@@ -8,6 +8,21 @@ import { describe, expect, it } from "vitest";
 import { computeQdcg } from "./qdcg.js";
 
 describe("computeQdcg", () => {
+  it("matches high-income golden", () => {
+      const r = computeQdcg({
+        taxableIncome: 600_000,
+        qualifiedDividends: 1_000,
+        // Caller computes smaller of Sched D L15 ($85,000) and L16 ($80,000),
+        // treating blank/loss as 0. Short-term losses pulled L16 below L15
+        // here, so L3 = L16 = 80,000 (not the higher L15).
+        netLongTermGain: 80_000,
+        filingStatus: "single",
+        taxYear: 2025,
+      });
+
+      expect(r.tax).toBeCloseTo(166676.5, 2);
+  })
+
   it("matches Alejandro's golden — single filer, $381 qual divs + $2,250 LTCG", () => {
     const r = computeQdcg({
       taxableIncome: 87185,
