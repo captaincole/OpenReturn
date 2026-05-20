@@ -1,331 +1,496 @@
-"use client";
+// Home-home — person-scope landing. Above any single return.
+//
+// No AppShell, no chat (no active return to chat about). Pure render —
+// server component, no client state needed. Auth is gated by the parent
+// (app)/layout.tsx.
+//
+// Sections:
+//   1. Your returns           — cards from lib/returns.ts (1 real, 3 stubs)
+//   2. Continue with          — workflow entry points (stubs for v1)
+//   3. Your tax picture       — lifetime SVG charts (faked data)
+//
+// Charts are faked because we don't capture historical year-over-year
+// data yet. When we do, swap the consts for a Supabase query keyed by
+// user_id; the chart components stay the same.
 
-import { type FormEvent, useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import { makeMastraClient } from "@/lib/mastraClient";
-import { UnauthorizedError, computeOverallPct } from "@/lib/api";
-import { getUserId } from "@/lib/auth";
-import { uploadDocument } from "@/lib/uploads";
-import { Markdown } from "@/components/Markdown";
-import { ActivityCard } from "@/components/ActivityCard";
-import { PlanCard } from "@/components/PlanCard";
-import {
-  type ChatMessage,
-  useAppShell,
-} from "@/components/AppShell";
-import { DEMO_THREAD_ID, THOM_AGENT_ID } from "@/lib/chatSession";
-import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
+import { RETURNS } from "@/lib/returns";
+import { cn } from "@/lib/cn";
 
-function readFileAsBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result as string;
-      const comma = result.indexOf(",");
-      resolve(comma >= 0 ? result.slice(comma + 1) : result);
-    };
-    reader.onerror = () => reject(reader.error);
-    reader.readAsDataURL(file);
-  });
-}
+const WORKFLOWS = [
+  { id: "new-2026", title: "Start 2026 return", desc: "Begin a new tax year. Thom will guide intake from scratch.", icon: "+" },
+  { id: "amend", title: "Amend a prior year", desc: "Open a previously filed return to correct or update.", icon: "↻" },
+  { id: "planning", title: "Tax planning session", desc: "Look ahead — reduce next year's liability before December.", icon: "○" },
+];
 
-export default function ChatPage() {
-  const router = useRouter();
-  const { state, refreshState, resetTick, messages, setMessages } = useAppShell();
-  const [input, setInput] = useState("");
-  const [streaming, setStreaming] = useState(false);
-  const [attachment, setAttachment] = useState<File | null>(null);
-  const [activityTick, setActivityTick] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const messageInputRef = useRef<HTMLTextAreaElement>(null);
+// Mock historical data. Replace with a Supabase query when we capture
+// year-over-year aggregates server-side.
+const INCOME = [
+  { year: 2021, value: 145000 },
+  { year: 2022, value: 162000 },
+  { year: 2023, value: 178000 },
+  { year: 2024, value: 192000 },
+  { year: 2025, value: 186400 },
+];
+const EFFECTIVE_RATE = [
+  { year: 2021, value: 22.4 },
+  { year: 2022, value: 23.1 },
+  { year: 2023, value: 24.0 },
+  { year: 2024, value: 24.6 },
+  { year: 2025, value: 23.8 },
+];
+const REFUND: { year: number; value: number | null }[] = [
+  { year: 2021, value: 2100 },
+  { year: 2022, value: -1400 },
+  { year: 2023, value: 3200 },
+  { year: 2024, value: 4210 },
+  { year: 2025, value: null },
+];
+const CHARITABLE = [
+  { year: 2021, value: 4200 },
+  { year: 2022, value: 5800 },
+  { year: 2023, value: 7500 },
+  { year: 2024, value: 9100 },
+  { year: 2025, value: 10500 },
+];
 
-  useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
-  }, [messages]);
-
-  // Streaming disables the input, which makes the browser drop focus.
-  // Restore it whenever streaming flips back to false so the user can
-  // keep typing without clicking back into the box.
-  useEffect(() => {
-    if (!streaming) messageInputRef.current?.focus();
-  }, [streaming]);
-
-  async function sendMessage(e?: FormEvent) {
-    e?.preventDefault();
-    const text = input.trim();
-    if ((!text && !attachment) || streaming) return;
-
-    const file = attachment;
-    const userMsg: ChatMessage = {
-      id: `u-${Date.now()}`,
-      role: "user",
-      content: text || (file ? `Uploaded ${file.name}` : ""),
-      attachmentName: file?.name,
-    };
-    const assistantMsg: ChatMessage = {
-      id: `a-${Date.now()}`,
-      role: "assistant",
-      content: "",
-    };
-    setMessages((m) => [...m, userMsg, assistantMsg]);
-    setInput("");
-    setAttachment(null);
-    if (fileInputRef.current) fileInputRef.current.value = "";
-    setStreaming(true);
-
-    if (file) {
-      uploadDocument(file).catch((err) => {
-        console.warn("[chat] upload to user-documents failed:", err);
-      });
-    }
-
-    try {
-      let payload: unknown = text;
-      if (file) {
-        const base64 = await readFileAsBase64(file);
-        const mediaType = file.type || "application/pdf";
-        payload = [
-          {
-            role: "user" as const,
-            content: [
-              {
-                type: "text" as const,
-                text: text || "I've attached a document — please review it.",
-              },
-              {
-                type: "file" as const,
-                data: base64,
-                mediaType,
-                filename: file.name,
-              },
-            ],
-          },
-        ];
-      }
-
-      const userId = await getUserId();
-      if (!userId) {
-        await createClient().auth.signOut();
-        router.refresh();
-        router.push("/login");
-        return;
-      }
-      const client = await makeMastraClient();
-      const stream = await client
-        .getAgent(THOM_AGENT_ID)
-        .stream(payload as string, {
-          memory: { thread: DEMO_THREAD_ID, resource: userId },
-        });
-
-      await stream.processDataStream({
-        onChunk: async (chunk) => {
-          if (chunk.type === "text-delta") {
-            const delta = (chunk.payload as { text: string }).text;
-            setMessages((m) =>
-              m.map((msg) =>
-                msg.id === assistantMsg.id
-                  ? { ...msg, content: msg.content + delta }
-                  : msg,
-              ),
-            );
-          }
-        },
-      });
-      await refreshState();
-      setActivityTick((t) => t + 1);
-    } catch (err) {
-      const message =
-        err instanceof UnauthorizedError
-          ? "Session expired — please sign in again."
-          : err instanceof Error
-            ? err.message
-            : "Something went wrong.";
-      setMessages((m) =>
-        m.map((msg) =>
-          msg.id === assistantMsg.id ? { ...msg, content: `[${message}]` } : msg,
-        ),
-      );
-      if (err instanceof UnauthorizedError) {
-        await createClient().auth.signOut();
-        router.refresh();
-        router.push("/login");
-      }
-    } finally {
-      setStreaming(false);
-    }
-  }
-
-  const activityRefreshKey = activityTick + resetTick * 1000;
+export default async function HomeHome() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const initials = (user?.email?.slice(0, 2) ?? "AC").toUpperCase();
 
   return (
-    <div className="flex-1 min-w-0 min-h-0 flex">
-      <div className="flex-1 min-w-0 min-h-0 flex flex-col">
-        <div className="shrink-0 border-b border-border-subtle px-6 py-3 hidden lg:flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="text-ink-secondary text-sm font-medium">Chat</div>
-            {state?.taxpayerFirstName && (
-              <div className="text-ink-primary text-sm pl-3 border-l border-border-subtle">
-                Hi, {state.taxpayerFirstName}
-              </div>
-            )}
-          </div>
-          <div className="flex items-center gap-3 text-xs text-ink-muted">
-            {state && (
-              <span className="tabular-nums">
-                {state.factCount} facts ·{" "}
-                {state.pendingDecisions.length + state.pendingFacts.length} open ·{" "}
-                {computeOverallPct(state.forms)}%
-              </span>
-            )}
-            {state?.documents.form1040Url && (
-              <a
-                href={state.documents.form1040Url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:text-accent-hover"
-              >
-                Draft 1040 ↗
-              </a>
-            )}
-          </div>
-        </div>
+    <div className="min-h-screen w-full bg-bg-base text-ink-primary flex flex-col">
+      <HomeTopBar initials={initials} />
+      <main className="flex-1 px-6 lg:px-10 py-10 lg:py-14">
+        <div className="max-w-6xl mx-auto space-y-14">
+          <header>
+            <h1 className="font-serif text-4xl text-ink-primary">Hi, Alex.</h1>
+            <p className="text-ink-secondary text-[15px] mt-2.5">
+              Your tax life, in one place.
+            </p>
+          </header>
 
-        <div
-          ref={scrollRef}
-          className="flex-1 min-h-0 overflow-y-auto px-4 lg:px-6 py-6 lg:py-8"
-        >
-          <div className="max-w-2xl mx-auto space-y-6">
-            {messages.length === 0 && (
-              <div className="text-center text-ink-muted text-sm py-12">
-                Say hi to start. Thom will guide you through 2025 tax intake.
-              </div>
-            )}
-            {messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={msg.role === "user" ? "flex justify-end" : ""}
-              >
-                <div
-                  className={
-                    msg.role === "user"
-                      ? "max-w-[80%] bg-accent text-white px-4 py-3 rounded-2xl rounded-br-sm whitespace-pre-wrap"
-                      : "max-w-[100%] text-ink-primary leading-relaxed"
-                  }
-                >
-                  {msg.attachmentName && (
-                    <div
-                      className={
-                        msg.role === "user"
-                          ? "text-xs opacity-80 mb-1.5 flex items-center gap-1.5"
-                          : "text-xs text-ink-muted mb-1.5 flex items-center gap-1.5"
-                      }
-                    >
-                      <span>📎</span>
-                      <span className="truncate">{msg.attachmentName}</span>
-                    </div>
-                  )}
-                  {msg.content ? (
-                    msg.role === "assistant" ? (
-                      <Markdown>{msg.content}</Markdown>
-                    ) : (
-                      msg.content
-                    )
-                  ) : (
-                    streaming && <span className="animate-pulse-soft">…</span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+          <Section
+            title="Your returns"
+            right={<button className="text-sm text-ink-secondary hover:text-ink-primary">View archive →</button>}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {RETURNS.map((r) => (
+                <ReturnCard key={r.id} ret={r} />
+              ))}
+              <NewReturnCard />
+            </div>
+          </Section>
 
-        <footer className="shrink-0 border-t border-border-subtle px-4 lg:px-6 py-4">
-          <div className="max-w-2xl mx-auto">
-            {attachment && (
-              <div className="mb-2 flex items-center gap-2 px-3 py-2 bg-bg-panel border border-border-subtle rounded-lg text-sm">
-                <span>📎</span>
-                <span className="flex-1 truncate text-ink-primary">
-                  {attachment.name}
-                </span>
-                <span className="text-ink-muted text-xs tabular-nums">
-                  {(attachment.size / 1024).toFixed(0)} KB
-                </span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAttachment(null);
-                    if (fileInputRef.current) fileInputRef.current.value = "";
-                  }}
-                  className="text-ink-muted hover:text-ink-primary text-lg leading-none"
-                  aria-label="Remove attachment"
-                >
-                  ×
-                </button>
-              </div>
-            )}
-            <form onSubmit={sendMessage} className="flex gap-2">
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="application/pdf,image/png,image/jpeg,image/webp"
-                onChange={(e) => setAttachment(e.target.files?.[0] ?? null)}
-                className="hidden"
-              />
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                disabled={streaming}
-                title="Attach a file"
-                className="shrink-0 px-3 py-3 border border-border-subtle hover:border-border-strong rounded-lg text-ink-secondary hover:text-ink-primary disabled:opacity-50 transition-colors"
-              >
-                📎
-              </button>
-              <textarea
-                ref={messageInputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && !e.shiftKey) {
-                    e.preventDefault();
-                    sendMessage();
-                  }
-                }}
-                rows={1}
-                placeholder={
-                  streaming
-                    ? "Thom is thinking…"
-                    : attachment
-                      ? "Add a note (optional)…"
-                      : "Type a message (shift+enter for newline)"
-                }
-                disabled={streaming}
-                autoFocus
-                className="input-base flex-1 resize-none max-h-40 overflow-y-auto"
-              />
-              <button
-                type="submit"
-                disabled={streaming || (!input.trim() && !attachment)}
-                className="btn-primary !w-auto px-6"
-              >
-                Send
-              </button>
-            </form>
-          </div>
-        </footer>
-      </div>
+          <Section title="Continue with">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {WORKFLOWS.map((w) => (
+                <WorkflowCard key={w.id} workflow={w} />
+              ))}
+            </div>
+          </Section>
 
-      <aside className="hidden lg:flex flex-col shrink-0 w-[22rem] xl:w-[26rem] border-l border-border-subtle p-5 min-h-0 gap-4">
-        {/* Plan and Activity claim a fixed 1:2 share of the column. Both
-            cards always fill their slot — no shifting around as content
-            grows or shrinks; internal scroll handles overflow. */}
-        <div className="flex-[1] min-h-0 flex flex-col">
-          <PlanCard plan={state?.plan ?? []} />
+          <Section title="Your tax picture">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <ChartCard
+                title="Income"
+                subtitle="Wages + investment income, last 5 years"
+                value={fmtCurrencyFull(INCOME[INCOME.length - 1].value)}
+                valueLabel="2025 (in progress)"
+              >
+                <BarChart data={INCOME} colorClass="fill-accent" valueFormatter={fmtCurrencyShort} />
+              </ChartCard>
+              <ChartCard
+                title="Effective tax rate"
+                subtitle="Federal, after deductions"
+                value={`${EFFECTIVE_RATE[EFFECTIVE_RATE.length - 1].value.toFixed(1)}%`}
+                valueLabel="2025 (estimated)"
+              >
+                <LineChart data={EFFECTIVE_RATE} valueFormatter={(v) => `${v.toFixed(1)}%`} domain={[20, 26]} />
+              </ChartCard>
+              <ChartCard
+                title="Federal refund / owed"
+                subtitle="What came back or went out"
+                value="Pending"
+                valueLabel="2025 (calculating)"
+              >
+                <DivergentBarChart data={REFUND} valueFormatter={fmtSigned} />
+              </ChartCard>
+              <ChartCard
+                title="Charitable giving"
+                subtitle="Cash + non-cash donations"
+                value={fmtCurrencyFull(CHARITABLE[CHARITABLE.length - 1].value)}
+                valueLabel="2025 year-to-date"
+              >
+                <BarChart data={CHARITABLE} colorClass="fill-emerald-400" valueFormatter={fmtCurrencyShort} />
+              </ChartCard>
+            </div>
+          </Section>
         </div>
-        <div className="flex-[2] min-h-0 flex flex-col">
-          <ActivityCard refreshKey={activityRefreshKey} />
-        </div>
-      </aside>
+      </main>
     </div>
   );
+}
+
+function HomeTopBar({ initials }: { initials: string }) {
+  return (
+    <header className="shrink-0 h-14 border-b border-border-subtle bg-bg-base/95 backdrop-blur-sm flex items-center px-4 lg:px-6 gap-3">
+      <Link
+        href="/"
+        title="Home"
+        className="shrink-0 w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center hover:bg-accent/25 transition-colors"
+      >
+        <span className="font-serif text-accent text-sm leading-none">W</span>
+      </Link>
+      <div className="h-6 w-px bg-border-subtle shrink-0" />
+      <span className="text-[15px] font-semibold tracking-tight text-ink-primary">Home</span>
+      <div className="flex-1" />
+      <div className="w-8 h-8 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center text-xs font-medium text-accent">
+        {initials}
+      </div>
+    </header>
+  );
+}
+
+function Section({
+  title,
+  right,
+  children,
+}: {
+  title: string;
+  right?: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <section>
+      <div className="mb-5 flex items-baseline justify-between">
+        <h2 className="text-[11px] uppercase tracking-[0.22em] text-ink-muted">{title}</h2>
+        {right}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function ReturnCard({ ret }: { ret: (typeof RETURNS)[number] }) {
+  const isActive = ret.state === "active";
+  const isFiled = ret.state === "filed";
+  const isEmpty = ret.state === "empty";
+
+  return (
+    <Link
+      href={`/r/${ret.id}`}
+      className={cn(
+        "card p-5 transition-all flex flex-col gap-4 min-h-[160px]",
+        isActive
+          ? "ring-1 ring-accent/30 hover:ring-accent/50 hover:border-accent/30"
+          : "hover:border-border-strong",
+      )}
+    >
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">Tax Year {ret.year}</div>
+          <div className="text-[15px] font-semibold text-ink-primary mt-1 tracking-tight">{ret.label}</div>
+        </div>
+        {isActive && (
+          <span className="text-[10px] uppercase tracking-wider text-accent bg-accent/15 px-1.5 py-0.5 rounded">
+            Active
+          </span>
+        )}
+        {isFiled && (
+          <span className="text-[10px] uppercase tracking-wider text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded">
+            Filed
+          </span>
+        )}
+      </div>
+
+      <div className="mt-auto">
+        {isActive && (
+          <>
+            <div className="h-1.5 rounded-full bg-bg-elevated overflow-hidden">
+              <div className="h-full bg-accent" style={{ width: "60%" }} />
+            </div>
+            <div className="flex items-baseline justify-between mt-2 text-[11px]">
+              <span className="tabular-nums text-ink-muted">In progress</span>
+              <span className="text-ink-secondary">Open →</span>
+            </div>
+          </>
+        )}
+        {isFiled && (
+          <div className="text-[12px] leading-relaxed">
+            <div className={cn("font-semibold tabular-nums", ret.outcomePositive ? "text-emerald-400" : "text-red-400")}>
+              {ret.outcome}
+            </div>
+            <div className="text-ink-muted mt-0.5">Filed {ret.filedOn}</div>
+          </div>
+        )}
+        {isEmpty && (
+          <div className="text-[12px] text-ink-muted">Not started — open to begin.</div>
+        )}
+      </div>
+    </Link>
+  );
+}
+
+function NewReturnCard() {
+  return (
+    <button className="border border-dashed border-border-subtle hover:border-accent/50 rounded-2xl p-5 transition-colors flex flex-col items-center justify-center text-center gap-2 min-h-[160px] text-ink-muted hover:text-ink-primary group">
+      <span className="text-2xl group-hover:text-accent transition-colors">+</span>
+      <span className="text-sm">Start a new return</span>
+    </button>
+  );
+}
+
+function WorkflowCard({ workflow }: { workflow: (typeof WORKFLOWS)[number] }) {
+  return (
+    <button className="card p-5 hover:border-border-strong transition-colors text-left flex flex-col gap-3 group">
+      <div className="w-9 h-9 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center text-accent text-base group-hover:bg-accent/25 transition-colors">
+        {workflow.icon}
+      </div>
+      <div>
+        <div className="text-[15px] font-medium text-ink-primary">{workflow.title}</div>
+        <div className="text-[13px] text-ink-secondary leading-relaxed mt-1">{workflow.desc}</div>
+      </div>
+    </button>
+  );
+}
+
+function ChartCard({
+  title,
+  subtitle,
+  value,
+  valueLabel,
+  children,
+}: {
+  title: string;
+  subtitle: string;
+  value: string;
+  valueLabel: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="card p-5">
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          <div className="text-[11px] uppercase tracking-[0.18em] text-ink-muted">{title}</div>
+          <div className="text-[13px] text-ink-secondary mt-1">{subtitle}</div>
+        </div>
+        <div className="text-right shrink-0">
+          <div className="text-2xl font-semibold tracking-tight tabular-nums text-ink-primary">{value}</div>
+          <div className="text-[11px] text-ink-muted mt-0.5">{valueLabel}</div>
+        </div>
+      </div>
+      <div className="mt-6">{children}</div>
+    </div>
+  );
+}
+
+const CHART_W = 400;
+const CHART_H = 140;
+const CHART_PAD_X = 16;
+const CHART_PAD_Y = 24;
+
+function BarChart({
+  data,
+  colorClass,
+  valueFormatter,
+}: {
+  data: { year: number; value: number }[];
+  colorClass: string;
+  valueFormatter: (v: number) => string;
+}) {
+  const max = Math.max(...data.map((d) => d.value)) * 1.18;
+  const slotW = (CHART_W - 2 * CHART_PAD_X) / data.length;
+  const barW = slotW * 0.55;
+
+  return (
+    <svg viewBox={`0 0 ${CHART_W} ${CHART_H + 24}`} className="w-full">
+      {data.map((d, i) => {
+        const x = CHART_PAD_X + slotW * i + (slotW - barW) / 2;
+        const h = (d.value / max) * (CHART_H - 2 * CHART_PAD_Y);
+        const y = CHART_H - CHART_PAD_Y - h;
+        const isCurrent = i === data.length - 1;
+        return (
+          <g key={d.year}>
+            <rect
+              x={x}
+              y={y}
+              width={barW}
+              height={h}
+              rx={3}
+              className={colorClass}
+              opacity={isCurrent ? 0.55 : 1}
+            />
+            <text
+              x={x + barW / 2}
+              y={y - 6}
+              textAnchor="middle"
+              className="fill-ink-secondary text-[10px]"
+              style={{ fontVariantNumeric: "tabular-nums" }}
+            >
+              {valueFormatter(d.value)}
+            </text>
+            <text
+              x={x + barW / 2}
+              y={CHART_H + 14}
+              textAnchor="middle"
+              className="fill-ink-muted text-[10px]"
+              style={{ fontVariantNumeric: "tabular-nums" }}
+            >
+              {d.year}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+function LineChart({
+  data,
+  valueFormatter,
+  domain,
+}: {
+  data: { year: number; value: number }[];
+  valueFormatter: (v: number) => string;
+  domain: [number, number];
+}) {
+  const [min, max] = domain;
+  const slotW = (CHART_W - 2 * CHART_PAD_X) / (data.length - 1);
+
+  const points = data.map((d, i) => {
+    const x = CHART_PAD_X + slotW * i;
+    const y = CHART_H - CHART_PAD_Y - ((d.value - min) / (max - min)) * (CHART_H - 2 * CHART_PAD_Y);
+    return { x, y, d };
+  });
+
+  const linePath = points.map((p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`)).join(" ");
+  const areaPath = `${linePath} L ${points[points.length - 1].x} ${CHART_H - CHART_PAD_Y} L ${points[0].x} ${CHART_H - CHART_PAD_Y} Z`;
+
+  return (
+    <svg viewBox={`0 0 ${CHART_W} ${CHART_H + 24}`} className="w-full">
+      <defs>
+        <linearGradient id="home-line-fill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="rgb(124 92 255)" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="rgb(124 92 255)" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={areaPath} fill="url(#home-line-fill)" />
+      <path d={linePath} stroke="rgb(124 92 255)" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      {points.map((p) => (
+        <g key={p.d.year}>
+          <circle cx={p.x} cy={p.y} r={3.5} className="fill-bg-base" stroke="rgb(124 92 255)" strokeWidth={1.5} />
+          <text
+            x={p.x}
+            y={p.y - 10}
+            textAnchor="middle"
+            className="fill-ink-secondary text-[10px]"
+            style={{ fontVariantNumeric: "tabular-nums" }}
+          >
+            {valueFormatter(p.d.value)}
+          </text>
+          <text
+            x={p.x}
+            y={CHART_H + 14}
+            textAnchor="middle"
+            className="fill-ink-muted text-[10px]"
+            style={{ fontVariantNumeric: "tabular-nums" }}
+          >
+            {p.d.year}
+          </text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+function DivergentBarChart({
+  data,
+  valueFormatter,
+}: {
+  data: { year: number; value: number | null }[];
+  valueFormatter: (v: number) => string;
+}) {
+  const present = data.filter((d): d is { year: number; value: number } => d.value !== null);
+  const max = Math.max(...present.map((d) => Math.abs(d.value))) * 1.18;
+  const baseline = CHART_H / 2;
+  const halfH = (CHART_H - 2 * CHART_PAD_Y) / 2;
+  const slotW = (CHART_W - 2 * CHART_PAD_X) / data.length;
+  const barW = slotW * 0.55;
+
+  return (
+    <svg viewBox={`0 0 ${CHART_W} ${CHART_H + 24}`} className="w-full">
+      <line
+        x1={CHART_PAD_X}
+        y1={baseline}
+        x2={CHART_W - CHART_PAD_X}
+        y2={baseline}
+        stroke="rgb(46 46 56)"
+        strokeWidth={1}
+      />
+      {data.map((d, i) => {
+        const x = CHART_PAD_X + slotW * i + (slotW - barW) / 2;
+        const isPending = d.value === null;
+        const v = d.value ?? 0;
+        const h = (Math.abs(v) / max) * halfH;
+        const y = v >= 0 ? baseline - h : baseline;
+        const labelY = v >= 0 ? y - 6 : y + h + 11;
+
+        return (
+          <g key={d.year}>
+            {!isPending && (
+              <rect
+                x={x}
+                y={y}
+                width={barW}
+                height={h}
+                rx={3}
+                className={v >= 0 ? "fill-emerald-400" : "fill-red-400"}
+              />
+            )}
+            {isPending && (
+              <rect x={x} y={baseline - 2} width={barW} height={4} rx={2} className="fill-ink-faint/40" />
+            )}
+            {!isPending && (
+              <text
+                x={x + barW / 2}
+                y={labelY}
+                textAnchor="middle"
+                className="fill-ink-secondary text-[10px]"
+                style={{ fontVariantNumeric: "tabular-nums" }}
+              >
+                {valueFormatter(v)}
+              </text>
+            )}
+            <text
+              x={x + barW / 2}
+              y={CHART_H + 14}
+              textAnchor="middle"
+              className="fill-ink-muted text-[10px]"
+              style={{ fontVariantNumeric: "tabular-nums" }}
+            >
+              {d.year}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+function fmtCurrencyFull(n: number): string {
+  return `$${n.toLocaleString()}`;
+}
+function fmtCurrencyShort(n: number): string {
+  if (Math.abs(n) >= 1000) return `$${(n / 1000).toFixed(0)}k`;
+  return `$${n}`;
+}
+function fmtSigned(n: number): string {
+  if (n > 0) return `+$${n.toLocaleString()}`;
+  if (n < 0) return `-$${Math.abs(n).toLocaleString()}`;
+  return "$0";
 }
