@@ -3,14 +3,16 @@ import { getAppDb, ensureAppSchema, asStr, asNum } from "./appDb";
 import { deleteBlob } from "./blobStore";
 
 /*
- * Per-user data reset is the only reset path. The web "Reset session" button
- * hits POST /app/session/reset, which calls resetCurrentUserData below. There
- * is no wholesale-truncate path; for that, delete .data/app.db and reseed.
- * 
- * Filings + filing_members are deliberately NOT wiped. Resetting the filing
- * to a known-empty state (zero facts, decisions, questions, documents,
- * requests) shouldn't force the owner to re-create the filing. The row +
- * membership persist; everything inside the filing gets cleared.
+ * Per-user data reset is the only reset path. POST /app/session/reset
+ * calls resetCurrentUserData below; the web UI no longer has a button
+ * for it. There is no wholesale-truncate path; for that, delete
+ * .data/app.db and reseed.
+ *
+ * Filings + filing_members are deliberately NOT wiped. A reset returns
+ * the filing to a known-empty state (zero facts, decisions, questions,
+ * documents, requests) and must not force the owner to re-create the
+ * filing. The row and membership persist; everything inside the filing
+ * is cleared.
  */
 
 export interface PerUserResetResult {
@@ -20,10 +22,10 @@ export interface PerUserResetResult {
 }
 
 /*
- * Per-user data reset, used by /app/session/reset. Deletes only the calling
- * user's data — domain rows (explicit WHERE user_id, since RLS is gone with
- * Postgres) + Mastra threads + documents (metadata rows AND their local
- * blob files).
+ * Per-user data reset, used by /app/session/reset. Deletes only the
+ * calling user's data: domain rows (explicit WHERE user_id, since RLS
+ * left with Postgres), Mastra threads, and documents (metadata rows AND
+ * their local blob files).
  */
 export async function resetCurrentUserData(
   userId: string,
@@ -32,8 +34,8 @@ export async function resetCurrentUserData(
   const db = getAppDb();
 
   /*
-   * Capture document storage paths BEFORE deleting rows — once the rows are
-   * gone we lose the pointers to the bytes in storage and would orphan them.
+   * Capture document storage paths BEFORE the row deletes. Deleted rows
+   * lose the pointers to the bytes in storage and orphan them.
    */
   const docPaths = await db.execute({
     sql: `SELECT storage_path FROM user_documents WHERE user_id = ?`,
@@ -41,7 +43,7 @@ export async function resetCurrentUserData(
   });
   const storagePaths = docPaths.rows.map((r) => asStr(r.storage_path));
 
-  // Domain + document tables — explicit user_id scoping.
+  // Domain + document tables, with explicit user_id scoping.
   const tables = [
     "tax_facts",
     "open_questions",
@@ -61,18 +63,17 @@ export async function resetCurrentUserData(
   }
 
   /*
-   * Blob files matching the rows we just deleted. Best-effort per file —
-   * a missing blob is already the desired end state.
+   * Blob files that match the deleted rows. Best-effort per file; a
+   * missing blob is already the desired end state.
    */
   await Promise.all(storagePaths.map((p) => deleteBlob(p)));
 
   /*
-   * Mastra memory cleanup goes through Memory.deleteThread() rather than
-   * raw SQL — Mastra owns the cascade (messages, observational memory,
-   * vector embeddings if semantic recall is enabled), and using the
-   * documented API keeps us aligned with whatever they add to the
-   * teardown path in future versions. We list this user's threads, then
-   * delete each one.
+   * Mastra memory cleanup goes through Memory.deleteThread(), not raw
+   * SQL. Mastra owns the cascade (messages, observational memory, vector
+   * embeddings when semantic recall is enabled). The documented API
+   * keeps us aligned with future additions to the teardown path. We list
+   * this user's threads, then delete each one.
    */
   let mastraThreadsDeleted = 0;
   const memory = await luca.getMemory();

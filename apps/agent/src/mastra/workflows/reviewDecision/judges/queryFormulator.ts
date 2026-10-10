@@ -4,17 +4,17 @@ import { modelFor } from "../../../models";
 /*
  * First-iteration query formulator. Reads the decision and emits 1–2
  * search-ref-docs queries phrased the way a tax professional would describe
- * the topic. Output is consumed by the gather step on iteration 1; on later
- * iterations queries come from the rule step's `suggestedQueries`.
- * 
+ * the topic. The gather step consumes the output on iteration 1; later
+ * iterations take queries from the rule step's `suggestedQueries`.
+ *
  * NOTE: the judges/ modules use Mastra's Agent class purely as "prompt +
- * model + schema (+ bounded tools)" — they are workflow-step internals, NOT
+ * model + schema (+ bounded tools)". They are workflow-step internals, NOT
  * registered on the Mastra instance, not conversational, no memory. The app
  * has exactly one agent: Luca.
- * 
- * Narrow, deterministic-feeling task → Haiku, no tools, structured output is
- * just `{queries: string[]}`. Lives separately from rule/assess so its prompt
- * and evals can evolve independently.
+ *
+ * The task is narrow, so it runs on the judge-role model (JUDGE_MODEL) with
+ * no tools; the structured output is just `{queries: string[]}`. It lives
+ * apart from rule/assess so its prompt and evals can evolve independently.
  */
 
 const instructions = `You write search queries against the IRS reference-document corpus that an automated grounding workflow will then run.

@@ -1,14 +1,15 @@
 /*
- * Core types for the Form Engine. Every form gets an evaluator function that
- * takes a DerivationContext (facts + decisions) and returns an EvaluatedForm
- * (mustFile result + per-field results). Evaluators are pure functions —
- * deterministic given the input fact + decision state.
- * 
+ * Core types for the Form Engine. The engine evaluates each form from a
+ * DerivationContext (facts + decisions) into an EvaluatedForm (mustFile
+ * result + per-field results). Evaluation is a pure function: the same
+ * fact and decision state always produces the same output.
+ *
  * The rules are:
  *  - Pure aggregation (sums, math, table lookups) lives in code.
  *  - Classification or judgment ALWAYS defers to an ai_decisions lookup,
  *    even when the answer is obvious.
- *  - Cross-form references go through ctx.formValues(...).
+ *  - Cross-form references go through the engine's shared fixpoint state
+ *    (see evaluateAllForms in engine.ts).
  */
 
 import type { TaxFactRow } from "./facts/rows.js";
@@ -18,21 +19,22 @@ import type { FilingInfo } from "./filingInfo.js";
 // ─── Engine-derived decisions (audit trail for code-driven scope calls) ─
 
 /**
- * Provenance record for an engine-derived scope call (e.g. "Schedule D must
- * be filed because two trade facts exist"). Carried on EvaluatedForm next to
- * the mustFile boolean so a CPA reviewing the doc-gen sidecar can see WHY a
- * form was generated even when no AI decision was recorded.
+ * Provenance record for an engine-derived scope call (for example
+ * "Schedule D must be filed because two trade facts exist"). Carried on
+ * EvaluatedForm next to the mustFile boolean. A CPA who reviews the
+ * doc-gen sidecar can then see WHY a form was generated even when no AI
+ * decision was recorded.
  *
- * Distinct from AIDecisionRow on purpose: engine derivations are pure
- * functions of state, don't need grounding review, and update implicitly
- * when facts change. We expose them in case-state / sidecar output but
- * don't persist them as event rows. See conversation 2026-05-20 for the
- * design rationale (separate from ai_decisions; future-extends `decidedBy`).
+ * Distinct from AIDecisionRow on purpose. Engine derivations are pure
+ * functions of state, need no grounding review, and update implicitly
+ * when facts change. We expose them in case-state / sidecar output but do
+ * not persist them as event rows. Design rationale: conversation
+ * 2026-05-20 (separate from ai_decisions; `decidedBy` extends later).
  */
 export interface EngineDerivation {
   /**
-   * Who/what produced this derivation. Today always "engine"; reserved
-   *  for future "ai" | "cpa" | "user" without changing consumers. 
+   * Who or what produced this derivation. Today always "engine". Reserved
+   * for future "ai" | "cpa" | "user" values without consumer changes.
    */
   decidedBy: "engine";
   /** Plain-English rule that fired. CPA-readable. */
@@ -66,12 +68,12 @@ export interface DerivationBlocked {
   /** Set when the block is "we need these facts present". */
   missingFactKeys?: string[];
   /**
-   * When true, this is an engine gap — we haven't built support for this
-   * field yet (no example scenario, no fact ingestion path). caseState
-   * filters unsupported results out of pendingDecisions / pendingFacts so
-   * Luca doesn't ask the user for input on fields we just don't compute
-   * yet. The `fromFields` rule treats unsupported terms as 0 so downstream
-   * sums continue without propagating the gap.
+   * When true, this block is an engine gap: we have not built support for
+   * this field yet (no example scenario, no fact ingestion path).
+   * caseState filters unsupported results out of pendingDecisions /
+   * pendingFacts, so Luca does not ask the user for input on fields we do
+   * not compute yet. The `sum(...)` helper treats unsupported terms as 0,
+   * so downstream sums continue without propagating the gap.
    */
   unsupported?: boolean;
 }
@@ -94,10 +96,10 @@ export const blocked = (
 });
 
 /**
- * Build a result that marks the field as unsupported — engine gap, not
- * user-input gap. Surfaces as blocked everywhere a value would be needed
- * (e.g. PDF rendering), but caseState skips it when aggregating pending
- * questions for Luca.
+ * Build a result that marks the field as unsupported: an engine gap, not
+ * a user-input gap. It surfaces as blocked everywhere a value is needed
+ * (for example PDF rendering), but caseState skips it when it aggregates
+ * pending questions for Luca.
  */
 export const unsupported = (reason: string): DerivationBlocked => ({
   ok: false,
@@ -112,18 +114,17 @@ export interface DerivationContext {
   facts: FactsView;
   decisions: DecisionsView;
   /**
-   * Resolved filing info — the typed view of facts+decisions that
-   * `defineForm` bindings read via `info.X`. Stand-in for the upcoming AI
-   * resolver layer; for now it's hand-computed by `resolveFilingInfo()`
+   * Resolved filing info: the typed view of facts + decisions that
+   * `defineForm` bindings read via `info.X`. A stand-in for the planned
+   * AI resolver layer. For now `resolveFilingInfo()` computes it by hand
    * before the engine runs.
    */
   filingInfo?: FilingInfo;
   /**
-   * Cross-form / cross-field lookup. Returns the previously-evaluated result
-   * for a (formId, fieldId), or undefined if not yet evaluated. The engine
-   * topologically schedules form/field evaluations; if you call this for a
-   * field that hasn't been evaluated yet, it's a programming error in the
-   * form spec, not a missing-data condition.
+   * Cross-form / cross-field lookup hook. Returns the previously
+   * evaluated result for a (formId, fieldId), or undefined when not yet
+   * evaluated. Currently unused: the engine resolves cross-form reads
+   * through EngineContext.fieldResult and the accessor proxy instead.
    */
   formValues?: (formId: string, fieldId: string) => DerivationResult<unknown> | undefined;
 }
@@ -142,19 +143,19 @@ export interface DecisionsView {
 
 /*
  * ─── Category + value-type taxonomy used by every form field ─────────────
- * 
+ *
  * Category is the user-facing bucket each field rolls up into for the
- * Filing Status panel. Every FormField declares one — TypeScript enforces
- * it, so a new field can't be added without classifying it.
- * 
- * FieldValueType describes the shape of the field's value, which drives
- * rendering and (eventually) UI input semantics. A single-select reads from
- * a decision; a numeric reads from a numeric derivation; a text reads
- * straight from an identity fact, etc.
+ * Filing Status panel. Every FormField declares one. TypeScript enforces
+ * the declaration, so no field can be added without a classification.
+ *
+ * FieldValueType describes the shape of the field's value. It drives
+ * rendering and, later, UI input semantics. A single-select reads from a
+ * decision; a numeric reads from a numeric derivation; a text reads
+ * straight from an identity fact.
  */
 
 export type Category =
-  | "personal_info"        // taxpayer name, SSN, address, DOB — top-of-form header bits
+  | "personal_info"        // taxpayer name, SSN, address, DOB (form-header fields)
   | "filing_scope"         // filing status, residency, must-file decisions
   | "income"               // wages, dividends, capital gains, withholding
   | "deductions_credits"   // standard deduction, taxable income, tax, credits, payments
@@ -170,13 +171,13 @@ export type FieldValueType =
 
 /*
  * ─── Evaluated form / field shapes ───────────────────────────────────────
- * 
- * Fields use a discriminated union: each form declares its own field kinds,
- * each kind tagged with a string `formFieldKind` and parameterized on a
- * value type V. Consumers narrow by formFieldKind to get a strongly-typed
- * value with no casts.
- * 
- * Example shape per form (declared in form8949.ts etc.):
+ *
+ * Fields use a discriminated union. Each form declares its own field
+ * kinds. Each kind carries a string `formFieldKind` tag and a value type
+ * V. Consumers narrow by formFieldKind to get a strongly typed value with
+ * no casts.
+ *
+ * Example shape per form:
  *   interface Form8949RowField extends BaseFormField<Form8949Row> {
  *     formFieldKind: "form-8949.row"; box: BoxId; rowIndex: number;
  *   }
@@ -184,25 +185,25 @@ export type FieldValueType =
  *     formFieldKind: "form-8949.totals"; box: BoxId;
  *   }
  *   type Form8949Field = Form8949RowField | Form8949TotalsField | …;
- * 
- * Each form's evaluator returns EvaluatedForm<TheirFieldUnion>.
+ *
+ * Evaluating a form yields EvaluatedForm<TheirFieldUnion>.
  */
 
 export interface BaseFormField<V = unknown> {
   fieldId: string;
   label: string;
-  /** Which UI bucket this field belongs to (Filing Status panel rollup). */
+  /** UI bucket this field belongs to (Filing Status panel rollup). */
   category: Category;
-  /** Shape of the field's value — informs rendering and input semantics. */
+  /** Shape of the field's value. Informs rendering and input semantics. */
   valueType: FieldValueType;
   result: DerivationResult<V>;
 }
 
 /**
- * Loosest possible field shape — what generic engine code (e.g., a registry
- * holding heterogeneous forms) gets when it doesn't know which form it's
- * looking at. Specific consumers should always know the form's concrete
- * field union and not see this type.
+ * Loosest possible field shape. Generic engine code (for example a
+ * registry of heterogeneous forms) gets this when the concrete form is
+ * unknown. Specific consumers know the form's concrete field union and do
+ * not see this type.
  */
 export type AnyFormField = BaseFormField & { formFieldKind: string };
 
@@ -213,9 +214,9 @@ export interface EvaluatedForm<F extends BaseFormField = AnyFormField> {
   taxYear: number;
   mustFile: DerivationResult<boolean>;
   /**
-   * Audit trail for the must-file determination. Present whenever the
-   * resolver populated it for this form (the five scope flags today;
-   * undefined for forms that don't go through resolveMustFile yet).
+   * Audit trail for the must-file determination. Present when the
+   * resolver populated it for this form (the five scope flags today).
+   * Undefined for forms that do not go through resolveMustFile yet.
    */
   mustFileDerivation?: EngineDerivation;
   fields: F[];
@@ -224,7 +225,7 @@ export interface EvaluatedForm<F extends BaseFormField = AnyFormField> {
 export type FormEvaluator<F extends BaseFormField = AnyFormField> =
   (ctx: DerivationContext) => EvaluatedForm<F>;
 
-// ─── In-memory view builders (used by tests + future engine wiring) ──────
+// ─── In-memory view builders (used by tests and evaluateScenario) ────────
 
 export function makeFactsView(rows: TaxFactRow[]): FactsView {
   const byKey = new Map(rows.map((r) => [r.key, r]));

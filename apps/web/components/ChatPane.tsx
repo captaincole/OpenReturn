@@ -1,13 +1,13 @@
 "use client";
 
 /*
- * The conversation surface. Lives in AppShell's left 1/3 on desktop, full
- * width inside the mobile "Chat" tab. No header — identity reads from the
- * avatar on each assistant message plus the Luca badge inside the input.
- * 
- * All actual sending is delegated to AppShell.sendChat — both the form
- * submit here and the Requested Actions card upload call the same
- * function, so there's exactly one code path that writes user turns.
+ * The conversation surface. On desktop it fills AppShell's left pane; on
+ * mobile it fills the "Chat" tab. It has no header. Identity reads from
+ * the avatar on each assistant message plus the Luca badge in the input.
+ *
+ * AppShell.sendChat does all sending. The form submit here and the
+ * Requested Actions card upload call the same function. Exactly one code
+ * path writes user turns.
  */
 
 import { type FormEvent, useEffect, useRef, useState } from "react";
@@ -36,8 +36,8 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
   }, [messages]);
 
   /*
-   * sendChat disables the textarea via lucaBusy — restore focus when it
-   * flips back so the user can keep typing without clicking back in.
+   * sendChat disables the textarea via lucaBusy. Restore focus when it
+   * flips back so the user can continue to type without a click.
    */
   useEffect(() => {
     if (!lucaBusy && !isPlaceholder) messageInputRef.current?.focus();
@@ -51,8 +51,8 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
     if (!text && !file) return;
 
     /*
-     * Clear local input state immediately so the user sees their message
-     * commit; sendChat handles the rest.
+     * Clear the local input state immediately so the user sees the
+     * message commit. sendChat handles the rest.
      */
     setInput("");
     setAttachment(null);
@@ -62,9 +62,9 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
   }
 
   /*
-   * For placeholder returns we render a single hardcoded Luca turn instead
-   * of the real message buffer — keeps the multi-return UX honest without
-   * requiring backend support for non-2025 threads yet.
+   * For placeholder returns, render one hardcoded Luca turn instead of
+   * the real message buffer. This keeps the multi-return UX honest
+   * without backend support for non-2025 threads.
    */
   const renderMessages: ChatMessage[] = isPlaceholder
     ? [placeholderMessageFor(activeReturn)]
@@ -228,8 +228,8 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
 }
 
 /*
- * Compact plan strip rendered INSIDE the input card. Hides done items
- * entirely; caps visible at 3 with a See N more toggle.
+ * Compact plan strip rendered INSIDE the input card. It hides done items.
+ * It shows at most 3 items, with a "See N more" toggle for the rest.
  */
 function PlanRail({ plan, hidden }: { plan: PlanItem[]; hidden: boolean }) {
   const [showAll, setShowAll] = useState(false);
@@ -344,10 +344,10 @@ function IconButton({
 
 function placeholderMessageFor(ret: TaxReturn): ChatMessage {
   /*
-   * Unreachable today — the return-layout redirects to '/' when the caller
-   * doesn't own a filing for the requested year, so every TaxReturn that
-   * reaches ChatPane is realDataAvailable=true. Kept as a defense-in-depth
-   * fallback (drift between RLS and the layout would otherwise crash here).
+   * Unreachable today. The return layout redirects to '/' when the caller
+   * does not own a filing for the requested year, so every TaxReturn that
+   * reaches ChatPane has realDataAvailable=true. Kept as a defense-in-depth
+   * fallback in case the layout gate drifts from this assumption.
    */
   if (ret.state === "filed") {
     return {

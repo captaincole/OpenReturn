@@ -1,23 +1,25 @@
 /*
- * FilingInfo — the typed boundary between AI-resolved values and form bindings.
- * 
+ * FilingInfo — the typed boundary between resolved values and form
+ * bindings.
+ *
  * Three layers:
  *   1. BaseFilingInfo (this file) — slots EVERY form needs: taxpayer
  *      identity (name / SSN / address) plus the small set of scope
  *      decisions that span jurisdictions (filingStatus).
- *   2. <Form>FilingInfo (per-form files, e.g. forms/federal/1040/filingInfo.ts)
- *      — extends BaseFilingInfo with slots specific to one form. Each form's
- *      bindings import their narrow type and TS rejects misreads.
- *   3. FilingInfo (this file) — the runtime intersection of every per-form
- *      type. The resolver produces this; the engine carries it on
+ *   2. <Form>FilingInfo (per-form files, for example
+ *      federal/1040/filingInfo.ts) — extends BaseFilingInfo with slots
+ *      specific to one form. Each form's bindings import their narrow
+ *      type, and TS rejects misreads.
+ *   3. FilingInfo (this file) — the runtime intersection of every
+ *      per-form type. The resolver produces it; the engine carries it on
  *      DerivationContext.filingInfo. Individual bindings see only their
  *      narrower view via their function signature.
- * 
- * Adding a new slot:
+ *
+ * To add a new slot:
  *   - Identity / cross-form scope → BaseFilingInfo here.
- *   - Form-specific → that form's filingInfo.ts. Update the FilingInfo
- *     intersection at the bottom of this file so the resolver returns the
- *     wider shape. TS will flag any binding that depends on a stale shape.
+ *   - Form-specific → that form's filingInfo.ts. Also update the
+ *     FilingInfo intersection in this file so the resolver returns the
+ *     wider shape. TS flags any binding that depends on a stale shape.
  */
 
 import {
@@ -38,9 +40,9 @@ import type { EngineDerivation } from "./types.js";
 import { isInterestFactKey, type TradeFactValue } from "./facts/index.js";
 
 /*
- * Mirrors the convention spelled out in src/engine/facts/kinds/trade.ts.
- * Inlined here because parseTradeFact() expects a full TaxFactRow, but
- * resolveFilingInfo only sees a {key, value, category} projection — the
+ * Mirrors the key convention in src/engine/facts/kinds/trade.ts. Inlined
+ * here because parseTradeFact() expects a full TaxFactRow, while
+ * resolveFilingInfo only sees a {key, value, category} projection. The
  * thinner shape is enough to recognize and decode a trade fact.
  */
 const TRADE_KEY_RE = /^account\.([^.]+)\.trades\.([^.]+)$/;
@@ -49,7 +51,7 @@ const TRADE_KEY_RE = /^account\.([^.]+)\.trades\.([^.]+)$/;
 
 export interface BaseFilingInfo {
   // ─── Scope decisions used by multiple forms ──────────────────────────
-  /** Single / MFJ / MFS / HOH / QSS. Drives standard-deduction + tax-table lookups on every jurisdiction's form. */
+  /** Single / MFJ / MFS / HOH / QSS. Drives standard-deduction and tax-table lookups on every jurisdiction's form. */
   filingStatus?: FilingStatus;
 
   // ─── Taxpayer identity ───────────────────────────────────────────────
@@ -57,7 +59,7 @@ export interface BaseFilingInfo {
   taxpayerMiddleInitial?: string;
   taxpayerLastName?: string;
   taxpayerSSN?: SSN;
-  taxpayerDateOfBirth?: string; // ISODate when we add a brand for it
+  taxpayerDateOfBirth?: string; // plain string; not yet typed as the ISODate brand
   taxpayerOccupation?: string;
   taxpayerPhone?: Phone;
   taxpayerEmail?: string;
@@ -80,9 +82,9 @@ export interface BaseFilingInfo {
   // ─── Health coverage ─────────────────────────────────────────────────
   /**
    * Taxpayer had minimum essential coverage every month of the tax year.
-   * Federal 1040 doesn't have a dedicated line for this in 2025 but the
-   * CA 540 (line 92) does, and other state forms may. Lives on base so
-   * any form's binding can read it.
+   * The 2025 federal 1040 has no dedicated line for this, but CA 540
+   * line 92 does, and other state forms may. Lives on base so any form's
+   * binding can read it.
    */
   fullYearMEC?: boolean;
 }
@@ -91,8 +93,9 @@ export interface BaseFilingInfo {
 
 /**
  * The combined shape the resolver produces and the engine carries on
- * DerivationContext.filingInfo. Intersection of every per-form FilingInfo,
- * so it's assignable to any narrower per-form type at the binding boundary.
+ * DerivationContext.filingInfo. It intersects every per-form FilingInfo,
+ * so it is assignable to any narrower per-form type at the binding
+ * boundary.
  */
 export type FilingInfo = BaseFilingInfo &
   Form1040FilingInfo &
@@ -107,12 +110,12 @@ export type FilingInfo = BaseFilingInfo &
 
 /**
  * Build FilingInfo from raw facts + decisions. Pure function: same inputs
- * → same output. Eventually replaced by an Anthropic-backed resolver that
- * produces the same shape from less-structured inputs (uploaded PDFs,
- * conversation transcripts).
+ * → same output. An Anthropic-backed resolver will eventually produce the
+ * same shape from less-structured inputs (uploaded PDFs, conversation
+ * transcripts).
  *
- * For the migration we keep the hand-coded resolver so Alex's offline
- * integration test passes without an LLM in the loop.
+ * The hand-coded resolver stays so Alex's offline integration test passes
+ * without an LLM in the loop.
  */
 export function resolveFilingInfo(opts: {
   facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
@@ -141,8 +144,8 @@ export function resolveFilingInfo(opts: {
   };
 
   /*
-   * Single-key numeric read. Returns undefined when missing or non-numeric;
-   * callers use ?? 0 when they need to compose into a sum.
+   * Single-key numeric read. Returns undefined when missing or
+   * non-numeric. Callers use ?? 0 when they compose a sum.
    */
   const num = (key: string): number | undefined => {
     const v = factByKey.get(key);
@@ -160,12 +163,12 @@ export function resolveFilingInfo(opts: {
   };
 
   /*
-   * Trade-fact partitioning for 8949. Walks investment_income facts and
-   * pulls out anything that parses as a trade (key shape
-   * `account.<slug>.trades.<tradeId>`), then splits by holding period:
-   * held > 1 year ⇒ long-term, else short-term. Dates are stored on the
-   * fact as "MM/DD/YY" or "MM/DD/YYYY"; we accept both. The fact-key list
-   * feeds the engine-derivation audit trail (triggeredByFactKeys).
+   * Trade-fact partitioning for Form 8949. Walk investment_income facts,
+   * pull out anything that parses as a trade (key shape
+   * `account.<slug>.trades.<tradeId>`), then split by holding period:
+   * held > 1 year ⇒ long-term, else short-term. Facts store dates as
+   * "MM/DD/YY" or "MM/DD/YYYY"; both parse. The fact-key list feeds the
+   * engine-derivation audit trail (triggeredByFactKeys).
    */
   const partitionTrades = (): {
     short: TradeFactValue[];
@@ -188,11 +191,11 @@ export function resolveFilingInfo(opts: {
 
   /*
    * Sum a numeric field across investment_income facts. The optional
-   * `keyFilter` narrows to a single 1099 section — 1099-DIV box1a doesn't
-   * overlap 1099-INT box1 today, but the filter makes the read explicit
-   * and protects against future per-section box-namespace overlap.
-   * Returns 0 when no facts match — same convention as sumW2Box: "no
-   * 1099-INT at all → 0 taxable interest" rather than "we don't know."
+   * `keyFilter` narrows the read to one 1099 section. 1099-DIV box1a does
+   * not overlap 1099-INT box1 today, but the filter makes the read
+   * explicit and protects against future box-name overlap. Returns 0 when
+   * no facts match, same convention as sumW2Box: "no 1099-INT at all → 0
+   * taxable interest" rather than "we do not know."
    */
   const sumInvestmentBox = (
     boxKey: string,
@@ -228,8 +231,8 @@ export function resolveFilingInfo(opts: {
     taxpayerMiddleInitial: text("identity.name.middle_initial"),
     taxpayerLastName: text("identity.name.last"),
     /*
-     * Constructors strip separators + validate digit count; canonical
-     * storage in the FilingInfo slot is bare digits.
+     * The constructors strip separators and validate the digit count.
+     * The FilingInfo slot stores bare digits.
      */
     taxpayerSSN: ssnRaw ? ssn(ssnRaw) : undefined,
     taxpayerDateOfBirth: text("identity.dob"),
@@ -268,12 +271,12 @@ export function resolveFilingInfo(opts: {
       "box4",
     ) as Form1040FilingInfo["form1099FederalWithholding"],
     /*
-     * 1099-INT sums: box1 (taxable) and box8 (tax-exempt). Filtered
-     * because future 1099 sections (OID, MISC) may reuse low-number box
-     * names — the filter pins each aggregate to its source section.
-     * Slots remain undefined when the taxpayer has NO interest facts at
-     * all (rather than 0), so the renderer leaves the cells blank
-     * instead of writing "0" — matches the CPA-golden convention.
+     * 1099-INT sums: box1 (taxable) and box8 (tax-exempt). The filter
+     * pins each aggregate to its source section, because future 1099
+     * sections (OID, MISC) may reuse low-number box names. When the
+     * taxpayer has NO interest facts at all, the slots stay undefined
+     * rather than 0. The renderer then leaves the cells blank instead of
+     * writing "0", which matches the CPA-golden convention.
      */
     ...(() => {
       const hasInterest = opts.facts.some(
@@ -344,10 +347,10 @@ export function resolveFilingInfo(opts: {
 
     /*
      * ─── Schedule CA (540) ──────────────────────────────────────────
-     * Default: Schedule CA is filed whenever Form 540 is filed.
-     * Explicit `decisions.scope.must_file_schedule_ca` overrides — set
-     * false on scenarios that don't need it (e.g. Alex declines, no
-     * adjustments to report).
+     * Default: file Schedule CA whenever Form 540 is filed. An explicit
+     * `decisions.scope.must_file_schedule_ca` overrides the default. Set
+     * it false on scenarios that do not need the schedule (for example
+     * Alex: no adjustments to report).
      */
     ...(() => {
       const r = resolveMustFile(decisionByKey, {
@@ -369,11 +372,11 @@ export function resolveFilingInfo(opts: {
 
     /*
      * ─── Form 8949 ──────────────────────────────────────────────────
-     * Default: required when there are trade facts to itemize OR when
-     * the 1099 ingest pipeline recorded `has_reportable_sales = true`.
-     * Either signal indicates capital-asset sales that need row-level
-     * reporting. Fallbacks are ordered: trade-facts win when present
-     * (more specific signal); has_reportable_sales is the safety net.
+     * Default: required when trade facts exist to itemize, OR when the
+     * 1099 ingest recorded `has_reportable_sales = true`. Either signal
+     * indicates capital-asset sales that need row-level reporting. The
+     * fallbacks are ordered: trade facts win when present (the more
+     * specific signal); has_reportable_sales is the safety net.
      */
     ...(() => {
       const tradeCount = trades.short.length + trades.long.length;
@@ -403,10 +406,10 @@ export function resolveFilingInfo(opts: {
 
     /*
      * ─── Schedule D ─────────────────────────────────────────────────
-     * Default: required whenever 8949 is required (Schedule D
-     * summarizes the per-row 8949 totals). Also fires for capital-gain
-     * distributions even without 8949 — same trade-fact / decision
-     * signal works for both cases.
+     * Default: required whenever Form 8949 is required, because
+     * Schedule D summarizes the per-row 8949 totals. It also fires for
+     * capital-gain distributions without 8949. The same trade-fact /
+     * decision signals cover both cases.
      */
     ...(() => {
       const tradeCount = trades.short.length + trades.long.length;
@@ -434,11 +437,11 @@ export function resolveFilingInfo(opts: {
 
     /*
      * ─── Form 8959 ──────────────────────────────────────────────────
-     * Default: required when the taxpayer's Medicare wages exceed
-     * $200,000 (the single-filer threshold the IRS uses as the
-     * employer-withholding cut-line; lower thresholds for MFJ/MFS
-     * apply but the conservative single-status fallback catches every
-     * case where the form COULD be required). Explicit
+     * Default: required when Medicare wages exceed $200,000. That is
+     * the single-filer threshold, which the IRS also uses as the
+     * employer-withholding cut-line. Other statuses have different
+     * thresholds, but this conservative fallback catches every case
+     * where the form COULD be required. An explicit
      * `decisions.scope.must_file_8959` wins when set.
      */
     ...(() => {
@@ -463,9 +466,9 @@ export function resolveFilingInfo(opts: {
     /*
      * ─── Schedule A ─────────────────────────────────────────────────
      * Default: required when decisions.itemize_vs_standard chose
-     * itemized. Explicit `decisions.scope.must_file_schedule_a` wins
-     * when set. State-local income tax composes from existing W-2
-     * sums (box 17 + CA SDI); other slots are single-fact reads.
+     * itemized. An explicit `decisions.scope.must_file_schedule_a` wins
+     * when set. State-local income tax composes from existing W-2 sums
+     * (box 17 + CA SDI); the other slots are single-fact reads.
      */
     ...(() => {
       const r = resolveMustFile(decisionByKey, {
@@ -507,26 +510,26 @@ export function resolveFilingInfo(opts: {
 
 /**
  * Resolve a must-file flag with explicit-decision-wins semantics, and
- * capture an audit trail (EngineDerivation) for which path fired.
+ * capture an audit trail (EngineDerivation) for the path that fired.
  *
  * Semantics:
- *  - Explicit decision present (boolean) → that wins, even when false.
- *    Lets scenarios opt out of a form they'd otherwise default into.
+ *  - An explicit boolean decision wins, even when false. This lets a
+ *    scenario opt out of a form it would otherwise default into.
  *  - Otherwise, walk `fallbacks` in order and return the first whose
- *    `value` is true. Source-order is the priority.
+ *    `value` is true. Source order is the priority.
  *  - All fallbacks false → return false with a "no signal" derivation.
- *  - No fallbacks AND no explicit → value is undefined (caller decides),
- *    derivation is undefined.
+ *  - No fallbacks AND no explicit decision → value is undefined (caller
+ *    decides), derivation is undefined.
  *
- * Why we record provenance even though the must_file_* keys aren't in
- * ai_decisions: a CPA reviewing the doc-gen sidecar should see WHY
- * Schedule D was generated. The engine is the decision-maker for these
- * scope calls today; the EngineDerivation captures that honestly.
+ * We record provenance even though the must_file_* keys are not in
+ * ai_decisions. A CPA who reviews the doc-gen sidecar should see WHY
+ * Schedule D was generated. The engine makes these scope calls today; the
+ * EngineDerivation captures that honestly.
  */
 interface MustFileFallback {
   /** Plain-English description of the rule. CPA-readable. */
   rule: string;
-  /** Whether this fallback signal currently fires. */
+  /** True when this fallback signal currently fires. */
   value: boolean;
   /** Fact keys this rule consumed. */
   triggeredByFactKeys?: readonly string[];
@@ -579,9 +582,8 @@ function resolveMustFile(
 }
 
 /*
- * Trade-date parser. Accepts "MM/DD/YY" or "MM/DD/YYYY" as emitted by
- * brokers on 1099-B. Two-digit years are anchored to the 2000s — anyone
- * taxed before 2050 needs to bring their own century.
+ * Trade-date parser. Accepts "MM/DD/YY" or "MM/DD/YYYY", the formats
+ * brokers print on a 1099-B. Two-digit years anchor to the 2000s.
  */
 function parseTradeDate(s: string): Date | null {
   const m = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/.exec(s);
@@ -595,9 +597,9 @@ function parseTradeDate(s: string): Date | null {
 
 /*
  * IRC §1222 short/long-term split: held more than 1 year is long-term.
- * "More than 1 year" = strictly past the anniversary date, day-precision.
- * Unparseable dates default to short-term — safer for tax purposes (more
- * conservative, higher rate) than mislabeling as long-term.
+ * "More than 1 year" means strictly past the anniversary date, at day
+ * precision. Unparseable dates default to short-term. That is the
+ * conservative choice (higher rate) versus a long-term mislabel.
  */
 function isLongTermTrade(t: TradeFactValue): boolean {
   const acq = parseTradeDate(t.dateAcquired);

@@ -1,25 +1,26 @@
 /*
- * Branded primitive types for form fields + accounting slots.
- * 
- * Each type is a phantom-branded primitive: zero runtime cost (the brand
- * only exists in the type-checker), but TS treats them as nominally distinct
- * so `SSN` can't be assigned to `Money` and vice versa. Bindings can return
- * these directly into form fields whose declared valueType matches the
- * underlying primitive.
- * 
- * Every brand carries a default `format(value)` used by the renderer when
- * writing into PDF widgets. Per-form overrides live next to each form's
- * bindings (see FormSpec.formatters) and take precedence over the default.
- * 
- * New brands are added here as the accounting layer grows. Bindings that
- * need a freshly-introduced shape should reference the brand in their
- * return type so the renderer/formatter path stays exhaustive.
+ * Branded primitive types for form fields and accounting slots.
+ *
+ * Each type is a phantom-branded primitive. The brand exists only in the
+ * type checker, so runtime cost is zero, but TS treats the types as
+ * nominally distinct: `SSN` cannot be assigned to `Money`, and vice
+ * versa. Bindings can return these directly into form fields whose
+ * declared valueType matches the underlying primitive.
+ *
+ * Every brand carries a default `format(value)` that the renderer uses
+ * when it writes PDF widgets. Per-form overrides live next to each form's
+ * bindings (see FormSpec.formatters) and take precedence over the
+ * default.
+ *
+ * Add new brands here as the accounting layer grows. A binding that needs
+ * a new shape should reference the brand in its return type, so the
+ * renderer/formatter path stays exhaustive.
  */
 
 /*
  * ─── Money ───────────────────────────────────────────────────────────────
- * Whole dollars. Storage convention is `number` of dollars (not cents) so
- * JSON round-trips and arithmetic don't need conversion helpers. Negatives
+ * Whole dollars. Storage is a `number` of dollars, not cents, so JSON
+ * round-trips and arithmetic need no conversion helpers. Negative values
  * are valid (refunds, losses, owe-amounts).
  */
 
@@ -30,10 +31,10 @@ export const money = (n: number): Money => n as Money;
 export const Money = {
   /**
    * Default IRS / FTB convention: comma-grouped whole dollars
-   * ("79,000"). Renderers historically wrote blank for zero; the form
-   * engine writes "0" so the field reads as "computed, value is zero"
-   * rather than "we forgot to fill it." Per-form overrides can swap
-   * conventions (blank-for-zero, no commas, etc.) via `FormSpec.formatters`.
+   * ("79,000"). Earlier renderers wrote blank for zero. The form engine
+   * writes "0", so the field reads as "computed, value is zero" rather
+   * than "we forgot to fill it." Per-form overrides can swap conventions
+   * (blank-for-zero, no commas, etc.) via `FormSpec.formatters`.
    */
   format: (m: Money): string => {
     if (!Number.isFinite(m)) return "";
@@ -44,10 +45,11 @@ export const Money = {
 
 /*
  * ─── SSN ─────────────────────────────────────────────────────────────────
- * Canonical storage is the 9-digit string with NO separators ("123456789").
- * Every per-form presentation derives from the bare digits. ITINs use the
- * same brand — both are 9 digits and the IRS treats them interchangeably
- * on filing forms. If a future form distinguishes, split the brand then.
+ * Canonical storage is the 9-digit string with NO separators
+ * ("123456789"). Every per-form presentation derives from the bare
+ * digits. ITINs use the same brand: both are 9 digits, and the IRS treats
+ * them interchangeably on filing forms. Split the brand when a future
+ * form distinguishes them.
  */
 
 export type SSN = string & { readonly __brand: "SSN" };
@@ -64,13 +66,13 @@ export const SSN = {
   /** Default human-readable presentation: "123-45-6789". */
   format: (s: SSN): string =>
     `${s.slice(0, 3)}-${s.slice(3, 5)}-${s.slice(5)}`,
-  /** Bare digits ("123456789") — identity, since canonical IS digit-only. */
+  /** Bare digits ("123456789"). Identity, since canonical storage IS digit-only. */
   digits: (s: SSN): string => s,
 };
 
 /*
  * ─── EIN ─────────────────────────────────────────────────────────────────
- * Employer identification number — canonical storage is 9 bare digits.
+ * Employer identification number. Canonical storage is 9 bare digits.
  * Default presentation matches the IRS format "##-#######".
  */
 
@@ -87,15 +89,16 @@ export const ein = (s: string): EIN => {
 export const EIN = {
   /** Default presentation: "36-1234567". */
   format: (e: EIN): string => `${e.slice(0, 2)}-${e.slice(2)}`,
-  /** Bare digits — identity. */
+  /** Bare digits. Identity. */
   digits: (e: EIN): string => e,
 };
 
 /*
  * ─── Phone ───────────────────────────────────────────────────────────────
- * Canonical storage is 10 bare digits ("7039530253"). Default presentation
- * is dashed "###-###-####"; per-form overrides can switch to parens
- * ("(703) 953-0253") or digit-only depending on the widget's convention.
+ * Canonical storage is 10 bare digits ("7039530253"). Default
+ * presentation is dashed "###-###-####". Per-form overrides can switch to
+ * parens ("(703) 953-0253") or digit-only to match the widget's
+ * convention.
  */
 
 export type Phone = string & { readonly __brand: "Phone" };
@@ -112,7 +115,7 @@ export const Phone = {
   /** Default human-readable presentation: "703-953-0253". */
   format: (p: Phone): string =>
     `${p.slice(0, 3)}-${p.slice(3, 6)}-${p.slice(6)}`,
-  /** Bare digits — identity. */
+  /** Bare digits. Identity. */
   digits: (p: Phone): string => p,
   /** Parens style: "(703) 953-0253". */
   parens: (p: Phone): string =>
@@ -121,7 +124,7 @@ export const Phone = {
 
 /*
  * ─── ISODate ─────────────────────────────────────────────────────────────
- * "YYYY-MM-DD". Renderer formats per-form (some want "MM/DD/YYYY").
+ * "YYYY-MM-DD". The renderer formats per form (some want "MM/DD/YYYY").
  */
 
 export type ISODate = string & { readonly __brand: "ISODate" };
@@ -135,7 +138,7 @@ export const isoDate = (s: string): ISODate => {
 
 export const ISODate = {
   format: (d: ISODate): string => d,
-  /** "MM/DD/YYYY" — the format every IRS/FTB PDF widget expects. */
+  /** "MM/DD/YYYY", the format every IRS/FTB PDF widget expects. */
   usSlash: (d: ISODate): string => {
     const [y, m, day] = d.split("-");
     return `${m}/${day}/${y}`;
@@ -144,10 +147,10 @@ export const ISODate = {
 
 /*
  * ─── FilingStatus ────────────────────────────────────────────────────────
- * Discriminated value, not a brand. Long form matches the AI decision
+ * Discriminated value, not a brand. The long form matches the AI decision
  * vocabulary (`decisions.scope.filing_status`) and the tax-table API's
- * column names — keep them aligned so resolvers / table lookups don't
- * need a translation table.
+ * column names. Keep them aligned so resolvers and table lookups need no
+ * translation table.
  */
 
 export type FilingStatus =

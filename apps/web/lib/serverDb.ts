@@ -6,17 +6,17 @@ import type { TaxReturn } from "@/lib/returns";
 
 /*
  * SERVER-ONLY domain reads/writes against the shared libsql app DB
- * (.data/app.db under apps/agent — the agent owns schema creation; we just
- * query). Replaces the per-table Postgres reads that used to live in
- * lib/{activity,filings,returns,requestedActions}.ts.
- * 
- * RLS is gone with Postgres, so every query here scopes explicitly by
- * userId / filingId. Callers (Server Components, Route Handlers) are
- * responsible for verifying the owner session (lib/localAuth.ts)
- * BEFORE calling in.
- * 
- * Never import this from a client component — @libsql/client and node:path
- * don't exist in the browser bundle, and the DB file lives on the server box.
+ * (.data/app.db under apps/agent). The agent owns schema creation; this
+ * module only queries. It replaces the per-table Postgres reads that
+ * lived in lib/{activity,filings,returns,requestedActions}.ts.
+ *
+ * RLS left with Postgres, so every query here scopes explicitly by
+ * userId / filingId. Callers (Server Components, Route Handlers) must
+ * verify the owner session (lib/localAuth.ts) BEFORE they call in.
+ *
+ * Never import this from a client component. @libsql/client and
+ * node:path do not exist in the browser bundle, and the DB file lives on
+ * the server box.
  */
 
 const DEFAULT_APP_DB = resolve(process.cwd(), "../agent/.data/app.db");
@@ -48,9 +48,9 @@ export interface OwnerAuthRow {
 }
 
 /*
- * Idempotent — the agent's ensureAppSchema also creates this table, but the
- * web app's first-run /setup can happen before the agent ever booted, so
- * both sides CREATE IF NOT EXISTS. Keep the DDL in sync with
+ * Idempotent. The agent's ensureAppSchema also creates this table, but
+ * the web app's first-run /setup can happen before the agent ever boots,
+ * so both sides CREATE IF NOT EXISTS. Keep the DDL in sync with
  * apps/agent/src/mastra/db/appDb.ts.
  */
 let ownerTableReady: Promise<unknown> | null = null;
@@ -158,8 +158,8 @@ export async function getOwnerFilingForYear(
 }
 
 /**
- * Non-revoked membership check — the explicit RLS replacement used before
- *  reading anything belonging to a filing the caller doesn't own outright. 
+ * Non-revoked membership check. This is the explicit RLS replacement.
+ * Run it before any read of a filing the caller does not own outright.
  */
 export async function hasMembership(
   filingId: string,
@@ -325,9 +325,9 @@ export interface UploadListRow {
 }
 
 /**
- * Uploaded (category='uploads') docs for a filing, newest first — the
- *  Documents tab grid + home-tab quick links. snake_case keys preserved
- *  because the components already render that shape. 
+ * Uploaded (category='uploads') documents for a filing, newest first.
+ * Feeds the Documents tab grid and the home-tab quick links. Keys stay
+ * snake_case because the components already render that shape.
  */
 export async function listUploads(filingId: string): Promise<UploadListRow[]> {
   const res = await db().execute({
@@ -355,8 +355,8 @@ export interface DraftListRow {
 }
 
 /**
- * Engine-generated drafts for a filing, newest first — the Forms tab.
- *  snake_case keys preserved for the existing components. 
+ * Engine-generated drafts for a filing, newest first. Feeds the Forms
+ * tab. Keys stay snake_case for the existing components.
  */
 export async function listDrafts(filingId: string): Promise<DraftListRow[]> {
   const res = await db().execute({

@@ -1,7 +1,7 @@
 /*
- * Requested-action types + browser-side fetchers. Domain data lives in the
- * libsql app DB on the server; the browser goes through the
- * /api/requested-actions Route Handlers (session cookie auth →
+ * Requested-action types + browser-side fetchers. Domain data lives in
+ * the libsql app DB on the server. The browser goes through the
+ * /api/requested-actions Route Handlers (session-cookie auth, then
  * lib/serverDb.ts queries).
  *
  * v1 only emits kind='upload'. The shape supports 'confirm' / 'decide'
@@ -31,9 +31,9 @@ export interface RequestedAction {
 }
 
 /*
- * "Open" in the UI sense — anything the user can still act on or that's
- * in flight. Resolved/skipped/dismissed cards stay in the DB for audit
- * but aren't surfaced.
+ * "Open" in the UI sense: anything the user can still act on, or that is
+ * in flight. Resolved / skipped / dismissed cards stay in the DB for
+ * audit. The UI does not show them.
  */
 export async function fetchOpenActions(
   taxYear: number,
@@ -46,9 +46,9 @@ export async function fetchOpenActions(
 }
 
 /*
- * Called the moment the user's upload lands. The card stays visible
+ * Call this the moment the user's upload lands. The card stays visible
  * (status='processing' shows a "Luca is reviewing this" indicator) until
- * Luca calls dismiss-requested-action after ingesting.
+ * Luca calls dismiss-requested-action after ingest.
  */
 export async function markActionProcessing(
   actionId: string,

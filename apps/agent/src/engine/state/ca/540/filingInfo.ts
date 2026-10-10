@@ -1,10 +1,10 @@
 /*
  * Form540FilingInfo — California Form 540 specific slots.
- * 
- * CA 540 cross-references federal Form 1040 line-by-line (AGI, taxable
- * income, etc.) but those flow through the form accessor `f`, not through
- * FilingInfo. FilingInfo slots are values produced by the AI resolver from
- * taxpayer facts + documents.
+ *
+ * CA 540 cross-references federal Form 1040 line by line (AGI, taxable
+ * income, etc.). Those values flow through the form accessor `f`, not
+ * through FilingInfo. FilingInfo slots hold values the resolver
+ * produces from taxpayer facts and documents.
  */
 
 import type { Money } from "../../../values.js";
@@ -34,15 +34,15 @@ export interface Form540FilingInfo extends BaseFilingInfo {
   /** True when no out-of-state purchases triggered a use-tax obligation. */
   noUseTaxOwed?: boolean;
   /**
-   * If use tax is zero, the reason — drives the line 91 radio group.
+   * The reason use tax is zero. Drives the line 91 radio group.
    * Values: "no_use_tax_owed" | "paid_directly_to_cdtfa".
    */
   useTaxZeroReason?: string;
   /** Mailing address matches principal residence. */
   mailingSameAsResidence?: boolean;
   /**
-   * Refund the California overpayment in full vs apply some to 2026
-   * estimated tax. Separate from the federal decision — a taxpayer can
+   * Refund the California overpayment in full, or apply some to 2026
+   * estimated tax. Separate from the federal decision: a taxpayer can
    * carry forward federal but refund state, or any combination.
    */
   refundFullOverpaymentCA?: boolean;

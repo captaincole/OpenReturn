@@ -1,8 +1,8 @@
 "use client";
 
 /*
- * Single-user login: one password, one owner. If setup hasn't run yet the
- * server layout for this route redirects to /setup before this renders.
+ * Single-user login: one password, one owner. If setup has not run yet,
+ * the server layout for this route redirects to /setup first.
  */
 
 import { type FormEvent, useState } from "react";

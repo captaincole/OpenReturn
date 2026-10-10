@@ -1,18 +1,18 @@
 /*
  * AI enrichment of extracted form fields.
- * 
- * Upstream (extractFormFields.ts) now hands us the label deterministically
- * from /TU or vision, so this stage no longer guesses labels from page text.
- * Its remaining job is three semantic decisions per field:
- * 
- *   - fieldId — stable "<formId>.<section>.<key>" id we can reference everywhere
+ *
+ * Upstream (extractFormFields.ts) hands us the label deterministically
+ * from /TU or vision, so this stage does not guess labels from page text.
+ * Its job is three semantic decisions per field:
+ *
+ *   - fieldId — stable "<formId>.<section>.<key>" id we reference everywhere
  *   - category — which Filing-Status panel bucket the field rolls up into
  *   - valueType — what kind of value belongs in the field (money / count /
- *                 text / ssn / phone / email / date / boolean / single_select /
- *                 multi_select / signature)
- * 
+ *                 text / ssn / phone / email / date / boolean /
+ *                 single_select / multi_select / signature)
+ *
  * For radio groups we also assign stable snake_case keys to each option.
- * 
+ *
  * The model is NOT responsible for:
  *   - Discovering field structure (pdf.js told us)
  *   - Inventing labels (extractFormFields tier-1/tier-2 produced them)
@@ -34,20 +34,20 @@ export type Category =
   | "other";
 
 /**
- * Semantic value type. Coarser than the IRS schemas but rich enough to drive
- * the renderer's formatters and the engine's rule library without resorting
- * to label-pattern matching.
+ * Semantic value type. Coarser than the IRS schemas but rich enough to
+ * drive the renderer's formatters and the engine's rule library without
+ * label-pattern matching.
  *
- *   money         — dollar amount on a tax line (sum/subtract; format with separators)
- *   count         — small integer (number of dependents, exemptions); multiplied by tables
+ *   money         — dollar amount on a tax line; format with separators
+ *   count         — small integer (number of dependents, exemptions)
  *   text          — free text (name, address line)
- *   ssn           — 9-digit identifier; renderer strips/inserts dashes per widget maxLength
+ *   ssn           — 9-digit identifier; renderer handles dashes per widget maxLength
  *   phone         — phone number; renderer formats per widget maxLength
  *   zip           — ZIP code, 5 or 9 digits
  *   email         — email address; verbatim
  *   date          — calendar date; renderer formats per widget(s)
- *   boolean       — single checkbox flipped on/off
- *   single_select — radio group OR group of checkboxes where only one is valid
+ *   boolean       — single checkbox, on or off
+ *   single_select — radio group OR checkbox group where only one is valid
  *   multi_select  — independent checkboxes where any subset can be set
  *   signature     — signature field, not autofilled
  */

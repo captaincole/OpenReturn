@@ -1,7 +1,8 @@
 /*
- * Manual single-doc ingest — the debugging seam under `sync`. Unlike sync,
- * this can ingest a PDF from anywhere on disk (not just the forms/ tree)
- * and can skip the paid contextualization stage via --no-contextualize.
+ * Manual single-doc ingest: the debugging seam under `sync`. Unlike
+ * sync, it can ingest a PDF from any path on disk, not just the forms/
+ * tree. It can also skip the paid contextualization stage via
+ * --no-contextualize.
  */
 
 import { parseArgs } from "node:util";

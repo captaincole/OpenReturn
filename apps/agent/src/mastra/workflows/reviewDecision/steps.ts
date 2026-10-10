@@ -29,8 +29,8 @@ import { modelFor } from "../../models";
 
 /*
  * ---------------------------------------------------------------------------
- * Step constants — review_run_steps.step_kind values. Kept here (vs as an
- * enum) so the workflow definition reads naturally.
+ * Step constants — the review_run_steps.step_kind values. They live here
+ * instead of an enum so the workflow definition stays readable.
  * ---------------------------------------------------------------------------
  */
 
@@ -52,10 +52,10 @@ const KIND = {
 export const initStep = createStep({
   id: "init",
   /*
-   * Scope arrives in the workflow input — the caller (record-ai-decision via
-   * the reviewDecision wrapper) already knows the filing; re-resolving it
-   * here would re-impose a one-filing-per-year assumption the workflow
-   * doesn't need.
+   * Scope arrives in the workflow input. The caller (record-ai-decision via
+   * the reviewDecision wrapper) already knows the filing. A re-resolve here
+   * would re-impose a one-filing-per-year assumption the workflow does not
+   * need.
    */
   inputSchema: z.object({
     decisionId: z.string(),
@@ -120,8 +120,8 @@ export const initStep = createStep({
 /*
  * ---------------------------------------------------------------------------
  * gather — deterministic. Loads supporting facts from tax_facts, derives
- * queries (Haiku formulator on iteration 1, rule's suggestedQueries on
- * iterations 2/3), runs hybrid retrieval, builds the evidence bundle.
+ * queries (the queryFormulator judge on iteration 1, rule's suggestedQueries
+ * on iterations 2/3), runs hybrid retrieval, builds the evidence bundle.
  * ---------------------------------------------------------------------------
  */
 
@@ -133,8 +133,8 @@ export const gatherStep = createStep({
     const t0 = Date.now();
     const carrier = inputData;
     /*
-     * Scope from the carrier — init already resolved + verified the filing;
-     * re-deriving it here would just repeat the lookup on every iteration.
+     * Scope comes from the carrier. init already resolved and verified the
+     * filing; a re-derive here would repeat the lookup on every iteration.
      */
     const scope = { userId: carrier.userId, filingId: carrier.filingId };
 
@@ -148,8 +148,8 @@ export const gatherStep = createStep({
     }
 
     /*
-     * Pull facts cited by the decision. Append-only table; latest-per-key
-     * collapsing happens inside listFactsByKeys.
+     * Pull the facts the decision cites. The table is append-only;
+     * listFactsByKeys collapses to the latest row per key.
      */
     const facts = await listFactsByKeys(
       scope,
@@ -304,9 +304,10 @@ export const ruleStep = createStep({
     const parsed = ruleOutputSchema.parse(ruleOutput);
 
     /*
-     * Update the carrier — if rule wants more evidence and we have iterations
-     * left, advance iteration + queries. Otherwise keep the carrier as-is so
-     * finalize can read the verdict.
+     * Update the carrier. When rule emits need_more_evidence, advance the
+     * iteration and swap in its suggested queries; the loop condition
+     * enforces the cap. Otherwise keep the carrier as-is so finalize can
+     * read the verdict.
      */
     let nextIteration = carrier.iteration;
     let nextQueries = carrier.queries;
@@ -367,9 +368,9 @@ export const finalizeStep = createStep({
     }
 
     /*
-     * Determine the final verdict. If rule still wanted more after the loop
-     * exhausted iterations, we collapse to needs_more_facts and synthesize a
-     * whatsMissing summary from accumulated need-more reasons.
+     * Determine the final verdict. If rule still wanted more evidence after
+     * the loop exhausted its iterations, collapse to needs_more_facts and
+     * synthesize a whatsMissing summary from the accumulated reasons.
      */
     let finalVerdict: Verdict;
     let reason: string;
@@ -383,9 +384,9 @@ export const finalizeStep = createStep({
       citations = carrier.ruleOutput.citations;
     } else {
       /*
-       * need_more_evidence + we're out of iterations → collapse to
-       * needs_more_facts. The rule agent's last "reason" describes the gap;
-       * earlier reasons are kept for context.
+       * need_more_evidence with no iterations left → collapse to
+       * needs_more_facts. The accumulated reasons (the last one included)
+       * describe the gap; whatsMissing joins them in order.
        */
       finalVerdict = "needs_more_facts";
       const allReasons = [
@@ -397,7 +398,6 @@ export const finalizeStep = createStep({
       reason = `Reviewer could not ground the decision after ${carrier.iteration - 1} iterations: ${whatsMissing}`;
     }
 
-    // Persist verdict on ai_decisions.
     await setDecisionVerdict(
       scope,
       carrier.decisionId,
@@ -407,8 +407,9 @@ export const finalizeStep = createStep({
     );
 
     /*
-     * Surface non-accurate outcomes to Luca via an open_questions row so he
-     * circles back with the user instead of the verdict dying in the ledger.
+     * Surface non-accurate outcomes to Luca via an open_questions row, so
+     * he circles back with the user. Otherwise the verdict sits unread in
+     * the ledger.
      */
     if (finalVerdict === "needs_more_facts") {
       openQuestionId = crypto.randomUUID();
@@ -433,9 +434,9 @@ export const finalizeStep = createStep({
     }
 
     /*
-     * Iteration count: if we converged on a verdict on iteration N, that's N.
-     * If we exhausted iterations (rule returned need_more on iter 3), the
-     * carrier was bumped to 4 by ruleStep — clamp to 3 for reporting.
+     * Iteration count: a verdict on iteration N reports N. When we
+     * exhausted iterations (rule returned need_more on iteration 3),
+     * ruleStep bumped the carrier to 4 — clamp to 3 for reporting.
      */
     const iterationCount = Math.min(carrier.iteration, 3) as 1 | 2 | 3;
 
@@ -444,7 +445,7 @@ export const finalizeStep = createStep({
       status: "completed",
       finalVerdict,
       iterationCount,
-      durationMs: Date.now() - t0, // approximate; per-step durations are in review_run_steps
+      durationMs: Date.now() - t0, // finalize-step time only; per-step durations are in review_run_steps
     });
 
     const output = {
@@ -493,9 +494,9 @@ function decisionSummary(carrier: LoopCarrier) {
 }
 
 /*
- * review_run_steps.input_json carries the relevant inputs only — no point
- * re-storing the whole evidence bundle on the rule step's input log when it
- * already lives on gather's output_json for the same iteration.
+ * review_run_steps.input_json carries only the relevant inputs. The gather
+ * and finalize steps log the carrier through this strip — the evidence
+ * bundle already lives on gather's output_json for the same iteration.
  */
 function stripHeavyFields(c: LoopCarrier) {
   return {
@@ -522,8 +523,8 @@ async function formulateQueries(c: LoopCarrier): Promise<string[]> {
     structuredOutput: {
       /*
        * Anthropic's native structured-output endpoint rejects `maxItems` on
-       * array properties, so the 1–2 cap lives in the prompt + the slice
-       * below rather than in the schema.
+       * array properties. The 1–2 cap therefore lives in the prompt and the
+       * slice below, not in the schema.
        */
       schema: z.object({ queries: z.array(z.string()).min(1) }),
       model: modelFor("judge"),
@@ -533,8 +534,9 @@ async function formulateQueries(c: LoopCarrier): Promise<string[]> {
   const obj = (result as { object?: { queries?: string[] } }).object;
   if (!obj?.queries || obj.queries.length === 0) {
     /*
-     * Fallback: synthesize a query from the decisionKey itself. Better than
-     * throwing — the workflow stays alive and we log the empty-queries case.
+     * Fallback: synthesize a query from the decisionKey itself. Better
+     * than a throw — the workflow stays alive, and the step log still
+     * records which queries ran.
      */
     return [c.decisionKey.replace(/^decisions\./, "").replace(/_/g, " ")];
   }

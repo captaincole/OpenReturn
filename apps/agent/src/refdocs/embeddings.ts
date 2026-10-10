@@ -1,22 +1,22 @@
 /*
  * Embedding provider. Every corpus embedding (ingest-time document vectors
- * and query-time search vectors) routes through here. Embeddings run LOCALLY
- * via Ollama — EmbeddingGemma 2 by default — so RAG costs nothing and needs
- * no API key. Env knobs follow the "provider/model" + _URL convention of
- * LUCA_MODEL / JUDGE_MODEL (see src/mastra/models.ts):
- * 
+ * and query-time search vectors) routes through here. Embeddings run
+ * locally via Ollama (EmbeddingGemma 2 by default), so RAG costs nothing
+ * and needs no API key. Env knobs follow the "provider/model" + _URL
+ * convention of LUCA_MODEL / JUDGE_MODEL (see src/mastra/models.ts):
+ *
  *   EMBEDDINGS_MODEL      default "ollama/embeddinggemma-2". Only the
  *                         ollama provider is supported.
  *   EMBEDDINGS_MODEL_URL  Ollama endpoint. Default http://localhost:11434.
- * 
- * Ollama not running / model not pulled is NOT fatal: the search path
- * catches embed failures and falls back to keyword (FTS) retrieval, and
- * ingest writes rows without vectors (recover with `corpus reembed`).
- * 
- * Changing the model invalidates every stored vector (different spaces,
- * different dims). setBlockEmbeddings stamps ref_meta.embedding_model; the
- * search path checks the stamp and degrades to FTS with a warning instead of
- * silently comparing vectors from two different models. Recovery:
+ *
+ * A stopped Ollama or a missing model is not fatal. The search path
+ * catches embed failures and falls back to keyword (FTS) retrieval.
+ * Ingest writes rows without vectors; `corpus reembed` recovers them.
+ *
+ * A model change invalidates every stored vector (different space,
+ * different dims). setBlockEmbeddings stamps ref_meta.embedding_model.
+ * The search path checks the stamp and degrades to FTS with a warning;
+ * it never compares vectors from two different models. Recovery:
  *   npm run corpus -- reembed --all
  */
 
@@ -33,8 +33,8 @@ export interface EmbeddingsConfig {
 const DEFAULT_EMBEDDINGS_MODEL = "ollama/embeddinggemma-2";
 
 /**
- * Resolve the active embeddings config. Always returns one — availability
- *  is a runtime question (callers catch embed failures and degrade to FTS). 
+ * Resolve the active embeddings config. It always returns one; availability
+ * is a runtime question. Callers catch embed failures and degrade to FTS.
  */
 export function resolveEmbeddings(): EmbeddingsConfig {
   const raw = process.env.EMBEDDINGS_MODEL ?? DEFAULT_EMBEDDINGS_MODEL;
@@ -57,9 +57,9 @@ export function resolveEmbeddings(): EmbeddingsConfig {
 
 /*
  * ─── EmbeddingGemma task prefixes ────────────────────────────────────────
- * The model card specifies task-instruction prefixes; omitting them works
- * but measurably hurts retrieval precision. Applied only for embeddinggemma
- * models — other Ollama embedding models get raw text.
+ * The model card specifies task-instruction prefixes. Omitting them works
+ * but measurably hurts retrieval precision. They apply only to
+ * embeddinggemma models; other Ollama embedding models get raw text.
  */
 function isEmbeddingGemma(model: string): boolean {
   return model.startsWith("embeddinggemma");
@@ -115,7 +115,7 @@ async function ollamaEmbed(
 
 /**
  * Embed document texts for storage. Batched; onProgress fires after each
- *  batch with the running count. 
+ * batch with the running count.
  */
 export async function embedDocuments(
   cfg: EmbeddingsConfig,

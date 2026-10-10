@@ -1,13 +1,13 @@
 /*
  * Emit a typed `Form<Id>` interface from a catalog JSON file.
- * 
- * Each catalog field has a `fieldId`, `valueType` (numeric/text/boolean/date/
- * single_select/multi_select), and a `label`. We strip the formId prefix
- * off each fieldId to get short keys (the convention used by defineForm),
- * map valueType → TS primitive, and emit one interface declaration the
- * bindings file can import.
- * 
- * Re-running overwrites.
+ *
+ * Each catalog field has a `fieldId`, a `valueType` (numeric/text/
+ * boolean/date/single_select/multi_select), and a `label`. The script
+ * strips the formId prefix off each fieldId to get short keys (the
+ * defineForm convention), maps valueType → TS primitive, and emits one
+ * interface declaration for the bindings file to import.
+ *
+ * Re-running overwrites the output.
  */
 
 import { promises as fs } from "node:fs";
@@ -52,8 +52,8 @@ function parseCmdArgs(argv: string[]): Args {
 
 /*
  * Map catalog valueType → TS primitive. Branded subtypes (Money for
- * numeric, SSN/Phone for specific text fields) are a future refinement;
- * for now we use plain primitives so the generated file is dependency-free.
+ * numeric, SSN/Phone for specific text fields) are a future refinement.
+ * Plain primitives keep the generated file dependency-free.
  */
 function tsType(field: CatalogField): string {
   switch (field.valueType) {
@@ -75,7 +75,7 @@ function tsType(field: CatalogField): string {
 }
 
 /*
- * Field IDs in the catalog are full ("form-540.header.first_name"); the
+ * Field IDs in the catalog are full ("form-540.header.first_name"). The
  * defineForm convention uses short keys ("header.first_name"). Strip the
  * formId prefix once at emit time.
  */

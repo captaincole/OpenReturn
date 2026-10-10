@@ -3,20 +3,20 @@ import { dirname, resolve, join, sep } from "node:path";
 import { mkdir, writeFile, readFile, unlink, rm } from "node:fs/promises";
 
 /*
- * Local filesystem store for document bytes — replaces the Supabase Storage
- * `user-documents` bucket (Phase 1 step 4). Layout mirrors the old bucket:
- * 
+ * Local filesystem store for document bytes. It replaces the Supabase
+ * Storage `user-documents` bucket. The layout mirrors the old bucket:
+ *
  *   <documents root>/{filingId}/{category}/{slug}-{ulid}.{ext}
- * 
- * user_documents.storage_path keeps the same relative-path convention, so
- * only the byte I/O changed — metadata rows and download URLs are untouched.
- * Access control happens in the callers (explicit membership checks against
- * the libsql app DB) exactly as it did for the interim service-role clients
- * this module deletes.
- * 
- * Path resolution mirrors db/appDb.ts: DOCUMENTS_PATH env wins (set it in
- * .env.development — module-relative defaults resolve differently in
- * Mastra's bundled output than in tsx source, see the step-3 gotcha), else
+ *
+ * user_documents.storage_path keeps the same relative-path convention,
+ * so only the byte I/O changed; metadata rows and download URLs are
+ * untouched. Access control happens in the callers, as explicit
+ * membership checks against the libsql app DB. There is no
+ * storage-layer ACL.
+ *
+ * Path resolution mirrors db/appDb.ts: DOCUMENTS_PATH env wins (set it
+ * in .env.development — module-relative defaults resolve differently in
+ * Mastra's bundled output than in tsx source), else
  * <apps/agent>/.data/documents.
  */
 
@@ -30,8 +30,8 @@ export function documentsRoot(): string {
 }
 
 /*
- * Storage paths come from our own DB rows, but resolve defensively anyway —
- * a `..` segment must never escape the documents root.
+ * Storage paths come from our own DB rows, but resolve defensively
+ * anyway. A `..` segment must never escape the documents root.
  */
 function safeJoin(storagePath: string): string {
   const root = documentsRoot();
@@ -55,7 +55,7 @@ export async function readBlob(storagePath: string): Promise<Buffer> {
   return readFile(safeJoin(storagePath));
 }
 
-/** Best-effort delete — missing files are fine (already gone). */
+/** Best-effort delete; a missing file is fine (already gone). */
 export async function deleteBlob(storagePath: string): Promise<void> {
   await unlink(safeJoin(storagePath)).catch(() => {});
 }

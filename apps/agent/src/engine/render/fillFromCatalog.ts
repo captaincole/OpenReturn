@@ -1,24 +1,27 @@
 /*
- * Catalog-driven PDF-fill pipeline. Walks an EvaluatedForm + matching
- * Catalog and writes each ok field result into its widget. Same code path
- * is exercised by:
- *   - the live tool (Supabase-fed facts → rendered PDF stored to Storage)
+ * Catalog-driven PDF-fill pipeline. Walks an EvaluatedForm plus its
+ * matching Catalog and writes each ok field result into its widget. The
+ * same code path serves:
+ *   - the live doc-gen tool (facts from app.db → rendered PDF saved via
+ *     createDocument)
  *   - the integration test suite (in-memory facts → in-memory PDF → assert)
- *   - the smoke:form-fill harness (synthetic field results → golden diff)
+ *   - the catalog-fill regression test (synthetic field results → golden
+ *     diff)
  * No I/O beyond the caller-supplied blank-PDF bytes; no database, no
- * network. Side-effect-free except for mutating the in-memory PDF.
- * 
+ * network. Side-effect-free except that it mutates the in-memory PDF.
+ *
  * Returns:
  *   pdfBytes — the flattened, filled PDF
- *   rendered — Map<fieldId, RenderedWidget[]> capturing what we actually
- *              wrote, so tests can assert on rendered values rather than
- *              re-reading widgets after flatten() (flatten destroys the
- *              fillable AcroForm).
- *   warnings — soft-failure log (widget missing, maxLength exceeded, etc.)
- *              Tests treat any non-empty warnings as a regression.
- * 
- * Behavior parity with the original inline loop in generateTaxDocuments:
- *   - verifiedWidget overlay takes precedence over catalog pdfWidgetName
+ *   rendered — Map<fieldId, RenderedWidget[]> of what was actually
+ *              written. Tests assert on these values because flatten()
+ *              destroys the fillable AcroForm, so widgets cannot be
+ *              re-read afterward.
+ *   warnings — soft-failure log (widget missing, maxLength exceeded,
+ *              etc.). Tests treat any non-empty warnings as a regression.
+ *
+ * Fill rules:
+ *   - the verifiedWidget overlay takes precedence over the catalog's
+ *     pdfWidgetName
  *   - missing/blocked/unsupported field results are skipped
  *   - multi_select fields iterate inv.options to check per-option widgets
  *   - numeric values render via fmtMoney (whole dollars, "0" for zero)
@@ -46,7 +49,7 @@ export interface RenderedWidget {
 
 export interface FillFromCatalogResult {
   pdfBytes: Buffer;
-  /** fieldId → list of widgets we wrote to (1+ entries; multi_select has many). */
+  /** fieldId → widgets written (1+ entries; multi_select has many). */
   rendered: Map<string, RenderedWidget[]>;
   warnings: string[];
 }
@@ -83,13 +86,13 @@ export async function fillFromCatalog(opts: {
       return;
     }
     /*
-     * Most fields render their value verbatim. A handful of widgets have
-     * maxLength constraints that conflict with the canonical fact format —
-     * SSN widgets are 9-char digit-only (no dashes), phone widgets are
-     * sometimes 10-char digit-only. When a length overflow happens, retry
-     * with separators stripped before declaring it a soft failure. This
-     * mirrors the IRS pattern: facts carry the human-readable format
-     * ("###-##-####"); the PDF holds the bare digits.
+     * Most fields render their value verbatim. A few widgets have
+     * maxLength constraints that conflict with the canonical fact
+     * format: SSN widgets take 9 digits with no dashes, and some phone
+     * widgets take 10 bare digits. On a length overflow, retry with
+     * separators stripped before declaring a soft failure. This mirrors
+     * the IRS pattern: facts carry the readable format ("###-##-####");
+     * the PDF holds the bare digits.
      */
     const written = trySetTextWithFallback(f, value);
     if (written === null) {
@@ -120,9 +123,9 @@ export async function fillFromCatalog(opts: {
     }
   };
   /*
-   * Radio-group select: the parent field is a PDFRadioGroup whose options
+   * Radio-group select. The parent field is a PDFRadioGroup whose options
    * come from PDFRadioGroup.getOptions(). The catalog records the exact
-   * option label per option; we call select(label) to pick it.
+   * label per option; select(label) picks it.
    */
   const selectRadio = (fieldId: string, widgetName: string, radioOption: string) => {
     try {
@@ -162,12 +165,12 @@ export async function fillFromCatalog(opts: {
 }
 
 /*
- * Try setText(value); on length-overflow, retry with separators stripped;
- * on still-overflow, expand the widget's maxLength to fit and retry one
- * more time. Since the renderer flattens the form before saving, expanding
- * maxLength has no visual consequence — it just lets pdf-lib write the
- * longer value through its strict validator. Returns the actually-written
- * string, or null if all attempts failed.
+ * Try setText(value). On length overflow, retry with separators stripped.
+ * On a further overflow, expand the widget's maxLength to fit and retry
+ * once more. The renderer flattens the form before it saves, so a larger
+ * maxLength has no visual consequence; it only lets pdf-lib write the
+ * longer value through its strict validator. Returns the string actually
+ * written, or null when all attempts failed.
  */
 function trySetTextWithFallback(f: PDFTextField, value: string): string | null {
   try {
@@ -187,10 +190,10 @@ function trySetTextWithFallback(f: PDFTextField, value: string): string | null {
   }
   /*
    * Final attempt: expand the widget's maxLength to fit the value. PDF
-   * viewers (and real users typing into the form) accept longer text than
-   * the maxLength claims; the widget's declared limit is often
-   * pessimistic (e.g. email widgets restricted to 12-15 chars despite
-   * accepting 30+ in practice). Flattening hides the maxLength entirely.
+   * viewers, and real users typing into the form, accept longer text than
+   * the declared maxLength. The declared limit is often pessimistic (for
+   * example email widgets limited to 12-15 chars that accept 30+ in
+   * practice). Flattening hides the maxLength entirely.
    */
   try {
     f.setMaxLength(value.length);
@@ -220,23 +223,23 @@ function fmtMoney(n: number | null | undefined): string {
   if (n === 0) return "0";
   /*
    * Comma-grouped whole dollars: 79000 → "79,000". Matches the IRS-form
-   * convention the CPA-completed golden PDFs use.
+   * convention in the CPA-completed golden PDFs.
    */
   return Math.round(n).toLocaleString("en-US", { maximumFractionDigits: 0 });
 }
 
 /*
  * Pre-render value coercion for text fields. SSN/phone widgets diverge by
- * jurisdiction: federal forms use comb widgets (one box per digit; the
- * visual gaps look like dashes, so the value must be digits-only), state
- * forms use single text widgets that expect the separators embedded
+ * jurisdiction. Federal forms use comb widgets: one box per digit, where
+ * the visual gaps look like dashes, so the value must be digits-only.
+ * State forms use single text widgets that expect embedded separators
  * ("###-##-####", "###-###-####"). Facts always carry the readable form;
- * we strip separators only on federal renders.
- * 
- * Branches on valueTypeRich (the classifier's structural verdict) rather
- * than label-regex — the vision tier sometimes captures whole instructional
- * sentences as the label (e.g. an 8949 page-2 name field whose label
- * included the word "SSN" from neighbouring text).
+ * only federal renders strip the separators.
+ *
+ * Branch on valueTypeRich (the classifier's structural verdict), not on a
+ * label regex. The vision tier sometimes captures whole instructional
+ * sentences as the label (for example an 8949 page-2 name field whose
+ * label included the word "SSN" from neighbouring text).
  */
 function coerceTextValue(
   inv: FieldInventory,
@@ -261,10 +264,10 @@ function fillByType(
   jurisdiction: string,
 ): boolean {
   /*
-   * Per-field formatter override (registered via FormSpec.formatters in
-   * a defineForm call). When present, the override decides exactly what
-   * text gets written — bypasses the value-type defaults (fmtMoney,
-   * coerceTextValue) so a form can opt into different conventions per
+   * Per-field formatter override, registered via FormSpec.formatters in
+   * a defineForm call. When present, the override decides exactly what
+   * text is written. It bypasses the value-type defaults (fmtMoney,
+   * coerceTextValue), so a form can opt into different conventions per
    * field. Example: 540 page 2 SSN renders with dashes via
    * formatters: { "page2.taxpayer_ssn": SSN.format }.
    */
@@ -311,11 +314,11 @@ function fillByType(
     case "single_select": {
       /*
        * Both render the same way: walk the selected value(s) and toggle
-       * the matching option's widget (per-checkbox 1040-style) or call
-       * PDFRadioGroup.select(label) (radio-group 540-style). single_select
-       * semantically means "exactly one selected"; multi_select means
-       * "zero or more." The renderer doesn't care about the distinction —
-       * it just iterates whichever value(s) are present.
+       * the matching option's widget (per-checkbox, 1040-style) or call
+       * PDFRadioGroup.select(label) (radio-group, 540-style).
+       * single_select means "exactly one selected"; multi_select means
+       * "zero or more." The renderer ignores the distinction and iterates
+       * whichever values are present.
        */
       if (!inv.options) return false;
       const selectedValues = Array.isArray(value) ? value : [value];

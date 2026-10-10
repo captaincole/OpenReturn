@@ -2,16 +2,16 @@ import type { PageSlice } from "./extract";
 import type { RefBlock, RefSection } from "../mastra/db/refDocs";
 
 /*
- * A heading detector returns the heading text if a line (given its neighbors)
- * qualifies as the start of a new section. Keep the rules conservative —
- * a miss degrades gracefully (content gets attached to the previous section),
- * a false positive fragments the doc.
- * 
- * `inlineBodyOffset`, when set, marks where the body content starts within the
- * source line — i.e. the heading consumes only the prefix of the line, not the
- * whole line. Used by FTB-style inline-dash headings ("Wildfire Disaster
- * Settlement Exclusion – For taxable years…"). Without it, the body would be
- * lost when the heading line is consumed.
+ * A heading detector returns the heading text when a line (given its
+ * neighbors) starts a new section. Keep the rules conservative. A miss
+ * degrades gracefully: content attaches to the previous section. A false
+ * positive fragments the doc.
+ *
+ * `inlineBodyOffset`, when set, marks where body content starts within the
+ * source line: the heading consumes only the prefix, not the whole line.
+ * FTB-style inline-dash headings use this ("Wildfire Disaster Settlement
+ * Exclusion – For taxable years…"). Without it, consuming the heading line
+ * would lose the body.
  */
 type HeadingMatch = {
   heading: string;
@@ -21,23 +21,24 @@ type HeadingMatch = {
 
 /**
  * Which publication style governs heading detection.
- *  - "irs" (default): em-dash conventions (`Line 25a—Form(s) W-2`), Part/Schedule
- *    headings, plus the 5-entry filing-status prose set.
- *  - "ftb": additive — keeps every IRS rule, then layers en-dash inline-body
- *    headings (`Wildfire Disaster Settlement Exclusion – For taxable years…`),
- *    en-dash line headings (`Line 2a – Alimony Received`), and an FTB-specific
- *    prose set ("What's New", "General Information", "Conformity").
+ *  - "irs" (default): em-dash conventions (`Line 25a—Form(s) W-2`),
+ *    Part/Schedule headings, plus the 5-entry filing-status prose set.
+ *  - "ftb": additive. Keeps every IRS rule, then layers en-dash inline-body
+ *    headings (`Wildfire Disaster Settlement Exclusion – For taxable
+ *    years…`), en-dash line headings (`Line 2a – Alimony Received`), and an
+ *    FTB-specific prose set ("What's New", "General Information",
+ *    "Conformity").
  *
  * Threaded in from `ingestRefDoc({ parserStyle })` → CLI `--parser-style`.
  */
 export type ParserStyle = "irs" | "ftb";
 
 /*
- * Known prose subject-headings that appear standalone on a line and would
- * otherwise be swept into the preceding section as body text. These follow no
- * structural pattern (they're just Title Case noun phrases), so we match them
- * by name. Add entries here conservatively — a false positive fragments the
- * section tree.
+ * Known prose subject-headings that appear standalone on a line. Without
+ * this set they would merge into the preceding section as body text. They
+ * follow no structural pattern (plain Title Case noun phrases), so we
+ * match them by name. Add entries conservatively: a false positive
+ * fragments the section tree.
  */
 const KNOWN_PROSE_HEADINGS = new Set<string>([
   // Filing status sub-sections (p.13–14 of 1040 instructions)
@@ -48,8 +49,8 @@ const KNOWN_PROSE_HEADINGS = new Set<string>([
   "Qualifying Surviving Spouse",
   /*
    * "Qualifying Surviving Spouse" wraps to two lines in the extracted text
-   * ("Qualifying Surviving\nSpouse"); match the first line so the continuation
-   * logic can absorb "Spouse" into the full heading.
+   * ("Qualifying Surviving\nSpouse"). Match the first line; the
+   * continuation logic absorbs "Spouse" into the full heading.
    */
   "Qualifying Surviving",
 ]);
@@ -59,37 +60,36 @@ const LINE_HEADING_RE = /^Line \d+[a-z]?$/;
 const LINE_DASH_HEADING_RE = /^Line \d+[a-z]?—.+$/;
 /*
  * Line-list headings, e.g. "Lines 27a, 27b, and 27c—" or "Lines 2a and 2b".
- * The em-dash is optional; some lists leave the title to the next line.
+ * The em-dash is optional; some lists put the title on the next line.
  */
 const LINES_LIST_HEADING_RE =
   /^Lines \d+[a-z]?(?:, \d+[a-z]?)*(?:,? and \d+[a-z]?)?\s*—?$/;
 // Line-range headings, e.g. "Lines 5a through 5c".
 const LINES_RANGE_HEADING_RE = /^Lines \d+[a-z]? through \d+[a-z]?$/;
 /*
- * Require Part/Schedule headings to appear alone on their line. Body prose
- * that references a part (e.g. "Part I of Form 4797;", "Part III, line 6")
- * also starts with "Part <roman>" but has trailing text on the same line,
- * which we reject here.
+ * Part/Schedule headings must appear alone on their line. Body prose that
+ * references a part (e.g. "Part I of Form 4797;", "Part III, line 6") also
+ * starts with "Part <roman>" but has trailing text on the same line, which
+ * we reject here.
  */
 const PART_HEADING_RE = /^Part [IVXLCDM]+$/;
 const SCHEDULE_HEADING_RE = /^Schedule \d+[A-Z]?$/;
 
 /*
- * FTB conventions — en-dash where IRS uses em-dash. Plus a small standalone
+ * FTB conventions: en-dash where IRS uses em-dash, plus a small standalone
  * section-header set ("What's New" etc.). The inline-body pattern captures
- * a Title Case prefix (up to 80 chars) followed by " – <body>"; the prefix
- * becomes the heading, the body stays as block content. Title Case is
- * enforced after match to reject lowercase echoes of headings that appear
- * in body prose (e.g. "wildfire mitigation payment – California law allows…"
- * on a later page).
+ * a Title Case prefix (up to 80 chars) followed by " – <body>". The prefix
+ * becomes the heading; the body stays as block content. A post-match Title
+ * Case check rejects lowercase echoes of headings in body prose (e.g.
+ * "wildfire mitigation payment – California law allows…" on a later page).
  */
 const FTB_LINE_EN_DASH_RE = /^Line \d+[a-z]? – .+$/;
 const FTB_INLINE_DASH_RE = /^([A-Z][^\n]{0,79}?)\s–\s(\S.*)$/;
 const FTB_KNOWN_PROSE_HEADINGS = new Set<string>([
   "What's New",
   /*
-   * PDF extractor preserves the curly apostrophe (U+2019). Match both so the
-   * detector survives whichever variant a future extractor revision yields.
+   * The PDF extractor preserves the curly apostrophe (U+2019). Match both
+   * variants so the detector survives a future extractor revision.
    */
   "What’s New",
   "General Information",
@@ -124,9 +124,9 @@ function detectHeading(
       const prefix = m[1].trim();
       if (isTitleCaseLine(prefix)) {
         /*
-         * Locate the en-dash in the un-trimmed line so the offset is correct
-         * relative to line.charStart in parseDoc. The regex anchors to the
-         * trimmed string but we need to point into the raw source.
+         * Locate the en-dash in the un-trimmed line so the offset is
+         * correct relative to line.charStart in parseDoc. The regex anchors
+         * to the trimmed string; the offset must point into the raw source.
          */
         const dashIdx = line.indexOf("–");
         if (dashIdx >= 0) {
@@ -155,12 +155,13 @@ function slugifyHeading(s: string): string {
 }
 
 /*
- * IRS headings often wrap across multiple lines ("Line 1e" / "Taxable Dependent
- * Care" / "Benefits From Form 2441," / "Line 26"). Without consuming the wrap,
- * the last line ("Line 26") looks like a brand-new heading and creates a
- * phantom section. A continuation line is a short Title Case fragment that
- * doesn't end a sentence. IRS headings are consistently Title Case; body prose
- * isn't, so the case test rejects things like "Each payer should send you…".
+ * IRS headings often wrap across multiple lines ("Line 1e" / "Taxable
+ * Dependent Care" / "Benefits From Form 2441," / "Line 26"). Without
+ * consuming the wrap, the last line ("Line 26") looks like a new heading
+ * and creates a phantom section. A continuation line is a short Title Case
+ * fragment that does not end a sentence. IRS headings are consistently
+ * Title Case; body prose is not, so the case test rejects lines like
+ * "Each payer should send you…".
  */
 const TITLE_CASE_SMALL_WORDS = new Set([
   "of", "the", "a", "an", "and", "or", "for", "in", "on", "at", "to", "from",
@@ -191,9 +192,9 @@ const MAX_HEADING_CONTINUATION_LINES = 5;
 
 /*
  * Lines we never emit into a block. These are structural PDF artifacts
- * (page numbers, footer boilerplate) that show up verbatim in the canonical
- * text but carry no citable content. They still live in canonical.txt;
- * we just don't include them in any block's char range.
+ * (page numbers, footer boilerplate) that appear verbatim in the canonical
+ * text but carry no citable content. They stay in canonical.txt; no
+ * block's char range includes them.
  */
 const PAGE_NUM_RE = /^\d{1,3}$/;
 const FOOTER_RE = /^\d{1,3} Need more information or forms\? Visit IRS\.gov\.$/;
@@ -245,12 +246,13 @@ export interface ParseOpts {
 /**
  * Parse canonical text into sections and blocks.
  *
- * v1 strategy: one block per (section × page). Sections are delimited by
- * high-confidence heading lines (`Line 1a`, `Part I`, `Schedule 3`). Content
+ * v1 strategy: one block per (section × page). High-confidence heading
+ * lines (`Line 1a`, `Part I`, `Schedule 3`) delimit sections. Content
  * before the first heading falls into a synthetic "preamble" section.
  *
- * All block `text` values are verbatim slices of `canonicalText` — we don't
- * clean extraction artifacts here. Char offsets always point back to canonical.txt.
+ * All block `text` values are verbatim slices of `canonicalText`; we do
+ * not clean extraction artifacts here. Char offsets always point back to
+ * canonical.txt.
  */
 export function parseDoc(
   canonicalText: string,
@@ -276,7 +278,7 @@ export function parseDoc(
   const usedSlugs = new Set<string>([preamble.headingSlug]);
 
   let blockOrdinal = 0;
-  // Accumulator for the block currently being built within the current section on the current page.
+  // Accumulator for the block in progress on the current section + page.
   let pendingBlock: {
     pageNum: number;
     firstLineStart: number;
@@ -310,9 +312,9 @@ export function parseDoc(
     currentSection.charEnd = charStart;
     sections.push(currentSection);
     /*
-     * Disambiguate duplicate slugs by suffixing. The IRS doc reuses headings
-     * like "Line 1a" across different sections (e.g. line-instruction vs.
-     * a referenced use in a table caption), so we just keep incrementing.
+     * Disambiguate duplicate slugs with a numeric suffix. The IRS doc
+     * reuses headings like "Line 1a" across sections (e.g. a line
+     * instruction vs. a table caption), so we keep incrementing.
      */
     let uniqueSlug = slug;
     let dupe = 2;
@@ -349,9 +351,9 @@ export function parseDoc(
       const heading = detectHeading(line.text, opts.style);
       if (heading) {
         /*
-         * Inline-body headings (FTB "Title – body" pattern) consume only the
-         * prefix of the line. Skip multi-line continuation logic and start
-         * the body block mid-line at the dash boundary.
+         * Inline-body headings (FTB "Title – body" pattern) consume only
+         * the line's prefix. Skip the multi-line continuation logic and
+         * start the body block mid-line at the dash boundary.
          */
         if (heading.inlineBodyOffset !== undefined) {
           startSection(
@@ -370,7 +372,7 @@ export function parseDoc(
           continue;
         }
 
-        // Whole-line heading. Consume continuation lines that form the rest.
+        // Whole-line heading. Consume continuation lines that complete it.
         const continuationTexts: string[] = [];
         let j = i + 1;
         let consumed = 0;
@@ -409,7 +411,7 @@ export function parseDoc(
         continue;
       }
 
-      // Regular content line. Extend the pending block, or open one on this page.
+      // Regular content line. Extend the pending block, or open one.
       if (!pendingBlock || pendingBlock.pageNum !== page.pageNum) {
         flushPendingBlock();
         pendingBlock = {
@@ -432,11 +434,11 @@ export function parseDoc(
   sections.push(currentSection);
 
   /*
-   * If no real sections were found, the preamble covered the whole doc.
-   * Leave it as-is; it's still a valid single-section parse.
+   * If no real sections were found, the preamble covers the whole doc.
+   * Leave it as-is; a single-section parse is valid.
    */
   if (!sectionsStarted && sections.length === 1) {
-    // preamble already in sections with full range — no-op
+    // The preamble is already in sections with the full range. No-op.
   }
 
   return { sections, blocks };

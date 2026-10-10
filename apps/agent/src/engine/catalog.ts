@@ -1,21 +1,19 @@
 /*
  * Form Catalog — the read model the engine evaluates against.
- * 
- * Inventory (label, category, valueType, position) lives here and is
- * shared across forms. The per-form bindings files (forms/<jurisdiction>/
- * <short>/bindings.ts) declare only the *behavior* layer (typed
- * (f, info) => value functions registered via defineForm). The Catalog
- * has two backing stores:
- * 
- *   - JSON fixture (apps/agent/fixtures/forms/<formId>-<taxYear>.json) —
- *     the source of truth checked into the repo. Always loadable in tests,
- *     no DB required.
- *   - Supabase tables (`forms`, `form_fields`) — the staging area the AI
- *     ingestion pipeline writes into starting in Phase C. Seeded from the
- *     JSON fixture so the runtime can switch between them transparently.
- * 
- * Both loaders return a `Catalog` of the same shape. Phase E's diff
- * (AI-generated vs hand-written) compares the contents of the two stores.
+ *
+ * The Catalog holds the inventory layer: label, category, valueType, PDF
+ * widget, position. The per-form bindings files
+ * (src/engine/<jurisdiction>/<short>/bindings.ts) declare only the
+ * behavior layer: typed (f, info) => value functions registered via
+ * defineForm.
+ *
+ * Catalog data comes from `catalog.json` files. The offline source of
+ * truth is `forms/<jurisdiction>/<short>/catalog.json`; the runtime uses
+ * the promoted copies under `src/mastra/public/forms/`, imported
+ * statically by the jurisdiction registries. The forms-ingest pipeline
+ * also stages catalog rows in corpus.db (`forms` / `form_fields`), but
+ * the engine does not read them (see the note on the removed loadFromDb
+ * below).
  */
 
 import { promises as fs } from "node:fs";
@@ -35,20 +33,21 @@ export interface FieldOption {
   /** Stable selection value, e.g. "single" / "mfj" / "yes" / "checking". */
   value: string;
   /**
-   * PDF AcroForm widget name that gets checked when this option is selected.
-   * Set when each option is its own checkbox widget (e.g. Form 1040's
-   * filing-status checkboxes). Unset for true PDFRadioGroup fields where the
-   * group is a single AcroForm field — the parent FieldInventory.pdfWidgetName
-   * names the group and the renderer calls `.select(radioOption)` instead.
+   * PDF AcroForm widget that the renderer checks when this option is
+   * selected. Set when each option is its own checkbox widget (for
+   * example Form 1040's filing-status checkboxes). Unset for true
+   * PDFRadioGroup fields, where the group is a single AcroForm field: the
+   * parent FieldInventory.pdfWidgetName names the group and the renderer
+   * calls `.select(radioOption)` instead.
    */
   pdfWidgetName?: string;
   /**
    * For PDFRadioGroup-backed options: the exact option label from
-   * `PDFRadioGroup.getOptions()`. The renderer passes this verbatim to
+   * `PDFRadioGroup.getOptions()`. The renderer passes it verbatim to
    * `.select(...)`. Mutually exclusive with `pdfWidgetName`.
    */
   radioOption?: string;
-  /** Optional human label for the option (UI display, not required for fill). */
+  /** Optional human label for UI display. Not required for PDF fill. */
   label?: string;
 }
 
@@ -61,43 +60,43 @@ export interface FieldInventory {
   category: Category;
   valueType: FieldValueType;
   /**
-   * Richer value-type from the classifier — distinguishes within the coarse
-   * buckets (e.g. "money" vs "count" both narrow to numeric; "ssn" / "phone"
-   * / "zip" / "email" / "signature" all narrow to text). Consumers that
-   * format values per shape (renderer SSN-digit-stripping, smoke-test
-   * synthetic-value generator) branch on this rather than label-regexing.
-   * Optional for backwards-compat; every post-pipeline-rewrite catalog
-   * carries it.
+   * Richer value-type from the classifier. It distinguishes within the
+   * coarse buckets: "money" and "count" both narrow to numeric; "ssn",
+   * "phone", "zip", "email", and "signature" all narrow to text.
+   * Consumers that format values per shape (renderer SSN digit stripping,
+   * test-harness synthetic values) branch on this field instead of a
+   * label regex. Optional for backward compatibility; every
+   * post-pipeline-rewrite catalog carries it.
    */
   valueTypeRich?: string;
   /**
-   * Deterministic structural type from pdf-lib. Optional for backwards-compat
-   * with catalogs ingested before this field existed (pre-pipeline-rewrite
-   * 1040 catalog). New catalogs always carry it; consumers that need the
-   * structural truth (e.g. "is this a real radio group?") read this rather
+   * Deterministic structural type from pdf-lib. Optional for backward
+   * compatibility with catalogs ingested before this field existed. New
+   * catalogs always carry it. Consumers that need the structural truth
+   * (for example "is this a real radio group?") read this field rather
    * than valueType.
    */
   pdfFieldKind?: PdfFieldKind;
   pdfWidgetName?: string;
   position?: { page: number; x: number; y: number };
   /**
-   * For multi_select fields: the set of selectable values and the PDF
-   * AcroForm widget each one toggles. Required when valueType ===
-   * "multi_select"; ignored otherwise. Each option carries its own
-   * pdfWidgetName because one form field can map to multiple underlying
-   * widgets (e.g. filing_status has 5 options across 3 AcroForm fields).
+   * For multi_select fields: the selectable values and the PDF AcroForm
+   * widget each one toggles. Required when valueType === "multi_select";
+   * ignored otherwise. Each option carries its own pdfWidgetName because
+   * one form field can map to multiple widgets (filing_status has 5
+   * options across 3 AcroForm fields).
    */
   options?: FieldOption[];
   /**
    * Widget-level character cap from the PDF AcroForm. Small values (≤ 4)
-   * usually signal a structural sub-field — date components, 2-letter state,
-   * 2-digit year, credit code — where the renderer needs a digit/letter
-   * subset rather than the canonical fact value. The renderer treats this
-   * as advisory (expands when needed); test harnesses honor it strictly to
-   * generate values that won't overflow.
+   * usually signal a structural sub-field: date components, 2-letter
+   * state, 2-digit year, credit code. There the renderer needs a
+   * digit/letter subset, not the canonical fact value. The renderer
+   * treats the cap as advisory and expands it when needed. Test harnesses
+   * honor it strictly so generated values do not overflow.
    */
   maxLength?: number;
-  /** Stable ordinal among the form's fields. Drives evaluation + display order. */
+  /** Stable ordinal among the form's fields. Drives evaluation and display order. */
   ordinal: number;
 }
 
@@ -152,19 +151,19 @@ export interface FixtureFile {
 
 /*
  * ─── Zod schema for catalog.json validation ──────────────────────────────
- * 
- * Mirrors the TypeScript types above so that static JSON imports in
- * registry.ts can be validated at module load. Without this, TS widens
- * JSON string-valued fields (e.g. `category: "personal_info"`) to plain
- * `string`, which won't satisfy our `Category` / `FieldValueType` unions
- * — and `import x from ".../catalog.json"` followed by passing `x` to
- * FixtureFile-typed code errors with an unfixable structural mismatch.
- * fixtureFileSchema.parse(x) narrows correctly and fails loud on drift
- * (renamed category, typo'd valueType, ingestion-pipeline schema change).
- * 
- * Unknown keys (`labelSource`, `multiline`, top-level `_meta`) are
- * emitted by the ingestion pipeline but unused by the engine — Zod
- * strips them by default.
+ *
+ * Mirrors the TypeScript types above so the jurisdiction registries can
+ * validate their static JSON imports at module load. Without it, TS
+ * widens JSON string fields (for example `category: "personal_info"`) to
+ * plain `string`, which does not satisfy the `Category` /
+ * `FieldValueType` unions, and passing the import to FixtureFile-typed
+ * code fails with a structural mismatch. fixtureFileSchema.parse(x)
+ * narrows correctly and fails loud on drift (renamed category, bad
+ * valueType, ingestion-pipeline schema change).
+ *
+ * The ingestion pipeline emits keys the engine does not use
+ * (`labelSource`, `multiline`, top-level `_meta`). Zod strips unknown
+ * keys by default.
  */
 
 const categoryEnum = z.enum([
@@ -228,7 +227,7 @@ export const fixtureFileSchema = z.object({
 
 /**
  * Load a Catalog from a single fixture file. The file holds one form's
- * inventory; multi-form catalogs are composed by `loadFromFixtures([…])`.
+ * inventory. Compose multi-form catalogs with `loadFromFixtures([…])`.
  */
 export async function loadFromFixture(filePath: string): Promise<Catalog> {
   return loadFromFixtures([filePath]);
@@ -244,11 +243,11 @@ export async function loadFromFixtures(filePaths: string[]): Promise<Catalog> {
 }
 
 /**
- * Build a Catalog from FixtureFile objects already in memory — used by the
- * prod hot path, which imports catalog.json files statically (so Rollup
- * bundles them and the function doesn't depend on filesystem layout under
- * /var/task on Vercel). The fs-based loaders above stay for tests/scripts
- * that load arbitrary catalog paths at runtime.
+ * Build a Catalog from FixtureFile objects already in memory. The prod
+ * hot path uses this: it imports catalog.json files statically, so the
+ * bundler ships them and the function does not depend on filesystem
+ * layout. The fs-based loaders above stay for tests and scripts that load
+ * arbitrary catalog paths at runtime.
  */
 export function buildCatalogFromFixtures(fixtures: FixtureFile[]): Catalog {
   const forms: FormDefinition[] = [];
@@ -267,17 +266,17 @@ export function buildCatalogFromFixtures(fixtures: FixtureFile[]): Catalog {
 }
 
 /*
- * NOTE: a corpus-DB catalog loader (loadFromDb) used to live here — it was
- * dormant (runtime uses the bundled JSON fixtures) and it was the engine's
- * only import of the db layer, so it moved out with the engine/mastra
- * boundary split. When the AI forms-ingest output is trusted (Phase C+),
- * the loader belongs on the mastra side: load rows there, build the
- * Catalog via makeCatalog(), and pass it in.
+ * NOTE: a corpus-DB catalog loader (loadFromDb) used to live here. It was
+ * dormant (the runtime uses the bundled JSON fixtures), and it was the
+ * engine's only import of the db layer, so it moved out with the
+ * engine/mastra boundary split. When the AI forms-ingest output is
+ * trusted, the loader belongs on the mastra side: load rows there, build
+ * the Catalog via makeCatalog(), and pass it in.
  */
 
-// ─── Pure utility (used by smoke tests and the seed script) ─────────────
+// ─── Pure utility ────────────────────────────────────────────────────────
 
-/** Build a Catalog from in-memory data — bypasses I/O. */
+/** Build a Catalog from in-memory data. No I/O. */
 export function makeCatalog(payload: CatalogPayload): Catalog {
   return buildCatalog(payload);
 }

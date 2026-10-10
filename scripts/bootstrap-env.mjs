@@ -1,12 +1,13 @@
 /*
  * Zero-config first boot: generate .env.development for both apps when
- * missing, with the .data paths filled in as absolute paths for THIS clone
- * (module-relative defaults resolve differently inside Mastra's bundled
- * output than in tsx scripts, so pinning absolute paths here keeps every
- * entry point on the same files).
- * 
- * Runs automatically via the root predev/predev:all hooks; idempotent — an
- * existing .env.development is never touched. Delete the file to regenerate.
+ * missing, with the .data paths filled in as absolute paths for THIS
+ * clone. Module-relative defaults resolve differently inside Mastra's
+ * bundled output than in tsx scripts. Pinned absolute paths keep every
+ * entry point on the same files.
+ *
+ * Runs automatically via the root predev and predev:web hooks.
+ * Idempotent: an existing .env.development is never touched. Delete the
+ * file to regenerate it.
  */
 
 import { existsSync, writeFileSync } from "node:fs";

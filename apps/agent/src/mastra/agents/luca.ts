@@ -26,9 +26,9 @@ export const luca = new Agent({
   model: modelFor("luca"),
   inputProcessors: [new PdfAttachmentRasterizer()],
   /*
-   * Multi-step: get-case-state + maybe one ingest + a record-ai-decision +
-   * optionally generate-tax-documents = ~5 steps per turn. 20 leaves headroom
-   * for batched scope decisions on a single turn.
+   * Multi-step: get-case-state + maybe one ingest + a record-ai-decision
+   * + optionally generate-tax-documents is ~5 steps per turn. 20 leaves
+   * headroom for batched scope decisions on a single turn.
    */
   defaultOptions: { maxSteps: 20 },
   defaultGenerateOptionsLegacy: { maxSteps: 20 },
@@ -47,9 +47,9 @@ export const luca = new Agent({
     // End-of-session artifact generation
     generateTaxDocuments,
     /*
-     * Secondary — listOpenQuestions/resolveOpenQuestion remain so Luca can
+     * Secondary: listOpenQuestions/resolveOpenQuestion remain so Luca can
      * see and clear rows that the review workflow writes. He no longer
-     * authors his own open questions — that lives in working memory now.
+     * authors his own open questions; those live in working memory now.
      */
     listOpenQuestions: listOpenQuestionsTool,
     resolveOpenQuestion,
@@ -57,9 +57,10 @@ export const luca = new Agent({
   },
   memory: new Memory({
     /*
-     * Same mastra.db file as the main runtime store — separate store
-     * instance because Memory owns its storage lifecycle, same database
-     * because threads/messages belong with the rest of the runtime state.
+     * Same mastra.db file as the main runtime store. A separate store
+     * instance because Memory owns its storage lifecycle; the same
+     * database because threads/messages belong with the rest of the
+     * runtime state.
      */
     storage: new LibSQLStore({
       id: "luca-memory",
@@ -67,10 +68,10 @@ export const luca = new Agent({
     }),
     options: {
       /*
-       * Thread-scoped because we currently run a single demo thread per user.
-       * Switch to "resource" once we split per tax year (2025 / 2026 / …).
-       * Mastra auto-registers updateWorkingMemory as a tool; the schema
-       * shape is documented in luca.workingMemory.ts.
+       * Thread-scoped: there is one thread per user × return year
+       * (threadIdFor in the web app), so working memory follows each
+       * filing's conversation. Mastra auto-registers updateWorkingMemory
+       * as a tool; luca.workingMemory.ts documents the schema shape.
        */
       workingMemory: {
         enabled: true,

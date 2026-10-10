@@ -1,13 +1,13 @@
 /*
  * Render one PDF page to a PNG with numbered overlay rectangles drawn over
  * each widget's bounding box. The output is the image we send to Claude
- * vision so it can pair each numbered badge to the form text adjacent to it.
- * 
+ * vision, which pairs each numbered badge with the adjacent form text.
+ *
  * Coordinate handling: pdf.js's `viewport.convertToViewportPoint(x, y)`
  * converts a PDF-space point (origin bottom-left, y-up) to canvas space
- * (origin top-left, y-down) and applies the page's scale factor. We use it
- * for both corners of the widget rect and take the min/max to get a
- * canvas-space bounding box that's stable regardless of rect orientation.
+ * (origin top-left, y-down) and applies the page's scale factor. We
+ * convert both corners of the widget rect and take the min/max. The
+ * canvas-space bounding box is then stable for any rect orientation.
  */
 
 import { renderPageAsImage } from "unpdf";
@@ -77,11 +77,11 @@ export async function renderPageWithOverlay(opts: {
 
     /*
      * Draw the number badge INSIDE the widget rectangle (top-left corner).
-     * Placing the badge above-the-widget put it in the label space, which
-     * made vision models confuse "badge over text X above widget Y" with
-     * "badge labels widget Y, whose actual label is text Z below." Inside
-     * the rectangle, the badge is unambiguously part of the widget — and
-     * the form text outside the rectangle is unambiguously the label.
+     * A badge above the widget sat in the label space. Vision models then
+     * confused "badge over text X above widget Y" with "badge labels
+     * widget Y, whose actual label is text Z below". Inside the rectangle,
+     * the badge is unambiguously part of the widget, and the form text
+     * outside the rectangle is unambiguously the label.
      */
     const badge = String(w.id);
     ctx.font = "bold 13px sans-serif";

@@ -1,14 +1,15 @@
 /*
- * Thin wrapper around the generateBindingsWorkflow: AI-generate the
+ * Thin wrapper around the generateBindingsWorkflow. AI-generates the
  * bindings.ts that maps engine FormFields to a catalog's PDF widgets.
- * 
+ *
  * Defaults:
- *   --catalog defaults to forms/<jurisdiction>/<short>/catalog.json
- *             (auto-discovered: federal/<short>, then state/ca/<short>, state/ny/<short>, …)
+ *   --catalog defaults to forms/<jurisdiction>/<short>/catalog.json,
+ *             auto-discovered: federal/<short>, then state/ca/<short>,
+ *             then state/ny/<short>.
  *   --output  derived from catalog location + formId:
  *               federal  → src/engine/federal/<short>/bindings.ts
  *               state/CA → src/engine/state/ca/<short>/bindings.ts
- *             where <short> is the formId with "form-" stripped.
+ *             <short> is the formId with "form-" stripped.
  */
 
 import { existsSync } from "node:fs";
@@ -18,11 +19,11 @@ import { projectRoot } from "../../src/paths.js";
 import type { Command } from "../lib/cli";
 
 /*
- * Auto-discover the catalog file in the conventional locations. Each form
- * has its own folder under forms/<jurisdiction>/<short>/ holding catalog.json.
- * First match wins; pass --catalog to override. (taxYear is currently
- * unused for path resolution — kept in the signature so the CLI's required
- * --tax-year arg still drives the workflow even when not in the path.)
+ * Auto-discover the catalog file in the conventional locations. Each
+ * form has its own folder under forms/<jurisdiction>/<short>/ with
+ * catalog.json. First match wins; pass --catalog to override. taxYear is
+ * unused for path resolution. It stays in the signature so the CLI's
+ * required --tax-year arg still drives the workflow.
  */
 function findDefaultCatalog(formId: string, _taxYear: number): string {
   const shortName = formId.replace(/^form-/, "");
@@ -36,8 +37,8 @@ function findDefaultCatalog(formId: string, _taxYear: number): string {
     if (existsSync(abs)) return abs;
   }
   /*
-   * Fall back to the federal path; runGenerateBindings will fail with a
-   * clear "file not found" error rather than swallowing the mismatch.
+   * Fall back to the federal path. runGenerateBindings then fails with a
+   * clear "file not found" error instead of a swallowed mismatch.
    */
   return resolve(projectRoot, `forms/federal/${shortName}/catalog.json`);
 }

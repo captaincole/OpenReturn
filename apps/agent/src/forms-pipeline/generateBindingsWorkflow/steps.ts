@@ -1,11 +1,11 @@
 /*
  * Phase D workflow steps. Four sequential steps:
- *   prepare  — load catalog from the JSON fixture (or DB in future)
+ *   prepare  — load the catalog from the JSON fixture
  *   retrieve — per-field hybridSearchRefDocs against the IRS corpus
- *   classify — batched Claude tool-use, returns {ruleName, params} per field
+ *   classify — batched Claude tool-use; returns {ruleName, params} per field
  *   write    — render bindings into TS source and write to disk
- * 
- * Each step's outputSchema is the next step's inputSchema; the carrier
+ *
+ * Each step's outputSchema is the next step's inputSchema. The carrier
  * accumulates via .extend() (see schemas.ts).
  */
 
@@ -173,7 +173,7 @@ export const writeStep = createStep({
 });
 
 /*
- * Unused — kept for the type re-export so adjacent modules don't have to
- * re-import the carrier types directly.
+ * Unused here. Kept as a type re-export so adjacent modules do not have
+ * to import the carrier types directly.
  */
 export type { AfterRetrieve };

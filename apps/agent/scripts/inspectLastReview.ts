@@ -1,11 +1,11 @@
-/**
- * One-off: dump the most recent review-decision workflow run, including each
- * step's input/output JSON. Useful when Studio's logs view is broken and we
- * need to see what actually happened.
+/*
+ * Dump the most recent review-decision workflow run with each step's
+ * input/output JSON. Use it when Studio's logs view is broken and you
+ * need to see what happened.
  *
  * Reads the libsql app DB (ai_decisions / review_runs / review_run_steps).
- * The old mastra_traces dump is gone — traces live in the in-memory
- * observability store now, visible only in Studio while the dev server runs.
+ * The old mastra_traces dump is gone. Traces now live in the in-memory
+ * observability store. Studio shows them only while the dev server runs.
  *
  * Usage:
  *   npx tsx --env-file=.env.development scripts/inspectLastReview.ts

@@ -1,19 +1,19 @@
 /*
  * Render Marcus Chen's source intake documents to disk for the CPA package.
- * 
+ *
  *   npx tsx tests/scenarios/marcus/generate-docs.ts
- * 
+ *
  * Emits:
  *   docs/01-marcus-w2.pdf               — Helix Software, Inc. W-2 (Copy B)
  *   docs/02-marcus-1099-wealthfront.pdf — Wealthfront-style consolidated 1099
- *                                         (only 1099-INT populated; everything
- *                                         else $0 to mirror a HYSA-only account)
+ *                                         (only 1099-INT populated; all else
+ *                                         $0 to mirror a HYSA-only account)
  *   docs/03-marcus-1099-schwab.pdf      — Schwab-style consolidated 1099
  *                                         (1099-DIV + 1099-B; mirrors the
  *                                         Apex/Alejandro layout)
- * 
+ *
  * One-off generator. The CPA receives these PDFs as Marcus's "source
- * documents" alongside the Markdown brief + cover note in the same folder.
+ * documents", next to the Markdown brief + cover note in the same folder.
  */
 
 import {
@@ -29,7 +29,7 @@ import { fileURLToPath } from "node:url";
 
 /*
  * ────────────────────────────────────────────────────────────────────────────
- * Constants — Marcus's identity & all the doc-level data
+ * Constants — Marcus's identity and all doc-level data
  * ────────────────────────────────────────────────────────────────────────────
  */
 
@@ -55,9 +55,9 @@ const HELIX = {
 };
 
 /*
- * W-2 numbers. Marcus's gross comp is $247,650 ($220k box-1 wages + $23.5k
- * 401(k) + $4,150 HSA). SS wage base 2025 = $176,100 (capped); Additional
- * Medicare 0.9% applies above $200k.
+ * W-2 numbers. Marcus's gross comp is $247,650 ($220k box-1 wages +
+ * $23.5k 401(k) + $4,150 HSA). The 2025 SS wage base is $176,100
+ * (capped). The 0.9% Additional Medicare Tax applies above $200k.
  */
 const W2 = {
   box1: 220_000.0,
@@ -131,10 +131,10 @@ const SCHWAB = {
 
 /*
  * ────────────────────────────────────────────────────────────────────────────
- * Drawing helpers — coordinate system runs y-down from top-left.
+ * Drawing helpers. The coordinate system runs y-down from the top-left.
  * ty(yTopDown, fontSize) returns the pdf-lib bottom-up baseline coordinate.
- * Interpretation: yTopDown is the TOP of the text's em-box (baseline below
- * by one fontSize). To put a value cleanly inside a box of height h, pass
+ * yTopDown is the TOP of the text's em-box; the baseline sits one fontSize
+ * below. To place a value inside a box of height h, pass
  * y_top = y_box + h - 4 - fontSize so descenders sit just inside the bottom.
  * ────────────────────────────────────────────────────────────────────────────
  */
@@ -201,7 +201,7 @@ function drawTextCenter(
   drawText(ctx, str, xCenter - widthOf(font, str, size) / 2, yTopDown, opts);
 }
 
-/** Greedy word-wrap. Returns lines that each fit within `maxWidth` at `size`. */
+/** Greedy word-wrap. Each returned line fits within `maxWidth` at `size`. */
 function wrapText(font: PDFFont, text: string, maxWidth: number, size: number): string[] {
   const words = text.split(/\s+/);
   const lines: string[] = [];
@@ -219,7 +219,7 @@ function wrapText(font: PDFFont, text: string, maxWidth: number, size: number): 
   return lines;
 }
 
-/** Draws word-wrapped text. Returns the y-coordinate one line-height below the last line. */
+/** Draw word-wrapped text. Returns the y one line-height below the last line. */
 function drawWrapped(
   ctx: Ctx,
   text: string,
@@ -319,9 +319,9 @@ function drawColumn(
 }
 
 /**
- * Section title row: title (left, size 8 bold) + optional inline subtitle
- *  positioned right after title with a measured gap + optional OMB note
- *  right-aligned to width. Underlined. 
+ * Section title row, underlined. Title sits left at size 8 bold. An
+ * optional subtitle follows the title after a measured gap. An optional
+ * OMB note is right-aligned to the row width.
  */
 function drawSectionTitle(
   ctx: Ctx,
@@ -514,14 +514,14 @@ function drawWealthfrontHeader(ctx: Ctx, opts: WfHeaderOpts) {
     drawText(ctx, "Account  " + WEALTHFRONT.account, 240, top + 22, { size: 9, bold: true });
     drawText(ctx, "Statement Date:  " + WEALTHFRONT.statementDate, 380, top + 6, { size: 8 });
     drawText(ctx, "Document ID:  " + WEALTHFRONT.documentId, 380, top + 18, { size: 8 });
-    // Right-align "2025" so it sits just inside the band's right edge
+    // Right-align "2025" just inside the band's right edge.
     drawTextRight(ctx, "2025", PAGE_W - 42, top + 4, { size: 22, bold: true });
     drawText(ctx, MARCUS.name, 240, top + 40, { size: 9 });
     drawText(ctx, MARCUS.street, 240, top + 52, { size: 9 });
     drawText(ctx, MARCUS.cityStateZip, 240, top + 64, { size: 9 });
     drawText(ctx, "RECIPIENT'S TIN: " + MARCUS.ssnMasked, 240, top + 75, { size: 8 });
   } else {
-    // Continuation band: 30pt tall, contents centered vertically inside
+    // Continuation band: 30pt tall, contents centered vertically.
     drawBox(ctx, 36, 32, PAGE_W - 72, 30, { fill: SHADE });
     drawText(ctx, WEALTHFRONT.payerName, 42, 38, { size: 9, bold: true });
     drawText(ctx, "2025", 42, 50, { size: 9, bold: true });
@@ -603,15 +603,15 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       colRightX, yR, colW, { size: 7, bold: true },
     );
 
-    // Summary table — column x positions widened so "Undetermined" has room
+    // Summary table. Column x positions are widened so "Undetermined" fits.
     const tableY = Math.max(yL, yR) + 20;
     drawText(ctx, "SUMMARY OF PROCEEDS, GAINS & LOSSES, ADJUSTMENTS AND WITHHOLDING", colLeftX, tableY, { size: 9, bold: true });
     drawText(ctx, "Refer to the 1099-B and Proceeds not reported to the IRS pages to ensure that you consider all relevant items and to determine the correct gains and losses. The amounts shown below are for informational purposes.", colLeftX, tableY + 12, { size: 6, italic: true });
 
     const tHdrY = tableY + 32; // extra room for 2-line headers
     /*
-     * Spread numeric columns so wide headers + wide values don't crash:
-     *   PROC(332) → BASIS(387) → MKT(442) → WASH(502) → NET(570)
+     * Spread the numeric columns so wide headers and wide values do not
+     * collide: PROC(332) → BASIS(387) → MKT(442) → WASH(502) → NET(570).
      */
     const X_TERM = colLeftX;
     const X_TYPE = colLeftX + 60;
@@ -1245,8 +1245,9 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     drawText(ctx, "purposes only.", x0, 195, { size: 7, italic: true });
 
     /*
-     * Column x positions chosen so adjacent headers + values never overlap.
-     * Layout: label area to ~270pt, then 5 numeric cols evenly spaced.
+     * Column x positions keep adjacent headers and values from
+     * overlapping. Layout: label area to ~270pt, then 5 numeric columns
+     * evenly spaced.
      */
     const C_PROC = x0 + 290;
     const C_BASIS = x0 + 355;
@@ -1368,10 +1369,11 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     let y = 168;
 
     /*
-     * 6 right-aligned numeric columns; gaps sized so that size-8-bold totals
-     * ("$57,500.00" ≈ 45pt, "$(3,000.00)" ≈ 48pt) never crash adjacent cols.
-     * PROC pushed right of SOLD date by ≥10pt; GAIN pulled left of WHELD by
-     * enough to clear the "TAX WITHHELD" header at size 6 bold.
+     * 6 right-aligned numeric columns. Gaps are sized so size-8-bold
+     * totals ("$57,500.00" ≈ 45pt, "$(3,000.00)" ≈ 48pt) never collide
+     * with adjacent columns. PROC sits ≥10pt right of the SOLD date.
+     * GAIN sits far enough left of WHELD to clear the "TAX WITHHELD"
+     * header at size 6 bold.
      */
     const C_QTY = x0 + 140;
     const C_ACQ = x0 + 180;
@@ -1385,8 +1387,11 @@ async function buildSchwab1099(): Promise<Uint8Array> {
 
     const moneyOrParen = (g: number) => (g < 0 ? "$(" + fmtMoney(-g) + ")" : "$" + fmtMoney(g));
 
-    const HSZ = 5.5; // header font size; smaller than 6 so neighbouring
-                     // column labels like "DISALLOWED" / "TAX WITHHELD" fit.
+    /*
+     * Header font size. Smaller than 6 so neighbouring column labels
+     * like "DISALLOWED" / "TAX WITHHELD" fit.
+     */
+    const HSZ = 5.5;
     const drawTradeHeader = () => {
       drawText(ctx, "DESCRIPTION", x0, y, { size: HSZ, bold: true });
       drawText(ctx, "(Box 1a)", x0, y + 7, { size: HSZ, bold: true });

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { ownerExists } from "@/lib/localAuth";
 
 /*
- * Before an owner exists there's nothing to log in to — send first-run
+ * Before an owner exists there is nothing to log in to. Send first-run
  * visitors to /setup instead.
  */
 export default async function LoginLayout({

@@ -1,19 +1,18 @@
 /*
  * Alex Morales — expected results.
- * 
+ *
  * Every numeric expected value below is the literal number from the
- * perfect Alex 1040 (the user's reference Alex-1040-Finished.pdf, kept
- * outside the repo). Any divergence between the rendered 1040 and these
- * values is a regression in the engine, catalog, bindings, FilingInfo
- * resolver, or renderer.
+ * CPA-completed `docs/Alex-1040-Golden.pdf` in this scenario folder. Any
+ * divergence between the rendered 1040 and these values is a regression
+ * in the engine, catalog, bindings, FilingInfo resolver, or renderer.
  */
 
 import type { ExpectedResults } from "../../types.js";
 
 export const alexExpected: ExpectedResults = {
   /*
-   * Engine-computed line values (numeric). The runner asserts each against
-   * the evaluated form's typed numeric result.
+   * Engine-computed line values (numeric). The runner asserts each
+   * against the evaluated form's typed numeric result.
    */
   engineFields: {
     "form-1040.line.1a": 79000,    // total W-2 wages box 1
@@ -36,8 +35,8 @@ export const alexExpected: ExpectedResults = {
 
   /*
    * PDF widget text values. Money fields render as integer strings via
-   * fmtMoney. SSN gets separator-stripped by the renderer because the PDF
-   * widget is 9-char digit-only (`maxLength=9`).
+   * fmtMoney. The renderer strips SSN separators because the PDF widget
+   * is 9-char digit-only (`maxLength=9`).
    */
   renderedText: {
     "form-1040.header.first_name_mi": "Alex",
@@ -55,18 +54,18 @@ export const alexExpected: ExpectedResults = {
   },
 
   renderedBlank: [
-    // Calendar-year filer — header date widgets stay blank.
+    // Calendar-year filer: header date widgets stay blank.
     "form-1040.header.tax_year_beginning_mm",
     "form-1040.header.tax_year_ending_mm",
     "form-1040.header.tax_year_ending_yy",
-    // No banking-info facts ingested → routing + account widgets blank.
+    // No banking-info facts ingested, so routing + account widgets stay blank.
     "form-1040.line.35b_routing_number",
     "form-1040.line.35d_account_number",
   ],
 
   /*
-   * Checkboxes that must end up checked. Filing status is now 5 separate
-   * boolean fields; only the matching one (Single for Alex) gets checked.
+   * Checkboxes that must end up checked. Filing status is 5 separate
+   * boolean fields; only the matching one (Single for Alex) is checked.
    */
   renderedChecked: [
     "form-1040.header.filing_status_single",

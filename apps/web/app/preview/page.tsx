@@ -1,14 +1,14 @@
 "use client";
 
 /*
- * Visual preview of the proposed new shell:
+ * Static design preview of the shell:
  *   Top bar (logo + return switcher + workspace tabs + status)
- *   Desktop: chat 1/3 | workspace 2/3 (fixed split, no resize for v1)
+ *   Desktop: chat 1/3 | workspace 2/3 (fixed split, no resize)
  *   Mobile:  bottom tab bar swaps chat <-> workspace
- *   Hard-lock co-editing: toggle "Luca working" to see the dashboard lock
- * 
- * Static data only. Once Andrew greenlights the look, we promote this into
- * the real shell (delete SideNav, lift streaming into context, etc.).
+ *   Toggle "Luca working" to see the dashboard hard-lock
+ *
+ * Static data only. The design shipped as the real shell
+ * (components/AppShell.tsx); this page stays as a reference mock.
  */
 
 import { useState, type ReactNode } from "react";
@@ -85,10 +85,10 @@ interface Category {
 }
 
 /*
- * Categories drive the Progress strip + drill-down panel. Each item is a
- * concrete workflow Luca can run (e.g. "ask about 1099-DIV", "compare
- * standard vs itemized"). Click a strip segment → expand → click an item →
- * Luca starts that workflow (stubbed in the preview).
+ * Categories drive the Progress strip and the drill-down panel. Each
+ * item is a concrete workflow Luca can run (e.g. "ask about 1099-DIV",
+ * "compare standard vs itemized"). Click a strip segment to expand it;
+ * click an item to start that workflow (stubbed in the preview).
  */
 const CATEGORIES: Category[] = [
   {
@@ -376,8 +376,10 @@ function ChatPane({
 }) {
   return (
     <div className={cn("flex flex-col h-full min-h-0", mobile && "bg-bg-base")}>
-      {/* No header — chat flows freely. Identity lives on each assistant
-          message (avatar) and inside the input bar (persona badge). */}
+      {/*
+       * No header — chat flows freely. Identity lives on each assistant
+       * message (avatar) and inside the input bar (persona badge).
+       */}
 
       <div className="flex-1 min-h-0 overflow-y-auto px-5 pt-6 pb-3 space-y-5">
         {CHAT_MESSAGES.map((m, i) => (
@@ -553,9 +555,10 @@ function HomeView() {
   const [expandedCat, setExpandedCat] = useState<string | null>(null);
   const expanded = expandedCat ? CATEGORIES.find((c) => c.id === expandedCat) : null;
   /*
-   * The "View all" expansion just unhides additional history. In the real
-   * shell this list comes from a single query against tax_facts + ai_decisions
-   * (paginated when expanded); the duplication here is mock-data only.
+   * The "View all" expansion only reveals more history. In the real
+   * shell this list comes from one query against tax_facts +
+   * ai_decisions (paginated when expanded); the duplication here is
+   * mock-data only.
    */
   const visibleActivity = activityExpanded ? ACTIVITY.concat(ACTIVITY, ACTIVITY) : ACTIVITY;
 

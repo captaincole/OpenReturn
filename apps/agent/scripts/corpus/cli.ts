@@ -1,8 +1,8 @@
 /*
- * corpus — the RAG knowledge base, end to end: get instruction documents
- * into corpus.db (sync/ingest/status/reembed) and operate on the db itself
- * (fetch/check/search).
- * 
+ * corpus — the RAG knowledge base, end to end. Gets instruction
+ * documents into corpus.db (sync/ingest/status/reembed) and operates on
+ * the db itself (fetch/check/search).
+ *
  *   npm run corpus -- <command>       (or: npx tsx scripts/corpus/cli.ts)
  */
 

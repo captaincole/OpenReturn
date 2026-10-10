@@ -2,17 +2,18 @@
  * Per-block contextual summarization, adapted from Anthropic's Contextual
  * Retrieval cookbook:
  *   https://www.anthropic.com/news/contextual-retrieval
- * 
+ *
  * The cookbook sends the WHOLE document as a cache-controlled content block
- * for each chunk's summary. That doesn't work for large reference documents:
- * the IRS 1040 instructions alone exceed Haiku's 200k context window.
- * 
+ * for each chunk's summary. That does not work for large reference
+ * documents: the IRS 1040 instructions alone exceed Haiku's 200k context
+ * window.
+ *
  * Instead, we send the SECTION text the block belongs to, plus the document
  * title and section heading as light metadata. The section text is the
- * cache-controlled block, so all blocks within the same section share the
- * cache — same locality benefit, scales to arbitrarily large docs.
- * 
- * We use fetch directly against /v1/messages to keep deps minimal.
+ * cache-controlled block, so all blocks in the same section share the
+ * cache. Same locality benefit; scales to any document size.
+ *
+ * We call /v1/messages with fetch directly to keep deps minimal.
  */
 
 import { createHash } from "node:crypto";
@@ -21,13 +22,13 @@ const ANTHROPIC_BASE = "https://api.anthropic.com/v1";
 const ANTHROPIC_VERSION = "2023-06-01";
 
 /*
- * Contextual-summary model. Haiku default keeps
- * `corpus sync` cheap for contributors adding a document (~$0.50/doc); the
- * official published corpus is built by the maintainer with
- * REFDOCS_MODEL=claude-opus-5 (measured: $17.35 for the full 10-doc
- * rebuild). Mixing models across docs is fine mechanically (sha-skip
- * preserves existing rows) but the published corpus should be one model
- * end-to-end — rebuild fully when switching.
+ * Contextual-summary model. The Haiku default keeps `corpus sync` cheap
+ * for contributors adding a document (~$0.50/doc). The maintainer builds
+ * the official published corpus with REFDOCS_MODEL=claude-opus-5
+ * (measured: $17.35 for the full 10-doc rebuild). Mixed models across
+ * docs work mechanically (sha-skip preserves existing rows), but the
+ * published corpus should use one model end-to-end. Rebuild fully when
+ * you switch models.
  */
 const SUMMARIZER_MODEL = process.env.REFDOCS_MODEL ?? "claude-haiku-5-5";
 
@@ -79,16 +80,16 @@ async function callMessages(
 }
 
 export interface SummarizeOpts {
-  /** Document title — light metadata, not cached. */
+  /** Document title. Light metadata, not cached. */
   documentTitle: string;
   /**
-   * Section heading the block lives under. Null for preamble/unattributed
-   *  blocks. 
+   * Section heading the block lives under. Null for preamble or
+   * unattributed blocks.
    */
   sectionHeading: string | null;
   /**
-   * Full text of the section the block belongs to. Sent as a cached content
-   *  block so all blocks within the same section share the prompt cache. 
+   * Full text of the block's section. Sent as a cached content block so
+   * all blocks in the same section share the prompt cache.
    */
   sectionText: string;
   /** The block text we want a summary for. */
@@ -148,8 +149,8 @@ export interface SummarizedBlock {
 }
 
 /**
- * sha1 of the raw block text — stored on each row so future ingests can
- *  skip re-summarizing unchanged blocks if we add that optimization later. 
+ * sha1 of the raw block text. Stored on each row so a future ingest can
+ * skip re-summarizing unchanged blocks, if we add that optimization.
  */
 export function sha1(text: string): string {
   return createHash("sha1").update(text).digest("hex");
@@ -160,7 +161,7 @@ export interface SummarizeAllOpts {
   blocks: BlockToSummarize[];
   /**
    * Number of summaries to run in parallel. Anthropic rate limits scale
-   *  with org tier; 5 is conservative and works under default tier-1 limits. 
+   * with org tier; 5 is conservative and works under default tier-1 limits.
    */
   concurrency?: number;
   /** Called after each block completes; useful for progress logging. */
@@ -172,9 +173,9 @@ export async function summarizeBlocks(
 ): Promise<SummarizedBlock[]> {
   const concurrency = Math.max(1, Math.min(opts.concurrency ?? 5, 16));
   /*
-   * Sort blocks so all blocks within the same section run consecutively. The
+   * Sort blocks so all blocks in the same section run consecutively. The
    * first block in each section warms the prompt cache for that section's
-   * text; subsequent blocks hit the cache (90% input discount).
+   * text; the rest hit the cache (90% input discount).
    */
   const ordered = opts.blocks
     .map((b, i) => ({ b, i }))

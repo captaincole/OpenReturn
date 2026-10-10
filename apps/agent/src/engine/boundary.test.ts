@@ -1,19 +1,19 @@
 /*
  * The engine boundary, enforced mechanically.
- * 
- * The form engine is a pure library: fact/decision rows in, evaluated forms
- * out. It must never import application code — no Mastra, no db layer, no
- * AI, no network clients. This test walks every module under src/engine/
- * and fails on any import that escapes the directory, so the boundary
- * survives contributors who never read a README.
- * 
+ *
+ * The form engine is a pure library: fact/decision rows in, evaluated
+ * forms out. It must never import application code: no Mastra, no db
+ * layer, no AI, no network clients. This test walks every module under
+ * src/engine/ and fails on any import that escapes the directory, so the
+ * boundary survives contributors who never read a README.
+ *
  * Allowed imports:
  *   - anything inside src/engine/
  *   - node builtins (node:*)
  *   - a short whitelist of pure libraries (zod, pdf-lib, vitest for tests)
- *   - the bundled form-catalog JSON assets under src/mastra/public/forms/
- *     (data, not code — the runtime copies Mastra's bundler ships; see
- *     federal/index.ts for the promotion-gate rationale)
+ *   - the bundled form-catalog JSON assets under src/mastra/public/forms/.
+ *     These are data, not code: the runtime copies Mastra's bundler
+ *     ships. See federal/index.ts for the promotion-gate rationale.
  */
 
 import { readdirSync, readFileSync } from "node:fs";
@@ -33,7 +33,7 @@ function walk(dir: string): string[] {
   });
 }
 
-/** Static, side-effect, re-export, and dynamic import specifiers. */
+/** Collect static, side-effect, re-export, and dynamic import specifiers. */
 function importSpecifiers(source: string): string[] {
   const specs: string[] = [];
   const patterns = [

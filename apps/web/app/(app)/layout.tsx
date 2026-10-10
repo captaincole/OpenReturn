@@ -3,12 +3,11 @@ import { getOwnerSession } from "@/lib/localAuth";
 import { ownerExists } from "@/lib/localAuth";
 
 /*
- * Auth gate. The return-scoped sub-layout at /r/[returnId]/layout.tsx
- * wraps children in AppShell; the home-home at (app)/page.tsx renders
- * with its own minimal top bar (no AppShell needed there).
- * 
- * getOwnerSession() verifies the cookie HMAC against the owner row — the
- * proxy only did a presence check, this is the real gate.
+ * Auth gate. getOwnerSession() verifies the cookie HMAC against the
+ * owner row; the proxy only checked cookie presence, so this is the real
+ * gate. The sub-layout at /r/[returnId]/layout.tsx wraps children in
+ * AppShell. The home-home at (app)/page.tsx renders its own minimal top
+ * bar and needs no AppShell.
  */
 export default async function AppLayout({
   children,

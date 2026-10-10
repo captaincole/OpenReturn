@@ -1,11 +1,12 @@
 /*
  * Marcus Chen scenario bundle.
- * 
- * Marcus is our higher-income archetype: single CA filer, $220k W-2 wages,
- * HSA + 401(k) pre-tax payroll, itemized deductions driven by the 2025
- * OBBBA SALT cap. This file currently exercises Form 1040 + Schedule A
- * only — Schedule B (1099-INT plumbing), Schedule 2, Form 8889 / 8959 /
- * 8960, Schedule D, and the CA-side forms turn on as their bindings land.
+ *
+ * Marcus is our higher-income archetype: single CA filer, $220k W-2
+ * wages, HSA + 401(k) pre-tax payroll, itemized deductions under the
+ * 2025 OBBBA SALT cap. The scenario exercises Schedule A, Form 8959, and
+ * Form 1040. Schedule B (1099-INT plumbing), Schedule 2, Form 8889,
+ * Form 8960, Schedule D, and the CA-side forms turn on as their bindings
+ * land.
  */
 
 import type { Scenario } from "../../types.js";
@@ -24,9 +25,9 @@ export const marcusScenario: Scenario = {
   facts: marcusFacts,
   decisions: marcusDecisions,
   /*
-   * Schedule A listed before form-1040 so the engine evaluates it
-   * first in pass 1 — 1040 line 12e (itemized → Schedule A line 17)
-   * resolves in the same pass instead of needing a fixpoint round-trip.
+   * Schedule A is listed before form-1040, so the engine evaluates it
+   * first in pass 1. 1040 line 12e (itemized → Schedule A line 17) then
+   * resolves in the same pass, without a fixpoint round-trip.
    */
   forms: [
     {
@@ -42,8 +43,8 @@ export const marcusScenario: Scenario = {
     {
       formId: "form-1040",
       /*
-       * No goldenPdfPath yet — the full 1040 won't match the CPA's
-       * golden until 1099-INT, brokerage, and Schedule 2 wiring land.
+       * No goldenPdfPath yet. The full 1040 will not match the CPA's
+       * golden until brokerage (Schedule D) and Schedule 2 wiring land.
        */
       expected: marcusExpected,
     },

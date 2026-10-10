@@ -1,9 +1,9 @@
 /*
  * Alex Morales — AI decisions (the "setup").
- * 
- * These are the judgment calls Luca (or Nynaeve, via review) would record
- * during a real intake. For the integration test we set them directly so
- * the engine has everything it needs without needing the agent loop.
+ *
+ * These are the judgment calls Luca would record during a real intake.
+ * The integration test sets them directly, so the engine has everything
+ * it needs without the agent loop.
  */
 
 import type { AIDecisionRow } from "../../../src/mastra/db/aiDecisions.js";
@@ -42,11 +42,11 @@ export const alexDecisions: AIDecisionRow[] = [
   ),
   /*
    * Form-scope decisions follow the convention
-   * `decisions.scope.must_file_<form_short_id>`. Each scenario records the
-   * gating decision for every form in the universe — true means the form
-   * is in this scenario's forms[] and asserted against; false means we
-   * declare it out-of-scope and don't list it. Keeps "why isn't Alex
-   * filing X?" answerable by grep instead of code archaeology.
+   * `decisions.scope.must_file_<form_short_id>`. Each scenario records
+   * the gating decision for every form in the universe. True means the
+   * form is in this scenario's forms[] and asserted against. False means
+   * we declare it out of scope and do not list it. A grep then answers
+   * "why does Alex not file X?".
    */
   dec(
     "decisions.scope.must_file_schedule_ca",

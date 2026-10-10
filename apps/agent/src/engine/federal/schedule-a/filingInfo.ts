@@ -1,16 +1,16 @@
 /*
  * ScheduleAFilingInfo — Schedule A (Itemized Deductions) specific slots
  * layered on top of BaseFilingInfo.
- * 
- * Schedule A reads upstream amounts from a mix of W-2 box totals (state
- * income tax withheld + CA SDI), single-value facts for property tax /
- * mortgage interest / charity, and one cross-form reference (Form 1040
- * line 11b for AGI, read directly in the binding — not here).
- * 
- * Slots resolve from raw facts via simple key lookups today. As scenarios
- * expand we'll replace those with proper fact-kind aggregation (e.g.
- * summing across multiple 1098s, applying basis-adjustment to noncash
- * gifts > $5,000). The slot shape stays stable; only the resolver moves.
+ *
+ * Schedule A reads upstream amounts from three sources: W-2 box totals
+ * (state income tax withheld + CA SDI), single-value facts (property
+ * tax, mortgage interest, charity), and one cross-form reference (Form
+ * 1040 line 11b for AGI, read directly in the binding, not here).
+ *
+ * Slots resolve from raw facts via simple key lookups today. As
+ * scenarios expand, proper fact-kind aggregation replaces the lookups
+ * (e.g. sums across multiple 1098s, basis adjustment on noncash gifts
+ * > $5,000). The slot shape stays stable; only the resolver moves.
  */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
@@ -19,10 +19,10 @@ import type { EngineDerivation } from "../../types.js";
 export interface ScheduleAFilingInfo extends BaseFilingInfo {
   /**
    * Schedule A must-file determination. Driven by
-   * `decisions.scope.must_file_schedule_a`, with fallback to
-   * `decisions.itemize_vs_standard === "itemized"`. Required because
-   * Schedule A is optional — taxpayers may itemize or take the standard
-   * deduction; Schedule A is filed only on the itemized side.
+   * `decisions.scope.must_file_schedule_a`, with a fallback to
+   * `decisions.itemize_vs_standard === "itemized"`. Schedule A is
+   * optional: a taxpayer itemizes or takes the standard deduction, and
+   * the form is filed only on the itemized side.
    */
   mustFileScheduleA?: boolean;
   /** Provenance for mustFileScheduleA — populated by resolveFilingInfo. */
@@ -31,27 +31,29 @@ export interface ScheduleAFilingInfo extends BaseFilingInfo {
   // ─── Line 1: medical & dental ────────────────────────────────────────
   /**
    * Total medical and dental expenses paid during the tax year. Goes on
-   * line 1; line 4 nets it against 7.5% of AGI (the threshold haircut).
+   * line 1. Line 4 nets it against 7.5% of AGI (the threshold).
    */
   medicalDentalExpenses?: number;
 
   // ─── Lines 5a–5c: taxes paid ─────────────────────────────────────────
   /**
-   * Total state and local income tax paid during the tax year (cash basis):
-   * W-2 box 17 (state withholding) + CA SDI (W-2 box 14) + state estimated
-   * payments + prior-year balance-due paid this year − refunds claimed last
-   * year as itemized. For Marcus this is W-2 box 17 + CA SDI only.
+   * Total state and local income tax paid during the tax year, cash
+   * basis: W-2 box 17 (state withholding) + CA SDI (W-2 box 14) +
+   * state estimated payments + prior-year balance due paid this year −
+   * refunds claimed last year as itemized. For Marcus this is W-2 box
+   * 17 + CA SDI only.
    *
-   * Goes on line 5a unless `generalSalesTaxElection` is true. The election
-   * lets taxpayers in no-income-tax states (TX, FL, etc.) deduct sales tax
-   * instead — irrelevant for CA filers but the slot exists for correctness.
+   * Goes on line 5a unless `generalSalesTaxElection` is true. The
+   * election lets taxpayers in no-income-tax states (TX, FL, etc.)
+   * deduct sales tax instead. It is irrelevant for CA filers, but the
+   * slot exists for correctness.
    */
   stateLocalIncomeTaxPaid?: number;
 
   /**
-   * Taxpayer elects to deduct general sales taxes instead of state/local
-   * income taxes (line 5a checkbox). Only meaningful in no-income-tax
-   * states; CA filers always leave this false.
+   * Taxpayer elects to deduct general sales taxes instead of state and
+   * local income taxes (line 5a checkbox). Only meaningful in
+   * no-income-tax states. CA filers always leave this false.
    */
   generalSalesTaxElection?: boolean;
 
@@ -64,8 +66,8 @@ export interface ScheduleAFilingInfo extends BaseFilingInfo {
   // ─── Lines 8a–9: interest paid ───────────────────────────────────────
   /**
    * Home mortgage interest + points reported on Form 1098 box 1.
-   * Single-1098 case for now; multi-1098 case will sum across mortgage
-   * facts when we add the fact kind.
+   * Single-1098 case for now. The multi-1098 case sums across mortgage
+   * facts when that fact kind exists.
    */
   mortgageInterestForm1098?: number;
 

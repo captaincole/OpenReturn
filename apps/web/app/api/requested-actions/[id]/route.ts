@@ -3,11 +3,11 @@ import { getOwnerSession } from "@/lib/localAuth";
 import { markActionProcessing, skipAction } from "@/lib/serverDb";
 
 /*
- * Status transitions the browser is allowed to drive:
+ * Status transitions the browser can drive:
  *   processing — an upload for this card just landed (documentId required)
  *   skipped    — the user dismissed the card
- * Both UPDATEs scope by (id, user_id) in serverDb — a caller can only touch
- * their own cards.
+ * Both UPDATEs scope by (id, user_id) in serverDb, so a caller can touch
+ * only their own cards.
  */
 export async function PATCH(
   request: NextRequest,

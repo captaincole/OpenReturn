@@ -1,16 +1,17 @@
 "use client";
 
 /*
- * Top bar for the return-scoped layout. Renders above the chat + workspace
- * split pane. Source of truth for "where am I" — chat header and workspace
- * headers DO NOT re-announce the active return per the labeling rule.
- * 
+ * Top bar for the return-scoped layout. It renders above the chat +
+ * workspace split pane. It is the one source of truth for "where am I".
+ * Per the labeling rule, chat and workspace headers DO NOT re-announce
+ * the active return.
+ *
  * Structure:
- *   [W → /]  [Return picker ▾]  ·  Home  Forms  Documents      [progress] [⚙] [AC]
- * 
- * The return picker is the title-weight element (font-semibold sans —
- * Fraunces renders numerals with cursive stylistic features that read
- * oddly on years like "2025"). Workspace tabs are subordinate.
+ *   [W → /]  [Return picker ▾]  ·  Home  Forms  Documents   [progress] [AC]
+ *
+ * The return picker is the title-weight element. It uses font-semibold
+ * sans because Fraunces renders numerals with cursive stylistic features
+ * that read oddly on years like "2025". Workspace tabs are subordinate.
  */
 
 import { signOut } from "@/lib/auth";
@@ -69,11 +70,11 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
 
   const basePath = `/r/${activeReturn.id}`;
   /*
-   * TODO: replace with a real overall-progress signal once the agent
-   * exposes one. computeOverallPct (forms-complete fraction) reads as 0
-   * until the very last form lands — fakes "no progress" even when the
-   * user has been chatting for a while. For now, scale with fact count
-   * so the chip feels alive at zero and tops out near completion.
+   * TODO: replace with a real overall-progress signal when the agent
+   * exposes one. computeOverallPct (the forms-complete fraction) reads 0
+   * until the last form lands. That shows "no progress" through a long
+   * chat. For now, scale with the fact count so the chip moves from the
+   * start and tops out near completion.
    */
   const pct = state ? Math.min(95, Math.max(8, state.factCount * 4)) : 8;
 
@@ -89,7 +90,7 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
 
   return (
     <header className="shrink-0 h-14 border-b border-border-subtle bg-bg-base/95 backdrop-blur-sm flex items-center px-4 lg:px-6 gap-3 relative z-30">
-      {/* Brand → home-home */}
+      {/* Brand mark. Links to the all-returns page. */}
       <Link
         href="/"
         title="All returns"
@@ -100,7 +101,7 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
 
       <div className="h-6 w-px bg-border-subtle shrink-0" />
 
-      {/* Active return — primary "where am I" cue */}
+      {/* Active return. The primary "where am I" cue. */}
       <div className="relative shrink-0">
         <button
           onClick={() => setReturnMenuOpen((v) => !v)}
@@ -149,7 +150,7 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
         )}
       </div>
 
-      {/* Workspace tabs — subordinate to the return picker */}
+      {/* Workspace tabs. Subordinate to the return picker. */}
       <div className="hidden md:block text-ink-faint shrink-0 px-1">·</div>
       <nav className="hidden md:flex items-center gap-0.5 flex-1 min-w-0">
         {TABS.map((t) => {

@@ -4,13 +4,13 @@ import { getOwnerSession } from "@/lib/localAuth";
 /*
  * Server-side proxy to the Mastra agent — the single bridge between the
  * browser and the agent (chat streaming, /app/state, filing lifecycle,
- * thread history). The browser authenticates with the session cookie; the
- * agent never sees a browser credential and can bind to localhost. If
- * AGENT_API_TOKEN is set (agent port reachable beyond localhost), the proxy
- * attaches it server-side.
- * 
- * Streaming: we hand the upstream body straight through, so chat SSE flows
- * without buffering.
+ * thread history). The browser authenticates with the session cookie.
+ * The agent never sees a browser credential and can bind to localhost.
+ * If AGENT_API_TOKEN is set (agent port reachable beyond localhost), the
+ * proxy attaches it server-side.
+ *
+ * Streaming: the upstream body passes straight through, so chat SSE
+ * flows without buffering.
  */
 
 const AGENT_INTERNAL_URL =

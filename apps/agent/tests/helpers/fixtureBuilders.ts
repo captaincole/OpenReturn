@@ -1,8 +1,7 @@
 /*
- * Small constructor helpers for building TaxFactRow / AIDecisionRow
- * fixtures with sensible defaults. Pulled out so every scenario's
- * facts.ts / decisions.ts stays focused on the values, not the row
- * scaffolding.
+ * Small constructor helpers that build TaxFactRow / AIDecisionRow
+ * fixtures with default values. Pulled out so each scenario's facts.ts
+ * and decisions.ts stays focused on the values, not the row scaffolding.
  */
 
 import type { TaxFactRow } from "../../src/mastra/db/taxFacts.js";
@@ -30,7 +29,7 @@ export function identityFact(opts: {
   };
 }
 
-/** Build an AIDecisionRow. Defaults to confidence "high" + verdict "accurate". */
+/** Build an AIDecisionRow. Defaults: confidence "high", verdict "accurate". */
 export function decisionRow(opts: {
   userId: string;
   taxYear: number;

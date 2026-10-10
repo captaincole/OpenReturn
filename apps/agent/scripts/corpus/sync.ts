@@ -1,11 +1,14 @@
-// Idempotent corpus sync. Walks forms/**/instructions.pdf, ingests anything
-// missing or sha-drifted. The ingest pipeline's own sha-skip handles re-runs
-// where the PDF hasn't changed, so this is also cheap to run on every dev tick.
-//
-// Continues past per-doc failures so one bad PDF doesn't block the rest;
-// exits non-zero at end if any failed. If a run dies at the embeddings step,
-// `npm run corpus -- reembed` finishes the job without re-paying for
-// contextualization.
+/*
+ * Idempotent corpus sync. Walks the instructions.pdf files under forms/
+ * and ingests anything missing or sha-drifted. The ingest pipeline's own
+ * sha-skip handles re-runs with unchanged PDFs, so the command is also
+ * cheap to run on every dev tick.
+ *
+ * The loop continues past per-doc failures, so one bad PDF does not
+ * block the rest. The run exits non-zero at the end if any doc failed.
+ * If a run dies at the embeddings step, `npm run corpus -- reembed`
+ * finishes the job without re-paying for contextualization.
+ */
 
 import { getDocument } from "../../src/mastra/db/refDocs";
 import { ingestRefDoc } from "../../src/refdocs/ingest";

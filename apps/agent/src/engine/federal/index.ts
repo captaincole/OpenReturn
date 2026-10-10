@@ -1,17 +1,18 @@
 /*
- * Federal form registry — every federal form the engine knows about, plus
- * the bundled runtime catalogs for the ones with bindings. Composed into
- * the global FORMS list by ../registry.ts.
- * 
- * Order is upstreams-first (8949 totals feed Schedule D, which feeds 1040).
- * The fixpoint evaluator converges regardless of order — this only keeps
- * the pass count low.
- * 
- * Adding a federal form:
- *   1. Drop catalog.json + blank.pdf into apps/agent/forms/federal/<short>/
- *      and promote the runtime copy to src/mastra/public/forms/federal/<short>/
- *   2. Write types.ts + filingInfo.ts + bindings.ts under ./<short>/
- *   3. Add a makeFormSpec entry below (+ its catalog import, if it has bindings)
+ * Federal form registry. It lists every federal form the engine knows,
+ * plus the bundled runtime catalogs for the forms with bindings.
+ * ../registry.ts composes it into the global FORMS list.
+ *
+ * Order is upstreams-first: 8949 totals feed Schedule D, which feeds
+ * 1040. The fixpoint evaluator converges in any order. Upstreams-first
+ * only keeps the pass count low.
+ *
+ * To add a federal form:
+ *   1. Put catalog.json + blank.pdf in apps/agent/forms/federal/<short>/.
+ *      Promote the runtime copy to src/mastra/public/forms/federal/<short>/.
+ *   2. Write types.ts + filingInfo.ts + bindings.ts under ./<short>/.
+ *   3. Add a makeFormSpec entry below. Add its catalog import if it has
+ *      bindings.
  */
 
 import { makeFormSpec, type FormSpec } from "../formSpec.js";
@@ -23,13 +24,13 @@ import { register as registerScheduleA } from "./schedule-a/bindings.js";
 import { register as registerForm8959 } from "./8959/bindings.js";
 
 /*
- * Static JSON imports — sourced from the PROMOTED runtime copies under
- * src/mastra/public/forms/, not the offline source-of-truth at
- * apps/agent/forms/. This gives us a promotion gate: ingesting a new
- * catalog updates apps/agent/forms/ (tests run against it), and only
- * after a `form-engine promote` cp does the runtime pick up the change.
- * Rollup inlines these JSON contents at build time; nothing reads them
- * from disk in the running process.
+ * Static JSON imports from the PROMOTED runtime copies under
+ * src/mastra/public/forms/, not from the source of truth at
+ * apps/agent/forms/. This split is a promotion gate: catalog ingest
+ * updates apps/agent/forms/ and tests run against it. The runtime picks
+ * up the change only after `form-engine promote` copies it. Rollup
+ * inlines the JSON at build time; the running process does not read it
+ * from disk.
  */
 import form8949CatalogJson from "../../mastra/public/forms/federal/8949/catalog.json";
 import scheduleDCatalogJson from "../../mastra/public/forms/federal/schedule-d/catalog.json";
@@ -39,8 +40,8 @@ import form1040CatalogJson from "../../mastra/public/forms/federal/1040/catalog.
 
 /*
  * fixtureFileSchema.parse() narrows TypeScript's widened JSON types
- * (e.g. `category: string` → `category: Category`) and fails loud at
- * boot if any catalog drifts from FixtureFile.
+ * (e.g. `category: string` → `category: Category`). It also fails loud
+ * at boot when a catalog drifts from FixtureFile.
  */
 export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(form8949CatalogJson),
@@ -80,9 +81,9 @@ export const FEDERAL_FORMS: FormSpec[] = [
     register: registerScheduleA,
   }),
   /*
-   * Catalog-only entries (no bindings yet — deferred). These exist so the
-   * catalog-fill regression test in runAll.ts checks them against their
-   * blank PDFs. Bindings + downstream wiring land in a follow-up PR.
+   * Catalog-only entries with no bindings yet. They exist so the
+   * catalog-fill regression test (tests/runAll.ts) checks them against
+   * their blank PDFs. Bindings and downstream wiring come later.
    */
   makeFormSpec({
     formId: "schedule-b",
@@ -91,9 +92,9 @@ export const FEDERAL_FORMS: FormSpec[] = [
     relativeDir: "federal/schedule-b",
   }),
   /*
-   * No instructions.pdf in schedule-2/ by design — IRS publishes Schedule 2
-   * instructions only as part of the 1040 instructions booklet (already in
-   * the corpus as irs-1040-inst-2025), so the cross-reference is implicit.
+   * schedule-2/ has no instructions.pdf by design. The IRS publishes
+   * Schedule 2 instructions only inside the 1040 instructions booklet,
+   * which is already in the corpus as irs-1040-inst-2025.
    */
   makeFormSpec({
     formId: "schedule-2",

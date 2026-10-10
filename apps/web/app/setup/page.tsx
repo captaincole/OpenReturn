@@ -1,8 +1,8 @@
 "use client";
 
 /*
- * First-run setup: create the instance owner. One-shot — the API 409s once
- * an owner exists, and the server layout redirects to /login in that case.
+ * First-run setup: create the instance owner. One-shot — the API 409s
+ * once an owner exists, and the server layout then redirects to /login.
  */
 
 import { type FormEvent, useState } from "react";

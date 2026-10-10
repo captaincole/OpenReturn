@@ -1,15 +1,15 @@
 /*
  * Fetch the prebuilt reference corpus into .data/corpus.db.
- * 
+ *
  * Resolution order:
- *   1. .data/corpus.db already present + sha matches manifest → done.
- *      (Present with a DIFFERENT sha is fine too — assume a locally-extended
- *      corpus via `corpus sync`; we won't clobber it. Use --force to replace.)
+ *   1. .data/corpus.db present and sha matches the manifest → done.
+ *      A DIFFERENT sha is also fine: assume a locally extended corpus
+ *      from `corpus sync` and do not clobber it. Use --force to replace.
  *   2. CORPUS_SEED_PATH env or a local seed file → copy.
- *   3. manifest url (GitHub Release asset) → download + sha256-verify.
- * 
- * The corpus ships as a release asset rather than in git because it grows
- * with scenario coverage (50 states ≈ 50+ instruction booklets); see
+ *   3. Manifest url (GitHub Release asset) → download and verify sha256.
+ *
+ * The corpus ships as a release asset, not in git, because it grows with
+ * scenario coverage (50 states ≈ 50+ instruction booklets). See
  * seed/corpus.manifest.json.
  */
 
@@ -43,7 +43,7 @@ async function run(argv: string[]): Promise<void> {
     : DEFAULT_TARGET;
   mkdirSync(dirname(target), { recursive: true });
 
-  // 1. Already there?
+  // 1. Already present on disk.
   if (existsSync(target) && !force) {
     const sha = sha256Of(target);
     if (sha === manifest.sha256) {
@@ -101,10 +101,11 @@ async function run(argv: string[]): Promise<void> {
 }
 
 /*
- * Compare the installed corpus's embedding-model stamp against the active
- * local model. On mismatch, search runs keyword-only until the vectors are
- * rebuilt (~4 min, free, needs Ollama) — say so now rather than at query time.
- * getCorpusDb resolves the same CORPUS_DB_PATH/default this script installed to.
+ * Compare the installed corpus's embedding-model stamp against the
+ * active local model. On mismatch, search runs keyword-only until the
+ * vectors are rebuilt (~4 min, free, needs Ollama). Say so now, not at
+ * query time. getCorpusDb resolves the same CORPUS_DB_PATH/default this
+ * script installed to.
  */
 async function checkEmbeddingStamp(): Promise<void> {
   const { storedEmbeddingModel } = await import("../../src/mastra/db/refDocs");

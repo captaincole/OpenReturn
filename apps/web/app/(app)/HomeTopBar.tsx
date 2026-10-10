@@ -1,7 +1,7 @@
 /*
- * Top bar variant for the home-home page (no active return).
- * Brand logo + page title + avatar tag. The avatar derives its initials
- * from the user's display name (or email fallback) via deriveProfile.
+ * Top bar for the home-home page (no active return). Brand logo, page
+ * title, avatar tag. The caller derives `initials` with deriveProfile
+ * (display name, or email as the fallback).
  */
 
 import Link from "next/link";

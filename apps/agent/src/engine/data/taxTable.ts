@@ -1,14 +1,15 @@
 /*
- * Runtime loader for tax tables (Form 1040 line 16 / Form 540 line 31, for
- * taxable income under $100,000). Each table is identified by a stable
- * `tableId` (e.g. "federal-2025", "ca-2025"). Per-table JSON files live
- * next to this file; adding a new jurisdiction or tax year = add a JSON +
- * import line below.
- * 
- * Tables differ in column count and which filing statuses share columns
- * (federal has 4, CA has 3 with Single+MFS and MFJ+QSS each sharing one).
- * Each JSON carries its own `filingStatusColumns` map so the rule code
- * stays jurisdiction-agnostic.
+ * Runtime loader for tax tables (Form 1040 line 16 / Form 540 line 31,
+ * for taxable income under $100,000). A stable `tableId` identifies each
+ * table (for example "federal-2025", "ca-2025"). Per-table JSON files
+ * live next to this file. To add a jurisdiction or tax year, add a JSON
+ * file and an import line below.
+ *
+ * Tables differ in column count and in which filing statuses share
+ * columns. Federal has 4 columns; CA has 3, where Single+MFS share one
+ * and MFJ+QSS share another. Each JSON carries its own
+ * `filingStatusColumns` map, so the lookup code stays
+ * jurisdiction-agnostic.
  */
 
 import federal2025 from "./tax-table-2025.json" with { type: "json" };
@@ -22,10 +23,10 @@ export type FilingStatus =
   | "qualifying_surviving_spouse";
 
 /*
- * A row's column-value lookups are jurisdiction-specific (federal uses
+ * Row column names are jurisdiction-specific (federal uses
  * "single"/"mfj"/"mfs"/"hoh"; CA uses "single_or_mfs"/"mfj_or_qss"/"hoh").
- * Treat per-row values as a string-keyed map and resolve via the table's
- * own filingStatusColumns mapping at lookup time.
+ * Treat per-row values as a string-keyed map. Resolve the column via the
+ * table's own filingStatusColumns mapping at lookup time.
  */
 export interface TaxTableRow {
   low: number;
@@ -64,7 +65,7 @@ export interface TaxTableLookupOk {
   ok: true;
   tax: number;
   bracket: { low: number; high: number };
-  /** Provenance, useful for AI rationale / grounding review. */
+  /** Provenance. Useful for AI rationale and grounding review. */
   source: { tableId: string; taxYear: number; jurisdiction: string; url: string };
 }
 
@@ -82,7 +83,7 @@ export type TaxTableLookupResult = TaxTableLookupOk | TaxTableLookupErr;
 
 /**
  * Look up tax for (tableId, taxableIncome, filingStatus). Returns a
- * discriminated result — callers handle each failure mode explicitly.
+ * discriminated result, so callers handle each failure mode explicitly.
  */
 export function lookupTax(
   tableId: string,
@@ -156,9 +157,9 @@ export function lookupTax(
 }
 
 /*
- * Linear scan with early exit. Tables are sorted by low ascending; bail as
- * soon as we pass the target. The federal table has 2062 rows, CA has 1001
- * — well under any threshold where binary search would matter.
+ * Linear scan with early exit. Rows sort by `low` ascending; the scan
+ * stops as soon as it passes the target. The federal table has 2062 rows
+ * and CA has 1001, well under any size where binary search would matter.
  */
 function findRow(
   rows: TaxTableRow[],
@@ -174,7 +175,7 @@ function findRow(
   return undefined;
 }
 
-/** Available tableIds, useful for diagnostic output. */
+/** Available tableIds. Useful for diagnostic output. */
 export function supportedTableIds(): string[] {
   return Object.keys(TABLES_BY_ID).sort();
 }

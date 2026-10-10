@@ -1,10 +1,9 @@
 /*
- * Form1040FilingInfo — federal-1040-specific slots layered on top of the
- * shared BaseFilingInfo (identity + cross-form scope).
- * 
- * Add slots here when a 1040 binding first references one. State forms
- * that need any of these can import this type directly — TS doesn't care
- * about folder hierarchy.
+ * Form1040FilingInfo — federal-1040-specific slots layered on top of
+ * the shared BaseFilingInfo (identity + cross-form scope).
+ *
+ * Add a slot here when a 1040 binding first references it. State forms
+ * that need one of these slots can import this type directly.
  */
 
 import type { Money } from "../../values.js";
@@ -18,12 +17,12 @@ export interface Form1040FilingInfo extends BaseFilingInfo {
   mustFileFederalDerivation?: EngineDerivation;
 
   /**
-   * Digital-assets question (1040 page 1) — every filer must answer.
-   * True when the taxpayer received, sold, or otherwise transacted in
-   * a digital asset (crypto / NFT / etc.) during the tax year. Drives
-   * which of the two yes/no checkboxes renders. Undefined means
-   * "scenario hasn't recorded the decision yet" — neither checkbox
-   * fires, surfacing the gap loudly.
+   * Digital-assets question (1040 page 1). Every filer must answer it.
+   * True when the taxpayer received, sold, or otherwise transacted in a
+   * digital asset (crypto, NFT, etc.) during the tax year. The value
+   * selects which of the two yes/no checkboxes renders. Undefined means
+   * the scenario has not recorded the decision yet; neither checkbox
+   * fires, which surfaces the gap loudly.
    */
   hasDigitalAssets?: boolean;
 
@@ -48,16 +47,17 @@ export interface Form1040FilingInfo extends BaseFilingInfo {
   taxExemptInterestTotal?: Money;
 
   /**
-   * Refund the federal overpayment in full vs apply some to 2026 estimated
-   * tax. Federal decision; the state-level analog lives on Form540FilingInfo
-   * because a taxpayer can choose differently between jurisdictions.
+   * Refund the federal overpayment in full, or apply some to 2026
+   * estimated tax. This is the federal decision. The state analog lives
+   * on Form540FilingInfo because a taxpayer can choose differently per
+   * jurisdiction.
    */
   refundFullOverpaymentFederal?: boolean;
 
   /**
-   * True when `decisions.itemize_vs_standard === "itemized"` — flips line
-   * 12e's source from the standard deduction table to Schedule A line 17.
-   * Undefined or "standard" leaves the standard deduction path in place.
+   * True when `decisions.itemize_vs_standard === "itemized"`. Flips the
+   * line 12e source from the standard deduction table to Schedule A
+   * line 17. Undefined or "standard" keeps the standard deduction path.
    */
   useItemizedDeductions?: boolean;
 }

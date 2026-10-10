@@ -1,11 +1,10 @@
 /*
  * Alejandro Reyes — AI decisions (the "setup").
- * 
- * Same setup pattern as Alex. The two differences relative to Alex:
- *   - Alejandro has 1099-B activity, so `has_reportable_sales = true`
- *     (which would in production gate Schedule D / 8949 ingest).
- *   - Filing status, residency, refund prefs, and use-tax-zero reason
- *     are otherwise identical to Alex.
+ *
+ * Same setup pattern as Alex, with one difference: Alejandro has 1099-B
+ * activity, so `has_reportable_sales = true`. In production that gates
+ * Schedule D / 8949 ingest. Filing status, residency, refund prefs, and
+ * use-tax-zero reason are identical to Alex.
  */
 
 import type { AIDecisionRow } from "../../../src/mastra/db/aiDecisions.js";
@@ -44,8 +43,9 @@ export const alejandroDecisions: AIDecisionRow[] = [
   ),
   /*
    * Form-scope decisions follow the convention
-   * `decisions.scope.must_file_<form_short_id>`. See alex/decisions.ts for
-   * the parallel false-cases that document why Alex doesn't file these.
+   * `decisions.scope.must_file_<form_short_id>`. See alex/decisions.ts
+   * for the parallel false cases that document why Alex files none of
+   * these.
    */
   dec(
     "decisions.scope.must_file_schedule_ca",

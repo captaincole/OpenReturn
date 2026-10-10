@@ -1,13 +1,14 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 /*
- * Next.js 16 file convention: this is the renamed Middleware. Optimistic
- * gate only — the Edge runtime can't read app.db to verify the session
- * HMAC, so this checks cookie PRESENCE and redirects; every layout and
- * route handler re-verifies with getOwnerSession() (node runtime).
- * 
- * Cookie name duplicated from lib/localAuth.ts on purpose: importing that
- * module here would drag node:crypto into the Edge bundle.
+ * Next.js 16 file convention: this is the renamed Middleware. It is an
+ * optimistic gate only. The Edge runtime cannot read app.db to verify the
+ * session HMAC, so this checks cookie PRESENCE and redirects. Every
+ * layout and route handler re-verifies with getOwnerSession() in the Node
+ * runtime.
+ *
+ * The cookie name is duplicated from lib/localAuth.ts on purpose. An
+ * import of that module would pull node:crypto into the Edge bundle.
  */
 
 const SESSION_COOKIE = "summa_session";

@@ -1,16 +1,16 @@
 /*
- * User profile derivation from the instance owner (name/email live on the
- * owner row in app.db; see lib/localAuth.ts). These helpers keep consumers
- * from re-deriving initials/first names everywhere.
+ * Derives the user profile from the instance owner. Name and email live
+ * on the owner row in app.db; see lib/localAuth.ts. These helpers keep
+ * consumers from re-deriving initials and first names everywhere.
  */
 
 export interface UserProfile {
   /*
-   * Friendly display name. Either the explicit `display_name` from auth
-   * metadata, or a fallback derived from the email's local-part.
+   * Friendly display name: the owner row's explicit `display_name`, or a
+   * fallback derived from the email's local-part.
    */
   displayName: string;
-  // First word of the display name — what the greeting renders.
+  // First word of the display name. The greeting renders it.
   firstName: string;
   // Two-letter avatar tag.
   initials: string;

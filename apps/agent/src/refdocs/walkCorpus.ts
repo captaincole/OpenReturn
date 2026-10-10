@@ -3,15 +3,17 @@ import { readdir, readFile } from "node:fs/promises";
 import type { Dirent } from "node:fs";
 import { resolve, join, relative } from "node:path";
 
-// Walks forms/**/instructions.pdf and pairs each PDF with its sibling
-// `instructions.meta.json` sidecar. The sidecar is the source of truth for
-// docId/title/publisher/taxYear/sourceUrl; the filesystem is the source of
-// truth for which docs *should* exist.
-//
-// An instructions.pdf without a sidecar is reported as `unconfigured` rather
-// than silently skipped — adding a PDF without metadata is almost always a
-// mistake. `blank.pdf` files (fillable form templates) are intentionally
-// ignored — they're rendered to, not ingested into the corpus.
+/*
+ * Walks the forms/ tree for instructions.pdf files and pairs each PDF
+ * with its sibling `instructions.meta.json` sidecar. The sidecar is the
+ * source of truth for docId/title/publisher/taxYear/sourceUrl. The
+ * filesystem is the source of truth for which docs should exist.
+ *
+ * A PDF without a sidecar is reported as `unconfigured`, not skipped.
+ * A PDF without metadata is almost always a mistake. `blank.pdf` files
+ * (fillable form templates) are ignored; the engine renders into them,
+ * the corpus does not ingest them.
+ */
 
 export interface RefDocSidecar {
   docId: string;

@@ -1,11 +1,11 @@
 /*
- * Assertion primitives the runner uses to check engine + render output
+ * Assertion primitives the runner uses to check engine and render output
  * against a Scenario's ExpectedResults. All assertions append to a
- * failure list rather than throwing — the runner reports all failures at
- * once instead of bailing on the first one.
- * 
- * Each helper takes an optional `prefix` (the formId) which gets prepended
- * to failure messages so multi-form scenarios are unambiguous.
+ * failure list instead of throwing. The runner then reports every failure
+ * at once instead of stopping at the first.
+ *
+ * Each helper takes an optional `prefix` (the formId). It is prepended to
+ * failure messages so multi-form scenarios stay unambiguous.
  */
 
 import type { EvaluatedForm, AnyFormField } from "../../src/engine/types.js";
@@ -33,9 +33,9 @@ export function assertEngineNumber(
     /*
      * `unsupported` is a deliberate engine gap, not a "needs data" block.
      * The rule library's fromFields contract treats unsupported terms as
-     * 0 downstream, so semantically an unsupported field IS 0 — accept
-     * it as a pass when the expected value is 0. Genuine blocked results
-     * (missing facts/decisions the user needs to provide) still fail.
+     * 0 downstream, so an unsupported field IS 0 semantically. Accept it
+     * as a pass when the expected value is 0. Genuinely blocked results
+     * (facts/decisions the user must still provide) fail.
      */
     if (f.result.unsupported && expected === 0) return;
     failures.push(tag(prefix, `engine: ${fieldId} blocked — ${f.result.reason}.`));
@@ -43,8 +43,8 @@ export function assertEngineNumber(
   }
   const got = f.result.value;
   /*
-   * 50¢ tolerance — money lines round at render time and the table-derived
-   * tax values are already integer-valued.
+   * 50¢ tolerance. Money lines round at render time, and table-derived
+   * tax values are already integers.
    */
   if (typeof got !== "number" || Math.abs(got - expected) > 0.5) {
     failures.push(
@@ -110,18 +110,18 @@ export function assertRenderedChecked(
 }
 
 /**
- * Diff our rendered values against a CPA-completed golden PDF, widget-by-
- * widget. This is the test layer that catches catalog mislabeling — if the
- * catalog says `first_name_mi → f1_01[0]` but f1_01[0] is actually the
- * year-begin widget, the binding writes "Alex" to f1_01[0] which doesn't
- * match the golden's "01/01/2025", and we report the mismatch.
+ * Diff our rendered values against a CPA-completed golden PDF, widget by
+ * widget. This test layer catches catalog mislabels. Example: the catalog
+ * says `first_name_mi → f1_01[0]`, but f1_01[0] is the year-begin widget.
+ * The binding writes "Alex" to f1_01[0], the golden holds "01/01/2025",
+ * and we report the mismatch.
  *
  * Comparison is per widget name (the deterministic PDF identifier), not
- * per fieldId — the catalog's labels are out of the loop entirely.
+ * per fieldId. The catalog's labels are fully out of the loop.
  *
- * For widgets the golden has filled and we didn't, OR widgets we filled
- * and the golden didn't, OR widgets where the values disagree — emit a
- * failure naming the widget and both values.
+ * Emit a failure with the widget name and both values when: the golden
+ * fills a widget and we do not, we fill a widget the golden does not, or
+ * the two values disagree.
  */
 export function assertMatchesGolden(
   rendered: Map<string, RenderedWidget[]>,
@@ -130,9 +130,9 @@ export function assertMatchesGolden(
   prefix?: string,
 ): void {
   /*
-   * Index our rendered output by widget name (1 row per widget actually
-   * written). RenderedWidget can be `text` (text fields, dates) or
-   * `checked` (checkboxes flipped on) or carry a radio-option label.
+   * Index our rendered output by widget name, one row per widget written.
+   * A RenderedWidget carries `text` (text fields, dates), `checked`
+   * (checkboxes turned on), or a radio-option label.
    */
   const ours = new Map<string, string | boolean>();
   for (const [, widgets] of rendered) {
@@ -151,8 +151,9 @@ export function assertMatchesGolden(
     const o = ours.get(widgetName);
 
     /*
-     * For checkboxes + radios, our renderer writes a value only when the
-     * box is "on." Golden's checkbox value is true/false explicitly.
+     * For checkboxes and radios, our renderer writes a value only when
+     * the box is "on". The golden's checkbox value is an explicit
+     * true/false.
      */
     if (g?.kind === "checkbox") {
       const goldenChecked = g.value === true;
@@ -182,10 +183,10 @@ export function assertMatchesGolden(
     }
 
     /*
-     * Default: text comparison (covers text fields + widgets the golden
-     * didn't classify cleanly). Empty/blank on both sides = pass. We
-     * intentionally do NOT treat "0" and "" as equivalent — every numeric
-     * line that computes to zero should be rendered as "0" on both sides.
+     * Default: text comparison. Covers text fields and widgets the golden
+     * did not classify cleanly. Blank on both sides is a pass. We do NOT
+     * treat "0" and "" as equal: a numeric line that computes to zero
+     * must render as "0" on both sides.
      */
     const goldenText = normalizeForCompare(g?.value);
     const ourText = typeof o === "string" ? normalizeForCompare(o) : "";

@@ -1,18 +1,18 @@
 /*
  * 1099-INT fact kind. One fact = one payer's full 1099-INT box totals.
- * Mirrors the 1099-DIV pattern (see dividends.ts) — same category, same
+ * Mirrors the 1099-DIV pattern (see dividends.ts): same category, same
  * per-payer key shape, same parse/get helpers.
- * 
+ *
  * Convention:
  *   category: "investment_income"
  *   key:      "account.{accountSlug}.interest"
  *   value:    InterestFactValue
- * 
+ *
  * TODO: Schedule B Part I requires per-payer rows when total interest
  * exceeds $1,500. Each fact already represents one payer, so the data
- * shape is right — the binding side just needs a repeating-row mechanism
- * that doesn't exist yet (same problem Schedule B / Schedule D capital
- * gains rows hit). Until that lands, Schedule B Part I stays unsupported.
+ * shape is right. The binding side needs a repeating-row mechanism that
+ * does not exist yet; Schedule D capital-gain rows hit the same problem.
+ * Until that lands, Schedule B Part I stays unsupported.
  */
 
 import type { FactsView } from "../../types.js";
@@ -22,9 +22,9 @@ export interface InterestFactValue {
   payerName: string;
   payerTin?: string;
   /*
-   * 1099-INT box totals — all optional. Box 1 is the load-bearing field
-   * (taxable interest income, flows to 1040 line 2b). Other boxes only
-   * populate when specific situations apply.
+   * 1099-INT box totals, all optional. Box 1 is the load-bearing field:
+   * taxable interest income, which flows to 1040 line 2b. Other boxes
+   * only populate when specific situations apply.
    */
   box1?: number;   // Interest income
   box2?: number;   // Early withdrawal penalty (an above-the-line deduction)
@@ -58,11 +58,11 @@ export function makeInterestFactKey(accountSlug: string): string {
 }
 
 /**
- * True when this key is a 1099-INT fact key. Used by the resolver to
- * filter `sumInvestmentBox` reads so 1099-INT box totals don't get
- * confused with 1099-DIV box totals that happen to share a numeric
- * suffix (box4 federal withholding is shared by design; box1 is INT-only
- * but the filter still protects against future overlap).
+ * True when this key is a 1099-INT fact key. The resolver uses it to
+ * filter `sumInvestmentBox` reads, so 1099-INT box totals do not mix
+ * with 1099-DIV box totals that share a numeric suffix. box4 federal
+ * withholding is shared by design; box1 is INT-only today, but the
+ * filter still protects against future overlap.
  */
 export function isInterestFactKey(key: string): boolean {
   return INT_KEY_RE.test(key);

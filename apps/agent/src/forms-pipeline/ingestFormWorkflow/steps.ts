@@ -1,19 +1,21 @@
 /*
  * Form-ingest workflow steps. Three sequential phases:
- *   extract  — pdf.js (via unpdf): widget discovery + label resolution. Two
- *              label tiers (/TU when present, vision LLM when not). Throws
- *              if any widget can't be labeled.
+ *   extract  — pdf.js (via unpdf): widget discovery + label resolution.
+ *              Two label tiers (/TU when present, vision LLM when not).
+ *              Throws when any widget cannot be labeled.
  *   classify — Claude enrichment per field: fieldId, category, valueType,
- *              stable option values for radios. Labels arrive deterministic;
- *              the classifier doesn't try to infer them.
+ *              stable option values for radios. Labels arrive
+ *              deterministic; the classifier does not infer them.
  *   persist  — Merge deterministic + enrichment into the catalog shape,
  *              round-trip-validate (every widget ends up in the catalog),
- *              write JSON, optionally upsert to Supabase.
- * 
+ *              write JSON, optionally upsert into corpus.db
+ *              (forms / form_fields tables).
+ *
  * Round-trip invariant: every ExtractedField is in the persisted catalog.
- * Fields the AI couldn't enrich get a placeholder fieldId
- * (form-<id>.unclassified.<shortName>); the deterministic structure
- * (pdfWidgetName, label, valueType from kind, options[] for radios) is preserved.
+ * Fields the AI could not enrich get a placeholder fieldId
+ * (form-<id>.unclassified.<shortName>). The deterministic structure
+ * (pdfWidgetName, label, valueType from kind, options[] for radios) is
+ * preserved.
  */
 
 import { promises as fs } from "node:fs";
@@ -93,28 +95,29 @@ interface CatalogRow {
   fieldId: string;
   label: string;
   /**
-   * Provenance of the label — "tu" (annotation /TU), "vision" (Claude vision),
-   * or absent on rows built before the new extractor was introduced.
+   * Provenance of the label: "tu" (annotation /TU), "vision" (Claude
+   * vision), or absent on rows built before the current extractor.
    */
   labelSource?: string;
   category: string;
   /**
-   * Coarse value-type used by the existing runtime engine + renderer. Today's
-   * vocabulary: numeric / single_select / multi_select / text / boolean / date.
-   * Mapped down from the classifier's richer valueType (see valueTypeRich).
+   * Coarse value-type used by the runtime engine + renderer. Today's
+   * vocabulary: numeric / single_select / multi_select / text / boolean /
+   * date. Mapped down from the classifier's richer valueType (see
+   * valueTypeRich).
    */
   valueType: string;
   /**
-   * Richer value-type produced by the classifier: money / count / text / ssn /
+   * Richer value-type from the classifier: money / count / text / ssn /
    * phone / zip / email / date / boolean / single_select / multi_select /
-   * signature. Carries formatter hints (e.g. "money" → comma separators) that
-   * the renderer doesn't consume yet but will when we make formatters
-   * data-driven. Persisted alongside `valueType` so we don't lose information.
+   * signature. Carries formatter hints (e.g. "money" → comma separators)
+   * that the renderer does not consume yet; data-driven formatters will.
+   * Persisted alongside `valueType` so no information is lost.
    */
   valueTypeRich?: string;
   /**
-   * Deterministic structural type from pdf.js — text / checkbox / radio /
-   * signature / other. Source of truth for "is this mutually-exclusive?",
+   * Deterministic structural type from pdf.js: text / checkbox / radio /
+   * signature / other. Source of truth for "is this mutually exclusive?",
    * "is this multi-line?", etc. Never derived from AI.
    */
   pdfFieldKind: string;
@@ -125,7 +128,7 @@ interface CatalogRow {
   multiline?: boolean;
 }
 
-/** Map the classifier's expanded enum down to the existing runtime vocabulary. */
+/** Map the classifier's expanded enum down to the runtime vocabulary. */
 function narrowValueType(rich: string): string {
   switch (rich) {
     case "money":
@@ -299,18 +302,19 @@ function buildCatalogRow(
     : `${formId}.unclassified.${slugifyShortName(field.shortName)}`;
   /*
    * Inject the widget's page index between the formId and the rest of the
-   * fieldId: "form-8949.header.taxpayer_name" → "form-8949.0.header.taxpayer_name".
-   * The classifier is instructed to reuse fieldIds across batches when fields
-   * are semantically equivalent, which means multi-page forms (8949 Part I/II,
-   * 540 pages 1+/2, …) emit the same name for distinct widgets. Page-prefixing
-   * restores per-widget uniqueness without making the classifier handle the
-   * physical layout. Catalogs ingested before this change kept their flat
-   * shape; their bindings reference fieldIds without the page slot.
+   * fieldId: "form-8949.header.taxpayer_name" →
+   * "form-8949.0.header.taxpayer_name". The classifier is instructed to
+   * reuse fieldIds across batches when fields are semantically equivalent.
+   * Multi-page forms (8949 Part I/II, 540 pages 1+/2, …) then emit the
+   * same name for distinct widgets. The page prefix restores per-widget
+   * uniqueness without making the classifier handle physical layout.
+   * Catalogs ingested before this change kept their flat shape; their
+   * bindings reference fieldIds without the page slot.
    */
   const fieldId = withPagePrefix(baseFieldId, formId, position.page);
   /*
-   * Label is deterministic (from extractFormFields tier-1 /TU or tier-2 vision).
-   * The classifier doesn't produce it.
+   * The label is deterministic (extractFormFields tier-1 /TU or tier-2
+   * vision). The classifier does not produce it.
    */
   const label = field.label;
   const labelSource = field.labelSource;
@@ -340,9 +344,9 @@ function buildCatalogRow(
   if (field.fieldKind === "radio" && field.radioOptions) {
     /*
      * Zip the deterministic option labels with the AI's stable values.
-     * If enrichment is missing or misaligned, fall back to slugifying the
-     * option label itself — at least the rendering binding can still target
-     * the right radio option.
+     * When enrichment is missing or misaligned, fall back to a slug of
+     * the option label itself. The rendering binding can then still
+     * target the right radio option.
      */
     const enrichmentByRadioOption = new Map<string, string>(
       (enrichment?.options ?? []).map((o) => [o.radioOption, o.value]),

@@ -1,16 +1,16 @@
 /*
  * Standard-deduction lookup table, keyed by (jurisdiction, taxYear,
- * filingStatus). Parallel structure to forms/data/taxTable.ts — both are
- * per-jurisdiction reference data that bindings call inline.
- * 
- * Bindings call this rather than carrying inline literals so that:
+ * filingStatus). Parallel in structure to taxTable.ts in this directory;
+ * both are per-jurisdiction reference data that bindings call inline.
+ *
+ * Bindings call this instead of carrying inline literals so that:
  *   - Annual amount updates land in one file, not N bindings
- *   - Adding a new jurisdiction (state-NY, state-OR, …) means appending
- *     one entry, not editing every state form's bindings
- * 
+ *   - A new jurisdiction (state-NY, state-OR, …) means one appended
+ *     entry, not edits to every state form's bindings
+ *
  * Sources:
- *   - federal 2025: IRS Rev. Proc. 2024-40 (inflation adjustments for 2025).
- *     Also printed on Form 1040 Instructions page 32.
+ *   - federal 2025: IRS Rev. Proc. 2024-40 (inflation adjustments for
+ *     2025). Also printed on Form 1040 Instructions page 32.
  *   - state-ca 2025: FTB 540 instructions, Schedule X.
  */
 
@@ -57,13 +57,13 @@ const TABLES: StandardDeductionTable[] = [
 
 /**
  * Look up the standard deduction for a (jurisdiction, year, filingStatus)
- * tuple. Returns undefined when no table is loaded for that combination —
- * lets bindings short-circuit to undefined (blocks the field) rather than
- * silently using a wrong default.
+ * tuple. Returns undefined when no table is loaded for that combination.
+ * Bindings then short-circuit to undefined, which blocks the field,
+ * instead of a silently wrong default.
  *
- * Doesn't currently handle the dependent / blind / 65+ worksheet (the
- * adjustments that bump the basic standard deduction). Those scenarios
- * aren't ingested yet; bind that worksheet when they are.
+ * Does not handle the dependent / blind / 65+ worksheet, the adjustments
+ * that increase the basic standard deduction. Those scenarios are not
+ * ingested yet. Bind that worksheet when they are.
  */
 export function lookupStandardDeduction(
   jurisdiction: string,

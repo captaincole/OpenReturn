@@ -10,19 +10,20 @@ import {
 
 /*
  * ConsoleExporter dumps the full span (input, output, attributes) every
- * time a span starts / ends / updates. Luca's multi-KB system prompt and
- * base64-encoded uploads end up in that dump, making the dev terminal
- * unusable. We pipe spans through a whitelist filter first — only the
- * listed keys survive at any depth. Anything Mastra adds in a future
- * version that isn't on the list gets dropped automatically.
- * 
- * DefaultExporter still writes the full, unstripped trace to observability
- * storage; Mastra Studio reads from there if you need the rest.
+ * time a span starts, ends, or updates. Luca's multi-KB system prompt and
+ * base64-encoded uploads land in that dump and make the dev terminal
+ * unusable. We pipe spans through a whitelist filter first; only the
+ * listed keys survive, at any depth. Keys that a future Mastra version
+ * adds drop out automatically.
+ *
+ * DefaultExporter still writes the full, unstripped trace to
+ * observability storage. Mastra Studio reads from there when you need
+ * the rest.
  */
 
 /*
- * Single flat union of keys we want to see anywhere they appear in a span.
- * Add a key here to surface it; remove one to suppress.
+ * One flat union of keys to keep, wherever they appear in a span.
+ * Add a key to surface it; remove one to suppress it.
  */
 const ALLOW_KEYS = new Set([
   // Span identity / timing
@@ -63,8 +64,8 @@ function isPlainObject(v: unknown): v is Record<string, unknown> {
 function filter(value: unknown): unknown {
   if (Array.isArray(value)) {
     /*
-     * Inside any messages array, drop role:'system' entries — they carry
-     * the system prompt. Other roles (user, assistant, tool) keep going.
+     * Inside any messages array, drop role:'system' entries; they carry
+     * the system prompt. Other roles (user, assistant, tool) pass.
      */
     return value
       .filter(
@@ -86,7 +87,7 @@ function filter(value: unknown): unknown {
     }
     return out;
   }
-  // Primitives + class instances (Date, etc.) — pass through.
+  // Primitives and class instances (Date, etc.) pass through.
   return value;
 }
 

@@ -8,7 +8,6 @@ async function run(): Promise<void> {
   for (const [t, n] of Object.entries(counts)) {
     console.log(`${t}: count=${n}`);
   }
-  // Per-doc breakdown.
   for (const d of await listDocuments()) {
     const { blocks, embedded } = await countBlocksByDoc(d.docId);
     console.log(`  ${d.docId}: blocks=${blocks}, embedded=${embedded}`);

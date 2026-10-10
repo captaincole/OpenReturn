@@ -71,12 +71,12 @@ export const recordAIDecision = createTool({
     });
 
     /*
-     * Fire-and-forget the review — self-host runs a long-lived process, so
-     * the promise just runs in the background (no serverless keep-alive
-     * needed). Errors are logged and swallowed — the workflow's own
-     * try/catch already stamps verdict='review_failed' on the row before
-     * re-throwing, so a failed review shows up in the activity feed
-     * regardless.
+     * Fire-and-forget the review. Self-host runs a long-lived process, so
+     * the promise runs in the background with no serverless keep-alive.
+     * The reviewDecision wrapper catches workflow failures itself and
+     * stamps verdict='review_failed' on the row, so a failed review still
+     * shows in the activity feed. This catch only logs unexpected throws
+     * from the wrapper.
      */
     void reviewDecision(scope, id).catch((err) => {
       console.error(

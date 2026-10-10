@@ -3,8 +3,9 @@ import { getOwnerSession } from "@/lib/localAuth";
 import { fetchOpenActions } from "@/lib/serverDb";
 
 /*
- * Open (open|processing) requested-action cards for the dashboard. Auth via
- * the owner session cookie; rows from the libsql app DB.
+ * Requested-action cards (status 'open' or 'processing') for the
+ * dashboard. Auth comes from the owner session cookie. Rows come from
+ * the libsql app DB.
  */
 export async function GET(request: NextRequest) {
   const session = await getOwnerSession();

@@ -1,16 +1,16 @@
 /*
- * Parser for the California FTB Tax Table (2025 540 booklet appendix). FTB
- * publishes the table as a PDF only; we extract text via unpdf and split
- * each row by whitespace.
- * 
- * CA Tax Table differs from the IRS table in two ways that matter here:
- *   - 5 numeric columns per row (low, high, single_or_mfs, mfj_or_qss, hoh)
- *     vs. IRS's 6 columns. CA combines Single+MFS into one column and
+ * Parser for the California FTB Tax Table (2025 540 booklet appendix).
+ * FTB publishes the table as a PDF only; we extract text via unpdf and
+ * split each row by whitespace.
+ *
+ * The CA Tax Table differs from the IRS table in two ways that matter:
+ *   - 5 numeric columns per row (low, high, single_or_mfs, mfj_or_qss,
+ *     hoh) vs. IRS's 6. CA combines Single+MFS into one column and
  *     MFJ+QSS into another (those pairs always pay the same tax).
  *   - Row width is $100 instead of $50, and the first row covers $1..$50.
- * 
- * Each text line is one row. The header repeats across pages; we filter by
- * shape — exactly 5 comma-formatted integers per line that satisfy
+ *
+ * Each text line is one row. The header repeats across pages, so we
+ * filter by shape: exactly 5 comma-formatted integers per line with
  * low < high.
  */
 
@@ -35,8 +35,8 @@ export interface CAParseResult {
 }
 
 /*
- * FTB renders the very first row with dollar-sign prefixes ($1 $50 $0 $0
- * $0) — accept optional "$" on each cell so the lowest band parses.
+ * FTB renders the first row with dollar-sign prefixes ($1 $50 $0 $0 $0).
+ * Accept an optional "$" on each cell so the lowest band parses.
  */
 const ROW_RE = /^\$?([\d,]+)\s+\$?([\d,]+)\s+\$?([\d,]+)\s+\$?([\d,]+)\s+\$?([\d,]+)$/;
 
@@ -99,11 +99,10 @@ export interface CACoverageReport {
 
 /**
  * Validates that rows form a contiguous sweep from $1 to ~$100,000. FTB's
- * convention is "at_least..but_not_over" with the upper bound EXCLUSIVE in
- * the next row's "at_least" — i.e. row N's `high` should equal row N+1's
- * `low` MINUS 1 (because "but_not_over $50" + next row "at_least $51"
- * means $50 belongs to the first row). We normalize to standard
- * half-open intervals at the call-site by treating `high` as inclusive.
+ * convention is "at_least..but_not_over": row N's `high` equals row N+1's
+ * `low` MINUS 1, because "but_not_over $50" + next row "at_least $51"
+ * puts $50 in the first row. The call site normalizes to standard
+ * half-open intervals and treats `high` as inclusive.
  */
 export function validateCACoverage(rows: CATaxTableRow[]): CACoverageReport {
   if (rows.length === 0) {
@@ -121,7 +120,7 @@ export function validateCACoverage(rows: CATaxTableRow[]): CACoverageReport {
   for (let i = 1; i < rows.length; i++) {
     const prev = rows[i - 1];
     const cur = rows[i];
-    // FTB: prev.high = 50, cur.low = 51 → contiguous (no gap)
+    // FTB: prev.high = 50, cur.low = 51 → contiguous (no gap).
     if (cur.low > prev.high + 1) gaps.push({ after: prev.high, before: cur.low });
     else if (cur.low <= prev.high) overlaps.push({ row: cur, previousHigh: prev.high });
   }

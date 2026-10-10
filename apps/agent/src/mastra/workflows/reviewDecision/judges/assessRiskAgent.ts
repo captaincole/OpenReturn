@@ -9,9 +9,10 @@ import { modelFor } from "../../../models";
  * the decision is wrong, and (b) how well the evidence corroborates the
  * decision today. The rule step downstream uses the tier to set the evidence
  * bar.
- * 
- * No tools — the agent reasons over the input it's given. Always emits a
- * tier even when shaky; the rule step is the single source of loop control.
+ *
+ * No tools — the agent reasons over the input it is given. It always emits
+ * a tier, even on weak evidence; the rule step is the single source of loop
+ * control.
  */
 
 const baseInstructions = `You are a tax risk assessor. Read one decision recorded by the tax agent, plus the supporting evidence (taxpayer-stated facts, retrieved IRS reference passages), and assign a risk tier.

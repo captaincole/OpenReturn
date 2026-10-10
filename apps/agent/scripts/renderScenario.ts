@@ -1,12 +1,12 @@
 /*
  * Render every form in a scenario to disk for spot-checking.
- * 
+ *
  *   npx tsx scripts/renderScenario.ts --scenario=alejandro
- * 
- * Writes one PDF per form into the scenario's `docs/` folder using the
- * pattern `<Scenario>-<FormShortName>-rendered.pdf`. Same engine +
- * renderer the tests use, so the output reflects whatever state the
- * bindings are in right now — including current failures.
+ *
+ * Writes one PDF per form into the scenario's `docs/` folder with the
+ * name pattern `<Scenario>-<FormShortName>-rendered.pdf`. It uses the
+ * same engine and renderer as the tests. The output shows the current
+ * state of the bindings, including current failures.
  */
 
 import "dotenv/config";
@@ -27,9 +27,9 @@ import { projectRoot } from "../src/paths.js";
 import type { Scenario } from "../tests/types.js";
 
 /*
- * Pretty short-name fragment for filenames. Maps formId → the PascalCase
- * chunk used in golden filenames (e.g. "form-540" → "CA540"). New forms
- * fall back to a Title-case of the formId.
+ * Short-name fragment for filenames. Maps formId → the PascalCase chunk
+ * used in golden filenames (e.g. "form-540" → "CA540"). New forms fall
+ * back to a Pascal-case form of the formId.
  */
 const FORM_SHORT_NAME: Record<string, string> = {
   "form-1040": "1040",
@@ -77,14 +77,14 @@ async function main() {
   const s = await loadScenario(name);
 
   /*
-   * Look up each scenario form's static config from the shared
-   * registry (catalog/blank/register live there, not on ScenarioForm).
+   * Look up each scenario form's static config in the shared registry.
+   * catalog/blank/register live there, not on ScenarioForm.
    */
   const specs = s.forms.map((sf) => getFormSpec(sf.formId));
 
   /*
-   * Register every form's bindings before evaluation. Side-effecting
-   * calls match what runScenario does.
+   * Register every form's bindings before evaluation. These calls have
+   * side effects and match what runScenario does.
    */
   for (const spec of specs) spec.register?.();
 

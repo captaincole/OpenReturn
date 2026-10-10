@@ -1,13 +1,13 @@
 /*
  * Vision-AI label resolver for the form-ingest pipeline.
- * 
- * Given one PDF page's worth of widgets and the rendered page image with
- * numbered overlay badges, ask Claude vision to return the human-readable
- * label for each widget. Widgets that already carry a /TU value are passed
- * through with `tuLabel` set — the prompt says to echo /TU verbatim and only
- * infer labels for widgets where /TU is null.
- * 
- * Single call per page. Tool-use enforces the response shape.
+ *
+ * Given one PDF page's widgets and the rendered page image with numbered
+ * overlay badges, ask Claude vision for the human-readable label of each
+ * widget. Widgets that already carry a /TU value pass through with
+ * `tuLabel` set. The prompt says to echo /TU verbatim and infer labels
+ * only where /TU is null.
+ *
+ * One call per page. Tool-use enforces the response shape.
  */
 
 import Anthropic from "@anthropic-ai/sdk";
@@ -23,7 +23,7 @@ const MAX_TOKENS = 4000;
 export interface VisionWidget {
   /** Page-local badge number drawn on the overlay image. Must be unique within the page. */
   id: number;
-  /** Full pdf-form widget name (returned in the prompt for the model's reference, not relied on). */
+  /** Full pdf-form widget name. For the model's reference only. */
   fieldName: string;
   kind: FieldKind;
   rect: [number, number, number, number];

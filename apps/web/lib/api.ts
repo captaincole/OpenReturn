@@ -2,14 +2,13 @@ import { authHeaders } from "@/lib/auth";
 import { agentUrl } from "@/lib/agentBase";
 
 /*
- * Cross-origin agent calls. fetchState stays here for now — it runs the
- * case engine on the agent side, which we're not extracting in this
- * migration (see follow-up on /app/state in CLAUDE.md). resetSession also
- * stays because it deletes Mastra threads via Memory.deleteThread (admin-
- * pool work).
- * 
- * fetchActivity moved to lib/activity.ts (/api/activity poll) — both
- * the chat right rail and /activity page consume it.
+ * Browser-side client for the agent's /app routes. Every call goes
+ * through the same-origin /api/agent proxy (lib/agentBase.ts). fetchState
+ * runs the case engine on the agent side. resetSession wipes the user's
+ * rows and deletes the Mastra threads on the agent side.
+ *
+ * Activity polling lives in lib/activity.ts (the /api/activity Route
+ * Handler), not here.
  */
 
 export type PlanItemStatus = "todo" | "doing" | "done";
@@ -22,9 +21,9 @@ export interface PlanItem {
 }
 
 /*
- * Per-form summary mirrors the agent-side EvaluatedFormSummary in
- * apps/agent/src/mastra/tools/caseState.ts. Kept in sync by hand for now;
- * when both apps share a types package we'll import it.
+ * Per-form summary. It mirrors the agent-side EvaluatedFormSummary in
+ * apps/agent/src/mastra/tools/caseState.ts. Keep the two in sync by hand
+ * until the apps share a types package.
  */
 export interface FormSummary {
   formId: string;
@@ -74,10 +73,11 @@ export interface CaseState {
 }
 
 /**
- * Coarse progress signal for the chat header: fraction of forms whose
- * must-file is decided AND, if filing, every non-unsupported field has
- * resolved. With only 1040 + 540 in the catalog the granularity is 0% /
- * 50% / 100% — that's fine, the UX intent is "are we close to hand-off."
+ * Coarse progress signal, rendered on the return home page: the fraction
+ * of forms whose must-file question is decided AND, if filing, whose
+ * non-unsupported fields have all resolved. With only 1040 + 540 in the
+ * catalog the granularity is 0% / 50% / 100%. That is fine. The UX
+ * intent is "are we close to hand-off".
  */
 export function computeOverallPct(forms: FormSummary[]): number {
   if (forms.length === 0) return 0;

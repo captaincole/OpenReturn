@@ -2,13 +2,14 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 /*
- * Renders Luca's responses as markdown. Custom components style each element
- * against our dark theme — most importantly, links pop in new tabs and use
- * the accent color.
- * 
- * Note: in the Vite app, agent-served paths got rewritten through apiUrl()
- * so they crossed origins. In Next.js we move /documents/{id} to a same-
- * origin Route Handler in Phase 4, so plain hrefs work — no rewriting.
+ * Renders Luca's responses as markdown. Custom components style each
+ * element for the dark theme. Most importantly, links open in new tabs
+ * and use the accent color.
+ *
+ * Document links need no URL rewriting: /documents/{id} is a same-origin
+ * Route Handler (app/documents/[id]/route.ts), so plain hrefs work. The
+ * old Vite app rewrote agent-served paths through apiUrl() to cross
+ * origins.
  */
 
 export function Markdown({ children }: { children: string }) {

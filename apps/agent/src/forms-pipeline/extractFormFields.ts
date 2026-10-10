@@ -1,25 +1,25 @@
 /*
  * Form-field extraction via pdf.js (through unpdf).
- * 
- * The pipeline is deterministic in structure; only LABEL resolution
- * involves AI (and only for widgets that don't carry their own /TU
- * alt-text).
- * 
+ *
+ * The pipeline is deterministic in structure. Only LABEL resolution
+ * involves AI, and only for widgets without their own /TU alt-text.
+ *
  * Two label tiers:
  *   tier 1 — annotation.alternativeText (/TU). Author-provided user name.
  *            CA 540 has these for every field; IRS 1040 strips them.
- *   tier 2 — vision LLM. Page is rasterized, widget rectangles are overlaid
- *            with numbered badges, and Claude returns one label per widget.
- *            Widgets that already have a /TU value get it echoed back as a
- *            cross-check (the prompt says "defer to tu_label verbatim").
- * 
+ *   tier 2 — vision LLM. We rasterize the page, overlay numbered badges on
+ *            the widget rectangles, and Claude returns one label per
+ *            widget. Widgets that already have a /TU value get it echoed
+ *            back as a cross-check (the prompt says "defer to tu_label
+ *            verbatim").
+ *
  * Tier 3 (would-be positional inference) is disabled by policy. If vision
- * fails to return a label for a widget, we throw — the form needs human
- * attention, not a silent fallback.
- * 
- * Field-kind, max length, radio options, checkbox on-values, and widget
- * positions are read straight from pdf.js's annotation objects. pdf-lib is
- * not used here.
+ * returns no label for a widget, we throw. The form needs human attention,
+ * not a silent fallback.
+ *
+ * Field kind, max length, radio options, checkbox on-values, and widget
+ * positions come straight from pdf.js's annotation objects. pdf-lib is not
+ * used here.
  */
 
 import { readFile } from "node:fs/promises";
@@ -74,7 +74,7 @@ export interface CoverageReport {
   tier2Count: number;
 }
 
-/** Throw subclass so callers can `instanceof`-detect missing-label failures. */
+/** Error subclass so callers can `instanceof`-detect missing-label failures. */
 export class MissingLabelError extends Error {
   fieldName: string;
   pdfPath: string;
@@ -100,10 +100,10 @@ interface PageWidget {
 export async function extractFormFields(pdfPath: string): Promise<ExtractedForm> {
   const bytes = await readFile(pdfPath);
   /*
-   * Pass canvasFactory at document-load time so pdf.js's internal render path
-   * (text extraction, getAnnotations) has canvas available. Without this,
-   * forms whose annotations need transparency-group resolution fail with
-   * "@napi-rs/canvas is not available".
+   * Pass CanvasFactory at document-load time so pdf.js's internal render
+   * path (text extraction, getAnnotations) has canvas available. Without
+   * it, forms whose annotations need transparency-group resolution fail
+   * with "@napi-rs/canvas is not available".
    */
   const CanvasFactory = await createIsomorphicCanvasFactory(canvasImport);
   const pdf = await getDocumentProxy(new Uint8Array(bytes), {
@@ -112,14 +112,15 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
   const totalPages = pdf.numPages;
 
   /*
-   * Tier-1 labels are field-scoped (same fieldName always gets the same /TU).
-   * We collect them up-front from any widget occurrence, then never lose them.
+   * Tier-1 labels are field-scoped: the same fieldName always gets the
+   * same /TU. We collect them up-front from any widget occurrence and
+   * never lose them.
    */
   const tier1Labels = new Map<string, string>();
   const tier2Labels = new Map<string, string>();
 
   /*
-   * Group widgets by fieldName for the final ExtractedField[]. Also remember
+   * Group widgets by fieldName for the final ExtractedField[]. Also record
    * each widget's page so the vision step can group correctly.
    */
   const widgetsByFieldName = new Map<string, Array<{ annot: any; page: number; rect: [number, number, number, number] }>>();
@@ -137,9 +138,9 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
     for (const a of annots) {
       if (a.subtype !== "Widget") continue;
       /*
-       * Skip ReadOnly widgets — computed-output cells the form marks
+       * Skip ReadOnly widgets: computed-output cells the form marks
        * non-fillable (e.g. Form 8949 column (f) on the Totals row). Real
-       * PDF viewers render them greyed out; including them lets a renderer
+       * PDF viewers grey them out. If we include them, a renderer can
        * write values into widgets that look non-fillable to humans.
        */
       if (a.readOnly === true) continue;
@@ -167,8 +168,8 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
 
     /*
      * Number badges in reading order (y desc, then x asc) so the model can
-     * rely on the convention "badge 1 is top-left, badge N is bottom-right."
-     * PDF y-axis is bottom-up so larger y = higher on the page.
+     * rely on "badge 1 is top-left, badge N is bottom-right". The PDF
+     * y-axis is bottom-up, so a larger y is higher on the page.
      */
     rawWidgets.sort((a, b) => {
       const ay = (a.rect[1] + a.rect[3]) / 2;
@@ -185,7 +186,7 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
     widgetsByPage.set(pageIdx, list);
   }
 
-  // Tier 2 — call vision once per page that has at least one widget without a /TU label.
+  // Tier 2: call vision once per page with at least one /TU-less widget.
   for (let p = 0; p < totalPages; p++) {
     const pageWidgets = widgetsByPage.get(p) ?? [];
     if (pageWidgets.length === 0) continue;
@@ -212,9 +213,9 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
     });
 
     /*
-     * Apply vision labels back to fieldName. Multiple widgets sharing a
-     * fieldName (e.g. CA 540's name field across pages 2-6) take the first
-     * non-empty vision result.
+     * Apply vision labels back to fieldName. When widgets share a
+     * fieldName (e.g. CA 540's name field across pages 2-6), the first
+     * non-empty vision result wins.
      */
     for (const w of pageWidgets) {
       const fn = w.annot.fieldName as string;

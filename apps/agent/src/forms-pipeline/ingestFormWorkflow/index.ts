@@ -1,10 +1,10 @@
 /*
  * Phase C Mastra workflow: ingest a form PDF into the form_fields catalog.
- * 
- * Not registered with the production Mastra instance (per PIPELINE.md the
- * forms-pipeline workflows run standalone from CLI scripts). Mastra's
- * in-memory storage handles snapshots for the duration of the run; we
- * don't persist them across invocations.
+ *
+ * Not registered on the production Mastra instance; the forms-pipeline
+ * workflows run standalone from CLI scripts. Mastra's in-memory storage
+ * holds snapshots for the duration of the run. We do not persist them
+ * across invocations.
  */
 
 import { createWorkflow } from "@mastra/core/workflows";
@@ -29,7 +29,7 @@ export const ingestFormWorkflow = createWorkflow({
 export type { WorkflowInput, WorkflowOutput };
 
 /**
- * Run the workflow end-to-end. Thin wrapper around createRun/start that
+ * Run the workflow end-to-end. A thin wrapper around createRun/start that
  * unwraps the success result or throws on failure. Used by
  * scripts/formEngine/generateCatalog.ts.
  */

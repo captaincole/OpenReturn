@@ -7,21 +7,22 @@ import { LibSQLStore } from "@mastra/libsql";
 /*
  * Mastra runtime storage (threads, messages, working memory, workflow
  * snapshots) lives in a local libsql/SQLite file — the third and last
- * database role to leave Postgres (after the corpus and the domain tables).
- * 
- * This deleted a pile of Postgres-era machinery on purpose:
- *   - disableInit + scripts/migrateMastra.ts — libsql init is a handful of
- *     local CREATE TABLE IF NOT EXISTS statements, not a ~200-query storm
- *     over a pooled network connection, so we just let Mastra run it.
- *   - pgPool + the pooler-6543 sizing rules — no server, no connections.
- * 
- * The file is separate from app.db (domain data): Mastra owns this schema
- * and migrates it on version bumps; keeping it in its own file means a
+ * database role to leave Postgres (after the corpus and the domain
+ * tables).
+ *
+ * The move deleted a pile of Postgres-era machinery on purpose:
+ *   - disableInit + scripts/migrateMastra.ts. libsql init is a handful
+ *     of local CREATE TABLE IF NOT EXISTS statements, not a ~200-query
+ *     storm over a pooled network connection, so we let Mastra run it.
+ *   - pgPool + the pooler-6543 sizing rules. No server, no connections.
+ *
+ * The file is separate from app.db (domain data). Mastra owns this
+ * schema and migrates it on version bumps; a separate file means a
  * framework migration can never touch user data, and "wipe all chats"
  * stays a file delete.
- * 
+ *
  * Path resolution mirrors db/appDb.ts: MASTRA_DB_PATH env wins, else
- * <apps/agent>/.data/mastra.db anchored to this module so cwd doesn't
+ * <apps/agent>/.data/mastra.db anchored to this module so cwd does not
  * matter across `mastra dev` / scripts / prod.
  */
 
@@ -37,9 +38,9 @@ export function mastraDbUrl(): string {
 }
 
 /*
- * Composite store: LibSQLStore for everything by default, InMemoryStore for
- * the observability domain. InMemoryStore resets on restart — fine for the
- * demo; revisit when we want persistent traces.
+ * Composite store: LibSQLStore for everything by default, InMemoryStore
+ * for the observability domain. InMemoryStore resets on restart. Fine
+ * for the demo; revisit when we want persistent traces.
  */
 export async function createStorage(): Promise<MastraCompositeStore> {
   const libsql = new LibSQLStore({

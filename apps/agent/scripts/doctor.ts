@@ -1,12 +1,12 @@
 /*
- * doctor — one-shot setup diagnostics: machine info, env config, data
- * files, and local model servers (Ollama, LM Studio).
- * 
+ * doctor — one-shot setup diagnostics. Reports machine info, env config,
+ * data files, and local model servers (Ollama, LM Studio).
+ *
  *   npm run doctor        (or: npx tsx scripts/doctor.ts from apps/agent/)
- * 
- * Read-only: probes the machine and local HTTP endpoints, writes nothing.
- * Use it to answer "why is semantic search falling back to keyword?" or
- * "what does this box actually have installed?" before debugging deeper.
+ *
+ * Read-only: the script probes the machine and local HTTP endpoints. It
+ * writes nothing. Run it before deeper debugging. It answers "why does
+ * semantic search fall back to keyword?" and "what is installed here?".
  */
 
 import { config } from "dotenv";
@@ -17,8 +17,8 @@ import { spawnSync } from "node:child_process";
 import { projectRoot } from "../src/paths";
 
 /*
- * Same layering the dev server sees: .env first, .env.development fills
- * the gaps (dotenv never overrides already-set keys).
+ * Load the same env layering the dev server sees. .env loads first, and
+ * .env.development fills the gaps. dotenv never overrides set keys.
  */
 config({ path: resolve(projectRoot, ".env"), quiet: true });
 config({ path: resolve(projectRoot, ".env.development"), quiet: true });
@@ -118,7 +118,7 @@ interface OllamaStatus {
   binary: string | null;
   serverUrl: string;
   serverVersion: string | null;
-  /** Pulled model names, null when the server is down. */
+  // Pulled model names. Null when the server is down.
   models: string[] | null;
 }
 
@@ -147,9 +147,9 @@ async function probeLmStudio(): Promise<{ binary: string | null; serverUp: boole
   };
 }
 
-/**
+/*
  * The bare model name Ollama knows, e.g. "embeddinggemma-2" from
- *  "ollama/embeddinggemma-2". Tags may carry a ":latest" suffix. 
+ * "ollama/embeddinggemma-2". Tags can carry a ":latest" suffix.
  */
 function embeddingModelName(): string {
   const raw = process.env.EMBEDDINGS_MODEL ?? DEFAULT_EMBEDDINGS_MODEL;

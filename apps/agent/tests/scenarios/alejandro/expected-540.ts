@@ -1,27 +1,24 @@
 /*
  * Alejandro Reyes — CA Form 540 expected results.
- * 
+ *
  * Every numeric expected value below is the literal number from
- * `docs/Alejandro-CA540-Golden.pdf` in this scenario folder. Any divergence is a
- * regression in the engine, catalog, bindings, FilingInfo resolver, or
- * renderer.
- * 
- * Known gaps that will surface as failures until upstream bindings land:
- *   - line.13_federal_agi reads f["form-1040.line.11b"], which depends on
- *     federal 1040 line 7a (Schedule D) flowing through correctly. Until
- *     the Schedule D binding lands, federal AGI is short by $2,550 and
- *     every downstream CA line is wrong.
- *   - line.31_tax_amount uses lookupTax(ca-2025, …). Once the upstream
- *     taxable income is correct ($97,229), this should produce $5,478
- *     directly — CA doesn't apply the QDCG worksheet, qualified divs
- *     and LTCG are ordinary at CA rates.
+ * `docs/Alejandro-CA540-Golden.pdf` in this scenario folder. Any
+ * divergence is a regression in the engine, catalog, bindings,
+ * FilingInfo resolver, or renderer.
+ *
+ * Cross-form notes:
+ *   - line.13_federal_agi reads f["form-1040.line.11b"], which includes
+ *     federal 1040 line 7a (Schedule D line 16, $2,550).
+ *   - line.31_tax_amount uses lookupTax(ca-2025, …) on taxable income
+ *     $97,229 and produces $5,478 directly. CA does not apply the QDCG
+ *     worksheet; qualified divs and LTCG are ordinary at CA rates.
  */
 
 import type { ExpectedResults } from "../../types.js";
 
 export const alejandro540Expected: ExpectedResults = {
   engineFields: {
-    // Exemptions — single filer, no blind/senior/dependents.
+    // Exemptions: single filer, no blind/senior/dependents.
     "form-540.line.7_personal_exemption_count": 1,
     "form-540.line.7_personal_exemption_amount": 153,
     "form-540.line.11_total_exemption_amount": 153,
@@ -44,7 +41,7 @@ export const alejandro540Expected: ExpectedResults = {
     "form-540.line.48_tax_after_credits": 5325,
     "form-540.line.64_total_tax": 5325,
 
-    // Payments — CA withholding from W-2 box 17.
+    // Payments: CA withholding from W-2 box 17.
     "form-540.line.71_ca_income_tax_withheld": 5500,
     "form-540.line.78_total_payments": 5500,
 
@@ -74,7 +71,7 @@ export const alejandro540Expected: ExpectedResults = {
   },
 
   renderedBlank: [
-    // Spouse — single, no spouse facts.
+    // Spouse: single, no spouse facts.
     "form-540.header.spouse_first_name",
     "form-540.header.spouse_last_name",
     "form-540.header.spouse_ssn",
@@ -82,7 +79,7 @@ export const alejandro540Expected: ExpectedResults = {
     "form-540.dependents.dep1_first_name",
     "form-540.dependents.dep1_last_name",
     "form-540.dependents.dep1_ssn",
-    // Lines bound unsupported — same set as Alex.
+    // Lines bound unsupported — the same set as Alex.
     "form-540.line.34_tax_amount",
     "form-540.line.40_child_dependent_care_credit",
     "form-540.line.46_renters_credit",
@@ -93,15 +90,15 @@ export const alejandro540Expected: ExpectedResults = {
     "form-540.line.98_applied_to_2026_estimated_tax",
     /*
      * Categorically unsupported scenarios (ISR penalty / voluntary
-     * contributions) — render blank.
+     * contributions) render blank.
      */
     "form-540.line.96_isr_penalty_balance",
     "form-540.line.110_total_contributions",
     /*
-     * Refund-branch scenario: lines 100/111 don't apply because Alejandro
-     * is getting a refund. Per-binding "undefined when 0" pattern keeps
-     * the line blank in the refund branch; it'd populate with a value
-     * for owe-branch scenarios like Alex.
+     * Refund-branch scenario: lines 100/111 do not apply because
+     * Alejandro gets a refund. The per-binding "undefined when 0"
+     * pattern keeps the line blank in the refund branch. It populates
+     * for owe-branch scenarios such as Alex.
      */
     "form-540.line.100_tax_due",
     "form-540.line.111_amount_you_owe",

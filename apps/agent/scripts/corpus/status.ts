@@ -1,5 +1,8 @@
-// Read-only diff between forms/**/instructions.pdf and ref_documents in the
-// local corpus DB. Exits 0 unless --strict is passed and there's any drift.
+/*
+ * Read-only diff between the instructions.pdf files under forms/ and the
+ * ref_documents rows in the local corpus DB. Exits 0 unless --strict is
+ * set and drift exists.
+ */
 
 import { getDocument, listDocuments } from "../../src/mastra/db/refDocs";
 import { walkCorpus, type CorpusEntry } from "../../src/refdocs/walkCorpus";
@@ -38,7 +41,7 @@ async function categorize(): Promise<{
     }
   }
 
-  // Find DB-only docs (rows that no longer have a corresponding PDF in repo).
+  // Find DB-only docs: rows with no matching PDF in the repo.
   for (const row of await listDocuments()) {
     if (!seenInRepo.has(row.docId)) {
       cats.extra.push({ docId: row.docId, sha: row.sha256 });

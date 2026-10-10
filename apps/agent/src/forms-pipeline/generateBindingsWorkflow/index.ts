@@ -1,8 +1,8 @@
 /*
  * Phase D Mastra workflow: classify rule + params per form field, render
- * the result as TypeScript, and overwrite the corresponding generated/
- * file. Not registered with the production Mastra instance (PIPELINE.md
- * keeps both forms-pipeline workflows standalone); invoked from
+ * the result as TypeScript, and overwrite the generated bindings file.
+ * Like all forms-pipeline workflows it runs standalone from CLI scripts
+ * and is not registered on the production Mastra instance. Invoked from
  * scripts/formEngine/generateBindings.ts.
  */
 

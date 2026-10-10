@@ -8,17 +8,18 @@ import type { Scope } from "../db/appDb";
 import { requireUserContext } from "./userContext";
 
 /*
- * Live case state for Luca. Runs the four-form engine against the current
- * fact + decision state and returns:
- *   - per-form summaries (formId, mustFile result, line count, blockers)
+ * Live case state for Luca. Runs the form engine against the current fact
+ * and decision state and returns:
+ *   - summaries for Form 1040 and CA 540 (mustFile result, line count,
+ *     blockers)
  *   - aggregated pending decisions (unique decisionKeys any form is blocked on)
- *   - convenience money fields pulled from Form 1040 / CA 540 specific lines
+ *   - convenience money fields pulled from specific Form 1040 / CA 540 lines
  *   - the most recent AI decisions for activity-feed display
- * 
- * Luca calls this at the start of every turn to know:
- *   - Which forms are required, computed, or blocked
- *   - What scope decisions or facts are still missing (= what to ask next)
- *   - The current refund/owed picture if computed
+ *
+ * Luca calls this at the start of every turn to learn:
+ *   - which forms are required, computed, or blocked
+ *   - which scope decisions or facts are still missing (= what to ask next)
+ *   - the current refund/owed picture, when computed
  */
 
 type EvaluatedFormSummary = {
@@ -30,8 +31,8 @@ type EvaluatedFormSummary = {
     | { ok: false; reason: string; missingDecisionKey: string | null };
   /**
    * Engine-derivation provenance for the must-file determination. Lets the
-   *  UI / sidecar surface WHY a form is being filed even when no AI
-   *  decision was recorded (e.g. Schedule D fired off trade-fact presence). 
+   * UI / sidecar show WHY a form is filed even when no AI decision was
+   * recorded (e.g. Schedule D gates on trade-fact presence).
    */
   mustFileDerivation: EngineDerivation | null;
   fieldCount: number;
@@ -48,8 +49,8 @@ type EvaluatedFormSummary = {
 /*
  * Exported so server routes (appState.ts) can run the same computation
  * outside the Mastra tool surface. Thin wrapper over the engine's
- * evaluateScenario — adds the case-state-specific summary/money/pendingFacts
- * derivations on top of the raw engine output.
+ * evaluateScenario. Adds the summary, money, and pendingFacts derivations
+ * on top of the raw engine output.
  */
 export async function buildCaseState(
   userId: string,
@@ -65,11 +66,11 @@ export async function buildCaseState(
 }
 
 /*
- * Variant that takes a filing identity directly — used by the CPA review
- * route, where the caller is NOT the owner and the owner resolver would
- * throw. Caller is responsible for verifying the user is allowed to read
- * this filing (via filing_members membership) BEFORE invoking; this
- * function trusts the inputs.
+ * Variant that takes a filing identity directly, for callers that are not
+ * the filing owner (the owner resolver would throw for them). The caller
+ * must verify read access (filing_members membership) BEFORE it invokes
+ * this; the function trusts its inputs. No in-repo callers today — the CPA
+ * review route that used it was removed.
  */
 export async function buildCaseStateForFiling(
   scope: Scope,
@@ -93,8 +94,8 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
   ];
 
   /*
-   * Aggregate unique pending decisions / facts across all blockers (incl.
-   * mustFile blockers). Luca asks the user about these.
+   * Aggregate unique pending decisions and facts across all blockers,
+   * including mustFile blockers. Luca asks the user about these.
    */
   const pendingDecisions = new Set<string>();
   const pendingFacts = new Set<string>();
@@ -110,11 +111,11 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
 
   /*
    * Identity gaps surface as pendingFacts. We check the RESOLVED filingInfo
-   * slot rather than raw fact presence — otherwise a fact recorded under the
-   * right key but the wrong value shape (e.g. identity.phone written as an
-   * object) passes the gate even though the resolver can't read it. Using
-   * filingInfo means pendingFacts reflects exactly what the engine consumes.
-   * identity.email is intentionally NOT in this list — it's a courtesy
+   * slot, not raw fact presence. A fact with the right key but the wrong
+   * value shape (e.g. identity.phone written as an object) would pass a
+   * raw-presence gate even though the resolver cannot read it. With
+   * filingInfo, pendingFacts reflects exactly what the engine consumes.
+   * identity.email is intentionally NOT in this list — it is a courtesy
    * field that Luca auto-fills from authEmail at doc-generation time.
    */
   const REQUIRED_IDENTITY_SLOTS: Array<[string, () => unknown]> = [
@@ -159,14 +160,14 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
     decisionRows: decisions,
     authEmail,
     /*
-     * The resolved filing info — handy for surfacing identity bits to the
-     * web app (e.g. taxpayer first name for the header greeting) without
-     * re-querying the DB.
+     * The resolved filing info. The web app reads identity bits from it
+     * (e.g. taxpayer first name for the header greeting) without another
+     * DB query.
      */
     filingInfo,
     /*
-     * Raw evaluated forms — for downstream rollups like the Filing Status
-     * panel that need access to every field, not just blockers.
+     * Raw evaluated forms, for downstream rollups like the Filing Status
+     * panel that need every field, not just blockers.
      */
     evaluatedForms: [form1040, form540],
   };
@@ -188,8 +189,8 @@ function summarizeForm(form: {
   }>;
 }): EvaluatedFormSummary {
   /*
-   * Unsupported fields are engine gaps, not user-input gaps. They don't
-   * count as blockers and don't get aggregated into pending questions.
+   * Unsupported fields are engine gaps, not user-input gaps. They do not
+   * count as blockers and do not aggregate into pending questions.
    */
   const blockers = form.fields
     .filter((l) => !l.result.ok && !l.result.unsupported)
@@ -226,7 +227,7 @@ function summarizeForm(form: {
 
 /*
  * Look up a numeric field by its fieldId. Fields are heterogeneous (text,
- * numeric, single_select) so we filter on result type.
+ * numeric, single_select), so we filter on result type.
  */
 function numericField(
   fields: readonly BaseFormField[],
@@ -264,8 +265,8 @@ export const getCaseState = createTool({
     }),
     factCount: z.number(),
     /**
-     * Account email — Luca records this as identity.email at doc-gen
-     *  time after acknowledging it with the user. 
+     * Account email. Luca records it as identity.email at doc-gen time
+     * after he confirms it with the user.
      */
     authEmail: z.string().nullable(),
     aiDecisions: z.array(
@@ -286,8 +287,8 @@ export const getCaseState = createTool({
     const { scope, filingId, taxYear, authEmail: jwtEmail } =
       await requireUserContext(context);
     /*
-     * requireUserContext already resolved the active filing — skip the extra
-     * resolveOwnerFilingForYear that buildCaseState would do.
+     * requireUserContext already resolved the active filing. Skip the extra
+     * resolveOwnerFilingForYear call that buildCaseState would make.
      */
     const scenario = await loadAndEvaluateScenario(scope, { id: filingId, taxYear }, jwtEmail);
     const {

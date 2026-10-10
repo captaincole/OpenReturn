@@ -1,12 +1,12 @@
 /*
  * Alex Morales — facts (the "data").
- * 
+ *
  * Sourced from `apps/agent/tests/scenarios/alex/docs/01-alex-w2.pdf`
- * (Brightside Logistics W-2). Box 1 ($79,000) sits below box 3/5 ($85,000) because of
- * the $6,000 traditional 401(k) in box 12a code D. Identity facts are
- * what Luca captures during intake (occupation/phone/email aren't on the
- * W-2 — they come from the conversation; identity.email is auto-sourced
- * from Supabase auth at doc-gen time).
+ * (Brightside Logistics W-2). Box 1 ($79,000) sits below box 3/5
+ * ($85,000) because of the $6,000 traditional 401(k) in box 12a code D.
+ * Identity facts are what Luca captures during intake. Occupation, phone,
+ * and email are not on the W-2; they come from the conversation, and Luca
+ * auto-fills identity.email from the account email at doc-gen time.
  */
 
 import type { TaxFactRow } from "../../../src/mastra/db/taxFacts.js";

@@ -1,20 +1,20 @@
 /*
  * Preferential-rate brackets for qualified dividends and net long-term
  * capital gain. Used by the Qualified Dividends and Capital Gain Tax
- * Worksheet (and the Schedule D Tax Worksheet when 28% gain / §1250 gain
- * carve-outs are needed).
- * 
+ * Worksheet, and by the Schedule D Tax Worksheet when 28% gain / §1250
+ * gain carve-outs apply.
+ *
  * Two thresholds per filing status × tax year:
- *   - 0% rate ceiling — preferential dollars below this pay no tax
+ *   - 0% rate ceiling — preferential dollars below it pay no tax
  *   - 15% rate ceiling — preferential dollars between the two ceilings
  *     pay 15%; dollars above the upper ceiling pay 20%
- * 
+ *
  * "Stacking" rule: ordinary income consumes bracket room FIRST, then
- * preferential income sits on top. So your preferential bucket starts
- * at the level (line 1 ordinary bucket cap) on the brackets, not at $0.
- * The worksheet handles this via lines 7–9 (0% consumption) and lines
- * 12–17 (15% consumption).
- * 
+ * preferential income sits on top. The preferential bucket therefore
+ * starts at the top of the ordinary bucket, not at $0. The worksheet
+ * handles this via lines 7–9 (0% consumption) and lines 12–17 (15%
+ * consumption).
+ *
  * Source: IRS Form 1040 (2025) Instructions, page 38 — Qualified
  * Dividends and Capital Gain Tax Worksheet, lines 6 and 13.
  * Block id in the ingested corpus: irs-1040-inst-2025::p38::b00073.
@@ -62,10 +62,9 @@ const TABLES_BY_YEAR: Record<number, BracketTable> = {
 };
 
 /**
- * Returns the preferential-rate ceilings for a (taxYear, filingStatus).
- * Throws on unknown year or status — callers should guard at the
- * binding layer where they have access to the engine's `blocked` result
- * shape.
+ * Return the preferential-rate ceilings for a (taxYear, filingStatus).
+ * Throws on an unknown year or status. Callers guard at the binding
+ * layer, where the engine's `blocked` result shape is available.
  */
 export function lookupPreferentialBrackets(
   taxYear: number,

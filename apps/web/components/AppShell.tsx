@@ -1,20 +1,20 @@
 "use client";
 
 /*
- * Return-scoped shell. Renders above every /r/[returnId]/* route.
+ * Return-scoped shell. It renders above every /r/[returnId]/* route.
+ *
  * Layout:
- *   - TopBar (brand + return picker + tabs + right cluster)
- *   - Main: desktop = ChatPane (1/3) | {children} (2/3). Mobile = single
- *           pane swap via the bottom tab bar.
+ *   - TopBar: brand, return picker, tabs, right cluster.
+ *   - Main, desktop: ChatPane on the left, {children} on the right.
+ *   - Main, mobile: one pane. The bottom tab bar swaps the panes.
  *
- * AppShellContext exposes user state, the chat message buffer, lucaBusy,
- * turnTick, mobile-pane setter, and the canonical sendChat function used
- * by both the chat input form and the Requested Actions card. Keeping
- * sendChat at this level means all callers go through the same code path
- * — no useEffect bridges, no state-trigger races, no double-fires.
+ * AppShellContext supplies user state, the chat message buffer, lucaBusy,
+ * turnTick, the mobile-pane setter, and sendChat. The chat input and the
+ * Requested Actions card call the same sendChat function. One code path
+ * prevents useEffect bridges, state-trigger races, and double sends.
  *
- * For placeholder returns (realDataAvailable=false) we skip the
- * /app/state fetch and the chat-history rehydration; sendChat is a no-op.
+ * For placeholder returns (realDataAvailable=false), the shell does not
+ * fetch /app/state and does not load chat history. sendChat is a no-op.
  */
 
 import {
@@ -55,8 +55,8 @@ export interface SendChatOpts {
   text?: string;
   file?: File;
   /*
-   * True when the caller already wrote to user_documents (e.g. via the
-   * Requested Actions card) so sendChat shouldn't double-upload.
+   * Set true when the caller already wrote the file to user_documents.
+   * Then sendChat does not upload the file again.
    */
   skipUpload?: boolean;
 }
@@ -76,9 +76,9 @@ interface AppShellContextValue {
   lucaBusy: boolean;
   setMobilePane: Dispatch<SetStateAction<MobilePane>>;
   /*
-   * Canonical entry point for sending a turn to Luca. Used by the chat
-   * input on submit, and by the Requested Actions card after an upload.
-   * Resolves once the stream finishes. No-op when busy or placeholder.
+   * The single entry point that sends a turn to Luca. The chat input and
+   * the Requested Actions card call it. It resolves when the stream ends.
+   * It is a no-op when Luca is busy or the return is a placeholder.
    */
   sendChat: (opts: SendChatOpts) => Promise<void>;
   onSignOut: () => Promise<void>;
@@ -131,9 +131,9 @@ export function AppShell({
   const [mobilePane, setMobilePane] = useState<MobilePane>("workspace");
   /*
    * Synchronous gate against concurrent sendChat calls. setLucaBusy is
-   * async, so two callers that fire in the same tick would both pass a
-   * `if (lucaBusy)` check. The ref is updated synchronously inside
-   * sendChat and flips back in the finally block.
+   * asynchronous. Two calls in the same tick can both pass an
+   * `if (lucaBusy)` check. sendChat sets this ref immediately and clears
+   * it in the finally block.
    */
   const sendingRef = useRef(false);
 
@@ -187,14 +187,14 @@ export function AppShell({
       }
       setMessages((current) => (current.length > 0 ? current : converted));
     } catch {
-      // Thread missing / transient failure — leave the buffer empty.
+      // Thread is missing or the request failed. Keep the buffer empty.
     }
   }
 
   useEffect(() => {
     refreshState();
     loadChatHistory();
-    // deps intentionally omit refreshState/loadChatHistory — rerun only on return switch
+    // Rerun only on a return switch. refreshState/loadChatHistory are stable.
   }, [activeReturn.id]);
 
   async function onSignOut() {
@@ -231,9 +231,9 @@ export function AppShell({
     setMessages((m) => [...m, userMsg, assistantMsg]);
 
     /*
-     * Parallel write to user_documents so the file shows up under the
-     * Documents tab. Skipped when the caller already did this (e.g. the
-     * Requested Actions card uploaded before calling sendChat).
+     * Write the file to user_documents in parallel. Then the Documents
+     * tab shows it. Skip this when the caller already uploaded the file
+     * (for example, the Requested Actions card).
      */
     if (file && !opts.skipUpload) {
       uploadDocument(file).catch((err) => {

@@ -13,24 +13,25 @@ import {
 import { requireUserContext } from "./userContext";
 
 /*
- * Ingest a consolidated 1099 (E*TRADE-style multi-section statement) as
- * structured tax_facts + a few broker-reported AI decisions.
- * 
- * Luca (vision-capable) reads the 1099 PDF and maps whatever broker-specific
- * labels are used to IRS-canonical box numbers. The schema below is what
- * the LLM should produce; the tool writes it to the DB.
- * 
+ * Ingest a consolidated 1099 (an E*TRADE-style multi-section statement) as
+ * structured tax_facts plus a few broker-reported AI decisions.
+ *
+ * Luca (vision-capable) reads the 1099 PDF and maps the broker-specific
+ * labels to IRS-canonical box numbers. The schema below is what the LLM
+ * produces; the tool writes it to the DB.
+ *
  * What gets written per call:
+ *   - 1 InterestFactValue if `int` is present
  *   - 1 DividendFactValue if `div` is present
  *   - 1 TradeFactValue per trade in `b.trades`
- *   - 1 ai_decision per trade (`decisions.trade.{tradeId}.form_8949_box`)
+ *   - 1 ai_decision per trade (`decisions.trade.{tradeId}.form_8949_box`),
  *     derived mechanically from the broker-reported (term, basisReported)
- *     pair — no grounding review needed since the broker classified it.
+ *     pair — no grounding review, because the broker classified it
  *   - 1 ai_decision (`decisions.scope.has_reportable_sales` = true) if
- *     trades are present.
- * 
- * (1099-MISC / 1099-OID sections will be added when we have a scenario
- * that uses them. INT, DIV, and B are accepted.)
+ *     trades are present
+ *
+ * (1099-MISC / 1099-OID sections land when a scenario needs them. INT,
+ * DIV, and B are accepted.)
  */
 
 const AddressSchema = z.object({
@@ -66,11 +67,11 @@ const tradeIdFor = (t: {
   return `${slugify(ticker)}-${slugDate(t.dateSold)}-q${t.quantity}`;
 };
 
-// Map broker-reported (term, basisReported) → Form 8949 box.
+// Map the broker-reported (term, basisReported) pair to a Form 8949 box.
 const boxFor = (term: "short_term" | "long_term" | "unknown", basisReported: boolean): string => {
   if (term === "short_term") return basisReported ? "partI.boxA" : "partI.boxB";
   if (term === "long_term") return basisReported ? "partII.boxD" : "partII.boxE";
-  // Unknown term → Box B or Box E (form 8949 instructions cover this).
+  // Unknown term → fall back to the short-term boxes (A/B).
   return basisReported ? "partI.boxA" : "partI.boxB";
 };
 
@@ -264,9 +265,10 @@ export const ingest1099Consolidated = createTool({
         factsWritten++;
 
         /*
-         * Auto-record the form_8949_box decision since broker classified it.
-         * Skips the grounding review by writing directly through recordDecision —
-         * the input is broker-reported, no judgment.
+         * Auto-record the form_8949_box decision — the broker already
+         * classified the sale. The write goes directly through
+         * recordDecision and skips the grounding review; the input is
+         * broker-reported, not a judgment call.
          */
         const box = boxFor(t.term, t.basisReported);
         await recordDecision(scope, {

@@ -5,18 +5,20 @@ import { mkdirSync } from "node:fs";
 import { createClient, type Client } from "@libsql/client";
 
 /*
- * Per-user DOMAIN data (tax_facts, ai_decisions, filings, …) lives in a local
- * libsql/SQLite file — separate from corpus.db, which is a prebuilt shippable
- * asset. This replaces the Supabase Postgres domain tables + RLS.
- * 
- * RLS is gone with Postgres, so scoping is explicit: every helper in
- * taxFacts/aiDecisions/etc. takes a `Scope { userId, filingId }` and writes
- * the WHERE clauses the database used to add for us. filing_members holds
- * exactly one owner membership per filing — the CPA-reviewer multi-user
+ * Per-user DOMAIN data (tax_facts, ai_decisions, filings, …) lives in a
+ * local libsql/SQLite file, separate from corpus.db, which is a prebuilt
+ * shippable asset. This replaces the Supabase Postgres domain tables and
+ * RLS.
+ *
+ * RLS left with Postgres, so scoping is explicit: every helper in
+ * taxFacts/aiDecisions/etc. takes a `Scope { userId, filingId }` and
+ * writes the WHERE clauses that RLS added before. filing_members holds
+ * exactly one owner membership per filing; the CPA-reviewer multi-user
  * surface was removed with the self-hosted transition.
- * 
+ *
  * Path resolution mirrors db/libsql.ts: APP_DB_PATH env wins, else
- * <apps/agent>/.data/app.db anchored to this module so cwd doesn't matter.
+ * <apps/agent>/.data/app.db anchored to this module so cwd does not
+ * matter.
  */
 
 const MODULE_DIR = dirname(fileURLToPath(import.meta.url)); // …/src/mastra/db
@@ -29,8 +31,8 @@ function appDbPath(): string {
 }
 
 /**
- * Explicit per-request scoping — the replacement for RLS. Built by
- *  requireUserContext (agent) or the membership-verified route handlers. 
+ * Explicit per-request scoping; the replacement for RLS. Built by
+ * requireUserContext (agent) or the membership-verified route handlers.
  */
 export interface Scope {
   userId: string;
@@ -38,8 +40,8 @@ export interface Scope {
 }
 
 /*
- * Cell readers — libsql row values are string | number | bigint | ArrayBuffer
- * | null. Exported for the domain helper modules.
+ * Cell readers. libsql row values are typed string | number | bigint |
+ * ArrayBuffer | null. Exported for the domain helper modules.
  */
 export const asStr = (v: unknown): string => (v == null ? "" : String(v));
 export const asStrOrNull = (v: unknown): string | null =>
@@ -52,8 +54,8 @@ export const asJson = (v: unknown): unknown =>
   v == null ? null : JSON.parse(String(v));
 
 /**
- * ISO timestamp — written from JS so ordering semantics match the old
- *  Postgres timestamptz strings the web app sorts on. 
+ * ISO timestamp written from JS. String ordering matches the old
+ * Postgres timestamptz values the web app sorts on.
  */
 export const nowIso = (): string => new Date().toISOString();
 
@@ -69,9 +71,10 @@ export function getAppDb(): Client {
 }
 
 /*
- * Idempotent schema init — every statement CREATE … IF NOT EXISTS. SQLite
- * type mapping from the Postgres migrations: uuid → TEXT, jsonb → TEXT
- * (JSON.stringify at write, JSON.parse at read), timestamptz → TEXT (ISO).
+ * Idempotent schema init; every statement is CREATE … IF NOT EXISTS.
+ * SQLite type mapping from the Postgres migrations: uuid → TEXT,
+ * jsonb → TEXT (JSON.stringify at write, JSON.parse at read),
+ * timestamptz → TEXT (ISO).
  */
 export function ensureAppSchema(): Promise<void> {
   if (schemaReady) return schemaReady;
@@ -82,12 +85,13 @@ export function ensureAppSchema(): Promise<void> {
     await db.batch(
       [
         /*
-         * The single owner of this instance. Identity = the instance; this
-         * row holds profile data (name/email, used for form prefill +
-         * authEmail) and the web gate's credentials (scrypt password hash +
-         * the HMAC secret for session cookies). Created by the web app's
-         * first-run /setup screen. The agent only READS it (ownerMiddleware
-         * resolves the owner as the resource id for every request).
+         * The single owner of this instance. Identity = the instance. The
+         * row holds profile data (name/email, used for form prefill and
+         * authEmail) and the web gate's credentials (scrypt password hash
+         * plus the HMAC secret for session cookies). The web app's
+         * first-run /setup screen creates it. The agent only READS it;
+         * ownerMiddleware resolves the owner as the resource id for every
+         * request.
          */
         `CREATE TABLE IF NOT EXISTS owner (
            id            TEXT PRIMARY KEY,
@@ -236,7 +240,7 @@ export interface Owner {
   displayName: string;
 }
 
-/** The instance owner, or null before first-run setup has been completed. */
+/** The instance owner, or null before first-run setup completes. */
 export async function getOwner(): Promise<Owner | null> {
   await ensureAppSchema();
   const res = await getAppDb().execute(`SELECT id, email, display_name FROM owner LIMIT 1`);

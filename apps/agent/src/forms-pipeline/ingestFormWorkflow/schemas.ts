@@ -1,7 +1,7 @@
 /*
- * Zod schemas for the form-ingest workflow. Each step's outputSchema is the
- * next step's inputSchema — we accumulate state via .extend() so the workflow
- * never has to thread "optional fields filled in later" through.
+ * Zod schemas for the form-ingest workflow. Each step's outputSchema is
+ * the next step's inputSchema. State accumulates via .extend(), so the
+ * workflow never threads "optional fields filled in later" through.
  */
 
 import { z } from "zod";

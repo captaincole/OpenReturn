@@ -2,11 +2,11 @@
 
 /*
  * Documents tab — uploads only. Generated drafts (1040, 540, sidecar)
- * live on the Forms tab as "Deliverables" per Andrew's labeling rule
- * (inputs vs outputs are different concerns).
+ * live on the Forms tab, per Andrew's labeling rule: inputs and outputs
+ * are different concerns.
  *
- * Drop zone wraps the existing uploadDocument flow. Card list reads
- * /api/uploads (libsql app DB, session-cookie auth).
+ * The drop zone wraps the existing uploadDocument flow. The card list
+ * reads /api/uploads (libsql app DB, session-cookie auth).
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -55,11 +55,11 @@ export default function DocumentsTab() {
   }, [resetTick, activeReturn.realDataAvailable, loadUploads]);
 
   /*
-   * Mirrors the Requested Actions upload flow: write to user_documents
-   * first (so the doc appears in the grid + has a real ID), then hand the
-   * file off to Luca via sendChat with skipUpload=true so he reacts to it
-   * exactly like a chat-attached upload. setMobilePane("chat") so mobile
-   * users actually see Luca respond instead of staring at the same grid.
+   * Mirrors the Requested Actions upload flow. Write to user_documents
+   * first, so the document appears in the grid with a real ID. Then hand
+   * the file to Luca via sendChat with skipUpload=true; he reacts to it
+   * exactly like a chat-attached upload. setMobilePane("chat") lets
+   * mobile users see Luca respond instead of the same grid.
    */
   async function handleFiles(files: FileList | null) {
     if (!files || files.length === 0) return;

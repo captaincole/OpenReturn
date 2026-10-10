@@ -1,15 +1,15 @@
 /*
- * Grounding smoke test — three end-to-end review-decision workflow runs
- * against a THROWAWAY app DB (APP_DB_PATH is pointed at a temp file before
- * any module loads, so the dev database is never touched; the real corpus.db
- * is used read-only for retrieval).
- * 
+ * Grounding smoke test: three end-to-end review-decision workflow runs
+ * against a THROWAWAY app DB. APP_DB_PATH points at a temp file before
+ * any module loads, so the dev database is never touched. The real
+ * corpus.db is used read-only for retrieval.
+ *
  * Each case: seed facts → record a decision → run reviewDecision(scope, id)
  * directly (the same entry the record-ai-decision tool fires in the
  * background) → assert the verdict, persistence, citations, and the
  * open-question side effects.
- * 
- * Costs real LLM calls (Haiku × a few per case) — run on demand, not in CI:
+ *
+ * Costs real LLM calls (Haiku × a few per case). Run on demand, not in CI:
  *   npm run smoke:review
  */
 
@@ -28,13 +28,13 @@ const OWNER_ID = "smoke-owner";
 
 interface Case {
   name: string;
-  /**
-   * Any of these verdicts passes. Case 3 accepts two: the CA 540 booklet is
-   *  in the corpus now, so the old "ungroundable" outcome became "accurate
-   *  when retrieval lands / needs_more_facts when it doesn't". 
+  /*
+   * Any of these verdicts passes. The CA 540 booklet is in the corpus
+   * now, so the old "ungroundable" outcome is gone. Case 3 accepts all
+   * three verdicts; see its inline comment.
    */
   acceptVerdicts: Array<"accurate" | "inaccurate" | "needs_more_facts">;
-  /** Should finalize have written an open_questions row? */
+  // Whether finalize must write an open_questions row.
   expectOpenQuestion: boolean | "if-not-accurate";
   facts: Array<{ category: string; key: string; value: unknown; sourceNote: string }>;
   decision: {
@@ -105,13 +105,14 @@ const CASES: Case[] = [
   },
   {
     /*
-     * Borderline-by-design: the 540 booklet has thin residency detail (FTB
-     * Pub 1031 isn't ingested), so the judge lands differently run to run
-     * (accurate / needs_more_facts / inaccurate are all defensible-ish).
-     * This case asserts PIPELINE MECHANICS (3-iteration loop, CA-corpus
-     * retrieval, persistence, open-question side effects) — not judge
-     * calibration. Calibration coverage belongs to a real eval dataset
-     * (see CLAUDE.md lessons: don't tune prompts off one smoke case).
+     * Borderline by design. The 540 booklet has thin residency detail
+     * (FTB Pub 1031 is not ingested), so the judge lands differently run
+     * to run. accurate / needs_more_facts / inaccurate are all
+     * defensible. This case asserts PIPELINE MECHANICS: the 3-iteration
+     * loop, CA-corpus retrieval, persistence, and open-question side
+     * effects. It does not assert judge calibration. Calibration
+     * coverage belongs in a real eval dataset (see CLAUDE.md lessons:
+     * do not tune prompts off one smoke case).
      */
     name: "CA residency call (mechanics only — borderline verdict accepted)",
     acceptVerdicts: ["accurate", "needs_more_facts", "inaccurate"],
@@ -163,7 +164,7 @@ async function main() {
   let passed = 0;
 
   for (const c of CASES) {
-    // Fresh filing per case → clean fact/question space.
+    // A fresh filing per case gives a clean fact/question space.
     const filingId = crypto.randomUUID();
     await createOwnerFiling({ filingId, userId: OWNER_ID, taxYear: YEAR });
     const scope = { userId: OWNER_ID, filingId };

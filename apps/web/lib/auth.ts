@@ -1,8 +1,8 @@
 /*
  * Client-side auth helpers. The session lives in an httpOnly cookie the
- * browser can't read, so identity checks go through /api/auth/me and
- * sign-out through /api/auth/logout. Agent calls need no headers anymore —
- * they ride the same cookie through the /api/agent proxy.
+ * browser cannot read. Identity checks go through /api/auth/me and
+ * sign-out through /api/auth/logout. Agent calls need no headers — the
+ * same cookie authenticates them through the /api/agent proxy.
  */
 
 export async function getUserId(): Promise<string | null> {
@@ -13,8 +13,9 @@ export async function getUserId(): Promise<string | null> {
 }
 
 /**
- * Kept for call-site compatibility: agent requests are same-origin via the
- *  /api/agent proxy now, authenticated by the session cookie. 
+ * Kept for call-site compatibility. Agent requests are same-origin via
+ * the /api/agent proxy and the session cookie authenticates them, so
+ * this returns no headers.
  */
 export async function authHeaders(): Promise<HeadersInit> {
   return {};

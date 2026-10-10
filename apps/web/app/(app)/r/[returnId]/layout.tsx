@@ -5,14 +5,14 @@ import { listOwnerReturns } from "@/lib/serverDb";
 import { deriveProfile } from "@/lib/profile";
 
 /*
- * Return-scoped layout. Resolves the route param against the caller's real
- * owner filings (queried from the filings + filing_members tables). If the
- * caller doesn't own a filing for the requested year, redirect to '/' so
- * they can start one — the home-home page renders the empty-state CTA.
- * 
- * The outer (app)/layout.tsx already gates auth, but we re-check getUser
- * here to pull the verified userId for AppShell. Server-side: a single
- * extra DB roundtrip per navigation, acceptable for now.
+ * Return-scoped layout. It resolves the route param against the caller's
+ * real filings (the filings + filing_members tables). If no filing exists
+ * for the requested year, redirect to '/' so the user can start one; the
+ * home-home page renders the empty-state CTA.
+ *
+ * The outer (app)/layout.tsx already gates auth. We call getOwnerSession
+ * again to get the verified userId for AppShell. That costs one extra DB
+ * roundtrip per navigation, acceptable for now.
  */
 export default async function ReturnLayout({
   children,

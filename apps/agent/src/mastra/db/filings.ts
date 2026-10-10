@@ -1,12 +1,12 @@
 import { getAppDb, ensureAppSchema, asStr, asNum, nowIso } from "./appDb";
 
 /*
- * Filings — the ownership root. Every domain row (tax_facts, ai_decisions,
- * etc.) carries a filing_id; with RLS gone, access is gated by explicit
- * filing_members lookups here (the routes/tools call these before building
- * a Scope).
- * 
- * For the current single-owner-per-user flow there's one active filing per
+ * Filings — the ownership root. Every domain row (tax_facts,
+ * ai_decisions, etc.) carries a filing_id. With RLS gone, explicit
+ * filing_members lookups here gate access; the routes/tools call these
+ * before they build a Scope.
+ *
+ * In the current single-owner flow there is one active filing per
  * (user, tax_year).
  */
 
@@ -20,9 +20,9 @@ export interface FilingRow {
 }
 
 /*
- * Resolve a user's active owner filing for a given tax year. Throws if
- * there isn't exactly one — that's a misconfiguration we want to surface
- * loudly rather than silently picking a filing.
+ * Resolve a user's active owner filing for a given tax year. Throws
+ * unless exactly one exists; that misconfiguration must surface loudly,
+ * not silently pick a filing.
  */
 export async function resolveOwnerFilingForYear(
   userId: string,
@@ -57,8 +57,9 @@ export async function resolveOwnerFilingForYear(
 }
 
 /**
- * Non-revoked membership for (filing, user, role). Returns the filing's tax
- *  year, or null when no such membership — the routes' 403/404 gate. 
+ * Non-revoked membership for (filing, user, role). Returns the filing's
+ * tax year, or null when no such membership exists — the routes' 403/404
+ * gate.
  */
 export async function getMembership(
   filingId: string,
@@ -79,8 +80,9 @@ export async function getMembership(
 }
 
 /**
- * Create a filing + owner membership. Used by the seed script and the
- *  create-filing flow. Caller supplies the id (crypto.randomUUID()). 
+ * Create a filing + owner membership. Used by the create-filing route
+ * and the smokeReview diagnostic. The caller supplies the id
+ * (crypto.randomUUID()).
  */
 export async function createOwnerFiling(args: {
   filingId: string;
@@ -106,8 +108,8 @@ export async function createOwnerFiling(args: {
 }
 
 /**
- * Delete a filing; FK ON DELETE CASCADE clears every domain row under it.
- *  Ownership must be verified by the caller (getMembership) first. 
+ * Delete a filing; FK ON DELETE CASCADE clears every domain row under
+ * it. The caller must verify ownership (getMembership) first.
  */
 export async function deleteFilingCascade(filingId: string): Promise<void> {
   await ensureAppSchema();

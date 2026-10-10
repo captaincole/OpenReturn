@@ -1,14 +1,13 @@
 /*
  * Ingest the California FTB Tax Table (2025 540 booklet appendix) from a
  * cached PDF into a checked-in JSON file. Same shape as the federal
- * ingest-federal-tax-table pipeline but reading from PDF text rather than
- * HTML.
- * 
- * `--refresh` re-downloads from ftb.ca.gov; default uses the cached PDF
- * next to the JSON output.
- * 
+ * ingest-federal-tax-table pipeline, but it reads PDF text, not HTML.
+ *
+ * `--refresh` re-downloads from ftb.ca.gov. The default uses the cached
+ * PDF next to the JSON output.
+ *
  * Spot-checks are hand-keyed from pages 1, 3, 4, and 5 of the published
- * FTB table; any change to extraction logic must keep them passing.
+ * FTB table. Any change to the extraction logic must keep them passing.
  */
 
 import { promises as fs } from "node:fs";
@@ -36,7 +35,7 @@ const SOURCES: Record<number, CATaxTableSource> = {
   2025: {
     url: "https://www.ftb.ca.gov/forms/2025/2025-540-taxtable.pdf",
     spotChecks: [
-      // Lowest band — should be $0 across all columns.
+      // Lowest band: $0 across all columns.
       { taxableIncome: 1, column: "single_or_mfs", expectedTax: 0 },
       { taxableIncome: 50, column: "hoh", expectedTax: 0 },
       // Early rows.
@@ -44,14 +43,14 @@ const SOURCES: Record<number, CATaxTableSource> = {
       { taxableIncome: 6500, column: "single_or_mfs", expectedTax: 65 },
       { taxableIncome: 6500, column: "mfj_or_qss", expectedTax: 65 },
       { taxableIncome: 6500, column: "hoh", expectedTax: 65 },
-      // Mid range — single/MFS starts diverging from mfj/qss and hoh.
+      // Mid range: single/MFS diverges from mfj/qss and hoh.
       { taxableIncome: 19500, column: "single_or_mfs", expectedTax: 279 },
       { taxableIncome: 19500, column: "mfj_or_qss", expectedTax: 195 },
       { taxableIncome: 19500, column: "hoh", expectedTax: 195 },
       { taxableIncome: 40500, column: "single_or_mfs", expectedTax: 984 },
       { taxableIncome: 40500, column: "mfj_or_qss", expectedTax: 588 },
       { taxableIncome: 40500, column: "hoh", expectedTax: 588 },
-      // Alex's row — the golden 540 has line 31 = $3,256 at $73,294 single.
+      // Alex's row: the golden 540 has line 31 = $3,256 at $73,294 single.
       { taxableIncome: 73294, column: "single_or_mfs", expectedTax: 3256 },
       { taxableIncome: 73294, column: "mfj_or_qss", expectedTax: 1660 },
       { taxableIncome: 73294, column: "hoh", expectedTax: 1771 },

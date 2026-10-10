@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     );
   }
   await createOwner({ email, displayName, password });
-  // Log the fresh owner straight in — no reason to make them retype it.
+  // Log the new owner in immediately, so they do not retype the password.
   await login(password);
   return NextResponse.json({ ok: true });
 }

@@ -7,15 +7,15 @@ import { luca } from "../../agents/luca";
 /*
  * POST /app/filings
  * body: { taxYear?: number }
- * 
- * Creates a new filing for the calling user with an `owner` membership in
- * the libsql app DB. If the caller already has a non-revoked owner
- * membership for the requested tax_year, return that existing filing
- * (idempotent — the home-home "Start your 2025 filing" button is safe to
- * double-click).
- * 
+ *
+ * Creates a new filing for the calling user with an `owner` membership
+ * in the libsql app DB. If the caller already has a non-revoked owner
+ * membership for the requested tax_year, return that existing filing.
+ * Idempotent: the home page's "Start your 2025 filing" button is safe
+ * to double-click.
+ *
  * Errors:
- *   401 — no JWT / unverified caller
+ *   401 — no resolved instance owner on the request
  *   400 — taxYear out of plausible range (defensive)
  */
 
@@ -30,10 +30,10 @@ function threadIdFor(userId: string, year: number | string): string {
 
 /*
  * Best-effort: create the per-filing Mastra thread so the chat-history
- * fetch from AppShell.loadChatHistory finds a thread (empty messages list)
- * instead of triggering Mastra's "Thread not found" 500. Errors are
- * swallowed because creating the filing is what matters; the thread will
- * be lazily created on the user's first message if this fails.
+ * fetch from AppShell.loadChatHistory finds a thread (empty messages
+ * list) instead of Mastra's "Thread not found" 500. Errors are
+ * swallowed; the filing creation is what matters, and the user's first
+ * message creates the thread lazily if this fails.
  */
 async function ensureThread(userId: string, taxYear: number): Promise<void> {
   try {
@@ -45,7 +45,7 @@ async function ensureThread(userId: string, taxYear: number): Promise<void> {
       title: `${taxYear} return`,
     });
   } catch {
-    // No-op — thread bootstrap is best-effort.
+    // No-op; thread bootstrap is best-effort.
   }
 }
 
@@ -73,7 +73,7 @@ export const createFilingRoute = registerApiRoute("/app/filings", {
       return c.json({ error: `taxYear out of range (${taxYear})` }, 400);
     }
 
-    // Idempotency check — explicit membership predicate (RLS is gone).
+    // Idempotency check: explicit membership predicate (RLS is gone).
     await ensureAppSchema();
     const existing = await getAppDb().execute({
       sql: `SELECT f.id, f.tax_year, f.status
@@ -87,9 +87,10 @@ export const createFilingRoute = registerApiRoute("/app/filings", {
     if (existing.rows.length > 0) {
       const row = existing.rows[0];
       /*
-       * Defensive: ensure the thread exists even on the idempotent path,
-       * in case an earlier filing created the row but the thread bootstrap
-       * failed (or the filing pre-dates this route's thread-creation logic).
+       * Defensive: ensure the thread exists on the idempotent path too,
+       * in case an earlier request created the row but the thread
+       * bootstrap failed (or the filing pre-dates this route's
+       * thread-creation logic).
        */
       await ensureThread(callerId, Number(row.tax_year));
       return c.json({

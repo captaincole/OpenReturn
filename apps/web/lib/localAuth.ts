@@ -3,16 +3,17 @@ import { cookies } from "next/headers";
 import { getOwnerAuthRow, insertOwnerRow, type OwnerAuthRow } from "@/lib/serverDb";
 
 /*
- * Single-user auth: identity = the instance. One `owner` row in app.db holds
- * profile data (name/email) plus the gate's credentials — an scrypt password
- * hash and the HMAC secret for session cookies (generated at setup, so
- * there's no SESSION_SECRET env var to configure). ~100 lines, node:crypto
- * only, deliberately auditable in one sitting.
- * 
- * Session cookie: `${base64url(payload)}.${base64url(hmac)}` where payload =
- * {uid, exp}. httpOnly + sameSite=lax; verification happens server-side in
- * layouts/route handlers (proxy.ts only does an optimistic presence check —
- * the Edge runtime can't read app.db).
+ * Single-user auth: identity = the instance. One `owner` row in app.db
+ * holds profile data (name/email) plus the gate's credentials: an scrypt
+ * password hash and the HMAC secret for session cookies. Setup generates
+ * the secret, so there is no SESSION_SECRET env var to configure. The
+ * module uses node:crypto only and stays small enough to audit in one
+ * sitting.
+ *
+ * Session cookie: `${base64url(payload)}.${base64url(hmac)}` where
+ * payload = {uid, exp}. httpOnly + sameSite=lax. Layouts and route
+ * handlers verify the cookie server-side. proxy.ts only does an
+ * optimistic presence check because the Edge runtime cannot read app.db.
  */
 
 export const SESSION_COOKIE = "summa_session";
@@ -74,7 +75,7 @@ function verifyToken(token: string, secret: string): string | null {
 
 // ─── Public API ─────────────────────────────────────────────────────────
 
-/** Has first-run setup been completed? */
+/** True when first-run setup has created the owner. */
 export async function ownerExists(): Promise<boolean> {
   return (await getOwnerAuthRow()) !== null;
 }
@@ -112,7 +113,7 @@ export async function setSessionCookie(owner: OwnerAuthRow): Promise<void> {
     sameSite: "lax",
     path: "/",
     maxAge: SESSION_TTL_MS / 1000,
-    // localhost is http; only mark secure when actually served over https.
+    // localhost is http. Mark the cookie secure only when served over https.
     secure: process.env.NODE_ENV === "production" && process.env.FORCE_INSECURE_COOKIE !== "1",
   });
 }

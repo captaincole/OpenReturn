@@ -1,21 +1,21 @@
 /*
  * Phase D — render typed bindings into TypeScript source for a per-form
  * `bindings.ts` file under `src/engine/<jurisdiction>/<short>/`.
- * 
+ *
  * The classifier outputs structured bindings (one of N rule shapes per
  * field) plus a confidence rating. This renderer translates each binding
- * into a typed TS function body for the new `defineForm<TForm, TInfo>`
- * shape, routes anything below `minConfidence` to a `todos` map, and
- * surfaces fact / decision keys that don't have a known FilingInfo slot
- * as todos as well (with rationale).
- * 
+ * into a typed TS function body for the `defineForm<TForm, TInfo>` shape.
+ * It routes anything below `minConfidence` to a `todos` map. Fact /
+ * decision keys without a known FilingInfo slot also become todos (with
+ * rationale).
+ *
  * Layout of the emitted file:
- * 
+ *
  *   import { defineForm, sum, floor } from "<relative engine.ts>";
  *   import { lookupTax } from "<relative data/taxTable.ts>";
  *   import type { Form540 } from "./types.js";
  *   import type { Form540FilingInfo } from "./filingInfo.js";
- * 
+ *
  *   export function register(): void {
  *     defineForm<Form540, Form540FilingInfo>("form-540", {
  *       mustFile: (info) => info.mustFileCA540,
@@ -39,7 +39,7 @@
  *       },
  *     });
  *   }
- * 
+ *
  * Each item the classifier rated below the minConfidence floor lands in
  * `todos`. Items whose rule is `unsupported` always land in `unsupported`.
  */
@@ -55,9 +55,9 @@ import type { FieldInventory } from "../engine/catalog.js";
 /*
  * ─── FilingInfo slot translation tables ──────────────────────────────────
  * Maps the AI's rule params (which reference raw fact / decision keys) to
- * the typed slot names in FilingInfo. When a key isn't in the table the
- * renderer pushes the binding to `todos` so a human reviews it — either
- * to add the slot to FilingInfo or to clarify the AI's choice.
+ * the typed slot names in FilingInfo. When a key is not in the table, the
+ * renderer pushes the binding to `todos` for human review: add the slot
+ * to FilingInfo, or clarify the AI's choice.
  */
 
 const FACT_TO_SLOT: Record<string, string> = {
@@ -112,7 +112,7 @@ export interface RenderBindingsOpts {
   fields: FieldInventory[]; // catalog ordinal order
   bindings: ClassifiedBinding[];
   mustFile: { decisionKey: string; rationale: string };
-  /** Absolute path the rendered TS will be written to. Used to compute relative imports. */
+  /** Absolute output path for the rendered TS. Used for relative imports. */
   outputPath: string;
   /**
    * Minimum confidence to commit a binding into `bindings`. Anything below
@@ -147,7 +147,7 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
 
   const minOrder = CONFIDENCE_ORDER[opts.minConfidence];
 
-  // Bucketize each catalog field.
+  // Sort each catalog field into one bucket.
   const entries: Array<
     | { kind: "binding"; field: FieldInventory; body: string; rationale: string }
     | { kind: "unsupported"; field: FieldInventory; reason: string }
@@ -176,8 +176,8 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
     confidenceBreakdown[binding.confidence]++;
 
     /*
-     * `unsupported` rule always goes to the unsupported map regardless of
-     * confidence — engine treats these the same as `unsupported`.
+     * The `unsupported` rule always goes to the unsupported map,
+     * regardless of confidence.
      */
     if (binding.ruleName === "unsupported") {
       const reason = String(binding.params.reason ?? binding.rationale);
@@ -185,7 +185,7 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
       continue;
     }
 
-    // Confidence floor — under-rated bindings become todos.
+    // Bindings below the confidence floor become todos.
     if (CONFIDENCE_ORDER[binding.confidence] < minOrder) {
       entries.push({
         kind: "todo",
@@ -270,8 +270,8 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
     out.push(`    mustFile: (info) => info.${mustFileSlot},`);
   } else {
     /*
-     * No slot for this decision — leave a TODO; engine will refuse to
-     * evaluate the form until this is filled in.
+     * No slot for this decision: leave a TODO. The engine refuses to
+     * evaluate the form until a slot is filled in.
      */
     out.push(
       `    // TODO: must-file decision "${opts.mustFile.decisionKey}" has no FilingInfo slot.`,
@@ -395,7 +395,7 @@ function translate(b: ClassifiedBinding, formId: string): Translation {
           "bracketLookup translation not implemented yet — typically progressive-bracket math (AMT, ≥$100k Tax Computation Worksheet)",
       };
     case "unsupported":
-      // Caller routes unsupported via the `unsupported` map; this shouldn't run.
+      // The caller routes `unsupported` to its own map; this must not run.
       return { kind: "todo", reason: "unsupported routed to bindings path" };
   }
 }
@@ -450,16 +450,17 @@ function translateDecisionIfEquals(b: ClassifiedBinding): Translation {
   }
   const matchValue = b.params.matchValue;
   if (matchValue === undefined) {
-    // Mode 1 — pass through the raw decision value (single_select / multi_select).
+    // Mode 1: pass through the raw decision value (single/multi select).
     return { kind: "body", body: `(_, info) => info.${slot}` };
   }
   /*
    * Mode 2 — per-checkbox boolean: true when decision === matchValue.
-   * JSON.stringify preserves boolean/number/string typing so the comparison
-   * operand matches the FilingInfo slot's type (boolean === boolean, not
-   * boolean === "true"). The AI sometimes emits matchValue as the literal
-   * `true` / `false`, sometimes the string "true" / "false" — keep both
-   * working by normalizing matchValues that LOOK boolean back to booleans.
+   * JSON.stringify preserves boolean/number/string typing, so the
+   * comparison operand matches the FilingInfo slot's type (boolean ===
+   * boolean, not boolean === "true"). The AI sometimes emits matchValue
+   * as the literal `true` / `false` and sometimes as the string "true" /
+   * "false". Normalize boolean-looking matchValues back to booleans so
+   * both work.
    */
   const normalized =
     matchValue === "true"
@@ -510,7 +511,7 @@ function translateFromFields(
     if (sign === 1) {
       args.push(`f[${quote(key)}]`);
     } else if (sign === -1) {
-      // sum() takes (number | undefined); negate at the type level by wrapping.
+      // sum() takes (number | undefined). Wrap to negate; undefined becomes 0.
       args.push(`f[${quote(key)}] === undefined ? 0 : -f[${quote(key)}]`);
     } else {
       args.push(`f[${quote(key)}] === undefined ? 0 : ${sign} * f[${quote(key)}]`);
@@ -581,9 +582,9 @@ function shortKey(fieldId: string, formId: string): string {
 }
 
 /**
- * For cross-form refs use the full fieldId so the form accessor proxy
- * routes through the global registry. For same-form refs use the short
- * key — that's the convention defineForm uses for its own fields.
+ * Cross-form refs use the full fieldId so the form accessor proxy routes
+ * through the global registry. Same-form refs use the short key, the
+ * convention defineForm uses for its own fields.
  */
 function shortOrFullKey(fieldId: string, formId: string): string {
   if (fieldId.startsWith(`${formId}.`)) return fieldId.slice(formId.length + 1);
@@ -596,14 +597,14 @@ function quote(s: string): string {
 
 /**
  * Compute an ESM-friendly relative import path from `fromFilePath` to
- * `toFilePath`, both relative to a known anchor (the agent's project root).
- * Strips the `.ts` extension and substitutes `.js` so the runtime resolver
- * works under tsx + the compiled output.
+ * `toRelativePath`, both anchored at the agent's project root. Replaces
+ * the `.ts` extension with `.js` so the runtime resolver works under tsx
+ * and in the compiled output.
  */
 function relImport(fromFilePath: string, toRelativePath: string): string {
   /*
-   * toRelativePath is "src/engine/engine.ts" — turn into an absolute
-   * path under the same root as fromFilePath.
+   * toRelativePath is like "src/engine/engine.ts". Turn it into an
+   * absolute path under the same root as fromFilePath.
    */
   const fromAbs = fromFilePath;
   const matchRoot = fromAbs.match(/^(.*?)(\/apps\/agent\/)/);

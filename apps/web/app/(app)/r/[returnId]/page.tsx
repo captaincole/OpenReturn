@@ -1,15 +1,15 @@
 "use client";
 
 /*
- * Home tab for the active return. Synthesized dashboard:
+ * Home tab for the active return. A synthesized dashboard:
  *   - Progress card with clickable category drill-downs
- *   - Plan + Open asks side-by-side
- *   - Activity (inline expand for full ledger)
- * 
- * Real data comes from useAppShell() — state.forms, state.plan,
- * state.pendingFacts, state.pendingDecisions. The category sub-items are
- * static for now (no categorization endpoint yet); the per-category pct
- * uses a hand-rolled mapping until we wire it server-side.
+ *   - Requested actions (the Plan list lives in the chat pane)
+ *   - Activity ticker with an inline detail panel
+ *
+ * Real data comes from useAppShell() — state.forms, state.pendingFacts,
+ * state.pendingDecisions. The category sub-items are static for now (no
+ * categorization endpoint yet); the per-category pct is a hand-rolled
+ * mapping until we wire it server-side.
  */
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -32,9 +32,9 @@ import { uploadDocument } from "@/lib/uploads";
 import { cn } from "@/lib/cn";
 
 /*
- * Fast regular poll against the /api routes — the libsql app DB has no push
- * channel (Supabase Realtime left with Postgres); for one user on one box a
- * short interval is indistinguishable from push.
+ * Short fixed poll against the /api routes. The libsql app DB has no push
+ * channel (Supabase Realtime left with Postgres). For one user on one box
+ * a short interval is indistinguishable from push.
  */
 const POLL_INTERVAL_MS = 3000;
 
@@ -53,22 +53,22 @@ interface Category {
   pct: number;
   items: CategoryItem[];
   /*
-   * Filename substrings used to filter user_documents into per-category
+   * Filename substrings that filter user_documents into the per-category
    * "Documents" quick links. Hand-mapped until the agent tags uploads
    * with a category at ingest time.
    */
   docHints: string[];
   /*
-   * Form IDs from state.forms to surface as quick links. The form's
-   * current fill % shows inline so the user has a one-glance read on
-   * "what this category translates into on the actual return."
+   * Form IDs from state.forms to show as quick links. Each link shows
+   * the form's current fill % inline, so the user sees what this
+   * category becomes on the actual return.
    */
   formIds: string[];
 }
 
 /*
- * Static category definitions. When we add a categorization endpoint on
- * the agent side these become server-derived; until then, edit the file.
+ * Static category definitions. When the agent gains a categorization
+ * endpoint these become server-derived; until then, edit this file.
  */
 const CATEGORIES: Category[] = [
   {
@@ -126,8 +126,8 @@ const CATEGORIES: Category[] = [
 ];
 
 /*
- * Pick the first not-yet-complete category as the default expanded one.
- * Skews toward the in-progress one (0 < pct < 100) over not-started.
+ * Pick the default expanded category: prefer an in-progress one
+ * (0 < pct < 100), then the first incomplete one.
  */
 function defaultExpandedCategoryId(): string {
   const inProgress = CATEGORIES.find((c) => c.pct > 0 && c.pct < 100);
@@ -146,15 +146,15 @@ export default function HomeTab() {
   const { activeReturn, state, resetTick, turnTick } = useAppShell();
   /*
    * Default-expand the in-progress category so the user lands on a
-   * populated drill-down (and never sees an empty Progress card).
+   * populated drill-down and never sees an empty Progress card.
    */
   const [expandedCat, setExpandedCat] = useState<string | null>(() => defaultExpandedCategoryId());
   const [uploads, setUploads] = useState<UploadRow[]>([]);
 
   /*
-   * Pull uploads so the per-category quick-links section can filter by
-   * filename hint. Refetches on resetTick + turn so newly-attached docs
-   * appear without manual refresh.
+   * Load uploads so the per-category quick links can filter by filename
+   * hint. Refetch on resetTick and turnTick so new documents appear
+   * without a manual refresh.
    */
   useEffect(() => {
     if (!activeReturn.realDataAvailable) return;
@@ -223,11 +223,11 @@ export default function HomeTab() {
         )}
       </section>
 
-      {/* Plan moved into the chat pane (always-visible above the input).
-          This slot is now for things Luca is asking the USER to do —
-          uploads, confirmations, decisions — that don't fit a natural
-          chat turn. Stubbed with one example until the agent emits
-          structured action items. */}
+      {/*
+       * The Plan list moved into the chat pane, above the input. This
+       * slot holds things Luca asks the USER to do — uploads,
+       * confirmations, decisions — that do not fit a natural chat turn.
+       */}
       <RequestedActionsCard />
 
       <ActivityTicker refreshKey={turnTick + resetTick * 10000} />
@@ -237,9 +237,9 @@ export default function HomeTab() {
 
 function PlaceholderHome() {
   /*
-   * Unreachable today — see ChatPane.placeholderMessageFor for the same
-   * story. Layout-level redirect prevents non-owners from reaching /r/*,
-   * so realDataAvailable is always true on the active return.
+   * Unreachable today — same story as ChatPane.placeholderMessageFor.
+   * The layout redirect keeps years without a filing out of /r/*, and
+   * every queried TaxReturn has realDataAvailable=true.
    */
   const { activeReturn } = useAppShell();
   return (
@@ -301,10 +301,10 @@ function ProgressSegment({
 }
 
 /*
- * Expanded drill-down panel for a category. Workflow list capped at 3
- * items by default with a 'See N more' toggle — keeps the Progress card
- * short enough that Requested Actions + Activity stay visible above the
- * fold on a normal desktop. Resets on category change because the parent
+ * Expanded drill-down panel for a category. The workflow list caps at 3
+ * items with a 'See N more' toggle. This keeps the Progress card short,
+ * so Requested Actions and Activity stay visible above the fold on a
+ * normal desktop. State resets on category change because the parent
  * keys this component by category.id.
  */
 const WORKFLOWS_CAP = 3;
@@ -372,10 +372,11 @@ function CategoryDetailsPanel({
 }
 
 /*
- * Quick-link strip under the workflows list. Two subsections (only render
- * the one that has hits): "Documents" — uploads whose filename matches a
- * docHint substring — and "Forms" — entries in state.forms whose formId
- * is in the category's formIds list. Both navigate into the relevant tab.
+ * Quick-link strip under the workflows list. Two subsections:
+ * "Documents" lists uploads whose filename matches a docHint substring;
+ * "Forms" lists state.forms entries whose formId is in the category's
+ * formIds. Both link into the relevant tab. The strip hides only when
+ * both subsections are empty.
  */
 function CategoryQuickLinks({
   category,
@@ -542,13 +543,15 @@ function CategoryItemRow({ item }: { item: CategoryItem }) {
 
 /*
  * Requested Actions — things Luca needs the user to DO. Pulls live rows
- * from requested_actions (status='open'|'processing') via /api/requested-
- * actions on a fast poll, plus an immediate refetch after resets and turns.
- * 
- * v1: only kind='upload' (document requests). Upload runs the existing
- * uploadDocument() flow then marks the action resolved with the new
- * document id; Skip just flips status. Both make the card disappear
- * because the query filter is status='open'.
+ * from requested_actions (status 'open' or 'processing') through
+ * /api/requested-actions on a fast poll, plus an immediate refetch after
+ * resets and turns.
+ *
+ * v1 handles only kind='upload' (document requests). Upload runs the
+ * existing uploadDocument() flow, then marks the action 'processing'
+ * with the new document id; the card stays visible until Luca dismisses
+ * it after ingest. Skip sets status 'skipped', which removes the card
+ * because the query returns only open and processing rows.
  */
 function RequestedActionsCard() {
   const { lucaBusy, sendChat, setMobilePane, resetTick, turnTick } = useAppShell();
@@ -556,8 +559,8 @@ function RequestedActionsCard() {
   const [busyId, setBusyId] = useState<string | null>(null);
 
   /*
-   * Fetch on mount / reset / turn, then poll — the poll replaces the old
-   * realtime channel and also catches Luca's background dismissals.
+   * Fetch on mount, reset, and turn, then poll. The poll replaces the
+   * old realtime channel and also catches Luca's background dismissals.
    */
   useEffect(() => {
     let cancelled = false;
@@ -585,23 +588,23 @@ function RequestedActionsCard() {
     try {
       const uploaded = await uploadDocument(file);
       /*
-       * Card flips to "processing" — stays visible until Luca calls
-       * dismiss-requested-action after ingesting. Optimistic: the next
-       * poll will also patch it (no-op if we got here first).
+       * The card flips to "processing" and stays visible until Luca
+       * calls dismiss-requested-action after ingest. This update is
+       * optimistic; the next poll patches the same state.
        */
       await markActionProcessing(action.id, uploaded.id);
       setActions((prev) =>
         prev ? prev.map((x) => (x.id === action.id ? { ...x, status: "processing" } : x)) : prev,
       );
       /*
-       * Mobile users can't see the chat from the workspace pane; flip
+       * Mobile users cannot see the chat from the workspace pane. Flip
        * them to it so they see Luca react to the upload.
        */
       setMobilePane("chat");
       /*
-       * Same code path the textarea uses — sendChat is the canonical
-       * entry point. skipUpload=true because we already wrote to
-       * user_documents above.
+       * Same code path as the textarea — sendChat is the canonical
+       * entry point. skipUpload=true because we already wrote the file
+       * to user_documents above.
        */
       await sendChat({
         text: action.documentType
@@ -748,13 +751,12 @@ function ActionCard({
 }
 
 /*
- * Horizontal live-wire of recent facts + decisions. Newest on the left,
- * older trailing right with a fade gradient on the right edge to signal
- * "more if you scroll." Polls /api/activity on a short interval — new
- * tax_facts / ai_decisions rows (and verdict updates) land within one poll.
- * Clicking a chip opens an ActivityDetail modal — handy for surfacing the
- * rationale + supporting facts + verdict reason behind a decision, so the
- * user can see exactly what Luca was thinking.
+ * Horizontal strip of recent facts and decisions, newest on the left. A
+ * fade gradient on the right edge signals more content on scroll. Polls
+ * /api/activity on a short interval; new tax_facts / ai_decisions rows
+ * and verdict updates land within one poll. A click on a chip opens an
+ * inline detail panel with the rationale, supporting facts, and verdict
+ * reason behind a decision, so the user sees what Luca was thinking.
  */
 function ActivityTicker({ refreshKey }: { refreshKey: number }) {
   const [items, setItems] = useState<ActivityItem[] | null>(null);
@@ -870,9 +872,9 @@ function ActivityChip({
 }
 
 /*
- * Detail panel rendered INSIDE the Activity card, below the chip row,
- * when a chip is clicked. Matches the Progress drill-down pattern —
- * grows the card vertically rather than overlaying a modal.
+ * Detail panel rendered inside the Activity card, below the chip row,
+ * when a chip is clicked. Matches the Progress drill-down pattern: the
+ * card grows vertically instead of overlaying a modal.
  */
 function ActivityDetailPanel({
   item,

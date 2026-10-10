@@ -10,8 +10,8 @@ import { cn } from "@/lib/cn";
 
 interface ActivityCardProps {
   /*
-   * Bumped by the parent when activity may have changed (new turn, reset, etc).
-   * Also serves as the "wipe and refetch" trigger after a session reset; the
+   * The parent bumps this when activity may have changed (new turn,
+   * reset). A bump also wipes and refetches after a session reset. The
    * interval poll handles incremental updates between bumps.
    */
   refreshKey: number;
@@ -19,9 +19,9 @@ interface ActivityCardProps {
 
 const ACTIVITY_LIMIT = 50;
 /*
- * Plain interval polling against /api/activity — the libsql app DB has no
- * push channel (Supabase Realtime left with Postgres), and for one user on
- * one box a fast regular poll is indistinguishable from push.
+ * Plain interval polling against /api/activity. The libsql app DB has no
+ * push channel (Supabase Realtime left with Postgres). For one user on
+ * one box, a fast regular poll is indistinguishable from push.
  */
 const POLL_INTERVAL_MS = 3000;
 
@@ -105,10 +105,11 @@ export function ActivityCard({ refreshKey }: ActivityCardProps) {
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
   /*
-   * Fetch on mount / refreshKey bump, then poll on a fast regular interval.
-   * Both paths replace the whole list — the endpoint returns the newest
-   * ACTIVITY_LIMIT rows already sorted, so there's no client-side merge to
-   * get wrong, and verdict updates (pending → grounded) come along free.
+   * Fetch on mount and on each refreshKey bump, then poll on a fast
+   * regular interval. Both paths replace the whole list. The endpoint
+   * returns the newest ACTIVITY_LIMIT rows already sorted, so there is no
+   * client-side merge to get wrong. Verdict updates (pending → grounded)
+   * arrive automatically.
    */
   useEffect(() => {
     let cancelled = false;

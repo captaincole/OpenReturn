@@ -28,8 +28,8 @@ function serializeForm<F extends AnyFormField>(
   title: string;
   mustFile: EvaluatedForm<F>["mustFile"];
   /**
-   * Audit trail for the must-file determination — present whenever the
-   *  resolver populated it for this form. See EngineDerivation. 
+   * Audit trail for the must-file determination. Present when the resolver
+   * populated it for this form. See EngineDerivation.
    */
   mustFileDerivation: EvaluatedForm<F>["mustFileDerivation"];
   fields: Array<{
@@ -93,11 +93,11 @@ export const generateTaxDocuments = createTool({
   }),
   outputSchema: z.object({
     /**
-     * "ok" — at least one form rendered. "no_forms_rendered" — NOTHING was
-     * generated (blockers explain why); present no links and no numbers.
+     * "ok" — at least one form rendered. "no_forms_rendered" — nothing was
+     * generated; blockers explain why. Then present no links and no numbers.
      */
     status: z.enum(["ok", "no_forms_rendered"]),
-    /** Forms that could not even evaluate must-file — usually a missing decision. */
+    /** Forms whose must-file check could not evaluate — usually a missing decision. */
     blockers: z.array(
       z.object({
         formId: z.string(),
@@ -107,7 +107,7 @@ export const generateTaxDocuments = createTool({
     ),
     /** Convenience: the 1040 URL ("" when the 1040 did not render). */
     url: z.string(),
-    /** Convenience: the 540 URL (null when not filed). Preserved for prior consumers. */
+    /** Convenience: the 540 URL (null when not filed). Kept for prior consumers. */
     form540Url: z.string().nullable(),
     /** Every rendered form keyed by formId — the canonical list going forward. */
     documents: z.array(
@@ -119,8 +119,8 @@ export const generateTaxDocuments = createTool({
     ),
     /**
      * Ready-to-paste markdown bullet list of the rendered documents. Paste
-     * VERBATIM when presenting forms to the user — do not retype the URLs.
-     * Empty string when no forms rendered.
+     * it VERBATIM when presenting forms to the user — do not retype the
+     * URLs. Empty string when no forms rendered.
      */
     markdownLinks: z.string(),
     /** Null when no forms rendered (no sidecar is written). */
@@ -155,11 +155,10 @@ export const generateTaxDocuments = createTool({
 
     /*
      * ─── Render every form whose mustFile predicate evaluates true ───
-     * 1040 is filed unconditionally for every scenario we model (its
-     * mustFile reads the decisions.scope.must_file_federal flag). Other
-     * forms gate per-scenario via their own mustFile decisions —
-     * Alejandro files 8949/Schedule D/Schedule CA/540; Alex files only
-     * 1040 + 540.
+     * Every scenario we model files the 1040; its mustFile reads the
+     * decisions.scope.must_file_federal flag. Other forms gate per
+     * scenario via their own mustFile decisions. Example: Alejandro files
+     * 8949, Schedule D, Schedule CA, and 540; Alex files only 1040 + 540.
      */
     const documents: Array<{ formId: string; url: string; filename: string }> = [];
     const blockers: Array<{
@@ -181,10 +180,10 @@ export const generateTaxDocuments = createTool({
       }
       if (!form.mustFile.ok) {
         /*
-         * Must-file couldn't even evaluate — usually a missing decision
-         * (e.g. decisions.scope.must_file_federal was never recorded).
-         * Surface it so the agent records the decision instead of
-         * mistaking "nothing rendered" for a completed hand-off.
+         * Must-file could not evaluate. The usual cause is a missing
+         * decision (e.g. decisions.scope.must_file_federal was never
+         * recorded). Surface it so the agent records the decision instead
+         * of mistaking "nothing rendered" for a completed hand-off.
          */
         blockers.push({
           formId: spec.formId,
@@ -195,8 +194,8 @@ export const generateTaxDocuments = createTool({
       }
       if (!form.mustFile.value) {
         /*
-         * Form is out of scope for this scenario — skip rendering, don't
-         * include in sidecar, no field counts contributed.
+         * The form is out of scope for this scenario. Skip the render,
+         * the sidecar entry, and the field counts.
          */
         continue;
       }
@@ -231,9 +230,9 @@ export const generateTaxDocuments = createTool({
     }
 
     /*
-     * ─── Sidecar — every rendered form; skipped entirely when nothing
-     * rendered (an empty sidecar only invites "here's your forms data"
-     * messages pointing at a useless JSON file). ───
+     * ─── Sidecar — every rendered form ───
+     * Skip it when nothing rendered: an empty sidecar only invites
+     * "here's your forms data" messages that point at a useless JSON file.
      */
     let sidecarUrl: string | null = null;
     if (documents.length > 0) {
@@ -261,8 +260,8 @@ export const generateTaxDocuments = createTool({
 
     /*
      * ─── Refund/owed summaries ───
-     * Only meaningful for forms that actually rendered — a blocked 1040
-     * would report a vacuous "balanced $0" otherwise.
+     * Only compute these for forms that rendered. A blocked 1040 would
+     * otherwise report a vacuous "balanced $0".
      */
     const form1040 = forms.get("form-1040");
     const form540 = forms.get("form-540");
@@ -284,9 +283,10 @@ export const generateTaxDocuments = createTool({
     const url540 = documents.find((d) => d.formId === "form-540")?.url ?? null;
 
     /*
-     * ─── Verbatim-paste markdown — the ONLY link text the agent should
-     * put in chat. Prevents hand-composed (and historically malformed /
-     * fabricated) document links. ───
+     * ─── Verbatim-paste markdown ───
+     * The ONLY link text the agent should put in chat. This prevents
+     * hand-composed document links, which were historically malformed or
+     * fabricated.
      */
     const markdownLinks = [
       ...documents.map((d) => `- [${d.filename}](${d.url})`),

@@ -1,7 +1,7 @@
 /*
  * Phase D workflow carriers. Each step's outputSchema is the next step's
- * inputSchema; the carrier accumulates via .extend() so we never have to
- * thread "optional fields filled in later."
+ * inputSchema. The carrier accumulates via .extend(), so we never thread
+ * "optional fields filled in later".
  */
 
 import { z } from "zod";
@@ -62,10 +62,10 @@ const classifiedBindingSchema = z.object({
   /**
    * Self-rated confidence in this binding:
    *   high   — label + data path are both unambiguous; bind directly.
-   *   medium — label is clear but I'm guessing about which fact/slot to use.
-   *   low    — label is ambiguous OR I picked unsupported because no path fits.
-   * The renderer routes low/medium below `minConfidence` to a TODO map so a
-   * human reviews them.
+   *   medium — label is clear but the fact/slot choice is a guess.
+   *   low    — label is ambiguous, OR unsupported because no path fits.
+   * The renderer routes ratings below `minConfidence` to a TODO map for
+   * human review.
    */
   confidence: confidenceSchema,
 });
@@ -104,8 +104,8 @@ export const workflowInputSchema = z.object({
   /**
    * Minimum confidence to emit a binding. Anything below this threshold
    * goes to the `todos` map for human review instead of into `bindings`.
-   * Default "high" — strict; lower it to ingest more bindings at the cost
-   * of needing fewer human revisits.
+   * Default "high" is strict. A lower floor emits more bindings directly,
+   * at the cost of less human review before they ship.
    */
   minConfidence: confidenceSchema.default("high"),
 });

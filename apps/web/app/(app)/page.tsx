@@ -1,21 +1,20 @@
 /*
- * Home-home — person-scope landing. Above any single return.
- * 
- * No AppShell, no chat (no active return to chat about). Pure render —
- * server component, no client state needed. Auth is gated by the parent
- * (app)/layout.tsx.
- * 
+ * Home-home — the person-scope landing page, above any single return.
+ *
+ * Server component, no client state. The parent (app)/layout.tsx gates
+ * auth. No AppShell and no chat, because no return is active here.
+ *
  * Sections:
- *   1. Your returns      — real filings queried from listOwnerReturns; empty
- *                          state shows a single big "Start your 2025 filing" CTA.
+ *   1. Your returns      — filings from listOwnerReturns; the empty state
+ *                          shows one big "Start your 2025 filing" CTA.
  *   2. Continue with     — "Start a new filing" (action) + "Tax planning
  *                          session" (locked placeholder).
- *   3. Your tax picture  — four chart cards visually present but overlay-
- *                          locked until the user has a filed return.
- * 
- * Charts read mock data underneath the overlay because we don't capture
- * year-over-year history yet. When we do, swap the consts for a Supabase
- * query and drop the overlay.
+ *   3. Your tax picture  — four chart cards, overlay-locked until the
+ *                          user has a filed return.
+ *
+ * The charts read mock data under the overlay because we do not capture
+ * year-over-year history yet. When we do, replace the consts with a
+ * serverDb query and remove the overlay.
  */
 
 import { redirect } from "next/navigation";
@@ -30,9 +29,9 @@ import { StartFilingButton } from "./StartFilingButton";
 const CURRENT_TAX_YEAR = 2025;
 
 /*
- * Mock historical data. Replace with a Supabase query when we capture
- * year-over-year aggregates server-side. Rendered beneath a "locked"
- * overlay so the user sees what's coming without us pretending it's real.
+ * Mock historical data. Replace with a serverDb query when we capture
+ * year-over-year aggregates. A "locked" overlay covers the charts, so
+ * the user sees what comes next and we do not present the data as real.
  */
 const INCOME = [
   { year: 2021, value: 145000 },
@@ -286,9 +285,9 @@ function ReturnCard({ ret }: { ret: TaxReturn }) {
 }
 
 /*
- * Big inline empty-state CTA when the user has no filings yet. Replaces the
- * returns grid entirely — the page is supposed to look "empty until you
- * start something" rather than dressing-up the void with placeholders.
+ * Large inline CTA when the user has no filings yet. It replaces the
+ * returns grid. The page intentionally looks empty until the user starts
+ * a filing; placeholder cards would hide that state.
  */
 function EmptyReturnsCta() {
   return (

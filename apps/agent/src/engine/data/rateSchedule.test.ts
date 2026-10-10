@@ -1,6 +1,6 @@
 /*
  * Cross-check the rate-schedule lookup against the IRS-published formula
- * pieces. Each case picks a representative income inside a bracket and
+ * pieces. Each case picks a representative income inside one bracket and
  * confirms tax = income × rate − subtraction.
  */
 
@@ -10,7 +10,7 @@ import { lookupRateSchedule } from "./rateSchedule.js";
 describe("lookupRateSchedule — 2025 federal", () => {
   describe("single", () => {
     it("$101,000 → 22% bracket: 101,000 × 0.22 − 5,086 = 17,134", () => {
-      // 22% bracket for single is very narrow: $100k–$103,350.
+      // The single 22% bracket is narrow: $100k–$103,350.
       expect(lookupRateSchedule(2025, "single", 101000)).toBeCloseTo(17134, 2);
     });
     it("$150,000 → 24% bracket: 150,000 × 0.24 − 7,153 = 28,847", () => {

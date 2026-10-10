@@ -108,8 +108,8 @@ export type RuleOutput = z.infer<typeof ruleOutputSchema>;
 /*
  * ---------------------------------------------------------------------------
  * Loop carrier — the shared shape that flows through gather → assess → rule
- * on every iteration. Each step takes this in and returns this out, with one
- * or more fields populated. `inputSchema === outputSchema` is what makes the
+ * on every iteration. Each step takes it in and returns it out with one or
+ * more fields populated. `inputSchema === outputSchema` is what makes the
  * child workflow legal as a `.dountil()` step.
  * ---------------------------------------------------------------------------
  */
@@ -129,24 +129,25 @@ export const loopCarrierSchema = z.object({
   supportingFactKeys: z.array(z.string()),
 
   /*
-   * Iteration state — bumped by rule when emitting need_more_evidence.
-   * Max 4 because ruleStep can bump from 3 → 4 on the final iteration if
-   * it still wants more evidence; the loop then exits on iterationCount >= 3
-   * and finalize clamps the reported value back to 3 via Math.min.
+   * Iteration state. rule bumps this when it emits need_more_evidence.
+   * Max 4: ruleStep can bump 3 → 4 on the final iteration when it still
+   * wants more evidence. The loop then exits on iterationCount >= 3, and
+   * finalize clamps the reported value back to 3 via Math.min.
    */
   iteration: z.number().int().min(1).max(4),
   queries: z.array(z.string()),
 
   /*
-   * Reasons accumulated across iterations when rule kicks back to gather.
-   * Used by finalize to synthesize the whatsMissing summary if we hit
-   * iteration 3 without converging.
+   * Reasons accumulated across iterations when rule sends the loop back to
+   * gather. finalize uses them to synthesize the whatsMissing summary when
+   * iteration 3 ends without a verdict.
    */
   needMoreReasons: z.array(z.string()),
 
   /*
-   * Populated by gather/assess/rule respectively. Optional because at the
-   * start of each iteration they're freshly produced.
+   * gather / assess / rule populate these respectively. Optional because
+   * init seeds the carrier without them; each iteration then produces
+   * fresh values.
    */
   evidence: evidenceBundleSchema.optional(),
   riskAssessment: riskAssessmentSchema.optional(),
@@ -173,7 +174,10 @@ export const reviewDecisionOutputSchema = z.object({
   ]),
   reason: z.string(),
   citations: z.array(authorityCitationSchema),
-  // Populated only when finalVerdict === 'needs_more_facts':
+  /*
+   * openQuestionId is set for needs_more_facts and inaccurate verdicts.
+   * whatsMissing is set only for needs_more_facts.
+   */
   openQuestionId: z.string().optional(),
   whatsMissing: z.string().optional(),
 });

@@ -1,18 +1,18 @@
 /*
  * Phase D — per-field binding classification.
- * 
+ *
  * For each form field in the catalog, pick a rule from our library and
- * emit its params + a self-rated confidence. The classifier's structured
- * output gets translated by renderBindings into typed defineForm-shape
- * TypeScript at the form's bindings.ts file. Low-confidence entries
- * route to a `todos` map for human review.
- * 
- * Batched at 10 fields per Claude call. The bulky context — rule-library
- * spec, full field inventory, available facts/decisions schema — is sent
- * as a cache-controlled content block, so every batch after the first
- * hits the prompt cache and only pays for the per-batch field list + the
- * tool response. Concurrency cap (3 in flight) smooths the TPM curve so
- * long forms don't burst-fail rate limits.
+ * emit its params plus a self-rated confidence. renderBindings translates
+ * the classifier's structured output into typed defineForm-shape
+ * TypeScript in the form's bindings.ts file. Low-confidence entries route
+ * to a `todos` map for human review.
+ *
+ * Batched at 10 fields per Claude call. The bulky context (rule-library
+ * spec, full field inventory, available facts/decisions schema) is sent
+ * as a cache-controlled content block. Every batch after the first hits
+ * the prompt cache and only pays for the per-batch field list and the
+ * tool response. A concurrency cap (3 in flight) smooths the TPM curve so
+ * long forms do not burst-fail rate limits.
  */
 
 import Anthropic from "@anthropic-ai/sdk";
@@ -29,10 +29,9 @@ const MAX_TOKENS = 16000;
 const FIELDS_PER_BATCH = 10;
 const CONCURRENCY = 3;
 /*
- * Cap how many lookup_form_fields calls the classifier can make per batch
- * before we force it to commit to a final emit_bindings. Protects against
- * runaway loops if the model gets confused. In practice 1-2 lookups per
- * batch is the realistic ceiling.
+ * Cap on lookup_form_fields calls per batch before we force a final
+ * emit_bindings. Protects against runaway loops when the model gets
+ * confused. In practice 1-2 lookups per batch is the realistic ceiling.
  */
 const MAX_LOOKUPS_PER_BATCH = 5;
 
@@ -59,11 +58,11 @@ export interface ClassifiedBinding {
   /**
    * Self-rated confidence in this binding.
    *   high   — label + data path are both unambiguous; bind directly.
-   *   medium — label is clear but I'm guessing about which fact/slot to use.
-   *   low    — label is ambiguous OR I picked `unsupported` because no path fits.
-   * The renderer routes anything below the workflow's minConfidence floor to
-   * a `todos` map (with rationale) so a human reviews them before the binding
-   * ships.
+   *   medium — label is clear but the fact/slot choice is a guess.
+   *   low    — label is ambiguous, OR `unsupported` because no path fits.
+   * The renderer routes anything below the workflow's minConfidence floor
+   * to a `todos` map (with rationale) so a human reviews it before the
+   * binding ships.
    */
   confidence: Confidence;
 }
@@ -90,8 +89,8 @@ export interface ClassifyBindingsOpts {
   fields: FieldInventory[];
   /**
    * Optional per-field retrieved IRS-instruction blocks. When present,
-   *  each batch's prompt embeds the relevant blocks alongside each field.
-   *  When absent, the classifier runs purely on field-label heuristics. 
+   * each batch's prompt embeds the relevant blocks alongside each field.
+   * When absent, the classifier runs purely on field-label heuristics.
    */
   retrievedContext?: RetrievedFieldContext[];
 }
@@ -266,9 +265,9 @@ export async function classifyBindings(
   const client = new Anthropic({ apiKey });
 
   /*
-   * Load the catalog index once. Excludes the form being bound. The
-   * classifier can ask for any form's fields via `lookup_form_fields`;
-   * we resolve the request out of this in-memory index.
+   * Load the catalog index once; it excludes the form being bound. The
+   * classifier asks for any form's fields via `lookup_form_fields`, and
+   * we resolve the request from this in-memory index.
    */
   const catalogIndex = await loadCatalogIndex(opts.formId);
   console.log(
@@ -276,7 +275,7 @@ export async function classifyBindings(
   );
 
   /*
-   * The full inventory is cached prefix context — every batch's prompt
+   * The full inventory is cached prefix context. Every batch's prompt
    * references it the same way, so prompt caching pays off heavily.
    */
   const inventoryBlock = buildInventoryBlock(opts, catalogIndex);
@@ -287,7 +286,6 @@ export async function classifyBindings(
     contextByFieldId.set(c.fieldId, c);
   }
 
-  // Slice fields into batches.
   const batches: FieldInventory[][] = [];
   for (let i = 0; i < opts.fields.length; i += FIELDS_PER_BATCH) {
     batches.push(opts.fields.slice(i, i + FIELDS_PER_BATCH));
@@ -319,7 +317,6 @@ export async function classifyBindings(
         contextByFieldId,
         catalogIndex,
       );
-      // Aggregate.
       for (const b of result.bindings) allBindings.push(b);
       if (result.mustFile && !mustFile) mustFile = result.mustFile;
       usage.input_tokens += result.usage.input_tokens;
@@ -459,11 +456,12 @@ If any field references a different form (e.g. "from Form 1040 line 11b"), call 
   ];
 
   /*
-   * Multi-turn conversation. Initial message contains the cached inventory
-   * block + the per-batch user text. On each tool_use response from Claude:
+   * Multi-turn conversation. The initial message contains the cached
+   * inventory block + the per-batch user text. On each tool_use response
+   * from Claude:
    *   - lookup_form_fields → execute, append tool_result, continue
-   *   - emit_bindings → that's our final answer; break
-   * Cap at MAX_LOOKUPS_PER_BATCH to bound the worst case.
+   *   - emit_bindings → final answer; break
+   * MAX_LOOKUPS_PER_BATCH bounds the worst case.
    */
   const messages: Anthropic.MessageParam[] = [
     {
@@ -523,7 +521,7 @@ If any field references a different form (e.g. "from Form 1040 line 11b"), call 
       );
     }
 
-    // If the model emitted the final answer, capture and stop.
+    // When the model emits the final answer, capture it and stop.
     const emit = toolUses.find((t) => t.name === "emit_bindings");
     if (emit) {
       const raw = emit.input as {
@@ -547,8 +545,8 @@ If any field references a different form (e.g. "from Form 1040 line 11b"), call 
     }
 
     /*
-     * Otherwise we got lookup_form_fields calls — execute each, append
-     * assistant + tool_result blocks, loop.
+     * Otherwise we got lookup_form_fields calls. Execute each, append
+     * assistant + tool_result blocks, and loop.
      */
     messages.push({ role: "assistant", content: response.content });
     const toolResults: Anthropic.ToolResultBlockParam[] = [];
@@ -604,15 +602,15 @@ If any field references a different form (e.g. "from Form 1040 line 11b"), call 
       ruleName: b.rule_name,
       params: b.params,
       /*
-       * Default when the AI omits rationale despite the tool schema marking
-       * it required (intermittent failure mode). Keeps the workflow's
-       * input-validation step from failing the whole bind over 1-3
-       * missing strings out of ~170.
+       * Default for when the AI omits rationale, although the tool schema
+       * marks it required (intermittent failure mode). This keeps the
+       * workflow's input-validation step from failing the whole bind over
+       * 1-3 missing strings out of ~170.
        */
       rationale: b.rationale ?? `(no rationale provided — rule=${b.rule_name})`,
       /*
-       * Same defensive default: if the AI omits confidence, mark "low" so
-       * a human reviews instead of trusting an unrated binding.
+       * Same defensive default: when the AI omits confidence, mark "low"
+       * so a human reviews it instead of trusting an unrated binding.
        */
       confidence: b.confidence ?? "low",
     })),
@@ -628,9 +626,8 @@ If any field references a different form (e.g. "from Form 1040 line 11b"), call 
 
 /*
  * One per-batch field entry: field metadata + the retrieved IRS blocks
- * for that field (when retrieval was run). Blocks are trimmed to a
- * manageable length so a 10-field batch doesn't blow past the per-batch
- * uncached token budget.
+ * for that field (when retrieval ran). Blocks are trimmed so a 10-field
+ * batch stays inside the per-batch uncached token budget.
  */
 const MAX_BLOCK_CHARS = 800;
 function renderFieldEntry(
@@ -654,9 +651,9 @@ function renderFieldEntry(
 }
 
 /*
- * Renders the full field inventory as a cached prefix block. Lets each
- * batch reference any field (for fromFields cross-references) while only
- * paying the prefix tokens once.
+ * Renders the full field inventory as a cached prefix block. Each batch
+ * can then reference any field (for fromFields cross-references) while
+ * the prefix tokens are paid once.
  */
 function buildInventoryBlock(
   opts: ClassifyBindingsOpts,
@@ -668,8 +665,8 @@ function buildInventoryBlock(
   );
   /*
    * Other forms available via lookup_form_fields. The classifier only
-   * sees a roster here (formId + title + jurisdiction); detailed fields
-   * come back when it actually calls lookup_form_fields(formId).
+   * sees a roster here (formId + title + jurisdiction). Detailed fields
+   * come back when it calls lookup_form_fields(formId).
    */
   const otherForms = Array.from(catalogIndex.values()).map(
     (f) =>

@@ -1,12 +1,12 @@
 /*
- * Filing Status panel rollup — walks evaluated forms, groups every field by
- * its `category`, and tallies complete vs. pending.
- * 
- * Each evaluated form contributes its fields only when `mustFile` is ok and
- * true. Forms that aren't required for this taxpayer simply don't show up
- * in the rollup. Forms whose mustFile is blocked (we don't yet know if they
- * should be filed) also don't contribute fields, but their underlying
- * must-file blocker still surfaces via pendingDecisions on the case state.
+ * Filing Status panel rollup. Walks the evaluated forms, groups every
+ * field by its `category`, and tallies complete vs. pending.
+ *
+ * A form contributes its fields only when `mustFile` is ok and true.
+ * Forms the taxpayer does not need simply do not appear in the rollup.
+ * Forms with a blocked mustFile (filing requirement still unknown) also
+ * contribute no fields, but their must-file blocker still surfaces via
+ * pendingDecisions on the case state.
  */
 
 import type {
@@ -33,16 +33,17 @@ const CATEGORY_LABEL: Record<Category, string> = {
 };
 
 export interface FilingStatusItem {
-  /** Stable id — the field's `fieldId` */
+  /** Stable id: the field's `fieldId`. */
   id: string;
   /**
-   * Form this item belongs to, e.g. "form-1040". Empty when the item isn't
-   *  tied to a specific form (no such cases today, kept for future expansion). 
+   * Form this item belongs to, for example "form-1040". Empty when the
+   * item is not tied to a specific form. No such cases exist today; the
+   * option stays for future expansion.
    */
   formId: string;
   label: string;
   state: "complete" | "pending";
-  /** When pending, why — typically the field's blocked reason. */
+  /** When pending, why. Typically the field's blocked reason. */
   reason?: string;
   /** When pending, the decision/fact keys the engine is waiting on. */
   missingDecisionKey?: string;
@@ -54,7 +55,7 @@ export interface FilingStatusCategory {
   label: string;
   /** Total items the rollup considered for this category. */
   total: number;
-  /** Items currently in `complete` state. completed/total = bar fill. */
+  /** Items in `complete` state. completed/total drives the bar fill. */
   completed: number;
   items: FilingStatusItem[];
 }
@@ -67,9 +68,9 @@ export interface FilingStatus {
 /**
  * Produce the FilingStatus tree from a set of evaluated forms.
  *
- * Forms whose mustFile is blocked or false are skipped — their fields don't
- * count toward any category total. That keeps the bar honest about what's
- * actually being worked on.
+ * Forms whose mustFile is blocked or false are skipped. Their fields do
+ * not count toward any category total. That keeps the bar honest about
+ * the work actually in progress.
  */
 export function categorizeFormProgress(
   forms: readonly EvaluatedForm<AnyFormField>[],

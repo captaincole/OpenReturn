@@ -1,7 +1,7 @@
 /*
- * Thin wrapper around the ingestFormWorkflow Mastra workflow: extract a
- * blank PDF's AcroForm widgets and AI-label them into a catalog.json.
- * 
+ * Thin wrapper around the ingestFormWorkflow Mastra workflow. Extracts a
+ * blank PDF's AcroForm widgets and AI-labels them into a catalog.json.
+ *
  * Writes the classified catalog to
  *   apps/agent/forms/<jurisdiction>/<short>/catalog.json
  * where <short> is the formId with "form-" stripped.
@@ -48,9 +48,9 @@ function parseCmdArgs(argv: string[]): Args {
 }
 
 /*
- * Co-locate the catalog with its source PDF: each form has its own folder
- * under forms/<jurisdiction>/<short>/ containing blank.pdf + catalog.json
- * (and the instructions sidecar, when ingested).
+ * Co-locate the catalog with its source PDF. Each form has its own
+ * folder under forms/<jurisdiction>/<short>/ with blank.pdf +
+ * catalog.json, plus the instructions sidecar when ingested.
  */
 function defaultOutputDir(jurisdiction: string, formId: string): string {
   const shortName = formId.replace(/^form-/, "");

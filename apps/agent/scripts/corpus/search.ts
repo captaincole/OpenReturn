@@ -1,6 +1,7 @@
 /*
- * Invoke the search-ref-docs Mastra tool directly — same code path the review
- * workflow uses during a review. Lets you eyeball what it'd see for a query.
+ * Invoke the search-ref-docs Mastra tool directly. The tool wraps the
+ * same hybridSearchRefDocs retrieval the review workflow runs. Use it
+ * to eyeball what a query returns.
  */
 
 import { parseArgs } from "node:util";

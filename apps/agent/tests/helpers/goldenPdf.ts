@@ -1,14 +1,13 @@
 /*
- * Read filled values out of a "golden" PDF — a CPA-completed form like
+ * Read filled values out of a "golden" PDF — a CPA-completed form such as
  * Alex-1040-Golden.pdf — keyed by the full AcroForm widget name. The
  * scenario runner uses this as the source of truth: our render must
- * produce the same value at the same widget for every assertion.
- * 
- * This is fundamentally different from the per-fieldId fixture assertions
- * in expected.ts. Those trust the catalog's `fieldId → pdfWidgetName`
- * mapping, so a mislabeled catalog passes even when the rendered PDF
- * shows everything in the wrong place. Golden-widget comparison
- * short-circuits the catalog entirely.
+ * produce the same value at the same widget.
+ *
+ * This differs from the per-fieldId fixture assertions in expected.ts.
+ * Those trust the catalog's `fieldId → pdfWidgetName` mapping, so a
+ * mislabeled catalog passes even when the rendered PDF puts values in
+ * the wrong places. Golden-widget comparison bypasses the catalog.
  */
 
 import { promises as fs } from "node:fs";
@@ -28,7 +27,7 @@ export interface GoldenValue {
   /**
    * Text fields: the rendered string ("" when blank).
    * Checkboxes: true when checked, false when not.
-   * Radio groups: the selected option label string, or null when nothing is selected.
+   * Radio groups: the selected option label, or null when none is selected.
    */
   value: string | boolean | null;
 }
@@ -72,9 +71,10 @@ export async function readGoldenPdfValues(
 }
 
 /**
- * Normalize text values for comparison. Empty strings, undefined, and null
- * all mean "blank"; whitespace differences should pass; SSN/phone we
- * compare digits-only because the renderer strips separators by convention.
+ * Normalize text values for comparison. Empty strings, undefined, and
+ * null all mean "blank". Strings compare trimmed, so edge whitespace
+ * passes. No further normalization: the renderer already strips SSN/phone
+ * separators, so those values match digit-only golden entries as-is.
  */
 export function normalizeForCompare(v: unknown): string {
   if (v === null || v === undefined) return "";

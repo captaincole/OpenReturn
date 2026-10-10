@@ -1,17 +1,17 @@
 /*
- * Parser for the IRS Pub 17 Tax Table (publication 17, "Your Federal Income
- * Tax", section "2025 Tax Table"). The IRS publishes the same numbers as
- * the i1040gi.pdf Tax Table but in actual HTML tables — much easier to
- * parse reliably than positional PDF text.
- * 
- * The page contains MANY tables (standard-deduction worksheets, EIC tables,
- * etc.). We recognize a "tax table chunk" by its shape:
+ * Parser for the IRS Pub 17 Tax Table (publication 17, "Your Federal
+ * Income Tax", section "2025 Tax Table"). The IRS publishes the same
+ * numbers as the i1040gi.pdf Tax Table, but in actual HTML tables. These
+ * parse far more reliably than positional PDF text.
+ *
+ * The page contains MANY tables (standard-deduction worksheets, EIC
+ * tables, etc.). We recognize a "tax table chunk" by its shape:
  *   - 6 numeric columns: low, high, single, mfj, mfs, hoh
  *   - thead text mentions "If line 15" or "taxable income" + "Your tax is"
- * 
- * The full tax table is split across many of these chunks (one per $1000 of
- * income, mirroring the PDF's page layout). We concatenate them in document
- * order, then validate coverage from 0 to $100,000 with no gaps.
+ *
+ * The full tax table is split across many of these chunks (one per $1000
+ * of income, which mirrors the PDF's page layout). We concatenate them in
+ * document order, then validate coverage from 0 to $100,000 with no gaps.
  */
 
 import { load, type CheerioAPI } from "cheerio";
@@ -55,8 +55,8 @@ export function parseTaxTable(html: string): ParseResult {
     const $table = $(el);
     if (!looksLikeTaxTable($, $table)) {
       /*
-       * Don't record a per-table reason for everything that isn't a tax
-       * table — the page has dozens of unrelated tables.
+       * Do not record a per-table reason for every non-tax table; the
+       * page has dozens of unrelated tables.
        */
       return;
     }
@@ -84,8 +84,8 @@ function looksLikeTaxTable($: CheerioAPI, $table: ReturnType<CheerioAPI>): boole
   if (cluesMatched.length < 2) return false;
 
   /*
-   * Confirm body shape: at least one row with exactly 6 td's whose contents
-   * all parse as non-negative integers (possibly comma-formatted).
+   * Confirm the body shape: the first row has exactly 6 td's whose
+   * contents all parse as non-negative integers (comma-formatted or not).
    */
   const $firstBodyRow = $table.find("tbody > tr").first();
   if ($firstBodyRow.length === 0) return false;
@@ -110,7 +110,7 @@ function extractRows(
     const nums = [0, 1, 2, 3, 4, 5].map((i) => parseIntCell($(cells[i]).text()));
     if (nums.some((n) => n === null)) return;
     const [low, high, single, mfj, mfs, hoh] = nums as number[];
-    if (low >= high) return; // malformed range — skip
+    if (low >= high) return; // Malformed range; skip.
     rows.push({ low, high, single, mfj, mfs, hoh });
   });
   return { rows };
@@ -137,10 +137,11 @@ export interface CoverageReport {
 }
 
 /**
- * Asserts the extracted rows cover [0, maxIncome) contiguously with no gaps
- * or overlaps. The IRS table covers 0..100,000 in $50 increments for the
- * higher bands and $25/$10/$5 increments for the lowest band — but the
- * one invariant is "row[i].high === row[i+1].low" all the way down.
+ * Reports whether the extracted rows cover [0, maxIncome) contiguously,
+ * with no gaps or overlaps. The IRS table covers 0..100,000 in $50
+ * increments for the higher bands and $25/$10/$5 increments for the
+ * lowest band. The one invariant is "row[i].high === row[i+1].low" all
+ * the way down.
  */
 export function validateCoverage(rows: TaxTableRow[]): CoverageReport {
   if (rows.length === 0) {

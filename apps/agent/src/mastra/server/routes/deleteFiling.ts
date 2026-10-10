@@ -6,21 +6,23 @@ import { luca } from "../../agents/luca";
 
 /*
  * DELETE /app/filings/:filingId
- * 
+ *
  * Owner-only filing deletion. Cascades:
  *   - filings ON DELETE CASCADE (libsql app DB) → filing_members,
- *     tax_facts, ai_decisions, open_questions,
- *     user_documents, requested_actions, review_runs, review_run_steps.
- *     Every domain row carries a filing_id with cascade, so a single
- *     DELETE on filings is enough at the SQL level.
- *   - Blob files under .data/documents/{filingId}/ are NOT cascaded by the
- *     DB — we remove the directory explicitly first.
- *   - Mastra thread keyed by `${userId}::${taxYear}` is also not FK-tied to
- *     filings — we delete it via Memory.deleteThread so the next filing the
- *     user creates for that year starts with a clean chat.
- * 
+ *     tax_facts, ai_decisions, open_questions, user_documents,
+ *     requested_actions, review_runs, review_run_steps. Every domain row
+ *     carries a filing_id with cascade, so a single DELETE on filings is
+ *     enough at the SQL level.
+ *   - The DB does NOT cascade blob files under
+ *     .data/documents/{filingId}/; we remove the directory explicitly
+ *     first.
+ *   - The Mastra thread keyed by `${userId}::${taxYear}` is also not
+ *     FK-tied to filings; we delete it via Memory.deleteThread so the
+ *     next filing the user creates for that year starts with a clean
+ *     chat.
+ *
  * Errors:
- *   401 — no JWT / unverified caller
+ *   401 — no resolved instance owner on the request
  *   403 — caller is not the filing's owner (or no such filing)
  */
 
@@ -43,14 +45,14 @@ export const deleteFilingRoute = registerApiRoute(
       if (!filingId) return c.json({ error: "missing filingId" }, 400);
 
       /*
-       * Ownership check — with RLS gone this explicit gate is the only
-       * thing standing between the caller and someone else's filing.
+       * Ownership check. With RLS gone, this explicit gate is the only
+       * thing between the caller and someone else's filing.
        */
       const ownership = await getMembership(filingId, callerId, "owner");
       if (!ownership) return c.json({ error: "forbidden" }, 403);
       const taxYear = ownership.taxYear;
 
-      // 1. Blob files — remove the filing's whole directory.
+      // 1. Blob files: remove the filing's whole directory.
       await deleteFilingBlobs(filingId);
 
       // 2. The filings row. FK cascade does the rest of the domain cleanup.
@@ -58,8 +60,9 @@ export const deleteFilingRoute = registerApiRoute(
 
       /*
        * 3. Mastra thread. The id format must match what the web app uses
-       * when streaming (apps/web/lib/returns.ts:threadIdFor). Quietly
-       * continue if Memory isn't configured or the thread is already gone.
+       * when streaming (apps/web/lib/returns.ts:threadIdFor). Continue
+       * quietly if Memory is not configured or the thread is already
+       * gone.
        */
       try {
         const memory = await luca.getMemory();
@@ -67,7 +70,7 @@ export const deleteFilingRoute = registerApiRoute(
           await memory.deleteThread(threadIdFor(callerId, taxYear));
         }
       } catch {
-        // No-op — thread cleanup is best-effort.
+        // No-op; thread cleanup is best-effort.
       }
 
       return c.json({ ok: true, filingId, taxYear });

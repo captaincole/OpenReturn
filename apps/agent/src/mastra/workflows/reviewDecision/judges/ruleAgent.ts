@@ -8,11 +8,12 @@ import { modelFor } from "../../../models";
  * the evidence bundle, and the assessed risk tier. Returns a discriminated
  * union: either a final verdict (with citations) or a request for more
  * evidence (with suggested next-iteration queries).
- * 
+ *
  * Tools: cite-ref-docs only. Retrieval is the gather step's job; the rule
- * agent receives the retrieved blocks already and only needs cite-ref-docs
- * to verify exact quotes for citations. (Restricting tools here prevents
- * the agent from inventing a parallel search and complicating training data.)
+ * agent already receives the retrieved blocks and needs cite-ref-docs only
+ * to verify exact quotes for citations. (The restricted toolset prevents
+ * the agent from inventing a parallel search and complicating training
+ * data.)
  */
 
 const baseInstructions = `You are the verdict-or-loop decider for the review-decision workflow. You see one decision the tax agent recorded, the evidence gathered for it (taxpayer facts + retrieved IRS passages), and a risk-tier assessment.

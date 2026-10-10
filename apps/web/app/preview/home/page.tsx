@@ -1,14 +1,14 @@
 "use client";
 
 /*
- * Home-home — person-scope landing page. Above any single return.
- * No chat (no active return to chat about). Full-width dashboard with:
+ * Home-home mock — the person-scope landing page, above any single
+ * return. No chat (no active return to chat about). Full-width dashboard:
  *   1. Your returns           — all in-progress + filed returns
  *   2. Continue with          — workflow entry points (new return, amend, plan)
  *   3. Your tax picture       — lifetime visualizations (income, refund, etc.)
- * 
- * Mock data only. Brand mark + return cards link into /preview (the
- * return-scoped view) to demonstrate the navigation model.
+ *
+ * Mock data only. The return cards link into /preview (the return-scoped
+ * view) to demonstrate the navigation model.
  */
 
 import Link from "next/link";

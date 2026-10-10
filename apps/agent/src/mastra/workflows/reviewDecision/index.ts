@@ -25,8 +25,8 @@ import type { Scope } from "../../db/appDb";
 /*
  * ---------------------------------------------------------------------------
  * Loop body — gather → assess → rule. Wrapped as a child workflow so the
- * parent can `.dountil()` it. Each iteration's input is the previous
- * iteration's output (LoopCarrier in, LoopCarrier out).
+ * parent can `.dountil()` it. Each iteration takes the previous iteration's
+ * output as input (LoopCarrier in, LoopCarrier out).
  * ---------------------------------------------------------------------------
  */
 
@@ -58,9 +58,9 @@ export const reviewDecisionWorkflow = createWorkflow({
   .then(initStep)
   .dountil(reviewLoopWorkflow, async ({ inputData, iterationCount }) => {
     /*
-     * Stop when rule committed to a verdict OR we've burned 3 iterations.
+     * Stop when rule committed to a verdict OR after 3 iterations.
      * ruleStep bumps `iteration` to N+1 only when it returned need_more, so
-     * checking `iterationCount` against 3 (Mastra-supplied count) is the
+     * the Mastra-supplied `iterationCount` checked against 3 is the
      * canonical hard stop.
      */
     return inputData.ruleOutput?.kind === "verdict" || iterationCount >= 3;
@@ -70,9 +70,9 @@ export const reviewDecisionWorkflow = createWorkflow({
 
 /*
  * ---------------------------------------------------------------------------
- * Public wrapper. Runs the workflow and returns the terminal output. Wraps
- * errors so a failed review row gets marked 'failed' on the way out — Luca
- * always sees a definitive state for every record-ai-decision call.
+ * Public wrapper. Runs the workflow and returns the terminal output. It
+ * catches errors and marks the failed review row 'failed' on the way out,
+ * so Luca always sees a definitive state for every record-ai-decision call.
  * ---------------------------------------------------------------------------
  */
 
@@ -109,10 +109,10 @@ export async function reviewDecision(
     );
   } catch (err) {
     /*
-     * Best-effort failure recording: stamp the decision row + the review_runs
-     * row so Luca (and the trace log) see why this fell over. We don't have
-     * the reviewRunId reliably here (init may have failed), so we only stamp
-     * the ai_decisions row in that case.
+     * Best-effort failure recording: stamp the decision row and the
+     * review_runs row so Luca (and the trace log) see why the run failed.
+     * init may have failed, so the reviewRunId is not reliably available
+     * here; in that case we stamp only the ai_decisions row.
      */
     const reason = err instanceof Error ? err.message : String(err);
     try {
@@ -127,8 +127,8 @@ export async function reviewDecision(
       /* swallow — the original error is what matters */
     }
     /*
-     * If init succeeded and we have a recent run, mark it failed too. Best
-     * effort; not all error paths give us the runId.
+     * If the error carries a runId, mark that run failed too. Best effort;
+     * most error paths do not attach one.
      */
     const runId = (err as { reviewRunId?: string }).reviewRunId;
     if (runId) {

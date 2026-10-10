@@ -1,17 +1,13 @@
 /*
  * Alejandro Reyes — Schedule CA (540) expected results.
- * 
+ *
  * Ground truth: `docs/Alejandro-ScheduleCA-Golden.pdf`. Alejandro has no
- * CA-specific income or deduction adjustments — every Schedule CA col B
- * (subtractions) and col C (additions) entry is zero. Col A simply
- * echoes the corresponding federal Form 1040 line. The only non-trivial
- * computation is Part II line 30, which selects between the CA standard
- * deduction ($5,706 for single) and itemized total — Alejandro takes
- * standard, so $5,706 lands there.
- * 
- * Schedule CA bindings haven't been generated yet — wiring this file
- * into the alejandro scenario's forms[] is gated on bindings landing.
- * Until then this file documents the target.
+ * CA-specific income or deduction adjustments. Every Schedule CA col B
+ * (subtractions) and col C (additions) entry is zero. Col A echoes the
+ * corresponding federal Form 1040 line. The only non-trivial computation
+ * is Part II line 30, which selects between the CA standard deduction
+ * ($5,706 for single) and the itemized total. Alejandro takes standard,
+ * so $5,706 lands there.
  */
 
 import type { ExpectedResults } from "../../types.js";
@@ -20,7 +16,7 @@ export const alejandroScheduleCaExpected: ExpectedResults = {
   engineFields: {
     /*
      * ─── Part I, Section A — Income from federal Form 1040 ──────────
-     * Col A is a pure federal echo; col B/C are zero (no CA adjustments).
+     * Col A is a pure federal echo. Col B/C are zero (no CA adjustments).
      */
     "schedule-ca.0.line.1a_federal": 100000, // W-2 wages
     "schedule-ca.0.line.1a_subtractions": 0,
@@ -49,8 +45,8 @@ export const alejandroScheduleCaExpected: ExpectedResults = {
 
     /*
      * ─── Part I, Section C (Schedule 1 adjustments) ─────────────────
-     * Alejandro has no above-the-line adjustments. Line 27 (final Part I
-     * total) flows to Form 540 line 14 (col B) and line 16 (col C).
+     * Alejandro has no above-the-line adjustments. Line 27 (the final
+     * Part I total) flows to Form 540 line 14 (col B) and line 16 (col C).
      */
     "schedule-ca.3.line.c27_federal": 102935,
     "schedule-ca.3.line.c27_subtractions": 0,
@@ -58,28 +54,27 @@ export const alejandroScheduleCaExpected: ExpectedResults = {
 
     /*
      * ─── Part II — Adjustments to Federal Itemized Deductions ───────
-     * Alejandro takes the standard deduction, so every itemized-detail
-     * line is zero and line 30 lands on the CA single std deduction.
+     * Alejandro takes the standard deduction. Every itemized-detail line
+     * is zero, and line 30 lands on the CA single standard deduction.
      */
     "schedule-ca.5.page2.total_itemized_30_standard_or_itemized": 5706,
   },
 
   renderedText: {
-    // Header — Schedule CA prints "First Last" as a single combined name.
+    // Header: Schedule CA prints "First Last" as one combined name.
     "schedule-ca.0.header.name": "Alejandro Reyes",
     /*
-     * SSN renders as bare digits via the FilingInfo SSN brand (same
-     * pattern as Form 540 page-1 header.ssn). The Schedule CA widget has
-     * maxLength=11 so it could accept dashes, but a formatter override
-     * would be needed; deferred until binding generation surfaces the
-     * need.
+     * SSN renders as bare digits via the FilingInfo SSN brand, the same
+     * pattern as Form 540 page-1 header.ssn. The Schedule CA widget has
+     * maxLength=11, so it could hold dashes, but that needs a formatter
+     * override. Deferred until a real need surfaces.
      */
     "schedule-ca.0.header.ssn": "234567890",
   },
 
   /*
    * The "did you NOT itemize for federal but will itemize for California"
-   * checkbox — Alejandro itemizes neither federal nor CA, so this stays
+   * checkbox. Alejandro itemizes neither federal nor CA, so it stays
    * unchecked.
    */
   renderedBlank: [

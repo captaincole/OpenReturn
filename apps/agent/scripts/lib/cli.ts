@@ -1,14 +1,15 @@
 /*
- * Tiny subcommand dispatcher shared by the scripts/ CLIs (corpus, …).
- * 
- * Each command module exports a `Command`: name, one-line summary, its
- * options (for generated help), and a run(argv) that receives only the args
- * after the command name. The dispatcher handles `--help`/`-h` at both
- * levels so every option is discoverable without reading source.
+ * Tiny subcommand dispatcher shared by the scripts/ CLIs (corpus,
+ * form-engine).
+ *
+ * Each command module exports a `Command`: name, one-line summary,
+ * options (for generated help), and a run(argv) that receives only the
+ * args after the command name. The dispatcher handles `--help`/`-h` at
+ * both levels, so every option is discoverable without reading source.
  */
 
 export interface CliOption {
-  /** e.g. `--strict` or `--mode auto|fts|vector|hybrid` */
+  /** e.g. `--strict` or `--mode fts|vector|hybrid` */
   flag: string;
   desc: string;
 }
@@ -23,9 +24,9 @@ export interface Command {
 }
 
 interface Cli {
-  /** Short CLI name used in error prefixes, e.g. "corpus". */
+  // Short CLI name used in error prefixes, e.g. "corpus".
   name: string;
-  /** How the user invokes this from the repo root, e.g. `npm run corpus --` */
+  // How the user invokes this from the repo root, e.g. `npm run corpus --`.
   bin: string;
   description: string;
   commands: Command[];

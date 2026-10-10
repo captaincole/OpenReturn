@@ -1,19 +1,19 @@
 /*
  * Alejandro scenario bundle.
- * 
+ *
  * Alejandro is the next step up from Alex: still a single CA filer with
  * one W-2, but with investment income (qualified dividends + net long-
- * term capital gain from stock sales). This forces:
- *   - Federal 1040 line 7a from Schedule D (needs new bindings)
+ * term capital gain from stock sales). This exercises:
+ *   - Federal 1040 line 7a from Schedule D line 16
  *   - Federal 1040 line 16 via the Qualified Dividends and Capital Gain
- *     Tax Worksheet (current binding does plain tax-table lookup)
+ *     Tax Worksheet, not a plain tax-table lookup
  *   - Schedule CA col A federal echoes (col B/C all zero — no adjustments)
- * 
+ *
  * Federal: taxable income $87,185 → tax $13,916 → $584 refund.
  * California: taxable income $97,229 → tax $5,478 → $175 refund.
- * 
- * Run just this scenario:
- *   npm run test:alejandro
+ *
+ * Run only this scenario:
+ *   npm test -- alejandro
  * Run all scenarios:
  *   npm test
  */
@@ -39,12 +39,12 @@ export const alejandroScenario: Scenario = {
    * Forms in dependency order: 8949 → Schedule D → 1040 → Schedule CA →
    * 540. The registry imposes the same order at the engine level, so
    * this listing matches the fixpoint evaluation sequence.
-   * 
-   * Each form pairs with the CPA-completed golden PDF in docs/. The
-   * runner reads every filled widget from the golden and asserts our
-   * render matches — catches anything the explicit engineFields /
-   * renderedText assertions miss (stray placeholder text, missing
-   * bindings, wrong widget mappings).
+   *
+   * Each form pairs with a CPA-completed golden PDF in docs/. The runner
+   * reads every filled widget from the golden and asserts that our
+   * render matches. This catches what the explicit engineFields /
+   * renderedText assertions miss: stray placeholder text, missing
+   * bindings, wrong widget mappings.
    */
   forms: [
     {

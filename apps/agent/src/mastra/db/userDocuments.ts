@@ -13,17 +13,20 @@ import {
 
 /*
  * Storage helper for user-owned documents (drafts, finals, uploads).
- * 
- * Two stores work in tandem:
- *   - user_documents (metadata, libsql app.db) — what files exist, when, what kind.
- *   - .data/documents/ (bytes, local filesystem via blobStore) — the actual
- *     PDF/JSON/etc. Callers must have verified the user's filing access
- *     (requireUserContext) before calling; there is no storage-layer ACL.
- * 
+ *
+ * Two stores work together:
+ *   - user_documents (metadata, libsql app.db): which files exist, when,
+ *     and what kind.
+ *   - .data/documents/ (bytes, local filesystem via blobStore): the
+ *     actual PDF/JSON/etc.
+ *
+ * Callers must verify the user's filing access (requireUserContext)
+ * before they call in; there is no storage-layer ACL.
+ *
  * Storage paths are `{filingId}/{category}/{slug}-{ulid}.{ext}`. The ULID
- * suffix avoids collisions when generate-tax-documents runs multiple times
- * (each run creates new rows + new files; old chat-message links keep
- * resolving to the version they were generated against).
+ * suffix avoids collisions when generate-tax-documents runs multiple
+ * times. Each run creates new rows and new files; old chat-message links
+ * keep resolving to the version they were generated against.
  */
 
 export type Category = "drafts" | "finals" | "uploads";
@@ -59,9 +62,10 @@ function rowToDocument(r: Row): UserDocumentRow {
 }
 
 /*
- * Crockford-base32 ULID generator (lexicographically sortable, no external dep).
- * Time component is 48-bit ms; randomness is 80-bit. Good enough for filename
- * disambiguation at our scale.
+ * Crockford-base32 ULID generator: lexicographically sortable, no
+ * external dependency. The time component is 48-bit milliseconds; the
+ * random part is 80-bit. Sufficient for filename disambiguation at our
+ * scale.
  */
 const ULID_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 function ulid(): string {
@@ -111,13 +115,14 @@ export interface CreateDocumentResult {
 }
 
 /*
- * Write bytes + insert metadata row in one operation. Returns the row's UUID
- * so callers can build the public download path `/documents/{id}`.
- * 
- * The bytes are written BEFORE the row is inserted; if the row insert fails
- * we end up with an orphan file on disk (cheap, will get cleaned up by a
- * future GC pass). The reverse ordering (insert first, then write) leaves a
- * row pointing at non-existent bytes which is worse — broken download links.
+ * Write the bytes and insert the metadata row in one operation. Returns
+ * the row's UUID so callers can build the public download path
+ * `/documents/{id}`.
+ *
+ * The bytes are written BEFORE the row insert. A failed insert leaves an
+ * orphan file on disk; that is cheap, and a future GC pass can remove it.
+ * The reverse order leaves a row that points at missing bytes, which is
+ * worse: broken download links.
  */
 export async function createDocument(
   input: CreateDocumentInput,
@@ -195,9 +200,9 @@ export async function listDocuments(
   }
   if (opts.taxYear !== undefined) {
     /*
-     * metadata.taxYear is stored as a JSON number; json_extract returns it
-     * numerically, so compare against the number (the old PostgREST ->> path
-     * compared text — SQLite lets us skip the stringify).
+     * metadata.taxYear is stored as a JSON number; json_extract returns
+     * it numerically, so compare against the number. The old PostgREST
+     * ->> path compared text; SQLite lets us skip the stringify.
      */
     conds.push(`json_extract(metadata, '$.taxYear') = ?`);
     args.push(opts.taxYear);
