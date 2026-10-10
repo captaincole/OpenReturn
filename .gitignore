@@ -15,3 +15,6 @@ apps/agent/src/mastra/public/drafts/
 .claude/
 .vercel
 supabase/
+
+# Claude's local scratch space — temp artifacts, screenshots, backups. Never committed.
+.scratch/

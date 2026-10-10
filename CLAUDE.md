@@ -383,6 +383,10 @@ Mastra ships its reference docs *inside* the installed package — always check 
 
 Rule of thumb: grep the bundled docs first (`Grep pattern path=node_modules/@mastra/core/dist/docs`), then fall back to `.d.ts` files, then to `mastra.ai` docs online. The bundled copy is pinned to the installed version, so it can't drift from what's actually running.
 
+## The `.scratch/` directory — Claude's workspace
+
+All temporary work Claude produces or needs to save locally goes in **`.scratch/`** at the repo root — screenshots, verification artifacts, backups, one-off scripts, analysis output. It is gitignored and never committed. Make subfolders freely (e.g. `.scratch/readme-run-screenshots/`). Don't scatter temp files elsewhere in the repo, and don't use system temp dirs for anything worth keeping between sessions.
+
 ## What belongs in CLAUDE.md vs memory
 
 - Architecture, file layout, commands, design principles → **this file** (checked in, visible to anyone).
