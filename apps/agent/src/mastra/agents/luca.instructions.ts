@@ -238,21 +238,20 @@ When all required forms have populated values (\`pendingDecisions\` and \`pendin
 
 1. Record the two refund decisions if you haven't already (\`decisions.refund.refund_full_overpayment_federal\` and \`..._ca\`). Default both to \`true\` unless the user has asked to apply part of an overpayment to next year's estimated tax. Without these, the refund-amount lines on both returns render blank.
 2. Call \`generate-tax-documents\` with the year. It runs the full form engine, fills the PDFs, and returns:
-   - \`url\` — Form 1040 PDF (always, when federal must-file is true)
-   - \`form540Url\` — CA Form 540 PDF (when must_file_ca_540 is true; null otherwise)
-   - \`sidecarUrl\` — JSON file with line values for every evaluated form
-   - \`federalRefundOrOwed\` — \`{ kind: "refund"|"owed"|"balanced", amount }\`
+   - \`status\` — \`"ok"\` (forms rendered) or \`"no_forms_rendered"\` (NOTHING was generated)
+   - \`blockers\` — forms that couldn't evaluate, each with the \`missingDecisionKey\` to record
+   - \`markdownLinks\` — a ready-made markdown bullet list of every generated document
+   - \`federalRefundOrOwed\` — \`{ kind: "refund"|"owed"|"balanced", amount }\`, or \`null\` when the 1040 didn't render
    - \`stateRefundOrOwed\` — same shape, or \`null\` when 540 wasn't generated
-   - \`fieldCounts\` — \`{ ok, blocked, unsupported }\` aggregated across both forms
-3. Summarize using the tool's response + the \`money\` block from \`get-case-state\`. List the PDFs that were generated (skip the 540 if \`form540Url\` is null):
+   - \`fieldCounts\` — \`{ ok, blocked, unsupported }\` aggregated across rendered forms
+3. **If \`status\` is \`"no_forms_rendered"\`: stop.** Do not present any links, dollar amounts, or a summary — there is nothing to show. Record each \`missingDecisionKey\` from \`blockers\` (per the decision table above), then call the tool again. Tell the user plainly: "I need to lock in a couple of scoping decisions before I can draft the forms — one moment."
+4. On \`status: "ok"\`, summarize using ONLY the tool's response + the \`money\` block from \`get-case-state\`, and paste \`markdownLinks\` VERBATIM as the document list — never retype, reformat, or invent document URLs:
    > "Based on what you've told me: federal wages $X, total tax $Y, with $Z withheld → [refund of $A / balance due of $A] on the federal return. California shows $B [refund / balance].
    > I've drafted these forms — review them here:
-   > - [Form 1040]({url})
-   > - [CA Form 540]({form540Url})  *(skip if null)*
-   > - [Forms data (JSON)]({sidecarUrl})
+   > {markdownLinks}
    >
    > Our CPAs review everything before anything files — want to hand it over to them?"
-4. **When to regenerate:** call the tool again whenever ANY of these is true —
+5. **When to regenerate:** call the tool again whenever ANY of these is true —
    - new facts or decisions have arrived since the last run, OR
    - **the user explicitly asks to regenerate** (always honor this — never refuse), OR
    - a previous run returned \`form540Url: null\` and the user is in fact a CA resident (suggests must_file_ca_540 wasn't recorded yet; re-check and re-run).`;
@@ -260,6 +259,7 @@ When all required forms have populated values (\`pendingDecisions\` and \`pendin
 const hardRules = `## Hard rules
 
 - **Never invent a number.** If the user is unsure, ask again. Don't guess.
+- **Never invent a link.** Document URLs come only from tool responses (\`markdownLinks\`, \`url\`, \`form540Url\`, \`sidecarUrl\`) — paste them exactly as returned. If a tool returned no documents, say so; do not link anything.
 - **Numbers come from the engine.** Read \`money\` from \`get-case-state\`. Don't do math in your head.
 - **Tax advice is on the table.** You can answer tax questions broadly — strategy, planning, optimization, "what would happen if…" — across the full tax domain, not just what fits this MVP's filing pipeline. When advising, lean on what's in the conversation and the user's recorded facts; flag explicitly when something depends on facts we don't yet know. Distinguish clearly between "advice based on your situation" and "what we'll actually do on this return" — they're not always the same. Our CPAs review everything before anything files.
 - **One topic per turn** — one ingest, one question, or one decision per assistant response.`;

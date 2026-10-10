@@ -27,8 +27,10 @@ function serializeForm<F extends AnyFormField>(
   jurisdiction: string;
   title: string;
   mustFile: EvaluatedForm<F>["mustFile"];
-  /** Audit trail for the must-file determination — present whenever the
-   *  resolver populated it for this form. See EngineDerivation. */
+  /**
+   * Audit trail for the must-file determination — present whenever the
+   *  resolver populated it for this form. See EngineDerivation. 
+   */
   mustFileDerivation: EvaluatedForm<F>["mustFileDerivation"];
   fields: Array<{
     fieldId: string;
@@ -85,12 +87,25 @@ function countFields(form: EvaluatedForm<AnyFormField>): {
 export const generateTaxDocuments = createTool({
   id: "generate-tax-documents",
   description:
-    "Render the taxpayer's filed forms as PDFs using the form engine. Runs the multi-form evaluator against the current facts and decisions, looks up each catalog field's PDF widget, and writes the value. Returns a list of {formId, url} entries for each form whose mustFile predicate evaluates true, plus a JSON sidecar with the evaluated forms. Call at hand-off (no pending decisions, all required facts present). Marked draft / not-for-filing — a CPA reviews before submission. Produces Form 1040, plus any of: Form 8949 / Schedule D when the taxpayer has reportable capital sales, Schedule CA (540) and Form 540 when the taxpayer is a CA filer.",
+    "Render the taxpayer's filed forms as PDFs using the form engine. Runs the multi-form evaluator against the current facts and decisions, looks up each catalog field's PDF widget, and writes the value. Returns a list of {formId, url} entries for each form whose mustFile predicate evaluates true, plus a JSON sidecar with the evaluated forms. Call at hand-off (no pending decisions, all required facts present). Marked draft / not-for-filing — a CPA reviews before submission. Produces Form 1040, plus any of: Form 8949 / Schedule D when the taxpayer has reportable capital sales, Schedule CA (540) and Form 540 when the taxpayer is a CA filer. READ THE RESULT CAREFULLY: if status is 'no_forms_rendered', NO forms were generated — tell the user that, report the blockers (record any missingDecisionKey listed), and do NOT present any links or dollar amounts. When forms ARE generated, present them by pasting markdownLinks verbatim — never compose or alter document URLs yourself.",
   inputSchema: z.object({
     year: z.number().int(),
   }),
   outputSchema: z.object({
-    /** Convenience: the 1040 URL (always present; 1040 is filed for every scenario we model). */
+    /**
+     * "ok" — at least one form rendered. "no_forms_rendered" — NOTHING was
+     * generated (blockers explain why); present no links and no numbers.
+     */
+    status: z.enum(["ok", "no_forms_rendered"]),
+    /** Forms that could not even evaluate must-file — usually a missing decision. */
+    blockers: z.array(
+      z.object({
+        formId: z.string(),
+        reason: z.string(),
+        missingDecisionKey: z.string().nullable(),
+      }),
+    ),
+    /** Convenience: the 1040 URL ("" when the 1040 did not render). */
     url: z.string(),
     /** Convenience: the 540 URL (null when not filed). Preserved for prior consumers. */
     form540Url: z.string().nullable(),
@@ -102,12 +117,22 @@ export const generateTaxDocuments = createTool({
         filename: z.string(),
       }),
     ),
-    sidecarUrl: z.string(),
+    /**
+     * Ready-to-paste markdown bullet list of the rendered documents. Paste
+     * VERBATIM when presenting forms to the user — do not retype the URLs.
+     * Empty string when no forms rendered.
+     */
+    markdownLinks: z.string(),
+    /** Null when no forms rendered (no sidecar is written). */
+    sidecarUrl: z.string().nullable(),
     linesPopulated: z.number(),
-    federalRefundOrOwed: z.object({
-      kind: z.enum(["refund", "owed", "balanced"]),
-      amount: z.number(),
-    }),
+    /** Null when the 1040 did not render — there is no federal result to report. */
+    federalRefundOrOwed: z
+      .object({
+        kind: z.enum(["refund", "owed", "balanced"]),
+        amount: z.number(),
+      })
+      .nullable(),
     stateRefundOrOwed: z
       .object({
         kind: z.enum(["refund", "owed", "balanced"]),
@@ -128,13 +153,20 @@ export const generateTaxDocuments = createTool({
     const scenario = await loadAndEvaluateScenario(scope, { id: filingId, taxYear }, authEmail);
     const { forms } = scenario;
 
-    // ─── Render every form whose mustFile predicate evaluates true ───
-    // 1040 is filed unconditionally for every scenario we model (its
-    // mustFile reads the decisions.scope.must_file_federal flag). Other
-    // forms gate per-scenario via their own mustFile decisions —
-    // Alejandro files 8949/Schedule D/Schedule CA/540; Alex files only
-    // 1040 + 540.
+    /*
+     * ─── Render every form whose mustFile predicate evaluates true ───
+     * 1040 is filed unconditionally for every scenario we model (its
+     * mustFile reads the decisions.scope.must_file_federal flag). Other
+     * forms gate per-scenario via their own mustFile decisions —
+     * Alejandro files 8949/Schedule D/Schedule CA/540; Alex files only
+     * 1040 + 540.
+     */
     const documents: Array<{ formId: string; url: string; filename: string }> = [];
+    const blockers: Array<{
+      formId: string;
+      reason: string;
+      missingDecisionKey: string | null;
+    }> = [];
     const sidecarForms: Record<string, ReturnType<typeof serializeForm>> = {};
     let totalLinesPopulated = 0;
     let totalCounts = { ok: 0, blocked: 0, unsupported: 0 };
@@ -147,9 +179,25 @@ export const generateTaxDocuments = createTool({
         );
         continue;
       }
-      if (!form.mustFile.ok || !form.mustFile.value) {
-        // Form is out of scope for this scenario — skip rendering, don't
-        // include in sidecar, no field counts contributed.
+      if (!form.mustFile.ok) {
+        /*
+         * Must-file couldn't even evaluate — usually a missing decision
+         * (e.g. decisions.scope.must_file_federal was never recorded).
+         * Surface it so the agent records the decision instead of
+         * mistaking "nothing rendered" for a completed hand-off.
+         */
+        blockers.push({
+          formId: spec.formId,
+          reason: form.mustFile.reason,
+          missingDecisionKey: form.mustFile.missingDecisionKey ?? null,
+        });
+        continue;
+      }
+      if (!form.mustFile.value) {
+        /*
+         * Form is out of scope for this scenario — skip rendering, don't
+         * include in sidecar, no field counts contributed.
+         */
         continue;
       }
 
@@ -182,37 +230,46 @@ export const generateTaxDocuments = createTool({
       };
     }
 
-    // ─── Sidecar — every rendered form ───
-    const sidecar = {
-      userId,
-      year,
-      generatedAt: new Date().toISOString(),
-      forms: sidecarForms,
-    };
-    const sidecarBytes = Buffer.from(JSON.stringify(sidecar, null, 2), "utf-8");
-    const sidecarDoc = await createDocument({
-      userId,
-      filingId,
-      category: "drafts",
-      filename: `Forms sidecar — ${year}`,
-      storageSlug: `forms-${year}`,
-      extension: "json",
-      bytes: sidecarBytes,
-      mimeType: "application/json",
-      expiresInDays: 30,
-      metadata: { formId: "sidecar", taxYear: year },
-    });
-    const sidecarUrl = `/documents/${sidecarDoc.id}`;
+    /*
+     * ─── Sidecar — every rendered form; skipped entirely when nothing
+     * rendered (an empty sidecar only invites "here's your forms data"
+     * messages pointing at a useless JSON file). ───
+     */
+    let sidecarUrl: string | null = null;
+    if (documents.length > 0) {
+      const sidecar = {
+        userId,
+        year,
+        generatedAt: new Date().toISOString(),
+        forms: sidecarForms,
+      };
+      const sidecarBytes = Buffer.from(JSON.stringify(sidecar, null, 2), "utf-8");
+      const sidecarDoc = await createDocument({
+        userId,
+        filingId,
+        category: "drafts",
+        filename: `Forms sidecar — ${year}`,
+        storageSlug: `forms-${year}`,
+        extension: "json",
+        bytes: sidecarBytes,
+        mimeType: "application/json",
+        expiresInDays: 30,
+        metadata: { formId: "sidecar", taxYear: year },
+      });
+      sidecarUrl = `/documents/${sidecarDoc.id}`;
+    }
 
-    // ─── Refund/owed summaries ───
-    // 1040 is always present; 540 is the conditional state-level analog.
-    const form1040 = forms.get("form-1040")!;
+    /*
+     * ─── Refund/owed summaries ───
+     * Only meaningful for forms that actually rendered — a blocked 1040
+     * would report a vacuous "balanced $0" otherwise.
+     */
+    const form1040 = forms.get("form-1040");
     const form540 = forms.get("form-540");
-    const federalRefundOrOwed = refundOrOwed(
-      form1040,
-      "form-1040.line.34",
-      "form-1040.line.37",
-    );
+    const federalRefundOrOwed =
+      form1040 && form1040.mustFile.ok && form1040.mustFile.value
+        ? refundOrOwed(form1040, "form-1040.line.34", "form-1040.line.37")
+        : null;
     const stateRefundOrOwed =
       form540 && form540.mustFile.ok && form540.mustFile.value
         ? refundOrOwed(
@@ -226,10 +283,24 @@ export const generateTaxDocuments = createTool({
     const url1040 = documents.find((d) => d.formId === "form-1040")?.url ?? "";
     const url540 = documents.find((d) => d.formId === "form-540")?.url ?? null;
 
+    /*
+     * ─── Verbatim-paste markdown — the ONLY link text the agent should
+     * put in chat. Prevents hand-composed (and historically malformed /
+     * fabricated) document links. ───
+     */
+    const markdownLinks = [
+      ...documents.map((d) => `- [${d.filename}](${d.url})`),
+      ...(sidecarUrl ? [`- [Forms data (JSON)](${sidecarUrl})`] : []),
+    ].join("\n");
+
     return {
+      status:
+        documents.length > 0 ? ("ok" as const) : ("no_forms_rendered" as const),
+      blockers,
       url: url1040,
       form540Url: url540,
       documents,
+      markdownLinks,
       sidecarUrl,
       linesPopulated: totalLinesPopulated,
       federalRefundOrOwed,

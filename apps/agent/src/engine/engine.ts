@@ -1,18 +1,20 @@
-// Form engine — binding registry + Catalog-driven evaluator.
-//
-// Per-form binding files live at
-// `src/engine/federal/<short>/bindings.ts` and
-// `src/engine/state/<state>/<short>/bindings.ts`. Each file calls
-// `register()` which invokes `defineForm<TForm, TInfo>` with the form's
-// typed binding functions. The engine joins those bindings against a
-// `Catalog` — inventory metadata (label, category, valueType, PDF widget,
-// position) loaded from a JSON catalog file
-// (`forms/<jurisdiction>/<short>/catalog.json`).
-//
-// At evaluation time the engine walks the catalog in field-ordinal order,
-// invokes each field's binding function with a typed form accessor +
-// `FilingInfo`, and produces an `EvaluatedForm`. Multi-form scenarios
-// iterate via `evaluateAllForms`, which fixpoints over cross-form refs.
+/*
+ * Form engine — binding registry + Catalog-driven evaluator.
+ * 
+ * Per-form binding files live at
+ * `src/engine/federal/<short>/bindings.ts` and
+ * `src/engine/state/<state>/<short>/bindings.ts`. Each file calls
+ * `register()` which invokes `defineForm<TForm, TInfo>` with the form's
+ * typed binding functions. The engine joins those bindings against a
+ * `Catalog` — inventory metadata (label, category, valueType, PDF widget,
+ * position) loaded from a JSON catalog file
+ * (`forms/<jurisdiction>/<short>/catalog.json`).
+ * 
+ * At evaluation time the engine walks the catalog in field-ordinal order,
+ * invokes each field's binding function with a typed form accessor +
+ * `FilingInfo`, and produces an `EvaluatedForm`. Multi-form scenarios
+ * iterate via `evaluateAllForms`, which fixpoints over cross-form refs.
+ */
 
 import { z } from "zod";
 import {
@@ -33,10 +35,12 @@ export interface Rule<Params = unknown, V = unknown> {
   evaluate: (params: Params, ctx: EngineContext) => DerivationResult<V>;
 }
 
-// EngineContext extends DerivationContext with the lookup hooks the
-// internal binding wrapper uses to reach previously-evaluated fields and
-// other forms' must-file results. Binding functions (the user-facing API)
-// see these through the `f` accessor proxy, not through this context.
+/*
+ * EngineContext extends DerivationContext with the lookup hooks the
+ * internal binding wrapper uses to reach previously-evaluated fields and
+ * other forms' must-file results. Binding functions (the user-facing API)
+ * see these through the `f` accessor proxy, not through this context.
+ */
 export interface EngineContext extends DerivationContext {
   /** Look up a previously-evaluated field by its fieldId. */
   fieldResult: (fieldId: string) => DerivationResult<unknown> | undefined;
@@ -69,9 +73,11 @@ const fieldBindings = new Map<string, FieldBinding>(); // keyed by fieldId
 
 // ─── Registration API (used by generated files) ──────────────────────────
 
-// Accepts any rule — the engine coerces the result's value to boolean at
-// evaluation time. This lets `lookupDecision` (which returns the decision
-// value as-is) be reused for must-file bindings without a typed-bool wrapper.
+/*
+ * Accepts any rule — the engine coerces the result's value to boolean at
+ * evaluation time. This lets `lookupDecision` (which returns the decision
+ * value as-is) be reused for must-file bindings without a typed-bool wrapper.
+ */
 export function bindMustFile<P>(
   formId: string,
   ruleDef: Rule<P, unknown>,
@@ -158,10 +164,12 @@ export function evaluateForm(
     formMustFile: (id) => formMustFiles.get(id),
   };
 
-  // Resolve must-file. Skip if a previous pass already produced an `ok`
-  // result for this form — monotonicity says we'd land on the same answer.
-  // Re-evaluate `blocked` results so cross-form deps that resolved this
-  // pass have a chance to unblock this form's must-file.
+  /*
+   * Resolve must-file. Skip if a previous pass already produced an `ok`
+   * result for this form — monotonicity says we'd land on the same answer.
+   * Re-evaluate `blocked` results so cross-form deps that resolved this
+   * pass have a chance to unblock this form's must-file.
+   */
   let mustFile: DerivationResult<boolean>;
   const cachedMustFile = formMustFiles.get(formId);
   if (cachedMustFile && cachedMustFile.ok) {
@@ -185,16 +193,20 @@ export function evaluateForm(
     formMustFiles.set(formId, mustFile);
   }
 
-  // Look up the engine-derivation provenance written by resolveFilingInfo
-  // (parallel slot to the boolean must-file flag). Undefined for forms not
-  // yet wired through resolveMustFile — that's fine, the field is optional.
+  /*
+   * Look up the engine-derivation provenance written by resolveFilingInfo
+   * (parallel slot to the boolean must-file flag). Undefined for forms not
+   * yet wired through resolveMustFile — that's fine, the field is optional.
+   */
   const mustFileDerivation = lookupMustFileDerivation(formId, ctx.filingInfo);
 
   const fields: AnyFormField[] = [];
 
-  // If must-file is blocked or false, return immediately with no fields.
-  // Matches the prior form1040/form540 behavior — saves a lot of cascading
-  // blocks downstream when a form turns out not to apply at all.
+  /*
+   * If must-file is blocked or false, return immediately with no fields.
+   * Matches the prior form1040/form540 behavior — saves a lot of cascading
+   * blocks downstream when a form turns out not to apply at all.
+   */
   if (!mustFile.ok || !mustFile.value) {
     return {
       formId: def.formId,
@@ -207,15 +219,17 @@ export function evaluateForm(
     };
   }
 
-  // Walk the Catalog's inventory in order. For each field, look up the
-  // binding registered by the generated TS. Missing bindings surface as
-  // blocked field results — that's a misalignment between the Catalog
-  // (inventory) and the generated TS (behavior), worth fixing rather than
-  // hiding.
-  //
-  // Fixpoint optimization: skip re-evaluation when an `ok` result is
-  // already cached. Pure functions of (params, ctx) + monotonic ctx →
-  // same answer next pass, so we'd just burn cycles.
+  /*
+   * Walk the Catalog's inventory in order. For each field, look up the
+   * binding registered by the generated TS. Missing bindings surface as
+   * blocked field results — that's a misalignment between the Catalog
+   * (inventory) and the generated TS (behavior), worth fixing rather than
+   * hiding.
+   * 
+   * Fixpoint optimization: skip re-evaluation when an `ok` result is
+   * already cached. Pure functions of (params, ctx) + monotonic ctx →
+   * same answer next pass, so we'd just burn cycles.
+   */
   for (const inv of catalog.getFields(formId)) {
     const cached = fieldResults.get(inv.fieldId);
     let result: DerivationResult<unknown>;
@@ -230,9 +244,11 @@ export function evaluateForm(
             `form's defineForm spec (bindings/unsupported/todos).`,
         );
       } else {
-        // Per-field context — same engine context, plus a pointer to the
-        // current field's inventory. The internal binding wrapper reads
-        // this when it needs per-field metadata (multi_select options).
+        /*
+         * Per-field context — same engine context, plus a pointer to the
+         * current field's inventory. The internal binding wrapper reads
+         * this when it needs per-field metadata (multi_select options).
+         */
         const fieldCtx: EngineContext = { ...engineCtx, field: inv };
         result = binding.rule.evaluate(binding.params, fieldCtx);
       }
@@ -259,11 +275,13 @@ export function evaluateForm(
   };
 }
 
-// Map from formId to the FilingInfo slot that carries the engine
-// derivation for that form's must-file determination. Kept here (not on
-// the form spec) because the slot names live in the per-form FilingInfo
-// types — this is the bridge between the engine's formId namespace and
-// the resolver's slot namespace.
+/*
+ * Map from formId to the FilingInfo slot that carries the engine
+ * derivation for that form's must-file determination. Kept here (not on
+ * the form spec) because the slot names live in the per-form FilingInfo
+ * types — this is the bridge between the engine's formId namespace and
+ * the resolver's slot namespace.
+ */
 const MUST_FILE_DERIVATION_SLOTS: Record<string, string> = {
   "form-1040": "mustFileFederalDerivation",
   "form-540": "mustFileCA540Derivation",
@@ -311,11 +329,13 @@ export function evaluateAllForms(
   passes: number;
   resolvedPerPass: number[];
 } {
-  // Fail fast on a missing resolver. Without filingInfo every typed binding
-  // short-circuits with the same "ctx.filingInfo is missing" block, so the
-  // forms render empty and forms with a filingInfo-dependent mustFile get
-  // skipped entirely. We've shipped this bug once; surface it loudly at
-  // boot rather than letting it manifest as silent blank PDFs.
+  /*
+   * Fail fast on a missing resolver. Without filingInfo every typed binding
+   * short-circuits with the same "ctx.filingInfo is missing" block, so the
+   * forms render empty and forms with a filingInfo-dependent mustFile get
+   * skipped entirely. We've shipped this bug once; surface it loudly at
+   * boot rather than letting it manifest as silent blank PDFs.
+   */
   if (!ctx.filingInfo) {
     throw new Error(
       "evaluateAllForms: ctx.filingInfo is missing. " +
@@ -346,9 +366,11 @@ export function evaluateAllForms(
     }
   }
 
-  // Convergence failure — emit a diagnostic listing the still-blocked
-  // fields with cross-form refs so the operator can see the suspected
-  // cycle locations.
+  /*
+   * Convergence failure — emit a diagnostic listing the still-blocked
+   * fields with cross-form refs so the operator can see the suspected
+   * cycle locations.
+   */
   const stillBlocked: string[] = [];
   for (const [fieldId, result] of shared.fieldResults) {
     if (!result.ok) stillBlocked.push(fieldId);
@@ -372,29 +394,31 @@ function countOkMustFiles(map: Map<string, DerivationResult<boolean>>): number {
   return n;
 }
 
-// ─── Typed binding API (defineForm) ──────────────────────────────────────
-//
-// Public authoring surface for per-form binding files. Each entry is a
-// plain TS function `(f, info) => value` — `f` is a typed proxy over the
-// form's other field results, `info` is the form's narrowed FilingInfo.
-// Catalog drift (rename a field, regen the catalog) surfaces as a TS
-// compile error in the binding because the keys are typed against the
-// per-form `<FormName>` interface emitted from the catalog.
-//
-// Authoring contract:
-//   - Returning `undefined` / `null` blocks the field — the engine retries
-//     on the next fixpoint pass (used for "dep hasn't resolved yet").
-//   - Returning a value commits the field; the cache locks it (monotonic).
-//   - To explicitly write 0 / "" / etc., return the literal value, NOT
-//     undefined.
-//   - `sum(...)` treats undefined / non-numeric terms as 0 — handy for
-//     line sums where some terms route to `unsupported`.
-//   - `floor(min, value)` clamps a value at `min`; matches IRS "if less
-//     than zero enter -0-" instructions when `min = 0`.
-//   - `stubZero(reason)` for "this field has a real source we haven't
-//     ingested yet but the answer is 0 for every scenario we model" —
-//     commits to 0 with documented assumption (grep `stubZero` for
-//     audit). Distinct from `unsupported`, which blocks the field.
+/*
+ * ─── Typed binding API (defineForm) ──────────────────────────────────────
+ * 
+ * Public authoring surface for per-form binding files. Each entry is a
+ * plain TS function `(f, info) => value` — `f` is a typed proxy over the
+ * form's other field results, `info` is the form's narrowed FilingInfo.
+ * Catalog drift (rename a field, regen the catalog) surfaces as a TS
+ * compile error in the binding because the keys are typed against the
+ * per-form `<FormName>` interface emitted from the catalog.
+ * 
+ * Authoring contract:
+ *   - Returning `undefined` / `null` blocks the field — the engine retries
+ *     on the next fixpoint pass (used for "dep hasn't resolved yet").
+ *   - Returning a value commits the field; the cache locks it (monotonic).
+ *   - To explicitly write 0 / "" / etc., return the literal value, NOT
+ *     undefined.
+ *   - `sum(...)` treats undefined / non-numeric terms as 0 — handy for
+ *     line sums where some terms route to `unsupported`.
+ *   - `floor(min, value)` clamps a value at `min`; matches IRS "if less
+ *     than zero enter -0-" instructions when `min = 0`.
+ *   - `stubZero(reason)` for "this field has a real source we haven't
+ *     ingested yet but the answer is 0 for every scenario we model" —
+ *     commits to 0 with documented assumption (grep `stubZero` for
+ *     audit). Distinct from `unsupported`, which blocks the field.
+ */
 
 /** Binding function — takes the typed form accessor + resolved FilingInfo, returns the field's value (or undefined to block). */
 export type BindingFn<TForm, TInfo extends BaseFilingInfo, K extends keyof TForm> = (
@@ -414,6 +438,15 @@ export interface FormSpec<
 > {
   /** Form-level must-file predicate. */
   mustFile?: MustFileFn<TInfo>;
+  /**
+   * The explicit decision key the must-file predicate reads (e.g.
+   * "decisions.scope.must_file_federal"). When the predicate returns
+   * undefined, the blocked result carries this key as missingDecisionKey —
+   * that's how caseState's pendingDecisions learns the form is waiting on
+   * a decision, which is what drives Luca to record it. Without it, an
+   * unrecorded must-file decision blocks the form silently.
+   */
+  mustFileDecisionKey?: string;
   /** One entry per field; key is the short fieldId (form-id prefix stripped). */
   bindings: Partial<{ [K in keyof TForm]: BindingFn<TForm, TInfo, K> }>;
   /**
@@ -485,7 +518,11 @@ export function defineForm<
   if (spec.mustFile) {
     bindMustFile(
       formId,
-      makeMustFileRule(formId, spec.mustFile as MustFileFn<BaseFilingInfo>),
+      makeMustFileRule(
+        formId,
+        spec.mustFile as MustFileFn<BaseFilingInfo>,
+        spec.mustFileDecisionKey,
+      ),
       null,
     );
   }
@@ -585,6 +622,7 @@ function makeBindingRule(
 function makeMustFileRule(
   formId: string,
   fn: MustFileFn<BaseFilingInfo>,
+  decisionKey?: string,
 ): Rule<unknown, unknown> {
   return {
     name: `typed-mustFile:${formId}`,
@@ -603,7 +641,12 @@ function makeMustFileRule(
         );
       }
       if (value === undefined) {
-        return blocked(`${formId} mustFile: returned undefined.`);
+        return decisionKey
+          ? blocked(
+              `${formId} mustFile: waiting on decision ${decisionKey}.`,
+              { decisionKey },
+            )
+          : blocked(`${formId} mustFile: returned undefined.`);
       }
       return {
         ok: true,
@@ -627,11 +670,13 @@ function makeUnsupportedRule(reason: string): Rule<unknown, unknown> {
   };
 }
 
-// ─── Form accessor proxy ─────────────────────────────────────────────────
-//
-// Bindings read other fields via `f["line.1z"]` (short key) or
-// `f["form-other.line.X"]` (cross-form full key). The proxy distinguishes
-// the two by looking for a "form-" / "schedule-" prefix.
+/*
+ * ─── Form accessor proxy ─────────────────────────────────────────────────
+ * 
+ * Bindings read other fields via `f["line.1z"]` (short key) or
+ * `f["form-other.line.X"]` (cross-form full key). The proxy distinguishes
+ * the two by looking for a "form-" / "schedule-" prefix.
+ */
 
 function makeFormAccessor(formId: string, ctx: EngineContext): unknown {
   return new Proxy(
