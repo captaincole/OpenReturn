@@ -1,13 +1,15 @@
-// Core types for the Form Engine. Every form gets an evaluator function that
-// takes a DerivationContext (facts + decisions) and returns an EvaluatedForm
-// (mustFile result + per-field results). Evaluators are pure functions —
-// deterministic given the input fact + decision state.
-//
-// The rules are:
-//  - Pure aggregation (sums, math, table lookups) lives in code.
-//  - Classification or judgment ALWAYS defers to an ai_decisions lookup,
-//    even when the answer is obvious.
-//  - Cross-form references go through ctx.formValues(...).
+/*
+ * Core types for the Form Engine. Every form gets an evaluator function that
+ * takes a DerivationContext (facts + decisions) and returns an EvaluatedForm
+ * (mustFile result + per-field results). Evaluators are pure functions —
+ * deterministic given the input fact + decision state.
+ * 
+ * The rules are:
+ *  - Pure aggregation (sums, math, table lookups) lives in code.
+ *  - Classification or judgment ALWAYS defers to an ai_decisions lookup,
+ *    even when the answer is obvious.
+ *  - Cross-form references go through ctx.formValues(...).
+ */
 
 import type { TaxFactRow } from "./facts/rows.js";
 import type { AIDecisionRow } from "./facts/rows.js";
@@ -28,8 +30,10 @@ import type { FilingInfo } from "./filingInfo.js";
  * design rationale (separate from ai_decisions; future-extends `decidedBy`).
  */
 export interface EngineDerivation {
-  /** Who/what produced this derivation. Today always "engine"; reserved
-   *  for future "ai" | "cpa" | "user" without changing consumers. */
+  /**
+   * Who/what produced this derivation. Today always "engine"; reserved
+   *  for future "ai" | "cpa" | "user" without changing consumers. 
+   */
   decidedBy: "engine";
   /** Plain-English rule that fired. CPA-readable. */
   rule: string;
@@ -136,16 +140,18 @@ export interface DecisionsView {
   byKeyPrefix(prefix: string): AIDecisionRow[];
 }
 
-// ─── Category + value-type taxonomy used by every form field ─────────────
-//
-// Category is the user-facing bucket each field rolls up into for the
-// Filing Status panel. Every FormField declares one — TypeScript enforces
-// it, so a new field can't be added without classifying it.
-//
-// FieldValueType describes the shape of the field's value, which drives
-// rendering and (eventually) UI input semantics. A single-select reads from
-// a decision; a numeric reads from a numeric derivation; a text reads
-// straight from an identity fact, etc.
+/*
+ * ─── Category + value-type taxonomy used by every form field ─────────────
+ * 
+ * Category is the user-facing bucket each field rolls up into for the
+ * Filing Status panel. Every FormField declares one — TypeScript enforces
+ * it, so a new field can't be added without classifying it.
+ * 
+ * FieldValueType describes the shape of the field's value, which drives
+ * rendering and (eventually) UI input semantics. A single-select reads from
+ * a decision; a numeric reads from a numeric derivation; a text reads
+ * straight from an identity fact, etc.
+ */
 
 export type Category =
   | "personal_info"        // taxpayer name, SSN, address, DOB — top-of-form header bits
@@ -162,23 +168,25 @@ export type FieldValueType =
   | "boolean"
   | "date";
 
-// ─── Evaluated form / field shapes ───────────────────────────────────────
-//
-// Fields use a discriminated union: each form declares its own field kinds,
-// each kind tagged with a string `formFieldKind` and parameterized on a
-// value type V. Consumers narrow by formFieldKind to get a strongly-typed
-// value with no casts.
-//
-// Example shape per form (declared in form8949.ts etc.):
-//   interface Form8949RowField extends BaseFormField<Form8949Row> {
-//     formFieldKind: "form-8949.row"; box: BoxId; rowIndex: number;
-//   }
-//   interface Form8949TotalsField extends BaseFormField<Form8949BoxTotals> {
-//     formFieldKind: "form-8949.totals"; box: BoxId;
-//   }
-//   type Form8949Field = Form8949RowField | Form8949TotalsField | …;
-//
-// Each form's evaluator returns EvaluatedForm<TheirFieldUnion>.
+/*
+ * ─── Evaluated form / field shapes ───────────────────────────────────────
+ * 
+ * Fields use a discriminated union: each form declares its own field kinds,
+ * each kind tagged with a string `formFieldKind` and parameterized on a
+ * value type V. Consumers narrow by formFieldKind to get a strongly-typed
+ * value with no casts.
+ * 
+ * Example shape per form (declared in form8949.ts etc.):
+ *   interface Form8949RowField extends BaseFormField<Form8949Row> {
+ *     formFieldKind: "form-8949.row"; box: BoxId; rowIndex: number;
+ *   }
+ *   interface Form8949TotalsField extends BaseFormField<Form8949BoxTotals> {
+ *     formFieldKind: "form-8949.totals"; box: BoxId;
+ *   }
+ *   type Form8949Field = Form8949RowField | Form8949TotalsField | …;
+ * 
+ * Each form's evaluator returns EvaluatedForm<TheirFieldUnion>.
+ */
 
 export interface BaseFormField<V = unknown> {
   fieldId: string;

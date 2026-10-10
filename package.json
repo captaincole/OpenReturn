@@ -20,13 +20,18 @@
     "doctor": "npm --prefix apps/agent run doctor",
     "test": "npm --prefix apps/agent test",
     "install:all": "npm install && npm --prefix apps/agent install && npm --prefix apps/web install",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "engines": {
     "node": ">=20.0.0"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^8.71.1",
     "concurrently": "^9.2.1",
+    "eslint": "^9.39.5",
     "husky": "^9.1.7"
   }
 }

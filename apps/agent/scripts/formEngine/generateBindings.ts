@@ -1,13 +1,15 @@
-// Thin wrapper around the generateBindingsWorkflow: AI-generate the
-// bindings.ts that maps engine FormFields to a catalog's PDF widgets.
-//
-// Defaults:
-//   --catalog defaults to forms/<jurisdiction>/<short>/catalog.json
-//             (auto-discovered: federal/<short>, then state/ca/<short>, state/ny/<short>, …)
-//   --output  derived from catalog location + formId:
-//               federal  → src/engine/federal/<short>/bindings.ts
-//               state/CA → src/engine/state/ca/<short>/bindings.ts
-//             where <short> is the formId with "form-" stripped.
+/*
+ * Thin wrapper around the generateBindingsWorkflow: AI-generate the
+ * bindings.ts that maps engine FormFields to a catalog's PDF widgets.
+ * 
+ * Defaults:
+ *   --catalog defaults to forms/<jurisdiction>/<short>/catalog.json
+ *             (auto-discovered: federal/<short>, then state/ca/<short>, state/ny/<short>, …)
+ *   --output  derived from catalog location + formId:
+ *               federal  → src/engine/federal/<short>/bindings.ts
+ *               state/CA → src/engine/state/ca/<short>/bindings.ts
+ *             where <short> is the formId with "form-" stripped.
+ */
 
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
@@ -15,11 +17,13 @@ import { runGenerateBindings } from "../../src/forms-pipeline/generateBindingsWo
 import { projectRoot } from "../../src/paths.js";
 import type { Command } from "../lib/cli";
 
-// Auto-discover the catalog file in the conventional locations. Each form
-// has its own folder under forms/<jurisdiction>/<short>/ holding catalog.json.
-// First match wins; pass --catalog to override. (taxYear is currently
-// unused for path resolution — kept in the signature so the CLI's required
-// --tax-year arg still drives the workflow even when not in the path.)
+/*
+ * Auto-discover the catalog file in the conventional locations. Each form
+ * has its own folder under forms/<jurisdiction>/<short>/ holding catalog.json.
+ * First match wins; pass --catalog to override. (taxYear is currently
+ * unused for path resolution — kept in the signature so the CLI's required
+ * --tax-year arg still drives the workflow even when not in the path.)
+ */
 function findDefaultCatalog(formId: string, _taxYear: number): string {
   const shortName = formId.replace(/^form-/, "");
   const candidates = [
@@ -31,8 +35,10 @@ function findDefaultCatalog(formId: string, _taxYear: number): string {
     const abs = resolve(projectRoot, c);
     if (existsSync(abs)) return abs;
   }
-  // Fall back to the federal path; runGenerateBindings will fail with a
-  // clear "file not found" error rather than swallowing the mismatch.
+  /*
+   * Fall back to the federal path; runGenerateBindings will fail with a
+   * clear "file not found" error rather than swallowing the mismatch.
+   */
   return resolve(projectRoot, `forms/federal/${shortName}/catalog.json`);
 }
 
@@ -44,10 +50,12 @@ interface Args {
   minConfidence: "high" | "medium" | "low";
 }
 
-// Derive the bindings output path from the catalog path + formId.
-// Catalog under forms/state/<state>/<short>/ → output under
-// src/engine/state/<state>/<short>/bindings.ts. Federal catalog
-// (forms/federal/<short>/) → src/engine/federal/<short>/bindings.ts.
+/*
+ * Derive the bindings output path from the catalog path + formId.
+ * Catalog under forms/state/<state>/<short>/ → output under
+ * src/engine/state/<state>/<short>/bindings.ts. Federal catalog
+ * (forms/federal/<short>/) → src/engine/federal/<short>/bindings.ts.
+ */
 function findDefaultOutput(formId: string, catalogPath: string): string {
   const shortName = formId.replace(/^form-/, "");
   const stateMatch = /\bforms\/state\/([a-z]+)\//.exec(catalogPath);

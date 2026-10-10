@@ -1,13 +1,15 @@
-// Runtime loader for tax tables (Form 1040 line 16 / Form 540 line 31, for
-// taxable income under $100,000). Each table is identified by a stable
-// `tableId` (e.g. "federal-2025", "ca-2025"). Per-table JSON files live
-// next to this file; adding a new jurisdiction or tax year = add a JSON +
-// import line below.
-//
-// Tables differ in column count and which filing statuses share columns
-// (federal has 4, CA has 3 with Single+MFS and MFJ+QSS each sharing one).
-// Each JSON carries its own `filingStatusColumns` map so the rule code
-// stays jurisdiction-agnostic.
+/*
+ * Runtime loader for tax tables (Form 1040 line 16 / Form 540 line 31, for
+ * taxable income under $100,000). Each table is identified by a stable
+ * `tableId` (e.g. "federal-2025", "ca-2025"). Per-table JSON files live
+ * next to this file; adding a new jurisdiction or tax year = add a JSON +
+ * import line below.
+ * 
+ * Tables differ in column count and which filing statuses share columns
+ * (federal has 4, CA has 3 with Single+MFS and MFJ+QSS each sharing one).
+ * Each JSON carries its own `filingStatusColumns` map so the rule code
+ * stays jurisdiction-agnostic.
+ */
 
 import federal2025 from "./tax-table-2025.json" with { type: "json" };
 import ca2025 from "./ca-tax-table-2025.json" with { type: "json" };
@@ -19,10 +21,12 @@ export type FilingStatus =
   | "head_of_household"
   | "qualifying_surviving_spouse";
 
-// A row's column-value lookups are jurisdiction-specific (federal uses
-// "single"/"mfj"/"mfs"/"hoh"; CA uses "single_or_mfs"/"mfj_or_qss"/"hoh").
-// Treat per-row values as a string-keyed map and resolve via the table's
-// own filingStatusColumns mapping at lookup time.
+/*
+ * A row's column-value lookups are jurisdiction-specific (federal uses
+ * "single"/"mfj"/"mfs"/"hoh"; CA uses "single_or_mfs"/"mfj_or_qss"/"hoh").
+ * Treat per-row values as a string-keyed map and resolve via the table's
+ * own filingStatusColumns mapping at lookup time.
+ */
 export interface TaxTableRow {
   low: number;
   high: number;
@@ -151,9 +155,11 @@ export function lookupTax(
   };
 }
 
-// Linear scan with early exit. Tables are sorted by low ascending; bail as
-// soon as we pass the target. The federal table has 2062 rows, CA has 1001
-// — well under any threshold where binary search would matter.
+/*
+ * Linear scan with early exit. Tables are sorted by low ascending; bail as
+ * soon as we pass the target. The federal table has 2062 rows, CA has 1001
+ * — well under any threshold where binary search would matter.
+ */
 function findRow(
   rows: TaxTableRow[],
   income: number,

@@ -1,20 +1,22 @@
-// Form Catalog — the read model the engine evaluates against.
-//
-// Inventory (label, category, valueType, position) lives here and is
-// shared across forms. The per-form bindings files (forms/<jurisdiction>/
-// <short>/bindings.ts) declare only the *behavior* layer (typed
-// (f, info) => value functions registered via defineForm). The Catalog
-// has two backing stores:
-//
-//   - JSON fixture (apps/agent/fixtures/forms/<formId>-<taxYear>.json) —
-//     the source of truth checked into the repo. Always loadable in tests,
-//     no DB required.
-//   - Supabase tables (`forms`, `form_fields`) — the staging area the AI
-//     ingestion pipeline writes into starting in Phase C. Seeded from the
-//     JSON fixture so the runtime can switch between them transparently.
-//
-// Both loaders return a `Catalog` of the same shape. Phase E's diff
-// (AI-generated vs hand-written) compares the contents of the two stores.
+/*
+ * Form Catalog — the read model the engine evaluates against.
+ * 
+ * Inventory (label, category, valueType, position) lives here and is
+ * shared across forms. The per-form bindings files (forms/<jurisdiction>/
+ * <short>/bindings.ts) declare only the *behavior* layer (typed
+ * (f, info) => value functions registered via defineForm). The Catalog
+ * has two backing stores:
+ * 
+ *   - JSON fixture (apps/agent/fixtures/forms/<formId>-<taxYear>.json) —
+ *     the source of truth checked into the repo. Always loadable in tests,
+ *     no DB required.
+ *   - Supabase tables (`forms`, `form_fields`) — the staging area the AI
+ *     ingestion pipeline writes into starting in Phase C. Seeded from the
+ *     JSON fixture so the runtime can switch between them transparently.
+ * 
+ * Both loaders return a `Catalog` of the same shape. Phase E's diff
+ * (AI-generated vs hand-written) compares the contents of the two stores.
+ */
 
 import { promises as fs } from "node:fs";
 import { z } from "zod";
@@ -148,20 +150,22 @@ export interface FixtureFile {
   fields: Array<Omit<FieldInventory, "formId" | "ordinal">>;
 }
 
-// ─── Zod schema for catalog.json validation ──────────────────────────────
-//
-// Mirrors the TypeScript types above so that static JSON imports in
-// registry.ts can be validated at module load. Without this, TS widens
-// JSON string-valued fields (e.g. `category: "personal_info"`) to plain
-// `string`, which won't satisfy our `Category` / `FieldValueType` unions
-// — and `import x from ".../catalog.json"` followed by passing `x` to
-// FixtureFile-typed code errors with an unfixable structural mismatch.
-// fixtureFileSchema.parse(x) narrows correctly and fails loud on drift
-// (renamed category, typo'd valueType, ingestion-pipeline schema change).
-//
-// Unknown keys (`labelSource`, `multiline`, top-level `_meta`) are
-// emitted by the ingestion pipeline but unused by the engine — Zod
-// strips them by default.
+/*
+ * ─── Zod schema for catalog.json validation ──────────────────────────────
+ * 
+ * Mirrors the TypeScript types above so that static JSON imports in
+ * registry.ts can be validated at module load. Without this, TS widens
+ * JSON string-valued fields (e.g. `category: "personal_info"`) to plain
+ * `string`, which won't satisfy our `Category` / `FieldValueType` unions
+ * — and `import x from ".../catalog.json"` followed by passing `x` to
+ * FixtureFile-typed code errors with an unfixable structural mismatch.
+ * fixtureFileSchema.parse(x) narrows correctly and fails loud on drift
+ * (renamed category, typo'd valueType, ingestion-pipeline schema change).
+ * 
+ * Unknown keys (`labelSource`, `multiline`, top-level `_meta`) are
+ * emitted by the ingestion pipeline but unused by the engine — Zod
+ * strips them by default.
+ */
 
 const categoryEnum = z.enum([
   "personal_info",
@@ -262,12 +266,14 @@ export function buildCatalogFromFixtures(fixtures: FixtureFile[]): Catalog {
   return buildCatalog({ forms, fields });
 }
 
-// NOTE: a corpus-DB catalog loader (loadFromDb) used to live here — it was
-// dormant (runtime uses the bundled JSON fixtures) and it was the engine's
-// only import of the db layer, so it moved out with the engine/mastra
-// boundary split. When the AI forms-ingest output is trusted (Phase C+),
-// the loader belongs on the mastra side: load rows there, build the
-// Catalog via makeCatalog(), and pass it in.
+/*
+ * NOTE: a corpus-DB catalog loader (loadFromDb) used to live here — it was
+ * dormant (runtime uses the bundled JSON fixtures) and it was the engine's
+ * only import of the db layer, so it moved out with the engine/mastra
+ * boundary split. When the AI forms-ingest output is trusted (Phase C+),
+ * the loader belongs on the mastra side: load rows there, build the
+ * Catalog via makeCatalog(), and pass it in.
+ */
 
 // ─── Pure utility (used by smoke tests and the seed script) ─────────────
 

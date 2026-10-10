@@ -1,30 +1,34 @@
-// Per-block contextual summarization, adapted from Anthropic's Contextual
-// Retrieval cookbook:
-//   https://www.anthropic.com/news/contextual-retrieval
-//
-// The cookbook sends the WHOLE document as a cache-controlled content block
-// for each chunk's summary. That doesn't work for large reference documents:
-// the IRS 1040 instructions alone exceed Haiku's 200k context window.
-//
-// Instead, we send the SECTION text the block belongs to, plus the document
-// title and section heading as light metadata. The section text is the
-// cache-controlled block, so all blocks within the same section share the
-// cache — same locality benefit, scales to arbitrarily large docs.
-//
-// We use fetch directly against /v1/messages to keep deps minimal.
+/*
+ * Per-block contextual summarization, adapted from Anthropic's Contextual
+ * Retrieval cookbook:
+ *   https://www.anthropic.com/news/contextual-retrieval
+ * 
+ * The cookbook sends the WHOLE document as a cache-controlled content block
+ * for each chunk's summary. That doesn't work for large reference documents:
+ * the IRS 1040 instructions alone exceed Haiku's 200k context window.
+ * 
+ * Instead, we send the SECTION text the block belongs to, plus the document
+ * title and section heading as light metadata. The section text is the
+ * cache-controlled block, so all blocks within the same section share the
+ * cache — same locality benefit, scales to arbitrarily large docs.
+ * 
+ * We use fetch directly against /v1/messages to keep deps minimal.
+ */
 
 import { createHash } from "node:crypto";
 
 const ANTHROPIC_BASE = "https://api.anthropic.com/v1";
 const ANTHROPIC_VERSION = "2023-06-01";
 
-// Contextual-summary model. Haiku default keeps
-// `corpus sync` cheap for contributors adding a document (~$0.50/doc); the
-// official published corpus is built by the maintainer with
-// REFDOCS_MODEL=claude-opus-5 (measured: $17.35 for the full 10-doc
-// rebuild). Mixing models across docs is fine mechanically (sha-skip
-// preserves existing rows) but the published corpus should be one model
-// end-to-end — rebuild fully when switching.
+/*
+ * Contextual-summary model. Haiku default keeps
+ * `corpus sync` cheap for contributors adding a document (~$0.50/doc); the
+ * official published corpus is built by the maintainer with
+ * REFDOCS_MODEL=claude-opus-5 (measured: $17.35 for the full 10-doc
+ * rebuild). Mixing models across docs is fine mechanically (sha-skip
+ * preserves existing rows) but the published corpus should be one model
+ * end-to-end — rebuild fully when switching.
+ */
 const SUMMARIZER_MODEL = process.env.REFDOCS_MODEL ?? "claude-haiku-5-5";
 
 const PROMPT_INSTRUCTION = `The chunk above lives in a larger document. Here is the chunk we want to situate within the document:
@@ -77,11 +81,15 @@ async function callMessages(
 export interface SummarizeOpts {
   /** Document title — light metadata, not cached. */
   documentTitle: string;
-  /** Section heading the block lives under. Null for preamble/unattributed
-   *  blocks. */
+  /**
+   * Section heading the block lives under. Null for preamble/unattributed
+   *  blocks. 
+   */
   sectionHeading: string | null;
-  /** Full text of the section the block belongs to. Sent as a cached content
-   *  block so all blocks within the same section share the prompt cache. */
+  /**
+   * Full text of the section the block belongs to. Sent as a cached content
+   *  block so all blocks within the same section share the prompt cache. 
+   */
   sectionText: string;
   /** The block text we want a summary for. */
   blockText: string;
@@ -139,8 +147,10 @@ export interface SummarizedBlock {
   blockTextSha1: string;
 }
 
-/** sha1 of the raw block text — stored on each row so future ingests can
- *  skip re-summarizing unchanged blocks if we add that optimization later. */
+/**
+ * sha1 of the raw block text — stored on each row so future ingests can
+ *  skip re-summarizing unchanged blocks if we add that optimization later. 
+ */
 export function sha1(text: string): string {
   return createHash("sha1").update(text).digest("hex");
 }
@@ -148,8 +158,10 @@ export function sha1(text: string): string {
 export interface SummarizeAllOpts {
   documentTitle: string;
   blocks: BlockToSummarize[];
-  /** Number of summaries to run in parallel. Anthropic rate limits scale
-   *  with org tier; 5 is conservative and works under default tier-1 limits. */
+  /**
+   * Number of summaries to run in parallel. Anthropic rate limits scale
+   *  with org tier; 5 is conservative and works under default tier-1 limits. 
+   */
   concurrency?: number;
   /** Called after each block completes; useful for progress logging. */
   onProgress?: (done: number, total: number) => void;
@@ -159,9 +171,11 @@ export async function summarizeBlocks(
   opts: SummarizeAllOpts,
 ): Promise<SummarizedBlock[]> {
   const concurrency = Math.max(1, Math.min(opts.concurrency ?? 5, 16));
-  // Sort blocks so all blocks within the same section run consecutively. The
-  // first block in each section warms the prompt cache for that section's
-  // text; subsequent blocks hit the cache (90% input discount).
+  /*
+   * Sort blocks so all blocks within the same section run consecutively. The
+   * first block in each section warms the prompt cache for that section's
+   * text; subsequent blocks hit the cache (90% input discount).
+   */
   const ordered = opts.blocks
     .map((b, i) => ({ b, i }))
     .sort((a, b) => {

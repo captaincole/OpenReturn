@@ -1,6 +1,8 @@
-// Phase D workflow carriers. Each step's outputSchema is the next step's
-// inputSchema; the carrier accumulates via .extend() so we never have to
-// thread "optional fields filled in later."
+/*
+ * Phase D workflow carriers. Each step's outputSchema is the next step's
+ * inputSchema; the carrier accumulates via .extend() so we never have to
+ * thread "optional fields filled in later."
+ */
 
 import { z } from "zod";
 

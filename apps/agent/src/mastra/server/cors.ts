@@ -1,9 +1,11 @@
 import { cors } from "hono/cors";
 
-// Comma-separated list of origins allowed to call the API cross-origin.
-// Supports a single leading "*." wildcard for preview-deploy patterns:
-//   "https://summa-web.vercel.app,https://*.vercel.app"
-// Empty / unset → allow all origins (intended for local dev only).
+/*
+ * Comma-separated list of origins allowed to call the API cross-origin.
+ * Supports a single leading "*." wildcard for preview-deploy patterns:
+ *   "https://summa-web.vercel.app,https://*.vercel.app"
+ * Empty / unset → allow all origins (intended for local dev only).
+ */
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS ?? "")
   .split(",")
   .map((o) => o.trim())
@@ -21,9 +23,11 @@ function matchesAllowed(origin: string): boolean {
   });
 }
 
-// Hono's cors() returns a (c, next) middleware that handles preflights and
-// stamps response headers. Echoing the request origin (rather than "*") is
-// required because we send credentials (Authorization: Bearer …).
+/*
+ * Hono's cors() returns a (c, next) middleware that handles preflights and
+ * stamps response headers. Echoing the request origin (rather than "*") is
+ * required because we send credentials (Authorization: Bearer …).
+ */
 export const corsMiddleware = cors({
   origin: (origin) => {
     if (!origin) return null;

@@ -1,8 +1,10 @@
-// Alex Morales — AI decisions (the "setup").
-//
-// These are the judgment calls Luca (or Nynaeve, via review) would record
-// during a real intake. For the integration test we set them directly so
-// the engine has everything it needs without needing the agent loop.
+/*
+ * Alex Morales — AI decisions (the "setup").
+ * 
+ * These are the judgment calls Luca (or Nynaeve, via review) would record
+ * during a real intake. For the integration test we set them directly so
+ * the engine has everything it needs without needing the agent loop.
+ */
 
 import type { AIDecisionRow } from "../../../src/mastra/db/aiDecisions.js";
 import { decisionRow } from "../../helpers/fixtureBuilders.js";
@@ -38,12 +40,14 @@ export const alexDecisions: AIDecisionRow[] = [
     false,
     "Alex reported no digital asset (crypto / NFT) transactions for 2025 — 1040 page 1 digital-assets question answered No.",
   ),
-  // Form-scope decisions follow the convention
-  // `decisions.scope.must_file_<form_short_id>`. Each scenario records the
-  // gating decision for every form in the universe — true means the form
-  // is in this scenario's forms[] and asserted against; false means we
-  // declare it out-of-scope and don't list it. Keeps "why isn't Alex
-  // filing X?" answerable by grep instead of code archaeology.
+  /*
+   * Form-scope decisions follow the convention
+   * `decisions.scope.must_file_<form_short_id>`. Each scenario records the
+   * gating decision for every form in the universe — true means the form
+   * is in this scenario's forms[] and asserted against; false means we
+   * declare it out-of-scope and don't list it. Keeps "why isn't Alex
+   * filing X?" answerable by grep instead of code archaeology.
+   */
   dec(
     "decisions.scope.must_file_schedule_ca",
     false,

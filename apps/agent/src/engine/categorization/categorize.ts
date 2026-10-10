@@ -1,11 +1,13 @@
-// Filing Status panel rollup — walks evaluated forms, groups every field by
-// its `category`, and tallies complete vs. pending.
-//
-// Each evaluated form contributes its fields only when `mustFile` is ok and
-// true. Forms that aren't required for this taxpayer simply don't show up
-// in the rollup. Forms whose mustFile is blocked (we don't yet know if they
-// should be filed) also don't contribute fields, but their underlying
-// must-file blocker still surfaces via pendingDecisions on the case state.
+/*
+ * Filing Status panel rollup — walks evaluated forms, groups every field by
+ * its `category`, and tallies complete vs. pending.
+ * 
+ * Each evaluated form contributes its fields only when `mustFile` is ok and
+ * true. Forms that aren't required for this taxpayer simply don't show up
+ * in the rollup. Forms whose mustFile is blocked (we don't yet know if they
+ * should be filed) also don't contribute fields, but their underlying
+ * must-file blocker still surfaces via pendingDecisions on the case state.
+ */
 
 import type {
   AnyFormField,
@@ -33,8 +35,10 @@ const CATEGORY_LABEL: Record<Category, string> = {
 export interface FilingStatusItem {
   /** Stable id — the field's `fieldId` */
   id: string;
-  /** Form this item belongs to, e.g. "form-1040". Empty when the item isn't
-   *  tied to a specific form (no such cases today, kept for future expansion). */
+  /**
+   * Form this item belongs to, e.g. "form-1040". Empty when the item isn't
+   *  tied to a specific form (no such cases today, kept for future expansion). 
+   */
   formId: string;
   label: string;
   state: "complete" | "pending";

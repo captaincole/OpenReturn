@@ -1,13 +1,15 @@
-// Alejandro Reyes — Form 8949 expected results.
-//
-// Ground truth: `docs/Alejandro-8949-Golden.pdf` (itemization version).
-// Alejandro has exactly two covered-basis-reported trades from his
-// Apex Securities 1099-B:
-//   - NVDA short-term  → Part I, Box A, Row 1
-//   - AAPL long-term   → Part II, Box D, Row 1
-// Each trade maps 1:1 to a Form 8949 row. The line 2 totals are
-// trivial single-row sums that flow into Schedule D line 1b
-// (short-term) and line 8b (long-term).
+/*
+ * Alejandro Reyes — Form 8949 expected results.
+ * 
+ * Ground truth: `docs/Alejandro-8949-Golden.pdf` (itemization version).
+ * Alejandro has exactly two covered-basis-reported trades from his
+ * Apex Securities 1099-B:
+ *   - NVDA short-term  → Part I, Box A, Row 1
+ *   - AAPL long-term   → Part II, Box D, Row 1
+ * Each trade maps 1:1 to a Form 8949 row. The line 2 totals are
+ * trivial single-row sums that flow into Schedule D line 1b
+ * (short-term) and line 8b (long-term).
+ */
 
 import type { ExpectedResults } from "../../types.js";
 
@@ -58,10 +60,12 @@ export const alejandro8949Expected: ExpectedResults = {
   },
 
   renderedBlank: [
-    // Sample of unused rows on both parts — only row 1 is populated.
-    // Description and gain_loss are both asserted so a regression in
-    // either the row-data binding or the gain_loss formula (e.g. the
-    // old `sum()` that emitted "0" into empty rows) surfaces here.
+    /*
+     * Sample of unused rows on both parts — only row 1 is populated.
+     * Description and gain_loss are both asserted so a regression in
+     * either the row-data binding or the gain_loss formula (e.g. the
+     * old `sum()` that emitted "0" into empty rows) surfaces here.
+     */
     "form-8949.0.part1.row2_description",
     "form-8949.0.part1.row2_gain_loss",
     "form-8949.0.part1.row3_description",

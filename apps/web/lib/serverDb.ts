@@ -4,18 +4,20 @@ import type { ActivityItem } from "@/lib/activity";
 import type { RequestedAction } from "@/lib/requestedActions";
 import type { TaxReturn } from "@/lib/returns";
 
-// SERVER-ONLY domain reads/writes against the shared libsql app DB
-// (.data/app.db under apps/agent — the agent owns schema creation; we just
-// query). Replaces the per-table Postgres reads that used to live in
-// lib/{activity,filings,returns,requestedActions}.ts.
-//
-// RLS is gone with Postgres, so every query here scopes explicitly by
-// userId / filingId. Callers (Server Components, Route Handlers) are
-// responsible for verifying the owner session (lib/localAuth.ts)
-// BEFORE calling in.
-//
-// Never import this from a client component — @libsql/client and node:path
-// don't exist in the browser bundle, and the DB file lives on the server box.
+/*
+ * SERVER-ONLY domain reads/writes against the shared libsql app DB
+ * (.data/app.db under apps/agent — the agent owns schema creation; we just
+ * query). Replaces the per-table Postgres reads that used to live in
+ * lib/{activity,filings,returns,requestedActions}.ts.
+ * 
+ * RLS is gone with Postgres, so every query here scopes explicitly by
+ * userId / filingId. Callers (Server Components, Route Handlers) are
+ * responsible for verifying the owner session (lib/localAuth.ts)
+ * BEFORE calling in.
+ * 
+ * Never import this from a client component — @libsql/client and node:path
+ * don't exist in the browser bundle, and the DB file lives on the server box.
+ */
 
 const DEFAULT_APP_DB = resolve(process.cwd(), "../agent/.data/app.db");
 
@@ -45,10 +47,12 @@ export interface OwnerAuthRow {
   sessionSecret: string;
 }
 
-// Idempotent — the agent's ensureAppSchema also creates this table, but the
-// web app's first-run /setup can happen before the agent ever booted, so
-// both sides CREATE IF NOT EXISTS. Keep the DDL in sync with
-// apps/agent/src/mastra/db/appDb.ts.
+/*
+ * Idempotent — the agent's ensureAppSchema also creates this table, but the
+ * web app's first-run /setup can happen before the agent ever booted, so
+ * both sides CREATE IF NOT EXISTS. Keep the DDL in sync with
+ * apps/agent/src/mastra/db/appDb.ts.
+ */
 let ownerTableReady: Promise<unknown> | null = null;
 function ensureOwnerTable() {
   if (!ownerTableReady) {
@@ -153,8 +157,10 @@ export async function getOwnerFilingForYear(
   return { id: ret.filingId, taxYear: ret.year, status: ret.status };
 }
 
-/** Non-revoked membership check — the explicit RLS replacement used before
- *  reading anything belonging to a filing the caller doesn't own outright. */
+/**
+ * Non-revoked membership check — the explicit RLS replacement used before
+ *  reading anything belonging to a filing the caller doesn't own outright. 
+ */
 export async function hasMembership(
   filingId: string,
   userId: string,
@@ -318,9 +324,11 @@ export interface UploadListRow {
   size_bytes: number | null;
 }
 
-/** Uploaded (category='uploads') docs for a filing, newest first — the
+/**
+ * Uploaded (category='uploads') docs for a filing, newest first — the
  *  Documents tab grid + home-tab quick links. snake_case keys preserved
- *  because the components already render that shape. */
+ *  because the components already render that shape. 
+ */
 export async function listUploads(filingId: string): Promise<UploadListRow[]> {
   const res = await db().execute({
     sql: `SELECT id, filename, created_at, mime_type, size_bytes
@@ -346,8 +354,10 @@ export interface DraftListRow {
   metadata: Record<string, unknown> | null;
 }
 
-/** Engine-generated drafts for a filing, newest first — the Forms tab.
- *  snake_case keys preserved for the existing components. */
+/**
+ * Engine-generated drafts for a filing, newest first — the Forms tab.
+ *  snake_case keys preserved for the existing components. 
+ */
 export async function listDrafts(filingId: string): Promise<DraftListRow[]> {
   const res = await db().execute({
     sql: `SELECT id, filename, created_at, mime_type, size_bytes, metadata

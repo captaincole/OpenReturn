@@ -2,16 +2,18 @@ import { randomBytes, scryptSync, timingSafeEqual, createHmac } from "node:crypt
 import { cookies } from "next/headers";
 import { getOwnerAuthRow, insertOwnerRow, type OwnerAuthRow } from "@/lib/serverDb";
 
-// Single-user auth: identity = the instance. One `owner` row in app.db holds
-// profile data (name/email) plus the gate's credentials — an scrypt password
-// hash and the HMAC secret for session cookies (generated at setup, so
-// there's no SESSION_SECRET env var to configure). ~100 lines, node:crypto
-// only, deliberately auditable in one sitting.
-//
-// Session cookie: `${base64url(payload)}.${base64url(hmac)}` where payload =
-// {uid, exp}. httpOnly + sameSite=lax; verification happens server-side in
-// layouts/route handlers (proxy.ts only does an optimistic presence check —
-// the Edge runtime can't read app.db).
+/*
+ * Single-user auth: identity = the instance. One `owner` row in app.db holds
+ * profile data (name/email) plus the gate's credentials — an scrypt password
+ * hash and the HMAC secret for session cookies (generated at setup, so
+ * there's no SESSION_SECRET env var to configure). ~100 lines, node:crypto
+ * only, deliberately auditable in one sitting.
+ * 
+ * Session cookie: `${base64url(payload)}.${base64url(hmac)}` where payload =
+ * {uid, exp}. httpOnly + sameSite=lax; verification happens server-side in
+ * layouts/route handlers (proxy.ts only does an optimistic presence check —
+ * the Edge runtime can't read app.db).
+ */
 
 export const SESSION_COOKIE = "summa_session";
 const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days

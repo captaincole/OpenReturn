@@ -1,46 +1,48 @@
-// Phase D — render typed bindings into TypeScript source for a per-form
-// `bindings.ts` file under `src/engine/<jurisdiction>/<short>/`.
-//
-// The classifier outputs structured bindings (one of N rule shapes per
-// field) plus a confidence rating. This renderer translates each binding
-// into a typed TS function body for the new `defineForm<TForm, TInfo>`
-// shape, routes anything below `minConfidence` to a `todos` map, and
-// surfaces fact / decision keys that don't have a known FilingInfo slot
-// as todos as well (with rationale).
-//
-// Layout of the emitted file:
-//
-//   import { defineForm, sum, floor } from "<relative engine.ts>";
-//   import { lookupTax } from "<relative data/taxTable.ts>";
-//   import type { Form540 } from "./types.js";
-//   import type { Form540FilingInfo } from "./filingInfo.js";
-//
-//   export function register(): void {
-//     defineForm<Form540, Form540FilingInfo>("form-540", {
-//       mustFile: (info) => info.mustFileCA540,
-//       bindings: {
-//         "header.first_name": (_, info) => info.taxpayerFirstName,
-//         "line.12_state_wages": (_, info) => info.w2StateWages,
-//         "line.31_tax_amount": (f, info) => {
-//           if (!info.filingStatus) return undefined;
-//           const income = f["line.19_taxable_income"];
-//           if (typeof income !== "number") return undefined;
-//           const r = lookupTax("ca-2025", income, info.filingStatus);
-//           return r.ok ? r.tax : undefined;
-//         },
-//         …
-//       },
-//       unsupported: {
-//         "header.combat_zone_checkbox": "No combat-zone scenario built yet.",
-//       },
-//       todos: {
-//         "line.40_ctc": "fromFields with terms whose source form isn't ingested",
-//       },
-//     });
-//   }
-//
-// Each item the classifier rated below the minConfidence floor lands in
-// `todos`. Items whose rule is `unsupported` always land in `unsupported`.
+/*
+ * Phase D — render typed bindings into TypeScript source for a per-form
+ * `bindings.ts` file under `src/engine/<jurisdiction>/<short>/`.
+ * 
+ * The classifier outputs structured bindings (one of N rule shapes per
+ * field) plus a confidence rating. This renderer translates each binding
+ * into a typed TS function body for the new `defineForm<TForm, TInfo>`
+ * shape, routes anything below `minConfidence` to a `todos` map, and
+ * surfaces fact / decision keys that don't have a known FilingInfo slot
+ * as todos as well (with rationale).
+ * 
+ * Layout of the emitted file:
+ * 
+ *   import { defineForm, sum, floor } from "<relative engine.ts>";
+ *   import { lookupTax } from "<relative data/taxTable.ts>";
+ *   import type { Form540 } from "./types.js";
+ *   import type { Form540FilingInfo } from "./filingInfo.js";
+ * 
+ *   export function register(): void {
+ *     defineForm<Form540, Form540FilingInfo>("form-540", {
+ *       mustFile: (info) => info.mustFileCA540,
+ *       bindings: {
+ *         "header.first_name": (_, info) => info.taxpayerFirstName,
+ *         "line.12_state_wages": (_, info) => info.w2StateWages,
+ *         "line.31_tax_amount": (f, info) => {
+ *           if (!info.filingStatus) return undefined;
+ *           const income = f["line.19_taxable_income"];
+ *           if (typeof income !== "number") return undefined;
+ *           const r = lookupTax("ca-2025", income, info.filingStatus);
+ *           return r.ok ? r.tax : undefined;
+ *         },
+ *         …
+ *       },
+ *       unsupported: {
+ *         "header.combat_zone_checkbox": "No combat-zone scenario built yet.",
+ *       },
+ *       todos: {
+ *         "line.40_ctc": "fromFields with terms whose source form isn't ingested",
+ *       },
+ *     });
+ *   }
+ * 
+ * Each item the classifier rated below the minConfidence floor lands in
+ * `todos`. Items whose rule is `unsupported` always land in `unsupported`.
+ */
 
 import { dirname, relative } from "node:path";
 import type {
@@ -50,11 +52,13 @@ import type {
 } from "./classifyBindings.js";
 import type { FieldInventory } from "../engine/catalog.js";
 
-// ─── FilingInfo slot translation tables ──────────────────────────────────
-// Maps the AI's rule params (which reference raw fact / decision keys) to
-// the typed slot names in FilingInfo. When a key isn't in the table the
-// renderer pushes the binding to `todos` so a human reviews it — either
-// to add the slot to FilingInfo or to clarify the AI's choice.
+/*
+ * ─── FilingInfo slot translation tables ──────────────────────────────────
+ * Maps the AI's rule params (which reference raw fact / decision keys) to
+ * the typed slot names in FilingInfo. When a key isn't in the table the
+ * renderer pushes the binding to `todos` so a human reviews it — either
+ * to add the slot to FilingInfo or to clarify the AI's choice.
+ */
 
 const FACT_TO_SLOT: Record<string, string> = {
   "identity.name.first": "taxpayerFirstName",
@@ -171,8 +175,10 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
       (ruleBreakdown[binding.ruleName] ?? 0) + 1;
     confidenceBreakdown[binding.confidence]++;
 
-    // `unsupported` rule always goes to the unsupported map regardless of
-    // confidence — engine treats these the same as `unsupported`.
+    /*
+     * `unsupported` rule always goes to the unsupported map regardless of
+     * confidence — engine treats these the same as `unsupported`.
+     */
     if (binding.ruleName === "unsupported") {
       const reason = String(binding.params.reason ?? binding.rationale);
       entries.push({ kind: "unsupported", field, reason });
@@ -263,8 +269,10 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
     out.push(`    // ${opts.mustFile.rationale}`);
     out.push(`    mustFile: (info) => info.${mustFileSlot},`);
   } else {
-    // No slot for this decision — leave a TODO; engine will refuse to
-    // evaluate the form until this is filled in.
+    /*
+     * No slot for this decision — leave a TODO; engine will refuse to
+     * evaluate the form until this is filled in.
+     */
     out.push(
       `    // TODO: must-file decision "${opts.mustFile.decisionKey}" has no FilingInfo slot.`,
     );
@@ -445,12 +453,14 @@ function translateDecisionIfEquals(b: ClassifiedBinding): Translation {
     // Mode 1 — pass through the raw decision value (single_select / multi_select).
     return { kind: "body", body: `(_, info) => info.${slot}` };
   }
-  // Mode 2 — per-checkbox boolean: true when decision === matchValue.
-  // JSON.stringify preserves boolean/number/string typing so the comparison
-  // operand matches the FilingInfo slot's type (boolean === boolean, not
-  // boolean === "true"). The AI sometimes emits matchValue as the literal
-  // `true` / `false`, sometimes the string "true" / "false" — keep both
-  // working by normalizing matchValues that LOOK boolean back to booleans.
+  /*
+   * Mode 2 — per-checkbox boolean: true when decision === matchValue.
+   * JSON.stringify preserves boolean/number/string typing so the comparison
+   * operand matches the FilingInfo slot's type (boolean === boolean, not
+   * boolean === "true"). The AI sometimes emits matchValue as the literal
+   * `true` / `false`, sometimes the string "true" / "false" — keep both
+   * working by normalizing matchValues that LOOK boolean back to booleans.
+   */
   const normalized =
     matchValue === "true"
       ? true
@@ -591,8 +601,10 @@ function quote(s: string): string {
  * works under tsx + the compiled output.
  */
 function relImport(fromFilePath: string, toRelativePath: string): string {
-  // toRelativePath is "src/engine/engine.ts" — turn into an absolute
-  // path under the same root as fromFilePath.
+  /*
+   * toRelativePath is "src/engine/engine.ts" — turn into an absolute
+   * path under the same root as fromFilePath.
+   */
   const fromAbs = fromFilePath;
   const matchRoot = fromAbs.match(/^(.*?)(\/apps\/agent\/)/);
   const projectRoot = matchRoot

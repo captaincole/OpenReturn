@@ -1,21 +1,23 @@
 "use client";
 
-// Forms tab — one unified list of tax forms for the active return.
-//
-// Two data sources, merged:
-//   - state.forms: engine-tracked primary forms (1040, CA 540) with
-//     fill state. Drives the "Drafting / Complete / Not filing" status
-//     and the fill % bar.
-//   - user_documents (category='drafts'): every PDF the engine has
-//     output, including engine-derived schedules (Schedule D, 8949,
-//     Schedule CA) that aren't first-class entries in state.forms.
-//     Drives the PDF Open + Download actions.
-//
-// Merge logic: each state.forms entry pulls its matching draft (if any)
-// by inferring the form key from filename. Drafts that don't match any
-// state.forms entry render as standalone "Generated" rows. Drafts are
-// deduped to the most recent per inferred type (engine regenerates on
-// every turn — we only show the latest snapshot).
+/*
+ * Forms tab — one unified list of tax forms for the active return.
+ * 
+ * Two data sources, merged:
+ *   - state.forms: engine-tracked primary forms (1040, CA 540) with
+ *     fill state. Drives the "Drafting / Complete / Not filing" status
+ *     and the fill % bar.
+ *   - user_documents (category='drafts'): every PDF the engine has
+ *     output, including engine-derived schedules (Schedule D, 8949,
+ *     Schedule CA) that aren't first-class entries in state.forms.
+ *     Drives the PDF Open + Download actions.
+ * 
+ * Merge logic: each state.forms entry pulls its matching draft (if any)
+ * by inferring the form key from filename. Drafts that don't match any
+ * state.forms entry render as standalone "Generated" rows. Drafts are
+ * deduped to the most recent per inferred type (engine regenerates on
+ * every turn — we only show the latest snapshot).
+ */
 
 import { useEffect, useMemo, useState } from "react";
 import { useAppShell } from "@/components/AppShell";
@@ -187,10 +189,12 @@ function FormRow({ item }: { item: FormItem }) {
 
 type Status = "not_started" | "drafting" | "generated" | "not_filing" | "pending_decision";
 
-// Status precedence: an existing PDF wins over engine fill state. A
-// generated draft is the user's source of truth for "this is done";
-// showing "Drafting · 36/39" next to a downloadable PDF is misleading
-// even when the engine still considers some fields unresolved.
+/*
+ * Status precedence: an existing PDF wins over engine fill state. A
+ * generated draft is the user's source of truth for "this is done";
+ * showing "Drafting · 36/39" next to a downloadable PDF is misleading
+ * even when the engine still considers some fields unresolved.
+ */
 function computeStatus(item: FormItem): Status {
   if (item.draft) return "generated";
   if (item.form) {
@@ -226,14 +230,16 @@ function computeFill(form: FormSummary): { filled: number; total: number; pct: n
   return { filled, total, pct };
 }
 
-// Stable key for matching state.forms entries to user_documents drafts.
-// generateTaxDocuments writes `metadata.formId = spec.shortId` (e.g.
-// "1040", "540", "schedule-d") on every draft row. state.forms uses the
-// longer `spec.formId` ("form-1040", "form-540"); stripping the "form-"
-// prefix gives the same shortId, so the two sides line up.
-//
-// Filename inference is a fallback for older rows that predate the
-// metadata column or any draft written outside generateTaxDocuments.
+/*
+ * Stable key for matching state.forms entries to user_documents drafts.
+ * generateTaxDocuments writes `metadata.formId = spec.shortId` (e.g.
+ * "1040", "540", "schedule-d") on every draft row. state.forms uses the
+ * longer `spec.formId` ("form-1040", "form-540"); stripping the "form-"
+ * prefix gives the same shortId, so the two sides line up.
+ * 
+ * Filename inference is a fallback for older rows that predate the
+ * metadata column or any draft written outside generateTaxDocuments.
+ */
 function draftKey(draft: DraftRow): string {
   const metaFormId = draft.metadata?.formId;
   if (typeof metaFormId === "string" && metaFormId.length > 0) return metaFormId;
@@ -278,8 +284,10 @@ const ORPHAN_LABELS: Record<string, { label: string; description: string }> = {
 };
 
 function mergeFormsAndDrafts(forms: FormSummary[], drafts: DraftRow[]): FormItem[] {
-  // Dedup: latest draft per key. `drafts` is already sorted desc by
-  // created_at from the query, so the first hit per key wins.
+  /*
+   * Dedup: latest draft per key. `drafts` is already sorted desc by
+   * created_at from the query, so the first hit per key wins.
+   */
   const draftByKey = new Map<string, DraftRow>();
   for (const d of drafts) {
     const key = draftKey(d);

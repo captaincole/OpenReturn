@@ -1,14 +1,16 @@
 import { authHeaders } from "@/lib/auth";
 import { agentUrl } from "@/lib/agentBase";
 
-// Cross-origin agent calls. fetchState stays here for now — it runs the
-// case engine on the agent side, which we're not extracting in this
-// migration (see follow-up on /app/state in CLAUDE.md). resetSession also
-// stays because it deletes Mastra threads via Memory.deleteThread (admin-
-// pool work).
-//
-// fetchActivity moved to lib/activity.ts (/api/activity poll) — both
-// the chat right rail and /activity page consume it.
+/*
+ * Cross-origin agent calls. fetchState stays here for now — it runs the
+ * case engine on the agent side, which we're not extracting in this
+ * migration (see follow-up on /app/state in CLAUDE.md). resetSession also
+ * stays because it deletes Mastra threads via Memory.deleteThread (admin-
+ * pool work).
+ * 
+ * fetchActivity moved to lib/activity.ts (/api/activity poll) — both
+ * the chat right rail and /activity page consume it.
+ */
 
 export type PlanItemStatus = "todo" | "doing" | "done";
 
@@ -19,9 +21,11 @@ export interface PlanItem {
   note?: string;
 }
 
-// Per-form summary mirrors the agent-side EvaluatedFormSummary in
-// apps/agent/src/mastra/tools/caseState.ts. Kept in sync by hand for now;
-// when both apps share a types package we'll import it.
+/*
+ * Per-form summary mirrors the agent-side EvaluatedFormSummary in
+ * apps/agent/src/mastra/tools/caseState.ts. Kept in sync by hand for now;
+ * when both apps share a types package we'll import it.
+ */
 export interface FormSummary {
   formId: string;
   jurisdiction: string;

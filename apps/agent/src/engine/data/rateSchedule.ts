@@ -1,20 +1,22 @@
-// Federal tax-rate schedule for the Tax Computation Worksheet, used when
-// taxable income (or the worksheet's ordinary bucket) is ≥ $100,000 and
-// the IRS Tax Table doesn't apply.
-//
-// The IRS publishes this as a 5-row "multiply by rate, subtract a
-// constant" schedule per filing status:
-//
-//     tax = income × (b) − (d)
-//
-// where (b) is the marginal rate and (d) is the cumulative tax in lower
-// brackets (collapsed into a constant). Result is the same as adding up
-// the bracket-by-bracket tax explicitly; the multiply/subtract form is
-// what the IRS prints because it's a one-line lookup.
-//
-// Source: IRS Form 1040 (2025) Instructions, page 80 — Tax Computation
-// Worksheet — Line 16. Block id: irs-1040-inst-2025::p80::b00132.
-// Bracket boundaries originate in Rev. Proc. 2024-40.
+/*
+ * Federal tax-rate schedule for the Tax Computation Worksheet, used when
+ * taxable income (or the worksheet's ordinary bucket) is ≥ $100,000 and
+ * the IRS Tax Table doesn't apply.
+ * 
+ * The IRS publishes this as a 5-row "multiply by rate, subtract a
+ * constant" schedule per filing status:
+ * 
+ *     tax = income × (b) − (d)
+ * 
+ * where (b) is the marginal rate and (d) is the cumulative tax in lower
+ * brackets (collapsed into a constant). Result is the same as adding up
+ * the bracket-by-bracket tax explicitly; the multiply/subtract form is
+ * what the IRS prints because it's a one-line lookup.
+ * 
+ * Source: IRS Form 1040 (2025) Instructions, page 80 — Tax Computation
+ * Worksheet — Line 16. Block id: irs-1040-inst-2025::p80::b00132.
+ * Bracket boundaries originate in Rev. Proc. 2024-40.
+ */
 
 import type { FilingStatus } from "../values.js";
 
@@ -36,14 +38,16 @@ interface RateScheduleTable {
   byStatus: Record<FilingStatus, RateScheduleRow[]>;
 }
 
-// All four filing statuses for 2025. Brackets must be ordered ascending
-// by overMin (the lookup helper relies on that to find the matching row).
-//
-// Note: Single and MFS share the bracket BOUNDARIES at $103,350 / $197,300
-// / $250,525 — they diverge above that ($626,350 → 37% for Single vs
-// $375,800 → 37% for MFS). The subtractAmount values also identical for
-// the bottom three rows because the underlying rates kick in at the same
-// income for both statuses.
+/*
+ * All four filing statuses for 2025. Brackets must be ordered ascending
+ * by overMin (the lookup helper relies on that to find the matching row).
+ *
+ * Note: Single and MFS share the bracket BOUNDARIES at $103,350 / $197,300
+ * / $250,525 — they diverge above that ($626,350 → 37% for Single vs
+ * $375,800 → 37% for MFS). The subtractAmount values also identical for
+ * the bottom three rows because the underlying rates kick in at the same
+ * income for both statuses.
+ */
 const SCHEDULE_2025_FEDERAL: RateScheduleTable = {
   taxYear: 2025,
   jurisdiction: "federal",

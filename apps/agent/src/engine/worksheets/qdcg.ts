@@ -1,17 +1,19 @@
-// Qualified Dividends and Capital Gain Tax Worksheet — Line 16.
-//
-// Implements all 25 lines of the IRS worksheet from the 2025 Form 1040
-// Instructions (page 38). The full breakdown is returned alongside the
-// final tax so callers can audit, render an explanation, or test against
-// any intermediate line.
-//
-// Source: IRS Form 1040 (2025) Instructions, page 38, "Qualified
-// Dividends and Capital Gain Tax Worksheet—Line 16".
-// Corpus block id: irs-1040-inst-2025::p38::b00073.
-//
-// Worksheet inputs that come from currently-unsupported fields are
-// noted inline. Default to 0 / not-filing for now; when ingestion lands,
-// the binding layer just passes through the real values.
+/*
+ * Qualified Dividends and Capital Gain Tax Worksheet — Line 16.
+ * 
+ * Implements all 25 lines of the IRS worksheet from the 2025 Form 1040
+ * Instructions (page 38). The full breakdown is returned alongside the
+ * final tax so callers can audit, render an explanation, or test against
+ * any intermediate line.
+ * 
+ * Source: IRS Form 1040 (2025) Instructions, page 38, "Qualified
+ * Dividends and Capital Gain Tax Worksheet—Line 16".
+ * Corpus block id: irs-1040-inst-2025::p38::b00073.
+ * 
+ * Worksheet inputs that come from currently-unsupported fields are
+ * noted inline. Default to 0 / not-filing for now; when ingestion lands,
+ * the binding layer just passes through the real values.
+ */
 
 import type { FilingStatus } from "../values.js";
 import { lookupTax } from "../data/taxTable.js";
@@ -55,8 +57,10 @@ export interface QdcgInputs {
 }
 
 export interface QdcgBreakdown {
-  // Numbers correspond 1:1 with the IRS worksheet line numbers. Useful
-  // for diffing against a CPA-completed worksheet during audit.
+  /*
+   * Numbers correspond 1:1 with the IRS worksheet line numbers. Useful
+   * for diffing against a CPA-completed worksheet during audit.
+   */
   line1: number;
   line2: number;
   line3: number;
@@ -139,29 +143,35 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
       `QDCG worksheet: preferential inputs must be ≥ 0 (got qd=${inputs.qualifiedDividends}, ltcg=${inputs.netLongTermGain}).`,
     );
   }
-  // TODO: when Form 2555 (Foreign Earned Income) ingestion lands, this
-  // branch should swap lines 1 and 2 for the FEIE Tax Worksheet outputs.
-  // Until then we always take the non-2555 path.
+  /*
+   * TODO: when Form 2555 (Foreign Earned Income) ingestion lands, this
+   * branch should swap lines 1 and 2 for the FEIE Tax Worksheet outputs.
+   * Until then we always take the non-2555 path.
+   */
   void inputs.filingForm2555;
 
   const { filingStatus, taxYear } = inputs;
   const brackets = lookupPreferentialBrackets(taxYear, filingStatus);
 
-  // Whole-dollar convention: every IRS-form line that takes a dollar
-  // entry rounds UP to the nearest dollar via Math.ceil. The IRS allows
-  // "round off cents to whole dollars" without specifying direction;
-  // CPA software conventionally rounds up because that's conservative
-  // for the taxpayer (slight overpayment is fine, underpayment isn't).
-  // We apply the convention at every "whole-dollar" line in the
-  // worksheet — at entry (L1/L2/L3), at the percentage lines (L18/L21),
-  // and implicitly via the tax-table lookups (L22/L24, which already
-  // return whole-dollar values).
-  // Line 1: 1040 line 15 (taxable income).
+  /*
+   * Whole-dollar convention: every IRS-form line that takes a dollar
+   * entry rounds UP to the nearest dollar via Math.ceil. The IRS allows
+   * "round off cents to whole dollars" without specifying direction;
+   * CPA software conventionally rounds up because that's conservative
+   * for the taxpayer (slight overpayment is fine, underpayment isn't).
+   * We apply the convention at every "whole-dollar" line in the
+   * worksheet — at entry (L1/L2/L3), at the percentage lines (L18/L21),
+   * and implicitly via the tax-table lookups (L22/L24, which already
+   * return whole-dollar values).
+   * Line 1: 1040 line 15 (taxable income).
+   */
   const line1 = Math.ceil(inputs.taxableIncome);
   // Line 2: 1040 line 3a (qualified dividends).
   const line2 = Math.ceil(inputs.qualifiedDividends);
-  // Line 3: smaller of Schedule D line 15 / line 16, treating blank/loss
-  // as 0. Caller computes this — the worksheet just uses the number.
+  /*
+   * Line 3: smaller of Schedule D line 15 / line 16, treating blank/loss
+   * as 0. Caller computes this — the worksheet just uses the number.
+   */
   const line3 = Math.ceil(inputs.netLongTermGain);
   // Line 4: add lines 2 and 3 (total preferential income).
   const line4 = line2 + line3;
@@ -182,24 +192,30 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
   const line13 = brackets.fifteenRateCeiling;
   const line14 = Math.min(line1, line13);
   const line15 = line5 + line9;
-  // Line 16 of the worksheet — NOT the 1040 line 16. Floored at 0 per
-  // instructions.
+  /*
+   * Line 16 of the worksheet — NOT the 1040 line 16. Floored at 0 per
+   * instructions.
+   */
   const line16 = Math.max(0, line14 - line15);
   // Line 17 = preferential dollars at 15%.
   const line17 = Math.min(line12, line16);
-  // Ceiling rounding on the percentage multiplications (lines 18 and
-  // 21). This matches the convention used by major CPA software
-  // packages (verified against a CPA-prepared 2024 return): they round
-  // each computed tax line UP to the next dollar so the result is
-  // conservative for the taxpayer. The IRS instructions don't mandate
-  // a specific direction; ceiling matches the published-form examples.
+  /*
+   * Ceiling rounding on the percentage multiplications (lines 18 and
+   * 21). This matches the convention used by major CPA software
+   * packages (verified against a CPA-prepared 2024 return): they round
+   * each computed tax line UP to the next dollar so the result is
+   * conservative for the taxpayer. The IRS instructions don't mandate
+   * a specific direction; ceiling matches the published-form examples.
+   */
   const line18 = Math.ceil(line17 * 0.15);
 
   // Lines 19–21 — 20% rate computation.
   const line19 = line9 + line17;
-  // Line 20 = preferential dollars at 20%. Floored at 0 because line 10
-  // − line 19 can go negative when line 19 fully absorbs the
-  // preferential bucket (typical case for filers below the 20% threshold).
+  /*
+   * Line 20 = preferential dollars at 20%. Floored at 0 because line 10
+   * − line 19 can go negative when line 19 fully absorbs the
+   * preferential bucket (typical case for filers below the 20% threshold).
+   */
   const line20 = Math.max(0, line10 - line19);
   const line21 = Math.ceil(line20 * 0.20);
 
@@ -209,9 +225,11 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
   const line23 = line18 + line21 + line22;
   // Line 24: tax on line 1 (full taxable income) — sanity-check alternative.
   const line24 = taxByAmount(line1, filingStatus, taxYear);
-  // Line 25: smaller of line 23 or line 24. The "min" guarantees we
-  // never overcharge versus the plain-ordinary calculation (it should
-  // never happen mathematically but the worksheet enforces it).
+  /*
+   * Line 25: smaller of line 23 or line 24. The "min" guarantees we
+   * never overcharge versus the plain-ordinary calculation (it should
+   * never happen mathematically but the worksheet enforces it).
+   */
   const line25 = Math.min(line23, line24);
 
   return {

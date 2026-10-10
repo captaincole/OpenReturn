@@ -1,12 +1,14 @@
-// Alejandro Reyes — facts (the "data").
-//
-// Sourced from `apps/agent/tests/scenarios/alejandro/docs/01-alejandro-w2.pdf`
-// (Pacific Software W-2) and `02-alejandro-1099.pdf` (Apex Securities 1099
-// consolidated statement: 1099-DIV + 1099-B). Identity facts come from
-// the W-2 / 1099 plus normal intake. Alejandro is the next step up from
-// Alex's clean W-2 case — he has investment income (dividends + capital
-// gain distributions from stock sales) that exercises the QDCG worksheet
-// on 1040 line 16 and the Schedule D / 8949 chain on line 7a.
+/*
+ * Alejandro Reyes — facts (the "data").
+ * 
+ * Sourced from `apps/agent/tests/scenarios/alejandro/docs/01-alejandro-w2.pdf`
+ * (Pacific Software W-2) and `02-alejandro-1099.pdf` (Apex Securities 1099
+ * consolidated statement: 1099-DIV + 1099-B). Identity facts come from
+ * the W-2 / 1099 plus normal intake. Alejandro is the next step up from
+ * Alex's clean W-2 case — he has investment income (dividends + capital
+ * gain distributions from stock sales) that exercises the QDCG worksheet
+ * on 1040 line 16 and the Schedule D / 8949 chain on line 7a.
+ */
 
 import type { TaxFactRow } from "../../../src/mastra/db/taxFacts.js";
 import {

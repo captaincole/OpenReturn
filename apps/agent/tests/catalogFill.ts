@@ -1,28 +1,30 @@
-// Catalog-fill test — validates a form catalog's completeness and per-field
-// value-type integrity against its blank PDF, snapshotted as a golden file.
-//
-// For a given form-id: load its catalog + blank PDF, build an EvaluatedForm
-// where every field has a deterministic synthetic value, render via
-// fillFromCatalog, and diff the rendered map against the golden stored
-// alongside the catalog.
-//
-//   npx tsx tests/catalogFill.ts --form-id=form-8949 [--update]
-//   (check-only, via the main runner: npm test -- form-8949)
-//
-// What this catches:
-//   - widget the catalog references doesn't exist in the PDF
-//   - catalog says `text` but the widget is actually a checkbox
-//   - field's pdfWidgetName collides with another field's (same value
-//     wouldn't surface this; per-field synthetic values do)
-//   - any catalog field skipped by the renderer (size mismatch)
-//   - drift from the last validated state (golden diff)
-//
-// First run: pass --update to bootstrap the golden + a filled PDF at
-// /tmp/smoke-<formId>.pdf. Eyeball the PDF, commit the golden, then future
-// runs (without --update) act as a regression check.
-//
-// runAll.ts imports `runCatalogFillCheck` and invokes it for each formId
-// listed in its CATALOG_FORM_IDS array — one row per form in the summary.
+/*
+ * Catalog-fill test — validates a form catalog's completeness and per-field
+ * value-type integrity against its blank PDF, snapshotted as a golden file.
+ *
+ * For a given form-id: load its catalog + blank PDF, build an EvaluatedForm
+ * where every field has a deterministic synthetic value, render via
+ * fillFromCatalog, and diff the rendered map against the golden stored
+ * alongside the catalog.
+ *
+ *   npx tsx tests/catalogFill.ts --form-id=form-8949 [--update]
+ *   (check-only, via the main runner: npm test -- form-8949)
+ *
+ * What this catches:
+ *   - widget the catalog references doesn't exist in the PDF
+ *   - catalog says `text` but the widget is actually a checkbox
+ *   - field's pdfWidgetName collides with another field's (same value
+ *     wouldn't surface this; per-field synthetic values do)
+ *   - any catalog field skipped by the renderer (size mismatch)
+ *   - drift from the last validated state (golden diff)
+ *
+ * First run: pass --update to bootstrap the golden + a filled PDF at
+ * /tmp/smoke-<formId>.pdf. Eyeball the PDF, commit the golden, then future
+ * runs (without --update) act as a regression check.
+ *
+ * runAll.ts imports `runCatalogFillCheck` and invokes it for each formId
+ * listed in its CATALOG_FORM_IDS array — one row per form in the summary.
+ */
 
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
@@ -57,11 +59,13 @@ function parseArgs(argv: string[]): Args {
   return { formId, update };
 }
 
-// ─── Catalog registry ───────────────────────────────────────────────────
-//
-// The set of forms with catalog-fill goldens is exactly the set of
-// forms in the shared registry — same source of truth. Re-export FORMS
-// under the CATALOGS name so runAll's iteration stays self-describing.
+/*
+ * ─── Catalog registry ───────────────────────────────────────────────────
+ * 
+ * The set of forms with catalog-fill goldens is exactly the set of
+ * forms in the shared registry — same source of truth. Re-export FORMS
+ * under the CATALOGS name so runAll's iteration stays self-describing.
+ */
 import { FORMS, getFormSpec } from "../src/engine/registry.js";
 
 export const CATALOGS = FORMS;
@@ -70,12 +74,14 @@ function lookupCatalogPath(formId: string): string {
   return getFormSpec(formId).catalogPath;
 }
 
-// ─── Synthetic value generation ─────────────────────────────────────────
-//
-// Deterministic per field. Two goals:
-//   1. Match the renderer's shape expectations per (valueType, pdfFieldKind).
-//   2. Make values per-field-unique so widget collisions (two fields
-//      sharing a pdfWidgetName) surface as the wrong text being written.
+/*
+ * ─── Synthetic value generation ─────────────────────────────────────────
+ * 
+ * Deterministic per field. Two goals:
+ *   1. Match the renderer's shape expectations per (valueType, pdfFieldKind).
+ *   2. Make values per-field-unique so widget collisions (two fields
+ *      sharing a pdfWidgetName) surface as the wrong text being written.
+ */
 
 function hashFieldId(id: string): number {
   return createHash("sha256").update(id).digest().readUInt32BE(0);
@@ -84,20 +90,24 @@ function hashFieldId(id: string): number {
 function syntheticValue(field: FieldInventory): unknown {
   const seed = hashFieldId(field.fieldId);
   const tag = seed.toString(36).slice(0, 5).toUpperCase();
-  // Branch on the classifier's rich type, which distinguishes within the
-  // coarse valueType buckets. Falls back to plain valueType for any catalog
-  // missing valueTypeRich.
+  /*
+   * Branch on the classifier's rich type, which distinguishes within the
+   * coarse valueType buckets. Falls back to plain valueType for any catalog
+   * missing valueTypeRich.
+   */
   const rich = field.valueTypeRich ?? field.valueType;
 
-  // Small-maxLength fields are usually structural sub-parts (date
-  // month/day/year, 2-letter state, 2-digit year suffix, credit code,
-  // single-digit count) where the canonical synthetic — "01/15/2025",
-  // "T-XXXXX", 4-digit money — overflows. The renderer's maxLength-expanding
-  // fallback then writes the longer value anyway, which masks the bug
-  // instead of failing the test. Produce a value of exactly maxLength,
-  // deterministic from the seed so values stay per-field-unique. Numeric
-  // fields get an actual number (renderer requires typeof === "number");
-  // everything else gets a digit string.
+  /*
+   * Small-maxLength fields are usually structural sub-parts (date
+   * month/day/year, 2-letter state, 2-digit year suffix, credit code,
+   * single-digit count) where the canonical synthetic — "01/15/2025",
+   * "T-XXXXX", 4-digit money — overflows. The renderer's maxLength-expanding
+   * fallback then writes the longer value anyway, which masks the bug
+   * instead of failing the test. Produce a value of exactly maxLength,
+   * deterministic from the seed so values stay per-field-unique. Numeric
+   * fields get an actual number (renderer requires typeof === "number");
+   * everything else gets a digit string.
+   */
   if (typeof field.maxLength === "number" && field.maxLength > 0 && field.maxLength <= 4) {
     const mod = 10 ** field.maxLength;
     if (field.valueType === "numeric") return seed % mod;
@@ -119,8 +129,10 @@ function syntheticValue(field: FieldInventory): unknown {
     case "email":
       return `t-${tag.toLowerCase()}@example.com`;
     case "signature":
-      // Signature widgets fall through to coerceTextValue as a plain string;
-      // give them a per-field-unique tag like other text fields.
+      /*
+       * Signature widgets fall through to coerceTextValue as a plain string;
+       * give them a per-field-unique tag like other text fields.
+       */
       return `T-${tag}`;
     case "boolean":
       return true;
@@ -174,10 +186,12 @@ function buildSyntheticForm(
   };
 }
 
-// ─── Golden serialization ───────────────────────────────────────────────
-//
-// Stable JSON shape: rendered map → sorted array of [fieldId, widgets[]].
-// widget entries omit absent text/checked fields so the diff is signal-only.
+/*
+ * ─── Golden serialization ───────────────────────────────────────────────
+ * 
+ * Stable JSON shape: rendered map → sorted array of [fieldId, widgets[]].
+ * widget entries omit absent text/checked fields so the diff is signal-only.
+ */
 
 interface GoldenEntry {
   fieldId: string;
@@ -241,13 +255,15 @@ function diffGoldens(expected: Golden, actual: Golden): string[] {
   return diffs;
 }
 
-// ─── Programmatic entry (used by runAll) ────────────────────────────────
-//
-// Returns a RunResult of the same shape `runScenario` produces so runAll.ts
-// can aggregate catalog-fill checks alongside scenario runs in one table.
-// Failures are collected as strings rather than thrown — partial info is
-// more useful than a stack trace when surfacing what changed across N
-// forms in one pre-commit pass.
+/*
+ * ─── Programmatic entry (used by runAll) ────────────────────────────────
+ * 
+ * Returns a RunResult of the same shape `runScenario` produces so runAll.ts
+ * can aggregate catalog-fill checks alongside scenario runs in one table.
+ * Failures are collected as strings rather than thrown — partial info is
+ * more useful than a stack trace when surfacing what changed across N
+ * forms in one pre-commit pass.
+ */
 
 export async function runCatalogFillCheck(formId: string): Promise<RunResult> {
   const t0 = Date.now();
@@ -268,17 +284,23 @@ export async function runCatalogFillCheck(formId: string): Promise<RunResult> {
       catalog,
     });
 
-    // Write the rendered PDF unconditionally — useful reference on both
-    // green and red runs (operator can open it to confirm a diff is real).
+    /*
+     * Write the rendered PDF unconditionally — useful reference on both
+     * green and red runs (operator can open it to confirm a diff is real).
+     */
     await fs.writeFile(`/tmp/smoke-${formId}.pdf`, pdfBytes);
 
-    // Layer 1: render warnings → catalog references a widget the PDF
-    // can't satisfy (wrong name, wrong type, overflow after fallbacks).
+    /*
+     * Layer 1: render warnings → catalog references a widget the PDF
+     * can't satisfy (wrong name, wrong type, overflow after fallbacks).
+     */
     for (const w of warnings) failures.push(`render warning: ${w}`);
 
-    // Layer 2: every field should have produced ≥1 rendered widget. The
-    // renderer silently skips fields with undefined values (e.g. selects
-    // with empty options) — surface those as missing.
+    /*
+     * Layer 2: every field should have produced ≥1 rendered widget. The
+     * renderer silently skips fields with undefined values (e.g. selects
+     * with empty options) — surface those as missing.
+     */
     if (rendered.size !== fieldCount) {
       const renderedIds = new Set(rendered.keys());
       const missing = catalog
@@ -292,9 +314,11 @@ export async function runCatalogFillCheck(formId: string): Promise<RunResult> {
       );
     }
 
-    // Layer 3: diff vs golden. Missing golden file is itself a failure —
-    // makes "operator added a form but never bootstrapped the snapshot"
-    // visible in the runAll table rather than silently green.
+    /*
+     * Layer 3: diff vs golden. Missing golden file is itself a failure —
+     * makes "operator added a form but never bootstrapped the snapshot"
+     * visible in the runAll table rather than silently green.
+     */
     const actual = toGolden(formId, fieldCount, rendered);
     let expectedRaw: string;
     try {
@@ -313,8 +337,10 @@ export async function runCatalogFillCheck(formId: string): Promise<RunResult> {
     const expected = JSON.parse(expectedRaw) as Golden;
     const diffs = diffGoldens(expected, actual);
     for (const d of diffs.slice(0, 10)) {
-      // Only the first line of each diff entry — multi-line diff bodies
-      // make the summary table unreadable.
+      /*
+       * Only the first line of each diff entry — multi-line diff bodies
+       * make the summary table unreadable.
+       */
       failures.push(`diff: ${d.split("\n")[0]}`);
     }
     if (diffs.length > 10) failures.push(`…and ${diffs.length - 10} more diffs`);
@@ -344,9 +370,11 @@ async function main(): Promise<void> {
   console.log(`  blank:   ${blankPath}`);
   console.log(`  golden:  ${goldenPath}`);
 
-  // --update path: bootstrap (or refresh) the golden, write the PDF, exit.
-  // Bypasses the diff check entirely so the operator can re-snapshot after
-  // an intentional change without seeing a fail-then-update churn.
+  /*
+   * --update path: bootstrap (or refresh) the golden, write the PDF, exit.
+   * Bypasses the diff check entirely so the operator can re-snapshot after
+   * an intentional change without seeing a fail-then-update churn.
+   */
   if (args.update) {
     const catalog = await loadFromFixture(catalogPath);
     const fieldCount = catalog.getFields(args.formId).length;
@@ -385,8 +413,10 @@ async function main(): Promise<void> {
     return;
   }
 
-  // Check path: defer entirely to runCatalogFillCheck so CLI + runAll
-  // share one implementation.
+  /*
+   * Check path: defer entirely to runCatalogFillCheck so CLI + runAll
+   * share one implementation.
+   */
   const result = await runCatalogFillCheck(args.formId);
   if (result.passed) {
     console.log(`\nOK: ${result.name} (${result.durationMs}ms)`);
@@ -401,8 +431,10 @@ async function main(): Promise<void> {
   process.exit(1);
 }
 
-// Skip the CLI wrapper when imported (runAll consumes the exports above).
-// import.meta.url vs argv[1] is the canonical Node way to detect this.
+/*
+ * Skip the CLI wrapper when imported (runAll consumes the exports above).
+ * import.meta.url vs argv[1] is the canonical Node way to detect this.
+ */
 const isCli =
   process.argv[1] && import.meta.url === `file://${process.argv[1]}`;
 if (isCli) {

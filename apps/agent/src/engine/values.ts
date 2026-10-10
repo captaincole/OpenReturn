@@ -1,23 +1,27 @@
-// Branded primitive types for form fields + accounting slots.
-//
-// Each type is a phantom-branded primitive: zero runtime cost (the brand
-// only exists in the type-checker), but TS treats them as nominally distinct
-// so `SSN` can't be assigned to `Money` and vice versa. Bindings can return
-// these directly into form fields whose declared valueType matches the
-// underlying primitive.
-//
-// Every brand carries a default `format(value)` used by the renderer when
-// writing into PDF widgets. Per-form overrides live next to each form's
-// bindings (see FormSpec.formatters) and take precedence over the default.
-//
-// New brands are added here as the accounting layer grows. Bindings that
-// need a freshly-introduced shape should reference the brand in their
-// return type so the renderer/formatter path stays exhaustive.
+/*
+ * Branded primitive types for form fields + accounting slots.
+ * 
+ * Each type is a phantom-branded primitive: zero runtime cost (the brand
+ * only exists in the type-checker), but TS treats them as nominally distinct
+ * so `SSN` can't be assigned to `Money` and vice versa. Bindings can return
+ * these directly into form fields whose declared valueType matches the
+ * underlying primitive.
+ * 
+ * Every brand carries a default `format(value)` used by the renderer when
+ * writing into PDF widgets. Per-form overrides live next to each form's
+ * bindings (see FormSpec.formatters) and take precedence over the default.
+ * 
+ * New brands are added here as the accounting layer grows. Bindings that
+ * need a freshly-introduced shape should reference the brand in their
+ * return type so the renderer/formatter path stays exhaustive.
+ */
 
-// ─── Money ───────────────────────────────────────────────────────────────
-// Whole dollars. Storage convention is `number` of dollars (not cents) so
-// JSON round-trips and arithmetic don't need conversion helpers. Negatives
-// are valid (refunds, losses, owe-amounts).
+/*
+ * ─── Money ───────────────────────────────────────────────────────────────
+ * Whole dollars. Storage convention is `number` of dollars (not cents) so
+ * JSON round-trips and arithmetic don't need conversion helpers. Negatives
+ * are valid (refunds, losses, owe-amounts).
+ */
 
 export type Money = number & { readonly __brand: "Money" };
 
@@ -38,11 +42,13 @@ export const Money = {
   },
 };
 
-// ─── SSN ─────────────────────────────────────────────────────────────────
-// Canonical storage is the 9-digit string with NO separators ("123456789").
-// Every per-form presentation derives from the bare digits. ITINs use the
-// same brand — both are 9 digits and the IRS treats them interchangeably
-// on filing forms. If a future form distinguishes, split the brand then.
+/*
+ * ─── SSN ─────────────────────────────────────────────────────────────────
+ * Canonical storage is the 9-digit string with NO separators ("123456789").
+ * Every per-form presentation derives from the bare digits. ITINs use the
+ * same brand — both are 9 digits and the IRS treats them interchangeably
+ * on filing forms. If a future form distinguishes, split the brand then.
+ */
 
 export type SSN = string & { readonly __brand: "SSN" };
 
@@ -62,9 +68,11 @@ export const SSN = {
   digits: (s: SSN): string => s,
 };
 
-// ─── EIN ─────────────────────────────────────────────────────────────────
-// Employer identification number — canonical storage is 9 bare digits.
-// Default presentation matches the IRS format "##-#######".
+/*
+ * ─── EIN ─────────────────────────────────────────────────────────────────
+ * Employer identification number — canonical storage is 9 bare digits.
+ * Default presentation matches the IRS format "##-#######".
+ */
 
 export type EIN = string & { readonly __brand: "EIN" };
 
@@ -83,10 +91,12 @@ export const EIN = {
   digits: (e: EIN): string => e,
 };
 
-// ─── Phone ───────────────────────────────────────────────────────────────
-// Canonical storage is 10 bare digits ("7039530253"). Default presentation
-// is dashed "###-###-####"; per-form overrides can switch to parens
-// ("(703) 953-0253") or digit-only depending on the widget's convention.
+/*
+ * ─── Phone ───────────────────────────────────────────────────────────────
+ * Canonical storage is 10 bare digits ("7039530253"). Default presentation
+ * is dashed "###-###-####"; per-form overrides can switch to parens
+ * ("(703) 953-0253") or digit-only depending on the widget's convention.
+ */
 
 export type Phone = string & { readonly __brand: "Phone" };
 
@@ -109,8 +119,10 @@ export const Phone = {
     `(${p.slice(0, 3)}) ${p.slice(3, 6)}-${p.slice(6)}`,
 };
 
-// ─── ISODate ─────────────────────────────────────────────────────────────
-// "YYYY-MM-DD". Renderer formats per-form (some want "MM/DD/YYYY").
+/*
+ * ─── ISODate ─────────────────────────────────────────────────────────────
+ * "YYYY-MM-DD". Renderer formats per-form (some want "MM/DD/YYYY").
+ */
 
 export type ISODate = string & { readonly __brand: "ISODate" };
 
@@ -130,11 +142,13 @@ export const ISODate = {
   },
 };
 
-// ─── FilingStatus ────────────────────────────────────────────────────────
-// Discriminated value, not a brand. Long form matches the AI decision
-// vocabulary (`decisions.scope.filing_status`) and the tax-table API's
-// column names — keep them aligned so resolvers / table lookups don't
-// need a translation table.
+/*
+ * ─── FilingStatus ────────────────────────────────────────────────────────
+ * Discriminated value, not a brand. Long form matches the AI decision
+ * vocabulary (`decisions.scope.filing_status`) and the tax-table API's
+ * column names — keep them aligned so resolvers / table lookups don't
+ * need a translation table.
+ */
 
 export type FilingStatus =
   | "single"

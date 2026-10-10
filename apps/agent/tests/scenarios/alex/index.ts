@@ -1,14 +1,16 @@
-// Alex scenario bundle.
-//
-// Alex is our MVP archetype: single CA filer, one W-2 from Brightside
-// Logistics, no dependents, standard deduction, no investment income.
-// Federal: taxable income $63,250 → tax $8,835 → $585 refund.
-// California: taxable income $73,294 → tax $3,256 → $3 owed.
-//
-// Run just this scenario:
-//   npm test -- alex
-// Run all scenarios:
-//   npm test
+/*
+ * Alex scenario bundle.
+ * 
+ * Alex is our MVP archetype: single CA filer, one W-2 from Brightside
+ * Logistics, no dependents, standard deduction, no investment income.
+ * Federal: taxable income $63,250 → tax $8,835 → $585 refund.
+ * California: taxable income $73,294 → tax $3,256 → $3 owed.
+ * 
+ * Run just this scenario:
+ *   npm test -- alex
+ * Run all scenarios:
+ *   npm test
+ */
 
 import type { Scenario } from "../../types.js";
 import { alexFacts, ALEX_TAX_YEAR, ALEX_USER_ID } from "./facts.js";

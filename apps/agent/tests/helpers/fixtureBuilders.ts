@@ -1,7 +1,9 @@
-// Small constructor helpers for building TaxFactRow / AIDecisionRow
-// fixtures with sensible defaults. Pulled out so every scenario's
-// facts.ts / decisions.ts stays focused on the values, not the row
-// scaffolding.
+/*
+ * Small constructor helpers for building TaxFactRow / AIDecisionRow
+ * fixtures with sensible defaults. Pulled out so every scenario's
+ * facts.ts / decisions.ts stays focused on the values, not the row
+ * scaffolding.
+ */
 
 import type { TaxFactRow } from "../../src/mastra/db/taxFacts.js";
 import type { AIDecisionRow } from "../../src/mastra/db/aiDecisions.js";

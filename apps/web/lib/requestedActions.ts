@@ -1,10 +1,12 @@
-// Requested-action types + browser-side fetchers. Domain data lives in the
-// libsql app DB on the server; the browser goes through the
-// /api/requested-actions Route Handlers (session cookie auth →
-// lib/serverDb.ts queries).
-//
-// v1 only emits kind='upload'. The shape supports 'confirm' / 'decide'
-// for when Luca learns to surface structured non-document asks.
+/*
+ * Requested-action types + browser-side fetchers. Domain data lives in the
+ * libsql app DB on the server; the browser goes through the
+ * /api/requested-actions Route Handlers (session cookie auth →
+ * lib/serverDb.ts queries).
+ *
+ * v1 only emits kind='upload'. The shape supports 'confirm' / 'decide'
+ * for when Luca learns to surface structured non-document asks.
+ */
 
 export type RequestedActionKind = "upload" | "confirm" | "decide";
 export type RequestedActionStatus =
@@ -28,9 +30,11 @@ export interface RequestedAction {
   resolvedAt: string | null;
 }
 
-// "Open" in the UI sense — anything the user can still act on or that's
-// in flight. Resolved/skipped/dismissed cards stay in the DB for audit
-// but aren't surfaced.
+/*
+ * "Open" in the UI sense — anything the user can still act on or that's
+ * in flight. Resolved/skipped/dismissed cards stay in the DB for audit
+ * but aren't surfaced.
+ */
 export async function fetchOpenActions(
   taxYear: number,
 ): Promise<RequestedAction[]> {
@@ -41,9 +45,11 @@ export async function fetchOpenActions(
   return (await res.json()) as RequestedAction[];
 }
 
-// Called the moment the user's upload lands. The card stays visible
-// (status='processing' shows a "Luca is reviewing this" indicator) until
-// Luca calls dismiss-requested-action after ingesting.
+/*
+ * Called the moment the user's upload lands. The card stays visible
+ * (status='processing' shows a "Luca is reviewing this" indicator) until
+ * Luca calls dismiss-requested-action after ingesting.
+ */
 export async function markActionProcessing(
   actionId: string,
   documentId: string,

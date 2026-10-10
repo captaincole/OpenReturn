@@ -5,9 +5,11 @@
 
 import { resolve } from "node:path";
 
-// Offline paths anchor at cwd — tests, scripts, and refdocs tooling all run
-// with cwd at apps/agent/ (same convention as src/paths.ts, inlined here so
-// the engine imports no code from outside src/engine/).
+/*
+ * Offline paths anchor at cwd — tests, scripts, and refdocs tooling all run
+ * with cwd at apps/agent/ (same convention as src/paths.ts, inlined here so
+ * the engine imports no code from outside src/engine/).
+ */
 const projectRoot = process.cwd();
 
 export interface FormSpec {

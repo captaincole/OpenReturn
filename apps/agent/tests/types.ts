@@ -1,12 +1,14 @@
-// Scenario type — the contract every test scenario implements.
-//
-// A Scenario bundles its inputs (facts + decisions) with its expected
-// outputs (engine field values + rendered widget values). The shared
-// runner (runScenario.ts) takes one of these and produces a RunResult.
-//
-// Adding a new scenario = create tests/scenarios/<name>/{facts,decisions,
-// expected,index}.ts following the Alex pattern; export a Scenario from
-// index.ts; add it to runAll.ts.
+/*
+ * Scenario type — the contract every test scenario implements.
+ * 
+ * A Scenario bundles its inputs (facts + decisions) with its expected
+ * outputs (engine field values + rendered widget values). The shared
+ * runner (runScenario.ts) takes one of these and produces a RunResult.
+ * 
+ * Adding a new scenario = create tests/scenarios/<name>/{facts,decisions,
+ * expected,index}.ts following the Alex pattern; export a Scenario from
+ * index.ts; add it to runAll.ts.
+ */
 
 import type { TaxFactRow } from "../src/mastra/db/taxFacts.js";
 import type { AIDecisionRow } from "../src/mastra/db/aiDecisions.js";

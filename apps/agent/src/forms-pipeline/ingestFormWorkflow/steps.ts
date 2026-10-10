@@ -1,18 +1,20 @@
-// Form-ingest workflow steps. Three sequential phases:
-//   extract  — pdf.js (via unpdf): widget discovery + label resolution. Two
-//              label tiers (/TU when present, vision LLM when not). Throws
-//              if any widget can't be labeled.
-//   classify — Claude enrichment per field: fieldId, category, valueType,
-//              stable option values for radios. Labels arrive deterministic;
-//              the classifier doesn't try to infer them.
-//   persist  — Merge deterministic + enrichment into the catalog shape,
-//              round-trip-validate (every widget ends up in the catalog),
-//              write JSON, optionally upsert to Supabase.
-//
-// Round-trip invariant: every ExtractedField is in the persisted catalog.
-// Fields the AI couldn't enrich get a placeholder fieldId
-// (form-<id>.unclassified.<shortName>); the deterministic structure
-// (pdfWidgetName, label, valueType from kind, options[] for radios) is preserved.
+/*
+ * Form-ingest workflow steps. Three sequential phases:
+ *   extract  — pdf.js (via unpdf): widget discovery + label resolution. Two
+ *              label tiers (/TU when present, vision LLM when not). Throws
+ *              if any widget can't be labeled.
+ *   classify — Claude enrichment per field: fieldId, category, valueType,
+ *              stable option values for radios. Labels arrive deterministic;
+ *              the classifier doesn't try to infer them.
+ *   persist  — Merge deterministic + enrichment into the catalog shape,
+ *              round-trip-validate (every widget ends up in the catalog),
+ *              write JSON, optionally upsert to Supabase.
+ * 
+ * Round-trip invariant: every ExtractedField is in the persisted catalog.
+ * Fields the AI couldn't enrich get a placeholder fieldId
+ * (form-<id>.unclassified.<shortName>); the deterministic structure
+ * (pdfWidgetName, label, valueType from kind, options[] for radios) is preserved.
+ */
 
 import { promises as fs } from "node:fs";
 import { createStep } from "@mastra/core/workflows";
@@ -295,17 +297,21 @@ function buildCatalogRow(
   const baseFieldId = enrichment
     ? enrichment.fieldId
     : `${formId}.unclassified.${slugifyShortName(field.shortName)}`;
-  // Inject the widget's page index between the formId and the rest of the
-  // fieldId: "form-8949.header.taxpayer_name" → "form-8949.0.header.taxpayer_name".
-  // The classifier is instructed to reuse fieldIds across batches when fields
-  // are semantically equivalent, which means multi-page forms (8949 Part I/II,
-  // 540 pages 1+/2, …) emit the same name for distinct widgets. Page-prefixing
-  // restores per-widget uniqueness without making the classifier handle the
-  // physical layout. Catalogs ingested before this change kept their flat
-  // shape; their bindings reference fieldIds without the page slot.
+  /*
+   * Inject the widget's page index between the formId and the rest of the
+   * fieldId: "form-8949.header.taxpayer_name" → "form-8949.0.header.taxpayer_name".
+   * The classifier is instructed to reuse fieldIds across batches when fields
+   * are semantically equivalent, which means multi-page forms (8949 Part I/II,
+   * 540 pages 1+/2, …) emit the same name for distinct widgets. Page-prefixing
+   * restores per-widget uniqueness without making the classifier handle the
+   * physical layout. Catalogs ingested before this change kept their flat
+   * shape; their bindings reference fieldIds without the page slot.
+   */
   const fieldId = withPagePrefix(baseFieldId, formId, position.page);
-  // Label is deterministic (from extractFormFields tier-1 /TU or tier-2 vision).
-  // The classifier doesn't produce it.
+  /*
+   * Label is deterministic (from extractFormFields tier-1 /TU or tier-2 vision).
+   * The classifier doesn't produce it.
+   */
   const label = field.label;
   const labelSource = field.labelSource;
   const category = enrichment ? enrichment.category : "other";
@@ -332,10 +338,12 @@ function buildCatalogRow(
   }
 
   if (field.fieldKind === "radio" && field.radioOptions) {
-    // Zip the deterministic option labels with the AI's stable values.
-    // If enrichment is missing or misaligned, fall back to slugifying the
-    // option label itself — at least the rendering binding can still target
-    // the right radio option.
+    /*
+     * Zip the deterministic option labels with the AI's stable values.
+     * If enrichment is missing or misaligned, fall back to slugifying the
+     * option label itself — at least the rendering binding can still target
+     * the right radio option.
+     */
     const enrichmentByRadioOption = new Map<string, string>(
       (enrichment?.options ?? []).map((o) => [o.radioOption, o.value]),
     );

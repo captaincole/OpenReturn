@@ -7,21 +7,25 @@ import type {
 import type { MastraDBMessage } from "@mastra/core/agent";
 import { modelReadsPdf } from "../models";
 
-// Claude reads PDF file parts natively; OpenAI-compatible servers (Ollama,
-// vLLM, LM Studio, …) accept images only — a PDF part makes the AI SDK throw
-// AI_UnsupportedFunctionalityError before the request even leaves. This
-// processor rasterizes PDF attachments to one PNG per page so document
-// reading keeps working when LUCA_MODEL points at a local model.
-//
-// It runs at processInput (the new user message) AND processInputStep (the
-// full per-step message list) because thread history replays older messages
-// that never went through processInput — a PDF uploaded three turns ago
-// would otherwise crash every later turn. Rasterization is cached by content
-// hash, so each PDF is rendered once per process lifetime.
+/*
+ * Claude reads PDF file parts natively; OpenAI-compatible servers (Ollama,
+ * vLLM, LM Studio, …) accept images only — a PDF part makes the AI SDK throw
+ * AI_UnsupportedFunctionalityError before the request even leaves. This
+ * processor rasterizes PDF attachments to one PNG per page so document
+ * reading keeps working when LUCA_MODEL points at a local model.
+ * 
+ * It runs at processInput (the new user message) AND processInputStep (the
+ * full per-step message list) because thread history replays older messages
+ * that never went through processInput — a PDF uploaded three turns ago
+ * would otherwise crash every later turn. Rasterization is cached by content
+ * hash, so each PDF is rendered once per process lifetime.
+ */
 
 const MAX_PAGES = 8;
-// 1.5× the 72dpi base ≈ 108dpi — enough to read W-2 box numbers without
-// blowing up the request payload (each page ≈ 150-400 KB of PNG).
+/*
+ * 1.5× the 72dpi base ≈ 108dpi — enough to read W-2 box numbers without
+ * blowing up the request payload (each page ≈ 150-400 KB of PNG).
+ */
 const SCALE = 1.5;
 
 type FilePart = { type: "file"; mimeType?: string; data?: unknown };

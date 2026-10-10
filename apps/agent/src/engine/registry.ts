@@ -1,17 +1,19 @@
-// Central form registry — composes the per-jurisdiction registries into
-// the single universe of forms the engine can evaluate and render. Every
-// consumer (case-state projection, doc-gen tool, test runner, catalog-fill
-// checker, scenario definitions) imports from here rather than maintaining
-// its own list.
-//
-// The actual form entries live with their jurisdiction:
-//   federal forms → ./federal/index.ts
-//   state forms   → ./state/<st>/index.ts, composed by ./state/index.ts
-//
-// Federal comes first: state forms read federal results cross-form (CA 540
-// line 13 ← 1040 AGI), and listing upstreams first lets the fixpoint
-// evaluator converge in fewer passes. Order affects pass count, never
-// correctness — see evaluateAllForms in engine.ts.
+/*
+ * Central form registry — composes the per-jurisdiction registries into
+ * the single universe of forms the engine can evaluate and render. Every
+ * consumer (case-state projection, doc-gen tool, test runner, catalog-fill
+ * checker, scenario definitions) imports from here rather than maintaining
+ * its own list.
+ * 
+ * The actual form entries live with their jurisdiction:
+ *   federal forms → ./federal/index.ts
+ *   state forms   → ./state/<st>/index.ts, composed by ./state/index.ts
+ * 
+ * Federal comes first: state forms read federal results cross-form (CA 540
+ * line 13 ← 1040 AGI), and listing upstreams first lets the fixpoint
+ * evaluator converge in fewer passes. Order affects pass count, never
+ * correctness — see evaluateAllForms in engine.ts.
+ */
 
 import { buildCatalogFromFixtures, type Catalog } from "./catalog.js";
 import { FEDERAL_FORMS, FEDERAL_CATALOGS } from "./federal/index.js";

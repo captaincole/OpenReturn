@@ -1,19 +1,21 @@
-// Alejandro Reyes — expected 1040 results.
-//
-// Every numeric expected value below is the literal number from the
-// CPA-completed `docs/Alejandro-1040-Golden.pdf` in this scenario folder.
-// Any divergence is a regression in the engine, catalog, bindings,
-// FilingInfo resolver, or renderer.
-//
-// Known gaps Alejandro will surface vs. current bindings:
-//   - line.7a (capital gain) — currently "unsupported"; needs Schedule D
-//     binding to produce $2,550. Until then, the sum on line 9 will be
-//     short by $2,550 and every downstream line will be wrong.
-//   - line.16 (tax) — currently uses lookupTax(taxable_income, status);
-//     Alejandro's preferential income ($381 qualified divs + $2,250 net
-//     LTCG = $2,631) requires the Qualified Dividends and Capital Gain
-//     Tax Worksheet to compute correctly ($13,916). Plain tax-table
-//     lookup at $87,185 gives a different (wrong) answer.
+/*
+ * Alejandro Reyes — expected 1040 results.
+ * 
+ * Every numeric expected value below is the literal number from the
+ * CPA-completed `docs/Alejandro-1040-Golden.pdf` in this scenario folder.
+ * Any divergence is a regression in the engine, catalog, bindings,
+ * FilingInfo resolver, or renderer.
+ * 
+ * Known gaps Alejandro will surface vs. current bindings:
+ *   - line.7a (capital gain) — currently "unsupported"; needs Schedule D
+ *     binding to produce $2,550. Until then, the sum on line 9 will be
+ *     short by $2,550 and every downstream line will be wrong.
+ *   - line.16 (tax) — currently uses lookupTax(taxable_income, status);
+ *     Alejandro's preferential income ($381 qualified divs + $2,250 net
+ *     LTCG = $2,631) requires the Qualified Dividends and Capital Gain
+ *     Tax Worksheet to compute correctly ($13,916). Plain tax-table
+ *     lookup at $87,185 gives a different (wrong) answer.
+ */
 
 import type { ExpectedResults } from "../../types.js";
 
@@ -61,11 +63,13 @@ export const alejandroExpected: ExpectedResults = {
     "form-1040.header.tax_year_beginning_mm",
     "form-1040.header.tax_year_ending_mm",
     "form-1040.header.tax_year_ending_yy",
-    // Direct-deposit bank info: we have no banking facts ingested yet,
-    // so the routing + account-number widgets must stay blank. (The
-    // original CPA-supplied golden had "stuff" placeholder text in
-    // both; we cleaned that up and now this assertion guards the
-    // regression.)
+    /*
+     * Direct-deposit bank info: we have no banking facts ingested yet,
+     * so the routing + account-number widgets must stay blank. (The
+     * original CPA-supplied golden had "stuff" placeholder text in
+     * both; we cleaned that up and now this assertion guards the
+     * regression.)
+     */
     "form-1040.line.35b_routing_number",
     "form-1040.line.35d_account_number",
   ],

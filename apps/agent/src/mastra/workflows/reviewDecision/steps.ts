@@ -27,10 +27,12 @@ import { assessRiskAgent } from "./judges/assessRiskAgent";
 import { ruleAgent } from "./judges/ruleAgent";
 import { modelFor } from "../../models";
 
-// ---------------------------------------------------------------------------
-// Step constants — review_run_steps.step_kind values. Kept here (vs as an
-// enum) so the workflow definition reads naturally.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Step constants — review_run_steps.step_kind values. Kept here (vs as an
+ * enum) so the workflow definition reads naturally.
+ * ---------------------------------------------------------------------------
+ */
 
 const KIND = {
   init: "init",
@@ -40,17 +42,21 @@ const KIND = {
   finalize: "finalize",
 } as const;
 
-// ---------------------------------------------------------------------------
-// init — load the decision, allocate the review_runs row, seed the loop
-// carrier. First step of the parent workflow; not part of the loop.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * init — load the decision, allocate the review_runs row, seed the loop
+ * carrier. First step of the parent workflow; not part of the loop.
+ * ---------------------------------------------------------------------------
+ */
 
 export const initStep = createStep({
   id: "init",
-  // Scope arrives in the workflow input — the caller (record-ai-decision via
-  // the reviewDecision wrapper) already knows the filing; re-resolving it
-  // here would re-impose a one-filing-per-year assumption the workflow
-  // doesn't need.
+  /*
+   * Scope arrives in the workflow input — the caller (record-ai-decision via
+   * the reviewDecision wrapper) already knows the filing; re-resolving it
+   * here would re-impose a one-filing-per-year assumption the workflow
+   * doesn't need.
+   */
   inputSchema: z.object({
     decisionId: z.string(),
     userId: z.string(),
@@ -111,11 +117,13 @@ export const initStep = createStep({
   },
 });
 
-// ---------------------------------------------------------------------------
-// gather — deterministic. Loads supporting facts from tax_facts, derives
-// queries (Haiku formulator on iteration 1, rule's suggestedQueries on
-// iterations 2/3), runs hybrid retrieval, builds the evidence bundle.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * gather — deterministic. Loads supporting facts from tax_facts, derives
+ * queries (Haiku formulator on iteration 1, rule's suggestedQueries on
+ * iterations 2/3), runs hybrid retrieval, builds the evidence bundle.
+ * ---------------------------------------------------------------------------
+ */
 
 export const gatherStep = createStep({
   id: "gather",
@@ -124,19 +132,25 @@ export const gatherStep = createStep({
   execute: async ({ inputData, requestContext }) => {
     const t0 = Date.now();
     const carrier = inputData;
-    // Scope from the carrier — init already resolved + verified the filing;
-    // re-deriving it here would just repeat the lookup on every iteration.
+    /*
+     * Scope from the carrier — init already resolved + verified the filing;
+     * re-deriving it here would just repeat the lookup on every iteration.
+     */
     const scope = { userId: carrier.userId, filingId: carrier.filingId };
 
-    // Iteration 1 → derive queries from the decision via the formulator.
-    // Iterations 2/3 → use the queries the rule step put on the carrier.
+    /*
+     * Iteration 1 → derive queries from the decision via the formulator.
+     * Iterations 2/3 → use the queries the rule step put on the carrier.
+     */
     let queries = carrier.queries;
     if (queries.length === 0) {
       queries = await formulateQueries(carrier);
     }
 
-    // Pull facts cited by the decision. Append-only table; latest-per-key
-    // collapsing happens inside listFactsByKeys.
+    /*
+     * Pull facts cited by the decision. Append-only table; latest-per-key
+     * collapsing happens inside listFactsByKeys.
+     */
     const facts = await listFactsByKeys(
       scope,
       carrier.taxYear,
@@ -200,9 +214,11 @@ export const gatherStep = createStep({
   },
 });
 
-// ---------------------------------------------------------------------------
-// assess — LLM. Reads decision + evidence, emits a risk tier.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * assess — LLM. Reads decision + evidence, emits a risk tier.
+ * ---------------------------------------------------------------------------
+ */
 
 export const assessRiskStep = createStep({
   id: "assess",
@@ -250,10 +266,12 @@ export const assessRiskStep = createStep({
   },
 });
 
-// ---------------------------------------------------------------------------
-// rule — LLM. Reads decision + evidence + risk, emits verdict OR a
-// need_more_evidence request that drives the next iteration.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * rule — LLM. Reads decision + evidence + risk, emits verdict OR a
+ * need_more_evidence request that drives the next iteration.
+ * ---------------------------------------------------------------------------
+ */
 
 export const ruleStep = createStep({
   id: "rule",
@@ -285,9 +303,11 @@ export const ruleStep = createStep({
     }
     const parsed = ruleOutputSchema.parse(ruleOutput);
 
-    // Update the carrier — if rule wants more evidence and we have iterations
-    // left, advance iteration + queries. Otherwise keep the carrier as-is so
-    // finalize can read the verdict.
+    /*
+     * Update the carrier — if rule wants more evidence and we have iterations
+     * left, advance iteration + queries. Otherwise keep the carrier as-is so
+     * finalize can read the verdict.
+     */
     let nextIteration = carrier.iteration;
     let nextQueries = carrier.queries;
     let nextReasons = carrier.needMoreReasons;
@@ -326,11 +346,13 @@ export const ruleStep = createStep({
   },
 });
 
-// ---------------------------------------------------------------------------
-// finalize — reads the carrier after the loop terminates, persists verdict
-// to ai_decisions, optionally writes an open_questions row, completes the
-// review_runs row, returns the workflow output.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * finalize — reads the carrier after the loop terminates, persists verdict
+ * to ai_decisions, optionally writes an open_questions row, completes the
+ * review_runs row, returns the workflow output.
+ * ---------------------------------------------------------------------------
+ */
 
 export const finalizeStep = createStep({
   id: "finalize",
@@ -344,9 +366,11 @@ export const finalizeStep = createStep({
       throw new Error("finalize: ruleOutput missing — loop did not run");
     }
 
-    // Determine the final verdict. If rule still wanted more after the loop
-    // exhausted iterations, we collapse to needs_more_facts and synthesize a
-    // whatsMissing summary from accumulated need-more reasons.
+    /*
+     * Determine the final verdict. If rule still wanted more after the loop
+     * exhausted iterations, we collapse to needs_more_facts and synthesize a
+     * whatsMissing summary from accumulated need-more reasons.
+     */
     let finalVerdict: Verdict;
     let reason: string;
     let citations: { blockId: string; quote?: string }[] = [];
@@ -358,9 +382,11 @@ export const finalizeStep = createStep({
       reason = carrier.ruleOutput.reason;
       citations = carrier.ruleOutput.citations;
     } else {
-      // need_more_evidence + we're out of iterations → collapse to
-      // needs_more_facts. The rule agent's last "reason" describes the gap;
-      // earlier reasons are kept for context.
+      /*
+       * need_more_evidence + we're out of iterations → collapse to
+       * needs_more_facts. The rule agent's last "reason" describes the gap;
+       * earlier reasons are kept for context.
+       */
       finalVerdict = "needs_more_facts";
       const allReasons = [
         ...carrier.needMoreReasons,
@@ -380,8 +406,10 @@ export const finalizeStep = createStep({
       citations.length > 0 ? citations : null,
     );
 
-    // Surface non-accurate outcomes to Luca via an open_questions row so he
-    // circles back with the user instead of the verdict dying in the ledger.
+    /*
+     * Surface non-accurate outcomes to Luca via an open_questions row so he
+     * circles back with the user instead of the verdict dying in the ledger.
+     */
     if (finalVerdict === "needs_more_facts") {
       openQuestionId = crypto.randomUUID();
       await noteQuestion(scope, {
@@ -404,9 +432,11 @@ export const finalizeStep = createStep({
       });
     }
 
-    // Iteration count: if we converged on a verdict on iteration N, that's N.
-    // If we exhausted iterations (rule returned need_more on iter 3), the
-    // carrier was bumped to 4 by ruleStep — clamp to 3 for reporting.
+    /*
+     * Iteration count: if we converged on a verdict on iteration N, that's N.
+     * If we exhausted iterations (rule returned need_more on iter 3), the
+     * carrier was bumped to 4 by ruleStep — clamp to 3 for reporting.
+     */
     const iterationCount = Math.min(carrier.iteration, 3) as 1 | 2 | 3;
 
     await completeReviewRun(scope, {
@@ -445,9 +475,11 @@ export const finalizeStep = createStep({
   },
 });
 
-// ---------------------------------------------------------------------------
-// Prompt rendering and small helpers
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Prompt rendering and small helpers
+ * ---------------------------------------------------------------------------
+ */
 
 function decisionSummary(carrier: LoopCarrier) {
   return {
@@ -460,9 +492,11 @@ function decisionSummary(carrier: LoopCarrier) {
   };
 }
 
-// review_run_steps.input_json carries the relevant inputs only — no point
-// re-storing the whole evidence bundle on the rule step's input log when it
-// already lives on gather's output_json for the same iteration.
+/*
+ * review_run_steps.input_json carries the relevant inputs only — no point
+ * re-storing the whole evidence bundle on the rule step's input log when it
+ * already lives on gather's output_json for the same iteration.
+ */
 function stripHeavyFields(c: LoopCarrier) {
   return {
     decisionId: c.decisionId,
@@ -486,9 +520,11 @@ async function formulateQueries(c: LoopCarrier): Promise<string[]> {
 
   const result = await queryFormulator.generate(prompt, {
     structuredOutput: {
-      // Anthropic's native structured-output endpoint rejects `maxItems` on
-      // array properties, so the 1–2 cap lives in the prompt + the slice
-      // below rather than in the schema.
+      /*
+       * Anthropic's native structured-output endpoint rejects `maxItems` on
+       * array properties, so the 1–2 cap lives in the prompt + the slice
+       * below rather than in the schema.
+       */
       schema: z.object({ queries: z.array(z.string()).min(1) }),
       model: modelFor("judge"),
       errorStrategy: "strict",
@@ -496,8 +532,10 @@ async function formulateQueries(c: LoopCarrier): Promise<string[]> {
   });
   const obj = (result as { object?: { queries?: string[] } }).object;
   if (!obj?.queries || obj.queries.length === 0) {
-    // Fallback: synthesize a query from the decisionKey itself. Better than
-    // throwing — the workflow stays alive and we log the empty-queries case.
+    /*
+     * Fallback: synthesize a query from the decisionKey itself. Better than
+     * throwing — the workflow stays alive and we log the empty-queries case.
+     */
     return [c.decisionKey.replace(/^decisions\./, "").replace(/_/g, " ")];
   }
   return obj.queries.slice(0, 2);

@@ -1,15 +1,17 @@
-// Grounding smoke test — three end-to-end review-decision workflow runs
-// against a THROWAWAY app DB (APP_DB_PATH is pointed at a temp file before
-// any module loads, so the dev database is never touched; the real corpus.db
-// is used read-only for retrieval).
-//
-// Each case: seed facts → record a decision → run reviewDecision(scope, id)
-// directly (the same entry the record-ai-decision tool fires in the
-// background) → assert the verdict, persistence, citations, and the
-// open-question side effects.
-//
-// Costs real LLM calls (Haiku × a few per case) — run on demand, not in CI:
-//   npm run smoke:review
+/*
+ * Grounding smoke test — three end-to-end review-decision workflow runs
+ * against a THROWAWAY app DB (APP_DB_PATH is pointed at a temp file before
+ * any module loads, so the dev database is never touched; the real corpus.db
+ * is used read-only for retrieval).
+ * 
+ * Each case: seed facts → record a decision → run reviewDecision(scope, id)
+ * directly (the same entry the record-ai-decision tool fires in the
+ * background) → assert the verdict, persistence, citations, and the
+ * open-question side effects.
+ * 
+ * Costs real LLM calls (Haiku × a few per case) — run on demand, not in CI:
+ *   npm run smoke:review
+ */
 
 import "dotenv/config";
 import { tmpdir } from "node:os";
@@ -26,9 +28,11 @@ const OWNER_ID = "smoke-owner";
 
 interface Case {
   name: string;
-  /** Any of these verdicts passes. Case 3 accepts two: the CA 540 booklet is
+  /**
+   * Any of these verdicts passes. Case 3 accepts two: the CA 540 booklet is
    *  in the corpus now, so the old "ungroundable" outcome became "accurate
-   *  when retrieval lands / needs_more_facts when it doesn't". */
+   *  when retrieval lands / needs_more_facts when it doesn't". 
+   */
   acceptVerdicts: Array<"accurate" | "inaccurate" | "needs_more_facts">;
   /** Should finalize have written an open_questions row? */
   expectOpenQuestion: boolean | "if-not-accurate";
@@ -100,13 +104,15 @@ const CASES: Case[] = [
     },
   },
   {
-    // Borderline-by-design: the 540 booklet has thin residency detail (FTB
-    // Pub 1031 isn't ingested), so the judge lands differently run to run
-    // (accurate / needs_more_facts / inaccurate are all defensible-ish).
-    // This case asserts PIPELINE MECHANICS (3-iteration loop, CA-corpus
-    // retrieval, persistence, open-question side effects) — not judge
-    // calibration. Calibration coverage belongs to a real eval dataset
-    // (see CLAUDE.md lessons: don't tune prompts off one smoke case).
+    /*
+     * Borderline-by-design: the 540 booklet has thin residency detail (FTB
+     * Pub 1031 isn't ingested), so the judge lands differently run to run
+     * (accurate / needs_more_facts / inaccurate are all defensible-ish).
+     * This case asserts PIPELINE MECHANICS (3-iteration loop, CA-corpus
+     * retrieval, persistence, open-question side effects) — not judge
+     * calibration. Calibration coverage belongs to a real eval dataset
+     * (see CLAUDE.md lessons: don't tune prompts off one smoke case).
+     */
     name: "CA residency call (mechanics only — borderline verdict accepted)",
     acceptVerdicts: ["accurate", "needs_more_facts", "inaccurate"],
     expectOpenQuestion: "if-not-accurate",

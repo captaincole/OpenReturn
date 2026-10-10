@@ -4,14 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import type { PlanItem, PlanItemStatus } from "@/lib/api";
 import { cn } from "@/lib/cn";
 
-// Renders Luca's rolling plan from /app/state. Refreshes whenever the parent
-// page re-fetches state (after each chat turn / reset). Items keep stable
-// ids across status changes so the same row visually transitions
-// todo → doing → done. When a row flips to done we keep it visible briefly
-// (FADE_OUT_MS) so the user sees the checkmark, then drop it.
-//
-// Returns null when there's nothing to show — empty plans don't render a
-// card at all (per Andrew's "no ceremonial single-item list" rule when zero).
+/*
+ * Renders Luca's rolling plan from /app/state. Refreshes whenever the parent
+ * page re-fetches state (after each chat turn / reset). Items keep stable
+ * ids across status changes so the same row visually transitions
+ * todo → doing → done. When a row flips to done we keep it visible briefly
+ * (FADE_OUT_MS) so the user sees the checkmark, then drop it.
+ * 
+ * Returns null when there's nothing to show — empty plans don't render a
+ * card at all (per Andrew's "no ceremonial single-item list" rule when zero).
+ */
 
 const FADE_OUT_MS = 1100;
 
@@ -30,10 +32,12 @@ export function PlanCard({ plan }: PlanCardProps) {
     new Map(),
   );
 
-  // Reconcile `display` whenever the upstream plan changes. Items in the new
-  // plan replace whatever's in display (preserving the leaving flag isn't
-  // needed since once a row is `done` upstream it stays `done`); items
-  // missing upstream that aren't already leaving get scheduled to fade.
+  /*
+   * Reconcile `display` whenever the upstream plan changes. Items in the new
+   * plan replace whatever's in display (preserving the leaving flag isn't
+   * needed since once a row is `done` upstream it stays `done`); items
+   * missing upstream that aren't already leaving get scheduled to fade.
+   */
   useEffect(() => {
     setDisplay((prev) => {
       const incomingById = new Map(plan.map((p) => [p.id, p]));
@@ -43,19 +47,23 @@ export function PlanCard({ plan }: PlanCardProps) {
       for (const incoming of plan) {
         const wasLeaving = prev.find((p) => p.id === incoming.id)?.leaving;
         if (wasLeaving) {
-          // Already on its way out; don't resurrect it just because the
-          // upstream snapshot still includes the done row. Once we've
-          // committed to fade, finish fading.
+          /*
+           * Already on its way out; don't resurrect it just because the
+           * upstream snapshot still includes the done row. Once we've
+           * committed to fade, finish fading.
+           */
           continue;
         }
         next.push(incoming);
       }
 
-      // Items the upstream plan dropped (e.g. Luca rewrote the array without
-      // them) that we haven't already scheduled to leave — keep them around
-      // briefly with whatever status they had so the disappearance isn't a
-      // hard pop-out. We don't have visibility into "was this a deliberate
-      // drop or a status flip we missed", so treat both the same.
+      /*
+       * Items the upstream plan dropped (e.g. Luca rewrote the array without
+       * them) that we haven't already scheduled to leave — keep them around
+       * briefly with whatever status they had so the disappearance isn't a
+       * hard pop-out. We don't have visibility into "was this a deliberate
+       * drop or a status flip we missed", so treat both the same.
+       */
       for (const old of prev) {
         if (incomingById.has(old.id)) continue;
         if (old.leaving) {
@@ -66,8 +74,10 @@ export function PlanCard({ plan }: PlanCardProps) {
         scheduleRemoval(old.id);
       }
 
-      // Items that are `done` upstream — schedule them to leave too, but
-      // keep them visible meanwhile so the checkmark animation reads.
+      /*
+       * Items that are `done` upstream — schedule them to leave too, but
+       * keep them visible meanwhile so the checkmark animation reads.
+       */
       for (const item of next) {
         if (item.status === "done" && !item.leaving) {
           item.leaving = true;
@@ -77,7 +87,7 @@ export function PlanCard({ plan }: PlanCardProps) {
 
       return next;
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // deps intentionally limited to plan — see removal timers above
   }, [plan]);
 
   function scheduleRemoval(id: string) {
@@ -89,8 +99,10 @@ export function PlanCard({ plan }: PlanCardProps) {
     removalTimers.current.set(id, timer);
   }
 
-  // Capture timers on mount so the cleanup closure references the same Map
-  // instance even after re-renders.
+  /*
+   * Capture timers on mount so the cleanup closure references the same Map
+   * instance even after re-renders.
+   */
   const timersAtCleanup = removalTimers.current;
   useEffect(() => {
     return () => {

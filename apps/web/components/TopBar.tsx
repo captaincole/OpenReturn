@@ -1,15 +1,17 @@
 "use client";
 
-// Top bar for the return-scoped layout. Renders above the chat + workspace
-// split pane. Source of truth for "where am I" — chat header and workspace
-// headers DO NOT re-announce the active return per the labeling rule.
-//
-// Structure:
-//   [W → /]  [Return picker ▾]  ·  Home  Forms  Documents      [progress] [⚙] [AC]
-//
-// The return picker is the title-weight element (font-semibold sans —
-// Fraunces renders numerals with cursive stylistic features that read
-// oddly on years like "2025"). Workspace tabs are subordinate.
+/*
+ * Top bar for the return-scoped layout. Renders above the chat + workspace
+ * split pane. Source of truth for "where am I" — chat header and workspace
+ * headers DO NOT re-announce the active return per the labeling rule.
+ * 
+ * Structure:
+ *   [W → /]  [Return picker ▾]  ·  Home  Forms  Documents      [progress] [⚙] [AC]
+ * 
+ * The return picker is the title-weight element (font-semibold sans —
+ * Fraunces renders numerals with cursive stylistic features that read
+ * oddly on years like "2025"). Workspace tabs are subordinate.
+ */
 
 import { signOut } from "@/lib/auth";
 import Link from "next/link";
@@ -66,11 +68,13 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
   }
 
   const basePath = `/r/${activeReturn.id}`;
-  // TODO: replace with a real overall-progress signal once the agent
-  // exposes one. computeOverallPct (forms-complete fraction) reads as 0
-  // until the very last form lands — fakes "no progress" even when the
-  // user has been chatting for a while. For now, scale with fact count
-  // so the chip feels alive at zero and tops out near completion.
+  /*
+   * TODO: replace with a real overall-progress signal once the agent
+   * exposes one. computeOverallPct (forms-complete fraction) reads as 0
+   * until the very last form lands — fakes "no progress" even when the
+   * user has been chatting for a while. For now, scale with fact count
+   * so the chip feels alive at zero and tops out near completion.
+   */
   const pct = state ? Math.min(95, Math.max(8, state.factCount * 4)) : 8;
 
   function isTabActive(tabPath: string): boolean {

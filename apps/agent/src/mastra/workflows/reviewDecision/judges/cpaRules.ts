@@ -1,9 +1,11 @@
-// Earned business logic — rules accumulated as CPAs flag edge cases. Both
-// assessRiskAgent and ruleAgent import this so they reason consistently. New
-// rules land as named sections; the prompt is meant to grow incrementally.
-//
-// Style: each rule states the default first, then overrides with examples.
-// LLMs handle "default + exceptions" structure well.
+/*
+ * Earned business logic — rules accumulated as CPAs flag edge cases. Both
+ * assessRiskAgent and ruleAgent import this so they reason consistently. New
+ * rules land as named sections; the prompt is meant to grow incrementally.
+ * 
+ * Style: each rule states the default first, then overrides with examples.
+ * LLMs handle "default + exceptions" structure well.
+ */
 
 export const CPA_RULES = `## Self-attestation-only categories
 

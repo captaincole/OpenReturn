@@ -1,6 +1,8 @@
-// Cross-check the rate-schedule lookup against the IRS-published formula
-// pieces. Each case picks a representative income inside a bracket and
-// confirms tax = income × rate − subtraction.
+/*
+ * Cross-check the rate-schedule lookup against the IRS-published formula
+ * pieces. Each case picks a representative income inside a bracket and
+ * confirms tax = income × rate − subtraction.
+ */
 
 import { describe, expect, it } from "vitest";
 import { lookupRateSchedule } from "./rateSchedule.js";

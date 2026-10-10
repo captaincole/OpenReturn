@@ -1,15 +1,17 @@
-// ScheduleAFilingInfo — Schedule A (Itemized Deductions) specific slots
-// layered on top of BaseFilingInfo.
-//
-// Schedule A reads upstream amounts from a mix of W-2 box totals (state
-// income tax withheld + CA SDI), single-value facts for property tax /
-// mortgage interest / charity, and one cross-form reference (Form 1040
-// line 11b for AGI, read directly in the binding — not here).
-//
-// Slots resolve from raw facts via simple key lookups today. As scenarios
-// expand we'll replace those with proper fact-kind aggregation (e.g.
-// summing across multiple 1098s, applying basis-adjustment to noncash
-// gifts > $5,000). The slot shape stays stable; only the resolver moves.
+/*
+ * ScheduleAFilingInfo — Schedule A (Itemized Deductions) specific slots
+ * layered on top of BaseFilingInfo.
+ * 
+ * Schedule A reads upstream amounts from a mix of W-2 box totals (state
+ * income tax withheld + CA SDI), single-value facts for property tax /
+ * mortgage interest / charity, and one cross-form reference (Form 1040
+ * line 11b for AGI, read directly in the binding — not here).
+ * 
+ * Slots resolve from raw facts via simple key lookups today. As scenarios
+ * expand we'll replace those with proper fact-kind aggregation (e.g.
+ * summing across multiple 1098s, applying basis-adjustment to noncash
+ * gifts > $5,000). The slot shape stays stable; only the resolver moves.
+ */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { EngineDerivation } from "../../types.js";

@@ -1,9 +1,11 @@
-// Form540FilingInfo — California Form 540 specific slots.
-//
-// CA 540 cross-references federal Form 1040 line-by-line (AGI, taxable
-// income, etc.) but those flow through the form accessor `f`, not through
-// FilingInfo. FilingInfo slots are values produced by the AI resolver from
-// taxpayer facts + documents.
+/*
+ * Form540FilingInfo — California Form 540 specific slots.
+ * 
+ * CA 540 cross-references federal Form 1040 line-by-line (AGI, taxable
+ * income, etc.) but those flow through the form accessor `f`, not through
+ * FilingInfo. FilingInfo slots are values produced by the AI resolver from
+ * taxpayer facts + documents.
+ */
 
 import type { Money } from "../../../values.js";
 import type { BaseFilingInfo } from "../../../filingInfo.js";

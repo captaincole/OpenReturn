@@ -1,15 +1,17 @@
-// Recovery + model-switch: embeds blocks via the local embedding model
-// (EMBEDDINGS_MODEL, default ollama/embeddinggemma-2 — see
-// src/refdocs/embeddings.ts) and writes the vectors back. Idempotent —
-// running it twice is a no-op the second time. Requires Ollama running.
-//
-// Two modes:
-//   (default)  only blocks with NULL embedding — recovers a `corpus sync`
-//              that ran while Ollama was down, without re-paying for
-//              contextualization.
-//   --all      EVERY block — required after switching embedding models (or
-//              fetching a corpus built with a different one), since vectors
-//              from different models live in different spaces.
+/*
+ * Recovery + model-switch: embeds blocks via the local embedding model
+ * (EMBEDDINGS_MODEL, default ollama/embeddinggemma-2 — see
+ * src/refdocs/embeddings.ts) and writes the vectors back. Idempotent —
+ * running it twice is a no-op the second time. Requires Ollama running.
+ * 
+ * Two modes:
+ *   (default)  only blocks with NULL embedding — recovers a `corpus sync`
+ *              that ran while Ollama was down, without re-paying for
+ *              contextualization.
+ *   --all      EVERY block — required after switching embedding models (or
+ *              fetching a corpus built with a different one), since vectors
+ *              from different models live in different spaces.
+ */
 
 import {
   setBlockEmbeddings,

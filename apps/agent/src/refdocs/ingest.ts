@@ -23,13 +23,17 @@ export interface IngestInput {
   taxYear: number | null;
   sourceUrl?: string | null;
   force?: boolean;
-  /** Skip the per-block Haiku contextualization step. Useful for fast dev
+  /**
+   * Skip the per-block Haiku contextualization step. Useful for fast dev
    *  iteration where you only care about the parser. Without contextualization
-   *  the embedding step still runs against raw block text. */
+   *  the embedding step still runs against raw block text. 
+   */
   noContextualize?: boolean;
-  /** Heading-detection profile. Defaults to "irs"; FTB-published docs (e.g.
+  /**
+   * Heading-detection profile. Defaults to "irs"; FTB-published docs (e.g.
    *  Schedule CA instructions) need "ftb" for their en-dash inline-body
-   *  convention. See `ParserStyle` in `./parse`. */
+   *  convention. See `ParserStyle` in `./parse`. 
+   */
   parserStyle?: ParserStyle;
 }
 
@@ -44,9 +48,11 @@ export interface IngestResult {
   replaced: boolean;
   contextualized: boolean;
   embedded: boolean;
-  /** True when the on-disk PDF's sha matches the existing ref_documents row,
+  /**
+   * True when the on-disk PDF's sha matches the existing ref_documents row,
    *  so we returned without re-running extract / contextualize / embed. The
-   *  rest of the result fields are pulled from the existing row in this case. */
+   *  rest of the result fields are pulled from the existing row in this case. 
+   */
   skipped: boolean;
 }
 
@@ -57,13 +63,17 @@ async function shaOfFile(path: string): Promise<string> {
 
 export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
   const pdfPath = resolve(input.pdfPath);
-  // Canonical text colocates with its source PDF: forms/<…>/instructions.pdf
-  // → forms/<…>/instructions.canonical.txt. Same dir, same basename, .canonical.txt extension.
+  /*
+   * Canonical text colocates with its source PDF: forms/<…>/instructions.pdf
+   * → forms/<…>/instructions.canonical.txt. Same dir, same basename, .canonical.txt extension.
+   */
   const canonicalTextPath = pdfPath.replace(/\.pdf$/i, ".canonical.txt");
 
-  // Sha-skip: hash the file before any expensive step. If the existing row's
-  // sha matches and the caller didn't pass --force, we have nothing to do.
-  // This is what makes `corpus sync` cheap to run on every dev tick.
+  /*
+   * Sha-skip: hash the file before any expensive step. If the existing row's
+   * sha matches and the caller didn't pass --force, we have nothing to do.
+   * This is what makes `corpus sync` cheap to run on every dev tick.
+   */
   const fileSha = await shaOfFile(pdfPath);
   const existing = await getDocument(input.docId);
   if (existing && existing.sha256 === fileSha && !input.force) {
@@ -75,8 +85,10 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
       sha256: existing.sha256,
       totalPages: existing.totalPages,
       totalChars: existing.totalChars,
-      // We don't know section/block counts without a query; callers that care
-      // can run the search smoke test instead. Return -1 to make this loud.
+      /*
+       * We don't know section/block counts without a query; callers that care
+       * can run the search smoke test instead. Return -1 to make this loud.
+       */
       sectionCount: -1,
       blockCount: -1,
       canonicalTextPath: existing.canonicalTextPath,
@@ -121,10 +133,12 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
     ...b,
   }));
 
-  // Contextual Retrieval: per-block Haiku summary, prepended before embedding/FTS.
-  // We pass the SECTION text (not the whole doc) as the cached prefix — large
-  // reference docs blow Haiku's 200k context window. Cache-by-section gives
-  // the same per-call discount within a section while scaling to any doc size.
+  /*
+   * Contextual Retrieval: per-block Haiku summary, prepended before embedding/FTS.
+   * We pass the SECTION text (not the whole doc) as the cached prefix — large
+   * reference docs blow Haiku's 200k context window. Cache-by-section gives
+   * the same per-call discount within a section while scaling to any doc size.
+   */
   if (!input.noContextualize) {
     const start = Date.now();
     const sectionTextById = new Map<string, string>();
@@ -172,18 +186,22 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
       `  contextualization done in ${Math.round((Date.now() - start) / 1000)}s`,
     );
   } else {
-    // Still hash the text so the column has something to compare against on
-    // a future re-ingest that does run summarization.
+    /*
+     * Still hash the text so the column has something to compare against on
+     * a future re-ingest that does run summarization.
+     */
     for (const b of blocks) b.blockTextSha1 = sha1(b.text);
   }
 
-  // Embedding step. Voyage embeds the contextualized text (summary + raw text).
-  // If the API key isn't configured, we silently skip — the system falls back
-  // to FTS-only at query time, and a future re-ingest with the key set will
-  // populate the column.
-  // Write the document + blocks now (before embedding). This way a crash in
-  // the embed step doesn't lose the contextual summaries we just paid Haiku
-  // to generate — we update embeddings in place afterward.
+  /*
+   * Embedding step. Voyage embeds the contextualized text (summary + raw text).
+   * If the API key isn't configured, we silently skip — the system falls back
+   * to FTS-only at query time, and a future re-ingest with the key set will
+   * populate the column.
+   * Write the document + blocks now (before embedding). This way a crash in
+   * the embed step doesn't lose the contextual summaries we just paid Haiku
+   * to generate — we update embeddings in place afterward.
+   */
   await writeDocument({
     document: {
       docId: input.docId,
@@ -202,10 +220,12 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
     blocks,
   });
 
-  // Embed AFTER writing rows so an embed failure (e.g. Ollama not running)
-  // doesn't lose the contextual summaries we just paid for. Fails soft:
-  // rows keep NULL embeddings, retrieval runs FTS-only, and
-  // `npm run corpus -- reembed` finishes the job once Ollama is up.
+  /*
+   * Embed AFTER writing rows so an embed failure (e.g. Ollama not running)
+   * doesn't lose the contextual summaries we just paid for. Fails soft:
+   * rows keep NULL embeddings, retrieval runs FTS-only, and
+   * `npm run corpus -- reembed` finishes the job once Ollama is up.
+   */
   let embedded = false;
   try {
     const embedCfg = resolveEmbeddings();

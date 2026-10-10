@@ -1,11 +1,13 @@
-// W-2 fact kind. Each W-2 the taxpayer received is stored as one tax_facts
-// row under category "wages" with a structured value containing all the
-// boxes plus employer metadata.
-//
-// Convention:
-//   category: "wages"
-//   key:      "employer.{employerSlug}"
-//   value:    W2FactValue
+/*
+ * W-2 fact kind. Each W-2 the taxpayer received is stored as one tax_facts
+ * row under category "wages" with a structured value containing all the
+ * boxes plus employer metadata.
+ * 
+ * Convention:
+ *   category: "wages"
+ *   key:      "employer.{employerSlug}"
+ *   value:    W2FactValue
+ */
 
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
@@ -32,9 +34,11 @@ export interface W2FactValue {
   employerName: string;
   employerEin: string;
   employerAddress?: W2Address;
-  // Employee identity — boxes (a) SSN, (e) name, (f) address. Captured here
-  // so a single W-2 ingest also populates the taxpayer's identity facts;
-  // the Luca flow doesn't need to re-ask for name/SSN/address.
+  /*
+   * Employee identity — boxes (a) SSN, (e) name, (f) address. Captured here
+   * so a single W-2 ingest also populates the taxpayer's identity facts;
+   * the Luca flow doesn't need to re-ask for name/SSN/address.
+   */
   employee?: {
     firstName: string;
     middleInitial?: string;

@@ -1,10 +1,12 @@
-// Assertion primitives the runner uses to check engine + render output
-// against a Scenario's ExpectedResults. All assertions append to a
-// failure list rather than throwing — the runner reports all failures at
-// once instead of bailing on the first one.
-//
-// Each helper takes an optional `prefix` (the formId) which gets prepended
-// to failure messages so multi-form scenarios are unambiguous.
+/*
+ * Assertion primitives the runner uses to check engine + render output
+ * against a Scenario's ExpectedResults. All assertions append to a
+ * failure list rather than throwing — the runner reports all failures at
+ * once instead of bailing on the first one.
+ * 
+ * Each helper takes an optional `prefix` (the formId) which gets prepended
+ * to failure messages so multi-form scenarios are unambiguous.
+ */
 
 import type { EvaluatedForm, AnyFormField } from "../../src/engine/types.js";
 import type { RenderedWidget } from "../../src/engine/render/fillFromCatalog.js";
@@ -28,18 +30,22 @@ export function assertEngineNumber(
     return;
   }
   if (!f.result.ok) {
-    // `unsupported` is a deliberate engine gap, not a "needs data" block.
-    // The rule library's fromFields contract treats unsupported terms as
-    // 0 downstream, so semantically an unsupported field IS 0 — accept
-    // it as a pass when the expected value is 0. Genuine blocked results
-    // (missing facts/decisions the user needs to provide) still fail.
+    /*
+     * `unsupported` is a deliberate engine gap, not a "needs data" block.
+     * The rule library's fromFields contract treats unsupported terms as
+     * 0 downstream, so semantically an unsupported field IS 0 — accept
+     * it as a pass when the expected value is 0. Genuine blocked results
+     * (missing facts/decisions the user needs to provide) still fail.
+     */
     if (f.result.unsupported && expected === 0) return;
     failures.push(tag(prefix, `engine: ${fieldId} blocked — ${f.result.reason}.`));
     return;
   }
   const got = f.result.value;
-  // 50¢ tolerance — money lines round at render time and the table-derived
-  // tax values are already integer-valued.
+  /*
+   * 50¢ tolerance — money lines round at render time and the table-derived
+   * tax values are already integer-valued.
+   */
   if (typeof got !== "number" || Math.abs(got - expected) > 0.5) {
     failures.push(
       tag(prefix, `engine: ${fieldId} expected ${expected}, got ${String(got)}.`),
@@ -123,9 +129,11 @@ export function assertMatchesGolden(
   failures: string[],
   prefix?: string,
 ): void {
-  // Index our rendered output by widget name (1 row per widget actually
-  // written). RenderedWidget can be `text` (text fields, dates) or
-  // `checked` (checkboxes flipped on) or carry a radio-option label.
+  /*
+   * Index our rendered output by widget name (1 row per widget actually
+   * written). RenderedWidget can be `text` (text fields, dates) or
+   * `checked` (checkboxes flipped on) or carry a radio-option label.
+   */
   const ours = new Map<string, string | boolean>();
   for (const [, widgets] of rendered) {
     for (const w of widgets) {
@@ -142,8 +150,10 @@ export function assertMatchesGolden(
     const g = golden.get(widgetName);
     const o = ours.get(widgetName);
 
-    // For checkboxes + radios, our renderer writes a value only when the
-    // box is "on." Golden's checkbox value is true/false explicitly.
+    /*
+     * For checkboxes + radios, our renderer writes a value only when the
+     * box is "on." Golden's checkbox value is true/false explicitly.
+     */
     if (g?.kind === "checkbox") {
       const goldenChecked = g.value === true;
       const ourChecked = o === true;
@@ -171,10 +181,12 @@ export function assertMatchesGolden(
       continue;
     }
 
-    // Default: text comparison (covers text fields + widgets the golden
-    // didn't classify cleanly). Empty/blank on both sides = pass. We
-    // intentionally do NOT treat "0" and "" as equivalent — every numeric
-    // line that computes to zero should be rendered as "0" on both sides.
+    /*
+     * Default: text comparison (covers text fields + widgets the golden
+     * didn't classify cleanly). Empty/blank on both sides = pass. We
+     * intentionally do NOT treat "0" and "" as equivalent — every numeric
+     * line that computes to zero should be rendered as "0" on both sides.
+     */
     const goldenText = normalizeForCompare(g?.value);
     const ourText = typeof o === "string" ? normalizeForCompare(o) : "";
     if (goldenText !== ourText) {

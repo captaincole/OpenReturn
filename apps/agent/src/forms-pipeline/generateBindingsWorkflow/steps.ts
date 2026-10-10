@@ -1,11 +1,13 @@
-// Phase D workflow steps. Four sequential steps:
-//   prepare  — load catalog from the JSON fixture (or DB in future)
-//   retrieve — per-field hybridSearchRefDocs against the IRS corpus
-//   classify — batched Claude tool-use, returns {ruleName, params} per field
-//   write    — render bindings into TS source and write to disk
-//
-// Each step's outputSchema is the next step's inputSchema; the carrier
-// accumulates via .extend() (see schemas.ts).
+/*
+ * Phase D workflow steps. Four sequential steps:
+ *   prepare  — load catalog from the JSON fixture (or DB in future)
+ *   retrieve — per-field hybridSearchRefDocs against the IRS corpus
+ *   classify — batched Claude tool-use, returns {ruleName, params} per field
+ *   write    — render bindings into TS source and write to disk
+ * 
+ * Each step's outputSchema is the next step's inputSchema; the carrier
+ * accumulates via .extend() (see schemas.ts).
+ */
 
 import { promises as fs } from "node:fs";
 import { createStep } from "@mastra/core/workflows";
@@ -170,6 +172,8 @@ export const writeStep = createStep({
   },
 });
 
-// Unused — kept for the type re-export so adjacent modules don't have to
-// re-import the carrier types directly.
+/*
+ * Unused — kept for the type re-export so adjacent modules don't have to
+ * re-import the carrier types directly.
+ */
 export type { AfterRetrieve };

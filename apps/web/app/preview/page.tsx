@@ -1,20 +1,24 @@
 "use client";
 
-// Visual preview of the proposed new shell:
-//   Top bar (logo + return switcher + workspace tabs + status)
-//   Desktop: chat 1/3 | workspace 2/3 (fixed split, no resize for v1)
-//   Mobile:  bottom tab bar swaps chat <-> workspace
-//   Hard-lock co-editing: toggle "Luca working" to see the dashboard lock
-//
-// Static data only. Once Andrew greenlights the look, we promote this into
-// the real shell (delete SideNav, lift streaming into context, etc.).
+/*
+ * Visual preview of the proposed new shell:
+ *   Top bar (logo + return switcher + workspace tabs + status)
+ *   Desktop: chat 1/3 | workspace 2/3 (fixed split, no resize for v1)
+ *   Mobile:  bottom tab bar swaps chat <-> workspace
+ *   Hard-lock co-editing: toggle "Luca working" to see the dashboard lock
+ * 
+ * Static data only. Once Andrew greenlights the look, we promote this into
+ * the real shell (delete SideNav, lift streaming into context, etc.).
+ */
 
 import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-// ────────────────────────────────────────────────────────────────────────────
-// Mock data
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Mock data
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 const RETURNS = [
   { id: "2025", year: 2025, label: "2025 Return", state: "active" as const, progress: 60 },
@@ -80,10 +84,12 @@ interface Category {
   items: CategoryItem[];
 }
 
-// Categories drive the Progress strip + drill-down panel. Each item is a
-// concrete workflow Luca can run (e.g. "ask about 1099-DIV", "compare
-// standard vs itemized"). Click a strip segment → expand → click an item →
-// Luca starts that workflow (stubbed in the preview).
+/*
+ * Categories drive the Progress strip + drill-down panel. Each item is a
+ * concrete workflow Luca can run (e.g. "ask about 1099-DIV", "compare
+ * standard vs itemized"). Click a strip segment → expand → click an item →
+ * Luca starts that workflow (stubbed in the preview).
+ */
 const CATEGORIES: Category[] = [
   {
     id: "filing",
@@ -144,9 +150,11 @@ const SOURCE_DOCS = [
   { id: "d3", name: "Voided check.pdf", type: "Other", size: "44 KB", parsed: false },
 ];
 
-// ────────────────────────────────────────────────────────────────────────────
-// Page
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Page
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 export default function PreviewPage() {
   const [returnId, setReturnId] = useState("2025");
@@ -203,9 +211,11 @@ export default function PreviewPage() {
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Top bar
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Top bar
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 interface TopBarProps {
   activeReturn: (typeof RETURNS)[number];
@@ -351,9 +361,11 @@ function TopBar({
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Chat pane
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Chat pane
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function ChatPane({
   busy,
@@ -491,9 +503,11 @@ function IconButton({ children, title }: { children: React.ReactNode; title: str
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Workspace pane (right 2/3)
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Workspace pane (right 2/3)
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function WorkspacePane({
   tab,
@@ -528,17 +542,21 @@ function WorkspacePane({
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Home view — synthesized dashboard
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Home view — synthesized dashboard
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function HomeView() {
   const [activityExpanded, setActivityExpanded] = useState(false);
   const [expandedCat, setExpandedCat] = useState<string | null>(null);
   const expanded = expandedCat ? CATEGORIES.find((c) => c.id === expandedCat) : null;
-  // The "View all" expansion just unhides additional history. In the real
-  // shell this list comes from a single query against tax_facts + ai_decisions
-  // (paginated when expanded); the duplication here is mock-data only.
+  /*
+   * The "View all" expansion just unhides additional history. In the real
+   * shell this list comes from a single query against tax_facts + ai_decisions
+   * (paginated when expanded); the duplication here is mock-data only.
+   */
   const visibleActivity = activityExpanded ? ACTIVITY.concat(ACTIVITY, ACTIVITY) : ACTIVITY;
 
   return (
@@ -785,9 +803,11 @@ function PlanRow({ item }: { item: (typeof PLAN)[number] }) {
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Forms view
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Forms view
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function FormsView() {
   return (
@@ -862,9 +882,11 @@ function FormsView() {
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Documents view
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Documents view
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function DocumentsView() {
   return (
@@ -927,9 +949,11 @@ function DocCard({ doc }: { doc: (typeof SOURCE_DOCS)[number] }) {
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Mobile tab bar
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Mobile tab bar
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function MobileTabBar({
   value,

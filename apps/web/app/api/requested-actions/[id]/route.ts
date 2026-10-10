@@ -2,11 +2,13 @@ import { type NextRequest, NextResponse } from "next/server";
 import { getOwnerSession } from "@/lib/localAuth";
 import { markActionProcessing, skipAction } from "@/lib/serverDb";
 
-// Status transitions the browser is allowed to drive:
-//   processing — an upload for this card just landed (documentId required)
-//   skipped    — the user dismissed the card
-// Both UPDATEs scope by (id, user_id) in serverDb — a caller can only touch
-// their own cards.
+/*
+ * Status transitions the browser is allowed to drive:
+ *   processing — an upload for this card just landed (documentId required)
+ *   skipped    — the user dismissed the card
+ * Both UPDATEs scope by (id, user_id) in serverDb — a caller can only touch
+ * their own cards.
+ */
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },

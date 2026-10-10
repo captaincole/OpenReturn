@@ -1,31 +1,35 @@
-// Hand-verified fieldId → PDF widget mapping for known forms.
-//
-// Background: Phase C's AI extraction labels each AcroForm widget by
-// reading nearby page text, and on densely-clustered widgets (header
-// block, line-by-line income section) it fence-posts — i.e. confuses
-// `your first name` with `spouse's first name`, or `line 10` with
-// `line 9`. The deterministic widget LIST is correct (pdf-lib's
-// AcroForm enumeration is reliable), but the label-to-widget pairing
-// drifts.
-//
-// This file overlays a hand-verified mapping for the fields we know the
-// AI got wrong. The renderer (generateTaxDocuments) checks this map
-// first; falls back to the catalog's AI-supplied pdfWidgetName for
-// fields not listed here.
-//
-// TODO(phase-c): improve Phase C extraction so the AI doesn't
-// fence-post on adjacent widgets. Possible approaches:
-//   - feed pdf-lib's full widget-name list + position table to Claude
-//     in one pass (instead of letting Claude scan-and-label)
-//   - validate alignment by cross-checking widget short names against
-//     known IRS naming conventions (f1_14 = taxpayer, f1_19 = spouse, etc.)
-//   - require operator confirmation when adjacent widgets share labels
-// Once Phase C reliably maps widgets to fields, delete this file.
+/*
+ * Hand-verified fieldId → PDF widget mapping for known forms.
+ * 
+ * Background: Phase C's AI extraction labels each AcroForm widget by
+ * reading nearby page text, and on densely-clustered widgets (header
+ * block, line-by-line income section) it fence-posts — i.e. confuses
+ * `your first name` with `spouse's first name`, or `line 10` with
+ * `line 9`. The deterministic widget LIST is correct (pdf-lib's
+ * AcroForm enumeration is reliable), but the label-to-widget pairing
+ * drifts.
+ * 
+ * This file overlays a hand-verified mapping for the fields we know the
+ * AI got wrong. The renderer (generateTaxDocuments) checks this map
+ * first; falls back to the catalog's AI-supplied pdfWidgetName for
+ * fields not listed here.
+ * 
+ * TODO(phase-c): improve Phase C extraction so the AI doesn't
+ * fence-post on adjacent widgets. Possible approaches:
+ *   - feed pdf-lib's full widget-name list + position table to Claude
+ *     in one pass (instead of letting Claude scan-and-label)
+ *   - validate alignment by cross-checking widget short names against
+ *     known IRS naming conventions (f1_14 = taxpayer, f1_19 = spouse, etc.)
+ *   - require operator confirmation when adjacent widgets share labels
+ * Once Phase C reliably maps widgets to fields, delete this file.
+ */
 
 export const VERIFIED_WIDGETS: Record<string, Record<string, string>> = {
-  // 2025 IRS Form 1040. Mappings verified by manual inspection of
-  // forms/federal/1040/blank.pdf — these are the same widget names the
-  // pre-pipeline generateTaxDocuments hand-coded.
+  /*
+   * 2025 IRS Form 1040. Mappings verified by manual inspection of
+   * forms/federal/1040/blank.pdf — these are the same widget names the
+   * pre-pipeline generateTaxDocuments hand-coded.
+   */
   "form-1040": {
     // Primary identity
     "form-1040.header.first_name": "topmostSubform[0].Page1[0].f1_14[0]",
@@ -80,11 +84,13 @@ export const VERIFIED_WIDGETS: Record<string, Record<string, string>> = {
     "form-1040.line.35a": "topmostSubform[0].Page2[0].f2_31[0]",
     "form-1040.line.37": "topmostSubform[0].Page2[0].f2_35[0]",
 
-    // Signing block — Phase C swapped occupation and "signature date" within
-    // each row. The wider widget at x=325 (w=135, no maxLength) is the
-    // OCCUPATION text field; the narrow widget at x=504 (w=72, maxLength=6)
-    // is the 6-digit IRS-mailed IP PIN. The catalog has these reversed.
-    // Signature dates have no fillable widget on this form (handwritten).
+    /*
+     * Signing block — Phase C swapped occupation and "signature date" within
+     * each row. The wider widget at x=325 (w=135, no maxLength) is the
+     * OCCUPATION text field; the narrow widget at x=504 (w=72, maxLength=6)
+     * is the 6-digit IRS-mailed IP PIN. The catalog has these reversed.
+     * Signature dates have no fillable widget on this form (handwritten).
+     */
     "form-1040.signing.taxpayer_occupation":
       "topmostSubform[0].Page2[0].f2_40[0]",
     "form-1040.signing.spouse_occupation":

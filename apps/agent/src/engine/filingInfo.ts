@@ -1,22 +1,24 @@
-// FilingInfo — the typed boundary between AI-resolved values and form bindings.
-//
-// Three layers:
-//   1. BaseFilingInfo (this file) — slots EVERY form needs: taxpayer
-//      identity (name / SSN / address) plus the small set of scope
-//      decisions that span jurisdictions (filingStatus).
-//   2. <Form>FilingInfo (per-form files, e.g. forms/federal/1040/filingInfo.ts)
-//      — extends BaseFilingInfo with slots specific to one form. Each form's
-//      bindings import their narrow type and TS rejects misreads.
-//   3. FilingInfo (this file) — the runtime intersection of every per-form
-//      type. The resolver produces this; the engine carries it on
-//      DerivationContext.filingInfo. Individual bindings see only their
-//      narrower view via their function signature.
-//
-// Adding a new slot:
-//   - Identity / cross-form scope → BaseFilingInfo here.
-//   - Form-specific → that form's filingInfo.ts. Update the FilingInfo
-//     intersection at the bottom of this file so the resolver returns the
-//     wider shape. TS will flag any binding that depends on a stale shape.
+/*
+ * FilingInfo — the typed boundary between AI-resolved values and form bindings.
+ * 
+ * Three layers:
+ *   1. BaseFilingInfo (this file) — slots EVERY form needs: taxpayer
+ *      identity (name / SSN / address) plus the small set of scope
+ *      decisions that span jurisdictions (filingStatus).
+ *   2. <Form>FilingInfo (per-form files, e.g. forms/federal/1040/filingInfo.ts)
+ *      — extends BaseFilingInfo with slots specific to one form. Each form's
+ *      bindings import their narrow type and TS rejects misreads.
+ *   3. FilingInfo (this file) — the runtime intersection of every per-form
+ *      type. The resolver produces this; the engine carries it on
+ *      DerivationContext.filingInfo. Individual bindings see only their
+ *      narrower view via their function signature.
+ * 
+ * Adding a new slot:
+ *   - Identity / cross-form scope → BaseFilingInfo here.
+ *   - Form-specific → that form's filingInfo.ts. Update the FilingInfo
+ *     intersection at the bottom of this file so the resolver returns the
+ *     wider shape. TS will flag any binding that depends on a stale shape.
+ */
 
 import {
   ssn,
@@ -35,10 +37,12 @@ import type { Form8959FilingInfo } from "./federal/8959/filingInfo.js";
 import type { EngineDerivation } from "./types.js";
 import { isInterestFactKey, type TradeFactValue } from "./facts/index.js";
 
-// Mirrors the convention spelled out in src/engine/facts/kinds/trade.ts.
-// Inlined here because parseTradeFact() expects a full TaxFactRow, but
-// resolveFilingInfo only sees a {key, value, category} projection — the
-// thinner shape is enough to recognize and decode a trade fact.
+/*
+ * Mirrors the convention spelled out in src/engine/facts/kinds/trade.ts.
+ * Inlined here because parseTradeFact() expects a full TaxFactRow, but
+ * resolveFilingInfo only sees a {key, value, category} projection — the
+ * thinner shape is enough to recognize and decode a trade fact.
+ */
 const TRADE_KEY_RE = /^account\.([^.]+)\.trades\.([^.]+)$/;
 
 // ─── Base (shared across every form) ─────────────────────────────────────
@@ -136,8 +140,10 @@ export function resolveFilingInfo(opts: {
     return v;
   };
 
-  // Single-key numeric read. Returns undefined when missing or non-numeric;
-  // callers use ?? 0 when they need to compose into a sum.
+  /*
+   * Single-key numeric read. Returns undefined when missing or non-numeric;
+   * callers use ?? 0 when they need to compose into a sum.
+   */
   const num = (key: string): number | undefined => {
     const v = factByKey.get(key);
     return typeof v === "number" && Number.isFinite(v) ? v : undefined;
@@ -153,12 +159,14 @@ export function resolveFilingInfo(opts: {
     return total;
   };
 
-  // Trade-fact partitioning for 8949. Walks investment_income facts and
-  // pulls out anything that parses as a trade (key shape
-  // `account.<slug>.trades.<tradeId>`), then splits by holding period:
-  // held > 1 year ⇒ long-term, else short-term. Dates are stored on the
-  // fact as "MM/DD/YY" or "MM/DD/YYYY"; we accept both. The fact-key list
-  // feeds the engine-derivation audit trail (triggeredByFactKeys).
+  /*
+   * Trade-fact partitioning for 8949. Walks investment_income facts and
+   * pulls out anything that parses as a trade (key shape
+   * `account.<slug>.trades.<tradeId>`), then splits by holding period:
+   * held > 1 year ⇒ long-term, else short-term. Dates are stored on the
+   * fact as "MM/DD/YY" or "MM/DD/YYYY"; we accept both. The fact-key list
+   * feeds the engine-derivation audit trail (triggeredByFactKeys).
+   */
   const partitionTrades = (): {
     short: TradeFactValue[];
     long: TradeFactValue[];
@@ -178,12 +186,14 @@ export function resolveFilingInfo(opts: {
   };
   const trades = partitionTrades();
 
-  // Sum a numeric field across investment_income facts. The optional
-  // `keyFilter` narrows to a single 1099 section — 1099-DIV box1a doesn't
-  // overlap 1099-INT box1 today, but the filter makes the read explicit
-  // and protects against future per-section box-namespace overlap.
-  // Returns 0 when no facts match — same convention as sumW2Box: "no
-  // 1099-INT at all → 0 taxable interest" rather than "we don't know."
+  /*
+   * Sum a numeric field across investment_income facts. The optional
+   * `keyFilter` narrows to a single 1099 section — 1099-DIV box1a doesn't
+   * overlap 1099-INT box1 today, but the filter makes the read explicit
+   * and protects against future per-section box-namespace overlap.
+   * Returns 0 when no facts match — same convention as sumW2Box: "no
+   * 1099-INT at all → 0 taxable interest" rather than "we don't know."
+   */
   const sumInvestmentBox = (
     boxKey: string,
     keyFilter?: (key: string) => boolean,
@@ -217,8 +227,10 @@ export function resolveFilingInfo(opts: {
     taxpayerFirstName: text("identity.name.first"),
     taxpayerMiddleInitial: text("identity.name.middle_initial"),
     taxpayerLastName: text("identity.name.last"),
-    // Constructors strip separators + validate digit count; canonical
-    // storage in the FilingInfo slot is bare digits.
+    /*
+     * Constructors strip separators + validate digit count; canonical
+     * storage in the FilingInfo slot is bare digits.
+     */
     taxpayerSSN: ssnRaw ? ssn(ssnRaw) : undefined,
     taxpayerDateOfBirth: text("identity.dob"),
     taxpayerOccupation: text("identity.occupation"),
@@ -255,12 +267,14 @@ export function resolveFilingInfo(opts: {
     form1099FederalWithholding: sumInvestmentBox(
       "box4",
     ) as Form1040FilingInfo["form1099FederalWithholding"],
-    // 1099-INT sums: box1 (taxable) and box8 (tax-exempt). Filtered
-    // because future 1099 sections (OID, MISC) may reuse low-number box
-    // names — the filter pins each aggregate to its source section.
-    // Slots remain undefined when the taxpayer has NO interest facts at
-    // all (rather than 0), so the renderer leaves the cells blank
-    // instead of writing "0" — matches the CPA-golden convention.
+    /*
+     * 1099-INT sums: box1 (taxable) and box8 (tax-exempt). Filtered
+     * because future 1099 sections (OID, MISC) may reuse low-number box
+     * names — the filter pins each aggregate to its source section.
+     * Slots remain undefined when the taxpayer has NO interest facts at
+     * all (rather than 0), so the renderer leaves the cells blank
+     * instead of writing "0" — matches the CPA-golden convention.
+     */
     ...(() => {
       const hasInterest = opts.facts.some(
         (f) => f.category === "investment_income" && isInterestFactKey(f.key),
@@ -328,11 +342,13 @@ export function resolveFilingInfo(opts: {
       "decisions.refund.refund_full_overpayment_ca",
     ) as boolean | undefined,
 
-    // ─── Schedule CA (540) ──────────────────────────────────────────
-    // Default: Schedule CA is filed whenever Form 540 is filed.
-    // Explicit `decisions.scope.must_file_schedule_ca` overrides — set
-    // false on scenarios that don't need it (e.g. Alex declines, no
-    // adjustments to report).
+    /*
+     * ─── Schedule CA (540) ──────────────────────────────────────────
+     * Default: Schedule CA is filed whenever Form 540 is filed.
+     * Explicit `decisions.scope.must_file_schedule_ca` overrides — set
+     * false on scenarios that don't need it (e.g. Alex declines, no
+     * adjustments to report).
+     */
     ...(() => {
       const r = resolveMustFile(decisionByKey, {
         explicitKey: "decisions.scope.must_file_schedule_ca",
@@ -351,12 +367,14 @@ export function resolveFilingInfo(opts: {
       };
     })(),
 
-    // ─── Form 8949 ──────────────────────────────────────────────────
-    // Default: required when there are trade facts to itemize OR when
-    // the 1099 ingest pipeline recorded `has_reportable_sales = true`.
-    // Either signal indicates capital-asset sales that need row-level
-    // reporting. Fallbacks are ordered: trade-facts win when present
-    // (more specific signal); has_reportable_sales is the safety net.
+    /*
+     * ─── Form 8949 ──────────────────────────────────────────────────
+     * Default: required when there are trade facts to itemize OR when
+     * the 1099 ingest pipeline recorded `has_reportable_sales = true`.
+     * Either signal indicates capital-asset sales that need row-level
+     * reporting. Fallbacks are ordered: trade-facts win when present
+     * (more specific signal); has_reportable_sales is the safety net.
+     */
     ...(() => {
       const tradeCount = trades.short.length + trades.long.length;
       const r = resolveMustFile(decisionByKey, {
@@ -383,11 +401,13 @@ export function resolveFilingInfo(opts: {
     shortTermTrades: trades.short,
     longTermTrades: trades.long,
 
-    // ─── Schedule D ─────────────────────────────────────────────────
-    // Default: required whenever 8949 is required (Schedule D
-    // summarizes the per-row 8949 totals). Also fires for capital-gain
-    // distributions even without 8949 — same trade-fact / decision
-    // signal works for both cases.
+    /*
+     * ─── Schedule D ─────────────────────────────────────────────────
+     * Default: required whenever 8949 is required (Schedule D
+     * summarizes the per-row 8949 totals). Also fires for capital-gain
+     * distributions even without 8949 — same trade-fact / decision
+     * signal works for both cases.
+     */
     ...(() => {
       const tradeCount = trades.short.length + trades.long.length;
       const r = resolveMustFile(decisionByKey, {
@@ -412,13 +432,15 @@ export function resolveFilingInfo(opts: {
       };
     })(),
 
-    // ─── Form 8959 ──────────────────────────────────────────────────
-    // Default: required when the taxpayer's Medicare wages exceed
-    // $200,000 (the single-filer threshold the IRS uses as the
-    // employer-withholding cut-line; lower thresholds for MFJ/MFS
-    // apply but the conservative single-status fallback catches every
-    // case where the form COULD be required). Explicit
-    // `decisions.scope.must_file_8959` wins when set.
+    /*
+     * ─── Form 8959 ──────────────────────────────────────────────────
+     * Default: required when the taxpayer's Medicare wages exceed
+     * $200,000 (the single-filer threshold the IRS uses as the
+     * employer-withholding cut-line; lower thresholds for MFJ/MFS
+     * apply but the conservative single-status fallback catches every
+     * case where the form COULD be required). Explicit
+     * `decisions.scope.must_file_8959` wins when set.
+     */
     ...(() => {
       const medicareWages = sumW2Box("box5");
       const r = resolveMustFile(decisionByKey, {
@@ -438,11 +460,13 @@ export function resolveFilingInfo(opts: {
       };
     })(),
 
-    // ─── Schedule A ─────────────────────────────────────────────────
-    // Default: required when decisions.itemize_vs_standard chose
-    // itemized. Explicit `decisions.scope.must_file_schedule_a` wins
-    // when set. State-local income tax composes from existing W-2
-    // sums (box 17 + CA SDI); other slots are single-fact reads.
+    /*
+     * ─── Schedule A ─────────────────────────────────────────────────
+     * Default: required when decisions.itemize_vs_standard chose
+     * itemized. Explicit `decisions.scope.must_file_schedule_a` wins
+     * when set. State-local income tax composes from existing W-2
+     * sums (box 17 + CA SDI); other slots are single-fact reads.
+     */
     ...(() => {
       const r = resolveMustFile(decisionByKey, {
         explicitKey: "decisions.scope.must_file_schedule_a",
@@ -554,9 +578,11 @@ function resolveMustFile(
   return { value: undefined, derivation: undefined };
 }
 
-// Trade-date parser. Accepts "MM/DD/YY" or "MM/DD/YYYY" as emitted by
-// brokers on 1099-B. Two-digit years are anchored to the 2000s — anyone
-// taxed before 2050 needs to bring their own century.
+/*
+ * Trade-date parser. Accepts "MM/DD/YY" or "MM/DD/YYYY" as emitted by
+ * brokers on 1099-B. Two-digit years are anchored to the 2000s — anyone
+ * taxed before 2050 needs to bring their own century.
+ */
 function parseTradeDate(s: string): Date | null {
   const m = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/.exec(s);
   if (!m) return null;
@@ -567,10 +593,12 @@ function parseTradeDate(s: string): Date | null {
   return new Date(year, month - 1, day);
 }
 
-// IRC §1222 short/long-term split: held more than 1 year is long-term.
-// "More than 1 year" = strictly past the anniversary date, day-precision.
-// Unparseable dates default to short-term — safer for tax purposes (more
-// conservative, higher rate) than mislabeling as long-term.
+/*
+ * IRC §1222 short/long-term split: held more than 1 year is long-term.
+ * "More than 1 year" = strictly past the anniversary date, day-precision.
+ * Unparseable dates default to short-term — safer for tax purposes (more
+ * conservative, higher rate) than mislabeling as long-term.
+ */
 function isLongTermTrade(t: TradeFactValue): boolean {
   const acq = parseTradeDate(t.dateAcquired);
   const sold = parseTradeDate(t.dateSold);

@@ -1,13 +1,15 @@
-// Ingest the California FTB Tax Table (2025 540 booklet appendix) from a
-// cached PDF into a checked-in JSON file. Same shape as the federal
-// ingest-federal-tax-table pipeline but reading from PDF text rather than
-// HTML.
-//
-// `--refresh` re-downloads from ftb.ca.gov; default uses the cached PDF
-// next to the JSON output.
-//
-// Spot-checks are hand-keyed from pages 1, 3, 4, and 5 of the published
-// FTB table; any change to extraction logic must keep them passing.
+/*
+ * Ingest the California FTB Tax Table (2025 540 booklet appendix) from a
+ * cached PDF into a checked-in JSON file. Same shape as the federal
+ * ingest-federal-tax-table pipeline but reading from PDF text rather than
+ * HTML.
+ * 
+ * `--refresh` re-downloads from ftb.ca.gov; default uses the cached PDF
+ * next to the JSON output.
+ * 
+ * Spot-checks are hand-keyed from pages 1, 3, 4, and 5 of the published
+ * FTB table; any change to extraction logic must keep them passing.
+ */
 
 import { promises as fs } from "node:fs";
 import path from "node:path";

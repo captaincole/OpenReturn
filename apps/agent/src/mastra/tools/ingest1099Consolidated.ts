@@ -12,24 +12,26 @@ import {
 } from "../../engine/facts";
 import { requireUserContext } from "./userContext";
 
-// Ingest a consolidated 1099 (E*TRADE-style multi-section statement) as
-// structured tax_facts + a few broker-reported AI decisions.
-//
-// Luca (vision-capable) reads the 1099 PDF and maps whatever broker-specific
-// labels are used to IRS-canonical box numbers. The schema below is what
-// the LLM should produce; the tool writes it to the DB.
-//
-// What gets written per call:
-//   - 1 DividendFactValue if `div` is present
-//   - 1 TradeFactValue per trade in `b.trades`
-//   - 1 ai_decision per trade (`decisions.trade.{tradeId}.form_8949_box`)
-//     derived mechanically from the broker-reported (term, basisReported)
-//     pair — no grounding review needed since the broker classified it.
-//   - 1 ai_decision (`decisions.scope.has_reportable_sales` = true) if
-//     trades are present.
-//
-// (1099-MISC / 1099-OID sections will be added when we have a scenario
-// that uses them. INT, DIV, and B are accepted.)
+/*
+ * Ingest a consolidated 1099 (E*TRADE-style multi-section statement) as
+ * structured tax_facts + a few broker-reported AI decisions.
+ * 
+ * Luca (vision-capable) reads the 1099 PDF and maps whatever broker-specific
+ * labels are used to IRS-canonical box numbers. The schema below is what
+ * the LLM should produce; the tool writes it to the DB.
+ * 
+ * What gets written per call:
+ *   - 1 DividendFactValue if `div` is present
+ *   - 1 TradeFactValue per trade in `b.trades`
+ *   - 1 ai_decision per trade (`decisions.trade.{tradeId}.form_8949_box`)
+ *     derived mechanically from the broker-reported (term, basisReported)
+ *     pair — no grounding review needed since the broker classified it.
+ *   - 1 ai_decision (`decisions.scope.has_reportable_sales` = true) if
+ *     trades are present.
+ * 
+ * (1099-MISC / 1099-OID sections will be added when we have a scenario
+ * that uses them. INT, DIV, and B are accepted.)
+ */
 
 const AddressSchema = z.object({
   line1: z.string(),
@@ -261,9 +263,11 @@ export const ingest1099Consolidated = createTool({
         });
         factsWritten++;
 
-        // Auto-record the form_8949_box decision since broker classified it.
-        // Skips the grounding review by writing directly through recordDecision —
-        // the input is broker-reported, no judgment.
+        /*
+         * Auto-record the form_8949_box decision since broker classified it.
+         * Skips the grounding review by writing directly through recordDecision —
+         * the input is broker-reported, no judgment.
+         */
         const box = boxFor(t.term, t.basisReported);
         await recordDecision(scope, {
           id: crypto.randomUUID(),

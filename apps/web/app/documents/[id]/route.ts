@@ -3,16 +3,18 @@ import { getOwnerSession } from "@/lib/localAuth";
 import { readBlob } from "@/lib/blobStore";
 import { getDocumentById, hasMembership } from "@/lib/serverDb";
 
-// Same-origin Route Handler for document downloads. Reads the cookie (which
-// the browser DOES send on plain <a href> clicks, unlike the bearer header),
-// validates the owner session, looks up the row in the libsql app DB,
-// verifies the caller
-// holds a non-revoked membership on the document's filing (the explicit RLS
-// replacement), and streams the file straight off the local documents dir —
-// no bucket, no signed URLs.
-//
-// `?download=1` flips Content-Disposition to attachment so the Documents
-// page's Download button forces a save instead of inline rendering.
+/*
+ * Same-origin Route Handler for document downloads. Reads the cookie (which
+ * the browser DOES send on plain <a href> clicks, unlike the bearer header),
+ * validates the owner session, looks up the row in the libsql app DB,
+ * verifies the caller
+ * holds a non-revoked membership on the document's filing (the explicit RLS
+ * replacement), and streams the file straight off the local documents dir —
+ * no bucket, no signed URLs.
+ * 
+ * `?download=1` flips Content-Disposition to attachment so the Documents
+ * page's Download button forces a save instead of inline rendering.
+ */
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
@@ -31,8 +33,10 @@ export async function GET(
   if (!doc) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
-  // Membership gate — 404 (not 403) so non-members can't probe which
-  // document ids exist, matching the old RLS behavior.
+  /*
+   * Membership gate — 404 (not 403) so non-members can't probe which
+   * document ids exist, matching the old RLS behavior.
+   */
   if (!(await hasMembership(doc.filingId, session.userId))) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }

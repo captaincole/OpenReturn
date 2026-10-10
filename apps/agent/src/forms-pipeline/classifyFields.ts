@@ -1,21 +1,23 @@
-// AI enrichment of extracted form fields.
-//
-// Upstream (extractFormFields.ts) now hands us the label deterministically
-// from /TU or vision, so this stage no longer guesses labels from page text.
-// Its remaining job is three semantic decisions per field:
-//
-//   - fieldId — stable "<formId>.<section>.<key>" id we can reference everywhere
-//   - category — which Filing-Status panel bucket the field rolls up into
-//   - valueType — what kind of value belongs in the field (money / count /
-//                 text / ssn / phone / email / date / boolean / single_select /
-//                 multi_select / signature)
-//
-// For radio groups we also assign stable snake_case keys to each option.
-//
-// The model is NOT responsible for:
-//   - Discovering field structure (pdf.js told us)
-//   - Inventing labels (extractFormFields tier-1/tier-2 produced them)
-//   - Inventing option labels for radios (radioOptions[] is ground truth)
+/*
+ * AI enrichment of extracted form fields.
+ * 
+ * Upstream (extractFormFields.ts) now hands us the label deterministically
+ * from /TU or vision, so this stage no longer guesses labels from page text.
+ * Its remaining job is three semantic decisions per field:
+ * 
+ *   - fieldId — stable "<formId>.<section>.<key>" id we can reference everywhere
+ *   - category — which Filing-Status panel bucket the field rolls up into
+ *   - valueType — what kind of value belongs in the field (money / count /
+ *                 text / ssn / phone / email / date / boolean / single_select /
+ *                 multi_select / signature)
+ * 
+ * For radio groups we also assign stable snake_case keys to each option.
+ * 
+ * The model is NOT responsible for:
+ *   - Discovering field structure (pdf.js told us)
+ *   - Inventing labels (extractFormFields tier-1/tier-2 produced them)
+ *   - Inventing option labels for radios (radioOptions[] is ground truth)
+ */
 
 import Anthropic from "@anthropic-ai/sdk";
 import type { ExtractedField } from "./extractFormFields.js";

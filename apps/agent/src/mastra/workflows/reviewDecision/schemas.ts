@@ -1,8 +1,10 @@
 import { z } from "zod";
 
-// ---------------------------------------------------------------------------
-// Building blocks shared across the workflow
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Building blocks shared across the workflow
+ * ---------------------------------------------------------------------------
+ */
 
 export const authorityCitationSchema = z.object({
   blockId: z.string(),
@@ -20,8 +22,10 @@ export const irsBlockSnapshotSchema = z.object({
   blockId: z.string(),
   docId: z.string(),
   text: z.string(),
-  // Score from the retrieval call (merged best-of-leg similarity).
-  // Persisted so future evals can compare retrieval strategies.
+  /*
+   * Score from the retrieval call (merged best-of-leg similarity).
+   * Persisted so future evals can compare retrieval strategies.
+   */
   score: z.number().optional(),
 });
 
@@ -33,9 +37,11 @@ export const evidenceBundleSchema = z.object({
 });
 export type EvidenceBundle = z.infer<typeof evidenceBundleSchema>;
 
-// ---------------------------------------------------------------------------
-// assessRisk output
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * assessRisk output
+ * ---------------------------------------------------------------------------
+ */
 
 export const riskTierSchema = z.enum(["low", "medium", "high"]);
 export type RiskTier = z.infer<typeof riskTierSchema>;
@@ -60,9 +66,11 @@ export const riskAssessmentSchema = z.object({
 });
 export type RiskAssessment = z.infer<typeof riskAssessmentSchema>;
 
-// ---------------------------------------------------------------------------
-// rule output — discriminated union on `kind`.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * rule output — discriminated union on `kind`.
+ * ---------------------------------------------------------------------------
+ */
 
 export const verdictSchema = z.enum([
   "accurate",
@@ -97,12 +105,14 @@ export const ruleOutputSchema = z.discriminatedUnion("kind", [
 ]);
 export type RuleOutput = z.infer<typeof ruleOutputSchema>;
 
-// ---------------------------------------------------------------------------
-// Loop carrier — the shared shape that flows through gather → assess → rule
-// on every iteration. Each step takes this in and returns this out, with one
-// or more fields populated. `inputSchema === outputSchema` is what makes the
-// child workflow legal as a `.dountil()` step.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Loop carrier — the shared shape that flows through gather → assess → rule
+ * on every iteration. Each step takes this in and returns this out, with one
+ * or more fields populated. `inputSchema === outputSchema` is what makes the
+ * child workflow legal as a `.dountil()` step.
+ * ---------------------------------------------------------------------------
+ */
 
 export const loopCarrierSchema = z.object({
   // Set once by the init step; immutable across iterations.
@@ -118,29 +128,37 @@ export const loopCarrierSchema = z.object({
   dissentingConsiderationsInput: z.string().nullable(),
   supportingFactKeys: z.array(z.string()),
 
-  // Iteration state — bumped by rule when emitting need_more_evidence.
-  // Max 4 because ruleStep can bump from 3 → 4 on the final iteration if
-  // it still wants more evidence; the loop then exits on iterationCount >= 3
-  // and finalize clamps the reported value back to 3 via Math.min.
+  /*
+   * Iteration state — bumped by rule when emitting need_more_evidence.
+   * Max 4 because ruleStep can bump from 3 → 4 on the final iteration if
+   * it still wants more evidence; the loop then exits on iterationCount >= 3
+   * and finalize clamps the reported value back to 3 via Math.min.
+   */
   iteration: z.number().int().min(1).max(4),
   queries: z.array(z.string()),
 
-  // Reasons accumulated across iterations when rule kicks back to gather.
-  // Used by finalize to synthesize the whatsMissing summary if we hit
-  // iteration 3 without converging.
+  /*
+   * Reasons accumulated across iterations when rule kicks back to gather.
+   * Used by finalize to synthesize the whatsMissing summary if we hit
+   * iteration 3 without converging.
+   */
   needMoreReasons: z.array(z.string()),
 
-  // Populated by gather/assess/rule respectively. Optional because at the
-  // start of each iteration they're freshly produced.
+  /*
+   * Populated by gather/assess/rule respectively. Optional because at the
+   * start of each iteration they're freshly produced.
+   */
   evidence: evidenceBundleSchema.optional(),
   riskAssessment: riskAssessmentSchema.optional(),
   ruleOutput: ruleOutputSchema.optional(),
 });
 export type LoopCarrier = z.infer<typeof loopCarrierSchema>;
 
-// ---------------------------------------------------------------------------
-// Workflow terminal output
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Workflow terminal output
+ * ---------------------------------------------------------------------------
+ */
 
 export const reviewDecisionOutputSchema = z.object({
   decisionId: z.string(),

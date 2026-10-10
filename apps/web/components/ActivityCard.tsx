@@ -9,16 +9,20 @@ import {
 import { cn } from "@/lib/cn";
 
 interface ActivityCardProps {
-  // Bumped by the parent when activity may have changed (new turn, reset, etc).
-  // Also serves as the "wipe and refetch" trigger after a session reset; the
-  // interval poll handles incremental updates between bumps.
+  /*
+   * Bumped by the parent when activity may have changed (new turn, reset, etc).
+   * Also serves as the "wipe and refetch" trigger after a session reset; the
+   * interval poll handles incremental updates between bumps.
+   */
   refreshKey: number;
 }
 
 const ACTIVITY_LIMIT = 50;
-// Plain interval polling against /api/activity — the libsql app DB has no
-// push channel (Supabase Realtime left with Postgres), and for one user on
-// one box a fast regular poll is indistinguishable from push.
+/*
+ * Plain interval polling against /api/activity — the libsql app DB has no
+ * push channel (Supabase Realtime left with Postgres), and for one user on
+ * one box a fast regular poll is indistinguishable from push.
+ */
 const POLL_INTERVAL_MS = 3000;
 
 const VERDICT_LABEL: Record<Verdict, string> = {
@@ -100,10 +104,12 @@ export function ActivityCard({ refreshKey }: ActivityCardProps) {
   const [items, setItems] = useState<ActivityItem[] | null>(null);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
-  // Fetch on mount / refreshKey bump, then poll on a fast regular interval.
-  // Both paths replace the whole list — the endpoint returns the newest
-  // ACTIVITY_LIMIT rows already sorted, so there's no client-side merge to
-  // get wrong, and verdict updates (pending → grounded) come along free.
+  /*
+   * Fetch on mount / refreshKey bump, then poll on a fast regular interval.
+   * Both paths replace the whole list — the endpoint returns the newest
+   * ACTIVITY_LIMIT rows already sorted, so there's no client-side merge to
+   * get wrong, and verdict updates (pending → grounded) come along free.
+   */
   useEffect(() => {
     let cancelled = false;
 

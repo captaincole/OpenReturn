@@ -17,12 +17,14 @@ function threadIdFor(userId: string, returnId: string | number): string {
 }
 
 async function readLucaPlan(threadId: string): Promise<PlanItem[]> {
-  // Read working memory off Luca's thread-scoped Memory. Returns [] when:
-  //   - the thread has never had a turn (no working memory row yet)
-  //   - the JSON parse fails (shouldn't happen since Mastra writes via the
-  //     same schema, but defensive)
-  //   - the schema validation fails (e.g. a field rename we haven't migrated)
-  // We never want a malformed plan to take down the whole /app/state response.
+  /*
+   * Read working memory off Luca's thread-scoped Memory. Returns [] when:
+   *   - the thread has never had a turn (no working memory row yet)
+   *   - the JSON parse fails (shouldn't happen since Mastra writes via the
+   *     same schema, but defensive)
+   *   - the schema validation fails (e.g. a field rename we haven't migrated)
+   * We never want a malformed plan to take down the whole /app/state response.
+   */
   try {
     const memory = await luca.getMemory();
     if (!memory) return [];
@@ -36,12 +38,14 @@ async function readLucaPlan(threadId: string): Promise<PlanItem[]> {
   }
 }
 
-// Live case state for the web app. Pass-through over buildCaseState plus
-// document URLs and Luca's plan. The previous handler adapted the engine
-// output to a legacy shape (openAsks / progress / draftUrl / 8949Url /
-// scheduleDUrl) that the new engine doesn't speak. The web app reads the
-// engine's native shape directly now — anything the engine doesn't compute
-// (Form 8949, Schedule D) is simply absent rather than rendered as null.
+/*
+ * Live case state for the web app. Pass-through over buildCaseState plus
+ * document URLs and Luca's plan. The previous handler adapted the engine
+ * output to a legacy shape (openAsks / progress / draftUrl / 8949Url /
+ * scheduleDUrl) that the new engine doesn't speak. The web app reads the
+ * engine's native shape directly now — anything the engine doesn't compute
+ * (Form 8949, Schedule D) is simply absent rather than rendered as null.
+ */
 export const appStateRoute = registerApiRoute("/app/state", {
   method: "GET",
   handler: async (c) => {
@@ -63,9 +67,11 @@ export const appStateRoute = registerApiRoute("/app/state", {
       listDocuments(scope, { category: "drafts", taxYear: DEMO_TAX_YEAR }),
     ]);
 
-    // Most recent draft per formId. listDocuments returns newest-first, so
-    // first-seen-wins gives us the latest version per form. Older versions
-    // remain reachable by their direct /documents/{uuid} URLs in chat history.
+    /*
+     * Most recent draft per formId. listDocuments returns newest-first, so
+     * first-seen-wins gives us the latest version per form. Older versions
+     * remain reachable by their direct /documents/{uuid} URLs in chat history.
+     */
     const latestByForm = new Map<string, UserDocumentRow>();
     for (const d of drafts) {
       const formId = (d.metadata as { formId?: string } | null)?.formId;

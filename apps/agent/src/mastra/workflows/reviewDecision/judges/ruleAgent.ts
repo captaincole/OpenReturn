@@ -3,15 +3,17 @@ import { citeRefDocTool } from "../../../tools/refDocs";
 import { CPA_RULES } from "./cpaRules";
 import { modelFor } from "../../../models";
 
-// Rule agent — the workflow's verdict-or-loop decider. Sees the decision,
-// the evidence bundle, and the assessed risk tier. Returns a discriminated
-// union: either a final verdict (with citations) or a request for more
-// evidence (with suggested next-iteration queries).
-//
-// Tools: cite-ref-docs only. Retrieval is the gather step's job; the rule
-// agent receives the retrieved blocks already and only needs cite-ref-docs
-// to verify exact quotes for citations. (Restricting tools here prevents
-// the agent from inventing a parallel search and complicating training data.)
+/*
+ * Rule agent — the workflow's verdict-or-loop decider. Sees the decision,
+ * the evidence bundle, and the assessed risk tier. Returns a discriminated
+ * union: either a final verdict (with citations) or a request for more
+ * evidence (with suggested next-iteration queries).
+ * 
+ * Tools: cite-ref-docs only. Retrieval is the gather step's job; the rule
+ * agent receives the retrieved blocks already and only needs cite-ref-docs
+ * to verify exact quotes for citations. (Restricting tools here prevents
+ * the agent from inventing a parallel search and complicating training data.)
+ */
 
 const baseInstructions = `You are the verdict-or-loop decider for the review-decision workflow. You see one decision the tax agent recorded, the evidence gathered for it (taxpayer facts + retrieved IRS passages), and a risk-tier assessment.
 

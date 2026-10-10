@@ -1,18 +1,20 @@
-// Render Marcus Chen's source intake documents to disk for the CPA package.
-//
-//   npx tsx tests/scenarios/marcus/generate-docs.ts
-//
-// Emits:
-//   docs/01-marcus-w2.pdf               — Helix Software, Inc. W-2 (Copy B)
-//   docs/02-marcus-1099-wealthfront.pdf — Wealthfront-style consolidated 1099
-//                                         (only 1099-INT populated; everything
-//                                         else $0 to mirror a HYSA-only account)
-//   docs/03-marcus-1099-schwab.pdf      — Schwab-style consolidated 1099
-//                                         (1099-DIV + 1099-B; mirrors the
-//                                         Apex/Alejandro layout)
-//
-// One-off generator. The CPA receives these PDFs as Marcus's "source
-// documents" alongside the Markdown brief + cover note in the same folder.
+/*
+ * Render Marcus Chen's source intake documents to disk for the CPA package.
+ * 
+ *   npx tsx tests/scenarios/marcus/generate-docs.ts
+ * 
+ * Emits:
+ *   docs/01-marcus-w2.pdf               — Helix Software, Inc. W-2 (Copy B)
+ *   docs/02-marcus-1099-wealthfront.pdf — Wealthfront-style consolidated 1099
+ *                                         (only 1099-INT populated; everything
+ *                                         else $0 to mirror a HYSA-only account)
+ *   docs/03-marcus-1099-schwab.pdf      — Schwab-style consolidated 1099
+ *                                         (1099-DIV + 1099-B; mirrors the
+ *                                         Apex/Alejandro layout)
+ * 
+ * One-off generator. The CPA receives these PDFs as Marcus's "source
+ * documents" alongside the Markdown brief + cover note in the same folder.
+ */
 
 import {
   PDFDocument,
@@ -25,9 +27,11 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-// ────────────────────────────────────────────────────────────────────────────
-// Constants — Marcus's identity & all the doc-level data
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Constants — Marcus's identity & all the doc-level data
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 const PAGE_W = 612; // US Letter, points
 const PAGE_H = 792;
@@ -50,9 +54,11 @@ const HELIX = {
   stateId: "123-4567-8",
 };
 
-// W-2 numbers. Marcus's gross comp is $247,650 ($220k box-1 wages + $23.5k
-// 401(k) + $4,150 HSA). SS wage base 2025 = $176,100 (capped); Additional
-// Medicare 0.9% applies above $200k.
+/*
+ * W-2 numbers. Marcus's gross comp is $247,650 ($220k box-1 wages + $23.5k
+ * 401(k) + $4,150 HSA). SS wage base 2025 = $176,100 (capped); Additional
+ * Medicare 0.9% applies above $200k.
+ */
 const W2 = {
   box1: 220_000.0,
   box2: 40_000.0,
@@ -123,13 +129,15 @@ const SCHWAB = {
   },
 };
 
-// ────────────────────────────────────────────────────────────────────────────
-// Drawing helpers — coordinate system runs y-down from top-left.
-// ty(yTopDown, fontSize) returns the pdf-lib bottom-up baseline coordinate.
-// Interpretation: yTopDown is the TOP of the text's em-box (baseline below
-// by one fontSize). To put a value cleanly inside a box of height h, pass
-// y_top = y_box + h - 4 - fontSize so descenders sit just inside the bottom.
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Drawing helpers — coordinate system runs y-down from top-left.
+ * ty(yTopDown, fontSize) returns the pdf-lib bottom-up baseline coordinate.
+ * Interpretation: yTopDown is the TOP of the text's em-box (baseline below
+ * by one fontSize). To put a value cleanly inside a box of height h, pass
+ * y_top = y_box + h - 4 - fontSize so descenders sit just inside the bottom.
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 interface Ctx {
   page: PDFPage;
@@ -279,9 +287,11 @@ function drawLabeledBox(
   }
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Shared layout helpers
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Shared layout helpers
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 interface LineRow {
   label: string;
@@ -308,9 +318,11 @@ function drawColumn(
   return y;
 }
 
-/** Section title row: title (left, size 8 bold) + optional inline subtitle
+/**
+ * Section title row: title (left, size 8 bold) + optional inline subtitle
  *  positioned right after title with a measured gap + optional OMB note
- *  right-aligned to width. Underlined. */
+ *  right-aligned to width. Underlined. 
+ */
 function drawSectionTitle(
   ctx: Ctx,
   x: number,
@@ -332,9 +344,11 @@ function drawSectionTitle(
   return y + 18;
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// W-2 (Helix Software, Inc.) — Copy B
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * W-2 (Helix Software, Inc.) — Copy B
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 async function buildW2(): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
@@ -469,9 +483,11 @@ async function buildW2(): Promise<Uint8Array> {
   return await doc.save();
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Wealthfront-style consolidated 1099 — 6 pages
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Wealthfront-style consolidated 1099 — 6 pages
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 interface WfHeaderOpts {
   page: number;
@@ -593,8 +609,10 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     drawText(ctx, "Refer to the 1099-B and Proceeds not reported to the IRS pages to ensure that you consider all relevant items and to determine the correct gains and losses. The amounts shown below are for informational purposes.", colLeftX, tableY + 12, { size: 6, italic: true });
 
     const tHdrY = tableY + 32; // extra room for 2-line headers
-    // Spread numeric columns so wide headers + wide values don't crash:
-    //   PROC(332) → BASIS(387) → MKT(442) → WASH(502) → NET(570)
+    /*
+     * Spread numeric columns so wide headers + wide values don't crash:
+     *   PROC(332) → BASIS(387) → MKT(442) → WASH(502) → NET(570)
+     */
     const X_TERM = colLeftX;
     const X_TYPE = colLeftX + 60;
     const X_PROC = colLeftX + 290;
@@ -966,9 +984,11 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
   return await doc.save();
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Schwab-style consolidated 1099 — 5 pages
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Schwab-style consolidated 1099 — 5 pages
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function drawSchwabHeader(ctx: Ctx, page: number, totalPages: number) {
   const x0 = 36;
@@ -1224,8 +1244,10 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     drawText(ctx, "Refer to Proceeds from Broker and Barter Exchange Transactions for detailed information regarding these summary values. The amounts shown below are for informational", x0, 186, { size: 7, italic: true });
     drawText(ctx, "purposes only.", x0, 195, { size: 7, italic: true });
 
-    // Column x positions chosen so adjacent headers + values never overlap.
-    // Layout: label area to ~270pt, then 5 numeric cols evenly spaced.
+    /*
+     * Column x positions chosen so adjacent headers + values never overlap.
+     * Layout: label area to ~270pt, then 5 numeric cols evenly spaced.
+     */
     const C_PROC = x0 + 290;
     const C_BASIS = x0 + 355;
     const C_MKT = x0 + 415;
@@ -1345,10 +1367,12 @@ async function buildSchwab1099(): Promise<Uint8Array> {
 
     let y = 168;
 
-    // 6 right-aligned numeric columns; gaps sized so that size-8-bold totals
-    // ("$57,500.00" ≈ 45pt, "$(3,000.00)" ≈ 48pt) never crash adjacent cols.
-    // PROC pushed right of SOLD date by ≥10pt; GAIN pulled left of WHELD by
-    // enough to clear the "TAX WITHHELD" header at size 6 bold.
+    /*
+     * 6 right-aligned numeric columns; gaps sized so that size-8-bold totals
+     * ("$57,500.00" ≈ 45pt, "$(3,000.00)" ≈ 48pt) never crash adjacent cols.
+     * PROC pushed right of SOLD date by ≥10pt; GAIN pulled left of WHELD by
+     * enough to clear the "TAX WITHHELD" header at size 6 bold.
+     */
     const C_QTY = x0 + 140;
     const C_ACQ = x0 + 180;
     const C_SOLD = x0 + 240;
@@ -1455,9 +1479,11 @@ async function buildSchwab1099(): Promise<Uint8Array> {
   return await doc.save();
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Main
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Main
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 async function main() {
   const __filename = fileURLToPath(import.meta.url);

@@ -1,8 +1,10 @@
-// Unit tests for the QDCG worksheet — pure math, no engine setup.
-//
-// Each case asserts both the final tax AND key intermediate breakdown
-// lines so a math regression surfaces at the step that broke, not at
-// the cascade downstream.
+/*
+ * Unit tests for the QDCG worksheet — pure math, no engine setup.
+ * 
+ * Each case asserts both the final tax AND key intermediate breakdown
+ * lines so a math regression surfaces at the step that broke, not at
+ * the cascade downstream.
+ */
 
 import { describe, expect, it } from "vitest";
 import { computeQdcg } from "./qdcg.js";
@@ -12,9 +14,11 @@ describe("computeQdcg", () => {
       const r = computeQdcg({
         taxableIncome: 600_000,
         qualifiedDividends: 1_000,
-        // Caller computes smaller of Sched D L15 ($85,000) and L16 ($80,000),
-        // treating blank/loss as 0. Short-term losses pulled L16 below L15
-        // here, so L3 = L16 = 80,000 (not the higher L15).
+        /*
+         * Caller computes smaller of Sched D L15 ($85,000) and L16 ($80,000),
+         * treating blank/loss as 0. Short-term losses pulled L16 below L15
+         * here, so L3 = L16 = 80,000 (not the higher L15).
+         */
         netLongTermGain: 80_000,
         filingStatus: "single",
         taxYear: 2025,
@@ -56,8 +60,10 @@ describe("computeQdcg", () => {
       taxYear: 2025,
     });
 
-    // With no preferential income, lines 23 and 24 should both equal
-    // the plain tax-table value — and 1040 line 16 should match.
+    /*
+     * With no preferential income, lines 23 and 24 should both equal
+     * the plain tax-table value — and 1040 line 16 should match.
+     */
     expect(r.tax).toBe(8835);
     expect(r.breakdown.line4).toBe(0);          // preferential bucket empty
     expect(r.breakdown.line5).toBe(63250);     // ordinary = full taxable income
@@ -69,8 +75,10 @@ describe("computeQdcg", () => {
   });
 
   it("all preferential at 0% — ordinary bucket below the 0% ceiling", () => {
-    // Single 2025: 0% ceiling = $48,350. Ordinary $30k leaves $18,350 of
-    // 0% room. Preferential $10k fits entirely in the 0% bracket.
+    /*
+     * Single 2025: 0% ceiling = $48,350. Ordinary $30k leaves $18,350 of
+     * 0% room. Preferential $10k fits entirely in the 0% bracket.
+     */
     const r = computeQdcg({
       taxableIncome: 40000,
       qualifiedDividends: 0,
@@ -90,8 +98,10 @@ describe("computeQdcg", () => {
   });
 
   it("preferential straddles 0% / 15% — ordinary fills part of 0% room", () => {
-    // Single 2025: 0% ceiling $48,350. Ordinary $40k → $8,350 of 0%
-    // room left. Preferential $20k splits: $8,350 at 0%, $11,650 at 15%.
+    /*
+     * Single 2025: 0% ceiling $48,350. Ordinary $40k → $8,350 of 0%
+     * room left. Preferential $20k splits: $8,350 at 0%, $11,650 at 15%.
+     */
     const r = computeQdcg({
       taxableIncome: 60000,
       qualifiedDividends: 5000,
@@ -109,8 +119,10 @@ describe("computeQdcg", () => {
   });
 
   it("MFJ filer at the 0% ceiling boundary — $96,700 single test", () => {
-    // MFJ 0% ceiling = $96,700. Ordinary exactly $96,700; preferential
-    // $10k all sits above the ceiling → all at 15%.
+    /*
+     * MFJ 0% ceiling = $96,700. Ordinary exactly $96,700; preferential
+     * $10k all sits above the ceiling → all at 15%.
+     */
     const r = computeQdcg({
       taxableIncome: 106700,
       qualifiedDividends: 10000,
@@ -126,11 +138,13 @@ describe("computeQdcg", () => {
   });
 
   it("hits 20% bracket — single with $1M taxable + $200k preferential", () => {
-    // Single 2025: 15% ceiling = $533,400. Ordinary $800k pushes past
-    // the 15% ceiling; preferential $200k → first $0 at 0%, all
-    // remaining at 20% (because the ordinary part exceeds both
-    // thresholds — none of the 15% bracket is available to the
-    // preferential dollars).
+    /*
+     * Single 2025: 15% ceiling = $533,400. Ordinary $800k pushes past
+     * the 15% ceiling; preferential $200k → first $0 at 0%, all
+     * remaining at 20% (because the ordinary part exceeds both
+     * thresholds — none of the 15% bracket is available to the
+     * preferential dollars).
+     */
     const r = computeQdcg({
       taxableIncome: 1000000,
       qualifiedDividends: 0,
@@ -147,8 +161,10 @@ describe("computeQdcg", () => {
   });
 
   it("returns line25 = min(line23, line24) when both would be equal", () => {
-    // No preferential income — line23 and line24 must be identical (the
-    // worksheet's min() acts as a fallback guard).
+    /*
+     * No preferential income — line23 and line24 must be identical (the
+     * worksheet's min() acts as a fallback guard).
+     */
     const r = computeQdcg({
       taxableIncome: 50000,
       qualifiedDividends: 0,

@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { createOwner, ownerExists, login } from "@/lib/localAuth";
 
-// First-run setup: create the instance owner. 409s once an owner exists —
-// this is a one-shot endpoint, not a signup system.
+/*
+ * First-run setup: create the instance owner. 409s once an owner exists —
+ * this is a one-shot endpoint, not a signup system.
+ */
 export async function POST(request: Request) {
   if (await ownerExists()) {
     return NextResponse.json({ error: "already set up" }, { status: 409 });

@@ -1,9 +1,11 @@
-// Phase C Mastra workflow: ingest a form PDF into the form_fields catalog.
-//
-// Not registered with the production Mastra instance (per PIPELINE.md the
-// forms-pipeline workflows run standalone from CLI scripts). Mastra's
-// in-memory storage handles snapshots for the duration of the run; we
-// don't persist them across invocations.
+/*
+ * Phase C Mastra workflow: ingest a form PDF into the form_fields catalog.
+ * 
+ * Not registered with the production Mastra instance (per PIPELINE.md the
+ * forms-pipeline workflows run standalone from CLI scripts). Mastra's
+ * in-memory storage handles snapshots for the duration of the run; we
+ * don't persist them across invocations.
+ */
 
 import { createWorkflow } from "@mastra/core/workflows";
 import {

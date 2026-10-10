@@ -1,12 +1,14 @@
-// Emit a typed `Form<Id>` interface from a catalog JSON file.
-//
-// Each catalog field has a `fieldId`, `valueType` (numeric/text/boolean/date/
-// single_select/multi_select), and a `label`. We strip the formId prefix
-// off each fieldId to get short keys (the convention used by defineForm),
-// map valueType → TS primitive, and emit one interface declaration the
-// bindings file can import.
-//
-// Re-running overwrites.
+/*
+ * Emit a typed `Form<Id>` interface from a catalog JSON file.
+ * 
+ * Each catalog field has a `fieldId`, `valueType` (numeric/text/boolean/date/
+ * single_select/multi_select), and a `label`. We strip the formId prefix
+ * off each fieldId to get short keys (the convention used by defineForm),
+ * map valueType → TS primitive, and emit one interface declaration the
+ * bindings file can import.
+ * 
+ * Re-running overwrites.
+ */
 
 import { promises as fs } from "node:fs";
 import { resolve } from "node:path";
@@ -48,9 +50,11 @@ function parseCmdArgs(argv: string[]): Args {
   };
 }
 
-// Map catalog valueType → TS primitive. Branded subtypes (Money for
-// numeric, SSN/Phone for specific text fields) are a future refinement;
-// for now we use plain primitives so the generated file is dependency-free.
+/*
+ * Map catalog valueType → TS primitive. Branded subtypes (Money for
+ * numeric, SSN/Phone for specific text fields) are a future refinement;
+ * for now we use plain primitives so the generated file is dependency-free.
+ */
 function tsType(field: CatalogField): string {
   switch (field.valueType) {
     case "numeric":
@@ -70,9 +74,11 @@ function tsType(field: CatalogField): string {
   }
 }
 
-// Field IDs in the catalog are full ("form-540.header.first_name"); the
-// defineForm convention uses short keys ("header.first_name"). Strip the
-// formId prefix once at emit time.
+/*
+ * Field IDs in the catalog are full ("form-540.header.first_name"); the
+ * defineForm convention uses short keys ("header.first_name"). Strip the
+ * formId prefix once at emit time.
+ */
 function shortKey(fieldId: string, formId: string): string {
   const prefix = `${formId}.`;
   if (!fieldId.startsWith(prefix)) {

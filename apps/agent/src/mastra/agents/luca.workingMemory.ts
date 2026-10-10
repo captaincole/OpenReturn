@@ -1,14 +1,16 @@
 import { z } from "zod";
 
-// Luca's working memory — a thread-scoped, schema-typed scratchpad that
-// Mastra surfaces in the system prompt every turn and exposes via the
-// auto-registered `updateWorkingMemory` tool. The shape is read by the web
-// PlanCard via /app/state, so the field names here are part of the public
-// contract with the frontend.
-//
-// Mastra merge semantics (per the docs): top-level object fields are deep
-// merged, but ARRAYS are replaced wholesale. So when Luca updates the plan
-// he emits the full plan array each time.
+/*
+ * Luca's working memory — a thread-scoped, schema-typed scratchpad that
+ * Mastra surfaces in the system prompt every turn and exposes via the
+ * auto-registered `updateWorkingMemory` tool. The shape is read by the web
+ * PlanCard via /app/state, so the field names here are part of the public
+ * contract with the frontend.
+ * 
+ * Mastra merge semantics (per the docs): top-level object fields are deep
+ * merged, but ARRAYS are replaced wholesale. So when Luca updates the plan
+ * he emits the full plan array each time.
+ */
 
 export const planItemStatus = z.enum(["todo", "doing", "done"]);
 export type PlanItemStatus = z.infer<typeof planItemStatus>;

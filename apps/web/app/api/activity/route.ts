@@ -3,8 +3,10 @@ import { getOwnerSession } from "@/lib/localAuth";
 import { fetchActivityItems } from "@/lib/serverDb";
 import { ACTIVITY_TAX_YEAR } from "@/lib/activity";
 
-// Activity feed for the polling ActivityCard. Auth via the owner session
-// cookie; rows from the libsql app DB, scoped explicitly to the caller.
+/*
+ * Activity feed for the polling ActivityCard. Auth via the owner session
+ * cookie; rows from the libsql app DB, scoped explicitly to the caller.
+ */
 export async function GET(request: NextRequest) {
   const session = await getOwnerSession();
   if (!session) {

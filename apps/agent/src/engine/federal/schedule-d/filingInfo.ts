@@ -1,11 +1,13 @@
-// ScheduleDFilingInfo — Schedule D (Capital Gains and Losses) specific
-// slots layered on top of BaseFilingInfo.
-//
-// Schedule D is almost entirely a summarizer over 8949: it reads
-// per-row totals from 8949 Part I / Part II via cross-form references,
-// then nets them into line 16 (the value Form 1040 line 7a consumes).
-// No FilingInfo slots are needed for the actual arithmetic — only the
-// form-scoping flag for now.
+/*
+ * ScheduleDFilingInfo — Schedule D (Capital Gains and Losses) specific
+ * slots layered on top of BaseFilingInfo.
+ * 
+ * Schedule D is almost entirely a summarizer over 8949: it reads
+ * per-row totals from 8949 Part I / Part II via cross-form references,
+ * then nets them into line 16 (the value Form 1040 line 7a consumes).
+ * No FilingInfo slots are needed for the actual arithmetic — only the
+ * form-scoping flag for now.
+ */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { EngineDerivation } from "../../types.js";

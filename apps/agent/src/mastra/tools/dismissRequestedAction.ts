@@ -3,14 +3,16 @@ import { z } from "zod";
 import { getAppDb, nowIso } from "../db/appDb";
 import { requireUserContext } from "./userContext";
 
-// dismiss-requested-action: close a dashboard upload card after Luca has
-// successfully ingested the corresponding document. Matches the most
-// recent open or processing action with the same document_type for the
-// current user.
-//
-// Returns { dismissed: false } if nothing matched — safe to call
-// unconditionally after every ingest; if there was no outstanding
-// request for that document, nothing happens.
+/*
+ * dismiss-requested-action: close a dashboard upload card after Luca has
+ * successfully ingested the corresponding document. Matches the most
+ * recent open or processing action with the same document_type for the
+ * current user.
+ * 
+ * Returns { dismissed: false } if nothing matched — safe to call
+ * unconditionally after every ingest; if there was no outstanding
+ * request for that document, nothing happens.
+ */
 
 export const dismissRequestedAction = createTool({
   id: "dismiss-requested-action",

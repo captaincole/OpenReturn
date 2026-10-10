@@ -1,12 +1,14 @@
 import { getAppDb, ensureAppSchema, asStr, asNum, nowIso } from "./appDb";
 
-// Filings — the ownership root. Every domain row (tax_facts, ai_decisions,
-// etc.) carries a filing_id; with RLS gone, access is gated by explicit
-// filing_members lookups here (the routes/tools call these before building
-// a Scope).
-//
-// For the current single-owner-per-user flow there's one active filing per
-// (user, tax_year).
+/*
+ * Filings — the ownership root. Every domain row (tax_facts, ai_decisions,
+ * etc.) carries a filing_id; with RLS gone, access is gated by explicit
+ * filing_members lookups here (the routes/tools call these before building
+ * a Scope).
+ * 
+ * For the current single-owner-per-user flow there's one active filing per
+ * (user, tax_year).
+ */
 
 export type FilingMemberRole = "owner";
 
@@ -17,9 +19,11 @@ export interface FilingRow {
   createdAt: string;
 }
 
-// Resolve a user's active owner filing for a given tax year. Throws if
-// there isn't exactly one — that's a misconfiguration we want to surface
-// loudly rather than silently picking a filing.
+/*
+ * Resolve a user's active owner filing for a given tax year. Throws if
+ * there isn't exactly one — that's a misconfiguration we want to surface
+ * loudly rather than silently picking a filing.
+ */
 export async function resolveOwnerFilingForYear(
   userId: string,
   taxYear: number,
@@ -52,8 +56,10 @@ export async function resolveOwnerFilingForYear(
   };
 }
 
-/** Non-revoked membership for (filing, user, role). Returns the filing's tax
- *  year, or null when no such membership — the routes' 403/404 gate. */
+/**
+ * Non-revoked membership for (filing, user, role). Returns the filing's tax
+ *  year, or null when no such membership — the routes' 403/404 gate. 
+ */
 export async function getMembership(
   filingId: string,
   userId: string,
@@ -72,8 +78,10 @@ export async function getMembership(
   return r ? { filingId: asStr(r.id), taxYear: asNum(r.tax_year) } : null;
 }
 
-/** Create a filing + owner membership. Used by the seed script and the
- *  create-filing flow. Caller supplies the id (crypto.randomUUID()). */
+/**
+ * Create a filing + owner membership. Used by the seed script and the
+ *  create-filing flow. Caller supplies the id (crypto.randomUUID()). 
+ */
 export async function createOwnerFiling(args: {
   filingId: string;
   userId: string;
@@ -97,12 +105,16 @@ export async function createOwnerFiling(args: {
   );
 }
 
-/** Delete a filing; FK ON DELETE CASCADE clears every domain row under it.
- *  Ownership must be verified by the caller (getMembership) first. */
+/**
+ * Delete a filing; FK ON DELETE CASCADE clears every domain row under it.
+ *  Ownership must be verified by the caller (getMembership) first. 
+ */
 export async function deleteFilingCascade(filingId: string): Promise<void> {
   await ensureAppSchema();
   const db = getAppDb();
-  // ensureAppSchema turned foreign_keys ON for this connection, so the
-  // cascade fires at the SQL level.
+  /*
+   * ensureAppSchema turned foreign_keys ON for this connection, so the
+   * cascade fires at the SQL level.
+   */
   await db.execute({ sql: `DELETE FROM filings WHERE id = ?`, args: [filingId] });
 }

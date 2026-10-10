@@ -1,12 +1,14 @@
-// Vision-AI label resolver for the form-ingest pipeline.
-//
-// Given one PDF page's worth of widgets and the rendered page image with
-// numbered overlay badges, ask Claude vision to return the human-readable
-// label for each widget. Widgets that already carry a /TU value are passed
-// through with `tuLabel` set — the prompt says to echo /TU verbatim and only
-// infer labels for widgets where /TU is null.
-//
-// Single call per page. Tool-use enforces the response shape.
+/*
+ * Vision-AI label resolver for the form-ingest pipeline.
+ * 
+ * Given one PDF page's worth of widgets and the rendered page image with
+ * numbered overlay badges, ask Claude vision to return the human-readable
+ * label for each widget. Widgets that already carry a /TU value are passed
+ * through with `tuLabel` set — the prompt says to echo /TU verbatim and only
+ * infer labels for widgets where /TU is null.
+ * 
+ * Single call per page. Tool-use enforces the response shape.
+ */
 
 import Anthropic from "@anthropic-ai/sdk";
 import {

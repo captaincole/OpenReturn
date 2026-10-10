@@ -1,7 +1,9 @@
 "use client";
 
-// Single-user login: one password, one owner. If setup hasn't run yet the
-// server layout for this route redirects to /setup before this renders.
+/*
+ * Single-user login: one password, one owner. If setup hasn't run yet the
+ * server layout for this route redirects to /setup before this renders.
+ */
 
 import { type FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -27,8 +29,10 @@ export default function LoginPage() {
       setSubmitting(false);
       return;
     }
-    // refresh() re-runs Server Components with the new session cookie; push()
-    // navigates to the protected home page.
+    /*
+     * refresh() re-runs Server Components with the new session cookie; push()
+     * navigates to the protected home page.
+     */
     router.refresh();
     router.push("/");
   }

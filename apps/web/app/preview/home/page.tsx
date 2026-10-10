@@ -1,20 +1,24 @@
 "use client";
 
-// Home-home — person-scope landing page. Above any single return.
-// No chat (no active return to chat about). Full-width dashboard with:
-//   1. Your returns           — all in-progress + filed returns
-//   2. Continue with          — workflow entry points (new return, amend, plan)
-//   3. Your tax picture       — lifetime visualizations (income, refund, etc.)
-//
-// Mock data only. Brand mark + return cards link into /preview (the
-// return-scoped view) to demonstrate the navigation model.
+/*
+ * Home-home — person-scope landing page. Above any single return.
+ * No chat (no active return to chat about). Full-width dashboard with:
+ *   1. Your returns           — all in-progress + filed returns
+ *   2. Continue with          — workflow entry points (new return, amend, plan)
+ *   3. Your tax picture       — lifetime visualizations (income, refund, etc.)
+ * 
+ * Mock data only. Brand mark + return cards link into /preview (the
+ * return-scoped view) to demonstrate the navigation model.
+ */
 
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 
-// ────────────────────────────────────────────────────────────────────────────
-// Mock data
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Mock data
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 const RETURNS = [
   { id: "2025", year: 2025, label: "2025 Return", state: "active" as const, progress: 60, openAsks: 3, subtitle: "60% complete · 3 open asks" },
@@ -61,9 +65,11 @@ const CHARITABLE = [
   { year: 2025, value: 10500 },
 ];
 
-// ────────────────────────────────────────────────────────────────────────────
-// Page
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Page
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 export default function HomePage() {
   return (
@@ -140,9 +146,11 @@ export default function HomePage() {
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Top bar — minimal, no return picker (no return is active here)
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Top bar — minimal, no return picker (no return is active here)
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function HomeTopBar() {
   return (
@@ -170,9 +178,11 @@ function HomeTopBar() {
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Section wrapper
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Section wrapper
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function Section({
   title,
@@ -194,9 +204,11 @@ function Section({
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Return cards
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Return cards
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function ReturnCard({ ret }: { ret: (typeof RETURNS)[number] }) {
   const isActive = ret.state === "active";
@@ -267,9 +279,11 @@ function NewReturnCard() {
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Workflow cards
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Workflow cards
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function WorkflowCard({ workflow }: { workflow: (typeof WORKFLOWS)[number] }) {
   return (
@@ -285,9 +299,11 @@ function WorkflowCard({ workflow }: { workflow: (typeof WORKFLOWS)[number] }) {
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Chart card + charts (hand-rolled SVG)
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Chart card + charts (hand-rolled SVG)
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function ChartCard({
   title,
@@ -521,9 +537,11 @@ function DivergentBarChart({
   );
 }
 
-// ────────────────────────────────────────────────────────────────────────────
-// Formatters
-// ────────────────────────────────────────────────────────────────────────────
+/*
+ * ────────────────────────────────────────────────────────────────────────────
+ * Formatters
+ * ────────────────────────────────────────────────────────────────────────────
+ */
 
 function fmtCurrencyFull(n: number): string {
   return `$${n.toLocaleString()}`;

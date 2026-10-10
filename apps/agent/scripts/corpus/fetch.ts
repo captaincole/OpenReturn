@@ -1,15 +1,17 @@
-// Fetch the prebuilt reference corpus into .data/corpus.db.
-//
-// Resolution order:
-//   1. .data/corpus.db already present + sha matches manifest → done.
-//      (Present with a DIFFERENT sha is fine too — assume a locally-extended
-//      corpus via `corpus sync`; we won't clobber it. Use --force to replace.)
-//   2. CORPUS_SEED_PATH env or a local seed file → copy.
-//   3. manifest url (GitHub Release asset) → download + sha256-verify.
-//
-// The corpus ships as a release asset rather than in git because it grows
-// with scenario coverage (50 states ≈ 50+ instruction booklets); see
-// seed/corpus.manifest.json.
+/*
+ * Fetch the prebuilt reference corpus into .data/corpus.db.
+ * 
+ * Resolution order:
+ *   1. .data/corpus.db already present + sha matches manifest → done.
+ *      (Present with a DIFFERENT sha is fine too — assume a locally-extended
+ *      corpus via `corpus sync`; we won't clobber it. Use --force to replace.)
+ *   2. CORPUS_SEED_PATH env or a local seed file → copy.
+ *   3. manifest url (GitHub Release asset) → download + sha256-verify.
+ * 
+ * The corpus ships as a release asset rather than in git because it grows
+ * with scenario coverage (50 states ≈ 50+ instruction booklets); see
+ * seed/corpus.manifest.json.
+ */
 
 import { createHash } from "node:crypto";
 import { mkdirSync, existsSync, copyFileSync, readFileSync, writeFileSync } from "node:fs";
@@ -98,10 +100,12 @@ async function run(argv: string[]): Promise<void> {
   await checkEmbeddingStamp();
 }
 
-// Compare the installed corpus's embedding-model stamp against the active
-// local model. On mismatch, search runs keyword-only until the vectors are
-// rebuilt (~4 min, free, needs Ollama) — say so now rather than at query time.
-// getCorpusDb resolves the same CORPUS_DB_PATH/default this script installed to.
+/*
+ * Compare the installed corpus's embedding-model stamp against the active
+ * local model. On mismatch, search runs keyword-only until the vectors are
+ * rebuilt (~4 min, free, needs Ollama) — say so now rather than at query time.
+ * getCorpusDb resolves the same CORPUS_DB_PATH/default this script installed to.
+ */
 async function checkEmbeddingStamp(): Promise<void> {
   const { storedEmbeddingModel } = await import("../../src/mastra/db/refDocs");
   const { resolveEmbeddings } = await import("../../src/refdocs/embeddings");

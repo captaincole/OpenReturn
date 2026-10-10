@@ -1,16 +1,18 @@
-// Parser for the California FTB Tax Table (2025 540 booklet appendix). FTB
-// publishes the table as a PDF only; we extract text via unpdf and split
-// each row by whitespace.
-//
-// CA Tax Table differs from the IRS table in two ways that matter here:
-//   - 5 numeric columns per row (low, high, single_or_mfs, mfj_or_qss, hoh)
-//     vs. IRS's 6 columns. CA combines Single+MFS into one column and
-//     MFJ+QSS into another (those pairs always pay the same tax).
-//   - Row width is $100 instead of $50, and the first row covers $1..$50.
-//
-// Each text line is one row. The header repeats across pages; we filter by
-// shape — exactly 5 comma-formatted integers per line that satisfy
-// low < high.
+/*
+ * Parser for the California FTB Tax Table (2025 540 booklet appendix). FTB
+ * publishes the table as a PDF only; we extract text via unpdf and split
+ * each row by whitespace.
+ * 
+ * CA Tax Table differs from the IRS table in two ways that matter here:
+ *   - 5 numeric columns per row (low, high, single_or_mfs, mfj_or_qss, hoh)
+ *     vs. IRS's 6 columns. CA combines Single+MFS into one column and
+ *     MFJ+QSS into another (those pairs always pay the same tax).
+ *   - Row width is $100 instead of $50, and the first row covers $1..$50.
+ * 
+ * Each text line is one row. The header repeats across pages; we filter by
+ * shape — exactly 5 comma-formatted integers per line that satisfy
+ * low < high.
+ */
 
 import { extractText } from "unpdf";
 
@@ -32,8 +34,10 @@ export interface CAParseResult {
   };
 }
 
-// FTB renders the very first row with dollar-sign prefixes ($1 $50 $0 $0
-// $0) — accept optional "$" on each cell so the lowest band parses.
+/*
+ * FTB renders the very first row with dollar-sign prefixes ($1 $50 $0 $0
+ * $0) — accept optional "$" on each cell so the lowest band parses.
+ */
 const ROW_RE = /^\$?([\d,]+)\s+\$?([\d,]+)\s+\$?([\d,]+)\s+\$?([\d,]+)\s+\$?([\d,]+)$/;
 
 export async function parseCATaxTable(pdfBytes: Uint8Array): Promise<CAParseResult> {

@@ -1,9 +1,11 @@
-// Marcus Chen — facts (the "data").
-//
-// Identity + W-2 (drives SALT + Add'l Medicare Tax) + 1099-INT (HYSA
-// interest, drives 1040 line 2b + NIIT line 1) + 1099-DIV (drives 1040
-// line 3a/3b + NIIT line 2). Brokerage trades (Schedule D / 8949) and
-// HSA / IRA facts come in later PRs as those form bindings land.
+/*
+ * Marcus Chen — facts (the "data").
+ * 
+ * Identity + W-2 (drives SALT + Add'l Medicare Tax) + 1099-INT (HYSA
+ * interest, drives 1040 line 2b + NIIT line 1) + 1099-DIV (drives 1040
+ * line 3a/3b + NIIT line 2). Brokerage trades (Schedule D / 8949) and
+ * HSA / IRA facts come in later PRs as those form bindings land.
+ */
 
 import type { TaxFactRow } from "../../../src/mastra/db/taxFacts.js";
 import {
@@ -28,17 +30,21 @@ const w2: W2FactValue = {
     state: "CA",
     zip: "94105",
   },
-  // Box 1 is wages after the $23,500 401(k) (code D) and $4,150 HSA (code W)
-  // pre-tax reductions: $247,650 gross − $23,500 − $4,150 = $220,000.
+  /*
+   * Box 1 is wages after the $23,500 401(k) (code D) and $4,150 HSA (code W)
+   * pre-tax reductions: $247,650 gross − $23,500 − $4,150 = $220,000.
+   */
   box1: 220000,
   box2: 40000,
   box3: 176100, // 2025 SS wage cap
   box4: 10918.2, // 6.2% of $176,100
   box5: 243500, // Medicare wages = gross − 401(k); HSA does NOT reduce box 5
-  // Box 6 includes both regular 1.45% Medicare tax AND the employer-side
-  // 0.9% Additional Medicare Tax on wages above $200k:
-  //   1.45% × $243,500 + 0.9% × ($243,500 − $200,000)
-  //   = $3,530.75 + $391.50 = $3,922.25 → $3,922
+  /*
+   * Box 6 includes both regular 1.45% Medicare tax AND the employer-side
+   * 0.9% Additional Medicare Tax on wages above $200k:
+   *   1.45% × $243,500 + 0.9% × ($243,500 − $200,000)
+   *   = $3,530.75 + $391.50 = $3,922.25 → $3,922
+   */
   box6: 3922,
   box12: [
     { code: "D", amount: 23500 }, // 2025 401(k) employee deferral max
@@ -51,18 +57,22 @@ const w2: W2FactValue = {
   box17: 15500,
 };
 
-// Wealthfront Cash (HYSA) — single 1099-INT, box 1 is the only
-// populated cell on the statement.
+/*
+ * Wealthfront Cash (HYSA) — single 1099-INT, box 1 is the only
+ * populated cell on the statement.
+ */
 const wealthfrontInterest: InterestFactValue = {
   payerName: "Wealthfront Brokerage LLC",
   payerTin: "27-3987858",
   box1: 700,
 };
 
-// Charles Schwab brokerage — 1099-DIV portion of the consolidated
-// statement. 4 VTI quarterly distributions sum to $3,000 ordinary
-// / $2,000 qualified. Brokerage trade facts (1099-B) come in a later
-// PR alongside Schedule D / 8949 wiring for Marcus.
+/*
+ * Charles Schwab brokerage — 1099-DIV portion of the consolidated
+ * statement. 4 VTI quarterly distributions sum to $3,000 ordinary
+ * / $2,000 qualified. Brokerage trade facts (1099-B) come in a later
+ * PR alongside Schedule D / 8949 wiring for Marcus.
+ */
 const schwabDividends: DividendFactValue = {
   payerName: "Charles Schwab & Co., Inc.",
   payerTin: "94-1737782",

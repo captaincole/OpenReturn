@@ -1,17 +1,19 @@
-// 1099-INT fact kind. One fact = one payer's full 1099-INT box totals.
-// Mirrors the 1099-DIV pattern (see dividends.ts) — same category, same
-// per-payer key shape, same parse/get helpers.
-//
-// Convention:
-//   category: "investment_income"
-//   key:      "account.{accountSlug}.interest"
-//   value:    InterestFactValue
-//
-// TODO: Schedule B Part I requires per-payer rows when total interest
-// exceeds $1,500. Each fact already represents one payer, so the data
-// shape is right — the binding side just needs a repeating-row mechanism
-// that doesn't exist yet (same problem Schedule B / Schedule D capital
-// gains rows hit). Until that lands, Schedule B Part I stays unsupported.
+/*
+ * 1099-INT fact kind. One fact = one payer's full 1099-INT box totals.
+ * Mirrors the 1099-DIV pattern (see dividends.ts) — same category, same
+ * per-payer key shape, same parse/get helpers.
+ * 
+ * Convention:
+ *   category: "investment_income"
+ *   key:      "account.{accountSlug}.interest"
+ *   value:    InterestFactValue
+ * 
+ * TODO: Schedule B Part I requires per-payer rows when total interest
+ * exceeds $1,500. Each fact already represents one payer, so the data
+ * shape is right — the binding side just needs a repeating-row mechanism
+ * that doesn't exist yet (same problem Schedule B / Schedule D capital
+ * gains rows hit). Until that lands, Schedule B Part I stays unsupported.
+ */
 
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
@@ -19,9 +21,11 @@ import type { TaxFactRow } from "../rows.js";
 export interface InterestFactValue {
   payerName: string;
   payerTin?: string;
-  // 1099-INT box totals — all optional. Box 1 is the load-bearing field
-  // (taxable interest income, flows to 1040 line 2b). Other boxes only
-  // populate when specific situations apply.
+  /*
+   * 1099-INT box totals — all optional. Box 1 is the load-bearing field
+   * (taxable interest income, flows to 1040 line 2b). Other boxes only
+   * populate when specific situations apply.
+   */
   box1?: number;   // Interest income
   box2?: number;   // Early withdrawal penalty (an above-the-line deduction)
   box3?: number;   // US savings bond and Treasury interest

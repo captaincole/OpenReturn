@@ -1,13 +1,15 @@
-// Read filled values out of a "golden" PDF — a CPA-completed form like
-// Alex-1040-Golden.pdf — keyed by the full AcroForm widget name. The
-// scenario runner uses this as the source of truth: our render must
-// produce the same value at the same widget for every assertion.
-//
-// This is fundamentally different from the per-fieldId fixture assertions
-// in expected.ts. Those trust the catalog's `fieldId → pdfWidgetName`
-// mapping, so a mislabeled catalog passes even when the rendered PDF
-// shows everything in the wrong place. Golden-widget comparison
-// short-circuits the catalog entirely.
+/*
+ * Read filled values out of a "golden" PDF — a CPA-completed form like
+ * Alex-1040-Golden.pdf — keyed by the full AcroForm widget name. The
+ * scenario runner uses this as the source of truth: our render must
+ * produce the same value at the same widget for every assertion.
+ * 
+ * This is fundamentally different from the per-fieldId fixture assertions
+ * in expected.ts. Those trust the catalog's `fieldId → pdfWidgetName`
+ * mapping, so a mislabeled catalog passes even when the rendered PDF
+ * shows everything in the wrong place. Golden-widget comparison
+ * short-circuits the catalog entirely.
+ */
 
 import { promises as fs } from "node:fs";
 import {

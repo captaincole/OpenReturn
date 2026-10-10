@@ -4,17 +4,19 @@ import { recordFact } from "../db/taxFacts";
 import { makeW2FactKey, type W2FactValue } from "../../engine/facts";
 import { requireUserContext } from "./userContext";
 
-// Ingest a W-2 as a single structured tax_facts row. The Form Engine reads
-// these via `getW2Facts(facts)` from the fact catalog.
-//
-// Convention (see src/engine/facts/kinds/wages.ts):
-//   category: "wages"
-//   key:      "employer.{employerSlug}"
-//   value:    W2FactValue
-//
-// Luca (vision-capable) reads the W-2 PDF and calls this tool with the
-// extracted values. The schema mirrors IRS-canonical box numbers so any
-// W-2 layout maps to the same fields.
+/*
+ * Ingest a W-2 as a single structured tax_facts row. The Form Engine reads
+ * these via `getW2Facts(facts)` from the fact catalog.
+ * 
+ * Convention (see src/engine/facts/kinds/wages.ts):
+ *   category: "wages"
+ *   key:      "employer.{employerSlug}"
+ *   value:    W2FactValue
+ * 
+ * Luca (vision-capable) reads the W-2 PDF and calls this tool with the
+ * extracted values. The schema mirrors IRS-canonical box numbers so any
+ * W-2 layout maps to the same fields.
+ */
 
 const AddressSchema = z.object({
   line1: z.string(),
@@ -141,10 +143,12 @@ export const ingestW2 = createTool({
     });
     let factsWritten = 1;
 
-    // Side effect: copy employee identity (boxes a/e/f) into the
-    // `identity.*` fact keys that PDF renderers read to fill the
-    // personal-info boxes at the top of every form. The most recent write
-    // wins, so a later user-stated correction will supersede this.
+    /*
+     * Side effect: copy employee identity (boxes a/e/f) into the
+     * `identity.*` fact keys that PDF renderers read to fill the
+     * personal-info boxes at the top of every form. The most recent write
+     * wins, so a later user-stated correction will supersede this.
+     */
     if (input.employee) {
       const e = input.employee;
       const writeIdentity = async (key: string, value: unknown) => {
@@ -164,9 +168,11 @@ export const ingestW2 = createTool({
       await writeIdentity("identity.name.first", e.firstName);
       await writeIdentity("identity.name.last", e.lastName);
       await writeIdentity("identity.ssn", e.ssn);
-      // Address gets stored as one fact per line so each form field can
-      // bind to its own sub-fact via lookupFact. Keeps the renderer dumb —
-      // no parsing or decomposition at fill time.
+      /*
+       * Address gets stored as one fact per line so each form field can
+       * bind to its own sub-fact via lookupFact. Keeps the renderer dumb —
+       * no parsing or decomposition at fill time.
+       */
       if (e.address) {
         await writeIdentity("identity.address.street", e.address.line1);
         await writeIdentity("identity.address.apt", e.address.line2);

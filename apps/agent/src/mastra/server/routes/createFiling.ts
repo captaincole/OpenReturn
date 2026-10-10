@@ -4,18 +4,20 @@ import { getAppDb, ensureAppSchema } from "../../db/appDb";
 import { createOwnerFiling } from "../../db/filings";
 import { luca } from "../../agents/luca";
 
-// POST /app/filings
-// body: { taxYear?: number }
-//
-// Creates a new filing for the calling user with an `owner` membership in
-// the libsql app DB. If the caller already has a non-revoked owner
-// membership for the requested tax_year, return that existing filing
-// (idempotent — the home-home "Start your 2025 filing" button is safe to
-// double-click).
-//
-// Errors:
-//   401 — no JWT / unverified caller
-//   400 — taxYear out of plausible range (defensive)
+/*
+ * POST /app/filings
+ * body: { taxYear?: number }
+ * 
+ * Creates a new filing for the calling user with an `owner` membership in
+ * the libsql app DB. If the caller already has a non-revoked owner
+ * membership for the requested tax_year, return that existing filing
+ * (idempotent — the home-home "Start your 2025 filing" button is safe to
+ * double-click).
+ * 
+ * Errors:
+ *   401 — no JWT / unverified caller
+ *   400 — taxYear out of plausible range (defensive)
+ */
 
 const DEFAULT_TAX_YEAR = 2025;
 const MIN_TAX_YEAR = 2020;
@@ -26,11 +28,13 @@ function threadIdFor(userId: string, year: number | string): string {
   return `${userId}::${year}`;
 }
 
-// Best-effort: create the per-filing Mastra thread so the chat-history
-// fetch from AppShell.loadChatHistory finds a thread (empty messages list)
-// instead of triggering Mastra's "Thread not found" 500. Errors are
-// swallowed because creating the filing is what matters; the thread will
-// be lazily created on the user's first message if this fails.
+/*
+ * Best-effort: create the per-filing Mastra thread so the chat-history
+ * fetch from AppShell.loadChatHistory finds a thread (empty messages list)
+ * instead of triggering Mastra's "Thread not found" 500. Errors are
+ * swallowed because creating the filing is what matters; the thread will
+ * be lazily created on the user's first message if this fails.
+ */
 async function ensureThread(userId: string, taxYear: number): Promise<void> {
   try {
     const memory = await luca.getMemory();
@@ -82,9 +86,11 @@ export const createFilingRoute = registerApiRoute("/app/filings", {
     });
     if (existing.rows.length > 0) {
       const row = existing.rows[0];
-      // Defensive: ensure the thread exists even on the idempotent path,
-      // in case an earlier filing created the row but the thread bootstrap
-      // failed (or the filing pre-dates this route's thread-creation logic).
+      /*
+       * Defensive: ensure the thread exists even on the idempotent path,
+       * in case an earlier filing created the row but the thread bootstrap
+       * failed (or the filing pre-dates this route's thread-creation logic).
+       */
       await ensureThread(callerId, Number(row.tax_year));
       return c.json({
         filing: {

@@ -1,17 +1,19 @@
-// Form8959FilingInfo — Form 8959 (Additional Medicare Tax) specific
-// slots layered on top of BaseFilingInfo.
-//
-// Most of 8959's inputs already live elsewhere:
-//   - Medicare wages (W-2 box 5) are summed by resolveFilingInfo into the
-//     existing w2WagesTotal/w2FederalWithholding pattern — we just add a
-//     parallel box-5 sum here.
-//   - Medicare tax withheld (W-2 box 6) likewise.
-//   - The filing-status threshold ($200k single / $250k MFJ / $125k MFS)
-//     is derived inside the binding from info.filingStatus rather than
-//     stored as a slot — it's a pure lookup with no per-form variation.
-//
-// Self-employment + RRTA inputs (lines 8/14) stay unsupported until a
-// scenario with those facts exists.
+/*
+ * Form8959FilingInfo — Form 8959 (Additional Medicare Tax) specific
+ * slots layered on top of BaseFilingInfo.
+ * 
+ * Most of 8959's inputs already live elsewhere:
+ *   - Medicare wages (W-2 box 5) are summed by resolveFilingInfo into the
+ *     existing w2WagesTotal/w2FederalWithholding pattern — we just add a
+ *     parallel box-5 sum here.
+ *   - Medicare tax withheld (W-2 box 6) likewise.
+ *   - The filing-status threshold ($200k single / $250k MFJ / $125k MFS)
+ *     is derived inside the binding from info.filingStatus rather than
+ *     stored as a slot — it's a pure lookup with no per-form variation.
+ * 
+ * Self-employment + RRTA inputs (lines 8/14) stay unsupported until a
+ * scenario with those facts exists.
+ */
 
 import type { Money } from "../../values.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";

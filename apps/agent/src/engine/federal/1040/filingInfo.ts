@@ -1,9 +1,11 @@
-// Form1040FilingInfo — federal-1040-specific slots layered on top of the
-// shared BaseFilingInfo (identity + cross-form scope).
-//
-// Add slots here when a 1040 binding first references one. State forms
-// that need any of these can import this type directly — TS doesn't care
-// about folder hierarchy.
+/*
+ * Form1040FilingInfo — federal-1040-specific slots layered on top of the
+ * shared BaseFilingInfo (identity + cross-form scope).
+ * 
+ * Add slots here when a 1040 binding first references one. State forms
+ * that need any of these can import this type directly — TS doesn't care
+ * about folder hierarchy.
+ */
 
 import type { Money } from "../../values.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";

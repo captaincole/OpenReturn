@@ -1,10 +1,12 @@
 import type { InValue, Row } from "@libsql/client";
 import { getCorpusDb, ensureCorpusSchema } from "./libsql";
 
-// ---------------------------------------------------------------------------
-// Public types — consumed by src/mastra/tools/refDocs.ts and
-// src/refdocs/ingest.ts.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Public types — consumed by src/mastra/tools/refDocs.ts and
+ * src/refdocs/ingest.ts.
+ * ---------------------------------------------------------------------------
+ */
 
 export interface RefDocument {
   docId: string;
@@ -93,9 +95,11 @@ export interface BlockDetail {
   citation: string;
 }
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Helpers
+ * ---------------------------------------------------------------------------
+ */
 
 function buildCitation(
   documentTitle: string,
@@ -110,35 +114,43 @@ function buildCitation(
   return parts.join(", ");
 }
 
-// libsql's vector32() function parses the canonical "[1,2,3]" text form into an
-// F32_BLOB. We store the JSON literal and let SQL do the conversion, both on
-// insert and inside the vector_distance_cos() query argument.
+/*
+ * libsql's vector32() function parses the canonical "[1,2,3]" text form into an
+ * F32_BLOB. We store the JSON literal and let SQL do the conversion, both on
+ * insert and inside the vector_distance_cos() query argument.
+ */
 function vectorLiteral(embedding: number[]): string {
   return `[${embedding.join(",")}]`;
 }
 
-// FTS5 MATCH has its own query grammar and throws on bare operator characters
-// (-, ", *, :, etc). User/agent queries are free text, so we reduce to bare
-// alphanumeric tokens, quote each to neutralize operators, and OR them for
-// recall — bm25 still ranks blocks matching more terms higher, and the merged
-// best-of-leg scoring decides final order. Returns null when nothing
-// searchable survives (all punctuation/stopwords), so the caller skips the leg.
+/*
+ * FTS5 MATCH has its own query grammar and throws on bare operator characters
+ * (-, ", *, :, etc). User/agent queries are free text, so we reduce to bare
+ * alphanumeric tokens, quote each to neutralize operators, and OR them for
+ * recall — bm25 still ranks blocks matching more terms higher, and the merged
+ * best-of-leg scoring decides final order. Returns null when nothing
+ * searchable survives (all punctuation/stopwords), so the caller skips the leg.
+ */
 function toFtsMatchQuery(raw: string): string | null {
   const terms = raw.toLowerCase().match(/[a-z0-9]+/g);
   if (!terms || terms.length === 0) return null;
   return terms.map((t) => `"${t}"`).join(" OR ");
 }
 
-// libsql cell readers — rows come back as `Record<string, unknown>`-ish with
-// values typed string | number | bigint | ArrayBuffer | null.
+/*
+ * libsql cell readers — rows come back as `Record<string, unknown>`-ish with
+ * values typed string | number | bigint | ArrayBuffer | null.
+ */
 const asStr = (v: unknown): string => (v == null ? "" : String(v));
 const asStrOrNull = (v: unknown): string | null => (v == null ? null : String(v));
 const asNum = (v: unknown): number => (v == null ? 0 : Number(v));
 const asNumOrNull = (v: unknown): number | null => (v == null ? null : Number(v));
 
-// ---------------------------------------------------------------------------
-// Single-row lookups
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Single-row lookups
+ * ---------------------------------------------------------------------------
+ */
 
 export async function getDocument(docId: string): Promise<RefDocument | null> {
   await ensureCorpusSchema();
@@ -199,12 +211,14 @@ export async function getBlock(blockId: string): Promise<BlockDetail | null> {
   };
 }
 
-// ---------------------------------------------------------------------------
-// Hybrid retrieval — the TS port of the Postgres match_ref_blocks() RPC.
-// Runs the FTS5 leg and the native-vector leg separately, merges/dedupes in
-// JS (max fts_rank, min vector_distance), then joins back for display columns.
-// FTS-only and vector-only paths reduce to the same call with one input nulled.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Hybrid retrieval — the TS port of the Postgres match_ref_blocks() RPC.
+ * Runs the FTS5 leg and the native-vector leg separately, merges/dedupes in
+ * JS (max fts_rank, min vector_distance), then joins back for display columns.
+ * FTS-only and vector-only paths reduce to the same call with one input nulled.
+ * ---------------------------------------------------------------------------
+ */
 
 interface MatchRow {
   block_id: string;
@@ -246,8 +260,10 @@ async function callMatch(args: {
   const db = getCorpusDb();
   const filterDocId: InValue = args.filterDocId ?? null;
 
-  // fts_rank: higher = better (we negate bm25, which is lower-is-better, to
-  // match the ts_rank_cd orientation the rest of the code assumes).
+  /*
+   * fts_rank: higher = better (we negate bm25, which is lower-is-better, to
+   * match the ts_rank_cd orientation the rest of the code assumes).
+   */
   const ftsRank = new Map<string, number>();
   const vecDist = new Map<string, number>();
 
@@ -320,8 +336,10 @@ export interface SearchOpts {
   limit?: number;
 }
 
-/** FTS-only search. Kept for the migration-test scripts; new callers should
- *  prefer hybridSearchRefDocs. */
+/**
+ * FTS-only search. Kept for the migration-test scripts; new callers should
+ *  prefer hybridSearchRefDocs. 
+ */
 export async function searchRefDocs(opts: SearchOpts): Promise<SearchHit[]> {
   const limit = Math.min(opts.limit ?? 5, 25);
   const rows = await callMatch({
@@ -332,8 +350,10 @@ export async function searchRefDocs(opts: SearchOpts): Promise<SearchHit[]> {
   });
   return rows
     .filter((r) => r.fts_rank != null)
-    // fts_rank: higher = better. Sort descending; expose negative for the
-    // "lower = better" orientation direct callers (smoke scripts) expect.
+    /*
+     * fts_rank: higher = better. Sort descending; expose negative for the
+     * "lower = better" orientation direct callers (smoke scripts) expect.
+     */
     .sort((a, b) => (b.fts_rank ?? 0) - (a.fts_rank ?? 0))
     .slice(0, limit)
     .map((r) => rowToHit(r, -(r.fts_rank ?? 0)));
@@ -344,15 +364,20 @@ export interface HybridSearchOpts {
   docId?: string;
   /** Top-K returned to the caller. Default 8. */
   limit?: number;
-  /** How many candidates to pull from each leg before merging.
-   *  Bigger = more recall. Default 50. */
+  /**
+   * How many candidates to pull from each leg before merging.
+   *  Bigger = more recall. Default 50. 
+   */
   candidatesPerLeg?: number;
-  /** Force a specific retrieval path. Default "hybrid", which degrades to
-   *  FTS when the local embedding model is unavailable or stale. */
+  /**
+   * Force a specific retrieval path. Default "hybrid", which degrades to
+   *  FTS when the local embedding model is unavailable or stale. 
+   */
   mode?: "fts" | "vector" | "hybrid";
 }
 
-/** Hybrid retrieval: FTS top-N ∪ vector top-N → merged ordering → top-K.
+/**
+ * Hybrid retrieval: FTS top-N ∪ vector top-N → merged ordering → top-K.
  *
  * Falls back gracefully to keyword (FTS-only) retrieval when the vector leg
  * can't run — searching always works, semantic quality is what degrades:
@@ -371,9 +396,11 @@ export async function hybridSearchRefDocs(
   );
   const mode = opts.mode ?? "hybrid";
 
-  // Embed the query if we're going to use the vector leg — but only when the
-  // stored vectors came from the same model (cross-model cosine is garbage),
-  // and only if the local embedding endpoint is actually up.
+  /*
+   * Embed the query if we're going to use the vector leg — but only when the
+   * stored vectors came from the same model (cross-model cosine is garbage),
+   * and only if the local embedding endpoint is actually up.
+   */
   let queryEmbedding: number[] | null = null;
   if (mode === "vector" || mode === "hybrid") {
     try {
@@ -405,11 +432,13 @@ export async function hybridSearchRefDocs(
   });
   if (rows.length === 0) return [];
 
-  // Merged ordering: blocks that hit both legs first, then by best signal.
-  // We don't try to normalize bm25 vs cosine — both-legs agreement is the
-  // strongest cheap relevance signal. (The retired Voyage pipeline reranked
-  // here with rerank-2.5; a local cross-encoder is the future option if
-  // ordering quality ever becomes the bottleneck.)
+  /*
+   * Merged ordering: blocks that hit both legs first, then by best signal.
+   * We don't try to normalize bm25 vs cosine — both-legs agreement is the
+   * strongest cheap relevance signal. (The retired Voyage pipeline reranked
+   * here with rerank-2.5; a local cross-encoder is the future option if
+   * ordering quality ever becomes the bottleneck.)
+   */
   const scored = rows
     .map((r) => {
       const ftsScore = r.fts_rank ?? 0;
@@ -423,15 +452,19 @@ export async function hybridSearchRefDocs(
   return scored.map(({ row, score }) => rowToHit(row, score));
 }
 
-// ---------------------------------------------------------------------------
-// Mutations — used by the ingest pipeline.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Mutations — used by the ingest pipeline.
+ * ---------------------------------------------------------------------------
+ */
 
 export async function deleteDocument(docId: string): Promise<void> {
   await ensureCorpusSchema();
   const db = getCorpusDb();
-  // FK ON DELETE CASCADE clears ref_pages/sections/blocks; the FTS5 mirror is
-  // not a real FK relation, so drop its rows explicitly first.
+  /*
+   * FK ON DELETE CASCADE clears ref_pages/sections/blocks; the FTS5 mirror is
+   * not a real FK relation, so drop its rows explicitly first.
+   */
   await db.execute({ sql: `DELETE FROM ref_blocks_fts WHERE doc_id = ?`, args: [docId] });
   await db.execute({ sql: `DELETE FROM ref_documents WHERE doc_id = ?`, args: [docId] });
 }
@@ -443,8 +476,10 @@ export async function setBlockEmbeddings(
   if (pairs.length === 0) return;
   await ensureCorpusSchema();
   const db = getCorpusDb();
-  // Batched UPDATEs inside a transaction. Local file + no network round-trip,
-  // so we don't need the concurrent-worker pool the Postgres version used.
+  /*
+   * Batched UPDATEs inside a transaction. Local file + no network round-trip,
+   * so we don't need the concurrent-worker pool the Postgres version used.
+   */
   const CHUNK = 500;
   for (let i = 0; i < pairs.length; i += CHUNK) {
     const slice = pairs.slice(i, i + CHUNK);
@@ -456,8 +491,10 @@ export async function setBlockEmbeddings(
       "write",
     );
   }
-  // Stamp which model produced these vectors so the search path can detect
-  // a provider switch (see storedEmbeddingModel / hybridSearchRefDocs).
+  /*
+   * Stamp which model produced these vectors so the search path can detect
+   * a provider switch (see storedEmbeddingModel / hybridSearchRefDocs).
+   */
   if (opts.embeddingModel) {
     await setCorpusMeta("embedding_model", opts.embeddingModel);
   }
@@ -470,9 +507,11 @@ export interface IngestPayload {
   blocks: RefBlock[];
 }
 
-/** Writes a full document tree. Not atomic across the whole tree — callers
+/**
+ * Writes a full document tree. Not atomic across the whole tree — callers
  *  should call deleteDocument() first if replacing, and re-run on partial
- *  failure (the FK cascade cleans up orphans on the next delete). */
+ *  failure (the FK cascade cleans up orphans on the next delete). 
+ */
 export async function writeDocument(payload: IngestPayload): Promise<void> {
   await ensureCorpusSchema();
   const { document: d, pages, sections, blocks } = payload;
@@ -538,8 +577,10 @@ export async function writeDocument(payload: IngestPayload): Promise<void> {
     );
   }
 
-  // 4) blocks + their FTS5 mirror row. Embedding goes through vector32() when
-  //    present, NULL otherwise (pre-embed ingest; the embed step UPDATEs later).
+  /*
+   * 4) blocks + their FTS5 mirror row. Embedding goes through vector32() when
+   *    present, NULL otherwise (pre-embed ingest; the embed step UPDATEs later).
+   */
   const BLOCK_CHUNK = 200;
   for (let i = 0; i < blocks.length; i += BLOCK_CHUNK) {
     const slice = blocks.slice(i, i + BLOCK_CHUNK);
@@ -582,10 +623,12 @@ export async function writeDocument(payload: IngestPayload): Promise<void> {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Corpus inspection helpers — used by the refdocs:* operator scripts so they
-// don't reach past this module into the DB client directly.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Corpus inspection helpers — used by the refdocs:* operator scripts so they
+ * don't reach past this module into the DB client directly.
+ * ---------------------------------------------------------------------------
+ */
 
 /** All ingested docs (doc_id + sha256). For drift detection in `corpus status`. */
 export async function listDocuments(): Promise<{ docId: string; sha256: string }[]> {
@@ -626,9 +669,11 @@ export async function countBlocksByDoc(
   };
 }
 
-/** Blocks with no embedding yet — the recovery input for `corpus reembed`.
+/**
+ * Blocks with no embedding yet — the recovery input for `corpus reembed`.
  *  Pass all=true to list EVERY block (for a full re-embed after switching
- *  embedding models). */
+ *  embedding models). 
+ */
 export async function listBlocksWithoutEmbeddings(
   opts: { all?: boolean } = {},
 ): Promise<
@@ -648,9 +693,11 @@ export async function listBlocksWithoutEmbeddings(
   }));
 }
 
-// ---------------------------------------------------------------------------
-// Corpus metadata (ref_meta) — which embedding model built the stored vectors.
-// ---------------------------------------------------------------------------
+/*
+ * ---------------------------------------------------------------------------
+ * Corpus metadata (ref_meta) — which embedding model built the stored vectors.
+ * ---------------------------------------------------------------------------
+ */
 
 async function getCorpusMeta(key: string): Promise<string | null> {
   await ensureCorpusSchema();
@@ -670,9 +717,11 @@ async function setCorpusMeta(key: string, value: string): Promise<void> {
   });
 }
 
-/** The embedding-model identity the stored vectors were built with, or null
+/**
+ * The embedding-model identity the stored vectors were built with, or null
  *  for a corpus that has never been embedded by current code (every writer
- *  stamps on embed). */
+ *  stamps on embed). 
+ */
 export async function storedEmbeddingModel(): Promise<string | null> {
   return getCorpusMeta("embedding_model");
 }

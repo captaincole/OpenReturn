@@ -1,23 +1,25 @@
-// Preferential-rate brackets for qualified dividends and net long-term
-// capital gain. Used by the Qualified Dividends and Capital Gain Tax
-// Worksheet (and the Schedule D Tax Worksheet when 28% gain / §1250 gain
-// carve-outs are needed).
-//
-// Two thresholds per filing status × tax year:
-//   - 0% rate ceiling — preferential dollars below this pay no tax
-//   - 15% rate ceiling — preferential dollars between the two ceilings
-//     pay 15%; dollars above the upper ceiling pay 20%
-//
-// "Stacking" rule: ordinary income consumes bracket room FIRST, then
-// preferential income sits on top. So your preferential bucket starts
-// at the level (line 1 ordinary bucket cap) on the brackets, not at $0.
-// The worksheet handles this via lines 7–9 (0% consumption) and lines
-// 12–17 (15% consumption).
-//
-// Source: IRS Form 1040 (2025) Instructions, page 38 — Qualified
-// Dividends and Capital Gain Tax Worksheet, lines 6 and 13.
-// Block id in the ingested corpus: irs-1040-inst-2025::p38::b00073.
-// Inflation-adjusted values originate in Rev. Proc. 2024-40.
+/*
+ * Preferential-rate brackets for qualified dividends and net long-term
+ * capital gain. Used by the Qualified Dividends and Capital Gain Tax
+ * Worksheet (and the Schedule D Tax Worksheet when 28% gain / §1250 gain
+ * carve-outs are needed).
+ * 
+ * Two thresholds per filing status × tax year:
+ *   - 0% rate ceiling — preferential dollars below this pay no tax
+ *   - 15% rate ceiling — preferential dollars between the two ceilings
+ *     pay 15%; dollars above the upper ceiling pay 20%
+ * 
+ * "Stacking" rule: ordinary income consumes bracket room FIRST, then
+ * preferential income sits on top. So your preferential bucket starts
+ * at the level (line 1 ordinary bucket cap) on the brackets, not at $0.
+ * The worksheet handles this via lines 7–9 (0% consumption) and lines
+ * 12–17 (15% consumption).
+ * 
+ * Source: IRS Form 1040 (2025) Instructions, page 38 — Qualified
+ * Dividends and Capital Gain Tax Worksheet, lines 6 and 13.
+ * Block id in the ingested corpus: irs-1040-inst-2025::p38::b00073.
+ * Inflation-adjusted values originate in Rev. Proc. 2024-40.
+ */
 
 import type { FilingStatus } from "../values.js";
 

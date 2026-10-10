@@ -1,9 +1,11 @@
 "use client";
 
-// Client-side "Start a new filing" trigger. Posts to /app/filings via the
-// agent (the endpoint is idempotent — re-clicks return the existing filing
-// rather than 500ing), then navigates to /r/<year>. Error state lands
-// inline below the button rather than disappearing into a console warn.
+/*
+ * Client-side "Start a new filing" trigger. Posts to /app/filings via the
+ * agent (the endpoint is idempotent — re-clicks return the existing filing
+ * rather than 500ing), then navigates to /r/<year>. Error state lands
+ * inline below the button rather than disappearing into a console warn.
+ */
 
 import { signOut } from "@/lib/auth";
 import { useState } from "react";

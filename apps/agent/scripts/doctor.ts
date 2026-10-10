@@ -1,11 +1,13 @@
-// doctor — one-shot setup diagnostics: machine info, env config, data
-// files, and local model servers (Ollama, LM Studio).
-//
-//   npm run doctor        (or: npx tsx scripts/doctor.ts from apps/agent/)
-//
-// Read-only: probes the machine and local HTTP endpoints, writes nothing.
-// Use it to answer "why is semantic search falling back to keyword?" or
-// "what does this box actually have installed?" before debugging deeper.
+/*
+ * doctor — one-shot setup diagnostics: machine info, env config, data
+ * files, and local model servers (Ollama, LM Studio).
+ * 
+ *   npm run doctor        (or: npx tsx scripts/doctor.ts from apps/agent/)
+ * 
+ * Read-only: probes the machine and local HTTP endpoints, writes nothing.
+ * Use it to answer "why is semantic search falling back to keyword?" or
+ * "what does this box actually have installed?" before debugging deeper.
+ */
 
 import { config } from "dotenv";
 import { existsSync, readdirSync, statSync } from "node:fs";
@@ -14,8 +16,10 @@ import { resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { projectRoot } from "../src/paths";
 
-// Same layering the dev server sees: .env first, .env.development fills
-// the gaps (dotenv never overrides already-set keys).
+/*
+ * Same layering the dev server sees: .env first, .env.development fills
+ * the gaps (dotenv never overrides already-set keys).
+ */
 config({ path: resolve(projectRoot, ".env"), quiet: true });
 config({ path: resolve(projectRoot, ".env.development"), quiet: true });
 
@@ -143,8 +147,10 @@ async function probeLmStudio(): Promise<{ binary: string | null; serverUp: boole
   };
 }
 
-/** The bare model name Ollama knows, e.g. "embeddinggemma-2" from
- *  "ollama/embeddinggemma-2". Tags may carry a ":latest" suffix. */
+/**
+ * The bare model name Ollama knows, e.g. "embeddinggemma-2" from
+ *  "ollama/embeddinggemma-2". Tags may carry a ":latest" suffix. 
+ */
 function embeddingModelName(): string {
   const raw = process.env.EMBEDDINGS_MODEL ?? DEFAULT_EMBEDDINGS_MODEL;
   return raw.replace(/^ollama\//, "");

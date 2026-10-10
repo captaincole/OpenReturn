@@ -1,16 +1,18 @@
-// Standard-deduction lookup table, keyed by (jurisdiction, taxYear,
-// filingStatus). Parallel structure to forms/data/taxTable.ts — both are
-// per-jurisdiction reference data that bindings call inline.
-//
-// Bindings call this rather than carrying inline literals so that:
-//   - Annual amount updates land in one file, not N bindings
-//   - Adding a new jurisdiction (state-NY, state-OR, …) means appending
-//     one entry, not editing every state form's bindings
-//
-// Sources:
-//   - federal 2025: IRS Rev. Proc. 2024-40 (inflation adjustments for 2025).
-//     Also printed on Form 1040 Instructions page 32.
-//   - state-ca 2025: FTB 540 instructions, Schedule X.
+/*
+ * Standard-deduction lookup table, keyed by (jurisdiction, taxYear,
+ * filingStatus). Parallel structure to forms/data/taxTable.ts — both are
+ * per-jurisdiction reference data that bindings call inline.
+ * 
+ * Bindings call this rather than carrying inline literals so that:
+ *   - Annual amount updates land in one file, not N bindings
+ *   - Adding a new jurisdiction (state-NY, state-OR, …) means appending
+ *     one entry, not editing every state form's bindings
+ * 
+ * Sources:
+ *   - federal 2025: IRS Rev. Proc. 2024-40 (inflation adjustments for 2025).
+ *     Also printed on Form 1040 Instructions page 32.
+ *   - state-ca 2025: FTB 540 instructions, Schedule X.
+ */
 
 import type { FilingStatus } from "../values.js";
 

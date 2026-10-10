@@ -1,10 +1,12 @@
-// Form8949FilingInfo — Form 8949 (Sales and Other Dispositions of Capital
-// Assets) specific slots layered on top of BaseFilingInfo.
-//
-// 8949 itemizes individual security sales — each TradeFact maps 1:1 to a
-// row on the form. The actual trade data flows through the form accessor
-// via `getTradeFacts(ctx.facts)` rather than through FilingInfo, so this
-// interface is minimal — only the form-scoping flag for now.
+/*
+ * Form8949FilingInfo — Form 8949 (Sales and Other Dispositions of Capital
+ * Assets) specific slots layered on top of BaseFilingInfo.
+ * 
+ * 8949 itemizes individual security sales — each TradeFact maps 1:1 to a
+ * row on the form. The actual trade data flows through the form accessor
+ * via `getTradeFacts(ctx.facts)` rather than through FilingInfo, so this
+ * interface is minimal — only the form-scoping flag for now.
+ */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { EngineDerivation } from "../../types.js";

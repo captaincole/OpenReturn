@@ -1,10 +1,12 @@
-// Generic scenario runner. Given a Scenario (facts + decisions + per-form
-// expected results), drives the full render pipeline (engine + PDF fill)
-// for every form in scenario.forms[] entirely in memory and asserts the
-// actual output against expected. Returns a RunResult so runAll.ts can
-// aggregate.
-//
-// No network, no Supabase, no Anthropic. Suitable for pre-commit hooks.
+/*
+ * Generic scenario runner. Given a Scenario (facts + decisions + per-form
+ * expected results), drives the full render pipeline (engine + PDF fill)
+ * for every form in scenario.forms[] entirely in memory and asserts the
+ * actual output against expected. Returns a RunResult so runAll.ts can
+ * aggregate.
+ * 
+ * No network, no Supabase, no Anthropic. Suitable for pre-commit hooks.
+ */
 
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -33,10 +35,12 @@ import {
 import { readGoldenPdfValues } from "./helpers/goldenPdf.js";
 import type { RunResult, Scenario, ScenarioForm } from "./types.js";
 
-// Cache the combined catalog (all forms loaded into one) keyed on the
-// joined paths so different scenarios that touch different form sets get
-// distinct catalogs. evaluateAllForms needs every referenced form in one
-// catalog so cross-form lookups can resolve.
+/*
+ * Cache the combined catalog (all forms loaded into one) keyed on the
+ * joined paths so different scenarios that touch different form sets get
+ * distinct catalogs. evaluateAllForms needs every referenced form in one
+ * catalog so cross-form lookups can resolve.
+ */
 const combinedCatalogCache = new Map<string, Promise<Catalog>>();
 function getCombinedCatalog(catalogPaths: string[]): Promise<Catalog> {
   const key = catalogPaths.slice().sort().join("|");
@@ -66,11 +70,13 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
     taxYear: s.taxYear,
     facts: makeFactsView(s.facts),
     decisions: makeDecisionsView(s.decisions),
-    // defineForm-style bindings read all their inputs through ctx.filingInfo
-    // (the AI-resolver layer; hand-coded stand-in today). Populating it here
-    // means every form's bindings, regardless of which shape they use, can
-    // resolve. Old-DSL bindings (1040 today) ignore this field and read
-    // facts/decisions directly.
+    /*
+     * defineForm-style bindings read all their inputs through ctx.filingInfo
+     * (the AI-resolver layer; hand-coded stand-in today). Populating it here
+     * means every form's bindings, regardless of which shape they use, can
+     * resolve. Old-DSL bindings (1040 today) ignore this field and read
+     * facts/decisions directly.
+     */
     filingInfo: resolveFilingInfo({
       facts: s.facts.map((f) => ({
         key: f.key,
@@ -84,14 +90,18 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
     }),
   };
 
-  // Look up each scenario form's static config (catalog/blank/register)
-  // from the shared registry. Scenarios just list `{ formId, expected }`;
-  // everything else comes from src/engine/registry.ts.
+  /*
+   * Look up each scenario form's static config (catalog/blank/register)
+   * from the shared registry. Scenarios just list `{ formId, expected }`;
+   * everything else comes from src/engine/registry.ts.
+   */
   const specs = s.forms.map((sf) => ({ sf, spec: getFormSpec(sf.formId) }));
 
-  // Register bindings for every form once. evaluateAllForms reads
-  // bindings out of the engine registry, so all forms in the scenario
-  // need their register() call to have run.
+  /*
+   * Register bindings for every form once. evaluateAllForms reads
+   * bindings out of the engine registry, so all forms in the scenario
+   * need their register() call to have run.
+   */
   for (const { spec } of specs) {
     if (!registeredForms.has(spec.formId)) {
       spec.register?.();
@@ -99,14 +109,18 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
     }
   }
 
-  // Single combined catalog across every form in the scenario. Lets
-  // cross-form lookups (e.g. CA 540 line 13 referencing form-1040 line 11b)
-  // find their target inventory rows in one place.
+  /*
+   * Single combined catalog across every form in the scenario. Lets
+   * cross-form lookups (e.g. CA 540 line 13 referencing form-1040 line 11b)
+   * find their target inventory rows in one place.
+   */
   const catalog = await getCombinedCatalog(specs.map((s) => s.spec.catalogPath));
 
-  // Fixpoint loop: evaluate every form, iterating until cross-form refs
-  // converge. Returns a Map<formId, EvaluatedForm> + a passes/resolvedPerPass
-  // diagnostic — useful when something doesn't converge.
+  /*
+   * Fixpoint loop: evaluate every form, iterating until cross-form refs
+   * converge. Returns a Map<formId, EvaluatedForm> + a passes/resolvedPerPass
+   * diagnostic — useful when something doesn't converge.
+   */
   const { forms, passes, resolvedPerPass } = evaluateAllForms(
     s.forms.map((f) => f.formId),
     ctx,
@@ -140,8 +154,10 @@ async function assertForm(
   catalog: Catalog,
   failures: string[],
 ): Promise<void> {
-  // fillFromCatalog walks the catalog inventory and writes each value into
-  // the corresponding PDF widget. Same function handles the 1040 and the 540.
+  /*
+   * fillFromCatalog walks the catalog inventory and writes each value into
+   * the corresponding PDF widget. Same function handles the 1040 and the 540.
+   */
   const { rendered, warnings } = await fillFromCatalog({
     blankPdfBytes: getBlankPdf(blankPdfPath),
     form,
@@ -163,10 +179,12 @@ async function assertForm(
     assertRenderedChecked(rendered, fieldId, failures, prefix);
   }
 
-  // Golden-PDF widget-level diff (when a goldenPdfPath is provided).
-  // Catches catalog mislabeling that the fieldId-based assertions above
-  // can't see — they trust the catalog's `fieldId → widget` mapping,
-  // while this layer compares directly against a CPA-completed PDF.
+  /*
+   * Golden-PDF widget-level diff (when a goldenPdfPath is provided).
+   * Catches catalog mislabeling that the fieldId-based assertions above
+   * can't see — they trust the catalog's `fieldId → widget` mapping,
+   * while this layer compares directly against a CPA-completed PDF.
+   */
   if (sf.goldenPdfPath) {
     const golden = await readGoldenPdfValues(
       resolve(projectRoot, sf.goldenPdfPath),

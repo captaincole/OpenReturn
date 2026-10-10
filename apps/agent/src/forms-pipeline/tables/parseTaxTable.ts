@@ -1,16 +1,18 @@
-// Parser for the IRS Pub 17 Tax Table (publication 17, "Your Federal Income
-// Tax", section "2025 Tax Table"). The IRS publishes the same numbers as
-// the i1040gi.pdf Tax Table but in actual HTML tables — much easier to
-// parse reliably than positional PDF text.
-//
-// The page contains MANY tables (standard-deduction worksheets, EIC tables,
-// etc.). We recognize a "tax table chunk" by its shape:
-//   - 6 numeric columns: low, high, single, mfj, mfs, hoh
-//   - thead text mentions "If line 15" or "taxable income" + "Your tax is"
-//
-// The full tax table is split across many of these chunks (one per $1000 of
-// income, mirroring the PDF's page layout). We concatenate them in document
-// order, then validate coverage from 0 to $100,000 with no gaps.
+/*
+ * Parser for the IRS Pub 17 Tax Table (publication 17, "Your Federal Income
+ * Tax", section "2025 Tax Table"). The IRS publishes the same numbers as
+ * the i1040gi.pdf Tax Table but in actual HTML tables — much easier to
+ * parse reliably than positional PDF text.
+ * 
+ * The page contains MANY tables (standard-deduction worksheets, EIC tables,
+ * etc.). We recognize a "tax table chunk" by its shape:
+ *   - 6 numeric columns: low, high, single, mfj, mfs, hoh
+ *   - thead text mentions "If line 15" or "taxable income" + "Your tax is"
+ * 
+ * The full tax table is split across many of these chunks (one per $1000 of
+ * income, mirroring the PDF's page layout). We concatenate them in document
+ * order, then validate coverage from 0 to $100,000 with no gaps.
+ */
 
 import { load, type CheerioAPI } from "cheerio";
 
@@ -52,8 +54,10 @@ export function parseTaxTable(html: string): ParseResult {
     diagnostics.tablesInspected++;
     const $table = $(el);
     if (!looksLikeTaxTable($, $table)) {
-      // Don't record a per-table reason for everything that isn't a tax
-      // table — the page has dozens of unrelated tables.
+      /*
+       * Don't record a per-table reason for everything that isn't a tax
+       * table — the page has dozens of unrelated tables.
+       */
       return;
     }
     const collected = extractRows($, $table);
@@ -79,8 +83,10 @@ function looksLikeTaxTable($: CheerioAPI, $table: ReturnType<CheerioAPI>): boole
   const cluesMatched = TAX_TABLE_HEADER_CLUES.filter((rx) => rx.test(headText));
   if (cluesMatched.length < 2) return false;
 
-  // Confirm body shape: at least one row with exactly 6 td's whose contents
-  // all parse as non-negative integers (possibly comma-formatted).
+  /*
+   * Confirm body shape: at least one row with exactly 6 td's whose contents
+   * all parse as non-negative integers (possibly comma-formatted).
+   */
   const $firstBodyRow = $table.find("tbody > tr").first();
   if ($firstBodyRow.length === 0) return false;
   const cells = $firstBodyRow.find("td");

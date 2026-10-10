@@ -1,20 +1,22 @@
-// Home-home — person-scope landing. Above any single return.
-//
-// No AppShell, no chat (no active return to chat about). Pure render —
-// server component, no client state needed. Auth is gated by the parent
-// (app)/layout.tsx.
-//
-// Sections:
-//   1. Your returns      — real filings queried from listOwnerReturns; empty
-//                          state shows a single big "Start your 2025 filing" CTA.
-//   2. Continue with     — "Start a new filing" (action) + "Tax planning
-//                          session" (locked placeholder).
-//   3. Your tax picture  — four chart cards visually present but overlay-
-//                          locked until the user has a filed return.
-//
-// Charts read mock data underneath the overlay because we don't capture
-// year-over-year history yet. When we do, swap the consts for a Supabase
-// query and drop the overlay.
+/*
+ * Home-home — person-scope landing. Above any single return.
+ * 
+ * No AppShell, no chat (no active return to chat about). Pure render —
+ * server component, no client state needed. Auth is gated by the parent
+ * (app)/layout.tsx.
+ * 
+ * Sections:
+ *   1. Your returns      — real filings queried from listOwnerReturns; empty
+ *                          state shows a single big "Start your 2025 filing" CTA.
+ *   2. Continue with     — "Start a new filing" (action) + "Tax planning
+ *                          session" (locked placeholder).
+ *   3. Your tax picture  — four chart cards visually present but overlay-
+ *                          locked until the user has a filed return.
+ * 
+ * Charts read mock data underneath the overlay because we don't capture
+ * year-over-year history yet. When we do, swap the consts for a Supabase
+ * query and drop the overlay.
+ */
 
 import { redirect } from "next/navigation";
 import { getOwnerSession } from "@/lib/localAuth";
@@ -27,9 +29,11 @@ import { StartFilingButton } from "./StartFilingButton";
 
 const CURRENT_TAX_YEAR = 2025;
 
-// Mock historical data. Replace with a Supabase query when we capture
-// year-over-year aggregates server-side. Rendered beneath a "locked"
-// overlay so the user sees what's coming without us pretending it's real.
+/*
+ * Mock historical data. Replace with a Supabase query when we capture
+ * year-over-year aggregates server-side. Rendered beneath a "locked"
+ * overlay so the user sees what's coming without us pretending it's real.
+ */
 const INCOME = [
   { year: 2021, value: 145000 },
   { year: 2022, value: 162000 },
@@ -281,9 +285,11 @@ function ReturnCard({ ret }: { ret: TaxReturn }) {
   );
 }
 
-// Big inline empty-state CTA when the user has no filings yet. Replaces the
-// returns grid entirely — the page is supposed to look "empty until you
-// start something" rather than dressing-up the void with placeholders.
+/*
+ * Big inline empty-state CTA when the user has no filings yet. Replaces the
+ * returns grid entirely — the page is supposed to look "empty until you
+ * start something" rather than dressing-up the void with placeholders.
+ */
 function EmptyReturnsCta() {
   return (
     <div className="card p-8 sm:p-10 flex flex-col items-start gap-5">

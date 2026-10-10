@@ -7,9 +7,11 @@ import {
   listUploads,
 } from "@/lib/serverDb";
 
-// Persists a user-attached file: bytes → local documents dir (blobStore),
-// metadata row → libsql app DB. The browser posts FormData here because
-// both stores are server-side files it can't reach.
+/*
+ * Persists a user-attached file: bytes → local documents dir (blobStore),
+ * metadata row → libsql app DB. The browser posts FormData here because
+ * both stores are server-side files it can't reach.
+ */
 
 const DEMO_TAX_YEAR = 2025;
 
@@ -104,8 +106,10 @@ export async function POST(request: Request) {
     });
     return NextResponse.json({ id, filename: file.name, storagePath });
   } catch (err) {
-    // Roll back the orphan file so a metadata failure doesn't leave
-    // unreachable bytes on disk.
+    /*
+     * Roll back the orphan file so a metadata failure doesn't leave
+     * unreachable bytes on disk.
+     */
     await deleteBlob(storagePath);
     const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json(

@@ -1,10 +1,12 @@
-// Ingest the IRS tax table from Pub 17 (HTML) into a checked-in JSON file.
-// Reproducible: re-running with no flags hits the cached HTML and rebuilds
-// the JSON. Use `--refresh` to re-fetch from irs.gov (validates the upstream
-// hasn't changed since we last ingested by diffing the sha256).
-//
-// Spot-checks are hand-keyed from the published table; any change to the
-// extraction logic must keep them passing.
+/*
+ * Ingest the IRS tax table from Pub 17 (HTML) into a checked-in JSON file.
+ * Reproducible: re-running with no flags hits the cached HTML and rebuilds
+ * the JSON. Use `--refresh` to re-fetch from irs.gov (validates the upstream
+ * hasn't changed since we last ingested by diffing the sha256).
+ * 
+ * Spot-checks are hand-keyed from the published table; any change to the
+ * extraction logic must keep them passing.
+ */
 
 import { promises as fs } from "node:fs";
 import path from "node:path";
@@ -17,8 +19,10 @@ import {
 import { projectRoot } from "../../src/paths.js";
 import type { Command } from "../lib/cli";
 
-// ─── Per-year source config ──────────────────────────────────────────────
-// Adding a new year = adding an entry here + the spot-check set below.
+/*
+ * ─── Per-year source config ──────────────────────────────────────────────
+ * Adding a new year = adding an entry here + the spot-check set below.
+ */
 
 interface TaxTableSource {
   url: string;
@@ -34,10 +38,12 @@ interface SpotCheck {
 const SOURCES: Record<number, TaxTableSource> = {
   2025: {
     url: "https://www.irs.gov/publications/p17",
-    // Hand-keyed from the published 2025 Tax Table. Picks are chosen to
-    // spread across the table (lowest band, $7k, $57k, $60k, $62k, $63k,
-    // and $97k) and to exercise every filing-status column at multiple
-    // income levels — so a regression in one column doesn't slip through.
+    /*
+     * Hand-keyed from the published 2025 Tax Table. Picks are chosen to
+     * spread across the table (lowest band, $7k, $57k, $60k, $62k, $63k,
+     * and $97k) and to exercise every filing-status column at multiple
+     * income levels — so a regression in one column doesn't slip through.
+     */
     spotChecks: [
       { taxableIncome: 0, filingStatus: "single", expectedTax: 0 },
       { taxableIncome: 10, filingStatus: "single", expectedTax: 1 },
@@ -169,9 +175,11 @@ async function run(argv: string[]): Promise<void> {
   console.log(`${LOG} wrote ${path.relative(process.cwd(), jsonPath)}`);
 }
 
-// Pretty-print the header object but write each row on its own line. Keeps
-// git diffs sane (inserting a row = one line of diff, not eight) and keeps
-// the file under ~150KB.
+/*
+ * Pretty-print the header object but write each row on its own line. Keeps
+ * git diffs sane (inserting a row = one line of diff, not eight) and keeps
+ * the file under ~150KB.
+ */
 function serializeWithCompactRows(
   header: Record<string, unknown>,
   rows: TaxTableRow[],

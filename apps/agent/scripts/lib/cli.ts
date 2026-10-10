@@ -1,9 +1,11 @@
-// Tiny subcommand dispatcher shared by the scripts/ CLIs (corpus, …).
-//
-// Each command module exports a `Command`: name, one-line summary, its
-// options (for generated help), and a run(argv) that receives only the args
-// after the command name. The dispatcher handles `--help`/`-h` at both
-// levels so every option is discoverable without reading source.
+/*
+ * Tiny subcommand dispatcher shared by the scripts/ CLIs (corpus, …).
+ * 
+ * Each command module exports a `Command`: name, one-line summary, its
+ * options (for generated help), and a run(argv) that receives only the args
+ * after the command name. The dispatcher handles `--help`/`-h` at both
+ * levels so every option is discoverable without reading source.
+ */
 
 export interface CliOption {
   /** e.g. `--strict` or `--mode auto|fts|vector|hybrid` */

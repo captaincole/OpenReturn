@@ -1,24 +1,28 @@
-// Alex Morales — CA Form 540 expected results.
-//
-// Every numeric expected value below is the literal number from the CPA-
-// completed Alex-CA540-Golden.pdf in this scenario's docs/ folder. Any
-// divergence between the rendered 540 and these values is a regression in
-// the engine, catalog, bindings, FilingInfo resolver, or renderer.
-//
-// FieldIds are pulled from the live catalog at
-// `ref/forms/state/ca/form-540-2025.catalog.json`. When the catalog is
-// re-ingested, fieldId renames surface as compile errors in the typed
-// bindings (Form540 interface no longer matches) and as runtime
-// mismatches here in the expected file.
+/*
+ * Alex Morales — CA Form 540 expected results.
+ * 
+ * Every numeric expected value below is the literal number from the CPA-
+ * completed Alex-CA540-Golden.pdf in this scenario's docs/ folder. Any
+ * divergence between the rendered 540 and these values is a regression in
+ * the engine, catalog, bindings, FilingInfo resolver, or renderer.
+ * 
+ * FieldIds are pulled from the live catalog at
+ * `ref/forms/state/ca/form-540-2025.catalog.json`. When the catalog is
+ * re-ingested, fieldId renames surface as compile errors in the typed
+ * bindings (Form540 interface no longer matches) and as runtime
+ * mismatches here in the expected file.
+ */
 
 import type { ExpectedResults } from "../../types.js";
 
 export const alex540Expected: ExpectedResults = {
   engineFields: {
-    // Exemptions. Catalog now exposes line 7 as TWO fields: `_count` (the
-    // exemption count widget — 1 for single/MFS/HOH, 2 for MFJ/QSS) and
-    // `_amount` (count × $153, the dollar amount that rolls into line 11).
-    // The new typed bindings handle both cleanly.
+    /*
+     * Exemptions. Catalog now exposes line 7 as TWO fields: `_count` (the
+     * exemption count widget — 1 for single/MFS/HOH, 2 for MFJ/QSS) and
+     * `_amount` (count × $153, the dollar amount that rolls into line 11).
+     * The new typed bindings handle both cleanly.
+     */
     "form-540.line.7_personal_exemption_count": 1,
     "form-540.line.7_personal_exemption_amount": 153,
     "form-540.line.11_total_exemption_amount": 153,
@@ -68,10 +72,12 @@ export const alex540Expected: ExpectedResults = {
     "form-540.header.date_of_birth": "01/01/2002",
     "form-540.signing.taxpayer_email": "alex@morales.com",
     "form-540.signing.taxpayer_phone": "7039530253",
-    // Lines bound via fromFields that genuinely produce 0 for Alex (the
-    // refund-branch reads them and clamps): line 97 (overpaid), 99
-    // (overpaid available), 115 (refund). Alex owes $3 so these are
-    // zero but still applicable.
+    /*
+     * Lines bound via fromFields that genuinely produce 0 for Alex (the
+     * refund-branch reads them and clamps): line 97 (overpaid), 99
+     * (overpaid available), 115 (refund). Alex owes $3 so these are
+     * zero but still applicable.
+     */
     "form-540.line.97_overpaid_tax": "0",
     "form-540.line.99_overpaid_tax_available": "0",
     "form-540.line.115_refund_or_no_amount_due": "0",
@@ -86,10 +92,12 @@ export const alex540Expected: ExpectedResults = {
     "form-540.dependents.dep1_first_name",
     "form-540.dependents.dep1_last_name",
     "form-540.dependents.dep1_ssn",
-    // Lines bound `unsupported` — Schedule G-1, AMT, CDCC, renter's
-    // credit, BHST, estimated payments, etc. Engine doesn't compute them,
-    // so the renderer leaves them blank (semantically equivalent to "0"
-    // on the form — IRS/FTB accept either).
+    /*
+     * Lines bound `unsupported` — Schedule G-1, AMT, CDCC, renter's
+     * credit, BHST, estimated payments, etc. Engine doesn't compute them,
+     * so the renderer leaves them blank (semantically equivalent to "0"
+     * on the form — IRS/FTB accept either).
+     */
     "form-540.line.34_tax_amount",
     "form-540.line.40_child_dependent_care_credit",
     "form-540.line.46_renters_credit",
@@ -98,8 +106,10 @@ export const alex540Expected: ExpectedResults = {
     "form-540.line.72_ca_estimated_tax_payments",
     "form-540.line.73_withholding_592b_593",
     "form-540.line.98_applied_to_2026_estimated_tax",
-    // ISR penalty / total contributions — categorically unsupported
-    // scenarios, render blank per the broader policy.
+    /*
+     * ISR penalty / total contributions — categorically unsupported
+     * scenarios, render blank per the broader policy.
+     */
     "form-540.line.96_isr_penalty_balance",
     "form-540.line.110_total_contributions",
   ],

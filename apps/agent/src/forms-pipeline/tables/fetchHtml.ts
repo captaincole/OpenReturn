@@ -1,17 +1,19 @@
-// Generic "fetch-once, cache-on-disk" helper for HTML sources we ingest into
-// structured JSON (tax tables, EIC tables, standard-deduction worksheets,
-// etc.). The cached HTML is checked into the repo alongside the JSON output
-// as provenance — if anyone questions a number later, we have a frozen copy
-// of exactly what the source served on the date we ingested it.
-//
-// Usage:
-//   const { html, source } = await fetchHtml({
-//     url: "https://www.irs.gov/publications/p17",
-//     cachePath: ".../tax-table-2025.source.html",
-//   });
-//
-// Pass refresh=true to bypass the cache and re-fetch (e.g. when validating
-// that the upstream hasn't changed since we last ingested).
+/*
+ * Generic "fetch-once, cache-on-disk" helper for HTML sources we ingest into
+ * structured JSON (tax tables, EIC tables, standard-deduction worksheets,
+ * etc.). The cached HTML is checked into the repo alongside the JSON output
+ * as provenance — if anyone questions a number later, we have a frozen copy
+ * of exactly what the source served on the date we ingested it.
+ * 
+ * Usage:
+ *   const { html, source } = await fetchHtml({
+ *     url: "https://www.irs.gov/publications/p17",
+ *     cachePath: ".../tax-table-2025.source.html",
+ *   });
+ * 
+ * Pass refresh=true to bypass the cache and re-fetch (e.g. when validating
+ * that the upstream hasn't changed since we last ingested).
+ */
 
 import { promises as fs } from "node:fs";
 import { createHash } from "node:crypto";

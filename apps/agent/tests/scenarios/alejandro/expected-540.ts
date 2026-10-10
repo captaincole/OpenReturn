@@ -1,19 +1,21 @@
-// Alejandro Reyes — CA Form 540 expected results.
-//
-// Every numeric expected value below is the literal number from
-// `docs/Alejandro-CA540-Golden.pdf` in this scenario folder. Any divergence is a
-// regression in the engine, catalog, bindings, FilingInfo resolver, or
-// renderer.
-//
-// Known gaps that will surface as failures until upstream bindings land:
-//   - line.13_federal_agi reads f["form-1040.line.11b"], which depends on
-//     federal 1040 line 7a (Schedule D) flowing through correctly. Until
-//     the Schedule D binding lands, federal AGI is short by $2,550 and
-//     every downstream CA line is wrong.
-//   - line.31_tax_amount uses lookupTax(ca-2025, …). Once the upstream
-//     taxable income is correct ($97,229), this should produce $5,478
-//     directly — CA doesn't apply the QDCG worksheet, qualified divs
-//     and LTCG are ordinary at CA rates.
+/*
+ * Alejandro Reyes — CA Form 540 expected results.
+ * 
+ * Every numeric expected value below is the literal number from
+ * `docs/Alejandro-CA540-Golden.pdf` in this scenario folder. Any divergence is a
+ * regression in the engine, catalog, bindings, FilingInfo resolver, or
+ * renderer.
+ * 
+ * Known gaps that will surface as failures until upstream bindings land:
+ *   - line.13_federal_agi reads f["form-1040.line.11b"], which depends on
+ *     federal 1040 line 7a (Schedule D) flowing through correctly. Until
+ *     the Schedule D binding lands, federal AGI is short by $2,550 and
+ *     every downstream CA line is wrong.
+ *   - line.31_tax_amount uses lookupTax(ca-2025, …). Once the upstream
+ *     taxable income is correct ($97,229), this should produce $5,478
+ *     directly — CA doesn't apply the QDCG worksheet, qualified divs
+ *     and LTCG are ordinary at CA rates.
+ */
 
 import type { ExpectedResults } from "../../types.js";
 
@@ -89,14 +91,18 @@ export const alejandro540Expected: ExpectedResults = {
     "form-540.line.72_ca_estimated_tax_payments",
     "form-540.line.73_withholding_592b_593",
     "form-540.line.98_applied_to_2026_estimated_tax",
-    // Categorically unsupported scenarios (ISR penalty / voluntary
-    // contributions) — render blank.
+    /*
+     * Categorically unsupported scenarios (ISR penalty / voluntary
+     * contributions) — render blank.
+     */
     "form-540.line.96_isr_penalty_balance",
     "form-540.line.110_total_contributions",
-    // Refund-branch scenario: lines 100/111 don't apply because Alejandro
-    // is getting a refund. Per-binding "undefined when 0" pattern keeps
-    // the line blank in the refund branch; it'd populate with a value
-    // for owe-branch scenarios like Alex.
+    /*
+     * Refund-branch scenario: lines 100/111 don't apply because Alejandro
+     * is getting a refund. Per-binding "undefined when 0" pattern keeps
+     * the line blank in the refund branch; it'd populate with a value
+     * for owe-branch scenarios like Alex.
+     */
     "form-540.line.100_tax_due",
     "form-540.line.111_amount_you_owe",
   ],

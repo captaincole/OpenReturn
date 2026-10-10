@@ -1,19 +1,21 @@
-// Marcus Chen — Form 8959 expected results.
-//
-// Mirror of `docs/Marcus-8959-Golden.pdf` (CPA-prepared). Marcus's
-// Additional Medicare Tax comes entirely from W-2 Medicare wages — no
-// SE income, no RRTA. Part I lines 1–7 fire; Parts II/III stay blank.
-// Part V reconciles employer withholding (W-2 box 6 includes both 1.45%
-// regular Medicare and the 0.9% Additional Medicare on wages above $200k):
-//
-//   Box 5 Medicare wages           $243,500
-//   Single-filer threshold        −$200,000
-//   Excess wages                    $43,500
-//   Additional Medicare Tax (0.9%)  $   392    ← line 7 / line 18
-//
-//   Box 6 Medicare tax withheld     $ 3,922
-//   1.45% × box 5                  −$ 3,531
-//   Add'l Medicare withholding      $   391    ← line 22 / line 24
+/*
+ * Marcus Chen — Form 8959 expected results.
+ * 
+ * Mirror of `docs/Marcus-8959-Golden.pdf` (CPA-prepared). Marcus's
+ * Additional Medicare Tax comes entirely from W-2 Medicare wages — no
+ * SE income, no RRTA. Part I lines 1–7 fire; Parts II/III stay blank.
+ * Part V reconciles employer withholding (W-2 box 6 includes both 1.45%
+ * regular Medicare and the 0.9% Additional Medicare on wages above $200k):
+ * 
+ *   Box 5 Medicare wages           $243,500
+ *   Single-filer threshold        −$200,000
+ *   Excess wages                    $43,500
+ *   Additional Medicare Tax (0.9%)  $   392    ← line 7 / line 18
+ * 
+ *   Box 6 Medicare tax withheld     $ 3,922
+ *   1.45% × box 5                  −$ 3,531
+ *   Add'l Medicare withholding      $   391    ← line 22 / line 24
+ */
 
 import type { ExpectedResults } from "../../types.js";
 

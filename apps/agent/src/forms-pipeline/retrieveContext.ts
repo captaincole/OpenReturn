@@ -1,18 +1,22 @@
-// Per-field IRS-instruction retrieval. Phase D feeds the binding classifier
-// the most relevant 2-3 blocks from the IRS reference corpus for each form
-// field, so Claude can ground rule + params choices against the actual
-// regulatory text instead of guessing from the field label alone.
-//
-// Uses the existing hybridSearchRefDocs (the grounding review's retrieval
-// path): FTS leg + local embedding vector leg, merged best-of-leg ordering.
-// Runs per-field in parallel with a concurrency cap.
+/*
+ * Per-field IRS-instruction retrieval. Phase D feeds the binding classifier
+ * the most relevant 2-3 blocks from the IRS reference corpus for each form
+ * field, so Claude can ground rule + params choices against the actual
+ * regulatory text instead of guessing from the field label alone.
+ * 
+ * Uses the existing hybridSearchRefDocs (the grounding review's retrieval
+ * path): FTS leg + local embedding vector leg, merged best-of-leg ordering.
+ * Runs per-field in parallel with a concurrency cap.
+ */
 
 import { hybridSearchRefDocs } from "../mastra/db/refDocs.js";
 import type { FieldInventory } from "../engine/catalog.js";
 
-// Minimal block shape — the classifier only needs the citation (for the
-// rationale's "ref:" tags) and the text body. Keeping this small means the
-// workflow's Zod carrier schema matches it exactly.
+/*
+ * Minimal block shape — the classifier only needs the citation (for the
+ * rationale's "ref:" tags) and the text body. Keeping this small means the
+ * workflow's Zod carrier schema matches it exactly.
+ */
 export interface RetrievedBlock {
   blockId: string;
   docId: string;
@@ -32,8 +36,10 @@ export interface RetrieveOpts {
   topK?: number;
   /** How many fields to retrieve for in parallel. */
   concurrency?: number;
-  /** Candidates pulled from each retrieval leg before merging. Default 20
-   *  (vs hybridSearchRefDocs's default of 50) since we keep topK at 3. */
+  /**
+   * Candidates pulled from each retrieval leg before merging. Default 20
+   *  (vs hybridSearchRefDocs's default of 50) since we keep topK at 3. 
+   */
   candidatesPerLeg?: number;
 }
 
@@ -82,10 +88,12 @@ export async function retrieveContextPerField(
   return out;
 }
 
-// The retrieval query — combines the form title and the field's label so
-// the embedding lives in the right neighborhood. fieldId is included
-// because the IRS instructions reference specific line numbers ("Line 1a",
-// "Line 11"), which helps FTS pick up the right section.
+/*
+ * The retrieval query — combines the form title and the field's label so
+ * the embedding lives in the right neighborhood. fieldId is included
+ * because the IRS instructions reference specific line numbers ("Line 1a",
+ * "Line 11"), which helps FTS pick up the right section.
+ */
 function buildFieldQuery(field: FieldInventory, formTitle: string): string {
   const linePart = parseLineNumber(field.fieldId);
   const linePhrase = linePart ? `Line ${linePart}` : "";
