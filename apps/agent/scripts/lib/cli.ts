@@ -45,7 +45,9 @@ function printCliHelp(cli: Cli): void {
 
 function printCommandHelp(cli: Cli, cmd: Command): void {
   console.log(`${cmd.summary}\n`);
-  console.log(`usage: ${cli.bin} ${cmd.name}${cmd.usage ? ` ${cmd.usage}` : ""}${cmd.options?.length ? " [options]" : ""}`);
+  console.log(
+    `usage: ${cli.bin} ${cmd.name}${cmd.usage ? ` ${cmd.usage}` : ""}${cmd.options?.length ? " [options]" : ""}`,
+  );
   if (cmd.options?.length) {
     console.log("\noptions:");
     const width = Math.max(...cmd.options.map((o) => o.flag.length));

@@ -90,9 +90,7 @@ export const ingestW2 = createTool({
     box15: z.string().describe("State (two-letter abbreviation)"),
     box16: z.number().describe("State wages"),
     box17: z.number().describe("State income tax withheld"),
-    sourceNote: z
-      .string()
-      .default("W-2 ingested via structured payload"),
+    sourceNote: z.string().default("W-2 ingested via structured payload"),
   }),
   outputSchema: z.object({
     factsWritten: z.number(),

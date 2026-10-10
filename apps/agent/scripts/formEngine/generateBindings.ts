@@ -61,15 +61,9 @@ function findDefaultOutput(formId: string, catalogPath: string): string {
   const shortName = formId.replace(/^form-/, "");
   const stateMatch = /\bforms\/state\/([a-z]+)\//.exec(catalogPath);
   if (stateMatch) {
-    return resolve(
-      projectRoot,
-      `src/engine/state/${stateMatch[1]}/${shortName}/bindings.ts`,
-    );
+    return resolve(projectRoot, `src/engine/state/${stateMatch[1]}/${shortName}/bindings.ts`);
   }
-  return resolve(
-    projectRoot,
-    `src/engine/federal/${shortName}/bindings.ts`,
-  );
+  return resolve(projectRoot, `src/engine/federal/${shortName}/bindings.ts`);
 }
 
 function parseCmdArgs(argv: string[]): Args {
@@ -87,15 +81,9 @@ function parseCmdArgs(argv: string[]): Args {
   const catalogPath = catalogOverride
     ? resolve(catalogOverride)
     : findDefaultCatalog(formId, taxYear);
-  const outputPath = resolve(
-    get("--output") ?? findDefaultOutput(formId, catalogPath),
-  );
+  const outputPath = resolve(get("--output") ?? findDefaultOutput(formId, catalogPath));
   const minConfidenceRaw = get("--min-confidence") ?? "high";
-  if (
-    minConfidenceRaw !== "high" &&
-    minConfidenceRaw !== "medium" &&
-    minConfidenceRaw !== "low"
-  ) {
+  if (minConfidenceRaw !== "high" && minConfidenceRaw !== "medium" && minConfidenceRaw !== "low") {
     throw new Error(
       `--min-confidence must be one of: high, medium, low (got "${minConfidenceRaw}")`,
     );
@@ -139,9 +127,7 @@ async function run(argv: string[]): Promise<void> {
     console.log(`    ${level}: ${result.confidenceBreakdown[level] ?? 0}`);
   }
   console.log(`  Rule breakdown:`);
-  const sorted = Object.entries(result.ruleBreakdown).sort(
-    (a, b) => b[1] - a[1],
-  );
+  const sorted = Object.entries(result.ruleBreakdown).sort((a, b) => b[1] - a[1]);
   for (const [rule, count] of sorted) {
     console.log(`    ${rule}: ${count}`);
   }

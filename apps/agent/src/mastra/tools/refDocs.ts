@@ -29,16 +29,8 @@ export const searchRefDocsTool = createTool({
     docId: z
       .string()
       .optional()
-      .describe(
-        "Optional: restrict search to a specific document id (e.g. 'irs-1040-inst-2025').",
-      ),
-    limit: z
-      .number()
-      .int()
-      .min(1)
-      .max(25)
-      .optional()
-      .describe("Max hits to return (default 8)."),
+      .describe("Optional: restrict search to a specific document id (e.g. 'irs-1040-inst-2025')."),
+    limit: z.number().int().min(1).max(25).optional().describe("Max hits to return (default 8)."),
     mode: z
       .enum(["fts", "vector", "hybrid"])
       .optional()

@@ -11,10 +11,7 @@
  */
 
 import Anthropic from "@anthropic-ai/sdk";
-import {
-  renderPageWithOverlay,
-  type OverlayWidget,
-} from "./renderPageWithOverlay.js";
+import { renderPageWithOverlay, type OverlayWidget } from "./renderPageWithOverlay.js";
 import type { FieldKind } from "./extractFormFields.js";
 
 const MODEL = "claude-sonnet-4-6";
@@ -62,9 +59,7 @@ Rules:
 
 Return exactly one label per input widget. Use the tool exactly once.`;
 
-export async function resolveLabelsForPage(
-  opts: ResolveLabelsOpts,
-): Promise<Map<number, string>> {
+export async function resolveLabelsForPage(opts: ResolveLabelsOpts): Promise<Map<number, string>> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error("ANTHROPIC_API_KEY is not set");
 
@@ -149,13 +144,11 @@ For each widget id above, return its label. Echo \`tu_label\` verbatim when pres
 
   const toolUse = response.content.find((c) => c.type === "tool_use");
   if (!toolUse || toolUse.type !== "tool_use") {
-    throw new Error(
-      `visionLabel: no tool_use in response (stop_reason=${response.stop_reason})`,
-    );
+    throw new Error(`visionLabel: no tool_use in response (stop_reason=${response.stop_reason})`);
   }
-  const rawInput = toolUse.input as
-    | { labels?: Array<{ id: number; label: string }> | string }
-    | null;
+  const rawInput = toolUse.input as {
+    labels?: Array<{ id: number; label: string }> | string;
+  } | null;
   if (rawInput && typeof rawInput.labels === "string") {
     try {
       rawInput.labels = JSON.parse(rawInput.labels);

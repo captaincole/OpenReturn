@@ -106,11 +106,7 @@ export interface QdcgResult {
  * schedule (≥ $100k). The worksheet uses this convention at lines 22
  * and 24.
  */
-function taxByAmount(
-  amount: number,
-  filingStatus: FilingStatus,
-  taxYear: number,
-): number {
+function taxByAmount(amount: number, filingStatus: FilingStatus, taxYear: number): number {
   if (amount < 0) return 0;
   if (amount < 100000) {
     const r = lookupTax(`federal-${taxYear}`, amount, filingStatus);
@@ -134,9 +130,7 @@ function taxByAmount(
  */
 export function computeQdcg(inputs: QdcgInputs): QdcgResult {
   if (inputs.taxableIncome < 0) {
-    throw new Error(
-      `QDCG worksheet: taxableIncome must be ≥ 0 (got ${inputs.taxableIncome}).`,
-    );
+    throw new Error(`QDCG worksheet: taxableIncome must be ≥ 0 (got ${inputs.taxableIncome}).`);
   }
   if (inputs.qualifiedDividends < 0 || inputs.netLongTermGain < 0) {
     throw new Error(
@@ -217,7 +211,7 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
    * 20% threshold.
    */
   const line20 = Math.max(0, line10 - line19);
-  const line21 = Math.ceil(line20 * 0.20);
+  const line21 = Math.ceil(line20 * 0.2);
 
   // Line 22: tax on line 5 (ordinary bucket) via tax table / rate schedule.
   const line22 = taxByAmount(line5, filingStatus, taxYear);
@@ -236,11 +230,31 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
     tax: line25,
     ordinaryAlternativeTax: line24,
     breakdown: {
-      line1, line2, line3, line4, line5,
-      line6, line7, line8, line9, line10,
-      line11, line12, line13, line14, line15,
-      line16, line17, line18, line19, line20,
-      line21, line22, line23, line24, line25,
+      line1,
+      line2,
+      line3,
+      line4,
+      line5,
+      line6,
+      line7,
+      line8,
+      line9,
+      line10,
+      line11,
+      line12,
+      line13,
+      line14,
+      line15,
+      line16,
+      line17,
+      line18,
+      line19,
+      line20,
+      line21,
+      line22,
+      line23,
+      line24,
+      line25,
     },
   };
 }

@@ -25,9 +25,7 @@ let cached: Client | null = null;
 
 function db(): Client {
   if (cached) return cached;
-  const path = process.env.APP_DB_PATH
-    ? resolve(process.env.APP_DB_PATH)
-    : DEFAULT_APP_DB;
+  const path = process.env.APP_DB_PATH ? resolve(process.env.APP_DB_PATH) : DEFAULT_APP_DB;
   cached = createClient({ url: `file:${path}` });
   return cached;
 }
@@ -148,10 +146,7 @@ export async function getOwnerReturnByYear(
   return res.rows[0] ? rowToReturn(res.rows[0]) : null;
 }
 
-export async function getOwnerFilingForYear(
-  userId: string,
-  taxYear: number,
-): Promise<FilingRow> {
+export async function getOwnerFilingForYear(userId: string, taxYear: number): Promise<FilingRow> {
   const ret = await getOwnerReturnByYear(userId, taxYear);
   if (!ret) throw new Error(`No owner filing found for tax_year=${taxYear}.`);
   return { id: ret.filingId, taxYear: ret.year, status: ret.status };
@@ -161,10 +156,7 @@ export async function getOwnerFilingForYear(
  * Non-revoked membership check. This is the explicit RLS replacement.
  * Run it before any read of a filing the caller does not own outright.
  */
-export async function hasMembership(
-  filingId: string,
-  userId: string,
-): Promise<boolean> {
+export async function hasMembership(filingId: string, userId: string): Promise<boolean> {
   const res = await db().execute({
     sql: `SELECT 1 FROM filing_members
           WHERE filing_id = ? AND user_id = ? AND revoked_at IS NULL LIMIT 1`,
@@ -216,11 +208,8 @@ export async function fetchActivityItems(
       value: json(r.decision),
       sourceNote: strOrNull(r.source_note),
       rationale: strOrNull(r.rationale) ?? undefined,
-      supportingFactKeys: Array.isArray(supporting)
-        ? (supporting as string[])
-        : undefined,
-      confidence:
-        (strOrNull(r.confidence) as ActivityItem["confidence"]) ?? undefined,
+      supportingFactKeys: Array.isArray(supporting) ? (supporting as string[]) : undefined,
+      confidence: (strOrNull(r.confidence) as ActivityItem["confidence"]) ?? undefined,
       verdict: (strOrNull(r.verdict) as ActivityItem["verdict"]) ?? null,
       verdictReason: strOrNull(r.verdict_reason),
     };
@@ -275,10 +264,7 @@ export async function markActionProcessing(
   });
 }
 
-export async function skipAction(
-  userId: string,
-  actionId: string,
-): Promise<void> {
+export async function skipAction(userId: string, actionId: string): Promise<void> {
   await db().execute({
     sql: `UPDATE requested_actions
           SET status = 'skipped', resolved_at = ?
@@ -297,9 +283,7 @@ export interface DocumentLookup {
   mimeType: string | null;
 }
 
-export async function getDocumentById(
-  id: string,
-): Promise<DocumentLookup | null> {
+export async function getDocumentById(id: string): Promise<DocumentLookup | null> {
   const res = await db().execute({
     sql: `SELECT id, filing_id, storage_path, filename, mime_type
           FROM user_documents WHERE id = ? LIMIT 1`,

@@ -22,13 +22,7 @@
  *     wider shape. TS flags any binding that depends on a stale shape.
  */
 
-import {
-  ssn,
-  phone,
-  type FilingStatus,
-  type SSN,
-  type Phone,
-} from "./values.js";
+import { ssn, phone, type FilingStatus, type SSN, type Phone } from "./values.js";
 import type { Form1040FilingInfo } from "./federal/1040/filingInfo.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
@@ -197,10 +191,7 @@ export function resolveFilingInfo(opts: {
    * no facts match, same convention as sumW2Box: "no 1099-INT at all → 0
    * taxable interest" rather than "we do not know."
    */
-  const sumInvestmentBox = (
-    boxKey: string,
-    keyFilter?: (key: string) => boolean,
-  ): number => {
+  const sumInvestmentBox = (boxKey: string, keyFilter?: (key: string) => boolean): number => {
     const rows = factsInCategory("investment_income");
     let total = 0;
     for (const row of rows) {
@@ -257,16 +248,11 @@ export function resolveFilingInfo(opts: {
       };
     })(),
     hasDigitalAssets: decisionByKey.get("decisions.scope.has_digital_assets") as
-      | boolean
-      | undefined,
+      boolean | undefined,
     w2WagesTotal: sumW2Box("box1") as Form1040FilingInfo["w2WagesTotal"],
     w2FederalWithholding: sumW2Box("box2") as Form1040FilingInfo["w2FederalWithholding"],
-    qualifiedDividends: sumInvestmentBox(
-      "box1b",
-    ) as Form1040FilingInfo["qualifiedDividends"],
-    ordinaryDividends: sumInvestmentBox(
-      "box1a",
-    ) as Form1040FilingInfo["ordinaryDividends"],
+    qualifiedDividends: sumInvestmentBox("box1b") as Form1040FilingInfo["qualifiedDividends"],
+    ordinaryDividends: sumInvestmentBox("box1a") as Form1040FilingInfo["ordinaryDividends"],
     form1099FederalWithholding: sumInvestmentBox(
       "box4",
     ) as Form1040FilingInfo["form1099FederalWithholding"],
@@ -320,9 +306,7 @@ export function resolveFilingInfo(opts: {
         mustFileCA540Derivation: r.derivation,
       };
     })(),
-    caResidencyStatus: decisionByKey.get("decisions.scope.ca_residency") as
-      | string
-      | undefined,
+    caResidencyStatus: decisionByKey.get("decisions.scope.ca_residency") as string | undefined,
     w2StateWages: sumW2Box("box16") as Form540FilingInfo["w2StateWages"],
     w2StateWithholding: sumW2Box("box17") as Form540FilingInfo["w2StateWithholding"],
     w2CaSdiTotal: sumCaSdi(factsInCategory("wages")) as Form540FilingInfo["w2CaSdiTotal"],
@@ -341,9 +325,8 @@ export function resolveFilingInfo(opts: {
     mailingSameAsResidence: decisionByKey.get(
       "decisions.scope.mailing_same_as_principal_residence",
     ) as boolean | undefined,
-    refundFullOverpaymentCA: decisionByKey.get(
-      "decisions.refund.refund_full_overpayment_ca",
-    ) as boolean | undefined,
+    refundFullOverpaymentCA: decisionByKey.get("decisions.refund.refund_full_overpayment_ca") as
+      boolean | undefined,
 
     /*
      * ─── Schedule CA (540) ──────────────────────────────────────────
@@ -358,8 +341,7 @@ export function resolveFilingInfo(opts: {
         fallbacks: [
           {
             rule: "fallback: must_file_ca_540 = true",
-            value:
-              decisionByKey.get("decisions.scope.must_file_ca_540") === true,
+            value: decisionByKey.get("decisions.scope.must_file_ca_540") === true,
             triggeredByDecisionKeys: ["decisions.scope.must_file_ca_540"],
           },
         ],
@@ -390,8 +372,7 @@ export function resolveFilingInfo(opts: {
           },
           {
             rule: "fallback: decisions.scope.has_reportable_sales = true",
-            value:
-              decisionByKey.get("decisions.scope.has_reportable_sales") === true,
+            value: decisionByKey.get("decisions.scope.has_reportable_sales") === true,
             triggeredByDecisionKeys: ["decisions.scope.has_reportable_sales"],
           },
         ],
@@ -423,8 +404,7 @@ export function resolveFilingInfo(opts: {
           },
           {
             rule: "fallback: decisions.scope.has_reportable_sales = true",
-            value:
-              decisionByKey.get("decisions.scope.has_reportable_sales") === true,
+            value: decisionByKey.get("decisions.scope.has_reportable_sales") === true,
             triggeredByDecisionKeys: ["decisions.scope.has_reportable_sales"],
           },
         ],
@@ -476,8 +456,7 @@ export function resolveFilingInfo(opts: {
         fallbacks: [
           {
             rule: "fallback: decisions.itemize_vs_standard = itemized",
-            value:
-              decisionByKey.get("decisions.itemize_vs_standard") === "itemized",
+            value: decisionByKey.get("decisions.itemize_vs_standard") === "itemized",
             triggeredByDecisionKeys: ["decisions.itemize_vs_standard"],
           },
         ],
@@ -490,9 +469,8 @@ export function resolveFilingInfo(opts: {
         mustFileScheduleADerivation: r.derivation,
         medicalDentalExpenses: num("medical.expenses_total"),
         stateLocalIncomeTaxPaid: w2Box17 + caSdi + (estStateTax ?? 0),
-        generalSalesTaxElection: decisionByKey.get(
-          "decisions.itemized.elect_general_sales_tax",
-        ) as boolean | undefined,
+        generalSalesTaxElection: decisionByKey.get("decisions.itemized.elect_general_sales_tax") as
+          boolean | undefined,
         realEstateTaxes: num("state_local_tax.real_estate"),
         personalPropertyTaxes: num("state_local_tax.personal_property"),
         mortgageInterestForm1098: num("mortgage.interest_form_1098"),
@@ -506,7 +484,6 @@ export function resolveFilingInfo(opts: {
     })(),
   };
 }
-
 
 /**
  * Resolve a must-file flag with explicit-decision-wins semantics, and

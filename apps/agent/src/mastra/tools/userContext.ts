@@ -31,11 +31,12 @@ export async function requireUserContext(
   toolContext: { requestContext?: { get: (key: string) => unknown } } | undefined,
 ): Promise<UserContext> {
   const rc = toolContext?.requestContext;
-  if (!rc) throw new Error("requestContext missing — was this tool called outside an authed request?");
+  if (!rc)
+    throw new Error("requestContext missing — was this tool called outside an authed request?");
   const userId = rc.get(MASTRA_RESOURCE_ID_KEY) as string | undefined;
-  const authEmail =
-    (rc.get(REQUEST_CONTEXT_KEYS.userEmail) as string | undefined) ?? null;
-  if (!userId) throw new Error("owner missing — complete first-run setup in the web app before chatting");
+  const authEmail = (rc.get(REQUEST_CONTEXT_KEYS.userEmail) as string | undefined) ?? null;
+  if (!userId)
+    throw new Error("owner missing — complete first-run setup in the web app before chatting");
   const taxYear = DEMO_TAX_YEAR;
   const filing = await resolveOwnerFilingForYear(userId, taxYear);
   return {

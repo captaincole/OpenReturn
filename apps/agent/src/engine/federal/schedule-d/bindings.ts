@@ -73,9 +73,23 @@ export function register(): void {
       },
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       // Line 1b gain/loss = its own columns: (d) proceeds − (e) cost + (g) adjustments.
-      "0.line.1b_gain_loss": (f) => sum(f["0.line.1b_proceeds"], f["0.line.1b_cost"] === undefined ? 0 : -f["0.line.1b_cost"], f["0.line.1b_adjustments"]),
+      "0.line.1b_gain_loss": (f) =>
+        sum(
+          f["0.line.1b_proceeds"],
+          f["0.line.1b_cost"] === undefined ? 0 : -f["0.line.1b_cost"],
+          f["0.line.1b_adjustments"],
+        ),
       // Net short-term capital gain or (loss): lines 1a through 6.
-      "0.line.7_net_short_term_gain_loss": (f) => sum(f["0.line.1a_gain_loss"], f["0.line.1b_gain_loss"], f["0.line.2_gain_loss"], f["0.line.3_gain_loss"], f["0.line.4_short_term_gain_other_forms"], f["0.line.5_net_short_term_passthrough"], f["0.line.6_short_term_loss_carryover"]),
+      "0.line.7_net_short_term_gain_loss": (f) =>
+        sum(
+          f["0.line.1a_gain_loss"],
+          f["0.line.1b_gain_loss"],
+          f["0.line.2_gain_loss"],
+          f["0.line.3_gain_loss"],
+          f["0.line.4_short_term_gain_other_forms"],
+          f["0.line.5_net_short_term_passthrough"],
+          f["0.line.6_short_term_loss_carryover"],
+        ),
       // Carried from Form 8949 Part II totals proceeds (Box D/J, long-term basis reported).
       "0.line.8b_proceeds": (f) => sum(f["form-8949.1.part2.totals_proceeds"]),
       // Carried from Form 8949 Part II totals cost basis (Box D/J, long-term basis reported).
@@ -83,57 +97,107 @@ export function register(): void {
       // Carried from Form 8949 Part II totals gain/(loss) (Box D/J, long-term basis reported).
       "0.line.8b_gain_loss": (f) => sum(f["form-8949.1.part2.totals_gain_loss"]),
       // Net long-term gain/loss: lines 8a through 14 per IRS Schedule D Part II instructions.
-      "0.line.15_net_long_term_gain_loss": (f) => sum(f["0.line.8a_gain_loss"], f["0.line.8b_gain_loss"], f["0.line.9_gain_loss"], f["0.line.10_gain_loss"], f["0.line.11_long_term_gain_other_forms"], f["0.line.12_net_long_term_passthrough"], f["0.line.13_capital_gain_distributions"], f["0.line.14_long_term_loss_carryover"]),
+      "0.line.15_net_long_term_gain_loss": (f) =>
+        sum(
+          f["0.line.8a_gain_loss"],
+          f["0.line.8b_gain_loss"],
+          f["0.line.9_gain_loss"],
+          f["0.line.10_gain_loss"],
+          f["0.line.11_long_term_gain_other_forms"],
+          f["0.line.12_net_long_term_passthrough"],
+          f["0.line.13_capital_gain_distributions"],
+          f["0.line.14_long_term_loss_carryover"],
+        ),
       // Line 16 = line 7 (net short-term) + line 15 (net long-term) per IRS Schedule D Part III instructions.
-      "1.line.16_combined_gain_loss": (f) => sum(f["0.line.7_net_short_term_gain_loss"], f["0.line.15_net_long_term_gain_loss"]),
+      "1.line.16_combined_gain_loss": (f) =>
+        sum(f["0.line.7_net_short_term_gain_loss"], f["0.line.15_net_long_term_gain_loss"]),
     },
 
     unsupported: {
-      "0.line.1b_adjustments": "Schedule D line 1b col (g) — depends on Form 8949 Part I adjustments, which aren't modeled yet.",
-      "0.line.2_gain_loss": "Schedule D Part I line 2 (Box B/H short-term, basis NOT reported) — engine lacks per-box-type filtered aggregation over trade facts.",
-      "0.line.3_gain_loss": "Schedule D Part I line 3 (Box C/I short-term, not on 1099-B/DA) — engine lacks per-box-type filtered aggregation over trade facts.",
-      "0.line.8a_gain_loss": "Schedule D Part II line 8a (long-term trades bypassing Form 8949) — no fact-level flag distinguishes long-term bypass from short-term bypass.",
-      "0.line.8b_adjustments": "Schedule D line 8b col (g) — depends on Form 8949 Part II adjustments, which aren't modeled yet.",
-      "0.header.qof_disposal_yes": "No QOF (Qualified Opportunity Fund) disposal fact or decision has been ingested yet; no scenario modeled.",
-      "0.header.qof_disposal_no": "No QOF disposal decision available; this is the complement of qof_disposal_yes and would require the same missing decision key.",
-      "0.line.1a_cost": "No fact key exists for aggregated short-term cost basis on 1099-B/DA transactions where basis was reported to IRS with no adjustments (the line 1a bypass bucket). Needs new fact ingestion path.",
-      "0.line.2_proceeds": "Requires summing proceeds only for Form 8949 Part I transactions with Box B or H checked; the engine has no per-box-type filtered aggregation over trade facts — needs a box-filtered sumFacts or a dedicated Box B/H totals field on Form 8949.",
-      "0.line.2_cost": "Requires summing cost basis only for Form 8949 Part I transactions with Box B or H checked; engine lacks per-box-type filtered aggregation.",
-      "0.line.2_adjustments": "Requires summing column (g) adjustments only for Form 8949 Part I transactions with Box B or H checked; engine lacks per-box-type filtered aggregation.",
-      "0.line.3_proceeds": "Requires summing proceeds only for Form 8949 Part I transactions with Box C or I checked; engine lacks per-box-type filtered aggregation over trade facts.",
-      "0.line.3_cost": "Requires summing cost basis only for Form 8949 Part I transactions with Box C or I checked; engine lacks per-box-type filtered aggregation.",
-      "0.line.3_adjustments": "Requires summing column (g) adjustments only for Form 8949 Part I transactions with Box C or I checked; engine lacks per-box-type filtered aggregation.",
-      "0.line.4_short_term_gain_other_forms": "Requires data from Forms 6252, 4684, 6781, and 8824 — none of these forms are ingested in the current engine. No installment-sale, casualty/theft, straddle, or like-kind-exchange scenarios have been built yet.",
-      "0.line.5_net_short_term_passthrough": "K-1 passthrough income/loss from partnerships, S-corps, estates, and trusts — no K-1 fact ingestion path built yet. Bind when K-1 scenario is modeled.",
-      "0.line.6_short_term_loss_carryover": "Short-term capital loss carryover from prior year — requires prior-year Schedule D data (2024 line 16/21 and Form 1040 line 15). No prior-year carryover fact ingestion path built yet.",
-      "0.line.8a_proceeds": "Line 8a covers long-term trades that bypass Form 8949 (basis IRS-reported, no adjustments). No fact-level flag distinguishes long-term bypass trades from short-term bypass trades — sumFacts cannot filter by the form_8949_box decision. Bind when a decision-filtered sum rule is available.",
-      "0.line.8a_cost": "Line 8a covers long-term trades that bypass Form 8949 (basis IRS-reported, no adjustments). No fact-level flag distinguishes long-term bypass trades from short-term bypass trades — sumFacts cannot filter by the form_8949_box decision.",
-      "0.line.9_proceeds": "Form 8949 Part II has only one aggregate totals row with no per-box (E/K) breakdown. The engine cannot isolate proceeds for box E or box K transactions until 8949 ingests per-box totals or we aggregate individual trade rows by box assignment.",
-      "0.line.9_cost": "Form 8949 Part II has only one aggregate totals row with no per-box (E/K) breakdown. The engine cannot isolate cost basis for box E or box K transactions until 8949 ingests per-box totals.",
-      "0.line.9_adjustments": "Form 8949 Part II has only one aggregate totals row with no per-box (E/K) breakdown. The engine cannot isolate adjustments for box E or box K transactions until 8949 ingests per-box totals.",
-      "0.line.9_gain_loss": "Cannot derive box-E/K-specific gain/loss from form-8949 catalog which only has a single aggregate Part II totals_gain_loss field. Need per-box totals or per-trade box-assignment aggregation to isolate box E/K.",
-      "0.line.10_proceeds": "Form 8949 Part II has only one aggregate totals row with no per-box (F/L) breakdown. The engine cannot isolate proceeds for box F or box L transactions until 8949 ingests per-box totals.",
-      "0.line.10_cost": "Form 8949 Part II has only one aggregate totals row with no per-box (F/L) breakdown. The engine cannot isolate cost basis for box F or box L transactions until 8949 ingests per-box totals.",
-      "0.line.10_adjustments": "Form 8949 Part II has only one aggregate totals row with no per-box (F/L) breakdown. The engine cannot isolate adjustments for box F or box L transactions until 8949 ingests per-box totals.",
-      "0.line.10_gain_loss": "Cannot derive box-F/L-specific gain/loss from form-8949 catalog which only has a single aggregate Part II totals_gain_loss field. Need per-box totals or per-trade box-assignment aggregation to isolate box F/L.",
-      "0.line.11_long_term_gain_other_forms": "Requires gain figures from Form 4797 Part I, Forms 2439, 6252, 4684, 6781, and 8824 — none of these forms are ingested or have fact categories in the current inventory.",
-      "0.line.12_net_long_term_passthrough": "Requires Schedule K-1 data from partnerships, S corporations, estates, and trusts — no K-1 fact category or ingestion path exists in the current inventory.",
-      "0.line.14_long_term_loss_carryover": "Long-term capital loss carryover from 2024 requires prior-year Schedule D data (2024 Sch D line 15/16/21 and 2024 Form 1040 line 15). No prior-year fact ingestion path exists yet.",
-      "1.line.17_both_gains_no": "This boolean is true when line 15 or line 16 is NOT a gain (i.e., zero or negative). Requires a conditional-comparison rule not yet in the library.",
-      "1.line.18_rate_gain_worksheet_amount": "Amount from line 7 of the 28% Rate Gain Worksheet requires ingestion of collectibles gains and section 1202 QSB stock exclusion data — no such fact ingestion path exists yet.",
-      "1.line.19_unrecaptured_sec1250_gain": "Amount from line 18 of the Unrecaptured Section 1250 Gain Worksheet requires Form 4797 depreciation recapture and real-property sale data — no such fact ingestion path exists yet.",
-      "1.line.20_use_qual_div_worksheet_no": "True when line 18 or 19 is non-zero OR Form 4952 is being filed. Requires conditional logic checking two computed fields and a form-presence flag — no such compound-conditional rule exists in the library yet.",
-      "1.line.21_allowable_loss": "Requires a conditional min-of-two-values computation: the smaller of (a) the loss on Schedule D line 16 or (b) the filing-status-dependent cap ($3,000 or $1,500 MFS), and only applies when line 16 is negative. We have no 'minOf' or 'conditionalCap' rule yet. Will need a dedicated rule or computed-field support to implement correctly.",
-      "1.line.22_qualified_dividends_yes": "This checkbox is true when Form 1040 line 3a (qualified dividends) is greater than zero. We have no 'greaterThanZero' comparison rule to drive a boolean checkbox from a numeric field. Needs a conditional/comparison rule.",
-      "1.line.22_qualified_dividends_no": "This checkbox is true when Form 1040 line 3a (qualified dividends) equals zero. We have no 'equalsZero' or 'not greaterThanZero' comparison rule to drive a boolean checkbox from a numeric field. Needs a conditional/comparison rule.",
+      "0.line.1b_adjustments":
+        "Schedule D line 1b col (g) — depends on Form 8949 Part I adjustments, which aren't modeled yet.",
+      "0.line.2_gain_loss":
+        "Schedule D Part I line 2 (Box B/H short-term, basis NOT reported) — engine lacks per-box-type filtered aggregation over trade facts.",
+      "0.line.3_gain_loss":
+        "Schedule D Part I line 3 (Box C/I short-term, not on 1099-B/DA) — engine lacks per-box-type filtered aggregation over trade facts.",
+      "0.line.8a_gain_loss":
+        "Schedule D Part II line 8a (long-term trades bypassing Form 8949) — no fact-level flag distinguishes long-term bypass from short-term bypass.",
+      "0.line.8b_adjustments":
+        "Schedule D line 8b col (g) — depends on Form 8949 Part II adjustments, which aren't modeled yet.",
+      "0.header.qof_disposal_yes":
+        "No QOF (Qualified Opportunity Fund) disposal fact or decision has been ingested yet; no scenario modeled.",
+      "0.header.qof_disposal_no":
+        "No QOF disposal decision available; this is the complement of qof_disposal_yes and would require the same missing decision key.",
+      "0.line.1a_cost":
+        "No fact key exists for aggregated short-term cost basis on 1099-B/DA transactions where basis was reported to IRS with no adjustments (the line 1a bypass bucket). Needs new fact ingestion path.",
+      "0.line.2_proceeds":
+        "Requires summing proceeds only for Form 8949 Part I transactions with Box B or H checked; the engine has no per-box-type filtered aggregation over trade facts — needs a box-filtered sumFacts or a dedicated Box B/H totals field on Form 8949.",
+      "0.line.2_cost":
+        "Requires summing cost basis only for Form 8949 Part I transactions with Box B or H checked; engine lacks per-box-type filtered aggregation.",
+      "0.line.2_adjustments":
+        "Requires summing column (g) adjustments only for Form 8949 Part I transactions with Box B or H checked; engine lacks per-box-type filtered aggregation.",
+      "0.line.3_proceeds":
+        "Requires summing proceeds only for Form 8949 Part I transactions with Box C or I checked; engine lacks per-box-type filtered aggregation over trade facts.",
+      "0.line.3_cost":
+        "Requires summing cost basis only for Form 8949 Part I transactions with Box C or I checked; engine lacks per-box-type filtered aggregation.",
+      "0.line.3_adjustments":
+        "Requires summing column (g) adjustments only for Form 8949 Part I transactions with Box C or I checked; engine lacks per-box-type filtered aggregation.",
+      "0.line.4_short_term_gain_other_forms":
+        "Requires data from Forms 6252, 4684, 6781, and 8824 — none of these forms are ingested in the current engine. No installment-sale, casualty/theft, straddle, or like-kind-exchange scenarios have been built yet.",
+      "0.line.5_net_short_term_passthrough":
+        "K-1 passthrough income/loss from partnerships, S-corps, estates, and trusts — no K-1 fact ingestion path built yet. Bind when K-1 scenario is modeled.",
+      "0.line.6_short_term_loss_carryover":
+        "Short-term capital loss carryover from prior year — requires prior-year Schedule D data (2024 line 16/21 and Form 1040 line 15). No prior-year carryover fact ingestion path built yet.",
+      "0.line.8a_proceeds":
+        "Line 8a covers long-term trades that bypass Form 8949 (basis IRS-reported, no adjustments). No fact-level flag distinguishes long-term bypass trades from short-term bypass trades — sumFacts cannot filter by the form_8949_box decision. Bind when a decision-filtered sum rule is available.",
+      "0.line.8a_cost":
+        "Line 8a covers long-term trades that bypass Form 8949 (basis IRS-reported, no adjustments). No fact-level flag distinguishes long-term bypass trades from short-term bypass trades — sumFacts cannot filter by the form_8949_box decision.",
+      "0.line.9_proceeds":
+        "Form 8949 Part II has only one aggregate totals row with no per-box (E/K) breakdown. The engine cannot isolate proceeds for box E or box K transactions until 8949 ingests per-box totals or we aggregate individual trade rows by box assignment.",
+      "0.line.9_cost":
+        "Form 8949 Part II has only one aggregate totals row with no per-box (E/K) breakdown. The engine cannot isolate cost basis for box E or box K transactions until 8949 ingests per-box totals.",
+      "0.line.9_adjustments":
+        "Form 8949 Part II has only one aggregate totals row with no per-box (E/K) breakdown. The engine cannot isolate adjustments for box E or box K transactions until 8949 ingests per-box totals.",
+      "0.line.9_gain_loss":
+        "Cannot derive box-E/K-specific gain/loss from form-8949 catalog which only has a single aggregate Part II totals_gain_loss field. Need per-box totals or per-trade box-assignment aggregation to isolate box E/K.",
+      "0.line.10_proceeds":
+        "Form 8949 Part II has only one aggregate totals row with no per-box (F/L) breakdown. The engine cannot isolate proceeds for box F or box L transactions until 8949 ingests per-box totals.",
+      "0.line.10_cost":
+        "Form 8949 Part II has only one aggregate totals row with no per-box (F/L) breakdown. The engine cannot isolate cost basis for box F or box L transactions until 8949 ingests per-box totals.",
+      "0.line.10_adjustments":
+        "Form 8949 Part II has only one aggregate totals row with no per-box (F/L) breakdown. The engine cannot isolate adjustments for box F or box L transactions until 8949 ingests per-box totals.",
+      "0.line.10_gain_loss":
+        "Cannot derive box-F/L-specific gain/loss from form-8949 catalog which only has a single aggregate Part II totals_gain_loss field. Need per-box totals or per-trade box-assignment aggregation to isolate box F/L.",
+      "0.line.11_long_term_gain_other_forms":
+        "Requires gain figures from Form 4797 Part I, Forms 2439, 6252, 4684, 6781, and 8824 — none of these forms are ingested or have fact categories in the current inventory.",
+      "0.line.12_net_long_term_passthrough":
+        "Requires Schedule K-1 data from partnerships, S corporations, estates, and trusts — no K-1 fact category or ingestion path exists in the current inventory.",
+      "0.line.14_long_term_loss_carryover":
+        "Long-term capital loss carryover from 2024 requires prior-year Schedule D data (2024 Sch D line 15/16/21 and 2024 Form 1040 line 15). No prior-year fact ingestion path exists yet.",
+      "1.line.17_both_gains_no":
+        "This boolean is true when line 15 or line 16 is NOT a gain (i.e., zero or negative). Requires a conditional-comparison rule not yet in the library.",
+      "1.line.18_rate_gain_worksheet_amount":
+        "Amount from line 7 of the 28% Rate Gain Worksheet requires ingestion of collectibles gains and section 1202 QSB stock exclusion data — no such fact ingestion path exists yet.",
+      "1.line.19_unrecaptured_sec1250_gain":
+        "Amount from line 18 of the Unrecaptured Section 1250 Gain Worksheet requires Form 4797 depreciation recapture and real-property sale data — no such fact ingestion path exists yet.",
+      "1.line.20_use_qual_div_worksheet_no":
+        "True when line 18 or 19 is non-zero OR Form 4952 is being filed. Requires conditional logic checking two computed fields and a form-presence flag — no such compound-conditional rule exists in the library yet.",
+      "1.line.21_allowable_loss":
+        "Requires a conditional min-of-two-values computation: the smaller of (a) the loss on Schedule D line 16 or (b) the filing-status-dependent cap ($3,000 or $1,500 MFS), and only applies when line 16 is negative. We have no 'minOf' or 'conditionalCap' rule yet. Will need a dedicated rule or computed-field support to implement correctly.",
+      "1.line.22_qualified_dividends_yes":
+        "This checkbox is true when Form 1040 line 3a (qualified dividends) is greater than zero. We have no 'greaterThanZero' comparison rule to drive a boolean checkbox from a numeric field. Needs a conditional/comparison rule.",
+      "1.line.22_qualified_dividends_no":
+        "This checkbox is true when Form 1040 line 3a (qualified dividends) equals zero. We have no 'equalsZero' or 'not greaterThanZero' comparison rule to drive a boolean checkbox from a numeric field. Needs a conditional/comparison rule.",
     },
 
     todos: {
-      "0.line.1a_proceeds": "confidence=low: Line 1a aggregates short-term proceeds for 1099-B/DA transactions where basis was reported and no adjustments needed; however, no fact fieldPath exists for this sub-bucket — unsupported until fact schema is extended.",
-      "0.line.1a_gain_loss": "confidence=medium: Line 1a gain/loss is proceeds minus cost basis; computed from the two sibling fields on this line.",
-      "0.line.13_capital_gain_distributions": "sumFacts: no FilingInfo slot for sumFacts(investment_income|account.|box2a). Add the aggregate to <Form>FilingInfo + the resolver, and map it in renderBindings.SUM_FACTS_TO_SLOT.",
+      "0.line.1a_proceeds":
+        "confidence=low: Line 1a aggregates short-term proceeds for 1099-B/DA transactions where basis was reported and no adjustments needed; however, no fact fieldPath exists for this sub-bucket — unsupported until fact schema is extended.",
+      "0.line.1a_gain_loss":
+        "confidence=medium: Line 1a gain/loss is proceeds minus cost basis; computed from the two sibling fields on this line.",
+      "0.line.13_capital_gain_distributions":
+        "sumFacts: no FilingInfo slot for sumFacts(investment_income|account.|box2a). Add the aggregate to <Form>FilingInfo + the resolver, and map it in renderBindings.SUM_FACTS_TO_SLOT.",
     },
-
   });
 }
 

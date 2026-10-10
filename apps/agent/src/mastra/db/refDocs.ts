@@ -41,12 +41,7 @@ export interface RefSection {
 }
 
 export type RefBlockType =
-  | "paragraph"
-  | "heading"
-  | "list_item"
-  | "table"
-  | "table_row"
-  | "callout";
+  "paragraph" | "heading" | "list_item" | "table" | "table_row" | "callout";
 
 export interface RefBlock {
   blockId: string;
@@ -348,15 +343,17 @@ export async function searchRefDocs(opts: SearchOpts): Promise<SearchHit[]> {
     matchCount: limit,
     filterDocId: opts.docId,
   });
-  return rows
-    .filter((r) => r.fts_rank != null)
-    /*
-     * fts_rank: higher is better. Sort descending, then return the
-     * negated value so the exposed score reads lower-is-better.
-     */
-    .sort((a, b) => (b.fts_rank ?? 0) - (a.fts_rank ?? 0))
-    .slice(0, limit)
-    .map((r) => rowToHit(r, -(r.fts_rank ?? 0)));
+  return (
+    rows
+      .filter((r) => r.fts_rank != null)
+      /*
+       * fts_rank: higher is better. Sort descending, then return the
+       * negated value so the exposed score reads lower-is-better.
+       */
+      .sort((a, b) => (b.fts_rank ?? 0) - (a.fts_rank ?? 0))
+      .slice(0, limit)
+      .map((r) => rowToHit(r, -(r.fts_rank ?? 0)))
+  );
 }
 
 export interface HybridSearchOpts {
@@ -385,15 +382,11 @@ export interface HybridSearchOpts {
  *   - Stored vectors built by a different embedding model than the active
  *     one → FTS-only with a warning. Fix: `npm run corpus -- reembed --all`.
  */
-export async function hybridSearchRefDocs(
-  opts: HybridSearchOpts,
-): Promise<SearchHit[]> {
+export async function hybridSearchRefDocs(opts: HybridSearchOpts): Promise<SearchHit[]> {
   const limit = Math.min(opts.limit ?? 8, 25);
   const cands = Math.min(opts.candidatesPerLeg ?? 50, 100);
 
-  const { resolveEmbeddings, embedQuery } = await import(
-    "../../refdocs/embeddings"
-  );
+  const { resolveEmbeddings, embedQuery } = await import("../../refdocs/embeddings");
   const mode = opts.mode ?? "hybrid";
 
   /*
@@ -682,9 +675,7 @@ export async function countBlocksByDoc(
  */
 export async function listBlocksWithoutEmbeddings(
   opts: { all?: boolean } = {},
-): Promise<
-  { blockId: string; docId: string; contextualizedText: string | null; text: string }[]
-> {
+): Promise<{ blockId: string; docId: string; contextualizedText: string | null; text: string }[]> {
   await ensureCorpusSchema();
   const where = opts.all ? "" : "WHERE embedding IS NULL ";
   const res = await getCorpusDb().execute(

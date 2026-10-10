@@ -55,14 +55,10 @@ function rowToDecision(r: Row): AIDecisionRow {
     decisionKey: asStr(r.decision_key),
     decision: asJson(r.decision),
     rationale: asStr(r.rationale),
-    supportingFactKeys: Array.isArray(supporting)
-      ? (supporting as string[])
-      : [],
+    supportingFactKeys: Array.isArray(supporting) ? (supporting as string[]) : [],
     confidence: asStr(r.confidence) as Confidence,
     dissentingConsiderations: asStrOrNull(r.dissenting_considerations),
-    authorityCitations: asJson(r.authority_citations) as
-      | AuthorityCitation[]
-      | null,
+    authorityCitations: asJson(r.authority_citations) as AuthorityCitation[] | null,
     sourceNote: asStrOrNull(r.source_note),
     createdAt: asStr(r.created_at),
     verdict: asStrOrNull(r.verdict) as Verdict | null,
@@ -71,10 +67,7 @@ function rowToDecision(r: Row): AIDecisionRow {
   };
 }
 
-export async function recordDecision(
-  scope: Scope,
-  d: AIDecision,
-): Promise<void> {
+export async function recordDecision(scope: Scope, d: AIDecision): Promise<void> {
   await ensureAppSchema();
   await getAppDb().execute({
     sql: `INSERT INTO ai_decisions
@@ -132,10 +125,7 @@ export async function listDecisions(
   return res.rows.map(rowToDecision);
 }
 
-export async function getDecisionById(
-  scope: Scope,
-  id: string,
-): Promise<AIDecisionRow | null> {
+export async function getDecisionById(scope: Scope, id: string): Promise<AIDecisionRow | null> {
   await ensureAppSchema();
   const res = await getAppDb().execute({
     sql: `SELECT * FROM ai_decisions WHERE id = ? AND filing_id = ? LIMIT 1`,

@@ -13,12 +13,7 @@ import {
   type WorkflowInput,
   type WorkflowOutput,
 } from "./schemas.js";
-import {
-  prepareStep,
-  retrieveStep,
-  classifyStep,
-  writeStep,
-} from "./steps.js";
+import { prepareStep, retrieveStep, classifyStep, writeStep } from "./steps.js";
 
 export const generateBindingsWorkflow = createWorkflow({
   id: "generate-bindings",
@@ -33,14 +28,10 @@ export const generateBindingsWorkflow = createWorkflow({
 
 export type { WorkflowInput, WorkflowOutput };
 
-export async function runGenerateBindings(
-  input: WorkflowInput,
-): Promise<WorkflowOutput> {
+export async function runGenerateBindings(input: WorkflowInput): Promise<WorkflowOutput> {
   const run = await generateBindingsWorkflow.createRun();
   const result = await run.start({ inputData: input });
   if (result.status === "success") return result.result;
   if (result.status === "failed") throw result.error;
-  throw new Error(
-    `generate-bindings: unexpected workflow status '${result.status}'`,
-  );
+  throw new Error(`generate-bindings: unexpected workflow status '${result.status}'`);
 }

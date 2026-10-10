@@ -19,7 +19,9 @@ function pp(label: string, value: unknown) {
   const s = typeof value === "string" ? value : JSON.stringify(value, null, 2);
   if (s == null) return console.log(`${label}: (null)`);
   if (s.length > TRUNCATE_AT) {
-    console.log(`${label}:\n${s.slice(0, TRUNCATE_AT)}\n  …[truncated ${s.length - TRUNCATE_AT} chars]`);
+    console.log(
+      `${label}:\n${s.slice(0, TRUNCATE_AT)}\n  …[truncated ${s.length - TRUNCATE_AT} chars]`,
+    );
   } else {
     console.log(`${label}:\n${s}`);
   }

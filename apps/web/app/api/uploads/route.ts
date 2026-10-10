@@ -1,11 +1,7 @@
 import { NextResponse } from "next/server";
 import { getOwnerSession } from "@/lib/localAuth";
 import { writeBlob, deleteBlob } from "@/lib/blobStore";
-import {
-  getOwnerFilingForYear,
-  insertUploadedDocument,
-  listUploads,
-} from "@/lib/serverDb";
+import { getOwnerFilingForYear, insertUploadedDocument, listUploads } from "@/lib/serverDb";
 
 /*
  * Persists a user-attached file: bytes → local documents dir (blobStore),
@@ -89,10 +85,7 @@ export async function POST(request: Request) {
     await writeBlob(storagePath, Buffer.from(await file.arrayBuffer()));
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    return NextResponse.json(
-      { error: `upload failed: ${message}` },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: `upload failed: ${message}` }, { status: 500 });
   }
 
   try {

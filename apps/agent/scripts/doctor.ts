@@ -66,10 +66,7 @@ function configSection(): void {
   }
   row("ANTHROPIC_API_KEY", process.env.ANTHROPIC_API_KEY ? `${OK} set` : `${DIM} unset`);
   const embeddings = process.env.EMBEDDINGS_MODEL;
-  row(
-    "EMBEDDINGS_MODEL",
-    embeddings ?? `${DEFAULT_EMBEDDINGS_MODEL} (default)`,
-  );
+  row("EMBEDDINGS_MODEL", embeddings ?? `${DEFAULT_EMBEDDINGS_MODEL} (default)`);
   for (const key of ["LUCA_MODEL_URL", "JUDGE_MODEL_URL", "EMBEDDINGS_MODEL_URL"]) {
     const v = process.env[key];
     if (v) row(key, v);
@@ -91,9 +88,7 @@ function dataSection(): void {
   const docs = process.env.DOCUMENTS_PATH ?? resolve(projectRoot, ".data/documents");
   row(
     "documents/",
-    existsSync(docs)
-      ? `${OK} ${readdirSync(docs).length} filing dir(s)`
-      : `${DIM} none yet`,
+    existsSync(docs) ? `${OK} ${readdirSync(docs).length} filing dir(s)` : `${DIM} none yet`,
   );
 }
 
@@ -124,9 +119,7 @@ interface OllamaStatus {
 
 async function probeOllama(): Promise<OllamaStatus> {
   const serverUrl = process.env.EMBEDDINGS_MODEL_URL ?? "http://localhost:11434";
-  const version = (await probeJson(`${serverUrl}/api/version`)) as
-    | { version?: string }
-    | null;
+  const version = (await probeJson(`${serverUrl}/api/version`)) as { version?: string } | null;
   const tags = version
     ? ((await probeJson(`${serverUrl}/api/tags`)) as {
         models?: { name?: string }[];
@@ -195,15 +188,11 @@ async function main(): Promise<void> {
 
   section("Verdict");
   const semanticReady =
-    ollama.serverVersion !== null &&
-    ollama.models !== null &&
-    hasModel(ollama.models, wanted);
+    ollama.serverVersion !== null && ollama.models !== null && hasModel(ollama.models, wanted);
   if (semanticReady) {
     console.log(`  ${OK} Semantic (RAG) search is ready — Ollama is serving ${wanted}.`);
   } else {
-    console.log(
-      `  ${BAD} Semantic search will fall back to keyword (FTS) matching.`,
-    );
+    console.log(`  ${BAD} Semantic search will fall back to keyword (FTS) matching.`);
     if (!ollama.binary) {
       console.log(`    → Install Ollama: https://ollama.com (or \`brew install ollama\`).`);
     } else if (!ollama.serverVersion) {

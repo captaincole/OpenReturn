@@ -22,7 +22,9 @@
     "install:all": "npm install && npm --prefix apps/agent install && npm --prefix apps/web install",
     "prepare": "husky",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,mjs,js}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,mjs,js}\""
   },
   "engines": {
     "node": ">=20.0.0"
@@ -32,6 +34,7 @@
     "@typescript-eslint/parser": "^8.71.1",
     "concurrently": "^9.2.1",
     "eslint": "^9.39.5",
-    "husky": "^9.1.7"
+    "husky": "^9.1.7",
+    "prettier": "^3.9.10"
   }
 }

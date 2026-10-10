@@ -114,9 +114,9 @@ export const alex540Expected: ExpectedResults = {
   ],
 
   renderedChecked: [
-    "form-540.header.filing_status",                 // Single (radio group)
-    "form-540.header.mailing_same_as_residence",     // mailing == principal
-    "form-540.line.91_no_use_tax_owed",              // "No use tax is owed"
-    "form-540.line.92_full_year_health_coverage",    // full-year MEC
+    "form-540.header.filing_status", // Single (radio group)
+    "form-540.header.mailing_same_as_residence", // mailing == principal
+    "form-540.line.91_no_use_tax_owed", // "No use tax is owed"
+    "form-540.line.92_full_year_health_coverage", // full-year MEC
   ],
 };

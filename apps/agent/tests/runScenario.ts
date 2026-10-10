@@ -11,17 +11,9 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { projectRoot } from "../src/paths.js";
 import { evaluateAllForms } from "../src/engine/engine.js";
-import {
-  loadFromFixtures,
-  makeCatalog,
-  type Catalog,
-} from "../src/engine/catalog.js";
+import { loadFromFixtures, makeCatalog, type Catalog } from "../src/engine/catalog.js";
 import { getFormSpec } from "../src/engine/registry.js";
-import {
-  makeDecisionsView,
-  makeFactsView,
-  type DerivationContext,
-} from "../src/engine/types.js";
+import { makeDecisionsView, makeFactsView, type DerivationContext } from "../src/engine/types.js";
 import { resolveFilingInfo } from "../src/engine/filingInfo.js";
 import { fillFromCatalog } from "../src/engine/render/fillFromCatalog.js";
 import {
@@ -184,9 +176,7 @@ async function assertForm(
    * directly against a CPA-completed PDF and catches them.
    */
   if (sf.goldenPdfPath) {
-    const golden = await readGoldenPdfValues(
-      resolve(projectRoot, sf.goldenPdfPath),
-    );
+    const golden = await readGoldenPdfValues(resolve(projectRoot, sf.goldenPdfPath));
     assertMatchesGolden(rendered, golden, failures, prefix);
   }
 

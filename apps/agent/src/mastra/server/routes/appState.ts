@@ -3,10 +3,7 @@ import { registerApiRoute } from "@mastra/core/server";
 import { listDocuments, type UserDocumentRow } from "../../db/userDocuments";
 import { buildCaseState } from "../../tools/caseState";
 import { luca } from "../../agents/luca";
-import {
-  lucaWorkingMemorySchema,
-  type PlanItem,
-} from "../../agents/luca.workingMemory";
+import { lucaWorkingMemorySchema, type PlanItem } from "../../agents/luca.workingMemory";
 import { DEMO_TAX_YEAR } from "../demoSession";
 import { REQUEST_CONTEXT_KEYS } from "../ownerMiddleware";
 import { resolveOwnerFilingForYear } from "../../db/filings";
@@ -51,13 +48,9 @@ export const appStateRoute = registerApiRoute("/app/state", {
   method: "GET",
   handler: async (c) => {
     const requestContext = c.get("requestContext");
-    const userId = requestContext?.get(MASTRA_RESOURCE_ID_KEY) as
-      | string
-      | undefined;
+    const userId = requestContext?.get(MASTRA_RESOURCE_ID_KEY) as string | undefined;
     const authEmail =
-      (requestContext?.get(REQUEST_CONTEXT_KEYS.userEmail) as
-        | string
-        | undefined) ?? null;
+      (requestContext?.get(REQUEST_CONTEXT_KEYS.userEmail) as string | undefined) ?? null;
     if (!userId) return c.json({ error: "unauthorized" }, 401);
 
     const filing = await resolveOwnerFilingForYear(userId, DEMO_TAX_YEAR);

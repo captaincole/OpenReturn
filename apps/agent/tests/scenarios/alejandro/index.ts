@@ -65,8 +65,7 @@ export const alejandroScenario: Scenario = {
     {
       formId: "schedule-ca",
       expected: alejandroScheduleCaExpected,
-      goldenPdfPath:
-        "tests/scenarios/alejandro/docs/Alejandro-ScheduleCA-Golden.pdf",
+      goldenPdfPath: "tests/scenarios/alejandro/docs/Alejandro-ScheduleCA-Golden.pdf",
     },
     {
       formId: "form-540",

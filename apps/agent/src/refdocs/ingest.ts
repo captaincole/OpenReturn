@@ -77,9 +77,7 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
   const fileSha = await shaOfFile(pdfPath);
   const existing = await getDocument(input.docId);
   if (existing && existing.sha256 === fileSha && !input.force) {
-    console.log(
-      `  ${input.docId}: sha unchanged (${fileSha.slice(0, 12)}…), skipping ingest`,
-    );
+    console.log(`  ${input.docId}: sha unchanged (${fileSha.slice(0, 12)}…), skipping ingest`);
     return {
       docId: existing.docId,
       sha256: existing.sha256,
@@ -145,22 +143,15 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
     const sectionTextById = new Map<string, string>();
     const sectionHeadingById = new Map<string, string>();
     for (const s of sections) {
-      sectionTextById.set(
-        s.sectionId,
-        extracted.canonicalText.slice(s.charStart, s.charEnd),
-      );
+      sectionTextById.set(s.sectionId, extracted.canonicalText.slice(s.charStart, s.charEnd));
       sectionHeadingById.set(s.sectionId, s.heading);
     }
 
     const summarized = await summarizeBlocks({
       documentTitle: input.title,
       blocks: blocks.map((b) => {
-        const sectionText = b.sectionId
-          ? (sectionTextById.get(b.sectionId) ?? b.text)
-          : b.text;
-        const sectionHeading = b.sectionId
-          ? (sectionHeadingById.get(b.sectionId) ?? null)
-          : null;
+        const sectionText = b.sectionId ? (sectionTextById.get(b.sectionId) ?? b.text) : b.text;
+        const sectionHeading = b.sectionId ? (sectionHeadingById.get(b.sectionId) ?? null) : null;
         return {
           blockId: b.blockId,
           text: b.text,
@@ -183,9 +174,7 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
       b.contextualizedText = s.contextualizedText;
       b.blockTextSha1 = s.blockTextSha1;
     }
-    console.log(
-      `  contextualization done in ${Math.round((Date.now() - start) / 1000)}s`,
-    );
+    console.log(`  contextualization done in ${Math.round((Date.now() - start) / 1000)}s`);
   } else {
     /*
      * Still hash the text so a future re-ingest that does run
@@ -236,9 +225,7 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
       { embeddingModel: embedCfg.id },
     );
     embedded = true;
-    console.log(
-      `  embedding done in ${Math.round((Date.now() - start) / 1000)}s`,
-    );
+    console.log(`  embedding done in ${Math.round((Date.now() - start) / 1000)}s`);
   } catch (err) {
     console.warn(
       `  (embedding skipped — ${err instanceof Error ? err.message : String(err)}\n` +

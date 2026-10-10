@@ -1,9 +1,5 @@
 import { createHash } from "node:crypto";
-import type {
-  Processor,
-  ProcessInputArgs,
-  ProcessInputStepArgs,
-} from "@mastra/core/processors";
+import type { Processor, ProcessInputArgs, ProcessInputStepArgs } from "@mastra/core/processors";
 import type { MastraDBMessage } from "@mastra/core/agent";
 import { modelReadsPdf } from "../models";
 
@@ -36,8 +32,7 @@ function isPdfPart(part: unknown): part is FilePart & { data: string } {
   return (
     p?.type === "file" &&
     typeof p.data === "string" &&
-    (p.mimeType === "application/pdf" ||
-      p.data.startsWith("data:application/pdf"))
+    (p.mimeType === "application/pdf" || p.data.startsWith("data:application/pdf"))
   );
 }
 
@@ -85,8 +80,7 @@ async function rasterizePdfParts(
           continue;
         }
         const pngs = await pdfToPngPages(rawBase64(part.data));
-        const name =
-          (part as { filename?: string }).filename ?? "attached PDF";
+        const name = (part as { filename?: string }).filename ?? "attached PDF";
         newParts.push({
           type: "text",
           text: `[${name} — rendered as ${pngs.length} page image(s)${

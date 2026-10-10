@@ -27,9 +27,7 @@ export interface PerUserResetResult {
  * left with Postgres), Mastra threads, and documents (metadata rows AND
  * their local blob files).
  */
-export async function resetCurrentUserData(
-  userId: string,
-): Promise<PerUserResetResult> {
+export async function resetCurrentUserData(userId: string): Promise<PerUserResetResult> {
   await ensureAppSchema();
   const db = getAppDb();
 

@@ -70,8 +70,6 @@ export function lookupStandardDeduction(
   taxYear: number,
   filingStatus: FilingStatus,
 ): number | undefined {
-  const table = TABLES.find(
-    (t) => t.jurisdiction === jurisdiction && t.taxYear === taxYear,
-  );
+  const table = TABLES.find((t) => t.jurisdiction === jurisdiction && t.taxYear === taxYear);
   return table?.byFilingStatus[filingStatus];
 }

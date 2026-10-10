@@ -13,8 +13,7 @@ import { getOwnerSession } from "@/lib/localAuth";
  * flows without buffering.
  */
 
-const AGENT_INTERNAL_URL =
-  process.env.AGENT_INTERNAL_URL ?? "http://127.0.0.1:4111";
+const AGENT_INTERNAL_URL = process.env.AGENT_INTERNAL_URL ?? "http://127.0.0.1:4111";
 
 async function forward(
   request: NextRequest,
@@ -26,10 +25,7 @@ async function forward(
   }
 
   const { path } = await params;
-  const target = new URL(
-    `/${path.join("/")}${request.nextUrl.search}`,
-    AGENT_INTERNAL_URL,
-  );
+  const target = new URL(`/${path.join("/")}${request.nextUrl.search}`, AGENT_INTERNAL_URL);
 
   const headers = new Headers();
   const contentType = request.headers.get("content-type");

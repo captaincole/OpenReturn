@@ -50,7 +50,4 @@ export function registerAllForms(): void {
  * (`buildCaseState`, `generateTaxDocuments`) import this directly instead
  * of loading catalogs from disk.
  */
-export const catalog: Catalog = buildCatalogFromFixtures([
-  ...FEDERAL_CATALOGS,
-  ...STATE_CATALOGS,
-]);
+export const catalog: Catalog = buildCatalogFromFixtures([...FEDERAL_CATALOGS, ...STATE_CATALOGS]);

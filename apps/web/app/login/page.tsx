@@ -43,13 +43,9 @@ export default function LoginPage() {
 
       <div className="relative z-10 w-full max-w-sm animate-fade-in">
         <div className="mb-10 text-center">
-          <div className="text-ink-muted text-[11px] uppercase tracking-[0.28em] mb-4">
-            Summa
-          </div>
+          <div className="text-ink-muted text-[11px] uppercase tracking-[0.28em] mb-4">Summa</div>
           <h1 className="font-serif text-4xl text-ink-primary mb-3">Sign in</h1>
-          <p className="text-ink-secondary text-sm">
-            Enter your password to unlock this instance.
-          </p>
+          <p className="text-ink-secondary text-sm">Enter your password to unlock this instance.</p>
         </div>
 
         <form onSubmit={onSubmit} className="space-y-3">
@@ -63,11 +59,7 @@ export default function LoginPage() {
             className="input-base"
           />
           {error && <div className="text-red-400 text-sm px-1">{error}</div>}
-          <button
-            type="submit"
-            disabled={submitting || !password}
-            className="btn-primary"
-          >
+          <button type="submit" disabled={submitting || !password} className="btn-primary">
             {submitting ? "Signing in…" : "Sign in"}
           </button>
         </form>

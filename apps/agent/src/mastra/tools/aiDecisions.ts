@@ -79,10 +79,7 @@ export const recordAIDecision = createTool({
      * from the wrapper.
      */
     void reviewDecision(scope, id).catch((err) => {
-      console.error(
-        `[review-decision] background run failed for decision ${id}:`,
-        err,
-      );
+      console.error(`[review-decision] background run failed for decision ${id}:`, err);
     });
 
     return {

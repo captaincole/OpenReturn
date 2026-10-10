@@ -68,12 +68,7 @@ export async function renderPageWithOverlay(opts: {
     const pad = 1;
     ctx.strokeStyle = "rgba(220, 30, 30, 0.95)";
     ctx.lineWidth = 2;
-    ctx.strokeRect(
-      left - pad,
-      top - pad,
-      width + pad * 2,
-      height + pad * 2,
-    );
+    ctx.strokeRect(left - pad, top - pad, width + pad * 2, height + pad * 2);
 
     /*
      * Draw the number badge INSIDE the widget rectangle (top-left corner).

@@ -28,14 +28,8 @@
  */
 
 import { PDFDocument, PDFTextField, PDFCheckBox, PDFRadioGroup } from "pdf-lib";
-import {
-  type AnyFormField,
-  type EvaluatedForm,
-} from "../types.js";
-import {
-  type Catalog,
-  type FieldInventory,
-} from "../catalog.js";
+import { type AnyFormField, type EvaluatedForm } from "../types.js";
+import { type Catalog, type FieldInventory } from "../catalog.js";
 import { getFormatter } from "../engine.js";
 import { verifiedWidget } from "./verifiedWidgets.js";
 
@@ -154,8 +148,7 @@ export async function fillFromCatalog(opts: {
     const value = field.result.value;
     if (value === null || value === undefined) continue;
 
-    const widgetName =
-      verifiedWidget(form.formId, field.fieldId) ?? inv.pdfWidgetName;
+    const widgetName = verifiedWidget(form.formId, field.fieldId) ?? inv.pdfWidgetName;
     fillByType(setText, check, selectRadio, widgetName, inv, value, form.jurisdiction);
   }
 
@@ -241,13 +234,8 @@ function fmtMoney(n: number | null | undefined): string {
  * sentences as the label (for example an 8949 page-2 name field whose
  * label included the word "SSN" from neighbouring text).
  */
-function coerceTextValue(
-  inv: FieldInventory,
-  value: string,
-  jurisdiction: string,
-): string {
-  const isFormatted =
-    inv.valueTypeRich === "ssn" || inv.valueTypeRich === "phone";
+function coerceTextValue(inv: FieldInventory, value: string, jurisdiction: string): string {
+  const isFormatted = inv.valueTypeRich === "ssn" || inv.valueTypeRich === "phone";
   if (isFormatted && jurisdiction === "federal") {
     return value.replace(/[^0-9]/g, "");
   }

@@ -82,8 +82,7 @@ export interface CaseState {
 export function computeOverallPct(forms: FormSummary[]): number {
   if (forms.length === 0) return 0;
   const computed = forms.filter(
-    (f) =>
-      f.mustFile.ok && (f.mustFile.value === false || f.blockedFieldCount === 0),
+    (f) => f.mustFile.ok && (f.mustFile.value === false || f.blockedFieldCount === 0),
   ).length;
   return Math.round((computed / forms.length) * 100);
 }

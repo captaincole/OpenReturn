@@ -65,9 +65,9 @@ export interface W2FactValue {
     thirdPartySickPay?: boolean;
   };
   box14?: W2Box14Entry[];
-  box15?: string;          // state
-  box16?: number;          // state wages
-  box17?: number;          // state income tax
+  box15?: string; // state
+  box16?: number; // state wages
+  box17?: number; // state income tax
 }
 
 export interface W2Fact {

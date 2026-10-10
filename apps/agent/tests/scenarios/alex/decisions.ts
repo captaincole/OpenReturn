@@ -25,11 +25,7 @@ export const alexDecisions: AIDecisionRow[] = [
     true,
     "W-2 wages $79,000 exceed the single-filer standard deduction; Alex must file.",
   ),
-  dec(
-    "decisions.scope.filing_status",
-    "single",
-    "Alex stated single filing status.",
-  ),
+  dec("decisions.scope.filing_status", "single", "Alex stated single filing status."),
   dec(
     "decisions.scope.has_reportable_sales",
     false,

@@ -33,9 +33,7 @@ export function deriveProfile(
   const email = owner?.email ?? null;
   const explicitName = owner?.displayName;
   const displayName =
-    explicitName && explicitName.trim().length > 0
-      ? explicitName.trim()
-      : deriveFromEmail(email);
+    explicitName && explicitName.trim().length > 0 ? explicitName.trim() : deriveFromEmail(email);
   const firstName = displayName.split(/\s+/)[0] ?? displayName;
   const initialsSource = displayName.split(/\s+/).filter(Boolean);
   const initials =

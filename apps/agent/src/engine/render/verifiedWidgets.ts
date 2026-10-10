@@ -37,16 +37,11 @@ export const VERIFIED_WIDGETS: Record<string, Record<string, string>> = {
     "form-1040.header.ssn": "topmostSubform[0].Page1[0].f1_16[0]",
 
     // Home address
-    "form-1040.header.address_street":
-      "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_20[0]",
-    "form-1040.header.address_apt":
-      "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_21[0]",
-    "form-1040.header.address_city":
-      "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_22[0]",
-    "form-1040.header.address_state":
-      "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_23[0]",
-    "form-1040.header.address_zip":
-      "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_24[0]",
+    "form-1040.header.address_street": "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_20[0]",
+    "form-1040.header.address_apt": "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_21[0]",
+    "form-1040.header.address_city": "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_22[0]",
+    "form-1040.header.address_state": "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_23[0]",
+    "form-1040.header.address_zip": "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_24[0]",
 
     // Filing status checkboxes
     "form-1040.header.filing_status_single":
@@ -92,10 +87,8 @@ export const VERIFIED_WIDGETS: Record<string, Record<string, string>> = {
      * has these reversed. Signature dates have no fillable widget on this
      * form; they are handwritten.
      */
-    "form-1040.signing.taxpayer_occupation":
-      "topmostSubform[0].Page2[0].f2_40[0]",
-    "form-1040.signing.spouse_occupation":
-      "topmostSubform[0].Page2[0].f2_42[0]",
+    "form-1040.signing.taxpayer_occupation": "topmostSubform[0].Page2[0].f2_40[0]",
+    "form-1040.signing.spouse_occupation": "topmostSubform[0].Page2[0].f2_42[0]",
   },
 };
 
@@ -104,9 +97,6 @@ export const VERIFIED_WIDGETS: Record<string, Record<string, string>> = {
  * when no verified mapping exists, so the renderer can fall back to the
  * AI catalog's pdfWidgetName.
  */
-export function verifiedWidget(
-  formId: string,
-  fieldId: string,
-): string | null {
+export function verifiedWidget(formId: string, fieldId: string): string | null {
   return VERIFIED_WIDGETS[formId]?.[fieldId] ?? null;
 }

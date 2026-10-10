@@ -73,12 +73,6 @@ export const mastra = new Mastra({
        */
       ownerMiddleware,
     ],
-    apiRoutes: [
-      appStateRoute,
-      createFilingRoute,
-      deleteFilingRoute,
-      sessionResetRoute,
-    ],
+    apiRoutes: [appStateRoute, createFilingRoute, deleteFilingRoute, sessionResetRoute],
   },
 });
-

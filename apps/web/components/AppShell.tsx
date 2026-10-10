@@ -29,11 +29,7 @@ import {
 import { useRouter } from "next/navigation";
 import { TopBar } from "@/components/TopBar";
 import { ChatPane } from "@/components/ChatPane";
-import {
-  fetchState,
-  UnauthorizedError,
-  type CaseState,
-} from "@/lib/api";
+import { fetchState, UnauthorizedError, type CaseState } from "@/lib/api";
 import { makeMastraClient } from "@/lib/mastraClient";
 import { LUCA_AGENT_ID } from "@/lib/chatSession";
 import { threadIdFor, type TaxReturn } from "@/lib/returns";
@@ -175,8 +171,7 @@ export function AppShell({
           .filter((p): p is { type: "text"; text: string } => p.type === "text")
           .map((p) => p.text)
           .join("");
-        const attachmentName =
-          m.content?.experimental_attachments?.[0]?.name ?? undefined;
+        const attachmentName = m.content?.experimental_attachments?.[0]?.name ?? undefined;
         if (!text && !attachmentName) continue;
         converted.push({
           id: m.id,
@@ -274,15 +269,12 @@ export function AppShell({
       }
 
       const client = await makeMastraClient();
-      const stream = await client.getAgent(LUCA_AGENT_ID).stream(
-        payload as string,
-        {
-          memory: {
-            thread: threadIdFor(userIdFresh, activeReturn.id),
-            resource: userIdFresh,
-          },
+      const stream = await client.getAgent(LUCA_AGENT_ID).stream(payload as string, {
+        memory: {
+          thread: threadIdFor(userIdFresh, activeReturn.id),
+          resource: userIdFresh,
         },
-      );
+      });
 
       await stream.processDataStream({
         onChunk: async (chunk) => {
@@ -290,9 +282,7 @@ export function AppShell({
             const delta = (chunk.payload as { text: string }).text;
             setMessages((m) =>
               m.map((msg) =>
-                msg.id === assistantMsg.id
-                  ? { ...msg, content: msg.content + delta }
-                  : msg,
+                msg.id === assistantMsg.id ? { ...msg, content: msg.content + delta } : msg,
               ),
             );
           }
@@ -309,9 +299,7 @@ export function AppShell({
             ? err.message
             : "Something went wrong.";
       setMessages((m) =>
-        m.map((msg) =>
-          msg.id === assistantMsg.id ? { ...msg, content: `[${message}]` } : msg,
-        ),
+        m.map((msg) => (msg.id === assistantMsg.id ? { ...msg, content: `[${message}]` } : msg)),
       );
       if (err instanceof UnauthorizedError) {
         await signOut();

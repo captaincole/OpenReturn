@@ -28,13 +28,19 @@ export function Markdown({ children }: { children: string }) {
           </a>
         ),
         p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
-        ul: ({ children }) => <ul className="list-disc pl-5 mb-3 last:mb-0 space-y-1">{children}</ul>,
-        ol: ({ children }) => <ol className="list-decimal pl-5 mb-3 last:mb-0 space-y-1">{children}</ol>,
+        ul: ({ children }) => (
+          <ul className="list-disc pl-5 mb-3 last:mb-0 space-y-1">{children}</ul>
+        ),
+        ol: ({ children }) => (
+          <ol className="list-decimal pl-5 mb-3 last:mb-0 space-y-1">{children}</ol>
+        ),
         li: ({ children }) => <li>{children}</li>,
         h1: ({ children }) => <h1 className="font-serif text-2xl mb-3 mt-1">{children}</h1>,
         h2: ({ children }) => <h2 className="font-serif text-xl mb-2 mt-3">{children}</h2>,
         h3: ({ children }) => <h3 className="font-medium text-base mb-2 mt-3">{children}</h3>,
-        strong: ({ children }) => <strong className="font-semibold text-ink-primary">{children}</strong>,
+        strong: ({ children }) => (
+          <strong className="font-semibold text-ink-primary">{children}</strong>
+        ),
         em: ({ children }) => <em className="italic">{children}</em>,
         code: ({ children, className }) => {
           const isBlock = className?.startsWith("language-");
@@ -70,10 +76,7 @@ export function Markdown({ children }: { children: string }) {
         ),
         tr: ({ children }) => <tr>{children}</tr>,
         th: ({ children, style }) => (
-          <th
-            className="px-3 py-2 text-left font-semibold text-ink-primary"
-            style={style}
-          >
+          <th className="px-3 py-2 text-left font-semibold text-ink-primary" style={style}>
             {children}
           </th>
         ),
@@ -82,9 +85,7 @@ export function Markdown({ children }: { children: string }) {
             {children}
           </td>
         ),
-        del: ({ children }) => (
-          <del className="text-ink-muted line-through">{children}</del>
-        ),
+        del: ({ children }) => <del className="text-ink-muted line-through">{children}</del>,
       }}
     >
       {children}

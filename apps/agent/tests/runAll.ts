@@ -25,11 +25,7 @@ import { alejandroScenario } from "./scenarios/alejandro/index.js";
 import { marcusScenario } from "./scenarios/marcus/index.js";
 import { CATALOGS, runCatalogFillCheck } from "./catalogFill.js";
 
-const SCENARIOS: Scenario[] = [
-  alexScenario,
-  alejandroScenario,
-  marcusScenario,
-];
+const SCENARIOS: Scenario[] = [alexScenario, alejandroScenario, marcusScenario];
 
 async function main() {
   const filters = process.argv

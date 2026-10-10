@@ -52,15 +52,46 @@ export function register(): void {
         return typeof v === "string" ? v : undefined;
       },
       // Line 1z Column A = lines 1a–1h federal amounts per form instructions.
-      "0.line.1z_federal": (f) => sum(f["0.line.1a_federal"], f["0.line.1b_federal"], f["0.line.1c_federal"], f["0.line.1d_federal"], f["0.line.1e_federal"], f["0.line.1f_federal"], f["0.line.1g_federal"], f["0.line.1h_federal"]),
+      "0.line.1z_federal": (f) =>
+        sum(
+          f["0.line.1a_federal"],
+          f["0.line.1b_federal"],
+          f["0.line.1c_federal"],
+          f["0.line.1d_federal"],
+          f["0.line.1e_federal"],
+          f["0.line.1f_federal"],
+          f["0.line.1g_federal"],
+          f["0.line.1h_federal"],
+        ),
       // Cross-form reference: Form 1040 line 3b (ordinary dividends) into Column A.
       "0.line.3b_federal": (f) => sum(f["form-1040.line.3b"]),
       // Column A capital gain/(loss), carried from federal Form 1040 line 7a.
       "0.line.7a_federal": (f) => sum(f["form-1040.line.7a"]),
       // Line 10 Column A = Section A (1z, 2b, 3b, 4b, 5b, 6b, 7a) + Section B (b1–b7, b9a) federal amounts.
-      "2.line.b10_federal": (f) => sum(f["0.line.1z_federal"], f["0.line.2b_federal"], f["0.line.3b_federal"], f["0.line.4b_federal"], f["0.line.5b_federal"], f["0.line.6b_federal"], f["0.line.7a_federal"], f["0.line.b1_federal"], f["0.line.b2a_federal"], f["0.line.b3_federal"], f["0.line.b4_federal"], f["0.line.b5_federal"], f["0.line.b6_federal"], f["0.line.b7_federal"], f["2.line.b9a_federal"]),
+      "2.line.b10_federal": (f) =>
+        sum(
+          f["0.line.1z_federal"],
+          f["0.line.2b_federal"],
+          f["0.line.3b_federal"],
+          f["0.line.4b_federal"],
+          f["0.line.5b_federal"],
+          f["0.line.6b_federal"],
+          f["0.line.7a_federal"],
+          f["0.line.b1_federal"],
+          f["0.line.b2a_federal"],
+          f["0.line.b3_federal"],
+          f["0.line.b4_federal"],
+          f["0.line.b5_federal"],
+          f["0.line.b6_federal"],
+          f["0.line.b7_federal"],
+          f["2.line.b9a_federal"],
+        ),
       // Line 27 Column A = line 10 minus line 26 in Column A. This yields federal AGI, matching form-1040 line 11b.
-      "3.line.c27_federal": (f) => sum(f["2.line.b10_federal"], f["3.line.c26_federal"] === undefined ? 0 : -f["3.line.c26_federal"]),
+      "3.line.c27_federal": (f) =>
+        sum(
+          f["2.line.b10_federal"],
+          f["3.line.c26_federal"] === undefined ? 0 : -f["3.line.c26_federal"],
+        ),
       /*
        * MANUAL EDIT: AI flagged this as unsupported ("no max() rule"),
        * but the engine's `floor(min, value)` IS max-with-floor. Look up
@@ -79,254 +110,491 @@ export function register(): void {
     },
 
     unsupported: {
-      "0.line.1b_federal": "Household-employee wages not reported on W-2 (federal 1040 line 1b) — no scenario modeled yet.",
-      "0.line.1c_federal": "Tip income not reported on line 1a (federal 1040 line 1c) — no scenario modeled yet.",
-      "0.line.1d_federal": "Medicaid waiver payments not reported on W-2 (federal 1040 line 1d) — no scenario modeled yet.",
-      "0.line.1e_federal": "Taxable dependent care benefits from Form 2441 (federal 1040 line 1e) — no scenario modeled yet.",
-      "0.line.1f_federal": "Employer-provided adoption benefits from Form 8839 (federal 1040 line 1f) — no scenario modeled yet.",
+      "0.line.1b_federal":
+        "Household-employee wages not reported on W-2 (federal 1040 line 1b) — no scenario modeled yet.",
+      "0.line.1c_federal":
+        "Tip income not reported on line 1a (federal 1040 line 1c) — no scenario modeled yet.",
+      "0.line.1d_federal":
+        "Medicaid waiver payments not reported on W-2 (federal 1040 line 1d) — no scenario modeled yet.",
+      "0.line.1e_federal":
+        "Taxable dependent care benefits from Form 2441 (federal 1040 line 1e) — no scenario modeled yet.",
+      "0.line.1f_federal":
+        "Employer-provided adoption benefits from Form 8839 (federal 1040 line 1f) — no scenario modeled yet.",
       "0.line.1g_federal": "Wages from Form 8919 (federal 1040 line 1g) — no scenario modeled yet.",
       "0.line.1h_federal": "Other earned income (federal 1040 line 1h) — no scenario modeled yet.",
-      "0.line.1z_subtractions": "Aggregate of line 1 subtractions; all upstream rows are unsupported.",
+      "0.line.1z_subtractions":
+        "Aggregate of line 1 subtractions; all upstream rows are unsupported.",
       "0.line.2a_federal": "Tax-exempt interest (federal 1040 line 2a) — no scenario modeled yet.",
       "0.line.2b_federal": "Taxable interest (federal 1040 line 2b) — no scenario modeled yet.",
-      "0.line.4a_federal": "IRA distributions gross (federal 1040 line 4a) — no scenario modeled yet.",
-      "0.line.4b_federal": "IRA distributions taxable amount (federal 1040 line 4b) — no scenario modeled yet.",
-      "0.line.5a_federal": "Pensions and annuities gross (federal 1040 line 5a) — no scenario modeled yet.",
-      "0.line.5b_federal": "Pensions and annuities taxable amount (federal 1040 line 5b) — no scenario modeled yet.",
-      "0.line.6a_federal": "Social Security benefits gross (federal 1040 line 6a) — no scenario modeled yet.",
-      "0.line.6b_federal": "Social Security benefits taxable amount (federal 1040 line 6b) — no scenario modeled yet.",
-      "0.line.6b_subtractions": "CA fully excludes US Social Security from taxable income; depends on 6b_federal which is unsupported.",
-      "2.line.b9a_federal": "Section B line 9a (total other income, col A) — aggregates Schedule 1-style other-income rows we don't ingest yet.",
-      "2.line.b9a_subtractions": "Section B line 9a col B — aggregates other-income subtractions we don't model yet.",
-      "2.line.b9a_additions": "Section B line 9a col C — aggregates other-income additions we don't model yet.",
-      "2.line.b10_subtractions": "Line 10 col B (total income subtractions) — aggregate over unsupported subtraction rows.",
-      "2.line.c11_subtractions": "CA disallows educator expenses; depends on line 11 col A federal echo which we don't ingest yet.",
-      "2.line.c13_subtractions": "CA disallows HSA deduction; depends on line 13 col A federal echo which we don't ingest yet.",
-      "3.line.c24i_subtractions": "Form 2555 foreign housing deduction (line 24i) col B — no scenario modeled yet.",
-      "3.line.c24j_subtractions": "Form 2555 housing deduction (line 24j) col B — no scenario modeled yet.",
-      "3.line.c25_federal": "Line 25 col A — aggregates 24a-24z col A; all upstream rows are unsupported.",
-      "3.line.c25_subtractions": "Line 25 col B — aggregates 24a-24z col B; all upstream rows are unsupported.",
-      "3.line.c25_additions": "Line 25 col C — aggregates 24a-24z col C; all upstream rows are unsupported.",
-      "3.line.c26_federal": "Line 26 col A — aggregates 11-23+25 col A; all upstream rows are unsupported.",
-      "3.line.c26_subtractions": "Line 26 col B — aggregates 11-23+25 col B; all upstream rows are unsupported.",
-      "3.line.c26_additions": "Line 26 col C — aggregates 11-23+25 col C; all upstream rows are unsupported.",
-      "3.line.c27_subtractions": "Line 27 col B (CA AGI subtractions) — aggregate over unsupported rows.",
+      "0.line.4a_federal":
+        "IRA distributions gross (federal 1040 line 4a) — no scenario modeled yet.",
+      "0.line.4b_federal":
+        "IRA distributions taxable amount (federal 1040 line 4b) — no scenario modeled yet.",
+      "0.line.5a_federal":
+        "Pensions and annuities gross (federal 1040 line 5a) — no scenario modeled yet.",
+      "0.line.5b_federal":
+        "Pensions and annuities taxable amount (federal 1040 line 5b) — no scenario modeled yet.",
+      "0.line.6a_federal":
+        "Social Security benefits gross (federal 1040 line 6a) — no scenario modeled yet.",
+      "0.line.6b_federal":
+        "Social Security benefits taxable amount (federal 1040 line 6b) — no scenario modeled yet.",
+      "0.line.6b_subtractions":
+        "CA fully excludes US Social Security from taxable income; depends on 6b_federal which is unsupported.",
+      "2.line.b9a_federal":
+        "Section B line 9a (total other income, col A) — aggregates Schedule 1-style other-income rows we don't ingest yet.",
+      "2.line.b9a_subtractions":
+        "Section B line 9a col B — aggregates other-income subtractions we don't model yet.",
+      "2.line.b9a_additions":
+        "Section B line 9a col C — aggregates other-income additions we don't model yet.",
+      "2.line.b10_subtractions":
+        "Line 10 col B (total income subtractions) — aggregate over unsupported subtraction rows.",
+      "2.line.c11_subtractions":
+        "CA disallows educator expenses; depends on line 11 col A federal echo which we don't ingest yet.",
+      "2.line.c13_subtractions":
+        "CA disallows HSA deduction; depends on line 13 col A federal echo which we don't ingest yet.",
+      "3.line.c24i_subtractions":
+        "Form 2555 foreign housing deduction (line 24i) col B — no scenario modeled yet.",
+      "3.line.c24j_subtractions":
+        "Form 2555 housing deduction (line 24j) col B — no scenario modeled yet.",
+      "3.line.c25_federal":
+        "Line 25 col A — aggregates 24a-24z col A; all upstream rows are unsupported.",
+      "3.line.c25_subtractions":
+        "Line 25 col B — aggregates 24a-24z col B; all upstream rows are unsupported.",
+      "3.line.c25_additions":
+        "Line 25 col C — aggregates 24a-24z col C; all upstream rows are unsupported.",
+      "3.line.c26_federal":
+        "Line 26 col A — aggregates 11-23+25 col A; all upstream rows are unsupported.",
+      "3.line.c26_subtractions":
+        "Line 26 col B — aggregates 11-23+25 col B; all upstream rows are unsupported.",
+      "3.line.c26_additions":
+        "Line 26 col C — aggregates 11-23+25 col C; all upstream rows are unsupported.",
+      "3.line.c27_subtractions":
+        "Line 27 col B (CA AGI subtractions) — aggregate over unsupported rows.",
       "3.line.c27_additions": "Line 27 col C (CA AGI additions) — aggregate over unsupported rows.",
-      "4.page2.taxes_5d_federal": "Schedule CA Part II line 5d (taxes paid, col A) — itemized-deduction workflow not supported yet.",
-      "4.page2.taxes_5e_subtractions": "Schedule CA Part II line 5e col B — itemized-deduction workflow not supported yet.",
-      "4.page2.taxes_7_federal": "Schedule CA Part II line 7 col A — itemized-deduction workflow not supported yet.",
-      "4.page2.taxes_7_subtractions": "Schedule CA Part II line 7 col B — itemized-deduction workflow not supported yet.",
-      "4.page2.taxes_7_additions": "Schedule CA Part II line 7 col C — itemized-deduction workflow not supported yet.",
-      "4.page2.interest_8e_federal": "Schedule CA Part II line 8e col A (mortgage interest) — itemized-deduction workflow not supported yet.",
-      "4.page2.interest_10_federal": "Schedule CA Part II line 10 col A — itemized-deduction workflow not supported yet.",
-      "4.page2.interest_10_subtractions": "Schedule CA Part II line 10 col B — itemized-deduction workflow not supported yet.",
-      "4.page2.interest_10_additions": "Schedule CA Part II line 10 col C — itemized-deduction workflow not supported yet.",
-      "5.page2.charity_14_federal": "Schedule CA Part II line 14 col A (gifts to charity) — itemized-deduction workflow not supported yet.",
-      "5.page2.charity_14_subtractions": "Schedule CA Part II line 14 col B — itemized-deduction workflow not supported yet.",
-      "5.page2.charity_14_additions": "Schedule CA Part II line 14 col C — itemized-deduction workflow not supported yet.",
-      "5.page2.total_itemized_17_federal": "Schedule CA Part II line 17 col A (total itemized) — itemized-deduction workflow not supported yet.",
-      "5.page2.total_itemized_17_additions": "Schedule CA Part II line 17 col C — itemized-deduction workflow not supported yet.",
-      "5.page2.total_itemized_18_combined": "Schedule CA Part II line 18 (combined) — itemized-deduction workflow not supported yet.",
-      "5.page2.job_expenses_22_total": "Schedule CA Part II line 22 (job expenses subtotal) — itemized-deduction workflow not supported yet.",
-      "5.page2.job_expenses_25_net": "Schedule CA Part II line 25 (net job expenses) — itemized-deduction workflow not supported yet.",
-      "5.page2.total_itemized_26": "Schedule CA Part II line 26 (itemized + job expenses subtotal) — itemized-deduction workflow not supported yet.",
-      "5.page2.total_itemized_28": "Schedule CA Part II line 28 — itemized-deduction workflow not supported yet.",
-      "0.line.3a_federal": "Schedule CA Part I line 3a Column A (federal amounts) is conventionally left blank: per CA instructions, dividends generally match between federal and CA, so col A is only meaningful when there's a CA-specific adjustment in col B/C — which we don't model yet.",
-      "4.page2.medical_agi_line11b": "Schedule CA Part II medical-deduction worksheet AGI input — only relevant when itemizing medical/dental expenses. We don't support non-standard-deduction workflows yet.",
-      "5.page2.job_expenses_23_agi": "Schedule CA Part II job-expenses worksheet AGI input — only relevant when itemizing unreimbursed job expenses. We don't support non-standard-deduction workflows yet.",
-      "0.line.1a_subtractions": "CA-specific subtraction adjustments to W-2 wages (e.g. active-duty military pay exclusions, combat zone exclusions) require specialized facts/scenarios not yet ingested.",
-      "0.line.1a_additions": "CA-specific addition adjustments to W-2 wages (e.g. combat zone income re-inclusions) require specialized facts/scenarios not yet ingested.",
-      "0.line.1b_subtractions": "CA-specific subtraction adjustments to household employee wages not on W-2; no scenario modeled yet.",
-      "0.line.1b_additions": "CA-specific addition adjustments to household employee wages not on W-2; no scenario modeled yet.",
-      "0.line.1c_subtractions": "CA-specific subtraction adjustments to tip income; no scenario modeled yet.",
-      "0.line.1c_additions": "No CA-specific addition scenario for tip income (line 1c). CA generally follows federal treatment; any addition would require FTB Pub 1001 guidance we haven't ingested. No known fact/decision path.",
-      "0.line.1d_subtractions": "No CA-specific subtraction scenario for Medicaid waiver payments. CA may exclude certain nontaxable Medicaid waiver payments per FTB Pub 1001, but no ingestion path or worked example exists yet.",
-      "0.line.1d_additions": "No CA-specific addition scenario for Medicaid waiver payments (line 1d). No known fact/decision path exists yet.",
-      "0.line.1e_subtractions": "No CA-specific subtraction scenario for taxable dependent care benefits (line 1e). CA generally conforms to federal; any adjustment would require Form 2441 CA-equivalent ingestion not yet built.",
-      "0.line.1e_additions": "No CA-specific addition scenario for taxable dependent care benefits (line 1e). No known fact/decision path exists yet.",
-      "0.line.1f_subtractions": "No CA-specific subtraction scenario for employer-provided adoption benefits (line 1f). CA may have different exclusion rules per FTB Pub 1001 but no ingestion path or worked example exists yet.",
-      "0.line.1f_additions": "No CA-specific addition scenario for employer-provided adoption benefits (line 1f). No known fact/decision path exists yet.",
-      "0.line.1g_subtractions": "No CA-specific subtraction scenario for Form 8919 wages has been modeled; no fact ingestion path exists for this adjustment.",
-      "0.line.1g_additions": "No CA-specific addition scenario for Form 8919 wages has been modeled; no fact ingestion path exists for this adjustment.",
-      "0.line.1h_subtractions": "CA subtractions for 'other earned income' (line 1h) depend on taxpayer-specific scenarios (e.g. ridesharing fringe benefits, CQSO exclusion) that have no ingested fact path yet.",
-      "0.line.1h_additions": "CA additions for 'other earned income' (line 1h) depend on taxpayer-specific scenarios (e.g. employer HSA contributions) that have no ingested fact path yet.",
-      "0.line.1i_additions": "Nontaxable combat pay addition applies only to active-duty military taxpayers in designated combat zones; no military/combat-zone fact ingestion scenario has been built yet.",
-      "0.line.2b_subtractions": "CA-specific subtractions to taxable interest (e.g. interest on US obligations exempt in CA) require fact ingestion we haven't built yet — no scenario modeled.",
-      "0.line.2b_additions": "CA-specific additions to taxable interest (e.g. interest on other-state obligations taxable in CA) require fact ingestion we haven't built yet — no scenario modeled.",
-      "0.line.3b_subtractions": "CA-specific subtractions to ordinary dividends (e.g. dividends from children included on parent's federal return but reported on child's CA return) require scenarios we haven't built yet.",
-      "0.line.3b_additions": "CA-specific additions to ordinary dividends (CFC dividends, RIC capital gain distributions, pre-1987 S-corp earnings, etc.) require scenarios we haven't built yet.",
-      "0.line.4b_subtractions": "CA IRA/pension subtraction adjustments (e.g. Tier 2 railroad retirement, three-year rule annuities) require ingestion of RRB-1099-R and specialized pension facts we don't yet model. No worked scenario exists for this.",
-      "0.line.4b_additions": "CA IRA distribution addition adjustments (e.g. pre-1987 annuity rule elections) require specialized pension/annuity facts not yet modeled. No worked scenario exists.",
-      "0.line.5b_subtractions": "CA pension/annuity subtraction adjustments (Tier 2 railroad retirement benefits, pre-1987 three-year rule) require RRB-1099-R and specialized pension scenario data not yet ingested.",
-      "0.line.5b_additions": "CA pension/annuity addition adjustments (pre-1987 three-year rule elections where CA uses different tax treatment) require specialized pension facts not yet modeled. No worked scenario exists.",
-      "0.line.7a_subtractions": "CA vs. federal capital gain adjustments (e.g. differences in depreciation recapture, installment sale basis, or CA-only exclusions) require Schedule D CA-specific computations or FTB 3885A data we have not ingested yet.",
-      "0.line.7a_additions": "CA vs. federal capital gain additions (e.g. CA-only gain recognition differences) require Schedule D CA-specific computations we have not ingested yet.",
-      "0.line.b1_federal": "Federal Schedule 1 (Form 1040) line 1 (taxable state/local tax refunds) is not exposed as an individual fieldId in the ingested form-1040 catalog — only the Schedule 1 total (line 10) flows into form-1040 line 8. No individual Schedule 1 line facts are ingested yet.",
-      "0.line.b1_subtractions": "CA subtraction for state income tax refunds (not taxable in CA) requires knowledge of the taxable refund amount from federal Schedule 1 line 1, which is not ingested as a separate fact or field.",
-      "0.line.b2b_divorce_date": "Date of original divorce or separation agreement is taxpayer-specific data we have no fact ingestion path for; no alimony/divorce scenario has been built.",
-      "0.line.b2a_federal": "Alimony received (federal Schedule 1 line 2a) is not exposed as an individual fieldId in the ingested form-1040 catalog, and no alimony fact key exists in the available facts.",
-      "0.line.b2a_additions": "CA addition for alimony received under post-2018 or post-2025 agreements requires alimony fact data and divorce agreement date logic not yet ingested or modeled.",
-      "0.line.b3_federal": "Business income/(loss) from federal Schedule 1 line 3 (Schedule C) is not exposed as an individual fieldId in the ingested form-1040 catalog, and no Schedule C / self-employment business income fact key exists in the available facts.",
-      "0.line.b3_subtractions": "CA adjustments to business income/(loss) (e.g. CA vs. federal depreciation differences via FTB 3885A) require Schedule C and CA depreciation adjustment data not yet ingested.",
-      "0.line.b3_additions": "Business income CA additions (Sch CA Section B line 3 col C) require CA-specific depreciation/basis adjustments per FTB 3885A and related forms; no ingestion path for Schedule C or depreciation adjustments yet.",
-      "0.line.b4_federal": "Other gains/losses (Sch CA Section B line 4 col A) comes from federal Schedule 1 line 4 (Form 4797 gains/losses); federal Schedule 1 is not an ingested form and we have no Form 4797 fact ingestion path.",
-      "0.line.b4_subtractions": "Other gains/losses CA subtractions (Sch CA Section B line 4 col B) require CA-specific basis and depreciation adjustments for Form 4797 transactions; no ingestion path for Schedule 1 or Form 4797 yet.",
-      "0.line.b4_additions": "Other gains/losses CA additions (Sch CA Section B line 4 col C) require CA-specific basis adjustments for Form 4797 transactions; no ingestion path for Schedule 1 or Form 4797 yet.",
-      "0.line.b5_federal": "Rental real estate/partnerships/S-corps/trusts (Sch CA Section B line 5 col A) comes from federal Schedule 1 line 5 (Schedule E); federal Schedule 1 and Schedule E are not ingested forms and we have no K-1/pass-through fact ingestion path.",
-      "0.line.b5_subtractions": "Rental/partnership/S-corp CA subtractions (Sch CA Section B line 5 col B) require FTB 3801/3885A passive activity and depreciation adjustments; no ingestion path for K-1 or Schedule E data yet.",
-      "0.line.b5_additions": "Rental/partnership/S-corp CA additions (Sch CA Section B line 5 col C) require FTB 3801/3885A passive activity and depreciation adjustments; no ingestion path for K-1 or Schedule E data yet.",
-      "0.line.b6_federal": "Farm income/loss (Sch CA Section B line 6 col A) comes from federal Schedule 1 line 6 (Schedule F); federal Schedule 1 and Schedule F are not ingested forms and we have no farm income fact ingestion path.",
-      "0.line.b6_subtractions": "Farm income CA subtractions (Sch CA Section B line 6 col B) require FTB 3801 passive activity and CA depreciation adjustments for farm activities; no Schedule F or farm fact ingestion path yet.",
-      "0.line.b6_additions": "Farm income CA additions (Sch CA Section B line 6 col C) require FTB 3801 passive activity and CA depreciation adjustments for farm activities; no Schedule F or farm fact ingestion path yet.",
-      "0.line.b7_federal": "Unemployment compensation flows from federal Schedule 1 line 2, which is not yet ingested. No unemployment_income fact category exists in the current fact model.",
-      "0.line.b7_subtractions": "CA subtracts all unemployment compensation (equals column A). However, column A (b7_federal) is itself unsupported because Schedule 1 is not ingested. Cannot derive this subtraction until the federal source is available.",
-      "1.line.b8a_federal": "Federal net operating loss from Schedule 1 line 8a. Schedule 1 is not ingested and there is no NOL fact category in the current fact model.",
-      "1.line.b8a_additions": "CA requires the federal NOL amount (column A) to be added back in column C because CA computes its own NOL via FTB 3805V. Column A source is unsupported (Schedule 1 not ingested) and FTB 3805V NOL is not modeled.",
-      "1.line.b8b_federal": "Gambling income from Schedule 1 line 8b. Schedule 1 is not ingested and there is no gambling income fact category in the current fact model.",
-      "1.line.b8b_subtractions": "CA subtracts California lottery winnings from gambling income. No CA lottery winnings fact category exists, and the column A source (Schedule 1 line 8b) is not ingested. This subtraction requires a scenario with CA lottery income.",
-      "1.line.b8c_federal": "Cancellation of debt income from Schedule 1 line 8c (1099-C). Schedule 1 is not ingested and there is no cancellation_of_debt fact category in the current fact model.",
-      "1.line.b8c_subtractions": "CA may allow a subtraction for mortgage forgiveness debt relief (Cancellation of Debt). No cancellation_of_debt fact category exists and Schedule 1 is not ingested. Requires a scenario with COD income and CA mortgage forgiveness exclusion.",
-      "1.line.b8c_additions": "CA additions for cancellation of debt (e.g. non-federal excluded COD amounts). No cancellation_of_debt fact category exists and Schedule 1 is not ingested.",
-      "1.line.b8d_federal": "Foreign earned income exclusion from federal Form 2555 line 45. No foreign income scenario or Form 2555 fact ingestion path exists. CA does not allow the federal foreign earned income exclusion, so this amount also requires a column C addition on line 8d.",
-      "1.line.b8d_additions": "Column C additions for foreign earned income exclusion (Form 2555) — CA does not conform for certain combat-zone contractors, but no fact/decision ingestion path exists for Form 2555 scenarios yet.",
-      "1.line.b8e_federal": "Income from federal Form 8853 (Archer MSAs and Long-Term Care Insurance Contracts) — no fact ingestion path for Form 8853 data exists yet.",
-      "1.line.b8e_additions": "Column C additions for Form 8853 income — no fact ingestion path for Form 8853 scenarios yet.",
-      "1.line.b8f_federal": "Income from federal Form 8889 (Health Savings Accounts) — no fact ingestion path for Form 8889 income/distribution data exists yet.",
-      "1.line.b8f_subtractions": "Column B subtractions for Form 8889 HSA income — CA does not conform to federal HSA treatment, but no Form 8889 fact ingestion path exists yet.",
-      "1.line.b8g_federal": "Alaska Permanent Fund dividends — niche income type specific to Alaska residents; no fact ingestion path exists.",
-      "1.line.b8h_federal": "Jury duty pay from federal Schedule 1 line 8h — no fact ingestion path for jury duty pay exists yet.",
-      "1.line.b8i_federal": "Prizes and awards from federal Schedule 1 line 8i — no fact ingestion path for prize/award income exists yet.",
-      "1.line.b8j_federal": "Activity not engaged in for profit (hobby) income from federal Schedule 1 line 8j — no fact ingestion path for hobby income exists yet.",
-      "1.line.b8k_federal": "Stock option income from federal Schedule 1 line 8k — no fact ingestion path for stock option income (separate from W-2 box 1 wages) exists yet.",
-      "1.line.b8k_additions": "Stock options CA addition adjustment requires stock option / equity compensation fact ingestion — no scenario built yet.",
-      "1.line.b8l_federal": "Rental of personal property income (not a rental business) has no fact ingestion path yet — no scenario built for this income type.",
-      "1.line.b8m_federal": "Olympic and Paralympic medal/USOC prize money income has no fact ingestion path — no athlete scenario built yet.",
-      "1.line.b8n_federal": "IRC §951(a) Subpart F inclusion (CFC income) has no fact ingestion path — no controlled foreign corporation scenario built yet.",
-      "1.line.b8n_subtractions": "IRC §951(a) CA subtraction adjustment requires CFC fact ingestion — no controlled foreign corporation scenario built yet.",
-      "1.line.b8o_federal": "IRC §951A(a) GILTI inclusion has no fact ingestion path — no GILTI/CFC scenario built yet.",
-      "1.line.b8o_subtractions": "IRC §951A(a) GILTI CA subtraction adjustment requires CFC/GILTI fact ingestion — no scenario built yet.",
-      "1.line.b8p_federal": "IRC §461(l) excess business loss adjustment requires Form 461 computation — no business loss scenario or FTB 3461 ingestion path built yet.",
-      "1.line.b8p_subtractions": "IRC §461(l) CA subtraction adjustment requires FTB 3461 computation — no excess business loss scenario built yet.",
-      "1.line.b8p_additions": "IRC §461(l) CA addition adjustment (CA does not conform to federal CARES/ARPA changes) requires FTB 3461 computation — no excess business loss scenario built yet.",
-      "1.line.b8q_federal": "No fact ingestion path for ABLE account distributions; no scenario modeled yet.",
-      "1.line.b8r_federal": "No fact ingestion path for scholarship/fellowship grants not reported on W-2; no scenario modeled yet.",
-      "1.line.b8s_federal": "No fact ingestion path for nontaxable Medicaid waiver payments included on 1040 line 1a/1d; no scenario modeled yet.",
-      "1.line.b8t_federal": "No fact ingestion path for pensions/annuities from nonqualified deferred compensation or nongovernmental 457 plans; no scenario modeled yet.",
-      "1.line.b8u_federal": "No fact ingestion path for wages earned while incarcerated; no scenario modeled yet.",
-      "1.line.b8v_federal": "No fact ingestion path for digital assets received as ordinary income (forks, staking, mining) not reported elsewhere; no scenario modeled yet.",
-      "1.line.b8v_subtractions": "No CA-specific subtraction rules ingested for digital asset ordinary income; no scenario modeled yet.",
-      "1.line.b8v_additions": "No CA-specific addition rules ingested for digital asset ordinary income; no scenario modeled yet.",
-      "1.line.b8z_income_type": "Free-text description of 'other income' type; no structured fact or decision maps to this catch-all label field.",
-      "1.line.b8z_federal": "No fact ingestion path for catch-all 'other income' amounts on Schedule 1 line 8z; no scenario modeled yet.",
-      "1.line.b8z_subtractions": "Line 8z 'Other income' CA subtractions are catch-all adjustments (e.g. Native American earned income, state income tax refunds reclassified, etc.) that require per-item CA guidance and no structured fact path exists for the general 8z bucket.",
-      "1.line.b8z_additions": "Line 8z 'Other income' CA additions are catch-all adjustments (e.g. expanded IRC 529 use, tribal income differences) requiring per-item CA guidance; no structured fact path exists for this bucket.",
-      "2.line.b9b1_subtractions": "CA-specific disaster loss deduction from FTB Form 3805V — no ingestion path for FTB 3805V data exists yet.",
-      "2.line.b9b2_subtractions": "CA-specific NOL deduction from FTB Form 3805V — no ingestion path for FTB 3805V data exists yet.",
-      "2.line.b9b3_subtractions": "CA-specific NOL deduction from FTB Forms 3805Z, 3807, or 3809 — no ingestion path for these FTB enterprise-zone NOL forms exists yet.",
-      "2.line.c11_federal": "Requires Schedule 1 (Form 1040) line 11 — federal Schedule 1 is not an ingested form in this roster; no fieldId available to reference.",
-      "2.line.c12_federal": "Requires Schedule 1 (Form 1040) line 12 — federal Schedule 1 is not an ingested form; no fieldId available to reference.",
-      "2.line.c12_subtractions": "CA adjustment for reservist/performing artist business expenses requires FTB Pub. 1001 analysis and Schedule 1 line 12 source data — no ingestion path for either yet.",
-      "2.line.c12_additions": "CA addition for reservist/performing artist business expenses (line 12, col C) requires FTB Pub. 1001 analysis and Schedule 1 line 12 source — no ingestion path yet.",
-      "2.line.c13_federal": "Requires Schedule 1 (Form 1040) line 13 (HSA deduction) — federal Schedule 1 is not an ingested form; no fieldId available to reference.",
-      "2.line.c14_federal": "Requires Schedule 1 (Form 1040) line 14 (moving expenses, military only federally) — federal Schedule 1 is not an ingested form; also no FTB 3913 ingestion path yet.",
-      "2.line.c14_additions": "CA moving expense addition (for non-military taxpayers who can deduct under CA but not federal) requires FTB 3913 data — no FTB 3913 ingestion path exists yet.",
-      "2.line.c15_federal": "Requires federal Schedule 1 line 15 (deductible part of self-employment tax). Schedule 1 is not an ingested form and its individual line fieldIds are not available on form-1040; no ingestion path for self-employment tax data yet.",
-      "2.line.c15_subtractions": "CA adjustment to SE tax deduction requires a self-employment scenario and Schedule SE data; neither is ingested yet.",
-      "2.line.c16_federal": "Requires federal Schedule 1 line 16 (self-employed SEP/SIMPLE/qualified plan deduction). Schedule 1 individual lines are not ingested; no self-employment retirement plan scenario yet.",
-      "2.line.c17_federal": "Requires federal Schedule 1 line 17 (self-employed health insurance deduction). Schedule 1 individual lines are not ingested; no self-employment health insurance scenario yet.",
-      "2.line.c17_subtractions": "CA subtraction for self-employed health insurance (line 17) requires a self-employment scenario; no such scenario or Schedule 1 line 17 ingestion path exists yet.",
-      "2.line.c18_federal": "Requires federal Schedule 1 line 18 (penalty on early withdrawal of savings). Schedule 1 individual lines are not ingested as separate fieldIds; no early-withdrawal-penalty fact ingestion path exists yet.",
-      "2.line.c19a_federal": "Requires federal Schedule 1 line 19a (alimony paid). Schedule 1 individual lines are not ingested; no alimony-paid scenario or fact ingestion path exists yet.",
-      "2.line.c19a_additions": "CA addition for alimony paid (post-2018/post-2025 divorce agreements differ between federal and CA law) requires an alimony scenario; no such scenario or fact ingestion path exists yet.",
-      "2.line.c19b_recipient_ssn": "SSN of alimony recipient — requires an alimony-paid scenario with recipient identity facts; no such scenario or fact ingestion path exists yet.",
-      "2.line.c19b_recipient_last_name": "Last name of alimony recipient — requires an alimony-paid scenario with recipient identity facts; no such scenario or fact ingestion path exists yet.",
-      "2.line.c19c_divorce_date": "Date of original divorce/separation agreement for alimony paid — no alimony-paid fact ingestion path exists yet; requires a scenario with alimony deductions.",
-      "2.line.c20_federal": "IRA deduction (federal Schedule 1 line 20) — no IRA deduction fact ingestion path exists yet; requires a retirement-contribution scenario.",
-      "2.line.c20_subtractions": "CA subtraction adjustment to IRA deduction (line 20 col B) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
-      "2.line.c20_additions": "CA addition adjustment to IRA deduction (line 20 col C) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
-      "2.line.c21_federal": "Student loan interest deduction (federal Schedule 1 line 21) — no student-loan fact ingestion path exists yet; requires a student-loan interest scenario.",
-      "2.line.c21_additions": "CA addition for student loan interest (line 21 col C) — CA does not conform to federal student loan interest deduction for certain years; no student-loan fact ingestion path exists yet.",
-      "2.line.c23_federal": "Archer MSA deduction (federal Schedule 1 line 23, from Form 8853) — no Archer MSA fact ingestion path exists; uncommon scenario not yet modeled.",
-      "3.line.c24a_federal": "Jury duty pay federal adjustment (Schedule 1 line 24a) — no jury-duty-pay fact ingestion path exists yet; uncommon scenario not yet modeled.",
-      "3.line.c24b_federal": "Deductible expenses for personal-property rental (Schedule 1 line 24b) — no personal-property-rental expense fact ingestion path exists yet.",
-      "3.line.c24b_subtractions": "CA subtraction for personal-property rental deductible expenses (line 24b col B) — no personal-property-rental expense fact ingestion path exists yet.",
-      "3.line.c24b_additions": "CA-specific addition for deductible expenses related to personal property rental income (line 8l). No fact ingestion path for personal property rental adjustments exists yet.",
-      "3.line.c24c_federal": "Federal amount for nontaxable Olympic/Paralympic medal value deduction (Schedule 1 line 24c). No ingestion for Olympic prize/medal income scenarios.",
-      "3.line.c24c_subtractions": "CA subtraction for nontaxable Olympic/Paralympic medal value. No ingestion for Olympic prize/medal income scenarios.",
-      "3.line.c24d_federal": "Federal amount for reforestation amortization and expenses (Form 4562). No ingestion for reforestation/forestry business scenarios.",
-      "3.line.c24d_subtractions": "CA subtraction for reforestation amortization and expenses. No ingestion for reforestation/forestry business scenarios.",
-      "3.line.c24e_federal": "Federal amount for repayment of supplemental unemployment benefits under the Trade Act of 1974. No ingestion for Trade Act repayment scenarios.",
-      "3.line.c24f_federal": "Federal amount for contributions to IRC Section 501(c)(18)(D) pension plans. No ingestion for this niche pension contribution type.",
-      "3.line.c24f_subtractions": "CA subtraction for IRC Section 501(c)(18)(D) pension plan contributions. No ingestion for this niche pension contribution type.",
-      "3.line.c24f_additions": "CA addition for IRC Section 501(c)(18)(D) pension plan contributions. No ingestion for this niche pension contribution type.",
-      "3.line.c24g_federal": "Federal amount for contributions by certain chaplains to IRC Section 403(b) plans (Pub. 517). No ingestion for chaplain/clergy 403(b) scenarios.",
-      "3.line.c24g_subtractions": "Chaplain IRC §403(b) plan contribution subtractions require a chaplain-specific fact we have not yet ingested; no scenario built for this.",
-      "3.line.c24g_additions": "Chaplain IRC §403(b) plan contribution additions require a chaplain-specific fact we have not yet ingested; no scenario built for this.",
-      "3.line.c24h_federal": "Attorney fees for unlawful discrimination claims (federal Schedule 1 line 24h) require a fact we have not yet ingested; no scenario built for this.",
-      "3.line.c24i_federal": "IRS whistleblower attorney fees (federal Schedule 1 line 24i) require a fact we have not yet ingested; no scenario built for this.",
-      "3.line.c24j_federal": "Housing deduction from Form 2555 (foreign housing exclusion) requires a foreign-income ingestion path we have not yet built; no foreign-income scenario exists.",
-      "3.line.c24k_federal": "Excess deductions of IRC §67(e) expenses from Schedule K-1 (Form 1041) require estate/trust K-1 fact ingestion we have not yet built; no such scenario exists.",
-      "3.line.c24z_income_type": "Free-text description for catch-all 'other adjustments' line 24z; no structured fact ingestion covers arbitrary other adjustments.",
-      "3.line.c24z_federal": "Catch-all 'other adjustments' line 24z amount; no structured fact ingestion covers arbitrary other adjustments.",
-      "3.line.c24z_subtractions": "Line 24z 'Other adjustments' Column B subtractions is a free-form catch-all for miscellaneous CA-specific subtraction adjustments not covered by lines 24a–24k. No fact or decision maps to this; needs scenario-specific ingestion.",
-      "3.line.c24z_additions": "Line 24z 'Other adjustments' Column C additions is a free-form catch-all for miscellaneous CA-specific addition adjustments. No fact or decision maps to this; needs scenario-specific ingestion.",
-      "4.page2.itemize_ca_not_federal": "No decision or scenario models the case where a taxpayer itemizes for CA but not federally. This checkbox requires a dedicated 'itemize_ca_not_federal' decision we haven't built yet.",
-      "4.page2.medical_dental_expenses": "No medical/dental expense facts have been ingested. This field requires a separate fact-ingestion path for unreimbursed medical costs (e.g. from federal Schedule A).",
-      "4.page2.medical_agi_threshold": "Requires multiplying line 2 by 7.5% — no multiply rule exists in the rule library. Cannot compute line 2 × 0.075 with available rules.",
-      "4.page2.medical_line4_federal": "Requires subtracting the unsupported medical_agi_threshold (line 3) from the unsupported medical_dental_expenses (line 1), floored at 0. Both upstream lines are unsupported so this line cannot be computed.",
-      "4.page2.medical_line4_additions": "CA additions for Part 2 medical line 4 require knowing the CA-specific medical threshold difference vs. federal, which depends on the unsupported medical expense and threshold lines. No scenario or fact path exists yet.",
-      "4.page2.taxes_5a_federal": "Requires federal Schedule A (Form 1040) line 5a (state and local income tax or general sales taxes). Schedule A has not been ingested as a catalog form; no fieldId available to reference.",
-      "4.page2.taxes_5a_subtractions": "CA requires that the state/local income tax amount from line 5a column A be fully entered as a subtraction in column B. However, the source (Schedule A line 5a federal amount) is itself unsupported because Schedule A is not ingested.",
-      "4.page2.taxes_5b_federal": "Requires federal Schedule A (Form 1040) line 5b (state and local real estate taxes). Schedule A has not been ingested as a catalog form; no fieldId available to reference.",
-      "4.page2.taxes_5c_federal": "No ingested fact for state and local personal property taxes; would require a Schedule A / personal property tax fact category we haven't built yet.",
-      "4.page2.taxes_5e_federal": "Requires min(line_5d, filing_status_cap) logic — the engine has no 'min of two values' rule. Line 5e Column A = smaller of line 5d or $40,000 ($20,000 MFS). Cannot express this with available rules.",
-      "4.page2.taxes_5e_additions": "Line 5e Column C = difference between line 5d and line 5e Column A (i.e., amount of SALT deduction over the $40k/$20k federal cap). Requires subtraction of two computed fields and depends on line 5e_federal being computed first; no rule supports this derived difference today.",
-      "4.page2.taxes_6_type": "Free-text description of 'other taxes' type (e.g., foreign income tax, generation-skipping tax). No ingested fact for this narrative field.",
-      "4.page2.taxes_6_federal": "No ingested fact for other taxes (e.g., foreign income taxes, generation-skipping transfer taxes) from federal Schedule A line 6. Would require a Schedule A other-taxes fact category.",
-      "4.page2.taxes_6_subtractions": "CA subtraction for line 6 other taxes (e.g., foreign income taxes not deductible in CA, generation-skipping taxes). Requires Schedule A other-taxes fact ingestion and CA conformity logic not yet built.",
-      "4.page2.taxes_6_additions": "CA addition for line 6 other taxes (e.g., foreign property taxes suspended federally but deductible in CA). Requires Schedule A foreign-property-tax fact ingestion not yet built.",
-      "4.page2.interest_8a_federal": "No mortgage interest (Form 1098) fact ingestion path exists yet. Requires a 1098 fact category to populate home mortgage interest. Downstream sum (line 8e) will treat as 0.",
-      "4.page2.interest_8a_additions": "CA conformity adjustment for mortgage interest (pre-TCJA $1M limit vs federal $750k limit, or home equity interest) requires 1098 fact ingestion and a scenario where federal and CA limits diverge. No such scenario or fact path exists yet.",
-      "4.page2.interest_8b_federal": "Home mortgage interest not reported on Form 1098 requires a dedicated fact (e.g. seller-financed mortgage). No such fact ingestion path exists yet.",
-      "4.page2.interest_8b_additions": "CA conformity addition for line 8b requires 1098/non-1098 mortgage interest facts not yet ingested.",
-      "4.page2.interest_8c_federal": "Points not reported on Form 1098 require a dedicated mortgage-points fact. No such fact ingestion path exists yet.",
-      "4.page2.interest_8c_additions": "CA conformity addition for points (line 8c) requires mortgage-points facts not yet ingested.",
-      "4.page2.interest_8e_additions": "CA additions to home mortgage interest (line 8e Col C) require taxpayer-specific adjustments per CA mortgage interest rules — no fact ingestion path exists for CA-specific home mortgage interest addition scenarios.",
-      "4.page2.interest_9_federal": "Investment interest expense from federal Schedule A line 9 — no Schedule A ingestion exists; would require FTB 3526 data.",
-      "4.page2.interest_9_subtractions": "CA investment interest subtractions per FTB 3526 — no FTB 3526 ingestion or investment-interest-expense fact path exists.",
-      "4.page2.interest_9_additions": "CA investment interest additions per FTB 3526 — no FTB 3526 ingestion or investment-interest-expense fact path exists.",
-      "5.page2.charity_11_federal": "Gifts by cash or check (federal Schedule A line 11) — no Schedule A ingestion exists; no charitable contribution fact path available.",
-      "5.page2.charity_11_subtractions": "CA charitable contribution subtractions (line 11 Col B) — CA limits contributions to 50% of AGI per FTB 3526 guidance; no charitable-contribution fact or FTB worksheet ingestion exists.",
-      "5.page2.charity_11_additions": "CA charitable contribution additions (line 11 Col C) — no scenario or fact path exists for charitable amounts that are higher for CA than federal.",
-      "5.page2.charity_12_federal": "Non-cash charitable gifts (federal Schedule A line 12) — no fact ingestion path for non-cash charitable contribution amounts; requires taxpayer-provided data from Form 8283 or similar.",
-      "5.page2.charity_12_subtractions": "CA adjustment for non-cash charitable gifts (line 12, col B) — requires FTB Pub. 1001 worksheet for CA-specific limitations (e.g., conservation easement 30% AGI cap vs. 50% federal); no scenario or ingestion path built yet.",
-      "5.page2.charity_12_additions": "CA addition for non-cash charitable gifts (line 12, col C) — no ingestion path for CA-specific non-cash charitable contribution additions; requires FTB Pub. 1001 analysis.",
-      "5.page2.charity_13_federal": "Charitable contribution carryover from prior year (federal Schedule A line 13, col A) — requires prior-year carryover data; no prior-year carryover ingestion path built yet.",
-      "5.page2.charity_13_subtractions": "CA subtraction for charitable carryover (line 13, col B) — applies when CA carryover period (5 years) has expired but federal (15 years) has not, or for appreciated stock contributed to private foundation; requires prior-year carryover tracking not yet ingested.",
-      "5.page2.charity_13_additions": "CA addition for charitable carryover (line 13, col C) — applies when CA carryover exceeds federal carryover; requires prior-year CA carryover tracking not yet ingested.",
-      "5.page2.casualty_15_federal": "Casualty/theft loss from federal Form 4684 (Schedule A line 15, col A) — no fact ingestion path for casualty loss data; requires Form 4684 completion which we have no scenario for yet.",
-      "5.page2.casualty_15_subtractions": "CA-specific subtraction for casualty/theft losses — requires FTB Form 4684 California conformity analysis; no ingestion path for casualty loss facts yet.",
-      "5.page2.casualty_15_additions": "CA-specific addition for casualty/theft losses — requires FTB Form 4684 California conformity analysis; no ingestion path for casualty loss facts yet.",
-      "5.page2.other_deductions_16_federal": "Other itemized deductions from federal Schedule A line 16 — no ingestion path for miscellaneous itemized deduction facts yet.",
-      "5.page2.other_deductions_16_subtractions": "CA-specific subtraction for other itemized deductions — no ingestion path for these deduction facts yet.",
-      "5.page2.other_deductions_16_additions": "CA-specific addition for other itemized deductions — no ingestion path for these deduction facts yet.",
-      "5.page2.job_expenses_19": "Unreimbursed employee expenses (Schedule CA Part 2 line 19) — requires Form 2106 California-specific computation; no ingestion path for employee business expense facts yet.",
-      "5.page2.job_expenses_20": "Tax preparation fees are a taxpayer-specific itemized deduction amount. No fact key exists for this; no ingestion path built yet.",
-      "5.page2.job_expenses_21_type": "Free-text description of other miscellaneous deduction expenses (investment, safe deposit box, etc.). No fact ingestion path for this.",
-      "5.page2.job_expenses_21_amount": "Amount for other miscellaneous itemized deductions (investment expenses, safe deposit box, etc.). No fact ingestion path built yet.",
-      "5.page2.job_expenses_24_threshold": "This is a computed field requiring multiplication of line 23 by 2% (0.02). No multiply rule exists in the rule library; would need a formula/expression rule.",
-      "5.page2.other_adjustments_27_type": "Free-text description of other CA-specific itemized deduction adjustments (e.g. adoption expenses, nontaxable income expenses). No fact or decision captures this.",
-      "5.page2.other_adjustments_27_amount": "Other CA itemized deduction adjustments (adoption credit, nontaxable income expenses, legislator travel, etc.). No fact ingestion path built for these CA-specific adjustments.",
-      "5.page2.total_itemized_29": "Line 29 requires a conditional: if Form 540 line 13 (federal AGI) exceeds the filing-status threshold ($252,203 / $378,310 / $504,411), the taxpayer must complete the Itemized Deductions Worksheet (a multi-step phase-out calculation). The engine has no conditional-branch or worksheet rule. For below-threshold taxpayers, line 29 equals line 28, but we cannot implement the high-income phase-out path. Bind as unsupported until a conditional/worksheet rule is available.",
+      "4.page2.taxes_5d_federal":
+        "Schedule CA Part II line 5d (taxes paid, col A) — itemized-deduction workflow not supported yet.",
+      "4.page2.taxes_5e_subtractions":
+        "Schedule CA Part II line 5e col B — itemized-deduction workflow not supported yet.",
+      "4.page2.taxes_7_federal":
+        "Schedule CA Part II line 7 col A — itemized-deduction workflow not supported yet.",
+      "4.page2.taxes_7_subtractions":
+        "Schedule CA Part II line 7 col B — itemized-deduction workflow not supported yet.",
+      "4.page2.taxes_7_additions":
+        "Schedule CA Part II line 7 col C — itemized-deduction workflow not supported yet.",
+      "4.page2.interest_8e_federal":
+        "Schedule CA Part II line 8e col A (mortgage interest) — itemized-deduction workflow not supported yet.",
+      "4.page2.interest_10_federal":
+        "Schedule CA Part II line 10 col A — itemized-deduction workflow not supported yet.",
+      "4.page2.interest_10_subtractions":
+        "Schedule CA Part II line 10 col B — itemized-deduction workflow not supported yet.",
+      "4.page2.interest_10_additions":
+        "Schedule CA Part II line 10 col C — itemized-deduction workflow not supported yet.",
+      "5.page2.charity_14_federal":
+        "Schedule CA Part II line 14 col A (gifts to charity) — itemized-deduction workflow not supported yet.",
+      "5.page2.charity_14_subtractions":
+        "Schedule CA Part II line 14 col B — itemized-deduction workflow not supported yet.",
+      "5.page2.charity_14_additions":
+        "Schedule CA Part II line 14 col C — itemized-deduction workflow not supported yet.",
+      "5.page2.total_itemized_17_federal":
+        "Schedule CA Part II line 17 col A (total itemized) — itemized-deduction workflow not supported yet.",
+      "5.page2.total_itemized_17_additions":
+        "Schedule CA Part II line 17 col C — itemized-deduction workflow not supported yet.",
+      "5.page2.total_itemized_18_combined":
+        "Schedule CA Part II line 18 (combined) — itemized-deduction workflow not supported yet.",
+      "5.page2.job_expenses_22_total":
+        "Schedule CA Part II line 22 (job expenses subtotal) — itemized-deduction workflow not supported yet.",
+      "5.page2.job_expenses_25_net":
+        "Schedule CA Part II line 25 (net job expenses) — itemized-deduction workflow not supported yet.",
+      "5.page2.total_itemized_26":
+        "Schedule CA Part II line 26 (itemized + job expenses subtotal) — itemized-deduction workflow not supported yet.",
+      "5.page2.total_itemized_28":
+        "Schedule CA Part II line 28 — itemized-deduction workflow not supported yet.",
+      "0.line.3a_federal":
+        "Schedule CA Part I line 3a Column A (federal amounts) is conventionally left blank: per CA instructions, dividends generally match between federal and CA, so col A is only meaningful when there's a CA-specific adjustment in col B/C — which we don't model yet.",
+      "4.page2.medical_agi_line11b":
+        "Schedule CA Part II medical-deduction worksheet AGI input — only relevant when itemizing medical/dental expenses. We don't support non-standard-deduction workflows yet.",
+      "5.page2.job_expenses_23_agi":
+        "Schedule CA Part II job-expenses worksheet AGI input — only relevant when itemizing unreimbursed job expenses. We don't support non-standard-deduction workflows yet.",
+      "0.line.1a_subtractions":
+        "CA-specific subtraction adjustments to W-2 wages (e.g. active-duty military pay exclusions, combat zone exclusions) require specialized facts/scenarios not yet ingested.",
+      "0.line.1a_additions":
+        "CA-specific addition adjustments to W-2 wages (e.g. combat zone income re-inclusions) require specialized facts/scenarios not yet ingested.",
+      "0.line.1b_subtractions":
+        "CA-specific subtraction adjustments to household employee wages not on W-2; no scenario modeled yet.",
+      "0.line.1b_additions":
+        "CA-specific addition adjustments to household employee wages not on W-2; no scenario modeled yet.",
+      "0.line.1c_subtractions":
+        "CA-specific subtraction adjustments to tip income; no scenario modeled yet.",
+      "0.line.1c_additions":
+        "No CA-specific addition scenario for tip income (line 1c). CA generally follows federal treatment; any addition would require FTB Pub 1001 guidance we haven't ingested. No known fact/decision path.",
+      "0.line.1d_subtractions":
+        "No CA-specific subtraction scenario for Medicaid waiver payments. CA may exclude certain nontaxable Medicaid waiver payments per FTB Pub 1001, but no ingestion path or worked example exists yet.",
+      "0.line.1d_additions":
+        "No CA-specific addition scenario for Medicaid waiver payments (line 1d). No known fact/decision path exists yet.",
+      "0.line.1e_subtractions":
+        "No CA-specific subtraction scenario for taxable dependent care benefits (line 1e). CA generally conforms to federal; any adjustment would require Form 2441 CA-equivalent ingestion not yet built.",
+      "0.line.1e_additions":
+        "No CA-specific addition scenario for taxable dependent care benefits (line 1e). No known fact/decision path exists yet.",
+      "0.line.1f_subtractions":
+        "No CA-specific subtraction scenario for employer-provided adoption benefits (line 1f). CA may have different exclusion rules per FTB Pub 1001 but no ingestion path or worked example exists yet.",
+      "0.line.1f_additions":
+        "No CA-specific addition scenario for employer-provided adoption benefits (line 1f). No known fact/decision path exists yet.",
+      "0.line.1g_subtractions":
+        "No CA-specific subtraction scenario for Form 8919 wages has been modeled; no fact ingestion path exists for this adjustment.",
+      "0.line.1g_additions":
+        "No CA-specific addition scenario for Form 8919 wages has been modeled; no fact ingestion path exists for this adjustment.",
+      "0.line.1h_subtractions":
+        "CA subtractions for 'other earned income' (line 1h) depend on taxpayer-specific scenarios (e.g. ridesharing fringe benefits, CQSO exclusion) that have no ingested fact path yet.",
+      "0.line.1h_additions":
+        "CA additions for 'other earned income' (line 1h) depend on taxpayer-specific scenarios (e.g. employer HSA contributions) that have no ingested fact path yet.",
+      "0.line.1i_additions":
+        "Nontaxable combat pay addition applies only to active-duty military taxpayers in designated combat zones; no military/combat-zone fact ingestion scenario has been built yet.",
+      "0.line.2b_subtractions":
+        "CA-specific subtractions to taxable interest (e.g. interest on US obligations exempt in CA) require fact ingestion we haven't built yet — no scenario modeled.",
+      "0.line.2b_additions":
+        "CA-specific additions to taxable interest (e.g. interest on other-state obligations taxable in CA) require fact ingestion we haven't built yet — no scenario modeled.",
+      "0.line.3b_subtractions":
+        "CA-specific subtractions to ordinary dividends (e.g. dividends from children included on parent's federal return but reported on child's CA return) require scenarios we haven't built yet.",
+      "0.line.3b_additions":
+        "CA-specific additions to ordinary dividends (CFC dividends, RIC capital gain distributions, pre-1987 S-corp earnings, etc.) require scenarios we haven't built yet.",
+      "0.line.4b_subtractions":
+        "CA IRA/pension subtraction adjustments (e.g. Tier 2 railroad retirement, three-year rule annuities) require ingestion of RRB-1099-R and specialized pension facts we don't yet model. No worked scenario exists for this.",
+      "0.line.4b_additions":
+        "CA IRA distribution addition adjustments (e.g. pre-1987 annuity rule elections) require specialized pension/annuity facts not yet modeled. No worked scenario exists.",
+      "0.line.5b_subtractions":
+        "CA pension/annuity subtraction adjustments (Tier 2 railroad retirement benefits, pre-1987 three-year rule) require RRB-1099-R and specialized pension scenario data not yet ingested.",
+      "0.line.5b_additions":
+        "CA pension/annuity addition adjustments (pre-1987 three-year rule elections where CA uses different tax treatment) require specialized pension facts not yet modeled. No worked scenario exists.",
+      "0.line.7a_subtractions":
+        "CA vs. federal capital gain adjustments (e.g. differences in depreciation recapture, installment sale basis, or CA-only exclusions) require Schedule D CA-specific computations or FTB 3885A data we have not ingested yet.",
+      "0.line.7a_additions":
+        "CA vs. federal capital gain additions (e.g. CA-only gain recognition differences) require Schedule D CA-specific computations we have not ingested yet.",
+      "0.line.b1_federal":
+        "Federal Schedule 1 (Form 1040) line 1 (taxable state/local tax refunds) is not exposed as an individual fieldId in the ingested form-1040 catalog — only the Schedule 1 total (line 10) flows into form-1040 line 8. No individual Schedule 1 line facts are ingested yet.",
+      "0.line.b1_subtractions":
+        "CA subtraction for state income tax refunds (not taxable in CA) requires knowledge of the taxable refund amount from federal Schedule 1 line 1, which is not ingested as a separate fact or field.",
+      "0.line.b2b_divorce_date":
+        "Date of original divorce or separation agreement is taxpayer-specific data we have no fact ingestion path for; no alimony/divorce scenario has been built.",
+      "0.line.b2a_federal":
+        "Alimony received (federal Schedule 1 line 2a) is not exposed as an individual fieldId in the ingested form-1040 catalog, and no alimony fact key exists in the available facts.",
+      "0.line.b2a_additions":
+        "CA addition for alimony received under post-2018 or post-2025 agreements requires alimony fact data and divorce agreement date logic not yet ingested or modeled.",
+      "0.line.b3_federal":
+        "Business income/(loss) from federal Schedule 1 line 3 (Schedule C) is not exposed as an individual fieldId in the ingested form-1040 catalog, and no Schedule C / self-employment business income fact key exists in the available facts.",
+      "0.line.b3_subtractions":
+        "CA adjustments to business income/(loss) (e.g. CA vs. federal depreciation differences via FTB 3885A) require Schedule C and CA depreciation adjustment data not yet ingested.",
+      "0.line.b3_additions":
+        "Business income CA additions (Sch CA Section B line 3 col C) require CA-specific depreciation/basis adjustments per FTB 3885A and related forms; no ingestion path for Schedule C or depreciation adjustments yet.",
+      "0.line.b4_federal":
+        "Other gains/losses (Sch CA Section B line 4 col A) comes from federal Schedule 1 line 4 (Form 4797 gains/losses); federal Schedule 1 is not an ingested form and we have no Form 4797 fact ingestion path.",
+      "0.line.b4_subtractions":
+        "Other gains/losses CA subtractions (Sch CA Section B line 4 col B) require CA-specific basis and depreciation adjustments for Form 4797 transactions; no ingestion path for Schedule 1 or Form 4797 yet.",
+      "0.line.b4_additions":
+        "Other gains/losses CA additions (Sch CA Section B line 4 col C) require CA-specific basis adjustments for Form 4797 transactions; no ingestion path for Schedule 1 or Form 4797 yet.",
+      "0.line.b5_federal":
+        "Rental real estate/partnerships/S-corps/trusts (Sch CA Section B line 5 col A) comes from federal Schedule 1 line 5 (Schedule E); federal Schedule 1 and Schedule E are not ingested forms and we have no K-1/pass-through fact ingestion path.",
+      "0.line.b5_subtractions":
+        "Rental/partnership/S-corp CA subtractions (Sch CA Section B line 5 col B) require FTB 3801/3885A passive activity and depreciation adjustments; no ingestion path for K-1 or Schedule E data yet.",
+      "0.line.b5_additions":
+        "Rental/partnership/S-corp CA additions (Sch CA Section B line 5 col C) require FTB 3801/3885A passive activity and depreciation adjustments; no ingestion path for K-1 or Schedule E data yet.",
+      "0.line.b6_federal":
+        "Farm income/loss (Sch CA Section B line 6 col A) comes from federal Schedule 1 line 6 (Schedule F); federal Schedule 1 and Schedule F are not ingested forms and we have no farm income fact ingestion path.",
+      "0.line.b6_subtractions":
+        "Farm income CA subtractions (Sch CA Section B line 6 col B) require FTB 3801 passive activity and CA depreciation adjustments for farm activities; no Schedule F or farm fact ingestion path yet.",
+      "0.line.b6_additions":
+        "Farm income CA additions (Sch CA Section B line 6 col C) require FTB 3801 passive activity and CA depreciation adjustments for farm activities; no Schedule F or farm fact ingestion path yet.",
+      "0.line.b7_federal":
+        "Unemployment compensation flows from federal Schedule 1 line 2, which is not yet ingested. No unemployment_income fact category exists in the current fact model.",
+      "0.line.b7_subtractions":
+        "CA subtracts all unemployment compensation (equals column A). However, column A (b7_federal) is itself unsupported because Schedule 1 is not ingested. Cannot derive this subtraction until the federal source is available.",
+      "1.line.b8a_federal":
+        "Federal net operating loss from Schedule 1 line 8a. Schedule 1 is not ingested and there is no NOL fact category in the current fact model.",
+      "1.line.b8a_additions":
+        "CA requires the federal NOL amount (column A) to be added back in column C because CA computes its own NOL via FTB 3805V. Column A source is unsupported (Schedule 1 not ingested) and FTB 3805V NOL is not modeled.",
+      "1.line.b8b_federal":
+        "Gambling income from Schedule 1 line 8b. Schedule 1 is not ingested and there is no gambling income fact category in the current fact model.",
+      "1.line.b8b_subtractions":
+        "CA subtracts California lottery winnings from gambling income. No CA lottery winnings fact category exists, and the column A source (Schedule 1 line 8b) is not ingested. This subtraction requires a scenario with CA lottery income.",
+      "1.line.b8c_federal":
+        "Cancellation of debt income from Schedule 1 line 8c (1099-C). Schedule 1 is not ingested and there is no cancellation_of_debt fact category in the current fact model.",
+      "1.line.b8c_subtractions":
+        "CA may allow a subtraction for mortgage forgiveness debt relief (Cancellation of Debt). No cancellation_of_debt fact category exists and Schedule 1 is not ingested. Requires a scenario with COD income and CA mortgage forgiveness exclusion.",
+      "1.line.b8c_additions":
+        "CA additions for cancellation of debt (e.g. non-federal excluded COD amounts). No cancellation_of_debt fact category exists and Schedule 1 is not ingested.",
+      "1.line.b8d_federal":
+        "Foreign earned income exclusion from federal Form 2555 line 45. No foreign income scenario or Form 2555 fact ingestion path exists. CA does not allow the federal foreign earned income exclusion, so this amount also requires a column C addition on line 8d.",
+      "1.line.b8d_additions":
+        "Column C additions for foreign earned income exclusion (Form 2555) — CA does not conform for certain combat-zone contractors, but no fact/decision ingestion path exists for Form 2555 scenarios yet.",
+      "1.line.b8e_federal":
+        "Income from federal Form 8853 (Archer MSAs and Long-Term Care Insurance Contracts) — no fact ingestion path for Form 8853 data exists yet.",
+      "1.line.b8e_additions":
+        "Column C additions for Form 8853 income — no fact ingestion path for Form 8853 scenarios yet.",
+      "1.line.b8f_federal":
+        "Income from federal Form 8889 (Health Savings Accounts) — no fact ingestion path for Form 8889 income/distribution data exists yet.",
+      "1.line.b8f_subtractions":
+        "Column B subtractions for Form 8889 HSA income — CA does not conform to federal HSA treatment, but no Form 8889 fact ingestion path exists yet.",
+      "1.line.b8g_federal":
+        "Alaska Permanent Fund dividends — niche income type specific to Alaska residents; no fact ingestion path exists.",
+      "1.line.b8h_federal":
+        "Jury duty pay from federal Schedule 1 line 8h — no fact ingestion path for jury duty pay exists yet.",
+      "1.line.b8i_federal":
+        "Prizes and awards from federal Schedule 1 line 8i — no fact ingestion path for prize/award income exists yet.",
+      "1.line.b8j_federal":
+        "Activity not engaged in for profit (hobby) income from federal Schedule 1 line 8j — no fact ingestion path for hobby income exists yet.",
+      "1.line.b8k_federal":
+        "Stock option income from federal Schedule 1 line 8k — no fact ingestion path for stock option income (separate from W-2 box 1 wages) exists yet.",
+      "1.line.b8k_additions":
+        "Stock options CA addition adjustment requires stock option / equity compensation fact ingestion — no scenario built yet.",
+      "1.line.b8l_federal":
+        "Rental of personal property income (not a rental business) has no fact ingestion path yet — no scenario built for this income type.",
+      "1.line.b8m_federal":
+        "Olympic and Paralympic medal/USOC prize money income has no fact ingestion path — no athlete scenario built yet.",
+      "1.line.b8n_federal":
+        "IRC §951(a) Subpart F inclusion (CFC income) has no fact ingestion path — no controlled foreign corporation scenario built yet.",
+      "1.line.b8n_subtractions":
+        "IRC §951(a) CA subtraction adjustment requires CFC fact ingestion — no controlled foreign corporation scenario built yet.",
+      "1.line.b8o_federal":
+        "IRC §951A(a) GILTI inclusion has no fact ingestion path — no GILTI/CFC scenario built yet.",
+      "1.line.b8o_subtractions":
+        "IRC §951A(a) GILTI CA subtraction adjustment requires CFC/GILTI fact ingestion — no scenario built yet.",
+      "1.line.b8p_federal":
+        "IRC §461(l) excess business loss adjustment requires Form 461 computation — no business loss scenario or FTB 3461 ingestion path built yet.",
+      "1.line.b8p_subtractions":
+        "IRC §461(l) CA subtraction adjustment requires FTB 3461 computation — no excess business loss scenario built yet.",
+      "1.line.b8p_additions":
+        "IRC §461(l) CA addition adjustment (CA does not conform to federal CARES/ARPA changes) requires FTB 3461 computation — no excess business loss scenario built yet.",
+      "1.line.b8q_federal":
+        "No fact ingestion path for ABLE account distributions; no scenario modeled yet.",
+      "1.line.b8r_federal":
+        "No fact ingestion path for scholarship/fellowship grants not reported on W-2; no scenario modeled yet.",
+      "1.line.b8s_federal":
+        "No fact ingestion path for nontaxable Medicaid waiver payments included on 1040 line 1a/1d; no scenario modeled yet.",
+      "1.line.b8t_federal":
+        "No fact ingestion path for pensions/annuities from nonqualified deferred compensation or nongovernmental 457 plans; no scenario modeled yet.",
+      "1.line.b8u_federal":
+        "No fact ingestion path for wages earned while incarcerated; no scenario modeled yet.",
+      "1.line.b8v_federal":
+        "No fact ingestion path for digital assets received as ordinary income (forks, staking, mining) not reported elsewhere; no scenario modeled yet.",
+      "1.line.b8v_subtractions":
+        "No CA-specific subtraction rules ingested for digital asset ordinary income; no scenario modeled yet.",
+      "1.line.b8v_additions":
+        "No CA-specific addition rules ingested for digital asset ordinary income; no scenario modeled yet.",
+      "1.line.b8z_income_type":
+        "Free-text description of 'other income' type; no structured fact or decision maps to this catch-all label field.",
+      "1.line.b8z_federal":
+        "No fact ingestion path for catch-all 'other income' amounts on Schedule 1 line 8z; no scenario modeled yet.",
+      "1.line.b8z_subtractions":
+        "Line 8z 'Other income' CA subtractions are catch-all adjustments (e.g. Native American earned income, state income tax refunds reclassified, etc.) that require per-item CA guidance and no structured fact path exists for the general 8z bucket.",
+      "1.line.b8z_additions":
+        "Line 8z 'Other income' CA additions are catch-all adjustments (e.g. expanded IRC 529 use, tribal income differences) requiring per-item CA guidance; no structured fact path exists for this bucket.",
+      "2.line.b9b1_subtractions":
+        "CA-specific disaster loss deduction from FTB Form 3805V — no ingestion path for FTB 3805V data exists yet.",
+      "2.line.b9b2_subtractions":
+        "CA-specific NOL deduction from FTB Form 3805V — no ingestion path for FTB 3805V data exists yet.",
+      "2.line.b9b3_subtractions":
+        "CA-specific NOL deduction from FTB Forms 3805Z, 3807, or 3809 — no ingestion path for these FTB enterprise-zone NOL forms exists yet.",
+      "2.line.c11_federal":
+        "Requires Schedule 1 (Form 1040) line 11 — federal Schedule 1 is not an ingested form in this roster; no fieldId available to reference.",
+      "2.line.c12_federal":
+        "Requires Schedule 1 (Form 1040) line 12 — federal Schedule 1 is not an ingested form; no fieldId available to reference.",
+      "2.line.c12_subtractions":
+        "CA adjustment for reservist/performing artist business expenses requires FTB Pub. 1001 analysis and Schedule 1 line 12 source data — no ingestion path for either yet.",
+      "2.line.c12_additions":
+        "CA addition for reservist/performing artist business expenses (line 12, col C) requires FTB Pub. 1001 analysis and Schedule 1 line 12 source — no ingestion path yet.",
+      "2.line.c13_federal":
+        "Requires Schedule 1 (Form 1040) line 13 (HSA deduction) — federal Schedule 1 is not an ingested form; no fieldId available to reference.",
+      "2.line.c14_federal":
+        "Requires Schedule 1 (Form 1040) line 14 (moving expenses, military only federally) — federal Schedule 1 is not an ingested form; also no FTB 3913 ingestion path yet.",
+      "2.line.c14_additions":
+        "CA moving expense addition (for non-military taxpayers who can deduct under CA but not federal) requires FTB 3913 data — no FTB 3913 ingestion path exists yet.",
+      "2.line.c15_federal":
+        "Requires federal Schedule 1 line 15 (deductible part of self-employment tax). Schedule 1 is not an ingested form and its individual line fieldIds are not available on form-1040; no ingestion path for self-employment tax data yet.",
+      "2.line.c15_subtractions":
+        "CA adjustment to SE tax deduction requires a self-employment scenario and Schedule SE data; neither is ingested yet.",
+      "2.line.c16_federal":
+        "Requires federal Schedule 1 line 16 (self-employed SEP/SIMPLE/qualified plan deduction). Schedule 1 individual lines are not ingested; no self-employment retirement plan scenario yet.",
+      "2.line.c17_federal":
+        "Requires federal Schedule 1 line 17 (self-employed health insurance deduction). Schedule 1 individual lines are not ingested; no self-employment health insurance scenario yet.",
+      "2.line.c17_subtractions":
+        "CA subtraction for self-employed health insurance (line 17) requires a self-employment scenario; no such scenario or Schedule 1 line 17 ingestion path exists yet.",
+      "2.line.c18_federal":
+        "Requires federal Schedule 1 line 18 (penalty on early withdrawal of savings). Schedule 1 individual lines are not ingested as separate fieldIds; no early-withdrawal-penalty fact ingestion path exists yet.",
+      "2.line.c19a_federal":
+        "Requires federal Schedule 1 line 19a (alimony paid). Schedule 1 individual lines are not ingested; no alimony-paid scenario or fact ingestion path exists yet.",
+      "2.line.c19a_additions":
+        "CA addition for alimony paid (post-2018/post-2025 divorce agreements differ between federal and CA law) requires an alimony scenario; no such scenario or fact ingestion path exists yet.",
+      "2.line.c19b_recipient_ssn":
+        "SSN of alimony recipient — requires an alimony-paid scenario with recipient identity facts; no such scenario or fact ingestion path exists yet.",
+      "2.line.c19b_recipient_last_name":
+        "Last name of alimony recipient — requires an alimony-paid scenario with recipient identity facts; no such scenario or fact ingestion path exists yet.",
+      "2.line.c19c_divorce_date":
+        "Date of original divorce/separation agreement for alimony paid — no alimony-paid fact ingestion path exists yet; requires a scenario with alimony deductions.",
+      "2.line.c20_federal":
+        "IRA deduction (federal Schedule 1 line 20) — no IRA deduction fact ingestion path exists yet; requires a retirement-contribution scenario.",
+      "2.line.c20_subtractions":
+        "CA subtraction adjustment to IRA deduction (line 20 col B) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
+      "2.line.c20_additions":
+        "CA addition adjustment to IRA deduction (line 20 col C) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
+      "2.line.c21_federal":
+        "Student loan interest deduction (federal Schedule 1 line 21) — no student-loan fact ingestion path exists yet; requires a student-loan interest scenario.",
+      "2.line.c21_additions":
+        "CA addition for student loan interest (line 21 col C) — CA does not conform to federal student loan interest deduction for certain years; no student-loan fact ingestion path exists yet.",
+      "2.line.c23_federal":
+        "Archer MSA deduction (federal Schedule 1 line 23, from Form 8853) — no Archer MSA fact ingestion path exists; uncommon scenario not yet modeled.",
+      "3.line.c24a_federal":
+        "Jury duty pay federal adjustment (Schedule 1 line 24a) — no jury-duty-pay fact ingestion path exists yet; uncommon scenario not yet modeled.",
+      "3.line.c24b_federal":
+        "Deductible expenses for personal-property rental (Schedule 1 line 24b) — no personal-property-rental expense fact ingestion path exists yet.",
+      "3.line.c24b_subtractions":
+        "CA subtraction for personal-property rental deductible expenses (line 24b col B) — no personal-property-rental expense fact ingestion path exists yet.",
+      "3.line.c24b_additions":
+        "CA-specific addition for deductible expenses related to personal property rental income (line 8l). No fact ingestion path for personal property rental adjustments exists yet.",
+      "3.line.c24c_federal":
+        "Federal amount for nontaxable Olympic/Paralympic medal value deduction (Schedule 1 line 24c). No ingestion for Olympic prize/medal income scenarios.",
+      "3.line.c24c_subtractions":
+        "CA subtraction for nontaxable Olympic/Paralympic medal value. No ingestion for Olympic prize/medal income scenarios.",
+      "3.line.c24d_federal":
+        "Federal amount for reforestation amortization and expenses (Form 4562). No ingestion for reforestation/forestry business scenarios.",
+      "3.line.c24d_subtractions":
+        "CA subtraction for reforestation amortization and expenses. No ingestion for reforestation/forestry business scenarios.",
+      "3.line.c24e_federal":
+        "Federal amount for repayment of supplemental unemployment benefits under the Trade Act of 1974. No ingestion for Trade Act repayment scenarios.",
+      "3.line.c24f_federal":
+        "Federal amount for contributions to IRC Section 501(c)(18)(D) pension plans. No ingestion for this niche pension contribution type.",
+      "3.line.c24f_subtractions":
+        "CA subtraction for IRC Section 501(c)(18)(D) pension plan contributions. No ingestion for this niche pension contribution type.",
+      "3.line.c24f_additions":
+        "CA addition for IRC Section 501(c)(18)(D) pension plan contributions. No ingestion for this niche pension contribution type.",
+      "3.line.c24g_federal":
+        "Federal amount for contributions by certain chaplains to IRC Section 403(b) plans (Pub. 517). No ingestion for chaplain/clergy 403(b) scenarios.",
+      "3.line.c24g_subtractions":
+        "Chaplain IRC §403(b) plan contribution subtractions require a chaplain-specific fact we have not yet ingested; no scenario built for this.",
+      "3.line.c24g_additions":
+        "Chaplain IRC §403(b) plan contribution additions require a chaplain-specific fact we have not yet ingested; no scenario built for this.",
+      "3.line.c24h_federal":
+        "Attorney fees for unlawful discrimination claims (federal Schedule 1 line 24h) require a fact we have not yet ingested; no scenario built for this.",
+      "3.line.c24i_federal":
+        "IRS whistleblower attorney fees (federal Schedule 1 line 24i) require a fact we have not yet ingested; no scenario built for this.",
+      "3.line.c24j_federal":
+        "Housing deduction from Form 2555 (foreign housing exclusion) requires a foreign-income ingestion path we have not yet built; no foreign-income scenario exists.",
+      "3.line.c24k_federal":
+        "Excess deductions of IRC §67(e) expenses from Schedule K-1 (Form 1041) require estate/trust K-1 fact ingestion we have not yet built; no such scenario exists.",
+      "3.line.c24z_income_type":
+        "Free-text description for catch-all 'other adjustments' line 24z; no structured fact ingestion covers arbitrary other adjustments.",
+      "3.line.c24z_federal":
+        "Catch-all 'other adjustments' line 24z amount; no structured fact ingestion covers arbitrary other adjustments.",
+      "3.line.c24z_subtractions":
+        "Line 24z 'Other adjustments' Column B subtractions is a free-form catch-all for miscellaneous CA-specific subtraction adjustments not covered by lines 24a–24k. No fact or decision maps to this; needs scenario-specific ingestion.",
+      "3.line.c24z_additions":
+        "Line 24z 'Other adjustments' Column C additions is a free-form catch-all for miscellaneous CA-specific addition adjustments. No fact or decision maps to this; needs scenario-specific ingestion.",
+      "4.page2.itemize_ca_not_federal":
+        "No decision or scenario models the case where a taxpayer itemizes for CA but not federally. This checkbox requires a dedicated 'itemize_ca_not_federal' decision we haven't built yet.",
+      "4.page2.medical_dental_expenses":
+        "No medical/dental expense facts have been ingested. This field requires a separate fact-ingestion path for unreimbursed medical costs (e.g. from federal Schedule A).",
+      "4.page2.medical_agi_threshold":
+        "Requires multiplying line 2 by 7.5% — no multiply rule exists in the rule library. Cannot compute line 2 × 0.075 with available rules.",
+      "4.page2.medical_line4_federal":
+        "Requires subtracting the unsupported medical_agi_threshold (line 3) from the unsupported medical_dental_expenses (line 1), floored at 0. Both upstream lines are unsupported so this line cannot be computed.",
+      "4.page2.medical_line4_additions":
+        "CA additions for Part 2 medical line 4 require knowing the CA-specific medical threshold difference vs. federal, which depends on the unsupported medical expense and threshold lines. No scenario or fact path exists yet.",
+      "4.page2.taxes_5a_federal":
+        "Requires federal Schedule A (Form 1040) line 5a (state and local income tax or general sales taxes). Schedule A has not been ingested as a catalog form; no fieldId available to reference.",
+      "4.page2.taxes_5a_subtractions":
+        "CA requires that the state/local income tax amount from line 5a column A be fully entered as a subtraction in column B. However, the source (Schedule A line 5a federal amount) is itself unsupported because Schedule A is not ingested.",
+      "4.page2.taxes_5b_federal":
+        "Requires federal Schedule A (Form 1040) line 5b (state and local real estate taxes). Schedule A has not been ingested as a catalog form; no fieldId available to reference.",
+      "4.page2.taxes_5c_federal":
+        "No ingested fact for state and local personal property taxes; would require a Schedule A / personal property tax fact category we haven't built yet.",
+      "4.page2.taxes_5e_federal":
+        "Requires min(line_5d, filing_status_cap) logic — the engine has no 'min of two values' rule. Line 5e Column A = smaller of line 5d or $40,000 ($20,000 MFS). Cannot express this with available rules.",
+      "4.page2.taxes_5e_additions":
+        "Line 5e Column C = difference between line 5d and line 5e Column A (i.e., amount of SALT deduction over the $40k/$20k federal cap). Requires subtraction of two computed fields and depends on line 5e_federal being computed first; no rule supports this derived difference today.",
+      "4.page2.taxes_6_type":
+        "Free-text description of 'other taxes' type (e.g., foreign income tax, generation-skipping tax). No ingested fact for this narrative field.",
+      "4.page2.taxes_6_federal":
+        "No ingested fact for other taxes (e.g., foreign income taxes, generation-skipping transfer taxes) from federal Schedule A line 6. Would require a Schedule A other-taxes fact category.",
+      "4.page2.taxes_6_subtractions":
+        "CA subtraction for line 6 other taxes (e.g., foreign income taxes not deductible in CA, generation-skipping taxes). Requires Schedule A other-taxes fact ingestion and CA conformity logic not yet built.",
+      "4.page2.taxes_6_additions":
+        "CA addition for line 6 other taxes (e.g., foreign property taxes suspended federally but deductible in CA). Requires Schedule A foreign-property-tax fact ingestion not yet built.",
+      "4.page2.interest_8a_federal":
+        "No mortgage interest (Form 1098) fact ingestion path exists yet. Requires a 1098 fact category to populate home mortgage interest. Downstream sum (line 8e) will treat as 0.",
+      "4.page2.interest_8a_additions":
+        "CA conformity adjustment for mortgage interest (pre-TCJA $1M limit vs federal $750k limit, or home equity interest) requires 1098 fact ingestion and a scenario where federal and CA limits diverge. No such scenario or fact path exists yet.",
+      "4.page2.interest_8b_federal":
+        "Home mortgage interest not reported on Form 1098 requires a dedicated fact (e.g. seller-financed mortgage). No such fact ingestion path exists yet.",
+      "4.page2.interest_8b_additions":
+        "CA conformity addition for line 8b requires 1098/non-1098 mortgage interest facts not yet ingested.",
+      "4.page2.interest_8c_federal":
+        "Points not reported on Form 1098 require a dedicated mortgage-points fact. No such fact ingestion path exists yet.",
+      "4.page2.interest_8c_additions":
+        "CA conformity addition for points (line 8c) requires mortgage-points facts not yet ingested.",
+      "4.page2.interest_8e_additions":
+        "CA additions to home mortgage interest (line 8e Col C) require taxpayer-specific adjustments per CA mortgage interest rules — no fact ingestion path exists for CA-specific home mortgage interest addition scenarios.",
+      "4.page2.interest_9_federal":
+        "Investment interest expense from federal Schedule A line 9 — no Schedule A ingestion exists; would require FTB 3526 data.",
+      "4.page2.interest_9_subtractions":
+        "CA investment interest subtractions per FTB 3526 — no FTB 3526 ingestion or investment-interest-expense fact path exists.",
+      "4.page2.interest_9_additions":
+        "CA investment interest additions per FTB 3526 — no FTB 3526 ingestion or investment-interest-expense fact path exists.",
+      "5.page2.charity_11_federal":
+        "Gifts by cash or check (federal Schedule A line 11) — no Schedule A ingestion exists; no charitable contribution fact path available.",
+      "5.page2.charity_11_subtractions":
+        "CA charitable contribution subtractions (line 11 Col B) — CA limits contributions to 50% of AGI per FTB 3526 guidance; no charitable-contribution fact or FTB worksheet ingestion exists.",
+      "5.page2.charity_11_additions":
+        "CA charitable contribution additions (line 11 Col C) — no scenario or fact path exists for charitable amounts that are higher for CA than federal.",
+      "5.page2.charity_12_federal":
+        "Non-cash charitable gifts (federal Schedule A line 12) — no fact ingestion path for non-cash charitable contribution amounts; requires taxpayer-provided data from Form 8283 or similar.",
+      "5.page2.charity_12_subtractions":
+        "CA adjustment for non-cash charitable gifts (line 12, col B) — requires FTB Pub. 1001 worksheet for CA-specific limitations (e.g., conservation easement 30% AGI cap vs. 50% federal); no scenario or ingestion path built yet.",
+      "5.page2.charity_12_additions":
+        "CA addition for non-cash charitable gifts (line 12, col C) — no ingestion path for CA-specific non-cash charitable contribution additions; requires FTB Pub. 1001 analysis.",
+      "5.page2.charity_13_federal":
+        "Charitable contribution carryover from prior year (federal Schedule A line 13, col A) — requires prior-year carryover data; no prior-year carryover ingestion path built yet.",
+      "5.page2.charity_13_subtractions":
+        "CA subtraction for charitable carryover (line 13, col B) — applies when CA carryover period (5 years) has expired but federal (15 years) has not, or for appreciated stock contributed to private foundation; requires prior-year carryover tracking not yet ingested.",
+      "5.page2.charity_13_additions":
+        "CA addition for charitable carryover (line 13, col C) — applies when CA carryover exceeds federal carryover; requires prior-year CA carryover tracking not yet ingested.",
+      "5.page2.casualty_15_federal":
+        "Casualty/theft loss from federal Form 4684 (Schedule A line 15, col A) — no fact ingestion path for casualty loss data; requires Form 4684 completion which we have no scenario for yet.",
+      "5.page2.casualty_15_subtractions":
+        "CA-specific subtraction for casualty/theft losses — requires FTB Form 4684 California conformity analysis; no ingestion path for casualty loss facts yet.",
+      "5.page2.casualty_15_additions":
+        "CA-specific addition for casualty/theft losses — requires FTB Form 4684 California conformity analysis; no ingestion path for casualty loss facts yet.",
+      "5.page2.other_deductions_16_federal":
+        "Other itemized deductions from federal Schedule A line 16 — no ingestion path for miscellaneous itemized deduction facts yet.",
+      "5.page2.other_deductions_16_subtractions":
+        "CA-specific subtraction for other itemized deductions — no ingestion path for these deduction facts yet.",
+      "5.page2.other_deductions_16_additions":
+        "CA-specific addition for other itemized deductions — no ingestion path for these deduction facts yet.",
+      "5.page2.job_expenses_19":
+        "Unreimbursed employee expenses (Schedule CA Part 2 line 19) — requires Form 2106 California-specific computation; no ingestion path for employee business expense facts yet.",
+      "5.page2.job_expenses_20":
+        "Tax preparation fees are a taxpayer-specific itemized deduction amount. No fact key exists for this; no ingestion path built yet.",
+      "5.page2.job_expenses_21_type":
+        "Free-text description of other miscellaneous deduction expenses (investment, safe deposit box, etc.). No fact ingestion path for this.",
+      "5.page2.job_expenses_21_amount":
+        "Amount for other miscellaneous itemized deductions (investment expenses, safe deposit box, etc.). No fact ingestion path built yet.",
+      "5.page2.job_expenses_24_threshold":
+        "This is a computed field requiring multiplication of line 23 by 2% (0.02). No multiply rule exists in the rule library; would need a formula/expression rule.",
+      "5.page2.other_adjustments_27_type":
+        "Free-text description of other CA-specific itemized deduction adjustments (e.g. adoption expenses, nontaxable income expenses). No fact or decision captures this.",
+      "5.page2.other_adjustments_27_amount":
+        "Other CA itemized deduction adjustments (adoption credit, nontaxable income expenses, legislator travel, etc.). No fact ingestion path built for these CA-specific adjustments.",
+      "5.page2.total_itemized_29":
+        "Line 29 requires a conditional: if Form 540 line 13 (federal AGI) exceeds the filing-status threshold ($252,203 / $378,310 / $504,411), the taxpayer must complete the Itemized Deductions Worksheet (a multi-step phase-out calculation). The engine has no conditional-branch or worksheet rule. For below-threshold taxpayers, line 29 equals line 28, but we cannot implement the high-income phase-out path. Bind as unsupported until a conditional/worksheet rule is available.",
     },
 
     todos: {
-      "0.line.1z_additions": "confidence=medium: Sum of available Column C addition sub-lines within lines 1a–1i; only 1i_additions exists in the inventory.",
-      "2.line.b10_additions": "confidence=medium: Sum of all Column C Additions from Section A (lines 1z through 7a) and Section B (lines 1 through 7 and 9a); col C does NOT include 9b1–9b3.",
-      "4.page2.interest_8e_subtractions": "confidence=low: Lines 8a, 8b, 8c have no column B fields in the inventory; line 8e col B has no contributing subtraction terms currently — unsupported is more appropriate.",
-      "5.page2.total_itemized_17_subtractions": "confidence=medium: Sum of lines 4, 7, 10, 14, 15, and 16 Column B per Schedule CA (540) Part 2 line 17 instructions.",
+      "0.line.1z_additions":
+        "confidence=medium: Sum of available Column C addition sub-lines within lines 1a–1i; only 1i_additions exists in the inventory.",
+      "2.line.b10_additions":
+        "confidence=medium: Sum of all Column C Additions from Section A (lines 1z through 7a) and Section B (lines 1 through 7 and 9a); col C does NOT include 9b1–9b3.",
+      "4.page2.interest_8e_subtractions":
+        "confidence=low: Lines 8a, 8b, 8c have no column B fields in the inventory; line 8e col B has no contributing subtraction terms currently — unsupported is more appropriate.",
+      "5.page2.total_itemized_17_subtractions":
+        "confidence=medium: Sum of lines 4, 7, 10, 14, 15, and 16 Column B per Schedule CA (540) Part 2 line 17 instructions.",
     },
-
   });
 }
 

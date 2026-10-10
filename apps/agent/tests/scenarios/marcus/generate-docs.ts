@@ -16,13 +16,7 @@
  * documents", next to the Markdown brief + cover note in the same folder.
  */
 
-import {
-  PDFDocument,
-  StandardFonts,
-  rgb,
-  type PDFPage,
-  type PDFFont,
-} from "pdf-lib";
+import { PDFDocument, StandardFonts, rgb, type PDFPage, type PDFFont } from "pdf-lib";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -111,20 +105,84 @@ const SCHWAB = {
     box1aOrdinary: 3_000.0,
     box1bQualified: 2_000.0,
     detail: [
-      { description: "VANGUARD TOTAL STOCK MARKET ETF", cusip: "922908769", payDate: "03/31/25", ord: 730.0, qual: 475.0 },
-      { description: "VANGUARD TOTAL STOCK MARKET ETF", cusip: "922908769", payDate: "06/30/25", ord: 740.0, qual: 500.0 },
-      { description: "VANGUARD TOTAL STOCK MARKET ETF", cusip: "922908769", payDate: "09/30/25", ord: 750.0, qual: 510.0 },
-      { description: "VANGUARD TOTAL STOCK MARKET ETF", cusip: "922908769", payDate: "12/22/25", ord: 780.0, qual: 515.0 },
+      {
+        description: "VANGUARD TOTAL STOCK MARKET ETF",
+        cusip: "922908769",
+        payDate: "03/31/25",
+        ord: 730.0,
+        qual: 475.0,
+      },
+      {
+        description: "VANGUARD TOTAL STOCK MARKET ETF",
+        cusip: "922908769",
+        payDate: "06/30/25",
+        ord: 740.0,
+        qual: 500.0,
+      },
+      {
+        description: "VANGUARD TOTAL STOCK MARKET ETF",
+        cusip: "922908769",
+        payDate: "09/30/25",
+        ord: 750.0,
+        qual: 510.0,
+      },
+      {
+        description: "VANGUARD TOTAL STOCK MARKET ETF",
+        cusip: "922908769",
+        payDate: "12/22/25",
+        ord: 780.0,
+        qual: 515.0,
+      },
     ],
   },
   trades: {
     shortTerm: [
-      { description: "TESLA INC", cusip: "88160R101", symbol: "TSLA", qty: 25, acquired: "02/14/25", sold: "11/05/25", proceeds: 14_000.0, basis: 10_000.0, gainLoss: 4_000.0 },
-      { description: "JPMORGAN CHASE & CO", cusip: "46625H100", symbol: "JPM", qty: 50, acquired: "03/10/25", sold: "08/22/25", proceeds: 8_500.0, basis: 10_000.0, gainLoss: -1_500.0 },
+      {
+        description: "TESLA INC",
+        cusip: "88160R101",
+        symbol: "TSLA",
+        qty: 25,
+        acquired: "02/14/25",
+        sold: "11/05/25",
+        proceeds: 14_000.0,
+        basis: 10_000.0,
+        gainLoss: 4_000.0,
+      },
+      {
+        description: "JPMORGAN CHASE & CO",
+        cusip: "46625H100",
+        symbol: "JPM",
+        qty: 50,
+        acquired: "03/10/25",
+        sold: "08/22/25",
+        proceeds: 8_500.0,
+        basis: 10_000.0,
+        gainLoss: -1_500.0,
+      },
     ],
     longTerm: [
-      { description: "ALPHABET INC CLASS A", cusip: "02079K305", symbol: "GOOGL", qty: 100, acquired: "01/15/22", sold: "10/10/25", proceeds: 20_000.0, basis: 12_000.0, gainLoss: 8_000.0 },
-      { description: "MICROSOFT CORP", cusip: "594918104", symbol: "MSFT", qty: 50, acquired: "05/20/23", sold: "09/25/25", proceeds: 15_000.0, basis: 18_000.0, gainLoss: -3_000.0 },
+      {
+        description: "ALPHABET INC CLASS A",
+        cusip: "02079K305",
+        symbol: "GOOGL",
+        qty: 100,
+        acquired: "01/15/22",
+        sold: "10/10/25",
+        proceeds: 20_000.0,
+        basis: 12_000.0,
+        gainLoss: 8_000.0,
+      },
+      {
+        description: "MICROSOFT CORP",
+        cusip: "594918104",
+        symbol: "MSFT",
+        qty: 50,
+        acquired: "05/20/23",
+        sold: "09/25/25",
+        proceeds: 15_000.0,
+        basis: 18_000.0,
+        gainLoss: -3_000.0,
+      },
     ],
   },
 };
@@ -245,10 +303,22 @@ function drawBox(
   yTopDown: number,
   w: number,
   h: number,
-  opts: { fill?: ReturnType<typeof rgb>; borderColor?: ReturnType<typeof rgb>; borderWidth?: number } = {},
+  opts: {
+    fill?: ReturnType<typeof rgb>;
+    borderColor?: ReturnType<typeof rgb>;
+    borderWidth?: number;
+  } = {},
 ) {
   const { fill, borderColor = BLACK, borderWidth = 0.5 } = opts;
-  ctx.page.drawRectangle({ x, y: PAGE_H - yTopDown - h, width: w, height: h, color: fill, borderColor, borderWidth });
+  ctx.page.drawRectangle({
+    x,
+    y: PAGE_H - yTopDown - h,
+    width: w,
+    height: h,
+    color: fill,
+    borderColor,
+    borderWidth,
+  });
 }
 
 function drawLine(
@@ -260,7 +330,12 @@ function drawLine(
   opts: { thickness?: number } = {},
 ) {
   const { thickness = 0.5 } = opts;
-  ctx.page.drawLine({ start: { x: x1, y: PAGE_H - y1 }, end: { x: x2, y: PAGE_H - y2 }, thickness, color: BLACK });
+  ctx.page.drawLine({
+    start: { x: x1, y: PAGE_H - y1 },
+    end: { x: x2, y: PAGE_H - y2 },
+    thickness,
+    color: BLACK,
+  });
 }
 
 function drawLabeledBox(
@@ -271,7 +346,12 @@ function drawLabeledBox(
   h: number,
   label: string,
   value?: string,
-  opts: { fill?: ReturnType<typeof rgb>; valueAlign?: "left" | "right"; valueSize?: number; multilineValue?: string[] } = {},
+  opts: {
+    fill?: ReturnType<typeof rgb>;
+    valueAlign?: "left" | "right";
+    valueSize?: number;
+    multilineValue?: string[];
+  } = {},
 ) {
   const { fill, valueAlign = "right", valueSize = 10, multilineValue } = opts;
   drawBox(ctx, x, y, w, h, { fill });
@@ -312,7 +392,8 @@ function drawColumn(
   let y = yStart;
   for (const row of rows) {
     drawText(ctx, row.label, x, y, { size, bold: row.bold, italic: row.italic });
-    if (row.value) drawTextRight(ctx, row.value, x + width, y, { size, bold: row.bold, italic: row.italic });
+    if (row.value)
+      drawTextRight(ctx, row.value, x + width, y, { size, bold: row.bold, italic: row.italic });
     y += lineHeight;
   }
   return y;
@@ -365,9 +446,20 @@ async function buildW2(): Promise<Uint8Array> {
   const X_END = 572;
 
   // Top row: SSN + OMB notice
-  drawLabeledBox(ctx, X0, 80, X_LEFT_END - X0, 32, "a  Employee's social security number", MARCUS.ssn, {
-    fill: SHADE, valueAlign: "left", valueSize: 11,
-  });
+  drawLabeledBox(
+    ctx,
+    X0,
+    80,
+    X_LEFT_END - X0,
+    32,
+    "a  Employee's social security number",
+    MARCUS.ssn,
+    {
+      fill: SHADE,
+      valueAlign: "left",
+      valueSize: 11,
+    },
+  );
   drawBox(ctx, X_LEFT_END, 80, X_END - X_LEFT_END, 32, { fill: SHADE });
   drawText(ctx, "OMB No. 1545-0008", X_LEFT_END + 4, 82, { size: 6, bold: true });
   drawText(ctx, "Safe, accurate,", X_LEFT_END + 4, 92, { size: 7 });
@@ -377,20 +469,86 @@ async function buildW2(): Promise<Uint8Array> {
 
   // Row: EIN | Box 1 | Box 2
   let y = 112;
-  drawLabeledBox(ctx, X0, y, X_LEFT_END - X0, 24, "b  Employer identification number (EIN)", HELIX.ein, { valueAlign: "left", valueSize: 10 });
-  drawLabeledBox(ctx, X_LEFT_END, y, X_PAIR_MID - X_LEFT_END, 24, "1  Wages, tips, other compensation", fmtMoney(W2.box1));
-  drawLabeledBox(ctx, X_PAIR_MID, y, X_END - X_PAIR_MID, 24, "2  Federal income tax withheld", fmtMoney(W2.box2));
+  drawLabeledBox(
+    ctx,
+    X0,
+    y,
+    X_LEFT_END - X0,
+    24,
+    "b  Employer identification number (EIN)",
+    HELIX.ein,
+    { valueAlign: "left", valueSize: 10 },
+  );
+  drawLabeledBox(
+    ctx,
+    X_LEFT_END,
+    y,
+    X_PAIR_MID - X_LEFT_END,
+    24,
+    "1  Wages, tips, other compensation",
+    fmtMoney(W2.box1),
+  );
+  drawLabeledBox(
+    ctx,
+    X_PAIR_MID,
+    y,
+    X_END - X_PAIR_MID,
+    24,
+    "2  Federal income tax withheld",
+    fmtMoney(W2.box2),
+  );
 
   // Employer block (3 lines) spanning rows 2-4
   y += 24;
-  drawLabeledBox(ctx, X0, y, X_LEFT_END - X0, 72, "c  Employer's name, address, and ZIP code", undefined, {
-    multilineValue: [HELIX.name, HELIX.street, HELIX.cityStateZip],
-  });
-  drawLabeledBox(ctx, X_LEFT_END, y, X_PAIR_MID - X_LEFT_END, 24, "3  Social security wages", fmtMoney(W2.box3));
-  drawLabeledBox(ctx, X_PAIR_MID, y, X_END - X_PAIR_MID, 24, "4  Social security tax withheld", fmtMoney(W2.box4));
+  drawLabeledBox(
+    ctx,
+    X0,
+    y,
+    X_LEFT_END - X0,
+    72,
+    "c  Employer's name, address, and ZIP code",
+    undefined,
+    {
+      multilineValue: [HELIX.name, HELIX.street, HELIX.cityStateZip],
+    },
+  );
+  drawLabeledBox(
+    ctx,
+    X_LEFT_END,
+    y,
+    X_PAIR_MID - X_LEFT_END,
+    24,
+    "3  Social security wages",
+    fmtMoney(W2.box3),
+  );
+  drawLabeledBox(
+    ctx,
+    X_PAIR_MID,
+    y,
+    X_END - X_PAIR_MID,
+    24,
+    "4  Social security tax withheld",
+    fmtMoney(W2.box4),
+  );
   y += 24;
-  drawLabeledBox(ctx, X_LEFT_END, y, X_PAIR_MID - X_LEFT_END, 24, "5  Medicare wages and tips", fmtMoney(W2.box5));
-  drawLabeledBox(ctx, X_PAIR_MID, y, X_END - X_PAIR_MID, 24, "6  Medicare tax withheld", fmtMoney(W2.box6));
+  drawLabeledBox(
+    ctx,
+    X_LEFT_END,
+    y,
+    X_PAIR_MID - X_LEFT_END,
+    24,
+    "5  Medicare wages and tips",
+    fmtMoney(W2.box5),
+  );
+  drawLabeledBox(
+    ctx,
+    X_PAIR_MID,
+    y,
+    X_END - X_PAIR_MID,
+    24,
+    "6  Medicare tax withheld",
+    fmtMoney(W2.box6),
+  );
   y += 24;
   drawLabeledBox(ctx, X_LEFT_END, y, X_PAIR_MID - X_LEFT_END, 24, "7  Social security tips", "");
   drawLabeledBox(ctx, X_PAIR_MID, y, X_END - X_PAIR_MID, 24, "8  Allocated tips", "");
@@ -417,7 +575,16 @@ async function buildW2(): Promise<Uint8Array> {
 
   // Row: Employee address line 1 | Box 13 checkboxes | Box 12b
   y += 24;
-  drawLabeledBox(ctx, X0, y, X_LEFT_END - X0, 24, "f  Employee's address and ZIP code", MARCUS.street, { valueAlign: "left", valueSize: 10 });
+  drawLabeledBox(
+    ctx,
+    X0,
+    y,
+    X_LEFT_END - X0,
+    24,
+    "f  Employee's address and ZIP code",
+    MARCUS.street,
+    { valueAlign: "left", valueSize: 10 },
+  );
   drawBox(ctx, X_LEFT_END, y, X_BOX12 - X_LEFT_END, 24);
   drawText(ctx, "13", X_LEFT_END + 2, y + 2, { size: 6, bold: true });
   const cb = (cx: number, cy: number) => drawBox(ctx, cx, cy, 8, 8, { borderWidth: 0.4 });
@@ -440,7 +607,10 @@ async function buildW2(): Promise<Uint8Array> {
   y += 24;
   drawBox(ctx, X0, y, X_LEFT_END - X0, 24);
   drawText(ctx, MARCUS.cityStateZip, X0 + 4, y + 10, { size: 10 });
-  drawLabeledBox(ctx, X_LEFT_END, y, X_BOX12 - X_LEFT_END, 24, "14  Other", W2.box14, { valueAlign: "left", valueSize: 9 });
+  drawLabeledBox(ctx, X_LEFT_END, y, X_BOX12 - X_LEFT_END, 24, "14  Other", W2.box14, {
+    valueAlign: "left",
+    valueSize: 9,
+  });
   drawLabeledBox(ctx, X_BOX12, y, X_END - X_BOX12, 24, "12c", "");
   drawLine(ctx, X_BOX12 + 24, y + 12, X_BOX12 + 24, y + 24);
 
@@ -456,14 +626,28 @@ async function buildW2(): Promise<Uint8Array> {
   const stateCols = [
     { x: X0, w: 40, label: "15  State", value: "CA" },
     { x: X0 + 40, w: 100, label: "Employer's state ID number", value: HELIX.stateId },
-    { x: X0 + 140, w: 90, label: "16  State wages, tips, etc.", value: fmtMoney(W2.box16), valueAlign: "right" as const },
-    { x: X0 + 230, w: 80, label: "17  State income tax", value: fmtMoney(W2.box17), valueAlign: "right" as const },
+    {
+      x: X0 + 140,
+      w: 90,
+      label: "16  State wages, tips, etc.",
+      value: fmtMoney(W2.box16),
+      valueAlign: "right" as const,
+    },
+    {
+      x: X0 + 230,
+      w: 80,
+      label: "17  State income tax",
+      value: fmtMoney(W2.box17),
+      valueAlign: "right" as const,
+    },
     { x: X0 + 310, w: 70, label: "18  Local wages, tips, etc.", value: "" },
     { x: X0 + 380, w: 70, label: "19  Local income tax", value: "" },
     { x: X0 + 450, w: 82, label: "20  Locality name", value: "" },
   ];
   for (const c of stateCols) {
-    drawLabeledBox(ctx, c.x, y, c.w, 28, c.label, c.value, { valueAlign: (c as { valueAlign?: "left" | "right" }).valueAlign ?? "left" });
+    drawLabeledBox(ctx, c.x, y, c.w, 28, c.label, c.value, {
+      valueAlign: (c as { valueAlign?: "left" | "right" }).valueAlign ?? "left",
+    });
   }
   y += 28;
   for (const c of stateCols) drawBox(ctx, c.x, y, c.w, 22);
@@ -474,11 +658,18 @@ async function buildW2(): Promise<Uint8Array> {
   drawText(ctx, "W-2", X0 + 24, y, { size: 16, bold: true });
   drawText(ctx, "Wage and Tax Statement", X0 + 60, y + 6, { size: 10, bold: true });
   drawText(ctx, "2025", X0 + 200, y - 2, { size: 16, bold: true });
-  drawTextRight(ctx, "Department of the Treasury—Internal Revenue Service", X_END, y + 8, { size: 8 });
+  drawTextRight(ctx, "Department of the Treasury—Internal Revenue Service", X_END, y + 8, {
+    size: 8,
+  });
   y += 22;
-  drawText(ctx, "Copy B—To Be Filed With Employee's FEDERAL Tax Return.", X0, y, { size: 9, bold: true });
+  drawText(ctx, "Copy B—To Be Filed With Employee's FEDERAL Tax Return.", X0, y, {
+    size: 9,
+    bold: true,
+  });
   y += 11;
-  drawText(ctx, "This information is being furnished to the Internal Revenue Service.", X0, y, { size: 8 });
+  drawText(ctx, "This information is being furnished to the Internal Revenue Service.", X0, y, {
+    size: 8,
+  });
 
   return await doc.save();
 }
@@ -527,7 +718,8 @@ function drawWealthfrontHeader(ctx: Ctx, opts: WfHeaderOpts) {
     drawText(ctx, "2025", 42, 50, { size: 9, bold: true });
     if (opts.titleLabel) {
       drawTextCenter(ctx, opts.titleLabel, PAGE_W / 2, 38, { size: 10, bold: true });
-      if (opts.continued) drawTextCenter(ctx, "(continued)", PAGE_W / 2, 50, { size: 8, italic: true });
+      if (opts.continued)
+        drawTextCenter(ctx, "(continued)", PAGE_W / 2, 50, { size: 8, italic: true });
     }
     drawTextRight(ctx, "Account  " + WEALTHFRONT.account, PAGE_W - 42, 38, { size: 8 });
     drawTextRight(ctx, WEALTHFRONT.statementDate, PAGE_W - 42, 50, { size: 8 });
@@ -548,17 +740,30 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
 
     drawTextCenter(ctx, "Summary Information", PAGE_W / 2, 140, { size: 11, bold: true });
     drawText(ctx, "11 - [ ] FATCA filing requirement (see instructions)", 42, 142, { size: 7 });
-    drawText(ctx, "13 - [ ] FATCA filing requirement (see instructions)", PAGE_W - 230, 142, { size: 7 });
+    drawText(ctx, "13 - [ ] FATCA filing requirement (see instructions)", PAGE_W - 230, 142, {
+      size: 7,
+    });
 
     const colLeftX = 42;
     const colRightX = 320;
     const colW = 250;
 
-    let yL = drawSectionTitle(ctx, colLeftX, 160, colW, "DIVIDENDS AND DISTRIBUTIONS", "2025 1099-DIV*", "OMB No. 1545-0110");
+    let yL = drawSectionTitle(
+      ctx,
+      colLeftX,
+      160,
+      colW,
+      "DIVIDENDS AND DISTRIBUTIONS",
+      "2025 1099-DIV*",
+      "OMB No. 1545-0110",
+    );
     yL = drawColumn(ctx, colLeftX, yL, colW, [
       { label: "1a- Total ordinary dividends (includes lines 1b, 5, 2e)", value: "0.00" },
       { label: "1b- Qualified dividends", value: "0.00" },
-      { label: "2a- Total capital gain distributions (includes lines 2b, 2c, 2d, 2f)", value: "0.00" },
+      {
+        label: "2a- Total capital gain distributions (includes lines 2b, 2c, 2d, 2f)",
+        value: "0.00",
+      },
       { label: "2b- Unrecaptured Section 1250 gain", value: "0.00" },
       { label: "2c- Section 1202 gain", value: "0.00" },
       { label: "2d- Collectibles (28%) gain", value: "0.00" },
@@ -575,7 +780,15 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       { label: "13- Specified private activity bond interest dividends (AMT)", value: "0.00" },
     ]);
 
-    let yR = drawSectionTitle(ctx, colRightX, 160, colW, "MISCELLANEOUS INFORMATION", "2025 1099-MISC*", "OMB No. 1545-0115");
+    let yR = drawSectionTitle(
+      ctx,
+      colRightX,
+      160,
+      colW,
+      "MISCELLANEOUS INFORMATION",
+      "2025 1099-MISC*",
+      "OMB No. 1545-0115",
+    );
     yR = drawColumn(ctx, colRightX, yR, colW, [
       { label: "2- Royalties", value: "0.00" },
       { label: "3- Other income", value: "0.00" },
@@ -583,7 +796,15 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       { label: "8- Substitute payments in lieu of dividends or interest", value: "0.00" },
     ]);
     yR += 8;
-    yR = drawSectionTitle(ctx, colRightX, yR, colW, "SECTION 1256 CONTRACTS", "2025 1099-B*", "OMB No. 1545-0715");
+    yR = drawSectionTitle(
+      ctx,
+      colRightX,
+      yR,
+      colW,
+      "SECTION 1256 CONTRACTS",
+      "2025 1099-B*",
+      "OMB No. 1545-0715",
+    );
     yR = drawColumn(ctx, colRightX, yR, colW, [
       { label: "8- Profit or (loss) realized in 2025 on closed contracts", value: "0.00" },
       { label: "9- Unrealized profit or (loss) on open contracts-12/31/2024", value: "0.00" },
@@ -594,19 +815,37 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     yR = drawWrapped(
       ctx,
       "If applicable, proceeds from sale transactions appear summarized below and are detailed in subsequent sections of this document.",
-      colRightX, yR, colW, { size: 7, italic: true },
+      colRightX,
+      yR,
+      colW,
+      { size: 7, italic: true },
     );
     yR += 6;
     yR = drawWrapped(
       ctx,
       "* This is important tax information and is being furnished to the Internal Revenue Service. If you are required to file a return, a negligence penalty or other sanction may be imposed on you if this income is taxable and the IRS determines that it has not been reported.",
-      colRightX, yR, colW, { size: 7, bold: true },
+      colRightX,
+      yR,
+      colW,
+      { size: 7, bold: true },
     );
 
     // Summary table. Column x positions are widened so "Undetermined" fits.
     const tableY = Math.max(yL, yR) + 20;
-    drawText(ctx, "SUMMARY OF PROCEEDS, GAINS & LOSSES, ADJUSTMENTS AND WITHHOLDING", colLeftX, tableY, { size: 9, bold: true });
-    drawText(ctx, "Refer to the 1099-B and Proceeds not reported to the IRS pages to ensure that you consider all relevant items and to determine the correct gains and losses. The amounts shown below are for informational purposes.", colLeftX, tableY + 12, { size: 6, italic: true });
+    drawText(
+      ctx,
+      "SUMMARY OF PROCEEDS, GAINS & LOSSES, ADJUSTMENTS AND WITHHOLDING",
+      colLeftX,
+      tableY,
+      { size: 9, bold: true },
+    );
+    drawText(
+      ctx,
+      "Refer to the 1099-B and Proceeds not reported to the IRS pages to ensure that you consider all relevant items and to determine the correct gains and losses. The amounts shown below are for informational purposes.",
+      colLeftX,
+      tableY + 12,
+      { size: 6, italic: true },
+    );
 
     const tHdrY = tableY + 32; // extra room for 2-line headers
     /*
@@ -665,20 +904,39 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     drawTextRight(ctx, "0.00", X_PROC, rowY, { size: 7 });
 
     rowY += 18;
-    drawText(ctx, "Changes to dividend tax classifications processed after your original tax form is issued for 2025 may require an amended tax form.", colLeftX, rowY, { size: 7, italic: true });
+    drawText(
+      ctx,
+      "Changes to dividend tax classifications processed after your original tax form is issued for 2025 may require an amended tax form.",
+      colLeftX,
+      rowY,
+      { size: 7, italic: true },
+    );
   }
 
   // ─── Page 2: Interest Income (the page that matters for Marcus) ──────────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
-    drawWealthfrontHeader(ctx, { page: 2, totalPages: 6, titleLabel: "Summary Information", continued: true });
+    drawWealthfrontHeader(ctx, {
+      page: 2,
+      totalPages: 6,
+      titleLabel: "Summary Information",
+      continued: true,
+    });
 
     const colLeftX = 42;
     const colRightX = 320;
     const colW = 250;
 
-    let yL = drawSectionTitle(ctx, colLeftX, 80, colW, "INTEREST INCOME", "2025 1099-INT", "OMB No. 1545-0112");
+    let yL = drawSectionTitle(
+      ctx,
+      colLeftX,
+      80,
+      colW,
+      "INTEREST INCOME",
+      "2025 1099-INT",
+      "OMB No. 1545-0112",
+    );
     yL = drawWrapped(
       ctx,
       "This is important tax information and is being furnished to the Internal Revenue Service. If you are required to file a return, a negligence penalty or other sanction may be imposed on you if this income is taxable and the IRS determines that it has not been reported.",
@@ -690,7 +948,11 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     yL += 6;
 
     yL = drawColumn(ctx, colLeftX, yL, colW, [
-      { label: "1- Interest income (not included in line 3)", value: fmtMoney(WEALTHFRONT.interestTotal), bold: true },
+      {
+        label: "1- Interest income (not included in line 3)",
+        value: fmtMoney(WEALTHFRONT.interestTotal),
+        bold: true,
+      },
       { label: "2- Early withdrawal penalty", value: "0.00" },
       { label: "3- Interest on US Savings Bonds & Treasury obligations", value: "0.00" },
       { label: "4- Federal income tax withheld", value: "0.00", bold: true },
@@ -703,7 +965,11 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       { label: "12- Bond premium on Treasury obligations (covered lots)", value: "0.00" },
       { label: "13- Bond premium on tax-exempt bonds (categorized below)", value: "0.00" },
       { label: "   Tax-exempt obligations (covered lots)", value: "0.00", italic: true },
-      { label: "   Tax-exempt private activity obligations (AMT, covered lots)", value: "0.00", italic: true },
+      {
+        label: "   Tax-exempt private activity obligations (AMT, covered lots)",
+        value: "0.00",
+        italic: true,
+      },
       { label: "14- Tax-exempt and tax credit bond CUSIP number", value: "See detail" },
       { label: "FATCA filing requirement [ ]", value: "" },
     ]);
@@ -788,7 +1054,13 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     ]);
 
     yR += 10;
-    yR = drawSectionTitle(ctx, colRightX, yR, colW, "RECONCILIATIONS, FEES, EXPENSES AND EXPENDITURES");
+    yR = drawSectionTitle(
+      ctx,
+      colRightX,
+      yR,
+      colW,
+      "RECONCILIATIONS, FEES, EXPENSES AND EXPENDITURES",
+    );
     yR = drawWrapped(
       ctx,
       "The amounts in this section are not reported to the IRS. They are presented here for your reference when preparing your income tax return(s).",
@@ -824,20 +1096,30 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
-    drawWealthfrontHeader(ctx, { page: 3, totalPages: 6, titleLabel: "Detail for Interest Income" });
+    drawWealthfrontHeader(ctx, {
+      page: 3,
+      totalPages: 6,
+      titleLabel: "Detail for Interest Income",
+    });
 
     const x0 = 42;
     const pageW = PAGE_W - 84;
     let introY = drawWrapped(
       ctx,
       "This section of your tax information statement contains the payment level detail of taxable interest and associated bond premium. Market discount will be shown here only if you have elected to recognize it currently rather than at the time of sale or maturity. Bond premium and market discount for covered tax lots are totaled on Form 1099-INT and reported to the IRS. For noncovered tax lots, they are totaled and presented beneath the 1099-INT for informational purposes and are not reported to the IRS.",
-      x0, 80, pageW, { size: 7, italic: true },
+      x0,
+      80,
+      pageW,
+      { size: 7, italic: true },
     );
     introY += 6;
     drawWrapped(
       ctx,
       "To provide a complete picture of activity for each investment, we also include here nonreportable transactions such as accrued interest paid on purchases and payment or receipt of nonqualified interest. Other amounts, such as federal, state and foreign tax withheld and investment expenses are shown as negative amounts but do not net against the reportable income totals.",
-      x0, introY, pageW, { size: 7, italic: true },
+      x0,
+      introY,
+      pageW,
+      { size: 7, italic: true },
     );
 
     const hdrY = 150;
@@ -861,7 +1143,10 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     drawText(ctx, "Total Interest", x0 + 400, rowY, { size: 8 });
     rowY += 16;
     drawLine(ctx, x0 + 340, rowY - 4, x0 + 388, rowY - 4, { thickness: 0.7 });
-    drawTextRight(ctx, fmtMoney(WEALTHFRONT.interestTotal), x0 + 380, rowY, { size: 8, bold: true });
+    drawTextRight(ctx, fmtMoney(WEALTHFRONT.interestTotal), x0 + 380, rowY, {
+      size: 8,
+      bold: true,
+    });
     drawText(ctx, "Total Interest", x0 + 400, rowY, { size: 8, bold: true });
   }
 
@@ -869,7 +1154,11 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
-    drawWealthfrontHeader(ctx, { page: 4, totalPages: 6, titleLabel: "Schedule of Management Fees" });
+    drawWealthfrontHeader(ctx, {
+      page: 4,
+      totalPages: 6,
+      titleLabel: "Schedule of Management Fees",
+    });
 
     const x0 = 100;
     const x1 = 440;
@@ -902,10 +1191,15 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     const footEnd = drawWrapped(
       ctx,
       "Please note that this illustrative calculation of the deductible portion of account management fees is provided as a service to you and is not reported to the Internal Revenue Service. The above calculation takes into account all items of taxable and tax-exempt gross income in the account that are reported on the enclosed 1099. Account level management fees may not be charged on some of the assets held in your account. Accordingly, if this applies to your account, you may wish to exclude gross income from those assets in making this calculation. You should consult with your tax advisor.",
-      42, footY, PAGE_W - 84, { size: 6, italic: true },
+      42,
+      footY,
+      PAGE_W - 84,
+      { size: 6, italic: true },
     );
     drawText(ctx, "*  Excludes Accrued Interest Paid", 42, footEnd + 6, { size: 6 });
-    drawText(ctx, "** Excludes US Government Dividends from Mutual Funds", 42, footEnd + 16, { size: 6 });
+    drawText(ctx, "** Excludes US Government Dividends from Mutual Funds", 42, footEnd + 16, {
+      size: 6,
+    });
   }
 
   // ─── Page 5: Instructions for Recipient (abbreviated) ────────────────────
@@ -933,7 +1227,10 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       "requirement.",
       "",
       "Keep tax documents for your records.",
-    ]) { drawText(ctx, l, x0, y, { size: 7 }); y += 9; }
+    ]) {
+      drawText(ctx, l, x0, y, { size: 7 });
+      y += 9;
+    }
     y += 8;
     drawText(ctx, "1099-INT Instructions for Recipient", x0, y, { size: 9, bold: true });
     y += 12;
@@ -950,7 +1247,10 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       "",
       "Box 4. Shows backup withholding. Generally, a payer must backup withhold",
       "if you did not furnish your TIN.",
-    ]) { drawText(ctx, l, x0, y, { size: 7 }); y += 9; }
+    ]) {
+      drawText(ctx, l, x0, y, { size: 7 });
+      y += 9;
+    }
 
     y = 110;
     drawText(ctx, "Additional Box Notes", x1, y, { size: 9, bold: true });
@@ -970,7 +1270,10 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       "Free File. Go to www.irs.gov/FreeFile to see if you qualify for no-cost",
       "online federal tax preparation, e-filing, and direct deposit or payment",
       "options.",
-    ]) { drawText(ctx, l, x1, y, { size: 7 }); y += 9; }
+    ]) {
+      drawText(ctx, l, x1, y, { size: 7 });
+      y += 9;
+    }
   }
 
   // ─── Page 6: blank ────────────────────────────────────────────────────────
@@ -1071,18 +1374,59 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     drawText(ctx, "(none)", 320, listY + 20, { size: 8 });
 
     const introY = 320;
-    drawText(ctx, "This Charles Schwab & Co., Inc. 2025 Consolidated Tax Statement provides your official tax information for use when preparing your tax return. It is important to", x0, introY, { size: 7 });
-    drawText(ctx, "note that the income information that was reported on your December account statement will not have included certain adjustments occurring after", x0, introY + 9, { size: 7 });
-    drawText(ctx, "year-end but are reflected on your Form 1099 and are necessary for tax reporting purposes.", x0, introY + 18, { size: 7 });
-    drawText(ctx, "The following tax documents are not included in this statement and are sent individually in separate mailings, if required: Forms 1099-R, 1099-Q,", x0, introY + 36, { size: 7 });
+    drawText(
+      ctx,
+      "This Charles Schwab & Co., Inc. 2025 Consolidated Tax Statement provides your official tax information for use when preparing your tax return. It is important to",
+      x0,
+      introY,
+      { size: 7 },
+    );
+    drawText(
+      ctx,
+      "note that the income information that was reported on your December account statement will not have included certain adjustments occurring after",
+      x0,
+      introY + 9,
+      { size: 7 },
+    );
+    drawText(
+      ctx,
+      "year-end but are reflected on your Form 1099 and are necessary for tax reporting purposes.",
+      x0,
+      introY + 18,
+      { size: 7 },
+    );
+    drawText(
+      ctx,
+      "The following tax documents are not included in this statement and are sent individually in separate mailings, if required: Forms 1099-R, 1099-Q,",
+      x0,
+      introY + 36,
+      { size: 7 },
+    );
     drawText(ctx, "1042-S, 2439, 5498, 5498-ESA, Schedule K-1.", x0, introY + 45, { size: 7 });
 
     const warnY = PAGE_H - 120;
     drawBox(ctx, x0, warnY, PAGE_W - 72, 50, { fill: rgb(0.98, 0.95, 0.86) });
-    drawText(ctx, "*** WARNING - CORRECTED TAX FORMS POSSIBLE ***", x0 + 10, warnY + 6, { size: 9, bold: true });
-    drawText(ctx, "The Forms 1099 included in your Charles Schwab & Co., Inc. 2025 Consolidated Tax Statement were prepared based upon information provided by the issuer of", x0 + 10, warnY + 20, { size: 7 });
-    drawText(ctx, "each security. The issuer may change the tax status of a distribution reported to you after the issuance of this 1099 Consolidated Tax Statement. If that occurs,", x0 + 10, warnY + 30, { size: 7 });
-    drawText(ctx, "we may be required to send you one or more corrections.", x0 + 10, warnY + 40, { size: 7 });
+    drawText(ctx, "*** WARNING - CORRECTED TAX FORMS POSSIBLE ***", x0 + 10, warnY + 6, {
+      size: 9,
+      bold: true,
+    });
+    drawText(
+      ctx,
+      "The Forms 1099 included in your Charles Schwab & Co., Inc. 2025 Consolidated Tax Statement were prepared based upon information provided by the issuer of",
+      x0 + 10,
+      warnY + 20,
+      { size: 7 },
+    );
+    drawText(
+      ctx,
+      "each security. The issuer may change the tax status of a distribution reported to you after the issuance of this 1099 Consolidated Tax Statement. If that occurs,",
+      x0 + 10,
+      warnY + 30,
+      { size: 7 },
+    );
+    drawText(ctx, "we may be required to send you one or more corrections.", x0 + 10, warnY + 40, {
+      size: 7,
+    });
   }
 
   // ─── Page 2: Box-by-box totals (1099-DIV / -INT / -MISC / -OID / -B) ─────
@@ -1091,8 +1435,20 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     const ctx: Ctx = { page, reg, bold, italic };
     drawSchwabHeader(ctx, 2, 5);
 
-    drawText(ctx, "This is important tax information and is being furnished to the Internal Revenue Service. If you are required to file a return, a negligence penalty or other sanction", x0, 130, { size: 7 });
-    drawText(ctx, "may be imposed on you if this income is taxable and the IRS determines that it has not been reported.", x0, 139, { size: 7 });
+    drawText(
+      ctx,
+      "This is important tax information and is being furnished to the Internal Revenue Service. If you are required to file a return, a negligence penalty or other sanction",
+      x0,
+      130,
+      { size: 7 },
+    );
+    drawText(
+      ctx,
+      "may be imposed on you if this income is taxable and the IRS determines that it has not been reported.",
+      x0,
+      139,
+      { size: 7 },
+    );
 
     const colLeftX = x0;
     const colRightX = 320;
@@ -1105,7 +1461,12 @@ async function buildSchwab1099(): Promise<Uint8Array> {
       return cy + 24;
     };
 
-    let yL = sectionHeader(colLeftX, 160, "IRS 2025 FORM 1099-DIV - DIVIDENDS AND DISTRIBUTIONS", "OMB NO. 1545-0110");
+    let yL = sectionHeader(
+      colLeftX,
+      160,
+      "IRS 2025 FORM 1099-DIV - DIVIDENDS AND DISTRIBUTIONS",
+      "OMB NO. 1545-0110",
+    );
     yL = drawColumn(ctx, colLeftX, yL, colW, [
       { label: "1a.  TOTAL ORDINARY DIVIDENDS", value: "$" + fmtMoney(SCHWAB.div.box1aOrdinary) },
       { label: "1b.  QUALIFIED DIVIDENDS", value: "$" + fmtMoney(SCHWAB.div.box1bQualified) },
@@ -1126,7 +1487,12 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     ]);
 
     yL += 6;
-    yL = sectionHeader(colLeftX, yL, "IRS 2025 FORM 1099-INT - INTEREST INCOME", "OMB NO. 1545-0112");
+    yL = sectionHeader(
+      colLeftX,
+      yL,
+      "IRS 2025 FORM 1099-INT - INTEREST INCOME",
+      "OMB NO. 1545-0112",
+    );
     yL = drawColumn(ctx, colLeftX, yL, colW, [
       { label: "1.   INTEREST INCOME", value: "$0.00" },
       { label: "2.   EARLY WITHDRAWAL PENALTY", value: "$0.00" },
@@ -1142,7 +1508,12 @@ async function buildSchwab1099(): Promise<Uint8Array> {
       { label: "13.  BOND PREMIUM ON TAX-EXEMPT BOND", value: "$0.00" },
     ]);
 
-    let yR = sectionHeader(colRightX, 160, "IRS 2025 FORM 1099-MISC - MISCELLANEOUS INFO", "OMB NO. 1545-0115");
+    let yR = sectionHeader(
+      colRightX,
+      160,
+      "IRS 2025 FORM 1099-MISC - MISCELLANEOUS INFO",
+      "OMB NO. 1545-0115",
+    );
     yR = drawColumn(ctx, colRightX, yR, colW, [
       { label: "1.   RENTS", value: "$0.00" },
       { label: "2.   ROYALTIES", value: "$0.00" },
@@ -1152,7 +1523,12 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     ]);
 
     yR += 6;
-    yR = sectionHeader(colRightX, yR, "IRS 2025 FORM 1099-OID - ORIGINAL ISSUE DISCOUNT", "OMB NO. 1545-0117");
+    yR = sectionHeader(
+      colRightX,
+      yR,
+      "IRS 2025 FORM 1099-OID - ORIGINAL ISSUE DISCOUNT",
+      "OMB NO. 1545-0117",
+    );
     yR = drawColumn(ctx, colRightX, yR, colW, [
       { label: "1.   ORIGINAL ISSUE DISCOUNT FOR 2025", value: "$0.00" },
       { label: "2.   OTHER PERIODIC INTEREST", value: "$0.00" },
@@ -1168,7 +1544,13 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     yR += 6;
     // Shrink long title font so it fits the column
     drawBox(ctx, colRightX, yR, colW, 14, { fill: SHADE });
-    drawText(ctx, "IRS 2025 FORM 1099-B - PROCEEDS FROM BROKER & BARTER EXCHANGE", colRightX + 4, yR + 3, { size: 6.5, bold: true });
+    drawText(
+      ctx,
+      "IRS 2025 FORM 1099-B - PROCEEDS FROM BROKER & BARTER EXCHANGE",
+      colRightX + 4,
+      yR + 3,
+      { size: 6.5, bold: true },
+    );
     drawText(ctx, "BOX   OMB NO. 1545-0715", colRightX + 4, yR + 14 + 3, { size: 7, bold: true });
     yR += 24;
     const stP = SCHWAB.trades.shortTerm.reduce((s, t) => s + t.proceeds, 0);
@@ -1185,7 +1567,13 @@ async function buildSchwab1099(): Promise<Uint8Array> {
       { label: "4.   FEDERAL INCOME TAX WITHHELD", value: "$0.00" },
     ]);
 
-    drawTextCenter(ctx, "IMPORTANT TAX INFORMATION -- PLEASE RETAIN FOR YOUR RECORDS", PAGE_W / 2, PAGE_H - 50, { size: 9, bold: true });
+    drawTextCenter(
+      ctx,
+      "IMPORTANT TAX INFORMATION -- PLEASE RETAIN FOR YOUR RECORDS",
+      PAGE_W / 2,
+      PAGE_H - 50,
+      { size: 9, bold: true },
+    );
   }
 
   // ─── Page 3: 1099-DIV detail ─────────────────────────────────────────────
@@ -1225,10 +1613,16 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     }
     rowY += 8;
     drawText(ctx, "Total Ordinary Dividends  1099-DIV box 1a", x0, rowY, { size: 8, bold: true });
-    drawTextRight(ctx, "$" + fmtMoney(SCHWAB.div.box1aOrdinary), x0 + 350, rowY, { size: 8, bold: true });
+    drawTextRight(ctx, "$" + fmtMoney(SCHWAB.div.box1aOrdinary), x0 + 350, rowY, {
+      size: 8,
+      bold: true,
+    });
     rowY += 12;
     drawText(ctx, "Total Qualified Dividends  1099-DIV box 1b", x0, rowY, { size: 8, bold: true });
-    drawTextRight(ctx, "$" + fmtMoney(SCHWAB.div.box1bQualified), x0 + 420, rowY, { size: 8, bold: true });
+    drawTextRight(ctx, "$" + fmtMoney(SCHWAB.div.box1bQualified), x0 + 420, rowY, {
+      size: 8,
+      bold: true,
+    });
   }
 
   // ─── Page 4: 1099-B totals summary ───────────────────────────────────────
@@ -1241,7 +1635,13 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     drawLine(ctx, x0, 154, xR, 154);
     drawText(ctx, "REALIZED GAIN/LOSS SUMMARY", x0, 164, { size: 10, bold: true });
     drawLine(ctx, x0, 178, xR, 178);
-    drawText(ctx, "Refer to Proceeds from Broker and Barter Exchange Transactions for detailed information regarding these summary values. The amounts shown below are for informational", x0, 186, { size: 7, italic: true });
+    drawText(
+      ctx,
+      "Refer to Proceeds from Broker and Barter Exchange Transactions for detailed information regarding these summary values. The amounts shown below are for informational",
+      x0,
+      186,
+      { size: 7, italic: true },
+    );
     drawText(ctx, "purposes only.", x0, 195, { size: 7, italic: true });
 
     /*
@@ -1273,7 +1673,10 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     const moneyOrParen = (g: number) => (g < 0 ? "$(" + fmtMoney(-g) + ")" : "$" + fmtMoney(g));
 
     let rowY = hdrY + 30;
-    drawText(ctx, "SHORT-TERM GAIN OR (LOSSES) - REPORT ON FORM 8949, PART I", x0, rowY, { size: 8, bold: true });
+    drawText(ctx, "SHORT-TERM GAIN OR (LOSSES) - REPORT ON FORM 8949, PART I", x0, rowY, {
+      size: 8,
+      bold: true,
+    });
     drawLine(ctx, x0, rowY + 9, xR, rowY + 9, { thickness: 0.3 });
     rowY += 14;
     const stRows: Array<[string, number, number, number]> = [
@@ -1299,7 +1702,10 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     drawTextRight(ctx, "$" + fmtMoney(stG), C_NET, rowY, { size: 8, bold: true });
 
     rowY += 22;
-    drawText(ctx, "LONG-TERM GAIN OR (LOSSES) - REPORT ON FORM 8949, PART II", x0, rowY, { size: 8, bold: true });
+    drawText(ctx, "LONG-TERM GAIN OR (LOSSES) - REPORT ON FORM 8949, PART II", x0, rowY, {
+      size: 8,
+      bold: true,
+    });
     drawLine(ctx, x0, rowY + 9, xR, rowY + 9, { thickness: 0.3 });
     rowY += 14;
     const ltRows: Array<[string, number, number, number]> = [
@@ -1325,7 +1731,10 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     drawTextRight(ctx, "$" + fmtMoney(ltG), C_NET, rowY, { size: 8, bold: true });
 
     rowY += 22;
-    drawText(ctx, "UNKNOWN TERM - CODE (X) REPORT ON FORM 8949, PART I OR PART II", x0, rowY, { size: 8, bold: true });
+    drawText(ctx, "UNKNOWN TERM - CODE (X) REPORT ON FORM 8949, PART I OR PART II", x0, rowY, {
+      size: 8,
+      bold: true,
+    });
     drawLine(ctx, x0, rowY + 9, xR, rowY + 9, { thickness: 0.3 });
     rowY += 14;
     for (const lbl of [
@@ -1333,11 +1742,13 @@ async function buildSchwab1099(): Promise<Uint8Array> {
       "Box B or Box E - Ordinary - (basis not reported to the IRS)",
     ]) {
       drawText(ctx, lbl, x0, rowY, { size: 7 });
-      for (const cx of [C_PROC, C_BASIS, C_MKT, C_WASH, C_NET]) drawTextRight(ctx, "$0.00", cx, rowY, { size: 7 });
+      for (const cx of [C_PROC, C_BASIS, C_MKT, C_WASH, C_NET])
+        drawTextRight(ctx, "$0.00", cx, rowY, { size: 7 });
       rowY += 11;
     }
     drawText(ctx, "Total Unknown Term", x0 + 80, rowY, { size: 8, bold: true });
-    for (const cx of [C_PROC, C_BASIS, C_MKT, C_WASH, C_NET]) drawTextRight(ctx, "$0.00", cx, rowY, { size: 8, bold: true });
+    for (const cx of [C_PROC, C_BASIS, C_MKT, C_WASH, C_NET])
+      drawTextRight(ctx, "$0.00", cx, rowY, { size: 8, bold: true });
 
     rowY += 22;
     drawText(ctx, "REGULATED FUTURES CONTRACTS", x0, rowY, { size: 8, bold: true });
@@ -1363,7 +1774,10 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     const ctx: Ctx = { page, reg, bold, italic };
     drawSchwabHeader(ctx, 5, 5);
 
-    drawText(ctx, "1099-B   PROCEEDS FROM BROKER AND BARTER EXCHANGE TRANSACTIONS", x0, 140, { size: 11, bold: true });
+    drawText(ctx, "1099-B   PROCEEDS FROM BROKER AND BARTER EXCHANGE TRANSACTIONS", x0, 140, {
+      size: 11,
+      bold: true,
+    });
     drawLine(ctx, x0, 154, xR, 154);
 
     let y = 168;
@@ -1426,7 +1840,9 @@ async function buildSchwab1099(): Promise<Uint8Array> {
       drawText(ctx, title, x0, y, { size: 9, bold: true });
       y += 14;
       drawTradeHeader();
-      let secP = 0, secB = 0, secG = 0;
+      let secP = 0,
+        secB = 0,
+        secG = 0;
       for (const t of trades) {
         drawText(ctx, t.description, x0, y, { size: 8, bold: true });
         drawText(ctx, "CUSIP: " + t.cusip, x0 + 115, y, { size: 7 });
@@ -1454,7 +1870,9 @@ async function buildSchwab1099(): Promise<Uint8Array> {
         secB += t.basis;
         secG += t.gainLoss;
       }
-      const totalLabel = title.startsWith("Short") ? "Total Short Term - Covered Securities" : "Total Long Term - Covered Securities";
+      const totalLabel = title.startsWith("Short")
+        ? "Total Short Term - Covered Securities"
+        : "Total Long Term - Covered Securities";
       drawText(ctx, totalLabel, x0, y, { size: 8, bold: true });
       drawTextRight(ctx, "$" + fmtMoney(secP), C_PROC, y, { size: 8, bold: true });
       drawTextRight(ctx, "$" + fmtMoney(secB), C_BASIS, y, { size: 8, bold: true });

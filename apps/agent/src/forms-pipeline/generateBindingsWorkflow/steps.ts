@@ -40,9 +40,7 @@ export const prepareStep = createStep({
     }
     const fields = catalog.getFields(inputData.formId);
     if (fields.length === 0) {
-      throw new Error(
-        `prepare: form "${inputData.formId}" has no fields in catalog`,
-      );
+      throw new Error(`prepare: form "${inputData.formId}" has no fields in catalog`);
     }
     return {
       ...inputData,
@@ -106,9 +104,7 @@ export const classifyStep = createStep({
         retrievedContext: inputData.retrievedContext,
       },
       (i, total, size) => {
-        process.stderr.write(
-          `    classify batch ${i + 1}/${total} (${size} fields)\n`,
-        );
+        process.stderr.write(`    classify batch ${i + 1}/${total} (${size} fields)\n`);
       },
     );
     return {

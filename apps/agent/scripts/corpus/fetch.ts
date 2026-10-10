@@ -38,9 +38,7 @@ function sha256Of(path: string): string {
 async function run(argv: string[]): Promise<void> {
   const force = argv.includes("--force");
   const manifest = JSON.parse(readFileSync(MANIFEST_PATH, "utf8")) as Manifest;
-  const target = process.env.CORPUS_DB_PATH
-    ? resolve(process.env.CORPUS_DB_PATH)
-    : DEFAULT_TARGET;
+  const target = process.env.CORPUS_DB_PATH ? resolve(process.env.CORPUS_DB_PATH) : DEFAULT_TARGET;
   mkdirSync(dirname(target), { recursive: true });
 
   // 1. Already present on disk.
@@ -81,7 +79,9 @@ async function run(argv: string[]): Promise<void> {
     process.exit(1);
   }
 
-  console.log(`[corpus fetch] downloading ${manifest.version} (${(manifest.sizeBytes / 1e6).toFixed(1)} MB)…`);
+  console.log(
+    `[corpus fetch] downloading ${manifest.version} (${(manifest.sizeBytes / 1e6).toFixed(1)} MB)…`,
+  );
   const res = await fetch(manifest.url);
   if (!res.ok) {
     console.error(`[corpus fetch] download failed: HTTP ${res.status} from ${manifest.url}`);
@@ -126,8 +126,6 @@ async function checkEmbeddingStamp(): Promise<void> {
 export const fetchCommand: Command = {
   name: "fetch",
   summary: "Install the prebuilt corpus.db (local seed or sha-verified release download)",
-  options: [
-    { flag: "--force", desc: "replace an existing corpus.db even if its sha differs" },
-  ],
+  options: [{ flag: "--force", desc: "replace an existing corpus.db even if its sha differs" }],
   run,
 };

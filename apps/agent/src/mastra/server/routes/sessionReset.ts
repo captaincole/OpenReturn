@@ -14,9 +14,7 @@ export const sessionResetRoute = registerApiRoute("/app/session/reset", {
   method: "POST",
   handler: async (c) => {
     const requestContext = c.get("requestContext");
-    const userId = requestContext?.get(MASTRA_RESOURCE_ID_KEY) as
-      | string
-      | undefined;
+    const userId = requestContext?.get(MASTRA_RESOURCE_ID_KEY) as string | undefined;
     if (!userId) return c.json({ error: "unauthorized" }, 401);
 
     const { domainRowsDeleted, mastraThreadsDeleted, documentsDeleted } =

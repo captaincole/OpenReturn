@@ -103,7 +103,9 @@ export default function DocumentsTab() {
       <div className="flex items-baseline justify-between mb-5">
         <div>
           <h2 className="font-serif text-2xl text-ink-primary">Documents</h2>
-          <p className="text-ink-secondary text-sm mt-1">W-2s, 1099s, K-1s — anything you've uploaded.</p>
+          <p className="text-ink-secondary text-sm mt-1">
+            W-2s, 1099s, K-1s — anything you've uploaded.
+          </p>
         </div>
         <span className="text-[11px] text-ink-muted uppercase tracking-wider">
           {uploads.length} {uploads.length === 1 ? "file" : "files"}
@@ -187,7 +189,9 @@ function DocCard({ doc }: { doc: UploadRow }) {
         <span className="px-2 py-0.5 rounded text-[10px] uppercase tracking-wide bg-bg-elevated text-ink-secondary">
           {inferType(doc)}
         </span>
-        <span className="text-[10px] text-ink-faint tabular-nums">{formatBytes(doc.size_bytes)}</span>
+        <span className="text-[10px] text-ink-faint tabular-nums">
+          {formatBytes(doc.size_bytes)}
+        </span>
       </div>
       <div className="aspect-[3/4] rounded-lg bg-bg-elevated/50 border border-border-subtle flex items-center justify-center">
         <span className="text-ink-faint text-xs font-mono">PDF</span>

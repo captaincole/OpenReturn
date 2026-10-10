@@ -24,7 +24,9 @@ const FILES = ["blank.pdf", "catalog.json"] as const;
 async function run(argv: string[]): Promise<void> {
   const sub = argv[0];
   if (!sub) {
-    console.error("required: <relativeDir> under forms/, e.g. federal/1040 or state/ca/schedule-ca");
+    console.error(
+      "required: <relativeDir> under forms/, e.g. federal/1040 or state/ca/schedule-ca",
+    );
     process.exit(1);
   }
 

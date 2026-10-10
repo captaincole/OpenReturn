@@ -76,10 +76,7 @@ export interface ListFactsOpts {
   limit?: number;
 }
 
-export async function listFacts(
-  scope: Scope,
-  opts: ListFactsOpts = {},
-): Promise<TaxFactRow[]> {
+export async function listFacts(scope: Scope, opts: ListFactsOpts = {}): Promise<TaxFactRow[]> {
   await ensureAppSchema();
   const conds: string[] = ["filing_id = ?"];
   const args: InValue[] = [opts.filingId ?? scope.filingId];
@@ -167,10 +164,7 @@ function rowToQuestion(r: Row): OpenQuestionRow {
   };
 }
 
-export async function noteQuestion(
-  scope: Scope,
-  q: OpenQuestion,
-): Promise<void> {
+export async function noteQuestion(scope: Scope, q: OpenQuestion): Promise<void> {
   await ensureAppSchema();
   await getAppDb().execute({
     sql: `INSERT INTO open_questions

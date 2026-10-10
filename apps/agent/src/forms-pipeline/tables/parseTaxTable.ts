@@ -99,10 +99,7 @@ function looksLikeTaxTable($: CheerioAPI, $table: ReturnType<CheerioAPI>): boole
 
 // ─── Row extraction ──────────────────────────────────────────────────────
 
-function extractRows(
-  $: CheerioAPI,
-  $table: ReturnType<CheerioAPI>,
-): { rows: TaxTableRow[] } {
+function extractRows($: CheerioAPI, $table: ReturnType<CheerioAPI>): { rows: TaxTableRow[] } {
   const rows: TaxTableRow[] = [];
   $table.find("tbody > tr").each((_, tr) => {
     const cells = $(tr).find("td");

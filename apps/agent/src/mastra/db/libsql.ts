@@ -23,9 +23,7 @@ const MODULE_DIR = dirname(fileURLToPath(import.meta.url)); // …/src/mastra/db
 const DEFAULT_DB_PATH = resolve(MODULE_DIR, "../../../.data/corpus.db"); // …/apps/agent/.data/corpus.db
 
 function corpusDbPath(): string {
-  return process.env.CORPUS_DB_PATH
-    ? resolve(process.env.CORPUS_DB_PATH)
-    : DEFAULT_DB_PATH;
+  return process.env.CORPUS_DB_PATH ? resolve(process.env.CORPUS_DB_PATH) : DEFAULT_DB_PATH;
 }
 
 let cached: Client | null = null;

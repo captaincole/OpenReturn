@@ -78,10 +78,7 @@ export default async function HomeHome() {
         <div className="max-w-6xl mx-auto space-y-14">
           <Greeting profile={profile} />
 
-          <ReturnsSection
-            returns={returns}
-            hasCurrentYear={hasCurrentYear}
-          />
+          <ReturnsSection returns={returns} hasCurrentYear={hasCurrentYear} />
 
           <ContinueWithSection
             hasCurrentYear={hasCurrentYear}
@@ -98,12 +95,8 @@ export default async function HomeHome() {
 function Greeting({ profile }: { profile: UserProfile }) {
   return (
     <header>
-      <h1 className="font-serif text-4xl text-ink-primary">
-        Hi, {profile.firstName}.
-      </h1>
-      <p className="text-ink-secondary text-[15px] mt-2.5">
-        Your tax life, in one place.
-      </p>
+      <h1 className="font-serif text-4xl text-ink-primary">Hi, {profile.firstName}.</h1>
+      <p className="text-ink-secondary text-[15px] mt-2.5">Your tax life, in one place.</p>
     </header>
   );
 }
@@ -167,11 +160,7 @@ function ContinueWithSection({
           title="Tax planning session"
           desc="Look ahead — reduce next year's liability before December."
           icon="○"
-          unlockText={
-            hasAnyFiledReturn
-              ? "Coming soon"
-              : "Unlocked after your first filed return"
-          }
+          unlockText={hasAnyFiledReturn ? "Coming soon" : "Unlocked after your first filed return"}
         />
       </div>
     </Section>
@@ -196,7 +185,11 @@ function TaxPictureSection({ locked }: { locked: boolean }) {
           value={`${EFFECTIVE_RATE[EFFECTIVE_RATE.length - 1].value.toFixed(1)}%`}
           valueLabel="2025 (estimated)"
         >
-          <LineChart data={EFFECTIVE_RATE} valueFormatter={(v) => `${v.toFixed(1)}%`} domain={[20, 26]} />
+          <LineChart
+            data={EFFECTIVE_RATE}
+            valueFormatter={(v) => `${v.toFixed(1)}%`}
+            domain={[20, 26]}
+          />
         </ChartCard>
         <ChartCard
           title="Federal refund / owed"
@@ -212,7 +205,11 @@ function TaxPictureSection({ locked }: { locked: boolean }) {
           value={fmtCurrencyFull(CHARITABLE[CHARITABLE.length - 1].value)}
           valueLabel="2025 year-to-date"
         >
-          <BarChart data={CHARITABLE} colorClass="fill-emerald-400" valueFormatter={fmtCurrencyShort} />
+          <BarChart
+            data={CHARITABLE}
+            colorClass="fill-emerald-400"
+            valueFormatter={fmtCurrencyShort}
+          />
         </ChartCard>
         {locked && <LockOverlay text="Unlocked after your first filed return" />}
       </div>
@@ -255,8 +252,12 @@ function ReturnCard({ ret }: { ret: TaxReturn }) {
     >
       <div className="flex items-start justify-between">
         <div>
-          <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">Tax Year {ret.year}</div>
-          <div className="text-[15px] font-semibold text-ink-primary mt-1 tracking-tight">{ret.label}</div>
+          <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">
+            Tax Year {ret.year}
+          </div>
+          <div className="text-[15px] font-semibold text-ink-primary mt-1 tracking-tight">
+            {ret.label}
+          </div>
         </div>
         {isActive && (
           <span className="text-[10px] uppercase tracking-wider text-accent bg-accent/15 px-1.5 py-0.5 rounded">
@@ -300,9 +301,8 @@ function EmptyReturnsCta() {
           Start your {CURRENT_TAX_YEAR} filing
         </h3>
         <p className="text-ink-secondary text-[14px] mt-2 max-w-xl leading-relaxed">
-          Luca will walk you through everything — wages, investments, deductions —
-          and keep a citation for every fact. You can pause and pick up where
-          you left off anytime.
+          Luca will walk you through everything — wages, investments, deductions — and keep a
+          citation for every fact. You can pause and pick up where you left off anytime.
         </p>
       </div>
       <StartFilingButton
@@ -449,7 +449,9 @@ function ChartCard({
           <div className="text-[13px] text-ink-secondary mt-1">{subtitle}</div>
         </div>
         <div className="text-right shrink-0">
-          <div className="text-2xl font-semibold tracking-tight tabular-nums text-ink-primary">{value}</div>
+          <div className="text-2xl font-semibold tracking-tight tabular-nums text-ink-primary">
+            {value}
+          </div>
           <div className="text-[11px] text-ink-muted mt-0.5">{valueLabel}</div>
         </div>
       </div>
@@ -537,7 +539,9 @@ function LineChart({
     return { x, y, d };
   });
 
-  const linePath = points.map((p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`)).join(" ");
+  const linePath = points
+    .map((p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`))
+    .join(" ");
   const areaPath = `${linePath} L ${points[points.length - 1].x} ${CHART_H - CHART_PAD_Y} L ${points[0].x} ${CHART_H - CHART_PAD_Y} Z`;
 
   return (
@@ -549,10 +553,24 @@ function LineChart({
         </linearGradient>
       </defs>
       <path d={areaPath} fill="url(#home-line-fill)" />
-      <path d={linePath} stroke="rgb(124 92 255)" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d={linePath}
+        stroke="rgb(124 92 255)"
+        strokeWidth={2}
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
       {points.map((p) => (
         <g key={p.d.year}>
-          <circle cx={p.x} cy={p.y} r={3.5} className="fill-bg-base" stroke="rgb(124 92 255)" strokeWidth={1.5} />
+          <circle
+            cx={p.x}
+            cy={p.y}
+            r={3.5}
+            className="fill-bg-base"
+            stroke="rgb(124 92 255)"
+            strokeWidth={1.5}
+          />
           <text
             x={p.x}
             y={p.y - 10}
@@ -622,7 +640,14 @@ function DivergentBarChart({
               />
             )}
             {isPending && (
-              <rect x={x} y={baseline - 2} width={barW} height={4} rx={2} className="fill-ink-faint/40" />
+              <rect
+                x={x}
+                y={baseline - 2}
+                width={barW}
+                height={4}
+                rx={2}
+                className="fill-ink-faint/40"
+              />
             )}
             {!isPending && (
               <text

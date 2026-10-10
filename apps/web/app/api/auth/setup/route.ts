@@ -22,10 +22,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "email and name are required" }, { status: 400 });
   }
   if (password.length < 8) {
-    return NextResponse.json(
-      { error: "password must be at least 8 characters" },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: "password must be at least 8 characters" }, { status: 400 });
   }
   await createOwner({ email, displayName, password });
   // Log the new owner in immediately, so they do not retype the password.

@@ -27,9 +27,7 @@ interface DisplayItem extends PlanItem {
 
 export function PlanCard({ plan }: PlanCardProps) {
   const [display, setDisplay] = useState<DisplayItem[]>(plan);
-  const removalTimers = useRef<Map<string, ReturnType<typeof setTimeout>>>(
-    new Map(),
-  );
+  const removalTimers = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
 
   /*
    * Reconcile `display` when the upstream plan changes. Incoming items
@@ -164,9 +162,7 @@ function PlanRow({ item }: { item: DisplayItem }) {
           {item.title}
         </div>
         {item.note && !isDone && (
-          <div className="text-[12px] text-ink-muted mt-0.5 leading-snug">
-            {item.note}
-          </div>
+          <div className="text-[12px] text-ink-muted mt-0.5 leading-snug">{item.note}</div>
         )}
       </div>
     </li>

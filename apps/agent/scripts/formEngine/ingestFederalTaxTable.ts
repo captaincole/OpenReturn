@@ -94,7 +94,11 @@ async function run(argv: string[]): Promise<void> {
   console.log(`${LOG} source ${source.url}`);
   console.log(`${LOG} cache  ${path.relative(process.cwd(), htmlPath)}`);
 
-  const { html, source: prov, cached } = await fetchHtml({
+  const {
+    html,
+    source: prov,
+    cached,
+  } = await fetchHtml({
     url: source.url,
     cachePath: htmlPath,
     refresh: args.refresh,
@@ -180,10 +184,7 @@ async function run(argv: string[]): Promise<void> {
  * This keeps git diffs small (one inserted row = one line of diff, not
  * eight) and keeps the file under ~150KB.
  */
-function serializeWithCompactRows(
-  header: Record<string, unknown>,
-  rows: TaxTableRow[],
-): string {
+function serializeWithCompactRows(header: Record<string, unknown>, rows: TaxTableRow[]): string {
   const headerJson = JSON.stringify(header, null, 2);
   // Drop the trailing "}" to append the rows array before the close.
   const headerOpen = headerJson.slice(0, headerJson.lastIndexOf("}"));

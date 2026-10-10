@@ -47,9 +47,7 @@ export function assertEngineNumber(
    * tax values are already integers.
    */
   if (typeof got !== "number" || Math.abs(got - expected) > 0.5) {
-    failures.push(
-      tag(prefix, `engine: ${fieldId} expected ${expected}, got ${String(got)}.`),
-    );
+    failures.push(tag(prefix, `engine: ${fieldId} expected ${expected}, got ${String(got)}.`));
   }
 }
 

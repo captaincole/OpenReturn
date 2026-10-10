@@ -1,11 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  fetchActivityItems,
-  type ActivityItem,
-  type Verdict,
-} from "@/lib/activity";
+import { fetchActivityItems, type ActivityItem, type Verdict } from "@/lib/activity";
 import { cn } from "@/lib/cn";
 
 interface ActivityCardProps {
@@ -151,9 +147,7 @@ export function ActivityCard({ refreshKey }: ActivityCardProps) {
       </div>
 
       <div className="flex-1 min-h-0 overflow-y-auto">
-        {items === null && (
-          <div className="px-5 py-6 text-sm text-ink-muted">Loading…</div>
-        )}
+        {items === null && <div className="px-5 py-6 text-sm text-ink-muted">Loading…</div>}
         {items?.length === 0 && (
           <div className="px-5 py-10 text-center text-sm text-ink-muted">
             Nothing recorded yet. Start a chat to populate the ledger.
@@ -207,9 +201,7 @@ function ActivityRow({
         >
           {item.kind}
         </span>
-        <span className="text-[11px] text-ink-faint tabular-nums">
-          {timeAgo(item.createdAt)}
-        </span>
+        <span className="text-[11px] text-ink-faint tabular-nums">{timeAgo(item.createdAt)}</span>
       </div>
 
       <div className="mt-1 flex items-center gap-2 text-ink-primary">
@@ -226,9 +218,7 @@ function ActivityRow({
       </div>
 
       {!isExpanded && (
-        <div className="mt-1 text-sm text-ink-secondary truncate">
-          {brief(item.value)}
-        </div>
+        <div className="mt-1 text-sm text-ink-secondary truncate">{brief(item.value)}</div>
       )}
 
       {isExpanded && <ExpandedBody item={item} />}
@@ -261,21 +251,17 @@ function ExpandedBody({ item }: { item: ActivityItem }) {
 
       {item.kind === "decision" && item.rationale && (
         <DetailBlock label="Why">
-          <p className="text-ink-secondary leading-relaxed whitespace-pre-wrap">
-            {item.rationale}
-          </p>
+          <p className="text-ink-secondary leading-relaxed whitespace-pre-wrap">{item.rationale}</p>
         </DetailBlock>
       )}
 
-      {item.kind === "decision" &&
-        item.verdictReason &&
-        item.verdict !== "accurate" && (
-          <DetailBlock label="Reviewer note">
-            <p className="text-ink-secondary leading-relaxed whitespace-pre-wrap">
-              {item.verdictReason}
-            </p>
-          </DetailBlock>
-        )}
+      {item.kind === "decision" && item.verdictReason && item.verdict !== "accurate" && (
+        <DetailBlock label="Reviewer note">
+          <p className="text-ink-secondary leading-relaxed whitespace-pre-wrap">
+            {item.verdictReason}
+          </p>
+        </DetailBlock>
+      )}
 
       {item.kind === "decision" &&
         item.supportingFactKeys &&
@@ -283,10 +269,7 @@ function ExpandedBody({ item }: { item: ActivityItem }) {
           <DetailBlock label="Supporting facts">
             <ul className="space-y-0.5">
               {item.supportingFactKeys.map((k) => (
-                <li
-                  key={k}
-                  className="text-ink-secondary font-mono text-[12px] truncate"
-                >
+                <li key={k} className="text-ink-secondary font-mono text-[12px] truncate">
                   {k}
                 </li>
               ))}
@@ -300,25 +283,15 @@ function ExpandedBody({ item }: { item: ActivityItem }) {
         </DetailBlock>
       )}
 
-      <div className="text-ink-faint text-[11px] font-mono pt-1">
-        {item.title}
-      </div>
+      <div className="text-ink-faint text-[11px] font-mono pt-1">{item.title}</div>
     </div>
   );
 }
 
-function DetailBlock({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+function DetailBlock({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted mb-1">
-        {label}
-      </div>
+      <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted mb-1">{label}</div>
       {children}
     </div>
   );
@@ -346,7 +319,5 @@ function ValueDisplay({ value }: { value: unknown }) {
       </dl>
     );
   }
-  return (
-    <p className="text-ink-primary break-words">{formatScalar(value)}</p>
-  );
+  return <p className="text-ink-primary break-words">{formatScalar(value)}</p>;
 }

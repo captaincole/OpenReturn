@@ -64,8 +64,7 @@ export const ssn = (s: string): SSN => {
 
 export const SSN = {
   /** Default human-readable presentation: "123-45-6789". */
-  format: (s: SSN): string =>
-    `${s.slice(0, 3)}-${s.slice(3, 5)}-${s.slice(5)}`,
+  format: (s: SSN): string => `${s.slice(0, 3)}-${s.slice(3, 5)}-${s.slice(5)}`,
   /** Bare digits ("123456789"). Identity, since canonical storage IS digit-only. */
   digits: (s: SSN): string => s,
 };
@@ -113,13 +112,11 @@ export const phone = (s: string): Phone => {
 
 export const Phone = {
   /** Default human-readable presentation: "703-953-0253". */
-  format: (p: Phone): string =>
-    `${p.slice(0, 3)}-${p.slice(3, 6)}-${p.slice(6)}`,
+  format: (p: Phone): string => `${p.slice(0, 3)}-${p.slice(3, 6)}-${p.slice(6)}`,
   /** Bare digits. Identity. */
   digits: (p: Phone): string => p,
   /** Parens style: "(703) 953-0253". */
-  parens: (p: Phone): string =>
-    `(${p.slice(0, 3)}) ${p.slice(3, 6)}-${p.slice(6)}`,
+  parens: (p: Phone): string => `(${p.slice(0, 3)}) ${p.slice(3, 6)}-${p.slice(6)}`,
 };
 
 /*

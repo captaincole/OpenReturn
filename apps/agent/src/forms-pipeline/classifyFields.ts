@@ -26,12 +26,7 @@ const MODEL = "claude-sonnet-4-6";
 const MAX_TOKENS = 16000;
 const FIELDS_PER_BATCH = 40;
 
-export type Category =
-  | "personal_info"
-  | "filing_scope"
-  | "income"
-  | "deductions_credits"
-  | "other";
+export type Category = "personal_info" | "filing_scope" | "income" | "deductions_credits" | "other";
 
 /**
  * Semantic value type. Coarser than the IRS schemas but rich enough to
@@ -159,9 +154,7 @@ If a field is genuinely decorative or duplicate-with-no-purpose, emit a skip ent
   - form-1040.signing.taxpayer_occupation, form-1040.signing.taxpayer_email, form-1040.signing.taxpayer_phone
   - form-540.header.filing_status (radio group with options)`;
 
-export async function classifyFields(
-  opts: ClassifyOpts,
-): Promise<ClassificationResult> {
+export async function classifyFields(opts: ClassifyOpts): Promise<ClassificationResult> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error("ANTHROPIC_API_KEY is not set");
   const client = new Anthropic({ apiKey });
@@ -270,12 +263,7 @@ For each field above, return one enrichment (or one skip). Reuse fieldIds from "
                       },
                     },
                   },
-                  required: [
-                    "pdf_field_name",
-                    "field_id",
-                    "category",
-                    "value_type",
-                  ],
+                  required: ["pdf_field_name", "field_id", "category", "value_type"],
                 },
               },
               skipped: {
@@ -310,22 +298,18 @@ For each field above, return one enrichment (or one skip). Reuse fieldIds from "
       );
       continue;
     }
-    const rawInput = toolUse.input as
-      | {
-          enrichments?:
-            | Array<{
-                pdf_field_name: string;
-                field_id: string;
-                category: Category;
-                value_type: ValueType;
-                options?: Array<{ value: string; radio_option: string }>;
-              }>
-            | string;
-          skipped?:
-            | Array<{ pdf_field_name: string; skip_reason: string }>
-            | string;
-        }
-      | null;
+    const rawInput = toolUse.input as {
+      enrichments?:
+        | Array<{
+            pdf_field_name: string;
+            field_id: string;
+            category: Category;
+            value_type: ValueType;
+            options?: Array<{ value: string; radio_option: string }>;
+          }>
+        | string;
+      skipped?: Array<{ pdf_field_name: string; skip_reason: string }> | string;
+    } | null;
     if (rawInput && typeof rawInput.enrichments === "string") {
       try {
         rawInput.enrichments = JSON.parse(rawInput.enrichments);
@@ -377,8 +361,7 @@ For each field above, return one enrichment (or one skip). Reuse fieldIds from "
 
     usage.input_tokens += response.usage.input_tokens;
     usage.output_tokens += response.usage.output_tokens;
-    usage.cache_creation_input_tokens +=
-      response.usage.cache_creation_input_tokens ?? 0;
+    usage.cache_creation_input_tokens += response.usage.cache_creation_input_tokens ?? 0;
     usage.cache_read_input_tokens += response.usage.cache_read_input_tokens ?? 0;
 
     console.log(
@@ -393,9 +376,7 @@ function buildAssignedTable(assigned: Map<string, string>): string {
   if (assigned.size === 0) {
     return "Already-assigned fieldIds: (none — this is the first batch)";
   }
-  const lines = [
-    "Already-assigned fieldIds from earlier batches (reuse when applicable):",
-  ];
+  const lines = ["Already-assigned fieldIds from earlier batches (reuse when applicable):"];
   for (const [id, label] of assigned) {
     lines.push(`  ${id} — ${label}`);
   }

@@ -58,9 +58,7 @@ export function register(): void {
        * table at the top of this file.
        */
       "0.line.5_filing_status_threshold_wages": (_, info) =>
-        info.filingStatus
-          ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus]
-          : undefined,
+        info.filingStatus ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus] : undefined,
       // Line 6 = max(0, line 4 − line 5).
       "0.line.6_excess_medicare_wages": (f) =>
         floor(
@@ -91,9 +89,7 @@ export function register(): void {
        */
       "0.line.9_filing_status_threshold_se": (f, info) => {
         if (f["0.line.8_self_employment_income"] === undefined) return undefined;
-        return info.filingStatus
-          ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus]
-          : undefined;
+        return info.filingStatus ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus] : undefined;
       },
       "0.line.10_medicare_wages_from_line4": (f) => {
         if (f["0.line.8_self_employment_income"] === undefined) return undefined;
@@ -134,9 +130,7 @@ export function register(): void {
        */
       "0.line.15_filing_status_threshold_rrta": (f, info) => {
         if (f["0.line.14_rrta_compensation_tips"] === undefined) return undefined;
-        return info.filingStatus
-          ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus]
-          : undefined;
+        return info.filingStatus ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus] : undefined;
       },
       "0.line.16_excess_rrta_compensation": (f) => {
         if (f["0.line.14_rrta_compensation_tips"] === undefined) return undefined;
@@ -164,11 +158,7 @@ export function register(): void {
         const seven = f["0.line.7_additional_medicare_tax_wages"];
         const thirteen = f["0.line.13_additional_medicare_tax_se"];
         const seventeen = f["0.line.17_additional_medicare_tax_rrta"];
-        if (
-          seven === undefined &&
-          thirteen === undefined &&
-          seventeen === undefined
-        ) {
+        if (seven === undefined && thirteen === undefined && seventeen === undefined) {
           return undefined;
         }
         return sum(seven, thirteen, seventeen);
@@ -176,8 +166,7 @@ export function register(): void {
       // MANUAL EDIT: routed to FilingInfo slot (sum of W-2 box 6).
       "0.line.19_medicare_tax_withheld": (_, info) => info.w2MedicareTaxWithheld,
       // Line 20 = line 1.
-      "0.line.20_medicare_wages_from_line1": (f) =>
-        f["0.line.1_medicare_wages_tips"],
+      "0.line.20_medicare_wages_from_line1": (f) => f["0.line.1_medicare_wages_tips"],
       /*
        * MANUAL EDIT: line 21 = line 20 × 1.45%, rounded UP per the
        * Math.ceil convention.
@@ -212,8 +201,7 @@ export function register(): void {
      * as Schedule A; not every federal form uses the comb widget.
      */
     formatters: {
-      "0.header.ssn": (value) =>
-        SSN.format(value as Parameters<typeof SSN.format>[0]),
+      "0.header.ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
     },
 
     unsupported: {

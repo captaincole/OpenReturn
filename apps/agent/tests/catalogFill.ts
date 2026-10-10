@@ -29,16 +29,9 @@
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
-import {
-  loadFromFixture,
-  type Catalog,
-  type FieldInventory,
-} from "../src/engine/catalog.js";
+import { loadFromFixture, type Catalog, type FieldInventory } from "../src/engine/catalog.js";
 import { fillFromCatalog } from "../src/engine/render/fillFromCatalog.js";
-import type {
-  AnyFormField,
-  EvaluatedForm,
-} from "../src/engine/types.js";
+import type { AnyFormField, EvaluatedForm } from "../src/engine/types.js";
 import type { RunResult } from "./types.js";
 
 interface Args {
@@ -150,10 +143,7 @@ function syntheticValue(field: FieldInventory): unknown {
 
 // ─── EvaluatedForm builder ──────────────────────────────────────────────
 
-function buildSyntheticForm(
-  formId: string,
-  catalog: Catalog,
-): EvaluatedForm<AnyFormField> {
+function buildSyntheticForm(formId: string, catalog: Catalog): EvaluatedForm<AnyFormField> {
   const meta = catalog.getForm(formId);
   if (!meta) throw new Error(`Catalog missing form metadata for ${formId}`);
 
@@ -228,9 +218,7 @@ function toGolden(
 function diffGoldens(expected: Golden, actual: Golden): string[] {
   const diffs: string[] = [];
   if (expected.fieldCount !== actual.fieldCount) {
-    diffs.push(
-      `fieldCount: expected=${expected.fieldCount} actual=${actual.fieldCount}`,
-    );
+    diffs.push(`fieldCount: expected=${expected.fieldCount} actual=${actual.fieldCount}`);
   }
   const expById = new Map(expected.entries.map((e) => [e.fieldId, e]));
   const actById = new Map(actual.entries.map((e) => [e.fieldId, e]));
@@ -425,9 +413,7 @@ async function main(): Promise<void> {
   }
   console.error(`\nFAIL: ${result.name} (${result.failures.length} failure(s)):`);
   for (const f of result.failures) console.error(`  - ${f}`);
-  console.error(
-    `\nIf the change is intentional, re-run with --update to refresh the golden.`,
-  );
+  console.error(`\nIf the change is intentional, re-run with --update to refresh the golden.`);
   process.exit(1);
 }
 
@@ -435,8 +421,7 @@ async function main(): Promise<void> {
  * Skip the CLI wrapper when imported; runAll consumes the exports above.
  * The import.meta.url vs argv[1] check is the standard Node pattern.
  */
-const isCli =
-  process.argv[1] && import.meta.url === `file://${process.argv[1]}`;
+const isCli = process.argv[1] && import.meta.url === `file://${process.argv[1]}`;
 if (isCli) {
   main().catch((err) => {
     console.error(err);

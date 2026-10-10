@@ -1,11 +1,6 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import {
-  recordFact,
-  listFacts,
-  listOpenQuestions,
-  resolveQuestion,
-} from "../db/taxFacts";
+import { recordFact, listFacts, listOpenQuestions, resolveQuestion } from "../db/taxFacts";
 import { requireUserContext } from "./userContext";
 
 const CATEGORIES = [
@@ -42,8 +37,14 @@ export const recordTaxFact = createTool({
   inputSchema: z.object({
     year: z.number().int().describe("Tax year (e.g. 2025)"),
     category: z.enum(CATEGORIES).describe("Fact category bucket"),
-    key: z.string().describe("Short snake_case key, e.g. 'w2_box1_wages' or 'roth_ira_contribution'"),
-    value: z.any().describe("The value — number, string, or object. Numbers should be in dollars unless noted."),
+    key: z
+      .string()
+      .describe("Short snake_case key, e.g. 'w2_box1_wages' or 'roth_ira_contribution'"),
+    value: z
+      .any()
+      .describe(
+        "The value — number, string, or object. Numbers should be in dollars unless noted.",
+      ),
     sourceNote: z.string().describe("Where this came from — document, statement, or conversation"),
   }),
   outputSchema: z.object({
@@ -130,7 +131,8 @@ export const listOpenQuestionsTool = createTool({
 
 export const resolveOpenQuestion = createTool({
   id: "resolve-open-question",
-  description: "Mark an open question as resolved once the user has answered it and the fact has been recorded.",
+  description:
+    "Mark an open question as resolved once the user has answered it and the fact has been recorded.",
   inputSchema: z.object({
     id: z.string(),
   }),

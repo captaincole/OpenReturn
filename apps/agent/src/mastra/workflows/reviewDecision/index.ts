@@ -1,24 +1,13 @@
 import { createWorkflow } from "@mastra/core/workflows";
-import {
-  RequestContext,
-  MASTRA_RESOURCE_ID_KEY,
-} from "@mastra/core/request-context";
+import { RequestContext, MASTRA_RESOURCE_ID_KEY } from "@mastra/core/request-context";
 import { z } from "zod";
 import {
   loopCarrierSchema,
   reviewDecisionOutputSchema,
   type ReviewDecisionOutput,
 } from "./schemas";
-import {
-  initStep,
-  gatherStep,
-  assessRiskStep,
-  ruleStep,
-  finalizeStep,
-} from "./steps";
-import {
-  completeReviewRun,
-} from "../../db/reviewRuns";
+import { initStep, gatherStep, assessRiskStep, ruleStep, finalizeStep } from "./steps";
+import { completeReviewRun } from "../../db/reviewRuns";
 import { setDecisionVerdict } from "../../db/aiDecisions";
 import type { Scope } from "../../db/appDb";
 
@@ -104,9 +93,7 @@ export async function reviewDecision(
     if (result.status === "failed") {
       throw result.error;
     }
-    throw new Error(
-      `review-decision: unexpected workflow status '${result.status}'`,
-    );
+    throw new Error(`review-decision: unexpected workflow status '${result.status}'`);
   } catch (err) {
     /*
      * Best-effort failure recording: stamp the decision row and the
@@ -116,13 +103,7 @@ export async function reviewDecision(
      */
     const reason = err instanceof Error ? err.message : String(err);
     try {
-      await setDecisionVerdict(
-        scope,
-        decisionId,
-        "review_failed",
-        reason,
-        null,
-      );
+      await setDecisionVerdict(scope, decisionId, "review_failed", reason, null);
     } catch {
       /* swallow — the original error is what matters */
     }

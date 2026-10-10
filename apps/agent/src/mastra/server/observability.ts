@@ -1,12 +1,5 @@
-import {
-  Observability,
-  ConsoleExporter,
-  DefaultExporter,
-} from "@mastra/observability";
-import {
-  type AnyExportedSpan,
-  type CustomSpanFormatter,
-} from "@mastra/core/observability";
+import { Observability, ConsoleExporter, DefaultExporter } from "@mastra/observability";
+import { type AnyExportedSpan, type CustomSpanFormatter } from "@mastra/core/observability";
 
 /*
  * ConsoleExporter dumps the full span (input, output, attributes) every
@@ -70,11 +63,7 @@ function filter(value: unknown): unknown {
     return value
       .filter(
         (item) =>
-          !(
-            item &&
-            typeof item === "object" &&
-            (item as { role?: unknown }).role === "system"
-          ),
+          !(item && typeof item === "object" && (item as { role?: unknown }).role === "system"),
       )
       .map(filter);
   }
@@ -102,10 +91,7 @@ export function createObservability(): Observability {
       default: {
         serviceName: "summa",
         exporters: isDev
-          ? [
-              new ConsoleExporter({ customSpanFormatter: formatSpan }),
-              new DefaultExporter(),
-            ]
+          ? [new ConsoleExporter({ customSpanFormatter: formatSpan }), new DefaultExporter()]
           : [new DefaultExporter()],
       },
     },

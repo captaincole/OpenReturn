@@ -40,9 +40,7 @@ export default function RootLayout({
       lang="en"
       className={`dark ${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="bg-bg-base text-ink-primary font-sans antialiased h-full">
-        {children}
-      </body>
+      <body className="bg-bg-base text-ink-primary font-sans antialiased h-full">{children}</body>
     </html>
   );
 }

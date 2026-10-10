@@ -9,11 +9,7 @@ import { ownerExists } from "@/lib/localAuth";
  * AppShell. The home-home at (app)/page.tsx renders its own minimal top
  * bar and needs no AppShell.
  */
-export default async function AppLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await getOwnerSession();
   if (!session) {
     redirect((await ownerExists()) ? "/login" : "/setup");

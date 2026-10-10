@@ -78,7 +78,5 @@ export const marcusExpected: ExpectedResults = {
 
   renderedBlank: [],
 
-  renderedChecked: [
-    "form-1040.header.filing_status_single",
-  ],
+  renderedChecked: ["form-1040.header.filing_status_single"],
 };

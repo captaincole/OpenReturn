@@ -42,7 +42,5 @@ export async function runIngestForm(input: WorkflowInput): Promise<WorkflowOutpu
   if (result.status === "failed") {
     throw result.error;
   }
-  throw new Error(
-    `ingest-form: unexpected workflow status '${result.status}'`,
-  );
+  throw new Error(`ingest-form: unexpected workflow status '${result.status}'`);
 }

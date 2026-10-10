@@ -81,10 +81,7 @@ interface OllamaEmbedResponse {
 
 const OLLAMA_BATCH = 32;
 
-async function ollamaEmbed(
-  cfg: EmbeddingsConfig,
-  inputs: string[],
-): Promise<number[][]> {
+async function ollamaEmbed(cfg: EmbeddingsConfig, inputs: string[]): Promise<number[][]> {
   const res = await fetch(`${cfg.url}/api/embed`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -123,9 +120,7 @@ export async function embedDocuments(
   onProgress?: (done: number, total: number) => void,
 ): Promise<number[][]> {
   if (inputs.length === 0) return [];
-  const prefixed = isEmbeddingGemma(cfg.model)
-    ? inputs.map(gemmaDocument)
-    : inputs;
+  const prefixed = isEmbeddingGemma(cfg.model) ? inputs.map(gemmaDocument) : inputs;
   const vectors: number[][] = [];
   for (let i = 0; i < prefixed.length; i += OLLAMA_BATCH) {
     const vecs = await ollamaEmbed(cfg, prefixed.slice(i, i + OLLAMA_BATCH));
@@ -136,10 +131,7 @@ export async function embedDocuments(
 }
 
 /** Embed a single search query. */
-export async function embedQuery(
-  cfg: EmbeddingsConfig,
-  query: string,
-): Promise<number[]> {
+export async function embedQuery(cfg: EmbeddingsConfig, query: string): Promise<number[]> {
   const input = isEmbeddingGemma(cfg.model) ? gemmaQuery(query) : query;
   const [vec] = await ollamaEmbed(cfg, [input]);
   return vec;

@@ -110,15 +110,28 @@ export function register(): void {
         return typeof v === "number" ? v : 0;
       },
       // Line 11 = exemption amounts on lines 7 + 8 + 9 + 10. The blind/senior/dependent lines are unsupported; sum() treats them as 0.
-      "line.11_total_exemption_amount": (f) => sum(f["line.7_personal_exemption_amount"], f["line.8_blind_exemption_amount"], f["line.9_senior_exemption_amount"], f["line.10_dependent_exemption_amount"]),
+      "line.11_total_exemption_amount": (f) =>
+        sum(
+          f["line.7_personal_exemption_amount"],
+          f["line.8_blind_exemption_amount"],
+          f["line.9_senior_exemption_amount"],
+          f["line.10_dependent_exemption_amount"],
+        ),
       // Sum of W-2 box 16 (state wages) across all employers.
       "line.12_state_wages": (_, info) => info.w2StateWages,
       // Cross-form reference: CA 540 line 13 = federal Form 1040 line 11b (AGI).
       "line.13_federal_agi": (f) => sum(f["form-1040.line.11b"]),
       // Line 15 = line 13 − line 14 per form instructions.
-      "line.15_ca_agi_before_additions": (f) => sum(f["line.13_federal_agi"], f["line.14_ca_adjustments_subtractions"] === undefined ? 0 : -f["line.14_ca_adjustments_subtractions"]),
+      "line.15_ca_agi_before_additions": (f) =>
+        sum(
+          f["line.13_federal_agi"],
+          f["line.14_ca_adjustments_subtractions"] === undefined
+            ? 0
+            : -f["line.14_ca_adjustments_subtractions"],
+        ),
       // California AGI = line 15 (pre-additions subtotal) + line 16 (CA additions).
-      "line.17_ca_agi": (f) => sum(f["line.15_ca_agi_before_additions"], f["line.16_ca_adjustments_additions"]),
+      "line.17_ca_agi": (f) =>
+        sum(f["line.15_ca_agi_before_additions"], f["line.16_ca_adjustments_additions"]),
       /*
        * MANUAL EDIT: read the CA deduction from Schedule CA Part II
        * line 30 (the larger-of standard-vs-itemized selector) when
@@ -128,15 +141,21 @@ export function register(): void {
        * for non-itemizing filers.
        */
       "line.18_deductions": (f, info) => {
-        const fromScheduleCA =
-          f["schedule-ca.5.page2.total_itemized_30_standard_or_itemized"];
+        const fromScheduleCA = f["schedule-ca.5.page2.total_itemized_30_standard_or_itemized"];
         if (typeof fromScheduleCA === "number") return fromScheduleCA;
         return info.filingStatus
           ? lookupStandardDeduction("state-ca", 2025, info.filingStatus)
           : undefined;
       },
       // CA taxable income = CA AGI (line 17) minus deductions (line 18), floored at 0.
-      "line.19_taxable_income": (f) => floor(0, sum(f["line.17_ca_agi"], f["line.18_deductions"] === undefined ? 0 : -f["line.18_deductions"])),
+      "line.19_taxable_income": (f) =>
+        floor(
+          0,
+          sum(
+            f["line.17_ca_agi"],
+            f["line.18_deductions"] === undefined ? 0 : -f["line.18_deductions"],
+          ),
+        ),
       // Line 31 tax from the California Tax Table (tableId "ca-2025", not the federal table), keyed by line 19 taxable income and filing status.
       "line.31_tax_amount": (f, info) => {
         if (!info.filingStatus) return undefined;
@@ -148,17 +167,47 @@ export function register(): void {
       // Line 32 exemption credits = the line 11 total exemption amount per instructions.
       "line.32_exemption_credits": (f) => sum(f["line.11_total_exemption_amount"]),
       // Tax after exemption credits = line 31 minus line 32, floored at 0.
-      "line.33_tax_after_exemption_credits": (f) => floor(0, sum(f["line.31_tax_amount"], f["line.32_exemption_credits"] === undefined ? 0 : -f["line.32_exemption_credits"])),
+      "line.33_tax_after_exemption_credits": (f) =>
+        floor(
+          0,
+          sum(
+            f["line.31_tax_amount"],
+            f["line.32_exemption_credits"] === undefined ? 0 : -f["line.32_exemption_credits"],
+          ),
+        ),
       // Line 33 + line 34 (Schedule G-1 / FTB 5870A tax). Line 34 is unsupported; sum() treats it as 0.
-      "line.35_total_tax_after_credits": (f) => sum(f["line.33_tax_after_exemption_credits"], f["line.34_tax_amount"]),
+      "line.35_total_tax_after_credits": (f) =>
+        sum(f["line.33_tax_after_exemption_credits"], f["line.34_tax_amount"]),
       // Line 35 minus line 47, floored at 0 per the instruction 'if less than zero, enter 0'.
-      "line.48_tax_after_credits": (f) => floor(0, sum(f["line.35_total_tax_after_credits"], f["line.47_total_credits"] === undefined ? 0 : -f["line.47_total_credits"])),
+      "line.48_tax_after_credits": (f) =>
+        floor(
+          0,
+          sum(
+            f["line.35_total_tax_after_credits"],
+            f["line.47_total_credits"] === undefined ? 0 : -f["line.47_total_credits"],
+          ),
+        ),
       // Lines 48 + 61 + 62 + 63 per form instructions. sum() treats unsupported lines as 0.
-      "line.64_total_tax": (f) => sum(f["line.48_tax_after_credits"], f["line.61_alternative_minimum_tax"], f["line.62_behavioral_health_services_tax"], f["line.63_other_taxes_credit_recapture"]),
+      "line.64_total_tax": (f) =>
+        sum(
+          f["line.48_tax_after_credits"],
+          f["line.61_alternative_minimum_tax"],
+          f["line.62_behavioral_health_services_tax"],
+          f["line.63_other_taxes_credit_recapture"],
+        ),
       // Sum of W-2 box 17 (state income tax withheld) across all employers.
       "line.71_ca_income_tax_withheld": (_, info) => info.w2StateWithholding,
       // Line 78 = lines 71–77 (CA withholding + estimated payments + 592-B/593 withholding + refundable credits). sum() treats unsupported terms as 0.
-      "line.78_total_payments": (f) => sum(f["line.71_ca_income_tax_withheld"], f["line.72_ca_estimated_tax_payments"], f["line.73_withholding_592b_593"], f["line.74_motion_picture_production_credit"], f["line.75_eitc"], f["line.76_young_child_tax_credit"], f["line.77_foster_youth_tax_credit"]),
+      "line.78_total_payments": (f) =>
+        sum(
+          f["line.71_ca_income_tax_withheld"],
+          f["line.72_ca_estimated_tax_payments"],
+          f["line.73_withholding_592b_593"],
+          f["line.74_motion_picture_production_credit"],
+          f["line.75_eitc"],
+          f["line.76_young_child_tax_credit"],
+          f["line.77_foster_youth_tax_credit"],
+        ),
       // Self-reported use tax owed, read from the use_tax fact.
       "line.91_use_tax": (_, info) => info.useTaxOwed,
       /*
@@ -172,34 +221,97 @@ export function register(): void {
       // Checked when the household had minimum essential coverage all year (health_coverage.full_year_mec fact).
       "line.92_full_year_health_coverage": (_, info) => info.fullYearMEC,
       // Line 93 = line 78 (total payments) minus line 91 (use tax), floored at 0 per instructions.
-      "line.93_payments_balance": (f) => floor(0, sum(f["line.78_total_payments"], f["line.91_use_tax"] === undefined ? 0 : -f["line.91_use_tax"])),
+      "line.93_payments_balance": (f) =>
+        floor(
+          0,
+          sum(
+            f["line.78_total_payments"],
+            f["line.91_use_tax"] === undefined ? 0 : -f["line.91_use_tax"],
+          ),
+        ),
       // Payments after ISR penalty = line 93 minus line 92, floored at 0 per instructions.
-      "line.95_payments_after_isr_penalty": (f) => floor(0, sum(f["line.93_payments_balance"], f["line.92_isr_penalty"] === undefined ? 0 : -f["line.92_isr_penalty"])),
+      "line.95_payments_after_isr_penalty": (f) =>
+        floor(
+          0,
+          sum(
+            f["line.93_payments_balance"],
+            f["line.92_isr_penalty"] === undefined ? 0 : -f["line.92_isr_penalty"],
+          ),
+        ),
       // Overpaid tax = line 95 minus line 64, floored at 0 per instructions.
-      "line.97_overpaid_tax": (f) => floor(0, sum(f["line.95_payments_after_isr_penalty"], f["line.64_total_tax"] === undefined ? 0 : -f["line.64_total_tax"])),
+      "line.97_overpaid_tax": (f) =>
+        floor(
+          0,
+          sum(
+            f["line.95_payments_after_isr_penalty"],
+            f["line.64_total_tax"] === undefined ? 0 : -f["line.64_total_tax"],
+          ),
+        ),
       // Overpaid tax available this year = line 97 minus line 98 (amount applied to 2026 estimated tax), floored at 0.
-      "line.99_overpaid_tax_available": (f) => floor(0, sum(f["line.97_overpaid_tax"], f["line.98_applied_to_2026_estimated_tax"] === undefined ? 0 : -f["line.98_applied_to_2026_estimated_tax"])),
+      "line.99_overpaid_tax_available": (f) =>
+        floor(
+          0,
+          sum(
+            f["line.97_overpaid_tax"],
+            f["line.98_applied_to_2026_estimated_tax"] === undefined
+              ? 0
+              : -f["line.98_applied_to_2026_estimated_tax"],
+          ),
+        ),
       /*
        * Tax due = line 64 minus line 95. Returns undefined when the
        * result is 0 (refund-branch scenarios) so the line renders blank
        * instead of "0". Only the owe branch populates this line.
        */
       "line.100_tax_due": (f) => {
-        const r = sum(f["line.64_total_tax"], f["line.95_payments_after_isr_penalty"] === undefined ? 0 : -f["line.95_payments_after_isr_penalty"]);
+        const r = sum(
+          f["line.64_total_tax"],
+          f["line.95_payments_after_isr_penalty"] === undefined
+            ? 0
+            : -f["line.95_payments_after_isr_penalty"],
+        );
         return r > 0 ? r : undefined;
       },
       // Per instructions: with no amount on line 99, amount owed = lines 94 + 96 + 100 + 110. Returns undefined when the result is 0.
       "line.111_amount_you_owe": (f) => {
-        const r = sum(f["line.94_use_tax_balance"], f["line.96_isr_penalty_balance"], f["line.100_tax_due"], f["line.110_total_contributions"]);
+        const r = sum(
+          f["line.94_use_tax_balance"],
+          f["line.96_isr_penalty_balance"],
+          f["line.100_tax_due"],
+          f["line.110_total_contributions"],
+        );
         return r > 0 ? r : undefined;
       },
       // Total amount due. Returns undefined when the result is 0 (refund-branch scenarios).
       "line.114_total_amount_due": (f) => {
-        const r = floor(0, sum(f["line.100_tax_due"], f["line.110_total_contributions"], f["line.112_interest_and_late_penalties"], f["line.113_underpayment_estimated_tax"]));
+        const r = floor(
+          0,
+          sum(
+            f["line.100_tax_due"],
+            f["line.110_total_contributions"],
+            f["line.112_interest_and_late_penalties"],
+            f["line.113_underpayment_estimated_tax"],
+          ),
+        );
         return r > 0 ? r : undefined;
       },
       // Refund or no amount due: line 99 minus contributions (110), interest/penalties (112), and underpayment penalty (113).
-      "line.115_refund_or_no_amount_due": (f) => floor(0, sum(f["line.99_overpaid_tax_available"], f["line.110_total_contributions"] === undefined ? 0 : -f["line.110_total_contributions"], f["line.112_interest_and_late_penalties"] === undefined ? 0 : -f["line.112_interest_and_late_penalties"], f["line.113_underpayment_estimated_tax"] === undefined ? 0 : -f["line.113_underpayment_estimated_tax"])),
+      "line.115_refund_or_no_amount_due": (f) =>
+        floor(
+          0,
+          sum(
+            f["line.99_overpaid_tax_available"],
+            f["line.110_total_contributions"] === undefined
+              ? 0
+              : -f["line.110_total_contributions"],
+            f["line.112_interest_and_late_penalties"] === undefined
+              ? 0
+              : -f["line.112_interest_and_late_penalties"],
+            f["line.113_underpayment_estimated_tax"] === undefined
+              ? 0
+              : -f["line.113_underpayment_estimated_tax"],
+          ),
+        ),
       // identity.email fact.
       "signing.taxpayer_email": (_, info) => info.taxpayerEmail,
       // identity.phone fact, collected during intake.
@@ -215,134 +327,248 @@ export function register(): void {
      * right runtime call.
      */
     formatters: {
-      "page2.taxpayer_ssn": (value) =>
-        SSN.format(value as Parameters<typeof SSN.format>[0]),
+      "page2.taxpayer_ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
     },
 
     unsupported: {
-      "line.47_total_credits": "Form 540 line 47 (total credits) — aggregates lines 40-46; no CA credit scenario (child/dependent care, renters, etc.) is exercised yet.",
-      "line.94_use_tax_balance": "Form 540 line 94 (use tax balance) — use-tax-owed branch not yet exercised; current scenarios all have $0 use tax.",
-      "line.96_isr_penalty_balance": "Form 540 line 96 (individual shared responsibility penalty balance) — ISR penalty / health-coverage-gap scenario not modeled yet.",
-      "line.110_total_contributions": "Form 540 line 110 (total voluntary contributions, codes 400-449) — no voluntary-contribution fact ingestion path built yet.",
-      "header.is_amended_return": "No amended-return scenario yet — we don't model Schedule X / amended filing triggers.",
-      "header.fiscal_year_end_month": "Fiscal year filers only — MVP only supports calendar-year (Jan–Dec) filers; no fiscal-year scenario ingested.",
-      "header.middle_initial": "No identity.name.middle_initial fact exists; identity.name.first holds the full first name which would corrupt a single-character field.",
+      "line.47_total_credits":
+        "Form 540 line 47 (total credits) — aggregates lines 40-46; no CA credit scenario (child/dependent care, renters, etc.) is exercised yet.",
+      "line.94_use_tax_balance":
+        "Form 540 line 94 (use tax balance) — use-tax-owed branch not yet exercised; current scenarios all have $0 use tax.",
+      "line.96_isr_penalty_balance":
+        "Form 540 line 96 (individual shared responsibility penalty balance) — ISR penalty / health-coverage-gap scenario not modeled yet.",
+      "line.110_total_contributions":
+        "Form 540 line 110 (total voluntary contributions, codes 400-449) — no voluntary-contribution fact ingestion path built yet.",
+      "header.is_amended_return":
+        "No amended-return scenario yet — we don't model Schedule X / amended filing triggers.",
+      "header.fiscal_year_end_month":
+        "Fiscal year filers only — MVP only supports calendar-year (Jan–Dec) filers; no fiscal-year scenario ingested.",
+      "header.middle_initial":
+        "No identity.name.middle_initial fact exists; identity.name.first holds the full first name which would corrupt a single-character field.",
       "header.suffix": "No identity.name.suffix fact exists in the available fact catalog.",
-      "header.spouse_first_name": "No MFJ/RDP scenario yet — spouse identity facts are not ingested.",
-      "header.spouse_middle_initial": "No MFJ/RDP scenario yet — spouse identity facts are not ingested.",
-      "header.spouse_last_name": "No MFJ/RDP scenario yet — spouse identity facts are not ingested.",
-      "header.spouse_suffix": "No MFJ/RDP scenario yet — spouse suffix field unsupported until we ingest spouse identity facts.",
-      "header.spouse_ssn": "No MFJ/RDP scenario yet — spouse SSN/ITIN field unsupported until we ingest spouse identity facts.",
-      "header.additional_information": "Free-text supplemental field with no defined fact or decision mapping; rarely populated and scenario-dependent.",
-      "header.principal_business_activity_code": "No self-employment / business-activity fact ingested yet; this field is only relevant for business-income filers.",
-      "header.private_mailbox": "No private mailbox fact key exists in the identity schema; this is an edge-case address field not yet modeled.",
-      "header.foreign_country_name": "No foreign address facts are ingested; MVP supports domestic US addresses only. This field is only relevant for taxpayers with a foreign mailing address.",
-      "header.foreign_province_state_county": "No foreign address facts are ingested; MVP supports domestic US addresses only.",
-      "header.foreign_postal_code": "No foreign address facts are ingested; MVP supports domestic US addresses only.",
-      "header.spouse_date_of_birth": "No MFJ/spouse scenario ingested; spouse date of birth has no corresponding fact key.",
-      "header.prior_name": "No prior-name fact key exists in the identity category; taxpayer name-change scenario not modeled.",
-      "header.spouse_prior_name": "No MFJ scenario ingested, and no prior-name fact key exists for the spouse.",
-      "header.residence_street_address": "No separate principal-residence street address fact exists; the identity address facts represent the mailing address. A distinct principal-residence address scenario has no ingestion path yet.",
-      "header.ca_filing_status_differs_from_federal": "No scenario yet where CA filing status differs from federal (e.g. RDP adjustments, community property MFS). MVP only handles matching statuses; this checkbox would require a dedicated ca_filing_status_differs decision.",
-      "header.spouse_rdp_year_of_death": "No scenario yet for qualifying surviving spouse/RDP with a deceased spouse — year-of-death fact not ingested.",
-      "header.qualifying_surviving_spouse_instructions_ref": "Static instructions reference label on the form; no computable value — no scenario for QSS filing status with deceased spouse data ingested.",
-      "header.mfs_spouse_rdp_name_and_ssn": "No MFS scenario yet — spouse/RDP name and SSN for married filing separately not ingested.",
-      "header.claimed_as_dependent": "No scenario yet where the taxpayer themselves is claimed as a dependent by another person — no fact or decision models this.",
-      "line.8_blind_exemption_count": "No blind/visual-impairment fact ingested yet. Need a 'disability.blind' or similar fact category before this can be computed.",
-      "line.8_blind_exemption_amount": "Depends on line 8 blind exemption count which has no ingested fact path yet.",
-      "line.9_senior_exemption_count": "While identity.dob exists for the primary taxpayer, computing the senior count (1 or 2) also requires spouse DOB for MFJ scenarios, and no MFJ/spouse-DOB ingestion path exists yet. Deferring until a senior-taxpayer scenario is built.",
-      "line.9_senior_exemption_amount": "Depends on line 9 senior exemption count which is unsupported until a senior/MFJ scenario is ingested.",
-      "dependents.dep1_first_name": "No dependent data ingestion path exists yet. Need a dependents fact category before any dependent fields can be populated.",
-      "dependents.dep2_first_name": "No dependent data ingestion path exists yet. Need a dependents fact category before any dependent fields can be populated.",
-      "dependents.dep3_first_name": "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep1_last_name": "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep2_last_name": "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep3_last_name": "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep1_ssn": "No dependent data ingestion path yet — dependent SSN fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep2_ssn": "No dependent data ingestion path yet — dependent SSN fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep3_ssn": "No dependent data ingestion path yet — dependent SSN fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep1_relationship": "No dependent data ingestion path yet — dependent relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep2_relationship": "No dependent data ingestion path yet — dependent relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep3_relationship": "No dependent data ingestion path yet — dependent relationship fields require a dependent-with-exemption scenario to be built.",
-      "line.10_dependent_exemption_count": "No dependent-data ingestion path yet — dependent count requires building dependent fact ingestion. Downstream sum (line 11) treats this as 0.",
-      "line.10_dependent_exemption_amount": "No dependent-data ingestion path yet — dependent exemption amount ($475 × count) requires building dependent fact ingestion. Downstream sum (line 11) treats this as 0.",
-      "line.31_tax_from_rate_schedule": "Checkbox indicating tax was computed from the Tax Rate Schedule (income > $100k). No engine decision tracks which computation method was used; unsupported until a method-selector decision is built.",
-      "line.31_tax_from_ftb_3800": "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
-      "line.31_tax_from_ftb_3803": "Checkbox indicating tax includes FTB 3803 (parent's election to report child's interest/dividend income). No FTB 3803 scenario or fact-ingestion path exists yet.",
-      "line.34_tax_from_schedule_g1": "Checkbox indicating line 34 tax is from Schedule G-1 (lump-sum distributions). No Schedule G-1 scenario or fact-ingestion path exists yet.",
-      "line.34_tax_from_ftb_5870a": "Checkbox indicating line 34 tax is from FTB 5870A (tax on accumulation distribution of trusts). No FTB 5870A scenario or fact-ingestion path exists yet.",
-      "line.34_tax_amount": "Line 34 is tax from Schedule G-1 (lump-sum distributions) or FTB 5870A (tax on accumulation distribution of trusts). No ingestion path exists for these scenarios yet — requires Schedule G-1 or FTB 5870A data.",
-      "line.40_child_dependent_care_credit": "CA nonrefundable Child and Dependent Care Expenses Credit (Code 232) requires FTB 3506 data and dependent/care-expense ingestion. No dependent or child-care-expense scenario built yet.",
-      "line.43_credit_name": "Free-text credit name for an additional special credit on line 43. No ingestion path for user-supplied special credits (e.g., CA Competes, PTE, etc.) exists yet.",
-      "line.43_credit_code": "Credit code for additional special credit on line 43. No ingestion path for user-supplied special credits exists yet.",
-      "line.43_credit_amount": "Credit amount for additional special credit on line 43. No ingestion path for user-supplied special credits (requires supporting schedules/FTB forms) exists yet.",
-      "line.44_credit_name": "Free-text credit name for an additional special credit on line 44. No ingestion path for user-supplied special credits exists yet.",
-      "line.44_credit_code": "Credit code for additional special credit on line 44. No ingestion path for user-supplied special credits exists yet.",
-      "line.44_credit_amount": "Credit amount for additional special credit on line 44. No ingestion path for user-supplied special credits (requires supporting schedules/FTB forms) exists yet.",
-      "line.45_schedule_p_credits": "Line 45 is for additional credits claimed via Schedule P (540). No ingestion path for Schedule P credits exists yet — would require a separate Schedule P catalog and credit data.",
-      "line.46_renters_credit": "Nonrefundable Renter's Credit eligibility requires income limits, rent paid, landlord details, and rental address data — no fact ingestion path or scenario built for this yet.",
-      "line.61_alternative_minimum_tax": "CA Alternative Minimum Tax requires Schedule P (540) computation — no Schedule P ingestion or AMT scenario built yet.",
-      "line.62_behavioral_health_services_tax": "Behavioral Health Services Tax requires separate computation based on high-income thresholds and specific instructions — no ingestion path or scenario built yet.",
-      "line.63_other_taxes_credit_recapture": "Other taxes and credit recapture (e.g. lump-sum distributions, credit recapture from FTB forms) require special form attachments — no ingestion path or scenario built yet.",
-      "line.72_ca_estimated_tax_payments": "California estimated tax payments and other prepayments are not captured in any current fact ingestion category — no scenario built for this yet.",
-      "line.73_withholding_592b_593": "Form 592-B and 593 withholding (partnership/LLC/real estate withholding) requires separate fact ingestion — no ingestion path or scenario built yet.",
-      "line.74_motion_picture_production_credit": "CA Motion Picture and Television Production Credit (FTB 3541) requires allocation/certification data from the California Film Commission — no ingestion path or scenario built yet.",
-      "line.75_eitc": "CA EITC requires earned income, qualifying children counts and SSNs, and a separate FTB 3514 computation — no EITC-specific ingestion or decision built yet.",
-      "line.76_young_child_tax_credit": "CA Young Child Tax Credit requires a qualifying child under age 6 and EITC eligibility — no dependent or YCTC ingestion/scenario built yet.",
-      "line.77_foster_youth_tax_credit": "CA Foster Youth Tax Credit requires foster care history facts (aged out of foster care, etc.) — no foster-youth ingestion or scenario built yet.",
-      "line.92_isr_penalty": "ISR penalty amount requires FTB 3853 computation (months without coverage × penalty rate per household member) — no FTB 3853 ingestion or partial-coverage scenario built yet.",
-      "line.98_applied_to_2026_estimated_tax": "Taxpayer-elected amount applied to 2026 estimated tax — this is a discretionary user input with no fact or decision key; we'd need an estimated-tax-election intake flow to support it.",
-      "line.contrib_400_ca_seniors_special_fund": "Voluntary charitable contribution — taxpayer-elected dollar amount with no fact or decision key. Would require a voluntary-contributions intake flow and senior-status verification to support.",
-      "line.contrib_401_alzheimers_fund": "Voluntary charitable contribution — taxpayer-elected dollar amount with no fact or decision key. Would require a voluntary-contributions intake flow to support.",
-      "line.contrib_403_rare_endangered_species_fund": "Voluntary charitable contribution — taxpayer-elected dollar amount with no fact or decision key. Would require a voluntary-contributions intake flow to support.",
-      "line.contrib_405_breast_cancer_research_fund": "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
-      "line.contrib_406_firefighters_memorial_fund": "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
-      "line.contrib_407_emergency_food_for_families_fund": "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
-      "line.contrib_408_peace_officer_memorial_fund": "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
-      "line.contrib_413_ca_cancer_research_fund": "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
-      "line.contrib_422_school_supplies_homeless_children_fund": "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
-      "line.contrib_423_state_parks_protection_fund": "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
-      "line.contrib_424_protect_our_coast_and_oceans_fund": "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
-      "line.contrib_431_prevention_animal_homelessness_fund": "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
-      "line.contrib_438_senior_citizen_advocacy_fund": "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
-      "line.contrib_439_native_ca_wildlife_rehabilitation_fund": "Voluntary charitable contribution — no fact ingestion path for taxpayer donation amounts; unsupported until a voluntary-contributions scenario is built.",
-      "line.contrib_445_mental_health_crisis_prevention_fund": "Voluntary charitable contribution — no fact ingestion path for taxpayer donation amounts; unsupported until a voluntary-contributions scenario is built.",
-      "line.contrib_447_ca_als_research_network_fund": "Voluntary charitable contribution — no fact ingestion path for taxpayer donation amounts; unsupported until a voluntary-contributions scenario is built.",
-      "line.contrib_448_ca_pediatric_cancer_research_fund": "Voluntary charitable contribution — no fact ingestion path for taxpayer donation amounts; unsupported until a voluntary-contributions scenario is built.",
-      "line.contrib_449_parkinsons_disease_research_fund": "Voluntary charitable contribution — no fact ingestion path for taxpayer donation amounts; unsupported until a voluntary-contributions scenario is built.",
-      "line.112_interest_and_late_penalties": "Interest and penalty calculations require FTB-computed penalty amounts based on filing date, payment history, and underpayment rules — no fact ingestion path or scenario for this yet.",
-      "line.112_ftb_5805_attached": "FTB 5805 attachment flag depends on underpayment of estimated tax — no scenario or decision models whether this form is attached.",
-      "line.112_ftb_5805f_attached": "FTB 5805F attachment flag depends on underpayment of estimated tax for farmers/fishermen — no scenario or decision models whether this form is attached.",
-      "line.113_underpayment_estimated_tax": "Underpayment of estimated tax penalty requires FTB 5805/5805F worksheet calculations comparing prior-year liability, withholding, and estimated payments — no scenario or fact ingestion path exists for this yet.",
-      "line.116_account_type_checking": "Bank account type (checking) is taxpayer-provided direct-deposit preference — no fact ingestion path built for banking details.",
-      "line.116_routing_number": "Bank routing number is taxpayer-provided direct-deposit preference — no fact ingestion path built for banking details.",
-      "line.116_account_number": "Bank account number is taxpayer-provided direct-deposit preference — no fact ingestion path built for banking details.",
-      "line.116_direct_deposit_amount": "Direct deposit split amount is a taxpayer allocation choice (all or partial of line 115) — no fact or decision models this preference yet.",
-      "line.116_account_type_savings": "Bank account type (savings) is taxpayer-provided direct-deposit preference — no fact ingestion path built for banking details.",
-      "line.117_secondary_account_type_checking": "Secondary bank account type (checking) is a taxpayer-provided direct-deposit split preference — no fact ingestion path built for banking details.",
-      "line.117_secondary_routing_number": "Secondary bank routing number is a taxpayer-provided direct-deposit split detail — no fact ingestion path built for banking details.",
-      "line.117_secondary_account_number": "No fact key exists for a secondary bank account number; bank account data is not ingested.",
-      "line.117_secondary_direct_deposit_amount": "No fact or decision captures the taxpayer's chosen split amount for a secondary direct deposit account.",
-      "line.117_secondary_account_type_savings": "No fact key exists for secondary bank account type (checking vs. savings); bank account data is not ingested.",
-      "signing.voter_registration_info_request": "Voluntary voter registration opt-in checkbox — no fact or decision models this taxpayer preference.",
-      "signing.wants_health_care_coverage_info": "Voluntary single_select asking if taxpayer wants health care coverage info — no decision models this preference.",
-      "signing.organ_donor_primary_taxpayer": "Voluntary organ donor registry opt-in for primary taxpayer — no fact or decision models this election.",
-      "signing.organ_donor_spouse_rdp": "Voluntary organ donor registry opt-in for spouse/RDP — no MFJ scenario built and no fact models this election.",
-      "signing.date_signed": "Signing date is set at the moment the taxpayer executes the return — no static fact captures it and it is not a fixed value.",
-      "signing.preparer_name": "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
-      "signing.preparer_phone": "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
-      "signing.preparer_firm_name": "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
-      "signing.preparer_ptin": "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
-      "signing.preparer_firm_address": "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
-      "signing.preparer_firm_ein": "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
-      "signing.third_party_designee_authorized": "Third-party designee authorization — no designee ingestion scenario built yet. Most self-filed returns do not authorize a third-party designee.",
-      "signing.third_party_designee_name": "Third-party designee block — no designee ingestion scenario built yet.",
-      "signing.third_party_designee_phone": "Third-party designee block — no designee ingestion scenario built yet.",
+      "header.spouse_first_name":
+        "No MFJ/RDP scenario yet — spouse identity facts are not ingested.",
+      "header.spouse_middle_initial":
+        "No MFJ/RDP scenario yet — spouse identity facts are not ingested.",
+      "header.spouse_last_name":
+        "No MFJ/RDP scenario yet — spouse identity facts are not ingested.",
+      "header.spouse_suffix":
+        "No MFJ/RDP scenario yet — spouse suffix field unsupported until we ingest spouse identity facts.",
+      "header.spouse_ssn":
+        "No MFJ/RDP scenario yet — spouse SSN/ITIN field unsupported until we ingest spouse identity facts.",
+      "header.additional_information":
+        "Free-text supplemental field with no defined fact or decision mapping; rarely populated and scenario-dependent.",
+      "header.principal_business_activity_code":
+        "No self-employment / business-activity fact ingested yet; this field is only relevant for business-income filers.",
+      "header.private_mailbox":
+        "No private mailbox fact key exists in the identity schema; this is an edge-case address field not yet modeled.",
+      "header.foreign_country_name":
+        "No foreign address facts are ingested; MVP supports domestic US addresses only. This field is only relevant for taxpayers with a foreign mailing address.",
+      "header.foreign_province_state_county":
+        "No foreign address facts are ingested; MVP supports domestic US addresses only.",
+      "header.foreign_postal_code":
+        "No foreign address facts are ingested; MVP supports domestic US addresses only.",
+      "header.spouse_date_of_birth":
+        "No MFJ/spouse scenario ingested; spouse date of birth has no corresponding fact key.",
+      "header.prior_name":
+        "No prior-name fact key exists in the identity category; taxpayer name-change scenario not modeled.",
+      "header.spouse_prior_name":
+        "No MFJ scenario ingested, and no prior-name fact key exists for the spouse.",
+      "header.residence_street_address":
+        "No separate principal-residence street address fact exists; the identity address facts represent the mailing address. A distinct principal-residence address scenario has no ingestion path yet.",
+      "header.ca_filing_status_differs_from_federal":
+        "No scenario yet where CA filing status differs from federal (e.g. RDP adjustments, community property MFS). MVP only handles matching statuses; this checkbox would require a dedicated ca_filing_status_differs decision.",
+      "header.spouse_rdp_year_of_death":
+        "No scenario yet for qualifying surviving spouse/RDP with a deceased spouse — year-of-death fact not ingested.",
+      "header.qualifying_surviving_spouse_instructions_ref":
+        "Static instructions reference label on the form; no computable value — no scenario for QSS filing status with deceased spouse data ingested.",
+      "header.mfs_spouse_rdp_name_and_ssn":
+        "No MFS scenario yet — spouse/RDP name and SSN for married filing separately not ingested.",
+      "header.claimed_as_dependent":
+        "No scenario yet where the taxpayer themselves is claimed as a dependent by another person — no fact or decision models this.",
+      "line.8_blind_exemption_count":
+        "No blind/visual-impairment fact ingested yet. Need a 'disability.blind' or similar fact category before this can be computed.",
+      "line.8_blind_exemption_amount":
+        "Depends on line 8 blind exemption count which has no ingested fact path yet.",
+      "line.9_senior_exemption_count":
+        "While identity.dob exists for the primary taxpayer, computing the senior count (1 or 2) also requires spouse DOB for MFJ scenarios, and no MFJ/spouse-DOB ingestion path exists yet. Deferring until a senior-taxpayer scenario is built.",
+      "line.9_senior_exemption_amount":
+        "Depends on line 9 senior exemption count which is unsupported until a senior/MFJ scenario is ingested.",
+      "dependents.dep1_first_name":
+        "No dependent data ingestion path exists yet. Need a dependents fact category before any dependent fields can be populated.",
+      "dependents.dep2_first_name":
+        "No dependent data ingestion path exists yet. Need a dependents fact category before any dependent fields can be populated.",
+      "dependents.dep3_first_name":
+        "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
+      "dependents.dep1_last_name":
+        "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
+      "dependents.dep2_last_name":
+        "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
+      "dependents.dep3_last_name":
+        "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
+      "dependents.dep1_ssn":
+        "No dependent data ingestion path yet — dependent SSN fields require a dependent-with-exemption scenario to be built.",
+      "dependents.dep2_ssn":
+        "No dependent data ingestion path yet — dependent SSN fields require a dependent-with-exemption scenario to be built.",
+      "dependents.dep3_ssn":
+        "No dependent data ingestion path yet — dependent SSN fields require a dependent-with-exemption scenario to be built.",
+      "dependents.dep1_relationship":
+        "No dependent data ingestion path yet — dependent relationship fields require a dependent-with-exemption scenario to be built.",
+      "dependents.dep2_relationship":
+        "No dependent data ingestion path yet — dependent relationship fields require a dependent-with-exemption scenario to be built.",
+      "dependents.dep3_relationship":
+        "No dependent data ingestion path yet — dependent relationship fields require a dependent-with-exemption scenario to be built.",
+      "line.10_dependent_exemption_count":
+        "No dependent-data ingestion path yet — dependent count requires building dependent fact ingestion. Downstream sum (line 11) treats this as 0.",
+      "line.10_dependent_exemption_amount":
+        "No dependent-data ingestion path yet — dependent exemption amount ($475 × count) requires building dependent fact ingestion. Downstream sum (line 11) treats this as 0.",
+      "line.31_tax_from_rate_schedule":
+        "Checkbox indicating tax was computed from the Tax Rate Schedule (income > $100k). No engine decision tracks which computation method was used; unsupported until a method-selector decision is built.",
+      "line.31_tax_from_ftb_3800":
+        "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
+      "line.31_tax_from_ftb_3803":
+        "Checkbox indicating tax includes FTB 3803 (parent's election to report child's interest/dividend income). No FTB 3803 scenario or fact-ingestion path exists yet.",
+      "line.34_tax_from_schedule_g1":
+        "Checkbox indicating line 34 tax is from Schedule G-1 (lump-sum distributions). No Schedule G-1 scenario or fact-ingestion path exists yet.",
+      "line.34_tax_from_ftb_5870a":
+        "Checkbox indicating line 34 tax is from FTB 5870A (tax on accumulation distribution of trusts). No FTB 5870A scenario or fact-ingestion path exists yet.",
+      "line.34_tax_amount":
+        "Line 34 is tax from Schedule G-1 (lump-sum distributions) or FTB 5870A (tax on accumulation distribution of trusts). No ingestion path exists for these scenarios yet — requires Schedule G-1 or FTB 5870A data.",
+      "line.40_child_dependent_care_credit":
+        "CA nonrefundable Child and Dependent Care Expenses Credit (Code 232) requires FTB 3506 data and dependent/care-expense ingestion. No dependent or child-care-expense scenario built yet.",
+      "line.43_credit_name":
+        "Free-text credit name for an additional special credit on line 43. No ingestion path for user-supplied special credits (e.g., CA Competes, PTE, etc.) exists yet.",
+      "line.43_credit_code":
+        "Credit code for additional special credit on line 43. No ingestion path for user-supplied special credits exists yet.",
+      "line.43_credit_amount":
+        "Credit amount for additional special credit on line 43. No ingestion path for user-supplied special credits (requires supporting schedules/FTB forms) exists yet.",
+      "line.44_credit_name":
+        "Free-text credit name for an additional special credit on line 44. No ingestion path for user-supplied special credits exists yet.",
+      "line.44_credit_code":
+        "Credit code for additional special credit on line 44. No ingestion path for user-supplied special credits exists yet.",
+      "line.44_credit_amount":
+        "Credit amount for additional special credit on line 44. No ingestion path for user-supplied special credits (requires supporting schedules/FTB forms) exists yet.",
+      "line.45_schedule_p_credits":
+        "Line 45 is for additional credits claimed via Schedule P (540). No ingestion path for Schedule P credits exists yet — would require a separate Schedule P catalog and credit data.",
+      "line.46_renters_credit":
+        "Nonrefundable Renter's Credit eligibility requires income limits, rent paid, landlord details, and rental address data — no fact ingestion path or scenario built for this yet.",
+      "line.61_alternative_minimum_tax":
+        "CA Alternative Minimum Tax requires Schedule P (540) computation — no Schedule P ingestion or AMT scenario built yet.",
+      "line.62_behavioral_health_services_tax":
+        "Behavioral Health Services Tax requires separate computation based on high-income thresholds and specific instructions — no ingestion path or scenario built yet.",
+      "line.63_other_taxes_credit_recapture":
+        "Other taxes and credit recapture (e.g. lump-sum distributions, credit recapture from FTB forms) require special form attachments — no ingestion path or scenario built yet.",
+      "line.72_ca_estimated_tax_payments":
+        "California estimated tax payments and other prepayments are not captured in any current fact ingestion category — no scenario built for this yet.",
+      "line.73_withholding_592b_593":
+        "Form 592-B and 593 withholding (partnership/LLC/real estate withholding) requires separate fact ingestion — no ingestion path or scenario built yet.",
+      "line.74_motion_picture_production_credit":
+        "CA Motion Picture and Television Production Credit (FTB 3541) requires allocation/certification data from the California Film Commission — no ingestion path or scenario built yet.",
+      "line.75_eitc":
+        "CA EITC requires earned income, qualifying children counts and SSNs, and a separate FTB 3514 computation — no EITC-specific ingestion or decision built yet.",
+      "line.76_young_child_tax_credit":
+        "CA Young Child Tax Credit requires a qualifying child under age 6 and EITC eligibility — no dependent or YCTC ingestion/scenario built yet.",
+      "line.77_foster_youth_tax_credit":
+        "CA Foster Youth Tax Credit requires foster care history facts (aged out of foster care, etc.) — no foster-youth ingestion or scenario built yet.",
+      "line.92_isr_penalty":
+        "ISR penalty amount requires FTB 3853 computation (months without coverage × penalty rate per household member) — no FTB 3853 ingestion or partial-coverage scenario built yet.",
+      "line.98_applied_to_2026_estimated_tax":
+        "Taxpayer-elected amount applied to 2026 estimated tax — this is a discretionary user input with no fact or decision key; we'd need an estimated-tax-election intake flow to support it.",
+      "line.contrib_400_ca_seniors_special_fund":
+        "Voluntary charitable contribution — taxpayer-elected dollar amount with no fact or decision key. Would require a voluntary-contributions intake flow and senior-status verification to support.",
+      "line.contrib_401_alzheimers_fund":
+        "Voluntary charitable contribution — taxpayer-elected dollar amount with no fact or decision key. Would require a voluntary-contributions intake flow to support.",
+      "line.contrib_403_rare_endangered_species_fund":
+        "Voluntary charitable contribution — taxpayer-elected dollar amount with no fact or decision key. Would require a voluntary-contributions intake flow to support.",
+      "line.contrib_405_breast_cancer_research_fund":
+        "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
+      "line.contrib_406_firefighters_memorial_fund":
+        "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
+      "line.contrib_407_emergency_food_for_families_fund":
+        "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
+      "line.contrib_408_peace_officer_memorial_fund":
+        "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
+      "line.contrib_413_ca_cancer_research_fund":
+        "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
+      "line.contrib_422_school_supplies_homeless_children_fund":
+        "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
+      "line.contrib_423_state_parks_protection_fund":
+        "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
+      "line.contrib_424_protect_our_coast_and_oceans_fund":
+        "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
+      "line.contrib_431_prevention_animal_homelessness_fund":
+        "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
+      "line.contrib_438_senior_citizen_advocacy_fund":
+        "Voluntary contribution amount elected by the taxpayer — no fact ingestion path exists for charitable donation elections on CA 540 contribution lines.",
+      "line.contrib_439_native_ca_wildlife_rehabilitation_fund":
+        "Voluntary charitable contribution — no fact ingestion path for taxpayer donation amounts; unsupported until a voluntary-contributions scenario is built.",
+      "line.contrib_445_mental_health_crisis_prevention_fund":
+        "Voluntary charitable contribution — no fact ingestion path for taxpayer donation amounts; unsupported until a voluntary-contributions scenario is built.",
+      "line.contrib_447_ca_als_research_network_fund":
+        "Voluntary charitable contribution — no fact ingestion path for taxpayer donation amounts; unsupported until a voluntary-contributions scenario is built.",
+      "line.contrib_448_ca_pediatric_cancer_research_fund":
+        "Voluntary charitable contribution — no fact ingestion path for taxpayer donation amounts; unsupported until a voluntary-contributions scenario is built.",
+      "line.contrib_449_parkinsons_disease_research_fund":
+        "Voluntary charitable contribution — no fact ingestion path for taxpayer donation amounts; unsupported until a voluntary-contributions scenario is built.",
+      "line.112_interest_and_late_penalties":
+        "Interest and penalty calculations require FTB-computed penalty amounts based on filing date, payment history, and underpayment rules — no fact ingestion path or scenario for this yet.",
+      "line.112_ftb_5805_attached":
+        "FTB 5805 attachment flag depends on underpayment of estimated tax — no scenario or decision models whether this form is attached.",
+      "line.112_ftb_5805f_attached":
+        "FTB 5805F attachment flag depends on underpayment of estimated tax for farmers/fishermen — no scenario or decision models whether this form is attached.",
+      "line.113_underpayment_estimated_tax":
+        "Underpayment of estimated tax penalty requires FTB 5805/5805F worksheet calculations comparing prior-year liability, withholding, and estimated payments — no scenario or fact ingestion path exists for this yet.",
+      "line.116_account_type_checking":
+        "Bank account type (checking) is taxpayer-provided direct-deposit preference — no fact ingestion path built for banking details.",
+      "line.116_routing_number":
+        "Bank routing number is taxpayer-provided direct-deposit preference — no fact ingestion path built for banking details.",
+      "line.116_account_number":
+        "Bank account number is taxpayer-provided direct-deposit preference — no fact ingestion path built for banking details.",
+      "line.116_direct_deposit_amount":
+        "Direct deposit split amount is a taxpayer allocation choice (all or partial of line 115) — no fact or decision models this preference yet.",
+      "line.116_account_type_savings":
+        "Bank account type (savings) is taxpayer-provided direct-deposit preference — no fact ingestion path built for banking details.",
+      "line.117_secondary_account_type_checking":
+        "Secondary bank account type (checking) is a taxpayer-provided direct-deposit split preference — no fact ingestion path built for banking details.",
+      "line.117_secondary_routing_number":
+        "Secondary bank routing number is a taxpayer-provided direct-deposit split detail — no fact ingestion path built for banking details.",
+      "line.117_secondary_account_number":
+        "No fact key exists for a secondary bank account number; bank account data is not ingested.",
+      "line.117_secondary_direct_deposit_amount":
+        "No fact or decision captures the taxpayer's chosen split amount for a secondary direct deposit account.",
+      "line.117_secondary_account_type_savings":
+        "No fact key exists for secondary bank account type (checking vs. savings); bank account data is not ingested.",
+      "signing.voter_registration_info_request":
+        "Voluntary voter registration opt-in checkbox — no fact or decision models this taxpayer preference.",
+      "signing.wants_health_care_coverage_info":
+        "Voluntary single_select asking if taxpayer wants health care coverage info — no decision models this preference.",
+      "signing.organ_donor_primary_taxpayer":
+        "Voluntary organ donor registry opt-in for primary taxpayer — no fact or decision models this election.",
+      "signing.organ_donor_spouse_rdp":
+        "Voluntary organ donor registry opt-in for spouse/RDP — no MFJ scenario built and no fact models this election.",
+      "signing.date_signed":
+        "Signing date is set at the moment the taxpayer executes the return — no static fact captures it and it is not a fixed value.",
+      "signing.preparer_name":
+        "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
+      "signing.preparer_phone":
+        "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
+      "signing.preparer_firm_name":
+        "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
+      "signing.preparer_ptin":
+        "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
+      "signing.preparer_firm_address":
+        "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
+      "signing.preparer_firm_ein":
+        "Paid preparer block — no paid-preparer ingestion scenario built yet. Self-filed returns leave this blank.",
+      "signing.third_party_designee_authorized":
+        "Third-party designee authorization — no designee ingestion scenario built yet. Most self-filed returns do not authorize a third-party designee.",
+      "signing.third_party_designee_name":
+        "Third-party designee block — no designee ingestion scenario built yet.",
+      "signing.third_party_designee_phone":
+        "Third-party designee block — no designee ingestion scenario built yet.",
     },
 
-    todos: {
-    },
-
+    todos: {},
   });
 }
 

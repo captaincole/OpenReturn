@@ -9,12 +9,7 @@
  * pendingDecisions on the case state.
  */
 
-import type {
-  AnyFormField,
-  BaseFormField,
-  Category,
-  EvaluatedForm,
-} from "../types.js";
+import type { AnyFormField, BaseFormField, Category, EvaluatedForm } from "../types.js";
 
 export const CATEGORIES: readonly Category[] = [
   "personal_info",

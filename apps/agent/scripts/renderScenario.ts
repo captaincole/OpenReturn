@@ -18,11 +18,7 @@ import { loadFromFixtures } from "../src/engine/catalog.js";
 import { getFormSpec } from "../src/engine/registry.js";
 import { fillFromCatalog } from "../src/engine/render/fillFromCatalog.js";
 import { resolveFilingInfo } from "../src/engine/filingInfo.js";
-import {
-  makeDecisionsView,
-  makeFactsView,
-  type DerivationContext,
-} from "../src/engine/types.js";
+import { makeDecisionsView, makeFactsView, type DerivationContext } from "../src/engine/types.js";
 import { projectRoot } from "../src/paths.js";
 import type { Scenario } from "../tests/types.js";
 
@@ -50,12 +46,7 @@ function toPascal(s: string): string {
 
 async function loadScenario(name: string): Promise<Scenario> {
   const mod = await import(`../tests/scenarios/${name}/index.js`);
-  const candidates = [
-    `${name}Scenario`,
-    `${toPascal(name)}Scenario`,
-    "default",
-    "scenario",
-  ];
+  const candidates = [`${name}Scenario`, `${toPascal(name)}Scenario`, "default", "scenario"];
   for (const key of candidates) {
     if (mod[key]) return mod[key] as Scenario;
   }
@@ -117,10 +108,7 @@ async function main() {
     `Rendering ${s.forms.length} form(s) for scenario "${s.name}" (engine converged in ${passes} pass${passes === 1 ? "" : "es"}):\n`,
   );
 
-  const docsDir = resolve(
-    projectRoot,
-    `tests/scenarios/${name}/docs`,
-  );
+  const docsDir = resolve(projectRoot, `tests/scenarios/${name}/docs`);
 
   for (const spec of specs) {
     const evaluated = forms.get(spec.formId);

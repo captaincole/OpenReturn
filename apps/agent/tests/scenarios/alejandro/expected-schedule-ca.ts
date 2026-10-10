@@ -77,9 +77,7 @@ export const alejandroScheduleCaExpected: ExpectedResults = {
    * checkbox. Alejandro itemizes neither federal nor CA, so it stays
    * unchecked.
    */
-  renderedBlank: [
-    "schedule-ca.4.page2.itemize_ca_not_federal",
-  ],
+  renderedBlank: ["schedule-ca.4.page2.itemize_ca_not_federal"],
 
   renderedChecked: [],
 };

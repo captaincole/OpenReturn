@@ -48,8 +48,8 @@ const w2: W2FactValue = {
 const div: DividendFactValue = {
   payerName: "Apex Securities, Inc.",
   payerTin: "13-2345678",
-  box1a: 385.20,
-  box1b: 381.40,
+  box1a: 385.2,
+  box1b: 381.4,
 };
 
 // NVDA short-term trade — Form 8949 Part I (Box A, basis reported).
@@ -146,7 +146,8 @@ export const alejandroFacts: TaxFactRow[] = [
     category: "health_coverage",
     key: "health_coverage.full_year_mec",
     value: true,
-    sourceNote: "Verbal confirmation during intake — employer-provided plan covered all 12 months of 2025.",
+    sourceNote:
+      "Verbal confirmation during intake — employer-provided plan covered all 12 months of 2025.",
     createdAt: "2026-04-29T00:00:00Z",
   },
   {
@@ -156,7 +157,8 @@ export const alejandroFacts: TaxFactRow[] = [
     category: "use_tax",
     key: "use_tax.owed_amount",
     value: 0,
-    sourceNote: "Verbal confirmation during intake — no out-of-state online purchases requiring use tax.",
+    sourceNote:
+      "Verbal confirmation during intake — no out-of-state online purchases requiring use tax.",
     createdAt: "2026-04-29T00:00:00Z",
   },
 ];

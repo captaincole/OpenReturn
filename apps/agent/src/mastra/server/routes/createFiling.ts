@@ -53,9 +53,7 @@ export const createFilingRoute = registerApiRoute("/app/filings", {
   method: "POST",
   handler: async (c) => {
     const requestContext = c.get("requestContext");
-    const callerId = requestContext?.get(MASTRA_RESOURCE_ID_KEY) as
-      | string
-      | undefined;
+    const callerId = requestContext?.get(MASTRA_RESOURCE_ID_KEY) as string | undefined;
     if (!callerId) return c.json({ error: "unauthorized" }, 401);
 
     let body: unknown = undefined;

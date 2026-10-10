@@ -1,19 +1,13 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 import { createDocument } from "../db/userDocuments";
-import {
-  type AnyFormField,
-  type EvaluatedForm,
-} from "../../engine/types";
+import { type AnyFormField, type EvaluatedForm } from "../../engine/types";
 import { renderForm } from "../../engine";
 import { loadAndEvaluateScenario } from "../loadScenario";
 import { FORMS } from "../../engine/registry";
 import { requireUserContext } from "./userContext";
 
-function lineValue(
-  form: EvaluatedForm<AnyFormField>,
-  fieldId: string,
-): number | null {
+function lineValue(form: EvaluatedForm<AnyFormField>, fieldId: string): number | null {
   const f = form.fields.find((x) => x.fieldId === fieldId);
   if (!f || !f.result.ok) return null;
   const v = f.result.value;
@@ -74,9 +68,7 @@ function countFields(form: EvaluatedForm<AnyFormField>): {
   unsupported: number;
 } {
   const ok = form.fields.filter((f) => f.result.ok).length;
-  const unsupported = form.fields.filter(
-    (f) => !f.result.ok && f.result.unsupported,
-  ).length;
+  const unsupported = form.fields.filter((f) => !f.result.ok && f.result.unsupported).length;
   return {
     ok,
     blocked: form.fields.length - ok - unsupported,
@@ -146,8 +138,7 @@ export const generateTaxDocuments = createTool({
     }),
   }),
   execute: async (input, context) => {
-    const { scope, userId, filingId, taxYear, authEmail } =
-      await requireUserContext(context);
+    const { scope, userId, filingId, taxYear, authEmail } = await requireUserContext(context);
     const { year } = input;
 
     const scenario = await loadAndEvaluateScenario(scope, { id: filingId, taxYear }, authEmail);
@@ -173,9 +164,7 @@ export const generateTaxDocuments = createTool({
     for (const spec of FORMS) {
       const form = forms.get(spec.formId);
       if (!form) {
-        console.warn(
-          `[generate-tax-documents] no evaluation result for ${spec.formId}`,
-        );
+        console.warn(`[generate-tax-documents] no evaluation result for ${spec.formId}`);
         continue;
       }
       if (!form.mustFile.ok) {
@@ -294,8 +283,7 @@ export const generateTaxDocuments = createTool({
     ].join("\n");
 
     return {
-      status:
-        documents.length > 0 ? ("ok" as const) : ("no_forms_rendered" as const),
+      status: documents.length > 0 ? ("ok" as const) : ("no_forms_rendered" as const),
       blockers,
       url: url1040,
       form540Url: url540,

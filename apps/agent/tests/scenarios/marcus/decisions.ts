@@ -28,11 +28,7 @@ export const marcusDecisions: AIDecisionRow[] = [
     true,
     "W-2 wages $220,000 far exceed any filing threshold; Marcus must file.",
   ),
-  dec(
-    "decisions.scope.filing_status",
-    "single",
-    "Marcus stated single filing status.",
-  ),
+  dec("decisions.scope.filing_status", "single", "Marcus stated single filing status."),
   dec(
     "decisions.scope.has_reportable_sales",
     false,

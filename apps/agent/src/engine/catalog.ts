@@ -183,13 +183,7 @@ const fieldValueTypeEnum = z.enum([
   "date",
 ]);
 
-const pdfFieldKindEnum = z.enum([
-  "text",
-  "checkbox",
-  "radio",
-  "signature",
-  "other",
-]);
+const pdfFieldKindEnum = z.enum(["text", "checkbox", "radio", "signature", "other"]);
 
 const fieldOptionSchema = z.object({
   value: z.string(),
@@ -206,9 +200,7 @@ const fieldInventoryInputSchema = z.object({
   valueTypeRich: z.string().optional(),
   pdfFieldKind: pdfFieldKindEnum.optional(),
   pdfWidgetName: z.string().optional(),
-  position: z
-    .object({ page: z.number(), x: z.number(), y: z.number() })
-    .optional(),
+  position: z.object({ page: z.number(), x: z.number(), y: z.number() }).optional(),
   options: z.array(fieldOptionSchema).optional(),
   maxLength: z.number().optional(),
 });

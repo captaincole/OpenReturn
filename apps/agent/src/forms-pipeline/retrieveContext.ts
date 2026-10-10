@@ -81,9 +81,7 @@ export async function retrieveContextPerField(
   }
 
   await Promise.all(
-    Array.from({ length: Math.min(concurrency, opts.fields.length) }, () =>
-      worker(),
-    ),
+    Array.from({ length: Math.min(concurrency, opts.fields.length) }, () => worker()),
   );
   return out;
 }

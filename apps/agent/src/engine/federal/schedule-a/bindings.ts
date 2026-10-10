@@ -79,9 +79,7 @@ export function register(): void {
           0,
           sum(
             f["0.line.1_medical_dental_expenses"],
-            f["0.line.3_agi_multiplied"] === undefined
-              ? 0
-              : -f["0.line.3_agi_multiplied"],
+            f["0.line.3_agi_multiplied"] === undefined ? 0 : -f["0.line.3_agi_multiplied"],
           ),
         );
       },
@@ -90,8 +88,7 @@ export function register(): void {
        * blank for CA filers (state income tax > sales tax). The slot
        * exists for no-income-tax-state scenarios (TX, FL, etc.).
        */
-      "0.line.5a_general_sales_tax_election": (_, info) =>
-        info.generalSalesTaxElection,
+      "0.line.5a_general_sales_tax_election": (_, info) => info.generalSalesTaxElection,
       /*
        * MANUAL EDIT: routed to a FilingInfo slot. resolveFilingInfo
        * composes W-2 box 17 + CA SDI (box 14) + state estimated
@@ -99,13 +96,11 @@ export function register(): void {
        * hold the sales-tax amount instead. That case is not modeled
        * yet; no scenario forces it.
        */
-      "0.line.5a_state_local_income_or_sales_tax": (_, info) =>
-        info.stateLocalIncomeTaxPaid,
+      "0.line.5a_state_local_income_or_sales_tax": (_, info) => info.stateLocalIncomeTaxPaid,
       // MANUAL EDIT: routed to FilingInfo slot.
       "0.line.5b_real_estate_taxes": (_, info) => info.realEstateTaxes,
       // MANUAL EDIT: routed to FilingInfo slot.
-      "0.line.5c_personal_property_taxes": (_, info) =>
-        info.personalPropertyTaxes,
+      "0.line.5c_personal_property_taxes": (_, info) => info.personalPropertyTaxes,
       /*
        * MANUAL EDIT: Schedule A subtotal lines suppress when every
        * addend is undefined. This matches the CPA convention: a section
@@ -154,11 +149,9 @@ export function register(): void {
        * MANUAL EDIT: routed to a FilingInfo slot. Single 1098 for now;
        * the multi-1098 sum lands when fact-kind plumbing exists.
        */
-      "0.line.8a_mortgage_interest_form1098": (_, info) =>
-        info.mortgageInterestForm1098,
+      "0.line.8a_mortgage_interest_form1098": (_, info) => info.mortgageInterestForm1098,
       // MANUAL EDIT: routed to FilingInfo slot (seller-financed loans).
-      "0.line.8b_mortgage_interest_not_form1098": (_, info) =>
-        info.mortgageInterestNotForm1098,
+      "0.line.8b_mortgage_interest_not_form1098": (_, info) => info.mortgageInterestNotForm1098,
       // MANUAL EDIT: routed to FilingInfo slot.
       "0.line.8c_points_not_form1098": (_, info) => info.pointsNotForm1098,
       // Line 8e = 8a + 8b + 8c (total mortgage interest and points).
@@ -193,11 +186,7 @@ export function register(): void {
         const eleven = f["0.line.11_gifts_cash_check"];
         const twelve = f["0.line.12_gifts_other_than_cash"];
         const thirteen = f["0.line.13_gifts_carryover"];
-        if (
-          eleven === undefined &&
-          twelve === undefined &&
-          thirteen === undefined
-        ) {
+        if (eleven === undefined && twelve === undefined && thirteen === undefined) {
           return undefined;
         }
         return sum(eleven, twelve, thirteen);
@@ -221,8 +210,7 @@ export function register(): void {
      * as form-specific.
      */
     formatters: {
-      "0.header.ssn": (value) =>
-        SSN.format(value as Parameters<typeof SSN.format>[0]),
+      "0.header.ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
     },
 
     unsupported: {

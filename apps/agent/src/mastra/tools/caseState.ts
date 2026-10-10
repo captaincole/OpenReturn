@@ -60,9 +60,7 @@ export async function buildCaseState(
   const filingRow = await resolveOwnerFilingForYear(userId, year);
   const filing: EngineFiling = { id: filingRow.id, taxYear: filingRow.taxYear };
   const scope: Scope = { userId, filingId: filingRow.id };
-  return buildCaseStateForScenario(
-    await loadAndEvaluateScenario(scope, filing, authEmail),
-  );
+  return buildCaseStateForScenario(await loadAndEvaluateScenario(scope, filing, authEmail));
 }
 
 /*
@@ -78,9 +76,7 @@ export async function buildCaseStateForFiling(
   authEmail: string | null = null,
 ) {
   const filing: EngineFiling = { id: scope.filingId, taxYear };
-  return buildCaseStateForScenario(
-    await loadAndEvaluateScenario(scope, filing, authEmail),
-  );
+  return buildCaseStateForScenario(await loadAndEvaluateScenario(scope, filing, authEmail));
 }
 
 export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
@@ -88,10 +84,7 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
   const form1040 = forms.get("form-1040")!;
   const form540 = forms.get("form-540")!;
 
-  const summaries: EvaluatedFormSummary[] = [
-    summarizeForm(form1040),
-    summarizeForm(form540),
-  ];
+  const summaries: EvaluatedFormSummary[] = [summarizeForm(form1040), summarizeForm(form540)];
 
   /*
    * Aggregate unique pending decisions and facts across all blockers,
@@ -144,10 +137,8 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
     federalRefund: numericField(form1040.fields, "form-1040.line.34") ?? 0,
     federalOwed: numericField(form1040.fields, "form-1040.line.37") ?? 0,
     stateTax: numericField(form540.fields, "form-540.line.64_total_tax") ?? 0,
-    stateWithholding:
-      numericField(form540.fields, "form-540.line.71_ca_income_tax_withheld") ?? 0,
-    stateRefund:
-      numericField(form540.fields, "form-540.line.115_refund_or_no_amount_due") ?? 0,
+    stateWithholding: numericField(form540.fields, "form-540.line.71_ca_income_tax_withheld") ?? 0,
+    stateRefund: numericField(form540.fields, "form-540.line.115_refund_or_no_amount_due") ?? 0,
     stateOwed: numericField(form540.fields, "form-540.line.111_amount_you_owe") ?? 0,
   };
 
@@ -178,14 +169,38 @@ function summarizeForm(form: {
   jurisdiction: string;
   title: string;
   mustFile:
-    | { ok: true; value: boolean; rationale: string; supportingFactKeys: string[]; decisionKey?: string }
-    | { ok: false; reason: string; missingDecisionKey?: string; missingFactKeys?: string[]; unsupported?: boolean };
+    | {
+        ok: true;
+        value: boolean;
+        rationale: string;
+        supportingFactKeys: string[];
+        decisionKey?: string;
+      }
+    | {
+        ok: false;
+        reason: string;
+        missingDecisionKey?: string;
+        missingFactKeys?: string[];
+        unsupported?: boolean;
+      };
   mustFileDerivation?: EngineDerivation;
   fields: Array<{
     fieldId: string;
     result:
-      | { ok: true; value: unknown; rationale: string; supportingFactKeys: string[]; decisionKey?: string }
-      | { ok: false; reason: string; missingDecisionKey?: string; missingFactKeys?: string[]; unsupported?: boolean };
+      | {
+          ok: true;
+          value: unknown;
+          rationale: string;
+          supportingFactKeys: string[];
+          decisionKey?: string;
+        }
+      | {
+          ok: false;
+          reason: string;
+          missingDecisionKey?: string;
+          missingFactKeys?: string[];
+          unsupported?: boolean;
+        };
   }>;
 }): EvaluatedFormSummary {
   /*
@@ -229,10 +244,7 @@ function summarizeForm(form: {
  * Look up a numeric field by its fieldId. Fields are heterogeneous (text,
  * numeric, single_select), so we filter on result type.
  */
-function numericField(
-  fields: readonly BaseFormField[],
-  fieldId: string,
-): number | null {
+function numericField(fields: readonly BaseFormField[], fieldId: string): number | null {
   const field = fields.find((f) => f.fieldId === fieldId);
   if (!field || !field.result.ok) return null;
   const v = field.result.value;
@@ -284,22 +296,14 @@ export const getCaseState = createTool({
     ),
   }),
   execute: async (_input, context) => {
-    const { scope, filingId, taxYear, authEmail: jwtEmail } =
-      await requireUserContext(context);
+    const { scope, filingId, taxYear, authEmail: jwtEmail } = await requireUserContext(context);
     /*
      * requireUserContext already resolved the active filing. Skip the extra
      * resolveOwnerFilingForYear call that buildCaseState would make.
      */
     const scenario = await loadAndEvaluateScenario(scope, { id: filingId, taxYear }, jwtEmail);
-    const {
-      summaries,
-      pendingDecisions,
-      pendingFacts,
-      money,
-      factCount,
-      decisionRows,
-      authEmail,
-    } = buildCaseStateForScenario(scenario);
+    const { summaries, pendingDecisions, pendingFacts, money, factCount, decisionRows, authEmail } =
+      buildCaseStateForScenario(scenario);
 
     return {
       forms: summaries,

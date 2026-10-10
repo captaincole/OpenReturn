@@ -60,22 +60,14 @@ function format(walk: Awaited<ReturnType<typeof walkCorpus>>, cats: Categorized)
     cats.extra.length +
     walk.unconfigured.length;
   lines.push(`[corpus status] ${total} doc(s):`);
-  lines.push(
-    `  present     ${cats.present.length.toString().padStart(3)} (sha matches DB)`,
-  );
+  lines.push(`  present     ${cats.present.length.toString().padStart(3)} (sha matches DB)`);
   lines.push(
     `  drift       ${cats.drift.length.toString().padStart(3)} (PDF changed since last ingest)`,
   );
+  lines.push(`  missing     ${cats.missing.length.toString().padStart(3)} (in repo, not in DB)`);
+  lines.push(`  extra       ${cats.extra.length.toString().padStart(3)} (in DB, no PDF in repo)`);
   lines.push(
-    `  missing     ${cats.missing.length.toString().padStart(3)} (in repo, not in DB)`,
-  );
-  lines.push(
-    `  extra       ${cats.extra.length.toString().padStart(3)} (in DB, no PDF in repo)`,
-  );
-  lines.push(
-    `  unconfigured ${walk.unconfigured.length
-      .toString()
-      .padStart(2)} (PDF without sidecar)`,
+    `  unconfigured ${walk.unconfigured.length.toString().padStart(2)} (PDF without sidecar)`,
   );
 
   if (cats.drift.length > 0) {
@@ -118,10 +110,7 @@ async function run(argv: string[]): Promise<void> {
 
   if (strict) {
     const dirty =
-      cats.drift.length +
-      cats.missing.length +
-      cats.extra.length +
-      walk.unconfigured.length;
+      cats.drift.length + cats.missing.length + cats.extra.length + walk.unconfigured.length;
     if (dirty > 0) {
       console.error(`\n[corpus status] --strict: ${dirty} drift item(s)`);
       process.exit(1);

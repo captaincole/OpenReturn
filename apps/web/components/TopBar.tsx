@@ -140,9 +140,7 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
                       {r.state === "active" ? "In progress" : "Filed"}
                     </div>
                   </div>
-                  {r.id === activeReturn.id && (
-                    <span className="text-accent text-sm">✓</span>
-                  )}
+                  {r.id === activeReturn.id && <span className="text-accent text-sm">✓</span>}
                 </button>
               ))}
             </div>
@@ -185,7 +183,10 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
         {state && activeReturn.realDataAvailable && !lucaBusy && (
           <div className="hidden sm:flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-bg-panel border border-border-subtle text-xs">
             <div className="w-16 h-1.5 rounded-full bg-bg-elevated overflow-hidden">
-              <div className="h-full bg-accent transition-all duration-500" style={{ width: `${pct}%` }} />
+              <div
+                className="h-full bg-accent transition-all duration-500"
+                style={{ width: `${pct}%` }}
+              />
             </div>
             <span className="tabular-nums text-ink-secondary">{pct}%</span>
           </div>
@@ -205,7 +206,9 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
               <div className="absolute top-full right-0 mt-2 w-56 bg-bg-elevated border border-border-subtle rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-40">
                 {profile.email && (
                   <div className="px-4 py-3 border-b border-border-subtle">
-                    <div className="text-[11px] uppercase tracking-wider text-ink-muted">Signed in as</div>
+                    <div className="text-[11px] uppercase tracking-wider text-ink-muted">
+                      Signed in as
+                    </div>
                     <div className="text-sm text-ink-primary truncate mt-0.5">{profile.email}</div>
                   </div>
                 )}

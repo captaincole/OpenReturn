@@ -71,11 +71,7 @@ export interface TaxTableLookupOk {
 
 export interface TaxTableLookupErr {
   ok: false;
-  reason:
-    | "table_not_supported"
-    | "filing_status_not_supported"
-    | "out_of_range"
-    | "invalid_input";
+  reason: "table_not_supported" | "filing_status_not_supported" | "out_of_range" | "invalid_input";
   message: string;
 }
 

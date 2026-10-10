@@ -11,12 +11,7 @@
  */
 
 import { promises as fs } from "node:fs";
-import {
-  PDFCheckBox,
-  PDFDocument,
-  PDFRadioGroup,
-  PDFTextField,
-} from "pdf-lib";
+import { PDFCheckBox, PDFDocument, PDFRadioGroup, PDFTextField } from "pdf-lib";
 
 export type GoldenKind = "text" | "checkbox" | "radio" | "other";
 
@@ -33,9 +28,7 @@ export interface GoldenValue {
 }
 
 /** Read every form widget's filled value out of a PDF. */
-export async function readGoldenPdfValues(
-  pdfPath: string,
-): Promise<Map<string, GoldenValue>> {
+export async function readGoldenPdfValues(pdfPath: string): Promise<Map<string, GoldenValue>> {
   const bytes = await fs.readFile(pdfPath);
   const pdf = await PDFDocument.load(bytes, { ignoreEncryption: true });
   const form = pdf.getForm();

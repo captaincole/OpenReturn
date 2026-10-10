@@ -21,16 +21,67 @@ import { cn } from "@/lib/cn";
  */
 
 const RETURNS = [
-  { id: "2025", year: 2025, label: "2025 Return", state: "active" as const, progress: 60, openAsks: 3, subtitle: "60% complete · 3 open asks" },
-  { id: "2024-amend", year: 2024, label: "2024 Amend", state: "empty" as const, progress: 0, openAsks: 0, subtitle: "Not started" },
-  { id: "2023", year: 2023, label: "2023 Return", state: "filed" as const, progress: 100, openAsks: 0, filedOn: "Mar 12, 2024", outcome: "Refund $4,210", outcomePositive: true },
-  { id: "2022", year: 2022, label: "2022 Return", state: "filed" as const, progress: 100, openAsks: 0, filedOn: "Mar 28, 2023", outcome: "Owed $1,400", outcomePositive: false },
+  {
+    id: "2025",
+    year: 2025,
+    label: "2025 Return",
+    state: "active" as const,
+    progress: 60,
+    openAsks: 3,
+    subtitle: "60% complete · 3 open asks",
+  },
+  {
+    id: "2024-amend",
+    year: 2024,
+    label: "2024 Amend",
+    state: "empty" as const,
+    progress: 0,
+    openAsks: 0,
+    subtitle: "Not started",
+  },
+  {
+    id: "2023",
+    year: 2023,
+    label: "2023 Return",
+    state: "filed" as const,
+    progress: 100,
+    openAsks: 0,
+    filedOn: "Mar 12, 2024",
+    outcome: "Refund $4,210",
+    outcomePositive: true,
+  },
+  {
+    id: "2022",
+    year: 2022,
+    label: "2022 Return",
+    state: "filed" as const,
+    progress: 100,
+    openAsks: 0,
+    filedOn: "Mar 28, 2023",
+    outcome: "Owed $1,400",
+    outcomePositive: false,
+  },
 ];
 
 const WORKFLOWS = [
-  { id: "new-2026", title: "Start 2026 return", desc: "Begin a new tax year. Luca will guide intake from scratch.", icon: "+" },
-  { id: "amend", title: "Amend a prior year", desc: "Open a previously filed return to correct or update.", icon: "↻" },
-  { id: "planning", title: "Tax planning session", desc: "Look ahead — reduce next year's liability before December.", icon: "○" },
+  {
+    id: "new-2026",
+    title: "Start 2026 return",
+    desc: "Begin a new tax year. Luca will guide intake from scratch.",
+    icon: "+",
+  },
+  {
+    id: "amend",
+    title: "Amend a prior year",
+    desc: "Open a previously filed return to correct or update.",
+    icon: "↻",
+  },
+  {
+    id: "planning",
+    title: "Tax planning session",
+    desc: "Look ahead — reduce next year's liability before December.",
+    icon: "○",
+  },
 ];
 
 const INCOME = [
@@ -79,14 +130,16 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto space-y-14">
           <header>
             <h1 className="font-serif text-4xl text-ink-primary">Hi, Alex.</h1>
-            <p className="text-ink-secondary text-[15px] mt-2.5">
-              Your tax life, in one place.
-            </p>
+            <p className="text-ink-secondary text-[15px] mt-2.5">Your tax life, in one place.</p>
           </header>
 
           <Section
             title="Your returns"
-            right={<button className="text-sm text-ink-secondary hover:text-ink-primary">View archive →</button>}
+            right={
+              <button className="text-sm text-ink-secondary hover:text-ink-primary">
+                View archive →
+              </button>
+            }
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {RETURNS.map((r) => (
@@ -112,7 +165,11 @@ export default function HomePage() {
                 value={fmtCurrencyFull(INCOME[INCOME.length - 1].value)}
                 valueLabel="2025 (in progress)"
               >
-                <BarChart data={INCOME} colorClass="fill-accent" valueFormatter={(v) => fmtCurrencyShort(v)} />
+                <BarChart
+                  data={INCOME}
+                  colorClass="fill-accent"
+                  valueFormatter={(v) => fmtCurrencyShort(v)}
+                />
               </ChartCard>
               <ChartCard
                 title="Effective tax rate"
@@ -120,7 +177,11 @@ export default function HomePage() {
                 value={`${EFFECTIVE_RATE[EFFECTIVE_RATE.length - 1].value.toFixed(1)}%`}
                 valueLabel="2025 (estimated)"
               >
-                <LineChart data={EFFECTIVE_RATE} valueFormatter={(v) => `${v.toFixed(1)}%`} domain={[20, 26]} />
+                <LineChart
+                  data={EFFECTIVE_RATE}
+                  valueFormatter={(v) => `${v.toFixed(1)}%`}
+                  domain={[20, 26]}
+                />
               </ChartCard>
               <ChartCard
                 title="Federal refund / owed"
@@ -136,7 +197,11 @@ export default function HomePage() {
                 value={fmtCurrencyFull(CHARITABLE[CHARITABLE.length - 1].value)}
                 valueLabel="2025 year-to-date"
               >
-                <BarChart data={CHARITABLE} colorClass="fill-emerald-400" valueFormatter={(v) => fmtCurrencyShort(v)} />
+                <BarChart
+                  data={CHARITABLE}
+                  colorClass="fill-emerald-400"
+                  valueFormatter={(v) => fmtCurrencyShort(v)}
+                />
               </ChartCard>
             </div>
           </Section>
@@ -227,8 +292,12 @@ function ReturnCard({ ret }: { ret: (typeof RETURNS)[number] }) {
     >
       <div className="flex items-start justify-between">
         <div>
-          <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">Tax Year {ret.year}</div>
-          <div className="text-[15px] font-semibold text-ink-primary mt-1 tracking-tight">{ret.label}</div>
+          <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">
+            Tax Year {ret.year}
+          </div>
+          <div className="text-[15px] font-semibold text-ink-primary mt-1 tracking-tight">
+            {ret.label}
+          </div>
         </div>
         {isActive && (
           <span className="text-[10px] uppercase tracking-wider text-accent bg-accent/15 px-1.5 py-0.5 rounded">
@@ -256,15 +325,18 @@ function ReturnCard({ ret }: { ret: (typeof RETURNS)[number] }) {
         )}
         {isFiled && (
           <div className="text-[12px] leading-relaxed">
-            <div className={cn("font-semibold tabular-nums", ret.outcomePositive ? "text-emerald-400" : "text-red-400")}>
+            <div
+              className={cn(
+                "font-semibold tabular-nums",
+                ret.outcomePositive ? "text-emerald-400" : "text-red-400",
+              )}
+            >
               {ret.outcome}
             </div>
             <div className="text-ink-muted mt-0.5">Filed {ret.filedOn}</div>
           </div>
         )}
-        {isEmpty && (
-          <div className="text-[12px] text-ink-muted">Not started — open to begin.</div>
-        )}
+        {isEmpty && <div className="text-[12px] text-ink-muted">Not started — open to begin.</div>}
       </div>
     </Link>
   );
@@ -326,7 +398,9 @@ function ChartCard({
           <div className="text-[13px] text-ink-secondary mt-1">{subtitle}</div>
         </div>
         <div className="text-right shrink-0">
-          <div className="text-2xl font-semibold tracking-tight tabular-nums text-ink-primary">{value}</div>
+          <div className="text-2xl font-semibold tracking-tight tabular-nums text-ink-primary">
+            {value}
+          </div>
           <div className="text-[11px] text-ink-muted mt-0.5">{valueLabel}</div>
         </div>
       </div>
@@ -414,7 +488,9 @@ function LineChart({
     return { x, y, d };
   });
 
-  const linePath = points.map((p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`)).join(" ");
+  const linePath = points
+    .map((p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`))
+    .join(" ");
   const areaPath = `${linePath} L ${points[points.length - 1].x} ${CHART_H - CHART_PAD_Y} L ${points[0].x} ${CHART_H - CHART_PAD_Y} Z`;
 
   return (
@@ -426,10 +502,24 @@ function LineChart({
         </linearGradient>
       </defs>
       <path d={areaPath} fill="url(#line-fill)" />
-      <path d={linePath} stroke="rgb(124 92 255)" strokeWidth={2} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d={linePath}
+        stroke="rgb(124 92 255)"
+        strokeWidth={2}
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
       {points.map((p) => (
         <g key={p.d.year}>
-          <circle cx={p.x} cy={p.y} r={3.5} className="fill-bg-base" stroke="rgb(124 92 255)" strokeWidth={1.5} />
+          <circle
+            cx={p.x}
+            cy={p.y}
+            r={3.5}
+            className="fill-bg-base"
+            stroke="rgb(124 92 255)"
+            strokeWidth={1.5}
+          />
           <text
             x={p.x}
             y={p.y - 10}

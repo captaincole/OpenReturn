@@ -15,22 +15,22 @@ export const alexExpected: ExpectedResults = {
    * against the evaluated form's typed numeric result.
    */
   engineFields: {
-    "form-1040.line.1a": 79000,    // total W-2 wages box 1
-    "form-1040.line.1z": 79000,    // sum of 1a..1h
-    "form-1040.line.9": 79000,     // total income
-    "form-1040.line.11b": 79000,   // AGI (page 2 display)
-    "form-1040.line.12e": 15750,   // 2025 single standard deduction
+    "form-1040.line.1a": 79000, // total W-2 wages box 1
+    "form-1040.line.1z": 79000, // sum of 1a..1h
+    "form-1040.line.9": 79000, // total income
+    "form-1040.line.11b": 79000, // AGI (page 2 display)
+    "form-1040.line.12e": 15750, // 2025 single standard deduction
     "form-1040.line.14": 15750,
-    "form-1040.line.15": 63250,    // taxable income
-    "form-1040.line.16": 8835,     // tax — from 2025 IRS Tax Table
+    "form-1040.line.15": 63250, // taxable income
+    "form-1040.line.16": 8835, // tax — from 2025 IRS Tax Table
     "form-1040.line.18": 8835,
     "form-1040.line.22": 8835,
-    "form-1040.line.24": 8835,     // total tax
-    "form-1040.line.25a": 9420,    // W-2 box 2 federal withholding
+    "form-1040.line.24": 8835, // total tax
+    "form-1040.line.25a": 9420, // W-2 box 2 federal withholding
     "form-1040.line.25d": 9420,
-    "form-1040.line.33": 9420,     // total payments
-    "form-1040.line.34": 585,       // refund (9,420 − 8,835)
-    "form-1040.line.37": 0,         // owed
+    "form-1040.line.33": 9420, // total payments
+    "form-1040.line.34": 585, // refund (9,420 − 8,835)
+    "form-1040.line.37": 0, // owed
   },
 
   /*
@@ -67,7 +67,5 @@ export const alexExpected: ExpectedResults = {
    * Checkboxes that must end up checked. Filing status is 5 separate
    * boolean fields; only the matching one (Single for Alex) is checked.
    */
-  renderedChecked: [
-    "form-1040.header.filing_status_single",
-  ],
+  renderedChecked: ["form-1040.header.filing_status_single"],
 };

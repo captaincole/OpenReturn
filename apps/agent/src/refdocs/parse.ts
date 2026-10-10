@@ -62,8 +62,7 @@ const LINE_DASH_HEADING_RE = /^Line \d+[a-z]?—.+$/;
  * Line-list headings, e.g. "Lines 27a, 27b, and 27c—" or "Lines 2a and 2b".
  * The em-dash is optional; some lists put the title on the next line.
  */
-const LINES_LIST_HEADING_RE =
-  /^Lines \d+[a-z]?(?:, \d+[a-z]?)*(?:,? and \d+[a-z]?)?\s*—?$/;
+const LINES_LIST_HEADING_RE = /^Lines \d+[a-z]?(?:, \d+[a-z]?)*(?:,? and \d+[a-z]?)?\s*—?$/;
 // Line-range headings, e.g. "Lines 5a through 5c".
 const LINES_RANGE_HEADING_RE = /^Lines \d+[a-z]? through \d+[a-z]?$/;
 /*
@@ -96,10 +95,7 @@ const FTB_KNOWN_PROSE_HEADINGS = new Set<string>([
   "Conformity",
 ]);
 
-function detectHeading(
-  line: string,
-  style: ParserStyle = "irs",
-): HeadingMatch | null {
+function detectHeading(line: string, style: ParserStyle = "irs"): HeadingMatch | null {
   const t = line.trim();
   if (
     LINE_HEADING_RE.test(t) ||
@@ -164,8 +160,24 @@ function slugifyHeading(s: string): string {
  * "Each payer should send you…".
  */
 const TITLE_CASE_SMALL_WORDS = new Set([
-  "of", "the", "a", "an", "and", "or", "for", "in", "on", "at", "to", "from",
-  "by", "with", "as", "nor", "but", "vs",
+  "of",
+  "the",
+  "a",
+  "an",
+  "and",
+  "or",
+  "for",
+  "in",
+  "on",
+  "at",
+  "to",
+  "from",
+  "by",
+  "with",
+  "as",
+  "nor",
+  "but",
+  "vs",
 ]);
 
 function isTitleCaseLine(t: string): boolean {
@@ -254,11 +266,7 @@ export interface ParseOpts {
  * not clean extraction artifacts here. Char offsets always point back to
  * canonical.txt.
  */
-export function parseDoc(
-  canonicalText: string,
-  pages: PageSlice[],
-  opts: ParseOpts,
-): ParsedDoc {
+export function parseDoc(canonicalText: string, pages: PageSlice[], opts: ParseOpts): ParsedDoc {
   const sections: Omit<RefSection, "docId">[] = [];
   const blocks: Omit<RefBlock, "docId">[] = [];
 
@@ -356,12 +364,7 @@ export function parseDoc(
          * start the body block mid-line at the dash boundary.
          */
         if (heading.inlineBodyOffset !== undefined) {
-          startSection(
-            heading.heading,
-            heading.slug,
-            line.charStart,
-            page.pageNum,
-          );
+          startSection(heading.heading, heading.slug, line.charStart, page.pageNum);
           const bodyStart = line.charStart + heading.inlineBodyOffset;
           pendingBlock = {
             pageNum: page.pageNum,
@@ -393,12 +396,7 @@ export function parseDoc(
             ? heading.heading
             : `${heading.heading} ${continuationTexts.join(" ")}`;
 
-        startSection(
-          fullHeading,
-          heading.slug,
-          line.charStart,
-          page.pageNum,
-        );
+        startSection(fullHeading, heading.slug, line.charStart, page.pageNum);
 
         // Body starts after the heading (including any continuation).
         const bodyStart = lastConsumedEnd;

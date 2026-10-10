@@ -2,11 +2,7 @@ import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 import { LibSQLStore } from "@mastra/libsql";
 import { mastraDbUrl } from "../server/storage";
-import {
-  recordTaxFact,
-  listOpenQuestionsTool,
-  resolveOpenQuestion,
-} from "../tools/taxFacts";
+import { recordTaxFact, listOpenQuestionsTool, resolveOpenQuestion } from "../tools/taxFacts";
 import { getCaseState } from "../tools/caseState";
 import { ingestW2 } from "../tools/ingestW2";
 import { ingest1099Consolidated } from "../tools/ingest1099Consolidated";

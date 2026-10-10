@@ -17,8 +17,7 @@ export default function SetupPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const canSubmit =
-    displayName.trim() && email.trim() && password.length >= 8 && !submitting;
+  const canSubmit = displayName.trim() && email.trim() && password.length >= 8 && !submitting;
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -56,13 +55,11 @@ export default function SetupPage() {
 
       <div className="relative z-10 w-full max-w-sm animate-fade-in">
         <div className="mb-10 text-center">
-          <div className="text-ink-muted text-[11px] uppercase tracking-[0.28em] mb-4">
-            Summa
-          </div>
+          <div className="text-ink-muted text-[11px] uppercase tracking-[0.28em] mb-4">Summa</div>
           <h1 className="font-serif text-4xl text-ink-primary mb-3">Welcome</h1>
           <p className="text-ink-secondary text-sm">
-            This instance is yours. Set a name, email, and password to get
-            started — everything stays on this machine.
+            This instance is yours. Set a name, email, and password to get started — everything
+            stays on this machine.
           </p>
         </div>
 

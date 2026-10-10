@@ -15,11 +15,7 @@ import {
   recordReviewStep,
   setDecisionLatestRunId,
 } from "../../db/reviewRuns";
-import {
-  getDecisionById,
-  setDecisionVerdict,
-  type Verdict,
-} from "../../db/aiDecisions";
+import { getDecisionById, setDecisionVerdict, type Verdict } from "../../db/aiDecisions";
 import { listFactsByKeys, noteQuestion } from "../../db/taxFacts";
 import { hybridSearchRefDocs } from "../../db/refDocs";
 import { queryFormulator } from "./judges/queryFormulator";
@@ -70,9 +66,7 @@ export const initStep = createStep({
 
     const decision = await getDecisionById(scope, inputData.decisionId);
     if (!decision) {
-      throw new Error(
-        `init: no ai_decision with id ${inputData.decisionId}`,
-      );
+      throw new Error(`init: no ai_decision with id ${inputData.decisionId}`);
     }
 
     const reviewRunId = crypto.randomUUID();
@@ -151,11 +145,7 @@ export const gatherStep = createStep({
      * Pull the facts the decision cites. The table is append-only;
      * listFactsByKeys collapses to the latest row per key.
      */
-    const facts = await listFactsByKeys(
-      scope,
-      carrier.taxYear,
-      carrier.supportingFactKeys,
-    );
+    const facts = await listFactsByKeys(scope, carrier.taxYear, carrier.supportingFactKeys);
 
     // Run each query and dedupe blocks across queries by blockId.
     const blockMap = new Map<string, { docId: string; text: string; score: number }>();
@@ -242,9 +232,7 @@ export const assessRiskStep = createStep({
     });
     const riskAssessment = (result as { object?: unknown }).object;
     if (!riskAssessment) {
-      throw new Error(
-        "assess: no structured output — check model/schema compatibility",
-      );
+      throw new Error("assess: no structured output — check model/schema compatibility");
     }
     const parsed = riskAssessmentSchema.parse(riskAssessment);
 
@@ -297,9 +285,7 @@ export const ruleStep = createStep({
     });
     const ruleOutput = (result as { object?: unknown }).object;
     if (!ruleOutput) {
-      throw new Error(
-        "rule: no structured output — check model/schema compatibility",
-      );
+      throw new Error("rule: no structured output — check model/schema compatibility");
     }
     const parsed = ruleOutputSchema.parse(ruleOutput);
 
@@ -389,12 +375,8 @@ export const finalizeStep = createStep({
        * describe the gap; whatsMissing joins them in order.
        */
       finalVerdict = "needs_more_facts";
-      const allReasons = [
-        ...carrier.needMoreReasons,
-      ];
-      whatsMissing = allReasons.length
-        ? allReasons.join(" → ")
-        : carrier.ruleOutput.reason;
+      const allReasons = [...carrier.needMoreReasons];
+      whatsMissing = allReasons.length ? allReasons.join(" → ") : carrier.ruleOutput.reason;
       reason = `Reviewer could not ground the decision after ${carrier.iteration - 1} iterations: ${whatsMissing}`;
     }
 

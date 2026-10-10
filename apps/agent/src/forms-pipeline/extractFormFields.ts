@@ -123,7 +123,10 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
    * Group widgets by fieldName for the final ExtractedField[]. Also record
    * each widget's page so the vision step can group correctly.
    */
-  const widgetsByFieldName = new Map<string, Array<{ annot: any; page: number; rect: [number, number, number, number] }>>();
+  const widgetsByFieldName = new Map<
+    string,
+    Array<{ annot: any; page: number; rect: [number, number, number, number] }>
+  >();
   const widgetsByPage = new Map<number, PageWidget[]>();
 
   for (let p = 1; p <= totalPages; p++) {
@@ -155,11 +158,7 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
       bucket.push({ annot: a, page: pageIdx, rect });
 
       const alt = a.alternativeText;
-      if (
-        !tier1Labels.has(fieldName) &&
-        typeof alt === "string" &&
-        alt.trim().length > 0
-      ) {
+      if (!tier1Labels.has(fieldName) && typeof alt === "string" && alt.trim().length > 0) {
         tier1Labels.set(fieldName, alt.trim());
       }
 
@@ -190,9 +189,7 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
   for (let p = 0; p < totalPages; p++) {
     const pageWidgets = widgetsByPage.get(p) ?? [];
     if (pageWidgets.length === 0) continue;
-    const allHaveTu = pageWidgets.every((w) =>
-      tier1Labels.has(w.annot.fieldName as string),
-    );
+    const allHaveTu = pageWidgets.every((w) => tier1Labels.has(w.annot.fieldName as string));
     if (allHaveTu) continue;
 
     const labels = await resolveLabelsForPage({
@@ -204,10 +201,8 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
         fieldName: w.annot.fieldName as string,
         kind: classifyKind(w.annot),
         rect: w.rect,
-        exportValue:
-          typeof w.annot.exportValue === "string" ? w.annot.exportValue : undefined,
-        buttonValue:
-          typeof w.annot.buttonValue === "string" ? w.annot.buttonValue : undefined,
+        exportValue: typeof w.annot.exportValue === "string" ? w.annot.exportValue : undefined,
+        buttonValue: typeof w.annot.buttonValue === "string" ? w.annot.buttonValue : undefined,
         tuLabel: tier1Labels.get(w.annot.fieldName as string) ?? null,
       })),
     });

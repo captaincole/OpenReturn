@@ -77,11 +77,7 @@ const fieldBindings = new Map<string, FieldBinding>(); // keyed by fieldId
  * evaluation time, so a rule that returns a non-boolean decision value
  * works as a must-file binding without a typed-bool wrapper.
  */
-export function bindMustFile<P>(
-  formId: string,
-  ruleDef: Rule<P, unknown>,
-  params: P,
-): void {
+export function bindMustFile<P>(formId: string, ruleDef: Rule<P, unknown>, params: P): void {
   ruleDef.paramsSchema.parse(params);
   mustFileBindings.set(formId, {
     rule: ruleDef as Rule<unknown, unknown>,
@@ -89,12 +85,7 @@ export function bindMustFile<P>(
   });
 }
 
-export function bindField<P>(
-  formId: string,
-  fieldId: string,
-  ruleDef: Rule<P>,
-  params: P,
-): void {
+export function bindField<P>(formId: string, fieldId: string, ruleDef: Rule<P>, params: P): void {
   ruleDef.paramsSchema.parse(params);
   fieldBindings.set(fieldId, {
     formId,
@@ -296,8 +287,7 @@ function lookupMustFileDerivation(
   if (!filingInfo) return undefined;
   const slot = MUST_FILE_DERIVATION_SLOTS[formId];
   if (!slot) return undefined;
-  return (filingInfo as Record<string, unknown>)[slot] as
-    | EvaluatedForm["mustFileDerivation"];
+  return (filingInfo as Record<string, unknown>)[slot] as EvaluatedForm["mustFileDerivation"];
 }
 
 // ─── Multi-form orchestration via fixpoint iteration ─────────────────────
@@ -431,10 +421,7 @@ export type MustFileFn<TInfo extends BaseFilingInfo> = (info: TInfo) => boolean 
 /** Per-field formatter override. Receives the typed value (non-null). */
 export type FormatterFn<V> = (value: NonNullable<V>) => string;
 
-export interface FormSpec<
-  TForm extends object,
-  TInfo extends BaseFilingInfo,
-> {
+export interface FormSpec<TForm extends object, TInfo extends BaseFilingInfo> {
   /** Form-level must-file predicate. */
   mustFile?: MustFileFn<TInfo>;
   /**
@@ -508,10 +495,10 @@ export function listFormSpecMeta(): FormSpecMeta[] {
  * Register a form's typed bindings. Idempotent: a second call with the
  * same formId overwrites the prior registration.
  */
-export function defineForm<
-  TForm extends object,
-  TInfo extends BaseFilingInfo,
->(formId: string, spec: FormSpec<TForm, TInfo>): void {
+export function defineForm<TForm extends object, TInfo extends BaseFilingInfo>(
+  formId: string,
+  spec: FormSpec<TForm, TInfo>,
+): void {
   if (spec.mustFile) {
     bindMustFile(
       formId,
@@ -639,10 +626,7 @@ function makeMustFileRule(
       }
       if (value === undefined) {
         return decisionKey
-          ? blocked(
-              `${formId} mustFile: waiting on decision ${decisionKey}.`,
-              { decisionKey },
-            )
+          ? blocked(`${formId} mustFile: waiting on decision ${decisionKey}.`, { decisionKey })
           : blocked(`${formId} mustFile: returned undefined.`);
       }
       return {
@@ -682,9 +666,7 @@ function makeFormAccessor(formId: string, ctx: EngineContext): unknown {
       get(_target, key) {
         if (typeof key !== "string") return undefined;
         const fullId =
-          key.startsWith(`${formId}.`) || isLikelyFullFieldId(key)
-            ? key
-            : `${formId}.${key}`;
+          key.startsWith(`${formId}.`) || isLikelyFullFieldId(key) ? key : `${formId}.${key}`;
         const result = ctx.fieldResult(fullId);
         if (!result) return undefined;
         if (result.ok) return result.value;

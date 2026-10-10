@@ -25,9 +25,7 @@ const MODULE_DIR = dirname(fileURLToPath(import.meta.url)); // …/src/mastra/db
 const DEFAULT_DB_PATH = resolve(MODULE_DIR, "../../../.data/app.db");
 
 function appDbPath(): string {
-  return process.env.APP_DB_PATH
-    ? resolve(process.env.APP_DB_PATH)
-    : DEFAULT_DB_PATH;
+  return process.env.APP_DB_PATH ? resolve(process.env.APP_DB_PATH) : DEFAULT_DB_PATH;
 }
 
 /**
@@ -44,14 +42,11 @@ export interface Scope {
  * ArrayBuffer | null. Exported for the domain helper modules.
  */
 export const asStr = (v: unknown): string => (v == null ? "" : String(v));
-export const asStrOrNull = (v: unknown): string | null =>
-  v == null ? null : String(v);
+export const asStrOrNull = (v: unknown): string | null => (v == null ? null : String(v));
 export const asNum = (v: unknown): number => (v == null ? 0 : Number(v));
-export const asNumOrNull = (v: unknown): number | null =>
-  v == null ? null : Number(v);
+export const asNumOrNull = (v: unknown): number | null => (v == null ? null : Number(v));
 /** Parse a TEXT column holding JSON; null stays null. */
-export const asJson = (v: unknown): unknown =>
-  v == null ? null : JSON.parse(String(v));
+export const asJson = (v: unknown): unknown => (v == null ? null : JSON.parse(String(v)));
 
 /**
  * ISO timestamp written from JS. String ordering matches the old

@@ -11,22 +11,22 @@ import { computeQdcg } from "./qdcg.js";
 
 describe("computeQdcg", () => {
   it("matches high-income golden", () => {
-      const r = computeQdcg({
-        taxableIncome: 600_000,
-        qualifiedDividends: 1_000,
-        /*
-         * The caller computes the smaller of Sched D L15 ($85,000) and
-         * L16 ($80,000), with blank/loss treated as 0. Short-term losses
-         * pulled L16 below L15 here, so L3 = L16 = 80,000, not the
-         * higher L15.
-         */
-        netLongTermGain: 80_000,
-        filingStatus: "single",
-        taxYear: 2025,
-      });
+    const r = computeQdcg({
+      taxableIncome: 600_000,
+      qualifiedDividends: 1_000,
+      /*
+       * The caller computes the smaller of Sched D L15 ($85,000) and
+       * L16 ($80,000), with blank/loss treated as 0. Short-term losses
+       * pulled L16 below L15 here, so L3 = L16 = 80,000, not the
+       * higher L15.
+       */
+      netLongTermGain: 80_000,
+      filingStatus: "single",
+      taxYear: 2025,
+    });
 
-      expect(r.tax).toBeCloseTo(166676.5, 2);
-  })
+    expect(r.tax).toBeCloseTo(166676.5, 2);
+  });
 
   it("matches Alejandro's golden — single filer, $381 qual divs + $2,250 LTCG", () => {
     const r = computeQdcg({
@@ -39,14 +39,14 @@ describe("computeQdcg", () => {
 
     expect(r.tax).toBe(13916);
     expect(r.breakdown.line1).toBe(87185);
-    expect(r.breakdown.line4).toBe(2631);      // total preferential
-    expect(r.breakdown.line5).toBe(84554);     // ordinary bucket
-    expect(r.breakdown.line9).toBe(0);          // none at 0% (ordinary fills past 0% ceiling)
-    expect(r.breakdown.line17).toBe(2631);     // all at 15%
-    expect(r.breakdown.line18).toBe(395);       // 2,631 × 15% = 394.65 → $395
-    expect(r.breakdown.line20).toBe(0);         // none at 20%
-    expect(r.breakdown.line22).toBe(13521);    // tax on ordinary $84,554 via 2025 single tax table
-    expect(r.breakdown.line24).toBe(14093);    // sanity-check tax on full $87,185
+    expect(r.breakdown.line4).toBe(2631); // total preferential
+    expect(r.breakdown.line5).toBe(84554); // ordinary bucket
+    expect(r.breakdown.line9).toBe(0); // none at 0% (ordinary fills past 0% ceiling)
+    expect(r.breakdown.line17).toBe(2631); // all at 15%
+    expect(r.breakdown.line18).toBe(395); // 2,631 × 15% = 394.65 → $395
+    expect(r.breakdown.line20).toBe(0); // none at 20%
+    expect(r.breakdown.line22).toBe(13521); // tax on ordinary $84,554 via 2025 single tax table
+    expect(r.breakdown.line24).toBe(14093); // sanity-check tax on full $87,185
     // Final = line23 = line22 + line18 + line21 = 13,521 + 395 + 0
     expect(r.breakdown.line25).toBe(13916);
   });
@@ -66,8 +66,8 @@ describe("computeQdcg", () => {
      * plain tax-table value, and 1040 line 16 must match.
      */
     expect(r.tax).toBe(8835);
-    expect(r.breakdown.line4).toBe(0);          // preferential bucket empty
-    expect(r.breakdown.line5).toBe(63250);     // ordinary = full taxable income
+    expect(r.breakdown.line4).toBe(0); // preferential bucket empty
+    expect(r.breakdown.line5).toBe(63250); // ordinary = full taxable income
     expect(r.breakdown.line18).toBe(0);
     expect(r.breakdown.line21).toBe(0);
     expect(r.breakdown.line22).toBe(8835);
@@ -88,10 +88,10 @@ describe("computeQdcg", () => {
       taxYear: 2025,
     });
 
-    expect(r.breakdown.line5).toBe(30000);     // ordinary bucket
-    expect(r.breakdown.line9).toBe(10000);     // all $10k at 0%
-    expect(r.breakdown.line17).toBe(0);         // nothing at 15%
-    expect(r.breakdown.line20).toBe(0);         // nothing at 20%
+    expect(r.breakdown.line5).toBe(30000); // ordinary bucket
+    expect(r.breakdown.line9).toBe(10000); // all $10k at 0%
+    expect(r.breakdown.line17).toBe(0); // nothing at 15%
+    expect(r.breakdown.line20).toBe(0); // nothing at 20%
     expect(r.breakdown.line18).toBe(0);
     expect(r.breakdown.line21).toBe(0);
     // Tax = just the ordinary bucket tax.
@@ -113,10 +113,10 @@ describe("computeQdcg", () => {
 
     expect(r.breakdown.line4).toBe(20000);
     expect(r.breakdown.line5).toBe(40000);
-    expect(r.breakdown.line9).toBe(8350);                  // 0%
-    expect(r.breakdown.line17).toBe(11650);                // 15%
-    expect(r.breakdown.line18).toBe(1748);                 // 11,650 × 15% = 1,747.5 → $1,748
-    expect(r.breakdown.line20).toBe(0);                     // no 20%
+    expect(r.breakdown.line9).toBe(8350); // 0%
+    expect(r.breakdown.line17).toBe(11650); // 15%
+    expect(r.breakdown.line18).toBe(1748); // 11,650 × 15% = 1,747.5 → $1,748
+    expect(r.breakdown.line20).toBe(0); // no 20%
   });
 
   it("MFJ filer at the 0% ceiling boundary — $96,700 single test", () => {
@@ -135,7 +135,7 @@ describe("computeQdcg", () => {
     expect(r.breakdown.line5).toBe(96700);
     expect(r.breakdown.line9).toBe(0);
     expect(r.breakdown.line17).toBe(10000);
-    expect(r.breakdown.line18).toBe(1500);                 // 10,000 × 15%
+    expect(r.breakdown.line18).toBe(1500); // 10,000 × 15%
   });
 
   it("hits 20% bracket — single with $1M taxable + $200k preferential", () => {
@@ -152,11 +152,11 @@ describe("computeQdcg", () => {
       taxYear: 2025,
     });
 
-    expect(r.breakdown.line5).toBe(800000);     // ordinary
-    expect(r.breakdown.line9).toBe(0);           // no 0%
-    expect(r.breakdown.line17).toBe(0);          // no 15% (ordinary already past 15% ceiling)
-    expect(r.breakdown.line20).toBe(200000);    // all at 20%
-    expect(r.breakdown.line21).toBe(40000);     // 200k × 20%
+    expect(r.breakdown.line5).toBe(800000); // ordinary
+    expect(r.breakdown.line9).toBe(0); // no 0%
+    expect(r.breakdown.line17).toBe(0); // no 15% (ordinary already past 15% ceiling)
+    expect(r.breakdown.line20).toBe(200000); // all at 20%
+    expect(r.breakdown.line21).toBe(40000); // 200k × 20%
   });
 
   it("returns line25 = min(line23, line24) when both would be equal", () => {

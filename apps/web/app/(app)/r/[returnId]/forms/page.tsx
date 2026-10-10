@@ -82,7 +82,8 @@ export default function FormsTab() {
         </div>
         <h1 className="font-serif text-3xl text-ink-primary mt-3">No forms yet</h1>
         <p className="text-ink-secondary text-[15px] mt-3 max-w-md mx-auto leading-relaxed">
-          Forms appear once Luca starts capturing facts. Switch to your 2025 Return to see them live.
+          Forms appear once Luca starts capturing facts. Switch to your 2025 Return to see them
+          live.
         </p>
       </div>
     );
@@ -138,9 +139,7 @@ function FormRow({ item }: { item: FormItem }) {
           <StatusPill status={status} />
         </div>
         {item.description && (
-          <div className="mt-0.5 text-[12px] text-ink-secondary truncate">
-            {item.description}
-          </div>
+          <div className="mt-0.5 text-[12px] text-ink-secondary truncate">{item.description}</div>
         )}
         {fill && (status === "drafting" || status === "not_started") && (
           <div className="mt-2 flex items-center gap-2.5">
@@ -148,7 +147,11 @@ function FormRow({ item }: { item: FormItem }) {
               <div
                 className={cn(
                   "h-full transition-all duration-500",
-                  fill.pct === 100 ? "bg-emerald-400" : fill.pct > 0 ? "bg-accent" : "bg-transparent",
+                  fill.pct === 100
+                    ? "bg-emerald-400"
+                    : fill.pct > 0
+                      ? "bg-accent"
+                      : "bg-transparent",
                 )}
                 style={{ width: `${fill.pct}%` }}
               />
@@ -199,7 +202,8 @@ function computeStatus(item: FormItem): Status {
   if (item.form) {
     if (!item.form.mustFile.ok) return "pending_decision";
     if (item.form.mustFile.value === false) return "not_filing";
-    const filled = item.form.fieldCount - item.form.unsupportedFieldCount - item.form.blockedFieldCount;
+    const filled =
+      item.form.fieldCount - item.form.unsupportedFieldCount - item.form.blockedFieldCount;
     if (filled === 0) return "not_started";
     return "drafting";
   }

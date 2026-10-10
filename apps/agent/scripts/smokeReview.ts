@@ -72,10 +72,7 @@ const CASES: Case[] = [
       decision: { status: "single" },
       rationale:
         "User confirmed marital_status=never_married and has no qualifying dependents. Per Form 1040 filing-status rules, a never-married taxpayer with no qualifying dependents files as Single.",
-      supportingFactKeys: [
-        "identity.marital_status",
-        "identity.has_qualifying_dependents",
-      ],
+      supportingFactKeys: ["identity.marital_status", "identity.has_qualifying_dependents"],
       confidence: "high",
       sourceNote: "derived from intake conversation 2026-04-23",
     },
@@ -136,10 +133,7 @@ const CASES: Case[] = [
       decision: "full_year_ca_resident",
       rationale:
         "User lived in CA all of 2025 except 20 days of business travel to Nevada. Under CA FTB rules, that is a full-year CA resident.",
-      supportingFactKeys: [
-        "identity.residence_state",
-        "identity.days_outside_ca_2025",
-      ],
+      supportingFactKeys: ["identity.residence_state", "identity.days_outside_ca_2025"],
       confidence: "high",
       sourceNote: "derived from intake conversation 2026-04-23",
     },
@@ -148,9 +142,7 @@ const CASES: Case[] = [
 
 async function main() {
   if (!process.env.ANTHROPIC_API_KEY) {
-    console.error(
-      "ANTHROPIC_API_KEY not set — skipping smoke test (the review workflow needs it)",
-    );
+    console.error("ANTHROPIC_API_KEY not set — skipping smoke test (the review workflow needs it)");
     process.exit(0);
   }
 
@@ -200,15 +192,12 @@ async function main() {
 
     const passVerdict = (c.acceptVerdicts as string[]).includes(result.finalVerdict);
     const passPersist = row?.verdict === result.finalVerdict;
-    const passCitations =
-      result.finalVerdict !== "accurate" || result.citations.length > 0;
+    const passCitations = result.finalVerdict !== "accurate" || result.citations.length > 0;
     const expectQ =
       c.expectOpenQuestion === "if-not-accurate"
         ? result.finalVerdict !== "accurate"
         : c.expectOpenQuestion;
-    const passQuestion = expectQ
-      ? questions.length > 0
-      : questions.length === 0;
+    const passQuestion = expectQ ? questions.length > 0 : questions.length === 0;
 
     const pass = passVerdict && passPersist && passCitations && passQuestion;
     if (pass) passed += 1;

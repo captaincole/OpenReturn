@@ -36,8 +36,7 @@ export function register(): void {
        * lands, route through an explicit
        * `decisions.scope.main_home_us_over_half_year` decision.
        */
-      "header.main_home_us_over_half_year": (_, info) =>
-        info.homeAddressState ? true : undefined,
+      "header.main_home_us_over_half_year": (_, info) => (info.homeAddressState ? true : undefined),
       /*
        * MANUAL EDIT: AI flagged both digital-assets widgets as
        * unsupported. The IRS makes this a mandatory yes/no for every
@@ -48,10 +47,8 @@ export function register(): void {
        * unanswered scenario then fails loudly instead of silently
        * picking a default.
        */
-      "header.digital_assets_yes": (_, info) =>
-        info.hasDigitalAssets === true ? true : undefined,
-      "header.digital_assets_no": (_, info) =>
-        info.hasDigitalAssets === false ? true : undefined,
+      "header.digital_assets_yes": (_, info) => (info.hasDigitalAssets === true ? true : undefined),
+      "header.digital_assets_no": (_, info) => (info.hasDigitalAssets === false ? true : undefined),
       /*
        * Middle initial is not a separate fact. The first-name fact is
        * the closest clean match for this combined field.
@@ -72,7 +69,17 @@ export function register(): void {
       // Sum of W-2 box 1 (wages) across all employers.
       "line.1a": (_, info) => info.w2WagesTotal,
       // Line 1z = lines 1a through 1h per IRS instructions. sum() treats unsupported terms as 0.
-      "line.1z": (f) => sum(f["line.1a"], f["line.1b"], f["line.1c"], f["line.1d"], f["line.1e"], f["line.1f"], f["line.1g"], f["line.1h_amount"]),
+      "line.1z": (f) =>
+        sum(
+          f["line.1a"],
+          f["line.1b"],
+          f["line.1c"],
+          f["line.1d"],
+          f["line.1e"],
+          f["line.1f"],
+          f["line.1g"],
+          f["line.1h_amount"],
+        ),
       /*
        * MANUAL EDIT: sum of 1099-INT box 8 (tax-exempt interest). The
        * fact keys have the same per-payer shape as dividends and trades.
@@ -102,7 +109,17 @@ export function register(): void {
         return typeof v === "number" ? v : undefined;
       },
       // Total income per IRS instructions: lines 1z + 2b + 3b + 4b + 5b + 6b + 7a + 8. sum() treats undefined terms as 0.
-      "line.9": (f) => sum(f["line.1z"], f["line.2b"], f["line.3b"], f["line.4b"], f["line.5b"], f["line.6b"], f["line.7a"], f["line.8"]),
+      "line.9": (f) =>
+        sum(
+          f["line.1z"],
+          f["line.2b"],
+          f["line.3b"],
+          f["line.4b"],
+          f["line.5b"],
+          f["line.6b"],
+          f["line.7a"],
+          f["line.8"],
+        ),
       // AGI = total income (line 9) minus adjustments (line 10). sum() treats unsupported line 10 as 0.
       "line.11a": (f) => sum(f["line.9"], f["line.10"] === undefined ? 0 : -f["line.10"]),
       // Line 11b copies line 11a (AGI) onto page 2 per IRS instructions.
@@ -126,7 +143,8 @@ export function register(): void {
       // Lines 12e + 13a + 13b per form instructions.
       "line.14": (f) => sum(f["line.12e"], f["line.13a"], f["line.13b"]),
       // Taxable income = line 11b minus line 14, floored at 0.
-      "line.15": (f) => floor(0, sum(f["line.11b"], f["line.14"] === undefined ? 0 : -f["line.14"])),
+      "line.15": (f) =>
+        floor(0, sum(f["line.11b"], f["line.14"] === undefined ? 0 : -f["line.14"])),
       /*
        * MANUAL EDIT: line 16 routes through the Qualified Dividends and
        * Capital Gain Tax Worksheet (worksheets/qdcg.ts). The worksheet
@@ -226,8 +244,7 @@ export function register(): void {
        * line 34. This is a federal decision, separate from the CA analog
        * on Form 540.
        */
-      "line.35a": (f, info) =>
-        info.refundFullOverpaymentFederal ? f["line.34"] : undefined,
+      "line.35a": (f, info) => (info.refundFullOverpaymentFederal ? f["line.34"] : undefined),
       // identity.occupation fact, collected during intake.
       "signing.taxpayer_occupation": (_, info) => info.taxpayerOccupation,
       // identity.phone fact, collected during intake.
@@ -249,165 +266,317 @@ export function register(): void {
         "Calendar-year filers leave this blank; only fiscal-year filers fill it. No fiscal-year scenario built yet.",
       "header.tax_year_ending_year":
         "Calendar-year filers leave this blank; only fiscal-year filers fill it. No fiscal-year scenario built yet.",
-      "header.filed_pursuant_9100_2": "No scenario or fact ingested for section 301.9100-2 election (late election relief); this is a rare regulatory checkbox with no current data path.",
-      "header.combat_zone_checkbox": "No combat zone fact or decision has been ingested; no military/combat zone scenario exists in the current MVP.",
-      "header.combat_zone_text": "No combat zone fact or decision has been ingested; no military/combat zone scenario exists in the current MVP.",
-      "header.taxpayer_deceased_checkbox": "No deceased-taxpayer scenario or fact has been ingested; deceased filer handling requires a dedicated data path not yet built.",
-      "header.taxpayer_deceased_month": "No deceased-taxpayer scenario or fact has been ingested; date-of-death fields require a dedicated ingestion path not yet built.",
-      "header.taxpayer_deceased_day": "No deceased-taxpayer scenario or fact has been ingested; date-of-death fields require a dedicated ingestion path not yet built.",
-      "header.taxpayer_deceased_year": "No deceased-taxpayer scenario or fact has been ingested; date-of-death fields require a dedicated ingestion path not yet built.",
-      "header.spouse_deceased_month": "No deceased-spouse scenario ingested yet; spouse date-of-death fields require a MFJ/surviving-spouse scenario we haven't built.",
-      "header.spouse_deceased_day": "No deceased-spouse scenario ingested yet; spouse date-of-death fields require a MFJ/surviving-spouse scenario we haven't built.",
-      "header.spouse_deceased_year": "No deceased-spouse scenario ingested yet; spouse date-of-death fields require a MFJ/surviving-spouse scenario we haven't built.",
-      "header.other_checkbox": "This 'Other' header checkbox covers edge cases (fiscal year, combat zone extension, etc.) with no fact or decision key defined for it yet.",
-      "header.other_description": "Free-text description for the 'Other' header checkbox; no fact/decision key defined for this edge-case scenario.",
-      "header.other_amount": "Numeric amount for the 'Other' header block; no fact/decision key defined for this edge-case scenario.",
-      "header.other_additional": "Additional text field for the 'Other' header block; no fact/decision key defined for this edge-case scenario.",
-      "header.spouse_first_name_mi": "No MFJ scenario yet — spouse identity facts are not ingested. Will support when a married_filing_jointly scenario is built.",
-      "header.spouse_last_name": "No MFJ scenario yet — spouse identity facts are not ingested. Will support when a married_filing_jointly scenario is built.",
-      "header.spouse_ssn": "No MFJ scenario yet — spouse SSN is not ingested. Will support when a married_filing_jointly scenario is built.",
-      "header.foreign_country_name": "No foreign address scenario modeled yet — no fact key exists for a foreign country name. Relevant only for taxpayers with a foreign address.",
-      "header.foreign_province_state_county": "No foreign address scenario or fact key exists for foreign province/state/county; we only model U.S. domestic addresses.",
-      "header.foreign_postal_code": "No foreign address scenario or fact key exists for foreign postal code; we only model U.S. domestic addresses.",
-      "header.presidential_campaign_you": "No fact or decision models the taxpayer's voluntary Presidential Election Campaign Fund $3 designation; no intake question captures this.",
-      "header.presidential_campaign_spouse": "No fact or decision models the spouse's voluntary Presidential Election Campaign Fund $3 designation; no MFJ/spouse scenario ingested.",
-      "header.mfs_spouse_full_name": "Spouse's full name for MFS is required only in a married-filing-separately scenario; no spouse identity facts are ingested yet.",
-      "header.hoh_qss_qualifying_child_name": "No dependent/qualifying-child ingestion scenario yet — this field is only filled when the HOH/QSS qualifying person is a child who is NOT the taxpayer's dependent, requiring dependent relationship data we haven't modeled.",
-      "header.nonresident_alien_spouse_checkbox": "No nonresident/dual-status alien spouse scenario modeled yet — requires a specific MFJ+NRA-spouse fact we haven't ingested.",
-      "header.nonresident_alien_spouse_name": "No nonresident/dual-status alien spouse scenario modeled yet — spouse name field only applies when the NRA-spouse checkbox is checked, which has no ingestion path.",
-      "dependents.dep1_first_name": "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
-      "dependents.dep2_first_name": "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
-      "dependents.dep3_first_name": "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
-      "dependents.dep4_first_name": "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
-      "dependents.dep1_last_name": "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
-      "dependents.dep2_last_name": "No dependent-data ingestion path exists yet — dependent last names are not modeled in the current fact schema.",
-      "dependents.dep3_last_name": "No dependent-data ingestion path exists yet — dependent last names are not modeled in the current fact schema.",
-      "dependents.dep4_last_name": "No dependent-data ingestion path exists yet — dependent last names are not modeled in the current fact schema.",
-      "dependents.dep1_ssn": "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
-      "dependents.dep2_ssn": "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
-      "dependents.dep3_ssn": "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
-      "dependents.dep4_ssn": "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
-      "dependents.dep1_relationship": "No dependent-data ingestion path exists yet — dependent relationship is not modeled in the current fact schema.",
-      "dependents.dep2_relationship": "No dependent-data ingestion path exists yet — dependent relationship is not modeled in the current fact schema.",
-      "dependents.dep3_relationship": "No dependent-data ingestion path exists yet — dependent relationship is not modeled in the current fact schema.",
-      "dependents.dep4_relationship": "No dependent data ingestion built yet — dependent 4 relationship requires a dependent-facts scenario.",
-      "dependents.dep1_lived_with_you": "No dependent data ingestion built yet — whether dependent 1 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
-      "dependents.dep2_lived_with_you": "No dependent data ingestion built yet — whether dependent 2 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
-      "dependents.dep3_lived_with_you": "No dependent data ingestion built yet — whether dependent 3 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
-      "dependents.dep4_lived_with_you": "No dependent data ingestion built yet — whether dependent 4 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
-      "dependents.more_than_four_dependents": "No dependent data ingestion built yet — determining whether there are more than four dependents requires a dependent-facts scenario.",
-      "dependents.dep1_lived_in_us": "No dependent data ingestion built yet — whether dependent 1 lived in the U.S. requires a dependent-facts scenario.",
-      "dependents.dep2_lived_in_us": "No dependent data ingestion built yet — whether dependent 2 lived in the U.S. requires a dependent-facts scenario.",
-      "dependents.dep3_lived_in_us": "No dependent data ingestion built yet — whether dependent 3 lived in the U.S. requires a dependent-facts scenario.",
-      "dependents.dep4_lived_in_us": "No dependent data ingestion built yet — whether dependent 4 lived in the U.S. requires a dependent-facts scenario.",
-      "dependents.dep1_full_time_student": "No dependent data ingestion model exists yet; full-time student status for Dependent 1 requires per-dependent fact facts we haven't built a scenario for.",
-      "dependents.dep1_permanently_disabled": "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 1 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep2_full_time_student": "No dependent data ingestion model exists yet; full-time student status for Dependent 2 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep2_permanently_disabled": "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 2 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep3_full_time_student": "No dependent data ingestion model exists yet; full-time student status for Dependent 3 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep3_permanently_disabled": "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 3 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep4_full_time_student": "No dependent data ingestion model exists yet; full-time student status for Dependent 4 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep4_permanently_disabled": "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 4 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep1_child_tax_credit": "No dependent data ingestion model exists yet; whether Dependent 1 qualifies for the child tax credit requires per-dependent facts (age, SSN validity, relationship) we haven't built a scenario for.",
-      "dependents.dep1_other_dependent_credit": "No dependent data ingestion model exists yet; whether Dependent 1 qualifies for the credit for other dependents requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep2_child_tax_credit": "No dependent-data ingestion yet — determining CTC eligibility (age, relationship, valid SSN) requires a dependent-intake scenario we haven't built.",
-      "dependents.dep2_other_dependent_credit": "No dependent-data ingestion yet — credit for other dependents requires per-dependent qualifying-relative analysis not yet built.",
-      "dependents.dep3_child_tax_credit": "No dependent-data ingestion yet — determining CTC eligibility (age, relationship, valid SSN) requires a dependent-intake scenario we haven't built.",
-      "dependents.dep3_other_dependent_credit": "No dependent-data ingestion yet — credit for other dependents requires per-dependent qualifying-relative analysis not yet built.",
-      "dependents.dep4_child_tax_credit": "No dependent-data ingestion yet — determining CTC eligibility (age, relationship, valid SSN) requires a dependent-intake scenario we haven't built.",
-      "dependents.dep4_other_dependent_credit": "No dependent-data ingestion yet — credit for other dependents requires per-dependent qualifying-relative analysis not yet built.",
-      "header.lived_apart_mfs_hoh": "No decision or fact key exists for 'lived apart from spouse last 6 months' — requires an MFS/HOH lived-apart scenario with explicit intake question we haven't built.",
-      "line.1b": "Household employee wages not reported on W-2 require a separate household-employer intake scenario not yet built; no fact key exists for this.",
-      "line.1c": "Unreported tip income (allocated tips, noncash tips) has no fact ingestion path; requires a tip-income intake scenario not yet built.",
-      "line.1d": "No ingestion path for Medicaid waiver payments not reported on W-2 — no scenario built for this income type yet.",
-      "line.1e": "Requires Form 2441 (Dependent Care Benefits) computation — no Form 2441 ingestion or scenario built yet.",
-      "line.1f": "Requires Form 8839 (Adoption Benefits) computation — no Form 8839 ingestion or scenario built yet.",
-      "line.1g": "Requires Form 8919 (Uncollected SS/Medicare Tax on Wages) — no Form 8919 ingestion or scenario built yet.",
-      "line.1h_type": "Free-text label describing the type of other earned income on line 1h — no fact or decision maps to this descriptor field; no other-earned-income scenario built yet.",
-      "line.1h_amount": "Other earned income (strike benefits, excess deferrals, etc.) — no ingestion path or scenario built for these miscellaneous earned income types yet.",
-      "line.1i": "Nontaxable combat pay election — no combat pay fact ingestion or military-taxpayer scenario built yet.",
-      "line.3c_box1": "Checkbox indicating child's qualified dividends are included in line 3a — requires Form 8814 / dependent-income scenario which has not been built yet.",
-      "line.3c_box2": "Checkbox indicating child's ordinary dividends are included in line 3b — requires Form 8814 / dependent-income scenario which has not been built yet.",
-      "line.4a": "IRA gross distribution (Form 1099-R box 1) — no 1099-R fact ingestion path has been built yet.",
-      "line.4b": "IRA taxable amount — requires 1099-R ingestion and potentially a taxable-portion computation (basis tracking, rollover rules, QCD exclusion). No 1099-R scenario built yet.",
-      "line.4c_rollover": "IRA rollover checkbox (Exception 1) — requires 1099-R ingestion and rollover-election logic. No 1099-R scenario built yet.",
-      "line.4c_qcd": "IRA QCD checkbox (Exception 3) — requires 1099-R ingestion and qualified-charitable-distribution scenario. No QCD scenario built yet.",
-      "line.4c_box3": "IRA exception box 3 checkbox (e.g. HFD or other special codes) — requires 1099-R ingestion and specific exception scenarios. No such scenario built yet.",
-      "line.4c_box3_amount": "Amount associated with IRA line 4c box 3 exception — requires 1099-R ingestion and exception-specific amount tracking. No such scenario built yet.",
-      "line.5a": "No 1099-R / pension ingestion path built yet; total pension and annuity payments cannot be computed until we ingest retirement distribution facts.",
-      "line.5b": "No 1099-R ingestion and no Simplified Method Worksheet implementation; taxable pension/annuity amount cannot be computed.",
-      "line.5c_rollover": "No rollover decision or 1099-R ingestion path; cannot determine whether taxpayer made a pension/annuity rollover.",
-      "line.5c_pso": "No PSO (Public Safety Officer insurance premium exclusion) scenario or decision ingested; cannot determine whether this election applies.",
-      "line.5c_box3": "No scenario requiring a special code/annotation next to line 5b; this checkbox is for edge cases referenced by other publications.",
-      "line.5c_box3_amount": "Companion amount field to line 5c box 3; no scenario requiring this annotation amount has been modeled.",
-      "line.6a": "No SSA-1099 or RRB-1099 ingestion path built yet; total social security benefits (box 5) cannot be summed.",
-      "line.6b": "No SSA-1099 ingestion and no Social Security Benefits Worksheet implementation; taxable SS benefit amount cannot be computed.",
-      "line.6c_lump_sum_election": "No lump-sum social security benefit scenario or decision modeled; this checkbox requires knowing whether the taxpayer received a prior-year lump-sum SS payment and elected the special treatment.",
-      "line.6d_mfs_lived_apart": "No MFS-lived-apart scenario modeled; this checkbox requires both married_filing_separately status AND the taxpayer having lived apart from their spouse all year — no decision captures the lived-apart fact.",
-      "line.7b_schedule_d_not_required": "Checking this box requires evaluating whether Exception 1 applies (no capital losses, only capital gain distributions from 1099-DIV box 2a with no amounts in boxes 2b/2c/2d). No decision or fact path models this determination yet.",
-      "line.7b_includes_childs_capital_gain": "Requires Form 8814 (child's interest and dividends) scenario — no dependent income ingestion or Form 8814 computation path exists yet.",
-      "line.7b_childs_capital_gain_amount": "Amount from Form 8814 line 10 — requires Form 8814 computation for child's capital gain, which depends on dependent income ingestion not yet built.",
-      "line.8": "Additional income from Schedule 1, line 10 — Schedule 1 is not yet ingested as a form, so no fieldId exists to reference.",
-      "line.10": "Adjustments to income from Schedule 1 line 26 — Schedule 1 is not yet ingested as a form, so no fieldId exists to reference.",
-      "line.12a_you_as_dependent": "Whether the taxpayer can be claimed as a dependent on someone else's return requires a dependent-status decision not yet modeled in the decision set.",
-      "line.12a_spouse_as_dependent": "No MFJ scenario ingested yet — spouse-as-dependent checkbox requires a joint-return scenario where the spouse can be claimed by a third party.",
-      "line.12b_spouse_itemizes_separate": "No MFS scenario ingested yet — this checkbox applies only to married filing separately filers whose spouse itemizes.",
-      "line.12b_dual_status_alien": "No dual-status alien scenario ingested yet — this checkbox requires a residency/immigration-status fact we don't model.",
-      "line.12d_you_born_before_jan2_1961": "Requires a date-comparison rule (identity.dob < 1961-01-02) that the engine doesn't support yet; no boolean age-threshold rule exists in the library.",
-      "line.12d_you_blind": "No blindness fact ingested — we don't yet have a fact key for the taxpayer's blindness status.",
-      "line.12d_spouse_born_before_jan2_1961": "No MFJ/spouse scenario ingested yet — spouse DOB fact does not exist, and no date-comparison rule is available.",
-      "line.12d_spouse_blind": "No MFJ/spouse scenario ingested yet — spouse blindness fact does not exist.",
-      "line.13a": "No self-employment or qualified business income scenario ingested yet — Form 8995/8995-A QBI deduction requires business income facts not yet modeled.",
-      "line.13b": "Schedule 1-A (new 2025 form) covers no-tax-on-tips, no-tax-on-overtime, car loan interest, and enhanced senior deductions — none of these scenarios are ingested yet.",
-      "line.16_from_form_8814": "Checkbox indicating tax includes amounts from Form 8814 (child's interest/dividends election). No Form 8814 ingestion scenario built yet; requires dependent-with-investment-income data.",
-      "line.16_from_form_4972": "Checkbox indicating tax includes amounts from Form 4972 (lump-sum distribution). No Form 4972 ingestion scenario built yet.",
-      "line.16_from_other_form": "Checkbox indicating tax includes amounts from a third special form (e.g. section 962 election, recapture). No ingestion scenario built for these edge cases.",
-      "line.16_other_form_number": "Free-text entry for the form number associated with the third checkbox on line 16. Tied to special-form tax scenarios not yet ingested.",
-      "line.17": "Amount from Schedule 2, line 3 (alternative minimum tax and other taxes). Schedule 2 has not been ingested; no fieldId available to reference.",
-      "line.19": "Child tax credit / credit for other dependents from Schedule 8812. Schedule 8812 has not been ingested and no dependent-with-CTC scenario has been built yet.",
-      "line.20": "Schedule 3 line 8 (nonrefundable credits) has not been ingested as a form yet — no cross-form reference path available.",
-      "line.23": "Schedule 2 line 21 (other taxes including self-employment tax) has not been ingested as a form yet — no cross-form reference path available.",
-      "line.26": "Estimated tax payments and prior-year overpayment applied forward have no ingestion path yet — no estimated_payments fact category exists.",
-      "line.former_spouse_ssn": "Former spouse SSN for joint estimated tax split — no MFS/divorce scenario with prior joint estimated payments modeled yet; requires separate fact ingestion for former spouse identity.",
-      "line.21": "Line 21 (lines 19 + 20) — child tax credit and Schedule 3 nonrefundable credits are both unsupported; the aggregate has no value to compute yet.",
-      "line.25b": "Federal income tax withheld from 1099 forms — no 1099-withholding scenario exercised yet; render blank rather than 0 until a fixture has Box 4 facts.",
-      "line.32": "Line 32 — sum of other refundable credits / payments (27a + 28 + 29 + 30 + 31), all of which are individually unsupported.",
-      "line.37": "Line 37 (amount you owe) — owe-tax branch not yet exercised by any test scenario; current fixtures all produce refunds.",
-      "line.27a": "Earned Income Credit requires an EIC eligibility worksheet computation (earned income, AGI, filing status, number of qualifying children with valid SSNs) — no EIC worksheet or qualifying-child ingestion path built yet.",
-      "line.27b_clergy_schedule_se": "Clergy/minister checkbox for Schedule SE filing — no clergy occupation scenario or Schedule SE ingestion built yet.",
-      "line.27c_no_eic_claim": "Opt-out checkbox for EIC claim — no EIC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
-      "line.28_no_actc_claim": "Opt-out checkbox for ACTC claim — no ACTC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
-      "line.28": "Additional Child Tax Credit from Schedule 8812 — Schedule 8812 not ingested and no qualifying-child dependent scenario built yet.",
-      "line.29": "American Opportunity Credit from Form 8863 line 8 — Form 8863 not ingested and no education-credit scenario built yet.",
-      "line.30": "Refundable adoption credit from Form 8839 line 13 — Form 8839 not ingested and no adoption expense scenario built yet.",
-      "line.31": "Amount from Schedule 3 line 15 (additional refundable credits/payments) — Schedule 3 not ingested as a separate form catalog yet.",
-      "line.35a_form_8888_attached": "Form 8888 (split refund into multiple accounts) has no ingestion path or scenario modeled yet — taxpayer must check this manually if they attach Form 8888.",
-      "line.35b_routing_number": "Bank routing number for direct deposit refund — no banking fact category ingested; taxpayer must enter this manually.",
-      "line.35c_checking": "Account type (checking) checkbox for direct deposit — no bank account type fact ingested; taxpayer must select manually.",
-      "line.35c_savings": "Account type (savings) checkbox for direct deposit — no bank account type fact ingested; taxpayer must select manually.",
-      "line.35d_account_number": "Bank account number for direct deposit refund — no banking fact category ingested; taxpayer must enter this manually.",
-      "line.36": "Amount of overpayment (line 34) to apply to 2026 estimated tax — a taxpayer election with no corresponding fact or decision in the ingestion model.",
-      "line.38": "Estimated tax penalty requires Form 2210 calculation (prior-year tax liability, installment due dates, underpayment amounts) — no penalty-calculation engine or prior-year facts ingested yet.",
-      "page2.third_party_designee_yes": "No fact or decision models whether the taxpayer designates a third party — no third-party-designee scenario built yet.",
-      "page2.third_party_designee_no": "No fact or decision models the third-party designee election — no scenario built yet.",
-      "page2.designee_name": "Third-party designee name — no fact or decision models designee info; no scenario built yet.",
-      "page2.designee_phone": "Third-party designee phone — no fact or decision models designee info; no scenario built yet.",
-      "page2.designee_pin": "Third-party designee PIN — no fact or decision models designee info; no scenario built yet.",
-      "signing.taxpayer_ip_pin": "IRS Identity Protection PIN is not part of current fact ingestion — no identity.ip_pin fact key exists yet.",
-      "signing.spouse_occupation": "No MFJ scenario built yet — spouse facts (including occupation) are not ingested.",
-      "signing.spouse_ip_pin": "No MFJ scenario built yet — spouse IP PIN fact not ingested; also no identity.spouse_ip_pin fact key exists.",
-      "signing.preparer_self_employed": "No paid-preparer ingestion path exists; this checkbox applies only when a paid preparer prepares the return, which is outside the current self-filing scenario.",
-      "signing.preparer_name": "No paid-preparer ingestion path exists; preparer name is supplied by a third-party tax professional, not a taxpayer fact.",
-      "signing.preparer_ptin": "No paid-preparer ingestion path exists; PTIN is the preparer's IRS-issued identifier, not a taxpayer fact.",
-      "signing.preparer_firm_name": "No paid-preparer ingestion path exists; firm name belongs to the paid preparer's practice, not the taxpayer.",
-      "signing.preparer_phone": "No paid-preparer ingestion path exists; this is the preparer's firm phone, distinct from the taxpayer's phone.",
-      "signing.preparer_firm_address": "No paid-preparer ingestion path exists; firm address belongs to the paid preparer's practice, not the taxpayer.",
-      "signing.preparer_firm_ein": "No paid-preparer ingestion path exists; firm EIN belongs to the paid preparer's practice, not the taxpayer.",
+      "header.filed_pursuant_9100_2":
+        "No scenario or fact ingested for section 301.9100-2 election (late election relief); this is a rare regulatory checkbox with no current data path.",
+      "header.combat_zone_checkbox":
+        "No combat zone fact or decision has been ingested; no military/combat zone scenario exists in the current MVP.",
+      "header.combat_zone_text":
+        "No combat zone fact or decision has been ingested; no military/combat zone scenario exists in the current MVP.",
+      "header.taxpayer_deceased_checkbox":
+        "No deceased-taxpayer scenario or fact has been ingested; deceased filer handling requires a dedicated data path not yet built.",
+      "header.taxpayer_deceased_month":
+        "No deceased-taxpayer scenario or fact has been ingested; date-of-death fields require a dedicated ingestion path not yet built.",
+      "header.taxpayer_deceased_day":
+        "No deceased-taxpayer scenario or fact has been ingested; date-of-death fields require a dedicated ingestion path not yet built.",
+      "header.taxpayer_deceased_year":
+        "No deceased-taxpayer scenario or fact has been ingested; date-of-death fields require a dedicated ingestion path not yet built.",
+      "header.spouse_deceased_month":
+        "No deceased-spouse scenario ingested yet; spouse date-of-death fields require a MFJ/surviving-spouse scenario we haven't built.",
+      "header.spouse_deceased_day":
+        "No deceased-spouse scenario ingested yet; spouse date-of-death fields require a MFJ/surviving-spouse scenario we haven't built.",
+      "header.spouse_deceased_year":
+        "No deceased-spouse scenario ingested yet; spouse date-of-death fields require a MFJ/surviving-spouse scenario we haven't built.",
+      "header.other_checkbox":
+        "This 'Other' header checkbox covers edge cases (fiscal year, combat zone extension, etc.) with no fact or decision key defined for it yet.",
+      "header.other_description":
+        "Free-text description for the 'Other' header checkbox; no fact/decision key defined for this edge-case scenario.",
+      "header.other_amount":
+        "Numeric amount for the 'Other' header block; no fact/decision key defined for this edge-case scenario.",
+      "header.other_additional":
+        "Additional text field for the 'Other' header block; no fact/decision key defined for this edge-case scenario.",
+      "header.spouse_first_name_mi":
+        "No MFJ scenario yet — spouse identity facts are not ingested. Will support when a married_filing_jointly scenario is built.",
+      "header.spouse_last_name":
+        "No MFJ scenario yet — spouse identity facts are not ingested. Will support when a married_filing_jointly scenario is built.",
+      "header.spouse_ssn":
+        "No MFJ scenario yet — spouse SSN is not ingested. Will support when a married_filing_jointly scenario is built.",
+      "header.foreign_country_name":
+        "No foreign address scenario modeled yet — no fact key exists for a foreign country name. Relevant only for taxpayers with a foreign address.",
+      "header.foreign_province_state_county":
+        "No foreign address scenario or fact key exists for foreign province/state/county; we only model U.S. domestic addresses.",
+      "header.foreign_postal_code":
+        "No foreign address scenario or fact key exists for foreign postal code; we only model U.S. domestic addresses.",
+      "header.presidential_campaign_you":
+        "No fact or decision models the taxpayer's voluntary Presidential Election Campaign Fund $3 designation; no intake question captures this.",
+      "header.presidential_campaign_spouse":
+        "No fact or decision models the spouse's voluntary Presidential Election Campaign Fund $3 designation; no MFJ/spouse scenario ingested.",
+      "header.mfs_spouse_full_name":
+        "Spouse's full name for MFS is required only in a married-filing-separately scenario; no spouse identity facts are ingested yet.",
+      "header.hoh_qss_qualifying_child_name":
+        "No dependent/qualifying-child ingestion scenario yet — this field is only filled when the HOH/QSS qualifying person is a child who is NOT the taxpayer's dependent, requiring dependent relationship data we haven't modeled.",
+      "header.nonresident_alien_spouse_checkbox":
+        "No nonresident/dual-status alien spouse scenario modeled yet — requires a specific MFJ+NRA-spouse fact we haven't ingested.",
+      "header.nonresident_alien_spouse_name":
+        "No nonresident/dual-status alien spouse scenario modeled yet — spouse name field only applies when the NRA-spouse checkbox is checked, which has no ingestion path.",
+      "dependents.dep1_first_name":
+        "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
+      "dependents.dep2_first_name":
+        "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
+      "dependents.dep3_first_name":
+        "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
+      "dependents.dep4_first_name":
+        "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
+      "dependents.dep1_last_name":
+        "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
+      "dependents.dep2_last_name":
+        "No dependent-data ingestion path exists yet — dependent last names are not modeled in the current fact schema.",
+      "dependents.dep3_last_name":
+        "No dependent-data ingestion path exists yet — dependent last names are not modeled in the current fact schema.",
+      "dependents.dep4_last_name":
+        "No dependent-data ingestion path exists yet — dependent last names are not modeled in the current fact schema.",
+      "dependents.dep1_ssn":
+        "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
+      "dependents.dep2_ssn":
+        "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
+      "dependents.dep3_ssn":
+        "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
+      "dependents.dep4_ssn":
+        "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
+      "dependents.dep1_relationship":
+        "No dependent-data ingestion path exists yet — dependent relationship is not modeled in the current fact schema.",
+      "dependents.dep2_relationship":
+        "No dependent-data ingestion path exists yet — dependent relationship is not modeled in the current fact schema.",
+      "dependents.dep3_relationship":
+        "No dependent-data ingestion path exists yet — dependent relationship is not modeled in the current fact schema.",
+      "dependents.dep4_relationship":
+        "No dependent data ingestion built yet — dependent 4 relationship requires a dependent-facts scenario.",
+      "dependents.dep1_lived_with_you":
+        "No dependent data ingestion built yet — whether dependent 1 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
+      "dependents.dep2_lived_with_you":
+        "No dependent data ingestion built yet — whether dependent 2 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
+      "dependents.dep3_lived_with_you":
+        "No dependent data ingestion built yet — whether dependent 3 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
+      "dependents.dep4_lived_with_you":
+        "No dependent data ingestion built yet — whether dependent 4 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
+      "dependents.more_than_four_dependents":
+        "No dependent data ingestion built yet — determining whether there are more than four dependents requires a dependent-facts scenario.",
+      "dependents.dep1_lived_in_us":
+        "No dependent data ingestion built yet — whether dependent 1 lived in the U.S. requires a dependent-facts scenario.",
+      "dependents.dep2_lived_in_us":
+        "No dependent data ingestion built yet — whether dependent 2 lived in the U.S. requires a dependent-facts scenario.",
+      "dependents.dep3_lived_in_us":
+        "No dependent data ingestion built yet — whether dependent 3 lived in the U.S. requires a dependent-facts scenario.",
+      "dependents.dep4_lived_in_us":
+        "No dependent data ingestion built yet — whether dependent 4 lived in the U.S. requires a dependent-facts scenario.",
+      "dependents.dep1_full_time_student":
+        "No dependent data ingestion model exists yet; full-time student status for Dependent 1 requires per-dependent fact facts we haven't built a scenario for.",
+      "dependents.dep1_permanently_disabled":
+        "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 1 requires per-dependent facts we haven't built a scenario for.",
+      "dependents.dep2_full_time_student":
+        "No dependent data ingestion model exists yet; full-time student status for Dependent 2 requires per-dependent facts we haven't built a scenario for.",
+      "dependents.dep2_permanently_disabled":
+        "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 2 requires per-dependent facts we haven't built a scenario for.",
+      "dependents.dep3_full_time_student":
+        "No dependent data ingestion model exists yet; full-time student status for Dependent 3 requires per-dependent facts we haven't built a scenario for.",
+      "dependents.dep3_permanently_disabled":
+        "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 3 requires per-dependent facts we haven't built a scenario for.",
+      "dependents.dep4_full_time_student":
+        "No dependent data ingestion model exists yet; full-time student status for Dependent 4 requires per-dependent facts we haven't built a scenario for.",
+      "dependents.dep4_permanently_disabled":
+        "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 4 requires per-dependent facts we haven't built a scenario for.",
+      "dependents.dep1_child_tax_credit":
+        "No dependent data ingestion model exists yet; whether Dependent 1 qualifies for the child tax credit requires per-dependent facts (age, SSN validity, relationship) we haven't built a scenario for.",
+      "dependents.dep1_other_dependent_credit":
+        "No dependent data ingestion model exists yet; whether Dependent 1 qualifies for the credit for other dependents requires per-dependent facts we haven't built a scenario for.",
+      "dependents.dep2_child_tax_credit":
+        "No dependent-data ingestion yet — determining CTC eligibility (age, relationship, valid SSN) requires a dependent-intake scenario we haven't built.",
+      "dependents.dep2_other_dependent_credit":
+        "No dependent-data ingestion yet — credit for other dependents requires per-dependent qualifying-relative analysis not yet built.",
+      "dependents.dep3_child_tax_credit":
+        "No dependent-data ingestion yet — determining CTC eligibility (age, relationship, valid SSN) requires a dependent-intake scenario we haven't built.",
+      "dependents.dep3_other_dependent_credit":
+        "No dependent-data ingestion yet — credit for other dependents requires per-dependent qualifying-relative analysis not yet built.",
+      "dependents.dep4_child_tax_credit":
+        "No dependent-data ingestion yet — determining CTC eligibility (age, relationship, valid SSN) requires a dependent-intake scenario we haven't built.",
+      "dependents.dep4_other_dependent_credit":
+        "No dependent-data ingestion yet — credit for other dependents requires per-dependent qualifying-relative analysis not yet built.",
+      "header.lived_apart_mfs_hoh":
+        "No decision or fact key exists for 'lived apart from spouse last 6 months' — requires an MFS/HOH lived-apart scenario with explicit intake question we haven't built.",
+      "line.1b":
+        "Household employee wages not reported on W-2 require a separate household-employer intake scenario not yet built; no fact key exists for this.",
+      "line.1c":
+        "Unreported tip income (allocated tips, noncash tips) has no fact ingestion path; requires a tip-income intake scenario not yet built.",
+      "line.1d":
+        "No ingestion path for Medicaid waiver payments not reported on W-2 — no scenario built for this income type yet.",
+      "line.1e":
+        "Requires Form 2441 (Dependent Care Benefits) computation — no Form 2441 ingestion or scenario built yet.",
+      "line.1f":
+        "Requires Form 8839 (Adoption Benefits) computation — no Form 8839 ingestion or scenario built yet.",
+      "line.1g":
+        "Requires Form 8919 (Uncollected SS/Medicare Tax on Wages) — no Form 8919 ingestion or scenario built yet.",
+      "line.1h_type":
+        "Free-text label describing the type of other earned income on line 1h — no fact or decision maps to this descriptor field; no other-earned-income scenario built yet.",
+      "line.1h_amount":
+        "Other earned income (strike benefits, excess deferrals, etc.) — no ingestion path or scenario built for these miscellaneous earned income types yet.",
+      "line.1i":
+        "Nontaxable combat pay election — no combat pay fact ingestion or military-taxpayer scenario built yet.",
+      "line.3c_box1":
+        "Checkbox indicating child's qualified dividends are included in line 3a — requires Form 8814 / dependent-income scenario which has not been built yet.",
+      "line.3c_box2":
+        "Checkbox indicating child's ordinary dividends are included in line 3b — requires Form 8814 / dependent-income scenario which has not been built yet.",
+      "line.4a":
+        "IRA gross distribution (Form 1099-R box 1) — no 1099-R fact ingestion path has been built yet.",
+      "line.4b":
+        "IRA taxable amount — requires 1099-R ingestion and potentially a taxable-portion computation (basis tracking, rollover rules, QCD exclusion). No 1099-R scenario built yet.",
+      "line.4c_rollover":
+        "IRA rollover checkbox (Exception 1) — requires 1099-R ingestion and rollover-election logic. No 1099-R scenario built yet.",
+      "line.4c_qcd":
+        "IRA QCD checkbox (Exception 3) — requires 1099-R ingestion and qualified-charitable-distribution scenario. No QCD scenario built yet.",
+      "line.4c_box3":
+        "IRA exception box 3 checkbox (e.g. HFD or other special codes) — requires 1099-R ingestion and specific exception scenarios. No such scenario built yet.",
+      "line.4c_box3_amount":
+        "Amount associated with IRA line 4c box 3 exception — requires 1099-R ingestion and exception-specific amount tracking. No such scenario built yet.",
+      "line.5a":
+        "No 1099-R / pension ingestion path built yet; total pension and annuity payments cannot be computed until we ingest retirement distribution facts.",
+      "line.5b":
+        "No 1099-R ingestion and no Simplified Method Worksheet implementation; taxable pension/annuity amount cannot be computed.",
+      "line.5c_rollover":
+        "No rollover decision or 1099-R ingestion path; cannot determine whether taxpayer made a pension/annuity rollover.",
+      "line.5c_pso":
+        "No PSO (Public Safety Officer insurance premium exclusion) scenario or decision ingested; cannot determine whether this election applies.",
+      "line.5c_box3":
+        "No scenario requiring a special code/annotation next to line 5b; this checkbox is for edge cases referenced by other publications.",
+      "line.5c_box3_amount":
+        "Companion amount field to line 5c box 3; no scenario requiring this annotation amount has been modeled.",
+      "line.6a":
+        "No SSA-1099 or RRB-1099 ingestion path built yet; total social security benefits (box 5) cannot be summed.",
+      "line.6b":
+        "No SSA-1099 ingestion and no Social Security Benefits Worksheet implementation; taxable SS benefit amount cannot be computed.",
+      "line.6c_lump_sum_election":
+        "No lump-sum social security benefit scenario or decision modeled; this checkbox requires knowing whether the taxpayer received a prior-year lump-sum SS payment and elected the special treatment.",
+      "line.6d_mfs_lived_apart":
+        "No MFS-lived-apart scenario modeled; this checkbox requires both married_filing_separately status AND the taxpayer having lived apart from their spouse all year — no decision captures the lived-apart fact.",
+      "line.7b_schedule_d_not_required":
+        "Checking this box requires evaluating whether Exception 1 applies (no capital losses, only capital gain distributions from 1099-DIV box 2a with no amounts in boxes 2b/2c/2d). No decision or fact path models this determination yet.",
+      "line.7b_includes_childs_capital_gain":
+        "Requires Form 8814 (child's interest and dividends) scenario — no dependent income ingestion or Form 8814 computation path exists yet.",
+      "line.7b_childs_capital_gain_amount":
+        "Amount from Form 8814 line 10 — requires Form 8814 computation for child's capital gain, which depends on dependent income ingestion not yet built.",
+      "line.8":
+        "Additional income from Schedule 1, line 10 — Schedule 1 is not yet ingested as a form, so no fieldId exists to reference.",
+      "line.10":
+        "Adjustments to income from Schedule 1 line 26 — Schedule 1 is not yet ingested as a form, so no fieldId exists to reference.",
+      "line.12a_you_as_dependent":
+        "Whether the taxpayer can be claimed as a dependent on someone else's return requires a dependent-status decision not yet modeled in the decision set.",
+      "line.12a_spouse_as_dependent":
+        "No MFJ scenario ingested yet — spouse-as-dependent checkbox requires a joint-return scenario where the spouse can be claimed by a third party.",
+      "line.12b_spouse_itemizes_separate":
+        "No MFS scenario ingested yet — this checkbox applies only to married filing separately filers whose spouse itemizes.",
+      "line.12b_dual_status_alien":
+        "No dual-status alien scenario ingested yet — this checkbox requires a residency/immigration-status fact we don't model.",
+      "line.12d_you_born_before_jan2_1961":
+        "Requires a date-comparison rule (identity.dob < 1961-01-02) that the engine doesn't support yet; no boolean age-threshold rule exists in the library.",
+      "line.12d_you_blind":
+        "No blindness fact ingested — we don't yet have a fact key for the taxpayer's blindness status.",
+      "line.12d_spouse_born_before_jan2_1961":
+        "No MFJ/spouse scenario ingested yet — spouse DOB fact does not exist, and no date-comparison rule is available.",
+      "line.12d_spouse_blind":
+        "No MFJ/spouse scenario ingested yet — spouse blindness fact does not exist.",
+      "line.13a":
+        "No self-employment or qualified business income scenario ingested yet — Form 8995/8995-A QBI deduction requires business income facts not yet modeled.",
+      "line.13b":
+        "Schedule 1-A (new 2025 form) covers no-tax-on-tips, no-tax-on-overtime, car loan interest, and enhanced senior deductions — none of these scenarios are ingested yet.",
+      "line.16_from_form_8814":
+        "Checkbox indicating tax includes amounts from Form 8814 (child's interest/dividends election). No Form 8814 ingestion scenario built yet; requires dependent-with-investment-income data.",
+      "line.16_from_form_4972":
+        "Checkbox indicating tax includes amounts from Form 4972 (lump-sum distribution). No Form 4972 ingestion scenario built yet.",
+      "line.16_from_other_form":
+        "Checkbox indicating tax includes amounts from a third special form (e.g. section 962 election, recapture). No ingestion scenario built for these edge cases.",
+      "line.16_other_form_number":
+        "Free-text entry for the form number associated with the third checkbox on line 16. Tied to special-form tax scenarios not yet ingested.",
+      "line.17":
+        "Amount from Schedule 2, line 3 (alternative minimum tax and other taxes). Schedule 2 has not been ingested; no fieldId available to reference.",
+      "line.19":
+        "Child tax credit / credit for other dependents from Schedule 8812. Schedule 8812 has not been ingested and no dependent-with-CTC scenario has been built yet.",
+      "line.20":
+        "Schedule 3 line 8 (nonrefundable credits) has not been ingested as a form yet — no cross-form reference path available.",
+      "line.23":
+        "Schedule 2 line 21 (other taxes including self-employment tax) has not been ingested as a form yet — no cross-form reference path available.",
+      "line.26":
+        "Estimated tax payments and prior-year overpayment applied forward have no ingestion path yet — no estimated_payments fact category exists.",
+      "line.former_spouse_ssn":
+        "Former spouse SSN for joint estimated tax split — no MFS/divorce scenario with prior joint estimated payments modeled yet; requires separate fact ingestion for former spouse identity.",
+      "line.21":
+        "Line 21 (lines 19 + 20) — child tax credit and Schedule 3 nonrefundable credits are both unsupported; the aggregate has no value to compute yet.",
+      "line.25b":
+        "Federal income tax withheld from 1099 forms — no 1099-withholding scenario exercised yet; render blank rather than 0 until a fixture has Box 4 facts.",
+      "line.32":
+        "Line 32 — sum of other refundable credits / payments (27a + 28 + 29 + 30 + 31), all of which are individually unsupported.",
+      "line.37":
+        "Line 37 (amount you owe) — owe-tax branch not yet exercised by any test scenario; current fixtures all produce refunds.",
+      "line.27a":
+        "Earned Income Credit requires an EIC eligibility worksheet computation (earned income, AGI, filing status, number of qualifying children with valid SSNs) — no EIC worksheet or qualifying-child ingestion path built yet.",
+      "line.27b_clergy_schedule_se":
+        "Clergy/minister checkbox for Schedule SE filing — no clergy occupation scenario or Schedule SE ingestion built yet.",
+      "line.27c_no_eic_claim":
+        "Opt-out checkbox for EIC claim — no EIC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
+      "line.28_no_actc_claim":
+        "Opt-out checkbox for ACTC claim — no ACTC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
+      "line.28":
+        "Additional Child Tax Credit from Schedule 8812 — Schedule 8812 not ingested and no qualifying-child dependent scenario built yet.",
+      "line.29":
+        "American Opportunity Credit from Form 8863 line 8 — Form 8863 not ingested and no education-credit scenario built yet.",
+      "line.30":
+        "Refundable adoption credit from Form 8839 line 13 — Form 8839 not ingested and no adoption expense scenario built yet.",
+      "line.31":
+        "Amount from Schedule 3 line 15 (additional refundable credits/payments) — Schedule 3 not ingested as a separate form catalog yet.",
+      "line.35a_form_8888_attached":
+        "Form 8888 (split refund into multiple accounts) has no ingestion path or scenario modeled yet — taxpayer must check this manually if they attach Form 8888.",
+      "line.35b_routing_number":
+        "Bank routing number for direct deposit refund — no banking fact category ingested; taxpayer must enter this manually.",
+      "line.35c_checking":
+        "Account type (checking) checkbox for direct deposit — no bank account type fact ingested; taxpayer must select manually.",
+      "line.35c_savings":
+        "Account type (savings) checkbox for direct deposit — no bank account type fact ingested; taxpayer must select manually.",
+      "line.35d_account_number":
+        "Bank account number for direct deposit refund — no banking fact category ingested; taxpayer must enter this manually.",
+      "line.36":
+        "Amount of overpayment (line 34) to apply to 2026 estimated tax — a taxpayer election with no corresponding fact or decision in the ingestion model.",
+      "line.38":
+        "Estimated tax penalty requires Form 2210 calculation (prior-year tax liability, installment due dates, underpayment amounts) — no penalty-calculation engine or prior-year facts ingested yet.",
+      "page2.third_party_designee_yes":
+        "No fact or decision models whether the taxpayer designates a third party — no third-party-designee scenario built yet.",
+      "page2.third_party_designee_no":
+        "No fact or decision models the third-party designee election — no scenario built yet.",
+      "page2.designee_name":
+        "Third-party designee name — no fact or decision models designee info; no scenario built yet.",
+      "page2.designee_phone":
+        "Third-party designee phone — no fact or decision models designee info; no scenario built yet.",
+      "page2.designee_pin":
+        "Third-party designee PIN — no fact or decision models designee info; no scenario built yet.",
+      "signing.taxpayer_ip_pin":
+        "IRS Identity Protection PIN is not part of current fact ingestion — no identity.ip_pin fact key exists yet.",
+      "signing.spouse_occupation":
+        "No MFJ scenario built yet — spouse facts (including occupation) are not ingested.",
+      "signing.spouse_ip_pin":
+        "No MFJ scenario built yet — spouse IP PIN fact not ingested; also no identity.spouse_ip_pin fact key exists.",
+      "signing.preparer_self_employed":
+        "No paid-preparer ingestion path exists; this checkbox applies only when a paid preparer prepares the return, which is outside the current self-filing scenario.",
+      "signing.preparer_name":
+        "No paid-preparer ingestion path exists; preparer name is supplied by a third-party tax professional, not a taxpayer fact.",
+      "signing.preparer_ptin":
+        "No paid-preparer ingestion path exists; PTIN is the preparer's IRS-issued identifier, not a taxpayer fact.",
+      "signing.preparer_firm_name":
+        "No paid-preparer ingestion path exists; firm name belongs to the paid preparer's practice, not the taxpayer.",
+      "signing.preparer_phone":
+        "No paid-preparer ingestion path exists; this is the preparer's firm phone, distinct from the taxpayer's phone.",
+      "signing.preparer_firm_address":
+        "No paid-preparer ingestion path exists; firm address belongs to the paid preparer's practice, not the taxpayer.",
+      "signing.preparer_firm_ein":
+        "No paid-preparer ingestion path exists; firm EIN belongs to the paid preparer's practice, not the taxpayer.",
     },
 
-    todos: {
-    },
-
+    todos: {},
   });
 }
 

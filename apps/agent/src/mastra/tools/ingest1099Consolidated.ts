@@ -98,7 +98,10 @@ export const ingest1099Consolidated = createTool({
       .object({
         box1: z.number().optional().describe("Interest income"),
         box2: z.number().optional().describe("Early withdrawal penalty"),
-        box3: z.number().optional().describe("Interest on US savings bonds and Treasury obligations"),
+        box3: z
+          .number()
+          .optional()
+          .describe("Interest on US savings bonds and Treasury obligations"),
         box4: z.number().optional().describe("Federal income tax withheld"),
         box5: z.number().optional().describe("Investment expenses"),
         box6: z.number().optional().describe("Foreign tax paid"),
@@ -149,7 +152,10 @@ export const ingest1099Consolidated = createTool({
             dateAcquired: z.string().describe("MM/DD/YY as printed on the 1099-B"),
             dateSold: z.string().describe("MM/DD/YY as printed"),
             proceeds: z.number(),
-            costBasis: z.number().optional().describe("Omit for noncovered securities where basis isn't reported"),
+            costBasis: z
+              .number()
+              .optional()
+              .describe("Omit for noncovered securities where basis isn't reported"),
             adjustmentCode: z.string().optional().describe("Form 8949 column (f) code, if present"),
             adjustmentAmount: z.number().optional(),
             washSaleLossDisallowed: z.number().optional(),
@@ -171,9 +177,7 @@ export const ingest1099Consolidated = createTool({
       .describe(
         "1099-B section with per-trade detail. Omit the entire object if there are no reportable sales.",
       ),
-    sourceNote: z
-      .string()
-      .default("Consolidated 1099 ingested via structured payload"),
+    sourceNote: z.string().default("Consolidated 1099 ingested via structured payload"),
   }),
   outputSchema: z.object({
     accountSlug: z.string(),
@@ -185,9 +189,7 @@ export const ingest1099Consolidated = createTool({
     const { scope, userId, filingId } = await requireUserContext(context);
     const { year, sourceNote } = input;
     const slug =
-      input.accountSlug ||
-      slugify(input.payer.name) ||
-      `tin-${input.payer.tin.replace(/-/g, "")}`;
+      input.accountSlug || slugify(input.payer.name) || `tin-${input.payer.tin.replace(/-/g, "")}`;
 
     let factsWritten = 0;
     let decisionsWritten = 0;
@@ -296,8 +298,7 @@ export const ingest1099Consolidated = createTool({
         taxYear: year,
         decisionKey: "decisions.scope.has_reportable_sales",
         decision: true,
-        rationale:
-          `Consolidated 1099 from ${input.payer.name} contains a populated 1099-B section with ${input.b.trades.length} reportable sale(s).`,
+        rationale: `Consolidated 1099 from ${input.payer.name} contains a populated 1099-B section with ${input.b.trades.length} reportable sale(s).`,
         supportingFactKeys: tradeIds.map((id) => makeTradeFactKey(slug, id)),
         confidence: "high",
         sourceNote: "Auto-recorded during 1099 ingest",

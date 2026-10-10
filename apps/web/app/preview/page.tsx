@@ -39,19 +39,35 @@ const MOBILE_PANES = [
 type MobilePaneId = (typeof MOBILE_PANES)[number]["id"];
 
 const CHAT_MESSAGES = [
-  { role: "assistant" as const, content: "Hi Alex — I'm Luca. Let's get your 2025 return started. First, can you confirm your filing status is still **Single**?" },
+  {
+    role: "assistant" as const,
+    content:
+      "Hi Alex — I'm Luca. Let's get your 2025 return started. First, can you confirm your filing status is still **Single**?",
+  },
   { role: "user" as const, content: "Yes, still single." },
   { role: "assistant" as const, content: "Got it. And no dependents this year?" },
   { role: "user" as const, content: "Right, no dependents." },
-  { role: "assistant" as const, content: "Perfect. I see you uploaded a W-2 from Acme Corp — wages of **$186,400** and federal withholding of **$38,210**. Recording those now." },
+  {
+    role: "assistant" as const,
+    content:
+      "Perfect. I see you uploaded a W-2 from Acme Corp — wages of **$186,400** and federal withholding of **$38,210**. Recording those now.",
+  },
   { role: "user" as const, content: "Looks right." },
-  { role: "assistant" as const, content: "Next, did you have any 1099-DIV or 1099-INT activity in 2025? Even small amounts." },
+  {
+    role: "assistant" as const,
+    content: "Next, did you have any 1099-DIV or 1099-INT activity in 2025? Even small amounts.",
+  },
 ];
 
 const PLAN = [
   { id: "p1", title: "Confirm filing status", status: "done" as const },
   { id: "p2", title: "Capture W-2 wages and withholding", status: "done" as const },
-  { id: "p3", title: "Check for 1099-DIV / 1099-INT", status: "doing" as const, note: "Asking now" },
+  {
+    id: "p3",
+    title: "Check for 1099-DIV / 1099-INT",
+    status: "doing" as const,
+    note: "Asking now",
+  },
   { id: "p4", title: "Review CA-specific items", status: "todo" as const },
   { id: "p5", title: "Charitable contributions", status: "todo" as const },
 ];
@@ -59,7 +75,14 @@ const PLAN = [
 const ACTIVITY = [
   { id: "a1", kind: "fact", title: "filing_status · single", value: "Single", time: "2m" },
   { id: "a2", kind: "fact", title: "wages · acme_corp · box1", value: "$186,400", time: "4m" },
-  { id: "a3", kind: "decision", title: "ca_residency · full_year", value: "Full-year CA resident", time: "5m", verdict: "accurate" as const },
+  {
+    id: "a3",
+    kind: "decision",
+    title: "ca_residency · full_year",
+    value: "Full-year CA resident",
+    time: "5m",
+    verdict: "accurate" as const,
+  },
   { id: "a4", kind: "fact", title: "wages · acme_corp · box2", value: "$38,210", time: "6m" },
   { id: "a5", kind: "fact", title: "dependents · count", value: "0", time: "8m" },
 ];
@@ -108,7 +131,12 @@ const CATEGORIES: Category[] = [
     items: [
       { id: "w1", label: "W-2 wages", status: "done", note: "Acme Corp · $186,400" },
       { id: "w2", label: "Federal withholding", status: "done", note: "$38,210" },
-      { id: "w3", label: "Self-employment income (1099-NEC)", status: "todo", note: "Confirm none" },
+      {
+        id: "w3",
+        label: "Self-employment income (1099-NEC)",
+        status: "todo",
+        note: "Confirm none",
+      },
     ],
   },
   {
@@ -128,7 +156,12 @@ const CATEGORIES: Category[] = [
     label: "Deductions",
     pct: 0,
     items: [
-      { id: "d1", label: "Standard vs itemized comparison", status: "todo", note: "Decides which path is worth pursuing" },
+      {
+        id: "d1",
+        label: "Standard vs itemized comparison",
+        status: "todo",
+        note: "Decides which path is worth pursuing",
+      },
       { id: "d2", label: "Charitable contributions", status: "todo" },
       { id: "d3", label: "Mortgage interest (Form 1098)", status: "todo" },
       { id: "d4", label: "State and local taxes (SALT)", status: "todo" },
@@ -146,7 +179,13 @@ const FORMS = [
 
 const SOURCE_DOCS = [
   { id: "d1", name: "W-2 — Acme Corp 2025.pdf", type: "W-2", size: "184 KB", parsed: true },
-  { id: "d2", name: "1099-INT — Chase Sapphire.pdf", type: "1099-INT", size: "92 KB", parsed: true },
+  {
+    id: "d2",
+    name: "1099-INT — Chase Sapphire.pdf",
+    type: "1099-INT",
+    size: "92 KB",
+    parsed: true,
+  },
   { id: "d3", name: "Voided check.pdf", type: "Other", size: "44 KB", parsed: false },
 ];
 
@@ -289,9 +328,7 @@ function TopBar({
                       : `Not started · ${r.year}`}
                   </div>
                 </div>
-                {r.id === activeReturn.id && (
-                  <span className="text-accent text-sm">✓</span>
-                )}
+                {r.id === activeReturn.id && <span className="text-accent text-sm">✓</span>}
               </button>
             ))}
             <div className="border-t border-border-subtle">
@@ -338,19 +375,30 @@ function TopBar({
               : "bg-bg-panel border-border-subtle text-ink-secondary hover:text-ink-primary",
           )}
         >
-          <span className={cn("w-1.5 h-1.5 rounded-full", lucaBusy ? "bg-amber-400 animate-pulse-soft" : "bg-emerald-400")} />
+          <span
+            className={cn(
+              "w-1.5 h-1.5 rounded-full",
+              lucaBusy ? "bg-amber-400 animate-pulse-soft" : "bg-emerald-400",
+            )}
+          />
           {lucaBusy ? "Luca working" : "Idle"}
         </button>
 
         {/* Progress chip */}
         <div className="hidden sm:flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-bg-panel border border-border-subtle text-xs">
           <div className="w-16 h-1.5 rounded-full bg-bg-elevated overflow-hidden">
-            <div className="h-full bg-accent transition-all duration-500" style={{ width: `${activeReturn.progress}%` }} />
+            <div
+              className="h-full bg-accent transition-all duration-500"
+              style={{ width: `${activeReturn.progress}%` }}
+            />
           </div>
           <span className="tabular-nums text-ink-secondary">{activeReturn.progress}%</span>
         </div>
 
-        <button className="w-8 h-8 rounded-lg border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary flex items-center justify-center transition-colors" title="Settings">
+        <button
+          className="w-8 h-8 rounded-lg border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary flex items-center justify-center transition-colors"
+          title="Settings"
+        >
           ⚙
         </button>
         <div className="w-8 h-8 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center text-xs font-medium text-accent">
@@ -367,13 +415,7 @@ function TopBar({
  * ────────────────────────────────────────────────────────────────────────────
  */
 
-function ChatPane({
-  busy,
-  mobile = false,
-}: {
-  busy: boolean;
-  mobile?: boolean;
-}) {
+function ChatPane({ busy, mobile = false }: { busy: boolean; mobile?: boolean }) {
   return (
     <div className={cn("flex flex-col h-full min-h-0", mobile && "bg-bg-base")}>
       {/*
@@ -395,7 +437,10 @@ function ChatPane({
                   : "max-w-full text-ink-primary text-[14px] leading-relaxed pt-0.5",
               )}
               dangerouslySetInnerHTML={{
-                __html: m.content.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-ink-primary">$1</strong>'),
+                __html: m.content.replace(
+                  /\*\*(.+?)\*\*/g,
+                  '<strong class="font-semibold text-ink-primary">$1</strong>',
+                ),
               }}
             />
           </div>
@@ -454,13 +499,31 @@ function ChatInput({ busy }: { busy: boolean }) {
       />
       <div className="flex items-center gap-1 px-2.5 pb-2.5">
         <IconButton title="Attach a document">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <line x1="12" y1="5" x2="12" y2="19" />
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
         </IconButton>
         <IconButton title="Suggest what to ask next">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path d="M12 3l1.5 5.5L19 10l-5.5 1.5L12 17l-1.5-5.5L5 10l5.5-1.5z" />
             <path d="M19 4l.5 1.5L21 6l-1.5.5L19 8l-.5-1.5L17 6l1.5-.5z" />
           </svg>
@@ -484,7 +547,16 @@ function ChatInput({ busy }: { busy: boolean }) {
           title="Send"
           className="w-8 h-8 rounded-full bg-accent hover:bg-accent-hover disabled:bg-bg-elevated disabled:text-ink-muted text-white flex items-center justify-center transition-colors ml-1"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <line x1="12" y1="19" x2="12" y2="5" />
             <polyline points="5 12 12 5 19 12" />
           </svg>
@@ -569,7 +641,9 @@ function HomeView() {
         <div className="flex items-baseline justify-between mb-4">
           <div>
             <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">Progress</div>
-            <div className="text-2xl font-semibold tracking-tight tabular-nums text-ink-primary mt-1">60% complete</div>
+            <div className="text-2xl font-semibold tracking-tight tabular-nums text-ink-primary mt-1">
+              60% complete
+            </div>
           </div>
           <div className="text-sm text-ink-secondary tabular-nums">12 facts · 3 open · 4 forms</div>
         </div>
@@ -615,26 +689,45 @@ function HomeView() {
       {/* Two-column: Plan + Open asks */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <section className="card">
-          <div className="card-header"><span>Plan</span><span className="tabular-nums text-ink-muted normal-case tracking-normal">{PLAN.filter(p => p.status !== "done").length}</span></div>
+          <div className="card-header">
+            <span>Plan</span>
+            <span className="tabular-nums text-ink-muted normal-case tracking-normal">
+              {PLAN.filter((p) => p.status !== "done").length}
+            </span>
+          </div>
           <ul className="px-5 pb-5 space-y-3">
-            {PLAN.map((item) => <PlanRow key={item.id} item={item} />)}
+            {PLAN.map((item) => (
+              <PlanRow key={item.id} item={item} />
+            ))}
           </ul>
         </section>
 
         <section className="card">
-          <div className="card-header"><span>Open asks</span><span className="tabular-nums text-ink-muted normal-case tracking-normal">{OPEN_ASKS.length}</span></div>
+          <div className="card-header">
+            <span>Open asks</span>
+            <span className="tabular-nums text-ink-muted normal-case tracking-normal">
+              {OPEN_ASKS.length}
+            </span>
+          </div>
           <ul className="px-5 pb-5 space-y-2.5">
             {OPEN_ASKS.map((ask) => (
-              <li key={ask.id} className="flex items-start gap-3 py-2.5 border-b border-border-subtle/50 last:border-0">
-                <span className={cn(
-                  "shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full",
-                  ask.priority === "high" && "bg-red-400",
-                  ask.priority === "med" && "bg-amber-400",
-                  ask.priority === "low" && "bg-ink-faint",
-                )} />
+              <li
+                key={ask.id}
+                className="flex items-start gap-3 py-2.5 border-b border-border-subtle/50 last:border-0"
+              >
+                <span
+                  className={cn(
+                    "shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full",
+                    ask.priority === "high" && "bg-red-400",
+                    ask.priority === "med" && "bg-amber-400",
+                    ask.priority === "low" && "bg-ink-faint",
+                  )}
+                />
                 <div className="flex-1">
                   <div className="text-sm text-ink-primary">{ask.title}</div>
-                  <div className="text-[11px] text-ink-muted uppercase tracking-wide mt-0.5">{ask.priority} priority</div>
+                  <div className="text-[11px] text-ink-muted uppercase tracking-wide mt-0.5">
+                    {ask.priority} priority
+                  </div>
                 </div>
               </li>
             ))}
@@ -647,23 +740,37 @@ function HomeView() {
         <div className="card-header">
           <span>Activity</span>
           <span className="tabular-nums text-ink-muted normal-case tracking-normal">
-            {activityExpanded ? visibleActivity.length : `${ACTIVITY.length} of ${visibleActivity.length === ACTIVITY.length ? ACTIVITY.length : "many"}`}
+            {activityExpanded
+              ? visibleActivity.length
+              : `${ACTIVITY.length} of ${visibleActivity.length === ACTIVITY.length ? ACTIVITY.length : "many"}`}
           </span>
         </div>
         <ul>
           {visibleActivity.map((item, i) => (
-            <li key={`${item.id}-${i}`} className={cn("px-5 py-3.5", i !== 0 && "border-t border-border-subtle")}>
+            <li
+              key={`${item.id}-${i}`}
+              className={cn("px-5 py-3.5", i !== 0 && "border-t border-border-subtle")}
+            >
               <div className="flex items-baseline justify-between gap-3">
-                <span className={cn("text-[9px] uppercase tracking-[0.18em] font-medium", item.kind === "decision" ? "text-accent" : "text-ink-muted")}>
+                <span
+                  className={cn(
+                    "text-[9px] uppercase tracking-[0.18em] font-medium",
+                    item.kind === "decision" ? "text-accent" : "text-ink-muted",
+                  )}
+                >
                   {item.kind}
                 </span>
                 <span className="text-[11px] text-ink-faint tabular-nums">{item.time}</span>
               </div>
               <div className="mt-1 flex items-center gap-3">
-                <span className="text-sm text-ink-primary truncate flex-1">{item.title.split("·").slice(1).join("·").trim() || item.title}</span>
+                <span className="text-sm text-ink-primary truncate flex-1">
+                  {item.title.split("·").slice(1).join("·").trim() || item.title}
+                </span>
                 <span className="text-sm text-ink-secondary tabular-nums">{item.value}</span>
                 {"verdict" in item && item.verdict === "accurate" && (
-                  <span className="text-[10px] px-1.5 py-0.5 rounded text-emerald-400 bg-emerald-400/10 uppercase tracking-wide">Grounded</span>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded text-emerald-400 bg-emerald-400/10 uppercase tracking-wide">
+                    Grounded
+                  </span>
                 )}
               </div>
             </li>
@@ -735,9 +842,20 @@ function CategoryItemRow({ item }: { item: CategoryItem }) {
         )}
       >
         {isDone ? (
-          <svg viewBox="0 0 16 16" className="shrink-0 mt-[3px] w-3.5 h-3.5 text-emerald-400" aria-hidden>
+          <svg
+            viewBox="0 0 16 16"
+            className="shrink-0 mt-[3px] w-3.5 h-3.5 text-emerald-400"
+            aria-hidden
+          >
             <circle cx="8" cy="8" r="7.5" fill="currentColor" opacity="0.18" />
-            <path d="M4.5 8.2 6.8 10.5 11.5 5.8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            <path
+              d="M4.5 8.2 6.8 10.5 11.5 5.8"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
           </svg>
         ) : isDoing ? (
           <span className="shrink-0 mt-[5px] w-2.5 h-2.5 rounded-full bg-accent animate-pulse-soft" />
@@ -750,7 +868,9 @@ function CategoryItemRow({ item }: { item: CategoryItem }) {
               "text-sm leading-snug",
               isDoing && "text-ink-primary font-medium",
               isDone && "text-ink-muted",
-              !isDoing && !isDone && "text-ink-secondary group-hover:text-ink-primary transition-colors",
+              !isDoing &&
+                !isDone &&
+                "text-ink-secondary group-hover:text-ink-primary transition-colors",
             )}
           >
             {item.label}
@@ -780,9 +900,20 @@ function PlanRow({ item }: { item: (typeof PLAN)[number] }) {
   return (
     <li className="flex items-start gap-2.5">
       {isDone ? (
-        <svg viewBox="0 0 16 16" className="shrink-0 mt-[3px] w-3.5 h-3.5 text-emerald-400" aria-hidden>
+        <svg
+          viewBox="0 0 16 16"
+          className="shrink-0 mt-[3px] w-3.5 h-3.5 text-emerald-400"
+          aria-hidden
+        >
           <circle cx="8" cy="8" r="7.5" fill="currentColor" opacity="0.18" />
-          <path d="M4.5 8.2 6.8 10.5 11.5 5.8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <path
+            d="M4.5 8.2 6.8 10.5 11.5 5.8"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
         </svg>
       ) : isDoing ? (
         <span className="shrink-0 mt-[5px] w-2.5 h-2.5 rounded-full bg-accent animate-pulse-soft" />
@@ -790,12 +921,14 @@ function PlanRow({ item }: { item: (typeof PLAN)[number] }) {
         <span className="shrink-0 mt-[4px] w-3 h-3 rounded-full border border-border-strong" />
       )}
       <div className="flex-1">
-        <div className={cn(
-          "text-sm leading-snug",
-          isDoing && "text-ink-primary font-medium",
-          isDone && "text-ink-muted line-through decoration-ink-faint/60",
-          !isDoing && !isDone && "text-ink-secondary",
-        )}>
+        <div
+          className={cn(
+            "text-sm leading-snug",
+            isDoing && "text-ink-primary font-medium",
+            isDone && "text-ink-muted line-through decoration-ink-faint/60",
+            !isDoing && !isDone && "text-ink-secondary",
+          )}
+        >
           {item.title}
         </div>
         {"note" in item && item.note && !isDone && (
@@ -819,29 +952,49 @@ function FormsView() {
         <div className="mb-5 flex items-baseline justify-between">
           <div>
             <h2 className="font-serif text-2xl text-ink-primary">Working drafts</h2>
-            <p className="text-ink-secondary text-sm mt-1">Live as you talk — Luca fills lines as facts come in.</p>
+            <p className="text-ink-secondary text-sm mt-1">
+              Live as you talk — Luca fills lines as facts come in.
+            </p>
           </div>
-          <span className="text-[11px] text-ink-muted uppercase tracking-wider">{FORMS.length} forms</span>
+          <span className="text-[11px] text-ink-muted uppercase tracking-wider">
+            {FORMS.length} forms
+          </span>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {FORMS.map((f) => (
-            <div key={f.id} className="card p-5 hover:border-border-strong transition-colors cursor-pointer">
+            <div
+              key={f.id}
+              className="card p-5 hover:border-border-strong transition-colors cursor-pointer"
+            >
               <div className="flex items-start justify-between">
                 <div>
-                  <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">{f.id}</div>
+                  <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">
+                    {f.id}
+                  </div>
                   <div className="font-serif text-lg text-ink-primary mt-1">{f.label}</div>
                 </div>
-                <span className={cn(
-                  "px-2 py-0.5 rounded text-[10px] uppercase tracking-wide",
-                  f.status === "drafting" ? "bg-accent/15 text-accent" : "bg-bg-elevated text-ink-muted",
-                )}>{f.status}</span>
+                <span
+                  className={cn(
+                    "px-2 py-0.5 rounded text-[10px] uppercase tracking-wide",
+                    f.status === "drafting"
+                      ? "bg-accent/15 text-accent"
+                      : "bg-bg-elevated text-ink-muted",
+                  )}
+                >
+                  {f.status}
+                </span>
               </div>
               <div className="mt-4">
                 <div className="h-1.5 rounded-full bg-bg-elevated overflow-hidden">
-                  <div className="h-full bg-accent transition-all duration-500" style={{ width: `${(f.filled / f.total) * 100}%` }} />
+                  <div
+                    className="h-full bg-accent transition-all duration-500"
+                    style={{ width: `${(f.filled / f.total) * 100}%` }}
+                  />
                 </div>
                 <div className="flex items-baseline justify-between mt-2 text-xs">
-                  <span className="text-ink-muted tabular-nums">{f.filled} / {f.total} fields</span>
+                  <span className="text-ink-muted tabular-nums">
+                    {f.filled} / {f.total} fields
+                  </span>
                   <div className="flex items-center gap-3 text-ink-secondary">
                     <button className="hover:text-ink-primary">PDF ↓</button>
                     <span>Open →</span>
@@ -856,7 +1009,9 @@ function FormsView() {
       <section>
         <div className="mb-5">
           <h2 className="font-serif text-2xl text-ink-primary">Deliverables</h2>
-          <p className="text-ink-secondary text-sm mt-1">Packaged outputs — ready to share with your CPA or file.</p>
+          <p className="text-ink-secondary text-sm mt-1">
+            Packaged outputs — ready to share with your CPA or file.
+          </p>
         </div>
         <div className="space-y-3">
           <div className="card p-4 flex items-center gap-4">
@@ -865,19 +1020,27 @@ function FormsView() {
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-medium text-ink-primary">CPA review packet</div>
-              <div className="text-[11px] text-ink-muted mt-0.5">Pending — completes when all working drafts are signed off</div>
+              <div className="text-[11px] text-ink-muted mt-0.5">
+                Pending — completes when all working drafts are signed off
+              </div>
             </div>
-            <span className="text-[10px] px-2 py-1 rounded bg-bg-elevated text-ink-muted uppercase tracking-wide">Not ready</span>
+            <span className="text-[10px] px-2 py-1 rounded bg-bg-elevated text-ink-muted uppercase tracking-wide">
+              Not ready
+            </span>
           </div>
           <div className="card p-4 flex items-center gap-4">
             <div className="w-10 h-12 rounded bg-bg-elevated border border-border-subtle flex items-center justify-center text-ink-muted text-[10px] font-mono">
               ZIP
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-sm font-medium text-ink-primary">Filing bundle (1040 + schedules + CA 540)</div>
+              <div className="text-sm font-medium text-ink-primary">
+                Filing bundle (1040 + schedules + CA 540)
+              </div>
               <div className="text-[11px] text-ink-muted mt-0.5">Pending CPA sign-off</div>
             </div>
-            <span className="text-[10px] px-2 py-1 rounded bg-bg-elevated text-ink-muted uppercase tracking-wide">Not ready</span>
+            <span className="text-[10px] px-2 py-1 rounded bg-bg-elevated text-ink-muted uppercase tracking-wide">
+              Not ready
+            </span>
           </div>
         </div>
       </section>
@@ -897,9 +1060,13 @@ function DocumentsView() {
       <div className="flex items-baseline justify-between mb-5">
         <div>
           <h2 className="font-serif text-2xl text-ink-primary">Documents</h2>
-          <p className="text-ink-secondary text-sm mt-1">W-2s, 1099s, K-1s — anything you've uploaded.</p>
+          <p className="text-ink-secondary text-sm mt-1">
+            W-2s, 1099s, K-1s — anything you've uploaded.
+          </p>
         </div>
-        <span className="text-[11px] text-ink-muted uppercase tracking-wider">{SOURCE_DOCS.length} files</span>
+        <span className="text-[11px] text-ink-muted uppercase tracking-wider">
+          {SOURCE_DOCS.length} files
+        </span>
       </div>
 
       <DropZone />
@@ -917,7 +1084,9 @@ function DropZone() {
   return (
     <div className="border-2 border-dashed border-border-subtle hover:border-accent/50 rounded-2xl py-10 px-6 text-center bg-bg-subtle/40 transition-colors cursor-pointer">
       <div className="text-3xl text-ink-muted">⬆</div>
-      <div className="mt-2 text-sm text-ink-primary">Drop W-2s, 1099s, or other tax documents here</div>
+      <div className="mt-2 text-sm text-ink-primary">
+        Drop W-2s, 1099s, or other tax documents here
+      </div>
       <div className="text-xs text-ink-muted mt-1">PDF, PNG, JPG · up to 10 MB each</div>
       <button className="mt-4 text-xs text-accent hover:text-accent-hover">or browse files</button>
     </div>
@@ -945,8 +1114,12 @@ function DocCard({ doc }: { doc: (typeof SOURCE_DOCS)[number] }) {
         <div className="text-[11px] text-ink-muted mt-0.5">{doc.size}</div>
       </div>
       <div className="mt-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button className="flex-1 text-xs py-1.5 rounded border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary">Preview</button>
-        <button className="flex-1 text-xs py-1.5 rounded border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary">Send to Luca</button>
+        <button className="flex-1 text-xs py-1.5 rounded border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary">
+          Preview
+        </button>
+        <button className="flex-1 text-xs py-1.5 rounded border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary">
+          Send to Luca
+        </button>
       </div>
     </div>
   );

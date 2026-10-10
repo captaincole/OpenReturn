@@ -13,10 +13,7 @@
  *              Vectors from different models live in different spaces.
  */
 
-import {
-  setBlockEmbeddings,
-  listBlocksWithoutEmbeddings,
-} from "../../src/mastra/db/refDocs";
+import { setBlockEmbeddings, listBlocksWithoutEmbeddings } from "../../src/mastra/db/refDocs";
 import { resolveEmbeddings, embedDocuments } from "../../src/refdocs/embeddings";
 import type { Command } from "../lib/cli";
 
@@ -59,7 +56,8 @@ async function run(argv: string[]): Promise<void> {
 
 export const reembedCommand: Command = {
   name: "reembed",
-  summary: "Embed blocks via the active provider (recover a failed sync, or --all to switch models)",
+  summary:
+    "Embed blocks via the active provider (recover a failed sync, or --all to switch models)",
   options: [
     {
       flag: "--all",

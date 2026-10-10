@@ -17,12 +17,7 @@ export type ActivityKind = "fact" | "decision";
  * record-ai-decision sets while the background review runs.
  */
 export type Verdict =
-  | "pending"
-  | "accurate"
-  | "inaccurate"
-  | "ungroundable"
-  | "needs_more_facts"
-  | "review_failed";
+  "pending" | "accurate" | "inaccurate" | "ungroundable" | "needs_more_facts" | "review_failed";
 export type Confidence = "low" | "medium" | "high";
 
 export interface ActivityItem {

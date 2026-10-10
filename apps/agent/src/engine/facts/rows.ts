@@ -25,12 +25,7 @@ export type Confidence = "low" | "medium" | "high";
  * re-stamps the row on completion, typically within seconds to a minute.
  */
 export type Verdict =
-  | "pending"
-  | "accurate"
-  | "inaccurate"
-  | "ungroundable"
-  | "needs_more_facts"
-  | "review_failed";
+  "pending" | "accurate" | "inaccurate" | "ungroundable" | "needs_more_facts" | "review_failed";
 
 export interface AuthorityCitation {
   blockId: string;

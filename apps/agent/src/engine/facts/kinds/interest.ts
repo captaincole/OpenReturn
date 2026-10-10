@@ -26,22 +26,22 @@ export interface InterestFactValue {
    * taxable interest income, which flows to 1040 line 2b. Other boxes
    * only populate when specific situations apply.
    */
-  box1?: number;   // Interest income
-  box2?: number;   // Early withdrawal penalty (an above-the-line deduction)
-  box3?: number;   // US savings bond and Treasury interest
-  box4?: number;   // Federal income tax withheld
-  box5?: number;   // Investment expenses
-  box6?: number;   // Foreign tax paid
-  box7?: string;   // Foreign country or US territory
-  box8?: number;   // Tax-exempt interest (flows to 1040 line 2a)
-  box9?: number;   // Specified private activity bond interest (AMT-relevant)
-  box10?: number;  // Market discount
-  box11?: number;  // Bond premium
-  box12?: number;  // Bond premium on Treasury obligations
-  box13?: number;  // Bond premium on tax-exempt bonds
-  box15?: string;  // State
-  box16?: string;  // State identification number
-  box17?: number;  // State income tax withheld
+  box1?: number; // Interest income
+  box2?: number; // Early withdrawal penalty (an above-the-line deduction)
+  box3?: number; // US savings bond and Treasury interest
+  box4?: number; // Federal income tax withheld
+  box5?: number; // Investment expenses
+  box6?: number; // Foreign tax paid
+  box7?: string; // Foreign country or US territory
+  box8?: number; // Tax-exempt interest (flows to 1040 line 2a)
+  box9?: number; // Specified private activity bond interest (AMT-relevant)
+  box10?: number; // Market discount
+  box11?: number; // Bond premium
+  box12?: number; // Bond premium on Treasury obligations
+  box13?: number; // Bond premium on tax-exempt bonds
+  box15?: string; // State
+  box16?: string; // State identification number
+  box17?: number; // State income tax withheld
 }
 
 export interface InterestFact {

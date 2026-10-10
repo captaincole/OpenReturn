@@ -18,16 +18,16 @@ import type { TaxFactRow } from "../rows.js";
 
 export interface TradeFactValue {
   tradeId: string;
-  description: string;             // "APPLE INC"
+  description: string; // "APPLE INC"
   cusip?: string;
   symbol?: string;
   quantity: number;
-  dateAcquired: string;            // "MM/DD/YY" as printed on the 1099-B
+  dateAcquired: string; // "MM/DD/YY" as printed on the 1099-B
   dateSold: string;
   proceeds: number;
   costBasis: number;
-  adjustmentCode?: string;         // Form 8949 column (f), optional
-  adjustmentAmount?: number;       // column (g), optional
+  adjustmentCode?: string; // Form 8949 column (f), optional
+  adjustmentAmount?: number; // column (g), optional
 }
 
 /**

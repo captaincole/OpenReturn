@@ -9,12 +9,7 @@
  */
 
 export type RequestedActionKind = "upload" | "confirm" | "decide";
-export type RequestedActionStatus =
-  | "open"
-  | "processing"
-  | "resolved"
-  | "skipped"
-  | "dismissed";
+export type RequestedActionStatus = "open" | "processing" | "resolved" | "skipped" | "dismissed";
 
 export interface RequestedAction {
   id: string;
@@ -35,9 +30,7 @@ export interface RequestedAction {
  * in flight. Resolved / skipped / dismissed cards stay in the DB for
  * audit. The UI does not show them.
  */
-export async function fetchOpenActions(
-  taxYear: number,
-): Promise<RequestedAction[]> {
+export async function fetchOpenActions(taxYear: number): Promise<RequestedAction[]> {
   const res = await fetch(`/api/requested-actions?year=${taxYear}`, {
     cache: "no-store",
   });
@@ -50,29 +43,20 @@ export async function fetchOpenActions(
  * (status='processing' shows a "Luca is reviewing this" indicator) until
  * Luca calls dismiss-requested-action after ingest.
  */
-export async function markActionProcessing(
-  actionId: string,
-  documentId: string,
-): Promise<void> {
-  const res = await fetch(
-    `/api/requested-actions/${encodeURIComponent(actionId)}`,
-    {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: "processing", documentId }),
-    },
-  );
+export async function markActionProcessing(actionId: string, documentId: string): Promise<void> {
+  const res = await fetch(`/api/requested-actions/${encodeURIComponent(actionId)}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status: "processing", documentId }),
+  });
   if (!res.ok) throw new Error(`mark action processing: ${res.status}`);
 }
 
 export async function skipAction(actionId: string): Promise<void> {
-  const res = await fetch(
-    `/api/requested-actions/${encodeURIComponent(actionId)}`,
-    {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: "skipped" }),
-    },
-  );
+  const res = await fetch(`/api/requested-actions/${encodeURIComponent(actionId)}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status: "skipped" }),
+  });
   if (!res.ok) throw new Error(`skip action: ${res.status}`);
 }

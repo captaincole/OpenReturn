@@ -90,7 +90,12 @@ const CATEGORIES: Category[] = [
     items: [
       { id: "w1", label: "W-2 wages", status: "done" },
       { id: "w2", label: "Federal withholding", status: "done" },
-      { id: "w3", label: "Self-employment income (1099-NEC)", status: "todo", note: "Confirm none" },
+      {
+        id: "w3",
+        label: "Self-employment income (1099-NEC)",
+        status: "todo",
+        note: "Confirm none",
+      },
     ],
     docHints: ["w-2", "w2", "1099-nec"],
     formIds: ["1040"],
@@ -114,7 +119,12 @@ const CATEGORIES: Category[] = [
     label: "Deductions",
     pct: 0,
     items: [
-      { id: "d1", label: "Standard vs itemized comparison", status: "todo", note: "Decides which path is worth pursuing" },
+      {
+        id: "d1",
+        label: "Standard vs itemized comparison",
+        status: "todo",
+        note: "Decides which path is worth pursuing",
+      },
       { id: "d2", label: "Charitable contributions", status: "todo" },
       { id: "d3", label: "Mortgage interest (Form 1098)", status: "todo" },
       { id: "d4", label: "State and local taxes (SALT)", status: "todo" },
@@ -333,9 +343,7 @@ function CategoryDetailsPanel({
           <span className="text-[11px] uppercase tracking-[0.18em] text-ink-muted">
             {category.label}
           </span>
-          <span className="text-[11px] text-ink-faint">
-            · {category.items.length} workflows
-          </span>
+          <span className="text-[11px] text-ink-faint">· {category.items.length} workflows</span>
         </div>
         <button
           onClick={onCollapse}
@@ -361,12 +369,7 @@ function CategoryDetailsPanel({
         </button>
       )}
 
-      <CategoryQuickLinks
-        category={category}
-        uploads={uploads}
-        forms={forms}
-        returnId={returnId}
-      />
+      <CategoryQuickLinks category={category} uploads={uploads} forms={forms} returnId={returnId} />
     </div>
   );
 }
@@ -460,15 +463,14 @@ function CategoryQuickLinks({
               const pct = total === 0 ? 0 : Math.round((filled / total) * 100);
               return (
                 <li key={f.formId}>
-                  <Link
-                    href={`/r/${returnId}/forms`}
-                    className="block group"
-                  >
+                  <Link href={`/r/${returnId}/forms`} className="block group">
                     <div className="flex items-baseline justify-between gap-2">
                       <span className="text-[12px] text-ink-secondary group-hover:text-ink-primary truncate">
                         {f.title}
                       </span>
-                      <span className="text-[10px] text-ink-muted tabular-nums shrink-0">{pct}%</span>
+                      <span className="text-[10px] text-ink-muted tabular-nums shrink-0">
+                        {pct}%
+                      </span>
                     </div>
                     <div className="mt-1 h-1 rounded-full bg-bg-elevated overflow-hidden">
                       <div
@@ -502,9 +504,20 @@ function CategoryItemRow({ item }: { item: CategoryItem }) {
         )}
       >
         {isDone ? (
-          <svg viewBox="0 0 16 16" className="shrink-0 mt-[3px] w-3.5 h-3.5 text-emerald-400" aria-hidden>
+          <svg
+            viewBox="0 0 16 16"
+            className="shrink-0 mt-[3px] w-3.5 h-3.5 text-emerald-400"
+            aria-hidden
+          >
             <circle cx="8" cy="8" r="7.5" fill="currentColor" opacity="0.18" />
-            <path d="M4.5 8.2 6.8 10.5 11.5 5.8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            <path
+              d="M4.5 8.2 6.8 10.5 11.5 5.8"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
           </svg>
         ) : isDoing ? (
           <span className="shrink-0 mt-[5px] w-2.5 h-2.5 rounded-full bg-accent animate-pulse-soft" />
@@ -517,7 +530,9 @@ function CategoryItemRow({ item }: { item: CategoryItem }) {
               "text-sm leading-snug",
               isDoing && "text-ink-primary font-medium",
               isDone && "text-ink-muted",
-              !isDoing && !isDone && "text-ink-secondary group-hover:text-ink-primary transition-colors",
+              !isDoing &&
+                !isDone &&
+                "text-ink-secondary group-hover:text-ink-primary transition-colors",
             )}
           >
             {item.label}
@@ -680,19 +695,46 @@ function ActionCard({
     <div className="surface px-4 py-3.5 flex items-start gap-3.5 hover:border-border-strong transition-colors">
       <div className="shrink-0 w-9 h-9 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
         {action.kind === "upload" && (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
             <polyline points="17 8 12 3 7 8" />
             <line x1="12" y1="3" x2="12" y2="15" />
           </svg>
         )}
         {action.kind === "confirm" && (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <polyline points="20 6 9 17 4 12" />
           </svg>
         )}
         {action.kind === "decide" && (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <circle cx="12" cy="12" r="9" />
             <line x1="12" y1="8" x2="12" y2="12" />
             <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -815,12 +857,7 @@ function ActivityTicker({ refreshKey }: { refreshKey: number }) {
             </div>
           </div>
 
-          {selected && (
-            <ActivityDetailPanel
-              item={selected}
-              onClose={() => setSelected(null)}
-            />
-          )}
+          {selected && <ActivityDetailPanel item={selected} onClose={() => setSelected(null)} />}
         </>
       )}
     </section>
@@ -860,10 +897,16 @@ function ActivityChip({
         </span>
         <span className="text-[10px] text-ink-faint tabular-nums">{timeAgo(item.createdAt)}</span>
       </div>
-      <div className="text-[12px] text-ink-primary leading-tight truncate" title={humanizeKey(item.title)}>
+      <div
+        className="text-[12px] text-ink-primary leading-tight truncate"
+        title={humanizeKey(item.title)}
+      >
         {humanizeKey(item.title)}
       </div>
-      <div className="text-[12px] text-ink-secondary leading-tight truncate" title={briefValue(item.value)}>
+      <div
+        className="text-[12px] text-ink-secondary leading-tight truncate"
+        title={briefValue(item.value)}
+      >
         {briefValue(item.value)}
       </div>
       {isDecision && item.verdict && <VerdictBadge verdict={item.verdict} />}
@@ -876,13 +919,7 @@ function ActivityChip({
  * when a chip is clicked. Matches the Progress drill-down pattern: the
  * card grows vertically instead of overlaying a modal.
  */
-function ActivityDetailPanel({
-  item,
-  onClose,
-}: {
-  item: ActivityItem;
-  onClose: () => void;
-}) {
+function ActivityDetailPanel({ item, onClose }: { item: ActivityItem; onClose: () => void }) {
   const isDecision = item.kind === "decision";
   return (
     <div className="px-5 pb-5 pt-4 border-t border-border-subtle animate-fade-in">
@@ -896,8 +933,12 @@ function ActivityDetailPanel({
           >
             {item.kind}
           </span>
-          <span className="font-serif text-[15px] text-ink-primary truncate">{humanizeKey(item.title)}</span>
-          <span className="text-[11px] text-ink-faint tabular-nums shrink-0">{timeAgo(item.createdAt)} ago</span>
+          <span className="font-serif text-[15px] text-ink-primary truncate">
+            {humanizeKey(item.title)}
+          </span>
+          <span className="text-[11px] text-ink-faint tabular-nums shrink-0">
+            {timeAgo(item.createdAt)} ago
+          </span>
         </div>
         <button
           type="button"
@@ -933,7 +974,9 @@ function ActivityDetailPanel({
 
         {isDecision && item.rationale && (
           <DetailBlock label="Why Luca decided this">
-            <p className="text-ink-secondary leading-relaxed whitespace-pre-wrap">{item.rationale}</p>
+            <p className="text-ink-secondary leading-relaxed whitespace-pre-wrap">
+              {item.rationale}
+            </p>
           </DetailBlock>
         )}
 
@@ -1037,7 +1080,9 @@ function humanizeKey(key: string): string {
   const parts = key.split(/[._]/);
   return parts
     .map((part, i) =>
-      i === 0 ? part.charAt(0).toUpperCase() + part.replace(/-/g, " ").slice(1) : part.replace(/-/g, " "),
+      i === 0
+        ? part.charAt(0).toUpperCase() + part.replace(/-/g, " ").slice(1)
+        : part.replace(/-/g, " "),
     )
     .join(" · ");
 }

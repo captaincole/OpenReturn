@@ -14,10 +14,7 @@ import { getDocumentById, hasMembership } from "@/lib/serverDb";
  * `?download=1` switches Content-Disposition to attachment, so the
  * Download button forces a save instead of inline rendering.
  */
-export async function GET(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   if (!id) {
     return NextResponse.json({ error: "Missing id" }, { status: 400 });

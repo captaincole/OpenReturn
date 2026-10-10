@@ -26,11 +26,7 @@ export const alejandroDecisions: AIDecisionRow[] = [
     true,
     "W-2 wages $100,000 plus dividend and capital-gain income exceed the single-filer standard deduction; Alejandro must file.",
   ),
-  dec(
-    "decisions.scope.filing_status",
-    "single",
-    "Alejandro stated single filing status.",
-  ),
+  dec("decisions.scope.filing_status", "single", "Alejandro stated single filing status."),
   dec(
     "decisions.scope.has_reportable_sales",
     true,

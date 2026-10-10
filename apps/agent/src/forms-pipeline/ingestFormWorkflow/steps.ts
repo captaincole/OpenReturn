@@ -26,16 +26,8 @@ import {
   afterClassifySchema,
   workflowOutputSchema,
 } from "./schemas.js";
-import {
-  extractFormFields,
-  type ExtractedField,
-  type FieldKind,
-} from "../extractFormFields.js";
-import {
-  classifyFields,
-  type FieldEnrichment,
-  type ValueType,
-} from "../classifyFields.js";
+import { extractFormFields, type ExtractedField, type FieldKind } from "../extractFormFields.js";
+import { classifyFields, type FieldEnrichment, type ValueType } from "../classifyFields.js";
 import { getCorpusDb, ensureCorpusSchema } from "../../mastra/db/libsql.js";
 
 // ─── extract ─────────────────────────────────────────────────────────────
@@ -158,9 +150,7 @@ export const persistStep = createStep({
   execute: async ({ inputData }) => {
     const enrichmentByName = new Map<string, FieldEnrichment>();
     for (const e of inputData.enrichments) enrichmentByName.set(e.pdfFieldName, e);
-    const skippedByName = new Set<string>(
-      inputData.skipped.map((s) => s.pdfFieldName),
-    );
+    const skippedByName = new Set<string>(inputData.skipped.map((s) => s.pdfFieldName));
 
     const catalog: CatalogRow[] = [];
     const unenriched: string[] = [];
@@ -175,13 +165,9 @@ export const persistStep = createStep({
 
     // Round-trip invariant: every non-skipped field must appear in the catalog.
     const expectedNames = new Set(
-      inputData.fields
-        .filter((f) => !skippedByName.has(f.fieldName))
-        .map((f) => f.fieldName),
+      inputData.fields.filter((f) => !skippedByName.has(f.fieldName)).map((f) => f.fieldName),
     );
-    const actualNames = new Set(
-      catalog.map((r) => r.pdfWidgetName ?? "").filter(Boolean),
-    );
+    const actualNames = new Set(catalog.map((r) => r.pdfWidgetName ?? "").filter(Boolean));
     const missing = [...expectedNames].filter((n) => !actualNames.has(n));
     if (missing.length > 0) {
       throw new Error(
@@ -211,11 +197,7 @@ export const persistStep = createStep({
         cacheCreate: inputData.usage.cache_creation_input_tokens,
       },
     };
-    await fs.writeFile(
-      inputData.outputPath,
-      JSON.stringify(payload, null, 2),
-      "utf8",
-    );
+    await fs.writeFile(inputData.outputPath, JSON.stringify(payload, null, 2), "utf8");
 
     let dbWritten = false;
     if (inputData.writeDb) {
@@ -352,8 +334,7 @@ function buildCatalogRow(
       (enrichment?.options ?? []).map((o) => [o.radioOption, o.value]),
     );
     row.options = field.radioOptions.map((radioOption) => ({
-      value:
-        enrichmentByRadioOption.get(radioOption) ?? slugifyOption(radioOption),
+      value: enrichmentByRadioOption.get(radioOption) ?? slugifyOption(radioOption),
       radioOption,
       label: radioOption,
     }));

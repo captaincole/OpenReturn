@@ -20,29 +20,31 @@ async function run(argv: string[]): Promise<void> {
   });
   const query = positionals.join(" ").trim();
   if (!query) {
-    console.error('required: a query string (see --help)');
+    console.error("required: a query string (see --help)");
     process.exit(1);
   }
 
-  const result = await (searchRefDocsTool as unknown as {
-    execute: (input: {
-      query: string;
-      limit?: number;
-      mode?: "fts" | "vector" | "hybrid";
-      docId?: string;
-    }) => Promise<{
-      query: string;
-      results: {
-        blockId: string;
-        citation: string;
-        sectionHeading: string | null;
-        pageNum: number;
-        score: number;
-        snippet: string;
-        text: string;
-      }[];
-    }>;
-  }).execute({
+  const result = await (
+    searchRefDocsTool as unknown as {
+      execute: (input: {
+        query: string;
+        limit?: number;
+        mode?: "fts" | "vector" | "hybrid";
+        docId?: string;
+      }) => Promise<{
+        query: string;
+        results: {
+          blockId: string;
+          citation: string;
+          sectionHeading: string | null;
+          pageNum: number;
+          score: number;
+          snippet: string;
+          text: string;
+        }[];
+      }>;
+    }
+  ).execute({
     query,
     limit: Math.max(1, Math.min(Number(values.limit), 25)),
     mode: values.mode as "fts" | "vector" | "hybrid",

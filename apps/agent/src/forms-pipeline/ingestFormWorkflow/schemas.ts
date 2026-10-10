@@ -8,13 +8,7 @@ import { z } from "zod";
 
 // ─── Primitive shapes shared across steps ────────────────────────────────
 
-const fieldKindSchema = z.enum([
-  "text",
-  "checkbox",
-  "radio",
-  "signature",
-  "other",
-]);
+const fieldKindSchema = z.enum(["text", "checkbox", "radio", "signature", "other"]);
 
 const labelSourceSchema = z.enum(["tu", "vision"]);
 

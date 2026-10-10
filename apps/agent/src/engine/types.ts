@@ -47,9 +47,7 @@ export interface EngineDerivation {
 
 // ─── Result of evaluating a single derivation ────────────────────────────
 
-export type DerivationResult<T> =
-  | DerivationOk<T>
-  | DerivationBlocked;
+export type DerivationResult<T> = DerivationOk<T> | DerivationBlocked;
 
 export interface DerivationOk<T> {
   ok: true;
@@ -155,19 +153,14 @@ export interface DecisionsView {
  */
 
 export type Category =
-  | "personal_info"        // taxpayer name, SSN, address, DOB (form-header fields)
-  | "filing_scope"         // filing status, residency, must-file decisions
-  | "income"               // wages, dividends, capital gains, withholding
-  | "deductions_credits"   // standard deduction, taxable income, tax, credits, payments
+  | "personal_info" // taxpayer name, SSN, address, DOB (form-header fields)
+  | "filing_scope" // filing status, residency, must-file decisions
+  | "income" // wages, dividends, capital gains, withholding
+  | "deductions_credits" // standard deduction, taxable income, tax, credits, payments
   | "other";
 
 export type FieldValueType =
-  | "numeric"
-  | "single_select"
-  | "multi_select"
-  | "text"
-  | "boolean"
-  | "date";
+  "numeric" | "single_select" | "multi_select" | "text" | "boolean" | "date";
 
 /*
  * ─── Evaluated form / field shapes ───────────────────────────────────────
@@ -209,7 +202,7 @@ export type AnyFormField = BaseFormField & { formFieldKind: string };
 
 export interface EvaluatedForm<F extends BaseFormField = AnyFormField> {
   formId: string;
-  jurisdiction: string;            // "federal" | "state-ca" | …
+  jurisdiction: string; // "federal" | "state-ca" | …
   title: string;
   taxYear: number;
   mustFile: DerivationResult<boolean>;
@@ -222,8 +215,9 @@ export interface EvaluatedForm<F extends BaseFormField = AnyFormField> {
   fields: F[];
 }
 
-export type FormEvaluator<F extends BaseFormField = AnyFormField> =
-  (ctx: DerivationContext) => EvaluatedForm<F>;
+export type FormEvaluator<F extends BaseFormField = AnyFormField> = (
+  ctx: DerivationContext,
+) => EvaluatedForm<F>;
 
 // ─── In-memory view builders (used by tests and evaluateScenario) ────────
 

@@ -72,11 +72,7 @@ export type RiskAssessment = z.infer<typeof riskAssessmentSchema>;
  * ---------------------------------------------------------------------------
  */
 
-export const verdictSchema = z.enum([
-  "accurate",
-  "inaccurate",
-  "needs_more_facts",
-]);
+export const verdictSchema = z.enum(["accurate", "inaccurate", "needs_more_facts"]);
 export type WorkflowVerdict = z.infer<typeof verdictSchema>;
 
 export const ruleVerdictOutputSchema = z.object({
@@ -88,9 +84,7 @@ export const ruleVerdictOutputSchema = z.object({
 
 export const ruleNeedMoreOutputSchema = z.object({
   kind: z.literal("need_more_evidence"),
-  reason: z
-    .string()
-    .describe("Why current evidence is insufficient for this risk tier."),
+  reason: z.string().describe("Why current evidence is insufficient for this risk tier."),
   suggestedQueries: z
     .array(z.string())
     .min(1)
@@ -166,12 +160,7 @@ export const reviewDecisionOutputSchema = z.object({
   reviewRunId: z.string(),
   iterationCount: z.number().int().min(1).max(3),
   riskTier: riskTierSchema.nullable(),
-  finalVerdict: z.enum([
-    "accurate",
-    "inaccurate",
-    "needs_more_facts",
-    "review_failed",
-  ]),
+  finalVerdict: z.enum(["accurate", "inaccurate", "needs_more_facts", "review_failed"]),
   reason: z.string(),
   citations: z.array(authorityCitationSchema),
   /*

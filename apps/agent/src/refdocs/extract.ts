@@ -21,10 +21,9 @@ export async function extractPdf(path: string): Promise<ExtractedPdf> {
   const buf = await readFile(path);
   const sha256 = createHash("sha256").update(buf).digest("hex");
 
-  const { totalPages, text: pageTexts } = await extractText(
-    new Uint8Array(buf),
-    { mergePages: false },
-  );
+  const { totalPages, text: pageTexts } = await extractText(new Uint8Array(buf), {
+    mergePages: false,
+  });
 
   const pages: PageSlice[] = [];
   const chunks: string[] = [];

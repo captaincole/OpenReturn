@@ -125,9 +125,7 @@ async function run(argv: string[]): Promise<void> {
   }
 
   const spotResults = source.spotChecks.map((sc) => {
-    const row = rows.find(
-      (r) => sc.taxableIncome >= r.low && sc.taxableIncome <= r.high,
-    );
+    const row = rows.find((r) => sc.taxableIncome >= r.low && sc.taxableIncome <= r.high);
     const got = row ? row[sc.column] : null;
     return { ...sc, got, pass: got === sc.expectedTax };
   });
@@ -172,10 +170,7 @@ async function run(argv: string[]): Promise<void> {
   console.log(`${LOG} wrote ${path.relative(process.cwd(), jsonPath)}`);
 }
 
-function serializeWithCompactRows(
-  header: Record<string, unknown>,
-  rows: CATaxTableRow[],
-): string {
+function serializeWithCompactRows(header: Record<string, unknown>, rows: CATaxTableRow[]): string {
   const headerJson = JSON.stringify(header, null, 2);
   const headerOpen = headerJson.slice(0, headerJson.lastIndexOf("}"));
   const rowLines = rows

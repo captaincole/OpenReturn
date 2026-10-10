@@ -55,10 +55,7 @@ interface MessagesResponse {
   };
 }
 
-async function callMessages(
-  body: unknown,
-  attempt = 0,
-): Promise<MessagesResponse> {
+async function callMessages(body: unknown, attempt = 0): Promise<MessagesResponse> {
   const res = await fetch(`${ANTHROPIC_BASE}/messages`, {
     method: "POST",
     headers: {
@@ -168,9 +165,7 @@ export interface SummarizeAllOpts {
   onProgress?: (done: number, total: number) => void;
 }
 
-export async function summarizeBlocks(
-  opts: SummarizeAllOpts,
-): Promise<SummarizedBlock[]> {
+export async function summarizeBlocks(opts: SummarizeAllOpts): Promise<SummarizedBlock[]> {
   const concurrency = Math.max(1, Math.min(opts.concurrency ?? 5, 16));
   /*
    * Sort blocks so all blocks in the same section run consecutively. The

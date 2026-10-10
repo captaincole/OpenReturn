@@ -124,9 +124,7 @@ export interface CreateDocumentResult {
  * The reverse order leaves a row that points at missing bytes, which is
  * worse: broken download links.
  */
-export async function createDocument(
-  input: CreateDocumentInput,
-): Promise<CreateDocumentResult> {
+export async function createDocument(input: CreateDocumentInput): Promise<CreateDocumentResult> {
   await ensureAppSchema();
   const storagePath = buildStoragePath(
     input.filingId,

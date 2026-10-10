@@ -53,8 +53,6 @@ describe("lookupRateSchedule — 2025 federal", () => {
   });
 
   it("throws on unknown tax year", () => {
-    expect(() => lookupRateSchedule(2099, "single", 150000)).toThrow(
-      /No rate schedule/,
-    );
+    expect(() => lookupRateSchedule(2099, "single", 150000)).toThrow(/No rate schedule/);
   });
 });

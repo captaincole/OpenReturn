@@ -1,9 +1,4 @@
-import {
-  getAppDb,
-  ensureAppSchema,
-  type Scope,
-  nowIso,
-} from "./appDb";
+import { getAppDb, ensureAppSchema, type Scope, nowIso } from "./appDb";
 
 /*
  * Persistence for the review-decision workflow. Two tables:
@@ -28,10 +23,7 @@ export interface InsertReviewRunArgs {
   filingId: string;
 }
 
-export async function insertReviewRun(
-  scope: Scope,
-  args: InsertReviewRunArgs,
-): Promise<void> {
+export async function insertReviewRun(scope: Scope, args: InsertReviewRunArgs): Promise<void> {
   await ensureAppSchema();
   await getAppDb().execute({
     sql: `INSERT INTO review_runs (id, decision_id, user_id, filing_id, status, started_at)
@@ -50,10 +42,7 @@ export interface CompleteReviewRunArgs {
   error?: string;
 }
 
-export async function completeReviewRun(
-  scope: Scope,
-  args: CompleteReviewRunArgs,
-): Promise<void> {
+export async function completeReviewRun(scope: Scope, args: CompleteReviewRunArgs): Promise<void> {
   await ensureAppSchema();
   await getAppDb().execute({
     sql: `UPDATE review_runs
@@ -85,10 +74,7 @@ export interface RecordStepArgs {
   durationMs: number;
 }
 
-export async function recordReviewStep(
-  scope: Scope,
-  args: RecordStepArgs,
-): Promise<void> {
+export async function recordReviewStep(scope: Scope, args: RecordStepArgs): Promise<void> {
   await ensureAppSchema();
   await getAppDb().execute({
     sql: `INSERT INTO review_run_steps

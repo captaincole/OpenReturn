@@ -9,10 +9,7 @@ import { markActionProcessing, skipAction } from "@/lib/serverDb";
  * Both UPDATEs scope by (id, user_id) in serverDb, so a caller can touch
  * only their own cards.
  */
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   if (!id) return NextResponse.json({ error: "missing id" }, { status: 400 });
 
@@ -39,10 +36,7 @@ export async function PATCH(
   } else if (body.status === "skipped") {
     await skipAction(session.userId, id);
   } else {
-    return NextResponse.json(
-      { error: `unsupported status '${body.status}'` },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: `unsupported status '${body.status}'` }, { status: 400 });
   }
 
   return NextResponse.json({ ok: true });

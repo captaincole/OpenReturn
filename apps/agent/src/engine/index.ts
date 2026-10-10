@@ -35,12 +35,7 @@ import type { AIDecisionRow } from "./facts/rows.js";
 import { evaluateAllForms } from "./engine.js";
 import { resolveFilingInfo, type FilingInfo } from "./filingInfo.js";
 import { fillFromCatalog, type RenderedWidget } from "./render/fillFromCatalog.js";
-import {
-  FORMS,
-  catalog as bundledCatalog,
-  getFormSpec,
-  registerAllForms,
-} from "./registry.js";
+import { FORMS, catalog as bundledCatalog, getFormSpec, registerAllForms } from "./registry.js";
 import {
   makeDecisionsView,
   makeFactsView,
@@ -162,12 +157,7 @@ export async function renderForm(
         `Was evaluateScenario called with a registry that includes this form?`,
     );
   }
-  const blankPdfPath = resolve(
-    process.cwd(),
-    "forms",
-    spec.relativeDir,
-    "blank.pdf",
-  );
+  const blankPdfPath = resolve(process.cwd(), "forms", spec.relativeDir, "blank.pdf");
   const blankPdfBytes = await readFile(blankPdfPath);
   return fillFromCatalog({ blankPdfBytes, form, catalog: bundledCatalog });
 }

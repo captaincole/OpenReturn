@@ -20,20 +20,20 @@ export interface DividendFactValue {
    * 1099-DIV box totals, all optional. Boxes 1a/1b are the common case.
    * Other boxes only populate when specific situations apply.
    */
-  box1a?: number;   // Total ordinary dividends
-  box1b?: number;   // Qualified dividends
-  box2a?: number;   // Total capital gain distributions
-  box2b?: number;   // Unrecap. Sec. 1250 gain
-  box2d?: number;   // Collectibles (28%) gain
-  box3?: number;    // Non-dividend distributions
-  box4?: number;    // Federal income tax withheld
-  box5?: number;    // Section 199A dividends
-  box6?: number;    // Investment expenses
-  box7?: number;    // Foreign tax paid
-  box9?: number;    // Cash liquidation distributions
-  box10?: number;   // Non-cash liquidation distributions
-  box12?: number;   // Exempt-interest dividends
-  box13?: number;   // Specified private activity bond interest dividends
+  box1a?: number; // Total ordinary dividends
+  box1b?: number; // Qualified dividends
+  box2a?: number; // Total capital gain distributions
+  box2b?: number; // Unrecap. Sec. 1250 gain
+  box2d?: number; // Collectibles (28%) gain
+  box3?: number; // Non-dividend distributions
+  box4?: number; // Federal income tax withheld
+  box5?: number; // Section 199A dividends
+  box6?: number; // Investment expenses
+  box7?: number; // Foreign tax paid
+  box9?: number; // Cash liquidation distributions
+  box10?: number; // Non-cash liquidation distributions
+  box12?: number; // Exempt-interest dividends
+  box13?: number; // Specified private activity bond interest dividends
 }
 
 export interface DividendFact {

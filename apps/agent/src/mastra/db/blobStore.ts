@@ -24,9 +24,7 @@ const MODULE_DIR = dirname(fileURLToPath(import.meta.url)); // …/src/mastra/db
 const DEFAULT_ROOT = resolve(MODULE_DIR, "../../../.data/documents");
 
 export function documentsRoot(): string {
-  return process.env.DOCUMENTS_PATH
-    ? resolve(process.env.DOCUMENTS_PATH)
-    : DEFAULT_ROOT;
+  return process.env.DOCUMENTS_PATH ? resolve(process.env.DOCUMENTS_PATH) : DEFAULT_ROOT;
 }
 
 /*
@@ -42,10 +40,7 @@ function safeJoin(storagePath: string): string {
   return full;
 }
 
-export async function writeBlob(
-  storagePath: string,
-  bytes: Buffer | Uint8Array,
-): Promise<void> {
+export async function writeBlob(storagePath: string, bytes: Buffer | Uint8Array): Promise<void> {
   const full = safeJoin(storagePath);
   await mkdir(dirname(full), { recursive: true });
   await writeFile(full, bytes);

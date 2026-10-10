@@ -18,11 +18,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { FieldInventory } from "../engine/catalog.js";
 import type { RetrievedFieldContext } from "./retrieveContext.js";
-import {
-  loadCatalogIndex,
-  formatIndexedForm,
-  type CatalogIndex,
-} from "./catalogIndex.js";
+import { loadCatalogIndex, formatIndexedForm, type CatalogIndex } from "./catalogIndex.js";
 
 const MODEL = "claude-sonnet-4-6";
 const MAX_TOKENS = 16000;
@@ -254,11 +250,7 @@ Don't inflate confidence — the human reviewer trusts your "high" ratings and o
 
 export async function classifyBindings(
   opts: ClassifyBindingsOpts,
-  onBatchComplete?: (
-    batchIndex: number,
-    totalBatches: number,
-    batchSize: number,
-  ) => void,
+  onBatchComplete?: (batchIndex: number, totalBatches: number, batchSize: number) => void,
 ): Promise<BindingClassificationResult> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error("ANTHROPIC_API_KEY is not set");
@@ -326,9 +318,7 @@ export async function classifyBindings(
       onBatchComplete?.(i, batches.length, batch.length);
     }
   }
-  await Promise.all(
-    Array.from({ length: Math.min(CONCURRENCY, batches.length) }, () => worker()),
-  );
+  await Promise.all(Array.from({ length: Math.min(CONCURRENCY, batches.length) }, () => worker()));
 
   if (!mustFile) {
     throw new Error(
@@ -414,13 +404,7 @@ If any field references a different form (e.g. "from Form 1040 line 11b"), call 
                     "Self-rated confidence — see system prompt for the calibration guide. Over-rating 'high' means buggy bindings ship.",
                 },
               },
-              required: [
-                "field_id",
-                "rule_name",
-                "params",
-                "rationale",
-                "confidence",
-              ],
+              required: ["field_id", "rule_name", "params", "rationale", "confidence"],
             },
           },
           must_file: {
@@ -508,8 +492,7 @@ If any field references a different form (e.g. "from Form 1040 line 11b"), call 
     });
     usage.input_tokens += response.usage.input_tokens;
     usage.output_tokens += response.usage.output_tokens;
-    usage.cache_creation_input_tokens +=
-      response.usage.cache_creation_input_tokens ?? 0;
+    usage.cache_creation_input_tokens += response.usage.cache_creation_input_tokens ?? 0;
     usage.cache_read_input_tokens += response.usage.cache_read_input_tokens ?? 0;
 
     const toolUses = response.content.filter(
@@ -591,9 +574,7 @@ If any field references a different form (e.g. "from Form 1040 line 11b"), call 
   }
 
   if (!finalBindings) {
-    throw new Error(
-      `Batch ${batchIndex + 1}/${totalBatches}: loop exited without emit_bindings.`,
-    );
+    throw new Error(`Batch ${batchIndex + 1}/${totalBatches}: loop exited without emit_bindings.`);
   }
 
   return {
@@ -640,10 +621,7 @@ function renderFieldEntry(
   const blockLines = context.blocks
     .map((b) => {
       const text = b.text.replace(/\s+/g, " ").trim();
-      const trimmed =
-        text.length > MAX_BLOCK_CHARS
-          ? text.slice(0, MAX_BLOCK_CHARS) + "…"
-          : text;
+      const trimmed = text.length > MAX_BLOCK_CHARS ? text.slice(0, MAX_BLOCK_CHARS) + "…" : text;
       return `     [${b.blockId}] ${trimmed}`;
     })
     .join("\n");
@@ -655,13 +633,9 @@ function renderFieldEntry(
  * can then reference any field (for fromFields cross-references) while
  * the prefix tokens are paid once.
  */
-function buildInventoryBlock(
-  opts: ClassifyBindingsOpts,
-  catalogIndex: CatalogIndex,
-): string {
+function buildInventoryBlock(opts: ClassifyBindingsOpts, catalogIndex: CatalogIndex): string {
   const lines = opts.fields.map(
-    (f) =>
-      `  ${f.fieldId} — "${f.label}" (category=${f.category}, valueType=${f.valueType})`,
+    (f) => `  ${f.fieldId} — "${f.label}" (category=${f.category}, valueType=${f.valueType})`,
   );
   /*
    * Other forms available via lookup_form_fields. The classifier only
@@ -669,8 +643,7 @@ function buildInventoryBlock(
    * come back when it calls lookup_form_fields(formId).
    */
   const otherForms = Array.from(catalogIndex.values()).map(
-    (f) =>
-      `  - ${f.formId} — ${f.title} (${f.jurisdiction}, ${f.fields.length} fields)`,
+    (f) => `  - ${f.formId} — ${f.title} (${f.jurisdiction}, ${f.fields.length} fields)`,
   );
   const otherFormsBlock =
     otherForms.length > 0
