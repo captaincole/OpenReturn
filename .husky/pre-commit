@@ -1,9 +1,12 @@
-# Pre-commit: run the Alex integration test (plus any other scenarios in
-# apps/agent/tests/runAll.ts). Fully offline, deterministic, ~200ms — fast
-# enough not to be annoying.
+# Pre-commit gate, fastest first:
+#   1. format:check — Prettier, verify only (run `npm run format` to fix)
+#   2. lint         — eslint, one rule: multi-line comments are starred blocks
+#   3. test         — offline golden suite in apps/agent/tests/runAll.ts (~2s)
 #
 # Skip with --no-verify if you're committing a deliberate scenario update
 # in two stages (expected.ts before fact-fix, or vice versa). Don't make
 # that a habit.
 
+npm run format:check
+npm run lint
 npm test
