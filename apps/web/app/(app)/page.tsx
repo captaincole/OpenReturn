@@ -17,12 +17,12 @@
  * serverDb query and remove the overlay.
  */
 
-import { redirect } from "next/navigation";
-import { getOwnerSession } from "@/lib/localAuth";
-import { listOwnerReturns } from "@/lib/serverDb";
-import { type TaxReturn } from "@/lib/returns";
-import { deriveProfile, type UserProfile } from "@/lib/profile";
 import { cn } from "@/lib/cn";
+import { getOwnerSession } from "@/lib/localAuth";
+import { deriveProfile, type UserProfile } from "@/lib/profile";
+import { type TaxReturn } from "@/lib/returns";
+import { listOwnerReturns } from "@/lib/serverDb";
+import { redirect } from "next/navigation";
 import { HomeTopBar } from "./HomeTopBar";
 import { StartFilingButton } from "./StartFilingButton";
 
@@ -72,10 +72,10 @@ export default async function HomeHome() {
   const hasAnyFiledReturn = returns.some((r) => r.state === "filed");
 
   return (
-    <div className="min-h-screen w-full bg-bg-base text-ink-primary flex flex-col">
+    <div className="flex min-h-screen w-full flex-col bg-bg-base text-ink-primary">
       <HomeTopBar initials={profile.initials} />
-      <main className="flex-1 px-6 lg:px-10 py-10 lg:py-14">
-        <div className="max-w-6xl mx-auto space-y-14">
+      <main className="flex-1 px-6 py-10 lg:px-10 lg:py-14">
+        <div className="mx-auto max-w-6xl space-y-14">
           <Greeting profile={profile} />
 
           <ReturnsSection returns={returns} hasCurrentYear={hasCurrentYear} />
@@ -96,7 +96,7 @@ function Greeting({ profile }: { profile: UserProfile }) {
   return (
     <header>
       <h1 className="font-serif text-4xl text-ink-primary">Hi, {profile.firstName}.</h1>
-      <p className="text-ink-secondary text-[15px] mt-2.5">Your tax life, in one place.</p>
+      <p className="mt-2.5 text-[15px] text-ink-secondary">Your tax life, in one place.</p>
     </header>
   );
 }
@@ -126,7 +126,7 @@ function ReturnsSection({
         ) : null
       }
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {returns.map((r) => (
           <ReturnCard key={r.filingId} ret={r} />
         ))}
@@ -145,7 +145,7 @@ function ContinueWithSection({
 }) {
   return (
     <Section title="Continue with">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {hasCurrentYear ? (
           <DisabledWorkflowCard
             title={`Start ${CURRENT_TAX_YEAR} filing`}
@@ -170,7 +170,7 @@ function ContinueWithSection({
 function TaxPictureSection({ locked }: { locked: boolean }) {
   return (
     <Section title="Your tax picture">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 relative">
+      <div className="relative grid grid-cols-1 gap-4 lg:grid-cols-2">
         <ChartCard
           title="Income"
           subtitle="Wages + investment income, last 5 years"
@@ -229,7 +229,7 @@ function Section({
   return (
     <section>
       <div className="mb-5 flex items-baseline justify-between">
-        <h2 className="text-[11px] uppercase tracking-[0.22em] text-ink-muted">{title}</h2>
+        <h2 className="text-[11px] tracking-[0.22em] text-ink-muted uppercase">{title}</h2>
         {right}
       </div>
       {children}
@@ -244,28 +244,28 @@ function ReturnCard({ ret }: { ret: TaxReturn }) {
     <a
       href={`/r/${ret.id}`}
       className={cn(
-        "card p-5 transition-all flex flex-col gap-4 min-h-[160px]",
+        "card flex min-h-[160px] flex-col gap-4 p-5 transition-all",
         isActive
-          ? "ring-1 ring-accent/30 hover:ring-accent/50 hover:border-accent/30"
+          ? "ring-1 ring-accent/30 hover:border-accent/30 hover:ring-accent/50"
           : "hover:border-border-strong",
       )}
     >
       <div className="flex items-start justify-between">
         <div>
-          <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">
+          <div className="text-[10px] tracking-[0.18em] text-ink-muted uppercase">
             Tax Year {ret.year}
           </div>
-          <div className="text-[15px] font-semibold text-ink-primary mt-1 tracking-tight">
+          <div className="mt-1 text-[15px] font-semibold tracking-tight text-ink-primary">
             {ret.label}
           </div>
         </div>
         {isActive && (
-          <span className="text-[10px] uppercase tracking-wider text-accent bg-accent/15 px-1.5 py-0.5 rounded">
+          <span className="rounded bg-accent/15 px-1.5 py-0.5 text-[10px] tracking-wider text-accent uppercase">
             Active
           </span>
         )}
         {isFiled && (
-          <span className="text-[10px] uppercase tracking-wider text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded">
+          <span className="rounded bg-emerald-400/10 px-1.5 py-0.5 text-[10px] tracking-wider text-emerald-400 uppercase">
             Filed
           </span>
         )}
@@ -292,22 +292,22 @@ function ReturnCard({ ret }: { ret: TaxReturn }) {
  */
 function EmptyReturnsCta() {
   return (
-    <div className="card p-8 sm:p-10 flex flex-col items-start gap-5">
+    <div className="card flex flex-col items-start gap-5 p-8 sm:p-10">
       <div>
-        <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">
+        <div className="text-[10px] tracking-[0.18em] text-ink-muted uppercase">
           Tax Year {CURRENT_TAX_YEAR}
         </div>
-        <h3 className="font-serif text-2xl text-ink-primary mt-1.5">
+        <h3 className="mt-1.5 font-serif text-2xl text-ink-primary">
           Start your {CURRENT_TAX_YEAR} filing
         </h3>
-        <p className="text-ink-secondary text-[14px] mt-2 max-w-xl leading-relaxed">
+        <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-ink-secondary">
           Luca will walk you through everything — wages, investments, deductions — and keep a
           citation for every fact. You can pause and pick up where you left off anytime.
         </p>
       </div>
       <StartFilingButton
         taxYear={CURRENT_TAX_YEAR}
-        className="px-5 py-2.5 rounded-lg bg-accent hover:bg-accent-hover text-white text-sm font-medium transition-colors"
+        className="rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
       >
         Start filing →
       </StartFilingButton>
@@ -317,7 +317,7 @@ function EmptyReturnsCta() {
 
 function NewReturnTile() {
   return (
-    <div className="border border-dashed border-border-subtle rounded-2xl p-5 flex flex-col items-center justify-center text-center gap-2 min-h-[160px] text-ink-muted">
+    <div className="flex min-h-[160px] flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border-subtle p-5 text-center text-ink-muted">
       <span className="text-2xl opacity-40">+</span>
       <span className="text-sm">New returns open in {CURRENT_TAX_YEAR + 1}</span>
     </div>
@@ -326,19 +326,19 @@ function NewReturnTile() {
 
 function StartFilingCard({ taxYear }: { taxYear: number }) {
   return (
-    <div className="card p-5 flex flex-col gap-3">
-      <div className="w-9 h-9 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center text-accent text-base">
+    <div className="card flex flex-col gap-3 p-5">
+      <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-accent/30 bg-accent/15 text-base text-accent">
         +
       </div>
       <div>
         <div className="text-[15px] font-medium text-ink-primary">Start a new filing</div>
-        <div className="text-[13px] text-ink-secondary leading-relaxed mt-1">
+        <div className="mt-1 text-[13px] leading-relaxed text-ink-secondary">
           Begin your {taxYear} return. Luca will guide intake from scratch.
         </div>
       </div>
       <StartFilingButton
         taxYear={taxYear}
-        className="self-start mt-1 text-[12px] text-accent hover:text-accent-hover transition-colors"
+        className="mt-1 self-start text-[12px] text-accent transition-colors hover:text-accent-hover"
       >
         Start {taxYear} filing →
       </StartFilingButton>
@@ -358,15 +358,15 @@ function DisabledWorkflowCard({
   note: string;
 }) {
   return (
-    <div className="card p-5 flex flex-col gap-3 opacity-60 cursor-not-allowed">
-      <div className="w-9 h-9 rounded-lg bg-bg-elevated border border-border-subtle flex items-center justify-center text-ink-muted text-base">
+    <div className="card flex cursor-not-allowed flex-col gap-3 p-5 opacity-60">
+      <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-border-subtle bg-bg-elevated text-base text-ink-muted">
         {icon}
       </div>
       <div>
         <div className="text-[15px] font-medium text-ink-primary">{title}</div>
-        <div className="text-[13px] text-ink-secondary leading-relaxed mt-1">{desc}</div>
+        <div className="mt-1 text-[13px] leading-relaxed text-ink-secondary">{desc}</div>
       </div>
-      <div className="text-[11px] uppercase tracking-wider text-ink-muted">{note}</div>
+      <div className="text-[11px] tracking-wider text-ink-muted uppercase">{note}</div>
     </div>
   );
 }
@@ -383,16 +383,16 @@ function LockedWorkflowCard({
   unlockText: string;
 }) {
   return (
-    <div className="card p-5 flex flex-col gap-3 relative overflow-hidden">
-      <div className="w-9 h-9 rounded-lg bg-bg-elevated border border-border-subtle flex items-center justify-center text-ink-muted text-base">
+    <div className="card relative flex flex-col gap-3 overflow-hidden p-5">
+      <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-border-subtle bg-bg-elevated text-base text-ink-muted">
         {icon}
       </div>
       <div>
         <div className="text-[15px] font-medium text-ink-primary">{title}</div>
-        <div className="text-[13px] text-ink-secondary leading-relaxed mt-1">{desc}</div>
+        <div className="mt-1 text-[13px] leading-relaxed text-ink-secondary">{desc}</div>
       </div>
       <div className="flex items-center gap-1.5 text-[11px] text-ink-muted">
-        <LockIcon className="w-3 h-3" />
+        <LockIcon className="h-3 w-3" />
         <span>{unlockText}</span>
       </div>
     </div>
@@ -401,9 +401,9 @@ function LockedWorkflowCard({
 
 function LockOverlay({ text }: { text: string }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center backdrop-blur-[2px] bg-bg-base/40 rounded-2xl">
-      <div className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-bg-elevated/90 border border-border-subtle text-ink-secondary text-[12px]">
-        <LockIcon className="w-3.5 h-3.5" />
+    <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-bg-base/40 backdrop-blur-[2px]">
+      <div className="flex items-center gap-2 rounded-full border border-border-subtle bg-bg-elevated/90 px-4 py-2.5 text-[12px] text-ink-secondary">
+        <LockIcon className="h-3.5 w-3.5" />
         <span>{text}</span>
       </div>
     </div>
@@ -445,14 +445,14 @@ function ChartCard({
     <div className="card p-5">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <div className="text-[11px] uppercase tracking-[0.18em] text-ink-muted">{title}</div>
-          <div className="text-[13px] text-ink-secondary mt-1">{subtitle}</div>
+          <div className="text-[11px] tracking-[0.18em] text-ink-muted uppercase">{title}</div>
+          <div className="mt-1 text-[13px] text-ink-secondary">{subtitle}</div>
         </div>
-        <div className="text-right shrink-0">
-          <div className="text-2xl font-semibold tracking-tight tabular-nums text-ink-primary">
+        <div className="shrink-0 text-right">
+          <div className="text-2xl font-semibold tracking-tight text-ink-primary tabular-nums">
             {value}
           </div>
-          <div className="text-[11px] text-ink-muted mt-0.5">{valueLabel}</div>
+          <div className="mt-0.5 text-[11px] text-ink-muted">{valueLabel}</div>
         </div>
       </div>
       <div className="mt-6">{children}</div>

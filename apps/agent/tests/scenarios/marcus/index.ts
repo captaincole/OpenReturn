@@ -10,11 +10,11 @@
  */
 
 import type { Scenario } from "../../types.js";
-import { marcusFacts, MARCUS_TAX_YEAR, MARCUS_USER_ID } from "./facts.js";
 import { marcusDecisions } from "./decisions.js";
-import { marcusExpected } from "./expected.js";
-import { marcusScheduleAExpected } from "./expected-schedule-a.js";
 import { marcus8959Expected } from "./expected-8959.js";
+import { marcusScheduleAExpected } from "./expected-schedule-a.js";
+import { marcusExpected } from "./expected.js";
+import { MARCUS_TAX_YEAR, MARCUS_USER_ID, marcusFacts } from "./facts.js";
 
 export const marcusScenario: Scenario = {
   name: "marcus",

@@ -1,5 +1,5 @@
-import { type NextRequest, NextResponse } from "next/server";
 import { getOwnerSession } from "@/lib/localAuth";
+import { type NextRequest, NextResponse } from "next/server";
 
 /*
  * Server-side proxy to the Mastra agent — the single bridge between the

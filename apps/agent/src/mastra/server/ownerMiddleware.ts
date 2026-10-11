@@ -1,5 +1,5 @@
-import type { MiddlewareHandler } from "hono";
 import { MASTRA_RESOURCE_ID_KEY } from "@mastra/core/request-context";
+import type { MiddlewareHandler } from "hono";
 import { getOwner } from "../db/appDb";
 
 /*

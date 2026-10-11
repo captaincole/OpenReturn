@@ -5,10 +5,10 @@
  * database (see ../engine/README.md).
  */
 
+import { evaluateScenario, type EngineFiling, type EvaluatedScenario } from "../engine";
+import { listDecisions } from "./db/aiDecisions";
 import type { Scope } from "./db/appDb";
 import { listFacts } from "./db/taxFacts";
-import { listDecisions } from "./db/aiDecisions";
-import { evaluateScenario, type EngineFiling, type EvaluatedScenario } from "../engine";
 
 export async function loadAndEvaluateScenario(
   scope: Scope,

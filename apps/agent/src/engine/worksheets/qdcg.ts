@@ -15,10 +15,10 @@
  * binding layer passes through the real values.
  */
 
-import type { FilingStatus } from "../values.js";
-import { lookupTax } from "../data/taxTable.js";
-import { lookupRateSchedule } from "../data/rateSchedule.js";
 import { lookupPreferentialBrackets } from "../data/preferentialBrackets.js";
+import { lookupRateSchedule } from "../data/rateSchedule.js";
+import { lookupTax } from "../data/taxTable.js";
+import type { FilingStatus } from "../values.js";
 
 export interface QdcgInputs {
   /** Worksheet line 1 — 1040 line 15 (taxable income). */

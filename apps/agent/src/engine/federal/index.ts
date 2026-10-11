@@ -15,13 +15,13 @@
  *      bindings.
  */
 
-import { makeFormSpec, type FormSpec } from "../formSpec.js";
 import { fixtureFileSchema } from "../catalog.js";
+import { makeFormSpec, type FormSpec } from "../formSpec.js";
 import { register as registerForm1040 } from "./1040/bindings.js";
 import { register as registerForm8949 } from "./8949/bindings.js";
-import { register as registerScheduleD } from "./schedule-d/bindings.js";
-import { register as registerScheduleA } from "./schedule-a/bindings.js";
 import { register as registerForm8959 } from "./8959/bindings.js";
+import { register as registerScheduleA } from "./schedule-a/bindings.js";
+import { register as registerScheduleD } from "./schedule-d/bindings.js";
 
 /*
  * Static JSON imports from the PROMOTED runtime copies under
@@ -32,11 +32,11 @@ import { register as registerForm8959 } from "./8959/bindings.js";
  * inlines the JSON at build time; the running process does not read it
  * from disk.
  */
-import form8949CatalogJson from "../../mastra/public/forms/federal/8949/catalog.json";
-import scheduleDCatalogJson from "../../mastra/public/forms/federal/schedule-d/catalog.json";
-import scheduleACatalogJson from "../../mastra/public/forms/federal/schedule-a/catalog.json";
-import form8959CatalogJson from "../../mastra/public/forms/federal/8959/catalog.json";
 import form1040CatalogJson from "../../mastra/public/forms/federal/1040/catalog.json";
+import form8949CatalogJson from "../../mastra/public/forms/federal/8949/catalog.json";
+import form8959CatalogJson from "../../mastra/public/forms/federal/8959/catalog.json";
+import scheduleACatalogJson from "../../mastra/public/forms/federal/schedule-a/catalog.json";
+import scheduleDCatalogJson from "../../mastra/public/forms/federal/schedule-d/catalog.json";
 
 /*
  * fixtureFileSchema.parse() narrows TypeScript's widened JSON types

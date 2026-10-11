@@ -22,22 +22,22 @@ export function Markdown({ children }: { children: string }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent hover:text-accent-hover underline underline-offset-2"
+            className="text-accent underline underline-offset-2 hover:text-accent-hover"
           >
             {children}
           </a>
         ),
         p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
         ul: ({ children }) => (
-          <ul className="list-disc pl-5 mb-3 last:mb-0 space-y-1">{children}</ul>
+          <ul className="mb-3 list-disc space-y-1 pl-5 last:mb-0">{children}</ul>
         ),
         ol: ({ children }) => (
-          <ol className="list-decimal pl-5 mb-3 last:mb-0 space-y-1">{children}</ol>
+          <ol className="mb-3 list-decimal space-y-1 pl-5 last:mb-0">{children}</ol>
         ),
         li: ({ children }) => <li>{children}</li>,
-        h1: ({ children }) => <h1 className="font-serif text-2xl mb-3 mt-1">{children}</h1>,
-        h2: ({ children }) => <h2 className="font-serif text-xl mb-2 mt-3">{children}</h2>,
-        h3: ({ children }) => <h3 className="font-medium text-base mb-2 mt-3">{children}</h3>,
+        h1: ({ children }) => <h1 className="mt-1 mb-3 font-serif text-2xl">{children}</h1>,
+        h2: ({ children }) => <h2 className="mt-3 mb-2 font-serif text-xl">{children}</h2>,
+        h3: ({ children }) => <h3 className="mt-3 mb-2 text-base font-medium">{children}</h3>,
         strong: ({ children }) => (
           <strong className="font-semibold text-ink-primary">{children}</strong>
         ),
@@ -47,18 +47,18 @@ export function Markdown({ children }: { children: string }) {
           return isBlock ? (
             <code className={className}>{children}</code>
           ) : (
-            <code className="px-1.5 py-0.5 bg-bg-elevated text-ink-primary text-[0.9em] font-mono rounded">
+            <code className="rounded bg-bg-elevated px-1.5 py-0.5 font-mono text-[0.9em] text-ink-primary">
               {children}
             </code>
           );
         },
         pre: ({ children }) => (
-          <pre className="my-3 p-3 bg-bg-elevated rounded-lg overflow-x-auto font-mono text-sm">
+          <pre className="my-3 overflow-x-auto rounded-lg bg-bg-elevated p-3 font-mono text-sm">
             {children}
           </pre>
         ),
         blockquote: ({ children }) => (
-          <blockquote className="border-l-2 border-border-strong pl-4 my-3 text-ink-secondary italic">
+          <blockquote className="my-3 border-l-2 border-border-strong pl-4 text-ink-secondary italic">
             {children}
           </blockquote>
         ),

@@ -9,10 +9,10 @@
  * reads /api/uploads (libsql app DB, session-cookie auth).
  */
 
-import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppShell } from "@/components/AppShell";
-import { uploadDocument } from "@/lib/uploads";
 import { cn } from "@/lib/cn";
+import { uploadDocument } from "@/lib/uploads";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface UploadRow {
   id: string;
@@ -86,12 +86,12 @@ export default function DocumentsTab() {
 
   if (!activeReturn.realDataAvailable) {
     return (
-      <div className="px-6 lg:px-10 py-16 max-w-2xl mx-auto text-center">
-        <div className="text-[11px] uppercase tracking-[0.22em] text-ink-muted">
+      <div className="mx-auto max-w-2xl px-6 py-16 text-center lg:px-10">
+        <div className="text-[11px] tracking-[0.22em] text-ink-muted uppercase">
           {activeReturn.label}
         </div>
-        <h1 className="font-serif text-3xl text-ink-primary mt-3">No documents yet</h1>
-        <p className="text-ink-secondary text-[15px] mt-3 max-w-md mx-auto leading-relaxed">
+        <h1 className="mt-3 font-serif text-3xl text-ink-primary">No documents yet</h1>
+        <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-ink-secondary">
           Documents you upload appear here. Switch to your 2025 Return to add files.
         </p>
       </div>
@@ -99,15 +99,15 @@ export default function DocumentsTab() {
   }
 
   return (
-    <div className="px-6 lg:px-10 py-8 max-w-5xl mx-auto">
-      <div className="flex items-baseline justify-between mb-5">
+    <div className="mx-auto max-w-5xl px-6 py-8 lg:px-10">
+      <div className="mb-5 flex items-baseline justify-between">
         <div>
           <h2 className="font-serif text-2xl text-ink-primary">Documents</h2>
-          <p className="text-ink-secondary text-sm mt-1">
+          <p className="mt-1 text-sm text-ink-secondary">
             W-2s, 1099s, K-1s — anything you've uploaded.
           </p>
         </div>
-        <span className="text-[11px] text-ink-muted uppercase tracking-wider">
+        <span className="text-[11px] tracking-wider text-ink-muted uppercase">
           {uploads.length} {uploads.length === 1 ? "file" : "files"}
         </span>
       </div>
@@ -136,11 +136,11 @@ export default function DocumentsTab() {
         }}
         disabled={uploading || lucaBusy}
         className={cn(
-          "w-full border-2 border-dashed rounded-2xl py-10 px-6 text-center transition-colors cursor-pointer",
+          "w-full cursor-pointer rounded-2xl border-2 border-dashed px-6 py-10 text-center transition-colors",
           dragOver
             ? "border-accent/60 bg-accent/5"
-            : "border-border-subtle hover:border-accent/40 bg-bg-subtle/40",
-          (uploading || lucaBusy) && "opacity-60 cursor-not-allowed",
+            : "border-border-subtle bg-bg-subtle/40 hover:border-accent/40",
+          (uploading || lucaBusy) && "cursor-not-allowed opacity-60",
         )}
       >
         <div className="text-3xl text-ink-muted">⬆</div>
@@ -151,23 +151,23 @@ export default function DocumentsTab() {
               ? "Uploading…"
               : "Drop W-2s, 1099s, or other tax documents here"}
         </div>
-        <div className="text-xs text-ink-muted mt-1">PDF, PNG, JPG · up to 10 MB each</div>
+        <div className="mt-1 text-xs text-ink-muted">PDF, PNG, JPG · up to 10 MB each</div>
         {!lucaBusy && (
           <div className="mt-4 text-xs text-accent hover:text-accent-hover">or browse files</div>
         )}
       </button>
 
       {error && (
-        <div className="mt-3 px-4 py-2.5 rounded-lg bg-red-400/10 border border-red-400/30 text-sm text-red-300">
+        <div className="mt-3 rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-2.5 text-sm text-red-300">
           {error}
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+      <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {uploads.length === 0 && !uploading && (
-          <div className="col-span-full card px-6 py-8 text-center">
-            <div className="text-ink-muted text-sm">No uploads yet.</div>
-            <div className="mt-1 text-ink-faint text-xs">
+          <div className="card col-span-full px-6 py-8 text-center">
+            <div className="text-sm text-ink-muted">No uploads yet.</div>
+            <div className="mt-1 text-xs text-ink-faint">
               Drop a W-2, 1099, or receipt above — or attach one in chat.
             </div>
           </div>
@@ -184,34 +184,34 @@ function DocCard({ doc }: { doc: UploadRow }) {
   const href = `/documents/${doc.id}`;
   const downloadHref = `${href}?download=1`;
   return (
-    <div className="card p-4 flex flex-col gap-3 group hover:border-border-strong transition-colors">
+    <div className="card group flex flex-col gap-3 p-4 transition-colors hover:border-border-strong">
       <div className="flex items-start justify-between">
-        <span className="px-2 py-0.5 rounded text-[10px] uppercase tracking-wide bg-bg-elevated text-ink-secondary">
+        <span className="rounded bg-bg-elevated px-2 py-0.5 text-[10px] tracking-wide text-ink-secondary uppercase">
           {inferType(doc)}
         </span>
         <span className="text-[10px] text-ink-faint tabular-nums">
           {formatBytes(doc.size_bytes)}
         </span>
       </div>
-      <div className="aspect-[3/4] rounded-lg bg-bg-elevated/50 border border-border-subtle flex items-center justify-center">
-        <span className="text-ink-faint text-xs font-mono">PDF</span>
+      <div className="flex aspect-[3/4] items-center justify-center rounded-lg border border-border-subtle bg-bg-elevated/50">
+        <span className="font-mono text-xs text-ink-faint">PDF</span>
       </div>
       <div className="min-w-0">
-        <div className="text-sm text-ink-primary truncate">{doc.filename}</div>
-        <div className="text-[11px] text-ink-muted mt-0.5">{formatUploadedAt(doc.created_at)}</div>
+        <div className="truncate text-sm text-ink-primary">{doc.filename}</div>
+        <div className="mt-0.5 text-[11px] text-ink-muted">{formatUploadedAt(doc.created_at)}</div>
       </div>
       <div className="flex gap-2">
         <a
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 text-xs py-1.5 rounded border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary text-center transition-colors"
+          className="flex-1 rounded border border-border-subtle py-1.5 text-center text-xs text-ink-secondary transition-colors hover:border-border-strong hover:text-ink-primary"
         >
           Preview
         </a>
         <a
           href={downloadHref}
-          className="flex-1 text-xs py-1.5 rounded border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary text-center transition-colors"
+          className="flex-1 rounded border border-border-subtle py-1.5 text-center text-xs text-ink-secondary transition-colors hover:border-border-strong hover:text-ink-primary"
         >
           Download
         </a>

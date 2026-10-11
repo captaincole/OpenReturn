@@ -5,8 +5,8 @@
  * once an owner exists, and the server layout then redirects to /login.
  */
 
-import { type FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { type FormEvent, useState } from "react";
 
 export default function SetupPage() {
   const router = useRouter();
@@ -50,14 +50,14 @@ export default function SetupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-bg-base bg-grid relative flex items-center justify-center px-6">
-      <div className="absolute inset-0 bg-hero-glow pointer-events-none" />
+    <div className="bg-grid relative flex min-h-screen items-center justify-center bg-bg-base px-6">
+      <div className="pointer-events-none absolute inset-0 bg-hero-glow" />
 
       <div className="relative z-10 w-full max-w-sm animate-fade-in">
         <div className="mb-10 text-center">
-          <div className="text-ink-muted text-[11px] uppercase tracking-[0.28em] mb-4">Summa</div>
-          <h1 className="font-serif text-4xl text-ink-primary mb-3">Welcome</h1>
-          <p className="text-ink-secondary text-sm">
+          <div className="mb-4 text-[11px] tracking-[0.28em] text-ink-muted uppercase">Summa</div>
+          <h1 className="mb-3 font-serif text-4xl text-ink-primary">Welcome</h1>
+          <p className="text-sm text-ink-secondary">
             This instance is yours. Set a name, email, and password to get started — everything
             stays on this machine.
           </p>
@@ -97,7 +97,7 @@ export default function SetupPage() {
             autoComplete="new-password"
             className="input-base"
           />
-          {error && <div className="text-red-400 text-sm px-1">{error}</div>}
+          {error && <div className="px-1 text-sm text-red-400">{error}</div>}
           <button type="submit" disabled={!canSubmit} className="btn-primary">
             {submitting ? "Setting up…" : "Create owner account"}
           </button>

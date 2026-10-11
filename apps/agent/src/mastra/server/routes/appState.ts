@@ -1,12 +1,12 @@
 import { MASTRA_RESOURCE_ID_KEY } from "@mastra/core/request-context";
 import { registerApiRoute } from "@mastra/core/server";
-import { listDocuments, type UserDocumentRow } from "../../db/userDocuments";
-import { buildCaseState } from "../../tools/caseState";
 import { luca } from "../../agents/luca";
 import { lucaWorkingMemorySchema, type PlanItem } from "../../agents/luca.workingMemory";
+import { resolveOwnerFilingForYear } from "../../db/filings";
+import { listDocuments, type UserDocumentRow } from "../../db/userDocuments";
+import { buildCaseState } from "../../tools/caseState";
 import { DEMO_TAX_YEAR } from "../demoSession";
 import { REQUEST_CONTEXT_KEYS } from "../ownerMiddleware";
-import { resolveOwnerFilingForYear } from "../../db/filings";
 
 // Must match apps/web/lib/returns.ts:threadIdFor — no shared package yet.
 function threadIdFor(userId: string, returnId: string | number): string {

@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import type { PlanItem, PlanItemStatus } from "@/lib/api";
 import { cn } from "@/lib/cn";
+import { useEffect, useRef, useState } from "react";
 
 /*
  * Renders Luca's rolling plan from /app/state. The parent page re-fetches
@@ -112,22 +112,22 @@ export function PlanCard({ plan }: PlanCardProps) {
   const isEmpty = display.length === 0;
 
   return (
-    <section className="card flex-1 min-h-0 flex flex-col">
+    <section className="card flex min-h-0 flex-1 flex-col">
       <div className="card-header shrink-0">
         <span>Plan</span>
         {activeCount > 0 && (
-          <span className="tabular-nums text-ink-muted normal-case tracking-normal">
+          <span className="tracking-normal text-ink-muted normal-case tabular-nums">
             {activeCount}
           </span>
         )}
       </div>
-      <div className="flex-1 min-h-0 overflow-y-auto">
+      <div className="min-h-0 flex-1 overflow-y-auto">
         {isEmpty ? (
-          <div className="px-5 pb-5 pt-1 text-sm text-ink-muted leading-relaxed">
+          <div className="px-5 pt-1 pb-5 text-sm leading-relaxed text-ink-muted">
             Luca&rsquo;s next steps will appear here as he works.
           </div>
         ) : (
-          <ul className="px-5 pb-4 space-y-2.5">
+          <ul className="space-y-2.5 px-5 pb-4">
             {display.map((item) => (
               <PlanRow key={item.id} item={item} />
             ))}
@@ -146,15 +146,15 @@ function PlanRow({ item }: { item: DisplayItem }) {
     <li
       className={cn(
         "flex items-start gap-2.5 transition-all duration-500",
-        item.leaving && "opacity-0 -translate-y-0.5",
+        item.leaving && "-translate-y-0.5 opacity-0",
       )}
     >
       <StatusIcon status={item.status} />
-      <div className="flex-1 min-w-0">
+      <div className="min-w-0 flex-1">
         <div
           className={cn(
             "text-sm leading-snug transition-colors duration-300",
-            isDoing && "text-ink-primary font-medium",
+            isDoing && "font-medium text-ink-primary",
             isDone && "text-ink-muted line-through decoration-ink-faint/60",
             !isDoing && !isDone && "text-ink-secondary",
           )}
@@ -162,7 +162,7 @@ function PlanRow({ item }: { item: DisplayItem }) {
           {item.title}
         </div>
         {item.note && !isDone && (
-          <div className="text-[12px] text-ink-muted mt-0.5 leading-snug">{item.note}</div>
+          <div className="mt-0.5 text-[12px] leading-snug text-ink-muted">{item.note}</div>
         )}
       </div>
     </li>
@@ -174,7 +174,7 @@ function StatusIcon({ status }: { status: PlanItemStatus }) {
     return (
       <svg
         viewBox="0 0 16 16"
-        className="shrink-0 mt-[3px] w-3.5 h-3.5 text-emerald-400"
+        className="mt-[3px] h-3.5 w-3.5 shrink-0 text-emerald-400"
         aria-hidden
       >
         <circle cx="8" cy="8" r="7.5" fill="currentColor" opacity="0.18" />
@@ -192,14 +192,14 @@ function StatusIcon({ status }: { status: PlanItemStatus }) {
   if (status === "doing") {
     return (
       <span
-        className="shrink-0 mt-[5px] w-2.5 h-2.5 rounded-full bg-accent animate-pulse-soft"
+        className="mt-[5px] h-2.5 w-2.5 shrink-0 animate-pulse-soft rounded-full bg-accent"
         aria-label="In progress"
       />
     );
   }
   return (
     <span
-      className="shrink-0 mt-[4px] w-3 h-3 rounded-full border border-border-strong"
+      className="mt-[4px] h-3 w-3 shrink-0 rounded-full border border-border-strong"
       aria-label="To do"
     />
   );

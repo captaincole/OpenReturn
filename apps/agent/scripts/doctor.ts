@@ -10,10 +10,10 @@
  */
 
 import { config } from "dotenv";
+import { spawnSync } from "node:child_process";
 import { existsSync, readdirSync, statSync } from "node:fs";
 import os from "node:os";
 import { resolve } from "node:path";
-import { spawnSync } from "node:child_process";
 import { projectRoot } from "../src/paths";
 
 /*

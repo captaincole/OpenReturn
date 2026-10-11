@@ -4,8 +4,8 @@
  * and decisions.ts stays focused on the values, not the row scaffolding.
  */
 
-import type { TaxFactRow } from "../../src/mastra/db/taxFacts.js";
 import type { AIDecisionRow } from "../../src/mastra/db/aiDecisions.js";
+import type { TaxFactRow } from "../../src/mastra/db/taxFacts.js";
 
 const DEFAULT_CREATED_AT = "2026-04-29T00:00:00Z";
 

@@ -1,4 +1,4 @@
-import { getAppDb, ensureAppSchema, type Scope, nowIso } from "./appDb";
+import { ensureAppSchema, getAppDb, nowIso, type Scope } from "./appDb";
 
 /*
  * Persistence for the review-decision workflow. Two tables:

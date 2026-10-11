@@ -9,8 +9,8 @@
  * ordering. Fields run in parallel under a concurrency cap.
  */
 
-import { hybridSearchRefDocs } from "../mastra/db/refDocs.js";
 import type { FieldInventory } from "../engine/catalog.js";
+import { hybridSearchRefDocs } from "../mastra/db/refDocs.js";
 
 /*
  * Minimal block shape. The classifier only needs the citation (for the

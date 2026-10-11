@@ -17,26 +17,26 @@
  * fetch /app/state and does not load chat history. sendChat is a no-op.
  */
 
+import { ChatPane } from "@/components/ChatPane";
+import { TopBar } from "@/components/TopBar";
+import { fetchState, UnauthorizedError, type CaseState } from "@/lib/api";
+import { getUserId, signOut } from "@/lib/auth";
+import { LUCA_AGENT_ID } from "@/lib/chatSession";
+import { cn } from "@/lib/cn";
+import { makeMastraClient } from "@/lib/mastraClient";
+import { type UserProfile } from "@/lib/profile";
+import { threadIdFor, type TaxReturn } from "@/lib/returns";
+import { uploadDocument } from "@/lib/uploads";
+import { useRouter } from "next/navigation";
 import {
   createContext,
-  type Dispatch,
-  type SetStateAction,
   useContext,
   useEffect,
   useRef,
   useState,
+  type Dispatch,
+  type SetStateAction,
 } from "react";
-import { useRouter } from "next/navigation";
-import { TopBar } from "@/components/TopBar";
-import { ChatPane } from "@/components/ChatPane";
-import { fetchState, UnauthorizedError, type CaseState } from "@/lib/api";
-import { makeMastraClient } from "@/lib/mastraClient";
-import { LUCA_AGENT_ID } from "@/lib/chatSession";
-import { threadIdFor, type TaxReturn } from "@/lib/returns";
-import { getUserId, signOut } from "@/lib/auth";
-import { uploadDocument } from "@/lib/uploads";
-import { type UserProfile } from "@/lib/profile";
-import { cn } from "@/lib/cn";
 
 export interface ChatMessage {
   id: string;
@@ -332,18 +332,18 @@ export function AppShell({
 
   return (
     <AppShellContext.Provider value={ctx}>
-      <div className="h-screen w-screen bg-bg-base text-ink-primary flex flex-col overflow-hidden">
+      <div className="flex h-screen w-screen flex-col overflow-hidden bg-bg-base text-ink-primary">
         <TopBar activeReturn={activeReturn} returns={returns} />
 
-        <main className="flex-1 min-h-0 flex">
-          <aside className="hidden lg:flex shrink-0 w-[40%] max-w-[640px] min-w-[400px] flex-col border-r border-border-subtle bg-bg-subtle/40">
+        <main className="flex min-h-0 flex-1">
+          <aside className="hidden w-[40%] max-w-[640px] min-w-[400px] shrink-0 flex-col border-r border-border-subtle bg-bg-subtle/40 lg:flex">
             <ChatPane activeReturn={activeReturn} />
           </aside>
-          <section className="hidden lg:flex flex-1 min-w-0 flex-col">
+          <section className="hidden min-w-0 flex-1 flex-col lg:flex">
             <WorkspaceFrame>{children}</WorkspaceFrame>
           </section>
 
-          <div className="lg:hidden flex-1 min-w-0 min-h-0 flex flex-col">
+          <div className="flex min-h-0 min-w-0 flex-1 flex-col lg:hidden">
             {mobilePane === "chat" ? (
               <ChatPane activeReturn={activeReturn} />
             ) : (
@@ -359,7 +359,7 @@ export function AppShell({
 }
 
 function WorkspaceFrame({ children }: { children: React.ReactNode }) {
-  return <div className="flex-1 min-h-0 overflow-y-auto">{children}</div>;
+  return <div className="min-h-0 flex-1 overflow-y-auto">{children}</div>;
 }
 
 function MobileTabBar({
@@ -376,20 +376,20 @@ function MobileTabBar({
     { id: "workspace", label: "Workspace", icon: "▦" },
   ];
   return (
-    <nav className="lg:hidden shrink-0 h-14 border-t border-border-subtle bg-bg-subtle/95 backdrop-blur-sm flex relative z-30">
+    <nav className="relative z-30 flex h-14 shrink-0 border-t border-border-subtle bg-bg-subtle/95 backdrop-blur-sm lg:hidden">
       {tabs.map((t) => (
         <button
           key={t.id}
           onClick={() => onChange(t.id)}
           className={cn(
-            "flex-1 flex flex-col items-center justify-center gap-0.5 relative",
+            "relative flex flex-1 flex-col items-center justify-center gap-0.5",
             value === t.id ? "text-ink-primary" : "text-ink-muted",
           )}
         >
           <span className="text-lg leading-none">{t.icon}</span>
-          <span className="text-[10px] uppercase tracking-wider">{t.label}</span>
+          <span className="text-[10px] tracking-wider uppercase">{t.label}</span>
           {busy && t.id === "workspace" && (
-            <span className="absolute top-1.5 right-[35%] w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse-soft" />
+            <span className="absolute top-1.5 right-[35%] h-1.5 w-1.5 animate-pulse-soft rounded-full bg-amber-400" />
           )}
         </button>
       ))}

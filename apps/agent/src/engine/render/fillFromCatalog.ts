@@ -27,10 +27,10 @@
  *   - numeric values render via fmtMoney (whole dollars, "0" for zero)
  */
 
-import { PDFDocument, PDFTextField, PDFCheckBox, PDFRadioGroup } from "pdf-lib";
-import { type AnyFormField, type EvaluatedForm } from "../types.js";
+import { PDFCheckBox, PDFDocument, PDFRadioGroup, PDFTextField } from "pdf-lib";
 import { type Catalog, type FieldInventory } from "../catalog.js";
 import { getFormatter } from "../engine.js";
+import { type AnyFormField, type EvaluatedForm } from "../types.js";
 import { verifiedWidget } from "./verifiedWidgets.js";
 
 export interface RenderedWidget {

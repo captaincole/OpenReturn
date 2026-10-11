@@ -8,8 +8,8 @@
  */
 
 import { defineForm, sum } from "../../engine.js";
-import type { ScheduleD } from "./types.js";
 import type { ScheduleDFilingInfo } from "./filingInfo.js";
+import type { ScheduleD } from "./types.js";
 
 /*
  * register() wraps the defineForm side effect. Callers import it and

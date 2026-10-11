@@ -1,7 +1,5 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import { recordFact } from "../db/taxFacts";
-import { recordDecision } from "../db/aiDecisions";
 import {
   makeDividendFactKey,
   makeInterestFactKey,
@@ -10,6 +8,8 @@ import {
   type InterestFactValue,
   type TradeFactValue,
 } from "../../engine/facts";
+import { recordDecision } from "../db/aiDecisions";
+import { recordFact } from "../db/taxFacts";
 import { requireUserContext } from "./userContext";
 
 /*

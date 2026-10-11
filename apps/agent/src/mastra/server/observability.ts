@@ -1,5 +1,5 @@
-import { Observability, ConsoleExporter, DefaultExporter } from "@mastra/observability";
 import { type AnyExportedSpan, type CustomSpanFormatter } from "@mastra/core/observability";
+import { ConsoleExporter, DefaultExporter, Observability } from "@mastra/observability";
 
 /*
  * ConsoleExporter dumps the full span (input, output, attributes) every

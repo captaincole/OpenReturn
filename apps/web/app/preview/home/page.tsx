@@ -11,8 +11,8 @@
  * view) to demonstrate the navigation model.
  */
 
-import Link from "next/link";
 import { cn } from "@/lib/cn";
+import Link from "next/link";
 
 /*
  * ────────────────────────────────────────────────────────────────────────────
@@ -124,13 +124,13 @@ const CHARITABLE = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen w-full bg-bg-base text-ink-primary flex flex-col">
+    <div className="flex min-h-screen w-full flex-col bg-bg-base text-ink-primary">
       <HomeTopBar />
-      <main className="flex-1 px-6 lg:px-10 py-10 lg:py-14">
-        <div className="max-w-6xl mx-auto space-y-14">
+      <main className="flex-1 px-6 py-10 lg:px-10 lg:py-14">
+        <div className="mx-auto max-w-6xl space-y-14">
           <header>
             <h1 className="font-serif text-4xl text-ink-primary">Hi, Alex.</h1>
-            <p className="text-ink-secondary text-[15px] mt-2.5">Your tax life, in one place.</p>
+            <p className="mt-2.5 text-[15px] text-ink-secondary">Your tax life, in one place.</p>
           </header>
 
           <Section
@@ -141,7 +141,7 @@ export default function HomePage() {
               </button>
             }
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {RETURNS.map((r) => (
                 <ReturnCard key={r.id} ret={r} />
               ))}
@@ -150,7 +150,7 @@ export default function HomePage() {
           </Section>
 
           <Section title="Continue with">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {WORKFLOWS.map((w) => (
                 <WorkflowCard key={w.id} workflow={w} />
               ))}
@@ -158,7 +158,7 @@ export default function HomePage() {
           </Section>
 
           <Section title="Your tax picture">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
               <ChartCard
                 title="Income"
                 subtitle="Wages + investment income, last 5 years"
@@ -219,24 +219,24 @@ export default function HomePage() {
 
 function HomeTopBar() {
   return (
-    <header className="shrink-0 h-14 border-b border-border-subtle bg-bg-base/95 backdrop-blur-sm flex items-center px-4 lg:px-6 gap-3">
+    <header className="flex h-14 shrink-0 items-center gap-3 border-b border-border-subtle bg-bg-base/95 px-4 backdrop-blur-sm lg:px-6">
       <Link
         href="/preview/home"
-        className="shrink-0 w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center hover:bg-accent/25 transition-colors"
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-accent/30 bg-accent/15 transition-colors hover:bg-accent/25"
         title="Home"
       >
-        <span className="font-serif text-accent text-sm leading-none">W</span>
+        <span className="font-serif text-sm leading-none text-accent">W</span>
       </Link>
-      <div className="h-6 w-px bg-border-subtle shrink-0" />
+      <div className="h-6 w-px shrink-0 bg-border-subtle" />
       <span className="text-[15px] font-semibold tracking-tight text-ink-primary">Home</span>
       <div className="flex-1" />
       <button
-        className="w-8 h-8 rounded-lg border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary flex items-center justify-center transition-colors"
+        className="flex h-8 w-8 items-center justify-center rounded-lg border border-border-subtle text-ink-secondary transition-colors hover:border-border-strong hover:text-ink-primary"
         title="Settings"
       >
         ⚙
       </button>
-      <div className="w-8 h-8 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center text-xs font-medium text-accent">
+      <div className="flex h-8 w-8 items-center justify-center rounded-full border border-accent/40 bg-accent/20 text-xs font-medium text-accent">
         AC
       </div>
     </header>
@@ -261,7 +261,7 @@ function Section({
   return (
     <section>
       <div className="mb-5 flex items-baseline justify-between">
-        <h2 className="text-[11px] uppercase tracking-[0.22em] text-ink-muted">{title}</h2>
+        <h2 className="text-[11px] tracking-[0.22em] text-ink-muted uppercase">{title}</h2>
         {right}
       </div>
       {children}
@@ -284,28 +284,28 @@ function ReturnCard({ ret }: { ret: (typeof RETURNS)[number] }) {
     <Link
       href="/preview"
       className={cn(
-        "card p-5 transition-all flex flex-col gap-4 min-h-[160px]",
+        "card flex min-h-[160px] flex-col gap-4 p-5 transition-all",
         isActive
-          ? "ring-1 ring-accent/30 hover:ring-accent/50 hover:border-accent/30"
+          ? "ring-1 ring-accent/30 hover:border-accent/30 hover:ring-accent/50"
           : "hover:border-border-strong",
       )}
     >
       <div className="flex items-start justify-between">
         <div>
-          <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">
+          <div className="text-[10px] tracking-[0.18em] text-ink-muted uppercase">
             Tax Year {ret.year}
           </div>
-          <div className="text-[15px] font-semibold text-ink-primary mt-1 tracking-tight">
+          <div className="mt-1 text-[15px] font-semibold tracking-tight text-ink-primary">
             {ret.label}
           </div>
         </div>
         {isActive && (
-          <span className="text-[10px] uppercase tracking-wider text-accent bg-accent/15 px-1.5 py-0.5 rounded">
+          <span className="rounded bg-accent/15 px-1.5 py-0.5 text-[10px] tracking-wider text-accent uppercase">
             Active
           </span>
         )}
         {isFiled && (
-          <span className="text-[10px] uppercase tracking-wider text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded">
+          <span className="rounded bg-emerald-400/10 px-1.5 py-0.5 text-[10px] tracking-wider text-emerald-400 uppercase">
             Filed
           </span>
         )}
@@ -314,11 +314,11 @@ function ReturnCard({ ret }: { ret: (typeof RETURNS)[number] }) {
       <div className="mt-auto">
         {isActive && (
           <>
-            <div className="h-1.5 rounded-full bg-bg-elevated overflow-hidden">
+            <div className="h-1.5 overflow-hidden rounded-full bg-bg-elevated">
               <div className="h-full bg-accent" style={{ width: `${ret.progress}%` }} />
             </div>
-            <div className="flex items-baseline justify-between mt-2 text-[11px]">
-              <span className="tabular-nums text-ink-muted">{ret.progress}% complete</span>
+            <div className="mt-2 flex items-baseline justify-between text-[11px]">
+              <span className="text-ink-muted tabular-nums">{ret.progress}% complete</span>
               <span className="text-ink-secondary">{ret.openAsks} open asks</span>
             </div>
           </>
@@ -333,7 +333,7 @@ function ReturnCard({ ret }: { ret: (typeof RETURNS)[number] }) {
             >
               {ret.outcome}
             </div>
-            <div className="text-ink-muted mt-0.5">Filed {ret.filedOn}</div>
+            <div className="mt-0.5 text-ink-muted">Filed {ret.filedOn}</div>
           </div>
         )}
         {isEmpty && <div className="text-[12px] text-ink-muted">Not started — open to begin.</div>}
@@ -344,8 +344,8 @@ function ReturnCard({ ret }: { ret: (typeof RETURNS)[number] }) {
 
 function NewReturnCard() {
   return (
-    <button className="border border-dashed border-border-subtle hover:border-accent/50 rounded-2xl p-5 transition-colors flex flex-col items-center justify-center text-center gap-2 min-h-[160px] text-ink-muted hover:text-ink-primary group">
-      <span className="text-2xl group-hover:text-accent transition-colors">+</span>
+    <button className="group flex min-h-[160px] flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border-subtle p-5 text-center text-ink-muted transition-colors hover:border-accent/50 hover:text-ink-primary">
+      <span className="text-2xl transition-colors group-hover:text-accent">+</span>
       <span className="text-sm">Start a new return</span>
     </button>
   );
@@ -359,13 +359,13 @@ function NewReturnCard() {
 
 function WorkflowCard({ workflow }: { workflow: (typeof WORKFLOWS)[number] }) {
   return (
-    <button className="card p-5 hover:border-border-strong transition-colors text-left flex flex-col gap-3 group">
-      <div className="w-9 h-9 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center text-accent text-base group-hover:bg-accent/25 transition-colors">
+    <button className="card group flex flex-col gap-3 p-5 text-left transition-colors hover:border-border-strong">
+      <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-accent/30 bg-accent/15 text-base text-accent transition-colors group-hover:bg-accent/25">
         {workflow.icon}
       </div>
       <div>
         <div className="text-[15px] font-medium text-ink-primary">{workflow.title}</div>
-        <div className="text-[13px] text-ink-secondary leading-relaxed mt-1">{workflow.desc}</div>
+        <div className="mt-1 text-[13px] leading-relaxed text-ink-secondary">{workflow.desc}</div>
       </div>
     </button>
   );
@@ -394,14 +394,14 @@ function ChartCard({
     <div className="card p-5">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <div className="text-[11px] uppercase tracking-[0.18em] text-ink-muted">{title}</div>
-          <div className="text-[13px] text-ink-secondary mt-1">{subtitle}</div>
+          <div className="text-[11px] tracking-[0.18em] text-ink-muted uppercase">{title}</div>
+          <div className="mt-1 text-[13px] text-ink-secondary">{subtitle}</div>
         </div>
-        <div className="text-right shrink-0">
-          <div className="text-2xl font-semibold tracking-tight tabular-nums text-ink-primary">
+        <div className="shrink-0 text-right">
+          <div className="text-2xl font-semibold tracking-tight text-ink-primary tabular-nums">
             {value}
           </div>
-          <div className="text-[11px] text-ink-muted mt-0.5">{valueLabel}</div>
+          <div className="mt-0.5 text-[11px] text-ink-muted">{valueLabel}</div>
         </div>
       </div>
       <div className="mt-6">{children}</div>

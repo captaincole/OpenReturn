@@ -9,13 +9,13 @@
 
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { projectRoot } from "../src/paths.js";
+import { loadFromFixtures, type Catalog } from "../src/engine/catalog.js";
 import { evaluateAllForms } from "../src/engine/engine.js";
-import { loadFromFixtures, makeCatalog, type Catalog } from "../src/engine/catalog.js";
-import { getFormSpec } from "../src/engine/registry.js";
-import { makeDecisionsView, makeFactsView, type DerivationContext } from "../src/engine/types.js";
 import { resolveFilingInfo } from "../src/engine/filingInfo.js";
+import { getFormSpec } from "../src/engine/registry.js";
 import { fillFromCatalog } from "../src/engine/render/fillFromCatalog.js";
+import { makeDecisionsView, makeFactsView, type DerivationContext } from "../src/engine/types.js";
+import { projectRoot } from "../src/paths.js";
 import {
   assertEngineNumber,
   assertMatchesGolden,

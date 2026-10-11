@@ -26,9 +26,9 @@
  * check per form — one row per form in the summary.
  */
 
+import { createHash } from "node:crypto";
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
-import { createHash } from "node:crypto";
 import { loadFromFixture, type Catalog, type FieldInventory } from "../src/engine/catalog.js";
 import { fillFromCatalog } from "../src/engine/render/fillFromCatalog.js";
 import type { AnyFormField, EvaluatedForm } from "../src/engine/types.js";

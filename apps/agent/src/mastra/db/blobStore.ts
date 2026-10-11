@@ -1,6 +1,6 @@
+import { mkdir, readFile, rm, unlink, writeFile } from "node:fs/promises";
+import { dirname, join, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { dirname, resolve, join, sep } from "node:path";
-import { mkdir, writeFile, readFile, unlink, rm } from "node:fs/promises";
 
 /*
  * Local filesystem store for document bytes. It replaces the Supabase

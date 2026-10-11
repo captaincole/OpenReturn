@@ -1,10 +1,10 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 import type { EngineFiling, EvaluatedScenario } from "../../engine";
-import { loadAndEvaluateScenario } from "../loadScenario";
 import type { BaseFormField, EngineDerivation } from "../../engine/types";
-import { resolveOwnerFilingForYear } from "../db/filings";
 import type { Scope } from "../db/appDb";
+import { resolveOwnerFilingForYear } from "../db/filings";
+import { loadAndEvaluateScenario } from "../loadScenario";
 import { requireUserContext } from "./userContext";
 
 /*

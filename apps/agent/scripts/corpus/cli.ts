@@ -8,13 +8,13 @@
 
 import "dotenv/config";
 import { runCli } from "../lib/cli";
+import { checkCommand } from "./check";
 import { fetchCommand } from "./fetch";
-import { syncCommand } from "./sync";
-import { statusCommand } from "./status";
 import { ingestCommand } from "./ingest";
 import { reembedCommand } from "./reembed";
-import { checkCommand } from "./check";
 import { searchCommand } from "./search";
+import { statusCommand } from "./status";
+import { syncCommand } from "./sync";
 
 runCli({
   name: "corpus",

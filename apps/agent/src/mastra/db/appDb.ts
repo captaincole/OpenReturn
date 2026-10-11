@@ -1,8 +1,8 @@
-import "dotenv/config";
-import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
-import { mkdirSync } from "node:fs";
 import { createClient, type Client } from "@libsql/client";
+import "dotenv/config";
+import { mkdirSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 /*
  * Per-user DOMAIN data (tax_facts, ai_decisions, filings, …) lives in a

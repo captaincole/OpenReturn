@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { fetchActivityItems, type ActivityItem, type Verdict } from "@/lib/activity";
 import { cn } from "@/lib/cn";
+import { useEffect, useState } from "react";
 
 interface ActivityCardProps {
   /*
@@ -138,15 +138,15 @@ export function ActivityCard({ refreshKey }: ActivityCardProps) {
   }
 
   return (
-    <section className="card flex-1 min-h-0 flex flex-col">
+    <section className="card flex min-h-0 flex-1 flex-col">
       <div className="card-header shrink-0">
         <span>Activity</span>
-        <span className="tabular-nums text-ink-muted normal-case tracking-normal">
+        <span className="tracking-normal text-ink-muted normal-case tabular-nums">
           {items?.length ?? 0}
         </span>
       </div>
 
-      <div className="flex-1 min-h-0 overflow-y-auto">
+      <div className="min-h-0 flex-1 overflow-y-auto">
         {items === null && <div className="px-5 py-6 text-sm text-ink-muted">Loading…</div>}
         {items?.length === 0 && (
           <div className="px-5 py-10 text-center text-sm text-ink-muted">
@@ -186,8 +186,8 @@ function ActivityRow({
       type="button"
       onClick={onToggle}
       className={cn(
-        "w-full text-left px-5 py-3.5",
-        "hover:bg-bg-elevated/50 transition-colors",
+        "w-full px-5 py-3.5 text-left",
+        "transition-colors hover:bg-bg-elevated/50",
         !isFirst && "border-t border-border-subtle",
       )}
       aria-expanded={isExpanded}
@@ -195,7 +195,7 @@ function ActivityRow({
       <div className="flex items-baseline justify-between gap-3">
         <span
           className={cn(
-            "text-[9px] uppercase tracking-[0.18em] font-medium",
+            "text-[9px] font-medium tracking-[0.18em] uppercase",
             isDecision ? "text-accent" : "text-ink-muted",
           )}
         >
@@ -205,10 +205,10 @@ function ActivityRow({
       </div>
 
       <div className="mt-1 flex items-center gap-2 text-ink-primary">
-        <span className="text-sm font-medium truncate">{title}</span>
+        <span className="truncate text-sm font-medium">{title}</span>
         <span
           className={cn(
-            "ml-auto shrink-0 text-ink-muted text-xs transition-transform duration-150",
+            "ml-auto shrink-0 text-xs text-ink-muted transition-transform duration-150",
             isExpanded && "rotate-90",
           )}
           aria-hidden
@@ -218,23 +218,23 @@ function ActivityRow({
       </div>
 
       {!isExpanded && (
-        <div className="mt-1 text-sm text-ink-secondary truncate">{brief(item.value)}</div>
+        <div className="mt-1 truncate text-sm text-ink-secondary">{brief(item.value)}</div>
       )}
 
       {isExpanded && <ExpandedBody item={item} />}
 
       {isDecision && item.verdict && (
-        <div className="mt-2 flex items-center gap-2 flex-wrap">
+        <div className="mt-2 flex flex-wrap items-center gap-2">
           <span
             className={cn(
-              "px-2 py-0.5 rounded text-[10px] font-medium uppercase tracking-wide",
+              "rounded px-2 py-0.5 text-[10px] font-medium tracking-wide uppercase",
               VERDICT_TONE[item.verdict],
             )}
           >
             {VERDICT_LABEL[item.verdict]}
           </span>
           {item.confidence && (
-            <span className="text-[10px] text-ink-muted uppercase tracking-wide">
+            <span className="text-[10px] tracking-wide text-ink-muted uppercase">
               {item.confidence} confidence
             </span>
           )}
@@ -251,13 +251,13 @@ function ExpandedBody({ item }: { item: ActivityItem }) {
 
       {item.kind === "decision" && item.rationale && (
         <DetailBlock label="Why">
-          <p className="text-ink-secondary leading-relaxed whitespace-pre-wrap">{item.rationale}</p>
+          <p className="leading-relaxed whitespace-pre-wrap text-ink-secondary">{item.rationale}</p>
         </DetailBlock>
       )}
 
       {item.kind === "decision" && item.verdictReason && item.verdict !== "accurate" && (
         <DetailBlock label="Reviewer note">
-          <p className="text-ink-secondary leading-relaxed whitespace-pre-wrap">
+          <p className="leading-relaxed whitespace-pre-wrap text-ink-secondary">
             {item.verdictReason}
           </p>
         </DetailBlock>
@@ -269,7 +269,7 @@ function ExpandedBody({ item }: { item: ActivityItem }) {
           <DetailBlock label="Supporting facts">
             <ul className="space-y-0.5">
               {item.supportingFactKeys.map((k) => (
-                <li key={k} className="text-ink-secondary font-mono text-[12px] truncate">
+                <li key={k} className="truncate font-mono text-[12px] text-ink-secondary">
                   {k}
                 </li>
               ))}
@@ -279,11 +279,11 @@ function ExpandedBody({ item }: { item: ActivityItem }) {
 
       {item.sourceNote && (
         <DetailBlock label="Source">
-          <p className="text-ink-secondary text-[13px]">{item.sourceNote}</p>
+          <p className="text-[13px] text-ink-secondary">{item.sourceNote}</p>
         </DetailBlock>
       )}
 
-      <div className="text-ink-faint text-[11px] font-mono pt-1">{item.title}</div>
+      <div className="pt-1 font-mono text-[11px] text-ink-faint">{item.title}</div>
     </div>
   );
 }
@@ -291,7 +291,7 @@ function ExpandedBody({ item }: { item: ActivityItem }) {
 function DetailBlock({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted mb-1">{label}</div>
+      <div className="mb-1 text-[10px] tracking-[0.18em] text-ink-muted uppercase">{label}</div>
       {children}
     </div>
   );
@@ -310,14 +310,14 @@ function ValueDisplay({ value }: { value: unknown }) {
       <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5">
         {entries.map(([k, v]) => (
           <div key={k} className="contents">
-            <dt className="text-[11px] uppercase tracking-wide text-ink-muted pt-0.5">
+            <dt className="pt-0.5 text-[11px] tracking-wide text-ink-muted uppercase">
               {formatFieldLabel(k)}
             </dt>
-            <dd className="text-ink-primary break-words">{formatScalar(v)}</dd>
+            <dd className="break-words text-ink-primary">{formatScalar(v)}</dd>
           </div>
         ))}
       </dl>
     );
   }
-  return <p className="text-ink-primary break-words">{formatScalar(value)}</p>;
+  return <p className="break-words text-ink-primary">{formatScalar(value)}</p>;
 }

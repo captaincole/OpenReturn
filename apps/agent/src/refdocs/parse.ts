@@ -1,5 +1,5 @@
-import type { PageSlice } from "./extract";
 import type { RefBlock, RefSection } from "../mastra/db/refDocs";
+import type { PageSlice } from "./extract";
 
 /*
  * A heading detector returns the heading text when a line (given its

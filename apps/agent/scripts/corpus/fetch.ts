@@ -14,7 +14,7 @@
  */
 
 import { createHash } from "node:crypto";
-import { mkdirSync, existsSync, copyFileSync, readFileSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Command } from "../lib/cli";

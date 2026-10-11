@@ -13,10 +13,10 @@
  */
 
 import type { Scenario } from "../../types.js";
-import { alexFacts, ALEX_TAX_YEAR, ALEX_USER_ID } from "./facts.js";
 import { alexDecisions } from "./decisions.js";
-import { alexExpected } from "./expected.js";
 import { alex540Expected } from "./expected-540.js";
+import { alexExpected } from "./expected.js";
+import { ALEX_TAX_YEAR, ALEX_USER_ID, alexFacts } from "./facts.js";
 
 export const alexScenario: Scenario = {
   name: "alex",

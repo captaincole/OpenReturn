@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
 import { ownerExists } from "@/lib/localAuth";
+import { redirect } from "next/navigation";
 
 /*
  * Setup is one-shot. Once the owner exists this route redirects to

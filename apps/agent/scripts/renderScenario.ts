@@ -11,13 +11,13 @@
 
 import "dotenv/config";
 import { readFile, writeFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { resolve } from "node:path";
 import { parseArgs } from "node:util";
-import { evaluateAllForms } from "../src/engine/engine.js";
 import { loadFromFixtures } from "../src/engine/catalog.js";
+import { evaluateAllForms } from "../src/engine/engine.js";
+import { resolveFilingInfo } from "../src/engine/filingInfo.js";
 import { getFormSpec } from "../src/engine/registry.js";
 import { fillFromCatalog } from "../src/engine/render/fillFromCatalog.js";
-import { resolveFilingInfo } from "../src/engine/filingInfo.js";
 import { makeDecisionsView, makeFactsView, type DerivationContext } from "../src/engine/types.js";
 import { projectRoot } from "../src/paths.js";
 import type { Scenario } from "../tests/types.js";

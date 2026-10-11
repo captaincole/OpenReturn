@@ -16,6 +16,8 @@
  */
 
 import { z } from "zod";
+import type { Catalog, FieldInventory } from "./catalog.js";
+import type { BaseFilingInfo } from "./filingInfo.js";
 import {
   blocked,
   type AnyFormField,
@@ -23,8 +25,6 @@ import {
   type DerivationResult,
   type EvaluatedForm,
 } from "./types.js";
-import type { Catalog, FieldInventory } from "./catalog.js";
-import type { BaseFilingInfo, FilingInfo } from "./filingInfo.js";
 
 // ─── Public shapes ───────────────────────────────────────────────────────
 

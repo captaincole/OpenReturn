@@ -1,6 +1,6 @@
-import { randomBytes, scryptSync, timingSafeEqual, createHmac } from "node:crypto";
-import { cookies } from "next/headers";
 import { getOwnerAuthRow, insertOwnerRow, type OwnerAuthRow } from "@/lib/serverDb";
+import { cookies } from "next/headers";
+import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 
 /*
  * Single-user auth: identity = the instance. One `owner` row in app.db

@@ -12,11 +12,11 @@ import { config } from "dotenv";
 import { resolve } from "node:path";
 import { projectRoot } from "../../src/paths";
 import { runCli } from "../lib/cli";
-import { generateCatalogCommand } from "./generateCatalog";
 import { generateBindingsCommand } from "./generateBindings";
+import { generateCatalogCommand } from "./generateCatalog";
 import { generateTypesCommand } from "./generateTypes";
-import { ingestFederalTaxTableCommand } from "./ingestFederalTaxTable";
 import { ingestCaTaxTableCommand } from "./ingestCaTaxTable";
+import { ingestFederalTaxTableCommand } from "./ingestFederalTaxTable";
 import { promoteCommand } from "./promote";
 
 /*

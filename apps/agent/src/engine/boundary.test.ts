@@ -17,8 +17,8 @@
  */
 
 import { readdirSync, readFileSync } from "node:fs";
-import { join, resolve, dirname, sep } from "node:path";
-import { describe, it, expect } from "vitest";
+import { dirname, join, resolve, sep } from "node:path";
+import { describe, expect, it } from "vitest";
 
 const ENGINE_ROOT = resolve(__dirname);
 

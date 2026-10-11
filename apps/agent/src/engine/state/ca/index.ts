@@ -11,8 +11,8 @@
  * 1040 AGI) resolve on a later fixpoint pass — see ../../registry.ts.
  */
 
-import { makeFormSpec, type FormSpec } from "../../formSpec.js";
 import { fixtureFileSchema } from "../../catalog.js";
+import { makeFormSpec, type FormSpec } from "../../formSpec.js";
 import { register as registerForm540 } from "./540/bindings.js";
 import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
 
@@ -21,8 +21,8 @@ import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
  * these import from src/mastra/public/forms/ and not from
  * apps/agent/forms/.
  */
-import scheduleCaCatalogJson from "../../../mastra/public/forms/state/ca/schedule-ca/catalog.json";
 import form540CatalogJson from "../../../mastra/public/forms/state/ca/540/catalog.json";
+import scheduleCaCatalogJson from "../../../mastra/public/forms/state/ca/schedule-ca/catalog.json";
 
 export const CA_CATALOGS = [
   fixtureFileSchema.parse(scheduleCaCatalogJson),

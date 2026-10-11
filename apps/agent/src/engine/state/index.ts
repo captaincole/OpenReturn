@@ -14,8 +14,8 @@
  * the first rule; review enforces the second.
  */
 
-import { CA_FORMS, CA_CATALOGS } from "./ca/index.js";
 import type { FormSpec } from "../formSpec.js";
+import { CA_CATALOGS, CA_FORMS } from "./ca/index.js";
 
 export const STATE_FORMS: FormSpec[] = [...CA_FORMS];
 export const STATE_CATALOGS = [...CA_CATALOGS];

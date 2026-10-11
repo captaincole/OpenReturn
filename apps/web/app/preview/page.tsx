@@ -11,8 +11,8 @@
  * (components/AppShell.tsx); this page stays as a reference mock.
  */
 
-import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { useState } from "react";
 
 /*
  * ────────────────────────────────────────────────────────────────────────────
@@ -205,7 +205,7 @@ export default function PreviewPage() {
   const activeReturn = RETURNS.find((r) => r.id === returnId)!;
 
   return (
-    <div className="h-screen w-screen bg-bg-base text-ink-primary flex flex-col overflow-hidden">
+    <div className="flex h-screen w-screen flex-col overflow-hidden bg-bg-base text-ink-primary">
       <TopBar
         activeReturn={activeReturn}
         returnMenuOpen={returnMenu}
@@ -220,23 +220,23 @@ export default function PreviewPage() {
         onLucaToggle={() => setLucaBusy((v) => !v)}
       />
 
-      <main className="flex-1 min-h-0 flex">
+      <main className="flex min-h-0 flex-1">
         {/* Desktop: split pane */}
         <aside
           className={cn(
-            "hidden lg:flex shrink-0 w-1/3 max-w-[520px] min-w-[360px] flex-col",
+            "hidden w-1/3 max-w-[520px] min-w-[360px] shrink-0 flex-col lg:flex",
             "border-r border-border-subtle bg-bg-subtle/40",
           )}
         >
           <ChatPane busy={lucaBusy} />
         </aside>
 
-        <section className="flex-1 min-w-0 flex flex-col relative">
+        <section className="relative flex min-w-0 flex-1 flex-col">
           <WorkspacePane tab={tab} busy={lucaBusy} />
         </section>
 
         {/* Mobile: single pane swap */}
-        <div className="lg:hidden flex-1 min-w-0 flex flex-col absolute inset-x-0 top-14 bottom-14">
+        <div className="absolute inset-x-0 top-14 bottom-14 flex min-w-0 flex-1 flex-col lg:hidden">
           {mobilePane === "chat" ? (
             <ChatPane busy={lucaBusy} mobile />
           ) : (
@@ -278,34 +278,34 @@ function TopBar({
   onLucaToggle,
 }: TopBarProps) {
   return (
-    <header className="shrink-0 h-14 border-b border-border-subtle bg-bg-base/95 backdrop-blur-sm flex items-center px-4 lg:px-6 gap-3 relative z-30">
+    <header className="relative z-30 flex h-14 shrink-0 items-center gap-3 border-b border-border-subtle bg-bg-base/95 px-4 backdrop-blur-sm lg:px-6">
       {/* Brand mark — always links back to home-home */}
       <a
         href="/preview/home"
         title="All returns"
-        className="shrink-0 w-8 h-8 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center hover:bg-accent/25 transition-colors"
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-accent/30 bg-accent/15 transition-colors hover:bg-accent/25"
       >
-        <span className="font-serif text-accent text-sm leading-none">W</span>
+        <span className="font-serif text-sm leading-none text-accent">W</span>
       </a>
 
-      <div className="h-6 w-px bg-border-subtle shrink-0" />
+      <div className="h-6 w-px shrink-0 bg-border-subtle" />
 
       {/* Active return — title-weight, the canonical "where am I" cue */}
       <div className="relative shrink-0">
         <button
           onClick={onReturnMenuToggle}
-          className="flex items-baseline gap-1.5 px-2 -mx-2 py-1 rounded-md hover:bg-bg-elevated transition-colors"
+          className="-mx-2 flex items-baseline gap-1.5 rounded-md px-2 py-1 transition-colors hover:bg-bg-elevated"
         >
-          <span className="text-[15px] font-semibold tracking-tight text-ink-primary leading-none">
+          <span className="text-[15px] leading-none font-semibold tracking-tight text-ink-primary">
             {activeReturn.label}
           </span>
-          <span className="text-ink-muted text-[11px] leading-none">▾</span>
+          <span className="text-[11px] leading-none text-ink-muted">▾</span>
         </button>
         {returnMenuOpen && (
-          <div className="absolute top-full left-0 mt-2 w-64 bg-bg-elevated border border-border-subtle rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-40">
+          <div className="absolute top-full left-0 z-40 mt-2 w-64 overflow-hidden rounded-xl border border-border-subtle bg-bg-elevated shadow-2xl shadow-black/40">
             <a
               href="/preview/home"
-              className="flex items-center gap-2 px-4 py-2.5 text-sm text-ink-secondary hover:text-ink-primary hover:bg-bg-panel transition-colors border-b border-border-subtle"
+              className="flex items-center gap-2 border-b border-border-subtle px-4 py-2.5 text-sm text-ink-secondary transition-colors hover:bg-bg-panel hover:text-ink-primary"
             >
               <span className="text-ink-muted">←</span>
               All returns
@@ -315,24 +315,24 @@ function TopBar({
                 key={r.id}
                 onClick={() => onReturnPick(r.id)}
                 className={cn(
-                  "w-full flex items-center justify-between gap-3 px-4 py-3 text-left",
-                  "hover:bg-bg-panel transition-colors",
+                  "flex w-full items-center justify-between gap-3 px-4 py-3 text-left",
+                  "transition-colors hover:bg-bg-panel",
                   r.id === activeReturn.id && "bg-bg-panel",
                 )}
               >
                 <div>
                   <div className="text-sm text-ink-primary">{r.label}</div>
-                  <div className="text-[11px] text-ink-muted mt-0.5">
+                  <div className="mt-0.5 text-[11px] text-ink-muted">
                     {r.state === "active"
                       ? `${r.progress}% complete · ${r.year}`
                       : `Not started · ${r.year}`}
                   </div>
                 </div>
-                {r.id === activeReturn.id && <span className="text-accent text-sm">✓</span>}
+                {r.id === activeReturn.id && <span className="text-sm text-accent">✓</span>}
               </button>
             ))}
             <div className="border-t border-border-subtle">
-              <button className="w-full px-4 py-2.5 text-left text-sm text-ink-secondary hover:bg-bg-panel hover:text-ink-primary transition-colors">
+              <button className="w-full px-4 py-2.5 text-left text-sm text-ink-secondary transition-colors hover:bg-bg-panel hover:text-ink-primary">
                 + Start a new return
               </button>
             </div>
@@ -341,17 +341,17 @@ function TopBar({
       </div>
 
       {/* Workspace tabs — subordinate to the return picker */}
-      <div className="hidden md:block text-ink-faint shrink-0 px-1">·</div>
-      <nav className="hidden md:flex items-center gap-0.5 flex-1 min-w-0">
+      <div className="hidden shrink-0 px-1 text-ink-faint md:block">·</div>
+      <nav className="hidden min-w-0 flex-1 items-center gap-0.5 md:flex">
         {TABS.map((t) => (
           <button
             key={t.id}
             onClick={() => onTab(t.id)}
             className={cn(
-              "px-2.5 py-1 text-[13px] rounded-md transition-colors",
+              "rounded-md px-2.5 py-1 text-[13px] transition-colors",
               tab === t.id
-                ? "text-ink-primary bg-bg-elevated"
-                : "text-ink-secondary hover:text-ink-primary hover:bg-bg-elevated/50",
+                ? "bg-bg-elevated text-ink-primary"
+                : "text-ink-secondary hover:bg-bg-elevated/50 hover:text-ink-primary",
             )}
           >
             {t.label}
@@ -360,48 +360,48 @@ function TopBar({
       </nav>
 
       {/* Mobile: tabs hidden, push right cluster */}
-      <div className="md:hidden flex-1" />
+      <div className="flex-1 md:hidden" />
 
       {/* Right cluster */}
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex shrink-0 items-center gap-2">
         {/* Hard-lock demo toggle */}
         <button
           onClick={onLucaToggle}
           title="Toggle Luca-is-working state (preview only)"
           className={cn(
-            "hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs border transition-colors",
+            "hidden items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs transition-colors sm:flex",
             lucaBusy
-              ? "bg-amber-400/10 border-amber-400/30 text-amber-300"
-              : "bg-bg-panel border-border-subtle text-ink-secondary hover:text-ink-primary",
+              ? "border-amber-400/30 bg-amber-400/10 text-amber-300"
+              : "border-border-subtle bg-bg-panel text-ink-secondary hover:text-ink-primary",
           )}
         >
           <span
             className={cn(
-              "w-1.5 h-1.5 rounded-full",
-              lucaBusy ? "bg-amber-400 animate-pulse-soft" : "bg-emerald-400",
+              "h-1.5 w-1.5 rounded-full",
+              lucaBusy ? "animate-pulse-soft bg-amber-400" : "bg-emerald-400",
             )}
           />
           {lucaBusy ? "Luca working" : "Idle"}
         </button>
 
         {/* Progress chip */}
-        <div className="hidden sm:flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-bg-panel border border-border-subtle text-xs">
-          <div className="w-16 h-1.5 rounded-full bg-bg-elevated overflow-hidden">
+        <div className="hidden items-center gap-2 rounded-lg border border-border-subtle bg-bg-panel px-2.5 py-1.5 text-xs sm:flex">
+          <div className="h-1.5 w-16 overflow-hidden rounded-full bg-bg-elevated">
             <div
               className="h-full bg-accent transition-all duration-500"
               style={{ width: `${activeReturn.progress}%` }}
             />
           </div>
-          <span className="tabular-nums text-ink-secondary">{activeReturn.progress}%</span>
+          <span className="text-ink-secondary tabular-nums">{activeReturn.progress}%</span>
         </div>
 
         <button
-          className="w-8 h-8 rounded-lg border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary flex items-center justify-center transition-colors"
+          className="flex h-8 w-8 items-center justify-center rounded-lg border border-border-subtle text-ink-secondary transition-colors hover:border-border-strong hover:text-ink-primary"
           title="Settings"
         >
           ⚙
         </button>
-        <div className="w-8 h-8 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center text-xs font-medium text-accent">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full border border-accent/40 bg-accent/20 text-xs font-medium text-accent">
           AC
         </div>
       </div>
@@ -417,24 +417,24 @@ function TopBar({
 
 function ChatPane({ busy, mobile = false }: { busy: boolean; mobile?: boolean }) {
   return (
-    <div className={cn("flex flex-col h-full min-h-0", mobile && "bg-bg-base")}>
+    <div className={cn("flex h-full min-h-0 flex-col", mobile && "bg-bg-base")}>
       {/*
        * No header — chat flows freely. Identity lives on each assistant
        * message (avatar) and inside the input bar (persona badge).
        */}
 
-      <div className="flex-1 min-h-0 overflow-y-auto px-5 pt-6 pb-3 space-y-5">
+      <div className="min-h-0 flex-1 space-y-5 overflow-y-auto px-5 pt-6 pb-3">
         {CHAT_MESSAGES.map((m, i) => (
           <div
             key={i}
-            className={m.role === "user" ? "flex justify-end" : "flex gap-2.5 items-start"}
+            className={m.role === "user" ? "flex justify-end" : "flex items-start gap-2.5"}
           >
             {m.role === "assistant" && <LucaAvatar />}
             <div
               className={cn(
                 m.role === "user"
-                  ? "max-w-[80%] bg-accent text-white px-3.5 py-2.5 rounded-2xl rounded-br-sm text-[14px] leading-relaxed"
-                  : "max-w-full text-ink-primary text-[14px] leading-relaxed pt-0.5",
+                  ? "max-w-[80%] rounded-2xl rounded-br-sm bg-accent px-3.5 py-2.5 text-[14px] leading-relaxed text-white"
+                  : "max-w-full pt-0.5 text-[14px] leading-relaxed text-ink-primary",
               )}
               dangerouslySetInnerHTML={{
                 __html: m.content.replace(
@@ -446,16 +446,16 @@ function ChatPane({ busy, mobile = false }: { busy: boolean; mobile?: boolean })
           </div>
         ))}
         {busy && (
-          <div className="flex gap-2.5 items-center">
+          <div className="flex items-center gap-2.5">
             <LucaAvatar pulsing />
             <div className="flex items-center gap-1 pt-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-ink-muted animate-pulse-soft" />
+              <span className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-ink-muted" />
               <span
-                className="w-1.5 h-1.5 rounded-full bg-ink-muted animate-pulse-soft"
+                className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-ink-muted"
                 style={{ animationDelay: "0.2s" }}
               />
               <span
-                className="w-1.5 h-1.5 rounded-full bg-ink-muted animate-pulse-soft"
+                className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-ink-muted"
                 style={{ animationDelay: "0.4s" }}
               />
             </div>
@@ -474,11 +474,11 @@ function LucaAvatar({ pulsing = false }: { pulsing?: boolean }) {
   return (
     <div
       className={cn(
-        "shrink-0 w-7 h-7 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mt-0.5",
+        "mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-accent/30 bg-accent/15",
         pulsing && "animate-pulse-soft",
       )}
     >
-      <span className="font-serif text-accent text-[11px] leading-none">T</span>
+      <span className="font-serif text-[11px] leading-none text-accent">T</span>
     </div>
   );
 }
@@ -495,7 +495,7 @@ function ChatInput({ busy }: { busy: boolean }) {
         placeholder={busy ? "Luca is thinking…" : "Reply to Luca…"}
         disabled={busy}
         rows={2}
-        className="w-full px-4 pt-3.5 pb-1 bg-transparent text-ink-primary placeholder:text-ink-muted text-[14px] leading-relaxed resize-none focus:outline-none disabled:opacity-50"
+        className="w-full resize-none bg-transparent px-4 pt-3.5 pb-1 text-[14px] leading-relaxed text-ink-primary placeholder:text-ink-muted focus:outline-none disabled:opacity-50"
       />
       <div className="flex items-center gap-1 px-2.5 pb-2.5">
         <IconButton title="Attach a document">
@@ -532,20 +532,20 @@ function ChatInput({ busy }: { busy: boolean }) {
         <div className="flex-1" />
 
         <button
-          className="flex items-center gap-1.5 px-2 py-1 rounded-md text-[12px] text-ink-secondary hover:text-ink-primary hover:bg-bg-elevated transition-colors"
+          className="flex items-center gap-1.5 rounded-md px-2 py-1 text-[12px] text-ink-secondary transition-colors hover:bg-bg-elevated hover:text-ink-primary"
           title="Switch agent"
         >
-          <span className="w-4 h-4 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center">
-            <span className="font-serif text-accent text-[9px] leading-none">T</span>
+          <span className="flex h-4 w-4 items-center justify-center rounded-full border border-accent/40 bg-accent/20">
+            <span className="font-serif text-[9px] leading-none text-accent">T</span>
           </span>
           <span>Luca</span>
-          <span className="text-ink-muted text-[10px] leading-none mt-0.5">▾</span>
+          <span className="mt-0.5 text-[10px] leading-none text-ink-muted">▾</span>
         </button>
 
         <button
           disabled={busy}
           title="Send"
-          className="w-8 h-8 rounded-full bg-accent hover:bg-accent-hover disabled:bg-bg-elevated disabled:text-ink-muted text-white flex items-center justify-center transition-colors ml-1"
+          className="ml-1 flex h-8 w-8 items-center justify-center rounded-full bg-accent text-white transition-colors hover:bg-accent-hover disabled:bg-bg-elevated disabled:text-ink-muted"
         >
           <svg
             width="14"
@@ -570,7 +570,7 @@ function IconButton({ children, title }: { children: React.ReactNode; title: str
   return (
     <button
       title={title}
-      className="w-8 h-8 rounded-lg text-ink-secondary hover:text-ink-primary hover:bg-bg-elevated flex items-center justify-center transition-colors"
+      className="flex h-8 w-8 items-center justify-center rounded-lg text-ink-secondary transition-colors hover:bg-bg-elevated hover:text-ink-primary"
     >
       {children}
     </button>
@@ -593,18 +593,18 @@ function WorkspacePane({
   mobile?: boolean;
 }) {
   return (
-    <div className={cn("flex-1 min-h-0 flex flex-col relative", mobile && "bg-bg-base")}>
+    <div className={cn("relative flex min-h-0 flex-1 flex-col", mobile && "bg-bg-base")}>
       {busy && (
-        <div className="absolute inset-x-0 top-0 z-20 px-6 py-2.5 bg-amber-400/10 border-b border-amber-400/20 flex items-center gap-2 text-sm text-amber-200">
-          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse-soft" />
+        <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-2 border-b border-amber-400/20 bg-amber-400/10 px-6 py-2.5 text-sm text-amber-200">
+          <span className="h-2 w-2 animate-pulse-soft rounded-full bg-amber-400" />
           <span>Luca is working — your turn next.</span>
         </div>
       )}
 
       <div
         className={cn(
-          "flex-1 min-h-0 overflow-y-auto transition-opacity",
-          busy && "opacity-50 pointer-events-none",
+          "min-h-0 flex-1 overflow-y-auto transition-opacity",
+          busy && "pointer-events-none opacity-50",
           busy && "pt-10",
         )}
       >
@@ -635,13 +635,13 @@ function HomeView() {
   const visibleActivity = activityExpanded ? ACTIVITY.concat(ACTIVITY, ACTIVITY) : ACTIVITY;
 
   return (
-    <div className="px-6 lg:px-10 py-8 lg:py-10 max-w-5xl mx-auto space-y-8">
+    <div className="mx-auto max-w-5xl space-y-8 px-6 py-8 lg:px-10 lg:py-10">
       {/* Progress strip with drill-down */}
       <section className="card p-5">
-        <div className="flex items-baseline justify-between mb-4">
+        <div className="mb-4 flex items-baseline justify-between">
           <div>
-            <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">Progress</div>
-            <div className="text-2xl font-semibold tracking-tight tabular-nums text-ink-primary mt-1">
+            <div className="text-[10px] tracking-[0.18em] text-ink-muted uppercase">Progress</div>
+            <div className="mt-1 text-2xl font-semibold tracking-tight text-ink-primary tabular-nums">
               60% complete
             </div>
           </div>
@@ -660,10 +660,10 @@ function HomeView() {
         </div>
 
         {expanded && (
-          <div className="mt-5 pt-5 border-t border-border-subtle animate-fade-in">
-            <div className="flex items-baseline justify-between mb-3">
+          <div className="mt-5 animate-fade-in border-t border-border-subtle pt-5">
+            <div className="mb-3 flex items-baseline justify-between">
               <div className="flex items-baseline gap-2">
-                <span className="text-[11px] uppercase tracking-[0.18em] text-ink-muted">
+                <span className="text-[11px] tracking-[0.18em] text-ink-muted uppercase">
                   {expanded.label}
                 </span>
                 <span className="text-[11px] text-ink-faint">
@@ -672,7 +672,7 @@ function HomeView() {
               </div>
               <button
                 onClick={() => setExpandedCat(null)}
-                className="text-[11px] uppercase tracking-wider text-ink-muted hover:text-ink-primary transition-colors"
+                className="text-[11px] tracking-wider text-ink-muted uppercase transition-colors hover:text-ink-primary"
               >
                 Collapse ↑
               </button>
@@ -687,15 +687,15 @@ function HomeView() {
       </section>
 
       {/* Two-column: Plan + Open asks */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <section className="card">
           <div className="card-header">
             <span>Plan</span>
-            <span className="tabular-nums text-ink-muted normal-case tracking-normal">
+            <span className="tracking-normal text-ink-muted normal-case tabular-nums">
               {PLAN.filter((p) => p.status !== "done").length}
             </span>
           </div>
-          <ul className="px-5 pb-5 space-y-3">
+          <ul className="space-y-3 px-5 pb-5">
             {PLAN.map((item) => (
               <PlanRow key={item.id} item={item} />
             ))}
@@ -705,19 +705,19 @@ function HomeView() {
         <section className="card">
           <div className="card-header">
             <span>Open asks</span>
-            <span className="tabular-nums text-ink-muted normal-case tracking-normal">
+            <span className="tracking-normal text-ink-muted normal-case tabular-nums">
               {OPEN_ASKS.length}
             </span>
           </div>
-          <ul className="px-5 pb-5 space-y-2.5">
+          <ul className="space-y-2.5 px-5 pb-5">
             {OPEN_ASKS.map((ask) => (
               <li
                 key={ask.id}
-                className="flex items-start gap-3 py-2.5 border-b border-border-subtle/50 last:border-0"
+                className="flex items-start gap-3 border-b border-border-subtle/50 py-2.5 last:border-0"
               >
                 <span
                   className={cn(
-                    "shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full",
+                    "mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full",
                     ask.priority === "high" && "bg-red-400",
                     ask.priority === "med" && "bg-amber-400",
                     ask.priority === "low" && "bg-ink-faint",
@@ -725,7 +725,7 @@ function HomeView() {
                 />
                 <div className="flex-1">
                   <div className="text-sm text-ink-primary">{ask.title}</div>
-                  <div className="text-[11px] text-ink-muted uppercase tracking-wide mt-0.5">
+                  <div className="mt-0.5 text-[11px] tracking-wide text-ink-muted uppercase">
                     {ask.priority} priority
                   </div>
                 </div>
@@ -739,7 +739,7 @@ function HomeView() {
       <section className="card">
         <div className="card-header">
           <span>Activity</span>
-          <span className="tabular-nums text-ink-muted normal-case tracking-normal">
+          <span className="tracking-normal text-ink-muted normal-case tabular-nums">
             {activityExpanded
               ? visibleActivity.length
               : `${ACTIVITY.length} of ${visibleActivity.length === ACTIVITY.length ? ACTIVITY.length : "many"}`}
@@ -754,7 +754,7 @@ function HomeView() {
               <div className="flex items-baseline justify-between gap-3">
                 <span
                   className={cn(
-                    "text-[9px] uppercase tracking-[0.18em] font-medium",
+                    "text-[9px] font-medium tracking-[0.18em] uppercase",
                     item.kind === "decision" ? "text-accent" : "text-ink-muted",
                   )}
                 >
@@ -763,12 +763,12 @@ function HomeView() {
                 <span className="text-[11px] text-ink-faint tabular-nums">{item.time}</span>
               </div>
               <div className="mt-1 flex items-center gap-3">
-                <span className="text-sm text-ink-primary truncate flex-1">
+                <span className="flex-1 truncate text-sm text-ink-primary">
                   {item.title.split("·").slice(1).join("·").trim() || item.title}
                 </span>
                 <span className="text-sm text-ink-secondary tabular-nums">{item.value}</span>
                 {"verdict" in item && item.verdict === "accurate" && (
-                  <span className="text-[10px] px-1.5 py-0.5 rounded text-emerald-400 bg-emerald-400/10 uppercase tracking-wide">
+                  <span className="rounded bg-emerald-400/10 px-1.5 py-0.5 text-[10px] tracking-wide text-emerald-400 uppercase">
                     Grounded
                   </span>
                 )}
@@ -779,7 +779,7 @@ function HomeView() {
         <div className="border-t border-border-subtle">
           <button
             onClick={() => setActivityExpanded((v) => !v)}
-            className="w-full px-5 py-3 text-sm text-ink-secondary hover:text-ink-primary hover:bg-bg-elevated/40 transition-colors"
+            className="w-full px-5 py-3 text-sm text-ink-secondary transition-colors hover:bg-bg-elevated/40 hover:text-ink-primary"
           >
             {activityExpanded ? "Show less ↑" : "View all ↓"}
           </button>
@@ -804,11 +804,11 @@ function ProgressSegment({
     <button
       onClick={onClick}
       className={cn(
-        "text-left p-2 rounded-lg transition-colors",
+        "rounded-lg p-2 text-left transition-colors",
         active ? "bg-accent/10 ring-1 ring-accent/30" : "hover:bg-bg-elevated/40",
       )}
     >
-      <div className="h-1.5 rounded-full bg-bg-elevated overflow-hidden">
+      <div className="h-1.5 overflow-hidden rounded-full bg-bg-elevated">
         <div
           className={cn(
             "h-full transition-all duration-500",
@@ -819,7 +819,7 @@ function ProgressSegment({
       </div>
       <div
         className={cn(
-          "text-[11px] mt-1.5 truncate flex items-center justify-between gap-1",
+          "mt-1.5 flex items-center justify-between gap-1 truncate text-[11px]",
           active ? "text-ink-primary" : "text-ink-muted",
         )}
       >
@@ -837,14 +837,14 @@ function CategoryItemRow({ item }: { item: CategoryItem }) {
     <li>
       <button
         className={cn(
-          "w-full flex items-start gap-3 p-2.5 rounded-lg text-left transition-colors group",
+          "group flex w-full items-start gap-3 rounded-lg p-2.5 text-left transition-colors",
           !isDone && "hover:bg-bg-elevated/50",
         )}
       >
         {isDone ? (
           <svg
             viewBox="0 0 16 16"
-            className="shrink-0 mt-[3px] w-3.5 h-3.5 text-emerald-400"
+            className="mt-[3px] h-3.5 w-3.5 shrink-0 text-emerald-400"
             aria-hidden
           >
             <circle cx="8" cy="8" r="7.5" fill="currentColor" opacity="0.18" />
@@ -858,31 +858,31 @@ function CategoryItemRow({ item }: { item: CategoryItem }) {
             />
           </svg>
         ) : isDoing ? (
-          <span className="shrink-0 mt-[5px] w-2.5 h-2.5 rounded-full bg-accent animate-pulse-soft" />
+          <span className="mt-[5px] h-2.5 w-2.5 shrink-0 animate-pulse-soft rounded-full bg-accent" />
         ) : (
-          <span className="shrink-0 mt-[4px] w-3 h-3 rounded-full border border-border-strong" />
+          <span className="mt-[4px] h-3 w-3 shrink-0 rounded-full border border-border-strong" />
         )}
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           <div
             className={cn(
               "text-sm leading-snug",
-              isDoing && "text-ink-primary font-medium",
+              isDoing && "font-medium text-ink-primary",
               isDone && "text-ink-muted",
               !isDoing &&
                 !isDone &&
-                "text-ink-secondary group-hover:text-ink-primary transition-colors",
+                "text-ink-secondary transition-colors group-hover:text-ink-primary",
             )}
           >
             {item.label}
           </div>
           {item.note && (
-            <div className="text-[11px] text-ink-muted mt-0.5 leading-snug">{item.note}</div>
+            <div className="mt-0.5 text-[11px] leading-snug text-ink-muted">{item.note}</div>
           )}
         </div>
         {!isDone && (
           <span
             className={cn(
-              "text-[11px] shrink-0 mt-0.5 transition-opacity",
+              "mt-0.5 shrink-0 text-[11px] transition-opacity",
               isDoing ? "text-accent opacity-100" : "text-accent opacity-0 group-hover:opacity-100",
             )}
           >
@@ -902,7 +902,7 @@ function PlanRow({ item }: { item: (typeof PLAN)[number] }) {
       {isDone ? (
         <svg
           viewBox="0 0 16 16"
-          className="shrink-0 mt-[3px] w-3.5 h-3.5 text-emerald-400"
+          className="mt-[3px] h-3.5 w-3.5 shrink-0 text-emerald-400"
           aria-hidden
         >
           <circle cx="8" cy="8" r="7.5" fill="currentColor" opacity="0.18" />
@@ -916,15 +916,15 @@ function PlanRow({ item }: { item: (typeof PLAN)[number] }) {
           />
         </svg>
       ) : isDoing ? (
-        <span className="shrink-0 mt-[5px] w-2.5 h-2.5 rounded-full bg-accent animate-pulse-soft" />
+        <span className="mt-[5px] h-2.5 w-2.5 shrink-0 animate-pulse-soft rounded-full bg-accent" />
       ) : (
-        <span className="shrink-0 mt-[4px] w-3 h-3 rounded-full border border-border-strong" />
+        <span className="mt-[4px] h-3 w-3 shrink-0 rounded-full border border-border-strong" />
       )}
       <div className="flex-1">
         <div
           className={cn(
             "text-sm leading-snug",
-            isDoing && "text-ink-primary font-medium",
+            isDoing && "font-medium text-ink-primary",
             isDone && "text-ink-muted line-through decoration-ink-faint/60",
             !isDoing && !isDone && "text-ink-secondary",
           )}
@@ -932,7 +932,7 @@ function PlanRow({ item }: { item: (typeof PLAN)[number] }) {
           {item.title}
         </div>
         {"note" in item && item.note && !isDone && (
-          <div className="text-[12px] text-ink-muted mt-0.5">{item.note}</div>
+          <div className="mt-0.5 text-[12px] text-ink-muted">{item.note}</div>
         )}
       </div>
     </li>
@@ -947,35 +947,35 @@ function PlanRow({ item }: { item: (typeof PLAN)[number] }) {
 
 function FormsView() {
   return (
-    <div className="px-6 lg:px-10 py-8 max-w-5xl mx-auto space-y-10">
+    <div className="mx-auto max-w-5xl space-y-10 px-6 py-8 lg:px-10">
       <section>
         <div className="mb-5 flex items-baseline justify-between">
           <div>
             <h2 className="font-serif text-2xl text-ink-primary">Working drafts</h2>
-            <p className="text-ink-secondary text-sm mt-1">
+            <p className="mt-1 text-sm text-ink-secondary">
               Live as you talk — Luca fills lines as facts come in.
             </p>
           </div>
-          <span className="text-[11px] text-ink-muted uppercase tracking-wider">
+          <span className="text-[11px] tracking-wider text-ink-muted uppercase">
             {FORMS.length} forms
           </span>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {FORMS.map((f) => (
             <div
               key={f.id}
-              className="card p-5 hover:border-border-strong transition-colors cursor-pointer"
+              className="card cursor-pointer p-5 transition-colors hover:border-border-strong"
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <div className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">
+                  <div className="text-[10px] tracking-[0.18em] text-ink-muted uppercase">
                     {f.id}
                   </div>
-                  <div className="font-serif text-lg text-ink-primary mt-1">{f.label}</div>
+                  <div className="mt-1 font-serif text-lg text-ink-primary">{f.label}</div>
                 </div>
                 <span
                   className={cn(
-                    "px-2 py-0.5 rounded text-[10px] uppercase tracking-wide",
+                    "rounded px-2 py-0.5 text-[10px] tracking-wide uppercase",
                     f.status === "drafting"
                       ? "bg-accent/15 text-accent"
                       : "bg-bg-elevated text-ink-muted",
@@ -985,13 +985,13 @@ function FormsView() {
                 </span>
               </div>
               <div className="mt-4">
-                <div className="h-1.5 rounded-full bg-bg-elevated overflow-hidden">
+                <div className="h-1.5 overflow-hidden rounded-full bg-bg-elevated">
                   <div
                     className="h-full bg-accent transition-all duration-500"
                     style={{ width: `${(f.filled / f.total) * 100}%` }}
                   />
                 </div>
-                <div className="flex items-baseline justify-between mt-2 text-xs">
+                <div className="mt-2 flex items-baseline justify-between text-xs">
                   <span className="text-ink-muted tabular-nums">
                     {f.filled} / {f.total} fields
                   </span>
@@ -1009,36 +1009,36 @@ function FormsView() {
       <section>
         <div className="mb-5">
           <h2 className="font-serif text-2xl text-ink-primary">Deliverables</h2>
-          <p className="text-ink-secondary text-sm mt-1">
+          <p className="mt-1 text-sm text-ink-secondary">
             Packaged outputs — ready to share with your CPA or file.
           </p>
         </div>
         <div className="space-y-3">
-          <div className="card p-4 flex items-center gap-4">
-            <div className="w-10 h-12 rounded bg-bg-elevated border border-border-subtle flex items-center justify-center text-ink-muted text-[10px] font-mono">
+          <div className="card flex items-center gap-4 p-4">
+            <div className="flex h-12 w-10 items-center justify-center rounded border border-border-subtle bg-bg-elevated font-mono text-[10px] text-ink-muted">
               PDF
             </div>
-            <div className="flex-1 min-w-0">
+            <div className="min-w-0 flex-1">
               <div className="text-sm font-medium text-ink-primary">CPA review packet</div>
-              <div className="text-[11px] text-ink-muted mt-0.5">
+              <div className="mt-0.5 text-[11px] text-ink-muted">
                 Pending — completes when all working drafts are signed off
               </div>
             </div>
-            <span className="text-[10px] px-2 py-1 rounded bg-bg-elevated text-ink-muted uppercase tracking-wide">
+            <span className="rounded bg-bg-elevated px-2 py-1 text-[10px] tracking-wide text-ink-muted uppercase">
               Not ready
             </span>
           </div>
-          <div className="card p-4 flex items-center gap-4">
-            <div className="w-10 h-12 rounded bg-bg-elevated border border-border-subtle flex items-center justify-center text-ink-muted text-[10px] font-mono">
+          <div className="card flex items-center gap-4 p-4">
+            <div className="flex h-12 w-10 items-center justify-center rounded border border-border-subtle bg-bg-elevated font-mono text-[10px] text-ink-muted">
               ZIP
             </div>
-            <div className="flex-1 min-w-0">
+            <div className="min-w-0 flex-1">
               <div className="text-sm font-medium text-ink-primary">
                 Filing bundle (1040 + schedules + CA 540)
               </div>
-              <div className="text-[11px] text-ink-muted mt-0.5">Pending CPA sign-off</div>
+              <div className="mt-0.5 text-[11px] text-ink-muted">Pending CPA sign-off</div>
             </div>
-            <span className="text-[10px] px-2 py-1 rounded bg-bg-elevated text-ink-muted uppercase tracking-wide">
+            <span className="rounded bg-bg-elevated px-2 py-1 text-[10px] tracking-wide text-ink-muted uppercase">
               Not ready
             </span>
           </div>
@@ -1056,22 +1056,22 @@ function FormsView() {
 
 function DocumentsView() {
   return (
-    <div className="px-6 lg:px-10 py-8 max-w-5xl mx-auto">
-      <div className="flex items-baseline justify-between mb-5">
+    <div className="mx-auto max-w-5xl px-6 py-8 lg:px-10">
+      <div className="mb-5 flex items-baseline justify-between">
         <div>
           <h2 className="font-serif text-2xl text-ink-primary">Documents</h2>
-          <p className="text-ink-secondary text-sm mt-1">
+          <p className="mt-1 text-sm text-ink-secondary">
             W-2s, 1099s, K-1s — anything you've uploaded.
           </p>
         </div>
-        <span className="text-[11px] text-ink-muted uppercase tracking-wider">
+        <span className="text-[11px] tracking-wider text-ink-muted uppercase">
           {SOURCE_DOCS.length} files
         </span>
       </div>
 
       <DropZone />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
+      <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {SOURCE_DOCS.map((doc) => (
           <DocCard key={doc.id} doc={doc} />
         ))}
@@ -1082,12 +1082,12 @@ function DocumentsView() {
 
 function DropZone() {
   return (
-    <div className="border-2 border-dashed border-border-subtle hover:border-accent/50 rounded-2xl py-10 px-6 text-center bg-bg-subtle/40 transition-colors cursor-pointer">
+    <div className="cursor-pointer rounded-2xl border-2 border-dashed border-border-subtle bg-bg-subtle/40 px-6 py-10 text-center transition-colors hover:border-accent/50">
       <div className="text-3xl text-ink-muted">⬆</div>
       <div className="mt-2 text-sm text-ink-primary">
         Drop W-2s, 1099s, or other tax documents here
       </div>
-      <div className="text-xs text-ink-muted mt-1">PDF, PNG, JPG · up to 10 MB each</div>
+      <div className="mt-1 text-xs text-ink-muted">PDF, PNG, JPG · up to 10 MB each</div>
       <button className="mt-4 text-xs text-accent hover:text-accent-hover">or browse files</button>
     </div>
   );
@@ -1095,29 +1095,29 @@ function DropZone() {
 
 function DocCard({ doc }: { doc: (typeof SOURCE_DOCS)[number] }) {
   return (
-    <div className="card p-4 group cursor-pointer hover:border-border-strong transition-colors">
+    <div className="card group cursor-pointer p-4 transition-colors hover:border-border-strong">
       <div className="flex items-start justify-between">
-        <span className="px-2 py-0.5 rounded text-[10px] uppercase tracking-wide bg-bg-elevated text-ink-secondary">
+        <span className="rounded bg-bg-elevated px-2 py-0.5 text-[10px] tracking-wide text-ink-secondary uppercase">
           {doc.type}
         </span>
         {doc.parsed && (
-          <span className="text-[10px] text-emerald-400 flex items-center gap-1">
-            <span className="w-1 h-1 rounded-full bg-emerald-400" /> parsed
+          <span className="flex items-center gap-1 text-[10px] text-emerald-400">
+            <span className="h-1 w-1 rounded-full bg-emerald-400" /> parsed
           </span>
         )}
       </div>
-      <div className="aspect-[3/4] mt-3 rounded-lg bg-bg-elevated/50 border border-border-subtle flex items-center justify-center">
-        <span className="text-ink-faint text-xs font-mono">preview</span>
+      <div className="mt-3 flex aspect-[3/4] items-center justify-center rounded-lg border border-border-subtle bg-bg-elevated/50">
+        <span className="font-mono text-xs text-ink-faint">preview</span>
       </div>
       <div className="mt-3">
-        <div className="text-sm text-ink-primary truncate">{doc.name}</div>
-        <div className="text-[11px] text-ink-muted mt-0.5">{doc.size}</div>
+        <div className="truncate text-sm text-ink-primary">{doc.name}</div>
+        <div className="mt-0.5 text-[11px] text-ink-muted">{doc.size}</div>
       </div>
-      <div className="mt-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button className="flex-1 text-xs py-1.5 rounded border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary">
+      <div className="mt-3 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+        <button className="flex-1 rounded border border-border-subtle py-1.5 text-xs text-ink-secondary hover:border-border-strong hover:text-ink-primary">
           Preview
         </button>
-        <button className="flex-1 text-xs py-1.5 rounded border border-border-subtle hover:border-border-strong text-ink-secondary hover:text-ink-primary">
+        <button className="flex-1 rounded border border-border-subtle py-1.5 text-xs text-ink-secondary hover:border-border-strong hover:text-ink-primary">
           Send to Luca
         </button>
       </div>
@@ -1139,18 +1139,18 @@ function MobileTabBar({
   onChange: (id: MobilePaneId) => void;
 }) {
   return (
-    <nav className="lg:hidden shrink-0 h-14 border-t border-border-subtle bg-bg-subtle/95 backdrop-blur-sm flex relative z-30">
+    <nav className="relative z-30 flex h-14 shrink-0 border-t border-border-subtle bg-bg-subtle/95 backdrop-blur-sm lg:hidden">
       {MOBILE_PANES.map((p) => (
         <button
           key={p.id}
           onClick={() => onChange(p.id)}
           className={cn(
-            "flex-1 flex flex-col items-center justify-center gap-0.5",
+            "flex flex-1 flex-col items-center justify-center gap-0.5",
             value === p.id ? "text-ink-primary" : "text-ink-muted",
           )}
         >
           <span className="text-lg leading-none">{p.icon}</span>
-          <span className="text-[10px] uppercase tracking-wider">{p.label}</span>
+          <span className="text-[10px] tracking-wider uppercase">{p.label}</span>
         </button>
       ))}
     </nav>

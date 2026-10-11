@@ -1,6 +1,6 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import { hybridSearchRefDocs, getBlock } from "../db/refDocs";
+import { getBlock, hybridSearchRefDocs } from "../db/refDocs";
 
 const searchHitSchema = z.object({
   blockId: z.string(),

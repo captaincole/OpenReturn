@@ -7,12 +7,12 @@
  * Generated at: 2026-05-14T20:21:25.969Z
  */
 
-import { defineForm, stubZero, sum, floor } from "../../../engine.js";
-import { SSN } from "../../../values.js";
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { lookupTax } from "../../../data/taxTable.js";
-import type { Form540 } from "./types.js";
+import { defineForm, floor, sum } from "../../../engine.js";
+import { SSN } from "../../../values.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
+import type { Form540 } from "./types.js";
 
 /*
  * register() wraps the defineForm side effect. Callers import it and

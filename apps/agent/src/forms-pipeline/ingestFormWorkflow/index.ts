@@ -14,7 +14,7 @@ import {
   type WorkflowInput,
   type WorkflowOutput,
 } from "./schemas.js";
-import { extractStep, classifyStep, persistStep } from "./steps.js";
+import { classifyStep, extractStep, persistStep } from "./steps.js";
 
 export const ingestFormWorkflow = createWorkflow({
   id: "ingest-form",

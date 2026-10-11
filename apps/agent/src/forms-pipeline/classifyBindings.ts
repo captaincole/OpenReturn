@@ -17,8 +17,8 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import type { FieldInventory } from "../engine/catalog.js";
+import { formatIndexedForm, loadCatalogIndex, type CatalogIndex } from "./catalogIndex.js";
 import type { RetrievedFieldContext } from "./retrieveContext.js";
-import { loadCatalogIndex, formatIndexedForm, type CatalogIndex } from "./catalogIndex.js";
 
 const MODEL = "claude-sonnet-4-6";
 const MAX_TOKENS = 16000;

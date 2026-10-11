@@ -1,6 +1,6 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import { recordDecision, listDecisions } from "../db/aiDecisions";
+import { listDecisions, recordDecision } from "../db/aiDecisions";
 import { reviewDecision } from "../workflows/reviewDecision";
 import { requireUserContext } from "./userContext";
 

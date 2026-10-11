@@ -1,7 +1,7 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { ACTIVITY_TAX_YEAR } from "@/lib/activity";
 import { getOwnerSession } from "@/lib/localAuth";
 import { fetchActivityItems } from "@/lib/serverDb";
-import { ACTIVITY_TAX_YEAR } from "@/lib/activity";
+import { type NextRequest, NextResponse } from "next/server";
 
 /*
  * Activity feed for the polling activity UI. Auth comes from the owner

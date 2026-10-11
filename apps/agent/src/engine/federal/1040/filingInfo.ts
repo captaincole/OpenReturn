@@ -6,9 +6,9 @@
  * that need one of these slots can import this type directly.
  */
 
-import type { Money } from "../../values.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { EngineDerivation } from "../../types.js";
+import type { Money } from "../../values.js";
 
 export interface Form1040FilingInfo extends BaseFilingInfo {
   /** Federal Form 1040 must-file determination. */

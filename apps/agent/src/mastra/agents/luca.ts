@@ -1,18 +1,18 @@
 import { Agent } from "@mastra/core/agent";
-import { Memory } from "@mastra/memory";
 import { LibSQLStore } from "@mastra/libsql";
+import { Memory } from "@mastra/memory";
+import { modelFor } from "../models";
 import { mastraDbUrl } from "../server/storage";
-import { recordTaxFact, listOpenQuestionsTool, resolveOpenQuestion } from "../tools/taxFacts";
+import { listAIDecisions, recordAIDecision } from "../tools/aiDecisions";
 import { getCaseState } from "../tools/caseState";
-import { ingestW2 } from "../tools/ingestW2";
-import { ingest1099Consolidated } from "../tools/ingest1099Consolidated";
-import { recordAIDecision, listAIDecisions } from "../tools/aiDecisions";
-import { generateTaxDocuments } from "../tools/generateTaxDocuments";
-import { requestDocumentUpload } from "../tools/requestDocument";
 import { dismissRequestedAction } from "../tools/dismissRequestedAction";
+import { generateTaxDocuments } from "../tools/generateTaxDocuments";
+import { ingest1099Consolidated } from "../tools/ingest1099Consolidated";
+import { ingestW2 } from "../tools/ingestW2";
+import { requestDocumentUpload } from "../tools/requestDocument";
+import { listOpenQuestionsTool, recordTaxFact, resolveOpenQuestion } from "../tools/taxFacts";
 import { lucaInstructions } from "./luca.instructions";
 import { lucaWorkingMemorySchema } from "./luca.workingMemory";
-import { modelFor } from "../models";
 import { PdfAttachmentRasterizer } from "./pdfAttachments";
 
 export const luca = new Agent({

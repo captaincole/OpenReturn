@@ -13,8 +13,8 @@
  *              Vectors from different models live in different spaces.
  */
 
-import { setBlockEmbeddings, listBlocksWithoutEmbeddings } from "../../src/mastra/db/refDocs";
-import { resolveEmbeddings, embedDocuments } from "../../src/refdocs/embeddings";
+import { listBlocksWithoutEmbeddings, setBlockEmbeddings } from "../../src/mastra/db/refDocs";
+import { embedDocuments, resolveEmbeddings } from "../../src/refdocs/embeddings";
 import type { Command } from "../lib/cli";
 
 async function run(argv: string[]): Promise<void> {

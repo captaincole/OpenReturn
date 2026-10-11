@@ -1,5 +1,5 @@
 import { luca } from "../agents/luca";
-import { getAppDb, ensureAppSchema, asStr, asNum } from "./appDb";
+import { asNum, asStr, ensureAppSchema, getAppDb } from "./appDb";
 import { deleteBlob } from "./blobStore";
 
 /*

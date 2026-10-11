@@ -1,13 +1,13 @@
 import type { InValue, Row } from "@libsql/client";
 import {
-  getAppDb,
-  ensureAppSchema,
-  type Scope,
+  asJson,
+  asNum,
   asStr,
   asStrOrNull,
-  asNum,
-  asJson,
+  ensureAppSchema,
+  getAppDb,
   nowIso,
+  type Scope,
 } from "./appDb";
 
 /*

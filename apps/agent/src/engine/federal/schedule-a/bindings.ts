@@ -7,10 +7,10 @@
  * Generated at: 2026-05-27T16:08:48.440Z
  */
 
-import { defineForm, sum, floor } from "../../engine.js";
+import { defineForm, floor, sum } from "../../engine.js";
 import { SSN } from "../../values.js";
-import type { ScheduleA } from "./types.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
+import type { ScheduleA } from "./types.js";
 
 /*
  * register() wraps the defineForm side effect. Callers import it and

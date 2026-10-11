@@ -13,7 +13,7 @@ import {
   type WorkflowInput,
   type WorkflowOutput,
 } from "./schemas.js";
-import { prepareStep, retrieveStep, classifyStep, writeStep } from "./steps.js";
+import { classifyStep, prepareStep, retrieveStep, writeStep } from "./steps.js";
 
 export const generateBindingsWorkflow = createWorkflow({
   id: "generate-bindings",

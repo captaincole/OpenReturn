@@ -18,12 +18,12 @@
  * "no golden — run --update"; bootstrap the snapshot and commit it.
  */
 
-import { runScenario } from "./runScenario.js";
-import type { RunResult, Scenario } from "./types.js";
-import { alexScenario } from "./scenarios/alex/index.js";
-import { alejandroScenario } from "./scenarios/alejandro/index.js";
-import { marcusScenario } from "./scenarios/marcus/index.js";
 import { CATALOGS, runCatalogFillCheck } from "./catalogFill.js";
+import { runScenario } from "./runScenario.js";
+import { alejandroScenario } from "./scenarios/alejandro/index.js";
+import { alexScenario } from "./scenarios/alex/index.js";
+import { marcusScenario } from "./scenarios/marcus/index.js";
+import type { RunResult, Scenario } from "./types.js";
 
 const SCENARIOS: Scenario[] = [alexScenario, alejandroScenario, marcusScenario];
 

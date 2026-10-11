@@ -18,10 +18,10 @@
  * the latest snapshot.
  */
 
-import { useEffect, useMemo, useState } from "react";
 import { useAppShell } from "@/components/AppShell";
 import type { FormSummary } from "@/lib/api";
 import { cn } from "@/lib/cn";
+import { useEffect, useMemo, useState } from "react";
 
 interface DraftRow {
   id: string;
@@ -76,12 +76,12 @@ export default function FormsTab() {
 
   if (!activeReturn.realDataAvailable) {
     return (
-      <div className="px-6 lg:px-10 py-16 max-w-2xl mx-auto text-center">
-        <div className="text-[11px] uppercase tracking-[0.22em] text-ink-muted">
+      <div className="mx-auto max-w-2xl px-6 py-16 text-center lg:px-10">
+        <div className="text-[11px] tracking-[0.22em] text-ink-muted uppercase">
           {activeReturn.label}
         </div>
-        <h1 className="font-serif text-3xl text-ink-primary mt-3">No forms yet</h1>
-        <p className="text-ink-secondary text-[15px] mt-3 max-w-md mx-auto leading-relaxed">
+        <h1 className="mt-3 font-serif text-3xl text-ink-primary">No forms yet</h1>
+        <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-ink-secondary">
           Forms appear once Luca starts capturing facts. Switch to your 2025 Return to see them
           live.
         </p>
@@ -90,23 +90,23 @@ export default function FormsTab() {
   }
 
   return (
-    <div className="px-6 lg:px-10 py-8 max-w-5xl mx-auto">
+    <div className="mx-auto max-w-5xl px-6 py-8 lg:px-10">
       <div className="mb-5 flex items-baseline justify-between">
         <div>
           <h2 className="font-serif text-2xl text-ink-primary">Tax forms</h2>
-          <p className="text-ink-secondary text-sm mt-1">
+          <p className="mt-1 text-sm text-ink-secondary">
             Everything Luca is preparing for your 2025 return. Snapshots regenerate as facts land.
           </p>
         </div>
-        <span className="text-[11px] text-ink-muted uppercase tracking-wider">
+        <span className="text-[11px] tracking-wider text-ink-muted uppercase">
           {items.length} {items.length === 1 ? "form" : "forms"}
         </span>
       </div>
 
       {items.length === 0 ? (
         <div className="card px-6 py-8 text-center">
-          <div className="text-ink-muted text-sm">No forms yet.</div>
-          <div className="mt-1 text-ink-faint text-xs">
+          <div className="text-sm text-ink-muted">No forms yet.</div>
+          <div className="mt-1 text-xs text-ink-faint">
             They appear here as Luca captures facts and packages the return.
           </div>
         </div>
@@ -128,22 +128,22 @@ function FormRow({ item }: { item: FormItem }) {
   const draftDownloadHref = draftHref ? `${draftHref}?download=1` : null;
 
   return (
-    <div className="card px-5 py-4 flex items-center gap-4">
-      <div className="w-10 h-12 shrink-0 rounded bg-bg-elevated border border-border-subtle flex items-center justify-center text-ink-muted text-[10px] font-mono">
+    <div className="card flex items-center gap-4 px-5 py-4">
+      <div className="flex h-12 w-10 shrink-0 items-center justify-center rounded border border-border-subtle bg-bg-elevated font-mono text-[10px] text-ink-muted">
         {draftHref ? (item.draft!.mime_type?.includes("json") ? "JSON" : "PDF") : "—"}
       </div>
 
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-sm font-medium text-ink-primary truncate">{item.label}</span>
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="truncate text-sm font-medium text-ink-primary">{item.label}</span>
           <StatusPill status={status} />
         </div>
         {item.description && (
-          <div className="mt-0.5 text-[12px] text-ink-secondary truncate">{item.description}</div>
+          <div className="mt-0.5 truncate text-[12px] text-ink-secondary">{item.description}</div>
         )}
         {fill && (status === "drafting" || status === "not_started") && (
           <div className="mt-2 flex items-center gap-2.5">
-            <div className="flex-1 max-w-[180px] h-1 rounded-full bg-bg-elevated overflow-hidden">
+            <div className="h-1 max-w-[180px] flex-1 overflow-hidden rounded-full bg-bg-elevated">
               <div
                 className={cn(
                   "h-full transition-all duration-500",
@@ -163,26 +163,26 @@ function FormRow({ item }: { item: FormItem }) {
         )}
       </div>
 
-      <div className="shrink-0 flex items-center gap-2">
+      <div className="flex shrink-0 items-center gap-2">
         {draftHref ? (
           <>
             <a
               href={draftHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-ink-secondary hover:text-ink-primary border border-border-subtle hover:border-border-strong rounded-md px-3 py-1.5 transition-colors"
+              className="rounded-md border border-border-subtle px-3 py-1.5 text-xs text-ink-secondary transition-colors hover:border-border-strong hover:text-ink-primary"
             >
               Open
             </a>
             <a
               href={draftDownloadHref!}
-              className="text-xs text-ink-secondary hover:text-ink-primary border border-border-subtle hover:border-border-strong rounded-md px-3 py-1.5 transition-colors"
+              className="rounded-md border border-border-subtle px-3 py-1.5 text-xs text-ink-secondary transition-colors hover:border-border-strong hover:text-ink-primary"
             >
               Download
             </a>
           </>
         ) : (
-          <span className="text-[11px] text-ink-faint italic px-2">No PDF yet</span>
+          <span className="px-2 text-[11px] text-ink-faint italic">No PDF yet</span>
         )}
       </div>
     </div>
@@ -220,7 +220,7 @@ function StatusPill({ status }: { status: Status }) {
   };
   const { label, tone } = map[status];
   return (
-    <span className={cn("px-2 py-0.5 rounded text-[10px] uppercase tracking-wide", tone)}>
+    <span className={cn("rounded px-2 py-0.5 text-[10px] tracking-wide uppercase", tone)}>
       {label}
     </span>
   );

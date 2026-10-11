@@ -7,10 +7,10 @@
  * Generated at: 2026-05-18T16:53:31.408Z
  */
 
-import { defineForm, sum, floor } from "../../../engine.js";
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
-import type { ScheduleCa } from "./types.js";
+import { defineForm, floor, sum } from "../../../engine.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
+import type { ScheduleCa } from "./types.js";
 
 /*
  * register() wraps the defineForm side effect. Callers import it and

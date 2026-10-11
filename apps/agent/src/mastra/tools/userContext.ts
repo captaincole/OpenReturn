@@ -1,8 +1,8 @@
 import { MASTRA_RESOURCE_ID_KEY } from "@mastra/core/request-context";
-import { REQUEST_CONTEXT_KEYS } from "../server/ownerMiddleware";
-import { resolveOwnerFilingForYear } from "../db/filings";
 import type { Scope } from "../db/appDb";
+import { resolveOwnerFilingForYear } from "../db/filings";
 import { DEMO_TAX_YEAR } from "../server/demoSession";
+import { REQUEST_CONTEXT_KEYS } from "../server/ownerMiddleware";
 
 export interface UserContext {
   userId: string;

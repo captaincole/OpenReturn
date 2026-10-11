@@ -8,8 +8,8 @@
  */
 
 import { defineForm, sum } from "../../engine.js";
-import type { Form8949 } from "./types.js";
 import type { Form8949FilingInfo } from "./filingInfo.js";
+import type { Form8949 } from "./types.js";
 
 /*
  * Per-row gain/loss, the IRS column (h) formula: (d) proceeds − (e)

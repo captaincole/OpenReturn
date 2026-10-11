@@ -9,20 +9,20 @@
  * accumulates via .extend() (see schemas.ts).
  */
 
-import { promises as fs } from "node:fs";
 import { createStep } from "@mastra/core/workflows";
+import { promises as fs } from "node:fs";
+import { loadFromFixture, type FieldInventory } from "../../engine/catalog.js";
+import { classifyBindings } from "../classifyBindings.js";
+import { renderBindings } from "../renderBindings.js";
+import { retrieveContextPerField } from "../retrieveContext.js";
 import {
-  workflowInputSchema,
+  afterClassifySchema,
   afterPrepareSchema,
   afterRetrieveSchema,
-  afterClassifySchema,
+  workflowInputSchema,
   workflowOutputSchema,
   type AfterRetrieve,
 } from "./schemas.js";
-import { loadFromFixture, type FieldInventory } from "../../engine/catalog.js";
-import { retrieveContextPerField } from "../retrieveContext.js";
-import { classifyBindings } from "../classifyBindings.js";
-import { renderBindings } from "../renderBindings.js";
 
 // ─── prepare ─────────────────────────────────────────────────────────────
 

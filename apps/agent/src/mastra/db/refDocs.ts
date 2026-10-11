@@ -1,5 +1,5 @@
 import type { InValue, Row } from "@libsql/client";
-import { getCorpusDb, ensureCorpusSchema } from "./libsql";
+import { ensureCorpusSchema, getCorpusDb } from "./libsql";
 
 /*
  * ---------------------------------------------------------------------------

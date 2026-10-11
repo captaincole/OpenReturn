@@ -10,8 +10,8 @@
  * canvas-space bounding box is then stable for any rect orientation.
  */
 
-import { renderPageAsImage } from "unpdf";
 import { createCanvas, loadImage } from "@napi-rs/canvas";
+import { renderPageAsImage } from "unpdf";
 
 export interface OverlayWidget {
   /** Badge number drawn on the page; must be unique within the page. */

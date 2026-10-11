@@ -15,7 +15,7 @@
  */
 
 import { copyFileSync, existsSync, mkdirSync } from "node:fs";
-import { resolve, dirname } from "node:path";
+import { dirname, resolve } from "node:path";
 import { projectRoot } from "../../src/paths.js";
 import type { Command } from "../lib/cli";
 

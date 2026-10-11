@@ -12,8 +12,7 @@
  *    (see evaluateAllForms in engine.ts).
  */
 
-import type { TaxFactRow } from "./facts/rows.js";
-import type { AIDecisionRow } from "./facts/rows.js";
+import type { AIDecisionRow, TaxFactRow } from "./facts/rows.js";
 import type { FilingInfo } from "./filingInfo.js";
 
 // ─── Engine-derived decisions (audit trail for code-driven scope calls) ─

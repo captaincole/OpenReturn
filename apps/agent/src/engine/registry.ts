@@ -16,9 +16,9 @@
  */
 
 import { buildCatalogFromFixtures, type Catalog } from "./catalog.js";
-import { FEDERAL_FORMS, FEDERAL_CATALOGS } from "./federal/index.js";
-import { STATE_FORMS, STATE_CATALOGS } from "./state/index.js";
+import { FEDERAL_CATALOGS, FEDERAL_FORMS } from "./federal/index.js";
 import type { FormSpec } from "./formSpec.js";
+import { STATE_CATALOGS, STATE_FORMS } from "./state/index.js";
 
 export { makeFormSpec, type FormSpec } from "./formSpec.js";
 

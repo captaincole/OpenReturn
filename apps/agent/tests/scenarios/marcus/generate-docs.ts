@@ -16,10 +16,10 @@
  * documents", next to the Markdown brief + cover note in the same folder.
  */
 
-import { PDFDocument, StandardFonts, rgb, type PDFPage, type PDFFont } from "pdf-lib";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from "pdf-lib";
 
 /*
  * ────────────────────────────────────────────────────────────────────────────

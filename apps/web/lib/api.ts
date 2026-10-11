@@ -1,5 +1,5 @@
-import { authHeaders } from "@/lib/auth";
 import { agentUrl } from "@/lib/agentBase";
+import { authHeaders } from "@/lib/auth";
 
 /*
  * Browser-side client for the agent's /app routes. Every call goes

@@ -15,9 +15,9 @@
  * scenario with those facts exists.
  */
 
-import type { Money } from "../../values.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { EngineDerivation } from "../../types.js";
+import type { Money } from "../../values.js";
 
 export interface Form8959FilingInfo extends BaseFilingInfo {
   /**

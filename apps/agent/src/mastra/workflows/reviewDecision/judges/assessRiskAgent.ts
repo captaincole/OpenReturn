@@ -1,6 +1,6 @@
 import { Agent } from "@mastra/core/agent";
-import { CPA_RULES } from "./cpaRules";
 import { modelFor } from "../../../models";
+import { CPA_RULES } from "./cpaRules";
 
 /*
  * Risk-tier assessor for the review-decision workflow. Reads the decision

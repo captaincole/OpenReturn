@@ -19,13 +19,13 @@
  */
 
 import type { Scenario } from "../../types.js";
-import { alejandroFacts, ALEJANDRO_TAX_YEAR, ALEJANDRO_USER_ID } from "./facts.js";
 import { alejandroDecisions } from "./decisions.js";
-import { alejandroExpected } from "./expected.js";
 import { alejandro540Expected } from "./expected-540.js";
-import { alejandroScheduleCaExpected } from "./expected-schedule-ca.js";
 import { alejandro8949Expected } from "./expected-8949.js";
+import { alejandroScheduleCaExpected } from "./expected-schedule-ca.js";
 import { alejandroScheduleDExpected } from "./expected-schedule-d.js";
+import { alejandroExpected } from "./expected.js";
+import { ALEJANDRO_TAX_YEAR, ALEJANDRO_USER_ID, alejandroFacts } from "./facts.js";
 
 export const alejandroScenario: Scenario = {
   name: "alejandro",

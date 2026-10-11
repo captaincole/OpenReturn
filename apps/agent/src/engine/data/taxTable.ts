@@ -12,8 +12,8 @@
  * jurisdiction-agnostic.
  */
 
-import federal2025 from "./tax-table-2025.json" with { type: "json" };
 import ca2025 from "./ca-tax-table-2025.json" with { type: "json" };
+import federal2025 from "./tax-table-2025.json" with { type: "json" };
 
 export type FilingStatus =
   | "single"

@@ -11,9 +11,9 @@
  */
 
 import { getDocument } from "../../src/mastra/db/refDocs";
+import { projectRoot } from "../../src/paths";
 import { ingestRefDoc } from "../../src/refdocs/ingest";
 import { walkCorpus, type CorpusEntry } from "../../src/refdocs/walkCorpus";
-import { projectRoot } from "../../src/paths";
 import type { Command } from "../lib/cli";
 
 interface SyncResult {

@@ -11,8 +11,8 @@
  */
 
 import Anthropic from "@anthropic-ai/sdk";
-import { renderPageWithOverlay, type OverlayWidget } from "./renderPageWithOverlay.js";
 import type { FieldKind } from "./extractFormFields.js";
+import { renderPageWithOverlay, type OverlayWidget } from "./renderPageWithOverlay.js";
 
 const MODEL = "claude-sonnet-4-6";
 const MAX_TOKENS = 4000;

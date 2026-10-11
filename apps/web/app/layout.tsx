@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -40,7 +40,7 @@ export default function RootLayout({
       lang="en"
       className={`dark ${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="bg-bg-base text-ink-primary font-sans antialiased h-full">{children}</body>
+      <body className="h-full bg-bg-base font-sans text-ink-primary antialiased">{children}</body>
     </html>
   );
 }

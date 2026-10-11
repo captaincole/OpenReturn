@@ -45,8 +45,8 @@
  */
 
 import { dirname, relative } from "node:path";
-import type { ClassifiedBinding, Confidence, RuleName } from "./classifyBindings.js";
 import type { FieldInventory } from "../engine/catalog.js";
+import type { ClassifiedBinding, Confidence } from "./classifyBindings.js";
 
 /*
  * ─── FilingInfo slot translation tables ──────────────────────────────────

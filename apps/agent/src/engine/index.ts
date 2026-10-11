@@ -30,12 +30,11 @@
 
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import type { TaxFactRow } from "./facts/rows.js";
-import type { AIDecisionRow } from "./facts/rows.js";
 import { evaluateAllForms } from "./engine.js";
+import type { AIDecisionRow, TaxFactRow } from "./facts/rows.js";
 import { resolveFilingInfo, type FilingInfo } from "./filingInfo.js";
-import { fillFromCatalog, type RenderedWidget } from "./render/fillFromCatalog.js";
 import { FORMS, catalog as bundledCatalog, getFormSpec, registerAllForms } from "./registry.js";
+import { fillFromCatalog, type RenderedWidget } from "./render/fillFromCatalog.js";
 import {
   makeDecisionsView,
   makeFactsView,

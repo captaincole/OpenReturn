@@ -7,10 +7,10 @@
  * Generated at: 2026-05-27T16:41:25.598Z
  */
 
-import { defineForm, sum, floor } from "../../engine.js";
+import { defineForm, floor, sum } from "../../engine.js";
 import { SSN } from "../../values.js";
-import type { Form8959 } from "./types.js";
 import type { Form8959FilingInfo } from "./filingInfo.js";
+import type { Form8959 } from "./types.js";
 
 /*
  * Per-status thresholds shared by Parts I, II, and III (form lines 5,

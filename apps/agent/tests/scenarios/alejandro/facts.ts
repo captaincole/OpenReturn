@@ -10,7 +10,6 @@
  * and the Schedule D / 8949 chain on line 7a.
  */
 
-import type { TaxFactRow } from "../../../src/mastra/db/taxFacts.js";
 import {
   makeDividendFactKey,
   makeTradeFactKey,
@@ -19,6 +18,7 @@ import {
   type TradeFactValue,
   type W2FactValue,
 } from "../../../src/engine/facts/index.js";
+import type { TaxFactRow } from "../../../src/mastra/db/taxFacts.js";
 import { identityFact } from "../../helpers/fixtureBuilders.js";
 
 export const ALEJANDRO_USER_ID = "alejandro-integration";

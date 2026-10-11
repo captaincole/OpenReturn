@@ -1,6 +1,5 @@
+import { getOwnerSession, ownerExists } from "@/lib/localAuth";
 import { redirect } from "next/navigation";
-import { getOwnerSession } from "@/lib/localAuth";
-import { ownerExists } from "@/lib/localAuth";
 
 /*
  * Auth gate. getOwnerSession() verifies the cookie HMAC against the

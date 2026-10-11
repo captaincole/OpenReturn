@@ -10,12 +10,12 @@
  * path writes user turns.
  */
 
-import { type FormEvent, useEffect, useRef, useState } from "react";
-import { Markdown } from "@/components/Markdown";
 import { type ChatMessage, useAppShell } from "@/components/AppShell";
-import { type TaxReturn } from "@/lib/returns";
+import { Markdown } from "@/components/Markdown";
 import { type PlanItem } from "@/lib/api";
 import { cn } from "@/lib/cn";
+import { type TaxReturn } from "@/lib/returns";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 
 interface ChatPaneProps {
   activeReturn: TaxReturn;
@@ -72,10 +72,10 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
   const isEmpty = renderMessages.length === 0;
 
   return (
-    <div className="flex flex-col h-full min-h-0">
-      <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto px-5 pt-6 pb-3 space-y-5">
+    <div className="flex h-full min-h-0 flex-col">
+      <div ref={scrollRef} className="min-h-0 flex-1 space-y-5 overflow-y-auto px-5 pt-6 pb-3">
         {isEmpty && (
-          <div className="flex gap-2.5 items-start text-ink-muted text-sm">
+          <div className="flex items-start gap-2.5 text-sm text-ink-muted">
             <LucaAvatar />
             <div className="pt-0.5">Say hi to start.</div>
           </div>
@@ -83,22 +83,22 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
         {renderMessages.map((msg) => (
           <div
             key={msg.id}
-            className={msg.role === "user" ? "flex justify-end" : "flex gap-2.5 items-start"}
+            className={msg.role === "user" ? "flex justify-end" : "flex items-start gap-2.5"}
           >
             {msg.role === "assistant" && <LucaAvatar />}
             <div
               className={cn(
                 msg.role === "user"
-                  ? "max-w-[80%] bg-accent text-white px-3.5 py-2.5 rounded-2xl rounded-br-sm whitespace-pre-wrap text-[14px] leading-relaxed"
-                  : "max-w-full text-ink-primary text-[14px] leading-relaxed pt-0.5",
+                  ? "max-w-[80%] rounded-2xl rounded-br-sm bg-accent px-3.5 py-2.5 text-[14px] leading-relaxed whitespace-pre-wrap text-white"
+                  : "max-w-full pt-0.5 text-[14px] leading-relaxed text-ink-primary",
               )}
             >
               {msg.attachmentName && (
                 <div
                   className={
                     msg.role === "user"
-                      ? "text-xs opacity-80 mb-1.5 flex items-center gap-1.5"
-                      : "text-xs text-ink-muted mb-1.5 flex items-center gap-1.5"
+                      ? "mb-1.5 flex items-center gap-1.5 text-xs opacity-80"
+                      : "mb-1.5 flex items-center gap-1.5 text-xs text-ink-muted"
                   }
                 >
                   <span>📎</span>
@@ -121,10 +121,10 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
 
       <footer className="shrink-0 px-3.5 pb-3.5">
         {attachment && (
-          <div className="mb-2 flex items-center gap-2 px-3 py-2 bg-bg-panel border border-border-subtle rounded-lg text-sm">
+          <div className="mb-2 flex items-center gap-2 rounded-lg border border-border-subtle bg-bg-panel px-3 py-2 text-sm">
             <span>📎</span>
             <span className="flex-1 truncate text-ink-primary">{attachment.name}</span>
-            <span className="text-ink-muted text-xs tabular-nums">
+            <span className="text-xs text-ink-muted tabular-nums">
               {(attachment.size / 1024).toFixed(0)} KB
             </span>
             <button
@@ -133,7 +133,7 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
                 setAttachment(null);
                 if (fileInputRef.current) fileInputRef.current.value = "";
               }}
-              className="text-ink-muted hover:text-ink-primary text-lg leading-none"
+              className="text-lg leading-none text-ink-muted hover:text-ink-primary"
               aria-label="Remove attachment"
             >
               ×
@@ -180,7 +180,7 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
             }
             disabled={lucaBusy || isPlaceholder}
             autoFocus={!isPlaceholder}
-            className="w-full px-4 pt-3.5 pb-1 bg-transparent text-ink-primary placeholder:text-ink-muted text-[14px] leading-relaxed resize-none focus:outline-none disabled:cursor-not-allowed"
+            className="w-full resize-none bg-transparent px-4 pt-3.5 pb-1 text-[14px] leading-relaxed text-ink-primary placeholder:text-ink-muted focus:outline-none disabled:cursor-not-allowed"
           />
           <div className="flex items-center gap-1 px-2.5 pb-2.5">
             <IconButton
@@ -220,9 +220,9 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
 
             <div className="flex-1" />
 
-            <div className="flex items-center gap-1.5 px-2 py-1 rounded-md text-[12px] text-ink-secondary">
-              <span className="w-4 h-4 rounded-full bg-accent/20 border border-accent/40 flex items-center justify-center">
-                <span className="font-serif text-accent text-[9px] leading-none">T</span>
+            <div className="flex items-center gap-1.5 rounded-md px-2 py-1 text-[12px] text-ink-secondary">
+              <span className="flex h-4 w-4 items-center justify-center rounded-full border border-accent/40 bg-accent/20">
+                <span className="font-serif text-[9px] leading-none text-accent">T</span>
               </span>
               <span>Luca</span>
             </div>
@@ -231,7 +231,7 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
               type="submit"
               disabled={lucaBusy || isPlaceholder || (!input.trim() && !attachment)}
               title="Send"
-              className="w-8 h-8 rounded-full bg-accent hover:bg-accent-hover disabled:bg-bg-elevated disabled:text-ink-muted text-white flex items-center justify-center transition-colors ml-1"
+              className="ml-1 flex h-8 w-8 items-center justify-center rounded-full bg-accent text-white transition-colors hover:bg-accent-hover disabled:bg-bg-elevated disabled:text-ink-muted"
             >
               <svg
                 width="14"
@@ -268,9 +268,9 @@ function PlanRail({ plan, hidden }: { plan: PlanItem[]; hidden: boolean }) {
   const hiddenCount = active.length - visible.length;
 
   return (
-    <div className="px-4 pt-3 pb-2.5 border-b border-border-subtle">
-      <div className="flex items-baseline justify-between mb-2">
-        <span className="text-[10px] uppercase tracking-[0.18em] text-ink-muted">Plan</span>
+    <div className="border-b border-border-subtle px-4 pt-3 pb-2.5">
+      <div className="mb-2 flex items-baseline justify-between">
+        <span className="text-[10px] tracking-[0.18em] text-ink-muted uppercase">Plan</span>
         <span className="text-[10px] text-ink-muted tabular-nums">{active.length} active</span>
       </div>
       <ul className="space-y-1.5">
@@ -305,13 +305,13 @@ function PlanRailRow({ item }: { item: PlanItem }) {
   return (
     <li className="flex items-start gap-2">
       {isDoing ? (
-        <span className="shrink-0 mt-[5px] w-2 h-2 rounded-full bg-accent animate-pulse-soft" />
+        <span className="mt-[5px] h-2 w-2 shrink-0 animate-pulse-soft rounded-full bg-accent" />
       ) : (
-        <span className="shrink-0 mt-[4px] w-2.5 h-2.5 rounded-full border border-border-strong" />
+        <span className="mt-[4px] h-2.5 w-2.5 shrink-0 rounded-full border border-border-strong" />
       )}
       <span
         className={cn(
-          "text-[12px] leading-snug truncate",
+          "truncate text-[12px] leading-snug",
           isDoing ? "text-ink-primary" : "text-ink-secondary",
         )}
       >
@@ -324,13 +324,13 @@ function PlanRailRow({ item }: { item: PlanItem }) {
 function TypingDots() {
   return (
     <span className="inline-flex items-center gap-1 align-middle">
-      <span className="w-1.5 h-1.5 rounded-full bg-ink-muted animate-pulse-soft" />
+      <span className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-ink-muted" />
       <span
-        className="w-1.5 h-1.5 rounded-full bg-ink-muted animate-pulse-soft"
+        className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-ink-muted"
         style={{ animationDelay: "0.2s" }}
       />
       <span
-        className="w-1.5 h-1.5 rounded-full bg-ink-muted animate-pulse-soft"
+        className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-ink-muted"
         style={{ animationDelay: "0.4s" }}
       />
     </span>
@@ -339,8 +339,8 @@ function TypingDots() {
 
 function LucaAvatar() {
   return (
-    <div className="shrink-0 w-7 h-7 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center mt-0.5">
-      <span className="font-serif text-accent text-[11px] leading-none">T</span>
+    <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-accent/30 bg-accent/15">
+      <span className="font-serif text-[11px] leading-none text-accent">T</span>
     </div>
   );
 }
@@ -362,7 +362,7 @@ function IconButton({
       title={title}
       onClick={onClick}
       disabled={disabled}
-      className="w-8 h-8 rounded-lg text-ink-secondary hover:text-ink-primary hover:bg-bg-elevated flex items-center justify-center transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+      className="flex h-8 w-8 items-center justify-center rounded-lg text-ink-secondary transition-colors hover:bg-bg-elevated hover:text-ink-primary disabled:cursor-not-allowed disabled:opacity-40"
     >
       {children}
     </button>

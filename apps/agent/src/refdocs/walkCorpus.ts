@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
-import { readdir, readFile } from "node:fs/promises";
 import type { Dirent } from "node:fs";
-import { resolve, join, relative } from "node:path";
+import { readdir, readFile } from "node:fs/promises";
+import { join, relative, resolve } from "node:path";
 
 /*
  * Walks the forms/ tree for instructions.pdf files and pairs each PDF

@@ -1,4 +1,4 @@
-import { getAppDb, ensureAppSchema, asStr, asNum, nowIso } from "./appDb";
+import { asNum, asStr, ensureAppSchema, getAppDb, nowIso } from "./appDb";
 
 /*
  * Filings — the ownership root. Every domain row (tax_facts,

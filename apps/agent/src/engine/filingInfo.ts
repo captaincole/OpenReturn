@@ -22,16 +22,16 @@
  *     wider shape. TS flags any binding that depends on a stale shape.
  */
 
-import { ssn, phone, type FilingStatus, type SSN, type Phone } from "./values.js";
+import { isInterestFactKey, type TradeFactValue } from "./facts/index.js";
 import type { Form1040FilingInfo } from "./federal/1040/filingInfo.js";
+import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
+import type { Form8959FilingInfo } from "./federal/8959/filingInfo.js";
+import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
+import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
-import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
-import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
-import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
-import type { Form8959FilingInfo } from "./federal/8959/filingInfo.js";
 import type { EngineDerivation } from "./types.js";
-import { isInterestFactKey, type TradeFactValue } from "./facts/index.js";
+import { phone, ssn, type FilingStatus, type Phone, type SSN } from "./values.js";
 
 /*
  * Mirrors the key convention in src/engine/facts/kinds/trade.ts. Inlined

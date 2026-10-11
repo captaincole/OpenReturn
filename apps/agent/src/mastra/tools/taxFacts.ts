@@ -1,6 +1,6 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import { recordFact, listFacts, listOpenQuestions, resolveQuestion } from "../db/taxFacts";
+import { listFacts, listOpenQuestions, recordFact, resolveQuestion } from "../db/taxFacts";
 import { requireUserContext } from "./userContext";
 
 const CATEGORIES = [

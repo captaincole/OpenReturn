@@ -11,8 +11,8 @@
  * convention drift across forms.
  */
 
-export * from "./rows.js";
-export * from "./kinds/trade.js";
-export * from "./kinds/wages.js";
 export * from "./kinds/dividends.js";
 export * from "./kinds/interest.js";
+export * from "./kinds/trade.js";
+export * from "./kinds/wages.js";
+export * from "./rows.js";

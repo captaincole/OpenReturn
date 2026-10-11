@@ -1,10 +1,6 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { resolve, dirname } from "node:path";
-import { extractPdf } from "./extract";
-import { parseDoc, type ParserStyle } from "./parse";
-import { summarizeBlocks, sha1 } from "./contextualize";
-import { resolveEmbeddings, embedDocuments } from "./embeddings";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
 import {
   deleteDocument,
   getDocument,
@@ -14,6 +10,10 @@ import {
   type RefPage,
   type RefSection,
 } from "../mastra/db/refDocs";
+import { sha1, summarizeBlocks } from "./contextualize";
+import { embedDocuments, resolveEmbeddings } from "./embeddings";
+import { extractPdf } from "./extract";
+import { parseDoc, type ParserStyle } from "./parse";
 
 export interface IngestInput {
   pdfPath: string;

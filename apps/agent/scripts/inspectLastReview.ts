@@ -11,7 +11,7 @@
  *   npx tsx --env-file=.env.development scripts/inspectLastReview.ts
  */
 import "dotenv/config";
-import { getAppDb, ensureAppSchema } from "../src/mastra/db/appDb";
+import { ensureAppSchema, getAppDb } from "../src/mastra/db/appDb";
 
 const TRUNCATE_AT = 1500;
 

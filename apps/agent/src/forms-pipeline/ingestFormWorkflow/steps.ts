@@ -18,17 +18,17 @@
  * preserved.
  */
 
-import { promises as fs } from "node:fs";
 import { createStep } from "@mastra/core/workflows";
+import { promises as fs } from "node:fs";
+import { ensureCorpusSchema, getCorpusDb } from "../../mastra/db/libsql.js";
+import { classifyFields, type FieldEnrichment, type ValueType } from "../classifyFields.js";
+import { extractFormFields, type ExtractedField, type FieldKind } from "../extractFormFields.js";
 import {
-  workflowInputSchema,
-  afterExtractSchema,
   afterClassifySchema,
+  afterExtractSchema,
+  workflowInputSchema,
   workflowOutputSchema,
 } from "./schemas.js";
-import { extractFormFields, type ExtractedField, type FieldKind } from "../extractFormFields.js";
-import { classifyFields, type FieldEnrichment, type ValueType } from "../classifyFields.js";
-import { getCorpusDb, ensureCorpusSchema } from "../../mastra/db/libsql.js";
 
 // ─── extract ─────────────────────────────────────────────────────────────
 

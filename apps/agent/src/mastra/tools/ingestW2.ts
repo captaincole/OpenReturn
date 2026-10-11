@@ -1,7 +1,7 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import { recordFact } from "../db/taxFacts";
 import { makeW2FactKey, type W2FactValue } from "../../engine/facts";
+import { recordFact } from "../db/taxFacts";
 import { requireUserContext } from "./userContext";
 
 /*

@@ -10,8 +10,8 @@
  * index.ts, and add it to runAll.ts.
  */
 
-import type { TaxFactRow } from "../src/mastra/db/taxFacts.js";
 import type { AIDecisionRow } from "../src/mastra/db/aiDecisions.js";
+import type { TaxFactRow } from "../src/mastra/db/taxFacts.js";
 
 export interface ScenarioForm {
   /**

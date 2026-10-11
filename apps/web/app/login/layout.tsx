@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
 import { ownerExists } from "@/lib/localAuth";
+import { redirect } from "next/navigation";
 
 /*
  * Before an owner exists there is nothing to log in to. Send first-run

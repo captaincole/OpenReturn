@@ -14,9 +14,9 @@
  */
 
 import "dotenv/config";
+import { rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { rm } from "node:fs/promises";
 
 // Point the app DB at a temp file BEFORE importing anything that opens it.
 const SMOKE_DB = join(tmpdir(), `summa-smoke-${Date.now()}.db`);

@@ -1,8 +1,8 @@
 import { MASTRA_RESOURCE_ID_KEY } from "@mastra/core/request-context";
 import { registerApiRoute } from "@mastra/core/server";
-import { getAppDb, ensureAppSchema } from "../../db/appDb";
-import { createOwnerFiling } from "../../db/filings";
 import { luca } from "../../agents/luca";
+import { ensureAppSchema, getAppDb } from "../../db/appDb";
+import { createOwnerFiling } from "../../db/filings";
 
 /*
  * POST /app/filings

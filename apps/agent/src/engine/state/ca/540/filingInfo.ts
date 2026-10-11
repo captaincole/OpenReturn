@@ -7,9 +7,9 @@
  * produces from taxpayer facts and documents.
  */
 
-import type { Money } from "../../../values.js";
 import type { BaseFilingInfo } from "../../../filingInfo.js";
 import type { EngineDerivation } from "../../../types.js";
+import type { Money } from "../../../values.js";
 
 export interface Form540FilingInfo extends BaseFilingInfo {
   /** California Form 540 must-file determination. */

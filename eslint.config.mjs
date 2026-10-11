@@ -3,8 +3,8 @@
 // (/** … */) passes as-is. Auto-fixable — `npm run lint:fix` converts
 // violations in place. We deliberately add no other rules; tsc and the
 // golden tests carry correctness.
-import tsParser from "@typescript-eslint/parser";
 import stylistic from "@stylistic/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
 
 export default [
   {

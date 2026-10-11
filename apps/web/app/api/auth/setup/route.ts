@@ -1,5 +1,5 @@
+import { createOwner, login, ownerExists } from "@/lib/localAuth";
 import { NextResponse } from "next/server";
-import { createOwner, ownerExists, login } from "@/lib/localAuth";
 
 /*
  * First-run setup: create the instance owner. 409s once an owner exists —

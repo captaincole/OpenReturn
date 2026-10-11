@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { getOwnerSession } from "@/lib/localAuth";
+import { NextResponse } from "next/server";
 
 // Session probe for client components (AppShell's pre-stream guard).
 export async function GET() {

@@ -8,8 +8,8 @@
  * failure messages so multi-form scenarios stay unambiguous.
  */
 
-import type { EvaluatedForm, AnyFormField } from "../../src/engine/types.js";
 import type { RenderedWidget } from "../../src/engine/render/fillFromCatalog.js";
+import type { AnyFormField, EvaluatedForm } from "../../src/engine/types.js";
 import type { GoldenValue } from "./goldenPdf.js";
 import { normalizeForCompare } from "./goldenPdf.js";
 

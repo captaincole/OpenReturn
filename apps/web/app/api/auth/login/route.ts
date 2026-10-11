@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { login } from "@/lib/localAuth";
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   let body: { password?: string };
