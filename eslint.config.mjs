@@ -8,6 +8,7 @@
 import stylistic from "@stylistic/eslint-plugin";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import reactHooks from "eslint-plugin-react-hooks";
 
 export default [
   {
@@ -48,6 +49,19 @@ export default [
     plugins: { "@typescript-eslint": tsPlugin },
     rules: {
       "@typescript-eslint/no-floating-promises": ["error", { ignoreVoid: true }],
+    },
+  },
+  /*
+   * React hooks correctness, web app only. A conditional hook is always a
+   * bug (error). Narrowed effect deps are sometimes deliberate — the rule
+   * warns, and intentional sites carry an eslint-disable with a reason.
+   */
+  {
+    files: ["apps/web/**/*.tsx", "apps/web/**/*.ts"],
+    plugins: { "react-hooks": reactHooks },
+    rules: {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
     },
   },
 ];

@@ -189,7 +189,7 @@ export function AppShell({
   useEffect(() => {
     void refreshState();
     void loadChatHistory();
-    // Rerun only on a return switch. refreshState/loadChatHistory are stable.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- rerun only on a return switch, not on every render's new function identities
   }, [activeReturn.id]);
 
   async function onSignOut() {

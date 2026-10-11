@@ -21,7 +21,7 @@
     "test": "npm --prefix apps/agent test",
     "install:all": "npm install && npm --prefix apps/agent install && npm --prefix apps/web install",
     "prepare": "husky",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx,mjs,js}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,mjs,js}\""
@@ -35,6 +35,7 @@
     "@typescript-eslint/parser": "^8.71.1",
     "concurrently": "^9.2.1",
     "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "husky": "^9.1.7",
     "prettier": "^3.9.10",
     "prettier-plugin-organize-imports": "^4.3.0",
