@@ -130,8 +130,8 @@ export function RequestedActionsCard() {
               key={a.id}
               action={a}
               busy={busyId === a.id || lucaBusy}
-              onUpload={(file) => handleUpload(a, file)}
-              onSkip={() => handleSkip(a)}
+              onUpload={(file) => void handleUpload(a, file)}
+              onSkip={() => void handleSkip(a)}
             />
           ))}
         </div>

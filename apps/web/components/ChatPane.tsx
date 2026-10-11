@@ -142,7 +142,7 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
         )}
 
         <form
-          onSubmit={onSubmit}
+          onSubmit={(e) => void onSubmit(e)}
           className={cn(
             "rounded-2xl border border-border-subtle bg-bg-panel transition-colors",
             "focus-within:border-border-strong",

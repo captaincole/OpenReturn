@@ -46,7 +46,12 @@ export function StartFilingButton({
 
   return (
     <div className="flex flex-col items-start gap-2">
-      <button type="button" onClick={handleClick} disabled={busy} className={className}>
+      <button
+        type="button"
+        onClick={() => void handleClick()}
+        disabled={busy}
+        className={className}
+      >
         {busy ? "Starting…" : children}
       </button>
       {error && <div className="text-[12px] text-red-400">{error}</div>}

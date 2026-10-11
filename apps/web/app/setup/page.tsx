@@ -63,7 +63,7 @@ export default function SetupPage() {
           </p>
         </div>
 
-        <form onSubmit={onSubmit} className="space-y-3">
+        <form onSubmit={(e) => void onSubmit(e)} className="space-y-3">
           <input
             type="text"
             value={displayName}

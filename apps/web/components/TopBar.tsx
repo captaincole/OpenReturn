@@ -213,7 +213,7 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
                   </div>
                 )}
                 <button
-                  onClick={handleDelete}
+                  onClick={() => void handleDelete()}
                   disabled={deleting}
                   className="w-full px-4 py-2.5 text-left text-sm text-red-300 transition-colors hover:bg-bg-panel hover:text-red-200 disabled:opacity-50"
                 >

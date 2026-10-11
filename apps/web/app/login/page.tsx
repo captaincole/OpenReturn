@@ -48,7 +48,7 @@ export default function LoginPage() {
           <p className="text-sm text-ink-secondary">Enter your password to unlock this instance.</p>
         </div>
 
-        <form onSubmit={onSubmit} className="space-y-3">
+        <form onSubmit={(e) => void onSubmit(e)} className="space-y-3">
           <input
             type="password"
             value={password}

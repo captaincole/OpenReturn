@@ -118,7 +118,7 @@ export default function DocumentsTab() {
         multiple
         accept="application/pdf,image/png,image/jpeg,image/webp"
         className="hidden"
-        onChange={(e) => handleFiles(e.target.files)}
+        onChange={(e) => void handleFiles(e.target.files)}
       />
 
       <button

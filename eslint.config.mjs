@@ -49,6 +49,13 @@ export default [
     plugins: { "@typescript-eslint": tsPlugin },
     rules: {
       "@typescript-eslint/no-floating-promises": ["error", { ignoreVoid: true }],
+      /*
+       * checksVoidReturn stays on — it is the one case tsc cannot catch
+       * (an async handler passed where () => void is expected). The
+       * conditional-promise case is mostly tsc's TS2801 already.
+       */
+      "@typescript-eslint/no-misused-promises": "error",
+      "@typescript-eslint/await-thenable": "error",
     },
   },
   /*
