@@ -187,8 +187,8 @@ export function AppShell({
   }
 
   useEffect(() => {
-    refreshState();
-    loadChatHistory();
+    void refreshState();
+    void loadChatHistory();
     // Rerun only on a return switch. refreshState/loadChatHistory are stable.
   }, [activeReturn.id]);
 

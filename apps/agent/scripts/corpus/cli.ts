@@ -16,7 +16,8 @@ import { searchCommand } from "./search";
 import { statusCommand } from "./status";
 import { syncCommand } from "./sync";
 
-runCli({
+// runCli catches subcommand errors and exits itself — safe to not await.
+void runCli({
   name: "corpus",
   bin: "npm run corpus --",
   description:

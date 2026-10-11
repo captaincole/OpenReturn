@@ -165,7 +165,7 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
-                onSubmit();
+                void onSubmit();
               }
             }}
             rows={2}

@@ -222,7 +222,7 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
                 <button
                   onClick={() => {
                     setAccountMenuOpen(false);
-                    onSignOut();
+                    void onSignOut();
                   }}
                   className="w-full border-t border-border-subtle px-4 py-2.5 text-left text-sm text-ink-secondary transition-colors hover:bg-bg-panel hover:text-ink-primary"
                 >

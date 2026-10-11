@@ -26,7 +26,8 @@ import { promoteCommand } from "./promote";
 config({ path: resolve(projectRoot, ".env.development") });
 config(); // Plain .env, if present. dotenv never overrides set vars.
 
-runCli({
+// runCli catches subcommand errors and exits itself — safe to not await.
+void runCli({
   name: "form-engine",
   bin: "npm run form-engine --",
   description:

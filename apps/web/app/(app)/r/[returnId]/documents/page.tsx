@@ -132,7 +132,7 @@ export default function DocumentsTab() {
         onDrop={(e) => {
           e.preventDefault();
           setDragOver(false);
-          if (!lucaBusy) handleFiles(e.dataTransfer.files);
+          if (!lucaBusy) void handleFiles(e.dataTransfer.files);
         }}
         disabled={uploading || lucaBusy}
         className={cn(
