@@ -2,6 +2,7 @@
 
 import { fetchActivityItems, type ActivityItem, type Verdict } from "@/lib/activity";
 import { cn } from "@/lib/cn";
+import { timeAgo } from "@/lib/format";
 import { useEffect, useState } from "react";
 
 interface ActivityCardProps {
@@ -38,18 +39,6 @@ const VERDICT_TONE: Record<Verdict, string> = {
   needs_more_facts: "text-amber-400 bg-amber-400/10",
   review_failed: "text-ink-muted bg-bg-elevated",
 };
-
-function timeAgo(iso: string): string {
-  const ms = Date.now() - new Date(iso).getTime();
-  const s = Math.max(1, Math.round(ms / 1000));
-  if (s < 60) return `${s}s`;
-  const m = Math.round(s / 60);
-  if (m < 60) return `${m}m`;
-  const h = Math.round(m / 60);
-  if (h < 24) return `${h}h`;
-  const d = Math.round(h / 24);
-  return `${d}d`;
-}
 
 function formatTitle(rawKey: string, dropFirstSegment: boolean): string {
   const parts = rawKey.split(".");
