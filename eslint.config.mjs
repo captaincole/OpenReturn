@@ -1,8 +1,12 @@
 /*
- * Small lint config, two jobs:
+ * Small lint config, three jobs:
  *  1. Comment style — multi-line comments are starred blocks, not
  *     stacked // lines. JSDoc passes as-is. `npm run lint:fix` converts.
  *  2. Promise safety — no floating promises (type-aware, apps/ only).
+ *  3. Size caps — 400 lines per file, 50 per function (100 in .tsx,
+ *     where JSX inflates line counts without adding complexity).
+ *     Form-specific engine files and tests are exempt. No grandfather
+ *     list: existing offenders fail the gate until they are split up.
  * Formatting is Prettier's job; correctness is tsc + the golden tests.
  */
 import stylistic from "@stylistic/eslint-plugin";
@@ -69,6 +73,48 @@ export default [
     rules: {
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
+    },
+  },
+  /*
+   * Size caps. A file over 400 real lines is probably two modules; a
+   * function over 50 probably wants extraction. Counts skip blank lines
+   * and comments. Known exceptions carry an inline disable with a reason.
+   */
+  {
+    files: ["apps/**/*.ts", "apps/**/*.tsx"],
+    rules: {
+      "max-lines": ["error", { max: 400, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  {
+    files: ["apps/**/*.ts"],
+    rules: {
+      "max-lines-per-function": ["error", { max: 50, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  {
+    /* JSX markup inflates line counts without adding complexity. */
+    files: ["apps/**/*.tsx"],
+    rules: {
+      "max-lines-per-function": ["error", { max: 100, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  {
+    /*
+     * Exempt: per-form registries/bindings mirror the shape of the paper
+     * form and are long by nature; tests and fixtures optimize for
+     * readability over size.
+     */
+    files: [
+      "apps/agent/src/engine/federal/**",
+      "apps/agent/src/engine/state/**",
+      "apps/agent/tests/**",
+      "apps/agent/fixtures/**",
+      "**/*.test.ts",
+    ],
+    rules: {
+      "max-lines": "off",
+      "max-lines-per-function": "off",
     },
   },
 ];
