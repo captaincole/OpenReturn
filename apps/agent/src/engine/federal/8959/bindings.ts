@@ -7,7 +7,7 @@
  * Generated at: 2026-05-27T16:41:25.598Z
  */
 
-import { defineForm, floor, sum } from "../../engine.js";
+import { defineForm, floor, sum } from "../../defineForm.js";
 import { SSN } from "../../values.js";
 import type { Form8959FilingInfo } from "./filingInfo.js";
 import type { Form8959 } from "./types.js";

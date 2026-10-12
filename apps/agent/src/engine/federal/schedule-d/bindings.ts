@@ -7,7 +7,7 @@
  * Generated at: 2026-05-18T20:21:51.690Z
  */
 
-import { defineForm, sum } from "../../engine.js";
+import { defineForm, sum } from "../../defineForm.js";
 import type { ScheduleDFilingInfo } from "./filingInfo.js";
 import type { ScheduleD } from "./types.js";
 

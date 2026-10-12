@@ -8,7 +8,7 @@
  */
 
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
-import { defineForm, floor, sum } from "../../../engine.js";
+import { defineForm, floor, sum } from "../../../defineForm.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import type { ScheduleCa } from "./types.js";
 

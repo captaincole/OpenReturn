@@ -7,7 +7,7 @@
  * Generated at: 2026-05-27T16:08:48.440Z
  */
 
-import { defineForm, floor, sum } from "../../engine.js";
+import { defineForm, floor, sum } from "../../defineForm.js";
 import { SSN } from "../../values.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
 import type { ScheduleA } from "./types.js";

@@ -7,7 +7,7 @@
  * Generated at: 2026-05-18T17:27:34.185Z
  */
 
-import { defineForm, sum } from "../../engine.js";
+import { defineForm, sum } from "../../defineForm.js";
 import type { Form8949FilingInfo } from "./filingInfo.js";
 import type { Form8949 } from "./types.js";
 

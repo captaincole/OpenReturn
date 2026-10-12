@@ -29,7 +29,7 @@
 
 import { PDFCheckBox, PDFDocument, PDFRadioGroup, PDFTextField } from "pdf-lib";
 import { type Catalog, type FieldInventory } from "../catalog.js";
-import { getFormatter } from "../engine.js";
+import { getFormatter } from "../defineForm.js";
 import { type AnyFormField, type EvaluatedForm } from "../types.js";
 import { verifiedWidget } from "./verifiedWidgets.js";
 

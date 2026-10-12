@@ -9,7 +9,7 @@
 
 import { lookupStandardDeduction } from "../../data/standardDeduction.js";
 import { lookupTax } from "../../data/taxTable.js";
-import { defineForm, floor, sum } from "../../engine.js";
+import { defineForm, floor, sum } from "../../defineForm.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
