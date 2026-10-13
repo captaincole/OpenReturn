@@ -66,29 +66,23 @@ export function getAppDb(): Client {
 }
 
 /*
- * Idempotent schema init; every statement is CREATE … IF NOT EXISTS.
+ * Idempotent schema DDL; every statement is CREATE … IF NOT EXISTS.
  * SQLite type mapping from the Postgres migrations: uuid → TEXT,
  * jsonb → TEXT (JSON.stringify at write, JSON.parse at read),
- * timestamptz → TEXT (ISO).
+ * timestamptz → TEXT (ISO). ensureAppSchema executes the list in one
+ * batch, in order.
  */
-export function ensureAppSchema(): Promise<void> {
-  if (schemaReady) return schemaReady;
-  schemaReady = (async () => {
-    const db = getAppDb();
-    // FK ON DELETE CASCADE (domain rows → filings) needs this per connection.
-    await db.execute("PRAGMA foreign_keys = ON");
-    await db.batch(
-      [
-        /*
-         * The single owner of this instance. Identity = the instance. The
-         * row holds profile data (name/email, used for form prefill and
-         * authEmail) and the web gate's credentials (scrypt password hash
-         * plus the HMAC secret for session cookies). The web app's
-         * first-run /setup screen creates it. The agent only READS it;
-         * ownerMiddleware resolves the owner as the resource id for every
-         * request.
-         */
-        `CREATE TABLE IF NOT EXISTS owner (
+const APP_SCHEMA_DDL: string[] = [
+  /*
+   * The single owner of this instance. Identity = the instance. The
+   * row holds profile data (name/email, used for form prefill and
+   * authEmail) and the web gate's credentials (scrypt password hash
+   * plus the HMAC secret for session cookies). The web app's
+   * first-run /setup screen creates it. The agent only READS it;
+   * ownerMiddleware resolves the owner as the resource id for every
+   * request.
+   */
+  `CREATE TABLE IF NOT EXISTS owner (
            id            TEXT PRIMARY KEY,
            email         TEXT NOT NULL,
            display_name  TEXT NOT NULL,
@@ -215,10 +209,16 @@ export function ensureAppSchema(): Promise<void> {
            duration_ms INTEGER,
            created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_review_run_steps_run ON review_run_steps(run_id, iteration)`,
-      ],
-      "write",
-    );
+  `CREATE INDEX IF NOT EXISTS idx_review_run_steps_run ON review_run_steps(run_id, iteration)`,
+];
+
+export function ensureAppSchema(): Promise<void> {
+  if (schemaReady) return schemaReady;
+  schemaReady = (async () => {
+    const db = getAppDb();
+    // FK ON DELETE CASCADE (domain rows → filings) needs this per connection.
+    await db.execute("PRAGMA foreign_keys = ON");
+    await db.batch(APP_SCHEMA_DDL, "write");
   })();
   return schemaReady;
 }

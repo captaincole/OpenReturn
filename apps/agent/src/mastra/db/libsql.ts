@@ -38,21 +38,12 @@ export function getCorpusDb(): Client {
 }
 
 /*
- * Idempotent schema init. Safe to call on a prebuilt (shipped) .db — every
- * statement is CREATE … IF NOT EXISTS. Runs at most once per process.
+ * Idempotent schema DDL. Safe to run on a prebuilt (shipped) .db — every
+ * statement is CREATE … IF NOT EXISTS. ensureCorpusSchema executes the
+ * list in one batch, in order.
  */
-export function ensureCorpusSchema(): Promise<void> {
-  if (schemaReady) return schemaReady;
-  schemaReady = (async () => {
-    const db = getCorpusDb();
-    /*
-     * FK ON DELETE CASCADE (ref_pages/sections/blocks → ref_documents)
-     * needs this per connection. SQLite defaults it off.
-     */
-    await db.execute("PRAGMA foreign_keys = ON");
-    await db.batch(
-      [
-        `CREATE TABLE IF NOT EXISTS ref_documents (
+const CORPUS_SCHEMA_DDL: string[] = [
+  `CREATE TABLE IF NOT EXISTS ref_documents (
            doc_id              TEXT PRIMARY KEY,
            title               TEXT NOT NULL,
            publisher           TEXT NOT NULL,
@@ -159,10 +150,22 @@ export function ensureCorpusSchema(): Promise<void> {
            updated_at      TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
            PRIMARY KEY (field_id, tax_year)
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_form_fields_form ON form_fields(form_id, tax_year, ordinal)`,
-      ],
-      "write",
-    );
+  `CREATE INDEX IF NOT EXISTS idx_form_fields_form ON form_fields(form_id, tax_year, ordinal)`,
+];
+
+/*
+ * Idempotent schema init. Runs at most once per process.
+ */
+export function ensureCorpusSchema(): Promise<void> {
+  if (schemaReady) return schemaReady;
+  schemaReady = (async () => {
+    const db = getCorpusDb();
+    /*
+     * FK ON DELETE CASCADE (ref_pages/sections/blocks → ref_documents)
+     * needs this per connection. SQLite defaults it off.
+     */
+    await db.execute("PRAGMA foreign_keys = ON");
+    await db.batch(CORPUS_SCHEMA_DDL, "write");
     /*
      * Warn once per process: an empty corpus means grounding reviews
      * retrieve nothing (verdicts degrade to needs_more_facts). The app
