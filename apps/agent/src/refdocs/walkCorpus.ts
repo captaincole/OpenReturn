@@ -67,54 +67,50 @@ export async function walkCorpus(projectRoot: string): Promise<WalkResult> {
   const unconfigured: WalkResult["unconfigured"] = [];
 
   for (const pdfPath of pdfPaths) {
-    const sidecarPath = pdfPath.replace(/\.pdf$/i, ".meta.json");
-    let sidecarText: string;
-    try {
-      sidecarText = await readFile(sidecarPath, "utf8");
-    } catch {
-      unconfigured.push({
-        pdfPath,
-        pdfRelPath: relative(root, pdfPath),
-        reason: `missing sidecar ${relative(root, sidecarPath)}`,
-      });
-      continue;
-    }
-
-    let parsed: unknown;
-    try {
-      parsed = JSON.parse(sidecarText);
-    } catch (e) {
-      unconfigured.push({
-        pdfPath,
-        pdfRelPath: relative(root, pdfPath),
-        reason: `sidecar JSON parse error: ${(e as Error).message}`,
-      });
-      continue;
-    }
-
-    const sidecar = coerceSidecar(parsed);
-    if (!sidecar) {
-      unconfigured.push({
-        pdfPath,
-        pdfRelPath: relative(root, pdfPath),
-        reason: "sidecar missing required fields (docId, title, publisher)",
-      });
-      continue;
-    }
-
-    const buf = await readFile(pdfPath);
-    const fileSha = createHash("sha256").update(buf).digest("hex");
-
-    entries.push({
-      pdfPath,
-      pdfRelPath: relative(root, pdfPath),
-      sidecarPath,
-      sidecar,
-      fileSha,
-    });
+    const loaded = await loadEntry(root, pdfPath);
+    if ("entry" in loaded) entries.push(loaded.entry);
+    else unconfigured.push(loaded.unconfigured);
   }
 
   return { entries, unconfigured };
+}
+
+/*
+ * Load one instructions.pdf + sidecar pair. A missing / malformed /
+ * incomplete sidecar makes the pdf "unconfigured" with a reason the
+ * `corpus status` output shows verbatim.
+ */
+async function loadEntry(
+  root: string,
+  pdfPath: string,
+): Promise<{ entry: CorpusEntry } | { unconfigured: WalkResult["unconfigured"][number] }> {
+  const pdfRelPath = relative(root, pdfPath);
+  const sidecarPath = pdfPath.replace(/\.pdf$/i, ".meta.json");
+  const fail = (reason: string) => ({ unconfigured: { pdfPath, pdfRelPath, reason } });
+
+  let sidecarText: string;
+  try {
+    sidecarText = await readFile(sidecarPath, "utf8");
+  } catch {
+    return fail(`missing sidecar ${relative(root, sidecarPath)}`);
+  }
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(sidecarText);
+  } catch (e) {
+    return fail(`sidecar JSON parse error: ${(e as Error).message}`);
+  }
+
+  const sidecar = coerceSidecar(parsed);
+  if (!sidecar) {
+    return fail("sidecar missing required fields (docId, title, publisher)");
+  }
+
+  const buf = await readFile(pdfPath);
+  const fileSha = createHash("sha256").update(buf).digest("hex");
+
+  return { entry: { pdfPath, pdfRelPath, sidecarPath, sidecar, fileSha } };
 }
 
 function coerceSidecar(v: unknown): RefDocSidecar | null {
