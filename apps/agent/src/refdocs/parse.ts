@@ -267,85 +267,62 @@ export interface ParseOpts {
  * canonical.txt.
  */
 export function parseDoc(canonicalText: string, pages: PageSlice[], opts: ParseOpts): ParsedDoc {
-  const sections: Omit<RefSection, "docId">[] = [];
-  const blocks: Omit<RefBlock, "docId">[] = [];
+  return new DocParser(canonicalText, opts, pages[0]?.pageNum ?? 1).parse(pages);
+}
 
-  const preamble: Omit<RefSection, "docId"> = {
-    sectionId: `${opts.docId}::sec::preamble`,
-    heading: "(Preamble)",
-    headingSlug: "preamble",
-    parentSectionId: null,
-    ordinal: 0,
-    firstPage: pages[0]?.pageNum ?? 1,
-    charStart: 0,
-    charEnd: 0, // filled when we close it
-  };
-  let currentSection = preamble;
-  let sectionOrdinal = 1; // next ordinal for a new section
-  let sectionsStarted = false;
-  const usedSlugs = new Set<string>([preamble.headingSlug]);
+/* Accumulator for the block in progress on the current section + page. */
+interface PendingBlock {
+  pageNum: number;
+  firstLineStart: number;
+  lastLineEnd: number;
+}
 
-  let blockOrdinal = 0;
-  // Accumulator for the block in progress on the current section + page.
-  let pendingBlock: {
-    pageNum: number;
-    firstLineStart: number;
-    lastLineEnd: number;
-  } | null = null;
+/*
+ * The line-walk state machine behind parseDoc. One instance per parse;
+ * the mutable state (current section, pending block, ordinals) lives on
+ * the instance instead of a nest of closures. If no real sections are
+ * found, the preamble covers the whole doc — a single-section parse is
+ * valid.
+ */
+class DocParser {
+  private readonly sections: Omit<RefSection, "docId">[] = [];
+  private readonly blocks: Omit<RefBlock, "docId">[] = [];
+  private readonly usedSlugs: Set<string>;
+  private currentSection: Omit<RefSection, "docId">;
+  private sectionOrdinal = 1; // next ordinal for a new section
+  private blockOrdinal = 0;
+  private pendingBlock: PendingBlock | null = null;
 
-  function flushPendingBlock() {
-    if (!pendingBlock) return;
-    const start = pendingBlock.firstLineStart;
-    const end = pendingBlock.lastLineEnd;
-    if (end > start) {
-      const text = canonicalText.slice(start, end);
-      blocks.push({
-        blockId: `${opts.docId}::p${pendingBlock.pageNum}::b${String(blockOrdinal).padStart(5, "0")}`,
-        sectionId: currentSection.sectionId,
-        pageNum: pendingBlock.pageNum,
-        blockType: "paragraph",
-        ordinal: blockOrdinal,
-        text,
-        charStart: start,
-        charEnd: end,
-      });
-      blockOrdinal += 1;
-    }
-    pendingBlock = null;
-  }
-
-  function startSection(heading: string, slug: string, charStart: number, firstPage: number) {
-    // Close out preamble or prior section.
-    flushPendingBlock();
-    currentSection.charEnd = charStart;
-    sections.push(currentSection);
-    /*
-     * Disambiguate duplicate slugs with a numeric suffix. The IRS doc
-     * reuses headings like "Line 1a" across sections (e.g. a line
-     * instruction vs. a table caption), so we keep incrementing.
-     */
-    let uniqueSlug = slug;
-    let dupe = 2;
-    while (usedSlugs.has(uniqueSlug)) {
-      uniqueSlug = `${slug}-${dupe++}`;
-    }
-    usedSlugs.add(uniqueSlug);
-    currentSection = {
-      sectionId: `${opts.docId}::sec::${uniqueSlug}`,
-      heading,
-      headingSlug: uniqueSlug,
+  constructor(
+    private readonly canonicalText: string,
+    private readonly opts: ParseOpts,
+    firstPageNum: number,
+  ) {
+    this.currentSection = {
+      sectionId: `${opts.docId}::sec::preamble`,
+      heading: "(Preamble)",
+      headingSlug: "preamble",
       parentSectionId: null,
-      ordinal: sectionOrdinal,
-      firstPage,
-      charStart,
-      charEnd: charStart,
+      ordinal: 0,
+      firstPage: firstPageNum,
+      charStart: 0,
+      charEnd: 0, // filled when we close it
     };
-    sectionOrdinal += 1;
-    sectionsStarted = true;
+    this.usedSlugs = new Set<string>([this.currentSection.headingSlug]);
   }
 
-  for (const page of pages) {
-    const pageText = canonicalText.slice(page.charStart, page.charEnd);
+  parse(pages: PageSlice[]): ParsedDoc {
+    for (const page of pages) {
+      this.processPage(page);
+    }
+    // Close the final section.
+    this.currentSection.charEnd = this.canonicalText.length;
+    this.sections.push(this.currentSection);
+    return { sections: this.sections, blocks: this.blocks };
+  }
+
+  private processPage(page: PageSlice): void {
+    const pageText = this.canonicalText.slice(page.charStart, page.charEnd);
     const lines = splitLinesWithOffsets(pageText, page.charStart);
 
     let i = 0;
@@ -356,88 +333,136 @@ export function parseDoc(canonicalText: string, pages: PageSlice[], opts: ParseO
         continue;
       }
 
-      const heading = detectHeading(line.text, opts.style);
+      const heading = detectHeading(line.text, this.opts.style);
       if (heading) {
-        /*
-         * Inline-body headings (FTB "Title – body" pattern) consume only
-         * the line's prefix. Skip the multi-line continuation logic and
-         * start the body block mid-line at the dash boundary.
-         */
-        if (heading.inlineBodyOffset !== undefined) {
-          startSection(heading.heading, heading.slug, line.charStart, page.pageNum);
-          const bodyStart = line.charStart + heading.inlineBodyOffset;
-          pendingBlock = {
-            pageNum: page.pageNum,
-            firstLineStart: bodyStart,
-            lastLineEnd: line.charEnd,
-          };
-          i += 1;
-          continue;
-        }
-
-        // Whole-line heading. Consume continuation lines that complete it.
-        const continuationTexts: string[] = [];
-        let j = i + 1;
-        let consumed = 0;
-        let lastConsumedEnd = line.charEnd;
-        while (
-          j < lines.length &&
-          consumed < MAX_HEADING_CONTINUATION_LINES &&
-          !isStructuralNoise(lines[j].text) &&
-          isHeadingContinuation(lines[j].text)
-        ) {
-          continuationTexts.push(lines[j].text.trim());
-          lastConsumedEnd = lines[j].charEnd;
-          j += 1;
-          consumed += 1;
-        }
-        const fullHeading =
-          continuationTexts.length === 0
-            ? heading.heading
-            : `${heading.heading} ${continuationTexts.join(" ")}`;
-
-        startSection(fullHeading, heading.slug, line.charStart, page.pageNum);
-
-        // Body starts after the heading (including any continuation).
-        const bodyStart = lastConsumedEnd;
-        pendingBlock = {
-          pageNum: page.pageNum,
-          firstLineStart: bodyStart,
-          lastLineEnd: bodyStart,
-        };
-        i = j;
+        i = this.processHeading(heading, lines, i, page.pageNum);
         continue;
       }
 
       // Regular content line. Extend the pending block, or open one.
-      if (!pendingBlock || pendingBlock.pageNum !== page.pageNum) {
-        flushPendingBlock();
-        pendingBlock = {
+      if (!this.pendingBlock || this.pendingBlock.pageNum !== page.pageNum) {
+        this.flushPendingBlock();
+        this.pendingBlock = {
           pageNum: page.pageNum,
           firstLineStart: line.charStart,
           lastLineEnd: line.charEnd,
         };
       } else {
-        pendingBlock.lastLineEnd = line.charEnd;
+        this.pendingBlock.lastLineEnd = line.charEnd;
       }
       i += 1;
     }
 
     // End of page: flush so the next page gets its own block.
-    flushPendingBlock();
+    this.flushPendingBlock();
   }
-
-  // Close the final section.
-  currentSection.charEnd = canonicalText.length;
-  sections.push(currentSection);
 
   /*
-   * If no real sections were found, the preamble covers the whole doc.
-   * Leave it as-is; a single-section parse is valid.
+   * Handle a detected heading at lines[i]. Starts the new section, seeds
+   * the pending body block, and returns the index of the next unconsumed
+   * line.
    */
-  if (!sectionsStarted && sections.length === 1) {
-    // The preamble is already in sections with the full range. No-op.
+  private processHeading(
+    heading: NonNullable<ReturnType<typeof detectHeading>>,
+    lines: ReturnType<typeof splitLinesWithOffsets>,
+    i: number,
+    pageNum: number,
+  ): number {
+    const line = lines[i];
+    /*
+     * Inline-body headings (FTB "Title – body" pattern) consume only
+     * the line's prefix. Skip the multi-line continuation logic and
+     * start the body block mid-line at the dash boundary.
+     */
+    if (heading.inlineBodyOffset !== undefined) {
+      this.startSection(heading.heading, heading.slug, line.charStart, pageNum);
+      this.pendingBlock = {
+        pageNum,
+        firstLineStart: line.charStart + heading.inlineBodyOffset,
+        lastLineEnd: line.charEnd,
+      };
+      return i + 1;
+    }
+
+    // Whole-line heading. Consume continuation lines that complete it.
+    const continuationTexts: string[] = [];
+    let j = i + 1;
+    let consumed = 0;
+    let lastConsumedEnd = line.charEnd;
+    while (
+      j < lines.length &&
+      consumed < MAX_HEADING_CONTINUATION_LINES &&
+      !isStructuralNoise(lines[j].text) &&
+      isHeadingContinuation(lines[j].text)
+    ) {
+      continuationTexts.push(lines[j].text.trim());
+      lastConsumedEnd = lines[j].charEnd;
+      j += 1;
+      consumed += 1;
+    }
+    const fullHeading =
+      continuationTexts.length === 0
+        ? heading.heading
+        : `${heading.heading} ${continuationTexts.join(" ")}`;
+
+    this.startSection(fullHeading, heading.slug, line.charStart, pageNum);
+
+    // Body starts after the heading (including any continuation).
+    this.pendingBlock = {
+      pageNum,
+      firstLineStart: lastConsumedEnd,
+      lastLineEnd: lastConsumedEnd,
+    };
+    return j;
   }
 
-  return { sections, blocks };
+  private flushPendingBlock(): void {
+    if (!this.pendingBlock) return;
+    const start = this.pendingBlock.firstLineStart;
+    const end = this.pendingBlock.lastLineEnd;
+    if (end > start) {
+      const text = this.canonicalText.slice(start, end);
+      this.blocks.push({
+        blockId: `${this.opts.docId}::p${this.pendingBlock.pageNum}::b${String(this.blockOrdinal).padStart(5, "0")}`,
+        sectionId: this.currentSection.sectionId,
+        pageNum: this.pendingBlock.pageNum,
+        blockType: "paragraph",
+        ordinal: this.blockOrdinal,
+        text,
+        charStart: start,
+        charEnd: end,
+      });
+      this.blockOrdinal += 1;
+    }
+    this.pendingBlock = null;
+  }
+
+  private startSection(heading: string, slug: string, charStart: number, firstPage: number): void {
+    // Close out preamble or prior section.
+    this.flushPendingBlock();
+    this.currentSection.charEnd = charStart;
+    this.sections.push(this.currentSection);
+    /*
+     * Disambiguate duplicate slugs with a numeric suffix. The IRS doc
+     * reuses headings like "Line 1a" across sections (e.g. a line
+     * instruction vs. a table caption), so we keep incrementing.
+     */
+    let uniqueSlug = slug;
+    let dupe = 2;
+    while (this.usedSlugs.has(uniqueSlug)) {
+      uniqueSlug = `${slug}-${dupe++}`;
+    }
+    this.usedSlugs.add(uniqueSlug);
+    this.currentSection = {
+      sectionId: `${this.opts.docId}::sec::${uniqueSlug}`,
+      heading,
+      headingSlug: uniqueSlug,
+      parentSectionId: null,
+      ordinal: this.sectionOrdinal,
+      firstPage,
+      charStart,
+      charEnd: charStart,
+    };
+    this.sectionOrdinal += 1;
+  }
 }
