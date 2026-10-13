@@ -1,7 +1,7 @@
 import { createStep } from "@mastra/core/workflows";
 import { z } from "zod";
 import { getDecisionById, setDecisionVerdict, type Verdict } from "../../db/aiDecisions";
-import { hybridSearchRefDocs } from "../../db/refDocs";
+import { hybridSearchRefDocs } from "../../db/corpusSearch";
 import {
   completeReviewRun,
   insertReviewRun,

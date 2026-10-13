@@ -122,7 +122,7 @@ export function ensureCorpusSchema(): Promise<void> {
         /*
          * Corpus-level key/value metadata. Today: embedding_model, the
          * "provider/model" that produced the stored vectors. Search uses it
-         * to refuse query vectors from a different model (db/refDocs.ts).
+         * to refuse query vectors from a different model (db/corpusSearch.ts).
          */
         `CREATE TABLE IF NOT EXISTS ref_meta (
            key   TEXT PRIMARY KEY,

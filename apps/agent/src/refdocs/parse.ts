@@ -1,4 +1,4 @@
-import type { RefBlock, RefSection } from "../mastra/db/refDocs";
+import type { RefBlock, RefSection } from "../mastra/db/corpusStore";
 import type { PageSlice } from "./extract";
 
 /*

@@ -10,7 +10,7 @@
  * finishes the job without re-paying for contextualization.
  */
 
-import { getDocument } from "../../src/mastra/db/refDocs";
+import { getDocument } from "../../src/mastra/db/corpusStore";
 import { projectRoot } from "../../src/paths";
 import { ingestRefDoc } from "../../src/refdocs/ingest";
 import { walkCorpus, type CorpusEntry } from "../../src/refdocs/walkCorpus";

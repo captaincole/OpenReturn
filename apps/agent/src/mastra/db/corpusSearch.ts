@@ -1,0 +1,377 @@
+import type { InValue, Row } from "@libsql/client";
+import {
+  asNum,
+  asNumOrNull,
+  asStr,
+  asStrOrNull,
+  storedEmbeddingModel,
+  vectorLiteral,
+  type RefBlockType,
+} from "./corpusStore";
+import { ensureCorpusSchema, getCorpusDb } from "./libsql";
+
+/*
+ * Corpus retrieval side: hybrid search over ref_blocks (FTS5 leg ∪
+ * native-vector leg) plus the block lookup the cite tool uses. Consumed
+ * by src/mastra/tools/refDocs.ts, the review-decision workflow, and the
+ * forms-pipeline context retriever. The write/ingest/inspection side
+ * lives in corpusStore.ts.
+ */
+
+// ─── Public types ────────────────────────────────────────────────────────
+
+export interface SearchHit {
+  blockId: string;
+  docId: string;
+  documentTitle: string;
+  sectionId: string | null;
+  sectionHeading: string | null;
+  pageNum: number;
+  blockType: RefBlockType;
+  text: string;
+  snippet: string;
+  score: number;
+  citation: string;
+}
+
+export interface BlockDetail {
+  blockId: string;
+  docId: string;
+  documentTitle: string;
+  publisher: string;
+  taxYear: number | null;
+  sectionId: string | null;
+  sectionHeading: string | null;
+  pageNum: number;
+  blockType: RefBlockType;
+  text: string;
+  charStart: number;
+  charEnd: number;
+  citation: string;
+}
+
+// ─── Helpers ─────────────────────────────────────────────────────────────
+
+function buildCitation(
+  documentTitle: string,
+  sectionHeading: string | null,
+  pageNum: number,
+): string {
+  const parts = [documentTitle];
+  if (sectionHeading && sectionHeading !== "(Preamble)") {
+    parts.push(`§ ${sectionHeading}`);
+  }
+  parts.push(`p. ${pageNum}`);
+  return parts.join(", ");
+}
+
+/*
+ * FTS5 MATCH has its own query grammar. It throws on bare operator
+ * characters (-, ", *, :, etc). Queries arrive as free text, so we reduce
+ * them to alphanumeric tokens, quote each token, and join them with OR
+ * for recall. bm25 still ranks blocks that match more terms higher, and
+ * the merged best-of-leg scoring decides final order. Returns null when
+ * no searchable token survives, so the caller skips the FTS leg.
+ */
+function toFtsMatchQuery(raw: string): string | null {
+  const terms = raw.toLowerCase().match(/[a-z0-9]+/g);
+  if (!terms || terms.length === 0) return null;
+  return terms.map((t) => `"${t}"`).join(" OR ");
+}
+
+// ─── Single-block lookup ─────────────────────────────────────────────────
+
+export async function getBlock(blockId: string): Promise<BlockDetail | null> {
+  await ensureCorpusSchema();
+  const res = await getCorpusDb().execute({
+    sql: `SELECT b.block_id, b.doc_id, b.section_id, b.page_num, b.block_type,
+                 b.text, b.char_start, b.char_end,
+                 d.title AS doc_title, d.publisher, d.tax_year,
+                 s.heading AS section_heading
+          FROM ref_blocks b
+          JOIN ref_documents d ON d.doc_id = b.doc_id
+          LEFT JOIN ref_sections s ON s.section_id = b.section_id
+          WHERE b.block_id = ? LIMIT 1`,
+    args: [blockId],
+  });
+  const d = res.rows[0];
+  if (!d) return null;
+  const documentTitle = asStr(d.doc_title) || "(unknown)";
+  const sectionHeading = asStrOrNull(d.section_heading);
+  const pageNum = asNum(d.page_num);
+  return {
+    blockId: asStr(d.block_id),
+    docId: asStr(d.doc_id),
+    documentTitle,
+    publisher: asStr(d.publisher) || "(unknown)",
+    taxYear: asNumOrNull(d.tax_year),
+    sectionId: asStrOrNull(d.section_id),
+    sectionHeading,
+    pageNum,
+    blockType: asStr(d.block_type) as RefBlockType,
+    text: asStr(d.text),
+    charStart: asNum(d.char_start),
+    charEnd: asNum(d.char_end),
+    citation: buildCitation(documentTitle, sectionHeading, pageNum),
+  };
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * Hybrid retrieval — the TS port of the Postgres match_ref_blocks() RPC.
+ * It runs the FTS5 leg and the native-vector leg separately, merges and
+ * dedupes the hits in JS, then joins back for display columns. FTS-only
+ * and vector-only paths use the same call with one input set to null.
+ * ---------------------------------------------------------------------------
+ */
+
+interface MatchRow {
+  block_id: string;
+  doc_id: string;
+  section_id: string | null;
+  page_num: number;
+  block_type: string;
+  text: string;
+  contextualized_text: string | null;
+  doc_title: string;
+  section_heading: string | null;
+  fts_rank: number | null;
+  vector_distance: number | null;
+}
+
+function rowToHit(row: MatchRow, score: number): SearchHit {
+  return {
+    blockId: row.block_id,
+    docId: row.doc_id,
+    documentTitle: row.doc_title,
+    sectionId: row.section_id,
+    sectionHeading: row.section_heading,
+    pageNum: row.page_num,
+    blockType: row.block_type as RefBlockType,
+    text: row.text,
+    snippet: row.text.slice(0, 200),
+    score,
+    citation: buildCitation(row.doc_title, row.section_heading, row.page_num),
+  };
+}
+
+/*
+ * FTS leg. fts_rank: higher is better. bm25 is lower-is-better, so the
+ * query negates it to match the orientation the rest of the code assumes.
+ */
+async function ftsLeg(
+  queryText: string,
+  filterDocId: InValue,
+  matchCount: number,
+): Promise<Map<string, number>> {
+  const ranks = new Map<string, number>();
+  const ftsQuery = toFtsMatchQuery(queryText);
+  if (!ftsQuery) return ranks;
+  const res = await getCorpusDb().execute({
+    sql: `SELECT block_id, -bm25(ref_blocks_fts) AS rank
+          FROM ref_blocks_fts
+          WHERE ref_blocks_fts MATCH ?
+            AND (? IS NULL OR doc_id = ?)
+          ORDER BY rank DESC
+          LIMIT ?`,
+    args: [ftsQuery, filterDocId, filterDocId, matchCount],
+  });
+  for (const r of res.rows) ranks.set(asStr(r.block_id), asNum(r.rank));
+  return ranks;
+}
+
+/* Vector leg: exact brute-force cosine scan (no ANN index). */
+async function vectorLeg(
+  queryEmbedding: number[],
+  filterDocId: InValue,
+  matchCount: number,
+): Promise<Map<string, number>> {
+  const distances = new Map<string, number>();
+  const res = await getCorpusDb().execute({
+    sql: `SELECT block_id, vector_distance_cos(embedding, vector32(?)) AS distance
+          FROM ref_blocks
+          WHERE embedding IS NOT NULL
+            AND (? IS NULL OR doc_id = ?)
+          ORDER BY distance ASC
+          LIMIT ?`,
+    args: [vectorLiteral(queryEmbedding), filterDocId, filterDocId, matchCount],
+  });
+  for (const r of res.rows) distances.set(asStr(r.block_id), asNum(r.distance));
+  return distances;
+}
+
+async function callMatch(args: {
+  queryText: string | null;
+  queryEmbedding: number[] | null;
+  matchCount: number;
+  filterDocId?: string;
+}): Promise<MatchRow[]> {
+  await ensureCorpusSchema();
+  const filterDocId: InValue = args.filterDocId ?? null;
+
+  const ftsRank = args.queryText
+    ? await ftsLeg(args.queryText, filterDocId, args.matchCount)
+    : new Map<string, number>();
+  const vecDist = args.queryEmbedding
+    ? await vectorLeg(args.queryEmbedding, filterDocId, args.matchCount)
+    : new Map<string, number>();
+
+  const blockIds = [...new Set([...ftsRank.keys(), ...vecDist.keys()])];
+  if (blockIds.length === 0) return [];
+
+  // Fetch display columns for the union of hits.
+  const placeholders = blockIds.map(() => "?").join(",");
+  const res = await getCorpusDb().execute({
+    sql: `SELECT b.block_id, b.doc_id, b.section_id, b.page_num, b.block_type,
+                 b.text, b.contextualized_text,
+                 d.title AS doc_title, s.heading AS section_heading
+          FROM ref_blocks b
+          JOIN ref_documents d ON d.doc_id = b.doc_id
+          LEFT JOIN ref_sections s ON s.section_id = b.section_id
+          WHERE b.block_id IN (${placeholders})`,
+    args: blockIds,
+  });
+
+  return res.rows.map((r: Row): MatchRow => {
+    const id = asStr(r.block_id);
+    return {
+      block_id: id,
+      doc_id: asStr(r.doc_id),
+      section_id: asStrOrNull(r.section_id),
+      page_num: asNum(r.page_num),
+      block_type: asStr(r.block_type),
+      text: asStr(r.text),
+      contextualized_text: asStrOrNull(r.contextualized_text),
+      doc_title: asStr(r.doc_title),
+      section_heading: asStrOrNull(r.section_heading),
+      fts_rank: ftsRank.has(id) ? ftsRank.get(id)! : null,
+      vector_distance: vecDist.has(id) ? vecDist.get(id)! : null,
+    };
+  });
+}
+
+// ─── Search entry points ─────────────────────────────────────────────────
+
+export interface SearchOpts {
+  query: string;
+  docId?: string;
+  limit?: number;
+}
+
+/**
+ * Legacy FTS-only search. It has no callers in the repo today; new code
+ * uses hybridSearchRefDocs.
+ */
+export async function searchRefDocs(opts: SearchOpts): Promise<SearchHit[]> {
+  const limit = Math.min(opts.limit ?? 5, 25);
+  const rows = await callMatch({
+    queryText: opts.query,
+    queryEmbedding: null,
+    matchCount: limit,
+    filterDocId: opts.docId,
+  });
+  return (
+    rows
+      .filter((r) => r.fts_rank != null)
+      /*
+       * fts_rank: higher is better. Sort descending, then return the
+       * negated value so the exposed score reads lower-is-better.
+       */
+      .sort((a, b) => (b.fts_rank ?? 0) - (a.fts_rank ?? 0))
+      .slice(0, limit)
+      .map((r) => rowToHit(r, -(r.fts_rank ?? 0)))
+  );
+}
+
+export interface HybridSearchOpts {
+  query: string;
+  docId?: string;
+  /** Top-K returned to the caller. Default 8. */
+  limit?: number;
+  /**
+   * Candidate count pulled from each leg before the merge. More
+   * candidates give more recall. Default 50.
+   */
+  candidatesPerLeg?: number;
+  /**
+   * Force a specific retrieval path. Default "hybrid", which degrades to
+   * FTS when the local embedding model is unavailable or stale.
+   */
+  mode?: "fts" | "vector" | "hybrid";
+}
+
+/**
+ * Hybrid retrieval: FTS top-N ∪ vector top-N → merged ordering → top-K.
+ *
+ * Falls back to keyword (FTS-only) retrieval when the vector leg cannot
+ * run. Search always works; only semantic quality degrades:
+ *   - Ollama down or model not pulled → FTS-only with a warning.
+ *   - Stored vectors built by a different embedding model than the active
+ *     one → FTS-only with a warning. Fix: `npm run corpus -- reembed --all`.
+ */
+export async function hybridSearchRefDocs(opts: HybridSearchOpts): Promise<SearchHit[]> {
+  const limit = Math.min(opts.limit ?? 8, 25);
+  const cands = Math.min(opts.candidatesPerLeg ?? 50, 100);
+
+  const mode = opts.mode ?? "hybrid";
+  const queryEmbedding =
+    mode === "vector" || mode === "hybrid" ? await embedQueryIfUsable(opts.query) : null;
+  if (queryEmbedding == null && mode === "vector") return [];
+
+  const rows = await callMatch({
+    queryText: mode === "vector" ? null : opts.query,
+    queryEmbedding: mode === "fts" ? null : queryEmbedding,
+    matchCount: cands,
+    filterDocId: opts.docId,
+  });
+  if (rows.length === 0) return [];
+
+  /*
+   * Merged ordering: blocks that hit both legs come first, then the best
+   * single-leg signal. We do not normalize bm25 against cosine;
+   * both-legs agreement is the strongest cheap relevance signal. The
+   * retired Voyage pipeline reranked here with rerank-2.5. A local
+   * cross-encoder is the future option if ordering quality becomes the
+   * bottleneck.
+   */
+  const scored = rows
+    .map((r) => {
+      const ftsScore = r.fts_rank ?? 0;
+      const vecScore = r.vector_distance != null ? 1 / (1 + r.vector_distance) : 0;
+      const bothLegs = r.fts_rank != null && r.vector_distance != null ? 1 : 0;
+      return { row: r, score: bothLegs + Math.max(ftsScore, vecScore) };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
+
+  return scored.map(({ row, score }) => rowToHit(row, score));
+}
+
+/*
+ * Embed the query only when the vector leg can actually run. Two guards:
+ * the stored vectors must come from the active model (cross-model cosine
+ * distances are meaningless), and the local embedding endpoint must
+ * respond. Returns null — degrade to the FTS leg — when either fails.
+ */
+async function embedQueryIfUsable(query: string): Promise<number[] | null> {
+  const { resolveEmbeddings, embedQuery } = await import("../../refdocs/embeddings");
+  try {
+    const embedCfg = resolveEmbeddings();
+    const stored = await storedEmbeddingModel();
+    if (stored !== null && stored !== embedCfg.id) {
+      console.warn(
+        `[hybridSearchRefDocs] corpus embeddings were built with ${stored} ` +
+          `but the active model is ${embedCfg.id} — skipping the vector ` +
+          `leg (FTS-only). Run \`npm run corpus -- reembed --all\` to rebuild.`,
+      );
+      return null;
+    }
+    return await embedQuery(embedCfg, query);
+  } catch (err) {
+    console.warn(
+      `[hybridSearchRefDocs] vector leg unavailable, falling back to ` +
+        `keyword search: ${err instanceof Error ? err.message : String(err)}`,
+    );
+    return null;
+  }
+}

@@ -108,7 +108,7 @@ async function run(argv: string[]): Promise<void> {
  * script installed to.
  */
 async function checkEmbeddingStamp(): Promise<void> {
-  const { storedEmbeddingModel } = await import("../../src/mastra/db/refDocs");
+  const { storedEmbeddingModel } = await import("../../src/mastra/db/corpusStore");
   const { resolveEmbeddings } = await import("../../src/refdocs/embeddings");
   const stored = await storedEmbeddingModel();
   const active = resolveEmbeddings().id;

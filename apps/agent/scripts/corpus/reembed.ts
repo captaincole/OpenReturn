@@ -13,7 +13,7 @@
  *              Vectors from different models live in different spaces.
  */
 
-import { listBlocksWithoutEmbeddings, setBlockEmbeddings } from "../../src/mastra/db/refDocs";
+import { listBlocksWithoutEmbeddings, setBlockEmbeddings } from "../../src/mastra/db/corpusStore";
 import { embedDocuments, resolveEmbeddings } from "../../src/refdocs/embeddings";
 import type { Command } from "../lib/cli";
 

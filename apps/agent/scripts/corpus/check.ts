@@ -1,6 +1,6 @@
 // Row counts + per-doc embedding coverage for the local corpus DB.
 
-import { countBlocksByDoc, listDocuments, tableCounts } from "../../src/mastra/db/refDocs";
+import { countBlocksByDoc, listDocuments, tableCounts } from "../../src/mastra/db/corpusStore";
 import type { Command } from "../lib/cli";
 
 async function run(): Promise<void> {

@@ -10,7 +10,7 @@
  */
 
 import type { FieldInventory } from "../engine/catalog.js";
-import { hybridSearchRefDocs } from "../mastra/db/refDocs.js";
+import { hybridSearchRefDocs } from "../mastra/db/corpusSearch.js";
 
 /*
  * Minimal block shape. The classifier only needs the citation (for the

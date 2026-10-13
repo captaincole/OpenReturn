@@ -9,7 +9,7 @@ import {
   type RefBlock,
   type RefPage,
   type RefSection,
-} from "../mastra/db/refDocs";
+} from "../mastra/db/corpusStore";
 import { sha1, summarizeBlocks } from "./contextualize";
 import { embedDocuments, resolveEmbeddings } from "./embeddings";
 import { extractPdf } from "./extract";

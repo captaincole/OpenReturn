@@ -4,7 +4,7 @@
  * set and drift exists.
  */
 
-import { getDocument, listDocuments } from "../../src/mastra/db/refDocs";
+import { getDocument, listDocuments } from "../../src/mastra/db/corpusStore";
 import { projectRoot } from "../../src/paths";
 import { walkCorpus, type CorpusEntry } from "../../src/refdocs/walkCorpus";
 import type { Command } from "../lib/cli";
