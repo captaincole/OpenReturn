@@ -1,6 +1,6 @@
 import { createStep } from "@mastra/core/workflows";
 import { z } from "zod";
-import { getDecisionById, setDecisionVerdict, type Verdict } from "../../db/aiDecisions";
+import { getDecisionById, setDecisionVerdict } from "../../db/aiDecisions";
 import { hybridSearchRefDocs } from "../../db/corpusSearch";
 import {
   completeReviewRun,
@@ -11,8 +11,8 @@ import {
 import { listFactsByKeys, noteQuestion } from "../../db/taxFacts";
 import { modelFor } from "../../models";
 import { assessRiskAgent } from "./judges/assessRiskAgent";
-import { queryFormulator } from "./judges/queryFormulator";
 import { ruleAgent } from "./judges/ruleAgent";
+import { decisionSummary, formulateQueries, renderAssessPrompt, renderRulePrompt } from "./prompts";
 import {
   loopCarrierSchema,
   reviewDecisionOutputSchema,
@@ -20,6 +20,7 @@ import {
   ruleOutputSchema,
   type EvidenceBundle,
   type LoopCarrier,
+  type RuleOutput,
 } from "./schemas";
 
 /*
@@ -36,6 +37,8 @@ const KIND = {
   rule: "rule",
   finalize: "finalize",
 } as const;
+
+type Scope = { userId: string; filingId: string };
 
 /*
  * ---------------------------------------------------------------------------
@@ -118,11 +121,33 @@ export const initStep = createStep({
  * ---------------------------------------------------------------------------
  */
 
+/*
+ * Run each query and dedupe blocks across queries by blockId, keeping the
+ * higher score when queries overlap.
+ */
+async function retrieveBlocks(queries: string[]): Promise<EvidenceBundle["irsBlocks"]> {
+  const blockMap = new Map<string, { docId: string; text: string; score: number }>();
+  for (const q of queries) {
+    const hits = await hybridSearchRefDocs({ query: q, limit: 6 });
+    for (const h of hits) {
+      const prev = blockMap.get(h.blockId);
+      if (prev && prev.score >= h.score) continue;
+      blockMap.set(h.blockId, { docId: h.docId, text: h.text, score: h.score });
+    }
+  }
+  return Array.from(blockMap.entries()).map(([blockId, b]) => ({
+    blockId,
+    docId: b.docId,
+    text: b.text,
+    score: b.score,
+  }));
+}
+
 export const gatherStep = createStep({
   id: "gather",
   inputSchema: loopCarrierSchema,
   outputSchema: loopCarrierSchema,
-  execute: async ({ inputData, requestContext }) => {
+  execute: async ({ inputData }) => {
     const t0 = Date.now();
     const carrier = inputData;
     /*
@@ -146,33 +171,6 @@ export const gatherStep = createStep({
      */
     const facts = await listFactsByKeys(scope, carrier.taxYear, carrier.supportingFactKeys);
 
-    // Run each query and dedupe blocks across queries by blockId.
-    const blockMap = new Map<string, { docId: string; text: string; score: number }>();
-    for (const q of queries) {
-      const hits = await hybridSearchRefDocs({ query: q, limit: 6 });
-      for (const h of hits) {
-        if (blockMap.has(h.blockId)) {
-          // Keep the higher score across queries.
-          const prev = blockMap.get(h.blockId)!;
-          if (h.score > prev.score) {
-            blockMap.set(h.blockId, { docId: h.docId, text: h.text, score: h.score });
-          }
-          continue;
-        }
-        blockMap.set(h.blockId, {
-          docId: h.docId,
-          text: h.text,
-          score: h.score,
-        });
-      }
-    }
-    const irsBlocks = Array.from(blockMap.entries()).map(([blockId, b]) => ({
-      blockId,
-      docId: b.docId,
-      text: b.text,
-      score: b.score,
-    }));
-
     const evidence: EvidenceBundle = {
       facts: facts.map((f) => ({
         key: f.key,
@@ -180,7 +178,7 @@ export const gatherStep = createStep({
         value: f.value,
         sourceNote: f.sourceNote,
       })),
-      irsBlocks,
+      irsBlocks: await retrieveBlocks(queries),
       queriesUsed: queries,
       iteration: carrier.iteration,
     };
@@ -213,7 +211,7 @@ export const assessRiskStep = createStep({
   id: "assess",
   inputSchema: loopCarrierSchema,
   outputSchema: loopCarrierSchema,
-  execute: async ({ inputData, requestContext }) => {
+  execute: async ({ inputData }) => {
     const t0 = Date.now();
     const carrier = inputData;
     const scope = { userId: carrier.userId, filingId: carrier.filingId };
@@ -260,11 +258,30 @@ export const assessRiskStep = createStep({
  * ---------------------------------------------------------------------------
  */
 
+/*
+ * Advance the carrier after a rule output. When rule emits
+ * need_more_evidence, bump the iteration and swap in its suggested
+ * queries; the loop condition enforces the cap. Otherwise keep the
+ * carrier as-is so finalize can read the verdict.
+ */
+function advanceAfterRule(carrier: LoopCarrier, ruleOutput: RuleOutput): LoopCarrier {
+  if (ruleOutput.kind !== "need_more_evidence") {
+    return { ...carrier, ruleOutput };
+  }
+  return {
+    ...carrier,
+    ruleOutput,
+    iteration: carrier.iteration + 1,
+    queries: ruleOutput.suggestedQueries,
+    needMoreReasons: [...carrier.needMoreReasons, ruleOutput.reason],
+  };
+}
+
 export const ruleStep = createStep({
   id: "rule",
   inputSchema: loopCarrierSchema,
   outputSchema: loopCarrierSchema,
-  execute: async ({ inputData, requestContext }) => {
+  execute: async ({ inputData }) => {
     const t0 = Date.now();
     const carrier = inputData;
     const scope = { userId: carrier.userId, filingId: carrier.filingId };
@@ -288,28 +305,7 @@ export const ruleStep = createStep({
     }
     const parsed = ruleOutputSchema.parse(ruleOutput);
 
-    /*
-     * Update the carrier. When rule emits need_more_evidence, advance the
-     * iteration and swap in its suggested queries; the loop condition
-     * enforces the cap. Otherwise keep the carrier as-is so finalize can
-     * read the verdict.
-     */
-    let nextIteration = carrier.iteration;
-    let nextQueries = carrier.queries;
-    let nextReasons = carrier.needMoreReasons;
-    if (parsed.kind === "need_more_evidence") {
-      nextIteration = carrier.iteration + 1;
-      nextQueries = parsed.suggestedQueries;
-      nextReasons = [...carrier.needMoreReasons, parsed.reason];
-    }
-
-    const out: LoopCarrier = {
-      ...carrier,
-      ruleOutput: parsed,
-      iteration: nextIteration,
-      queries: nextQueries,
-      needMoreReasons: nextReasons,
-    };
+    const out = advanceAfterRule(carrier, parsed);
 
     await recordReviewStep(scope, {
       id: crypto.randomUUID(),
@@ -340,11 +336,82 @@ export const ruleStep = createStep({
  * ---------------------------------------------------------------------------
  */
 
+/* The reviewable subset of Verdict — the output schema excludes "pending". */
+type FinalVerdict = z.infer<typeof reviewDecisionOutputSchema>["finalVerdict"];
+
+interface FinalRuling {
+  finalVerdict: FinalVerdict;
+  reason: string;
+  citations: { blockId: string; quote?: string }[];
+  whatsMissing?: string;
+}
+
+/*
+ * Determine the final verdict. If rule still wanted more evidence after
+ * the loop exhausted its iterations, collapse to needs_more_facts and
+ * synthesize a whatsMissing summary from the accumulated reasons (the
+ * last one included).
+ */
+function resolveFinalVerdict(carrier: LoopCarrier): FinalRuling {
+  const ruleOutput = carrier.ruleOutput!;
+  if (ruleOutput.kind === "verdict") {
+    return {
+      finalVerdict: ruleOutput.verdict,
+      reason: ruleOutput.reason,
+      citations: ruleOutput.citations,
+    };
+  }
+  const allReasons = [...carrier.needMoreReasons];
+  const whatsMissing = allReasons.length ? allReasons.join(" → ") : ruleOutput.reason;
+  return {
+    finalVerdict: "needs_more_facts",
+    reason: `Reviewer could not ground the decision after ${carrier.iteration - 1} iterations: ${whatsMissing}`,
+    citations: [],
+    whatsMissing,
+  };
+}
+
+/*
+ * Surface non-accurate outcomes to Luca via an open_questions row, so he
+ * circles back with the user. Otherwise the verdict sits unread in the
+ * ledger. Returns the open question's id, or undefined when the verdict
+ * needs no follow-up.
+ */
+async function noteFollowUpQuestion(
+  scope: Scope,
+  carrier: LoopCarrier,
+  ruling: FinalRuling,
+): Promise<string | undefined> {
+  const prompts: Partial<Record<FinalVerdict, { question: string; context: string | undefined }>> = {
+    needs_more_facts: {
+      question: `Confirm the basis for decision \`${carrier.decisionKey}\` — review couldn't ground it.`,
+      context: ruling.whatsMissing,
+    },
+    inaccurate: {
+      question: `Revisit decision \`${carrier.decisionKey}\` with the user — review found it conflicts with the evidence.`,
+      context: ruling.reason,
+    },
+  };
+  const followUp = prompts[ruling.finalVerdict];
+  if (!followUp) return undefined;
+
+  const openQuestionId = crypto.randomUUID();
+  await noteQuestion(scope, {
+    id: openQuestionId,
+    userId: carrier.userId,
+    filingId: carrier.filingId,
+    question: followUp.question,
+    context: followUp.context,
+    decisionId: carrier.decisionId,
+  });
+  return openQuestionId;
+}
+
 export const finalizeStep = createStep({
   id: "finalize",
   inputSchema: loopCarrierSchema,
   outputSchema: reviewDecisionOutputSchema,
-  execute: async ({ inputData, requestContext }) => {
+  execute: async ({ inputData }) => {
     const t0 = Date.now();
     const carrier = inputData;
     const scope = { userId: carrier.userId, filingId: carrier.filingId };
@@ -352,32 +419,8 @@ export const finalizeStep = createStep({
       throw new Error("finalize: ruleOutput missing — loop did not run");
     }
 
-    /*
-     * Determine the final verdict. If rule still wanted more evidence after
-     * the loop exhausted its iterations, collapse to needs_more_facts and
-     * synthesize a whatsMissing summary from the accumulated reasons.
-     */
-    let finalVerdict: Verdict;
-    let reason: string;
-    let citations: { blockId: string; quote?: string }[] = [];
-    let whatsMissing: string | undefined;
-    let openQuestionId: string | undefined;
-
-    if (carrier.ruleOutput.kind === "verdict") {
-      finalVerdict = carrier.ruleOutput.verdict;
-      reason = carrier.ruleOutput.reason;
-      citations = carrier.ruleOutput.citations;
-    } else {
-      /*
-       * need_more_evidence with no iterations left → collapse to
-       * needs_more_facts. The accumulated reasons (the last one included)
-       * describe the gap; whatsMissing joins them in order.
-       */
-      finalVerdict = "needs_more_facts";
-      const allReasons = [...carrier.needMoreReasons];
-      whatsMissing = allReasons.length ? allReasons.join(" → ") : carrier.ruleOutput.reason;
-      reason = `Reviewer could not ground the decision after ${carrier.iteration - 1} iterations: ${whatsMissing}`;
-    }
+    const ruling = resolveFinalVerdict(carrier);
+    const { finalVerdict, reason, citations, whatsMissing } = ruling;
 
     await setDecisionVerdict(
       scope,
@@ -387,32 +430,7 @@ export const finalizeStep = createStep({
       citations.length > 0 ? citations : null,
     );
 
-    /*
-     * Surface non-accurate outcomes to Luca via an open_questions row, so
-     * he circles back with the user. Otherwise the verdict sits unread in
-     * the ledger.
-     */
-    if (finalVerdict === "needs_more_facts") {
-      openQuestionId = crypto.randomUUID();
-      await noteQuestion(scope, {
-        id: openQuestionId,
-        userId: carrier.userId,
-        filingId: carrier.filingId,
-        question: `Confirm the basis for decision \`${carrier.decisionKey}\` — review couldn't ground it.`,
-        context: whatsMissing,
-        decisionId: carrier.decisionId,
-      });
-    } else if (finalVerdict === "inaccurate") {
-      openQuestionId = crypto.randomUUID();
-      await noteQuestion(scope, {
-        id: openQuestionId,
-        userId: carrier.userId,
-        filingId: carrier.filingId,
-        question: `Revisit decision \`${carrier.decisionKey}\` with the user — review found it conflicts with the evidence.`,
-        context: reason,
-        decisionId: carrier.decisionId,
-      });
-    }
+    const openQuestionId = await noteFollowUpQuestion(scope, carrier, ruling);
 
     /*
      * Iteration count: a verdict on iteration N reports N. When we
@@ -458,23 +476,6 @@ export const finalizeStep = createStep({
 });
 
 /*
- * ---------------------------------------------------------------------------
- * Prompt rendering and small helpers
- * ---------------------------------------------------------------------------
- */
-
-function decisionSummary(carrier: LoopCarrier) {
-  return {
-    decisionKey: carrier.decisionKey,
-    decision: carrier.decisionValue,
-    rationale: carrier.rationale,
-    confidence: carrier.confidence,
-    dissentingConsiderations: carrier.dissentingConsiderationsInput,
-    supportingFactKeys: carrier.supportingFactKeys,
-  };
-}
-
-/*
  * review_run_steps.input_json carries only the relevant inputs. The gather
  * and finalize steps log the carrier through this strip — the evidence
  * bundle already lives on gather's output_json for the same iteration.
@@ -487,104 +488,4 @@ function stripHeavyFields(c: LoopCarrier) {
     queries: c.queries,
     needMoreReasons: c.needMoreReasons,
   };
-}
-
-async function formulateQueries(c: LoopCarrier): Promise<string[]> {
-  const prompt = [
-    `Decision to ground:`,
-    `  decisionKey: ${c.decisionKey}`,
-    `  value: ${JSON.stringify(c.decisionValue)}`,
-    `  rationale: ${c.rationale}`,
-    `  supportingFactKeys: ${c.supportingFactKeys.join(", ") || "(none)"}`,
-    ``,
-    `Emit 1–2 search queries that would surface the IRS guidance governing this kind of decision.`,
-  ].join("\n");
-
-  const result = await queryFormulator.generate(prompt, {
-    structuredOutput: {
-      /*
-       * Anthropic's native structured-output endpoint rejects `maxItems` on
-       * array properties. The 1–2 cap therefore lives in the prompt and the
-       * slice below, not in the schema.
-       */
-      schema: z.object({ queries: z.array(z.string()).min(1) }),
-      model: modelFor("judge"),
-      errorStrategy: "strict",
-    },
-  });
-  const obj = (result as { object?: { queries?: string[] } }).object;
-  if (!obj?.queries || obj.queries.length === 0) {
-    /*
-     * Fallback: synthesize a query from the decisionKey itself. Better
-     * than a throw — the workflow stays alive, and the step log still
-     * records which queries ran.
-     */
-    return [c.decisionKey.replace(/^decisions\./, "").replace(/_/g, " ")];
-  }
-  return obj.queries.slice(0, 2);
-}
-
-function renderAssessPrompt(c: LoopCarrier): string {
-  return [
-    `Decision under review:`,
-    JSON.stringify(decisionSummary(c), null, 2),
-    ``,
-    `Supporting facts (from tax_facts):`,
-    factLines(c.evidence!.facts),
-    ``,
-    `Retrieved IRS passages (top hits across ${c.evidence!.queriesUsed.length} query/queries):`,
-    blockLines(c.evidence!.irsBlocks),
-    ``,
-    `Assess the risk tier of this decision per your instructions.`,
-  ].join("\n");
-}
-
-function renderRulePrompt(c: LoopCarrier): string {
-  const evidence = c.evidence!;
-  const risk = c.riskAssessment!;
-  return [
-    `Decision under review:`,
-    JSON.stringify(decisionSummary(c), null, 2),
-    ``,
-    `Risk tier: ${risk.riskTier}`,
-    `  rationale: ${risk.rationale}`,
-    `  consequence: ${risk.consequenceNotes}`,
-    risk.dissentingConsiderations.length
-      ? `  dissenting: ${risk.dissentingConsiderations.join("; ")}`
-      : "",
-    ``,
-    `Supporting facts (from tax_facts):`,
-    factLines(evidence.facts),
-    ``,
-    `Retrieved IRS passages (this iteration: ${c.iteration}, queries: ${evidence.queriesUsed.join(" | ")}):`,
-    blockLines(evidence.irsBlocks),
-    ``,
-    c.needMoreReasons.length
-      ? `Previous iterations asked for more evidence with these reasons:\n${c.needMoreReasons.map((r, i) => `  ${i + 1}. ${r}`).join("\n")}\n`
-      : "",
-    `You are on iteration ${c.iteration} of 3. Decide: commit to a verdict, or request more evidence (with suggested queries).`,
-  ]
-    .filter((line) => line !== "")
-    .join("\n");
-}
-
-function factLines(facts: EvidenceBundle["facts"]): string {
-  if (!facts.length) return "  (none)";
-  return facts
-    .map(
-      (f) =>
-        `  - ${f.key} (${f.category}): ${JSON.stringify(f.value)}` +
-        (f.sourceNote ? ` [source: ${f.sourceNote}]` : ""),
-    )
-    .join("\n");
-}
-
-function blockLines(blocks: EvidenceBundle["irsBlocks"]): string {
-  if (!blocks.length) return "  (no IRS passages retrieved)";
-  return blocks
-    .map(
-      (b) =>
-        `  [${b.blockId}] ${b.text.replace(/\s+/g, " ").slice(0, 600)}${b.text.length > 600 ? "…" : ""}`,
-    )
-    .join("\n");
 }
