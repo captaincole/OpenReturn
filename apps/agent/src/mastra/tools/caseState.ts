@@ -1,7 +1,7 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 import type { EngineFiling, EvaluatedScenario } from "../../engine";
-import type { BaseFormField, EngineDerivation } from "../../engine/types";
+import type { BaseFormField, EngineDerivation, EvaluatedForm } from "../../engine/types";
 import type { Scope } from "../db/appDb";
 import { resolveOwnerFilingForYear } from "../db/filings";
 import { loadAndEvaluateScenario } from "../loadScenario";
@@ -79,17 +79,14 @@ export async function buildCaseStateForFiling(
   return buildCaseStateForScenario(await loadAndEvaluateScenario(scope, filing, authEmail));
 }
 
-export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
-  const { forms, facts, decisions, filingInfo, authEmail } = scenario;
-  const form1040 = forms.get("form-1040")!;
-  const form540 = forms.get("form-540")!;
-
-  const summaries: EvaluatedFormSummary[] = [summarizeForm(form1040), summarizeForm(form540)];
-
-  /*
-   * Aggregate unique pending decisions and facts across all blockers,
-   * including mustFile blockers. Luca asks the user about these.
-   */
+/*
+ * Aggregate unique pending decisions and facts across all blockers,
+ * including mustFile blockers. Luca asks the user about these.
+ */
+function collectPending(summaries: EvaluatedFormSummary[]): {
+  pendingDecisions: Set<string>;
+  pendingFacts: Set<string>;
+} {
   const pendingDecisions = new Set<string>();
   const pendingFacts = new Set<string>();
   for (const s of summaries) {
@@ -101,34 +98,42 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
       for (const f of b.missingFactKeys ?? []) pendingFacts.add(f);
     }
   }
+  return { pendingDecisions, pendingFacts };
+}
 
-  /*
-   * Identity gaps surface as pendingFacts. We check the RESOLVED filingInfo
-   * slot, not raw fact presence. A fact with the right key but the wrong
-   * value shape (e.g. identity.phone written as an object) would pass a
-   * raw-presence gate even though the resolver cannot read it. With
-   * filingInfo, pendingFacts reflects exactly what the engine consumes.
-   * identity.email is intentionally NOT in this list — it is a courtesy
-   * field that Luca auto-fills from authEmail at doc-generation time.
-   */
-  const REQUIRED_IDENTITY_SLOTS: Array<[string, () => unknown]> = [
-    ["identity.name.first", () => filingInfo.taxpayerFirstName],
-    ["identity.name.last", () => filingInfo.taxpayerLastName],
-    ["identity.ssn", () => filingInfo.taxpayerSSN],
-    ["identity.dob", () => filingInfo.taxpayerDateOfBirth],
-    ["identity.address.street", () => filingInfo.homeAddressLine1],
-    ["identity.address.city", () => filingInfo.homeAddressCity],
-    ["identity.address.state", () => filingInfo.homeAddressState],
-    ["identity.address.zip", () => filingInfo.homeAddressZip],
-    ["identity.occupation", () => filingInfo.taxpayerOccupation],
-    ["identity.phone", () => filingInfo.taxpayerPhone],
+/*
+ * Identity gaps surface as pendingFacts. We check the RESOLVED filingInfo
+ * slot, not raw fact presence. A fact with the right key but the wrong
+ * value shape (e.g. identity.phone written as an object) would pass a
+ * raw-presence gate even though the resolver cannot read it. With
+ * filingInfo, pendingFacts reflects exactly what the engine consumes.
+ * identity.email is intentionally NOT in this list — it is a courtesy
+ * field that Luca auto-fills from authEmail at doc-generation time.
+ */
+function addPendingIdentityFacts(
+  filingInfo: EvaluatedScenario["filingInfo"],
+  pendingFacts: Set<string>,
+): void {
+  const requiredSlots: Array<[string, unknown]> = [
+    ["identity.name.first", filingInfo.taxpayerFirstName],
+    ["identity.name.last", filingInfo.taxpayerLastName],
+    ["identity.ssn", filingInfo.taxpayerSSN],
+    ["identity.dob", filingInfo.taxpayerDateOfBirth],
+    ["identity.address.street", filingInfo.homeAddressLine1],
+    ["identity.address.city", filingInfo.homeAddressCity],
+    ["identity.address.state", filingInfo.homeAddressState],
+    ["identity.address.zip", filingInfo.homeAddressZip],
+    ["identity.occupation", filingInfo.taxpayerOccupation],
+    ["identity.phone", filingInfo.taxpayerPhone],
   ];
-  for (const [key, get] of REQUIRED_IDENTITY_SLOTS) {
-    if (!get()) pendingFacts.add(key);
+  for (const [key, value] of requiredSlots) {
+    if (!value) pendingFacts.add(key);
   }
+}
 
-  // Money convenience fields — federal from 1040, state from 540.
-  const money = {
+/* Money convenience fields — federal from 1040, state from 540. */
+function extractMoney(form1040: EvaluatedForm<BaseFormField>, form540: EvaluatedForm<BaseFormField>) {
+  return {
     totalWages: numericField(form1040.fields, "form-1040.line.1z") ?? 0,
     federalAgi: numericField(form1040.fields, "form-1040.line.11") ?? 0,
     federalTaxableIncome: numericField(form1040.fields, "form-1040.line.15") ?? 0,
@@ -141,12 +146,23 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
     stateRefund: numericField(form540.fields, "form-540.line.115_refund_or_no_amount_due") ?? 0,
     stateOwed: numericField(form540.fields, "form-540.line.111_amount_you_owe") ?? 0,
   };
+}
+
+export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
+  const { forms, facts, decisions, filingInfo, authEmail } = scenario;
+  const form1040 = forms.get("form-1040")!;
+  const form540 = forms.get("form-540")!;
+
+  const summaries: EvaluatedFormSummary[] = [summarizeForm(form1040), summarizeForm(form540)];
+
+  const { pendingDecisions, pendingFacts } = collectPending(summaries);
+  addPendingIdentityFacts(filingInfo, pendingFacts);
 
   return {
     summaries,
     pendingDecisions: Array.from(pendingDecisions).sort(),
     pendingFacts: Array.from(pendingFacts).sort(),
-    money,
+    money: extractMoney(form1040, form540),
     factCount: facts.length,
     decisionRows: decisions,
     authEmail,
@@ -164,45 +180,7 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
   };
 }
 
-function summarizeForm(form: {
-  formId: string;
-  jurisdiction: string;
-  title: string;
-  mustFile:
-    | {
-        ok: true;
-        value: boolean;
-        rationale: string;
-        supportingFactKeys: string[];
-        decisionKey?: string;
-      }
-    | {
-        ok: false;
-        reason: string;
-        missingDecisionKey?: string;
-        missingFactKeys?: string[];
-        unsupported?: boolean;
-      };
-  mustFileDerivation?: EngineDerivation;
-  fields: Array<{
-    fieldId: string;
-    result:
-      | {
-          ok: true;
-          value: unknown;
-          rationale: string;
-          supportingFactKeys: string[];
-          decisionKey?: string;
-        }
-      | {
-          ok: false;
-          reason: string;
-          missingDecisionKey?: string;
-          missingFactKeys?: string[];
-          unsupported?: boolean;
-        };
-  }>;
-}): EvaluatedFormSummary {
+function summarizeForm(form: EvaluatedForm<BaseFormField>): EvaluatedFormSummary {
   /*
    * Unsupported fields are engine gaps, not user-input gaps. They do not
    * count as blockers and do not aggregate into pending questions.
