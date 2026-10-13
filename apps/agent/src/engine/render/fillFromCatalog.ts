@@ -27,7 +27,7 @@
  *   - numeric values render via fmtMoney (whole dollars, "0" for zero)
  */
 
-import { PDFCheckBox, PDFDocument, PDFRadioGroup, PDFTextField } from "pdf-lib";
+import { PDFCheckBox, PDFDocument, PDFRadioGroup, PDFTextField, type PDFForm } from "pdf-lib";
 import { type Catalog, type FieldInventory } from "../catalog.js";
 import { getFormatter } from "../defineForm.js";
 import { type AnyFormField, type EvaluatedForm } from "../types.js";
@@ -48,6 +48,13 @@ export interface FillFromCatalogResult {
   warnings: string[];
 }
 
+/* Shared mutable state the widget writers append into. */
+interface WriterCtx {
+  pdfForm: PDFForm;
+  rendered: Map<string, RenderedWidget[]>;
+  warnings: string[];
+}
+
 export async function fillFromCatalog(opts: {
   blankPdfBytes: Buffer | Uint8Array;
   form: EvaluatedForm<AnyFormField>;
@@ -55,90 +62,10 @@ export async function fillFromCatalog(opts: {
 }): Promise<FillFromCatalogResult> {
   const { blankPdfBytes, form, catalog } = opts;
   const pdf = await PDFDocument.load(blankPdfBytes);
-  const pdfForm = pdf.getForm();
-
-  const rendered = new Map<string, RenderedWidget[]>();
-  const warnings: string[] = [];
-
-  const setText = (fieldId: string, widgetName: string, value: string) => {
-    if (!value) return;
-    let f;
-    try {
-      f = pdfForm.getField(widgetName);
-    } catch (err) {
-      warnings.push(
-        `fieldId=${fieldId} widget=${widgetName} getField failed: ${
-          err instanceof Error ? err.message : String(err)
-        }`,
-      );
-      return;
-    }
-    if (!(f instanceof PDFTextField)) {
-      warnings.push(
-        `fieldId=${fieldId} widget=${widgetName} is ${f.constructor.name}, expected PDFTextField.`,
-      );
-      return;
-    }
-    /*
-     * Most fields render their value verbatim. A few widgets have
-     * maxLength constraints that conflict with the canonical fact
-     * format: SSN widgets take 9 digits with no dashes, and some phone
-     * widgets take 10 bare digits. On a length overflow, retry with
-     * separators stripped before declaring a soft failure. This mirrors
-     * the IRS pattern: facts carry the readable format ("###-##-####");
-     * the PDF holds the bare digits.
-     */
-    const written = trySetTextWithFallback(f, value);
-    if (written === null) {
-      warnings.push(
-        `fieldId=${fieldId} widget=${widgetName} setText failed even after stripping separators (value="${value}").`,
-      );
-      return;
-    }
-    appendRendered(rendered, fieldId, { widgetName, text: written });
-  };
-  const check = (fieldId: string, widgetName: string) => {
-    try {
-      const f = pdfForm.getField(widgetName);
-      if (f instanceof PDFCheckBox) {
-        f.check();
-        appendRendered(rendered, fieldId, { widgetName, checked: true });
-      } else {
-        warnings.push(
-          `fieldId=${fieldId} widget=${widgetName} is ${f.constructor.name}, expected PDFCheckBox.`,
-        );
-      }
-    } catch (err) {
-      warnings.push(
-        `fieldId=${fieldId} widget=${widgetName} check failed: ${
-          err instanceof Error ? err.message : String(err)
-        }`,
-      );
-    }
-  };
-  /*
-   * Radio-group select. The parent field is a PDFRadioGroup whose options
-   * come from PDFRadioGroup.getOptions(). The catalog records the exact
-   * label per option; select(label) picks it.
-   */
-  const selectRadio = (fieldId: string, widgetName: string, radioOption: string) => {
-    try {
-      const f = pdfForm.getField(widgetName);
-      if (f instanceof PDFRadioGroup) {
-        f.select(radioOption);
-        appendRendered(rendered, fieldId, { widgetName, text: radioOption });
-      } else {
-        warnings.push(
-          `fieldId=${fieldId} widget=${widgetName} is ${f.constructor.name}, expected PDFRadioGroup.`,
-        );
-      }
-    } catch (err) {
-      warnings.push(
-        `fieldId=${fieldId} widget=${widgetName} radio select(${radioOption}) failed: ${
-          err instanceof Error ? err.message : String(err)
-        }`,
-      );
-    }
+  const ctx: WriterCtx = {
+    pdfForm: pdf.getForm(),
+    rendered: new Map<string, RenderedWidget[]>(),
+    warnings: [],
   };
 
   for (const field of form.fields) {
@@ -149,12 +76,97 @@ export async function fillFromCatalog(opts: {
     if (value === null || value === undefined) continue;
 
     const widgetName = verifiedWidget(form.formId, field.fieldId) ?? inv.pdfWidgetName;
-    fillByType(setText, check, selectRadio, widgetName, inv, value, form.jurisdiction);
+    fillByType(ctx, widgetName, inv, value, form.jurisdiction);
   }
 
-  pdfForm.flatten();
+  ctx.pdfForm.flatten();
   const pdfBytes = Buffer.from(await pdf.save());
-  return { pdfBytes, rendered, warnings };
+  return { pdfBytes, rendered: ctx.rendered, warnings: ctx.warnings };
+}
+
+// ─── Widget writers ──────────────────────────────────────────────────────
+
+function setText(ctx: WriterCtx, fieldId: string, widgetName: string, value: string): void {
+  if (!value) return;
+  let f;
+  try {
+    f = ctx.pdfForm.getField(widgetName);
+  } catch (err) {
+    ctx.warnings.push(
+      `fieldId=${fieldId} widget=${widgetName} getField failed: ${
+        err instanceof Error ? err.message : String(err)
+      }`,
+    );
+    return;
+  }
+  if (!(f instanceof PDFTextField)) {
+    ctx.warnings.push(
+      `fieldId=${fieldId} widget=${widgetName} is ${f.constructor.name}, expected PDFTextField.`,
+    );
+    return;
+  }
+  /*
+   * Most fields render their value verbatim. A few widgets have
+   * maxLength constraints that conflict with the canonical fact
+   * format: SSN widgets take 9 digits with no dashes, and some phone
+   * widgets take 10 bare digits. On a length overflow, retry with
+   * separators stripped before declaring a soft failure. This mirrors
+   * the IRS pattern: facts carry the readable format ("###-##-####");
+   * the PDF holds the bare digits.
+   */
+  const written = trySetTextWithFallback(f, value);
+  if (written === null) {
+    ctx.warnings.push(
+      `fieldId=${fieldId} widget=${widgetName} setText failed even after stripping separators (value="${value}").`,
+    );
+    return;
+  }
+  appendRendered(ctx.rendered, fieldId, { widgetName, text: written });
+}
+
+function check(ctx: WriterCtx, fieldId: string, widgetName: string): void {
+  try {
+    const f = ctx.pdfForm.getField(widgetName);
+    if (f instanceof PDFCheckBox) {
+      f.check();
+      appendRendered(ctx.rendered, fieldId, { widgetName, checked: true });
+    } else {
+      ctx.warnings.push(
+        `fieldId=${fieldId} widget=${widgetName} is ${f.constructor.name}, expected PDFCheckBox.`,
+      );
+    }
+  } catch (err) {
+    ctx.warnings.push(
+      `fieldId=${fieldId} widget=${widgetName} check failed: ${
+        err instanceof Error ? err.message : String(err)
+      }`,
+    );
+  }
+}
+
+/*
+ * Radio-group select. The parent field is a PDFRadioGroup whose options
+ * come from PDFRadioGroup.getOptions(). The catalog records the exact
+ * label per option; select(label) picks it.
+ */
+function selectRadio(ctx: WriterCtx, fieldId: string, widgetName: string, radioOption: string): void {
+  try {
+    const f = ctx.pdfForm.getField(widgetName);
+    if (f instanceof PDFRadioGroup) {
+      f.select(radioOption);
+      appendRendered(ctx.rendered, fieldId, { widgetName, text: radioOption });
+    } else {
+      ctx.warnings.push(
+        `fieldId=${fieldId} widget=${widgetName} is ${f.constructor.name}, expected PDFRadioGroup.`,
+      );
+    }
+  } catch (err) {
+    ctx.warnings.push(
+      `fieldId=${fieldId} widget=${widgetName} radio select(${radioOption}) failed: ${
+        err instanceof Error ? err.message : String(err)
+      }`,
+    );
+  }
 }
 
 /*
@@ -242,10 +254,39 @@ function coerceTextValue(inv: FieldInventory, value: string, jurisdiction: strin
   return value;
 }
 
+/*
+ * Select rendering, shared by multi_select and single_select. Both walk
+ * the selected value(s) and toggle the matching option's widget
+ * (per-checkbox, 1040-style) or call PDFRadioGroup.select(label)
+ * (radio-group, 540-style). single_select means "exactly one selected";
+ * multi_select means "zero or more." The renderer ignores the
+ * distinction and iterates whichever values are present.
+ */
+function fillSelect(
+  ctx: WriterCtx,
+  widgetName: string | undefined,
+  inv: FieldInventory,
+  value: unknown,
+): boolean {
+  if (!inv.options) return false;
+  const selectedValues = Array.isArray(value) ? value : [value];
+  let touched = false;
+  for (const selected of selectedValues) {
+    const opt = inv.options.find((o) => o.value === selected);
+    if (!opt) continue;
+    if (opt.radioOption && widgetName) {
+      selectRadio(ctx, inv.fieldId, widgetName, opt.radioOption);
+      touched = true;
+    } else if (opt.pdfWidgetName) {
+      check(ctx, inv.fieldId, opt.pdfWidgetName);
+      touched = true;
+    }
+  }
+  return touched;
+}
+
 function fillByType(
-  setText: (fieldId: string, widgetName: string, value: string) => void,
-  check: (fieldId: string, widgetName: string) => void,
-  selectRadio: (fieldId: string, widgetName: string, radioOption: string) => void,
+  ctx: WriterCtx,
   widgetName: string | undefined,
   inv: FieldInventory,
   value: unknown,
@@ -261,68 +302,47 @@ function fillByType(
    */
   const override = getFormatter(inv.fieldId);
 
+  /*
+   * Selects resolve widgets per option, so they go first; every other
+   * value type writes into the field's own widget and shares one guard.
+   */
+  if (inv.valueType === "multi_select" || inv.valueType === "single_select") {
+    return fillSelect(ctx, widgetName, inv, value);
+  }
+  if (!widgetName) return false;
+
   switch (inv.valueType) {
     case "numeric": {
-      if (!widgetName) return false;
       if (typeof value === "number" && Number.isFinite(value)) {
         const text = override ? override(value as never) : fmtMoney(value);
-        setText(inv.fieldId, widgetName, text);
+        setText(ctx, inv.fieldId, widgetName, text);
         return true;
       }
       return false;
     }
     case "text": {
-      if (!widgetName) return false;
       if (typeof value === "string" && value.length > 0) {
         const text = override
           ? override(value as never)
           : coerceTextValue(inv, value, jurisdiction);
-        setText(inv.fieldId, widgetName, text);
+        setText(ctx, inv.fieldId, widgetName, text);
         return true;
       }
       return false;
     }
     case "boolean": {
-      if (!widgetName) return false;
       if (value === true) {
-        check(inv.fieldId, widgetName);
+        check(ctx, inv.fieldId, widgetName);
         return true;
       }
       return false;
     }
     case "date": {
-      if (!widgetName) return false;
       if (typeof value === "string" && value.length > 0) {
-        setText(inv.fieldId, widgetName, value);
+        setText(ctx, inv.fieldId, widgetName, value);
         return true;
       }
       return false;
-    }
-    case "multi_select":
-    case "single_select": {
-      /*
-       * Both render the same way: walk the selected value(s) and toggle
-       * the matching option's widget (per-checkbox, 1040-style) or call
-       * PDFRadioGroup.select(label) (radio-group, 540-style).
-       * single_select means "exactly one selected"; multi_select means
-       * "zero or more." The renderer ignores the distinction and iterates
-       * whichever values are present.
-       */
-      if (!inv.options) return false;
-      const selectedValues = Array.isArray(value) ? value : [value];
-      let touched = false;
-      for (const selected of selectedValues) {
-        const opt = inv.options.find((o) => o.value === selected);
-        if (!opt) continue;
-        if (opt.radioOption && widgetName) {
-          selectRadio(inv.fieldId, widgetName, opt.radioOption);
-          touched = true;
-        } else if (opt.pdfWidgetName) {
-          check(inv.fieldId, opt.pdfWidgetName);
-          touched = true;
-        }
-      }
-      return touched;
     }
   }
   return false;

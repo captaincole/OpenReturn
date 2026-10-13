@@ -77,6 +77,34 @@ export interface TaxTableLookupErr {
 
 export type TaxTableLookupResult = TaxTableLookupOk | TaxTableLookupErr;
 
+const err = (reason: TaxTableLookupErr["reason"], message: string): TaxTableLookupErr => ({
+  ok: false,
+  reason,
+  message,
+});
+
+/* Resolve (tableId, filingStatus) to the table and its status column. */
+function resolveTableColumn(
+  tableId: string,
+  filingStatus: FilingStatus,
+): { table: LoadedTaxTable; column: string } | TaxTableLookupErr {
+  const table = TABLES_BY_ID[tableId];
+  if (!table) {
+    return err(
+      "table_not_supported",
+      `No tax table loaded for tableId "${tableId}". Available: ${Object.keys(TABLES_BY_ID).join(", ")}.`,
+    );
+  }
+  const column = table.filingStatusColumns[filingStatus];
+  if (!column) {
+    return err(
+      "filing_status_not_supported",
+      `Filing status "${filingStatus}" has no column mapping in table "${tableId}".`,
+    );
+  }
+  return { table, column };
+}
+
 /**
  * Look up tax for (tableId, taxableIncome, filingStatus). Returns a
  * discriminated result, so callers handle each failure mode explicitly.
@@ -86,58 +114,34 @@ export function lookupTax(
   taxableIncome: number,
   filingStatus: FilingStatus,
 ): TaxTableLookupResult {
-  const table = TABLES_BY_ID[tableId];
-  if (!table) {
-    return {
-      ok: false,
-      reason: "table_not_supported",
-      message: `No tax table loaded for tableId "${tableId}". Available: ${Object.keys(TABLES_BY_ID).join(", ")}.`,
-    };
-  }
-  const column = table.filingStatusColumns[filingStatus];
-  if (!column) {
-    return {
-      ok: false,
-      reason: "filing_status_not_supported",
-      message: `Filing status "${filingStatus}" has no column mapping in table "${tableId}".`,
-    };
-  }
+  const resolved = resolveTableColumn(tableId, filingStatus);
+  if ("ok" in resolved) return resolved;
+  const { table, column } = resolved;
   if (!Number.isFinite(taxableIncome)) {
-    return {
-      ok: false,
-      reason: "invalid_input",
-      message: `Taxable income must be finite; got ${taxableIncome}.`,
-    };
+    return err("invalid_input", `Taxable income must be finite; got ${taxableIncome}.`);
   }
   if (taxableIncome < 0) {
-    return {
-      ok: false,
-      reason: "out_of_range",
-      message: `Taxable income ${taxableIncome} is negative.`,
-    };
+    return err("out_of_range", `Taxable income ${taxableIncome} is negative.`);
   }
   if (taxableIncome > table.coverage.maxIncome) {
-    return {
-      ok: false,
-      reason: "out_of_range",
-      message: `Taxable income ${taxableIncome} is above the tax-table ceiling of $${table.coverage.maxIncome} for ${tableId}. Use the appropriate tax-rate schedule / computation worksheet instead.`,
-    };
+    return err(
+      "out_of_range",
+      `Taxable income ${taxableIncome} is above the tax-table ceiling of $${table.coverage.maxIncome} for ${tableId}. Use the appropriate tax-rate schedule / computation worksheet instead.`,
+    );
   }
   const row = findRow(table.rows, taxableIncome, table.boundaryConvention);
   if (!row) {
-    return {
-      ok: false,
-      reason: "out_of_range",
-      message: `No tax-table row matched income ${taxableIncome} in ${tableId} — coverage gap in the JSON.`,
-    };
+    return err(
+      "out_of_range",
+      `No tax-table row matched income ${taxableIncome} in ${tableId} — coverage gap in the JSON.`,
+    );
   }
   const tax = row[column];
   if (typeof tax !== "number") {
-    return {
-      ok: false,
-      reason: "invalid_input",
-      message: `Row for income ${taxableIncome} in ${tableId} is missing column "${column}".`,
-    };
+    return err(
+      "invalid_input",
+      `Row for income ${taxableIncome} in ${tableId} is missing column "${column}".`,
+    );
   }
   return {
     ok: true,

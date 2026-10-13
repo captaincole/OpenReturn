@@ -128,6 +128,7 @@ function taxByAmount(amount: number, filingStatus: FilingStatus, taxYear: number
  * failed tax lookup for the (status, year). Both indicate a programming
  * error at the binding layer, not a recoverable runtime condition.
  */
+// eslint-disable-next-line max-lines-per-function -- line-by-line transcription of the IRS QDCG worksheet; splitting it would break the 1:1 audit against the published form
 export function computeQdcg(inputs: QdcgInputs): QdcgResult {
   if (inputs.taxableIncome < 0) {
     throw new Error(`QDCG worksheet: taxableIncome must be ≥ 0 (got ${inputs.taxableIncome}).`);
