@@ -95,45 +95,53 @@ export async function reviewDecision(
     }
     throw new Error(`review-decision: unexpected workflow status '${result.status}'`);
   } catch (err) {
-    /*
-     * Best-effort failure recording: stamp the decision row and the
-     * review_runs row so Luca (and the trace log) see why the run failed.
-     * init may have failed, so the reviewRunId is not reliably available
-     * here; in that case we stamp only the ai_decisions row.
-     */
-    const reason = err instanceof Error ? err.message : String(err);
-    try {
-      await setDecisionVerdict(scope, decisionId, "review_failed", reason, null);
-    } catch {
-      /* swallow — the original error is what matters */
-    }
-    /*
-     * If the error carries a runId, mark that run failed too. Best effort;
-     * most error paths do not attach one.
-     */
-    const runId = (err as { reviewRunId?: string }).reviewRunId;
-    if (runId) {
-      try {
-        await completeReviewRun(scope, {
-          id: runId,
-          status: "failed",
-          finalVerdict: "review_failed",
-          iterationCount: 0,
-          durationMs: 0,
-          error: reason,
-        });
-      } catch {
-        /* swallow */
-      }
-    }
-    return {
-      decisionId,
-      reviewRunId: runId ?? "",
-      iterationCount: 1,
-      riskTier: null,
-      finalVerdict: "review_failed",
-      reason,
-      citations: [],
-    };
+    return recordReviewFailure(scope, decisionId, err);
   }
+}
+
+/*
+ * Best-effort failure recording: stamp the decision row and the
+ * review_runs row so Luca (and the trace log) see why the run failed.
+ * init may have failed, so the reviewRunId is not reliably available
+ * here; in that case we stamp only the ai_decisions row.
+ */
+async function recordReviewFailure(
+  scope: Scope,
+  decisionId: string,
+  err: unknown,
+): Promise<ReviewDecisionOutput> {
+  const reason = err instanceof Error ? err.message : String(err);
+  try {
+    await setDecisionVerdict(scope, decisionId, "review_failed", reason, null);
+  } catch {
+    /* swallow — the original error is what matters */
+  }
+  /*
+   * If the error carries a runId, mark that run failed too. Best effort;
+   * most error paths do not attach one.
+   */
+  const runId = (err as { reviewRunId?: string }).reviewRunId;
+  if (runId) {
+    try {
+      await completeReviewRun(scope, {
+        id: runId,
+        status: "failed",
+        finalVerdict: "review_failed",
+        iterationCount: 0,
+        durationMs: 0,
+        error: reason,
+      });
+    } catch {
+      /* swallow */
+    }
+  }
+  return {
+    decisionId,
+    reviewRunId: runId ?? "",
+    iterationCount: 1,
+    riskTier: null,
+    finalVerdict: "review_failed",
+    reason,
+    citations: [],
+  };
 }
