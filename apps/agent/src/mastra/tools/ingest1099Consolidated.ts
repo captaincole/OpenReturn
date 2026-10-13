@@ -9,6 +9,7 @@ import {
   type TradeFactValue,
 } from "../../engine/facts";
 import { recordDecision } from "../db/aiDecisions";
+import type { Scope } from "../db/appDb";
 import { recordFact } from "../db/taxFacts";
 import { requireUserContext } from "./userContext";
 
@@ -33,6 +34,58 @@ import { requireUserContext } from "./userContext";
  * (1099-MISC / 1099-OID sections land when a scenario needs them. INT,
  * DIV, and B are accepted.)
  */
+
+const TradeInputSchema = z.object({
+  description: z.string().describe("Security description, e.g. 'APPLE INC'"),
+  cusip: z.string().optional(),
+  symbol: z.string().optional().describe("Ticker symbol"),
+  quantity: z.number(),
+  dateAcquired: z.string().describe("MM/DD/YY as printed on the 1099-B"),
+  dateSold: z.string().describe("MM/DD/YY as printed"),
+  proceeds: z.number(),
+  costBasis: z
+    .number()
+    .optional()
+    .describe("Omit for noncovered securities where basis isn't reported"),
+  adjustmentCode: z.string().optional().describe("Form 8949 column (f) code, if present"),
+  adjustmentAmount: z.number().optional(),
+  washSaleLossDisallowed: z.number().optional(),
+  federalIncomeTaxWithheld: z.number().optional(),
+  term: z
+    .enum(["short_term", "long_term", "unknown"])
+    .describe(
+      "Holding period. Read this from the 1099-B section header on the PDF: 'Long Term' / 'Short Term' / 'Unknown Term'. Don't compute it from dates — trust what the broker reported.",
+    ),
+  basisReported: z
+    .boolean()
+    .describe(
+      "True for 'Covered Securities' (basis reported to IRS), false for 'Noncovered Securities'. Read from the section header.",
+    ),
+});
+type TradeInput = z.infer<typeof TradeInputSchema>;
+
+/** Shared write context for the per-section ingest helpers. */
+interface IngestCtx {
+  scope: Scope;
+  userId: string;
+  filingId: string;
+  year: number;
+  sourceNote: string | undefined;
+}
+
+/** One investment_income fact row — the INT / DIV / trade write shape. */
+async function recordInvestmentFact(ctx: IngestCtx, key: string, value: unknown): Promise<void> {
+  await recordFact(ctx.scope, {
+    id: crypto.randomUUID(),
+    userId: ctx.userId,
+    filingId: ctx.filingId,
+    taxYear: ctx.year,
+    category: "investment_income",
+    key,
+    value,
+    sourceNote: ctx.sourceNote,
+  });
+}
 
 const AddressSchema = z.object({
   line1: z.string(),
@@ -143,35 +196,7 @@ export const ingest1099Consolidated = createTool({
       ),
     b: z
       .object({
-        trades: z.array(
-          z.object({
-            description: z.string().describe("Security description, e.g. 'APPLE INC'"),
-            cusip: z.string().optional(),
-            symbol: z.string().optional().describe("Ticker symbol"),
-            quantity: z.number(),
-            dateAcquired: z.string().describe("MM/DD/YY as printed on the 1099-B"),
-            dateSold: z.string().describe("MM/DD/YY as printed"),
-            proceeds: z.number(),
-            costBasis: z
-              .number()
-              .optional()
-              .describe("Omit for noncovered securities where basis isn't reported"),
-            adjustmentCode: z.string().optional().describe("Form 8949 column (f) code, if present"),
-            adjustmentAmount: z.number().optional(),
-            washSaleLossDisallowed: z.number().optional(),
-            federalIncomeTaxWithheld: z.number().optional(),
-            term: z
-              .enum(["short_term", "long_term", "unknown"])
-              .describe(
-                "Holding period. Read this from the 1099-B section header on the PDF: 'Long Term' / 'Short Term' / 'Unknown Term'. Don't compute it from dates — trust what the broker reported.",
-              ),
-            basisReported: z
-              .boolean()
-              .describe(
-                "True for 'Covered Securities' (basis reported to IRS), false for 'Noncovered Securities'. Read from the section header.",
-              ),
-          }),
-        ),
+        trades: z.array(TradeInputSchema),
       })
       .optional()
       .describe(
@@ -191,121 +216,117 @@ export const ingest1099Consolidated = createTool({
     const slug =
       input.accountSlug || slugify(input.payer.name) || `tin-${input.payer.tin.replace(/-/g, "")}`;
 
+    const ctx: IngestCtx = { scope, userId, filingId, year, sourceNote };
+    const payer = { payerName: input.payer.name, payerTin: input.payer.tin };
     let factsWritten = 0;
     let decisionsWritten = 0;
     const tradeIds: string[] = [];
 
     // ─── Interest section ───
     if (input.int) {
-      const value: InterestFactValue = {
-        payerName: input.payer.name,
-        payerTin: input.payer.tin,
-        ...input.int,
-      };
-      await recordFact(scope, {
-        id: crypto.randomUUID(),
-        userId,
-        filingId,
-        taxYear: year,
-        category: "investment_income",
-        key: makeInterestFactKey(slug),
-        value,
-        sourceNote,
-      });
+      const value: InterestFactValue = { ...payer, ...input.int };
+      await recordInvestmentFact(ctx, makeInterestFactKey(slug), value);
       factsWritten++;
     }
 
     // ─── Dividend section ───
     if (input.div) {
-      const value: DividendFactValue = {
-        payerName: input.payer.name,
-        payerTin: input.payer.tin,
-        ...input.div,
-      };
-      await recordFact(scope, {
-        id: crypto.randomUUID(),
-        userId,
-        filingId,
-        taxYear: year,
-        category: "investment_income",
-        key: makeDividendFactKey(slug),
-        value,
-        sourceNote,
-      });
+      const value: DividendFactValue = { ...payer, ...input.div };
+      await recordInvestmentFact(ctx, makeDividendFactKey(slug), value);
       factsWritten++;
     }
 
     // ─── 1099-B trades ───
     if (input.b && input.b.trades.length > 0) {
-      for (const t of input.b.trades) {
-        const tradeId = tradeIdFor(t);
-        tradeIds.push(tradeId);
-
-        const trade: TradeFactValue = {
-          tradeId,
-          description: t.description,
-          cusip: t.cusip,
-          symbol: t.symbol,
-          quantity: t.quantity,
-          dateAcquired: t.dateAcquired,
-          dateSold: t.dateSold,
-          proceeds: t.proceeds,
-          costBasis: t.costBasis ?? 0,
-          adjustmentCode: t.adjustmentCode,
-          adjustmentAmount: t.adjustmentAmount,
-        };
-        await recordFact(scope, {
-          id: crypto.randomUUID(),
-          userId,
-          filingId,
-          taxYear: year,
-          category: "investment_income",
-          key: makeTradeFactKey(slug, tradeId),
-          value: trade,
-          sourceNote,
-        });
-        factsWritten++;
-
-        /*
-         * Auto-record the form_8949_box decision — the broker already
-         * classified the sale. The write goes directly through
-         * recordDecision and skips the grounding review; the input is
-         * broker-reported, not a judgment call.
-         */
-        const box = boxFor(t.term, t.basisReported);
-        await recordDecision(scope, {
-          id: crypto.randomUUID(),
-          userId,
-          filingId,
-          taxYear: year,
-          decisionKey: `decisions.trade.${tradeId}.form_8949_box`,
-          decision: box,
-          rationale:
-            `Broker reported ${t.term === "long_term" ? "long-term" : t.term === "short_term" ? "short-term" : "unknown-term"} ` +
-            `${t.basisReported ? "covered" : "noncovered"} sale → Form 8949 ${box}.`,
-          supportingFactKeys: [makeTradeFactKey(slug, tradeId)],
-          confidence: "high",
-          sourceNote: "Auto-classified during 1099 ingest (broker-reported section)",
-        });
-        decisionsWritten++;
-      }
-
-      // Scope decision: reportable sales exist
-      await recordDecision(scope, {
-        id: crypto.randomUUID(),
-        userId,
-        filingId,
-        taxYear: year,
-        decisionKey: "decisions.scope.has_reportable_sales",
-        decision: true,
-        rationale: `Consolidated 1099 from ${input.payer.name} contains a populated 1099-B section with ${input.b.trades.length} reportable sale(s).`,
-        supportingFactKeys: tradeIds.map((id) => makeTradeFactKey(slug, id)),
-        confidence: "high",
-        sourceNote: "Auto-recorded during 1099 ingest",
-      });
-      decisionsWritten++;
+      const trades = await ingestTrades(ctx, slug, input.b.trades, input.payer.name);
+      tradeIds.push(...trades.tradeIds);
+      factsWritten += trades.tradeIds.length;
+      decisionsWritten += trades.decisionsWritten;
     }
 
     return { accountSlug: slug, factsWritten, decisionsWritten, tradeIds };
   },
 });
+
+/*
+ * Write one trade's fact row plus its form_8949_box decision. The
+ * decision is auto-recorded — the broker already classified the sale.
+ * The write goes directly through recordDecision and skips the grounding
+ * review; the input is broker-reported, not a judgment call.
+ */
+async function ingestOneTrade(ctx: IngestCtx, slug: string, t: TradeInput): Promise<string> {
+  const { scope, userId, filingId, year, sourceNote } = ctx;
+  const tradeId = tradeIdFor(t);
+  const trade: TradeFactValue = {
+    tradeId,
+    description: t.description,
+    cusip: t.cusip,
+    symbol: t.symbol,
+    quantity: t.quantity,
+    dateAcquired: t.dateAcquired,
+    dateSold: t.dateSold,
+    proceeds: t.proceeds,
+    costBasis: t.costBasis ?? 0,
+    adjustmentCode: t.adjustmentCode,
+    adjustmentAmount: t.adjustmentAmount,
+  };
+  await recordFact(scope, {
+    id: crypto.randomUUID(),
+    userId,
+    filingId,
+    taxYear: year,
+    category: "investment_income",
+    key: makeTradeFactKey(slug, tradeId),
+    value: trade,
+    sourceNote,
+  });
+
+  const box = boxFor(t.term, t.basisReported);
+  await recordDecision(scope, {
+    id: crypto.randomUUID(),
+    userId,
+    filingId,
+    taxYear: year,
+    decisionKey: `decisions.trade.${tradeId}.form_8949_box`,
+    decision: box,
+    rationale:
+      `Broker reported ${t.term === "long_term" ? "long-term" : t.term === "short_term" ? "short-term" : "unknown-term"} ` +
+      `${t.basisReported ? "covered" : "noncovered"} sale → Form 8949 ${box}.`,
+    supportingFactKeys: [makeTradeFactKey(slug, tradeId)],
+    confidence: "high",
+    sourceNote: "Auto-classified during 1099 ingest (broker-reported section)",
+  });
+  return tradeId;
+}
+
+/*
+ * Ingest every 1099-B trade (one fact + one box decision each), then
+ * record the has_reportable_sales scope decision that gates Form 8949 /
+ * Schedule D.
+ */
+async function ingestTrades(
+  ctx: IngestCtx,
+  slug: string,
+  trades: TradeInput[],
+  payerName: string,
+): Promise<{ tradeIds: string[]; decisionsWritten: number }> {
+  const tradeIds: string[] = [];
+  for (const t of trades) {
+    tradeIds.push(await ingestOneTrade(ctx, slug, t));
+  }
+
+  await recordDecision(ctx.scope, {
+    id: crypto.randomUUID(),
+    userId: ctx.userId,
+    filingId: ctx.filingId,
+    taxYear: ctx.year,
+    decisionKey: "decisions.scope.has_reportable_sales",
+    decision: true,
+    rationale: `Consolidated 1099 from ${payerName} contains a populated 1099-B section with ${trades.length} reportable sale(s).`,
+    supportingFactKeys: tradeIds.map((id) => makeTradeFactKey(slug, id)),
+    confidence: "high",
+    sourceNote: "Auto-recorded during 1099 ingest",
+  });
+  /* decisions: one per trade + the scope decision */
+  return { tradeIds, decisionsWritten: tradeIds.length + 1 };
+}
