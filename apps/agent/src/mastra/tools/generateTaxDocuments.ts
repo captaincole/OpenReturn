@@ -1,11 +1,18 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import { renderForm } from "../../engine";
+import { renderForm, type EvaluatedScenario } from "../../engine";
 import { FORMS } from "../../engine/registry";
 import { type AnyFormField, type EvaluatedForm } from "../../engine/types";
 import { createDocument } from "../db/userDocuments";
 import { loadAndEvaluateScenario } from "../loadScenario";
 import { requireUserContext } from "./userContext";
+
+/** Identity of the render target — threaded through the render helpers. */
+interface RenderTarget {
+  userId: string;
+  filingId: string;
+  year: number;
+}
 
 function lineValue(form: EvaluatedForm<AnyFormField>, fieldId: string): number | null {
   const f = form.fields.find((x) => x.fieldId === fieldId);
@@ -76,6 +83,122 @@ function countFields(form: EvaluatedForm<AnyFormField>): {
   };
 }
 
+/*
+ * Render one must-file form to PDF, store it as a drafts document, and
+ * return the pieces the accumulator needs. Render warnings pass through
+ * to the server log — a non-empty list is a soft regression.
+ */
+async function renderAndStoreForm(
+  scenario: EvaluatedScenario,
+  spec: (typeof FORMS)[number],
+  target: RenderTarget,
+): Promise<{ url: string; filename: string; linesPopulated: number }> {
+  const { pdfBytes, rendered, warnings } = await renderForm(scenario, spec.formId);
+  for (const w of warnings) {
+    console.warn(`[generate-tax-documents][${spec.formId}] ${w}`);
+  }
+  const filename = `${spec.displayName} — ${target.year}`;
+  const doc = await createDocument({
+    userId: target.userId,
+    filingId: target.filingId,
+    category: "drafts",
+    filename,
+    storageSlug: `${spec.shortId}-${target.year}`,
+    extension: "pdf",
+    bytes: pdfBytes,
+    mimeType: "application/pdf",
+    expiresInDays: 30,
+    metadata: { formId: spec.shortId, taxYear: target.year },
+  });
+  return { url: `/documents/${doc.id}`, filename, linesPopulated: rendered.size };
+}
+
+/*
+ * ─── Render every form whose mustFile predicate evaluates true ───
+ * Every scenario we model files the 1040; its mustFile reads the
+ * decisions.scope.must_file_federal flag. Other forms gate per scenario
+ * via their own mustFile decisions. Example: Alejandro files 8949,
+ * Schedule D, Schedule CA, and 540; Alex files only 1040 + 540.
+ */
+async function renderMustFileForms(scenario: EvaluatedScenario, target: RenderTarget) {
+  const documents: Array<{ formId: string; url: string; filename: string }> = [];
+  const blockers: Array<{ formId: string; reason: string; missingDecisionKey: string | null }> =
+    [];
+  const sidecarForms: Record<string, ReturnType<typeof serializeForm>> = {};
+  let totalLinesPopulated = 0;
+  let totalCounts = { ok: 0, blocked: 0, unsupported: 0 };
+
+  for (const spec of FORMS) {
+    const form = scenario.forms.get(spec.formId);
+    if (!form) {
+      console.warn(`[generate-tax-documents] no evaluation result for ${spec.formId}`);
+      continue;
+    }
+    if (!form.mustFile.ok) {
+      /*
+       * Must-file could not evaluate. The usual cause is a missing
+       * decision (e.g. decisions.scope.must_file_federal was never
+       * recorded). Surface it so the agent records the decision instead
+       * of mistaking "nothing rendered" for a completed hand-off.
+       */
+      blockers.push({
+        formId: spec.formId,
+        reason: form.mustFile.reason,
+        missingDecisionKey: form.mustFile.missingDecisionKey ?? null,
+      });
+      continue;
+    }
+    /* mustFile false: out of scope — skip render, sidecar entry, counts. */
+    if (!form.mustFile.value) continue;
+
+    const { url, filename, linesPopulated } = await renderAndStoreForm(scenario, spec, target);
+    documents.push({ formId: spec.formId, url, filename });
+    sidecarForms[spec.formId] = serializeForm(form);
+    totalLinesPopulated += linesPopulated;
+    const counts = countFields(form);
+    totalCounts = {
+      ok: totalCounts.ok + counts.ok,
+      blocked: totalCounts.blocked + counts.blocked,
+      unsupported: totalCounts.unsupported + counts.unsupported,
+    };
+  }
+
+  return { documents, blockers, sidecarForms, totalLinesPopulated, totalCounts };
+}
+
+/*
+ * ─── Sidecar — every rendered form ───
+ * The caller skips it when nothing rendered: an empty sidecar only
+ * invites "here's your forms data" messages that point at a useless JSON
+ * file.
+ */
+async function writeSidecar(opts: {
+  userId: string;
+  filingId: string;
+  year: number;
+  sidecarForms: Record<string, ReturnType<typeof serializeForm>>;
+}): Promise<string> {
+  const sidecar = {
+    userId: opts.userId,
+    year: opts.year,
+    generatedAt: new Date().toISOString(),
+    forms: opts.sidecarForms,
+  };
+  const sidecarDoc = await createDocument({
+    userId: opts.userId,
+    filingId: opts.filingId,
+    category: "drafts",
+    filename: `Forms sidecar — ${opts.year}`,
+    storageSlug: `forms-${opts.year}`,
+    extension: "json",
+    bytes: Buffer.from(JSON.stringify(sidecar, null, 2), "utf-8"),
+    mimeType: "application/json",
+    expiresInDays: 30,
+    metadata: { formId: "sidecar", taxYear: opts.year },
+  });
+  return `/documents/${sidecarDoc.id}`;
+}
+
 export const generateTaxDocuments = createTool({
   id: "generate-tax-documents",
   description:
@@ -144,108 +267,10 @@ export const generateTaxDocuments = createTool({
     const scenario = await loadAndEvaluateScenario(scope, { id: filingId, taxYear }, authEmail);
     const { forms } = scenario;
 
-    /*
-     * ─── Render every form whose mustFile predicate evaluates true ───
-     * Every scenario we model files the 1040; its mustFile reads the
-     * decisions.scope.must_file_federal flag. Other forms gate per
-     * scenario via their own mustFile decisions. Example: Alejandro files
-     * 8949, Schedule D, Schedule CA, and 540; Alex files only 1040 + 540.
-     */
-    const documents: Array<{ formId: string; url: string; filename: string }> = [];
-    const blockers: Array<{
-      formId: string;
-      reason: string;
-      missingDecisionKey: string | null;
-    }> = [];
-    const sidecarForms: Record<string, ReturnType<typeof serializeForm>> = {};
-    let totalLinesPopulated = 0;
-    let totalCounts = { ok: 0, blocked: 0, unsupported: 0 };
-
-    for (const spec of FORMS) {
-      const form = forms.get(spec.formId);
-      if (!form) {
-        console.warn(`[generate-tax-documents] no evaluation result for ${spec.formId}`);
-        continue;
-      }
-      if (!form.mustFile.ok) {
-        /*
-         * Must-file could not evaluate. The usual cause is a missing
-         * decision (e.g. decisions.scope.must_file_federal was never
-         * recorded). Surface it so the agent records the decision instead
-         * of mistaking "nothing rendered" for a completed hand-off.
-         */
-        blockers.push({
-          formId: spec.formId,
-          reason: form.mustFile.reason,
-          missingDecisionKey: form.mustFile.missingDecisionKey ?? null,
-        });
-        continue;
-      }
-      if (!form.mustFile.value) {
-        /*
-         * The form is out of scope for this scenario. Skip the render,
-         * the sidecar entry, and the field counts.
-         */
-        continue;
-      }
-
-      const { pdfBytes, rendered, warnings } = await renderForm(scenario, spec.formId);
-      for (const w of warnings) {
-        console.warn(`[generate-tax-documents][${spec.formId}] ${w}`);
-      }
-      const filename = `${spec.displayName} — ${year}`;
-      const doc = await createDocument({
-        userId,
-        filingId,
-        category: "drafts",
-        filename,
-        storageSlug: `${spec.shortId}-${year}`,
-        extension: "pdf",
-        bytes: pdfBytes,
-        mimeType: "application/pdf",
-        expiresInDays: 30,
-        metadata: { formId: spec.shortId, taxYear: year },
-      });
-      const url = `/documents/${doc.id}`;
-      documents.push({ formId: spec.formId, url, filename });
-      sidecarForms[spec.formId] = serializeForm(form);
-      totalLinesPopulated += rendered.size;
-      const counts = countFields(form);
-      totalCounts = {
-        ok: totalCounts.ok + counts.ok,
-        blocked: totalCounts.blocked + counts.blocked,
-        unsupported: totalCounts.unsupported + counts.unsupported,
-      };
-    }
-
-    /*
-     * ─── Sidecar — every rendered form ───
-     * Skip it when nothing rendered: an empty sidecar only invites
-     * "here's your forms data" messages that point at a useless JSON file.
-     */
-    let sidecarUrl: string | null = null;
-    if (documents.length > 0) {
-      const sidecar = {
-        userId,
-        year,
-        generatedAt: new Date().toISOString(),
-        forms: sidecarForms,
-      };
-      const sidecarBytes = Buffer.from(JSON.stringify(sidecar, null, 2), "utf-8");
-      const sidecarDoc = await createDocument({
-        userId,
-        filingId,
-        category: "drafts",
-        filename: `Forms sidecar — ${year}`,
-        storageSlug: `forms-${year}`,
-        extension: "json",
-        bytes: sidecarBytes,
-        mimeType: "application/json",
-        expiresInDays: 30,
-        metadata: { formId: "sidecar", taxYear: year },
-      });
-      sidecarUrl = `/documents/${sidecarDoc.id}`;
-    }
+    const { documents, blockers, sidecarForms, totalLinesPopulated, totalCounts } =
+      await renderMustFileForms(scenario, { userId, filingId, year });
+    const sidecarUrl =
+      documents.length > 0 ? await writeSidecar({ userId, filingId, year, sidecarForms }) : null;
 
     /*
      * ─── Refund/owed summaries ───
