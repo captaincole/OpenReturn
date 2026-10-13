@@ -82,65 +82,10 @@ async function run(argv: string[]): Promise<void> {
   console.log(`${LOG} source ${source.url}`);
   console.log(`${LOG} cache  ${path.relative(process.cwd(), pdfPath)}`);
 
-  let pdfBytes: Buffer;
-  let cached = true;
-  if (args.refresh) {
-    console.log(`${LOG} --refresh: fetching from ${source.url}`);
-    const res = await fetch(source.url);
-    if (!res.ok) {
-      throw new Error(`FTB fetch failed: ${res.status} ${res.statusText}`);
-    }
-    pdfBytes = Buffer.from(await res.arrayBuffer());
-    await fs.writeFile(pdfPath, pdfBytes);
-    cached = false;
-  } else {
-    pdfBytes = await fs.readFile(pdfPath);
-  }
-  const sha256 = await sha256Hex(pdfBytes);
-  console.log(
-    `${LOG} pdf ${cached ? "from cache" : "fetched"} ` +
-      `(${(pdfBytes.length / 1024).toFixed(1)}KB, sha256 ${sha256.slice(0, 12)}…)`,
-  );
+  const { pdfBytes, sha256 } = await loadPdf(source.url, pdfPath, args.refresh);
 
-  const { rows, diagnostics } = await parseCATaxTable(new Uint8Array(pdfBytes));
-  console.log(
-    `${LOG} parsed ${rows.length} rows ` +
-      `(accepted ${diagnostics.linesAccepted}/${diagnostics.linesInspected} lines, ` +
-      `rejected ${diagnostics.linesRejected})`,
-  );
-
-  const coverage = validateCACoverage(rows);
-  console.log(
-    `${LOG} coverage [${coverage.minIncome}, ${coverage.maxIncome}] ` +
-      `(${coverage.rowCount} rows, gaps=${coverage.gaps.length}, overlaps=${coverage.overlaps.length})`,
-  );
-  if (!coverage.ok) {
-    if (coverage.gaps.length > 0) {
-      console.error(`${LOG} gaps:`, coverage.gaps.slice(0, 5));
-    }
-    if (coverage.overlaps.length > 0) {
-      console.error(`${LOG} overlaps:`, coverage.overlaps.slice(0, 5));
-    }
-    throw new Error("Coverage validation failed; refusing to write JSON.");
-  }
-
-  const spotResults = source.spotChecks.map((sc) => {
-    const row = rows.find((r) => sc.taxableIncome >= r.low && sc.taxableIncome <= r.high);
-    const got = row ? row[sc.column] : null;
-    return { ...sc, got, pass: got === sc.expectedTax };
-  });
-  const failed = spotResults.filter((r) => !r.pass);
-  console.log(
-    `${LOG} spot checks ${spotResults.length - failed.length}/${spotResults.length} pass`,
-  );
-  for (const f of failed) {
-    console.error(
-      `  ✗ income=${f.taxableIncome} column=${f.column} expected=${f.expectedTax} got=${f.got}`,
-    );
-  }
-  if (failed.length > 0) {
-    throw new Error("Spot-check failures; refusing to write JSON.");
-  }
+  const { rows, coverage } = await parseAndValidate(pdfBytes);
+  runSpotChecks(source, rows);
 
   const header = {
     tableId: `ca-${year}`,
@@ -168,6 +113,82 @@ async function run(argv: string[]): Promise<void> {
   };
   await fs.writeFile(jsonPath, serializeWithCompactRows(header, rows), "utf8");
   console.log(`${LOG} wrote ${path.relative(process.cwd(), jsonPath)}`);
+}
+
+/* Read the cached PDF, or re-download it on --refresh. */
+async function loadPdf(
+  url: string,
+  pdfPath: string,
+  refresh: boolean,
+): Promise<{ pdfBytes: Buffer; sha256: string }> {
+  let pdfBytes: Buffer;
+  let cached = true;
+  if (refresh) {
+    console.log(`${LOG} --refresh: fetching from ${url}`);
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`FTB fetch failed: ${res.status} ${res.statusText}`);
+    }
+    pdfBytes = Buffer.from(await res.arrayBuffer());
+    await fs.writeFile(pdfPath, pdfBytes);
+    cached = false;
+  } else {
+    pdfBytes = await fs.readFile(pdfPath);
+  }
+  const sha256 = await sha256Hex(pdfBytes);
+  console.log(
+    `${LOG} pdf ${cached ? "from cache" : "fetched"} ` +
+      `(${(pdfBytes.length / 1024).toFixed(1)}KB, sha256 ${sha256.slice(0, 12)}…)`,
+  );
+  return { pdfBytes, sha256 };
+}
+
+/* Parse the table and refuse to continue on coverage gaps/overlaps. */
+async function parseAndValidate(
+  pdfBytes: Buffer,
+): Promise<{ rows: CATaxTableRow[]; coverage: ReturnType<typeof validateCACoverage> }> {
+  const { rows, diagnostics } = await parseCATaxTable(new Uint8Array(pdfBytes));
+  console.log(
+    `${LOG} parsed ${rows.length} rows ` +
+      `(accepted ${diagnostics.linesAccepted}/${diagnostics.linesInspected} lines, ` +
+      `rejected ${diagnostics.linesRejected})`,
+  );
+
+  const coverage = validateCACoverage(rows);
+  console.log(
+    `${LOG} coverage [${coverage.minIncome}, ${coverage.maxIncome}] ` +
+      `(${coverage.rowCount} rows, gaps=${coverage.gaps.length}, overlaps=${coverage.overlaps.length})`,
+  );
+  if (!coverage.ok) {
+    if (coverage.gaps.length > 0) {
+      console.error(`${LOG} gaps:`, coverage.gaps.slice(0, 5));
+    }
+    if (coverage.overlaps.length > 0) {
+      console.error(`${LOG} overlaps:`, coverage.overlaps.slice(0, 5));
+    }
+    throw new Error("Coverage validation failed; refusing to write JSON.");
+  }
+  return { rows, coverage };
+}
+
+function runSpotChecks(source: CATaxTableSource, rows: CATaxTableRow[]): void {
+  const spotResults = source.spotChecks.map((sc) => {
+    const row = rows.find((r) => sc.taxableIncome >= r.low && sc.taxableIncome <= r.high);
+    const got = row ? row[sc.column] : null;
+    return { ...sc, got, pass: got === sc.expectedTax };
+  });
+  const failed = spotResults.filter((r) => !r.pass);
+  console.log(
+    `${LOG} spot checks ${spotResults.length - failed.length}/${spotResults.length} pass`,
+  );
+  for (const f of failed) {
+    console.error(
+      `  ✗ income=${f.taxableIncome} column=${f.column} expected=${f.expectedTax} got=${f.got}`,
+    );
+  }
+  if (failed.length > 0) {
+    throw new Error("Spot-check failures; refusing to write JSON.");
+  }
 }
 
 function serializeWithCompactRows(header: Record<string, unknown>, rows: CATaxTableRow[]): string {

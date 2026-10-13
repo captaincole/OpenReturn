@@ -108,55 +108,20 @@ async function run(argv: string[]): Promise<void> {
       `(${(html.length / 1024).toFixed(1)}KB, sha256 ${prov.sha256.slice(0, 12)}…)`,
   );
 
-  const { rows, diagnostics } = parseTaxTable(html);
-  console.log(
-    `${LOG} parsed ${rows.length} rows ` +
-      `(${diagnostics.tablesAccepted}/${diagnostics.tablesInspected} tables accepted)`,
-  );
-  if (diagnostics.tablesRejected.length > 0) {
-    console.warn(
-      `${LOG} ${diagnostics.tablesRejected.length} table(s) ` +
-        `looked tax-table-shaped but produced no rows:`,
-    );
-    for (const r of diagnostics.tablesRejected) {
-      console.warn(`  - ${r.reason}${r.sample ? `\n    sample: ${r.sample}` : ""}`);
-    }
-  }
+  const rows = parseAndReport(html);
+  const coverage = assertCoverage(rows);
+  runSpotChecks(source, rows);
 
-  const coverage = validateCoverage(rows);
-  console.log(
-    `${LOG} coverage [${coverage.minIncome}, ${coverage.maxIncome}) ` +
-      `(${coverage.rowCount} rows, gaps=${coverage.gaps.length}, overlaps=${coverage.overlaps.length})`,
-  );
-  if (!coverage.ok) {
-    if (coverage.gaps.length > 0) {
-      console.error(`${LOG} gaps:`, coverage.gaps.slice(0, 5));
-    }
-    if (coverage.overlaps.length > 0) {
-      console.error(`${LOG} overlaps:`, coverage.overlaps.slice(0, 5));
-    }
-    throw new Error("Coverage validation failed; refusing to write JSON.");
-  }
+  await fs.writeFile(jsonPath, serializeWithCompactRows(buildHeader(year, prov, coverage), rows), "utf8");
+  console.log(`${LOG} wrote ${path.relative(process.cwd(), jsonPath)}`);
+}
 
-  const spotResults = source.spotChecks.map((sc) => {
-    const row = rows.find((r) => sc.taxableIncome >= r.low && sc.taxableIncome < r.high);
-    const got = row ? row[sc.filingStatus] : null;
-    return { ...sc, got, pass: got === sc.expectedTax };
-  });
-  const failed = spotResults.filter((r) => !r.pass);
-  console.log(
-    `${LOG} spot checks ${spotResults.length - failed.length}/${spotResults.length} pass`,
-  );
-  for (const f of failed) {
-    console.error(
-      `  ✗ income=${f.taxableIncome} status=${f.filingStatus} expected=${f.expectedTax} got=${f.got}`,
-    );
-  }
-  if (failed.length > 0) {
-    throw new Error("Spot-check failures; refusing to write JSON.");
-  }
-
-  const header = {
+function buildHeader(
+  year: number,
+  prov: unknown,
+  coverage: ReturnType<typeof validateCoverage>,
+): Record<string, unknown> {
+  return {
     tableId: `federal-${year}`,
     taxYear: year,
     jurisdiction: "federal",
@@ -175,8 +140,62 @@ async function run(argv: string[]): Promise<void> {
       qualifying_surviving_spouse: "mfj",
     },
   };
-  await fs.writeFile(jsonPath, serializeWithCompactRows(header, rows), "utf8");
-  console.log(`${LOG} wrote ${path.relative(process.cwd(), jsonPath)}`);
+}
+
+function parseAndReport(html: string): TaxTableRow[] {
+  const { rows, diagnostics } = parseTaxTable(html);
+  console.log(
+    `${LOG} parsed ${rows.length} rows ` +
+      `(${diagnostics.tablesAccepted}/${diagnostics.tablesInspected} tables accepted)`,
+  );
+  if (diagnostics.tablesRejected.length > 0) {
+    console.warn(
+      `${LOG} ${diagnostics.tablesRejected.length} table(s) ` +
+        `looked tax-table-shaped but produced no rows:`,
+    );
+    for (const r of diagnostics.tablesRejected) {
+      console.warn(`  - ${r.reason}${r.sample ? `\n    sample: ${r.sample}` : ""}`);
+    }
+  }
+  return rows;
+}
+
+function assertCoverage(rows: TaxTableRow[]): ReturnType<typeof validateCoverage> {
+  const coverage = validateCoverage(rows);
+  console.log(
+    `${LOG} coverage [${coverage.minIncome}, ${coverage.maxIncome}) ` +
+      `(${coverage.rowCount} rows, gaps=${coverage.gaps.length}, overlaps=${coverage.overlaps.length})`,
+  );
+  if (!coverage.ok) {
+    if (coverage.gaps.length > 0) {
+      console.error(`${LOG} gaps:`, coverage.gaps.slice(0, 5));
+    }
+    if (coverage.overlaps.length > 0) {
+      console.error(`${LOG} overlaps:`, coverage.overlaps.slice(0, 5));
+    }
+    throw new Error("Coverage validation failed; refusing to write JSON.");
+  }
+  return coverage;
+}
+
+function runSpotChecks(source: (typeof SOURCES)[number], rows: TaxTableRow[]): void {
+  const spotResults = source.spotChecks.map((sc) => {
+    const row = rows.find((r) => sc.taxableIncome >= r.low && sc.taxableIncome < r.high);
+    const got = row ? row[sc.filingStatus] : null;
+    return { ...sc, got, pass: got === sc.expectedTax };
+  });
+  const failed = spotResults.filter((r) => !r.pass);
+  console.log(
+    `${LOG} spot checks ${spotResults.length - failed.length}/${spotResults.length} pass`,
+  );
+  for (const f of failed) {
+    console.error(
+      `  ✗ income=${f.taxableIncome} status=${f.filingStatus} expected=${f.expectedTax} got=${f.got}`,
+    );
+  }
+  if (failed.length > 0) {
+    throw new Error("Spot-check failures; refusing to write JSON.");
+  }
 }
 
 /*

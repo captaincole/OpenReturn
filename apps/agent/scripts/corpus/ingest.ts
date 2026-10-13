@@ -52,6 +52,10 @@ async function run(argv: string[]): Promise<void> {
     parserStyle,
   });
 
+  printIngestResult(result);
+}
+
+function printIngestResult(result: Awaited<ReturnType<typeof ingestRefDoc>>): void {
   console.log("ingested:");
   console.log(`  doc_id:   ${result.docId}`);
   console.log(`  sha256:   ${result.sha256.slice(0, 16)}…`);

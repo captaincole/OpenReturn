@@ -78,7 +78,12 @@ async function run(argv: string[]): Promise<void> {
     );
     process.exit(1);
   }
+  await downloadFromRelease(manifest, target);
+  await checkEmbeddingStamp();
+}
 
+/* Download the release asset, verify its sha256, install to target. */
+async function downloadFromRelease(manifest: Manifest, target: string): Promise<void> {
   console.log(
     `[corpus fetch] downloading ${manifest.version} (${(manifest.sizeBytes / 1e6).toFixed(1)} MB)…`,
   );
@@ -97,7 +102,6 @@ async function run(argv: string[]): Promise<void> {
   }
   writeFileSync(target, bytes);
   console.log(`[corpus fetch] installed ${manifest.version} → ${target}`);
-  await checkEmbeddingStamp();
 }
 
 /*

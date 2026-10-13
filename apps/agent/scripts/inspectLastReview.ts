@@ -59,11 +59,17 @@ async function main() {
     console.log("\n(no associated review_run — workflow likely never started)");
     return;
   }
+  await printRunWithSteps(db, String(d.latest_review_run_id));
+}
 
+async function printRunWithSteps(
+  db: ReturnType<typeof getAppDb>,
+  runId: string,
+): Promise<void> {
   const run = await db.execute({
     sql: `SELECT id, status, final_verdict, iteration_count, duration_ms, error, started_at, completed_at
           FROM review_runs WHERE id = ?`,
-    args: [String(d.latest_review_run_id)],
+    args: [runId],
   });
   if (run.rows.length === 0) {
     console.log("\n(latest_review_run_id points to a missing review_runs row)");
@@ -86,7 +92,7 @@ async function main() {
     sql: `SELECT step_kind, iteration, duration_ms, input_json, output_json, created_at
           FROM review_run_steps WHERE run_id = ?
           ORDER BY created_at ASC`,
-    args: [String(r.id)],
+    args: [runId],
   });
   console.log("\n════════════════════════════════════════════════════════════");
   console.log(`review_run_steps (${steps.rows.length} total)`);

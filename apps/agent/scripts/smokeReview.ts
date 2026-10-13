@@ -140,6 +140,99 @@ const CASES: Case[] = [
   },
 ];
 
+type SmokeCase = (typeof CASES)[number];
+
+/* The DB/workflow modules, imported AFTER the env override (see main). */
+interface Deps {
+  createOwnerFiling: typeof import("../src/mastra/db/filings").createOwnerFiling;
+  recordFact: typeof import("../src/mastra/db/taxFacts").recordFact;
+  listOpenQuestions: typeof import("../src/mastra/db/taxFacts").listOpenQuestions;
+  recordDecision: typeof import("../src/mastra/db/aiDecisions").recordDecision;
+  getDecisionById: typeof import("../src/mastra/db/aiDecisions").getDecisionById;
+  reviewDecision: typeof import("../src/mastra/workflows/reviewDecision").reviewDecision;
+}
+
+/* Seed the case's facts + decision into a fresh filing; return the decision id. */
+async function seedCase(
+  deps: Deps,
+  c: SmokeCase,
+  scope: { userId: string; filingId: string },
+): Promise<string> {
+  for (const f of c.facts) {
+    await deps.recordFact(scope, {
+      id: crypto.randomUUID(),
+      userId: OWNER_ID,
+      filingId: scope.filingId,
+      taxYear: YEAR,
+      category: f.category,
+      key: f.key,
+      value: f.value,
+      sourceNote: f.sourceNote,
+    });
+  }
+  const decisionId = crypto.randomUUID();
+  await deps.recordDecision(scope, {
+    id: decisionId,
+    userId: OWNER_ID,
+    filingId: scope.filingId,
+    taxYear: YEAR,
+    ...c.decision,
+  });
+  return decisionId;
+}
+
+/* Check the four assertions, print the per-case report, return pass/fail. */
+function reportCase(
+  c: SmokeCase,
+  secs: string,
+  result: Awaited<ReturnType<Deps["reviewDecision"]>>,
+  row: Awaited<ReturnType<Deps["getDecisionById"]>>,
+  questions: Awaited<ReturnType<Deps["listOpenQuestions"]>>,
+): boolean {
+  const passVerdict = (c.acceptVerdicts as string[]).includes(result.finalVerdict);
+  const passPersist = row?.verdict === result.finalVerdict;
+  const passCitations = result.finalVerdict !== "accurate" || result.citations.length > 0;
+  const expectQ =
+    c.expectOpenQuestion === "if-not-accurate"
+      ? result.finalVerdict !== "accurate"
+      : c.expectOpenQuestion;
+  const passQuestion = expectQ ? questions.length > 0 : questions.length === 0;
+  const pass = passVerdict && passPersist && passCitations && passQuestion;
+
+  console.log(
+    `${pass ? "✓" : "✗"} ${c.name} (${secs}s, ${result.iterationCount} iter)\n` +
+      `    accept=[${c.acceptVerdicts.join("|")}]  got=${result.finalVerdict}` +
+      (result.citations.length
+        ? `\n    citations: ${result.citations.map((x) => x.blockId).join(", ")}`
+        : "") +
+      `\n    reason: ${result.reason.slice(0, 180)}`,
+  );
+  if (!passPersist) console.log(`    [!] DB verdict=${row?.verdict} ≠ workflow result`);
+  if (!passCitations) console.log(`    [!] accurate verdict but no citations`);
+  if (!passQuestion)
+    console.log(
+      `    [!] open_questions mismatch: expected ${expectQ ? ">0" : "0"}, got ${questions.length}`,
+    );
+  return pass;
+}
+
+async function runCase(deps: Deps, c: SmokeCase): Promise<boolean> {
+  // A fresh filing per case gives a clean fact/question space.
+  const filingId = crypto.randomUUID();
+  await deps.createOwnerFiling({ filingId, userId: OWNER_ID, taxYear: YEAR });
+  const scope = { userId: OWNER_ID, filingId };
+
+  const decisionId = await seedCase(deps, c, scope);
+
+  const t0 = Date.now();
+  const result = await deps.reviewDecision(scope, decisionId);
+  const secs = ((Date.now() - t0) / 1000).toFixed(1);
+
+  const row = await deps.getDecisionById(scope, decisionId);
+  const questions = await deps.listOpenQuestions(scope, "open");
+  return reportCase(c, secs, result, row, questions);
+}
+
 async function main() {
   if (!process.env.ANTHROPIC_API_KEY) {
     console.error("ANTHROPIC_API_KEY not set — skipping smoke test (the review workflow needs it)");
@@ -151,71 +244,19 @@ async function main() {
   const { recordFact, listOpenQuestions } = await import("../src/mastra/db/taxFacts");
   const { recordDecision, getDecisionById } = await import("../src/mastra/db/aiDecisions");
   const { reviewDecision } = await import("../src/mastra/workflows/reviewDecision");
+  const deps: Deps = {
+    createOwnerFiling,
+    recordFact,
+    listOpenQuestions,
+    recordDecision,
+    getDecisionById,
+    reviewDecision,
+  };
 
   console.log(`[smoke:review] temp app DB: ${SMOKE_DB}`);
   let passed = 0;
-
   for (const c of CASES) {
-    // A fresh filing per case gives a clean fact/question space.
-    const filingId = crypto.randomUUID();
-    await createOwnerFiling({ filingId, userId: OWNER_ID, taxYear: YEAR });
-    const scope = { userId: OWNER_ID, filingId };
-
-    for (const f of c.facts) {
-      await recordFact(scope, {
-        id: crypto.randomUUID(),
-        userId: OWNER_ID,
-        filingId,
-        taxYear: YEAR,
-        category: f.category,
-        key: f.key,
-        value: f.value,
-        sourceNote: f.sourceNote,
-      });
-    }
-
-    const decisionId = crypto.randomUUID();
-    await recordDecision(scope, {
-      id: decisionId,
-      userId: OWNER_ID,
-      filingId,
-      taxYear: YEAR,
-      ...c.decision,
-    });
-
-    const t0 = Date.now();
-    const result = await reviewDecision(scope, decisionId);
-    const secs = ((Date.now() - t0) / 1000).toFixed(1);
-
-    const row = await getDecisionById(scope, decisionId);
-    const questions = await listOpenQuestions(scope, "open");
-
-    const passVerdict = (c.acceptVerdicts as string[]).includes(result.finalVerdict);
-    const passPersist = row?.verdict === result.finalVerdict;
-    const passCitations = result.finalVerdict !== "accurate" || result.citations.length > 0;
-    const expectQ =
-      c.expectOpenQuestion === "if-not-accurate"
-        ? result.finalVerdict !== "accurate"
-        : c.expectOpenQuestion;
-    const passQuestion = expectQ ? questions.length > 0 : questions.length === 0;
-
-    const pass = passVerdict && passPersist && passCitations && passQuestion;
-    if (pass) passed += 1;
-
-    console.log(
-      `${pass ? "✓" : "✗"} ${c.name} (${secs}s, ${result.iterationCount} iter)\n` +
-        `    accept=[${c.acceptVerdicts.join("|")}]  got=${result.finalVerdict}` +
-        (result.citations.length
-          ? `\n    citations: ${result.citations.map((x) => x.blockId).join(", ")}`
-          : "") +
-        `\n    reason: ${result.reason.slice(0, 180)}`,
-    );
-    if (!passPersist) console.log(`    [!] DB verdict=${row?.verdict} ≠ workflow result`);
-    if (!passCitations) console.log(`    [!] accurate verdict but no citations`);
-    if (!passQuestion)
-      console.log(
-        `    [!] open_questions mismatch: expected ${expectQ ? ">0" : "0"}, got ${questions.length}`,
-      );
+    if (await runCase(deps, c)) passed += 1;
   }
 
   // Clean up the throwaway DBs.

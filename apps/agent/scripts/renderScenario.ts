@@ -55,6 +55,26 @@ async function loadScenario(name: string): Promise<Scenario> {
   );
 }
 
+/* Same context construction as runScenario: facts/decisions views + resolver. */
+function buildContext(s: Scenario): DerivationContext {
+  return {
+    taxYear: s.taxYear,
+    facts: makeFactsView(s.facts),
+    decisions: makeDecisionsView(s.decisions),
+    filingInfo: resolveFilingInfo({
+      facts: s.facts.map((f) => ({
+        key: f.key,
+        value: f.value,
+        category: f.category,
+      })),
+      decisions: s.decisions.map((d) => ({
+        decisionKey: d.decisionKey,
+        decision: d.decision,
+      })),
+    }),
+  };
+}
+
 async function main() {
   const { values } = parseArgs({
     options: { scenario: { type: "string" } },
@@ -79,22 +99,7 @@ async function main() {
    */
   for (const spec of specs) spec.register?.();
 
-  const ctx: DerivationContext = {
-    taxYear: s.taxYear,
-    facts: makeFactsView(s.facts),
-    decisions: makeDecisionsView(s.decisions),
-    filingInfo: resolveFilingInfo({
-      facts: s.facts.map((f) => ({
-        key: f.key,
-        value: f.value,
-        category: f.category,
-      })),
-      decisions: s.decisions.map((d) => ({
-        decisionKey: d.decisionKey,
-        decision: d.decision,
-      })),
-    }),
-  };
+  const ctx = buildContext(s);
 
   const catalog = await loadFromFixtures(specs.map((spec) => spec.catalogPath));
 
