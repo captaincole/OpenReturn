@@ -1,6 +1,7 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 import { makeW2FactKey, type W2FactValue } from "../../engine/facts";
+import type { Scope } from "../db/appDb";
 import { recordFact } from "../db/taxFacts";
 import { requireUserContext } from "./userContext";
 
@@ -31,6 +32,51 @@ const slugify = (s: string): string =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+
+/* Flatten the tool input into the W2FactValue fact shape. */
+function toW2FactValue(input: {
+  employer: { name: string; ein: string; address?: W2FactValue["employerAddress"] };
+  employee?: W2FactValue["employee"];
+  box1: number;
+  box2: number;
+  box3?: number;
+  box4?: number;
+  box5?: number;
+  box6?: number;
+  box7?: number;
+  box8?: number;
+  box10?: number;
+  box11?: number;
+  box12?: W2FactValue["box12"];
+  box13?: W2FactValue["box13"];
+  box14?: W2FactValue["box14"];
+  box15: string;
+  box16: number;
+  box17: number;
+}): W2FactValue {
+  return {
+    employerName: input.employer.name,
+    employerEin: input.employer.ein,
+    employerAddress: input.employer.address,
+    employee: input.employee,
+    box1: input.box1,
+    box2: input.box2,
+    box3: input.box3,
+    box4: input.box4,
+    box5: input.box5,
+    box6: input.box6,
+    box7: input.box7,
+    box8: input.box8,
+    box10: input.box10,
+    box11: input.box11,
+    box12: input.box12,
+    box13: input.box13,
+    box14: input.box14,
+    box15: input.box15,
+    box16: input.box16,
+    box17: input.box17,
+  };
+}
 
 export const ingestW2 = createTool({
   id: "ingest-w2-structured",
@@ -105,28 +151,7 @@ export const ingestW2 = createTool({
       slugify(input.employer.name) ||
       `ein-${input.employer.ein.replace(/-/g, "")}`;
 
-    const w2: W2FactValue = {
-      employerName: input.employer.name,
-      employerEin: input.employer.ein,
-      employerAddress: input.employer.address,
-      employee: input.employee,
-      box1: input.box1,
-      box2: input.box2,
-      box3: input.box3,
-      box4: input.box4,
-      box5: input.box5,
-      box6: input.box6,
-      box7: input.box7,
-      box8: input.box8,
-      box10: input.box10,
-      box11: input.box11,
-      box12: input.box12,
-      box13: input.box13,
-      box14: input.box14,
-      box15: input.box15,
-      box16: input.box16,
-      box17: input.box17,
-    };
+    const w2 = toW2FactValue(input);
 
     const factKey = makeW2FactKey(slug);
     await recordFact(scope, {
@@ -139,47 +164,71 @@ export const ingestW2 = createTool({
       value: w2,
       sourceNote,
     });
-    let factsWritten = 1;
-
-    /*
-     * Side effect: copy employee identity (boxes a/e/f) into the
-     * `identity.*` fact keys that PDF renderers read to fill the
-     * personal-info boxes at the top of every form. The most recent write
-     * wins, so a later user-stated correction supersedes this.
-     */
-    if (input.employee) {
-      const e = input.employee;
-      const writeIdentity = async (key: string, value: unknown) => {
-        if (value === undefined || value === null || value === "") return;
-        await recordFact(scope, {
-          id: crypto.randomUUID(),
+    const identityWrites = input.employee
+      ? await writeIdentityFacts({
+          scope,
           userId,
           filingId,
-          taxYear: year,
-          category: "identity",
-          key,
-          value,
-          sourceNote: `Auto-extracted from W-2 (${input.employer.name})`,
-        });
-        factsWritten++;
-      };
-      await writeIdentity("identity.name.first", e.firstName);
-      await writeIdentity("identity.name.last", e.lastName);
-      await writeIdentity("identity.ssn", e.ssn);
-      /*
-       * Store the address as one fact per line so each form field can
-       * bind to its own sub-fact via lookupFact. This keeps the renderer
-       * dumb — no parsing or decomposition at fill time.
-       */
-      if (e.address) {
-        await writeIdentity("identity.address.street", e.address.line1);
-        await writeIdentity("identity.address.apt", e.address.line2);
-        await writeIdentity("identity.address.city", e.address.city);
-        await writeIdentity("identity.address.state", e.address.state);
-        await writeIdentity("identity.address.zip", e.address.zip);
-      }
-    }
+          year,
+          employerName: input.employer.name,
+          employee: input.employee,
+        })
+      : 0;
 
-    return { factsWritten, employerSlug: slug, factKey };
+    return { factsWritten: 1 + identityWrites, employerSlug: slug, factKey };
   },
 });
+
+/*
+ * Side effect of W-2 ingest: copy employee identity (boxes a/e/f) into
+ * the `identity.*` fact keys that PDF renderers read to fill the
+ * personal-info boxes at the top of every form. The most recent write
+ * wins, so a later user-stated correction supersedes this. Returns the
+ * number of identity facts written.
+ */
+async function writeIdentityFacts(opts: {
+  scope: Scope;
+  userId: string;
+  filingId: string;
+  year: number;
+  employerName: string;
+  employee: {
+    firstName?: string;
+    lastName?: string;
+    ssn?: string;
+    address?: { line1?: string; line2?: string; city?: string; state?: string; zip?: string };
+  };
+}): Promise<number> {
+  const { scope, userId, filingId, year, employerName, employee: e } = opts;
+  let written = 0;
+  const writeIdentity = async (key: string, value: unknown) => {
+    if (value === undefined || value === null || value === "") return;
+    await recordFact(scope, {
+      id: crypto.randomUUID(),
+      userId,
+      filingId,
+      taxYear: year,
+      category: "identity",
+      key,
+      value,
+      sourceNote: `Auto-extracted from W-2 (${employerName})`,
+    });
+    written++;
+  };
+  await writeIdentity("identity.name.first", e.firstName);
+  await writeIdentity("identity.name.last", e.lastName);
+  await writeIdentity("identity.ssn", e.ssn);
+  /*
+   * Store the address as one fact per line so each form field can bind to
+   * its own sub-fact via lookupFact. This keeps the renderer dumb — no
+   * parsing or decomposition at fill time.
+   */
+  if (e.address) {
+    await writeIdentity("identity.address.street", e.address.line1);
+    await writeIdentity("identity.address.apt", e.address.line2);
+    await writeIdentity("identity.address.city", e.address.city);
+    await writeIdentity("identity.address.state", e.address.state);
+    await writeIdentity("identity.address.zip", e.address.zip);
+  }
+  return written;
+}
