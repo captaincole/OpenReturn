@@ -154,6 +154,229 @@ If a field is genuinely decorative or duplicate-with-no-purpose, emit a skip ent
   - form-1040.signing.taxpayer_occupation, form-1040.signing.taxpayer_email, form-1040.signing.taxpayer_phone
   - form-540.header.filing_status (radio group with options)`;
 
+const ENRICH_TOOL: Anthropic.Tool = {
+  name: "enrich_fields",
+  description:
+    "Submit semantic enrichment for every field in this batch. Field entries become catalog rows; skip entries are dropped from the catalog but preserved in the run record.",
+  input_schema: {
+    type: "object",
+    properties: {
+      enrichments: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            pdf_field_name: { type: "string" },
+            field_id: { type: "string" },
+            category: {
+              type: "string",
+              enum: ["personal_info", "filing_scope", "income", "deductions_credits", "other"],
+            },
+            value_type: {
+              type: "string",
+              enum: [
+                "money",
+                "count",
+                "text",
+                "ssn",
+                "phone",
+                "zip",
+                "email",
+                "date",
+                "boolean",
+                "single_select",
+                "multi_select",
+                "signature",
+              ],
+            },
+            options: {
+              type: "array",
+              description:
+                "Required when field_kind is radio. One entry per radio_option in the PDF, in the same order. value is a stable snake_case key; radio_option echoes the PDF's exact label so we can verify alignment.",
+              items: {
+                type: "object",
+                properties: {
+                  value: { type: "string" },
+                  radio_option: { type: "string" },
+                },
+                required: ["value", "radio_option"],
+              },
+            },
+          },
+          required: ["pdf_field_name", "field_id", "category", "value_type"],
+        },
+      },
+      skipped: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            pdf_field_name: { type: "string" },
+            skip_reason: { type: "string" },
+          },
+          required: ["pdf_field_name", "skip_reason"],
+        },
+      },
+    },
+    required: ["enrichments", "skipped"],
+  },
+};
+
+interface RawEnrichInput {
+  enrichments: Array<{
+    pdf_field_name: string;
+    field_id: string;
+    category: Category;
+    value_type: ValueType;
+    options?: Array<{ value: string; radio_option: string }>;
+  }>;
+  skipped: Array<{ pdf_field_name: string; skip_reason: string }>;
+}
+
+function buildBatchUserText(
+  opts: ClassifyOpts,
+  batch: ExtractedField[],
+  batchIndex: number,
+  totalBatches: number,
+  assignedFieldIds: Map<string, string>,
+): string {
+  const fieldsJson = JSON.stringify(
+    batch.map((f) => ({
+      pdf_field_name: f.fieldName,
+      short_name: f.shortName,
+      field_kind: f.fieldKind,
+      label: f.label,
+      ...(f.maxLength != null ? { max_length: f.maxLength } : {}),
+      ...(f.multiline ? { multiline: true } : {}),
+      ...(f.comb ? { comb: true } : {}),
+      ...(f.radioOptions ? { radio_options: f.radioOptions } : {}),
+      ...(f.checkboxOnValue ? { checkbox_on: f.checkboxOnValue } : {}),
+    })),
+    null,
+    2,
+  );
+
+  return `Form: ${opts.formTitle} (${opts.formId}, tax year ${opts.taxYear}, jurisdiction ${opts.jurisdiction})
+
+${buildAssignedTable(assignedFieldIds)}
+
+Batch ${batchIndex + 1} of ${totalBatches} — ${batch.length} fields to enrich:
+
+${fieldsJson}
+
+For each field above, return one enrichment (or one skip). Reuse fieldIds from "Already-assigned fieldIds" when semantically equivalent.`;
+}
+
+/*
+ * Coerce the tool input into RawEnrichInput. The model occasionally
+ * returns the arrays as JSON strings; parse them back. Returns null when
+ * the input is unusable — the caller skips the batch with a warning.
+ */
+function parseEnrichInput(input: unknown): RawEnrichInput | null {
+  const raw = input as {
+    enrichments?: RawEnrichInput["enrichments"] | string;
+    skipped?: RawEnrichInput["skipped"] | string;
+  } | null;
+  if (raw && typeof raw.enrichments === "string") {
+    try {
+      raw.enrichments = JSON.parse(raw.enrichments) as RawEnrichInput["enrichments"];
+    } catch {
+      /* fall through */
+    }
+  }
+  if (raw && typeof raw.skipped === "string") {
+    try {
+      const parsed: unknown = JSON.parse(raw.skipped);
+      raw.skipped = Array.isArray(parsed) ? (parsed as RawEnrichInput["skipped"]) : undefined;
+    } catch {
+      raw.skipped = undefined;
+    }
+  }
+  if (!raw || !Array.isArray(raw.enrichments)) return null;
+  return {
+    enrichments: raw.enrichments,
+    skipped: Array.isArray(raw.skipped) ? raw.skipped : [],
+  };
+}
+
+/*
+ * One enrichment batch: prompt → forced enrich_fields call → coerced
+ * result. Returns null (batch skipped) when the model's output is
+ * unusable; the pipeline continues with the remaining batches.
+ */
+async function classifyOneFieldBatch(
+  client: Anthropic,
+  opts: ClassifyOpts,
+  batch: ExtractedField[],
+  batchIndex: number,
+  totalBatches: number,
+  assignedFieldIds: Map<string, string>,
+): Promise<{ raw: RawEnrichInput; usage: Anthropic.Usage } | null> {
+  const userText = buildBatchUserText(opts, batch, batchIndex, totalBatches, assignedFieldIds);
+  const response = await client.messages.create({
+    model: MODEL,
+    max_tokens: MAX_TOKENS,
+    system: SYSTEM_PROMPT,
+    tools: [ENRICH_TOOL],
+    tool_choice: { type: "tool", name: "enrich_fields" },
+    messages: [{ role: "user", content: [{ type: "text", text: userText }] }],
+  });
+
+  const toolUse = response.content.find((c) => c.type === "tool_use");
+  if (!toolUse || toolUse.type !== "tool_use") {
+    console.warn(
+      `[classify] batch ${batchIndex + 1}/${totalBatches}: no tool_use returned (stop_reason=${response.stop_reason}); skipping batch`,
+    );
+    return null;
+  }
+  const raw = parseEnrichInput(toolUse.input);
+  if (!raw) {
+    console.warn(
+      `[classify] batch ${batchIndex + 1}/${totalBatches}: malformed tool input; skipping batch. Preview: ${JSON.stringify(toolUse.input).slice(0, 300)}`,
+    );
+    return null;
+  }
+  return { raw, usage: response.usage };
+}
+
+/*
+ * Fold one batch's raw output into the run accumulators: camelCase the
+ * enrichments, carry radio options through, and record first-seen
+ * fieldIds (with their label) so later batches can reuse them.
+ */
+function accumulateBatch(
+  raw: RawEnrichInput,
+  batch: ExtractedField[],
+  acc: {
+    allEnrichments: FieldEnrichment[];
+    allSkipped: FieldSkip[];
+    assignedFieldIds: Map<string, string>;
+  },
+): void {
+  for (const f of raw.enrichments) {
+    const enrichment: FieldEnrichment = {
+      pdfFieldName: f.pdf_field_name,
+      fieldId: f.field_id,
+      category: f.category,
+      valueType: f.value_type,
+    };
+    if (Array.isArray(f.options) && f.options.length > 0) {
+      enrichment.options = f.options.map((o) => ({
+        value: o.value,
+        radioOption: o.radio_option,
+      }));
+    }
+    acc.allEnrichments.push(enrichment);
+    if (!acc.assignedFieldIds.has(f.field_id)) {
+      const matched = batch.find((b) => b.fieldName === f.pdf_field_name);
+      acc.assignedFieldIds.set(f.field_id, matched?.label ?? "");
+    }
+  }
+  for (const s of raw.skipped) {
+    acc.allSkipped.push({ pdfFieldName: s.pdf_field_name, skipReason: s.skip_reason });
+  }
+}
+
 export async function classifyFields(opts: ClassifyOpts): Promise<ClassificationResult> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error("ANTHROPIC_API_KEY is not set");
@@ -177,195 +400,19 @@ export async function classifyFields(opts: ClassifyOpts): Promise<Classification
 
   for (let i = 0; i < batches.length; i++) {
     const batch = batches[i];
-    const fieldsJson = JSON.stringify(
-      batch.map((f) => ({
-        pdf_field_name: f.fieldName,
-        short_name: f.shortName,
-        field_kind: f.fieldKind,
-        label: f.label,
-        ...(f.maxLength != null ? { max_length: f.maxLength } : {}),
-        ...(f.multiline ? { multiline: true } : {}),
-        ...(f.comb ? { comb: true } : {}),
-        ...(f.radioOptions ? { radio_options: f.radioOptions } : {}),
-        ...(f.checkboxOnValue ? { checkbox_on: f.checkboxOnValue } : {}),
-      })),
-      null,
-      2,
-    );
+    const result = await classifyOneFieldBatch(client, opts, batch, i, batches.length, assignedFieldIds);
+    if (!result) continue;
+    const { raw } = result;
 
-    const userText = `Form: ${opts.formTitle} (${opts.formId}, tax year ${opts.taxYear}, jurisdiction ${opts.jurisdiction})
+    accumulateBatch(raw, batch, { allEnrichments, allSkipped, assignedFieldIds });
 
-${buildAssignedTable(assignedFieldIds)}
-
-Batch ${i + 1} of ${batches.length} — ${batch.length} fields to enrich:
-
-${fieldsJson}
-
-For each field above, return one enrichment (or one skip). Reuse fieldIds from "Already-assigned fieldIds" when semantically equivalent.`;
-
-    const response = await client.messages.create({
-      model: MODEL,
-      max_tokens: MAX_TOKENS,
-      system: SYSTEM_PROMPT,
-      tools: [
-        {
-          name: "enrich_fields",
-          description:
-            "Submit semantic enrichment for every field in this batch. Field entries become catalog rows; skip entries are dropped from the catalog but preserved in the run record.",
-          input_schema: {
-            type: "object",
-            properties: {
-              enrichments: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    pdf_field_name: { type: "string" },
-                    field_id: { type: "string" },
-                    category: {
-                      type: "string",
-                      enum: [
-                        "personal_info",
-                        "filing_scope",
-                        "income",
-                        "deductions_credits",
-                        "other",
-                      ],
-                    },
-                    value_type: {
-                      type: "string",
-                      enum: [
-                        "money",
-                        "count",
-                        "text",
-                        "ssn",
-                        "phone",
-                        "zip",
-                        "email",
-                        "date",
-                        "boolean",
-                        "single_select",
-                        "multi_select",
-                        "signature",
-                      ],
-                    },
-                    options: {
-                      type: "array",
-                      description:
-                        "Required when field_kind is radio. One entry per radio_option in the PDF, in the same order. value is a stable snake_case key; radio_option echoes the PDF's exact label so we can verify alignment.",
-                      items: {
-                        type: "object",
-                        properties: {
-                          value: { type: "string" },
-                          radio_option: { type: "string" },
-                        },
-                        required: ["value", "radio_option"],
-                      },
-                    },
-                  },
-                  required: ["pdf_field_name", "field_id", "category", "value_type"],
-                },
-              },
-              skipped: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    pdf_field_name: { type: "string" },
-                    skip_reason: { type: "string" },
-                  },
-                  required: ["pdf_field_name", "skip_reason"],
-                },
-              },
-            },
-            required: ["enrichments", "skipped"],
-          },
-        },
-      ],
-      tool_choice: { type: "tool", name: "enrich_fields" },
-      messages: [
-        {
-          role: "user",
-          content: [{ type: "text", text: userText }],
-        },
-      ],
-    });
-
-    const toolUse = response.content.find((c) => c.type === "tool_use");
-    if (!toolUse || toolUse.type !== "tool_use") {
-      console.warn(
-        `[classify] batch ${i + 1}/${batches.length}: no tool_use returned (stop_reason=${response.stop_reason}); skipping batch`,
-      );
-      continue;
-    }
-    const rawInput = toolUse.input as {
-      enrichments?:
-        | Array<{
-            pdf_field_name: string;
-            field_id: string;
-            category: Category;
-            value_type: ValueType;
-            options?: Array<{ value: string; radio_option: string }>;
-          }>
-        | string;
-      skipped?: Array<{ pdf_field_name: string; skip_reason: string }> | string;
-    } | null;
-    if (rawInput && typeof rawInput.enrichments === "string") {
-      try {
-        rawInput.enrichments = JSON.parse(rawInput.enrichments);
-      } catch {
-        /* fall through */
-      }
-    }
-    if (rawInput && typeof rawInput.skipped === "string") {
-      try {
-        const parsed = JSON.parse(rawInput.skipped);
-        rawInput.skipped = Array.isArray(parsed) ? parsed : undefined;
-      } catch {
-        rawInput.skipped = undefined;
-      }
-    }
-    if (!rawInput || !Array.isArray(rawInput.enrichments)) {
-      console.warn(
-        `[classify] batch ${i + 1}/${batches.length}: malformed tool input; skipping batch. Preview: ${JSON.stringify(rawInput).slice(0, 300)}`,
-      );
-      continue;
-    }
-
-    for (const f of rawInput.enrichments) {
-      const enrichment: FieldEnrichment = {
-        pdfFieldName: f.pdf_field_name,
-        fieldId: f.field_id,
-        category: f.category,
-        valueType: f.value_type,
-      };
-      if (Array.isArray(f.options) && f.options.length > 0) {
-        enrichment.options = f.options.map((o) => ({
-          value: o.value,
-          radioOption: o.radio_option,
-        }));
-      }
-      allEnrichments.push(enrichment);
-      if (!assignedFieldIds.has(f.field_id)) {
-        const matched = batch.find((b) => b.fieldName === f.pdf_field_name);
-        assignedFieldIds.set(f.field_id, matched?.label ?? "");
-      }
-    }
-    const skippedArr = Array.isArray(rawInput.skipped) ? rawInput.skipped : [];
-    for (const s of skippedArr) {
-      allSkipped.push({
-        pdfFieldName: s.pdf_field_name,
-        skipReason: s.skip_reason,
-      });
-    }
-
-    usage.input_tokens += response.usage.input_tokens;
-    usage.output_tokens += response.usage.output_tokens;
-    usage.cache_creation_input_tokens += response.usage.cache_creation_input_tokens ?? 0;
-    usage.cache_read_input_tokens += response.usage.cache_read_input_tokens ?? 0;
+    usage.input_tokens += result.usage.input_tokens;
+    usage.output_tokens += result.usage.output_tokens;
+    usage.cache_creation_input_tokens += result.usage.cache_creation_input_tokens ?? 0;
+    usage.cache_read_input_tokens += result.usage.cache_read_input_tokens ?? 0;
 
     console.log(
-      `    batch ${i + 1}/${batches.length}: ${rawInput.enrichments.length} enriched, ${skippedArr.length} skipped, ${assignedFieldIds.size} unique fieldIds so far`,
+      `    batch ${i + 1}/${batches.length}: ${raw.enrichments.length} enriched, ${raw.skipped.length} skipped, ${assignedFieldIds.size} unique fieldIds so far`,
     );
   }
 
