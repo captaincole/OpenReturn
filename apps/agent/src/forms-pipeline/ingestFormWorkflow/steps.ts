@@ -148,32 +148,7 @@ export const persistStep = createStep({
   inputSchema: afterClassifySchema,
   outputSchema: workflowOutputSchema,
   execute: async ({ inputData }) => {
-    const enrichmentByName = new Map<string, FieldEnrichment>();
-    for (const e of inputData.enrichments) enrichmentByName.set(e.pdfFieldName, e);
-    const skippedByName = new Set<string>(inputData.skipped.map((s) => s.pdfFieldName));
-
-    const catalog: CatalogRow[] = [];
-    const unenriched: string[] = [];
-
-    for (const field of inputData.fields) {
-      if (skippedByName.has(field.fieldName)) continue;
-      const enrichment = enrichmentByName.get(field.fieldName);
-      const row = buildCatalogRow(inputData.formId, field, enrichment);
-      catalog.push(row);
-      if (!enrichment) unenriched.push(field.fieldName);
-    }
-
-    // Round-trip invariant: every non-skipped field must appear in the catalog.
-    const expectedNames = new Set(
-      inputData.fields.filter((f) => !skippedByName.has(f.fieldName)).map((f) => f.fieldName),
-    );
-    const actualNames = new Set(catalog.map((r) => r.pdfWidgetName ?? "").filter(Boolean));
-    const missing = [...expectedNames].filter((n) => !actualNames.has(n));
-    if (missing.length > 0) {
-      throw new Error(
-        `Round-trip invariant violated: ${missing.length} field(s) missing from catalog: ${missing.slice(0, 5).join(", ")}${missing.length > 5 ? "…" : ""}`,
-      );
-    }
+    const { catalog, unenriched } = assembleCatalog(inputData);
 
     const payload = {
       form: {
@@ -201,54 +176,7 @@ export const persistStep = createStep({
 
     let dbWritten = false;
     if (inputData.writeDb) {
-      await ensureCorpusSchema();
-      const db = getCorpusDb();
-      const now = new Date().toISOString();
-      await db.execute({
-        sql: `INSERT INTO forms (form_id, tax_year, jurisdiction, title, updated_at)
-              VALUES (?, ?, ?, ?, ?)
-              ON CONFLICT (form_id, tax_year) DO UPDATE SET
-                jurisdiction = excluded.jurisdiction,
-                title = excluded.title,
-                updated_at = excluded.updated_at`,
-        args: [
-          inputData.formId,
-          inputData.taxYear,
-          inputData.jurisdiction,
-          inputData.formTitle,
-          now,
-        ],
-      });
-      await db.batch(
-        catalog.map((f, i) => ({
-          sql: `INSERT INTO form_fields
-                  (field_id, form_id, tax_year, ordinal, label, category,
-                   value_type, pdf_widget_name, position, updated_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT (field_id, tax_year) DO UPDATE SET
-                  form_id = excluded.form_id,
-                  ordinal = excluded.ordinal,
-                  label = excluded.label,
-                  category = excluded.category,
-                  value_type = excluded.value_type,
-                  pdf_widget_name = excluded.pdf_widget_name,
-                  position = excluded.position,
-                  updated_at = excluded.updated_at`,
-          args: [
-            f.fieldId,
-            inputData.formId,
-            inputData.taxYear,
-            i,
-            f.label,
-            f.category,
-            f.valueType,
-            f.pdfWidgetName ?? null,
-            f.position ? JSON.stringify(f.position) : null,
-            now,
-          ],
-        })),
-        "write",
-      );
+      await upsertCatalogDb(inputData, catalog);
       dbWritten = true;
     }
 
@@ -268,6 +196,94 @@ export const persistStep = createStep({
 });
 
 // ─── Merge: deterministic field + AI enrichment → catalog row ────────────
+
+/*
+ * Merge deterministic extraction + AI enrichment into catalog rows and
+ * enforce the round-trip invariant: every non-skipped field must appear
+ * in the catalog.
+ */
+function assembleCatalog(inputData: {
+  formId: string;
+  fields: Array<Parameters<typeof buildCatalogRow>[1]>;
+  enrichments: FieldEnrichment[];
+  skipped: Array<{ pdfFieldName: string }>;
+}): { catalog: CatalogRow[]; unenriched: string[] } {
+  const enrichmentByName = new Map<string, FieldEnrichment>();
+  for (const e of inputData.enrichments) enrichmentByName.set(e.pdfFieldName, e);
+  const skippedByName = new Set<string>(inputData.skipped.map((s) => s.pdfFieldName));
+
+  const catalog: CatalogRow[] = [];
+  const unenriched: string[] = [];
+
+  for (const field of inputData.fields) {
+    if (skippedByName.has(field.fieldName)) continue;
+    const enrichment = enrichmentByName.get(field.fieldName);
+    catalog.push(buildCatalogRow(inputData.formId, field, enrichment));
+    if (!enrichment) unenriched.push(field.fieldName);
+  }
+
+  const expectedNames = new Set(
+    inputData.fields.filter((f) => !skippedByName.has(f.fieldName)).map((f) => f.fieldName),
+  );
+  const actualNames = new Set(catalog.map((r) => r.pdfWidgetName ?? "").filter(Boolean));
+  const missing = [...expectedNames].filter((n) => !actualNames.has(n));
+  if (missing.length > 0) {
+    throw new Error(
+      `Round-trip invariant violated: ${missing.length} field(s) missing from catalog: ${missing.slice(0, 5).join(", ")}${missing.length > 5 ? "…" : ""}`,
+    );
+  }
+
+  return { catalog, unenriched };
+}
+
+/* Upsert the form + its catalog rows into corpus.db (forms / form_fields). */
+async function upsertCatalogDb(
+  meta: { formId: string; taxYear: number; jurisdiction: string; formTitle: string },
+  catalog: CatalogRow[],
+): Promise<void> {
+  await ensureCorpusSchema();
+  const db = getCorpusDb();
+  const now = new Date().toISOString();
+  await db.execute({
+    sql: `INSERT INTO forms (form_id, tax_year, jurisdiction, title, updated_at)
+          VALUES (?, ?, ?, ?, ?)
+          ON CONFLICT (form_id, tax_year) DO UPDATE SET
+            jurisdiction = excluded.jurisdiction,
+            title = excluded.title,
+            updated_at = excluded.updated_at`,
+    args: [meta.formId, meta.taxYear, meta.jurisdiction, meta.formTitle, now],
+  });
+  await db.batch(
+    catalog.map((f, i) => ({
+      sql: `INSERT INTO form_fields
+              (field_id, form_id, tax_year, ordinal, label, category,
+               value_type, pdf_widget_name, position, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT (field_id, tax_year) DO UPDATE SET
+              form_id = excluded.form_id,
+              ordinal = excluded.ordinal,
+              label = excluded.label,
+              category = excluded.category,
+              value_type = excluded.value_type,
+              pdf_widget_name = excluded.pdf_widget_name,
+              position = excluded.position,
+              updated_at = excluded.updated_at`,
+      args: [
+        f.fieldId,
+        meta.formId,
+        meta.taxYear,
+        i,
+        f.label,
+        f.category,
+        f.valueType,
+        f.pdfWidgetName ?? null,
+        f.position ? JSON.stringify(f.position) : null,
+        now,
+      ],
+    })),
+    "write",
+  );
+}
 
 function buildCatalogRow(
   formId: string,

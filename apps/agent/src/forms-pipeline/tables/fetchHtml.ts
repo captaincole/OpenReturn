@@ -41,25 +41,8 @@ export async function fetchHtml(opts: {
   const abs = path.resolve(cachePath);
 
   if (!refresh) {
-    try {
-      const html = await fs.readFile(abs, "utf8");
-      const sha = sha256(html);
-      const stat = await fs.stat(abs);
-      return {
-        html,
-        cached: true,
-        source: {
-          url,
-          fetchedAt: stat.mtime.toISOString(),
-          sha256: sha,
-          cacheFile: path.basename(abs),
-        },
-      };
-    } catch (err: unknown) {
-      const e = err as NodeJS.ErrnoException;
-      if (e.code !== "ENOENT") throw err;
-      // Fall through to the network fetch.
-    }
+    const cached = await readCache(url, abs);
+    if (cached) return cached;
   }
 
   const res = await fetch(url, {
@@ -87,6 +70,28 @@ export async function fetchHtml(opts: {
       cacheFile: path.basename(abs),
     },
   };
+}
+
+/* Cache read; null on a cache miss (ENOENT falls through to the fetch). */
+async function readCache(url: string, abs: string): Promise<FetchHtmlResult | null> {
+  try {
+    const html = await fs.readFile(abs, "utf8");
+    const stat = await fs.stat(abs);
+    return {
+      html,
+      cached: true,
+      source: {
+        url,
+        fetchedAt: stat.mtime.toISOString(),
+        sha256: sha256(html),
+        cacheFile: path.basename(abs),
+      },
+    };
+  } catch (err: unknown) {
+    const e = err as NodeJS.ErrnoException;
+    if (e.code !== "ENOENT") throw err;
+    return null;
+  }
 }
 
 function sha256(s: string): string {
