@@ -34,12 +34,102 @@ const TABS = [
   { id: "documents", label: "Documents", path: "/documents" },
 ] as const;
 
-export function TopBar({ activeReturn, returns }: TopBarProps) {
+/* Active return + dropdown. The primary "where am I" cue. */
+function ReturnPicker({ activeReturn, returns }: TopBarProps) {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
+
+  function pickReturn(r: TaxReturn) {
+    setOpen(false);
+    router.push(`/r/${r.id}`);
+  }
+
+  return (
+    <div className="relative shrink-0">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="-mx-2 flex items-baseline gap-1.5 rounded-md px-2 py-1 transition-colors hover:bg-bg-elevated"
+      >
+        <span className="text-[15px] leading-none font-semibold tracking-tight text-ink-primary">
+          {activeReturn.label}
+        </span>
+        <span className="text-[11px] leading-none text-ink-muted">▾</span>
+      </button>
+      {open && (
+        <>
+          <div className="fixed inset-0 z-30" onClick={() => setOpen(false)} />
+          <div className="absolute top-full left-0 z-40 mt-2 w-64 overflow-hidden rounded-xl border border-border-subtle bg-bg-elevated shadow-2xl shadow-black/40">
+            <Link
+              href="/"
+              className="flex items-center gap-2 border-b border-border-subtle px-4 py-2.5 text-sm text-ink-secondary transition-colors hover:bg-bg-panel hover:text-ink-primary"
+              onClick={() => setOpen(false)}
+            >
+              <span className="text-ink-muted">←</span>
+              All returns
+            </Link>
+            {returns.map((r) => (
+              <button
+                key={r.filingId}
+                onClick={() => pickReturn(r)}
+                className={cn(
+                  "flex w-full items-center justify-between gap-3 px-4 py-3 text-left",
+                  "transition-colors hover:bg-bg-panel",
+                  r.id === activeReturn.id && "bg-bg-panel",
+                )}
+              >
+                <div>
+                  <div className="text-sm text-ink-primary">{r.label}</div>
+                  <div className="mt-0.5 text-[11px] text-ink-muted">
+                    {r.state === "active" ? "In progress" : "Filed"}
+                  </div>
+                </div>
+                {r.id === activeReturn.id && <span className="text-sm text-accent">✓</span>}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+/* Workspace tabs. Subordinate to the return picker. */
+function WorkspaceTabs({ basePath }: { basePath: string }) {
   const pathname = usePathname();
-  const { state, profile, lucaBusy, onSignOut } = useAppShell();
-  const [returnMenuOpen, setReturnMenuOpen] = useState(false);
-  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+
+  function isTabActive(tabPath: string): boolean {
+    if (tabPath === "") return pathname === basePath;
+    return pathname === `${basePath}${tabPath}` || pathname.startsWith(`${basePath}${tabPath}/`);
+  }
+
+  return (
+    <nav className="hidden min-w-0 flex-1 items-center gap-0.5 md:flex">
+      {TABS.map((t) => {
+        const active = isTabActive(t.path);
+        return (
+          <Link
+            key={t.id}
+            href={`${basePath}${t.path}`}
+            className={cn(
+              "rounded-md px-2.5 py-1 text-[13px] transition-colors",
+              active
+                ? "bg-bg-elevated text-ink-primary"
+                : "text-ink-secondary hover:bg-bg-elevated/50 hover:text-ink-primary",
+            )}
+          >
+            {t.label}
+          </Link>
+        );
+      })}
+    </nav>
+  );
+}
+
+/* Avatar + account dropdown; owns the delete-filing flow. */
+function AccountMenu({ activeReturn }: { activeReturn: TaxReturn }) {
+  const router = useRouter();
+  const { profile, onSignOut } = useAppShell();
+  const [open, setOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
   async function handleDelete() {
@@ -54,7 +144,7 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
     setDeleting(true);
     try {
       await deleteFiling(activeReturn.filingId);
-      setAccountMenuOpen(false);
+      setOpen(false);
       router.push("/");
       router.refresh();
     } catch (err) {
@@ -68,6 +158,53 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
     }
   }
 
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex h-8 w-8 items-center justify-center rounded-full border border-accent/40 bg-accent/20 text-xs font-medium text-accent transition-colors hover:bg-accent/30"
+        title="Account"
+      >
+        {profile.initials}
+      </button>
+      {open && (
+        <>
+          <div className="fixed inset-0 z-30" onClick={() => setOpen(false)} />
+          <div className="absolute top-full right-0 z-40 mt-2 w-56 overflow-hidden rounded-xl border border-border-subtle bg-bg-elevated shadow-2xl shadow-black/40">
+            {profile.email && (
+              <div className="border-b border-border-subtle px-4 py-3">
+                <div className="text-[11px] tracking-wider text-ink-muted uppercase">
+                  Signed in as
+                </div>
+                <div className="mt-0.5 truncate text-sm text-ink-primary">{profile.email}</div>
+              </div>
+            )}
+            <button
+              onClick={() => void handleDelete()}
+              disabled={deleting}
+              className="w-full px-4 py-2.5 text-left text-sm text-red-300 transition-colors hover:bg-bg-panel hover:text-red-200 disabled:opacity-50"
+            >
+              {deleting ? "Deleting…" : `Delete this filing`}
+            </button>
+            <button
+              onClick={() => {
+                setOpen(false);
+                void onSignOut();
+              }}
+              className="w-full border-t border-border-subtle px-4 py-2.5 text-left text-sm text-ink-secondary transition-colors hover:bg-bg-panel hover:text-ink-primary"
+            >
+              Sign out
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+export function TopBar({ activeReturn, returns }: TopBarProps) {
+  const { state, lucaBusy } = useAppShell();
+
   const basePath = `/r/${activeReturn.id}`;
   /*
    * TODO: replace with a real overall-progress signal when the agent
@@ -77,16 +214,6 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
    * start and tops out near completion.
    */
   const pct = state ? Math.min(95, Math.max(8, state.factCount * 4)) : 8;
-
-  function isTabActive(tabPath: string): boolean {
-    if (tabPath === "") return pathname === basePath;
-    return pathname === `${basePath}${tabPath}` || pathname.startsWith(`${basePath}${tabPath}/`);
-  }
-
-  function pickReturn(r: TaxReturn) {
-    setReturnMenuOpen(false);
-    router.push(`/r/${r.id}`);
-  }
 
   return (
     <header className="relative z-30 flex h-14 shrink-0 items-center gap-3 border-b border-border-subtle bg-bg-base/95 px-4 backdrop-blur-sm lg:px-6">
@@ -101,74 +228,10 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
 
       <div className="h-6 w-px shrink-0 bg-border-subtle" />
 
-      {/* Active return. The primary "where am I" cue. */}
-      <div className="relative shrink-0">
-        <button
-          onClick={() => setReturnMenuOpen((v) => !v)}
-          className="-mx-2 flex items-baseline gap-1.5 rounded-md px-2 py-1 transition-colors hover:bg-bg-elevated"
-        >
-          <span className="text-[15px] leading-none font-semibold tracking-tight text-ink-primary">
-            {activeReturn.label}
-          </span>
-          <span className="text-[11px] leading-none text-ink-muted">▾</span>
-        </button>
-        {returnMenuOpen && (
-          <>
-            <div className="fixed inset-0 z-30" onClick={() => setReturnMenuOpen(false)} />
-            <div className="absolute top-full left-0 z-40 mt-2 w-64 overflow-hidden rounded-xl border border-border-subtle bg-bg-elevated shadow-2xl shadow-black/40">
-              <Link
-                href="/"
-                className="flex items-center gap-2 border-b border-border-subtle px-4 py-2.5 text-sm text-ink-secondary transition-colors hover:bg-bg-panel hover:text-ink-primary"
-                onClick={() => setReturnMenuOpen(false)}
-              >
-                <span className="text-ink-muted">←</span>
-                All returns
-              </Link>
-              {returns.map((r) => (
-                <button
-                  key={r.filingId}
-                  onClick={() => pickReturn(r)}
-                  className={cn(
-                    "flex w-full items-center justify-between gap-3 px-4 py-3 text-left",
-                    "transition-colors hover:bg-bg-panel",
-                    r.id === activeReturn.id && "bg-bg-panel",
-                  )}
-                >
-                  <div>
-                    <div className="text-sm text-ink-primary">{r.label}</div>
-                    <div className="mt-0.5 text-[11px] text-ink-muted">
-                      {r.state === "active" ? "In progress" : "Filed"}
-                    </div>
-                  </div>
-                  {r.id === activeReturn.id && <span className="text-sm text-accent">✓</span>}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
+      <ReturnPicker activeReturn={activeReturn} returns={returns} />
 
-      {/* Workspace tabs. Subordinate to the return picker. */}
       <div className="hidden shrink-0 px-1 text-ink-faint md:block">·</div>
-      <nav className="hidden min-w-0 flex-1 items-center gap-0.5 md:flex">
-        {TABS.map((t) => {
-          const active = isTabActive(t.path);
-          return (
-            <Link
-              key={t.id}
-              href={`${basePath}${t.path}`}
-              className={cn(
-                "rounded-md px-2.5 py-1 text-[13px] transition-colors",
-                active
-                  ? "bg-bg-elevated text-ink-primary"
-                  : "text-ink-secondary hover:bg-bg-elevated/50 hover:text-ink-primary",
-              )}
-            >
-              {t.label}
-            </Link>
-          );
-        })}
-      </nav>
+      <WorkspaceTabs basePath={basePath} />
 
       <div className="flex-1 md:hidden" />
 
@@ -192,46 +255,7 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
           </div>
         )}
 
-        <div className="relative">
-          <button
-            onClick={() => setAccountMenuOpen((v) => !v)}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-accent/40 bg-accent/20 text-xs font-medium text-accent transition-colors hover:bg-accent/30"
-            title="Account"
-          >
-            {profile.initials}
-          </button>
-          {accountMenuOpen && (
-            <>
-              <div className="fixed inset-0 z-30" onClick={() => setAccountMenuOpen(false)} />
-              <div className="absolute top-full right-0 z-40 mt-2 w-56 overflow-hidden rounded-xl border border-border-subtle bg-bg-elevated shadow-2xl shadow-black/40">
-                {profile.email && (
-                  <div className="border-b border-border-subtle px-4 py-3">
-                    <div className="text-[11px] tracking-wider text-ink-muted uppercase">
-                      Signed in as
-                    </div>
-                    <div className="mt-0.5 truncate text-sm text-ink-primary">{profile.email}</div>
-                  </div>
-                )}
-                <button
-                  onClick={() => void handleDelete()}
-                  disabled={deleting}
-                  className="w-full px-4 py-2.5 text-left text-sm text-red-300 transition-colors hover:bg-bg-panel hover:text-red-200 disabled:opacity-50"
-                >
-                  {deleting ? "Deleting…" : `Delete this filing`}
-                </button>
-                <button
-                  onClick={() => {
-                    setAccountMenuOpen(false);
-                    void onSignOut();
-                  }}
-                  className="w-full border-t border-border-subtle px-4 py-2.5 text-left text-sm text-ink-secondary transition-colors hover:bg-bg-panel hover:text-ink-primary"
-                >
-                  Sign out
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+        <AccountMenu activeReturn={activeReturn} />
       </div>
     </header>
   );
