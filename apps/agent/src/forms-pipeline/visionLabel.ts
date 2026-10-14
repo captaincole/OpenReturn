@@ -74,21 +74,7 @@ export async function resolveLabelsForPage(opts: ResolveLabelsOpts): Promise<Map
     scale: 2,
   });
 
-  const widgetTable = opts.widgets.map((w) => ({
-    id: w.id,
-    kind: w.kind,
-    tu_label: w.tuLabel,
-    ...(w.exportValue ? { export_value: w.exportValue } : {}),
-    ...(w.buttonValue ? { button_value: w.buttonValue } : {}),
-  }));
-
-  const userText = `Form: ${opts.pdfPath}
-Page index (0-based): ${opts.pageIndex}
-
-Widgets to label (${widgetTable.length}):
-${JSON.stringify(widgetTable, null, 2)}
-
-For each widget id above, return its label. Echo \`tu_label\` verbatim when present. Otherwise read the rendered page image (attached) and infer the label from the adjacent form text.`;
+  const userText = buildLabelPrompt(opts);
 
   const client = new Anthropic({ apiKey });
 
@@ -96,30 +82,7 @@ For each widget id above, return its label. Echo \`tu_label\` verbatim when pres
     model: MODEL,
     max_tokens: MAX_TOKENS,
     system: SYSTEM_PROMPT,
-    tools: [
-      {
-        name: "submit_labels",
-        description:
-          "Submit one label per widget in the input table. The label is the human-readable prompt that tells a taxpayer what value belongs in that widget.",
-        input_schema: {
-          type: "object",
-          properties: {
-            labels: {
-              type: "array",
-              items: {
-                type: "object",
-                properties: {
-                  id: { type: "integer" },
-                  label: { type: "string" },
-                },
-                required: ["id", "label"],
-              },
-            },
-          },
-          required: ["labels"],
-        },
-      },
-    ],
+    tools: [SUBMIT_LABELS_TOOL],
     tool_choice: { type: "tool", name: "submit_labels" },
     messages: [
       {
@@ -142,6 +105,56 @@ For each widget id above, return its label. Echo \`tu_label\` verbatim when pres
     ],
   });
 
+  return parseLabels(response);
+}
+
+function buildLabelPrompt(opts: ResolveLabelsOpts): string {
+  const widgetTable = opts.widgets.map((w) => ({
+    id: w.id,
+    kind: w.kind,
+    tu_label: w.tuLabel,
+    ...(w.exportValue ? { export_value: w.exportValue } : {}),
+    ...(w.buttonValue ? { button_value: w.buttonValue } : {}),
+  }));
+
+  return `Form: ${opts.pdfPath}
+Page index (0-based): ${opts.pageIndex}
+
+Widgets to label (${widgetTable.length}):
+${JSON.stringify(widgetTable, null, 2)}
+
+For each widget id above, return its label. Echo \`tu_label\` verbatim when present. Otherwise read the rendered page image (attached) and infer the label from the adjacent form text.`;
+}
+
+const SUBMIT_LABELS_TOOL: Anthropic.Tool = {
+  name: "submit_labels",
+  description:
+    "Submit one label per widget in the input table. The label is the human-readable prompt that tells a taxpayer what value belongs in that widget.",
+  input_schema: {
+    type: "object",
+    properties: {
+      labels: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            id: { type: "integer" },
+            label: { type: "string" },
+          },
+          required: ["id", "label"],
+        },
+      },
+    },
+    required: ["labels"],
+  },
+};
+
+/*
+ * Extract the id→label map from the forced tool call. The model
+ * occasionally stringifies the labels array; parse it back before
+ * validating.
+ */
+function parseLabels(response: Anthropic.Message): Map<number, string> {
   const toolUse = response.content.find((c) => c.type === "tool_use");
   if (!toolUse || toolUse.type !== "tool_use") {
     throw new Error(`visionLabel: no tool_use in response (stop_reason=${response.stop_reason})`);
@@ -151,7 +164,7 @@ For each widget id above, return its label. Echo \`tu_label\` verbatim when pres
   } | null;
   if (rawInput && typeof rawInput.labels === "string") {
     try {
-      rawInput.labels = JSON.parse(rawInput.labels);
+      rawInput.labels = JSON.parse(rawInput.labels) as Array<{ id: number; label: string }>;
     } catch {
       /* fall through to validation */
     }
