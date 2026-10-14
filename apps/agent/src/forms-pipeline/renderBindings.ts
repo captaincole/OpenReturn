@@ -47,55 +47,7 @@
 import { dirname, relative } from "node:path";
 import type { FieldInventory } from "../engine/catalog.js";
 import type { ClassifiedBinding, Confidence } from "./classifyBindings.js";
-
-/*
- * ─── FilingInfo slot translation tables ──────────────────────────────────
- * Maps the AI's rule params (which reference raw fact / decision keys) to
- * the typed slot names in FilingInfo. When a key is not in the table, the
- * renderer pushes the binding to `todos` for human review: add the slot
- * to FilingInfo, or clarify the AI's choice.
- */
-
-const FACT_TO_SLOT: Record<string, string> = {
-  "identity.name.first": "taxpayerFirstName",
-  "identity.name.middle_initial": "taxpayerMiddleInitial",
-  "identity.name.last": "taxpayerLastName",
-  "identity.ssn": "taxpayerSSN",
-  "identity.dob": "taxpayerDateOfBirth",
-  "identity.address.street": "homeAddressLine1",
-  "identity.address.apt": "homeAddressApt",
-  "identity.address.city": "homeAddressCity",
-  "identity.address.state": "homeAddressState",
-  "identity.address.zip": "homeAddressZip",
-  "identity.address.county": "homeAddressCounty",
-  "identity.email": "taxpayerEmail",
-  "identity.phone": "taxpayerPhone",
-  "identity.occupation": "taxpayerOccupation",
-  "use_tax.owed_amount": "useTaxOwed",
-  "health_coverage.full_year_mec": "fullYearMEC",
-};
-
-const DECISION_TO_SLOT: Record<string, string> = {
-  "decisions.scope.must_file_federal": "mustFileFederal",
-  "decisions.scope.must_file_ca_540": "mustFileCA540",
-  "decisions.scope.filing_status": "filingStatus",
-  "decisions.scope.ca_residency": "caResidencyStatus",
-  "decisions.scope.mailing_same_as_principal_residence": "mailingSameAsResidence",
-  "decisions.scope.use_tax_zero_reason": "useTaxZeroReason",
-  "decisions.refund.refund_full_overpayment_federal": "refundFullOverpaymentFederal",
-  "decisions.refund.refund_full_overpayment_ca": "refundFullOverpaymentCA",
-};
-
-// sumFacts identity: `${category}|${keyPrefix ?? ""}|${fieldPath}`.
-const SUM_FACTS_TO_SLOT: Record<string, string> = {
-  "wages|employer.|box1": "w2WagesTotal",
-  "wages|employer.|box2": "w2FederalWithholding",
-  "wages|employer.|box16": "w2StateWages",
-  "wages|employer.|box17": "w2StateWithholding",
-  "investment_income|account.|box1a": "ordinaryDividends",
-  "investment_income|account.|box1b": "qualifiedDividends",
-  "investment_income|account.|box4": "form1099FederalWithholding",
-};
+import { DECISION_TO_SLOT, quote, shortKey, translate } from "./translateBinding.js";
 
 // ─── Public shapes ───────────────────────────────────────────────────────
 
@@ -134,90 +86,96 @@ export interface RenderBindingsReport {
 
 // ─── Entry point ─────────────────────────────────────────────────────────
 
-export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
+type RenderEntry =
+  | { kind: "binding"; field: FieldInventory; body: string; rationale: string }
+  | { kind: "unsupported"; field: FieldInventory; reason: string }
+  | { kind: "todo"; field: FieldInventory; reason: string }
+  | { kind: "unbound"; field: FieldInventory };
+
+interface BucketResult {
+  entries: RenderEntry[];
+  ruleBreakdown: Record<string, number>;
+  confidenceBreakdown: Record<Confidence, number>;
+  usesLookupTax: boolean;
+  usesSum: boolean;
+  usesFloor: boolean;
+}
+
+/* Sort each catalog field into its bucket and tally the breakdowns. */
+function bucketFields(opts: RenderBindingsOpts): BucketResult {
   const bindingByFieldId = new Map<string, ClassifiedBinding>();
   for (const b of opts.bindings) {
     if (!bindingByFieldId.has(b.fieldId)) bindingByFieldId.set(b.fieldId, b);
   }
-
   const minOrder = CONFIDENCE_ORDER[opts.minConfidence];
 
-  // Sort each catalog field into one bucket.
-  const entries: Array<
-    | { kind: "binding"; field: FieldInventory; body: string; rationale: string }
-    | { kind: "unsupported"; field: FieldInventory; reason: string }
-    | { kind: "todo"; field: FieldInventory; reason: string }
-    | { kind: "unbound"; field: FieldInventory }
-  > = [];
-
-  const ruleBreakdown: Record<string, number> = {};
-  const confidenceBreakdown: Record<Confidence, number> = {
-    high: 0,
-    medium: 0,
-    low: 0,
+  const result: BucketResult = {
+    entries: [],
+    ruleBreakdown: {},
+    confidenceBreakdown: { high: 0, medium: 0, low: 0 },
+    usesLookupTax: false,
+    usesSum: false,
+    usesFloor: false,
   };
-  let usesLookupTax = false;
-  let usesSum = false;
-  let usesFloor = false;
 
   for (const field of opts.fields) {
     const binding = bindingByFieldId.get(field.fieldId);
     if (!binding) {
-      entries.push({ kind: "unbound", field });
+      result.entries.push({ kind: "unbound", field });
       continue;
     }
-    ruleBreakdown[binding.ruleName] = (ruleBreakdown[binding.ruleName] ?? 0) + 1;
-    confidenceBreakdown[binding.confidence]++;
+    result.ruleBreakdown[binding.ruleName] = (result.ruleBreakdown[binding.ruleName] ?? 0) + 1;
+    result.confidenceBreakdown[binding.confidence]++;
+    result.entries.push(bucketOneField(field, binding, minOrder, opts.formId, result));
+  }
+  return result;
+}
 
-    /*
-     * The `unsupported` rule always goes to the unsupported map,
-     * regardless of confidence.
-     */
-    if (binding.ruleName === "unsupported") {
-      const reason = String(binding.params.reason ?? binding.rationale);
-      entries.push({ kind: "unsupported", field, reason });
-      continue;
-    }
-
-    // Bindings below the confidence floor become todos.
-    if (CONFIDENCE_ORDER[binding.confidence] < minOrder) {
-      entries.push({
-        kind: "todo",
-        field,
-        reason: `confidence=${binding.confidence}: ${binding.rationale}`,
-      });
-      continue;
-    }
-
-    // Translate the binding to a TS function body.
-    const translated = translate(binding, opts.formId);
-    if (translated.kind === "todo") {
-      entries.push({
-        kind: "todo",
-        field,
-        reason: `${binding.ruleName}: ${translated.reason}`,
-      });
-      continue;
-    }
-    if (translated.usesLookupTax) usesLookupTax = true;
-    if (translated.usesSum) usesSum = true;
-    if (translated.usesFloor) usesFloor = true;
-    entries.push({
-      kind: "binding",
-      field,
-      body: translated.body,
-      rationale: binding.rationale,
-    });
+/*
+ * Bucket one bound field. The `unsupported` rule always goes to the
+ * unsupported map regardless of confidence; bindings below the
+ * confidence floor become todos; the rest translate to TS bodies (and
+ * failed translations become todos too). Sets the uses* flags on
+ * `result` as translations require helpers.
+ */
+function bucketOneField(
+  field: FieldInventory,
+  binding: ClassifiedBinding,
+  minOrder: number,
+  formId: string,
+  result: BucketResult,
+): RenderEntry {
+  if (binding.ruleName === "unsupported") {
+    const reason = String(binding.params.reason ?? binding.rationale);
+    return { kind: "unsupported", field, reason };
   }
 
-  // ─── Build the source string ─────────────────────────────────────────
+  if (CONFIDENCE_ORDER[binding.confidence] < minOrder) {
+    return {
+      kind: "todo",
+      field,
+      reason: `confidence=${binding.confidence}: ${binding.rationale}`,
+    };
+  }
 
-  const engineImport = relImport(opts.outputPath, "src/engine/engine.ts");
+  const translated = translate(binding, formId);
+  if (translated.kind === "todo") {
+    return { kind: "todo", field, reason: `${binding.ruleName}: ${translated.reason}` };
+  }
+  if (translated.usesLookupTax) result.usesLookupTax = true;
+  if (translated.usesSum) result.usesSum = true;
+  if (translated.usesFloor) result.usesFloor = true;
+  return { kind: "binding", field, body: translated.body, rationale: binding.rationale };
+}
+
+/* File header, imports, register() opener, and the mustFile line(s). */
+function renderPreamble(opts: RenderBindingsOpts, b: BucketResult): string[] {
+  const engineImport = relImport(opts.outputPath, "src/engine/defineForm.ts");
   const taxTableImport = relImport(opts.outputPath, "src/engine/data/taxTable.ts");
 
   const engineSymbols = ["defineForm"];
-  if (usesSum) engineSymbols.push("sum");
-  if (usesFloor) engineSymbols.push("floor");
+  if (b.usesSum) engineSymbols.push("sum");
+  if (b.usesFloor) engineSymbols.push("floor");
 
   const out: string[] = [];
   out.push(
@@ -229,7 +187,7 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
   out.push(`// Generated at: ${new Date().toISOString()}`);
   out.push("");
   out.push(`import { ${engineSymbols.join(", ")} } from "${engineImport}";`);
-  if (usesLookupTax) {
+  if (b.usesLookupTax) {
     out.push(`import { lookupTax } from "${taxTableImport}";`);
   }
   out.push(`import type { ${opts.typeInterfaceName} } from "./types.js";`);
@@ -243,7 +201,6 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
     `  defineForm<${opts.typeInterfaceName}, ${opts.filingInfoInterfaceName}>(${quote(opts.formId)}, {`,
   );
 
-  // mustFile
   const mustFileSlot = DECISION_TO_SLOT[opts.mustFile.decisionKey];
   if (mustFileSlot) {
     out.push(`    // ${opts.mustFile.rationale}`);
@@ -260,46 +217,36 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
     out.push(`    // mustFile: (info) => info.???,`);
   }
   out.push("");
+  return out;
+}
 
-  // bindings
-  const bindingEntries = entries.filter((e) => e.kind === "binding") as Array<{
-    kind: "binding";
-    field: FieldInventory;
-    body: string;
-    rationale: string;
-  }>;
+/* The bindings / unsupported / todos sections of the defineForm spec. */
+function renderSpecSections(opts: RenderBindingsOpts, entries: RenderEntry[]): string[] {
+  const out: string[] = [];
+
   out.push(`    bindings: {`);
-  for (const e of bindingEntries) {
+  for (const e of entries) {
+    if (e.kind !== "binding") continue;
     out.push(`      // ${e.rationale}`);
     out.push(`      ${quote(shortKey(e.field.fieldId, opts.formId))}: ${e.body},`);
   }
   out.push(`    },`);
   out.push("");
 
-  // unsupported
-  const unsupportedEntries = entries.filter((e) => e.kind === "unsupported") as Array<{
-    kind: "unsupported";
-    field: FieldInventory;
-    reason: string;
-  }>;
-  if (unsupportedEntries.length > 0) {
+  const unsupported = entries.filter((e) => e.kind === "unsupported");
+  if (unsupported.length > 0) {
     out.push(`    unsupported: {`);
-    for (const e of unsupportedEntries) {
+    for (const e of unsupported) {
       out.push(`      ${quote(shortKey(e.field.fieldId, opts.formId))}: ${quote(e.reason)},`);
     }
     out.push(`    },`);
     out.push("");
   }
 
-  // todos
-  const todoEntries = entries.filter((e) => e.kind === "todo") as Array<{
-    kind: "todo";
-    field: FieldInventory;
-    reason: string;
-  }>;
-  if (todoEntries.length > 0) {
+  const todos = entries.filter((e) => e.kind === "todo");
+  if (todos.length > 0) {
     out.push(`    todos: {`);
-    for (const e of todoEntries) {
+    for (const e of todos) {
       out.push(`      ${quote(shortKey(e.field.fieldId, opts.formId))}: ${quote(e.reason)},`);
     }
     out.push(`    },`);
@@ -309,17 +256,25 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
   out.push(`  });`);
   out.push(`}`);
   out.push("");
+  return out;
+}
 
-  const emittedCount = bindingEntries.length;
-  const todoCount = todoEntries.length;
-  const unsupportedCount = unsupportedEntries.length;
+export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
+  const bucketed = bucketFields(opts);
+  const { entries } = bucketed;
+
+  const out = [...renderPreamble(opts, bucketed), ...renderSpecSections(opts, entries)];
+
+  const emittedCount = entries.filter((e) => e.kind === "binding").length;
+  const todoCount = entries.filter((e) => e.kind === "todo").length;
+  const unsupportedCount = entries.filter((e) => e.kind === "unsupported").length;
   const unboundCount = entries.filter((e) => e.kind === "unbound").length;
 
   out.push(
     `// Summary: ${emittedCount} binding(s), ${todoCount} todo(s), ${unsupportedCount} unsupported, ${unboundCount} unbound.`,
   );
   out.push(
-    `// Confidence: ${confidenceBreakdown.high} high, ${confidenceBreakdown.medium} medium, ${confidenceBreakdown.low} low.`,
+    `// Confidence: ${bucketed.confidenceBreakdown.high} high, ${bucketed.confidenceBreakdown.medium} medium, ${bucketed.confidenceBreakdown.low} low.`,
   );
   out.push("");
 
@@ -329,210 +284,11 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
     todoCount,
     unsupportedCount,
     unboundCount,
-    confidenceBreakdown,
-    ruleBreakdown,
+    confidenceBreakdown: bucketed.confidenceBreakdown,
+    ruleBreakdown: bucketed.ruleBreakdown,
   };
 }
 
-// ─── Translation: classifier rule → TS function body ─────────────────────
-
-type Translation =
-  | {
-      kind: "body";
-      body: string;
-      usesLookupTax?: boolean;
-      usesSum?: boolean;
-      usesFloor?: boolean;
-    }
-  | { kind: "todo"; reason: string };
-
-function translate(b: ClassifiedBinding, formId: string): Translation {
-  switch (b.ruleName) {
-    case "lookupFact":
-      return translateLookupFact(b);
-    case "sumFacts":
-      return translateSumFacts(b);
-    case "lookupDecision":
-      return translateLookupDecision(b);
-    case "decisionIfEquals":
-      return translateDecisionIfEquals(b);
-    case "tableLookupByDecision":
-      return translateTableLookupByDecision(b);
-    case "fromFields":
-      return translateFromFields(b, formId);
-    case "taxTable":
-      return translateTaxTable(b, formId);
-    case "constant":
-      return translateConstant(b);
-    case "bracketLookup":
-      return {
-        kind: "todo",
-        reason:
-          "bracketLookup translation not implemented yet — typically progressive-bracket math (AMT, ≥$100k Tax Computation Worksheet)",
-      };
-    case "unsupported":
-      // The caller routes `unsupported` to its own map; this must not run.
-      return { kind: "todo", reason: "unsupported routed to bindings path" };
-  }
-}
-
-function translateLookupFact(b: ClassifiedBinding): Translation {
-  const factKey = String(b.params.factKey ?? "");
-  const slot = FACT_TO_SLOT[factKey];
-  if (!slot) {
-    return {
-      kind: "todo",
-      reason: `no FilingInfo slot for fact "${factKey}". Add the slot to BaseFilingInfo / <Form>FilingInfo and map it in renderBindings.FACT_TO_SLOT.`,
-    };
-  }
-  return { kind: "body", body: `(_, info) => info.${slot}` };
-}
-
-function translateSumFacts(b: ClassifiedBinding): Translation {
-  const category = String(b.params.category ?? "");
-  const keyPrefix = String(b.params.keyPrefix ?? "");
-  const fieldPath = String(b.params.fieldPath ?? "");
-  const key = `${category}|${keyPrefix}|${fieldPath}`;
-  const slot = SUM_FACTS_TO_SLOT[key];
-  if (!slot) {
-    return {
-      kind: "todo",
-      reason: `no FilingInfo slot for sumFacts(${key}). Add the aggregate to <Form>FilingInfo + the resolver, and map it in renderBindings.SUM_FACTS_TO_SLOT.`,
-    };
-  }
-  return { kind: "body", body: `(_, info) => info.${slot}` };
-}
-
-function translateLookupDecision(b: ClassifiedBinding): Translation {
-  const decisionKey = String(b.params.decisionKey ?? "");
-  const slot = DECISION_TO_SLOT[decisionKey];
-  if (!slot) {
-    return {
-      kind: "todo",
-      reason: `no FilingInfo slot for decision "${decisionKey}". Add the slot to BaseFilingInfo / <Form>FilingInfo and map it in renderBindings.DECISION_TO_SLOT.`,
-    };
-  }
-  return { kind: "body", body: `(_, info) => info.${slot}` };
-}
-
-function translateDecisionIfEquals(b: ClassifiedBinding): Translation {
-  const decisionKey = String(b.params.decisionKey ?? "");
-  const slot = DECISION_TO_SLOT[decisionKey];
-  if (!slot) {
-    return {
-      kind: "todo",
-      reason: `no FilingInfo slot for decision "${decisionKey}".`,
-    };
-  }
-  const matchValue = b.params.matchValue;
-  if (matchValue === undefined) {
-    // Mode 1: pass through the raw decision value (single/multi select).
-    return { kind: "body", body: `(_, info) => info.${slot}` };
-  }
-  /*
-   * Mode 2 — per-checkbox boolean: true when decision === matchValue.
-   * JSON.stringify preserves boolean/number/string typing, so the
-   * comparison operand matches the FilingInfo slot's type (boolean ===
-   * boolean, not boolean === "true"). The AI sometimes emits matchValue
-   * as the literal `true` / `false` and sometimes as the string "true" /
-   * "false". Normalize boolean-looking matchValues back to booleans so
-   * both work.
-   */
-  const normalized = matchValue === "true" ? true : matchValue === "false" ? false : matchValue;
-  return {
-    kind: "body",
-    body: `(_, info) => info.${slot} === ${JSON.stringify(normalized)}`,
-  };
-}
-
-function translateTableLookupByDecision(b: ClassifiedBinding): Translation {
-  const decisionKey = String(b.params.decisionKey ?? "");
-  const slot = DECISION_TO_SLOT[decisionKey];
-  if (!slot) {
-    return {
-      kind: "todo",
-      reason: `no FilingInfo slot for decision "${decisionKey}".`,
-    };
-  }
-  const table = b.params.table;
-  if (!table || typeof table !== "object") {
-    return { kind: "todo", reason: "tableLookupByDecision missing table param" };
-  }
-  const tableLiteral = JSON.stringify(table);
-  return {
-    kind: "body",
-    body: `(_, info) => (info.${slot} ? (${tableLiteral} as Record<string, number>)[info.${slot}] : undefined)`,
-  };
-}
-
-function translateFromFields(b: ClassifiedBinding, formId: string): Translation {
-  const terms = b.params.terms as
-    Array<{ fieldId: string; sign?: number; whenSourceNotRequired?: unknown }> | undefined;
-  if (!Array.isArray(terms) || terms.length === 0) {
-    return { kind: "todo", reason: "fromFields missing terms" };
-  }
-  const args: string[] = [];
-  for (const t of terms) {
-    const sign = t.sign ?? 1;
-    const key = shortOrFullKey(t.fieldId, formId);
-    if (sign === 1) {
-      args.push(`f[${quote(key)}]`);
-    } else if (sign === -1) {
-      // sum() takes (number | undefined). Wrap to negate; undefined becomes 0.
-      args.push(`f[${quote(key)}] === undefined ? 0 : -f[${quote(key)}]`);
-    } else {
-      args.push(`f[${quote(key)}] === undefined ? 0 : ${sign} * f[${quote(key)}]`);
-    }
-  }
-  const sumExpr = `sum(${args.join(", ")})`;
-  const floorVal = b.params.floor;
-  if (typeof floorVal === "number") {
-    return {
-      kind: "body",
-      body: `(f) => floor(${floorVal}, ${sumExpr})`,
-      usesSum: true,
-      usesFloor: true,
-    };
-  }
-  return { kind: "body", body: `(f) => ${sumExpr}`, usesSum: true };
-}
-
-function translateTaxTable(b: ClassifiedBinding, formId: string): Translation {
-  const decisionKey = String(b.params.decisionKey ?? "");
-  const inputFieldId = String(b.params.inputFieldId ?? "");
-  const tableId = String(b.params.tableId ?? "federal-2025");
-  const slot = DECISION_TO_SLOT[decisionKey];
-  if (!slot) {
-    return {
-      kind: "todo",
-      reason: `taxTable: no FilingInfo slot for decision "${decisionKey}".`,
-    };
-  }
-  if (!inputFieldId) {
-    return { kind: "todo", reason: "taxTable missing inputFieldId" };
-  }
-  const inputKey = shortOrFullKey(inputFieldId, formId);
-  return {
-    kind: "body",
-    body:
-      `(f, info) => {\n` +
-      `        if (!info.${slot}) return undefined;\n` +
-      `        const income = f[${quote(inputKey)}];\n` +
-      `        if (typeof income !== "number") return undefined;\n` +
-      `        const r = lookupTax(${quote(tableId)}, income, info.${slot});\n` +
-      `        return r.ok ? r.tax : undefined;\n` +
-      `      }`,
-    usesLookupTax: true,
-  };
-}
-
-function translateConstant(b: ClassifiedBinding): Translation {
-  const value = b.params.value;
-  if (value === undefined) {
-    return { kind: "todo", reason: "constant missing value param" };
-  }
-  return { kind: "body", body: `() => ${JSON.stringify(value)}` };
-}
 
 // ─── Helpers ─────────────────────────────────────────────────────────────
 
@@ -541,26 +297,6 @@ const CONFIDENCE_ORDER: Record<Confidence, number> = {
   medium: 1,
   high: 2,
 };
-
-function shortKey(fieldId: string, formId: string): string {
-  const prefix = `${formId}.`;
-  if (fieldId.startsWith(prefix)) return fieldId.slice(prefix.length);
-  return fieldId;
-}
-
-/**
- * Cross-form refs use the full fieldId so the form accessor proxy routes
- * through the global registry. Same-form refs use the short key, the
- * convention defineForm uses for its own fields.
- */
-function shortOrFullKey(fieldId: string, formId: string): string {
-  if (fieldId.startsWith(`${formId}.`)) return fieldId.slice(formId.length + 1);
-  return fieldId;
-}
-
-function quote(s: string): string {
-  return JSON.stringify(s);
-}
 
 /**
  * Compute an ESM-friendly relative import path from `fromFilePath` to
