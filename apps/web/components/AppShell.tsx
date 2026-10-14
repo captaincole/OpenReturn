@@ -9,9 +9,8 @@
  *   - Main, mobile: one pane. The bottom tab bar swaps the panes.
  *
  * AppShellContext supplies user state, the chat message buffer, lucaBusy,
- * turnTick, the mobile-pane setter, and sendChat. The chat input and the
- * Requested Actions card call the same sendChat function. One code path
- * prevents useEffect bridges, state-trigger races, and double sends.
+ * turnTick, the mobile-pane setter, and sendChat. The chat session itself
+ * (buffer, history hydration, streaming) lives in useLucaChat.
  *
  * For placeholder returns (realDataAvailable=false), the shell does not
  * fetch /app/state and does not load chat history. sendChat is a no-op.
@@ -19,43 +18,29 @@
 
 import { ChatPane } from "@/components/ChatPane";
 import { TopBar } from "@/components/TopBar";
+import {
+  useLucaChat,
+  type ChatMessage,
+  type SendChatOpts,
+} from "@/components/useLucaChat";
 import { fetchState, UnauthorizedError, type CaseState } from "@/lib/api";
-import { getUserId, signOut } from "@/lib/auth";
-import { LUCA_AGENT_ID } from "@/lib/chatSession";
+import { signOut } from "@/lib/auth";
 import { cn } from "@/lib/cn";
-import { makeMastraClient } from "@/lib/mastraClient";
 import { type UserProfile } from "@/lib/profile";
-import { threadIdFor, type TaxReturn } from "@/lib/returns";
-import { uploadDocument } from "@/lib/uploads";
+import { type TaxReturn } from "@/lib/returns";
 import { useRouter } from "next/navigation";
 import {
   createContext,
   useContext,
   useEffect,
-  useRef,
   useState,
   type Dispatch,
   type SetStateAction,
 } from "react";
 
-export interface ChatMessage {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-  attachmentName?: string;
-}
+export type { ChatMessage, SendChatOpts };
 
 type MobilePane = "chat" | "workspace";
-
-export interface SendChatOpts {
-  text?: string;
-  file?: File;
-  /*
-   * Set true when the caller already wrote the file to user_documents.
-   * Then sendChat does not upload the file again.
-   */
-  skipUpload?: boolean;
-}
 
 interface AppShellContextValue {
   userId: string;
@@ -88,23 +73,6 @@ export function useAppShell(): AppShellContextValue {
   return v;
 }
 
-function freshId(prefix: string): string {
-  return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-}
-
-function readFileAsBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result as string;
-      const comma = result.indexOf(",");
-      resolve(comma >= 0 ? result.slice(comma + 1) : result);
-    };
-    reader.onerror = () => reject(reader.error);
-    reader.readAsDataURL(file);
-  });
-}
-
 export function AppShell({
   children,
   userId,
@@ -121,76 +89,7 @@ export function AppShell({
   const router = useRouter();
   const [state, setState] = useState<CaseState | null>(null);
   const [resetTick] = useState(0);
-  const [turnTick, setTurnTick] = useState(0);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [lucaBusy, setLucaBusy] = useState(false);
   const [mobilePane, setMobilePane] = useState<MobilePane>("workspace");
-  /*
-   * Synchronous gate against concurrent sendChat calls. setLucaBusy is
-   * asynchronous. Two calls in the same tick can both pass an
-   * `if (lucaBusy)` check. sendChat sets this ref immediately and clears
-   * it in the finally block.
-   */
-  const sendingRef = useRef(false);
-
-  const realData = activeReturn.realDataAvailable;
-
-  async function refreshState() {
-    if (!realData) {
-      setState(null);
-      return;
-    }
-    try {
-      setState(await fetchState());
-    } catch (err) {
-      if (err instanceof UnauthorizedError) {
-        await signOut();
-        router.refresh();
-        router.push("/login");
-      }
-    }
-  }
-
-  async function loadChatHistory() {
-    if (!realData) {
-      setMessages([]);
-      return;
-    }
-    try {
-      const client = await makeMastraClient();
-      const thread = client.getMemoryThread({
-        threadId: threadIdFor(userId, activeReturn.id),
-        agentId: LUCA_AGENT_ID,
-      });
-      const res = await thread.listMessages({ perPage: 200 });
-      const converted: ChatMessage[] = [];
-      for (const m of res.messages) {
-        if (m.role !== "user" && m.role !== "assistant") continue;
-        const parts = m.content?.parts ?? [];
-        const text = parts
-          .filter((p): p is { type: "text"; text: string } => p.type === "text")
-          .map((p) => p.text)
-          .join("");
-        const attachmentName = m.content?.experimental_attachments?.[0]?.name ?? undefined;
-        if (!text && !attachmentName) continue;
-        converted.push({
-          id: m.id,
-          role: m.role,
-          content: text || (attachmentName ? `Uploaded ${attachmentName}` : ""),
-          attachmentName,
-        });
-      }
-      setMessages((current) => (current.length > 0 ? current : converted));
-    } catch {
-      // Thread is missing or the request failed. Keep the buffer empty.
-    }
-  }
-
-  useEffect(() => {
-    void refreshState();
-    void loadChatHistory();
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- rerun only on a return switch, not on every render's new function identities
-  }, [activeReturn.id]);
 
   async function onSignOut() {
     await signOut();
@@ -198,119 +97,32 @@ export function AppShell({
     router.push("/login");
   }
 
-  function bumpTurn() {
-    setTurnTick((t) => t + 1);
-  }
-
-  async function sendChat(opts: SendChatOpts): Promise<void> {
-    if (sendingRef.current) return;
-    if (!realData) return;
-    const text = (opts.text ?? "").trim();
-    const file = opts.file;
-    if (!text && !file) return;
-
-    sendingRef.current = true;
-    setLucaBusy(true);
-
-    const userMsg: ChatMessage = {
-      id: freshId("u"),
-      role: "user",
-      content: text || (file ? `Uploaded ${file.name}` : ""),
-      attachmentName: file?.name,
-    };
-    const assistantMsg: ChatMessage = {
-      id: freshId("a"),
-      role: "assistant",
-      content: "",
-    };
-    setMessages((m) => [...m, userMsg, assistantMsg]);
-
-    /*
-     * Write the file to user_documents in parallel. Then the Documents
-     * tab shows it. Skip this when the caller already uploaded the file
-     * (for example, the Requested Actions card).
-     */
-    if (file && !opts.skipUpload) {
-      uploadDocument(file).catch((err) => {
-        console.warn("[chat] upload to user-documents failed:", err);
-      });
+  async function refreshState() {
+    if (!activeReturn.realDataAvailable) {
+      setState(null);
+      return;
     }
-
     try {
-      let payload: unknown = text;
-      if (file) {
-        const base64 = await readFileAsBase64(file);
-        const mediaType = file.type || "application/pdf";
-        payload = [
-          {
-            role: "user" as const,
-            content: [
-              {
-                type: "text" as const,
-                text: text || "I've attached a document — please review it.",
-              },
-              {
-                type: "file" as const,
-                data: base64,
-                mediaType,
-                filename: file.name,
-              },
-            ],
-          },
-        ];
-      }
-
-      const userIdFresh = await getUserId();
-      if (!userIdFresh) {
-        await signOut();
-        router.refresh();
-        router.push("/login");
-        return;
-      }
-
-      const client = await makeMastraClient();
-      const stream = await client.getAgent(LUCA_AGENT_ID).stream(payload as string, {
-        memory: {
-          thread: threadIdFor(userIdFresh, activeReturn.id),
-          resource: userIdFresh,
-        },
-      });
-
-      await stream.processDataStream({
-        onChunk: async (chunk) => {
-          if (chunk.type === "text-delta") {
-            const delta = (chunk.payload as { text: string }).text;
-            setMessages((m) =>
-              m.map((msg) =>
-                msg.id === assistantMsg.id ? { ...msg, content: msg.content + delta } : msg,
-              ),
-            );
-          }
-        },
-      });
-
-      await refreshState();
-      setTurnTick((t) => t + 1);
+      setState(await fetchState());
     } catch (err) {
-      const message =
-        err instanceof UnauthorizedError
-          ? "Session expired — please sign in again."
-          : err instanceof Error
-            ? err.message
-            : "Something went wrong.";
-      setMessages((m) =>
-        m.map((msg) => (msg.id === assistantMsg.id ? { ...msg, content: `[${message}]` } : msg)),
-      );
       if (err instanceof UnauthorizedError) {
-        await signOut();
-        router.refresh();
-        router.push("/login");
+        await onSignOut();
       }
-    } finally {
-      setLucaBusy(false);
-      sendingRef.current = false;
     }
   }
+
+  const chat = useLucaChat({
+    userId,
+    activeReturn,
+    refreshState,
+    onUnauthorized: onSignOut,
+  });
+
+  useEffect(() => {
+    void refreshState();
+    void chat.loadChatHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- rerun only on a return switch, not on every render's new function identities
+  }, [activeReturn.id]);
 
   const ctx: AppShellContextValue = {
     userId,
@@ -320,13 +132,13 @@ export function AppShell({
     state,
     refreshState,
     resetTick,
-    turnTick,
-    bumpTurn,
-    messages,
-    setMessages,
-    lucaBusy,
+    turnTick: chat.turnTick,
+    bumpTurn: chat.bumpTurn,
+    messages: chat.messages,
+    setMessages: chat.setMessages,
+    lucaBusy: chat.lucaBusy,
     setMobilePane,
-    sendChat,
+    sendChat: chat.sendChat,
     onSignOut,
   };
 
@@ -352,7 +164,7 @@ export function AppShell({
           </div>
         </main>
 
-        <MobileTabBar value={mobilePane} onChange={setMobilePane} busy={lucaBusy} />
+        <MobileTabBar value={mobilePane} onChange={setMobilePane} busy={chat.lucaBusy} />
       </div>
     </AppShellContext.Provider>
   );
