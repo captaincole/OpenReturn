@@ -13,7 +13,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 const SESSION_COOKIE = "summa_session";
 
-const PUBLIC_PATHS = ["/login", "/setup", "/api/auth", "/preview"];
+const PUBLIC_PATHS = ["/login", "/setup", "/api/auth"];
 
 function isPublic(pathname: string): boolean {
   return PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
