@@ -382,16 +382,17 @@ async function noteFollowUpQuestion(
   carrier: LoopCarrier,
   ruling: FinalRuling,
 ): Promise<string | undefined> {
-  const prompts: Partial<Record<FinalVerdict, { question: string; context: string | undefined }>> = {
-    needs_more_facts: {
-      question: `Confirm the basis for decision \`${carrier.decisionKey}\` — review couldn't ground it.`,
-      context: ruling.whatsMissing,
-    },
-    inaccurate: {
-      question: `Revisit decision \`${carrier.decisionKey}\` with the user — review found it conflicts with the evidence.`,
-      context: ruling.reason,
-    },
-  };
+  const prompts: Partial<Record<FinalVerdict, { question: string; context: string | undefined }>> =
+    {
+      needs_more_facts: {
+        question: `Confirm the basis for decision \`${carrier.decisionKey}\` — review couldn't ground it.`,
+        context: ruling.whatsMissing,
+      },
+      inaccurate: {
+        question: `Revisit decision \`${carrier.decisionKey}\` with the user — review found it conflicts with the evidence.`,
+        context: ruling.reason,
+      },
+    };
   const followUp = prompts[ruling.finalVerdict];
   if (!followUp) return undefined;
 

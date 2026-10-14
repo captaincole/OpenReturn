@@ -90,14 +90,14 @@ const APP_SCHEMA_DDL: string[] = [
            session_secret TEXT NOT NULL,
            created_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
          )`,
-        `CREATE TABLE IF NOT EXISTS filings (
+  `CREATE TABLE IF NOT EXISTS filings (
            id         TEXT PRIMARY KEY,
            tax_year   INTEGER NOT NULL,
            status     TEXT NOT NULL DEFAULT 'draft',
            created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_filings_tax_year ON filings(tax_year)`,
-        `CREATE TABLE IF NOT EXISTS filing_members (
+  `CREATE INDEX IF NOT EXISTS idx_filings_tax_year ON filings(tax_year)`,
+  `CREATE TABLE IF NOT EXISTS filing_members (
            filing_id  TEXT NOT NULL REFERENCES filings(id) ON DELETE CASCADE,
            user_id    TEXT NOT NULL,
            role       TEXT NOT NULL CHECK (role IN ('owner')),
@@ -105,8 +105,8 @@ const APP_SCHEMA_DDL: string[] = [
            revoked_at TEXT,
            PRIMARY KEY (filing_id, user_id)
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_filing_members_user ON filing_members(user_id) WHERE revoked_at IS NULL`,
-        `CREATE TABLE IF NOT EXISTS tax_facts (
+  `CREATE INDEX IF NOT EXISTS idx_filing_members_user ON filing_members(user_id) WHERE revoked_at IS NULL`,
+  `CREATE TABLE IF NOT EXISTS tax_facts (
            id          TEXT PRIMARY KEY,
            user_id     TEXT NOT NULL,
            filing_id   TEXT NOT NULL REFERENCES filings(id) ON DELETE CASCADE,
@@ -117,9 +117,9 @@ const APP_SCHEMA_DDL: string[] = [
            source_note TEXT,
            created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_tax_facts_filing ON tax_facts(filing_id, created_at)`,
-        `CREATE INDEX IF NOT EXISTS idx_tax_facts_key ON tax_facts(filing_id, fact_key)`,
-        `CREATE TABLE IF NOT EXISTS open_questions (
+  `CREATE INDEX IF NOT EXISTS idx_tax_facts_filing ON tax_facts(filing_id, created_at)`,
+  `CREATE INDEX IF NOT EXISTS idx_tax_facts_key ON tax_facts(filing_id, fact_key)`,
+  `CREATE TABLE IF NOT EXISTS open_questions (
            id          TEXT PRIMARY KEY,
            user_id     TEXT NOT NULL,
            filing_id   TEXT NOT NULL REFERENCES filings(id) ON DELETE CASCADE,
@@ -130,8 +130,8 @@ const APP_SCHEMA_DDL: string[] = [
            created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
            resolved_at TEXT
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_open_questions_filing ON open_questions(filing_id, status)`,
-        `CREATE TABLE IF NOT EXISTS ai_decisions (
+  `CREATE INDEX IF NOT EXISTS idx_open_questions_filing ON open_questions(filing_id, status)`,
+  `CREATE TABLE IF NOT EXISTS ai_decisions (
            id                       TEXT PRIMARY KEY,
            user_id                  TEXT NOT NULL,
            filing_id                TEXT NOT NULL REFERENCES filings(id) ON DELETE CASCADE,
@@ -150,8 +150,8 @@ const APP_SCHEMA_DDL: string[] = [
            verdict_at               TEXT,
            latest_review_run_id     TEXT
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_ai_decisions_filing ON ai_decisions(filing_id, created_at)`,
-        `CREATE TABLE IF NOT EXISTS user_documents (
+  `CREATE INDEX IF NOT EXISTS idx_ai_decisions_filing ON ai_decisions(filing_id, created_at)`,
+  `CREATE TABLE IF NOT EXISTS user_documents (
            id           TEXT PRIMARY KEY,
            user_id      TEXT NOT NULL,
            filing_id    TEXT NOT NULL REFERENCES filings(id) ON DELETE CASCADE,
@@ -165,8 +165,8 @@ const APP_SCHEMA_DDL: string[] = [
            created_at   TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
            metadata     TEXT
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_user_documents_filing ON user_documents(filing_id, category, created_at)`,
-        `CREATE TABLE IF NOT EXISTS requested_actions (
+  `CREATE INDEX IF NOT EXISTS idx_user_documents_filing ON user_documents(filing_id, category, created_at)`,
+  `CREATE TABLE IF NOT EXISTS requested_actions (
            id                   TEXT PRIMARY KEY,
            user_id              TEXT NOT NULL,
            filing_id            TEXT NOT NULL REFERENCES filings(id) ON DELETE CASCADE,
@@ -182,8 +182,8 @@ const APP_SCHEMA_DDL: string[] = [
            created_at           TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
            resolved_at          TEXT
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_requested_actions_filing ON requested_actions(filing_id, status, created_at)`,
-        `CREATE TABLE IF NOT EXISTS review_runs (
+  `CREATE INDEX IF NOT EXISTS idx_requested_actions_filing ON requested_actions(filing_id, status, created_at)`,
+  `CREATE TABLE IF NOT EXISTS review_runs (
            id              TEXT PRIMARY KEY,
            decision_id     TEXT NOT NULL,
            user_id         TEXT NOT NULL,
@@ -196,8 +196,8 @@ const APP_SCHEMA_DDL: string[] = [
            completed_at    TEXT,
            duration_ms     INTEGER
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_review_runs_decision ON review_runs(decision_id)`,
-        `CREATE TABLE IF NOT EXISTS review_run_steps (
+  `CREATE INDEX IF NOT EXISTS idx_review_runs_decision ON review_runs(decision_id)`,
+  `CREATE TABLE IF NOT EXISTS review_run_steps (
            id          TEXT PRIMARY KEY,
            run_id      TEXT NOT NULL,
            user_id     TEXT NOT NULL,

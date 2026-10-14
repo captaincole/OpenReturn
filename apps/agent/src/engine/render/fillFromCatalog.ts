@@ -149,7 +149,12 @@ function check(ctx: WriterCtx, fieldId: string, widgetName: string): void {
  * come from PDFRadioGroup.getOptions(). The catalog records the exact
  * label per option; select(label) picks it.
  */
-function selectRadio(ctx: WriterCtx, fieldId: string, widgetName: string, radioOption: string): void {
+function selectRadio(
+  ctx: WriterCtx,
+  fieldId: string,
+  widgetName: string,
+  radioOption: string,
+): void {
   try {
     const f = ctx.pdfForm.getField(widgetName);
     if (f instanceof PDFRadioGroup) {

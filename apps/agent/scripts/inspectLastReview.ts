@@ -62,10 +62,7 @@ async function main() {
   await printRunWithSteps(db, String(d.latest_review_run_id));
 }
 
-async function printRunWithSteps(
-  db: ReturnType<typeof getAppDb>,
-  runId: string,
-): Promise<void> {
+async function printRunWithSteps(db: ReturnType<typeof getAppDb>, runId: string): Promise<void> {
   const run = await db.execute({
     sql: `SELECT id, status, final_verdict, iteration_count, duration_ms, error, started_at, completed_at
           FROM review_runs WHERE id = ?`,

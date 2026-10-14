@@ -373,10 +373,7 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
       inputs,
       "box1b",
     ) as Form1040FilingInfo["qualifiedDividends"],
-    ordinaryDividends: sumInvestmentBox(
-      inputs,
-      "box1a",
-    ) as Form1040FilingInfo["ordinaryDividends"],
+    ordinaryDividends: sumInvestmentBox(inputs, "box1a") as Form1040FilingInfo["ordinaryDividends"],
     form1099FederalWithholding: sumInvestmentBox(
       inputs,
       "box4",

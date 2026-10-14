@@ -122,8 +122,7 @@ async function renderAndStoreForm(
  */
 async function renderMustFileForms(scenario: EvaluatedScenario, target: RenderTarget) {
   const documents: Array<{ formId: string; url: string; filename: string }> = [];
-  const blockers: Array<{ formId: string; reason: string; missingDecisionKey: string | null }> =
-    [];
+  const blockers: Array<{ formId: string; reason: string; missingDecisionKey: string | null }> = [];
   const sidecarForms: Record<string, ReturnType<typeof serializeForm>> = {};
   let totalLinesPopulated = 0;
   let totalCounts = { ok: 0, blocked: 0, unsupported: 0 };

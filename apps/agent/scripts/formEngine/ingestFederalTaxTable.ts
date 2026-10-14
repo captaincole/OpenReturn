@@ -112,7 +112,11 @@ async function run(argv: string[]): Promise<void> {
   const coverage = assertCoverage(rows);
   runSpotChecks(source, rows);
 
-  await fs.writeFile(jsonPath, serializeWithCompactRows(buildHeader(year, prov, coverage), rows), "utf8");
+  await fs.writeFile(
+    jsonPath,
+    serializeWithCompactRows(buildHeader(year, prov, coverage), rows),
+    "utf8",
+  );
   console.log(`${LOG} wrote ${path.relative(process.cwd(), jsonPath)}`);
 }
 

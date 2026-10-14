@@ -66,7 +66,9 @@ async function shaOfFile(path: string): Promise<string> {
  * callers that care can run the search smoke test. Return -1 to make
  * this loud.
  */
-function skippedResult(existing: NonNullable<Awaited<ReturnType<typeof getDocument>>>): IngestResult {
+function skippedResult(
+  existing: NonNullable<Awaited<ReturnType<typeof getDocument>>>,
+): IngestResult {
   return {
     docId: existing.docId,
     sha256: existing.sha256,

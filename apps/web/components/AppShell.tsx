@@ -18,11 +18,7 @@
 
 import { ChatPane } from "@/components/ChatPane";
 import { TopBar } from "@/components/TopBar";
-import {
-  useLucaChat,
-  type ChatMessage,
-  type SendChatOpts,
-} from "@/components/useLucaChat";
+import { useLucaChat, type ChatMessage, type SendChatOpts } from "@/components/useLucaChat";
 import { fetchState, UnauthorizedError, type CaseState } from "@/lib/api";
 import { signOut } from "@/lib/auth";
 import { cn } from "@/lib/cn";

@@ -132,7 +132,10 @@ function addPendingIdentityFacts(
 }
 
 /* Money convenience fields — federal from 1040, state from 540. */
-function extractMoney(form1040: EvaluatedForm<BaseFormField>, form540: EvaluatedForm<BaseFormField>) {
+function extractMoney(
+  form1040: EvaluatedForm<BaseFormField>,
+  form540: EvaluatedForm<BaseFormField>,
+) {
   return {
     totalWages: numericField(form1040.fields, "form-1040.line.1z") ?? 0,
     federalAgi: numericField(form1040.fields, "form-1040.line.11") ?? 0,

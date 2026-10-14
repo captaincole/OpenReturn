@@ -92,7 +92,6 @@ export interface ClassifyBindingsOpts {
   retrievedContext?: RetrievedFieldContext[];
 }
 
-
 export async function classifyBindings(
   opts: ClassifyBindingsOpts,
   onBatchComplete?: (batchIndex: number, totalBatches: number, batchSize: number) => void,

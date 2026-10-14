@@ -171,9 +171,7 @@ async function streamTurn(
       if (chunk.type === "text-delta") {
         const delta = (chunk.payload as { text: string }).text;
         ctx.setMessages((m) =>
-          m.map((msg) =>
-            msg.id === assistantId ? { ...msg, content: msg.content + delta } : msg,
-          ),
+          m.map((msg) => (msg.id === assistantId ? { ...msg, content: msg.content + delta } : msg)),
         );
       }
     },

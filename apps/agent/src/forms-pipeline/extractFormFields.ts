@@ -119,11 +119,7 @@ interface CollectedWidgets {
  * include them, a renderer can write values into widgets that look
  * non-fillable to humans.
  */
-function collectPageWidgets(
-  annots: any[],
-  pageIdx: number,
-  out: CollectedWidgets,
-): PageWidget[] {
+function collectPageWidgets(annots: any[], pageIdx: number, out: CollectedWidgets): PageWidget[] {
   const rawWidgets: Array<{ annot: any; rect: [number, number, number, number] }> = [];
 
   for (const a of annots) {

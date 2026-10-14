@@ -289,7 +289,6 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
   };
 }
 
-
 // ─── Helpers ─────────────────────────────────────────────────────────────
 
 const CONFIDENCE_ORDER: Record<Confidence, number> = {

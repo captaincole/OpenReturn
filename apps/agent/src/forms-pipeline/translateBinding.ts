@@ -9,7 +9,6 @@
 
 import type { ClassifiedBinding } from "./classifyBindings.js";
 
-
 const FACT_TO_SLOT: Record<string, string> = {
   "identity.name.first": "taxpayerFirstName",
   "identity.name.middle_initial": "taxpayerMiddleInitial",
@@ -268,4 +267,3 @@ function shortOrFullKey(fieldId: string, formId: string): string {
 export function quote(s: string): string {
   return JSON.stringify(s);
 }
-

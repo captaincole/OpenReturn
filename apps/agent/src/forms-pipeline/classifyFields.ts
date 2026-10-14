@@ -400,7 +400,14 @@ export async function classifyFields(opts: ClassifyOpts): Promise<Classification
 
   for (let i = 0; i < batches.length; i++) {
     const batch = batches[i];
-    const result = await classifyOneFieldBatch(client, opts, batch, i, batches.length, assignedFieldIds);
+    const result = await classifyOneFieldBatch(
+      client,
+      opts,
+      batch,
+      i,
+      batches.length,
+      assignedFieldIds,
+    );
     if (!result) continue;
     const { raw } = result;
 

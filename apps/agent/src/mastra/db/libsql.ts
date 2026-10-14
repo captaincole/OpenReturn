@@ -56,14 +56,14 @@ const CORPUS_SCHEMA_DDL: string[] = [
            canonical_text_path TEXT NOT NULL,
            ingested_at         TEXT NOT NULL DEFAULT (datetime('now'))
          )`,
-        `CREATE TABLE IF NOT EXISTS ref_pages (
+  `CREATE TABLE IF NOT EXISTS ref_pages (
            doc_id     TEXT NOT NULL REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
            page_num   INTEGER NOT NULL,
            char_start INTEGER NOT NULL,
            char_end   INTEGER NOT NULL,
            PRIMARY KEY (doc_id, page_num)
          )`,
-        `CREATE TABLE IF NOT EXISTS ref_sections (
+  `CREATE TABLE IF NOT EXISTS ref_sections (
            section_id        TEXT PRIMARY KEY,
            doc_id            TEXT NOT NULL REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
            heading           TEXT NOT NULL,
@@ -74,8 +74,8 @@ const CORPUS_SCHEMA_DDL: string[] = [
            char_start        INTEGER NOT NULL,
            char_end          INTEGER NOT NULL
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_ref_sections_doc ON ref_sections(doc_id, ordinal)`,
-        `CREATE TABLE IF NOT EXISTS ref_blocks (
+  `CREATE INDEX IF NOT EXISTS idx_ref_sections_doc ON ref_sections(doc_id, ordinal)`,
+  `CREATE TABLE IF NOT EXISTS ref_blocks (
            block_id            TEXT PRIMARY KEY,
            doc_id              TEXT NOT NULL REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
            section_id          TEXT REFERENCES ref_sections(section_id) ON DELETE SET NULL,
@@ -93,42 +93,42 @@ const CORPUS_SCHEMA_DDL: string[] = [
            -- dim; ref_meta.embedding_model is the real cross-model guard.
            embedding           F32_BLOB(768)
          )`,
-        `CREATE INDEX IF NOT EXISTS idx_ref_blocks_doc_ord ON ref_blocks(doc_id, ordinal)`,
-        `CREATE INDEX IF NOT EXISTS idx_ref_blocks_section ON ref_blocks(section_id, ordinal)`,
-        `CREATE INDEX IF NOT EXISTS idx_ref_blocks_page ON ref_blocks(doc_id, page_num)`,
-        /*
-         * FTS5 mirror of ref_blocks. content = coalesce(contextualized_text,
-         * text), populated at writeDocument time; SQLite FTS5 has no
-         * generated-column equivalent of Postgres's tsvector column. Porter
-         * stemming approximates Postgres's 'english' config. No vector
-         * index; brute-force vector_distance_cos is exact and fast at our
-         * scale (low thousands of blocks).
-         */
-        `CREATE VIRTUAL TABLE IF NOT EXISTS ref_blocks_fts USING fts5(
+  `CREATE INDEX IF NOT EXISTS idx_ref_blocks_doc_ord ON ref_blocks(doc_id, ordinal)`,
+  `CREATE INDEX IF NOT EXISTS idx_ref_blocks_section ON ref_blocks(section_id, ordinal)`,
+  `CREATE INDEX IF NOT EXISTS idx_ref_blocks_page ON ref_blocks(doc_id, page_num)`,
+  /*
+   * FTS5 mirror of ref_blocks. content = coalesce(contextualized_text,
+   * text), populated at writeDocument time; SQLite FTS5 has no
+   * generated-column equivalent of Postgres's tsvector column. Porter
+   * stemming approximates Postgres's 'english' config. No vector
+   * index; brute-force vector_distance_cos is exact and fast at our
+   * scale (low thousands of blocks).
+   */
+  `CREATE VIRTUAL TABLE IF NOT EXISTS ref_blocks_fts USING fts5(
            block_id UNINDEXED,
            doc_id UNINDEXED,
            content,
            tokenize = 'porter unicode61'
          )`,
-        /*
-         * Corpus-level key/value metadata. Today: embedding_model, the
-         * "provider/model" that produced the stored vectors. Search uses it
-         * to refuse query vectors from a different model (db/corpusSearch.ts).
-         */
-        `CREATE TABLE IF NOT EXISTS ref_meta (
+  /*
+   * Corpus-level key/value metadata. Today: embedding_model, the
+   * "provider/model" that produced the stored vectors. Search uses it
+   * to refuse query vectors from a different model (db/corpusSearch.ts).
+   */
+  `CREATE TABLE IF NOT EXISTS ref_meta (
            key   TEXT PRIMARY KEY,
            value TEXT NOT NULL
          )`,
-        /*
-         * Form catalog — the inventory side of the form engine (one row per
-         * (form_id, tax_year) + one per field). The forms-ingest pipeline
-         * writes it (--write-db). The runtime reads the bundled JSON
-         * fixtures instead (engine/catalog.ts loadFromFixtures); the old
-         * loadFromDb loader was removed in the engine/db boundary split.
-         * The catalog lives in corpus.db because it is shared reference
-         * data that ships prebuilt, like the instruction corpus.
-         */
-        `CREATE TABLE IF NOT EXISTS forms (
+  /*
+   * Form catalog — the inventory side of the form engine (one row per
+   * (form_id, tax_year) + one per field). The forms-ingest pipeline
+   * writes it (--write-db). The runtime reads the bundled JSON
+   * fixtures instead (engine/catalog.ts loadFromFixtures); the old
+   * loadFromDb loader was removed in the engine/db boundary split.
+   * The catalog lives in corpus.db because it is shared reference
+   * data that ships prebuilt, like the instruction corpus.
+   */
+  `CREATE TABLE IF NOT EXISTS forms (
            form_id      TEXT NOT NULL,
            tax_year     INTEGER NOT NULL,
            jurisdiction TEXT NOT NULL,
@@ -137,7 +137,7 @@ const CORPUS_SCHEMA_DDL: string[] = [
            updated_at   TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
            PRIMARY KEY (form_id, tax_year)
          )`,
-        `CREATE TABLE IF NOT EXISTS form_fields (
+  `CREATE TABLE IF NOT EXISTS form_fields (
            field_id        TEXT NOT NULL,
            form_id         TEXT NOT NULL,
            tax_year        INTEGER NOT NULL,
