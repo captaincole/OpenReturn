@@ -22,6 +22,29 @@ interface UploadRow {
   size_bytes: number | null;
 }
 
+/*
+ * Load the uploads grid. Returns the cancel function the effect uses as
+ * its cleanup, so a stale response cannot clobber a newer one.
+ */
+function fetchUploads(setUploads: (rows: UploadRow[]) => void): () => void {
+  let cancelled = false;
+  fetch("/api/uploads", { cache: "no-store" })
+    .then(async (res) => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return (await res.json()) as UploadRow[];
+    })
+    .then((rows) => {
+      if (!cancelled) setUploads(rows);
+    })
+    .catch((err) => {
+      console.warn("[documents] failed to load uploads:", err);
+      if (!cancelled) setUploads([]);
+    });
+  return () => {
+    cancelled = true;
+  };
+}
+
 export default function DocumentsTab() {
   const { activeReturn, resetTick, lucaBusy, sendChat, setMobilePane } = useAppShell();
   const [uploads, setUploads] = useState<UploadRow[]>([]);
@@ -30,24 +53,7 @@ export default function DocumentsTab() {
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const loadUploads = useCallback(() => {
-    let cancelled = false;
-    fetch("/api/uploads", { cache: "no-store" })
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return (await res.json()) as UploadRow[];
-      })
-      .then((rows) => {
-        if (!cancelled) setUploads(rows);
-      })
-      .catch((err) => {
-        console.warn("[documents] failed to load uploads:", err);
-        if (!cancelled) setUploads([]);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const loadUploads = useCallback(() => fetchUploads(setUploads), []);
 
   useEffect(() => {
     if (!activeReturn.realDataAvailable) return;
@@ -85,17 +91,7 @@ export default function DocumentsTab() {
   }
 
   if (!activeReturn.realDataAvailable) {
-    return (
-      <div className="mx-auto max-w-2xl px-6 py-16 text-center lg:px-10">
-        <div className="text-[11px] tracking-[0.22em] text-ink-muted uppercase">
-          {activeReturn.label}
-        </div>
-        <h1 className="mt-3 font-serif text-3xl text-ink-primary">No documents yet</h1>
-        <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-ink-secondary">
-          Documents you upload appear here. Switch to your 2025 Return to add files.
-        </p>
-      </div>
-    );
+    return <PlaceholderNotice label={activeReturn.label} />;
   }
 
   return (
@@ -121,41 +117,14 @@ export default function DocumentsTab() {
         onChange={(e) => void handleFiles(e.target.files)}
       />
 
-      <button
-        type="button"
-        onClick={() => fileInputRef.current?.click()}
-        onDragOver={(e) => {
-          e.preventDefault();
-          if (!lucaBusy) setDragOver(true);
-        }}
-        onDragLeave={() => setDragOver(false)}
-        onDrop={(e) => {
-          e.preventDefault();
-          setDragOver(false);
-          if (!lucaBusy) void handleFiles(e.dataTransfer.files);
-        }}
-        disabled={uploading || lucaBusy}
-        className={cn(
-          "w-full cursor-pointer rounded-2xl border-2 border-dashed px-6 py-10 text-center transition-colors",
-          dragOver
-            ? "border-accent/60 bg-accent/5"
-            : "border-border-subtle bg-bg-subtle/40 hover:border-accent/40",
-          (uploading || lucaBusy) && "cursor-not-allowed opacity-60",
-        )}
-      >
-        <div className="text-3xl text-ink-muted">⬆</div>
-        <div className="mt-2 text-sm text-ink-primary">
-          {lucaBusy
-            ? "Wait for Luca to finish before uploading"
-            : uploading
-              ? "Uploading…"
-              : "Drop W-2s, 1099s, or other tax documents here"}
-        </div>
-        <div className="mt-1 text-xs text-ink-muted">PDF, PNG, JPG · up to 10 MB each</div>
-        {!lucaBusy && (
-          <div className="mt-4 text-xs text-accent hover:text-accent-hover">or browse files</div>
-        )}
-      </button>
+      <UploadDropzone
+        uploading={uploading}
+        lucaBusy={lucaBusy}
+        dragOver={dragOver}
+        setDragOver={setDragOver}
+        onBrowse={() => fileInputRef.current?.click()}
+        onDrop={(files) => void handleFiles(files)}
+      />
 
       {error && (
         <div className="mt-3 rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-2.5 text-sm text-red-300">
@@ -245,4 +214,70 @@ function formatUploadedAt(iso: string): string {
   const opts: Intl.DateTimeFormatOptions = { month: "short", day: "numeric" };
   if (d.getFullYear() !== new Date().getFullYear()) opts.year = "numeric";
   return d.toLocaleDateString(undefined, opts);
+}
+
+function PlaceholderNotice({ label }: { label: string }) {
+  return (
+    <div className="mx-auto max-w-2xl px-6 py-16 text-center lg:px-10">
+      <div className="text-[11px] tracking-[0.22em] text-ink-muted uppercase">{label}</div>
+      <h1 className="mt-3 font-serif text-3xl text-ink-primary">No documents yet</h1>
+      <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-ink-secondary">
+        Documents you upload appear here. Switch to your 2025 Return to add files.
+      </p>
+    </div>
+  );
+}
+
+function UploadDropzone({
+  uploading,
+  lucaBusy,
+  dragOver,
+  setDragOver,
+  onBrowse,
+  onDrop,
+}: {
+  uploading: boolean;
+  lucaBusy: boolean;
+  dragOver: boolean;
+  setDragOver: (v: boolean) => void;
+  onBrowse: () => void;
+  onDrop: (files: FileList) => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onBrowse}
+      onDragOver={(e) => {
+        e.preventDefault();
+        if (!lucaBusy) setDragOver(true);
+      }}
+      onDragLeave={() => setDragOver(false)}
+      onDrop={(e) => {
+        e.preventDefault();
+        setDragOver(false);
+        if (!lucaBusy) onDrop(e.dataTransfer.files);
+      }}
+      disabled={uploading || lucaBusy}
+      className={cn(
+        "w-full cursor-pointer rounded-2xl border-2 border-dashed px-6 py-10 text-center transition-colors",
+        dragOver
+          ? "border-accent/60 bg-accent/5"
+          : "border-border-subtle bg-bg-subtle/40 hover:border-accent/40",
+        (uploading || lucaBusy) && "cursor-not-allowed opacity-60",
+      )}
+    >
+      <div className="text-3xl text-ink-muted">⬆</div>
+      <div className="mt-2 text-sm text-ink-primary">
+        {lucaBusy
+          ? "Wait for Luca to finish before uploading"
+          : uploading
+            ? "Uploading…"
+            : "Drop W-2s, 1099s, or other tax documents here"}
+      </div>
+      <div className="mt-1 text-xs text-ink-muted">PDF, PNG, JPG · up to 10 MB each</div>
+      {!lucaBusy && (
+        <div className="mt-4 text-xs text-accent hover:text-accent-hover">or browse files</div>
+      )}
+    </button>
+  );
 }

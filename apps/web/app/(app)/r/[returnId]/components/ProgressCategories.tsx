@@ -260,84 +260,93 @@ function CategoryQuickLinks({
 
   return (
     <div className="mt-5 grid grid-cols-1 gap-4 border-t border-border-subtle pt-4 md:grid-cols-2">
-      <div>
-        <div className="mb-2 text-[10px] tracking-[0.18em] text-ink-muted uppercase">Documents</div>
-        {matchingDocs.length === 0 ? (
-          <div className="text-[12px] text-ink-muted">
-            No matching uploads yet.{" "}
-            <Link href={`/r/${returnId}/documents`} className="text-accent hover:text-accent-hover">
-              Upload →
-            </Link>
-          </div>
-        ) : (
-          <ul className="space-y-1">
-            {matchingDocs.slice(0, 4).map((doc) => (
-              <li key={doc.id}>
-                <a
-                  href={`/documents/${doc.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-2 text-[12px] text-ink-secondary hover:text-ink-primary"
-                >
-                  <span className="text-ink-faint">📎</span>
-                  <span className="truncate">{doc.filename}</span>
-                  <span className="ml-auto shrink-0 text-ink-faint opacity-0 transition-opacity group-hover:opacity-100">
-                    ↗
-                  </span>
-                </a>
-              </li>
-            ))}
-            {matchingDocs.length > 4 && (
-              <li>
-                <Link
-                  href={`/r/${returnId}/documents`}
-                  className="text-[11px] text-accent hover:text-accent-hover"
-                >
-                  +{matchingDocs.length - 4} more →
+      <QuickLinkDocs docs={matchingDocs} returnId={returnId} />
+      <QuickLinkForms forms={matchingForms} returnId={returnId} />
+    </div>
+  );
+}
+
+function QuickLinkDocs({ docs, returnId }: { docs: UploadRow[]; returnId: string }) {
+  return (
+    <div>
+      <div className="mb-2 text-[10px] tracking-[0.18em] text-ink-muted uppercase">Documents</div>
+      {docs.length === 0 ? (
+        <div className="text-[12px] text-ink-muted">
+          No matching uploads yet.{" "}
+          <Link href={`/r/${returnId}/documents`} className="text-accent hover:text-accent-hover">
+            Upload →
+          </Link>
+        </div>
+      ) : (
+        <ul className="space-y-1">
+          {docs.slice(0, 4).map((doc) => (
+            <li key={doc.id}>
+              <a
+                href={`/documents/${doc.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 text-[12px] text-ink-secondary hover:text-ink-primary"
+              >
+                <span className="text-ink-faint">📎</span>
+                <span className="truncate">{doc.filename}</span>
+                <span className="ml-auto shrink-0 text-ink-faint opacity-0 transition-opacity group-hover:opacity-100">
+                  ↗
+                </span>
+              </a>
+            </li>
+          ))}
+          {docs.length > 4 && (
+            <li>
+              <Link
+                href={`/r/${returnId}/documents`}
+                className="text-[11px] text-accent hover:text-accent-hover"
+              >
+                +{docs.length - 4} more →
+              </Link>
+            </li>
+          )}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function QuickLinkForms({ forms, returnId }: { forms: FormSummary[]; returnId: string }) {
+  return (
+    <div>
+      <div className="mb-2 text-[10px] tracking-[0.18em] text-ink-muted uppercase">Forms</div>
+      {forms.length === 0 ? (
+        <div className="text-[12px] text-ink-muted">No forms drafted yet for this category.</div>
+      ) : (
+        <ul className="space-y-2">
+          {forms.map((f) => {
+            const total = Math.max(0, f.fieldCount - f.unsupportedFieldCount);
+            const filled = Math.max(0, total - f.blockedFieldCount);
+            const pct = total === 0 ? 0 : Math.round((filled / total) * 100);
+            return (
+              <li key={f.formId}>
+                <Link href={`/r/${returnId}/forms`} className="group block">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="truncate text-[12px] text-ink-secondary group-hover:text-ink-primary">
+                      {f.title}
+                    </span>
+                    <span className="shrink-0 text-[10px] text-ink-muted tabular-nums">{pct}%</span>
+                  </div>
+                  <div className="mt-1 h-1 overflow-hidden rounded-full bg-bg-elevated">
+                    <div
+                      className={cn(
+                        "h-full transition-all duration-500",
+                        pct === 100 ? "bg-emerald-400" : pct > 0 ? "bg-accent" : "bg-transparent",
+                      )}
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
                 </Link>
               </li>
-            )}
-          </ul>
-        )}
-      </div>
-
-      <div>
-        <div className="mb-2 text-[10px] tracking-[0.18em] text-ink-muted uppercase">Forms</div>
-        {matchingForms.length === 0 ? (
-          <div className="text-[12px] text-ink-muted">No forms drafted yet for this category.</div>
-        ) : (
-          <ul className="space-y-2">
-            {matchingForms.map((f) => {
-              const total = Math.max(0, f.fieldCount - f.unsupportedFieldCount);
-              const filled = Math.max(0, total - f.blockedFieldCount);
-              const pct = total === 0 ? 0 : Math.round((filled / total) * 100);
-              return (
-                <li key={f.formId}>
-                  <Link href={`/r/${returnId}/forms`} className="group block">
-                    <div className="flex items-baseline justify-between gap-2">
-                      <span className="truncate text-[12px] text-ink-secondary group-hover:text-ink-primary">
-                        {f.title}
-                      </span>
-                      <span className="shrink-0 text-[10px] text-ink-muted tabular-nums">
-                        {pct}%
-                      </span>
-                    </div>
-                    <div className="mt-1 h-1 overflow-hidden rounded-full bg-bg-elevated">
-                      <div
-                        className={cn(
-                          "h-full transition-all duration-500",
-                          pct === 100 ? "bg-emerald-400" : pct > 0 ? "bg-accent" : "bg-transparent",
-                        )}
-                        style={{ width: `${pct}%` }}
-                      />
-                    </div>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }
