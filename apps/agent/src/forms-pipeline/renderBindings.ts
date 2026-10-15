@@ -305,7 +305,7 @@ const CONFIDENCE_ORDER: Record<Confidence, number> = {
  */
 function relImport(fromFilePath: string, toRelativePath: string): string {
   /*
-   * toRelativePath is like "src/engine/engine.ts". Turn it into an
+   * toRelativePath is like "src/engine/defineForm.ts". Turn it into an
    * absolute path under the same root as fromFilePath.
    */
   const fromAbs = fromFilePath;

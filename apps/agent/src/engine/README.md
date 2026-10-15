@@ -30,8 +30,10 @@ renderForm(scenario, formId)                    →  filled PDF bytes
 engine/
 ├── index.ts          public API: evaluateScenario, renderForm
 ├── engine.ts         fixpoint evaluator (cross-form refs converge in ≤5 passes)
+├── defineForm.ts     typed binding authoring API (defineForm, sum, floor)
 ├── types.ts          FormField model, DerivationContext
 ├── filingInfo.ts     facts + decisions → typed FilingInfo projection
+├── filingInfoResolvers.ts  per-form resolve<Form>Info slot resolvers
 ├── catalog.ts        widget catalogs (fieldId → PDF widget inventories)
 ├── formSpec.ts       FormSpec shape shared by jurisdiction registries
 ├── registry.ts       composes federal + state into the global FORMS list
@@ -57,9 +59,12 @@ by Mastra and shipped next to the deployed function).
 2. Create `<jurisdiction>/<short>/` here with `types.ts` (the form's
    FormFields — every field must declare `category` and `valueType`; TS
    won't compile otherwise), `filingInfo.ts`, and `bindings.ts`.
-3. Add a `makeFormSpec` entry (+ catalog import) to the jurisdiction's
+3. If the form's `filingInfo.ts` declares slots, add a `resolve<Form>Info`
+   function to `filingInfoResolvers.ts` and spread it in
+   `resolveFilingInfo` (`filingInfo.ts`).
+4. Add a `makeFormSpec` entry (+ catalog import) to the jurisdiction's
    `index.ts`.
-4. Add golden coverage under `tests/scenarios/`.
+5. Add golden coverage under `tests/scenarios/`.
 
 If a new form makes you touch files outside its folder and its jurisdiction
 registry, the registry isn't doing its job — surface the missing abstraction
