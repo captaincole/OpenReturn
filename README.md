@@ -1,6 +1,6 @@
 # Summa by @captaincole — AI Can Do Your Taxes
 
-Summa is a local-capable AI harness that allows you to build all the documents you need to either estimate or file your taxes. This is a project I've been developing 
+Summa is a local-capable AI harness that allows you to build all the documents you need to either estimate or file your taxes.
 
 ## Why? - Let's Break The System...
 
@@ -8,7 +8,7 @@ Taxes shouldn't be as hard as they are today. An entire industry profits from ke
 
 You shouldn't have to pay a private company to help you figure out how much money you have to pay to the government!
 
-This project was going to be a startup, but life changed directions. Now I want this to be a collaborative project that has the greatest impact it can. Join me in disrupting the tax cabal. 
+This project was going to be a startup, but life changed directions. Now I want this to be a collaborative project that has the greatest impact it can.
 
 ## Contents
 
