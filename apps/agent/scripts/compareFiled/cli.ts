@@ -22,7 +22,7 @@
 
 import { execSync } from "node:child_process";
 import { existsSync, writeFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { resolve, sep } from "node:path";
 import { parseArgs } from "node:util";
 import { loadFromFixtures } from "../../src/engine/catalog.js";
 import { evaluateScenario } from "../../src/engine/index.js";
@@ -177,6 +177,12 @@ async function main(): Promise<void> {
     process.exit(1);
   }
   const dir = resolve(positionals[0]);
+  /* Private data never lives inside the project (CLAUDE.md, ".scratch/"). */
+  const project = resolve(process.cwd(), "../..");
+  if (dir === project || dir.startsWith(`${project}${sep}`)) {
+    console.error(`${dir} is inside this project. Keep the data folder outside it.`);
+    process.exit(1);
+  }
   if (values.init) return writeTemplates(dir);
   if (!existsSync(resolve(dir, "index.ts"))) {
     console.error(`No ${dir}/index.ts. Run with --init first.`);

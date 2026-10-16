@@ -39,7 +39,9 @@ All commands below run from `apps/agent/`.
 
 ## Step 1 — Create your folder
 
-Pick a folder outside the repo. This creates it with example files:
+Pick a folder **outside the project**, somewhere your AI coding tools for
+this repo can't read. The kit refuses a folder inside the project. This
+creates it with example files:
 
 ```bash
 npx tsx scripts/compareFiled/cli.ts ~/taxes/2025-return --init
