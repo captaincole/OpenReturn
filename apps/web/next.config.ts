@@ -20,8 +20,12 @@ const nextConfig: NextConfig = {
   /*
    * Hosts that can reach dev internals (/_next/*, HMR websocket) from
    * another device on the LAN. Next 16 returns 403 to them otherwise.
+   * Set DEV_ALLOWED_ORIGINS in .env.development (comma-separated).
    */
-  allowedDevOrigins: ["192.168.1.20", "my-laptop.local"],
+  allowedDevOrigins: (process.env.DEV_ALLOWED_ORIGINS ?? "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
 };
 
 export default nextConfig;
