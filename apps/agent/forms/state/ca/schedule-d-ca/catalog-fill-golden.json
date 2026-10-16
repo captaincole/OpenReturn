@@ -1,0 +1,1131 @@
+{
+  "formId": "schedule-d-ca",
+  "fieldCount": 125,
+  "entries": [
+    {
+      "fieldId": "schedule-d-ca.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1001",
+          "text": "T-1M8FY"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1002",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1a.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1005",
+          "text": "4,179"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1a.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1003",
+          "text": "T-QJ868"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1a.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1007",
+          "text": "4,239"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1a.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1006",
+          "text": "5,640"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1a.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1004",
+          "text": "6,306"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1b.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1010",
+          "text": "1,665"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1b.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1008",
+          "text": "T-145J2"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1b.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1012",
+          "text": "4,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1b.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1011",
+          "text": "2,106"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1b.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1009",
+          "text": "9,992"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1c.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1015",
+          "text": "2,120"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1c.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1013",
+          "text": "T-18SJE"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1c.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1017",
+          "text": "3,297"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1c.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1016",
+          "text": "2,944"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1c.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1014",
+          "text": "4,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1d.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1020",
+          "text": "2,516"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1d.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1018",
+          "text": "T-1VP2M"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1d.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1022",
+          "text": "1,768"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1d.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1021",
+          "text": "9,981"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1d.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1019",
+          "text": "8,549"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1e.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1025",
+          "text": "8,717"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1e.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1023",
+          "text": "T-1AS7Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1e.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1027",
+          "text": "3,849"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1e.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1026",
+          "text": "7,856"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1e.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1024",
+          "text": "5,082"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1f.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1030",
+          "text": "8,828"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1f.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1028",
+          "text": "T-F5UDB"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1f.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1032",
+          "text": "3,648"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1f.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1031",
+          "text": "1,963"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1f.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 1029",
+          "text": "3,215"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1g.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2003",
+          "text": "2,409"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1g.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2001",
+          "text": "T-3L4U5"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1g.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2005",
+          "text": "9,799"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1g.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2004",
+          "text": "6,888"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1g.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2002",
+          "text": "6,254"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1h.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2008",
+          "text": "9,348"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1h.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2006",
+          "text": "T-7LB30"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1h.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2010",
+          "text": "1,720"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1h.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2009",
+          "text": "2,274"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1h.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2007",
+          "text": "5,320"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1i.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2013",
+          "text": "3,319"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1i.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2011",
+          "text": "T-1WK4C"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1i.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2015",
+          "text": "6,046"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1i.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2014",
+          "text": "3,020"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1i.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2012",
+          "text": "5,816"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1j.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2018",
+          "text": "5,479"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1j.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2016",
+          "text": "T-135UZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1j.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2020",
+          "text": "1,393"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1j.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2019",
+          "text": "2,619"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1j.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2017",
+          "text": "4,736"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1k.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2023",
+          "text": "8,007"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1k.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2021",
+          "text": "T-V8NIG"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1k.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2025",
+          "text": "8,615"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1k.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2024",
+          "text": "3,998"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1k.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2022",
+          "text": "6,471"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1l.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2028",
+          "text": "7,182"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1l.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2026",
+          "text": "T-1FR13"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1l.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2030",
+          "text": "9,245"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1l.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2029",
+          "text": "9,160"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1l.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2027",
+          "text": "7,140"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1m.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2033",
+          "text": "8,409"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1m.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2031",
+          "text": "T-OYASI"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1m.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2035",
+          "text": "7,981"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1m.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2034",
+          "text": "8,755"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1m.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 2032",
+          "text": "3,584"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1n.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3003",
+          "text": "9,704"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1n.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3001",
+          "text": "T-1IL5L"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1n.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3005",
+          "text": "9,417"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1n.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3004",
+          "text": "9,348"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1n.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3002",
+          "text": "8,466"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1o.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3008",
+          "text": "1,134"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1o.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3006",
+          "text": "T-1A9TJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1o.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3010",
+          "text": "3,686"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1o.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3009",
+          "text": "1,782"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1o.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3007",
+          "text": "9,317"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1p.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3013",
+          "text": "3,923"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1p.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3011",
+          "text": "T-1LQKP"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1p.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3015",
+          "text": "5,888"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1p.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3014",
+          "text": "6,882"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1p.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3012",
+          "text": "4,920"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1q.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3018",
+          "text": "6,009"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1q.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3016",
+          "text": "T-9HEO7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1q.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3020",
+          "text": "1,427"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1q.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3019",
+          "text": "9,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1q.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3017",
+          "text": "4,342"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1r.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3023",
+          "text": "8,259"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1r.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3021",
+          "text": "T-XEQQZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1r.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3025",
+          "text": "3,509"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1r.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3024",
+          "text": "1,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1r.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3022",
+          "text": "5,506"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1s.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3028",
+          "text": "5,360"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1s.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3026",
+          "text": "T-JFDPB"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1s.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3030",
+          "text": "5,704"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1s.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3029",
+          "text": "9,913"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1s.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3027",
+          "text": "7,365"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1t.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3033",
+          "text": "4,481"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1t.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3031",
+          "text": "T-XNHUR"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1t.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3035",
+          "text": "5,827"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1t.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3034",
+          "text": "1,377"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1t.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 3032",
+          "text": "9,412"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.10",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4020",
+          "text": "4,968"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.11",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4021",
+          "text": "9,668"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.12a",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4022",
+          "text": "4,727"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.12b",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4023",
+          "text": "1,888"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1u.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4003",
+          "text": "2,196"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1u.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4001",
+          "text": "T-ZLFEC"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1u.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4005",
+          "text": "4,283"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1u.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4004",
+          "text": "1,019"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1u.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4002",
+          "text": "9,403"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1v.cost_basis",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4008",
+          "text": "9,203"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1v.description",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4006",
+          "text": "T-120KI"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1v.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4010",
+          "text": "5,850"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1v.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4009",
+          "text": "4,470"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1v.sales_price",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4007",
+          "text": "8,888"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.2.gain",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4012",
+          "text": "2,172"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.2.loss",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4011",
+          "text": "1,165"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.3",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4013",
+          "text": "8,256"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.4",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4014",
+          "text": "4,939"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.5",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4015",
+          "text": "3,217"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.6",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4016",
+          "text": "4,249"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.7",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4017",
+          "text": "4,480"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.8",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4018",
+          "text": "8,491"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.9",
+      "widgets": [
+        {
+          "widgetName": "540 sch D - 4019",
+          "text": "7,723"
+        }
+      ]
+    }
+  ]
+}

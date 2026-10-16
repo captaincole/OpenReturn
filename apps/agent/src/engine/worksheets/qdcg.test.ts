@@ -10,22 +10,25 @@ import { describe, expect, it } from "vitest";
 import { computeQdcg } from "./qdcg.js";
 
 describe("computeQdcg", () => {
-  it("matches high-income golden", () => {
+  it("high-income single filer — gains in the 15% and 20% bands", () => {
+    // Fake figures, checked by hand against the 2025 rate schedule.
     const r = computeQdcg({
       taxableIncome: 600_000,
       qualifiedDividends: 1_000,
       /*
-       * The caller computes the smaller of Sched D L15 ($85,000) and
-       * L16 ($80,000), with blank/loss treated as 0. Short-term losses
-       * pulled L16 below L15 here, so L3 = L16 = 80,000, not the
-       * higher L15.
+       * The caller computes the smaller of Sched D L15 and L16, with
+       * blank/loss treated as 0. Here L3 = 80,000.
        */
       netLongTermGain: 80_000,
       filingStatus: "single",
       taxYear: 2025,
     });
 
-    expect(r.tax).toBeCloseTo(166676.5, 2);
+    expect(r.breakdown.line5).toBe(519000); // ordinary bucket
+    expect(r.breakdown.line18).toBe(2160); // 14,400 × 15%
+    expect(r.breakdown.line21).toBe(13320); // 66,600 × 20%
+    expect(r.breakdown.line22).toBe(151197); // 57,231 + 35% × (519,000 − 250,525) = 151,197.25
+    expect(r.tax).toBe(166677);
   });
 
   it("matches Alejandro's golden — single filer, $381 qual divs + $2,250 LTCG", () => {

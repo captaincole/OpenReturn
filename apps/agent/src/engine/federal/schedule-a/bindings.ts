@@ -7,7 +7,7 @@
  * Generated at: 2026-05-27T16:08:48.440Z
  */
 
-import { defineForm, floor, sum } from "../../defineForm.js";
+import { defineForm, floor, roundDollars, sum } from "../../defineForm.js";
 import { SSN } from "../../values.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
 import type { ScheduleA } from "./types.js";
@@ -59,15 +59,14 @@ export function register(): void {
         return typeof agi === "number" ? agi : undefined;
       },
       /*
-       * Line 3 = line 2 × 7.5%, rounded UP to whole dollars per the
-       * project's Math.ceil convention (CLAUDE.md, "Whole-dollar
-       * rounding").
+       * Line 3 = line 2 × 7.5%, rounded to the nearest dollar (CLAUDE.md,
+       * "Whole-dollar rounding").
        */
       "0.line.3_agi_multiplied": (f) => {
         if (f["0.line.1_medical_dental_expenses"] === undefined) return undefined;
         const line2 = f["0.line.2_agi_from_1040"];
         if (typeof line2 !== "number") return undefined;
-        return Math.ceil(line2 * 0.075);
+        return roundDollars(line2 * 0.075);
       },
       /*
        * Line 4 = line 1 minus line 3, floored at 0 per the instruction

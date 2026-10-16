@@ -329,8 +329,9 @@ function isLikelyFullFieldId(key: string): boolean {
  * without casts. The runtime `typeof v === "number"` filter keeps the
  * math honest.
  *
- * An unsupported or not-yet-resolved upstream term contributes 0 rather
- * than blocking the sum. To block the sum when any term is missing, write
+ * An unsupported upstream term contributes 0 rather than blocking the
+ * sum. A cross-form term that is not evaluated yet does not: the engine
+ * re-runs the binding on the next pass (pendingReads.ts). To block the sum when any term is missing, write
  * the arithmetic by hand and return undefined from the binding.
  */
 export function sum(...values: unknown[]): number {
@@ -345,6 +346,21 @@ export function sum(...values: unknown[]): number {
 export function floor(min: number, value: unknown): number {
   if (typeof value !== "number" || !Number.isFinite(value)) return min;
   return Math.max(min, value);
+}
+
+/**
+ * Whole dollars, nearest — every tax-form money line (CLAUDE.md,
+ * "Whole-dollar rounding"). The IRS rule: drop under 50 cents, raise
+ * 50–99 cents to the next dollar (by magnitude). Snaps to cents first,
+ * so a float sum like 202887.49999999997 does not round the wrong way.
+ * Blank stays blank.
+ */
+export function roundDollars(value: number): number;
+export function roundDollars(value: number | undefined): number | undefined;
+export function roundDollars(value: number | undefined): number | undefined {
+  if (typeof value !== "number" || !Number.isFinite(value)) return undefined;
+  const cents = Math.round(Math.abs(value) * 100) / 100;
+  return Math.sign(value) * Math.floor(cents + 0.5);
 }
 
 /**

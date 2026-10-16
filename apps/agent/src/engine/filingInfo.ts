@@ -25,9 +25,17 @@
  */
 
 import type { Form1040FilingInfo } from "./federal/1040/filingInfo.js";
+import type { Form8889FilingInfo } from "./federal/8889/filingInfo.js";
+import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import type { Form8959FilingInfo } from "./federal/8959/filingInfo.js";
+import type { Form8960FilingInfo } from "./federal/8960/filingInfo.js";
+import type { Form8995AFilingInfo } from "./federal/8995-a/filingInfo.js";
+import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
+import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
+import type { Schedule2FilingInfo } from "./federal/schedule-2/filingInfo.js";
 import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
+import type { ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
 import {
   makeResolverInputs,
@@ -35,12 +43,18 @@ import {
   resolve540Info,
   resolve8949Info,
   resolve8959Info,
+  resolve8960Info,
   resolveBaseInfo,
+  resolveSchedule1Info,
+  resolveSchedule2Info,
   resolveScheduleAInfo,
+  resolveScheduleBInfo,
   resolveScheduleCaInfo,
   resolveScheduleDInfo,
 } from "./filingInfoResolvers.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
+import type { Form5805FilingInfo } from "./state/ca/5805/filingInfo.js";
+import { resolve5805Info } from "./state/ca/5805/resolveInfo.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
 import type { FilingStatus, Phone, SSN } from "./values.js";
 
@@ -97,11 +111,18 @@ export interface BaseFilingInfo {
 export type FilingInfo = BaseFilingInfo &
   Form1040FilingInfo &
   Form540FilingInfo &
+  Form5805FilingInfo &
   ScheduleCaFilingInfo &
   Form8949FilingInfo &
   ScheduleDFilingInfo &
   ScheduleAFilingInfo &
-  Form8959FilingInfo;
+  ScheduleBFilingInfo &
+  Form8889FilingInfo &
+  Form8959FilingInfo &
+  Form8960FilingInfo &
+  Form8995AFilingInfo &
+  Schedule1FilingInfo &
+  Schedule2FilingInfo;
 
 // ─── Resolver (hand-coded stand-in for the AI layer) ─────────────────────
 
@@ -125,10 +146,17 @@ export function resolveFilingInfo(opts: {
     ...resolveBaseInfo(inputs),
     ...resolve1040Info(inputs),
     ...resolve540Info(inputs),
+    ...resolve5805Info(inputs),
     ...resolveScheduleCaInfo(inputs),
     ...resolve8949Info(inputs),
     ...resolveScheduleDInfo(inputs),
+    ...resolve8889Info(inputs),
     ...resolve8959Info(inputs),
+    ...resolve8960Info(inputs),
+    ...resolve8995AInfo(inputs),
+    ...resolveSchedule1Info(inputs),
+    ...resolveSchedule2Info(inputs),
     ...resolveScheduleAInfo(inputs),
+    ...resolveScheduleBInfo(inputs),
   };
 }

@@ -12,10 +12,12 @@
  * that the form accessor and BaseFilingInfo cannot reach.
  */
 
+import type { Form8889FilingInfo } from "../../../federal/8889/filingInfo.js";
 import type { BaseFilingInfo } from "../../../filingInfo.js";
 import type { EngineDerivation } from "../../../types.js";
 
-export interface ScheduleCaFilingInfo extends BaseFilingInfo {
+export interface ScheduleCaFilingInfo
+  extends BaseFilingInfo, Pick<Form8889FilingInfo, "hsaEmployerContributions"> {
   /**
    * Schedule CA (540) must-file determination. Driven by the
    * `decisions.scope.must_file_schedule_ca` AI decision. True when the

@@ -1,0 +1,63 @@
+/*
+ * Form 8889 slot resolver (composed by resolveFilingInfo). Lives next to
+ * the form; the shared readers come from resolverInputs.ts.
+ */
+
+import { HSA_COVERAGE_KEYS, type HsaCoverageType } from "../../facts/index.js";
+import { factsInCategory, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import type { Form8889FilingInfo } from "./filingInfo.js";
+
+const SA_KEY_RE = /^account\.[^.]+\.hsa_distributions\.[^.]+$/;
+
+/*
+ * Default: required when any HSA fact exists (coverage, W-2 box 12 code
+ * W, or a 1099-SA). An explicit `decisions.scope.must_file_8889` wins.
+ */
+export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
+  const { factByKey } = inputs;
+  const coverageType = factByKey.get(HSA_COVERAGE_KEYS.coverageType) as HsaCoverageType | undefined;
+  const employer = employerContributions(inputs);
+  const distributions = factsInCategory(inputs, "hsa").filter((row) => SA_KEY_RE.test(row.key));
+  const r = resolveMustFile(inputs.decisionByKey, {
+    explicitKey: "decisions.scope.must_file_8889",
+    fallbacks: [
+      {
+        rule: "fallback: HSA coverage, W-2 box 12 code W, or 1099-SA present",
+        value: coverageType !== undefined || employer !== undefined || distributions.length > 0,
+      },
+    ],
+  });
+  return {
+    mustFile8889: r.value as Form8889FilingInfo["mustFile8889"],
+    mustFile8889Derivation: r.derivation,
+    hsaCoverageType: coverageType,
+    hsaCoverageMonths: numberFact(factByKey.get(HSA_COVERAGE_KEYS.coverageMonths)),
+    hsaOwnContributions: numberFact(factByKey.get(HSA_COVERAGE_KEYS.ownContributions)),
+    hsaEmployerContributions: employer,
+    hsaDistributionsTotal:
+      distributions.length > 0
+        ? distributions.reduce(
+            (t, row) => t + (numberFact((row.value as { box1?: unknown }).box1) ?? 0),
+            0,
+          )
+        : undefined,
+    hsaDistributionsAllQualified: factByKey.get(HSA_COVERAGE_KEYS.distributionsAllQualified) as
+      boolean | undefined,
+  };
+}
+
+/* Sum of W-2 box 12 code W across employers; undefined when no W-2 has one. */
+function employerContributions(inputs: ResolverInputs): number | undefined {
+  let total: number | undefined;
+  for (const row of factsInCategory(inputs, "wages")) {
+    const box12 = (row.value as { box12?: Array<{ code: string; amount: number }> }).box12 ?? [];
+    for (const entry of box12) {
+      if (entry.code.toUpperCase() === "W") total = (total ?? 0) + entry.amount;
+    }
+  }
+  return total;
+}
+
+function numberFact(v: unknown): number | undefined {
+  return typeof v === "number" && Number.isFinite(v) ? v : undefined;
+}

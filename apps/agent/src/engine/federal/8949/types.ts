@@ -3,7 +3,7 @@
  * Source: forms/federal/8949/catalog.json
  * Form: Sales and Other Dispositions of Capital Assets (form-8949, tax year 2025)
  * Fields: 200
- * 
+ *
  * Hand edits are overwritten on the next regeneration. To change a
  * field shape, edit the catalog and re-run forms:emit-types.
  */

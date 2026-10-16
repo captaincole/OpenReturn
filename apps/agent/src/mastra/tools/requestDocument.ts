@@ -22,7 +22,7 @@ export const requestDocumentUpload = createTool({
     documentType: z
       .string()
       .describe(
-        "Short canonical name of the document, e.g. 'W-2', '1099-DIV', '1099-INT', 'K-1', '1098'. Don't include the year here.",
+        "Short canonical name of the document, e.g. 'W-2', '1099-DIV', '1099-INT', '1099-B', '1099-DA', '1099-MISC', '1099-R', '1099-SA', 'K-1', '1098'. Don't include the year here.",
       ),
     title: z
       .string()

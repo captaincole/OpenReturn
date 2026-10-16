@@ -7,6 +7,7 @@
  */
 
 import { resolve } from "node:path";
+import type { FilingInfo } from "./filingInfo.js";
 
 /*
  * Offline paths anchor at cwd. Tests, scripts, and refdocs tooling all
@@ -63,6 +64,19 @@ export interface FormSpec {
    * That is harmless as long as no scenario asks to file the form.
    */
   register?: () => void;
+  /**
+   * Forms filed as several copies (Form 8949: one box per page). The
+   * engine evaluates copy 0; render/renderCopies.ts evaluates the others
+   * with `select(info, n)` and merges them into one PDF.
+   */
+  copies?: FormCopies;
+}
+
+export interface FormCopies {
+  /** How many copies to file (at least 1). */
+  count: (info: FilingInfo | undefined) => number;
+  /** FilingInfo that makes the bindings fill copy `index`. */
+  select: (info: FilingInfo | undefined, index: number) => FilingInfo | undefined;
 }
 
 export function makeFormSpec(args: {
@@ -71,6 +85,7 @@ export function makeFormSpec(args: {
   displayName: string;
   relativeDir: string;
   register?: () => void;
+  copies?: FormCopies;
 }): FormSpec {
   return {
     ...args,

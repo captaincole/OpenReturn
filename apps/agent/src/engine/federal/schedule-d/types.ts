@@ -3,7 +3,7 @@
  * Source: forms/federal/schedule-d/catalog.json
  * Form: Capital Gains and Losses (schedule-d, tax year 2025)
  * Fields: 53
- * 
+ *
  * Hand edits are overwritten on the next regeneration. To change a
  * field shape, edit the catalog and re-run forms:emit-types.
  */

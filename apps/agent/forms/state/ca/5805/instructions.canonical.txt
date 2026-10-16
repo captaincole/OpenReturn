@@ -1,0 +1,661 @@
+FTB 5805 Instructions 2025 Page 1
+2025 Instructions for Form FTB 5805
+Underpayment of Estimated Tax by Individuals and Fiduciaries
+General Information
+Estimated Tax Payments – Taxpayers are required
+to pay 30% of the required annual payment
+for the first required installment, 40% of the
+required annual payment for the second required
+installment, no installment is due for the third
+required installment, and 30% of the required
+annual payment for the fourth required installment.
+For more information, get the instructions for
+Form 540‑ES, Estimated Tax for Individuals, or
+Form 541‑ES, Estimated Tax for Fiduciaries.
+You must make estimated tax payments if
+you expect to owe at least $500 ($250 if
+married/registered domestic partner (RDP) filing
+separately) in tax for 2025. If in the prior year
+your tax liability, less any credits for the prior
+year, was less than $500 ($250 for married/RDP
+filing separately) you are not subject to the
+underpayment of estimated tax penalty.
+Taxpayers with California adjusted gross income
+(AGI) equal to or greater than $1,000,000 (or
+$500,000 if married/RDP filing separately) must
+use the tax on their 2025 tax return to figure their
+penalty if they are subject to the underpayment of
+estimated tax penalty.
+The California Behavioral Health Services Act,
+imposes an additional 1% tax on taxable income
+over $1,000,000 and is included in the calculation
+of the estimated tax.
+Alternative Minimum Tax (AMT) is included in the
+calculation of estimated tax.
+The underpayment of estimated tax penalty
+shall not apply to the extent the underpayment
+of an installment was created or increased
+by any provision of law that is chaptered
+during and operative for the taxable year of
+the underpayment. To request a waiver of
+underpayment of estimated penalty, follow the
+directions under General Information C.
+A Purpose
+Use form FTB 5805, Underpayment of Estimated
+Tax by Individuals and Fiduciaries, to see if you
+owe a penalty for underpaying your estimated tax
+and, if you do, to figure the amount of the penalty.
+B Who Must File
+Generally, you do not have to complete this
+form. If you owe a penalty, the Franchise Tax
+Board (FTB) figures the penalty for you and sends
+you a bill after you have filed your tax return. You
+must pay the penalty within 15 days of the billing
+to avoid additional interest charges.
+Important: If you answer “Yes” to any of the
+questions in Part I (estates and trusts, see
+General Information E), complete this form and
+attach it to the back of your tax return.
+C Waiver of the Penalty
+You may request a waiver of the penalty if either
+one of the following apply:
+# You underpaid an estimated tax installment
+due to a casualty, disaster, or other unusual
+circumstance and it would be against equity
+and good conscience to impose the penalty.
+# You retired after age 62 or became disabled in
+2024 or 2025 and your underpayment was due
+to reasonable cause and not willful neglect.
+To request a waiver do all of the following:
+# Check the “Yes” box on form FTB 5805, Part I,
+Question 1, and in the space provided, explain
+why you are requesting a waiver of the
+estimated penalty. If you need additional space,
+attach a statement. Be sure to include your
+name and tax ID number to any statement you
+attach.
+# Complete form FTB 5805 through Part II,
+line 12 (Worksheet II, Regular Method to
+Figure Your Underpayment and Penalty,
+line 13 if you use the regular method) without
+regard to the waiver. Write the amount you
+want waived in parentheses on the dotted line
+next to Part II, line 13 (Worksheet II, line 14
+if you use the regular method). Subtract this
+amount from the total penalty you figured
+without regard to the waiver, and enter the
+result on Part II, line 13 (Worksheet II, line 14
+if you use the regular method).
+# Check the box on Form 540, California
+Resident Income Tax Return, line 113;
+Form 540NR, California Nonresident or
+Part‑Year Resident Income Tax Return, line 123;
+or Form 541, California Fiduciary Income Tax
+Return, line 45.
+# Attach form FTB 5805 to the back of your
+tax return.
+D Annualized Income
+Installment Method
+If your income varied during the year and you
+use the annualized income installment method to
+determine your estimate payment requirements,
+you must complete form FTB 5805, including
+Side 3 and Side 4. Attach it to the back of your tax
+return. Also, check the box on Form 540, line 113;
+Form 540NR, line 123; or Form 541, line 45 for
+the underpayment of estimated tax.
+E Estates and Trusts
+Estates and grantor trusts, which receive the
+residue of the decedent’s estate, are required to
+make estimated income tax payments for any year
+ending two or more years after the date of the
+decedent’s death. If you answer “Yes” to Part I,
+Question 4, complete Part I only and attach form
+FTB 5805 to the back of your tax return.
+Exempt trusts should use form FTB 5806,
+Underpayment of Estimated Tax by Corporations.
+F Nonresidents and New
+Residents
+The penalty for the underpayment of estimated
+tax applies to nonresidents and new residents.
+See the conditions listed in the box labeled
+“Important” on Side 1 of form FTB 5805.
+In 2001, California changed the method
+used to calculate loss carryovers, deferred
+deductions, and deferred income for nonresident
+and part‑year resident taxpayers. This law
+changed the tax computation to recognize
+those items, and established a new method of
+determining percentages for computing tax for all
+nonresidents and part‑year residents. California
+changed the nonresident tax form (Form 540NR)
+to more clearly show that nonresidents are taxed
+by California only on their California taxable
+income. For more information, get FTB Pub. 1100,
+Taxation of Nonresidents and Individuals Who
+Change Residency.
+California law is compatible with the federal
+Servicemembers Civil Relief Act (Public
+Law 108‑189). This means that servicemembers
+domiciled outside of California, and their
+spouses/RDPs, may exclude the servicemember’s
+military pay from gross income when computing
+the tax rate on nonmilitary income.
+For more information, see California Revenue
+and Taxation Code (R&TC) Section 17140.5 and
+get FTB Pub. 1032, Tax Information for Military
+Personnel.
+G Farmers and Fishermen
+You are considered a farmer or fisherman if at least
+two‑thirds (2/3) of your annual gross income for
+2024 or 2025 is from farming or fishing. Farmers
+and fishermen are required to make one estimate
+payment. For calendar year taxpayers, the due
+date is January 15, 2026. If you file Form 540,
+Form 540NR, or Form 541 and pay the entire
+tax due by March 1, 2026, you do not owe a
+penalty for underpaying estimated tax. Use form
+FTB 5805F, Underpayment of Estimated Tax by
+Farmers and Fishermen.
+H Due Dates for Estimated Tax
+Installments
+If you are a calendar year taxpayer, the estimated
+tax installment due dates for 2025 were:
+# First payment — April 15, 2025
+# Second payment — June 15, 2025
+# Third payment — September 15, 2025
+# Fourth payment — January 15, 2026
+Fiscal year filers must pay estimated tax
+installments on the 15th day of the 4th, 6th,
+and 9th months of their fiscal year, and the 1st
+month of the following fiscal year.
+The penalty is figured separately for each due
+date. Therefore, you may owe a penalty for an
+earlier installment due date, even if you pay
+enough tax later to make up the underpayment.
+When the estimate due date falls on a weekend
+or holiday, the deadline to file and pay without
+penalty is extended to the next business day.
+I Filing an Early Return in
+Place of the 4th Installment
+If you file your 2025 tax return before
+February 1, 2026, and pay the entire balance
+due, you do not have to make your last estimate
+payment. Fiscal year filers must file their tax
+return and pay their tax before the first day of
+the 2nd month after the end of their taxable year.
+J Amended Tax Return
+If you file an amended tax return:
+# On or before the due date of your original
+return, use the tax, credit, and other amounts
+shown on your amended tax return to figure
+your penalty for underpayment of estimated tax.
+# After the due date of the original tax return,
+you must use the amounts shown on the
+original tax return to figure the penalty.
+K Penalty Rates
+The rates used to determine the amount of
+your penalty are established at various dates
+throughout the year. If an installment of estimated
+
+
+
+Page 2 FTB 5805 Instructions 2025
+tax for any quarter remained unpaid or underpaid
+for more than one rate period, the penalty for that
+underpayment will be figured using more than
+one rate when applicable.
+The following rates apply to the 2025
+computation period:
+# 8% 4‑15‑25 through 6‑30‑25
+# 7% 7‑1‑25 through 4‑15‑26
+Fiscal year filers: The rates for the periods
+July 1, 2026 through December 31, 2026 and
+January 1, 2027 through June 30, 2027 will
+be determined by the FTB in March 2026 and
+September 2026, respectively.
+Call the FTB’s automated phone service to get
+updated penalty rates. Call the number below,
+and follow the recorded instructions. Enter code
+number 403 when instructed.
+The automated phone service is available in
+English and Spanish to callers with touch‑tone
+telephones 24 hours a day, seven days a week.
+Telephone: 800.852.5711 from within the
+United States
+916.845.6500 from outside the
+United States
+California
+Relay
+Service: 711 or 800.735.2929 for persons
+with hearing or speaking limitations
+Specific Line Instructions
+Part II – Computing the
+Required Annual Payment
+Use this part to figure the amount of estimated
+tax that you were required to pay.
+Certain high‑income taxpayers are required to
+use 110% (instead of 100%) of the tax shown on
+their previous year’s return in the computation
+of the required annual payments. See the
+instructions for line 5.
+Line 1 – Enter your 2025 tax liability from
+the following (excluding tax on lump‑sum
+distributions and accumulation distribution of
+trusts):
+# Form 540, add line 48, line 61, line 62, and
+any Internal Revenue Code (IRC) Section
+453A interest from line 63.
+# Form 540NR, add line 63, line 71, line 72, and
+any IRC Section 453A interest from line 73.
+# Form 541, line 28.
+Line 3 – Enter the 2025 amounts from
+the following:
+# Form 540, line 71 and line 73.
+# Form 540NR, line 81 and line 83.
+# Form 541, line 29 and line 31.
+Line 5 – Enter your 2024 tax liability from the
+following (excluding tax on lump‑sum distributions
+and accumulation distribution of trusts):
+# Form 540, add line 48, line 61, line 62, and
+any IRC Section 453A interest from line 63.
+# Form 540NR, add line 63, line 71, line 72, and
+any IRC Section 453A interest from line 73.
+# Form 541, line 28.
+If the California AGI shown on your 2024
+California tax return is more than $150,000,
+or more than $75,000 if married/RDP filing a
+separate tax return, then enter 110% (1.10) of the
+tax liability from your 2024 tax return on line 5.
+If the California AGI on your 2025 tax return is
+equal to or greater than $1,000,000/$500,000 if
+married/RDP filing separately, enter 90% (.90) of
+the tax liability from your 2025 tax return on line 5.
+If you did not file a tax return for 2024, or if
+your 2024 taxable year was less than 12 months,
+do not complete line 5. Instead, enter the amount
+from line 2 on line 6. If your California AGI is
+equal to or greater than $1,000,000/$500,000 for
+married/RDP filing separately, use line 2.
+Short Method
+You may use the short method only if you are
+a calendar year taxpayer and either one of the
+following apply:
+# You made no estimated tax payments or
+your only payments were California income
+tax withheld.
+# You paid estimated tax on the required
+due dates.
+If any payment was made earlier than the due
+date, you may use the short method, but using it
+may cause you to pay a larger penalty than using
+the regular method. If the payment was only a few
+days early, the difference is likely to be small.
+You may not use the short method if either of the
+following apply:
+# You made any estimated tax payment late.
+# You answered “Yes” to Part I, Question 3.
+If you can use the short method, complete
+Part II, line 1 through line 10 to figure your total
+underpayment for the year, and line 11 through
+line 13 to figure the penalty.
+Part III – Annualized Income
+Installment Method Schedule
+If your income varied during the year, you
+may be able to lower or eliminate the amount
+of one or more required installments by
+using the annualized income installment
+method. Use Part III to figure the required
+installment amount to enter on Worksheet II,
+line 1, on page 4 of the instructions.
+Complete line 1 through line 16 to figure your
+current year tax, per quarter, based on your income
+as you earned it. Then, complete line 17 through
+line 23 to figure your required installment for each
+quarter. (The total of all amounts entered on line 23
+should equal the amount from Part II, line 6.)
+If you use the annualized income installment
+method for any payment due date, you must use
+it for all payment due dates. To figure the amount
+of each required installment, Part III automatically
+selects the smaller of the annualized income
+installment or the regular installment (increased
+by the amount saved by using the annualized
+income installment method in figuring earlier
+installments).
+If you are filing Form 540NR, see Form 540NR
+Instructions for Part III at the end of this section.
+Line 1 – Figure your total income minus your
+adjustments to income for each period from
+January 1, 2025 to the ending date of each period
+(the amounts are cumulative). Include your share
+of partnership or S corporation income or loss
+items for the period.
+Line 2 – Form 541 filers. Do not use amounts
+shown in column (a) through column (d). Instead,
+use 6, 3, 1.71429, and 1.09091, respectively, as
+the annualization amounts.
+Line 6 – Multiply line 4 by line 5 and enter
+the result on line 6. Your annualized itemized
+deductions are limited if, in any quarter, federal
+annualized income (use Federal Annualized
+Income Worksheet below) is greater than:
+# $504,411 (married/RDP filing jointly or
+qualifying surviving spouse/RDP).
+# $252,203 (single or married/RDP
+filing separately).
+# $378,310 (head of household).
+Use the following worksheet to figure the amount
+to enter on Part III, line 6 for each period federal
+annualized income reaches the above amounts.
+1 Enter the amount from
+Part III, line 4 . . . . . . . . . . . . . . . . . 1_______
+2 Add the amounts on federal
+Schedule A (Form 1040), line 4,
+line 9, and line 15 plus any gambling
+losses included on line 16 . . . . . . . 2_______
+3 Subtract line 2 from line 1 . . . . . . 3_______
+4 Enter the number from
+Part III, line 5 . . . . . . . . . . . . . . . . . 4_______
+5 Multiply the amount on line 1
+by line 4 . . . . . . . . . . . . . . . . . . . . . 5_______
+If the amount on line 3 is zero,
+stop here and enter the amount
+from line 5 on Part III, line 6.
+6 Multiply the amount on line 3
+by the number on line 4 . . . . . . . . 6_______
+7 Multiply the amount on
+line 6 by 80% (.80) . . . . . . . . . . . . 7_______
+(continued on page 3)
+1 Enter your federal AGI* for each period
+(see instructions for federal Form 2210, Schedule AI, Part I,
+line 1). (Estates and trusts, enter your taxable income
+without your exemption for each period.) . . . . . . . . . . . . . . . . 1
+2 Annualization amounts. (Estates and trusts, see instructions
+for federal Form 2210, Schedule AI, Part I, line 2). . . . . . . . . . 2 4 2.4 1.5 1
+3 Annualized federal income. Multiply line 1 by line 2 . . . . . . . . 3
+*Note: If you are a military servicemember domiciled outside of California, subtract your military pay from your federal AGI.
+Federal Annualized Income Worksheet
+Estates and trusts, do not use the period ending dates shown to the
+right. Instead, use the following: 2/28/25, 4/30/25, 7/31/25,
+and 11/30/25.
+(a)
+1/1/25-3/31/25
+(b)
+1/1/25-5/31/25
+(c)
+1/1/25-8/31/25
+(d)
+1/1/25-12/31/25
+
+
+
+FTB 5805 Instructions 2025 Page 3
+8 Enter the amount from
+Federal Annualized
+Income Worksheet, line 3 . . . . . . . 8_______
+9 Enter the amount shown
+from line 6 line instructions
+for your filing status . . . . . . . . . . . 9_______
+10 Subtract line 9 from line 8 . . . . . .10_______
+11 Multiply the amount on
+line 10 by 6% (.06) . . . . . . . . . . . 11_______
+12 Enter the smaller of line 7 or
+line 11 . . . . . . . . . . . . . . . . . . . . . .12_______
+13 Subtract line 12 from line 5.
+Enter the result here and on
+Part III, line 6 . . . . . . . . . . . . . . . .13_______
+Line 7 – Enter the total standard deduction
+allowed for your filing status in each column even
+if you itemized your deductions.
+Line 10 – Form 541 filers. Figure the tax on the
+amount in each column of line 9 using the tax rate
+schedule in your tax booklet. Also, include any
+tax from:
+# Form FTB 5870A, Tax on Accumulation
+Distribution of Trusts
+# IRC Section 453A tax
+Line 11 – If your exemption credits were limited
+by AGI, it may be to your advantage to make a
+separate computation for each period. If you
+choose, you may complete the exemption credit
+worksheet in your tax booklet for each period.
+If you filed Form 540NR, complete the AGI
+Limitation Worksheet found in your tax booklet
+and transfer the amount from line n to form
+FTB 5805, Part III, line 11.
+Line 13 – Enter the special credits you are entitled
+to because of events that occurred during the
+months shown in the column headings.
+Credit Limitation – If your special credits were
+limited by tentative minimum tax (TMT), it
+may be to your advantage to make a separate
+computation for each period. If you choose,
+you may complete a separate Schedule P (540,
+540NR, or 541), Alternative Minimum Tax and
+Credit Limitations, for each period.
+Line 14b – Figure the alternative minimum tax
+and behavioral health services tax you owe based
+on income earned during the periods shown in
+the column headings. For column (d), enter the
+amounts from your 2025 Form 540, line 61 and
+line 62; 2025 Form 540NR, line 71 and line 72; or
+2025 Form 541, line 26 and line 27.
+Form 540NR Instructions for Part III
+Use these instructions only if you are filing
+Form 540NR.
+If you are a nonresident military servicemember
+domiciled outside of California, subtract your
+military pay from your federal AGI.
+Line 1 – Enter your total AGI for each period.
+Your total AGI is your AGI for the period from all
+sources.
+Line 12 – Form 540NR filers. Complete
+Worksheet I, Prorated Tax for Form 540NR Filers,
+below.
+California AGI is all of the income you earned
+while you were a California resident plus any
+income received from sources within California
+while you were a nonresident, less applicable
+income adjustments. For more information,
+get the instructions for Schedule CA (540NR),
+California Adjustments – Nonresidents or
+Part‑Year Residents.
+Line 13 – Refigure Form 540NR, line 51 through
+line 62. Prorate the credits on line 51 through
+line 53 using the ratio from Worksheet I, line N.
+Instructions for Worksheet II –
+Regular Method to Figure Your
+Underpayment and Penalty
+Part I — Figure Your Underpayment
+Line 1 – Enter in column (a) through column (d)
+the amount of your required installment. For most
+taxpayers, this is the amount shown on form
+FTB 5805, Side 2, Part II, line 6 multiplied by
+30% for column (a) and column (d), enter ‑0‑ in
+column (c), and 40% for column (b). If you use
+the annualized income installment method, enter
+the amounts from form FTB 5805, Side 4, Part III,
+line 23.
+Line 2 – Enter the estimate payments made by
+the date at the top of each column.
+Include in column (a) any overpayment of tax
+from your 2024 tax return that you elected to
+apply to the 2025 estimated tax.
+Enter in column (a) and column (d) the result
+of the amount shown on form FTB 5805, Part ll,
+line 3 multiplied by 30%, enter ‑0‑ in column (c)
+and 40% for column (b).
+For withheld California income tax, you are
+considered to have paid the required amounts
+on each payment due date unless you can show
+otherwise. If you can show that your California
+withholding was otherwise withheld, answer
+“Yes” to Part I, Question 3 and enter the uneven
+amounts withheld on the lines provided on Part I,
+Question 3.
+If you file your tax return and pay the tax due
+before February 1, 2026, enter the amount of tax
+paid with your tax return in column (d). In this
+case, you will not owe a penalty for the estimate
+payment due by January 15, 2026.
+Line 8 – If line 8 is zero for all payment periods,
+you do not owe a penalty. But if you answer “Yes”
+for any question on form FTB 5805, Side 1, Part I,
+you must file form FTB 5805 with your tax return.
+Part II — Figure the Penalty
+Figure the penalty by applying the appropriate rate
+against each underpayment shown on line 8. The
+penalty is figured for the number of days that the
+underpayment remained unpaid.
+The rates are established at various times
+throughout the year. If an underpayment remained
+unpaid for more than one rate period, the penalty
+on that underpayment will be figured using more
+than one rate period.
+A Tax on annualized total taxable income from Part III, line 10 . . . . .
+B Annualized total taxable income from Part III, line 9 . . . . . . . . . . . .
+C Annualized California tax rate: Divide line A by line B. . . . . . . . . . . . .__ __ __ __ .__ __ __ __ .__ __ __ __ .__ __ __ __
+D California AGI. Enter the amount from Schedule CA (540NR),
+Part IV, line 1 that is applicable for the period . . . . . . . . . . . . . . . . .
+E Annualization amounts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4 2.4 1.5 1
+F Annualized California AGI. Multiply line D by line E . . . . . . . . . . . . .
+G Annualized Total AGI. Enter the amount from Part III, line 3.. . . . . .
+H Annualized itemized or standard deduction rate. Divide line F by
+line G. Do not enter more than 1.0000 . . . . . . . . . . . . . . . . . . . . . . __ . __ __ __ __ __ . __ __ __ __ __ . __ __ __ __ __ . __ __ __ __
+I Enter the amount from Part III, line 8 . . . . . . . . . . . . . . . . . . . . . . .
+J Prorated standard deduction or annualized itemized deductions.
+Multiply line I by line H . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+K Annualized California taxable income. Subtract line J from line F . .
+L Annualized California prorated tax before exemption credit.
+Multiply line K by line C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+M Exemption credits. Enter the amount from Part III, line 11 . . . . . . .
+N Annualized credit rate. Divide line K by line B . . . . . . . . . . . . . . . . . __ . __ __ __ __ __ . __ __ __ __ __ . __ __ __ __ __ . __ __ __ __
+O Annualized prorated exemption credits. Multiply line M by line N . .
+P Annualized California tax after exemption credits. Subtract
+line O from line L. Enter this amount here and on Part III, line 12 . .
+Worksheet I Prorated Tax for Form 540NR Filers. 1/1/25 to
+3/31/25
+1/1/25 to
+5/31/25
+1/1/25 to
+8/31/25
+1/1/25 to
+12/31/25
+(continued on page 4)
+
+
+
+Page 4 FTB 5805 Instructions 2025
+Use line 10 and line 12 to figure the number of days
+the underpayment remained unpaid. Use line 11
+and line 13 to figure the actual penalty amount by
+applying the rate against the underpayment for the
+number of days it remained unpaid.
+Maximum days in a rate period per quarter:
+Installment Days in Rate
+Period 1 Period 2
+1 76 289
+2 15 289
+3 212
+4 90
+Payment Application. Your payments are applied
+to any underpayment balance on an earlier
+installment. It does not matter if you designate a
+payment for a later period.
+Example: You had an underpayment for the
+April 15th installment of $500. The June 15th
+installment required a payment of $1,200. On
+June 10th, you sent in a payment of $1,200 to
+cover the June 15th installment. However, $500 of
+this payment is considered to be for the April 15th
+installment. The penalty for the April 15th installment
+is figured to June 10th. The amount of the payment
+to be applied to the June 15th installment is $700.
+Subsequent Payments. For purposes of
+computing the penalty, it may be helpful to make
+a list of any payments that you made after the
+timely payments entered in Part I, line 2. If you
+made no other payments, follow the line‑by‑line
+instructions for Part II.
+If you made subsequent payments, you may need
+to make additional computations for the applicable
+column on the worksheet. However, if the payment
+reduced the underpayment to zero, there are no
+further computations to make for that column. In
+that case, you count the number of days from the
+installment due date to the date paid.
+If a subsequent payment does not reduce the
+underpayment to zero, you will need to make an
+additional computation in the column.
+# First, count the number of days from the
+due date to the date paid and use the
+underpayment amount from Worksheet II,
+line 8.
+# Second, count the number of days from the
+payment date to the end of the rate period,
+and subtract the amount of the subsequent
+payment from the underpayment amount from
+Worksheet II, line 8.
+# Third, apply the rate for the applicable period.
+Note: A year is 365 days, a leap year is 366
+days, reflected in the penalty computation on
+Worksheet II, line 11 and line 13.
+Franchise Tax Board Privacy
+Notice on Collection
+Our privacy notice can be found in annual tax
+booklets or online. Go to ftb.ca.gov/privacy to
+learn about our privacy policy statement, or go to
+ftb.ca.gov/forms and search for 1131 to locate
+FTB 1131 EN‑SP, Franchise Tax Board Privacy
+Notice on Collection ‑ Aviso de Privacidad del
+Franchise Tax Board sobre la Recaudación. To
+request this notice by mail, call 800.338.0505 and
+enter form code 948 when instructed.
+Part II Figure the Penalty.
+Complete line 10 through line 13 of each column before going to the next column.
+14 PENALTY. Add amounts on line 11 and line 13 in all columns. Enter the total here, on form FTB 5805, Side 2, Part II, line 13,
+and on Form 540, line 113; Form 540NR, line 123; or Form 541, line 45, and check the box on that line . . . . . . . . . . . . . . . . . . . . . . .▶ 14 $
+Worksheet II Regular Method to Figure Your Underpayment and Penalty.
+Part I Figure Your Underpayment.
+Payment Due Dates
+(a)
+4/15/25
+(b)
+6/15/25
+(c)
+9/15/25
+(d)
+1/15/26
+1 Required Installments. See instructions. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+2 Estimated tax paid and tax withheld. See instructions. For column (a) only,
+also enter the amount from line 2 on line 6. (If line 2 is equal to or more than
+line 1 for all payment periods, stop here; you do not owe the penalty. Do not
+file form FTB 5805 unless you answer “Yes’’ to a question in Part I). . . . . . . . . . . . . . . 2
+Complete line 3 through line 9 of each column before going to the next column.
+3 Enter amount, if any, from line 9 of previous column . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+4 Add line 2 and line 3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+5 Add amounts on line 7 and line 8 of the previous column . . . . . . . . . . . . . . . . . . . . . . . 5
+6 Subtract line 5 from line 4. If zero or less, enter ‑0‑. For column (a) only,
+enter the amount from line 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+7 If the amount on line 6 is zero, subtract line 4 from line 5. Otherwise, enter ‑0‑ . . . . . . 7
+8 Underpayment. If line 1 is equal to or more than line 6, subtract line 6 from
+line 1. Then go to line 3 of next column. Otherwise, go to line 9 . . . . . . . . . . . . . . . . . ▶ 8
+9 Overpayment. If line 6 is more than line 1, subtract line 1 from line 6.
+Then go to line 3 of next column . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Rate Period 1: 4/15/25 6/15/25 9/15/25 1/15/26
+April 15, 2025 – June 30, 2025
+10 Number of days from the date shown above line 10 to the date the amount
+on line 8 was paid or 6/30/25, whichever is earlier . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+Days: Days:
+11 Underpayment Number of
+on line 8 X days on line 10 X .08
+(see instructions) 365 ▶ 11 $ $
+Rate Period 2: 7/1/25 7/1/25 9/15/25 1/15/26
+July 1, 2025 – April 15, 2026
+12 Number of days from the date shown above line 12 to the date the amount
+on line 8 was paid or 4/15/26, whichever is earlier . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+Days: Days: Days: Days:
+13 Underpayment Number of
+on line 8 X days on line 12 X .07
+(see instructions) 365 ▶ 13 $ $ $ $

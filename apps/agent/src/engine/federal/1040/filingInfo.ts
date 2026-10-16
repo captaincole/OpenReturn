@@ -46,6 +46,11 @@ export interface Form1040FilingInfo extends BaseFilingInfo {
   /** Sum of 1099-INT Box 8 (tax-exempt interest) across all accounts. */
   taxExemptInterestTotal?: Money;
 
+  /** Lines 4a–4c (IRA, SEP, SIMPLE: 1099-R box 7 IRA/SEP/SIMPLE checked). */
+  iraDistributions?: RetirementLine;
+  /** Lines 5a–5c (pensions and annuities: every other 1099-R). */
+  pensionDistributions?: RetirementLine;
+
   /**
    * Refund the federal overpayment in full, or apply some to 2026
    * estimated tax. This is the federal decision. The state analog lives
@@ -60,4 +65,16 @@ export interface Form1040FilingInfo extends BaseFilingInfo {
    * line 17. Undefined or "standard" keeps the standard deduction path.
    */
   useItemizedDeductions?: boolean;
+}
+
+/**
+ * One 1040 retirement line pair. `taxable` is undefined when any 1099-R
+ * leaves box 2a blank with "taxable amount not determined" (Simplified
+ * Method, not modeled). `rollover` is true when any distribution is a
+ * direct rollover (box 7 code G or H): the "Rollover" box next to (b).
+ */
+export interface RetirementLine {
+  gross: number;
+  taxable?: number;
+  rollover: boolean;
 }

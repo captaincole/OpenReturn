@@ -22,10 +22,11 @@ import { CATALOGS, runCatalogFillCheck } from "./catalogFill.js";
 import { runScenario } from "./runScenario.js";
 import { alejandroScenario } from "./scenarios/alejandro/index.js";
 import { alexScenario } from "./scenarios/alex/index.js";
+import { jordanScenario } from "./scenarios/jordan/index.js";
 import { marcusScenario } from "./scenarios/marcus/index.js";
 import type { RunResult, Scenario } from "./types.js";
 
-const SCENARIOS: Scenario[] = [alexScenario, alejandroScenario, marcusScenario];
+const SCENARIOS: Scenario[] = [alexScenario, alejandroScenario, marcusScenario, jordanScenario];
 
 async function main() {
   const filters = process.argv
@@ -36,7 +37,10 @@ async function main() {
     filters.length === 0 || filters.some((f) => name.toLowerCase().includes(f));
 
   const catalogs = CATALOGS.filter((c) => matches(`catalog-fill:${c.formId}`));
-  const scenarios = SCENARIOS.filter((s) => matches(s.name));
+  /* A skipped scenario runs only when a filter names it. */
+  const scenarios = SCENARIOS.filter((s) =>
+    s.skip ? filters.some((f) => s.name.toLowerCase().includes(f)) : matches(s.name),
+  );
 
   if (catalogs.length + scenarios.length === 0) {
     console.error(`No checks match filter(s): ${filters.join(", ")}`);
@@ -65,12 +69,24 @@ async function main() {
   const record = (r: RunResult) => {
     results.push(r);
     if (r.passed) {
-      console.log(`✓ ${r.name.padEnd(colWidth)} ${r.durationMs}ms`);
+      const nm =
+        (r.knownMismatches?.length ? ` — ${r.knownMismatches.length} known mismatch(es)` : "") +
+        (r.notModeled?.length ? ` — ${r.notModeled.length} line(s) not modeled` : "");
+      console.log(`✓ ${r.name.padEnd(colWidth)} ${r.durationMs}ms${nm}`);
+      /* The full list only when the scenario was asked for by name. */
+      if (filters.length > 0) {
+        for (const line of r.knownMismatches ?? []) console.log(`    known: ${line}`);
+        for (const line of r.notModeled ?? []) console.log(`    not modeled: ${line}`);
+      }
     } else {
       console.error(
         `✗ ${r.name.padEnd(colWidth)} ${r.durationMs}ms — ${r.failures.length} failure(s):`,
       );
       for (const f of r.failures) console.error(`    ${f}`);
+      if (filters.length > 0 && r.notModeled?.length) {
+        console.error(`    — ${r.notModeled.length} line(s) not modeled:`);
+        for (const line of r.notModeled) console.error(`    ${line}`);
+      }
     }
   };
 

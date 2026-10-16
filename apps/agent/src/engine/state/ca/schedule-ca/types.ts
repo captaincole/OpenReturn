@@ -3,7 +3,7 @@
  * Source: forms/state/ca/schedule-ca/catalog.json
  * Form: California Adjustments — Residents (schedule-ca, tax year 2025)
  * Fields: 253
- * 
+ *
  * Hand edits are overwritten on the next regeneration. To change a
  * field shape, edit the catalog and re-run forms:emit-types.
  */
@@ -16,7 +16,8 @@ export interface ScheduleCa {
   /**  Part One. Income Adjustment Schedule. Section A. Income from federal Form 1040 or 1040-SR. Line 1a. Total amount from federal Form or Forms W-2, box 1. See instructions. Column A. Federal Amounts. (taxable amounts from your federal tax return). */
   "0.line.1a_federal": number | undefined;
   /**
-   *  Line 1a. Column B. Subtractions.   *See instructions. 
+   *  Line 1a. Column B. Subtractions.
+   *See instructions.
    */
   "0.line.1a_subtractions": number | undefined;
   /**  Line 1a. Column C. Additions. See instructions. */

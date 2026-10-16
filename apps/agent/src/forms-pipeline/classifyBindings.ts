@@ -21,7 +21,7 @@ import { formatIndexedForm, loadCatalogIndex, type CatalogIndex } from "./catalo
 import { BINDING_TOOLS, SYSTEM_PROMPT } from "./classifyBindingsPrompt.js";
 import type { RetrievedFieldContext } from "./retrieveContext.js";
 
-const MODEL = "claude-sonnet-4-6";
+const MODEL = "claude-opus-5-5";
 const MAX_TOKENS = 16000;
 const FIELDS_PER_BATCH = 10;
 const CONCURRENCY = 3;
@@ -133,15 +133,24 @@ export async function classifyBindings(
     onBatchComplete,
   );
 
+  /*
+   * A missing must-file binding should not discard the run. Fall back to
+   * the naming convention; the renderer emits a TODO when no FilingInfo
+   * slot exists for it, so a human writes the rule.
+   */
+  const mustFile = result.mustFile ?? {
+    decisionKey: `decisions.scope.must_file_${opts.formId.replace(/^form-/, "").replace(/-/g, "_")}`,
+    rationale: "Classifier returned no must-file binding; defaulted to the naming convention.",
+  };
   if (!result.mustFile) {
-    throw new Error(
-      "classifyBindings: no batch returned a mustFile binding — check the prompt + tool schema.",
+    console.warn(
+      `[classify-bindings] no must-file binding returned; using ${mustFile.decisionKey}`,
     );
   }
 
   return {
     bindings: result.bindings,
-    mustFile: result.mustFile,
+    mustFile,
     usage: result.usage,
   };
 }
@@ -299,8 +308,10 @@ If any field references a different form (e.g. "from Form 1040 line 11b"), call 
  * Multi-turn conversation. On each tool_use response from Claude:
  *   - lookup_form_fields → execute, append tool_result, continue
  *   - emit_bindings → final answer; return
- * MAX_LOOKUPS_PER_BATCH bounds the worst case: once the budget is spent,
- * tool_choice forces emit_bindings.
+ * MAX_LOOKUPS_PER_BATCH bounds the worst case. The 5.5 models reject a
+ * forced tool_choice, so once the budget is spent, further lookups get an
+ * error result that tells the model to call emit_bindings now. A model
+ * that keeps looking up after that fails the batch.
  */
 async function runBindingConversation(
   client: Anthropic,
@@ -310,6 +321,7 @@ async function runBindingConversation(
 ): Promise<{ payload: EmitPayload; usage: Usage }> {
   const usage = zeroUsage();
   let lookups = 0;
+  let overBudgetTurns = 0;
 
   while (true) {
     const response = await client.messages.create({
@@ -317,10 +329,7 @@ async function runBindingConversation(
       max_tokens: MAX_TOKENS,
       system: SYSTEM_PROMPT,
       tools: BINDING_TOOLS,
-      tool_choice:
-        lookups >= MAX_LOOKUPS_PER_BATCH
-          ? { type: "tool", name: "emit_bindings" }
-          : { type: "auto" },
+      tool_choice: { type: "auto" },
       messages,
     });
     addUsage(usage, response.usage);
@@ -345,6 +354,13 @@ async function runBindingConversation(
      * assistant + tool_result blocks, and loop.
      */
     messages.push({ role: "assistant", content: response.content });
+    if (lookups >= MAX_LOOKUPS_PER_BATCH) {
+      if (overBudgetTurns++ > 0) {
+        throw new Error(`Batch ${batchLabel}: kept calling lookups after the budget was spent.`);
+      }
+      messages.push({ role: "user", content: budgetSpentResults(toolUses) });
+      continue;
+    }
     const { toolResults, lookupCount } = executeLookups(toolUses, catalogIndex);
     lookups += lookupCount;
     messages.push({ role: "user", content: toolResults });
@@ -366,6 +382,16 @@ function parseEmitPayload(
     );
   }
   return { bindings: raw.bindings, must_file: raw.must_file ?? null };
+}
+
+/* Error results for lookups made after the budget is spent. */
+function budgetSpentResults(toolUses: Anthropic.ToolUseBlock[]): Anthropic.ToolResultBlockParam[] {
+  return toolUses.map((tu) => ({
+    type: "tool_result",
+    tool_use_id: tu.id,
+    content: `Lookup budget spent (${MAX_LOOKUPS_PER_BATCH}). Do not look up more forms. Call emit_bindings now; use \`unsupported\` for any field you could not resolve.`,
+    is_error: true,
+  }));
 }
 
 /* Resolve each lookup_form_fields call against the in-memory catalog index. */

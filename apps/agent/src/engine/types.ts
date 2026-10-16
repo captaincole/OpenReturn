@@ -189,6 +189,8 @@ export interface BaseFormField<V = unknown> {
   /** Shape of the field's value. Informs rendering and input semantics. */
   valueType: FieldValueType;
   result: DerivationResult<V>;
+  /** Field ids the binding read to compute `result`. Set by the engine. */
+  reads?: string[];
 }
 
 /**

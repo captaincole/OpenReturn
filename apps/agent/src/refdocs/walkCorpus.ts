@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import type { Dirent } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
+import type { ParserStyle } from "./parse";
 
 /*
  * Walks the forms/ tree for instructions.pdf files and pairs each PDF
@@ -21,6 +22,11 @@ export interface RefDocSidecar {
   publisher: string;
   taxYear: number | null;
   sourceUrl: string | null;
+  /*
+   * Heading-detection style. The sidecar may set "parserStyle"
+   * explicitly; otherwise it follows the publisher (FTB → "ftb").
+   */
+  parserStyle: ParserStyle;
 }
 
 export interface CorpusEntry {
@@ -125,11 +131,18 @@ function coerceSidecar(v: unknown): RefDocSidecar | null {
   }
   const taxYear = typeof o.taxYear === "number" ? o.taxYear : null;
   const sourceUrl = typeof o.sourceUrl === "string" ? o.sourceUrl : null;
+  const parserStyle: ParserStyle =
+    o.parserStyle === "irs" || o.parserStyle === "ftb"
+      ? o.parserStyle
+      : o.publisher === "FTB"
+        ? "ftb"
+        : "irs";
   return {
     docId: o.docId,
     title: o.title,
     publisher: o.publisher,
     taxYear,
     sourceUrl,
+    parserStyle,
   };
 }

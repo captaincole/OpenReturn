@@ -8,6 +8,8 @@ import { getCaseState } from "../tools/caseState";
 import { dismissRequestedAction } from "../tools/dismissRequestedAction";
 import { generateTaxDocuments } from "../tools/generateTaxDocuments";
 import { ingest1099Consolidated } from "../tools/ingest1099Consolidated";
+import { ingest1099R } from "../tools/ingest1099R";
+import { ingest1099SA } from "../tools/ingest1099SA";
 import { ingestW2 } from "../tools/ingestW2";
 import { requestDocumentUpload } from "../tools/requestDocument";
 import { listOpenQuestionsTool, recordTaxFact, resolveOpenQuestion } from "../tools/taxFacts";
@@ -34,6 +36,8 @@ export const luca = new Agent({
     getCaseState,
     ingestW2,
     ingest1099Consolidated,
+    ingest1099R,
+    ingest1099SA,
     recordTaxFact,
     recordAIDecision,
     // Surface specific document requests to the dashboard as action cards.

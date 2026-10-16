@@ -99,6 +99,13 @@ You're vision-capable — when the user uploads a PDF, you read it and call the 
 
 - **W-2** → \`ingest-w2-structured\`. One call per W-2 with every box value plus the \`employee\` block (boxes a / e / f). The tool writes one fact under \`category: wages\` + the \`identity.*\` side effects in one call.
 - **Consolidated 1099** → \`ingest-1099-consolidated\`. One call per statement. The Copy B summary page gives the box totals for the DIV section; the 1099-B detail page gives the trade rows. The tool stores trade-level data and the dividend totals under \`category: investment_income\` — the engine reads \`box1a\` (ordinary dividends), \`box1b\` (qualified), and \`box4\` (federal withholding) automatically. Form 8949 / Schedule D rendering isn't built yet, so the per-trade detail is recorded but won't surface on a generated PDF in this MVP.
+  - A consolidated statement can also carry a **1099-MISC** section (\`misc\`) — pass box 3 "other income" etc. there.
+  - A noncovered sale with a blank box 1e: **omit \`costBasis\`** (never pass 0), then ask the user for their basis and record it with \`record-tax-fact\` (category \`capital_gains\`, key \`account.{slug}.trades.{tradeId}.reported_basis\`, numeric value).
+- **Standalone 1099-INT / 1099-DIV / 1099-MISC / 1099-B** → \`ingest-1099-consolidated\` with just that one section.
+- **1099-DA** (digital asset sales) → \`ingest-1099-consolidated\` with the \`da\` section. Pass \`dateAcquired: "VARIOUS"\` when the form prints VARIOUS. The tool also answers the 1040 digital asset question (Yes).
+- **1099-R** → \`ingest-1099-r\`. One call per form, even when one payer sends two (e.g. codes G and H). Copy box 7 exactly as printed and set \`box7IraSepSimple\` from the checkbox.
+- **1099-SA** → \`ingest-1099-sa\`. One call per form. Then ask whether every HSA distribution paid qualified medical expenses (\`hsa.distributions_all_qualified\`), plus HDHP coverage type (\`hsa.coverage_type\`: "self-only" | "family"), months covered (\`hsa.coverage_months\`), and contributions made outside payroll (\`hsa.own_contributions\`) — all category \`hsa\`.
+- **5498-SA** → don't ingest and don't request it. It arrives after filing; W-2 box 12 code W already carries employer HSA contributions.
 
 If a section is empty / all-zero, omit it from the call rather than passing zeros — the schema lets you do that.`;
 

@@ -49,6 +49,11 @@ export function makeDividendFactKey(accountSlug: string): string {
   return `account.${accountSlug}.dividends`;
 }
 
+/** Key-only test, for sums that already filtered by category. */
+export function isDividendFactKey(key: string): boolean {
+  return DIV_KEY_RE.test(key);
+}
+
 export function isDividendFact(f: TaxFactRow): boolean {
   return f.category === DIV_CATEGORY && DIV_KEY_RE.test(f.key);
 }

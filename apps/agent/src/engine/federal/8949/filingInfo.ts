@@ -6,9 +6,10 @@
  * row on the form.
  */
 
-import type { TradeFactValue } from "../../facts/index.js";
+import type { Form8949Box, TradeFactValue } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { EngineDerivation } from "../../types.js";
+import type { BoxTotals, Form8949Copy } from "./copyPlan.js";
 
 export interface Form8949FilingInfo extends BaseFilingInfo {
   /**
@@ -33,4 +34,14 @@ export interface Form8949FilingInfo extends BaseFilingInfo {
    */
   shortTermTrades?: TradeFactValue[];
   longTermTrades?: TradeFactValue[];
+
+  /** The copies to file (copyPlan.ts). Empty when there are no sales. */
+  form8949Copies?: Form8949Copy[];
+  /**
+   * Which copy the Form 8949 bindings fill. The engine evaluates copy 0;
+   * the renderer re-evaluates with 1, 2, … for the other copies.
+   */
+  form8949CopyIndex?: number;
+  /** Column totals per box across all copies, in cents. Schedule D reads these. */
+  form8949BoxTotals?: Partial<Record<Form8949Box, BoxTotals>>;
 }

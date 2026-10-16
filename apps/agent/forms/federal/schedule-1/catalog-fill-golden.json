@@ -1,0 +1,654 @@
+{
+  "formId": "schedule-1",
+  "fieldCount": 72,
+  "entries": [
+    {
+      "fieldId": "schedule-1.0.header.form_1099k_error_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "5,510"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-17D8C"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "4,301"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+          "text": "1,704"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.2a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "7,311"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.2b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "5,734"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "6,693"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.4_form_4684",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.4_form_4797",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "2,073"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "7,486"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "7,617"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.7_amount_repaid",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line7_ReadOrder[0].f1_11[0]",
+          "text": "1,320"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.7_repaid_checkbox",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line7_ReadOrder[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line8a_ReadOrder[0].f1_13[0]",
+          "text": "1,690"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "7,547"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "2,015"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "4,411"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "6,251"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "6,621"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "9,998"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "8,816"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "2,257"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "1,062"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "3,104"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "5,299"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "6,990"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8n",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "3,328"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8o",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "1,399"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8p",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "8,330"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "1,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "9,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "9,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "6,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8u",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "7,281"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8v",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+          "text": "6,382"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8z",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+          "text": "8,459"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.8z_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line8z_ReadOrder[0].f1_35[0]",
+          "text": "T-7DNS8"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.0.line.9",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+          "text": "8,118"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.11",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+          "text": "6,142"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.12",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+          "text": "2,297"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.13",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+          "text": "6,347"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.14",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+          "text": "3,270"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.14_storage_fees_only",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+          "text": "6,947"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.16",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+          "text": "4,264"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.17",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+          "text": "5,627"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.18",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+          "text": "4,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.19a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+          "text": "5,619"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.19b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line19b_CombField[0].f2_10[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.19c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.20",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "1,582"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.20_mfs_lived_apart",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.21",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "7,057"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.23",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "6,047"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line24a_ReadOrder[0].f2_16[0]",
+          "text": "2,227"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "3,809"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "3,443"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "9,496"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+          "text": "3,608"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+          "text": "2,739"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+          "text": "7,625"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+          "text": "6,433"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+          "text": "5,814"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+          "text": "6,997"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+          "text": "4,256"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24z",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+          "text": "7,497"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.24z_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line24z_ReadOrder[0].f2_27[0]",
+          "text": "T-1Z00G"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.25",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+          "text": "9,996"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1.1.line.26",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+          "text": "4,271"
+        }
+      ]
+    }
+  ]
+}

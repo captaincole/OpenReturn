@@ -82,8 +82,9 @@ federal results (CA 540 reads federal AGI cross-form) but never each other.
 
 ## Conventions
 
-- **Whole-dollar rounding is `Math.ceil`**, always up, never `Math.round` —
-  see the QDCG worksheet for the pattern and CLAUDE.md for the CPA rationale.
+- **Whole-dollar rounding is `roundDollars()`**, the nearest dollar (the IRS
+  rule) — see CLAUDE.md for the evidence and the one exception ("or part"
+  step rules round up by definition).
 - **Never invent a number.** A field whose inputs are missing evaluates to
   `blocked` with a reason — that's what feeds the open-questions list.
 - **Tax years are parameter-keyed data** (tables take `taxYear`), not

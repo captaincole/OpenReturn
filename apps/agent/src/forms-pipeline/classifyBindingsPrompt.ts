@@ -81,7 +81,7 @@ taxTable — Tax-table lookup for any jurisdiction (federal 1040 line 16, CA 540
     inputFieldId: string (the taxable income field, e.g. "form-1040.line.15" or "form-540.line.19_taxable_income"),
     tableId?: string (defaults to "federal-2025"; for CA 540 use "ca-2025"; future tableIds follow "<jurisdiction>-<year>")
   }
-  Use for any "tax = <table>(taxable_income, filing_status)" line. The rule reads the per-jurisdiction table loaded by the engine (federal-2025, ca-2025, …) and returns the correct tax. Returns \`unsupported\` for income above the table ceiling (~$100k for both federal and CA). Handles all five filing statuses; QSS uses MFJ column per IRS/FTB instructions.
+  Use for any "tax = <table>(taxable_income, filing_status)" line. The rule reads the per-jurisdiction table loaded by the engine (federal-2025, ca-2025, …) and returns the correct tax. Returns \`unsupported\` for income above the table ceiling (~$100k for both federal and CA). Above $100k the engine has hand-written paths: federal Tax Computation Worksheet / QDCG worksheet for 1040 line 16, and the CA Tax Rate Schedules X/Y/Z for 540 line 31. Still bind taxTable; a human merges the over-$100k path. Handles all five filing statuses; QSS uses MFJ column per IRS/FTB instructions.
   CRITICAL: state forms (jurisdiction = "state-ca", "state-ny", …) MUST pass tableId="<state>-<year>". Omitting tableId on a state form would silently use the federal table — wrong answer.
 
 unsupported — Mark a field as a known engine gap. We don't compute it yet because we don't have a worked example scenario or fact-ingestion path for it.
@@ -95,15 +95,28 @@ const AVAILABLE_DATA_SPEC = `Available tax_facts (fact_key patterns):
     - identity.address.street, identity.address.apt (optional), identity.address.city,
       identity.address.state, identity.address.zip
     - identity.address.county (CA 540 header asks for this — Alex example: "Alameda")
-    - identity.email     (Luca signs in via Supabase auth; auto-populated at doc-gen time; use with optional=true)
+    - identity.email     (from the owner profile; use with optional=true)
     - identity.phone     (Luca asks during intake; format "703-953-0253")
     - identity.occupation (Luca asks during intake; free-text like "Engineer")
   Wages (category "wages"):
     - key "employer.{slug}" → { box1, box2, box3, …, box14, box15, box16, box17 } (one per W-2)
       box15 is the state abbreviation ("CA"); box16 is state wages; box17 is state income tax withheld
   Investment income (category "investment_income"):
-    - key "account.{slug}.dividends" → { box1a, box1b, box2a, … } (one per 1099-DIV)
-    - key "account.{slug}.trade.{tradeId}" → { proceeds, costBasis, dateAcquired, dateSold, … }
+    - key "account.{slug}.interest" → { box1, box2, box3, box4, box8, … } (one per 1099-INT)
+    - key "account.{slug}.dividends" → { box1a, box1b, box2a, box4, box5, box12, … } (one per 1099-DIV; box5 = Section 199A REIT dividends)
+    - key "account.{slug}.trades.{tradeId}" → { proceeds, costBasis?, dateAcquired?, dateSold, … } (one per sale, 1099-B or 1099-DA)
+  Capital gains (category "capital_gains"):
+    - key "account.{slug}.trades.{tradeId}.reported_basis" — basis the broker reported, when it differs from costBasis
+  Retirement (category "retirement"):
+    - key "payer.{slug}.distributions.{id}" → { box1, box2a, box4, box7 (distribution code string), box7IraSepSimple, … } (one per 1099-R)
+  Other income (category "other"):
+    - key "account.{slug}.misc" → { box1, box2, box3, box4, … } (one per 1099-MISC; box3 = other income → Schedule 1 line 8z)
+  HSA (category "hsa"):
+    - key "account.{slug}.hsa_distributions.{id}" → { box1, box2, box3, box5 } (one per 1099-SA)
+    - hsa.coverage_type ("self-only" | "family"), hsa.coverage_months, hsa.own_contributions, hsa.distributions_all_qualified
+    - Employer HSA contributions are W-2 box 12 code W (wages fact, box12 entries).
+  Prior year (category "estimated_payments"):
+    - prior_year.federal_agi, prior_year.federal_tax, prior_year.ca_tax, prior_year.ca_balance_paid_this_year (safe-harbor and FTB 5805 inputs)
   Health coverage (category "health_coverage"):
     - health_coverage.full_year_mec (boolean) — true when taxpayer had minimum essential coverage every month of the year. CA 540 line 92 reads this directly via lookupFact.
   Use tax (category "use_tax"):
@@ -112,14 +125,16 @@ const AVAILABLE_DATA_SPEC = `Available tax_facts (fact_key patterns):
 Available ai_decisions (decision_key patterns):
   - decisions.scope.must_file_federal (boolean) — used by form-1040's must-file binding
   - decisions.scope.must_file_ca_540 (boolean) — used by form-540's must-file binding
+  - decisions.scope.must_file_<form> (boolean) — every form has one, named from its formId without "form-" and with "_" for "-": must_file_8959, must_file_8960, must_file_schedule_d, must_file_schedule_2. Use this pattern for the must-file binding when the form is not listed above.
   - decisions.scope.filing_status (string: "single" | "married_filing_jointly" | "married_filing_separately" | "head_of_household" | "qualifying_surviving_spouse") — CANONICAL filing status used by BOTH federal and state forms. Don't invent a state-specific filing-status decision; CA 540 reuses the federal one.
   - decisions.scope.ca_residency (string: "full_year" | "part_year" | "non_resident") — drives state-form scoping; MVP only supports "full_year"
   - decisions.scope.mailing_same_as_principal_residence (boolean) — CA 540 header has a checkbox "Address above is the same as principal/physical residence." Bind that checkbox with decisionIfEquals(matchValue=true) for a boolean field, or read directly via lookupDecision.
   - decisions.scope.use_tax_zero_reason (string: "no_use_tax_owed" | "paid_directly_to_cdtfa") — CA 540 line 91 has a "If line 91 is zero, why?" radio group. Bind the radio group with decisionIfEquals (mode 1) — the catalog options expose the two values directly.
   - decisions.scope.has_reportable_sales (boolean) — set automatically by 1099 ingest
-  - decisions.trade.{tradeId}.form_8949_box (string) — per-trade Form 8949 box assignment
+  - decisions.scope.has_digital_assets (boolean) — set by 1099-DA ingest; drives the 1040 digital-asset question
+  - decisions.trade.{tradeId}.form_8949_box (string) — per-trade Form 8949 box: "partI.boxA" | "partI.boxB" | "partI.boxC" | "partI.boxG" | "partI.boxH" | "partI.boxI" (short-term) or "partII.boxD" | "partII.boxE" | "partII.boxF" | "partII.boxJ" | "partII.boxK" | "partII.boxL" (long-term). G/H/I and J/K/L are the 1099-DA boxes.
 
-For fields that don't map to any of the above (spouse info, dependents, retirement, foreign income, Schedule 1/2/3 detail, signing-block dates, paid preparer block, …), bind to \`unsupported\` with a reason explaining what scenario we'd need to support it (e.g. "no MFJ scenario yet — spouse fields unsupported" or "no dependent-with-CTC scenario yet"). The engine will treat these as gaps without surfacing them as user questions; downstream sums skip them as 0.
+For fields that don't map to any of the above (spouse info, dependents, foreign income, K-1s, rental, signing-block dates, paid preparer block, …), bind to \`unsupported\` with a reason explaining what scenario we'd need to support it (e.g. "no MFJ scenario yet — spouse fields unsupported" or "no dependent-with-CTC scenario yet"). The engine will treat these as gaps without surfacing them as user questions; downstream sums skip them as 0.
 
 IMPORTANT — anti-hallucination: do NOT bind a field to a fact key whose semantics don't match the field. Example failure: binding header.middle_initial (maxLength=1) to identity.name.first (e.g. "Alex") — the renderer truncates and writes garbage. When no fact matches a field cleanly, bind to \`unsupported\`.`;
 
@@ -155,6 +170,11 @@ When using fromFields, every term's fieldId must match an inventory entry exactl
 **Cross-form references.** When a field's label says something like "from Form 1040 line 11b" or "from Schedule CA Part I line 27", that's a cross-form reference. The referenced form is one of the rosters listed in the inventory block. You DO NOT know the exact fieldId on the referenced form from memory — call the \`lookup_form_fields\` tool with the formId (e.g. "form-1040") to retrieve its (fieldId, label, valueType) rows. Pick the matching fieldId from the tool's response and use it in the fromFields term, with \`whenSourceNotRequired: 0\` so the engine treats a missing source-form filing as 0 rather than blocking. If the referenced form is NOT in the inventory's roster (no catalog ingested yet), bind to \`unsupported\` with a rationale naming the missing form — do not guess at fieldIds.
 
 Don't invent facts, decisions, or field references that aren't on the inventory / Available list. If a field requires data we don't have, use \`unsupported\` with a reason — that's the honest answer. Reserve \`constant\` for values that are TRULY fixed (not "we'll fill this in later").
+
+Money conventions (the engine applies them; rationales should not contradict them):
+  - Whole dollars round to the NEAREST dollar (the IRS rule): calculated lines and totals alike. Only "for each $X or part of $X" step rules round up, by definition.
+  - When a line adds several document amounts (payers, 1099 boxes, Form 8949 rows), keep cents while adding and round only the total.
+  - Blank vs. zero: when the taxpayer has NO source facts for a line (no 1099-INT at all), the line stays blank, not "0". When facts exist and compute to zero, the line prints "0".
 
 Rationales should be one short sentence per binding ("Sum of W-2 box 1 across employers"). The form engine surfaces rationales to debug why a value came out a certain way.
 

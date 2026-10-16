@@ -19,7 +19,7 @@ const searchHitSchema = z.object({
 export const searchRefDocsTool = createTool({
   id: "search-ref-docs",
   description:
-    "Search the ingested reference-document corpus (IRS instructions, pubs, etc.). Uses hybrid retrieval (lexical FTS + local semantic vector search) — the system gracefully falls back to keyword-only search if the local embedding model is unavailable. Pass a natural-language query with the key terms (e.g. 'household employee wages reporting', 'standard deduction single filer 2025'). Each hit includes a block_id that can be resolved to exact text via cite-ref-docs.",
+    "Search the ingested reference-document corpus (IRS instructions, pubs, etc.). Uses hybrid retrieval (lexical FTS + local semantic vector search) — the system gracefully falls back to keyword-only search if the local embedding model is unavailable. Pass a natural-language query with the key terms (e.g. 'household employee wages reporting', 'standard deduction single filer 2025'). Each hit includes a block_id that can be resolved to exact text via cite-ref-docs, plus its document, section and page. Blocks are short; when a hit lacks context (e.g. a table without its title), search again with that hit's docId to read around it.",
   inputSchema: z.object({
     query: z
       .string()

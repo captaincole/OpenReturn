@@ -7,285 +7,38 @@
  * Adding a form = add its resolver here and spread it there.
  */
 
-import { isInterestFactKey, type TradeFactValue } from "./facts/index.js";
-import type { Form1040FilingInfo } from "./federal/1040/filingInfo.js";
+import {
+  isDividendFactKey,
+  isInterestFactKey,
+  type RetirementDistributionFactValue,
+} from "./facts/index.js";
+import type { Form1040FilingInfo, RetirementLine } from "./federal/1040/filingInfo.js";
+import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import type { Form8959FilingInfo } from "./federal/8959/filingInfo.js";
+import type { Form8960FilingInfo } from "./federal/8960/filingInfo.js";
+import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
+import type { Schedule2FilingInfo } from "./federal/schedule-2/filingInfo.js";
 import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
+import type { PayerAmount, ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
 import type { BaseFilingInfo } from "./filingInfo.js";
+import {
+  factsInCategory,
+  num,
+  reportableSalesFallbacks,
+  resolveMustFile,
+  sumCaSdi,
+  sumInvestmentBox,
+  sumW2Box,
+  text,
+  type ResolverInputs,
+} from "./resolverInputs.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
-import type { EngineDerivation } from "./types.js";
 import { phone, ssn } from "./values.js";
 
-// ─── Shared inputs view ──────────────────────────────────────────────────
-
-export interface ResolverInputs {
-  facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
-  factByKey: Map<string, unknown>;
-  decisionByKey: Map<string, unknown>;
-  trades: PartitionedTrades;
-}
-
-export function makeResolverInputs(opts: {
-  facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
-  decisions: ReadonlyArray<{ decisionKey: string; decision: unknown }>;
-}): ResolverInputs {
-  const factByKey = new Map<string, unknown>();
-  for (const f of opts.facts) factByKey.set(f.key, f.value);
-  const decisionByKey = new Map<string, unknown>();
-  for (const d of opts.decisions) decisionByKey.set(d.decisionKey, d.decision);
-  return { facts: opts.facts, factByKey, decisionByKey, trades: partitionTrades(opts.facts) };
-}
-
-// ─── Fact readers ────────────────────────────────────────────────────────
-
-function text(inputs: ResolverInputs, key: string): string | undefined {
-  const v = inputs.factByKey.get(key);
-  if (v === undefined || v === null || v === "") return undefined;
-  if (typeof v !== "string") {
-    throw new Error(
-      `resolveFilingInfo: fact "${key}" expected string, got ${typeof v} ` +
-        `(value=${JSON.stringify(v).slice(0, 100)}). Re-record this fact as a ` +
-        `plain string via record-tax-fact.`,
-    );
-  }
-  return v;
-}
-
-/*
- * Single-key numeric read. Returns undefined when missing or
- * non-numeric. Callers use ?? 0 when they compose a sum.
- */
-function num(inputs: ResolverInputs, key: string): number | undefined {
-  const v = inputs.factByKey.get(key);
-  return typeof v === "number" && Number.isFinite(v) ? v : undefined;
-}
-
-function factsInCategory(
-  inputs: ResolverInputs,
-  cat: string,
-): Array<{ key: string; value: unknown }> {
-  return inputs.facts.filter((f) => f.category === cat);
-}
-
-function sumW2Box(inputs: ResolverInputs, boxKey: string): number {
-  let total = 0;
-  for (const row of factsInCategory(inputs, "wages")) {
-    const v = (row.value as Record<string, unknown>)?.[boxKey];
-    if (typeof v === "number" && Number.isFinite(v)) total += v;
-  }
-  return total;
-}
-
-/*
- * Sum a numeric field across investment_income facts. The optional
- * `keyFilter` narrows the read to one 1099 section. 1099-DIV box1a does
- * not overlap 1099-INT box1 today, but the filter makes the read
- * explicit and protects against future box-name overlap. Returns 0 when
- * no facts match, same convention as sumW2Box: "no 1099-INT at all → 0
- * taxable interest" rather than "we do not know."
- */
-function sumInvestmentBox(
-  inputs: ResolverInputs,
-  boxKey: string,
-  keyFilter?: (key: string) => boolean,
-): number {
-  let total = 0;
-  for (const row of factsInCategory(inputs, "investment_income")) {
-    if (keyFilter && !keyFilter(row.key)) continue;
-    const v = (row.value as Record<string, unknown>)?.[boxKey];
-    if (typeof v === "number" && Number.isFinite(v)) total += v;
-  }
-  return total;
-}
-
-function sumCaSdi(wageRows: Array<{ value: unknown }>): number {
-  let total = 0;
-  for (const row of wageRows) {
-    const box14 = (row.value as Record<string, unknown>)?.box14;
-    if (!Array.isArray(box14)) continue;
-    for (const entry of box14) {
-      const label = (entry as Record<string, unknown>)?.label;
-      const amount = (entry as Record<string, unknown>)?.amount;
-      if (
-        typeof label === "string" &&
-        /CA\s*SDI/i.test(label) &&
-        typeof amount === "number" &&
-        Number.isFinite(amount)
-      ) {
-        total += amount;
-      }
-    }
-  }
-  return total;
-}
-
-// ─── Trade facts (Form 8949 / Schedule D inputs) ─────────────────────────
-
-/*
- * Mirrors the key convention in src/engine/facts/kinds/trade.ts. Inlined
- * here because parseTradeFact() expects a full TaxFactRow, while the
- * resolver only sees a {key, value, category} projection. The thinner
- * shape is enough to recognize and decode a trade fact.
- */
-const TRADE_KEY_RE = /^account\.([^.]+)\.trades\.([^.]+)$/;
-
-interface PartitionedTrades {
-  short: TradeFactValue[];
-  long: TradeFactValue[];
-  factKeys: string[];
-}
-
-/*
- * Trade-fact partitioning for Form 8949. Walk investment_income facts,
- * pull out anything that parses as a trade (key shape
- * `account.<slug>.trades.<tradeId>`), then split by holding period:
- * held > 1 year ⇒ long-term, else short-term. Facts store dates as
- * "MM/DD/YY" or "MM/DD/YYYY"; both parse. The fact-key list feeds the
- * engine-derivation audit trail (triggeredByFactKeys).
- */
-function partitionTrades(
-  facts: ReadonlyArray<{ key: string; value: unknown; category: string }>,
-): PartitionedTrades {
-  const short: TradeFactValue[] = [];
-  const long: TradeFactValue[] = [];
-  const factKeys: string[] = [];
-  for (const row of facts) {
-    if (row.category !== "investment_income") continue;
-    if (!TRADE_KEY_RE.test(row.key)) continue;
-    const trade = row.value as TradeFactValue;
-    (isLongTermTrade(trade) ? long : short).push(trade);
-    factKeys.push(row.key);
-  }
-  return { short, long, factKeys };
-}
-
-/*
- * Trade-date parser. Accepts "MM/DD/YY" or "MM/DD/YYYY", the formats
- * brokers print on a 1099-B. Two-digit years anchor to the 2000s.
- */
-function parseTradeDate(s: string): Date | null {
-  const m = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/.exec(s);
-  if (!m) return null;
-  const month = parseInt(m[1], 10);
-  const day = parseInt(m[2], 10);
-  let year = parseInt(m[3], 10);
-  if (year < 100) year += 2000;
-  return new Date(year, month - 1, day);
-}
-
-/*
- * IRC §1222 short/long-term split: held more than 1 year is long-term.
- * "More than 1 year" means strictly past the anniversary date, at day
- * precision. Unparseable dates default to short-term. That is the
- * conservative choice (higher rate) versus a long-term mislabel.
- */
-function isLongTermTrade(t: TradeFactValue): boolean {
-  const acq = parseTradeDate(t.dateAcquired);
-  const sold = parseTradeDate(t.dateSold);
-  if (!acq || !sold) return false;
-  const anniversary = new Date(acq);
-  anniversary.setFullYear(anniversary.getFullYear() + 1);
-  return sold > anniversary;
-}
-
-// ─── Must-file resolution with provenance ────────────────────────────────
-
-/**
- * Resolve a must-file flag with explicit-decision-wins semantics, and
- * capture an audit trail (EngineDerivation) for the path that fired.
- *
- * Semantics:
- *  - An explicit boolean decision wins, even when false. This lets a
- *    scenario opt out of a form it would otherwise default into.
- *  - Otherwise, walk `fallbacks` in order and return the first whose
- *    `value` is true. Source order is the priority.
- *  - All fallbacks false → return false with a "no signal" derivation.
- *  - No fallbacks AND no explicit decision → value is undefined (caller
- *    decides), derivation is undefined.
- *
- * We record provenance even though the must_file_* keys are not in
- * ai_decisions. A CPA who reviews the doc-gen sidecar should see WHY
- * Schedule D was generated. The engine makes these scope calls today; the
- * EngineDerivation captures that honestly.
- */
-interface MustFileFallback {
-  /** Plain-English description of the rule. CPA-readable. */
-  rule: string;
-  /** True when this fallback signal currently fires. */
-  value: boolean;
-  /** Fact keys this rule consumed. */
-  triggeredByFactKeys?: readonly string[];
-  /** Decision keys this rule consumed. */
-  triggeredByDecisionKeys?: readonly string[];
-}
-
-function resolveMustFile(
-  decisions: Map<string, unknown>,
-  opts: { explicitKey: string; fallbacks?: MustFileFallback[] },
-): { value: boolean | undefined; derivation: EngineDerivation | undefined } {
-  const explicit = decisions.get(opts.explicitKey);
-  if (typeof explicit === "boolean") {
-    return {
-      value: explicit,
-      derivation: {
-        decidedBy: "engine",
-        rule: `explicit decision: ${opts.explicitKey} = ${explicit}`,
-        triggeredByFactKeys: [],
-        triggeredByDecisionKeys: [opts.explicitKey],
-      },
-    };
-  }
-  const fallbacks = opts.fallbacks ?? [];
-  for (const fb of fallbacks) {
-    if (fb.value === true) {
-      return {
-        value: true,
-        derivation: {
-          decidedBy: "engine",
-          rule: fb.rule,
-          triggeredByFactKeys: fb.triggeredByFactKeys ?? [],
-          triggeredByDecisionKeys: fb.triggeredByDecisionKeys ?? [],
-        },
-      };
-    }
-  }
-  if (fallbacks.length > 0) {
-    return {
-      value: false,
-      derivation: {
-        decidedBy: "engine",
-        rule: "no triggering signal (no explicit decision; all fallback signals absent)",
-        triggeredByFactKeys: [],
-        triggeredByDecisionKeys: [],
-      },
-    };
-  }
-  return { value: undefined, derivation: undefined };
-}
-
-/*
- * Shared fallback pair for Form 8949 and Schedule D: trade facts win when
- * present (the more specific signal); has_reportable_sales is the safety
- * net.
- */
-function reportableSalesFallbacks(inputs: ResolverInputs): MustFileFallback[] {
-  const tradeCount = inputs.trades.short.length + inputs.trades.long.length;
-  return [
-    {
-      rule: `fallback: ${tradeCount} trade fact(s) present`,
-      value: tradeCount > 0,
-      triggeredByFactKeys: inputs.trades.factKeys,
-    },
-    {
-      rule: "fallback: decisions.scope.has_reportable_sales = true",
-      value: inputs.decisionByKey.get("decisions.scope.has_reportable_sales") === true,
-      triggeredByDecisionKeys: ["decisions.scope.has_reportable_sales"],
-    },
-  ];
-}
+export { makeResolverInputs, type ResolverInputs } from "./resolverInputs.js";
 
 // ─── Per-form resolvers ──────────────────────────────────────────────────
 
@@ -343,17 +96,43 @@ function resolveInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
     return { taxableInterestTotal: undefined, taxExemptInterestTotal: undefined };
   }
   return {
-    taxableInterestTotal: sumInvestmentBox(
-      inputs,
-      "box1",
-      isInterestFactKey,
-    ) as Form1040FilingInfo["taxableInterestTotal"],
+    // Box 3 (US savings bond and Treasury interest) is taxable federally, as on Schedule B line 1.
+    taxableInterestTotal: (sumInvestmentBox(inputs, "box1", isInterestFactKey) +
+      sumInvestmentBox(
+        inputs,
+        "box3",
+        isInterestFactKey,
+      )) as Form1040FilingInfo["taxableInterestTotal"],
     taxExemptInterestTotal: sumInvestmentBox(
       inputs,
       "box8",
       isInterestFactKey,
     ) as Form1040FilingInfo["taxExemptInterestTotal"],
   };
+}
+
+/*
+ * 1099-R facts (category "retirement") → 1040 lines 4a–4c (IRA box
+ * checked) and 5a–5c (everything else). Gross = box 1, taxable = box 2a.
+ * Codes G and H are direct rollovers. No 1099-R facts: both stay blank.
+ */
+function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
+  const rows = factsInCategory(inputs, "retirement")
+    .filter((row) => /^payer\.[^.]+\.distributions\.[^.]+$/.test(row.key))
+    .map((row) => row.value as RetirementDistributionFactValue);
+  const line = (ira: boolean): RetirementLine | undefined => {
+    const group = rows.filter((r) => r.box7IraSepSimple === ira);
+    if (group.length === 0) return undefined;
+    const undetermined = group.some(
+      (r) => r.box2a === undefined && r.box2b?.taxableAmountNotDetermined === true,
+    );
+    return {
+      gross: group.reduce((t, r) => t + r.box1, 0),
+      taxable: undetermined ? undefined : group.reduce((t, r) => t + (r.box2a ?? r.box1), 0),
+      rollover: group.some((r) => /[GH]/.test(r.box7)),
+    };
+  };
+  return { iraDistributions: line(true), pensionDistributions: line(false) };
 }
 
 export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
@@ -379,6 +158,7 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
       "box4",
     ) as Form1040FilingInfo["form1099FederalWithholding"],
     ...resolveInterestSlots(inputs),
+    ...resolveRetirementSlots(inputs),
     refundFullOverpaymentFederal: decisionByKey.get(
       "decisions.refund.refund_full_overpayment_federal",
     ) as boolean | undefined,
@@ -457,6 +237,8 @@ export function resolve8949Info(inputs: ResolverInputs): Form8949FilingInfo {
     mustFile8949Derivation: r.derivation,
     shortTermTrades: inputs.trades.short,
     longTermTrades: inputs.trades.long,
+    form8949Copies: planForm8949Copies(inputs.trades.boxed),
+    form8949BoxTotals: totalsByBox(inputs.trades.boxed),
   };
 }
 
@@ -502,6 +284,155 @@ export function resolve8959Info(inputs: ResolverInputs): Form8959FilingInfo {
     w2MedicareWagesTotal: medicareWages as Form8959FilingInfo["w2MedicareWagesTotal"],
     w2MedicareTaxWithheld: sumW2Box(inputs, "box6") as Form8959FilingInfo["w2MedicareTaxWithheld"],
   };
+}
+
+/*
+ * Default: required when the taxpayer has investment income and W-2
+ * wages + taxable interest + ordinary dividends exceed $200,000 (the
+ * single threshold, as conservative as the 8959 fallback). It misses a
+ * taxpayer whose MAGI crosses the line only through capital gains; set
+ * `decisions.scope.must_file_8960` explicitly then. The explicit
+ * decision wins when set.
+ */
+export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
+  const hasInvestment = inputs.facts.some((f) => f.category === "investment_income");
+  const income =
+    sumW2Box(inputs, "box1") +
+    sumInvestmentBox(inputs, "box1", isInterestFactKey) +
+    sumInvestmentBox(inputs, "box1a", isDividendFactKey);
+  const r = resolveMustFile(inputs.decisionByKey, {
+    explicitKey: "decisions.scope.must_file_8960",
+    fallbacks: [
+      {
+        rule: `fallback: investment income present and wages + interest + dividends $${income} > $200,000`,
+        value: hasInvestment && income > 200000,
+      },
+    ],
+  });
+  return {
+    mustFile8960: r.value as Form8960FilingInfo["mustFile8960"],
+    mustFile8960Derivation: r.derivation,
+  };
+}
+
+/*
+ * Default: required when there is other income (1099-MISC box 3, line
+ * 8z). An explicit `decisions.scope.must_file_schedule_1` wins.
+ */
+export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInfo {
+  const misc = factsInCategory(inputs, "other").filter((row) =>
+    /^account\.[^.]+\.misc$/.test(row.key),
+  );
+  const miscOtherIncome =
+    misc.length > 0
+      ? misc.reduce((t, row) => t + num0((row.value as Record<string, unknown>).box3), 0)
+      : undefined;
+  const r = resolveMustFile(inputs.decisionByKey, {
+    explicitKey: "decisions.scope.must_file_schedule_1",
+    fallbacks: [
+      {
+        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0`,
+        value: (miscOtherIncome ?? 0) > 0,
+      },
+    ],
+  });
+  return {
+    mustFileSchedule1: r.value as Schedule1FilingInfo["mustFileSchedule1"],
+    mustFileSchedule1Derivation: r.derivation,
+    miscOtherIncome,
+  };
+}
+
+/*
+ * Default: required when a form that feeds it is required: Form 8959
+ * (line 11) or Form 8960 (line 12). Form 8889 (lines 17c/17d) joins when
+ * it gets a must-file rule. An explicit
+ * `decisions.scope.must_file_schedule_2` wins when set.
+ */
+export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInfo {
+  const form8959 = resolve8959Info(inputs).mustFile8959 === true;
+  const form8960 = resolve8960Info(inputs).mustFile8960 === true;
+  const r = resolveMustFile(inputs.decisionByKey, {
+    explicitKey: "decisions.scope.must_file_schedule_2",
+    fallbacks: [
+      {
+        rule: "fallback: Form 8959 (line 11) or Form 8960 (line 12) is required",
+        value: form8959 || form8960,
+      },
+    ],
+  });
+  return {
+    mustFileSchedule2: r.value as Schedule2FilingInfo["mustFileSchedule2"],
+    mustFileSchedule2Derivation: r.derivation,
+  };
+}
+
+/*
+ * Default (IRS Schedule B instructions): required when taxable interest
+ * or ordinary dividends exceed $1,500, or when either Part III question
+ * is "Yes". An explicit `decisions.scope.must_file_schedule_b` wins.
+ */
+export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInfo {
+  const interestPayers = payerAmounts(
+    inputs,
+    isInterestFactKey,
+    (v) => num0(v.box1) + num0(v.box3),
+  );
+  const dividendPayers = payerAmounts(inputs, isDividendFactKey, (v) => num0(v.box1a));
+  const hasForeignFinancialAccount = boolDecision(
+    inputs,
+    "decisions.scope.has_foreign_financial_account",
+  );
+  const hasForeignTrust = boolDecision(inputs, "decisions.scope.has_foreign_trust");
+  const rounding = inputs.decisionByKey.get("decisions.rounding.schedule_b");
+  const interest = interestPayers.reduce((t, p) => t + p.amount, 0);
+  const dividends = dividendPayers.reduce((t, p) => t + p.amount, 0);
+  const r = resolveMustFile(inputs.decisionByKey, {
+    explicitKey: "decisions.scope.must_file_schedule_b",
+    fallbacks: [
+      {
+        rule: `fallback: interest $${interest} or dividends $${dividends} > $1,500, or a Part III "Yes"`,
+        value:
+          interest > 1500 ||
+          dividends > 1500 ||
+          hasForeignFinancialAccount === true ||
+          hasForeignTrust === true,
+      },
+    ],
+  });
+  return {
+    mustFileScheduleB: r.value as ScheduleBFilingInfo["mustFileScheduleB"],
+    mustFileScheduleBDerivation: r.derivation,
+    interestPayers,
+    rounding: rounding === "sum_rounded_rows" ? "sum_rounded_rows" : "round_total",
+    dividendPayers,
+    hasForeignFinancialAccount,
+    hasForeignTrust,
+  };
+}
+
+/* One row per 1099 fact of the given kind, in fact order; zero amounts are skipped. */
+function payerAmounts(
+  inputs: ResolverInputs,
+  isKind: (key: string) => boolean,
+  amountOf: (v: Record<string, unknown>) => number,
+): PayerAmount[] {
+  return factsInCategory(inputs, "investment_income")
+    .filter((row) => isKind(row.key))
+    .map((row) => {
+      const v = row.value as Record<string, unknown>;
+      return { payerName: String(v.payerName ?? ""), amount: amountOf(v) };
+    })
+    .filter((p) => p.amount !== 0);
+}
+
+function num0(v: unknown): number {
+  return typeof v === "number" && Number.isFinite(v) ? v : 0;
+}
+
+function boolDecision(inputs: ResolverInputs, key: string): boolean | undefined {
+  const v = inputs.decisionByKey.get(key);
+  return typeof v === "boolean" ? v : undefined;
 }
 
 /*

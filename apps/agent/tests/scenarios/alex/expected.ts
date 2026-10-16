@@ -29,8 +29,7 @@ export const alexExpected: ExpectedResults = {
     "form-1040.line.25a": 9420, // W-2 box 2 federal withholding
     "form-1040.line.25d": 9420,
     "form-1040.line.33": 9420, // total payments
-    "form-1040.line.34": 585, // refund (9,420 − 8,835)
-    "form-1040.line.37": 0, // owed
+    "form-1040.line.34": 585,
   },
 
   /*

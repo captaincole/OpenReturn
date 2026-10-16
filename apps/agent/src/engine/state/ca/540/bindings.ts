@@ -7,10 +7,12 @@
  * Generated at: 2026-05-14T20:21:25.969Z
  */
 
+import { lookupCaRateSchedule } from "../../../data/caRateSchedule.js";
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { lookupTax } from "../../../data/taxTable.js";
-import { defineForm, floor, sum } from "../../../defineForm.js";
+import { defineForm, floor, roundDollars, sum } from "../../../defineForm.js";
 import { SSN } from "../../../values.js";
+import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitation.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
 import type { Form540 } from "./types.js";
 
@@ -89,10 +91,11 @@ export function register(): void {
       /*
        * MANUAL EDIT: source-of-tax checkbox for line 31. CA 540
        * instructs the filer to mark which method computed line 31 (Tax
-       * Table, Tax Rate Schedule, FTB 3800, FTB 3803). For sub-$100k
-       * income we use the Tax Table, so bind that checkbox to true.
+       * Table, Tax Rate Schedule, FTB 3800, FTB 3803). Line 31 uses the
+       * Tax Table up to $100,000 and the Tax Rate Schedules above it.
        */
-      "line.31_tax_from_tax_table": () => true,
+      "line.31_tax_from_tax_table": (f) => usesRateSchedule(f["line.19_taxable_income"]) === false,
+      "line.31_tax_from_rate_schedule": (f) => usesRateSchedule(f["line.19_taxable_income"]),
       /*
        * MANUAL EDIT: read CA subtractions/additions from Schedule CA
        * Part I line 27 (col B / col C). The cross-form ref returns
@@ -118,7 +121,11 @@ export function register(): void {
           f["line.10_dependent_exemption_amount"],
         ),
       // Sum of W-2 box 16 (state wages) across all employers.
-      "line.12_state_wages": (_, info) => info.w2StateWages,
+      /*
+       * MANUAL EDIT: W-2 box 16 sum rounds to the nearest dollar
+       * (roundDollars). Found by the private comparison kit.
+       */
+      "line.12_state_wages": (_, info) => roundDollars(info.w2StateWages),
       // Cross-form reference: CA 540 line 13 = federal Form 1040 line 11b (AGI).
       "line.13_federal_agi": (f) => sum(f["form-1040.line.11b"]),
       // Line 15 = line 13 − line 14 per form instructions.
@@ -156,16 +163,46 @@ export function register(): void {
             f["line.18_deductions"] === undefined ? 0 : -f["line.18_deductions"],
           ),
         ),
-      // Line 31 tax from the California Tax Table (tableId "ca-2025", not the federal table), keyed by line 19 taxable income and filing status.
+      /*
+       * MANUAL EDIT: line 31 tax. Up to $100,000 of line 19 taxable
+       * income, the California Tax Table (tableId "ca-2025"). Above it,
+       * the 2025 Tax Rate Schedules X/Y/Z, nearest dollar (roundDollars).
+       */
       "line.31_tax_amount": (f, info) => {
         if (!info.filingStatus) return undefined;
         const income = f["line.19_taxable_income"];
         if (typeof income !== "number") return undefined;
+        if (usesRateSchedule(income)) {
+          return roundDollars(lookupCaRateSchedule(2025, info.filingStatus, income));
+        }
         const r = lookupTax("ca-2025", income, info.filingStatus);
         return r.ok ? r.tax : undefined;
       },
-      // Line 32 exemption credits = the line 11 total exemption amount per instructions.
-      "line.32_exemption_credits": (f) => sum(f["line.11_total_exemption_amount"]),
+      /*
+       * MANUAL EDIT: line 32 = line 11, limited by the AGI Limitation
+       * Worksheet when line 13 is over the filing-status threshold.
+       * Blind/senior (lines 8, 9) and dependents (line 10) count as 0
+       * until those inputs exist.
+       */
+      "line.32_exemption_credits": (f, info) => {
+        const agi = f["line.13_federal_agi"];
+        const count = f["line.7_personal_exemption_count"];
+        if (!info.filingStatus || typeof agi !== "number" || typeof count !== "number") {
+          return sum(f["line.11_total_exemption_amount"]);
+        }
+        return caExemptionCreditsAfterLimit({
+          filingStatus: info.filingStatus,
+          federalAgi: agi,
+          personalCount: count,
+          personalAmount: sum(
+            f["line.7_personal_exemption_amount"],
+            f["line.8_blind_exemption_amount"],
+            f["line.9_senior_exemption_amount"],
+          ),
+          dependentCount: sum(f["line.10_dependent_exemption_count"]),
+          dependentAmount: sum(f["line.10_dependent_exemption_amount"]),
+        });
+      },
       // Tax after exemption credits = line 31 minus line 32, floored at 0.
       "line.33_tax_after_exemption_credits": (f) =>
         floor(
@@ -195,8 +232,11 @@ export function register(): void {
           f["line.62_behavioral_health_services_tax"],
           f["line.63_other_taxes_credit_recapture"],
         ),
-      // Sum of W-2 box 17 (state income tax withheld) across all employers.
-      "line.71_ca_income_tax_withheld": (_, info) => info.w2StateWithholding,
+      /*
+       * Sum of W-2 box 17 (state income tax withheld) across all employers.
+       * MANUAL EDIT: W-2 box 17 sum rounds to the nearest dollar (roundDollars).
+       */
+      "line.71_ca_income_tax_withheld": (_, info) => roundDollars(info.w2StateWithholding),
       // Line 78 = lines 71–77 (CA withholding + estimated payments + 592-B/593 withholding + refundable credits). sum() treats unsupported terms as 0.
       "line.78_total_payments": (f) =>
         sum(
@@ -281,6 +321,11 @@ export function register(): void {
           f["line.110_total_contributions"],
         );
         return r > 0 ? r : undefined;
+      },
+      // MANUAL EDIT: line 113 = FTB 5805 line 13 (underpayment penalty); blank when 5805 is not filed.
+      "line.113_underpayment_estimated_tax": (f) => {
+        const v = f["form-5805.1.part2.line_13"];
+        return typeof v === "number" ? v : undefined;
       },
       // Total amount due. Returns undefined when the result is 0 (refund-branch scenarios).
       "line.114_total_amount_due": (f) => {
@@ -422,8 +467,6 @@ export function register(): void {
         "No dependent-data ingestion path yet — dependent count requires building dependent fact ingestion. Downstream sum (line 11) treats this as 0.",
       "line.10_dependent_exemption_amount":
         "No dependent-data ingestion path yet — dependent exemption amount ($475 × count) requires building dependent fact ingestion. Downstream sum (line 11) treats this as 0.",
-      "line.31_tax_from_rate_schedule":
-        "Checkbox indicating tax was computed from the Tax Rate Schedule (income > $100k). No engine decision tracks which computation method was used; unsupported until a method-selector decision is built.",
       "line.31_tax_from_ftb_3800":
         "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
       "line.31_tax_from_ftb_3803":
@@ -516,8 +559,6 @@ export function register(): void {
         "FTB 5805 attachment flag depends on underpayment of estimated tax — no scenario or decision models whether this form is attached.",
       "line.112_ftb_5805f_attached":
         "FTB 5805F attachment flag depends on underpayment of estimated tax for farmers/fishermen — no scenario or decision models whether this form is attached.",
-      "line.113_underpayment_estimated_tax":
-        "Underpayment of estimated tax penalty requires FTB 5805/5805F worksheet calculations comparing prior-year liability, withholding, and estimated payments — no scenario or fact ingestion path exists for this yet.",
       "line.116_account_type_checking":
         "Bank account type (checking) is taxpayer-provided direct-deposit preference — no fact ingestion path built for banking details.",
       "line.116_routing_number":
@@ -577,3 +618,11 @@ export function register(): void {
  * updated after MANUAL EDITs).
  * Confidence at generation: 168 high, 1 medium, 0 low.
  */
+
+/*
+ * MANUAL EDIT: FTB sends line 19 taxable income over $100,000 to the Tax
+ * Rate Schedules instead of the Tax Table. Undefined until line 19 is known.
+ */
+function usesRateSchedule(taxableIncome: number | undefined): boolean | undefined {
+  return typeof taxableIncome === "number" ? taxableIncome > 100000 : undefined;
+}

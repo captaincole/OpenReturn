@@ -18,9 +18,15 @@
 import { fixtureFileSchema } from "../catalog.js";
 import { makeFormSpec, type FormSpec } from "../formSpec.js";
 import { register as registerForm1040 } from "./1040/bindings.js";
+import { register as registerForm8889 } from "./8889/bindings.js";
 import { register as registerForm8949 } from "./8949/bindings.js";
 import { register as registerForm8959 } from "./8959/bindings.js";
+import { register as registerForm8960 } from "./8960/bindings.js";
+import { register as registerForm8995A } from "./8995-a/bindings.js";
+import { register as registerSchedule1 } from "./schedule-1/bindings.js";
+import { register as registerSchedule2 } from "./schedule-2/bindings.js";
 import { register as registerScheduleA } from "./schedule-a/bindings.js";
+import { register as registerScheduleB } from "./schedule-b/bindings.js";
 import { register as registerScheduleD } from "./schedule-d/bindings.js";
 
 /*
@@ -33,9 +39,15 @@ import { register as registerScheduleD } from "./schedule-d/bindings.js";
  * from disk.
  */
 import form1040CatalogJson from "../../mastra/public/forms/federal/1040/catalog.json";
+import form8889CatalogJson from "../../mastra/public/forms/federal/8889/catalog.json";
 import form8949CatalogJson from "../../mastra/public/forms/federal/8949/catalog.json";
 import form8959CatalogJson from "../../mastra/public/forms/federal/8959/catalog.json";
+import form8960CatalogJson from "../../mastra/public/forms/federal/8960/catalog.json";
+import form8995ACatalogJson from "../../mastra/public/forms/federal/8995-a/catalog.json";
+import schedule1CatalogJson from "../../mastra/public/forms/federal/schedule-1/catalog.json";
+import schedule2CatalogJson from "../../mastra/public/forms/federal/schedule-2/catalog.json";
 import scheduleACatalogJson from "../../mastra/public/forms/federal/schedule-a/catalog.json";
+import scheduleBCatalogJson from "../../mastra/public/forms/federal/schedule-b/catalog.json";
 import scheduleDCatalogJson from "../../mastra/public/forms/federal/schedule-d/catalog.json";
 
 /*
@@ -47,7 +59,13 @@ export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(form8949CatalogJson),
   fixtureFileSchema.parse(scheduleDCatalogJson),
   fixtureFileSchema.parse(scheduleACatalogJson),
+  fixtureFileSchema.parse(scheduleBCatalogJson),
+  fixtureFileSchema.parse(form8889CatalogJson),
   fixtureFileSchema.parse(form8959CatalogJson),
+  fixtureFileSchema.parse(form8960CatalogJson),
+  fixtureFileSchema.parse(form8995ACatalogJson),
+  fixtureFileSchema.parse(schedule1CatalogJson),
+  fixtureFileSchema.parse(schedule2CatalogJson),
   fixtureFileSchema.parse(form1040CatalogJson),
 ];
 
@@ -58,6 +76,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8949",
     relativeDir: "federal/8949",
     register: registerForm8949,
+    // One box per page: the copy plan decides how many copies to file.
+    copies: {
+      count: (info) => info?.form8949Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form8949CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "schedule-d",
@@ -90,23 +113,33 @@ export const FEDERAL_FORMS: FormSpec[] = [
     shortId: "schedule-b",
     displayName: "Schedule B",
     relativeDir: "federal/schedule-b",
+    register: registerScheduleB,
+  }),
+  makeFormSpec({
+    formId: "schedule-1",
+    shortId: "schedule-1",
+    displayName: "Schedule 1",
+    relativeDir: "federal/schedule-1",
+    register: registerSchedule1,
   }),
   /*
-   * schedule-2/ has no instructions.pdf by design. The IRS publishes
-   * Schedule 2 instructions only inside the 1040 instructions booklet,
-   * which is already in the corpus as irs-1040-inst-2025.
+   * schedule-1/ and schedule-2/ have no instructions.pdf by design. The
+   * IRS publishes their instructions only inside the 1040 instructions
+   * booklet, which is already in the corpus as irs-1040-inst-2025.
    */
   makeFormSpec({
     formId: "schedule-2",
     shortId: "schedule-2",
     displayName: "Schedule 2",
     relativeDir: "federal/schedule-2",
+    register: registerSchedule2,
   }),
   makeFormSpec({
     formId: "form-8889",
     shortId: "8889",
     displayName: "Form 8889",
     relativeDir: "federal/8889",
+    register: registerForm8889,
   }),
   makeFormSpec({
     formId: "form-8959",
@@ -120,5 +153,13 @@ export const FEDERAL_FORMS: FormSpec[] = [
     shortId: "8960",
     displayName: "Form 8960",
     relativeDir: "federal/8960",
+    register: registerForm8960,
+  }),
+  makeFormSpec({
+    formId: "form-8995-a",
+    shortId: "8995-a",
+    displayName: "Form 8995-A",
+    relativeDir: "federal/8995-a",
+    register: registerForm8995A,
   }),
 ];

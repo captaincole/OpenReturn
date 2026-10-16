@@ -23,13 +23,27 @@ export function assertEngineNumber(
   expected: number,
   failures: string[],
   prefix?: string,
+  notModeled?: string[],
 ): void {
   const f = form.fields.find((x) => x.fieldId === fieldId);
+  if (!f && notModeled) {
+    /* A catalog-only form has no evaluated fields at all. */
+    notModeled.push(tag(prefix, `${fieldId} (expected ${expected})`));
+    return;
+  }
   if (!f) {
     failures.push(tag(prefix, `engine: field ${fieldId} not present in evaluated form.`));
     return;
   }
   if (!f.result.ok) {
+    /*
+     * Roadmap scenarios pass a notModeled list: an unsupported field is
+     * recorded there (zero or not) instead of failing.
+     */
+    if (f.result.unsupported && notModeled) {
+      notModeled.push(tag(prefix, `${fieldId} (expected ${expected})`));
+      return;
+    }
     /*
      * `unsupported` is a deliberate engine gap, not a "needs data" block.
      * The rule library's fromFields contract treats unsupported terms as

@@ -14,7 +14,7 @@
  * because it is a one-line lookup.
  *
  * Source: IRS Form 1040 (2025) Instructions, page 80 — Tax Computation
- * Worksheet — Line 16. Block id: irs-1040-inst-2025::p80::b00132.
+ * Worksheet — Line 16. Block id: irs-1040-inst-2025::sec::2025-tax-computation-worksheet-line-16::b02.
  * Bracket boundaries originate in Rev. Proc. 2024-40.
  */
 
@@ -53,7 +53,7 @@ const SCHEDULE_2025_FEDERAL: RateScheduleTable = {
   jurisdiction: "federal",
   source: {
     docId: "irs-1040-inst-2025",
-    blockId: "irs-1040-inst-2025::p80::b00132",
+    blockId: "irs-1040-inst-2025::sec::2025-tax-computation-worksheet-line-16::b02",
     page: 80,
   },
   byStatus: {

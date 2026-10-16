@@ -10,6 +10,7 @@
  * index.ts, and add it to runAll.ts.
  */
 
+import type { ScheduleBRounding } from "../src/engine/federal/schedule-b/filingInfo.js";
 import type { AIDecisionRow } from "../src/mastra/db/aiDecisions.js";
 import type { TaxFactRow } from "../src/mastra/db/taxFacts.js";
 
@@ -32,18 +33,59 @@ export interface ScenarioForm {
   expected: ExpectedResults;
 }
 
+/** Who prepared the filed return the expected values come from. */
+export interface Preparer {
+  /** A CPA, an enrolled agent, tax software, or the taxpayer by hand. */
+  kind: "cpa" | "enrolled_agent" | "software" | "self";
+  /** Firm or software name and version, e.g. "TurboTax Premier 2025". */
+  name?: string;
+  /**
+   * How this preparer rounds where the IRS allows a choice. Absent means
+   * the IRS rule. Passed to the engine by decisionsWithPreparerStyle.
+   */
+  rounding?: {
+    /** Schedule B lines 2 and 6: "round_total" (IRS) or "sum_rounded_rows". */
+    scheduleB?: ScheduleBRounding;
+  };
+}
+
 export interface Scenario {
   /** Short id used in CLI output (e.g. "alex"). Must be unique. */
   name: string;
   /** One-line human description for the summary banner. */
   description: string;
   taxYear: number;
+  /**
+   * Who prepared the filed return behind `expected`. Explains rounding
+   * and judgment calls in a comparison report. Absent for provisional
+   * values (jordan).
+   */
+  preparer?: Preparer;
   /** Stable id used as the synthetic user for these in-memory fixtures. */
   userId: string;
   facts: TaxFactRow[];
   decisions: AIDecisionRow[];
   /** Forms this scenario evaluates + asserts on. Order is reporting order. */
   forms: ScenarioForm[];
+  /**
+   * When true, an expected engine field whose result is `unsupported`
+   * (no binding yet) is reported as "not modeled" instead of failing.
+   * For roadmap scenarios only (jordan); the CPA-golden scenarios stay
+   * strict so a regression to unsupported still fails.
+   */
+  allowNotModeled?: boolean;
+  /**
+   * Skip this scenario in the default run (pre-commit). It still runs
+   * when named on the command line: npm test -- <name>.
+   */
+  skip?: boolean;
+  /**
+   * The ratchet: fieldId → cause for lines the engine computes but gets
+   * wrong today. A listed mismatch is reported, not failed. A listed line
+   * that now matches FAILS ("remove from knownMismatches"), so the list
+   * only shrinks. Requires allowNotModeled (roadmap scenarios only).
+   */
+  knownMismatches?: Record<string, string>;
 }
 
 export interface ExpectedResults {
@@ -89,4 +131,12 @@ export interface RunResult {
   fixpointPasses?: number;
   /** Newly resolved `ok` results per pass. The last entry must be 0 (convergence). */
   resolvedPerPass?: number[];
+  /**
+   * Expected engine fields whose result is `unsupported` (no binding
+   * yet). Only collected for scenarios with allowNotModeled; they do not
+   * fail the run. One entry per line: "[formId] fieldId (expected N)".
+   */
+  notModeled?: string[];
+  /** Listed known mismatches that still mismatch: "[formId] fieldId — cause". */
+  knownMismatches?: string[];
 }

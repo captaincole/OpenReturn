@@ -8,9 +8,14 @@
  */
 
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
-import { defineForm, floor, sum } from "../../../defineForm.js";
+import { defineForm, floor, roundDollars, sum } from "../../../defineForm.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import type { ScheduleCa } from "./types.js";
+
+/* Sum of the column's numbers; blank when every term is blank (printed-zero rule). */
+function sumIfAny(...values: unknown[]): number | undefined {
+  return values.some((v) => typeof v === "number") ? sum(...values) : undefined;
+}
 
 /*
  * register() wraps the defineForm side effect. Callers import it and
@@ -30,6 +35,60 @@ export function register(): void {
     mustFileDecisionKey: "decisions.scope.must_file_schedule_ca",
 
     bindings: {
+      /*
+       * MANUAL EDIT (2026-10-15): federal column for interest and other
+       * income, and the CA HSA add-back in column C. California does not
+       * conform to HSAs: employer contributions (W-2 box 12 code W) are CA
+       * wages (line 1a col C). Totals carry the add-back to line 27.
+       */
+      "0.line.2b_federal": (f) => {
+        const v = f["form-1040.line.2b"];
+        return typeof v === "number" ? v : undefined;
+      },
+      "1.line.b8z_federal": (f) => {
+        const v = f["schedule-1.0.line.8z"];
+        return typeof v === "number" ? v : undefined;
+      },
+      "1.line.b8z_income_type": (f) => {
+        const v = f["schedule-1.0.line.8z_type"];
+        return typeof v === "string" ? v : undefined;
+      },
+      "2.line.b9a_federal": (f) => {
+        const v = f["schedule-1.0.line.9"];
+        return typeof v === "number" ? v : undefined;
+      },
+      "0.line.1a_additions": (_, info) => roundDollars(info.hsaEmployerContributions),
+      "0.line.1z_additions": (f) =>
+        sumIfAny(
+          f["0.line.1a_additions"],
+          f["0.line.1b_additions"],
+          f["0.line.1c_additions"],
+          f["0.line.1d_additions"],
+          f["0.line.1e_additions"],
+          f["0.line.1f_additions"],
+          f["0.line.1g_additions"],
+          f["0.line.1h_additions"],
+          f["0.line.1i_additions"],
+        ),
+      "2.line.b10_additions": (f) =>
+        sumIfAny(
+          f["0.line.1z_additions"],
+          f["0.line.2b_additions"],
+          f["0.line.3b_additions"],
+          f["0.line.4b_additions"],
+          f["0.line.5b_additions"],
+          f["0.line.7a_additions"],
+          f["0.line.b2a_additions"],
+          f["0.line.b3_additions"],
+          f["0.line.b4_additions"],
+          f["0.line.b5_additions"],
+          f["0.line.b6_additions"],
+          f["2.line.b9a_additions"],
+        ),
+      "3.line.c27_additions": (f) => {
+        const total = f["2.line.b10_additions"];
+        return typeof total === "number" ? total - sum(f["3.line.c26_additions"]) : undefined;
+      },
       /*
        * MANUAL EDIT: AI flagged this as a low-confidence todo (no
        * combined-name fact exists). Concatenate identity.name.first +
@@ -125,7 +184,6 @@ export function register(): void {
       "0.line.1z_subtractions":
         "Aggregate of line 1 subtractions; all upstream rows are unsupported.",
       "0.line.2a_federal": "Tax-exempt interest (federal 1040 line 2a) — no scenario modeled yet.",
-      "0.line.2b_federal": "Taxable interest (federal 1040 line 2b) — no scenario modeled yet.",
       "0.line.4a_federal":
         "IRA distributions gross (federal 1040 line 4a) — no scenario modeled yet.",
       "0.line.4b_federal":
@@ -140,8 +198,6 @@ export function register(): void {
         "Social Security benefits taxable amount (federal 1040 line 6b) — no scenario modeled yet.",
       "0.line.6b_subtractions":
         "CA fully excludes US Social Security from taxable income; depends on 6b_federal which is unsupported.",
-      "2.line.b9a_federal":
-        "Section B line 9a (total other income, col A) — aggregates Schedule 1-style other-income rows we don't ingest yet.",
       "2.line.b9a_subtractions":
         "Section B line 9a col B — aggregates other-income subtractions we don't model yet.",
       "2.line.b9a_additions":
@@ -170,7 +226,6 @@ export function register(): void {
         "Line 26 col C — aggregates 11-23+25 col C; all upstream rows are unsupported.",
       "3.line.c27_subtractions":
         "Line 27 col B (CA AGI subtractions) — aggregate over unsupported rows.",
-      "3.line.c27_additions": "Line 27 col C (CA AGI additions) — aggregate over unsupported rows.",
       "4.page2.taxes_5d_federal":
         "Schedule CA Part II line 5d (taxes paid, col A) — itemized-deduction workflow not supported yet.",
       "4.page2.taxes_5e_subtractions":
@@ -217,8 +272,6 @@ export function register(): void {
         "Schedule CA Part II job-expenses worksheet AGI input — only relevant when itemizing unreimbursed job expenses. We don't support non-standard-deduction workflows yet.",
       "0.line.1a_subtractions":
         "CA-specific subtraction adjustments to W-2 wages (e.g. active-duty military pay exclusions, combat zone exclusions) require specialized facts/scenarios not yet ingested.",
-      "0.line.1a_additions":
-        "CA-specific addition adjustments to W-2 wages (e.g. combat zone income re-inclusions) require specialized facts/scenarios not yet ingested.",
       "0.line.1b_subtractions":
         "CA-specific subtraction adjustments to household employee wages not on W-2; no scenario modeled yet.",
       "0.line.1b_additions":
@@ -379,10 +432,6 @@ export function register(): void {
         "No CA-specific subtraction rules ingested for digital asset ordinary income; no scenario modeled yet.",
       "1.line.b8v_additions":
         "No CA-specific addition rules ingested for digital asset ordinary income; no scenario modeled yet.",
-      "1.line.b8z_income_type":
-        "Free-text description of 'other income' type; no structured fact or decision maps to this catch-all label field.",
-      "1.line.b8z_federal":
-        "No fact ingestion path for catch-all 'other income' amounts on Schedule 1 line 8z; no scenario modeled yet.",
       "1.line.b8z_subtractions":
         "Line 8z 'Other income' CA subtractions are catch-all adjustments (e.g. Native American earned income, state income tax refunds reclassified, etc.) that require per-item CA guidance and no structured fact path exists for the general 8z bucket.",
       "1.line.b8z_additions":
@@ -586,10 +635,6 @@ export function register(): void {
     },
 
     todos: {
-      "0.line.1z_additions":
-        "confidence=medium: Sum of available Column C addition sub-lines within lines 1a–1i; only 1i_additions exists in the inventory.",
-      "2.line.b10_additions":
-        "confidence=medium: Sum of all Column C Additions from Section A (lines 1z through 7a) and Section B (lines 1 through 7 and 9a); col C does NOT include 9b1–9b3.",
       "4.page2.interest_8e_subtractions":
         "confidence=low: Lines 8a, 8b, 8c have no column B fields in the inventory; line 8e col B has no contributing subtraction terms currently — unsupported is more appropriate.",
       "5.page2.total_itemized_17_subtractions":

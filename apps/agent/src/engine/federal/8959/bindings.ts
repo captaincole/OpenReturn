@@ -7,7 +7,7 @@
  * Generated at: 2026-05-27T16:41:25.598Z
  */
 
-import { defineForm, floor, sum } from "../../defineForm.js";
+import { defineForm, floor, roundDollars, sum } from "../../defineForm.js";
 import { SSN } from "../../values.js";
 import type { Form8959FilingInfo } from "./filingInfo.js";
 import type { Form8959 } from "./types.js";
@@ -41,8 +41,11 @@ export function register(): void {
           ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
           : undefined,
       "0.header.ssn": (_, info) => info.taxpayerSSN,
-      // MANUAL EDIT: routed to FilingInfo slot (sum of W-2 box 5).
-      "0.line.1_medicare_wages_tips": (_, info) => info.w2MedicareWagesTotal,
+      /*
+       * MANUAL EDIT: routed to FilingInfo slot (sum of W-2 box 5).
+       * MANUAL EDIT: W-2 sums round to the nearest dollar (roundDollars).
+       */
+      "0.line.1_medicare_wages_tips": (_, info) => roundDollars(info.w2MedicareWagesTotal),
       /*
        * Line 4 = lines 1 + 2 + 3. Lines 2 and 3 are unsupported; sum()
        * treats undefined as 0, so line 4 = line 1 for Marcus.
@@ -71,14 +74,14 @@ export function register(): void {
           ),
         ),
       /*
-       * MANUAL EDIT: line 7 = line 6 × 0.9%, rounded UP to whole
-       * dollars per the project's Math.ceil convention (CLAUDE.md). The
-       * engine has no multiply rule, so the math is inline.
+       * MANUAL EDIT: line 7 = line 6 × 0.9%, rounded to the nearest
+       * dollar (CLAUDE.md). The engine has no multiply rule, so the math
+       * is inline.
        */
       "0.line.7_additional_medicare_tax_wages": (f) => {
         const line6 = f["0.line.6_excess_medicare_wages"];
         if (typeof line6 !== "number" || line6 === 0) return undefined;
-        return Math.ceil(line6 * 0.009);
+        return roundDollars(line6 * 0.009);
       },
       /*
        * MANUAL EDIT: Part II lines 9–13 all gate on line 8 (SE income)
@@ -122,7 +125,7 @@ export function register(): void {
       "0.line.13_additional_medicare_tax_se": (f) => {
         const line12 = f["0.line.12_excess_se_income"];
         if (typeof line12 !== "number" || line12 === 0) return undefined;
-        return Math.ceil(line12 * 0.009);
+        return roundDollars(line12 * 0.009);
       },
       /*
        * MANUAL EDIT: Part III lines 15–17 all gate on line 14 (RRTA
@@ -147,7 +150,7 @@ export function register(): void {
       "0.line.17_additional_medicare_tax_rrta": (f) => {
         const line16 = f["0.line.16_excess_rrta_compensation"];
         if (typeof line16 !== "number" || line16 === 0) return undefined;
-        return Math.ceil(line16 * 0.009);
+        return roundDollars(line16 * 0.009);
       },
       /*
        * MANUAL EDIT: line 18 = sum(7, 13, 17). The gate requires at
@@ -164,17 +167,17 @@ export function register(): void {
         return sum(seven, thirteen, seventeen);
       },
       // MANUAL EDIT: routed to FilingInfo slot (sum of W-2 box 6).
-      "0.line.19_medicare_tax_withheld": (_, info) => info.w2MedicareTaxWithheld,
+      "0.line.19_medicare_tax_withheld": (_, info) => roundDollars(info.w2MedicareTaxWithheld),
       // Line 20 = line 1.
       "0.line.20_medicare_wages_from_line1": (f) => f["0.line.1_medicare_wages_tips"],
       /*
-       * MANUAL EDIT: line 21 = line 20 × 1.45%, rounded UP per the
-       * Math.ceil convention.
+       * MANUAL EDIT: line 21 = line 20 × 1.45%, rounded to the nearest
+       * dollar (CLAUDE.md).
        */
       "0.line.21_regular_medicare_tax_on_wages": (f) => {
         const line20 = f["0.line.20_medicare_wages_from_line1"];
         if (typeof line20 !== "number" || line20 === 0) return undefined;
-        return Math.ceil(line20 * 0.0145);
+        return roundDollars(line20 * 0.0145);
       },
       // Line 22 = max(0, line 19 − line 21).
       "0.line.22_additional_medicare_tax_withholding_wages": (f) =>

@@ -1,4 +1,5 @@
 import type { RefBlock, RefSection } from "../mastra/db/corpusStore";
+import { splitRange } from "./chunk";
 import type { PageSlice } from "./extract";
 
 /*
@@ -95,8 +96,138 @@ const FTB_KNOWN_PROSE_HEADINGS = new Set<string>([
   "Conformity",
 ]);
 
+/*
+ * IRS run-in headings: a line or part reference, a period, then body text
+ * on the same line ("Line 4. If any of your…", "Lines 2 and 16. Enter…",
+ * "Line 3(c). Enter…", "Part I. Use a separate…"). The prefix becomes
+ * the heading; the body stays as block content (inlineBodyOffset).
+ */
+const LINE_REF = String.raw`\d+[a-z]?(?:\([a-z0-9]\))?`;
+const RUN_IN_HEADING_RE = new RegExp(
+  String.raw`^((?:Lines? ${LINE_REF}(?:(?:,|,? and| through) ${LINE_REF})*)|Part [IVXLC]+)\.\s+(\S.*)$`,
+);
+
+function detectRunInHeading(line: string): HeadingMatch | null {
+  const lead = line.length - line.trimStart().length;
+  const m = line.trimStart().match(RUN_IN_HEADING_RE);
+  if (!m) return null;
+  const bodyOffset = lead + line.trimStart().indexOf(m[2], m[1].length);
+  return { heading: m[1], slug: slugifyHeading(m[1]), inlineBodyOffset: bodyOffset };
+}
+
+/*
+ * Standalone prose heading ("Purpose of Form", "Who Can Take the
+ * Deduction"): a short Title Case line with no closing punctuation, whose
+ * previous line ended a sentence (or that opens the doc). The previous-
+ * line test rejects wrapped body text, such as the second line of a
+ * bullet ("…Special Rules for Patrons of" / "Agricultural or Horticultural
+ * Cooperatives"). Wrapped headings are completed by the continuation rule.
+ */
+export function isProseHeading(line: string, prevLine: string | null): boolean {
+  const t = line.trim();
+  if (t.length < 3 || t.length > 60) return false;
+  if (/[.,;:]$/.test(t) || t.startsWith("•") || /^\d/.test(t) || /^See /.test(t)) return false;
+  if (!/^[A-Z]/.test(t) || !isTitleCaseLine(t)) return false;
+  /*
+   * At least two words, not all Yes/No: one-word worksheet cells
+   * ("Suspended", "Utilized") and flowchart answers ("Yes No") are not
+   * headings. Rare one-word headings ("Exceptions") fold into the parent.
+   */
+  const words = t.split(/\s+/);
+  if (words.length < 2 || words.every((w) => w === "Yes" || w === "No")) return false;
+  // Table rows and dates ("April 15, 2025", "Period 1 Period 2 1 76") are mostly numbers.
+  if (words.filter((w) => /\d/.test(w)).length * 2 > words.length) return false;
+  if (prevLine === null) return true;
+  return /[.:?!)]$/.test(prevLine.trim());
+}
+
+/*
+ * A real prose heading is followed by body text: after any wrapped
+ * heading lines, the next line is not Title Case. Worksheet and table
+ * cells ("Suspended" / "Utilized 2018" / "Remaining") fail this test
+ * because their neighbors are Title Case cells too.
+ */
+export function hasBodyAfter(lines: ReadonlyArray<{ text: string }>, i: number): boolean {
+  for (let j = i + 1; j < lines.length && j <= i + 1 + MAX_HEADING_CONTINUATION_LINES; j++) {
+    const t = lines[j].text.trim();
+    if (t.length === 0) continue;
+    if (!isTitleCaseLine(t) || /[.:]$/.test(t)) return /[a-z]/.test(t);
+  }
+  return false;
+}
+
+/* FTB layers: prose set, en-dash line headings, inline-dash headings. */
+function detectFtbHeading(line: string, t: string): HeadingMatch | null {
+  if (FTB_KNOWN_PROSE_HEADINGS.has(t)) {
+    return { heading: t, slug: slugifyHeading(t) };
+  }
+  if (FTB_LINE_EN_DASH_RE.test(t)) {
+    /*
+     * "Line 2a – Alimony Received" is a title: keep the whole line.
+     * "Line 1 – Enter your 2025 tax liability from" starts the body:
+     * the heading is "Line 1" and the rest stays as block content.
+     */
+    const dash = line.indexOf("–");
+    const rest = line.slice(dash + 1).trim();
+    if (isTitleCaseLine(rest) && !/[.:]$/.test(rest)) {
+      return { heading: t, slug: slugifyHeading(t) };
+    }
+    const label = line.slice(0, dash).trim();
+    let bodyOffset = dash + 1;
+    while (bodyOffset < line.length && /\s/.test(line[bodyOffset])) bodyOffset += 1;
+    return { heading: label, slug: slugifyHeading(label), inlineBodyOffset: bodyOffset };
+  }
+  const m = t.match(FTB_INLINE_DASH_RE);
+  if (m) {
+    const prefix = m[1].trim();
+    const prefixWords = prefix.split(/\s+/);
+    const mostlyNumbers = prefixWords.filter((w) => /\d/.test(w)).length * 2 > prefixWords.length;
+    if (isTitleCaseLine(prefix) && !mostlyNumbers) {
+      /*
+       * Locate the en-dash in the un-trimmed line so the offset is
+       * correct relative to line.charStart in parseDoc. The regex anchors
+       * to the trimmed string; the offset must point into the raw source.
+       */
+      const dashIdx = line.indexOf("–");
+      if (dashIdx >= 0) {
+        // Body begins after the dash and any following whitespace.
+        let bodyOffset = dashIdx + 1;
+        while (bodyOffset < line.length && /\s/.test(line[bodyOffset])) {
+          bodyOffset += 1;
+        }
+        return {
+          heading: prefix,
+          slug: slugifyHeading(prefix),
+          inlineBodyOffset: bodyOffset,
+        };
+      }
+    }
+  }
+  return null;
+}
+
+/*
+ * Worksheet and rate-schedule titles — the blocks engine code cites most
+ * ("Qualified Dividends and Capital Gain Tax Worksheet—Line 16 Keep for
+ * Your Records", "2025 Tax Computation Worksheet—Line 16CAUTION", "2025
+ * California Tax Rate Schedules"). A bare "…Worksheet" can end a body
+ * line ("Use the Tax Computation Worksheet"), so require a mark: a
+ * "—Line N" suffix, a year prefix, or the "Keep for Your Records" /
+ * "CAUTION" box text the PDF appends. The heading drops that box text.
+ */
+const WORKSHEET_TITLE_RE =
+  /^((\d{4} )?[A-Z][^.]{0,90}?(?:Worksheet|Tax Rate Schedules|Tax Table)(—Lines? \d+[a-z]?(?:,? (?:and|through) \d+[a-z]?)?)?)((?:\s*(?:Keep for Your Records|CAUTION))*)\s*!?$/;
+
+function detectWorksheetTitle(t: string): HeadingMatch | null {
+  const m = t.match(WORKSHEET_TITLE_RE);
+  if (!m || !(m[2] || m[3] || m[4])) return null;
+  return { heading: m[1], slug: slugifyHeading(m[1]) };
+}
+
 function detectHeading(line: string, style: ParserStyle = "irs"): HeadingMatch | null {
   const t = line.trim();
+  const runIn = detectRunInHeading(line) ?? detectWorksheetTitle(t);
+  if (runIn) return runIn;
   if (
     LINE_HEADING_RE.test(t) ||
     LINE_DASH_HEADING_RE.test(t) ||
@@ -108,38 +239,7 @@ function detectHeading(line: string, style: ParserStyle = "irs"): HeadingMatch |
   ) {
     return { heading: t, slug: slugifyHeading(t) };
   }
-  if (style === "ftb") {
-    if (FTB_KNOWN_PROSE_HEADINGS.has(t)) {
-      return { heading: t, slug: slugifyHeading(t) };
-    }
-    if (FTB_LINE_EN_DASH_RE.test(t)) {
-      return { heading: t, slug: slugifyHeading(t) };
-    }
-    const m = t.match(FTB_INLINE_DASH_RE);
-    if (m) {
-      const prefix = m[1].trim();
-      if (isTitleCaseLine(prefix)) {
-        /*
-         * Locate the en-dash in the un-trimmed line so the offset is
-         * correct relative to line.charStart in parseDoc. The regex anchors
-         * to the trimmed string; the offset must point into the raw source.
-         */
-        const dashIdx = line.indexOf("–");
-        if (dashIdx >= 0) {
-          // Body begins after the dash and any following whitespace.
-          let bodyOffset = dashIdx + 1;
-          while (bodyOffset < line.length && /\s/.test(line[bodyOffset])) {
-            bodyOffset += 1;
-          }
-          return {
-            heading: prefix,
-            slug: slugifyHeading(prefix),
-            inlineBodyOffset: bodyOffset,
-          };
-        }
-      }
-    }
-  }
+  if (style === "ftb") return detectFtbHeading(line, t);
   return null;
 }
 
@@ -194,6 +294,7 @@ function isTitleCaseLine(t: string): boolean {
 function isHeadingContinuation(lineText: string): boolean {
   const t = lineText.trim();
   if (t.length === 0 || t.length > 60) return false;
+  if (!/[A-Za-z]/.test(t)) return false;
   if (/[.!?]$/.test(t)) return false;
   if (/^[a-z]/.test(t)) return false;
   if (!isTitleCaseLine(t)) return false;
@@ -211,6 +312,16 @@ const MAX_HEADING_CONTINUATION_LINES = 5;
 const PAGE_NUM_RE = /^\d{1,3}$/;
 const FOOTER_RE = /^\d{1,3} Need more information or forms\? Visit IRS\.gov\.$/;
 const HEADER_CONTINUED_RE = /^\(Continued\)$/;
+/*
+ * FTB running headers/footers: "FTB 5805 Instructions 2025 Page 1",
+ * "Page 4 FTB 5805 Instructions 2025", "Personal Income Tax Booklet 2025
+ * Page 75".
+ */
+const FTB_RUNNING_RE =
+  /^(?:Page \d{1,3} )?[\w ().-]*(?:Instructions|Booklet) \d{4}(?: \(REV [\d-]+\))?(?: Page \d{1,3})?$/;
+/* IRS running footer, e.g. "Instructions for Form 8995-A (2025) 5". */
+const IRS_FOOTER_RE =
+  /^(?:\d{1,3} )?Instructions for (?:Form|Schedule) .*\(\d{4}\)(?: \d{1,3}| Catalog Number \w+)?$/;
 
 function isStructuralNoise(line: string): boolean {
   const t = line.trim();
@@ -218,6 +329,9 @@ function isStructuralNoise(line: string): boolean {
   if (PAGE_NUM_RE.test(t)) return true;
   if (FOOTER_RE.test(t)) return true;
   if (HEADER_CONTINUED_RE.test(t)) return true;
+  if (IRS_FOOTER_RE.test(t)) return true;
+  if (FTB_RUNNING_RE.test(t)) return true;
+  if (/^This Page Intentionally Left Blank$/i.test(t)) return true;
   return false;
 }
 
@@ -258,9 +372,12 @@ export interface ParseOpts {
 /**
  * Parse canonical text into sections and blocks.
  *
- * v1 strategy: one block per (section × page). High-confidence heading
- * lines (`Line 1a`, `Part I`, `Schedule 3`) delimit sections. Content
- * before the first heading falls into a synthetic "preamble" section.
+ * Headings delimit sections: regex lines (`Line 1a`, `Part I`), run-in
+ * headings (`Line 4. If…`), worksheet titles, known and Title Case prose
+ * headings, plus the FTB layers for style "ftb". Within a section, a
+ * block is the text on one page, capped at MAX_BLOCK_CHARS (chunk.ts).
+ * Block ids are `<sectionId>::bNN`. Content before the first heading
+ * falls into a synthetic "preamble" section.
  *
  * All block `text` values are verbatim slices of `canonicalText`; we do
  * not clean extraction artifacts here. Char offsets always point back to
@@ -290,7 +407,10 @@ class DocParser {
   private readonly usedSlugs: Set<string>;
   private currentSection: Omit<RefSection, "docId">;
   private sectionOrdinal = 1; // next ordinal for a new section
-  private blockOrdinal = 0;
+  private blockOrdinal = 0; // doc-wide order (ref_blocks.ordinal)
+  private blockInSection = 0; // per-section counter for the block id
+  /* Last non-noise line seen (any page); null before the first line. */
+  private prevLine: string | null = null;
   private pendingBlock: PendingBlock | null = null;
 
   constructor(
@@ -333,11 +453,18 @@ class DocParser {
         continue;
       }
 
-      const heading = detectHeading(line.text, this.opts.style);
+      const heading =
+        detectHeading(line.text, this.opts.style) ??
+        (isProseHeading(line.text, this.prevLine) && hasBodyAfter(lines, i)
+          ? { heading: line.text.trim(), slug: slugifyHeading(line.text.trim()) }
+          : null);
       if (heading) {
-        i = this.processHeading(heading, lines, i, page.pageNum);
+        const next = this.processHeading(heading, lines, i, page.pageNum);
+        this.prevLine = lines[next - 1].text;
+        i = next;
         continue;
       }
+      this.prevLine = line.text;
 
       // Regular content line. Extend the pending block, or open one.
       if (!this.pendingBlock || this.pendingBlock.pageNum !== page.pageNum) {
@@ -420,17 +547,23 @@ class DocParser {
     if (!this.pendingBlock) return;
     const start = this.pendingBlock.firstLineStart;
     const end = this.pendingBlock.lastLineEnd;
-    if (end > start) {
-      const text = this.canonicalText.slice(start, end);
+    /*
+     * Block ids are section-anchored and human readable:
+     * `<sectionId>::b01` is the first block under that heading. A parser
+     * change elsewhere in the doc does not renumber them. Long ranges are
+     * capped (chunk.ts); each piece gets its own id.
+     */
+    for (const [s, e] of end > start ? splitRange(this.canonicalText, start, end) : []) {
+      this.blockInSection += 1;
       this.blocks.push({
-        blockId: `${this.opts.docId}::p${this.pendingBlock.pageNum}::b${String(this.blockOrdinal).padStart(5, "0")}`,
+        blockId: `${this.currentSection.sectionId}::b${String(this.blockInSection).padStart(2, "0")}`,
         sectionId: this.currentSection.sectionId,
         pageNum: this.pendingBlock.pageNum,
         blockType: "paragraph",
         ordinal: this.blockOrdinal,
-        text,
-        charStart: start,
-        charEnd: end,
+        text: this.canonicalText.slice(s, e),
+        charStart: s,
+        charEnd: e,
       });
       this.blockOrdinal += 1;
     }
@@ -464,5 +597,6 @@ class DocParser {
       charEnd: charStart,
     };
     this.sectionOrdinal += 1;
+    this.blockInSection = 0;
   }
 }

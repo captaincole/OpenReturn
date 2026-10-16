@@ -9,10 +9,15 @@
 
 import { lookupStandardDeduction } from "../../data/standardDeduction.js";
 import { lookupTax } from "../../data/taxTable.js";
-import { defineForm, floor, sum } from "../../defineForm.js";
+import { defineForm, floor, roundDollars, sum } from "../../defineForm.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
+
+/* A Schedule B total, or undefined when Schedule B is not filed. */
+function fromScheduleB(value: unknown): number | undefined {
+  return typeof value === "number" ? value : undefined;
+}
 
 /*
  * register() wraps the defineForm side effect. Callers import it and
@@ -66,8 +71,11 @@ export function register(): void {
       "header.filing_status_mfj": (_, info) => info.filingStatus === "married_filing_jointly",
       "header.filing_status_qss": (_, info) => info.filingStatus === "qualifying_surviving_spouse",
       "header.filing_status_mfs": (_, info) => info.filingStatus === "married_filing_separately",
-      // Sum of W-2 box 1 (wages) across all employers.
-      "line.1a": (_, info) => info.w2WagesTotal,
+      /*
+       * Sum of W-2 box 1 (wages) across all employers.
+       * MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar (roundDollars).
+       */
+      "line.1a": (_, info) => roundDollars(info.w2WagesTotal),
       // Line 1z = lines 1a through 1h per IRS instructions. sum() treats unsupported terms as 0.
       "line.1z": (f) =>
         sum(
@@ -86,16 +94,36 @@ export function register(): void {
        * resolveFilingInfo fills the slot via sumInvestmentBox filtered
        * to interest keys.
        */
-      "line.2a": (_, info) => info.taxExemptInterestTotal,
+      "line.2a": (_, info) => roundDollars(info.taxExemptInterestTotal),
       /*
        * MANUAL EDIT: sum of 1099-INT box 1 (taxable interest). Flows
        * into line 9 total income.
        */
-      "line.2b": (_, info) => info.taxableInterestTotal,
+      /*
+       * MANUAL EDIT (2026-10-16): when Schedule B is filed, line 2b is its
+       * line 4 (and 3b its line 6), so a "sum_rounded_rows" choice there
+       * carries through. Otherwise the document sum, nearest dollar.
+       */
+      "line.2b": (f, info) =>
+        fromScheduleB(f["schedule-b.0.line.4_taxable_interest"]) ??
+        roundDollars(info.taxableInterestTotal),
       // Sum of 1099-DIV box 1b (qualified dividends) across all accounts.
-      "line.3a": (_, info) => info.qualifiedDividends,
+      "line.3a": (_, info) => roundDollars(info.qualifiedDividends),
       // Sum of 1099-DIV box 1a (ordinary dividends) across all accounts.
-      "line.3b": (_, info) => info.ordinaryDividends,
+      "line.3b": (f, info) =>
+        fromScheduleB(f["schedule-b.0.line.6_total_ordinary_dividends"]) ??
+        roundDollars(info.ordinaryDividends),
+      /*
+       * MANUAL EDIT: lines 4a–5c from 1099-R facts (resolveRetirementSlots).
+       * (a) gross and (b) taxable are document sums; "Rollover" marks a
+       * direct rollover (codes G, H).
+       */
+      "line.4a": (_, info) => roundDollars(info.iraDistributions?.gross),
+      "line.4b": (_, info) => roundDollars(info.iraDistributions?.taxable),
+      "line.4c_rollover": (_, info) => (info.iraDistributions?.rollover ? true : undefined),
+      "line.5a": (_, info) => roundDollars(info.pensionDistributions?.gross),
+      "line.5b": (_, info) => roundDollars(info.pensionDistributions?.taxable),
+      "line.5c_rollover": (_, info) => (info.pensionDistributions?.rollover ? true : undefined),
       /*
        * MANUAL EDIT: line 7a reads the net capital gain from Schedule D
        * line 16. It returns undefined (blocked) when the scenario does
@@ -192,7 +220,8 @@ export function register(): void {
         try {
           const r = computeQdcg({
             taxableIncome: taxable,
-            qualifiedDividends: info.qualifiedDividends ?? 0,
+            // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
+            qualifiedDividends: roundDollars(info.qualifiedDividends) ?? 0,
             netLongTermGain: netLtcg,
             /*
              * TODO: route through the Foreign Earned Income Tax
@@ -213,14 +242,39 @@ export function register(): void {
           return r.ok ? r.tax : undefined;
         }
       },
-      // Lines 16 + 17. Line 17 is unsupported; sum() treats it as 0.
+      // MANUAL EDIT: line 8 = Schedule 1 line 10; blank when Schedule 1 is not filed.
+      "line.8": (f) => {
+        const v = f["schedule-1.0.line.10"];
+        return typeof v === "number" ? v : undefined;
+      },
+      // MANUAL EDIT: line 10 = Schedule 1 line 26; blank when Schedule 1 is not filed.
+      "line.10": (f) => {
+        const v = f["schedule-1.1.line.26"];
+        return typeof v === "number" ? v : undefined;
+      },
+      // MANUAL EDIT: line 13a = Form 8995-A line 39 (QBI deduction); blank when 8995-A is not filed.
+      "line.13a": (f) => {
+        const v = f["form-8995-a.1.line.39"];
+        return typeof v === "number" ? v : undefined;
+      },
+      // MANUAL EDIT: line 17 = Schedule 2 line 3 (AMT + excess APTC); blank when Schedule 2 is not filed.
+      "line.17": (f) => {
+        const v = f["schedule-2.0.line.3_total_lines_1z_and_2"];
+        return typeof v === "number" ? v : undefined;
+      },
+      // Lines 16 + 17. sum() treats a blank line 17 as 0.
       "line.18": (f) => sum(f["line.16"], f["line.17"]),
+      // MANUAL EDIT: line 23 = Schedule 2 line 21 (other taxes); blank when Schedule 2 is not filed.
+      "line.23": (f) => {
+        const v = f["schedule-2.1.line.21_total_other_taxes"];
+        return typeof v === "number" ? v : undefined;
+      },
       // Line 22 = line 18 minus line 21, floored at 0 per the 'if zero or less, enter -0-' instruction.
       "line.22": (f) => floor(0, sum(f["line.18"], f["line.21"] === undefined ? 0 : -f["line.21"])),
       // Total tax = line 22 (tax after credits) + line 23 (other taxes from Schedule 2).
       "line.24": (f) => sum(f["line.22"], f["line.23"]),
       // Sum of W-2 box 2 (federal income tax withheld) across all employers.
-      "line.25a": (_, info) => info.w2FederalWithholding,
+      "line.25a": (_, info) => roundDollars(info.w2FederalWithholding),
       /*
        * MANUAL EDIT: line 25c = federal income tax withheld from
        * "other" forms. In today's scope that means Form 8959 line 24
@@ -235,8 +289,23 @@ export function register(): void {
       "line.25d": (f) => sum(f["line.25a"], f["line.25b"], f["line.25c"]),
       // Total withholding (25d) + estimated tax payments (26) + other refundable credits (32) per IRS instructions.
       "line.33": (f) => sum(f["line.25d"], f["line.26"], f["line.32"]),
-      // Overpayment = total payments (33) minus total tax (24), floored at 0 per IRS instructions.
-      "line.34": (f) => floor(0, sum(f["line.33"], f["line.24"] === undefined ? 0 : -f["line.24"])),
+      // MANUAL EDIT: line 34 (overpaid) only when line 33 exceeds line 24; blank otherwise.
+      "line.34": (f) => {
+        const paid = f["line.33"];
+        const tax = f["line.24"];
+        if (typeof paid !== "number" || typeof tax !== "number") return undefined;
+        return paid > tax ? paid - tax : undefined;
+      },
+      /*
+       * MANUAL EDIT: line 37 (amount you owe) = line 24 − line 33 when
+       * tax exceeds payments, plus the line 38 penalty (not modeled: 0).
+       */
+      "line.37": (f) => {
+        const paid = f["line.33"];
+        const tax = f["line.24"];
+        if (typeof paid !== "number" || typeof tax !== "number") return undefined;
+        return tax > paid ? tax - paid + sum(f["line.38"]) : undefined;
+      },
       /*
        * MANUAL EDIT: refund amount requested = line 34 minus the portion
        * applied to next year's estimated tax (line 36). When the
@@ -424,24 +493,12 @@ export function register(): void {
         "Checkbox indicating child's qualified dividends are included in line 3a — requires Form 8814 / dependent-income scenario which has not been built yet.",
       "line.3c_box2":
         "Checkbox indicating child's ordinary dividends are included in line 3b — requires Form 8814 / dependent-income scenario which has not been built yet.",
-      "line.4a":
-        "IRA gross distribution (Form 1099-R box 1) — no 1099-R fact ingestion path has been built yet.",
-      "line.4b":
-        "IRA taxable amount — requires 1099-R ingestion and potentially a taxable-portion computation (basis tracking, rollover rules, QCD exclusion). No 1099-R scenario built yet.",
-      "line.4c_rollover":
-        "IRA rollover checkbox (Exception 1) — requires 1099-R ingestion and rollover-election logic. No 1099-R scenario built yet.",
       "line.4c_qcd":
         "IRA QCD checkbox (Exception 3) — requires 1099-R ingestion and qualified-charitable-distribution scenario. No QCD scenario built yet.",
       "line.4c_box3":
         "IRA exception box 3 checkbox (e.g. HFD or other special codes) — requires 1099-R ingestion and specific exception scenarios. No such scenario built yet.",
       "line.4c_box3_amount":
         "Amount associated with IRA line 4c box 3 exception — requires 1099-R ingestion and exception-specific amount tracking. No such scenario built yet.",
-      "line.5a":
-        "No 1099-R / pension ingestion path built yet; total pension and annuity payments cannot be computed until we ingest retirement distribution facts.",
-      "line.5b":
-        "No 1099-R ingestion and no Simplified Method Worksheet implementation; taxable pension/annuity amount cannot be computed.",
-      "line.5c_rollover":
-        "No rollover decision or 1099-R ingestion path; cannot determine whether taxpayer made a pension/annuity rollover.",
       "line.5c_pso":
         "No PSO (Public Safety Officer insurance premium exclusion) scenario or decision ingested; cannot determine whether this election applies.",
       "line.5c_box3":
@@ -462,10 +519,6 @@ export function register(): void {
         "Requires Form 8814 (child's interest and dividends) scenario — no dependent income ingestion or Form 8814 computation path exists yet.",
       "line.7b_childs_capital_gain_amount":
         "Amount from Form 8814 line 10 — requires Form 8814 computation for child's capital gain, which depends on dependent income ingestion not yet built.",
-      "line.8":
-        "Additional income from Schedule 1, line 10 — Schedule 1 is not yet ingested as a form, so no fieldId exists to reference.",
-      "line.10":
-        "Adjustments to income from Schedule 1 line 26 — Schedule 1 is not yet ingested as a form, so no fieldId exists to reference.",
       "line.12a_you_as_dependent":
         "Whether the taxpayer can be claimed as a dependent on someone else's return requires a dependent-status decision not yet modeled in the decision set.",
       "line.12a_spouse_as_dependent":
@@ -482,8 +535,6 @@ export function register(): void {
         "No MFJ/spouse scenario ingested yet — spouse DOB fact does not exist, and no date-comparison rule is available.",
       "line.12d_spouse_blind":
         "No MFJ/spouse scenario ingested yet — spouse blindness fact does not exist.",
-      "line.13a":
-        "No self-employment or qualified business income scenario ingested yet — Form 8995/8995-A QBI deduction requires business income facts not yet modeled.",
       "line.13b":
         "Schedule 1-A (new 2025 form) covers no-tax-on-tips, no-tax-on-overtime, car loan interest, and enhanced senior deductions — none of these scenarios are ingested yet.",
       "line.16_from_form_8814":
@@ -494,14 +545,10 @@ export function register(): void {
         "Checkbox indicating tax includes amounts from a third special form (e.g. section 962 election, recapture). No ingestion scenario built for these edge cases.",
       "line.16_other_form_number":
         "Free-text entry for the form number associated with the third checkbox on line 16. Tied to special-form tax scenarios not yet ingested.",
-      "line.17":
-        "Amount from Schedule 2, line 3 (alternative minimum tax and other taxes). Schedule 2 has not been ingested; no fieldId available to reference.",
       "line.19":
         "Child tax credit / credit for other dependents from Schedule 8812. Schedule 8812 has not been ingested and no dependent-with-CTC scenario has been built yet.",
       "line.20":
         "Schedule 3 line 8 (nonrefundable credits) has not been ingested as a form yet — no cross-form reference path available.",
-      "line.23":
-        "Schedule 2 line 21 (other taxes including self-employment tax) has not been ingested as a form yet — no cross-form reference path available.",
       "line.26":
         "Estimated tax payments and prior-year overpayment applied forward have no ingestion path yet — no estimated_payments fact category exists.",
       "line.former_spouse_ssn":
@@ -512,8 +559,6 @@ export function register(): void {
         "Federal income tax withheld from 1099 forms — no 1099-withholding scenario exercised yet; render blank rather than 0 until a fixture has Box 4 facts.",
       "line.32":
         "Line 32 — sum of other refundable credits / payments (27a + 28 + 29 + 30 + 31), all of which are individually unsupported.",
-      "line.37":
-        "Line 37 (amount you owe) — owe-tax branch not yet exercised by any test scenario; current fixtures all produce refunds.",
       "line.27a":
         "Earned Income Credit requires an EIC eligibility worksheet computation (earned income, AGI, filing status, number of qualifying children with valid SSNs) — no EIC worksheet or qualifying-child ingestion path built yet.",
       "line.27b_clergy_schedule_se":

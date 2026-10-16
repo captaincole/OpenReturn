@@ -10,8 +10,10 @@
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { EngineDerivation } from "../../types.js";
+import type { Form8949FilingInfo } from "../8949/filingInfo.js";
 
-export interface ScheduleDFilingInfo extends BaseFilingInfo {
+export interface ScheduleDFilingInfo
+  extends BaseFilingInfo, Pick<Form8949FilingInfo, "form8949BoxTotals"> {
   /**
    * Schedule D must-file determination. Driven by
    * `decisions.scope.must_file_schedule_d`. True when the taxpayer has

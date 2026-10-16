@@ -14,6 +14,7 @@
 import { fixtureFileSchema } from "../../catalog.js";
 import { makeFormSpec, type FormSpec } from "../../formSpec.js";
 import { register as registerForm540 } from "./540/bindings.js";
+import { register as registerForm5805 } from "./5805/bindings.js";
 import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
 
 /*
@@ -22,14 +23,27 @@ import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
  * apps/agent/forms/.
  */
 import form540CatalogJson from "../../../mastra/public/forms/state/ca/540/catalog.json";
+import form5805CatalogJson from "../../../mastra/public/forms/state/ca/5805/catalog.json";
 import scheduleCaCatalogJson from "../../../mastra/public/forms/state/ca/schedule-ca/catalog.json";
 
 export const CA_CATALOGS = [
   fixtureFileSchema.parse(scheduleCaCatalogJson),
   fixtureFileSchema.parse(form540CatalogJson),
+  fixtureFileSchema.parse(form5805CatalogJson),
 ];
 
 export const CA_FORMS: FormSpec[] = [
+  /*
+   * Catalog-only entries with no bindings yet (catalog-fill regression
+   * only). Schedule D (540) and FTB 5805 instructions are published as
+   * HTML, not PDF, so neither folder has an instructions.pdf yet.
+   */
+  makeFormSpec({
+    formId: "schedule-d-ca",
+    shortId: "schedule-d-ca",
+    displayName: "Schedule D (540)",
+    relativeDir: "state/ca/schedule-d-ca",
+  }),
   makeFormSpec({
     formId: "schedule-ca",
     shortId: "schedule-ca",
@@ -43,5 +57,12 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "Form 540",
     relativeDir: "state/ca/540",
     register: registerForm540,
+  }),
+  makeFormSpec({
+    formId: "form-5805",
+    shortId: "5805",
+    displayName: "FTB 5805",
+    relativeDir: "state/ca/5805",
+    register: registerForm5805,
   }),
 ];

@@ -11,6 +11,7 @@
 
 import { createStep } from "@mastra/core/workflows";
 import { promises as fs } from "node:fs";
+import path from "node:path";
 import { loadFromFixture, type FieldInventory } from "../../engine/catalog.js";
 import { classifyBindings } from "../classifyBindings.js";
 import { renderBindings } from "../renderBindings.js";
@@ -151,6 +152,8 @@ export const writeStep = createStep({
       typeInterfaceName: interfaceBase,
       filingInfoInterfaceName: `${interfaceBase}FilingInfo`,
     });
+    // Catalog-only forms have no engine folder yet.
+    await fs.mkdir(path.dirname(inputData.outputPath), { recursive: true });
     await fs.writeFile(inputData.outputPath, report.source, "utf8");
 
     return {

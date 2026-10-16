@@ -8,7 +8,7 @@
  *
  * Source: IRS Form 1040 (2025) Instructions, page 38, "Qualified
  * Dividends and Capital Gain Tax Worksheet—Line 16".
- * Corpus block id: irs-1040-inst-2025::p38::b00073.
+ * Corpus block id: irs-1040-inst-2025::sec::qualified-dividends-and-capital-gain-tax-worksheet-line-16::b02.
  *
  * Inline notes mark worksheet inputs that come from unsupported fields.
  * They default to 0 / not-filing for now. When ingestion lands, the
@@ -18,6 +18,7 @@
 import { lookupPreferentialBrackets } from "../data/preferentialBrackets.js";
 import { lookupRateSchedule } from "../data/rateSchedule.js";
 import { lookupTax } from "../data/taxTable.js";
+import { roundDollars } from "../defineForm.js";
 import type { FilingStatus } from "../values.js";
 
 export interface QdcgInputs {
@@ -117,7 +118,8 @@ function taxByAmount(amount: number, filingStatus: FilingStatus, taxYear: number
     }
     return r.tax;
   }
-  return lookupRateSchedule(taxYear, filingStatus, amount);
+  // Rate-schedule tax is un-rounded; round to the nearest dollar (CLAUDE.md).
+  return roundDollars(lookupRateSchedule(taxYear, filingStatus, amount));
 }
 
 /**
@@ -149,24 +151,22 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
   const brackets = lookupPreferentialBrackets(taxYear, filingStatus);
 
   /*
-   * Whole-dollar convention: every IRS-form line that takes a dollar
-   * entry rounds UP to the next dollar via Math.ceil. The IRS allows
-   * "round off cents to whole dollars" without a direction. CPA software
-   * conventionally rounds up because that is conservative for the
-   * taxpayer: slight overpayment is fine, underpayment is not. The
-   * convention applies at every whole-dollar line in the worksheet: at
-   * entry (L1/L2/L3), at the percentage lines (L18/L21), and implicitly
-   * via the tax-table lookups (L22/L24 already return whole dollars).
+   * Whole dollars (CLAUDE.md). Lines 1–3 copy 1040 lines that are already
+   * whole dollars (line 2 = 1040 line 3a, a document sum rounded to the
+   * nearest dollar by the caller); roundDollars there only guards against
+   * a caller passing cents. Calculated lines round to the nearest dollar
+   * too: the percentage lines (L18/L21) and the rate-schedule tax at
+   * L22/L24 (taxByAmount).
    * Line 1: 1040 line 15 (taxable income).
    */
-  const line1 = Math.ceil(inputs.taxableIncome);
+  const line1 = roundDollars(inputs.taxableIncome);
   // Line 2: 1040 line 3a (qualified dividends).
-  const line2 = Math.ceil(inputs.qualifiedDividends);
+  const line2 = roundDollars(inputs.qualifiedDividends);
   /*
    * Line 3: the smaller of Schedule D line 15 / line 16, with blank/loss
    * treated as 0. The caller computes it; the worksheet uses the number.
    */
-  const line3 = Math.ceil(inputs.netLongTermGain);
+  const line3 = roundDollars(inputs.netLongTermGain);
   // Line 4: add lines 2 and 3 (total preferential income).
   const line4 = line2 + line3;
   // Line 5: line 1 − line 4 (ordinary bucket; floored at 0).
@@ -194,14 +194,10 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
   // Line 17 = preferential dollars at 15%.
   const line17 = Math.min(line12, line16);
   /*
-   * Ceiling rounding on the percentage multiplications (lines 18 and
-   * 21). This matches the convention of major CPA software packages,
-   * verified against a CPA-prepared 2024 return: they round each computed
-   * tax line UP to the next dollar, which is conservative for the
-   * taxpayer. The IRS instructions mandate no direction; ceiling matches
-   * the published-form examples.
+   * The percentage lines (18 and 21) round to the nearest dollar, the
+   * IRS rule (CLAUDE.md, "Whole-dollar rounding").
    */
-  const line18 = Math.ceil(line17 * 0.15);
+  const line18 = roundDollars(line17 * 0.15);
 
   // Lines 19–21 — 20% rate computation.
   const line19 = line9 + line17;
@@ -212,7 +208,7 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
    * 20% threshold.
    */
   const line20 = Math.max(0, line10 - line19);
-  const line21 = Math.ceil(line20 * 0.2);
+  const line21 = roundDollars(line20 * 0.2);
 
   // Line 22: tax on line 5 (ordinary bucket) via tax table / rate schedule.
   const line22 = taxByAmount(line5, filingStatus, taxYear);

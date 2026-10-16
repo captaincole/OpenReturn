@@ -192,7 +192,7 @@ Decide before binding Schedule B Part I; the answer affects how
 so a scenario can express "Marcus received $700 in HYSA interest." No
 scenario fixture in this PR — just the infrastructure and a unit test.
 
-The Wealthfront 1099-INT sample (a real HYSA statement) informed
+A Wealthfront-style 1099-INT sample informed
 our box layout in Phase A. `InterestFactValue` should mirror the
 box-1/box-3/box-4/box-8 + state-info (box 15–17) shape we see there.
 

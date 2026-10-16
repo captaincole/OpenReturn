@@ -17,7 +17,7 @@ import { loadFromFixtures } from "../src/engine/catalog.js";
 import { evaluateAllForms } from "../src/engine/engine.js";
 import { resolveFilingInfo } from "../src/engine/filingInfo.js";
 import { getFormSpec } from "../src/engine/registry.js";
-import { fillFromCatalog } from "../src/engine/render/fillFromCatalog.js";
+import { renderFormCopies } from "../src/engine/render/renderCopies.js";
 import { makeDecisionsView, makeFactsView, type DerivationContext } from "../src/engine/types.js";
 import { projectRoot } from "../src/paths.js";
 import type { Scenario } from "../tests/types.js";
@@ -123,10 +123,12 @@ async function main() {
     }
 
     const blankBytes = await readFile(spec.blankPdfPath);
-    const { pdfBytes, warnings } = await fillFromCatalog({
-      blankPdfBytes: blankBytes,
+    const { pdfBytes, warnings, copies } = await renderFormCopies({
+      spec,
       form: evaluated,
+      ctx,
       catalog,
+      blankPdfBytes: blankBytes,
     });
 
     const outName = `${toPascal(s.name)}-${shortName(spec.formId)}-rendered.pdf`;
@@ -136,7 +138,7 @@ async function main() {
     const filled = evaluated.fields.filter((f) => f.result.ok).length;
     const total = evaluated.fields.length;
     console.log(
-      `  ✓ ${spec.formId.padEnd(14)} → ${outName}  (${filled}/${total} fields filled${warnings.length ? `, ${warnings.length} warning(s)` : ""})`,
+      `  ✓ ${spec.formId.padEnd(14)} → ${outName}  (${filled}/${total} fields filled${copies > 1 ? `, ${copies} copies` : ""}${warnings.length ? `, ${warnings.length} warning(s)` : ""})`,
     );
   }
 }

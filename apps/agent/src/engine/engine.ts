@@ -19,6 +19,7 @@
 
 import { z } from "zod";
 import type { Catalog, FieldInventory } from "./catalog.js";
+import { isPendingResult, pendingResult, trackPendingReads } from "./pendingReads.js";
 import {
   blocked,
   type AnyFormField,
@@ -52,6 +53,8 @@ export interface EngineContext extends DerivationContext {
    * during a must-file evaluation.
    */
   field?: FieldInventory;
+  /** Final fixpoint pass: cross-form reads stop waiting (pendingReads.ts). */
+  settling?: boolean;
 }
 
 // ─── Internal registry state ─────────────────────────────────────────────
@@ -119,6 +122,8 @@ export function _resetBindingRegistryForTests(): void {
 export interface EvaluateFormSharedState {
   fieldResults: Map<string, DerivationResult<unknown>>;
   formMustFiles: Map<string, DerivationResult<boolean>>;
+  /** Set by evaluateAllForms for the final settle pass. */
+  settling?: boolean;
 }
 
 /**
@@ -150,6 +155,7 @@ export function evaluateForm(
     ...ctx,
     fieldResult: (id) => fieldResults.get(id),
     formMustFile: (id) => formMustFiles.get(id),
+    settling: shared?.settling,
   };
 
   const mustFile = resolveMustFile(formId, engineCtx, formMustFiles);
@@ -223,6 +229,12 @@ function resolveMustFile(
  * already cached. Bindings are pure functions of (params, ctx), and ctx
  * only grows, so the next pass returns the same answer.
  */
+/*
+ * Field ids each result's binding read. Keyed by the result object, so a
+ * cached ok result from an earlier pass keeps the reads that produced it.
+ */
+const readsByResult = new WeakMap<object, string[]>();
+
 function evaluateFields(
   formId: string,
   engineCtx: EngineContext,
@@ -249,8 +261,10 @@ function evaluateFields(
          * field's inventory. The internal binding wrapper reads it for
          * per-field metadata (multi_select options).
          */
-        const fieldCtx: EngineContext = { ...engineCtx, field: inv };
-        result = binding.rule.evaluate(binding.params, fieldCtx);
+        const reads = trackPendingReads({ ...engineCtx, field: inv }, formId);
+        result = binding.rule.evaluate(binding.params, reads.ctx);
+        if (reads.hadPendingRead()) result = pendingResult(inv.fieldId);
+        readsByResult.set(result, reads.readIds());
       }
       fieldResults.set(inv.fieldId, result);
     }
@@ -261,6 +275,7 @@ function evaluateFields(
       category: inv.category,
       valueType: inv.valueType,
       result,
+      reads: readsByResult.get(result),
     });
   }
   return fields;
@@ -294,12 +309,13 @@ function lookupMustFileDerivation(
 // ─── Multi-form orchestration via fixpoint iteration ─────────────────────
 
 /**
- * Max passes before the evaluator gives up. In practice evaluation
- * converges in 2-3 passes: federal resolves on pass 1, state cross-form
- * references resolve on pass 2. The 5-pass ceiling turns genuine
- * non-convergence into a loud error instead of an infinite loop.
+ * Max passes before the evaluator gives up. A cross-form read of a form
+ * not evaluated yet waits one pass (pendingReads.ts), so the pass count
+ * grows with the depth of the form-to-form chain: 4 for the simple
+ * scenarios, 6 for jordan (2026-10-15), plus the settle pass. The
+ * ceiling turns a genuine cycle into a loud error, not an infinite loop.
  */
-const MAX_FIXPOINT_PASSES = 5;
+const MAX_FIXPOINT_PASSES = 20;
 
 /**
  * Evaluate multiple forms with shared state. Iterate until results stop
@@ -353,7 +369,8 @@ export function evaluateAllForms(
     const delta = okAfter - okBefore;
     resolvedPerPass.push(delta);
     if (delta === 0) {
-      return { forms, passes: pass, resolvedPerPass };
+      if (shared.settling || !hasPending(shared)) return { forms, passes: pass, resolvedPerPass };
+      shared.settling = true;
     }
   }
 
@@ -374,6 +391,11 @@ function nonConvergenceError(shared: EvaluateFormSharedState): Error {
       `Still-blocked fields (${stillBlocked.length}): ${stillBlocked.slice(0, 10).join(", ")}${stillBlocked.length > 10 ? "…" : ""}. ` +
       `Suspect a real binding cycle. Add intermediate decisions or split bindings to break it.`,
   );
+}
+
+function hasPending(shared: EvaluateFormSharedState): boolean {
+  for (const result of shared.fieldResults.values()) if (isPendingResult(result)) return true;
+  return false;
 }
 
 function countOk<V>(map: Map<string, DerivationResult<V>>): number {

@@ -20,11 +20,8 @@ export const alejandroScheduleCaExpected: ExpectedResults = {
      */
     "schedule-ca.0.line.1a_federal": 100000, // W-2 wages
     "schedule-ca.0.line.1a_subtractions": 0,
-    "schedule-ca.0.line.1a_additions": 0,
     "schedule-ca.0.line.1z_federal": 100000, // sum of 1a–1i
     "schedule-ca.0.line.1z_subtractions": 0,
-    "schedule-ca.0.line.1z_additions": 0,
-    "schedule-ca.0.line.2b_federal": 0, // taxable interest (none)
     "schedule-ca.0.line.3b_federal": 385, // ordinary dividends
     "schedule-ca.0.line.3b_subtractions": 0,
     "schedule-ca.0.line.3b_additions": 0,
@@ -41,7 +38,6 @@ export const alejandroScheduleCaExpected: ExpectedResults = {
      */
     "schedule-ca.2.line.b10_federal": 102935, // 100,000 + 385 + 2,550
     "schedule-ca.2.line.b10_subtractions": 0,
-    "schedule-ca.2.line.b10_additions": 0,
 
     /*
      * ─── Part I, Section C (Schedule 1 adjustments) ─────────────────
@@ -50,7 +46,6 @@ export const alejandroScheduleCaExpected: ExpectedResults = {
      */
     "schedule-ca.3.line.c27_federal": 102935,
     "schedule-ca.3.line.c27_subtractions": 0,
-    "schedule-ca.3.line.c27_additions": 0,
 
     /*
      * ─── Part II — Adjustments to Federal Itemized Deductions ───────

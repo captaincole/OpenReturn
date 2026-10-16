@@ -10,6 +10,7 @@
  * finishes the job without re-paying for contextualization.
  */
 
+import { parseArgs } from "node:util";
 import { getDocument } from "../../src/mastra/db/corpusStore";
 import { projectRoot } from "../../src/paths";
 import { ingestRefDoc } from "../../src/refdocs/ingest";
@@ -22,7 +23,15 @@ interface SyncResult {
   unconfigured: string[];
 }
 
-async function syncOne(entry: CorpusEntry): Promise<{
+interface SyncFlags {
+  force: boolean;
+  noContextualize: boolean;
+}
+
+async function syncOne(
+  entry: CorpusEntry,
+  flags: SyncFlags,
+): Promise<{
   docId: string;
   action: "ingested" | "replaced" | "skipped";
 }> {
@@ -36,6 +45,9 @@ async function syncOne(entry: CorpusEntry): Promise<{
     publisher: entry.sidecar.publisher,
     taxYear: entry.sidecar.taxYear,
     sourceUrl: entry.sidecar.sourceUrl,
+    parserStyle: entry.sidecar.parserStyle,
+    force: flags.force,
+    noContextualize: flags.noContextualize,
   });
 
   if (result.skipped) {
@@ -47,7 +59,17 @@ async function syncOne(entry: CorpusEntry): Promise<{
   };
 }
 
-async function run(): Promise<void> {
+async function run(argv: string[]): Promise<void> {
+  const { values } = parseArgs({
+    args: argv,
+    options: {
+      force: { type: "boolean", default: false },
+      "no-contextualize": { type: "boolean", default: false },
+    },
+    strict: true,
+    allowPositionals: false,
+  });
+  const flags: SyncFlags = { force: values.force, noContextualize: values["no-contextualize"] };
   const walk = await walkCorpus(projectRoot);
   const result: SyncResult = { ok: [], failed: [], unconfigured: [] };
 
@@ -59,7 +81,7 @@ async function run(): Promise<void> {
   console.log(`[corpus sync] processing ${walk.entries.length} doc(s)`);
   for (const entry of walk.entries) {
     try {
-      const r = await syncOne(entry);
+      const r = await syncOne(entry, flags);
       result.ok.push(r);
       console.log(`  ✓ ${r.docId} (${r.action})`);
     } catch (err) {
@@ -88,5 +110,15 @@ async function run(): Promise<void> {
 export const syncCommand: Command = {
   name: "sync",
   summary: "Ingest new/sha-drifted forms/**/instructions.pdf into corpus.db (idempotent)",
+  options: [
+    {
+      flag: "--force",
+      desc: "re-ingest every doc even if its sha matches (after a parser change)",
+    },
+    {
+      flag: "--no-contextualize",
+      desc: "skip the Haiku contextualization stage (parser iteration)",
+    },
+  ],
   run,
 };

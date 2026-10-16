@@ -17,7 +17,7 @@
  *
  * Source: IRS Form 1040 (2025) Instructions, page 38 — Qualified
  * Dividends and Capital Gain Tax Worksheet, lines 6 and 13.
- * Block id in the ingested corpus: irs-1040-inst-2025::p38::b00073.
+ * Block id in the ingested corpus: irs-1040-inst-2025::sec::qualified-dividends-and-capital-gain-tax-worksheet-line-16::b02.
  * Inflation-adjusted values originate in Rev. Proc. 2024-40.
  */
 
@@ -45,7 +45,8 @@ const BRACKETS_2025_FEDERAL: BracketTable = {
   jurisdiction: "federal",
   source: {
     docId: "irs-1040-inst-2025",
-    blockId: "irs-1040-inst-2025::p38::b00073",
+    blockId:
+      "irs-1040-inst-2025::sec::qualified-dividends-and-capital-gain-tax-worksheet-line-16::b02",
     page: 38,
   },
   byStatus: {

@@ -21,8 +21,9 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import type { ExtractedField } from "./extractFormFields.js";
+import { createStructured } from "./structuredOutput.js";
 
-const MODEL = "claude-sonnet-4-6";
+const MODEL = "claude-sonnet-5-5";
 const MAX_TOKENS = 16000;
 const FIELDS_PER_BATCH = 40;
 
@@ -300,7 +301,7 @@ function parseEnrichInput(input: unknown): RawEnrichInput | null {
 }
 
 /*
- * One enrichment batch: prompt → forced enrich_fields call → coerced
+ * One enrichment batch: prompt → structured enrich_fields output → coerced
  * result. Returns null (batch skipped) when the model's output is
  * unusable; the pipeline continues with the remaining batches.
  */
@@ -313,26 +314,18 @@ async function classifyOneFieldBatch(
   assignedFieldIds: Map<string, string>,
 ): Promise<{ raw: RawEnrichInput; usage: Anthropic.Usage } | null> {
   const userText = buildBatchUserText(opts, batch, batchIndex, totalBatches, assignedFieldIds);
-  const response = await client.messages.create({
+  const { input, response } = await createStructured(client, {
     model: MODEL,
     max_tokens: MAX_TOKENS,
     system: SYSTEM_PROMPT,
-    tools: [ENRICH_TOOL],
-    tool_choice: { type: "tool", name: "enrich_fields" },
+    tool: ENRICH_TOOL,
     messages: [{ role: "user", content: [{ type: "text", text: userText }] }],
   });
 
-  const toolUse = response.content.find((c) => c.type === "tool_use");
-  if (!toolUse || toolUse.type !== "tool_use") {
-    console.warn(
-      `[classify] batch ${batchIndex + 1}/${totalBatches}: no tool_use returned (stop_reason=${response.stop_reason}); skipping batch`,
-    );
-    return null;
-  }
-  const raw = parseEnrichInput(toolUse.input);
+  const raw = input === null ? null : parseEnrichInput(input);
   if (!raw) {
     console.warn(
-      `[classify] batch ${batchIndex + 1}/${totalBatches}: malformed tool input; skipping batch. Preview: ${JSON.stringify(toolUse.input).slice(0, 300)}`,
+      `[classify] batch ${batchIndex + 1}/${totalBatches}: no parseable output (stop_reason=${response.stop_reason}); skipping batch. Preview: ${JSON.stringify(input).slice(0, 300)}`,
     );
     return null;
   }

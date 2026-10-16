@@ -22,13 +22,12 @@ const ANTHROPIC_BASE = "https://api.anthropic.com/v1";
 const ANTHROPIC_VERSION = "2023-06-01";
 
 /*
- * Contextual-summary model. The Haiku default keeps `corpus sync` cheap
- * for contributors adding a document (~$0.50/doc). The maintainer builds
- * the official published corpus with REFDOCS_MODEL=claude-opus-5
- * (measured: $17.35 for the full 10-doc rebuild). Mixed models across
- * docs work mechanically (sha-skip preserves existing rows), but the
- * published corpus should use one model end-to-end. Rebuild fully when
- * you switch models.
+ * Contextual-summary model. Haiku 5.5 for everything, including the
+ * published corpus (decided 2026-10-15; corpus-v2 used claude-opus-5 at
+ * $17.35 for 10 docs). Override with REFDOCS_MODEL for experiments only.
+ * Mixed models across docs work mechanically (sha-skip preserves
+ * existing rows), but a published corpus should use one model
+ * end-to-end: rebuild fully (`corpus sync --force`) when you switch.
  */
 const SUMMARIZER_MODEL = process.env.REFDOCS_MODEL ?? "claude-haiku-5-5";
 

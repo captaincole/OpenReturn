@@ -13,8 +13,9 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { FieldKind } from "./extractFormFields.js";
 import { renderPageWithOverlay, type OverlayWidget } from "./renderPageWithOverlay.js";
+import { createStructured } from "./structuredOutput.js";
 
-const MODEL = "claude-sonnet-4-6";
+const MODEL = "claude-sonnet-5-5";
 const MAX_TOKENS = 4000;
 
 export interface VisionWidget {
@@ -78,12 +79,11 @@ export async function resolveLabelsForPage(opts: ResolveLabelsOpts): Promise<Map
 
   const client = new Anthropic({ apiKey });
 
-  const response = await client.messages.create({
+  const { input } = await createStructured(client, {
     model: MODEL,
     max_tokens: MAX_TOKENS,
     system: SYSTEM_PROMPT,
-    tools: [SUBMIT_LABELS_TOOL],
-    tool_choice: { type: "tool", name: "submit_labels" },
+    tool: SUBMIT_LABELS_TOOL,
     messages: [
       {
         role: "user",
@@ -105,7 +105,7 @@ export async function resolveLabelsForPage(opts: ResolveLabelsOpts): Promise<Map
     ],
   });
 
-  return parseLabels(response);
+  return parseLabels(input);
 }
 
 function buildLabelPrompt(opts: ResolveLabelsOpts): string {
@@ -150,16 +150,12 @@ const SUBMIT_LABELS_TOOL: Anthropic.Tool = {
 };
 
 /*
- * Extract the id→label map from the forced tool call. The model
+ * Extract the id→label map from the structured output. The model
  * occasionally stringifies the labels array; parse it back before
  * validating.
  */
-function parseLabels(response: Anthropic.Message): Map<number, string> {
-  const toolUse = response.content.find((c) => c.type === "tool_use");
-  if (!toolUse || toolUse.type !== "tool_use") {
-    throw new Error(`visionLabel: no tool_use in response (stop_reason=${response.stop_reason})`);
-  }
-  const rawInput = toolUse.input as {
+function parseLabels(input: unknown): Map<number, string> {
+  const rawInput = input as {
     labels?: Array<{ id: number; label: string }> | string;
   } | null;
   if (rawInput && typeof rawInput.labels === "string") {

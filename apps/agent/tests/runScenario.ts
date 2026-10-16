@@ -24,6 +24,7 @@ import {
   assertRenderedText,
 } from "./helpers/assertions.js";
 import { readGoldenPdfValues } from "./helpers/goldenPdf.js";
+import { decisionsWithPreparerStyle } from "./helpers/preparer.js";
 import type { RunResult, Scenario, ScenarioForm } from "./types.js";
 
 /*
@@ -56,11 +57,16 @@ const registeredForms = new Set<string>();
 export async function runScenario(s: Scenario): Promise<RunResult> {
   const t0 = Date.now();
   const failures: string[] = [];
+  const notModeled: string[] | undefined = s.allowNotModeled ? [] : undefined;
+  const known = s.allowNotModeled
+    ? { causes: s.knownMismatches ?? {}, hits: [] as string[] }
+    : undefined;
 
+  const decisions = decisionsWithPreparerStyle(s);
   const ctx: DerivationContext = {
     taxYear: s.taxYear,
     facts: makeFactsView(s.facts),
-    decisions: makeDecisionsView(s.decisions),
+    decisions: makeDecisionsView(decisions),
     /*
      * defineForm bindings read their inputs through ctx.filingInfo (the
      * AI-resolver layer; a hand-coded stand-in today). Every registered
@@ -73,7 +79,7 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
         value: f.value,
         category: f.category,
       })),
-      decisions: s.decisions.map((d) => ({
+      decisions: decisions.map((d) => ({
         decisionKey: d.decisionKey,
         decision: d.decision,
       })),
@@ -124,7 +130,7 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
       failures.push(`[${sf.formId}] evaluateAllForms returned no result.`);
       continue;
     }
-    await assertForm(sf, spec.blankPdfPath, evaluated, catalog, failures);
+    await assertForm(sf, spec.blankPdfPath, evaluated, catalog, failures, notModeled, known);
   }
 
   return {
@@ -134,6 +140,8 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
     durationMs: Date.now() - t0,
     fixpointPasses: passes,
     resolvedPerPass,
+    notModeled,
+    knownMismatches: known?.hits,
   };
 }
 
@@ -143,6 +151,8 @@ async function assertForm(
   form: ReturnType<typeof evaluateAllForms>["forms"] extends Map<string, infer V> ? V : never,
   catalog: Catalog,
   failures: string[],
+  notModeled?: string[],
+  known?: { causes: Record<string, string>; hits: string[] },
 ): Promise<void> {
   /*
    * fillFromCatalog walks the catalog inventory and writes each value into
@@ -156,8 +166,33 @@ async function assertForm(
 
   const prefix = sf.formId;
 
+  if (notModeled) {
+    /*
+     * Not-modeled reporting hides a missing field, so a typo in an
+     * expected fieldId would hide too. Check every id against the catalog.
+     */
+    const known = new Set(catalog.getFields(sf.formId).map((f) => f.fieldId));
+    const ids = [...Object.keys(sf.expected.engineFields), ...sf.expected.renderedChecked];
+    for (const id of ids) {
+      if (!known.has(id)) failures.push(`[${prefix}] unknown fieldId ${id} (not in catalog).`);
+    }
+  }
+
   for (const [fieldId, expected] of Object.entries(sf.expected.engineFields)) {
-    assertEngineNumber(form, fieldId, expected, failures, prefix);
+    const cause = known?.causes[fieldId];
+    if (!known || cause === undefined) {
+      assertEngineNumber(form, fieldId, expected, failures, prefix, notModeled);
+      continue;
+    }
+    /* Ratchet: route a listed line's result instead of failing on it. */
+    const own: string[] = [];
+    const nmBefore = notModeled?.length ?? 0;
+    assertEngineNumber(form, fieldId, expected, own, prefix, notModeled);
+    if (own.length > 0) {
+      known.hits.push(`[${prefix}] ${fieldId} — ${cause}`);
+    } else if ((notModeled?.length ?? 0) === nmBefore) {
+      failures.push(`[${prefix}] ${fieldId} now matches — remove it from knownMismatches.`);
+    }
   }
   for (const [fieldId, expected] of Object.entries(sf.expected.renderedText)) {
     assertRenderedText(rendered, fieldId, expected, failures, prefix);
@@ -166,6 +201,11 @@ async function assertForm(
     assertNotRendered(rendered, fieldId, failures, prefix);
   }
   for (const fieldId of sf.expected.renderedChecked) {
+    const f = form.fields.find((x) => x.fieldId === fieldId);
+    if (notModeled && (!f || (!f.result.ok && f.result.unsupported))) {
+      notModeled.push(`[${prefix}] ${fieldId} (expected checked)`);
+      continue;
+    }
     assertRenderedChecked(rendered, fieldId, failures, prefix);
   }
 

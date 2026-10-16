@@ -34,7 +34,8 @@ import { evaluateAllForms } from "./engine.js";
 import type { AIDecisionRow, TaxFactRow } from "./facts/rows.js";
 import { resolveFilingInfo, type FilingInfo } from "./filingInfo.js";
 import { FORMS, catalog as bundledCatalog, getFormSpec, registerAllForms } from "./registry.js";
-import { fillFromCatalog, type RenderedWidget } from "./render/fillFromCatalog.js";
+import { type RenderedWidget } from "./render/fillFromCatalog.js";
+import { renderFormCopies } from "./render/renderCopies.js";
 import {
   makeDecisionsView,
   makeFactsView,
@@ -66,6 +67,8 @@ export interface EvaluatedScenario {
   authEmail: string | null;
   /** Every registered form, keyed by formId. */
   forms: Map<string, EvaluatedForm<AnyFormField>>;
+  /** The context the forms were evaluated with. Rendering extra copies reuses it. */
+  ctx: DerivationContext;
 }
 
 export interface RenderedForm {
@@ -132,7 +135,7 @@ export function evaluateScenario(inputs: ScenarioInputs): EvaluatedScenario {
 
   const { forms } = evaluateAllForms(SCENARIO_FORM_IDS, ctx, bundledCatalog);
 
-  return { filing, facts, decisions, filingInfo, authEmail, forms };
+  return { filing, facts, decisions, filingInfo, authEmail, forms, ctx };
 }
 
 /**
@@ -158,5 +161,11 @@ export async function renderForm(
   }
   const blankPdfPath = resolve(process.cwd(), "forms", spec.relativeDir, "blank.pdf");
   const blankPdfBytes = await readFile(blankPdfPath);
-  return fillFromCatalog({ blankPdfBytes, form, catalog: bundledCatalog });
+  return renderFormCopies({
+    spec,
+    form,
+    ctx: scenario.ctx,
+    catalog: bundledCatalog,
+    blankPdfBytes,
+  });
 }

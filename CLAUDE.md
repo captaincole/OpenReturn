@@ -151,26 +151,24 @@ TypeScript enforces both. Adding a field without declaring them is a compile err
 
 **Header fields** (top-of-form personal info, filing-status checkboxes) are modeled as FormFields too — text/single-select kinds that derive from identity facts / scope decisions. They sit in the same `EvaluatedForm.fields` array as the numeric lines. PDF renderers continue to read raw facts directly; the header fields exist for the Filing Status panel rollup.
 
-### Whole-dollar rounding convention — `Math.ceil`
+### Whole-dollar rounding convention — nearest dollar
 
-Every tax-form line that expects a whole-dollar entry rounds **UP** to the next dollar via `Math.ceil`. Not `Math.round`, not truncation — always up.
+Tax-form lines take whole dollars, rounded to the **nearest** dollar with `roundDollars()` in `src/engine/defineForm.ts` (decided 2026-10-16). The IRS rule (1040 instructions, "Rounding Off to Whole Dollars"): drop amounts under 50 cents, raise 50–99 cents to the next dollar.
 
-Applies to:
-- Worksheet inputs that arrive with floating-point precision (e.g. summed 1099-DIV box totals like $381.40)
-- Percentage multiplications (e.g. 15% of $13,885 = $2,082.75 → $2,083)
-- Any other "fill in the dollar amount" line on a form or worksheet
+- **Document sums** keep the cents while adding and round only the total (IRS: "include cents when adding the amounts and round off only the total"). Example: interest $9.59 + $2,287.09 = $2,296.68 → $2,297. Verified: Alejandro's CPA return, 1040 line 3a $381.40 → $381.
+- **Calculated lines** (percentages, worksheet steps, rate-schedule tax) also round to nearest. Verified against a filed 2025 return (private comparison kit) and marcus's CPA (8959: 43,500 × 0.9% = 391.50 → 392; 243,500 × 1.45% = 3,530.75 → 3,531).
+- **Exception — step rules:** "for each $2,500 **or part** of $2,500" (CA AGI limitation) rounds up by definition (`Math.ceil` on the step count). That is the rule itself, not dollar rounding.
 
-Why: the IRS instruction says "you may round off cents to whole dollars" without specifying direction. CPA software conventionally rounds up because that's conservative for the taxpayer (slight overpayment is fine, underpayment triggers penalties). Verified against an actual CPA-prepared 2024 return: their QDCG worksheet line 21 used `ceil(70,001 × 0.20) = 14,001` (not `round → 14,000`), and the cumulative ceiling rounding produced the exact $1 difference that confirmed the convention.
+Lines that the form defines as arithmetic on other lines use those lines' rounded values (Schedule D col (h) = rounded (d) − rounded (e)).
 
-Implementation pattern (used in `src/engine/worksheets/qdcg.ts`):
 ```ts
-const line1 = Math.ceil(inputs.taxableIncome);   // round inputs at entry
-const line18 = Math.ceil(line17 * 0.15);          // round percentage lines
+"line.3a": (_, info) => roundDollars(info.qualifiedDividends); // document sum
+const line18 = roundDollars(line17 * 0.15);                     // calculated line
 ```
 
-Tax-table lookups (`lookupTax`) already return whole dollars; rate-schedule lookups (`lookupRateSchedule`) return un-rounded values, and the caller (typically a worksheet) is responsible for ceiling at the next whole-dollar boundary.
+`roundDollars()` snaps to cents first, so a float sum like 202887.49999999997 does not round the wrong way. Tax-table lookups (`lookupTax`) already return whole dollars; rate-schedule lookups return un-rounded values for the caller to round.
 
-Don't reach for `Math.round` on tax-form money. Default to `Math.ceil` and document any exception inline.
+**Preparers differ.** A CPA's 2024 QDCG worksheet rounded a 20% line up (x.20 → the next dollar). Marcus's CPA wrote 392 on 8959 line 7 but 391 on Schedule 2 line 11 (which should copy it). The engine follows the IRS rule. Don't use bare `Math.round` or `Math.ceil` on tax-form money; record new evidence here.
 
 ## Vercel logs (production debugging)
 
@@ -236,7 +234,7 @@ ref_meta                      (key/value; embedding_model = which model built th
 Stable IDs — used everywhere as citations:
 - `irs-1040-inst-2025` (doc)
 - `irs-1040-inst-2025::sec::single` (section)
-- `irs-1040-inst-2025::p13::b00013` (block)
+- `irs-1040-inst-2025::sec::single::b01` (block — section-anchored: the 1st block under that heading; a parser change elsewhere in the doc does not renumber it)
 
 Canonical text lives on disk next to its source PDF: `apps/agent/forms/<jurisdiction>/<short>/instructions.canonical.txt`. DB stores char offsets pointing into it. Source-of-truth is the canonical file; everything else is a derivation.
 
@@ -305,7 +303,7 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 - Ollama down / model not pulled → FTS-only with a warning
 - `ref_meta.embedding_model` ≠ active model (e.g. prebuilt corpus from another model) → FTS-only with a warning; fix with `npm run corpus -- reembed --all`
 
-`mode` parameter (`fts` | `vector` | `hybrid`, default hybrid) lets evals A/B specific legs. (A local cross-encoder reranker is the future option if merge-ordering quality ever becomes the bottleneck.)
+`mode` parameter (`fts` | `vector` | `hybrid`, default hybrid) lets evals A/B specific legs.
 
 ### The reviewDecision workflow
 
@@ -342,6 +340,8 @@ Everything lives under `apps/agent/scripts/`. Two subcommand CLIs (shared dispat
 | `smokeReview.ts` | three end-to-end review scenarios (npm: `smoke:review`) |
 | `inspectLastReview.ts` | dump most recent review-decision workflow run + trace |
 | `renderScenario.ts` | render every form in a scenario to PDF for spot-checking |
+| `lockScenario.ts --scenario=<name>` | rewrite a scenario's `expected.ts` engineFields from the engine's output — only after the output is verified (jordan pattern, see docs/contributing.md) |
+| `compareFiled/cli.ts <folder>` | private comparison kit: engine vs a real filed return (scenario format, kept outside the repo); writes a no-amounts report with root causes for the checker to send to a maintainer |
 
 ### Lessons from this build (read before changing the pipeline)
 
@@ -351,7 +351,7 @@ Everything lives under `apps/agent/scripts/`. Two subcommand CLIs (shared dispat
 - **Embedding models need their documented task prefixes.** EmbeddingGemma expects `task: search result | query: …` for queries and `title: none | text: …` for documents (applied in `src/refdocs/embeddings.ts`); skipping them silently degrades retrieval precision. When swapping embedding models, read the model card for its prompt convention — and remember vectors from different models (or dims) are never comparable, which is why `ref_meta.embedding_model` gates the vector leg.
 - **Vector literals serialize as strings, not arrays.** `vectorLiteral([1,2,3])` returns `"[1,2,3]"` — that string feeds libsql's `vector32()`. Passing a JS array silently fails or coerces. (SQLite doesn't enforce the declared `F32_BLOB` dim — only query-vs-stored dim equality matters at distance time.)
 - **Diagnose retrieval failures bottom-up.** Order: parser → FTS index → embeddings → merge ordering → agent prompt. Don't blame the corpus first. Our headline parsing failure was attributing the `§ Single` block to `(Preamble)`, not a corpus or retrieval gap. Verify section attribution by querying `ref_blocks` directly before tuning retrieval.
-- **Heading detection needs both regex and named prose.** `Line Nx`, `Part N`, `Schedule N` come from regex. Standalone Title Case headings like `Single`, `Married Filing Jointly`, `Head of Household` need an explicit `KNOWN_PROSE_HEADINGS` set in `apps/agent/src/refdocs/parse.ts`. Title-case continuation rule absorbs multi-line headings (`Qualifying Surviving` + `Spouse`).
+- **Heading detection needs both regex and named prose.** `Line Nx`, `Part N`, `Schedule N` come from regex. Standalone Title Case headings like `Single`, `Married Filing Jointly`, `Head of Household` need an explicit `KNOWN_PROSE_HEADINGS` set in `apps/agent/src/refdocs/parse.ts`. Title-case continuation rule absorbs multi-line headings (`Qualifying Surviving` + `Spouse`). Since 2026-10-15 the parser also detects run-in headings (`Line 4. If…`), worksheet titles (`…Worksheet—Line 16`), and standalone Title Case prose headings (previous line ends a sentence, body follows); FTB docs get the FTB rules automatically (sidecar `publisher: "FTB"`, or `"parserStyle"`); blocks are capped at 1,200 chars (`refdocs/chunk.ts`). After any parser change: `corpus sync --force`, then re-point code citations to block ids.
 - **One-off smoke tests miss "fixed A but broke B" patterns.** A 3-case smoke gave us false confidence twice during this build. Phase 6 of the original plan (a real Mastra eval dataset with scorers) is the next thing to build before any further prompt/retrieval changes.
 - **The review judges use Haiku because each task is narrow.** Read decision + facts + retrieval, emit one structured output. If verdict-quality drops on harder cases, swap to Sonnet — one-line change per judge in `workflows/reviewDecision/judges/`. Don't reach for it preemptively.
 - **`structuredOutput.errorStrategy: "strict"` is right for production but loud during prompt iteration.** Catches malformed model output explicitly via the existing try/catch → `review_failed` verdict, so failures surface in the DB rather than being papered over.
