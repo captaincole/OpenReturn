@@ -78,15 +78,21 @@ export const recordAIDecision = createTool({
      * shows in the activity feed. This catch only logs unexpected throws
      * from the wrapper.
      */
-    void reviewDecision(scope, id).catch((err) => {
-      console.error(`[review-decision] background run failed for decision ${id}:`, err);
-    });
+    // DECISION_REVIEW=off skips the review (the E2E run does this); the verdict stays "pending".
+    const reviewOn = process.env.DECISION_REVIEW !== "off";
+    if (reviewOn) {
+      void reviewDecision(scope, id).catch((err) => {
+        console.error(`[review-decision] background run failed for decision ${id}:`, err);
+      });
+    }
 
     return {
       id,
       recorded: true,
       verdict: "pending" as const,
-      verdictReason: "Review running in background.",
+      verdictReason: reviewOn
+        ? "Review running in background."
+        : "Review turned off (DECISION_REVIEW=off).",
     };
   },
 });
