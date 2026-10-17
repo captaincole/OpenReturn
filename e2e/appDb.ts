@@ -41,3 +41,11 @@ export function latestDecisions(): Map<string, unknown> {
   );
   return new Map(rows.map((r) => [r.decision_key, parse(r.decision)]));
 }
+
+/* Decisions whose grounding review has not written a verdict yet. */
+export function unreviewedDecisions(): number {
+  const [row] = query<{ n: number }>(
+    "SELECT count(*) AS n FROM ai_decisions WHERE verdict IS NULL OR verdict = 'pending'",
+  );
+  return row.n;
+}

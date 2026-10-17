@@ -11,6 +11,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { appendFileSync } from "node:fs";
 import { join } from "node:path";
+import { agentStreamErrors } from "./agentLog";
 import { OPENING_TURNS, replyTo, type Turn } from "./alexAnswers";
 import {
   decisionProblems,
@@ -19,11 +20,13 @@ import {
   latestSidecar,
   w2Problems,
 } from "./alexChecks";
+import { unreviewedDecisions } from "./appDb";
 import { RUN_DIR } from "./run";
 import { check, failedStages, note, plumbing, writeSummary } from "./summary";
 
 const OWNER = { name: "Alex Morales", email: "alex@morales.com", password: "e2e-alex-password" };
 const MAX_TURNS = 10;
+const REVIEW_WAIT_MS = 20 * 60_000;
 const TURN_MS = 15 * 60_000; // one Luca turn on a local model, tool calls included
 const TRANSCRIPT = join(RUN_DIR, "transcript.md");
 const EXPECTED_FORMS = ["form-1040", "form-540"];
@@ -40,6 +43,7 @@ test("Alex: intake through generated forms", async ({ page }) => {
   const generated = await runIntake(page);
   if (generated)
     await plumbing("forms page serves the PDFs", () => checkFormsPage(page, filingPath));
+  if (process.env.E2E_DECISION_REVIEW === "on") await waitForReviews();
 
   check("W-2 read matches the PDF", "model", w2Problems());
   check("required decisions recorded", "model", decisionProblems());
@@ -88,13 +92,16 @@ async function runIntake(page: Page): Promise<boolean> {
             ? await plumbing("upload is sent", () => send(page, next))
             : await send(page, next);
       log(turn, next, lucaSaid);
+      noAgentErrors(turn);
       if (!lucaSaid.trim()) note(`turn ${turn}: empty reply from Luca`);
       if (next.file) await plumbing("upload is stored", () => expectUploadStored());
       if (EXPECTED_FORMS.every((formId) => latestSidecar()?.forms[formId])) {
+        check("agent turns run without errors", "plumbing", []);
         check("intake reaches generated forms", "model", []);
         return true;
       }
     }
+    check("agent turns run without errors", "plumbing", []);
     throw new Error(`forms incomplete after ${MAX_TURNS} turns`);
   } catch (err) {
     if (failedStages().some((s) => s.startsWith("plumbing"))) throw err;
@@ -104,6 +111,27 @@ async function runIntake(page: Page): Promise<boolean> {
 }
 
 const toTurn = (text: string | undefined): Turn | undefined => (text ? { text } : undefined);
+
+/*
+ * Reviews run in the background and stop when the servers stop. Wait for
+ * every verdict, so the run time and the API cost include them.
+ */
+async function waitForReviews() {
+  const start = Date.now();
+  await expect
+    .poll(() => unreviewedDecisions(), { timeout: REVIEW_WAIT_MS, intervals: [5_000] })
+    .toBe(0)
+    .catch(() => note(`reviews: ${unreviewedDecisions()} still without a verdict`));
+  note(`reviews: waited ${Math.round((Date.now() - start) / 1000)} s after the forms`);
+}
+
+/* An agent error is a broken app, not a model mistake: fail plumbing and stop. */
+function noAgentErrors(turn: number) {
+  const errors = agentStreamErrors();
+  if (errors.length === 0) return;
+  check("agent turns run without errors", "plumbing", [`turn ${turn}: ${errors[0]}`]);
+  throw new Error(`turn ${turn}: agent error`);
+}
 
 /* Send one message and return Luca's reply once the turn ends. */
 async function send(page: Page, turn: Turn): Promise<string> {
