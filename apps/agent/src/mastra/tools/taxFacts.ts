@@ -1,6 +1,6 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import { listFacts, listOpenQuestions, recordFact, resolveQuestion } from "../db/taxFacts";
+import { listFacts, listOpenQuestions, recordFacts, resolveQuestion } from "../db/taxFacts";
 import { requireUserContext } from "./userContext";
 
 const CATEGORIES = [
@@ -30,41 +30,49 @@ const CATEGORIES = [
   "other",
 ] as const;
 
-export const recordTaxFact = createTool({
-  id: "record-tax-fact",
-  description:
-    "Store a confirmed tax fact for the current user/year. Only call after the user has explicitly stated or confirmed the value — never invent or guess. Always include a source_note describing where the number came from (e.g. 'W-2 Box 1 from Stripe, 2025', 'verbal confirmation during 2026-04-19 intake'). The user is identified automatically via auth — you don't need to track an id.",
+/* Few enough facts per call that each call is easy to trace back to one user message. */
+export const MAX_FACTS_PER_CALL = 5;
+
+const factInput = z.object({
+  category: z.enum(CATEGORIES).describe("Fact category bucket"),
+  key: z.string().describe("Fact key, e.g. 'identity.occupation' or 'use_tax.owed_amount'"),
+  value: z
+    .any()
+    .describe("The value — number, string, or object. Numbers should be in dollars unless noted."),
+  sourceNote: z.string().describe("Where this came from — document, statement, or conversation"),
+});
+
+export const recordTaxFacts = createTool({
+  id: "record-tax-facts",
+  description: `Store 1 to ${MAX_FACTS_PER_CALL} confirmed tax facts for the current user/year in one call. Put every fact from the user's message in the same call; split more than ${MAX_FACTS_PER_CALL} facts into several calls. Only record a value the user has explicitly stated or confirmed — never invent or guess. Give each fact a sourceNote describing where the value came from (e.g. 'W-2 Box 1 from Stripe, 2025', 'verbal confirmation during 2026-04-19 intake'). The user is identified automatically via auth — you don't need to track an id.`,
   inputSchema: z.object({
     year: z.number().int().describe("Tax year (e.g. 2025)"),
-    category: z.enum(CATEGORIES).describe("Fact category bucket"),
-    key: z
-      .string()
-      .describe("Short snake_case key, e.g. 'w2_box1_wages' or 'roth_ira_contribution'"),
-    value: z
-      .any()
-      .describe(
-        "The value — number, string, or object. Numbers should be in dollars unless noted.",
-      ),
-    sourceNote: z.string().describe("Where this came from — document, statement, or conversation"),
+    // No .max(): the cap is enforced in execute, with an error that says how to split.
+    facts: z.array(factInput).describe(`1 to ${MAX_FACTS_PER_CALL} facts`),
   }),
   outputSchema: z.object({
-    id: z.string(),
-    recorded: z.boolean(),
+    recorded: z.array(z.object({ key: z.string(), id: z.string() })),
   }),
   execute: async (input, context) => {
+    const { facts, year } = input;
+    if (facts.length === 0 || facts.length > MAX_FACTS_PER_CALL) {
+      throw new Error(
+        `record-tax-facts takes 1 to ${MAX_FACTS_PER_CALL} facts; got ${facts.length}. Nothing was recorded. Split the facts into calls of ${MAX_FACTS_PER_CALL} or fewer.`,
+      );
+    }
     const { scope, userId, filingId } = await requireUserContext(context);
-    const id = crypto.randomUUID();
-    await recordFact(scope, {
-      id,
+    const rows = facts.map((f) => ({
+      id: crypto.randomUUID(),
       userId,
       filingId,
-      taxYear: input.year,
-      category: input.category,
-      key: input.key,
-      value: input.value,
-      sourceNote: input.sourceNote,
-    });
-    return { id, recorded: true };
+      taxYear: year,
+      category: f.category,
+      key: f.key,
+      value: f.value,
+      sourceNote: f.sourceNote,
+    }));
+    await recordFacts(scope, rows);
+    return { recorded: rows.map(({ key, id }) => ({ key, id })) };
   },
 });
 

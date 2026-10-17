@@ -41,7 +41,7 @@ export function text(inputs: ResolverInputs, key: string): string | undefined {
     throw new Error(
       `resolveFilingInfo: fact "${key}" expected string, got ${typeof v} ` +
         `(value=${JSON.stringify(v).slice(0, 100)}). Re-record this fact as a ` +
-        `plain string via record-tax-fact.`,
+        `plain string via record-tax-facts.`,
     );
   }
   return v;

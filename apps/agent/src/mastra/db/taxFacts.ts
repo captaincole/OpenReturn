@@ -48,9 +48,8 @@ function rowToFact(r: Row): TaxFactRow {
   };
 }
 
-export async function recordFact(scope: Scope, fact: TaxFact): Promise<void> {
-  await ensureAppSchema();
-  await getAppDb().execute({
+function insertFact(fact: TaxFact) {
+  return {
     sql: `INSERT INTO tax_facts
             (id, user_id, filing_id, tax_year, category, fact_key, fact_value, source_note, created_at)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -65,7 +64,19 @@ export async function recordFact(scope: Scope, fact: TaxFact): Promise<void> {
       fact.sourceNote ?? null,
       nowIso(),
     ],
-  });
+  };
+}
+
+export async function recordFact(scope: Scope, fact: TaxFact): Promise<void> {
+  await ensureAppSchema();
+  await getAppDb().execute(insertFact(fact));
+  void scope; // scoping is explicit via fact.userId/filingId on insert
+}
+
+/** Writes all the facts in one transaction: every row is stored, or none. */
+export async function recordFacts(scope: Scope, facts: TaxFact[]): Promise<void> {
+  await ensureAppSchema();
+  await getAppDb().batch(facts.map(insertFact), "write");
   void scope; // scoping is explicit via fact.userId/filingId on insert
 }
 

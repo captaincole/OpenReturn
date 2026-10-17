@@ -12,7 +12,7 @@ import { ingest1099R } from "../tools/ingest1099R";
 import { ingest1099SA } from "../tools/ingest1099SA";
 import { ingestW2 } from "../tools/ingestW2";
 import { requestDocumentUpload } from "../tools/requestDocument";
-import { listOpenQuestionsTool, recordTaxFact, resolveOpenQuestion } from "../tools/taxFacts";
+import { listOpenQuestionsTool, recordTaxFacts, resolveOpenQuestion } from "../tools/taxFacts";
 import { lucaInstructions } from "./luca.instructions";
 import { lucaWorkingMemorySchema } from "./luca.workingMemory";
 import { PdfAttachmentRasterizer } from "./pdfAttachments";
@@ -38,7 +38,7 @@ export const luca = new Agent({
     ingest1099Consolidated,
     ingest1099R,
     ingest1099SA,
-    recordTaxFact,
+    recordTaxFacts,
     recordAIDecision,
     // Surface specific document requests to the dashboard as action cards.
     requestDocumentUpload,
