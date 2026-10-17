@@ -23,8 +23,7 @@ export function resolve8995AInfo(inputs: ResolverInputs): Form8995AFilingInfo {
     fallbacks: [{ rule: `fallback: section 199A dividends $${reit} > 0`, value: reit > 0 }],
   });
   return {
-    mustFile8995A: r.value as Form8995AFilingInfo["mustFile8995A"],
-    mustFile8995ADerivation: r.derivation,
+    mustFile: { "form-8995-a": r },
     qualifiedReitDividends: divs.length > 0 ? reit : undefined,
   };
 }

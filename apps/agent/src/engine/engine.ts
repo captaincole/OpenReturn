@@ -5,7 +5,8 @@
  * and `src/engine/state/<state>/<short>/bindings.ts`. Each file exports
  * `register()`, which calls `defineForm<TForm, TInfo>` (see
  * defineForm.ts — the typed authoring surface) with the form's binding
- * functions. defineForm registers rules here via bindField / bindMustFile.
+ * functions. defineForm registers rules here via bindField. Must-file
+ * comes from FilingInfo.mustFile, which each form's resolver writes.
  * The engine joins those bindings against a `Catalog`: inventory metadata
  * (label, category, valueType, PDF widget, position) loaded from
  * `forms/<jurisdiction>/<short>/catalog.json`.
@@ -19,9 +20,11 @@
 
 import { z } from "zod";
 import type { Catalog, FieldInventory } from "./catalog.js";
+import type { MustFileResolution } from "./filingInfo.js";
 import { isPendingResult, pendingResult, trackPendingReads } from "./pendingReads.js";
 import {
   blocked,
+  ok,
   type AnyFormField,
   type DerivationContext,
   type DerivationResult,
@@ -66,28 +69,9 @@ interface FieldBinding {
   params: unknown;
 }
 
-interface MustFileBinding {
-  rule: Rule<unknown, unknown>;
-  params: unknown;
-}
-
-const mustFileBindings = new Map<string, MustFileBinding>();
 const fieldBindings = new Map<string, FieldBinding>(); // keyed by fieldId
 
 // ─── Registration API (called by defineForm) ─────────────────────────────
-
-/*
- * Accepts any rule. The engine coerces the result's value to boolean at
- * evaluation time, so a rule that returns a non-boolean decision value
- * works as a must-file binding without a typed-bool wrapper.
- */
-export function bindMustFile<P>(formId: string, ruleDef: Rule<P, unknown>, params: P): void {
-  ruleDef.paramsSchema.parse(params);
-  mustFileBindings.set(formId, {
-    rule: ruleDef as Rule<unknown, unknown>,
-    params,
-  });
-}
 
 export function bindField<P>(formId: string, fieldId: string, ruleDef: Rule<P>, params: P): void {
   ruleDef.paramsSchema.parse(params);
@@ -99,9 +83,8 @@ export function bindField<P>(formId: string, fieldId: string, ruleDef: Rule<P>, 
   });
 }
 
-/** Test-only: clears this module's binding maps. defineForm.ts composes it into _resetRegistryForTests. */
+/** Test-only: clears this module's binding map. defineForm.ts composes it into _resetRegistryForTests. */
 export function _resetBindingRegistryForTests(): void {
-  mustFileBindings.clear();
   fieldBindings.clear();
 }
 
@@ -158,19 +141,16 @@ export function evaluateForm(
     settling: shared?.settling,
   };
 
-  const mustFile = resolveMustFile(formId, engineCtx, formMustFiles);
+  const mustFile = resolveMustFile(formId, ctx, formMustFiles);
   const base = {
     formId: def.formId,
     jurisdiction: def.jurisdiction,
     title: def.title,
     taxYear: ctx.taxYear,
     mustFile,
-    /*
-     * The engine-derivation provenance that resolveFilingInfo wrote next
-     * to the boolean must-file flag. Undefined for forms not yet wired
-     * through resolveMustFile; the field is optional.
-     */
-    mustFileDerivation: lookupMustFileDerivation(formId, ctx.filingInfo),
+    /* The provenance resolveFilingInfo wrote next to the must-file value. */
+    mustFileDerivation: ctx.filingInfo?.mustFile?.[formId]?.derivation,
+    missingInputs: [...(ctx.filingInfo?.missingInputs?.[formId] ?? [])],
   };
 
   /*
@@ -186,37 +166,37 @@ export function evaluateForm(
 }
 
 /*
- * Resolve must-file. Skip when a previous pass already produced an `ok`
- * result for this form; monotonicity guarantees the same answer.
- * Re-evaluate `blocked` results so cross-form dependencies that resolved
- * this pass can unblock this form's must-file.
+ * Resolve must-file from FilingInfo.mustFile[formId]. It is a pure read
+ * of resolved facts + decisions, so the first result is cached for the
+ * other forms' cross-form reads (pendingReads.ts).
  */
 function resolveMustFile(
   formId: string,
-  engineCtx: EngineContext,
+  ctx: DerivationContext,
   formMustFiles: Map<string, DerivationResult<boolean>>,
 ): DerivationResult<boolean> {
   const cached = formMustFiles.get(formId);
-  if (cached && cached.ok) return cached;
-
-  let mustFile: DerivationResult<boolean>;
-  const mf = mustFileBindings.get(formId);
-  if (!mf) {
-    mustFile = blocked(`No must-file binding registered for ${formId}`);
-  } else {
-    const raw = mf.rule.evaluate(mf.params, engineCtx);
-    mustFile = raw.ok
-      ? {
-          ok: true,
-          value: raw.value === true,
-          rationale: raw.rationale,
-          supportingFactKeys: raw.supportingFactKeys,
-          decisionKey: raw.decisionKey,
-        }
-      : raw;
-  }
+  if (cached) return cached;
+  const mustFile = mustFileResult(formId, ctx.filingInfo?.mustFile?.[formId], !!ctx.filingInfo);
   formMustFiles.set(formId, mustFile);
   return mustFile;
+}
+
+function mustFileResult(
+  formId: string,
+  r: MustFileResolution | undefined,
+  hasFilingInfo: boolean,
+): DerivationResult<boolean> {
+  if (!hasFilingInfo) return blocked(`${formId} mustFile: ctx.filingInfo is missing.`);
+  if (!r) return blocked(`No must-file rule resolved for ${formId}`);
+  if (r.value === undefined) {
+    return blocked(`${formId} mustFile: waiting on decision ${r.decisionKey}.`, {
+      decisionKey: r.decisionKey,
+    });
+  }
+  return ok(r.value, r.derivation?.rule ?? `must-file for ${formId}`, [
+    ...(r.derivation?.triggeredByFactKeys ?? []),
+  ]);
 }
 
 /*
@@ -279,31 +259,6 @@ function evaluateFields(
     });
   }
   return fields;
-}
-
-/*
- * Map from formId to the FilingInfo slot that carries the engine
- * derivation for that form's must-file determination. Kept here, not on
- * the form spec, because the slot names live in the per-form FilingInfo
- * types. This map bridges the engine's formId namespace and the
- * resolver's slot namespace.
- */
-const MUST_FILE_DERIVATION_SLOTS: Record<string, string> = {
-  "form-1040": "mustFileFederalDerivation",
-  "form-540": "mustFileCA540Derivation",
-  "schedule-ca": "mustFileScheduleCADerivation",
-  "form-8949": "mustFile8949Derivation",
-  "schedule-d": "mustFileScheduleDDerivation",
-};
-
-function lookupMustFileDerivation(
-  formId: string,
-  filingInfo: DerivationContext["filingInfo"],
-): EvaluatedForm["mustFileDerivation"] {
-  if (!filingInfo) return undefined;
-  const slot = MUST_FILE_DERIVATION_SLOTS[formId];
-  if (!slot) return undefined;
-  return (filingInfo as Record<string, unknown>)[slot] as EvaluatedForm["mustFileDerivation"];
 }
 
 // ─── Multi-form orchestration via fixpoint iteration ─────────────────────

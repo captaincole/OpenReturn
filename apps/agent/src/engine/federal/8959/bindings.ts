@@ -27,10 +27,6 @@ const ADDITIONAL_MEDICARE_THRESHOLDS: Record<string, number> = {
 
 export function register(): void {
   defineForm<Form8959, Form8959FilingInfo>("form-8959", {
-    // MANUAL EDIT: form-scoped must-file (AI defaulted to mustFileFederal).
-    mustFile: (info) => info.mustFile8959,
-    mustFileDecisionKey: "decisions.scope.must_file_8959",
-
     bindings: {
       /*
        * MANUAL EDIT: no combined-name fact; concatenate first + last

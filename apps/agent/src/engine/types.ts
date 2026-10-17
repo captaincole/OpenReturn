@@ -208,11 +208,18 @@ export interface EvaluatedForm<F extends BaseFormField = AnyFormField> {
   taxYear: number;
   mustFile: DerivationResult<boolean>;
   /**
-   * Audit trail for the must-file determination. Present when the
-   * resolver populated it for this form (the five scope flags today).
-   * Undefined for forms that do not go through resolveMustFile yet.
+   * Audit trail for the must-file determination, from
+   * FilingInfo.mustFile[formId]. Undefined while the form waits on its
+   * must-file decision.
    */
   mustFileDerivation?: EngineDerivation;
+  /**
+   * Inputs this form still needs (fact or decision keys), from
+   * FilingInfo.missingInputs[formId]. A filed form is not complete until
+   * this is empty: a missing input can leave a line blank or computed
+   * without it.
+   */
+  missingInputs: string[];
   fields: F[];
 }
 

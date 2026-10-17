@@ -19,15 +19,6 @@ import type { ScheduleA } from "./types.js";
  */
 export function register(): void {
   defineForm<ScheduleA, ScheduleAFilingInfo>("schedule-a", {
-    /*
-     * MANUAL EDIT: AI defaulted to info.mustFileFederal. Schedule A is
-     * filed only when the taxpayer itemizes. Routed to the form-scoped
-     * flag, which decisions.itemize_vs_standard drives via
-     * resolveFilingInfo.
-     */
-    mustFile: (info) => info.mustFileScheduleA,
-    mustFileDecisionKey: "decisions.scope.must_file_schedule_a",
-
     bindings: {
       /*
        * MANUAL EDIT: no combined-name fact; concatenate first + last

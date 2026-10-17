@@ -54,10 +54,6 @@ function inPartIII<T>(f: Read, info: Form8995AFilingInfo, value: () => T): T | u
  */
 export function register(): void {
   defineForm<Form8995A, Form8995AFilingInfo>("form-8995-a", {
-    // MANUAL EDIT: must-file rule lives in federal/8995-a/resolveInfo.ts.
-    mustFile: (info) => info.mustFile8995A,
-    mustFileDecisionKey: "decisions.scope.must_file_8995_a",
-
     bindings: {
       /*
        * MANUAL EDIT (2026-10-15): Part IV for the REIT-dividend path.

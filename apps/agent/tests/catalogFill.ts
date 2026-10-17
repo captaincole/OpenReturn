@@ -166,6 +166,7 @@ function buildSyntheticForm(formId: string, catalog: Catalog): EvaluatedForm<Any
     jurisdiction: meta.jurisdiction,
     title: meta.title,
     taxYear: meta.taxYear,
+    missingInputs: [],
     mustFile: {
       ok: true,
       value: true,

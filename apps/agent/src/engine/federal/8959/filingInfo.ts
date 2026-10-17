@@ -16,21 +16,9 @@
  */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
-import type { EngineDerivation } from "../../types.js";
 import type { Money } from "../../values.js";
 
 export interface Form8959FilingInfo extends BaseFilingInfo {
-  /**
-   * Form 8959 must-file determination. Driven by
-   * `decisions.scope.must_file_8959`, with a fallback to the IRS
-   * trigger "Medicare wages over the filing-status threshold". The
-   * resolver fallback uses W-2 box 5 > $200k (the single threshold) as
-   * the conservative trigger.
-   */
-  mustFile8959?: boolean;
-  /** Provenance for mustFile8959. */
-  mustFile8959Derivation?: EngineDerivation;
-
   /** Sum of W-2 Box 5 (Medicare wages and tips) across all employers. */
   w2MedicareWagesTotal?: Money;
 

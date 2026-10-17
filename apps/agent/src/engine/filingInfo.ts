@@ -15,6 +15,11 @@
  *      DerivationContext.filingInfo. Individual bindings see only their
  *      narrower view via their function signature.
  *
+ * Must-file is one keyed slot on BaseFilingInfo (mustFile[formId]).
+ * Each form's resolver writes its entry with resolveMustFile. Required
+ * inputs work the same way: missingInputs[formId] lists the inputs that
+ * form still needs, written with missingInputs() from resolverInputs.ts.
+ *
  * To add a new slot:
  *   - Identity / cross-form scope → BaseFilingInfo here.
  *   - Form-specific → that form's filingInfo.ts. Also update the
@@ -56,11 +61,35 @@ import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
 import type { Form5805FilingInfo } from "./state/ca/5805/filingInfo.js";
 import { resolve5805Info } from "./state/ca/5805/resolveInfo.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
+import type { EngineDerivation } from "./types.js";
 import type { FilingStatus, Phone, SSN } from "./values.js";
 
 // ─── Base (shared across every form) ─────────────────────────────────────
 
+/**
+ * One form's must-file determination. Each form's resolver writes it
+ * through resolveMustFile (resolverInputs.ts); the engine reads it by
+ * formId.
+ */
+export interface MustFileResolution {
+  /** The explicit decision that wins over the fallbacks (for example "decisions.scope.must_file_8889"). */
+  decisionKey: string;
+  /** True = file, false = do not file, undefined = waiting on decisionKey. */
+  value: boolean | undefined;
+  /** Provenance for value. Undefined while value is undefined. */
+  derivation: EngineDerivation | undefined;
+}
+
 export interface BaseFilingInfo {
+  /** Must-file determination per form, keyed by formId ("form-1040", "schedule-d", …). */
+  mustFile?: Readonly<Record<string, MustFileResolution>>;
+  /**
+   * Required inputs each form still needs, keyed by formId: the fact or
+   * decision keys to record. A filed form is not complete until its list
+   * is empty. A recorded 0 or false counts as an input.
+   */
+  missingInputs?: Readonly<Record<string, readonly string[]>>;
+
   // ─── Scope decisions used by multiple forms ──────────────────────────
   /** Single / MFJ / MFS / HOH / QSS. Drives standard-deduction and tax-table lookups on every jurisdiction's form. */
   filingStatus?: FilingStatus;
@@ -142,21 +171,34 @@ export function resolveFilingInfo(opts: {
   decisions: ReadonlyArray<{ decisionKey: string; decision: unknown }>;
 }): FilingInfo {
   const inputs = makeResolverInputs(opts);
-  return {
-    ...resolveBaseInfo(inputs),
-    ...resolve1040Info(inputs),
-    ...resolve540Info(inputs),
-    ...resolve5805Info(inputs),
-    ...resolveScheduleCaInfo(inputs),
-    ...resolve8949Info(inputs),
-    ...resolveScheduleDInfo(inputs),
-    ...resolve8889Info(inputs),
-    ...resolve8959Info(inputs),
-    ...resolve8960Info(inputs),
-    ...resolve8995AInfo(inputs),
-    ...resolveSchedule1Info(inputs),
-    ...resolveSchedule2Info(inputs),
-    ...resolveScheduleAInfo(inputs),
-    ...resolveScheduleBInfo(inputs),
-  };
+  return mergeInfo([
+    resolveBaseInfo(inputs),
+    resolve1040Info(inputs),
+    resolve540Info(inputs),
+    resolve5805Info(inputs),
+    resolveScheduleCaInfo(inputs),
+    resolve8949Info(inputs),
+    resolveScheduleDInfo(inputs),
+    resolve8889Info(inputs),
+    resolve8959Info(inputs),
+    resolve8960Info(inputs),
+    resolve8995AInfo(inputs),
+    resolveSchedule1Info(inputs),
+    resolveSchedule2Info(inputs),
+    resolveScheduleAInfo(inputs),
+    resolveScheduleBInfo(inputs),
+  ]);
+}
+
+/* Spread every per-form slice; the per-form maps merge instead of overwriting. */
+function mergeInfo(parts: ReadonlyArray<BaseFilingInfo>): FilingInfo {
+  return parts.reduce<FilingInfo>(
+    (acc, part) => ({
+      ...acc,
+      ...part,
+      mustFile: { ...acc.mustFile, ...part.mustFile },
+      missingInputs: { ...acc.missingInputs, ...part.missingInputs },
+    }),
+    {},
+  );
 }

@@ -4,7 +4,12 @@
  */
 
 import { HSA_COVERAGE_KEYS, type HsaCoverageType } from "../../facts/index.js";
-import { factsInCategory, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import {
+  factsInCategory,
+  missingInputs,
+  resolveMustFile,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
 import type { Form8889FilingInfo } from "./filingInfo.js";
 
 const SA_KEY_RE = /^account\.[^.]+\.hsa_distributions\.[^.]+$/;
@@ -27,12 +32,23 @@ export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
       },
     ],
   });
+  const ownContributions = numberFact(factByKey.get(HSA_COVERAGE_KEYS.ownContributions));
+  const allQualified = factByKey.get(HSA_COVERAGE_KEYS.distributionsAllQualified) as
+    boolean | undefined;
   return {
-    mustFile8889: r.value as Form8889FilingInfo["mustFile8889"],
-    mustFile8889Derivation: r.derivation,
+    mustFile: { "form-8889": r },
+    missingInputs: {
+      "form-8889": missingInputs({
+        [HSA_COVERAGE_KEYS.coverageType]: coverageType,
+        [HSA_COVERAGE_KEYS.ownContributions]: ownContributions,
+        ...(distributions.length > 0
+          ? { [HSA_COVERAGE_KEYS.distributionsAllQualified]: allQualified }
+          : {}),
+      }),
+    },
     hsaCoverageType: coverageType,
     hsaCoverageMonths: numberFact(factByKey.get(HSA_COVERAGE_KEYS.coverageMonths)),
-    hsaOwnContributions: numberFact(factByKey.get(HSA_COVERAGE_KEYS.ownContributions)),
+    hsaOwnContributions: ownContributions,
     hsaEmployerContributions: employer,
     hsaDistributionsTotal:
       distributions.length > 0
@@ -41,8 +57,7 @@ export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
             0,
           )
         : undefined,
-    hsaDistributionsAllQualified: factByKey.get(HSA_COVERAGE_KEYS.distributionsAllQualified) as
-      boolean | undefined,
+    hsaDistributionsAllQualified: allQualified,
   };
 }
 

@@ -188,9 +188,6 @@ export function register(): void {
     ...PARTS.reduce((acc, p) => ({ ...acc, ...totalBindings(p.prefix, p.page) }), {}),
   };
   defineForm<Form8949, Form8949FilingInfo>("form-8949", {
-    // Must-file comes from decisions.scope.must_file_8949 (resolve8949Info).
-    mustFile: (info) => info.mustFile8949,
-    mustFileDecisionKey: "decisions.scope.must_file_8949",
     bindings: bindings as Bindings,
     unsupported: adjustmentNotes() as Notes,
   });

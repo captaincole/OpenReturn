@@ -86,8 +86,6 @@ export function register(): void {
     "0.line.8_foreign_trust_no": yesNo((info) => info.hasForeignTrust, false),
   };
   defineForm<ScheduleB, ScheduleBFilingInfo>("schedule-b", {
-    mustFile: (info) => info.mustFileScheduleB,
-    mustFileDecisionKey: "decisions.scope.must_file_schedule_b",
     bindings: bindings as Bindings,
     unsupported: {
       "0.line.3_excludable_savings_bond_interest":

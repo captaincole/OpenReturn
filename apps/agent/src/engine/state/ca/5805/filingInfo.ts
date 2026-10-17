@@ -5,13 +5,8 @@
  */
 
 import type { BaseFilingInfo } from "../../../filingInfo.js";
-import type { EngineDerivation } from "../../../types.js";
 
 export interface Form5805FilingInfo extends BaseFilingInfo {
-  /** Driven by `decisions.scope.must_file_5805`, else filed when the prior-year CA tax is known. */
-  mustFile5805?: boolean;
-  /** Provenance for mustFile5805. */
-  mustFile5805Derivation?: EngineDerivation;
   /** Prior-year CA tax (fact prior_year.ca_tax). Line 5 base. */
   priorYearCaTax?: number;
   /**

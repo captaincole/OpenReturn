@@ -26,9 +26,6 @@ function fromScheduleB(value: unknown): number | undefined {
  */
 export function register(): void {
   defineForm<Form1040, Form1040FilingInfo>("form-1040", {
-    mustFile: (info) => info.mustFileFederal,
-    mustFileDecisionKey: "decisions.scope.must_file_federal",
-
     bindings: {
       /*
        * MANUAL EDIT: AI flagged this as unsupported ("only for

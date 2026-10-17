@@ -29,8 +29,6 @@ const FACT_TO_SLOT: Record<string, string> = {
 };
 
 export const DECISION_TO_SLOT: Record<string, string> = {
-  "decisions.scope.must_file_federal": "mustFileFederal",
-  "decisions.scope.must_file_ca_540": "mustFileCA540",
   "decisions.scope.filing_status": "filingStatus",
   "decisions.scope.ca_residency": "caResidencyStatus",
   "decisions.scope.mailing_same_as_principal_residence": "mailingSameAsResidence",

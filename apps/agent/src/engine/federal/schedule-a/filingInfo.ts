@@ -14,20 +14,8 @@
  */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
-import type { EngineDerivation } from "../../types.js";
 
 export interface ScheduleAFilingInfo extends BaseFilingInfo {
-  /**
-   * Schedule A must-file determination. Driven by
-   * `decisions.scope.must_file_schedule_a`, with a fallback to
-   * `decisions.itemize_vs_standard === "itemized"`. Schedule A is
-   * optional: a taxpayer itemizes or takes the standard deduction, and
-   * the form is filed only on the itemized side.
-   */
-  mustFileScheduleA?: boolean;
-  /** Provenance for mustFileScheduleA — populated by resolveFilingInfo. */
-  mustFileScheduleADerivation?: EngineDerivation;
-
   // ─── Line 1: medical & dental ────────────────────────────────────────
   /**
    * Total medical and dental expenses paid during the tax year. Goes on

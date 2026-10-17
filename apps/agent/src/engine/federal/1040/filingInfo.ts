@@ -7,15 +7,9 @@
  */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
-import type { EngineDerivation } from "../../types.js";
 import type { Money } from "../../values.js";
 
 export interface Form1040FilingInfo extends BaseFilingInfo {
-  /** Federal Form 1040 must-file determination. */
-  mustFileFederal?: boolean;
-  /** Provenance for mustFileFederal — populated by resolveFilingInfo. */
-  mustFileFederalDerivation?: EngineDerivation;
-
   /**
    * Digital-assets question (1040 page 1). Every filer must answer it.
    * True when the taxpayer received, sold, or otherwise transacted in a

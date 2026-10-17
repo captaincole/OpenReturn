@@ -3,7 +3,7 @@
  */
 
 import { PRIOR_YEAR_KEYS } from "../../../facts/index.js";
-import { resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
+import { missingInputs, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
 import type { Form5805FilingInfo } from "./filingInfo.js";
 
 const PRIOR_YEAR_CA_AGI = "prior_year.ca_agi";
@@ -28,8 +28,9 @@ export function resolve5805Info(inputs: ResolverInputs): Form5805FilingInfo {
   const agi = caAgi ?? fedAgi;
   const mfs = decisionByKey.get("decisions.scope.filing_status") === "married_filing_separately";
   return {
-    mustFile5805: r.value as Form5805FilingInfo["mustFile5805"],
-    mustFile5805Derivation: r.derivation,
+    mustFile: { "form-5805": r },
+    /* The safe-harbor rate (line 5) needs the prior-year AGI; federal AGI stands in for CA AGI. */
+    missingInputs: { "form-5805": missingInputs({ [PRIOR_YEAR_KEYS.federalAgi]: agi }) },
     priorYearCaTax,
     priorYearSafeHarborRate: agi === undefined ? undefined : agi > (mfs ? 75000 : 150000) ? 1.1 : 1,
     priorYearAgiSource:

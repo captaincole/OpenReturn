@@ -35,6 +35,8 @@ type EvaluatedFormSummary = {
    * recorded (e.g. Schedule D gates on trade-fact presence).
    */
   mustFileDerivation: EngineDerivation | null;
+  /** Required inputs this form still needs (fact or decision keys). */
+  missingInputs: string[];
   fieldCount: number;
   blockedFieldCount: number;
   unsupportedFieldCount: number;
@@ -80,22 +82,30 @@ export async function buildCaseStateForFiling(
 }
 
 /*
- * Aggregate unique pending decisions and facts across all blockers,
- * including mustFile blockers. Luca asks the user about these.
+ * Aggregate unique pending decisions and facts across every form:
+ * must-file blockers, and for each filed form its missing required inputs
+ * plus field blockers that name a key. Luca asks the user about these,
+ * and generate-tax-documents renders nothing until both lists are empty.
  */
-function collectPending(summaries: EvaluatedFormSummary[]): {
+function collectPending(forms: Iterable<EvaluatedForm<BaseFormField>>): {
   pendingDecisions: Set<string>;
   pendingFacts: Set<string>;
 } {
   const pendingDecisions = new Set<string>();
   const pendingFacts = new Set<string>();
-  for (const s of summaries) {
-    if (!s.mustFile.ok && s.mustFile.missingDecisionKey) {
-      pendingDecisions.add(s.mustFile.missingDecisionKey);
+  const add = (key: string) =>
+    (key.startsWith("decisions.") ? pendingDecisions : pendingFacts).add(key);
+  for (const form of forms) {
+    if (!form.mustFile.ok) {
+      if (form.mustFile.missingDecisionKey) add(form.mustFile.missingDecisionKey);
+      continue;
     }
-    for (const b of s.blockers) {
-      if (b.missingDecisionKey) pendingDecisions.add(b.missingDecisionKey);
-      for (const f of b.missingFactKeys ?? []) pendingFacts.add(f);
+    if (!form.mustFile.value) continue;
+    form.missingInputs.forEach(add);
+    for (const field of form.fields) {
+      if (field.result.ok || field.result.unsupported) continue;
+      if (field.result.missingDecisionKey) add(field.result.missingDecisionKey);
+      field.result.missingFactKeys?.forEach(add);
     }
   }
   return { pendingDecisions, pendingFacts };
@@ -131,23 +141,27 @@ function addPendingIdentityFacts(
   }
 }
 
-/* Money convenience fields — federal from 1040, state from 540. */
+/*
+ * Money convenience fields — federal from 1040, state from 540. A line is
+ * null when it is blank on the form (for example "amount you owe" on a
+ * refund). Never 0 as a stand-in: a real $0 must stay distinct from blank.
+ */
 function extractMoney(
   form1040: EvaluatedForm<BaseFormField>,
   form540: EvaluatedForm<BaseFormField>,
 ) {
   return {
-    totalWages: numericField(form1040.fields, "form-1040.line.1z") ?? 0,
-    federalAgi: numericField(form1040.fields, "form-1040.line.11") ?? 0,
-    federalTaxableIncome: numericField(form1040.fields, "form-1040.line.15") ?? 0,
-    federalTax: numericField(form1040.fields, "form-1040.line.24") ?? 0,
-    federalWithholding: numericField(form1040.fields, "form-1040.line.25a") ?? 0,
-    federalRefund: numericField(form1040.fields, "form-1040.line.34") ?? 0,
-    federalOwed: numericField(form1040.fields, "form-1040.line.37") ?? 0,
-    stateTax: numericField(form540.fields, "form-540.line.64_total_tax") ?? 0,
-    stateWithholding: numericField(form540.fields, "form-540.line.71_ca_income_tax_withheld") ?? 0,
-    stateRefund: numericField(form540.fields, "form-540.line.115_refund_or_no_amount_due") ?? 0,
-    stateOwed: numericField(form540.fields, "form-540.line.111_amount_you_owe") ?? 0,
+    totalWages: numericField(form1040.fields, "form-1040.line.1z"),
+    federalAgi: numericField(form1040.fields, "form-1040.line.11a"),
+    federalTaxableIncome: numericField(form1040.fields, "form-1040.line.15"),
+    federalTax: numericField(form1040.fields, "form-1040.line.24"),
+    federalWithholding: numericField(form1040.fields, "form-1040.line.25a"),
+    federalRefund: numericField(form1040.fields, "form-1040.line.34"),
+    federalOwed: numericField(form1040.fields, "form-1040.line.37"),
+    stateTax: numericField(form540.fields, "form-540.line.64_total_tax"),
+    stateWithholding: numericField(form540.fields, "form-540.line.71_ca_income_tax_withheld"),
+    stateRefund: numericField(form540.fields, "form-540.line.115_refund_or_no_amount_due"),
+    stateOwed: numericField(form540.fields, "form-540.line.111_amount_you_owe"),
   };
 }
 
@@ -158,14 +172,22 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
 
   const summaries: EvaluatedFormSummary[] = [summarizeForm(form1040), summarizeForm(form540)];
 
-  const { pendingDecisions, pendingFacts } = collectPending(summaries);
+  const { pendingDecisions, pendingFacts } = collectPending(forms.values());
   addPendingIdentityFacts(filingInfo, pendingFacts);
 
   return {
     summaries,
     pendingDecisions: Array.from(pendingDecisions).sort(),
     pendingFacts: Array.from(pendingFacts).sort(),
-    money: extractMoney(form1040, form540),
+    /*
+     * Null while anything is pending. A form still computes with a missing
+     * input and shows a wrong but plausible number (no filing status → zero
+     * tax), so nothing here is final until both lists are empty.
+     */
+    money:
+      pendingDecisions.size === 0 && pendingFacts.size === 0
+        ? extractMoney(form1040, form540)
+        : null,
     factCount: facts.length,
     decisionRows: decisions,
     authEmail,
@@ -214,6 +236,7 @@ function summarizeForm(form: EvaluatedForm<BaseFormField>): EvaluatedFormSummary
           missingDecisionKey: form.mustFile.missingDecisionKey ?? null,
         },
     mustFileDerivation: form.mustFileDerivation ?? null,
+    missingInputs: form.missingInputs,
     fieldCount: form.fields.length,
     blockedFieldCount: blockers.length,
     unsupportedFieldCount,
@@ -232,6 +255,12 @@ function numericField(fields: readonly BaseFormField[], fieldId: string): number
   return typeof v === "number" ? v : null;
 }
 
+/* A money line, or null when the line is blank on the form. */
+const moneyLine = z
+  .number()
+  .nullable()
+  .describe("null = blank on the form. Never read null as $0.");
+
 export const getCaseState = createTool({
   id: "get-case-state",
   description:
@@ -243,19 +272,24 @@ export const getCaseState = createTool({
     forms: z.array(z.any()),
     pendingDecisions: z.array(z.string()),
     pendingFacts: z.array(z.string()),
-    money: z.object({
-      totalWages: z.number(),
-      federalAgi: z.number(),
-      federalTaxableIncome: z.number(),
-      federalTax: z.number(),
-      federalWithholding: z.number(),
-      federalRefund: z.number(),
-      federalOwed: z.number(),
-      stateTax: z.number(),
-      stateWithholding: z.number(),
-      stateRefund: z.number(),
-      stateOwed: z.number(),
-    }),
+    money: z
+      .object({
+        totalWages: moneyLine,
+        federalAgi: moneyLine,
+        federalTaxableIncome: moneyLine,
+        federalTax: moneyLine,
+        federalWithholding: moneyLine,
+        federalRefund: moneyLine,
+        federalOwed: moneyLine,
+        stateTax: moneyLine,
+        stateWithholding: moneyLine,
+        stateRefund: moneyLine,
+        stateOwed: moneyLine,
+      })
+      .nullable()
+      .describe(
+        "null while pendingDecisions or pendingFacts has entries: the values are not final.",
+      ),
     factCount: z.number(),
     /**
      * Account email. Luca records it as identity.email at doc-gen time

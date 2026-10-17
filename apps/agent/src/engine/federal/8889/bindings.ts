@@ -18,10 +18,6 @@ import type { Form8889 } from "./types.js";
  */
 export function register(): void {
   defineForm<Form8889, Form8889FilingInfo>("form-8889", {
-    // MANUAL EDIT: must-file rule lives in federal/8889/resolveInfo.ts.
-    mustFile: (info) => info.mustFile8889,
-    mustFileDecisionKey: "decisions.scope.must_file_8889",
-
     bindings: {
       /*
        * MANUAL EDIT (2026-10-15): header name, line 1 coverage, limits,

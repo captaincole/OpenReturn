@@ -2,9 +2,10 @@
  * Per-form slot resolvers behind resolveFilingInfo (filingInfo.ts).
  *
  * Each resolve<Form>Info function reads raw facts + decisions through a
- * shared ResolverInputs view and produces that form's FilingInfo slots.
- * resolveFilingInfo spreads the results into the runtime intersection.
- * Adding a form = add its resolver here and spread it there.
+ * shared ResolverInputs view and produces that form's FilingInfo slots,
+ * plus its mustFile[formId] entry. resolveFilingInfo merges the results
+ * into the runtime intersection. Adding a form = add its resolver here
+ * and list it there.
  */
 
 import {
@@ -25,6 +26,7 @@ import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
 import type { BaseFilingInfo } from "./filingInfo.js";
 import {
   factsInCategory,
+  missingInputs,
   num,
   reportableSalesFallbacks,
   resolveMustFile,
@@ -36,23 +38,27 @@ import {
 } from "./resolverInputs.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
-import { phone, ssn } from "./values.js";
+import { phone, ssn, type FilingStatus } from "./values.js";
 
 export { makeResolverInputs, type ResolverInputs } from "./resolverInputs.js";
 
 // ─── Per-form resolvers ──────────────────────────────────────────────────
 
-export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
-  const filingStatusRaw = inputs.decisionByKey.get("decisions.scope.filing_status");
-  const filingStatus =
-    filingStatusRaw === "single" ||
-    filingStatusRaw === "married_filing_jointly" ||
-    filingStatusRaw === "married_filing_separately" ||
-    filingStatusRaw === "head_of_household" ||
-    filingStatusRaw === "qualifying_surviving_spouse"
-      ? filingStatusRaw
-      : undefined;
+const FILING_STATUSES: ReadonlySet<unknown> = new Set<FilingStatus>([
+  "single",
+  "married_filing_jointly",
+  "married_filing_separately",
+  "head_of_household",
+  "qualifying_surviving_spouse",
+]);
 
+function filingStatusOf(inputs: ResolverInputs): FilingStatus | undefined {
+  const raw = inputs.decisionByKey.get("decisions.scope.filing_status");
+  return FILING_STATUSES.has(raw) ? (raw as FilingStatus) : undefined;
+}
+
+export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
+  const filingStatus = filingStatusOf(inputs);
   const ssnRaw = text(inputs, "identity.ssn");
   const phoneRaw = text(inputs, "identity.phone");
 
@@ -137,15 +143,29 @@ function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
 
 export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
   const { decisionByKey } = inputs;
-  const mustFile = resolveMustFile(decisionByKey, {
+  const r = resolveMustFile(decisionByKey, {
     explicitKey: "decisions.scope.must_file_federal",
   });
   const itemizeDecision = decisionByKey.get("decisions.itemize_vs_standard");
+  const useItemizedDeductions =
+    itemizeDecision === "itemized" ? true : itemizeDecision === "standard" ? false : undefined;
+  const hasDigitalAssets = decisionByKey.get("decisions.scope.has_digital_assets") as
+    boolean | undefined;
+  const refundFullOverpaymentFederal = decisionByKey.get(
+    "decisions.refund.refund_full_overpayment_federal",
+  ) as boolean | undefined;
+  const filesScheduleA = resolveScheduleAInfo(inputs).mustFile?.["schedule-a"]?.value === true;
   return {
-    mustFileFederal: mustFile.value as Form1040FilingInfo["mustFileFederal"],
-    mustFileFederalDerivation: mustFile.derivation,
-    hasDigitalAssets: decisionByKey.get("decisions.scope.has_digital_assets") as
-      boolean | undefined,
+    mustFile: { "form-1040": r },
+    missingInputs: {
+      "form-1040": missingInputs({
+        "decisions.scope.filing_status": filingStatusOf(inputs),
+        "decisions.scope.has_digital_assets": hasDigitalAssets,
+        "decisions.refund.refund_full_overpayment_federal": refundFullOverpaymentFederal,
+        ...(filesScheduleA ? { "decisions.itemize_vs_standard": useItemizedDeductions } : {}),
+      }),
+    },
+    hasDigitalAssets,
     w2WagesTotal: sumW2Box(inputs, "box1") as Form1040FilingInfo["w2WagesTotal"],
     w2FederalWithholding: sumW2Box(inputs, "box2") as Form1040FilingInfo["w2FederalWithholding"],
     qualifiedDividends: sumInvestmentBox(
@@ -159,38 +179,47 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
     ) as Form1040FilingInfo["form1099FederalWithholding"],
     ...resolveInterestSlots(inputs),
     ...resolveRetirementSlots(inputs),
-    refundFullOverpaymentFederal: decisionByKey.get(
-      "decisions.refund.refund_full_overpayment_federal",
-    ) as boolean | undefined,
-    useItemizedDeductions:
-      itemizeDecision === "itemized" ? true : itemizeDecision === "standard" ? false : undefined,
+    refundFullOverpaymentFederal,
+    useItemizedDeductions,
   };
 }
 
 export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
   const { decisionByKey, factByKey } = inputs;
-  const mustFile = resolveMustFile(decisionByKey, {
+  const r = resolveMustFile(decisionByKey, {
     explicitKey: "decisions.scope.must_file_ca_540",
   });
+  const useTaxOwed = num(inputs, "use_tax.owed_amount");
+  const useTaxZeroReason = decisionByKey.get("decisions.scope.use_tax_zero_reason");
   return {
-    mustFileCA540: mustFile.value as Form540FilingInfo["mustFileCA540"],
-    mustFileCA540Derivation: mustFile.derivation,
+    mustFile: { "form-540": r },
+    missingInputs: {
+      "form-540": missingInputs({
+        "identity.address.county": text(inputs, "identity.address.county"),
+        "health_coverage.full_year_mec": factByKey.get("health_coverage.full_year_mec"),
+        "use_tax.owed_amount": useTaxOwed,
+        /* Line 91 takes an amount, or the "no use tax owed" reason when there is none. */
+        ...(useTaxOwed !== undefined && useTaxOwed > 0
+          ? {}
+          : { "decisions.scope.use_tax_zero_reason": useTaxZeroReason }),
+        "decisions.scope.mailing_same_as_principal_residence": decisionByKey.get(
+          "decisions.scope.mailing_same_as_principal_residence",
+        ),
+        "decisions.refund.refund_full_overpayment_ca": decisionByKey.get(
+          "decisions.refund.refund_full_overpayment_ca",
+        ),
+      }),
+    },
     caResidencyStatus: decisionByKey.get("decisions.scope.ca_residency") as string | undefined,
     w2StateWages: sumW2Box(inputs, "box16") as Form540FilingInfo["w2StateWages"],
     w2StateWithholding: sumW2Box(inputs, "box17") as Form540FilingInfo["w2StateWithholding"],
     w2CaSdiTotal: sumCaSdi(factsInCategory(inputs, "wages")) as Form540FilingInfo["w2CaSdiTotal"],
-    useTaxOwed:
-      typeof factByKey.get("use_tax.owed_amount") === "number"
-        ? (factByKey.get("use_tax.owed_amount") as Form540FilingInfo["useTaxOwed"])
-        : undefined,
+    useTaxOwed: useTaxOwed as Form540FilingInfo["useTaxOwed"],
     noUseTaxOwed:
       decisionByKey.get("decisions.scope.use_tax_zero_reason") === "no_use_tax_owed"
         ? true
         : undefined,
-    useTaxZeroReason: (() => {
-      const v = decisionByKey.get("decisions.scope.use_tax_zero_reason");
-      return typeof v === "string" ? v : undefined;
-    })(),
+    useTaxZeroReason: typeof useTaxZeroReason === "string" ? useTaxZeroReason : undefined,
     mailingSameAsResidence: decisionByKey.get(
       "decisions.scope.mailing_same_as_principal_residence",
     ) as boolean | undefined,
@@ -217,8 +246,7 @@ export function resolveScheduleCaInfo(inputs: ResolverInputs): ScheduleCaFilingI
     ],
   });
   return {
-    mustFileScheduleCA: r.value as ScheduleCaFilingInfo["mustFileScheduleCA"],
-    mustFileScheduleCADerivation: r.derivation,
+    mustFile: { "schedule-ca": r },
   };
 }
 
@@ -233,8 +261,7 @@ export function resolve8949Info(inputs: ResolverInputs): Form8949FilingInfo {
     fallbacks: reportableSalesFallbacks(inputs),
   });
   return {
-    mustFile8949: r.value as Form8949FilingInfo["mustFile8949"],
-    mustFile8949Derivation: r.derivation,
+    mustFile: { "form-8949": r },
     shortTermTrades: inputs.trades.short,
     longTermTrades: inputs.trades.long,
     form8949Copies: planForm8949Copies(inputs.trades.boxed),
@@ -254,8 +281,7 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
     fallbacks: reportableSalesFallbacks(inputs),
   });
   return {
-    mustFileScheduleD: r.value as ScheduleDFilingInfo["mustFileScheduleD"],
-    mustFileScheduleDDerivation: r.derivation,
+    mustFile: { "schedule-d": r },
   };
 }
 
@@ -279,8 +305,7 @@ export function resolve8959Info(inputs: ResolverInputs): Form8959FilingInfo {
     ],
   });
   return {
-    mustFile8959: r.value as Form8959FilingInfo["mustFile8959"],
-    mustFile8959Derivation: r.derivation,
+    mustFile: { "form-8959": r },
     w2MedicareWagesTotal: medicareWages as Form8959FilingInfo["w2MedicareWagesTotal"],
     w2MedicareTaxWithheld: sumW2Box(inputs, "box6") as Form8959FilingInfo["w2MedicareTaxWithheld"],
   };
@@ -310,8 +335,7 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
     ],
   });
   return {
-    mustFile8960: r.value as Form8960FilingInfo["mustFile8960"],
-    mustFile8960Derivation: r.derivation,
+    mustFile: { "form-8960": r },
   };
 }
 
@@ -337,8 +361,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     ],
   });
   return {
-    mustFileSchedule1: r.value as Schedule1FilingInfo["mustFileSchedule1"],
-    mustFileSchedule1Derivation: r.derivation,
+    mustFile: { "schedule-1": r },
     miscOtherIncome,
   };
 }
@@ -350,8 +373,8 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
  * `decisions.scope.must_file_schedule_2` wins when set.
  */
 export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInfo {
-  const form8959 = resolve8959Info(inputs).mustFile8959 === true;
-  const form8960 = resolve8960Info(inputs).mustFile8960 === true;
+  const form8959 = resolve8959Info(inputs).mustFile?.["form-8959"]?.value === true;
+  const form8960 = resolve8960Info(inputs).mustFile?.["form-8960"]?.value === true;
   const r = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_2",
     fallbacks: [
@@ -362,8 +385,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     ],
   });
   return {
-    mustFileSchedule2: r.value as Schedule2FilingInfo["mustFileSchedule2"],
-    mustFileSchedule2Derivation: r.derivation,
+    mustFile: { "schedule-2": r },
   };
 }
 
@@ -384,6 +406,10 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
     "decisions.scope.has_foreign_financial_account",
   );
   const hasForeignTrust = boolDecision(inputs, "decisions.scope.has_foreign_trust");
+  const partIII = {
+    "decisions.scope.has_foreign_financial_account": hasForeignFinancialAccount,
+    "decisions.scope.has_foreign_trust": hasForeignTrust,
+  };
   const rounding = inputs.decisionByKey.get("decisions.rounding.schedule_b");
   const interest = interestPayers.reduce((t, p) => t + p.amount, 0);
   const dividends = dividendPayers.reduce((t, p) => t + p.amount, 0);
@@ -401,8 +427,9 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
     ],
   });
   return {
-    mustFileScheduleB: r.value as ScheduleBFilingInfo["mustFileScheduleB"],
-    mustFileScheduleBDerivation: r.derivation,
+    mustFile: { "schedule-b": r },
+    /* Part III's yes/no questions are required on every filed Schedule B. */
+    missingInputs: { "schedule-b": missingInputs(partIII) },
     interestPayers,
     rounding: rounding === "sum_rounded_rows" ? "sum_rounded_rows" : "round_total",
     dividendPayers,
@@ -457,8 +484,7 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
   const caSdi = sumCaSdi(factsInCategory(inputs, "wages"));
   const estStateTax = num(inputs, "state_local_tax.estimated_payments");
   return {
-    mustFileScheduleA: r.value as ScheduleAFilingInfo["mustFileScheduleA"],
-    mustFileScheduleADerivation: r.derivation,
+    mustFile: { "schedule-a": r },
     medicalDentalExpenses: num(inputs, "medical.expenses_total"),
     stateLocalIncomeTaxPaid: w2Box17 + caSdi + (estStateTax ?? 0),
     generalSalesTaxElection: decisionByKey.get("decisions.itemized.elect_general_sales_tax") as

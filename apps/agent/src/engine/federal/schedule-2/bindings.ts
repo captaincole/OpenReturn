@@ -17,10 +17,6 @@ import type { Schedule2 } from "./types.js";
  */
 export function register(): void {
   defineForm<Schedule2, Schedule2FilingInfo>("schedule-2", {
-    // MANUAL EDIT: own must-file rule (resolveSchedule2Info), not the 1040's.
-    mustFile: (info) => info.mustFileSchedule2,
-    mustFileDecisionKey: "decisions.scope.must_file_schedule_2",
-
     bindings: {
       // Taxpayer SSN from identity facts.
       "0.header.ssn": (_, info) => info.taxpayerSSN,

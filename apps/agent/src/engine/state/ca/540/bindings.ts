@@ -23,9 +23,6 @@ import type { Form540 } from "./types.js";
  */
 export function register(): void {
   defineForm<Form540, Form540FilingInfo>("form-540", {
-    mustFile: (info) => info.mustFileCA540,
-    mustFileDecisionKey: "decisions.scope.must_file_ca_540",
-
     bindings: {
       "header.first_name": (_, info) => info.taxpayerFirstName,
       "header.last_name": (_, info) => info.taxpayerLastName,

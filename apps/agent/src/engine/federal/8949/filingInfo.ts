@@ -8,20 +8,9 @@
 
 import type { Form8949Box, TradeFactValue } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
-import type { EngineDerivation } from "../../types.js";
 import type { BoxTotals, Form8949Copy } from "./copyPlan.js";
 
 export interface Form8949FilingInfo extends BaseFilingInfo {
-  /**
-   * Form 8949 must-file determination. Driven by
-   * `decisions.scope.must_file_8949`. True when reportable security
-   * sales exist to itemize — in effect, whenever Schedule D is filed
-   * and at least one transaction needs row-level reporting.
-   */
-  mustFile8949?: boolean;
-  /** Provenance for mustFile8949 — populated by resolveFilingInfo. */
-  mustFile8949Derivation?: EngineDerivation;
-
   /**
    * Trade facts partitioned by holding period for 8949 row assignment.
    * Each TradeFactValue maps 1:1 to a form row. Short-term trades fill

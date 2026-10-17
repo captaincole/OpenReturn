@@ -7,7 +7,6 @@
  */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
-import type { EngineDerivation } from "../../types.js";
 
 /** One Schedule B row: payer name and amount (cents kept). */
 export interface PayerAmount {
@@ -26,14 +25,6 @@ export interface PayerAmount {
 export type ScheduleBRounding = "round_total" | "sum_rounded_rows";
 
 export interface ScheduleBFilingInfo extends BaseFilingInfo {
-  /**
-   * Schedule B must-file determination. Driven by
-   * `decisions.scope.must_file_schedule_b`, with a fallback to the IRS
-   * rule: interest or ordinary dividends over $1,500, or a Part III "Yes".
-   */
-  mustFileScheduleB?: boolean;
-  /** Provenance for mustFileScheduleB. */
-  mustFileScheduleBDerivation?: EngineDerivation;
   /** Part I line 1: taxable interest per payer (1099-INT box 1 + box 3). */
   interestPayers?: PayerAmount[];
   /** Part II line 5: ordinary dividends per payer (1099-DIV box 1a). */

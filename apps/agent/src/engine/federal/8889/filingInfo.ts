@@ -7,17 +7,8 @@
 
 import type { HsaCoverageType } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
-import type { EngineDerivation } from "../../types.js";
 
 export interface Form8889FilingInfo extends BaseFilingInfo {
-  /**
-   * Form 8889 must-file determination. Driven by
-   * `decisions.scope.must_file_8889`, with a fallback to "any HSA fact"
-   * (coverage, W-2 code W, or 1099-SA).
-   */
-  mustFile8889?: boolean;
-  /** Provenance for mustFile8889. */
-  mustFile8889Derivation?: EngineDerivation;
   /** Line 1: HDHP coverage type (fact hsa.coverage_type). */
   hsaCoverageType?: HsaCoverageType;
   /** Months of HDHP coverage (fact hsa.coverage_months). */

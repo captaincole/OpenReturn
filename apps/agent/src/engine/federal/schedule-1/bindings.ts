@@ -18,10 +18,6 @@ import type { Schedule1 } from "./types.js";
  */
 export function register(): void {
   defineForm<Schedule1, Schedule1FilingInfo>("schedule-1", {
-    // MANUAL EDIT: must-file rule lives in resolveSchedule1Info.
-    mustFile: (info) => info.mustFileSchedule1,
-    mustFileDecisionKey: "decisions.scope.must_file_schedule_1",
-
     bindings: {
       // MANUAL EDIT: line 8z = 1099-MISC box 3 other income (document sum, nearest dollar).
       "0.line.8z": (_, info) => roundDollars(info.miscOtherIncome),

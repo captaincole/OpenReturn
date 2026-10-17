@@ -18,10 +18,6 @@ import type { Form8960 } from "./types.js";
  */
 export function register(): void {
   defineForm<Form8960, Form8960FilingInfo>("form-8960", {
-    // MANUAL EDIT: must-file rule lives in resolve8960Info.
-    mustFile: (info) => info.mustFile8960,
-    mustFileDecisionKey: "decisions.scope.must_file_8960",
-
     bindings: {
       // Taxpayer SSN from identity facts.
       "0.header.ssn_or_ein": (_, info) => info.taxpayerSSN,

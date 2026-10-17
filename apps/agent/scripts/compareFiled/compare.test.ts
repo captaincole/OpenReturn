@@ -30,6 +30,7 @@ function form(results: Record<string, DerivationResult<number>>): EvaluatedForm<
     jurisdiction: "federal",
     title: "F1",
     taxYear: 2025,
+    missingInputs: [],
     mustFile: { ok: true, value: true, rationale: "", supportingFactKeys: [] },
     fields: Object.entries(results).map(([id, result]) => ({
       fieldId: `f1.${id}`,

@@ -52,19 +52,20 @@ export interface CaseState {
   pendingDecisions: string[];
   pendingFacts: string[];
   forms: FormSummary[];
+  /** null while anything is pending. Inside, null = the line is blank on the form. */
   money: {
-    totalWages: number;
-    federalAgi: number;
-    federalTaxableIncome: number;
-    federalTax: number;
-    federalWithholding: number;
-    federalRefund: number;
-    federalOwed: number;
-    stateTax: number;
-    stateWithholding: number;
-    stateRefund: number;
-    stateOwed: number;
-  };
+    totalWages: number | null;
+    federalAgi: number | null;
+    federalTaxableIncome: number | null;
+    federalTax: number | null;
+    federalWithholding: number | null;
+    federalRefund: number | null;
+    federalOwed: number | null;
+    stateTax: number | null;
+    stateWithholding: number | null;
+    stateRefund: number | null;
+    stateOwed: number | null;
+  } | null;
   documents: {
     form1040Url: string | null;
     form540Url: string | null;

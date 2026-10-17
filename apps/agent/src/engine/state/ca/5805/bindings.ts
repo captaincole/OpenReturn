@@ -18,10 +18,6 @@ import type { Form5805 } from "./types.js";
  */
 export function register(): void {
   defineForm<Form5805, Form5805FilingInfo>("form-5805", {
-    // MANUAL EDIT: must-file rule lives in state/ca/5805/resolveInfo.ts.
-    mustFile: (info) => info.mustFile5805,
-    mustFileDecisionKey: "decisions.scope.must_file_5805",
-
     bindings: {
       /*
        * MANUAL EDIT (2026-10-15): Part II short method. Percent lines

@@ -5,7 +5,7 @@
  */
 
 import { partitionTrades, type PartitionedTrades } from "./federal/8949/partitionTrades.js";
-import type { EngineDerivation } from "./types.js";
+import type { MustFileResolution } from "./filingInfo.js";
 
 // ─── Shared inputs view ──────────────────────────────────────────────────
 
@@ -115,6 +115,20 @@ export function sumCaSdi(wageRows: Array<{ value: unknown }>): number {
   return total;
 }
 
+// ─── Required inputs ─────────────────────────────────────────────────────
+
+/**
+ * The keys whose resolved value is still undefined: the inputs a form
+ * needs before it is complete. Pass each required input's fact or
+ * decision key with the value the resolver read for it. A 0 or false is
+ * an input; only undefined is missing.
+ */
+export function missingInputs(required: Record<string, unknown>): string[] {
+  return Object.entries(required)
+    .filter(([, value]) => value === undefined)
+    .map(([key]) => key);
+}
+
 // ─── Must-file resolution with provenance ────────────────────────────────
 
 /**
@@ -149,10 +163,12 @@ export interface MustFileFallback {
 export function resolveMustFile(
   decisions: Map<string, unknown>,
   opts: { explicitKey: string; fallbacks?: MustFileFallback[] },
-): { value: boolean | undefined; derivation: EngineDerivation | undefined } {
+): MustFileResolution {
+  const decisionKey = opts.explicitKey;
   const explicit = decisions.get(opts.explicitKey);
   if (typeof explicit === "boolean") {
     return {
+      decisionKey,
       value: explicit,
       derivation: {
         decidedBy: "engine",
@@ -166,6 +182,7 @@ export function resolveMustFile(
   for (const fb of fallbacks) {
     if (fb.value === true) {
       return {
+        decisionKey,
         value: true,
         derivation: {
           decidedBy: "engine",
@@ -178,6 +195,7 @@ export function resolveMustFile(
   }
   if (fallbacks.length > 0) {
     return {
+      decisionKey,
       value: false,
       derivation: {
         decidedBy: "engine",
@@ -187,7 +205,7 @@ export function resolveMustFile(
       },
     };
   }
-  return { value: undefined, derivation: undefined };
+  return { decisionKey, value: undefined, derivation: undefined };
 }
 
 /*

@@ -24,16 +24,6 @@ function sumIfAny(...values: unknown[]): number | undefined {
  */
 export function register(): void {
   defineForm<ScheduleCa, ScheduleCaFilingInfo>("schedule-ca", {
-    /*
-     * MANUAL EDIT: AI proposed `info.mustFileCA540`, but that slot
-     * lives on Form540FilingInfo, not on ScheduleCaFilingInfo. Routed
-     * to the per-schedule slot, driven by
-     * `decisions.scope.must_file_schedule_ca`. Scenarios can then scope
-     * Schedule CA independently (Alex declines it, Alejandro files it).
-     */
-    mustFile: (info) => info.mustFileScheduleCA,
-    mustFileDecisionKey: "decisions.scope.must_file_schedule_ca",
-
     bindings: {
       /*
        * MANUAL EDIT (2026-10-15): federal column for interest and other

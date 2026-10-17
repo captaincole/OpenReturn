@@ -25,15 +25,15 @@
  *     which blocks the field.
  *
  * The evaluator (registry, evaluateForm, fixpoint orchestration) lives in
- * engine.ts; this module registers rules into it via bindField /
- * bindMustFile.
+ * engine.ts; this module registers rules into it via bindField.
+ * Must-file is not authored here: each form's resolver writes it into
+ * FilingInfo.mustFile (resolverInputs.ts resolveMustFile).
  */
 
 import { z } from "zod";
 import {
   _resetBindingRegistryForTests,
   bindField,
-  bindMustFile,
   type EngineContext,
   type Rule,
 } from "./engine.js";
@@ -48,24 +48,10 @@ export type BindingFn<TForm, TInfo extends BaseFilingInfo, K extends keyof TForm
   info: TInfo,
 ) => TForm[K] | undefined;
 
-/** Must-file predicate. Returns true (file), false (do not file), or undefined (blocked). */
-export type MustFileFn<TInfo extends BaseFilingInfo> = (info: TInfo) => boolean | undefined;
-
 /** Per-field formatter override. Receives the typed value (non-null). */
 export type FormatterFn<V> = (value: NonNullable<V>) => string;
 
 export interface FormSpec<TForm extends object, TInfo extends BaseFilingInfo> {
-  /** Form-level must-file predicate. */
-  mustFile?: MustFileFn<TInfo>;
-  /**
-   * The explicit decision key the must-file predicate reads (for example
-   * "decisions.scope.must_file_federal"). When the predicate returns
-   * undefined, the blocked result carries this key as missingDecisionKey.
-   * caseState's pendingDecisions reads that key, and it drives Luca to
-   * record the decision. Without it, an unrecorded must-file decision
-   * blocks the form silently.
-   */
-  mustFileDecisionKey?: string;
   /** One entry per field; key is the short fieldId (form-id prefix stripped). */
   bindings: Partial<{ [K in keyof TForm]: BindingFn<TForm, TInfo, K> }>;
   /**
@@ -113,7 +99,6 @@ interface FormSpecMeta {
   unsupportedKeys: string[];
   todoKeys: string[];
   formatterKeys: string[];
-  mustFileBound: boolean;
 }
 
 const formSpecMeta = new Map<string, FormSpecMeta>();
@@ -154,18 +139,6 @@ export function defineForm<TForm extends object, TInfo extends BaseFilingInfo>(
   formId: string,
   spec: FormSpec<TForm, TInfo>,
 ): void {
-  if (spec.mustFile) {
-    bindMustFile(
-      formId,
-      makeMustFileRule(
-        formId,
-        spec.mustFile as MustFileFn<BaseFilingInfo>,
-        spec.mustFileDecisionKey,
-      ),
-      null,
-    );
-  }
-
   const bindingKeys = registerEntries<BindingFn<TForm, TInfo, keyof TForm>>(
     spec.bindings,
     (shortKey, fn) => {
@@ -200,7 +173,6 @@ export function defineForm<TForm extends object, TInfo extends BaseFilingInfo>(
     unsupportedKeys,
     todoKeys,
     formatterKeys,
-    mustFileBound: !!spec.mustFile,
   });
 }
 
@@ -237,42 +209,6 @@ function makeBindingRule(
         ok: true,
         value,
         rationale: `Typed binding ${fieldFullId}.`,
-        supportingFactKeys: [],
-      };
-    },
-  };
-}
-
-function makeMustFileRule(
-  formId: string,
-  fn: MustFileFn<BaseFilingInfo>,
-  decisionKey?: string,
-): Rule<unknown, unknown> {
-  return {
-    name: `typed-mustFile:${formId}`,
-    paramsSchema: z.unknown(),
-    evaluate: (_params, ctx) => {
-      const info = ctx.filingInfo;
-      if (!info) {
-        return blocked(`${formId} mustFile: ctx.filingInfo is missing.`);
-      }
-      let value: boolean | undefined;
-      try {
-        value = fn(info);
-      } catch (err) {
-        return blocked(
-          `${formId} mustFile: threw: ${err instanceof Error ? err.message : String(err)}`,
-        );
-      }
-      if (value === undefined) {
-        return decisionKey
-          ? blocked(`${formId} mustFile: waiting on decision ${decisionKey}.`, { decisionKey })
-          : blocked(`${formId} mustFile: returned undefined.`);
-      }
-      return {
-        ok: true,
-        value,
-        rationale: `Typed mustFile for ${formId}.`,
         supportingFactKeys: [],
       };
     },

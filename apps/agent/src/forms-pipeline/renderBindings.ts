@@ -18,7 +18,7 @@
  *
  *   export function register(): void {
  *     defineForm<Form540, Form540FilingInfo>("form-540", {
- *       mustFile: (info) => info.mustFileCA540,
+ *       // Must-file: decisions.scope.must_file_ca_540 → the form's resolver.
  *       bindings: {
  *         "header.first_name": (_, info) => info.taxpayerFirstName,
  *         "line.12_state_wages": (_, info) => info.w2StateWages,
@@ -47,7 +47,7 @@
 import { dirname, relative } from "node:path";
 import type { FieldInventory } from "../engine/catalog.js";
 import type { ClassifiedBinding, Confidence } from "./classifyBindings.js";
-import { DECISION_TO_SLOT, quote, shortKey, translate } from "./translateBinding.js";
+import { quote, shortKey, translate } from "./translateBinding.js";
 
 // ─── Public shapes ───────────────────────────────────────────────────────
 
@@ -168,7 +168,7 @@ function bucketOneField(
   return { kind: "binding", field, body: translated.body, rationale: binding.rationale };
 }
 
-/* File header, imports, register() opener, and the mustFile line(s). */
+/* File header, imports, register() opener, and the must-file note. */
 function renderPreamble(opts: RenderBindingsOpts, b: BucketResult): string[] {
   const engineImport = relImport(opts.outputPath, "src/engine/defineForm.ts");
   const taxTableImport = relImport(opts.outputPath, "src/engine/data/taxTable.ts");
@@ -204,21 +204,14 @@ function renderPreamble(opts: RenderBindingsOpts, b: BucketResult): string[] {
     `  defineForm<${opts.typeInterfaceName}, ${opts.filingInfoInterfaceName}>(${quote(opts.formId)}, {`,
   );
 
-  const mustFileSlot = DECISION_TO_SLOT[opts.mustFile.decisionKey];
-  if (mustFileSlot) {
-    out.push(`    // ${opts.mustFile.rationale}`);
-    out.push(`    mustFile: (info) => info.${mustFileSlot},`);
-  } else {
-    /*
-     * No slot for this decision: leave a TODO. The engine refuses to
-     * evaluate the form until a slot is filled in.
-     */
-    out.push(
-      `    // TODO: must-file decision "${opts.mustFile.decisionKey}" has no FilingInfo slot.`,
-    );
-    out.push(`    // ${opts.mustFile.rationale}`);
-    out.push(`    // mustFile: (info) => info.???,`);
-  }
+  /*
+   * Must-file is not a binding: the form's resolver writes it into
+   * FilingInfo.mustFile via resolveMustFile (resolverInputs.ts).
+   */
+  out.push(
+    `    // Must-file: ${opts.mustFile.decisionKey} → resolveMustFile in the form's resolver.`,
+  );
+  out.push(`    // ${opts.mustFile.rationale}`);
   out.push("");
   return out;
 }

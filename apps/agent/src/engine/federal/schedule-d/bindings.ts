@@ -65,15 +65,6 @@ function boxLineBindings(): Partial<{
  */
 export function register(): void {
   defineForm<ScheduleD, ScheduleDFilingInfo>("schedule-d", {
-    /*
-     * MANUAL EDIT: AI flagged this as TODO. Routed to
-     * info.mustFileScheduleD, set from
-     * `decisions.scope.must_file_schedule_d`. Same per-form scope
-     * pattern as 1040 / 540 / Schedule CA / 8949.
-     */
-    mustFile: (info) => info.mustFileScheduleD,
-    mustFileDecisionKey: "decisions.scope.must_file_schedule_d",
-
     bindings: {
       ...boxLineBindings(),
       /*

@@ -59,9 +59,15 @@ by Mastra and shipped next to the deployed function).
 2. Create `<jurisdiction>/<short>/` here with `types.ts` (the form's
    FormFields — every field must declare `category` and `valueType`; TS
    won't compile otherwise), `filingInfo.ts`, and `bindings.ts`.
-3. If the form's `filingInfo.ts` declares slots, add a `resolve<Form>Info`
-   function to `filingInfoResolvers.ts` and spread it in
-   `resolveFilingInfo` (`filingInfo.ts`).
+3. Add a `resolve<Form>Info` function (in `filingInfoResolvers.ts` or the
+   form's `resolveInfo.ts`) and list it in `resolveFilingInfo`
+   (`filingInfo.ts`). Every form needs one: it writes the form's
+   must-file entry, `mustFile: { "<formId>": resolveMustFile(…) }`, plus
+   any slots the form's `filingInfo.ts` declares. If the form reads an
+   answer (a decision, or a fact that is not a document), list it in
+   `missingInputs: { "<formId>": missingInputs({ "<key>": value }) }`.
+   Otherwise a missing answer leaves a line blank or wrong and nothing
+   tells Luca to ask. `requiredInputs.test.ts` fails when you forget.
 4. Add a `makeFormSpec` entry (+ catalog import) to the jurisdiction's
    `index.ts`.
 5. Add golden coverage under `tests/scenarios/`.
