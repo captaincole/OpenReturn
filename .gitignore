@@ -18,3 +18,6 @@ supabase/
 
 # Claude's local scratch space — temp artifacts, screenshots, backups. Never committed.
 .scratch/
+
+# E2E run folders: data, logs, transcripts, Playwright output.
+e2e/.run/

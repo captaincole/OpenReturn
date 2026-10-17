@@ -75,6 +75,7 @@ npm run dev          # mastra only — also opens Mastra Studio at :4111
 npm run dev:web      # next only
 
 npm test             # offline golden suite; positional filters work (npm test -- alex)
+npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see e2e/README.md)
 ```
 
 All persistent state lives in local files under `apps/agent/.data/` ("the DB is a file"):
@@ -117,6 +118,10 @@ Limits worth remembering:
 - These tools are deferred — load each one with `ToolSearch` (`select:mcp__claude-in-chrome__<name>`) before calling it.
 - Avoid triggering `alert()` / `confirm()` / `prompt()` dialogs — they freeze the extension. The Delete-filing button uses `confirm()`; if you need to test it programmatically, dispatch the click in the codepath that bypasses the confirm or temporarily comment it out.
 - If a browser tool errors twice in a row, stop and ask Andrew rather than retrying blindly.
+
+### Claude verifies the whole stack with `npm run e2e`
+
+After a change to the web app, the agent tools, or document generation, run `npm run e2e` in the background (about 15 minutes on a local model). Read `e2e/.run/<runId>/summary.md`. A `plumbing` failure means the change probably broke the app. A `model` failure can be a model mistake: run again before you debug. `dev:all` must be stopped first.
 
 ### Resetting user data
 

@@ -65,6 +65,7 @@ function MessageBubble({ msg, lucaBusy }: { msg: ChatMessage; lucaBusy: boolean 
     <div className={msg.role === "user" ? "flex justify-end" : "flex items-start gap-2.5"}>
       {msg.role === "assistant" && <LucaAvatar />}
       <div
+        data-message-role={msg.role}
         className={cn(
           msg.role === "user"
             ? "max-w-[80%] rounded-2xl rounded-br-sm bg-accent px-3.5 py-2.5 text-[14px] leading-relaxed whitespace-pre-wrap text-white"
@@ -152,12 +153,14 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
         <input
           ref={fileInputRef}
           type="file"
+          aria-label="Attach a file for Luca"
           accept="application/pdf,image/png,image/jpeg,image/webp"
           onChange={(e) => setAttachment(e.target.files?.[0] ?? null)}
           className="hidden"
         />
         <textarea
           ref={messageInputRef}
+          aria-label="Message Luca"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {

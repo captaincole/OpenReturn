@@ -19,6 +19,7 @@
     "smoke:review": "npm --prefix apps/agent run smoke:review",
     "doctor": "npm --prefix apps/agent run doctor",
     "test": "npm --prefix apps/agent test",
+    "e2e": "playwright test -c e2e",
     "install:all": "npm install && npm --prefix apps/agent install && npm --prefix apps/web install",
     "prepare": "husky",
     "lint": "eslint . --max-warnings 0",
@@ -30,6 +31,7 @@
     "node": ">=20.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "1.63.0",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@typescript-eslint/eslint-plugin": "^8.71.1",
     "@typescript-eslint/parser": "^8.71.1",
