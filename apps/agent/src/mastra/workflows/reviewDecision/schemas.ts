@@ -58,8 +58,10 @@ export const riskAssessmentSchema = z.object({
     .describe(
       "What the downstream impact looks like if this decision is wrong (e.g. wrong state-of-residence => owe state tax in two states; wrong filing status => bracket and standard-deduction wrong).",
     ),
+  // Default []: the model may leave the field out when it has nothing to add.
   dissentingConsiderations: z
     .array(z.string())
+    .default([])
     .describe(
       "Things that could push this risk higher (or change the tier) that the assessor noticed but didn't have evidence to act on.",
     ),
@@ -98,6 +100,14 @@ export const ruleOutputSchema = z.discriminatedUnion("kind", [
   ruleNeedMoreOutputSchema,
 ]);
 export type RuleOutput = z.infer<typeof ruleOutputSchema>;
+
+/*
+ * Anthropic sends a structured-output schema as a tool input schema, and
+ * a tool input schema must be a top-level object. A discriminated union
+ * is a top-level anyOf, which the API refuses. The rule step therefore
+ * asks for this wrapper and unwraps `result`.
+ */
+export const ruleStructuredOutputSchema = z.object({ result: ruleOutputSchema });
 
 /*
  * ---------------------------------------------------------------------------

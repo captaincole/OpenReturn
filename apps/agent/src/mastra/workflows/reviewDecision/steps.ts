@@ -15,7 +15,7 @@ import {
   loopCarrierSchema,
   reviewDecisionOutputSchema,
   riskAssessmentSchema,
-  ruleOutputSchema,
+  ruleStructuredOutputSchema,
   type EvidenceBundle,
   type LoopCarrier,
   type RuleOutput,
@@ -292,7 +292,7 @@ export const ruleStep = createStep({
       // Allow up to 4 internal turns so cite-ref-docs verification has room.
       maxSteps: 4,
       structuredOutput: {
-        schema: ruleOutputSchema,
+        schema: ruleStructuredOutputSchema,
         model: modelFor("judge"),
         errorStrategy: "strict",
       },
@@ -301,7 +301,7 @@ export const ruleStep = createStep({
     if (!ruleOutput) {
       throw new Error("rule: no structured output — check model/schema compatibility");
     }
-    const parsed = ruleOutputSchema.parse(ruleOutput);
+    const parsed = ruleStructuredOutputSchema.parse(ruleOutput).result;
 
     const out = advanceAfterRule(carrier, parsed);
 
