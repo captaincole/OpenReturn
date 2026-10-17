@@ -1,12 +1,12 @@
+import type { Agent } from "@mastra/core/agent";
 import { z } from "zod";
 import { modelFor } from "../../models";
-import { queryFormulator } from "./judges/queryFormulator";
 import type { EvidenceBundle, LoopCarrier } from "./schemas";
 
 /*
  * Prompt rendering for the review-decision judges, plus the iteration-1
  * query formulation. Pure string-building except formulateQueries, which
- * calls the queryFormulator judge. The step orchestration lives in
+ * calls the queryFormulator judge it is given. The step orchestration lives in
  * steps.ts.
  */
 
@@ -22,7 +22,7 @@ export function decisionSummary(carrier: LoopCarrier) {
   };
 }
 
-export async function formulateQueries(c: LoopCarrier): Promise<string[]> {
+export async function formulateQueries(queryFormulator: Agent, c: LoopCarrier): Promise<string[]> {
   const prompt = [
     `Decision to ground:`,
     `  decisionKey: ${c.decisionKey}`,

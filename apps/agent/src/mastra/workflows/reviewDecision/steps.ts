@@ -10,8 +10,6 @@ import {
 } from "../../db/reviewRuns";
 import { listFactsByKeys, noteQuestion } from "../../db/taxFacts";
 import { modelFor } from "../../models";
-import { assessRiskAgent } from "./judges/assessRiskAgent";
-import { ruleAgent } from "./judges/ruleAgent";
 import { decisionSummary, formulateQueries, renderAssessPrompt, renderRulePrompt } from "./prompts";
 import {
   loopCarrierSchema,
@@ -147,7 +145,7 @@ export const gatherStep = createStep({
   id: "gather",
   inputSchema: loopCarrierSchema,
   outputSchema: loopCarrierSchema,
-  execute: async ({ inputData }) => {
+  execute: async ({ inputData, mastra }) => {
     const t0 = Date.now();
     const carrier = inputData;
     /*
@@ -162,7 +160,7 @@ export const gatherStep = createStep({
      */
     let queries = carrier.queries;
     if (queries.length === 0) {
-      queries = await formulateQueries(carrier);
+      queries = await formulateQueries(mastra.getAgent("queryFormulator"), carrier);
     }
 
     /*
@@ -211,7 +209,7 @@ export const assessRiskStep = createStep({
   id: "assess",
   inputSchema: loopCarrierSchema,
   outputSchema: loopCarrierSchema,
-  execute: async ({ inputData }) => {
+  execute: async ({ inputData, mastra }) => {
     const t0 = Date.now();
     const carrier = inputData;
     const scope = { userId: carrier.userId, filingId: carrier.filingId };
@@ -220,7 +218,7 @@ export const assessRiskStep = createStep({
     }
 
     const prompt = renderAssessPrompt(carrier);
-    const result = await assessRiskAgent.generate(prompt, {
+    const result = await mastra.getAgent("assessRiskAgent").generate(prompt, {
       structuredOutput: {
         schema: riskAssessmentSchema,
         model: modelFor("judge"),
@@ -281,7 +279,7 @@ export const ruleStep = createStep({
   id: "rule",
   inputSchema: loopCarrierSchema,
   outputSchema: loopCarrierSchema,
-  execute: async ({ inputData }) => {
+  execute: async ({ inputData, mastra }) => {
     const t0 = Date.now();
     const carrier = inputData;
     const scope = { userId: carrier.userId, filingId: carrier.filingId };
@@ -290,7 +288,7 @@ export const ruleStep = createStep({
     }
 
     const prompt = renderRulePrompt(carrier);
-    const result = await ruleAgent.generate(prompt, {
+    const result = await mastra.getAgent("ruleAgent").generate(prompt, {
       // Allow up to 4 internal turns so cite-ref-docs verification has room.
       maxSteps: 4,
       structuredOutput: {

@@ -243,7 +243,9 @@ async function main() {
   const { createOwnerFiling } = await import("../src/mastra/db/filings");
   const { recordFact, listOpenQuestions } = await import("../src/mastra/db/taxFacts");
   const { recordDecision, getDecisionById } = await import("../src/mastra/db/aiDecisions");
-  const { reviewDecision } = await import("../src/mastra/workflows/reviewDecision");
+  const { reviewDecision, reviewDecisionWorkflow } =
+    await import("../src/mastra/workflows/reviewDecision");
+  await registerReviewWorkflow(reviewDecisionWorkflow);
   const deps: Deps = {
     createOwnerFiling,
     recordFact,
@@ -273,3 +275,23 @@ main().catch((err) => {
   console.error("[smoke:review] failed:", err);
   process.exit(1);
 });
+
+/*
+ * The workflow steps get the judges with mastra.getAgent(), so the
+ * workflow must be registered on a Mastra instance. The app's instance
+ * (src/mastra/index.ts) uses top-level await, which tsx cannot load in
+ * this CommonJS script, so register the workflow and judges on a small
+ * instance here.
+ */
+async function registerReviewWorkflow(workflow: unknown) {
+  const { Mastra } = await import("@mastra/core");
+  const { queryFormulator } =
+    await import("../src/mastra/workflows/reviewDecision/judges/queryFormulator");
+  const { assessRiskAgent } =
+    await import("../src/mastra/workflows/reviewDecision/judges/assessRiskAgent");
+  const { ruleAgent } = await import("../src/mastra/workflows/reviewDecision/judges/ruleAgent");
+  new Mastra({
+    agents: { queryFormulator, assessRiskAgent, ruleAgent },
+    workflows: { reviewDecision: workflow as never },
+  });
+}

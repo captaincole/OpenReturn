@@ -11,6 +11,9 @@ import { deleteFilingRoute } from "./server/routes/deleteFiling";
 import { sessionResetRoute } from "./server/routes/sessionReset";
 import { createStorage } from "./server/storage";
 import { reviewDecisionWorkflow } from "./workflows/reviewDecision";
+import { assessRiskAgent } from "./workflows/reviewDecision/judges/assessRiskAgent";
+import { queryFormulator } from "./workflows/reviewDecision/judges/queryFormulator";
+import { ruleAgent } from "./workflows/reviewDecision/judges/ruleAgent";
 
 const storage = await createStorage();
 
@@ -24,12 +27,12 @@ const logger = new ConsoleLogger({ name: "summa", level: "info" });
 
 export const mastra = new Mastra({
   /*
-   * The app has exactly ONE agent. The review-decision judges are
-   * workflow internals (workflows/reviewDecision/judges/) and are
-   * deliberately NOT registered. Registration would expose them as
-   * chattable agents in Studio and the public API.
+   * Luca is the one conversational agent. The three review-decision
+   * judges (workflows/reviewDecision/judges/) are registered too, as the
+   * Mastra workflow docs show: the steps get them with mastra.getAgent(),
+   * so their calls share the app's logger and traces. Studio lists them.
    */
-  agents: { luca },
+  agents: { luca, queryFormulator, assessRiskAgent, ruleAgent },
   workflows: { reviewDecision: reviewDecisionWorkflow },
   storage,
   logger,

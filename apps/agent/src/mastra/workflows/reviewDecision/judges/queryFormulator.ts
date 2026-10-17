@@ -7,10 +7,11 @@ import { modelFor } from "../../../models";
  * the topic. The gather step consumes the output on iteration 1; later
  * iterations take queries from the rule step's `suggestedQueries`.
  *
- * NOTE: the judges/ modules use Mastra's Agent class purely as "prompt +
- * model + schema (+ bounded tools)". They are workflow-step internals, NOT
- * registered on the Mastra instance, not conversational, no memory. The app
- * has exactly one agent: Luca.
+ * NOTE: the judges/ modules use Mastra's Agent class as "prompt + model +
+ * schema (+ bounded tools)": not conversational, no memory. They are
+ * registered on the Mastra instance (index.ts) so their calls get the
+ * app's logger and traces; the workflow steps get them with
+ * mastra.getAgent(). Luca is the one conversational agent.
  *
  * The task is narrow, so it runs on the judge-role model (JUDGE_MODEL) with
  * no tools; the structured output is just `{queries: string[]}`. It lives
