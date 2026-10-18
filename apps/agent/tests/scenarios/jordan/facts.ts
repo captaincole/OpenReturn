@@ -644,6 +644,7 @@ export const jordanFacts: TaxFactRow[] = [
   idFact("name.middle_initial", "A"),
   idFact("name.last", "Sample"),
   idFact("ssn", "400-00-0001"),
+  idFact("dob", "04/12/1985"),
   idFact("address.street", "1500 Example Street"),
   idFact("address.city", "Oakland"),
   idFact("address.state", "CA"),

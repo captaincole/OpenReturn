@@ -31,8 +31,18 @@ export interface Form1040FilingInfo extends BaseFilingInfo {
   ordinaryDividends?: Money;
   /** Sum of 1099-DIV Box 1b across all accounts. */
   qualifiedDividends?: Money;
-  /** Sum of 1099 Box 4 (federal income tax withheld on 1099 forms). */
+  /**
+   * Line 25b: federal income tax withheld on 1099 forms — 1099-INT,
+   * 1099-DIV, and 1099-R box 4, plus SSA-1099 box 6. Undefined when no
+   * 1099 withheld anything (the line stays blank).
+   */
   form1099FederalWithholding?: Money;
+  /**
+   * Line 7a when Schedule D is not filed (instructions, line 7a,
+   * Exception 1): the sum of 1099-DIV box 2a. Undefined when Schedule D
+   * is filed or there are no capital gain distributions.
+   */
+  capitalGainDistributionsNoScheduleD?: Money;
 
   // ─── 1099-INT aggregates ─────────────────────────────────────────────
   /** Sum of 1099-INT Box 1 (taxable interest income) across all accounts. */
@@ -44,6 +54,15 @@ export interface Form1040FilingInfo extends BaseFilingInfo {
   iraDistributions?: RetirementLine;
   /** Lines 5a–5c (pensions and annuities: every other 1099-R). */
   pensionDistributions?: RetirementLine;
+
+  /** Line 6a: SSA-1099 / RRB-1099 box 5 (net benefits). Undefined when none. */
+  socialSecurityBenefits?: Money;
+  /**
+   * Married filing separately and lived apart from the spouse all year:
+   * the line 6d box, and the $25,000 base on the Social Security
+   * Benefits Worksheet instead of 0.
+   */
+  livedApartFromSpouseAllYear?: boolean;
 
   /**
    * Refund the federal overpayment in full, or apply some to 2026

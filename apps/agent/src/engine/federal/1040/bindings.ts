@@ -7,11 +7,15 @@
  * Generated at: 2026-05-14T20:53:03.862Z
  */
 
-import { lookupStandardDeduction } from "../../data/standardDeduction.js";
+import {
+  lookupAdditionalStandardDeduction,
+  lookupStandardDeduction,
+} from "../../data/standardDeduction.js";
 import { lookupTax } from "../../data/taxTable.js";
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
+import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
 
@@ -70,6 +74,33 @@ export function register(): void {
       "header.filing_status_qss": (_, info) => info.filingStatus === "qualifying_surviving_spouse",
       "header.filing_status_mfs": (_, info) => info.filingStatus === "married_filing_separately",
       /*
+       * MANUAL EDIT: married filing separately names the spouse: SSN in
+       * the spouse SSN box, full name after the MFS checkbox. Joint
+       * returns (MFJ spouse name fields) are not modeled yet.
+       */
+      "header.spouse_ssn": (_, info) =>
+        info.filingStatus === "married_filing_separately" ||
+        info.filingStatus === "married_filing_jointly"
+          ? info.spouseSSN
+          : undefined,
+      "header.mfs_spouse_full_name": (_, info) =>
+        info.filingStatus === "married_filing_separately" &&
+        info.spouseFirstName &&
+        info.spouseLastName
+          ? `${info.spouseFirstName} ${info.spouseLastName}`
+          : undefined,
+      /*
+       * MANUAL EDIT: "MFS or HOH and lived apart from your spouse for the
+       * last 6 months". Living apart all year covers the last 6 months.
+       * Legal separation is not modeled.
+       */
+      "header.lived_apart_mfs_hoh": (_, info) =>
+        (info.filingStatus === "married_filing_separately" ||
+          info.filingStatus === "head_of_household") &&
+        info.livedApartFromSpouseAllYear === true
+          ? true
+          : undefined,
+      /*
        * Sum of W-2 box 1 (wages) across all employers.
        * MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar (roundDollars).
        */
@@ -123,6 +154,54 @@ export function register(): void {
       "line.5b": (_, info) => roundDollars(info.pensionDistributions?.taxable),
       "line.5c_rollover": (_, info) => (info.pensionDistributions?.rollover ? true : undefined),
       /*
+       * MANUAL EDIT: lines 6a/6b from SSA-1099 box 5 and the Social
+       * Security Benefits Worksheet (worksheets/socialSecurityBenefits.ts).
+       * Line 6b blocks for MFS until the lived-apart answer is known: it
+       * picks the worksheet base ($25,000 or none).
+       */
+      "line.6a": (_, info) => roundDollars(info.socialSecurityBenefits),
+      "line.6b": (f, info) => {
+        const benefits = info.socialSecurityBenefits;
+        if (benefits === undefined || !info.filingStatus) return undefined;
+        const mfs = info.filingStatus === "married_filing_separately";
+        if (mfs && info.livedApartFromSpouseAllYear === undefined) return undefined;
+        return socialSecurityTaxable({
+          benefits,
+          otherIncome: sum(
+            f["line.1z"],
+            f["line.2b"],
+            f["line.3b"],
+            f["line.4b"],
+            f["line.5b"],
+            f["line.7a"],
+            f["line.8"],
+          ),
+          taxExemptInterest: sum(f["line.2a"]),
+          adjustments: sum(
+            f["schedule-1.1.line.11"],
+            f["schedule-1.1.line.12"],
+            f["schedule-1.1.line.13"],
+            f["schedule-1.1.line.14"],
+            f["schedule-1.1.line.15"],
+            f["schedule-1.1.line.16"],
+            f["schedule-1.1.line.17"],
+            f["schedule-1.1.line.18"],
+            f["schedule-1.1.line.19a"],
+            f["schedule-1.1.line.20"],
+            f["schedule-1.1.line.23"],
+            f["schedule-1.1.line.25"],
+          ),
+          filingStatus: info.filingStatus,
+          livedApartAllYear: info.livedApartFromSpouseAllYear,
+        }).taxable;
+      },
+      "line.6d_mfs_lived_apart": (_, info) =>
+        info.socialSecurityBenefits !== undefined &&
+        info.filingStatus === "married_filing_separately" &&
+        info.livedApartFromSpouseAllYear === true
+          ? true
+          : undefined,
+      /*
        * MANUAL EDIT: line 7a reads the net capital gain from Schedule D
        * line 16. It returns undefined (blocked) when the scenario does
        * not file Schedule D (Alex declined it via
@@ -130,10 +209,14 @@ export function register(): void {
        * `unsupported` semantics: the widget stays blank in the rendered
        * PDF. Downstream sum() treats undefined as 0 either way.
        */
-      "line.7a": (f) => {
+      "line.7a": (f, info) => {
         const v = f["schedule-d.1.line.16_combined_gain_loss"];
-        return typeof v === "number" ? v : undefined;
+        if (typeof v === "number") return v;
+        // MANUAL EDIT: Exception 1 — capital gain distributions only, no Schedule D.
+        return roundDollars(info.capitalGainDistributionsNoScheduleD);
       },
+      "line.7b_schedule_d_not_required": (_, info) =>
+        info.capitalGainDistributionsNoScheduleD !== undefined ? true : undefined,
       // Total income per IRS instructions: lines 1z + 2b + 3b + 4b + 5b + 6b + 7a + 8. sum() treats undefined terms as 0.
       "line.9": (f) =>
         sum(
@@ -154,17 +237,23 @@ export function register(): void {
        * MANUAL EDIT: line 12e is the standard deduction (filing-status
        * lookup) OR Schedule A line 17 (itemized total).
        * decisions.itemize_vs_standard gates the choice via
-       * info.useItemizedDeductions. The dependent/senior/blind worksheet
-       * adjustment to the standard deduction is still unsupported.
+       * info.useItemizedDeductions. A line 12d box adds the amount from
+       * the chart for people born before January 2, 1961, or blind
+       * (blindness and the spouse boxes are not modeled). The worksheet
+       * for a taxpayer someone can claim as a dependent is not modeled.
        */
+      "line.12d_you_born_before_jan2_1961": (_, info) =>
+        info.taxpayerBornBeforeJan2_1961 === true ? true : undefined,
       "line.12e": (f, info) => {
         if (info.useItemizedDeductions === true) {
           const itemized = f["schedule-a.0.line.17_total_itemized_deductions"];
           return typeof itemized === "number" ? itemized : undefined;
         }
-        return info.filingStatus
-          ? lookupStandardDeduction("federal", 2025, info.filingStatus)
-          : undefined;
+        if (!info.filingStatus || info.taxpayerBornBeforeJan2_1961 === undefined) return undefined;
+        const base = lookupStandardDeduction("federal", 2025, info.filingStatus);
+        const boxes = f["line.12d_you_born_before_jan2_1961"] === true ? 1 : 0;
+        const extra = lookupAdditionalStandardDeduction(2025, info.filingStatus);
+        return base === undefined || extra === undefined ? undefined : base + boxes * extra;
       },
       // Lines 12e + 13a + 13b per form instructions.
       "line.14": (f) => sum(f["line.12e"], f["line.13a"], f["line.13b"]),
@@ -286,6 +375,8 @@ export function register(): void {
       },
       // Total federal income tax withheld = lines 25a + 25b + 25c.
       "line.25d": (f) => sum(f["line.25a"], f["line.25b"], f["line.25c"]),
+      // MANUAL EDIT: 1099 box 4 and SSA-1099 box 6; blank when nothing was withheld.
+      "line.25b": (_, info) => roundDollars(info.form1099FederalWithholding),
       // Total withholding (25d) + estimated tax payments (26) + other refundable credits (32) per IRS instructions.
       "line.33": (f) => sum(f["line.25d"], f["line.26"], f["line.32"]),
       // MANUAL EDIT: line 34 (overpaid) only when line 33 exceeds line 24; blank otherwise.
@@ -366,8 +457,6 @@ export function register(): void {
         "No MFJ scenario yet — spouse identity facts are not ingested. Will support when a married_filing_jointly scenario is built.",
       "header.spouse_last_name":
         "No MFJ scenario yet — spouse identity facts are not ingested. Will support when a married_filing_jointly scenario is built.",
-      "header.spouse_ssn":
-        "No MFJ scenario yet — spouse SSN is not ingested. Will support when a married_filing_jointly scenario is built.",
       "header.foreign_country_name":
         "No foreign address scenario modeled yet — no fact key exists for a foreign country name. Relevant only for taxpayers with a foreign address.",
       "header.foreign_province_state_county":
@@ -378,8 +467,6 @@ export function register(): void {
         "No fact or decision models the taxpayer's voluntary Presidential Election Campaign Fund $3 designation; no intake question captures this.",
       "header.presidential_campaign_spouse":
         "No fact or decision models the spouse's voluntary Presidential Election Campaign Fund $3 designation; no MFJ/spouse scenario ingested.",
-      "header.mfs_spouse_full_name":
-        "Spouse's full name for MFS is required only in a married-filing-separately scenario; no spouse identity facts are ingested yet.",
       "header.hoh_qss_qualifying_child_name":
         "No dependent/qualifying-child ingestion scenario yet — this field is only filled when the HOH/QSS qualifying person is a child who is NOT the taxpayer's dependent, requiring dependent relationship data we haven't modeled.",
       "header.nonresident_alien_spouse_checkbox":
@@ -468,8 +555,6 @@ export function register(): void {
         "No dependent-data ingestion yet — determining CTC eligibility (age, relationship, valid SSN) requires a dependent-intake scenario we haven't built.",
       "dependents.dep4_other_dependent_credit":
         "No dependent-data ingestion yet — credit for other dependents requires per-dependent qualifying-relative analysis not yet built.",
-      "header.lived_apart_mfs_hoh":
-        "No decision or fact key exists for 'lived apart from spouse last 6 months' — requires an MFS/HOH lived-apart scenario with explicit intake question we haven't built.",
       "line.1b":
         "Household employee wages not reported on W-2 require a separate household-employer intake scenario not yet built; no fact key exists for this.",
       "line.1c":
@@ -504,16 +589,8 @@ export function register(): void {
         "No scenario requiring a special code/annotation next to line 5b; this checkbox is for edge cases referenced by other publications.",
       "line.5c_box3_amount":
         "Companion amount field to line 5c box 3; no scenario requiring this annotation amount has been modeled.",
-      "line.6a":
-        "No SSA-1099 or RRB-1099 ingestion path built yet; total social security benefits (box 5) cannot be summed.",
-      "line.6b":
-        "No SSA-1099 ingestion and no Social Security Benefits Worksheet implementation; taxable SS benefit amount cannot be computed.",
       "line.6c_lump_sum_election":
         "No lump-sum social security benefit scenario or decision modeled; this checkbox requires knowing whether the taxpayer received a prior-year lump-sum SS payment and elected the special treatment.",
-      "line.6d_mfs_lived_apart":
-        "No MFS-lived-apart scenario modeled; this checkbox requires both married_filing_separately status AND the taxpayer having lived apart from their spouse all year — no decision captures the lived-apart fact.",
-      "line.7b_schedule_d_not_required":
-        "Checking this box requires evaluating whether Exception 1 applies (no capital losses, only capital gain distributions from 1099-DIV box 2a with no amounts in boxes 2b/2c/2d). No decision or fact path models this determination yet.",
       "line.7b_includes_childs_capital_gain":
         "Requires Form 8814 (child's interest and dividends) scenario — no dependent income ingestion or Form 8814 computation path exists yet.",
       "line.7b_childs_capital_gain_amount":
@@ -526,8 +603,6 @@ export function register(): void {
         "No MFS scenario ingested yet — this checkbox applies only to married filing separately filers whose spouse itemizes.",
       "line.12b_dual_status_alien":
         "No dual-status alien scenario ingested yet — this checkbox requires a residency/immigration-status fact we don't model.",
-      "line.12d_you_born_before_jan2_1961":
-        "Requires a date-comparison rule (identity.dob < 1961-01-02) that the engine doesn't support yet; no boolean age-threshold rule exists in the library.",
       "line.12d_you_blind":
         "No blindness fact ingested — we don't yet have a fact key for the taxpayer's blindness status.",
       "line.12d_spouse_born_before_jan2_1961":
@@ -554,8 +629,6 @@ export function register(): void {
         "Former spouse SSN for joint estimated tax split — no MFS/divorce scenario with prior joint estimated payments modeled yet; requires separate fact ingestion for former spouse identity.",
       "line.21":
         "Line 21 (lines 19 + 20) — child tax credit and Schedule 3 nonrefundable credits are both unsupported; the aggregate has no value to compute yet.",
-      "line.25b":
-        "Federal income tax withheld from 1099 forms — no 1099-withholding scenario exercised yet; render blank rather than 0 until a fixture has Box 4 facts.",
       "line.32":
         "Line 32 — sum of other refundable credits / payments (27a + 28 + 29 + 30 + 31), all of which are individually unsupported.",
       "line.27a":

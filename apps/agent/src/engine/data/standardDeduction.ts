@@ -61,9 +61,9 @@ const TABLES: StandardDeductionTable[] = [
  * Bindings then short-circuit to undefined, which blocks the field,
  * instead of a silently wrong default.
  *
- * Does not handle the dependent / blind / 65+ worksheet, the adjustments
- * that increase the basic standard deduction. Those scenarios are not
- * ingested yet. Bind that worksheet when they are.
+ * The 65+ / blind increase is lookupAdditionalStandardDeduction below.
+ * The worksheet for a taxpayer someone else can claim as a dependent is
+ * not modeled.
  */
 export function lookupStandardDeduction(
   jurisdiction: string,
@@ -72,4 +72,20 @@ export function lookupStandardDeduction(
 ): number | undefined {
   const table = TABLES.find((t) => t.jurisdiction === jurisdiction && t.taxYear === taxYear);
   return table?.byFilingStatus[filingStatus];
+}
+
+/*
+ * Federal 2025 increase per box checked on 1040 line 12d (born before
+ * January 2, 1961, or blind): $2,000 for single or head of household,
+ * $1,600 otherwise. Source: Form 1040 Instructions (2025), Standard
+ * Deduction Worksheet for Dependents line 4b and the Standard Deduction
+ * Chart for People Who Were Born Before January 2, 1961, or Were Blind
+ * (MFS, one box: $15,750 + $1,600 = $17,350).
+ */
+export function lookupAdditionalStandardDeduction(
+  taxYear: number,
+  filingStatus: FilingStatus,
+): number | undefined {
+  if (taxYear !== 2025) return undefined;
+  return filingStatus === "single" || filingStatus === "head_of_household" ? 2000 : 1600;
 }

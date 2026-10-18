@@ -8,12 +8,7 @@
  * and list it there.
  */
 
-import {
-  isDividendFactKey,
-  isInterestFactKey,
-  type RetirementDistributionFactValue,
-} from "./facts/index.js";
-import type { Form1040FilingInfo, RetirementLine } from "./federal/1040/filingInfo.js";
+import { SPOUSE_KEYS, isDividendFactKey, isInterestFactKey, isW2FactKey } from "./facts/index.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import type { Form8959FilingInfo } from "./federal/8959/filingInfo.js";
@@ -53,15 +48,32 @@ const FILING_STATUSES: ReadonlySet<unknown> = new Set<FilingStatus>([
   "qualifying_surviving_spouse",
 ]);
 
-function filingStatusOf(inputs: ResolverInputs): FilingStatus | undefined {
+export function filingStatusOf(inputs: ResolverInputs): FilingStatus | undefined {
   const raw = inputs.decisionByKey.get("decisions.scope.filing_status");
   return FILING_STATUSES.has(raw) ? (raw as FilingStatus) : undefined;
+}
+
+/*
+ * Born before January 2, 1961: 65 or older at the end of 2025 (1040
+ * line 12d; CA 540 line 9 counts a January 1, 1961 birthday as 65 on
+ * December 31). Reads "MM/DD/YYYY" or "YYYY-MM-DD"; anything else is
+ * unknown. Tax year 2025 only, like the rest of the engine's tables.
+ */
+export function bornBeforeJan2_1961(dob: string | undefined): boolean | undefined {
+  const us = dob?.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  const iso = dob?.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  const ymd = us ? [us[3], us[1], us[2]] : iso ? [iso[1], iso[2], iso[3]] : undefined;
+  if (!ymd) return undefined;
+  const [y, m, d] = ymd.map(Number);
+  return y < 1961 || (y === 1961 && m === 1 && d < 2);
 }
 
 export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
   const filingStatus = filingStatusOf(inputs);
   const ssnRaw = text(inputs, "identity.ssn");
+  const spouseSsnRaw = text(inputs, SPOUSE_KEYS.ssn);
   const phoneRaw = text(inputs, "identity.phone");
+  const dob = text(inputs, "identity.dob");
 
   return {
     filingStatus,
@@ -73,7 +85,12 @@ export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
      * The FilingInfo slot stores bare digits.
      */
     taxpayerSSN: ssnRaw ? ssn(ssnRaw) : undefined,
-    taxpayerDateOfBirth: text(inputs, "identity.dob"),
+    taxpayerDateOfBirth: dob,
+    taxpayerBornBeforeJan2_1961: bornBeforeJan2_1961(dob),
+    spouseFirstName: text(inputs, SPOUSE_KEYS.firstName),
+    spouseMiddleInitial: text(inputs, SPOUSE_KEYS.middleInitial),
+    spouseLastName: text(inputs, SPOUSE_KEYS.lastName),
+    spouseSSN: spouseSsnRaw ? ssn(spouseSsnRaw) : undefined,
     taxpayerOccupation: text(inputs, "identity.occupation"),
     taxpayerPhone: phoneRaw ? phone(phoneRaw) : undefined,
     taxpayerEmail: text(inputs, "identity.email"),
@@ -87,102 +104,8 @@ export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
   };
 }
 
-/*
- * 1099-INT sums: box1 (taxable) and box8 (tax-exempt). The filter pins
- * each aggregate to its source section, because future 1099 sections
- * (OID, MISC) may reuse low-number box names. When the taxpayer has NO
- * interest facts at all, the slots stay undefined rather than 0. The
- * renderer then leaves the cells blank instead of writing "0", which
- * matches the CPA-golden convention.
- */
-function resolveInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
-  const hasInterest = inputs.facts.some(
-    (f) => f.category === "investment_income" && isInterestFactKey(f.key),
-  );
-  if (!hasInterest) {
-    return { taxableInterestTotal: undefined, taxExemptInterestTotal: undefined };
-  }
-  return {
-    // Box 3 (US savings bond and Treasury interest) is taxable federally, as on Schedule B line 1.
-    taxableInterestTotal: (sumInvestmentBox(inputs, "box1", isInterestFactKey) +
-      sumInvestmentBox(
-        inputs,
-        "box3",
-        isInterestFactKey,
-      )) as Form1040FilingInfo["taxableInterestTotal"],
-    taxExemptInterestTotal: sumInvestmentBox(
-      inputs,
-      "box8",
-      isInterestFactKey,
-    ) as Form1040FilingInfo["taxExemptInterestTotal"],
-  };
-}
-
-/*
- * 1099-R facts (category "retirement") → 1040 lines 4a–4c (IRA box
- * checked) and 5a–5c (everything else). Gross = box 1, taxable = box 2a.
- * Codes G and H are direct rollovers. No 1099-R facts: both stay blank.
- */
-function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
-  const rows = factsInCategory(inputs, "retirement")
-    .filter((row) => /^payer\.[^.]+\.distributions\.[^.]+$/.test(row.key))
-    .map((row) => row.value as RetirementDistributionFactValue);
-  const line = (ira: boolean): RetirementLine | undefined => {
-    const group = rows.filter((r) => r.box7IraSepSimple === ira);
-    if (group.length === 0) return undefined;
-    const undetermined = group.some(
-      (r) => r.box2a === undefined && r.box2b?.taxableAmountNotDetermined === true,
-    );
-    return {
-      gross: sum(...group.map((r) => r.box1)),
-      taxable: undetermined ? undefined : sum(...group.map((r) => r.box2a ?? r.box1)),
-      rollover: group.some((r) => /[GH]/.test(r.box7)),
-    };
-  };
-  return { iraDistributions: line(true), pensionDistributions: line(false) };
-}
-
-export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
-  const { decisionByKey } = inputs;
-  const r = resolveMustFile(decisionByKey, {
-    explicitKey: "decisions.scope.must_file_federal",
-  });
-  const itemizeDecision = decisionByKey.get("decisions.itemize_vs_standard");
-  const useItemizedDeductions =
-    itemizeDecision === "itemized" ? true : itemizeDecision === "standard" ? false : undefined;
-  const hasDigitalAssets = decisionByKey.get("decisions.scope.has_digital_assets") as
-    boolean | undefined;
-  const refundFullOverpaymentFederal = decisionByKey.get(
-    "decisions.refund.refund_full_overpayment_federal",
-  ) as boolean | undefined;
-  const filesScheduleA = resolveScheduleAInfo(inputs).mustFile?.["schedule-a"]?.value === true;
-  return {
-    mustFile: { "form-1040": r },
-    missingInputs: {
-      "form-1040": missingInputs({
-        "decisions.scope.filing_status": filingStatusOf(inputs),
-        "decisions.scope.has_digital_assets": hasDigitalAssets,
-        "decisions.refund.refund_full_overpayment_federal": refundFullOverpaymentFederal,
-        ...(filesScheduleA ? { "decisions.itemize_vs_standard": useItemizedDeductions } : {}),
-      }),
-    },
-    hasDigitalAssets,
-    w2WagesTotal: sumW2Box(inputs, "box1") as Form1040FilingInfo["w2WagesTotal"],
-    w2FederalWithholding: sumW2Box(inputs, "box2") as Form1040FilingInfo["w2FederalWithholding"],
-    qualifiedDividends: sumInvestmentBox(
-      inputs,
-      "box1b",
-    ) as Form1040FilingInfo["qualifiedDividends"],
-    ordinaryDividends: sumInvestmentBox(inputs, "box1a") as Form1040FilingInfo["ordinaryDividends"],
-    form1099FederalWithholding: sumInvestmentBox(
-      inputs,
-      "box4",
-    ) as Form1040FilingInfo["form1099FederalWithholding"],
-    ...resolveInterestSlots(inputs),
-    ...resolveRetirementSlots(inputs),
-    refundFullOverpaymentFederal,
-    useItemizedDeductions,
-  };
+export function hasW2(inputs: ResolverInputs): boolean {
+  return factsInCategory(inputs, "wages").some((row) => isW2FactKey(row.key));
 }
 
 export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
@@ -197,6 +120,8 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
     missingInputs: {
       "form-540": missingInputs({
         "identity.address.county": text(inputs, "identity.address.county"),
+        // Line 9: 65 or older by December 31 adds the senior exemption.
+        "identity.dob": text(inputs, "identity.dob"),
         "health_coverage.full_year_mec": factByKey.get("health_coverage.full_year_mec"),
         "use_tax.owed_amount": useTaxOwed,
         /* Line 91 takes an amount, or the "no use tax owed" reason when there is none. */
@@ -212,8 +137,13 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
       }),
     },
     caResidencyStatus: decisionByKey.get("decisions.scope.ca_residency") as string | undefined,
-    w2StateWages: sumW2Box(inputs, "box16") as Form540FilingInfo["w2StateWages"],
-    w2StateWithholding: sumW2Box(inputs, "box17") as Form540FilingInfo["w2StateWithholding"],
+    // No W-2 at all: lines 12 and 71 stay blank, not "0".
+    w2StateWages: hasW2(inputs)
+      ? (sumW2Box(inputs, "box16") as Form540FilingInfo["w2StateWages"])
+      : undefined,
+    w2StateWithholding: hasW2(inputs)
+      ? (sumW2Box(inputs, "box17") as Form540FilingInfo["w2StateWithholding"])
+      : undefined,
     w2CaSdiTotal: sumCaSdi(factsInCategory(inputs, "wages")) as Form540FilingInfo["w2CaSdiTotal"],
     useTaxOwed: useTaxOwed as Form540FilingInfo["useTaxOwed"],
     noUseTaxOwed:
