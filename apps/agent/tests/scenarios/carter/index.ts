@@ -23,6 +23,7 @@
  *   npm test -- carter
  */
 
+import { lockedGoldenPath } from "../../helpers/scenarioPdfName.js";
 import type { Scenario } from "../../types.js";
 import { carterDecisions } from "./decisions.js";
 import { carterExpected } from "./expected.js";
@@ -41,5 +42,9 @@ export const carterScenario: Scenario = {
   facts: carterFacts,
   decisions: carterDecisions,
   allowNotModeled: true,
-  forms: FORM_IDS.map((formId) => ({ formId, expected: carterExpected(formId) })),
+  forms: FORM_IDS.map((formId) => ({
+    formId,
+    expected: carterExpected(formId),
+    goldenPdfPath: lockedGoldenPath("carter", formId),
+  })),
 };

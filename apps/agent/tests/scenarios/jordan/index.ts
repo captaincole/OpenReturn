@@ -16,6 +16,7 @@
  *   npm test -- jordan
  */
 
+import { lockedGoldenPath } from "../../helpers/scenarioPdfName.js";
 import type { Scenario } from "../../types.js";
 import { jordanDecisions } from "./decisions.js";
 import { jordanExpected } from "./expected.js";
@@ -50,5 +51,9 @@ export const jordanScenario: Scenario = {
   decisions: jordanDecisions,
   allowNotModeled: true,
   knownMismatches: jordanKnownMismatches,
-  forms: FORM_IDS.map((formId) => ({ formId, expected: jordanExpected(formId) })),
+  forms: FORM_IDS.map((formId) => ({
+    formId,
+    expected: jordanExpected(formId),
+    goldenPdfPath: lockedGoldenPath("jordan", formId),
+  })),
 };

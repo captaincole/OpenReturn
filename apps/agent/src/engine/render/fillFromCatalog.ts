@@ -11,7 +11,9 @@
  * network. Side-effect-free except that it mutates the in-memory PDF.
  *
  * Returns:
- *   pdfBytes — the flattened, filled PDF
+ *   pdfBytes — the filled PDF, flattened unless `flatten: false` (a
+ *              locked scenario golden keeps its AcroForm so the test
+ *              suite can read the widgets back)
  *   rendered — Map<fieldId, RenderedWidget[]> of what was actually
  *              written. Tests assert on these values because flatten()
  *              destroys the fillable AcroForm, so widgets cannot be
@@ -60,8 +62,9 @@ export async function fillFromCatalog(opts: {
   blankPdfBytes: Buffer | Uint8Array;
   form: EvaluatedForm<AnyFormField>;
   catalog: Catalog;
+  flatten?: boolean;
 }): Promise<FillFromCatalogResult> {
-  const { blankPdfBytes, form, catalog } = opts;
+  const { blankPdfBytes, form, catalog, flatten = true } = opts;
   const pdf = await PDFDocument.load(blankPdfBytes);
   const ctx: WriterCtx = {
     pdfForm: pdf.getForm(),
@@ -80,7 +83,7 @@ export async function fillFromCatalog(opts: {
     fillByType(ctx, widgetName, inv, value, form.jurisdiction);
   }
 
-  ctx.pdfForm.flatten();
+  if (flatten) ctx.pdfForm.flatten();
   const pdfBytes = Buffer.from(await pdf.save());
   return { pdfBytes, rendered: ctx.rendered, warnings: ctx.warnings };
 }

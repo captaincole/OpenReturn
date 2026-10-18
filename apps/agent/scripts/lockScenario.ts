@@ -16,6 +16,9 @@
  * e.g. against a filed return with the comparison kit
  * (scripts/compareFiled). From then on, any change to a locked line
  * fails the test suite until someone verifies it and locks again.
+ *
+ * Then write the golden PDFs the tests diff widget by widget:
+ *   npx tsx scripts/renderScenario.ts --scenario=jordan --golden
  */
 
 import { writeFileSync } from "node:fs";

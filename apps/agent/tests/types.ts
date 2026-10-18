@@ -22,7 +22,9 @@ export interface ScenarioForm {
    */
   formId: string;
   /**
-   * Path to a CPA-completed "golden" PDF for this scenario+form. The
+   * Path to a "golden" PDF for this scenario+form: the CPA's filled form,
+   * or, for a locked scenario, the engine's unflattened output
+   * (renderScenario --golden; see lockedGoldenPath). The
    * runner reads every filled widget from this PDF and diffs against our
    * render. This bypasses the catalog's fieldId→widget mapping, so
    * catalog mislabels surface immediately. Optional; without it, only

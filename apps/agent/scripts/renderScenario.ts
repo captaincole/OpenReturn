@@ -7,42 +7,35 @@
  * name pattern `<Scenario>-<FormShortName>-rendered.pdf`. It uses the
  * same engine and renderer as the tests. The output shows the current
  * state of the bindings, including current failures.
+ *
+ *   npx tsx scripts/renderScenario.ts --scenario=carter --golden
+ *
+ * --golden writes `<Scenario>-<FormShortName>-Golden.pdf` instead: the
+ * locked output for a scenario with no CPA return (jordan, carter). The
+ * scenario's goldenPdfPath points at it, so the test suite diffs every
+ * widget. Run it with lockScenario, after the output is verified.
  */
 
 import "dotenv/config";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { parseArgs } from "node:util";
-import { loadFromFixtures } from "../src/engine/catalog.js";
+import { loadFromFixtures, type Catalog } from "../src/engine/catalog.js";
 import { evaluateAllForms } from "../src/engine/engine.js";
 import { resolveFilingInfo } from "../src/engine/filingInfo.js";
 import { getFormSpec } from "../src/engine/registry.js";
+import { fillFromCatalog } from "../src/engine/render/fillFromCatalog.js";
 import { renderFormCopies } from "../src/engine/render/renderCopies.js";
-import { makeDecisionsView, makeFactsView, type DerivationContext } from "../src/engine/types.js";
+import {
+  makeDecisionsView,
+  makeFactsView,
+  type AnyFormField,
+  type DerivationContext,
+  type EvaluatedForm,
+} from "../src/engine/types.js";
 import { projectRoot } from "../src/paths.js";
+import { scenarioPdfName, toPascal } from "../tests/helpers/scenarioPdfName.js";
 import type { Scenario } from "../tests/types.js";
-
-/*
- * Short-name fragment for filenames. Maps formId → the PascalCase chunk
- * used in golden filenames (e.g. "form-540" → "CA540"). New forms fall
- * back to a Pascal-case form of the formId.
- */
-const FORM_SHORT_NAME: Record<string, string> = {
-  "form-1040": "1040",
-  "form-540": "CA540",
-  "form-8949": "8949",
-  "schedule-d": "ScheduleD",
-  "schedule-ca": "ScheduleCA",
-};
-function shortName(formId: string): string {
-  return FORM_SHORT_NAME[formId] ?? toPascal(formId);
-}
-function toPascal(s: string): string {
-  return s
-    .split(/[-_]/)
-    .map((p) => (p ? p[0].toUpperCase() + p.slice(1) : ""))
-    .join("");
-}
 
 async function loadScenario(name: string): Promise<Scenario> {
   const mod = await import(`../tests/scenarios/${name}/index.js`);
@@ -75,9 +68,28 @@ function buildContext(s: Scenario): DerivationContext {
   };
 }
 
+/*
+ * A golden is copy 0 only, unflattened: the same fill the test runner
+ * makes, with the AcroForm kept so the runner can read each widget back.
+ * Further copies (Form 8949 overflow) are in the -rendered.pdf only.
+ */
+async function renderGolden(
+  form: EvaluatedForm<AnyFormField>,
+  catalog: Catalog,
+  blankPdfBytes: Buffer,
+): Promise<{ pdfBytes: Buffer; warnings: string[]; copies: number }> {
+  const { pdfBytes, warnings } = await fillFromCatalog({
+    blankPdfBytes,
+    form,
+    catalog,
+    flatten: false,
+  });
+  return { pdfBytes, warnings, copies: 1 };
+}
+
 async function main() {
   const { values } = parseArgs({
-    options: { scenario: { type: "string" } },
+    options: { scenario: { type: "string" }, golden: { type: "boolean" } },
     strict: true,
   });
   const name = values.scenario;
@@ -122,16 +134,12 @@ async function main() {
       continue;
     }
 
-    const blankBytes = await readFile(spec.blankPdfPath);
-    const { pdfBytes, warnings, copies } = await renderFormCopies({
-      spec,
-      form: evaluated,
-      ctx,
-      catalog,
-      blankPdfBytes: blankBytes,
-    });
+    const blankPdfBytes = await readFile(spec.blankPdfPath);
+    const { pdfBytes, warnings, copies } = values.golden
+      ? await renderGolden(evaluated, catalog, blankPdfBytes)
+      : await renderFormCopies({ spec, form: evaluated, ctx, catalog, blankPdfBytes });
 
-    const outName = `${toPascal(s.name)}-${shortName(spec.formId)}-rendered.pdf`;
+    const outName = scenarioPdfName(s.name, spec.formId, values.golden ? "Golden" : "rendered");
     const outPath = resolve(docsDir, outName);
     await writeFile(outPath, pdfBytes);
 
