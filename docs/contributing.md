@@ -59,6 +59,8 @@ live in `apps/agent/tests/scenarios/<name>/` (`facts.ts`, `decisions.ts`,
 `expected.ts`, `index.ts`). `npm test` runs all of them before every commit.
 
 **Every new field or document we support needs a scenario that uses it.**
+The steps, with a diagram of the tests that check each one, are in
+[Add a scenario](adding-a-scenario.md).
 
 An expected value is only as good as its source. We use two sources, and
 never a tax-software export we cannot redistribute:

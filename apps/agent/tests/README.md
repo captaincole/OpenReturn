@@ -10,13 +10,15 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
 
 Two kinds of checks, one summary table (`runAll.ts`):
 
-- **Scenario goldens** (`scenarios/alex|alejandro|marcus/`) — each scenario
+- **Scenario goldens** (`scenarios/alex|alejandro|marcus|jordan/`) — each scenario
   bundles facts + decisions + per-form expected line values. `runScenario.ts`
   runs the engine over them and asserts every field, then diffs the filled
   PDF against a golden. These are the ground truth for "did the math change".
   - `alex` — single CA filer, one W-2, standard deduction (the canonical case)
   - `alejandro` — adds 1099-INT/DIV investment income
   - `marcus` — adds capital gains (8949 / Schedule D)
+  - `jordan` — high income: HSA, RSU and crypto sales, 401(k) rollovers,
+    1099-MISC (locked engine output, see `scripts/lockScenario.ts`)
 - **Catalog-fill checks** (`catalogFill.ts`) — for every form in its
   `CATALOGS` registry: fill the blank PDF with synthetic values for every
   cataloged field and diff against a golden snapshot. Catches widget-mapping
@@ -24,11 +26,14 @@ Two kinds of checks, one summary table (`runAll.ts`):
 
 ## Adding coverage
 
-- **New scenario**: create `scenarios/<name>/` (see `alex/` for the file
-  shape: `facts.ts`, `decisions.ts`, `expected.ts`, `index.ts`), add it to
-  the `SCENARIOS` array in `runAll.ts`.
-- **New form's catalog check**: add an entry to `CATALOGS` in
-  `catalogFill.ts`. The first run fails with "no golden — run --update";
+- **New scenario**: follow [Add a scenario](../../../docs/adding-a-scenario.md).
+  In short: create `scenarios/<name>/` (see `alex/` for the file shape:
+  `facts.ts`, `decisions.ts`, `expected.ts`, `index.ts`), and add it to
+  the `SCENARIOS` arrays in `runAll.ts` and
+  `src/mastra/tools/requiredInputs.test.ts`.
+- **New form's catalog check**: `CATALOGS` in `catalogFill.ts` mirrors the
+  engine registry, so a registered form gets a check by itself. The first
+  run fails with "no golden — run --update";
   run `npx tsx tests/catalogFill.ts --form-id=<id> --update` (from
   `apps/agent/`) to bootstrap the snapshot, eyeball the PDF it wrote, and
   commit it.

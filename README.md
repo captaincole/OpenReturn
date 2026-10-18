@@ -108,6 +108,7 @@ owner account.
 | --- | --- |
 | [Contributing and developer guide](docs/contributing.md) | Who can contribute, and how the agent, corpus, scenarios, and form engine work |
 | [Test Summa against your filed return](docs/testing-with-your-return.md) | Check the engine against a return you already filed, privately, and send us the result |
+| [Add a scenario](docs/adding-a-scenario.md) | The steps to add a new test taxpayer, with new forms or documents, and the tests that check each step |
 
 ## License
 
