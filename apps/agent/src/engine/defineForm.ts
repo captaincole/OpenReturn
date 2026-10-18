@@ -15,10 +15,8 @@
  *   - Return a value to commit the field. The cache locks it (monotonic).
  *   - To write an explicit 0 / "" / etc., return the literal value, NOT
  *     undefined.
- *   - `sum(...)` treats undefined / non-numeric terms as 0. Use it for
- *     line sums where some terms route to `unsupported`.
- *   - `floor(min, value)` clamps a value at `min`. With `min = 0` it
- *     matches IRS "if less than zero enter -0-" instructions.
+ *   - Money math (`sum`, `atLeast`, `roundDollars`, …) comes from
+ *     money.ts, the one module for money rules.
  *   - `stubZero(reason)` commits a field to 0 when its real source is not
  *     ingested yet but the answer is 0 for every modeled scenario. Grep
  *     `stubZero` to audit these assumptions. Distinct from `unsupported`,
@@ -56,7 +54,7 @@ export interface FormSpec<TForm extends object, TInfo extends BaseFilingInfo> {
   bindings: Partial<{ [K in keyof TForm]: BindingFn<TForm, TInfo, K> }>;
   /**
    * Optional per-field formatter overrides. Default formatters live with
-   * each branded type (Money.format, SSN.digits, etc.). The renderer
+   * each value type (formatDollars in money.ts, SSN.digits, etc.). The renderer
    * consults this map first.
    */
   formatters?: Partial<{ [K in keyof TForm]: FormatterFn<TForm[K]> }>;
@@ -254,49 +252,6 @@ function makeFormAccessor(formId: string, ctx: EngineContext): unknown {
 
 function isLikelyFullFieldId(key: string): boolean {
   return /^(form-|schedule-)/.test(key);
-}
-
-// ─── sum / floor helpers (used inside binding bodies) ────────────────────
-
-/**
- * Sum any number of numeric inputs. Undefined / null / NaN / non-numeric
- * values count as 0. The parameter type is `unknown` so cross-form
- * accessor reads (which the type system widens to `unknown`) flow through
- * without casts. The runtime `typeof v === "number"` filter keeps the
- * math honest.
- *
- * An unsupported upstream term contributes 0 rather than blocking the
- * sum. A cross-form term that is not evaluated yet does not: the engine
- * re-runs the binding on the next pass (pendingReads.ts). To block the sum when any term is missing, write
- * the arithmetic by hand and return undefined from the binding.
- */
-export function sum(...values: unknown[]): number {
-  let total = 0;
-  for (const v of values) {
-    if (typeof v === "number" && Number.isFinite(v)) total += v;
-  }
-  return total;
-}
-
-/** max(value, min). Treats undefined / non-numeric as `min`. */
-export function floor(min: number, value: unknown): number {
-  if (typeof value !== "number" || !Number.isFinite(value)) return min;
-  return Math.max(min, value);
-}
-
-/**
- * Whole dollars, nearest — every tax-form money line (CLAUDE.md,
- * "Whole-dollar rounding"). The IRS rule: drop under 50 cents, raise
- * 50–99 cents to the next dollar (by magnitude). Snaps to cents first,
- * so a float sum like 202887.49999999997 does not round the wrong way.
- * Blank stays blank.
- */
-export function roundDollars(value: number): number;
-export function roundDollars(value: number | undefined): number | undefined;
-export function roundDollars(value: number | undefined): number | undefined {
-  if (typeof value !== "number" || !Number.isFinite(value)) return undefined;
-  const cents = Math.round(Math.abs(value) * 100) / 100;
-  return Math.sign(value) * Math.floor(cents + 0.5);
 }
 
 /**

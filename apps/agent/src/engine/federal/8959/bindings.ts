@@ -7,7 +7,8 @@
  * Generated at: 2026-05-27T16:41:25.598Z
  */
 
-import { defineForm, floor, roundDollars, sum } from "../../defineForm.js";
+import { defineForm } from "../../defineForm.js";
+import { atLeast, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { Form8959FilingInfo } from "./filingInfo.js";
 import type { Form8959 } from "./types.js";
@@ -60,7 +61,7 @@ export function register(): void {
         info.filingStatus ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus] : undefined,
       // Line 6 = max(0, line 4 − line 5).
       "0.line.6_excess_medicare_wages": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["0.line.4_total_medicare_wages"],
@@ -96,7 +97,7 @@ export function register(): void {
       },
       "0.line.11_threshold_reduced_by_wages": (f) => {
         if (f["0.line.8_self_employment_income"] === undefined) return undefined;
-        return floor(
+        return atLeast(
           0,
           sum(
             f["0.line.9_filing_status_threshold_se"],
@@ -108,7 +109,7 @@ export function register(): void {
       },
       "0.line.12_excess_se_income": (f) => {
         if (f["0.line.8_self_employment_income"] === undefined) return undefined;
-        return floor(
+        return atLeast(
           0,
           sum(
             f["0.line.8_self_employment_income"],
@@ -133,7 +134,7 @@ export function register(): void {
       },
       "0.line.16_excess_rrta_compensation": (f) => {
         if (f["0.line.14_rrta_compensation_tips"] === undefined) return undefined;
-        return floor(
+        return atLeast(
           0,
           sum(
             f["0.line.14_rrta_compensation_tips"],
@@ -177,7 +178,7 @@ export function register(): void {
       },
       // Line 22 = max(0, line 19 − line 21).
       "0.line.22_additional_medicare_tax_withholding_wages": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["0.line.19_medicare_tax_withheld"],

@@ -7,7 +7,8 @@
  * Generated at: 2026-10-15T22:15:39.389Z
  */
 
-import { defineForm, roundDollars, sum } from "../../defineForm.js";
+import { defineForm } from "../../defineForm.js";
+import { roundDollars, sum } from "../../money.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import type { Schedule1 } from "./types.js";
 

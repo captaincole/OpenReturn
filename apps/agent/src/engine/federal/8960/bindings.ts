@@ -7,7 +7,8 @@
  * Generated at: 2026-10-15T21:06:53.804Z
  */
 
-import { defineForm, floor, roundDollars, sum } from "../../defineForm.js";
+import { defineForm } from "../../defineForm.js";
+import { atLeast, roundDollars, sum } from "../../money.js";
 import type { Form8960FilingInfo } from "./filingInfo.js";
 import type { Form8960 } from "./types.js";
 
@@ -88,7 +89,7 @@ export function register(): void {
         return typeof base === "number" ? roundDollars(base * 0.038) : undefined;
       },
       "0.line.15": (f) =>
-        floor(0, sum(f["0.line.13"], f["0.line.14"] === undefined ? 0 : -f["0.line.14"])),
+        atLeast(0, sum(f["0.line.13"], f["0.line.14"] === undefined ? 0 : -f["0.line.14"])),
     },
 
     unsupported: {

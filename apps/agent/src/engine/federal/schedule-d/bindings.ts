@@ -7,8 +7,9 @@
  * Generated at: 2026-05-18T20:21:51.690Z
  */
 
-import { defineForm, roundDollars, sum, type BindingFn } from "../../defineForm.js";
+import { defineForm, type BindingFn } from "../../defineForm.js";
 import type { Form8949Box } from "../../facts/index.js";
+import { roundDollars, sum } from "../../money.js";
 import type { ScheduleDFilingInfo } from "./filingInfo.js";
 import type { ScheduleD } from "./types.js";
 

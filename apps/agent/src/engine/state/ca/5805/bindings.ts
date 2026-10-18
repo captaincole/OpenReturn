@@ -7,7 +7,8 @@
  * Generated at: 2026-10-15T23:14:58.042Z
  */
 
-import { defineForm, floor, roundDollars, sum } from "../../../defineForm.js";
+import { defineForm } from "../../../defineForm.js";
+import { atLeast, roundDollars, sum } from "../../../money.js";
 import type { Form5805FilingInfo } from "./filingInfo.js";
 import type { Form5805 } from "./types.js";
 
@@ -77,13 +78,13 @@ export function register(): void {
       "1.part2.line_9": (f) => sum(f["1.part2.line_7"], f["1.part2.line_8"]),
       // Required annual payment minus total payments; zero or less means no penalty, so floored at 0.
       "1.part2.line_10": (f) =>
-        floor(
+        atLeast(
           0,
           sum(f["1.part2.line_6"], f["1.part2.line_9"] === undefined ? 0 : -f["1.part2.line_9"]),
         ),
       // Penalty is line 11 minus line 12, floored at 0.
       "1.part2.line_13": (f) =>
-        floor(
+        atLeast(
           0,
           sum(f["1.part2.line_11"], f["1.part2.line_12"] === undefined ? 0 : -f["1.part2.line_12"]),
         ),
@@ -139,7 +140,7 @@ export function register(): void {
         ),
       // Line 14a col (a) = line 12 minus line 13, floored at 0.
       "3.part3.line_14a_col_a": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["2.part3.line_12_col_a"],
@@ -148,7 +149,7 @@ export function register(): void {
         ),
       // Line 12 minus line 13 for column (b), floored at 0.
       "3.part3.line_14a_col_b": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["2.part3.line_12_col_b"],
@@ -157,7 +158,7 @@ export function register(): void {
         ),
       // Line 12 minus line 13 for column (c), floored at 0.
       "3.part3.line_14a_col_c": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["2.part3.line_12_col_c"],
@@ -166,7 +167,7 @@ export function register(): void {
         ),
       // Line 12 minus line 13 for column (d), floored at 0.
       "3.part3.line_14a_col_d": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["2.part3.line_12_col_d"],
@@ -199,10 +200,10 @@ export function register(): void {
       "3.part3.line_17_col_d": (f) =>
         sum(f["3.part3.line_23_col_a"], f["3.part3.line_23_col_b"], f["3.part3.line_23_col_c"]),
       // Line 16 − line 17 (none in col a), floored at 0.
-      "3.part3.line_18_col_a": (f) => floor(0, sum(f["3.part3.line_16_col_a"])),
+      "3.part3.line_18_col_a": (f) => atLeast(0, sum(f["3.part3.line_16_col_a"])),
       // Line 16 − line 17 col (b), floored at 0.
       "3.part3.line_18_col_b": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["3.part3.line_16_col_b"],
@@ -211,7 +212,7 @@ export function register(): void {
         ),
       // Line 18 col (c) = line 16 − line 17, floored at 0.
       "3.part3.line_18_col_c": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["3.part3.line_16_col_c"],
@@ -220,7 +221,7 @@ export function register(): void {
         ),
       // Line 18 col (d) = line 16 − line 17, floored at 0.
       "3.part3.line_18_col_d": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["3.part3.line_16_col_d"],
@@ -245,7 +246,7 @@ export function register(): void {
       "3.part3.line_21_col_d": (f) => sum(f["3.part3.line_19_col_d"], f["3.part3.line_20_col_d"]),
       // Line 22 col (a) = line 21 − line 18, floored at 0.
       "3.part3.line_22_col_a": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["3.part3.line_21_col_a"],
@@ -254,7 +255,7 @@ export function register(): void {
         ),
       // Line 22 col (b) = line 21 − line 18, floored at 0.
       "3.part3.line_22_col_b": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["3.part3.line_21_col_b"],
@@ -263,7 +264,7 @@ export function register(): void {
         ),
       // Line 22 col (c) = line 21 − line 18, floored at 0.
       "3.part3.line_22_col_c": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["3.part3.line_21_col_c"],
@@ -272,7 +273,7 @@ export function register(): void {
         ),
       // Line 22 col (d) = line 21 − line 18, floored at 0.
       "3.part3.line_22_col_d": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["3.part3.line_21_col_d"],

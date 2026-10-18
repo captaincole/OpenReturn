@@ -7,7 +7,8 @@
  * Generated at: 2026-10-15T22:22:40.088Z
  */
 
-import { defineForm, floor, roundDollars, sum } from "../../defineForm.js";
+import { defineForm } from "../../defineForm.js";
+import { atLeast, roundDollars, sum } from "../../money.js";
 import type { Form8995AFilingInfo } from "./filingInfo.js";
 import type { Form8995A } from "./types.js";
 
@@ -69,14 +70,14 @@ export function register(): void {
       "1.line.33": (f) => {
         const agi = f["form-1040.line.11b"];
         if (typeof agi !== "number") return undefined;
-        return floor(0, sum(agi, -sum(f["form-1040.line.12e"]), -sum(f["form-1040.line.13b"])));
+        return atLeast(0, sum(agi, -sum(f["form-1040.line.12e"]), -sum(f["form-1040.line.13b"])));
       },
       // Net capital gain: qualified dividends + the smaller of Schedule D lines 15 and 16 when both are gains.
       "1.line.34": (f) => {
         const l15 = f["schedule-d.0.line.15_net_long_term_gain_loss"];
         const l16 = f["schedule-d.1.line.16_combined_gain_loss"];
         const gain =
-          typeof l15 === "number" && typeof l16 === "number" ? Math.max(0, Math.min(l15, l16)) : 0;
+          typeof l15 === "number" && typeof l16 === "number" ? atLeast(0, Math.min(l15, l16)) : 0;
         return sum(f["form-1040.line.3a"], gain);
       },
       "1.line.36": (f) => {
@@ -105,13 +106,13 @@ export function register(): void {
       "0.line.12_c": (f) => sum(f["1.line.26_c"]),
       // Line 13 minus line 14, with a floor of 0 per the instructions (Column A).
       "0.line.15_a": (f) =>
-        floor(0, sum(f["0.line.13_a"], f["0.line.14_a"] === undefined ? 0 : -f["0.line.14_a"])),
+        atLeast(0, sum(f["0.line.13_a"], f["0.line.14_a"] === undefined ? 0 : -f["0.line.14_a"])),
       // Line 13 minus line 14, with a floor of 0 per the instructions (Column B).
       "0.line.15_b": (f) =>
-        floor(0, sum(f["0.line.13_b"], f["0.line.14_b"] === undefined ? 0 : -f["0.line.14_b"])),
+        atLeast(0, sum(f["0.line.13_b"], f["0.line.14_b"] === undefined ? 0 : -f["0.line.14_b"])),
       // Line 13 minus line 14, with a floor of 0 per the instructions (Column C).
       "0.line.15_c": (f) =>
-        floor(0, sum(f["0.line.13_c"], f["0.line.14_c"] === undefined ? 0 : -f["0.line.14_c"])),
+        atLeast(0, sum(f["0.line.13_c"], f["0.line.14_c"] === undefined ? 0 : -f["0.line.14_c"])),
       // Total QBI component: line 15 summed across columns A, B and C.
       "0.line.16": (f) => sum(f["0.line.15_a"], f["0.line.15_b"], f["0.line.15_c"]),
       /*
@@ -141,12 +142,12 @@ export function register(): void {
       // Copies line 16 total QBI component.
       "1.line.27": (f) => sum(f["0.line.16"]),
       // Line 28 + line 29, floored at 0.
-      "1.line.30": (f) => floor(0, sum(f["1.line.28"], f["1.line.29"])),
+      "1.line.30": (f) => atLeast(0, sum(f["1.line.28"], f["1.line.29"])),
       // Line 27 + line 31.
       "1.line.32": (f) => sum(f["1.line.27"], f["1.line.31"]),
       // Line 33 − line 34, floored at 0.
       "1.line.35": (f) =>
-        floor(0, sum(f["1.line.33"], f["1.line.34"] === undefined ? 0 : -f["1.line.34"])),
+        atLeast(0, sum(f["1.line.33"], f["1.line.34"] === undefined ? 0 : -f["1.line.34"])),
       // Total QBI deduction is line 37 plus line 38.
       "1.line.39": (f) => sum(f["1.line.37"], f["1.line.38"]),
     },

@@ -107,7 +107,7 @@ const SCHEDULES_BY_YEAR: Record<number, RateScheduleTable> = {
  *
  * The IRS rounds tax to whole dollars. This function returns the
  * un-rounded result; the caller rounds (the renderer rounds at write
- * time via fmtMoney).
+ * time via formatDollars).
  */
 export function lookupRateSchedule(
   taxYear: number,

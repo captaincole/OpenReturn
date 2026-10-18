@@ -158,11 +158,11 @@ TypeScript enforces both. Adding a field without declaring them is a compile err
 
 ### Whole-dollar rounding convention — nearest dollar
 
-Tax-form lines take whole dollars, rounded to the **nearest** dollar with `roundDollars()` in `src/engine/defineForm.ts` (decided 2026-10-16). The IRS rule (1040 instructions, "Rounding Off to Whole Dollars"): drop amounts under 50 cents, raise 50–99 cents to the next dollar.
+Tax-form lines take whole dollars, rounded to the **nearest** dollar with `roundDollars()` in `src/engine/money.ts` (decided 2026-10-16). `money.ts` is the one module for engine money math: `sum`, `atLeast`, `roundDollars`, `stepsOf`, `formatDollars`, and the `Money` brand. Lint bans `Math.round` / `ceil` / `floor` / `trunc`, `toFixed`, and `toLocaleString` elsewhere in `src/engine/`. The IRS rule (1040 instructions, "Rounding Off to Whole Dollars"): drop amounts under 50 cents, raise 50–99 cents to the next dollar.
 
 - **Document sums** keep the cents while adding and round only the total (IRS: "include cents when adding the amounts and round off only the total"). Example: interest $9.59 + $2,287.09 = $2,296.68 → $2,297. Verified: Alejandro's CPA return, 1040 line 3a $381.40 → $381.
 - **Calculated lines** (percentages, worksheet steps, rate-schedule tax) also round to nearest. Verified against a filed 2025 return (private comparison kit) and marcus's CPA (8959: 43,500 × 0.9% = 391.50 → 392; 243,500 × 1.45% = 3,530.75 → 3,531).
-- **Exception — step rules:** "for each $2,500 **or part** of $2,500" (CA AGI limitation) rounds up by definition (`Math.ceil` on the step count). That is the rule itself, not dollar rounding.
+- **Exception — step rules:** "for each $2,500 **or part** of $2,500" (CA AGI limitation) rounds up by definition (`stepsOf()`, a ceiling on the step count). That is the rule itself, not dollar rounding.
 
 Lines that the form defines as arithmetic on other lines use those lines' rounded values (Schedule D col (h) = rounded (d) − rounded (e)).
 
@@ -173,7 +173,7 @@ const line18 = roundDollars(line17 * 0.15);                     // calculated li
 
 `roundDollars()` snaps to cents first, so a float sum like 202887.49999999997 does not round the wrong way. Tax-table lookups (`lookupTax`) already return whole dollars; rate-schedule lookups return un-rounded values for the caller to round.
 
-**Preparers differ.** A CPA's 2024 QDCG worksheet rounded a 20% line up (x.20 → the next dollar). Marcus's CPA wrote 392 on 8959 line 7 but 391 on Schedule 2 line 11 (which should copy it). The engine follows the IRS rule. Don't use bare `Math.round` or `Math.ceil` on tax-form money; record new evidence here.
+**Preparers differ.** A CPA's 2024 QDCG worksheet rounded a 20% line up (x.20 → the next dollar). Marcus's CPA wrote 392 on 8959 line 7 but 391 on Schedule 2 line 11 (which should copy it). The engine follows the IRS rule. Don't use bare `Math.round` or `Math.ceil` on tax-form money (lint enforces this in the engine); record new evidence here.
 
 ## Vercel logs (production debugging)
 

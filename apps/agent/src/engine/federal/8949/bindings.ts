@@ -13,14 +13,9 @@
  * layout: two parts × 11 rows.
  */
 
-import {
-  defineForm,
-  roundDollars,
-  sum,
-  type BindingFn,
-  type FormAccessor,
-} from "../../defineForm.js";
+import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import type { Form8949Box } from "../../facts/index.js";
+import { roundDollars, sum } from "../../money.js";
 import { ROWS_PER_PAGE, type Form8949Copy, type Form8949Page } from "./copyPlan.js";
 import type { Form8949FilingInfo } from "./filingInfo.js";
 import type { Form8949 } from "./types.js";

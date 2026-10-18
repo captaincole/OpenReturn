@@ -6,6 +6,7 @@
  * or part of it over the threshold. Whole dollars only.
  */
 
+import { atLeast, stepsOf } from "../money.js";
 import type { FilingStatus } from "../values.js";
 
 const THRESHOLDS_2025: Record<FilingStatus, number> = {
@@ -36,8 +37,8 @@ export function caExemptionCreditsAfterLimit(inputs: CaAgiLimitationInputs): num
   const excess = inputs.federalAgi - THRESHOLDS_2025[inputs.filingStatus]; // line c
   if (excess <= 0) return total; // not over the threshold: line 32 = line 11
   const step = inputs.filingStatus === "married_filing_separately" ? 1250 : 2500;
-  const e = Math.ceil(excess / step) * 6; // lines d, e
-  const i = Math.max(0, inputs.personalAmount - e * inputs.personalCount); // lines g, i
-  const m = Math.max(0, inputs.dependentAmount - e * inputs.dependentCount); // lines k, m
+  const e = stepsOf(excess, step) * 6; // lines d, e
+  const i = atLeast(0, inputs.personalAmount - e * inputs.personalCount); // lines g, i
+  const m = atLeast(0, inputs.dependentAmount - e * inputs.dependentCount); // lines k, m
   return i + m; // line n
 }

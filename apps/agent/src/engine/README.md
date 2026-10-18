@@ -30,7 +30,8 @@ renderForm(scenario, formId)                    →  filled PDF bytes
 engine/
 ├── index.ts          public API: evaluateScenario, renderForm
 ├── engine.ts         fixpoint evaluator (cross-form refs converge in ≤5 passes)
-├── defineForm.ts     typed binding authoring API (defineForm, sum, floor)
+├── defineForm.ts     typed binding authoring API (defineForm, stubZero)
+├── money.ts          the one module for money math (sum, atLeast, roundDollars, stepsOf, formatDollars)
 ├── types.ts          FormField model, DerivationContext
 ├── filingInfo.ts     facts + decisions → typed FilingInfo projection
 ├── filingInfoResolvers.ts  per-form resolve<Form>Info slot resolvers
@@ -88,9 +89,11 @@ federal results (CA 540 reads federal AGI cross-form) but never each other.
 
 ## Conventions
 
-- **Whole-dollar rounding is `roundDollars()`**, the nearest dollar (the IRS
-  rule) — see CLAUDE.md for the evidence and the one exception ("or part"
-  step rules round up by definition).
+- **All money math goes through `money.ts`.** Whole-dollar rounding is
+  `roundDollars()`, the nearest dollar (the IRS rule) — see CLAUDE.md for
+  the evidence and the one exception ("or part" step rules, `stepsOf()`,
+  round up by definition). Lint bans `Math.round` / `ceil` / `floor` /
+  `trunc`, `toFixed`, and `toLocaleString` elsewhere in the engine.
 - **Never invent a number.** A field whose inputs are missing evaluates to
   `blocked` with a reason — that's what feeds the open-questions list.
 - **Tax years are parameter-keyed data** (tables take `taxYear`), not

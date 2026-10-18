@@ -7,7 +7,8 @@
  * Generated at: 2026-05-27T16:08:48.440Z
  */
 
-import { defineForm, floor, roundDollars, sum } from "../../defineForm.js";
+import { defineForm } from "../../defineForm.js";
+import { atLeast, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
 import type { ScheduleA } from "./types.js";
@@ -65,7 +66,7 @@ export function register(): void {
        */
       "0.line.4_net_medical_dental": (f) => {
         if (f["0.line.1_medical_dental_expenses"] === undefined) return undefined;
-        return floor(
+        return atLeast(
           0,
           sum(
             f["0.line.1_medical_dental_expenses"],
@@ -124,7 +125,7 @@ export function register(): void {
         const magi = f["form-1040.line.11b"];
         let cap = baseCap;
         if (typeof magi === "number" && magi > threshold) {
-          cap = Math.max(capFloor, baseCap - 0.3 * (magi - threshold));
+          cap = atLeast(capFloor, baseCap - 0.3 * (magi - threshold));
         }
         return Math.min(line5d, cap);
       },

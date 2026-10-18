@@ -4,6 +4,7 @@
  */
 
 import { HSA_COVERAGE_KEYS, type HsaCoverageType } from "../../facts/index.js";
+import { sum } from "../../money.js";
 import {
   factsInCategory,
   missingInputs,
@@ -52,10 +53,7 @@ export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
     hsaEmployerContributions: employer,
     hsaDistributionsTotal:
       distributions.length > 0
-        ? distributions.reduce(
-            (t, row) => t + (numberFact((row.value as { box1?: unknown }).box1) ?? 0),
-            0,
-          )
+        ? sum(...distributions.map((row) => numberFact((row.value as { box1?: unknown }).box1)))
         : undefined,
     hsaDistributionsAllQualified: allQualified,
   };

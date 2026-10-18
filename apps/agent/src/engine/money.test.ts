@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { roundDollars } from "./defineForm.js";
+import { atLeast, formatDollars, roundDollars, stepsOf, sum } from "./money.js";
 
 describe("roundDollars", () => {
   it("drops under 50 cents and raises 50–99 cents (IRS rule)", () => {
@@ -31,5 +31,39 @@ describe("roundDollars on calculated lines (decided 2026-10-16)", () => {
      */
     expect(roundDollars(70001 * 0.2)).toBe(14000); // 14,000.20
     expect(roundDollars(13885 * 0.15)).toBe(2083); // 2,082.75
+  });
+});
+
+describe("sum", () => {
+  it("keeps cents and counts blank terms as 0", () => {
+    expect(sum(9.59, 2287.09)).toBeCloseTo(2296.68, 10);
+    expect(sum(100, undefined, null, Number.NaN, "7")).toBe(100);
+    expect(sum()).toBe(0);
+  });
+});
+
+describe("atLeast", () => {
+  it("clamps at the minimum and treats blank as the minimum", () => {
+    expect(atLeast(0, -250)).toBe(0);
+    expect(atLeast(0, 250)).toBe(250);
+    expect(atLeast(10000, undefined)).toBe(10000);
+  });
+});
+
+describe("stepsOf", () => {
+  it("counts a part step as a whole step (CA AGI limitation)", () => {
+    expect(stepsOf(2500, 2500)).toBe(1);
+    expect(stepsOf(2501, 2500)).toBe(2);
+    expect(stepsOf(1, 1250)).toBe(1);
+  });
+});
+
+describe("formatDollars", () => {
+  it("prints comma-grouped whole dollars, 0 for zero, blank for blank", () => {
+    expect(formatDollars(79000)).toBe("79,000");
+    expect(formatDollars(-4293.4)).toBe("-4,293");
+    expect(formatDollars(0)).toBe("0");
+    expect(formatDollars(undefined)).toBe("");
+    expect(formatDollars(null)).toBe("");
   });
 });

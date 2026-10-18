@@ -6,7 +6,8 @@
  * Generated at: 2026-10-15T21:00:33.801Z
  */
 
-import { defineForm, sum } from "../../defineForm.js";
+import { defineForm } from "../../defineForm.js";
+import { sum } from "../../money.js";
 import type { Schedule2FilingInfo } from "./filingInfo.js";
 import type { Schedule2 } from "./types.js";
 

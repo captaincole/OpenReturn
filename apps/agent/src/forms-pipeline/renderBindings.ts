@@ -11,7 +11,8 @@
  *
  * Layout of the emitted file:
  *
- *   import { defineForm, sum, floor } from "<relative engine.ts>";
+ *   import { defineForm } from "<relative defineForm.ts>";
+ *   import { atLeast, sum } from "<relative money.ts>";
  *   import { lookupTax } from "<relative data/taxTable.ts>";
  *   import type { Form540 } from "./types.js";
  *   import type { Form540FilingInfo } from "./filingInfo.js";
@@ -98,7 +99,7 @@ interface BucketResult {
   confidenceBreakdown: Record<Confidence, number>;
   usesLookupTax: boolean;
   usesSum: boolean;
-  usesFloor: boolean;
+  usesAtLeast: boolean;
 }
 
 /* Sort each catalog field into its bucket and tally the breakdowns. */
@@ -115,7 +116,7 @@ function bucketFields(opts: RenderBindingsOpts): BucketResult {
     confidenceBreakdown: { high: 0, medium: 0, low: 0 },
     usesLookupTax: false,
     usesSum: false,
-    usesFloor: false,
+    usesAtLeast: false,
   };
 
   for (const field of opts.fields) {
@@ -164,7 +165,7 @@ function bucketOneField(
   }
   if (translated.usesLookupTax) result.usesLookupTax = true;
   if (translated.usesSum) result.usesSum = true;
-  if (translated.usesFloor) result.usesFloor = true;
+  if (translated.usesAtLeast) result.usesAtLeast = true;
   return { kind: "binding", field, body: translated.body, rationale: binding.rationale };
 }
 
@@ -173,9 +174,8 @@ function renderPreamble(opts: RenderBindingsOpts, b: BucketResult): string[] {
   const engineImport = relImport(opts.outputPath, "src/engine/defineForm.ts");
   const taxTableImport = relImport(opts.outputPath, "src/engine/data/taxTable.ts");
 
-  const engineSymbols = ["defineForm"];
-  if (b.usesSum) engineSymbols.push("sum");
-  if (b.usesFloor) engineSymbols.push("floor");
+  const moneyImport = relImport(opts.outputPath, "src/engine/money.ts");
+  const moneySymbols = [b.usesAtLeast && "atLeast", b.usesSum && "sum"].filter(Boolean);
 
   const out: string[] = [];
   out.push(`/*`);
@@ -187,7 +187,10 @@ function renderPreamble(opts: RenderBindingsOpts, b: BucketResult): string[] {
   out.push(` * Generated at: ${new Date().toISOString()}`);
   out.push(` */`);
   out.push("");
-  out.push(`import { ${engineSymbols.join(", ")} } from "${engineImport}";`);
+  out.push(`import { defineForm } from "${engineImport}";`);
+  if (moneySymbols.length > 0) {
+    out.push(`import { ${moneySymbols.join(", ")} } from "${moneyImport}";`);
+  }
   if (b.usesLookupTax) {
     out.push(`import { lookupTax } from "${taxTableImport}";`);
   }

@@ -11,13 +11,8 @@
  * payer (an attached statement would list the rest; not modeled).
  */
 
-import {
-  defineForm,
-  roundDollars,
-  sum,
-  type BindingFn,
-  type FormAccessor,
-} from "../../defineForm.js";
+import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
+import { roundDollars, sum } from "../../money.js";
 import type { PayerAmount, ScheduleBFilingInfo, ScheduleBRounding } from "./filingInfo.js";
 import type { ScheduleB } from "./types.js";
 

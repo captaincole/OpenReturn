@@ -16,7 +16,7 @@
  */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
-import type { Money } from "../../values.js";
+import type { Money } from "../../money.js";
 
 export interface Form8959FilingInfo extends BaseFilingInfo {
   /** Sum of W-2 Box 5 (Medicare wages and tips) across all employers. */

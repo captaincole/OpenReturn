@@ -11,6 +11,7 @@
  */
 
 import type { Form8949Box, TradeFactValue } from "../../facts/index.js";
+import { sum } from "../../money.js";
 
 export const ROWS_PER_PAGE = 11;
 
@@ -67,8 +68,8 @@ export function totalsByBox(
   const out: Partial<Record<Form8949Box, BoxTotals>> = {};
   for (const t of trades) {
     const totals = (out[t.box] ??= { proceeds: 0, cost: 0 });
-    totals.proceeds += t.trade.proceeds;
-    totals.cost += t.basis ?? 0;
+    totals.proceeds = sum(totals.proceeds, t.trade.proceeds);
+    totals.cost = sum(totals.cost, t.basis);
   }
   return out;
 }

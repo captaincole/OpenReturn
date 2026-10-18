@@ -6,6 +6,7 @@
 
 import { partitionTrades, type PartitionedTrades } from "./federal/8949/partitionTrades.js";
 import type { MustFileResolution } from "./filingInfo.js";
+import { sum } from "./money.js";
 
 // ─── Shared inputs view ──────────────────────────────────────────────────
 
@@ -64,12 +65,11 @@ export function factsInCategory(
 }
 
 export function sumW2Box(inputs: ResolverInputs, boxKey: string): number {
-  let total = 0;
-  for (const row of factsInCategory(inputs, "wages")) {
-    const v = (row.value as Record<string, unknown>)?.[boxKey];
-    if (typeof v === "number" && Number.isFinite(v)) total += v;
-  }
-  return total;
+  return sum(
+    ...factsInCategory(inputs, "wages").map(
+      (row) => (row.value as Record<string, unknown>)?.[boxKey],
+    ),
+  );
 }
 
 /*
@@ -85,34 +85,23 @@ export function sumInvestmentBox(
   boxKey: string,
   keyFilter?: (key: string) => boolean,
 ): number {
-  let total = 0;
-  for (const row of factsInCategory(inputs, "investment_income")) {
-    if (keyFilter && !keyFilter(row.key)) continue;
-    const v = (row.value as Record<string, unknown>)?.[boxKey];
-    if (typeof v === "number" && Number.isFinite(v)) total += v;
-  }
-  return total;
+  return sum(
+    ...factsInCategory(inputs, "investment_income")
+      .filter((row) => !keyFilter || keyFilter(row.key))
+      .map((row) => (row.value as Record<string, unknown>)?.[boxKey]),
+  );
 }
 
 export function sumCaSdi(wageRows: Array<{ value: unknown }>): number {
-  let total = 0;
-  for (const row of wageRows) {
-    const box14 = (row.value as Record<string, unknown>)?.box14;
-    if (!Array.isArray(box14)) continue;
-    for (const entry of box14) {
-      const label = (entry as Record<string, unknown>)?.label;
-      const amount = (entry as Record<string, unknown>)?.amount;
-      if (
-        typeof label === "string" &&
-        /CA\s*SDI/i.test(label) &&
-        typeof amount === "number" &&
-        Number.isFinite(amount)
-      ) {
-        total += amount;
-      }
-    }
-  }
-  return total;
+  const box14 = wageRows.flatMap((row) => {
+    const entries = (row.value as Record<string, unknown>)?.box14;
+    return Array.isArray(entries) ? (entries as Array<Record<string, unknown>>) : [];
+  });
+  return sum(
+    ...box14
+      .filter((e) => typeof e?.label === "string" && /CA\s*SDI/i.test(e.label))
+      .map((e) => e.amount),
+  );
 }
 
 // ─── Required inputs ─────────────────────────────────────────────────────

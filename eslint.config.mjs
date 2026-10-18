@@ -1,5 +1,5 @@
 /*
- * Small lint config, three jobs:
+ * Small lint config, four jobs:
  *  1. Comment style — multi-line comments are starred blocks, not
  *     stacked // lines. JSDoc passes as-is. `npm run lint:fix` converts.
  *  2. Promise safety — no floating promises (type-aware, apps/ only).
@@ -7,6 +7,8 @@
  *     where JSX inflates line counts without adding complexity).
  *     Form-specific engine files and tests are exempt. No grandfather
  *     list: existing offenders fail the gate until they are split up.
+ *  4. Money rules — rounding and money formatting in the form engine go
+ *     through src/engine/money.ts only.
  * Formatting is Prettier's job; correctness is tsc + the golden tests.
  */
 import stylistic from "@stylistic/eslint-plugin";
@@ -97,6 +99,28 @@ export default [
     files: ["apps/**/*.tsx"],
     rules: {
       "max-lines-per-function": ["error", { max: 100, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  {
+    /*
+     * The form engine rounds and formats money in one place: money.ts.
+     * A bare Math.round here would skip the IRS nearest-dollar rule.
+     */
+    files: ["apps/agent/src/engine/**/*.ts"],
+    ignores: ["apps/agent/src/engine/money.ts", "**/*.test.ts"],
+    rules: {
+      "no-restricted-properties": [
+        "error",
+        ...["round", "ceil", "floor", "trunc"].map((property) => ({
+          object: "Math",
+          property,
+          message: "Money math goes through src/engine/money.ts (roundDollars, stepsOf, …).",
+        })),
+        ...["toFixed", "toLocaleString"].map((property) => ({
+          property,
+          message: "Money formatting goes through src/engine/money.ts (formatDollars).",
+        })),
+      ],
     },
   },
   {

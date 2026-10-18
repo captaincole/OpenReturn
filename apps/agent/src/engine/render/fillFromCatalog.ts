@@ -24,12 +24,13 @@
  *     pdfWidgetName
  *   - missing/blocked/unsupported field results are skipped
  *   - multi_select fields iterate inv.options to check per-option widgets
- *   - numeric values render via fmtMoney (whole dollars, "0" for zero)
+ *   - numeric values render via formatDollars (whole dollars, "0" for zero)
  */
 
 import { PDFCheckBox, PDFDocument, PDFRadioGroup, PDFTextField, type PDFForm } from "pdf-lib";
 import { type Catalog, type FieldInventory } from "../catalog.js";
 import { getFormatter } from "../defineForm.js";
+import { formatDollars } from "../money.js";
 import { type AnyFormField, type EvaluatedForm } from "../types.js";
 import { verifiedWidget } from "./verifiedWidgets.js";
 
@@ -228,16 +229,6 @@ function appendRendered(
   else map.set(fieldId, [w]);
 }
 
-function fmtMoney(n: number | null | undefined): string {
-  if (n === null || n === undefined) return "";
-  if (n === 0) return "0";
-  /*
-   * Comma-grouped whole dollars: 79000 → "79,000". Matches the IRS-form
-   * convention in the CPA-completed golden PDFs.
-   */
-  return Math.round(n).toLocaleString("en-US", { maximumFractionDigits: 0 });
-}
-
 /*
  * Pre-render value coercion for text fields. SSN/phone widgets diverge by
  * jurisdiction. Federal forms use comb widgets: one box per digit, where
@@ -300,7 +291,7 @@ function fillByType(
   /*
    * Per-field formatter override, registered via FormSpec.formatters in
    * a defineForm call. When present, the override decides exactly what
-   * text is written. It bypasses the value-type defaults (fmtMoney,
+   * text is written. It bypasses the value-type defaults (formatDollars,
    * coerceTextValue), so a form can opt into different conventions per
    * field. Example: 540 page 2 SSN renders with dashes via
    * formatters: { "page2.taxpayer_ssn": SSN.format }.
@@ -319,7 +310,7 @@ function fillByType(
   switch (inv.valueType) {
     case "numeric": {
       if (typeof value === "number" && Number.isFinite(value)) {
-        const text = override ? override(value as never) : fmtMoney(value);
+        const text = override ? override(value as never) : formatDollars(value);
         setText(ctx, inv.fieldId, widgetName, text);
         return true;
       }

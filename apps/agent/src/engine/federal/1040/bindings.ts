@@ -9,7 +9,8 @@
 
 import { lookupStandardDeduction } from "../../data/standardDeduction.js";
 import { lookupTax } from "../../data/taxTable.js";
-import { defineForm, floor, roundDollars, sum } from "../../defineForm.js";
+import { defineForm } from "../../defineForm.js";
+import { atLeast, roundDollars, sum } from "../../money.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
@@ -169,7 +170,7 @@ export function register(): void {
       "line.14": (f) => sum(f["line.12e"], f["line.13a"], f["line.13b"]),
       // Taxable income = line 11b minus line 14, floored at 0.
       "line.15": (f) =>
-        floor(0, sum(f["line.11b"], f["line.14"] === undefined ? 0 : -f["line.14"])),
+        atLeast(0, sum(f["line.11b"], f["line.14"] === undefined ? 0 : -f["line.14"])),
       /*
        * MANUAL EDIT: line 16 routes through the Qualified Dividends and
        * Capital Gain Tax Worksheet (worksheets/qdcg.ts). The worksheet
@@ -199,8 +200,8 @@ export function register(): void {
          */
         const schDL15 = f["schedule-d.0.line.15_net_long_term_gain_loss"];
         const schDL16 = f["schedule-d.1.line.16_combined_gain_loss"];
-        const candL15 = typeof schDL15 === "number" ? Math.max(0, schDL15) : 0;
-        const candL16 = typeof schDL16 === "number" ? Math.max(0, schDL16) : 0;
+        const candL15 = typeof schDL15 === "number" ? atLeast(0, schDL15) : 0;
+        const candL16 = typeof schDL16 === "number" ? atLeast(0, schDL16) : 0;
         /*
          * "No" branch of worksheet line 3: no Schedule D, but capital
          * gain distributions can appear directly on 1040 line 7a. When
@@ -211,7 +212,7 @@ export function register(): void {
             ? Math.min(candL15, candL16)
             : (() => {
                 const l7a = f["line.7a"];
-                return typeof l7a === "number" ? Math.max(0, l7a) : 0;
+                return typeof l7a === "number" ? atLeast(0, l7a) : 0;
               })();
 
         try {
@@ -267,7 +268,8 @@ export function register(): void {
         return typeof v === "number" ? v : undefined;
       },
       // Line 22 = line 18 minus line 21, floored at 0 per the 'if zero or less, enter -0-' instruction.
-      "line.22": (f) => floor(0, sum(f["line.18"], f["line.21"] === undefined ? 0 : -f["line.21"])),
+      "line.22": (f) =>
+        atLeast(0, sum(f["line.18"], f["line.21"] === undefined ? 0 : -f["line.21"])),
       // Total tax = line 22 (tax after credits) + line 23 (other taxes from Schedule 2).
       "line.24": (f) => sum(f["line.22"], f["line.23"]),
       // Sum of W-2 box 2 (federal income tax withheld) across all employers.

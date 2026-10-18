@@ -10,7 +10,8 @@
 import { lookupCaRateSchedule } from "../../../data/caRateSchedule.js";
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { lookupTax } from "../../../data/taxTable.js";
-import { defineForm, floor, roundDollars, sum } from "../../../defineForm.js";
+import { defineForm } from "../../../defineForm.js";
+import { atLeast, roundDollars, sum } from "../../../money.js";
 import { SSN } from "../../../values.js";
 import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitation.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
@@ -153,7 +154,7 @@ export function register(): void {
       },
       // CA taxable income = CA AGI (line 17) minus deductions (line 18), floored at 0.
       "line.19_taxable_income": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["line.17_ca_agi"],
@@ -202,7 +203,7 @@ export function register(): void {
       },
       // Tax after exemption credits = line 31 minus line 32, floored at 0.
       "line.33_tax_after_exemption_credits": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["line.31_tax_amount"],
@@ -214,7 +215,7 @@ export function register(): void {
         sum(f["line.33_tax_after_exemption_credits"], f["line.34_tax_amount"]),
       // Line 35 minus line 47, floored at 0 per the instruction 'if less than zero, enter 0'.
       "line.48_tax_after_credits": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["line.35_total_tax_after_credits"],
@@ -259,7 +260,7 @@ export function register(): void {
       "line.92_full_year_health_coverage": (_, info) => info.fullYearMEC,
       // Line 93 = line 78 (total payments) minus line 91 (use tax), floored at 0 per instructions.
       "line.93_payments_balance": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["line.78_total_payments"],
@@ -268,7 +269,7 @@ export function register(): void {
         ),
       // Payments after ISR penalty = line 93 minus line 92, floored at 0 per instructions.
       "line.95_payments_after_isr_penalty": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["line.93_payments_balance"],
@@ -277,7 +278,7 @@ export function register(): void {
         ),
       // Overpaid tax = line 95 minus line 64, floored at 0 per instructions.
       "line.97_overpaid_tax": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["line.95_payments_after_isr_penalty"],
@@ -286,7 +287,7 @@ export function register(): void {
         ),
       // Overpaid tax available this year = line 97 minus line 98 (amount applied to 2026 estimated tax), floored at 0.
       "line.99_overpaid_tax_available": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["line.97_overpaid_tax"],
@@ -326,7 +327,7 @@ export function register(): void {
       },
       // Total amount due. Returns undefined when the result is 0 (refund-branch scenarios).
       "line.114_total_amount_due": (f) => {
-        const r = floor(
+        const r = atLeast(
           0,
           sum(
             f["line.100_tax_due"],
@@ -339,7 +340,7 @@ export function register(): void {
       },
       // Refund or no amount due: line 99 minus contributions (110), interest/penalties (112), and underpayment penalty (113).
       "line.115_refund_or_no_amount_due": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["line.99_overpaid_tax_available"],

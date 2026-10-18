@@ -8,7 +8,8 @@
  */
 
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
-import { defineForm, floor, roundDollars, sum } from "../../../defineForm.js";
+import { defineForm } from "../../../defineForm.js";
+import { atLeast, roundDollars, sum } from "../../../money.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import type { ScheduleCa } from "./types.js";
 
@@ -143,7 +144,7 @@ export function register(): void {
         ),
       /*
        * MANUAL EDIT: AI flagged this as unsupported ("no max() rule"),
-       * but the engine's `floor(min, value)` IS max-with-floor. Look up
+       * but the engine's `atLeast(min, value)` IS max-with-floor. Look up
        * the CA standard deduction for the filer's status and floor line
        * 29 against it. When line 29 is 0 (non-itemizer), the result is
        * the standard deduction. When line 29 > standard, the result is
@@ -154,7 +155,7 @@ export function register(): void {
         const stdDed = lookupStandardDeduction("state-ca", 2025, info.filingStatus);
         if (stdDed === undefined) return undefined;
         const line29 = f["5.page2.total_itemized_29"];
-        return floor(stdDed, typeof line29 === "number" ? line29 : 0);
+        return atLeast(stdDed, typeof line29 === "number" ? line29 : 0);
       },
     },
 

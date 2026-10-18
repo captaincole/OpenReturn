@@ -54,7 +54,7 @@ export type Translation =
       body: string;
       usesLookupTax?: boolean;
       usesSum?: boolean;
-      usesFloor?: boolean;
+      usesAtLeast?: boolean;
     }
   | { kind: "todo"; reason: string };
 
@@ -201,9 +201,9 @@ function translateFromFields(b: ClassifiedBinding, formId: string): Translation 
   if (typeof floorVal === "number") {
     return {
       kind: "body",
-      body: `(f) => floor(${floorVal}, ${sumExpr})`,
+      body: `(f) => atLeast(${floorVal}, ${sumExpr})`,
       usesSum: true,
-      usesFloor: true,
+      usesAtLeast: true,
     };
   }
   return { kind: "body", body: `(f) => ${sumExpr}`, usesSum: true };

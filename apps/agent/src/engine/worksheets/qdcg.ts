@@ -18,7 +18,7 @@
 import { lookupPreferentialBrackets } from "../data/preferentialBrackets.js";
 import { lookupRateSchedule } from "../data/rateSchedule.js";
 import { lookupTax } from "../data/taxTable.js";
-import { roundDollars } from "../defineForm.js";
+import { atLeast, roundDollars } from "../money.js";
 import type { FilingStatus } from "../values.js";
 
 export interface QdcgInputs {
@@ -170,7 +170,7 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
   // Line 4: add lines 2 and 3 (total preferential income).
   const line4 = line2 + line3;
   // Line 5: line 1 − line 4 (ordinary bucket; floored at 0).
-  const line5 = Math.max(0, line1 - line4);
+  const line5 = atLeast(0, line1 - line4);
 
   // Lines 6–9 — 0% rate computation.
   const line6 = brackets.zeroRateCeiling;
@@ -190,7 +190,7 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
    * Line 16 of the worksheet, NOT 1040 line 16. Floored at 0 per the
    * instructions.
    */
-  const line16 = Math.max(0, line14 - line15);
+  const line16 = atLeast(0, line14 - line15);
   // Line 17 = preferential dollars at 15%.
   const line17 = Math.min(line12, line16);
   /*
@@ -207,7 +207,7 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
    * preferential bucket. That is the typical case for filers below the
    * 20% threshold.
    */
-  const line20 = Math.max(0, line10 - line19);
+  const line20 = atLeast(0, line10 - line19);
   const line21 = roundDollars(line20 * 0.2);
 
   // Line 22: tax on line 5 (ordinary bucket) via tax table / rate schedule.

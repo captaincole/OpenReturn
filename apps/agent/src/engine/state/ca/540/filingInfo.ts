@@ -8,7 +8,7 @@
  */
 
 import type { BaseFilingInfo } from "../../../filingInfo.js";
-import type { Money } from "../../../values.js";
+import type { Money } from "../../../money.js";
 
 export interface Form540FilingInfo extends BaseFilingInfo {
   /** "full_year" | "part_year" | "non_resident". */

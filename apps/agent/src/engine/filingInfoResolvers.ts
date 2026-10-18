@@ -24,6 +24,7 @@ import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
 import type { PayerAmount, ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
 import type { BaseFilingInfo } from "./filingInfo.js";
+import { sum } from "./money.js";
 import {
   factsInCategory,
   missingInputs,
@@ -133,8 +134,8 @@ function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
       (r) => r.box2a === undefined && r.box2b?.taxableAmountNotDetermined === true,
     );
     return {
-      gross: group.reduce((t, r) => t + r.box1, 0),
-      taxable: undetermined ? undefined : group.reduce((t, r) => t + (r.box2a ?? r.box1), 0),
+      gross: sum(...group.map((r) => r.box1)),
+      taxable: undetermined ? undefined : sum(...group.map((r) => r.box2a ?? r.box1)),
       rollover: group.some((r) => /[GH]/.test(r.box7)),
     };
   };
@@ -349,7 +350,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   );
   const miscOtherIncome =
     misc.length > 0
-      ? misc.reduce((t, row) => t + num0((row.value as Record<string, unknown>).box3), 0)
+      ? sum(...misc.map((row) => (row.value as Record<string, unknown>).box3))
       : undefined;
   const r = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
@@ -395,12 +396,8 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
  * is "Yes". An explicit `decisions.scope.must_file_schedule_b` wins.
  */
 export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInfo {
-  const interestPayers = payerAmounts(
-    inputs,
-    isInterestFactKey,
-    (v) => num0(v.box1) + num0(v.box3),
-  );
-  const dividendPayers = payerAmounts(inputs, isDividendFactKey, (v) => num0(v.box1a));
+  const interestPayers = payerAmounts(inputs, isInterestFactKey, (v) => sum(v.box1, v.box3));
+  const dividendPayers = payerAmounts(inputs, isDividendFactKey, (v) => sum(v.box1a));
   const hasForeignFinancialAccount = boolDecision(
     inputs,
     "decisions.scope.has_foreign_financial_account",
@@ -411,8 +408,8 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
     "decisions.scope.has_foreign_trust": hasForeignTrust,
   };
   const rounding = inputs.decisionByKey.get("decisions.rounding.schedule_b");
-  const interest = interestPayers.reduce((t, p) => t + p.amount, 0);
-  const dividends = dividendPayers.reduce((t, p) => t + p.amount, 0);
+  const interest = sum(...interestPayers.map((p) => p.amount));
+  const dividends = sum(...dividendPayers.map((p) => p.amount));
   const r = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_b",
     fallbacks: [
@@ -451,10 +448,6 @@ function payerAmounts(
       return { payerName: String(v.payerName ?? ""), amount: amountOf(v) };
     })
     .filter((p) => p.amount !== 0);
-}
-
-function num0(v: unknown): number {
-  return typeof v === "number" && Number.isFinite(v) ? v : 0;
 }
 
 function boolDecision(inputs: ResolverInputs, key: string): boolean | undefined {

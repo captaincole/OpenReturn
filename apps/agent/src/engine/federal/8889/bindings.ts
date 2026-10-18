@@ -7,7 +7,8 @@
  * Generated at: 2026-10-15T22:19:07.846Z
  */
 
-import { defineForm, floor, roundDollars, sum } from "../../defineForm.js";
+import { defineForm } from "../../defineForm.js";
+import { atLeast, roundDollars, sum } from "../../money.js";
 import type { Form8889FilingInfo } from "./filingInfo.js";
 import type { Form8889 } from "./types.js";
 
@@ -81,7 +82,7 @@ export function register(): void {
         ),
       // Line 12 = line 8 − line 11, floored at 0.
       "0.line.12_subtract_line11_from_line8": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["0.line.8_add_lines_6_and_7"],
@@ -100,7 +101,7 @@ export function register(): void {
         ),
       // Taxable HSA distributions = line 14c − line 15, not below zero.
       "0.line.16_taxable_hsa_distributions": (f) =>
-        floor(
+        atLeast(
           0,
           sum(
             f["0.line.14c_subtract_14b_from_14a"],

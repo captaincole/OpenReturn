@@ -3,9 +3,10 @@
  *
  * Each type is a phantom-branded primitive. The brand exists only in the
  * type checker, so runtime cost is zero, but TS treats the types as
- * nominally distinct: `SSN` cannot be assigned to `Money`, and vice
+ * nominally distinct: `SSN` cannot be assigned to `Phone`, and vice
  * versa. Bindings can return these directly into form fields whose
- * declared valueType matches the underlying primitive.
+ * declared valueType matches the underlying primitive. The `Money`
+ * brand lives in money.ts with the money rules.
  *
  * Every brand carries a default `format(value)` that the renderer uses
  * when it writes PDF widgets. Per-form overrides live next to each form's
@@ -16,32 +17,6 @@
  * a new shape should reference the brand in its return type, so the
  * renderer/formatter path stays exhaustive.
  */
-
-/*
- * ─── Money ───────────────────────────────────────────────────────────────
- * Whole dollars. Storage is a `number` of dollars, not cents, so JSON
- * round-trips and arithmetic need no conversion helpers. Negative values
- * are valid (refunds, losses, owe-amounts).
- */
-
-export type Money = number & { readonly __brand: "Money" };
-
-export const money = (n: number): Money => n as Money;
-
-export const Money = {
-  /**
-   * Default IRS / FTB convention: comma-grouped whole dollars
-   * ("79,000"). Earlier renderers wrote blank for zero. The form engine
-   * writes "0", so the field reads as "computed, value is zero" rather
-   * than "we forgot to fill it." Per-form overrides can swap conventions
-   * (blank-for-zero, no commas, etc.) via `FormSpec.formatters`.
-   */
-  format: (m: Money): string => {
-    if (!Number.isFinite(m)) return "";
-    if (m === 0) return "0";
-    return Math.round(m).toLocaleString("en-US", { maximumFractionDigits: 0 });
-  },
-};
 
 /*
  * ─── SSN ─────────────────────────────────────────────────────────────────
