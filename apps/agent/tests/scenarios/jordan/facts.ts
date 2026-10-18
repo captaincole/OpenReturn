@@ -148,8 +148,8 @@ const exchangeMisc: MiscIncomeFactValue = {
   box3: 1045.85,
 };
 
-// docs/07 and 08 — two 1099-Rs from one payer (direct rollovers, codes G and H)
-const rolloverG: RetirementDistributionFactValue = {
+// docs/07 and 08 — two 1099-Rs from one payer (direct rollovers, codes G and H); see generate-docs.ts
+export const rolloverG: RetirementDistributionFactValue = {
   payerName: "Example Retirement Trust Company",
   payerTin: "00-0000005",
   planName: "EXAMPLE CORP 401(K) SAVINGS PLAN",
@@ -165,7 +165,7 @@ const rolloverG: RetirementDistributionFactValue = {
   box15: "CA 000-0000-2",
 };
 
-const rolloverH: RetirementDistributionFactValue = {
+export const rolloverH: RetirementDistributionFactValue = {
   payerName: "Example Retirement Trust Company",
   payerTin: "00-0000005",
   planName: "EXAMPLE CORP 401(K) SAVINGS PLAN",
