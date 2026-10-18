@@ -60,15 +60,23 @@ const jubileeRetirement: RetirementDistributionFactValue = {
   box7IraSepSimple: false,
 };
 
-// docs/00-carter-cover.pdf: "a 1099-DIV for total gain distribution from Real Estate Investment Trust".
+/*
+ * docs/03-example-reit-fund-1099-div.pdf (made by generate-docs.ts from the cover page:
+ * "a 1099-DIV for total gain distribution from Real Estate Investment Trust").
+ */
 const reitDiv: DividendFactValue = {
   payerName: "Example REIT Fund",
+  payerTin: "00-0000009",
   box2a: 7500,
 };
 
-// docs/00-carter-cover.pdf: "$1,000 in Social Security benefits".
+/*
+ * docs/04-ssa-1099.pdf (made by generate-docs.ts from the cover page:
+ * "$1,000 in Social Security benefits").
+ */
 const ssa: SocialSecurityFactValue = {
   payerName: "Social Security Administration",
+  box3: 1000,
   box5: 1000,
 };
 
@@ -122,14 +130,9 @@ export const carterFacts: TaxFactRow[] = [
     "investment_income",
     makeDividendFactKey("example-reit-fund"),
     reitDiv,
-    "Cover page: 1099-DIV capital gain distribution from a REIT.",
+    "1099-DIV from Example REIT Fund (docs/03-example-reit-fund-1099-div.pdf).",
   ),
-  fact(
-    "retirement",
-    makeSocialSecurityFactKey("ssa"),
-    ssa,
-    "Cover page: $1,000 in Social Security benefits.",
-  ),
+  fact("retirement", makeSocialSecurityFactKey("ssa"), ssa, "SSA-1099 (docs/04-ssa-1099.pdf)."),
   fact(
     "health_coverage",
     "health_coverage.full_year_mec",

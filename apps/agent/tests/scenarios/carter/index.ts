@@ -13,6 +13,8 @@
  * 00-carter-cover.pdf (DOB, Social Security, REIT distribution, lived
  * apart), 01-…-1099-r-code-q.pdf, and 02-…-1099-r-code-g.pdf. The
  * split pages are unchanged, so they still show the Nevada address.
+ * The package has no 1099-DIV or SSA-1099, only their amounts on the
+ * cover; generate-docs.ts makes 03-…-1099-div.pdf and 04-ssa-1099.pdf.
  *
  * UNVERIFIED. The IRS package is an e-file schema test, not an answer
  * key, and no CPA has prepared this return. The expected values are

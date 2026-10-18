@@ -30,9 +30,11 @@ Form 540 can compute:
 - California use tax owed: none.
 - Mailing address is the home address.
 
-The package names the 1099-DIV only by its amount. The payer name
-("Example REIT Fund") is invented. The package has no SSA-1099; the
-cover page gives the net benefits ($1,000).
+The package has no 1099-DIV and no SSA-1099. The IRS e-file test needs
+only their amounts, which the cover page gives. `generate-docs.ts` makes
+the two documents from those amounts (see Input documents below). The
+1099-DIV payer ("Example REIT Fund"), its address, TIN, and account
+number are invented.
 
 ## Not modeled
 
@@ -43,14 +45,17 @@ cover page gives the net benefits ($1,000).
 
 ## Input documents
 
-The IRS PDF is split into one file per input document. The pages are
-unchanged, so they still show the Nevada addresses.
+Files 00–02 are pages of the IRS PDF, split out unchanged, so they still
+show the Nevada addresses. Files 03–04 are made by `generate-docs.ts`,
+with the California address.
 
 | File | IRS PDF page | What it holds |
 | --- | --- | --- |
 | `00-carter-cover.pdf` | 1 | Date of birth, Social Security benefits, REIT capital gain distribution, lived apart from spouse |
 | `01-liberty-trust-1099-r-code-q.pdf` | 4 | 1099-R, code Q (qualified Roth IRA) |
 | `02-jubilee-retirement-1099-r-code-g.pdf` | 5 | 1099-R, code G (direct rollover) |
+| `03-example-reit-fund-1099-div.pdf` | made by us | 1099-DIV, box 2a only (IRS fillable Copy B) |
+| `04-ssa-1099.pdf` | made by us | SSA-1099, net benefits $1,000 (drawn; SSA has no public blank) |
 
 Pages 2–3 are the IRS draft Form 1040. They are not an input document,
 but they give the spouse's name and SSN. They stay in
