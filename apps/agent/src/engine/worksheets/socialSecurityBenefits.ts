@@ -17,7 +17,7 @@ import { atLeast, roundDollars } from "../money.js";
 import type { FilingStatus } from "../values.js";
 
 export interface SocialSecurityInputs {
-  /** Line 1: total of box 5 of all SSA-1099 / RRB-1099 forms. */
+  /** Line 1: total of box 5 of all SSA-1099 forms (RRB-1099 is not supported). */
   benefits: number;
   /** Line 3: 1040 lines 1z + 2b + 3b + 4b + 5b + 7a + 8. */
   otherIncome: number;

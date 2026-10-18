@@ -16,7 +16,7 @@ export const carterDecisions: AIDecisionRow[] = [
   dec(
     "decisions.scope.must_file_federal",
     true,
-    "Federal income tax was withheld; filing gets it refunded.",
+    "Married filing separately: gross income is over the $5 filing threshold (any age).",
   ),
   dec(
     "decisions.scope.filing_status",
@@ -33,7 +33,7 @@ export const carterDecisions: AIDecisionRow[] = [
   dec(
     "decisions.scope.must_file_ca_540",
     true,
-    "Full-year CA resident with income above the filing threshold.",
+    "Full-year CA resident. Files to report residency; CA tax is 0. (Own income is below the MFS 65+ thresholds, but the CA test combines both spouses' income, which is unknown.)",
   ),
   dec("decisions.scope.ca_residency", "full_year", "Lived in Sacramento, CA all of 2025."),
   dec(

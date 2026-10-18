@@ -63,6 +63,7 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(HSA_COVERAGE_KEYS),
   ...Object.values(PRIOR_YEAR_KEYS),
   SPOUSE_KEYS.livedApartAllYear,
+  SPOUSE_KEYS.itemizesSeparately,
   "prior_year.ca_agi",
   "medical.expenses_total",
   "mortgage.interest_form_1098",

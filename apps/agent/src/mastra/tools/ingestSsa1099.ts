@@ -5,28 +5,25 @@ import { recordIngestFact, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
 /*
- * Ingest one Form SSA-1099 or RRB-1099 (Social Security / Tier 1
- * railroad retirement benefits) as a single structured tax_facts row.
- * Box 5 (net benefits) feeds Form 1040 line 6a and the Social Security
- * Benefits Worksheet; box 6 (voluntary withholding) feeds line 25b.
+ * Ingest one Form SSA-1099 (Social Security benefits) as a single
+ * structured tax_facts row. Box 5 (net benefits) feeds Form 1040 line 6a
+ * and the Social Security Benefits Worksheet; box 6 (voluntary
+ * withholding) feeds line 25b.
+ *
+ * Form RRB-1099 is not supported: its boxes differ (box 6 is the
+ * workers' compensation offset; withholding is box 10).
  *
  * Convention (see src/engine/facts/kinds/socialSecurity.ts):
  *   category: "retirement"
- *   key:      "payer.{ssa|rrb}.social_security"
+ *   key:      "payer.ssa.social_security"
  */
-
-const PAYERS = {
-  SSA: { slug: "ssa", name: "Social Security Administration" },
-  RRB: { slug: "rrb", name: "Railroad Retirement Board" },
-} as const;
 
 export const ingestSsa1099 = createTool({
   id: "ingest-ssa-1099",
   description:
-    "Ingest one Form SSA-1099 (or RRB-1099). Call ONCE per form. Writes one fact under category 'retirement'. If the filing status is married filing separately, also ask whether the user lived apart from their spouse for all of 2025.",
+    "Ingest one Form SSA-1099. Not for Form RRB-1099 (railroad retirement), which is not supported. Call ONCE per form. Writes one fact under category 'retirement'. If the filing status is married filing separately, also ask whether the user lived apart from their spouse for all of 2025.",
   inputSchema: z.object({
     year: z.number().int(),
-    payer: z.enum(["SSA", "RRB"]).describe("SSA for Form SSA-1099, RRB for Form RRB-1099"),
     box3: z.number().optional().describe("Benefits paid in the year"),
     box4: z.number().optional().describe("Benefits repaid to SSA in the year"),
     box5: z.number().describe("Net benefits (box 3 minus box 4)"),
@@ -43,15 +40,14 @@ export const ingestSsa1099 = createTool({
       year: input.year,
       sourceNote: input.sourceNote,
     };
-    const payer = PAYERS[input.payer];
     const value: SocialSecurityFactValue = {
-      payerName: payer.name,
+      payerName: "Social Security Administration",
       box3: input.box3,
       box4: input.box4,
       box5: input.box5,
       box6: input.box6,
     };
-    const factKey = makeSocialSecurityFactKey(payer.slug);
+    const factKey = makeSocialSecurityFactKey("ssa");
     await recordIngestFact(ctx, "retirement", factKey, value);
     return { factKey };
   },

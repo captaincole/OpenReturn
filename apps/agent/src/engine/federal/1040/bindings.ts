@@ -244,10 +244,19 @@ export function register(): void {
        */
       "line.12d_you_born_before_jan2_1961": (_, info) =>
         info.taxpayerBornBeforeJan2_1961 === true ? true : undefined,
+      "line.12b_spouse_itemizes_separate": (_, info) =>
+        info.filingStatus === "married_filing_separately" && info.spouseItemizesSeparately === true
+          ? true
+          : undefined,
       "line.12e": (f, info) => {
         if (info.useItemizedDeductions === true) {
           const itemized = f["schedule-a.0.line.17_total_itemized_deductions"];
           return typeof itemized === "number" ? itemized : undefined;
+        }
+        // Exception 2: MFS and the spouse itemizes → zero, even when born before 1961.
+        if (info.filingStatus === "married_filing_separately") {
+          if (info.spouseItemizesSeparately === undefined) return undefined;
+          if (info.spouseItemizesSeparately) return 0;
         }
         if (!info.filingStatus || info.taxpayerBornBeforeJan2_1961 === undefined) return undefined;
         const base = lookupStandardDeduction("federal", 2025, info.filingStatus);
@@ -255,11 +264,27 @@ export function register(): void {
         const extra = lookupAdditionalStandardDeduction(2025, info.filingStatus);
         return base === undefined || extra === undefined ? undefined : base + boxes * extra;
       },
-      // Lines 12e + 13a + 13b per form instructions.
-      "line.14": (f) => sum(f["line.12e"], f["line.13a"], f["line.13b"]),
-      // Taxable income = line 11b minus line 14, floored at 0.
+      /*
+       * Lines 12e + 13a + 13b. Blank when 12e is blank: sum() would count
+       * it as 0 and overstate taxable income. Also blank for a filer born
+       * before January 2, 1961 who is not MFS: they may qualify for the
+       * enhanced deduction for seniors (Schedule 1-A → line 13b, up to
+       * $6,000), which is not modeled. MFS filers cannot claim it.
+       */
+      "line.14": (f, info) => {
+        if (f["line.12e"] === undefined) return undefined;
+        const mayClaimSeniorDeduction =
+          info.taxpayerBornBeforeJan2_1961 === true &&
+          info.filingStatus !== "married_filing_separately";
+        if (mayClaimSeniorDeduction) return undefined;
+        return sum(f["line.12e"], f["line.13a"], f["line.13b"]);
+      },
+      /*
+       * Taxable income = line 11b minus line 14, floored at 0. Blank when
+       * line 14 is blank: sum() would read it as 0 and tax all of 11b.
+       */
       "line.15": (f) =>
-        atLeast(0, sum(f["line.11b"], f["line.14"] === undefined ? 0 : -f["line.14"])),
+        f["line.14"] === undefined ? undefined : atLeast(0, sum(f["line.11b"], -f["line.14"])),
       /*
        * MANUAL EDIT: line 16 routes through the Qualified Dividends and
        * Capital Gain Tax Worksheet (worksheets/qdcg.ts). The worksheet
@@ -350,17 +375,23 @@ export function register(): void {
         return typeof v === "number" ? v : undefined;
       },
       // Lines 16 + 17. sum() treats a blank line 17 as 0.
-      "line.18": (f) => sum(f["line.16"], f["line.17"]),
+      "line.18": (f) => (f["line.16"] === undefined ? undefined : sum(f["line.16"], f["line.17"])),
       // MANUAL EDIT: line 23 = Schedule 2 line 21 (other taxes); blank when Schedule 2 is not filed.
       "line.23": (f) => {
         const v = f["schedule-2.1.line.21_total_other_taxes"];
         return typeof v === "number" ? v : undefined;
       },
-      // Line 22 = line 18 minus line 21, floored at 0 per the 'if zero or less, enter -0-' instruction.
+      /*
+       * Line 22 = line 18 minus line 21, floored at 0 per the 'if zero or
+       * less, enter -0-' instruction. A blank line 18 (no tax computed)
+       * stays blank down to line 24, so lines 34/37 stay blank.
+       */
       "line.22": (f) =>
-        atLeast(0, sum(f["line.18"], f["line.21"] === undefined ? 0 : -f["line.21"])),
+        f["line.18"] === undefined
+          ? undefined
+          : atLeast(0, sum(f["line.18"], f["line.21"] === undefined ? 0 : -f["line.21"])),
       // Total tax = line 22 (tax after credits) + line 23 (other taxes from Schedule 2).
-      "line.24": (f) => sum(f["line.22"], f["line.23"]),
+      "line.24": (f) => (f["line.22"] === undefined ? undefined : sum(f["line.22"], f["line.23"])),
       // Sum of W-2 box 2 (federal income tax withheld) across all employers.
       "line.25a": (_, info) => roundDollars(info.w2FederalWithholding),
       /*
@@ -599,8 +630,6 @@ export function register(): void {
         "Whether the taxpayer can be claimed as a dependent on someone else's return requires a dependent-status decision not yet modeled in the decision set.",
       "line.12a_spouse_as_dependent":
         "No MFJ scenario ingested yet — spouse-as-dependent checkbox requires a joint-return scenario where the spouse can be claimed by a third party.",
-      "line.12b_spouse_itemizes_separate":
-        "No MFS scenario ingested yet — this checkbox applies only to married filing separately filers whose spouse itemizes.",
       "line.12b_dual_status_alien":
         "No dual-status alien scenario ingested yet — this checkbox requires a residency/immigration-status fact we don't model.",
       "line.12d_you_blind":
@@ -610,7 +639,7 @@ export function register(): void {
       "line.12d_spouse_blind":
         "No MFJ/spouse scenario ingested yet — spouse blindness fact does not exist.",
       "line.13b":
-        "Schedule 1-A (new 2025 form) covers no-tax-on-tips, no-tax-on-overtime, car loan interest, and enhanced senior deductions — none of these scenarios are ingested yet.",
+        "Schedule 1-A (new 2025 form) covers no-tax-on-tips, no-tax-on-overtime, car loan interest, and enhanced senior deductions — none of these scenarios are ingested yet. Line 14 stays blank for a filer born before January 2, 1961 who is not MFS, because they may qualify for the senior deduction.",
       "line.16_from_form_8814":
         "Checkbox indicating tax includes amounts from Form 8814 (child's interest/dividends election). No Form 8814 ingestion scenario built yet; requires dependent-with-investment-income data.",
       "line.16_from_form_4972":

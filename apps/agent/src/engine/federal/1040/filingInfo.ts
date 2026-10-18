@@ -55,7 +55,7 @@ export interface Form1040FilingInfo extends BaseFilingInfo {
   /** Lines 5a–5c (pensions and annuities: every other 1099-R). */
   pensionDistributions?: RetirementLine;
 
-  /** Line 6a: SSA-1099 / RRB-1099 box 5 (net benefits). Undefined when none. */
+  /** Line 6a: SSA-1099 box 5 (net benefits). Undefined when none. */
   socialSecurityBenefits?: Money;
   /**
    * Married filing separately and lived apart from the spouse all year:
@@ -63,6 +63,12 @@ export interface Form1040FilingInfo extends BaseFilingInfo {
    * Benefits Worksheet instead of 0.
    */
   livedApartFromSpouseAllYear?: boolean;
+  /**
+   * Married filing separately and the spouse itemizes on their own
+   * return: the line 12b box, and a standard deduction of zero
+   * (instructions, line 12e Exception 2).
+   */
+  spouseItemizesSeparately?: boolean;
 
   /**
    * Refund the federal overpayment in full, or apply some to 2026
@@ -83,7 +89,8 @@ export interface Form1040FilingInfo extends BaseFilingInfo {
 /**
  * One 1040 retirement line pair. `taxable` is undefined when any 1099-R
  * leaves box 2a blank with "taxable amount not determined" (Simplified
- * Method, not modeled). `rollover` is true when any distribution is a
+ * Method, not modeled) or has Roth code J or T (Form 8606, not modeled).
+ * Code Q counts as 0. `rollover` is true when any distribution is a
  * direct rollover (box 7 code G or H): the "Rollover" box next to (b).
  */
 export interface RetirementLine {

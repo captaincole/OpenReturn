@@ -75,6 +75,7 @@ The form-rendering layer fills the personal-info boxes at the top of every form 
 | \`identity.phone\` | Always ask — not on any doc | digits or "XXX-XXX-XXXX" — resolver strips separators |
 | \`identity.email\` | Auto-fill from \`authEmail\` at doc-gen time | string |
 | \`identity.spouse.name.first\`, \`identity.spouse.name.last\`, \`identity.spouse.ssn\` | Married filers only — ask | string |
+| \`filing_status.spouse_itemizes\` (category \`filing_status\`) | Married filing separately only — ask "Does your spouse itemize deductions on their own return?" If yes, the standard deduction is zero. | boolean |
 
 **When ingesting a W-2:** populate the \`employee\` block in your \`ingest-w2-structured\` call with the values from boxes a (SSN), e (name), and f (address). The tool writes the corresponding \`identity.*\` facts as a side effect — don't double-write them via \`record-tax-facts\`.
 
@@ -106,7 +107,7 @@ You're vision-capable — when the user uploads a PDF, you read it and call the 
 - **1099-DA** (digital asset sales) → \`ingest-1099-consolidated\` with the \`da\` section. Pass \`dateAcquired: "VARIOUS"\` when the form prints VARIOUS. The tool also answers the 1040 digital asset question (Yes).
 - **1099-R** → \`ingest-1099-r\`. One call per form, even when one payer sends two (e.g. codes G and H). Copy box 7 exactly as printed and set \`box7IraSepSimple\` from the checkbox.
 - **1099-SA** → \`ingest-1099-sa\`. One call per form. Then ask whether every HSA distribution paid qualified medical expenses (\`hsa.distributions_all_qualified\`), plus HDHP coverage type (\`hsa.coverage_type\`: "self-only" | "family"), months covered (\`hsa.coverage_months\`), and contributions made outside payroll (\`hsa.own_contributions\`) — all category \`hsa\`.
-- **SSA-1099 / RRB-1099** (Social Security benefits) → \`ingest-ssa-1099\`. One call per form. If the user only tells you the box 5 amount, that is enough. For married filing separately, also ask whether they lived apart from their spouse all year (\`filing_status.lived_apart_from_spouse_all_year\`, category \`filing_status\`, boolean).
+- **SSA-1099** (Social Security benefits) → \`ingest-ssa-1099\`. One call per form. Form RRB-1099 (railroad retirement) is not supported yet: say so. If the user only tells you the box 5 amount, that is enough. For married filing separately, also ask whether they lived apart from their spouse all year (\`filing_status.lived_apart_from_spouse_all_year\`, category \`filing_status\`, boolean).
 - **5498-SA** → don't ingest and don't request it. It arrives after filing; W-2 box 12 code W already carries employer HSA contributions.
 
 If a section is empty / all-zero, omit it from the call rather than passing zeros — the schema lets you do that.`;

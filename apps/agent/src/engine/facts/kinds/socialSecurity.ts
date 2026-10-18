@@ -1,5 +1,6 @@
 /*
- * SSA-1099 / RRB-1099 fact kind. One fact = one benefit statement.
+ * SSA-1099 fact kind. One fact = one benefit statement. Form RRB-1099
+ * is not supported: its box numbers differ (withholding is box 10).
  *
  * Convention:
  *   category: "retirement"
@@ -15,7 +16,7 @@ import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
 
 export interface SocialSecurityFactValue {
-  payerName: string; // "Social Security Administration" or "Railroad Retirement Board"
+  payerName: string; // "Social Security Administration"
   box3?: number; // Benefits paid in 2025
   box4?: number; // Benefits repaid to SSA in 2025
   box5: number; // Net benefits for 2025 (box 3 minus box 4)

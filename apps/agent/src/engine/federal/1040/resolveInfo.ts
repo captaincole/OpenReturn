@@ -71,6 +71,19 @@ function resolveInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
  */
 const ROTH_IRA_CODES = /[JQT]/;
 
+/*
+ * One 1099-R's taxable amount; undefined blocks the taxable line.
+ * Code Q (qualified Roth IRA distribution) is not taxable by rule. For
+ * codes J and T the taxable part comes from Form 8606 Part III, which is
+ * not modeled, so box 2a is not used.
+ */
+function rowTaxable(r: RetirementDistributionFactValue): number | undefined {
+  if (r.box7.includes("Q")) return 0;
+  if (/[JT]/.test(r.box7)) return undefined;
+  if (r.box2a === undefined && r.box2b?.taxableAmountNotDetermined === true) return undefined;
+  return r.box2a ?? r.box1;
+}
+
 function retirementRows(inputs: ResolverInputs): RetirementDistributionFactValue[] {
   return factsInCategory(inputs, "retirement")
     .filter((row) => /^payer\.[^.]+\.distributions\.[^.]+$/.test(row.key))
@@ -84,12 +97,10 @@ function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
   const line = (ira: boolean): RetirementLine | undefined => {
     const group = rows.filter((r) => isIra(r) === ira);
     if (group.length === 0) return undefined;
-    const undetermined = group.some(
-      (r) => r.box2a === undefined && r.box2b?.taxableAmountNotDetermined === true,
-    );
+    const taxable = group.map(rowTaxable);
     return {
       gross: sum(...group.map((r) => r.box1)),
-      taxable: undetermined ? undefined : sum(...group.map((r) => r.box2a ?? r.box1)),
+      taxable: taxable.includes(undefined) ? undefined : sum(...taxable),
       rollover: group.some((r) => /[GH]/.test(r.box7)),
     };
   };
@@ -152,6 +163,7 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
   const married =
     filingStatus === "married_filing_separately" || filingStatus === "married_filing_jointly";
   const livedApart = factByKey.get(SPOUSE_KEYS.livedApartAllYear) as boolean | undefined;
+  const spouseItemizes = factByKey.get(SPOUSE_KEYS.itemizesSeparately) as boolean | undefined;
   return {
     mustFile: { "form-1040": r },
     missingInputs: {
@@ -168,6 +180,10 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
               [SPOUSE_KEYS.lastName]: text(inputs, SPOUSE_KEYS.lastName),
               [SPOUSE_KEYS.ssn]: text(inputs, SPOUSE_KEYS.ssn),
             }
+          : {}),
+        // Line 12b: an MFS spouse who itemizes makes the standard deduction zero.
+        ...(filingStatus === "married_filing_separately"
+          ? { [SPOUSE_KEYS.itemizesSeparately]: spouseItemizes }
           : {}),
         // Line 6b: the worksheet base for MFS depends on living apart all year.
         ...(filingStatus === "married_filing_separately" && ss.length > 0
@@ -197,6 +213,7 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
         ? (sum(...ss.map((s) => s.box5)) as Form1040FilingInfo["socialSecurityBenefits"])
         : undefined,
     livedApartFromSpouseAllYear: livedApart,
+    spouseItemizesSeparately: spouseItemizes,
     refundFullOverpaymentFederal,
     useItemizedDeductions,
   };

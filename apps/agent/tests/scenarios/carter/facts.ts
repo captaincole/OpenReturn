@@ -115,6 +115,12 @@ export const carterFacts: TaxFactRow[] = [
     "Cover page: lived apart from spouse the entire year.",
   ),
   fact(
+    "filing_status",
+    SPOUSE_KEYS.itemizesSeparately,
+    false,
+    "IRS draft 1040: line 12b (spouse itemizes on a separate return) is unchecked.",
+  ),
+  fact(
     "retirement",
     makeRetirementDistributionFactKey("liberty-trust-company", "code-q"),
     libertyTrust,
