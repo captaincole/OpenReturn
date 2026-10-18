@@ -9,12 +9,12 @@
  * 1099-DIV payer name, and the California answers the package does not
  * give.
  *
- * The input documents are split out of the IRS PDF, one file each:
- * 00-carter-cover.pdf (DOB, Social Security, REIT distribution, lived
- * apart), 01-…-1099-r-code-q.pdf, and 02-…-1099-r-code-g.pdf. The
- * split pages are unchanged, so they still show the Nevada address.
- * The package has no 1099-DIV or SSA-1099, only their amounts on the
- * cover; we made 03-…-1099-div.pdf and 04-ssa-1099.pdf from them.
+ * Input documents, one file each. 00-carter-cover.pdf is the IRS cover
+ * page (DOB, Social Security, REIT distribution, lived apart). The
+ * 1099-Rs (01, 02) are the official 2025 IRS Copy B, filled with the
+ * IRS pages' values and the Sacramento address. The package has no
+ * 1099-DIV or SSA-1099, only their amounts on the cover; we made
+ * 03-…-1099-div.pdf and 04-ssa-1099.pdf from them.
  *
  * UNVERIFIED. The IRS package is an e-file schema test, not an answer
  * key, and no CPA has prepared this return. The expected values are

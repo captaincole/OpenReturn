@@ -45,15 +45,18 @@ number are invented.
 
 ## Input documents
 
-Files 00–02 are pages of the IRS PDF, split out unchanged, so they still
-show the Nevada addresses. We made files 03–04, with the California
+File 00 is page 1 of the IRS PDF, unchanged. Files 01–02 are the
+official 2025 IRS fillable 1099-R, Copy B, filled with the values on IRS
+PDF pages 4–5 and the Sacramento recipient address. This is the same
+form as those pages; a filled form avoids leaving the old address in
+the PDF text under a cover-up. We made files 03–04, with the California
 address.
 
-| File | IRS PDF page | What it holds |
+| File | Source | What it holds |
 | --- | --- | --- |
-| `00-carter-cover.pdf` | 1 | Date of birth, Social Security benefits, REIT capital gain distribution, lived apart from spouse |
-| `01-liberty-trust-1099-r-code-q.pdf` | 4 | 1099-R, code Q (qualified Roth IRA) |
-| `02-jubilee-retirement-1099-r-code-g.pdf` | 5 | 1099-R, code G (direct rollover) |
+| `00-carter-cover.pdf` | IRS PDF page 1 | Date of birth, Social Security benefits, REIT capital gain distribution, lived apart from spouse |
+| `01-liberty-trust-1099-r-code-q.pdf` | values from IRS PDF page 4 | 1099-R, code Q (qualified Roth IRA) |
+| `02-jubilee-retirement-1099-r-code-g.pdf` | values from IRS PDF page 5 | 1099-R, code G (direct rollover) |
 | `03-example-reit-fund-1099-div.pdf` | made by us | 1099-DIV, box 2a only (IRS fillable Copy B) |
 | `04-ssa-1099.pdf` | made by us | SSA-1099, net benefits $1,000 (drawn; SSA has no public blank) |
 
