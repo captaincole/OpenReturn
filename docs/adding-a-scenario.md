@@ -22,6 +22,12 @@ them fake: invented names, employers, payers, and amounts. Put one PDF
 per document in `apps/agent/tests/scenarios/<name>/docs/`. For an
 example generator, see `tests/scenarios/marcus/generate-docs.ts`.
 
+Every document value in `facts.ts` must come from one of these files. If
+your source gives only an amount (an SSA-1099 or a 1099-DIV, for
+example), make that document yourself. Use the official form layout
+where possible. Do not combine documents: a source with many pages
+becomes one file per document.
+
 ### 2. Identify the scenario
 
 Decide what the return looks like: filing status, state, which forms
