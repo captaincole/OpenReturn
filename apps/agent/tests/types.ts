@@ -61,6 +61,13 @@ export interface Scenario {
    * values (jordan).
    */
   preparer?: Preparer;
+  /**
+   * "unverified": no answer key (no CPA return, no filed-return check).
+   * The expected values are hand-checked, locked engine output. The
+   * scenario still runs in the full suite, and its summary line says
+   * "unverified". Absent: the values come from a verified source.
+   */
+  verification?: "unverified";
   /** Stable id used as the synthetic user for these in-memory fixtures. */
   userId: string;
   facts: TaxFactRow[];
@@ -98,7 +105,7 @@ export interface ExpectedResults {
 
   /**
    * Rendered text widgets: fieldId → expected string written to the PDF
-   * widget. Money values render as integer strings (fmtMoney). Text
+   * widget. Money values render as whole-dollar strings (formatDollars). Text
    * fields render verbatim, with one exception: when an SSN/phone-style
    * value is longer than the widget's maxLength, the renderer strips the
    * separators. Write the post-render form here (e.g. "123456789", not

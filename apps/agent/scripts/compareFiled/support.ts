@@ -22,12 +22,14 @@
 import {
   HSA_COVERAGE_KEYS,
   PRIOR_YEAR_KEYS,
+  SPOUSE_KEYS,
   isDividendFact,
   isHsaDistributionFact,
   isInterestFact,
   isMiscIncomeFact,
   isReportedBasisFact,
   isRetirementDistributionFact,
+  isSocialSecurityFact,
   isTradeFact,
   isW2Fact,
 } from "../../src/engine/facts/index.js";
@@ -49,6 +51,7 @@ const DOCUMENT_FACTS = [
   isReportedBasisFact,
   isRetirementDistributionFact,
   isHsaDistributionFact,
+  isSocialSecurityFact,
 ];
 
 /*
@@ -59,6 +62,7 @@ const DOCUMENT_FACTS = [
 export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(HSA_COVERAGE_KEYS),
   ...Object.values(PRIOR_YEAR_KEYS),
+  SPOUSE_KEYS.livedApartAllYear,
   "prior_year.ca_agi",
   "medical.expenses_total",
   "mortgage.interest_form_1098",
@@ -100,8 +104,8 @@ const DECISION_PATTERNS = [
 const OUT_OF_SCOPE: { key: string; supported: (v: unknown) => boolean; detail: string }[] = [
   {
     key: "decisions.scope.filing_status",
-    supported: (v) => v === "single",
-    detail: "Only single filers are tested.",
+    supported: (v) => v === "single" || v === "married_filing_separately",
+    detail: "Only single filers are tested (married filing separately: one unverified scenario).",
   },
   {
     key: "decisions.scope.ca_residency",
