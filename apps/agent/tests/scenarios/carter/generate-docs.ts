@@ -47,6 +47,7 @@ const SSA = {
   box5: "$1,000.00",
   box6: "NONE",
   claimNumber: "400-00-1039A",
+  box3Description: "Paid by check or direct deposit   $1,000.00\n\nBenefits for 2025   $1,000.00",
 };
 
 /* Copy B widget names, from the IRS file's AcroForm. */
@@ -81,92 +82,137 @@ async function build1099Div(): Promise<Uint8Array> {
 
 /* ─── SSA-1099 (drawn) ─────────────────────────────────────────────── */
 
+/*
+ * Layout follows SSA's published sample: a centered title, the year in
+ * the header box, boxes 1–5 in two rows (box 5 shaded), then a tall
+ * box 3 description on the left and box 4 description and boxes 6–8
+ * stacked on the right. Coordinates are PDF points from the bottom left.
+ */
+const SSA_PAGE = { w: 612, h: 470 };
+const LEFT = 36;
+const RIGHT = 576;
+const MID = 306;
+
 interface Ctx {
   page: PDFPage;
   font: PDFFont;
   bold: PDFFont;
 }
 
-/* A labeled box: top-left at (x, y) in PDF points, label above value. */
-function box(ctx: Ctx, x: number, y: number, w: number, h: number, label: string, value = "") {
-  ctx.page.drawRectangle({
-    x,
-    y: y - h,
-    width: w,
+interface BoxOpts {
+  value?: string;
+  shaded?: boolean;
+  /* Bold, centered label (the two DESCRIPTION boxes). */
+  heading?: boolean;
+}
+
+/* A labeled box from x0 to x1, top edge at `top`, `h` points tall. */
+function box(
+  ctx: Ctx,
+  x0: number,
+  x1: number,
+  top: number,
+  h: number,
+  label: string,
+  o: BoxOpts = {},
+) {
+  const { page, font, bold } = ctx;
+  page.drawRectangle({
+    x: x0,
+    y: top - h,
+    width: x1 - x0,
     height: h,
+    borderWidth: o.shaded ? 1.6 : 0.8,
+    borderColor: rgb(0, 0, 0),
+    color: o.shaded ? rgb(0.88, 0.88, 0.88) : undefined,
+  });
+  const size = 7.5;
+  const labelFont = o.heading ? bold : font;
+  const lx = o.heading ? (x0 + x1 - labelFont.widthOfTextAtSize(label, size)) / 2 : x0 + 4;
+  page.drawText(label, { x: lx, y: top - 11, size, font: labelFont });
+  (o.value ?? "").split("\n").forEach((line, i) => {
+    page.drawText(line, { x: x0 + 8, y: top - 28 - i * 14, size: 10, font });
+  });
+}
+
+function drawSsaHeader(ctx: Ctx) {
+  const { page, font, bold } = ctx;
+  const title = "FORM SSA-1099 – SOCIAL SECURITY BENEFIT STATEMENT";
+  const tw = bold.widthOfTextAtSize(title, 14);
+  page.drawText(title, { x: (SSA_PAGE.w - tw) / 2, y: 440, size: 14, font: bold });
+  page.drawRectangle({
+    x: LEFT,
+    y: 385,
+    width: RIGHT - LEFT,
+    height: 40,
     borderWidth: 0.8,
     borderColor: rgb(0, 0, 0),
   });
-  ctx.page.drawText(label, { x: x + 4, y: y - 10, size: 7, font: ctx.bold });
-  value.split("\n").forEach((line, i) => {
-    ctx.page.drawText(line, { x: x + 8, y: y - 26 - i * 12, size: 10, font: ctx.font });
-  });
-}
-
-function drawSsaHeader(ctx: Ctx, top: number) {
-  const { page, bold, font } = ctx;
-  page.drawText("FORM SSA-1099 - SOCIAL SECURITY BENEFIT STATEMENT", {
-    x: 40,
-    y: top,
-    size: 12,
-    font: bold,
-  });
-  page.drawText("2025", { x: 520, y: top, size: 16, font: bold });
-  page.drawText("PART OF YOUR SOCIAL SECURITY BENEFITS SHOWN IN BOX 5 MAY BE TAXABLE INCOME.", {
-    x: 40,
-    y: top - 16,
-    size: 8,
+  page.drawText("2025", { x: LEFT + 6, y: 394, size: 28, font: bold });
+  page.drawText("• PART OF YOUR SOCIAL SECURITY BENEFITS SHOWN IN BOX 5 MAY BE TAXABLE INCOME.", {
+    x: 120,
+    y: 410,
+    size: 9,
     font,
   });
-  page.drawText("SEE THE REVERSE FOR MORE INFORMATION.", { x: 40, y: top - 26, size: 8, font });
+  page.drawText("• SEE THE REVERSE FOR MORE INFORMATION.", { x: 120, y: 398, size: 9, font });
 }
 
-function drawSsaBoxes(ctx: Ctx, top: number) {
-  box(ctx, 40, top, 330, 40, "Box 1. Name", CARTER.name);
-  box(ctx, 370, top, 200, 40, "Box 2. Beneficiary's Social Security Number", CARTER.ssn);
-  const row2 = top - 40;
-  box(ctx, 40, row2, 177, 40, "Box 3. Benefits Paid in 2025", SSA.box3);
-  box(ctx, 217, row2, 177, 40, "Box 4. Benefits Repaid to SSA in 2025", SSA.box4);
-  box(ctx, 394, row2, 176, 40, "Box 5. Net Benefits for 2025 (Box 3 minus Box 4)", SSA.box5);
-  const row3 = row2 - 40;
+function drawSsaBoxes(ctx: Ctx) {
+  box(ctx, LEFT, 396, 385, 36, "Box 1. Name", { value: CARTER.name });
+  box(ctx, 396, RIGHT, 385, 36, "Box 2. Beneficiary's Social Security Number", {
+    value: CARTER.ssn,
+  });
+  box(ctx, LEFT, 216, 349, 36, "Box 3. Benefits Paid in 2025", { value: SSA.box3 });
+  box(ctx, 216, 396, 349, 36, "Box 4. Benefits Repaid to SSA in 2025", { value: SSA.box4 });
+  box(ctx, 396, RIGHT, 349, 36, "Box 5. Net Benefits for 2025 (Box 3 minus Box 4)", {
+    value: SSA.box5,
+    shaded: true,
+  });
+  box(ctx, LEFT, MID, 313, 253, "DESCRIPTION OF AMOUNT IN BOX 3", {
+    value: SSA.box3Description,
+    heading: true,
+  });
+  box(ctx, MID, RIGHT, 313, 93, "DESCRIPTION OF AMOUNT IN BOX 4", {
+    value: SSA.box4,
+    heading: true,
+  });
+  box(ctx, MID, RIGHT, 220, 40, "Box 6. Voluntary Federal Income Tax Withheld", {
+    value: SSA.box6,
+  });
+  box(ctx, MID, RIGHT, 180, 70, "Box 7. Address", {
+    value: `${CARTER.name}\n${CARTER.street}\n${CARTER.cityStateZip}`,
+  });
   box(
     ctx,
-    40,
-    row3,
-    265,
-    70,
-    "DESCRIPTION OF AMOUNT IN BOX 3",
-    "Paid by check or direct deposit  $1,000.00\nBenefits for 2025  $1,000.00",
-  );
-  box(ctx, 305, row3, 265, 70, "DESCRIPTION OF AMOUNT IN BOX 4", "NONE");
-  const row4 = row3 - 70;
-  box(ctx, 40, row4, 265, 40, "Box 6. Voluntary Federal Income Tax Withheld", SSA.box6);
-  box(
-    ctx,
-    305,
-    row4,
-    265,
-    40,
+    MID,
+    RIGHT,
+    110,
+    50,
     "Box 8. Claim Number (Use this number if you need to contact SSA.)",
-    SSA.claimNumber,
+    { value: SSA.claimNumber },
   );
-  box(ctx, 40, row4 - 40, 530, 52, "Box 7. Address", `${CARTER.street}\n${CARTER.cityStateZip}`);
 }
 
 async function buildSsa1099(): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
-  const page = doc.addPage([612, 396]);
+  const page = doc.addPage([SSA_PAGE.w, SSA_PAGE.h]);
   const ctx: Ctx = {
     page,
     font: await doc.embedFont(StandardFonts.Helvetica),
     bold: await doc.embedFont(StandardFonts.HelveticaBold),
   };
-  drawSsaHeader(ctx, 360);
-  drawSsaBoxes(ctx, 320);
-  page.drawText("DO NOT RETURN THIS FORM TO SSA OR IRS", { x: 40, y: 40, size: 8, font: ctx.bold });
+  drawSsaHeader(ctx);
+  drawSsaBoxes(ctx);
+  page.drawText("DO NOT RETURN THIS FORM TO SSA OR IRS", {
+    x: LEFT,
+    y: 44,
+    size: 8,
+    font: ctx.bold,
+  });
   page.drawText("Test document for the Summa carter scenario (IRS ATS 8). Not issued by SSA.", {
-    x: 40,
-    y: 24,
+    x: LEFT,
+    y: 30,
     size: 7,
     font: ctx.font,
     color: rgb(0.4, 0.4, 0.4),
