@@ -32,8 +32,8 @@ Form 540 can compute:
 - Mailing address is the home address.
 
 The package has no 1099-DIV and no SSA-1099. The IRS e-file test needs
-only their amounts, which the cover page gives. `generate-docs.ts` makes
-the two documents from those amounts (see Input documents below). The
+only their amounts, which the cover page gives. We made the two
+documents from those amounts (see Input documents below). The
 1099-DIV payer ("Example REIT Fund"), its address, TIN, and account
 number are invented.
 
@@ -46,8 +46,8 @@ number are invented.
 
 ## Input documents
 
-File 00 is page 1 of the IRS PDF, unchanged. Files 01–04 are made by
-`generate-docs.ts`, with the California address. The 1099-Rs (01–02)
+File 00 is page 1 of the IRS PDF, unchanged. We made files 01–04, with
+the California address. The 1099-Rs (01–02)
 carry the IRS PDF's box values in a payer-style statement layout; their
 plan names, phone numbers, and account numbers are invented.
 

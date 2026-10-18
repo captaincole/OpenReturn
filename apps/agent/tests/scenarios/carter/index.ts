@@ -11,7 +11,7 @@
  *
  * Input documents, one file each: 00-carter-cover.pdf is the IRS cover
  * page (DOB, Social Security, REIT distribution, lived apart).
- * generate-docs.ts makes the rest with the California address: the two
+ * We made the rest, with the California address: the two
  * 1099-Rs (01, 02) from the IRS PDF's values, and the 1099-DIV (03) and
  * SSA-1099 (04), which the package gives only as amounts on the cover.
  *

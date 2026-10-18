@@ -39,7 +39,7 @@ const idFact = (suffix: string, value: string) =>
   identityFact({ userId: CARTER_USER_ID, taxYear: CARTER_TAX_YEAR, suffix, value });
 
 /* docs/01-liberty-trust-1099-r-code-q.pdf (values from the IRS PDF, page 4; plan name invented). */
-export const libertyTrust: RetirementDistributionFactValue = {
+const libertyTrust: RetirementDistributionFactValue = {
   payerName: "Liberty Trust Company",
   payerTin: "00-0000009",
   planName: "LIBERTY TRUST ROTH IRA",
@@ -51,7 +51,7 @@ export const libertyTrust: RetirementDistributionFactValue = {
 };
 
 /* docs/02-jubilee-retirement-1099-r-code-g.pdf (values from the IRS PDF, page 5; plan name invented). */
-export const jubileeRetirement: RetirementDistributionFactValue = {
+const jubileeRetirement: RetirementDistributionFactValue = {
   payerName: "Jubilee Retirement Fund",
   payerTin: "00-0000009",
   planName: "JUBILEE RETIREMENT PLAN",
@@ -63,7 +63,7 @@ export const jubileeRetirement: RetirementDistributionFactValue = {
 };
 
 /*
- * docs/03-example-reit-fund-1099-div.pdf (made by generate-docs.ts from the cover page:
+ * docs/03-example-reit-fund-1099-div.pdf (made by us from the cover page:
  * "a 1099-DIV for total gain distribution from Real Estate Investment Trust").
  */
 const reitDiv: DividendFactValue = {
@@ -73,7 +73,7 @@ const reitDiv: DividendFactValue = {
 };
 
 /*
- * docs/04-ssa-1099.pdf (made by generate-docs.ts from the cover page:
+ * docs/04-ssa-1099.pdf (made by us from the cover page:
  * "$1,000 in Social Security benefits").
  */
 const ssa: SocialSecurityFactValue = {
