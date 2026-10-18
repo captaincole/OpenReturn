@@ -19,6 +19,7 @@ scenario also covers Form 540.
 | Home address | 807 Sahara Drive, Las Vegas, NV 89101 | 807 Sahara Drive, Sacramento, CA 95814 |
 | Recipient address on both 1099-Rs | 807 Sahara Drive, Las Vegas, NV 89117 | 807 Sahara Drive, Sacramento, CA 95814 |
 | Payer addresses on the 1099-Rs | Las Vegas, NV | unchanged |
+| 1099-R layout | IRS official form | payer-style statement (Copies B, C, 2) |
 
 ## Answers the package does not give
 
@@ -45,15 +46,16 @@ number are invented.
 
 ## Input documents
 
-Files 00–02 are pages of the IRS PDF, split out unchanged, so they still
-show the Nevada addresses. Files 03–04 are made by `generate-docs.ts`,
-with the California address.
+File 00 is page 1 of the IRS PDF, unchanged. Files 01–04 are made by
+`generate-docs.ts`, with the California address. The 1099-Rs (01–02)
+carry the IRS PDF's box values in a payer-style statement layout; their
+plan names, phone numbers, and account numbers are invented.
 
-| File | IRS PDF page | What it holds |
+| File | Source | What it holds |
 | --- | --- | --- |
-| `00-carter-cover.pdf` | 1 | Date of birth, Social Security benefits, REIT capital gain distribution, lived apart from spouse |
-| `01-liberty-trust-1099-r-code-q.pdf` | 4 | 1099-R, code Q (qualified Roth IRA) |
-| `02-jubilee-retirement-1099-r-code-g.pdf` | 5 | 1099-R, code G (direct rollover) |
+| `00-carter-cover.pdf` | IRS PDF page 1 | Date of birth, Social Security benefits, REIT capital gain distribution, lived apart from spouse |
+| `01-liberty-trust-1099-r-code-q.pdf` | values from IRS PDF page 4 | 1099-R, code Q (qualified Roth IRA) |
+| `02-jubilee-retirement-1099-r-code-g.pdf` | values from IRS PDF page 5 | 1099-R, code G (direct rollover) |
 | `03-example-reit-fund-1099-div.pdf` | made by us | 1099-DIV, box 2a only (IRS fillable Copy B) |
 | `04-ssa-1099.pdf` | made by us | SSA-1099, net benefits $1,000 (drawn; SSA has no public blank) |
 

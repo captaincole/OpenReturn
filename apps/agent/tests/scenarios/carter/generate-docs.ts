@@ -1,11 +1,16 @@
 /*
- * Make the two carter input documents that the IRS package does not
- * include. The ATS cover page states their amounts only, because the
- * IRS e-file test needs just the 1040 line values.
+ * Make carter's input documents. The IRS package does not include a
+ * 1099-DIV or SSA-1099 (the ATS cover page states only their amounts,
+ * because the e-file test needs just the 1040 line values), and its
+ * 1099-Rs show the Nevada address.
  *
  *   npx tsx tests/scenarios/carter/generate-docs.ts
  *
  * Emits:
+ *   docs/01-liberty-trust-1099-r-code-q.pdf, docs/02-jubilee-retirement-
+ *     1099-r-code-g.pdf — payer-style statements (tests/helpers/
+ *     form1099RDoc.ts) from the facts.ts values, which are the IRS
+ *     PDF's (pages 4 and 5). Plan names, phones, and accounts are invented.
  *   docs/03-example-reit-fund-1099-div.pdf — Copy B of the official IRS
  *     fillable 1099-DIV (Rev. January 2024, downloaded from irs.gov when
  *     the script runs), filled and flattened. Box 2a only, as the cover
@@ -21,6 +26,8 @@ import { writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from "pdf-lib";
+import { render1099R, type Form1099RMailing } from "../../helpers/form1099RDoc.js";
+import { jubileeRetirement, libertyTrust } from "./facts.js";
 
 const DOCS = join(dirname(fileURLToPath(import.meta.url)), "docs");
 const IRS_1099_DIV_URL = "https://www.irs.gov/pub/irs-pdf/f1099div.pdf";
@@ -49,6 +56,27 @@ const SSA = {
   claimNumber: "400-00-1039A",
   box3Description: "Paid by check or direct deposit   $1,000.00\n\nBenefits for 2025   $1,000.00",
 };
+
+/* Mailing details for the two 1099-Rs. Box values come from facts.ts. */
+const r1099 = (payerAddress: string[], phone: string, account: string): Form1099RMailing => ({
+  taxYear: 2025,
+  payerAddress,
+  payerPhone: phone,
+  recipientName: CARTER.name,
+  recipientAddress: [CARTER.street, CARTER.cityStateZip],
+  recipientTinMasked: "XXX-XX-1039",
+  account,
+});
+const LIBERTY = r1099(
+  ["6000 FREMONT STREET", "LAS VEGAS NV 89101"],
+  "1-800-555-0101",
+  "LT-0001039",
+);
+const JUBILEE = r1099(
+  ["1347 CARSON STREET", "LAS VEGAS NV 89104"],
+  "1-800-555-0102",
+  "JRF-0001039",
+);
 
 /* Copy B widget names, from the IRS file's AcroForm. */
 const DIV_FIELDS: Record<string, string> = {
@@ -222,6 +250,8 @@ async function buildSsa1099(): Promise<Uint8Array> {
 
 async function main() {
   const outputs: [string, Uint8Array][] = [
+    ["01-liberty-trust-1099-r-code-q.pdf", await render1099R(libertyTrust, LIBERTY)],
+    ["02-jubilee-retirement-1099-r-code-g.pdf", await render1099R(jubileeRetirement, JUBILEE)],
     ["03-example-reit-fund-1099-div.pdf", await build1099Div()],
     ["04-ssa-1099.pdf", await buildSsa1099()],
   ];

@@ -38,10 +38,11 @@ const fact = (category: string, key: string, value: unknown, sourceNote: string)
 const idFact = (suffix: string, value: string) =>
   identityFact({ userId: CARTER_USER_ID, taxYear: CARTER_TAX_YEAR, suffix, value });
 
-// docs/01-liberty-trust-1099-r-code-q.pdf
-const libertyTrust: RetirementDistributionFactValue = {
+/* docs/01-liberty-trust-1099-r-code-q.pdf (values from the IRS PDF, page 4; plan name invented). */
+export const libertyTrust: RetirementDistributionFactValue = {
   payerName: "Liberty Trust Company",
   payerTin: "00-0000009",
+  planName: "LIBERTY TRUST ROTH IRA",
   box1: 35800,
   box2a: 0,
   box4: 0,
@@ -49,10 +50,11 @@ const libertyTrust: RetirementDistributionFactValue = {
   box7IraSepSimple: false,
 };
 
-// docs/02-jubilee-retirement-1099-r-code-g.pdf
-const jubileeRetirement: RetirementDistributionFactValue = {
+/* docs/02-jubilee-retirement-1099-r-code-g.pdf (values from the IRS PDF, page 5; plan name invented). */
+export const jubileeRetirement: RetirementDistributionFactValue = {
   payerName: "Jubilee Retirement Fund",
   payerTin: "00-0000009",
+  planName: "JUBILEE RETIREMENT PLAN",
   box1: 20300,
   box2a: 10300,
   box4: 2555,
