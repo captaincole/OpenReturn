@@ -9,6 +9,11 @@
  * 1099-DIV payer name, and the California answers the package does not
  * give.
  *
+ * The input documents are split out of the IRS PDF, one file each:
+ * 00-carter-cover.pdf (DOB, Social Security, REIT distribution, lived
+ * apart), 01-…-1099-r-code-q.pdf, and 02-…-1099-r-code-g.pdf. The
+ * split pages are unchanged, so they still show the Nevada address.
+ *
  * UNVERIFIED. The IRS package is an e-file schema test, not an answer
  * key, and no CPA has prepared this return. The expected values are
  * the engine's output, checked by hand line by line (see expected.ts),

@@ -38,7 +38,7 @@ const fact = (category: string, key: string, value: unknown, sourceNote: string)
 const idFact = (suffix: string, value: string) =>
   identityFact({ userId: CARTER_USER_ID, taxYear: CARTER_TAX_YEAR, suffix, value });
 
-// docs/irs-ats-2025-scenario-8.pdf, page 4
+// docs/01-liberty-trust-1099-r-code-q.pdf
 const libertyTrust: RetirementDistributionFactValue = {
   payerName: "Liberty Trust Company",
   payerTin: "00-0000009",
@@ -49,7 +49,7 @@ const libertyTrust: RetirementDistributionFactValue = {
   box7IraSepSimple: false,
 };
 
-// docs/irs-ats-2025-scenario-8.pdf, page 5
+// docs/02-jubilee-retirement-1099-r-code-g.pdf
 const jubileeRetirement: RetirementDistributionFactValue = {
   payerName: "Jubilee Retirement Fund",
   payerTin: "00-0000009",
@@ -60,13 +60,13 @@ const jubileeRetirement: RetirementDistributionFactValue = {
   box7IraSepSimple: false,
 };
 
-// Cover page: "a 1099-DIV for total gain distribution from Real Estate Investment Trust".
+// docs/00-carter-cover.pdf: "a 1099-DIV for total gain distribution from Real Estate Investment Trust".
 const reitDiv: DividendFactValue = {
   payerName: "Example REIT Fund",
   box2a: 7500,
 };
 
-// Cover page: "$1,000 in Social Security benefits".
+// docs/00-carter-cover.pdf: "$1,000 in Social Security benefits".
 const ssa: SocialSecurityFactValue = {
   payerName: "Social Security Administration",
   box5: 1000,
@@ -82,9 +82,24 @@ export const carterFacts: TaxFactRow[] = [
   idFact("address.state", "CA"),
   idFact("address.zip", "95814"),
   idFact("address.county", "Sacramento"),
-  fact("identity", SPOUSE_KEYS.firstName, "Elizabeth", "1040 header (docs, page 2)."),
-  fact("identity", SPOUSE_KEYS.lastName, "Lewis", "1040 header (docs, page 2)."),
-  fact("identity", SPOUSE_KEYS.ssn, "400-00-1057", "1040 header (docs, page 2)."),
+  fact(
+    "identity",
+    SPOUSE_KEYS.firstName,
+    "Elizabeth",
+    "IRS draft 1040 header (docs/irs-ats-2025-scenario-8.pdf, page 2).",
+  ),
+  fact(
+    "identity",
+    SPOUSE_KEYS.lastName,
+    "Lewis",
+    "IRS draft 1040 header (docs/irs-ats-2025-scenario-8.pdf, page 2).",
+  ),
+  fact(
+    "identity",
+    SPOUSE_KEYS.ssn,
+    "400-00-1057",
+    "IRS draft 1040 header (docs/irs-ats-2025-scenario-8.pdf, page 2).",
+  ),
   fact(
     "filing_status",
     SPOUSE_KEYS.livedApartAllYear,
@@ -95,13 +110,13 @@ export const carterFacts: TaxFactRow[] = [
     "retirement",
     makeRetirementDistributionFactKey("liberty-trust-company", "code-q"),
     libertyTrust,
-    "1099-R from Liberty Trust Company (docs, page 4).",
+    "1099-R from Liberty Trust Company (docs/01-liberty-trust-1099-r-code-q.pdf).",
   ),
   fact(
     "retirement",
     makeRetirementDistributionFactKey("jubilee-retirement-fund", "code-g"),
     jubileeRetirement,
-    "1099-R from Jubilee Retirement Fund (docs, page 5).",
+    "1099-R from Jubilee Retirement Fund (docs/02-jubilee-retirement-1099-r-code-g.pdf).",
   ),
   fact(
     "investment_income",

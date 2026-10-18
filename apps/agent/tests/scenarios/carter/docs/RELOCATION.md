@@ -40,3 +40,18 @@ cover page gives the net benefits ($1,000).
   code Q (qualified Roth IRA) distribution. Summa does not model
   qualified charitable distributions. The taxable amount (line 4b) is
   0 either way, because box 2a of that 1099-R is 0.
+
+## Input documents
+
+The IRS PDF is split into one file per input document. The pages are
+unchanged, so they still show the Nevada addresses.
+
+| File | IRS PDF page | What it holds |
+| --- | --- | --- |
+| `00-carter-cover.pdf` | 1 | Date of birth, Social Security benefits, REIT capital gain distribution, lived apart from spouse |
+| `01-liberty-trust-1099-r-code-q.pdf` | 4 | 1099-R, code Q (qualified Roth IRA) |
+| `02-jubilee-retirement-1099-r-code-g.pdf` | 5 | 1099-R, code G (direct rollover) |
+
+Pages 2–3 are the IRS draft Form 1040. They are not an input document,
+but they give the spouse's name and SSN. They stay in
+`irs-ats-2025-scenario-8.pdf` only.
