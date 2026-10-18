@@ -12,7 +12,7 @@ import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { lookupTax } from "../../../data/taxTable.js";
 import { defineForm } from "../../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../../money.js";
-import { SSN } from "../../../values.js";
+import { SSN, type FilingStatus } from "../../../values.js";
 import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitation.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
 import type { Form540 } from "./types.js";
@@ -22,6 +22,15 @@ import type { Form540 } from "./types.js";
  * run the registration once at startup. The call is idempotent; a
  * second call overwrites in place.
  */
+/* Engine filing status → the 540 catalog's radio option value. */
+const CA_FILING_STATUS_OPTION = {
+  single: "single",
+  married_filing_jointly: "married_rdp_filing_jointly",
+  married_filing_separately: "married_rdp_filing_separately",
+  head_of_household: "head_of_household",
+  qualifying_surviving_spouse: "qualifying_surviving_spouse_rdp",
+} as const satisfies Record<FilingStatus, string>;
+
 export function register(): void {
   defineForm<Form540, Form540FilingInfo>("form-540", {
     bindings: {
@@ -60,8 +69,13 @@ export function register(): void {
         info.mailingSameAsResidence ? undefined : info.homeAddressState,
       "header.residence_zip": (_, info) =>
         info.mailingSameAsResidence ? undefined : info.homeAddressZip,
-      // Filing-status radio group, driven by the canonical filing_status decision.
-      "header.filing_status": (_, info) => info.filingStatus,
+      /*
+       * Filing-status radio group, driven by the canonical filing_status
+       * decision. MANUAL EDIT: the 540 catalog names the married and QSS
+       * options with "rdp"; map the engine value to the option value.
+       */
+      "header.filing_status": (_, info) =>
+        info.filingStatus ? CA_FILING_STATUS_OPTION[info.filingStatus] : undefined,
       /*
        * MANUAL EDIT: AI originally returned the DOLLAR AMOUNT here to
        * dodge a multiply rule. Typed bindings do the multiply cleanly:
@@ -79,6 +93,37 @@ export function register(): void {
         const count = f["line.7_personal_exemption_count"];
         return typeof count === "number" ? count * 153 : undefined;
       },
+      /*
+       * MANUAL EDIT: line 9 senior exemption — 1 when the taxpayer was 65
+       * or older on December 31, 2025. A joint return also counts the
+       * spouse, whose date of birth is not modeled, so MFJ / QSS block.
+       * Not 65: the line stays blank.
+       */
+      "line.9_senior_exemption_count": (_, info) => {
+        if (info.filingStatus === "married_filing_jointly") return undefined;
+        if (info.filingStatus === "qualifying_surviving_spouse") return undefined;
+        return info.taxpayerBornBeforeJan2_1961 === true ? 1 : undefined;
+      },
+      "line.9_senior_exemption_amount": (f) => {
+        const count = f["line.9_senior_exemption_count"];
+        return typeof count === "number" ? count * 153 : undefined;
+      },
+      /*
+       * MANUAL EDIT: married filing separately (line 3) — spouse's SSN in
+       * the header, full name on line 3. Joint-return spouse name fields
+       * are not modeled yet.
+       */
+      "header.spouse_ssn": (_, info) =>
+        info.filingStatus === "married_filing_separately" ||
+        info.filingStatus === "married_filing_jointly"
+          ? info.spouseSSN
+          : undefined,
+      "header.mfs_spouse_rdp_name_and_ssn": (_, info) =>
+        info.filingStatus === "married_filing_separately" &&
+        info.spouseFirstName &&
+        info.spouseLastName
+          ? `${info.spouseFirstName} ${info.spouseLastName}`
+          : undefined,
       // Page 2 repeats the header SSN.
       "page2.taxpayer_ssn": (_, info) => info.taxpayerSSN,
       // MANUAL EDIT: page 2 reprints the taxpayer's full name above the SSN.
@@ -110,7 +155,7 @@ export function register(): void {
         const v = f["schedule-ca.3.line.c27_additions"];
         return typeof v === "number" ? v : 0;
       },
-      // Line 11 = exemption amounts on lines 7 + 8 + 9 + 10. The blind/senior/dependent lines are unsupported; sum() treats them as 0.
+      // Line 11 = exemption amounts on lines 7 + 8 + 9 + 10. Blind and dependent lines are unsupported; sum() treats them as 0.
       "line.11_total_exemption_amount": (f) =>
         sum(
           f["line.7_personal_exemption_amount"],
@@ -179,8 +224,8 @@ export function register(): void {
       /*
        * MANUAL EDIT: line 32 = line 11, limited by the AGI Limitation
        * Worksheet when line 13 is over the filing-status threshold.
-       * Blind/senior (lines 8, 9) and dependents (line 10) count as 0
-       * until those inputs exist.
+       * Blind (line 8) and dependents (line 10) count as 0 until those
+       * inputs exist.
        */
       "line.32_exemption_credits": (f, info) => {
         const agi = f["line.13_federal_agi"];
@@ -191,7 +236,12 @@ export function register(): void {
         return caExemptionCreditsAfterLimit({
           filingStatus: info.filingStatus,
           federalAgi: agi,
-          personalCount: count,
+          // Line f: the number of exemptions in the boxes on lines 7, 8, and 9.
+          personalCount: sum(
+            count,
+            f["line.8_blind_exemption_count"],
+            f["line.9_senior_exemption_count"],
+          ),
           personalAmount: sum(
             f["line.7_personal_exemption_amount"],
             f["line.8_blind_exemption_amount"],
@@ -397,8 +447,6 @@ export function register(): void {
         "No MFJ/RDP scenario yet — spouse identity facts are not ingested.",
       "header.spouse_suffix":
         "No MFJ/RDP scenario yet — spouse suffix field unsupported until we ingest spouse identity facts.",
-      "header.spouse_ssn":
-        "No MFJ/RDP scenario yet — spouse SSN/ITIN field unsupported until we ingest spouse identity facts.",
       "header.additional_information":
         "Free-text supplemental field with no defined fact or decision mapping; rarely populated and scenario-dependent.",
       "header.principal_business_activity_code":
@@ -425,18 +473,12 @@ export function register(): void {
         "No scenario yet for qualifying surviving spouse/RDP with a deceased spouse — year-of-death fact not ingested.",
       "header.qualifying_surviving_spouse_instructions_ref":
         "Static instructions reference label on the form; no computable value — no scenario for QSS filing status with deceased spouse data ingested.",
-      "header.mfs_spouse_rdp_name_and_ssn":
-        "No MFS scenario yet — spouse/RDP name and SSN for married filing separately not ingested.",
       "header.claimed_as_dependent":
         "No scenario yet where the taxpayer themselves is claimed as a dependent by another person — no fact or decision models this.",
       "line.8_blind_exemption_count":
         "No blind/visual-impairment fact ingested yet. Need a 'disability.blind' or similar fact category before this can be computed.",
       "line.8_blind_exemption_amount":
         "Depends on line 8 blind exemption count which has no ingested fact path yet.",
-      "line.9_senior_exemption_count":
-        "While identity.dob exists for the primary taxpayer, computing the senior count (1 or 2) also requires spouse DOB for MFJ scenarios, and no MFJ/spouse-DOB ingestion path exists yet. Deferring until a senior-taxpayer scenario is built.",
-      "line.9_senior_exemption_amount":
-        "Depends on line 9 senior exemption count which is unsupported until a senior/MFJ scenario is ingested.",
       "dependents.dep1_first_name":
         "No dependent data ingestion path exists yet. Need a dependents fact category before any dependent fields can be populated.",
       "dependents.dep2_first_name":

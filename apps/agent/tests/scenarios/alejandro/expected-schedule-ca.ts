@@ -25,19 +25,16 @@ export const alejandroScheduleCaExpected: ExpectedResults = {
     "schedule-ca.0.line.3b_federal": 385, // ordinary dividends
     "schedule-ca.0.line.3b_subtractions": 0,
     "schedule-ca.0.line.3b_additions": 0,
-    "schedule-ca.0.line.4b_federal": 0, // IRA distributions (none)
-    "schedule-ca.0.line.5b_federal": 0, // pensions (none)
-    "schedule-ca.0.line.6b_federal": 0, // social security (none)
     "schedule-ca.0.line.7a_federal": 2550, // capital gain (from Schedule D)
     "schedule-ca.0.line.7a_subtractions": 0,
     "schedule-ca.0.line.7a_additions": 0,
+    // Lines 4b, 5b, 6b (no IRA, pension, or Social Security) are blank on the CPA return.
 
     /*
      * ─── Part I, Section A + Section B totals (line 10) ─────────────
      * Section B (Schedule 1 income) is entirely blank for Alejandro.
      */
     "schedule-ca.2.line.b10_federal": 102935, // 100,000 + 385 + 2,550
-    "schedule-ca.2.line.b10_subtractions": 0,
 
     /*
      * ─── Part I, Section C (Schedule 1 adjustments) ─────────────────
@@ -45,7 +42,7 @@ export const alejandroScheduleCaExpected: ExpectedResults = {
      * Part I total) flows to Form 540 line 14 (col B) and line 16 (col C).
      */
     "schedule-ca.3.line.c27_federal": 102935,
-    "schedule-ca.3.line.c27_subtractions": 0,
+    // Column B totals (lines 10 and 27) are blank on the CPA return: no subtractions.
 
     /*
      * ─── Part II — Adjustments to Federal Itemized Deductions ───────

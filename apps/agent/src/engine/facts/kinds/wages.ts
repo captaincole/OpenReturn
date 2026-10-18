@@ -83,6 +83,11 @@ export function makeW2FactKey(employerSlug: string): string {
   return `employer.${employerSlug}`;
 }
 
+/** Key-only test, for reads that already filtered by category. */
+export function isW2FactKey(key: string): boolean {
+  return W2_KEY_RE.test(key);
+}
+
 export function isW2Fact(f: TaxFactRow): boolean {
   return f.category === W2_CATEGORY && W2_KEY_RE.test(f.key);
 }

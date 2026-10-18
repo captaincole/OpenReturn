@@ -22,11 +22,21 @@ import { CATALOGS, runCatalogFillCheck } from "./catalogFill.js";
 import { runScenario } from "./runScenario.js";
 import { alejandroScenario } from "./scenarios/alejandro/index.js";
 import { alexScenario } from "./scenarios/alex/index.js";
+import { carterScenario } from "./scenarios/carter/index.js";
 import { jordanScenario } from "./scenarios/jordan/index.js";
 import { marcusScenario } from "./scenarios/marcus/index.js";
 import type { RunResult, Scenario } from "./types.js";
 
-const SCENARIOS: Scenario[] = [alexScenario, alejandroScenario, marcusScenario, jordanScenario];
+const SCENARIOS: Scenario[] = [
+  alexScenario,
+  alejandroScenario,
+  marcusScenario,
+  jordanScenario,
+  carterScenario,
+];
+const UNVERIFIED = new Set(
+  SCENARIOS.filter((s) => s.verification === "unverified").map((s) => s.name),
+);
 
 async function main() {
   const filters = process.argv
@@ -72,7 +82,8 @@ async function main() {
       const nm =
         (r.knownMismatches?.length ? ` — ${r.knownMismatches.length} known mismatch(es)` : "") +
         (r.notModeled?.length ? ` — ${r.notModeled.length} line(s) not modeled` : "");
-      console.log(`✓ ${r.name.padEnd(colWidth)} ${r.durationMs}ms${nm}`);
+      const tag = UNVERIFIED.has(r.name) ? " — unverified (locked engine output)" : "";
+      console.log(`✓ ${r.name.padEnd(colWidth)} ${r.durationMs}ms${tag}${nm}`);
       /* The full list only when the scenario was asked for by name. */
       if (filters.length > 0) {
         for (const line of r.knownMismatches ?? []) console.log(`    known: ${line}`);

@@ -30,6 +30,7 @@
  */
 
 import type { Form1040FilingInfo } from "./federal/1040/filingInfo.js";
+import { resolve1040Info } from "./federal/1040/resolveInfo.js";
 import type { Form8889FilingInfo } from "./federal/8889/filingInfo.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
@@ -44,7 +45,6 @@ import type { ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
 import {
   makeResolverInputs,
-  resolve1040Info,
   resolve540Info,
   resolve8949Info,
   resolve8959Info,
@@ -100,6 +100,12 @@ export interface BaseFilingInfo {
   taxpayerLastName?: string;
   taxpayerSSN?: SSN;
   taxpayerDateOfBirth?: string; // plain string; not yet typed as the ISODate brand
+  /**
+   * Born before January 2, 1961: age 65 by the end of 2025. Drives the
+   * 1040 line 12d box (larger standard deduction) and the CA 540 line 9
+   * senior exemption. Undefined when the date of birth is unknown.
+   */
+  taxpayerBornBeforeJan2_1961?: boolean;
   taxpayerOccupation?: string;
   taxpayerPhone?: Phone;
   taxpayerEmail?: string;

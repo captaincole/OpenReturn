@@ -345,7 +345,7 @@ Everything lives under `apps/agent/scripts/`. Two subcommand CLIs (shared dispat
 | `smokeReview.ts` | three end-to-end review scenarios (npm: `smoke:review`) |
 | `inspectLastReview.ts` | dump most recent review-decision workflow run + trace |
 | `renderScenario.ts` | render every form in a scenario to PDF for spot-checking |
-| `lockScenario.ts --scenario=<name>` | rewrite a scenario's `expected.ts` engineFields from the engine's output — only after the output is verified (jordan pattern, see docs/contributing.md) |
+| `lockScenario.ts --scenario=<name>` | rewrite a scenario's `expected.ts` engineFields from the engine's output — only after the output is verified (jordan pattern, see docs/contributing.md); then `renderScenario.ts --scenario=<name> --golden` rewrites its golden PDFs |
 | `compareFiled/cli.ts <folder>` | private comparison kit: engine vs a real filed return (scenario format, kept outside the repo); writes a no-amounts report with root causes for the checker to send to a maintainer |
 
 ### Lessons from this build (read before changing the pipeline)

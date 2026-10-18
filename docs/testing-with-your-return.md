@@ -23,9 +23,10 @@ before you start (see [Contributing](contributing.md#who-can-contribute)).
 ## What Summa supports
 
 Tax year 2025, **single** filers, **California** full-year residents.
+Married filing separately has one unverified test scenario.
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
-1099-SA, 1098.
+1099-SA, 1098, SSA-1099.
 
 A return outside this list still helps: the report shows what your
 return needs that Summa lacks.

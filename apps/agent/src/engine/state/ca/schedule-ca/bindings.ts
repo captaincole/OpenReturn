@@ -18,6 +18,9 @@ function sumIfAny(...values: unknown[]): number | undefined {
   return values.some((v) => typeof v === "number") ? sum(...values) : undefined;
 }
 
+/* A federal amount read across forms: the number, or blank. */
+const federal = (v: unknown): number | undefined => (typeof v === "number" ? v : undefined);
+
 /*
  * register() wraps the defineForm side effect. Callers import it and
  * run the registration once at startup. The call is idempotent; a
@@ -76,6 +79,41 @@ export function register(): void {
           f["0.line.b6_additions"],
           f["2.line.b9a_additions"],
         ),
+      /*
+       * MANUAL EDIT (2026-10-18): column A for IRA, pension, and Social
+       * Security lines copies federal 1040 lines 4a–6b, blank when the
+       * federal line is blank (the CPA-golden convention). California
+       * excludes Social Security: column B takes the taxable amount
+       * from line 6b. Column B totals carry it to line 27, then to
+       * Form 540 line 14.
+       */
+      "0.line.4a_federal": (f) => federal(f["form-1040.line.4a"]),
+      "0.line.4b_federal": (f) => federal(f["form-1040.line.4b"]),
+      "0.line.5a_federal": (f) => federal(f["form-1040.line.5a"]),
+      "0.line.5b_federal": (f) => federal(f["form-1040.line.5b"]),
+      "0.line.6a_federal": (f) => federal(f["form-1040.line.6a"]),
+      "0.line.6b_federal": (f) => federal(f["form-1040.line.6b"]),
+      "0.line.6b_subtractions": (f) => federal(f["0.line.6b_federal"]),
+      "2.line.b10_subtractions": (f) =>
+        sumIfAny(
+          f["0.line.1z_subtractions"],
+          f["0.line.2b_subtractions"],
+          f["0.line.3b_subtractions"],
+          f["0.line.4b_subtractions"],
+          f["0.line.5b_subtractions"],
+          f["0.line.6b_subtractions"],
+          f["0.line.7a_subtractions"],
+          f["0.line.b2a_subtractions"],
+          f["0.line.b3_subtractions"],
+          f["0.line.b4_subtractions"],
+          f["0.line.b5_subtractions"],
+          f["0.line.b6_subtractions"],
+          f["2.line.b9a_subtractions"],
+        ),
+      "3.line.c27_subtractions": (f) => {
+        const total = f["2.line.b10_subtractions"];
+        return typeof total === "number" ? total - sum(f["3.line.c26_subtractions"]) : undefined;
+      },
       "3.line.c27_additions": (f) => {
         const total = f["2.line.b10_additions"];
         return typeof total === "number" ? total - sum(f["3.line.c26_additions"]) : undefined;
@@ -175,26 +213,10 @@ export function register(): void {
       "0.line.1z_subtractions":
         "Aggregate of line 1 subtractions; all upstream rows are unsupported.",
       "0.line.2a_federal": "Tax-exempt interest (federal 1040 line 2a) — no scenario modeled yet.",
-      "0.line.4a_federal":
-        "IRA distributions gross (federal 1040 line 4a) — no scenario modeled yet.",
-      "0.line.4b_federal":
-        "IRA distributions taxable amount (federal 1040 line 4b) — no scenario modeled yet.",
-      "0.line.5a_federal":
-        "Pensions and annuities gross (federal 1040 line 5a) — no scenario modeled yet.",
-      "0.line.5b_federal":
-        "Pensions and annuities taxable amount (federal 1040 line 5b) — no scenario modeled yet.",
-      "0.line.6a_federal":
-        "Social Security benefits gross (federal 1040 line 6a) — no scenario modeled yet.",
-      "0.line.6b_federal":
-        "Social Security benefits taxable amount (federal 1040 line 6b) — no scenario modeled yet.",
-      "0.line.6b_subtractions":
-        "CA fully excludes US Social Security from taxable income; depends on 6b_federal which is unsupported.",
       "2.line.b9a_subtractions":
         "Section B line 9a col B — aggregates other-income subtractions we don't model yet.",
       "2.line.b9a_additions":
         "Section B line 9a col C — aggregates other-income additions we don't model yet.",
-      "2.line.b10_subtractions":
-        "Line 10 col B (total income subtractions) — aggregate over unsupported subtraction rows.",
       "2.line.c11_subtractions":
         "CA disallows educator expenses; depends on line 11 col A federal echo which we don't ingest yet.",
       "2.line.c13_subtractions":
@@ -215,8 +237,6 @@ export function register(): void {
         "Line 26 col B — aggregates 11-23+25 col B; all upstream rows are unsupported.",
       "3.line.c26_additions":
         "Line 26 col C — aggregates 11-23+25 col C; all upstream rows are unsupported.",
-      "3.line.c27_subtractions":
-        "Line 27 col B (CA AGI subtractions) — aggregate over unsupported rows.",
       "4.page2.taxes_5d_federal":
         "Schedule CA Part II line 5d (taxes paid, col A) — itemized-deduction workflow not supported yet.",
       "4.page2.taxes_5e_subtractions":

@@ -22,7 +22,9 @@ export interface ScenarioForm {
    */
   formId: string;
   /**
-   * Path to a CPA-completed "golden" PDF for this scenario+form. The
+   * Path to a "golden" PDF for this scenario+form: the CPA's filled form,
+   * or, for a locked scenario, the engine's unflattened output
+   * (renderScenario --golden; see lockedGoldenPath). The
    * runner reads every filled widget from this PDF and diffs against our
    * render. This bypasses the catalog's fieldId→widget mapping, so
    * catalog mislabels surface immediately. Optional; without it, only
@@ -61,6 +63,13 @@ export interface Scenario {
    * values (jordan).
    */
   preparer?: Preparer;
+  /**
+   * "unverified": no answer key (no CPA return, no filed-return check).
+   * The expected values are hand-checked, locked engine output. The
+   * scenario still runs in the full suite, and its summary line says
+   * "unverified". Absent: the values come from a verified source.
+   */
+  verification?: "unverified";
   /** Stable id used as the synthetic user for these in-memory fixtures. */
   userId: string;
   facts: TaxFactRow[];
@@ -98,7 +107,7 @@ export interface ExpectedResults {
 
   /**
    * Rendered text widgets: fieldId → expected string written to the PDF
-   * widget. Money values render as integer strings (fmtMoney). Text
+   * widget. Money values render as whole-dollar strings (formatDollars). Text
    * fields render verbatim, with one exception: when an SSN/phone-style
    * value is longer than the widget's maxLength, the renderer strips the
    * separators. Write the post-render form here (e.g. "123456789", not

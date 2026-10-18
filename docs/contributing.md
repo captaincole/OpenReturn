@@ -76,9 +76,12 @@ never a tax-software export we cannot redistribute:
    ```bash
    cd apps/agent
    npx tsx scripts/lockScenario.ts --scenario=jordan
+   npx tsx scripts/renderScenario.ts --scenario=jordan --golden
    ```
 
-   From then on, any change to a locked line fails the tests until it is
+   The second command writes the golden PDFs (`docs/*-Golden.pdf`), which
+   the tests diff widget by widget. Commit them with `expected.ts`. From
+   then on, any change to a locked line fails the tests until it is
    verified again and re-locked. No real data enters the repo.
 
 ### Understanding The Form Engine

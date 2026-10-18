@@ -110,6 +110,14 @@ The expected values come from one of three sources:
 
 Then run `npm test -- <name>`.
 
+**Output goldens.** Every scenario commits one golden PDF per output
+form in `docs/`, and `index.ts` points `goldenPdfPath` at it. The tests
+diff every widget, so they also catch text and checkbox changes that
+`expected.ts` does not list. A CPA scenario uses the CPA's filled PDFs.
+A locked scenario writes its own:
+`npx tsx scripts/renderScenario.ts --scenario=<name> --golden`, then
+`goldenPdfPath: lockedGoldenPath("<name>", formId)`.
+
 ### 7. Fix the issues by hand
 
 - Render the forms (`renderScenario`) and compare them with the source
@@ -122,7 +130,8 @@ Then run `npm test -- <name>`.
 - A line you cannot fix now goes in `knownMismatches.ts`. When it starts
   to match, the test fails until you remove it, so the list only
   shrinks.
-- After the output is verified, lock it again with `lockScenario`.
+- After the output is verified, lock it again with `lockScenario`, and
+  write the goldens again with `renderScenario --golden`.
 
 ### 8. Finish
 
