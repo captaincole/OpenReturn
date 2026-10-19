@@ -40,7 +40,7 @@ engine/
 ├── registry.ts       composes federal + state into the global FORMS list
 ├── facts/            fact vocabulary: row shapes + per-kind key conventions
 ├── data/             federal tables (rate schedules, tax table, std deduction)
-├── worksheets/       shared computations (QDCG, …)
+├── worksheets/       IRS/FTB worksheets as pure functions (QDCG, 5695 line 31, …)
 ├── render/           PDF fill (fillFromCatalog + hand-verified widget overrides)
 ├── federal/          one folder per federal form + federal registry (index.ts)
 └── state/

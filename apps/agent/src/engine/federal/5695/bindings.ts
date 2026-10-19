@@ -4,8 +4,8 @@
  * form and its instructions (irs-5695-inst-2025).
  *
  * Modeled: Part II, the energy efficient home improvement credit
- * (lines 17–32), with the line 31 limit worksheet. Line 32 goes to
- * Schedule 3 line 5b. Not modeled: Part I (residential clean energy:
+ * (lines 17–32). Line 31 comes from worksheets/energyCreditLimit.ts.
+ * Line 32 goes to Schedule 3 line 5b. Not modeled: Part I (residential clean energy:
  * solar, wind, geothermal, battery, fuel cell; lines 1–16), enabling
  * property (line 25), and the joint-occupant and condominium boxes
  * (32a, 32b).
@@ -16,8 +16,8 @@
 
 import { defineForm } from "../../defineForm.js";
 import type { EnergyItemKind } from "../../facts/index.js";
-import { atLeast, sum } from "../../money.js";
 import { SSN } from "../../values.js";
+import { computeEnergyCreditLimit } from "../../worksheets/energyCreditLimit.js";
 import type { Form5695FilingInfo } from "./filingInfo.js";
 import {
   costOf,
@@ -32,6 +32,9 @@ import {
 import type { Form5695 } from "./types.js";
 
 type Info = Form5695FilingInfo;
+
+/* A cross-form read as a number; anything else is blank. */
+const num = (v: unknown): number | undefined => (typeof v === "number" ? v : undefined);
 
 /* Section A items of one kind, only when Section A qualifies. */
 const a = (info: Info, kind: EnergyItemKind) =>
@@ -216,24 +219,19 @@ export function register(): void {
         ),
       "3.line.29h": (f) => credit(f["3.line.29g"], 2000),
       "3.line.30": (f) => total(f["3.line.28"], f["3.line.29h"]),
-      /*
-       * Line 31: Energy Efficient Home Improvement Credit Limit
-       * Worksheet. Form 1040 line 18 minus the Schedule 3 credits that
-       * come first (lines 1, 2, 3, 4, 6d, 6l), at least 0.
-       */
+      // Line 31: the Energy Efficient Home Improvement Credit Limit Worksheet.
       "3.line.31": (f) => {
-        if (f["3.line.30"] === undefined) return undefined;
         const tax = f["form-1040.line.18"];
-        if (typeof tax !== "number") return undefined;
-        const before = sum(
-          f["schedule-3.0.line.1"],
-          f["schedule-3.0.line.2"],
-          f["schedule-3.0.line.3"],
-          f["schedule-3.0.line.4"],
-          f["schedule-3.0.line.6d"],
-          f["schedule-3.0.line.6l"],
-        );
-        return atLeast(0, tax - before);
+        if (f["3.line.30"] === undefined || typeof tax !== "number") return undefined;
+        return computeEnergyCreditLimit({
+          tax,
+          form8978Amount: num(f["schedule-3.0.line.6l"]),
+          foreignTaxCredit: num(f["schedule-3.0.line.1"]),
+          dependentCareCredit: num(f["schedule-3.0.line.2"]),
+          elderlyOrDisabledCredit: num(f["schedule-3.0.line.6d"]),
+          educationCredits: num(f["schedule-3.0.line.3"]),
+          retirementSavingsCredit: num(f["schedule-3.0.line.4"]),
+        }).line3;
       },
       "3.line.32": (f) =>
         f["3.line.30"] === undefined || f["3.line.31"] === undefined
