@@ -37,8 +37,18 @@ describe("roundDollars on calculated lines (decided 2026-10-16)", () => {
 describe("sum", () => {
   it("keeps cents and counts blank terms as 0", () => {
     expect(sum(9.59, 2287.09)).toBeCloseTo(2296.68, 10);
-    expect(sum(100, undefined, null, Number.NaN, "7")).toBe(100);
+    expect(sum(100, undefined, null, Number.NaN)).toBe(100);
     expect(sum()).toBe(0);
+  });
+
+  it("counts a non-numeric term as 0 (a documented trade-off)", () => {
+    /*
+     * Cross-form reads widen to `unknown`, so a text value can reach a
+     * sum. The engine drops it instead of throwing mid-evaluation. A
+     * string here is an upstream bug: the binding should read a numeric
+     * field. Pinned so a change to this choice is deliberate.
+     */
+    expect(sum(100, "7")).toBe(100);
   });
 });
 

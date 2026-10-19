@@ -19,6 +19,7 @@
     "smoke:review": "npm --prefix apps/agent run smoke:review",
     "doctor": "npm --prefix apps/agent run doctor",
     "test": "npm --prefix apps/agent test",
+    "test:unit": "npm --prefix apps/agent run test:unit",
     "e2e": "playwright test -c e2e",
     "install:all": "npm install && npm --prefix apps/agent install && npm --prefix apps/web install",
     "prepare": "husky",

@@ -215,6 +215,7 @@ export function register(): void {
         if (!info.filingStatus) return undefined;
         const income = f["line.19_taxable_income"];
         if (typeof income !== "number") return undefined;
+        if (income === 0) return 0; // the table starts at $1
         if (usesRateSchedule(income)) {
           return roundDollars(lookupCaRateSchedule(2025, info.filingStatus, income));
         }
