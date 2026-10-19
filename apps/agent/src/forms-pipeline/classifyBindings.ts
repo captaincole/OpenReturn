@@ -21,7 +21,8 @@ import { formatIndexedForm, loadCatalogIndex, type CatalogIndex } from "./catalo
 import { BINDING_TOOLS, SYSTEM_PROMPT } from "./classifyBindingsPrompt.js";
 import type { RetrievedFieldContext } from "./retrieveContext.js";
 
-const MODEL = "claude-opus-5-5";
+/* FORMS_PIPELINE_MODEL overrides the model (e.g. Haiku for a cheap draft). */
+const MODEL = process.env.FORMS_PIPELINE_MODEL ?? "claude-opus-5-5";
 const MAX_TOKENS = 16000;
 const FIELDS_PER_BATCH = 10;
 const CONCURRENCY = 3;

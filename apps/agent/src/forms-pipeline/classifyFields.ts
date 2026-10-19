@@ -23,7 +23,8 @@ import Anthropic from "@anthropic-ai/sdk";
 import type { ExtractedField } from "./extractFormFields.js";
 import { createStructured } from "./structuredOutput.js";
 
-const MODEL = "claude-sonnet-5-5";
+/* FORMS_PIPELINE_MODEL overrides the model (e.g. Haiku for a cheap draft). */
+const MODEL = process.env.FORMS_PIPELINE_MODEL ?? "claude-sonnet-5-5";
 const MAX_TOKENS = 16000;
 const FIELDS_PER_BATCH = 40;
 
