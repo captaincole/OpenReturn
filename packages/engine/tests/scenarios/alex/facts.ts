@@ -1,7 +1,7 @@
 /*
  * Alex Morales — facts (the "data").
  *
- * Sourced from `apps/agent/tests/scenarios/alex/docs/01-alex-w2.pdf`
+ * Sourced from `packages/engine/tests/scenarios/alex/docs/01-alex-w2.pdf`
  * (Brightside Logistics W-2). Box 1 ($79,000) sits below box 3/5
  * ($85,000) because of the $6,000 traditional 401(k) in box 12a code D.
  * Identity facts are what Luca captures during intake. Occupation, phone,

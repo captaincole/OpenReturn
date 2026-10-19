@@ -1,6 +1,6 @@
 /*
  * Alex's side of the conversation. The values match
- * apps/agent/tests/scenarios/alex/{facts,decisions}.ts.
+ * packages/engine/tests/scenarios/alex/{facts,decisions}.ts.
  *
  * The test does not measure how smart the model is, so the replies are
  * direct and specific. The opening turns give every fact up front. After

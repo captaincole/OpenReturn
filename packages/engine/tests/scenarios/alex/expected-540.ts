@@ -7,7 +7,7 @@
  * in the engine, catalog, bindings, FilingInfo resolver, or renderer.
  *
  * FieldIds come from the live catalog at
- * `apps/agent/forms/state/ca/540/catalog.json`. After a catalog
+ * `packages/engine/src/state/ca/540/catalog.json`. After a catalog
  * re-ingest, fieldId renames surface as compile errors in the typed
  * bindings (the Form540 interface no longer matches) and as runtime
  * mismatches here in the expected file.

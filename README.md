@@ -38,7 +38,7 @@ Summa is a local-capable AI harness that allows you to build all the documents y
   instruction text, which either cites the supporting passage or reopens the
   question. Numbers are never invented — an unknown becomes an open question,
   not a guess.
-- **Form Engine (apps/agent/src/engine)** — a solver. Takes the facts and decisions and computes the
+- **Form Engine (packages/engine)** — a solver. Takes the facts and decisions and computes the
   draft 1040/540 by the tax rules — deterministic code, no AI anywhere in the
   math. Every new fact re-computes the return, so your draft updates live as
   you talk, and the open questions it surfaces are what Luca asks you next.

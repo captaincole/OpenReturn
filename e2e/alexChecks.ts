@@ -1,6 +1,6 @@
 /*
  * Model checks for the Alex run: what was stored and generated vs the
- * fixtures in apps/agent/tests/scenarios/alex. Each returns a list of
+ * fixtures in packages/engine/tests/scenarios/alex. Each returns a list of
  * problems (empty = pass).
  */
 

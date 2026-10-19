@@ -19,7 +19,7 @@ documents and their filed return. The engine code is in `{{ENGINE}}`.
 - One fact per document, written with the builders the file already uses.
   Jordan's file shows one example of each document type.
 - The key and value shape of each type is documented in
-  `{{ENGINE}}/src/engine/facts/kinds/*.ts`.
+  `{{ENGINE}}/src/facts/kinds/*.ts`.
 - Amounts from documents keep their cents, exactly as printed.
 - **A document or amount with no matching type:** do not drop it. Add a
   fact with the closest category and a clear key (for example
@@ -36,7 +36,7 @@ documents and their filed return. The engine code is in `{{ENGINE}}`.
 - Take values from the **filed return**, not from the documents.
 - Enter every non-blank numeric line, in whole dollars, as printed.
 - Line ids are the `fieldId` values in
-  `{{ENGINE}}/forms/<federal|state/ca>/<form>/catalog.json`. Match by the
+  `{{ENGINE}}/src/<federal|state/ca>/<form>/catalog.json`. Match by the
   `label`. Skip Form 8949; Schedule D carries its totals.
 - A line you cannot match to a `fieldId`: list it for the taxpayer. Do not guess.
 

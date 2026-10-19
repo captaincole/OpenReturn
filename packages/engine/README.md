@@ -1,4 +1,4 @@
-# The Form Engine
+# The Form Engine (`@summa/engine`)
 
 The deterministic core of Summa. Facts and decisions go in, evaluated tax
 forms come out. **No AI anywhere in the math** — every line on every form is
@@ -6,20 +6,42 @@ computed by a typed, pure-function derivation you can read, test, and diff.
 
 ```
 evaluateScenario({ filing, facts, decisions })  →  EvaluatedScenario (all forms)
-renderForm(scenario, formId)                    →  filled PDF bytes
+pendingInputs(scenario)                         →  decision + fact keys still needed
+renderForm(scenario, formId, loadBlankPdf)      →  filled PDF bytes
 ```
+
+## The package
+
+```
+packages/engine/
+├── src/        the engine (below)
+├── tests/      unit, integration, golden, and the scenarios (tests/README.md)
+├── scripts/    renderScenario, lockScenario, compareFiled
+└── paths.ts    where the package sits on disk, for offline tooling
+```
+
+Other code imports only the `exports` in `package.json`:
+`@summa/engine` (evaluate, render, pendingInputs, FORMS, the FormField
+types), `@summa/engine/facts` (the fact vocabulary and row types),
+`@summa/engine/catalog` (for the agent's form tools),
+`@summa/engine/paths`, and `@summa/engine/scenarios` (test fixtures).
+A deep import does not resolve.
+
+Commands, from the repo root: `npm test` (golden), `npm run test:unit`,
+`npm run test:integration`, `npm run typecheck`. From this folder:
+`npx tsx scripts/renderScenario.ts --scenario=<name>`.
 
 ## The three rules
 
-1. **The engine imports nothing outside `src/engine/`** — no Mastra, no db
+1. **The engine imports nothing outside `src/`** — no Mastra, no db
    layer, no AI, no network. The only exceptions: node builtins, `zod`,
-   `pdf-lib`, and the bundled catalog JSON assets under
-   `src/mastra/public/forms/`. `tests/unit/engine/boundary.test.ts` enforces this on every
+   and `pdf-lib`. `tests/unit/boundary.test.ts` enforces this on every
    commit; if your change fails it, the fix is to move code or pass data in,
    never to widen the whitelist casually.
-2. **The engine does no I/O** beyond reading its own blank PDFs. Callers load
-   fact/decision rows and pass them to `evaluateScenario` — the runtime
-   bridge is `src/mastra/loadScenario.ts`, the only place db and engine meet.
+2. **The engine does no I/O.** Callers load fact/decision rows and pass
+   them to `evaluateScenario` — the runtime bridge is the agent's
+   `src/mastra/loadScenario.ts`, the only place db and engine meet.
+   `renderForm` gets the blank PDF from the caller's `BlankPdfLoader`.
 3. **The engine owns its vocabulary.** `facts/rows.ts` defines what a fact
    and a decision look like; the db layer imports those types, not the other
    way around.
@@ -27,8 +49,9 @@ renderForm(scenario, formId)                    →  filled PDF bytes
 ## Layout
 
 ```
-engine/
-├── index.ts          public API: evaluateScenario, renderForm
+src/
+├── index.ts          public API: evaluateScenario, renderForm, pendingInputs
+├── pendingInputs.ts  the decision and fact keys the filed forms still need
 ├── engine.ts         fixpoint evaluator (cross-form refs converge in ≤5 passes)
 ├── defineForm.ts     typed binding authoring API (defineForm, stubZero)
 ├── money.ts          the one module for money math (sum, atLeast, roundDollars, stepsOf, formatDollars)
@@ -42,22 +65,23 @@ engine/
 ├── data/             federal tables (rate schedules, tax table, std deduction)
 ├── worksheets/       IRS/FTB worksheets as pure functions (QDCG, 5695 line 31, …)
 ├── render/           PDF fill (fillFromCatalog + hand-verified widget overrides)
-├── federal/          one folder per federal form + federal registry (index.ts)
+├── federal/          one folder per federal form (catalog.json, bindings.ts, …) + registry (index.ts)
 └── state/
     ├── index.ts      one import + one spread per supported state
     └── ca/           CA registry + one folder per CA form (+ ca/data/ tables)
 ```
 
-Form assets live in two mirrored trees keyed by the same `relativeDir`:
-`apps/agent/forms/<relativeDir>/` (offline source of truth, used by tests)
-and `src/mastra/public/forms/<relativeDir>/` (promoted runtime copy, bundled
-by Mastra and shipped next to the deployed function).
+Each form's folder is its `relativeDir` (`federal/1040`, `state/ca/540`).
+The engine keeps `catalog.json` there, next to `bindings.ts`. The source
+documents (`blank.pdf`, instructions) use the same subpath in
+`packages/forms/<year>/<relativeDir>/`.
 
 ## Adding a form
 
-1. Drop `catalog.json` + `blank.pdf` into `apps/agent/forms/<jurisdiction>/<short>/`
-   and promote the runtime copy into `src/mastra/public/forms/<jurisdiction>/<short>/`.
-2. Create `<jurisdiction>/<short>/` here with `types.ts` (the form's
+1. Put `blank.pdf` in `packages/forms/<year>/<jurisdiction>/<short>/`.
+   Generate `catalog.json` into `src/<jurisdiction>/<short>/` with
+   `npm run form-engine -- generate-catalog`.
+2. In `src/<jurisdiction>/<short>/`, add `types.ts` (the form's
    FormFields — every field must declare `category` and `valueType`; TS
    won't compile otherwise), `filingInfo.ts`, and `bindings.ts`.
 3. Add a `resolve<Form>Info` function (in `filingInfoResolvers.ts` or the
@@ -71,7 +95,8 @@ by Mastra and shipped next to the deployed function).
    tells Luca to ask. `tests/integration/requiredInputs.test.ts` fails when you forget.
 4. Add a `makeFormSpec` entry (+ catalog import) to the jurisdiction's
    `index.ts`.
-5. Add golden coverage under `tests/scenarios/`.
+5. Add golden coverage under `tests/scenarios/`, and a catalog-fill golden
+   (`tests/README.md`).
 
 If a new form makes you touch files outside its folder and its jurisdiction
 registry, the registry isn't doing its job — surface the missing abstraction
@@ -97,4 +122,6 @@ federal results (CA 540 reads federal AGI cross-form) but never each other.
 - **Never invent a number.** A field whose inputs are missing evaluates to
   `blocked` with a reason — that's what feeds the open-questions list.
 - **Tax years are parameter-keyed data** (tables take `taxYear`), not
-  directory-per-year. Revisit only when a second filing year ships.
+  directory-per-year. The source documents in `packages/forms` are by
+  year; how the engine's rules change by year is still open. Decide it
+  when a second filing year ships.

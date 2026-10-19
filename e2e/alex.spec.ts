@@ -2,7 +2,7 @@
  * Alex, end to end: create the owner, start a filing, talk Luca through
  * the intake with the W-2 upload, and wait for the generated forms. Then
  * check what the model stored and generated against Alex's fixtures
- * (apps/agent/tests/scenarios/alex).
+ * (packages/engine/tests/scenarios/alex).
  *
  * Results go to <runDir>/summary.md, one row per stage. See summary.ts
  * for the plumbing / model split.
