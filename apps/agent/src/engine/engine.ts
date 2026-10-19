@@ -207,8 +207,13 @@ function mustFileResult(
  *
  * Fixpoint optimization: skip re-evaluation when an `ok` result is
  * already cached. Bindings are pure functions of (params, ctx), and ctx
- * only grows, so the next pass returns the same answer.
+ * only grows, so the next pass returns the same answer. The exception
+ * is a result from a settle pass: its reads stopped waiting, so it can
+ * hold a value computed before an input resolved. It is evaluated again
+ * every pass.
  */
+const settledResults = new WeakSet<object>();
+
 /*
  * Field ids each result's binding read. Keyed by the result object, so a
  * cached ok result from an earlier pass keeps the reads that produced it.
@@ -225,7 +230,7 @@ function evaluateFields(
   for (const inv of catalog.getFields(formId)) {
     const cached = fieldResults.get(inv.fieldId);
     let result: DerivationResult<unknown>;
-    if (cached && cached.ok) {
+    if (cached && cached.ok && !settledResults.has(cached)) {
       result = cached;
     } else {
       const binding = fieldBindings.get(inv.fieldId);
@@ -244,6 +249,7 @@ function evaluateFields(
         const reads = trackPendingReads({ ...engineCtx, field: inv }, formId);
         result = binding.rule.evaluate(binding.params, reads.ctx);
         if (reads.hadPendingRead()) result = pendingResult(inv.fieldId);
+        if (engineCtx.settling) settledResults.add(result);
         readsByResult.set(result, reads.readIds());
       }
       fieldResults.set(inv.fieldId, result);
@@ -280,7 +286,8 @@ const MAX_FIXPOINT_PASSES = 20;
  *
  * Monotonicity guarantees termination: each pass can only resolve more
  * fields to `ok`, never un-resolve them. The loop exits when a pass
- * produces zero new `ok` results, or fails loudly at MAX_FIXPOINT_PASSES.
+ * produces zero new `ok` results and no settle-pass value changed, or
+ * fails loudly at MAX_FIXPOINT_PASSES.
  */
 export function evaluateAllForms(
   formIds: string[],
@@ -316,6 +323,7 @@ export function evaluateAllForms(
 
   for (let pass = 1; pass <= MAX_FIXPOINT_PASSES; pass++) {
     const okBefore = countOk(shared.fieldResults) + countOk(shared.formMustFiles);
+    const valuesBefore = okValues(shared.fieldResults);
     for (const formId of formIds) {
       const evaluated = evaluateForm(formId, ctx, catalog, shared);
       forms.set(formId, evaluated);
@@ -323,7 +331,8 @@ export function evaluateAllForms(
     const okAfter = countOk(shared.fieldResults) + countOk(shared.formMustFiles);
     const delta = okAfter - okBefore;
     resolvedPerPass.push(delta);
-    if (delta === 0) {
+    // A settle-pass value can change with no new ok result: wait until values are stable.
+    if (delta === 0 && okValues(shared.fieldResults) === valuesBefore) {
       if (shared.settling || !hasPending(shared)) return { forms, passes: pass, resolvedPerPass };
       shared.settling = true;
     }
@@ -357,4 +366,11 @@ function countOk<V>(map: Map<string, DerivationResult<V>>): number {
   let n = 0;
   for (const r of map.values()) if (r.ok) n++;
   return n;
+}
+
+/* The ok values, as one string to compare between passes. */
+function okValues(map: Map<string, DerivationResult<unknown>>): string {
+  const out: Array<[string, unknown]> = [];
+  for (const [id, r] of map) if (r.ok) out.push([id, r.value]);
+  return JSON.stringify(out);
 }
