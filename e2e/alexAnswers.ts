@@ -14,7 +14,7 @@ export interface Turn {
   file?: string;
 }
 
-const W2_PDF = resolve(__dirname, "../apps/agent/tests/scenarios/alex/docs/01-alex-w2.pdf");
+const W2_PDF = resolve(__dirname, "../packages/engine/tests/scenarios/alex/docs/01-alex-w2.pdf");
 
 const GENERATE = "That is everything. Please generate my 2025 tax documents now.";
 

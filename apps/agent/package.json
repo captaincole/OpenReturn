@@ -12,10 +12,10 @@
     "form-engine": "tsx scripts/formEngine/cli.ts",
     "smoke:review": "tsx scripts/smokeReview.ts",
     "doctor": "tsx scripts/doctor.ts",
-    "test": "tsx tests/golden/runAll.ts",
     "test:unit": "vitest run tests/unit",
     "test:unit:watch": "vitest tests/unit",
-    "test:integration": "vitest run tests/integration"
+    "test:integration": "vitest run tests/integration",
+    "typecheck": "tsc --noEmit -p ."
   },
   "engines": {
     "node": ">=20.0.0"
@@ -28,6 +28,7 @@
     "@mastra/memory": "^1.17.4",
     "@mastra/observability": "^1.10.3",
     "@napi-rs/canvas": "^0.1.100",
+    "@summa/engine": "0.1.0",
     "dotenv": "^17.4.2",
     "mastra": "^1.7.2",
     "unpdf": "^1.6.0",

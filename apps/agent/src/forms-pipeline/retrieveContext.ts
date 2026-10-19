@@ -9,7 +9,7 @@
  * ordering. Fields run in parallel under a concurrency cap.
  */
 
-import type { FieldInventory } from "../engine/catalog.js";
+import type { FieldInventory } from "@summa/engine/catalog";
 import { hybridSearchRefDocs } from "../mastra/db/corpusSearch.js";
 
 /*

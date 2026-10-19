@@ -3,7 +3,7 @@
  * blank PDF's AcroForm widgets and AI-labels them into a catalog.json.
  *
  * Writes the classified catalog to
- *   src/engine/<jurisdiction>/<short>/catalog.json
+ *   packages/engine/src/<jurisdiction>/<short>/catalog.json
  * where <short> is the formId with "form-" stripped. The catalog sits
  * next to the form's bindings.ts.
  */

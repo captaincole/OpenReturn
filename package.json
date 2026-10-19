@@ -2,7 +2,11 @@
   "name": "summa",
   "version": "0.1.0",
   "private": true,
-  "description": "Summa monorepo. apps/agent is the Mastra-based AI CPA backend; apps/web is the React frontend. Each app installs and deploys independently.",
+  "description": "Summa monorepo. apps/agent is the Mastra-based AI CPA backend; apps/web is the Next.js frontend; packages/engine is the form engine. agent and engine are npm workspaces; web installs on its own.",
+  "workspaces": [
+    "apps/agent",
+    "packages/engine"
+  ],
   "scripts": {
     "dev": "npm --prefix apps/agent run dev",
     "dev:web": "npm --prefix apps/web run dev",
@@ -18,16 +22,17 @@
     "form-engine": "npm --prefix apps/agent run form-engine --",
     "smoke:review": "npm --prefix apps/agent run smoke:review",
     "doctor": "npm --prefix apps/agent run doctor",
-    "test": "npm --prefix apps/agent test",
-    "test:unit": "npm --prefix apps/agent run test:unit",
-    "test:integration": "npm --prefix apps/agent run test:integration",
+    "test": "npm -w packages/engine test",
+    "test:unit": "npm -w packages/engine run test:unit && npm -w apps/agent run test:unit",
+    "test:integration": "npm -w packages/engine run test:integration && npm -w apps/agent run test:integration",
     "e2e": "playwright test -c e2e",
-    "install:all": "npm install && npm --prefix apps/agent install && npm --prefix apps/web install",
+    "install:all": "npm install && npm --prefix apps/web install",
     "prepare": "husky",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx,mjs,js}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,mjs,js}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,mjs,js}\"",
+    "typecheck": "npm -w packages/engine run typecheck && npm -w apps/agent run typecheck"
   },
   "engines": {
     "node": ">=20.0.0"

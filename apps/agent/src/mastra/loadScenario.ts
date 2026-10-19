@@ -5,7 +5,7 @@
  * database (see ../engine/README.md).
  */
 
-import { evaluateScenario, type EngineFiling, type EvaluatedScenario } from "../engine";
+import { evaluateScenario, type EngineFiling, type EvaluatedScenario } from "@summa/engine";
 import { listDecisions } from "./db/aiDecisions";
 import type { Scope } from "./db/appDb";
 import { listFacts } from "./db/taxFacts";

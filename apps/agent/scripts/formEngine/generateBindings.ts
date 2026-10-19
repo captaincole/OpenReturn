@@ -3,7 +3,7 @@
  * bindings.ts that maps engine FormFields to a catalog's PDF widgets.
  *
  * Defaults:
- *   --catalog defaults to src/engine/<jurisdiction>/<short>/catalog.json,
+ *   --catalog defaults to packages/engine/src/<jurisdiction>/<short>/catalog.json,
  *             auto-discovered: federal/<short>, then state/ca/<short>,
  *             then state/ny/<short>.
  *   --output  bindings.ts in the same folder as the catalog.
@@ -18,7 +18,7 @@ import type { Command } from "../lib/cli";
 
 /*
  * Auto-discover the catalog file in the conventional locations. Each
- * form has its own folder under src/engine/<jurisdiction>/<short>/ with
+ * form has its own folder under packages/engine/src/<jurisdiction>/<short>/ with
  * catalog.json. First match wins; pass --catalog to override. taxYear is
  * unused for path resolution. It stays in the signature so the CLI's
  * required --tax-year arg still drives the workflow.
@@ -123,7 +123,7 @@ async function run(argv: string[]): Promise<void> {
 
 export const generateBindingsCommand: Command = {
   name: "generate-bindings",
-  summary: "AI-generate src/engine/<…>/bindings.ts from a form's catalog",
+  summary: "AI-generate packages/engine/src/<…>/bindings.ts from a form's catalog",
   options: [
     { flag: "--form-id=<id>", desc: "e.g. form-1040 (required)" },
     { flag: "--tax-year=<year>", desc: "e.g. 2025 (required)" },

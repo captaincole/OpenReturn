@@ -6,9 +6,9 @@
  * both.
  */
 
+import type { BlankPdfLoader } from "@summa/engine";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import type { BlankPdfLoader } from "../engine";
 
 export const loadBlankPdf: BlankPdfLoader = ({ relativeDir }) =>
   readFile(resolve(process.cwd(), "forms", relativeDir, "blank.pdf"));

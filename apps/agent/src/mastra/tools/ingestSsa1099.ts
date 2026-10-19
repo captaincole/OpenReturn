@@ -1,6 +1,6 @@
 import { createTool } from "@mastra/core/tools";
+import { makeSocialSecurityFactKey, type SocialSecurityFactValue } from "@summa/engine/facts";
 import { z } from "zod";
-import { makeSocialSecurityFactKey, type SocialSecurityFactValue } from "../../engine/facts";
 import { recordIngestFact, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
@@ -13,7 +13,7 @@ import { requireUserContext } from "./userContext";
  * Form RRB-1099 is not supported: its boxes differ (box 6 is the
  * workers' compensation offset; withholding is box 10).
  *
- * Convention (see src/engine/facts/kinds/socialSecurity.ts):
+ * Convention (see packages/engine/src/facts/kinds/socialSecurity.ts):
  *   category: "retirement"
  *   key:      "payer.ssa.social_security"
  */

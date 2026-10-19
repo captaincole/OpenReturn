@@ -1,9 +1,9 @@
 import { createTool } from "@mastra/core/tools";
-import { z } from "zod";
 import {
   makeRetirementDistributionFactKey,
   type RetirementDistributionFactValue,
-} from "../../engine/facts";
+} from "@summa/engine/facts";
+import { z } from "zod";
 import { PayerSchema, recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
@@ -11,7 +11,7 @@ import { requireUserContext } from "./userContext";
  * Ingest one Form 1099-R as a single structured tax_facts row. The Form
  * Engine reads it via `getRetirementDistributionFacts(facts)`.
  *
- * Convention (see src/engine/facts/kinds/retirementDistribution.ts):
+ * Convention (see packages/engine/src/facts/kinds/retirementDistribution.ts):
  *   category: "retirement"
  *   key:      "payer.{payerSlug}.distributions.{distributionId}"
  *

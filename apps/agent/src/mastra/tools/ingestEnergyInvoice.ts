@@ -1,10 +1,10 @@
 import { createTool } from "@mastra/core/tools";
-import { z } from "zod";
 import {
   ENERGY_ITEM_KINDS,
   makeEnergyInvoiceFactKey,
   type EnergyInvoiceFactValue,
-} from "../../engine/facts";
+} from "@summa/engine/facts";
+import { z } from "zod";
 import { recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
@@ -14,7 +14,7 @@ import { requireUserContext } from "./userContext";
  * pumps, water heaters, furnaces, energy audits). One fact per invoice,
  * one item per piece of property.
  *
- * Convention (see src/engine/facts/kinds/homeEnergy.ts):
+ * Convention (see packages/engine/src/facts/kinds/homeEnergy.ts):
  *   category: "home_energy"
  *   key:      "vendor.{vendorSlug}.energy_invoice"
  */

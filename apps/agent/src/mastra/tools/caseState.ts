@@ -1,7 +1,7 @@
 import { createTool } from "@mastra/core/tools";
+import type { BaseFormField, EngineDerivation, EvaluatedForm } from "@summa/engine";
+import { pendingInputs, type EngineFiling, type EvaluatedScenario } from "@summa/engine";
 import { z } from "zod";
-import { pendingInputs, type EngineFiling, type EvaluatedScenario } from "../../engine";
-import type { BaseFormField, EngineDerivation, EvaluatedForm } from "../../engine/types";
 import type { Scope } from "../db/appDb";
 import { resolveOwnerFilingForYear } from "../db/filings";
 import { loadAndEvaluateScenario } from "../loadScenario";

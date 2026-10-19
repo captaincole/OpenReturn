@@ -1,9 +1,10 @@
+import { ENGINE_ROOT } from "@summa/engine/paths";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
 import { PdfAttachmentRasterizer } from "../../../../src/mastra/agents/pdfAttachments";
 
-const W2 = resolve(__dirname, "../../../scenarios/alex/docs/01-alex-w2.pdf");
+const W2 = resolve(ENGINE_ROOT, "tests/scenarios/alex/docs/01-alex-w2.pdf");
 
 /* A URL-based model gets the PDF as page images only. */
 describe("PdfAttachmentRasterizer", () => {

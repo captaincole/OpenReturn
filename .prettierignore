@@ -8,8 +8,8 @@
 .scratch/
 
 # Generated files — regeneration would undo formatting
-apps/agent/src/engine/federal/*/types.ts
-apps/agent/src/engine/state/*/*/types.ts
+packages/engine/src/federal/*/types.ts
+packages/engine/src/state/*/*/types.ts
 apps/web/next-env.d.ts
 
 # Form assets and catalogs (large, partly generated)

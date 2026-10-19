@@ -1,10 +1,10 @@
-import { z } from "zod";
 import {
   makeForm8949BoxDecisionKey,
   makeTradeFactKey,
   type Form8949Box,
   type TradeFactValue,
-} from "../../engine/facts";
+} from "@summa/engine/facts";
+import { z } from "zod";
 import { recordDecision } from "../db/aiDecisions";
 import { recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 

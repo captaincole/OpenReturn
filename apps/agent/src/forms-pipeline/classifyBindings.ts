@@ -16,7 +16,7 @@
  */
 
 import Anthropic from "@anthropic-ai/sdk";
-import type { FieldInventory } from "../engine/catalog.js";
+import type { FieldInventory } from "@summa/engine/catalog";
 import { formatIndexedForm, loadCatalogIndex, type CatalogIndex } from "./catalogIndex.js";
 import { BINDING_TOOLS, SYSTEM_PROMPT } from "./classifyBindingsPrompt.js";
 import type { RetrievedFieldContext } from "./retrieveContext.js";

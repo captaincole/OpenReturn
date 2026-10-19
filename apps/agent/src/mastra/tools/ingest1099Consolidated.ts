@@ -1,5 +1,4 @@
 import { createTool } from "@mastra/core/tools";
-import { z } from "zod";
 import {
   makeDividendFactKey,
   makeInterestFactKey,
@@ -7,7 +6,8 @@ import {
   type DividendFactValue,
   type InterestFactValue,
   type MiscIncomeFactValue,
-} from "../../engine/facts";
+} from "@summa/engine/facts";
+import { z } from "zod";
 import { PayerSchema, recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { ingestTrades, TradeInputSchema } from "./ingestTrades";
 import { requireUserContext } from "./userContext";

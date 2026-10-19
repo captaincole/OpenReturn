@@ -1,6 +1,6 @@
 /*
  * Phase D — render typed bindings into TypeScript source for a per-form
- * `bindings.ts` file under `src/engine/<jurisdiction>/<short>/`.
+ * `bindings.ts` file under the engine's `src/<jurisdiction>/<short>/`.
  *
  * The classifier outputs structured bindings (one of N rule shapes per
  * field) plus a confidence rating. This renderer translates each binding
@@ -45,8 +45,9 @@
  * `todos`. Items whose rule is `unsupported` always land in `unsupported`.
  */
 
-import { dirname, relative } from "node:path";
-import type { FieldInventory } from "../engine/catalog.js";
+import type { FieldInventory } from "@summa/engine/catalog";
+import { dirname, relative, resolve } from "node:path";
+import { engineSrcDir } from "../paths.js";
 import type { ClassifiedBinding, Confidence } from "./classifyBindings.js";
 import { quote, shortKey, translate } from "./translateBinding.js";
 
@@ -171,10 +172,10 @@ function bucketOneField(
 
 /* File header, imports, register() opener, and the must-file note. */
 function renderPreamble(opts: RenderBindingsOpts, b: BucketResult): string[] {
-  const engineImport = relImport(opts.outputPath, "src/engine/defineForm.ts");
-  const taxTableImport = relImport(opts.outputPath, "src/engine/data/taxTable.ts");
+  const engineImport = relImport(opts.outputPath, "defineForm.ts");
+  const taxTableImport = relImport(opts.outputPath, "data/taxTable.ts");
 
-  const moneyImport = relImport(opts.outputPath, "src/engine/money.ts");
+  const moneyImport = relImport(opts.outputPath, "money.ts");
   const moneySymbols = [b.usesAtLeast && "atLeast", b.usesSum && "sum"].filter(Boolean);
 
   const out: string[] = [];
@@ -299,23 +300,13 @@ const CONFIDENCE_ORDER: Record<Confidence, number> = {
 };
 
 /**
- * Compute an ESM-friendly relative import path from `fromFilePath` to
- * `toRelativePath`, both anchored at the agent's project root. Replaces
- * the `.ts` extension with `.js` so the runtime resolver works under tsx
- * and in the compiled output.
+ * Compute an ESM-friendly relative import path from `fromFilePath` to an
+ * engine module (`engineModule` is relative to the engine's src/, for
+ * example "defineForm.ts"). Replaces the `.ts` extension with `.js` so
+ * the runtime resolver works under tsx and in the compiled output.
  */
-function relImport(fromFilePath: string, toRelativePath: string): string {
-  /*
-   * toRelativePath is like "src/engine/defineForm.ts". Turn it into an
-   * absolute path under the same root as fromFilePath.
-   */
-  const fromAbs = fromFilePath;
-  const matchRoot = fromAbs.match(/^(.*?)(\/apps\/agent\/)/);
-  const projectRoot = matchRoot
-    ? `${matchRoot[1]}${matchRoot[2]}`.replace(/\/$/, "")
-    : process.cwd();
-  const toAbs = `${projectRoot}/${toRelativePath}`;
-  let rel = relative(dirname(fromAbs), toAbs);
+function relImport(fromFilePath: string, engineModule: string): string {
+  let rel = relative(dirname(fromFilePath), resolve(engineSrcDir, engineModule));
   rel = rel.replace(/\.ts$/, ".js");
   if (!rel.startsWith(".")) rel = `./${rel}`;
   return rel;

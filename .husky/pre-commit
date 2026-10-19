@@ -1,9 +1,9 @@
 # Pre-commit gate, fastest first:
 #   1. format:check — Prettier, verify only (run `npm run format` to fix)
 #   2. lint         — eslint, one rule: multi-line comments are starred blocks
-#   3. test             — golden suite, apps/agent/tests/golden/runAll.ts (~5s)
-#   4. test:unit        — vitest, apps/agent/tests/unit (~2s)
-#   5. test:integration — vitest, apps/agent/tests/integration (~2s)
+#   3. test             — golden suite, packages/engine/tests/golden/runAll.ts (~5s)
+#   4. test:unit        — vitest, packages/engine/tests/unit + apps/agent/tests/unit (~3s)
+#   5. test:integration — vitest, packages/engine/tests/integration + apps/agent/tests/integration (~3s)
 #
 # Skip with --no-verify if you're committing a deliberate scenario update
 # in two stages (expected.ts before fact-fix, or vice versa). Don't make
