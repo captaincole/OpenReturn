@@ -111,7 +111,7 @@ We're building agent + UI together. When changes touch both, expect to:
 
 1. **Edit code** (backend in `apps/agent/src/mastra/`, frontend in `apps/web/{app,components,lib}/`).
 2. **Watch logs** for errors. Three places to look:
-   - **Mastra log** — backend errors, agent traces, tool-call output. When Claude runs mastra in the background it writes to `/private/tmp/claude-501/.../tasks/<id>.output`; otherwise it's whatever terminal you started `npm run dev` in.
+   - **Mastra log** — backend errors, agent traces, tool-call output. When Claude runs mastra in the background it writes to that background task's output file; otherwise it's whatever terminal you started `npm run dev` in.
    - **Mastra Studio** at http://localhost:4111 — the **Observability** tab shows full agent traces (which tools fired, with what args, in what order). This is the right place to debug "why did Luca do X?".
    - **Browser console + Network panel** — frontend errors and HTTP failures (401s from a wrong passcode, 404s from a missing proxy entry, etc.).
 3. **Verify the change in the browser** at http://localhost:3000. Sign in with the owner password (session cookie persists across reloads). To wipe state between test runs use **Delete filing** (avatar menu, top-right) and start a fresh filing from the home page. The activity rail and header counters refresh after each agent turn (plus a short client-side poll).
@@ -377,7 +377,7 @@ Agent tooling lives under `apps/agent/scripts/`; engine scripts under `packages/
 
 ## Related project — lessons carried forward
 
-This project is a deliberate application of lessons learned from **Mr. BigBadgeGuy** (BBG), a Mastra-based agent at `/Users/andrewcole/playground/bigbadgeguy-agent`. BBG memory lives at `/Users/andrewcole/.claude/projects/-Users-andrewcole-playground-bigbadgeguy/memory/` — read `MEMORY.md` there for the full index. When a second Claude Code session in this folder needs context, point it at that directory.
+This project is a deliberate application of lessons learned from **Mr. BigBadgeGuy** (BBG), an earlier Mastra-based agent. Its repo and memory are local to the maintainer's machine; the pointer to them lives in local Claude memory, not here.
 
 Lessons worth bringing forward:
 
@@ -412,7 +412,7 @@ All temporary work Claude produces or needs to save locally goes in **`.scratch/
 - Architecture, file layout, commands, design principles → **this file** (checked in, visible to anyone).
 - User preferences, cross-project learnings, ongoing context → **`~/.claude/projects/.../memory/`** (local, persists across sessions).
 
-If you're a fresh Claude Code session starting in this folder: read this file, then read the BBG memory dir for broader context on how Andrew builds agents.
+If you're a fresh Claude Code session starting in this folder: read this file, then the BBG memory (see your local memory index for its path) for broader context on how Andrew builds agents.
 
 ## Things explicitly out of scope (for now)
 
