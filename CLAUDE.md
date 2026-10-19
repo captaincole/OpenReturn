@@ -29,7 +29,7 @@ apps/
 │   ├── src/engine/              # THE FORM ENGINE — pure, deterministic, no AI/DB/network.
 │   │                              Owns the fact vocabulary (facts/), per-jurisdiction form
 │   │                              registries (federal/, state/ca/), worksheets, PDF fill.
-│   │                              Boundary enforced by src/engine/boundary.test.ts; contributor
+│   │                              Boundary enforced by tests/unit/engine/boundary.test.ts; contributor
 │   │                              guide at src/engine/README.md.
 │   ├── src/mastra/              # agent code (Luca, tools, db, server, workflows incl. review judges)
 │   │                              loadScenario.ts is the one db↔engine bridge; public/forms/

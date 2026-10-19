@@ -7,15 +7,12 @@
  * Generated at: 2026-05-14T20:53:03.862Z
  */
 
-import {
-  lookupAdditionalStandardDeduction,
-  lookupStandardDeduction,
-} from "../../data/standardDeduction.js";
 import { lookupTax } from "../../data/taxTable.js";
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
+import { mayClaimSeniorDeduction, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
 
@@ -253,30 +250,15 @@ export function register(): void {
           const itemized = f["schedule-a.0.line.17_total_itemized_deductions"];
           return typeof itemized === "number" ? itemized : undefined;
         }
-        // Exception 2: MFS and the spouse itemizes → zero, even when born before 1961.
-        if (info.filingStatus === "married_filing_separately") {
-          if (info.spouseItemizesSeparately === undefined) return undefined;
-          if (info.spouseItemizesSeparately) return 0;
-        }
-        if (!info.filingStatus || info.taxpayerBornBeforeJan2_1961 === undefined) return undefined;
-        const base = lookupStandardDeduction("federal", 2025, info.filingStatus);
-        const boxes = f["line.12d_you_born_before_jan2_1961"] === true ? 1 : 0;
-        const extra = lookupAdditionalStandardDeduction(2025, info.filingStatus);
-        return base === undefined || extra === undefined ? undefined : base + boxes * extra;
+        return standardDeduction(info);
       },
       /*
        * Lines 12e + 13a + 13b. Blank when 12e is blank: sum() would count
-       * it as 0 and overstate taxable income. Also blank for a filer born
-       * before January 2, 1961 who is not MFS: they may qualify for the
-       * enhanced deduction for seniors (Schedule 1-A → line 13b, up to
-       * $6,000), which is not modeled. MFS filers cannot claim it.
+       * it as 0 and overstate taxable income. Also blank when the filer
+       * may claim the senior deduction (deductions.ts).
        */
       "line.14": (f, info) => {
-        if (f["line.12e"] === undefined) return undefined;
-        const mayClaimSeniorDeduction =
-          info.taxpayerBornBeforeJan2_1961 === true &&
-          info.filingStatus !== "married_filing_separately";
-        if (mayClaimSeniorDeduction) return undefined;
+        if (f["line.12e"] === undefined || mayClaimSeniorDeduction(info)) return undefined;
         return sum(f["line.12e"], f["line.13a"], f["line.13b"]);
       },
       /*

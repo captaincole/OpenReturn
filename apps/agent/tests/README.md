@@ -2,18 +2,36 @@
 
 Scenario tests should cover *EVERY* supported form field at some level. This is the core way that we can establish that our engine is accurate, as all scenarios are CPA reviewed. 
 
-The offline golden suite — `npm test` from the repo root, and what the
-pre-commit hook runs. Fast, deterministic, no network, no AI: it exercises
-the form engine and PDF fill entirely in memory. Positional args filter by
+Every test for `apps/agent` lives here. No test file goes under `src/`
+or `scripts/`; `unit/layout.test.ts` fails on one.
+
+| Folder | Kind | Command (repo root) |
+| --- | --- | --- |
+| `unit/` | One module, its own small inputs. The same folders as `src/` and `scripts/`. | `npm run test:unit` |
+| `integration/` | The whole engine over every scenario. | `npm run test:integration` |
+| `golden/` | Every scenario and catalog, against locked values and PDFs. | `npm test` |
+| `scenarios/` | The scenario data. `scenarios/index.ts` lists them all. | — |
+| `helpers/` | Shared assertion, fixture, and golden-PDF code. | — |
+
+The pre-commit hook runs all three. All are offline: no network, no AI.
+
+**Where a new test goes.** A rule, worksheet, or table test goes in
+`unit/`, next to the same path as its module. Give it small inputs of its
+own, as a table when there are several cases. Do not change a scenario
+to check one rule. Only a check that must hold for every scenario goes
+in `integration/`.
+
+## Golden suite
+
+`golden/runAll.ts` prints one summary table. Positional args filter by
 check name: `npm test -- alex`, `npm test -- catalog-fill`,
 `npm test -- form-540`.
 
-Two kinds of checks, one summary table (`runAll.ts`):
-
-- **Scenario goldens** (`scenarios/alex|alejandro|marcus|jordan|carter|tara/`) — each scenario
-  bundles facts + decisions + per-form expected line values. `runScenario.ts`
-  runs the engine over them and asserts every field, then diffs the filled
-  PDF against a golden. These are the ground truth for "did the math change".
+- **Scenario goldens** (`scenarios/<name>/`) — each scenario bundles
+  facts + decisions + per-form expected line values.
+  `golden/runScenario.ts` runs the engine over them and asserts every
+  field, then diffs the filled PDF against a golden. These are the ground
+  truth for "did the math change".
   - `alex` — single CA filer, one W-2, standard deduction (the canonical case)
   - `alejandro` — adds 1099-INT/DIV investment income
   - `marcus` — adds capital gains (8949 / Schedule D)
@@ -26,7 +44,7 @@ Two kinds of checks, one summary table (`runAll.ts`):
   - `tara` — **unverified**: IRS ATS test scenario 1 moved to CA. Single,
     two W-2s, a household employee (Schedule H), home energy improvements
     (Form 5695 Part II, Schedule 3). Hand-checked, locked engine output
-- **Catalog-fill checks** (`catalogFill.ts`) — for every form in its
+- **Catalog-fill checks** (`golden/catalogFill.ts`) — for every form in its
   `CATALOGS` registry: fill the blank PDF with synthetic values for every
   cataloged field and diff against a golden snapshot. Catches widget-mapping
   drift without needing scenario coverage.
@@ -36,19 +54,11 @@ Two kinds of checks, one summary table (`runAll.ts`):
 - **New scenario**: follow [Add a scenario](../../../docs/adding-a-scenario.md).
   In short: create `scenarios/<name>/` (see `alex/` for the file shape:
   `facts.ts`, `decisions.ts`, `expected.ts`, `index.ts`), and add it to
-  the `SCENARIOS` arrays in `runAll.ts` and
-  `src/mastra/tools/requiredInputs.test.ts`.
-- **New form's catalog check**: `CATALOGS` in `catalogFill.ts` mirrors the
-  engine registry, so a registered form gets a check by itself. The first
-  run fails with "no golden — run --update";
-  run `npx tsx tests/catalogFill.ts --form-id=<id> --update` (from
+  `SCENARIOS` in `scenarios/index.ts`. The golden and integration tests
+  then run it.
+- **New form's catalog check**: `CATALOGS` in `golden/catalogFill.ts`
+  mirrors the engine registry, so a registered form gets a check by
+  itself. The first run fails with "no golden — run --update"; run
+  `npx tsx tests/golden/catalogFill.ts --form-id=<id> --update` (from
   `apps/agent/`) to bootstrap the snapshot, eyeball the PDF it wrote, and
   commit it.
-
-`helpers/` holds the shared assertion/fixture/golden-PDF utilities.
-
-Unit tests are separate: vitest, colocated with the code they test
-(`src/**/*.test.ts`, `scripts/**/*.test.ts`, and the rule tests in
-`tests/*.test.ts`; the engine boundary check is one of them). Run them
-with `npm run test:unit` (from the repo root or `apps/agent/`). The
-pre-commit hook runs them after the golden suite.

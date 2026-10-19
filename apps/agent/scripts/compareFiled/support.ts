@@ -62,7 +62,7 @@ const DOCUMENT_FACTS = [
 
 /*
  * Single-value facts the resolvers read (filingInfoResolvers.ts,
- * resolverInputs.ts). support.test.ts fails when a resolver reads a key
+ * resolverInputs.ts). tests/unit/scripts/compareFiled/support.test.ts fails when a resolver reads a key
  * that is missing here.
  */
 export const SIMPLE_FACT_KEYS = new Set<string>([

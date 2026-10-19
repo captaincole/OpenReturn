@@ -114,7 +114,7 @@ export const FEDERAL_FORMS: FormSpec[] = [
   }),
   /*
    * Catalog-only entries with no bindings yet. They exist so the
-   * catalog-fill regression test (tests/runAll.ts) checks them against
+   * catalog-fill regression test (tests/golden/runAll.ts) checks them against
    * their blank PDFs. Bindings and downstream wiring come later.
    */
   makeFormSpec({

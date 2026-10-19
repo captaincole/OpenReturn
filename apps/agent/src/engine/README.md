@@ -14,7 +14,7 @@ renderForm(scenario, formId)                    →  filled PDF bytes
 1. **The engine imports nothing outside `src/engine/`** — no Mastra, no db
    layer, no AI, no network. The only exceptions: node builtins, `zod`,
    `pdf-lib`, and the bundled catalog JSON assets under
-   `src/mastra/public/forms/`. `boundary.test.ts` enforces this on every
+   `src/mastra/public/forms/`. `tests/unit/engine/boundary.test.ts` enforces this on every
    commit; if your change fails it, the fix is to move code or pass data in,
    never to widen the whitelist casually.
 2. **The engine does no I/O** beyond reading its own blank PDFs. Callers load
@@ -68,7 +68,7 @@ by Mastra and shipped next to the deployed function).
    answer (a decision, or a fact that is not a document), list it in
    `missingInputs: { "<formId>": missingInputs({ "<key>": value }) }`.
    Otherwise a missing answer leaves a line blank or wrong and nothing
-   tells Luca to ask. `requiredInputs.test.ts` fails when you forget.
+   tells Luca to ask. `tests/integration/requiredInputs.test.ts` fails when you forget.
 4. Add a `makeFormSpec` entry (+ catalog import) to the jurisdiction's
    `index.ts`.
 5. Add golden coverage under `tests/scenarios/`.
