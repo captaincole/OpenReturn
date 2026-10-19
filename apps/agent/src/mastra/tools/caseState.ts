@@ -1,6 +1,6 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import type { EngineFiling, EvaluatedScenario } from "../../engine";
+import { pendingInputs, type EngineFiling, type EvaluatedScenario } from "../../engine";
 import type { BaseFormField, EngineDerivation, EvaluatedForm } from "../../engine/types";
 import type { Scope } from "../db/appDb";
 import { resolveOwnerFilingForYear } from "../db/filings";
@@ -82,66 +82,6 @@ export async function buildCaseStateForFiling(
 }
 
 /*
- * Aggregate unique pending decisions and facts across every form:
- * must-file blockers, and for each filed form its missing required inputs
- * plus field blockers that name a key. Luca asks the user about these,
- * and generate-tax-documents renders nothing until both lists are empty.
- */
-function collectPending(forms: Iterable<EvaluatedForm<BaseFormField>>): {
-  pendingDecisions: Set<string>;
-  pendingFacts: Set<string>;
-} {
-  const pendingDecisions = new Set<string>();
-  const pendingFacts = new Set<string>();
-  const add = (key: string) =>
-    (key.startsWith("decisions.") ? pendingDecisions : pendingFacts).add(key);
-  for (const form of forms) {
-    if (!form.mustFile.ok) {
-      if (form.mustFile.missingDecisionKey) add(form.mustFile.missingDecisionKey);
-      continue;
-    }
-    if (!form.mustFile.value) continue;
-    form.missingInputs.forEach(add);
-    for (const field of form.fields) {
-      if (field.result.ok || field.result.unsupported) continue;
-      if (field.result.missingDecisionKey) add(field.result.missingDecisionKey);
-      field.result.missingFactKeys?.forEach(add);
-    }
-  }
-  return { pendingDecisions, pendingFacts };
-}
-
-/*
- * Identity gaps surface as pendingFacts. We check the RESOLVED filingInfo
- * slot, not raw fact presence. A fact with the right key but the wrong
- * value shape (e.g. identity.phone written as an object) would pass a
- * raw-presence gate even though the resolver cannot read it. With
- * filingInfo, pendingFacts reflects exactly what the engine consumes.
- * identity.email is intentionally NOT in this list — it is a courtesy
- * field that Luca auto-fills from authEmail at doc-generation time.
- */
-function addPendingIdentityFacts(
-  filingInfo: EvaluatedScenario["filingInfo"],
-  pendingFacts: Set<string>,
-): void {
-  const requiredSlots: Array<[string, unknown]> = [
-    ["identity.name.first", filingInfo.taxpayerFirstName],
-    ["identity.name.last", filingInfo.taxpayerLastName],
-    ["identity.ssn", filingInfo.taxpayerSSN],
-    ["identity.dob", filingInfo.taxpayerDateOfBirth],
-    ["identity.address.street", filingInfo.homeAddressLine1],
-    ["identity.address.city", filingInfo.homeAddressCity],
-    ["identity.address.state", filingInfo.homeAddressState],
-    ["identity.address.zip", filingInfo.homeAddressZip],
-    ["identity.occupation", filingInfo.taxpayerOccupation],
-    ["identity.phone", filingInfo.taxpayerPhone],
-  ];
-  for (const [key, value] of requiredSlots) {
-    if (!value) pendingFacts.add(key);
-  }
-}
-
-/*
  * Money convenience fields — federal from 1040, state from 540. A line is
  * null when it is blank on the form (for example "amount you owe" on a
  * refund). Never 0 as a stand-in: a real $0 must stay distinct from blank.
@@ -172,20 +112,19 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
 
   const summaries: EvaluatedFormSummary[] = [summarizeForm(form1040), summarizeForm(form540)];
 
-  const { pendingDecisions, pendingFacts } = collectPending(forms.values());
-  addPendingIdentityFacts(filingInfo, pendingFacts);
+  const { pendingDecisions, pendingFacts } = pendingInputs(scenario);
 
   return {
     summaries,
-    pendingDecisions: Array.from(pendingDecisions).sort(),
-    pendingFacts: Array.from(pendingFacts).sort(),
+    pendingDecisions,
+    pendingFacts,
     /*
      * Null while anything is pending. A form still computes with a missing
      * input and shows a wrong but plausible number (no filing status → zero
      * tax), so nothing here is final until both lists are empty.
      */
     money:
-      pendingDecisions.size === 0 && pendingFacts.size === 0
+      pendingDecisions.length === 0 && pendingFacts.length === 0
         ? extractMoney(form1040, form540)
         : null,
     factCount: facts.length,

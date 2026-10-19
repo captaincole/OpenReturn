@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { evaluateScenario } from "../../src/engine";
+import { evaluateScenario, pendingInputs } from "../../src/engine";
 import type { AIDecisionRow, TaxFactRow } from "../../src/engine/facts/rows";
-import { buildCaseStateForScenario } from "../../src/mastra/tools/caseState";
 import { decisionsWithPreparerStyle } from "../helpers/preparer";
 import { SCENARIOS } from "../scenarios/index";
 import type { Scenario } from "../types";
@@ -57,7 +56,7 @@ function evaluate(s: Scenario, facts: TaxFactRow[], decisions: AIDecisionRow[]):
       values.set(f.fieldId, f.result.ok ? JSON.stringify(f.result.value) : "(blank)");
     }
   }
-  const { pendingDecisions, pendingFacts } = buildCaseStateForScenario(scenario);
+  const { pendingDecisions, pendingFacts } = pendingInputs(scenario);
   return { values, pending: new Set([...pendingDecisions, ...pendingFacts]) };
 }
 

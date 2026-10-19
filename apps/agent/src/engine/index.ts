@@ -23,6 +23,9 @@
  * PDFs live (the agent's runtime tree, the forms package) is the
  * caller's business.
  *
+ * pendingInputs(evaluated) lists the decision and fact keys the filed
+ * forms still wait for (see pendingInputs.ts).
+ *
  * Neither function persists documents. Tools wrap renderForm with
  * createDocument() to store a user-visible draft.
  */
@@ -40,6 +43,8 @@ import {
   type DerivationContext,
   type EvaluatedForm,
 } from "./types.js";
+
+export { pendingInputs, type PendingInputs } from "./pendingInputs.js";
 
 export interface EngineFiling {
   id: string;
