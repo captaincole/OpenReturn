@@ -5,6 +5,7 @@ import { alexScenario } from "../../../tests/scenarios/alex/index";
 import { carterScenario } from "../../../tests/scenarios/carter/index";
 import { jordanScenario } from "../../../tests/scenarios/jordan/index";
 import { marcusScenario } from "../../../tests/scenarios/marcus/index";
+import { taraScenario } from "../../../tests/scenarios/tara/index";
 import type { Scenario } from "../../../tests/types";
 import { evaluateScenario } from "../../engine";
 import type { AIDecisionRow, TaxFactRow } from "../../engine/facts/rows";
@@ -19,7 +20,8 @@ import { buildCaseStateForScenario } from "./caseState";
  * tells Luca to ask. Fix that with a missingInputs entry in the form's
  * resolver, or list the input below with the reason it is optional.
  *
- * Document facts (employer.*, account.*, payer.*) are skipped: dropping
+ * Document facts (employer.*, account.*, payer.*, employee.*, vendor.*)
+ * are skipped: dropping
  * one removes income, and the scope decisions cover whether it exists.
  */
 const OPTIONAL: Array<[RegExp, string]> = [
@@ -43,8 +45,9 @@ const SCENARIOS: Scenario[] = [
   marcusScenario,
   jordanScenario,
   carterScenario,
+  taraScenario,
 ];
-const isDocument = (key: string) => /^(employer|account|payer)\./.test(key);
+const isDocument = (key: string) => /^(employer|account|payer|employee|vendor)\./.test(key);
 const isOptional = (key: string) => OPTIONAL.some(([pattern]) => pattern.test(key));
 
 interface Outcome {
