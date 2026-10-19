@@ -4,21 +4,28 @@
  * offline code resolves the paths here.
  */
 
+import { formDir } from "@summa/forms";
+import { readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { engineSrcDir } from "../../paths.js";
 import type { BlankPdfLoader } from "../../src/index.js";
 import type { FormSpec } from "../../src/registry.js";
 
-import { ENGINE_ROOT, engineSrcDir } from "../../paths.js";
-
 /** The form's catalog.json, next to its bindings. */
-export function catalogPath(spec: FormSpec): string {
+export function catalogPath(spec: Pick<FormSpec, "relativeDir">): string {
   return resolve(engineSrcDir, spec.relativeDir, "catalog.json");
 }
 
-/** The form's fillable blank PDF. */
-export function blankPdfPath(spec: Pick<FormSpec, "relativeDir">): string {
-  return resolve(ENGINE_ROOT, "../../apps/agent/forms", spec.relativeDir, "blank.pdf");
+/** The tax year a form's catalog was built from. */
+export function catalogTaxYear(spec: Pick<FormSpec, "relativeDir">): number {
+  return (JSON.parse(readFileSync(catalogPath(spec), "utf8")) as { form: { taxYear: number } }).form
+    .taxYear;
+}
+
+/** The form's fillable blank PDF for one tax year, from @summa/forms. */
+export function blankPdfPath(form: { relativeDir: string; taxYear: number }): string {
+  return resolve(formDir(form.taxYear, form.relativeDir), "blank.pdf");
 }
 
 export const loadBlankPdf: BlankPdfLoader = (form) => readFile(blankPdfPath(form));

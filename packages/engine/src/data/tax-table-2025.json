@@ -6,7 +6,7 @@
     "url": "https://www.irs.gov/publications/p17",
     "fetchedAt": "2026-05-12T20:53:59.672Z",
     "sha256": "955b733bbcff8f53422d9ae7b006352ea5a66c177ffcc92052835d0699d50ebb",
-    "cacheFile": "tax-table-2025.source.html"
+    "cacheFile": "tax-table.source.html"
   },
   "coverage": {
     "minIncome": 0,

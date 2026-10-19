@@ -140,7 +140,15 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
       failures.push(`[${sf.formId}] evaluateAllForms returned no result.`);
       continue;
     }
-    await assertForm(sf, blankPdfPath(spec), evaluated, catalog, failures, notModeled, known);
+    await assertForm(
+      sf,
+      blankPdfPath({ relativeDir: spec.relativeDir, taxYear: s.taxYear }),
+      evaluated,
+      catalog,
+      failures,
+      notModeled,
+      known,
+    );
   }
 
   return {

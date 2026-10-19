@@ -2,10 +2,10 @@
   "name": "summa",
   "version": "0.1.0",
   "private": true,
-  "description": "Summa monorepo. apps/agent is the Mastra-based AI CPA backend; apps/web is the Next.js frontend; packages/engine is the form engine. agent and engine are npm workspaces; web installs on its own.",
+  "description": "Summa monorepo. apps/agent is the Mastra-based AI CPA backend; apps/web is the Next.js frontend; packages/engine is the form engine; packages/forms holds the source documents by tax year. apps/agent and packages/* are npm workspaces; web installs on its own.",
   "workspaces": [
     "apps/agent",
-    "packages/engine"
+    "packages/*"
   ],
   "scripts": {
     "dev": "npm --prefix apps/agent run dev",

@@ -13,7 +13,7 @@ packages/engine/src/state/*/*/types.ts
 apps/web/next-env.d.ts
 
 # Form assets and catalogs (large, partly generated)
-apps/agent/forms/
+packages/forms/
 apps/agent/src/mastra/public/forms/
 
 # Lockfiles

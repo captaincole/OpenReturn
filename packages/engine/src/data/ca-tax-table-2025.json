@@ -6,7 +6,7 @@
     "url": "https://www.ftb.ca.gov/forms/2025/2025-540-taxtable.pdf",
     "fetchedAt": "2026-05-13T17:04:33.271Z",
     "sha256": "0414ffb02dbcd209966f5fe9bbdfeffd55816cc8d86a08501fd9ef7d79e7087d",
-    "cacheFile": "ca-tax-table-2025.source.pdf"
+    "cacheFile": "tax-table.source.pdf"
   },
   "coverage": {
     "minIncome": 1,

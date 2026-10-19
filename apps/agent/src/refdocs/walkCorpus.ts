@@ -1,3 +1,4 @@
+import { FORMS_ROOT } from "@summa/forms";
 import { createHash } from "node:crypto";
 import type { Dirent } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
@@ -5,7 +6,7 @@ import { join, relative, resolve } from "node:path";
 import type { ParserStyle } from "./parse";
 
 /*
- * Walks the forms/ tree for instructions.pdf files and pairs each PDF
+ * Walks the @summa/forms tree (packages/forms/<year>/…) for instructions.pdf files and pairs each PDF
  * with its sibling `instructions.meta.json` sidecar. The sidecar is the
  * source of truth for docId/title/publisher/taxYear/sourceUrl. The
  * filesystem is the source of truth for which docs should exist.
@@ -31,7 +32,7 @@ export interface RefDocSidecar {
 
 export interface CorpusEntry {
   pdfPath: string; // absolute
-  pdfRelPath: string; // relative to project root, for display
+  pdfRelPath: string; // relative to the forms root, for display
   sidecarPath: string; // absolute
   sidecar: RefDocSidecar;
   fileSha: string;
@@ -42,7 +43,6 @@ export interface WalkResult {
   unconfigured: { pdfPath: string; pdfRelPath: string; reason: string }[];
 }
 
-const REF_DOCS_DIR = "forms";
 const INSTRUCTIONS_FILENAME = "instructions.pdf";
 
 async function walkPdfs(dir: string): Promise<string[]> {
@@ -64,10 +64,9 @@ async function walkPdfs(dir: string): Promise<string[]> {
   return out;
 }
 
-export async function walkCorpus(projectRoot: string): Promise<WalkResult> {
-  const root = resolve(projectRoot);
-  const refDir = join(root, REF_DOCS_DIR);
-  const pdfPaths = await walkPdfs(refDir);
+export async function walkCorpus(formsRoot: string = FORMS_ROOT): Promise<WalkResult> {
+  const root = resolve(formsRoot);
+  const pdfPaths = await walkPdfs(root);
 
   const entries: CorpusEntry[] = [];
   const unconfigured: WalkResult["unconfigured"] = [];

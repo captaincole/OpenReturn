@@ -134,7 +134,9 @@ async function main() {
       continue;
     }
 
-    const blankPdfBytes = await readFile(blankPdfPath(spec));
+    const blankPdfBytes = await readFile(
+      blankPdfPath({ relativeDir: spec.relativeDir, taxYear: s.taxYear }),
+    );
     const { pdfBytes, warnings, copies } = values.golden
       ? await renderGolden(evaluated, catalog, blankPdfBytes)
       : await renderFormCopies({ spec, form: evaluated, ctx, catalog, blankPdfBytes });

@@ -1,6 +1,8 @@
 /*
  * Ingest the IRS tax table from Pub 17 (HTML) into a checked-in JSON
- * file. Reproducible: a re-run with no flags hits the cached HTML and
+ * file. The source HTML lives in @summa/forms
+ * (<year>/federal/tax-table.source.html); the JSON goes to the engine's
+ * src/data/. Reproducible: a re-run with no flags hits the cached HTML and
  * rebuilds the JSON. Use `--refresh` to re-fetch from irs.gov and check
  * for upstream changes since the last ingest (the sha256 changes).
  *
@@ -8,6 +10,7 @@
  * extraction logic must keep them passing.
  */
 
+import { formDir } from "@summa/forms";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { fetchHtml } from "../../src/forms-pipeline/tables/fetchHtml.js";
@@ -16,7 +19,7 @@ import {
   validateCoverage,
   type TaxTableRow,
 } from "../../src/forms-pipeline/tables/parseTaxTable.js";
-import { projectRoot } from "../../src/paths.js";
+import { engineSrcDir } from "../../src/paths.js";
 import type { Command } from "../lib/cli";
 
 /*
@@ -86,9 +89,8 @@ async function run(argv: string[]): Promise<void> {
     );
   }
 
-  const dataDir = path.resolve(projectRoot, "src/mastra/forms/data");
-  const htmlPath = path.join(dataDir, `tax-table-${year}.source.html`);
-  const jsonPath = path.join(dataDir, `tax-table-${year}.json`);
+  const htmlPath = path.join(formDir(year, "federal"), "tax-table.source.html");
+  const jsonPath = path.join(engineSrcDir, "data", `tax-table-${year}.json`);
 
   console.log(`${LOG} year=${year}`);
   console.log(`${LOG} source ${source.url}`);

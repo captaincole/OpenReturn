@@ -32,7 +32,7 @@ import { join } from "node:path";
 import { loadFromFixture, type Catalog, type FieldInventory } from "../../src/catalog.js";
 import { fillFromCatalog } from "../../src/render/fillFromCatalog.js";
 import type { AnyFormField, EvaluatedForm } from "../../src/types.js";
-import { blankPdfPath, catalogPath } from "../helpers/formPaths.js";
+import { blankPdfPath, catalogPath, catalogTaxYear } from "../helpers/formPaths.js";
 import type { RunResult } from "../types.js";
 
 interface Args {
@@ -71,7 +71,7 @@ function formPaths(formId: string): { catalogPath: string; blankPath: string; go
   const spec = getFormSpec(formId);
   return {
     catalogPath: catalogPath(spec),
-    blankPath: blankPdfPath(spec),
+    blankPath: blankPdfPath({ relativeDir: spec.relativeDir, taxYear: catalogTaxYear(spec) }),
     goldenPath: join(GOLDEN_DIR, `${spec.relativeDir}.json`),
   };
 }
