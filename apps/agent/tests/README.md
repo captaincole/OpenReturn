@@ -45,5 +45,7 @@ Two kinds of checks, one summary table (`runAll.ts`):
 `helpers/` holds the shared assertion/fixture/golden-PDF utilities.
 
 Unit tests are separate: vitest, colocated with the code they test
-(`src/engine/**/*.test.ts`, including the engine boundary check) — run via
-`npm run test:unit`.
+(`src/**/*.test.ts`, `scripts/**/*.test.ts`, and the rule tests in
+`tests/*.test.ts`; the engine boundary check is one of them). Run them
+with `npm run test:unit` (from the repo root or `apps/agent/`). The
+pre-commit hook runs them after the golden suite.

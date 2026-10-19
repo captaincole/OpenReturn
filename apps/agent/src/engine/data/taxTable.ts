@@ -123,7 +123,7 @@ export function lookupTax(
   if (taxableIncome < 0) {
     return err("out_of_range", `Taxable income ${taxableIncome} is negative.`);
   }
-  if (taxableIncome > table.coverage.maxIncome) {
+  if (aboveCeiling(table, taxableIncome)) {
     return err(
       "out_of_range",
       `Taxable income ${taxableIncome} is above the tax-table ceiling of $${table.coverage.maxIncome} for ${tableId}. Use the appropriate tax-rate schedule / computation worksheet instead.`,
@@ -154,6 +154,16 @@ export function lookupTax(
       url: table.source.url,
     },
   };
+}
+
+/*
+ * The ceiling is the last row's upper bound. A half-open table ends
+ * before it (federal: the Tax Table is for income under $100,000); an
+ * inclusive table includes it (CA: up to and including $100,000).
+ */
+function aboveCeiling(table: LoadedTaxTable, income: number): boolean {
+  const max = table.coverage.maxIncome;
+  return table.boundaryConvention === "half_open" ? income >= max : income > max;
 }
 
 /*

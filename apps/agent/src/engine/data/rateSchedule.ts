@@ -21,7 +21,7 @@
 import type { FilingStatus } from "../values.js";
 
 export interface RateScheduleRow {
-  /** Bracket lower bound, exclusive: income > overMin. */
+  /** Bracket lower bound, exclusive: income > overMin. The first row includes it ("At least $100,000"). */
   overMin: number;
   /** Bracket upper bound, inclusive: income ≤ overMax. Infinity for the top bracket. */
   overMax: number;
@@ -95,6 +95,9 @@ const SCHEDULE_2025_FEDERAL: RateScheduleTable = {
   },
 };
 
+/** The 2025 rows by filing status, exported for the continuity test. */
+export const FEDERAL_RATE_SCHEDULES_2025 = SCHEDULE_2025_FEDERAL.byStatus;
+
 const SCHEDULES_BY_YEAR: Record<number, RateScheduleTable> = {
   2025: SCHEDULE_2025_FEDERAL,
 };
@@ -132,7 +135,9 @@ export function lookupRateSchedule(
     );
   }
   for (const r of rows) {
-    if (taxableIncome > r.overMin && taxableIncome <= r.overMax) {
+    // The worksheet's first row reads "At least $100,000"; the rest read "over".
+    const aboveMin = r === rows[0] ? taxableIncome >= r.overMin : taxableIncome > r.overMin;
+    if (aboveMin && taxableIncome <= r.overMax) {
       return taxableIncome * r.rate - r.subtractAmount;
     }
   }

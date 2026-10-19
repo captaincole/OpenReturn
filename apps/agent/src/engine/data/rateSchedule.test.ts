@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it } from "vitest";
-import { lookupRateSchedule } from "./rateSchedule.js";
+import { FEDERAL_RATE_SCHEDULES_2025, lookupRateSchedule } from "./rateSchedule.js";
 
 describe("lookupRateSchedule — 2025 federal", () => {
   describe("single", () => {
@@ -46,6 +46,24 @@ describe("lookupRateSchedule — 2025 federal", () => {
         2,
       );
     });
+  });
+
+  it("every printed constant continues the previous row (catches typos)", () => {
+    /*
+     * Tax is continuous at each bracket edge x: x·r₀ − d₀ = x·r₁ − d₁, so
+     * d₁ = d₀ + x·(r₁ − r₀). The IRS prints the constants; this re-derives
+     * each one from the row before it. The first row is checked against
+     * the Tax Table in taxTable.test.ts.
+     */
+    for (const [status, rows] of Object.entries(FEDERAL_RATE_SCHEDULES_2025)) {
+      for (let i = 1; i < rows.length; i++) {
+        const prev = rows[i - 1];
+        const row = rows[i];
+        expect(row.overMin, `${status} row ${i} edge`).toBe(prev.overMax);
+        const expected = prev.subtractAmount + row.overMin * (row.rate - prev.rate);
+        expect(row.subtractAmount, `${status} row ${i}`).toBeCloseTo(expected, 2);
+      }
+    }
   });
 
   it("throws for income < $100,000 (should use tax table)", () => {
