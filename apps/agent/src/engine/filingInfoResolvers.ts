@@ -18,6 +18,7 @@ import type { Schedule2FilingInfo } from "./federal/schedule-2/filingInfo.js";
 import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
 import type { PayerAmount, ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
+import { resolveScheduleHInfo } from "./federal/schedule-h/resolveInfo.js";
 import type { BaseFilingInfo } from "./filingInfo.js";
 import { sum } from "./money.js";
 import {
@@ -306,12 +307,13 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
 export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInfo {
   const form8959 = resolve8959Info(inputs).mustFile?.["form-8959"]?.value === true;
   const form8960 = resolve8960Info(inputs).mustFile?.["form-8960"]?.value === true;
+  const scheduleH = resolveScheduleHInfo(inputs).mustFile?.["schedule-h"]?.value === true;
   const r = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_2",
     fallbacks: [
       {
-        rule: "fallback: Form 8959 (line 11) or Form 8960 (line 12) is required",
-        value: form8959 || form8960,
+        rule: "fallback: Form 8959 (line 11), Form 8960 (line 12), or Schedule H (line 9) is required",
+        value: form8959 || form8960 || scheduleH,
       },
     ],
   });

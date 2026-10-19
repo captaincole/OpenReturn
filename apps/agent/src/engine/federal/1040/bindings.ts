@@ -374,6 +374,16 @@ export function register(): void {
         const v = f["schedule-2.0.line.3_total_lines_1z_and_2"];
         return typeof v === "number" ? v : undefined;
       },
+      // Line 20 = Schedule 3 line 8 (nonrefundable credits); blank when Schedule 3 is not filed.
+      "line.20": (f) => {
+        const v = f["schedule-3.0.line.8"];
+        return typeof v === "number" ? v : undefined;
+      },
+      // Line 21 = lines 19 + 20. Line 19 (Schedule 8812) is not modeled yet.
+      "line.21": (f) =>
+        f["line.19"] === undefined && f["line.20"] === undefined
+          ? undefined
+          : sum(f["line.19"], f["line.20"]),
       // Lines 16 + 17. sum() treats a blank line 17 as 0.
       "line.18": (f) => (f["line.16"] === undefined ? undefined : sum(f["line.16"], f["line.17"])),
       // MANUAL EDIT: line 23 = Schedule 2 line 21 (other taxes); blank when Schedule 2 is not filed.
@@ -650,14 +660,10 @@ export function register(): void {
         "Free-text entry for the form number associated with the third checkbox on line 16. Tied to special-form tax scenarios not yet ingested.",
       "line.19":
         "Child tax credit / credit for other dependents from Schedule 8812. Schedule 8812 has not been ingested and no dependent-with-CTC scenario has been built yet.",
-      "line.20":
-        "Schedule 3 line 8 (nonrefundable credits) has not been ingested as a form yet — no cross-form reference path available.",
       "line.26":
         "Estimated tax payments and prior-year overpayment applied forward have no ingestion path yet — no estimated_payments fact category exists.",
       "line.former_spouse_ssn":
         "Former spouse SSN for joint estimated tax split — no MFS/divorce scenario with prior joint estimated payments modeled yet; requires separate fact ingestion for former spouse identity.",
-      "line.21":
-        "Line 21 (lines 19 + 20) — child tax credit and Schedule 3 nonrefundable credits are both unsupported; the aggregate has no value to compute yet.",
       "line.32":
         "Line 32 — sum of other refundable credits / payments (27a + 28 + 29 + 30 + 31), all of which are individually unsupported.",
       "line.27a":
