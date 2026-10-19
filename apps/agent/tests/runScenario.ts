@@ -54,14 +54,15 @@ function getBlankPdf(blankPdfPath: string): Buffer {
 
 const registeredForms = new Set<string>();
 
-export async function runScenario(s: Scenario): Promise<RunResult> {
-  const t0 = Date.now();
-  const failures: string[] = [];
-  const notModeled: string[] | undefined = s.allowNotModeled ? [] : undefined;
-  const known = s.allowNotModeled
-    ? { causes: s.knownMismatches ?? {}, hits: [] as string[] }
-    : undefined;
-
+/*
+ * Run the engine over a scenario's forms, in the order given (default:
+ * the scenario's own order). No rendering. tests/integration/formOrder
+ * calls it with the order reversed.
+ */
+export async function evaluateScenarioForms(
+  s: Scenario,
+  formIds: string[] = s.forms.map((f) => f.formId),
+): Promise<ReturnType<typeof evaluateAllForms> & { catalog: Catalog }> {
   const decisions = decisionsWithPreparerStyle(s);
   const ctx: DerivationContext = {
     taxYear: s.taxYear,
@@ -91,14 +92,14 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
    * from the shared registry. Scenarios list only `{ formId, expected }`;
    * everything else comes from src/engine/registry.ts.
    */
-  const specs = s.forms.map((sf) => ({ sf, spec: getFormSpec(sf.formId) }));
+  const specs = formIds.map((formId) => getFormSpec(formId));
 
   /*
    * Register bindings for every form once. evaluateAllForms reads
    * bindings from the engine registry, so each form in the scenario
    * needs its register() call to have run.
    */
-  for (const { spec } of specs) {
+  for (const spec of specs) {
     if (!registeredForms.has(spec.formId)) {
       spec.register?.();
       registeredForms.add(spec.formId);
@@ -110,18 +111,26 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
    * lookups (e.g. CA 540 line 13 reads form-1040 line 11b) then find
    * their target inventory rows in one place.
    */
-  const catalog = await getCombinedCatalog(specs.map((s) => s.spec.catalogPath));
+  const catalog = await getCombinedCatalog(specs.map((spec) => spec.catalogPath));
 
   /*
    * Fixpoint loop: evaluate every form and iterate until cross-form refs
    * converge. Returns a Map<formId, EvaluatedForm> plus passes and
    * resolvedPerPass diagnostics for non-convergence debugging.
    */
-  const { forms, passes, resolvedPerPass } = evaluateAllForms(
-    s.forms.map((f) => f.formId),
-    ctx,
-    catalog,
-  );
+  return { ...evaluateAllForms(formIds, ctx, catalog), catalog };
+}
+
+export async function runScenario(s: Scenario): Promise<RunResult> {
+  const t0 = Date.now();
+  const failures: string[] = [];
+  const notModeled: string[] | undefined = s.allowNotModeled ? [] : undefined;
+  const known = s.allowNotModeled
+    ? { causes: s.knownMismatches ?? {}, hits: [] as string[] }
+    : undefined;
+
+  const specs = s.forms.map((sf) => ({ sf, spec: getFormSpec(sf.formId) }));
+  const { forms, passes, resolvedPerPass, catalog } = await evaluateScenarioForms(s);
 
   // Per-form rendering + assertions.
   for (const { sf, spec } of specs) {

@@ -1,11 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { decisionsWithPreparerStyle } from "../../../tests/helpers/preparer";
-import { alejandroScenario } from "../../../tests/scenarios/alejandro/index";
-import { alexScenario } from "../../../tests/scenarios/alex/index";
-import { carterScenario } from "../../../tests/scenarios/carter/index";
-import { jordanScenario } from "../../../tests/scenarios/jordan/index";
-import { marcusScenario } from "../../../tests/scenarios/marcus/index";
-import { taraScenario } from "../../../tests/scenarios/tara/index";
+import { SCENARIOS } from "../../../tests/scenarios/index";
 import type { Scenario } from "../../../tests/types";
 import { evaluateScenario } from "../../engine";
 import type { AIDecisionRow, TaxFactRow } from "../../engine/facts/rows";
@@ -39,14 +34,6 @@ const OPTIONAL: Array<[RegExp, string]> = [
   ],
 ];
 
-const SCENARIOS: Scenario[] = [
-  alexScenario,
-  alejandroScenario,
-  marcusScenario,
-  jordanScenario,
-  carterScenario,
-  taraScenario,
-];
 const isDocument = (key: string) => /^(employer|account|payer|employee|vendor)\./.test(key);
 const isOptional = (key: string) => OPTIONAL.some(([pattern]) => pattern.test(key));
 

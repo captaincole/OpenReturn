@@ -9,8 +9,7 @@
  *   npm test -- catalog-fill       → all catalog-fill checks
  *   npm test -- form-540 marcus    → any check matching either
  *
- * To add a scenario: import its bundled Scenario and add it to the
- * SCENARIOS array below.
+ * To add a scenario: add it to SCENARIOS in tests/scenarios/index.ts.
  *
  * To add a form's catalog-fill check: register the form in the engine
  * registry (src/engine/registry.ts, via its jurisdiction index). CATALOGS
@@ -20,22 +19,9 @@
 
 import { CATALOGS, runCatalogFillCheck } from "./catalogFill.js";
 import { runScenario } from "./runScenario.js";
-import { alejandroScenario } from "./scenarios/alejandro/index.js";
-import { alexScenario } from "./scenarios/alex/index.js";
-import { carterScenario } from "./scenarios/carter/index.js";
-import { jordanScenario } from "./scenarios/jordan/index.js";
-import { marcusScenario } from "./scenarios/marcus/index.js";
-import { taraScenario } from "./scenarios/tara/index.js";
-import type { RunResult, Scenario } from "./types.js";
+import { SCENARIOS } from "./scenarios/index.js";
+import type { RunResult } from "./types.js";
 
-const SCENARIOS: Scenario[] = [
-  alexScenario,
-  alejandroScenario,
-  marcusScenario,
-  jordanScenario,
-  carterScenario,
-  taraScenario,
-];
 const UNVERIFIED = new Set(
   SCENARIOS.filter((s) => s.verification === "unverified").map((s) => s.name),
 );
