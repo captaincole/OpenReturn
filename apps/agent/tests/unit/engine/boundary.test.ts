@@ -11,9 +11,6 @@
  *   - anything inside src/engine/
  *   - node builtins (node:*)
  *   - a short whitelist of pure libraries (zod, pdf-lib)
- *   - the bundled form-catalog JSON assets under src/mastra/public/forms/.
- *     These are data, not code: the runtime copies Mastra's bundler
- *     ships. See federal/index.ts for the promotion-gate rationale.
  */
 
 import { readdirSync, readFileSync } from "node:fs";
@@ -23,7 +20,6 @@ import { describe, expect, it } from "vitest";
 const ENGINE_ROOT = resolve(__dirname, "../../../src/engine");
 
 const ALLOWED_PACKAGES = new Set(["zod", "pdf-lib"]);
-const ALLOWED_ESCAPE = /[/\\]mastra[/\\]public[/\\]forms[/\\].*\.json$/;
 
 function walk(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -63,7 +59,7 @@ describe("engine boundary", () => {
         if (spec.startsWith(".")) {
           const target = resolve(dirname(file), spec);
           const inside = target === ENGINE_ROOT || target.startsWith(ENGINE_ROOT + sep);
-          if (!inside && !ALLOWED_ESCAPE.test(target)) violations.push(spec);
+          if (!inside) violations.push(spec);
         } else {
           const pkg = spec.startsWith("@")
             ? spec.split("/").slice(0, 2).join("/")

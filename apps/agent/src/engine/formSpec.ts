@@ -38,11 +38,10 @@ export interface FormSpec {
    */
   relativeDir: string;
   /**
-   * Absolute path to the OFFLINE catalog.json under apps/agent/forms/.
+   * Absolute path to the form's catalog.json, next to its bindings.
    * Tests and one-off scripts load catalog files from disk via
    * `loadFromFixtures([...])`. Production code uses the bundled `catalog`
-   * export from registry.ts, sourced from the promoted copy in
-   * public/forms/.
+   * export from registry.ts, which imports the same files.
    */
   catalogPath: string;
   /**
@@ -89,7 +88,7 @@ export function makeFormSpec(args: {
 }): FormSpec {
   return {
     ...args,
-    catalogPath: resolve(projectRoot, "forms", args.relativeDir, "catalog.json"),
+    catalogPath: resolve(projectRoot, "src/engine", args.relativeDir, "catalog.json"),
     blankPdfPath: resolve(projectRoot, "forms", args.relativeDir, "blank.pdf"),
   };
 }

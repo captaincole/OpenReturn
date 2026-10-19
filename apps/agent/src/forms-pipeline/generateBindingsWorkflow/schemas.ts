@@ -94,7 +94,7 @@ const usageSchema = z.object({
 export const workflowInputSchema = z.object({
   formId: z.string(),
   taxYear: z.number().int(),
-  /** Path to the JSON catalog (e.g. forms/federal/1040/catalog.json). */
+  /** Path to the JSON catalog (e.g. src/engine/federal/1040/catalog.json). */
   catalogPath: z.string(),
   /**
    * Where to write the generated TS — e.g.

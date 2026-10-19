@@ -13,7 +13,7 @@
 
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import { projectRoot } from "../paths.js";
+import { engineSrcDir } from "../paths.js";
 
 export interface IndexedField {
   fieldId: string;
@@ -32,15 +32,13 @@ export interface IndexedForm {
 
 export type CatalogIndex = Map<string, IndexedForm>;
 
-const CATALOG_ROOT = "forms";
-
 /**
- * Walk `forms/` for `catalog.json` files and build a Map keyed on formId.
+ * Walk the engine source tree for `catalog.json` files and build a Map keyed on formId.
  * Excludes the form currently being bound, so the AI cannot cite the form
  * as its own cross-form reference.
  */
 export async function loadCatalogIndex(excludeFormId?: string): Promise<CatalogIndex> {
-  const root = path.resolve(projectRoot, CATALOG_ROOT);
+  const root = engineSrcDir;
   const files = await walkCatalogFiles(root);
   const index: CatalogIndex = new Map();
   for (const file of files) {

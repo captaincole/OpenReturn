@@ -1,9 +1,14 @@
+import { resolve } from "node:path";
+
 /*
  * "Project root" for offline tooling — tests, scripts, refdocs:* — that run
- * with cwd at apps/agent/. The engine's runtime no longer imports this; it
- * reads its assets via cwd-relative paths that work uniformly across
- * `mastra dev` (cwd = src/mastra/public), Vercel (cwd = /var/task, populated
- * by Mastra's copyPublic step), and npm scripts (cwd = apps/agent).
+ * with cwd at apps/agent/. The engine never imports this.
  */
 
 export const projectRoot = process.cwd();
+
+/*
+ * The engine's source tree. Each form's catalog.json and bindings.ts sit
+ * at <engineSrcDir>/<relativeDir>/ (for example federal/1040).
+ */
+export const engineSrcDir = resolve(projectRoot, "src/engine");

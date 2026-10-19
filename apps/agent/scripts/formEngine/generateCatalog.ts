@@ -3,13 +3,14 @@
  * blank PDF's AcroForm widgets and AI-labels them into a catalog.json.
  *
  * Writes the classified catalog to
- *   apps/agent/forms/<jurisdiction>/<short>/catalog.json
- * where <short> is the formId with "form-" stripped.
+ *   src/engine/<jurisdiction>/<short>/catalog.json
+ * where <short> is the formId with "form-" stripped. The catalog sits
+ * next to the form's bindings.ts.
  */
 
 import { resolve } from "node:path";
 import { runIngestForm } from "../../src/forms-pipeline/ingestFormWorkflow/index.js";
-import { projectRoot } from "../../src/paths.js";
+import { engineSrcDir } from "../../src/paths.js";
 import type { Command } from "../lib/cli";
 
 interface Args {
@@ -47,25 +48,20 @@ function parseCmdArgs(argv: string[]): Args {
   };
 }
 
-/*
- * Co-locate the catalog with its source PDF. Each form has its own
- * folder under forms/<jurisdiction>/<short>/ with blank.pdf +
- * catalog.json, plus the instructions sidecar when ingested.
- */
+/* The form's folder under the engine: federal/<short> or state/<st>/<short>. */
 function defaultOutputDir(jurisdiction: string, formId: string): string {
   const shortName = formId.replace(/^form-/, "");
-  if (jurisdiction === "federal") return `forms/federal/${shortName}`;
   if (jurisdiction.startsWith("state-")) {
     const state = jurisdiction.slice("state-".length);
-    return `forms/state/${state}/${shortName}`;
+    return `state/${state}/${shortName}`;
   }
-  return `forms/federal/${shortName}`;
+  return `federal/${shortName}`;
 }
 
 async function run(argv: string[]): Promise<void> {
   const args = parseCmdArgs(argv);
   const outputPath = resolve(
-    projectRoot,
+    engineSrcDir,
     `${defaultOutputDir(args.jurisdiction, args.formId)}/catalog.json`,
   );
 

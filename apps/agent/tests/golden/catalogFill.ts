@@ -5,7 +5,7 @@
  * For one form-id: load the catalog and the blank PDF. Build an
  * EvaluatedForm with a deterministic synthetic value per field. Render
  * with fillFromCatalog. Diff the rendered map against the golden file
- * stored next to the catalog.
+ * in tests/golden/catalog-fill/<relativeDir>.json.
  *
  *   npx tsx tests/golden/catalogFill.ts --form-id=form-8949 [--update]
  *   (check-only, via the main runner: npm test -- form-8949)
@@ -63,8 +63,16 @@ import { FORMS, getFormSpec } from "../../src/engine/registry.js";
 
 export const CATALOGS = FORMS;
 
-function lookupCatalogPath(formId: string): string {
-  return getFormSpec(formId).catalogPath;
+const GOLDEN_DIR = join(__dirname, "catalog-fill");
+
+/** The catalog, blank PDF, and catalog-fill golden for one form. */
+function formPaths(formId: string): { catalogPath: string; blankPath: string; goldenPath: string } {
+  const spec = getFormSpec(formId);
+  return {
+    catalogPath: spec.catalogPath,
+    blankPath: spec.blankPdfPath,
+    goldenPath: join(GOLDEN_DIR, `${spec.relativeDir}.json`),
+  };
 }
 
 /*
@@ -258,10 +266,7 @@ export async function runCatalogFillCheck(formId: string): Promise<RunResult> {
   const t0 = Date.now();
   const failures: string[] = [];
   try {
-    const catalogPath = lookupCatalogPath(formId);
-    const formDir = catalogPath.replace(/\/catalog\.json$/, "");
-    const blankPath = join(formDir, "blank.pdf");
-    const goldenPath = join(formDir, "catalog-fill-golden.json");
+    const { catalogPath, blankPath, goldenPath } = formPaths(formId);
 
     const catalog = await loadFromFixture(catalogPath);
     const fieldCount = catalog.getFields(formId).length;
@@ -349,10 +354,7 @@ export async function runCatalogFillCheck(formId: string): Promise<RunResult> {
 async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
 
-  const catalogPath = lookupCatalogPath(args.formId);
-  const formDir = catalogPath.replace(/\/catalog\.json$/, "");
-  const blankPath = join(formDir, "blank.pdf");
-  const goldenPath = join(formDir, "catalog-fill-golden.json");
+  const { catalogPath, blankPath, goldenPath } = formPaths(args.formId);
 
   console.log(`catalog-fill ${args.formId}${args.update ? " (--update)" : ""}`);
   console.log(`  catalog: ${catalogPath}`);

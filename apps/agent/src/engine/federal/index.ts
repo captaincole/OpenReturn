@@ -8,8 +8,8 @@
  * only keeps the pass count low.
  *
  * To add a federal form:
- *   1. Put catalog.json + blank.pdf in apps/agent/forms/federal/<short>/.
- *      Promote the runtime copy to src/mastra/public/forms/federal/<short>/.
+ *   1. Put blank.pdf in apps/agent/forms/federal/<short>/. Generate
+ *      catalog.json into ./<short>/ (form-engine generate-catalog).
  *   2. Write types.ts + filingInfo.ts + bindings.ts under ./<short>/.
  *   3. Add a makeFormSpec entry below. Add its catalog import if it has
  *      bindings.
@@ -33,28 +33,23 @@ import { register as registerScheduleD } from "./schedule-d/bindings.js";
 import { register as registerScheduleH } from "./schedule-h/bindings.js";
 
 /*
- * Static JSON imports from the PROMOTED runtime copies under
- * src/mastra/public/forms/, not from the source of truth at
- * apps/agent/forms/. This split is a promotion gate: catalog ingest
- * updates apps/agent/forms/ and tests run against it. The runtime picks
- * up the change only after `form-engine promote` copies it. Rollup
- * inlines the JSON at build time; the running process does not read it
- * from disk.
+ * Each form's catalog.json sits next to its bindings. Rollup inlines the
+ * JSON at build time; the running process does not read it from disk.
  */
-import form1040CatalogJson from "../../mastra/public/forms/federal/1040/catalog.json";
-import form5695CatalogJson from "../../mastra/public/forms/federal/5695/catalog.json";
-import form8889CatalogJson from "../../mastra/public/forms/federal/8889/catalog.json";
-import form8949CatalogJson from "../../mastra/public/forms/federal/8949/catalog.json";
-import form8959CatalogJson from "../../mastra/public/forms/federal/8959/catalog.json";
-import form8960CatalogJson from "../../mastra/public/forms/federal/8960/catalog.json";
-import form8995ACatalogJson from "../../mastra/public/forms/federal/8995-a/catalog.json";
-import schedule1CatalogJson from "../../mastra/public/forms/federal/schedule-1/catalog.json";
-import schedule2CatalogJson from "../../mastra/public/forms/federal/schedule-2/catalog.json";
-import schedule3CatalogJson from "../../mastra/public/forms/federal/schedule-3/catalog.json";
-import scheduleACatalogJson from "../../mastra/public/forms/federal/schedule-a/catalog.json";
-import scheduleBCatalogJson from "../../mastra/public/forms/federal/schedule-b/catalog.json";
-import scheduleDCatalogJson from "../../mastra/public/forms/federal/schedule-d/catalog.json";
-import scheduleHCatalogJson from "../../mastra/public/forms/federal/schedule-h/catalog.json";
+import form1040CatalogJson from "./1040/catalog.json";
+import form5695CatalogJson from "./5695/catalog.json";
+import form8889CatalogJson from "./8889/catalog.json";
+import form8949CatalogJson from "./8949/catalog.json";
+import form8959CatalogJson from "./8959/catalog.json";
+import form8960CatalogJson from "./8960/catalog.json";
+import form8995ACatalogJson from "./8995-a/catalog.json";
+import schedule1CatalogJson from "./schedule-1/catalog.json";
+import schedule2CatalogJson from "./schedule-2/catalog.json";
+import schedule3CatalogJson from "./schedule-3/catalog.json";
+import scheduleACatalogJson from "./schedule-a/catalog.json";
+import scheduleBCatalogJson from "./schedule-b/catalog.json";
+import scheduleDCatalogJson from "./schedule-d/catalog.json";
+import scheduleHCatalogJson from "./schedule-h/catalog.json";
 
 /*
  * fixtureFileSchema.parse() narrows TypeScript's widened JSON types

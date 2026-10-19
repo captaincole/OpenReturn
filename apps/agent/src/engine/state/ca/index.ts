@@ -17,14 +17,10 @@ import { register as registerForm540 } from "./540/bindings.js";
 import { register as registerForm5805 } from "./5805/bindings.js";
 import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
 
-/*
- * Promoted runtime catalog copies. See ../../federal/index.ts for why
- * these import from src/mastra/public/forms/ and not from
- * apps/agent/forms/.
- */
-import form540CatalogJson from "../../../mastra/public/forms/state/ca/540/catalog.json";
-import form5805CatalogJson from "../../../mastra/public/forms/state/ca/5805/catalog.json";
-import scheduleCaCatalogJson from "../../../mastra/public/forms/state/ca/schedule-ca/catalog.json";
+/* Each form's catalog.json sits next to its bindings. */
+import form540CatalogJson from "./540/catalog.json";
+import form5805CatalogJson from "./5805/catalog.json";
+import scheduleCaCatalogJson from "./schedule-ca/catalog.json";
 
 export const CA_CATALOGS = [
   fixtureFileSchema.parse(scheduleCaCatalogJson),
