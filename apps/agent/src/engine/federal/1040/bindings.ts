@@ -382,8 +382,16 @@ export function register(): void {
         f["line.18"] === undefined
           ? undefined
           : atLeast(0, sum(f["line.18"], f["line.21"] === undefined ? 0 : -f["line.21"])),
-      // Total tax = line 22 (tax after credits) + line 23 (other taxes from Schedule 2).
-      "line.24": (f) => (f["line.22"] === undefined ? undefined : sum(f["line.22"], f["line.23"])),
+      /*
+       * Total tax = line 22 (tax after credits) + line 23 (other taxes
+       * from Schedule 2). A blank line 23 is 0 when Schedule 2 is not
+       * filed, so also blank when Schedule H line 9 is Yes: Schedule 2
+       * line 21 is blank then (FUTA tax not modeled).
+       */
+      "line.24": (f) =>
+        f["line.22"] === undefined || f["schedule-h.0.line.9_yes"] === true
+          ? undefined
+          : sum(f["line.22"], f["line.23"]),
       // Sum of W-2 box 2 (federal income tax withheld) across all employers.
       "line.25a": (_, info) => roundDollars(info.w2FederalWithholding),
       /*

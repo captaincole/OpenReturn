@@ -33,6 +33,20 @@ const ItemSchema = z.object({
     ),
 });
 
+/*
+ * The key slug: vendor plus invoice number, or vendor plus date when
+ * there is no number. Two invoices from one vendor then get two keys;
+ * one key would let the second replace the first.
+ */
+export function energyInvoiceSlug(input: {
+  vendorName: string;
+  invoiceNumber?: string;
+  invoiceDate?: string;
+}): string {
+  const id = input.invoiceNumber ?? input.invoiceDate ?? "";
+  return slugify(`${input.vendorName} ${id}`) || "vendor";
+}
+
 export const ingestEnergyInvoice = createTool({
   id: "ingest-energy-invoice",
   description:
@@ -61,8 +75,7 @@ export const ingestEnergyInvoice = createTool({
       invoiceDate: input.invoiceDate,
       items: input.items,
     };
-    const slug = slugify(`${input.vendorName} ${input.invoiceNumber ?? ""}`) || "vendor";
-    const factKey = makeEnergyInvoiceFactKey(slug);
+    const factKey = makeEnergyInvoiceFactKey(energyInvoiceSlug(input));
     await recordIngestFact(ctx, "home_energy", factKey, value);
     return { factKey };
   },

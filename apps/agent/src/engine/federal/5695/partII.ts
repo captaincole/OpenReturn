@@ -26,17 +26,25 @@ export function hasSectionB(info: Form5695FilingInfo): boolean {
 }
 
 /*
- * Section A applies only when lines 17a, 17b, and 17c are all Yes
- * ("If you checked the No box for line 17a, 17b, or 17c, you cannot
- * claim the energy efficient home improvement credit").
+ * Lines 17d and 17e are filled in only when lines 17a, 17b, and 17c are
+ * all Yes ("If you check the No box, you can't take the energy
+ * efficient home improvement credit").
  */
-export function sectionAQualifies(info: Form5695FilingInfo): boolean {
+export function sectionAApplies(info: Form5695FilingInfo): boolean {
   return (
     hasSectionA(info) &&
     info.homeEnergyMainHomeInUs === true &&
     info.homeEnergyOriginalUser === true &&
     info.homeEnergyLastsFiveYears === true
   );
+}
+
+/*
+ * Lines 18–20 also need line 17e No: "If you check the Yes box, skip
+ * lines 18a through 20d" (improvements related to building a new home).
+ */
+export function sectionAQualifies(info: Form5695FilingInfo): boolean {
+  return sectionAApplies(info) && info.homeEnergyNewConstruction === false;
 }
 
 /* Section B applies only when lines 21a and 21b are both Yes. */

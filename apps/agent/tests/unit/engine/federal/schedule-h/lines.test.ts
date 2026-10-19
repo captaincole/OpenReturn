@@ -9,6 +9,7 @@ import type {
   ScheduleHFilingInfo,
 } from "../../../../../src/engine/federal/schedule-h/filingInfo.js";
 import {
+  line9,
   lineA,
   lineAEmployees,
   lineB,
@@ -50,5 +51,18 @@ describe("Schedule H lines A–C", () => {
   it("counts Medicare wages toward the $2,800 when they are higher", () => {
     const e = { ...employee(0), medicareWages: 2800 };
     expect(lineA(info([e]))).toBe(true);
+  });
+});
+
+describe("Schedule H line 9 ($1,000 in a quarter: FUTA)", () => {
+  it.each([
+    // label, info, line 9
+    ["line A Yes, no $1,000 quarter", info([employee(3100)], false), false],
+    ["line A Yes, a $1,000 quarter", info([employee(3100)], true), true],
+    ["line B Yes, a $1,000 quarter", info([employee(2000, 150)], true), true],
+    ["line A Yes, quarter not answered", info([employee(3100)]), undefined],
+    ["lines A and B No: line 9 is not reached", info([employee(2000)], true), undefined],
+  ] as const)("%s", (_, i, expected) => {
+    expect(line9(i)).toBe(expected);
   });
 });

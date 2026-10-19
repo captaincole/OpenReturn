@@ -15,9 +15,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import type { HouseholdEmployee, ScheduleHFilingInfo } from "./filingInfo.js";
-
-/* Schedule H line A: 2025 cash-wage threshold for one household employee. */
-export const HOUSEHOLD_WAGE_THRESHOLD = 2800;
+import { paysLineA } from "./lines.js";
 
 /*
  * Default (Schedule H instructions, "Who Must File"): required when any
@@ -60,11 +58,6 @@ export function resolveScheduleHInfo(inputs: ResolverInputs): ScheduleHFilingInf
     householdEmployerEin: values.find((v) => v.employerEin)?.employerEin,
     householdPaid1000InAQuarter: paid1000,
   };
-}
-
-/** Line A: this employee's cash wages reached the $2,800 threshold. */
-export function paysLineA(e: HouseholdEmployee): boolean {
-  return Math.max(e.socialSecurityWages, e.medicareWages) >= HOUSEHOLD_WAGE_THRESHOLD;
 }
 
 function toEmployee(v: HouseholdEmployeeFactValue): HouseholdEmployee {

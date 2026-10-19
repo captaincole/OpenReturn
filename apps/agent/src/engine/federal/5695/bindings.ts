@@ -25,6 +25,7 @@ import {
   hasSectionA,
   hasSectionB,
   itemsOf,
+  sectionAApplies,
   sectionAQualifies,
   sectionBQualifies,
   total,
@@ -88,13 +89,13 @@ export function register(): void {
       "1.line.17c_yes": (_, i) => yesBox(hasSectionA, (x) => x.homeEnergyLastsFiveYears)(i),
       "1.line.17c_no": (_, i) => noBox(hasSectionA, (x) => x.homeEnergyLastsFiveYears)(i),
       // Line 17d: the main home's address. The home address on the return.
-      "1.line.17d_street": (_, i) => (sectionAQualifies(i) ? i.homeAddressLine1 : undefined),
-      "1.line.17d_unit": (_, i) => (sectionAQualifies(i) ? i.homeAddressApt : undefined),
-      "1.line.17d_city": (_, i) => (sectionAQualifies(i) ? i.homeAddressCity : undefined),
-      "1.line.17d_state": (_, i) => (sectionAQualifies(i) ? i.homeAddressState : undefined),
-      "1.line.17d_zip": (_, i) => (sectionAQualifies(i) ? i.homeAddressZip : undefined),
-      "1.line.17e_yes": (_, i) => yesBox(sectionAQualifies, (x) => x.homeEnergyNewConstruction)(i),
-      "1.line.17e_no": (_, i) => noBox(sectionAQualifies, (x) => x.homeEnergyNewConstruction)(i),
+      "1.line.17d_street": (_, i) => (sectionAApplies(i) ? i.homeAddressLine1 : undefined),
+      "1.line.17d_unit": (_, i) => (sectionAApplies(i) ? i.homeAddressApt : undefined),
+      "1.line.17d_city": (_, i) => (sectionAApplies(i) ? i.homeAddressCity : undefined),
+      "1.line.17d_state": (_, i) => (sectionAApplies(i) ? i.homeAddressState : undefined),
+      "1.line.17d_zip": (_, i) => (sectionAApplies(i) ? i.homeAddressZip : undefined),
+      "1.line.17e_yes": (_, i) => yesBox(sectionAApplies, (x) => x.homeEnergyNewConstruction)(i),
+      "1.line.17e_no": (_, i) => noBox(sectionAApplies, (x) => x.homeEnergyNewConstruction)(i),
 
       // Line 18: insulation and air sealing. 30%, at most $1,200.
       "1.line.18a": (_, i) => costOf(a(i, "insulation")),
@@ -175,7 +176,11 @@ export function register(): void {
        */
       "2.line.25a_no": (_, i) => (sectionBQualifies(i) ? true : undefined),
 
-      // Line 26: home energy audits. 30%, at most $150.
+      /*
+       * Line 26: home energy audits. 30%, at most $150. Line 26a is
+       * inferred, not asked: Yes when an invoice has an audit item, No
+       * when none does.
+       */
       "3.line.26a_yes": (_, i) =>
         sectionBQualifies(i) ? b(i, "home_energy_audit").length > 0 : undefined,
       "3.line.26a_no": (_, i) =>

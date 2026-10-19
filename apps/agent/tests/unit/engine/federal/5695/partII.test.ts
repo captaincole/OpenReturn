@@ -10,6 +10,7 @@ import {
   costOf,
   credit,
   itemsOf,
+  sectionAApplies,
   sectionAQualifies,
   sectionBQualifies,
   total,
@@ -18,40 +19,67 @@ import {
 const door = (cost: number): EnergyImprovementItem => ({ kind: "exterior_door", cost });
 const ac = (cost: number): EnergyImprovementItem => ({ kind: "central_air_conditioner", cost });
 
+/* Lines 17a–17c Yes, 17e No: every answer that lets the credit through. */
 const YES = {
   homeEnergyMainHomeInUs: true,
   homeEnergyOriginalUser: true,
   homeEnergyLastsFiveYears: true,
+  homeEnergyNewConstruction: false,
 };
+const BOTH = [door(800), ac(2100)];
 
 describe("section qualification", () => {
   it.each([
-    // label, info, Section A, Section B
-    ["all Yes, both kinds", { ...YES, energyItems: [door(800), ac(2100)] }, true, true],
+    // label, info, A applies (17d–17e), A qualifies (18–20), B qualifies
+    ["all answers allow it, both kinds", { ...YES, energyItems: BOTH }, true, true, true],
+    [
+      "17e Yes (new home construction): skip 18a–20d",
+      { ...YES, homeEnergyNewConstruction: true, energyItems: BOTH },
+      true,
+      false,
+      true,
+    ],
+    [
+      "17e not answered",
+      { ...YES, homeEnergyNewConstruction: undefined, energyItems: BOTH },
+      true,
+      false,
+      true,
+    ],
     [
       "17c No (lasts 5 years)",
-      { ...YES, homeEnergyLastsFiveYears: false, energyItems: [door(800), ac(2100)] },
+      { ...YES, homeEnergyLastsFiveYears: false, energyItems: BOTH },
+      false,
       false,
       true,
     ],
     [
       "17a/21a No (main home in US)",
-      { ...YES, homeEnergyMainHomeInUs: false, energyItems: [door(800), ac(2100)] },
+      { ...YES, homeEnergyMainHomeInUs: false, energyItems: BOTH },
+      false,
       false,
       false,
     ],
     [
       "17b/21b No (original user)",
-      { ...YES, homeEnergyOriginalUser: false, energyItems: [door(800), ac(2100)] },
+      { ...YES, homeEnergyOriginalUser: false, energyItems: BOTH },
+      false,
       false,
       false,
     ],
-    ["answers not given", { energyItems: [door(800), ac(2100)] }, false, false],
-    ["doors only", { ...YES, energyItems: [door(800)] }, true, false],
-    ["no items", YES, false, false],
-  ] as Array<[string, Form5695FilingInfo, boolean, boolean]>)("%s", (_, info, a, b) => {
-    expect([sectionAQualifies(info), sectionBQualifies(info)]).toEqual([a, b]);
-  });
+    ["answers not given", { energyItems: BOTH }, false, false, false],
+    ["doors only", { ...YES, energyItems: [door(800)] }, true, true, false],
+    ["no items", YES, false, false, false],
+  ] as Array<[string, Form5695FilingInfo, boolean, boolean, boolean]>)(
+    "%s",
+    (_, info, aApplies, aQualifies, bQualifies) => {
+      expect([sectionAApplies(info), sectionAQualifies(info), sectionBQualifies(info)]).toEqual([
+        aApplies,
+        aQualifies,
+        bQualifies,
+      ]);
+    },
+  );
 });
 
 describe("itemsOf / costOf", () => {

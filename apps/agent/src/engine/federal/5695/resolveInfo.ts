@@ -18,8 +18,13 @@ import type { Form5695FilingInfo } from "./filingInfo.js";
 import { hasSectionA } from "./partII.js";
 
 /*
- * Default: required when any energy invoice is recorded. An explicit
- * `decisions.scope.must_file_5695` wins.
+ * Default: required when a recorded energy invoice has at least one
+ * item. An explicit `decisions.scope.must_file_5695` wins.
+ *
+ * TODO: ask for a missing QMID. The 2025 instructions require one for
+ * each item of specified property (every kind but insulation and
+ * audits). missingInputs names whole facts, so it cannot ask for one
+ * item's QMID yet.
  */
 export function resolve5695Info(inputs: ResolverInputs): Form5695FilingInfo {
   const rows = factsInCategory(inputs, "home_energy").filter((row) =>
@@ -41,14 +46,14 @@ export function resolve5695Info(inputs: ResolverInputs): Form5695FilingInfo {
     explicitKey: "decisions.scope.must_file_5695",
     fallbacks: [
       {
-        rule: "fallback: an energy improvement invoice is recorded",
-        value: rows.length > 0,
+        rule: "fallback: an energy improvement invoice with an item is recorded",
+        value: energyItems.length > 0,
         triggeredByFactKeys: rows.map((row) => row.key),
       },
     ],
   });
   const required =
-    rows.length === 0
+    energyItems.length === 0
       ? {}
       : {
           [HOME_ENERGY_KEYS.mainHomeInUs]: info.homeEnergyMainHomeInUs,

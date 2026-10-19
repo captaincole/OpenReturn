@@ -84,22 +84,29 @@ export function register(): void {
           f["1.line.17q_interest_form8621_line24"],
           f["1.line.17z_other_taxes_amount"],
         ),
-      // Adds lines 4, 7–9, 11–16, 18 and 19 to get total other taxes; line 10 has no field in the inventory.
+      /*
+       * Adds lines 4, 7–9, 11–16, 18 and 19 to get total other taxes; line
+       * 10 has no field in the inventory. Blank when Schedule H line 9 is
+       * Yes: line 9 then needs the FUTA tax (Part II, not modeled), and a
+       * total without it would understate the tax.
+       */
       "1.line.21_total_other_taxes": (f) =>
-        total(
-          f["0.line.4_self_employment_tax"],
-          f["0.line.7_total_additional_ss_medicare_tax"],
-          f["0.line.8_additional_tax_iras_tax_favored_accounts"],
-          f["0.line.9_household_employment_taxes"],
-          f["0.line.11_additional_medicare_tax"],
-          f["0.line.12_net_investment_income_tax"],
-          f["0.line.13_uncollected_ss_medicare_rrta_tax_w2"],
-          f["0.line.14_interest_tax_installment_residential_lots"],
-          f["0.line.15_interest_deferred_tax_installment_sales"],
-          f["0.line.16_recapture_low_income_housing_credit"],
-          f["1.line.18_total_additional_taxes"],
-          f["1.line.19_recapture_net_epe_form4255_line1d"],
-        ),
+        f["schedule-h.0.line.9_yes"] === true
+          ? undefined
+          : total(
+              f["0.line.4_self_employment_tax"],
+              f["0.line.7_total_additional_ss_medicare_tax"],
+              f["0.line.8_additional_tax_iras_tax_favored_accounts"],
+              f["0.line.9_household_employment_taxes"],
+              f["0.line.11_additional_medicare_tax"],
+              f["0.line.12_net_investment_income_tax"],
+              f["0.line.13_uncollected_ss_medicare_rrta_tax_w2"],
+              f["0.line.14_interest_tax_installment_residential_lots"],
+              f["0.line.15_interest_deferred_tax_installment_sales"],
+              f["0.line.16_recapture_low_income_housing_credit"],
+              f["1.line.18_total_additional_taxes"],
+              f["1.line.19_recapture_net_epe_form4255_line1d"],
+            ),
     },
 
     unsupported: {

@@ -4,12 +4,19 @@
  */
 
 import type { HouseholdEmployee, ScheduleHFilingInfo } from "./filingInfo.js";
-import { paysLineA } from "./resolveInfo.js";
+
+/* Schedule H line A: 2025 cash-wage threshold for one household employee. */
+export const HOUSEHOLD_WAGE_THRESHOLD = 2800;
 
 /* Line 5: wages over this amount to one employee need Additional Medicare Tax withholding. */
 export const ADDITIONAL_MEDICARE_WITHHOLDING_THRESHOLD = 200000;
 
 type Info = ScheduleHFilingInfo;
+
+/** Line A: this employee's cash wages reached the $2,800 threshold. */
+export function paysLineA(e: HouseholdEmployee): boolean {
+  return Math.max(e.socialSecurityWages, e.medicareWages) >= HOUSEHOLD_WAGE_THRESHOLD;
+}
 
 /* The employees whose wages go on lines 1, 3, and 5 (line A is Yes for them). */
 export const lineAEmployees = (info: Info): HouseholdEmployee[] =>
@@ -31,3 +38,10 @@ export const lineC = (info: Info): boolean | undefined =>
 /* Part I (lines 1–6) applies when line A is Yes; lines 7–9 also when line B is Yes. */
 export const partI = (info: Info): boolean => lineA(info) === true;
 export const lines7to9 = (info: Info): boolean => lineA(info) === true || lineB(info) === true;
+
+/*
+ * Line 9: $1,000 or more in cash wages in any quarter of 2024 or 2025.
+ * Yes means Part II (FUTA tax) applies, which is not modeled.
+ */
+export const line9 = (info: Info): boolean | undefined =>
+  lines7to9(info) ? info.householdPaid1000InAQuarter : undefined;

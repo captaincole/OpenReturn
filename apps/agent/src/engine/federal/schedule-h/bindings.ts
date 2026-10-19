@@ -16,6 +16,7 @@ import { SSN } from "../../values.js";
 import type { ScheduleHFilingInfo } from "./filingInfo.js";
 import {
   ADDITIONAL_MEDICARE_WITHHOLDING_THRESHOLD,
+  line9,
   lineA,
   lineAEmployees,
   lineB,
@@ -82,10 +83,8 @@ export function register(): void {
         lines7to9(info)
           ? sum(f["0.line.2"], f["0.line.4"], f["0.line.6"], f["0.line.7"])
           : undefined,
-      "0.line.9_yes": (_, info) =>
-        lines7to9(info) ? yes(info.householdPaid1000InAQuarter) : undefined,
-      "0.line.9_no": (_, info) =>
-        lines7to9(info) ? no(info.householdPaid1000InAQuarter) : undefined,
+      "0.line.9_yes": (_, info) => yes(line9(info)),
+      "0.line.9_no": (_, info) => no(line9(info)),
     },
 
     formatters: {
