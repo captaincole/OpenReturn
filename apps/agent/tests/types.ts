@@ -10,9 +10,8 @@
  * index.ts, and add it to SCENARIOS in scenarios/index.ts.
  */
 
+import type { AIDecisionRow, TaxFactRow } from "../src/engine/facts/rows.js";
 import type { ScheduleBRounding } from "../src/engine/federal/schedule-b/filingInfo.js";
-import type { AIDecisionRow } from "../src/mastra/db/aiDecisions.js";
-import type { TaxFactRow } from "../src/mastra/db/taxFacts.js";
 
 export interface ScenarioForm {
   /**

@@ -6,7 +6,7 @@
  * it needs without the agent loop.
  */
 
-import type { AIDecisionRow } from "../../../src/mastra/db/aiDecisions.js";
+import type { AIDecisionRow } from "../../../src/engine/facts/rows.js";
 import { decisionRow } from "../../helpers/fixtureBuilders.js";
 import { ALEX_TAX_YEAR, ALEX_USER_ID } from "./facts.js";
 

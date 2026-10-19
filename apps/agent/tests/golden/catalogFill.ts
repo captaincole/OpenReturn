@@ -32,6 +32,7 @@ import { join } from "node:path";
 import { loadFromFixture, type Catalog, type FieldInventory } from "../../src/engine/catalog.js";
 import { fillFromCatalog } from "../../src/engine/render/fillFromCatalog.js";
 import type { AnyFormField, EvaluatedForm } from "../../src/engine/types.js";
+import { blankPdfPath, catalogPath } from "../helpers/formPaths.js";
 import type { RunResult } from "../types.js";
 
 interface Args {
@@ -69,8 +70,8 @@ const GOLDEN_DIR = join(__dirname, "catalog-fill");
 function formPaths(formId: string): { catalogPath: string; blankPath: string; goldenPath: string } {
   const spec = getFormSpec(formId);
   return {
-    catalogPath: spec.catalogPath,
-    blankPath: spec.blankPdfPath,
+    catalogPath: catalogPath(spec),
+    blankPath: blankPdfPath(spec),
     goldenPath: join(GOLDEN_DIR, `${spec.relativeDir}.json`),
   };
 }

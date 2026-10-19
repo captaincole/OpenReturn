@@ -27,6 +27,7 @@ import { parseArgs } from "node:util";
 import { loadFromFixtures } from "../../src/engine/catalog.js";
 import { evaluateScenario } from "../../src/engine/index.js";
 import { FORMS } from "../../src/engine/registry.js";
+import { catalogPath } from "../../tests/helpers/formPaths.js";
 import { decisionsWithPreparerStyle } from "../../tests/helpers/preparer.js";
 import type { Scenario } from "../../tests/types.js";
 import { compareFiled, type CompareResult, type FiledReturn } from "./compare.js";
@@ -118,7 +119,7 @@ async function buildReport(dir: string): Promise<{ s: Scenario; report: ReportIn
     facts: s.facts,
     decisions: decisionsWithPreparerStyle(s),
   });
-  const catalog = await loadFromFixtures(FORMS.map((f) => f.catalogPath));
+  const catalog = await loadFromFixtures(FORMS.map(catalogPath));
   const formOrder = [...CALC_ORDER, ...FORMS.map((f) => f.formId)].filter(
     (id, i, all) => all.indexOf(id) === i,
   );

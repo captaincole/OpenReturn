@@ -34,6 +34,7 @@ import {
   type EvaluatedForm,
 } from "../src/engine/types.js";
 import { projectRoot } from "../src/paths.js";
+import { blankPdfPath, catalogPath } from "../tests/helpers/formPaths.js";
 import { scenarioPdfName, toPascal } from "../tests/helpers/scenarioPdfName.js";
 import type { Scenario } from "../tests/types.js";
 
@@ -113,7 +114,7 @@ async function main() {
 
   const ctx = buildContext(s);
 
-  const catalog = await loadFromFixtures(specs.map((spec) => spec.catalogPath));
+  const catalog = await loadFromFixtures(specs.map(catalogPath));
 
   const { forms, passes } = evaluateAllForms(
     s.forms.map((f) => f.formId),
@@ -134,7 +135,7 @@ async function main() {
       continue;
     }
 
-    const blankPdfBytes = await readFile(spec.blankPdfPath);
+    const blankPdfBytes = await readFile(blankPdfPath(spec));
     const { pdfBytes, warnings, copies } = values.golden
       ? await renderGolden(evaluated, catalog, blankPdfBytes)
       : await renderFormCopies({ spec, form: evaluated, ctx, catalog, blankPdfBytes });

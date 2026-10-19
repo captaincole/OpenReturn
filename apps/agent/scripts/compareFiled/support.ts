@@ -37,7 +37,7 @@ import {
   isTradeFact,
   isW2Fact,
 } from "../../src/engine/facts/index.js";
-import type { TaxFactRow } from "../../src/mastra/db/taxFacts.js";
+import type { TaxFactRow } from "../../src/engine/facts/rows.js";
 import type { Scenario } from "../../tests/types.js";
 
 export interface SupportIssue {

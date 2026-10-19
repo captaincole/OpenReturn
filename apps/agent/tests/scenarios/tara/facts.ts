@@ -16,7 +16,7 @@ import {
   type HouseholdEmployeeFactValue,
   type W2FactValue,
 } from "../../../src/engine/facts/index.js";
-import type { TaxFactRow } from "../../../src/mastra/db/taxFacts.js";
+import type { TaxFactRow } from "../../../src/engine/facts/rows.js";
 import { identityFact } from "../../helpers/fixtureBuilders.js";
 
 export const TARA_USER_ID = "tara-integration";

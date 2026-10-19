@@ -9,7 +9,7 @@
  * 8960, full 1040 line 23) lights up as those bindings land.
  */
 
-import type { AIDecisionRow } from "../../../src/mastra/db/aiDecisions.js";
+import type { AIDecisionRow } from "../../../src/engine/facts/rows.js";
 import { decisionRow } from "../../helpers/fixtureBuilders.js";
 import { MARCUS_TAX_YEAR, MARCUS_USER_ID } from "./facts.js";
 

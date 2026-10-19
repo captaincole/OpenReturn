@@ -3,7 +3,7 @@
  * through these two functions:
  *
  *   evaluateScenario({filing, facts, decisions, authEmail?}) → EvaluatedScenario
- *   renderForm(scenario, formId)                             → RenderedForm
+ *   renderForm(scenario, formId, loadBlankPdf)               → RenderedForm
  *
  * The engine never touches a database. Callers load the filing's fact and
  * decision rows (see mastra/loadScenario.ts for the runtime bridge) and
@@ -18,18 +18,15 @@
  * instance owner's email; it is never load-bearing for evaluation.
  *
  * renderForm fills the catalog widgets on a form's blank PDF with the
- * values that evaluateScenario produced. The blank PDF lives at
- * `forms/<spec.relativeDir>/blank.pdf` relative to cwd. Mastra's
- * copyPublic step ships src/mastra/public/forms/** into the deployed
- * bundle, and `mastra dev` runs with cwd at src/mastra/public, so the
- * same relative path works in dev, prod, and offline scripts.
+ * values that evaluateScenario produced. The caller supplies the blank
+ * PDF through a BlankPdfLoader: the engine reads no files, so where the
+ * PDFs live (the agent's runtime tree, the forms package) is the
+ * caller's business.
  *
  * Neither function persists documents. Tools wrap renderForm with
  * createDocument() to store a user-visible draft.
  */
 
-import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
 import { evaluateAllForms } from "./engine.js";
 import type { AIDecisionRow, TaxFactRow } from "./facts/rows.js";
 import { resolveFilingInfo, type FilingInfo } from "./filingInfo.js";
@@ -70,6 +67,15 @@ export interface EvaluatedScenario {
   /** The context the forms were evaluated with. Rendering extra copies reuses it. */
   ctx: DerivationContext;
 }
+
+/**
+ * Reads one form's blank PDF. relativeDir is the form's folder (for
+ * example "federal/1040"); taxYear is the filing's year.
+ */
+export type BlankPdfLoader = (form: {
+  relativeDir: string;
+  taxYear: number;
+}) => Promise<Uint8Array>;
 
 export interface RenderedForm {
   pdfBytes: Buffer;
@@ -139,9 +145,8 @@ export function evaluateScenario(inputs: ScenarioInputs): EvaluatedScenario {
 }
 
 /**
- * Render one of the scenario's evaluated forms to PDF bytes. Reads the
- * blank PDF from disk relative to cwd. The file header explains why this
- * path resolution works across dev, prod, and offline scripts.
+ * Render one of the scenario's evaluated forms to PDF bytes. The loader
+ * supplies the blank PDF.
  *
  * Returns the filled PDF, a map of rendered widgets (tests assert on
  * rendered values), and a warnings list (widget missing, maxLength
@@ -150,6 +155,7 @@ export function evaluateScenario(inputs: ScenarioInputs): EvaluatedScenario {
 export async function renderForm(
   scenario: EvaluatedScenario,
   formId: string,
+  loadBlankPdf: BlankPdfLoader,
 ): Promise<RenderedForm> {
   const spec = getFormSpec(formId);
   const form = scenario.forms.get(formId);
@@ -159,8 +165,10 @@ export async function renderForm(
         `Was evaluateScenario called with a registry that includes this form?`,
     );
   }
-  const blankPdfPath = resolve(process.cwd(), "forms", spec.relativeDir, "blank.pdf");
-  const blankPdfBytes = await readFile(blankPdfPath);
+  const blankPdfBytes = await loadBlankPdf({
+    relativeDir: spec.relativeDir,
+    taxYear: scenario.filing.taxYear,
+  });
   return renderFormCopies({
     spec,
     form,

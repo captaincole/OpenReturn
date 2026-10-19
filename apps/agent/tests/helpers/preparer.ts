@@ -6,7 +6,7 @@
  * that preparer formatted it. Set it on `Scenario.preparer.rounding`.
  */
 
-import type { AIDecisionRow } from "../../src/mastra/db/aiDecisions.js";
+import type { AIDecisionRow } from "../../src/engine/facts/rows.js";
 import type { Scenario } from "../types.js";
 import { decisionRow } from "./fixtureBuilders.js";
 

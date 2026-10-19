@@ -6,15 +6,7 @@
  * circular dependency on registry.ts.
  */
 
-import { resolve } from "node:path";
 import type { FilingInfo } from "./filingInfo.js";
-
-/*
- * Offline paths anchor at cwd. Tests, scripts, and refdocs tooling all
- * run with cwd at apps/agent/. Same convention as src/paths.ts, inlined
- * here so the engine imports no code from outside src/engine/.
- */
-const projectRoot = process.cwd();
 
 export interface FormSpec {
   /** Long-form id used by the engine and bindings (for example "form-1040", "schedule-d"). */
@@ -28,29 +20,12 @@ export interface FormSpec {
   /** Human-readable name used in filenames and UI ("Form 1040", "Schedule CA (540)"). */
   displayName: string;
   /**
-   * Per-form subpath under both `forms/` (offline) and
-   * `src/mastra/public/forms/` (runtime). Examples: "federal/1040",
-   * "state/ca/schedule-ca". The engine renderer uses it to build
-   * cwd-relative paths to blank.pdf. This works in dev
-   * (cwd = src/mastra/public/), in prod (cwd = /var/task, where Mastra's
-   * copyPublic step puts the same forms/ tree), and in tests/scripts
-   * (cwd = apps/agent/, offline source of truth at forms/).
+   * The form's folder, for example "federal/1040" or
+   * "state/ca/schedule-ca". The engine keeps catalog.json and bindings.ts
+   * there, and the source-document trees (blank.pdf, instructions) use
+   * the same subpath. renderForm passes it to the caller's BlankPdfLoader.
    */
   relativeDir: string;
-  /**
-   * Absolute path to the form's catalog.json, next to its bindings.
-   * Tests and one-off scripts load catalog files from disk via
-   * `loadFromFixtures([...])`. Production code uses the bundled `catalog`
-   * export from registry.ts, which imports the same files.
-   */
-  catalogPath: string;
-  /**
-   * Absolute path to the OFFLINE blank.pdf under apps/agent/forms/. Used
-   * by tests and one-off scripts. Production rendering reads
-   * `forms/<relativeDir>/blank.pdf` relative to cwd; see index.ts
-   * renderForm.
-   */
-  blankPdfPath: string;
   /**
    * Side-effecting registration of this form's typed bindings into the
    * engine's registry. Idempotent: a second call overwrites in place. We
@@ -86,9 +61,5 @@ export function makeFormSpec(args: {
   register?: () => void;
   copies?: FormCopies;
 }): FormSpec {
-  return {
-    ...args,
-    catalogPath: resolve(projectRoot, "src/engine", args.relativeDir, "catalog.json"),
-    blankPdfPath: resolve(projectRoot, "forms", args.relativeDir, "blank.pdf"),
-  };
+  return args;
 }

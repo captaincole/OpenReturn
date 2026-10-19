@@ -5,7 +5,7 @@
  * draft 1040. The California answers were added (docs/RELOCATION.md).
  */
 
-import type { AIDecisionRow } from "../../../src/mastra/db/aiDecisions.js";
+import type { AIDecisionRow } from "../../../src/engine/facts/rows.js";
 import { decisionRow } from "../../helpers/fixtureBuilders.js";
 import { CARTER_TAX_YEAR, CARTER_USER_ID } from "./facts.js";
 

@@ -27,6 +27,7 @@ import {
   assertRenderedChecked,
   assertRenderedText,
 } from "../helpers/assertions.js";
+import { blankPdfPath, catalogPath } from "../helpers/formPaths.js";
 import { readGoldenPdfValues } from "../helpers/goldenPdf.js";
 import { decisionsWithPreparerStyle } from "../helpers/preparer.js";
 import type { RunResult, Scenario, ScenarioForm } from "../types.js";
@@ -115,7 +116,7 @@ export async function evaluateScenarioForms(
    * lookups (e.g. CA 540 line 13 reads form-1040 line 11b) then find
    * their target inventory rows in one place.
    */
-  const catalog = await getCombinedCatalog(specs.map((spec) => spec.catalogPath));
+  const catalog = await getCombinedCatalog(specs.map(catalogPath));
 
   /*
    * Fixpoint loop: evaluate every form and iterate until cross-form refs
@@ -143,7 +144,7 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
       failures.push(`[${sf.formId}] evaluateAllForms returned no result.`);
       continue;
     }
-    await assertForm(sf, spec.blankPdfPath, evaluated, catalog, failures, notModeled, known);
+    await assertForm(sf, blankPdfPath(spec), evaluated, catalog, failures, notModeled, known);
   }
 
   return {

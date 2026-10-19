@@ -6,7 +6,7 @@
  */
 
 import { makeForm8949BoxDecisionKey } from "../../../src/engine/facts/index.js";
-import type { AIDecisionRow } from "../../../src/mastra/db/aiDecisions.js";
+import type { AIDecisionRow } from "../../../src/engine/facts/rows.js";
 import { decisionRow } from "../../helpers/fixtureBuilders.js";
 import { JORDAN_BOXES, JORDAN_TAX_YEAR, JORDAN_USER_ID } from "./facts.js";
 
