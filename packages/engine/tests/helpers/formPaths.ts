@@ -6,10 +6,8 @@
 
 import { formDir } from "@summa/forms";
 import { readFileSync } from "node:fs";
-import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { engineSrcDir } from "../../paths.js";
-import type { BlankPdfLoader } from "../../src/index.js";
 import type { FormSpec } from "../../src/registry.js";
 
 /** The form's catalog.json, next to its bindings. */
@@ -27,5 +25,3 @@ export function catalogTaxYear(spec: Pick<FormSpec, "relativeDir">): number {
 export function blankPdfPath(form: { relativeDir: string; taxYear: number }): string {
   return resolve(formDir(form.taxYear, form.relativeDir), "blank.pdf");
 }
-
-export const loadBlankPdf: BlankPdfLoader = (form) => readFile(blankPdfPath(form));

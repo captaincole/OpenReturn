@@ -110,7 +110,7 @@ async function run(argv: string[]): Promise<void> {
 
 export const generateCatalogCommand: Command = {
   name: "generate-catalog",
-  summary: "Extract + AI-label a blank PDF's widgets → forms/<…>/catalog.json",
+  summary: "Extract + AI-label a blank PDF's widgets → packages/engine/src/<…>/catalog.json",
   options: [
     { flag: "--pdf=<path>", desc: "blank fillable PDF (required)" },
     { flag: "--form-id=<id>", desc: "e.g. form-1040 (required)" },
