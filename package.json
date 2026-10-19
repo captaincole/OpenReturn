@@ -20,6 +20,7 @@
     "doctor": "npm --prefix apps/agent run doctor",
     "test": "npm --prefix apps/agent test",
     "test:unit": "npm --prefix apps/agent run test:unit",
+    "test:integration": "npm --prefix apps/agent run test:integration",
     "e2e": "playwright test -c e2e",
     "install:all": "npm install && npm --prefix apps/agent install && npm --prefix apps/web install",
     "prepare": "husky",

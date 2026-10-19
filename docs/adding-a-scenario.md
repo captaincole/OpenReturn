@@ -35,7 +35,8 @@ it files, and which answers (decisions) it needs. Compare that with
 [What Summa supports](testing-with-your-return.md#what-summa-supports).
 A scenario earns its place when it covers a shape no other scenario
 covers (alex: one W-2; alejandro: investment income; marcus: capital
-gains; jordan: high income, HSA, rollovers, crypto).
+gains; jordan: high income, HSA, rollovers, crypto; carter: MFS,
+Social Security, 1099-Rs; tara: household employee, home energy credit).
 
 ### 3. Create `facts.ts` and `decisions.ts`
 
@@ -46,8 +47,7 @@ Create `tests/scenarios/<name>/` (copy `alex/`):
   residency, …). The engine cannot run without them.
 - `index.ts` — the scenario bundle and its forms in dependency order.
 
-Add the scenario to `SCENARIOS` in `tests/runAll.ts` and in
-`src/mastra/tools/requiredInputs.test.ts`. If a document or value has
+Add the scenario to `SCENARIOS` in `tests/scenarios/index.ts`. If a document or value has
 no fact shape yet, note it for step 5.
 
 You can now render the forms before any expected values exist:
@@ -94,7 +94,7 @@ model.
   form reads in `missingInputs`, so Luca asks for it.
 - **5g. Registry.** Add a `makeFormSpec` entry to the jurisdiction's
   `index.ts`. Then make the form's catalog-fill golden:
-  `npx tsx tests/catalogFill.ts --form-id=<id> --update`, and look at the
+  `npx tsx tests/golden/catalogFill.ts --form-id=<id> --update`, and look at the
   PDF it writes.
 
 **A new field on an existing document or form:** add it to the fact
@@ -188,7 +188,8 @@ flowchart TD
 | Support check | `npx tsx scripts/compareFiled/cli.ts <folder> --check` | Inputs the engine does not read, forms it does not model |
 | Type check | `npx tsc --noEmit -p apps/agent` | A field with no `category` or `valueType`, catalog drift |
 | Lint | `npx eslint apps/agent/src` | Money math outside `money.ts`, oversize files and functions |
-| Unit tests | `npm run test:unit` (in `apps/agent`) | Engine boundary breaks, a form answer Luca is never told to ask (`requiredInputs.test.ts`) |
+| Unit tests | `npm run test:unit` | A rule or worksheet that computes wrong, an engine boundary break |
+| Integration tests | `npm run test:integration` | A form answer Luca is never told to ask (`requiredInputs`), a result that depends on form order (`formOrder`) |
 | Catalog-fill | `npm test -- catalog-fill` | A widget that maps to the wrong PDF field |
 | Scenario goldens | `npm test -- <name>` | A changed line value, a changed PDF fill |
 | Comparison kit | `npx tsx scripts/compareFiled/cli.ts <folder>` | Lines that differ from a filed return, and their root causes |

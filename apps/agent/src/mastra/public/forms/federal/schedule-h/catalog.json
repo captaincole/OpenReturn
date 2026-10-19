@@ -1,0 +1,1108 @@
+{
+  "form": {
+    "formId": "schedule-h",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Schedule H (Form 1040) — Household Employment Taxes"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-h.0.header.ssn",
+      "label": "Social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-h.0.header.employer_name",
+      "label": "Name of employer",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 660.002
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "schedule-h.0.header.ein",
+      "label": "Employer identification number (EIN)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].CombField[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 659.999
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "schedule-h.0.line.A_yes",
+      "label": "Yes. Skip lines B and C and go to line 1.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 578
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.A_no",
+      "label": "No. Go to line B.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 566.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.B_yes",
+      "label": "Yes. Skip line C and go to line 7.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 518.002
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.B_no",
+      "label": "No. Go to line C.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 506
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.C_no",
+      "label": "No. Stop. Don't file this schedule.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 446.002
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.C_yes",
+      "label": "Yes. Skip lines 1–9 and go to line 10.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 434
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.1",
+      "label": "Line 1 — Total cash wages subject to social security tax",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.2",
+      "label": "Line 2 — Social security tax. Multiply line 1 by 12.4% (0.124)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.3",
+      "label": "Line 3 — Total cash wages subject to Medicare tax",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.4",
+      "label": "Line 4 — Medicare tax. Multiply line 3 by 2.9% (0.029)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.5",
+      "label": "Line 5 — Total cash wages subject to Additional Medicare Tax withholding",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.6",
+      "label": "Line 6 — Additional Medicare Tax withholding. Multiply line 5 by 0.9% (0.009)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.7",
+      "label": "Line 7 — Federal income tax withheld, if any",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.8",
+      "label": "Line 8 — Total social security, Medicare, and federal income taxes. Add lines 2, 4, 6, and 7",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 216
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.9_no",
+      "label": "No. Stop. Include the amount from line 8 above on Schedule 2 (Form 1040), line 9.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 158.002
+      }
+    },
+    {
+      "fieldId": "schedule-h.0.line.9_yes",
+      "label": "Yes. Go to line 10.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 122.002
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.10_yes",
+      "label": "Line 10 — Did you pay unemployment contributions to only one state? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line10[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 539.6,
+        "y": 698
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.10_no",
+      "label": "Line 10 — Did you pay unemployment contributions to only one state? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line10[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 561.2,
+        "y": 698
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.11_yes",
+      "label": "Line 11 — Did you pay all state unemployment contributions for 2025 by April 15, 2026? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 539.6,
+        "y": 686
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.11_no",
+      "label": "Line 11 — Did you pay all state unemployment contributions for 2025 by April 15, 2026? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[1]",
+      "position": {
+        "page": 1,
+        "x": 561.2,
+        "y": 686
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.12_yes",
+      "label": "Line 12 — Were all wages that are taxable for FUTA tax also taxable for your state's unemployment tax? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 539.6,
+        "y": 674.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.12_no",
+      "label": "Line 12 — Were all wages that are taxable for FUTA tax also taxable for your state's unemployment tax? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+      "position": {
+        "page": 1,
+        "x": 561.2,
+        "y": 674.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.13_state_name",
+      "label": "Line 13 — Name of the state where you paid unemployment contributions",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 618.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.14",
+      "label": "Line 14 — Contributions paid to your state unemployment fund",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.15",
+      "label": "Line 15 — Total cash wages subject to FUTA tax",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.16",
+      "label": "Line 16 — FUTA tax. Multiply line 15 by 0.6% (0.006)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row1.state_name",
+      "label": "Line 17 Column (a) — Name of state",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow1[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 479.999
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row1.taxable_wages",
+      "label": "Line 17 Column (b) — Taxable wages (as defined in state act)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow1[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 122.4,
+        "y": 479.999
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row1.experience_period_from",
+      "label": "Line 17 Column (c) — State experience rate period From",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow1[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 187.2,
+        "y": 479.999
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row1.experience_period_to",
+      "label": "Line 17 Column (c) — State experience rate period To",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow1[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 223.2,
+        "y": 479.999
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row1.experience_rate",
+      "label": "Line 17 Column (d) — State experience rate",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow1[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 259.2,
+        "y": 479.999
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row1.col_e_amount",
+      "label": "Line 17 Column (e) — Multiply col. (b) by 0.054",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow1[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 302.4,
+        "y": 479.999
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row1.col_f_amount",
+      "label": "Line 17 Column (f) — Multiply col. (b) by col. (d)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow1[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 479.999
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row1.col_g_amount",
+      "label": "Line 17 Column (g) — Subtract col. (f) from col. (e)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow1[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 479.999
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row1.contributions_paid",
+      "label": "Line 17 Column (h) — Contributions paid to state unemployment fund",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow1[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 479.999
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row2.state_name",
+      "label": "Line 17 (second row) Column (a) — Name of state",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 455.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row2.taxable_wages",
+      "label": "Line 17 (second row) Column (b) — Taxable wages (as defined in state act)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 122.4,
+        "y": 455.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row2.experience_period_from",
+      "label": "Line 17 (second row) Column (c) — State experience rate period From",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 187.2,
+        "y": 455.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row2.experience_period_to",
+      "label": "Line 17 (second row) Column (c) — State experience rate period To",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 223.2,
+        "y": 455.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row2.experience_rate",
+      "label": "Line 17 (second row) Column (d) — State experience rate",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 259.2,
+        "y": 455.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row2.col_e_amount",
+      "label": "Line 17 (second row) Column (e) — Multiply col. (b) by 0.054",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 302.4,
+        "y": 455.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row2.col_f_amount",
+      "label": "Line 17 (second row) Column (f) — Multiply col. (b) by col. (d)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 455.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row2.col_g_amount",
+      "label": "Line 17 (second row) Column (g) — Subtract col. (f) from col. (e)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 455.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.17.row2.contributions_paid",
+      "label": "Line 17 (second row) Column (h) — Contributions paid to state unemployment fund",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line17[0].BodyRow2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 455.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.18.taxable_wages_total",
+      "label": "Line 18 — Totals (column b)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 438.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.18.contributions_total",
+      "label": "Line 18 — Totals (column h)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 438.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.19",
+      "label": "Line 19 — Add columns (g) and (h) of line 18",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.20",
+      "label": "Line 20 — Total cash wages subject to FUTA tax",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.21",
+      "label": "Line 21 — Multiply line 20 by 6.0% (0.06)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.22",
+      "label": "Line 22 — Multiply line 20 by 5.4% (0.054)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.23.late_contributions_credit_reduction",
+      "label": "Line 23 — Late contributions or credit reduction state, check here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 467.2,
+        "y": 350.501
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.23",
+      "label": "Line 23 — Enter the smaller of line 19 or line 22",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.24",
+      "label": "Line 24 — FUTA tax. Subtract line 23 from line 21",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.25",
+      "label": "Line 25 — Enter the amount from line 8",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.26",
+      "label": "Line 26 — Add line 16 (or line 24) and line 25",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.27_yes",
+      "label": "Line 27 — Yes. Stop. Include the amount from line 26 on Schedule 2 (Form 1040), line 9",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 277
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.line.27_no",
+      "label": "Line 27 — No. You may have to complete Part IV",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 266.502
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.header.employer_address",
+      "label": "Address (number and street) or P.O. box if mail isn't delivered to street address",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 227.999
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.header.employer_apartment",
+      "label": "Apt., room, or suite no.",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 460.8,
+        "y": 227.999
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.header.employer_city",
+      "label": "City, town, or post office",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 203.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.header.employer_state",
+      "label": "State",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 309.6,
+        "y": 203.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.header.employer_zip",
+      "label": "ZIP code",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 460.8,
+        "y": 203.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.signing.preparer_self_employed",
+      "label": "Check if self-employed",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 480.1,
+        "y": 126.499
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.signing.preparer_name",
+      "label": "Preparer's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 87.4,
+        "y": 113.998
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.signing.preparer_ptin",
+      "label": "PTIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 113.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-h.1.signing.firm_name",
+      "label": "Firm's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 135.254,
+        "y": 102.002
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.signing.firm_ein",
+      "label": "Firm's EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 102.002
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-h.1.signing.firm_address",
+      "label": "Firm's address",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 144,
+        "y": 90
+      }
+    },
+    {
+      "fieldId": "schedule-h.1.signing.firm_phone",
+      "label": "Phone no.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 475.2,
+        "y": 90
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "/Users/andrewcole/attain-finance/project-merrilin/apps/agent/forms/federal/schedule-h/blank.pdf",
+    "ingestedAt": "2026-10-19T02:01:00.237Z",
+    "totalFields": 72,
+    "enriched": 72,
+    "unenriched": 0,
+    "skipped": 0,
+    "catalogEntries": 72,
+    "tokensIn": 13334,
+    "tokensOut": 9432,
+    "cacheRead": 0,
+    "cacheCreate": 0
+  }
+}

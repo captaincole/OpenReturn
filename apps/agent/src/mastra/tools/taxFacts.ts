@@ -16,6 +16,8 @@ const CATEGORIES = [
   "rental",
   "retirement",
   "hsa",
+  "household_employment",
+  "home_energy",
   "charitable",
   "mortgage",
   "state_local_tax",

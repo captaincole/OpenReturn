@@ -16,6 +16,10 @@ import type { Schedule2 } from "./types.js";
  * import { register } and force the side-effectful registration once
  * at startup. Idempotent — calling twice overwrites in place.
  */
+/* Sum of the lines that have a value; blank when every line is blank, as on the paper form. */
+const total = (...values: unknown[]): number | undefined =>
+  values.every((v) => v === undefined) ? undefined : sum(...values);
+
 export function register(): void {
   defineForm<Schedule2, Schedule2FilingInfo>("schedule-2", {
     bindings: {
@@ -23,7 +27,7 @@ export function register(): void {
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       // Sum of the amount lines 1a through 1y.
       "0.line.1z_total_lines_1a_through_1y": (f) =>
-        sum(
+        total(
           f["0.line.1a_excess_aptc_repayment"],
           f["0.line.1b_new_clean_vehicle_credit_repayment"],
           f["0.line.1c_previously_owned_clean_vehicle_credit_repayment"],
@@ -34,27 +38,33 @@ export function register(): void {
         ),
       // Line 3 is line 1z plus line 2 (AMT).
       "0.line.3_total_lines_1z_and_2": (f) =>
-        sum(f["0.line.1z_total_lines_1a_through_1y"], f["0.line.2_alternative_minimum_tax"]),
+        total(f["0.line.1z_total_lines_1a_through_1y"], f["0.line.2_alternative_minimum_tax"]),
       // Line 7 is line 5 plus line 6.
       "0.line.7_total_additional_ss_medicare_tax": (f) =>
-        sum(
+        total(
           f["0.line.5_ss_medicare_tax_unreported_tips"],
           f["0.line.6_uncollected_ss_medicare_tax_wages"],
         ),
       // Form 8959 line 18 total Additional Medicare Tax.
+      /*
+       * Line 9 = Schedule H line 8 when Schedule H line 9 is No (no FUTA
+       * tax). Part II (line 26) is not modeled, so a Yes leaves it blank.
+       */
+      "0.line.9_household_employment_taxes": (f) =>
+        f["schedule-h.0.line.9_no"] === true ? total(f["schedule-h.0.line.8"]) : undefined,
       "0.line.11_additional_medicare_tax": (f) =>
-        sum(f["form-8959.0.line.18_total_additional_medicare_tax"]),
+        total(f["form-8959.0.line.18_total_additional_medicare_tax"]),
       // Form 8960 line 17 NIIT for individuals.
-      "0.line.12_net_investment_income_tax": (f) => sum(f["form-8960.0.line.17"]),
+      "0.line.12_net_investment_income_tax": (f) => total(f["form-8960.0.line.17"]),
       // Additional 20% HSA distribution tax from Form 8889 line 17b.
       "1.line.17c_additional_tax_hsa_distributions": (f) =>
-        sum(f["form-8889.0.line.17b_additional_20pct_tax"]),
+        total(f["form-8889.0.line.17b_additional_20pct_tax"]),
       // Testing-period failure additional tax from Form 8889 line 21.
       "1.line.17d_additional_tax_hsa_ineligible_individual": (f) =>
-        sum(f["form-8889.0.line.21_additional_tax_10pct"]),
+        total(f["form-8889.0.line.21_additional_tax_10pct"]),
       // Line 18 is the sum of the line 17a–17z amounts.
       "1.line.18_total_additional_taxes": (f) =>
-        sum(
+        total(
           f["1.line.17a_recapture_other_credits_amount"],
           f["1.line.17b_recapture_federal_mortgage_subsidy"],
           f["1.line.17c_additional_tax_hsa_distributions"],
@@ -74,22 +84,29 @@ export function register(): void {
           f["1.line.17q_interest_form8621_line24"],
           f["1.line.17z_other_taxes_amount"],
         ),
-      // Adds lines 4, 7–9, 11–16, 18 and 19 to get total other taxes; line 10 has no field in the inventory.
+      /*
+       * Adds lines 4, 7–9, 11–16, 18 and 19 to get total other taxes; line
+       * 10 has no field in the inventory. Blank when Schedule H line 9 is
+       * Yes: line 9 then needs the FUTA tax (Part II, not modeled), and a
+       * total without it would understate the tax.
+       */
       "1.line.21_total_other_taxes": (f) =>
-        sum(
-          f["0.line.4_self_employment_tax"],
-          f["0.line.7_total_additional_ss_medicare_tax"],
-          f["0.line.8_additional_tax_iras_tax_favored_accounts"],
-          f["0.line.9_household_employment_taxes"],
-          f["0.line.11_additional_medicare_tax"],
-          f["0.line.12_net_investment_income_tax"],
-          f["0.line.13_uncollected_ss_medicare_rrta_tax_w2"],
-          f["0.line.14_interest_tax_installment_residential_lots"],
-          f["0.line.15_interest_deferred_tax_installment_sales"],
-          f["0.line.16_recapture_low_income_housing_credit"],
-          f["1.line.18_total_additional_taxes"],
-          f["1.line.19_recapture_net_epe_form4255_line1d"],
-        ),
+        f["schedule-h.0.line.9_yes"] === true
+          ? undefined
+          : total(
+              f["0.line.4_self_employment_tax"],
+              f["0.line.7_total_additional_ss_medicare_tax"],
+              f["0.line.8_additional_tax_iras_tax_favored_accounts"],
+              f["0.line.9_household_employment_taxes"],
+              f["0.line.11_additional_medicare_tax"],
+              f["0.line.12_net_investment_income_tax"],
+              f["0.line.13_uncollected_ss_medicare_rrta_tax_w2"],
+              f["0.line.14_interest_tax_installment_residential_lots"],
+              f["0.line.15_interest_deferred_tax_installment_sales"],
+              f["0.line.16_recapture_low_income_housing_credit"],
+              f["1.line.18_total_additional_taxes"],
+              f["1.line.19_recapture_net_epe_form4255_line1d"],
+            ),
     },
 
     unsupported: {
@@ -136,8 +153,6 @@ export function register(): void {
         "No Form 5329 / early-distribution additional-tax scenario or decision modeled yet.",
       "0.line.8_additional_tax_iras_tax_favored_accounts":
         "Form 5329 not ingested; no early-distribution/excess-contribution penalty scenario yet",
-      "0.line.9_household_employment_taxes":
-        "Schedule H not ingested; no household-employee scenario yet",
       "0.line.13_uncollected_ss_medicare_rrta_tax_w2":
         "W-2 box 12 codes A/B/M/N are not exposed as summable fields; no uncollected-tip-tax scenario yet",
       "0.line.14_interest_tax_installment_residential_lots":

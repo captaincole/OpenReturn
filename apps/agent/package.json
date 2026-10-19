@@ -12,9 +12,10 @@
     "form-engine": "tsx scripts/formEngine/cli.ts",
     "smoke:review": "tsx scripts/smokeReview.ts",
     "doctor": "tsx scripts/doctor.ts",
-    "test": "tsx tests/runAll.ts",
-    "test:unit": "vitest run",
-    "test:unit:watch": "vitest"
+    "test": "tsx tests/golden/runAll.ts",
+    "test:unit": "vitest run tests/unit",
+    "test:unit:watch": "vitest tests/unit",
+    "test:integration": "vitest run tests/integration"
   },
   "engines": {
     "node": ">=20.0.0"

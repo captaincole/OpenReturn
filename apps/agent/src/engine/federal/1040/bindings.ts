@@ -7,15 +7,12 @@
  * Generated at: 2026-05-14T20:53:03.862Z
  */
 
-import {
-  lookupAdditionalStandardDeduction,
-  lookupStandardDeduction,
-} from "../../data/standardDeduction.js";
 import { lookupTax } from "../../data/taxTable.js";
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
+import { mayClaimSeniorDeduction, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
 
@@ -253,30 +250,15 @@ export function register(): void {
           const itemized = f["schedule-a.0.line.17_total_itemized_deductions"];
           return typeof itemized === "number" ? itemized : undefined;
         }
-        // Exception 2: MFS and the spouse itemizes → zero, even when born before 1961.
-        if (info.filingStatus === "married_filing_separately") {
-          if (info.spouseItemizesSeparately === undefined) return undefined;
-          if (info.spouseItemizesSeparately) return 0;
-        }
-        if (!info.filingStatus || info.taxpayerBornBeforeJan2_1961 === undefined) return undefined;
-        const base = lookupStandardDeduction("federal", 2025, info.filingStatus);
-        const boxes = f["line.12d_you_born_before_jan2_1961"] === true ? 1 : 0;
-        const extra = lookupAdditionalStandardDeduction(2025, info.filingStatus);
-        return base === undefined || extra === undefined ? undefined : base + boxes * extra;
+        return standardDeduction(info);
       },
       /*
        * Lines 12e + 13a + 13b. Blank when 12e is blank: sum() would count
-       * it as 0 and overstate taxable income. Also blank for a filer born
-       * before January 2, 1961 who is not MFS: they may qualify for the
-       * enhanced deduction for seniors (Schedule 1-A → line 13b, up to
-       * $6,000), which is not modeled. MFS filers cannot claim it.
+       * it as 0 and overstate taxable income. Also blank when the filer
+       * may claim the senior deduction (deductions.ts).
        */
       "line.14": (f, info) => {
-        if (f["line.12e"] === undefined) return undefined;
-        const mayClaimSeniorDeduction =
-          info.taxpayerBornBeforeJan2_1961 === true &&
-          info.filingStatus !== "married_filing_separately";
-        if (mayClaimSeniorDeduction) return undefined;
+        if (f["line.12e"] === undefined || mayClaimSeniorDeduction(info)) return undefined;
         return sum(f["line.12e"], f["line.13a"], f["line.13b"]);
       },
       /*
@@ -374,6 +356,16 @@ export function register(): void {
         const v = f["schedule-2.0.line.3_total_lines_1z_and_2"];
         return typeof v === "number" ? v : undefined;
       },
+      // Line 20 = Schedule 3 line 8 (nonrefundable credits); blank when Schedule 3 is not filed.
+      "line.20": (f) => {
+        const v = f["schedule-3.0.line.8"];
+        return typeof v === "number" ? v : undefined;
+      },
+      // Line 21 = lines 19 + 20. Line 19 (Schedule 8812) is not modeled yet.
+      "line.21": (f) =>
+        f["line.19"] === undefined && f["line.20"] === undefined
+          ? undefined
+          : sum(f["line.19"], f["line.20"]),
       // Lines 16 + 17. sum() treats a blank line 17 as 0.
       "line.18": (f) => (f["line.16"] === undefined ? undefined : sum(f["line.16"], f["line.17"])),
       // MANUAL EDIT: line 23 = Schedule 2 line 21 (other taxes); blank when Schedule 2 is not filed.
@@ -390,8 +382,16 @@ export function register(): void {
         f["line.18"] === undefined
           ? undefined
           : atLeast(0, sum(f["line.18"], f["line.21"] === undefined ? 0 : -f["line.21"])),
-      // Total tax = line 22 (tax after credits) + line 23 (other taxes from Schedule 2).
-      "line.24": (f) => (f["line.22"] === undefined ? undefined : sum(f["line.22"], f["line.23"])),
+      /*
+       * Total tax = line 22 (tax after credits) + line 23 (other taxes
+       * from Schedule 2). A blank line 23 is 0 when Schedule 2 is not
+       * filed, so also blank when Schedule H line 9 is Yes: Schedule 2
+       * line 21 is blank then (FUTA tax not modeled).
+       */
+      "line.24": (f) =>
+        f["line.22"] === undefined || f["schedule-h.0.line.9_yes"] === true
+          ? undefined
+          : sum(f["line.22"], f["line.23"]),
       // Sum of W-2 box 2 (federal income tax withheld) across all employers.
       "line.25a": (_, info) => roundDollars(info.w2FederalWithholding),
       /*
@@ -650,14 +650,10 @@ export function register(): void {
         "Free-text entry for the form number associated with the third checkbox on line 16. Tied to special-form tax scenarios not yet ingested.",
       "line.19":
         "Child tax credit / credit for other dependents from Schedule 8812. Schedule 8812 has not been ingested and no dependent-with-CTC scenario has been built yet.",
-      "line.20":
-        "Schedule 3 line 8 (nonrefundable credits) has not been ingested as a form yet — no cross-form reference path available.",
       "line.26":
         "Estimated tax payments and prior-year overpayment applied forward have no ingestion path yet — no estimated_payments fact category exists.",
       "line.former_spouse_ssn":
         "Former spouse SSN for joint estimated tax split — no MFS/divorce scenario with prior joint estimated payments modeled yet; requires separate fact ingestion for former spouse identity.",
-      "line.21":
-        "Line 21 (lines 19 + 20) — child tax credit and Schedule 3 nonrefundable credits are both unsupported; the aggregate has no value to compute yet.",
       "line.32":
         "Line 32 — sum of other refundable credits / payments (27a + 28 + 29 + 30 + 31), all of which are individually unsupported.",
       "line.27a":

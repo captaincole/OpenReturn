@@ -31,6 +31,8 @@
 
 import type { Form1040FilingInfo } from "./federal/1040/filingInfo.js";
 import { resolve1040Info } from "./federal/1040/resolveInfo.js";
+import type { Form5695FilingInfo } from "./federal/5695/filingInfo.js";
+import { resolve5695Info } from "./federal/5695/resolveInfo.js";
 import type { Form8889FilingInfo } from "./federal/8889/filingInfo.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
@@ -40,9 +42,13 @@ import type { Form8995AFilingInfo } from "./federal/8995-a/filingInfo.js";
 import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
 import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
 import type { Schedule2FilingInfo } from "./federal/schedule-2/filingInfo.js";
+import type { Schedule3FilingInfo } from "./federal/schedule-3/filingInfo.js";
+import { resolveSchedule3Info } from "./federal/schedule-3/resolveInfo.js";
 import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
 import type { ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
+import type { ScheduleHFilingInfo } from "./federal/schedule-h/filingInfo.js";
+import { resolveScheduleHInfo } from "./federal/schedule-h/resolveInfo.js";
 import {
   makeResolverInputs,
   resolve540Info,
@@ -157,7 +163,10 @@ export type FilingInfo = BaseFilingInfo &
   Form8960FilingInfo &
   Form8995AFilingInfo &
   Schedule1FilingInfo &
-  Schedule2FilingInfo;
+  Schedule2FilingInfo &
+  Schedule3FilingInfo &
+  ScheduleHFilingInfo &
+  Form5695FilingInfo;
 
 // ─── Resolver (hand-coded stand-in for the AI layer) ─────────────────────
 
@@ -191,6 +200,9 @@ export function resolveFilingInfo(opts: {
     resolve8995AInfo(inputs),
     resolveSchedule1Info(inputs),
     resolveSchedule2Info(inputs),
+    resolveSchedule3Info(inputs),
+    resolveScheduleHInfo(inputs),
+    resolve5695Info(inputs),
     resolveScheduleAInfo(inputs),
     resolveScheduleBInfo(inputs),
   ]);

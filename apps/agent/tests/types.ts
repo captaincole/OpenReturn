@@ -3,11 +3,11 @@
  *
  * A Scenario bundles its inputs (facts + decisions) with its expected
  * outputs (engine field values + rendered widget values). The shared
- * runner (runScenario.ts) takes one and produces a RunResult.
+ * runner (golden/runScenario.ts) takes one and produces a RunResult.
  *
  * To add a scenario: create tests/scenarios/<name>/{facts,decisions,
  * expected,index}.ts in the Alex pattern, export a Scenario from
- * index.ts, and add it to runAll.ts.
+ * index.ts, and add it to SCENARIOS in scenarios/index.ts.
  */
 
 import type { ScheduleBRounding } from "../src/engine/federal/schedule-b/filingInfo.js";

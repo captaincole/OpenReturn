@@ -18,6 +18,7 @@
 import { fixtureFileSchema } from "../catalog.js";
 import { makeFormSpec, type FormSpec } from "../formSpec.js";
 import { register as registerForm1040 } from "./1040/bindings.js";
+import { register as registerForm5695 } from "./5695/bindings.js";
 import { register as registerForm8889 } from "./8889/bindings.js";
 import { register as registerForm8949 } from "./8949/bindings.js";
 import { register as registerForm8959 } from "./8959/bindings.js";
@@ -25,9 +26,11 @@ import { register as registerForm8960 } from "./8960/bindings.js";
 import { register as registerForm8995A } from "./8995-a/bindings.js";
 import { register as registerSchedule1 } from "./schedule-1/bindings.js";
 import { register as registerSchedule2 } from "./schedule-2/bindings.js";
+import { register as registerSchedule3 } from "./schedule-3/bindings.js";
 import { register as registerScheduleA } from "./schedule-a/bindings.js";
 import { register as registerScheduleB } from "./schedule-b/bindings.js";
 import { register as registerScheduleD } from "./schedule-d/bindings.js";
+import { register as registerScheduleH } from "./schedule-h/bindings.js";
 
 /*
  * Static JSON imports from the PROMOTED runtime copies under
@@ -39,6 +42,7 @@ import { register as registerScheduleD } from "./schedule-d/bindings.js";
  * from disk.
  */
 import form1040CatalogJson from "../../mastra/public/forms/federal/1040/catalog.json";
+import form5695CatalogJson from "../../mastra/public/forms/federal/5695/catalog.json";
 import form8889CatalogJson from "../../mastra/public/forms/federal/8889/catalog.json";
 import form8949CatalogJson from "../../mastra/public/forms/federal/8949/catalog.json";
 import form8959CatalogJson from "../../mastra/public/forms/federal/8959/catalog.json";
@@ -46,9 +50,11 @@ import form8960CatalogJson from "../../mastra/public/forms/federal/8960/catalog.
 import form8995ACatalogJson from "../../mastra/public/forms/federal/8995-a/catalog.json";
 import schedule1CatalogJson from "../../mastra/public/forms/federal/schedule-1/catalog.json";
 import schedule2CatalogJson from "../../mastra/public/forms/federal/schedule-2/catalog.json";
+import schedule3CatalogJson from "../../mastra/public/forms/federal/schedule-3/catalog.json";
 import scheduleACatalogJson from "../../mastra/public/forms/federal/schedule-a/catalog.json";
 import scheduleBCatalogJson from "../../mastra/public/forms/federal/schedule-b/catalog.json";
 import scheduleDCatalogJson from "../../mastra/public/forms/federal/schedule-d/catalog.json";
+import scheduleHCatalogJson from "../../mastra/public/forms/federal/schedule-h/catalog.json";
 
 /*
  * fixtureFileSchema.parse() narrows TypeScript's widened JSON types
@@ -66,6 +72,9 @@ export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(form8995ACatalogJson),
   fixtureFileSchema.parse(schedule1CatalogJson),
   fixtureFileSchema.parse(schedule2CatalogJson),
+  fixtureFileSchema.parse(scheduleHCatalogJson),
+  fixtureFileSchema.parse(form5695CatalogJson),
+  fixtureFileSchema.parse(schedule3CatalogJson),
   fixtureFileSchema.parse(form1040CatalogJson),
 ];
 
@@ -105,7 +114,7 @@ export const FEDERAL_FORMS: FormSpec[] = [
   }),
   /*
    * Catalog-only entries with no bindings yet. They exist so the
-   * catalog-fill regression test (tests/runAll.ts) checks them against
+   * catalog-fill regression test (tests/golden/runAll.ts) checks them against
    * their blank PDFs. Bindings and downstream wiring come later.
    */
   makeFormSpec({
@@ -133,6 +142,31 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Schedule 2",
     relativeDir: "federal/schedule-2",
     register: registerSchedule2,
+  }),
+  /*
+   * Schedule 3 has no instructions.pdf for the same reason: its
+   * instructions are in the 1040 booklet.
+   */
+  makeFormSpec({
+    formId: "schedule-3",
+    shortId: "schedule-3",
+    displayName: "Schedule 3",
+    relativeDir: "federal/schedule-3",
+    register: registerSchedule3,
+  }),
+  makeFormSpec({
+    formId: "schedule-h",
+    shortId: "schedule-h",
+    displayName: "Schedule H",
+    relativeDir: "federal/schedule-h",
+    register: registerScheduleH,
+  }),
+  makeFormSpec({
+    formId: "form-5695",
+    shortId: "5695",
+    displayName: "Form 5695",
+    relativeDir: "federal/5695",
+    register: registerForm5695,
   }),
   makeFormSpec({
     formId: "form-8889",

@@ -77,7 +77,7 @@ const ROTH_IRA_CODES = /[JQT]/;
  * codes J and T the taxable part comes from Form 8606 Part III, which is
  * not modeled, so box 2a is not used.
  */
-function rowTaxable(r: RetirementDistributionFactValue): number | undefined {
+export function rowTaxable(r: RetirementDistributionFactValue): number | undefined {
   if (r.box7.includes("Q")) return 0;
   if (/[JT]/.test(r.box7)) return undefined;
   if (r.box2a === undefined && r.box2b?.taxableAmountNotDetermined === true) return undefined;
