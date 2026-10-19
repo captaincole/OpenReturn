@@ -25,6 +25,7 @@ import { alexScenario } from "./scenarios/alex/index.js";
 import { carterScenario } from "./scenarios/carter/index.js";
 import { jordanScenario } from "./scenarios/jordan/index.js";
 import { marcusScenario } from "./scenarios/marcus/index.js";
+import { taraScenario } from "./scenarios/tara/index.js";
 import type { RunResult, Scenario } from "./types.js";
 
 const SCENARIOS: Scenario[] = [
@@ -33,6 +34,7 @@ const SCENARIOS: Scenario[] = [
   marcusScenario,
   jordanScenario,
   carterScenario,
+  taraScenario,
 ];
 const UNVERIFIED = new Set(
   SCENARIOS.filter((s) => s.verification === "unverified").map((s) => s.name),

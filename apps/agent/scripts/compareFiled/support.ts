@@ -20,10 +20,14 @@
  */
 
 import {
+  HOME_ENERGY_KEYS,
+  HOUSEHOLD_EMPLOYMENT_KEYS,
   HSA_COVERAGE_KEYS,
   PRIOR_YEAR_KEYS,
   SPOUSE_KEYS,
   isDividendFact,
+  isEnergyInvoiceFact,
+  isHouseholdEmployeeFact,
   isHsaDistributionFact,
   isInterestFact,
   isMiscIncomeFact,
@@ -52,6 +56,8 @@ const DOCUMENT_FACTS = [
   isRetirementDistributionFact,
   isHsaDistributionFact,
   isSocialSecurityFact,
+  isHouseholdEmployeeFact,
+  isEnergyInvoiceFact,
 ];
 
 /*
@@ -62,6 +68,8 @@ const DOCUMENT_FACTS = [
 export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(HSA_COVERAGE_KEYS),
   ...Object.values(PRIOR_YEAR_KEYS),
+  ...Object.values(HOUSEHOLD_EMPLOYMENT_KEYS),
+  ...Object.values(HOME_ENERGY_KEYS),
   SPOUSE_KEYS.livedApartAllYear,
   SPOUSE_KEYS.itemizesSeparately,
   "prior_year.ca_agi",

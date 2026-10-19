@@ -10,7 +10,7 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
 
 Two kinds of checks, one summary table (`runAll.ts`):
 
-- **Scenario goldens** (`scenarios/alex|alejandro|marcus|jordan|carter/`) — each scenario
+- **Scenario goldens** (`scenarios/alex|alejandro|marcus|jordan|carter|tara/`) — each scenario
   bundles facts + decisions + per-form expected line values. `runScenario.ts`
   runs the engine over them and asserts every field, then diffs the filled
   PDF against a golden. These are the ground truth for "did the math change".
@@ -23,6 +23,9 @@ Two kinds of checks, one summary table (`runAll.ts`):
     age 65+, Roth and rollover 1099-Rs, capital gain distribution, Social
     Security. No answer key: hand-checked, locked engine output
     (`verification: "unverified"`; the summary line says so)
+  - `tara` — **unverified**: IRS ATS test scenario 1 moved to CA. Single,
+    two W-2s, a household employee (Schedule H), home energy improvements
+    (Form 5695 Part II, Schedule 3). Hand-checked, locked engine output
 - **Catalog-fill checks** (`catalogFill.ts`) — for every form in its
   `CATALOGS` registry: fill the blank PDF with synthetic values for every
   cataloged field and diff against a golden snapshot. Catches widget-mapping

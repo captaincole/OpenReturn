@@ -35,7 +35,8 @@ it files, and which answers (decisions) it needs. Compare that with
 [What Summa supports](testing-with-your-return.md#what-summa-supports).
 A scenario earns its place when it covers a shape no other scenario
 covers (alex: one W-2; alejandro: investment income; marcus: capital
-gains; jordan: high income, HSA, rollovers, crypto).
+gains; jordan: high income, HSA, rollovers, crypto; carter: MFS,
+Social Security, 1099-Rs; tara: household employee, home energy credit).
 
 ### 3. Create `facts.ts` and `decisions.ts`
 
