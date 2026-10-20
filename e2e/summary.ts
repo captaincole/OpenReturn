@@ -10,8 +10,9 @@
  *              debug. The run checks every model stage, then fails.
  */
 
-import { writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join, relative } from "node:path";
+import { parseEnv } from "node:util";
 import { RUN_DIR } from "./run";
 
 export type StageKind = "plumbing" | "model";
@@ -62,6 +63,18 @@ function verdict(testError: string | undefined): string {
   return testError ? "FAIL (test error)" : "PASS";
 }
 
+/* The models this run used, from the env file servers.mjs wrote for the agent. */
+function models(): string {
+  const file = join(RUN_DIR, "agent.env");
+  if (!existsSync(file)) return "unknown";
+  const env = parseEnv(readFileSync(file, "utf8"));
+  const at = (role: string) => {
+    const url = env[`${role}_MODEL_URL`];
+    return `${env[`${role}_MODEL`] ?? "default"}${url ? ` (${new URL(url).host})` : ""}`;
+  };
+  return `Luca ${at("LUCA")}, judges ${at("JUDGE")} (reviews ${env.DECISION_REVIEW ?? "on"})`;
+}
+
 export function writeSummary(opts: { durationMs: number; testError?: string }): void {
   const rel = (p: string) => relative(process.cwd(), join(RUN_DIR, p));
   const rows = results.map(
@@ -71,6 +84,8 @@ export function writeSummary(opts: { durationMs: number; testError?: string }): 
     `# Alex E2E — ${verdict(opts.testError)}`,
     "",
     `Duration: ${Math.round(opts.durationMs / 1000)} s`,
+    "",
+    `Models: ${models()}`,
     "",
     "| result | kind | stage | detail |",
     "| --- | --- | --- | --- |",

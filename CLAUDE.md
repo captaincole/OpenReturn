@@ -129,7 +129,7 @@ Limits worth remembering:
 
 ### Claude verifies the whole stack with `npm run e2e`
 
-After a change to the web app, the agent tools, or document generation, run `npm run e2e` in the background (about 15 minutes on a local model). Read `e2e/.run/<runId>/summary.md`. A `plumbing` failure means the change probably broke the app. A `model` failure can be a model mistake: run again before you debug. `dev:all` must be stopped first.
+After a change to the web app, the agent tools, or document generation, run `npm run e2e` in the background (about 2 minutes on the default local model, Gemma 4 31b on the LAN PC; see e2e/README.md). Read `e2e/.run/<runId>/summary.md`. A `plumbing` failure means the change probably broke the app. A `model` failure can be a model mistake: run again before you debug. `dev:all` must be stopped first.
 
 ### Resetting user data
 
