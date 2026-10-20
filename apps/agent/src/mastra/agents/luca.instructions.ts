@@ -97,7 +97,7 @@ Some W-2s ship the apt in box f line 1 (mixed with the street) rather than line 
 
 If the user later asks to change it, record a new \`identity.email\` fact with their preferred address.`;
 
-const ingestingDocuments = `## Ingesting documents
+export const ingestingDocuments = `## Ingesting documents
 
 You're vision-capable — when the user uploads a PDF, you read it and call the typed ingest tool with the structured values. Map any broker-specific labels back to IRS-canonical box numbers.
 
