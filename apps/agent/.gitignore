@@ -1,17 +1,5 @@
 .vercel
 
-# Local libsql reference-corpus DB. Rebuilt from forms/**/instructions.pdf via
-# `npm run refdocs:sync`; a prebuilt copy ships as a release asset (Phase 4).
+# Local libsql reference-corpus DB. Rebuilt from packages/forms/**/instructions.pdf
+# via `npm run corpus -- sync`; a prebuilt copy ships as a release asset (Phase 4).
 .data/
-
-# Source HTML cached by scripts/ingestTaxTable.ts (and future table-ingest
-# scripts). Provenance — URL, sha256, fetchedAt — lives in the generated
-# JSON, so reproducibility is preserved without checking in megabytes of
-# raw HTML.
-src/mastra/forms/data/*.source.html
-
-# Per-scenario rendered PDFs produced by scripts/renderScenario.ts —
-# generated artifacts for visual spot-checking, regenerable any time.
-# Goldens (the CPA-completed source-of-truth PDFs) DO get checked in
-# under the same docs/ folders with the *-Golden.pdf naming.
-tests/scenarios/*/docs/*-rendered.pdf

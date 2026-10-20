@@ -1,9 +1,14 @@
 import { createTool } from "@mastra/core/tools";
+import {
+  FORMS,
+  renderForm,
+  type AnyFormField,
+  type EvaluatedForm,
+  type EvaluatedScenario,
+} from "@summa/engine";
 import { z } from "zod";
-import { renderForm, type EvaluatedScenario } from "../../engine";
-import { FORMS } from "../../engine/registry";
-import { type AnyFormField, type EvaluatedForm } from "../../engine/types";
 import { createDocument } from "../db/userDocuments";
+import { loadBlankPdf } from "../formAssets";
 import { loadAndEvaluateScenario } from "../loadScenario";
 import { buildCaseStateForScenario } from "./caseState";
 import { requireUserContext } from "./userContext";
@@ -94,7 +99,7 @@ async function renderAndStoreForm(
   spec: (typeof FORMS)[number],
   target: RenderTarget,
 ): Promise<{ url: string; filename: string; linesPopulated: number }> {
-  const { pdfBytes, rendered, warnings } = await renderForm(scenario, spec.formId);
+  const { pdfBytes, rendered, warnings } = await renderForm(scenario, spec.formId, loadBlankPdf);
   for (const w of warnings) {
     console.warn(`[generate-tax-documents][${spec.formId}] ${w}`);
   }

@@ -21,32 +21,38 @@ Everything routes through a `tax_facts` table (libsql/SQLite, `.data/app.db`) wh
 
 ## Repo structure
 
-This is a monorepo. Two independent deploy units, each with its own `package.json` and lockfile:
+This is a monorepo. `apps/agent`, `packages/engine`, and `packages/forms` are npm workspaces with one root lockfile; `apps/web` installs on its own:
 
 ```
+packages/
+├── engine/                      # @summa/engine — THE FORM ENGINE. Pure, deterministic, no AI/DB/network.
+│   ├── src/                       Owns the fact vocabulary (facts/), per-jurisdiction form
+│   │                              registries (federal/, state/ca/; each form's catalog.json sits
+│   │                              next to its bindings.ts), worksheets, PDF fill.
+│   │                              Boundary enforced by tests/unit/boundary.test.ts.
+│   ├── tests/                   # the engine's test pyramid: unit/, integration/, golden/, scenarios/
+│   ├── scripts/                 # renderScenario, lockScenario, compareFiled
+│   ├── paths.ts                 # on-disk locations for offline tooling
+│   └── README.md                # contributor guide; public API = package.json "exports"
+└── forms/                       # @summa/forms — data only: what the IRS/FTB publish, by tax year.
+                                   <year>/federal/<short>/ and <year>/state/<st>/<short>/ hold
+                                   blank.pdf, instructions.pdf, instructions.meta.json,
+                                   instructions.canonical.txt; plus tax-table sources. Files we
+                                   generate (catalogs, tax-table JSON) live with the engine.
 apps/
 ├── agent/                       # Mastra backend → deployed to Vercel
-│   ├── src/engine/              # THE FORM ENGINE — pure, deterministic, no AI/DB/network.
-│   │                              Owns the fact vocabulary (facts/), per-jurisdiction form
-│   │                              registries (federal/, state/ca/), worksheets, PDF fill.
-│   │                              Boundary enforced by tests/unit/engine/boundary.test.ts; contributor
-│   │                              guide at src/engine/README.md.
 │   ├── src/mastra/              # agent code (Luca, tools, db, server, workflows incl. review judges)
-│   │                              loadScenario.ts is the one db↔engine bridge; public/forms/
-│   │                              holds the promoted runtime form assets Mastra bundles.
+│   │                              loadScenario.ts is the one db↔engine bridge; formAssets.ts loads
+│   │                              blank PDFs from public/forms/<year>/ (gitignored, built by
+│   │                              `npm --prefix apps/agent run forms:sync` before dev/build).
 │   ├── src/refdocs/             # reference-corpus ingest pipeline (parse, contextualize, embed)
 │   ├── src/forms-pipeline/      # dev-time form-catalog ingest (widget extraction, AI labeling)
-│   ├── fixtures/                # canonical test scenarios + PDF render pipeline
 │   ├── scripts/                 # operator CLIs: corpus/ + formEngine/ subcommand
 │   │                              CLIs on a shared dispatcher (scripts/lib/cli.ts),
 │   │                              plus standalone diagnostics (smokeReview, …)
-│   ├── forms/                   # one folder per tax form: blank.pdf (fillable template),
-│   │                              catalog.json (widget inventory), instructions.pdf
-│   │                              (IRS booklet), instructions.meta.json (corpus metadata),
-│   │                              instructions.canonical.txt (extracted text). Federal
-│   │                              forms under federal/<short>/, state under state/<st>/<short>/.
-│   ├── package.json             # agent deps + scripts (mastra dev, corpus, form-engine, test)
-│   └── tsconfig.json
+│   ├── tests/                   # agent tests (tools, db, refdocs); engine tests are in packages/engine
+│   ├── package.json             # agent deps + scripts (mastra dev, corpus, form-engine, forms:sync)
+│   └── tsconfig.json            # "paths" aliases @summa/* to source so `mastra dev` bundles them
 └── web/                         # Next.js 16 (App Router) frontend → deployed to Vercel
     ├── app/                     # /login, (app)/{page,documents,activity}, /documents/[id] route handler
     ├── components/              # AppShell, SideNav, ActivityCard, Markdown
@@ -56,25 +62,27 @@ apps/
     └── next.config.ts
 
 (no other top-level infra — auth is a password gate in the web app; see below)
-package.json                     # workspace root: thin delegating scripts (dev, dev:all, corpus, form-engine, …)
+package.json                     # workspace root: workspaces + thin delegating scripts (dev, dev:all, test, …)
 CLAUDE.md
 ```
 
-The two apps share zero source code today. If we ever extract shared types (e.g. an API contract generated from the agent's tool schemas), it goes in a sibling `packages/` directory; we don't need it yet.
+The agent uses the engine only through `@summa/engine`'s exports. The web app shares no source with either.
 
 ## Running it
 
 Two services. Run both — backend changes hot-reload via Mastra file-watching, frontend changes HMR via Next.js (Turbopack). All commands run from the repo root; root scripts delegate via `npm --prefix apps/<app>`.
 
 ```bash
-npm run install:all                         # installs root + apps/agent + apps/web
+npm run install:all                         # installs the workspaces (root) + apps/web
 npm run dev:all                             # mastra (:4111) + next (:3000) — that's everything
 
 # or run them separately:
 npm run dev          # mastra only — also opens Mastra Studio at :4111
 npm run dev:web      # next only
 
-npm test             # offline golden suite; positional filters work (npm test -- alex)
+npm test             # engine golden suite; positional filters work (npm test -- alex)
+npm run test:unit    # engine + agent unit tests (test:integration likewise)
+npm run typecheck    # tsc over engine + agent
 npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see e2e/README.md)
 ```
 
@@ -103,7 +111,7 @@ We're building agent + UI together. When changes touch both, expect to:
 
 1. **Edit code** (backend in `apps/agent/src/mastra/`, frontend in `apps/web/{app,components,lib}/`).
 2. **Watch logs** for errors. Three places to look:
-   - **Mastra log** — backend errors, agent traces, tool-call output. When Claude runs mastra in the background it writes to `/private/tmp/claude-501/.../tasks/<id>.output`; otherwise it's whatever terminal you started `npm run dev` in.
+   - **Mastra log** — backend errors, agent traces, tool-call output. When Claude runs mastra in the background it writes to that background task's output file; otherwise it's whatever terminal you started `npm run dev` in.
    - **Mastra Studio** at http://localhost:4111 — the **Observability** tab shows full agent traces (which tools fired, with what args, in what order). This is the right place to debug "why did Luca do X?".
    - **Browser console + Network panel** — frontend errors and HTTP failures (401s from a wrong passcode, 404s from a missing proxy entry, etc.).
 3. **Verify the change in the browser** at http://localhost:3000. Sign in with the owner password (session cookie persists across reloads). To wipe state between test runs use **Delete filing** (avatar menu, top-right) and start a fresh filing from the home page. The activity rail and header counters refresh after each agent turn (plus a short client-side poll).
@@ -129,7 +137,7 @@ Two paths:
 - **UI: Delete filing** (avatar menu) → `DELETE /app/filings/:id` — removes the filing's blob directory, cascades every domain row, deletes the Mastra thread. Start a fresh filing from the home page afterwards.
 - **API: `POST /app/session/reset`** → `resetCurrentUserData` in `apps/agent/src/mastra/db/resetUserData.ts` — wipes the user's rows but keeps the filing + memberships. No UI button anymore.
 
-**Reference corpus and `apps/agent/forms/` always survive.** To rebuild the corpus, delete `.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete the `.data/` directory and re-run `npm run reset`.
+**Reference corpus and `packages/forms/` always survive.** To rebuild the corpus, delete `.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete the `.data/` directory and re-run `npm run reset`.
 
 ## Mastra schema
 
@@ -150,15 +158,15 @@ Every output form (1040, 540, 8949, Schedule D, …) is a collection of typed **
 - **`category: Category`** — which Filing Status panel bucket the field rolls up into. One of `personal_info | filing_scope | income | deductions_credits | other`.
 - **`valueType: FieldValueType`** — shape of the field's value. One of `numeric | single_select | text | boolean | date`.
 
-TypeScript enforces both. Adding a field without declaring them is a compile error — the categorization layer (`src/engine/categorization/categorize.ts`) is automatically consistent because it reads `field.category` directly off each field.
+TypeScript enforces both. Adding a field without declaring them is a compile error — the categorization layer (`packages/engine/src/categorization/categorize.ts`) is automatically consistent because it reads `field.category` directly off each field.
 
-**When adding a new form**: follow the checklist in `apps/agent/src/engine/README.md` — form folder under the jurisdiction (`engine/federal/<short>/` or `engine/state/<st>/<short>/`), one `makeFormSpec` entry in that jurisdiction's `index.ts`, assets in the two mirrored `forms/` trees. TypeScript will fail to compile until every field has its `category` and `valueType`.
+**When adding a new form**: follow the checklist in `packages/engine/README.md` — form folder under the jurisdiction (`src/federal/<short>/` or `src/state/<st>/<short>/`, with its `catalog.json`), one `makeFormSpec` entry in that jurisdiction's `index.ts`, source documents in `packages/forms/<year>/<same subpath>/`. TypeScript will fail to compile until every field has its `category` and `valueType`.
 
 **Header fields** (top-of-form personal info, filing-status checkboxes) are modeled as FormFields too — text/single-select kinds that derive from identity facts / scope decisions. They sit in the same `EvaluatedForm.fields` array as the numeric lines. PDF renderers continue to read raw facts directly; the header fields exist for the Filing Status panel rollup.
 
 ### Whole-dollar rounding convention — nearest dollar
 
-Tax-form lines take whole dollars, rounded to the **nearest** dollar with `roundDollars()` in `src/engine/money.ts` (decided 2026-10-16). `money.ts` is the one module for engine money math: `sum`, `atLeast`, `roundDollars`, `stepsOf`, `formatDollars`, and the `Money` brand. Lint bans `Math.round` / `ceil` / `floor` / `trunc`, `toFixed`, and `toLocaleString` elsewhere in `src/engine/`. The IRS rule (1040 instructions, "Rounding Off to Whole Dollars"): drop amounts under 50 cents, raise 50–99 cents to the next dollar.
+Tax-form lines take whole dollars, rounded to the **nearest** dollar with `roundDollars()` in `packages/engine/src/money.ts` (decided 2026-10-16). `money.ts` is the one module for engine money math: `sum`, `atLeast`, `roundDollars`, `stepsOf`, `formatDollars`, and the `Money` brand. Lint bans `Math.round` / `ceil` / `floor` / `trunc`, `toFixed`, and `toLocaleString` elsewhere in the engine's `src/`. The IRS rule (1040 instructions, "Rounding Off to Whole Dollars"): drop amounts under 50 cents, raise 50–99 cents to the next dollar.
 
 - **Document sums** keep the cents while adding and round only the total (IRS: "include cents when adding the amounts and round off only the total"). Example: interest $9.59 + $2,287.09 = $2,296.68 → $2,297. Verified: Alejandro's CPA return, 1040 line 3a $381.40 → $381.
 - **Calculated lines** (percentages, worksheet steps, rate-schedule tax) also round to nearest. Verified against a filed 2025 return (private comparison kit) and marcus's CPA (8959: 43,500 × 0.9% = 391.50 → 392; 243,500 × 1.45% = 3,530.75 → 3,531).
@@ -241,11 +249,11 @@ Stable IDs — used everywhere as citations:
 - `irs-1040-inst-2025::sec::single` (section)
 - `irs-1040-inst-2025::sec::single::b01` (block — section-anchored: the 1st block under that heading; a parser change elsewhere in the doc does not renumber it)
 
-Canonical text lives on disk next to its source PDF: `apps/agent/forms/<jurisdiction>/<short>/instructions.canonical.txt`. DB stores char offsets pointing into it. Source-of-truth is the canonical file; everything else is a derivation.
+Canonical text lives on disk next to its source PDF: `packages/forms/<year>/<jurisdiction>/<short>/instructions.canonical.txt`. DB stores char offsets pointing into it. Source-of-truth is the canonical file; everything else is a derivation.
 
 ### Adding or updating a reference document
 
-Each form's instructions live at `apps/agent/forms/<jurisdiction>/<short>/instructions.pdf` with a sibling `instructions.meta.json` carrying the doc metadata:
+Each form's instructions live at `packages/forms/<year>/<jurisdiction>/<short>/instructions.pdf` with a sibling `instructions.meta.json` carrying the doc metadata:
 
 ```json
 {
@@ -261,7 +269,7 @@ Operator flow (the `corpus` CLI — `npm run corpus` with no args lists all subc
 
 ```bash
 # 1. Drop new/updated instructions.pdf + instructions.meta.json into the form's folder
-#    (apps/agent/forms/<jurisdiction>/<short>/)
+#    (packages/forms/<year>/<jurisdiction>/<short>/)
 # 2. See what's drifted vs the corpus DB:
 npm run corpus -- status            # diff: present / missing / sha-drift / extra / unconfigured
 npm run corpus -- status --strict   # exit non-zero on any drift (for CI/pre-push later)
@@ -322,21 +330,21 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 
 ### Operator CLIs and inspection scripts
 
-Everything lives under `apps/agent/scripts/`. Two subcommand CLIs (shared dispatcher in `scripts/lib/cli.ts` — no args lists subcommands, `-- <cmd> --help` shows options) plus standalone diagnostics. All run from the repo root; `--` passes args through both npm layers.
+Agent tooling lives under `apps/agent/scripts/`; engine scripts under `packages/engine/scripts/`. Two subcommand CLIs (shared dispatcher in `scripts/lib/cli.ts` — no args lists subcommands, `-- <cmd> --help` shows options) plus standalone diagnostics. All run from the repo root; `--` passes args through both npm layers.
 
 **`npm run corpus`** — the RAG knowledge base, end to end:
 
 | subcommand | use |
 |---|---|
 | `fetch` | install the prebuilt corpus.db (local seed or sha-verified release download) |
-| `sync` | idempotent corpus sync from `forms/**/instructions.pdf` |
+| `sync` | idempotent corpus sync from `packages/forms/**/instructions.pdf` |
 | `status [--strict]` | diff repo PDFs vs corpus.db |
 | `ingest` | manual single-doc ingest (any PDF path; debug flags) |
 | `reembed [--all]` | re-embed NULL blocks; `--all` after a model switch |
 | `check` | row counts + per-doc embedding coverage |
 | `search "q" [--mode …]` | invoke the production search tool |
 
-**`npm run form-engine`** — documents → form-engine assets: `generate-catalog`, `generate-bindings`, `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`, `promote`.
+**`npm run form-engine`** — source documents (`packages/forms`) → engine assets (`packages/engine/src`): `generate-catalog`, `generate-bindings`, `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`.
 
 **Standalone diagnostics** (run via `npx tsx` from `apps/agent/`):
 
@@ -344,6 +352,11 @@ Everything lives under `apps/agent/scripts/`. Two subcommand CLIs (shared dispat
 |---|---|
 | `smokeReview.ts` | three end-to-end review scenarios (npm: `smoke:review`) |
 | `inspectLastReview.ts` | dump most recent review-decision workflow run + trace |
+
+**Engine scripts** (run via `npx tsx` from `packages/engine/`):
+
+| script | use |
+|---|---|
 | `renderScenario.ts` | render every form in a scenario to PDF for spot-checking |
 | `lockScenario.ts --scenario=<name>` | rewrite a scenario's `expected.ts` engineFields from the engine's output — only after the output is verified (jordan pattern, see docs/contributing.md); then `renderScenario.ts --scenario=<name> --golden` rewrites its golden PDFs |
 | `compareFiled/cli.ts <folder>` | private comparison kit: engine vs a real filed return (scenario format, kept outside the repo); writes a no-amounts report with root causes for the checker to send to a maintainer |
@@ -364,7 +377,7 @@ Everything lives under `apps/agent/scripts/`. Two subcommand CLIs (shared dispat
 
 ## Related project — lessons carried forward
 
-This project is a deliberate application of lessons learned from **Mr. BigBadgeGuy** (BBG), a Mastra-based agent at `/Users/andrewcole/playground/bigbadgeguy-agent`. BBG memory lives at `/Users/andrewcole/.claude/projects/-Users-andrewcole-playground-bigbadgeguy/memory/` — read `MEMORY.md` there for the full index. When a second Claude Code session in this folder needs context, point it at that directory.
+This project is a deliberate application of lessons learned from **Mr. BigBadgeGuy** (BBG), an earlier Mastra-based agent. Its repo and memory are local to the maintainer's machine; the pointer to them lives in local Claude memory, not here.
 
 Lessons worth bringing forward:
 
@@ -399,7 +412,7 @@ All temporary work Claude produces or needs to save locally goes in **`.scratch/
 - Architecture, file layout, commands, design principles → **this file** (checked in, visible to anyone).
 - User preferences, cross-project learnings, ongoing context → **`~/.claude/projects/.../memory/`** (local, persists across sessions).
 
-If you're a fresh Claude Code session starting in this folder: read this file, then read the BBG memory dir for broader context on how Andrew builds agents.
+If you're a fresh Claude Code session starting in this folder: read this file, then the BBG memory (see your local memory index for its path) for broader context on how Andrew builds agents.
 
 ## Things explicitly out of scope (for now)
 

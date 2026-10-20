@@ -4,12 +4,14 @@
  * ingest-federal-tax-table pipeline, but it reads PDF text, not HTML.
  *
  * `--refresh` re-downloads from ftb.ca.gov. The default uses the cached
- * PDF next to the JSON output.
+ * PDF in @summa/forms (<year>/state/ca/tax-table.source.pdf); the JSON
+ * goes to the engine's src/data/.
  *
  * Spot-checks are hand-keyed from pages 1, 3, 4, and 5 of the published
  * FTB table. Any change to the extraction logic must keep them passing.
  */
 
+import { formDir } from "@summa/forms";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import {
@@ -17,7 +19,7 @@ import {
   validateCACoverage,
   type CATaxTableRow,
 } from "../../src/forms-pipeline/tables/parseCATaxTable.js";
-import { projectRoot } from "../../src/paths.js";
+import { engineSrcDir } from "../../src/paths.js";
 import type { Command } from "../lib/cli";
 
 interface SpotCheck {
@@ -74,9 +76,8 @@ async function run(argv: string[]): Promise<void> {
     );
   }
 
-  const dataDir = path.resolve(projectRoot, "src/mastra/forms/data");
-  const pdfPath = path.join(dataDir, `ca-tax-table-${year}.source.pdf`);
-  const jsonPath = path.join(dataDir, `ca-tax-table-${year}.json`);
+  const pdfPath = path.join(formDir(year, "state/ca"), "tax-table.source.pdf");
+  const jsonPath = path.join(engineSrcDir, "data", `ca-tax-table-${year}.json`);
 
   console.log(`${LOG} year=${year}`);
   console.log(`${LOG} source ${source.url}`);
@@ -95,7 +96,7 @@ async function run(argv: string[]): Promise<void> {
       url: source.url,
       fetchedAt: new Date().toISOString(),
       sha256,
-      cacheFile: `ca-tax-table-${year}.source.pdf`,
+      cacheFile: path.basename(pdfPath),
     },
     coverage: {
       minIncome: coverage.minIncome,

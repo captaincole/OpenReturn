@@ -5,7 +5,6 @@
  */
 
 import { getDocument, listDocuments } from "../../src/mastra/db/corpusStore";
-import { projectRoot } from "../../src/paths";
 import { walkCorpus, type CorpusEntry } from "../../src/refdocs/walkCorpus";
 import type { Command } from "../lib/cli";
 
@@ -20,7 +19,7 @@ async function categorize(): Promise<{
   walk: Awaited<ReturnType<typeof walkCorpus>>;
   cats: Categorized;
 }> {
-  const walk = await walkCorpus(projectRoot);
+  const walk = await walkCorpus();
   const cats: Categorized = {
     present: [],
     drift: [],

@@ -1,6 +1,6 @@
 import { createTool } from "@mastra/core/tools";
+import { makeHouseholdEmployeeFactKey, type HouseholdEmployeeFactValue } from "@summa/engine/facts";
 import { z } from "zod";
-import { makeHouseholdEmployeeFactKey, type HouseholdEmployeeFactValue } from "../../engine/facts";
 import { recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
@@ -10,7 +10,7 @@ import { requireUserContext } from "./userContext";
  * W-2 (box c), not the employee, so it is not wage income: it records
  * a household_employment fact, never a wages fact or identity facts.
  *
- * Convention (see src/engine/facts/kinds/householdEmployment.ts):
+ * Convention (see packages/engine/src/facts/kinds/householdEmployment.ts):
  *   category: "household_employment"
  *   key:      "employee.{employeeSlug}.household_w2"
  */

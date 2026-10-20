@@ -1,6 +1,6 @@
 /*
  * Alex's side of the conversation. The values match
- * apps/agent/tests/scenarios/alex/{facts,decisions}.ts.
+ * packages/engine/tests/scenarios/alex/{facts,decisions}.ts.
  *
  * The test does not measure how smart the model is, so the replies are
  * direct and specific. The opening turns give every fact up front. After
@@ -14,7 +14,7 @@ export interface Turn {
   file?: string;
 }
 
-const W2_PDF = resolve(__dirname, "../apps/agent/tests/scenarios/alex/docs/01-alex-w2.pdf");
+const W2_PDF = resolve(__dirname, "../packages/engine/tests/scenarios/alex/docs/01-alex-w2.pdf");
 
 const GENERATE = "That is everything. Please generate my 2025 tax documents now.";
 

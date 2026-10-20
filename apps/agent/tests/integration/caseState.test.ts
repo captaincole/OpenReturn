@@ -1,8 +1,9 @@
+import { evaluateScenario } from "@summa/engine";
+import { alexScenario } from "@summa/engine/scenarios";
 import { describe, expect, it } from "vitest";
-import { evaluateScenario } from "../../src/engine";
 import { buildCaseStateForScenario } from "../../src/mastra/tools/caseState";
-import { alexDecisions } from "../scenarios/alex/decisions";
-import { alexFacts } from "../scenarios/alex/facts";
+
+const { facts: alexFacts, decisions: alexDecisions } = alexScenario;
 
 /*
  * generate-tax-documents renders only when nothing is pending, so the

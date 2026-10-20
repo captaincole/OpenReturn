@@ -1,0 +1,31 @@
+{
+  "name": "@summa/engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Summa's form engine. Pure and deterministic: fact and decision rows in, evaluated tax forms and filled PDFs out. No AI, database, or network.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./facts": "./src/facts/index.ts",
+    "./catalog": "./src/catalog.ts",
+    "./paths": "./paths.ts",
+    "./scenarios": "./tests/scenarios/index.ts"
+  },
+  "scripts": {
+    "test": "tsx tests/golden/runAll.ts",
+    "test:unit": "vitest run tests/unit",
+    "test:unit:watch": "vitest tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@summa/forms": "0.1.0",
+    "@types/node": "^20",
+    "tsx": "^4.20.5",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
+  }
+}

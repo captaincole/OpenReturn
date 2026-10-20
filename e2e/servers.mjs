@@ -10,7 +10,7 @@
  *           the data paths pass straight through.
  */
 
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import { createWriteStream, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { parseEnv } from "node:util";
@@ -84,6 +84,19 @@ if (!runDir || !COMMANDS[name]) {
   process.exit(2);
 }
 mkdirSync(process.env.DOCUMENTS_PATH, { recursive: true });
+
+/* The agent reads blank PDFs from a gitignored runtime tree; build it first. */
+if (name === "agent") {
+  const sync = spawnSync("npm", ["--prefix", join(root, "apps/agent"), "run", "forms:sync"], {
+    stdio: "inherit",
+  });
+  if (sync.status !== 0) {
+    console.error(
+      `forms:sync failed (${sync.error?.message ?? `exit ${sync.status}`}); not starting the agent`,
+    );
+    process.exit(1);
+  }
+}
 
 const { cwd, args } = COMMANDS[name]();
 const log = createWriteStream(join(runDir, `${name}.log`));

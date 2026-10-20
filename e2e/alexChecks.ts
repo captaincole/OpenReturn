@@ -1,14 +1,14 @@
 /*
  * Model checks for the Alex run: what was stored and generated vs the
- * fixtures in apps/agent/tests/scenarios/alex. Each returns a list of
+ * fixtures in packages/engine/tests/scenarios/alex. Each returns a list of
  * problems (empty = pass).
  */
 
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { alexExpected } from "../apps/agent/tests/scenarios/alex/expected";
-import { alex540Expected } from "../apps/agent/tests/scenarios/alex/expected-540";
-import { alexFacts } from "../apps/agent/tests/scenarios/alex/facts";
+import { alexExpected } from "../packages/engine/tests/scenarios/alex/expected";
+import { alex540Expected } from "../packages/engine/tests/scenarios/alex/expected-540";
+import { alexFacts } from "../packages/engine/tests/scenarios/alex/facts";
 import { latestDecisions, latestW2 } from "./appDb";
 import { DATA_ENV } from "./run";
 

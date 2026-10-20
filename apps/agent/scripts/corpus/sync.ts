@@ -12,7 +12,6 @@
 
 import { parseArgs } from "node:util";
 import { getDocument } from "../../src/mastra/db/corpusStore";
-import { projectRoot } from "../../src/paths";
 import { ingestRefDoc } from "../../src/refdocs/ingest";
 import { walkCorpus, type CorpusEntry } from "../../src/refdocs/walkCorpus";
 import type { Command } from "../lib/cli";
@@ -70,7 +69,7 @@ async function run(argv: string[]): Promise<void> {
     allowPositionals: false,
   });
   const flags: SyncFlags = { force: values.force, noContextualize: values["no-contextualize"] };
-  const walk = await walkCorpus(projectRoot);
+  const walk = await walkCorpus();
   const result: SyncResult = { ok: [], failed: [], unconfigured: [] };
 
   for (const u of walk.unconfigured) {

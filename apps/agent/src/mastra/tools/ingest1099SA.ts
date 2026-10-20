@@ -1,6 +1,6 @@
 import { createTool } from "@mastra/core/tools";
+import { makeHsaDistributionFactKey, type HsaDistributionFactValue } from "@summa/engine/facts";
 import { z } from "zod";
-import { makeHsaDistributionFactKey, type HsaDistributionFactValue } from "../../engine/facts";
 import { PayerSchema, recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
@@ -9,7 +9,7 @@ import { requireUserContext } from "./userContext";
  * single structured tax_facts row. The Form Engine reads it via
  * `getHsaDistributionFacts(facts)`; box 1 feeds Form 8889 line 14a.
  *
- * Convention (see src/engine/facts/kinds/hsaDistribution.ts):
+ * Convention (see packages/engine/src/facts/kinds/hsaDistribution.ts):
  *   category: "hsa"
  *   key:      "account.{accountSlug}.hsa_distributions.{distributionId}"
  *

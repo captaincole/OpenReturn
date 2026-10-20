@@ -1,6 +1,6 @@
 import { createTool } from "@mastra/core/tools";
+import { makeW2FactKey, type W2FactValue } from "@summa/engine/facts";
 import { z } from "zod";
-import { makeW2FactKey, type W2FactValue } from "../../engine/facts";
 import type { Scope } from "../db/appDb";
 import { recordFact } from "../db/taxFacts";
 import { requireUserContext } from "./userContext";
@@ -9,7 +9,7 @@ import { requireUserContext } from "./userContext";
  * Ingest a W-2 as a single structured tax_facts row. The Form Engine reads
  * these via `getW2Facts(facts)` from the fact catalog.
  *
- * Convention (see src/engine/facts/kinds/wages.ts):
+ * Convention (see packages/engine/src/facts/kinds/wages.ts):
  *   category: "wages"
  *   key:      "employer.{employerSlug}"
  *   value:    W2FactValue

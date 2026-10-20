@@ -19,16 +19,11 @@ import {
 
 /*
  * Confidence / Verdict / citation / row shapes are engine vocabulary:
- * the engine defines them (src/engine/facts/rows.ts), this module
+ * the engine defines them (packages/engine/src/facts/rows.ts), this module
  * persists them. Re-exported so db-side callers keep importing from
  * here.
  */
-import type {
-  AIDecisionRow,
-  AuthorityCitation,
-  Confidence,
-  Verdict,
-} from "../../engine/facts/rows";
+import type { AIDecisionRow, AuthorityCitation, Confidence, Verdict } from "@summa/engine/facts";
 export type { AIDecisionRow, AuthorityCitation, Confidence, Verdict };
 
 export interface AIDecision {

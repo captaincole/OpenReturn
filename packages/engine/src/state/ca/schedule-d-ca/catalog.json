@@ -1,0 +1,2000 @@
+{
+  "form": {
+    "formId": "schedule-d-ca",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Schedule D (540) California Capital Gain or Loss Adjustment"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-d-ca.0.header.name",
+      "label": "Name or names as shown on return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1001",
+      "position": {
+        "page": 0,
+        "x": 36.5,
+        "y": 690.535
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.0.header.ssn",
+      "label": "Social security number or Individual Taxpayer Identification Number. Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1002",
+      "position": {
+        "page": 0,
+        "x": 459.768,
+        "y": 690.535
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1a.description",
+      "label": "Line 1 a .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1003",
+      "position": {
+        "page": 0,
+        "x": 70.08,
+        "y": 633.5
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1a.sales_price",
+      "label": "Line 1 a .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1004",
+      "position": {
+        "page": 0,
+        "x": 70.2,
+        "y": 585.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1a.cost_basis",
+      "label": "Line 1 a .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1005",
+      "position": {
+        "page": 0,
+        "x": 199.08,
+        "y": 585.625
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1a.loss",
+      "label": "Line 1 a .  (d) Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1006",
+      "position": {
+        "page": 0,
+        "x": 328.86,
+        "y": 585.625
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1a.gain",
+      "label": "Line 1 a .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1007",
+      "position": {
+        "page": 0,
+        "x": 465.6,
+        "y": 585.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1b.description",
+      "label": "Line 1 b .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1008",
+      "position": {
+        "page": 0,
+        "x": 70.08,
+        "y": 537.765
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1b.sales_price",
+      "label": "Line 1 b .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1009",
+      "position": {
+        "page": 0,
+        "x": 70.08,
+        "y": 489.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1b.cost_basis",
+      "label": "Line 1 b .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1010",
+      "position": {
+        "page": 0,
+        "x": 199.08,
+        "y": 489.625
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1b.loss",
+      "label": "Line 1 b .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1011",
+      "position": {
+        "page": 0,
+        "x": 328.86,
+        "y": 489.625
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1b.gain",
+      "label": "Line 1 b .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1012",
+      "position": {
+        "page": 0,
+        "x": 465.6,
+        "y": 489.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1c.description",
+      "label": "Line 1 c .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1013",
+      "position": {
+        "page": 0,
+        "x": 70.08,
+        "y": 441.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1c.sales_price",
+      "label": "Line 1 c .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1014",
+      "position": {
+        "page": 0,
+        "x": 70.08,
+        "y": 393.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1c.cost_basis",
+      "label": "Line 1 c .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1015",
+      "position": {
+        "page": 0,
+        "x": 199.08,
+        "y": 393.625
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1c.loss",
+      "label": "Line 1 c .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1016",
+      "position": {
+        "page": 0,
+        "x": 328.86,
+        "y": 393.625
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1c.gain",
+      "label": "Line 1 c .   (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1017",
+      "position": {
+        "page": 0,
+        "x": 465.6,
+        "y": 393.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1d.description",
+      "label": "Line 1 d .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1018",
+      "position": {
+        "page": 0,
+        "x": 70.08,
+        "y": 345.765
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1d.sales_price",
+      "label": "Line 1 d .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1019",
+      "position": {
+        "page": 0,
+        "x": 70.08,
+        "y": 297.837
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1d.cost_basis",
+      "label": "Line 1 d .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1020",
+      "position": {
+        "page": 0,
+        "x": 199.08,
+        "y": 297.937
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1d.loss",
+      "label": "Line 1 d .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1021",
+      "position": {
+        "page": 0,
+        "x": 328.86,
+        "y": 297.937
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1d.gain",
+      "label": "Line 1 d .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1022",
+      "position": {
+        "page": 0,
+        "x": 465.6,
+        "y": 297.837
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1e.description",
+      "label": "Line 1 e .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1023",
+      "position": {
+        "page": 0,
+        "x": 70.08,
+        "y": 249.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1e.sales_price",
+      "label": "Line 1e — (b) Sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1024",
+      "position": {
+        "page": 0,
+        "x": 70.08,
+        "y": 201.952
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1e.cost_basis",
+      "label": "Line 1e — (c) Cost or other basis",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1025",
+      "position": {
+        "page": 0,
+        "x": 199.08,
+        "y": 201.952
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1e.loss",
+      "label": "Line 1e — (d) Loss. If (c) is more than (b), subtract (b) from (c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1026",
+      "position": {
+        "page": 0,
+        "x": 328.86,
+        "y": 201.952
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1e.gain",
+      "label": "Line 1e — (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1027",
+      "position": {
+        "page": 0,
+        "x": 465.6,
+        "y": 202.421
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1f.description",
+      "label": "Line 1 f .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1028",
+      "position": {
+        "page": 0,
+        "x": 70.08,
+        "y": 153.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1f.sales_price",
+      "label": "Line 1 f .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1029",
+      "position": {
+        "page": 0,
+        "x": 70.08,
+        "y": 105.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1f.cost_basis",
+      "label": "Line 1 f .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1030",
+      "position": {
+        "page": 0,
+        "x": 199.08,
+        "y": 105.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1f.loss",
+      "label": "Line 1 f .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1031",
+      "position": {
+        "page": 0,
+        "x": 328.86,
+        "y": 105.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.0.line.1f.gain",
+      "label": "Line 1f — (e) Gain. If (b) is more than (c), subtract (c) from (b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 1032",
+      "position": {
+        "page": 0,
+        "x": 465.6,
+        "y": 105.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1g.description",
+      "label": "Line 1 g .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2001",
+      "position": {
+        "page": 1,
+        "x": 70.14,
+        "y": 693.5
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1g.sales_price",
+      "label": "Line 1 g .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2002",
+      "position": {
+        "page": 1,
+        "x": 70.08,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1g.cost_basis",
+      "label": "Line 1 g .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2003",
+      "position": {
+        "page": 1,
+        "x": 199.05,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1g.loss",
+      "label": "Line 1 g .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2004",
+      "position": {
+        "page": 1,
+        "x": 328.8,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1g.gain",
+      "label": "Line 1 g .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2005",
+      "position": {
+        "page": 1,
+        "x": 465.45,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1h.description",
+      "label": "Line 1 h .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2006",
+      "position": {
+        "page": 1,
+        "x": 70.08,
+        "y": 597.765
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1h.sales_price",
+      "label": "Line 1 h .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2007",
+      "position": {
+        "page": 1,
+        "x": 70.08,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1h.cost_basis",
+      "label": "Line 1 h .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2008",
+      "position": {
+        "page": 1,
+        "x": 199.05,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1h.loss",
+      "label": "Line 1 h .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2009",
+      "position": {
+        "page": 1,
+        "x": 329.425,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1h.gain",
+      "label": "Line 1 h .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2010",
+      "position": {
+        "page": 1,
+        "x": 465.45,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1i.description",
+      "label": "Line 1 i .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2011",
+      "position": {
+        "page": 1,
+        "x": 70.08,
+        "y": 501.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1i.sales_price",
+      "label": "Line 1 i .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2012",
+      "position": {
+        "page": 1,
+        "x": 70.08,
+        "y": 453.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1i.cost_basis",
+      "label": "Line 1 i .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2013",
+      "position": {
+        "page": 1,
+        "x": 199.05,
+        "y": 453.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1i.loss",
+      "label": "Line 1 i .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2014",
+      "position": {
+        "page": 1,
+        "x": 328.8,
+        "y": 453.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1i.gain",
+      "label": "Line 1 i .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2015",
+      "position": {
+        "page": 1,
+        "x": 465.45,
+        "y": 453.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1j.description",
+      "label": "Line 1 j .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2016",
+      "position": {
+        "page": 1,
+        "x": 70.08,
+        "y": 405.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1j.sales_price",
+      "label": "Line 1 j .  (b) Sales Price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2017",
+      "position": {
+        "page": 1,
+        "x": 69.5321,
+        "y": 357.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1j.cost_basis",
+      "label": "Line 1 j .  (c) Cost or other basis",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2018",
+      "position": {
+        "page": 1,
+        "x": 198.502,
+        "y": 357.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1j.loss",
+      "label": "Line 1 j .  (d) Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2019",
+      "position": {
+        "page": 1,
+        "x": 328.252,
+        "y": 357.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1j.gain",
+      "label": "Line 1 j .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2020",
+      "position": {
+        "page": 1,
+        "x": 464.902,
+        "y": 357.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1k.description",
+      "label": "Line 1 k .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2021",
+      "position": {
+        "page": 1,
+        "x": 70.14,
+        "y": 309.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1k.sales_price",
+      "label": "Line 1 k .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2022",
+      "position": {
+        "page": 1,
+        "x": 70.08,
+        "y": 261.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1k.cost_basis",
+      "label": "Line 1 k .  (c) Cost or other basis",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2023",
+      "position": {
+        "page": 1,
+        "x": 198.502,
+        "y": 261.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1k.loss",
+      "label": "Line 1 k .  (d) Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2024",
+      "position": {
+        "page": 1,
+        "x": 328.252,
+        "y": 261.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1k.gain",
+      "label": "Line 1 k .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2025",
+      "position": {
+        "page": 1,
+        "x": 464.902,
+        "y": 261.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1l.description",
+      "label": "Line 1 l .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2026",
+      "position": {
+        "page": 1,
+        "x": 70.14,
+        "y": 213.765
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1l.sales_price",
+      "label": "Line 1 l .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2027",
+      "position": {
+        "page": 1,
+        "x": 70.08,
+        "y": 165.331
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1l.cost_basis",
+      "label": "Line 1 l .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2028",
+      "position": {
+        "page": 1,
+        "x": 199.05,
+        "y": 165.331
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1l.loss",
+      "label": "Line 1 l .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2029",
+      "position": {
+        "page": 1,
+        "x": 328.8,
+        "y": 165.331
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1l.gain",
+      "label": "Line 1 l .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2030",
+      "position": {
+        "page": 1,
+        "x": 465.45,
+        "y": 165.331
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1m.description",
+      "label": "Line 1 m .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2031",
+      "position": {
+        "page": 1,
+        "x": 70.14,
+        "y": 117.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1m.sales_price",
+      "label": "Line 1 m .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2032",
+      "position": {
+        "page": 1,
+        "x": 70.08,
+        "y": 69.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1m.cost_basis",
+      "label": "Line 1 m .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2033",
+      "position": {
+        "page": 1,
+        "x": 199.05,
+        "y": 69.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1m.loss",
+      "label": "Line 1 m .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2034",
+      "position": {
+        "page": 1,
+        "x": 328.8,
+        "y": 69.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.1.line.1m.gain",
+      "label": "Line 1 m .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 2035",
+      "position": {
+        "page": 1,
+        "x": 465.45,
+        "y": 69.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1n.description",
+      "label": "Line 1 n .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3001",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 693.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1n.sales_price",
+      "label": "Line 1 n .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3002",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1n.cost_basis",
+      "label": "Line 1 n .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3003",
+      "position": {
+        "page": 2,
+        "x": 199.2,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1n.loss",
+      "label": "Line 1 n .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3004",
+      "position": {
+        "page": 2,
+        "x": 328.68,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1n.gain",
+      "label": "Line 1 n .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3005",
+      "position": {
+        "page": 2,
+        "x": 465.6,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1o.description",
+      "label": "Line 1 o .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3006",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 597.765
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1o.sales_price",
+      "label": "Line 1 o .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3007",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1o.cost_basis",
+      "label": "Line 1 o .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3008",
+      "position": {
+        "page": 2,
+        "x": 199.2,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1o.loss",
+      "label": "Line 1 o .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3009",
+      "position": {
+        "page": 2,
+        "x": 328.68,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1o.gain",
+      "label": "Line 1 o .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3010",
+      "position": {
+        "page": 2,
+        "x": 465.6,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1p.description",
+      "label": "Line 1 p .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3011",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 501.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1p.sales_price",
+      "label": "Line 1 p .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3012",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 453.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1p.cost_basis",
+      "label": "Line 1 p .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3013",
+      "position": {
+        "page": 2,
+        "x": 199.2,
+        "y": 453.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1p.loss",
+      "label": "Line 1 p .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3014",
+      "position": {
+        "page": 2,
+        "x": 328.68,
+        "y": 453.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1p.gain",
+      "label": "Line 1 p .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3015",
+      "position": {
+        "page": 2,
+        "x": 465.6,
+        "y": 453.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1q.description",
+      "label": "Line 1 q .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3016",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 405.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1q.sales_price",
+      "label": "Line 1 q .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3017",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 357.405
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1q.cost_basis",
+      "label": "Line 1 q .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3018",
+      "position": {
+        "page": 2,
+        "x": 199.2,
+        "y": 357.405
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1q.loss",
+      "label": "Line 1 q .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3019",
+      "position": {
+        "page": 2,
+        "x": 328.68,
+        "y": 357.405
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1q.gain",
+      "label": "Line 1 q .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3020",
+      "position": {
+        "page": 2,
+        "x": 465.6,
+        "y": 357.405
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1r.description",
+      "label": "Line 1 r .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3021",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 309.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1r.sales_price",
+      "label": "Line 1 r .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3022",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 261.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1r.cost_basis",
+      "label": "Line 1 r .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3023",
+      "position": {
+        "page": 2,
+        "x": 199.2,
+        "y": 261.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1r.loss",
+      "label": "Line 1 r .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3024",
+      "position": {
+        "page": 2,
+        "x": 328.68,
+        "y": 261.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1r.gain",
+      "label": "Line 1 r .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3025",
+      "position": {
+        "page": 2,
+        "x": 465.6,
+        "y": 261.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1s.description",
+      "label": "Line 1 s .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3026",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 213.765
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1s.sales_price",
+      "label": "Line 1 s .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3027",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 165.331
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1s.cost_basis",
+      "label": "Line 1 s .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3028",
+      "position": {
+        "page": 2,
+        "x": 199.2,
+        "y": 165.331
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1s.loss",
+      "label": "Line 1 s .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3029",
+      "position": {
+        "page": 2,
+        "x": 328.68,
+        "y": 165.331
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1s.gain",
+      "label": "Line 1 s .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3030",
+      "position": {
+        "page": 2,
+        "x": 465.6,
+        "y": 165.331
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1t.description",
+      "label": "Line 1 t .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3031",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 117.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1t.sales_price",
+      "label": "Line 1 t .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3032",
+      "position": {
+        "page": 2,
+        "x": 70.08,
+        "y": 69.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1t.cost_basis",
+      "label": "Line 1 t .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3033",
+      "position": {
+        "page": 2,
+        "x": 199.2,
+        "y": 69.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1t.loss",
+      "label": "Line 1 t .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3034",
+      "position": {
+        "page": 2,
+        "x": 328.68,
+        "y": 69.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.2.line.1t.gain",
+      "label": "Line 1 t .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 3035",
+      "position": {
+        "page": 2,
+        "x": 465.6,
+        "y": 69.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1u.description",
+      "label": "Line 1 u .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4001",
+      "position": {
+        "page": 3,
+        "x": 70.08,
+        "y": 693.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1u.sales_price",
+      "label": "Line 1 u .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4002",
+      "position": {
+        "page": 3,
+        "x": 70.08,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1u.cost_basis",
+      "label": "Line 1 u .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4003",
+      "position": {
+        "page": 3,
+        "x": 199.2,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1u.loss",
+      "label": "Line 1 u .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4004",
+      "position": {
+        "page": 3,
+        "x": 328.965,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1u.gain",
+      "label": "Line 1 u .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4005",
+      "position": {
+        "page": 3,
+        "x": 465.6,
+        "y": 645.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1v.description",
+      "label": "Line 1 v .  (a)  Description of property. Example: 100 shares of “Z” Company.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4006",
+      "position": {
+        "page": 3,
+        "x": 70.08,
+        "y": 597.525
+      }
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1v.sales_price",
+      "label": "Line 1 v .  (b) Sales Price",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4007",
+      "position": {
+        "page": 3,
+        "x": 70.08,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1v.cost_basis",
+      "label": "Line 1 v .  (c) Cost or other basis",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4008",
+      "position": {
+        "page": 3,
+        "x": 199.2,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1v.loss",
+      "label": "Line 1 v .  (d). Loss. If (c) is more than (b), subtract (b) from (c).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4009",
+      "position": {
+        "page": 3,
+        "x": 328.965,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.1v.gain",
+      "label": "Line 1 v .  (e) Gain. If (b) is more than (c), subtract (c) from (b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4010",
+      "position": {
+        "page": 3,
+        "x": 465.6,
+        "y": 549.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.2.loss",
+      "label": "Line 2 .  Net gain or (loss) shown on California Schedule(s) K-1 (100S, 541, 565, and 568) .   (d). Loss.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4011",
+      "position": {
+        "page": 3,
+        "x": 328.965,
+        "y": 501.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.2.gain",
+      "label": "Line 2.    (e) Gain.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4012",
+      "position": {
+        "page": 3,
+        "x": 465.6,
+        "y": 501.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.3",
+      "label": "Line 3 .  Capital gain distributions (federal Form 1099-DIV, box 2 a ) .",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4013",
+      "position": {
+        "page": 3,
+        "x": 465.6,
+        "y": 465.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.4",
+      "label": "Line 4 . Total 2025 gains from all sources. Add column (e) amounts of line 1, line 2, and line 3.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4014",
+      "position": {
+        "page": 3,
+        "x": 465.6,
+        "y": 441.405
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.5",
+      "label": "Line 5 . 2025 loss. Add column (d) amounts of line 1 and line 2.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4015",
+      "position": {
+        "page": 3,
+        "x": 328.965,
+        "y": 417.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.6",
+      "label": "Line 6 . California capital loss carryover from 2024, if any. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4016",
+      "position": {
+        "page": 3,
+        "x": 328.965,
+        "y": 393.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.7",
+      "label": "Line 7 . Total 2025 loss. Add line 5 and line 6.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4017",
+      "position": {
+        "page": 3,
+        "x": 328.965,
+        "y": 369.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.8",
+      "label": "Line 8 . Net gain or (loss). Combine line 4 and line 7. If a loss, go to line 9. If a gain, go to line 10.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4018",
+      "position": {
+        "page": 3,
+        "x": 465.6,
+        "y": 345.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.9",
+      "label": "Line 9 . If line 8 is a loss, enter the smaller of: a. the loss on line 8. b. $3,000 ($1,500 if married/registered domestic partner filing separate). See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4019",
+      "position": {
+        "page": 3,
+        "x": 465.6,
+        "y": 309.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.10",
+      "label": "Line 10 . Enter the gain or (loss) from federal Form 1040 or 1040-SR, line 7a.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4020",
+      "position": {
+        "page": 3,
+        "x": 465.6,
+        "y": 285.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.11",
+      "label": "Line 11 . Enter the California gain from line 8 or (loss) from line 9.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4021",
+      "position": {
+        "page": 3,
+        "x": 465.6,
+        "y": 261.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.12a",
+      "label": "Line 12 a . If line 10 is more than line 11, enter the difference here and on Schedule CA (540), Part I, Section A, line 7a, column B.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4022",
+      "position": {
+        "page": 3,
+        "x": 465.6,
+        "y": 225.525
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-d-ca.3.line.12b",
+      "label": "Line 12 b . If line 10 is less than line 11, enter the difference here and on Schedule CA (540), Part I, Section A, line 7a, column C.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 sch D - 4023",
+      "position": {
+        "page": 3,
+        "x": 465.6,
+        "y": 201.525
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/state/ca/schedule-d-ca/blank.pdf",
+    "ingestedAt": "2026-10-15T17:41:08.096Z",
+    "totalFields": 125,
+    "enriched": 125,
+    "unenriched": 0,
+    "skipped": 0,
+    "catalogEntries": 125,
+    "tokensIn": 32969,
+    "tokensOut": 7122,
+    "cacheRead": 0,
+    "cacheCreate": 0
+  }
+}

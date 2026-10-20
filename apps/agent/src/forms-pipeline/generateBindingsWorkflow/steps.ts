@@ -10,9 +10,9 @@
  */
 
 import { createStep } from "@mastra/core/workflows";
+import { loadFromFixture, type FieldInventory } from "@summa/engine/catalog";
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import { loadFromFixture, type FieldInventory } from "../../engine/catalog.js";
 import { classifyBindings } from "../classifyBindings.js";
 import { renderBindings } from "../renderBindings.js";
 import { retrieveContextPerField } from "../retrieveContext.js";

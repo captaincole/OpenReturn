@@ -2,7 +2,7 @@
  * form-engine — the pipeline from source documents to the form engine's
  * checked-in assets. Inputs: blank fillable PDFs and published tax
  * tables. Outputs: catalog.json widget inventories, bindings.ts, typed
- * interfaces, tax-table JSON, and the promoted runtime tree. For
+ * interfaces, and tax-table JSON. For
  * instruction booklets → RAG, see `npm run corpus`.
  *
  *   npm run form-engine -- <command>    (or: npx tsx scripts/formEngine/cli.ts)
@@ -17,7 +17,6 @@ import { generateCatalogCommand } from "./generateCatalog";
 import { generateTypesCommand } from "./generateTypes";
 import { ingestCaTaxTableCommand } from "./ingestCaTaxTable";
 import { ingestFederalTaxTableCommand } from "./ingestFederalTaxTable";
-import { promoteCommand } from "./promote";
 
 /*
  * generate-catalog and generate-bindings call Anthropic. Load the dev
@@ -38,6 +37,5 @@ void runCli({
     generateTypesCommand,
     ingestFederalTaxTableCommand,
     ingestCaTaxTableCommand,
-    promoteCommand,
   ],
 });

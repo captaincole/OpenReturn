@@ -19,7 +19,9 @@
  */
 
 import { createStep } from "@mastra/core/workflows";
+import { FORMS_ROOT } from "@summa/forms";
 import { promises as fs } from "node:fs";
+import { relative } from "node:path";
 import { ensureCorpusSchema, getCorpusDb } from "../../mastra/db/libsql.js";
 import { classifyFields, type FieldEnrichment, type ValueType } from "../classifyFields.js";
 import { extractFormFields, type ExtractedField, type FieldKind } from "../extractFormFields.js";
@@ -159,7 +161,8 @@ export const persistStep = createStep({
       },
       fields: catalog,
       _meta: {
-        sourcePdf: inputData.pdfPath,
+        // Relative to packages/forms, so the committed catalog holds no local path.
+        sourcePdf: relative(FORMS_ROOT, inputData.pdfPath),
         ingestedAt: new Date().toISOString(),
         totalFields: inputData.fields.length,
         enriched: inputData.enrichments.length,

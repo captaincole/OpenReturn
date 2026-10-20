@@ -21,3 +21,7 @@ supabase/
 
 # E2E run folders: data, logs, transcripts, Playwright output.
 e2e/.run/
+
+# Runtime copy of the blank PDFs, made by apps/agent scripts/syncForms.ts
+# from packages/forms (the one copy in git).
+apps/agent/src/mastra/public/forms/

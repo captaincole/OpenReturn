@@ -1,0 +1,1107 @@
+{
+  "form": {
+    "formId": "schedule-1",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Schedule 1 (Form 1040) Additional Income and Adjustments to Income"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-1.0.header.name",
+      "label": "Name(s) shown on Form 1040, 1040-SR, or 1040-NR",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-1.0.header.form_1099k_error_amount",
+      "label": "Amount reported to you on Form(s) 1099-K included in error or for personal items sold at a loss (2025)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.1",
+      "label": "Line 1 — Taxable refunds, credits, or offsets of state and local income taxes",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 606.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.2a",
+      "label": "Line 2a — Alimony received",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 594
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.2b",
+      "label": "Line 2b — Date of original divorce or separation agreement (see instructions)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 582.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.3",
+      "label": "Line 3 — Business income or (loss). Attach Schedule C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 570.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.4_form_4797",
+      "label": "Line 4 — Other gains or (losses): check if from Form 4797",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 560
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.4_form_4684",
+      "label": "Line 4 — Other gains or (losses): check if from Form 4684",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 324,
+        "y": 560
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.4",
+      "label": "Line 4 — Other gains or (losses)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 558
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.5",
+      "label": "Line 5 — Rental real estate, royalties, partnerships, S corporations, trusts, etc. Attach Schedule E",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 546.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.6",
+      "label": "Line 6 — Farm income or (loss). Attach Schedule F",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 534.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.7_repaid_checkbox",
+      "label": "Line 7 — Check here if you repaid a 2025 unemployment compensation overpayment (see instructions)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line7_ReadOrder[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 448.8,
+        "y": 524
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.7_amount_repaid",
+      "label": "Line 7 — Enter amount repaid",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line7_ReadOrder[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 151.2,
+        "y": 510.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.7",
+      "label": "Line 7 — Unemployment compensation",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 510.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8a",
+      "label": "Line 8a — Net operating loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line8a_ReadOrder[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 414.4,
+        "y": 486
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8b",
+      "label": "Line 8b — Gambling",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 474.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8c",
+      "label": "Line 8c — Cancellation of debt",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 462.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8d",
+      "label": "Line 8d — Foreign earned income exclusion from Form 2555",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 414.4,
+        "y": 450
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8e",
+      "label": "Line 8e — Income from Form 8853",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 438.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8f",
+      "label": "Line 8f — Income from Form 8889",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 426.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8g",
+      "label": "Line 8g — Alaska Permanent Fund dividends",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 414
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8h",
+      "label": "Line 8h — Jury duty pay",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 402.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8i",
+      "label": "Line 8i — Prizes and awards",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 390.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8j",
+      "label": "Line 8j — Activity not engaged in for profit income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 378
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8k",
+      "label": "Line 8k — Stock options",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 366.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8l",
+      "label": "Line 8l — Income from the rental of personal property if you engaged in the rental for profit but were not in the business of renting such property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 342
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8m",
+      "label": "Line 8m — Olympic and Paralympic medals and USOC prize money (see instructions)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 330.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8n",
+      "label": "Line 8n — Section 951(a) inclusion (see instructions)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 318.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8o",
+      "label": "Line 8o — Section 951A(a) inclusion (see instructions)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 306
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8p",
+      "label": "Line 8p — Section 461(l) excess business loss adjustment",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 294.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8q",
+      "label": "Line 8q — Taxable distributions from an ABLE account (see instructions)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 282.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8r",
+      "label": "Line 8r — Scholarship and fellowship grants not reported on Form W-2",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 270
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8s",
+      "label": "Line 8s — Nontaxable amount of Medicaid waiver payments included on Form 1040, line 1a or 1d",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 414.4,
+        "y": 246.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8t",
+      "label": "Line 8t — Pension or annuity from a nonqualified deferred compensation plan or a nongovernmental section 457 plan",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 222.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8u",
+      "label": "Line 8u — Wages earned while incarcerated",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 210.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8v",
+      "label": "Line 8v — Digital assets received as ordinary income not reported elsewhere (see instructions)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 186.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.8z_type",
+      "label": "Line 8z — Other income. List type",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line8z_ReadOrder[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 149.998
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "schedule-1.0.line.8z",
+      "label": "Line 8z — Other income amount",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 150.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.9",
+      "label": "Line 9 — Total other income. Add lines 8a through 8z",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 138.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.0.line.10",
+      "label": "Line 10 — Combine lines 1 through 7 and 9. This is your additional income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 114.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.11",
+      "label": "Line 11 — Educator expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 720
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.12",
+      "label": "Line 12 — Certain business expenses of reservists, performing artists, and fee-basis government officials (attach Form 2106)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 696.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.13",
+      "label": "Line 13 — Health savings account deduction (attach Form 8889)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.14_storage_fees_only",
+      "label": "Line 14 — Check here if claiming only storage fees for moving expenses for members of the Armed Forces",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 185.8,
+        "y": 662.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.14",
+      "label": "Line 14 — Moving expenses for members of the Armed Forces (attach Form 3903)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.15",
+      "label": "Line 15 — Deductible part of self-employment tax (attach Schedule SE)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.16",
+      "label": "Line 16 — Self-employed SEP, SIMPLE, and qualified plans",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.17",
+      "label": "Line 17 — Self-employed health insurance deduction",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.18",
+      "label": "Line 18 — Penalty on early withdrawal of savings",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.19a",
+      "label": "Line 19a — Alimony paid",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.19b",
+      "label": "Line 19b — Recipient's SSN",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line19b_CombField[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 588.002
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "schedule-1.1.line.19c",
+      "label": "Line 19c — Date of original divorce or separation agreement (see instructions)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 338.4,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.20_mfs_lived_apart",
+      "label": "Line 20 — Check here if you are married filing separately and lived apart from your spouse for the entire year (IRA deduction)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 185.8,
+        "y": 554.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.20",
+      "label": "Line 20 — IRA deduction",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.21",
+      "label": "Line 21 — Student loan interest deduction",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 540
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.23",
+      "label": "Line 23 — Archer MSA deduction",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24a",
+      "label": "Line 24a — Jury duty pay (see instructions)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line24a_ReadOrder[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24b",
+      "label": "Line 24b — Deductible expenses related to income reported on line 8l from the rental of personal property engaged in for profit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24c",
+      "label": "Line 24c — Nontaxable amount of the value of Olympic and Paralympic medals and USOC prize money reported on line 8m",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24d",
+      "label": "Line 24d — Reforestation amortization and expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24e",
+      "label": "Line 24e — Repayment of supplemental unemployment benefits under the Trade Act of 1974",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24f",
+      "label": "Line 24f — Contributions to section 501(c)(18)(D) pension plans",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24g",
+      "label": "Line 24g — Contributions by certain chaplains to section 403(b) plans",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24h",
+      "label": "Line 24h — Attorney fees and court costs for actions involving certain unlawful discrimination claims (see instructions)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24i",
+      "label": "Line 24i — Attorney fees and court costs you paid in connection with an award from the IRS for information you provided that helped the IRS detect tax law violations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24j",
+      "label": "Line 24j — Housing deduction from Form 2555",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24k",
+      "label": "Line 24k — Excess deductions of section 67(e) expenses from Schedule K-1 (Form 1041)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.24z_type",
+      "label": "Line 24z — Other adjustments. List type",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line24z_ReadOrder[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 275.998
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "schedule-1.1.line.24z",
+      "label": "Line 24z — Other adjustments amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.25",
+      "label": "Line 25 — Total other adjustments. Add lines 24a through 24z",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "schedule-1.1.line.26",
+      "label": "Line 26 — Adjustments to income. Add lines 11 through 23 and 25",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 240.001
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/federal/schedule-1/blank.pdf",
+    "ingestedAt": "2026-10-15T17:35:52.964Z",
+    "totalFields": 72,
+    "enriched": 72,
+    "unenriched": 0,
+    "skipped": 0,
+    "catalogEntries": 72,
+    "tokensIn": 13170,
+    "tokensOut": 4871,
+    "cacheRead": 0,
+    "cacheCreate": 0
+  }
+}

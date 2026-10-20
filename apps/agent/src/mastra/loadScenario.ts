@@ -2,10 +2,10 @@
  * The one bridge between the db layer and the pure form engine: load a
  * filing's fact + decision rows, hand them to evaluateScenario. All I/O
  * stays on this side of the engine boundary; the engine never touches a
- * database (see ../engine/README.md).
+ * database (see packages/engine/README.md).
  */
 
-import { evaluateScenario, type EngineFiling, type EvaluatedScenario } from "../engine";
+import { evaluateScenario, type EngineFiling, type EvaluatedScenario } from "@summa/engine";
 import { listDecisions } from "./db/aiDecisions";
 import type { Scope } from "./db/appDb";
 import { listFacts } from "./db/taxFacts";

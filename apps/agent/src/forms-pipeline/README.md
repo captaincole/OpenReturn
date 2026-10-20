@@ -16,7 +16,8 @@ blank.pdf ──ingest──► catalog.json ──promote──► runtime copy
   not registered on the production instance): extract AcroForm widgets from
   the PDF (`extractFormFields.ts`), AI-label and classify each field
   (`visionLabel.ts`, `classifyFields.ts`), persist a `catalog.json` to
-  `apps/agent/forms/<jurisdiction>/<short>/`.
+  the engine, next to the form's bindings
+  (`packages/engine/src/<jurisdiction>/<short>/`).
 - **`generateBindingsWorkflow/`** — drafts a `bindings.ts` skeleton for a
   cataloged form: retrieves instruction context from the corpus
   (`retrieveContext.ts`), classifies which fields are derivable
@@ -31,7 +32,6 @@ blank.pdf ──ingest──► catalog.json ──promote──► runtime copy
 
 ```bash
 npm run form-engine -- generate-catalog           # PDF → catalog.json (Anthropic calls, costs money)
-npm run form-engine -- promote                    # copy catalog + blank.pdf into src/mastra/public/forms/
 npm run form-engine -- generate-bindings          # catalog → bindings.ts draft
 npm run form-engine -- ingest-federal-tax-table   # refresh the federal tax table JSON
 ```
@@ -40,8 +40,9 @@ Run `npm run form-engine` with no arguments for the full command list
 (including `generate-types` and `ingest-ca-tax-table`), and
 `-- <command> --help` for a command's options.
 
-The promote step is a deliberate gate: tests run against
-`apps/agent/forms/` (offline source of truth); the runtime only sees a
-catalog after promotion. AI labeling fence-posts on dense widget clusters —
-hand-verified corrections live in `src/engine/render/verifiedWidgets.ts`
-and take precedence over catalog widget names at render time.
+Inputs come from `packages/forms/<year>/` (the source documents); outputs
+go to `packages/engine/src/`. A new catalog reaches the runtime in the
+same commit as its tests: the engine imports it directly. AI labeling
+fence-posts on dense widget clusters — hand-verified corrections live in
+`packages/engine/src/render/verifiedWidgets.ts` and take precedence over
+catalog widget names at render time.
