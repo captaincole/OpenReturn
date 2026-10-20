@@ -30,8 +30,12 @@ export const luca = new Agent({
    * Multi-step: get-case-state + maybe one ingest + a record-ai-decision
    * + optionally generate-tax-documents is ~5 steps per turn. 20 leaves
    * headroom for batched scope decisions on a single turn.
+   *
+   * maxOutputTokens doubles the 4,096 default. One ingest call carries a
+   * whole statement: the 21 trades on jordan's consolidated 1099 take
+   * about 4,500 tokens, and at 4,096 the call came back with no trades.
    */
-  defaultOptions: { maxSteps: 20 },
+  defaultOptions: { maxSteps: 20, modelSettings: { maxOutputTokens: 8192 } },
   defaultGenerateOptionsLegacy: { maxSteps: 20 },
   defaultStreamOptionsLegacy: { maxSteps: 20 },
   tools: {
