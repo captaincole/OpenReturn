@@ -24,12 +24,12 @@ export const MARCUS_TAX_YEAR = 2025;
 
 const w2: W2FactValue = {
   employerName: "Helix Software, Inc.",
-  employerEin: "84-7654321",
+  employerEin: "87-1234567",
   employerAddress: {
-    line1: "550 Mission St",
+    line1: "1455 Mission Street",
     city: "San Francisco",
     state: "CA",
-    zip: "94105",
+    zip: "94103",
   },
   /*
    * Box 1 is wages after the $23,500 401(k) (code D) and $4,150 HSA
@@ -45,9 +45,9 @@ const w2: W2FactValue = {
    * Box 6 includes the regular 1.45% Medicare tax AND the withheld 0.9%
    * Additional Medicare Tax on wages above $200k:
    *   1.45% × $243,500 + 0.9% × ($243,500 − $200,000)
-   *   = $3,530.75 + $391.50 = $3,922.25 → $3,922
+   *   = $3,530.75 + $391.50 = $3,922.25 (8959 line 19 rounds it to $3,922)
    */
-  box6: 3922,
+  box6: 3922.25,
   box12: [
     { code: "D", amount: 23500 }, // 2025 401(k) employee deferral max
     { code: "W", amount: 4150 }, // 2025 self-only HSA limit
@@ -65,7 +65,7 @@ const w2: W2FactValue = {
  */
 const wealthfrontInterest: InterestFactValue = {
   payerName: "Wealthfront Brokerage LLC",
-  payerTin: "27-3987858",
+  payerTin: "27-1967207",
   box1: 700,
 };
 
