@@ -28,6 +28,7 @@ export async function askTheTaxCode(page: Page): Promise<void> {
 
   if ((await turn.getAttribute("data-turn-status")) === "failed") {
     check("tax-code answer cites a reference", "model", [`turn failed: ${answer.split("\n")[1]}`]);
+    await backHome(page);
     return;
   }
   const pdfLinks = turn.getByRole("link", { name: /Open PDF/ });
@@ -43,6 +44,13 @@ export async function askTheTaxCode(page: Page): Promise<void> {
   if ((await pdfLinks.count()) > 0) {
     await plumbing("reference PDF opens", () => expectPdf(page, pdfLinks.first()));
   }
+  await backHome(page);
+}
+
+/* Leave the browser on the home page, where the next stage (start a filing) begins. */
+async function backHome(page: Page) {
+  await page.goto("/");
+  await expect(page.getByRole("button", { name: /Start filing/ }).first()).toBeVisible();
 }
 
 /* Returns the finished turn's <article> (status completed or failed). */
