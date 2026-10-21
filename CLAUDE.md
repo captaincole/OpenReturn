@@ -129,7 +129,7 @@ Limits worth remembering:
 
 ### Claude verifies the whole stack with `npm run e2e`
 
-After a change to the web app, the agent tools, or document generation, run `npm run e2e` in the background (about 15 minutes on a local model). Read `e2e/.run/<runId>/summary.md`. A `plumbing` failure means the change probably broke the app. A `model` failure can be a model mistake: run again before you debug. `dev:all` must be stopped first.
+After a change to the web app, the agent tools, or document generation, run `npm run e2e` in the background (a few minutes; the models come from `apps/agent/.env.development` and optional `E2E_*` lines in the gitignored `apps/agent/.env`, see e2e/README.md). Read `e2e/.run/<runId>/summary.md`. A `plumbing` failure means the change probably broke the app. A `model` failure can be a model mistake: run again before you debug. `dev:all` must be stopped first.
 
 ### Resetting user data
 
@@ -416,7 +416,7 @@ If you're a fresh Claude Code session starting in this folder: read this file, t
 
 ## Things explicitly out of scope (for now)
 
-- A dedicated OCR/parsing service. Document reading DOES work today — chat attachments are sent inline to Luca (base64 in the stream, `AppShell.tsx` `sendChat`), Claude reads the PDF/image natively, then calls the structured ingest tools (`ingestW2`, `ingest1099Consolidated`). Out of scope is only a separate extraction pipeline (batch OCR, non-chat ingestion paths).
+- A dedicated OCR/parsing service. Document reading DOES work today — chat attachments are sent inline to Luca (base64 in the stream, `AppShell.tsx` `sendChat`), Claude reads the PDF/image natively, then calls the structured ingest tools (`ingestW2`, `ingest1099Div`, `ingest1099B`, …). Out of scope is only a separate extraction pipeline (batch OCR, non-chat ingestion paths).
 - Direct IRS filing (human-in-the-loop CPA signs off first)
 - Multi-tenant auth / client portal (single-user for prototyping)
 - Pricing, payments, scheduling (Stage 1 only cares about extracting facts)

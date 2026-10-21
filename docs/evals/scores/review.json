@@ -1,0 +1,47 @@
+{
+  "flow": "review",
+  "title": "Review",
+  "definition": "Each case runs the production review-decision workflow on one AI decision, in a correct and a wrong version. The flow score is the mean of four shares of runs: Verdict (the verdict matches), Grounding (on a correct decision, the judge cites the expected authority), Retrieval (the search, from the model's own queries, found the authority) and Citations (the judge cites only blocks it retrieved).",
+  "report": "review.md",
+  "capabilities": [
+    "Verdict",
+    "Grounding",
+    "Retrieval",
+    "Citations"
+  ],
+  "models": [
+    {
+      "label": "Gemma 4 31b Q4_K_M",
+      "id": "ollama/gemma4:31b",
+      "score": 0.9583333333333333,
+      "capabilities": {
+        "Verdict": 1,
+        "Grounding": 1,
+        "Retrieval": 0.8888888888888888,
+        "Citations": 0.9444444444444444
+      }
+    },
+    {
+      "label": "Gemma 4 26b Q4_K_M",
+      "id": "ollama/gemma4:26b",
+      "score": 0.8055555555555556,
+      "capabilities": {
+        "Verdict": 0.8333333333333334,
+        "Grounding": 0.8888888888888888,
+        "Retrieval": 0.7777777777777778,
+        "Citations": 0.7222222222222222
+      }
+    },
+    {
+      "label": "Haiku 5.5",
+      "id": "anthropic/claude-haiku-5-5",
+      "score": 1,
+      "capabilities": {
+        "Verdict": 1,
+        "Grounding": 1,
+        "Retrieval": 1,
+        "Citations": 1
+      }
+    }
+  ]
+}

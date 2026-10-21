@@ -21,6 +21,6 @@
       "@summa/forms": ["../../packages/forms/index.ts"]
     }
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts", "scripts/**/*.ts"],
+  "include": ["src/**/*.ts", "tests/**/*.ts", "scripts/**/*.ts", "evals/**/*.ts"],
   "exclude": ["node_modules", ".mastra"]
 }

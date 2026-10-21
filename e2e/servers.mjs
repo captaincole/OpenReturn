@@ -27,11 +27,21 @@ const DATA_KEYS = ["APP_DB_PATH", "MASTRA_DB_PATH", "DOCUMENTS_PATH"];
 const DECISION_REVIEW = process.env.E2E_DECISION_REVIEW ?? "off";
 
 /*
- * E2E_LUCA_MODEL / E2E_JUDGE_MODEL run a role on another model for one
- * run, for example anthropic/claude-haiku-5-5. Its URL comes from
+ * E2E_LUCA_MODEL / E2E_JUDGE_MODEL run a role on another model, for
+ * example anthropic/claude-haiku-5-5. Its URL comes from
  * E2E_<ROLE>_MODEL_URL; without one, the model is a cloud model (key
- * from apps/agent/.env).
+ * from apps/agent/.env). Defaults come from E2E_* lines in the gitignored
+ * apps/agent/.env (e.g. a model on a LAN machine); the shell wins.
  */
+function loadE2eDefaults() {
+  const file = join(root, "apps/agent/.env");
+  if (!existsSync(file)) return;
+  for (const [key, value] of Object.entries(parseEnv(readFileSync(file, "utf8")))) {
+    if (key.startsWith("E2E_")) process.env[key] ??= value;
+  }
+}
+loadE2eDefaults();
+
 const ROLES = ["LUCA", "JUDGE"].filter((role) => process.env[`E2E_${role}_MODEL`]);
 const roleKeys = ROLES.flatMap((r) => [`${r}_MODEL`, `${r}_MODEL_URL`, `${r}_MODEL_API_KEY`]);
 const roleOverrides = ROLES.flatMap((r) => {

@@ -128,7 +128,10 @@ export const ingestW2 = createTool({
         retirementPlan: z.boolean().optional(),
         thirdPartySickPay: z.boolean().optional(),
       })
-      .optional(),
+      .optional()
+      .describe(
+        "Box 13 checkboxes: set true for each box marked with an X (statutory employee, retirement plan, third-party sick pay)",
+      ),
     box14: z
       .array(z.object({ label: z.string(), amount: z.number() }))
       .optional()
