@@ -1,7 +1,7 @@
 /*
- * Read-only diff between the instructions.pdf files under forms/ and the
- * ref_documents rows in the local corpus DB. Exits 0 unless --strict is
- * set and drift exists.
+ * Read-only diff between the source PDFs under forms/ (instructions.pdf,
+ * publication.pdf) and the ref_documents rows in the local corpus DB.
+ * Exits 0 unless --strict is set and drift exists.
  */
 
 import { getDocument, listDocuments } from "../../src/mastra/db/corpusStore";

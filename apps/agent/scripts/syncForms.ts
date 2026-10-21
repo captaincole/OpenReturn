@@ -1,7 +1,7 @@
 /*
  * Copy every blank.pdf (the engine fills it) and every instructions.pdf
- * plus its instructions.meta.json sidecar (the reference library serves
- * it) from @summa/forms into the agent's runtime tree,
+ * or publication.pdf plus its .meta.json sidecar (the reference library
+ * serves it) from @summa/forms into the agent's runtime tree,
  * src/mastra/public/forms/<year>/<relativeDir>/. Mastra ships public/
  * with the server, and src/mastra/formAssets.ts reads from it.
  * The tree is gitignored: @summa/forms is the one copy in git. Runs
@@ -14,7 +14,13 @@ import { dirname, join, relative, resolve } from "node:path";
 
 const RUNTIME_DIR = resolve(__dirname, "../src/mastra/public/forms");
 
-const RUNTIME_FILES = new Set(["blank.pdf", "instructions.pdf", "instructions.meta.json"]);
+const RUNTIME_FILES = new Set([
+  "blank.pdf",
+  "instructions.pdf",
+  "instructions.meta.json",
+  "publication.pdf",
+  "publication.meta.json",
+]);
 
 function runtimeFiles(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {

@@ -10,7 +10,7 @@
 import type { BlankPdfLoader } from "@summa/engine";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
-import { dirname, join, resolve } from "node:path";
+import { join, resolve } from "node:path";
 
 export const loadBlankPdf: BlankPdfLoader = ({ relativeDir, taxYear }) => {
   const path = resolve(process.cwd(), "forms", String(taxYear), relativeDir, "blank.pdf");
@@ -24,12 +24,13 @@ function metaFiles(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) return metaFiles(full);
-    return entry.name === "instructions.meta.json" ? [full] : [];
+    return /^(instructions|publication)\.meta\.json$/.test(entry.name) ? [full] : [];
   });
 }
 
 /*
- * The instructions.pdf whose sidecar names this corpus docId, or null.
+ * The source PDF (instructions.pdf or publication.pdf) whose sidecar
+ * names this corpus docId, or null.
  * It scans the runtime tree on each call: a few dozen small files, and
  * a forms:sync never leaves a stale cache behind.
  */
@@ -39,6 +40,6 @@ export async function loadInstructionsPdf(docId: string): Promise<Buffer | null>
   const meta = metaFiles(root).find(
     (file) => (JSON.parse(readFileSync(file, "utf8")) as { docId?: string }).docId === docId,
   );
-  const pdf = meta && join(dirname(meta), "instructions.pdf");
+  const pdf = meta?.replace(/\.meta\.json$/, ".pdf");
   return pdf && existsSync(pdf) ? readFile(pdf) : null;
 }

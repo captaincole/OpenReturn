@@ -6,8 +6,10 @@ import { join, relative, resolve } from "node:path";
 import type { ParserStyle } from "./parse";
 
 /*
- * Walks the @summa/forms tree (packages/forms/<year>/…) for instructions.pdf files and pairs each PDF
- * with its sibling `instructions.meta.json` sidecar. The sidecar is the
+ * Walks the @summa/forms tree (packages/forms/<year>/…) for source PDFs —
+ * instructions.pdf (form instructions, in a form's folder) and
+ * publication.pdf (an IRS/FTB publication, under publications/) — and
+ * pairs each PDF with its sibling `<name>.meta.json` sidecar. The sidecar is the
  * source of truth for docId/title/publisher/taxYear/sourceUrl. The
  * filesystem is the source of truth for which docs should exist.
  *
@@ -43,7 +45,7 @@ export interface WalkResult {
   unconfigured: { pdfPath: string; pdfRelPath: string; reason: string }[];
 }
 
-const INSTRUCTIONS_FILENAME = "instructions.pdf";
+const SOURCE_FILENAMES = new Set(["instructions.pdf", "publication.pdf"]);
 
 async function walkPdfs(dir: string): Promise<string[]> {
   const out: string[] = [];
@@ -57,7 +59,7 @@ async function walkPdfs(dir: string): Promise<string[]> {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) {
       out.push(...(await walkPdfs(full)));
-    } else if (entry.isFile() && entry.name === INSTRUCTIONS_FILENAME) {
+    } else if (entry.isFile() && SOURCE_FILENAMES.has(entry.name)) {
       out.push(full);
     }
   }
@@ -81,7 +83,7 @@ export async function walkCorpus(formsRoot: string = FORMS_ROOT): Promise<WalkRe
 }
 
 /*
- * Load one instructions.pdf + sidecar pair. A missing / malformed /
+ * Load one source PDF + sidecar pair. A missing / malformed /
  * incomplete sidecar makes the pdf "unconfigured" with a reason the
  * `corpus status` output shows verbatim.
  */
