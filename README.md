@@ -53,6 +53,10 @@ A 2025 return: chat with Luca on the left; activity, requested actions, and the 
 
 <img src="static/screenshots/return-2025.png" alt="The 2025 return workspace: Luca's chat summary of the drafted return on the left, and the Activity, Requested actions, and Tax forms sections on the right" width="880">
 
+Ask The Tax Code: a question from the home page gets a short answer with numbered citations into the IRS and FTB instructions; each card quotes the passage and opens the source PDF on its page.
+
+<img src="static/screenshots/ask-tax-code.png" alt="Ask The Tax Code page: the question 'Can I deduct a loss from a wash sale?', a two-sentence answer with citation markers 1 and 2, two reference cards quoting the Schedule D instructions with Open PDF links, and the Follow up / Ask a different question composer at the bottom" width="880">
+
 ## Before you use this — read honestly
 
 - **Your tax data goes to your model.** Every conversation turn and every background check sends your tax facts to the model you configured. A local model or your own private infrastructure keeps the data with you; a cloud API (Anthropic, OpenAI) does not.
