@@ -3,6 +3,9 @@ import {
   makeDividendFactKey,
   makeInterestFactKey,
   makeMiscIncomeFactKey,
+  type DividendFactValue,
+  type InterestFactValue,
+  type MiscIncomeFactValue,
 } from "@summa/engine/facts";
 import { z } from "zod";
 import { recordIngestFact, statementContext, statementFields } from "./ingestShared";
@@ -21,37 +24,46 @@ import { recordIngestFact, statementContext, statementFields } from "./ingestSha
 
 const ONLY_NON_ZERO = "Pass only the boxes that have non-zero values.";
 
-interface FormSpec {
+type Payer = "payerName" | "payerTin";
+
+/*
+ * One schema per box of the engine's fact value: a missing box, an extra
+ * box, or a box whose type differs from the engine's fails to compile.
+ */
+type BoxSchemas<V> = { [K in keyof Omit<V, Payer>]-?: z.ZodType<V[K]> };
+
+interface FormSpec<V> {
   id: string;
   form: string;
   category: string;
   factKey: (slug: string) => string;
-  boxes: z.ZodRawShape;
+  boxes: BoxSchemas<V>;
   description: string;
 }
 
-function formTool(spec: FormSpec) {
+function formTool<V extends { payerName: string; payerTin?: string }>(spec: FormSpec<V>) {
   return createTool({
     id: spec.id,
     description: `${spec.description} ${ONLY_NON_ZERO}`,
-    inputSchema: z.object({ ...statementFields, ...spec.boxes }),
+    inputSchema: z.object({ ...statementFields, ...(spec.boxes as z.ZodRawShape) }),
     outputSchema: z.object({ accountSlug: z.string(), factKey: z.string() }),
     execute: async (input, context) => {
       const { ctx, slug } = await statementContext(input, context, spec.form);
       const boxes = Object.entries(input).filter(([k]) => k in spec.boxes);
       const factKey = spec.factKey(slug);
+      /* The boxes passed the schemas above, which BoxSchemas ties to V. */
       const value = {
         payerName: input.payer.name,
         payerTin: input.payer.tin,
         ...Object.fromEntries(boxes),
-      };
+      } as V;
       await recordIngestFact(ctx, spec.category, factKey, value);
       return { accountSlug: slug, factKey };
     },
   });
 }
 
-export const ingest1099Int = formTool({
+export const ingest1099Int = formTool<InterestFactValue>({
   id: "ingest-1099-int",
   form: "1099-INT",
   category: "investment_income",
@@ -78,7 +90,7 @@ export const ingest1099Int = formTool({
   },
 });
 
-export const ingest1099Div = formTool({
+export const ingest1099Div = formTool<DividendFactValue>({
   id: "ingest-1099-div",
   form: "1099-DIV",
   category: "investment_income",
@@ -103,7 +115,7 @@ export const ingest1099Div = formTool({
   },
 });
 
-export const ingest1099Misc = formTool({
+export const ingest1099Misc = formTool<MiscIncomeFactValue>({
   id: "ingest-1099-misc",
   form: "1099-MISC",
   category: "other",
