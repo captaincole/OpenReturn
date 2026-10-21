@@ -55,7 +55,7 @@ A 2025 return: chat with Luca on the left; activity, requested actions, and the 
 
 Ask The Tax Code: a question from the home page gets a short answer with numbered citations into the IRS and FTB instructions; each card quotes the passage and opens the source PDF on its page.
 
-<img src="static/screenshots/ask-tax-code.png" alt="Ask The Tax Code page: the question 'Can I deduct a loss from a wash sale?', a two-sentence answer with citation markers 1 and 2, two reference cards quoting the Schedule D instructions with Open PDF links, and the Follow up / Ask a different question composer at the bottom" width="880">
+<img src="static/screenshots/ask-tax-code.png" alt="Ask The Tax Code page: the question 'How much can I contribute to my HSA in 2025?', an answer giving the $4,300 self-only and $8,550 family limits with citation markers, a reference card quoting the Form 8889 instructions with an Open PDF link, and the Follow up / Ask a different question composer at the bottom" width="880">
 
 ## Before you use this — read honestly
 
