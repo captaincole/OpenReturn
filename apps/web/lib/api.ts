@@ -28,6 +28,8 @@ export interface PlanItem {
 export interface FormSummary {
   formId: string;
   jurisdiction: string;
+  /** Official short name, e.g. "Form 1040" or "Schedule H". */
+  displayName: string;
   title: string;
   mustFile:
     | { ok: true; value: boolean; rationale: string }
@@ -71,21 +73,6 @@ export interface CaseState {
     form540Url: string | null;
     sidecarUrl: string | null;
   };
-}
-
-/**
- * Coarse progress signal, rendered on the return home page: the fraction
- * of forms whose must-file question is decided AND, if filing, whose
- * non-unsupported fields have all resolved. With only 1040 + 540 in the
- * catalog the granularity is 0% / 50% / 100%. That is fine. The UX
- * intent is "are we close to hand-off".
- */
-export function computeOverallPct(forms: FormSummary[]): number {
-  if (forms.length === 0) return 0;
-  const computed = forms.filter(
-    (f) => f.mustFile.ok && (f.mustFile.value === false || f.blockedFieldCount === 0),
-  ).length;
-  return Math.round((computed / forms.length) * 100);
 }
 
 export class UnauthorizedError extends Error {

@@ -6,10 +6,11 @@
  * Layout:
  *   - TopBar: brand, return picker, tabs, right cluster.
  *   - Main, desktop: ChatPane on the left, {children} on the right.
- *   - Main, mobile: one pane. The bottom tab bar swaps the panes.
+ *   - Main, mobile: one pane. The bottom tab bar picks Chat or one of the
+ *     workspace sections (Activity, Forms, Documents).
  *
  * AppShellContext supplies user state, the chat message buffer, lucaBusy,
- * turnTick, the mobile-pane setter, and sendChat. The chat session itself
+ * turnTick, the mobile pane and its setter, and sendChat. The chat session itself
  * (buffer, history hydration, streaming) lives in useLucaChat.
  *
  * For placeholder returns (realDataAvailable=false), the shell does not
@@ -36,7 +37,11 @@ import {
 
 export type { ChatMessage, SendChatOpts };
 
-type MobilePane = "chat" | "workspace";
+/*
+ * Mobile only. The workspace page reads it to show one section; on
+ * desktop every section renders and this value has no effect.
+ */
+export type MobilePane = "chat" | "activity" | "forms" | "documents";
 
 interface AppShellContextValue {
   userId: string;
@@ -51,6 +56,7 @@ interface AppShellContextValue {
   messages: ChatMessage[];
   setMessages: Dispatch<SetStateAction<ChatMessage[]>>;
   lucaBusy: boolean;
+  mobilePane: MobilePane;
   setMobilePane: Dispatch<SetStateAction<MobilePane>>;
   /*
    * The single entry point that sends a turn to Luca. The chat input and
@@ -85,7 +91,7 @@ export function AppShell({
   const router = useRouter();
   const [state, setState] = useState<CaseState | null>(null);
   const [resetTick] = useState(0);
-  const [mobilePane, setMobilePane] = useState<MobilePane>("workspace");
+  const [mobilePane, setMobilePane] = useState<MobilePane>("activity");
 
   async function onSignOut() {
     await signOut();
@@ -133,6 +139,7 @@ export function AppShell({
     messages: chat.messages,
     setMessages: chat.setMessages,
     lucaBusy: chat.lucaBusy,
+    mobilePane,
     setMobilePane,
     sendChat: chat.sendChat,
     onSignOut,
@@ -181,7 +188,9 @@ function MobileTabBar({
 }) {
   const tabs: { id: MobilePane; label: string; icon: string }[] = [
     { id: "chat", label: "Chat", icon: "◐" },
-    { id: "workspace", label: "Workspace", icon: "▦" },
+    { id: "activity", label: "Activity", icon: "≋" },
+    { id: "forms", label: "Forms", icon: "▤" },
+    { id: "documents", label: "Documents", icon: "▦" },
   ];
   return (
     <nav className="relative z-30 flex h-14 shrink-0 border-t border-border-subtle bg-bg-subtle/95 backdrop-blur-sm lg:hidden">
@@ -196,8 +205,8 @@ function MobileTabBar({
         >
           <span className="text-lg leading-none">{t.icon}</span>
           <span className="text-[10px] tracking-wider uppercase">{t.label}</span>
-          {busy && t.id === "workspace" && (
-            <span className="absolute top-1.5 right-[35%] h-1.5 w-1.5 animate-pulse-soft rounded-full bg-amber-400" />
+          {busy && t.id === "activity" && (
+            <span className="absolute top-1.5 right-[30%] h-1.5 w-1.5 animate-pulse-soft rounded-full bg-amber-400" />
           )}
         </button>
       ))}
