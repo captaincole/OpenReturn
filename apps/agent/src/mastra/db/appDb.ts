@@ -210,6 +210,37 @@ const APP_SCHEMA_DDL: string[] = [
            created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
          )`,
   `CREATE INDEX IF NOT EXISTS idx_review_run_steps_run ON review_run_steps(run_id, iteration)`,
+  /*
+   * Tax-code Q&A ("Ask the tax code"). Person-scoped, not filing-scoped.
+   * One thread per first question, one turn per question in it. The turn
+   * rows double as the query log: log_json keeps the pipeline's queries,
+   * retrieval and step timings raw. See db/askThreads.ts.
+   */
+  `CREATE TABLE IF NOT EXISTS ask_threads (
+           id         TEXT PRIMARY KEY,
+           user_id    TEXT NOT NULL,
+           title      TEXT NOT NULL,
+           created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
+         )`,
+  `CREATE TABLE IF NOT EXISTS ask_turns (
+           id             TEXT PRIMARY KEY,
+           thread_id      TEXT NOT NULL REFERENCES ask_threads(id) ON DELETE CASCADE,
+           user_id        TEXT NOT NULL,
+           turn_index     INTEGER NOT NULL,
+           question       TEXT NOT NULL,
+           status         TEXT NOT NULL CHECK (status IN ('running','completed','failed')),
+           stage          TEXT,
+           answer         TEXT,
+           coverage       TEXT CHECK (coverage IN ('covered','partial','not_covered')),
+           citations_json TEXT,
+           missing_docs_json TEXT,
+           log_json       TEXT,
+           error          TEXT,
+           created_at     TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
+           completed_at   TEXT,
+           duration_ms    INTEGER
+         )`,
+  `CREATE INDEX IF NOT EXISTS idx_ask_turns_thread ON ask_turns(thread_id, turn_index)`,
 ];
 
 export function ensureAppSchema(): Promise<void> {

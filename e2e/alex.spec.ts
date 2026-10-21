@@ -1,5 +1,6 @@
 /*
- * Alex, end to end: create the owner, start a filing, talk Luca through
+ * Alex, end to end: create the owner, ask the tax code one question
+ * (ask.ts), start a filing, talk Luca through
  * the intake with the W-2 upload, and wait for the generated forms. Then
  * check what the model stored and generated against Alex's fixtures
  * (packages/engine/tests/scenarios/alex).
@@ -21,6 +22,7 @@ import {
   w2Problems,
 } from "./alexChecks";
 import { unreviewedDecisions } from "./appDb";
+import { askTheTaxCode } from "./ask";
 import { RUN_DIR } from "./run";
 import { check, failedStages, note, plumbing, writeSummary } from "./summary";
 
@@ -39,6 +41,7 @@ test.afterEach(({}, testInfo) => {
 test("Alex: intake through generated forms", async ({ page }) => {
   test.setTimeout(90 * 60_000);
   await plumbing("setup page creates the owner", () => createOwner(page));
+  await askTheTaxCode(page);
   const filingPath = await plumbing("start a filing", () => startFiling(page));
   const generated = await runIntake(page);
   if (generated)

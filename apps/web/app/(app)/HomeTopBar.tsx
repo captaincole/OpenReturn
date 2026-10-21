@@ -1,12 +1,13 @@
 /*
- * Top bar for the home-home page (no active return). Brand logo, page
- * title, avatar tag. The caller derives `initials` with deriveProfile
+ * Top bar for the person-scope pages (home, /ask, /library — no active
+ * return). Brand logo, page title, a link to the reference library,
+ * avatar tag. The caller derives `initials` with deriveProfile
  * (display name, or email as the fallback).
  */
 
 import Link from "next/link";
 
-export function HomeTopBar({ initials }: { initials: string }) {
+export function HomeTopBar({ initials, title = "Home" }: { initials: string; title?: string }) {
   return (
     <header className="flex h-14 shrink-0 items-center gap-3 border-b border-border-subtle bg-bg-base/95 px-4 backdrop-blur-sm lg:px-6">
       <Link
@@ -17,8 +18,14 @@ export function HomeTopBar({ initials }: { initials: string }) {
         <span className="font-serif text-sm leading-none text-accent">W</span>
       </Link>
       <div className="h-6 w-px shrink-0 bg-border-subtle" />
-      <span className="text-[15px] font-semibold tracking-tight text-ink-primary">Home</span>
+      <span className="text-[15px] font-semibold tracking-tight text-ink-primary">{title}</span>
       <div className="flex-1" />
+      <Link
+        href="/library"
+        className="text-[13px] text-ink-secondary transition-colors hover:text-ink-primary"
+      >
+        Reference Library
+      </Link>
       <div className="flex h-8 w-8 items-center justify-center rounded-full border border-accent/40 bg-accent/20 text-xs font-medium text-accent">
         {initials}
       </div>

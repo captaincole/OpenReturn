@@ -5,7 +5,7 @@
  * auth. No AppShell and no chat, because no return is active here.
  *
  * Sections:
- *   1. Tax code search   — disabled search box (placeholder, coming soon).
+ *   1. Tax code search   — question box; submitting opens /ask/<threadId>.
  *   2. Tax returns       — filings from listOwnerReturns; the empty state
  *                          shows one big "Start your 2025 filing" CTA.
  *   3. Tax estimates     — 1040-ES estimate card (placeholder, coming soon).
