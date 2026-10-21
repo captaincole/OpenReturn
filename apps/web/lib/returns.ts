@@ -10,8 +10,8 @@
  * keys threads and draft lookups by year. The TaxReturn carries the
  * filing UUID for callers that need it (e.g. deleteFiling in TopBar).
  *
- * `realDataAvailable` stays on the type because several /r/* pages still
- * branch on it. In the query-based world every TaxReturn is real, so the
+ * `realDataAvailable` stays on the type because AppShell, ChatPane, and
+ * the return workspace page still branch on it. In the query-based world every TaxReturn is real, so the
  * field is always `true`.
  */
 

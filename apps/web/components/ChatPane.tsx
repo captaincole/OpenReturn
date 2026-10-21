@@ -22,14 +22,19 @@ interface ChatPaneProps {
 }
 
 export function ChatPane({ activeReturn }: ChatPaneProps) {
-  const { messages, lucaBusy } = useAppShell();
+  const { messages, lucaBusy, mobilePane } = useAppShell();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const isPlaceholder = !activeReturn.realDataAvailable;
 
+  /*
+   * mobilePane: on mobile this pane stays mounted but hidden behind the
+   * workspace tabs, and a hidden element cannot scroll. Scroll again
+   * when the Chat tab shows it.
+   */
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
-  }, [messages]);
+  }, [messages, mobilePane]);
 
   /*
    * For placeholder returns, render one hardcoded Luca turn instead of

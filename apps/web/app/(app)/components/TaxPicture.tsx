@@ -1,5 +1,5 @@
+import { LockOverlay } from "./Lock";
 import { Section } from "./Section";
-import { LockOverlay } from "./WorkflowCards";
 
 /*
  * Mock historical data. Replace with a serverDb query when we capture

@@ -7,11 +7,12 @@
  * the active return.
  *
  * Structure:
- *   [W → /]  [Return picker ▾]  ·  Home  Forms  Documents   [progress] [AC]
+ *   [W → /]  [Return picker ▾]                    [Luca is working] [AC]
  *
  * The return picker is the title-weight element. It uses font-semibold
  * sans because Fraunces renders numerals with cursive stylistic features
- * that read oddly on years like "2025". Workspace tabs are subordinate.
+ * that read oddly on years like "2025". Activity, Forms, and Documents are
+ * sections of one workspace page, not tabs here.
  */
 
 import { useAppShell } from "@/components/AppShell";
@@ -20,19 +21,13 @@ import { signOut } from "@/lib/auth";
 import { cn } from "@/lib/cn";
 import { type TaxReturn } from "@/lib/returns";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface TopBarProps {
   activeReturn: TaxReturn;
   returns: TaxReturn[];
 }
-
-const TABS = [
-  { id: "home", label: "Home", path: "" },
-  { id: "forms", label: "Forms", path: "/forms" },
-  { id: "documents", label: "Documents", path: "/documents" },
-] as const;
 
 /* Active return + dropdown. The primary "where am I" cue. */
 function ReturnPicker({ activeReturn, returns }: TopBarProps) {
@@ -90,38 +85,6 @@ function ReturnPicker({ activeReturn, returns }: TopBarProps) {
         </>
       )}
     </div>
-  );
-}
-
-/* Workspace tabs. Subordinate to the return picker. */
-function WorkspaceTabs({ basePath }: { basePath: string }) {
-  const pathname = usePathname();
-
-  function isTabActive(tabPath: string): boolean {
-    if (tabPath === "") return pathname === basePath;
-    return pathname === `${basePath}${tabPath}` || pathname.startsWith(`${basePath}${tabPath}/`);
-  }
-
-  return (
-    <nav className="hidden min-w-0 flex-1 items-center gap-0.5 md:flex">
-      {TABS.map((t) => {
-        const active = isTabActive(t.path);
-        return (
-          <Link
-            key={t.id}
-            href={`${basePath}${t.path}`}
-            className={cn(
-              "rounded-md px-2.5 py-1 text-[13px] transition-colors",
-              active
-                ? "bg-bg-elevated text-ink-primary"
-                : "text-ink-secondary hover:bg-bg-elevated/50 hover:text-ink-primary",
-            )}
-          >
-            {t.label}
-          </Link>
-        );
-      })}
-    </nav>
   );
 }
 
@@ -203,17 +166,7 @@ function AccountMenu({ activeReturn }: { activeReturn: TaxReturn }) {
 }
 
 export function TopBar({ activeReturn, returns }: TopBarProps) {
-  const { state, lucaBusy } = useAppShell();
-
-  const basePath = `/r/${activeReturn.id}`;
-  /*
-   * TODO: replace with a real overall-progress signal when the agent
-   * exposes one. computeOverallPct (the forms-complete fraction) reads 0
-   * until the last form lands. That shows "no progress" through a long
-   * chat. For now, scale with the fact count so the chip moves from the
-   * start and tops out near completion.
-   */
-  const pct = state ? Math.min(95, Math.max(8, state.factCount * 4)) : 8;
+  const { lucaBusy } = useAppShell();
 
   return (
     <header className="relative z-30 flex h-14 shrink-0 items-center gap-3 border-b border-border-subtle bg-bg-base/95 px-4 backdrop-blur-sm lg:px-6">
@@ -230,10 +183,7 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
 
       <ReturnPicker activeReturn={activeReturn} returns={returns} />
 
-      <div className="hidden shrink-0 px-1 text-ink-faint md:block">·</div>
-      <WorkspaceTabs basePath={basePath} />
-
-      <div className="flex-1 md:hidden" />
+      <div className="flex-1" />
 
       {/* Right cluster */}
       <div className="flex shrink-0 items-center gap-2">
@@ -241,17 +191,6 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
           <div className="hidden items-center gap-2 rounded-lg border border-amber-400/30 bg-amber-400/10 px-2.5 py-1.5 text-xs text-amber-200 sm:flex">
             <span className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-amber-400" />
             <span>Luca is working</span>
-          </div>
-        )}
-        {state && activeReturn.realDataAvailable && !lucaBusy && (
-          <div className="hidden items-center gap-2 rounded-lg border border-border-subtle bg-bg-panel px-2.5 py-1.5 text-xs sm:flex">
-            <div className="h-1.5 w-16 overflow-hidden rounded-full bg-bg-elevated">
-              <div
-                className="h-full bg-accent transition-all duration-500"
-                style={{ width: `${pct}%` }}
-              />
-            </div>
-            <span className="text-ink-secondary tabular-nums">{pct}%</span>
           </div>
         )}
 

@@ -150,12 +150,12 @@ async function expectUploadStored() {
 }
 
 /*
- * The forms page lists a PDF for each expected form (plus the JSON
- * sidecar), and each link serves its file.
+ * The Forms section of the return page lists a PDF for each expected form
+ * (plus the JSON sidecar), and each link serves its file.
  */
 async function checkFormsPage(page: Page, filingPath: string) {
-  await page.goto(`${filingPath}/forms`);
-  const open = page.getByRole("link", { name: "Open" });
+  await page.goto(filingPath);
+  const open = page.getByRole("region", { name: "Tax forms" }).getByRole("link", { name: "Open" });
   await expect
     .poll(() => open.count(), { timeout: 30_000 })
     .toBeGreaterThanOrEqual(EXPECTED_FORMS.length);

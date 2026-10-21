@@ -1,6 +1,11 @@
 import { createTool } from "@mastra/core/tools";
 import type { BaseFormField, EngineDerivation, EvaluatedForm } from "@summa/engine";
-import { pendingInputs, type EngineFiling, type EvaluatedScenario } from "@summa/engine";
+import {
+  getFormSpec,
+  pendingInputs,
+  type EngineFiling,
+  type EvaluatedScenario,
+} from "@summa/engine";
 import { z } from "zod";
 import type { Scope } from "../db/appDb";
 import { resolveOwnerFilingForYear } from "../db/filings";
@@ -25,6 +30,8 @@ import { requireUserContext } from "./userContext";
 type EvaluatedFormSummary = {
   formId: string;
   jurisdiction: string;
+  /** Official short name, e.g. "Form 1040" or "Schedule H". */
+  displayName: string;
   title: string;
   mustFile:
     | { ok: true; value: boolean; rationale: string }
@@ -166,6 +173,7 @@ function summarizeForm(form: EvaluatedForm<BaseFormField>): EvaluatedFormSummary
   return {
     formId: form.formId,
     jurisdiction: form.jurisdiction,
+    displayName: getFormSpec(form.formId).displayName,
     title: form.title,
     mustFile: form.mustFile.ok
       ? { ok: true, value: form.mustFile.value, rationale: form.mustFile.rationale }

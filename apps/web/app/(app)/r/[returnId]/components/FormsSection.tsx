@@ -1,7 +1,8 @@
 "use client";
 
 /*
- * Forms tab — one unified list of tax forms for the active return.
+ * Forms section of the return page — one unified list of tax forms for
+ * the active return.
  *
  * Two data sources, merged:
  *   - state.forms: engine-tracked primary forms (1040, CA 540) with
@@ -42,15 +43,11 @@ interface FormItem {
   draft?: DraftRow;
 }
 
-export default function FormsTab() {
-  const { activeReturn, state, resetTick, turnTick } = useAppShell();
+export function FormsSection() {
+  const { state, resetTick, turnTick } = useAppShell();
   const [drafts, setDrafts] = useState<DraftRow[]>([]);
 
   useEffect(() => {
-    if (!activeReturn.realDataAvailable) {
-      setDrafts([]);
-      return;
-    }
     let cancelled = false;
     fetch("/api/drafts", { cache: "no-store" })
       .then(async (res) => {
@@ -67,33 +64,20 @@ export default function FormsTab() {
     return () => {
       cancelled = true;
     };
-  }, [activeReturn.realDataAvailable, resetTick, turnTick]);
+  }, [resetTick, turnTick]);
 
   const items = useMemo(
     () => mergeFormsAndDrafts(state?.forms ?? [], drafts),
     [state?.forms, drafts],
   );
 
-  if (!activeReturn.realDataAvailable) {
-    return (
-      <div className="mx-auto max-w-2xl px-6 py-16 text-center lg:px-10">
-        <div className="text-[11px] tracking-[0.22em] text-ink-muted uppercase">
-          {activeReturn.label}
-        </div>
-        <h1 className="mt-3 font-serif text-3xl text-ink-primary">No forms yet</h1>
-        <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-ink-secondary">
-          Forms appear once Luca starts capturing facts. Switch to your 2025 Return to see them
-          live.
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <div className="mx-auto max-w-5xl px-6 py-8 lg:px-10">
+    <section aria-labelledby="forms-heading">
       <div className="mb-5 flex items-baseline justify-between">
         <div>
-          <h2 className="font-serif text-2xl text-ink-primary">Tax forms</h2>
+          <h2 id="forms-heading" className="font-serif text-2xl text-ink-primary">
+            Tax forms
+          </h2>
           <p className="mt-1 text-sm text-ink-secondary">
             Everything Luca is preparing for your 2025 return. Snapshots regenerate as facts land.
           </p>
@@ -117,7 +101,7 @@ export default function FormsTab() {
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 }
 
@@ -306,8 +290,8 @@ function mergeFormsAndDrafts(forms: FormSummary[], drafts: DraftRow[]): FormItem
     claimedKeys.add(key);
     items.push({
       key,
-      label: f.title,
-      description: null,
+      label: f.displayName,
+      description: f.title,
       form: f,
       draft: draftByKey.get(key),
     });

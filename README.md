@@ -43,6 +43,16 @@ Summa is a local-capable AI harness that allows you to build all the documents y
   math. Every new fact re-computes the return, so your draft updates live as
   you talk, and the open questions it surfaces are what Luca asks you next.
 
+### What it looks like
+
+The home page: your returns, estimates, and tax code search.
+
+<img src="static/screenshots/home.png" alt="Summa home page with a tax code search box, the 2025 return card, and the 2026 estimated taxes card" width="880">
+
+A 2025 return: chat with Luca on the left; activity, requested actions, and the generated forms on the right.
+
+<img src="static/screenshots/return-2025.png" alt="The 2025 return workspace: Luca's chat summary of the drafted return on the left, and the Activity, Requested actions, and Tax forms sections on the right" width="880">
+
 ## Before you use this — read honestly
 
 - **Your tax data goes to your model.** Every conversation turn and every background check sends your tax facts to the model you configured. A local model or your own private infrastructure keeps the data with you; a cloud API (Anthropic, OpenAI) does not.

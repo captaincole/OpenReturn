@@ -1,9 +1,9 @@
 "use client";
 
 /*
- * Documents tab — uploads only. Generated drafts (1040, 540, sidecar)
- * live on the Forms tab, per Andrew's labeling rule: inputs and outputs
- * are different concerns.
+ * Documents section of the return page — uploads only. Generated drafts
+ * (1040, 540, sidecar) live in the Forms section, per Andrew's labeling
+ * rule: inputs and outputs are different concerns.
  *
  * The drop zone wraps the existing uploadDocument flow. The card list
  * reads /api/uploads (libsql app DB, session-cookie auth).
@@ -45,8 +45,8 @@ function fetchUploads(setUploads: (rows: UploadRow[]) => void): () => void {
   };
 }
 
-export default function DocumentsTab() {
-  const { activeReturn, resetTick, lucaBusy, sendChat, setMobilePane } = useAppShell();
+export function DocumentsSection() {
+  const { resetTick, turnTick, lucaBusy, sendChat, setMobilePane } = useAppShell();
   const [uploads, setUploads] = useState<UploadRow[]>([]);
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
@@ -55,10 +55,11 @@ export default function DocumentsTab() {
 
   const loadUploads = useCallback(() => fetchUploads(setUploads), []);
 
-  useEffect(() => {
-    if (!activeReturn.realDataAvailable) return;
-    return loadUploads();
-  }, [resetTick, activeReturn.realDataAvailable, loadUploads]);
+  /*
+   * turnTick: chat attachments and Requested Actions also upload, and
+   * this section stays mounted beside the chat, so reload after each turn.
+   */
+  useEffect(() => loadUploads(), [resetTick, turnTick, loadUploads]);
 
   /*
    * Mirrors the Requested Actions upload flow. Write to user_documents
@@ -90,15 +91,13 @@ export default function DocumentsTab() {
     }
   }
 
-  if (!activeReturn.realDataAvailable) {
-    return <PlaceholderNotice label={activeReturn.label} />;
-  }
-
   return (
-    <div className="mx-auto max-w-5xl px-6 py-8 lg:px-10">
+    <section aria-labelledby="documents-heading">
       <div className="mb-5 flex items-baseline justify-between">
         <div>
-          <h2 className="font-serif text-2xl text-ink-primary">Documents</h2>
+          <h2 id="documents-heading" className="font-serif text-2xl text-ink-primary">
+            Documents
+          </h2>
           <p className="mt-1 text-sm text-ink-secondary">
             W-2s, 1099s, K-1s — anything you've uploaded.
           </p>
@@ -145,7 +144,7 @@ export default function DocumentsTab() {
           <DocCard key={doc.id} doc={doc} />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -214,18 +213,6 @@ function formatUploadedAt(iso: string): string {
   const opts: Intl.DateTimeFormatOptions = { month: "short", day: "numeric" };
   if (d.getFullYear() !== new Date().getFullYear()) opts.year = "numeric";
   return d.toLocaleDateString(undefined, opts);
-}
-
-function PlaceholderNotice({ label }: { label: string }) {
-  return (
-    <div className="mx-auto max-w-2xl px-6 py-16 text-center lg:px-10">
-      <div className="text-[11px] tracking-[0.22em] text-ink-muted uppercase">{label}</div>
-      <h1 className="mt-3 font-serif text-3xl text-ink-primary">No documents yet</h1>
-      <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-ink-secondary">
-        Documents you upload appear here. Switch to your 2025 Return to add files.
-      </p>
-    </div>
-  );
 }
 
 function UploadDropzone({
