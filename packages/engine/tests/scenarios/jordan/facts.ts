@@ -208,7 +208,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-01",
-      description: "91.207 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 91.207,
       dateAcquired: "11/28/22",
       dateSold: "05/12/25",
@@ -221,7 +221,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-02",
-      description: "91.627 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 91.627,
       dateAcquired: "11/28/22",
       dateSold: "05/12/25",
@@ -234,7 +234,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-03",
-      description: "60.208 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 60.208,
       dateAcquired: "12/07/22",
       dateSold: "05/12/25",
@@ -247,7 +247,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-04",
-      description: "84.604 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 84.604,
       dateAcquired: "12/07/22",
       dateSold: "05/12/25",
@@ -260,7 +260,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-05",
-      description: "30.696 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 30.696,
       dateAcquired: "12/07/22",
       dateSold: "05/09/25",
@@ -273,7 +273,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-06",
-      description: "92.951 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 92.951,
       dateAcquired: "12/07/22",
       dateSold: "05/09/25",
@@ -286,7 +286,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-07",
-      description: "37.588 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 37.588,
       dateAcquired: "12/04/22",
       dateSold: "05/09/25",
@@ -299,7 +299,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-08",
-      description: "96.399 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 96.399,
       dateAcquired: "12/04/22",
       dateSold: "05/09/25",
@@ -312,7 +312,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-09",
-      description: "88.099 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 88.099,
       dateAcquired: "12/04/22",
       dateSold: "05/09/25",
@@ -325,7 +325,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-10",
-      description: "95.395 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 95.395,
       dateAcquired: "12/04/22",
       dateSold: "05/14/25",
@@ -338,7 +338,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-11",
-      description: "127.962 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 127.962,
       dateAcquired: "12/04/22",
       dateSold: "05/14/25",
@@ -351,7 +351,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-12",
-      description: "106.200 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 106.2,
       dateAcquired: "12/30/22",
       dateSold: "05/14/25",
@@ -364,7 +364,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-13",
-      description: "32.299 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 32.299,
       dateAcquired: "12/30/22",
       dateSold: "10/29/25",
@@ -377,7 +377,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-14",
-      description: "199.153 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 199.153,
       dateAcquired: "12/30/22",
       dateSold: "10/29/25",
@@ -390,7 +390,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-15",
-      description: "143.447 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 143.447,
       dateAcquired: "01/02/23",
       dateSold: "10/29/25",
@@ -403,7 +403,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-16",
-      description: "141.595 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 141.595,
       dateAcquired: "01/12/23",
       dateSold: "10/29/25",
@@ -416,7 +416,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-17",
-      description: "171.062 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 171.062,
       dateAcquired: "01/12/23",
       dateSold: "10/29/25",
@@ -429,8 +429,8 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-18",
-      description: "1,283.162 sh TEST ORBITAL CORP",
-      quantity: 1.0,
+      description: "TEST ORBITAL CORP",
+      quantity: 1283.162,
       dateAcquired: "04/14/24",
       dateSold: "07/10/25",
       proceeds: 34074.48,
@@ -442,7 +442,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-d-19",
-      description: "644.647 sh TEST ORBITAL CORP",
+      description: "TEST ORBITAL CORP",
       quantity: 644.647,
       dateAcquired: "04/14/24",
       dateSold: "10/10/25",
@@ -455,7 +455,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-e-01",
-      description: "0.800 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 0.8,
       dateSold: "04/11/25",
       proceeds: 6.53,
@@ -466,7 +466,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "02",
     trade: {
       tradeId: "exb-e-02",
-      description: "19.000 sh SAMPLE GLOBAL HOLDINGS INC",
+      description: "SAMPLE GLOBAL HOLDINGS INC",
       quantity: 19.0,
       dateSold: "05/12/25",
       proceeds: 298.92,
@@ -477,7 +477,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "03",
     trade: {
       tradeId: "exbsp-b-01",
-      description: "91.626 sh EXAMPLE CORP CL C",
+      description: "EXAMPLE CORP CL C 00000C107",
       quantity: 91.626,
       dateAcquired: "01/15/25",
       dateSold: "02/14/25",
@@ -490,7 +490,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "03",
     trade: {
       tradeId: "exbsp-b-02",
-      description: "69.572 sh EXAMPLE CORP CL C",
+      description: "EXAMPLE CORP CL C 00000C107",
       quantity: 69.572,
       dateAcquired: "02/11/25",
       dateSold: "03/09/25",
@@ -503,7 +503,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "03",
     trade: {
       tradeId: "exbsp-b-03",
-      description: "98.308 sh EXAMPLE CORP CL C",
+      description: "EXAMPLE CORP CL C 00000C107",
       quantity: 98.308,
       dateAcquired: "03/14/25",
       dateSold: "04/13/25",
@@ -516,7 +516,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "03",
     trade: {
       tradeId: "exbsp-b-04",
-      description: "97.997 sh EXAMPLE CORP CL C",
+      description: "EXAMPLE CORP CL C 00000C107",
       quantity: 97.997,
       dateAcquired: "05/10/25",
       dateSold: "05/12/25",
@@ -529,7 +529,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "03",
     trade: {
       tradeId: "exbsp-b-05",
-      description: "91.064 sh EXAMPLE CORP CL C",
+      description: "EXAMPLE CORP CL C 00000C107",
       quantity: 91.064,
       dateAcquired: "05/21/25",
       dateSold: "06/14/25",
@@ -542,7 +542,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "03",
     trade: {
       tradeId: "exbsp-b-06",
-      description: "96.839 sh EXAMPLE CORP CL C",
+      description: "EXAMPLE CORP CL C 00000C107",
       quantity: 96.839,
       dateAcquired: "06/10/25",
       dateSold: "06/18/25",
@@ -555,7 +555,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "03",
     trade: {
       tradeId: "exbsp-b-07",
-      description: "101.310 sh EXAMPLE CORP CL C",
+      description: "EXAMPLE CORP CL C 00000C107",
       quantity: 101.31,
       dateAcquired: "07/20/25",
       dateSold: "08/09/25",
@@ -568,7 +568,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "05",
     trade: {
       tradeId: "exd-h-01",
-      description: "0.242151 EXAMPLECOIN",
+      description: "EXAMPLECOIN / EXC0000A1",
       quantity: 0.242151,
       dateAcquired: "VARIOUS",
       dateSold: "01/30/25",
@@ -581,7 +581,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "05",
     trade: {
       tradeId: "exd-h-02",
-      description: "0.0000122 SAMPLETOKEN",
+      description: "SAMPLETOKEN / SMP0000B2",
       quantity: 1.22e-5,
       dateAcquired: "01/17/25",
       dateSold: "01/24/25",
@@ -594,7 +594,7 @@ export const JORDAN_SALES: Sale[] = [
     doc: "05",
     trade: {
       tradeId: "exd-h-03",
-      description: "0.000539 TESTCHAIN",
+      description: "TESTCHAIN / TST0000C3",
       quantity: 0.000539,
       dateAcquired: "11/23/24",
       dateSold: "01/17/25",
