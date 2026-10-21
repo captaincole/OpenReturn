@@ -22,7 +22,8 @@ const STAGE_LABELS: Record<AskStage, string> = {
 
 export function TurnView({ turn }: { turn: AskTurn }) {
   return (
-    <article className="space-y-6">
+    // data-turn-status: the e2e run waits on it (e2e/ask.ts).
+    <article className="space-y-6" data-turn-status={turn.status}>
       <h1 className="font-serif text-3xl leading-tight text-ink-primary">{turn.question}</h1>
       {turn.status === "running" && <RunningAnswer stage={turn.stage} />}
       {turn.status === "failed" && (
@@ -66,7 +67,7 @@ function CompletedAnswer({ turn }: { turn: AskTurn }) {
 
   return (
     <>
-      <div className="space-y-3 text-[15px] leading-relaxed text-ink-secondary">
+      <div className="space-y-3 text-[15px] leading-relaxed text-ink-secondary" data-answer>
         {(turn.answer ?? "").split(/\n{2,}/).map((para, i) => (
           <p key={i}>
             <AnswerText text={para} citations={turn.citations} onMarker={jumpTo} />
