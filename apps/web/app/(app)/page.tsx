@@ -5,11 +5,11 @@
  * auth. No AppShell and no chat, because no return is active here.
  *
  * Sections:
- *   1. Your returns      — filings from listOwnerReturns; the empty state
+ *   1. Tax code search   — disabled search box (placeholder, coming soon).
+ *   2. Tax returns       — filings from listOwnerReturns; the empty state
  *                          shows one big "Start your 2025 filing" CTA.
- *   2. Continue with     — "Start a new filing" (action) + "Tax planning
- *                          session" (locked placeholder).
- *   3. Your tax picture  — four chart cards, overlay-locked until the
+ *   3. Tax estimates     — 1040-ES estimate card (placeholder, coming soon).
+ *   4. Your tax picture  — four chart cards, overlay-locked until the
  *                          user has a filed return.
  *
  * The charts read mock data under the overlay because we do not capture
@@ -22,9 +22,10 @@ import { deriveProfile, type UserProfile } from "@/lib/profile";
 import { listOwnerReturns } from "@/lib/serverDb";
 import { redirect } from "next/navigation";
 import { CURRENT_TAX_YEAR } from "./components/constants";
+import { EstimatesSection } from "./components/EstimatesSection";
+import { KnowledgeSearch } from "./components/KnowledgeSearch";
 import { ReturnsSection } from "./components/ReturnCards";
 import { TaxPictureSection } from "./components/TaxPicture";
-import { ContinueWithSection } from "./components/WorkflowCards";
 import { HomeTopBar } from "./HomeTopBar";
 
 export default async function HomeHome() {
@@ -41,14 +42,14 @@ export default async function HomeHome() {
       <HomeTopBar initials={profile.initials} />
       <main className="flex-1 px-6 py-10 lg:px-10 lg:py-14">
         <div className="mx-auto max-w-6xl space-y-14">
-          <Greeting profile={profile} />
+          <div className="space-y-6">
+            <Greeting profile={profile} />
+            <KnowledgeSearch />
+          </div>
 
           <ReturnsSection returns={returns} hasCurrentYear={hasCurrentYear} />
 
-          <ContinueWithSection
-            hasCurrentYear={hasCurrentYear}
-            hasAnyFiledReturn={hasAnyFiledReturn}
-          />
+          <EstimatesSection />
 
           <TaxPictureSection locked={!hasAnyFiledReturn} />
         </div>

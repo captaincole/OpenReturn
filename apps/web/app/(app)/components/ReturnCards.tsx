@@ -13,14 +13,14 @@ export function ReturnsSection({
 }) {
   if (returns.length === 0) {
     return (
-      <Section title="Your returns">
+      <Section title="Tax returns">
         <EmptyReturnsCta />
       </Section>
     );
   }
   return (
     <Section
-      title="Your returns"
+      title="Tax returns"
       right={
         returns.some((r) => r.state === "filed") ? (
           <button className="text-sm text-ink-secondary hover:text-ink-primary">
@@ -33,7 +33,7 @@ export function ReturnsSection({
         {returns.map((r) => (
           <ReturnCard key={r.filingId} ret={r} />
         ))}
-        {!hasCurrentYear && <NewReturnTile />}
+        {hasCurrentYear ? <NewReturnTile /> : <StartReturnTile />}
       </div>
     </Section>
   );
@@ -114,6 +114,18 @@ function EmptyReturnsCta() {
         Start filing →
       </StartFilingButton>
     </div>
+  );
+}
+
+function StartReturnTile() {
+  return (
+    <StartFilingButton
+      taxYear={CURRENT_TAX_YEAR}
+      className="flex min-h-[160px] w-full flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-accent/40 p-5 text-center text-accent transition-colors hover:border-accent hover:text-accent-hover"
+    >
+      <span className="text-2xl">+</span>
+      <span className="text-sm">Start {CURRENT_TAX_YEAR} return</span>
+    </StartFilingButton>
   );
 }
 
