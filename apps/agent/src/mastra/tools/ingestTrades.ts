@@ -9,8 +9,7 @@ import { recordDecision } from "../db/aiDecisions";
 import { recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 
 /*
- * Per-sale ingest shared by the 1099-B and 1099-DA sections of
- * ingest-1099-consolidated. Each sale becomes one trade fact plus one
+ * Per-sale ingest for 1099-B and 1099-DA sales (ingest-1099-b). Each sale becomes one trade fact plus one
  * broker-reported form_8949_box decision.
  */
 
@@ -28,7 +27,9 @@ export const TradeInputSchema = z.object({
   costBasis: z
     .number()
     .optional()
-    .describe("Omit when the form leaves basis blank (noncovered). Never pass 0 for a blank."),
+    .describe(
+      "The Basis column as printed, including supplemental basis on a noncovered sale. Omit only when the column is blank. Never pass 0 for a blank.",
+    ),
   adjustmentCode: z.string().optional().describe("Form 8949 column (f) code, if present"),
   adjustmentAmount: z.number().optional(),
   washSaleLossDisallowed: z.number().optional(),

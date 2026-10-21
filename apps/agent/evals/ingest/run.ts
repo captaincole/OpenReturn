@@ -25,7 +25,12 @@ import { createOwnerFiling } from "../../src/mastra/db/filings";
 import { listFacts } from "../../src/mastra/db/taxFacts";
 import { modelFor } from "../../src/mastra/models";
 import { DEMO_TAX_YEAR } from "../../src/mastra/server/demoSession";
-import { ingest1099Consolidated } from "../../src/mastra/tools/ingest1099Consolidated";
+import { ingest1099B } from "../../src/mastra/tools/ingest1099B";
+import {
+  ingest1099Div,
+  ingest1099Int,
+  ingest1099Misc,
+} from "../../src/mastra/tools/ingest1099Forms";
 import { ingest1099R } from "../../src/mastra/tools/ingest1099R";
 import { ingest1099SA } from "../../src/mastra/tools/ingest1099SA";
 import { ingestEnergyInvoice } from "../../src/mastra/tools/ingestEnergyInvoice";
@@ -41,16 +46,19 @@ import { scoreDoc } from "./score";
 const REPO = path.resolve(__dirname, "../../../..");
 
 /* Luca's own document rules, without the conversation around them. */
-const INSTRUCTIONS = `You ingest tax documents. The user uploads one document. Read it and call the matching ingest tool with every value on it.
+const INSTRUCTIONS = `You ingest tax documents. The user uploads one document. Read it and call the matching ingest tools with every value on it.
 
 ${ingestingDocuments}
 
 For a W-2: if box f line 1 holds "Apt N", "# N", "Unit N", or "Ste N", split it: the bare street in line1, the apt in line2.
-Use plain numbers for dollar amounts (79000.00, not "$79,000.00"). Do not ask the user questions and do not record other facts. After the ingest call, reply with one short sentence.`;
+Use plain numbers for dollar amounts (79000.00, not "$79,000.00"). Do not ask the user questions and do not record other facts. After the ingest calls, reply with one short sentence.`;
 
 const TOOLS = {
   ingestW2,
-  ingest1099Consolidated,
+  ingest1099Int,
+  ingest1099Div,
+  ingest1099Misc,
+  ingest1099B,
   ingest1099R,
   ingest1099SA,
   ingestSsa1099,
@@ -112,10 +120,14 @@ async function evalDoc(
   const started = Date.now();
   const { scope, requestContext } = await freshScope();
   try {
-    /* Luca's output limit (defaultOptions in agents/luca.ts), not the SDK's 4,096. */
+    /*
+     * Luca's output limit (defaultOptions in agents/luca.ts), not the SDK's
+     * 4,096. A consolidated 1099 takes one call per form and one per 20
+     * trades (5 for jordan's), and a model can make them one step at a time.
+     */
     const result = await agent.generate(toMessages(c), {
       requestContext,
-      maxSteps: 3,
+      maxSteps: 8,
       modelSettings: { maxOutputTokens: 8192 },
     });
     const usage = result.totalUsage ?? result.usage;

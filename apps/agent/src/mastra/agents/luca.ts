@@ -7,7 +7,8 @@ import { listAIDecisions, recordAIDecision } from "../tools/aiDecisions";
 import { getCaseState } from "../tools/caseState";
 import { dismissRequestedAction } from "../tools/dismissRequestedAction";
 import { generateTaxDocuments } from "../tools/generateTaxDocuments";
-import { ingest1099Consolidated } from "../tools/ingest1099Consolidated";
+import { ingest1099B } from "../tools/ingest1099B";
+import { ingest1099Div, ingest1099Int, ingest1099Misc } from "../tools/ingest1099Forms";
 import { ingest1099R } from "../tools/ingest1099R";
 import { ingest1099SA } from "../tools/ingest1099SA";
 import { ingestEnergyInvoice } from "../tools/ingestEnergyInvoice";
@@ -31,9 +32,9 @@ export const luca = new Agent({
    * + optionally generate-tax-documents is ~5 steps per turn. 20 leaves
    * headroom for batched scope decisions on a single turn.
    *
-   * maxOutputTokens doubles the 4,096 default. One ingest call carries a
-   * whole statement: the 21 trades on jordan's consolidated 1099 take
-   * about 4,500 tokens, and at 4,096 the call came back with no trades.
+   * maxOutputTokens doubles the 4,096 default. One ingest-1099-b call
+   * carries up to 20 trades, about 4,300 tokens; at 4,096 a call with
+   * 21 trades came back with no trades.
    */
   defaultOptions: { maxSteps: 20, modelSettings: { maxOutputTokens: 8192 } },
   defaultGenerateOptionsLegacy: { maxSteps: 20 },
@@ -42,7 +43,10 @@ export const luca = new Agent({
     // Primary tools Luca uses every turn
     getCaseState,
     ingestW2,
-    ingest1099Consolidated,
+    ingest1099Int,
+    ingest1099Div,
+    ingest1099Misc,
+    ingest1099B,
     ingest1099R,
     ingest1099SA,
     ingestSsa1099,
