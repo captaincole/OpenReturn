@@ -70,9 +70,12 @@ export function modelsFromArgs(argv: string[]): EvalModel[] {
   return picked.map((m) => ({ ...m, runs: m.url ? (override ?? RUNS[tier]) : 1 }));
 }
 
-/* Point the production model resolver (models.ts) at one model for a role. */
+/*
+ * Point the production model resolver (models.ts) at one model for a role.
+ * A cloud model gets an empty URL, not a deleted one: modules imported
+ * later run dotenv/config, which would restore a deleted URL from .env.
+ */
 export function useModel(role: "LUCA" | "JUDGE", model: EvalModel): void {
   process.env[`${role}_MODEL`] = model.id;
-  if (model.url) process.env[`${role}_MODEL_URL`] = model.url;
-  else delete process.env[`${role}_MODEL_URL`];
+  process.env[`${role}_MODEL_URL`] = model.url ?? "";
 }

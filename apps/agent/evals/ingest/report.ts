@@ -3,7 +3,8 @@
  * docs/evals/ingest-quick.md for the quick tier (both linked from the
  * README). Run directly to re-render from saved results, for example to
  * combine a new model's run with earlier runs (a later file replaces a
- * model's rows; only the tier's documents are kept):
+ * model's rows for the documents it ran; only the tier's documents are
+ * kept):
  *
  *   npx tsx evals/ingest/report.ts [--full] <results.json>…   (from apps/agent)
  */
@@ -164,25 +165,26 @@ export function renderReport(tier: Tier, models: EvalModel[], results: IngestRes
 }
 
 /*
- * Merge runs (a later run replaces a model's results), keep the tier's
- * documents, write the doc, and return its repo path.
+ * Merge runs: a later run replaces a model's results for the documents it
+ * ran, so one document can be rerun on its own. Keep the tier's documents,
+ * write the doc, and return its repo path.
  */
 export function publishReport(tier: Tier, runs: IngestRun[]): string {
   const docs = new Set(loadCases(tier).map((c) => c.doc));
-  const byModel = new Map<string, { model: EvalModel; results: IngestResult[] }>();
-  for (const run of runs)
-    for (const model of run.models)
-      byModel.set(model.label, {
-        model,
-        results: run.results.filter((r) => r.model === model.label && docs.has(r.doc)),
-      });
-  const entries = [...byModel.values()].filter((e) => e.results.length);
-  const md = renderReport(
-    tier,
-    entries.map((e) => e.model),
-    entries.flatMap((e) => e.results),
-  );
-  writeFileSync(OUT[tier], md + "\n");
+  const models = new Map<string, EvalModel>();
+  const results = new Map<string, IngestResult[]>();
+  for (const run of runs) {
+    for (const model of run.models) models.set(model.label, model);
+    const fresh = new Map<string, IngestResult[]>();
+    for (const r of run.results.filter((x) => docs.has(x.doc))) {
+      const key = `${r.model}\u0000${r.doc}`;
+      fresh.set(key, [...(fresh.get(key) ?? []), r]);
+    }
+    for (const [key, rs] of fresh) results.set(key, rs);
+  }
+  const all = [...results.values()].flat();
+  const used = [...models.values()].filter((m) => all.some((r) => r.model === m.label));
+  writeFileSync(OUT[tier], renderReport(tier, used, all) + "\n");
   return path.relative(REPO, OUT[tier]);
 }
 

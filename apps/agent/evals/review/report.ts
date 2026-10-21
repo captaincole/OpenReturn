@@ -1,7 +1,7 @@
 /*
  * Renders the review-judge eval as docs/evals/review.md (linked from the
  * README). Run directly to combine saved runs (a later file replaces a
- * model's rows):
+ * model's rows for the cases it ran):
  *
  *   npx tsx evals/review/report.ts <results.json>…   (from apps/agent)
  */
@@ -106,22 +106,25 @@ export function renderReport(models: EvalModel[], results: ReviewResult[]): stri
   ].join("\n\n");
 }
 
+/*
+ * Merge runs: a later run replaces a model's results for the cases it ran,
+ * so one case can be rerun on its own. Write the doc; return its repo path.
+ */
 export function publishReport(runs: ReviewRun[]): string {
-  const byModel = new Map<string, { model: EvalModel; results: ReviewResult[] }>();
-  for (const run of runs)
-    for (const model of run.models)
-      byModel.set(model.label, {
-        model,
-        results: run.results.filter((r) => r.model === model.label),
-      });
-  const entries = [...byModel.values()];
-  writeFileSync(
-    OUT,
-    renderReport(
-      entries.map((e) => e.model),
-      entries.flatMap((e) => e.results),
-    ) + "\n",
-  );
+  const models = new Map<string, EvalModel>();
+  const results = new Map<string, ReviewResult[]>();
+  for (const run of runs) {
+    for (const model of run.models) models.set(model.label, model);
+    const fresh = new Map<string, ReviewResult[]>();
+    for (const r of run.results) {
+      const key = `${r.model}\u0000${r.case}`;
+      fresh.set(key, [...(fresh.get(key) ?? []), r]);
+    }
+    for (const [key, rs] of fresh) results.set(key, rs);
+  }
+  const all = [...results.values()].flat();
+  const used = [...models.values()].filter((m) => all.some((r) => r.model === m.label));
+  writeFileSync(OUT, renderReport(used, all) + "\n");
   return path.relative(REPO, OUT);
 }
 

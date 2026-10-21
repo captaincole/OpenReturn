@@ -3,9 +3,13 @@
  * review-decision workflow, and score the verdict, the cited authority,
  * and whether retrieval found that authority at all.
  *
- *   npx tsx --env-file=.env evals/review/run.ts <model-substring> [--runs=N]   (from apps/agent)
+ *   npx tsx --env-file=.env evals/review/run.ts <model-substring> [--runs=N] [--case=…]   (from apps/agent)
  *
  * One model per run: the judges read JUDGE_MODEL when their module loads.
+ * --case=<substring> runs only matching cases and does not publish a
+ * report; combine saved runs with report.ts. Memory grows with each review
+ * in one process (Node ran out of heap after 13 runs on Gemma 4 31b), so
+ * for long runs, start one process per case with --case.
  * Writes .scratch/evals/review/<runId>/results.json and docs/evals/review.md.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -126,9 +130,11 @@ async function main() {
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
   const outDir = path.join(REPO, ".scratch/evals/review", runId);
   mkdirSync(outDir, { recursive: true });
-  console.log(`${CASES.length} cases × ${model.runs} runs, ${model.label}`);
+  const caseFilter = process.argv.find((a) => a.startsWith("--case="))?.slice(7);
+  const cases = CASES.filter((c) => !caseFilter || c.name.includes(caseFilter));
+  console.log(`${cases.length} cases × ${model.runs} runs, ${model.label}`);
   const results: ReviewResult[] = [];
-  for (const c of CASES)
+  for (const c of cases)
     for (let run = 1; run <= model.runs; run++) {
       const r = await evalCase(d, c, run);
       console.log(
@@ -140,8 +146,8 @@ async function main() {
         JSON.stringify({ models: [model], results }, null, 2),
       );
     }
-  const doc = publishReport([{ models: [model], results }]);
-  console.log(`\nResults: ${path.relative(REPO, outDir)}/results.json\nReport: ${doc}`);
+  console.log(`\nResults: ${path.relative(REPO, outDir)}/results.json`);
+  if (!caseFilter) console.log(`Report: ${publishReport([{ models: [model], results }])}`);
 }
 
 main().catch((err) => {

@@ -112,7 +112,12 @@ async function evalDoc(
   const started = Date.now();
   const { scope, requestContext } = await freshScope();
   try {
-    const result = await agent.generate(toMessages(c), { requestContext, maxSteps: 3 });
+    /* Luca's output limit (defaultOptions in agents/luca.ts), not the SDK's 4,096. */
+    const result = await agent.generate(toMessages(c), {
+      requestContext,
+      maxSteps: 3,
+      modelSettings: { maxOutputTokens: 8192 },
+    });
     const usage = result.totalUsage ?? result.usage;
     const written = await listFacts(scope);
     return {
