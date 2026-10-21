@@ -8,9 +8,10 @@ import {
   setAskTurnStage,
   type AskTurn,
 } from "../../db/askThreads";
-import { hybridSearchRefDocs } from "../../db/corpusSearch";
+import { hybridSearchRefDocs, type SearchHit } from "../../db/corpusSearch";
 import { askAnswerSchema } from "./judges/askAnswerer";
 import { askQueriesSchema } from "./judges/askQueryFormulator";
+import { mergeByRank } from "./mergeHits";
 import { renderAnswerPrompt, renderFormulatePrompt, renderHistory } from "./prompts";
 import { NOT_COVERED_ANSWER, validateAnswer, type Passage } from "./validate";
 
@@ -51,29 +52,23 @@ async function judge<S extends z.ZodTypeAny>(
   return schema.parse(obj) as z.infer<S>;
 }
 
-/* Runs every query, keeps each block's best score, returns the top passages. */
+/* Runs every query, merges the hit lists by rank (mergeHits.ts), returns the top passages. */
 async function retrieve(queries: string[]): Promise<{ passages: Passage[]; log: unknown[] }> {
-  const best = new Map<string, { passage: Passage; score: number }>();
+  const lists: SearchHit[][] = [];
   const log: unknown[] = [];
   for (const query of queries) {
     const hits = await hybridSearchRefDocs({ query, limit: HITS_PER_QUERY });
     log.push({ query, hits: hits.map((h) => ({ blockId: h.blockId, score: h.score })) });
-    for (const h of hits) {
-      if ((best.get(h.blockId)?.score ?? -Infinity) >= h.score) continue;
-      best.set(h.blockId, { passage: h, score: h.score });
-    }
+    lists.push(hits);
   }
-  const passages = [...best.values()]
-    .sort((a, b) => b.score - a.score)
-    .slice(0, MAX_PASSAGES)
-    .map(({ passage: p }) => ({
-      blockId: p.blockId,
-      docId: p.docId,
-      documentTitle: p.documentTitle,
-      sectionHeading: p.sectionHeading,
-      pageNum: p.pageNum,
-      text: p.text,
-    }));
+  const passages = mergeByRank(lists, MAX_PASSAGES).map((p) => ({
+    blockId: p.blockId,
+    docId: p.docId,
+    documentTitle: p.documentTitle,
+    sectionHeading: p.sectionHeading,
+    pageNum: p.pageNum,
+    text: p.text,
+  }));
   return { passages, log };
 }
 
