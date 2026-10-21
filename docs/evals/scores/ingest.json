@@ -1,0 +1,53 @@
+{
+  "flow": "ingest",
+  "title": "Ingest",
+  "definition": "Each model reads every scenario source document and calls Luca's ingest tools. A document scores the share of ground-truth fields its runs wrote correctly; a run with no ingest call scores 0. Each capability is the mean over its documents; the flow score is the mean of the capabilities.",
+  "report": "ingest.md",
+  "capabilities": [
+    "W-2",
+    "1099",
+    "Invoices"
+  ],
+  "models": [
+    {
+      "label": "Haiku 5.5",
+      "id": "anthropic/claude-haiku-5-5",
+      "score": 1,
+      "capabilities": {
+        "1099": 1,
+        "W-2": 1,
+        "Invoices": 1
+      }
+    },
+    {
+      "label": "Gemma 4 26b Q4_K_M",
+      "id": "ollama/gemma4:26b",
+      "score": 0.9029179362003358,
+      "capabilities": {
+        "1099": 0.9260623781676413,
+        "W-2": 0.9852329749103943,
+        "Invoices": 0.7974584555229717
+      }
+    },
+    {
+      "label": "Gemma 4 31b Q4_K_M",
+      "id": "ollama/gemma4:31b",
+      "score": 0.911409731562533,
+      "capabilities": {
+        "1099": 0.964727728411939,
+        "W-2": 0.9529953917050692,
+        "Invoices": 0.8165060745705907
+      }
+    },
+    {
+      "label": "Gemma 4 e4b",
+      "id": "ollama/gemma4:e4b",
+      "score": 0.745696513876197,
+      "capabilities": {
+        "1099": 0.653418040049619,
+        "W-2": 0.8074112027380279,
+        "Invoices": 0.776260298840944
+      }
+    }
+  ]
+}

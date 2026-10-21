@@ -9,19 +9,19 @@ Each case seeds facts and one AI decision, then runs the production review-decis
 - **Authority retrieved:** the gather step found a labeled block at all. A miss here is a retrieval problem, not a judge problem.
 - **Cited unretrieved ids:** the judge cited an id the run never retrieved (a fact key or a made-up block id). The workflow should only store retrieved blocks.
 
-Models: Gemma 4 31b Q4_K_M (4090) (`ollama/gemma4:31b`), Gemma 4 26b Q4_K_M (4090) (`ollama/gemma4:26b`), Haiku 5.5 (`anthropic/claude-haiku-5-5`).
+Models: Gemma 4 31b Q4_K_M (`ollama/gemma4:31b`), Gemma 4 26b Q4_K_M (`ollama/gemma4:26b`), Haiku 5.5 (`anthropic/claude-haiku-5-5`).
 
 ## Summary
 
 | Model | Runs per case | Verdict correct | Grounded (accurate cases) | Authority retrieved | Cited unretrieved ids | Review failed | Avg time |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Gemma 4 31b Q4_K_M (4090) | 3 | 18/18 | 9/9 | 16/18 | 1/18 | 0/18 | 150s |
-| Gemma 4 26b Q4_K_M (4090) | 3 | 15/18 | 8/9 | 14/18 | 5/18 | 0/18 | 48s |
+| Gemma 4 31b Q4_K_M | 3 | 18/18 | 9/9 | 16/18 | 1/18 | 0/18 | 150s |
+| Gemma 4 26b Q4_K_M | 3 | 15/18 | 8/9 | 14/18 | 5/18 | 0/18 | 48s |
 | Haiku 5.5 | 1 | 6/6 | 3/3 | 6/6 | 0/6 | 0/6 | 30s |
 
 ## By case
 
-| Case | Expected | Gemma 4 31b Q4_K_M (4090) | Gemma 4 26b Q4_K_M (4090) | Haiku 5.5 |
+| Case | Expected | Gemma 4 31b Q4_K_M | Gemma 4 26b Q4_K_M | Haiku 5.5 |
 | --- | --- | --- | --- | --- |
 | Schedule H: $3,100 cash wages to one household employee | accurate | 3/3 (accurate) · cited 3/3 · retrieved 3/3 | 3/3 (accurate) · cited 3/3 · retrieved 3/3 | 1/1 (accurate) · cited 1/1 · retrieved 1/1 |
 | Schedule H: $2,500 cash wages (under the threshold) | inaccurate | 3/3 (inaccurate) · retrieved 2/3 | 3/3 (inaccurate) · retrieved 3/3 | 1/1 (inaccurate) · retrieved 1/1 |
