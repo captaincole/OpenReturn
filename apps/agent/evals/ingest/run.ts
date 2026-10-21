@@ -25,18 +25,7 @@ import { createOwnerFiling } from "../../src/mastra/db/filings";
 import { listFacts } from "../../src/mastra/db/taxFacts";
 import { modelFor } from "../../src/mastra/models";
 import { DEMO_TAX_YEAR } from "../../src/mastra/server/demoSession";
-import { ingest1099B } from "../../src/mastra/tools/ingest1099B";
-import {
-  ingest1099Div,
-  ingest1099Int,
-  ingest1099Misc,
-} from "../../src/mastra/tools/ingest1099Forms";
-import { ingest1099R } from "../../src/mastra/tools/ingest1099R";
-import { ingest1099SA } from "../../src/mastra/tools/ingest1099SA";
-import { ingestEnergyInvoice } from "../../src/mastra/tools/ingestEnergyInvoice";
-import { ingestHouseholdW2 } from "../../src/mastra/tools/ingestHouseholdW2";
-import { ingestSsa1099 } from "../../src/mastra/tools/ingestSsa1099";
-import { ingestW2 } from "../../src/mastra/tools/ingestW2";
+import { INGEST_MAX_OUTPUT_TOKENS, ingestTools } from "../../src/mastra/tools/ingestTools";
 import { modelsFromArgs, tierFromArgs, useModel, type EvalModel } from "../lib/models";
 import "../lib/tempDb";
 import { loadCases, type IngestCase } from "./cases";
@@ -50,21 +39,7 @@ const INSTRUCTIONS = `You ingest tax documents. The user uploads one document. R
 
 ${ingestingDocuments}
 
-For a W-2: if box f line 1 holds "Apt N", "# N", "Unit N", or "Ste N", split it: the bare street in line1, the apt in line2.
 Use plain numbers for dollar amounts (79000.00, not "$79,000.00"). Do not ask the user questions and do not record other facts. After the ingest calls, reply with one short sentence.`;
-
-const TOOLS = {
-  ingestW2,
-  ingest1099Int,
-  ingest1099Div,
-  ingest1099Misc,
-  ingest1099B,
-  ingest1099R,
-  ingest1099SA,
-  ingestSsa1099,
-  ingestHouseholdW2,
-  ingestEnergyInvoice,
-};
 
 function agentFor(model: EvalModel): Agent {
   useModel("LUCA", model);
@@ -73,7 +48,7 @@ function agentFor(model: EvalModel): Agent {
     name: "Ingest eval",
     instructions: INSTRUCTIONS,
     model: modelFor("luca"),
-    tools: TOOLS,
+    tools: ingestTools,
     inputProcessors: [new PdfAttachmentRasterizer()],
   });
 }
@@ -121,14 +96,14 @@ async function evalDoc(
   const { scope, requestContext } = await freshScope();
   try {
     /*
-     * Luca's output limit (defaultOptions in agents/luca.ts), not the SDK's
-     * 4,096. A consolidated 1099 takes one call per form and one per 20
-     * trades (5 for jordan's), and a model can make them one step at a time.
+     * Luca's output limit, not the SDK's 4,096. A consolidated 1099 takes
+     * one call per form and one per 20 trades (5 for jordan's), and a
+     * model can make them one step at a time.
      */
     const result = await agent.generate(toMessages(c), {
       requestContext,
       maxSteps: 8,
-      modelSettings: { maxOutputTokens: 8192 },
+      modelSettings: { maxOutputTokens: INGEST_MAX_OUTPUT_TOKENS },
     });
     const usage = result.totalUsage ?? result.usage;
     const written = await listFacts(scope);

@@ -89,8 +89,6 @@ The form-rendering layer fills the personal-info boxes at the top of every form 
 
 If the user gives you an address that includes an apt or unit and you're unsure whether they meant it as part of the building, ask explicitly: *"Got it — and is there an apartment, suite, or unit number we should include?"*
 
-Some W-2s ship the apt in box f line 1 (mixed with the street) rather than line 2. When ingesting, inspect line 1 — if you see "Apt N", "# N", "Unit N", "Ste N", split it out and pass the bare street as line1 + the apt as line2.
-
 **Email — auto-acknowledge at doc-gen time.** \`get-case-state\` returns the account email as \`authEmail\`. Before calling \`generate-tax-documents\`:
 1. If \`pendingFacts\` includes \`identity.email\` and \`authEmail\` is present, call \`record-tax-facts\` with \`key: "identity.email"\`, \`value: "<authEmail>"\`, \`category: "identity"\`, \`sourceNote: "account email"\`.
 2. Acknowledge the choice in your reply: *"I'll use your login email \`<authEmail>\` on the signature block — let me know if you'd prefer a different one."*
@@ -102,6 +100,7 @@ export const ingestingDocuments = `## Ingesting documents
 You're vision-capable — when the user uploads a PDF, you read it and call the typed ingest tool with the structured values. Map any broker-specific labels back to IRS-canonical box numbers.
 
 - **W-2** → \`ingest-w2-structured\`. One call per W-2 with every box value plus the \`employee\` block (boxes a / e / f). The tool writes one fact under \`category: wages\` + the \`identity.*\` side effects in one call.
+  - Some W-2s put the apt in box f line 1 (mixed with the street) rather than line 2. Inspect line 1: if you see "Apt N", "# N", "Unit N", or "Ste N", split it out and pass the bare street as line1 + the apt as line2.
 - **Consolidated 1099** (one broker statement that holds several forms) → one call per form on it. First list the forms the statement holds, then make every call:
   - 1099-DIV → \`ingest-1099-div\`, 1099-INT → \`ingest-1099-int\`, 1099-MISC → \`ingest-1099-misc\` (box 3 "other income" etc.).
   - 1099-B → \`ingest-1099-b\` with the sales, at most 20 per call. For more sales, call again with the next 20.

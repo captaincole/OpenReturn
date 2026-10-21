@@ -82,6 +82,10 @@ interface StatementInput {
   sourceNote?: string;
 }
 
+/* The account's slug in fact keys: the one the model passed, else the payer's name or TIN. */
+export const accountSlugFor = (input: Pick<StatementInput, "accountSlug" | "payer">): string =>
+  input.accountSlug || slugify(input.payer.name) || `tin-${input.payer.tin.replace(/-/g, "")}`;
+
 /* The write context and account slug for one 1099 call. */
 export async function statementContext(
   input: StatementInput,
@@ -89,8 +93,7 @@ export async function statementContext(
   form: string,
 ): Promise<{ ctx: IngestCtx; slug: string }> {
   const { scope, userId, filingId } = await requireUserContext(toolContext);
-  const slug =
-    input.accountSlug || slugify(input.payer.name) || `tin-${input.payer.tin.replace(/-/g, "")}`;
+  const slug = accountSlugFor(input);
   const sourceNote = input.sourceNote ?? `${form} ingested via structured payload`;
   return { ctx: { scope, userId, filingId, year: input.year, sourceNote }, slug };
 }

@@ -1,6 +1,6 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import { statementContext, statementFields } from "./ingestShared";
+import { accountSlugFor, statementContext, statementFields } from "./ingestShared";
 import { ingestTrades, TradeInputSchema } from "./ingestTrades";
 
 /*
@@ -41,6 +41,14 @@ export const ingest1099B = createTool({
     tradeIds: z.array(z.string()),
   }),
   execute: async (input, context) => {
+    /* No sales: write nothing, so has_reportable_sales stays unrecorded. */
+    if (input.trades.length === 0)
+      return {
+        accountSlug: accountSlugFor(input),
+        factsWritten: 0,
+        decisionsWritten: 0,
+        tradeIds: [],
+      };
     const { ctx, slug } = await statementContext(input, context, input.form);
     const { tradeIds, decisionsWritten } = await ingestTrades(
       ctx,
