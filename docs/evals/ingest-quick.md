@@ -81,6 +81,6 @@ From `apps/agent`, with Ollama running for the local models:
 
 ```bash
 npx tsx --env-file=.env evals/ingest/run.ts [model…]          # quick tier
-EVAL_PC_OLLAMA_URL=http://<pc>:11434/v1 \
-  npx tsx --env-file=.env evals/ingest/run.ts --full [model…]   # full tier: Haiku + PC models
+EVAL_PC_OLLAMA_URL=http://<host>:11434/v1 \
+  npx tsx --env-file=.env evals/ingest/run.ts --full [model…]   # full tier: Haiku + second-machine models
 ```

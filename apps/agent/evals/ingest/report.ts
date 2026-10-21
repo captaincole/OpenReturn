@@ -188,7 +188,7 @@ export function renderReport(tier: Tier, models: EvalModel[], results: IngestRes
     `The ${TOP_FIELDS} most-missed fields: misses / scored runs.`,
     fieldMissTable(models, results),
     "## Run it",
-    "From `apps/agent`, with Ollama running for the local models:\n\n```bash\nnpx tsx --env-file=.env evals/ingest/run.ts [model…]          # quick tier\nEVAL_PC_OLLAMA_URL=http://<pc>:11434/v1 \\\n  npx tsx --env-file=.env evals/ingest/run.ts --full [model…]   # full tier: Haiku + PC models\n```",
+    "From `apps/agent`, with Ollama running for the local models:\n\n```bash\nnpx tsx --env-file=.env evals/ingest/run.ts [model…]          # quick tier\nEVAL_PC_OLLAMA_URL=http://<host>:11434/v1 \\\n  npx tsx --env-file=.env evals/ingest/run.ts --full [model…]   # full tier: Haiku + second-machine models\n```",
   ].join("\n\n");
 }
 

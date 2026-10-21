@@ -7,7 +7,7 @@
  *   npx tsx --env-file=.env evals/ingest/run.ts [model…] [--full] [--runs=N] [--doc=…]   (from apps/agent)
  *
  * Default is the quick tier (one document per type, 2 runs). --full runs
- * every document 5 times, with local models on the PC only (see
+ * every document 5 times, with local models on a second machine only (see
  * lib/models.ts). --doc=<substring> runs only matching documents and does
  * not publish a report.
  *
