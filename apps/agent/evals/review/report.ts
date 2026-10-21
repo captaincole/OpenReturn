@@ -1,6 +1,6 @@
 /*
- * Renders the review-judge eval as docs/evals/review.md (linked from the
- * README). Run directly to combine saved runs (a later file replaces a
+ * Renders the review-judge eval as docs/evals/review.md, and the review
+ * flow's row in the eval overview (docs/evals/README.md, lib/overview.ts). Run directly to combine saved runs (a later file replaces a
  * model's rows for the cases it ran):
  *
  *   npx tsx evals/review/report.ts <results.json>…   (from apps/agent)
@@ -8,7 +8,9 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { avg, table } from "../lib/markdown";
-import type { EvalModel } from "../lib/models";
+import { forDisplay, type EvalModel } from "../lib/models";
+import { publishOverview } from "../lib/overview";
+import { groundedOk, reviewFlowScores, verdictOk } from "./flow";
 
 export interface ReviewResult {
   model: string;
@@ -35,10 +37,6 @@ const OUT = path.join(REPO, "docs/evals/review.md");
 
 const count = (rs: ReviewResult[], pred: (r: ReviewResult) => boolean) =>
   `${rs.filter(pred).length}/${rs.length}`;
-const verdictOk = (r: ReviewResult) => r.verdict === r.expectedVerdict;
-/* Citations are graded only on an "accurate" verdict: that is when the workflow stores them. */
-const groundedOk = (r: ReviewResult) =>
-  r.expectedVerdict === "accurate" && r.verdict === "accurate" && r.citedAuthority;
 const shouldGround = (rs: ReviewResult[]) => rs.filter((r) => r.expectedVerdict === "accurate");
 
 function summaryTable(models: EvalModel[], results: ReviewResult[]): string {
@@ -108,7 +106,8 @@ export function renderReport(models: EvalModel[], results: ReviewResult[]): stri
 
 /*
  * Merge runs: a later run replaces a model's results for the cases it ran,
- * so one case can be rerun on its own. Write the doc; return its repo path.
+ * so one case can be rerun on its own. Write the doc and the overview;
+ * return the doc's repo path.
  */
 export function publishReport(runs: ReviewRun[]): string {
   const models = new Map<string, EvalModel>();
@@ -124,7 +123,9 @@ export function publishReport(runs: ReviewRun[]): string {
   }
   const all = [...results.values()].flat();
   const used = [...models.values()].filter((m) => all.some((r) => r.model === m.label));
-  writeFileSync(OUT, renderReport(used, all) + "\n");
+  const shown = forDisplay(used, all);
+  writeFileSync(OUT, renderReport(shown.models, shown.results) + "\n");
+  publishOverview(reviewFlowScores(shown.models, shown.results));
   return path.relative(REPO, OUT);
 }
 

@@ -45,6 +45,20 @@ const MODELS: Omit<EvalModel, "runs">[] = [
   { label: "Gemma 4 e2b (4090)", id: "ollama/gemma4:e2b", url: PC },
 ].filter((m) => !m.id.startsWith("ollama/") || m.url);
 
+/*
+ * The label a report shows. The machine tag stays in the stored label,
+ * which keys merged runs and tells the Mac and PC entries apart.
+ */
+const shortLabel = (label: string) => label.replace(/ \(4090\)$/, "");
+
+/* Reports show short labels: drop the machine tag from the models and their results. */
+export function forDisplay<R extends { model: string }>(models: EvalModel[], results: R[]) {
+  return {
+    models: models.map((m) => ({ ...m, label: shortLabel(m.label) })),
+    results: results.map((r) => ({ ...r, model: shortLabel(r.model) })),
+  };
+}
+
 export const tierFromArgs = (argv: string[]): Tier => (argv.includes("--full") ? "full" : "quick");
 
 /*
