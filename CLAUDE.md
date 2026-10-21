@@ -9,6 +9,8 @@ Agents on the platform:
 - **Luca** — the conversational front-desk agent (named after Pacioli); guides the user through the tax-prep flow, orchestrates workflows, narrates progress. First agent built.
 There is exactly **one** conversational agent. Grounding is NOT a conversation: every `record-ai-decision` triggers the background **review-decision workflow** (`workflows/reviewDecision/`) — deterministic gather/retrieval plus three narrow LLM "judges" (`judges/`: queryFormulator, assessRiskAgent, ruleAgent on Haiku). The judges are registered on the Mastra instance, and the steps get them with `mastra.getAgent()` (the Mastra workflow docs pattern), so their calls share the app's logger and traces.
 
+**Tax-code Q&A ("Ask The Tax Code")** is not a conversation either: each question runs a fixed pipeline (`workflows/askTurn/`: formulate → retrieve → answer → validate) with two more judges (askQueryFormulator, askAnswerer). Follow-ups pass the earlier turns as context; threads live in `ask_threads`/`ask_turns` in `app.db`, whose `log_json` is the query log. `validate.ts` drops any citation or quote that does not trace to a retrieved block.
+
 Note: the Unix working directory is still `project-merrilin` (the product's earliest name; later "Wheel of Time," now "Summa"). The directory name was left alone to avoid churning local paths/configs. Internal names / IDs / docs use "summa" or "Summa".
 
 The end goal is a three-stage workflow:

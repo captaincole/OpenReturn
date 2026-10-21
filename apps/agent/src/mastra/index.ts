@@ -6,10 +6,14 @@ import { corsMiddleware } from "./server/cors";
 import { createObservability } from "./server/observability";
 import { ownerMiddleware } from "./server/ownerMiddleware";
 import { appStateRoute } from "./server/routes/appState";
+import { addAskTurnRoute, createAskRoute, getAskThreadRoute } from "./server/routes/ask";
 import { createFilingRoute } from "./server/routes/createFiling";
 import { deleteFilingRoute } from "./server/routes/deleteFiling";
+import { listRefDocsRoute, refDocPdfRoute } from "./server/routes/refdocs";
 import { sessionResetRoute } from "./server/routes/sessionReset";
 import { createStorage } from "./server/storage";
+import { askAnswerer } from "./workflows/askTurn/judges/askAnswerer";
+import { askQueryFormulator } from "./workflows/askTurn/judges/askQueryFormulator";
 import { reviewDecisionWorkflow } from "./workflows/reviewDecision";
 import { assessRiskAgent } from "./workflows/reviewDecision/judges/assessRiskAgent";
 import { queryFormulator } from "./workflows/reviewDecision/judges/queryFormulator";
@@ -32,7 +36,7 @@ export const mastra = new Mastra({
    * Mastra workflow docs show: the steps get them with mastra.getAgent(),
    * so their calls share the app's logger and traces. Studio lists them.
    */
-  agents: { luca, queryFormulator, assessRiskAgent, ruleAgent },
+  agents: { luca, queryFormulator, assessRiskAgent, ruleAgent, askQueryFormulator, askAnswerer },
   workflows: { reviewDecision: reviewDecisionWorkflow },
   storage,
   logger,
@@ -76,6 +80,16 @@ export const mastra = new Mastra({
        */
       ownerMiddleware,
     ],
-    apiRoutes: [appStateRoute, createFilingRoute, deleteFilingRoute, sessionResetRoute],
+    apiRoutes: [
+      appStateRoute,
+      createFilingRoute,
+      deleteFilingRoute,
+      sessionResetRoute,
+      createAskRoute,
+      addAskTurnRoute,
+      getAskThreadRoute,
+      listRefDocsRoute,
+      refDocPdfRoute,
+    ],
   },
 });

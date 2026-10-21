@@ -8,8 +8,9 @@ import type { MastraModelConfig } from "@mastra/core/llm";
  *               orchestration.
  *   judge     — the grounding judges in workflows/reviewDecision
  *               (assess, rule, queryFormulator) plus their
- *               structured-output extraction passes. Text-only, narrow
- *               tasks.
+ *               structured-output extraction passes, and the tax-code
+ *               Q&A judges in workflows/askTurn (askQueryFormulator,
+ *               askAnswerer). Text-only, narrow tasks.
  *   retrieval — embeddings for reference-doc search. Not resolved here:
  *               they route through src/refdocs/embeddings.ts
  *               (EMBEDDINGS_MODEL, local Ollama — EmbeddingGemma 2 by
