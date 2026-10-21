@@ -150,21 +150,28 @@ export function AppShell({
       <div className="flex h-screen w-screen flex-col overflow-hidden bg-bg-base text-ink-primary">
         <TopBar activeReturn={activeReturn} returns={returns} />
 
+        {/*
+         * Chat and workspace each render once. Below lg, CSS hides the
+         * pane the tab bar did not pick, so neither unmounts on a tab
+         * switch.
+         */}
         <main className="flex min-h-0 flex-1">
-          <aside className="hidden w-[40%] max-w-[640px] min-w-[400px] shrink-0 flex-col border-r border-border-subtle bg-bg-subtle/40 lg:flex">
+          <aside
+            className={cn(
+              "min-h-0 min-w-0 flex-1 flex-col lg:flex lg:w-[40%] lg:max-w-[640px] lg:min-w-[400px] lg:flex-none lg:shrink-0 lg:border-r lg:border-border-subtle lg:bg-bg-subtle/40",
+              mobilePane === "chat" ? "flex" : "hidden",
+            )}
+          >
             <ChatPane activeReturn={activeReturn} />
           </aside>
-          <section className="hidden min-w-0 flex-1 flex-col lg:flex">
+          <section
+            className={cn(
+              "min-h-0 min-w-0 flex-1 flex-col lg:flex",
+              mobilePane === "chat" ? "hidden" : "flex",
+            )}
+          >
             <WorkspaceFrame>{children}</WorkspaceFrame>
           </section>
-
-          <div className="flex min-h-0 min-w-0 flex-1 flex-col lg:hidden">
-            {mobilePane === "chat" ? (
-              <ChatPane activeReturn={activeReturn} />
-            ) : (
-              <WorkspaceFrame>{children}</WorkspaceFrame>
-            )}
-          </div>
         </main>
 
         <MobileTabBar value={mobilePane} onChange={setMobilePane} busy={chat.lucaBusy} />

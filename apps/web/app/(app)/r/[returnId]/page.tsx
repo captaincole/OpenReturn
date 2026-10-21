@@ -7,8 +7,9 @@
  *   - Documents: the user's uploads
  *
  * Desktop shows every section. Mobile shows only the section that the
- * bottom tab bar picks (mobilePane in useAppShell). All sections stay
- * mounted, so a tab switch does not refetch.
+ * bottom tab bar picks (mobilePane in useAppShell). AppShell renders this
+ * page once and only hides it behind the Chat tab, so every section stays
+ * mounted and a tab switch does not refetch.
  */
 
 import { useAppShell, type MobilePane } from "@/components/AppShell";

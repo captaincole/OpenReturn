@@ -46,7 +46,7 @@ function fetchUploads(setUploads: (rows: UploadRow[]) => void): () => void {
 }
 
 export function DocumentsSection() {
-  const { activeReturn, resetTick, lucaBusy, sendChat, setMobilePane } = useAppShell();
+  const { resetTick, turnTick, lucaBusy, sendChat, setMobilePane } = useAppShell();
   const [uploads, setUploads] = useState<UploadRow[]>([]);
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
@@ -55,10 +55,11 @@ export function DocumentsSection() {
 
   const loadUploads = useCallback(() => fetchUploads(setUploads), []);
 
-  useEffect(() => {
-    if (!activeReturn.realDataAvailable) return;
-    return loadUploads();
-  }, [resetTick, activeReturn.realDataAvailable, loadUploads]);
+  /*
+   * turnTick: chat attachments and Requested Actions also upload, and
+   * this section stays mounted beside the chat, so reload after each turn.
+   */
+  useEffect(() => loadUploads(), [resetTick, turnTick, loadUploads]);
 
   /*
    * Mirrors the Requested Actions upload flow. Write to user_documents

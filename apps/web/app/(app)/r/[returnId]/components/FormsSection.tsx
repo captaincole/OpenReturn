@@ -44,14 +44,10 @@ interface FormItem {
 }
 
 export function FormsSection() {
-  const { activeReturn, state, resetTick, turnTick } = useAppShell();
+  const { state, resetTick, turnTick } = useAppShell();
   const [drafts, setDrafts] = useState<DraftRow[]>([]);
 
   useEffect(() => {
-    if (!activeReturn.realDataAvailable) {
-      setDrafts([]);
-      return;
-    }
     let cancelled = false;
     fetch("/api/drafts", { cache: "no-store" })
       .then(async (res) => {
@@ -68,7 +64,7 @@ export function FormsSection() {
     return () => {
       cancelled = true;
     };
-  }, [activeReturn.realDataAvailable, resetTick, turnTick]);
+  }, [resetTick, turnTick]);
 
   const items = useMemo(
     () => mergeFormsAndDrafts(state?.forms ?? [], drafts),
