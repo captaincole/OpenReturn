@@ -9,7 +9,7 @@ import { appStateRoute } from "./server/routes/appState";
 import { addAskTurnRoute, createAskRoute, getAskThreadRoute } from "./server/routes/ask";
 import { createFilingRoute } from "./server/routes/createFiling";
 import { deleteFilingRoute } from "./server/routes/deleteFiling";
-import { listRefDocsRoute, refDocPdfRoute } from "./server/routes/refdocs";
+import { listRefDocsRoute, refDocHtmlRoute, refDocPdfRoute } from "./server/routes/refdocs";
 import { sessionResetRoute } from "./server/routes/sessionReset";
 import { createStorage } from "./server/storage";
 import { askAnswerer } from "./workflows/askTurn/judges/askAnswerer";
@@ -90,6 +90,7 @@ export const mastra = new Mastra({
       getAskThreadRoute,
       listRefDocsRoute,
       refDocPdfRoute,
+      refDocHtmlRoute,
     ],
   },
 });

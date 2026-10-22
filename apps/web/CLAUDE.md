@@ -19,3 +19,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Colors and themes
 
 The app has a light and a dark theme (`lib/theme.ts`, toggle in both top bars). Use the theme tokens from `app/globals.css` (`bg-bg-*`, `text-ink-*`, `border-border-*`, `accent`, and `ok` / `warn` / `danger` for status). Do not use Tailwind palette colors such as `text-red-400`: they do not change with the theme and are hard to read on one of the two backgrounds. For a one-off per-theme style, use the `light:` variant (for example `light:shadow-black/10`).
+
+## Stale CSS after a branch switch
+
+Turbopack keeps a persistent cache in `.next/`. After switching branches, `next dev` can serve a `globals.css` chunk from before your change: new rules are missing from the page, and editing or touching the file does not help. Stop the server, `rm -rf apps/web/.next`, and start it again.

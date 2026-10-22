@@ -11,7 +11,7 @@ import { UnauthorizedError } from "@/lib/api";
 export type AskTurnStatus = "running" | "completed" | "failed";
 export type AskCoverage = "covered" | "partial" | "not_covered";
 export type AskStage = "formulating" | "retrieving" | "answering";
-/** A document's source: a PDF, or a cleaned publisher web page (no pages). */
+/** A document's source: a PDF, or a cleaned HTML page the library renders. */
 export type SourceFormat = "pdf" | "html";
 
 export interface AskCitation {
@@ -60,6 +60,23 @@ export interface LibraryDocument {
   blockCount: number;
 }
 
+/** A heading in an HTML document; anchor is its id in the HTML. */
+export interface LibrarySection {
+  anchor: string;
+  heading: string;
+  parent: string | null;
+}
+
+export interface LibraryHtmlDocument {
+  docId: string;
+  title: string;
+  publisher: string;
+  taxYear: number | null;
+  sourceUrl: string | null;
+  html: string;
+  sections: LibrarySection[];
+}
+
 interface StartedTurn {
   threadId: string;
   turnId: string;
@@ -102,11 +119,28 @@ export async function fetchLibrary(): Promise<LibraryDocument[]> {
   return (await readJson<{ documents: LibraryDocument[] }>(res, "Load library")).documents;
 }
 
+export async function fetchLibraryDocument(docId: string): Promise<LibraryHtmlDocument> {
+  const res = await fetch(agentUrl(`/app/refdocs/${encodeURIComponent(docId)}/html`));
+  return readJson<LibraryHtmlDocument>(res, "Load document");
+}
+
+/** The library's page for an HTML document, optionally at a section anchor. */
+export function refDocPageUrl(docId: string, anchor?: string): string {
+  const url = `/library/${encodeURIComponent(docId)}`;
+  return anchor ? `${url}#${anchor}` : url;
+}
+
 /*
- * Opens the source PDF on the cited page (the browser viewer honors
- * #page). For an HTML document the route redirects to the publisher's
- * page, so pass no page.
+ * Where a citation opens: an HTML document's page at the cited section
+ * (block ids are `<docId>::sec::<anchor>::bNN`), or the PDF on its page.
  */
+export function citationUrl(c: AskCitation): string {
+  if (c.format !== "html") return refDocPdfUrl(c.docId, c.pageNum);
+  const anchor = c.blockId.split("::")[2];
+  return refDocPageUrl(c.docId, anchor === "preamble" ? undefined : anchor);
+}
+
+/** Opens the source PDF on the cited page (the browser viewer honors #page). */
 export function refDocPdfUrl(docId: string, pageNum?: number): string {
   const url = agentUrl(`/app/refdocs/${encodeURIComponent(docId)}/pdf`);
   return pageNum ? `${url}#page=${pageNum}` : url;
