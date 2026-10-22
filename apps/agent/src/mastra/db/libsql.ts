@@ -120,6 +120,16 @@ const CORPUS_SCHEMA_DDL: string[] = [
            value TEXT NOT NULL
          )`,
   /*
+   * The source PDF of each document, so the published corpus.db is the
+   * whole library: the PDFs are not committed (packages/sources keeps
+   * only their sidecars). The reference library's "Open PDF" serves
+   * from here. See db/corpusFiles.ts.
+   */
+  `CREATE TABLE IF NOT EXISTS ref_document_files (
+           doc_id TEXT PRIMARY KEY REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
+           pdf    BLOB NOT NULL
+         )`,
+  /*
    * Form catalog — the inventory side of the form engine (one row per
    * (form_id, tax_year) + one per field). The forms-ingest pipeline
    * writes it (--write-db). The runtime reads the bundled JSON

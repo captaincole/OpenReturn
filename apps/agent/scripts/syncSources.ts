@@ -1,9 +1,9 @@
 /*
- * Copy every blank.pdf (the engine fills it) and every instructions.pdf
- * or publication.pdf plus its .meta.json sidecar (the reference library
- * serves it) from @summa/sources into the agent's runtime tree,
- * src/mastra/public/sources/, with the same layout (<year>/forms/…,
- * <year>/publications/…). Mastra ships public/ with the server, and
+ * Copy every blank.pdf (the engine fills it) from @summa/sources into
+ * the agent's runtime tree, src/mastra/public/sources/, with the same
+ * layout (<year>/forms/<relativeDir>/blank.pdf). Instruction and
+ * publication PDFs are not copied: the reference library serves them
+ * from corpus.db. Mastra ships public/ with the server, and
  * src/mastra/formAssets.ts reads from it. The tree is gitignored:
  * @summa/sources is the one copy in git. Runs before `dev` and `build`
  * (npm pre-scripts) and before the e2e agent.
@@ -15,13 +15,7 @@ import { dirname, join, relative, resolve } from "node:path";
 
 const RUNTIME_DIR = resolve(__dirname, "../src/mastra/public/sources");
 
-const RUNTIME_FILES = new Set([
-  "blank.pdf",
-  "instructions.pdf",
-  "instructions.meta.json",
-  "publication.pdf",
-  "publication.meta.json",
-]);
+const RUNTIME_FILES = new Set(["blank.pdf"]);
 
 function runtimeFiles(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
