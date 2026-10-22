@@ -15,3 +15,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## File conventions
 
 - This file replaced `AGENTS.md` (2026-10-08). If a Next.js upgrade regenerates `AGENTS.md`, merge any changed `nextjs-agent-rules` block into this file and delete it again.
+
+## Colors and themes
+
+The app has a light and a dark theme (`lib/theme.ts`, toggle in both top bars). Use the theme tokens from `app/globals.css` (`bg-bg-*`, `text-ink-*`, `border-border-*`, `accent`, and `ok` / `warn` / `danger` for status). Do not use Tailwind palette colors such as `text-red-400`: they do not change with the theme and are hard to read on one of the two backgrounds. For a one-off per-theme style, use the `light:` variant (for example `light:shadow-black/10`).

@@ -213,7 +213,7 @@ function MobileTabBar({
           <span className="text-lg leading-none">{t.icon}</span>
           <span className="text-[10px] tracking-wider uppercase">{t.label}</span>
           {busy && t.id === "activity" && (
-            <span className="absolute top-1.5 right-[30%] h-1.5 w-1.5 animate-pulse-soft rounded-full bg-amber-400" />
+            <span className="absolute top-1.5 right-[30%] h-1.5 w-1.5 animate-pulse-soft rounded-full bg-warn" />
           )}
         </button>
       ))}

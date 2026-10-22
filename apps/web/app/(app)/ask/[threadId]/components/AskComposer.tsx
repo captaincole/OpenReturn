@@ -48,7 +48,7 @@ export function AskComposer({
           e.preventDefault();
           void send();
         }}
-        className="card space-y-2.5 px-4 py-3 shadow-lg shadow-black/40 focus-within:border-accent/60"
+        className="card space-y-2.5 px-4 py-3 shadow-lg shadow-black/40 focus-within:border-accent/60 light:shadow-black/10"
       >
         <div className="flex flex-wrap gap-1.5">
           {MODES.map((m) => (
@@ -94,7 +94,7 @@ export function AskComposer({
             {busy ? "Asking…" : "Ask"}
           </button>
         </div>
-        {error && <p className="text-[12px] text-red-400">{error}</p>}
+        {error && <p className="text-[12px] text-danger">{error}</p>}
       </form>
     </section>
   );

@@ -7,7 +7,7 @@
  * the active return.
  *
  * Structure:
- *   [W → /]  [Return picker ▾]                    [Luca is working] [AC]
+ *   [W → /]  [Return picker ▾]               [Luca is working] [☀] [AC]
  *
  * The return picker is the title-weight element. It uses font-semibold
  * sans because Fraunces renders numerals with cursive stylistic features
@@ -16,6 +16,7 @@
  */
 
 import { useAppShell } from "@/components/AppShell";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { deleteFiling, UnauthorizedError } from "@/lib/api";
 import { signOut } from "@/lib/auth";
 import { cn } from "@/lib/cn";
@@ -53,7 +54,7 @@ function ReturnPicker({ activeReturn, returns }: TopBarProps) {
       {open && (
         <>
           <div className="fixed inset-0 z-30" onClick={() => setOpen(false)} />
-          <div className="absolute top-full left-0 z-40 mt-2 w-64 overflow-hidden rounded-xl border border-border-subtle bg-bg-elevated shadow-2xl shadow-black/40">
+          <div className="absolute top-full left-0 z-40 mt-2 w-64 overflow-hidden rounded-xl border border-border-subtle bg-bg-elevated shadow-2xl shadow-black/40 light:shadow-black/10">
             <Link
               href="/"
               className="flex items-center gap-2 border-b border-border-subtle px-4 py-2.5 text-sm text-ink-secondary transition-colors hover:bg-bg-panel hover:text-ink-primary"
@@ -133,7 +134,7 @@ function AccountMenu({ activeReturn }: { activeReturn: TaxReturn }) {
       {open && (
         <>
           <div className="fixed inset-0 z-30" onClick={() => setOpen(false)} />
-          <div className="absolute top-full right-0 z-40 mt-2 w-56 overflow-hidden rounded-xl border border-border-subtle bg-bg-elevated shadow-2xl shadow-black/40">
+          <div className="absolute top-full right-0 z-40 mt-2 w-56 overflow-hidden rounded-xl border border-border-subtle bg-bg-elevated shadow-2xl shadow-black/40 light:shadow-black/10">
             {profile.email && (
               <div className="border-b border-border-subtle px-4 py-3">
                 <div className="text-[11px] tracking-wider text-ink-muted uppercase">
@@ -145,7 +146,7 @@ function AccountMenu({ activeReturn }: { activeReturn: TaxReturn }) {
             <button
               onClick={() => void handleDelete()}
               disabled={deleting}
-              className="w-full px-4 py-2.5 text-left text-sm text-red-300 transition-colors hover:bg-bg-panel hover:text-red-200 disabled:opacity-50"
+              className="w-full px-4 py-2.5 text-left text-sm text-danger/90 transition-colors hover:bg-bg-panel hover:text-danger disabled:opacity-50"
             >
               {deleting ? "Deleting…" : `Delete this filing`}
             </button>
@@ -188,12 +189,13 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
       {/* Right cluster */}
       <div className="flex shrink-0 items-center gap-2">
         {lucaBusy && (
-          <div className="hidden items-center gap-2 rounded-lg border border-amber-400/30 bg-amber-400/10 px-2.5 py-1.5 text-xs text-amber-200 sm:flex">
-            <span className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-amber-400" />
+          <div className="hidden items-center gap-2 rounded-lg border border-warn/30 bg-warn/10 px-2.5 py-1.5 text-xs text-warn sm:flex">
+            <span className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-warn" />
             <span>Luca is working</span>
           </div>
         )}
 
+        <ThemeToggle />
         <AccountMenu activeReturn={activeReturn} />
       </div>
     </header>

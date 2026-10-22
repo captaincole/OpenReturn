@@ -54,7 +54,7 @@ export function StartFilingButton({
       >
         {busy ? "Starting…" : children}
       </button>
-      {error && <div className="text-[12px] text-red-400">{error}</div>}
+      {error && <div className="text-[12px] text-danger">{error}</div>}
     </div>
   );
 }

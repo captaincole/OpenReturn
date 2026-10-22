@@ -67,7 +67,7 @@ export function AskThreadView({ threadId }: { threadId: string }) {
   if (loadError) {
     return (
       <div className="mx-auto max-w-3xl text-[14px] text-ink-secondary">
-        <p className="text-red-400">{loadError}</p>
+        <p className="text-danger">{loadError}</p>
         <Link href="/" className="mt-3 inline-block text-accent hover:text-accent-hover">
           ← Back to home
         </Link>

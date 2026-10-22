@@ -53,6 +53,10 @@ A 2025 return: chat with Luca on the left; activity, requested actions, and the 
 
 <img src="static/screenshots/return-2025.png" alt="The 2025 return workspace: Luca's chat summary of the drafted return on the left, and the Activity, Requested actions, and Tax forms sections on the right" width="880">
 
+The same page in the light theme. Summa follows your system setting; the sun/moon button in the top bar switches it.
+
+<img src="static/screenshots/return-2025-light.png" alt="The 2025 return workspace in the light theme, with the theme switch next to the avatar in the top bar" width="880">
+
 Ask The Tax Code: a question from the home page gets a short answer with numbered citations into the IRS and FTB instructions; each card quotes the passage and opens the source PDF on its page.
 
 <img src="static/screenshots/ask-tax-code.png" alt="Ask The Tax Code page: the question 'How much can I contribute to my HSA in 2025?', an answer giving the $4,300 self-only and $8,550 family limits with citation markers, a reference card quoting the Form 8889 instructions with an Open PDF link, and the Follow up / Ask a different question composer at the bottom" width="880">

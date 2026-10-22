@@ -97,7 +97,7 @@ export default function SetupPage() {
             autoComplete="new-password"
             className="input-base"
           />
-          {error && <div className="px-1 text-sm text-red-400">{error}</div>}
+          {error && <div className="px-1 text-sm text-danger">{error}</div>}
           <button type="submit" disabled={!canSubmit} className="btn-primary">
             {submitting ? "Setting up…" : "Create owner account"}
           </button>

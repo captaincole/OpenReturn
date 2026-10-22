@@ -67,7 +67,7 @@ function ReturnCard({ ret }: { ret: TaxReturn }) {
           </span>
         )}
         {isFiled && (
-          <span className="rounded bg-emerald-400/10 px-1.5 py-0.5 text-[10px] tracking-wider text-emerald-400 uppercase">
+          <span className="rounded bg-ok/10 px-1.5 py-0.5 text-[10px] tracking-wider text-ok uppercase">
             Filed
           </span>
         )}
