@@ -1,4 +1,4 @@
-import { FORMS_ROOT } from "@summa/forms";
+import { SOURCES_ROOT } from "@summa/sources";
 import { createHash } from "node:crypto";
 import type { Dirent } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
@@ -6,8 +6,8 @@ import { join, relative, resolve } from "node:path";
 import type { ParserStyle } from "./parse";
 
 /*
- * Walks the @summa/forms tree (packages/forms/<year>/…) for source PDFs —
- * instructions.pdf (form instructions, in a form's folder) and
+ * Walks the @summa/sources tree (packages/sources/<year>/…) for source PDFs —
+ * instructions.pdf (form instructions, under forms/) and
  * publication.pdf (an IRS/FTB publication, under publications/) — and
  * pairs each PDF with its sibling `<name>.meta.json` sidecar. The sidecar is the
  * source of truth for docId/title/publisher/taxYear/sourceUrl. The
@@ -66,7 +66,7 @@ async function walkPdfs(dir: string): Promise<string[]> {
   return out;
 }
 
-export async function walkCorpus(formsRoot: string = FORMS_ROOT): Promise<WalkResult> {
+export async function walkCorpus(formsRoot: string = SOURCES_ROOT): Promise<WalkResult> {
   const root = resolve(formsRoot);
   const pdfPaths = await walkPdfs(root);
 

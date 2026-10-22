@@ -1,9 +1,0 @@
-{
-  "name": "@summa/forms",
-  "version": "0.1.0",
-  "private": true,
-  "description": "Source documents the IRS and FTB publish, by tax year: fillable blank PDFs, instruction booklets, and tax-table sources. Data only: we download these files and do not edit them.",
-  "exports": {
-    ".": "./index.ts"
-  }
-}

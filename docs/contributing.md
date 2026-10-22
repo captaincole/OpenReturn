@@ -30,7 +30,7 @@ The current agent Luca is built off of the [Mastra](https://mastra.ai/docs) fram
 
 The agent and the workflows use a corpus of IRS provided guides to ground its information in truth and to generate the original bindings of the form engine. Here is how that corpus is turned into our data model that the agents can then search. We store information in both vector format and in plain text format for two reasons. First, so there is a backup option if you aren't running a local embedding model, and second because if you add plain text search queries it makes the model's retrieval capabilities better for corpus search. 
 
-1. *Read* Using unpdf, we read the instructions files (e.g. `packages/forms/2025/federal/1040/instructions.pdf`) from the IRS and turn them into text documents for further processing
+1. *Read* Using unpdf, we read the instructions files (e.g. `packages/sources/2025/forms/federal/1040/instructions.pdf`) from the IRS and turn them into text documents for further processing
 2. *Parse (parse.ts)* turns those text documents into sections based on headers deterministically (No AI) with stable section IDs. 
 3. *Contextualize (contextualize.ts)* receives each block and sends that to an LLM (haiku) that then adds contextual information as part of the block.
 4. *Store* Then we store everything in the DB, as ref_documents (parent), ref_pages, ref_sections, and ref_blocks

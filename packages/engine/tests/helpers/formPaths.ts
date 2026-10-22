@@ -4,7 +4,7 @@
  * offline code resolves the paths here.
  */
 
-import { formDir } from "@summa/forms";
+import { formDir } from "@summa/sources";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { engineSrcDir } from "../../paths.js";
@@ -21,7 +21,7 @@ export function catalogTaxYear(spec: Pick<FormSpec, "relativeDir">): number {
     .taxYear;
 }
 
-/** The form's fillable blank PDF for one tax year, from @summa/forms. */
+/** The form's fillable blank PDF for one tax year, from @summa/sources. */
 export function blankPdfPath(form: { relativeDir: string; taxYear: number }): string {
   return resolve(formDir(form.taxYear, form.relativeDir), "blank.pdf");
 }

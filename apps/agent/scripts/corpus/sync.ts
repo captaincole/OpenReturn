@@ -109,7 +109,7 @@ async function run(argv: string[]): Promise<void> {
 export const syncCommand: Command = {
   name: "sync",
   summary:
-    "Ingest new/sha-drifted forms/**/{instructions,publication}.pdf into corpus.db (idempotent)",
+    "Ingest new/sha-drifted sources/**/{instructions,publication}.pdf into corpus.db (idempotent)",
   options: [
     {
       flag: "--force",

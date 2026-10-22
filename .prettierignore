@@ -13,8 +13,8 @@ packages/engine/src/state/*/*/types.ts
 apps/web/next-env.d.ts
 
 # Form assets and catalogs (large, partly generated)
-packages/forms/
-apps/agent/src/mastra/public/forms/
+packages/sources/
+apps/agent/src/mastra/public/sources/
 
 # Lockfiles
 **/package-lock.json

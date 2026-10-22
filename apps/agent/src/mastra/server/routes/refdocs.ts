@@ -1,6 +1,6 @@
 import { registerApiRoute } from "@mastra/core/server";
 import { listLibrary } from "../../db/refLibrary";
-import { loadInstructionsPdf } from "../../formAssets";
+import { loadSourcePdf } from "../../formAssets";
 
 /*
  * The reference library — what tax-code Q&A searches.
@@ -22,7 +22,7 @@ export const listRefDocsRoute = registerApiRoute("/app/refdocs", {
 export const refDocPdfRoute = registerApiRoute("/app/refdocs/:docId/pdf", {
   method: "GET",
   handler: async (c) => {
-    const pdf = await loadInstructionsPdf(c.req.param("docId"));
+    const pdf = await loadSourcePdf(c.req.param("docId"));
     if (!pdf) return c.json({ error: "not found" }, 404);
     return c.body(new Uint8Array(pdf), 200, {
       "content-type": "application/pdf",

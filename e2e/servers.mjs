@@ -97,12 +97,12 @@ mkdirSync(process.env.DOCUMENTS_PATH, { recursive: true });
 
 /* The agent reads blank PDFs from a gitignored runtime tree; build it first. */
 if (name === "agent") {
-  const sync = spawnSync("npm", ["--prefix", join(root, "apps/agent"), "run", "forms:sync"], {
+  const sync = spawnSync("npm", ["--prefix", join(root, "apps/agent"), "run", "sources:sync"], {
     stdio: "inherit",
   });
   if (sync.status !== 0) {
     console.error(
-      `forms:sync failed (${sync.error?.message ?? `exit ${sync.status}`}); not starting the agent`,
+      `sources:sync failed (${sync.error?.message ?? `exit ${sync.status}`}); not starting the agent`,
     );
     process.exit(1);
   }
