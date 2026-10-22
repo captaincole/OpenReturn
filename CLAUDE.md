@@ -57,10 +57,11 @@ apps/
 │   ├── package.json             # agent deps + scripts (mastra dev, corpus, form-engine, sources:sync)
 │   └── tsconfig.json            # "paths" aliases @summa/* to source so `mastra dev` bundles them
 └── web/                         # Next.js 16 (App Router) frontend → deployed to Vercel
-    ├── app/                     # /login, (app)/{page,documents,activity}, /documents/[id] route handler
-    ├── components/              # AppShell, SideNav, ActivityCard, Markdown
-    ├── lib/                     # supabase/{client,server,proxy}, activity, api, mastraClient, uploads
-    ├── proxy.ts                 # Next.js 16 Proxy (renamed Middleware): @supabase/ssr session refresh + auth gate
+    ├── app/                     # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
+    │                              library}, /documents/[id] route handler, /api/* route handlers
+    ├── components/              # AppShell, ChatPane, ActivityCard, PlanCard, TopBar, Markdown
+    ├── lib/                     # localAuth, serverDb, api, ask, activity, mastraClient, uploads, …
+    ├── proxy.ts                 # Next.js 16 Proxy (renamed Middleware): optimistic session-cookie gate
     ├── package.json             # web deps + scripts (next dev, next build)
     └── next.config.ts
 
@@ -94,7 +95,7 @@ All persistent state lives in local files under `apps/agent/.data/` ("the DB is 
 | file | contents | owner |
 | --- | --- | --- |
 | `corpus.db` | reference corpus (ref_* tables, FTS5 + vectors) + forms catalog | `db/libsql.ts` |
-| `app.db` | domain data (tax_facts, ai_decisions, filings, …) | `db/appDb.ts` |
+| `app.db` | domain data (tax_facts, ai_decisions, filings, ask_threads/ask_turns, …) | `db/appDb.ts` |
 | `mastra.db` | Mastra runtime (threads, messages, working memory) | `@mastra/libsql` |
 | `documents/` | document blobs `{filingId}/{category}/{slug}-{ulid}.{ext}` | `db/blobStore.ts` |
 
@@ -231,7 +232,7 @@ Add categories as the domain grows. Prefer splitting over lumping (it's easier t
 
 ### Where the corpus lives
 
-The reference corpus (IRS pubs/instructions, FTB booklets, etc.) lives in **`.data/corpus.db`** — a local libsql/SQLite file, separate from user data (`app.db`) because it's shared, read-mostly reference material that will ship prebuilt as a release asset (Phase 4). Client + schema live in `apps/agent/src/mastra/db/libsql.ts`; the same file also holds the forms catalog (`forms` / `form_fields`, written by the forms-ingest pipeline, dormant at runtime).
+The reference corpus (IRS/FTB form instructions and publications, FTB booklets) lives in **`.data/corpus.db`** — a local libsql/SQLite file, separate from user data (`app.db`) because it's shared, read-mostly reference material that will ship prebuilt as a release asset (Phase 4). Client + schema live in `apps/agent/src/mastra/db/libsql.ts`; the same file also holds the forms catalog (`forms` / `form_fields`, written by the forms-ingest pipeline, dormant at runtime).
 
 ### Corpus shape (libsql)
 
