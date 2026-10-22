@@ -1,6 +1,7 @@
 "use client";
 
-import { fetchLibrary, refDocPdfUrl, type LibraryDocument } from "@/lib/ask";
+import { fetchLibrary, refDocPageUrl, refDocPdfUrl, type LibraryDocument } from "@/lib/ask";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Section } from "../../components/Section";
 
@@ -66,7 +67,11 @@ function LibraryRow({ doc }: { doc: LibraryDocument }) {
         </div>
       </div>
       <div className="flex shrink-0 gap-4 text-[12px]">
-        {doc.format === "pdf" && (
+        {doc.format === "html" ? (
+          <Link href={refDocPageUrl(doc.docId)} className="text-accent hover:text-accent-hover">
+            Read
+          </Link>
+        ) : (
           <a
             href={refDocPdfUrl(doc.docId)}
             target="_blank"

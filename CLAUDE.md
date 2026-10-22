@@ -60,7 +60,7 @@ apps/
 │   └── tsconfig.json            # "paths" aliases @summa/* to source so `mastra dev` bundles them
 └── web/                         # Next.js 16 (App Router) frontend → deployed to Vercel
     ├── app/                     # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
-    │                              library}, /documents/[id] route handler, /api/* route handlers
+    │                              library, library/[docId]}, /documents/[id] + /api/* route handlers
     ├── components/              # AppShell, ChatPane, ActivityCard, PlanCard, TopBar, Markdown
     ├── lib/                     # localAuth, serverDb, api, ask, activity, mastraClient, uploads, …
     ├── proxy.ts                 # Next.js 16 Proxy (renamed Middleware): optimistic session-cookie gate
@@ -255,9 +255,9 @@ Stable IDs — used everywhere as citations:
 - `irs-1040-inst-2025::sec::single` (section)
 - `irs-1040-inst-2025::sec::single::b01` (block — section-anchored: the 1st block under that heading; a parser change elsewhere in the doc does not renumber it)
 
-**corpus.db is the library.** It holds every document's text, sections, blocks, embeddings, and its source file (`ref_document_files`): a PDF's bytes, or a cleaned web page as UTF-8. `ref_documents.format` (`pdf` | `html`) says which; the reference library's "Open PDF" serves PDFs from there. Git holds only the sidecars, each with the source file's `sha256`: the source files and the extracted `*.canonical.txt` text are gitignored build files, written next to the sidecar when sync ingests.
+**corpus.db is the library.** It holds every document's text, sections, blocks, embeddings, and its source file (`ref_document_files`): a PDF's bytes, or a cleaned web page as UTF-8. `ref_documents.format` (`pdf` | `html`) says which; the reference library's "Open PDF" serves PDFs from there, and its `/library/<docId>` page renders HTML documents (styled by `.ref-doc` in `apps/web/app/globals.css`). Git holds only the sidecars, each with the source file's `sha256`: the source files and the extracted `*.canonical.txt` text are gitignored build files, written next to the sidecar when sync ingests.
 
-**FTB instructions are HTML when FTB has a page.** FTB publishes most instructions only as web pages. `refdocs/html/cleanFtb.ts` keeps the page's article (allowlisted tags, every heading's id = its section slug, images inlined), and `refdocs/html/parseHtml.ts` reads sections from `h2`–`h4` and blocks from whole elements; a table row carries its column headers. An HTML document has no pages (all page 1): citations show `§ Section`, and open the publisher's page. The sha256 covers the cleaned output (the raw page differs on every request); bump `CLEANER_VERSION` when the cleaner's output changes. Use the PDF when FTB has no page (3514, 3526, the FTB publications).
+**FTB instructions are HTML when FTB has a page.** FTB publishes most instructions only as web pages. `refdocs/html/cleanFtb.ts` keeps the page's article (allowlisted tags, every heading's id = its section slug, images inlined), and `refdocs/html/parseHtml.ts` reads sections from `h2`–`h4` and blocks from whole elements; a table row carries its column headers. An HTML document has no pages (all page 1): citations show `§ Section`, and open the library page at `#<slug>`. The sha256 covers the cleaned output (the raw page differs on every request); bump `CLEANER_VERSION` when the cleaner's output changes. Use the PDF when FTB has no page (3514, 3526, the FTB publications).
 
 ### Adding or updating a reference document
 

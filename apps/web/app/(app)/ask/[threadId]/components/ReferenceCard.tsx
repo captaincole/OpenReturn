@@ -4,10 +4,10 @@
  * A compact numbered reference behind an `[n]` marker: document,
  * section, page, the quoted passage (click to expand), and a link that
  * opens the source PDF on that page — or, for an HTML document (no
- * pages), the publisher's page.
+ * pages), the library's copy at that section.
  */
 
-import { refDocPdfUrl, type AskCitation } from "@/lib/ask";
+import { citationUrl, type AskCitation } from "@/lib/ask";
 import { cn } from "@/lib/cn";
 import { useState } from "react";
 
@@ -67,12 +67,12 @@ export function ReferenceCard({
         {citation.quote.trim()}
       </blockquote>
       <a
-        href={refDocPdfUrl(citation.docId, html ? undefined : citation.pageNum)}
+        href={citationUrl(citation)}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-2.5 self-start text-[11px] text-accent hover:text-accent-hover"
       >
-        {html ? "Open source ↗" : `Open PDF, p. ${citation.pageNum} ↗`}
+        {html ? "Read this section ↗" : `Open PDF, p. ${citation.pageNum} ↗`}
       </a>
     </div>
   );
