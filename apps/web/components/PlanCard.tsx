@@ -172,11 +172,7 @@ function PlanRow({ item }: { item: DisplayItem }) {
 function StatusIcon({ status }: { status: PlanItemStatus }) {
   if (status === "done") {
     return (
-      <svg
-        viewBox="0 0 16 16"
-        className="mt-[3px] h-3.5 w-3.5 shrink-0 text-emerald-400"
-        aria-hidden
-      >
+      <svg viewBox="0 0 16 16" className="mt-[3px] h-3.5 w-3.5 shrink-0 text-ok" aria-hidden>
         <circle cx="8" cy="8" r="7.5" fill="currentColor" opacity="0.18" />
         <path
           d="M4.5 8.2 6.8 10.5 11.5 5.8"

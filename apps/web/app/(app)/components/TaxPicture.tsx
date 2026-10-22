@@ -73,11 +73,7 @@ export function TaxPictureSection({ locked }: { locked: boolean }) {
           value={fmtCurrencyFull(CHARITABLE[CHARITABLE.length - 1].value)}
           valueLabel="2025 year-to-date"
         >
-          <BarChart
-            data={CHARITABLE}
-            colorClass="fill-emerald-400"
-            valueFormatter={fmtCurrencyShort}
-          />
+          <BarChart data={CHARITABLE} colorClass="fill-ok" valueFormatter={fmtCurrencyShort} />
         </ChartCard>
         {locked && <LockOverlay text="Unlocked after your first filed return" />}
       </div>
@@ -293,7 +289,7 @@ function DivergentBarChart({
                 width={barW}
                 height={h}
                 rx={3}
-                className={v >= 0 ? "fill-emerald-400" : "fill-red-400"}
+                className={v >= 0 ? "fill-ok" : "fill-danger"}
               />
             )}
             {isPending && (

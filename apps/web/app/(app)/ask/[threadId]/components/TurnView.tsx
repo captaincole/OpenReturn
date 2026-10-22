@@ -27,7 +27,7 @@ export function TurnView({ turn }: { turn: AskTurn }) {
       <h1 className="font-serif text-3xl leading-tight text-ink-primary">{turn.question}</h1>
       {turn.status === "running" && <RunningAnswer stage={turn.stage} />}
       {turn.status === "failed" && (
-        <div className="card border-red-400/30 px-5 py-4 text-[14px] text-red-300">
+        <div className="card border-danger/30 px-5 py-4 text-[14px] text-danger">
           {turn.error ?? "Something went wrong. Ask again."}
         </div>
       )}
@@ -110,8 +110,8 @@ function CoverageNote({ turn }: { turn: AskTurn }) {
   if (turn.coverage !== "partial" && turn.coverage !== "not_covered") return null;
   const docs = turn.missingDocuments;
   return (
-    <div className="rounded-xl border border-amber-400/25 bg-amber-400/5 px-4 py-3 text-[13px] text-ink-secondary">
-      <span className="font-medium text-amber-300">
+    <div className="rounded-xl border border-warn/25 bg-warn/5 px-4 py-3 text-[13px] text-ink-secondary">
+      <span className="font-medium text-warn">
         {turn.coverage === "partial" ? "Partly covered." : "Not in our library yet."}
       </span>{" "}
       {docs.length > 0 ? `Documents that would cover this: ${docs.join(", ")}. ` : ""}

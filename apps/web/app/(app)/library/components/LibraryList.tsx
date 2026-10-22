@@ -25,7 +25,7 @@ export function LibraryList() {
       .catch((err: unknown) => setError(err instanceof Error ? err.message : String(err)));
   }, []);
 
-  if (error) return <p className="text-[14px] text-red-400">{error}</p>;
+  if (error) return <p className="text-[14px] text-danger">{error}</p>;
   if (!docs) return <p className="text-[14px] text-ink-muted">Loading…</p>;
   if (docs.length === 0) {
     return (

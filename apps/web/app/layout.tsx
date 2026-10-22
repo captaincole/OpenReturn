@@ -1,5 +1,7 @@
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import type { Metadata } from "next";
 import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -27,7 +29,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#0a0a0b",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0b" },
+  ],
 };
 
 export default function RootLayout({
@@ -36,11 +41,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    /*
+     * suppressHydrationWarning: THEME_INIT_SCRIPT sets data-theme on <html>
+     * before React hydrates, so the attribute differs from the server render.
+     */
     <html
       lang="en"
-      className={`dark ${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+      className={`${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="h-full bg-bg-base font-sans text-ink-primary antialiased">{children}</body>
+      <body className="h-full bg-bg-base font-sans text-ink-primary antialiased">
+        <Script id="theme-init" strategy="beforeInteractive">
+          {THEME_INIT_SCRIPT}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }

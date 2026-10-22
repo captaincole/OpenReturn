@@ -253,10 +253,10 @@ function ValueDisplay({ value }: { value: unknown }) {
 function VerdictBadge({ verdict }: { verdict: Verdict }) {
   const tones: Record<Verdict, string> = {
     pending: "text-ink-secondary bg-bg-elevated",
-    accurate: "text-emerald-400 bg-emerald-400/10",
-    inaccurate: "text-red-400 bg-red-400/10",
-    ungroundable: "text-amber-400 bg-amber-400/10",
-    needs_more_facts: "text-amber-400 bg-amber-400/10",
+    accurate: "text-ok bg-ok/10",
+    inaccurate: "text-danger bg-danger/10",
+    ungroundable: "text-warn bg-warn/10",
+    needs_more_facts: "text-warn bg-warn/10",
     review_failed: "text-ink-muted bg-bg-elevated",
   };
   const labels: Record<Verdict, string> = {

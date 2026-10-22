@@ -131,11 +131,7 @@ function FormRow({ item }: { item: FormItem }) {
               <div
                 className={cn(
                   "h-full transition-all duration-500",
-                  fill.pct === 100
-                    ? "bg-emerald-400"
-                    : fill.pct > 0
-                      ? "bg-accent"
-                      : "bg-transparent",
+                  fill.pct === 100 ? "bg-ok" : fill.pct > 0 ? "bg-accent" : "bg-transparent",
                 )}
                 style={{ width: `${fill.pct}%` }}
               />
@@ -198,9 +194,9 @@ function StatusPill({ status }: { status: Status }) {
   const map: Record<Status, { label: string; tone: string }> = {
     not_started: { label: "Not started", tone: "bg-bg-elevated text-ink-muted" },
     drafting: { label: "Drafting", tone: "bg-accent/15 text-accent" },
-    generated: { label: "Generated", tone: "bg-emerald-400/10 text-emerald-400" },
+    generated: { label: "Generated", tone: "bg-ok/10 text-ok" },
     not_filing: { label: "Not filing", tone: "bg-bg-elevated text-ink-muted" },
-    pending_decision: { label: "Pending decision", tone: "bg-amber-400/10 text-amber-300" },
+    pending_decision: { label: "Pending decision", tone: "bg-warn/10 text-warn" },
   };
   const { label, tone } = map[status];
   return (

@@ -41,7 +41,7 @@ export function KnowledgeSearch() {
           {busy ? "Asking…" : "Ask"}
         </button>
       </form>
-      {error && <p className="mt-2 px-1 text-[12px] text-red-400">{error}</p>}
+      {error && <p className="mt-2 px-1 text-[12px] text-danger">{error}</p>}
       <p className="mt-2 flex flex-wrap items-baseline justify-between gap-2 px-1 text-[12px] text-ink-muted">
         <span>Answers come from IRS and FTB publications, with a citation for each one.</span>
         <Link href="/library" className="text-ink-secondary hover:text-ink-primary">

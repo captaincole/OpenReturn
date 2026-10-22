@@ -1,10 +1,11 @@
 /*
  * Top bar for the person-scope pages (home, /ask, /library — no active
- * return). Brand logo, page title, a link to the reference library,
- * avatar tag. The caller derives `initials` with deriveProfile
+ * return). Brand logo, page title, a link to the reference library, the
+ * theme switch, avatar tag. The caller derives `initials` with deriveProfile
  * (display name, or email as the fallback).
  */
 
+import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
 
 export function HomeTopBar({ initials, title = "Home" }: { initials: string; title?: string }) {
@@ -26,6 +27,7 @@ export function HomeTopBar({ initials, title = "Home" }: { initials: string; tit
       >
         Reference Library
       </Link>
+      <ThemeToggle />
       <div className="flex h-8 w-8 items-center justify-center rounded-full border border-accent/40 bg-accent/20 text-xs font-medium text-accent">
         {initials}
       </div>
