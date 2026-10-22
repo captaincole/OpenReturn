@@ -303,11 +303,12 @@ Cost: ~$0.50 Haiku contextualization per doc; embeddings are local and free (Emb
 ### Ingest pipeline
 
 ```
-PDF → shaOfFile (compare to ref_documents.sha256 — skip if match)
+sidecar sha256 (compare to ref_documents.sha256 — skip if match)
+    → ensureSourcePdf (disk, else corpus.db, else sourceUrl; sha256 checked)
     → unpdf extractText (per-page text)
     → parseDoc (heading detection → Document/Section/Block tree, stable IDs)
     → contextualize (Haiku per block, section-scoped prompt cache)
-    → writeDocument (insert rows, embedding=NULL)
+    → writeDocument (insert rows, embedding=NULL) + setDocumentPdf (ref_document_files)
     → embed (embeddinggemma-2 via Ollama /api/embed, batches of 32, task prefixes)
     → setBlockEmbeddings (batched UPDATEs + ref_meta.embedding_model stamp)
 ```
@@ -350,8 +351,8 @@ Agent tooling lives under `apps/agent/scripts/`; engine scripts under `packages/
 | subcommand | use |
 |---|---|
 | `fetch` | install the prebuilt corpus.db (local seed or sha-verified release download) |
-| `sync` | idempotent corpus sync from `packages/sources/**/{instructions,publication}.pdf` |
-| `status [--strict]` | diff repo PDFs vs corpus.db |
+| `sync` | idempotent corpus sync from the `packages/sources/**/{instructions,publication}.meta.json` sidecars; fetches PDFs as needed |
+| `status [--strict]` | diff repo sidecars vs corpus.db (no PDF needed) |
 | `ingest` | manual single-doc ingest (any PDF path; debug flags) |
 | `reembed [--all]` | re-embed NULL blocks; `--all` after a model switch |
 | `check` | row counts + per-doc embedding coverage |

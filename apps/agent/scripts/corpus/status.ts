@@ -132,7 +132,13 @@ async function run(argv: string[]): Promise<void> {
 
 export const statusCommand: Command = {
   name: "status",
-  summary: "Diff repo instruction PDFs vs corpus.db (present/drift/missing/extra)",
-  options: [{ flag: "--strict", desc: "exit non-zero on any drift (for CI/pre-push)" }],
+  summary:
+    "Diff the repo's sidecars vs corpus.db (present/drift/missing/extra/unconfigured/no PDF)",
+  options: [
+    {
+      flag: "--strict",
+      desc: "exit non-zero on drift, missing, extra or unconfigured (a missing stored PDF does not count)",
+    },
+  ],
   run,
 };

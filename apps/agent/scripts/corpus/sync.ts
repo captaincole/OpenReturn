@@ -20,7 +20,7 @@ import { ingestRefDoc } from "../../src/refdocs/ingest";
 import { walkCorpus, type CorpusEntry } from "../../src/refdocs/walkCorpus";
 import type { Command } from "../lib/cli";
 
-type SyncAction = "ingested" | "replaced" | "stored" | "skipped";
+type SyncAction = "ingested" | "replaced" | "stored" | "pdf-unavailable" | "skipped";
 
 interface SyncResult {
   ok: { docId: string; action: SyncAction }[];
@@ -37,7 +37,10 @@ interface SyncFlags {
  * One document. Current in corpus.db (same sha256 as the sidecar) → skip
  * without touching the PDF, unless its PDF is not stored yet ("stored":
  * a corpus ingested before ref_document_files existed). Otherwise fetch
- * the PDF if it is not on disk (refdocs/fetchSource.ts) and ingest.
+ * the PDF if it is not on disk (refdocs/fetchSource.ts) and ingest. A
+ * PDF that cannot be stored for a current document is a warning, not a
+ * failure: the document is ingested and searchable, and `corpus status`
+ * keeps listing it under "no PDF".
  */
 async function syncOne(
   entry: CorpusEntry,
@@ -48,8 +51,15 @@ async function syncOne(
   const existing = await getDocument(docId);
   if (existing?.sha256 === entry.sidecar.sha256 && !flags.force) {
     if (stored.has(docId)) return { docId, action: "skipped" };
-    await setDocumentPdf(docId, await ensureSourcePdf(entry));
-    return { docId, action: "stored" };
+    try {
+      await setDocumentPdf(docId, await ensureSourcePdf(entry));
+      return { docId, action: "stored" };
+    } catch (err) {
+      console.warn(
+        `  ! ${docId}: PDF not stored — ${err instanceof Error ? err.message : String(err)}`,
+      );
+      return { docId, action: "pdf-unavailable" };
+    }
   }
 
   await ensureSourcePdf(entry);
@@ -108,7 +118,7 @@ async function run(argv: string[]): Promise<void> {
   const count = (...actions: SyncAction[]) =>
     result.ok.filter((r) => actions.includes(r.action)).length;
   console.log(
-    `\n[corpus sync] done: ${count("ingested", "replaced")} ingested/replaced, ${count("stored")} PDF stored, ${count("skipped")} skipped, ${result.failed.length} failed, ${result.unconfigured.length} unconfigured`,
+    `\n[corpus sync] done: ${count("ingested", "replaced")} ingested/replaced, ${count("stored")} PDF stored, ${count("pdf-unavailable")} PDF unavailable, ${count("skipped")} skipped, ${result.failed.length} failed, ${result.unconfigured.length} unconfigured`,
   );
 
   if (result.failed.length > 0 || result.unconfigured.length > 0) {
