@@ -1,6 +1,6 @@
 /*
  * A preparer's style reaches the engine as an input row
- * (`decisions.rounding.*`). It is not an AI decision: Luca never records
+ * (`decisions.rounding.*`). It is not an AI decision: Cade never records
  * it, and Summa's own returns use the IRS default. It exists so a
  * comparison against another preparer's filed return can match how
  * that preparer formatted it. Set it on `Scenario.preparer.rounding`.

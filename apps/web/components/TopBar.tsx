@@ -7,7 +7,7 @@
  * the active return.
  *
  * Structure:
- *   [W → /]  [Return picker ▾]               [Luca is working] [☀] [AC]
+ *   [W → /]  [Return picker ▾]               [Cade is working] [☀] [AC]
  *
  * The return picker is the title-weight element. It uses font-semibold
  * sans because Fraunces renders numerals with cursive stylistic features
@@ -167,7 +167,7 @@ function AccountMenu({ activeReturn }: { activeReturn: TaxReturn }) {
 }
 
 export function TopBar({ activeReturn, returns }: TopBarProps) {
-  const { lucaBusy } = useAppShell();
+  const { cadeBusy } = useAppShell();
 
   return (
     <header className="relative z-30 flex h-14 shrink-0 items-center gap-3 border-b border-border-subtle bg-bg-base/95 px-4 backdrop-blur-sm lg:px-6">
@@ -188,10 +188,10 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
 
       {/* Right cluster */}
       <div className="flex shrink-0 items-center gap-2">
-        {lucaBusy && (
+        {cadeBusy && (
           <div className="hidden items-center gap-2 rounded-lg border border-warn/30 bg-warn/10 px-2.5 py-1.5 text-xs text-warn sm:flex">
             <span className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-warn" />
-            <span>Luca is working</span>
+            <span>Cade is working</span>
           </div>
         )}
 

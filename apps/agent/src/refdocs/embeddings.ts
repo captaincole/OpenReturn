@@ -3,7 +3,7 @@
  * and query-time search vectors) routes through here. Embeddings run
  * locally via Ollama (EmbeddingGemma 2 by default), so RAG costs nothing
  * and needs no API key. Env knobs follow the "provider/model" + _URL
- * convention of LUCA_MODEL / JUDGE_MODEL (see src/mastra/models.ts):
+ * convention of CADE_MODEL / JUDGE_MODEL (see src/mastra/models.ts):
  *
  *   EMBEDDINGS_MODEL      default "ollama/embeddinggemma-2". Only the
  *                         ollama provider is supported.

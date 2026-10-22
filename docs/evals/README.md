@@ -13,7 +13,7 @@ One number per model: the mean of its flow scores (shown only when the model ran
 
 ## Ingest
 
-Each model reads every scenario source document and calls Luca's ingest tools. A document scores the share of ground-truth fields its runs wrote correctly; a run with no ingest call scores 0. Each capability is the mean over its documents; the flow score is the mean of the capabilities. Raw numbers: [ingest.md](ingest.md).
+Each model reads every scenario source document and calls Cade's ingest tools. A document scores the share of ground-truth fields its runs wrote correctly; a run with no ingest call scores 0. Each capability is the mean over its documents; the flow score is the mean of the capabilities. Raw numbers: [ingest.md](ingest.md).
 
 | Model | **Ingest** | W-2 | 1099 | Invoices |
 | --- | --- | --- | --- | --- |

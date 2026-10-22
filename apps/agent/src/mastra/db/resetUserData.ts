@@ -1,4 +1,4 @@
-import { luca } from "../agents/luca";
+import { cade } from "../agents/cade";
 import { asNum, asStr, ensureAppSchema, getAppDb } from "./appDb";
 import { deleteBlob } from "./blobStore";
 
@@ -74,7 +74,7 @@ export async function resetCurrentUserData(userId: string): Promise<PerUserReset
    * this user's threads, then delete each one.
    */
   let mastraThreadsDeleted = 0;
-  const memory = await luca.getMemory();
+  const memory = await cade.getMemory();
   if (memory) {
     const { threads } = await memory.listThreads({
       filter: { resourceId: userId },

@@ -3,7 +3,7 @@ import type { MastraModelConfig } from "@mastra/core/llm";
 /*
  * The app has exactly three model roles:
  *
- *   luca      — the conversation agent. Must be multimodal (reads
+ *   cade      — the conversation agent. Must be multimodal (reads
  *               W-2/1099 images inline) and handle multi-step tool
  *               orchestration.
  *   judge     — the grounding judges in workflows/reviewDecision
@@ -21,7 +21,7 @@ import type { MastraModelConfig } from "@mastra/core/llm";
  * contextualization) is operator-side tooling whose output ships
  * prebuilt. Those are deliberately not routed through this module.
  *
- * Configuration contract (per role, LUCA_* / JUDGE_*):
+ * Configuration contract (per role, CADE_* / JUDGE_*):
  *
  *   <ROLE>_MODEL          REQUIRED. "provider/model" string. Without a
  *                         URL it resolves through Mastra's provider
@@ -39,7 +39,7 @@ import type { MastraModelConfig } from "@mastra/core/llm";
  * .env.development, so a fresh clone still boots without research.
  */
 
-export type ModelRole = "luca" | "judge";
+export type ModelRole = "cade" | "judge";
 
 /*
  * Providers whose APIs accept PDF file parts directly. Everything else
@@ -64,7 +64,7 @@ export function modelFor(role: ModelRole): MastraModelConfig {
         `"provider/model" string (e.g. anthropic/claude-sonnet-4-6, or ` +
         `ollama/qwen3-vl:8b with ${prefix}_MODEL_URL pointing at your ` +
         `server). Set it in apps/agent/.env.development. The app refuses ` +
-        `to guess which model handles ${role === "luca" ? "conversations" : "grounding reviews"}.`,
+        `to guess which model handles ${role === "cade" ? "conversations" : "grounding reviews"}.`,
     );
   }
   const url = process.env[`${prefix}_MODEL_URL`];

@@ -21,13 +21,13 @@ const DATA_KEYS = ["APP_DB_PATH", "MASTRA_DB_PATH", "DOCUMENTS_PATH"];
 
 /*
  * Decision reviews are off by default. On a local model they share the
- * GPU with Luca and make each turn several times slower, and the Alex
+ * GPU with Cade and make each turn several times slower, and the Alex
  * test does not test grounding. E2E_DECISION_REVIEW=on turns them on.
  */
 const DECISION_REVIEW = process.env.E2E_DECISION_REVIEW ?? "off";
 
 /*
- * E2E_LUCA_MODEL / E2E_JUDGE_MODEL run a role on another model, for
+ * E2E_CADE_MODEL / E2E_JUDGE_MODEL run a role on another model, for
  * example anthropic/claude-haiku-5-5. Its URL comes from
  * E2E_<ROLE>_MODEL_URL; without one, the model is a cloud model (key
  * from apps/agent/.env). Defaults come from E2E_* lines in the gitignored
@@ -42,7 +42,7 @@ function loadE2eDefaults() {
 }
 loadE2eDefaults();
 
-const ROLES = ["LUCA", "JUDGE"].filter((role) => process.env[`E2E_${role}_MODEL`]);
+const ROLES = ["CADE", "JUDGE"].filter((role) => process.env[`E2E_${role}_MODEL`]);
 const roleKeys = ROLES.flatMap((r) => [`${r}_MODEL`, `${r}_MODEL_URL`, `${r}_MODEL_API_KEY`]);
 const roleOverrides = ROLES.flatMap((r) => {
   const url = process.env[`E2E_${r}_MODEL_URL`];

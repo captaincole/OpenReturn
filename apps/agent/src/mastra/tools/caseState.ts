@@ -13,7 +13,7 @@ import { loadAndEvaluateScenario } from "../loadScenario";
 import { requireUserContext } from "./userContext";
 
 /*
- * Live case state for Luca. Runs the form engine against the current fact
+ * Live case state for Cade. Runs the form engine against the current fact
  * and decision state and returns:
  *   - summaries for Form 1040 and CA 540 (mustFile result, line count,
  *     blockers)
@@ -21,7 +21,7 @@ import { requireUserContext } from "./userContext";
  *   - convenience money fields pulled from specific Form 1040 / CA 540 lines
  *   - the most recent AI decisions for activity-feed display
  *
- * Luca calls this at the start of every turn to learn:
+ * Cade calls this at the start of every turn to learn:
  *   - which forms are required, computed, or blocked
  *   - which scope decisions or facts are still missing (= what to ask next)
  *   - the current refund/owed picture, when computed
@@ -239,7 +239,7 @@ export const getCaseState = createTool({
       ),
     factCount: z.number(),
     /**
-     * Account email. Luca records it as identity.email at doc-gen time
+     * Account email. Cade records it as identity.email at doc-gen time
      * after he confirms it with the user.
      */
     authEmail: z.string().nullable(),

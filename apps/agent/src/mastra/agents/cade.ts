@@ -10,15 +10,15 @@ import { generateTaxDocuments } from "../tools/generateTaxDocuments";
 import { INGEST_MAX_OUTPUT_TOKENS, ingestTools } from "../tools/ingestTools";
 import { requestDocumentUpload } from "../tools/requestDocument";
 import { listOpenQuestionsTool, recordTaxFacts, resolveOpenQuestion } from "../tools/taxFacts";
-import { lucaInstructions } from "./luca.instructions";
-import { lucaWorkingMemorySchema } from "./luca.workingMemory";
+import { cadeInstructions } from "./cade.instructions";
+import { cadeWorkingMemorySchema } from "./cade.workingMemory";
 import { PdfAttachmentRasterizer } from "./pdfAttachments";
 
-export const luca = new Agent({
-  id: "luca",
-  name: "Luca",
-  instructions: lucaInstructions,
-  model: modelFor("luca"),
+export const cade = new Agent({
+  id: "cade",
+  name: "Cade",
+  instructions: cadeInstructions,
+  model: modelFor("cade"),
   inputProcessors: [new PdfAttachmentRasterizer()],
   /*
    * Multi-step: get-case-state + maybe one ingest + a record-ai-decision
@@ -30,7 +30,7 @@ export const luca = new Agent({
   defaultGenerateOptionsLegacy: { maxSteps: 20 },
   defaultStreamOptionsLegacy: { maxSteps: 20 },
   tools: {
-    // Primary tools Luca uses every turn
+    // Primary tools Cade uses every turn
     getCaseState,
     ...ingestTools,
     recordTaxFacts,
@@ -42,7 +42,7 @@ export const luca = new Agent({
     // End-of-session artifact generation
     generateTaxDocuments,
     /*
-     * Secondary: listOpenQuestions/resolveOpenQuestion remain so Luca can
+     * Secondary: listOpenQuestions/resolveOpenQuestion remain so Cade can
      * see and clear rows that the review workflow writes. He no longer
      * authors his own open questions; those live in working memory now.
      */
@@ -58,7 +58,7 @@ export const luca = new Agent({
      * runtime state.
      */
     storage: new LibSQLStore({
-      id: "luca-memory",
+      id: "cade-memory",
       url: mastraDbUrl(),
     }),
     options: {
@@ -66,12 +66,12 @@ export const luca = new Agent({
        * Thread-scoped: there is one thread per user × return year
        * (threadIdFor in the web app), so working memory follows each
        * filing's conversation. Mastra auto-registers updateWorkingMemory
-       * as a tool; luca.workingMemory.ts documents the schema shape.
+       * as a tool; cade.workingMemory.ts documents the schema shape.
        */
       workingMemory: {
         enabled: true,
         scope: "thread",
-        schema: lucaWorkingMemorySchema,
+        schema: cadeWorkingMemorySchema,
       },
     },
   }),

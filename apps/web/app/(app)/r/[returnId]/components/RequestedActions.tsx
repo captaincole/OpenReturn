@@ -19,25 +19,25 @@ import { useEffect, useRef, useState } from "react";
 export const POLL_INTERVAL_MS = 3000;
 
 /*
- * Requested Actions — things Luca needs the user to DO. Pulls live rows
+ * Requested Actions — things Cade needs the user to DO. Pulls live rows
  * from requested_actions (status 'open' or 'processing') through
  * /api/requested-actions on a fast poll, plus an immediate refetch after
  * resets and turns.
  *
  * v1 handles only kind='upload' (document requests). Upload runs the
  * existing uploadDocument() flow, then marks the action 'processing'
- * with the new document id; the card stays visible until Luca dismisses
+ * with the new document id; the card stays visible until Cade dismisses
  * it after ingest. Skip sets status 'skipped', which removes the card
  * because the query returns only open and processing rows.
  */
 export function RequestedActionsCard() {
-  const { lucaBusy, sendChat, setMobilePane, resetTick, turnTick } = useAppShell();
+  const { cadeBusy, sendChat, setMobilePane, resetTick, turnTick } = useAppShell();
   const [actions, setActions] = useState<RequestedAction[] | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
 
   /*
    * Fetch on mount, reset, and turn, then poll. The poll replaces the
-   * old realtime channel and also catches Luca's background dismissals.
+   * old realtime channel and also catches Cade's background dismissals.
    */
   useEffect(() => {
     let cancelled = false;
@@ -65,7 +65,7 @@ export function RequestedActionsCard() {
     try {
       const uploaded = await uploadDocument(file);
       /*
-       * The card flips to "processing" and stays visible until Luca
+       * The card flips to "processing" and stays visible until Cade
        * calls dismiss-requested-action after ingest. This update is
        * optimistic; the next poll patches the same state.
        */
@@ -75,7 +75,7 @@ export function RequestedActionsCard() {
       );
       /*
        * Mobile users cannot see the chat from the workspace pane. Flip
-       * them to it so they see Luca react to the upload.
+       * them to it so they see Cade react to the upload.
        */
       setMobilePane("chat");
       /*
@@ -121,7 +121,7 @@ export function RequestedActionsCard() {
       </div>
       {isEmpty ? (
         <div className="px-5 pt-1 pb-5 text-sm leading-relaxed text-ink-muted">
-          Nothing waiting on you. Luca will drop a card here when he needs a specific document.
+          Nothing waiting on you. Cade will drop a card here when he needs a specific document.
         </div>
       ) : (
         <div className="space-y-2.5 px-5 pb-5">
@@ -129,7 +129,7 @@ export function RequestedActionsCard() {
             <ActionCard
               key={a.id}
               action={a}
-              busy={busyId === a.id || lucaBusy}
+              busy={busyId === a.id || cadeBusy}
               onUpload={(file) => void handleUpload(a, file)}
               onSkip={() => void handleSkip(a)}
             />
@@ -199,7 +199,7 @@ function ActionCard({
         {isProcessing ? (
           <div className="mt-0.5 flex items-center gap-1.5 text-[12px] text-warn/90">
             <span className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-warn" />
-            <span>Luca is reviewing this…</span>
+            <span>Cade is reviewing this…</span>
           </div>
         ) : (
           action.detail && (

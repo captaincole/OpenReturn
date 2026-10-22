@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 import { useEffect, useRef, useState } from "react";
 
 /*
- * Renders Luca's rolling plan from /app/state. The parent page re-fetches
+ * Renders Cade's rolling plan from /app/state. The parent page re-fetches
  * state after each chat turn or reset, and the card re-renders. Items keep
  * stable ids across status changes, so the same row visually transitions
  * todo → doing → done. When a row flips to done, it stays visible for
@@ -55,7 +55,7 @@ export function PlanCard({ plan }: PlanCardProps) {
       }
 
       /*
-       * The upstream plan dropped these items, for example when Luca
+       * The upstream plan dropped these items, for example when Cade
        * rewrote the array without them. Keep them briefly with their last
        * status so the disappearance is not a hard pop-out. We cannot tell
        * a deliberate drop from a missed status flip, so treat both the
@@ -124,7 +124,7 @@ export function PlanCard({ plan }: PlanCardProps) {
       <div className="min-h-0 flex-1 overflow-y-auto">
         {isEmpty ? (
           <div className="px-5 pt-1 pb-5 text-sm leading-relaxed text-ink-muted">
-            Luca&rsquo;s next steps will appear here as he works.
+            Cade&rsquo;s next steps will appear here as he works.
           </div>
         ) : (
           <ul className="space-y-2.5 px-5 pb-4">

@@ -1,6 +1,6 @@
 # apps/web
 
-The Summa web app: Next.js 16 (App Router). You chat with Luca, upload documents, watch your return take shape, and ask the tax code questions.
+The Summa web app: Next.js 16 (App Router). You chat with Cade, upload documents, watch your return take shape, and ask the tax code questions.
 
 ## Run
 
@@ -19,7 +19,7 @@ The first run redirects to `/setup` to create the owner account. The env file is
 | --- | --- |
 | `/setup`, `/login` | First-run owner account, then a password sign-in |
 | `/` | Home: tax returns, estimates, the tax code search box |
-| `/r/[returnId]` | A return: chat with Luca, activity, forms, documents |
+| `/r/[returnId]` | A return: chat with Cade, activity, forms, documents |
 | `/ask/[threadId]` | Ask The Tax Code: cited answers and follow-up questions |
 | `/library` | The reference documents the answers can cite |
 | `/library/[docId]` | One HTML reference document (FTB web page), opened at a cited section |

@@ -3,7 +3,7 @@
 /*
  * The conversation surface. On desktop it fills AppShell's left pane; on
  * mobile it fills the "Chat" tab. It has no header. Identity reads from
- * the avatar on each assistant message plus the Luca badge in the input.
+ * the avatar on each assistant message plus the Cade badge in the input.
  *
  * AppShell.sendChat does all sending. The form submit here and the
  * Requested Actions card upload call the same function. Exactly one code
@@ -22,7 +22,7 @@ interface ChatPaneProps {
 }
 
 export function ChatPane({ activeReturn }: ChatPaneProps) {
-  const { messages, lucaBusy, mobilePane } = useAppShell();
+  const { messages, cadeBusy, mobilePane } = useAppShell();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const isPlaceholder = !activeReturn.realDataAvailable;
@@ -37,7 +37,7 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
   }, [messages, mobilePane]);
 
   /*
-   * For placeholder returns, render one hardcoded Luca turn instead of
+   * For placeholder returns, render one hardcoded Cade turn instead of
    * the real message buffer. This keeps the multi-return UX honest
    * without backend support for non-2025 threads.
    */
@@ -51,12 +51,12 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
       <div ref={scrollRef} className="min-h-0 flex-1 space-y-5 overflow-y-auto px-5 pt-6 pb-3">
         {isEmpty && (
           <div className="flex items-start gap-2.5 text-sm text-ink-muted">
-            <LucaAvatar />
+            <CadeAvatar />
             <div className="pt-0.5">Say hi to start.</div>
           </div>
         )}
         {renderMessages.map((msg) => (
-          <MessageBubble key={msg.id} msg={msg} lucaBusy={lucaBusy} />
+          <MessageBubble key={msg.id} msg={msg} cadeBusy={cadeBusy} />
         ))}
       </div>
 
@@ -65,10 +65,10 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
   );
 }
 
-function MessageBubble({ msg, lucaBusy }: { msg: ChatMessage; lucaBusy: boolean }) {
+function MessageBubble({ msg, cadeBusy }: { msg: ChatMessage; cadeBusy: boolean }) {
   return (
     <div className={msg.role === "user" ? "flex justify-end" : "flex items-start gap-2.5"}>
-      {msg.role === "assistant" && <LucaAvatar />}
+      {msg.role === "assistant" && <CadeAvatar />}
       <div
         data-message-role={msg.role}
         className={cn(
@@ -96,7 +96,7 @@ function MessageBubble({ msg, lucaBusy }: { msg: ChatMessage; lucaBusy: boolean 
             msg.content
           )
         ) : (
-          lucaBusy && <TypingDots />
+          cadeBusy && <TypingDots />
         )}
       </div>
     </div>
@@ -105,19 +105,19 @@ function MessageBubble({ msg, lucaBusy }: { msg: ChatMessage; lucaBusy: boolean 
 
 /* The input card: plan rail, attachment strip, textarea, action row. */
 function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
-  const { state, lucaBusy, sendChat } = useAppShell();
+  const { state, cadeBusy, sendChat } = useAppShell();
   const [input, setInput] = useState("");
   const [attachment, setAttachment] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const messageInputRef = useRef<HTMLTextAreaElement>(null);
 
   /*
-   * sendChat disables the textarea via lucaBusy. Restore focus when it
+   * sendChat disables the textarea via cadeBusy. Restore focus when it
    * flips back so the user can continue to type without a click.
    */
   useEffect(() => {
-    if (!lucaBusy && !isPlaceholder) messageInputRef.current?.focus();
-  }, [lucaBusy, isPlaceholder]);
+    if (!cadeBusy && !isPlaceholder) messageInputRef.current?.focus();
+  }, [cadeBusy, isPlaceholder]);
 
   function clearAttachment() {
     setAttachment(null);
@@ -126,7 +126,7 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
 
   async function onSubmit(e?: FormEvent) {
     e?.preventDefault();
-    if (isPlaceholder || lucaBusy) return;
+    if (isPlaceholder || cadeBusy) return;
     const text = input.trim();
     const file = attachment;
     if (!text && !file) return;
@@ -158,14 +158,14 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
         <input
           ref={fileInputRef}
           type="file"
-          aria-label="Attach a file for Luca"
+          aria-label="Attach a file for Cade"
           accept="application/pdf,image/png,image/jpeg,image/webp"
           onChange={(e) => setAttachment(e.target.files?.[0] ?? null)}
           className="hidden"
         />
         <textarea
           ref={messageInputRef}
-          aria-label="Message Luca"
+          aria-label="Message Cade"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
@@ -178,13 +178,13 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
           placeholder={
             isPlaceholder
               ? "This return is a placeholder."
-              : lucaBusy
-                ? "Luca is thinking…"
+              : cadeBusy
+                ? "Cade is thinking…"
                 : attachment
                   ? "Add a note (optional)…"
-                  : "Reply to Luca…"
+                  : "Reply to Cade…"
           }
-          disabled={lucaBusy || isPlaceholder}
+          disabled={cadeBusy || isPlaceholder}
           autoFocus={!isPlaceholder}
           className="w-full resize-none bg-transparent px-4 pt-3.5 pb-1 text-[14px] leading-relaxed text-ink-primary placeholder:text-ink-muted focus:outline-none disabled:cursor-not-allowed"
         />
@@ -192,7 +192,7 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
           <IconButton
             title="Attach a document"
             onClick={() => fileInputRef.current?.click()}
-            disabled={lucaBusy || isPlaceholder}
+            disabled={cadeBusy || isPlaceholder}
           >
             <PlusIcon />
           </IconButton>
@@ -206,12 +206,12 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
             <span className="flex h-4 w-4 items-center justify-center rounded-full border border-accent/40 bg-accent/20">
               <span className="font-serif text-[9px] leading-none text-accent">T</span>
             </span>
-            <span>Luca</span>
+            <span>Cade</span>
           </div>
 
           <button
             type="submit"
-            disabled={lucaBusy || isPlaceholder || (!input.trim() && !attachment)}
+            disabled={cadeBusy || isPlaceholder || (!input.trim() && !attachment)}
             title="Send"
             className="ml-1 flex h-8 w-8 items-center justify-center rounded-full bg-accent text-white transition-colors hover:bg-accent-hover disabled:bg-bg-elevated disabled:text-ink-muted"
           >
@@ -381,7 +381,7 @@ function TypingDots() {
   );
 }
 
-function LucaAvatar() {
+function CadeAvatar() {
   return (
     <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-accent/30 bg-accent/15">
       <span className="font-serif text-[11px] leading-none text-accent">T</span>

@@ -79,7 +79,7 @@ export function FormsSection() {
             Tax forms
           </h2>
           <p className="mt-1 text-sm text-ink-secondary">
-            Everything Luca is preparing for your 2025 return. Snapshots regenerate as facts land.
+            Everything Cade is preparing for your 2025 return. Snapshots regenerate as facts land.
           </p>
         </div>
         <span className="text-[11px] tracking-wider text-ink-muted uppercase">
@@ -91,7 +91,7 @@ export function FormsSection() {
         <div className="card px-6 py-8 text-center">
           <div className="text-sm text-ink-muted">No forms yet.</div>
           <div className="mt-1 text-xs text-ink-faint">
-            They appear here as Luca captures facts and packages the return.
+            They appear here as Cade captures facts and packages the return.
           </div>
         </div>
       ) : (

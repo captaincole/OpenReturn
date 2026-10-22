@@ -1,6 +1,6 @@
 import { MASTRA_RESOURCE_ID_KEY } from "@mastra/core/request-context";
 import { registerApiRoute } from "@mastra/core/server";
-import { luca } from "../../agents/luca";
+import { cade } from "../../agents/cade";
 import { deleteFilingBlobs } from "../../db/blobStore";
 import { deleteFilingCascade, getMembership } from "../../db/filings";
 
@@ -61,7 +61,7 @@ export const deleteFilingRoute = registerApiRoute("/app/filings/:filingId", {
      * gone.
      */
     try {
-      const memory = await luca.getMemory();
+      const memory = await cade.getMemory();
       if (memory) {
         await memory.deleteThread(threadIdFor(callerId, taxYear));
       }

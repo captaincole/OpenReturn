@@ -11,7 +11,7 @@ import type { Scenario } from "../types";
  * document) and re-evaluate. When a filed form's output changes, the
  * pending lists must name a new key. Otherwise the form computes without
  * the input (a blank line, or a wrong but plausible number) and nothing
- * tells Luca to ask. Fix that with a missingInputs entry in the form's
+ * tells Cade to ask. Fix that with a missingInputs entry in the form's
  * resolver, or list the input below with the reason it is optional.
  *
  * Document facts (employer.*, account.*, payer.*, employee.*, vendor.*)
@@ -25,7 +25,7 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "override; the default box comes from the 1099-B facts",
   ],
   [/^identity\.address\.apt$/, "not every address has an apartment"],
-  [/^identity\.email$/, "Luca records the login email at doc-gen time"],
+  [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +

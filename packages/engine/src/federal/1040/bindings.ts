@@ -44,7 +44,7 @@ export function register(): void {
       /*
        * MANUAL EDIT: AI flagged both digital-assets widgets as
        * unsupported. The IRS makes this a mandatory yes/no for every
-       * 1040 filer, so Luca must ask. The boolean
+       * 1040 filer, so Cade must ask. The boolean
        * `decisions.scope.has_digital_assets` decision drives it. The
        * matching checkbox renders when the decision lands on its side.
        * When the decision is undefined, neither checkbox fires. An

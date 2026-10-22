@@ -92,7 +92,7 @@ documents (`blank.pdf`, instructions) use the same subpath in
    answer (a decision, or a fact that is not a document), list it in
    `missingInputs: { "<formId>": missingInputs({ "<key>": value }) }`.
    Otherwise a missing answer leaves a line blank or wrong and nothing
-   tells Luca to ask. `tests/integration/requiredInputs.test.ts` fails when you forget.
+   tells Cade to ask. `tests/integration/requiredInputs.test.ts` fails when you forget.
 4. Add a `makeFormSpec` entry (+ catalog import) to the jurisdiction's
    `index.ts`.
 5. Add golden coverage under `tests/scenarios/`, and a catalog-fill golden

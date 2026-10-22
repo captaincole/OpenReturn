@@ -89,7 +89,7 @@ export function modelsFromArgs(argv: string[]): EvalModel[] {
  * A cloud model gets an empty URL, not a deleted one: modules imported
  * later run dotenv/config, which would restore a deleted URL from .env.
  */
-export function useModel(role: "LUCA" | "JUDGE", model: EvalModel): void {
+export function useModel(role: "CADE" | "JUDGE", model: EvalModel): void {
   process.env[`${role}_MODEL`] = model.id;
   process.env[`${role}_MODEL_URL`] = model.url ?? "";
 }

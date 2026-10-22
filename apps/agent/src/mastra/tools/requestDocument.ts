@@ -4,7 +4,7 @@ import { getAppDb, nowIso } from "../db/appDb";
 import { requireUserContext } from "./userContext";
 
 /*
- * request-document-upload: surface a structured "Luca needs you to upload
+ * request-document-upload: surface a structured "Cade needs you to upload
  * X" card on the user's dashboard. Use it when a specific tax document is
  * load-bearing for the return and the user has not already uploaded it.
  *
@@ -44,7 +44,7 @@ export const requestDocumentUpload = createTool({
     const db = getAppDb();
 
     /*
-     * Dedup: one open|processing card per documentType. When Luca calls
+     * Dedup: one open|processing card per documentType. When Cade calls
      * this tool twice for "W-2" (same turn, or across turns before the
      * upload), we return the existing card's id instead of stacking
      * duplicates on the dashboard. The user only ever sees one Upload

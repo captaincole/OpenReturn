@@ -5,7 +5,7 @@
  * lib/serverDb.ts queries).
  *
  * v1 only emits kind='upload'. The shape supports 'confirm' / 'decide'
- * for when Luca learns to surface structured non-document asks.
+ * for when Cade learns to surface structured non-document asks.
  */
 
 export type RequestedActionKind = "upload" | "confirm" | "decide";
@@ -40,8 +40,8 @@ export async function fetchOpenActions(taxYear: number): Promise<RequestedAction
 
 /*
  * Call this the moment the user's upload lands. The card stays visible
- * (status='processing' shows a "Luca is reviewing this" indicator) until
- * Luca calls dismiss-requested-action after ingest.
+ * (status='processing' shows a "Cade is reviewing this" indicator) until
+ * Cade calls dismiss-requested-action after ingest.
  */
 export async function markActionProcessing(actionId: string, documentId: string): Promise<void> {
   const res = await fetch(`/api/requested-actions/${encodeURIComponent(actionId)}`, {
