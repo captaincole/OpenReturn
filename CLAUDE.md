@@ -322,13 +322,13 @@ We write the rows BEFORE embedding so an embed failure (Ollama down) doesn't was
 
 ### Retrieval — `search-ref-docs` tool
 
-Single entry point. `callMatch` in `db/corpusSearch.ts` (the TS port of the old Postgres `match_ref_blocks` function) runs two legs and merges in JS: top-N from the FTS5 leg (`MATCH` + bm25, negated to higher-is-better) unioned with top-N from the vector leg (brute-force `vector_distance_cos` — exact and fast at low-thousands of blocks; no ANN index on purpose). Final ordering is merged best-of-leg: blocks hit by BOTH legs first, then best single-leg signal. Query embedding comes from the local model via `src/refdocs/embeddings.ts` (`EMBEDDINGS_MODEL`, default `ollama/embeddinggemma-2`).
+Single entry point. `callMatch` in `db/corpusSearch.ts` (the TS port of the old Postgres `match_ref_blocks` function) runs two legs and merges in JS: top-N from the FTS5 leg (`MATCH` + bm25, negated to higher-is-better) unioned with top-N from the vector leg (brute-force `vector_distance_cos` — exact and fast at low-thousands of blocks; no ANN index on purpose). Final ordering is reciprocal rank fusion: each leg ranks its own hits, and a block scores `1/(60 + rank)` from each leg that found it, so the legs count equally and bm25 is never compared with cosine (a max() of raw scores once let any keyword hit outrank every vector-only hit). Query embedding comes from the local model via `src/refdocs/embeddings.ts` (`EMBEDDINGS_MODEL`, default `ollama/embeddinggemma-2`).
 
 ```
 query
  → embedQuery (local Ollama) ┐
  → callMatch ─┬─ FTS5 top-50 (bm25 over ref_blocks_fts)          ┐
-              └─ vector top-50 (vector_distance_cos over blocks) ┘ → dedupe → merge → top-K
+              └─ vector top-50 (vector_distance_cos over blocks) ┘ → rank fusion (RRF) → top-K
 ```
 
 Falls back gracefully to keyword-only (searching always works; semantic quality is what degrades):

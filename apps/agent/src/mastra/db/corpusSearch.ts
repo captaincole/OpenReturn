@@ -76,7 +76,7 @@ function buildCitation(
  * characters (-, ", *, :, etc). Queries arrive as free text, so we reduce
  * them to alphanumeric tokens, quote each token, and join them with OR
  * for recall. bm25 still ranks blocks that match more terms higher, and
- * the merged best-of-leg scoring decides final order. Returns null when
+ * rank fusion with the vector leg decides final order. Returns null when
  * no searchable token survives, so the caller skips the FTS leg.
  */
 function toFtsMatchQuery(raw: string): string | null {
@@ -133,7 +133,7 @@ export async function getBlock(blockId: string): Promise<BlockDetail | null> {
  * ---------------------------------------------------------------------------
  */
 
-interface MatchRow {
+export interface MatchRow {
   block_id: string;
   doc_id: string;
   section_id: string | null;
@@ -312,7 +312,7 @@ export interface HybridSearchOpts {
 }
 
 /**
- * Hybrid retrieval: FTS top-N ∪ vector top-N → merged ordering → top-K.
+ * Hybrid retrieval: FTS top-N ∪ vector top-N → reciprocal rank fusion → top-K.
  *
  * Falls back to keyword (FTS-only) retrieval when the vector leg cannot
  * run. Search always works; only semantic quality degrades:
@@ -337,25 +337,39 @@ export async function hybridSearchRefDocs(opts: HybridSearchOpts): Promise<Searc
   });
   if (rows.length === 0) return [];
 
-  /*
-   * Merged ordering: blocks that hit both legs come first, then the best
-   * single-leg signal. We do not normalize bm25 against cosine;
-   * both-legs agreement is the strongest cheap relevance signal. The
-   * retired Voyage pipeline reranked here with rerank-2.5. A local
-   * cross-encoder is the future option if ordering quality becomes the
-   * bottleneck.
-   */
-  const scored = rows
-    .map((r) => {
-      const ftsScore = r.fts_rank ?? 0;
-      const vecScore = r.vector_distance != null ? 1 / (1 + r.vector_distance) : 0;
-      const bothLegs = r.fts_rank != null && r.vector_distance != null ? 1 : 0;
-      return { row: r, score: bothLegs + Math.max(ftsScore, vecScore) };
-    })
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit);
+  return fuseByRank(rows)
+    .slice(0, limit)
+    .map(({ row, score }) => rowToHit(row, score));
+}
 
-  return scored.map(({ row, score }) => rowToHit(row, score));
+/* Reciprocal rank fusion constant. 60 is the standard value. */
+const RRF_K = 60;
+
+/*
+ * Merged ordering: reciprocal rank fusion. Each leg ranks its own hits
+ * (bm25 for FTS, cosine distance for vectors), and a block scores
+ * 1 / (RRF_K + rank) from each leg that returned it. The two legs count
+ * equally, and their raw scores are never compared: bm25 runs ~10-30
+ * while cosine similarity is at most 1, so a max() of the two let any
+ * keyword hit outrank every block only the vector leg found. A block
+ * that both legs found still ranks high, because it scores twice.
+ */
+export function fuseByRank(rows: MatchRow[]): { row: MatchRow; score: number }[] {
+  const ranks = (value: (r: MatchRow) => number | null, higherIsBetter: boolean) => {
+    const ranked = rows
+      .filter((r) => value(r) != null)
+      .sort((a, b) => (higherIsBetter ? value(b)! - value(a)! : value(a)! - value(b)!));
+    return new Map(ranked.map((r, i) => [r.block_id, i + 1]));
+  };
+  const ftsRanks = ranks((r) => r.fts_rank, true);
+  const vectorRanks = ranks((r) => r.vector_distance, false);
+  const rrf = (rank: number | undefined) => (rank === undefined ? 0 : 1 / (RRF_K + rank));
+  return rows
+    .map((row) => ({
+      row,
+      score: rrf(ftsRanks.get(row.block_id)) + rrf(vectorRanks.get(row.block_id)),
+    }))
+    .sort((a, b) => b.score - a.score);
 }
 
 /*
