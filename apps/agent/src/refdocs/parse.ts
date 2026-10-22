@@ -243,7 +243,7 @@ function detectHeading(line: string, style: ParserStyle = "irs"): HeadingMatch |
   return null;
 }
 
-function slugifyHeading(s: string): string {
+export function slugifyHeading(s: string): string {
   return s
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")

@@ -1,9 +1,9 @@
 {
-  "version": "corpus-v3",
-  "description": "Prebuilt IRS/FTB reference corpus, tax year 2025: 35 documents (28 sets of form instructions, 7 IRS publications), 5,470 passages, FTS5 + embeddinggemma-2 768-dim embeddings, Haiku contextual summaries, and each document's source PDF (ref_document_files).",
+  "version": "corpus-v4",
+  "description": "Prebuilt IRS/FTB reference corpus, tax year 2025: 35 documents (31 PDFs — form instructions and 7 IRS publications — and 4 FTB instruction web pages), 4,997 passages, FTS5 + embeddinggemma-2 768-dim embeddings, Haiku contextual summaries, and each document's source file (ref_document_files; ref_documents.format says pdf or html).",
   "file": "corpus.db",
-  "sha256": "0f72db18665a00c01154ab147f7e4ba3e740552057b91bfa335bf8ead3b67f0a",
-  "sizeBytes": 74706944,
-  "url": "https://github.com/captaincole/summa-tax/releases/download/corpus-v3/corpus.db",
-  "_notes": "GitHub Release asset (corpus-v3 tag). Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in ref_meta), so clones running Ollama need no reembed. The PDFs live in the database, not in git; packages/sources keeps their sidecars. Everyone downloads the full corpus; per-state packs are a future option if size demands it."
+  "sha256": "8ecc2e5144ab7e49689d012f6d79fdd91c6e628598dc02ea8c84d3c14dee47f6",
+  "sizeBytes": 71966720,
+  "url": "https://github.com/captaincole/summa-tax/releases/download/corpus-v4/corpus.db",
+  "_notes": "GitHub Release asset (corpus-v4 tag). Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in ref_meta), so clones running Ollama need no reembed. The source files live in the database, not in git; packages/sources keeps their sidecars. corpus-v4 changed the schema (ref_documents.format, ref_document_files.source): replace an older corpus.db with `npm run corpus -- fetch --force`. Everyone downloads the full corpus; per-state packs are a future option if size demands it."
 }

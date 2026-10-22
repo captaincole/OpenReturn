@@ -1,8 +1,10 @@
 {
-  "docId": "ca-540-booklet-2025",
-  "title": "2025 California 540 Personal Income Tax Booklet",
+  "docId": "ca-540-inst-2025",
+  "title": "2025 Instructions for Form 540 — California Resident Income Tax Return",
   "publisher": "FTB",
   "taxYear": 2025,
-  "sourceUrl": null,
-  "sha256": "3320149a0bb9f2a5e7eeeb0119525895dfedfdc86a94b8786591eb57c14fe62c"
+  "sourceUrl": "https://www.ftb.ca.gov/forms/2025/2025-540-instructions.html",
+  "sha256": "795882a79aebb701a1fa4022e6ffd08d94fa4ee34ff6f1a4f0b439c2a54975a1",
+  "format": "html",
+  "cleanerVersion": 1
 }

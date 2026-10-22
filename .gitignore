@@ -27,9 +27,11 @@ e2e/.run/
 apps/agent/src/mastra/public/sources/
 
 # Corpus source documents are not committed: packages/sources keeps their
-# sidecars (docId, sourceUrl, sha256), and corpus.db stores the PDFs and
-# the extracted text. `npm run corpus -- sync` restores or downloads a PDF
-# when it has to ingest.
+# sidecars (docId, sourceUrl, sha256), and corpus.db stores the PDFs, the
+# cleaned HTML pages and the extracted text. `npm run corpus -- sync`
+# restores or downloads a source file when it has to ingest.
 packages/sources/**/instructions.pdf
 packages/sources/**/publication.pdf
+packages/sources/**/instructions.html
+packages/sources/**/publication.html
 packages/sources/**/*.canonical.txt

@@ -65,6 +65,7 @@ async function retrieve(queries: string[]): Promise<{ passages: Passage[]; log: 
     blockId: p.blockId,
     docId: p.docId,
     documentTitle: p.documentTitle,
+    format: p.format,
     sectionHeading: p.sectionHeading,
     pageNum: p.pageNum,
     text: p.text,

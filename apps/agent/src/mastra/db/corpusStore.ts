@@ -11,6 +11,9 @@ import { ensureCorpusSchema, getCorpusDb } from "./libsql";
 
 // ─── Corpus row types — consumed by src/refdocs/ (ingest pipeline) ───────
 
+/** What a document's source file is: a PDF, or a cleaned publisher web page. */
+export type SourceFormat = "pdf" | "html";
+
 export interface RefDocument {
   docId: string;
   title: string;
@@ -22,6 +25,8 @@ export interface RefDocument {
   totalPages: number;
   totalChars: number;
   canonicalTextPath: string;
+  /** "html" documents have no pages: everything is page 1, cited by section. */
+  format: SourceFormat;
 }
 
 export interface RefPage {
@@ -110,7 +115,7 @@ export async function getDocument(docId: string): Promise<RefDocument | null> {
   await ensureCorpusSchema();
   const res = await getCorpusDb().execute({
     sql: `SELECT doc_id, title, publisher, tax_year, source_path, source_url,
-                 sha256, total_pages, total_chars, canonical_text_path
+                 sha256, total_pages, total_chars, canonical_text_path, format
           FROM ref_documents WHERE doc_id = ? LIMIT 1`,
     args: [docId],
   });
@@ -127,8 +132,11 @@ export async function getDocument(docId: string): Promise<RefDocument | null> {
     totalPages: asNum(d.total_pages),
     totalChars: asNum(d.total_chars),
     canonicalTextPath: asStr(d.canonical_text_path),
+    format: asFormat(d.format),
   };
 }
+
+export const asFormat = (v: unknown): SourceFormat => (v === "html" ? "html" : "pdf");
 
 // ─── Mutations — used by the ingest pipeline ─────────────────────────────
 
@@ -184,8 +192,8 @@ export async function writeDocument(payload: IngestPayload): Promise<void> {
   await getCorpusDb().execute({
     sql: `INSERT INTO ref_documents
             (doc_id, title, publisher, tax_year, source_path, source_url,
-             sha256, total_pages, total_chars, canonical_text_path)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+             sha256, total_pages, total_chars, canonical_text_path, format)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     args: [
       d.docId,
       d.title,
@@ -197,6 +205,7 @@ export async function writeDocument(payload: IngestPayload): Promise<void> {
       d.totalPages,
       d.totalChars,
       d.canonicalTextPath,
+      d.format,
     ],
   });
 

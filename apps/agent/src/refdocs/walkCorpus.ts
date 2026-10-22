@@ -2,18 +2,23 @@ import { SOURCES_ROOT } from "@summa/sources";
 import type { Dirent } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
+import type { SourceFormat } from "../mastra/db/corpusStore";
 import type { ParserStyle } from "./parse";
 
 /*
  * Walks the @summa/sources tree (packages/sources/<year>/…) for corpus
  * sidecars: instructions.meta.json (form instructions, under forms/) and
  * publication.meta.json (an IRS/FTB publication, under publications/).
- * The sidecars are committed; their PDFs are not. A sidecar is the source
- * of truth for docId/title/publisher/taxYear/sourceUrl and the PDF's
- * sha256, so `corpus status` needs no PDF on disk and `corpus sync`
- * downloads one only when it has to ingest (refdocs/fetchSource.ts).
+ * The sidecars are committed; their source files are not. A source file
+ * is a PDF, or for "format": "html" a cleaned publisher web page
+ * (refdocs/html/cleanFtb.ts), saved beside the sidecar as
+ * instructions.pdf / instructions.html (publication.* likewise). A sidecar
+ * is the source of truth for docId/title/publisher/taxYear/sourceUrl and
+ * the source file's sha256, so `corpus status` needs no file on disk and
+ * `corpus sync` fetches one only when it has to ingest
+ * (refdocs/fetchSource.ts).
  *
- * A malformed sidecar, or a PDF with no sidecar, is reported as
+ * A malformed sidecar, or a source file with no sidecar, is reported as
  * `unconfigured`, not skipped: it is almost always a mistake. blank.pdf
  * files (fillable form templates) are ignored; the engine renders into
  * them, the corpus does not ingest them.
@@ -25,8 +30,10 @@ export interface RefDocSidecar {
   publisher: string;
   taxYear: number | null;
   sourceUrl: string | null;
-  /** sha256 of the source PDF: the corpus document's identity. */
+  /** sha256 of the source file: the corpus document's identity. */
   sha256: string;
+  /** "pdf" unless the sidecar says "html". */
+  format: SourceFormat;
   /*
    * Heading-detection style. The sidecar may set "parserStyle"
    * explicitly; otherwise it follows the publisher (FTB → "ftb").
@@ -35,19 +42,19 @@ export interface RefDocSidecar {
 }
 
 export interface CorpusEntry {
-  pdfPath: string; // absolute; the PDF may not be on disk (see pdfOnDisk)
-  pdfRelPath: string; // relative to the sources root, for display
+  sourcePath: string; // absolute; the file may not be on disk (see sourceOnDisk)
+  sourceRelPath: string; // relative to the sources root, for display
   sidecarPath: string; // absolute
   sidecar: RefDocSidecar;
-  pdfOnDisk: boolean;
+  sourceOnDisk: boolean;
 }
 
 export interface WalkResult {
   entries: CorpusEntry[];
-  unconfigured: { pdfPath: string; pdfRelPath: string; reason: string }[];
+  unconfigured: { sourcePath: string; sourceRelPath: string; reason: string }[];
 }
 
-const SOURCE_FILE = /^(instructions|publication)\.(pdf|meta\.json)$/;
+const SOURCE_FILE = /^(instructions|publication)\.(pdf|html|meta\.json)$/;
 
 async function walkSourceFiles(dir: string): Promise<string[]> {
   let entries: Dirent[];
@@ -68,30 +75,37 @@ async function walkSourceFiles(dir: string): Promise<string[]> {
 export async function walkCorpus(sourcesRoot: string = SOURCES_ROOT): Promise<WalkResult> {
   const root = resolve(sourcesRoot);
   const files = await walkSourceFiles(root);
-  const pdfs = new Set(files.filter((f) => f.endsWith(".pdf")));
+  const sources = new Set(files.filter((f) => !f.endsWith(".meta.json")));
 
   const entries: CorpusEntry[] = [];
   const unconfigured: WalkResult["unconfigured"] = [];
 
   for (const sidecarPath of files.filter((f) => f.endsWith(".meta.json"))) {
-    const pdfPath = sidecarPath.replace(/\.meta\.json$/, ".pdf");
-    const pdfRelPath = relative(root, pdfPath);
     const loaded = await loadSidecar(sidecarPath);
+    const ext = typeof loaded === "string" ? "pdf" : loaded.format;
+    const sourcePath = sidecarPath.replace(/\.meta\.json$/, `.${ext}`);
+    const sourceRelPath = relative(root, sourcePath);
     if (typeof loaded === "string") {
-      unconfigured.push({ pdfPath, pdfRelPath, reason: loaded });
+      unconfigured.push({ sourcePath, sourceRelPath, reason: loaded });
     } else {
       entries.push({
-        pdfPath,
-        pdfRelPath,
+        sourcePath,
+        sourceRelPath,
         sidecarPath,
         sidecar: loaded,
-        pdfOnDisk: pdfs.has(pdfPath),
+        sourceOnDisk: sources.has(sourcePath),
       });
     }
-    pdfs.delete(pdfPath);
+    // A leftover file in the other format (a document that moved to HTML) is not an error.
+    for (const other of ["pdf", "html"])
+      sources.delete(sidecarPath.replace(/\.meta\.json$/, `.${other}`));
   }
-  for (const pdfPath of pdfs) {
-    unconfigured.push({ pdfPath, pdfRelPath: relative(root, pdfPath), reason: "no sidecar" });
+  for (const sourcePath of sources) {
+    unconfigured.push({
+      sourcePath,
+      sourceRelPath: relative(root, sourcePath),
+      reason: "no sidecar",
+    });
   }
 
   return { entries, unconfigured };
@@ -106,7 +120,8 @@ async function loadSidecar(sidecarPath: string): Promise<RefDocSidecar | string>
     return `sidecar unreadable: ${(e as Error).message}`;
   }
   return (
-    coerceSidecar(parsed) ?? "sidecar missing required fields (docId, title, publisher, sha256)"
+    coerceSidecar(parsed) ??
+    "sidecar missing required fields (docId, title, publisher, sha256), or format is not pdf/html"
   );
 }
 
@@ -121,6 +136,7 @@ function coerceSidecar(v: unknown): RefDocSidecar | null {
   ) {
     return null;
   }
+  if (o.format !== undefined && o.format !== "pdf" && o.format !== "html") return null;
   const taxYear = typeof o.taxYear === "number" ? o.taxYear : null;
   const sourceUrl = typeof o.sourceUrl === "string" ? o.sourceUrl : null;
   const parserStyle: ParserStyle =
@@ -136,6 +152,7 @@ function coerceSidecar(v: unknown): RefDocSidecar | null {
     taxYear,
     sourceUrl,
     sha256: o.sha256,
+    format: o.format === "html" ? "html" : "pdf",
     parserStyle,
   };
 }

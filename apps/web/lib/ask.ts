@@ -11,12 +11,16 @@ import { UnauthorizedError } from "@/lib/api";
 export type AskTurnStatus = "running" | "completed" | "failed";
 export type AskCoverage = "covered" | "partial" | "not_covered";
 export type AskStage = "formulating" | "retrieving" | "answering";
+/** A document's source: a PDF, or a cleaned publisher web page (no pages). */
+export type SourceFormat = "pdf" | "html";
 
 export interface AskCitation {
   n: number;
   blockId: string;
   docId: string;
   documentTitle: string;
+  /** Missing on citations saved before HTML documents existed: read it as "pdf". */
+  format?: SourceFormat;
   sectionHeading: string | null;
   pageNum: number;
   quote: string;
@@ -51,6 +55,7 @@ export interface LibraryDocument {
   publisher: string;
   taxYear: number | null;
   sourceUrl: string | null;
+  format: SourceFormat;
   totalPages: number;
   blockCount: number;
 }
@@ -97,7 +102,11 @@ export async function fetchLibrary(): Promise<LibraryDocument[]> {
   return (await readJson<{ documents: LibraryDocument[] }>(res, "Load library")).documents;
 }
 
-/** Opens the source PDF on the cited page (the browser viewer honors #page). */
+/*
+ * Opens the source PDF on the cited page (the browser viewer honors
+ * #page). For an HTML document the route redirects to the publisher's
+ * page, so pass no page.
+ */
 export function refDocPdfUrl(docId: string, pageNum?: number): string {
   const url = agentUrl(`/app/refdocs/${encodeURIComponent(docId)}/pdf`);
   return pageNum ? `${url}#page=${pageNum}` : url;

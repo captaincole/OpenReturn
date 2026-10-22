@@ -1,6 +1,6 @@
 /*
- * California AGI Limitation Worksheet (2025 Form 540 booklet, line 32
- * instructions; corpus: ca-540-booklet-2025::sec::agi-limitation-worksheet).
+ * California AGI Limitation Worksheet (2025 Form 540 instructions,
+ * line 32; corpus: ca-540-inst-2025::sec::agi-limitation-worksheet).
  * Phases out exemption credits when federal AGI (540 line 13) exceeds
  * the filing-status threshold: $6 per credit for each $2,500 ($1,250 MFS)
  * or part of it over the threshold. Whole dollars only.

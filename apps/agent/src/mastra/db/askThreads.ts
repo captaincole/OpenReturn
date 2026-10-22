@@ -8,6 +8,7 @@ import {
   getAppDb,
   nowIso,
 } from "./appDb";
+import type { SourceFormat } from "./corpusStore";
 
 /*
  * Persistence for tax-code Q&A. Two tables (DDL in appDb.ts):
@@ -32,6 +33,8 @@ export interface AskCitation {
   blockId: string;
   docId: string;
   documentTitle: string;
+  /** Missing on citations saved before HTML documents existed: read it as "pdf". */
+  format?: SourceFormat;
   sectionHeading: string | null;
   pageNum: number;
   quote: string;

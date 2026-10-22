@@ -1,7 +1,7 @@
 /*
  * Manual single-doc ingest: the debugging seam under `sync`. Unlike
- * sync, it can ingest a PDF from any path on disk, not just the forms/
- * tree. It can also skip the paid contextualization stage via
+ * sync, it can ingest a source file (a PDF, or a cleaned HTML page with
+ * --format html) from any path on disk, not just the sources tree. It can also skip the paid contextualization stage via
  * --no-contextualize.
  */
 
@@ -13,7 +13,8 @@ async function run(argv: string[]): Promise<void> {
   const { values } = parseArgs({
     args: argv,
     options: {
-      pdf: { type: "string", short: "p" },
+      file: { type: "string", short: "f" },
+      format: { type: "string", default: "pdf" },
       "doc-id": { type: "string" },
       title: { type: "string" },
       publisher: { type: "string", default: "IRS" },
@@ -27,10 +28,15 @@ async function run(argv: string[]): Promise<void> {
     allowPositionals: false,
   });
 
-  if (!values.pdf || !values["doc-id"] || !values.title) {
+  if (!values.file || !values["doc-id"] || !values.title) {
     console.error(
-      "required: --pdf <path> --doc-id <id> --title <title> (see --help for all options)",
+      "required: --file <path> --doc-id <id> --title <title> (see --help for all options)",
     );
+    process.exit(1);
+  }
+  const format = values.format;
+  if (format !== "pdf" && format !== "html") {
+    console.error(`--format must be "pdf" or "html" (got "${format}")`);
     process.exit(1);
   }
 
@@ -41,7 +47,8 @@ async function run(argv: string[]): Promise<void> {
   }
 
   const result = await ingestRefDoc({
-    pdfPath: values.pdf,
+    sourcePath: values.file,
+    format,
     docId: values["doc-id"],
     title: values.title,
     publisher: values.publisher ?? "IRS",
@@ -71,14 +78,15 @@ function printIngestResult(result: Awaited<ReturnType<typeof ingestRefDoc>>): vo
 
 export const ingestCommand: Command = {
   name: "ingest",
-  summary: "Manually ingest one PDF (any path on disk) into corpus.db",
+  summary: "Manually ingest one source file (any path on disk) into corpus.db",
   options: [
-    { flag: "--pdf <path>", desc: "path to the PDF (required; -p shorthand)" },
+    { flag: "--file <path>", desc: "path to the source file (required; -f shorthand)" },
+    { flag: "--format pdf|html", desc: "source format; html = a cleaned page (default: pdf)" },
     { flag: "--doc-id <id>", desc: "stable doc id, e.g. irs-1040-inst-2025 (required)" },
     { flag: "--title <title>", desc: "human-readable document title (required)" },
     { flag: "--publisher <name>", desc: "publisher (default: IRS)" },
     { flag: "--tax-year <year>", desc: "tax year, e.g. 2025" },
-    { flag: "--source-url <url>", desc: "where the PDF was downloaded from" },
+    { flag: "--source-url <url>", desc: "where the file was downloaded from" },
     { flag: "--force", desc: "re-ingest even if the sha matches the DB" },
     { flag: "--no-contextualize", desc: "skip the Haiku contextualization stage" },
     { flag: "--parser-style irs|ftb", desc: "heading-detection style (default: irs)" },

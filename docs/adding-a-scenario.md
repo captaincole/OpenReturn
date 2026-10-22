@@ -82,8 +82,10 @@ model.
 [Adding a form](../packages/engine/README.md#adding-a-form)):
 
 - **5d. Assets.** `blank.pdf` and `instructions.meta.json` (with the
-  instructions PDF's `sourceUrl` and `sha256`; the PDF itself is not
-  committed) in `packages/sources/<year>/forms/<jurisdiction>/<short>/`.
+  instructions' `sourceUrl` and `sha256`; the instructions file itself is
+  not committed) in `packages/sources/<year>/forms/<jurisdiction>/<short>/`.
+  For FTB instructions that are a web page, `npm run corpus -- add-html`
+  writes the sidecar.
   Then generate the catalog (it lands next to the bindings) and sync the
   corpus: `npm run form-engine -- generate-catalog`, `npm run corpus -- sync`.
 - **5e. Engine form.** `types.ts`, `filingInfo.ts`, and `bindings.ts` in

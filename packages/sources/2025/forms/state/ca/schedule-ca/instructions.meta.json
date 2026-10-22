@@ -3,6 +3,8 @@
   "title": "2025 Instructions for Schedule CA (540) — California Adjustments — Residents",
   "publisher": "FTB",
   "taxYear": 2025,
-  "sourceUrl": null,
-  "sha256": "d82b8814ce51559297e8c6f2fb896b90a2fc4bab642386b4ea729f256805b96a"
+  "sourceUrl": "https://www.ftb.ca.gov/forms/2025/2025-540-ca-instructions.html",
+  "sha256": "81cf7c066d8301b701f872252d5b93e029c8e2a3110a7d44e09f918ba04d7db6",
+  "format": "html",
+  "cleanerVersion": 1
 }
