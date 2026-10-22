@@ -77,6 +77,16 @@ describe("cleanFtbHtml", () => {
     expect(html).not.toContain('alt="pixel"');
   });
 
+  it("escapes the page title instead of passing it through as markup", async () => {
+    const raw = page(BODY).replace(
+      "California Resident Income Tax Return",
+      "Return &lt;img src=x onerror=alert(1)&gt;",
+    );
+    const { html } = await cleanFtbHtml(raw, PAGE_URL, fakeImage);
+    expect(html).not.toContain("<img src=x");
+    expect(html).toContain("Return &lt;img src=x onerror=alert(1)&gt;</h1>");
+  });
+
   it("is deterministic", async () => {
     expect((await clean()).html).toBe((await clean()).html);
   });
@@ -108,6 +118,17 @@ describe("parseHtmlDoc", () => {
     expect(table.blockId).toBe("doc::sec::filing-status::b02");
     expect(table.text).toBe(
       "1 – Single | Enter On Line 18: $5,706\n\n2 – Married | Enter On Line 18: $11,412",
+    );
+  });
+
+  it("lines values up with their headers when a header cell spans two rows", async () => {
+    const table = `<h2>Worksheet</h2><table><thead>
+<tr><th rowspan="2"></th><th colspan="2">Payment Due Dates</th></tr>
+<tr><th>(a) 4/15/25</th><th>(b) 6/15/25</th></tr></thead>
+<tbody><tr><td>3. Enter line 9</td><td>N/A</td><td></td></tr></tbody></table>${FILLER}`;
+    const { blocks } = parseHtmlDoc((await clean(table)).html, "doc");
+    expect(blocks.find((b) => b.blockType === "table")!.text).toBe(
+      "3. Enter line 9 | (a) 4/15/25: N/A",
     );
   });
 

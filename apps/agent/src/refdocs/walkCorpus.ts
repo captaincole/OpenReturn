@@ -2,10 +2,8 @@ import { SOURCES_ROOT } from "@summa/sources";
 import type { Dirent } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
+import type { SourceFormat } from "../mastra/db/corpusStore";
 import type { ParserStyle } from "./parse";
-
-/** What a document's source file is: a PDF, or a cleaned HTML page. */
-export type SourceFormat = "pdf" | "html";
 
 /*
  * Walks the @summa/sources tree (packages/sources/<year>/…) for corpus

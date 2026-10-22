@@ -54,7 +54,7 @@ async function syncOne(
   if (existing?.sha256 === entry.sidecar.sha256 && !flags.force) {
     if (stored.has(docId)) return { docId, action: "skipped" };
     try {
-      await setDocumentSource(docId, entry.sidecar.format, await ensureSourceFile(entry));
+      await setDocumentSource(docId, await ensureSourceFile(entry));
       return { docId, action: "stored" };
     } catch (err) {
       console.warn(

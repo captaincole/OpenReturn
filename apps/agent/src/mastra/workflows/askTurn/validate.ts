@@ -1,5 +1,5 @@
-import type { SourceFormat } from "../../../refdocs/walkCorpus";
 import type { AskCitation, AskCoverage } from "../../db/askThreads";
+import type { SourceFormat } from "../../db/corpusStore";
 import type { AskAnswerOutput } from "./judges/askAnswerer";
 
 /*

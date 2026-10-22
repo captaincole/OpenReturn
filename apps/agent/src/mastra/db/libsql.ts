@@ -53,6 +53,8 @@ const CORPUS_SCHEMA_DDL: string[] = [
            sha256              TEXT NOT NULL,
            total_pages         INTEGER NOT NULL,
            total_chars         INTEGER NOT NULL,
+           -- 'pdf', or 'html' (a cleaned publisher page, which has no pages)
+           format              TEXT NOT NULL DEFAULT 'pdf',
            canonical_text_path TEXT NOT NULL,
            ingested_at         TEXT NOT NULL DEFAULT (datetime('now'))
          )`,
@@ -120,24 +122,14 @@ const CORPUS_SCHEMA_DDL: string[] = [
            value TEXT NOT NULL
          )`,
   /*
-   * The source PDF of each document, so the published corpus.db is the
-   * whole library: the PDFs are not committed (packages/sources keeps
-   * only their sidecars). The reference library's "Open PDF" serves
-   * from here. See db/corpusFiles.ts.
+   * Each document's source file, so the published corpus.db is the whole
+   * library: the files are not committed (packages/sources keeps only
+   * their sidecars). A PDF's bytes, or a cleaned HTML page as UTF-8 —
+   * ref_documents.format says which. See db/corpusFiles.ts.
    */
   `CREATE TABLE IF NOT EXISTS ref_document_files (
            doc_id TEXT PRIMARY KEY REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
-           pdf    BLOB NOT NULL
-         )`,
-  /*
-   * The source of an HTML document (sidecar "format": "html"): the
-   * cleaned page (refdocs/html/cleanFtb.ts). The reference library's
-   * document page renders it. A document has a row here or in
-   * ref_document_files, never both.
-   */
-  `CREATE TABLE IF NOT EXISTS ref_document_html (
-           doc_id TEXT PRIMARY KEY REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
-           html   TEXT NOT NULL
+           source BLOB NOT NULL
          )`,
   /*
    * Form catalog — the inventory side of the form engine (one row per

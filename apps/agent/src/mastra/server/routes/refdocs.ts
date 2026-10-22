@@ -1,5 +1,5 @@
 import { registerApiRoute } from "@mastra/core/server";
-import { getDocumentPdf } from "../../db/corpusFiles";
+import { getDocumentSource } from "../../db/corpusFiles";
 import { getDocument } from "../../db/corpusStore";
 import { listLibrary } from "../../db/refLibrary";
 
@@ -26,11 +26,11 @@ export const listRefDocsRoute = registerApiRoute("/app/refdocs", {
 export const refDocPdfRoute = registerApiRoute("/app/refdocs/:docId/pdf", {
   method: "GET",
   handler: async (c) => {
-    const docId = c.req.param("docId");
-    const pdf = await getDocumentPdf(docId);
+    const doc = await getDocument(c.req.param("docId"));
+    if (!doc) return c.json({ error: "not found" }, 404);
+    const pdf = doc.format === "pdf" ? await getDocumentSource(doc.docId) : null;
     if (!pdf) {
-      const sourceUrl = (await getDocument(docId))?.sourceUrl;
-      return sourceUrl ? c.redirect(sourceUrl, 302) : c.json({ error: "not found" }, 404);
+      return doc.sourceUrl ? c.redirect(doc.sourceUrl, 302) : c.json({ error: "not found" }, 404);
     }
     return c.body(pdf, 200, {
       "content-type": "application/pdf",

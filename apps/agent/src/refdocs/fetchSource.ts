@@ -38,7 +38,7 @@ export async function ensureSourceFile(entry: CorpusEntry): Promise<Uint8Array> 
       `${sourceRelPath} does not match its sidecar sha256. Update the sidecar for a new edition, or delete the file to fetch it again.`,
     );
   }
-  const stored = await getDocumentSource(sidecar.docId, sidecar.format);
+  const stored = await getDocumentSource(sidecar.docId);
   const file = stored && sha256(stored) === sidecar.sha256 ? stored : await download(entry);
   await mkdir(dirname(sourcePath), { recursive: true });
   await writeFile(sourcePath, file);

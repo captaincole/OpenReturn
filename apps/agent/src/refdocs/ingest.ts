@@ -11,13 +11,13 @@ import {
   type RefBlock,
   type RefPage,
   type RefSection,
+  type SourceFormat,
 } from "../mastra/db/corpusStore";
 import { sha1, summarizeBlocks } from "./contextualize";
 import { embedDocuments, resolveEmbeddings } from "./embeddings";
 import { extractPdf, type PageSlice } from "./extract";
 import { parseHtmlDoc } from "./html/parseHtml";
 import { parseDoc, type ParsedDoc, type ParserStyle } from "./parse";
-import type { SourceFormat } from "./walkCorpus";
 
 export interface IngestInput {
   /** The source file: a PDF, or a cleaned HTML page (format "html"). */
@@ -237,6 +237,7 @@ async function persistParsedDoc(
       totalPages: extracted.totalPages,
       totalChars: extracted.canonicalText.length,
       canonicalTextPath: recordedPath(canonicalTextPath),
+      format: input.format ?? "pdf",
     },
     ...rows,
   });
@@ -304,11 +305,7 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
     blocks,
   });
   // corpus.db carries the source file itself; packages/sources commits only the sidecar.
-  await setDocumentSource(
-    input.docId,
-    input.format ?? "pdf",
-    new Uint8Array(await readFile(sourcePath)),
-  );
+  await setDocumentSource(input.docId, new Uint8Array(await readFile(sourcePath)));
 
   const embedded = await embedBlocks(blocks);
 

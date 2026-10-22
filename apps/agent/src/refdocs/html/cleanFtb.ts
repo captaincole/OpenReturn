@@ -75,10 +75,17 @@ export async function cleanFtbHtml(
   fixLinks($, pageUrl);
   await inlineImages($, pageUrl, fetchImage);
 
-  const h1 = kicker ? `<h1><small>${kicker}</small> ${title}</h1>` : `<h1>${title}</h1>`;
-  const html = tidy(`<article>\n${h1}\n${$.html()}\n</article>`);
+  const html = tidy(`<article>\n${heading(kicker, title)}\n${$.html()}\n</article>`);
   checkContent(html);
   return { html: `${html}\n`, title: kicker ? `${kicker} — ${title}` : title };
+}
+
+/* The h1, built from text: the title is page text, never markup. */
+function heading(kicker: string, title: string): string {
+  const $ = cheerio.load("", null, false);
+  const h1 = $("<h1></h1>").text(title);
+  if (kicker) h1.prepend($("<small></small>").text(kicker), " ");
+  return $.html(h1);
 }
 
 function mainContent(raw: string): string {

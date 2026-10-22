@@ -1,4 +1,3 @@
-import type { SourceFormat } from "../../refdocs/walkCorpus";
 import {
   asJson,
   asNum,
@@ -9,6 +8,7 @@ import {
   getAppDb,
   nowIso,
 } from "./appDb";
+import type { SourceFormat } from "./corpusStore";
 
 /*
  * Persistence for tax-code Q&A. Two tables (DDL in appDb.ts):

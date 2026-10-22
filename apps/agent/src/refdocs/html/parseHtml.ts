@@ -117,13 +117,16 @@ function definitionUnits($: cheerio.CheerioAPI, dl: Element): Unit[] {
 /* One unit per body row: the row label, then "header: value" for each filled cell. */
 function tableUnits($: cheerio.CheerioAPI, table: Element): Unit[] {
   const rows = $(table).find("tr").toArray();
+  const grid = tableGrid($, rows);
   const headRows = rows.filter((tr) => $(tr).closest("thead").length > 0);
-  const firstAllTh = rows[0] && $(rows[0]).children("td").length === 0 ? [rows[0]] : [];
-  const headerRow = headRows.at(-1) ?? firstAllTh[0];
-  const headers = headerRow ? expandCells($, headerRow) : [];
+  const firstAllTh = rows[0] && $(rows[0]).children("td").length === 0 ? rows[0] : undefined;
+  const headerRow = headRows.at(-1) ?? firstAllTh;
+  const headers = headerRow ? grid[rows.indexOf(headerRow)] : [];
   const caption = squash($(table).children("caption").text());
-  const body = rows.filter((tr) => !headRows.includes(tr) && tr !== headerRow);
-  return [...textUnit(caption), ...body.flatMap((tr) => rowUnit(expandCells($, tr), headers))];
+  const body = rows.flatMap((tr, i) =>
+    headRows.includes(tr) || tr === headerRow ? [] : rowUnit(grid[i], headers),
+  );
+  return [...textUnit(caption), ...body];
 }
 
 function rowUnit(cells: string[], headers: string[]): Unit[] {
@@ -135,15 +138,33 @@ function rowUnit(cells: string[], headers: string[]): Unit[] {
   return text ? [{ kind: "row", text }] : [];
 }
 
-/* One-line cell texts with colspan expanded, so values line up with their headers. */
-function expandCells($: cheerio.CheerioAPI, tr: Element): string[] {
-  return $(tr)
-    .children("th, td")
-    .toArray()
-    .flatMap((cell) => {
+/*
+ * The table as a grid of one-line cell texts, one array per row, so a
+ * value lines up with its header. A colspan cell fills its extra columns
+ * with ""; a rowspan cell repeats into the rows below (a corner cell over
+ * a two-row header, a label shared by two rows).
+ */
+function tableGrid($: cheerio.CheerioAPI, rows: Element[]): string[][] {
+  const carried = new Map<number, { text: string; rows: number }>();
+  return rows.map((tr) => {
+    const out: string[] = [];
+    const takeCarried = () => {
+      for (let c = carried.get(out.length); c; c = carried.get(out.length)) {
+        out.push(c.text);
+        if (--c.rows === 0) carried.delete(out.length - 1);
+      }
+    };
+    for (const cell of $(tr).children("th, td").toArray()) {
+      takeCarried();
+      const text = squash(textOf($, cell));
       const span = Math.max(1, Number(cell.attribs.colspan ?? 1));
-      return [squash(textOf($, cell)), ...Array<string>(span - 1).fill("")];
-    });
+      const down = Math.max(1, Number(cell.attribs.rowspan ?? 1));
+      if (down > 1) carried.set(out.length, { text, rows: down - 1 });
+      out.push(text, ...Array<string>(span - 1).fill(""));
+    }
+    takeCarried();
+    return out;
+  });
 }
 
 /* Element text with <br> and nested blocks as line breaks, spaces collapsed. */
