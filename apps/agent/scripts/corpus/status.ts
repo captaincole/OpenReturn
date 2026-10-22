@@ -1,10 +1,12 @@
 /*
- * Read-only diff between the source PDFs under packages/sources/
- * (instructions.pdf under forms/, publication.pdf under publications/)
- * and the ref_documents rows in the local corpus DB.
+ * Read-only diff between the sidecars under packages/sources/
+ * (instructions.meta.json under forms/, publication.meta.json under
+ * publications/) and the ref_documents rows in the local corpus DB. It
+ * compares each sidecar's sha256 with the DB row, so no PDF is needed.
  * Exits 0 unless --strict is set and drift exists.
  */
 
+import { docIdsWithPdf } from "../../src/mastra/db/corpusFiles";
 import { getDocument, listDocuments } from "../../src/mastra/db/corpusStore";
 import { walkCorpus, type CorpusEntry } from "../../src/refdocs/walkCorpus";
 import type { Command } from "../lib/cli";
@@ -14,6 +16,8 @@ interface Categorized {
   drift: { entry: CorpusEntry; dbSha: string }[];
   missing: CorpusEntry[];
   extra: { docId: string; sha: string }[];
+  /** In the DB and current, but its PDF is not stored (run sync). */
+  noPdf: CorpusEntry[];
 }
 
 async function categorize(): Promise<{
@@ -26,7 +30,9 @@ async function categorize(): Promise<{
     drift: [],
     missing: [],
     extra: [],
+    noPdf: [],
   };
+  const stored = await docIdsWithPdf();
 
   const seenInRepo = new Set<string>();
   for (const entry of walk.entries) {
@@ -34,14 +40,15 @@ async function categorize(): Promise<{
     const row = await getDocument(entry.sidecar.docId);
     if (!row) {
       cats.missing.push(entry);
-    } else if (row.sha256 !== entry.fileSha) {
+    } else if (row.sha256 !== entry.sidecar.sha256) {
       cats.drift.push({ entry, dbSha: row.sha256 });
     } else {
       cats.present.push(entry);
+      if (!stored.has(entry.sidecar.docId)) cats.noPdf.push(entry);
     }
   }
 
-  // Find DB-only docs: rows with no matching PDF in the repo.
+  // Find DB-only docs: rows with no matching sidecar in the repo.
   for (const row of await listDocuments()) {
     if (!seenInRepo.has(row.docId)) {
       cats.extra.push({ docId: row.docId, sha: row.sha256 });
@@ -51,31 +58,36 @@ async function categorize(): Promise<{
   return { walk, cats };
 }
 
-function format(walk: Awaited<ReturnType<typeof walkCorpus>>, cats: Categorized): string {
-  const lines: string[] = [];
+/* The count table at the top of the report. */
+function summaryLines(walk: Awaited<ReturnType<typeof walkCorpus>>, cats: Categorized): string[] {
   const total =
     cats.present.length +
     cats.drift.length +
     cats.missing.length +
     cats.extra.length +
     walk.unconfigured.length;
-  lines.push(`[corpus status] ${total} doc(s):`);
-  lines.push(`  present     ${cats.present.length.toString().padStart(3)} (sha matches DB)`);
-  lines.push(
-    `  drift       ${cats.drift.length.toString().padStart(3)} (PDF changed since last ingest)`,
-  );
-  lines.push(`  missing     ${cats.missing.length.toString().padStart(3)} (in repo, not in DB)`);
-  lines.push(`  extra       ${cats.extra.length.toString().padStart(3)} (in DB, no PDF in repo)`);
-  lines.push(
-    `  unconfigured ${walk.unconfigured.length.toString().padStart(2)} (PDF without sidecar)`,
-  );
+  const row = (label: string, n: number, note: string) =>
+    `  ${label.padEnd(12)}${n.toString().padStart(3)} (${note})`;
+  return [
+    `[corpus status] ${total} doc(s):`,
+    row("present", cats.present.length, "sha matches DB"),
+    row("drift", cats.drift.length, "sidecar sha256 differs from DB"),
+    row("missing", cats.missing.length, "in repo, not in DB"),
+    row("extra", cats.extra.length, "in DB, no sidecar in repo"),
+    row("unconfigured", walk.unconfigured.length, "bad sidecar, or PDF without one"),
+    row("no PDF", cats.noPdf.length, "current, PDF not stored; run sync"),
+  ];
+}
+
+function format(walk: Awaited<ReturnType<typeof walkCorpus>>, cats: Categorized): string {
+  const lines = summaryLines(walk, cats);
 
   if (cats.drift.length > 0) {
     lines.push("");
     lines.push("drift:");
     for (const d of cats.drift) {
       lines.push(
-        `  ${d.entry.sidecar.docId}  db=${d.dbSha.slice(0, 12)}…  pdf=${d.entry.fileSha.slice(0, 12)}…`,
+        `  ${d.entry.sidecar.docId}  db=${d.dbSha.slice(0, 12)}…  sidecar=${d.entry.sidecar.sha256.slice(0, 12)}…`,
       );
     }
   }
@@ -120,7 +132,13 @@ async function run(argv: string[]): Promise<void> {
 
 export const statusCommand: Command = {
   name: "status",
-  summary: "Diff repo instruction PDFs vs corpus.db (present/drift/missing/extra)",
-  options: [{ flag: "--strict", desc: "exit non-zero on any drift (for CI/pre-push)" }],
+  summary:
+    "Diff the repo's sidecars vs corpus.db (present/drift/missing/extra/unconfigured/no PDF)",
+  options: [
+    {
+      flag: "--strict",
+      desc: "exit non-zero on drift, missing, extra or unconfigured (a missing stored PDF does not count)",
+    },
+  ],
   run,
 };

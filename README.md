@@ -94,7 +94,6 @@ npm run install:all
 npm run dev:all          # first run generates .env.development files
 # → set ANTHROPIC_API_KEY in apps/agent/.env.development, restart
 npm run corpus -- fetch  # prebuilt IRS/FTB reference corpus
-npm run corpus -- sync   # add documents newer than the prebuilt release (uses Haiku)
 
 # Optional but recommended — needs Ollama installed (https://ollama.com):
 ollama pull embeddinggemma-2          # local embedding model for RAG

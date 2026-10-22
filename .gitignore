@@ -22,6 +22,14 @@ supabase/
 # E2E run folders: data, logs, transcripts, Playwright output.
 e2e/.run/
 
-# Runtime copy of the blank PDFs, instructions and publications, made by
-# apps/agent scripts/syncSources.ts from packages/sources (the one copy in git).
+# Runtime copy of the blank PDFs, made by apps/agent scripts/syncSources.ts
+# from packages/sources (the one copy in git).
 apps/agent/src/mastra/public/sources/
+
+# Corpus source documents are not committed: packages/sources keeps their
+# sidecars (docId, sourceUrl, sha256), and corpus.db stores the PDFs and
+# the extracted text. `npm run corpus -- sync` restores or downloads a PDF
+# when it has to ingest.
+packages/sources/**/instructions.pdf
+packages/sources/**/publication.pdf
+packages/sources/**/*.canonical.txt

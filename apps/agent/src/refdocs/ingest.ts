@@ -1,6 +1,8 @@
+import { SOURCES_ROOT } from "@summa/sources";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { basename, dirname, relative, resolve } from "node:path";
+import { setDocumentPdf } from "../mastra/db/corpusFiles";
 import {
   deleteDocument,
   getDocument,
@@ -169,6 +171,16 @@ async function embedBlocks(blocks: RefBlock[]): Promise<boolean> {
  * step then cannot lose the contextual summaries we just paid Haiku to
  * generate; embeddings update in place afterward.
  */
+/*
+ * The path recorded in ref_documents: relative to packages/sources, or
+ * only the file name for a PDF outside it. corpus.db ships publicly, so
+ * it must not carry a machine's absolute paths.
+ */
+function recordedPath(path: string): string {
+  const rel = relative(SOURCES_ROOT, path);
+  return rel.startsWith("..") ? basename(path) : rel;
+}
+
 async function persistParsedDoc(
   input: IngestInput,
   extracted: Awaited<ReturnType<typeof extractPdf>>,
@@ -182,12 +194,12 @@ async function persistParsedDoc(
       title: input.title,
       publisher: input.publisher,
       taxYear: input.taxYear,
-      sourcePath: pdfPath,
+      sourcePath: recordedPath(pdfPath),
       sourceUrl: input.sourceUrl ?? null,
       sha256: extracted.sha256,
       totalPages: extracted.totalPages,
       totalChars: extracted.canonicalText.length,
-      canonicalTextPath,
+      canonicalTextPath: recordedPath(canonicalTextPath),
     },
     ...rows,
   });
@@ -218,8 +230,9 @@ function parseToRows(
 export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
   const pdfPath = resolve(input.pdfPath);
   /*
-   * Canonical text colocates with its source PDF: forms/<…>/instructions.pdf
-   * → forms/<…>/instructions.canonical.txt.
+   * The extracted text is also written next to the PDF
+   * (forms/<…>/instructions.pdf → forms/<…>/instructions.canonical.txt) as
+   * a gitignored debugging aid; corpus.db holds the text the corpus uses.
    */
   const canonicalTextPath = pdfPath.replace(/\.pdf$/i, ".canonical.txt");
 
@@ -263,6 +276,8 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
     sections,
     blocks,
   });
+  // corpus.db carries the PDF itself; packages/sources commits only the sidecar.
+  await setDocumentPdf(input.docId, new Uint8Array(await readFile(pdfPath)));
 
   const embedded = await embedBlocks(blocks);
 

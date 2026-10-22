@@ -30,10 +30,10 @@ The current agent Luca is built off of the [Mastra](https://mastra.ai/docs) fram
 
 The agent and the workflows use a corpus of IRS and FTB documents, form instructions and publications, to ground their information in truth and to generate the original bindings of the form engine. Here is how that corpus is turned into our data model that the agents can then search. We store information in both vector format and in plain text format for two reasons. First, so there is a backup option if you aren't running a local embedding model, and second because if you add plain text search queries it makes the model's retrieval capabilities better for corpus search. 
 
-1. *Read* Using unpdf, we read the source PDFs: form instructions (e.g. `packages/sources/2025/forms/federal/1040/instructions.pdf`) and publications (e.g. `packages/sources/2025/publications/federal/p587/publication.pdf`) and turn them into text documents for further processing
+1. *Read* Each document has a committed sidecar (e.g. `packages/sources/2025/forms/federal/1040/instructions.meta.json` or `packages/sources/2025/publications/federal/p587/publication.meta.json`) that names its PDF by URL and sha256. Sync gets the PDF (from corpus.db, or downloads it), and unpdf turns it into text for further processing
 2. *Parse (parse.ts)* turns those text documents into sections based on headers deterministically (No AI) with stable section IDs. 
 3. *Contextualize (contextualize.ts)* receives each block and sends that to an LLM (haiku) that then adds contextual information as part of the block.
-4. *Store* Then we store everything in the DB, as ref_documents (parent), ref_pages, ref_sections, and ref_blocks
+4. *Store* Then we store everything in the DB, as ref_documents (parent), ref_pages, ref_sections, and ref_blocks, plus the PDF itself (ref_document_files). The PDFs are not in git; corpus.db is the library
 5. *Embeddings* Next we convert each block's summary + text into RAG-capable embeddings with the local embedding model (EmbeddingGemma 2 via Ollama — see below). We store those vectors in each block's embedding column. 
 
 ### Semantic search (RAG) vs keyword fallback
@@ -45,7 +45,7 @@ Reference-corpus search runs two legs: a keyword leg (SQLite FTS5) and a semanti
 ollama pull embeddinggemma-2          # 1.3 GB; needs Ollama ≥ 0.40
 ```
 
-The prebuilt corpus (corpus-v2, via `npm run corpus -- fetch`) ships EmbeddingGemma 2 vectors, so no re-embedding is needed. The release lags the repo: corpus-v2 holds 10 documents, and `packages/sources` holds more. After a fetch, `npm run corpus -- status` lists the missing documents and `npm run corpus -- sync` ingests them (about $0.50 of Haiku contextualization for a typical set of form instructions, more for a long publication). If you switch embedding models, run `npm run corpus -- reembed --all` (~4 min, free) — the corpus records which model built its vectors, and search refuses to mix vector spaces until you do.
+The prebuilt corpus (corpus-v3, via `npm run corpus -- fetch`) holds every document in `packages/sources`, with their PDFs, and ships EmbeddingGemma 2 vectors, so no re-embedding is needed. When you add documents, `npm run corpus -- status` lists the ones missing from your corpus and `npm run corpus -- sync` ingests them (about $0.50 of Haiku contextualization for a typical set of form instructions, more for a long publication). If you switch embedding models, run `npm run corpus -- reembed --all` (~4 min, free) — the corpus records which model built its vectors, and search refuses to mix vector spaces until you do.
 
 **If Ollama isn't running, nothing breaks** — searches log a warning and fall back to keyword (FTS) matching, which is a real but lower-recall mode: exact-term queries work well, paraphrased/semantic queries suffer. Fine for end users trying the app; not fine for judging retrieval quality or developing anything RAG-adjacent. Use `npm run corpus -- search "your query" --mode vector` (vs `--mode fts`) to see each leg's behavior, and `npm run corpus -- check` to confirm every block has an embedding.
 
