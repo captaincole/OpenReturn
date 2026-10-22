@@ -20,7 +20,7 @@ export const askQueriesSchema = z.object({
   namedDocuments: z.array(z.string()),
 });
 
-const instructions = `You write search queries for a library of IRS and California FTB form instructions (tax year 2025). A hybrid keyword + semantic search runs each query.
+const instructions = `You write search queries for a library of IRS and California FTB form instructions and publications (tax year 2025). A hybrid keyword + semantic search runs each query.
 
 You get a taxpayer's question, and sometimes earlier questions and answers from the same conversation. Resolve follow-ups against that context: "what about family coverage?" after an HSA question means HSA family-coverage limits.
 

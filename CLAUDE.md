@@ -23,7 +23,7 @@ Everything routes through a `tax_facts` table (libsql/SQLite, `.data/app.db`) wh
 
 ## Repo structure
 
-This is a monorepo. `apps/agent`, `packages/engine`, and `packages/forms` are npm workspaces with one root lockfile; `apps/web` installs on its own:
+This is a monorepo. `apps/agent`, `packages/engine`, and `packages/sources` are npm workspaces with one root lockfile; `apps/web` installs on its own:
 
 ```
 packages/
@@ -36,30 +36,32 @@ packages/
 │   ├── scripts/                 # renderScenario, lockScenario, compareFiled
 │   ├── paths.ts                 # on-disk locations for offline tooling
 │   └── README.md                # contributor guide; public API = package.json "exports"
-└── forms/                       # @summa/forms — data only: what the IRS/FTB publish, by tax year.
-                                   <year>/federal/<short>/ and <year>/state/<st>/<short>/ hold
-                                   blank.pdf, instructions.pdf, instructions.meta.json,
-                                   instructions.canonical.txt; plus tax-table sources. Files we
-                                   generate (catalogs, tax-table JSON) live with the engine.
+└── sources/                     # @summa/sources — data only: what the IRS/FTB publish, by tax year.
+                                   <year>/forms/federal/<short>/ and <year>/forms/state/<st>/<short>/
+                                   hold blank.pdf, instructions.pdf (+ .meta.json, .canonical.txt)
+                                   and tax-table sources; <year>/publications/{federal,state/<st>}/<pub>/ holds
+                                   publication.pdf (+ sidecars). Files we generate (catalogs,
+                                   tax-table JSON) live with the engine.
 apps/
 ├── agent/                       # Mastra backend → deployed to Vercel
 │   ├── src/mastra/              # agent code (Luca, tools, db, server, workflows incl. review judges)
 │   │                              loadScenario.ts is the one db↔engine bridge; formAssets.ts loads
-│   │                              blank PDFs from public/forms/<year>/ (gitignored, built by
-│   │                              `npm --prefix apps/agent run forms:sync` before dev/build).
+│   │                              blank PDFs from public/sources/<year>/forms/ (gitignored, built
+│   │                              by `npm --prefix apps/agent run sources:sync` before dev/build).
 │   ├── src/refdocs/             # reference-corpus ingest pipeline (parse, contextualize, embed)
 │   ├── src/forms-pipeline/      # dev-time form-catalog ingest (widget extraction, AI labeling)
 │   ├── scripts/                 # operator CLIs: corpus/ + formEngine/ subcommand
 │   │                              CLIs on a shared dispatcher (scripts/lib/cli.ts),
 │   │                              plus standalone diagnostics (smokeReview, …)
 │   ├── tests/                   # agent tests (tools, db, refdocs); engine tests are in packages/engine
-│   ├── package.json             # agent deps + scripts (mastra dev, corpus, form-engine, forms:sync)
+│   ├── package.json             # agent deps + scripts (mastra dev, corpus, form-engine, sources:sync)
 │   └── tsconfig.json            # "paths" aliases @summa/* to source so `mastra dev` bundles them
 └── web/                         # Next.js 16 (App Router) frontend → deployed to Vercel
-    ├── app/                     # /login, (app)/{page,documents,activity}, /documents/[id] route handler
-    ├── components/              # AppShell, SideNav, ActivityCard, Markdown
-    ├── lib/                     # supabase/{client,server,proxy}, activity, api, mastraClient, uploads
-    ├── proxy.ts                 # Next.js 16 Proxy (renamed Middleware): @supabase/ssr session refresh + auth gate
+    ├── app/                     # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
+    │                              library}, /documents/[id] route handler, /api/* route handlers
+    ├── components/              # AppShell, ChatPane, ActivityCard, PlanCard, TopBar, Markdown
+    ├── lib/                     # localAuth, serverDb, api, ask, activity, mastraClient, uploads, …
+    ├── proxy.ts                 # Next.js 16 Proxy (renamed Middleware): optimistic session-cookie gate
     ├── package.json             # web deps + scripts (next dev, next build)
     └── next.config.ts
 
@@ -93,7 +95,7 @@ All persistent state lives in local files under `apps/agent/.data/` ("the DB is 
 | file | contents | owner |
 | --- | --- | --- |
 | `corpus.db` | reference corpus (ref_* tables, FTS5 + vectors) + forms catalog | `db/libsql.ts` |
-| `app.db` | domain data (tax_facts, ai_decisions, filings, …) | `db/appDb.ts` |
+| `app.db` | domain data (tax_facts, ai_decisions, filings, ask_threads/ask_turns, …) | `db/appDb.ts` |
 | `mastra.db` | Mastra runtime (threads, messages, working memory) | `@mastra/libsql` |
 | `documents/` | document blobs `{filingId}/{category}/{slug}-{ulid}.{ext}` | `db/blobStore.ts` |
 
@@ -139,7 +141,7 @@ Two paths:
 - **UI: Delete filing** (avatar menu) → `DELETE /app/filings/:id` — removes the filing's blob directory, cascades every domain row, deletes the Mastra thread. Start a fresh filing from the home page afterwards.
 - **API: `POST /app/session/reset`** → `resetCurrentUserData` in `apps/agent/src/mastra/db/resetUserData.ts` — wipes the user's rows but keeps the filing + memberships. No UI button anymore.
 
-**Reference corpus and `packages/forms/` always survive.** To rebuild the corpus, delete `.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete the `.data/` directory and re-run `npm run reset`.
+**Reference corpus and `packages/sources/` always survive.** To rebuild the corpus, delete `.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete the `.data/` directory and re-run `npm run reset`.
 
 ## Mastra schema
 
@@ -162,7 +164,7 @@ Every output form (1040, 540, 8949, Schedule D, …) is a collection of typed **
 
 TypeScript enforces both. Adding a field without declaring them is a compile error — the categorization layer (`packages/engine/src/categorization/categorize.ts`) is automatically consistent because it reads `field.category` directly off each field.
 
-**When adding a new form**: follow the checklist in `packages/engine/README.md` — form folder under the jurisdiction (`src/federal/<short>/` or `src/state/<st>/<short>/`, with its `catalog.json`), one `makeFormSpec` entry in that jurisdiction's `index.ts`, source documents in `packages/forms/<year>/<same subpath>/`. TypeScript will fail to compile until every field has its `category` and `valueType`.
+**When adding a new form**: follow the checklist in `packages/engine/README.md` — form folder under the jurisdiction (`src/federal/<short>/` or `src/state/<st>/<short>/`, with its `catalog.json`), one `makeFormSpec` entry in that jurisdiction's `index.ts`, source documents in `packages/sources/<year>/forms/<same subpath>/`. TypeScript will fail to compile until every field has its `category` and `valueType`.
 
 **Header fields** (top-of-form personal info, filing-status checkboxes) are modeled as FormFields too — text/single-select kinds that derive from identity facts / scope decisions. They sit in the same `EvaluatedForm.fields` array as the numeric lines. PDF renderers continue to read raw facts directly; the header fields exist for the Filing Status panel rollup.
 
@@ -230,7 +232,7 @@ Add categories as the domain grows. Prefer splitting over lumping (it's easier t
 
 ### Where the corpus lives
 
-The reference corpus (IRS pubs/instructions, FTB booklets, etc.) lives in **`.data/corpus.db`** — a local libsql/SQLite file, separate from user data (`app.db`) because it's shared, read-mostly reference material that will ship prebuilt as a release asset (Phase 4). Client + schema live in `apps/agent/src/mastra/db/libsql.ts`; the same file also holds the forms catalog (`forms` / `form_fields`, written by the forms-ingest pipeline, dormant at runtime).
+The reference corpus (IRS/FTB form instructions and publications, FTB booklets) lives in **`.data/corpus.db`** — a local libsql/SQLite file, separate from user data (`app.db`) because it's shared, read-mostly reference material that will ship prebuilt as a release asset (Phase 4). Client + schema live in `apps/agent/src/mastra/db/libsql.ts`; the same file also holds the forms catalog (`forms` / `form_fields`, written by the forms-ingest pipeline, dormant at runtime).
 
 ### Corpus shape (libsql)
 
@@ -251,11 +253,11 @@ Stable IDs — used everywhere as citations:
 - `irs-1040-inst-2025::sec::single` (section)
 - `irs-1040-inst-2025::sec::single::b01` (block — section-anchored: the 1st block under that heading; a parser change elsewhere in the doc does not renumber it)
 
-Canonical text lives on disk next to its source PDF: `packages/forms/<year>/<jurisdiction>/<short>/instructions.canonical.txt`. DB stores char offsets pointing into it. Source-of-truth is the canonical file; everything else is a derivation.
+Canonical text lives on disk next to its source PDF: `packages/sources/<year>/forms/<jurisdiction>/<short>/instructions.canonical.txt` (publications: `publication.canonical.txt`). DB stores char offsets pointing into it. Source-of-truth is the canonical file; everything else is a derivation.
 
 ### Adding or updating a reference document
 
-Each form's instructions live at `packages/forms/<year>/<jurisdiction>/<short>/instructions.pdf` with a sibling `instructions.meta.json` carrying the doc metadata:
+Each form's instructions live at `packages/sources/<year>/forms/<jurisdiction>/<short>/instructions.pdf` with a sibling `instructions.meta.json` carrying the doc metadata. Publications (IRS/FTB guides to a topic across forms) live at `packages/sources/<year>/publications/<jurisdiction>/<pub>/publication.pdf` with a `publication.meta.json`, and their docIds start `irs-pub-` / `ftb-pub-`:
 
 ```json
 {
@@ -271,7 +273,8 @@ Operator flow (the `corpus` CLI — `npm run corpus` with no args lists all subc
 
 ```bash
 # 1. Drop new/updated instructions.pdf + instructions.meta.json into the form's folder
-#    (packages/forms/<year>/<jurisdiction>/<short>/)
+#    (packages/sources/<year>/forms/<jurisdiction>/<short>/), or publication.pdf +
+#    publication.meta.json into packages/sources/<year>/publications/<jurisdiction>/<pub>/
 # 2. See what's drifted vs the corpus DB:
 npm run corpus -- status            # diff: present / missing / sha-drift / extra / unconfigured
 npm run corpus -- status --strict   # exit non-zero on any drift (for CI/pre-push later)
@@ -339,14 +342,14 @@ Agent tooling lives under `apps/agent/scripts/`; engine scripts under `packages/
 | subcommand | use |
 |---|---|
 | `fetch` | install the prebuilt corpus.db (local seed or sha-verified release download) |
-| `sync` | idempotent corpus sync from `packages/forms/**/instructions.pdf` |
+| `sync` | idempotent corpus sync from `packages/sources/**/{instructions,publication}.pdf` |
 | `status [--strict]` | diff repo PDFs vs corpus.db |
 | `ingest` | manual single-doc ingest (any PDF path; debug flags) |
 | `reembed [--all]` | re-embed NULL blocks; `--all` after a model switch |
 | `check` | row counts + per-doc embedding coverage |
 | `search "q" [--mode …]` | invoke the production search tool |
 
-**`npm run form-engine`** — source documents (`packages/forms`) → engine assets (`packages/engine/src`): `generate-catalog`, `generate-bindings`, `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`.
+**`npm run form-engine`** — source documents (`packages/sources`) → engine assets (`packages/engine/src`): `generate-catalog`, `generate-bindings`, `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`.
 
 **Standalone diagnostics** (run via `npx tsx` from `apps/agent/`):
 

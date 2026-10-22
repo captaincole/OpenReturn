@@ -34,7 +34,7 @@ describe("workspace path aliases", () => {
     };
     expect(paths).toEqual({
       ...exportsAsPaths("../../packages/engine"),
-      ...exportsAsPaths("../../packages/forms"),
+      ...exportsAsPaths("../../packages/sources"),
     });
   });
 });

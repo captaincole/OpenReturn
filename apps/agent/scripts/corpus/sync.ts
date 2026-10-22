@@ -1,5 +1,6 @@
 /*
- * Idempotent corpus sync. Walks the instructions.pdf files under forms/
+ * Idempotent corpus sync. Walks the source PDFs under packages/sources/
+ * (instructions.pdf under forms/, publication.pdf under publications/)
  * and ingests anything missing or sha-drifted. The ingest pipeline's own
  * sha-skip handles re-runs with unchanged PDFs, so the command is also
  * cheap to run on every dev tick.
@@ -108,7 +109,8 @@ async function run(argv: string[]): Promise<void> {
 
 export const syncCommand: Command = {
   name: "sync",
-  summary: "Ingest new/sha-drifted forms/**/instructions.pdf into corpus.db (idempotent)",
+  summary:
+    "Ingest new/sha-drifted sources/**/{instructions,publication}.pdf into corpus.db (idempotent)",
   options: [
     {
       flag: "--force",

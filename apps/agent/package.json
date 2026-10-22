@@ -4,9 +4,9 @@
   "private": true,
   "description": "Mastra-based AI CPA backend. Conversational agent (Luca) orchestrates fact-gathering and form generation; Nynaeve reviews every AI decision against the IRS reference corpus.",
   "scripts": {
-    "predev": "npm run forms:sync",
+    "predev": "npm run sources:sync",
     "dev": "mastra dev --env .env.development",
-    "prebuild": "npm run forms:sync",
+    "prebuild": "npm run sources:sync",
     "build": "mastra build --studio",
     "start": "cd .mastra/output && node index.mjs",
     "reset:data": "rm -f .data/app.db .data/app.db-shm .data/app.db-wal .data/mastra.db .data/mastra.db-shm .data/mastra.db-wal && rm -rf .data/documents && echo 'Factory reset done (corpus.db preserved). Restart the dev servers and visit http://localhost:3000/setup.'",
@@ -18,7 +18,7 @@
     "test:unit:watch": "vitest tests/unit",
     "test:integration": "vitest run tests/integration",
     "typecheck": "tsc --noEmit -p .",
-    "forms:sync": "tsx scripts/syncForms.ts"
+    "sources:sync": "tsx scripts/syncSources.ts"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -38,7 +38,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@summa/forms": "0.1.0",
+    "@summa/sources": "0.1.0",
     "@types/node": "^20",
     "cheerio": "^1.2.0",
     "pdf-lib": "^1.17.1",

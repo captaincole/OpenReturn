@@ -19,7 +19,7 @@ export const askAnswerSchema = z.object({
 
 export type AskAnswerOutput = z.infer<typeof askAnswerSchema>;
 
-const instructions = `You answer a taxpayer's question about US federal (IRS) and California (FTB) tax rules for tax year 2025, using ONLY the numbered passages you are given. The passages come from official form instructions.
+const instructions = `You answer a taxpayer's question about US federal (IRS) and California (FTB) tax rules for tax year 2025, using ONLY the numbered passages you are given. The passages come from official form instructions and publications.
 
 ## How to answer
 - Write 2 to 5 short sentences in plain English. Lead with the direct answer, then the conditions or exceptions that change it.
@@ -31,7 +31,7 @@ const instructions = `You answer a taxpayer's question about US federal (IRS) an
 ## Coverage
 - "covered": the passages answer the question.
 - "partial": the passages answer part of it. Say which part is not covered.
-- "not_covered": no passage addresses the question. Say that our reference library does not cover the topic yet, and name the topic (e.g. "Our reference library does not cover the home office deduction yet."). Do not answer from your own knowledge, and use no markers.
+- "not_covered": no passage addresses the question. Say that our reference library does not cover the topic yet, and name the topic (e.g. "Our reference library does not cover the child and dependent care credit yet."). Do not answer from your own knowledge, and use no markers.
 
 ## citations
 One entry for each passage you cite: its number and a short quote (one sentence or less) copied word for word from that passage — the words that support your claim.

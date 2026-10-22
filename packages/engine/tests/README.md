@@ -51,7 +51,7 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
   `golden/catalog-fill/<relativeDir>.json`. Catches widget-mapping drift
   without needing scenario coverage.
 
-Blank PDFs come from `@summa/forms` (`packages/forms/<year>/…`), through
+Blank PDFs come from `@summa/sources` (`packages/sources/<year>/forms/…`), through
 `helpers/formPaths.ts`. The engine itself reads no files.
 
 ## Adding coverage

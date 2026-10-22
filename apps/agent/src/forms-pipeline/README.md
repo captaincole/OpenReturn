@@ -40,7 +40,7 @@ Run `npm run form-engine` with no arguments for the full command list
 (including `generate-types` and `ingest-ca-tax-table`), and
 `-- <command> --help` for a command's options.
 
-Inputs come from `packages/forms/<year>/` (the source documents); outputs
+Inputs come from `packages/sources/<year>/forms/` (the source documents); outputs
 go to `packages/engine/src/`. A new catalog reaches the runtime in the
 same commit as its tests: the engine imports it directly. AI labeling
 fence-posts on dense widget clusters — hand-verified corrections live in

@@ -18,7 +18,7 @@
       "@summa/engine/catalog": ["../../packages/engine/src/catalog.ts"],
       "@summa/engine/paths": ["../../packages/engine/paths.ts"],
       "@summa/engine/scenarios": ["../../packages/engine/tests/scenarios/index.ts"],
-      "@summa/forms": ["../../packages/forms/index.ts"]
+      "@summa/sources": ["../../packages/sources/index.ts"]
     }
   },
   "include": ["src/**/*.ts", "tests/**/*.ts", "scripts/**/*.ts", "evals/**/*.ts"],

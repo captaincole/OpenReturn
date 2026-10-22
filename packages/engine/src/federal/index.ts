@@ -8,7 +8,7 @@
  * only keeps the pass count low.
  *
  * To add a federal form:
- *   1. Put blank.pdf in packages/forms/<year>/federal/<short>/. Generate
+ *   1. Put blank.pdf in packages/sources/<year>/forms/federal/<short>/. Generate
  *      catalog.json into ./<short>/ (form-engine generate-catalog).
  *   2. Write types.ts + filingInfo.ts + bindings.ts under ./<short>/.
  *   3. Add a makeFormSpec entry below. Add its catalog import if it has

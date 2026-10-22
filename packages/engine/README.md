@@ -74,11 +74,11 @@ src/
 Each form's folder is its `relativeDir` (`federal/1040`, `state/ca/540`).
 The engine keeps `catalog.json` there, next to `bindings.ts`. The source
 documents (`blank.pdf`, instructions) use the same subpath in
-`packages/forms/<year>/<relativeDir>/`.
+`packages/sources/<year>/forms/<relativeDir>/`.
 
 ## Adding a form
 
-1. Put `blank.pdf` in `packages/forms/<year>/<jurisdiction>/<short>/`.
+1. Put `blank.pdf` in `packages/sources/<year>/forms/<jurisdiction>/<short>/`.
    Generate `catalog.json` into `src/<jurisdiction>/<short>/` with
    `npm run form-engine -- generate-catalog`.
 2. In `src/<jurisdiction>/<short>/`, add `types.ts` (the form's
@@ -122,6 +122,6 @@ federal results (CA 540 reads federal AGI cross-form) but never each other.
 - **Never invent a number.** A field whose inputs are missing evaluates to
   `blocked` with a reason — that's what feeds the open-questions list.
 - **Tax years are parameter-keyed data** (tables take `taxYear`), not
-  directory-per-year. The source documents in `packages/forms` are by
+  directory-per-year. The source documents in `packages/sources` are by
   year; how the engine's rules change by year is still open. Decide it
   when a second filing year ships.

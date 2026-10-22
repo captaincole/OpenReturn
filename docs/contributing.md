@@ -28,9 +28,9 @@ The current agent Luca is built off of the [Mastra](https://mastra.ai/docs) fram
 
 ### Generating The Corpus
 
-The agent and the workflows use a corpus of IRS provided guides to ground its information in truth and to generate the original bindings of the form engine. Here is how that corpus is turned into our data model that the agents can then search. We store information in both vector format and in plain text format for two reasons. First, so there is a backup option if you aren't running a local embedding model, and second because if you add plain text search queries it makes the model's retrieval capabilities better for corpus search. 
+The agent and the workflows use a corpus of IRS and FTB documents, form instructions and publications, to ground their information in truth and to generate the original bindings of the form engine. Here is how that corpus is turned into our data model that the agents can then search. We store information in both vector format and in plain text format for two reasons. First, so there is a backup option if you aren't running a local embedding model, and second because if you add plain text search queries it makes the model's retrieval capabilities better for corpus search. 
 
-1. *Read* Using unpdf, we read the instructions files (e.g. `packages/forms/2025/federal/1040/instructions.pdf`) from the IRS and turn them into text documents for further processing
+1. *Read* Using unpdf, we read the source PDFs: form instructions (e.g. `packages/sources/2025/forms/federal/1040/instructions.pdf`) and publications (e.g. `packages/sources/2025/publications/federal/p587/publication.pdf`) and turn them into text documents for further processing
 2. *Parse (parse.ts)* turns those text documents into sections based on headers deterministically (No AI) with stable section IDs. 
 3. *Contextualize (contextualize.ts)* receives each block and sends that to an LLM (haiku) that then adds contextual information as part of the block.
 4. *Store* Then we store everything in the DB, as ref_documents (parent), ref_pages, ref_sections, and ref_blocks
@@ -45,7 +45,7 @@ Reference-corpus search runs two legs: a keyword leg (SQLite FTS5) and a semanti
 ollama pull embeddinggemma-2          # 1.3 GB; needs Ollama ≥ 0.40
 ```
 
-The prebuilt corpus (corpus-v2, via `npm run corpus -- fetch`) ships EmbeddingGemma 2 vectors, so no re-embedding is needed. If you switch embedding models, run `npm run corpus -- reembed --all` (~4 min, free) — the corpus records which model built its vectors, and search refuses to mix vector spaces until you do.
+The prebuilt corpus (corpus-v2, via `npm run corpus -- fetch`) ships EmbeddingGemma 2 vectors, so no re-embedding is needed. The release lags the repo: corpus-v2 holds 10 documents, and `packages/sources` holds more. After a fetch, `npm run corpus -- status` lists the missing documents and `npm run corpus -- sync` ingests them (about $0.50 of Haiku contextualization for a typical set of form instructions, more for a long publication). If you switch embedding models, run `npm run corpus -- reembed --all` (~4 min, free) — the corpus records which model built its vectors, and search refuses to mix vector spaces until you do.
 
 **If Ollama isn't running, nothing breaks** — searches log a warning and fall back to keyword (FTS) matching, which is a real but lower-recall mode: exact-term queries work well, paraphrased/semantic queries suffer. Fine for end users trying the app; not fine for judging retrieval quality or developing anything RAG-adjacent. Use `npm run corpus -- search "your query" --mode vector` (vs `--mode fts`) to see each leg's behavior, and `npm run corpus -- check` to confirm every block has an embedding.
 

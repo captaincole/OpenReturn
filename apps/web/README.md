@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# apps/web
 
-## Getting Started
+The Summa web app: Next.js 16 (App Router). You chat with Luca, upload documents, watch your return take shape, and ask the tax code questions.
 
-First, run the development server:
+## Run
+
+From the repo root:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev:all   # agent (:4111) + web (:3000)
+npm run dev:web   # web only
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The first run redirects to `/setup` to create the owner account. The env file is `.env.development` (see `.env.example`). `APP_DB_PATH` and `DOCUMENTS_PATH` must point at the same files as the agent.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Route | What it shows |
+| --- | --- |
+| `/setup`, `/login` | First-run owner account, then a password sign-in |
+| `/` | Home: tax returns, estimates, the tax code search box |
+| `/r/[returnId]` | A return: chat with Luca, activity, forms, documents |
+| `/ask/[threadId]` | Ask The Tax Code: cited answers and follow-up questions |
+| `/library` | The reference documents the answers can cite |
 
-## Learn More
+## How it talks to the agent
 
-To learn more about Next.js, take a look at the following resources:
+- **The browser never calls the agent.** Agent calls go through `/api/agent/[...path]`, which checks the session cookie and forwards to `AGENT_INTERNAL_URL` (default `http://127.0.0.1:4111`).
+- **Everything else reads `app.db` directly:** Server Components through `lib/serverDb.ts`, browser code through the other `/api/*` route handlers.
+- **Auth** is one owner and one password (`lib/localAuth.ts`). `proxy.ts` checks only that the cookie exists; layouts and route handlers verify it with `getOwnerSession()`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See the root `CLAUDE.md` for the whole architecture.

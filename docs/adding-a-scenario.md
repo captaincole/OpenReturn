@@ -82,7 +82,7 @@ model.
 [Adding a form](../packages/engine/README.md#adding-a-form)):
 
 - **5d. Assets.** `blank.pdf`, `instructions.pdf`, and
-  `instructions.meta.json` in `packages/forms/<year>/<jurisdiction>/<short>/`.
+  `instructions.meta.json` in `packages/sources/<year>/forms/<jurisdiction>/<short>/`.
   Then generate the catalog (it lands next to the bindings) and sync the
   corpus: `npm run form-engine -- generate-catalog`, `npm run corpus -- sync`.
 - **5e. Engine form.** `types.ts`, `filingInfo.ts`, and `bindings.ts` in
