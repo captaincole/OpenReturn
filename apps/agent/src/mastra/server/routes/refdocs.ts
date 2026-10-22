@@ -10,9 +10,10 @@ import { listLibrary } from "../../db/refLibrary";
  *   GET /app/refdocs/:docId/pdf   → the source PDF, inline, from corpus.db
  *
  * The web app links to the PDF with a #page=N fragment, so the browser's
- * viewer opens on the cited page. A document whose PDF is not stored (a
- * corpus built before ref_document_files) redirects to its sourceUrl; the
- * browser keeps the #page fragment across the redirect. Corpus data is shared reference
+ * viewer opens on the cited page. A document with no stored PDF — an HTML
+ * document (sidecar format "html"), or a corpus built before
+ * ref_document_files — redirects to its sourceUrl, the publisher's page;
+ * the browser keeps any fragment across the redirect. Corpus data is shared reference
  * material, not user data, so these routes need no owner check beyond
  * the middleware's token gate.
  */

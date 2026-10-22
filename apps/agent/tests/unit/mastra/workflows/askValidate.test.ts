@@ -9,6 +9,7 @@ const passage = (n: number, text: string): Passage => ({
   blockId: `doc::sec::b0${n}`,
   docId: "doc",
   documentTitle: "Doc",
+  format: "pdf",
   sectionHeading: "Section",
   pageNum: n,
   text,

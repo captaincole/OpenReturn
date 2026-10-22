@@ -40,8 +40,9 @@ packages/
                                    <year>/forms/federal/<short>/ and <year>/forms/state/<st>/<short>/
                                    hold blank.pdf, the instructions sidecar (instructions.meta.json)
                                    and tax-table sources; <year>/publications/{federal,state/<st>}/<pub>/
-                                   holds publication.meta.json. The instruction and publication PDFs
-                                   are not committed: corpus.db stores them. Files we generate
+                                   holds publication.meta.json. The instruction and publication files
+                                   (PDFs, or cleaned FTB web pages) are not committed: corpus.db
+                                   stores them. Files we generate
                                    (catalogs, tax-table JSON) live with the engine.
 apps/
 ├── agent/                       # Mastra backend → deployed to Vercel
@@ -233,7 +234,7 @@ Add categories as the domain grows. Prefer splitting over lumping (it's easier t
 
 ### Where the corpus lives
 
-The reference corpus (IRS/FTB form instructions and publications, FTB booklets) lives in **`.data/corpus.db`** — a local libsql/SQLite file, separate from user data (`app.db`) because it's shared, read-mostly reference material that will ship prebuilt as a release asset (Phase 4). Client + schema live in `apps/agent/src/mastra/db/libsql.ts`; the same file also holds the forms catalog (`forms` / `form_fields`, written by the forms-ingest pipeline, dormant at runtime).
+The reference corpus (IRS/FTB form instructions and publications) lives in **`.data/corpus.db`** — a local libsql/SQLite file, separate from user data (`app.db`) because it's shared, read-mostly reference material that will ship prebuilt as a release asset (Phase 4). Client + schema live in `apps/agent/src/mastra/db/libsql.ts`; the same file also holds the forms catalog (`forms` / `form_fields`, written by the forms-ingest pipeline, dormant at runtime).
 
 ### Corpus shape (libsql)
 
@@ -254,11 +255,13 @@ Stable IDs — used everywhere as citations:
 - `irs-1040-inst-2025::sec::single` (section)
 - `irs-1040-inst-2025::sec::single::b01` (block — section-anchored: the 1st block under that heading; a parser change elsewhere in the doc does not renumber it)
 
-**corpus.db is the library.** It holds every document's text, sections, blocks, embeddings, and its source PDF (`ref_document_files`; the reference library's "Open PDF" serves from there). Git holds only the sidecars, each with the PDF's `sha256`: the instruction and publication PDFs and the extracted `*.canonical.txt` text are gitignored build files, written next to the sidecar when sync ingests.
+**corpus.db is the library.** It holds every document's text, sections, blocks, embeddings, and its source file: a PDF (`ref_document_files`; the reference library's "Open PDF" serves from there) or a cleaned web page (`ref_document_html`). Git holds only the sidecars, each with the source file's `sha256`: the source files and the extracted `*.canonical.txt` text are gitignored build files, written next to the sidecar when sync ingests.
+
+**FTB instructions are HTML when FTB has a page.** FTB publishes most instructions only as web pages. `refdocs/html/cleanFtb.ts` keeps the page's article (allowlisted tags, every heading's id = its section slug, images inlined), and `refdocs/html/parseHtml.ts` reads sections from `h2`–`h4` and blocks from whole elements; a table row carries its column headers. An HTML document has no pages (all page 1): citations show `§ Section`, and open the publisher's page. The sha256 covers the cleaned output (the raw page differs on every request); bump `CLEANER_VERSION` when the cleaner's output changes. Use the PDF when FTB has no page (3514, 3526, the FTB publications).
 
 ### Adding or updating a reference document
 
-Each form's instructions are described by `packages/sources/<year>/forms/<jurisdiction>/<short>/instructions.meta.json`. Publications (IRS/FTB guides to a topic across forms) are described by `packages/sources/<year>/publications/<jurisdiction>/<pub>/publication.meta.json`, and their docIds start `irs-pub-` / `ftb-pub-`. The sidecar names the PDF by `sourceUrl` and `sha256`; only the sidecar is committed:
+Each form's instructions are described by `packages/sources/<year>/forms/<jurisdiction>/<short>/instructions.meta.json`. Publications (IRS/FTB guides to a topic across forms) are described by `packages/sources/<year>/publications/<jurisdiction>/<pub>/publication.meta.json`, and their docIds start `irs-pub-` / `ftb-pub-`. The sidecar names the source file by `sourceUrl` and `sha256` (plus `"format": "html"` for a web page); only the sidecar is committed:
 
 ```json
 {
@@ -271,7 +274,7 @@ Each form's instructions are described by `packages/sources/<year>/forms/<jurisd
 }
 ```
 
-When sync needs a PDF that is not on disk, it takes it from corpus.db (every ingested PDF is stored there), else downloads `sourceUrl` and checks `sha256`. Publishers replace files at the same URL with new editions, so the stored copy is what keeps re-ingests working; a mismatch error names the fix (`apps/agent/src/refdocs/fetchSource.ts`).
+When sync needs a source file that is not on disk, it takes it from corpus.db (every ingested file is stored there), else downloads `sourceUrl` (and cleans it, for HTML) and checks `sha256`. Publishers replace files at the same URL with new editions, so the stored copy is what keeps re-ingests working; a mismatch error names the fix (`apps/agent/src/refdocs/fetchSource.ts`).
 
 Operator flow (the `corpus` CLI — `npm run corpus` with no args lists all subcommands, `-- <cmd> --help` shows options):
 
@@ -279,9 +282,10 @@ Operator flow (the `corpus` CLI — `npm run corpus` with no args lists all subc
 # 1. Download the PDF and write its sidecar (docId, title, publisher, taxYear, sourceUrl,
 #    sha256) as instructions.meta.json in packages/sources/<year>/forms/<jurisdiction>/<short>/,
 #    or publication.meta.json in packages/sources/<year>/publications/<jurisdiction>/<pub>/.
-#    Leave the PDF beside it; it is gitignored.
+#    Leave the PDF beside it; it is gitignored. For an FTB web page instead:
+npm run corpus -- add-html <url> --dir 2025/forms/state/ca/540 --doc-id ca-540-inst-2025
 # 2. See what's drifted vs the corpus DB:
-npm run corpus -- status            # diff: present / missing / sha-drift / extra / unconfigured / no PDF
+npm run corpus -- status            # diff: present / missing / sha-drift / extra / unconfigured / no source
 npm run corpus -- status --strict   # exit non-zero on any drift (for CI/pre-push later)
 
 # 3. Sync changes into corpus.db (idempotent, sha-skips already-ingested docs):
@@ -304,11 +308,12 @@ Cost: ~$0.50 Haiku contextualization per doc; embeddings are local and free (Emb
 
 ```
 sidecar sha256 (compare to ref_documents.sha256 — skip if match)
-    → ensureSourcePdf (disk, else corpus.db, else sourceUrl; sha256 checked)
-    → unpdf extractText (per-page text)
-    → parseDoc (heading detection → Document/Section/Block tree, stable IDs)
+    → ensureSourceFile (disk, else corpus.db, else sourceUrl; sha256 checked)
+    → PDF:  unpdf extractText (per-page text)
+            → parseDoc (heading detection → Document/Section/Block tree, stable IDs)
+      HTML: parseHtmlDoc (h2–h4 sections, element blocks, one page)
     → contextualize (Haiku per block, section-scoped prompt cache)
-    → writeDocument (insert rows, embedding=NULL) + setDocumentPdf (ref_document_files)
+    → writeDocument (insert rows, embedding=NULL) + setDocumentSource (PDF or HTML table)
     → embed (embeddinggemma-2 via Ollama /api/embed, batches of 32, task prefixes)
     → setBlockEmbeddings (batched UPDATEs + ref_meta.embedding_model stamp)
 ```
@@ -351,9 +356,10 @@ Agent tooling lives under `apps/agent/scripts/`; engine scripts under `packages/
 | subcommand | use |
 |---|---|
 | `fetch` | install the prebuilt corpus.db (local seed or sha-verified release download) |
-| `sync` | idempotent corpus sync from the `packages/sources/**/{instructions,publication}.meta.json` sidecars; fetches PDFs as needed |
-| `status [--strict]` | diff repo sidecars vs corpus.db (no PDF needed) |
-| `ingest` | manual single-doc ingest (any PDF path; debug flags) |
+| `sync` | idempotent corpus sync from the `packages/sources/**/{instructions,publication}.meta.json` sidecars; fetches source files as needed |
+| `add-html <url> --dir …` | fetch + clean a publisher web page into a sources folder (HTML file + sidecar); re-run to refresh the sha256 |
+| `status [--strict]` | diff repo sidecars vs corpus.db (no source file needed) |
+| `ingest` | manual single-doc ingest (any PDF or HTML path; debug flags) |
 | `reembed [--all]` | re-embed NULL blocks; `--all` after a model switch |
 | `check` | row counts + per-doc embedding coverage |
 | `search "q" [--mode …]` | invoke the production search tool |

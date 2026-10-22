@@ -1,4 +1,5 @@
 import type { InValue, Row } from "@libsql/client";
+import type { SourceFormat } from "../../refdocs/walkCorpus";
 import {
   asNum,
   asNumOrNull,
@@ -24,6 +25,8 @@ export interface SearchHit {
   blockId: string;
   docId: string;
   documentTitle: string;
+  /** "html" documents have no pages: cite them by section. */
+  format: SourceFormat;
   sectionId: string | null;
   sectionHeading: string | null;
   pageNum: number;
@@ -38,6 +41,7 @@ export interface BlockDetail {
   blockId: string;
   docId: string;
   documentTitle: string;
+  format: SourceFormat;
   publisher: string;
   taxYear: number | null;
   sectionId: string | null;
@@ -56,14 +60,19 @@ function buildCitation(
   documentTitle: string,
   sectionHeading: string | null,
   pageNum: number,
+  format: SourceFormat,
 ): string {
   const parts = [documentTitle];
   if (sectionHeading && sectionHeading !== "(Preamble)") {
     parts.push(`§ ${sectionHeading}`);
   }
-  parts.push(`p. ${pageNum}`);
+  if (format === "pdf") parts.push(`p. ${pageNum}`);
   return parts.join(", ");
 }
+
+/* SQL for a block row `b`: 1 when its document's source is an HTML page. */
+const IS_HTML_SQL = `EXISTS (SELECT 1 FROM ref_document_html h WHERE h.doc_id = b.doc_id) AS is_html`;
+const formatOf = (isHtml: unknown): SourceFormat => (Number(isHtml) === 1 ? "html" : "pdf");
 
 /*
  * FTS5 MATCH has its own query grammar. It throws on bare operator
@@ -87,7 +96,7 @@ export async function getBlock(blockId: string): Promise<BlockDetail | null> {
     sql: `SELECT b.block_id, b.doc_id, b.section_id, b.page_num, b.block_type,
                  b.text, b.char_start, b.char_end,
                  d.title AS doc_title, d.publisher, d.tax_year,
-                 s.heading AS section_heading
+                 s.heading AS section_heading, ${IS_HTML_SQL}
           FROM ref_blocks b
           JOIN ref_documents d ON d.doc_id = b.doc_id
           LEFT JOIN ref_sections s ON s.section_id = b.section_id
@@ -99,10 +108,12 @@ export async function getBlock(blockId: string): Promise<BlockDetail | null> {
   const documentTitle = asStr(d.doc_title) || "(unknown)";
   const sectionHeading = asStrOrNull(d.section_heading);
   const pageNum = asNum(d.page_num);
+  const format = formatOf(d.is_html);
   return {
     blockId: asStr(d.block_id),
     docId: asStr(d.doc_id),
     documentTitle,
+    format,
     publisher: asStr(d.publisher) || "(unknown)",
     taxYear: asNumOrNull(d.tax_year),
     sectionId: asStrOrNull(d.section_id),
@@ -112,7 +123,7 @@ export async function getBlock(blockId: string): Promise<BlockDetail | null> {
     text: asStr(d.text),
     charStart: asNum(d.char_start),
     charEnd: asNum(d.char_end),
-    citation: buildCitation(documentTitle, sectionHeading, pageNum),
+    citation: buildCitation(documentTitle, sectionHeading, pageNum, format),
   };
 }
 
@@ -135,6 +146,7 @@ interface MatchRow {
   contextualized_text: string | null;
   doc_title: string;
   section_heading: string | null;
+  format: SourceFormat;
   fts_rank: number | null;
   vector_distance: number | null;
 }
@@ -144,6 +156,7 @@ function rowToHit(row: MatchRow, score: number): SearchHit {
     blockId: row.block_id,
     docId: row.doc_id,
     documentTitle: row.doc_title,
+    format: row.format,
     sectionId: row.section_id,
     sectionHeading: row.section_heading,
     pageNum: row.page_num,
@@ -151,7 +164,7 @@ function rowToHit(row: MatchRow, score: number): SearchHit {
     text: row.text,
     snippet: row.text.slice(0, 200),
     score,
-    citation: buildCitation(row.doc_title, row.section_heading, row.page_num),
+    citation: buildCitation(row.doc_title, row.section_heading, row.page_num, row.format),
   };
 }
 
@@ -224,7 +237,7 @@ async function callMatch(args: {
   const res = await getCorpusDb().execute({
     sql: `SELECT b.block_id, b.doc_id, b.section_id, b.page_num, b.block_type,
                  b.text, b.contextualized_text,
-                 d.title AS doc_title, s.heading AS section_heading
+                 d.title AS doc_title, s.heading AS section_heading, ${IS_HTML_SQL}
           FROM ref_blocks b
           JOIN ref_documents d ON d.doc_id = b.doc_id
           LEFT JOIN ref_sections s ON s.section_id = b.section_id
@@ -244,6 +257,7 @@ async function callMatch(args: {
       contextualized_text: asStrOrNull(r.contextualized_text),
       doc_title: asStr(r.doc_title),
       section_heading: asStrOrNull(r.section_heading),
+      format: formatOf(r.is_html),
       fts_rank: ftsRank.has(id) ? ftsRank.get(id)! : null,
       vector_distance: vecDist.has(id) ? vecDist.get(id)! : null,
     };

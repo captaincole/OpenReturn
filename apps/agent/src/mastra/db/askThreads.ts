@@ -1,3 +1,4 @@
+import type { SourceFormat } from "../../refdocs/walkCorpus";
 import {
   asJson,
   asNum,
@@ -32,6 +33,8 @@ export interface AskCitation {
   blockId: string;
   docId: string;
   documentTitle: string;
+  /** Missing on citations saved before HTML documents existed: read it as "pdf". */
+  format?: SourceFormat;
   sectionHeading: string | null;
   pageNum: number;
   quote: string;

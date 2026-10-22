@@ -1,3 +1,4 @@
+import type { SourceFormat } from "../../../refdocs/walkCorpus";
 import type { AskCitation, AskCoverage } from "../../db/askThreads";
 import type { AskAnswerOutput } from "./judges/askAnswerer";
 
@@ -19,6 +20,7 @@ export interface Passage {
   blockId: string;
   docId: string;
   documentTitle: string;
+  format: SourceFormat;
   sectionHeading: string | null;
   pageNum: number;
   text: string;
@@ -106,6 +108,7 @@ export function validateAnswer(output: AskAnswerOutput, passages: Passage[]): Va
       blockId: passage.blockId,
       docId: passage.docId,
       documentTitle: passage.documentTitle,
+      format: passage.format,
       sectionHeading: passage.sectionHeading,
       pageNum: passage.pageNum,
       quote,

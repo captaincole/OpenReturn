@@ -1,8 +1,9 @@
 /*
  * Idempotent corpus sync. Walks the sidecars under packages/sources/
  * (instructions.meta.json under forms/, publication.meta.json under
- * publications/) and ingests anything missing or sha-drifted, downloading
- * the PDF from the sidecar's sourceUrl when it is not on disk. A
+ * publications/) and ingests anything missing or sha-drifted, fetching
+ * the source file (a PDF, or an HTML page it cleans) from the sidecar's
+ * sourceUrl when it is not on disk or in corpus.db. A
  * document that is already current costs one DB lookup, so the command
  * is cheap to run on every dev tick.
  *
@@ -13,14 +14,14 @@
  */
 
 import { parseArgs } from "node:util";
-import { docIdsWithPdf, setDocumentPdf } from "../../src/mastra/db/corpusFiles";
+import { docIdsWithSource, setDocumentSource } from "../../src/mastra/db/corpusFiles";
 import { getDocument } from "../../src/mastra/db/corpusStore";
-import { ensureSourcePdf } from "../../src/refdocs/fetchSource";
+import { ensureSourceFile } from "../../src/refdocs/fetchSource";
 import { ingestRefDoc } from "../../src/refdocs/ingest";
 import { walkCorpus, type CorpusEntry } from "../../src/refdocs/walkCorpus";
 import type { Command } from "../lib/cli";
 
-type SyncAction = "ingested" | "replaced" | "stored" | "pdf-unavailable" | "skipped";
+type SyncAction = "ingested" | "replaced" | "stored" | "source-unavailable" | "skipped";
 
 interface SyncResult {
   ok: { docId: string; action: SyncAction }[];
@@ -35,12 +36,13 @@ interface SyncFlags {
 
 /*
  * One document. Current in corpus.db (same sha256 as the sidecar) → skip
- * without touching the PDF, unless its PDF is not stored yet ("stored":
- * a corpus ingested before ref_document_files existed). Otherwise fetch
- * the PDF if it is not on disk (refdocs/fetchSource.ts) and ingest. A
- * PDF that cannot be stored for a current document is a warning, not a
- * failure: the document is ingested and searchable, and `corpus status`
- * keeps listing it under "no PDF".
+ * without touching the source file, unless it is not stored yet
+ * ("stored": a corpus ingested before the file tables existed).
+ * Otherwise fetch the source file if it is not on disk
+ * (refdocs/fetchSource.ts) and ingest. A source file that cannot be
+ * stored for a current document is a warning, not a failure: the
+ * document is ingested and searchable, and `corpus status` keeps listing
+ * it under "no source".
  */
 async function syncOne(
   entry: CorpusEntry,
@@ -52,19 +54,20 @@ async function syncOne(
   if (existing?.sha256 === entry.sidecar.sha256 && !flags.force) {
     if (stored.has(docId)) return { docId, action: "skipped" };
     try {
-      await setDocumentPdf(docId, await ensureSourcePdf(entry));
+      await setDocumentSource(docId, entry.sidecar.format, await ensureSourceFile(entry));
       return { docId, action: "stored" };
     } catch (err) {
       console.warn(
-        `  ! ${docId}: PDF not stored — ${err instanceof Error ? err.message : String(err)}`,
+        `  ! ${docId}: source file not stored — ${err instanceof Error ? err.message : String(err)}`,
       );
-      return { docId, action: "pdf-unavailable" };
+      return { docId, action: "source-unavailable" };
     }
   }
 
-  await ensureSourcePdf(entry);
+  await ensureSourceFile(entry);
   await ingestRefDoc({
-    pdfPath: entry.pdfPath,
+    sourcePath: entry.sourcePath,
+    format: entry.sidecar.format,
     docId,
     title: entry.sidecar.title,
     publisher: entry.sidecar.publisher,
@@ -92,12 +95,12 @@ async function run(argv: string[]): Promise<void> {
   const result: SyncResult = { ok: [], failed: [], unconfigured: [] };
 
   for (const u of walk.unconfigured) {
-    console.warn(`[corpus sync] unconfigured: ${u.pdfRelPath} — ${u.reason}`);
-    result.unconfigured.push(u.pdfRelPath);
+    console.warn(`[corpus sync] unconfigured: ${u.sourceRelPath} — ${u.reason}`);
+    result.unconfigured.push(u.sourceRelPath);
   }
 
   console.log(`[corpus sync] processing ${walk.entries.length} doc(s)`);
-  const stored = await docIdsWithPdf();
+  const stored = await docIdsWithSource();
   for (const entry of walk.entries) {
     try {
       const r = await syncOne(entry, flags, stored);
@@ -118,7 +121,7 @@ async function run(argv: string[]): Promise<void> {
   const count = (...actions: SyncAction[]) =>
     result.ok.filter((r) => actions.includes(r.action)).length;
   console.log(
-    `\n[corpus sync] done: ${count("ingested", "replaced")} ingested/replaced, ${count("stored")} PDF stored, ${count("pdf-unavailable")} PDF unavailable, ${count("skipped")} skipped, ${result.failed.length} failed, ${result.unconfigured.length} unconfigured`,
+    `\n[corpus sync] done: ${count("ingested", "replaced")} ingested/replaced, ${count("stored")} source stored, ${count("source-unavailable")} source unavailable, ${count("skipped")} skipped, ${result.failed.length} failed, ${result.unconfigured.length} unconfigured`,
   );
 
   if (result.failed.length > 0 || result.unconfigured.length > 0) {
@@ -129,7 +132,7 @@ async function run(argv: string[]): Promise<void> {
 export const syncCommand: Command = {
   name: "sync",
   summary:
-    "Ingest new/changed source documents into corpus.db, downloading their PDFs as needed (idempotent)",
+    "Ingest new/changed source documents into corpus.db, fetching their PDFs or HTML pages as needed (idempotent)",
   options: [
     {
       flag: "--force",

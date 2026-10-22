@@ -130,6 +130,16 @@ const CORPUS_SCHEMA_DDL: string[] = [
            pdf    BLOB NOT NULL
          )`,
   /*
+   * The source of an HTML document (sidecar "format": "html"): the
+   * cleaned page (refdocs/html/cleanFtb.ts). The reference library's
+   * document page renders it. A document has a row here or in
+   * ref_document_files, never both.
+   */
+  `CREATE TABLE IF NOT EXISTS ref_document_html (
+           doc_id TEXT PRIMARY KEY REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
+           html   TEXT NOT NULL
+         )`,
+  /*
    * Form catalog — the inventory side of the form engine (one row per
    * (form_id, tax_year) + one per field). The forms-ingest pipeline
    * writes it (--write-db). The runtime reads the bundled JSON

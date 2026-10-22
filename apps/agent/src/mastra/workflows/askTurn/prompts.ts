@@ -24,10 +24,12 @@ export function renderFormulatePrompt(history: string, question: string): string
   return `${history}Question: ${question}\n\nWrite the search queries.`;
 }
 
+/* An HTML document has no pages, so its passages carry the section only. */
 function renderPassage(p: Passage, n: number): string {
   const section =
     p.sectionHeading && p.sectionHeading !== "(Preamble)" ? `, § ${p.sectionHeading}` : "";
-  return `[${n}] ${p.documentTitle}${section}, p. ${p.pageNum}\n${p.text.trim()}`;
+  const page = p.format === "html" ? "" : `, p. ${p.pageNum}`;
+  return `[${n}] ${p.documentTitle}${section}${page}\n${p.text.trim()}`;
 }
 
 export function renderAnswerPrompt(history: string, question: string, passages: Passage[]): string {

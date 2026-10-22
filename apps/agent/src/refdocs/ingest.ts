@@ -2,7 +2,7 @@ import { SOURCES_ROOT } from "@summa/sources";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, relative, resolve } from "node:path";
-import { setDocumentPdf } from "../mastra/db/corpusFiles";
+import { setDocumentSource } from "../mastra/db/corpusFiles";
 import {
   deleteDocument,
   getDocument,
@@ -14,11 +14,15 @@ import {
 } from "../mastra/db/corpusStore";
 import { sha1, summarizeBlocks } from "./contextualize";
 import { embedDocuments, resolveEmbeddings } from "./embeddings";
-import { extractPdf } from "./extract";
-import { parseDoc, type ParserStyle } from "./parse";
+import { extractPdf, type PageSlice } from "./extract";
+import { parseHtmlDoc } from "./html/parseHtml";
+import { parseDoc, type ParsedDoc, type ParserStyle } from "./parse";
+import type { SourceFormat } from "./walkCorpus";
 
 export interface IngestInput {
-  pdfPath: string;
+  /** The source file: a PDF, or a cleaned HTML page (format "html"). */
+  sourcePath: string;
+  format?: SourceFormat;
   docId: string;
   title: string;
   publisher: string;
@@ -51,7 +55,7 @@ export interface IngestResult {
   contextualized: boolean;
   embedded: boolean;
   /**
-   * True when the on-disk PDF's sha matches the existing ref_documents row,
+   * True when the source file's sha matches the existing ref_documents row,
    * so we returned without re-running extract / contextualize / embed. In
    * that case the other result fields come from the existing row.
    */
@@ -181,10 +185,43 @@ function recordedPath(path: string): string {
   return rel.startsWith("..") ? basename(path) : rel;
 }
 
+/* A source file read into corpus rows: canonical text, pages, sections, blocks. */
+interface ExtractedDoc extends ParsedDoc {
+  sha256: string;
+  canonicalText: string;
+  pages: PageSlice[];
+  totalPages: number;
+}
+
+/*
+ * PDF: unpdf text, then the heading-detection parser. HTML: the cleaned
+ * page's own structure (html/parseHtml.ts); it has no pages, so it is
+ * one page.
+ */
+async function extractSource(input: IngestInput, path: string): Promise<ExtractedDoc> {
+  if (input.format === "html") {
+    const bytes = await readFile(path);
+    const parsed = parseHtmlDoc(bytes.toString("utf8"), input.docId);
+    const length = parsed.canonicalText.length;
+    return {
+      ...parsed,
+      sha256: createHash("sha256").update(bytes).digest("hex"),
+      pages: [{ pageNum: 1, charStart: 0, charEnd: length }],
+      totalPages: 1,
+    };
+  }
+  const extracted = await extractPdf(path);
+  const parsed = parseDoc(extracted.canonicalText, extracted.pages, {
+    docId: input.docId,
+    style: input.parserStyle,
+  });
+  return { ...extracted, ...parsed };
+}
+
 async function persistParsedDoc(
   input: IngestInput,
-  extracted: Awaited<ReturnType<typeof extractPdf>>,
-  pdfPath: string,
+  extracted: ExtractedDoc,
+  sourcePath: string,
   canonicalTextPath: string,
   rows: { pages: RefPage[]; sections: RefSection[]; blocks: RefBlock[] },
 ): Promise<void> {
@@ -194,7 +231,7 @@ async function persistParsedDoc(
       title: input.title,
       publisher: input.publisher,
       taxYear: input.taxYear,
-      sourcePath: recordedPath(pdfPath),
+      sourcePath: recordedPath(sourcePath),
       sourceUrl: input.sourceUrl ?? null,
       sha256: extracted.sha256,
       totalPages: extracted.totalPages,
@@ -205,50 +242,40 @@ async function persistParsedDoc(
   });
 }
 
-/* Parse the extracted text and stamp docId onto every corpus row. */
-function parseToRows(
-  input: IngestInput,
-  extracted: Awaited<ReturnType<typeof extractPdf>>,
+/* Stamp docId onto every corpus row. */
+function toRows(
+  docId: string,
+  extracted: ExtractedDoc,
 ): { pages: RefPage[]; sections: RefSection[]; blocks: RefBlock[] } {
-  const { sections: parsedSections, blocks: parsedBlocks } = parseDoc(
-    extracted.canonicalText,
-    extracted.pages,
-    { docId: input.docId, style: input.parserStyle },
-  );
   return {
-    pages: extracted.pages.map((p) => ({
-      docId: input.docId,
-      pageNum: p.pageNum,
-      charStart: p.charStart,
-      charEnd: p.charEnd,
-    })),
-    sections: parsedSections.map((s) => ({ docId: input.docId, ...s })),
-    blocks: parsedBlocks.map((b) => ({ docId: input.docId, ...b })),
+    pages: extracted.pages.map((p) => ({ docId, ...p })),
+    sections: extracted.sections.map((s) => ({ docId, ...s })),
+    blocks: extracted.blocks.map((b) => ({ docId, ...b })),
   };
 }
 
 export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
-  const pdfPath = resolve(input.pdfPath);
+  const sourcePath = resolve(input.sourcePath);
   /*
-   * The extracted text is also written next to the PDF
+   * The extracted text is also written next to the source file
    * (forms/<…>/instructions.pdf → forms/<…>/instructions.canonical.txt) as
    * a gitignored debugging aid; corpus.db holds the text the corpus uses.
    */
-  const canonicalTextPath = pdfPath.replace(/\.pdf$/i, ".canonical.txt");
+  const canonicalTextPath = sourcePath.replace(/\.(pdf|html)$/i, ".canonical.txt");
 
   /*
    * Sha-skip: hash the file before any expensive step. If the existing
    * row's sha matches and the caller did not pass --force, there is
    * nothing to do. This makes `corpus sync` cheap to run on every dev tick.
    */
-  const fileSha = await shaOfFile(pdfPath);
+  const fileSha = await shaOfFile(sourcePath);
   const existing = await getDocument(input.docId);
   if (existing && existing.sha256 === fileSha && !input.force) {
     console.log(`  ${input.docId}: sha unchanged (${fileSha.slice(0, 12)}…), skipping ingest`);
     return skippedResult(existing);
   }
 
-  const extracted = await extractPdf(pdfPath);
+  const extracted = await extractSource(input, sourcePath);
 
   let replaced = false;
   if (existing) {
@@ -259,7 +286,7 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
   await mkdir(dirname(canonicalTextPath), { recursive: true });
   await writeFile(canonicalTextPath, extracted.canonicalText, "utf8");
 
-  const { pages, sections, blocks } = parseToRows(input, extracted);
+  const { pages, sections, blocks } = toRows(input.docId, extracted);
 
   if (!input.noContextualize) {
     await contextualizeBlocks(input.title, extracted.canonicalText, sections, blocks);
@@ -271,13 +298,17 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
     for (const b of blocks) b.blockTextSha1 = sha1(b.text);
   }
 
-  await persistParsedDoc(input, extracted, pdfPath, canonicalTextPath, {
+  await persistParsedDoc(input, extracted, sourcePath, canonicalTextPath, {
     pages,
     sections,
     blocks,
   });
-  // corpus.db carries the PDF itself; packages/sources commits only the sidecar.
-  await setDocumentPdf(input.docId, new Uint8Array(await readFile(pdfPath)));
+  // corpus.db carries the source file itself; packages/sources commits only the sidecar.
+  await setDocumentSource(
+    input.docId,
+    input.format ?? "pdf",
+    new Uint8Array(await readFile(sourcePath)),
+  );
 
   const embedded = await embedBlocks(blocks);
 
