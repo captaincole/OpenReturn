@@ -61,18 +61,21 @@ function LibraryRow({ doc }: { doc: LibraryDocument }) {
         <div className="text-[14px] font-medium text-ink-primary">{doc.title}</div>
         <div className="mt-0.5 text-[12px] text-ink-muted">
           {doc.taxYear ? `Tax year ${doc.taxYear} · ` : ""}
-          {doc.totalPages} pages · {doc.blockCount} passages
+          {doc.format === "html" ? "Web page" : `${doc.totalPages} pages`} · {doc.blockCount}{" "}
+          passages
         </div>
       </div>
       <div className="flex shrink-0 gap-4 text-[12px]">
-        <a
-          href={refDocPdfUrl(doc.docId)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-accent hover:text-accent-hover"
-        >
-          Open PDF ↗
-        </a>
+        {doc.format === "pdf" && (
+          <a
+            href={refDocPdfUrl(doc.docId)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent hover:text-accent-hover"
+          >
+            Open PDF ↗
+          </a>
+        )}
         {doc.sourceUrl && (
           <a
             href={doc.sourceUrl}

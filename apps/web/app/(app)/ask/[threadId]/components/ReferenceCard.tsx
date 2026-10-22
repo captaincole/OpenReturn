@@ -3,7 +3,8 @@
 /*
  * A compact numbered reference behind an `[n]` marker: document,
  * section, page, the quoted passage (click to expand), and a link that
- * opens the source PDF on that page.
+ * opens the source PDF on that page — or, for an HTML document (no
+ * pages), the publisher's page.
  */
 
 import { refDocPdfUrl, type AskCitation } from "@/lib/ask";
@@ -28,6 +29,10 @@ export function ReferenceCard({
     citation.sectionHeading && citation.sectionHeading !== "(Preamble)"
       ? citation.sectionHeading
       : null;
+  const html = citation.format === "html";
+  const where = [section && `§ ${section}`, !html && `p. ${citation.pageNum}`]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <div
@@ -48,9 +53,7 @@ export function ReferenceCard({
           >
             {citation.documentTitle}
           </div>
-          <div className="mt-0.5 truncate text-[11px] text-ink-muted">
-            {section ? `§ ${section} · ` : ""}p. {citation.pageNum}
-          </div>
+          <div className="mt-0.5 truncate text-[11px] text-ink-muted">{where}</div>
         </div>
       </div>
       <blockquote
@@ -64,12 +67,12 @@ export function ReferenceCard({
         {citation.quote.trim()}
       </blockquote>
       <a
-        href={refDocPdfUrl(citation.docId, citation.pageNum)}
+        href={refDocPdfUrl(citation.docId, html ? undefined : citation.pageNum)}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-2.5 self-start text-[11px] text-accent hover:text-accent-hover"
       >
-        Open PDF, p. {citation.pageNum} ↗
+        {html ? "Open source ↗" : `Open PDF, p. ${citation.pageNum} ↗`}
       </a>
     </div>
   );
