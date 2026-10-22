@@ -1,9 +1,9 @@
 {
-  "version": "corpus-v5",
-  "description": "Prebuilt IRS/FTB reference corpus, tax year 2025: 64 documents (49 PDFs — form instructions and 11 IRS/FTB publications — and 15 FTB instruction web pages), 7,709 passages, FTS5 + embeddinggemma-2 768-dim embeddings, Haiku contextual summaries, and each document's source file (ref_document_files; ref_documents.format says pdf or html).",
+  "version": "corpus-v6",
+  "description": "Prebuilt IRS/FTB reference corpus, tax year 2025: 97 documents (77 IRS, 20 FTB; 82 PDFs — form instructions and 26 IRS/FTB publications — and 15 FTB instruction web pages), 13,725 passages, FTS5 + embeddinggemma-2 768-dim embeddings, Haiku contextual summaries, and each document's source file (ref_document_files; ref_documents.format says pdf or html).",
   "file": "corpus.db",
-  "sha256": "ead0e18a65966b28b00702f94a0629c08a2e0ed583ab0ab4c54416069f4fc1ac",
-  "sizeBytes": 110370816,
-  "url": "https://github.com/captaincole/summa-tax/releases/download/corpus-v5/corpus.db",
-  "_notes": "GitHub Release asset (corpus-v5 tag). Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in ref_meta), so clones running Ollama need no reembed. The source files live in the database, not in git; packages/sources keeps their sidecars. corpus-v4 changed the schema (ref_documents.format, ref_document_files.source): replace an older corpus.db with `npm run corpus -- fetch --force`. Everyone downloads the full corpus; per-state packs are a future option if size demands it."
+  "sha256": "a82965e6c8b56b148cbe97cdcecc60a607920b262fc47e89544ce1dffefbff6f",
+  "sizeBytes": 191664128,
+  "url": "https://github.com/captaincole/summa-tax/releases/download/corpus-v6/corpus.db",
+  "_notes": "GitHub Release asset (corpus-v6 tag). Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in ref_meta), so clones running Ollama need no reembed. The source files live in the database, not in git; packages/sources keeps their sidecars. corpus-v4 changed the schema (ref_documents.format, ref_document_files.source): replace an older corpus.db with `npm run corpus -- fetch --force`. Everyone downloads the full corpus; per-state packs are a future option if size demands it."
 }
