@@ -23,8 +23,8 @@ const ANTHROPIC_VERSION = "2023-06-01";
 
 /*
  * Contextual-summary model. Haiku 5.5 for everything, including the
- * published corpus (decided 2026-10-15; corpus-v2 used claude-opus-5 at
- * $17.35 for 10 docs). Override with REFDOCS_MODEL for experiments only.
+ * published corpus (decided 2026-10-15; corpus-v3 is Haiku throughout).
+ * Override with REFDOCS_MODEL for experiments only.
  * Mixed models across docs work mechanically (sha-skip preserves
  * existing rows), but a published corpus should use one model
  * end-to-end: rebuild fully (`corpus sync --force`) when you switch.
