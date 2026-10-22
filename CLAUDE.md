@@ -38,10 +38,11 @@ packages/
 │   └── README.md                # contributor guide; public API = package.json "exports"
 └── sources/                     # @summa/sources — data only: what the IRS/FTB publish, by tax year.
                                    <year>/forms/federal/<short>/ and <year>/forms/state/<st>/<short>/
-                                   hold blank.pdf, instructions.pdf (+ .meta.json, .canonical.txt)
-                                   and tax-table sources; <year>/publications/{federal,state/<st>}/<pub>/ holds
-                                   publication.pdf (+ sidecars). Files we generate (catalogs,
-                                   tax-table JSON) live with the engine.
+                                   hold blank.pdf, the instructions sidecar (instructions.meta.json)
+                                   and tax-table sources; <year>/publications/{federal,state/<st>}/<pub>/
+                                   holds publication.meta.json. The instruction and publication PDFs
+                                   are not committed: corpus.db stores them. Files we generate
+                                   (catalogs, tax-table JSON) live with the engine.
 apps/
 ├── agent/                       # Mastra backend → deployed to Vercel
 │   ├── src/mastra/              # agent code (Luca, tools, db, server, workflows incl. review judges)
@@ -253,11 +254,11 @@ Stable IDs — used everywhere as citations:
 - `irs-1040-inst-2025::sec::single` (section)
 - `irs-1040-inst-2025::sec::single::b01` (block — section-anchored: the 1st block under that heading; a parser change elsewhere in the doc does not renumber it)
 
-Canonical text lives on disk next to its source PDF: `packages/sources/<year>/forms/<jurisdiction>/<short>/instructions.canonical.txt` (publications: `publication.canonical.txt`). DB stores char offsets pointing into it. Source-of-truth is the canonical file; everything else is a derivation.
+**corpus.db is the library.** It holds every document's text, sections, blocks, embeddings, and its source PDF (`ref_document_files`; the reference library's "Open PDF" serves from there). Git holds only the sidecars, each with the PDF's `sha256`: the instruction and publication PDFs and the extracted `*.canonical.txt` text are gitignored build files, written next to the sidecar when sync ingests.
 
 ### Adding or updating a reference document
 
-Each form's instructions live at `packages/sources/<year>/forms/<jurisdiction>/<short>/instructions.pdf` with a sibling `instructions.meta.json` carrying the doc metadata. Publications (IRS/FTB guides to a topic across forms) live at `packages/sources/<year>/publications/<jurisdiction>/<pub>/publication.pdf` with a `publication.meta.json`, and their docIds start `irs-pub-` / `ftb-pub-`:
+Each form's instructions are described by `packages/sources/<year>/forms/<jurisdiction>/<short>/instructions.meta.json`. Publications (IRS/FTB guides to a topic across forms) are described by `packages/sources/<year>/publications/<jurisdiction>/<pub>/publication.meta.json`, and their docIds start `irs-pub-` / `ftb-pub-`. The sidecar names the PDF by `sourceUrl` and `sha256`; only the sidecar is committed:
 
 ```json
 {
@@ -265,22 +266,29 @@ Each form's instructions live at `packages/sources/<year>/forms/<jurisdiction>/<
   "title": "Instructions for Form 1040 (2025)",
   "publisher": "IRS",
   "taxYear": 2025,
-  "sourceUrl": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf"
+  "sourceUrl": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+  "sha256": "<sha256 of the PDF>"
 }
 ```
+
+When sync needs a PDF that is not on disk, it takes it from corpus.db (every ingested PDF is stored there), else downloads `sourceUrl` and checks `sha256`. Publishers replace files at the same URL with new editions, so the stored copy is what keeps re-ingests working; a mismatch error names the fix (`apps/agent/src/refdocs/fetchSource.ts`).
 
 Operator flow (the `corpus` CLI — `npm run corpus` with no args lists all subcommands, `-- <cmd> --help` shows options):
 
 ```bash
-# 1. Drop new/updated instructions.pdf + instructions.meta.json into the form's folder
-#    (packages/sources/<year>/forms/<jurisdiction>/<short>/), or publication.pdf +
-#    publication.meta.json into packages/sources/<year>/publications/<jurisdiction>/<pub>/
+# 1. Download the PDF and write its sidecar (docId, title, publisher, taxYear, sourceUrl,
+#    sha256) as instructions.meta.json in packages/sources/<year>/forms/<jurisdiction>/<short>/,
+#    or publication.meta.json in packages/sources/<year>/publications/<jurisdiction>/<pub>/.
+#    Leave the PDF beside it; it is gitignored.
 # 2. See what's drifted vs the corpus DB:
-npm run corpus -- status            # diff: present / missing / sha-drift / extra / unconfigured
+npm run corpus -- status            # diff: present / missing / sha-drift / extra / unconfigured / no PDF
 npm run corpus -- status --strict   # exit non-zero on any drift (for CI/pre-push later)
 
 # 3. Sync changes into corpus.db (idempotent, sha-skips already-ingested docs):
-npm run corpus -- sync              # ~$0.50 + ~5 min per new/changed doc
+npm run corpus -- sync              # ~$0.50 + a few min per new/changed doc
+
+# 3b. Publish: corpus.db is a GitHub Release asset (apps/agent/seed/corpus.manifest.json);
+#     a new release is how other clones get the new documents.
 
 # 4. If a previous sync wrote rows but embeddings failed (Ollama down),
 #    re-embed without re-paying for Haiku contextualization:

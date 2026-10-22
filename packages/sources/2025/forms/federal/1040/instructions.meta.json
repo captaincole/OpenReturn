@@ -3,5 +3,6 @@
   "title": "Instructions for Form 1040 (2025)",
   "publisher": "IRS",
   "taxYear": 2025,
-  "sourceUrl": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf"
+  "sourceUrl": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
+  "sha256": "482e9c487c608f1bbeaceef35bc3c0933e8b35443cfff447e4279d590468364a"
 }
