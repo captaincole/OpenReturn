@@ -3,8 +3,8 @@ import { ensureCorpusSchema, getCorpusDb } from "./libsql";
 
 /*
  * The reference library: every document in corpus.db, for the web app's
- * Reference Library page, federal (IRS) first, and one HTML document with
- * its headings for the library's document page. Read-only; the corpus CLI
+ * Reference Library page, federal (IRS) first, and one HTML document's
+ * headings for the library's document page. Read-only; the corpus CLI
  * owns the writes.
  */
 
@@ -48,46 +48,19 @@ export interface LibrarySection {
   parent: string | null;
 }
 
-export interface LibraryHtmlDocument {
-  docId: string;
-  title: string;
-  publisher: string;
-  taxYear: number | null;
-  sourceUrl: string | null;
-  html: string;
-  sections: LibrarySection[];
-}
-
-/* Null when the document does not exist, is not HTML, or has no stored source. */
-export async function getLibraryHtmlDocument(docId: string): Promise<LibraryHtmlDocument | null> {
+/* The headings of one document, in order, for the library page's contents rail. */
+export async function listSections(docId: string): Promise<LibrarySection[]> {
   await ensureCorpusSchema();
-  const db = getCorpusDb();
-  const docs = await db.execute({
-    sql: `SELECT d.title, d.publisher, d.tax_year, d.source_url, f.source
-          FROM ref_documents d JOIN ref_document_files f ON f.doc_id = d.doc_id
-          WHERE d.doc_id = ? AND d.format = 'html'`,
-    args: [docId],
-  });
-  const d = docs.rows[0];
-  if (!d || !(d.source instanceof ArrayBuffer)) return null;
-  const sections = await db.execute({
+  const res = await getCorpusDb().execute({
     sql: `SELECT s.heading_slug, s.heading, p.heading_slug AS parent_slug
           FROM ref_sections s LEFT JOIN ref_sections p ON p.section_id = s.parent_section_id
           WHERE s.doc_id = ? AND s.heading_slug != 'preamble'
           ORDER BY s.ordinal`,
     args: [docId],
   });
-  return {
-    docId,
-    title: asStr(d.title),
-    publisher: asStr(d.publisher),
-    taxYear: asNumOrNull(d.tax_year),
-    sourceUrl: asStrOrNull(d.source_url),
-    html: new TextDecoder().decode(d.source),
-    sections: sections.rows.map((r) => ({
-      anchor: asStr(r.heading_slug),
-      heading: asStr(r.heading),
-      parent: asStrOrNull(r.parent_slug),
-    })),
-  };
+  return res.rows.map((r) => ({
+    anchor: asStr(r.heading_slug),
+    heading: asStr(r.heading),
+    parent: asStrOrNull(r.parent_slug),
+  }));
 }

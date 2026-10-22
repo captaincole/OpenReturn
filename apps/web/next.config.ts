@@ -10,6 +10,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
+  experimental: {
+    /*
+     * Off: with the dev filesystem cache (on by default since Next 16.1),
+     * a restart served a globals.css chunk from before edits made while
+     * the server was stopped, so new Tailwind/CSS rules never reached the
+     * page. A cold start is slower, but CSS is always current.
+     */
+    turbopackFileSystemCacheForDev: false,
+  },
   /*
    * The dev-tools FAB defaults to bottom-left. There it covers the chat
    * composer's attach button.

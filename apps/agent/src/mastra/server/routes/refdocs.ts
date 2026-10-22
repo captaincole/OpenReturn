@@ -1,24 +1,22 @@
 import { registerApiRoute } from "@mastra/core/server";
 import { getDocumentSource } from "../../db/corpusFiles";
 import { getDocument } from "../../db/corpusStore";
-import { getLibraryHtmlDocument, listLibrary } from "../../db/refLibrary";
+import { listLibrary, listSections } from "../../db/refLibrary";
 
 /*
  * The reference library — what tax-code Q&A searches.
  *
  *   GET /app/refdocs              → { documents: LibraryDocument[] }
  *   GET /app/refdocs/:docId/pdf   → the source PDF, inline, from corpus.db
- *   GET /app/refdocs/:docId/html  → LibraryHtmlDocument: a cleaned HTML
- *                                   document (format "html") and its
- *                                   headings, for the library's page
+ *   GET /app/refdocs/:docId/html  → a cleaned HTML document (format
+ *                                   "html") and its headings, for the
+ *                                   library's page
  *
  * The web app links to the PDF with a #page=N fragment, so the browser's
- * viewer opens on the cited page. A document with no stored PDF — an HTML
- * document (sidecar format "html"), or a corpus built before
- * ref_document_files — redirects to its sourceUrl, the publisher's page;
- * the browser keeps any fragment across the redirect. Corpus data is shared reference
- * material, not user data, so these routes need no owner check beyond
- * the middleware's token gate.
+ * viewer opens on the cited page; a PDF document whose file is not stored
+ * redirects to its sourceUrl. Corpus data is shared reference material,
+ * not user data, so these routes need no owner check beyond the
+ * middleware's token gate.
  */
 
 export const listRefDocsRoute = registerApiRoute("/app/refdocs", {
@@ -50,7 +48,18 @@ export const refDocPdfRoute = registerApiRoute("/app/refdocs/:docId/pdf", {
 export const refDocHtmlRoute = registerApiRoute("/app/refdocs/:docId/html", {
   method: "GET",
   handler: async (c) => {
-    const doc = await getLibraryHtmlDocument(c.req.param("docId"));
-    return doc ? c.json(doc) : c.json({ error: "not found" }, 404);
+    const doc = await getDocument(c.req.param("docId"));
+    const source = doc?.format === "html" ? await getDocumentSource(doc.docId) : null;
+    if (!doc || !source) return c.json({ error: "not found" }, 404);
+    const { docId, title, publisher, taxYear, sourceUrl } = doc;
+    return c.json({
+      docId,
+      title,
+      publisher,
+      taxYear,
+      sourceUrl,
+      html: new TextDecoder().decode(source),
+      sections: await listSections(docId),
+    });
   },
 });

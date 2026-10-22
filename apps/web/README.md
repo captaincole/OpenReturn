@@ -22,6 +22,7 @@ The first run redirects to `/setup` to create the owner account. The env file is
 | `/r/[returnId]` | A return: chat with Luca, activity, forms, documents |
 | `/ask/[threadId]` | Ask The Tax Code: cited answers and follow-up questions |
 | `/library` | The reference documents the answers can cite |
+| `/library/[docId]` | One HTML reference document (FTB web page), opened at a cited section |
 
 ## How it talks to the agent
 

@@ -224,8 +224,8 @@
     font-weight: 600;
     color: var(--color-ink-secondary);
   }
-  /* The section a citation opened. */
-  .ref-doc :is(h2, h3, h4):target {
+  /* The section a citation (or the contents rail) opened: RefDocView sets data-cited. */
+  .ref-doc [data-cited] {
     color: var(--color-accent);
   }
   .ref-doc p {

@@ -6,7 +6,9 @@
  * semantic tags only, no scripts, styles or event attributes, so it is
  * rendered as-is and styled by `.ref-doc` in globals.css (theme tokens).
  * The page loads after navigation, so the browser cannot jump to a
- * #section on its own: once the document is in, we scroll to it.
+ * #section on its own, and `:target` is not reliable for headings that
+ * arrive late: once the document is in, we scroll to the section and
+ * mark it with data-cited (re-marked when the hash changes).
  */
 
 import { fetchLibraryDocument, type LibraryHtmlDocument, type LibrarySection } from "@/lib/ask";
@@ -29,8 +31,17 @@ export function RefDocView({ docId }: { docId: string }) {
 
   useEffect(() => {
     if (!doc) return;
-    const anchor = decodeURIComponent(window.location.hash.slice(1));
-    if (anchor) document.getElementById(anchor)?.scrollIntoView();
+    const mark = (scroll: boolean) => {
+      document.querySelectorAll("[data-cited]").forEach((el) => el.removeAttribute("data-cited"));
+      const anchor = decodeURIComponent(window.location.hash.slice(1));
+      const el = anchor ? document.getElementById(anchor) : null;
+      el?.setAttribute("data-cited", "");
+      if (scroll) el?.scrollIntoView();
+    };
+    const onHashChange = () => mark(false);
+    mark(true);
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
   }, [doc]);
 
   if (error) return <p className="mx-auto max-w-3xl text-[14px] text-danger">{error}</p>;
