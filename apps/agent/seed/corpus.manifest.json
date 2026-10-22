@@ -4,6 +4,6 @@
   "file": "corpus.db",
   "sha256": "bcc17c9a72ad99590e0649771f1ad9bb08c802af891c67ab3f47b9cec81b5e6b",
   "sizeBytes": 324882432,
-  "url": "https://github.com/captaincole/summa-tax/releases/download/corpus-v7/corpus.db",
+  "url": "https://github.com/captaincole/openreturn/releases/download/corpus-v7/corpus.db",
   "_notes": "GitHub Release asset (corpus-v7 tag). Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in ref_meta), so clones running Ollama need no reembed. The source files live in the database, not in git; packages/sources keeps their sidecars. corpus-v4 changed the schema (ref_documents.format, ref_document_files.source): replace an older corpus.db with `npm run corpus -- fetch --force`. Everyone downloads the full corpus; per-state packs are a future option if size demands it."
 }

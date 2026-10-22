@@ -13,7 +13,7 @@ import type { InputShape } from "./inputShape.js";
 import type { RootCause } from "./rootCauses.js";
 import type { SupportIssue } from "./support.js";
 
-export const REPORT_SCHEMA = "summa-check/1";
+export const REPORT_SCHEMA = "openreturn-check/1";
 
 /* Placeholder until the first checker run settles the channel. */
 export const SEND_INSTRUCTIONS =
@@ -186,7 +186,7 @@ export function reportHead(input: ReportInput): string[] {
   const { result } = input;
   const matched = Object.values(result.matches).reduce((n, ids) => n + ids.length, 0);
   return [
-    `# Summa check — tax year ${input.taxYear}`,
+    `# OpenReturn check — tax year ${input.taxYear}`,
     "",
     `- **Prepared by:** ${preparerLine(input.preparer)}`,
     `- **Engine:** \`${input.engineCommit}\``,

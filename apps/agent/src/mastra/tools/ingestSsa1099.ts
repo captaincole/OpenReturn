@@ -1,5 +1,5 @@
 import { createTool } from "@mastra/core/tools";
-import { makeSocialSecurityFactKey, type SocialSecurityFactValue } from "@summa/engine/facts";
+import { makeSocialSecurityFactKey, type SocialSecurityFactValue } from "@openreturn/engine/facts";
 import { z } from "zod";
 import { recordIngestFact, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";

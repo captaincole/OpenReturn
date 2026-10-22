@@ -1,10 +1,10 @@
-# Project Summa — Claude Development Guide
+# Project OpenReturn — Claude Development Guide
 
 ## What this is
 
-**Summa** is an AI CPA platform for high-net-worth individuals (HNWIs). Target user has W-2 income of $400k+/yr and $2–5M in investable assets, often with RSUs, K-1s, rental property, multi-state or foreign exposure, crypto, and meaningful charitable giving. The name nods to Cade Pacioli's *Summa de arithmetica* (1494), the book that first described double-entry bookkeeping.
+**OpenReturn** is an open-source AI tax platform: twin agents, Cade and Canon, that prepare your US federal and California return or estimate. Target user has W-2 income of $400k+/yr and $2–5M in investable assets, often with RSUs, K-1s, rental property, multi-state or foreign exposure, crypto, and meaningful charitable giving.
 
-Agents on the platform:
+The twin agents:
 
 - **Cade** — your CPA. The conversational front-desk agent: guides the user through the tax-prep flow, records facts and decisions, orchestrates workflows, narrates progress. First agent built.
 - **Canon** — your tax attorney. Grounds Cade's decisions in the IRS/FTB reference corpus and answers tax-code questions with citations. Today Canon is the review judges and the Ask pipeline inside the agent app; the migration plan makes it its own Mastra project.
@@ -12,7 +12,7 @@ There is exactly **one** conversational agent (Cade). Grounding is NOT a convers
 
 **Tax-code Q&A ("Ask The Tax Code")** is not a conversation either: each question runs a fixed pipeline (`workflows/askTurn/`: formulate → retrieve → answer → validate) with two more judges (askQueryFormulator, askAnswerer). A "partial" answer names its gaps as search queries; the pipeline searches once more with them and answers again. Follow-ups pass the earlier turns as context; threads live in `ask_threads`/`ask_turns` in `app.db`, whose `log_json` is the query log. `validate.ts` drops any citation or quote that does not trace to a retrieved block. The Ask eval (`apps/agent/evals/ask/`, report in `docs/evals/ask.md`) runs labeled questions through this pipeline and scores coverage, grounding, retrieval and the stated facts.
 
-Note: the Unix working directory is still `project-merrilin` (the product's earliest name; later "Wheel of Time," now "Summa"). The directory name was left alone to avoid churning local paths/configs. Internal names / IDs / docs use "summa" or "Summa".
+Note: the Unix working directory is still `project-merrilin` (the product's earliest name; later "Wheel of Time," then "Summa," now "OpenReturn"). The directory name was left alone to avoid churning local paths/configs. Internal names / IDs / docs use "openreturn" or "OpenReturn". The agent was "Luca" before it was Cade; old threads in mastra.db carry that id.
 
 The end goal is a three-stage workflow:
 
@@ -28,7 +28,7 @@ This is a monorepo. `apps/agent`, `packages/engine`, and `packages/sources` are 
 
 ```
 packages/
-├── engine/                      # @summa/engine — THE FORM ENGINE. Pure, deterministic, no AI/DB/network.
+├── engine/                      # @openreturn/engine — THE FORM ENGINE. Pure, deterministic, no AI/DB/network.
 │   ├── src/                       Owns the fact vocabulary (facts/), per-jurisdiction form
 │   │                              registries (federal/, state/ca/; each form's catalog.json sits
 │   │                              next to its bindings.ts), worksheets, PDF fill.
@@ -37,7 +37,7 @@ packages/
 │   ├── scripts/                 # renderScenario, lockScenario, compareFiled
 │   ├── paths.ts                 # on-disk locations for offline tooling
 │   └── README.md                # contributor guide; public API = package.json "exports"
-└── sources/                     # @summa/sources — data only: what the IRS/FTB publish, by tax year.
+└── sources/                     # @openreturn/sources — data only: what the IRS/FTB publish, by tax year.
                                    <year>/forms/federal/<short>/ and <year>/forms/state/<st>/<short>/
                                    hold blank.pdf, the instructions sidecar (instructions.meta.json)
                                    and tax-table sources; <year>/publications/{federal,state/<st>}/<pub>/
@@ -58,7 +58,7 @@ apps/
 │   │                              plus standalone diagnostics (smokeReview, …)
 │   ├── tests/                   # agent tests (tools, db, refdocs); engine tests are in packages/engine
 │   ├── package.json             # agent deps + scripts (mastra dev, corpus, form-engine, sources:sync)
-│   └── tsconfig.json            # "paths" aliases @summa/* to source so `mastra dev` bundles them
+│   └── tsconfig.json            # "paths" aliases @openreturn/* to source so `mastra dev` bundles them
 └── web/                         # Next.js 16 (App Router) frontend → deployed to Vercel
     ├── app/                     # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
     │                              library, library/[docId]}, /documents/[id] + /api/* route handlers
@@ -73,7 +73,7 @@ package.json                     # workspace root: workspaces + thin delegating 
 CLAUDE.md
 ```
 
-The agent uses the engine only through `@summa/engine`'s exports. The web app shares no source with either.
+The agent uses the engine only through `@openreturn/engine`'s exports. The web app shares no source with either.
 
 ## Running it
 

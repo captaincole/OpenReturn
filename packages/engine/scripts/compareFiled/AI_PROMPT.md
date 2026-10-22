@@ -1,6 +1,6 @@
-# Fill in a Summa comparison folder
+# Fill in a OpenReturn comparison folder
 
-You are helping a taxpayer check the Summa tax engine against the return
+You are helping a taxpayer check the OpenReturn tax engine against the return
 they filed. Fill in the scenario files in `{{FOLDER}}` from their tax
 documents and their filed return. The engine code is in `{{ENGINE}}`.
 

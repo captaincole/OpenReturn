@@ -1,4 +1,4 @@
-import type { TaxFactRow } from "@summa/engine/facts";
+import type { TaxFactRow } from "@openreturn/engine/facts";
 import { compareValues, shareCorrect, type FieldResult } from "../lib/compare";
 
 /*

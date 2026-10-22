@@ -6,7 +6,7 @@ import {
   type DividendFactValue,
   type InterestFactValue,
   type MiscIncomeFactValue,
-} from "@summa/engine/facts";
+} from "@openreturn/engine/facts";
 import { z } from "zod";
 import { recordIngestFact, statementContext, statementFields } from "./ingestShared";
 

@@ -1,9 +1,9 @@
-# Test Summa against your filed return
+# Test OpenReturn against your filed return
 
 [← Back to the README](../README.md)
 
-You can check the Summa engine against a tax return you already filed.
-You enter your documents and the numbers from your filed return. Summa
+You can check the OpenReturn engine against a tax return you already filed.
+You enter your documents and the numbers from your filed return. OpenReturn
 computes the return itself and reports which lines match. You send the
 report to the maintainer, privately. Each report shows us what to fix
 next — and every line that matches counts as proof the engine is right.
@@ -20,7 +20,7 @@ before you start (see [Contributing](contributing.md#who-can-contribute)).
 - **You decide what to send.** Read the report first, then send it
   yourself.
 
-## What Summa supports
+## What OpenReturn supports
 
 Tax year 2025, **single** filers, **California** full-year residents.
 Married filing separately has one unverified test scenario.
@@ -31,11 +31,11 @@ Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
 (Form 5695 Part II). The last two have one unverified test scenario.
 
 A return outside this list still helps: the report shows what your
-return needs that Summa lacks.
+return needs that OpenReturn lacks.
 
 ## Before you start
 
-- Summa runs on your computer — follow the [Quick Start](../README.md#quick-start).
+- OpenReturn runs on your computer — follow the [Quick Start](../README.md#quick-start).
 - You have your **tax documents** (W-2, 1099s) and your **filed return** (PDF or paper).
 
 All commands below run from `packages/engine/`.
@@ -51,7 +51,7 @@ npx tsx scripts/compareFiled/cli.ts ~/taxes/2025-return --init
 ```
 
 The example files hold a fake taxpayer ("Jordan") with a return like a
-typical Summa user's. You replace Jordan's values with yours.
+typical OpenReturn user's. You replace Jordan's values with yours.
 
 | File | What you put in it |
 | --- | --- |
@@ -95,8 +95,8 @@ npx tsx scripts/compareFiled/cli.ts ~/taxes/2025-return --check
 It prints two lists. Fix what they show, then run it again until both are
 clean.
 
-- **Support check** — inputs Summa does not read (usually a typo) and
-  parts of your return Summa does not cover yet.
+- **Support check** — inputs OpenReturn does not read (usually a typo) and
+  parts of your return OpenReturn does not cover yet.
 - **Input check** — a missing preparer, filed lines typed with cents, line
   ids that do not exist.
 
@@ -107,7 +107,7 @@ npx tsx scripts/compareFiled/cli.ts ~/taxes/2025-return
 ```
 
 It writes two files into your folder:
-`summa-check-<year>-<date>.md` (for people) and `.json` (for scripts).
+`openreturn-check-<year>-<date>.md` (for people) and `.json` (for scripts).
 
 To see the dollar amounts yourself, add `--show-values`. They print to
 your terminal only — never into the report.

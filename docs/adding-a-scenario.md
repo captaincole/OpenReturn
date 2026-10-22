@@ -10,7 +10,7 @@ it.
 
 **All scenario data is fake.** A real return never enters the repo. To
 check the engine against a real return, use the private comparison kit
-([Test Summa against your filed return](testing-with-your-return.md)),
+([Test OpenReturn against your filed return](testing-with-your-return.md)),
 which keeps the data outside the project.
 
 ## The steps
@@ -32,7 +32,7 @@ becomes one file per document.
 
 Decide what the return looks like: filing status, state, which forms
 it files, and which answers (decisions) it needs. Compare that with
-[What Summa supports](testing-with-your-return.md#what-summa-supports).
+[What OpenReturn supports](testing-with-your-return.md#what-openreturn-supports).
 A scenario earns its place when it covers a shape no other scenario
 covers (alex: one W-2; alejandro: investment income; marcus: capital
 gains; jordan: high income, HSA, rollovers, crypto; carter: MFS,
@@ -145,7 +145,7 @@ A locked scenario writes its own:
 
 - Run the gates in the table below. All of them must pass.
 - Add new input documents to
-  [What Summa supports](testing-with-your-return.md#what-summa-supports)
+  [What OpenReturn supports](testing-with-your-return.md#what-openreturn-supports)
   and to the comparison kit's support check
   (`scripts/compareFiled/support.ts`).
 - Add the scenario to the list in `apps/agent/tests/README.md`.

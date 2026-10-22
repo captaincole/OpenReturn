@@ -152,13 +152,13 @@ export function register(): void {
         "Part II (FUTA tax, lines 10–26) is not modeled. It applies when line 9 is Yes.",
       "1.line.23": "Part II (FUTA tax, lines 10–26) is not modeled. It applies when line 9 is Yes.",
       "1.signing.preparer_self_employed":
-        "Paid preparer block: Summa does not model preparer details.",
-      "1.signing.preparer_name": "Paid preparer block: Summa does not model preparer details.",
-      "1.signing.preparer_ptin": "Paid preparer block: Summa does not model preparer details.",
-      "1.signing.firm_name": "Paid preparer block: Summa does not model preparer details.",
-      "1.signing.firm_ein": "Paid preparer block: Summa does not model preparer details.",
-      "1.signing.firm_address": "Paid preparer block: Summa does not model preparer details.",
-      "1.signing.firm_phone": "Paid preparer block: Summa does not model preparer details.",
+        "Paid preparer block: OpenReturn does not model preparer details.",
+      "1.signing.preparer_name": "Paid preparer block: OpenReturn does not model preparer details.",
+      "1.signing.preparer_ptin": "Paid preparer block: OpenReturn does not model preparer details.",
+      "1.signing.firm_name": "Paid preparer block: OpenReturn does not model preparer details.",
+      "1.signing.firm_ein": "Paid preparer block: OpenReturn does not model preparer details.",
+      "1.signing.firm_address": "Paid preparer block: OpenReturn does not model preparer details.",
+      "1.signing.firm_phone": "Paid preparer block: OpenReturn does not model preparer details.",
       "1.line.18.taxable_wages_total":
         "Part II (FUTA tax, lines 10–26) is not modeled. It applies when line 9 is Yes.",
       "1.line.18.contributions_total":

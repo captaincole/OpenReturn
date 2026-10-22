@@ -1,5 +1,5 @@
 {
-  "name": "summa-agent",
+  "name": "openreturn-agent",
   "version": "0.1.0",
   "private": true,
   "description": "Mastra-based AI CPA backend. Conversational agent (Cade) orchestrates fact-gathering and form generation; Nynaeve reviews every AI decision against the IRS reference corpus.",
@@ -31,14 +31,14 @@
     "@mastra/memory": "^1.17.4",
     "@mastra/observability": "^1.10.3",
     "@napi-rs/canvas": "^0.1.100",
-    "@summa/engine": "0.1.0",
+    "@openreturn/engine": "0.1.0",
     "dotenv": "^17.4.2",
     "mastra": "^1.7.2",
     "unpdf": "^1.6.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@summa/sources": "0.1.0",
+    "@openreturn/sources": "0.1.0",
     "@types/node": "^20",
     "cheerio": "^1.2.0",
     "domhandler": "^5.0.3",

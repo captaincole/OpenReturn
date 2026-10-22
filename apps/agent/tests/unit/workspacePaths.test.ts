@@ -1,8 +1,8 @@
 /*
- * tsconfig.json maps each @summa/* entry point to its source file. Mastra
+ * tsconfig.json maps each @openreturn/* entry point to its source file. Mastra
  * dev reads the `server` config by bundling src/mastra/index.ts and
  * running the result with plain Node; without the alias it leaves
- * @summa/engine external, and Node cannot load the engine's TypeScript.
+ * @openreturn/engine external, and Node cannot load the engine's TypeScript.
  * The alias makes Mastra bundle it instead. This test keeps the alias
  * equal to the packages' `exports` maps.
  */

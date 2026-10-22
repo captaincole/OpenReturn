@@ -39,7 +39,7 @@ number are invented.
 ## Not modeled
 
 - Form 1040 line 4c, box 2 ("QCD"): the IRS draft checks it for the
-  code Q (qualified Roth IRA) distribution. Summa does not model
+  code Q (qualified Roth IRA) distribution. OpenReturn does not model
   qualified charitable distributions. The taxable amount (line 4b) is
   0 either way, because box 2a of that 1099-R is 0.
 

@@ -9,7 +9,7 @@
  * rank fusion. Fields run in parallel under a concurrency cap.
  */
 
-import type { FieldInventory } from "@summa/engine/catalog";
+import type { FieldInventory } from "@openreturn/engine/catalog";
 import { hybridSearchRefDocs } from "../mastra/db/corpusSearch.js";
 
 /*

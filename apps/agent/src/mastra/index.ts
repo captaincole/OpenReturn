@@ -27,7 +27,7 @@ const storage = await createStorage();
  * not `logger.error()` unhandled handler exceptions before it returns
  * 500, which would otherwise hide the failure in prod.
  */
-const logger = new ConsoleLogger({ name: "summa", level: "info" });
+const logger = new ConsoleLogger({ name: "openreturn", level: "info" });
 
 export const mastra = new Mastra({
   /*

@@ -1,6 +1,6 @@
 # apps/web
 
-The Summa web app: Next.js 16 (App Router). You chat with Cade, upload documents, watch your return take shape, and ask the tax code questions.
+The OpenReturn web app: Next.js 16 (App Router). You chat with Cade, upload documents, watch your return take shape, and ask the tax code questions.
 
 ## Run
 

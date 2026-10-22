@@ -19,9 +19,9 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 // Point the app DB at a temp file BEFORE importing anything that opens it.
-const SMOKE_DB = join(tmpdir(), `summa-smoke-${Date.now()}.db`);
+const SMOKE_DB = join(tmpdir(), `openreturn-smoke-${Date.now()}.db`);
 process.env.APP_DB_PATH = SMOKE_DB;
-process.env.MASTRA_DB_PATH = join(tmpdir(), `summa-smoke-mastra-${Date.now()}.db`);
+process.env.MASTRA_DB_PATH = join(tmpdir(), `openreturn-smoke-mastra-${Date.now()}.db`);
 
 const YEAR = 2025;
 const OWNER_ID = "smoke-owner";

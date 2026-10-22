@@ -2,7 +2,7 @@ import { createTool } from "@mastra/core/tools";
 import {
   makeRetirementDistributionFactKey,
   type RetirementDistributionFactValue,
-} from "@summa/engine/facts";
+} from "@openreturn/engine/facts";
 import { z } from "zod";
 import { PayerSchema, recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";

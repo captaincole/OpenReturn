@@ -1,4 +1,4 @@
-import { SOURCES_ROOT } from "@summa/sources";
+import { SOURCES_ROOT } from "@openreturn/sources";
 import type { Dirent } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
@@ -7,7 +7,7 @@ import type { ParserStyle } from "./parse";
 import { isPublishedDate } from "./published";
 
 /*
- * Walks the @summa/sources tree (packages/sources/<year>/…) for corpus
+ * Walks the @openreturn/sources tree (packages/sources/<year>/…) for corpus
  * sidecars: instructions.meta.json (form instructions, under forms/) and
  * publication.meta.json (an IRS/FTB publication, under publications/).
  * The sidecars are committed; their source files are not. A source file

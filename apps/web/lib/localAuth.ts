@@ -16,7 +16,7 @@ import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypt
  * optimistic presence check because the Edge runtime cannot read app.db.
  */
 
-export const SESSION_COOKIE = "summa_session";
+export const SESSION_COOKIE = "openreturn_session";
 const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 export interface OwnerSession {

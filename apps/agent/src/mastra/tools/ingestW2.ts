@@ -1,5 +1,5 @@
 import { createTool } from "@mastra/core/tools";
-import { makeW2FactKey, type W2FactValue } from "@summa/engine/facts";
+import { makeW2FactKey, type W2FactValue } from "@openreturn/engine/facts";
 import { z } from "zod";
 import type { Scope } from "../db/appDb";
 import { recordFact } from "../db/taxFacts";

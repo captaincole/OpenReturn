@@ -156,7 +156,7 @@ function hasModel(models: string[], name: string): boolean {
 // ─── Main ───────────────────────────────────────────────────────────────
 
 async function main(): Promise<void> {
-  console.log("Summa doctor — machine, config, and model-server diagnostics");
+  console.log("OpenReturn doctor — machine, config, and model-server diagnostics");
 
   machineSection();
   configSection();

@@ -1,6 +1,6 @@
-# The Form Engine (`@summa/engine`)
+# The Form Engine (`@openreturn/engine`)
 
-The deterministic core of Summa. Facts and decisions go in, evaluated tax
+The deterministic core of OpenReturn. Facts and decisions go in, evaluated tax
 forms come out. **No AI anywhere in the math** — every line on every form is
 computed by a typed, pure-function derivation you can read, test, and diff.
 
@@ -21,10 +21,10 @@ packages/engine/
 ```
 
 Other code imports only the `exports` in `package.json`:
-`@summa/engine` (evaluate, render, pendingInputs, FORMS, the FormField
-types), `@summa/engine/facts` (the fact vocabulary and row types),
-`@summa/engine/catalog` (for the agent's form tools),
-`@summa/engine/paths`, and `@summa/engine/scenarios` (test fixtures).
+`@openreturn/engine` (evaluate, render, pendingInputs, FORMS, the FormField
+types), `@openreturn/engine/facts` (the fact vocabulary and row types),
+`@openreturn/engine/catalog` (for the agent's form tools),
+`@openreturn/engine/paths`, and `@openreturn/engine/scenarios` (test fixtures).
 A deep import does not resolve.
 
 Commands, from the repo root: `npm test` (golden), `npm run test:unit`,

@@ -1,5 +1,5 @@
-import { evaluateScenario } from "@summa/engine";
-import { alexScenario } from "@summa/engine/scenarios";
+import { evaluateScenario } from "@openreturn/engine";
+import { alexScenario } from "@openreturn/engine/scenarios";
 import { describe, expect, it } from "vitest";
 import { buildCaseStateForScenario } from "../../src/mastra/tools/caseState";
 

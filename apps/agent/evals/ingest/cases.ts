@@ -1,5 +1,5 @@
-import type { TaxFactRow } from "@summa/engine/facts";
-import { SCENARIOS } from "@summa/engine/scenarios";
+import type { TaxFactRow } from "@openreturn/engine/facts";
+import { SCENARIOS } from "@openreturn/engine/scenarios";
 import path from "node:path";
 
 /*

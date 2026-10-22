@@ -89,7 +89,7 @@ export function createObservability(): Observability {
   return new Observability({
     configs: {
       default: {
-        serviceName: "summa",
+        serviceName: "openreturn",
         exporters: isDev
           ? [new ConsoleExporter({ customSpanFormatter: formatSpan }), new DefaultExporter()]
           : [new DefaultExporter()],

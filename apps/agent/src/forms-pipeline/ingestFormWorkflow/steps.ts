@@ -19,7 +19,7 @@
  */
 
 import { createStep } from "@mastra/core/workflows";
-import { SOURCES_ROOT } from "@summa/sources";
+import { SOURCES_ROOT } from "@openreturn/sources";
 import { promises as fs } from "node:fs";
 import { relative } from "node:path";
 import { ensureCorpusSchema, getCorpusDb } from "../../mastra/db/libsql.js";

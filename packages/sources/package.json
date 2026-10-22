@@ -1,5 +1,5 @@
 {
-  "name": "@summa/sources",
+  "name": "@openreturn/sources",
   "version": "0.1.0",
   "private": true,
   "description": "Source documents the IRS and FTB publish, by tax year: fillable blank PDFs, form instructions, publications, and tax-table sources. Data only: we download these files and do not edit them.",
