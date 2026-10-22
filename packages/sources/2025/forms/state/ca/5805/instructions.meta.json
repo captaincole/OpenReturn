@@ -4,5 +4,7 @@
   "publisher": "FTB",
   "taxYear": 2025,
   "sourceUrl": "https://www.ftb.ca.gov/forms/2025/2025-5805-instructions.html",
-  "sha256": "9b2c4a0c8a53c7d834df79e9f3b164e1c8fec3600220c78324373a8273099c0c"
+  "sha256": "1f461758b1d4cf2c1838b6892fb0daa7c875eca1d6bed8dac3566ac92dcfe3b2",
+  "format": "html",
+  "cleanerVersion": 1
 }

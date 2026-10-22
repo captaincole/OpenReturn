@@ -5,13 +5,13 @@
  *
  * Keyed exactly as FTB prints them — "base + rate × amount over" — not
  * converted to the federal "multiply and subtract" form, so every
- * number here can be checked against the booklet by eye:
+ * number here can be checked against FTB's schedules by eye:
  *
  *     tax = base + rate × (income − overMin)
  *
- * Source: 2025 California 540 Personal Income Tax Booklet, page 75 —
- * 2025 California Tax Rate Schedules X, Y, Z.
- * Block id: ca-540-booklet-2025::sec::schedule-x::b01.
+ * Source: 2025 California Tax Rate Schedules X, Y, Z
+ * (ftb.ca.gov/forms/2025/2025-540-tax-rate-schedules.pdf; also page 75
+ * of the 540 Personal Income Tax Booklet). Not in the reference corpus.
  *
  * Rows below $100,000 are kept: the base of each higher row depends on
  * them, and a full copy is easier to verify against the page.
