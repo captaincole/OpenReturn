@@ -1,7 +1,7 @@
 /*
  * Ingest the IRS tax table from Pub 17 (HTML) into a checked-in JSON
  * file. The source HTML lives in @summa/sources
- * (<year>/federal/tax-table.source.html); the JSON goes to the engine's
+ * (<year>/forms/federal/tax-table.source.html); the JSON goes to the engine's
  * src/data/. Reproducible: a re-run with no flags hits the cached HTML and
  * rebuilds the JSON. Use `--refresh` to re-fetch from irs.gov and check
  * for upstream changes since the last ingest (the sha256 changes).

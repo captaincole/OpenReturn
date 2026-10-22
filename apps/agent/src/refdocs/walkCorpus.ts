@@ -66,8 +66,8 @@ async function walkPdfs(dir: string): Promise<string[]> {
   return out;
 }
 
-export async function walkCorpus(formsRoot: string = SOURCES_ROOT): Promise<WalkResult> {
-  const root = resolve(formsRoot);
+export async function walkCorpus(sourcesRoot: string = SOURCES_ROOT): Promise<WalkResult> {
+  const root = resolve(sourcesRoot);
   const pdfPaths = await walkPdfs(root);
 
   const entries: CorpusEntry[] = [];

@@ -1,8 +1,9 @@
 /*
- * Idempotent corpus sync. Walks the source PDFs under forms/
- * (instructions.pdf, publication.pdf) and ingests anything missing or
- * sha-drifted. The ingest pipeline's own sha-skip handles re-runs with
- * unchanged PDFs, so the command is also cheap to run on every dev tick.
+ * Idempotent corpus sync. Walks the source PDFs under packages/sources/
+ * (instructions.pdf under forms/, publication.pdf under publications/)
+ * and ingests anything missing or sha-drifted. The ingest pipeline's own
+ * sha-skip handles re-runs with unchanged PDFs, so the command is also
+ * cheap to run on every dev tick.
  *
  * The loop continues past per-doc failures, so one bad PDF does not
  * block the rest. The run exits non-zero at the end if any doc failed.

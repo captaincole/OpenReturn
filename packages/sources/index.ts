@@ -4,7 +4,9 @@
  *                                      is the form's folder (federal/1040,
  *                                      state/ca/540), the same string the
  *                                      engine uses
- *   <taxYear>/publications/<jur>/<pub>/  IRS and FTB publications
+ *   <taxYear>/publications/<jurisdiction>/<pub>/  IRS and FTB publications;
+ *                                      jurisdiction is federal or state/<st>,
+ *                                      as under forms/
  * Offline tools read from here; the agent copies the runtime files
  * (blank PDFs, instructions, publications) into its runtime tree (apps/agent
  * scripts/syncSources.ts).

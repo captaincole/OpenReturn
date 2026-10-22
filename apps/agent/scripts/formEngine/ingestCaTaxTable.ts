@@ -4,7 +4,7 @@
  * ingest-federal-tax-table pipeline, but it reads PDF text, not HTML.
  *
  * `--refresh` re-downloads from ftb.ca.gov. The default uses the cached
- * PDF in @summa/sources (<year>/state/ca/tax-table.source.pdf); the JSON
+ * PDF in @summa/sources (<year>/forms/state/ca/tax-table.source.pdf); the JSON
  * goes to the engine's src/data/.
  *
  * Spot-checks are hand-keyed from pages 1, 3, 4, and 5 of the published

@@ -1,6 +1,7 @@
 /*
- * Read-only diff between the source PDFs under forms/ (instructions.pdf,
- * publication.pdf) and the ref_documents rows in the local corpus DB.
+ * Read-only diff between the source PDFs under packages/sources/
+ * (instructions.pdf under forms/, publication.pdf under publications/)
+ * and the ref_documents rows in the local corpus DB.
  * Exits 0 unless --strict is set and drift exists.
  */
 

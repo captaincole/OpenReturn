@@ -8,7 +8,7 @@ The documents the IRS and FTB publish, stored by tax year and then by document t
 <year>/forms/federal/tax-table.source.html
 <year>/forms/state/ca/tax-table.source.pdf
 <year>/publications/federal/<pub>/   publication.pdf, publication.meta.json, publication.canonical.txt
-<year>/publications/<st>/<pub>/
+<year>/publications/state/<st>/<pub>/
 ```
 
 - `blank.pdf`: the fillable form. The engine fills it. A form's folder path below `forms/` (`federal/1040`) is the form's `relativeDir` in the engine.
@@ -18,4 +18,4 @@ The documents the IRS and FTB publish, stored by tax year and then by document t
 
 Files we generate do not go here. A form's `catalog.json` sits next to its bindings in `packages/engine/src/<relativeDir>/`.
 
-For a new tax year, add a `<year>/` folder. For a new state, add `<year>/forms/state/<st>/` (and `<year>/publications/<st>/` for its publications).
+For a new tax year, add a `<year>/` folder. For a new state, add `<year>/forms/state/<st>/` (and `<year>/publications/state/<st>/` for its publications).

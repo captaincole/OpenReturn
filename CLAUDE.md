@@ -39,7 +39,7 @@ packages/
 └── sources/                     # @summa/sources — data only: what the IRS/FTB publish, by tax year.
                                    <year>/forms/federal/<short>/ and <year>/forms/state/<st>/<short>/
                                    hold blank.pdf, instructions.pdf (+ .meta.json, .canonical.txt)
-                                   and tax-table sources; <year>/publications/<jur>/<pub>/ holds
+                                   and tax-table sources; <year>/publications/{federal,state/<st>}/<pub>/ holds
                                    publication.pdf (+ sidecars). Files we generate (catalogs,
                                    tax-table JSON) live with the engine.
 apps/
@@ -163,7 +163,7 @@ Every output form (1040, 540, 8949, Schedule D, …) is a collection of typed **
 
 TypeScript enforces both. Adding a field without declaring them is a compile error — the categorization layer (`packages/engine/src/categorization/categorize.ts`) is automatically consistent because it reads `field.category` directly off each field.
 
-**When adding a new form**: follow the checklist in `packages/engine/README.md` — form folder under the jurisdiction (`src/federal/<short>/` or `src/state/<st>/<short>/`, with its `catalog.json`), one `makeFormSpec` entry in that jurisdiction's `index.ts`, source documents in `packages/forms/<year>/<same subpath>/`. TypeScript will fail to compile until every field has its `category` and `valueType`.
+**When adding a new form**: follow the checklist in `packages/engine/README.md` — form folder under the jurisdiction (`src/federal/<short>/` or `src/state/<st>/<short>/`, with its `catalog.json`), one `makeFormSpec` entry in that jurisdiction's `index.ts`, source documents in `packages/sources/<year>/forms/<same subpath>/`. TypeScript will fail to compile until every field has its `category` and `valueType`.
 
 **Header fields** (top-of-form personal info, filing-status checkboxes) are modeled as FormFields too — text/single-select kinds that derive from identity facts / scope decisions. They sit in the same `EvaluatedForm.fields` array as the numeric lines. PDF renderers continue to read raw facts directly; the header fields exist for the Filing Status panel rollup.
 
