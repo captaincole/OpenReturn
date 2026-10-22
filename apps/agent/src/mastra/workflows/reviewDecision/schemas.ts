@@ -23,7 +23,7 @@ export const irsBlockSnapshotSchema = z.object({
   docId: z.string(),
   text: z.string(),
   /*
-   * Score from the retrieval call (merged best-of-leg similarity).
+   * Score from the retrieval call (reciprocal rank fusion; higher is better).
    * Persisted so future evals can compare retrieval strategies.
    */
   score: z.number().optional(),

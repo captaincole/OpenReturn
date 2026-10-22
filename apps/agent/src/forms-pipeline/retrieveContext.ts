@@ -5,8 +5,8 @@
  * regulatory text instead of guessing from the field label alone.
  *
  * Uses the existing hybridSearchRefDocs (the grounding review's retrieval
- * path): FTS leg + local embedding vector leg, merged best-of-leg
- * ordering. Fields run in parallel under a concurrency cap.
+ * path): FTS leg + local embedding vector leg, merged by reciprocal
+ * rank fusion. Fields run in parallel under a concurrency cap.
  */
 
 import type { FieldInventory } from "@summa/engine/catalog";
