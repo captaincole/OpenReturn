@@ -1,0 +1,41 @@
+{
+  "name": "@openreturn/canon",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Canon, the tax attorney: the IRS/FTB reference corpus (corpus.db), its ingest pipeline and CLI, hybrid retrieval, the Ask The Tax Code pipeline and the grounding judges. A Mastra project with an MCP server; no user data.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "dev": "mastra dev --env .env.development",
+    "build": "mastra build",
+    "start": "cd .mastra/output && node index.mjs",
+    "corpus": "tsx scripts/corpus/cli.ts",
+    "test:unit": "vitest run tests/unit",
+    "test:unit:watch": "vitest tests/unit",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.17.4",
+    "@mastra/core": "^1.30.0",
+    "@mastra/libsql": "1.9.1",
+    "@mastra/mcp": "1.6.0",
+    "@mastra/observability": "^1.10.3",
+    "dotenv": "^17.4.2",
+    "mastra": "^1.7.2",
+    "unpdf": "^1.6.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@openreturn/sources": "0.1.0",
+    "@types/node": "^20",
+    "cheerio": "^1.2.0",
+    "domhandler": "^5.0.3",
+    "tsx": "^4.20.5",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
+  }
+}

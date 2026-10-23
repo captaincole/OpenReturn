@@ -1,3 +1,4 @@
+import type { SourceFormat } from "@openreturn/canon";
 import {
   asJson,
   asNum,
@@ -8,7 +9,6 @@ import {
   getAppDb,
   nowIso,
 } from "./appDb";
-import type { SourceFormat } from "./corpusStore";
 
 /*
  * Persistence for tax-code Q&A. Two tables (DDL in appDb.ts):

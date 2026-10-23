@@ -1,0 +1,194 @@
+import { createClient, type Client } from "@libsql/client";
+import "dotenv/config";
+import { mkdirSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+/*
+ * The reference corpus lives in a single local libsql/SQLite file — "the
+ * DB is a file." This replaces the Supabase/Postgres corpus store (ref_*
+ * tables + the match_ref_blocks RPC). One @libsql/client drives text
+ * (FTS5), vectors (native F32_BLOB + vector_distance_cos), and the
+ * relational doc graph.
+ *
+ * Path resolution:
+ *   - CORPUS_DB_PATH env wins. Set it in .env.development so `mastra dev`
+ *     and the corpus CLI agree on one file.
+ *   - Otherwise default to <canon>/.data/corpus.db, anchored to this
+ *     module's location. Then cwd (repo root vs canon vs mastra
+ *     output) does not matter for local dev.
+ */
+
+const MODULE_DIR = dirname(fileURLToPath(import.meta.url)); // …/canon/src/db
+const DEFAULT_DB_PATH = resolve(MODULE_DIR, "../../.data/corpus.db"); // …/canon/.data/corpus.db
+
+function corpusDbPath(): string {
+  return process.env.CORPUS_DB_PATH ? resolve(process.env.CORPUS_DB_PATH) : DEFAULT_DB_PATH;
+}
+
+let cached: Client | null = null;
+let schemaReady: Promise<void> | null = null;
+
+export function getCorpusDb(): Client {
+  if (cached) return cached;
+  const path = corpusDbPath();
+  mkdirSync(dirname(path), { recursive: true });
+  cached = createClient({ url: `file:${path}` });
+  return cached;
+}
+
+/*
+ * Idempotent schema DDL. Safe to run on a prebuilt (shipped) .db — every
+ * statement is CREATE … IF NOT EXISTS. ensureCorpusSchema executes the
+ * list in one batch, in order.
+ */
+const CORPUS_SCHEMA_DDL: string[] = [
+  `CREATE TABLE IF NOT EXISTS ref_documents (
+           doc_id              TEXT PRIMARY KEY,
+           title               TEXT NOT NULL,
+           publisher           TEXT NOT NULL,
+           tax_year            INTEGER,
+           source_path         TEXT NOT NULL,
+           source_url          TEXT,
+           sha256              TEXT NOT NULL,
+           total_pages         INTEGER NOT NULL,
+           total_chars         INTEGER NOT NULL,
+           -- 'pdf', or 'html' (a cleaned publisher page, which has no pages)
+           format              TEXT NOT NULL DEFAULT 'pdf',
+           -- YYYY-MM-DD the publisher issued the source (sidecar "published"):
+           -- when passages disagree, the newer document wins (askAnswerer)
+           published           TEXT,
+           canonical_text_path TEXT NOT NULL,
+           ingested_at         TEXT NOT NULL DEFAULT (datetime('now'))
+         )`,
+  `CREATE TABLE IF NOT EXISTS ref_pages (
+           doc_id     TEXT NOT NULL REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
+           page_num   INTEGER NOT NULL,
+           char_start INTEGER NOT NULL,
+           char_end   INTEGER NOT NULL,
+           PRIMARY KEY (doc_id, page_num)
+         )`,
+  `CREATE TABLE IF NOT EXISTS ref_sections (
+           section_id        TEXT PRIMARY KEY,
+           doc_id            TEXT NOT NULL REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
+           heading           TEXT NOT NULL,
+           heading_slug      TEXT NOT NULL,
+           parent_section_id TEXT,
+           ordinal           INTEGER NOT NULL,
+           first_page        INTEGER NOT NULL,
+           char_start        INTEGER NOT NULL,
+           char_end          INTEGER NOT NULL
+         )`,
+  `CREATE INDEX IF NOT EXISTS idx_ref_sections_doc ON ref_sections(doc_id, ordinal)`,
+  `CREATE TABLE IF NOT EXISTS ref_blocks (
+           block_id            TEXT PRIMARY KEY,
+           doc_id              TEXT NOT NULL REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
+           section_id          TEXT REFERENCES ref_sections(section_id) ON DELETE SET NULL,
+           page_num            INTEGER NOT NULL,
+           block_type          TEXT NOT NULL,
+           ordinal             INTEGER NOT NULL,
+           text                TEXT NOT NULL,
+           char_start          INTEGER NOT NULL,
+           char_end            INTEGER NOT NULL,
+           metadata_json       TEXT,
+           contextual_summary  TEXT,
+           contextualized_text TEXT,
+           block_text_sha1     TEXT,
+           -- 768 = embeddinggemma-2. SQLite doesn't enforce the declared
+           -- dim; ref_meta.embedding_model is the real cross-model guard.
+           embedding           F32_BLOB(768)
+         )`,
+  `CREATE INDEX IF NOT EXISTS idx_ref_blocks_doc_ord ON ref_blocks(doc_id, ordinal)`,
+  `CREATE INDEX IF NOT EXISTS idx_ref_blocks_section ON ref_blocks(section_id, ordinal)`,
+  `CREATE INDEX IF NOT EXISTS idx_ref_blocks_page ON ref_blocks(doc_id, page_num)`,
+  /*
+   * FTS5 mirror of ref_blocks. content = coalesce(contextualized_text,
+   * text), populated at writeDocument time; SQLite FTS5 has no
+   * generated-column equivalent of Postgres's tsvector column. Porter
+   * stemming approximates Postgres's 'english' config. No vector
+   * index; brute-force vector_distance_cos is exact and fast at our
+   * scale (low thousands of blocks).
+   */
+  `CREATE VIRTUAL TABLE IF NOT EXISTS ref_blocks_fts USING fts5(
+           block_id UNINDEXED,
+           doc_id UNINDEXED,
+           content,
+           tokenize = 'porter unicode61'
+         )`,
+  /*
+   * Corpus-level key/value metadata. Today: embedding_model, the
+   * "provider/model" that produced the stored vectors. Search uses it
+   * to refuse query vectors from a different model (db/corpusSearch.ts).
+   */
+  `CREATE TABLE IF NOT EXISTS ref_meta (
+           key   TEXT PRIMARY KEY,
+           value TEXT NOT NULL
+         )`,
+  /*
+   * Each document's source file, so the published corpus.db is the whole
+   * library: the files are not committed (packages/sources keeps only
+   * their sidecars). A PDF's bytes, or a cleaned HTML page as UTF-8 —
+   * ref_documents.format says which. See db/corpusFiles.ts.
+   */
+  `CREATE TABLE IF NOT EXISTS ref_document_files (
+           doc_id TEXT PRIMARY KEY REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
+           source BLOB NOT NULL
+         )`,
+  /*
+   * The form catalog (forms / form_fields) used to live here too. It is
+   * engine output: the forms pipeline writes catalog.json next to each
+   * form's bindings, and nothing read the tables. An older corpus.db may
+   * still carry them; they are harmless and `corpus sync --force` can
+   * rebuild a file without them.
+   */
+];
+
+/*
+ * Columns added after a corpus release shipped. CREATE TABLE IF NOT EXISTS
+ * leaves an older file's table alone, so add them here; each is nullable
+ * and `corpus sync` fills it.
+ */
+const ADDED_COLUMNS: { table: string; column: string; ddl: string }[] = [
+  { table: "ref_documents", column: "published", ddl: "published TEXT" },
+];
+
+async function addMissingColumns(db: Client): Promise<void> {
+  for (const { table, column, ddl } of ADDED_COLUMNS) {
+    const cols = await db.execute(`PRAGMA table_info(${table})`);
+    if (!cols.rows.some((r) => r.name === column)) {
+      await db.execute(`ALTER TABLE ${table} ADD COLUMN ${ddl}`);
+    }
+  }
+}
+
+/*
+ * Idempotent schema init. Runs at most once per process.
+ */
+export function ensureCorpusSchema(): Promise<void> {
+  if (schemaReady) return schemaReady;
+  schemaReady = (async () => {
+    const db = getCorpusDb();
+    /*
+     * FK ON DELETE CASCADE (ref_pages/sections/blocks → ref_documents)
+     * needs this per connection. SQLite defaults it off.
+     */
+    await db.execute("PRAGMA foreign_keys = ON");
+    await db.batch(CORPUS_SCHEMA_DDL, "write");
+    await addMissingColumns(db);
+    /*
+     * Warn once per process: an empty corpus means grounding reviews
+     * retrieve nothing (verdicts degrade to needs_more_facts). The app
+     * keeps working; this matches the graceful degrade when Ollama is
+     * down.
+     */
+    const count = await db.execute(`SELECT count(*) AS n FROM ref_documents`);
+    if (Number(count.rows[0]?.n ?? 0) === 0) {
+      console.warn(
+        "[corpus] reference corpus is EMPTY — grounding reviews will return " +
+          "needs_more_facts. Run `npm run corpus -- fetch` (prebuilt) or " +
+          "`npm run corpus -- sync` (rebuild, needs ANTHROPIC_API_KEY + Ollama).",
+      );
+    }
+  })();
+  return schemaReady;
+}

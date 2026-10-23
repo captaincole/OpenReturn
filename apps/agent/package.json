@@ -31,6 +31,7 @@
     "@mastra/memory": "^1.17.4",
     "@mastra/observability": "^1.10.3",
     "@napi-rs/canvas": "^0.1.100",
+    "@openreturn/canon": "0.1.0",
     "@openreturn/engine": "0.1.0",
     "dotenv": "^17.4.2",
     "mastra": "^1.7.2",

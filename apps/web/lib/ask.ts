@@ -1,5 +1,6 @@
 import { agentUrl } from "@/lib/agentBase";
 import { UnauthorizedError } from "@/lib/api";
+import { canonUrl } from "@/lib/canonBase";
 
 /*
  * Browser-side client for tax-code Q&A and the reference library. The
@@ -118,12 +119,12 @@ export async function fetchAskThread(threadId: string): Promise<AskThread> {
 }
 
 export async function fetchLibrary(): Promise<LibraryDocument[]> {
-  const res = await fetch(agentUrl("/app/refdocs"));
+  const res = await fetch(canonUrl("/app/refdocs"));
   return (await readJson<{ documents: LibraryDocument[] }>(res, "Load library")).documents;
 }
 
 export async function fetchLibraryDocument(docId: string): Promise<LibraryHtmlDocument> {
-  const res = await fetch(agentUrl(`/app/refdocs/${encodeURIComponent(docId)}/html`));
+  const res = await fetch(canonUrl(`/app/refdocs/${encodeURIComponent(docId)}/html`));
   return readJson<LibraryHtmlDocument>(res, "Load document");
 }
 
@@ -145,6 +146,6 @@ export function citationUrl(c: AskCitation): string {
 
 /** Opens the source PDF on the cited page (the browser viewer honors #page). */
 export function refDocPdfUrl(docId: string, pageNum?: number): string {
-  const url = agentUrl(`/app/refdocs/${encodeURIComponent(docId)}/pdf`);
+  const url = canonUrl(`/app/refdocs/${encodeURIComponent(docId)}/pdf`);
   return pageNum ? `${url}#page=${pageNum}` : url;
 }

@@ -1,7 +1,20 @@
 import { createStep } from "@mastra/core/workflows";
+import {
+  decisionSummary,
+  formulateQueries,
+  hybridSearchRefDocs,
+  loopCarrierSchema,
+  renderAssessPrompt,
+  renderRulePrompt,
+  reviewDecisionOutputSchema,
+  riskAssessmentSchema,
+  ruleStructuredOutputSchema,
+  type EvidenceBundle,
+  type LoopCarrier,
+  type RuleOutput,
+} from "@openreturn/canon";
 import { z } from "zod";
 import { getDecisionById, setDecisionVerdict } from "../../db/aiDecisions";
-import { hybridSearchRefDocs } from "../../db/corpusSearch";
 import {
   completeReviewRun,
   insertReviewRun,
@@ -10,16 +23,6 @@ import {
 } from "../../db/reviewRuns";
 import { listFactsByKeys, noteQuestion } from "../../db/taxFacts";
 import { modelFor } from "../../models";
-import { decisionSummary, formulateQueries, renderAssessPrompt, renderRulePrompt } from "./prompts";
-import {
-  loopCarrierSchema,
-  reviewDecisionOutputSchema,
-  riskAssessmentSchema,
-  ruleStructuredOutputSchema,
-  type EvidenceBundle,
-  type LoopCarrier,
-  type RuleOutput,
-} from "./schemas";
 
 /*
  * ---------------------------------------------------------------------------

@@ -40,12 +40,12 @@ export default [
   },
   /*
    * Type-aware rules. These need type information, so they run only on
-   * files a tsconfig covers (apps/agent and packages/engine:
+   * files a tsconfig covers (canon, apps/agent and packages/engine:
    * src+tests+scripts; apps/web: everything). Modeled on n8n's config: a floating promise is an
    * error; an explicit `void` marks intentional fire-and-forget.
    */
   {
-    files: ["apps/**/*.ts", "apps/**/*.tsx", "packages/**/*.ts"],
+    files: ["canon/**/*.ts", "apps/**/*.ts", "apps/**/*.tsx", "packages/**/*.ts"],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -84,13 +84,13 @@ export default [
    * and comments. Known exceptions carry an inline disable with a reason.
    */
   {
-    files: ["apps/**/*.ts", "apps/**/*.tsx", "packages/**/*.ts"],
+    files: ["canon/**/*.ts", "apps/**/*.ts", "apps/**/*.tsx", "packages/**/*.ts"],
     rules: {
       "max-lines": ["error", { max: 400, skipBlankLines: true, skipComments: true }],
     },
   },
   {
-    files: ["apps/**/*.ts", "packages/**/*.ts"],
+    files: ["canon/**/*.ts", "apps/**/*.ts", "packages/**/*.ts"],
     rules: {
       "max-lines-per-function": ["error", { max: 50, skipBlankLines: true, skipComments: true }],
     },
@@ -135,6 +135,7 @@ export default [
       "packages/engine/src/federal/**",
       "packages/engine/src/state/**",
       "packages/engine/tests/**",
+      "canon/tests/**",
       "apps/agent/tests/**",
       "**/*.test.ts",
     ],
