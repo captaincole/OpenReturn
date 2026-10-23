@@ -1,6 +1,7 @@
 import * as cheerio from "cheerio";
 import { isTag, type AnyNode, type Element } from "domhandler";
 import { slugifyHeading } from "../parse";
+import { htmlPublished } from "../published";
 
 /*
  * An FTB instructions page → the HTML document the corpus stores and the
@@ -55,6 +56,8 @@ export interface CleanedDoc {
   html: string;
   /** The page's h1, e.g. "2025 Instructions for Form 540 — California Resident Income Tax Return". */
   title: string;
+  /* The h1's "Revised: MM/YYYY" as "YYYY-MM" (refdocs/published.ts); tax-year pages have none. */
+  published: string | null;
 }
 
 /* Returns an image as a data: URI. Injected so tests run offline. */
@@ -65,7 +68,7 @@ export async function cleanFtbHtml(
   pageUrl: string,
   fetchImage: FetchImage,
 ): Promise<CleanedDoc> {
-  const { kicker, title } = pageTitle(raw);
+  const { kicker, title, published } = pageTitle(raw);
   const $ = cheerio.load(mainContent(raw), null, false);
   removeComments($);
   $(DROP_TAGS).remove();
@@ -77,7 +80,7 @@ export async function cleanFtbHtml(
 
   const html = tidy(`<article>\n${heading(kicker, title)}\n${$.html()}\n</article>`);
   checkContent(html);
-  return { html: `${html}\n`, title: kicker ? `${kicker} — ${title}` : title };
+  return { html: `${html}\n`, title: kicker ? `${kicker} — ${title}` : title, published };
 }
 
 /* The h1, built from text: the title is page text, never markup. */
@@ -97,16 +100,22 @@ function mainContent(raw: string): string {
   return raw.slice(start + MAIN_START.length, end);
 }
 
-/* FTB's h1 is "<small>2025 Instructions for Form 540</small> California Resident…". */
-function pageTitle(raw: string): { kicker: string; title: string } {
+/*
+ * FTB's h1 is "<small>2025 Instructions for Form 540</small> California
+ * Resident…", sometimes with a second "<small>Revised: 01/2015</small>".
+ * (The tax-year template's Revised line is inside a comment; text() skips it.)
+ */
+function pageTitle(raw: string): Omit<CleanedDoc, "html"> & { kicker: string } {
   const $ = cheerio.load(raw);
   const h1 = $("main h1").first();
   const squash = (s: string) => s.replace(/\s+/g, " ").trim();
-  const kicker = squash(h1.find("small").first().text());
-  h1.find("small").remove();
+  const smalls = h1.find("small");
+  const kicker = squash(smalls.first().text());
+  const published = htmlPublished(smalls.slice(1).text());
+  smalls.remove();
   const title = squash(h1.text());
   if (!title) throw new CleanError("no page title (main h1)");
-  return { kicker, title };
+  return { kicker, title, published };
 }
 
 function removeComments($: cheerio.CheerioAPI): void {

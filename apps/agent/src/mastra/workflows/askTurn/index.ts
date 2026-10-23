@@ -9,7 +9,7 @@ import {
   type AskTurn,
 } from "../../db/askThreads";
 import { hybridSearchRefDocs, type SearchHit } from "../../db/corpusSearch";
-import { askAnswerSchema } from "./judges/askAnswerer";
+import { askAnswerSchema, type AskAnswerOutput } from "./judges/askAnswerer";
 import { askQueriesSchema } from "./judges/askQueryFormulator";
 import { mergeByRank } from "./mergeHits";
 import { renderAnswerPrompt, renderFormulatePrompt, renderHistory } from "./prompts";
@@ -23,6 +23,10 @@ import { NOT_COVERED_ANSWER, validateAnswer, type Passage } from "./validate";
  *
  *   formulate (judge) → retrieve (per query) → answer (judge) → validate
  *
+ * A "partial" answer names its gaps as search queries. The pipeline then
+ * runs one more round: retrieve for the gaps, add the new passages after
+ * the first ones (their numbers stay the same) and answer again.
+ *
  * The judges are registered on the Mastra instance (index.ts), so their
  * calls show in Studio traces. Each step also lands in the turn row's
  * log_json with its input, output and timing — the query log.
@@ -31,6 +35,8 @@ import { NOT_COVERED_ANSWER, validateAnswer, type Passage } from "./validate";
 const HITS_PER_QUERY = 6;
 const MAX_QUERIES = 3;
 const MAX_PASSAGES = 10;
+/* The gap round adds at most this many passages to the first round's. */
+const MAX_GAP_PASSAGES = 6;
 
 interface StepLog {
   kind: string;
@@ -38,7 +44,14 @@ interface StepLog {
   [key: string]: unknown;
 }
 
-/* One structured-output judge call; the schema goes to the model as response_format. */
+/*
+ * One structured-output judge call; the schema goes to the model as
+ * response_format. The Anthropic provider bundled with Mastra uses native
+ * structured output only for the Claude models it knows; for newer ones
+ * it falls back to a JSON tool call, where Claude sometimes sends an
+ * array as a string. "outputFormat" forces the native mode. Other
+ * providers ignore the option.
+ */
 async function judge<S extends z.ZodTypeAny>(
   agent: Agent,
   prompt: string,
@@ -46,26 +59,35 @@ async function judge<S extends z.ZodTypeAny>(
 ): Promise<z.infer<S>> {
   const result = await agent.generate(prompt, {
     structuredOutput: { schema, errorStrategy: "strict" },
+    providerOptions: { anthropic: { structuredOutputMode: "outputFormat" } },
   });
   const obj = (result as { object?: unknown }).object;
   if (!obj) throw new Error(`${agent.name}: no structured output`);
   return schema.parse(obj) as z.infer<S>;
 }
 
-/* Runs every query, merges the hit lists by rank (mergeHits.ts), returns the top passages. */
-async function retrieve(queries: string[]): Promise<{ passages: Passage[]; log: unknown[] }> {
+/*
+ * Runs every query, merges the hit lists by rank (mergeHits.ts), returns
+ * the top passages. Blocks in `skip` (already passages) are left out.
+ */
+async function retrieve(
+  queries: string[],
+  max = MAX_PASSAGES,
+  skip = new Set<string>(),
+): Promise<{ passages: Passage[]; log: unknown[] }> {
   const lists: SearchHit[][] = [];
   const log: unknown[] = [];
   for (const query of queries) {
     const hits = await hybridSearchRefDocs({ query, limit: HITS_PER_QUERY });
     log.push({ query, hits: hits.map((h) => ({ blockId: h.blockId, score: h.score })) });
-    lists.push(hits);
+    lists.push(hits.filter((h) => !skip.has(h.blockId)));
   }
-  const passages = mergeByRank(lists, MAX_PASSAGES).map((p) => ({
+  const passages = mergeByRank(lists, max).map((p) => ({
     blockId: p.blockId,
     docId: p.docId,
     documentTitle: p.documentTitle,
     format: p.format,
+    published: p.published,
     sectionHeading: p.sectionHeading,
     pageNum: p.pageNum,
     text: p.text,
@@ -119,17 +141,76 @@ async function answerTurn(mastra: Mastra, turn: AskTurn, earlier: AskTurn[], ste
   }
 
   await setAskTurnStage(turn.id, "answering");
-  const answerPrompt = renderAnswerPrompt(history, turn.question, passages);
-  const raw = await timed(
-    steps,
-    "answer",
-    () => judge(mastra.getAgent("askAnswerer"), answerPrompt, askAnswerSchema),
-    (out) => ({ passages: passages.map((p) => p.blockId), output: out }),
-  );
+  const first = await answer(mastra, history, turn.question, passages, steps, "answer");
+  const final = await fillGaps(mastra, turn, history, passages, first, steps);
 
-  const validated = validateAnswer(raw, passages);
+  const validated = validateAnswer(final.raw, final.passages);
   steps.push({ kind: "validate", durationMs: 0, dropped: validated.dropped });
   return validated;
+}
+
+async function answer(
+  mastra: Mastra,
+  history: string,
+  question: string,
+  passages: Passage[],
+  steps: StepLog[],
+  kind: string,
+): Promise<AskAnswerOutput> {
+  const prompt = renderAnswerPrompt(history, question, passages);
+  return timed(
+    steps,
+    kind,
+    () => judge(mastra.getAgent("askAnswerer"), prompt, askAnswerSchema),
+    (out) => ({ passages: passages.map((p) => p.blockId), output: out }),
+  );
+}
+
+/*
+ * The gap round: when the answer is "partial" and names its gaps, search
+ * for them and answer again with the new passages added. One round only.
+ * It is best effort: if it fails, the first answer stands.
+ */
+async function fillGaps(
+  mastra: Mastra,
+  turn: AskTurn,
+  history: string,
+  passages: Passage[],
+  raw: AskAnswerOutput,
+  steps: StepLog[],
+): Promise<{ raw: AskAnswerOutput; passages: Passage[] }> {
+  const gaps = raw.gaps
+    .map((q) => q.trim())
+    .filter(Boolean)
+    .slice(0, MAX_QUERIES);
+  if (raw.coverage !== "partial" || gaps.length === 0) return { raw, passages };
+
+  try {
+    await setAskTurnStage(turn.id, "retrieving");
+    const skip = new Set(passages.map((p) => p.blockId));
+    const found = await timed(
+      steps,
+      "retrieve-gaps",
+      () => retrieve(gaps, MAX_GAP_PASSAGES, skip),
+      (r) => ({ queries: r.log }),
+    );
+    if (found.passages.length === 0) return { raw, passages };
+
+    await setAskTurnStage(turn.id, "answering");
+    const all = [...passages, ...found.passages];
+    return {
+      raw: await answer(mastra, history, turn.question, all, steps, "answer-gaps"),
+      passages: all,
+    };
+  } catch (err) {
+    const reason = err instanceof Error ? err.message : String(err);
+    steps.push({ kind: "gaps-failed", durationMs: 0, error: reason });
+    mastra.getLogger().warn("ask gap round failed; keeping the first answer", {
+      turnId: turn.id,
+      err: reason,
+    });
+    return { raw, passages };
+  }
 }
 
 export async function runAskTurn(

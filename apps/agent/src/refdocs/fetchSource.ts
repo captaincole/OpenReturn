@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { getDocumentSource } from "../mastra/db/corpusFiles";
-import { cleanFtbHtml } from "./html/cleanFtb";
+import { cleanFtbHtml, type CleanedDoc } from "./html/cleanFtb";
 import type { CorpusEntry } from "./walkCorpus";
 
 /*
@@ -72,7 +72,7 @@ async function fetchBytes(url: string): Promise<Uint8Array> {
 }
 
 /* Download a publisher page and clean it (images inlined). */
-export async function fetchCleanHtml(url: string): Promise<{ html: string; title: string }> {
+export async function fetchCleanHtml(url: string): Promise<CleanedDoc> {
   const raw = new TextDecoder().decode(await fetchBytes(url));
   return cleanFtbHtml(raw, url, async (imageUrl) => {
     const res = await fetch(imageUrl, { headers: FETCH_HEADERS });

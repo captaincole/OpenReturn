@@ -15,7 +15,7 @@ import {
 } from "../mastra/db/corpusStore";
 import { sha1, summarizeBlocks } from "./contextualize";
 import { embedDocuments, resolveEmbeddings } from "./embeddings";
-import { extractPdf, type PageSlice } from "./extract";
+import { extractPdf, pdfPublished, type PageSlice } from "./extract";
 import { parseHtmlDoc } from "./html/parseHtml";
 import { parseDoc, type ParsedDoc, type ParserStyle } from "./parse";
 
@@ -28,6 +28,8 @@ export interface IngestInput {
   publisher: string;
   taxYear: number | null;
   sourceUrl?: string | null;
+  /** The sidecar's date; without one, the source file's own (refdocs/published.ts). */
+  published?: string | null;
   force?: boolean;
   /**
    * Skip the per-block Haiku contextualization step. Useful for fast dev
@@ -191,6 +193,7 @@ interface ExtractedDoc extends ParsedDoc {
   canonicalText: string;
   pages: PageSlice[];
   totalPages: number;
+  published: string | null;
 }
 
 /*
@@ -205,6 +208,7 @@ async function extractSource(input: IngestInput, path: string): Promise<Extracte
     const length = parsed.canonicalText.length;
     return {
       ...parsed,
+      published: null, // the sidecar's (add-html), if the page shows one
       sha256: createHash("sha256").update(bytes).digest("hex"),
       pages: [{ pageNum: 1, charStart: 0, charEnd: length }],
       totalPages: 1,
@@ -215,7 +219,7 @@ async function extractSource(input: IngestInput, path: string): Promise<Extracte
     docId: input.docId,
     style: input.parserStyle,
   });
-  return { ...extracted, ...parsed };
+  return { ...extracted, ...parsed, published: await pdfPublished(await readFile(path)) };
 }
 
 async function persistParsedDoc(
@@ -238,6 +242,7 @@ async function persistParsedDoc(
       totalChars: extracted.canonicalText.length,
       canonicalTextPath: recordedPath(canonicalTextPath),
       format: input.format ?? "pdf",
+      published: input.published ?? extracted.published,
     },
     ...rows,
   });

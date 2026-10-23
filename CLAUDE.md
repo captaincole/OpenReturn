@@ -9,7 +9,7 @@ Agents on the platform:
 - **Luca** — the conversational front-desk agent (named after Pacioli); guides the user through the tax-prep flow, orchestrates workflows, narrates progress. First agent built.
 There is exactly **one** conversational agent. Grounding is NOT a conversation: every `record-ai-decision` triggers the background **review-decision workflow** (`workflows/reviewDecision/`) — deterministic gather/retrieval plus three narrow LLM "judges" (`judges/`: queryFormulator, assessRiskAgent, ruleAgent on Haiku). The judges are registered on the Mastra instance, and the steps get them with `mastra.getAgent()` (the Mastra workflow docs pattern), so their calls share the app's logger and traces.
 
-**Tax-code Q&A ("Ask The Tax Code")** is not a conversation either: each question runs a fixed pipeline (`workflows/askTurn/`: formulate → retrieve → answer → validate) with two more judges (askQueryFormulator, askAnswerer). Follow-ups pass the earlier turns as context; threads live in `ask_threads`/`ask_turns` in `app.db`, whose `log_json` is the query log. `validate.ts` drops any citation or quote that does not trace to a retrieved block.
+**Tax-code Q&A ("Ask The Tax Code")** is not a conversation either: each question runs a fixed pipeline (`workflows/askTurn/`: formulate → retrieve → answer → validate) with two more judges (askQueryFormulator, askAnswerer). A "partial" answer names its gaps as search queries; the pipeline searches once more with them and answers again. Follow-ups pass the earlier turns as context; threads live in `ask_threads`/`ask_turns` in `app.db`, whose `log_json` is the query log. `validate.ts` drops any citation or quote that does not trace to a retrieved block. The Ask eval (`apps/agent/evals/ask/`, report in `docs/evals/ask.md`) runs labeled questions through this pipeline and scores coverage, grounding, retrieval and the stated facts.
 
 Note: the Unix working directory is still `project-merrilin` (the product's earliest name; later "Wheel of Time," now "Summa"). The directory name was left alone to avoid churning local paths/configs. Internal names / IDs / docs use "summa" or "Summa".
 
@@ -276,6 +276,8 @@ Each form's instructions are described by `packages/sources/<year>/forms/<jurisd
 
 When sync needs a source file that is not on disk, it takes it from corpus.db (every ingested file is stored there), else downloads `sourceUrl` (and cleans it, for HTML) and checks `sha256`. Publishers replace files at the same URL with new editions, so the stored copy is what keeps re-ingests working; a mismatch error names the fix (`apps/agent/src/refdocs/fetchSource.ts`).
 
+Each document has a publication date (`ref_documents.published`, `refdocs/published.ts`). The Ask answerer sees it in each passage header and prefers the newer document when two passages disagree; the library shows it. A PDF's date is its creation date, read at ingest; a sidecar's optional `"published": "YYYY-MM[-DD]"` overrides it (set it when the PDF's metadata is older than its revision, e.g. 3921 "Rev. April 2025"). `add-html` records an FTB page's "Revised" date; FTB's tax-year pages show none, so they have no date.
+
 Operator flow (the `corpus` CLI — `npm run corpus` with no args lists all subcommands, `-- <cmd> --help` shows options):
 
 ```bash
@@ -393,6 +395,7 @@ Agent tooling lives under `apps/agent/scripts/`; engine scripts under `packages/
 - **One-off smoke tests miss "fixed A but broke B" patterns.** A 3-case smoke gave us false confidence twice during this build. Phase 6 of the original plan (a real Mastra eval dataset with scorers) is the next thing to build before any further prompt/retrieval changes.
 - **The review judges use Haiku because each task is narrow.** Read decision + facts + retrieval, emit one structured output. If verdict-quality drops on harder cases, swap to Sonnet — one-line change per judge in `workflows/reviewDecision/judges/`. Don't reach for it preemptively.
 - **`structuredOutput.errorStrategy: "strict"` is right for production but loud during prompt iteration.** Catches malformed model output explicitly via the existing try/catch → `review_failed` verdict, so failures surface in the DB rather than being papered over.
+- **Mastra's bundled Anthropic provider uses native structured output only for Claude models it knows.** For a newer model (e.g. `claude-haiku-5-5`) it falls back to a JSON tool call, where Claude sometimes sends an array as a string and the turn fails. The Ask judges pass `providerOptions: { anthropic: { structuredOutputMode: "outputFormat" } }` to force native mode (`workflows/askTurn/index.ts`), and their schema's lists default to empty.
 - **Pre-retrieval and curated topic indexes were dead ends for this domain.** We considered both; agent-with-good-tool wins on simplicity once the retrieval pipeline is strong. Resist re-introducing pre-retrieval plumbing unless evals show the agent genuinely can't formulate queries — and even then, fix the agent prompt first.
 
 ## Related project — lessons carried forward

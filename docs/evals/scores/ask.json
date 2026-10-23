@@ -1,0 +1,58 @@
+{
+  "flow": "ask",
+  "title": "Ask",
+  "definition": "Each case asks one tax-code question through the production Ask The Tax Code pipeline (query formulator, hybrid retrieval, answerer, citation check). The flow score is the share of correct runs: the covered / partial / not-covered label is right, the answer cites the labeled passage, and it states every key fact. The capabilities show where runs went wrong: Coverage (the label is right, including a question the library cannot answer), Grounding (an answer cites the labeled passage), Retrieval (the search, from the model's own queries, found it) and Facts (the answer states the key amount).",
+  "report": "ask.md",
+  "capabilities": [
+    "Coverage",
+    "Grounding",
+    "Retrieval",
+    "Facts"
+  ],
+  "models": [
+    {
+      "label": "Gemma 4 31b Q4_K_M",
+      "id": "ollama/gemma4:31b",
+      "score": 0.6875,
+      "capabilities": {
+        "Coverage": 0.8645833333333334,
+        "Grounding": 0.717948717948718,
+        "Retrieval": 0.7307692307692307,
+        "Facts": 0.7948717948717948
+      }
+    },
+    {
+      "label": "Gemma 4 26b Q4_K_M",
+      "id": "ollama/gemma4:26b",
+      "score": 0.71875,
+      "capabilities": {
+        "Coverage": 0.9375,
+        "Grounding": 0.7692307692307693,
+        "Retrieval": 0.8333333333333334,
+        "Facts": 0.8589743589743589
+      }
+    },
+    {
+      "label": "Gemma 4 e4b",
+      "id": "ollama/gemma4:e4b",
+      "score": 0.5104166666666666,
+      "capabilities": {
+        "Coverage": 0.75,
+        "Grounding": 0.5641025641025641,
+        "Retrieval": 0.6923076923076923,
+        "Facts": 0.6410256410256411
+      }
+    },
+    {
+      "label": "Haiku 5.5",
+      "id": "anthropic/claude-haiku-5-5",
+      "score": 0.8125,
+      "capabilities": {
+        "Coverage": 0.875,
+        "Grounding": 0.9230769230769231,
+        "Retrieval": 0.9615384615384616,
+        "Facts": 0.9230769230769231
+      }
+    }
+  ]
+}

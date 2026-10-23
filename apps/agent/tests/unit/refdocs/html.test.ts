@@ -87,6 +87,21 @@ describe("cleanFtbHtml", () => {
     expect(html).toContain("Return &lt;img src=x onerror=alert(1)&gt;</h1>");
   });
 
+  it("reads the h1's Revised date, but not one inside a comment", async () => {
+    expect((await clean()).published).toBeNull();
+    const commented = page(BODY).replace("</h1>", " <!-- Revised: 06/2023 --></h1>");
+    expect((await cleanFtbHtml(commented, PAGE_URL, fakeImage)).published).toBeNull();
+    const revised = page(BODY).replace(
+      "</h1>",
+      ' <small class="d-block">Revised: 01/2015</small></h1>',
+    );
+    const doc = await cleanFtbHtml(revised, PAGE_URL, fakeImage);
+    expect(doc.published).toBe("2015-01");
+    expect(doc.title).toBe(
+      "2025 Instructions for Form 540 — California Resident Income Tax Return",
+    );
+  });
+
   it("is deterministic", async () => {
     expect((await clean()).html).toBe((await clean()).html);
   });

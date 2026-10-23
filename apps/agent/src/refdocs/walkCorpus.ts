@@ -4,6 +4,7 @@ import { readdir, readFile } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 import type { SourceFormat } from "../mastra/db/corpusStore";
 import type { ParserStyle } from "./parse";
+import { isPublishedDate } from "./published";
 
 /*
  * Walks the @summa/sources tree (packages/sources/<year>/…) for corpus
@@ -39,6 +40,8 @@ export interface RefDocSidecar {
    * explicitly; otherwise it follows the publisher (FTB → "ftb").
    */
   parserStyle: ParserStyle;
+  /** "YYYY-MM-DD" or "YYYY-MM" (refdocs/published.ts); null → derived from the source. */
+  published: string | null;
 }
 
 export interface CorpusEntry {
@@ -121,7 +124,7 @@ async function loadSidecar(sidecarPath: string): Promise<RefDocSidecar | string>
   }
   return (
     coerceSidecar(parsed) ??
-    "sidecar missing required fields (docId, title, publisher, sha256), or format is not pdf/html"
+    "sidecar missing required fields (docId, title, publisher, sha256), format is not pdf/html, or published is not YYYY-MM[-DD]"
   );
 }
 
@@ -137,6 +140,7 @@ function coerceSidecar(v: unknown): RefDocSidecar | null {
     return null;
   }
   if (o.format !== undefined && o.format !== "pdf" && o.format !== "html") return null;
+  if (o.published !== undefined && !isPublishedDate(o.published)) return null;
   const taxYear = typeof o.taxYear === "number" ? o.taxYear : null;
   const sourceUrl = typeof o.sourceUrl === "string" ? o.sourceUrl : null;
   const parserStyle: ParserStyle =
@@ -154,5 +158,6 @@ function coerceSidecar(v: unknown): RefDocSidecar | null {
     sha256: o.sha256,
     format: o.format === "html" ? "html" : "pdf",
     parserStyle,
+    published: isPublishedDate(o.published) ? o.published : null,
   };
 }

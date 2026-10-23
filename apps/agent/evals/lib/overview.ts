@@ -1,6 +1,6 @@
 /*
  * The eval overview, docs/evals/README.md: one number per model, which
- * breaks down into one number per flow (ingest, review), which breaks down
+ * breaks down into one number per flow (ingest, review, ask), which breaks down
  * into capabilities. Each flow's report keeps the raw numbers.
  *
  * A flow's report writes its scores to docs/evals/scores/<flow>.json when
@@ -12,7 +12,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pct, table } from "./markdown";
 
-export type Flow = "ingest" | "review";
+export type Flow = "ingest" | "review" | "ask";
 
 export interface ModelScores {
   label: string;
@@ -36,7 +36,7 @@ export interface FlowScores {
 
 const REPO = path.resolve(__dirname, "../../../..");
 const DIR = path.join(REPO, "docs/evals");
-const FLOWS: Flow[] = ["ingest", "review"];
+const FLOWS: Flow[] = ["ingest", "review", "ask"];
 const scoresFile = (flow: Flow) => path.join(DIR, "scores", `${flow}.json`);
 
 const cell = (m: ModelScores | undefined) =>
