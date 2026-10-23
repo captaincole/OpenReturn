@@ -13,6 +13,7 @@
 
 import { fetchLibraryDocument, type LibraryHtmlDocument, type LibrarySection } from "@/lib/ask";
 import { cn } from "@/lib/cn";
+import { formatPublished } from "@/lib/format";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
@@ -67,6 +68,7 @@ function DocHeader({ doc }: { doc: LibraryHtmlDocument }) {
       <span>
         {doc.publisher}
         {doc.taxYear ? ` · Tax year ${doc.taxYear}` : ""}
+        {doc.published ? ` · Published ${formatPublished(doc.published)}` : ""}
       </span>
       {doc.sourceUrl && (
         <a

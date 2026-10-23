@@ -8,7 +8,10 @@
  * The HTML file is gitignored; the sidecar (with the cleaned file's
  * sha256 and "format": "html") is what gets committed. Run `corpus sync`
  * afterwards to ingest. On an existing sidecar, flags left out keep their
- * values, so a re-run after FTB edits the page only refreshes the sha256.
+ * values, so a re-run after FTB edits the page only refreshes the sha256
+ * and the date: the page's "Revised: MM/YYYY" line, or --published.
+ * FTB's tax-year pages show no date, so their sidecars have none
+ * (refdocs/published.ts).
  */
 
 import { SOURCES_ROOT } from "@summa/sources";
@@ -17,6 +20,7 @@ import { join, relative, resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { fetchCleanHtml, sha256 } from "../../src/refdocs/fetchSource";
 import { CLEANER_VERSION } from "../../src/refdocs/html/cleanFtb";
+import { isPublishedDate } from "../../src/refdocs/published";
 import type { Command } from "../lib/cli";
 
 async function readJson(path: string): Promise<Record<string, unknown> | null> {
@@ -26,6 +30,9 @@ async function readJson(path: string): Promise<Record<string, unknown> | null> {
     return null;
   }
 }
+
+/* Left out of the sidecar when unknown: a fetch date is not a publication date. */
+const withPublished = (published: unknown) => (isPublishedDate(published) ? { published } : {});
 
 async function run(argv: string[]): Promise<void> {
   const { values, positionals } = parseArgs({
@@ -37,6 +44,7 @@ async function run(argv: string[]): Promise<void> {
       publisher: { type: "string" },
       "tax-year": { type: "string" },
       kind: { type: "string", default: "instructions" },
+      published: { type: "string" },
     },
     strict: true,
     allowPositionals: true,
@@ -56,7 +64,7 @@ async function run(argv: string[]): Promise<void> {
     process.exit(1);
   }
 
-  const { html, title } = await fetchCleanHtml(url);
+  const { html, title, published } = await fetchCleanHtml(url);
   const bytes = new TextEncoder().encode(html);
   const yearInUrl = /\/(20\d\d)\//.exec(url)?.[1];
   const sidecar = {
@@ -67,6 +75,7 @@ async function run(argv: string[]): Promise<void> {
     sourceUrl: url,
     sha256: sha256(bytes),
     format: "html",
+    ...withPublished(values.published ?? published ?? existing.published),
     cleanerVersion: CLEANER_VERSION,
   };
   await mkdir(dir, { recursive: true });
@@ -94,6 +103,10 @@ export const addHtmlCommand: Command = {
     { flag: "--publisher <name>", desc: "publisher (default: FTB)" },
     { flag: "--tax-year <year>", desc: "tax year (default: the year in the URL)" },
     { flag: "--kind instructions|publication", desc: "file name stem (default: instructions)" },
+    {
+      flag: "--published <YYYY-MM[-DD]>",
+      desc: "publication date (default: the page's Revised date, if it shows one)",
+    },
   ],
   run,
 };

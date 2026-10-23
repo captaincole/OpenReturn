@@ -28,6 +28,8 @@ export interface SearchHit {
   documentTitle: string;
   /** "html" documents have no pages: cite them by section. */
   format: SourceFormat;
+  /** When the publisher issued the document ("YYYY-MM[-DD]"); null when unknown. */
+  published: string | null;
   sectionId: string | null;
   sectionHeading: string | null;
   pageNum: number;
@@ -144,6 +146,7 @@ export interface MatchRow {
   doc_title: string;
   section_heading: string | null;
   format: SourceFormat;
+  published: string | null;
   fts_rank: number | null;
   vector_distance: number | null;
 }
@@ -154,6 +157,7 @@ function rowToHit(row: MatchRow, score: number): SearchHit {
     docId: row.doc_id,
     documentTitle: row.doc_title,
     format: row.format,
+    published: row.published,
     sectionId: row.section_id,
     sectionHeading: row.section_heading,
     pageNum: row.page_num,
@@ -234,7 +238,7 @@ async function callMatch(args: {
   const res = await getCorpusDb().execute({
     sql: `SELECT b.block_id, b.doc_id, b.section_id, b.page_num, b.block_type,
                  b.text, b.contextualized_text,
-                 d.title AS doc_title, s.heading AS section_heading, d.format
+                 d.title AS doc_title, s.heading AS section_heading, d.format, d.published
           FROM ref_blocks b
           JOIN ref_documents d ON d.doc_id = b.doc_id
           LEFT JOIN ref_sections s ON s.section_id = b.section_id
@@ -255,6 +259,7 @@ async function callMatch(args: {
       doc_title: asStr(r.doc_title),
       section_heading: asStrOrNull(r.section_heading),
       format: asFormat(r.format),
+      published: asStrOrNull(r.published),
       fts_rank: ftsRank.has(id) ? ftsRank.get(id)! : null,
       vector_distance: vecDist.has(id) ? vecDist.get(id)! : null,
     };

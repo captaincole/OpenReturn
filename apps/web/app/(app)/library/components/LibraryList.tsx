@@ -1,6 +1,7 @@
 "use client";
 
 import { fetchLibrary, refDocPageUrl, refDocPdfUrl, type LibraryDocument } from "@/lib/ask";
+import { formatPublished } from "@/lib/format";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Section } from "../../components/Section";
@@ -62,6 +63,7 @@ function LibraryRow({ doc }: { doc: LibraryDocument }) {
         <div className="text-[14px] font-medium text-ink-primary">{doc.title}</div>
         <div className="mt-0.5 text-[12px] text-ink-muted">
           {doc.taxYear ? `Tax year ${doc.taxYear} · ` : ""}
+          {doc.published ? `Published ${formatPublished(doc.published)} · ` : ""}
           {doc.format === "html" ? "Web page" : `${doc.totalPages} pages`} · {doc.blockCount}{" "}
           passages
         </div>

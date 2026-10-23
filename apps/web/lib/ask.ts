@@ -56,6 +56,8 @@ export interface LibraryDocument {
   taxYear: number | null;
   sourceUrl: string | null;
   format: SourceFormat;
+  /** When the publisher issued it ("YYYY-MM[-DD]"); null when unknown. */
+  published: string | null;
   totalPages: number;
   blockCount: number;
 }
@@ -73,6 +75,7 @@ export interface LibraryHtmlDocument {
   publisher: string;
   taxYear: number | null;
   sourceUrl: string | null;
+  published: string | null;
   html: string;
   sections: LibrarySection[];
 }

@@ -51,13 +51,14 @@ export const refDocHtmlRoute = registerApiRoute("/app/refdocs/:docId/html", {
     const doc = await getDocument(c.req.param("docId"));
     const source = doc?.format === "html" ? await getDocumentSource(doc.docId) : null;
     if (!doc || !source) return c.json({ error: "not found" }, 404);
-    const { docId, title, publisher, taxYear, sourceUrl } = doc;
+    const { docId, title, publisher, taxYear, sourceUrl, published } = doc;
     return c.json({
       docId,
       title,
       publisher,
       taxYear,
       sourceUrl,
+      published,
       html: new TextDecoder().decode(source),
       sections: await listSections(docId),
     });

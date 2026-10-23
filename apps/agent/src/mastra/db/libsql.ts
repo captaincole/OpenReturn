@@ -55,6 +55,9 @@ const CORPUS_SCHEMA_DDL: string[] = [
            total_chars         INTEGER NOT NULL,
            -- 'pdf', or 'html' (a cleaned publisher page, which has no pages)
            format              TEXT NOT NULL DEFAULT 'pdf',
+           -- YYYY-MM-DD the publisher issued the source (sidecar "published"):
+           -- when passages disagree, the newer document wins (askAnswerer)
+           published           TEXT,
            canonical_text_path TEXT NOT NULL,
            ingested_at         TEXT NOT NULL DEFAULT (datetime('now'))
          )`,
@@ -166,6 +169,24 @@ const CORPUS_SCHEMA_DDL: string[] = [
 ];
 
 /*
+ * Columns added after a corpus release shipped. CREATE TABLE IF NOT EXISTS
+ * leaves an older file's table alone, so add them here; each is nullable
+ * and `corpus sync` fills it.
+ */
+const ADDED_COLUMNS: { table: string; column: string; ddl: string }[] = [
+  { table: "ref_documents", column: "published", ddl: "published TEXT" },
+];
+
+async function addMissingColumns(db: Client): Promise<void> {
+  for (const { table, column, ddl } of ADDED_COLUMNS) {
+    const cols = await db.execute(`PRAGMA table_info(${table})`);
+    if (!cols.rows.some((r) => r.name === column)) {
+      await db.execute(`ALTER TABLE ${table} ADD COLUMN ${ddl}`);
+    }
+  }
+}
+
+/*
  * Idempotent schema init. Runs at most once per process.
  */
 export function ensureCorpusSchema(): Promise<void> {
@@ -178,6 +199,7 @@ export function ensureCorpusSchema(): Promise<void> {
      */
     await db.execute("PRAGMA foreign_keys = ON");
     await db.batch(CORPUS_SCHEMA_DDL, "write");
+    await addMissingColumns(db);
     /*
      * Warn once per process: an empty corpus means grounding reviews
      * retrieve nothing (verdicts degrade to needs_more_facts). The app

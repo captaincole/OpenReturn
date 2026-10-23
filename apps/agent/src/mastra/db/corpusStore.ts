@@ -27,6 +27,8 @@ export interface RefDocument {
   canonicalTextPath: string;
   /** "html" documents have no pages: everything is page 1, cited by section. */
   format: SourceFormat;
+  /** YYYY-MM-DD the publisher issued the source; null when unknown. */
+  published: string | null;
 }
 
 export interface RefPage {
@@ -115,7 +117,7 @@ export async function getDocument(docId: string): Promise<RefDocument | null> {
   await ensureCorpusSchema();
   const res = await getCorpusDb().execute({
     sql: `SELECT doc_id, title, publisher, tax_year, source_path, source_url,
-                 sha256, total_pages, total_chars, canonical_text_path, format
+                 sha256, total_pages, total_chars, canonical_text_path, format, published
           FROM ref_documents WHERE doc_id = ? LIMIT 1`,
     args: [docId],
   });
@@ -133,7 +135,17 @@ export async function getDocument(docId: string): Promise<RefDocument | null> {
     totalChars: asNum(d.total_chars),
     canonicalTextPath: asStr(d.canonical_text_path),
     format: asFormat(d.format),
+    published: asStrOrNull(d.published),
   };
+}
+
+/* Sync re-applies a sidecar's date without re-ingesting the document. */
+export async function setDocumentPublished(docId: string, published: string | null) {
+  await ensureCorpusSchema();
+  await getCorpusDb().execute({
+    sql: `UPDATE ref_documents SET published = ? WHERE doc_id = ?`,
+    args: [published, docId],
+  });
 }
 
 export const asFormat = (v: unknown): SourceFormat => (v === "html" ? "html" : "pdf");
@@ -180,20 +192,12 @@ export interface IngestPayload {
   blocks: RefBlock[];
 }
 
-/**
- * Writes a full document tree. The write is not atomic across the tree.
- * Call deleteDocument() first to replace a doc. Re-run on partial
- * failure; the FK cascade cleans up orphans on the next delete.
- */
-export async function writeDocument(payload: IngestPayload): Promise<void> {
-  await ensureCorpusSchema();
-  const { document: d, pages, sections, blocks } = payload;
-
+async function insertDocumentRow(d: RefDocument): Promise<void> {
   await getCorpusDb().execute({
     sql: `INSERT INTO ref_documents
             (doc_id, title, publisher, tax_year, source_path, source_url,
-             sha256, total_pages, total_chars, canonical_text_path, format)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+             sha256, total_pages, total_chars, canonical_text_path, format, published)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     args: [
       d.docId,
       d.title,
@@ -206,8 +210,21 @@ export async function writeDocument(payload: IngestPayload): Promise<void> {
       d.totalChars,
       d.canonicalTextPath,
       d.format,
+      d.published,
     ],
   });
+}
+
+/**
+ * Writes a full document tree. The write is not atomic across the tree.
+ * Call deleteDocument() first to replace a doc. Re-run on partial
+ * failure; the FK cascade cleans up orphans on the next delete.
+ */
+export async function writeDocument(payload: IngestPayload): Promise<void> {
+  await ensureCorpusSchema();
+  const { document: d, pages, sections, blocks } = payload;
+
+  await insertDocumentRow(d);
 
   await batchChunked(pages, 500, (p) => [
     {

@@ -14,14 +14,23 @@
  */
 
 import { parseArgs } from "node:util";
-import { docIdsWithSource, setDocumentSource } from "../../src/mastra/db/corpusFiles";
-import { getDocument } from "../../src/mastra/db/corpusStore";
+import {
+  docIdsWithSource,
+  getDocumentSource,
+  setDocumentSource,
+} from "../../src/mastra/db/corpusFiles";
+import {
+  getDocument,
+  setDocumentPublished,
+  type RefDocument,
+} from "../../src/mastra/db/corpusStore";
+import { pdfPublished } from "../../src/refdocs/extract";
 import { ensureSourceFile } from "../../src/refdocs/fetchSource";
 import { ingestRefDoc } from "../../src/refdocs/ingest";
 import { walkCorpus, type CorpusEntry } from "../../src/refdocs/walkCorpus";
 import type { Command } from "../lib/cli";
 
-type SyncAction = "ingested" | "replaced" | "stored" | "source-unavailable" | "skipped";
+type SyncAction = "ingested" | "replaced" | "stored" | "dated" | "source-unavailable" | "skipped";
 
 interface SyncResult {
   ok: { docId: string; action: SyncAction }[];
@@ -52,7 +61,9 @@ async function syncOne(
   const { docId } = entry.sidecar;
   const existing = await getDocument(docId);
   if (existing?.sha256 === entry.sidecar.sha256 && !flags.force) {
-    if (stored.has(docId)) return { docId, action: "skipped" };
+    if (stored.has(docId)) {
+      return { docId, action: (await redate(entry, existing)) ? "dated" : "skipped" };
+    }
     try {
       await setDocumentSource(docId, await ensureSourceFile(entry));
       return { docId, action: "stored" };
@@ -73,11 +84,29 @@ async function syncOne(
     publisher: entry.sidecar.publisher,
     taxYear: entry.sidecar.taxYear,
     sourceUrl: entry.sidecar.sourceUrl,
+    published: entry.sidecar.published,
     parserStyle: entry.sidecar.parserStyle,
     force: flags.force,
     noContextualize: flags.noContextualize,
   });
   return { docId, action: existing ? "replaced" : "ingested" };
+}
+
+/*
+ * A current document's date: the sidecar's when it has one, else read
+ * once from the stored source file (a corpus built before the column).
+ */
+async function redate(entry: CorpusEntry, existing: RefDocument): Promise<boolean> {
+  let published = entry.sidecar.published;
+  if (!published) {
+    // A cleaned page keeps no date: an HTML document's comes only from its sidecar.
+    if (existing.published || existing.format !== "pdf") return false;
+    const source = await getDocumentSource(existing.docId);
+    published = source && (await pdfPublished(source));
+  }
+  if (!published || published === existing.published) return false;
+  await setDocumentPublished(existing.docId, published);
+  return true;
 }
 
 async function run(argv: string[]): Promise<void> {
@@ -121,7 +150,7 @@ async function run(argv: string[]): Promise<void> {
   const count = (...actions: SyncAction[]) =>
     result.ok.filter((r) => actions.includes(r.action)).length;
   console.log(
-    `\n[corpus sync] done: ${count("ingested", "replaced")} ingested/replaced, ${count("stored")} source stored, ${count("source-unavailable")} source unavailable, ${count("skipped")} skipped, ${result.failed.length} failed, ${result.unconfigured.length} unconfigured`,
+    `\n[corpus sync] done: ${count("ingested", "replaced")} ingested/replaced, ${count("stored")} source stored, ${count("dated")} dated, ${count("source-unavailable")} source unavailable, ${count("skipped")} skipped, ${result.failed.length} failed, ${result.unconfigured.length} unconfigured`,
   );
 
   if (result.failed.length > 0 || result.unconfigured.length > 0) {

@@ -9,6 +9,16 @@ export function timeAgo(iso: string): string {
   return `${Math.round(h / 24)}d`;
 }
 
+/* A reference document's publication date: "2025-02-05" or "2025-02" → "Feb 2025". */
+export function formatPublished(published: string): string {
+  const [year, month] = published.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1)).toLocaleString("en-US", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
 export function humanizeKey(key: string): string {
   const parts = key.split(/[._]/);
   return parts

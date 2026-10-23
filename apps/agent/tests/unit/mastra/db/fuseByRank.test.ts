@@ -17,6 +17,7 @@ const row = (id: string, fts: number | null, distance: number | null): MatchRow 
   doc_title: "Doc",
   section_heading: null,
   format: "pdf",
+  published: null,
   fts_rank: fts,
   vector_distance: distance,
 });

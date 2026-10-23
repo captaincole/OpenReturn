@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import { extractText } from "unpdf";
+import { extractText, getDocumentProxy } from "unpdf";
 
 export const PAGE_SEPARATOR = "\n\n\f\n\n";
 
@@ -15,6 +15,14 @@ export interface ExtractedPdf {
   pages: PageSlice[];
   totalPages: number;
   sha256: string;
+}
+
+/* When the PDF was made: metadata "D:20250205100010-05'00'" → "2025-02-05" (refdocs/published.ts). */
+export async function pdfPublished(bytes: Uint8Array): Promise<string | null> {
+  const pdf = await getDocumentProxy(new Uint8Array(bytes));
+  const { info } = (await pdf.getMetadata()) as { info?: { CreationDate?: unknown } };
+  const m = /^D:(\d{4})(\d{2})(\d{2})/.exec(String(info?.CreationDate ?? ""));
+  return m ? `${m[1]}-${m[2]}-${m[3]}` : null;
 }
 
 export async function extractPdf(path: string): Promise<ExtractedPdf> {
