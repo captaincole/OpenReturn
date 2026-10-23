@@ -20,7 +20,7 @@ The first run redirects to `/setup` to create the owner account. The env file is
 | `/setup`, `/login` | First-run owner account, then a password sign-in |
 | `/` | Home: tax returns, estimates, the tax code search box |
 | `/r/[returnId]` | A return: chat with Cade, activity, forms, documents |
-| `/ask/[threadId]` | Ask The Tax Code: cited answers and follow-up questions |
+| `/ask/[threadId]` | Ask Canon - Your Tax Code Expert: cited answers and follow-up questions |
 | `/library` | The reference documents the answers can cite |
 | `/library/[docId]` | One HTML reference document (FTB web page), opened at a cited section |
 
