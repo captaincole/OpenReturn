@@ -6,6 +6,7 @@ import { corsMiddleware } from "./server/cors";
 import { createObservability } from "./server/observability";
 import { listRefDocsRoute, refDocHtmlRoute, refDocPdfRoute } from "./server/routes/refdocs";
 import { createStorage } from "./server/storage";
+import { tokenGate } from "./server/tokenGate";
 import { askWorkflow } from "./workflows/ask";
 import { askAnswerer } from "./workflows/ask/judges/askAnswerer";
 import { askQueryFormulator } from "./workflows/ask/judges/askQueryFormulator";
@@ -50,10 +51,12 @@ export const mastra = new Mastra({
       return c.json({ error: "internal server error" }, 500);
     },
     /*
-     * CORS only. Corpus data is shared reference material, not user data;
-     * the web app's proxy is what sits in front of this port.
+     * No user auth: corpus data is shared reference material, and the web
+     * app's proxy is what sits in front of this port. The token gate is
+     * the optional defense in depth when the port is reachable beyond
+     * localhost (CANON_API_TOKEN, same shape as Cade's AGENT_API_TOKEN).
      */
-    middleware: [corsMiddleware],
+    middleware: [corsMiddleware, tokenGate],
     apiRoutes: [listRefDocsRoute, refDocPdfRoute, refDocHtmlRoute],
   },
 });

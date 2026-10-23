@@ -15,8 +15,8 @@ import { listLibrary, listSections } from "../../../db/refLibrary";
  * The web app links to the PDF with a #page=N fragment, so the browser's
  * viewer opens on the cited page; a PDF document whose file is not stored
  * redirects to its sourceUrl. Corpus data is shared reference material,
- * not user data, so these routes need no owner check beyond the
- * middleware's token gate.
+ * not user data, so these routes need no owner check; the optional
+ * CANON_API_TOKEN gate (server/tokenGate.ts) is the only guard.
  */
 
 export const listRefDocsRoute = registerApiRoute("/app/refdocs", {

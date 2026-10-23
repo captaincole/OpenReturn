@@ -1,5 +1,5 @@
 import type { Mastra } from "@mastra/core";
-import { answerQuestion, type AskHistoryTurn } from "@openreturn/canon";
+import { answerQuestion, type AskHistoryTurn, type AskStepLog } from "@openreturn/canon";
 import {
   completeAskTurn,
   failAskTurn,
@@ -28,7 +28,8 @@ export async function runAskTurn(
   turnId: string,
 ): Promise<void> {
   const started = Date.now();
-  let steps: unknown[] = [];
+  /* Cade owns the query log: a failed turn keeps the steps that ran. */
+  const steps: AskStepLog[] = [];
   try {
     const thread = await getAskThread(userId, threadId);
     const turn = thread?.turns.find((t) => t.id === turnId);
@@ -39,8 +40,8 @@ export async function runAskTurn(
       question: turn.question,
       history: history(earlier),
       onStage: (stage) => setAskTurnStage(turn.id, stage),
+      steps,
     });
-    steps = result.log.steps;
     await completeAskTurn(turnId, {
       answer: result.answer,
       coverage: result.coverage,

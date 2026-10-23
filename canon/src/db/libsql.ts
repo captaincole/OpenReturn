@@ -138,8 +138,8 @@ const CORPUS_SCHEMA_DDL: string[] = [
    * The form catalog (forms / form_fields) used to live here too. It is
    * engine output: the forms pipeline writes catalog.json next to each
    * form's bindings, and nothing read the tables. An older corpus.db may
-   * still carry them; they are harmless and `corpus sync --force` can
-   * rebuild a file without them.
+   * still carry them; they are harmless. To drop them, delete corpus.db
+   * and `corpus fetch` (or `corpus sync`) a fresh file.
    */
 ];
 

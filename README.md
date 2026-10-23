@@ -36,7 +36,7 @@ OpenReturn is a local-capable AI harness that allows you to build all the docume
   And it makes **decisions**: judgment calls where the facts are ambiguous.
   Numbers are never invented — an unknown becomes an open question,
   not a guess.
-- **Canon (apps/agent, moving to its own project)** — Cade's twin, the tax
+- **Canon (canon)** — Cade's twin, the tax
   attorney. Every decision Cade makes is checked in the background against the
   actual IRS/FTB instruction text; Canon either cites the supporting passage
   or reopens the question. Canon also answers tax-code questions with
@@ -96,14 +96,15 @@ hardware, and each model call must currently finish within 5 minutes.
 You don't have to write this file from scratch: the first-run bootstrap
 generates `apps/agent/.env.development` with the two model roles pre-filled
 to Anthropic models (`anthropic/claude-sonnet-4-6` / `anthropic/claude-haiku-4-5`)
-and working values for ports and `.data` paths. **The one thing it cannot
+and working values for ports and `.data` paths, plus `canon/.env.development`
+for Canon (`JUDGE_MODEL` and the corpus path). **The one thing it cannot
 fill in is your `ANTHROPIC_API_KEY`** — set that yourself (or repoint the
 model roles at a local server) before the app will do anything useful.
 
 ```bash
 npm run install:all
 npm run dev:all          # first run generates .env.development files
-# → set ANTHROPIC_API_KEY in apps/agent/.env.development, restart
+# → set ANTHROPIC_API_KEY in apps/agent/.env.development and canon/.env.development, restart
 npm run corpus -- fetch  # prebuilt IRS/FTB reference corpus
 
 # Optional but recommended — needs Ollama installed (https://ollama.com):

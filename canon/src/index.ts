@@ -15,7 +15,7 @@ export { ensureCorpusSchema, getCorpusDb } from "./db/libsql";
 export { citeRefDocTool, searchRefDocsTool } from "./mastra/tools/refDocs";
 
 export { answerQuestion, askWorkflow } from "./mastra/workflows/ask";
-export type { AnswerQuestionInput } from "./mastra/workflows/ask";
+export type { AnswerQuestionInput, AskStepLog } from "./mastra/workflows/ask";
 export { askAnswerer } from "./mastra/workflows/ask/judges/askAnswerer";
 export { askQueryFormulator } from "./mastra/workflows/ask/judges/askQueryFormulator";
 export type {

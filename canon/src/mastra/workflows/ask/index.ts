@@ -40,17 +40,25 @@ const MAX_PASSAGES = 10;
 /* The gap round adds at most this many passages to the first round's. */
 const MAX_GAP_PASSAGES = 6;
 
-interface StepLog {
+/** One entry of the query log: a pipeline step, how long it took, and what it did. */
+export interface AskStepLog {
   kind: string;
   durationMs: number;
   [key: string]: unknown;
 }
+type StepLog = AskStepLog;
 
 export interface AnswerQuestionInput {
   question: string;
   history?: AskHistoryTurn[];
   /** Called as each stage starts, for callers that show progress. */
   onStage?: (stage: AskStage) => Promise<void> | void;
+  /**
+   * The query log, when the caller owns it: each step is pushed as it
+   * finishes, so a judge that throws still leaves the steps that ran
+   * with the caller. Otherwise the log comes back in the result only.
+   */
+  steps?: AskStepLog[];
 }
 
 /*
@@ -182,7 +190,7 @@ export async function answerQuestion(
   mastra: Mastra,
   input: AnswerQuestionInput,
 ): Promise<AskResult> {
-  const steps: StepLog[] = [];
+  const steps: StepLog[] = input.steps ?? [];
   const history = renderHistory(input.history ?? []);
 
   await input.onStage?.("formulating");

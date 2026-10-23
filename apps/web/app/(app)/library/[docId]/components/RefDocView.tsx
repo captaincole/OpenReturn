@@ -2,7 +2,7 @@
 
 /*
  * Renders a stored HTML reference document. The HTML is the corpus
- * cleaner's output (apps/agent/src/refdocs/html/cleanFtb.ts): allowlisted
+ * cleaner's output (canon/src/refdocs/html/cleanFtb.ts): allowlisted
  * semantic tags only, no scripts, styles or event attributes, so it is
  * rendered as-is and styled by `.ref-doc` in globals.css (theme tokens).
  * The page loads after navigation, so the browser cannot jump to a

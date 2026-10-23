@@ -7,7 +7,7 @@ The OpenReturn web app: Next.js 16 (App Router). You chat with Cade, upload docu
 From the repo root:
 
 ```bash
-npm run dev:all   # agent (:4111) + web (:3000)
+npm run dev:all   # canon (:4112) + agent (:4111) + web (:3000)
 npm run dev:web   # web only
 ```
 
@@ -27,6 +27,7 @@ The first run redirects to `/setup` to create the owner account. The env file is
 ## How it talks to the agent
 
 - **The browser never calls the agent.** Agent calls go through `/api/agent/[...path]`, which checks the session cookie and forwards to `AGENT_INTERNAL_URL` (default `http://127.0.0.1:4111`).
+- **The reference library comes from Canon.** `/api/canon/[...path]` (read-only, same cookie check) forwards to `CANON_INTERNAL_URL` (default `http://127.0.0.1:4112`).
 - **Everything else reads `app.db` directly:** Server Components through `lib/serverDb.ts`, browser code through the other `/api/*` route handlers.
 - **Auth** is one owner and one password (`lib/localAuth.ts`). `proxy.ts` checks only that the cookie exists; layouts and route handlers verify it with `getOwnerSession()`.
 
