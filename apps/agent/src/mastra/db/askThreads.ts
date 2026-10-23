@@ -1,3 +1,4 @@
+import type { AskCitation, AskCoverage, AskStage } from "@openreturn/canon";
 import {
   asJson,
   asNum,
@@ -8,7 +9,6 @@ import {
   getAppDb,
   nowIso,
 } from "./appDb";
-import type { SourceFormat } from "./corpusStore";
 
 /*
  * Persistence for tax-code Q&A. Two tables (DDL in appDb.ts):
@@ -23,22 +23,8 @@ import type { SourceFormat } from "./corpusStore";
  */
 
 export type AskTurnStatus = "running" | "completed" | "failed";
-export type AskCoverage = "covered" | "partial" | "not_covered";
-/** Which pipeline step a running turn is in; the page shows it as progress. */
-export type AskStage = "formulating" | "retrieving" | "answering";
-
-/** One numbered reference behind an `[n]` marker in the answer. */
-export interface AskCitation {
-  n: number;
-  blockId: string;
-  docId: string;
-  documentTitle: string;
-  /** Missing on citations saved before HTML documents existed: read it as "pdf". */
-  format?: SourceFormat;
-  sectionHeading: string | null;
-  pageNum: number;
-  quote: string;
-}
+/* The answer's shape (coverage, stage, citations) is Canon's contract; re-exported for the routes. */
+export type { AskCitation, AskCoverage, AskStage };
 
 export interface AskTurn {
   id: string;

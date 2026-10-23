@@ -1,4 +1,11 @@
 import { Mastra } from "@mastra/core";
+import {
+  askAnswerer,
+  askQueryFormulator,
+  assessRiskAgent,
+  queryFormulator,
+  ruleAgent,
+} from "@openreturn/canon";
 import "dotenv/config";
 import { cade } from "./agents/cade";
 import { ConsoleLogger } from "./server/consoleLogger";
@@ -9,15 +16,9 @@ import { appStateRoute } from "./server/routes/appState";
 import { addAskTurnRoute, createAskRoute, getAskThreadRoute } from "./server/routes/ask";
 import { createFilingRoute } from "./server/routes/createFiling";
 import { deleteFilingRoute } from "./server/routes/deleteFiling";
-import { listRefDocsRoute, refDocHtmlRoute, refDocPdfRoute } from "./server/routes/refdocs";
 import { sessionResetRoute } from "./server/routes/sessionReset";
 import { createStorage } from "./server/storage";
-import { askAnswerer } from "./workflows/askTurn/judges/askAnswerer";
-import { askQueryFormulator } from "./workflows/askTurn/judges/askQueryFormulator";
 import { reviewDecisionWorkflow } from "./workflows/reviewDecision";
-import { assessRiskAgent } from "./workflows/reviewDecision/judges/assessRiskAgent";
-import { queryFormulator } from "./workflows/reviewDecision/judges/queryFormulator";
-import { ruleAgent } from "./workflows/reviewDecision/judges/ruleAgent";
 
 const storage = await createStorage();
 
@@ -31,10 +32,11 @@ const logger = new ConsoleLogger({ name: "openreturn", level: "info" });
 
 export const mastra = new Mastra({
   /*
-   * Cade is the one conversational agent. The three review-decision
-   * judges (workflows/reviewDecision/judges/) are registered too, as the
-   * Mastra workflow docs show: the steps get them with mastra.getAgent(),
-   * so their calls share the app's logger and traces. Studio lists them.
+   * Cade is the one conversational agent. Canon's judges are registered
+   * too while the review and ask workflows still call them in-process:
+   * the steps get them with mastra.getAgent(), so their calls share the
+   * app's logger and traces. They leave this list when those calls move
+   * to Canon's MCP server.
    */
   agents: { cade, queryFormulator, assessRiskAgent, ruleAgent, askQueryFormulator, askAnswerer },
   workflows: { reviewDecision: reviewDecisionWorkflow },
@@ -88,9 +90,6 @@ export const mastra = new Mastra({
       createAskRoute,
       addAskTurnRoute,
       getAskThreadRoute,
-      listRefDocsRoute,
-      refDocPdfRoute,
-      refDocHtmlRoute,
     ],
   },
 });

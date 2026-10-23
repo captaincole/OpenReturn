@@ -1,14 +1,14 @@
 import { MASTRA_RESOURCE_ID_KEY, RequestContext } from "@mastra/core/request-context";
 import { createWorkflow } from "@mastra/core/workflows";
-import { z } from "zod";
-import { setDecisionVerdict } from "../../db/aiDecisions";
-import type { Scope } from "../../db/appDb";
-import { completeReviewRun } from "../../db/reviewRuns";
 import {
   loopCarrierSchema,
   reviewDecisionOutputSchema,
   type ReviewDecisionOutput,
-} from "./schemas";
+} from "@openreturn/canon";
+import { z } from "zod";
+import { setDecisionVerdict } from "../../db/aiDecisions";
+import type { Scope } from "../../db/appDb";
+import { completeReviewRun } from "../../db/reviewRuns";
 import { assessRiskStep, finalizeStep, gatherStep, initStep, ruleStep } from "./steps";
 
 /*

@@ -285,11 +285,7 @@ main().catch((err) => {
  */
 async function registerReviewWorkflow(workflow: unknown) {
   const { Mastra } = await import("@mastra/core");
-  const { queryFormulator } =
-    await import("../src/mastra/workflows/reviewDecision/judges/queryFormulator");
-  const { assessRiskAgent } =
-    await import("../src/mastra/workflows/reviewDecision/judges/assessRiskAgent");
-  const { ruleAgent } = await import("../src/mastra/workflows/reviewDecision/judges/ruleAgent");
+  const { queryFormulator, assessRiskAgent, ruleAgent } = await import("@openreturn/canon");
   new Mastra({
     agents: { queryFormulator, assessRiskAgent, ruleAgent },
     workflows: { reviewDecision: workflow as never },

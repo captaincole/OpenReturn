@@ -19,7 +19,7 @@ const serverEnv = {
   E2E_RUN_DIR: RUN_DIR,
 };
 
-const server = (name: "agent" | "web", url: string) => ({
+const server = (name: "canon" | "agent" | "web", url: string) => ({
   name,
   command: `node ${resolve(__dirname, "servers.mjs")} ${name}`,
   url,
@@ -42,6 +42,7 @@ export default defineConfig({
     video: "retain-on-failure",
   },
   webServer: [
+    server("canon", "http://127.0.0.1:4112/health"),
     server("agent", "http://127.0.0.1:4111/health"),
     server("web", "http://localhost:3000/login"),
   ],

@@ -28,16 +28,16 @@ useModel("JUDGE", model);
 /* Imported after JUDGE_MODEL is set. */
 const deps = async () => {
   const { Mastra } = await import("@mastra/core");
-  const { askQueryFormulator } =
-    await import("../../src/mastra/workflows/askTurn/judges/askQueryFormulator");
-  const { askAnswerer } = await import("../../src/mastra/workflows/askTurn/judges/askAnswerer");
+  const { askQueryFormulator, askAnswerer, ensureCorpusSchema, getCorpusDb } =
+    await import("@openreturn/canon");
   const mastra = new Mastra({ agents: { askQueryFormulator, askAnswerer } });
   return {
     mastra,
     ...(await import("../../src/mastra/workflows/askTurn")),
     ...(await import("../../src/mastra/db/askThreads")),
     ...(await import("../../src/mastra/db/appDb")),
-    ...(await import("../../src/mastra/db/libsql")),
+    ensureCorpusSchema,
+    getCorpusDb,
   };
 };
 type Deps = Awaited<ReturnType<typeof deps>>;

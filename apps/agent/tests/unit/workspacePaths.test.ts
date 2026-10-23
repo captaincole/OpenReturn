@@ -28,11 +28,12 @@ function exportsAsPaths(pkgDir: string): Record<string, string[]> {
 }
 
 describe("workspace path aliases", () => {
-  it("match the engine and forms package exports", () => {
+  it("match the canon, engine and sources package exports", () => {
     const { paths } = readJson("tsconfig.json").compilerOptions as {
       paths: Record<string, string[]>;
     };
     expect(paths).toEqual({
+      ...exportsAsPaths("../../canon"),
       ...exportsAsPaths("../../packages/engine"),
       ...exportsAsPaths("../../packages/sources"),
     });

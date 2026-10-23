@@ -29,11 +29,8 @@ useModel("JUDGE", model);
 /* Imported after JUDGE_MODEL is set. */
 const deps = async () => {
   const { Mastra } = await import("@mastra/core");
-  const { queryFormulator } =
-    await import("../../src/mastra/workflows/reviewDecision/judges/queryFormulator");
-  const { assessRiskAgent } =
-    await import("../../src/mastra/workflows/reviewDecision/judges/assessRiskAgent");
-  const { ruleAgent } = await import("../../src/mastra/workflows/reviewDecision/judges/ruleAgent");
+  const { queryFormulator, assessRiskAgent, ruleAgent, ensureCorpusSchema, getCorpusDb } =
+    await import("@openreturn/canon");
   const workflow = await import("../../src/mastra/workflows/reviewDecision");
   new Mastra({
     agents: { queryFormulator, assessRiskAgent, ruleAgent },
@@ -41,11 +38,12 @@ const deps = async () => {
   });
   return {
     reviewDecision: workflow.reviewDecision,
+    ensureCorpusSchema,
+    getCorpusDb,
     ...(await import("../../src/mastra/db/filings")),
     ...(await import("../../src/mastra/db/taxFacts")),
     ...(await import("../../src/mastra/db/aiDecisions")),
     ...(await import("../../src/mastra/db/appDb")),
-    ...(await import("../../src/mastra/db/libsql")),
   };
 };
 type Deps = Awaited<ReturnType<typeof deps>>;

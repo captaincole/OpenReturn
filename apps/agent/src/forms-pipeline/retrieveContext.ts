@@ -9,8 +9,8 @@
  * rank fusion. Fields run in parallel under a concurrency cap.
  */
 
+import { hybridSearchRefDocs } from "@openreturn/canon";
 import type { FieldInventory } from "@openreturn/engine/catalog";
-import { hybridSearchRefDocs } from "../mastra/db/corpusSearch.js";
 
 /*
  * Minimal block shape. The classifier only needs the citation (for the

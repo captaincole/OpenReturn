@@ -66,6 +66,25 @@ function agentEnvFile() {
 }
 
 /*
+ * Canon runs on the normal corpus (CORPUS_DB_PATH from its own env file)
+ * but its judge model follows E2E_JUDGE_MODEL, so the Ask step and the
+ * reviews run on the same model as Cade's judges. Its Mastra state goes
+ * to the run folder.
+ */
+function canonEnvFile() {
+  const replaced = ["MASTRA_DB_PATH", ...roleKeys];
+  const source = readFileSync(join(root, "canon/.env.development"), "utf8");
+  const kept = source
+    .split("\n")
+    .filter((line) => !replaced.some((key) => line.startsWith(`${key}=`)));
+  const judge = roleOverrides.filter((line) => line.startsWith("JUDGE_"));
+  const pinned = [`MASTRA_DB_PATH=${join(runDir, "data", "canon.db")}`, ...judge];
+  const file = join(runDir, "canon.env");
+  writeFileSync(file, [...kept, ...pinned].join("\n") + "\n");
+  return file;
+}
+
+/*
  * API keys live in apps/agent/.env. The agent's dotenv/config does not
  * find that file when mastra dev runs its bundle, so copy the *_API_KEY
  * entries into the agent's environment here. Only the keys: that file
@@ -81,6 +100,10 @@ function loadAgentKeys() {
 }
 
 const COMMANDS = {
+  canon: () => {
+    loadAgentKeys();
+    return { cwd: join(root, "canon"), args: ["mastra", "dev", "--env", canonEnvFile()] };
+  },
   agent: () => {
     loadAgentKeys();
     return { cwd: join(root, "apps/agent"), args: ["mastra", "dev", "--env", agentEnvFile()] };
@@ -90,7 +113,7 @@ const COMMANDS = {
 
 const name = process.argv[2];
 if (!runDir || !COMMANDS[name]) {
-  console.error("usage: E2E_RUN_DIR=… node e2e/servers.mjs agent|web");
+  console.error("usage: E2E_RUN_DIR=… node e2e/servers.mjs canon|agent|web");
   process.exit(2);
 }
 mkdirSync(process.env.DOCUMENTS_PATH, { recursive: true });

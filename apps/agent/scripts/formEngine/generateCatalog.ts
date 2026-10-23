@@ -19,7 +19,6 @@ interface Args {
   taxYear: number;
   jurisdiction: string;
   title: string;
-  writeDb: boolean;
 }
 
 function parseCmdArgs(argv: string[]): Args {
@@ -32,10 +31,9 @@ function parseCmdArgs(argv: string[]): Args {
   const taxYearStr = get("--tax-year");
   const jurisdiction = get("--jurisdiction") ?? "federal";
   const title = get("--title");
-  const writeDb = argv.includes("--write-db");
   if (!pdf || !formId || !taxYearStr || !title) {
     throw new Error(
-      "Required: --pdf, --form-id, --tax-year, --title. Optional: --jurisdiction (default federal), --write-db.",
+      "Required: --pdf, --form-id, --tax-year, --title. Optional: --jurisdiction (default federal).",
     );
   }
   return {
@@ -44,7 +42,6 @@ function parseCmdArgs(argv: string[]): Args {
     taxYear: parseInt(taxYearStr, 10),
     jurisdiction,
     title,
-    writeDb,
   };
 }
 
@@ -68,7 +65,6 @@ async function run(argv: string[]): Promise<void> {
   console.log(`generate-catalog: ${args.formId} (${args.taxYear})`);
   console.log(`  PDF:    ${args.pdf}`);
   console.log(`  Output: ${outputPath}`);
-  if (args.writeDb) console.log(`  --write-db: forms + form_fields will be upserted`);
   console.log();
 
   const result = await runIngestForm({
@@ -78,7 +74,6 @@ async function run(argv: string[]): Promise<void> {
     jurisdiction: args.jurisdiction,
     formTitle: args.title,
     outputPath,
-    writeDb: args.writeDb,
   });
 
   console.log(
@@ -87,9 +82,6 @@ async function run(argv: string[]): Promise<void> {
   console.log(
     `  usage: input=${result.usage.input_tokens} output=${result.usage.output_tokens} cached_read=${result.usage.cache_read_input_tokens} cached_create=${result.usage.cache_creation_input_tokens}`,
   );
-  if (result.dbWritten) {
-    console.log(`  DB: forms + form_fields upserted (${result.catalogEntryCount} rows)`);
-  }
   if (result.unenrichedSample.length > 0) {
     console.log(`  Unenriched fields (first ${result.unenrichedSample.length}):`);
     for (const n of result.unenrichedSample) console.log(`    - ${n}`);
@@ -117,7 +109,6 @@ export const generateCatalogCommand: Command = {
     { flag: "--tax-year=<year>", desc: "e.g. 2025 (required)" },
     { flag: "--title=<title>", desc: "official form title (required)" },
     { flag: "--jurisdiction=<j>", desc: "federal | state-<st> (default: federal)" },
-    { flag: "--write-db", desc: "also upsert forms/form_fields tables in corpus.db" },
   ],
   run,
 };

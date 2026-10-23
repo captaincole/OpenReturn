@@ -7,10 +7,10 @@
 The twin agents:
 
 - **Cade** — your CPA. The conversational front-desk agent: guides the user through the tax-prep flow, records facts and decisions, orchestrates workflows, narrates progress. First agent built.
-- **Canon** — your tax attorney. Grounds Cade's decisions in the IRS/FTB reference corpus and answers tax-code questions with citations. Today Canon is the review judges and the Ask pipeline inside the agent app; the migration plan makes it its own Mastra project.
-There is exactly **one** conversational agent (Cade). Grounding is NOT a conversation: every `record-ai-decision` triggers the background **review-decision workflow** (`workflows/reviewDecision/`) — deterministic gather/retrieval plus three narrow LLM "judges" (`judges/`: queryFormulator, assessRiskAgent, ruleAgent on Haiku). The judges are registered on the Mastra instance, and the steps get them with `mastra.getAgent()` (the Mastra workflow docs pattern), so their calls share the app's logger and traces.
+- **Canon** — your tax attorney. Grounds Cade's decisions in the IRS/FTB reference corpus and answers tax-code questions with citations. Canon is its own Mastra project (`canon/`, port 4112) with an MCP server (`searchRefDocs`, `citeRefDoc`, `run_ask`) and the reference-library routes. Cade still calls Canon's judges and search in-process through `@openreturn/canon` until the review and ask calls move to MCP (phase 3 of the split).
+There is exactly **one** conversational agent (Cade). Grounding is NOT a conversation: every `record-ai-decision` triggers the background **review-decision workflow** (`workflows/reviewDecision/`) — deterministic gather/retrieval plus three narrow LLM "judges" (Canon's `workflows/ground/judges/`: queryFormulator, assessRiskAgent, ruleAgent on Haiku). The judges are registered on the Mastra instance, and the steps get them with `mastra.getAgent()` (the Mastra workflow docs pattern), so their calls share the app's logger and traces.
 
-**Tax-code Q&A ("Ask The Tax Code")** is not a conversation either: each question runs a fixed pipeline (`workflows/askTurn/`: formulate → retrieve → answer → validate) with two more judges (askQueryFormulator, askAnswerer). A "partial" answer names its gaps as search queries; the pipeline searches once more with them and answers again. Follow-ups pass the earlier turns as context; threads live in `ask_threads`/`ask_turns` in `app.db`, whose `log_json` is the query log. `validate.ts` drops any citation or quote that does not trace to a retrieved block. The Ask eval (`apps/agent/evals/ask/`, report in `docs/evals/ask.md`) runs labeled questions through this pipeline and scores coverage, grounding, retrieval and the stated facts.
+**Tax-code Q&A ("Ask The Tax Code")** is not a conversation either: each question runs a fixed pipeline (Canon's `workflows/ask/`: formulate → retrieve → answer → validate; Cade's `workflows/askTurn/` owns the thread rows and calls it) with two more judges (askQueryFormulator, askAnswerer). A "partial" answer names its gaps as search queries; the pipeline searches once more with them and answers again. Follow-ups pass the earlier turns as context; threads live in `ask_threads`/`ask_turns` in `app.db`, whose `log_json` is the query log. `validate.ts` drops any citation or quote that does not trace to a retrieved block. The Ask eval (`apps/agent/evals/ask/`, report in `docs/evals/ask.md`) runs labeled questions through this pipeline and scores coverage, grounding, retrieval and the stated facts.
 
 Note: the Unix working directory is still `project-merrilin` (the product's earliest name; later "Wheel of Time," then "Summa," now "OpenReturn"). The directory name was left alone to avoid churning local paths/configs. Internal names / IDs / docs use "openreturn" or "OpenReturn". The agent was "Luca" before it was Cade; old threads in mastra.db carry that id.
 
@@ -24,9 +24,20 @@ Everything routes through a `tax_facts` table (libsql/SQLite, `.data/app.db`) wh
 
 ## Repo structure
 
-This is a monorepo. `apps/agent`, `packages/engine`, and `packages/sources` are npm workspaces with one root lockfile; `apps/web` installs on its own:
+This is a monorepo. `canon`, `apps/agent`, `packages/engine`, and `packages/sources` are npm workspaces with one root lockfile; `apps/web` installs on its own. The target layout is flat (`canon/ cade/ engine/ sources/ web/`); `canon/` is the first folder there, the rest move in later phases of the split:
 
 ```
+canon/                           # @openreturn/canon — CANON, the tax attorney. Mastra project, port 4112.
+├── src/db/                        corpus.db schema, store, files, hybrid search (corpusSearch.ts)
+├── src/refdocs/                   reference-corpus ingest pipeline (parse, contextualize, embed)
+├── src/mastra/                    index.ts (instance), mcp.ts (MCP server), tools/refDocs.ts,
+│                                  workflows/ask/ (Ask The Tax Code), workflows/ground/ (judges,
+│                                  prompts, schemas), server/routes/refdocs.ts (the library)
+├── scripts/corpus/                the `corpus` CLI (npm run corpus)
+├── seed/corpus.manifest.json      the prebuilt corpus.db release pointer
+├── tests/unit/                    refdocs, search, ask validation, boundary.test.ts (no Cade, no
+│                                  app.db, no engine imports)
+└── .data/                         corpus.db + mastra.db (gitignored)
 packages/
 ├── engine/                      # @openreturn/engine — THE FORM ENGINE. Pure, deterministic, no AI/DB/network.
 │   ├── src/                       Owns the fact vocabulary (facts/), per-jurisdiction form
@@ -51,13 +62,13 @@ apps/
 │   │                              loadScenario.ts is the one db↔engine bridge; formAssets.ts loads
 │   │                              blank PDFs from public/sources/<year>/forms/ (gitignored, built
 │   │                              by `npm --prefix apps/agent run sources:sync` before dev/build).
-│   ├── src/refdocs/             # reference-corpus ingest pipeline (parse, contextualize, embed)
-│   ├── src/forms-pipeline/      # dev-time form-catalog ingest (widget extraction, AI labeling)
-│   ├── scripts/                 # operator CLIs: corpus/ + formEngine/ subcommand
-│   │                              CLIs on a shared dispatcher (scripts/lib/cli.ts),
-│   │                              plus standalone diagnostics (smokeReview, …)
-│   ├── tests/                   # agent tests (tools, db, refdocs); engine tests are in packages/engine
-│   ├── package.json             # agent deps + scripts (mastra dev, corpus, form-engine, sources:sync)
+│   ├── src/forms-pipeline/      # dev-time form-catalog ingest (widget extraction, AI labeling);
+│   │                              retrieval through @openreturn/canon (moves to engine/builder in phase 4)
+│   ├── scripts/                 # operator CLI: formEngine/ subcommands on a small dispatcher
+│   │                              (scripts/lib/cli.ts), plus standalone diagnostics (smokeReview, …)
+│   ├── evals/                   # model evals (ingest, review, ask) and the combined report in docs/evals
+│   ├── tests/                   # agent tests (tools, db); corpus tests are in canon/, engine tests in packages/engine
+│   ├── package.json             # agent deps + scripts (mastra dev, form-engine, sources:sync)
 │   └── tsconfig.json            # "paths" aliases @openreturn/* to source so `mastra dev` bundles them
 └── web/                         # Next.js 16 (App Router) frontend → deployed to Vercel
     ├── app/                     # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
@@ -77,27 +88,28 @@ The agent uses the engine only through `@openreturn/engine`'s exports. The web a
 
 ## Running it
 
-Two services. Run both — backend changes hot-reload via Mastra file-watching, frontend changes HMR via Next.js (Turbopack). All commands run from the repo root; root scripts delegate via `npm --prefix apps/<app>`.
+Three services: Canon (:4112), Cade (:4111) and the web app (:3000). Run all three — backend changes hot-reload via Mastra file-watching, frontend changes HMR via Next.js (Turbopack). All commands run from the repo root; root scripts delegate via `npm --prefix apps/<app>` (or `canon`).
 
 ```bash
 npm run install:all                         # installs the workspaces (root) + apps/web
-npm run dev:all                             # mastra (:4111) + next (:3000) — that's everything
+npm run dev:all                             # canon (:4112) + cade (:4111) + next (:3000) — that's everything
 
 # or run them separately:
-npm run dev          # mastra only — also opens Mastra Studio at :4111
+npm run dev:canon    # Canon only — Mastra Studio at :4112, MCP at /api/mcp/canon/mcp
+npm run dev          # Cade only — also opens Mastra Studio at :4111
 npm run dev:web      # next only
 
 npm test             # engine golden suite; positional filters work (npm test -- alex)
-npm run test:unit    # engine + agent unit tests (test:integration likewise)
-npm run typecheck    # tsc over engine + agent
+npm run test:unit    # engine + canon + agent unit tests (test:integration likewise)
+npm run typecheck    # tsc over engine + canon + agent
 npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see e2e/README.md)
 ```
 
-All persistent state lives in local files under `apps/agent/.data/` ("the DB is a file"):
+All persistent state lives in local files: user data under `apps/agent/.data/`, the corpus under `canon/.data/` ("the DB is a file"):
 
 | file | contents | owner |
 | --- | --- | --- |
-| `corpus.db` | reference corpus (ref_* tables, FTS5 + vectors) + forms catalog | `db/libsql.ts` |
+| `corpus.db` | reference corpus (ref_* tables, FTS5 + vectors); lives in `canon/.data/` | `canon/src/db/libsql.ts` |
 | `app.db` | domain data (tax_facts, ai_decisions, filings, ask_threads/ask_turns, …) | `db/appDb.ts` |
 | `mastra.db` | Mastra runtime (threads, messages, working memory) | `@mastra/libsql` |
 | `documents/` | document blobs `{filingId}/{category}/{slug}-{ulid}.{ext}` | `db/blobStore.ts` |
@@ -106,7 +118,7 @@ Pin all four paths via env (`CORPUS_DB_PATH` / `APP_DB_PATH` / `MASTRA_DB_PATH` 
 
 **Auth (single-user):** identity = the instance. One `owner` row in `app.db` holds profile data (name/email) plus an scrypt password hash and the session-cookie HMAC secret — all created by the web app's first-run `/setup` screen. Login = one password → signed httpOnly cookie (`lib/localAuth.ts`, ~100 lines, node:crypto only). `proxy.ts` does an optimistic cookie-presence redirect; layouts/route handlers verify for real via `getOwnerSession()`.
 
-**The browser never talks to the agent.** All agent calls (chat streaming, `/app/state`, filing lifecycle, thread history) go through the same-origin `/api/agent/[...path]` proxy — session-cookie authenticated, forwarded server-side to `AGENT_INTERNAL_URL` (default `http://127.0.0.1:4111`), streaming passed through. The agent itself has no user auth; `ownerMiddleware` resolves the instance owner from `app.db` for memory scoping, and an optional `AGENT_API_TOKEN` gates the port when it's reachable beyond localhost. Everything non-agent — activity, drafts, uploads, filings lists — is read from `app.db` directly: Server Components via `lib/serverDb.ts`, browser code via the `/api/*` Route Handlers (no realtime channel — client components poll on a short interval). With RLS gone, **every query scopes explicitly** by `userId`/`filingId` (`Scope` in `db/appDb.ts`), and routes gate with membership checks before touching another filing's data.
+**The browser never talks to the agent.** All agent calls (chat streaming, `/app/state`, filing lifecycle, thread history) go through the same-origin `/api/agent/[...path]` proxy — session-cookie authenticated, forwarded server-side to `AGENT_INTERNAL_URL` (default `http://127.0.0.1:4111`), streaming passed through. The agent itself has no user auth; `ownerMiddleware` resolves the instance owner from `app.db` for memory scoping, and an optional `AGENT_API_TOKEN` gates the port when it's reachable beyond localhost. Everything non-agent — activity, drafts, uploads, filings lists — is read from `app.db` directly: Server Components via `lib/serverDb.ts`, browser code via the `/api/*` Route Handlers (no realtime channel — client components poll on a short interval). With RLS gone, **every query scopes explicitly** by `userId`/`filingId` (`Scope` in `db/appDb.ts`), and routes gate with membership checks before touching another filing's data. Reference-library calls (`/library`, Open PDF) go through a second proxy, `/api/canon/[...path]`, to Canon at `CANON_INTERNAL_URL` (default `http://127.0.0.1:4112`); it is read-only and gated by the same session cookie.
 
 ## First run / factory reset
 
@@ -119,7 +131,7 @@ We're building agent + UI together. When changes touch both, expect to:
 1. **Edit code** (backend in `apps/agent/src/mastra/`, frontend in `apps/web/{app,components,lib}/`).
 2. **Watch logs** for errors. Three places to look:
    - **Mastra log** — backend errors, agent traces, tool-call output. When Claude runs mastra in the background it writes to that background task's output file; otherwise it's whatever terminal you started `npm run dev` in.
-   - **Mastra Studio** at http://localhost:4111 — the **Observability** tab shows full agent traces (which tools fired, with what args, in what order). This is the right place to debug "why did Cade do X?".
+   - **Mastra Studio** at http://localhost:4111 (Canon's at :4112) — the **Observability** tab shows full agent traces (which tools fired, with what args, in what order). This is the right place to debug "why did Cade do X?".
    - **Browser console + Network panel** — frontend errors and HTTP failures (401s from a wrong passcode, 404s from a missing proxy entry, etc.).
 3. **Verify the change in the browser** at http://localhost:3000. Sign in with the owner password (session cookie persists across reloads). To wipe state between test runs use **Delete filing** (avatar menu, top-right) and start a fresh filing from the home page. The activity rail and header counters refresh after each agent turn (plus a short client-side poll).
 
@@ -136,7 +148,7 @@ Limits worth remembering:
 
 ### Claude verifies the whole stack with `npm run e2e`
 
-After a change to the web app, the agent tools, or document generation, run `npm run e2e` in the background (a few minutes; the models come from `apps/agent/.env.development` and optional `E2E_*` lines in the gitignored `apps/agent/.env`, see e2e/README.md). Read `e2e/.run/<runId>/summary.md`. A `plumbing` failure means the change probably broke the app. A `model` failure can be a model mistake: run again before you debug. `dev:all` must be stopped first.
+After a change to the web app, the agent tools, or document generation, run `npm run e2e` in the background (a few minutes; the models come from `apps/agent/.env.development` (Canon's from `canon/.env.development`) and optional `E2E_*` lines in the gitignored `apps/agent/.env`, see e2e/README.md). Read `e2e/.run/<runId>/summary.md`. A `plumbing` failure means the change probably broke the app. A `model` failure can be a model mistake: run again before you debug. `dev:all` must be stopped first.
 
 ### Resetting user data
 
@@ -144,7 +156,7 @@ Two paths:
 - **UI: Delete filing** (avatar menu) → `DELETE /app/filings/:id` — removes the filing's blob directory, cascades every domain row, deletes the Mastra thread. Start a fresh filing from the home page afterwards.
 - **API: `POST /app/session/reset`** → `resetCurrentUserData` in `apps/agent/src/mastra/db/resetUserData.ts` — wipes the user's rows but keeps the filing + memberships. No UI button anymore.
 
-**Reference corpus and `packages/sources/` always survive.** To rebuild the corpus, delete `.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete the `.data/` directory and re-run `npm run reset`.
+**Reference corpus and `packages/sources/` always survive.** To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete both `.data/` directories (`apps/agent/`, `canon/`) and re-run `npm run reset`.
 
 ## Mastra schema
 
@@ -152,7 +164,7 @@ The runtime store is `@mastra/libsql` (pinned; see `server/storage.ts` and `agen
 
 ## Data-model iteration: wipe + re-ingest, not migrations
 
-While the data model is in flux, breaking schema changes are handled by **wiping and re-seeding**, not by migrations or backfill scripts: edit the `CREATE TABLE` statements in `db/appDb.ts` (or `db/libsql.ts` for the corpus), delete the affected `.data/*.db` file, and re-run `npm run reset` / `npm run corpus -- sync`. Delete-filing + fixture-driven re-ingest restores a known-good user state.
+While the data model is in flux, breaking schema changes are handled by **wiping and re-seeding**, not by migrations or backfill scripts: edit the `CREATE TABLE` statements in `db/appDb.ts` (or `canon/src/db/libsql.ts` for the corpus), delete the affected `.data/*.db` file, and re-run `npm run reset` / `npm run corpus -- sync`. Delete-filing + fixture-driven re-ingest restores a known-good user state.
 
 There is no migration system for the libsql files — dev/test data only. That changes when real users have data worth preserving (revisit in Phase 4 packaging).
 
@@ -235,7 +247,7 @@ Add categories as the domain grows. Prefer splitting over lumping (it's easier t
 
 ### Where the corpus lives
 
-The reference corpus (IRS/FTB form instructions and publications) lives in **`.data/corpus.db`** — a local libsql/SQLite file, separate from user data (`app.db`) because it's shared, read-mostly reference material that will ship prebuilt as a release asset (Phase 4). Client + schema live in `apps/agent/src/mastra/db/libsql.ts`; the same file also holds the forms catalog (`forms` / `form_fields`, written by the forms-ingest pipeline, dormant at runtime).
+The reference corpus (IRS/FTB form instructions and publications) lives in **`canon/.data/corpus.db`** — a local libsql/SQLite file, separate from user data (`app.db`) because it's shared, read-mostly reference material that will ship prebuilt as a release asset (Phase 4). Client + schema live in `canon/src/db/libsql.ts`. (The forms catalog tables are gone: the catalog is engine output, written as catalog.json by the forms pipeline.)
 
 ### Corpus shape (libsql)
 
@@ -275,7 +287,7 @@ Each form's instructions are described by `packages/sources/<year>/forms/<jurisd
 }
 ```
 
-When sync needs a source file that is not on disk, it takes it from corpus.db (every ingested file is stored there), else downloads `sourceUrl` (and cleans it, for HTML) and checks `sha256`. Publishers replace files at the same URL with new editions, so the stored copy is what keeps re-ingests working; a mismatch error names the fix (`apps/agent/src/refdocs/fetchSource.ts`).
+When sync needs a source file that is not on disk, it takes it from corpus.db (every ingested file is stored there), else downloads `sourceUrl` (and cleans it, for HTML) and checks `sha256`. Publishers replace files at the same URL with new editions, so the stored copy is what keeps re-ingests working; a mismatch error names the fix (`canon/src/refdocs/fetchSource.ts`).
 
 Each document has a publication date (`ref_documents.published`, `refdocs/published.ts`). The Ask answerer sees it in each passage header and prefers the newer document when two passages disagree; the library shows it. A PDF's date is its creation date, read at ingest; a sidecar's optional `"published": "YYYY-MM[-DD]"` overrides it (set it when the PDF's metadata is older than its revision, e.g. 3921 "Rev. April 2025"). `add-html` records an FTB page's "Revised" date; FTB's tax-year pages show none, so they have no date.
 
@@ -294,7 +306,7 @@ npm run corpus -- status --strict   # exit non-zero on any drift (for CI/pre-pus
 # 3. Sync changes into corpus.db (idempotent, sha-skips already-ingested docs):
 npm run corpus -- sync              # ~$0.50 + a few min per new/changed doc
 
-# 3b. Publish: corpus.db is a GitHub Release asset (apps/agent/seed/corpus.manifest.json);
+# 3b. Publish: corpus.db is a GitHub Release asset (canon/seed/corpus.manifest.json);
 #     a new release is how other clones get the new documents.
 
 # 4. If a previous sync wrote rows but embeddings failed (Ollama down),
@@ -325,7 +337,7 @@ We write the rows BEFORE embedding so an embed failure (Ollama down) doesn't was
 
 ### Retrieval — `search-ref-docs` tool
 
-Single entry point. `callMatch` in `db/corpusSearch.ts` (the TS port of the old Postgres `match_ref_blocks` function) runs two legs and merges in JS: top-N from the FTS5 leg (`MATCH` + bm25, negated to higher-is-better) unioned with top-N from the vector leg (brute-force `vector_distance_cos` — exact and fast at low-thousands of blocks; no ANN index on purpose). Final ordering is reciprocal rank fusion: each leg ranks its own hits, and a block scores `1/(60 + rank)` from each leg that found it, so the legs count equally and bm25 is never compared with cosine (a max() of raw scores once let any keyword hit outrank every vector-only hit). Query embedding comes from the local model via `src/refdocs/embeddings.ts` (`EMBEDDINGS_MODEL`, default `ollama/embeddinggemma-2`).
+Single entry point. `callMatch` in `canon/src/db/corpusSearch.ts` (the TS port of the old Postgres `match_ref_blocks` function) runs two legs and merges in JS: top-N from the FTS5 leg (`MATCH` + bm25, negated to higher-is-better) unioned with top-N from the vector leg (brute-force `vector_distance_cos` — exact and fast at low-thousands of blocks; no ANN index on purpose). Final ordering is reciprocal rank fusion: each leg ranks its own hits, and a block scores `1/(60 + rank)` from each leg that found it, so the legs count equally and bm25 is never compared with cosine (a max() of raw scores once let any keyword hit outrank every vector-only hit). Query embedding comes from the local model via `src/refdocs/embeddings.ts` (`EMBEDDINGS_MODEL`, default `ollama/embeddinggemma-2`).
 
 ```
 query
@@ -345,14 +357,14 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 `apps/agent/src/mastra/workflows/reviewDecision/` — fired in the background by `record-ai-decision` (fire-and-forget; the tool returns `pending` immediately). Shape: `init → (gather → assess → rule) ×≤3 → finalize`, driven by `reviewDecision(scope, decisionId)`.
 
 - **gather** (deterministic) — loads the cited facts, runs hybrid retrieval per query (queries from the `queryFormulator` judge on iteration 1, from the rule step's `suggestedQueries` after).
-- **assess / rule** (LLM judges, `judges/` — Haiku, structured output) — risk tier, then verdict-or-loop. `ruleAgent` may use `cite-ref-docs` (bounded, maxSteps 4) to verify quotes; hard rule: never cite a `blockId` that wasn't retrieved in this run.
+- **assess / rule** (LLM judges from Canon's `workflows/ground/judges/` — Haiku, structured output) — risk tier, then verdict-or-loop. `ruleAgent` may use `cite-ref-docs` (bounded, maxSteps 4) to verify quotes; hard rule: never cite a `blockId` that wasn't retrieved in this run.
 - **finalize** — persists verdict + citations; `needs_more_facts`/`inaccurate` also write an `open_questions` row.
-- Shared CPA heuristics both judges import live in `judges/cpaRules.ts` — rules accumulate there as CPAs flag edge cases.
+- Shared CPA heuristics both judges import live in Canon's `workflows/ground/judges/cpaRules.ts` — rules accumulate there as CPAs flag edge cases.
 - Every step logs to `review_run_steps` (raw input/output JSON — future fine-tuning substrate). `npm run smoke:review` is the end-to-end test (3 cases, temp DB, real Haiku calls).
 
 ### Operator CLIs and inspection scripts
 
-Agent tooling lives under `apps/agent/scripts/`; engine scripts under `packages/engine/scripts/`. Two subcommand CLIs (shared dispatcher in `scripts/lib/cli.ts` — no args lists subcommands, `-- <cmd> --help` shows options) plus standalone diagnostics. All run from the repo root; `--` passes args through both npm layers.
+Canon's corpus CLI lives under `canon/scripts/corpus/`, Cade's tooling under `apps/agent/scripts/`, engine scripts under `packages/engine/scripts/`. Two subcommand CLIs (shared dispatcher in `scripts/lib/cli.ts` — no args lists subcommands, `-- <cmd> --help` shows options) plus standalone diagnostics. All run from the repo root; `--` passes args through both npm layers.
 
 **`npm run corpus`** — the RAG knowledge base, end to end:
 
@@ -392,11 +404,11 @@ Agent tooling lives under `apps/agent/scripts/`; engine scripts under `packages/
 - **Embedding models need their documented task prefixes.** EmbeddingGemma expects `task: search result | query: …` for queries and `title: none | text: …` for documents (applied in `src/refdocs/embeddings.ts`); skipping them silently degrades retrieval precision. When swapping embedding models, read the model card for its prompt convention — and remember vectors from different models (or dims) are never comparable, which is why `ref_meta.embedding_model` gates the vector leg.
 - **Vector literals serialize as strings, not arrays.** `vectorLiteral([1,2,3])` returns `"[1,2,3]"` — that string feeds libsql's `vector32()`. Passing a JS array silently fails or coerces. (SQLite doesn't enforce the declared `F32_BLOB` dim — only query-vs-stored dim equality matters at distance time.)
 - **Diagnose retrieval failures bottom-up.** Order: parser → FTS index → embeddings → merge ordering → agent prompt. Don't blame the corpus first. Our headline parsing failure was attributing the `§ Single` block to `(Preamble)`, not a corpus or retrieval gap. Verify section attribution by querying `ref_blocks` directly before tuning retrieval.
-- **Heading detection needs both regex and named prose.** `Line Nx`, `Part N`, `Schedule N` come from regex. Standalone Title Case headings like `Single`, `Married Filing Jointly`, `Head of Household` need an explicit `KNOWN_PROSE_HEADINGS` set in `apps/agent/src/refdocs/parse.ts`. Title-case continuation rule absorbs multi-line headings (`Qualifying Surviving` + `Spouse`). Since 2026-10-15 the parser also detects run-in headings (`Line 4. If…`), worksheet titles (`…Worksheet—Line 16`), and standalone Title Case prose headings (previous line ends a sentence, body follows); FTB PDFs get the FTB rules automatically (sidecar `publisher: "FTB"`, or `"parserStyle"`), and HTML documents do not use this parser at all; blocks are capped at 1,200 chars (`refdocs/chunk.ts`). After any parser change: `corpus sync --force`, then re-point code citations to block ids.
+- **Heading detection needs both regex and named prose.** `Line Nx`, `Part N`, `Schedule N` come from regex. Standalone Title Case headings like `Single`, `Married Filing Jointly`, `Head of Household` need an explicit `KNOWN_PROSE_HEADINGS` set in `canon/src/refdocs/parse.ts`. Title-case continuation rule absorbs multi-line headings (`Qualifying Surviving` + `Spouse`). Since 2026-10-15 the parser also detects run-in headings (`Line 4. If…`), worksheet titles (`…Worksheet—Line 16`), and standalone Title Case prose headings (previous line ends a sentence, body follows); FTB PDFs get the FTB rules automatically (sidecar `publisher: "FTB"`, or `"parserStyle"`), and HTML documents do not use this parser at all; blocks are capped at 1,200 chars (`refdocs/chunk.ts`). After any parser change: `corpus sync --force`, then re-point code citations to block ids.
 - **One-off smoke tests miss "fixed A but broke B" patterns.** A 3-case smoke gave us false confidence twice during this build. Phase 6 of the original plan (a real Mastra eval dataset with scorers) is the next thing to build before any further prompt/retrieval changes.
-- **The review judges use Haiku because each task is narrow.** Read decision + facts + retrieval, emit one structured output. If verdict-quality drops on harder cases, swap to Sonnet — one-line change per judge in `workflows/reviewDecision/judges/`. Don't reach for it preemptively.
+- **The review judges use Haiku because each task is narrow.** Read decision + facts + retrieval, emit one structured output. If verdict-quality drops on harder cases, swap to Sonnet — one-line change per judge in `canon/src/mastra/workflows/ground/judges/`. Don't reach for it preemptively.
 - **`structuredOutput.errorStrategy: "strict"` is right for production but loud during prompt iteration.** Catches malformed model output explicitly via the existing try/catch → `review_failed` verdict, so failures surface in the DB rather than being papered over.
-- **Mastra's bundled Anthropic provider uses native structured output only for Claude models it knows.** For a newer model (e.g. `claude-haiku-5-5`) it falls back to a JSON tool call, where Claude sometimes sends an array as a string and the turn fails. The Ask judges pass `providerOptions: { anthropic: { structuredOutputMode: "outputFormat" } }` to force native mode (`workflows/askTurn/index.ts`), and their schema's lists default to empty.
+- **Mastra's bundled Anthropic provider uses native structured output only for Claude models it knows.** For a newer model (e.g. `claude-haiku-5-5`) it falls back to a JSON tool call, where Claude sometimes sends an array as a string and the turn fails. The Ask judges pass `providerOptions: { anthropic: { structuredOutputMode: "outputFormat" } }` to force native mode (Canon's `workflows/ask/index.ts`), and their schema's lists default to empty.
 - **Pre-retrieval and curated topic indexes were dead ends for this domain.** We considered both; agent-with-good-tool wins on simplicity once the retrieval pipeline is strong. Resist re-introducing pre-retrieval plumbing unless evals show the agent genuinely can't formulate queries — and even then, fix the agent prompt first.
 
 ## Related project — lessons carried forward

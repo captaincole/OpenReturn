@@ -8,8 +8,7 @@
  *              deterministic; the classifier does not infer them.
  *   persist  — Merge deterministic + enrichment into the catalog shape,
  *              round-trip-validate (every widget ends up in the catalog),
- *              write JSON, optionally upsert into corpus.db
- *              (forms / form_fields tables).
+ *              write JSON (catalog.json next to the form's bindings).
  *
  * Round-trip invariant: every ExtractedField is in the persisted catalog.
  * Fields the AI could not enrich get a placeholder fieldId
@@ -22,7 +21,6 @@ import { createStep } from "@mastra/core/workflows";
 import { SOURCES_ROOT } from "@openreturn/sources";
 import { promises as fs } from "node:fs";
 import { relative } from "node:path";
-import { ensureCorpusSchema, getCorpusDb } from "../../mastra/db/libsql.js";
 import { classifyFields, type FieldEnrichment, type ValueType } from "../classifyFields.js";
 import { extractFormFields, type ExtractedField, type FieldKind } from "../extractFormFields.js";
 import {
@@ -177,12 +175,6 @@ export const persistStep = createStep({
     };
     await fs.writeFile(inputData.outputPath, JSON.stringify(payload, null, 2), "utf8");
 
-    let dbWritten = false;
-    if (inputData.writeDb) {
-      await upsertCatalogDb(inputData, catalog);
-      dbWritten = true;
-    }
-
     return {
       outputPath: inputData.outputPath,
       totalFields: inputData.fields.length,
@@ -190,7 +182,6 @@ export const persistStep = createStep({
       unenrichedCount: unenriched.length,
       skippedCount: inputData.skipped.length,
       catalogEntryCount: catalog.length,
-      dbWritten,
       usage: inputData.usage,
       skipSample: inputData.skipped.slice(0, 8),
       unenrichedSample: unenriched.slice(0, 8),
@@ -237,55 +228,6 @@ function assembleCatalog(inputData: {
   }
 
   return { catalog, unenriched };
-}
-
-/* Upsert the form + its catalog rows into corpus.db (forms / form_fields). */
-async function upsertCatalogDb(
-  meta: { formId: string; taxYear: number; jurisdiction: string; formTitle: string },
-  catalog: CatalogRow[],
-): Promise<void> {
-  await ensureCorpusSchema();
-  const db = getCorpusDb();
-  const now = new Date().toISOString();
-  await db.execute({
-    sql: `INSERT INTO forms (form_id, tax_year, jurisdiction, title, updated_at)
-          VALUES (?, ?, ?, ?, ?)
-          ON CONFLICT (form_id, tax_year) DO UPDATE SET
-            jurisdiction = excluded.jurisdiction,
-            title = excluded.title,
-            updated_at = excluded.updated_at`,
-    args: [meta.formId, meta.taxYear, meta.jurisdiction, meta.formTitle, now],
-  });
-  await db.batch(
-    catalog.map((f, i) => ({
-      sql: `INSERT INTO form_fields
-              (field_id, form_id, tax_year, ordinal, label, category,
-               value_type, pdf_widget_name, position, updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT (field_id, tax_year) DO UPDATE SET
-              form_id = excluded.form_id,
-              ordinal = excluded.ordinal,
-              label = excluded.label,
-              category = excluded.category,
-              value_type = excluded.value_type,
-              pdf_widget_name = excluded.pdf_widget_name,
-              position = excluded.position,
-              updated_at = excluded.updated_at`,
-      args: [
-        f.fieldId,
-        meta.formId,
-        meta.taxYear,
-        i,
-        f.label,
-        f.category,
-        f.valueType,
-        f.pdfWidgetName ?? null,
-        f.position ? JSON.stringify(f.position) : null,
-        now,
-      ],
-    })),
-    "write",
-  );
 }
 
 function buildCatalogRow(

@@ -94,7 +94,6 @@ export const workflowInputSchema = z.object({
   jurisdiction: z.string(),
   formTitle: z.string(),
   outputPath: z.string(),
-  writeDb: z.boolean(),
 });
 
 export const afterExtractSchema = workflowInputSchema.extend({
@@ -115,7 +114,6 @@ export const workflowOutputSchema = z.object({
   unenrichedCount: z.number().int(),
   skippedCount: z.number().int(),
   catalogEntryCount: z.number().int(),
-  dbWritten: z.boolean(),
   usage: usageSchema,
   skipSample: z.array(fieldSkipSchema),
   /** pdfFieldNames that had no enrichment and got a placeholder fieldId. */
