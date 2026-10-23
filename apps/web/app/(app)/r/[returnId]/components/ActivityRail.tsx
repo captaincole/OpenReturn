@@ -12,7 +12,7 @@ import { POLL_INTERVAL_MS } from "./RequestedActions";
  * /api/activity on a short interval; new tax_facts / ai_decisions rows
  * and verdict updates land within one poll. A click on a chip opens an
  * inline detail panel with the rationale, supporting facts, and verdict
- * reason behind a decision, so the user sees what Luca was thinking.
+ * reason behind a decision, so the user sees what Cade was thinking.
  */
 export function ActivityTicker({ refreshKey }: { refreshKey: number }) {
   const [items, setItems] = useState<ActivityItem[] | null>(null);
@@ -51,7 +51,7 @@ export function ActivityTicker({ refreshKey }: { refreshKey: number }) {
         <div className="px-5 pb-5 text-sm text-ink-muted">Loading…</div>
       ) : items.length === 0 ? (
         <div className="px-5 pb-5 text-sm text-ink-muted">
-          Nothing yet. Items appear here the moment Luca records them.
+          Nothing yet. Items appear here the moment Cade records them.
         </div>
       ) : (
         <>
@@ -187,7 +187,7 @@ function ActivityDetailPanel({ item, onClose }: { item: ActivityItem; onClose: (
         )}
 
         {isDecision && item.rationale && (
-          <DetailBlock label="Why Luca decided this">
+          <DetailBlock label="Why Cade decided this">
             <p className="leading-relaxed whitespace-pre-wrap text-ink-secondary">
               {item.rationale}
             </p>

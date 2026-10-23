@@ -1,5 +1,8 @@
 import { createTool } from "@mastra/core/tools";
-import { makeHsaDistributionFactKey, type HsaDistributionFactValue } from "@summa/engine/facts";
+import {
+  makeHsaDistributionFactKey,
+  type HsaDistributionFactValue,
+} from "@openreturn/engine/facts";
 import { z } from "zod";
 import { PayerSchema, recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";

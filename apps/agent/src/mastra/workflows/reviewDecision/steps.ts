@@ -370,7 +370,7 @@ function resolveFinalVerdict(carrier: LoopCarrier): FinalRuling {
 }
 
 /*
- * Surface non-accurate outcomes to Luca via an open_questions row, so he
+ * Surface non-accurate outcomes to Cade via an open_questions row, so he
  * circles back with the user. Otherwise the verdict sits unread in the
  * ledger. Returns the open question's id, or undefined when the verdict
  * needs no follow-up.

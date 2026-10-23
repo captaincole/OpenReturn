@@ -3,7 +3,7 @@
 /*
  * The chat session behind AppShell: message buffer, busy flag, history
  * hydration, and the single sendChat entry point that streams a turn to
- * Luca. Extracted from AppShell so the shell stays layout + context
+ * Cade. Extracted from AppShell so the shell stays layout + context
  * plumbing. One sendChat code path (chat input and the Requested
  * Actions card both call it) prevents useEffect bridges, state-trigger
  * races, and double sends.
@@ -11,7 +11,7 @@
 
 import { UnauthorizedError } from "@/lib/api";
 import { getUserId } from "@/lib/auth";
-import { LUCA_AGENT_ID } from "@/lib/chatSession";
+import { CADE_AGENT_ID } from "@/lib/chatSession";
 import { makeMastraClient } from "@/lib/mastraClient";
 import { threadIdFor, type TaxReturn } from "@/lib/returns";
 import { uploadDocument } from "@/lib/uploads";
@@ -34,10 +34,10 @@ export interface SendChatOpts {
   skipUpload?: boolean;
 }
 
-export interface LucaChat {
+export interface CadeChat {
   messages: ChatMessage[];
   setMessages: Dispatch<SetStateAction<ChatMessage[]>>;
-  lucaBusy: boolean;
+  cadeBusy: boolean;
   turnTick: number;
   bumpTurn: () => void;
   sendChat: (opts: SendChatOpts) => Promise<void>;
@@ -128,7 +128,7 @@ interface ChatCtx {
   refreshState: () => Promise<void>;
   onUnauthorized: () => Promise<void>;
   setMessages: Dispatch<SetStateAction<ChatMessage[]>>;
-  setLucaBusy: Dispatch<SetStateAction<boolean>>;
+  setCadeBusy: Dispatch<SetStateAction<boolean>>;
   setTurnTick: Dispatch<SetStateAction<number>>;
   sendingRef: { current: boolean };
 }
@@ -142,7 +142,7 @@ async function loadChatHistoryImpl(ctx: ChatCtx): Promise<void> {
     const client = await makeMastraClient();
     const thread = client.getMemoryThread({
       threadId: threadIdFor(ctx.userId, ctx.activeReturn.id),
-      agentId: LUCA_AGENT_ID,
+      agentId: CADE_AGENT_ID,
     });
     const res = await thread.listMessages({ perPage: 200 });
     const converted = convertThreadMessages(res.messages);
@@ -160,7 +160,7 @@ async function streamTurn(
   assistantId: string,
 ): Promise<void> {
   const client = await makeMastraClient();
-  const stream = await client.getAgent(LUCA_AGENT_ID).stream(payload as string, {
+  const stream = await client.getAgent(CADE_AGENT_ID).stream(payload as string, {
     memory: {
       thread: threadIdFor(freshUserId, ctx.activeReturn.id),
       resource: freshUserId,
@@ -214,7 +214,7 @@ async function sendChatImpl(ctx: ChatCtx, sendOpts: SendChatOpts): Promise<void>
   if (!text && !file) return;
 
   ctx.sendingRef.current = true;
-  ctx.setLucaBusy(true);
+  ctx.setCadeBusy(true);
 
   const userMsg: ChatMessage = {
     id: freshId("u"),
@@ -239,24 +239,24 @@ async function sendChatImpl(ctx: ChatCtx, sendOpts: SendChatOpts): Promise<void>
   try {
     await runTurn(ctx, text, file, assistantMsg.id);
   } finally {
-    ctx.setLucaBusy(false);
+    ctx.setCadeBusy(false);
     ctx.sendingRef.current = false;
   }
 }
 
-export function useLucaChat(opts: {
+export function useCadeChat(opts: {
   userId: string;
   activeReturn: TaxReturn;
   refreshState: () => Promise<void>;
   onUnauthorized: () => Promise<void>;
-}): LucaChat {
+}): CadeChat {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [lucaBusy, setLucaBusy] = useState(false);
+  const [cadeBusy, setCadeBusy] = useState(false);
   const [turnTick, setTurnTick] = useState(0);
   /*
-   * Synchronous gate against concurrent sendChat calls. setLucaBusy is
+   * Synchronous gate against concurrent sendChat calls. setCadeBusy is
    * asynchronous. Two calls in the same tick can both pass an
-   * `if (lucaBusy)` check. sendChatImpl sets this ref immediately and
+   * `if (cadeBusy)` check. sendChatImpl sets this ref immediately and
    * clears it in the finally block.
    */
   const sendingRef = useRef(false);
@@ -268,7 +268,7 @@ export function useLucaChat(opts: {
     refreshState: opts.refreshState,
     onUnauthorized: opts.onUnauthorized,
     setMessages,
-    setLucaBusy,
+    setCadeBusy,
     setTurnTick,
     sendingRef,
   };
@@ -276,7 +276,7 @@ export function useLucaChat(opts: {
   return {
     messages,
     setMessages,
-    lucaBusy,
+    cadeBusy,
     turnTick,
     bumpTurn: () => setTurnTick((t) => t + 1),
     sendChat: (sendOpts) => sendChatImpl(ctx, sendOpts),

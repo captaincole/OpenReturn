@@ -37,7 +37,7 @@ export interface W2FactValue {
   /*
    * Employee identity: boxes (a) SSN, (e) name, (f) address. Captured
    * here so a single W-2 ingest also populates the taxpayer's identity
-   * facts. The Luca flow then does not re-ask for name/SSN/address.
+   * facts. The Cade flow then does not re-ask for name/SSN/address.
    */
   employee?: {
     firstName: string;

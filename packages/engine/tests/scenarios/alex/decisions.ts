@@ -1,7 +1,7 @@
 /*
  * Alex Morales — AI decisions (the "setup").
  *
- * These are the judgment calls Luca would record during a real intake.
+ * These are the judgment calls Cade would record during a real intake.
  * The integration test sets them directly, so the engine has everything
  * it needs without the agent loop.
  */

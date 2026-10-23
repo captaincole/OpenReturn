@@ -46,7 +46,7 @@ function fetchUploads(setUploads: (rows: UploadRow[]) => void): () => void {
 }
 
 export function DocumentsSection() {
-  const { resetTick, turnTick, lucaBusy, sendChat, setMobilePane } = useAppShell();
+  const { resetTick, turnTick, cadeBusy, sendChat, setMobilePane } = useAppShell();
   const [uploads, setUploads] = useState<UploadRow[]>([]);
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
@@ -64,9 +64,9 @@ export function DocumentsSection() {
   /*
    * Mirrors the Requested Actions upload flow. Write to user_documents
    * first, so the document appears in the grid with a real ID. Then hand
-   * the file to Luca via sendChat with skipUpload=true; he reacts to it
+   * the file to Cade via sendChat with skipUpload=true; he reacts to it
    * exactly like a chat-attached upload. setMobilePane("chat") lets
-   * mobile users see Luca respond instead of the same grid.
+   * mobile users see Cade respond instead of the same grid.
    */
   async function handleFiles(files: FileList | null) {
     if (!files || files.length === 0) return;
@@ -118,7 +118,7 @@ export function DocumentsSection() {
 
       <UploadDropzone
         uploading={uploading}
-        lucaBusy={lucaBusy}
+        cadeBusy={cadeBusy}
         dragOver={dragOver}
         setDragOver={setDragOver}
         onBrowse={() => fileInputRef.current?.click()}
@@ -217,14 +217,14 @@ function formatUploadedAt(iso: string): string {
 
 function UploadDropzone({
   uploading,
-  lucaBusy,
+  cadeBusy,
   dragOver,
   setDragOver,
   onBrowse,
   onDrop,
 }: {
   uploading: boolean;
-  lucaBusy: boolean;
+  cadeBusy: boolean;
   dragOver: boolean;
   setDragOver: (v: boolean) => void;
   onBrowse: () => void;
@@ -236,33 +236,33 @@ function UploadDropzone({
       onClick={onBrowse}
       onDragOver={(e) => {
         e.preventDefault();
-        if (!lucaBusy) setDragOver(true);
+        if (!cadeBusy) setDragOver(true);
       }}
       onDragLeave={() => setDragOver(false)}
       onDrop={(e) => {
         e.preventDefault();
         setDragOver(false);
-        if (!lucaBusy) onDrop(e.dataTransfer.files);
+        if (!cadeBusy) onDrop(e.dataTransfer.files);
       }}
-      disabled={uploading || lucaBusy}
+      disabled={uploading || cadeBusy}
       className={cn(
         "w-full cursor-pointer rounded-2xl border-2 border-dashed px-6 py-10 text-center transition-colors",
         dragOver
           ? "border-accent/60 bg-accent/5"
           : "border-border-subtle bg-bg-subtle/40 hover:border-accent/40",
-        (uploading || lucaBusy) && "cursor-not-allowed opacity-60",
+        (uploading || cadeBusy) && "cursor-not-allowed opacity-60",
       )}
     >
       <div className="text-3xl text-ink-muted">⬆</div>
       <div className="mt-2 text-sm text-ink-primary">
-        {lucaBusy
-          ? "Wait for Luca to finish before uploading"
+        {cadeBusy
+          ? "Wait for Cade to finish before uploading"
           : uploading
             ? "Uploading…"
             : "Drop W-2s, 1099s, or other tax documents here"}
       </div>
       <div className="mt-1 text-xs text-ink-muted">PDF, PNG, JPG · up to 10 MB each</div>
-      {!lucaBusy && (
+      {!cadeBusy && (
         <div className="mt-4 text-xs text-accent hover:text-accent-hover">or browse files</div>
       )}
     </button>

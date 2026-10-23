@@ -1,6 +1,6 @@
 /*
  * What the return still needs: every decision and fact key a filed form
- * is waiting for. Luca asks the user about these, and the agent renders
+ * is waiting for. Cade asks the user about these, and the agent renders
  * no documents until both lists are empty.
  */
 
@@ -62,7 +62,7 @@ function collectPending(forms: Iterable<EvaluatedForm<BaseFormField>>): {
  * raw-presence gate even though the resolver cannot read it. With
  * filingInfo, pendingFacts reflects exactly what the engine consumes.
  * identity.email is intentionally NOT in this list — it is a courtesy
- * field that Luca auto-fills from authEmail at doc-generation time.
+ * field that Cade auto-fills from authEmail at doc-generation time.
  */
 function addPendingIdentityFacts(filingInfo: FilingInfo, pendingFacts: Set<string>): void {
   const requiredSlots: Array<[string, unknown]> = [

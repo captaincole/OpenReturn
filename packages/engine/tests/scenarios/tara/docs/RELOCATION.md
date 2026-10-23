@@ -61,7 +61,7 @@ invoice lists four more doors at $685 each. The $500 door cap on line
 19h makes the credit the same either way.
 
 The IRS draft also prints 0 on lines with no property (20b, 23a, 23b,
-24b, 29g). Summa leaves them blank.
+24b, 29g). OpenReturn leaves them blank.
 
 ## Not modeled
 

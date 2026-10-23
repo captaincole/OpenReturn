@@ -11,7 +11,7 @@ import { NextResponse, type NextRequest } from "next/server";
  * import of that module would pull node:crypto into the Edge bundle.
  */
 
-const SESSION_COOKIE = "summa_session";
+const SESSION_COOKIE = "openreturn_session";
 
 const PUBLIC_PATHS = ["/login", "/setup", "/api/auth"];
 

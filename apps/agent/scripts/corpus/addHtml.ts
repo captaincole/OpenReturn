@@ -14,7 +14,7 @@
  * (refdocs/published.ts).
  */
 
-import { SOURCES_ROOT } from "@summa/sources";
+import { SOURCES_ROOT } from "@openreturn/sources";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 import { parseArgs } from "node:util";

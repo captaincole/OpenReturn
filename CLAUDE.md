@@ -1,21 +1,22 @@
-# Project Summa — Claude Development Guide
+# Project OpenReturn — Claude Development Guide
 
 ## What this is
 
-**Summa** is an AI CPA platform for high-net-worth individuals (HNWIs). Target user has W-2 income of $400k+/yr and $2–5M in investable assets, often with RSUs, K-1s, rental property, multi-state or foreign exposure, crypto, and meaningful charitable giving. The name nods to Luca Pacioli's *Summa de arithmetica* (1494), the book that first described double-entry bookkeeping.
+**OpenReturn** is an open-source AI tax platform: twin agents, Cade and Canon, that prepare your US federal and California return or estimate. Target user has W-2 income of $400k+/yr and $2–5M in investable assets, often with RSUs, K-1s, rental property, multi-state or foreign exposure, crypto, and meaningful charitable giving.
 
-Agents on the platform:
+The twin agents:
 
-- **Luca** — the conversational front-desk agent (named after Pacioli); guides the user through the tax-prep flow, orchestrates workflows, narrates progress. First agent built.
-There is exactly **one** conversational agent. Grounding is NOT a conversation: every `record-ai-decision` triggers the background **review-decision workflow** (`workflows/reviewDecision/`) — deterministic gather/retrieval plus three narrow LLM "judges" (`judges/`: queryFormulator, assessRiskAgent, ruleAgent on Haiku). The judges are registered on the Mastra instance, and the steps get them with `mastra.getAgent()` (the Mastra workflow docs pattern), so their calls share the app's logger and traces.
+- **Cade** — your CPA. The conversational front-desk agent: guides the user through the tax-prep flow, records facts and decisions, orchestrates workflows, narrates progress. First agent built.
+- **Canon** — your tax attorney. Grounds Cade's decisions in the IRS/FTB reference corpus and answers tax-code questions with citations. Today Canon is the review judges and the Ask pipeline inside the agent app; the migration plan makes it its own Mastra project.
+There is exactly **one** conversational agent (Cade). Grounding is NOT a conversation: every `record-ai-decision` triggers the background **review-decision workflow** (`workflows/reviewDecision/`) — deterministic gather/retrieval plus three narrow LLM "judges" (`judges/`: queryFormulator, assessRiskAgent, ruleAgent on Haiku). The judges are registered on the Mastra instance, and the steps get them with `mastra.getAgent()` (the Mastra workflow docs pattern), so their calls share the app's logger and traces.
 
 **Tax-code Q&A ("Ask The Tax Code")** is not a conversation either: each question runs a fixed pipeline (`workflows/askTurn/`: formulate → retrieve → answer → validate) with two more judges (askQueryFormulator, askAnswerer). A "partial" answer names its gaps as search queries; the pipeline searches once more with them and answers again. Follow-ups pass the earlier turns as context; threads live in `ask_threads`/`ask_turns` in `app.db`, whose `log_json` is the query log. `validate.ts` drops any citation or quote that does not trace to a retrieved block. The Ask eval (`apps/agent/evals/ask/`, report in `docs/evals/ask.md`) runs labeled questions through this pipeline and scores coverage, grounding, retrieval and the stated facts.
 
-Note: the Unix working directory is still `project-merrilin` (the product's earliest name; later "Wheel of Time," now "Summa"). The directory name was left alone to avoid churning local paths/configs. Internal names / IDs / docs use "summa" or "Summa".
+Note: the Unix working directory is still `project-merrilin` (the product's earliest name; later "Wheel of Time," then "Summa," now "OpenReturn"). The directory name was left alone to avoid churning local paths/configs. Internal names / IDs / docs use "openreturn" or "OpenReturn". The agent was "Luca" before it was Cade; old threads in mastra.db carry that id.
 
 The end goal is a three-stage workflow:
 
-1. **Gatherer** (Stage 1, where we are now) — Luca runs conversational intake that captures structured tax facts with citations and produces a live-updating case state (draft 1040, open asks, decisions).
+1. **Gatherer** (Stage 1, where we are now) — Cade runs conversational intake that captures structured tax facts with citations and produces a live-updating case state (draft 1040, open asks, decisions).
 2. **Summarizer** (Stage 2, not built yet) — turns gathered facts into a human-reviewable tax summary / organizer.
 3. **Preparer** (Stage 3, not built yet) — fills out the actual forms (1040 + schedules, state returns). Human-in-the-loop is mandatory; a CPA signs off.
 
@@ -27,7 +28,7 @@ This is a monorepo. `apps/agent`, `packages/engine`, and `packages/sources` are 
 
 ```
 packages/
-├── engine/                      # @summa/engine — THE FORM ENGINE. Pure, deterministic, no AI/DB/network.
+├── engine/                      # @openreturn/engine — THE FORM ENGINE. Pure, deterministic, no AI/DB/network.
 │   ├── src/                       Owns the fact vocabulary (facts/), per-jurisdiction form
 │   │                              registries (federal/, state/ca/; each form's catalog.json sits
 │   │                              next to its bindings.ts), worksheets, PDF fill.
@@ -36,7 +37,7 @@ packages/
 │   ├── scripts/                 # renderScenario, lockScenario, compareFiled
 │   ├── paths.ts                 # on-disk locations for offline tooling
 │   └── README.md                # contributor guide; public API = package.json "exports"
-└── sources/                     # @summa/sources — data only: what the IRS/FTB publish, by tax year.
+└── sources/                     # @openreturn/sources — data only: what the IRS/FTB publish, by tax year.
                                    <year>/forms/federal/<short>/ and <year>/forms/state/<st>/<short>/
                                    hold blank.pdf, the instructions sidecar (instructions.meta.json)
                                    and tax-table sources; <year>/publications/{federal,state/<st>}/<pub>/
@@ -46,7 +47,7 @@ packages/
                                    (catalogs, tax-table JSON) live with the engine.
 apps/
 ├── agent/                       # Mastra backend → deployed to Vercel
-│   ├── src/mastra/              # agent code (Luca, tools, db, server, workflows incl. review judges)
+│   ├── src/mastra/              # agent code (Cade, tools, db, server, workflows incl. review judges)
 │   │                              loadScenario.ts is the one db↔engine bridge; formAssets.ts loads
 │   │                              blank PDFs from public/sources/<year>/forms/ (gitignored, built
 │   │                              by `npm --prefix apps/agent run sources:sync` before dev/build).
@@ -57,7 +58,7 @@ apps/
 │   │                              plus standalone diagnostics (smokeReview, …)
 │   ├── tests/                   # agent tests (tools, db, refdocs); engine tests are in packages/engine
 │   ├── package.json             # agent deps + scripts (mastra dev, corpus, form-engine, sources:sync)
-│   └── tsconfig.json            # "paths" aliases @summa/* to source so `mastra dev` bundles them
+│   └── tsconfig.json            # "paths" aliases @openreturn/* to source so `mastra dev` bundles them
 └── web/                         # Next.js 16 (App Router) frontend → deployed to Vercel
     ├── app/                     # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
     │                              library, library/[docId]}, /documents/[id] + /api/* route handlers
@@ -72,7 +73,7 @@ package.json                     # workspace root: workspaces + thin delegating 
 CLAUDE.md
 ```
 
-The agent uses the engine only through `@summa/engine`'s exports. The web app shares no source with either.
+The agent uses the engine only through `@openreturn/engine`'s exports. The web app shares no source with either.
 
 ## Running it
 
@@ -118,11 +119,11 @@ We're building agent + UI together. When changes touch both, expect to:
 1. **Edit code** (backend in `apps/agent/src/mastra/`, frontend in `apps/web/{app,components,lib}/`).
 2. **Watch logs** for errors. Three places to look:
    - **Mastra log** — backend errors, agent traces, tool-call output. When Claude runs mastra in the background it writes to that background task's output file; otherwise it's whatever terminal you started `npm run dev` in.
-   - **Mastra Studio** at http://localhost:4111 — the **Observability** tab shows full agent traces (which tools fired, with what args, in what order). This is the right place to debug "why did Luca do X?".
+   - **Mastra Studio** at http://localhost:4111 — the **Observability** tab shows full agent traces (which tools fired, with what args, in what order). This is the right place to debug "why did Cade do X?".
    - **Browser console + Network panel** — frontend errors and HTTP failures (401s from a wrong passcode, 404s from a missing proxy entry, etc.).
 3. **Verify the change in the browser** at http://localhost:3000. Sign in with the owner password (session cookie persists across reloads). To wipe state between test runs use **Delete filing** (avatar menu, top-right) and start a fresh filing from the home page. The activity rail and header counters refresh after each agent turn (plus a short client-side poll).
 
-For backend-only changes you don't always need to open the browser — `curl` against `http://localhost:4111/app/state` (or `/api/agents/luca/stream`) with `Authorization: Bearer <DEMO_PASSCODE>` is faster.
+For backend-only changes you don't always need to open the browser — `curl` against `http://localhost:4111/app/state` (or `/api/agents/cade/stream`) with `Authorization: Bearer <DEMO_PASSCODE>` is faster.
 
 ### Claude verifies UI changes via claude-in-chrome
 
@@ -147,7 +148,7 @@ Two paths:
 
 ## Mastra schema
 
-The runtime store is `@mastra/libsql` (pinned; see `server/storage.ts` and `agents/luca.ts` — agents with `memory: new Memory({ storage })` create their own store instance against the same `mastra.db` file). Mastra runs its own idempotent `init()` on boot — a handful of local `CREATE TABLE IF NOT EXISTS` statements, cheap enough that the old `disableInit` + standalone-migration machinery is gone. On `@mastra/*` version bumps, the framework migrates its own schema; keep `mastra.db` separate from `app.db` so that can never touch user data.
+The runtime store is `@mastra/libsql` (pinned; see `server/storage.ts` and `agents/cade.ts` — agents with `memory: new Memory({ storage })` create their own store instance against the same `mastra.db` file). Mastra runs its own idempotent `init()` on boot — a handful of local `CREATE TABLE IF NOT EXISTS` statements, cheap enough that the old `disableInit` + standalone-migration machinery is gone. On `@mastra/*` version bumps, the framework migrates its own schema; keep `mastra.db` separate from `app.db` so that can never touch user data.
 
 ## Data-model iteration: wipe + re-ingest, not migrations
 
@@ -204,7 +205,7 @@ Production runtime logs for the agent come through `vercel logs`, but with gotch
 - **Never invent a number.** If the taxpayer isn't sure, the agent records an open question, not a guess. This is enforced in the system prompt and should be enforced in prompt tests once we have them.
 - **Every fact has a citation.** The `source_note` field is required — document source, statement line number, or "verbal, date".
 - **Document minimalism — only ask for load-bearing forms.** Getting a form is expensive user labor (dig through email, HR portal, physical mail). The default is verbal confirmation; we escalate to "please upload X" only when (a) the form is required to compute or file the return, or (b) a fact on the form can't be reliably obtained another way. Example: don't ask for Form 1095-C if the only fact we need is "had coverage all year" — a yes/no scoping question gets it faster. Example: W-2 box 12 code D already proves 401(k) contribution, so we don't also ask for Form 5498.
-- **Bottom-up derivation, not top-down guessing.** The case engine computes state (draft 1040, scoping decisions, open asks) from facts via a graph of typed pure-function derivations. Luca *reads* the computed state to decide what to ask next; he doesn't invent scope or asks on his own.
+- **Bottom-up derivation, not top-down guessing.** The case engine computes state (draft 1040, scoping decisions, open asks) from facts via a graph of typed pure-function derivations. Cade *reads* the computed state to decide what to ask next; he doesn't invent scope or asks on his own.
 - **Reactive, not batch.** Every fact write triggers downstream re-derivation. At any turn, the draft 1040, open-asks list, and decisions reflect everything known so far. Observable at every step.
 - **Stage boundaries are hard.** Stage 1 (Gatherer) doesn't compute tax owed, suggest strategies, or fill forms. Cross-stage leakage is a bug.
 - **Human in the loop.** Stage 3 requires CPA sign-off before anything ships. The preparer will probably use Opus for accuracy over cost.
@@ -219,7 +220,7 @@ The system separates two kinds of data:
 
 Decisions flow back into the case engine: a decision with key `decisions.ca_residency` becomes a fact-like input that downstream derivations can consume. This means "is this person a full-year CA resident?" can be the output of AI reasoning, and the CA 540 scoping derivation reads it like any other fact.
 
-**Two-phase pattern — decide, then ground in the background.** Every `record-ai-decision` call returns immediately with `verdict: 'pending'` and fires the review-decision workflow, which grounds the decision against the supporting facts + the IRS reference corpus and re-stamps the row: `accurate` / `inaccurate` / `needs_more_facts` / `review_failed` (legacy rows may carry `ungroundable`). `authority_citations` populates with `{blockId, quote?}[]` on `accurate`. Non-accurate verdicts also write an `open_questions` row so Luca circles back with the user. See the "Reference-document RAG" section for the corpus and retrieval pipeline.
+**Two-phase pattern — decide, then ground in the background.** Every `record-ai-decision` call returns immediately with `verdict: 'pending'` and fires the review-decision workflow, which grounds the decision against the supporting facts + the IRS reference corpus and re-stamps the row: `accurate` / `inaccurate` / `needs_more_facts` / `review_failed` (legacy rows may carry `ungroundable`). `authority_citations` populates with `{blockId, quote?}[]` on `accurate`. Non-accurate verdicts also write an `open_questions` row so Cade circles back with the user. See the "Reference-document RAG" section for the corpus and retrieval pipeline.
 
 ## Tax facts schema
 
@@ -439,8 +440,8 @@ If you're a fresh Claude Code session starting in this folder: read this file, t
 
 ## Things explicitly out of scope (for now)
 
-- A dedicated OCR/parsing service. Document reading DOES work today — chat attachments are sent inline to Luca (base64 in the stream, `AppShell.tsx` `sendChat`), Claude reads the PDF/image natively, then calls the structured ingest tools (`ingestW2`, `ingest1099Div`, `ingest1099B`, …). Out of scope is only a separate extraction pipeline (batch OCR, non-chat ingestion paths).
+- A dedicated OCR/parsing service. Document reading DOES work today — chat attachments are sent inline to Cade (base64 in the stream, `AppShell.tsx` `sendChat`), Claude reads the PDF/image natively, then calls the structured ingest tools (`ingestW2`, `ingest1099Div`, `ingest1099B`, …). Out of scope is only a separate extraction pipeline (batch OCR, non-chat ingestion paths).
 - Direct IRS filing (human-in-the-loop CPA signs off first)
 - Multi-tenant auth / client portal (single-user for prototyping)
 - Pricing, payments, scheduling (Stage 1 only cares about extracting facts)
-- Anything outside the Alex-simple scenario (single CA filer, one W-2, no deps, standard deduction). When the user's situation goes outside, Luca responds "Oh, we don't handle that scenario yet" rather than inventing behavior.
+- Anything outside the Alex-simple scenario (single CA filer, one W-2, no deps, standard deduction). When the user's situation goes outside, Cade responds "Oh, we don't handle that scenario yet" rather than inventing behavior.

@@ -43,7 +43,9 @@ export default function LoginPage() {
 
       <div className="relative z-10 w-full max-w-sm animate-fade-in">
         <div className="mb-10 text-center">
-          <div className="mb-4 text-[11px] tracking-[0.28em] text-ink-muted uppercase">Summa</div>
+          <div className="mb-4 text-[11px] tracking-[0.28em] text-ink-muted uppercase">
+            OpenReturn
+          </div>
           <h1 className="mb-3 font-serif text-4xl text-ink-primary">Sign in</h1>
           <p className="text-sm text-ink-secondary">Enter your password to unlock this instance.</p>
         </div>

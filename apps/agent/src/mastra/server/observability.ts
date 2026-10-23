@@ -3,7 +3,7 @@ import { ConsoleExporter, DefaultExporter, Observability } from "@mastra/observa
 
 /*
  * ConsoleExporter dumps the full span (input, output, attributes) every
- * time a span starts, ends, or updates. Luca's multi-KB system prompt and
+ * time a span starts, ends, or updates. Cade's multi-KB system prompt and
  * base64-encoded uploads land in that dump and make the dev terminal
  * unusable. We pipe spans through a whitelist filter first; only the
  * listed keys survive, at any depth. Keys that a future Mastra version
@@ -89,7 +89,7 @@ export function createObservability(): Observability {
   return new Observability({
     configs: {
       default: {
-        serviceName: "summa",
+        serviceName: "openreturn",
         exporters: isDev
           ? [new ConsoleExporter({ customSpanFormatter: formatSpan }), new DefaultExporter()]
           : [new DefaultExporter()],

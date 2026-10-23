@@ -11,7 +11,7 @@ import { modelFor } from "../../../models";
  * schema (+ bounded tools)": not conversational, no memory. They are
  * registered on the Mastra instance (index.ts) so their calls get the
  * app's logger and traces; the workflow steps get them with
- * mastra.getAgent(). Luca is the one conversational agent.
+ * mastra.getAgent(). Cade is the one conversational agent.
  *
  * The task is narrow, so it runs on the judge-role model (JUDGE_MODEL) with
  * no tools; the structured output is just `{queries: string[]}`. It lives

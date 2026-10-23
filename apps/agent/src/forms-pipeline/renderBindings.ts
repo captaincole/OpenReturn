@@ -45,7 +45,7 @@
  * `todos`. Items whose rule is `unsupported` always land in `unsupported`.
  */
 
-import type { FieldInventory } from "@summa/engine/catalog";
+import type { FieldInventory } from "@openreturn/engine/catalog";
 import { dirname, relative, resolve } from "node:path";
 import { engineSrcDir } from "../paths.js";
 import type { ClassifiedBinding, Confidence } from "./classifyBindings.js";

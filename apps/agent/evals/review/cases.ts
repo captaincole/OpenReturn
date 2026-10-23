@@ -1,5 +1,5 @@
-import { makeW2FactKey, type TaxFactRow } from "@summa/engine/facts";
-import { SCENARIOS } from "@summa/engine/scenarios";
+import { makeW2FactKey, type TaxFactRow } from "@openreturn/engine/facts";
+import { SCENARIOS } from "@openreturn/engine/scenarios";
 
 /*
  * The review-judge dataset. Each decision has a correct version and a

@@ -4,7 +4,7 @@
  *
  * The test does not measure how smart the model is, so the replies are
  * direct and specific. The opening turns give every fact up front. After
- * that, replyTo() answers Luca's follow-up questions by keyword.
+ * that, replyTo() answers Cade's follow-up questions by keyword.
  */
 
 import { resolve } from "node:path";
@@ -21,7 +21,7 @@ const GENERATE = "That is everything. Please generate my 2025 tax documents now.
 export const OPENING_TURNS: Turn[] = [
   {
     text:
-      "Hi Luca. Please help me file my 2025 federal and California returns. " +
+      "Hi Cade. Please help me file my 2025 federal and California returns. " +
       "Please record my filing status as single. I lived in Oakland, California " +
       "(Alameda County) for all of 2025, so I am a full-year California resident. " +
       "My mailing address is the same as where I live. My only income is one W-2. " +
@@ -69,12 +69,12 @@ const ANSWERS: Array<[RegExp, string]> = [
 ];
 
 /*
- * The reply to Luca's last message. A message with no question gets the
+ * The reply to Cade's last message. A message with no question gets the
  * generate request. A question that no rule matches returns undefined,
  * so the test fails and shows the transcript.
  */
-export function replyTo(lucaMessage: string): string | undefined {
-  const matched = ANSWERS.filter(([pattern]) => pattern.test(lucaMessage)).map(([, a]) => a);
+export function replyTo(cadeMessage: string): string | undefined {
+  const matched = ANSWERS.filter(([pattern]) => pattern.test(cadeMessage)).map(([, a]) => a);
   if (matched.length > 0) return [...new Set(matched)].join(" ");
-  return lucaMessage.includes("?") ? undefined : GENERATE;
+  return cadeMessage.includes("?") ? undefined : GENERATE;
 }

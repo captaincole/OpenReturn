@@ -1,14 +1,14 @@
 import { z } from "zod";
 
 /*
- * Luca's working memory — a thread-scoped, schema-typed scratchpad.
+ * Cade's working memory — a thread-scoped, schema-typed scratchpad.
  * Mastra surfaces it in the system prompt every turn and exposes it via
  * the auto-registered `updateWorkingMemory` tool. The web PlanCard reads
  * the shape via /app/state, so the field names here are part of the
  * public contract with the frontend.
  *
  * Mastra merge semantics (per the docs): top-level object fields are
- * deep merged, but ARRAYS are replaced wholesale. So when Luca updates
+ * deep merged, but ARRAYS are replaced wholesale. So when Cade updates
  * the plan, he emits the full plan array each time.
  */
 
@@ -24,7 +24,7 @@ export const planItemSchema = z.object({
   title: z
     .string()
     .describe(
-      "What Luca is doing in plain language, e.g. 'Capture W-2 box 1 wages' or 'Confirm CA full-year residency'. Premium-feeling phrasing — short, specific, taxpayer-readable.",
+      "What Cade is doing in plain language, e.g. 'Capture W-2 box 1 wages' or 'Confirm CA full-year residency'. Premium-feeling phrasing — short, specific, taxpayer-readable.",
     ),
   status: planItemStatus.describe(
     "todo = not yet started, doing = currently working on, done = finished",
@@ -38,12 +38,12 @@ export const planItemSchema = z.object({
 });
 export type PlanItem = z.infer<typeof planItemSchema>;
 
-export const lucaWorkingMemorySchema = z.object({
+export const cadeWorkingMemorySchema = z.object({
   plan: z
     .array(planItemSchema)
     .optional()
     .describe(
-      "Rolling 1–5 item plan of Luca's next steps. Empty/absent when there's genuinely nothing in flight.",
+      "Rolling 1–5 item plan of Cade's next steps. Empty/absent when there's genuinely nothing in flight.",
     ),
 });
-export type LucaWorkingMemory = z.infer<typeof lucaWorkingMemorySchema>;
+export type CadeWorkingMemory = z.infer<typeof cadeWorkingMemorySchema>;

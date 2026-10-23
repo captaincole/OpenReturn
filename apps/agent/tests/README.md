@@ -10,5 +10,5 @@ form engine's tests (unit, integration, golden, and the scenarios) are in
 | `integration/` | Agent code over engine output. | `npm run test:integration` |
 
 No test file goes under `src/` or `scripts/`; `unit/layout.test.ts` fails
-on one. Scenario data comes from `@summa/engine/scenarios`; do not copy it
+on one. Scenario data comes from `@openreturn/engine/scenarios`; do not copy it
 here.

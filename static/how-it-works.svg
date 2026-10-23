@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 540" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
-  <title>The Summa triangle: Web App → Luca → Form Engine → back to Web App</title>
+  <title>The OpenReturn triangle: Web App → Cade → Form Engine → back to Web App</title>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#7d8590"/>
@@ -28,10 +28,10 @@
     <text x="400" y="108" text-anchor="middle" fill="#ffffff" fill-opacity="0.88" font-size="13.5">watch progress</text>
   </g>
 
-  <!-- Luca (bottom left) -->
+  <!-- Cade (bottom left) -->
   <g>
     <rect x="40" y="390" width="270" height="112" rx="12" fill="#7c3aed" stroke="#5b21b6" stroke-width="2"/>
-    <text x="175" y="428" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">🤖 Luca — the AI agent</text>
+    <text x="175" y="428" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">🤖 Cade — the AI agent</text>
     <text x="175" y="454" text-anchor="middle" fill="#ffffff" fill-opacity="0.88" font-size="13.5">captures cited tax facts</text>
     <text x="175" y="474" text-anchor="middle" fill="#ffffff" fill-opacity="0.88" font-size="13.5">makes grounded decisions</text>
   </g>

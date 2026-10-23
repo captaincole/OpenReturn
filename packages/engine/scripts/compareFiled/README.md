@@ -1,6 +1,6 @@
 # Private comparison kit
 
-Checks the Summa engine against a tax return you already filed. The full
+Checks the OpenReturn engine against a tax return you already filed. The full
 guide is [docs/testing-with-your-return.md](../../../../docs/testing-with-your-return.md).
 
 | File | Role |

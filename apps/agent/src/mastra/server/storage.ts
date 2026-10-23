@@ -42,13 +42,13 @@ export function mastraDbUrl(): string {
  */
 export async function createStorage(): Promise<MastraCompositeStore> {
   const libsql = new LibSQLStore({
-    id: "summa-storage",
+    id: "openreturn-storage",
     url: mastraDbUrl(),
   });
-  const inMemory = new InMemoryStore({ id: "summa-inmemory" });
+  const inMemory = new InMemoryStore({ id: "openreturn-inmemory" });
 
   return new MastraCompositeStore({
-    id: "summa-composite",
+    id: "openreturn-composite",
     default: libsql,
     domains: {
       observability: await inMemory.getStore("observability"),

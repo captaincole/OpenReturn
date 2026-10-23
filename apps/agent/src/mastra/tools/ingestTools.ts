@@ -8,7 +8,7 @@ import { ingestSsa1099 } from "./ingestSsa1099";
 import { ingestW2 } from "./ingestW2";
 
 /*
- * Every document-ingest tool. Luca registers these, and the ingest eval
+ * Every document-ingest tool. Cade registers these, and the ingest eval
  * (evals/ingest/run.ts) runs the same set, so a new tool lands in both.
  */
 export const ingestTools = {

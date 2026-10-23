@@ -4,14 +4,14 @@
 
 ## Who can contribute
 
-Summa computes taxes, so I limit code contributions to people I have
+OpenReturn computes taxes, so I limit code contributions to people I have
 verified are real. To become an approved contributor, contact the
 maintainer: file an issue in this repo that says who you are and why
 you want to contribute.
 
-There is a second way to help, also by approval: **check Summa against a
+There is a second way to help, also by approval: **check OpenReturn against a
 return you already filed** and send the maintainer the report. See
-[Test Summa against your filed return](testing-with-your-return.md).
+[Test OpenReturn against your filed return](testing-with-your-return.md).
 
 ## Developer guide
 
@@ -21,10 +21,10 @@ If you want to get setup locally to be able to add capabilities to this system t
 
 ### Understanding The Agent
 
-The current agent Luca is built off of the [Mastra](https://mastra.ai/docs) framework. If you want to watch the agent run, checkout the [mastra studio](http://localhost:4111) locally. We don't currently use all the features of the framework but there are two core concepts that we utilize:
+The current agent Cade is built off of the [Mastra](https://mastra.ai/docs) framework. If you want to watch the agent run, checkout the [mastra studio](http://localhost:4111) locally. We don't currently use all the features of the framework but there are two core concepts that we utilize:
 
 * Agent Setup: Mastra allows us to have a really simple agent setup that uses either your local provided model or a cloud model. We have environment configurations for you to setup either of them. 
-* Workflows: We have developed several workflows that help us reduce context and verify that what Luca is saying is actually based in facts. See the `apps/agent/src/mastra/workflows` to learn more about workflows
+* Workflows: We have developed several workflows that help us reduce context and verify that what Cade is saying is actually based in facts. See the `apps/agent/src/mastra/workflows` to learn more about workflows
 
 ### Generating The Corpus
 
@@ -69,7 +69,7 @@ never a tax-software export we cannot redistribute:
    values are the expected values.
 2. **A fake scenario verified against a contributor's filed return
    (jordan).** A contributor runs the engine on their own return privately (see
-   [Test Summa against your filed return](testing-with-your-return.md)).
+   [Test OpenReturn against your filed return](testing-with-your-return.md)).
    When it matches, we run the engine on a *fake* scenario with the same
    shape and lock its output as the expected values:
 

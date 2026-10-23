@@ -4,7 +4,7 @@ import { getAppDb, nowIso } from "../db/appDb";
 import { requireUserContext } from "./userContext";
 
 /*
- * dismiss-requested-action: close a dashboard upload card after Luca
+ * dismiss-requested-action: close a dashboard upload card after Cade
  * ingests the corresponding document. Matches the most recent open or
  * processing action with the same document_type for the current user.
  *

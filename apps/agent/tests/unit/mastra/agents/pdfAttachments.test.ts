@@ -1,4 +1,4 @@
-import { ENGINE_ROOT } from "@summa/engine/paths";
+import { ENGINE_ROOT } from "@openreturn/engine/paths";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
@@ -9,8 +9,8 @@ const W2 = resolve(ENGINE_ROOT, "tests/scenarios/alex/docs/01-alex-w2.pdf");
 /* A URL-based model gets the PDF as page images only. */
 describe("PdfAttachmentRasterizer", () => {
   beforeAll(() => {
-    process.env.LUCA_MODEL = "ollama/test-model";
-    process.env.LUCA_MODEL_URL = "http://localhost:11434/v1";
+    process.env.CADE_MODEL = "ollama/test-model";
+    process.env.CADE_MODEL_URL = "http://localhost:11434/v1";
   });
 
   it("replaces a PDF part with its page images", async () => {

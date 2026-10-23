@@ -23,7 +23,12 @@ import {
  * persists them. Re-exported so db-side callers keep importing from
  * here.
  */
-import type { AIDecisionRow, AuthorityCitation, Confidence, Verdict } from "@summa/engine/facts";
+import type {
+  AIDecisionRow,
+  AuthorityCitation,
+  Confidence,
+  Verdict,
+} from "@openreturn/engine/facts";
 export type { AIDecisionRow, AuthorityCitation, Confidence, Verdict };
 
 export interface AIDecision {

@@ -66,7 +66,7 @@ const nth = (items: (i: Info) => ReturnType<typeof itemsOf>, n: number) => ({
 const PART_I = "Part I (residential clean energy credit) is not modeled.";
 const QMID_EXT =
   "Boxes 5–17 after the 4-character QMID: the 2025 instructions use only the 4 characters.";
-const OTHER_HOMES = "Section B property at more than one home: Summa records one home.";
+const OTHER_HOMES = "Section B property at more than one home: OpenReturn records one home.";
 const ENABLING = "Enabling property (panelboards, branch circuits, feeders) is not modeled.";
 
 const doors = (info: Info) => a(info, "exterior_door");

@@ -9,9 +9,9 @@
  *   - Main, mobile: one pane. The bottom tab bar picks Chat or one of the
  *     workspace sections (Activity, Forms, Documents).
  *
- * AppShellContext supplies user state, the chat message buffer, lucaBusy,
+ * AppShellContext supplies user state, the chat message buffer, cadeBusy,
  * turnTick, the mobile pane and its setter, and sendChat. The chat session itself
- * (buffer, history hydration, streaming) lives in useLucaChat.
+ * (buffer, history hydration, streaming) lives in useCadeChat.
  *
  * For placeholder returns (realDataAvailable=false), the shell does not
  * fetch /app/state and does not load chat history. sendChat is a no-op.
@@ -19,7 +19,7 @@
 
 import { ChatPane } from "@/components/ChatPane";
 import { TopBar } from "@/components/TopBar";
-import { useLucaChat, type ChatMessage, type SendChatOpts } from "@/components/useLucaChat";
+import { useCadeChat, type ChatMessage, type SendChatOpts } from "@/components/useCadeChat";
 import { fetchState, UnauthorizedError, type CaseState } from "@/lib/api";
 import { signOut } from "@/lib/auth";
 import { cn } from "@/lib/cn";
@@ -55,13 +55,13 @@ interface AppShellContextValue {
   bumpTurn: () => void;
   messages: ChatMessage[];
   setMessages: Dispatch<SetStateAction<ChatMessage[]>>;
-  lucaBusy: boolean;
+  cadeBusy: boolean;
   mobilePane: MobilePane;
   setMobilePane: Dispatch<SetStateAction<MobilePane>>;
   /*
-   * The single entry point that sends a turn to Luca. The chat input and
+   * The single entry point that sends a turn to Cade. The chat input and
    * the Requested Actions card call it. It resolves when the stream ends.
-   * It is a no-op when Luca is busy or the return is a placeholder.
+   * It is a no-op when Cade is busy or the return is a placeholder.
    */
   sendChat: (opts: SendChatOpts) => Promise<void>;
   onSignOut: () => Promise<void>;
@@ -113,7 +113,7 @@ export function AppShell({
     }
   }
 
-  const chat = useLucaChat({
+  const chat = useCadeChat({
     userId,
     activeReturn,
     refreshState,
@@ -138,7 +138,7 @@ export function AppShell({
     bumpTurn: chat.bumpTurn,
     messages: chat.messages,
     setMessages: chat.setMessages,
-    lucaBusy: chat.lucaBusy,
+    cadeBusy: chat.cadeBusy,
     mobilePane,
     setMobilePane,
     sendChat: chat.sendChat,
@@ -174,7 +174,7 @@ export function AppShell({
           </section>
         </main>
 
-        <MobileTabBar value={mobilePane} onChange={setMobilePane} busy={chat.lucaBusy} />
+        <MobileTabBar value={mobilePane} onChange={setMobilePane} busy={chat.cadeBusy} />
       </div>
     </AppShellContext.Provider>
   );

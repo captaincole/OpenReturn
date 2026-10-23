@@ -1,6 +1,6 @@
 import { MASTRA_RESOURCE_ID_KEY } from "@mastra/core/request-context";
 import { registerApiRoute } from "@mastra/core/server";
-import { luca } from "../../agents/luca";
+import { cade } from "../../agents/cade";
 import { ensureAppSchema, getAppDb } from "../../db/appDb";
 import { createOwnerFiling } from "../../db/filings";
 
@@ -37,7 +37,7 @@ function threadIdFor(userId: string, year: number | string): string {
  */
 async function ensureThread(userId: string, taxYear: number): Promise<void> {
   try {
-    const memory = await luca.getMemory();
+    const memory = await cade.getMemory();
     if (!memory) return;
     await memory.createThread({
       threadId: threadIdFor(userId, taxYear),

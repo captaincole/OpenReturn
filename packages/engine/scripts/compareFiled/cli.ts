@@ -13,7 +13,7 @@
  * expected engineFields are the filed return; `preparer` says who
  * prepared it.
  *
- * PRIVACY: the report files (<folder>/summa-check-<year>-<date>.md and
+ * PRIVACY: the report files (<folder>/openreturn-check-<year>-<date>.md and
  * .json, sent together) and
  * the default terminal output hold no amounts, names, or payers, so an
  * AI session can run it. Only the taxpayer runs --show-values, which
@@ -154,7 +154,7 @@ async function checkFolder(dir: string): Promise<number> {
 async function compareFolder(dir: string, showValues: boolean): Promise<number> {
   const { s, report } = await buildReport(dir);
   const { result, createdAt } = report;
-  const base = resolve(dir, `summa-check-${s.taxYear}-${createdAt}`);
+  const base = resolve(dir, `openreturn-check-${s.taxYear}-${createdAt}`);
   writeFileSync(`${base}.md`, renderReport(report));
   writeFileSync(`${base}.json`, `${JSON.stringify(reportData(report), null, 2)}\n`);
   console.log(reportHead(report).join("\n"));

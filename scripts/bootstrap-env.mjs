@@ -32,9 +32,9 @@ ANTHROPIC_API_KEY=
 
 # REQUIRED — which model powers each role. No in-code defaults on purpose.
 # To use a local/self-hosted OpenAI-compatible server (Ollama, LM Studio,
-# vLLM, …) set e.g. LUCA_MODEL=ollama/qwen3-vl:8b and
-# LUCA_MODEL_URL=http://localhost:11434/v1 (same pattern for JUDGE_*).
-LUCA_MODEL=anthropic/claude-sonnet-4-6
+# vLLM, …) set e.g. CADE_MODEL=ollama/qwen3-vl:8b and
+# CADE_MODEL_URL=http://localhost:11434/v1 (same pattern for JUDGE_*).
+CADE_MODEL=anthropic/claude-sonnet-4-6
 JUDGE_MODEL=anthropic/claude-haiku-5-5
 
 # Semantic retrieval (RAG) embeds locally via Ollama — install from

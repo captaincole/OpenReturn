@@ -8,7 +8,7 @@ import { modelReadsPdf } from "../models";
  * (Ollama, vLLM, LM Studio, …) accept images only. A PDF part makes the
  * AI SDK throw AI_UnsupportedFunctionalityError before the request even
  * leaves. This processor rasterizes PDF attachments to one PNG per page,
- * so document reading keeps working when LUCA_MODEL points at a local
+ * so document reading keeps working when CADE_MODEL points at a local
  * model.
  *
  * It runs at processInput (the new user message) AND processInputStep
@@ -106,12 +106,12 @@ export class PdfAttachmentRasterizer implements Processor {
     "Rasterizes PDF attachments to PNG pages for models without native PDF input";
 
   async processInput({ messages }: ProcessInputArgs) {
-    if (modelReadsPdf("luca")) return messages;
+    if (modelReadsPdf("cade")) return messages;
     return (await rasterizePdfParts(messages)) ?? messages;
   }
 
   async processInputStep({ messages }: ProcessInputStepArgs) {
-    if (modelReadsPdf("luca")) return;
+    if (modelReadsPdf("cade")) return;
     return await rasterizePdfParts(messages);
   }
 }

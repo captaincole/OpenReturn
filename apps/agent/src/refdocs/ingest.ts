@@ -1,4 +1,4 @@
-import { SOURCES_ROOT } from "@summa/sources";
+import { SOURCES_ROOT } from "@openreturn/sources";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, relative, resolve } from "node:path";

@@ -1,7 +1,7 @@
 import { MASTRA_RESOURCE_ID_KEY } from "@mastra/core/request-context";
 import { registerApiRoute } from "@mastra/core/server";
-import { luca } from "../../agents/luca";
-import { lucaWorkingMemorySchema, type PlanItem } from "../../agents/luca.workingMemory";
+import { cade } from "../../agents/cade";
+import { cadeWorkingMemorySchema, type PlanItem } from "../../agents/cade.workingMemory";
 import { resolveOwnerFilingForYear } from "../../db/filings";
 import { listDocuments, type UserDocumentRow } from "../../db/userDocuments";
 import { buildCaseState } from "../../tools/caseState";
@@ -13,9 +13,9 @@ function threadIdFor(userId: string, returnId: string | number): string {
   return `${userId}::${returnId}`;
 }
 
-async function readLucaPlan(threadId: string): Promise<PlanItem[]> {
+async function readCadePlan(threadId: string): Promise<PlanItem[]> {
   /*
-   * Read working memory off Luca's thread-scoped Memory. Returns [] when:
+   * Read working memory off Cade's thread-scoped Memory. Returns [] when:
    *   - the thread has never had a turn (no working memory row yet)
    *   - the JSON parse fails (defensive; Mastra writes via the same
    *     schema)
@@ -23,11 +23,11 @@ async function readLucaPlan(threadId: string): Promise<PlanItem[]> {
    * A malformed plan must never take down the whole /app/state response.
    */
   try {
-    const memory = await luca.getMemory();
+    const memory = await cade.getMemory();
     if (!memory) return [];
     const raw = await memory.getWorkingMemory({ threadId });
     if (!raw) return [];
-    const parsed = lucaWorkingMemorySchema.safeParse(JSON.parse(raw));
+    const parsed = cadeWorkingMemorySchema.safeParse(JSON.parse(raw));
     if (!parsed.success) return [];
     return parsed.data.plan ?? [];
   } catch {
@@ -37,7 +37,7 @@ async function readLucaPlan(threadId: string): Promise<PlanItem[]> {
 
 /*
  * Live case state for the web app. Pass-through over buildCaseState plus
- * document URLs and Luca's plan. The previous handler adapted the engine
+ * document URLs and Cade's plan. The previous handler adapted the engine
  * output to a legacy shape (openAsks / progress / draftUrl / 8949Url /
  * scheduleDUrl) that the new engine does not speak. The web app now
  * reads the engine's native shape directly; anything the engine does not
@@ -57,7 +57,7 @@ export const appStateRoute = registerApiRoute("/app/state", {
     const scope = { userId, filingId: filing.id };
     const [caseState, plan, drafts] = await Promise.all([
       buildCaseState(userId, DEMO_TAX_YEAR, authEmail),
-      readLucaPlan(threadIdFor(userId, DEMO_TAX_YEAR)),
+      readCadePlan(threadIdFor(userId, DEMO_TAX_YEAR)),
       listDocuments(scope, { category: "drafts", taxYear: DEMO_TAX_YEAR }),
     ]);
 

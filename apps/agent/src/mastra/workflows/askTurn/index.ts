@@ -18,7 +18,7 @@ import { NOT_COVERED_ANSWER, validateAnswer, type Passage } from "./validate";
 /*
  * The per-turn answer pipeline for tax-code Q&A. One run per question;
  * the earlier turns of the thread are the only context (no agent memory,
- * so Luca stays the one conversational agent). The routes in
+ * so Cade stays the one conversational agent). The routes in
  * server/routes/ask.ts fire it in the background and the page polls.
  *
  *   formulate (judge) → retrieve (per query) → answer (judge) → validate

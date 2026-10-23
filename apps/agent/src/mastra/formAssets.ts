@@ -1,13 +1,13 @@
 /*
  * Runtime loader for the blank PDFs the engine fills.
- * scripts/syncSources.ts copies them from @summa/sources into
+ * scripts/syncSources.ts copies them from @openreturn/sources into
  * src/mastra/public/sources/ before dev and build (the tree is
  * gitignored). Mastra's copyPublic step ships that tree with the server,
  * and the server runs with cwd at it (src/mastra/public/ in dev,
  * /var/task in prod).
  */
 
-import type { BlankPdfLoader } from "@summa/engine";
+import type { BlankPdfLoader } from "@openreturn/engine";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";

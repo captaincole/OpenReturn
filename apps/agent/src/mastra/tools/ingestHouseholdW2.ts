@@ -1,5 +1,8 @@
 import { createTool } from "@mastra/core/tools";
-import { makeHouseholdEmployeeFactKey, type HouseholdEmployeeFactValue } from "@summa/engine/facts";
+import {
+  makeHouseholdEmployeeFactKey,
+  type HouseholdEmployeeFactValue,
+} from "@openreturn/engine/facts";
 import { z } from "zod";
 import { recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";

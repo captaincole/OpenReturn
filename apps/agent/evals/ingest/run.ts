@@ -19,7 +19,7 @@ import { extractTrajectory } from "@mastra/core/evals";
 import { MASTRA_RESOURCE_ID_KEY, RequestContext } from "@mastra/core/request-context";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { ingestingDocuments } from "../../src/mastra/agents/luca.instructions";
+import { ingestingDocuments } from "../../src/mastra/agents/cade.instructions";
 import { PdfAttachmentRasterizer } from "../../src/mastra/agents/pdfAttachments";
 import { createOwnerFiling } from "../../src/mastra/db/filings";
 import { listFacts } from "../../src/mastra/db/taxFacts";
@@ -34,7 +34,7 @@ import { scoreDoc } from "./score";
 
 const REPO = path.resolve(__dirname, "../../../..");
 
-/* Luca's own document rules, without the conversation around them. */
+/* Cade's own document rules, without the conversation around them. */
 const INSTRUCTIONS = `You ingest tax documents. The user uploads one document. Read it and call the matching ingest tools with every value on it.
 
 ${ingestingDocuments}
@@ -42,18 +42,18 @@ ${ingestingDocuments}
 Use plain numbers for dollar amounts (79000.00, not "$79,000.00"). Do not ask the user questions and do not record other facts. After the ingest calls, reply with one short sentence.`;
 
 function agentFor(model: EvalModel): Agent {
-  useModel("LUCA", model);
+  useModel("CADE", model);
   return new Agent({
     id: "ingest-eval",
     name: "Ingest eval",
     instructions: INSTRUCTIONS,
-    model: modelFor("luca"),
+    model: modelFor("cade"),
     tools: ingestTools,
     inputProcessors: [new PdfAttachmentRasterizer()],
   });
 }
 
-/* The same message shape the web app sends (useLucaChat.buildPayload). */
+/* The same message shape the web app sends (useCadeChat.buildPayload). */
 const toMessages = (c: IngestCase) => [
   {
     role: "user" as const,
@@ -96,7 +96,7 @@ async function evalDoc(
   const { scope, requestContext } = await freshScope();
   try {
     /*
-     * Luca's output limit, not the SDK's 4,096. A consolidated 1099 takes
+     * Cade's output limit, not the SDK's 4,096. A consolidated 1099 takes
      * one call per form and one per 20 trades (5 for jordan's), and a
      * model can make them one step at a time.
      */

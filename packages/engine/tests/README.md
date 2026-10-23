@@ -2,7 +2,7 @@
 
 Scenario tests should cover *EVERY* supported form field at some level. This is the core way that we can establish that our engine is accurate, as all scenarios are CPA reviewed. 
 
-Every test for `@summa/engine` lives here. No test file goes under `src/`
+Every test for `@openreturn/engine` lives here. No test file goes under `src/`
 or `scripts/`; `unit/layout.test.ts` fails on one. The agent's own tests
 (tools, db, refdocs) are in `apps/agent/tests/`.
 
@@ -51,7 +51,7 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
   `golden/catalog-fill/<relativeDir>.json`. Catches widget-mapping drift
   without needing scenario coverage.
 
-Blank PDFs come from `@summa/sources` (`packages/sources/<year>/forms/…`), through
+Blank PDFs come from `@openreturn/sources` (`packages/sources/<year>/forms/…`), through
 `helpers/formPaths.ts`. The engine itself reads no files.
 
 ## Adding coverage

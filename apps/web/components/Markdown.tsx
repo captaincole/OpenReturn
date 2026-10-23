@@ -2,7 +2,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 /*
- * Renders Luca's responses as markdown. Custom components style each
+ * Renders Cade's responses as markdown. Custom components style each
  * element for the dark theme. Most importantly, links open in new tabs
  * and use the accent color.
  *

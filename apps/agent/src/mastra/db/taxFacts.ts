@@ -21,7 +21,7 @@ import {
  * The row shape is engine vocabulary: the engine defines it, this module
  * persists it. Re-exported so db-side callers keep importing from here.
  */
-import type { TaxFactRow } from "@summa/engine/facts";
+import type { TaxFactRow } from "@openreturn/engine/facts";
 export type { TaxFactRow };
 
 export interface TaxFact {

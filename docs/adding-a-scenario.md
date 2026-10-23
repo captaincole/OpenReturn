@@ -10,7 +10,7 @@ it.
 
 **All scenario data is fake.** A real return never enters the repo. To
 check the engine against a real return, use the private comparison kit
-([Test Summa against your filed return](testing-with-your-return.md)),
+([Test OpenReturn against your filed return](testing-with-your-return.md)),
 which keeps the data outside the project.
 
 ## The steps
@@ -32,7 +32,7 @@ becomes one file per document.
 
 Decide what the return looks like: filing status, state, which forms
 it files, and which answers (decisions) it needs. Compare that with
-[What Summa supports](testing-with-your-return.md#what-summa-supports).
+[What OpenReturn supports](testing-with-your-return.md#what-openreturn-supports).
 A scenario earns its place when it covers a shape no other scenario
 covers (alex: one W-2; alejandro: investment income; marcus: capital
 gains; jordan: high income, HSA, rollovers, crypto; carter: MFS,
@@ -75,8 +75,8 @@ model.
   `packages/engine/src/facts/kinds/`, exported from `facts/index.ts`.
 - **5b. Ingest tool.** A typed tool in `src/mastra/tools/` (see
   `ingest1099R.ts`) that writes the facts.
-- **5c. Luca.** Register the tool in `agents/luca.ts`. Tell Luca when to
-  call it in `luca.instructions.ts`.
+- **5c. Cade.** Register the tool in `agents/cade.ts`. Tell Cade when to
+  call it in `cade.instructions.ts`.
 
 **A new output form** (full checklist:
 [Adding a form](../packages/engine/README.md#adding-a-form)):
@@ -93,7 +93,7 @@ model.
   `npm run form-engine -- generate-bindings`, then finish them by hand.
   All money math goes through `packages/engine/src/money.ts`.
 - **5f. Resolver.** Write the must-file rule, and list each answer the
-  form reads in `missingInputs`, so Luca asks for it.
+  form reads in `missingInputs`, so Cade asks for it.
 - **5g. Registry.** Add a `makeFormSpec` entry to the jurisdiction's
   `index.ts`. Then make the form's catalog-fill golden:
   `npx tsx tests/golden/catalogFill.ts --form-id=<id> --update`, and look at the
@@ -145,7 +145,7 @@ A locked scenario writes its own:
 
 - Run the gates in the table below. All of them must pass.
 - Add new input documents to
-  [What Summa supports](testing-with-your-return.md#what-summa-supports)
+  [What OpenReturn supports](testing-with-your-return.md#what-openreturn-supports)
   and to the comparison kit's support check
   (`scripts/compareFiled/support.ts`).
 - Add the scenario to the list in `apps/agent/tests/README.md`.
@@ -160,7 +160,7 @@ flowchart TD
   S2 --> S3[Step 3: facts.ts + decisions.ts]
   S3 --> S4[Step 4: Research new documents and fields]
   S4 --> S5{Step 5: What is new?}
-  S5 -->|input document| D[5a fact kind<br/>5b ingest tool<br/>5c Luca]
+  S5 -->|input document| D[5a fact kind<br/>5b ingest tool<br/>5c Cade]
   S5 -->|output form| F[5d assets + corpus<br/>5e engine form<br/>5f resolver<br/>5g registry]
   S5 -->|nothing| S6
   D --> S6[Step 6: expected.ts + run]
@@ -191,7 +191,7 @@ flowchart TD
 | Type check | `npx tsc --noEmit -p apps/agent` | A field with no `category` or `valueType`, catalog drift |
 | Lint | `npx eslint apps/agent/src` | Money math outside `money.ts`, oversize files and functions |
 | Unit tests | `npm run test:unit` | A rule or worksheet that computes wrong, an engine boundary break |
-| Integration tests | `npm run test:integration` | A form answer Luca is never told to ask (`requiredInputs`), a result that depends on form order (`formOrder`) |
+| Integration tests | `npm run test:integration` | A form answer Cade is never told to ask (`requiredInputs`), a result that depends on form order (`formOrder`) |
 | Catalog-fill | `npm test -- catalog-fill` | A widget that maps to the wrong PDF field |
 | Scenario goldens | `npm test -- <name>` | A changed line value, a changed PDF fill |
 | Comparison kit | `npx tsx scripts/compareFiled/cli.ts <folder>` | Lines that differ from a filed return, and their root causes |

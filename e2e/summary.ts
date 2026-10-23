@@ -72,7 +72,7 @@ function models(): string {
     const url = env[`${role}_MODEL_URL`];
     return `${env[`${role}_MODEL`] ?? "default"}${url ? ` (${new URL(url).host})` : ""}`;
   };
-  return `Luca ${at("LUCA")}, judges ${at("JUDGE")} (reviews ${env.DECISION_REVIEW ?? "on"})`;
+  return `Cade ${at("CADE")}, judges ${at("JUDGE")} (reviews ${env.DECISION_REVIEW ?? "on"})`;
 }
 
 export function writeSummary(opts: { durationMs: number; testError?: string }): void {

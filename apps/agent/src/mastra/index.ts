@@ -1,6 +1,6 @@
 import { Mastra } from "@mastra/core";
 import "dotenv/config";
-import { luca } from "./agents/luca";
+import { cade } from "./agents/cade";
 import { ConsoleLogger } from "./server/consoleLogger";
 import { corsMiddleware } from "./server/cors";
 import { createObservability } from "./server/observability";
@@ -27,16 +27,16 @@ const storage = await createStorage();
  * not `logger.error()` unhandled handler exceptions before it returns
  * 500, which would otherwise hide the failure in prod.
  */
-const logger = new ConsoleLogger({ name: "summa", level: "info" });
+const logger = new ConsoleLogger({ name: "openreturn", level: "info" });
 
 export const mastra = new Mastra({
   /*
-   * Luca is the one conversational agent. The three review-decision
+   * Cade is the one conversational agent. The three review-decision
    * judges (workflows/reviewDecision/judges/) are registered too, as the
    * Mastra workflow docs show: the steps get them with mastra.getAgent(),
    * so their calls share the app's logger and traces. Studio lists them.
    */
-  agents: { luca, queryFormulator, assessRiskAgent, ruleAgent, askQueryFormulator, askAnswerer },
+  agents: { cade, queryFormulator, assessRiskAgent, ruleAgent, askQueryFormulator, askAnswerer },
   workflows: { reviewDecision: reviewDecisionWorkflow },
   storage,
   logger,

@@ -103,7 +103,7 @@ function EmptyReturnsCta() {
           Start your {CURRENT_TAX_YEAR} filing
         </h3>
         <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-ink-secondary">
-          Luca will walk you through everything — wages, investments, deductions — and keep a
+          Cade will walk you through everything — wages, investments, deductions — and keep a
           citation for every fact. You can pause and pick up where you left off anytime.
         </p>
       </div>

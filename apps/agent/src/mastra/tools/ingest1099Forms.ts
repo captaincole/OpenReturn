@@ -6,14 +6,14 @@ import {
   type DividendFactValue,
   type InterestFactValue,
   type MiscIncomeFactValue,
-} from "@summa/engine/facts";
+} from "@openreturn/engine/facts";
 import { z } from "zod";
 import { recordIngestFact, statementContext, statementFields } from "./ingestShared";
 
 /*
  * Ingest one 1099-INT, 1099-DIV or 1099-MISC as one box-totals fact. A
  * consolidated broker statement is several of these forms (plus a 1099-B,
- * see ingest1099B.ts) in one PDF: Luca makes one call per form on it.
+ * see ingest1099B.ts) in one PDF: Cade makes one call per form on it.
  *
  * Short calls are the point. One call for a whole statement put the box
  * totals after a long list of trades, and local models (Gemma 4 31b)

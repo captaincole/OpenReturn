@@ -31,7 +31,7 @@ export default function ReturnWorkspace() {
       <Pane id="activity" className="space-y-6">
         <ActivityTicker refreshKey={turnTick + resetTick * 10000} />
         {/*
-         * Things Luca asks the USER to do — uploads, confirmations,
+         * Things Cade asks the USER to do — uploads, confirmations,
          * decisions — that do not fit a natural chat turn. The Plan list
          * lives in the chat pane.
          */}

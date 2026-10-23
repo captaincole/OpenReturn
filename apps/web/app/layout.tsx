@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Summa — Tax Prep",
+  title: "OpenReturn — Tax Prep",
   description: "AI CPA platform for high-net-worth individuals.",
 };
 

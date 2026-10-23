@@ -3,7 +3,7 @@ import {
   ENERGY_ITEM_KINDS,
   makeEnergyInvoiceFactKey,
   type EnergyInvoiceFactValue,
-} from "@summa/engine/facts";
+} from "@openreturn/engine/facts";
 import { z } from "zod";
 import { recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";

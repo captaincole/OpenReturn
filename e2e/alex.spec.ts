@@ -1,6 +1,6 @@
 /*
  * Alex, end to end: create the owner, ask the tax code one question
- * (ask.ts), start a filing, talk Luca through
+ * (ask.ts), start a filing, talk Cade through
  * the intake with the W-2 upload, and wait for the generated forms. Then
  * check what the model stored and generated against Alex's fixtures
  * (packages/engine/tests/scenarios/alex).
@@ -29,7 +29,7 @@ import { check, failedStages, note, plumbing, writeSummary } from "./summary";
 const OWNER = { name: "Alex Morales", email: "alex@morales.com", password: "e2e-alex-password" };
 const MAX_TURNS = 10;
 const REVIEW_WAIT_MS = 20 * 60_000;
-const TURN_MS = 15 * 60_000; // one Luca turn on a local model, tool calls included
+const TURN_MS = 15 * 60_000; // one Cade turn on a local model, tool calls included
 const TRANSCRIPT = join(RUN_DIR, "transcript.md");
 const EXPECTED_FORMS = ["form-1040", "form-540"];
 const started = Date.now();
@@ -71,7 +71,7 @@ async function startFiling(page: Page): Promise<string> {
     .first()
     .click();
   await expect(page).toHaveURL(/\/r\/2025/);
-  await expect(page.getByLabel("Message Luca")).toBeEnabled();
+  await expect(page.getByLabel("Message Cade")).toBeEnabled();
   return new URL(page.url()).pathname;
 }
 
@@ -83,20 +83,20 @@ async function startFiling(page: Page): Promise<string> {
  */
 async function runIntake(page: Page): Promise<boolean> {
   const script = [...OPENING_TURNS];
-  let lucaSaid = "";
+  let cadeSaid = "";
   try {
     for (let turn = 1; turn <= MAX_TURNS; turn++) {
-      const next: Turn | undefined = script.shift() ?? toTurn(replyTo(lucaSaid));
-      if (!next) throw new Error(`turn ${turn}: no answer-sheet rule for Luca's question`);
-      lucaSaid =
+      const next: Turn | undefined = script.shift() ?? toTurn(replyTo(cadeSaid));
+      if (!next) throw new Error(`turn ${turn}: no answer-sheet rule for Cade's question`);
+      cadeSaid =
         turn === 1
           ? await plumbing("chat returns a reply", () => send(page, next))
           : next.file
             ? await plumbing("upload is sent", () => send(page, next))
             : await send(page, next);
-      log(turn, next, lucaSaid);
+      log(turn, next, cadeSaid);
       noAgentErrors(turn);
-      if (!lucaSaid.trim()) note(`turn ${turn}: empty reply from Luca`);
+      if (!cadeSaid.trim()) note(`turn ${turn}: empty reply from Cade`);
       if (next.file) await plumbing("upload is stored", () => expectUploadStored());
       if (EXPECTED_FORMS.every((formId) => latestSidecar()?.forms[formId])) {
         check("agent turns run without errors", "plumbing", []);
@@ -136,10 +136,10 @@ function noAgentErrors(turn: number) {
   throw new Error(`turn ${turn}: agent error`);
 }
 
-/* Send one message and return Luca's reply once the turn ends. */
+/* Send one message and return Cade's reply once the turn ends. */
 async function send(page: Page, turn: Turn): Promise<string> {
-  const box = page.getByLabel("Message Luca");
-  if (turn.file) await page.getByLabel("Attach a file for Luca").setInputFiles(turn.file);
+  const box = page.getByLabel("Message Cade");
+  if (turn.file) await page.getByLabel("Attach a file for Cade").setInputFiles(turn.file);
   await box.fill(turn.text);
   await box.press("Enter");
   await expect(box).toBeDisabled();
@@ -178,6 +178,6 @@ function log(turn: number, sent: Turn, reply: string) {
   const file = sent.file ? ` [attached ${sent.file.split("/").pop()}]` : "";
   appendFileSync(
     TRANSCRIPT,
-    `## Turn ${turn}\n\n**Alex:** ${sent.text}${file}\n\n**Luca:** ${reply}\n\n`,
+    `## Turn ${turn}\n\n**Alex:** ${sent.text}${file}\n\n**Cade:** ${reply}\n\n`,
   );
 }

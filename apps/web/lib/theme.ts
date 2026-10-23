@@ -7,7 +7,7 @@
 
 export type Theme = "light" | "dark";
 
-const STORAGE_KEY = "summa-theme";
+const STORAGE_KEY = "openreturn-theme";
 
 export const THEME_INIT_SCRIPT = `try {
   var saved = localStorage.getItem("${STORAGE_KEY}");

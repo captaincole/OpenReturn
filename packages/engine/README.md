@@ -1,6 +1,6 @@
-# The Form Engine (`@summa/engine`)
+# The Form Engine (`@openreturn/engine`)
 
-The deterministic core of Summa. Facts and decisions go in, evaluated tax
+The deterministic core of OpenReturn. Facts and decisions go in, evaluated tax
 forms come out. **No AI anywhere in the math** — every line on every form is
 computed by a typed, pure-function derivation you can read, test, and diff.
 
@@ -21,10 +21,10 @@ packages/engine/
 ```
 
 Other code imports only the `exports` in `package.json`:
-`@summa/engine` (evaluate, render, pendingInputs, FORMS, the FormField
-types), `@summa/engine/facts` (the fact vocabulary and row types),
-`@summa/engine/catalog` (for the agent's form tools),
-`@summa/engine/paths`, and `@summa/engine/scenarios` (test fixtures).
+`@openreturn/engine` (evaluate, render, pendingInputs, FORMS, the FormField
+types), `@openreturn/engine/facts` (the fact vocabulary and row types),
+`@openreturn/engine/catalog` (for the agent's form tools),
+`@openreturn/engine/paths`, and `@openreturn/engine/scenarios` (test fixtures).
 A deep import does not resolve.
 
 Commands, from the repo root: `npm test` (golden), `npm run test:unit`,
@@ -92,7 +92,7 @@ documents (`blank.pdf`, instructions) use the same subpath in
    answer (a decision, or a fact that is not a document), list it in
    `missingInputs: { "<formId>": missingInputs({ "<key>": value }) }`.
    Otherwise a missing answer leaves a line blank or wrong and nothing
-   tells Luca to ask. `tests/integration/requiredInputs.test.ts` fails when you forget.
+   tells Cade to ask. `tests/integration/requiredInputs.test.ts` fails when you forget.
 4. Add a `makeFormSpec` entry (+ catalog import) to the jurisdiction's
    `index.ts`.
 5. Add golden coverage under `tests/scenarios/`, and a catalog-fill golden

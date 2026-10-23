@@ -8,7 +8,7 @@ import { ingestTrades, TradeInputSchema } from "./ingestTrades";
  * 1099-B section of a consolidated statement (the box-total forms on the
  * same statement go to ingest1099Forms.ts).
  *
- * At most 20 sales per call; Luca calls again for the next 20. Trade ids
+ * At most 20 sales per call; Cade calls again for the next 20. Trade ids
  * come from each sale's content (ingestTrades.ts), so the calls add up
  * without collisions. Long calls failed: after about 20 trades, local
  * models (Gemma 4 31b) broke the call's nesting about half the time.
