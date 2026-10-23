@@ -96,7 +96,7 @@ export function writeSummary(opts: { durationMs: number; testError?: string }): 
     "## Files",
     "",
     `- Transcript: ${rel("transcript.md")}`,
-    `- Logs: ${rel("agent.log")}, ${rel("web.log")}`,
+    `- Logs: ${rel("canon.log")}, ${rel("agent.log")}, ${rel("web.log")}`,
     `- Data: ${rel("data")}`,
     `- Trace and video (on failure): ${rel("test-results")}`,
     "",
