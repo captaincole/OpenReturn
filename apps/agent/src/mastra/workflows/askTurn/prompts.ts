@@ -1,3 +1,4 @@
+import { formatPublished } from "../../../refdocs/published";
 import type { AskTurn } from "../../db/askThreads";
 import type { Passage } from "./validate";
 
@@ -24,12 +25,17 @@ export function renderFormulatePrompt(history: string, question: string): string
   return `${history}Question: ${question}\n\nWrite the search queries.`;
 }
 
-/* An HTML document has no pages, so its passages carry the section only. */
+/*
+ * An HTML document has no pages, so its passages carry the section only.
+ * The publication date lets the answerer prefer the newer of two passages
+ * that disagree.
+ */
 function renderPassage(p: Passage, n: number): string {
   const section =
     p.sectionHeading && p.sectionHeading !== "(Preamble)" ? `, § ${p.sectionHeading}` : "";
   const page = p.format === "html" ? "" : `, p. ${p.pageNum}`;
-  return `[${n}] ${p.documentTitle}${section}${page}\n${p.text.trim()}`;
+  const published = p.published ? ` (published ${formatPublished(p.published)})` : "";
+  return `[${n}] ${p.documentTitle}${section}${page}${published}\n${p.text.trim()}`;
 }
 
 export function renderAnswerPrompt(history: string, question: string, passages: Passage[]): string {

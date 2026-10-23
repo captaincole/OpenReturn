@@ -1,0 +1,203 @@
+/*
+ * Renders the Ask The Tax Code eval as docs/evals/ask.md, and the Ask
+ * flow's row in the eval overview (docs/evals/README.md, lib/overview.ts).
+ * Run directly to combine saved runs (a later file replaces a model's rows
+ * for the cases it ran, rescored against the current labels):
+ *
+ *   npx tsx evals/ask/report.ts <results.json>…   (from apps/agent)
+ */
+import { readFileSync, writeFileSync } from "node:fs";
+import path from "node:path";
+import { avg, table } from "../lib/markdown";
+import { forDisplay, type EvalModel } from "../lib/models";
+import { publishOverview } from "../lib/overview";
+import type { Kind, Tier } from "./cases";
+import {
+  askFlowScores,
+  correct,
+  coverageOk,
+  coveredButWrong,
+  groundedOk,
+  shouldGround,
+} from "./flow";
+import { scoreResult } from "./score";
+
+export interface AskResult {
+  model: string;
+  case: string;
+  run: number;
+  tier: Tier;
+  kind: Kind;
+  expectedCoverage: string[];
+  /* null when the turn failed. */
+  coverage: string | null;
+  cited: string[];
+  /* Every block the retrieve step returned. Missing in runs saved before it was kept. */
+  retrieved?: string[];
+  /* null when the case has no labeled authority. */
+  citedAuthority: boolean | null;
+  retrievedAuthority: boolean | null;
+  /* null when the case has no required facts. */
+  factsOk: boolean | null;
+  missingFacts: string[];
+  answer: string;
+  error: string | null;
+  latencyMs: number;
+}
+
+export interface AskRun {
+  models: EvalModel[];
+  results: AskResult[];
+}
+
+const REPO = path.resolve(__dirname, "../../../..");
+const OUT = path.join(REPO, "docs/evals/ask.md");
+
+const count = (rs: AskResult[], pred: (r: AskResult) => boolean) =>
+  `${rs.filter(pred).length}/${rs.length}`;
+const where = (rs: AskResult[], pred: (r: AskResult) => boolean) => rs.filter(pred);
+
+function summaryTable(models: EvalModel[], results: AskResult[]): string {
+  const rows = models.map((m) => {
+    const mine = results.filter((r) => r.model === m.label);
+    return [
+      m.label,
+      String(m.runs),
+      count(mine, correct),
+      count(mine, coveredButWrong),
+      count(mine, coverageOk),
+      count(where(mine, shouldGround), groundedOk),
+      count(
+        where(mine, (r) => r.retrievedAuthority !== null),
+        (r) => r.retrievedAuthority === true,
+      ),
+      count(
+        where(mine, (r) => r.factsOk !== null),
+        (r) => r.factsOk === true,
+      ),
+      count(mine, (r) => r.error !== null),
+      `${(avg(mine.map((r) => r.latencyMs)) / 1000).toFixed(0)}s`,
+    ];
+  });
+  return table(
+    [
+      "Model",
+      "Runs per case",
+      "Correct",
+      "Covered but wrong",
+      "Coverage right",
+      "Grounded",
+      "Authority retrieved",
+      "Facts stated",
+      "Turn failed",
+      "Avg time",
+    ],
+    rows,
+  );
+}
+
+const KIND_LABEL: Record<Kind, string> = {
+  standard: "standard",
+  false_premise: "false premise",
+  insufficient: "insufficient info",
+};
+
+/* One row per tier and kind: is the run correct, and if not, which part failed? */
+function groupTable(models: EvalModel[], results: AskResult[]): string {
+  const groups = [...new Set(results.map((r) => `${r.tier}\u0000${r.kind}`))];
+  const cell = (rs: AskResult[]) => {
+    if (!rs.length) return "—";
+    const parts = [`correct ${count(rs, correct)}`, `label ${count(rs, coverageOk)}`];
+    const grounded = where(rs, shouldGround);
+    if (grounded.length) parts.push(`cited ${count(grounded, groundedOk)}`);
+    const facts = where(rs, (r) => r.factsOk !== null);
+    if (facts.length) parts.push(`facts ${count(facts, (r) => r.factsOk === true)}`);
+    return parts.join(" · ");
+  };
+  const rows = groups.map((g) => {
+    const [tier, kind] = g.split("\u0000");
+    const mine = results.filter((r) => String(r.tier) === tier && r.kind === kind);
+    return [
+      tier,
+      KIND_LABEL[kind as Kind],
+      ...models.map((m) => cell(mine.filter((r) => r.model === m.label))),
+    ];
+  });
+  return table(["Tier", "Kind", ...models.map((m) => m.label)], rows);
+}
+
+function caseCell(rs: AskResult[]): string {
+  if (!rs.length) return "—";
+  const labels = [...new Set(rs.map((r) => r.coverage ?? "failed"))].join(", ");
+  const parts = [`**${count(rs, correct)}** · label ${count(rs, coverageOk)} (${labels})`];
+  if (rs[0].citedAuthority !== null) parts.push(`cited ${count(rs, groundedOk)}`);
+  if (rs[0].retrievedAuthority !== null)
+    parts.push(`retrieved ${count(rs, (r) => r.retrievedAuthority === true)}`);
+  if (rs[0].factsOk !== null) parts.push(`facts ${count(rs, (r) => r.factsOk === true)}`);
+  return parts.join(" · ");
+}
+
+function caseTable(models: EvalModel[], results: AskResult[]): string {
+  const cases = [...new Set(results.map((r) => r.case))];
+  const rows = cases.map((c) => {
+    const first = results.find((r) => r.case === c)!;
+    return [
+      c,
+      String(first.tier),
+      KIND_LABEL[first.kind],
+      first.expectedCoverage.join(" or "),
+      ...models.map((m) => caseCell(results.filter((r) => r.model === m.label && r.case === c))),
+    ];
+  });
+  return table(["Case", "Tier", "Kind", "Expected", ...models.map((m) => m.label)], rows);
+}
+
+export function renderReport(models: EvalModel[], results: AskResult[]): string {
+  return [
+    "# Ask The Tax Code eval",
+    `_Generated by \`apps/agent/evals/ask\` on ${new Date().toISOString().slice(0, 10)}. Do not edit by hand._`,
+    "Each case asks one question through the production Ask pipeline (query formulator, hybrid retrieval over the IRS/FTB corpus, answerer, citation check). The cases, their expected passages and the facts each answer must state are in `apps/agent/evals/ask/` (`cases.ts` and the tier files).",
+    "Three tiers: (1) one rule, one obvious passage; (2) generally accepted answers that take a closer read or two passages; (3) two or more passages, usually federal and California. Each tier has 6 standard questions (tier 3 has 7), 2 that assert a wrong amount or rule the answer must correct (false premise; tier 3 has 3), and 2 the library cannot support (insufficient info: the right answer says not covered, or partial). Coverage is about the library: a question about the taxpayer's own numbers is covered when the passages give every rule and amount needed (the answer may state the rule instead of computing the total), and a fact the taxpayer left out does not make it partial.",
+    "- **Correct:** the coverage label is right, the answer cites a labeled passage for each rule (on a question the library covers), and it states every key fact. This is the headline score; the other columns show which part failed.\n- **Covered but wrong:** the answer says the library covers the question, but the run is not correct. This is the confidently wrong answer.\n- **Coverage right:** the answer's covered / partial / not-covered label is one the case accepts.\n- **Grounded:** on a question the library covers, the answer cites a labeled passage for each rule.\n- **Authority retrieved:** the search, from the formulator's own queries, found a labeled passage at all. A miss here is a retrieval problem, not an answerer problem.\n- **Facts stated:** the answer states the key amount (any accepted spelling).",
+    `Models: ${models.map((m) => `${m.label} (\`${m.id}\`)`).join(", ")}.`,
+    "## Summary",
+    summaryTable(models, results),
+    "## By tier and kind",
+    groupTable(models, results),
+    "## By case",
+    caseTable(models, results),
+    "## Run it",
+    "From `apps/agent`, with Ollama running (retrieval embeds queries locally):\n\n```bash\nnpx tsx --env-file=.env evals/ask/run.ts <model-substring> [--runs=N] [--case=…]\n```",
+  ].join("\n\n");
+}
+
+/*
+ * Merge runs: a later run replaces a model's results for the cases it ran,
+ * so one case can be rerun on its own. Every result is rescored against the
+ * current labels (score.ts). Write the doc and the overview;
+ * return the doc's repo path.
+ */
+export function publishReport(runs: AskRun[]): string {
+  const models = new Map<string, EvalModel>();
+  const results = new Map<string, AskResult[]>();
+  for (const run of runs) {
+    for (const model of run.models) models.set(model.label, model);
+    const fresh = new Map<string, AskResult[]>();
+    for (const r of run.results) {
+      const key = `${r.model}\u0000${r.case}`;
+      fresh.set(key, [...(fresh.get(key) ?? []), scoreResult(r)]);
+    }
+    for (const [key, rs] of fresh) results.set(key, rs);
+  }
+  const all = [...results.values()].flat();
+  const used = [...models.values()].filter((m) => all.some((r) => r.model === m.label));
+  const shown = forDisplay(used, all);
+  writeFileSync(OUT, renderReport(shown.models, shown.results) + "\n");
+  publishOverview(askFlowScores(shown.models, shown.results));
+  return path.relative(REPO, OUT);
+}
+
+if (require.main === module) {
+  const runs = process.argv.slice(2).map((f) => JSON.parse(readFileSync(f, "utf8")) as AskRun);
+  console.log(publishReport(runs));
+}

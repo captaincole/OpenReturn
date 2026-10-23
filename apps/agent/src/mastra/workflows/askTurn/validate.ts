@@ -16,11 +16,16 @@ import type { AskAnswerOutput } from "./judges/askAnswerer";
  *     not-covered message. A not_covered answer keeps no markers.
  */
 
+/* The gap queries are for the pipeline, not the answer: validate does not read them. */
+type AnswerOutput = Omit<AskAnswerOutput, "gaps">;
+
 export interface Passage {
   blockId: string;
   docId: string;
   documentTitle: string;
   format: SourceFormat;
+  /* When the publisher issued the document; the answerer prefers the newer of two that disagree. */
+  published?: string | null;
   sectionHeading: string | null;
   pageNum: number;
   text: string;
@@ -74,13 +79,13 @@ function renumberMarkers(text: string, passageCount: number) {
   return { answer: answer.trim(), order, invalid };
 }
 
-function quoteFor(output: AskAnswerOutput, passageNum: number, passage: Passage) {
+function quoteFor(output: AnswerOutput, passageNum: number, passage: Passage) {
   const quote = output.citations.find((c) => c.passage === passageNum)?.quote?.trim() ?? "";
   const ok = quote.length > 0 && normalize(passage.text).includes(normalize(quote));
   return { quote: ok ? quote : passage.text.trim(), ok };
 }
 
-export function validateAnswer(output: AskAnswerOutput, passages: Passage[]): ValidatedAnswer {
+export function validateAnswer(output: AnswerOutput, passages: Passage[]): ValidatedAnswer {
   const missingDocuments = output.missingDocuments.map((d) => d.trim()).filter(Boolean);
   const { answer, order, invalid } = renumberMarkers(
     splitMarkerLists(output.answer),
