@@ -169,6 +169,7 @@ async function answer(
 /*
  * The gap round: when the answer is "partial" and names its gaps, search
  * for them and answer again with the new passages added. One round only.
+ * It is best effort: if it fails, the first answer stands.
  */
 async function fillGaps(
   mastra: Mastra,
@@ -184,22 +185,32 @@ async function fillGaps(
     .slice(0, MAX_QUERIES);
   if (raw.coverage !== "partial" || gaps.length === 0) return { raw, passages };
 
-  await setAskTurnStage(turn.id, "retrieving");
-  const skip = new Set(passages.map((p) => p.blockId));
-  const found = await timed(
-    steps,
-    "retrieve-gaps",
-    () => retrieve(gaps, MAX_GAP_PASSAGES, skip),
-    (r) => ({ queries: r.log }),
-  );
-  if (found.passages.length === 0) return { raw, passages };
+  try {
+    await setAskTurnStage(turn.id, "retrieving");
+    const skip = new Set(passages.map((p) => p.blockId));
+    const found = await timed(
+      steps,
+      "retrieve-gaps",
+      () => retrieve(gaps, MAX_GAP_PASSAGES, skip),
+      (r) => ({ queries: r.log }),
+    );
+    if (found.passages.length === 0) return { raw, passages };
 
-  await setAskTurnStage(turn.id, "answering");
-  const all = [...passages, ...found.passages];
-  return {
-    raw: await answer(mastra, history, turn.question, all, steps, "answer-gaps"),
-    passages: all,
-  };
+    await setAskTurnStage(turn.id, "answering");
+    const all = [...passages, ...found.passages];
+    return {
+      raw: await answer(mastra, history, turn.question, all, steps, "answer-gaps"),
+      passages: all,
+    };
+  } catch (err) {
+    const reason = err instanceof Error ? err.message : String(err);
+    steps.push({ kind: "gaps-failed", durationMs: 0, error: reason });
+    mastra.getLogger().warn("ask gap round failed; keeping the first answer", {
+      turnId: turn.id,
+      err: reason,
+    });
+    return { raw, passages };
+  }
 }
 
 export async function runAskTurn(
