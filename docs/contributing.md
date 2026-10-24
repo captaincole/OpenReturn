@@ -74,7 +74,7 @@ never a tax-software export we cannot redistribute:
    shape and lock its output as the expected values:
 
    ```bash
-   cd cade
+   cd engine
    npx tsx scripts/lockScenario.ts --scenario=jordan
    npx tsx scripts/renderScenario.ts --scenario=jordan --golden
    ```

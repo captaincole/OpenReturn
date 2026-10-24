@@ -51,7 +51,7 @@ Add the scenario to `SCENARIOS` in `tests/scenarios/index.ts`. If a document or 
 no fact shape yet, note it for step 5.
 
 You can now render the forms before any expected values exist:
-`npx tsx scripts/renderScenario.ts --scenario=<name>` (from `cade/`).
+`npx tsx scripts/renderScenario.ts --scenario=<name>` (from `engine/`).
 
 ### 4. Research the new documents and fields
 
@@ -148,7 +148,6 @@ A locked scenario writes its own:
   [What OpenReturn supports](testing-with-your-return.md#what-openreturn-supports)
   and to the comparison kit's support check
   (`scripts/compareFiled/support.ts`).
-- Add the scenario to the list in `cade/tests/README.md`.
 
 ## The flow and its tests
 
@@ -188,8 +187,8 @@ flowchart TD
 | --- | --- | --- |
 | Render | `npx tsx scripts/renderScenario.ts --scenario=<name>` | Lines you can see are wrong on the PDF |
 | Support check | `npx tsx scripts/compareFiled/cli.ts <folder> --check` | Inputs the engine does not read, forms it does not model |
-| Type check | `npx tsc --noEmit -p cade` | A field with no `category` or `valueType`, catalog drift |
-| Lint | `npx eslint cade/src` | Money math outside `money.ts`, oversize files and functions |
+| Type check | `npx tsc --noEmit -p engine` | A field with no `category` or `valueType`, catalog drift |
+| Lint | `npx eslint engine/src` | Money math outside `money.ts`, oversize files and functions |
 | Unit tests | `npm run test:unit` | A rule or worksheet that computes wrong, an engine boundary break |
 | Integration tests | `npm run test:integration` | A form answer Cade is never told to ask (`requiredInputs`), a result that depends on form order (`formOrder`) |
 | Catalog-fill | `npm test -- catalog-fill` | A widget that maps to the wrong PDF field |

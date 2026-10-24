@@ -9,6 +9,7 @@ From the repo root:
 ```bash
 npm run dev:all   # canon (:4112) + agent (:4111) + web (:3000)
 npm run dev:web   # web only
+npm run e2e       # Playwright E2E through the UI (see e2e/README.md)
 ```
 
 The first run redirects to `/setup` to create the owner account. The env file is `.env.development` (see `.env.example`). `APP_DB_PATH` and `DOCUMENTS_PATH` must point at the same files as the agent.

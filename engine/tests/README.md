@@ -3,8 +3,8 @@
 Scenario tests should cover *EVERY* supported form field at some level. This is the core way that we can establish that our engine is accurate, as all scenarios are CPA reviewed. 
 
 Every test for `@openreturn/engine` lives here. No test file goes under `src/`
-or `scripts/`; `unit/layout.test.ts` fails on one. The agent's own tests
-(tools, db, refdocs) are in `cade/tests/`.
+or `scripts/`; `unit/layout.test.ts` fails on one. Cade's tests (tools, db)
+are in `cade/tests/`; the corpus tests are in `canon/tests/`.
 
 | Folder | Kind | Command (repo root) |
 | --- | --- | --- |
