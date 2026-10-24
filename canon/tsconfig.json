@@ -13,7 +13,7 @@
     "allowImportingTsExtensions": false,
     "types": ["node"],
     "paths": {
-      "@openreturn/sources": ["../packages/sources/index.ts"]
+      "@openreturn/sources": ["../sources/index.ts"]
     }
   },
   "include": ["src/**/*.ts", "tests/**/*.ts", "scripts/**/*.ts", "evals/**/*.ts"],

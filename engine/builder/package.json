@@ -1,0 +1,27 @@
+{
+  "name": "@openreturn/builder",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dev-time tools that build the form engine's assets: blank IRS/FTB PDFs and tax tables in, catalog.json, bindings.ts drafts, field types and tax-table JSON out. Calls Anthropic and searches Canon over MCP; nothing here runs in production.",
+  "scripts": {
+    "form-engine": "tsx scripts/formEngine/cli.ts",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.91.1",
+    "@mastra/core": "^1.30.0",
+    "@mastra/mcp": "1.6.0",
+    "@napi-rs/canvas": "^0.1.100",
+    "@openreturn/engine": "0.1.0",
+    "@openreturn/sources": "0.1.0",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.4.2",
+    "unpdf": "^1.6.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4.20.5",
+    "typescript": "^5"
+  }
+}

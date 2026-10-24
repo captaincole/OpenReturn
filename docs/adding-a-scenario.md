@@ -19,7 +19,7 @@ which keeps the data outside the project.
 
 Collect the W-2s and 1099s the taxpayer would hand to a preparer. Make
 them fake: invented names, employers, payers, and amounts. Put one PDF
-per document in `packages/engine/tests/scenarios/<name>/docs/`. For an
+per document in `engine/tests/scenarios/<name>/docs/`. For an
 example generator, see `tests/scenarios/marcus/generate-docs.ts`.
 
 Every document value in `facts.ts` must come from one of these files. If
@@ -72,26 +72,26 @@ model.
 **A new input document:**
 
 - **5a. Fact kind.** The row shape and key rules, in
-  `packages/engine/src/facts/kinds/`, exported from `facts/index.ts`.
+  `engine/src/facts/kinds/`, exported from `facts/index.ts`.
 - **5b. Ingest tool.** A typed tool in `src/mastra/tools/` (see
   `ingest1099R.ts`) that writes the facts.
 - **5c. Cade.** Register the tool in `agents/cade.ts`. Tell Cade when to
   call it in `cade.instructions.ts`.
 
 **A new output form** (full checklist:
-[Adding a form](../packages/engine/README.md#adding-a-form)):
+[Adding a form](../engine/README.md#adding-a-form)):
 
 - **5d. Assets.** `blank.pdf` and `instructions.meta.json` (with the
   instructions' `sourceUrl` and `sha256`; the instructions file itself is
-  not committed) in `packages/sources/<year>/forms/<jurisdiction>/<short>/`.
+  not committed) in `sources/<year>/forms/<jurisdiction>/<short>/`.
   For FTB instructions that are a web page, `npm run corpus -- add-html`
   writes the sidecar.
   Then generate the catalog (it lands next to the bindings) and sync the
   corpus: `npm run form-engine -- generate-catalog`, `npm run corpus -- sync`.
 - **5e. Engine form.** `types.ts`, `filingInfo.ts`, and `bindings.ts` in
-  `packages/engine/src/<jurisdiction>/<short>/`. Draft the bindings with
+  `engine/src/<jurisdiction>/<short>/`. Draft the bindings with
   `npm run form-engine -- generate-bindings`, then finish them by hand.
-  All money math goes through `packages/engine/src/money.ts`.
+  All money math goes through `engine/src/money.ts`.
 - **5f. Resolver.** Write the must-file rule, and list each answer the
   form reads in `missingInputs`, so Cade asks for it.
 - **5g. Registry.** Add a `makeFormSpec` entry to the jurisdiction's

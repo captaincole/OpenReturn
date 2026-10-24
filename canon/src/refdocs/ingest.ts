@@ -178,7 +178,7 @@ async function embedBlocks(blocks: RefBlock[]): Promise<boolean> {
  * generate; embeddings update in place afterward.
  */
 /*
- * The path recorded in ref_documents: relative to packages/sources, or
+ * The path recorded in ref_documents: relative to sources, or
  * only the file name for a PDF outside it. corpus.db ships publicly, so
  * it must not carry a machine's absolute paths.
  */
@@ -309,7 +309,7 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
     sections,
     blocks,
   });
-  // corpus.db carries the source file itself; packages/sources commits only the sidecar.
+  // corpus.db carries the source file itself; sources commits only the sidecar.
   await setDocumentSource(input.docId, new Uint8Array(await readFile(sourcePath)));
 
   const embedded = await embedBlocks(blocks);

@@ -41,7 +41,7 @@ OpenReturn is a local-capable AI harness that allows you to build all the docume
   actual IRS/FTB instruction text; Canon either cites the supporting passage
   or reopens the question. Canon also answers tax-code questions with
   citations ("Ask The Tax Code").
-- **Form Engine (packages/engine)** — a solver. Takes the facts and decisions and computes the
+- **Form Engine (engine)** — a solver. Takes the facts and decisions and computes the
   draft 1040/540 by the tax rules — deterministic code, no AI anywhere in the
   math. Every new fact re-computes the return, so your draft updates live as
   you talk, and the open questions it surfaces are what Cade asks you next.

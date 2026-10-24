@@ -1,5 +1,5 @@
 .vercel
 
-# Local libsql reference-corpus DB. Rebuilt from packages/sources/**/{instructions,publication}.pdf
+# Local libsql reference-corpus DB. Rebuilt from sources/**/{instructions,publication}.pdf
 # via `npm run corpus -- sync`; a prebuilt copy ships as a release asset (Phase 4).
 .data/

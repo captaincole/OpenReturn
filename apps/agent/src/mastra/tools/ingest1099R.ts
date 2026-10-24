@@ -11,7 +11,7 @@ import { requireUserContext } from "./userContext";
  * Ingest one Form 1099-R as a single structured tax_facts row. The Form
  * Engine reads it via `getRetirementDistributionFacts(facts)`.
  *
- * Convention (see packages/engine/src/facts/kinds/retirementDistribution.ts):
+ * Convention (see engine/src/facts/kinds/retirementDistribution.ts):
  *   category: "retirement"
  *   key:      "payer.{payerSlug}.distributions.{distributionId}"
  *

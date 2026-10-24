@@ -1,5 +1,5 @@
 /*
- * Idempotent corpus sync. Walks the sidecars under packages/sources/
+ * Idempotent corpus sync. Walks the sidecars under sources/
  * (instructions.meta.json under forms/, publication.meta.json under
  * publications/) and ingests anything missing or sha-drifted, fetching
  * the source file (a PDF, or an HTML page it cleans) from the sidecar's

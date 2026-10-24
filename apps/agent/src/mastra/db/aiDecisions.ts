@@ -19,7 +19,7 @@ import {
 
 /*
  * Confidence / Verdict / citation / row shapes are engine vocabulary:
- * the engine defines them (packages/engine/src/facts/rows.ts), this module
+ * the engine defines them (engine/src/facts/rows.ts), this module
  * persists them. Re-exported so db-side callers keep importing from
  * here.
  */

@@ -1,5 +1,5 @@
 /*
- * Read-only diff between the sidecars under packages/sources/
+ * Read-only diff between the sidecars under sources/
  * (instructions.meta.json under forms/, publication.meta.json under
  * publications/) and the ref_documents rows in the local corpus DB. It
  * compares each sidecar's sha256 with the DB row, so no source file is

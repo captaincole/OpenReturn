@@ -2,11 +2,13 @@
   "name": "openreturn",
   "version": "0.1.0",
   "private": true,
-  "description": "OpenReturn monorepo. canon is Canon, the tax attorney (reference corpus, retrieval, Ask The Tax Code, grounding judges; a Mastra project with an MCP server); apps/agent is Cade, the AI CPA (Mastra); apps/web is the Next.js frontend; packages/engine is the form engine; packages/sources holds the IRS/FTB source documents by tax year. canon, apps/agent and packages/* are npm workspaces; web installs on its own.",
+  "description": "OpenReturn monorepo. canon is Canon, the tax attorney (reference corpus, retrieval, Ask The Tax Code, grounding judges; a Mastra project with an MCP server); apps/agent is Cade, the AI CPA (Mastra); apps/web is the Next.js frontend; engine is the form engine and engine/builder the dev-time tools that build its assets; sources holds the IRS/FTB source documents by tax year. canon, apps/agent, engine, engine/builder and sources are npm workspaces; web installs on its own.",
   "workspaces": [
     "canon",
     "apps/agent",
-    "packages/*"
+    "engine",
+    "engine/builder",
+    "sources"
   ],
   "scripts": {
     "dev": "npm --prefix apps/agent run dev",
@@ -22,12 +24,12 @@
     "build": "npm --prefix apps/agent run build",
     "build:web": "npm --prefix apps/web run build",
     "start": "npm --prefix apps/agent run start",
-    "form-engine": "npm --prefix apps/agent run form-engine --",
+    "form-engine": "npm --prefix engine/builder run form-engine --",
     "smoke:review": "npm --prefix apps/agent run smoke:review",
     "doctor": "npm --prefix apps/agent run doctor",
-    "test": "npm -w packages/engine test",
-    "test:unit": "npm -w packages/engine run test:unit && npm -w canon run test:unit && npm -w apps/agent run test:unit",
-    "test:integration": "npm -w packages/engine run test:integration && npm -w apps/agent run test:integration",
+    "test": "npm -w @openreturn/engine test",
+    "test:unit": "npm -w @openreturn/engine run test:unit && npm -w canon run test:unit && npm -w apps/agent run test:unit",
+    "test:integration": "npm -w @openreturn/engine run test:integration && npm -w apps/agent run test:integration",
     "e2e": "playwright test -c e2e",
     "install:all": "npm install && npm --prefix apps/web install",
     "prepare": "husky",
@@ -35,7 +37,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx,mjs,js}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,mjs,js}\"",
-    "typecheck": "npm -w packages/engine run typecheck && npm -w canon run typecheck && npm -w apps/agent run typecheck"
+    "typecheck": "npm -w @openreturn/engine run typecheck && npm -w @openreturn/builder run typecheck && npm -w canon run typecheck && npm -w apps/agent run typecheck"
   },
   "engines": {
     "node": ">=20.0.0"

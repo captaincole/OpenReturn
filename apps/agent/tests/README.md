@@ -4,7 +4,7 @@ Cade's tests: tools, db, and the case-state hand-off. The reference
 corpus, retrieval and Ask pipeline are tested in
 [`canon/tests/`](../../../canon/tests/); the form engine's tests (unit,
 integration, golden, and the scenarios) are in
-[`packages/engine/tests/`](../../../packages/engine/tests/README.md).
+[`engine/tests/`](../../../engine/tests/README.md).
 
 | Folder | Kind | Command (repo root) |
 | --- | --- | --- |

@@ -24,7 +24,7 @@ Everything routes through a `tax_facts` table (libsql/SQLite, `.data/app.db`) wh
 
 ## Repo structure
 
-This is a monorepo. `canon`, `apps/agent`, `packages/engine`, and `packages/sources` are npm workspaces with one root lockfile; `apps/web` installs on its own. The target layout is flat (`canon/ cade/ engine/ sources/ web/`); `canon/` is the first folder there, the rest move in later phases of the split:
+This is a monorepo. `canon`, `apps/agent`, `engine`, `engine/builder` and `sources` are npm workspaces with one root lockfile; `apps/web` installs on its own. Select the engine by name in npm commands (`npm -w @openreturn/engine`): `-w engine` also selects the nested builder. The target layout is flat (`canon/ cade/ engine/ sources/ web/`); `apps/agent` and `apps/web` move in phase 5:
 
 ```
 canon/                           # @openreturn/canon — CANON, the tax attorney. Mastra project, port 4112.
@@ -40,17 +40,21 @@ canon/                           # @openreturn/canon — CANON, the tax attorney
 ├── tests/unit/                    refdocs, search, ask validation, ground loop, boundary.test.ts
 │                                  (no Cade, no app.db, no engine imports)
 └── .data/                         corpus.db + mastra.db (gitignored)
-packages/
-├── engine/                      # @openreturn/engine — THE FORM ENGINE. Pure, deterministic, no AI/DB/network.
-│   ├── src/                       Owns the fact vocabulary (facts/), per-jurisdiction form
-│   │                              registries (federal/, state/ca/; each form's catalog.json sits
-│   │                              next to its bindings.ts), worksheets, PDF fill.
-│   │                              Boundary enforced by tests/unit/boundary.test.ts.
-│   ├── tests/                   # the engine's test pyramid: unit/, integration/, golden/, scenarios/
-│   ├── scripts/                 # renderScenario, lockScenario, compareFiled
-│   ├── paths.ts                 # on-disk locations for offline tooling
-│   └── README.md                # contributor guide; public API = package.json "exports"
-└── sources/                     # @openreturn/sources — data only: what the IRS/FTB publish, by tax year.
+engine/                          # @openreturn/engine — THE FORM ENGINE. Pure, deterministic, no AI/DB/network.
+├── src/                           Owns the fact vocabulary (facts/), per-jurisdiction form
+│                                  registries (federal/, state/ca/; each form's catalog.json sits
+│                                  next to its bindings.ts), worksheets, PDF fill.
+│                                  Boundary enforced by tests/unit/boundary.test.ts.
+├── tests/                       # the engine's test pyramid: unit/, integration/, golden/, scenarios/
+├── scripts/                     # renderScenario, lockScenario, compareFiled
+├── paths.ts                     # on-disk locations for offline tooling
+├── README.md                    # contributor guide; public API = package.json "exports"
+└── builder/                     # @openreturn/builder — dev-time tools that build the engine's assets:
+                                   the `form-engine` CLI (scripts/formEngine/) and the forms pipeline
+                                   (src/: widget extraction, AI labeling, bindings drafts, tax-table
+                                   parsers). Calls Anthropic; searches Canon over MCP (src/canonSearch.ts).
+                                   Its own .env (see .env.example). Never runs in production.
+sources/                         # @openreturn/sources — data only: what the IRS/FTB publish, by tax year.
                                    <year>/forms/federal/<short>/ and <year>/forms/state/<st>/<short>/
                                    hold blank.pdf, the instructions sidecar (instructions.meta.json)
                                    and tax-table sources; <year>/publications/{federal,state/<st>}/<pub>/
@@ -65,13 +69,11 @@ apps/
 │   │                              loadScenario.ts is the one db↔engine bridge; formAssets.ts loads
 │   │                              blank PDFs from public/sources/<year>/forms/ (gitignored, built
 │   │                              by `npm --prefix apps/agent run sources:sync` before dev/build).
-│   ├── src/forms-pipeline/      # dev-time form-catalog ingest (widget extraction, AI labeling);
-│   │                              retrieval through Canon's MCP search (moves to engine/builder in phase 4)
-│   ├── scripts/                 # operator CLI: formEngine/ subcommands on a small dispatcher
-│   │                              (scripts/lib/cli.ts), plus standalone diagnostics (smokeReview, …)
+│   ├── scripts/                 # standalone diagnostics (doctor, smokeReview, inspectLastReview)
+│   │                              and syncSources (the runtime copy of the blank PDFs)
 │   ├── evals/                   # the ingest eval; review and ask evals are Canon's (canon/evals)
-│   ├── tests/                   # agent tests (tools, db, boundary); corpus tests are in canon/, engine tests in packages/engine
-│   ├── package.json             # agent deps + scripts (mastra dev, form-engine, sources:sync)
+│   ├── tests/                   # agent tests (tools, db, boundary); corpus tests are in canon/, engine tests in engine
+│   ├── package.json             # agent deps + scripts (mastra dev, sources:sync)
 │   └── tsconfig.json            # "paths" aliases @openreturn/engine to source so `mastra dev` bundles it
 └── web/                         # Next.js 16 (App Router) frontend → deployed to Vercel
     ├── app/                     # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
@@ -159,7 +161,7 @@ Two paths:
 - **UI: Delete filing** (avatar menu) → `DELETE /app/filings/:id` — removes the filing's blob directory, cascades every domain row, deletes the Mastra thread. Start a fresh filing from the home page afterwards.
 - **API: `POST /app/session/reset`** → `resetCurrentUserData` in `apps/agent/src/mastra/db/resetUserData.ts` — wipes the user's rows but keeps the filing + memberships. No UI button anymore.
 
-**Reference corpus and `packages/sources/` always survive.** To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete both `.data/` directories (`apps/agent/`, `canon/`) and re-run `npm run reset`.
+**Reference corpus and `sources/` always survive.** To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete both `.data/` directories (`apps/agent/`, `canon/`) and re-run `npm run reset`.
 
 ## Mastra schema
 
@@ -180,15 +182,15 @@ Every output form (1040, 540, 8949, Schedule D, …) is a collection of typed **
 - **`category: Category`** — which Filing Status panel bucket the field rolls up into. One of `personal_info | filing_scope | income | deductions_credits | other`.
 - **`valueType: FieldValueType`** — shape of the field's value. One of `numeric | single_select | text | boolean | date`.
 
-TypeScript enforces both. Adding a field without declaring them is a compile error — the categorization layer (`packages/engine/src/categorization/categorize.ts`) is automatically consistent because it reads `field.category` directly off each field.
+TypeScript enforces both. Adding a field without declaring them is a compile error — the categorization layer (`engine/src/categorization/categorize.ts`) is automatically consistent because it reads `field.category` directly off each field.
 
-**When adding a new form**: follow the checklist in `packages/engine/README.md` — form folder under the jurisdiction (`src/federal/<short>/` or `src/state/<st>/<short>/`, with its `catalog.json`), one `makeFormSpec` entry in that jurisdiction's `index.ts`, source documents in `packages/sources/<year>/forms/<same subpath>/`. TypeScript will fail to compile until every field has its `category` and `valueType`.
+**When adding a new form**: follow the checklist in `engine/README.md` — form folder under the jurisdiction (`src/federal/<short>/` or `src/state/<st>/<short>/`, with its `catalog.json`), one `makeFormSpec` entry in that jurisdiction's `index.ts`, source documents in `sources/<year>/forms/<same subpath>/`. TypeScript will fail to compile until every field has its `category` and `valueType`.
 
 **Header fields** (top-of-form personal info, filing-status checkboxes) are modeled as FormFields too — text/single-select kinds that derive from identity facts / scope decisions. They sit in the same `EvaluatedForm.fields` array as the numeric lines. PDF renderers continue to read raw facts directly; the header fields exist for the Filing Status panel rollup.
 
 ### Whole-dollar rounding convention — nearest dollar
 
-Tax-form lines take whole dollars, rounded to the **nearest** dollar with `roundDollars()` in `packages/engine/src/money.ts` (decided 2026-10-16). `money.ts` is the one module for engine money math: `sum`, `atLeast`, `roundDollars`, `stepsOf`, `formatDollars`, and the `Money` brand. Lint bans `Math.round` / `ceil` / `floor` / `trunc`, `toFixed`, and `toLocaleString` elsewhere in the engine's `src/`. The IRS rule (1040 instructions, "Rounding Off to Whole Dollars"): drop amounts under 50 cents, raise 50–99 cents to the next dollar.
+Tax-form lines take whole dollars, rounded to the **nearest** dollar with `roundDollars()` in `engine/src/money.ts` (decided 2026-10-16). `money.ts` is the one module for engine money math: `sum`, `atLeast`, `roundDollars`, `stepsOf`, `formatDollars`, and the `Money` brand. Lint bans `Math.round` / `ceil` / `floor` / `trunc`, `toFixed`, and `toLocaleString` elsewhere in the engine's `src/`. The IRS rule (1040 instructions, "Rounding Off to Whole Dollars"): drop amounts under 50 cents, raise 50–99 cents to the next dollar.
 
 - **Document sums** keep the cents while adding and round only the total (IRS: "include cents when adding the amounts and round off only the total"). Example: interest $9.59 + $2,287.09 = $2,296.68 → $2,297. Verified: Alejandro's CPA return, 1040 line 3a $381.40 → $381.
 - **Calculated lines** (percentages, worksheet steps, rate-schedule tax) also round to nearest. Verified against a filed 2025 return (private comparison kit) and marcus's CPA (8959: 43,500 × 0.9% = 391.50 → 392; 243,500 × 1.45% = 3,530.75 → 3,531).
@@ -277,7 +279,7 @@ Stable IDs — used everywhere as citations:
 
 ### Adding or updating a reference document
 
-Each form's instructions are described by `packages/sources/<year>/forms/<jurisdiction>/<short>/instructions.meta.json`. Publications (IRS/FTB guides to a topic across forms) are described by `packages/sources/<year>/publications/<jurisdiction>/<pub>/publication.meta.json`, and their docIds start `irs-pub-` / `ftb-pub-`. The sidecar names the source file by `sourceUrl` and `sha256` (plus `"format": "html"` for a web page); only the sidecar is committed:
+Each form's instructions are described by `sources/<year>/forms/<jurisdiction>/<short>/instructions.meta.json`. Publications (IRS/FTB guides to a topic across forms) are described by `sources/<year>/publications/<jurisdiction>/<pub>/publication.meta.json`, and their docIds start `irs-pub-` / `ftb-pub-`. The sidecar names the source file by `sourceUrl` and `sha256` (plus `"format": "html"` for a web page); only the sidecar is committed:
 
 ```json
 {
@@ -298,8 +300,8 @@ Operator flow (the `corpus` CLI — `npm run corpus` with no args lists all subc
 
 ```bash
 # 1. Download the PDF and write its sidecar (docId, title, publisher, taxYear, sourceUrl,
-#    sha256) as instructions.meta.json in packages/sources/<year>/forms/<jurisdiction>/<short>/,
-#    or publication.meta.json in packages/sources/<year>/publications/<jurisdiction>/<pub>/.
+#    sha256) as instructions.meta.json in sources/<year>/forms/<jurisdiction>/<short>/,
+#    or publication.meta.json in sources/<year>/publications/<jurisdiction>/<pub>/.
 #    Leave the PDF beside it; it is gitignored. For an FTB web page instead:
 npm run corpus -- add-html <url> --dir 2025/forms/state/ca/540 --doc-id ca-540-inst-2025
 # 2. See what's drifted vs the corpus DB:
@@ -370,14 +372,14 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 
 ### Operator CLIs and inspection scripts
 
-Canon's corpus CLI lives under `canon/scripts/corpus/`, Cade's tooling under `apps/agent/scripts/`, engine scripts under `packages/engine/scripts/`. Two subcommand CLIs (shared dispatcher in `scripts/lib/cli.ts` — no args lists subcommands, `-- <cmd> --help` shows options) plus standalone diagnostics. All run from the repo root; `--` passes args through both npm layers.
+Canon's corpus CLI lives under `canon/scripts/corpus/`, the form-engine CLI under `engine/builder/scripts/formEngine/`, Cade's tooling under `apps/agent/scripts/`, engine scripts under `engine/scripts/`. Two subcommand CLIs (each package has its own copy of the small dispatcher, `scripts/lib/cli.ts` — no args lists subcommands, `-- <cmd> --help` shows options) plus standalone diagnostics. All run from the repo root; `--` passes args through both npm layers.
 
 **`npm run corpus`** — the RAG knowledge base, end to end:
 
 | subcommand | use |
 |---|---|
 | `fetch` | install the prebuilt corpus.db (local seed or sha-verified release download) |
-| `sync` | idempotent corpus sync from the `packages/sources/**/{instructions,publication}.meta.json` sidecars; fetches source files as needed |
+| `sync` | idempotent corpus sync from the `sources/**/{instructions,publication}.meta.json` sidecars; fetches source files as needed |
 | `add-html <url> --dir …` | fetch + clean a publisher web page into a sources folder (HTML file + sidecar); re-run to refresh the sha256 |
 | `status [--strict]` | diff repo sidecars vs corpus.db (no source file needed) |
 | `ingest` | manual single-doc ingest (any PDF or HTML path; debug flags) |
@@ -385,7 +387,7 @@ Canon's corpus CLI lives under `canon/scripts/corpus/`, Cade's tooling under `ap
 | `check` | row counts + per-doc embedding coverage |
 | `search "q" [--mode …]` | invoke the production search tool |
 
-**`npm run form-engine`** — source documents (`packages/sources`) → engine assets (`packages/engine/src`): `generate-catalog`, `generate-bindings`, `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`.
+**`npm run form-engine`** — source documents (`sources`) → engine assets (`engine/src`): `generate-catalog`, `generate-bindings`, `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`. It is the builder's CLI (`engine/builder/`): put `ANTHROPIC_API_KEY` in `engine/builder/.env` for the two AI commands, and run Canon (`npm run dev:canon`) for `generate-bindings`.
 
 **Standalone diagnostics** (run via `npx tsx` from `apps/agent/`):
 
@@ -394,7 +396,7 @@ Canon's corpus CLI lives under `canon/scripts/corpus/`, Cade's tooling under `ap
 | `smokeReview.ts` | three end-to-end review scenarios (npm: `smoke:review`; needs `npm run dev:canon`) |
 | `inspectLastReview.ts` | dump most recent review-decision workflow run + trace |
 
-**Engine scripts** (run via `npx tsx` from `packages/engine/`):
+**Engine scripts** (run via `npx tsx` from `engine/`):
 
 | script | use |
 |---|---|

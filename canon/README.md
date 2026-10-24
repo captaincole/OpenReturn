@@ -5,7 +5,7 @@ Canon is the tax attorney: the IRS and FTB reference library, and the judges tha
 What it owns:
 
 - **`.data/corpus.db`** — the library: every ingested document's text, sections, blocks, embeddings and source file. Prebuilt; `npm run corpus -- fetch` installs it.
-- **`src/refdocs/`** — the ingest pipeline (parse, contextualize, embed) and **`scripts/corpus/`**, the `corpus` CLI that runs it from the sidecars in `packages/sources`.
+- **`src/refdocs/`** — the ingest pipeline (parse, contextualize, embed) and **`scripts/corpus/`**, the `corpus` CLI that runs it from the sidecars in `sources`.
 - **`src/db/`** — the corpus schema, store and hybrid search (FTS5 + local embeddings, rank fusion).
 - **`src/mastra/workflows/ask/`** — Ask The Tax Code: formulate → retrieve → answer → validate. Stateless; the caller keeps threads.
 - **`src/mastra/workflows/ground/`** — ground one decision: (gather → assess → rule) × up to `maxIterations` (default 3). The decision and its facts come in; the verdict, citations and the judges' step log go out. Stateless; the caller keeps the decision and the verdict.

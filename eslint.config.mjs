@@ -2,13 +2,13 @@
  * Small lint config, four jobs:
  *  1. Comment style — multi-line comments are starred blocks, not
  *     stacked // lines. JSDoc passes as-is. `npm run lint:fix` converts.
- *  2. Promise safety — no floating promises (type-aware, apps/ and packages/).
+ *  2. Promise safety — no floating promises (type-aware: canon/, apps/ and engine/).
  *  3. Size caps — 400 lines per file, 50 per function (100 in .tsx,
  *     where JSX inflates line counts without adding complexity).
  *     Form-specific engine files and tests are exempt. No grandfather
  *     list: existing offenders fail the gate until they are split up.
  *  4. Money rules — rounding and money formatting in the form engine go
- *     through packages/engine/src/money.ts only.
+ *     through engine/src/money.ts only.
  * Formatting is Prettier's job; correctness is tsc + the golden tests.
  */
 import stylistic from "@stylistic/eslint-plugin";
@@ -40,12 +40,12 @@ export default [
   },
   /*
    * Type-aware rules. These need type information, so they run only on
-   * files a tsconfig covers (canon, apps/agent and packages/engine:
+   * files a tsconfig covers (canon, apps/agent, engine and engine/builder:
    * src+tests+scripts; apps/web: everything). Modeled on n8n's config: a floating promise is an
    * error; an explicit `void` marks intentional fire-and-forget.
    */
   {
-    files: ["canon/**/*.ts", "apps/**/*.ts", "apps/**/*.tsx", "packages/**/*.ts"],
+    files: ["canon/**/*.ts", "apps/**/*.ts", "apps/**/*.tsx", "engine/**/*.ts"],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -84,13 +84,13 @@ export default [
    * and comments. Known exceptions carry an inline disable with a reason.
    */
   {
-    files: ["canon/**/*.ts", "apps/**/*.ts", "apps/**/*.tsx", "packages/**/*.ts"],
+    files: ["canon/**/*.ts", "apps/**/*.ts", "apps/**/*.tsx", "engine/**/*.ts"],
     rules: {
       "max-lines": ["error", { max: 400, skipBlankLines: true, skipComments: true }],
     },
   },
   {
-    files: ["canon/**/*.ts", "apps/**/*.ts", "packages/**/*.ts"],
+    files: ["canon/**/*.ts", "apps/**/*.ts", "engine/**/*.ts"],
     rules: {
       "max-lines-per-function": ["error", { max: 50, skipBlankLines: true, skipComments: true }],
     },
@@ -107,20 +107,19 @@ export default [
      * The form engine rounds and formats money in one place: money.ts.
      * A bare Math.round here would skip the IRS nearest-dollar rule.
      */
-    files: ["packages/engine/src/**/*.ts"],
-    ignores: ["packages/engine/src/money.ts", "**/*.test.ts"],
+    files: ["engine/src/**/*.ts"],
+    ignores: ["engine/src/money.ts", "**/*.test.ts"],
     rules: {
       "no-restricted-properties": [
         "error",
         ...["round", "ceil", "floor", "trunc"].map((property) => ({
           object: "Math",
           property,
-          message:
-            "Money math goes through packages/engine/src/money.ts (roundDollars, stepsOf, …).",
+          message: "Money math goes through engine/src/money.ts (roundDollars, stepsOf, …).",
         })),
         ...["toFixed", "toLocaleString"].map((property) => ({
           property,
-          message: "Money formatting goes through packages/engine/src/money.ts (formatDollars).",
+          message: "Money formatting goes through engine/src/money.ts (formatDollars).",
         })),
       ],
     },
@@ -132,9 +131,9 @@ export default [
      * readability over size.
      */
     files: [
-      "packages/engine/src/federal/**",
-      "packages/engine/src/state/**",
-      "packages/engine/tests/**",
+      "engine/src/federal/**",
+      "engine/src/state/**",
+      "engine/tests/**",
       "canon/tests/**",
       "apps/agent/tests/**",
       "**/*.test.ts",

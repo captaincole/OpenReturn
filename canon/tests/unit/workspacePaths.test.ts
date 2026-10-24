@@ -30,6 +30,6 @@ describe("workspace path aliases", () => {
     const { paths } = readJson("tsconfig.json").compilerOptions as {
       paths: Record<string, string[]>;
     };
-    expect(paths).toEqual(exportsAsPaths("../packages/sources"));
+    expect(paths).toEqual(exportsAsPaths("../sources"));
   });
 });

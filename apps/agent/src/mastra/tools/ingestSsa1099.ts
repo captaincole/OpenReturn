@@ -13,7 +13,7 @@ import { requireUserContext } from "./userContext";
  * Form RRB-1099 is not supported: its boxes differ (box 6 is the
  * workers' compensation offset; withholding is box 10).
  *
- * Convention (see packages/engine/src/facts/kinds/socialSecurity.ts):
+ * Convention (see engine/src/facts/kinds/socialSecurity.ts):
  *   category: "retirement"
  *   key:      "payer.ssa.social_security"
  */
