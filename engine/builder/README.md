@@ -39,8 +39,10 @@ npm run form-engine -- ingest-federal-tax-table   # refresh the federal tax tabl
 
 ## Setup
 
-Copy `.env.example` to `.env` here and set `ANTHROPIC_API_KEY`
-(`generate-catalog` and `generate-bindings` call Anthropic).
+Set `ANTHROPIC_API_KEY` in `.env.development` here
+(`generate-catalog` and `generate-bindings` call Anthropic). The first
+`npm run form-engine` writes that file; `.env.example` lists every
+setting. As in Canon and Cade, a `.env` file overrides it.
 `generate-bindings` also searches Canon over MCP (`src/canonSearch.ts`),
 so start it first with `npm run dev:canon`.
 

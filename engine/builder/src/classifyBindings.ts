@@ -21,8 +21,11 @@ import { formatIndexedForm, loadCatalogIndex, type CatalogIndex } from "./catalo
 import { BINDING_TOOLS, SYSTEM_PROMPT } from "./classifyBindingsPrompt.js";
 import type { RetrievedFieldContext } from "./retrieveContext.js";
 
-/* FORMS_PIPELINE_MODEL overrides the model (e.g. Haiku for a cheap draft). */
-const MODEL = process.env.FORMS_PIPELINE_MODEL ?? "claude-opus-5-5";
+/*
+ * FORMS_PIPELINE_MODEL overrides the model (e.g. Haiku for a cheap draft).
+ * Read at call time: the CLI loads its env files after the imports run.
+ */
+const model = () => process.env.FORMS_PIPELINE_MODEL ?? "claude-opus-5-5";
 const MAX_TOKENS = 16000;
 const FIELDS_PER_BATCH = 10;
 const CONCURRENCY = 3;
@@ -326,7 +329,7 @@ async function runBindingConversation(
 
   while (true) {
     const response = await client.messages.create({
-      model: MODEL,
+      model: model(),
       max_tokens: MAX_TOKENS,
       system: SYSTEM_PROMPT,
       tools: BINDING_TOOLS,

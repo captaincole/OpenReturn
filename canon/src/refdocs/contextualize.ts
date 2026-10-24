@@ -28,8 +28,9 @@ const ANTHROPIC_VERSION = "2023-06-01";
  * Mixed models across docs work mechanically (sha-skip preserves
  * existing rows), but a published corpus should use one model
  * end-to-end: rebuild fully (`corpus sync --force`) when you switch.
+ * Read at call time: the corpus CLI loads its env files after the imports run.
  */
-const SUMMARIZER_MODEL = process.env.REFDOCS_MODEL ?? "claude-haiku-5-5";
+const summarizerModel = () => process.env.REFDOCS_MODEL ?? "claude-haiku-5-5";
 
 const PROMPT_INSTRUCTION = `The chunk above lives in a larger document. Here is the chunk we want to situate within the document:
 <chunk>
@@ -100,7 +101,7 @@ export async function summarizeBlock(opts: SummarizeOpts): Promise<string> {
     : "Section: (preamble — top-level document content)";
 
   const res = await callMessages({
-    model: SUMMARIZER_MODEL,
+    model: summarizerModel(),
     max_tokens: opts.maxTokens ?? 200,
     system: `You are summarizing chunks of "${opts.documentTitle}" for a tax-law retrieval index. Each summary must let a future search find the chunk by topic, not just by keyword.`,
     messages: [

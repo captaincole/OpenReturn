@@ -50,11 +50,22 @@ async function searchTool(): Promise<SearchTool> {
   return tool;
 }
 
-/* A result arrives as the structured object, or as JSON text in `content`. */
+type McpResult = { isError?: boolean; content?: { type?: string; text?: string }[] } | null;
+
+/*
+ * A result arrives as the structured object, or as JSON text in `content`.
+ * A failed tool call arrives as `isError` with the error text in `content`.
+ */
 function unwrap(raw: unknown): unknown {
-  const content = (raw as { content?: { type?: string; text?: string }[] } | null)?.content;
-  if (!Array.isArray(content)) return raw;
-  return JSON.parse(content.map((c) => (c.type === "text" ? (c.text ?? "") : "")).join(""));
+  const r = raw as McpResult;
+  const text = r?.content?.map((c) => (c.type === "text" ? (c.text ?? "") : "")).join("") ?? "";
+  if (r?.isError) throw new Error(`Canon searchRefDocs failed: ${text || "unknown error"}`);
+  if (!Array.isArray(r?.content)) return raw;
+  try {
+    return JSON.parse(text);
+  } catch {
+    throw new Error(`Canon searchRefDocs returned non-JSON content: ${text.slice(0, 200)}`);
+  }
 }
 
 export async function searchCanon(input: { query: string; limit?: number }): Promise<SearchHit[]> {

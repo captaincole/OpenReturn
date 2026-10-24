@@ -21,6 +21,7 @@
     "predev": "node scripts/bootstrap-env.mjs",
     "predev:canon": "node scripts/bootstrap-env.mjs",
     "predev:web": "node scripts/bootstrap-env.mjs",
+    "preform-engine": "node scripts/bootstrap-env.mjs",
     "build": "npm --prefix apps/agent run build",
     "build:web": "npm --prefix apps/web run build",
     "start": "npm --prefix apps/agent run start",

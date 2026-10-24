@@ -53,7 +53,7 @@ engine/                          # @openreturn/engine — THE FORM ENGINE. Pure,
                                    the `form-engine` CLI (scripts/formEngine/) and the forms pipeline
                                    (src/: widget extraction, AI labeling, bindings drafts, tax-table
                                    parsers). Calls Anthropic; searches Canon over MCP (src/canonSearch.ts).
-                                   Its own .env (see .env.example). Never runs in production.
+                                   Its own env files (below). Never runs in production.
 sources/                         # @openreturn/sources — data only: what the IRS/FTB publish, by tax year.
                                    <year>/forms/federal/<short>/ and <year>/forms/state/<st>/<short>/
                                    hold blank.pdf, the instructions sidecar (instructions.meta.json)
@@ -106,7 +106,7 @@ npm run dev:web      # next only
 
 npm test             # engine golden suite; positional filters work (npm test -- alex)
 npm run test:unit    # engine + canon + agent unit tests (test:integration likewise)
-npm run typecheck    # tsc over engine + canon + agent
+npm run typecheck    # tsc over engine + builder + canon + agent
 npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see e2e/README.md)
 ```
 
@@ -119,7 +119,9 @@ All persistent state lives in local files: user data under `apps/agent/.data/`, 
 | `mastra.db` | Mastra runtime (threads, messages, working memory) | `@mastra/libsql` |
 | `documents/` | document blobs `{filingId}/{category}/{slug}-{ulid}.{ext}` | `db/blobStore.ts` |
 
-Pin all four paths via env (`CORPUS_DB_PATH` in Canon's env file; `APP_DB_PATH` / `MASTRA_DB_PATH` / `DOCUMENTS_PATH` in Cade's) — module-relative defaults resolve differently inside Mastra's bundled output than in tsx scripts. Cade finds Canon at `CANON_URL` (default `http://127.0.0.1:4112`). There are **no external services**: no Docker, no Postgres, no Supabase.
+Pin all four paths via env (`CORPUS_DB_PATH` in Canon's env file; `APP_DB_PATH` / `MASTRA_DB_PATH` / `DOCUMENTS_PATH` in Cade's) — module-relative defaults resolve differently inside Mastra's bundled output than in tsx scripts. Cade finds Canon at `CANON_URL` (default `http://127.0.0.1:4112`).
+
+**Env files, the same in every package** (`canon/`, `apps/agent/`, `apps/web/`, `engine/builder/`): `.env.example` (committed) lists every setting; `.env.development` (gitignored) is written on first run by `scripts/bootstrap-env.mjs` and is the file `mastra dev` reads; a gitignored `.env` holds personal overrides. The CLIs (`corpus`, `form-engine`, `doctor`) load `.env` first, then `.env.development` (dotenv never overrides a set key). They load them after their imports run, so read env at call time, not in a module-level constant. There are **no external services**: no Docker, no Postgres, no Supabase.
 
 **Auth (single-user):** identity = the instance. One `owner` row in `app.db` holds profile data (name/email) plus an scrypt password hash and the session-cookie HMAC secret — all created by the web app's first-run `/setup` screen. Login = one password → signed httpOnly cookie (`lib/localAuth.ts`, ~100 lines, node:crypto only). `proxy.ts` does an optimistic cookie-presence redirect; layouts/route handlers verify for real via `getOwnerSession()`.
 
@@ -387,7 +389,7 @@ Canon's corpus CLI lives under `canon/scripts/corpus/`, the form-engine CLI unde
 | `check` | row counts + per-doc embedding coverage |
 | `search "q" [--mode …]` | invoke the production search tool |
 
-**`npm run form-engine`** — source documents (`sources`) → engine assets (`engine/src`): `generate-catalog`, `generate-bindings`, `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`. It is the builder's CLI (`engine/builder/`): put `ANTHROPIC_API_KEY` in `engine/builder/.env` for the two AI commands, and run Canon (`npm run dev:canon`) for `generate-bindings`.
+**`npm run form-engine`** — source documents (`sources`) → engine assets (`engine/src`): `generate-catalog`, `generate-bindings`, `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`. It is the builder's CLI (`engine/builder/`): put `ANTHROPIC_API_KEY` in `engine/builder/.env.development` for the two AI commands, and run Canon (`npm run dev:canon`) for `generate-bindings`.
 
 **Standalone diagnostics** (run via `npx tsx` from `apps/agent/`):
 

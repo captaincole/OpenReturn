@@ -15,8 +15,11 @@ import type { FieldKind } from "./extractFormFields.js";
 import { renderPageWithOverlay, type OverlayWidget } from "./renderPageWithOverlay.js";
 import { createStructured } from "./structuredOutput.js";
 
-/* FORMS_PIPELINE_MODEL overrides the model (e.g. Haiku for a cheap draft). */
-const MODEL = process.env.FORMS_PIPELINE_MODEL ?? "claude-sonnet-5-5";
+/*
+ * FORMS_PIPELINE_MODEL overrides the model (e.g. Haiku for a cheap draft).
+ * Read at call time: the CLI loads its env files after the imports run.
+ */
+const model = () => process.env.FORMS_PIPELINE_MODEL ?? "claude-sonnet-5-5";
 const MAX_TOKENS = 4000;
 
 export interface VisionWidget {
@@ -81,7 +84,7 @@ export async function resolveLabelsForPage(opts: ResolveLabelsOpts): Promise<Map
   const client = new Anthropic({ apiKey });
 
   const { input } = await createStructured(client, {
-    model: MODEL,
+    model: model(),
     max_tokens: MAX_TOKENS,
     system: SYSTEM_PROMPT,
     tool: SUBMIT_LABELS_TOOL,

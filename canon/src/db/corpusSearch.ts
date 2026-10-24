@@ -15,8 +15,8 @@ import { ensureCorpusSchema, getCorpusDb } from "./libsql";
 /*
  * Corpus retrieval side: hybrid search over ref_blocks (FTS5 leg ∪
  * native-vector leg) plus the block lookup the cite tool uses. Consumed
- * by src/mastra/tools/refDocs.ts, the review-decision workflow, and the
- * forms-pipeline context retriever. The write/ingest/inspection side
+ * by src/mastra/tools/refDocs.ts (the MCP search tool, which the builder
+ * calls) and the ask and ground workflows. The write/ingest/inspection side
  * lives in corpusStore.ts.
  */
 

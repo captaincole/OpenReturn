@@ -3,24 +3,24 @@ import type { z } from "zod";
 import {
   askRunResultSchema,
   groundRunResultSchema,
-  searchResultSchema,
   type AskHistoryTurn,
   type AskRunResult,
   type GroundInput,
   type GroundRunResult,
-  type SearchHit,
 } from "./schemas";
 
 /*
  * Cade's MCP client for Canon. Canon runs as its own process (port 4112)
  * and this is the only way Cade reaches the reference library: no
- * in-process import, no shared database. Three calls:
+ * in-process import, no shared database. Two calls:
  *
- *   searchCanon   hybrid retrieval (the forms pipeline's labeling step)
  *   askCanon      Ask The Tax Code, one turn
  *   groundCanon   ground one decision: verdict, citations, step log
  *
- * The two workflow calls return a run result: `status: "ok"` with the
+ * (The builder searches Canon with its own client,
+ * engine/builder/src/canonSearch.ts.)
+ *
+ * Both are workflow calls and return a run result: `status: "ok"` with the
  * result, or `status: "failed"` with Canon's error and the steps that
  * ran before it, so the caller keeps the log either way.
  *
@@ -178,14 +178,6 @@ export async function callCanon<S extends z.ZodTypeAny>(
     throw new CanonToolError(`Canon ${name} returned an unexpected shape: ${parsed.error.message}`);
   }
   return parsed.data;
-}
-
-export async function searchCanon(input: {
-  query: string;
-  limit?: number;
-  docId?: string;
-}): Promise<SearchHit[]> {
-  return (await callCanon("searchRefDocs", input, searchResultSchema)).results;
 }
 
 export async function askCanon(input: {

@@ -9,17 +9,6 @@ import { z } from "zod";
  * zod drops the rest.
  */
 
-/* ---------- search ---------- */
-
-export const searchHitSchema = z.object({
-  blockId: z.string(),
-  docId: z.string(),
-  text: z.string(),
-  score: z.number(),
-});
-export const searchResultSchema = z.object({ results: z.array(searchHitSchema) });
-export type SearchHit = z.infer<typeof searchHitSchema>;
-
 /* ---------- ask ---------- */
 
 export type AskCoverage = "covered" | "partial" | "not_covered";

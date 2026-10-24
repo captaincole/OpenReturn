@@ -19,11 +19,14 @@ import { ingestFederalTaxTableCommand } from "./ingestFederalTaxTable";
 
 /*
  * generate-catalog and generate-bindings call Anthropic (ANTHROPIC_API_KEY),
- * and generate-bindings searches Canon (CANON_URL). Load the builder's .env
- * (see .env.example) so every subcommand sees the same vars. dotenv never
- * overrides vars already set.
+ * and generate-bindings searches Canon (CANON_URL). Same env files as Canon
+ * and Cade: .env (personal overrides) first, then .env.development (written
+ * by scripts/bootstrap-env.mjs) fills the gaps. dotenv never overrides set
+ * keys.
  */
-config({ path: resolve(__dirname, "../../.env"), quiet: true });
+const BUILDER_ROOT = resolve(__dirname, "../..");
+config({ path: resolve(BUILDER_ROOT, ".env"), quiet: true });
+config({ path: resolve(BUILDER_ROOT, ".env.development"), quiet: true });
 
 // runCli catches subcommand errors and exits itself — safe to not await.
 void runCli({

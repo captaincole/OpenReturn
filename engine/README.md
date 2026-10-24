@@ -17,7 +17,9 @@ engine/
 ├── src/        the engine (below)
 ├── tests/      unit, integration, golden, and the scenarios (tests/README.md)
 ├── scripts/    renderScenario, lockScenario, compareFiled
-└── paths.ts    where the package sits on disk, for offline tooling
+├── paths.ts    where the package sits on disk, for offline tooling
+└── builder/    @openreturn/builder: dev-time tools that build the engine's
+                assets (catalog.json, bindings drafts, tax tables; builder/README.md)
 ```
 
 Other code imports only the `exports` in `package.json`:
