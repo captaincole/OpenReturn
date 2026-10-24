@@ -14,7 +14,7 @@ import { requireUserContext } from "./userContext";
  * pumps, water heaters, furnaces, energy audits). One fact per invoice,
  * one item per piece of property.
  *
- * Convention (see packages/engine/src/facts/kinds/homeEnergy.ts):
+ * Convention (see engine/src/facts/kinds/homeEnergy.ts):
  *   category: "home_energy"
  *   key:      "vendor.{vendorSlug}.energy_invoice"
  */

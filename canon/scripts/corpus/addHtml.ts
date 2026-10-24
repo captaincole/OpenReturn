@@ -1,7 +1,7 @@
 /*
  * Add (or refresh) a corpus document whose source is a publisher web page.
  * Fetches the page, cleans it (refdocs/html/cleanFtb.ts), and writes the
- * cleaned HTML plus its sidecar into a packages/sources folder:
+ * cleaned HTML plus its sidecar into a sources folder:
  *
  *   npm run corpus -- add-html <url> --dir 2025/forms/state/ca/540 --doc-id ca-540-inst-2025
  *
@@ -52,7 +52,7 @@ async function run(argv: string[]): Promise<void> {
   const url = positionals[0];
   const kind = values.kind;
   if (!url || !values.dir || (kind !== "instructions" && kind !== "publication")) {
-    console.error("usage: add-html <url> --dir <folder under packages/sources> [--doc-id <id>]");
+    console.error("usage: add-html <url> --dir <folder under sources> [--doc-id <id>]");
     process.exit(1);
   }
   const dir = resolve(SOURCES_ROOT, values.dir);
@@ -96,7 +96,7 @@ export const addHtmlCommand: Command = {
     },
     {
       flag: "--dir <path>",
-      desc: "folder under packages/sources, e.g. 2025/forms/state/ca/540 (required)",
+      desc: "folder under sources, e.g. 2025/forms/state/ca/540 (required)",
     },
     { flag: "--doc-id <id>", desc: "stable doc id (required for a new sidecar)" },
     { flag: "--title <title>", desc: "document title (default: the page's h1)" },

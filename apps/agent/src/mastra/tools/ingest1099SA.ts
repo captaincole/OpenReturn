@@ -12,7 +12,7 @@ import { requireUserContext } from "./userContext";
  * single structured tax_facts row. The Form Engine reads it via
  * `getHsaDistributionFacts(facts)`; box 1 feeds Form 8889 line 14a.
  *
- * Convention (see packages/engine/src/facts/kinds/hsaDistribution.ts):
+ * Convention (see engine/src/facts/kinds/hsaDistribution.ts):
  *   category: "hsa"
  *   key:      "account.{accountSlug}.hsa_distributions.{distributionId}"
  *

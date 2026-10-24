@@ -3,7 +3,7 @@
  * (ask.ts), start a filing, talk Cade through
  * the intake with the W-2 upload, and wait for the generated forms. Then
  * check what the model stored and generated against Alex's fixtures
- * (packages/engine/tests/scenarios/alex).
+ * (engine/tests/scenarios/alex).
  *
  * Results go to <runDir>/summary.md, one row per stage. See summary.ts
  * for the plumbing / model split.

@@ -2,7 +2,7 @@
  * The one bridge between the db layer and the pure form engine: load a
  * filing's fact + decision rows, hand them to evaluateScenario. All I/O
  * stays on this side of the engine boundary; the engine never touches a
- * database (see packages/engine/README.md).
+ * database (see engine/README.md).
  */
 
 import { evaluateScenario, type EngineFiling, type EvaluatedScenario } from "@openreturn/engine";

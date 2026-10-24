@@ -9,8 +9,7 @@ import type { MastraModelConfig } from "@mastra/core/llm";
  *
  * The judges (grounding, Ask The Tax Code) and the retrieval embeddings
  * are Canon's models, configured in canon/.env.development (JUDGE_*,
- * EMBEDDINGS_*); Cade reaches them over MCP. The forms pipeline's
- * labeling model is operator-side tooling whose output ships prebuilt.
+ * EMBEDDINGS_*); Cade reaches them over MCP.
  *
  * Configuration contract (CADE_*):
  *

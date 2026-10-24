@@ -13,7 +13,7 @@ import { requireUserContext } from "./userContext";
  * W-2 (box c), not the employee, so it is not wage income: it records
  * a household_employment fact, never a wages fact or identity facts.
  *
- * Convention (see packages/engine/src/facts/kinds/householdEmployment.ts):
+ * Convention (see engine/src/facts/kinds/householdEmployment.ts):
  *   category: "household_employment"
  *   key:      "employee.{employeeSlug}.household_w2"
  */

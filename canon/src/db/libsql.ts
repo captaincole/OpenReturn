@@ -126,7 +126,7 @@ const CORPUS_SCHEMA_DDL: string[] = [
          )`,
   /*
    * Each document's source file, so the published corpus.db is the whole
-   * library: the files are not committed (packages/sources keeps only
+   * library: the files are not committed (sources keeps only
    * their sidecars). A PDF's bytes, or a cleaned HTML page as UTF-8 —
    * ref_documents.format says which. See db/corpusFiles.ts.
    */

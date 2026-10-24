@@ -38,7 +38,7 @@ return needs that OpenReturn lacks.
 - OpenReturn runs on your computer — follow the [Quick Start](../README.md#quick-start).
 - You have your **tax documents** (W-2, 1099s) and your **filed return** (PDF or paper).
 
-All commands below run from `packages/engine/`.
+All commands below run from `engine/`.
 
 ## Step 1 — Create your folder
 

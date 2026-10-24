@@ -9,7 +9,7 @@ import { requireUserContext } from "./userContext";
  * Ingest a W-2 as a single structured tax_facts row. The Form Engine reads
  * these via `getW2Facts(facts)` from the fact catalog.
  *
- * Convention (see packages/engine/src/facts/kinds/wages.ts):
+ * Convention (see engine/src/facts/kinds/wages.ts):
  *   category: "wages"
  *   key:      "employer.{employerSlug}"
  *   value:    W2FactValue

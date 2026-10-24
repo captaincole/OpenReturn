@@ -19,7 +19,7 @@ export interface IngestCase {
   expected: TaxFactRow[];
 }
 
-const SCENARIO_DIR = path.resolve(__dirname, "../../../../packages/engine/tests/scenarios");
+const SCENARIO_DIR = path.resolve(__dirname, "../../../../engine/tests/scenarios");
 
 /*
  * [scenario, file, document type, key patterns of the facts it produces].

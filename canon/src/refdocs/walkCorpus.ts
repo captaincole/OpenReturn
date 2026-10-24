@@ -7,7 +7,7 @@ import type { ParserStyle } from "./parse";
 import { isPublishedDate } from "./published";
 
 /*
- * Walks the @openreturn/sources tree (packages/sources/<year>/…) for corpus
+ * Walks the @openreturn/sources tree (sources/<year>/…) for corpus
  * sidecars: instructions.meta.json (form instructions, under forms/) and
  * publication.meta.json (an IRS/FTB publication, under publications/).
  * The sidecars are committed; their source files are not. A source file

@@ -33,8 +33,8 @@ describe("workspace path aliases", () => {
       paths: Record<string, string[]>;
     };
     expect(paths).toEqual({
-      ...exportsAsPaths("../../packages/engine"),
-      ...exportsAsPaths("../../packages/sources"),
+      ...exportsAsPaths("../../engine"),
+      ...exportsAsPaths("../../sources"),
     });
   });
 });

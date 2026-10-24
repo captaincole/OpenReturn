@@ -1,7 +1,7 @@
 /*
  * The Ask The Tax Code dataset: one question per case, run through the
  * production answer pipeline (workflows/askTurn). Labeled by hand against
- * corpus-v7, plus FTB Pubs 1004 and 1100 and the 3921 instructions.
+ * corpus-v8.
  *
  * Three tiers (tier1.ts, tier2.ts, tier3.ts), each with three kinds of question:
  *   tier 1     one rule, one obvious passage.

@@ -13,12 +13,12 @@
     "allowImportingTsExtensions": false,
     "types": ["node"],
     "paths": {
-      "@openreturn/engine": ["../../packages/engine/src/index.ts"],
-      "@openreturn/engine/facts": ["../../packages/engine/src/facts/index.ts"],
-      "@openreturn/engine/catalog": ["../../packages/engine/src/catalog.ts"],
-      "@openreturn/engine/paths": ["../../packages/engine/paths.ts"],
-      "@openreturn/engine/scenarios": ["../../packages/engine/tests/scenarios/index.ts"],
-      "@openreturn/sources": ["../../packages/sources/index.ts"]
+      "@openreturn/engine": ["../../engine/src/index.ts"],
+      "@openreturn/engine/facts": ["../../engine/src/facts/index.ts"],
+      "@openreturn/engine/catalog": ["../../engine/src/catalog.ts"],
+      "@openreturn/engine/paths": ["../../engine/paths.ts"],
+      "@openreturn/engine/scenarios": ["../../engine/tests/scenarios/index.ts"],
+      "@openreturn/sources": ["../../sources/index.ts"]
     }
   },
   "include": ["src/**/*.ts", "tests/**/*.ts", "scripts/**/*.ts", "evals/**/*.ts"],

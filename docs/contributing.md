@@ -30,7 +30,7 @@ The current agent Cade is built off of the [Mastra](https://mastra.ai/docs) fram
 
 The agent and the workflows use a corpus of IRS and FTB documents, form instructions and publications, to ground their information in truth and to generate the original bindings of the form engine. The corpus, its ingest pipeline and search live in Canon (`canon/`, see its [README](../canon/README.md)). Here is how that corpus is turned into our data model that the agents can then search. We store information in both vector format and in plain text format for two reasons. First, so there is a backup option if you aren't running a local embedding model, and second because if you add plain text search queries it makes the model's retrieval capabilities better for corpus search. 
 
-1. *Read* Each document has a committed sidecar (e.g. `packages/sources/2025/forms/federal/1040/instructions.meta.json` or `packages/sources/2025/publications/federal/p587/publication.meta.json`) that names its source file by URL and sha256: a PDF, or for most FTB instructions a cleaned web page. Sync gets the file (from corpus.db, or downloads it). unpdf turns a PDF into text; a web page is read from its own headings and paragraphs (`refdocs/html/`)
+1. *Read* Each document has a committed sidecar (e.g. `sources/2025/forms/federal/1040/instructions.meta.json` or `sources/2025/publications/federal/p587/publication.meta.json`) that names its source file by URL and sha256: a PDF, or for most FTB instructions a cleaned web page. Sync gets the file (from corpus.db, or downloads it). unpdf turns a PDF into text; a web page is read from its own headings and paragraphs (`refdocs/html/`)
 2. *Parse (parse.ts)* turns those text documents into sections based on headers deterministically (No AI) with stable section IDs. A web page needs no heading detection: its `h2`–`h4` are the sections. 
 3. *Contextualize (contextualize.ts)* receives each block and sends that to an LLM (haiku) that then adds contextual information as part of the block.
 4. *Store* Then we store everything in the DB, as ref_documents (parent), ref_pages, ref_sections, and ref_blocks, plus the source file itself (ref_document_files; ref_documents.format says whether it is a PDF or a web page). The source files are not in git; corpus.db is the library
@@ -45,7 +45,7 @@ Reference-corpus search runs two legs: a keyword leg (SQLite FTS5) and a semanti
 ollama pull embeddinggemma-2          # 1.3 GB; needs Ollama ≥ 0.40
 ```
 
-The prebuilt corpus (corpus-v7, via `npm run corpus -- fetch`) holds every document in `packages/sources`, with their source files, and ships EmbeddingGemma 2 vectors, so no re-embedding is needed. When you add documents, `npm run corpus -- status` lists the ones missing from your corpus and `npm run corpus -- sync` ingests them (about $0.50 of Haiku contextualization for a typical set of form instructions, more for a long publication). If you switch embedding models, run `npm run corpus -- reembed --all` (~4 min, free) — the corpus records which model built its vectors, and search refuses to mix vector spaces until you do.
+The prebuilt corpus (corpus-v8, via `npm run corpus -- fetch`) holds every document in `sources`, with their source files, and ships EmbeddingGemma 2 vectors, so no re-embedding is needed. When you add documents, `npm run corpus -- status` lists the ones missing from your corpus and `npm run corpus -- sync` ingests them (about $0.50 of Haiku contextualization for a typical set of form instructions, more for a long publication). If you switch embedding models, run `npm run corpus -- reembed --all` (~4 min, free) — the corpus records which model built its vectors, and search refuses to mix vector spaces until you do.
 
 **If Ollama isn't running, nothing breaks** — searches log a warning and fall back to keyword (FTS) matching, which is a real but lower-recall mode: exact-term queries work well, paraphrased/semantic queries suffer. Fine for end users trying the app; not fine for judging retrieval quality or developing anything RAG-adjacent. Use `npm run corpus -- search "your query" --mode vector` (vs `--mode fts`) to see each leg's behavior, and `npm run corpus -- check` to confirm every block has an embedding.
 
@@ -55,7 +55,7 @@ The embedding model is configurable via `EMBEDDINGS_MODEL` / `EMBEDDINGS_MODEL_U
 
 A scenario is one taxpayer: their documents as facts, their choices as
 decisions, and the expected value of every line on their return. They
-live in `packages/engine/tests/scenarios/<name>/` (`facts.ts`, `decisions.ts`,
+live in `engine/tests/scenarios/<name>/` (`facts.ts`, `decisions.ts`,
 `expected.ts`, `index.ts`). `npm test` runs all of them before every commit.
 
 **Every new field or document we support needs a scenario that uses it.**

@@ -1,6 +1,6 @@
 /*
- * Tiny subcommand dispatcher shared by the scripts/ CLIs (corpus,
- * form-engine).
+ * Tiny subcommand dispatcher for the corpus CLI (the builder's
+ * form-engine CLI has its own copy in engine/builder/scripts/lib/cli.ts).
  *
  * Each command module exports a `Command`: name, one-line summary,
  * options (for generated help), and a run(argv) that receives only the

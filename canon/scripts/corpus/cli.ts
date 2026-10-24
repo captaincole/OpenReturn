@@ -6,7 +6,8 @@
  *   npm run corpus -- <command>       (or: npx tsx scripts/corpus/cli.ts)
  */
 
-import "dotenv/config";
+import { config } from "dotenv";
+import { resolve } from "node:path";
 import { runCli } from "../lib/cli";
 import { addHtmlCommand } from "./addHtml";
 import { checkCommand } from "./check";
@@ -16,6 +17,17 @@ import { reembedCommand } from "./reembed";
 import { searchCommand } from "./search";
 import { statusCommand } from "./status";
 import { syncCommand } from "./sync";
+
+/*
+ * Same env files as Cade's and the builder's scripts: .env (personal
+ * overrides) first, then .env.development (the file `mastra dev` reads,
+ * written by scripts/bootstrap-env.mjs) fills the gaps. dotenv never overrides set
+ * keys. Modules read the env at call time, so loading it here is early
+ * enough.
+ */
+const CANON_ROOT = resolve(__dirname, "../..");
+config({ path: resolve(CANON_ROOT, ".env"), quiet: true });
+config({ path: resolve(CANON_ROOT, ".env.development"), quiet: true });
 
 // runCli catches subcommand errors and exits itself — safe to not await.
 void runCli({
