@@ -1,6 +1,6 @@
 import type { Agent } from "@mastra/core/agent";
 import { z } from "zod";
-import { modelFor } from "../../models";
+import { judge } from "../../judge";
 import type { EvidenceBundle, LoopCarrier } from "./schemas";
 
 /*
@@ -34,28 +34,17 @@ export async function formulateQueries(queryFormulator: Agent, c: LoopCarrier): 
     `Emit 1–2 search queries that would surface the IRS guidance governing this kind of decision.`,
   ].join("\n");
 
-  const result = await queryFormulator.generate(prompt, {
-    structuredOutput: {
-      /*
-       * Anthropic's native structured-output endpoint rejects `maxItems` on
-       * array properties. The 1–2 cap therefore lives in the prompt and the
-       * slice below, not in the schema.
-       */
-      schema: z.object({ queries: z.array(z.string()).min(1) }),
-      model: modelFor("judge"),
-      errorStrategy: "strict",
-    },
-  });
-  const obj = (result as { object?: { queries?: string[] } }).object;
-  if (!obj?.queries || obj.queries.length === 0) {
-    /*
-     * Fallback: synthesize a query from the decisionKey itself. Better
-     * than a throw — the workflow stays alive, and the step log still
-     * records which queries ran.
-     */
-    return [d.decisionKey.replace(/^decisions\./, "").replace(/_/g, " ")];
-  }
-  return obj.queries.slice(0, 2);
+  /*
+   * Anthropic's native structured-output endpoint rejects `maxItems` on
+   * array properties. The 1–2 cap therefore lives in the prompt and the
+   * slice below, not in the schema.
+   */
+  const { queries } = await judge(
+    queryFormulator,
+    prompt,
+    z.object({ queries: z.array(z.string()).min(1) }),
+  );
+  return queries.slice(0, 2);
 }
 
 export function renderAssessPrompt(c: LoopCarrier): string {

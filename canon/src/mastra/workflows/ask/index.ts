@@ -1,8 +1,7 @@
 import type { Mastra } from "@mastra/core";
-import type { Agent } from "@mastra/core/agent";
 import { createStep, createWorkflow } from "@mastra/core/workflows";
-import type { z } from "zod";
 import { hybridSearchRefDocs, type SearchHit } from "../../../db/corpusSearch";
+import { judge } from "../../judge";
 import { askAnswerSchema, type AskAnswerOutput } from "./judges/askAnswerer";
 import { askQueriesSchema } from "./judges/askQueryFormulator";
 import { mergeByRank } from "./mergeHits";
@@ -60,28 +59,6 @@ export interface AnswerQuestionInput {
    * with the caller. Otherwise the log comes back in the result only.
    */
   steps?: AskStepLog[];
-}
-
-/*
- * One structured-output judge call; the schema goes to the model as
- * response_format. The Anthropic provider bundled with Mastra uses native
- * structured output only for the Claude models it knows; for newer ones
- * it falls back to a JSON tool call, where Claude sometimes sends an
- * array as a string. "outputFormat" forces the native mode. Other
- * providers ignore the option.
- */
-async function judge<S extends z.ZodTypeAny>(
-  agent: Agent,
-  prompt: string,
-  schema: S,
-): Promise<z.infer<S>> {
-  const result = await agent.generate(prompt, {
-    structuredOutput: { schema, errorStrategy: "strict" },
-    providerOptions: { anthropic: { structuredOutputMode: "outputFormat" } },
-  });
-  const obj = (result as { object?: unknown }).object;
-  if (!obj) throw new Error(`${agent.name}: no structured output`);
-  return schema.parse(obj) as z.infer<S>;
 }
 
 /*

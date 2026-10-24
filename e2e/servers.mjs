@@ -27,6 +27,13 @@ const DATA_KEYS = ["APP_DB_PATH", "MASTRA_DB_PATH", "DOCUMENTS_PATH"];
 const DECISION_REVIEW = process.env.E2E_DECISION_REVIEW ?? "off";
 
 /*
+ * With reviews on, one judge round per decision: the run checks that a
+ * review reaches Canon and comes back, not the verdict, and each extra
+ * round is minutes on a local model. E2E_GROUND_MAX_ITERATIONS raises it.
+ */
+const GROUND_MAX_ITERATIONS = process.env.E2E_GROUND_MAX_ITERATIONS ?? "1";
+
+/*
  * E2E_CADE_MODEL / E2E_JUDGE_MODEL run a role on another model, for
  * example anthropic/claude-haiku-5-5. Its URL comes from
  * E2E_<ROLE>_MODEL_URL; without one, the model is a cloud model (key
@@ -50,7 +57,7 @@ const roleOverrides = ROLES.flatMap((r) => {
 });
 
 function agentEnvFile() {
-  const replaced = [...DATA_KEYS, "DECISION_REVIEW", ...roleKeys];
+  const replaced = [...DATA_KEYS, "DECISION_REVIEW", "CANON_GROUND_MAX_ITERATIONS", ...roleKeys];
   const source = readFileSync(join(root, "apps/agent/.env.development"), "utf8");
   const kept = source
     .split("\n")
@@ -58,6 +65,7 @@ function agentEnvFile() {
   const pinned = [
     ...DATA_KEYS.map((key) => `${key}=${process.env[key]}`),
     `DECISION_REVIEW=${DECISION_REVIEW}`,
+    `CANON_GROUND_MAX_ITERATIONS=${GROUND_MAX_ITERATIONS}`,
     ...roleOverrides.filter((line) => line.startsWith("CADE_")),
   ];
   const file = join(runDir, "agent.env");

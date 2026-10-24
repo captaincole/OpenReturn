@@ -33,6 +33,7 @@ type Ground = (
   options?: { steps?: GroundStepLog[] },
 ) => Promise<{
   verdict: string;
+  citations: { blockId: string; quote?: string }[];
   iterationCount: number;
   whatsMissing?: string;
   log: { steps: GroundStepLog[] };
@@ -115,6 +116,35 @@ describe("groundDecision", () => {
       ["additional medicare tax"],
       ["query 1"],
     ]);
+  });
+
+  it("drops a citation to a block that was not retrieved, and logs it", async () => {
+    const mastra = fakeMastra({
+      queryFormulator: formulator,
+      assessRiskAgent: assessor,
+      ruleAgent: async () => ({
+        object: {
+          result: {
+            kind: "verdict",
+            verdict: "accurate",
+            reason: "ok",
+            citations: [
+              { blockId: "block-for-additional-medicare-tax", quote: "PASSAGE for additional" },
+              { blockId: "invented" },
+            ],
+          },
+        },
+      }),
+    });
+    const out = await groundDecision(mastra, { decision });
+    expect(out.citations).toEqual([
+      { blockId: "block-for-additional-medicare-tax", quote: "PASSAGE for additional" },
+    ]);
+    const rule = out.log.steps.find((s) => s.kind === "rule")!;
+    expect((rule.output as { dropped: unknown }).dropped).toEqual({
+      blockIds: ["invented"],
+      quotes: [],
+    });
   });
 
   it("leaves the completed steps with the caller when a judge throws", async () => {

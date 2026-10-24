@@ -1,7 +1,7 @@
 import type { Mastra } from "@mastra/core";
 import { createStep, createWorkflow } from "@mastra/core/workflows";
 import { hybridSearchRefDocs } from "../../../db/corpusSearch";
-import { modelFor } from "../../models";
+import { judge } from "../../judge";
 import { decisionSummary, formulateQueries, renderAssessPrompt, renderRulePrompt } from "./prompts";
 import {
   groundInputSchema,
@@ -16,6 +16,7 @@ import {
   type LoopCarrier,
   type RuleOutput,
 } from "./schemas";
+import { validateCitations } from "./validateCitations";
 
 /*
  * Grounding one decision: (gather → assess → rule) × up to maxIterations.
@@ -25,7 +26,11 @@ import {
  *           retrieval; the evidence bundle.
  *   assess  LLM — a risk tier for the decision.
  *   rule    LLM — a verdict with citations, or a request for another
- *           retrieval round.
+ *           retrieval round; the citations are then checked against the
+ *           retrieved blocks in code (validateCitations.ts).
+ *
+ * Each judge is one model call with the output schema as its response
+ * format (judge.ts): no tools, no second structuring pass.
  *
  * Canon never sees app.db: the facts arrive with the decision, and the
  * verdict goes back with the step log for the caller to persist (Cade
@@ -107,20 +112,8 @@ async function assess(
     carrier,
     "assess",
     { decision: decisionSummary(carrier), evidence: carrier.evidence },
-    async () => {
-      const result = await mastra
-        .getAgent("assessRiskAgent")
-        .generate(renderAssessPrompt(carrier), {
-          structuredOutput: {
-            schema: riskAssessmentSchema,
-            model: modelFor("judge"),
-            errorStrategy: "strict",
-          },
-        });
-      const obj = (result as { object?: unknown }).object;
-      if (!obj) throw new Error("assess: no structured output — check model/schema compatibility");
-      return riskAssessmentSchema.parse(obj);
-    },
+    () =>
+      judge(mastra.getAgent("assessRiskAgent"), renderAssessPrompt(carrier), riskAssessmentSchema),
     (riskAssessment) => ({ riskAssessment }),
   );
   return { ...carrier, riskAssessment };
@@ -147,7 +140,7 @@ async function rule(
   carrier: LoopCarrier,
   steps: GroundStepLog[],
 ): Promise<LoopCarrier> {
-  const ruleOutput = await timed(
+  const { ruleOutput } = await timed(
     steps,
     carrier,
     "rule",
@@ -158,20 +151,19 @@ async function rule(
       prevReasons: carrier.needMoreReasons,
     },
     async () => {
-      const result = await mastra.getAgent("ruleAgent").generate(renderRulePrompt(carrier), {
-        // Allow up to 4 internal turns so cite-ref-docs verification has room.
-        maxSteps: 4,
-        structuredOutput: {
-          schema: ruleStructuredOutputSchema,
-          model: modelFor("judge"),
-          errorStrategy: "strict",
-        },
-      });
-      const obj = (result as { object?: unknown }).object;
-      if (!obj) throw new Error("rule: no structured output — check model/schema compatibility");
-      return ruleStructuredOutputSchema.parse(obj).result;
+      const { result } = await judge(
+        mastra.getAgent("ruleAgent"),
+        renderRulePrompt(carrier),
+        ruleStructuredOutputSchema,
+      );
+      if (result.kind !== "verdict") return { ruleOutput: result, dropped: undefined };
+      const { citations, dropped } = validateCitations(
+        result.citations,
+        carrier.evidence!.irsBlocks,
+      );
+      return { ruleOutput: { ...result, citations }, dropped };
     },
-    (ruleOutput) => ({ ruleOutput }),
+    (r) => r,
   );
   return advanceAfterRule(carrier, ruleOutput);
 }

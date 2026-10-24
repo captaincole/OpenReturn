@@ -101,6 +101,20 @@ export const initStep = createStep({
  * ---------------------------------------------------------------------------
  */
 
+/*
+ * CANON_GROUND_MAX_ITERATIONS caps the judges' gather → assess → rule
+ * rounds; unset leaves Canon's default (3). The e2e pins it to 1: it
+ * tests that a review reaches Canon and comes back, not the verdict.
+ */
+function groundMaxIterations(): number | undefined {
+  const raw = process.env.CANON_GROUND_MAX_ITERATIONS;
+  if (!raw) return undefined;
+  const n = Number(raw);
+  if (!Number.isInteger(n) || n < 1)
+    throw new Error(`CANON_GROUND_MAX_ITERATIONS: not a count: ${raw}`);
+  return n;
+}
+
 export const groundStep = createStep({
   id: "ground",
   inputSchema: reviewCarrierSchema,
@@ -111,11 +125,13 @@ export const groundStep = createStep({
       Object.assign(err instanceof Error ? err : new Error(String(err)), {
         reviewRunId: carrier.reviewRunId,
       });
-    const run = await groundCanon({ decision: carrier.decision, facts: carrier.facts }).catch(
-      (err: unknown) => {
-        throw withRunId(err);
-      },
-    );
+    const run = await groundCanon({
+      decision: carrier.decision,
+      facts: carrier.facts,
+      maxIterations: groundMaxIterations(),
+    }).catch((err: unknown) => {
+      throw withRunId(err);
+    });
     for (const step of run.log.steps) {
       await recordReviewStep(scope, {
         id: crypto.randomUUID(),

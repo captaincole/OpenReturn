@@ -14,14 +14,14 @@ const dir = mkdtempSync(path.join(tmpdir(), "openreturn-review-test-"));
 process.env.APP_DB_PATH = path.join(dir, "app.db");
 process.env.MASTRA_DB_PATH = path.join(dir, "mastra.db");
 
-type GroundFn = () => Promise<unknown>;
+type GroundFn = (input: unknown) => Promise<unknown>;
 let ground: GroundFn = async () => {
   throw new Error("no fake set");
 };
 
 vi.mock("../../../../src/mastra/canon/client", async (importOriginal) => {
   const real = await importOriginal<typeof import("../../../../src/mastra/canon/client")>();
-  return { ...real, groundCanon: () => ground() };
+  return { ...real, groundCanon: (input: unknown) => ground(input) };
 });
 
 const client = await import("../../../../src/mastra/canon/client");
@@ -100,6 +100,22 @@ describe("reviewDecision", () => {
     expect(out.finalVerdict).toBe("accurate");
     expect((await decisions.getDecisionById(scope, id))?.verdict).toBe("accurate");
     expect(await stepKinds(id)).toEqual(["init", "gather", "assess", "rule", "finalize"]);
+  });
+
+  it("passes CANON_GROUND_MAX_ITERATIONS to Canon, and nothing when unset", async () => {
+    const seen: unknown[] = [];
+    ground = async (input) => {
+      seen.push((input as { maxIterations?: number }).maxIterations);
+      return okRun;
+    };
+    process.env.CANON_GROUND_MAX_ITERATIONS = "1";
+    try {
+      await review.reviewDecision(scope, await seedDecision());
+    } finally {
+      delete process.env.CANON_GROUND_MAX_ITERATIONS;
+    }
+    await review.reviewDecision(scope, await seedDecision());
+    expect(seen).toEqual([1, undefined]);
   });
 
   it("stamps review_unreached when the call never reached Canon", async () => {

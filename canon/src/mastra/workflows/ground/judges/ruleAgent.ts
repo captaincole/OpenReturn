@@ -1,6 +1,5 @@
 import { Agent } from "@mastra/core/agent";
 import { modelFor } from "../../../models";
-import { citeRefDocTool } from "../../../tools/refDocs";
 import { CPA_RULES } from "./cpaRules";
 
 /*
@@ -9,11 +8,11 @@ import { CPA_RULES } from "./cpaRules";
  * union: either a final verdict (with citations) or a request for more
  * evidence (with suggested next-iteration queries).
  *
- * Tools: cite-ref-docs only. Retrieval is the gather step's job; the rule
- * agent already receives the retrieved blocks and needs cite-ref-docs only
- * to verify exact quotes for citations. (The restricted toolset prevents
- * the agent from inventing a parallel search and complicating training
- * data.)
+ * No tools. Retrieval is the gather step's job, and the agent receives
+ * the retrieved blocks' text in its prompt. Its hard rule, cite only what
+ * was retrieved and quote it word for word, is enforced after the call
+ * by validateCitations.ts, not by a lookup tool: one model call per
+ * ruling, and the training data stays one prompt → one object.
  */
 
 const baseInstructions = `You are the verdict-or-loop decider for the review-decision workflow. You see one decision the tax agent recorded, the evidence gathered for it (taxpayer facts + retrieved IRS passages), and a risk-tier assessment.
@@ -58,7 +57,4 @@ export const ruleAgent = new Agent({
   name: "Rule Agent",
   instructions,
   model: modelFor("judge"),
-  tools: {
-    citeRefDoc: citeRefDocTool,
-  },
 });
