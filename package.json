@@ -13,7 +13,7 @@
     "dev:canon": "npm --prefix canon run dev",
     "dev:web": "npm --prefix apps/web run dev",
     "dev:all": "concurrently -k -n canon,agent,web -c yellow,cyan,magenta \"npm:dev:canon\" \"npm:dev\" \"npm:dev:web\"",
-    "reset": "npm --prefix apps/agent run reset:data",
+    "reset": "npm --prefix apps/agent run reset:data && npm --prefix canon run reset:data",
     "corpus": "npm --prefix canon run corpus --",
     "bootstrap": "node scripts/bootstrap-env.mjs",
     "predev": "node scripts/bootstrap-env.mjs",

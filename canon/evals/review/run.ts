@@ -1,9 +1,9 @@
 /*
- * Review-judge eval: seed a decision and its facts, run the production
- * review-decision workflow, and score the verdict, the cited authority,
- * and whether retrieval found that authority at all.
+ * Review-judge eval: ground each case's decision with the production
+ * ground pipeline (workflows/ground) and score the verdict, the cited
+ * authority, and whether retrieval found that authority at all.
  *
- *   npx tsx --env-file=.env evals/review/run.ts <model-substring> [--runs=N] [--case=…]   (from apps/agent)
+ *   npx tsx --env-file=.env.development evals/review/run.ts <model-substring> [--runs=N] [--case=…]   (from canon)
  *
  * One model per run: the judges read JUDGE_MODEL when their module loads.
  * --case=<substring> runs only matching cases and does not publish a
@@ -14,12 +14,12 @@
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import type { GroundStepLog } from "../../src/mastra/workflows/ground/schemas";
 import { modelsFromArgs, useModel } from "../lib/models";
-import "../lib/tempDb";
 import { CASES, type ReviewCase } from "./cases";
 import { publishReport, type ReviewResult } from "./report";
 
-const REPO = path.resolve(__dirname, "../../../..");
+const REPO = path.resolve(__dirname, "../../..");
 const YEAR = 2025;
 
 const [model] = modelsFromArgs(process.argv.slice(2));
@@ -29,22 +29,15 @@ useModel("JUDGE", model);
 /* Imported after JUDGE_MODEL is set. */
 const deps = async () => {
   const { Mastra } = await import("@mastra/core");
-  const { queryFormulator, assessRiskAgent, ruleAgent, ensureCorpusSchema, getCorpusDb } =
-    await import("@openreturn/canon");
-  const workflow = await import("../../src/mastra/workflows/reviewDecision");
-  new Mastra({
-    agents: { queryFormulator, assessRiskAgent, ruleAgent },
-    workflows: { reviewDecision: workflow.reviewDecisionWorkflow },
-  });
-  return {
-    reviewDecision: workflow.reviewDecision,
-    ensureCorpusSchema,
-    getCorpusDb,
-    ...(await import("../../src/mastra/db/filings")),
-    ...(await import("../../src/mastra/db/taxFacts")),
-    ...(await import("../../src/mastra/db/aiDecisions")),
-    ...(await import("../../src/mastra/db/appDb")),
-  };
+  const { queryFormulator } =
+    await import("../../src/mastra/workflows/ground/judges/queryFormulator");
+  const { assessRiskAgent } =
+    await import("../../src/mastra/workflows/ground/judges/assessRiskAgent");
+  const { ruleAgent } = await import("../../src/mastra/workflows/ground/judges/ruleAgent");
+  const { groundDecision } = await import("../../src/mastra/workflows/ground");
+  const { getCorpusDb } = await import("../../src/db/libsql");
+  const mastra = new Mastra({ agents: { queryFormulator, assessRiskAgent, ruleAgent } });
+  return { mastra, groundDecision, getCorpusDb };
 };
 type Deps = Awaited<ReturnType<typeof deps>>;
 
@@ -61,38 +54,9 @@ async function checkAuthority(d: Deps) {
     throw new Error(`labeled blocks missing from corpus.db: ${missing.join(", ")}`);
 }
 
-async function seed(d: Deps, c: ReviewCase, run: number) {
-  const userId = `eval-${run}-${crypto.randomUUID().slice(0, 8)}`;
-  const filingId = crypto.randomUUID();
-  await d.createOwnerFiling({ filingId, userId, taxYear: YEAR });
-  const scope = { userId, filingId };
-  const base = { userId, filingId, taxYear: YEAR };
-  for (const f of c.facts)
-    await d.recordFact(scope, {
-      id: crypto.randomUUID(),
-      ...base,
-      ...f,
-      sourceNote: f.sourceNote ?? undefined,
-    });
-  const decisionId = crypto.randomUUID();
-  await d.recordDecision(scope, {
-    id: decisionId,
-    ...base,
-    ...c.decision,
-    supportingFactKeys: c.facts.map((f) => f.key),
-    confidence: "high",
-    sourceNote: "review eval",
-  });
-  return { scope, decisionId };
-}
-
-/* Every block id the gather steps retrieved, from the workflow's step log. */
-async function retrievedBlocks(d: Deps, runId: string): Promise<Set<string>> {
-  const res = await d.getAppDb().execute({
-    sql: `SELECT output_json FROM review_run_steps WHERE run_id = ? AND step_kind = 'gather'`,
-    args: [runId],
-  });
-  const json = res.rows.map((r) => String(r.output_json ?? "")).join("\n");
+/* Every block id the gather steps retrieved, from the step log. */
+function retrievedBlocks(steps: GroundStepLog[]): Set<string> {
+  const json = JSON.stringify(steps.filter((s) => s.kind === "gather").map((s) => s.output));
   return new Set([...json.matchAll(/"blockId":"([^"]+)"/g)].map((m) => m[1]));
 }
 
@@ -100,17 +64,32 @@ const hitsAll = (groups: string[][], ids: Set<string>) =>
   groups.every((g) => g.some((id) => ids.has(id)));
 
 async function evalCase(d: Deps, c: ReviewCase, run: number): Promise<ReviewResult> {
-  const { scope, decisionId } = await seed(d, c, run);
+  const steps: GroundStepLog[] = [];
   const started = Date.now();
-  const out = await d.reviewDecision(scope, decisionId);
+  const input = {
+    decision: {
+      ...c.decision,
+      taxYear: YEAR,
+      confidence: "high",
+      dissentingConsiderations: null,
+      supportingFactKeys: c.facts.map((f) => f.key),
+    },
+    facts: c.facts.map((f) => ({ ...f, sourceNote: f.sourceNote ?? null })),
+  };
+  const out = await d.groundDecision(d.mastra, input, { steps }).catch((err: unknown) => ({
+    verdict: "review_failed",
+    reason: err instanceof Error ? err.message : String(err),
+    citations: [] as { blockId: string }[],
+    iterationCount: 0,
+  }));
   const cited = out.citations.map((x) => x.blockId);
-  const retrieved = await retrievedBlocks(d, out.reviewRunId);
+  const retrieved = retrievedBlocks(steps);
   return {
     model: model.label,
     case: c.name,
     run,
     expectedVerdict: c.expectedVerdict,
-    verdict: out.finalVerdict,
+    verdict: out.verdict,
     citedAuthority: hitsAll(c.authority, new Set(cited)),
     retrievedAuthority: hitsAll(c.authority, retrieved),
     cited,

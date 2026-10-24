@@ -6,19 +6,22 @@ import { corsMiddleware } from "./server/cors";
 import { createObservability } from "./server/observability";
 import { listRefDocsRoute, refDocHtmlRoute, refDocPdfRoute } from "./server/routes/refdocs";
 import { createStorage } from "./server/storage";
+import { keepServingAfterClientLeft } from "./server/streamGuard";
 import { tokenGate } from "./server/tokenGate";
 import { askWorkflow } from "./workflows/ask";
 import { askAnswerer } from "./workflows/ask/judges/askAnswerer";
 import { askQueryFormulator } from "./workflows/ask/judges/askQueryFormulator";
+import { groundWorkflow } from "./workflows/ground";
 import { assessRiskAgent } from "./workflows/ground/judges/assessRiskAgent";
 import { queryFormulator } from "./workflows/ground/judges/queryFormulator";
 import { ruleAgent } from "./workflows/ground/judges/ruleAgent";
 
 /*
  * Canon, the tax attorney. A Mastra project with no conversational agent
- * and no user data: five narrow judges, the Ask The Tax Code workflow,
- * the reference-library routes the web app reads, and the MCP server
- * (mcp.ts) that is its contract with Cade and the engine builder.
+ * and no user data: five narrow judges, the Ask The Tax Code and ground
+ * workflows, the reference-library routes the web app reads, and the
+ * MCP server (mcp.ts) that is its contract with Cade and the engine
+ * builder.
  *
  * Port 4112 (Cade is 4111). CANON_PORT overrides it.
  */
@@ -27,10 +30,11 @@ const storage = await createStorage();
 
 /* Hoisted so the onError hook routes uncaught throws through the app logger. */
 const logger = new ConsoleLogger({ name: "canon", level: "info" });
+keepServingAfterClientLeft(logger);
 
 export const mastra = new Mastra({
   agents: { askQueryFormulator, askAnswerer, queryFormulator, assessRiskAgent, ruleAgent },
-  workflows: { ask: askWorkflow },
+  workflows: { ask: askWorkflow, ground: groundWorkflow },
   mcpServers: { canon: canonMcp },
   storage,
   logger,

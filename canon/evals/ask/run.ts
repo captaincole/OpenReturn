@@ -1,9 +1,9 @@
 /*
  * Ask The Tax Code eval: ask each question through the production answer
- * pipeline (workflows/askTurn) and score coverage, citations, retrieval
- * and the stated facts.
+ * pipeline (workflows/ask) and score coverage, citations, retrieval and
+ * the stated facts.
  *
- *   npx tsx --env-file=.env evals/ask/run.ts <model-substring> [--runs=N] [--case=…]   (from apps/agent)
+ *   npx tsx --env-file=.env.development evals/ask/run.ts <model-substring> [--runs=N] [--case=…]   (from canon)
  *
  * One model per run: the judges read JUDGE_MODEL when their module loads.
  * --case=<substring> runs only matching cases and does not publish a
@@ -13,13 +13,13 @@
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import type { AskStepLog } from "../../src/mastra/workflows/ask";
 import { modelsFromArgs, useModel } from "../lib/models";
-import "../lib/tempDb";
 import { CASES, type AskCase } from "./cases";
 import { publishReport, type AskResult } from "./report";
 import { scoreResult } from "./score";
 
-const REPO = path.resolve(__dirname, "../../../..");
+const REPO = path.resolve(__dirname, "../../..");
 
 const [model] = modelsFromArgs(process.argv.slice(2));
 if (!model) throw new Error("name one model, e.g. gemma4:31b");
@@ -28,17 +28,13 @@ useModel("JUDGE", model);
 /* Imported after JUDGE_MODEL is set. */
 const deps = async () => {
   const { Mastra } = await import("@mastra/core");
-  const { askQueryFormulator, askAnswerer, ensureCorpusSchema, getCorpusDb } =
-    await import("@openreturn/canon");
+  const { askQueryFormulator } =
+    await import("../../src/mastra/workflows/ask/judges/askQueryFormulator");
+  const { askAnswerer } = await import("../../src/mastra/workflows/ask/judges/askAnswerer");
+  const { answerQuestion } = await import("../../src/mastra/workflows/ask");
+  const { getCorpusDb } = await import("../../src/db/libsql");
   const mastra = new Mastra({ agents: { askQueryFormulator, askAnswerer } });
-  return {
-    mastra,
-    ...(await import("../../src/mastra/workflows/askTurn")),
-    ...(await import("../../src/mastra/db/askThreads")),
-    ...(await import("../../src/mastra/db/appDb")),
-    ensureCorpusSchema,
-    getCorpusDb,
-  };
+  return { mastra, answerQuestion, getCorpusDb };
 };
 type Deps = Awaited<ReturnType<typeof deps>>;
 
@@ -55,22 +51,24 @@ async function checkAuthority(d: Deps) {
     throw new Error(`labeled blocks missing from corpus.db: ${missing.join(", ")}`);
 }
 
-/* Every block id the retrieve step returned, from the turn's query log. */
-async function retrievedBlocks(d: Deps, turnId: string): Promise<Set<string>> {
-  const res = await d.getAppDb().execute({
-    sql: `SELECT log_json FROM ask_turns WHERE id = ?`,
-    args: [turnId],
-  });
-  const json = String(res.rows[0]?.log_json ?? "");
+/* Every block id the retrieve steps returned, from the query log. */
+function retrievedBlocks(steps: AskStepLog[]): Set<string> {
+  const json = JSON.stringify(steps.filter((s) => s.kind === "retrieve"));
   return new Set([...json.matchAll(/"blockId":"([^"]+)"/g)].map((m) => m[1]));
 }
 
 async function evalCase(d: Deps, c: AskCase, run: number): Promise<AskResult> {
-  const userId = `eval-${run}-${crypto.randomUUID().slice(0, 8)}`;
-  const { threadId, turnId } = await d.createAskThread(userId, c.question);
+  const steps: AskStepLog[] = [];
   const started = Date.now();
-  await d.runAskTurn(d.mastra, userId, threadId, turnId).catch(() => undefined);
-  const turn = (await d.getAskThread(userId, threadId))!.turns[0];
+  const result = await d
+    .answerQuestion(d.mastra, { question: c.question, steps })
+    .then((r) => ({ ...r, error: null as string | null }))
+    .catch((err: unknown) => ({
+      answer: "",
+      coverage: null,
+      citations: [] as { blockId: string }[],
+      error: err instanceof Error ? err.message : String(err),
+    }));
   return scoreResult({
     model: model.label,
     case: c.name,
@@ -78,15 +76,15 @@ async function evalCase(d: Deps, c: AskCase, run: number): Promise<AskResult> {
     tier: c.tier,
     kind: c.kind,
     expectedCoverage: c.coverage,
-    coverage: turn.status === "completed" ? turn.coverage : null,
-    cited: turn.citations.map((x) => x.blockId),
-    retrieved: [...(await retrievedBlocks(d, turnId))],
+    coverage: result.coverage,
+    cited: result.citations.map((x) => x.blockId),
+    retrieved: [...retrievedBlocks(steps)],
     citedAuthority: null,
     retrievedAuthority: null,
     factsOk: null,
     missingFacts: [],
-    answer: turn.answer ?? "",
-    error: turn.status === "failed" ? (turn.error ?? "failed") : null,
+    answer: result.answer,
+    error: result.error,
     latencyMs: Date.now() - started,
   });
 }

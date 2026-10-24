@@ -16,7 +16,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const DATA = join(ROOT, "apps", "agent", ".data");
-/* Canon owns the reference corpus; Cade reads the same file in-process for now. */
+/* Canon owns the reference corpus. */
 const CANON_DATA = join(ROOT, "canon", ".data");
 
 const canonEnvPath = join(ROOT, "canon", ".env.development");
@@ -58,22 +58,17 @@ if (!existsSync(agentEnvPath)) {
 # REQUIRED — the one key the app cannot run without.
 ANTHROPIC_API_KEY=
 
-# REQUIRED — which model powers each role. No in-code defaults on purpose.
+# REQUIRED — which model powers Cade. No in-code default on purpose.
 # To use a local/self-hosted OpenAI-compatible server (Ollama, LM Studio,
 # vLLM, …) set e.g. CADE_MODEL=ollama/qwen3-vl:8b and
-# CADE_MODEL_URL=http://localhost:11434/v1 (same pattern for JUDGE_*).
+# CADE_MODEL_URL=http://localhost:11434/v1.
 CADE_MODEL=anthropic/claude-sonnet-4-6
-JUDGE_MODEL=anthropic/claude-haiku-5-5
 
-# Semantic retrieval (RAG) embeds locally via Ollama — install from
-# https://ollama.com and run \`ollama pull embeddinggemma-2\`. Without Ollama
-# running, reference search falls back to keyword (FTS) matching.
-# Defaults shown; uncomment to override.
-# EMBEDDINGS_MODEL=ollama/embeddinggemma-2
-# EMBEDDINGS_MODEL_URL=http://localhost:11434
+# Canon (the reference library and the judges) runs as its own process and
+# Cade reaches it over MCP. Its models and corpus live in canon/.env.development.
+# CANON_URL=http://127.0.0.1:4112
 
-# Local data files. corpus.db is Canon's; Cade reads it in-process for now.
-CORPUS_DB_PATH=${CANON_DATA}/corpus.db
+# Local data files.
 APP_DB_PATH=${DATA}/app.db
 MASTRA_DB_PATH=${DATA}/mastra.db
 DOCUMENTS_PATH=${DATA}/documents

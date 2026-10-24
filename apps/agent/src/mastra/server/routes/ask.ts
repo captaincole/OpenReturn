@@ -34,7 +34,7 @@ async function readQuestion(c: Context): Promise<string | null> {
 
 function startTurn(c: Context, userId: string, threadId: string, turnId: string): void {
   const mastra = c.get("mastra") as Mastra;
-  void runAskTurn(mastra, userId, threadId, turnId).catch((err) => {
+  void runAskTurn(userId, threadId, turnId).catch((err) => {
     mastra.getLogger().error("ask turn failed", { threadId, turnId, err });
   });
 }

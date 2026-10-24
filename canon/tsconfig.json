@@ -16,6 +16,6 @@
       "@openreturn/sources": ["../packages/sources/index.ts"]
     }
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts", "scripts/**/*.ts"],
+  "include": ["src/**/*.ts", "tests/**/*.ts", "scripts/**/*.ts", "evals/**/*.ts"],
   "exclude": ["node_modules", ".mastra"]
 }

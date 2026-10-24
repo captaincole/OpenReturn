@@ -23,9 +23,18 @@ export type Confidence = "low" | "medium" | "high";
  * `pending` is the initial state. record-ai-decision sets it when it
  * starts the review as a background task. The workflow's finalizeStep
  * re-stamps the row on completion, typically within seconds to a minute.
+ * `review_unreached` means the review never reached Canon (the grounding
+ * service was down or timed out): the judges did not run, and the review
+ * is retried later. `review_failed` means it ran and broke.
  */
 export type Verdict =
-  "pending" | "accurate" | "inaccurate" | "ungroundable" | "needs_more_facts" | "review_failed";
+  | "pending"
+  | "accurate"
+  | "inaccurate"
+  | "ungroundable"
+  | "needs_more_facts"
+  | "review_failed"
+  | "review_unreached";
 
 export interface AuthorityCitation {
   blockId: string;

@@ -1,17 +1,17 @@
 import type { Mastra } from "@mastra/core";
-import type { Agent } from "@mastra/core/agent";
 import { createStep, createWorkflow } from "@mastra/core/workflows";
-import type { z } from "zod";
 import { hybridSearchRefDocs, type SearchHit } from "../../../db/corpusSearch";
+import { judge } from "../../judge";
 import { askAnswerSchema, type AskAnswerOutput } from "./judges/askAnswerer";
 import { askQueriesSchema } from "./judges/askQueryFormulator";
 import { mergeByRank } from "./mergeHits";
 import { renderAnswerPrompt, renderFormulatePrompt, renderHistory } from "./prompts";
 import {
   askInputSchema,
-  askResultSchema,
+  askRunResultSchema,
   type AskHistoryTurn,
   type AskResult,
+  type AskRunResult,
   type AskStage,
 } from "./types";
 import { NOT_COVERED_ANSWER, validateAnswer, type Passage } from "./validate";
@@ -59,28 +59,6 @@ export interface AnswerQuestionInput {
    * with the caller. Otherwise the log comes back in the result only.
    */
   steps?: AskStepLog[];
-}
-
-/*
- * One structured-output judge call; the schema goes to the model as
- * response_format. The Anthropic provider bundled with Mastra uses native
- * structured output only for the Claude models it knows; for newer ones
- * it falls back to a JSON tool call, where Claude sometimes sends an
- * array as a string. "outputFormat" forces the native mode. Other
- * providers ignore the option.
- */
-async function judge<S extends z.ZodTypeAny>(
-  agent: Agent,
-  prompt: string,
-  schema: S,
-): Promise<z.infer<S>> {
-  const result = await agent.generate(prompt, {
-    structuredOutput: { schema, errorStrategy: "strict" },
-    providerOptions: { anthropic: { structuredOutputMode: "outputFormat" } },
-  });
-  const obj = (result as { object?: unknown }).object;
-  if (!obj) throw new Error(`${agent.name}: no structured output`);
-  return schema.parse(obj) as z.infer<S>;
 }
 
 /*
@@ -241,8 +219,17 @@ export async function answerQuestion(
 const answerStep = createStep({
   id: "answer",
   inputSchema: askInputSchema,
-  outputSchema: askResultSchema,
-  execute: ({ inputData, mastra }) => answerQuestion(mastra, inputData),
+  outputSchema: askRunResultSchema,
+  /* The MCP-facing step: a judge failure comes back with the query log, not as a thrown error. */
+  execute: async ({ inputData, mastra }): Promise<AskRunResult> => {
+    const steps: AskStepLog[] = [];
+    try {
+      return { status: "ok", ...(await answerQuestion(mastra, { ...inputData, steps })) };
+    } catch (err) {
+      const error = err instanceof Error ? err.message : String(err);
+      return { status: "failed", error, log: { steps } };
+    }
+  },
 });
 
 export const askWorkflow = createWorkflow({
@@ -250,7 +237,7 @@ export const askWorkflow = createWorkflow({
   description:
     "Ask The Tax Code: answers one question about US federal or California tax from the IRS/FTB reference library, with numbered citations to the passages it relied on. Pass completed earlier turns as history for a follow-up. Says when the library does not cover the question.",
   inputSchema: askInputSchema,
-  outputSchema: askResultSchema,
+  outputSchema: askRunResultSchema,
 })
   .then(answerStep)
   .commit();

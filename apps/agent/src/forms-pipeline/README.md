@@ -19,10 +19,11 @@ blank.pdf ──ingest──► catalog.json ──promote──► runtime copy
   the engine, next to the form's bindings
   (`packages/engine/src/<jurisdiction>/<short>/`).
 - **`generateBindingsWorkflow/`** — drafts a `bindings.ts` skeleton for a
-  cataloged form: retrieves instruction context from the corpus
-  (`retrieveContext.ts`), classifies which fields are derivable
-  (`classifyBindings.ts`), renders the draft (`renderBindings.ts`). Output
-  is a starting point — a human finishes and owns the bindings.
+  cataloged form: retrieves instruction context through Canon's MCP
+  search (`retrieveContext.ts`; run `npm run dev:canon` first),
+  classifies which fields are derivable (`classifyBindings.ts`),
+  renders the draft (`renderBindings.ts`). Output is a starting point —
+  a human finishes and owns the bindings.
 - **`tables/`** — parsers for official rate/tax tables (IRS HTML, FTB PDF)
   into the JSON the engine's `data/` modules load.
 - **`renderPageWithOverlay.ts`** — debug renders with widget boxes drawn on

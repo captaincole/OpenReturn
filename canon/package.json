@@ -11,6 +11,7 @@
     "build": "mastra build",
     "start": "cd .mastra/output && node index.mjs",
     "corpus": "tsx scripts/corpus/cli.ts",
+    "reset:data": "rm -f .data/mastra.db .data/mastra.db-shm .data/mastra.db-wal",
     "test:unit": "vitest run tests/unit",
     "test:unit:watch": "vitest tests/unit",
     "typecheck": "tsc --noEmit -p ."

@@ -7,10 +7,10 @@
 The twin agents:
 
 - **Cade** — your CPA. The conversational front-desk agent: guides the user through the tax-prep flow, records facts and decisions, orchestrates workflows, narrates progress. First agent built.
-- **Canon** — your tax attorney. Grounds Cade's decisions in the IRS/FTB reference corpus and answers tax-code questions with citations. Canon is its own Mastra project (`canon/`, port 4112) with an MCP server (`searchRefDocs`, `citeRefDoc`, `run_ask`) and the reference-library routes. Cade still calls Canon's judges and search in-process through `@openreturn/canon` until the review and ask calls move to MCP (phase 3 of the split).
-There is exactly **one** conversational agent (Cade). Grounding is NOT a conversation: every `record-ai-decision` triggers the background **review-decision workflow** (`workflows/reviewDecision/`) — deterministic gather/retrieval plus three narrow LLM "judges" (Canon's `workflows/ground/judges/`: queryFormulator, assessRiskAgent, ruleAgent on Haiku). The judges are registered on the Mastra instance, and the steps get them with `mastra.getAgent()` (the Mastra workflow docs pattern), so their calls share the app's logger and traces.
+- **Canon** — your tax attorney. Grounds Cade's decisions in the IRS/FTB reference corpus and answers tax-code questions with citations. Canon is its own Mastra project (`canon/`, port 4112) with an MCP server (`searchRefDocs`, `citeRefDoc`, `run_ask`, `run_ground`) and the reference-library routes. Cade reaches Canon only over MCP (`apps/agent/src/mastra/canon/client.ts`); nothing in Cade imports Canon's code or opens corpus.db (`apps/agent/tests/unit/boundary.test.ts`).
+There is exactly **one** conversational agent (Cade). Grounding is NOT a conversation: every `record-ai-decision` triggers the background **review-decision workflow** (`workflows/reviewDecision/`), which hands the decision and its facts to Canon's `ground` workflow — deterministic gather/retrieval plus three narrow LLM "judges" (Canon's `workflows/ground/judges/`: queryFormulator, assessRiskAgent, ruleAgent on Haiku), looped up to `maxIterations` (default 3) inside Canon — and writes the verdict and the judges' step log back to app.db.
 
-**Tax-code Q&A ("Ask The Tax Code")** is not a conversation either: each question runs a fixed pipeline (Canon's `workflows/ask/`: formulate → retrieve → answer → validate; Cade's `workflows/askTurn/` owns the thread rows and calls it) with two more judges (askQueryFormulator, askAnswerer). A "partial" answer names its gaps as search queries; the pipeline searches once more with them and answers again. Follow-ups pass the earlier turns as context; threads live in `ask_threads`/`ask_turns` in `app.db`, whose `log_json` is the query log. `validate.ts` drops any citation or quote that does not trace to a retrieved block. The Ask eval (`apps/agent/evals/ask/`, report in `docs/evals/ask.md`) runs labeled questions through this pipeline and scores coverage, grounding, retrieval and the stated facts.
+**Tax-code Q&A ("Ask The Tax Code")** is not a conversation either: each question runs a fixed pipeline (Canon's `workflows/ask/`: formulate → retrieve → answer → validate; Cade's `workflows/askTurn/` owns the thread rows and calls it) with two more judges (askQueryFormulator, askAnswerer). A "partial" answer names its gaps as search queries; the pipeline searches once more with them and answers again. Follow-ups pass the earlier turns as context; threads live in `ask_threads`/`ask_turns` in `app.db`, whose `log_json` is the query log. `validate.ts` drops any citation or quote that does not trace to a retrieved block. The Ask eval (`canon/evals/ask/`, report in `docs/evals/ask.md`) runs labeled questions through this pipeline and scores coverage, grounding, retrieval and the stated facts.
 
 Note: the Unix working directory is still `project-merrilin` (the product's earliest name; later "Wheel of Time," then "Summa," now "OpenReturn"). The directory name was left alone to avoid churning local paths/configs. Internal names / IDs / docs use "openreturn" or "OpenReturn". The agent was "Luca" before it was Cade; old threads in mastra.db carry that id.
 
@@ -35,8 +35,10 @@ canon/                           # @openreturn/canon — CANON, the tax attorney
 │                                  prompts, schemas), server/routes/refdocs.ts (the library)
 ├── scripts/corpus/                the `corpus` CLI (npm run corpus)
 ├── seed/corpus.manifest.json      the prebuilt corpus.db release pointer
-├── tests/unit/                    refdocs, search, ask validation, boundary.test.ts (no Cade, no
-│                                  app.db, no engine imports)
+├── evals/                         model evals of Canon's pipelines (review = ground, ask); the
+│                                  reports land in docs/evals with Cade's ingest eval
+├── tests/unit/                    refdocs, search, ask validation, ground loop, boundary.test.ts
+│                                  (no Cade, no app.db, no engine imports)
 └── .data/                         corpus.db + mastra.db (gitignored)
 packages/
 ├── engine/                      # @openreturn/engine — THE FORM ENGINE. Pure, deterministic, no AI/DB/network.
@@ -58,18 +60,19 @@ packages/
                                    (catalogs, tax-table JSON) live with the engine.
 apps/
 ├── agent/                       # Mastra backend → deployed to Vercel
-│   ├── src/mastra/              # agent code (Cade, tools, db, server, workflows incl. review judges)
+│   ├── src/mastra/              # agent code (Cade, tools, db, server, workflows); canon/client.ts is
+│   │                              the MCP client, the only path to Canon.
 │   │                              loadScenario.ts is the one db↔engine bridge; formAssets.ts loads
 │   │                              blank PDFs from public/sources/<year>/forms/ (gitignored, built
 │   │                              by `npm --prefix apps/agent run sources:sync` before dev/build).
 │   ├── src/forms-pipeline/      # dev-time form-catalog ingest (widget extraction, AI labeling);
-│   │                              retrieval through @openreturn/canon (moves to engine/builder in phase 4)
+│   │                              retrieval through Canon's MCP search (moves to engine/builder in phase 4)
 │   ├── scripts/                 # operator CLI: formEngine/ subcommands on a small dispatcher
 │   │                              (scripts/lib/cli.ts), plus standalone diagnostics (smokeReview, …)
-│   ├── evals/                   # model evals (ingest, review, ask) and the combined report in docs/evals
-│   ├── tests/                   # agent tests (tools, db); corpus tests are in canon/, engine tests in packages/engine
+│   ├── evals/                   # the ingest eval; review and ask evals are Canon's (canon/evals)
+│   ├── tests/                   # agent tests (tools, db, boundary); corpus tests are in canon/, engine tests in packages/engine
 │   ├── package.json             # agent deps + scripts (mastra dev, form-engine, sources:sync)
-│   └── tsconfig.json            # "paths" aliases @openreturn/* to source so `mastra dev` bundles them
+│   └── tsconfig.json            # "paths" aliases @openreturn/engine to source so `mastra dev` bundles it
 └── web/                         # Next.js 16 (App Router) frontend → deployed to Vercel
     ├── app/                     # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
     │                              library, library/[docId]}, /documents/[id] + /api/* route handlers
@@ -114,7 +117,7 @@ All persistent state lives in local files: user data under `apps/agent/.data/`, 
 | `mastra.db` | Mastra runtime (threads, messages, working memory) | `@mastra/libsql` |
 | `documents/` | document blobs `{filingId}/{category}/{slug}-{ulid}.{ext}` | `db/blobStore.ts` |
 
-Pin all four paths via env (`CORPUS_DB_PATH` / `APP_DB_PATH` / `MASTRA_DB_PATH` / `DOCUMENTS_PATH`) — module-relative defaults resolve differently inside Mastra's bundled output than in tsx scripts. There are **no external services**: no Docker, no Postgres, no Supabase.
+Pin all four paths via env (`CORPUS_DB_PATH` in Canon's env file; `APP_DB_PATH` / `MASTRA_DB_PATH` / `DOCUMENTS_PATH` in Cade's) — module-relative defaults resolve differently inside Mastra's bundled output than in tsx scripts. Cade finds Canon at `CANON_URL` (default `http://127.0.0.1:4112`). There are **no external services**: no Docker, no Postgres, no Supabase.
 
 **Auth (single-user):** identity = the instance. One `owner` row in `app.db` holds profile data (name/email) plus an scrypt password hash and the session-cookie HMAC secret — all created by the web app's first-run `/setup` screen. Login = one password → signed httpOnly cookie (`lib/localAuth.ts`, ~100 lines, node:crypto only). `proxy.ts` does an optimistic cookie-presence redirect; layouts/route handlers verify for real via `getOwnerSession()`.
 
@@ -122,7 +125,7 @@ Pin all four paths via env (`CORPUS_DB_PATH` / `APP_DB_PATH` / `MASTRA_DB_PATH` 
 
 ## First run / factory reset
 
-`npm run reset` wipes user data (app.db, mastra.db, documents/) while **preserving corpus.db** (rebuilding it costs Haiku money for contextualization). After a reset, the web app redirects to `/setup` — create the owner account (name, email, password) — then start a filing from the home page. No seed scripts, no test users; the setup screen IS the seeding.
+`npm run reset` wipes user data (app.db, mastra.db, documents/, and Canon's mastra.db, whose ground-run snapshots carry the facts Cade sent) while **preserving corpus.db** (rebuilding it costs Haiku money for contextualization). After a reset, the web app redirects to `/setup` — create the owner account (name, email, password) — then start a filing from the home page. No seed scripts, no test users; the setup screen IS the seeding.
 
 ## Development workflow
 
@@ -232,7 +235,7 @@ The system separates two kinds of data:
 
 Decisions flow back into the case engine: a decision with key `decisions.ca_residency` becomes a fact-like input that downstream derivations can consume. This means "is this person a full-year CA resident?" can be the output of AI reasoning, and the CA 540 scoping derivation reads it like any other fact.
 
-**Two-phase pattern — decide, then ground in the background.** Every `record-ai-decision` call returns immediately with `verdict: 'pending'` and fires the review-decision workflow, which grounds the decision against the supporting facts + the IRS reference corpus and re-stamps the row: `accurate` / `inaccurate` / `needs_more_facts` / `review_failed` (legacy rows may carry `ungroundable`). `authority_citations` populates with `{blockId, quote?}[]` on `accurate`. Non-accurate verdicts also write an `open_questions` row so Cade circles back with the user. See the "Reference-document RAG" section for the corpus and retrieval pipeline.
+**Two-phase pattern — decide, then ground in the background.** Every `record-ai-decision` call returns immediately with `verdict: 'pending'` and fires the review-decision workflow, which grounds the decision against the supporting facts + the IRS reference corpus and re-stamps the row: `accurate` / `inaccurate` / `needs_more_facts` / `review_failed` / `review_unreached` (Canon never got the call; retried later). Legacy rows may carry `ungroundable`. `authority_citations` populates with `{blockId, quote?}[]` on `accurate`. Non-accurate verdicts also write an `open_questions` row so Cade circles back with the user. See the "Reference-document RAG" section for the corpus and retrieval pipeline.
 
 ## Tax facts schema
 
@@ -354,13 +357,16 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 
 ### The reviewDecision workflow
 
-`apps/agent/src/mastra/workflows/reviewDecision/` — fired in the background by `record-ai-decision` (fire-and-forget; the tool returns `pending` immediately). Shape: `init → (gather → assess → rule) ×≤3 → finalize`, driven by `reviewDecision(scope, decisionId)`.
+`apps/agent/src/mastra/workflows/reviewDecision/` — fired in the background by `record-ai-decision` (fire-and-forget; the tool returns `pending` immediately). Shape: `init → ground → finalize`, driven by `reviewDecision(scope, decisionId)`. The judges run in Canon: `ground` is one MCP call (`run_ground`) that loops `(gather → assess → rule) × ≤maxIterations` (default 3; a parameter of the call) in `canon/src/mastra/workflows/ground/`.
 
-- **gather** (deterministic) — loads the cited facts, runs hybrid retrieval per query (queries from the `queryFormulator` judge on iteration 1, from the rule step's `suggestedQueries` after).
-- **assess / rule** (LLM judges from Canon's `workflows/ground/judges/` — Haiku, structured output) — risk tier, then verdict-or-loop. `ruleAgent` may use `cite-ref-docs` (bounded, maxSteps 4) to verify quotes; hard rule: never cite a `blockId` that wasn't retrieved in this run.
-- **finalize** — persists verdict + citations; `needs_more_facts`/`inaccurate` also write an `open_questions` row.
+- **init** (Cade) — loads the decision and the facts it cites from app.db, opens the `review_runs` row.
+- **gather** (Canon, deterministic) — runs hybrid retrieval per query (queries from the `queryFormulator` judge on iteration 1, from the rule step's `suggestedQueries` after).
+- **assess / rule** (Canon's LLM judges, `workflows/ground/judges/` — Haiku, structured output) — risk tier, then verdict-or-loop. Each judge is one model call with its output schema as the response format (`canon/src/mastra/judge.ts`), no tools. The hard rule — never cite a `blockId` that wasn't retrieved in this run, and quote it word for word — is enforced in code after the rule call (`ground/validateCitations.ts`).
+- **finalize** (Cade) — persists verdict + citations; `needs_more_facts`/`inaccurate` also write an `open_questions` row. Canon's step log is written to `review_run_steps` by the ground step, one row per judge step.
+- **Reviews run one at a time** (the queue in `reviewDecision/index.ts`): the judges share one model, so parallel reviews only slow each other down and time out together (the MCP call's cap is `CANON_TIMEOUT_MS`, default 5 min; a ground call that needs longer means fewer iterations — `CANON_GROUND_MAX_ITERATIONS`, which the e2e pins to 1 — or a faster judge, never a longer cap).
+- **When Canon is down**, the decision is stamped `review_unreached` (not `review_failed`): the judges never ran. No scheduler — the next `record-ai-decision` queues every unreached review after its own, and `POST /app/filings/:filingId/reviews/retry` does it on demand.
 - Shared CPA heuristics both judges import live in Canon's `workflows/ground/judges/cpaRules.ts` — rules accumulate there as CPAs flag edge cases.
-- Every step logs to `review_run_steps` (raw input/output JSON — future fine-tuning substrate). `npm run smoke:review` is the end-to-end test (3 cases, temp DB, real Haiku calls).
+- Every step logs to `review_run_steps` (raw input/output JSON — future fine-tuning substrate). `npm run smoke:review` is the end-to-end test (3 cases, temp DB, real calls to Canon's judge model; needs Canon running, skips when it is not).
 
 ### Operator CLIs and inspection scripts
 
@@ -385,7 +391,7 @@ Canon's corpus CLI lives under `canon/scripts/corpus/`, Cade's tooling under `ap
 
 | script | use |
 |---|---|
-| `smokeReview.ts` | three end-to-end review scenarios (npm: `smoke:review`) |
+| `smokeReview.ts` | three end-to-end review scenarios (npm: `smoke:review`; needs `npm run dev:canon`) |
 | `inspectLastReview.ts` | dump most recent review-decision workflow run + trace |
 
 **Engine scripts** (run via `npx tsx` from `packages/engine/`):
@@ -398,8 +404,7 @@ Canon's corpus CLI lives under `canon/scripts/corpus/`, Cade's tooling under `ap
 
 ### Lessons from this build (read before changing the pipeline)
 
-- **Mastra `maxSteps` defaults to 5 — too low for "ungroundable" verdicts.** Nynaeve burns steps chasing publications the corpus references but doesn't include (e.g. FTB Pub 1031). When she hits the limit mid-tool-call, no final summary is produced and the structuring agent has nothing to convert → `review_failed` with "no structured output". Bump to 10 in `reviewDecision.ts` AND give the agent a hard search budget in the prompt.
-- **Mastra structured-output with tools needs `structuredOutput.model` (separate structuring agent) OR `jsonPromptInjection: true`.** We use the former — Nynaeve does tool calls naturally, then a second Haiku pass extracts structured output from her final text. Direct JSON injection conflicts with critic-style prompts where the agent reasons in prose.
+- **No judge gets a tool or a second structuring pass.** The first reviewer was one critic agent with search tools; a model cannot combine tool calls with native structured output, so a second model pass turned her prose into JSON (`structuredOutput.model`). The three-judge split kept that pass, and on Haiku it cost a second. On a local 31b each pass cost 25–60 s (more than the judging) and once looped for 12 minutes on four repeating tokens. Since 2026-10-24 every judge is one `generate` with the schema as response format (`canon/src/mastra/judge.ts`), and the rule judge's quote check is code (`validateCitations.ts`). If a judge ever needs a tool again, run the tool deterministically in the workflow step and hand the result to the prompt; don't bring the structurer back.
 - **The cookbook's "send the whole document" doesn't fit big tax docs.** 1040 instructions alone are ~211k tokens — over Haiku's 200k. We use **section-scoped context** for contextual summarization: each block is summarized with its section text as the cached prefix. Same caching benefit (cache hits across blocks within a section), no doc-size ceiling.
 - **Embedding models need their documented task prefixes.** EmbeddingGemma expects `task: search result | query: …` for queries and `title: none | text: …` for documents (applied in `src/refdocs/embeddings.ts`); skipping them silently degrades retrieval precision. When swapping embedding models, read the model card for its prompt convention — and remember vectors from different models (or dims) are never comparable, which is why `ref_meta.embedding_model` gates the vector leg.
 - **Vector literals serialize as strings, not arrays.** `vectorLiteral([1,2,3])` returns `"[1,2,3]"` — that string feeds libsql's `vector32()`. Passing a JS array silently fails or coerces. (SQLite doesn't enforce the declared `F32_BLOB` dim — only query-vs-stored dim equality matters at distance time.)

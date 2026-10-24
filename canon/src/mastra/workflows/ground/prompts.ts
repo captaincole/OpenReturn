@@ -1,60 +1,50 @@
 import type { Agent } from "@mastra/core/agent";
 import { z } from "zod";
-import { modelFor } from "../../models";
+import { judge } from "../../judge";
 import type { EvidenceBundle, LoopCarrier } from "./schemas";
 
 /*
- * Prompt rendering for the review-decision judges, plus the iteration-1
- * query formulation. Pure string-building except formulateQueries, which
- * calls the queryFormulator judge it is given. The step orchestration lives in
- * steps.ts.
+ * Prompt rendering for the grounding judges, plus the iteration-1 query
+ * formulation. Pure string-building except formulateQueries, which calls
+ * the queryFormulator judge it is given. The loop lives in index.ts.
  */
 
 /** The decision fields the judges see (and the step log records). */
 export function decisionSummary(carrier: LoopCarrier) {
+  const d = carrier.decision;
   return {
-    decisionKey: carrier.decisionKey,
-    decision: carrier.decisionValue,
-    rationale: carrier.rationale,
-    confidence: carrier.confidence,
-    dissentingConsiderations: carrier.dissentingConsiderationsInput,
-    supportingFactKeys: carrier.supportingFactKeys,
+    decisionKey: d.decisionKey,
+    decision: d.decision,
+    rationale: d.rationale,
+    confidence: d.confidence,
+    dissentingConsiderations: d.dissentingConsiderations,
+    supportingFactKeys: d.supportingFactKeys,
   };
 }
 
 export async function formulateQueries(queryFormulator: Agent, c: LoopCarrier): Promise<string[]> {
+  const d = c.decision;
   const prompt = [
     `Decision to ground:`,
-    `  decisionKey: ${c.decisionKey}`,
-    `  value: ${JSON.stringify(c.decisionValue)}`,
-    `  rationale: ${c.rationale}`,
-    `  supportingFactKeys: ${c.supportingFactKeys.join(", ") || "(none)"}`,
+    `  decisionKey: ${d.decisionKey}`,
+    `  value: ${JSON.stringify(d.decision)}`,
+    `  rationale: ${d.rationale}`,
+    `  supportingFactKeys: ${d.supportingFactKeys.join(", ") || "(none)"}`,
     ``,
     `Emit 1–2 search queries that would surface the IRS guidance governing this kind of decision.`,
   ].join("\n");
 
-  const result = await queryFormulator.generate(prompt, {
-    structuredOutput: {
-      /*
-       * Anthropic's native structured-output endpoint rejects `maxItems` on
-       * array properties. The 1–2 cap therefore lives in the prompt and the
-       * slice below, not in the schema.
-       */
-      schema: z.object({ queries: z.array(z.string()).min(1) }),
-      model: modelFor("judge"),
-      errorStrategy: "strict",
-    },
-  });
-  const obj = (result as { object?: { queries?: string[] } }).object;
-  if (!obj?.queries || obj.queries.length === 0) {
-    /*
-     * Fallback: synthesize a query from the decisionKey itself. Better
-     * than a throw — the workflow stays alive, and the step log still
-     * records which queries ran.
-     */
-    return [c.decisionKey.replace(/^decisions\./, "").replace(/_/g, " ")];
-  }
-  return obj.queries.slice(0, 2);
+  /*
+   * Anthropic's native structured-output endpoint rejects `maxItems` on
+   * array properties. The 1–2 cap therefore lives in the prompt and the
+   * slice below, not in the schema.
+   */
+  const { queries } = await judge(
+    queryFormulator,
+    prompt,
+    z.object({ queries: z.array(z.string()).min(1) }),
+  );
+  return queries.slice(0, 2);
 }
 
 export function renderAssessPrompt(c: LoopCarrier): string {
@@ -95,7 +85,7 @@ export function renderRulePrompt(c: LoopCarrier): string {
     c.needMoreReasons.length
       ? `Previous iterations asked for more evidence with these reasons:\n${c.needMoreReasons.map((r, i) => `  ${i + 1}. ${r}`).join("\n")}\n`
       : "",
-    `You are on iteration ${c.iteration} of 3. Decide: commit to a verdict, or request more evidence (with suggested queries).`,
+    `You are on iteration ${c.iteration} of ${c.maxIterations}. Decide: commit to a verdict, or request more evidence (with suggested queries).`,
   ]
     .filter((line) => line !== "")
     .join("\n");

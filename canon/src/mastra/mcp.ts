@@ -1,6 +1,7 @@
 import { MCPServer } from "@mastra/mcp";
 import { citeRefDocTool, searchRefDocsTool } from "./tools/refDocs";
 import { askWorkflow } from "./workflows/ask";
+import { groundWorkflow } from "./workflows/ground";
 
 /*
  * Canon's public surface. Mastra serves it at /api/mcp/canon/mcp
@@ -12,17 +13,18 @@ import { askWorkflow } from "./workflows/ask";
  *   searchRefDocs   hybrid retrieval over the corpus
  *   citeRefDoc      one block's verbatim text and citation
  *   run_ask         Ask The Tax Code (workflows/ask)
+ *   run_ground      ground one decision: the judges' verdict with
+ *                   citations and their step log (workflows/ground)
  *
- * Grounding a decision (the review judges) joins this list when Cade's
- * review workflow moves to the boundary. Keep the surface this small:
- * everything a consumer needs from the corpus should fit in these tools.
+ * Keep the surface this small: everything a consumer needs from the
+ * corpus should fit in these tools.
  */
 export const canonMcp = new MCPServer({
   id: "canon",
   name: "Canon",
   version: "0.1.0",
   description:
-    "The IRS and FTB reference library: search it, cite it, and ask it a tax-code question.",
+    "The IRS and FTB reference library: search it, cite it, ask it a tax-code question, and ground a tax decision in it.",
   tools: { searchRefDocs: searchRefDocsTool, citeRefDoc: citeRefDocTool },
-  workflows: { ask: askWorkflow },
+  workflows: { ask: askWorkflow, ground: groundWorkflow },
 });
