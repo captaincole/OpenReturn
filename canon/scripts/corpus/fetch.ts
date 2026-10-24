@@ -19,7 +19,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Command } from "../lib/cli";
 
-const HERE = dirname(fileURLToPath(import.meta.url)); // apps/agent/scripts/corpus
+const HERE = dirname(fileURLToPath(import.meta.url)); // cade/scripts/corpus
 const MANIFEST_PATH = resolve(HERE, "../../seed/corpus.manifest.json");
 const DEFAULT_TARGET = resolve(HERE, "../../.data/corpus.db");
 

@@ -4,7 +4,7 @@ Scenario tests should cover *EVERY* supported form field at some level. This is 
 
 Every test for `@openreturn/engine` lives here. No test file goes under `src/`
 or `scripts/`; `unit/layout.test.ts` fails on one. The agent's own tests
-(tools, db, refdocs) are in `apps/agent/tests/`.
+(tools, db, refdocs) are in `cade/tests/`.
 
 | Folder | Kind | Command (repo root) |
 | --- | --- | --- |

@@ -10,11 +10,11 @@
 # Generated files — regeneration would undo formatting
 engine/src/federal/*/types.ts
 engine/src/state/*/*/types.ts
-apps/web/next-env.d.ts
+web/next-env.d.ts
 
 # Form assets and catalogs (large, partly generated)
 sources/
-apps/agent/src/mastra/public/sources/
+cade/src/mastra/public/sources/
 
 # Lockfiles
 **/package-lock.json

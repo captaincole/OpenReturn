@@ -2,7 +2,7 @@
  * Small lint config, four jobs:
  *  1. Comment style — multi-line comments are starred blocks, not
  *     stacked // lines. JSDoc passes as-is. `npm run lint:fix` converts.
- *  2. Promise safety — no floating promises (type-aware: canon/, apps/ and engine/).
+ *  2. Promise safety — no floating promises (type-aware: canon/, cade/, web/ and engine/).
  *  3. Size caps — 400 lines per file, 50 per function (100 in .tsx,
  *     where JSX inflates line counts without adding complexity).
  *     Form-specific engine files and tests are exempt. No grandfather
@@ -40,12 +40,12 @@ export default [
   },
   /*
    * Type-aware rules. These need type information, so they run only on
-   * files a tsconfig covers (canon, apps/agent, engine and engine/builder:
-   * src+tests+scripts; apps/web: everything). Modeled on n8n's config: a floating promise is an
+   * files a tsconfig covers (canon, cade, engine and engine/builder:
+   * src+tests+scripts; web: everything). Modeled on n8n's config: a floating promise is an
    * error; an explicit `void` marks intentional fire-and-forget.
    */
   {
-    files: ["canon/**/*.ts", "apps/**/*.ts", "apps/**/*.tsx", "engine/**/*.ts"],
+    files: ["canon/**/*.ts", "cade/**/*.ts", "web/**/*.ts", "web/**/*.tsx", "engine/**/*.ts"],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -71,7 +71,7 @@ export default [
    * warns, and intentional sites carry an eslint-disable with a reason.
    */
   {
-    files: ["apps/web/**/*.tsx", "apps/web/**/*.ts"],
+    files: ["web/**/*.tsx", "web/**/*.ts"],
     plugins: { "react-hooks": reactHooks },
     rules: {
       "react-hooks/rules-of-hooks": "error",
@@ -84,20 +84,20 @@ export default [
    * and comments. Known exceptions carry an inline disable with a reason.
    */
   {
-    files: ["canon/**/*.ts", "apps/**/*.ts", "apps/**/*.tsx", "engine/**/*.ts"],
+    files: ["canon/**/*.ts", "cade/**/*.ts", "web/**/*.ts", "web/**/*.tsx", "engine/**/*.ts"],
     rules: {
       "max-lines": ["error", { max: 400, skipBlankLines: true, skipComments: true }],
     },
   },
   {
-    files: ["canon/**/*.ts", "apps/**/*.ts", "engine/**/*.ts"],
+    files: ["canon/**/*.ts", "cade/**/*.ts", "web/**/*.ts", "engine/**/*.ts"],
     rules: {
       "max-lines-per-function": ["error", { max: 50, skipBlankLines: true, skipComments: true }],
     },
   },
   {
     /* JSX markup inflates line counts without adding complexity. */
-    files: ["apps/**/*.tsx"],
+    files: ["web/**/*.tsx"],
     rules: {
       "max-lines-per-function": ["error", { max: 100, skipBlankLines: true, skipComments: true }],
     },
@@ -135,7 +135,7 @@ export default [
       "engine/src/state/**",
       "engine/tests/**",
       "canon/tests/**",
-      "apps/agent/tests/**",
+      "cade/tests/**",
       "**/*.test.ts",
     ],
     rules: {

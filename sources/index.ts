@@ -8,7 +8,7 @@
  *                                      jurisdiction is federal or state/<st>,
  *                                      as under forms/
  * Offline tools read from here; the agent copies the runtime files
- * (blank PDFs, instructions, publications) into its runtime tree (apps/agent
+ * (blank PDFs, instructions, publications) into its runtime tree (cade
  * scripts/syncSources.ts).
  */
 

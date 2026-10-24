@@ -1,6 +1,6 @@
 /*
  * Zero-config first boot: generate .env.development for each package
- * (canon, apps/agent, apps/web, engine/builder) when missing, with the .data paths filled in as absolute paths for THIS
+ * (canon, cade, web, engine/builder) when missing, with the .data paths filled in as absolute paths for THIS
  * clone. Module-relative defaults resolve differently inside Mastra's
  * bundled output than in tsx scripts. Pinned absolute paths keep every
  * entry point on the same files.
@@ -16,13 +16,13 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
-const DATA = join(ROOT, "apps", "agent", ".data");
+const DATA = join(ROOT, "cade", ".data");
 /* Canon owns the reference corpus. */
 const CANON_DATA = join(ROOT, "canon", ".data");
 
 const canonEnvPath = join(ROOT, "canon", ".env.development");
-const agentEnvPath = join(ROOT, "apps", "agent", ".env.development");
-const webEnvPath = join(ROOT, "apps", "web", ".env.development");
+const agentEnvPath = join(ROOT, "cade", ".env.development");
+const webEnvPath = join(ROOT, "web", ".env.development");
 const builderEnvPath = join(ROOT, "engine", "builder", ".env.development");
 
 let wrote = false;
@@ -115,6 +115,6 @@ ANTHROPIC_API_KEY=
 if (wrote) {
   console.log(
     "[bootstrap] first run: set ANTHROPIC_API_KEY in canon/.env.development and" +
-      " apps/agent/.env.development, then `npm run corpus -- fetch` for the prebuilt reference corpus.",
+      " cade/.env.development, then `npm run corpus -- fetch` for the prebuilt reference corpus.",
   );
 }

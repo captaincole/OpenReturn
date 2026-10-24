@@ -7,7 +7,7 @@
 The twin agents:
 
 - **Cade** — your CPA. The conversational front-desk agent: guides the user through the tax-prep flow, records facts and decisions, orchestrates workflows, narrates progress. First agent built.
-- **Canon** — your tax attorney. Grounds Cade's decisions in the IRS/FTB reference corpus and answers tax-code questions with citations. Canon is its own Mastra project (`canon/`, port 4112) with an MCP server (`searchRefDocs`, `citeRefDoc`, `run_ask`, `run_ground`) and the reference-library routes. Cade reaches Canon only over MCP (`apps/agent/src/mastra/canon/client.ts`); nothing in Cade imports Canon's code or opens corpus.db (`apps/agent/tests/unit/boundary.test.ts`).
+- **Canon** — your tax attorney. Grounds Cade's decisions in the IRS/FTB reference corpus and answers tax-code questions with citations. Canon is its own Mastra project (`canon/`, port 4112) with an MCP server (`searchRefDocs`, `citeRefDoc`, `run_ask`, `run_ground`) and the reference-library routes. Cade reaches Canon only over MCP (`cade/src/mastra/canon/client.ts`); nothing in Cade imports Canon's code or opens corpus.db (`cade/tests/unit/boundary.test.ts`).
 There is exactly **one** conversational agent (Cade). Grounding is NOT a conversation: every `record-ai-decision` triggers the background **review-decision workflow** (`workflows/reviewDecision/`), which hands the decision and its facts to Canon's `ground` workflow — deterministic gather/retrieval plus three narrow LLM "judges" (Canon's `workflows/ground/judges/`: queryFormulator, assessRiskAgent, ruleAgent on Haiku), looped up to `maxIterations` (default 3) inside Canon — and writes the verdict and the judges' step log back to app.db.
 
 **Tax-code Q&A ("Ask The Tax Code")** is not a conversation either: each question runs a fixed pipeline (Canon's `workflows/ask/`: formulate → retrieve → answer → validate; Cade's `workflows/askTurn/` owns the thread rows and calls it) with two more judges (askQueryFormulator, askAnswerer). A "partial" answer names its gaps as search queries; the pipeline searches once more with them and answers again. Follow-ups pass the earlier turns as context; threads live in `ask_threads`/`ask_turns` in `app.db`, whose `log_json` is the query log. `validate.ts` drops any citation or quote that does not trace to a retrieved block. The Ask eval (`canon/evals/ask/`, report in `docs/evals/ask.md`) runs labeled questions through this pipeline and scores coverage, grounding, retrieval and the stated facts.
@@ -24,7 +24,7 @@ Everything routes through a `tax_facts` table (libsql/SQLite, `.data/app.db`) wh
 
 ## Repo structure
 
-This is a monorepo. `canon`, `apps/agent`, `engine`, `engine/builder` and `sources` are npm workspaces with one root lockfile; `apps/web` installs on its own. Select the engine by name in npm commands (`npm -w @openreturn/engine`): `-w engine` also selects the nested builder. The target layout is flat (`canon/ cade/ engine/ sources/ web/`); `apps/agent` and `apps/web` move in phase 5:
+This is a monorepo. `canon`, `cade`, `engine`, `engine/builder` and `sources` are npm workspaces with one root lockfile; `web` installs on its own. Select the engine by name in npm commands (`npm -w @openreturn/engine`): `-w engine` also selects the nested builder. The layout is flat: each top-level folder builds and runs on its own.
 
 ```
 canon/                           # @openreturn/canon — CANON, the tax attorney. Mastra project, port 4112.
@@ -62,27 +62,27 @@ sources/                         # @openreturn/sources — data only: what the I
                                    (PDFs, or cleaned FTB web pages) are not committed: corpus.db
                                    stores them. Files we generate
                                    (catalogs, tax-table JSON) live with the engine.
-apps/
-├── agent/                       # Mastra backend → deployed to Vercel
-│   ├── src/mastra/              # agent code (Cade, tools, db, server, workflows); canon/client.ts is
-│   │                              the MCP client, the only path to Canon.
-│   │                              loadScenario.ts is the one db↔engine bridge; formAssets.ts loads
-│   │                              blank PDFs from public/sources/<year>/forms/ (gitignored, built
-│   │                              by `npm --prefix apps/agent run sources:sync` before dev/build).
-│   ├── scripts/                 # standalone diagnostics (doctor, smokeReview, inspectLastReview)
-│   │                              and syncSources (the runtime copy of the blank PDFs)
-│   ├── evals/                   # the ingest eval; review and ask evals are Canon's (canon/evals)
-│   ├── tests/                   # agent tests (tools, db, boundary); corpus tests are in canon/, engine tests in engine
-│   ├── package.json             # agent deps + scripts (mastra dev, sources:sync)
-│   └── tsconfig.json            # "paths" aliases @openreturn/engine to source so `mastra dev` bundles it
-└── web/                         # Next.js 16 (App Router) frontend → deployed to Vercel
-    ├── app/                     # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
-    │                              library, library/[docId]}, /documents/[id] + /api/* route handlers
-    ├── components/              # AppShell, ChatPane, ActivityCard, PlanCard, TopBar, Markdown
-    ├── lib/                     # localAuth, serverDb, api, ask, activity, mastraClient, uploads, …
-    ├── proxy.ts                 # Next.js 16 Proxy (renamed Middleware): optimistic session-cookie gate
-    ├── package.json             # web deps + scripts (next dev, next build)
-    └── next.config.ts
+cade/                            # @openreturn/cade — CADE, the AI CPA. Mastra project, port 4111 → Vercel.
+├── src/mastra/                  # agent code (Cade, tools, db, server, workflows); canon/client.ts is
+│                                  the MCP client, the only path to Canon.
+│                                  loadScenario.ts is the one db↔engine bridge; formAssets.ts loads
+│                                  blank PDFs from public/sources/<year>/forms/ (gitignored, built
+│                                  by `npm --prefix cade run sources:sync` before dev/build).
+├── scripts/                     # standalone diagnostics (doctor, smokeReview, inspectLastReview)
+│                                  and syncSources (the runtime copy of the blank PDFs)
+├── evals/                       # the ingest eval; review and ask evals are Canon's (canon/evals)
+├── tests/                       # agent tests (tools, db, boundary); corpus tests are in canon/, engine tests in engine
+├── package.json                 # agent deps + scripts (mastra dev, sources:sync)
+└── tsconfig.json                # "paths" aliases @openreturn/engine to source so `mastra dev` bundles it
+web/                             # Next.js 16 (App Router) frontend → deployed to Vercel
+├── app/                         # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
+│                                  library, library/[docId]}, /documents/[id] + /api/* route handlers
+├── components/                  # AppShell, ChatPane, ActivityCard, PlanCard, TopBar, Markdown
+├── lib/                         # localAuth, serverDb, api, ask, activity, mastraClient, uploads, …
+├── e2e/                         # Playwright E2E: drives web + Cade + Canon + a real model (npm run e2e)
+├── proxy.ts                     # Next.js 16 Proxy (renamed Middleware): optimistic session-cookie gate
+├── package.json                 # web deps + scripts (next dev, next build, e2e)
+└── next.config.ts
 
 (no other top-level infra — auth is a password gate in the web app; see below)
 package.json                     # workspace root: workspaces + thin delegating scripts (dev, dev:all, test, …)
@@ -93,10 +93,10 @@ The agent uses the engine only through `@openreturn/engine`'s exports. The web a
 
 ## Running it
 
-Three services: Canon (:4112), Cade (:4111) and the web app (:3000). Run all three — backend changes hot-reload via Mastra file-watching, frontend changes HMR via Next.js (Turbopack). All commands run from the repo root; root scripts delegate via `npm --prefix apps/<app>` (or `canon`).
+Three services: Canon (:4112), Cade (:4111) and the web app (:3000). Run all three — backend changes hot-reload via Mastra file-watching, frontend changes HMR via Next.js (Turbopack). All commands run from the repo root; root scripts delegate via `npm --prefix <folder>` (`canon`, `cade`, `web`).
 
 ```bash
-npm run install:all                         # installs the workspaces (root) + apps/web
+npm run install:all                         # installs the workspaces (root) + web
 npm run dev:all                             # canon (:4112) + cade (:4111) + next (:3000) — that's everything
 
 # or run them separately:
@@ -107,10 +107,10 @@ npm run dev:web      # next only
 npm test             # engine golden suite; positional filters work (npm test -- alex)
 npm run test:unit    # engine + canon + agent unit tests (test:integration likewise)
 npm run typecheck    # tsc over engine + builder + canon + agent
-npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see e2e/README.md)
+npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see web/e2e/README.md)
 ```
 
-All persistent state lives in local files: user data under `apps/agent/.data/`, the corpus under `canon/.data/` ("the DB is a file"):
+All persistent state lives in local files: user data under `cade/.data/`, the corpus under `canon/.data/` ("the DB is a file"):
 
 | file | contents | owner |
 | --- | --- | --- |
@@ -121,7 +121,7 @@ All persistent state lives in local files: user data under `apps/agent/.data/`, 
 
 Pin all four paths via env (`CORPUS_DB_PATH` in Canon's env file; `APP_DB_PATH` / `MASTRA_DB_PATH` / `DOCUMENTS_PATH` in Cade's) — module-relative defaults resolve differently inside Mastra's bundled output than in tsx scripts. Cade finds Canon at `CANON_URL` (default `http://127.0.0.1:4112`).
 
-**Env files, the same in every package** (`canon/`, `apps/agent/`, `apps/web/`, `engine/builder/`): `.env.example` (committed) lists every setting; `.env.development` (gitignored) is written on first run by `scripts/bootstrap-env.mjs` and is the file `mastra dev` reads; a gitignored `.env` holds personal overrides. The CLIs (`corpus`, `form-engine`, `doctor`) load `.env` first, then `.env.development` (dotenv never overrides a set key). They load them after their imports run, so read env at call time, not in a module-level constant. There are **no external services**: no Docker, no Postgres, no Supabase.
+**Env files, the same in every package** (`canon/`, `cade/`, `web/`, `engine/builder/`): `.env.example` (committed) lists every setting; `.env.development` (gitignored) is written on first run by `scripts/bootstrap-env.mjs` and is the file `mastra dev` reads; a gitignored `.env` holds personal overrides. The CLIs (`corpus`, `form-engine`, `doctor`) load `.env` first, then `.env.development` (dotenv never overrides a set key). They load them after their imports run, so read env at call time, not in a module-level constant. There are **no external services**: no Docker, no Postgres, no Supabase.
 
 **Auth (single-user):** identity = the instance. One `owner` row in `app.db` holds profile data (name/email) plus an scrypt password hash and the session-cookie HMAC secret — all created by the web app's first-run `/setup` screen. Login = one password → signed httpOnly cookie (`lib/localAuth.ts`, ~100 lines, node:crypto only). `proxy.ts` does an optimistic cookie-presence redirect; layouts/route handlers verify for real via `getOwnerSession()`.
 
@@ -135,7 +135,7 @@ Pin all four paths via env (`CORPUS_DB_PATH` in Canon's env file; `APP_DB_PATH` 
 
 We're building agent + UI together. When changes touch both, expect to:
 
-1. **Edit code** (backend in `apps/agent/src/mastra/`, frontend in `apps/web/{app,components,lib}/`).
+1. **Edit code** (backend in `cade/src/mastra/`, frontend in `web/{app,components,lib}/`).
 2. **Watch logs** for errors. Three places to look:
    - **Mastra log** — backend errors, agent traces, tool-call output. When Claude runs mastra in the background it writes to that background task's output file; otherwise it's whatever terminal you started `npm run dev` in.
    - **Mastra Studio** at http://localhost:4111 (Canon's at :4112) — the **Observability** tab shows full agent traces (which tools fired, with what args, in what order). This is the right place to debug "why did Cade do X?".
@@ -155,15 +155,15 @@ Limits worth remembering:
 
 ### Claude verifies the whole stack with `npm run e2e`
 
-After a change to the web app, the agent tools, or document generation, run `npm run e2e` in the background (a few minutes; the models come from `apps/agent/.env.development` (Canon's from `canon/.env.development`) and optional `E2E_*` lines in the gitignored `apps/agent/.env`, see e2e/README.md). Read `e2e/.run/<runId>/summary.md`. A `plumbing` failure means the change probably broke the app. A `model` failure can be a model mistake: run again before you debug. `dev:all` must be stopped first.
+After a change to the web app, the agent tools, or document generation, run `npm run e2e` in the background (a few minutes; the models come from `cade/.env.development` (Canon's from `canon/.env.development`) and optional `E2E_*` lines in the gitignored `cade/.env`, see web/e2e/README.md). Read `web/e2e/.run/<runId>/summary.md`. A `plumbing` failure means the change probably broke the app. A `model` failure can be a model mistake: run again before you debug. `dev:all` must be stopped first.
 
 ### Resetting user data
 
 Two paths:
 - **UI: Delete filing** (avatar menu) → `DELETE /app/filings/:id` — removes the filing's blob directory, cascades every domain row, deletes the Mastra thread. Start a fresh filing from the home page afterwards.
-- **API: `POST /app/session/reset`** → `resetCurrentUserData` in `apps/agent/src/mastra/db/resetUserData.ts` — wipes the user's rows but keeps the filing + memberships. No UI button anymore.
+- **API: `POST /app/session/reset`** → `resetCurrentUserData` in `cade/src/mastra/db/resetUserData.ts` — wipes the user's rows but keeps the filing + memberships. No UI button anymore.
 
-**Reference corpus and `sources/` always survive.** To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete both `.data/` directories (`apps/agent/`, `canon/`) and re-run `npm run reset`.
+**Reference corpus and `sources/` always survive.** To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete both `.data/` directories (`cade/`, `canon/`) and re-run `npm run reset`.
 
 ## Mastra schema
 
@@ -213,9 +213,9 @@ const line18 = roundDollars(line17 * 0.15);                     // calculated li
 
 Production runtime logs for the agent come through `vercel logs`, but with gotchas:
 
-- **Run from `apps/agent/`** — the linked project's directory. From the repo root, the CLI uses the wheel-of-finances project context and returns nothing for the agent. `apps/agent/.vercel/project.json` (gitignored) is what scopes the call.
+- **Run from `cade/`** — the linked project's directory. From the repo root, the CLI uses the wheel-of-finances project context and returns nothing for the agent. `cade/.vercel/project.json` (gitignored) is what scopes the call.
 - **`/health` bypasses user middleware.** Mastra special-cases its framework routes; a `/health` hit doesn't fire `server.middleware`, so it won't show your `console.log` lines. Test logging via `/api/*` or `/app/*` instead.
-- **We don't use Mastra's `PinoLogger`** — its default destination is async-buffered and gets truncated on Vercel function exit, swallowing every log line on requests that error. We ship `ConsoleLogger` (`apps/agent/src/mastra/server/consoleLogger.ts`) instead — a ~70-line `MastraLogger` subclass that writes single-line JSON via `console.{log,warn,error}`. `vercel logs --json` parses each line into its structured fields. Use `mastra.getLogger()` (or `logger.error("msg", { err })`) anywhere new error paths land; no need for ad-hoc `console.log`.
+- **We don't use Mastra's `PinoLogger`** — its default destination is async-buffered and gets truncated on Vercel function exit, swallowing every log line on requests that error. We ship `ConsoleLogger` (`cade/src/mastra/server/consoleLogger.ts`) instead — a ~70-line `MastraLogger` subclass that writes single-line JSON via `console.{log,warn,error}`. `vercel logs --json` parses each line into its structured fields. Use `mastra.getLogger()` (or `logger.error("msg", { err })`) anywhere new error paths land; no need for ad-hoc `console.log`.
 - **Useful flags:** `--since 30m --limit 30 --expand` (historical), `--follow` (live tail), `--json` (richer per-request record incl. `responseStatusCode`, `cache`, structured `logs` array). No duration field — log timings yourself in middleware if needed.
 - **Build logs (separate from runtime):** `vercel inspect <deployment-url> --logs`.
 
@@ -245,7 +245,7 @@ Decisions flow back into the case engine: a decision with key `decisions.ca_resi
 
 `tax_facts` rows are keyed by `(taxpayer_id, year, category, fact_key)` in spirit — we don't enforce uniqueness yet because we want an append-only audit log of what was told to us and when.
 
-Categories (see `apps/agent/src/mastra/tools/taxFacts.ts` for the enum):
+Categories (see `cade/src/mastra/tools/taxFacts.ts` for the enum):
 `identity`, `filing_status`, `dependents`, `wages`, `self_employment`, `k1`, `investment_income`, `capital_gains`, `rental`, `retirement`, `hsa`, `charitable`, `mortgage`, `state_local_tax`, `medical`, `education`, `estimated_payments`, `crypto`, `foreign`, `trust_estate`, `other`.
 
 Add categories as the domain grows. Prefer splitting over lumping (it's easier to roll up later than to untangle a bucket).
@@ -275,7 +275,7 @@ Stable IDs — used everywhere as citations:
 - `irs-1040-inst-2025::sec::single` (section)
 - `irs-1040-inst-2025::sec::single::b01` (block — section-anchored: the 1st block under that heading; a parser change elsewhere in the doc does not renumber it)
 
-**corpus.db is the library.** It holds every document's text, sections, blocks, embeddings, and its source file (`ref_document_files`): a PDF's bytes, or a cleaned web page as UTF-8. `ref_documents.format` (`pdf` | `html`) says which; the reference library's "Open PDF" serves PDFs from there, and its `/library/<docId>` page renders HTML documents (styled by `.ref-doc` in `apps/web/app/globals.css`). Git holds only the sidecars, each with the source file's `sha256`: the source files and the extracted `*.canonical.txt` text are gitignored build files, written next to the sidecar when sync ingests.
+**corpus.db is the library.** It holds every document's text, sections, blocks, embeddings, and its source file (`ref_document_files`): a PDF's bytes, or a cleaned web page as UTF-8. `ref_documents.format` (`pdf` | `html`) says which; the reference library's "Open PDF" serves PDFs from there, and its `/library/<docId>` page renders HTML documents (styled by `.ref-doc` in `web/app/globals.css`). Git holds only the sidecars, each with the source file's `sha256`: the source files and the extracted `*.canonical.txt` text are gitignored build files, written next to the sidecar when sync ingests.
 
 **FTB instructions are HTML when FTB has a page.** FTB publishes most instructions only as web pages. `refdocs/html/cleanFtb.ts` keeps the page's article (allowlisted tags, every heading's id = its section slug, images inlined), and `refdocs/html/parseHtml.ts` reads sections from `h2`–`h4` and blocks from whole elements; a table row carries its column headers. An HTML document has no pages (all page 1): citations show `§ Section`, and open the library page at `#<slug>`. The sha256 covers the cleaned output (the raw page differs on every request); bump `CLEANER_VERSION` when the cleaner's output changes. Use the PDF when FTB has no page (3514, 3526, the FTB publications).
 
@@ -361,7 +361,7 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 
 ### The reviewDecision workflow
 
-`apps/agent/src/mastra/workflows/reviewDecision/` — fired in the background by `record-ai-decision` (fire-and-forget; the tool returns `pending` immediately). Shape: `init → ground → finalize`, driven by `reviewDecision(scope, decisionId)`. The judges run in Canon: `ground` is one MCP call (`run_ground`) that loops `(gather → assess → rule) × ≤maxIterations` (default 3; a parameter of the call) in `canon/src/mastra/workflows/ground/`.
+`cade/src/mastra/workflows/reviewDecision/` — fired in the background by `record-ai-decision` (fire-and-forget; the tool returns `pending` immediately). Shape: `init → ground → finalize`, driven by `reviewDecision(scope, decisionId)`. The judges run in Canon: `ground` is one MCP call (`run_ground`) that loops `(gather → assess → rule) × ≤maxIterations` (default 3; a parameter of the call) in `canon/src/mastra/workflows/ground/`.
 
 - **init** (Cade) — loads the decision and the facts it cites from app.db, opens the `review_runs` row.
 - **gather** (Canon, deterministic) — runs hybrid retrieval per query (queries from the `queryFormulator` judge on iteration 1, from the rule step's `suggestedQueries` after).
@@ -374,7 +374,7 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 
 ### Operator CLIs and inspection scripts
 
-Canon's corpus CLI lives under `canon/scripts/corpus/`, the form-engine CLI under `engine/builder/scripts/formEngine/`, Cade's tooling under `apps/agent/scripts/`, engine scripts under `engine/scripts/`. Two subcommand CLIs (each package has its own copy of the small dispatcher, `scripts/lib/cli.ts` — no args lists subcommands, `-- <cmd> --help` shows options) plus standalone diagnostics. All run from the repo root; `--` passes args through both npm layers.
+Canon's corpus CLI lives under `canon/scripts/corpus/`, the form-engine CLI under `engine/builder/scripts/formEngine/`, Cade's tooling under `cade/scripts/`, engine scripts under `engine/scripts/`. Two subcommand CLIs (each package has its own copy of the small dispatcher, `scripts/lib/cli.ts` — no args lists subcommands, `-- <cmd> --help` shows options) plus standalone diagnostics. All run from the repo root; `--` passes args through both npm layers.
 
 **`npm run corpus`** — the RAG knowledge base, end to end:
 
@@ -391,7 +391,7 @@ Canon's corpus CLI lives under `canon/scripts/corpus/`, the form-engine CLI unde
 
 **`npm run form-engine`** — source documents (`sources`) → engine assets (`engine/src`): `generate-catalog`, `generate-bindings`, `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`. It is the builder's CLI (`engine/builder/`): put `ANTHROPIC_API_KEY` in `engine/builder/.env.development` for the two AI commands, and run Canon (`npm run dev:canon`) for `generate-bindings`.
 
-**Standalone diagnostics** (run via `npx tsx` from `apps/agent/`):
+**Standalone diagnostics** (run via `npx tsx` from `cade/`):
 
 | script | use |
 |---|---|
@@ -430,7 +430,7 @@ Lessons worth bringing forward:
 - **Agent `Memory` + per-item loops is a trap.** BBG's Twitter poller used `agent.generate()` inside a `for` loop over mentions; memory carried context between iterations and polluted replies. For multi-item batch work, either make each iteration stateless or use separate threads.
 - **Advance dedup markers before processing, not after.** BBG was replying to the same mention multiple times because the "last processed" marker only advanced after the loop completed successfully. Set it first so a crash can't re-process.
 - **Research before building integrations.** For any new third-party API (IRS, state, Plaid, document OCR), do a research pass first, then build. Coding from memory against unfamiliar APIs wastes cycles. This is also saved in BBG's memory.
-- **`mastra dev` doesn't auto-load `.env`.** The `dev` script in `apps/agent/package.json` passes `--env .env.development` explicitly for a reason.
+- **`mastra dev` doesn't auto-load `.env`.** The `dev` script in `cade/package.json` passes `--env .env.development` explicitly for a reason.
 - **Vercel Cron is the right primitive for scheduled work** *(historical — self-host runs a long-lived process now, so plain background tasks work)*. Kept for if a hosted deployment returns.
 
 ## Finding Mastra docs

@@ -2,8 +2,8 @@
 #   1. format:check — Prettier, verify only (run `npm run format` to fix)
 #   2. lint         — eslint, one rule: multi-line comments are starred blocks
 #   3. test             — golden suite, engine/tests/golden/runAll.ts (~5s)
-#   4. test:unit        — vitest, engine/tests/unit + apps/agent/tests/unit (~3s)
-#   5. test:integration — vitest, engine/tests/integration + apps/agent/tests/integration (~3s)
+#   4. test:unit        — vitest, engine/tests/unit + cade/tests/unit (~3s)
+#   5. test:integration — vitest, engine/tests/integration + cade/tests/integration (~3s)
 #
 # Skip with --no-verify if you're committing a deliberate scenario update
 # in two stages (expected.ts before fact-fix, or vice versa). Don't make
