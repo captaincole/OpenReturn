@@ -4,13 +4,14 @@
  * for each form field. Claude then grounds rule + params choices in the
  * regulatory text instead of guessing from the field label alone.
  *
- * Uses the existing hybridSearchRefDocs (the grounding review's retrieval
- * path): FTS leg + local embedding vector leg, merged by reciprocal
- * rank fusion. Fields run in parallel under a concurrency cap.
+ * Uses Canon's searchRefDocs over MCP (hybrid retrieval: FTS leg + local
+ * embedding vector leg, merged by reciprocal rank fusion), so Canon must
+ * be running (npm run dev:canon). Fields run in parallel under a
+ * concurrency cap.
  */
 
-import { hybridSearchRefDocs } from "@openreturn/canon";
 import type { FieldInventory } from "@openreturn/engine/catalog";
+import { searchCanon } from "../mastra/canon/client";
 
 /*
  * Minimal block shape. The classifier only needs the citation (for the
@@ -36,11 +37,6 @@ export interface RetrieveOpts {
   topK?: number;
   /** How many fields to retrieve for in parallel. */
   concurrency?: number;
-  /**
-   * Candidates pulled from each retrieval leg before merging. Default 20
-   * (vs hybridSearchRefDocs's default of 50) because topK stays at 3.
-   */
-  candidatesPerLeg?: number;
 }
 
 export async function retrieveContextPerField(
@@ -49,7 +45,6 @@ export async function retrieveContextPerField(
 ): Promise<RetrievedFieldContext[]> {
   const topK = opts.topK ?? 3;
   const concurrency = Math.max(1, Math.min(opts.concurrency ?? 10, 25));
-  const candidatesPerLeg = opts.candidatesPerLeg ?? 20;
 
   const out: RetrievedFieldContext[] = new Array(opts.fields.length);
   let cursor = 0;
@@ -61,11 +56,7 @@ export async function retrieveContextPerField(
       if (i >= opts.fields.length) return;
       const field = opts.fields[i];
       const query = buildFieldQuery(field, opts.formTitle);
-      const hits = await hybridSearchRefDocs({
-        query,
-        limit: topK,
-        candidatesPerLeg,
-      });
+      const hits = await searchCanon({ query, limit: topK });
       out[i] = {
         fieldId: field.fieldId,
         blocks: hits.map((h) => ({

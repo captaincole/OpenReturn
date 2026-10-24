@@ -80,10 +80,11 @@ The default setup uses Anthropic models (just for ease of startup), but OpenRetu
 
 | Variable | Required | What it does |
 | --- | --- | --- |
-| `CADE_MODEL` | **Yes** | The conversation agent — must handle images (reads your W-2s). There is no in-code default: the app refuses to start without it. |
-| `JUDGE_MODEL` | **Yes** | The grounding judges that double-check AI decisions. Also required at startup. |
-| `ANTHROPIC_API_KEY` | With Anthropic models | Powers the two roles above when they point at Anthropic. |
+| `CADE_MODEL` | **Yes** (Cade's env file) | The conversation agent — must handle images (reads your W-2s). There is no in-code default: the app refuses to start without it. |
+| `JUDGE_MODEL` | **Yes** (Canon's env file) | The grounding and tax-code judges that double-check AI decisions and answer questions. Also required at startup. |
+| `ANTHROPIC_API_KEY` | With Anthropic models | Powers the two roles above when they point at Anthropic; set it in both env files. |
 | `CADE_MODEL_URL` / `JUDGE_MODEL_URL` | For local models | Point a role at an OpenAI-compatible server instead, e.g. `CADE_MODEL=ollama/gemma4:26b` + `CADE_MODEL_URL=http://localhost:11434/v1`. |
+| `CANON_URL` | No (defaults to `http://127.0.0.1:4112`) | Where Cade reaches Canon over MCP. |
 | `EMBEDDINGS_MODEL` | No (defaults to `ollama/embeddinggemma-2`) | The local embedding model for semantic corpus search. Needs [Ollama](https://ollama.com) running with the model pulled; without it, search falls back to keyword matching. |
 | `AGENT_API_TOKEN` | No | Gates the agent port if it's ever reachable beyond localhost. |
 
@@ -94,10 +95,10 @@ native PDF input. Expect turns to take minutes, not seconds, on laptop
 hardware, and each model call must currently finish within 5 minutes.
 
 You don't have to write this file from scratch: the first-run bootstrap
-generates `apps/agent/.env.development` with the two model roles pre-filled
-to Anthropic models (`anthropic/claude-sonnet-4-6` / `anthropic/claude-haiku-4-5`)
-and working values for ports and `.data` paths, plus `canon/.env.development`
-for Canon (`JUDGE_MODEL` and the corpus path). **The one thing it cannot
+generates `apps/agent/.env.development` with `CADE_MODEL` pre-filled to an
+Anthropic model (`anthropic/claude-sonnet-4-6`) and working values for
+ports and `.data` paths, plus `canon/.env.development` for Canon
+(`JUDGE_MODEL=anthropic/claude-haiku-5-5` and the corpus path). **The one thing it cannot
 fill in is your `ANTHROPIC_API_KEY`** — set that yourself (or repoint the
 model roles at a local server) before the app will do anything useful.
 

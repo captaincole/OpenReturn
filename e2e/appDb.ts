@@ -49,3 +49,11 @@ export function unreviewedDecisions(): number {
   );
   return row.n;
 }
+
+/* How many decisions ended in each verdict. */
+export function verdictCounts(): Record<string, number> {
+  const rows = query<{ verdict: string | null; n: number }>(
+    "SELECT verdict, count(*) AS n FROM ai_decisions GROUP BY verdict",
+  );
+  return Object.fromEntries(rows.map((r) => [r.verdict ?? "null", r.n]));
+}

@@ -60,14 +60,13 @@ const DEFAULT_EMBEDDINGS_MODEL = "ollama/embeddinggemma-2";
 
 function configSection(): void {
   section("Config (.env + .env.development)");
-  for (const key of ["CADE_MODEL", "JUDGE_MODEL"]) {
+  for (const key of ["CADE_MODEL"]) {
     const v = process.env[key];
     row(key, v ?? `${BAD} unset — the app refuses to start without it`);
   }
   row("ANTHROPIC_API_KEY", process.env.ANTHROPIC_API_KEY ? `${OK} set` : `${DIM} unset`);
-  const embeddings = process.env.EMBEDDINGS_MODEL;
-  row("EMBEDDINGS_MODEL", embeddings ?? `${DEFAULT_EMBEDDINGS_MODEL} (default)`);
-  for (const key of ["CADE_MODEL_URL", "JUDGE_MODEL_URL", "EMBEDDINGS_MODEL_URL"]) {
+  row("CANON_URL", process.env.CANON_URL ?? "http://127.0.0.1:4112 (default)");
+  for (const key of ["CADE_MODEL_URL", "EMBEDDINGS_MODEL_URL"]) {
     const v = process.env[key];
     if (v) row(key, v);
   }
@@ -78,7 +77,6 @@ function configSection(): void {
 function dataSection(): void {
   section("Data files");
   const entries: [string, string][] = [
-    ["corpus.db", process.env.CORPUS_DB_PATH ?? resolve(projectRoot, ".data/corpus.db")],
     ["app.db", process.env.APP_DB_PATH ?? resolve(projectRoot, ".data/app.db")],
     ["mastra.db", process.env.MASTRA_DB_PATH ?? resolve(projectRoot, ".data/mastra.db")],
   ];

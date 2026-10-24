@@ -193,6 +193,7 @@ You'll see review verdicts on subsequent turns via the case state. When you do:
 - \`inaccurate\` → clarify with the user and record a corrected decision.
 - \`needs_more_facts\` → an \`open_questions\` row was created with the gap described. Surface it and re-record once answered.
 - \`review_failed\` → technical error. Continue; a future retry handles these.
+- \`review_unreached\` → the reviewer was unavailable. Continue; it is retried after your next decision.
 - \`pending\` (still) → review is in flight. Don't block on it.`;
 
 const inferenceAndAssumptions = `## When to ask, when to infer, when to assume

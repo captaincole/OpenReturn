@@ -1,27 +1,18 @@
 import type { MastraModelConfig } from "@mastra/core/llm";
 
 /*
- * The app has exactly three model roles:
+ * Cade has exactly one model role:
  *
  *   cade      — the conversation agent. Must be multimodal (reads
  *               W-2/1099 images inline) and handle multi-step tool
  *               orchestration.
- *   judge     — the grounding judges in workflows/reviewDecision
- *               (assess, rule, queryFormulator) plus their
- *               structured-output extraction passes, and the tax-code
- *               Q&A judges in workflows/askTurn (askQueryFormulator,
- *               askAnswerer). Text-only, narrow tasks.
- *   retrieval — embeddings for reference-doc search. Not resolved here:
- *               they route through src/refdocs/embeddings.ts
- *               (EMBEDDINGS_MODEL, local Ollama — EmbeddingGemma 2 by
- *               default) with graceful keyword-only (FTS) fallback when
- *               Ollama is not running.
  *
- * Every other model string in the repo (forms-pipeline, refdocs
- * contextualization) is operator-side tooling whose output ships
- * prebuilt. Those are deliberately not routed through this module.
+ * The judges (grounding, Ask The Tax Code) and the retrieval embeddings
+ * are Canon's models, configured in canon/.env.development (JUDGE_*,
+ * EMBEDDINGS_*); Cade reaches them over MCP. The forms pipeline's
+ * labeling model is operator-side tooling whose output ships prebuilt.
  *
- * Configuration contract (per role, CADE_* / JUDGE_*):
+ * Configuration contract (CADE_*):
  *
  *   <ROLE>_MODEL          REQUIRED. "provider/model" string. Without a
  *                         URL it resolves through Mastra's provider
@@ -39,7 +30,7 @@ import type { MastraModelConfig } from "@mastra/core/llm";
  * .env.development, so a fresh clone still boots without research.
  */
 
-export type ModelRole = "cade" | "judge";
+export type ModelRole = "cade";
 
 /*
  * Providers whose APIs accept PDF file parts directly. Everything else
@@ -64,7 +55,7 @@ export function modelFor(role: ModelRole): MastraModelConfig {
         `"provider/model" string (e.g. anthropic/claude-sonnet-4-6, or ` +
         `ollama/qwen3-vl:8b with ${prefix}_MODEL_URL pointing at your ` +
         `server). Set it in apps/agent/.env.development. The app refuses ` +
-        `to guess which model handles ${role === "cade" ? "conversations" : "grounding reviews"}.`,
+        `to guess which model handles ${role} conversations.`,
     );
   }
   const url = process.env[`${prefix}_MODEL_URL`];

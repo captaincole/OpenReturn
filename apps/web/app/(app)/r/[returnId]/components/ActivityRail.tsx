@@ -258,6 +258,7 @@ function VerdictBadge({ verdict }: { verdict: Verdict }) {
     ungroundable: "text-warn bg-warn/10",
     needs_more_facts: "text-warn bg-warn/10",
     review_failed: "text-ink-muted bg-bg-elevated",
+    review_unreached: "text-ink-muted bg-bg-elevated",
   };
   const labels: Record<Verdict, string> = {
     pending: "Reviewing",
@@ -266,6 +267,7 @@ function VerdictBadge({ verdict }: { verdict: Verdict }) {
     ungroundable: "No source",
     needs_more_facts: "Needs info",
     review_failed: "Failed",
+    review_unreached: "Retry pending",
   };
   return (
     <span

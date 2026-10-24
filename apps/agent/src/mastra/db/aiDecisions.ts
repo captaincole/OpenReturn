@@ -98,6 +98,7 @@ export interface ListDecisionsOpts {
   filingId?: string;
   taxYear?: number;
   decisionKey?: string;
+  verdict?: Verdict;
   limit?: number;
 }
 
@@ -115,6 +116,10 @@ export async function listDecisions(
   if (opts.decisionKey) {
     conds.push("decision_key = ?");
     args.push(opts.decisionKey);
+  }
+  if (opts.verdict) {
+    conds.push("verdict = ?");
+    args.push(opts.verdict);
   }
   args.push(Math.min(opts.limit ?? 100, 500));
   const res = await getAppDb().execute({

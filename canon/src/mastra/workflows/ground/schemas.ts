@@ -1,15 +1,33 @@
 import { z } from "zod";
 
 /*
+ * The grounding contract: what a caller sends Canon to ground one
+ * decision, what the judges pass between them, and what comes back.
+ * Canon is stateless here too: the decision and the facts it cites come
+ * in, a verdict with citations and the step log go out. Who recorded the
+ * decision, which filing it belongs to and where the verdict is stored
+ * are the caller's business (Cade keeps them in app.db).
+ */
+
+export const DEFAULT_MAX_ITERATIONS = 3;
+export const MAX_ITERATIONS_CAP = 5;
+
+/*
  * ---------------------------------------------------------------------------
- * Building blocks shared across the workflow
+ * Input
  * ---------------------------------------------------------------------------
  */
 
-export const authorityCitationSchema = z.object({
-  blockId: z.string(),
-  quote: z.string().optional(),
+export const groundDecisionSchema = z.object({
+  taxYear: z.number().int(),
+  decisionKey: z.string(),
+  decision: z.unknown().describe("The decision's value (boolean, string, object…)."),
+  rationale: z.string(),
+  confidence: z.string(),
+  dissentingConsiderations: z.string().nullable().default(null),
+  supportingFactKeys: z.array(z.string()).default([]),
 });
+export type GroundDecision = z.infer<typeof groundDecisionSchema>;
 
 export const taxFactSnapshotSchema = z.object({
   key: z.string(),
@@ -17,6 +35,35 @@ export const taxFactSnapshotSchema = z.object({
   value: z.unknown(),
   sourceNote: z.string().nullable(),
 });
+export type TaxFactSnapshot = z.infer<typeof taxFactSnapshotSchema>;
+
+export const groundInputSchema = z.object({
+  decision: groundDecisionSchema,
+  facts: z
+    .array(taxFactSnapshotSchema)
+    .default([])
+    .describe("The facts the decision cites, as the caller recorded them."),
+  maxIterations: z
+    .number()
+    .int()
+    .min(1)
+    .max(MAX_ITERATIONS_CAP)
+    .default(DEFAULT_MAX_ITERATIONS)
+    .describe("How many gather → assess → rule rounds the judges may take before they must rule."),
+});
+export type GroundInput = z.input<typeof groundInputSchema>;
+
+/*
+ * ---------------------------------------------------------------------------
+ * Building blocks the judges share
+ * ---------------------------------------------------------------------------
+ */
+
+export const authorityCitationSchema = z.object({
+  blockId: z.string(),
+  quote: z.string().optional(),
+});
+export type AuthorityCitation = z.infer<typeof authorityCitationSchema>;
 
 export const irsBlockSnapshotSchema = z.object({
   blockId: z.string(),
@@ -33,7 +80,7 @@ export const evidenceBundleSchema = z.object({
   facts: z.array(taxFactSnapshotSchema),
   irsBlocks: z.array(irsBlockSnapshotSchema),
   queriesUsed: z.array(z.string()),
-  iteration: z.number().int().min(1).max(3),
+  iteration: z.number().int().min(1),
 });
 export type EvidenceBundle = z.infer<typeof evidenceBundleSchema>;
 
@@ -75,7 +122,7 @@ export type RiskAssessment = z.infer<typeof riskAssessmentSchema>;
  */
 
 export const verdictSchema = z.enum(["accurate", "inaccurate", "needs_more_facts"]);
-export type WorkflowVerdict = z.infer<typeof verdictSchema>;
+export type GroundVerdict = z.infer<typeof verdictSchema>;
 
 export const ruleVerdictOutputSchema = z.object({
   kind: z.literal("verdict"),
@@ -111,48 +158,33 @@ export const ruleStructuredOutputSchema = z.object({ result: ruleOutputSchema })
 
 /*
  * ---------------------------------------------------------------------------
- * Loop carrier — the shared shape that flows through gather → assess → rule
- * on every iteration. Each step takes it in and returns it out with one or
- * more fields populated. `inputSchema === outputSchema` is what makes the
- * child workflow legal as a `.dountil()` step.
+ * Loop carrier — the shape that flows through gather → assess → rule on
+ * every iteration. Each judge takes it in and returns it with one more
+ * field populated.
  * ---------------------------------------------------------------------------
  */
 
 export const loopCarrierSchema = z.object({
-  // Set once by the init step; immutable across iterations.
-  decisionId: z.string(),
-  reviewRunId: z.string(),
-  userId: z.string(),
-  filingId: z.string(),
-  taxYear: z.number().int(),
-  decisionKey: z.string(),
-  decisionValue: z.unknown(),
-  rationale: z.string(),
-  confidence: z.string(),
-  dissentingConsiderationsInput: z.string().nullable(),
-  supportingFactKeys: z.array(z.string()),
+  decision: groundDecisionSchema,
+  facts: z.array(taxFactSnapshotSchema),
+  maxIterations: z.number().int().min(1).max(MAX_ITERATIONS_CAP),
 
   /*
-   * Iteration state. rule bumps this when it emits need_more_evidence.
-   * Max 4: ruleStep can bump 3 → 4 on the final iteration when it still
-   * wants more evidence. The loop then exits on iterationCount >= 3, and
-   * finalize clamps the reported value back to 3 via Math.min.
+   * Iteration state. rule bumps this when it emits need_more_evidence;
+   * the loop stops once it passes maxIterations, and the reported count
+   * clamps back to maxIterations.
    */
-  iteration: z.number().int().min(1).max(4),
+  iteration: z.number().int().min(1),
   queries: z.array(z.string()),
 
   /*
    * Reasons accumulated across iterations when rule sends the loop back to
-   * gather. finalize uses them to synthesize the whatsMissing summary when
-   * iteration 3 ends without a verdict.
+   * gather. They become the whatsMissing summary when the last iteration
+   * ends without a verdict.
    */
   needMoreReasons: z.array(z.string()),
 
-  /*
-   * gather / assess / rule populate these respectively. Optional because
-   * init seeds the carrier without them; each iteration then produces
-   * fresh values.
-   */
+  /* gather / assess / rule populate these respectively. */
   evidence: evidenceBundleSchema.optional(),
   riskAssessment: riskAssessmentSchema.optional(),
   ruleOutput: ruleOutputSchema.optional(),
@@ -161,23 +193,28 @@ export type LoopCarrier = z.infer<typeof loopCarrierSchema>;
 
 /*
  * ---------------------------------------------------------------------------
- * Workflow terminal output
+ * Result
  * ---------------------------------------------------------------------------
  */
 
-export const reviewDecisionOutputSchema = z.object({
-  decisionId: z.string(),
-  reviewRunId: z.string(),
-  iterationCount: z.number().int().min(1).max(3),
-  riskTier: riskTierSchema.nullable(),
-  finalVerdict: z.enum(["accurate", "inaccurate", "needs_more_facts", "review_failed"]),
+/** One judge step: what it saw, what it said, how long it took. The caller persists these. */
+export const groundStepLogSchema = z.object({
+  iteration: z.number().int().min(1),
+  kind: z.enum(["gather", "assess", "rule"]),
+  durationMs: z.number(),
+  input: z.unknown(),
+  output: z.unknown(),
+});
+export type GroundStepLog = z.infer<typeof groundStepLogSchema>;
+
+export const groundResultSchema = z.object({
+  verdict: verdictSchema,
   reason: z.string(),
   citations: z.array(authorityCitationSchema),
-  /*
-   * openQuestionId is set for needs_more_facts and inaccurate verdicts.
-   * whatsMissing is set only for needs_more_facts.
-   */
-  openQuestionId: z.string().optional(),
+  riskTier: riskTierSchema.nullable(),
+  iterationCount: z.number().int().min(1),
+  /** Set when the judges ran out of iterations without a verdict. */
   whatsMissing: z.string().optional(),
+  log: z.object({ steps: z.array(groundStepLogSchema) }),
 });
-export type ReviewDecisionOutput = z.infer<typeof reviewDecisionOutputSchema>;
+export type GroundResult = z.infer<typeof groundResultSchema>;

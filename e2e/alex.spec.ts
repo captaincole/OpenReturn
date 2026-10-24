@@ -21,7 +21,7 @@ import {
   latestSidecar,
   w2Problems,
 } from "./alexChecks";
-import { unreviewedDecisions } from "./appDb";
+import { unreviewedDecisions, verdictCounts } from "./appDb";
 import { askTheTaxCode } from "./ask";
 import { RUN_DIR } from "./run";
 import { check, failedStages, note, plumbing, writeSummary } from "./summary";
@@ -117,7 +117,9 @@ const toTurn = (text: string | undefined): Turn | undefined => (text ? { text } 
 
 /*
  * Reviews run in the background and stop when the servers stop. Wait for
- * every verdict, so the run time and the API cost include them.
+ * every verdict, so the run time and the API cost include them. A review
+ * that never reached Canon, or broke, is a broken app, not a model
+ * mistake: that is the one plumbing check on the reviews.
  */
 async function waitForReviews() {
   const start = Date.now();
@@ -126,6 +128,17 @@ async function waitForReviews() {
     .toBe(0)
     .catch(() => note(`reviews: ${unreviewedDecisions()} still without a verdict`));
   note(`reviews: waited ${Math.round((Date.now() - start) / 1000)} s after the forms`);
+  const counts = verdictCounts();
+  note(
+    `reviews: ${Object.entries(counts)
+      .map(([v, n]) => `${v} ${n}`)
+      .join(", ")}`,
+  );
+  check(
+    "reviews reach Canon",
+    "plumbing",
+    ["review_unreached", "review_failed"].filter((v) => counts[v]).map((v) => `${counts[v]} ${v}`),
+  );
 }
 
 /* An agent error is a broken app, not a model mistake: fail plumbing and stop. */

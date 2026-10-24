@@ -58,7 +58,7 @@ function agentEnvFile() {
   const pinned = [
     ...DATA_KEYS.map((key) => `${key}=${process.env[key]}`),
     `DECISION_REVIEW=${DECISION_REVIEW}`,
-    ...roleOverrides,
+    ...roleOverrides.filter((line) => line.startsWith("CADE_")),
   ];
   const file = join(runDir, "agent.env");
   writeFileSync(file, [...kept, ...pinned].join("\n") + "\n");
@@ -68,8 +68,8 @@ function agentEnvFile() {
 /*
  * Canon runs on the normal corpus (CORPUS_DB_PATH from its own env file)
  * but its judge model follows E2E_JUDGE_MODEL, so the Ask step and the
- * reviews run on the same model as Cade's judges. Its Mastra state goes
- * to the run folder.
+ * reviews (Cade's ground calls over MCP) run on the chosen judge model.
+ * Its Mastra state goes to the run folder.
  */
 function canonEnvFile() {
   const replaced = ["MASTRA_DB_PATH", ...roleKeys];

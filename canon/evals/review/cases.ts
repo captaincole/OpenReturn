@@ -1,11 +1,10 @@
-import { makeW2FactKey, type TaxFactRow } from "@openreturn/engine/facts";
-import { SCENARIOS } from "@openreturn/engine/scenarios";
-
 /*
  * The review-judge dataset. Each decision has a correct version and a
  * wrong one, so a judge that always says "accurate" scores 50%, not 100%.
- * Facts come from the engine scenarios; a wrong version changes a fact
- * across the threshold or flips the decision.
+ * The facts are copies of the engine's test scenarios (tara, marcus:
+ * IRS ATS test data), trimmed to the fields a judge reads; a wrong
+ * version changes a fact across the threshold or flips the decision.
+ * Canon does not import the engine, so the copies live here as data.
  *
  * `authority` lists citation groups. A judge passes a group when it
  * cites ANY block in it: the same rule often appears in several
@@ -14,32 +13,30 @@ import { SCENARIOS } from "@openreturn/engine/scenarios";
 
 type Verdict = "accurate" | "inaccurate" | "needs_more_facts";
 
+export interface ReviewFact {
+  category: string;
+  key: string;
+  value: unknown;
+  sourceNote?: string | null;
+}
+
 export interface ReviewCase {
   name: string;
   expectedVerdict: Verdict;
-  facts: Pick<TaxFactRow, "category" | "key" | "value" | "sourceNote">[];
+  facts: ReviewFact[];
   decision: { decisionKey: string; decision: unknown; rationale: string };
   authority: string[][];
 }
 
-const scenarioFacts = (scenario: string, keys: string[]) => {
-  const facts = SCENARIOS.find((s) => s.name === scenario)?.facts ?? [];
-  return keys.map((key) => {
-    const f = facts.find((x) => x.key === key);
-    if (!f) throw new Error(`${scenario}: no fact ${key}`);
-    return { category: f.category, key: f.key, value: f.value, sourceNote: f.sourceNote };
-  });
-};
-
 /* Replace one fact's value (shallow merge for objects). */
-const withValue = (facts: ReviewCase["facts"], key: string, patch: unknown) =>
+const withValue = (facts: ReviewFact[], key: string, patch: unknown) =>
   facts.map((f) =>
     f.key === key
       ? { ...f, value: typeof patch === "object" ? { ...(f.value as object), ...patch } : patch }
       : f,
   );
 
-const single = {
+const single: ReviewFact = {
   category: "filing_status",
   key: "filing_status.marital_status",
   value: "never_married",
@@ -49,10 +46,27 @@ const single = {
 /* ---------- 1. Schedule H (Tara's household employee) ---------- */
 
 const HOUSEHOLD_W2 = "employee.rosa-delgado.household_w2";
-const scheduleHFacts = scenarioFacts("tara", [
-  HOUSEHOLD_W2,
-  "household_employment.paid_1000_in_a_quarter",
-]);
+const scheduleHFacts: ReviewFact[] = [
+  {
+    category: "household_employment",
+    key: HOUSEHOLD_W2,
+    value: {
+      employeeName: "Rosa Delgado",
+      box1: 3100,
+      box3: 3100,
+      box4: 192.2,
+      box5: 3100,
+      box6: 44.95,
+    },
+    sourceNote: "W-2 Tara issued to Rosa Delgado.",
+  },
+  {
+    category: "household_employment",
+    key: "household_employment.paid_1000_in_a_quarter",
+    value: false,
+    sourceNote: "Schedule H line 9 is No.",
+  },
+];
 const scheduleHAuthority = [
   [
     "irs-1040sh-inst-2025::sec::part-i::b03",
@@ -66,8 +80,27 @@ const scheduleHAuthority = [
 
 /* ---------- 2. Form 8959 (Marcus's Medicare wages) ---------- */
 
-const MARCUS_W2 = makeW2FactKey("helix-software");
-const form8959Facts = [single, ...scenarioFacts("marcus", [MARCUS_W2])];
+const MARCUS_W2 = "employer.helix-software";
+const form8959Facts: ReviewFact[] = [
+  single,
+  {
+    category: "wages",
+    key: MARCUS_W2,
+    value: {
+      employerName: "Helix Software, Inc.",
+      box1: 220000,
+      box2: 40000,
+      box3: 176100,
+      box4: 10918.2,
+      box5: 243500,
+      box6: 3922.25,
+      box15: "CA",
+      box16: 220000,
+      box17: 15500,
+    },
+    sourceNote: "W-2 from Helix Software, Inc.",
+  },
+];
 const form8959Authority = [
   [
     "irs-8959-inst-2025::sec::who-must-file::b01",
@@ -78,14 +111,27 @@ const form8959Authority = [
 
 /* ---------- 3. Must file a federal return (Tara) ---------- */
 
-const mustFileFacts = [
+const taraW2 = (key: string, employerName: string, box1: number, box2: number, box17: number) => ({
+  category: "wages",
+  key,
+  value: {
+    employerName,
+    box1,
+    box2,
+    box3: box1,
+    box5: box1,
+    box15: "CA",
+    box16: box1,
+    box17,
+  },
+  sourceNote: `W-2 from ${employerName}.`,
+});
+const mustFileFacts: ReviewFact[] = [
   single,
-  ...scenarioFacts("tara", [
-    "identity.dob",
-    makeW2FactKey("the-green-ladies"),
-    makeW2FactKey("c-r"),
-    HOUSEHOLD_W2,
-  ]),
+  { category: "identity", key: "identity.dob", value: "08/14/1985", sourceNote: "verbal" },
+  taraW2("employer.the-green-ladies", "The Green Ladies", 22970, 1073, 320),
+  taraW2("employer.c-r", "C&R", 19500, 1640, 416),
+  ...scheduleHFacts.filter((f) => f.key === HOUSEHOLD_W2),
 ];
 const mustFileAuthority = [
   [

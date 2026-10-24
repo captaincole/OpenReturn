@@ -1,15 +1,17 @@
 /*
  * Grounding smoke test: three end-to-end review-decision workflow runs
  * against a THROWAWAY app DB. APP_DB_PATH points at a temp file before
- * any module loads, so the dev database is never touched. The real
- * corpus.db is used read-only for retrieval.
+ * any module loads, so the dev database is never touched. The judges run
+ * in Canon, so Canon must be up (npm run dev:canon; CANON_URL to point
+ * elsewhere); the script skips when it is not.
  *
  * Each case: seed facts → record a decision → run reviewDecision(scope, id)
  * directly (the same entry the record-ai-decision tool fires in the
  * background) → assert the verdict, persistence, citations, and the
  * open-question side effects.
  *
- * Costs real LLM calls (Haiku × a few per case). Run on demand, not in CI:
+ * Costs real LLM calls (Canon's judge model × a few per case). Run on
+ * demand, not in CI:
  *   npm run smoke:review
  */
 
@@ -234,8 +236,12 @@ async function runCase(deps: Deps, c: SmokeCase): Promise<boolean> {
 }
 
 async function main() {
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error("ANTHROPIC_API_KEY not set — skipping smoke test (the review workflow needs it)");
+  const canonUrl = process.env.CANON_URL ?? "http://127.0.0.1:4112";
+  const canonUp = await fetch(`${canonUrl}/health`, { signal: AbortSignal.timeout(2_000) })
+    .then((r) => r.ok)
+    .catch(() => false);
+  if (!canonUp) {
+    console.error(`Canon is not running at ${canonUrl} — skipping smoke test (npm run dev:canon)`);
     process.exit(0);
   }
 
@@ -246,6 +252,7 @@ async function main() {
   const { reviewDecision, reviewDecisionWorkflow } =
     await import("../src/mastra/workflows/reviewDecision");
   await registerReviewWorkflow(reviewDecisionWorkflow);
+  const { disconnectCanon } = await import("../src/mastra/canon/client");
   const deps: Deps = {
     createOwnerFiling,
     recordFact,
@@ -268,6 +275,7 @@ async function main() {
   }
 
   console.log(`\n[smoke:review] ${passed}/${CASES.length} cases passed`);
+  await disconnectCanon();
   process.exit(passed === CASES.length ? 0 : 1);
 }
 
@@ -277,17 +285,11 @@ main().catch((err) => {
 });
 
 /*
- * The workflow steps get the judges with mastra.getAgent(), so the
- * workflow must be registered on a Mastra instance. The app's instance
+ * A workflow runs registered on a Mastra instance. The app's instance
  * (src/mastra/index.ts) uses top-level await, which tsx cannot load in
- * this CommonJS script, so register the workflow and judges on a small
- * instance here.
+ * this CommonJS script, so register the workflow on a small instance here.
  */
 async function registerReviewWorkflow(workflow: unknown) {
   const { Mastra } = await import("@mastra/core");
-  const { queryFormulator, assessRiskAgent, ruleAgent } = await import("@openreturn/canon");
-  new Mastra({
-    agents: { queryFormulator, assessRiskAgent, ruleAgent },
-    workflows: { reviewDecision: workflow as never },
-  });
+  new Mastra({ workflows: { reviewDecision: workflow as never } });
 }

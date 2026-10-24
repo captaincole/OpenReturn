@@ -1,4 +1,4 @@
-import type { AskCitation, AskCoverage, AskStage } from "@openreturn/canon";
+import type { AskCitation, AskCoverage, AskStage } from "../canon/schemas";
 import {
   asJson,
   asNum,
