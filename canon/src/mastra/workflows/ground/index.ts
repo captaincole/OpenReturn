@@ -5,12 +5,13 @@ import { modelFor } from "../../models";
 import { decisionSummary, formulateQueries, renderAssessPrompt, renderRulePrompt } from "./prompts";
 import {
   groundInputSchema,
-  groundResultSchema,
+  groundRunResultSchema,
   riskAssessmentSchema,
   ruleStructuredOutputSchema,
   type EvidenceBundle,
   type GroundInput,
   type GroundResult,
+  type GroundRunResult,
   type GroundStepLog,
   type LoopCarrier,
   type RuleOutput,
@@ -240,11 +241,20 @@ export async function groundDecision(
   return { ...resolve(carrier), log: { steps } };
 }
 
+/* The MCP-facing step: a judge failure comes back with the steps that ran, not as a thrown error. */
 const groundStep = createStep({
   id: "ground",
   inputSchema: groundInputSchema,
-  outputSchema: groundResultSchema,
-  execute: ({ inputData, mastra }) => groundDecision(mastra, inputData),
+  outputSchema: groundRunResultSchema,
+  execute: async ({ inputData, mastra }): Promise<GroundRunResult> => {
+    const steps: GroundStepLog[] = [];
+    try {
+      return { status: "ok", ...(await groundDecision(mastra, inputData, { steps })) };
+    } catch (err) {
+      const error = err instanceof Error ? err.message : String(err);
+      return { status: "failed", error, log: { steps } };
+    }
+  },
 });
 
 export const groundWorkflow = createWorkflow({
@@ -252,7 +262,7 @@ export const groundWorkflow = createWorkflow({
   description:
     "Grounds one tax decision in the IRS/FTB reference library: the judges retrieve the governing passages, assess the risk, and rule accurate, inaccurate or needs_more_facts with citations. Pass the decision and the facts it cites; maxIterations (default 3) caps the retrieval rounds. The result carries each judge step for the caller's log.",
   inputSchema: groundInputSchema,
-  outputSchema: groundResultSchema,
+  outputSchema: groundRunResultSchema,
 })
   .then(groundStep)
   .commit();

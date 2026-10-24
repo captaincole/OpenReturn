@@ -13,7 +13,8 @@ import {
  * the user's; the answer comes from Canon over MCP (run_ask). The routes
  * in server/routes/ask.ts fire this in the background and the page polls
  * the turn's stage. One call means one stage: the turn shows "searching"
- * until Canon answers, and the query log comes back with the answer.
+ * until Canon answers, and the query log comes back with the answer, or
+ * with the failure.
  */
 
 function history(earlier: AskTurn[]): AskHistoryTurn[] {
@@ -32,6 +33,15 @@ export async function runAskTurn(userId: string, threadId: string, turnId: strin
 
     await setAskTurnStage(turn.id, "retrieving");
     const result = await askCanon({ question: turn.question, history: history(earlier) });
+    if (result.status === "failed") {
+      await failAskTurn(
+        turnId,
+        `The answer failed: ${result.error}`,
+        result.log,
+        Date.now() - started,
+      );
+      return;
+    }
     await completeAskTurn(turnId, {
       answer: result.answer,
       coverage: result.coverage,

@@ -1,13 +1,13 @@
 import { MCPClient } from "@mastra/mcp";
 import type { z } from "zod";
 import {
-  askResultSchema,
-  groundResultSchema,
+  askRunResultSchema,
+  groundRunResultSchema,
   searchResultSchema,
   type AskHistoryTurn,
-  type AskResult,
+  type AskRunResult,
   type GroundInput,
-  type GroundResult,
+  type GroundRunResult,
   type SearchHit,
 } from "./schemas";
 
@@ -19,6 +19,10 @@ import {
  *   searchCanon   hybrid retrieval (the forms pipeline's labeling step)
  *   askCanon      Ask The Tax Code, one turn
  *   groundCanon   ground one decision: verdict, citations, step log
+ *
+ * The two workflow calls return a run result: `status: "ok"` with the
+ * result, or `status: "failed"` with Canon's error and the steps that
+ * ran before it, so the caller keeps the log either way.
  *
  * Failure comes in two kinds, and the review workflow stamps them
  * differently:
@@ -187,12 +191,12 @@ export async function searchCanon(input: {
 export async function askCanon(input: {
   question: string;
   history: AskHistoryTurn[];
-}): Promise<AskResult> {
-  return callCanon("run_ask", input, askResultSchema);
+}): Promise<AskRunResult> {
+  return callCanon("run_ask", input, askRunResultSchema);
 }
 
-export async function groundCanon(input: GroundInput): Promise<GroundResult> {
-  return callCanon("run_ground", input, groundResultSchema);
+export async function groundCanon(input: GroundInput): Promise<GroundRunResult> {
+  return callCanon("run_ground", input, groundRunResultSchema);
 }
 
 /** For scripts that exit: close the MCP session. */

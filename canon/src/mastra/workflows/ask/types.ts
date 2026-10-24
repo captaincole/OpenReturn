@@ -63,3 +63,17 @@ export const askResultSchema = z.object({
 
 export type AskInput = z.infer<typeof askInputSchema>;
 export type AskResult = z.infer<typeof askResultSchema>;
+
+/*
+ * What the `ask` workflow (and so run_ask) returns: the result, or the
+ * failure with the query log up to it, so the caller keeps the log.
+ */
+export const askRunResultSchema = z.discriminatedUnion("status", [
+  askResultSchema.extend({ status: z.literal("ok") }),
+  z.object({
+    status: z.literal("failed"),
+    error: z.string(),
+    log: z.object({ steps: z.array(z.record(z.unknown())) }),
+  }),
+]);
+export type AskRunResult = z.infer<typeof askRunResultSchema>;

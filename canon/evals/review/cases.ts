@@ -1,9 +1,10 @@
 /*
  * The review-judge dataset. Each decision has a correct version and a
  * wrong one, so a judge that always says "accurate" scores 50%, not 100%.
- * The facts are copies of the engine's test scenarios (tara, marcus:
- * IRS ATS test data), trimmed to the fields a judge reads; a wrong
- * version changes a fact across the threshold or flips the decision.
+ * The facts are copies of the engine's test scenarios (tara: IRS ATS
+ * scenario 1; marcus: a synthetic scenario), trimmed to the fields a
+ * judge reads; a wrong version changes a fact across the threshold or
+ * flips the decision.
  * Canon does not import the engine, so the copies live here as data.
  *
  * `authority` lists citation groups. A judge passes a group when it

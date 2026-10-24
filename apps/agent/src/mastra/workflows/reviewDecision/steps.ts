@@ -1,5 +1,5 @@
 import { createStep } from "@mastra/core/workflows";
-import { groundCanon } from "../../canon/client";
+import { CanonToolError, groundCanon } from "../../canon/client";
 import { getDecisionById, setDecisionVerdict } from "../../db/aiDecisions";
 import {
   completeReviewRun,
@@ -94,8 +94,10 @@ export const initStep = createStep({
 /*
  * ---------------------------------------------------------------------------
  * ground — one call to Canon. Its step log lands in review_run_steps as if
- * the judges had run here. A transport failure is rethrown with the run id
- * attached, so the wrapper can mark the run and stamp review_unreached.
+ * the judges had run here, on success and on failure alike. Errors are
+ * rethrown with the run id attached, so the wrapper can mark the run and
+ * stamp review_unreached (the call never came back) or review_failed
+ * (Canon ran it and a judge broke).
  * ---------------------------------------------------------------------------
  */
 
@@ -105,18 +107,16 @@ export const groundStep = createStep({
   outputSchema: reviewCarrierSchema,
   execute: async ({ inputData: carrier }) => {
     const scope = { userId: carrier.userId, filingId: carrier.filingId };
-    let ground: ReviewCarrier["ground"];
-    try {
-      ground = await groundCanon({
-        decision: { ...carrier.decision, decision: carrier.decision.decision },
-        facts: carrier.facts.map((f) => ({ ...f, value: f.value })),
-      });
-    } catch (err) {
-      throw Object.assign(err instanceof Error ? err : new Error(String(err)), {
+    const withRunId = (err: unknown) =>
+      Object.assign(err instanceof Error ? err : new Error(String(err)), {
         reviewRunId: carrier.reviewRunId,
       });
-    }
-    for (const step of ground.log.steps) {
+    const run = await groundCanon({ decision: carrier.decision, facts: carrier.facts }).catch(
+      (err: unknown) => {
+        throw withRunId(err);
+      },
+    );
+    for (const step of run.log.steps) {
       await recordReviewStep(scope, {
         id: crypto.randomUUID(),
         runId: carrier.reviewRunId,
@@ -129,6 +129,8 @@ export const groundStep = createStep({
         durationMs: step.durationMs,
       });
     }
+    if (run.status === "failed") throw withRunId(new CanonToolError(`Canon ground: ${run.error}`));
+    const { status: _status, ...ground } = run;
     return { ...carrier, ground };
   },
 });

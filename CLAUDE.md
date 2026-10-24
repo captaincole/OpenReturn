@@ -72,7 +72,7 @@ apps/
 │   ├── evals/                   # the ingest eval; review and ask evals are Canon's (canon/evals)
 │   ├── tests/                   # agent tests (tools, db, boundary); corpus tests are in canon/, engine tests in packages/engine
 │   ├── package.json             # agent deps + scripts (mastra dev, form-engine, sources:sync)
-│   └── tsconfig.json            # "paths" aliases @openreturn/* to source so `mastra dev` bundles them
+│   └── tsconfig.json            # "paths" aliases @openreturn/engine to source so `mastra dev` bundles it
 └── web/                         # Next.js 16 (App Router) frontend → deployed to Vercel
     ├── app/                     # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
     │                              library, library/[docId]}, /documents/[id] + /api/* route handlers
@@ -125,7 +125,7 @@ Pin all four paths via env (`CORPUS_DB_PATH` in Canon's env file; `APP_DB_PATH` 
 
 ## First run / factory reset
 
-`npm run reset` wipes user data (app.db, mastra.db, documents/) while **preserving corpus.db** (rebuilding it costs Haiku money for contextualization). After a reset, the web app redirects to `/setup` — create the owner account (name, email, password) — then start a filing from the home page. No seed scripts, no test users; the setup screen IS the seeding.
+`npm run reset` wipes user data (app.db, mastra.db, documents/, and Canon's mastra.db, whose ground-run snapshots carry the facts Cade sent) while **preserving corpus.db** (rebuilding it costs Haiku money for contextualization). After a reset, the web app redirects to `/setup` — create the owner account (name, email, password) — then start a filing from the home page. No seed scripts, no test users; the setup screen IS the seeding.
 
 ## Development workflow
 
@@ -235,7 +235,7 @@ The system separates two kinds of data:
 
 Decisions flow back into the case engine: a decision with key `decisions.ca_residency` becomes a fact-like input that downstream derivations can consume. This means "is this person a full-year CA resident?" can be the output of AI reasoning, and the CA 540 scoping derivation reads it like any other fact.
 
-**Two-phase pattern — decide, then ground in the background.** Every `record-ai-decision` call returns immediately with `verdict: 'pending'` and fires the review-decision workflow, which grounds the decision against the supporting facts + the IRS reference corpus and re-stamps the row: `accurate` / `inaccurate` / `needs_more_facts` / `review_failed` (legacy rows may carry `ungroundable`). `authority_citations` populates with `{blockId, quote?}[]` on `accurate`. Non-accurate verdicts also write an `open_questions` row so Cade circles back with the user. See the "Reference-document RAG" section for the corpus and retrieval pipeline.
+**Two-phase pattern — decide, then ground in the background.** Every `record-ai-decision` call returns immediately with `verdict: 'pending'` and fires the review-decision workflow, which grounds the decision against the supporting facts + the IRS reference corpus and re-stamps the row: `accurate` / `inaccurate` / `needs_more_facts` / `review_failed` / `review_unreached` (Canon never got the call; retried later). Legacy rows may carry `ungroundable`. `authority_citations` populates with `{blockId, quote?}[]` on `accurate`. Non-accurate verdicts also write an `open_questions` row so Cade circles back with the user. See the "Reference-document RAG" section for the corpus and retrieval pipeline.
 
 ## Tax facts schema
 
@@ -366,7 +366,7 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 - **Reviews run one at a time** (the queue in `reviewDecision/index.ts`): the judges share one model, so parallel reviews only slow each other down and time out together (the MCP call's cap is `CANON_TIMEOUT_MS`, default 5 min; a ground call that needs longer means fewer iterations or a faster judge, never a longer cap).
 - **When Canon is down**, the decision is stamped `review_unreached` (not `review_failed`): the judges never ran. No scheduler — the next `record-ai-decision` queues every unreached review after its own, and `POST /app/filings/:filingId/reviews/retry` does it on demand.
 - Shared CPA heuristics both judges import live in Canon's `workflows/ground/judges/cpaRules.ts` — rules accumulate there as CPAs flag edge cases.
-- Every step logs to `review_run_steps` (raw input/output JSON — future fine-tuning substrate). `npm run smoke:review` is the end-to-end test (3 cases, temp DB, real Haiku calls).
+- Every step logs to `review_run_steps` (raw input/output JSON — future fine-tuning substrate). `npm run smoke:review` is the end-to-end test (3 cases, temp DB, real calls to Canon's judge model; needs Canon running, skips when it is not).
 
 ### Operator CLIs and inspection scripts
 
@@ -391,7 +391,7 @@ Canon's corpus CLI lives under `canon/scripts/corpus/`, Cade's tooling under `ap
 
 | script | use |
 |---|---|
-| `smokeReview.ts` | three end-to-end review scenarios (npm: `smoke:review`) |
+| `smokeReview.ts` | three end-to-end review scenarios (npm: `smoke:review`; needs `npm run dev:canon`) |
 | `inspectLastReview.ts` | dump most recent review-decision workflow run + trace |
 
 **Engine scripts** (run via `npx tsx` from `packages/engine/`):

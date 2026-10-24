@@ -1,7 +1,7 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 import { listDecisions, recordDecision } from "../db/aiDecisions";
-import { enqueueReview, retryUnreachedReviews } from "../workflows/reviewDecision";
+import { enqueueReview, retryAfter } from "../workflows/reviewDecision";
 import { requireUserContext } from "./userContext";
 
 export const recordAIDecision = createTool({
@@ -76,16 +76,16 @@ export const recordAIDecision = createTool({
      * The reviewDecision wrapper catches workflow failures itself and
      * stamps the row (review_failed, or review_unreached when Canon was
      * not reachable), so a failed review still shows in the activity
-     * feed. Reviews run one at a time through the review queue. Afterwards,
-     * any earlier review that never reached Canon is queued again: that is
-     * the retry path, no scheduler. This catch only logs unexpected throws
-     * from the wrapper.
+     * feed. Reviews run one at a time through the review queue. When this
+     * review reached Canon, any earlier review that never did is queued
+     * again: that is the retry path, no scheduler. This catch only logs
+     * unexpected throws from the wrapper.
      */
     // DECISION_REVIEW=off skips the review (the E2E run does this); the verdict stays "pending".
     const reviewOn = process.env.DECISION_REVIEW !== "off";
     if (reviewOn) {
       void enqueueReview(scope, id)
-        .then(() => retryUnreachedReviews(scope))
+        .then((out) => retryAfter(scope, out))
         .catch((err) => {
           console.error(`[review-decision] background run failed for decision ${id}:`, err);
         });

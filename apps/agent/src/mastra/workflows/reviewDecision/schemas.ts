@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { authorityCitationSchema, groundResultSchema } from "../../canon/schemas";
+import {
+  authorityCitationSchema,
+  groundInputSchema,
+  groundResultSchema,
+} from "../../canon/schemas";
 
 /*
  * The review-decision workflow's shapes. The judges' contract (what Canon
@@ -17,23 +21,8 @@ export const reviewInputSchema = z.object({
 export const reviewCarrierSchema = reviewInputSchema.extend({
   reviewRunId: z.string(),
   decisionKey: z.string(),
-  decision: z.object({
-    taxYear: z.number().int(),
-    decisionKey: z.string(),
-    decision: z.unknown(),
-    rationale: z.string(),
-    confidence: z.string(),
-    dissentingConsiderations: z.string().nullable(),
-    supportingFactKeys: z.array(z.string()),
-  }),
-  facts: z.array(
-    z.object({
-      key: z.string(),
-      category: z.string(),
-      value: z.unknown(),
-      sourceNote: z.string().nullable(),
-    }),
-  ),
+  decision: groundInputSchema.shape.decision,
+  facts: groundInputSchema.shape.facts,
   ground: groundResultSchema.optional(),
 });
 export type ReviewCarrier = z.infer<typeof reviewCarrierSchema>;

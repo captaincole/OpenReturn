@@ -67,22 +67,43 @@ export const askResultSchema = z.object({
 });
 export type AskResult = z.infer<typeof askResultSchema>;
 
+/* run_ask: the result, or the failure with the query log up to it. */
+export const askRunResultSchema = z.discriminatedUnion("status", [
+  askResultSchema.extend({ status: z.literal("ok") }),
+  z.object({
+    status: z.literal("failed"),
+    error: z.string(),
+    log: z.object({ steps: z.array(z.record(z.unknown())) }),
+  }),
+]);
+export type AskRunResult = z.infer<typeof askRunResultSchema>;
+
 /* ---------- ground ---------- */
 
-export interface GroundInput {
-  decision: {
-    taxYear: number;
-    decisionKey: string;
-    decision: unknown;
-    rationale: string;
-    confidence: string;
-    dissentingConsiderations: string | null;
-    supportingFactKeys: string[];
-  };
-  facts: { key: string; category: string; value: unknown; sourceNote: string | null }[];
+export const groundDecisionSchema = z.object({
+  taxYear: z.number().int(),
+  decisionKey: z.string(),
+  decision: z.unknown(),
+  rationale: z.string(),
+  confidence: z.string(),
+  dissentingConsiderations: z.string().nullable(),
+  supportingFactKeys: z.array(z.string()),
+});
+
+export const taxFactSnapshotSchema = z.object({
+  key: z.string(),
+  category: z.string(),
+  value: z.unknown(),
+  sourceNote: z.string().nullable(),
+});
+
+export const groundInputSchema = z.object({
+  decision: groundDecisionSchema,
+  facts: z.array(taxFactSnapshotSchema),
   /** Retrieval rounds the judges may take (Canon's default: 3). */
-  maxIterations?: number;
-}
+  maxIterations: z.number().int().optional(),
+});
+export type GroundInput = z.infer<typeof groundInputSchema>;
 
 export const authorityCitationSchema = z.object({
   blockId: z.string(),
@@ -108,3 +129,14 @@ export const groundResultSchema = z.object({
   log: z.object({ steps: z.array(groundStepLogSchema) }),
 });
 export type GroundResult = z.infer<typeof groundResultSchema>;
+
+/* run_ground: the result, or the failure with the judge steps that ran. */
+export const groundRunResultSchema = z.discriminatedUnion("status", [
+  groundResultSchema.extend({ status: z.literal("ok") }),
+  z.object({
+    status: z.literal("failed"),
+    error: z.string(),
+    log: z.object({ steps: z.array(groundStepLogSchema) }),
+  }),
+]);
+export type GroundRunResult = z.infer<typeof groundRunResultSchema>;

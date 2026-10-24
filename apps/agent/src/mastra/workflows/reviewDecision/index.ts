@@ -98,12 +98,30 @@ export function enqueueReview(scope: Scope, decisionId: string): Promise<ReviewD
  * Re-queue every review that never reached Canon. No scheduler: this runs
  * after each record-ai-decision's own review and on
  * POST /app/filings/:filingId/reviews/retry. Decisions already in the
- * queue are skipped, so overlapping sweeps do not pile up.
+ * queue are skipped, so overlapping sweeps do not pile up, and `except`
+ * leaves out the decision whose review just ran: a timed-out call may
+ * still be running in Canon, and re-sending it at once would put two
+ * grounds on the judges' GPU, the very thing the queue prevents.
  */
-export async function retryUnreachedReviews(scope: Scope): Promise<ReviewDecisionOutput[]> {
+export async function retryUnreachedReviews(
+  scope: Scope,
+  except?: string,
+): Promise<ReviewDecisionOutput[]> {
   const unreached = await listDecisions(scope, { verdict: "review_unreached" });
-  const runs = unreached.filter((d) => !queued.has(d.id)).map((d) => enqueueReview(scope, d.id));
+  const runs = unreached
+    .filter((d) => d.id !== except && !queued.has(d.id))
+    .map((d) => enqueueReview(scope, d.id));
   return Promise.all(runs);
+}
+
+/*
+ * The tool's follow-up: sweep only when this review reached Canon. A
+ * review that did not is no evidence Canon is back, so its sweep would
+ * only queue more calls to time out; the next decision tries again.
+ */
+export function retryAfter(scope: Scope, out: ReviewDecisionOutput): Promise<unknown> {
+  if (out.finalVerdict === "review_unreached") return Promise.resolve();
+  return retryUnreachedReviews(scope, out.decisionId);
 }
 
 /*

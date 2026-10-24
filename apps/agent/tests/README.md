@@ -11,6 +11,9 @@ integration, golden, and the scenarios) are in
 | `unit/` | One module, its own small inputs. The same folders as `src/` and `scripts/`. | `npm run test:unit` |
 | `integration/` | Agent code over engine output. | `npm run test:integration` |
 
+`unit/boundary.test.ts` fails if Cade imports Canon's code or opens
+corpus.db; Cade reaches Canon only over MCP.
+
 No test file goes under `src/` or `scripts/`; `unit/layout.test.ts` fails
 on one. Scenario data comes from `@openreturn/engine/scenarios`; do not copy it
 here.

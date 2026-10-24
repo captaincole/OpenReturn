@@ -9,9 +9,10 @@ import { mergeByRank } from "./mergeHits";
 import { renderAnswerPrompt, renderFormulatePrompt, renderHistory } from "./prompts";
 import {
   askInputSchema,
-  askResultSchema,
+  askRunResultSchema,
   type AskHistoryTurn,
   type AskResult,
+  type AskRunResult,
   type AskStage,
 } from "./types";
 import { NOT_COVERED_ANSWER, validateAnswer, type Passage } from "./validate";
@@ -241,8 +242,17 @@ export async function answerQuestion(
 const answerStep = createStep({
   id: "answer",
   inputSchema: askInputSchema,
-  outputSchema: askResultSchema,
-  execute: ({ inputData, mastra }) => answerQuestion(mastra, inputData),
+  outputSchema: askRunResultSchema,
+  /* The MCP-facing step: a judge failure comes back with the query log, not as a thrown error. */
+  execute: async ({ inputData, mastra }): Promise<AskRunResult> => {
+    const steps: AskStepLog[] = [];
+    try {
+      return { status: "ok", ...(await answerQuestion(mastra, { ...inputData, steps })) };
+    } catch (err) {
+      const error = err instanceof Error ? err.message : String(err);
+      return { status: "failed", error, log: { steps } };
+    }
+  },
 });
 
 export const askWorkflow = createWorkflow({
@@ -250,7 +260,7 @@ export const askWorkflow = createWorkflow({
   description:
     "Ask The Tax Code: answers one question about US federal or California tax from the IRS/FTB reference library, with numbered citations to the passages it relied on. Pass completed earlier turns as history for a follow-up. Says when the library does not cover the question.",
   inputSchema: askInputSchema,
-  outputSchema: askResultSchema,
+  outputSchema: askRunResultSchema,
 })
   .then(answerStep)
   .commit();

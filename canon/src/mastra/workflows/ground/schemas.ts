@@ -218,3 +218,18 @@ export const groundResultSchema = z.object({
   log: z.object({ steps: z.array(groundStepLogSchema) }),
 });
 export type GroundResult = z.infer<typeof groundResultSchema>;
+
+/*
+ * What the `ground` workflow (and so run_ground) returns: the result, or
+ * the failure with the steps that ran before it. A judge that throws
+ * must not take the step log with it; the caller persists both.
+ */
+export const groundRunResultSchema = z.discriminatedUnion("status", [
+  groundResultSchema.extend({ status: z.literal("ok") }),
+  z.object({
+    status: z.literal("failed"),
+    error: z.string(),
+    log: z.object({ steps: z.array(groundStepLogSchema) }),
+  }),
+]);
+export type GroundRunResult = z.infer<typeof groundRunResultSchema>;

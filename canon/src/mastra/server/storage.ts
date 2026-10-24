@@ -6,9 +6,11 @@ import { fileURLToPath } from "node:url";
 
 /*
  * Mastra runtime storage for Canon (workflow snapshots, traces). Canon
- * keeps no user data, so this file holds only framework state; deleting
- * it loses nothing but Studio history. It is separate from corpus.db,
- * which is the library and ships prebuilt.
+ * keeps no user data of its own, but a ground run's snapshot carries the
+ * decision and facts Cade sent, so `npm run reset` deletes this file with
+ * Cade's (canon reset:data); deleting it loses nothing but Studio
+ * history. It is separate from corpus.db, which is the library and ships
+ * prebuilt.
  *
  * Path: MASTRA_DB_PATH env wins (Canon's own .env.development), else
  * <canon>/.data/mastra.db anchored to this module.
