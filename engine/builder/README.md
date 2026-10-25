@@ -1,4 +1,6 @@
-# builder
+# Builder (`@openreturn/builder`)
+
+[← Back to the README](../../README.md) · [the engine](../README.md)
 
 Dev-time tooling (`@openreturn/builder`) that turns a blank IRS/FTB PDF
 into the assets the form engine consumes. Nothing here runs in production — the engine reads the
