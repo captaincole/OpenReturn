@@ -1,7 +1,7 @@
 <h1 align="center">OpenReturn</h1>
 
 <p align="center">
-  <strong>Open-source AI tax preparation. Cited facts in, a deterministic return out.</strong>
+  <strong>Open-source AI Agent tax preparation. Cited facts in, a deterministic return out.</strong>
 </p>
 
 <p align="center">
