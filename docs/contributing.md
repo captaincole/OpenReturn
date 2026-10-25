@@ -17,6 +17,8 @@ return you already filed** and send the maintainer the report. See
 
 Congratulations on wanting to be a developer! The point of this project is that it should be collaborative. 
 
+To get it running first, follow the [Quickstart](quickstart.md). Each folder's README explains that part: [Cade](../cade/README.md), [Canon](../canon/README.md), [the form engine](../engine/README.md), [the builder](../engine/builder/README.md), [sources](../sources/README.md) and [the web app](../web/README.md).
+
 If you want to get setup locally to be able to add capabilities to this system there are a few things you need to know. I would really like the patterns that have been established to stay the same unless there is a significantly improved pattern that a core contributor wants to recommend. 
 
 ### Understanding The Agent

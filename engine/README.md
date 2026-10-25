@@ -1,5 +1,7 @@
 # The Form Engine (`@openreturn/engine`)
 
+[← Back to the README](../README.md)
+
 The deterministic core of OpenReturn. Facts and decisions go in, evaluated tax
 forms come out. **No AI anywhere in the math** — every line on every form is
 computed by a typed, pure-function derivation you can read, test, and diff.
