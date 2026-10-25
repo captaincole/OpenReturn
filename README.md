@@ -76,22 +76,6 @@ The [Quickstart guide](docs/quickstart.md) has the local-model settings and what
 3. The **form engine** computes the return from the facts and decisions. The inputs it still needs become Cade's next questions.
 4. **Canon** checks each decision against the IRS and FTB reference library, and answers your tax-code questions with citations.
 
-Three services run on your machine. Cade reaches Canon only over [MCP](https://modelcontextprotocol.io):
-
-```mermaid
-flowchart LR
-  you([You]) --> web["<b>web/</b><br/>Next.js · :3000"]
-  web -- "/api/agent proxy" --> cade["<b>cade/</b><br/>Cade · Mastra · :4111"]
-  web -- "/api/canon proxy" --> canon["<b>canon/</b><br/>Canon · Mastra · :4112"]
-  cade -- "MCP: ground, ask" --> canon
-  cade --> engine["<b>engine/</b><br/>form engine · no AI"]
-  web -.-> appdb[("app.db<br/>documents/")]
-  cade --> appdb
-  canon --> corpus[("corpus.db<br/>IRS + FTB library")]
-  sources["<b>sources/</b><br/>IRS + FTB source files"] -. "npm run corpus" .-> corpus
-  sources -. "npm run form-engine" .-> engine
-```
-
 ## The project
 
 Each top-level folder builds and runs on its own, and each has its own README.
