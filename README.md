@@ -14,15 +14,16 @@
 </p>
 
 <p align="center">
-  <a href="#quickstart">Quickstart</a> ·
-  <a href="#how-it-works">How it works</a> ·
-  <a href="#the-project">The project</a> ·
-  <a href="#documentation">Documentation</a> ·
-  <a href="docs/contributing.md">Contributing</a>
+  <a href="cade/README.md">Cade</a> ·
+  <a href="canon/README.md">Canon</a> ·
+  <a href="engine/README.md">Form engine</a> ·
+  <a href="sources/README.md">Sources</a> ·
+  <a href="web/README.md">Web app</a> ·
+  <a href="docs/quickstart.md">Quickstart</a>
 </p>
 
 <p align="center">
-  <img src="static/screenshots/return-2025.png" alt="The 2025 return workspace: Cade's chat on the left, with a summary of the drafted return and links to the forms; on the right, the Activity feed of recorded facts and decisions, Requested actions, and the generated Tax forms" width="880">
+  <img src="static/how-it-works.svg" alt="How OpenReturn works: the Web App sends your words and documents to Cade. Cade sends tax facts and decisions to the Form Engine, and asks Canon to check each decision against the IRS and FTB reference library. Canon sends back verdicts and citations. The Form Engine sends the draft return and open questions back to the Web App." width="720">
 </p>
 
 OpenReturn prepares your US federal and California return, or an estimate, on your own machine. Twin agents do the work: **Cade**, your CPA, interviews you and reads your documents. **Canon**, your tax attorney, checks each of Cade's decisions against the IRS and FTB text. A deterministic form engine computes every line. No AI touches the math.
@@ -44,7 +45,7 @@ This project was going to be a startup, but life changed directions. Now I want 
 - **Ask The Tax Code.** Ask a tax question and get a short answer with numbered citations into a library of 168 IRS and FTB documents.
 - **A live draft return.** Each new fact runs the engine again. The 1040, the CA 540 and their schedules update as you talk.
 - **Your data stays local.** All data is SQLite files and a documents folder on your machine. No Docker, no Postgres, no hosted services.
-- **Any model.** Use Anthropic, or any OpenAI-compatible server such as Ollama. The full flow, document reading included, runs on Gemma 4 through Ollama.
+- **Any model.** Use Anthropic, or any OpenAI-compatible server such as Ollama. The smallest model we recommend is **Gemma 4 31B**; it runs the full flow locally, document reading included. See [Evals](#evals).
 
 ## Before you use this — read honestly
 
@@ -54,28 +55,21 @@ This project was going to be a startup, but life changed directions. Now I want 
 
 ## Quickstart
 
-You need Node.js 20 or later, and an Anthropic API key or a local model server. [Ollama](https://ollama.com) is optional; it adds semantic search over the tax library.
+You need Node.js 20 or later, and an Anthropic API key or [Ollama](https://ollama.com) with Gemma 4 31B.
 
 ```bash
 git clone https://github.com/captaincole/OpenReturn.git
 cd OpenReturn
-npm run install:all      # install the workspaces and the web app
-npm run dev:all          # first run writes the .env.development files, then starts all three services
+npm run install:all
+npm run dev:all            # writes the .env.development files; stop it with Ctrl-C
+# set ANTHROPIC_API_KEY (or a local model) in cade/ and canon/.env.development
+npm run corpus -- fetch    # the IRS + FTB library
+npm run dev:all            # then open http://localhost:3000
 ```
 
-Then:
-
-1. Stop the services (Ctrl-C). Set `ANTHROPIC_API_KEY` in `cade/.env.development` and `canon/.env.development`.
-2. Run `npm run corpus -- fetch` to download the prebuilt IRS and FTB library.
-3. Run `npm run dev:all` again and open http://localhost:3000. The first visit asks you to create the owner account.
-
-The [Quickstart guide](docs/quickstart.md) explains each step, how to run on local models, and how to check your setup with `npm run doctor`.
+The [Quickstart guide](docs/quickstart.md) has the local-model settings and what to explore first.
 
 ## How it works
-
-<p align="center">
-  <img src="static/how-it-works.svg" alt="How OpenReturn works: the Web App sends your words and documents to Cade. Cade sends tax facts and decisions to the Form Engine, and asks Canon to check each decision against the IRS and FTB reference library. Canon sends back verdicts and citations. The Form Engine sends the draft return and open questions back to the Web App." width="720">
-</p>
 
 1. You talk to **Cade** in the web app and upload your documents.
 2. Cade records **tax facts** (what you said or what a document shows, with a citation) and **decisions** (judgment calls, with a rationale).
@@ -114,16 +108,32 @@ Each top-level folder builds and runs on its own, and each has its own README.
 
 ## What it looks like
 
+<p align="center">
+  <img src="static/screenshots/return-2025.png" alt="The 2025 return workspace: Cade's chat on the left, with a summary of the drafted return and links to the forms; on the right, the Activity feed of recorded facts and decisions, Requested actions, and the generated Tax forms" width="880">
+  <br/><strong>A return.</strong> Chat with Cade on the left; the facts, decisions and forms it drafts on the right.
+</p>
+
 | | |
 | --- | --- |
-| <img src="static/screenshots/home.png" alt="The home page: a tax code search box, the 2025 return card and the 2026 estimated taxes card" width="430"><br/>**Home.** Your returns, estimates and the tax-code search. | <img src="static/screenshots/ask-tax-code.png" alt="Ask Canon: the question 'What is the maximum HSA contribution for self-only coverage in 2025?' with a cited answer and three reference cards that quote Publication 969 and the Form 8889 instructions" width="430"><br/>**Ask The Tax Code.** Short answers with numbered citations. Each card quotes the passage and opens the source on its page. |
-| <img src="static/screenshots/library-document.png" alt="The FTB 5805 instructions in the Reference Library, opened at the Federal Annualized Income Worksheet, with a contents rail on the left" width="430"><br/>**Reference Library.** Every document an answer can cite. A citation opens it at the cited section. | <img src="static/screenshots/return-2025-light.png" alt="The 2025 return workspace in the light theme" width="430"><br/>**Light and dark.** OpenReturn follows your system setting; the button in the top bar switches it. |
+| <img src="static/screenshots/home.png" alt="The home page: a tax code search box, the 2025 return card and the 2026 estimated taxes card" width="430"><br/>**Home.** Your returns, estimates and the tax-code search. | <img src="static/screenshots/ask-tax-code.png" alt="Ask Canon: the question 'What is the maximum HSA contribution for self-only coverage in 2025?' with a cited answer and three reference cards that quote Publication 969 and the Form 8889 instructions" width="430"><br/>**Ask The Tax Code.** Short answers with numbered citations into the IRS and FTB text. |
+
+## Evals
+
+Every flow that uses a model has an eval: document ingest (Cade), decision review and Ask The Tax Code (Canon). Each model gets one score per flow. Scores from 2026-10-23; the [eval reports](docs/evals/README.md) have the details.
+
+| Model | Overall | Ingest | Review | Ask |
+| --- | --- | --- | --- | --- |
+| Claude Haiku 5.5 | **94%** | 100% | 100% | 81% |
+| Gemma 4 31B (Q4_K_M) | **85%** | 91% | 96% | 69% |
+| Gemma 4 26B (Q4_K_M) | **81%** | 90% | 81% | 72% |
+
+**The smallest recommended model is Gemma 4 31B** (`ollama/gemma4:31b`). Smaller models lose accuracy in decision review.
 
 ## Documentation
 
 | Guide | For |
 | --- | --- |
-| [Quickstart](docs/quickstart.md) | Install, configure and run OpenReturn, on a cloud model or a local one |
+| [Quickstart](docs/quickstart.md) | Run OpenReturn in a few minutes, on a cloud model or a local one |
 | [Contributing and developer guide](docs/contributing.md) | Who can contribute, and how the agents, the corpus, the scenarios and the form engine work |
 | [Test OpenReturn against your filed return](docs/testing-with-your-return.md) | Check the engine against a return you already filed, privately, and send us the result |
 | [Add a scenario](docs/adding-a-scenario.md) | Add a new test taxpayer, with new forms or documents, and the tests that check each step |

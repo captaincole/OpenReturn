@@ -28,7 +28,11 @@ In the web app, Ask The Tax Code shows Canon's answers:
 
 ## The library
 
-`canon/.data/corpus.db` is the library: 168 IRS and FTB documents, form instructions and publications, with their text, sections, citable blocks, embeddings and the source file of each. The web app's Reference Library lists them all.
+`canon/.data/corpus.db` is the library: 168 IRS and FTB documents, form instructions and publications, with their text, sections, citable blocks, embeddings and the source file of each. The web app's Reference Library lists them all, and a citation opens its document at the cited section:
+
+<p align="center">
+  <img src="../static/screenshots/library-document.png" alt="The FTB 5805 instructions in the Reference Library, opened at the Federal Annualized Income Worksheet, with a contents rail on the left" width="880">
+</p>
 
 ```
 sources/**/*.meta.json  →  fetch the source file (PDF, or a cleaned FTB web page)
