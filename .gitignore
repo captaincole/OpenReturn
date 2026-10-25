@@ -1,5 +1,5 @@
 node_modules
-apps/web/dist
+web/dist
 .mastra
 .env
 .env.development
@@ -10,7 +10,7 @@ apps/web/dist
 *.db-wal
 *.db-shm
 *.log
-apps/agent/src/mastra/public/drafts/
+cade/src/mastra/public/drafts/
 .DS_Store
 .claude/
 .vercel
@@ -20,11 +20,11 @@ supabase/
 .scratch/
 
 # E2E run folders: data, logs, transcripts, Playwright output.
-e2e/.run/
+web/e2e/.run/
 
-# Runtime copy of the blank PDFs, made by apps/agent scripts/syncSources.ts
+# Runtime copy of the blank PDFs, made by cade scripts/syncSources.ts
 # from sources (the one copy in git).
-apps/agent/src/mastra/public/sources/
+cade/src/mastra/public/sources/
 
 # Corpus source documents are not committed: sources keeps their
 # sidecars (docId, sourceUrl, sha256), and canon/.data/corpus.db stores the

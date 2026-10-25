@@ -4,5 +4,5 @@
   "singleQuote": false,
   "trailingComma": "all",
   "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
-  "tailwindStylesheet": "./apps/web/app/globals.css"
+  "tailwindStylesheet": "./web/app/globals.css"
 }

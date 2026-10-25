@@ -1,6 +1,6 @@
 /*
  * Canon is the library, not the tax return. Nothing under src/ or
- * scripts/ may reach into Cade (apps/agent, app.db, ask threads), the
+ * scripts/ may reach into Cade (cade, app.db, ask threads), the
  * form engine, or agent memory. The MCP server is the only way out; the
  * corpus is the only thing in.
  */
@@ -12,7 +12,8 @@ import { describe, expect, it } from "vitest";
 const CANON_ROOT = resolve(__dirname, "../..");
 
 const FORBIDDEN: { pattern: RegExp; why: string }[] = [
-  { pattern: /from ["'][^"']*apps\/agent/, why: "Cade's code" },
+  { pattern: /from ["'](?:\.\.\/)+cade\//, why: "Cade's code" },
+  { pattern: /from ["']@openreturn\/cade/, why: "Cade's code" },
   {
     pattern: /from ["'][^"']*\/(appDb|askThreads|taxFacts|aiDecisions|filings)["']/,
     why: "app.db",

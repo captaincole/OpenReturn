@@ -1,0 +1,40 @@
+/*
+ * tsconfig.json maps each @openreturn/* entry point to its source file. Mastra
+ * dev reads the `server` config by bundling src/mastra/index.ts and
+ * running the result with plain Node; without the alias it leaves
+ * @openreturn/engine external, and Node cannot load the engine's TypeScript.
+ * The alias makes Mastra bundle it instead. This test keeps the alias
+ * equal to the packages' `exports` maps.
+ */
+
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { describe, expect, it } from "vitest";
+
+const AGENT_ROOT = resolve(__dirname, "../..");
+const readJson = (path: string) => JSON.parse(readFileSync(resolve(AGENT_ROOT, path), "utf8"));
+
+function exportsAsPaths(pkgDir: string): Record<string, string[]> {
+  const pkg = readJson(`${pkgDir}/package.json`) as {
+    name: string;
+    exports: Record<string, string>;
+  };
+  return Object.fromEntries(
+    Object.entries(pkg.exports).map(([sub, file]) => [
+      sub === "." ? pkg.name : `${pkg.name}/${sub.slice(2)}`,
+      [`${pkgDir}/${file.slice(2)}`],
+    ]),
+  );
+}
+
+describe("workspace path aliases", () => {
+  it("match the engine and sources package exports", () => {
+    const { paths } = readJson("tsconfig.json").compilerOptions as {
+      paths: Record<string, string[]>;
+    };
+    expect(paths).toEqual({
+      ...exportsAsPaths("../engine"),
+      ...exportsAsPaths("../sources"),
+    });
+  });
+});

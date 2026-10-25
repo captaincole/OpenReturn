@@ -19,7 +19,7 @@ npm run dev:canon          # from the repo root: Mastra on :4112, Studio include
 npm run corpus -- status   # the corpus CLI (no args lists subcommands)
 ```
 
-MCP clients connect to `http://localhost:4112/api/mcp/canon/mcp` (streamable HTTP) or `/api/mcp/canon/sse`; Cade's client is `apps/agent/src/mastra/canon/client.ts`. The web app reads the reference library through its `/api/canon` proxy.
+MCP clients connect to `http://localhost:4112/api/mcp/canon/mcp` (streamable HTTP) or `/api/mcp/canon/sse`; Cade's client is `cade/src/mastra/canon/client.ts`. The web app reads the reference library through its `/api/canon` proxy.
 
 Configuration lives in `canon/.env.development` (generated on first `npm run dev`, see `.env.example`): `JUDGE_MODEL`, the embeddings model, and `CORPUS_DB_PATH`.
 
