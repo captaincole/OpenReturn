@@ -35,6 +35,23 @@ const nextConfig: NextConfig = {
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean),
+  /*
+   * On every response: no MIME sniffing (an upload cannot turn into a
+   * page), no framing (clickjacking), no Referer to other sites. The page
+   * CSP is per request, in proxy.ts.
+   */
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Referrer-Policy", value: "same-origin" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

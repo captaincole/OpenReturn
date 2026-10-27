@@ -1,6 +1,7 @@
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import type { Metadata } from "next";
 import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { headers } from "next/headers";
 import Script from "next/script";
 import "./globals.css";
 
@@ -35,11 +36,16 @@ export const viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  /*
+   * The CSP nonce from proxy.ts. Reading a request header also makes
+   * every page render per request, which the nonce requires.
+   */
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     /*
      * suppressHydrationWarning: THEME_INIT_SCRIPT sets data-theme on <html>
@@ -51,7 +57,7 @@ export default function RootLayout({
       className={`${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable}`}
     >
       <body className="h-full bg-bg-base font-sans text-ink-primary antialiased">
-        <Script id="theme-init" strategy="beforeInteractive">
+        <Script id="theme-init" strategy="beforeInteractive" nonce={nonce}>
           {THEME_INIT_SCRIPT}
         </Script>
         {children}

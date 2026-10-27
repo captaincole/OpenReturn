@@ -19,6 +19,40 @@ function isPublic(pathname: string): boolean {
   return PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 }
 
+/*
+ * Content Security Policy for pages, the nonce pattern from the Next.js
+ * CSP guide: only scripts that carry this request's nonce run, so markup
+ * injected into a page (stored reference HTML, an XSS) cannot run script.
+ * Images, fetches and form posts stay on this origin, which also stops
+ * a prompt injection from sending data out in an image URL. Next.js reads
+ * the nonce from the request header and puts it on its own scripts; the
+ * root layout passes it to the theme script.
+ *
+ * Styles allow inline: React style props need it, and a style cannot
+ * run script. No upgrade-insecure-requests: the app is plain http on
+ * localhost and the LAN. Dev needs 'unsafe-eval' (React's dev stacks).
+ */
+function contentSecurityPolicy(nonce: string): string {
+  const dev = process.env.NODE_ENV === "development";
+  return [
+    "default-src 'self'",
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${dev ? " 'unsafe-eval'" : ""}`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob:",
+    "font-src 'self' data:",
+    "connect-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'none'",
+  ].join("; ");
+}
+
+/* Route handlers (JSON, PDFs, downloads) get no CSP; pages do. */
+function isPage(pathname: string): boolean {
+  return !pathname.startsWith("/api/") && !pathname.startsWith("/documents/");
+}
+
 export function proxy(request: NextRequest) {
   const hasCookie = request.cookies.has(SESSION_COOKIE);
   const { pathname } = request.nextUrl;
@@ -33,7 +67,16 @@ export function proxy(request: NextRequest) {
     url.pathname = "/";
     return NextResponse.redirect(url);
   }
-  return NextResponse.next();
+  if (!isPage(pathname)) return NextResponse.next();
+
+  const nonce = btoa(crypto.randomUUID());
+  const csp = contentSecurityPolicy(nonce);
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-nonce", nonce);
+  requestHeaders.set("Content-Security-Policy", csp);
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
+  response.headers.set("Content-Security-Policy", csp);
+  return response;
 }
 
 export const config = {
