@@ -84,11 +84,17 @@ export async function getOwnerAuthRow(): Promise<OwnerAuthRow | null> {
   };
 }
 
-export async function insertOwnerRow(row: OwnerAuthRow): Promise<void> {
+/*
+ * Inserts the owner only when the table is empty, in one statement, so
+ * two setup requests at once cannot both create an owner. False when an
+ * owner already exists.
+ */
+export async function insertOwnerRow(row: OwnerAuthRow): Promise<boolean> {
   await ensureOwnerTable();
-  await db().execute({
+  const result = await db().execute({
     sql: `INSERT INTO owner (id, email, display_name, password_hash, session_secret, created_at)
-          VALUES (?, ?, ?, ?, ?, ?)`,
+          SELECT ?, ?, ?, ?, ?, ?
+          WHERE NOT EXISTS (SELECT 1 FROM owner)`,
     args: [
       row.id,
       row.email,
@@ -98,6 +104,7 @@ export async function insertOwnerRow(row: OwnerAuthRow): Promise<void> {
       new Date().toISOString(),
     ],
   });
+  return result.rowsAffected === 1;
 }
 
 // ─── Filings / memberships ─────────────────────────────────────────────
