@@ -21,7 +21,7 @@ const DEFAULT_DB_PATH = resolve(MODULE_DIR, "../../../.data/mastra.db");
 
 export function mastraDbUrl(): string {
   const path = process.env.MASTRA_DB_PATH ? resolve(process.env.MASTRA_DB_PATH) : DEFAULT_DB_PATH;
-  mkdirSync(dirname(path), { recursive: true });
+  mkdirSync(dirname(path), { recursive: true, mode: 0o700 }); // owner-only: tax data
   return `file:${path}`;
 }
 

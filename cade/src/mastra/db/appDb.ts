@@ -60,7 +60,7 @@ let schemaReady: Promise<void> | null = null;
 export function getAppDb(): Client {
   if (cached) return cached;
   const path = appDbPath();
-  mkdirSync(dirname(path), { recursive: true });
+  mkdirSync(dirname(path), { recursive: true, mode: 0o700 }); // owner-only: tax data
   cached = createClient({ url: `file:${path}` });
   return cached;
 }
