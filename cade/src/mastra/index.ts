@@ -40,6 +40,12 @@ export const mastra = new Mastra({
    */
   server: {
     /*
+     * Loopback only. Mastra leaves the bind address to Node when no host
+     * is set, and Node then listens on every interface. The web app's
+     * proxy reaches the agent at 127.0.0.1; MASTRA_HOST opens it wider.
+     */
+    host: process.env.MASTRA_HOST ?? "127.0.0.1",
+    /*
      * Single-user model: no per-request auth provider. The web app fronts
      * the agent (session cookie + server-side proxy). ownerMiddleware
      * resolves the instance owner and optionally enforces AGENT_API_TOKEN

@@ -4,7 +4,7 @@ import { getOwner } from "../db/appDb";
 
 /*
  * Single-user auth model: identity = the instance. The agent binds to
- * localhost. The web app fronts it, authenticates the browser with its
+ * 127.0.0.1 (index.ts, server.host). The web app fronts it, authenticates the browser with its
  * own session cookie, and proxies agent calls server-side. This
  * middleware does two things:
  *
