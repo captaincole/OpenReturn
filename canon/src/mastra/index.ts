@@ -41,6 +41,8 @@ export const mastra = new Mastra({
   observability: createObservability(),
   server: {
     port: Number(process.env.CANON_PORT ?? 4112),
+    /* Loopback only, as Cade (its index.ts says why). MASTRA_HOST opens it wider. */
+    host: process.env.MASTRA_HOST ?? "127.0.0.1",
     /*
      * Mastra wraps every route handler in its own try/catch before any
      * middleware runs; an uncaught throw funnels through this hook.
