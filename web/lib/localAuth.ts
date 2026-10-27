@@ -94,7 +94,7 @@ export async function createOwner(input: {
     passwordHash: hashPassword(input.password),
     sessionSecret: randomBytes(32).toString("hex"),
   };
-  await insertOwnerRow(row);
+  if (!(await insertOwnerRow(row))) throw new Error("owner already exists");
   return { userId: row.id, email: row.email, displayName: row.displayName };
 }
 
