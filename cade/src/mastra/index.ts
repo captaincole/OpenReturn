@@ -2,9 +2,9 @@ import { Mastra } from "@mastra/core";
 import "dotenv/config";
 import { cade } from "./agents/cade";
 import { ConsoleLogger } from "./server/consoleLogger";
-import { corsMiddleware } from "./server/cors";
 import { createObservability } from "./server/observability";
 import { ownerMiddleware } from "./server/ownerMiddleware";
+import { requestGuard } from "./server/requestGuard";
 import { appStateRoute } from "./server/routes/appState";
 import { addAskTurnRoute, createAskRoute, getAskThreadRoute } from "./server/routes/ask";
 import { createFilingRoute } from "./server/routes/createFiling";
@@ -59,13 +59,15 @@ export const mastra = new Mastra({
       });
       return c.json({ error: "internal server error" }, 500);
     },
+    /*
+     * No CORS: the browser never calls the agent, so no other origin may
+     * read its responses. Without this, Mastra answers every origin with
+     * Access-Control-Allow-Origin: *.
+     */
+    cors: false,
     middleware: [
-      /*
-       * CORS first, so cross-origin preflights short-circuit before
-       * everything else. The ALLOWED_ORIGINS env var configures it;
-       * permissive when unset.
-       */
-      corsMiddleware,
+      /* Refuse foreign Origin and Host headers first (requestGuard.ts). */
+      requestGuard,
       /*
        * Optional AGENT_API_TOKEN gate. Also resolves the instance owner
        * onto requestContext (resource id for memory scoping, email for

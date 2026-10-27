@@ -1,4 +1,5 @@
 import type { MiddlewareHandler } from "hono";
+import { bearerMatches } from "./requestGuard";
 
 /*
  * Optional shared-token gate, the same shape as Cade's: when
@@ -15,7 +16,7 @@ const PROTECTED_PREFIXES = ["/api/", "/app/"];
 export const tokenGate: MiddlewareHandler = async (c, next) => {
   const token = process.env.CANON_API_TOKEN;
   if (token && PROTECTED_PREFIXES.some((p) => c.req.path.startsWith(p))) {
-    if (c.req.header("Authorization") !== `Bearer ${token}`) {
+    if (!bearerMatches(c.req.header("Authorization"), token)) {
       return c.json({ error: "unauthorized" }, 401);
     }
   }
