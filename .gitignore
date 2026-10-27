@@ -1,10 +1,11 @@
 node_modules
 web/dist
 .mastra
-.env
-.env.development
-.env.local
-.env.*.local
+# Env files hold API keys and tokens; only the .env.example templates are committed.
+.env*
+!.env.example
+# Local data: databases, documents, uploads. Every package keeps it in .data/.
+.data/
 *.db
 *.db-journal
 *.db-wal
