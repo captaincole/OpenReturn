@@ -15,6 +15,9 @@ import { existsSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+/* Owner read/write only: these files end up holding API keys. */
+const PRIVATE = 0o600;
+
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const DATA = join(ROOT, "cade", ".data");
 /* Canon owns the reference corpus. */
@@ -47,6 +50,7 @@ JUDGE_MODEL=anthropic/claude-haiku-5-5
 CORPUS_DB_PATH=${CANON_DATA}/corpus.db
 MASTRA_DB_PATH=${CANON_DATA}/mastra.db
 `,
+    { mode: PRIVATE },
   );
   console.log(`[bootstrap] wrote ${canonEnvPath}`);
   wrote = true;
@@ -75,6 +79,7 @@ APP_DB_PATH=${DATA}/app.db
 MASTRA_DB_PATH=${DATA}/mastra.db
 DOCUMENTS_PATH=${DATA}/documents
 `,
+    { mode: PRIVATE },
   );
   console.log(`[bootstrap] wrote ${agentEnvPath}`);
   wrote = true;
@@ -87,6 +92,7 @@ if (!existsSync(webEnvPath)) {
 APP_DB_PATH=${DATA}/app.db
 DOCUMENTS_PATH=${DATA}/documents
 `,
+    { mode: PRIVATE },
   );
   console.log(`[bootstrap] wrote ${webEnvPath}`);
   wrote = true;
@@ -104,6 +110,7 @@ ANTHROPIC_API_KEY=
 # generate-bindings searches Canon over MCP (npm run dev:canon).
 # CANON_URL=http://127.0.0.1:4112
 `,
+    { mode: PRIVATE },
   );
   console.log(`[bootstrap] wrote ${builderEnvPath}`);
   console.log(

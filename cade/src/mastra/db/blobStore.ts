@@ -42,8 +42,9 @@ function safeJoin(storagePath: string): string {
 
 export async function writeBlob(storagePath: string, bytes: Buffer | Uint8Array): Promise<void> {
   const full = safeJoin(storagePath);
-  await mkdir(dirname(full), { recursive: true });
-  await writeFile(full, bytes);
+  // Owner-only: these are tax documents.
+  await mkdir(dirname(full), { recursive: true, mode: 0o700 });
+  await writeFile(full, bytes, { mode: 0o600 });
 }
 
 export async function readBlob(storagePath: string): Promise<Buffer> {
