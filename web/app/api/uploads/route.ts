@@ -1,6 +1,7 @@
 import { deleteBlob, writeBlob } from "@/lib/blobStore";
 import { getOwnerSession } from "@/lib/localAuth";
 import { getOwnerFilingForYear, insertUploadedDocument, listUploads } from "@/lib/serverDb";
+import { MAX_UPLOAD_BYTES, sniffUploadType } from "@/lib/uploadTypes";
 import { NextResponse } from "next/server";
 
 /*
@@ -38,14 +39,17 @@ function slugify(filename: string): string {
   return slug || "file";
 }
 
-function extensionOf(filename: string, mimeType: string): string {
-  const dot = filename.lastIndexOf(".");
-  if (dot > 0 && dot < filename.length - 1) {
-    return filename.slice(dot + 1).toLowerCase();
+/* The file's bytes and real type (lib/uploadTypes.ts), or the error response. */
+async function readAllowedFile(file: File) {
+  if (file.size > MAX_UPLOAD_BYTES) {
+    return NextResponse.json({ error: "file is larger than 25 MB" }, { status: 413 });
   }
-  if (mimeType === "application/pdf") return "pdf";
-  if (mimeType.startsWith("image/")) return mimeType.slice("image/".length);
-  return "bin";
+  const bytes = Buffer.from(await file.arrayBuffer());
+  const type = sniffUploadType(bytes);
+  if (!type) {
+    return NextResponse.json({ error: "upload a PDF, PNG, JPEG or WebP file" }, { status: 415 });
+  }
+  return { bytes, type };
 }
 
 // List the caller's uploads (Documents tab grid, home-tab quick links).
@@ -75,14 +79,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "file is required" }, { status: 400 });
   }
 
+  const checked = await readAllowedFile(file);
+  if (checked instanceof NextResponse) return checked;
+  const { bytes, type } = checked;
+
   const filing = await getOwnerFilingForYear(session.userId, DEMO_TAX_YEAR);
 
   const slug = slugify(file.name);
-  const ext = extensionOf(file.name, file.type);
-  const storagePath = `${filing.id}/uploads/${slug}-${ulid()}.${ext}`;
+  const storagePath = `${filing.id}/uploads/${slug}-${ulid()}.${type.ext}`;
 
   try {
-    await writeBlob(storagePath, Buffer.from(await file.arrayBuffer()));
+    await writeBlob(storagePath, bytes);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json({ error: `upload failed: ${message}` }, { status: 500 });
@@ -95,7 +102,7 @@ export async function POST(request: Request) {
       filename: file.name,
       storagePath,
       sizeBytes: file.size,
-      mimeType: file.type || null,
+      mimeType: type.mimeType,
     });
     return NextResponse.json({ id, filename: file.name, storagePath });
   } catch (err) {
