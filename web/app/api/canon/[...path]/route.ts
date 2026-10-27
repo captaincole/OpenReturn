@@ -1,4 +1,5 @@
 import { getOwnerSession } from "@/lib/localAuth";
+import { proxyTarget } from "@/lib/proxyTarget";
 import { type NextRequest, NextResponse } from "next/server";
 
 /*
@@ -21,7 +22,10 @@ async function forward(
   }
 
   const { path } = await params;
-  const target = new URL(`/${path.join("/")}${request.nextUrl.search}`, CANON_INTERNAL_URL);
+  const target = proxyTarget(path, request.nextUrl.search, CANON_INTERNAL_URL);
+  if (!target) {
+    return NextResponse.json({ error: "bad path" }, { status: 400 });
+  }
 
   const headers = new Headers();
   const accept = request.headers.get("accept");
