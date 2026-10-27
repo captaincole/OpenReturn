@@ -46,6 +46,14 @@ describe("requestGuard", () => {
       (await get({ Host: "taxbox.local:4111", Origin: "http://taxbox.local:4111" })).status,
     ).toBe(200);
   });
+
+  it("matches subdomains of a wildcard entry, not the bare domain", async () => {
+    process.env.ALLOWED_HOSTS = "*.example.app";
+    expect((await get({ Host: "preview-abc123.example.app" })).status).toBe(200);
+    expect((await get({ Host: "a.b.example.app:443" })).status).toBe(200);
+    expect((await get({ Host: "example.app" })).status).toBe(403);
+    expect((await get({ Host: "evilexample.app" })).status).toBe(403);
+  });
 });
 
 describe("bearerMatches", () => {
