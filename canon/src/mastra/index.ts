@@ -2,8 +2,8 @@ import { Mastra } from "@mastra/core";
 import "dotenv/config";
 import { canonMcp } from "./mcp";
 import { ConsoleLogger } from "./server/consoleLogger";
-import { corsMiddleware } from "./server/cors";
 import { createObservability } from "./server/observability";
+import { requestGuard } from "./server/requestGuard";
 import { listRefDocsRoute, refDocHtmlRoute, refDocPdfRoute } from "./server/routes/refdocs";
 import { createStorage } from "./server/storage";
 import { keepServingAfterClientLeft } from "./server/streamGuard";
@@ -56,13 +56,16 @@ export const mastra = new Mastra({
       });
       return c.json({ error: "internal server error" }, 500);
     },
+    /* No CORS, as Cade: browsers reach Canon only through the web app's proxy. */
+    cors: false,
     /*
      * No user auth: corpus data is shared reference material, and the web
-     * app's proxy is what sits in front of this port. The token gate is
-     * the optional defense in depth when the port is reachable beyond
-     * localhost (CANON_API_TOKEN, same shape as Cade's AGENT_API_TOKEN).
+     * app's proxy is what sits in front of this port. requestGuard refuses
+     * foreign Origin and Host headers. The token gate is the optional
+     * defense in depth when the port is reachable beyond localhost
+     * (CANON_API_TOKEN, same shape as Cade's AGENT_API_TOKEN).
      */
-    middleware: [corsMiddleware, tokenGate],
+    middleware: [requestGuard, tokenGate],
     apiRoutes: [listRefDocsRoute, refDocPdfRoute, refDocHtmlRoute],
   },
 });

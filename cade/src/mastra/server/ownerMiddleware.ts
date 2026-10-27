@@ -1,6 +1,7 @@
 import { MASTRA_RESOURCE_ID_KEY } from "@mastra/core/request-context";
 import type { MiddlewareHandler } from "hono";
 import { getOwner } from "../db/appDb";
+import { bearerMatches } from "./requestGuard";
 
 /*
  * Single-user auth model: identity = the instance. The agent binds to
@@ -29,8 +30,7 @@ const PROTECTED_PREFIXES = ["/api/", "/app/"];
 export const ownerMiddleware: MiddlewareHandler = async (c, next) => {
   const token = process.env.AGENT_API_TOKEN;
   if (token && PROTECTED_PREFIXES.some((p) => c.req.path.startsWith(p))) {
-    const auth = c.req.header("Authorization");
-    if (auth !== `Bearer ${token}`) {
+    if (!bearerMatches(c.req.header("Authorization"), token)) {
       return c.json({ error: "unauthorized" }, 401);
     }
   }
