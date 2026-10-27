@@ -14,7 +14,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## File conventions
 
-- This file replaced `AGENTS.md` (2026-10-08). If a Next.js upgrade regenerates `AGENTS.md`, merge any changed `nextjs-agent-rules` block into this file and delete it again.
+- This file replaced `AGENTS.md` (2026-10-08). `agentRules: false` in `next.config.ts` stops `next dev` from writing it again (Next 16.4+). After a Next.js upgrade, compare `node_modules/next/dist/server/lib/generate-agent-files.js` with the rules above and merge any change here.
 
 ## Colors and themes
 

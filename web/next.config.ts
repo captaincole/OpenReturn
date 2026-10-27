@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
    * The dev-tools FAB defaults to bottom-left. There it covers the chat
    * composer's attach button.
    */
+  /*
+   * Next 16.4 writes AGENTS.md on `next dev` when it sees a coding agent.
+   * The same rules already live in this folder's CLAUDE.md.
+   */
+  agentRules: false,
   devIndicators: {
     position: "bottom-right",
   },
