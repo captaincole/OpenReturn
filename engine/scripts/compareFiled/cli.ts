@@ -21,9 +21,10 @@
  */
 
 import { execSync } from "node:child_process";
-import { existsSync, writeFileSync } from "node:fs";
-import { resolve, sep } from "node:path";
+import { existsSync, realpathSync, writeFileSync } from "node:fs";
+import { dirname, resolve, sep } from "node:path";
 import { parseArgs } from "node:util";
+import { ENGINE_ROOT } from "../../paths";
 import { loadFromFixtures } from "../../src/catalog.js";
 import { evaluateScenario } from "../../src/index.js";
 import { FORMS } from "../../src/registry.js";
@@ -178,9 +179,14 @@ async function main(): Promise<void> {
     process.exit(1);
   }
   const dir = resolve(positionals[0]);
-  /* Private data never lives inside the project (CLAUDE.md, ".scratch/"). */
-  const project = resolve(process.cwd(), "../..");
-  if (dir === project || dir.startsWith(`${project}${sep}`)) {
+  /*
+   * Private data never lives inside the project (CLAUDE.md, ".scratch/").
+   * The repo root comes from this file's location, not the cwd, and both
+   * paths resolve symlinks, so no working directory or link gets past it.
+   */
+  const project = realPath(dirname(ENGINE_ROOT));
+  const real = realPath(dir);
+  if (real === project || real.startsWith(`${project}${sep}`)) {
     console.error(`${dir} is inside this project. Keep the data folder outside it.`);
     process.exit(1);
   }
@@ -193,6 +199,13 @@ async function main(): Promise<void> {
     ? await checkFolder(dir)
     : await compareFolder(dir, values["show-values"] === true);
   process.exit(problems === 0 ? 0 : 1);
+}
+
+/* realpath of the path, or of its nearest existing parent (--init creates the folder). */
+function realPath(path: string): string {
+  if (existsSync(path)) return realpathSync(path);
+  const parent = dirname(path);
+  return parent === path ? path : resolve(realPath(parent), path.slice(parent.length + 1));
 }
 
 main().catch((err) => {
