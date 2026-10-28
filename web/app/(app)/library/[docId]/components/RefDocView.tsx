@@ -1,14 +1,10 @@
 "use client";
 
 /*
- * Renders a stored HTML reference document. The HTML is the corpus
- * cleaner's output (canon/src/refdocs/html/cleanFtb.ts): allowlisted
- * semantic tags only, no scripts, styles or event attributes, so it is
- * rendered as-is and styled by `.ref-doc` in globals.css (theme tokens).
- * The page loads after navigation, so the browser cannot jump to a
- * #section on its own, and `:target` is not reliable for headings that
- * arrive late: once the document is in, we scroll to the section and
- * mark it with data-cited (re-marked when the hash changes).
+ * Rendered as-is: canon's cleaner (refdocs/html/cleanFtb.ts) allowlists tags
+ * and drops scripts, styles and event attributes. The HTML arrives after
+ * navigation, so the browser cannot jump to #section and `:target` fails:
+ * we scroll and mark the section with data-cited ourselves.
  */
 
 import { fetchLibraryDocument, type LibraryHtmlDocument, type LibrarySection } from "@/lib/ask";
@@ -92,7 +88,6 @@ function contentsEntries(sections: LibrarySection[]): { s: LibrarySection; neste
     .map((s) => ({ s, nested: s.parent !== null }));
 }
 
-/* The section whose heading is the last one scrolled past. */
 function useActiveAnchor(anchors: string[]): string | null {
   const [active, setActive] = useState<string | null>(null);
   useEffect(() => {

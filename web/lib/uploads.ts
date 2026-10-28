@@ -1,15 +1,4 @@
-/*
- * Uploads a user-attached file via the /api/uploads Route Handler. The
- * handler authenticates from the session cookie, writes the bytes to the
- * local documents dir (blobStore), and inserts the metadata row in the
- * libsql app DB.
- *
- * The browser used to write both stores directly. The whole persist path
- * now sits behind the API route because the metadata lives in a
- * server-side file. The same bytes also flow through the chat message as
- * base64, in parallel with this call, for the agent's vision-based
- * extraction.
- */
+/* The same bytes also go to the agent as base64 in the chat message, in parallel. */
 
 export interface UploadResult {
   id: string;

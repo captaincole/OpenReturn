@@ -1,16 +1,8 @@
-/*
- * The ingest flow's scores for the eval overview (lib/overview.ts). A
- * document scores the mean of its runs, where a run with no ingest call
- * or an error scores 0. Each capability is the mean over its documents,
- * and the flow score is the mean of the capabilities, so the columns add
- * up to it.
- */
 import { avg } from "../lib/markdown";
 import type { EvalModel } from "../lib/models";
 import type { FlowScores, ModelScores } from "../lib/overview";
 import type { IngestResult } from "./report";
 
-/* Capability → which document types it covers (IngestCase.type). The first match wins. */
 const CAPABILITIES: [string, (type: string) => boolean][] = [
   ["W-2", (t) => t.includes("W-2")],
   ["1099", (t) => t.includes("1099")],

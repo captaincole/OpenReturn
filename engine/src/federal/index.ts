@@ -1,18 +1,7 @@
 /*
- * Federal form registry. It lists every federal form the engine knows,
- * plus the bundled runtime catalogs for the forms with bindings.
- * ../registry.ts composes it into the global FORMS list.
- *
- * Order is upstreams-first: 8949 totals feed Schedule D, which feeds
- * 1040. The fixpoint evaluator converges in any order. Upstreams-first
- * only keeps the pass count low.
- *
- * To add a federal form:
- *   1. Put blank.pdf in sources/<year>/forms/federal/<short>/. Generate
- *      catalog.json into ./<short>/ (form-engine generate-catalog).
- *   2. Write types.ts + filingInfo.ts + bindings.ts under ./<short>/.
- *   3. Add a makeFormSpec entry below. Add its catalog import if it has
- *      bindings.
+ * Order is upstreams-first (8949 → Schedule D → 1040) only to keep the
+ * fixpoint pass count low; any order converges. To add a form, follow
+ * the checklist in engine/README.md.
  */
 
 import { fixtureFileSchema } from "../catalog.js";
@@ -32,10 +21,7 @@ import { register as registerScheduleB } from "./schedule-b/bindings.js";
 import { register as registerScheduleD } from "./schedule-d/bindings.js";
 import { register as registerScheduleH } from "./schedule-h/bindings.js";
 
-/*
- * Each form's catalog.json sits next to its bindings. Rollup inlines the
- * JSON at build time; the running process does not read it from disk.
- */
+/* Rollup inlines the JSON at build time; the process does not read it from disk. */
 import form1040CatalogJson from "./1040/catalog.json";
 import form5695CatalogJson from "./5695/catalog.json";
 import form8889CatalogJson from "./8889/catalog.json";
@@ -51,11 +37,7 @@ import scheduleBCatalogJson from "./schedule-b/catalog.json";
 import scheduleDCatalogJson from "./schedule-d/catalog.json";
 import scheduleHCatalogJson from "./schedule-h/catalog.json";
 
-/*
- * fixtureFileSchema.parse() narrows TypeScript's widened JSON types
- * (e.g. `category: string` → `category: Category`). It also fails loud
- * at boot when a catalog drifts from FixtureFile.
- */
+/* parse() narrows the widened JSON types and fails at boot when a catalog drifts. */
 export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(form8949CatalogJson),
   fixtureFileSchema.parse(scheduleDCatalogJson),
@@ -80,7 +62,6 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8949",
     relativeDir: "federal/8949",
     register: registerForm8949,
-    // One box per page: the copy plan decides how many copies to file.
     copies: {
       count: (info) => info?.form8949Copies?.length ?? 1,
       select: (info, index) => info && { ...info, form8949CopyIndex: index },
@@ -107,11 +88,6 @@ export const FEDERAL_FORMS: FormSpec[] = [
     relativeDir: "federal/schedule-a",
     register: registerScheduleA,
   }),
-  /*
-   * Catalog-only entries with no bindings yet. They exist so the
-   * catalog-fill regression test (tests/golden/runAll.ts) checks them against
-   * their blank PDFs. Bindings and downstream wiring come later.
-   */
   makeFormSpec({
     formId: "schedule-b",
     shortId: "schedule-b",
@@ -126,11 +102,7 @@ export const FEDERAL_FORMS: FormSpec[] = [
     relativeDir: "federal/schedule-1",
     register: registerSchedule1,
   }),
-  /*
-   * schedule-1/ and schedule-2/ have no instructions.pdf by design. The
-   * IRS publishes their instructions only inside the 1040 instructions
-   * booklet, which is already in the corpus as irs-1040-inst-2025.
-   */
+  // Schedules 1–3 have no instructions sidecar: the IRS prints them in the 1040 booklet.
   makeFormSpec({
     formId: "schedule-2",
     shortId: "schedule-2",
@@ -138,10 +110,6 @@ export const FEDERAL_FORMS: FormSpec[] = [
     relativeDir: "federal/schedule-2",
     register: registerSchedule2,
   }),
-  /*
-   * Schedule 3 has no instructions.pdf for the same reason: its
-   * instructions are in the 1040 booklet.
-   */
   makeFormSpec({
     formId: "schedule-3",
     shortId: "schedule-3",

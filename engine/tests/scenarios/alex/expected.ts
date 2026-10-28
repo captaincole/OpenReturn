@@ -1,46 +1,30 @@
-/*
- * Alex Morales — expected results.
- *
- * Every numeric expected value below is the literal number from the
- * CPA-completed `docs/Alex-1040-Golden.pdf` in this scenario folder. Any
- * divergence between the rendered 1040 and these values is a regression
- * in the engine, catalog, bindings, FilingInfo resolver, or renderer.
- */
+/* Every numeric value is from the CPA-completed docs/Alex-1040-Golden.pdf. */
 
 import type { ExpectedResults } from "../../types.js";
 
 export const alexExpected: ExpectedResults = {
-  /*
-   * Engine-computed line values (numeric). The runner asserts each
-   * against the evaluated form's typed numeric result.
-   */
   engineFields: {
-    "form-1040.line.1a": 79000, // total W-2 wages box 1
-    "form-1040.line.1z": 79000, // sum of 1a..1h
-    "form-1040.line.9": 79000, // total income
-    "form-1040.line.11b": 79000, // AGI (page 2 display)
+    "form-1040.line.1a": 79000, // W-2 box 1
+    "form-1040.line.1z": 79000,
+    "form-1040.line.9": 79000,
+    "form-1040.line.11b": 79000,
     "form-1040.line.12e": 15750, // 2025 single standard deduction
     "form-1040.line.14": 15750,
-    "form-1040.line.15": 63250, // taxable income
-    "form-1040.line.16": 8835, // tax — from 2025 IRS Tax Table
+    "form-1040.line.15": 63250,
+    "form-1040.line.16": 8835, // 2025 IRS Tax Table
     "form-1040.line.18": 8835,
     "form-1040.line.22": 8835,
-    "form-1040.line.24": 8835, // total tax
-    "form-1040.line.25a": 9420, // W-2 box 2 federal withholding
+    "form-1040.line.24": 8835,
+    "form-1040.line.25a": 9420, // W-2 box 2
     "form-1040.line.25d": 9420,
-    "form-1040.line.33": 9420, // total payments
+    "form-1040.line.33": 9420,
     "form-1040.line.34": 585,
   },
 
-  /*
-   * PDF widget text values. Money fields render as integer strings via
-   * fmtMoney. The renderer strips SSN separators because the PDF widget
-   * is 9-char digit-only (`maxLength=9`).
-   */
   renderedText: {
     "form-1040.header.first_name_mi": "Alex",
     "form-1040.header.last_name": "Morales",
-    "form-1040.header.ssn": "123456789", // stripped from "123-45-6789"
+    "form-1040.header.ssn": "123456789", // maxLength=9 strips the separators
     "form-1040.header.home_address": "2245 Lakeshore Ave",
     "form-1040.header.city": "Oakland",
     "form-1040.header.state": "CA",
@@ -53,18 +37,12 @@ export const alexExpected: ExpectedResults = {
   },
 
   renderedBlank: [
-    // Calendar-year filer: header date widgets stay blank.
     "form-1040.header.tax_year_beginning_mm",
     "form-1040.header.tax_year_ending_mm",
     "form-1040.header.tax_year_ending_yy",
-    // No banking-info facts ingested, so routing + account widgets stay blank.
     "form-1040.line.35b_routing_number",
     "form-1040.line.35d_account_number",
   ],
 
-  /*
-   * Checkboxes that must end up checked. Filing status is 5 separate
-   * boolean fields; only the matching one (Single for Alex) is checked.
-   */
   renderedChecked: ["form-1040.header.filing_status_single"],
 };

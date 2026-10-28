@@ -1,11 +1,4 @@
-/*
- * Alex's side of the conversation. The values match
- * engine/tests/scenarios/alex/{facts,decisions}.ts.
- *
- * The test does not measure how smart the model is, so the replies are
- * direct and specific. The opening turns give every fact up front. After
- * that, replyTo() answers Cade's follow-up questions by keyword.
- */
+/* Values match engine/tests/scenarios/alex/{facts,decisions}.ts. */
 
 import { resolve } from "node:path";
 
@@ -47,7 +40,6 @@ export const OPENING_TURNS: Turn[] = [
   },
 ];
 
-/* replyTo joins the answer of every rule that matches, in this order. */
 const ANSWERS: Array<[RegExp, string]> = [
   [/filing status|married/i, "Please record my filing status as single."],
   [/birth|\bdob\b/i, "My date of birth is 01/01/2002."],
@@ -68,11 +60,7 @@ const ANSWERS: Array<[RegExp, string]> = [
   [/generate|go ahead|proceed|ready|look (right|correct)|confirm/i, GENERATE],
 ];
 
-/*
- * The reply to Cade's last message. A message with no question gets the
- * generate request. A question that no rule matches returns undefined,
- * so the test fails and shows the transcript.
- */
+/* An unmatched question returns undefined, so the test fails and shows the transcript. */
 export function replyTo(cadeMessage: string): string | undefined {
   const matched = ANSWERS.filter(([pattern]) => pattern.test(cadeMessage)).map(([, a]) => a);
   if (matched.length > 0) return [...new Set(matched)].join(" ");

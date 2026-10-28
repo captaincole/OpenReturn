@@ -1,44 +1,30 @@
 /*
- * Render one PDF page to a PNG with numbered overlay rectangles drawn over
- * each widget's bounding box. The output is the image we send to Claude
- * vision, which pairs each numbered badge with the adjacent form text.
- *
- * Coordinate handling: pdf.js's `viewport.convertToViewportPoint(x, y)`
- * converts a PDF-space point (origin bottom-left, y-up) to canvas space
- * (origin top-left, y-down) and applies the page's scale factor. We
- * convert both corners of the widget rect and take the min/max. The
- * canvas-space bounding box is then stable for any rect orientation.
+ * convertToViewportPoint flips PDF space (y-up) to canvas space (y-down).
+ * The min/max of both corners keeps the box right for any rect orientation.
  */
 
 import { createCanvas, loadImage } from "@napi-rs/canvas";
 import { renderPageAsImage } from "unpdf";
 
 export interface OverlayWidget {
-  /** Badge number drawn on the page; must be unique within the page. */
   id: number;
-  /** Widget bounding box in PDF page coordinates: [x1, y1, x2, y2]. */
+  /** PDF page coordinates: [x1, y1, x2, y2]. */
   rect: [number, number, number, number];
 }
 
 export interface RenderedPage {
-  /** PNG bytes ready for Anthropic image input. */
   png: Buffer;
-  /** Final image width in pixels. */
   width: number;
-  /** Final image height in pixels. */
   height: number;
-  /** Scale factor applied (e.g. 2.0). */
   scale: number;
 }
 
 export async function renderPageWithOverlay(opts: {
-  /** A pdf.js PDFDocumentProxy (e.g. from unpdf's getDocumentProxy). */
+  /** A pdf.js PDFDocumentProxy. */
   pdf: any;
-  /** 0-indexed page number. */
+  /** 0-based; pdf.js pages are 1-based. */
   pageIndex: number;
-  /** Widgets to overlay on the page. */
   widgets: OverlayWidget[];
-  /** Render scale; higher = larger image. Default 2.0 (good legibility, modest tokens). */
   scale?: number;
 }): Promise<RenderedPage> {
   const scale = opts.scale ?? 2.0;
@@ -71,12 +57,8 @@ export async function renderPageWithOverlay(opts: {
     ctx.strokeRect(left - pad, top - pad, width + pad * 2, height + pad * 2);
 
     /*
-     * Draw the number badge INSIDE the widget rectangle (top-left corner).
-     * A badge above the widget sat in the label space. Vision models then
-     * confused "badge over text X above widget Y" with "badge labels
-     * widget Y, whose actual label is text Z below". Inside the rectangle,
-     * the badge is unambiguously part of the widget, and the form text
-     * outside the rectangle is unambiguously the label.
+     * The badge sits INSIDE the rectangle. Above the widget it covered label
+     * text, and vision models paired it with the wrong label.
      */
     const badge = String(w.id);
     ctx.font = "bold 13px sans-serif";

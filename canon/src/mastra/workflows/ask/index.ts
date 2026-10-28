@@ -17,30 +17,15 @@ import {
 import { NOT_COVERED_ANSWER, validateAnswer, type Passage } from "./validate";
 
 /*
- * The answer pipeline for tax-code Q&A. One run per question; the earlier
- * turns of the conversation are the only context (no agent memory, so
- * there is still exactly one conversational agent, and it is not Canon).
- *
- *   formulate (judge) → retrieve (per query) → answer (judge) → validate
- *
- * A "partial" answer names its gaps as search queries. The pipeline then
- * runs one more round: retrieve for the gaps, add the new passages after
- * the first ones (their numbers stay the same) and answer again.
- *
- * `answerQuestion` is the function; `askWorkflow` wraps it as a Mastra
- * workflow so the MCP server exposes it (run_ask) and Studio can run it.
- * The judges come from the Mastra instance (mastra.getAgent), so their
- * calls show in that instance's traces. Each step also lands in the
- * result's log with its input, output and timing — the query log.
+ * No agent memory: the earlier turns are the only context, so Cade stays
+ * the one conversational agent.
  */
 
 const HITS_PER_QUERY = 6;
 const MAX_QUERIES = 3;
 const MAX_PASSAGES = 10;
-/* The gap round adds at most this many passages to the first round's. */
 const MAX_GAP_PASSAGES = 6;
 
-/** One entry of the query log: a pipeline step, how long it took, and what it did. */
 export interface AskStepLog {
   kind: string;
   durationMs: number;
@@ -51,20 +36,11 @@ type StepLog = AskStepLog;
 export interface AnswerQuestionInput {
   question: string;
   history?: AskHistoryTurn[];
-  /** Called as each stage starts, for callers that show progress. */
   onStage?: (stage: AskStage) => Promise<void> | void;
-  /**
-   * The query log, when the caller owns it: each step is pushed as it
-   * finishes, so a judge that throws still leaves the steps that ran
-   * with the caller. Otherwise the log comes back in the result only.
-   */
+  /** Steps are pushed as they finish, so a judge that throws keeps the steps that ran. */
   steps?: AskStepLog[];
 }
 
-/*
- * Runs every query, merges the hit lists by rank (mergeHits.ts), returns
- * the top passages. Blocks in `skip` (already passages) are left out.
- */
 async function retrieve(
   queries: string[],
   max = MAX_PASSAGES,
@@ -120,9 +96,8 @@ async function answer(
 }
 
 /*
- * The gap round: when the answer is "partial" and names its gaps, search
- * for them and answer again with the new passages added. One round only.
- * It is best effort: if it fails, the first answer stands.
+ * New passages go after the first ones, so their numbers stay the same.
+ * Best effort: if the round fails, the first answer stands.
  */
 async function fillGaps(
   mastra: Mastra,
@@ -163,7 +138,6 @@ async function fillGaps(
   }
 }
 
-/* Answers one question. Throws when a judge fails; the caller records that. */
 export async function answerQuestion(
   mastra: Mastra,
   input: AnswerQuestionInput,
@@ -220,7 +194,6 @@ const answerStep = createStep({
   id: "answer",
   inputSchema: askInputSchema,
   outputSchema: askRunResultSchema,
-  /* The MCP-facing step: a judge failure comes back with the query log, not as a thrown error. */
   execute: async ({ inputData, mastra }): Promise<AskRunResult> => {
     const steps: AskStepLog[] = [];
     try {

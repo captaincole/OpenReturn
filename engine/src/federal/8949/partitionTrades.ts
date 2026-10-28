@@ -1,9 +1,3 @@
-/*
- * Trade-fact partitioning for Form 8949 / Schedule D.
- * makeResolverInputs (resolverInputs.ts) builds ResolverInputs.trades
- * with partitionTrades().
- */
-
 import {
   isLongTermBox,
   makeForm8949BoxDecisionKey,
@@ -13,34 +7,21 @@ import {
 import type { BoxedTrade } from "./copyPlan.js";
 
 /*
- * Mirrors the key convention in src/facts/kinds/trade.ts. Inlined
- * here because parseTradeFact() expects a full TaxFactRow, while the
- * resolver only sees a {key, value, category} projection. The thinner
- * shape is enough to recognize and decode a trade fact.
+ * Mirrors facts/kinds/trade.ts. parseTradeFact() needs a full TaxFactRow,
+ * and the resolver only sees {key, value, category}.
  */
 const TRADE_KEY_RE = /^account\.([^.]+)\.trades\.([^.]+)$/;
 
 export interface PartitionedTrades {
   short: TradeFactValue[];
   long: TradeFactValue[];
-  /** Every sale with its Form 8949 box and applicable basis, in fact order. */
   boxed: BoxedTrade[];
   factKeys: string[];
 }
 
 /*
- * Trade-fact partitioning for Form 8949. Walk investment_income facts,
- * pull out anything that parses as a trade (key shape
- * `account.<slug>.trades.<tradeId>`), then split by holding period.
- * The per-trade box decision wins: the broker reports the term, and a
- * "VARIOUS" acquired date cannot be dated. Without a decision, fall back
- * to the dates: held > 1 year ⇒ long-term, else short-term. Facts store
- * dates as "MM/DD/YY" or "MM/DD/YYYY"; both parse. The fact-key list
- * feeds the engine-derivation audit trail (triggeredByFactKeys).
- *
- * `boxed` carries the box (the decision, else A or D by term) and the
- * basis: the broker's box 1e, else the taxpayer-reported basis fact
- * (`<trade key>.reported_basis`, category capital_gains).
+ * The per-trade box decision wins over the dates: the broker reports the
+ * term, and a "VARIOUS" acquired date cannot be dated.
  */
 export function partitionTrades(
   facts: ReadonlyArray<{ key: string; value: unknown; category: string }>,
@@ -76,10 +57,6 @@ export function partitionTrades(
   return { short, long, boxed, factKeys };
 }
 
-/*
- * Trade-date parser. Accepts "MM/DD/YY" or "MM/DD/YYYY", the formats
- * brokers print on a 1099-B. Two-digit years anchor to the 2000s.
- */
 function parseTradeDate(s: string): Date | null {
   const m = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/.exec(s);
   if (!m) return null;
@@ -91,10 +68,8 @@ function parseTradeDate(s: string): Date | null {
 }
 
 /*
- * IRC §1222 short/long-term split: held more than 1 year is long-term.
- * "More than 1 year" means strictly past the anniversary date, at day
- * precision. Missing or unparseable dates default to short-term. That is the
- * conservative choice (higher rate) versus a long-term mislabel.
+ * IRC §1222: long-term means sold strictly after the anniversary date.
+ * Missing dates default to short-term, the conservative (higher-rate) choice.
  */
 function isLongTermTrade(t: TradeFactValue): boolean {
   const acq = t.dateAcquired === undefined ? null : parseTradeDate(t.dateAcquired);

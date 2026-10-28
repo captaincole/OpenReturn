@@ -1,10 +1,4 @@
-/*
- * Carter Lewis — facts (the "data").
- *
- * IRS ATS test scenario 8 (tax year 2025), moved from Nevada to
- * California. Every dollar amount is the IRS package's; see
- * docs/RELOCATION.md for what changed and what was added.
- */
+/* Source: IRS ATS test scenario 8 (2025), moved from NV to CA. Changes: docs/RELOCATION.md. */
 
 import {
   SPOUSE_KEYS,
@@ -23,7 +17,6 @@ export const CARTER_TAX_YEAR = 2025;
 
 const CREATED_AT = "2026-10-18T00:00:00Z";
 
-/** One fact row. `id` is derived from the key so it stays stable. */
 const fact = (category: string, key: string, value: unknown, sourceNote: string): TaxFactRow => ({
   id: `f-${key.replace(/[^a-z0-9]+/gi, "-")}`,
   userId: CARTER_USER_ID,
@@ -60,20 +53,14 @@ const jubileeRetirement: RetirementDistributionFactValue = {
   box7IraSepSimple: false,
 };
 
-/*
- * docs/03-example-reit-fund-1099-div.pdf (made by us from the cover page:
- * "a 1099-DIV for total gain distribution from Real Estate Investment Trust").
- */
+// docs/03-example-reit-fund-1099-div.pdf (made by us from the cover page)
 const reitDiv: DividendFactValue = {
   payerName: "Example REIT Fund",
   payerTin: "00-0000009",
   box2a: 7500,
 };
 
-/*
- * docs/04-ssa-1099.pdf (made by us from the cover page:
- * "$1,000 in Social Security benefits").
- */
+// docs/04-ssa-1099.pdf (made by us from the cover page)
 const ssa: SocialSecurityFactValue = {
   payerName: "Social Security Administration",
   box3: 1000,

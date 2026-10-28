@@ -2,17 +2,11 @@ import type { Agent } from "@mastra/core/agent";
 import type { z } from "zod";
 
 /*
- * One judge call: a prompt in, the schema's object out, in a single
- * model request. The schema goes to the model as its response format,
- * so the provider constrains decoding to it and generation ends when
- * the JSON closes. No tools, no second "structuring" pass: on a local
- * model that pass cost more than the judging and could run away.
- *
- * The Anthropic provider bundled with Mastra uses native structured
- * output only for the Claude models it knows; for newer ones it falls
- * back to a JSON tool call, where Claude sometimes sends an array as a
- * string. "outputFormat" forces the native mode. Other providers ignore
- * the option.
+ * One request with the schema as response format. No tools and no second
+ * structuring pass: on a local model that pass cost more than the judging
+ * and could run away. "outputFormat" forces native structured output: for
+ * Claude models Mastra does not know, it falls back to a JSON tool call that
+ * sometimes sends an array as a string.
  */
 export async function judge<S extends z.ZodTypeAny>(
   agent: Agent,

@@ -1,11 +1,3 @@
-/*
- * Prompt + tool definitions for the bindings classifier
- * (classifyBindings.ts). All static: the rule-library spec, the
- * available-data spec, the system prompt that composes them, and the
- * two Anthropic tools the batch conversation uses. Nothing here varies
- * per form or per batch.
- */
-
 import type Anthropic from "@anthropic-ai/sdk";
 
 const RULE_LIBRARY_SPEC = `Rule library — pick one rule per field:

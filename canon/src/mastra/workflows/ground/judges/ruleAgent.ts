@@ -3,16 +3,8 @@ import { modelFor } from "../../../models";
 import { CPA_RULES } from "./cpaRules";
 
 /*
- * Rule agent — the workflow's verdict-or-loop decider. Sees the decision,
- * the evidence bundle, and the assessed risk tier. Returns a discriminated
- * union: either a final verdict (with citations) or a request for more
- * evidence (with suggested next-iteration queries).
- *
- * No tools. Retrieval is the gather step's job, and the agent receives
- * the retrieved blocks' text in its prompt. Its hard rule, cite only what
- * was retrieved and quote it word for word, is enforced after the call
- * by validateCitations.ts, not by a lookup tool: one model call per
- * ruling, and the training data stays one prompt → one object.
+ * No tools: "cite only retrieved blocks, quote word for word" is enforced in
+ * code after the call (validateCitations.ts), so a ruling stays one call.
  */
 
 const baseInstructions = `You are the verdict-or-loop decider for the review-decision workflow. You see one decision the tax agent recorded, the evidence gathered for it (taxpayer facts + retrieved IRS passages), and a risk-tier assessment.

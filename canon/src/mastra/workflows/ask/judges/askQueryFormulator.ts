@@ -2,17 +2,7 @@ import { Agent } from "@mastra/core/agent";
 import { z } from "zod";
 import { modelFor } from "../../../models";
 
-/*
- * Turns a taxpayer's plain-English question (plus the thread so far)
- * into search queries for the reference corpus. Same judge pattern as
- * the review workflow's queryFormulator — prompt + judge model +
- * structured output, no tools, no memory — with a prompt for questions
- * instead of recorded decisions.
- *
- * namedDocuments is a corpus-gap signal: the publications an expert
- * would open for this question. The turn log keeps it, so we can see
- * which documents to add to the library next.
- */
+// namedDocuments is a corpus-gap signal: the turn log shows which documents to add next.
 
 export const askQueriesSchema = z.object({
   /* Capped at 3 in the prompt and by a slice; Anthropic rejects maxItems. */

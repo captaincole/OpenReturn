@@ -1,31 +1,10 @@
 import type { MastraModelConfig } from "@mastra/core/llm";
 
 /*
- * Canon has one model role:
- *
- *   judge     — the grounding judges (workflows/ground/judges: assess,
- *               rule, queryFormulator) and the Ask The Tax Code judges
- *               (workflows/ask/judges: askQueryFormulator, askAnswerer).
- *               Text-only, narrow tasks with structured output.
- *
- * Retrieval embeddings are not a chat model: they route through
- * src/refdocs/embeddings.ts (EMBEDDINGS_MODEL, local Ollama) with a
- * keyword-only fallback when Ollama is down. The ingest contextualizer
- * (REFDOCS_MODEL) is operator tooling whose output ships prebuilt.
- *
- * Configuration contract (JUDGE_*):
- *
- *   JUDGE_MODEL          REQUIRED. "provider/model". Without a URL it
- *                        resolves through Mastra's provider registry
- *                        (cloud, keyed by the provider's *_API_KEY env).
- *   JUDGE_MODEL_URL      When set, the role talks to this
- *                        OpenAI-compatible endpoint instead (Ollama,
- *                        vLLM, LM Studio, llama.cpp, …).
- *   JUDGE_MODEL_API_KEY  Optional bearer token for that endpoint.
- *
- * No in-code default: a missing var is a startup failure, not a silent
- * fallback. Cade resolves its own copy of this role for the grounding
- * steps it still runs in-process.
+ * JUDGE_MODEL ("provider/model") is required: no in-code default, so a
+ * missing var fails at startup. JUDGE_MODEL_URL points the role at an
+ * OpenAI-compatible endpoint (Ollama, vLLM, …); JUDGE_MODEL_API_KEY is its
+ * optional bearer token.
  */
 
 export type ModelRole = "judge";

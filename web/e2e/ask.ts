@@ -1,14 +1,4 @@
-/*
- * Ask The Tax Code, end to end: one definitive question from the home
- * search box, answered from the reference corpus with a citation.
- *
- * The question has one right answer in the Form 8889 instructions
- * (self-only HSA limit, $4,300 for 2025), so a miss is easy to read.
- * Stages, as in summary.ts:
- *   plumbing — the box opens an /ask page and the turn finishes; the
- *              first reference's PDF link serves a PDF.
- *   model    — the answer cites at least one reference and states $4,300.
- */
+/* One right answer: Form 8889 instructions, self-only HSA limit for 2025. */
 
 import { expect, type Locator, type Page } from "@playwright/test";
 import { appendFileSync } from "node:fs";
@@ -47,13 +37,12 @@ export async function askTheTaxCode(page: Page): Promise<void> {
   await backHome(page);
 }
 
-/* Leave the browser on the home page, where the next stage (start a filing) begins. */
+/* The next stage (start a filing) begins on the home page. */
 async function backHome(page: Page) {
   await page.goto("/");
   await expect(page.getByRole("button", { name: /Start filing/ }).first()).toBeVisible();
 }
 
-/* Returns the finished turn's <article> (status completed or failed). */
 async function askQuestion(page: Page): Promise<Locator> {
   await page.goto("/");
   const box = page.getByPlaceholder(/Ask the tax code/);

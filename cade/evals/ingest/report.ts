@@ -1,14 +1,4 @@
-/*
- * Renders the ingest eval: docs/evals/ingest.md for the full tier and
- * docs/evals/ingest-quick.md for the quick tier. The full tier also
- * writes the ingest flow's row in the eval overview (docs/evals/README.md,
- * lib/overview.ts). Run directly to re-render from saved results, for example to
- * combine a new model's run with earlier runs (a later file replaces a
- * model's rows for the documents it ran; only the tier's documents are
- * kept):
- *
- *   npx tsx evals/ingest/report.ts [--full] <results.json>…   (from cade)
- */
+/* Re-render from saved results: npx tsx evals/ingest/report.ts [--full] <results.json>… */
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { avg, scoreCell, table } from "../lib/markdown";
@@ -45,7 +35,6 @@ const OUT: Record<Tier, string> = {
 };
 const TOP_FIELDS = 15;
 
-/* A run with no ingest call (or an error) is counted, not scored. */
 const scored = (rs: IngestResult[]) => rs.filter((r) => !r.error && r.toolCalls.length > 0);
 const failed = (rs: IngestResult[]) => rs.length - scored(rs).length;
 const perfect = (rs: IngestResult[]) => rs.filter((r) => r.score.score === 1).length;
@@ -58,7 +47,6 @@ function cell(rs: IngestResult[]): string {
   return `${scoreCell(ok.map((r) => r.score.score))}${dropped ? ` · ${dropped} failed` : ""}`;
 }
 
-/* End to end: output tokens over wall time, so it includes reading the input. */
 const tokensPerSecond = (rs: IngestResult[]) => {
   const secs = rs.reduce((n, r) => n + r.latencyMs, 0) / 1000;
   return secs ? (rs.reduce((n, r) => n + r.outputTokens, 0) / secs).toFixed(0) : "—";
@@ -108,10 +96,7 @@ function groupTable(
   return table([head, ...models.map((m) => m.label)], rows);
 }
 
-/*
- * Consolidated statements, one row per form on each. Every run without an
- * error counts here, so a form the model skipped scores 0 in that run.
- */
+/* Every run without an error counts here, so a skipped form scores 0 in that run. */
 function formTable(models: EvalModel[], results: IngestResult[]): string {
   const consolidated = results.filter((r) => r.type === "Consolidated 1099" && !r.error);
   const rows = [...new Set(consolidated.map((r) => r.doc))].flatMap((doc) => {
@@ -130,7 +115,6 @@ function formTable(models: EvalModel[], results: IngestResult[]): string {
   return rows.length ? table(["Statement and form", ...models.map((m) => m.label)], rows) : "None.";
 }
 
-/* How often each field was wrong, over scored runs. */
 function fieldMissTable(models: EvalModel[], results: IngestResult[]): string {
   const ok = scored(results);
   const fieldsOf = (r: IngestResult) =>
@@ -192,12 +176,7 @@ export function renderReport(tier: Tier, models: EvalModel[], results: IngestRes
   ].join("\n\n");
 }
 
-/*
- * Merge runs: a later run replaces a model's results for the documents it
- * ran, so one document can be rerun on its own. Keep the tier's documents,
- * write the doc (and the overview, for the full tier), and return the
- * doc's repo path.
- */
+/* A later run replaces a model's results for the documents it ran, so one can rerun alone. */
 export function publishReport(tier: Tier, runs: IngestRun[]): string {
   const docs = new Set(loadCases(tier).map((c) => c.doc));
   const models = new Map<string, EvalModel>();

@@ -2,20 +2,8 @@ import { Agent } from "@mastra/core/agent";
 import { modelFor } from "../../../models";
 
 /*
- * First-iteration query formulator. Reads the decision and emits 1–2
- * search-ref-docs queries phrased the way a tax professional would describe
- * the topic. The gather step consumes the output on iteration 1; later
- * iterations take queries from the rule step's `suggestedQueries`.
- *
- * NOTE: the judges/ modules use Mastra's Agent class as "prompt + model +
- * schema (+ bounded tools)": not conversational, no memory. They are
- * registered on the Mastra instance (index.ts) so their calls get the
- * app's logger and traces; the workflow steps get them with
- * mastra.getAgent(). Cade is the one conversational agent.
- *
- * The task is narrow, so it runs on the judge-role model (JUDGE_MODEL) with
- * no tools; the structured output is just `{queries: string[]}`. It lives
- * apart from rule/assess so its prompt and evals can evolve independently.
+ * The judges use Mastra's Agent class only as prompt + model: no memory, not
+ * conversational. Cade is the one conversational agent.
  */
 
 const instructions = `You write search queries against the IRS reference-document corpus that an automated grounding workflow will then run.

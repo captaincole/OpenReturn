@@ -3,14 +3,7 @@ import { registerApiRoute } from "@mastra/core/server";
 import { getMembership } from "../../db/filings";
 import { retryUnreachedReviews } from "../../workflows/reviewDecision";
 
-/*
- * POST /app/filings/:filingId/reviews/retry — re-run every decision
- * review in the filing that never reached Canon (verdict
- * review_unreached). The operator's lever after Canon was down; the
- * record-ai-decision tool also retries them in the background after the
- * next decision. Runs the reviews before answering, so the response
- * reports each verdict.
- */
+/* Re-runs every review that never reached Canon (review_unreached); answers with each verdict. */
 export const retryReviewsRoute = registerApiRoute("/app/filings/:filingId/reviews/retry", {
   method: "POST",
   handler: async (c) => {

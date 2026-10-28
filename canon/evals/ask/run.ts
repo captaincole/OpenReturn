@@ -1,15 +1,8 @@
 /*
- * Ask The Tax Code eval: ask each question through the production answer
- * pipeline (workflows/ask) and score coverage, citations, retrieval and
- * the stated facts.
- *
  *   npx tsx --env-file=.env.development evals/ask/run.ts <model-substring> [--runs=N] [--case=…]   (from canon)
  *
  * One model per run: the judges read JUDGE_MODEL when their module loads.
- * --case=<substring> runs only matching cases and does not publish a
- * report; combine saved runs with report.ts. As with the review eval, a
- * long run on Gemma 4 31b is safer as one process per case (--case).
- * Writes .scratch/evals/ask/<runId>/results.json and docs/evals/ask.md.
+ * For long runs, start one process per case with --case.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -51,7 +44,6 @@ async function checkAuthority(d: Deps) {
     throw new Error(`labeled blocks missing from corpus.db: ${missing.join(", ")}`);
 }
 
-/* Every block id the retrieve steps returned, from the query log. */
 function retrievedBlocks(steps: AskStepLog[]): Set<string> {
   const json = JSON.stringify(steps.filter((s) => s.kind === "retrieve"));
   return new Set([...json.matchAll(/"blockId":"([^"]+)"/g)].map((m) => m[1]));

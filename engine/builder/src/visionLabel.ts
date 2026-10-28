@@ -1,15 +1,3 @@
-/*
- * Vision-AI label resolver for the form-ingest pipeline.
- *
- * Given one PDF page's widgets and the rendered page image with numbered
- * overlay badges, ask Claude vision for the human-readable label of each
- * widget. Widgets that already carry a /TU value pass through with
- * `tuLabel` set. The prompt says to echo /TU verbatim and infer labels
- * only where /TU is null.
- *
- * One call per page. Tool-use enforces the response shape.
- */
-
 import Anthropic from "@anthropic-ai/sdk";
 import type { FieldKind } from "./extractFormFields.js";
 import { renderPageWithOverlay, type OverlayWidget } from "./renderPageWithOverlay.js";
@@ -23,17 +11,13 @@ const model = () => process.env.FORMS_PIPELINE_MODEL ?? "claude-sonnet-5-5";
 const MAX_TOKENS = 4000;
 
 export interface VisionWidget {
-  /** Page-local badge number drawn on the overlay image. Must be unique within the page. */
+  /** The overlay badge number. Unique within the page. */
   id: number;
-  /** Full pdf-form widget name. For the model's reference only. */
   fieldName: string;
   kind: FieldKind;
   rect: [number, number, number, number];
-  /** Checkbox on-value (when applicable). */
   exportValue?: string;
-  /** Radio-button option label (when applicable). */
   buttonValue?: string;
-  /** /TU value when present. The model is instructed to echo this verbatim. */
   tuLabel: string | null;
 }
 
@@ -153,11 +137,7 @@ const SUBMIT_LABELS_TOOL: Anthropic.Tool = {
   },
 };
 
-/*
- * Extract the id→label map from the structured output. The model
- * occasionally stringifies the labels array; parse it back before
- * validating.
- */
+/* The model sometimes stringifies the labels array; parse it back. */
 function parseLabels(input: unknown): Map<number, string> {
   const rawInput = input as {
     labels?: Array<{ id: number; label: string }> | string;

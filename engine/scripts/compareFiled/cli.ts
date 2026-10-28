@@ -1,23 +1,9 @@
 /*
- * Private comparison kit: run the engine on a real return's facts,
- * compare every numeric line with the filed return, and write a report
- * the checker can send to a maintainer.
+ * Usage: npx tsx scripts/compareFiled/cli.ts <folder> [--init | --check | --show-values]
  *
- *   npx tsx scripts/compareFiled/cli.ts <folder> --init   # write templates once
- *   npx tsx scripts/compareFiled/cli.ts <folder> --check  # support + input checks only
- *   npx tsx scripts/compareFiled/cli.ts <folder>          # compare + write report
- *   npx tsx scripts/compareFiled/cli.ts <folder> --show-values
- *
- * <folder> holds the real data, anywhere outside the repo, in the normal
- * scenario format (tests/types.ts): index.ts exports a Scenario. Its
- * expected engineFields are the filed return; `preparer` says who
- * prepared it.
- *
- * PRIVACY: the report files (<folder>/openreturn-check-<year>-<date>.md and
- * .json, sent together) and
- * the default terminal output hold no amounts, names, or payers, so an
- * AI session can run it. Only the taxpayer runs --show-values, which
- * prints amounts to the terminal and never to the report.
+ * PRIVACY: the report files and the default terminal output hold no amounts,
+ * names, or payers, so an AI session can run it. Only --show-values prints
+ * amounts, and only to the terminal.
  */
 
 import { execSync } from "node:child_process";
@@ -70,7 +56,6 @@ const CALC_ORDER = [
  */
 const SKIP = ["form-8949"];
 
-/* The folder's index.ts may name its Scenario export anything. */
 function findScenario(mod: Record<string, unknown>): Scenario {
   const found = Object.values(mod).find(
     (v) => typeof v === "object" && v !== null && Array.isArray((v as Scenario).forms),
@@ -143,7 +128,6 @@ async function buildReport(dir: string): Promise<{ s: Scenario; report: ReportIn
   return { s, report };
 }
 
-/* --check: what the AI filling in the files runs after each edit. No files, no results. */
 async function checkFolder(dir: string): Promise<number> {
   const { report } = await buildReport(dir);
   console.log([...supportSection(report), ...inputSection(report)].join("\n"));
@@ -178,7 +162,7 @@ async function main(): Promise<void> {
     process.exit(1);
   }
   const dir = resolve(positionals[0]);
-  /* Private data never lives inside the project (CLAUDE.md, ".scratch/"). */
+  /* Private data never lives inside the project, not even in .scratch/. */
   const project = resolve(process.cwd(), "../..");
   if (dir === project || dir.startsWith(`${project}${sep}`)) {
     console.error(`${dir} is inside this project. Keep the data folder outside it.`);

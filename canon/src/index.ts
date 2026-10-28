@@ -1,12 +1,7 @@
 /*
- * @openreturn/canon — Canon's in-process API: the corpus, the two
- * pipelines (ask, ground) and their contracts. Cade and the web app
- * reach Canon over MCP and HTTP instead (mastra/mcp.ts, the reference
- * library routes); this surface is for tooling that runs inside Canon's
- * process, such as canon/evals.
- *
- * Nothing here opens app.db or depends on the form engine
- * (tests/unit/boundary.test.ts).
+ * For tooling inside Canon's process (evals). Cade and the web app reach
+ * Canon over MCP and HTTP only. Nothing here opens app.db or imports the
+ * engine (tests/unit/boundary.test.ts).
  */
 
 export { getBlock, hybridSearchRefDocs } from "./db/corpusSearch";

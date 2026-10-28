@@ -14,14 +14,7 @@ function threadIdFor(userId: string, returnId: string | number): string {
 }
 
 async function readCadePlan(threadId: string): Promise<PlanItem[]> {
-  /*
-   * Read working memory off Cade's thread-scoped Memory. Returns [] when:
-   *   - the thread has never had a turn (no working memory row yet)
-   *   - the JSON parse fails (defensive; Mastra writes via the same
-   *     schema)
-   *   - the schema validation fails (e.g. an unmigrated field rename)
-   * A malformed plan must never take down the whole /app/state response.
-   */
+  /* A missing or malformed plan must never take down the whole /app/state response. */
   try {
     const memory = await cade.getMemory();
     if (!memory) return [];
@@ -35,15 +28,6 @@ async function readCadePlan(threadId: string): Promise<PlanItem[]> {
   }
 }
 
-/*
- * Live case state for the web app. Pass-through over buildCaseState plus
- * document URLs and Cade's plan. The previous handler adapted the engine
- * output to a legacy shape (openAsks / progress / draftUrl / 8949Url /
- * scheduleDUrl) that the new engine does not speak. The web app now
- * reads the engine's native shape directly; anything the engine does not
- * compute (Form 8949, Schedule D) is simply absent, not rendered as
- * null.
- */
 export const appStateRoute = registerApiRoute("/app/state", {
   method: "GET",
   handler: async (c) => {
@@ -61,12 +45,7 @@ export const appStateRoute = registerApiRoute("/app/state", {
       listDocuments(scope, { category: "drafts", taxYear: DEMO_TAX_YEAR }),
     ]);
 
-    /*
-     * Most recent draft per formId. listDocuments returns newest-first,
-     * so first-seen-wins gives the latest version per form. Older
-     * versions stay reachable by their direct /documents/{uuid} URLs in
-     * chat history.
-     */
+    /* listDocuments returns newest first, so the first draft seen per formId is the latest. */
     const latestByForm = new Map<string, UserDocumentRow>();
     for (const d of drafts) {
       const formId = (d.metadata as { formId?: string } | null)?.formId;

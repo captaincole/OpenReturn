@@ -4,18 +4,8 @@ import { accountSlugFor, statementContext, statementFields } from "./ingestShare
 import { ingestTrades, TradeInputSchema } from "./ingestTrades";
 
 /*
- * Ingest the sales on a 1099-B or 1099-DA: a standalone form, or the
- * 1099-B section of a consolidated statement (the box-total forms on the
- * same statement go to ingest1099Forms.ts).
- *
- * At most 20 sales per call; Cade calls again for the next 20. Trade ids
- * come from each sale's content (ingestTrades.ts), so the calls add up
- * without collisions. Long calls failed: after about 20 trades, local
- * models (Gemma 4 31b) broke the call's nesting about half the time.
- *
- * Writes per call: 1 trade fact + 1 form_8949_box decision per sale, plus
- * decisions.scope.has_reportable_sales (and has_digital_assets for a
- * 1099-DA).
+ * Past about 20 trades, local models broke the call's nesting about half the time.
+ * Trade ids come from each sale's content, so repeated calls add up without collisions.
  */
 
 export const MAX_TRADES_PER_CALL = 20;

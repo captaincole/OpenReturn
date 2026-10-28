@@ -1,13 +1,6 @@
 /*
- * Ingest the IRS tax table from Pub 17 (HTML) into a checked-in JSON
- * file. The source HTML lives in @openreturn/sources
- * (<year>/forms/federal/tax-table.source.html); the JSON goes to the engine's
- * src/data/. Reproducible: a re-run with no flags hits the cached HTML and
- * rebuilds the JSON. Use `--refresh` to re-fetch from irs.gov and check
- * for upstream changes since the last ingest (the sha256 changes).
- *
- * Spot-checks are hand-keyed from the published table. Any change to the
- * extraction logic must keep them passing.
+ * Spot-checks are hand-keyed from the published table and cover every
+ * filing-status column. Any change to the extraction logic must keep them passing.
  */
 
 import { engineSrcDir } from "@openreturn/engine/paths";
@@ -21,11 +14,6 @@ import {
   type TaxTableRow,
 } from "../../src/tables/parseTaxTable.js";
 import type { Command } from "../lib/cli";
-
-/*
- * ─── Per-year source config ──────────────────────────────────────────────
- * To add a new year, add an entry here plus its spot-check set below.
- */
 
 interface TaxTableSource {
   url: string;
@@ -41,12 +29,6 @@ interface SpotCheck {
 const SOURCES: Record<number, TaxTableSource> = {
   2025: {
     url: "https://www.irs.gov/publications/p17",
-    /*
-     * Hand-keyed from the published 2025 Tax Table. The picks spread
-     * across the table (lowest band, $7k, $57k, $60k, $62k, $63k, and
-     * $97k) and exercise every filing-status column at multiple income
-     * levels. A regression in one column cannot slip through.
-     */
     spotChecks: [
       { taxableIncome: 0, filingStatus: "single", expectedTax: 0 },
       { taxableIncome: 10, filingStatus: "single", expectedTax: 1 },
@@ -74,8 +56,6 @@ const SOURCES: Record<number, TaxTableSource> = {
     ],
   },
 };
-
-// ─── Driver ──────────────────────────────────────────────────────────────
 
 const LOG = "[ingest-federal-tax-table]";
 
@@ -204,14 +184,9 @@ function runSpotChecks(source: (typeof SOURCES)[number], rows: TaxTableRow[]): v
   }
 }
 
-/*
- * Pretty-print the header object but write each row on its own line.
- * This keeps git diffs small (one inserted row = one line of diff, not
- * eight) and keeps the file under ~150KB.
- */
+/* One row per line keeps git diffs small and the file under ~150KB. */
 function serializeWithCompactRows(header: Record<string, unknown>, rows: TaxTableRow[]): string {
   const headerJson = JSON.stringify(header, null, 2);
-  // Drop the trailing "}" to append the rows array before the close.
   const headerOpen = headerJson.slice(0, headerJson.lastIndexOf("}"));
   const rowLines = rows
     .map(

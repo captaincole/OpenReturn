@@ -1,6 +1,5 @@
 import { blocks, CA_EXEMPTION_LIMIT, FEDERAL_110, insufficient, type AskCase } from "./caseKit";
 
-/* Tier 2: generally accepted answers that take a closer read, or two passages. */
 export const TIER_2: AskCase[] = [
   {
     name: "Child tax credit phase-out",

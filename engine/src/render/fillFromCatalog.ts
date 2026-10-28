@@ -1,32 +1,6 @@
 /*
- * Catalog-driven PDF-fill pipeline. Walks an EvaluatedForm plus its
- * matching Catalog and writes each ok field result into its widget. The
- * same code path serves:
- *   - the live doc-gen tool (facts from app.db → rendered PDF saved via
- *     createDocument)
- *   - the integration test suite (in-memory facts → in-memory PDF → assert)
- *   - the catalog-fill regression test (synthetic field results → golden
- *     diff)
- * No I/O beyond the caller-supplied blank-PDF bytes; no database, no
- * network. Side-effect-free except that it mutates the in-memory PDF.
- *
- * Returns:
- *   pdfBytes — the filled PDF, flattened unless `flatten: false` (a
- *              locked scenario golden keeps its AcroForm so the test
- *              suite can read the widgets back)
- *   rendered — Map<fieldId, RenderedWidget[]> of what was actually
- *              written. Tests assert on these values because flatten()
- *              destroys the fillable AcroForm, so widgets cannot be
- *              re-read afterward.
- *   warnings — soft-failure log (widget missing, maxLength exceeded,
- *              etc.). Tests treat any non-empty warnings as a regression.
- *
- * Fill rules:
- *   - the verifiedWidget overlay takes precedence over the catalog's
- *     pdfWidgetName
- *   - missing/blocked/unsupported field results are skipped
- *   - multi_select fields iterate inv.options to check per-option widgets
- *   - numeric values render via formatDollars (whole dollars, "0" for zero)
+ * `rendered` records what was written: flatten() destroys the AcroForm, so
+ * tests cannot read the widgets back. A locked golden passes flatten: false.
  */
 
 import { PDFCheckBox, PDFDocument, PDFRadioGroup, PDFTextField, type PDFForm } from "pdf-lib";
@@ -38,20 +12,16 @@ import { verifiedWidget } from "./verifiedWidgets.js";
 
 export interface RenderedWidget {
   widgetName: string;
-  /** Text written for text/numeric/date fields. */
   text?: string;
-  /** True if the widget was a checkbox that we checked. */
   checked?: boolean;
 }
 
 export interface FillFromCatalogResult {
   pdfBytes: Buffer;
-  /** fieldId → widgets written (1+ entries; multi_select has many). */
   rendered: Map<string, RenderedWidget[]>;
   warnings: string[];
 }
 
-/* Shared mutable state the widget writers append into. */
 interface WriterCtx {
   pdfForm: PDFForm;
   rendered: Map<string, RenderedWidget[]>;
@@ -88,8 +58,6 @@ export async function fillFromCatalog(opts: {
   return { pdfBytes, rendered: ctx.rendered, warnings: ctx.warnings };
 }
 
-// ─── Widget writers ──────────────────────────────────────────────────────
-
 function setText(ctx: WriterCtx, fieldId: string, widgetName: string, value: string): void {
   if (!value) return;
   let f;
@@ -109,15 +77,6 @@ function setText(ctx: WriterCtx, fieldId: string, widgetName: string, value: str
     );
     return;
   }
-  /*
-   * Most fields render their value verbatim. A few widgets have
-   * maxLength constraints that conflict with the canonical fact
-   * format: SSN widgets take 9 digits with no dashes, and some phone
-   * widgets take 10 bare digits. On a length overflow, retry with
-   * separators stripped before declaring a soft failure. This mirrors
-   * the IRS pattern: facts carry the readable format ("###-##-####");
-   * the PDF holds the bare digits.
-   */
   const written = trySetTextWithFallback(f, value);
   if (written === null) {
     ctx.warnings.push(
@@ -148,11 +107,6 @@ function check(ctx: WriterCtx, fieldId: string, widgetName: string): void {
   }
 }
 
-/*
- * Radio-group select. The parent field is a PDFRadioGroup whose options
- * come from PDFRadioGroup.getOptions(). The catalog records the exact
- * label per option; select(label) picks it.
- */
 function selectRadio(
   ctx: WriterCtx,
   fieldId: string,
@@ -179,12 +133,9 @@ function selectRadio(
 }
 
 /*
- * Try setText(value). On length overflow, retry with separators stripped.
- * On a further overflow, expand the widget's maxLength to fit and retry
- * once more. The renderer flattens the form before it saves, so a larger
- * maxLength has no visual consequence; it only lets pdf-lib write the
- * longer value through its strict validator. Returns the string actually
- * written, or null when all attempts failed.
+ * pdf-lib rejects text over maxLength. Retry with separators stripped,
+ * then raise maxLength to fit: flattening hides the limit, and declared
+ * limits are often too small (email widgets of 12–15 chars).
  */
 function trySetTextWithFallback(f: PDFTextField, value: string): string | null {
   try {
@@ -202,13 +153,6 @@ function trySetTextWithFallback(f: PDFTextField, value: string): string | null {
       if (!isLengthOverflow(err)) return null;
     }
   }
-  /*
-   * Final attempt: expand the widget's maxLength to fit the value. PDF
-   * viewers, and real users typing into the form, accept longer text than
-   * the declared maxLength. The declared limit is often pessimistic (for
-   * example email widgets limited to 12-15 chars that accept 30+ in
-   * practice). Flattening hides the maxLength entirely.
-   */
   try {
     f.setMaxLength(value.length);
     f.setText(value);
@@ -233,17 +177,9 @@ function appendRendered(
 }
 
 /*
- * Pre-render value coercion for text fields. SSN/phone widgets diverge by
- * jurisdiction. Federal forms use comb widgets: one box per digit, where
- * the visual gaps look like dashes, so the value must be digits-only.
- * State forms use single text widgets that expect embedded separators
- * ("###-##-####", "###-###-####"). Facts always carry the readable form;
- * only federal renders strip the separators.
- *
- * Branch on valueTypeRich (the classifier's structural verdict), not on a
- * label regex. The vision tier sometimes captures whole instructional
- * sentences as the label (for example an 8949 page-2 name field whose
- * label included the word "SSN" from neighbouring text).
+ * Federal SSN/phone widgets are combs (one box per digit), so they take
+ * digits only; state widgets expect separators. Branch on valueTypeRich,
+ * not the label: AI labels sometimes catch "SSN" from nearby text.
  */
 function coerceTextValue(inv: FieldInventory, value: string, jurisdiction: string): string {
   const isFormatted = inv.valueTypeRich === "ssn" || inv.valueTypeRich === "phone";
@@ -253,14 +189,6 @@ function coerceTextValue(inv: FieldInventory, value: string, jurisdiction: strin
   return value;
 }
 
-/*
- * Select rendering, shared by multi_select and single_select. Both walk
- * the selected value(s) and toggle the matching option's widget
- * (per-checkbox, 1040-style) or call PDFRadioGroup.select(label)
- * (radio-group, 540-style). single_select means "exactly one selected";
- * multi_select means "zero or more." The renderer ignores the
- * distinction and iterates whichever values are present.
- */
 function fillSelect(
   ctx: WriterCtx,
   widgetName: string | undefined,
@@ -291,20 +219,9 @@ function fillByType(
   value: unknown,
   jurisdiction: string,
 ): boolean {
-  /*
-   * Per-field formatter override, registered via FormSpec.formatters in
-   * a defineForm call. When present, the override decides exactly what
-   * text is written. It bypasses the value-type defaults (formatDollars,
-   * coerceTextValue), so a form can opt into different conventions per
-   * field. Example: 540 page 2 SSN renders with dashes via
-   * formatters: { "page2.taxpayer_ssn": SSN.format }.
-   */
+  // A per-field formatter override bypasses formatDollars and coerceTextValue.
   const override = getFormatter(inv.fieldId);
 
-  /*
-   * Selects resolve widgets per option, so they go first; every other
-   * value type writes into the field's own widget and shares one guard.
-   */
   if (inv.valueType === "multi_select" || inv.valueType === "single_select") {
     return fillSelect(ctx, widgetName, inv, value);
   }

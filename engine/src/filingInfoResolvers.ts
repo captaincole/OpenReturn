@@ -1,13 +1,3 @@
-/*
- * Per-form slot resolvers behind resolveFilingInfo (filingInfo.ts).
- *
- * Each resolve<Form>Info function reads raw facts + decisions through a
- * shared ResolverInputs view and produces that form's FilingInfo slots,
- * plus its mustFile[formId] entry. resolveFilingInfo merges the results
- * into the runtime intersection. Adding a form = add its resolver here
- * and list it there.
- */
-
 import { SPOUSE_KEYS, isDividendFactKey, isInterestFactKey, isW2FactKey } from "./facts/index.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
@@ -39,8 +29,6 @@ import { phone, ssn, type FilingStatus } from "./values.js";
 
 export { makeResolverInputs, type ResolverInputs } from "./resolverInputs.js";
 
-// ─── Per-form resolvers ──────────────────────────────────────────────────
-
 const FILING_STATUSES: ReadonlySet<unknown> = new Set<FilingStatus>([
   "single",
   "married_filing_jointly",
@@ -55,10 +43,8 @@ export function filingStatusOf(inputs: ResolverInputs): FilingStatus | undefined
 }
 
 /*
- * Born before January 2, 1961: 65 or older at the end of 2025 (1040
- * line 12d; CA 540 line 9 counts a January 1, 1961 birthday as 65 on
- * December 31). Reads "MM/DD/YYYY" or "YYYY-MM-DD"; anything else is
- * unknown. Tax year 2025 only, like the rest of the engine's tables.
+ * 65 or older at the end of 2025 (1040 line 12d). CA 540 line 9 counts a
+ * January 1, 1961 birthday as 65 on December 31. Tax year 2025 only.
  */
 export function bornBeforeJan2_1961(dob: string | undefined): boolean | undefined {
   const us = dob?.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
@@ -81,10 +67,6 @@ export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
     taxpayerFirstName: text(inputs, "identity.name.first"),
     taxpayerMiddleInitial: text(inputs, "identity.name.middle_initial"),
     taxpayerLastName: text(inputs, "identity.name.last"),
-    /*
-     * The constructors strip separators and validate the digit count.
-     * The FilingInfo slot stores bare digits.
-     */
     taxpayerSSN: ssnRaw ? ssn(ssnRaw) : undefined,
     taxpayerDateOfBirth: dob,
     taxpayerBornBeforeJan2_1961: bornBeforeJan2_1961(dob),
@@ -160,12 +142,7 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
   };
 }
 
-/*
- * Default: file Schedule CA whenever Form 540 is filed. An explicit
- * `decisions.scope.must_file_schedule_ca` overrides the default. Set it
- * false on scenarios that do not need the schedule (for example Alex: no
- * adjustments to report).
- */
+// Default: file with Form 540. Set the explicit decision false to opt out.
 export function resolveScheduleCaInfo(inputs: ResolverInputs): ScheduleCaFilingInfo {
   const r = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_ca",
@@ -182,11 +159,6 @@ export function resolveScheduleCaInfo(inputs: ResolverInputs): ScheduleCaFilingI
   };
 }
 
-/*
- * Default: required when trade facts exist to itemize, OR when the 1099
- * ingest recorded `has_reportable_sales = true`. Either signal indicates
- * capital-asset sales that need row-level reporting.
- */
 export function resolve8949Info(inputs: ResolverInputs): Form8949FilingInfo {
   const r = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8949",
@@ -201,12 +173,7 @@ export function resolve8949Info(inputs: ResolverInputs): Form8949FilingInfo {
   };
 }
 
-/*
- * Default: required whenever Form 8949 is required, because Schedule D
- * summarizes the per-row 8949 totals. It also fires for capital-gain
- * distributions without 8949. The same trade-fact / decision signals
- * cover both cases.
- */
+// Also fires for capital-gain distributions without 8949.
 export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInfo {
   const r = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_d",
@@ -218,12 +185,8 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
 }
 
 /*
- * Default: required when Medicare wages exceed $200,000. That is the
- * single-filer threshold, which the IRS also uses as the
- * employer-withholding cut-line. Other statuses have different
- * thresholds, but this conservative fallback catches every case where
- * the form COULD be required. An explicit `decisions.scope.must_file_8959`
- * wins when set.
+ * Default: Medicare wages over $200,000, the single filer threshold (and
+ * the employer-withholding line). Other statuses differ; set the decision.
  */
 export function resolve8959Info(inputs: ResolverInputs): Form8959FilingInfo {
   const medicareWages = sumW2Box(inputs, "box5");
@@ -244,12 +207,9 @@ export function resolve8959Info(inputs: ResolverInputs): Form8959FilingInfo {
 }
 
 /*
- * Default: required when the taxpayer has investment income and W-2
- * wages + taxable interest + ordinary dividends exceed $200,000 (the
- * single threshold, as conservative as the 8959 fallback). It misses a
- * taxpayer whose MAGI crosses the line only through capital gains; set
- * `decisions.scope.must_file_8960` explicitly then. The explicit
- * decision wins when set.
+ * Default: investment income, and wages + interest + dividends over the
+ * $200,000 single threshold. It misses MAGI that crosses only through
+ * capital gains; set decisions.scope.must_file_8960 for that case.
  */
 export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
   const hasInvestment = inputs.facts.some((f) => f.category === "investment_income");
@@ -271,10 +231,6 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
   };
 }
 
-/*
- * Default: required when there is other income (1099-MISC box 3, line
- * 8z). An explicit `decisions.scope.must_file_schedule_1` wins.
- */
 export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInfo {
   const misc = factsInCategory(inputs, "other").filter((row) =>
     /^account\.[^.]+\.misc$/.test(row.key),
@@ -298,12 +254,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   };
 }
 
-/*
- * Default: required when a form that feeds it is required: Form 8959
- * (line 11) or Form 8960 (line 12). Form 8889 (lines 17c/17d) joins when
- * it gets a must-file rule. An explicit
- * `decisions.scope.must_file_schedule_2` wins when set.
- */
+// Default: required when Form 8959 (line 11) or Form 8960 (line 12) is filed.
 export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInfo {
   const form8959 = resolve8959Info(inputs).mustFile?.["form-8959"]?.value === true;
   const form8960 = resolve8960Info(inputs).mustFile?.["form-8960"]?.value === true;
@@ -322,11 +273,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
   };
 }
 
-/*
- * Default (IRS Schedule B instructions): required when taxable interest
- * or ordinary dividends exceed $1,500, or when either Part III question
- * is "Yes". An explicit `decisions.scope.must_file_schedule_b` wins.
- */
+// IRS Schedule B inst.: interest or dividends over $1,500, or a Part III "Yes".
 export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInfo {
   const interestPayers = payerAmounts(inputs, isInterestFactKey, (v) => sum(v.box1, v.box3));
   const dividendPayers = payerAmounts(inputs, isDividendFactKey, (v) => sum(v.box1a));
@@ -357,7 +304,6 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
   });
   return {
     mustFile: { "schedule-b": r },
-    /* Part III's yes/no questions are required on every filed Schedule B. */
     missingInputs: { "schedule-b": missingInputs(partIII) },
     interestPayers,
     rounding: rounding === "sum_rounded_rows" ? "sum_rounded_rows" : "round_total",
@@ -367,7 +313,6 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
   };
 }
 
-/* One row per 1099 fact of the given kind, in fact order; zero amounts are skipped. */
 function payerAmounts(
   inputs: ResolverInputs,
   isKind: (key: string) => boolean,
@@ -387,12 +332,6 @@ function boolDecision(inputs: ResolverInputs, key: string): boolean | undefined 
   return typeof v === "boolean" ? v : undefined;
 }
 
-/*
- * Default: required when decisions.itemize_vs_standard chose itemized.
- * An explicit `decisions.scope.must_file_schedule_a` wins when set.
- * State-local income tax composes from existing W-2 sums (box 17 + CA
- * SDI); the other slots are single-fact reads.
- */
 export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInfo {
   const { decisionByKey } = inputs;
   const r = resolveMustFile(decisionByKey, {

@@ -3,29 +3,19 @@ import { cookies } from "next/headers";
 import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 
 /*
- * Single-user auth: identity = the instance. One `owner` row in app.db
- * holds profile data (name/email) plus the gate's credentials: an scrypt
- * password hash and the HMAC secret for session cookies. Setup generates
- * the secret, so there is no SESSION_SECRET env var to configure. The
- * module uses node:crypto only and stays small enough to audit in one
- * sitting.
- *
- * Session cookie: `${base64url(payload)}.${base64url(hmac)}` where
- * payload = {uid, exp}. httpOnly + sameSite=lax. Layouts and route
- * handlers verify the cookie server-side. proxy.ts only does an
- * optimistic presence check because the Edge runtime cannot read app.db.
+ * Single-user auth. The owner row holds the scrypt hash and the cookie HMAC
+ * secret (made at setup, no env var). Keep this module small enough to audit.
+ * Only getOwnerSession() verifies; proxy.ts checks cookie presence only.
  */
 
 export const SESSION_COOKIE = "openreturn_session";
-const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
 export interface OwnerSession {
   userId: string;
   email: string;
   displayName: string;
 }
-
-// ─── Password hashing ───────────────────────────────────────────────────
 
 function hashPassword(password: string): string {
   const salt = randomBytes(16);
@@ -40,8 +30,6 @@ function verifyPassword(password: string, stored: string): boolean {
   const actual = scryptSync(password, Buffer.from(saltHex, "hex"), expected.length);
   return timingSafeEqual(actual, expected);
 }
-
-// ─── Session tokens ─────────────────────────────────────────────────────
 
 function sign(payload: string, secret: string): string {
   return createHmac("sha256", secret).update(payload).digest("base64url");
@@ -73,14 +61,10 @@ function verifyToken(token: string, secret: string): string | null {
   }
 }
 
-// ─── Public API ─────────────────────────────────────────────────────────
-
-/** True when first-run setup has created the owner. */
 export async function ownerExists(): Promise<boolean> {
   return (await getOwnerAuthRow()) !== null;
 }
 
-/** First-run setup: create the owner. Throws if one already exists. */
 export async function createOwner(input: {
   email: string;
   displayName: string;
@@ -98,7 +82,6 @@ export async function createOwner(input: {
   return { userId: row.id, email: row.email, displayName: row.displayName };
 }
 
-/** Verify the password and set the session cookie. Returns null on failure. */
 export async function login(password: string): Promise<OwnerSession | null> {
   const owner = await getOwnerAuthRow();
   if (!owner || !verifyPassword(password, owner.passwordHash)) return null;
@@ -122,7 +105,6 @@ export async function logout(): Promise<void> {
   (await cookies()).delete(SESSION_COOKIE);
 }
 
-/** The verified session, or null. Server-side only (layouts, route handlers). */
 export async function getOwnerSession(): Promise<OwnerSession | null> {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token) return null;

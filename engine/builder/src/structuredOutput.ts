@@ -1,14 +1,8 @@
 import type Anthropic from "@anthropic-ai/sdk";
 
 /*
- * Structured output for the forms pipeline. The 5.5 models reject a
- * forced tool_choice ({type: "tool"} or "any"), so the pipeline asks for
- * JSON through output_config.format instead. The call sites keep their
- * tool definitions: the tool's input_schema becomes the JSON schema and
- * its description goes into the system prompt.
- *
- * Returns the parsed JSON (the old tool_use.input), or null when the
- * response has no parseable text block.
+ * The 5.5 models reject a forced tool_choice, so ask for JSON through
+ * output_config.format. The tool's input_schema becomes the schema.
  */
 
 /* Structured outputs require additionalProperties: false on every object. */

@@ -1,7 +1,6 @@
 import { getOwnerSession } from "@/lib/localAuth";
 import { NextResponse } from "next/server";
 
-// Session probe for client components (AppShell's pre-stream guard).
 export async function GET() {
   const session = await getOwnerSession();
   if (!session) {

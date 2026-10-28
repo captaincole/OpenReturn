@@ -1,12 +1,3 @@
-/*
- * Read-only diff between the sidecars under sources/
- * (instructions.meta.json under forms/, publication.meta.json under
- * publications/) and the ref_documents rows in the local corpus DB. It
- * compares each sidecar's sha256 with the DB row, so no source file is
- * needed.
- * Exits 0 unless --strict is set and drift exists.
- */
-
 import { docIdsWithSource } from "../../src/db/corpusFiles";
 import { getDocument, listDocuments } from "../../src/db/corpusStore";
 import { walkCorpus, type CorpusEntry } from "../../src/refdocs/walkCorpus";
@@ -17,7 +8,6 @@ interface Categorized {
   drift: { entry: CorpusEntry; dbSha: string }[];
   missing: CorpusEntry[];
   extra: { docId: string; sha: string }[];
-  /** In the DB and current, but its source file is not stored (run sync). */
   noSource: CorpusEntry[];
 }
 
@@ -49,7 +39,6 @@ async function categorize(): Promise<{
     }
   }
 
-  // Find DB-only docs: rows with no matching sidecar in the repo.
   for (const row of await listDocuments()) {
     if (!seenInRepo.has(row.docId)) {
       cats.extra.push({ docId: row.docId, sha: row.sha256 });
@@ -59,7 +48,6 @@ async function categorize(): Promise<{
   return { walk, cats };
 }
 
-/* The count table at the top of the report. */
 function summaryLines(walk: Awaited<ReturnType<typeof walkCorpus>>, cats: Categorized): string[] {
   const total =
     cats.present.length +

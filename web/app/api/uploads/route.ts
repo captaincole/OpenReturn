@@ -3,12 +3,6 @@ import { getOwnerSession } from "@/lib/localAuth";
 import { getOwnerFilingForYear, insertUploadedDocument, listUploads } from "@/lib/serverDb";
 import { NextResponse } from "next/server";
 
-/*
- * Persists a user-attached file: bytes → local documents dir (blobStore),
- * metadata row → libsql app DB. The browser posts FormData here because
- * both stores are server-side files it cannot reach.
- */
-
 const DEMO_TAX_YEAR = 2025;
 
 const ULID_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
@@ -48,7 +42,6 @@ function extensionOf(filename: string, mimeType: string): string {
   return "bin";
 }
 
-// List the caller's uploads (Documents tab grid, home-tab quick links).
 export async function GET() {
   const session = await getOwnerSession();
   if (!session) {
@@ -99,10 +92,7 @@ export async function POST(request: Request) {
     });
     return NextResponse.json({ id, filename: file.name, storagePath });
   } catch (err) {
-    /*
-     * Roll back the orphan file, so a metadata failure does not leave
-     * unreachable bytes on disk.
-     */
+    /* Roll back, so a metadata failure leaves no unreachable bytes on disk. */
     await deleteBlob(storagePath);
     const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json(

@@ -3,13 +3,6 @@ import { z } from "zod";
 import { judge } from "../../judge";
 import type { EvidenceBundle, LoopCarrier } from "./schemas";
 
-/*
- * Prompt rendering for the grounding judges, plus the iteration-1 query
- * formulation. Pure string-building except formulateQueries, which calls
- * the queryFormulator judge it is given. The loop lives in index.ts.
- */
-
-/** The decision fields the judges see (and the step log records). */
 export function decisionSummary(carrier: LoopCarrier) {
   const d = carrier.decision;
   return {
@@ -34,11 +27,7 @@ export async function formulateQueries(queryFormulator: Agent, c: LoopCarrier): 
     `Emit 1–2 search queries that would surface the IRS guidance governing this kind of decision.`,
   ].join("\n");
 
-  /*
-   * Anthropic's native structured-output endpoint rejects `maxItems` on
-   * array properties. The 1–2 cap therefore lives in the prompt and the
-   * slice below, not in the schema.
-   */
+  // Anthropic rejects `maxItems`, so the prompt and the slice cap the count.
   const { queries } = await judge(
     queryFormulator,
     prompt,

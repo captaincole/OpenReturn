@@ -6,14 +6,6 @@ import { briefValue, humanizeKey, timeAgo } from "@/lib/format";
 import { useEffect, useState } from "react";
 import { POLL_INTERVAL_MS } from "./RequestedActions";
 
-/*
- * Horizontal strip of recent facts and decisions, newest on the left. A
- * fade gradient on the right edge signals more content on scroll. Polls
- * /api/activity on a short interval; new tax_facts / ai_decisions rows
- * and verdict updates land within one poll. A click on a chip opens an
- * inline detail panel with the rationale, supporting facts, and verdict
- * reason behind a decision, so the user sees what Cade was thinking.
- */
 export function ActivityTicker({ refreshKey }: { refreshKey: number }) {
   const [items, setItems] = useState<ActivityItem[] | null>(null);
   const [selected, setSelected] = useState<ActivityItem | null>(null);
@@ -128,11 +120,6 @@ function ActivityChip({
   );
 }
 
-/*
- * Detail panel rendered inside the Activity card, below the chip row,
- * when a chip is clicked. Matches the Progress drill-down pattern: the
- * card grows vertically instead of overlaying a modal.
- */
 function ActivityDetailPanel({ item, onClose }: { item: ActivityItem; onClose: () => void }) {
   const isDecision = item.kind === "decision";
   return (

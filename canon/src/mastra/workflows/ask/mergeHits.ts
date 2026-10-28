@@ -1,10 +1,6 @@
 /*
- * Merges the ranked hit lists of several queries into one passage list.
- * Raw scores from different queries are not comparable (bm25 has no
- * upper bound and grows with query length), so the merge goes by rank:
- * the 1st hit of each query, then the 2nd of each, and so on. A block
- * that two queries found keeps its first (best-ranked) place. Every
- * query therefore gets its top hits in, whatever its score scale.
+ * Merges by rank, round-robin: scores from different queries are not
+ * comparable (bm25 grows with query length).
  */
 export function mergeByRank<T extends { blockId: string }>(lists: T[][], max: number): T[] {
   const seen = new Set<string>();

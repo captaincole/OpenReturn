@@ -1,19 +1,6 @@
 /*
- * Jordan scenario bundle.
- *
- * A fake high-income persona: one large W-2 with
- * an employer HSA contribution, a consolidated broker 1099 (DIV, INT,
- * MISC, B boxes D and E), RSU sales (box B), a 1099-DA (box H, one
- * "VARIOUS" lot), a crypto-exchange 1099-MISC, two 401(k) rollover
- * 1099-Rs (codes G and H), and a 1099-SA.
- *
- * Expected values are LOCKED engine output (scripts/lockScenario.ts),
- * after the engine's output was verified (docs/contributing.md,
- * "Scenarios"). Any change to a locked line fails until it is verified
- * and locked again. Form 8949 rows were locked without a row-level check
- * (assumed correct); only their Schedule D totals are verified.
- *
- *   npm test -- jordan
+ * Fake persona. Expected values are LOCKED engine output. Form 8949 rows were
+ * locked without a row-level check; only their Schedule D totals are verified.
  */
 
 import { lockedGoldenPath } from "../../helpers/scenarioPdfName.js";
@@ -23,7 +10,6 @@ import { jordanExpected } from "./expected.js";
 import { JORDAN_TAX_YEAR, JORDAN_USER_ID, jordanFacts } from "./facts.js";
 import { jordanKnownMismatches } from "./knownMismatches.js";
 
-/* Forms in dependency order, matching the registry. */
 const FORM_IDS = [
   "form-8949",
   "schedule-d",

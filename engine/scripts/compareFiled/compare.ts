@@ -1,34 +1,12 @@
-/*
- * Compare the engine's numeric lines against a filed return.
- *
- * Pure: takes the evaluated forms, the catalog, and the filed values;
- * returns one row per line that differs. Blank and 0 are equal. A line
- * the filed return leaves out is blank on the filed return.
- *
- * Rows come out in calculation order: forms in the given order (the
- * registry is upstreams-first), lines in catalog order. The first
- * mismatch row is the first place to look.
- */
+/* Blank and 0 are equal. A line the filed return leaves out is blank. */
 
 import type { Catalog } from "../../src/catalog.js";
 import type { AnyFormField, EvaluatedForm } from "../../src/types.js";
 
-/** formId → fieldId → the amount on the filed return. */
 export type FiledReturn = Record<string, Record<string, number>>;
 
 export type LineStatus =
-  /** The engine has no rule for a line the filed return fills. */
-  | "not_modeled"
-  /** The engine could not compute a line the filed return fills. */
-  | "blocked"
-  /** The engine fills a line the filed return leaves blank. */
-  | "engine_only"
-  /** Off by at most $1. */
-  | "drift_1"
-  /** Off by $2 to $10. */
-  | "drift_10"
-  /** Off by more than $10. */
-  | "wrong";
+  "not_modeled" | "blocked" | "engine_only" | "drift_1" | "drift_10" | "wrong";
 
 export interface LineDiff {
   formId: string;
@@ -41,9 +19,8 @@ export interface LineDiff {
 
 export interface CompareResult {
   diffs: LineDiff[];
-  /** Filled lines that match, per form (field ids). Blank-and-blank is not a match. */
+  /** Blank-and-blank is not a match. */
   matches: Record<string, string[]>;
-  /** Filed fieldIds that are not in the catalog (typos). */
   unknownFields: string[];
 }
 
@@ -90,17 +67,11 @@ function compareForm(
   }
 }
 
-/** True when the engine files the form and fills at least one numeric line. */
 function engineFills(form: EvaluatedForm<AnyFormField> | undefined): boolean {
   if (!form?.mustFile.ok || form.mustFile.value !== true) return false;
   return form.fields.some((f) => f.valueType === "numeric" && f.result.ok && f.result.value !== 0);
 }
 
-/**
- * Compare every form the filed return lists or the engine fills.
- * `formOrder` is the calculation order; `skip` drops forms the
- * comparison cannot line up (Form 8949 rows).
- */
 export function compareFiled(opts: {
   formOrder: string[];
   forms: Map<string, EvaluatedForm<AnyFormField>>;

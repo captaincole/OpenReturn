@@ -1,24 +1,8 @@
 /*
- * Lock a scenario's expected values to the engine's current output.
- *
- *   npx tsx scripts/lockScenario.ts --scenario=jordan
- *
- * Rewrites tests/scenarios/<name>/expected.ts: engineFields become every
- * non-zero numeric line the engine fills, labelled from the catalog. A
- * zero is kept only where expected.ts already asserts it: a filed-return
+ * Run it only after the engine's output for this scenario is verified: it
+ * overwrites expected.ts with that output.
+ * A zero is kept only where expected.ts already asserts it: a filed-return
  * comparison treats blank and 0 as equal, so it never verifies a zero.
- * Form 8949 rows are locked too, though the comparison kit skips them (a
- * preparer may combine lots); they are verified only through the
- * Schedule D totals.
- * renderedText / renderedBlank / renderedChecked are kept as they are.
- *
- * Run it only after the engine's output for this scenario is verified,
- * e.g. against a filed return with the comparison kit
- * (scripts/compareFiled). From then on, any change to a locked line
- * fails the test suite until someone verifies it and locks again.
- *
- * Then write the golden PDFs the tests diff widget by widget:
- *   npx tsx scripts/renderScenario.ts --scenario=jordan --golden
  */
 
 import { writeFileSync } from "node:fs";
@@ -76,7 +60,6 @@ function formBlock(
   return lines;
 }
 
-/* Header for an unverified scenario: no answer key behind the values. */
 const UNVERIFIED_NOTE = [
   " *",
   " * UNVERIFIED: no CPA return or filed-return check stands behind these",

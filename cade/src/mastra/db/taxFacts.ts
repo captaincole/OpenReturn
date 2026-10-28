@@ -10,17 +10,8 @@ import {
   type Scope,
 } from "./appDb";
 
-/*
- * All helpers take an explicit Scope { userId, filingId }, the
- * replacement for the RLS policies that scoped these queries in
- * Postgres. Reads filter on filing_id; writes stamp both user_id and
- * filing_id.
- */
+/* Explicit Scope everywhere: reads filter on filing_id, writes stamp user_id and filing_id. */
 
-/*
- * The row shape is engine vocabulary: the engine defines it, this module
- * persists it. Re-exported so db-side callers keep importing from here.
- */
 import type { TaxFactRow } from "@openreturn/engine/facts";
 export type { TaxFactRow };
 
@@ -73,7 +64,7 @@ export async function recordFact(scope: Scope, fact: TaxFact): Promise<void> {
   void scope; // scoping is explicit via fact.userId/filingId on insert
 }
 
-/** Writes all the facts in one transaction: every row is stored, or none. */
+/** One transaction: every row is stored, or none. */
 export async function recordFacts(scope: Scope, facts: TaxFact[]): Promise<void> {
   await ensureAppSchema();
   await getAppDb().batch(facts.map(insertFact), "write");
@@ -132,24 +123,13 @@ export async function listFactsByKeys(
   return Array.from(latest.values());
 }
 
-/*
- * ---------------------------------------------------------------------------
- * Open questions (small surface area, lives alongside tax_facts)
- * ---------------------------------------------------------------------------
- */
-
 export interface OpenQuestion {
   id: string;
   userId: string;
   filingId: string;
   question: string;
   context?: string;
-  /*
-   * Set when the review-decision workflow generates the question on a
-   * `needs_more_facts` or `inaccurate` verdict — the only writers today.
-   * The link lets us re-trigger review on the parent decision once the
-   * user answers.
-   */
+  /* Set by the review workflow, so the decision can be reviewed again once the user answers. */
   decisionId?: string;
 }
 

@@ -1,15 +1,4 @@
-/*
- * 1099-R fact kind. One fact = one Form 1099-R. A payer can issue more
- * than one 1099-R in a year (for example a code G and a code H rollover
- * from the same plan), so the key carries a per-form id.
- *
- * Convention:
- *   category: "retirement"
- *   key:      "payer.{payerSlug}.distributions.{distributionId}"
- *   value:    RetirementDistributionFactValue
- *
- * Box numbers follow the 2025 Form 1099-R.
- */
+/* One fact per 1099-R. A payer can issue several (e.g. codes G and H from one plan), so the key carries a form id. */
 
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
@@ -28,15 +17,9 @@ export interface RetirementDistributionFactValue {
   box4?: number; // Federal income tax withheld
   box5?: number; // Employee contributions / designated Roth contributions
   box6?: number; // Net unrealized appreciation
-  /*
-   * Box 7 distribution code(s) as printed, e.g. "7", "G", "H", "4G".
-   * Up to two codes.
-   */
+  /* Up to two codes as printed, e.g. "7", "G", "4G". */
   box7: string;
-  /*
-   * Box 7 IRA/SEP/SIMPLE checkbox. Checked ⇒ the distribution goes on
-   * 1040 lines 4a/4b. Unchecked ⇒ pensions and annuities, lines 5a/5b.
-   */
+  /* Checked: 1040 lines 4a/4b. Unchecked: pensions and annuities, lines 5a/5b. */
   box7IraSepSimple: boolean;
   box8?: number; // Other
   box9a?: number; // Your percentage of total distribution

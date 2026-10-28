@@ -1,12 +1,3 @@
-/*
- * Translation layer for generate-bindings: classifier rule → TS function
- * body, plus the FilingInfo slot tables that ground the AI's raw fact /
- * decision keys in typed slots. renderBindings.ts composes these into the
- * generated bindings file. When a key is not in a table, the renderer
- * pushes the binding to `todos` for human review: add the slot to
- * FilingInfo, or clarify the AI's choice.
- */
-
 import type { ClassifiedBinding } from "./classifyBindings.js";
 
 const FACT_TO_SLOT: Record<string, string> = {
@@ -142,13 +133,8 @@ function translateDecisionIfEquals(b: ClassifiedBinding): Translation {
     return { kind: "body", body: `(_, info) => info.${slot}` };
   }
   /*
-   * Mode 2 — per-checkbox boolean: true when decision === matchValue.
-   * JSON.stringify preserves boolean/number/string typing, so the
-   * comparison operand matches the FilingInfo slot's type (boolean ===
-   * boolean, not boolean === "true"). The AI sometimes emits matchValue
-   * as the literal `true` / `false` and sometimes as the string "true" /
-   * "false". Normalize boolean-looking matchValues back to booleans so
-   * both work.
+   * Mode 2: per-checkbox boolean. The AI emits matchValue as `true` or as "true".
+   * Normalize to a boolean so the comparison matches the slot's type.
    */
   const normalized = matchValue === "true" ? true : matchValue === "false" ? false : matchValue;
   return {
@@ -252,11 +238,7 @@ export function shortKey(fieldId: string, formId: string): string {
   return fieldId;
 }
 
-/**
- * Cross-form refs use the full fieldId so the form accessor proxy routes
- * through the global registry. Same-form refs use the short key, the
- * convention defineForm uses for its own fields.
- */
+/** Cross-form refs keep the full fieldId so the form accessor routes through the global registry. */
 function shortOrFullKey(fieldId: string, formId: string): string {
   if (fieldId.startsWith(`${formId}.`)) return fieldId.slice(formId.length + 1);
   return fieldId;

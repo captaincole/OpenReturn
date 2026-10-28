@@ -1,19 +1,4 @@
-/*
- * Generic "fetch-once, cache-on-disk" helper for HTML sources we ingest
- * into structured JSON (tax tables, EIC tables, standard-deduction
- * worksheets, etc.). The cached HTML is checked into the repo alongside
- * the JSON output as provenance. If anyone questions a number later, we
- * have a frozen copy of exactly what the source served on ingest day.
- *
- * Usage:
- *   const { html, source } = await fetchHtml({
- *     url: "https://www.irs.gov/publications/p17",
- *     cachePath: ".../tax-table-2025.source.html",
- *   });
- *
- * Pass refresh=true to bypass the cache and re-fetch, e.g. to check that
- * the upstream has not changed since the last ingest.
- */
+/* The cached HTML is checked in as provenance: a frozen copy of what the source served. */
 
 import { createHash } from "node:crypto";
 import { promises as fs } from "node:fs";
@@ -72,7 +57,6 @@ export async function fetchHtml(opts: {
   };
 }
 
-/* Cache read; null on a cache miss (ENOENT falls through to the fetch). */
 async function readCache(url: string, abs: string): Promise<FetchHtmlResult | null> {
   try {
     const html = await fs.readFile(abs, "utf8");

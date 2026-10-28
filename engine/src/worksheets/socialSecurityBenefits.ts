@@ -1,23 +1,10 @@
-/*
- * Social Security Benefits Worksheet — Lines 6a and 6b.
- *
- * Implements the 18-line worksheet from the 2025 Form 1040
- * Instructions (page 32). Returns the taxable amount (line 18, the
- * 1040 line 6b value) and every intermediate line, so callers can audit
- * or test any step.
- *
- * Corpus section:
- * irs-1040-inst-2025::sec::social-security-benefits-worksheet-lines-6a-and-6b.
- *
- * Not modeled: the lump-sum election (line 6c, Pub. 915) and the
- * Exception cases that send the taxpayer to Pub. 915 instead.
- */
+/* 1040 instructions (2025) p. 32, Social Security Benefits Worksheet. Not modeled: the lump-sum election and the Pub. 915 exceptions. */
 
 import { atLeast, roundDollars } from "../money.js";
 import type { FilingStatus } from "../values.js";
 
 export interface SocialSecurityInputs {
-  /** Line 1: total of box 5 of all SSA-1099 forms (RRB-1099 is not supported). */
+  /** Line 1: SSA-1099 box 5 total. */
   benefits: number;
   /** Line 3: 1040 lines 1z + 2b + 3b + 4b + 5b + 7a + 8. */
   otherIncome: number;
@@ -26,7 +13,6 @@ export interface SocialSecurityInputs {
   /** Line 6: Schedule 1 lines 11 through 20, plus 23 and 25. */
   adjustments: number;
   filingStatus: FilingStatus;
-  /** Married filing separately only: lived apart from the spouse all year. */
   livedApartAllYear?: boolean;
 }
 
@@ -38,11 +24,11 @@ export interface SocialSecurityBreakdown {
   line8?: number;
   line16: number;
   line17: number;
-  /** Taxable benefits: 1040 line 6b. */
+  /** 1040 line 6b. */
   taxable: number;
 }
 
-/* Lines 8 and 10: the base and adjusted base amounts. */
+/* Lines 8 and 10. */
 function bases(i: SocialSecurityInputs): { base: number; adjusted: number } | undefined {
   if (i.filingStatus === "married_filing_jointly") return { base: 32000, adjusted: 12000 };
   if (i.filingStatus === "married_filing_separately" && i.livedApartAllYear !== true) {
@@ -55,7 +41,6 @@ export function socialSecurityTaxable(i: SocialSecurityInputs): SocialSecurityBr
   const line2 = roundDollars(i.benefits * 0.5);
   const line5 = line2 + i.otherIncome + i.taxExemptInterest;
   const line17 = roundDollars(i.benefits * 0.85);
-  // Line 7: none taxable unless line 6 is less than line 5.
   if (!(i.adjustments < line5)) {
     return { line2, line5, line7: 0, line16: 0, line17, taxable: 0 };
   }
@@ -66,7 +51,6 @@ export function socialSecurityTaxable(i: SocialSecurityInputs): SocialSecurityBr
     const line16 = roundDollars(line7 * 0.85);
     return { line2, line5, line7, line16, line17, taxable: Math.min(line16, line17) };
   }
-  // Line 9: none taxable unless line 8 is less than line 7.
   if (!(b.base < line7)) {
     return { line2, line5, line7, line8: b.base, line16: 0, line17, taxable: 0 };
   }

@@ -1,13 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 
-/*
- * The MCP client's result handling, with a fake MCPClient: a tool with an
- * output schema arrives structured, a workflow tool arrives as a run
- * envelope in JSON text, a failed run is a CanonToolError, and a client
- * that cannot connect is a CanonUnreachableError (retryable).
- */
-
 type FakeTool = { execute: (input: unknown) => Promise<unknown> };
 let fakeTools: Record<string, FakeTool> = {};
 let listToolsError: Error | undefined;

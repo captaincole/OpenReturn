@@ -3,11 +3,6 @@ import { getOwnerSession } from "@/lib/localAuth";
 import { fetchActivityItems } from "@/lib/serverDb";
 import { type NextRequest, NextResponse } from "next/server";
 
-/*
- * Activity feed for the polling activity UI. Auth comes from the owner
- * session cookie. Rows come from the libsql app DB, scoped explicitly to
- * the caller.
- */
 export async function GET(request: NextRequest) {
   const session = await getOwnerSession();
   if (!session) {

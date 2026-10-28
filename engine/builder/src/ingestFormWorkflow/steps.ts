@@ -1,20 +1,6 @@
 /*
- * Form-ingest workflow steps. Three sequential phases:
- *   extract  — pdf.js (via unpdf): widget discovery + label resolution.
- *              Two label tiers (/TU when present, vision LLM when not).
- *              Throws when any widget cannot be labeled.
- *   classify — Claude enrichment per field: fieldId, category, valueType,
- *              stable option values for radios. Labels arrive
- *              deterministic; the classifier does not infer them.
- *   persist  — Merge deterministic + enrichment into the catalog shape,
- *              round-trip-validate (every widget ends up in the catalog),
- *              write JSON (catalog.json next to the form's bindings).
- *
- * Round-trip invariant: every ExtractedField is in the persisted catalog.
- * Fields the AI could not enrich get a placeholder fieldId
- * (form-<id>.unclassified.<shortName>). The deterministic structure
- * (pdfWidgetName, label, valueType from kind, options[] for radios) is
- * preserved.
+ * Round-trip invariant: every non-skipped field lands in the catalog.
+ * A field the AI did not enrich gets a placeholder fieldId.
  */
 
 import { createStep } from "@mastra/core/workflows";
@@ -30,8 +16,6 @@ import {
   workflowOutputSchema,
 } from "./schemas.js";
 
-// ─── extract ─────────────────────────────────────────────────────────────
-
 export const extractStep = createStep({
   id: "extract",
   inputSchema: workflowInputSchema,
@@ -45,8 +29,6 @@ export const extractStep = createStep({
     };
   },
 });
-
-// ─── classify ────────────────────────────────────────────────────────────
 
 export const classifyStep = createStep({
   id: "classify",
@@ -74,8 +56,6 @@ export const classifyStep = createStep({
   },
 });
 
-// ─── persist ─────────────────────────────────────────────────────────────
-
 interface CatalogOption {
   value: string;
   pdfWidgetName?: string;
@@ -86,32 +66,13 @@ interface CatalogOption {
 interface CatalogRow {
   fieldId: string;
   label: string;
-  /**
-   * Provenance of the label: "tu" (annotation /TU), "vision" (Claude
-   * vision), or absent on rows built before the current extractor.
-   */
   labelSource?: string;
   category: string;
-  /**
-   * Coarse value-type used by the runtime engine + renderer. Today's
-   * vocabulary: numeric / single_select / multi_select / text / boolean /
-   * date. Mapped down from the classifier's richer valueType (see
-   * valueTypeRich).
-   */
+  /** The runtime vocabulary, narrowed from valueTypeRich. */
   valueType: string;
-  /**
-   * Richer value-type from the classifier: money / count / text / ssn /
-   * phone / zip / email / date / boolean / single_select / multi_select /
-   * signature. Carries formatter hints (e.g. "money" → comma separators)
-   * that the renderer does not consume yet; data-driven formatters will.
-   * Persisted alongside `valueType` so no information is lost.
-   */
+  /** Kept for formatter hints ("money", "ssn") that the renderer does not read yet. */
   valueTypeRich?: string;
-  /**
-   * Deterministic structural type from pdf.js: text / checkbox / radio /
-   * signature / other. Source of truth for "is this mutually exclusive?",
-   * "is this multi-line?", etc. Never derived from AI.
-   */
+  /** From pdf.js, never from AI. */
   pdfFieldKind: string;
   pdfWidgetName?: string;
   options?: CatalogOption[];
@@ -120,7 +81,6 @@ interface CatalogRow {
   multiline?: boolean;
 }
 
-/** Map the classifier's expanded enum down to the runtime vocabulary. */
 function narrowValueType(rich: string): string {
   switch (rich) {
     case "money":
@@ -189,13 +149,6 @@ export const persistStep = createStep({
   },
 });
 
-// ─── Merge: deterministic field + AI enrichment → catalog row ────────────
-
-/*
- * Merge deterministic extraction + AI enrichment into catalog rows and
- * enforce the round-trip invariant: every non-skipped field must appear
- * in the catalog.
- */
 function assembleCatalog(inputData: {
   formId: string;
   fields: Array<Parameters<typeof buildCatalogRow>[1]>;
@@ -244,21 +197,10 @@ function buildCatalogRow(
     ? enrichment.fieldId
     : `${formId}.unclassified.${slugifyShortName(field.shortName)}`;
   /*
-   * Inject the widget's page index between the formId and the rest of the
-   * fieldId: "form-8949.header.taxpayer_name" →
-   * "form-8949.0.header.taxpayer_name". The classifier is instructed to
-   * reuse fieldIds across batches when fields are semantically equivalent.
-   * Multi-page forms (8949 Part I/II, 540 pages 1+/2, …) then emit the
-   * same name for distinct widgets. The page prefix restores per-widget
-   * uniqueness without making the classifier handle physical layout.
-   * Catalogs ingested before this change kept their flat shape; their
-   * bindings reference fieldIds without the page slot.
+   * "form-8949.header.x" → "form-8949.0.header.x". The classifier reuses a
+   * fieldId for equivalent widgets on different pages; the page keeps them unique.
    */
   const fieldId = withPagePrefix(baseFieldId, formId, position.page);
-  /*
-   * The label is deterministic (extractFormFields tier-1 /TU or tier-2
-   * vision). The classifier does not produce it.
-   */
   const label = field.label;
   const labelSource = field.labelSource;
   const category = enrichment ? enrichment.category : "other";
@@ -285,12 +227,7 @@ function buildCatalogRow(
   }
 
   if (field.fieldKind === "radio" && field.radioOptions) {
-    /*
-     * Zip the deterministic option labels with the AI's stable values.
-     * When enrichment is missing or misaligned, fall back to a slug of
-     * the option label itself. The rendering binding can then still
-     * target the right radio option.
-     */
+    /* When the AI's options are missing or misaligned, fall back to a slug of the label. */
     const enrichmentByRadioOption = new Map<string, string>(
       (enrichment?.options ?? []).map((o) => [o.radioOption, o.value]),
     );

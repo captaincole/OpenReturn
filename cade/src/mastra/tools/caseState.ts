@@ -12,37 +12,15 @@ import { resolveOwnerFilingForYear } from "../db/filings";
 import { loadAndEvaluateScenario } from "../loadScenario";
 import { requireUserContext } from "./userContext";
 
-/*
- * Live case state for Cade. Runs the form engine against the current fact
- * and decision state and returns:
- *   - summaries for Form 1040 and CA 540 (mustFile result, line count,
- *     blockers)
- *   - aggregated pending decisions (unique decisionKeys any form is blocked on)
- *   - convenience money fields pulled from specific Form 1040 / CA 540 lines
- *   - the most recent AI decisions for activity-feed display
- *
- * Cade calls this at the start of every turn to learn:
- *   - which forms are required, computed, or blocked
- *   - which scope decisions or facts are still missing (= what to ask next)
- *   - the current refund/owed picture, when computed
- */
-
 type EvaluatedFormSummary = {
   formId: string;
   jurisdiction: string;
-  /** Official short name, e.g. "Form 1040" or "Schedule H". */
   displayName: string;
   title: string;
   mustFile:
     | { ok: true; value: boolean; rationale: string }
     | { ok: false; reason: string; missingDecisionKey: string | null };
-  /**
-   * Engine-derivation provenance for the must-file determination. Lets the
-   * UI / sidecar show WHY a form is filed even when no AI decision was
-   * recorded (e.g. Schedule D gates on trade-fact presence).
-   */
   mustFileDerivation: EngineDerivation | null;
-  /** Required inputs this form still needs (fact or decision keys). */
   missingInputs: string[];
   fieldCount: number;
   blockedFieldCount: number;
@@ -55,12 +33,6 @@ type EvaluatedFormSummary = {
   }>;
 };
 
-/*
- * Exported so server routes (appState.ts) can run the same computation
- * outside the Mastra tool surface. Thin wrapper over the engine's
- * evaluateScenario. Adds the summary, money, and pendingFacts derivations
- * on top of the raw engine output.
- */
 export async function buildCaseState(
   userId: string,
   year: number,
@@ -72,13 +44,7 @@ export async function buildCaseState(
   return buildCaseStateForScenario(await loadAndEvaluateScenario(scope, filing, authEmail));
 }
 
-/*
- * Variant that takes a filing identity directly, for callers that are not
- * the filing owner (the owner resolver would throw for them). The caller
- * must verify read access (filing_members membership) BEFORE it invokes
- * this; the function trusts its inputs. No in-repo callers today — the CPA
- * review route that used it was removed.
- */
+/* Trusts its inputs: the caller must verify filing_members membership BEFORE it calls this. */
 export async function buildCaseStateForFiling(
   scope: Scope,
   taxYear: number,
@@ -88,11 +54,7 @@ export async function buildCaseStateForFiling(
   return buildCaseStateForScenario(await loadAndEvaluateScenario(scope, filing, authEmail));
 }
 
-/*
- * Money convenience fields — federal from 1040, state from 540. A line is
- * null when it is blank on the form (for example "amount you owe" on a
- * refund). Never 0 as a stand-in: a real $0 must stay distinct from blank.
- */
+/* Null when the line is blank, never 0: a real $0 must stay distinct from blank. */
 function extractMoney(
   form1040: EvaluatedForm<BaseFormField>,
   form540: EvaluatedForm<BaseFormField>,
@@ -125,11 +87,7 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
     summaries,
     pendingDecisions,
     pendingFacts,
-    /*
-     * Null while anything is pending. A form still computes with a missing
-     * input and shows a wrong but plausible number (no filing status → zero
-     * tax), so nothing here is final until both lists are empty.
-     */
+    /* Null while anything is pending: a missing input gives a wrong but plausible number. */
     money:
       pendingDecisions.length === 0 && pendingFacts.length === 0
         ? extractMoney(form1040, form540)
@@ -137,25 +95,13 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
     factCount: facts.length,
     decisionRows: decisions,
     authEmail,
-    /*
-     * The resolved filing info. The web app reads identity bits from it
-     * (e.g. taxpayer first name for the header greeting) without another
-     * DB query.
-     */
     filingInfo,
-    /*
-     * Raw evaluated forms, for downstream rollups like the Filing Status
-     * panel that need every field, not just blockers.
-     */
     evaluatedForms: [form1040, form540],
   };
 }
 
 function summarizeForm(form: EvaluatedForm<BaseFormField>): EvaluatedFormSummary {
-  /*
-   * Unsupported fields are engine gaps, not user-input gaps. They do not
-   * count as blockers and do not aggregate into pending questions.
-   */
+  /* Unsupported fields are engine gaps, not user-input gaps: they are not blockers. */
   const blockers = form.fields
     .filter((l) => !l.result.ok && !l.result.unsupported)
     .map((l) => {
@@ -191,10 +137,6 @@ function summarizeForm(form: EvaluatedForm<BaseFormField>): EvaluatedFormSummary
   };
 }
 
-/*
- * Look up a numeric field by its fieldId. Fields are heterogeneous (text,
- * numeric, single_select), so we filter on result type.
- */
 function numericField(fields: readonly BaseFormField[], fieldId: string): number | null {
   const field = fields.find((f) => f.fieldId === fieldId);
   if (!field || !field.result.ok) return null;
@@ -202,7 +144,6 @@ function numericField(fields: readonly BaseFormField[], fieldId: string): number
   return typeof v === "number" ? v : null;
 }
 
-/* A money line, or null when the line is blank on the form. */
 const moneyLine = z
   .number()
   .nullable()
@@ -238,10 +179,6 @@ export const getCaseState = createTool({
         "null while pendingDecisions or pendingFacts has entries: the values are not final.",
       ),
     factCount: z.number(),
-    /**
-     * Account email. Cade records it as identity.email at doc-gen time
-     * after he confirms it with the user.
-     */
     authEmail: z.string().nullable(),
     aiDecisions: z.array(
       z.object({
@@ -259,10 +196,6 @@ export const getCaseState = createTool({
   }),
   execute: async (_input, context) => {
     const { scope, filingId, taxYear, authEmail: jwtEmail } = await requireUserContext(context);
-    /*
-     * requireUserContext already resolved the active filing. Skip the extra
-     * resolveOwnerFilingForYear call that buildCaseState would make.
-     */
     const scenario = await loadAndEvaluateScenario(scope, { id: filingId, taxYear }, jwtEmail);
     const { summaries, pendingDecisions, pendingFacts, money, factCount, decisionRows, authEmail } =
       buildCaseStateForScenario(scenario);

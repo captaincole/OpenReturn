@@ -20,7 +20,6 @@ import { parseHtmlDoc } from "./html/parseHtml";
 import { parseDoc, type ParsedDoc, type ParserStyle } from "./parse";
 
 export interface IngestInput {
-  /** The source file: a PDF, or a cleaned HTML page (format "html"). */
   sourcePath: string;
   format?: SourceFormat;
   docId: string;
@@ -28,20 +27,10 @@ export interface IngestInput {
   publisher: string;
   taxYear: number | null;
   sourceUrl?: string | null;
-  /** The sidecar's date; without one, the source file's own (refdocs/published.ts). */
   published?: string | null;
   force?: boolean;
-  /**
-   * Skip the per-block Haiku contextualization step. Useful for fast dev
-   * iteration on the parser. Without contextualization the embedding step
-   * still runs, against raw block text.
-   */
+  /** Skips the paid Haiku step; embeddings then use the raw block text. */
   noContextualize?: boolean;
-  /**
-   * Heading-detection profile. Defaults to "irs". FTB-published docs (e.g.
-   * Schedule CA instructions) need "ftb" for their en-dash inline-body
-   * convention. See `ParserStyle` in `./parse`.
-   */
   parserStyle?: ParserStyle;
 }
 
@@ -56,11 +45,6 @@ export interface IngestResult {
   replaced: boolean;
   contextualized: boolean;
   embedded: boolean;
-  /**
-   * True when the source file's sha matches the existing ref_documents row,
-   * so we returned without re-running extract / contextualize / embed. In
-   * that case the other result fields come from the existing row.
-   */
   skipped: boolean;
 }
 
@@ -69,11 +53,7 @@ async function shaOfFile(path: string): Promise<string> {
   return createHash("sha256").update(buf).digest("hex");
 }
 
-/*
- * Sha-skip result. Section/block counts need a query we do not run here;
- * callers that care can run the search smoke test. Return -1 to make
- * this loud.
- */
+// Counts are -1: they need a query this path does not run.
 function skippedResult(
   existing: NonNullable<Awaited<ReturnType<typeof getDocument>>>,
 ): IngestResult {
@@ -93,11 +73,8 @@ function skippedResult(
 }
 
 /*
- * Contextual Retrieval: a per-block Haiku summary, prepended before
- * embedding/FTS. We pass the SECTION text (not the whole doc) as the
- * cached prefix because large reference docs exceed Haiku's 200k context
- * window. Cache-by-section keeps the per-call discount within a section
- * and scales to any doc size. Mutates the blocks in place.
+ * The cached prefix is the section, not the whole doc: large docs exceed
+ * Haiku's 200k context. Mutates the blocks in place.
  */
 async function contextualizeBlocks(
   documentTitle: string,
@@ -143,12 +120,7 @@ async function contextualizeBlocks(
   console.log(`  contextualization done in ${Math.round((Date.now() - start) / 1000)}s`);
 }
 
-/*
- * Embed the contextualized text (summary + raw text) via local Ollama.
- * Fails soft: on an embed failure (e.g. Ollama not running) rows keep
- * NULL embeddings, retrieval runs FTS-only, and
- * `npm run corpus -- reembed` finishes the job once Ollama is up.
- */
+// Fails soft: rows keep NULL embeddings and `corpus reembed` finishes later.
 async function embedBlocks(blocks: RefBlock[]): Promise<boolean> {
   try {
     const embedCfg = resolveEmbeddings();
@@ -172,22 +144,12 @@ async function embedBlocks(blocks: RefBlock[]): Promise<boolean> {
   }
 }
 
-/*
- * Write the document + rows now, before embedding. A crash in the embed
- * step then cannot lose the contextual summaries we just paid Haiku to
- * generate; embeddings update in place afterward.
- */
-/*
- * The path recorded in ref_documents: relative to sources, or
- * only the file name for a PDF outside it. corpus.db ships publicly, so
- * it must not carry a machine's absolute paths.
- */
+// corpus.db ships publicly, so it must not carry a machine's absolute paths.
 function recordedPath(path: string): string {
   const rel = relative(SOURCES_ROOT, path);
   return rel.startsWith("..") ? basename(path) : rel;
 }
 
-/* A source file read into corpus rows: canonical text, pages, sections, blocks. */
 interface ExtractedDoc extends ParsedDoc {
   sha256: string;
   canonicalText: string;
@@ -196,11 +158,6 @@ interface ExtractedDoc extends ParsedDoc {
   published: string | null;
 }
 
-/*
- * PDF: unpdf text, then the heading-detection parser. HTML: the cleaned
- * page's own structure (html/parseHtml.ts); it has no pages, so it is
- * one page.
- */
 async function extractSource(input: IngestInput, path: string): Promise<ExtractedDoc> {
   if (input.format === "html") {
     const bytes = await readFile(path);
@@ -208,7 +165,7 @@ async function extractSource(input: IngestInput, path: string): Promise<Extracte
     const length = parsed.canonicalText.length;
     return {
       ...parsed,
-      published: null, // the sidecar's (add-html), if the page shows one
+      published: null, // the sidecar's, if the page shows one
       sha256: createHash("sha256").update(bytes).digest("hex"),
       pages: [{ pageNum: 1, charStart: 0, charEnd: length }],
       totalPages: 1,
@@ -248,7 +205,6 @@ async function persistParsedDoc(
   });
 }
 
-/* Stamp docId onto every corpus row. */
 function toRows(
   docId: string,
   extracted: ExtractedDoc,
@@ -262,18 +218,10 @@ function toRows(
 
 export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
   const sourcePath = resolve(input.sourcePath);
-  /*
-   * The extracted text is also written next to the source file
-   * (forms/<…>/instructions.pdf → forms/<…>/instructions.canonical.txt) as
-   * a gitignored debugging aid; corpus.db holds the text the corpus uses.
-   */
+  // A gitignored debugging aid; corpus.db holds the text the corpus uses.
   const canonicalTextPath = sourcePath.replace(/\.(pdf|html)$/i, ".canonical.txt");
 
-  /*
-   * Sha-skip: hash the file before any expensive step. If the existing
-   * row's sha matches and the caller did not pass --force, there is
-   * nothing to do. This makes `corpus sync` cheap to run on every dev tick.
-   */
+  // Hash before any paid step, so an unchanged file costs nothing.
   const fileSha = await shaOfFile(sourcePath);
   const existing = await getDocument(input.docId);
   if (existing && existing.sha256 === fileSha && !input.force) {
@@ -297,19 +245,15 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
   if (!input.noContextualize) {
     await contextualizeBlocks(input.title, extracted.canonicalText, sections, blocks);
   } else {
-    /*
-     * Still hash the text so a future re-ingest that does run
-     * summarization has something to compare against.
-     */
     for (const b of blocks) b.blockTextSha1 = sha1(b.text);
   }
 
+  // Write rows before embedding: an embed failure then keeps the Haiku summaries.
   await persistParsedDoc(input, extracted, sourcePath, canonicalTextPath, {
     pages,
     sections,
     blocks,
   });
-  // corpus.db carries the source file itself; sources commits only the sidecar.
   await setDocumentSource(input.docId, new Uint8Array(await readFile(sourcePath)));
 
   const embedded = await embedBlocks(blocks);

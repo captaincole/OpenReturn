@@ -1,14 +1,7 @@
-/*
- * Small constructor helpers that build TaxFactRow / AIDecisionRow
- * fixtures with default values. Pulled out so each scenario's facts.ts
- * and decisions.ts stays focused on the values, not the row scaffolding.
- */
-
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows.js";
 
 const DEFAULT_CREATED_AT = "2026-04-29T00:00:00Z";
 
-/** Build an `identity.<suffix>` text fact (single string value). */
 export function identityFact(opts: {
   userId: string;
   taxYear: number;
@@ -28,7 +21,6 @@ export function identityFact(opts: {
   };
 }
 
-/** Build an AIDecisionRow. Defaults: confidence "high", verdict "accurate". */
 export function decisionRow(opts: {
   userId: string;
   taxYear: number;

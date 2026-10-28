@@ -1,9 +1,6 @@
 /*
- * Renders the Ask The Tax Code eval as docs/evals/ask.md, and the Ask
- * flow's row in the eval overview (docs/evals/README.md, lib/overview.ts).
- * Run directly to combine saved runs (a later file replaces a model's rows
- * for the cases it ran, rescored against the current labels):
- *
+ * Combines saved runs, rescored against the current labels; a later file
+ * replaces a model's rows for the cases it ran:
  *   npx tsx evals/ask/report.ts <results.json>…   (from canon)
  */
 import { readFileSync, writeFileSync } from "node:fs";
@@ -29,15 +26,12 @@ export interface AskResult {
   tier: Tier;
   kind: Kind;
   expectedCoverage: string[];
-  /* null when the turn failed. */
   coverage: string | null;
   cited: string[];
-  /* Every block the retrieve step returned. Missing in runs saved before it was kept. */
+  /* Missing in older saved runs. */
   retrieved?: string[];
-  /* null when the case has no labeled authority. */
   citedAuthority: boolean | null;
   retrievedAuthority: boolean | null;
-  /* null when the case has no required facts. */
   factsOk: boolean | null;
   missingFacts: string[];
   answer: string;
@@ -102,7 +96,6 @@ const KIND_LABEL: Record<Kind, string> = {
   insufficient: "insufficient info",
 };
 
-/* One row per tier and kind: is the run correct, and if not, which part failed? */
 function groupTable(models: EvalModel[], results: AskResult[]): string {
   const groups = [...new Set(results.map((r) => `${r.tier}\u0000${r.kind}`))];
   const cell = (rs: AskResult[]) => {
@@ -171,12 +164,6 @@ export function renderReport(models: EvalModel[], results: AskResult[]): string 
   ].join("\n\n");
 }
 
-/*
- * Merge runs: a later run replaces a model's results for the cases it ran,
- * so one case can be rerun on its own. Every result is rescored against the
- * current labels (score.ts). Write the doc and the overview;
- * return the doc's repo path.
- */
 export function publishReport(runs: AskRun[]): string {
   const models = new Map<string, EvalModel>();
   const results = new Map<string, AskResult[]>();

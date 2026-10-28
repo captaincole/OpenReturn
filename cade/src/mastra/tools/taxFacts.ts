@@ -32,7 +32,6 @@ const CATEGORIES = [
   "other",
 ] as const;
 
-/* Few enough facts per call that each call is easy to trace back to one user message. */
 export const MAX_FACTS_PER_CALL = 5;
 
 const factInput = z.object({

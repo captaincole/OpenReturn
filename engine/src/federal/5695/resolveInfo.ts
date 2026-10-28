@@ -1,8 +1,3 @@
-/*
- * Form 5695 slot resolver (composed by resolveFilingInfo). Reads the
- * energy invoice facts and the four home answers.
- */
-
 import {
   HOME_ENERGY_KEYS,
   isEnergyInvoiceFactKey,
@@ -18,13 +13,8 @@ import type { Form5695FilingInfo } from "./filingInfo.js";
 import { hasSectionA } from "./partII.js";
 
 /*
- * Default: required when a recorded energy invoice has at least one
- * item. An explicit `decisions.scope.must_file_5695` wins.
- *
- * TODO: ask for a missing QMID. The 2025 instructions require one for
- * each item of specified property (every kind but insulation and
- * audits). missingInputs names whole facts, so it cannot ask for one
- * item's QMID yet.
+ * TODO: ask for a missing QMID. The 2025 instructions require one per item
+ * of specified property; missingInputs cannot ask for one item's field yet.
  */
 export function resolve5695Info(inputs: ResolverInputs): Form5695FilingInfo {
   const rows = factsInCategory(inputs, "home_energy").filter((row) =>

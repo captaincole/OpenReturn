@@ -1,24 +1,5 @@
 "use client";
 
-/*
- * Forms section of the return page — one unified list of tax forms for
- * the active return.
- *
- * Two data sources, merged:
- *   - state.forms: engine-tracked primary forms (1040, CA 540) with
- *     fill state. Drives the status pill and the fill % bar.
- *   - user_documents (category='drafts'): every PDF the engine has
- *     output, including engine-derived schedules (Schedule D, 8949,
- *     Schedule CA) that are not first-class entries in state.forms.
- *     Drives the Open + Download actions.
- *
- * Merge logic: each state.forms entry pulls its matching draft (if any)
- * by key — see draftKey. Drafts that match no state.forms entry render
- * as standalone "Generated" rows. Drafts dedupe to the most recent per
- * key, because the engine regenerates on every turn and we show only
- * the latest snapshot.
- */
-
 import { useAppShell } from "@/components/AppShell";
 import type { FormSummary } from "@/lib/api";
 import { cn } from "@/lib/cn";
@@ -37,9 +18,7 @@ interface FormItem {
   key: string;
   label: string;
   description: string | null;
-  // From state.forms when this is a tracked primary form
   form?: FormSummary;
-  // From user_documents when an engine-generated PDF exists
   draft?: DraftRow;
 }
 
@@ -171,12 +150,7 @@ function FormRow({ item }: { item: FormItem }) {
 
 type Status = "not_started" | "drafting" | "generated" | "not_filing" | "pending_decision";
 
-/*
- * Status precedence: an existing PDF wins over engine fill state. A
- * generated draft is the user's source of truth for "this is done".
- * "Drafting · 36/39" next to a downloadable PDF misleads, even when the
- * engine still marks some fields unresolved.
- */
+/* An existing PDF wins over fill state: "Drafting · 36/39" beside a PDF misleads. */
 function computeStatus(item: FormItem): Status {
   if (item.draft) return "generated";
   if (item.form) {
@@ -214,14 +188,9 @@ function computeFill(form: FormSummary): { filled: number; total: number; pct: n
 }
 
 /*
- * Stable key that matches state.forms entries to user_documents drafts.
- * generateTaxDocuments writes `metadata.formId = spec.shortId` (e.g.
- * "1040", "540", "schedule-d") on every draft row. state.forms uses the
- * longer `spec.formId` ("form-1040", "form-540"); stripping the "form-"
- * prefix gives the same shortId, so the two sides line up.
- *
- * Filename inference is a fallback for older rows that predate the
- * metadata column, and for drafts written outside generateTaxDocuments.
+ * Drafts carry metadata.formId = spec.shortId ("1040"); state.forms uses
+ * spec.formId ("form-1040"), so formKey strips "form-". The filename
+ * checks cover rows without that metadata.
  */
 function draftKey(draft: DraftRow): string {
   const metaFormId = draft.metadata?.formId;
@@ -267,10 +236,7 @@ const ORPHAN_LABELS: Record<string, { label: string; description: string }> = {
 };
 
 function mergeFormsAndDrafts(forms: FormSummary[], drafts: DraftRow[]): FormItem[] {
-  /*
-   * Dedup: keep the latest draft per key. The query sorts `drafts` by
-   * created_at descending, so the first hit per key wins.
-   */
+  /* The engine regenerates every turn. Drafts sort newest first, so the first hit wins. */
   const draftByKey = new Map<string, DraftRow>();
   for (const d of drafts) {
     const key = draftKey(d);
@@ -280,7 +246,6 @@ function mergeFormsAndDrafts(forms: FormSummary[], drafts: DraftRow[]): FormItem
   const items: FormItem[] = [];
   const claimedKeys = new Set<string>();
 
-  // 1) Engine-tracked forms with their matching drafts (if any).
   for (const f of forms) {
     const key = formKey(f);
     claimedKeys.add(key);
@@ -293,7 +258,6 @@ function mergeFormsAndDrafts(forms: FormSummary[], drafts: DraftRow[]): FormItem
     });
   }
 
-  // 2) Drafts that do not correspond to a tracked form (schedules, JSON).
   for (const [key, draft] of draftByKey.entries()) {
     if (claimedKeys.has(key)) continue;
     const meta = ORPHAN_LABELS[key];

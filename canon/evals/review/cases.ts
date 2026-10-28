@@ -1,15 +1,8 @@
 /*
- * The review-judge dataset. Each decision has a correct version and a
- * wrong one, so a judge that always says "accurate" scores 50%, not 100%.
- * The facts are copies of the engine's test scenarios (tara: IRS ATS
- * scenario 1; marcus: a synthetic scenario), trimmed to the fields a
- * judge reads; a wrong version changes a fact across the threshold or
- * flips the decision.
- * Canon does not import the engine, so the copies live here as data.
- *
- * `authority` lists citation groups. A judge passes a group when it
- * cites ANY block in it: the same rule often appears in several
- * documents. Labeled by a Fable-class model, checked by hand.
+ * Each decision has a correct and a wrong version, so a judge that always
+ * says "accurate" scores 50%. The facts copy the engine's scenarios as
+ * data: Canon does not import the engine. A judge passes an `authority`
+ * group when it cites ANY block in it.
  */
 
 type Verdict = "accurate" | "inaccurate" | "needs_more_facts";
@@ -29,7 +22,6 @@ export interface ReviewCase {
   authority: string[][];
 }
 
-/* Replace one fact's value (shallow merge for objects). */
 const withValue = (facts: ReviewFact[], key: string, patch: unknown) =>
   facts.map((f) =>
     f.key === key
@@ -43,8 +35,6 @@ const single: ReviewFact = {
   value: "never_married",
   sourceNote: "Verbal: never married, no dependents.",
 };
-
-/* ---------- 1. Schedule H (Tara's household employee) ---------- */
 
 const HOUSEHOLD_W2 = "employee.rosa-delgado.household_w2";
 const scheduleHFacts: ReviewFact[] = [
@@ -79,8 +69,6 @@ const scheduleHAuthority = [
   ],
 ];
 
-/* ---------- 2. Form 8959 (Marcus's Medicare wages) ---------- */
-
 const MARCUS_W2 = "employer.helix-software";
 const form8959Facts: ReviewFact[] = [
   single,
@@ -109,8 +97,6 @@ const form8959Authority = [
     "irs-1040-inst-2025::sec::line-11::b01",
   ],
 ];
-
-/* ---------- 3. Must file a federal return (Tara) ---------- */
 
 const taraW2 = (key: string, employerName: string, box1: number, box2: number, box17: number) => ({
   category: "wages",

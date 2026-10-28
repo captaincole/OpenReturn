@@ -1,8 +1,3 @@
-/*
- * Hybrid search merge: reciprocal rank fusion. bm25 (FTS) and cosine
- * distance (vector) are on different scales; only ranks are combined.
- */
-
 import { describe, expect, it } from "vitest";
 import { fuseByRank, type MatchRow } from "../../../src/db/corpusSearch.js";
 

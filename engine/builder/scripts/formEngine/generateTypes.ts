@@ -1,15 +1,3 @@
-/*
- * Emit a typed `Form<Id>` interface from a catalog JSON file.
- *
- * Each catalog field has a `fieldId`, a `valueType` (numeric/text/
- * boolean/date/single_select/multi_select), and a `label`. The script
- * strips the formId prefix off each fieldId to get short keys (the
- * defineForm convention), maps valueType → TS primitive, and emits one
- * interface declaration for the bindings file to import.
- *
- * Re-running overwrites the output.
- */
-
 import { engineSrcDir } from "@openreturn/engine/paths";
 import { promises as fs } from "node:fs";
 import { dirname, relative, resolve } from "node:path";
@@ -50,11 +38,7 @@ function parseCmdArgs(argv: string[]): Args {
   };
 }
 
-/*
- * Map catalog valueType → TS primitive. Branded subtypes (Money for
- * numeric, SSN/Phone for specific text fields) are a future refinement.
- * Plain primitives keep the generated file dependency-free.
- */
+/* Plain primitives, not branded types, keep the generated file dependency-free. */
 function tsType(field: CatalogField): string {
   switch (field.valueType) {
     case "numeric":
@@ -74,11 +58,6 @@ function tsType(field: CatalogField): string {
   }
 }
 
-/*
- * Field IDs in the catalog are full ("form-540.header.first_name"). The
- * defineForm convention uses short keys ("header.first_name"). Strip the
- * formId prefix once at emit time.
- */
 function shortKey(fieldId: string, formId: string): string {
   const prefix = `${formId}.`;
   if (!fieldId.startsWith(prefix)) {

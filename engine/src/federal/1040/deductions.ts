@@ -1,8 +1,3 @@
-/*
- * Form 1040 lines 12e and 14 rules (2025 instructions): the standard
- * deduction, and when the senior deduction blocks line 14.
- */
-
 import {
   lookupAdditionalStandardDeduction,
   lookupStandardDeduction,
@@ -10,10 +5,8 @@ import {
 import type { Form1040FilingInfo } from "./filingInfo.js";
 
 /*
- * Line 12e when the filer does not itemize. Undefined blocks the line.
- * Exception 2: MFS and the spouse itemizes → zero, even when born before
- * 1961. A line 12d box (born before January 2, 1961) adds the amount from
- * the chart; blindness and the spouse boxes are not modeled.
+ * 1040 inst. line 12e, Exception 2: MFS and the spouse itemizes → zero.
+ * The blindness and spouse boxes of line 12d are not modeled.
  */
 export function standardDeduction(info: Form1040FilingInfo): number | undefined {
   if (info.filingStatus === "married_filing_separately") {
@@ -28,10 +21,8 @@ export function standardDeduction(info: Form1040FilingInfo): number | undefined 
 }
 
 /*
- * A filer born before January 2, 1961 who is not MFS may qualify for the
- * enhanced deduction for seniors (Schedule 1-A → line 13b, up to $6,000),
- * which is not modeled. Line 14 stays blank for them. MFS filers cannot
- * claim it.
+ * The senior deduction (Schedule 1-A → line 13b) is not modeled, so line 14
+ * stays blank for a filer who may claim it. MFS filers cannot.
  */
 export function mayClaimSeniorDeduction(info: Form1040FilingInfo): boolean {
   return (

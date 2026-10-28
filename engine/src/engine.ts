@@ -1,23 +1,3 @@
-/*
- * Form engine: binding registry plus Catalog-driven evaluator.
- *
- * Per-form binding files live at `src/federal/<short>/bindings.ts`
- * and `src/state/<state>/<short>/bindings.ts`. Each file exports
- * `register()`, which calls `defineForm<TForm, TInfo>` (see
- * defineForm.ts — the typed authoring surface) with the form's binding
- * functions. defineForm registers rules here via bindField. Must-file
- * comes from FilingInfo.mustFile, which each form's resolver writes.
- * The engine joins those bindings against a `Catalog`: inventory metadata
- * (label, category, valueType, PDF widget, position) loaded from
- * `forms/<jurisdiction>/<short>/catalog.json`.
- *
- * At evaluation time the engine walks the catalog in field-ordinal order.
- * It calls each field's binding with a typed form accessor and the
- * resolved `FilingInfo`, and produces an `EvaluatedForm`. Multi-form
- * scenarios run through `evaluateAllForms`, which iterates to a fixpoint
- * over cross-form references.
- */
-
 import { z } from "zod";
 import type { Catalog, FieldInventory } from "./catalog.js";
 import type { MustFileResolution } from "./filingInfo.js";
@@ -31,36 +11,19 @@ import {
   type EvaluatedForm,
 } from "./types.js";
 
-// ─── Public shapes ───────────────────────────────────────────────────────
-
 export interface Rule<Params = unknown, V = unknown> {
   name: string;
   paramsSchema: z.ZodType<Params>;
   evaluate: (params: Params, ctx: EngineContext) => DerivationResult<V>;
 }
 
-/*
- * EngineContext adds lookup hooks to DerivationContext. The internal
- * binding wrapper uses them to read previously evaluated fields and other
- * forms' must-file results. Binding functions (the authoring API) see
- * these values through the `f` accessor proxy, not through this context.
- */
 export interface EngineContext extends DerivationContext {
-  /** Look up a previously-evaluated field by its fieldId. */
   fieldResult: (fieldId: string) => DerivationResult<unknown> | undefined;
-  /** Look up another form's must-file result. */
   formMustFile: (formId: string) => DerivationResult<boolean> | undefined;
-  /**
-   * The catalog field under evaluation. Internal binding wrappers read it
-   * for per-field metadata (for example multi_select options). Undefined
-   * during a must-file evaluation.
-   */
   field?: FieldInventory;
   /** Final fixpoint pass: cross-form reads stop waiting (pendingReads.ts). */
   settling?: boolean;
 }
-
-// ─── Internal registry state ─────────────────────────────────────────────
 
 interface FieldBinding {
   formId: string;
@@ -70,8 +33,6 @@ interface FieldBinding {
 }
 
 const fieldBindings = new Map<string, FieldBinding>(); // keyed by fieldId
-
-// ─── Registration API (called by defineForm) ─────────────────────────────
 
 export function bindField<P>(formId: string, fieldId: string, ruleDef: Rule<P>, params: P): void {
   ruleDef.paramsSchema.parse(params);
@@ -83,39 +44,23 @@ export function bindField<P>(formId: string, fieldId: string, ruleDef: Rule<P>, 
   });
 }
 
-/** Test-only: clears this module's binding map. defineForm.ts composes it into _resetRegistryForTests. */
 export function _resetBindingRegistryForTests(): void {
   fieldBindings.clear();
 }
 
-// ─── Evaluation ──────────────────────────────────────────────────────────
-
-/**
- * Optional shared state for fixpoint orchestration across multiple forms.
- * When supplied, evaluateForm reads cross-form lookups from these maps and
- * writes its own results back into them. `evaluateAllForms` uses this to
- * propagate cross-form references (for example CA 540 line 13 reads
- * federal AGI from form-1040.line.11b) across passes until results stop
- * changing.
- *
- * Monotonicity invariant: once a field result is `ok`, later passes MUST
- * NOT overwrite it. Fixpoint termination depends on this rule. Fields can
- * only resolve; they never un-resolve.
+/*
+ * Monotonicity invariant: a later pass never overwrites an `ok` field
+ * result. Fixpoint termination depends on it.
  */
 export interface EvaluateFormSharedState {
   fieldResults: Map<string, DerivationResult<unknown>>;
   formMustFiles: Map<string, DerivationResult<boolean>>;
-  /** Set by evaluateAllForms for the final settle pass. */
   settling?: boolean;
 }
 
-/**
- * Evaluate a single form against the supplied Catalog. The engine walks
- * fields in Catalog ordinal order. Intra-form arithmetic (for example
- * line 11 = line 9 − line 10) works when the inventory is ordered
- * top-to-bottom. Cross-form references resolve only through
- * `evaluateAllForms`, which threads shared state across passes. A
- * standalone call evaluates one form in isolation.
+/*
+ * Catalog ordinal order drives intra-form arithmetic. Cross-form reads
+ * resolve only through evaluateAllForms.
  */
 export function evaluateForm(
   formId: string,
@@ -148,16 +93,11 @@ export function evaluateForm(
     title: def.title,
     taxYear: ctx.taxYear,
     mustFile,
-    /* The provenance resolveFilingInfo wrote next to the must-file value. */
     mustFileDerivation: ctx.filingInfo?.mustFile?.[formId]?.derivation,
     missingInputs: [...(ctx.filingInfo?.missingInputs?.[formId] ?? [])],
   };
 
-  /*
-   * When must-file is blocked or false, return immediately with no
-   * fields. This prevents a cascade of blocked results downstream when a
-   * form does not apply at all.
-   */
+  // Must-file blocked or false: no fields, so blocked results do not cascade.
   if (!mustFile.ok || !mustFile.value) {
     return { ...base, fields: [] };
   }
@@ -165,11 +105,6 @@ export function evaluateForm(
   return { ...base, fields: evaluateFields(formId, engineCtx, catalog, fieldResults) };
 }
 
-/*
- * Resolve must-file from FilingInfo.mustFile[formId]. It is a pure read
- * of resolved facts + decisions, so the first result is cached for the
- * other forms' cross-form reads (pendingReads.ts).
- */
 function resolveMustFile(
   formId: string,
   ctx: DerivationContext,
@@ -200,24 +135,12 @@ function mustFileResult(
 }
 
 /*
- * Walk the Catalog's inventory in order. For each field, look up the
- * registered binding. A missing binding surfaces as a blocked field
- * result. That signals a misalignment between the Catalog (inventory)
- * and the bindings file (behavior); fix it, do not hide it.
- *
- * Fixpoint optimization: skip re-evaluation when an `ok` result is
- * already cached. Bindings are pure functions of (params, ctx), and ctx
- * only grows, so the next pass returns the same answer. The exception
- * is a result from a settle pass: its reads stopped waiting, so it can
- * hold a value computed before an input resolved. It is evaluated again
- * every pass.
+ * A cached `ok` result is not evaluated again: ctx only grows. A settle-pass
+ * result is the exception. It may predate an input, so it runs every pass.
  */
 const settledResults = new WeakSet<object>();
 
-/*
- * Field ids each result's binding read. Keyed by the result object, so a
- * cached ok result from an earlier pass keeps the reads that produced it.
- */
+// Keyed by the result object, so a cached ok result keeps the reads that produced it.
 const readsByResult = new WeakMap<object, string[]>();
 
 function evaluateFields(
@@ -241,11 +164,6 @@ function evaluateFields(
             `form's defineForm spec (bindings/unsupported/todos).`,
         );
       } else {
-        /*
-         * Per-field context: the same engine context plus the current
-         * field's inventory. The internal binding wrapper reads it for
-         * per-field metadata (multi_select options).
-         */
         const reads = trackPendingReads({ ...engineCtx, field: inv }, formId);
         result = binding.rule.evaluate(binding.params, reads.ctx);
         if (reads.hadPendingRead()) result = pendingResult(inv.fieldId);
@@ -267,28 +185,9 @@ function evaluateFields(
   return fields;
 }
 
-// ─── Multi-form orchestration via fixpoint iteration ─────────────────────
-
-/**
- * Max passes before the evaluator gives up. A cross-form read of a form
- * not evaluated yet waits one pass (pendingReads.ts), so the pass count
- * grows with the depth of the form-to-form chain: 4 for the simple
- * scenarios, 6 for jordan (2026-10-15), plus the settle pass. The
- * ceiling turns a genuine cycle into a loud error, not an infinite loop.
- */
+// Each cross-form wait costs a pass. The cap turns a real cycle into an error.
 const MAX_FIXPOINT_PASSES = 20;
 
-/**
- * Evaluate multiple forms with shared state. Iterate until results stop
- * changing. Cross-form references (for example CA 540 line 13 → form-1040
- * line 11b) resolve because dependent forms re-evaluate after their
- * sources resolve.
- *
- * Monotonicity guarantees termination: each pass can only resolve more
- * fields to `ok`, never un-resolve them. The loop exits when a pass
- * produces zero new `ok` results and no settle-pass value changed, or
- * fails loudly at MAX_FIXPOINT_PASSES.
- */
 export function evaluateAllForms(
   formIds: string[],
   ctx: DerivationContext,
@@ -298,13 +197,7 @@ export function evaluateAllForms(
   passes: number;
   resolvedPerPass: number[];
 } {
-  /*
-   * Fail fast on a missing resolver. Without filingInfo, every typed
-   * binding blocks with the same "ctx.filingInfo is missing" reason. Forms
-   * then render empty, and forms with a filingInfo-dependent mustFile get
-   * skipped entirely. We shipped this bug once. Surface it loudly here
-   * rather than as silent blank PDFs.
-   */
+  // Fail loud: without filingInfo every binding blocks and the PDFs render blank.
   if (!ctx.filingInfo) {
     throw new Error(
       "evaluateAllForms: ctx.filingInfo is missing. " +
@@ -341,10 +234,6 @@ export function evaluateAllForms(
   throw nonConvergenceError(shared);
 }
 
-/*
- * Convergence failure. List the still-blocked fields so the operator can
- * see the suspected cycle locations.
- */
 function nonConvergenceError(shared: EvaluateFormSharedState): Error {
   const stillBlocked: string[] = [];
   for (const [fieldId, result] of shared.fieldResults) {
@@ -368,7 +257,6 @@ function countOk<V>(map: Map<string, DerivationResult<V>>): number {
   return n;
 }
 
-/* The ok values, as one string to compare between passes. */
 function okValues(map: Map<string, DerivationResult<unknown>>): string {
   const out: Array<[string, unknown]> = [];
   for (const [id, r] of map) if (r.ok) out.push([id, r.value]);

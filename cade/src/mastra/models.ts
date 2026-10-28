@@ -1,41 +1,14 @@
 import type { MastraModelConfig } from "@mastra/core/llm";
 
 /*
- * Cade has exactly one model role:
- *
- *   cade      — the conversation agent. Must be multimodal (reads
- *               W-2/1099 images inline) and handle multi-step tool
- *               orchestration.
- *
- * The judges (grounding, Ask The Tax Code) and the retrieval embeddings
- * are Canon's models, configured in canon/.env.development (JUDGE_*,
- * EMBEDDINGS_*); Cade reaches them over MCP.
- *
- * Configuration contract (CADE_*):
- *
- *   <ROLE>_MODEL          REQUIRED. "provider/model" string. Without a
- *                         URL it resolves through Mastra's provider
- *                         registry (cloud, keyed by the provider's
- *                         *_API_KEY env).
- *   <ROLE>_MODEL_URL      When set, the role talks to this
- *                         OpenAI-compatible endpoint instead (Ollama,
- *                         vLLM, LM Studio, llama.cpp, HF endpoint, …).
- *   <ROLE>_MODEL_API_KEY  Optional bearer token for that endpoint.
- *
- * There are deliberately NO in-code defaults. The operator decides in
- * the env file which model reads the user's tax data, so a missing var
- * is a startup failure, not a silent fallback. The first-run bootstrap
- * (scripts/bootstrap-env.mjs) writes Anthropic values into the generated
- * .env.development, so a fresh clone still boots without research.
+ * CADE_MODEL ("provider/model") is required. CADE_MODEL_URL points it at an OpenAI-compatible
+ * endpoint, with CADE_MODEL_API_KEY as its bearer token. No in-code defaults on purpose:
+ * the operator chooses which model reads tax data. The judges are Canon's models.
  */
 
 export type ModelRole = "cade";
 
-/*
- * Providers whose APIs accept PDF file parts directly. Everything else
- * (notably any OpenAI-compatible URL) gets PDF attachments rasterized to
- * images first — see agents/pdfAttachments.ts.
- */
+/* Every other provider, and any OpenAI-compatible URL, gets PDFs rasterized (pdfAttachments.ts). */
 const PDF_NATIVE_PROVIDERS = new Set(["anthropic", "google", "vertex"]);
 
 export function modelReadsPdf(role: ModelRole): boolean {

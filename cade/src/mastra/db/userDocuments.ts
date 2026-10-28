@@ -12,21 +12,8 @@ import {
 import { writeBlob } from "./blobStore";
 
 /*
- * Storage helper for user-owned documents (drafts, finals, uploads).
- *
- * Two stores work together:
- *   - user_documents (metadata, libsql app.db): which files exist, when,
- *     and what kind.
- *   - .data/documents/ (bytes, local filesystem via blobStore): the
- *     actual PDF/JSON/etc.
- *
- * Callers must verify the user's filing access (requireUserContext)
- * before they call in; there is no storage-layer ACL.
- *
- * Storage paths are `{filingId}/{category}/{slug}-{ulid}.{ext}`. The ULID
- * suffix avoids collisions when generate-tax-documents runs multiple
- * times. Each run creates new rows and new files; old chat-message links
- * keep resolving to the version they were generated against.
+ * Callers must verify filing access (requireUserContext) first: there is no storage-layer ACL.
+ * Each generate run writes new files, so old chat links keep the version they were made from.
  */
 
 export type Category = "drafts" | "finals" | "uploads";
@@ -61,12 +48,6 @@ function rowToDocument(r: Row): UserDocumentRow {
   };
 }
 
-/*
- * Crockford-base32 ULID generator: lexicographically sortable, no
- * external dependency. The time component is 48-bit milliseconds; the
- * random part is 80-bit. Sufficient for filename disambiguation at our
- * scale.
- */
 const ULID_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 function ulid(): string {
   const time = Date.now();
@@ -98,9 +79,7 @@ export interface CreateDocumentInput {
   filingId: string;
   category: Category;
   scenario?: string | null;
-  /** Display name shown in the UI / chat link (e.g., "Form 1040 — 2025"). */
   filename: string;
-  /** Slug used in the storage filename (e.g., "1040-2025"). */
   storageSlug: string;
   extension: string;
   bytes: Buffer | Uint8Array;
@@ -115,14 +94,8 @@ export interface CreateDocumentResult {
 }
 
 /*
- * Write the bytes and insert the metadata row in one operation. Returns
- * the row's UUID so callers can build the public download path
- * `/documents/{id}`.
- *
- * The bytes are written BEFORE the row insert. A failed insert leaves an
- * orphan file on disk; that is cheap, and a future GC pass can remove it.
- * The reverse order leaves a row that points at missing bytes, which is
- * worse: broken download links.
+ * Bytes BEFORE the row: a failed insert leaves a cheap orphan file. The reverse order
+ * leaves a row that points at missing bytes, a broken download link.
  */
 export async function createDocument(input: CreateDocumentInput): Promise<CreateDocumentResult> {
   await ensureAppSchema();
@@ -167,9 +140,7 @@ export async function createDocument(input: CreateDocumentInput): Promise<Create
 export interface ListDocumentsOpts {
   category?: Category;
   scenario?: string | null;
-  /** Filter by metadata.formId — convenience for the "most recent 1040" query. */
   formId?: string;
-  /** Filter by metadata.taxYear. */
   taxYear?: number;
   limit?: number;
 }
@@ -197,11 +168,7 @@ export async function listDocuments(
     args.push(opts.formId);
   }
   if (opts.taxYear !== undefined) {
-    /*
-     * metadata.taxYear is stored as a JSON number; json_extract returns
-     * it numerically, so compare against the number. The old PostgREST
-     * ->> path compared text; SQLite lets us skip the stringify.
-     */
+    /* metadata.taxYear is a JSON number: compare a number, not a string. */
     conds.push(`json_extract(metadata, '$.taxYear') = ?`);
     args.push(opts.taxYear);
   }

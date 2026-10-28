@@ -1,16 +1,8 @@
-/*
- * Form 8995-A slot resolver (composed by resolveFilingInfo).
- */
-
 import { isDividendFactKey } from "../../facts/index.js";
 import { sum } from "../../money.js";
 import { factsInCategory, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import type { Form8995AFilingInfo } from "./filingInfo.js";
 
-/*
- * Default: required when 1099-DIV box 5 (section 199A dividends) is
- * positive. An explicit `decisions.scope.must_file_8995_a` wins.
- */
 export function resolve8995AInfo(inputs: ResolverInputs): Form8995AFilingInfo {
   const divs = factsInCategory(inputs, "investment_income").filter((row) =>
     isDividendFactKey(row.key),

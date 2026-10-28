@@ -1,12 +1,6 @@
 /*
- * Copy every blank.pdf (the engine fills it) from @openreturn/sources into
- * the agent's runtime tree, src/mastra/public/sources/, with the same
- * layout (<year>/forms/<relativeDir>/blank.pdf). Instruction and
- * publication PDFs are not copied: the reference library serves them
- * from corpus.db. Mastra ships public/ with the server, and
- * src/mastra/formAssets.ts reads from it. The tree is gitignored:
- * @openreturn/sources is the one copy in git. Runs before `dev` and `build`
- * (npm pre-scripts) and before the e2e agent.
+ * Copy every blank.pdf into src/mastra/public/sources/ (gitignored), which Mastra
+ * ships with the server. Runs before `dev`, `build` and the e2e agent.
  */
 
 import { SOURCES_ROOT } from "@openreturn/sources";

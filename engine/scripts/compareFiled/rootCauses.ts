@@ -1,21 +1,12 @@
-/*
- * Group differences by root cause.
- *
- * A root difference is a differing line whose inputs (the field ids its
- * binding read) all match. Every other differing line inherits from one
- * or more roots upstream. Fixing a root usually fixes its downstream
- * lines, so the report leads with roots.
- */
+/* A root is a differing line whose inputs (the field ids its binding read) all match. */
 
 import type { LineDiff } from "./compare.js";
 
 export interface RootCause {
   root: LineDiff;
-  /** Differing lines that read this root, directly or through other differing lines. */
   downstream: LineDiff[];
 }
 
-/** `readsOf(fieldId)` returns the field ids the line's binding read. */
 export function groupRootCauses(
   diffs: LineDiff[],
   readsOf: (fieldId: string) => string[] | undefined,

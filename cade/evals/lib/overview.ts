@@ -1,13 +1,3 @@
-/*
- * The eval overview, docs/evals/README.md: one number per model, which
- * breaks down into one number per flow (ingest, review, ask), which breaks down
- * into capabilities. Each flow's report keeps the raw numbers.
- *
- * A flow's report writes its scores to docs/evals/scores/<flow>.json when
- * it publishes, then calls publishOverview, which renders every flow found
- * there. The overall score is the mean of a model's flow scores, so it
- * shows only for models that ran every flow.
- */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pct, table } from "./markdown";
@@ -18,16 +8,13 @@ export interface ModelScores {
   label: string;
   id: string;
   score: number;
-  /* Capability name → score. A model with no case for a capability has no entry. */
   capabilities: Record<string, number>;
-  /* Set when the model ran only part of the flow's cases, e.g. "12/23 documents". */
   partial?: string;
 }
 
 export interface FlowScores {
   flow: Flow;
   title: string;
-  /* How the flow score is computed: one or two sentences. */
   definition: string;
   report: string;
   capabilities: string[];
@@ -42,7 +29,6 @@ const scoresFile = (flow: Flow) => path.join(DIR, "scores", `${flow}.json`);
 const cell = (m: ModelScores | undefined) =>
   m ? `${pct(m.score)}${m.partial ? ` (${m.partial})` : ""}` : "—";
 
-/* Each model's overall score: the mean of its flow scores, when it ran every flow in full. */
 function overallRows(flows: FlowScores[]) {
   const labels = [...new Set(flows.flatMap((f) => f.models.map((m) => m.label)))];
   const rows = labels.map((label) => {
@@ -62,7 +48,6 @@ function headline(flows: FlowScores[]): string {
   );
 }
 
-/* One flow's table, its rows in the headline's order. */
 function flowSection(f: FlowScores, order: string[]): string {
   const sorted = [...f.models].sort((a, b) => order.indexOf(a.label) - order.indexOf(b.label));
   const rows = sorted.map((m) => [
@@ -88,7 +73,6 @@ export function renderOverview(flows: FlowScores[]): string {
   ].join("\n\n");
 }
 
-/* Save one flow's scores and re-render the overview from every saved flow. */
 export function publishOverview(scores: FlowScores): string {
   mkdirSync(path.dirname(scoresFile(scores.flow)), { recursive: true });
   writeFileSync(scoresFile(scores.flow), JSON.stringify(scores, null, 2) + "\n");

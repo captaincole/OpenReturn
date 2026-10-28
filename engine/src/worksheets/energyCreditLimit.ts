@@ -1,37 +1,28 @@
-/*
- * Energy Efficient Home Improvement Credit Limit Worksheet—Line 31
- * (2025 Form 5695 instructions; corpus: irs-5695-inst-2025). Limits the
- * Part II credit to the tax left after the Schedule 3 credits that come
- * before it. Line 3 goes on Form 5695 line 31.
- */
+/* Form 5695 instructions, Credit Limit Worksheet—Line 31. Blank Schedule 3 amounts count as 0. */
 
 import { atLeast, sum } from "../money.js";
 
 export interface EnergyCreditLimitInputs {
   /** Line 1: Form 1040 line 18. */
   tax: number;
-  /*
-   * Line 2: the Schedule 3 amounts taken on the return. Blank counts
-   * as 0.
-   */
-  /** Schedule 3 line 6l: amount on Form 8978, line 14. */
+  /* Line 2 sums the Schedule 3 lines below. */
+  /** Schedule 3 line 6l (Form 8978 line 14). */
   form8978Amount?: number;
-  /** Schedule 3 line 1: foreign tax credit. */
+  /** Schedule 3 line 1. */
   foreignTaxCredit?: number;
-  /** Schedule 3 line 2: credit for child and dependent care expenses. */
+  /** Schedule 3 line 2. */
   dependentCareCredit?: number;
-  /** Schedule 3 line 6d: credit for the elderly or the disabled. */
+  /** Schedule 3 line 6d. */
   elderlyOrDisabledCredit?: number;
-  /** Schedule 3 line 3: nonrefundable education credits. */
+  /** Schedule 3 line 3. */
   educationCredits?: number;
-  /** Schedule 3 line 4: retirement savings contributions credit. */
+  /** Schedule 3 line 4. */
   retirementSavingsCredit?: number;
 }
 
 export interface EnergyCreditLimitResult {
   line1: number;
   line2: number;
-  /** Line 1 minus line 2, at least 0. Form 5695 line 31. */
   line3: number;
 }
 

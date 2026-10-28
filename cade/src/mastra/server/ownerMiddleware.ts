@@ -4,21 +4,10 @@ import { getOwner } from "../db/appDb";
 import { bearerMatches } from "./requestGuard";
 
 /*
- * Single-user auth model: identity = the instance. The agent binds to
- * 127.0.0.1 (index.ts, server.host). The web app fronts it, authenticates the browser with its
- * own session cookie, and proxies agent calls server-side. This
- * middleware does two things:
- *
- *   1. Optional shared-token gate: when AGENT_API_TOKEN is set, require
- *      `Authorization: Bearer <token>` on /api/* and /app/* — defense in
- *      depth for deployments where the agent port is reachable beyond
- *      localhost. When unset (the localhost default), everything is
- *      allowed.
- *   2. Resolve the instance owner from app.db and stash their id/email
- *      on requestContext. MASTRA_RESOURCE_ID_KEY scopes Mastra memory;
- *      userEmail feeds the engine's authEmail enrichment. Before
- *      first-run setup (no owner row) requests still flow; tools that
- *      need a filing throw their own "no owner filing" error.
+ * Identity = the instance. The agent binds to 127.0.0.1; the web app authenticates the
+ * browser and proxies here. AGENT_API_TOKEN, when set, gates /api/* and /app/* for a port
+ * reachable beyond localhost. The owner id on MASTRA_RESOURCE_ID_KEY scopes Mastra memory.
+ * Before first-run setup there is no owner: requests still flow, and tools throw.
  */
 
 export const REQUEST_CONTEXT_KEYS = {

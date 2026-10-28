@@ -1,15 +1,5 @@
 "use client";
 
-/*
- * The conversation surface. On desktop it fills AppShell's left pane; on
- * mobile it fills the "Chat" tab. It has no header. Identity reads from
- * the avatar on each assistant message plus the Cade badge in the input.
- *
- * AppShell.sendChat does all sending. The form submit here and the
- * Requested Actions card upload call the same function. Exactly one code
- * path writes user turns.
- */
-
 import { type ChatMessage, useAppShell } from "@/components/AppShell";
 import { Markdown } from "@/components/Markdown";
 import { type PlanItem } from "@/lib/api";
@@ -27,20 +17,11 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
 
   const isPlaceholder = !activeReturn.realDataAvailable;
 
-  /*
-   * mobilePane: on mobile this pane stays mounted but hidden behind the
-   * workspace tabs, and a hidden element cannot scroll. Scroll again
-   * when the Chat tab shows it.
-   */
+  /* mobilePane: a hidden element cannot scroll, so scroll again when the Chat tab shows. */
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
   }, [messages, mobilePane]);
 
-  /*
-   * For placeholder returns, render one hardcoded Cade turn instead of
-   * the real message buffer. This keeps the multi-return UX honest
-   * without backend support for non-2025 threads.
-   */
   const renderMessages: ChatMessage[] = isPlaceholder
     ? [placeholderMessageFor(activeReturn)]
     : messages;
@@ -103,7 +84,6 @@ function MessageBubble({ msg, cadeBusy }: { msg: ChatMessage; cadeBusy: boolean 
   );
 }
 
-/* The input card: plan rail, attachment strip, textarea, action row. */
 function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
   const { state, cadeBusy, sendChat } = useAppShell();
   const [input, setInput] = useState("");
@@ -111,10 +91,7 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const messageInputRef = useRef<HTMLTextAreaElement>(null);
 
-  /*
-   * sendChat disables the textarea via cadeBusy. Restore focus when it
-   * flips back so the user can continue to type without a click.
-   */
+  /* cadeBusy disables the textarea, which drops focus. Restore it. */
   useEffect(() => {
     if (!cadeBusy && !isPlaceholder) messageInputRef.current?.focus();
   }, [cadeBusy, isPlaceholder]);
@@ -131,10 +108,6 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
     const file = attachment;
     if (!text && !file) return;
 
-    /*
-     * Clear the local input state immediately so the user sees the
-     * message commit. sendChat handles the rest.
-     */
     setInput("");
     clearAttachment();
 
@@ -223,7 +196,6 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
   );
 }
 
-/* Pending-attachment strip shown above the input card. */
 function AttachmentChip({ attachment, onClear }: { attachment: File; onClear: () => void }) {
   return (
     <div className="mb-2 flex items-center gap-2 rounded-lg border border-border-subtle bg-bg-panel px-3 py-2 text-sm">
@@ -298,10 +270,6 @@ function SendIcon() {
   );
 }
 
-/*
- * Compact plan strip rendered INSIDE the input card. It hides done items.
- * It shows at most 3 items, with a "See N more" toggle for the rest.
- */
 function PlanRail({ plan, hidden }: { plan: PlanItem[]; hidden: boolean }) {
   const [showAll, setShowAll] = useState(false);
   const active = plan.filter((p) => p.status !== "done");
@@ -414,12 +382,7 @@ function IconButton({
 }
 
 function placeholderMessageFor(ret: TaxReturn): ChatMessage {
-  /*
-   * Unreachable today. The return layout redirects to '/' when the caller
-   * does not own a filing for the requested year, so every TaxReturn that
-   * reaches ChatPane has realDataAvailable=true. Kept as a defense-in-depth
-   * fallback in case the layout gate drifts from this assumption.
-   */
+  /* Unreachable today: the return layout redirects years without a filing. Defense in depth. */
   if (ret.state === "filed") {
     return {
       id: "placeholder",

@@ -1,9 +1,4 @@
-/*
- * Tax Table lookup: printed rows, row boundaries, the hand-off to the
- * rate schedules at $100,000, and the error contract. Row values come
- * from the 2025 Form 1040 Instructions (Tax Table) and the 2025 540
- * booklet (California Tax Table).
- */
+/* Source: 2025 Form 1040 instructions (Tax Table) and the 2025 540 booklet (CA Tax Table). */
 
 import { describe, expect, it } from "vitest";
 import { lookupCaRateSchedule } from "../../../src/data/caRateSchedule.js";

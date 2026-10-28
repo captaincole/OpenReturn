@@ -1,16 +1,6 @@
 "use client";
 
-/*
- * Workspace page for the active return. One column of sections:
- *   - Activity: recent facts and decisions, then Requested actions
- *   - Forms: engine-tracked forms and generated drafts
- *   - Documents: the user's uploads
- *
- * Desktop shows every section. Mobile shows only the section that the
- * bottom tab bar picks (mobilePane in useAppShell). AppShell renders this
- * page once and only hides it behind the Chat tab, so every section stays
- * mounted and a tab switch does not refetch.
- */
+/* Mobile hides sections instead of unmounting them, so a tab switch does not refetch. */
 
 import { useAppShell, type MobilePane } from "@/components/AppShell";
 import { cn } from "@/lib/cn";
@@ -30,11 +20,6 @@ export default function ReturnWorkspace() {
     <div className="mx-auto max-w-5xl space-y-10 px-6 pt-4 pb-10 lg:px-10 lg:pt-6">
       <Pane id="activity" className="space-y-6">
         <ActivityTicker refreshKey={turnTick + resetTick * 10000} />
-        {/*
-         * Things Cade asks the USER to do — uploads, confirmations,
-         * decisions — that do not fit a natural chat turn. The Plan list
-         * lives in the chat pane.
-         */}
         <RequestedActionsCard />
       </Pane>
       <Pane id="forms">
@@ -47,7 +32,6 @@ export default function ReturnWorkspace() {
   );
 }
 
-/* Hidden below lg unless the mobile tab bar picks it. */
 function Pane({
   id,
   className,
@@ -62,11 +46,7 @@ function Pane({
 }
 
 function PlaceholderWorkspace() {
-  /*
-   * Unreachable today — same story as ChatPane.placeholderMessageFor.
-   * The layout redirect keeps years without a filing out of /r/*, and
-   * every queried TaxReturn has realDataAvailable=true.
-   */
+  /* Unreachable today: every queried TaxReturn has realDataAvailable=true. */
   const { activeReturn } = useAppShell();
   return (
     <div className="mx-auto max-w-2xl px-6 py-16 text-center lg:px-10">

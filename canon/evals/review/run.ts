@@ -1,16 +1,9 @@
 /*
- * Review-judge eval: ground each case's decision with the production
- * ground pipeline (workflows/ground) and score the verdict, the cited
- * authority, and whether retrieval found that authority at all.
- *
  *   npx tsx --env-file=.env.development evals/review/run.ts <model-substring> [--runs=N] [--case=…]   (from canon)
  *
  * One model per run: the judges read JUDGE_MODEL when their module loads.
- * --case=<substring> runs only matching cases and does not publish a
- * report; combine saved runs with report.ts. Memory grows with each review
- * in one process (Node ran out of heap after 13 runs on Gemma 4 31b), so
- * for long runs, start one process per case with --case.
- * Writes .scratch/evals/review/<runId>/results.json and docs/evals/review.md.
+ * Memory grows with each review in one process, so for long runs start one
+ * process per case with --case.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -54,7 +47,6 @@ async function checkAuthority(d: Deps) {
     throw new Error(`labeled blocks missing from corpus.db: ${missing.join(", ")}`);
 }
 
-/* Every block id the gather steps retrieved, from the step log. */
 function retrievedBlocks(steps: GroundStepLog[]): Set<string> {
   const json = JSON.stringify(steps.filter((s) => s.kind === "gather").map((s) => s.output));
   return new Set([...json.matchAll(/"blockId":"([^"]+)"/g)].map((m) => m[1]));
@@ -93,7 +85,6 @@ async function evalCase(d: Deps, c: ReviewCase, run: number): Promise<ReviewResu
     citedAuthority: hitsAll(c.authority, new Set(cited)),
     retrievedAuthority: hitsAll(c.authority, retrieved),
     cited,
-    /* The rule judge must cite only retrieved blocks; fact keys and made-up ids break that. */
     invalidCitations: cited.filter((id) => !retrieved.has(id)),
     iterations: out.iterationCount,
     latencyMs: Date.now() - started,

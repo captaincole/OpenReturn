@@ -1,22 +1,7 @@
 /*
- * Support check: does the engine cover this return at all? It runs
- * before the comparison. A return that uses inputs or forms the engine
- * does not model will differ for that reason alone, and that is not a
- * rounding or rule bug.
- *
- * Rounding styles (decisions.rounding.*) are not decisions: they come
- * from Scenario.preparer.rounding, so one in decisions.ts is flagged.
- *
- * Four kinds of issue:
- *   - unknown_fact / unknown_decision: a key the engine never reads.
- *     Usually a typo in facts.ts or decisions.ts; fix the input.
- *   - out_of_scope: a supported key with an answer the engine does not
- *     model (part-year resident, foreign trust, …).
- *   - form_not_modeled: the filed return includes a form the engine
- *     does not compute.
- *
- * Fact keys carry payer and account names, so issues print a masked key
- * (account.<name>.k1), never the key itself.
+ * Rounding styles come from Scenario.preparer.rounding, so a decisions.rounding.*
+ * entry in decisions.ts is flagged as unknown.
+ * PRIVACY: fact keys carry payer and account names, so issues print a masked key.
  */
 
 import {
@@ -60,11 +45,7 @@ const DOCUMENT_FACTS = [
   isEnergyInvoiceFact,
 ];
 
-/*
- * Single-value facts the resolvers read (filingInfoResolvers.ts,
- * resolverInputs.ts). tests/unit/scripts/compareFiled/support.test.ts fails when a resolver reads a key
- * that is missing here.
- */
+/* support.test.ts fails when a resolver reads a key that is missing here. */
 export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(HSA_COVERAGE_KEYS),
   ...Object.values(PRIOR_YEAR_KEYS),
@@ -109,7 +90,6 @@ const DECISION_PATTERNS = [
   /^decisions\.trade\.[^.]+\.form_8949_box$/,
 ];
 
-/* Supported keys whose answer the engine does not model. */
 const OUT_OF_SCOPE: { key: string; supported: (v: unknown) => boolean; detail: string }[] = [
   {
     key: "decisions.scope.filing_status",
@@ -133,7 +113,6 @@ const OUT_OF_SCOPE: { key: string; supported: (v: unknown) => boolean; detail: s
   },
 ];
 
-/** account.<name>.k1 — never print a payer or account name. */
 export function maskKey(key: string): string {
   return key
     .replace(/^(account|employer|payer)\.[^.]+/, "$1.<name>")
@@ -150,7 +129,6 @@ function isKnownDecision(key: string): boolean {
   return DECISION_KEYS.has(key) || DECISION_PATTERNS.some((re) => re.test(key));
 }
 
-/** `modeledForms`: form ids the engine computes (registered with bindings). */
 export function checkSupport(s: Scenario, modeledForms: Set<string>): SupportIssue[] {
   const issues: SupportIssue[] = [];
   const unknownFacts = new Set(s.facts.filter((f) => !isKnownFact(f)).map((f) => maskKey(f.key)));

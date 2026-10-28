@@ -21,11 +21,7 @@ describe("record-tax-facts", () => {
   });
 
   it("passes the cap check with the maximum number of facts", async () => {
-    /*
-     * The call stops at the user lookup, after the cap check. Which error
-     * depends on the checkout: "owner missing" without an app.db,
-     * "requestContext missing" with one (userContext.ts).
-     */
+    /* The call stops at the user lookup. The error depends on whether an app.db exists. */
     await expect(run(MAX_FACTS_PER_CALL)).rejects.toThrow(/owner missing|requestContext missing/);
   });
 });

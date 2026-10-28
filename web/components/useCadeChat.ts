@@ -1,13 +1,6 @@
 "use client";
 
-/*
- * The chat session behind AppShell: message buffer, busy flag, history
- * hydration, and the single sendChat entry point that streams a turn to
- * Cade. Extracted from AppShell so the shell stays layout + context
- * plumbing. One sendChat code path (chat input and the Requested
- * Actions card both call it) prevents useEffect bridges, state-trigger
- * races, and double sends.
- */
+/* One sendChat code path for every caller prevents state-trigger races and double sends. */
 
 import { UnauthorizedError } from "@/lib/api";
 import { getUserId } from "@/lib/auth";
@@ -27,10 +20,7 @@ export interface ChatMessage {
 export interface SendChatOpts {
   text?: string;
   file?: File;
-  /*
-   * Set true when the caller already wrote the file to user_documents.
-   * Then sendChat does not upload the file again.
-   */
+  /* The caller already wrote the file to user_documents. */
   skipUpload?: boolean;
 }
 
@@ -61,7 +51,6 @@ function readFileAsBase64(file: File): Promise<string> {
   });
 }
 
-/* The stream payload: plain text, or a one-message array with the file inlined. */
 async function buildPayload(text: string, file: File | undefined): Promise<unknown> {
   if (!file) return text;
   const base64 = await readFileAsBase64(file);
@@ -85,7 +74,6 @@ async function buildPayload(text: string, file: File | undefined): Promise<unkno
   ];
 }
 
-/* Convert a Mastra thread listing into the ChatMessage buffer shape. */
 function convertThreadMessages(
   messages: Array<{
     id: string;
@@ -116,11 +104,6 @@ function convertThreadMessages(
   return converted;
 }
 
-/*
- * Everything the top-level send/load implementations need. Built fresh
- * each render by the hook; the implementations live at module level so
- * no single function carries the whole session.
- */
 interface ChatCtx {
   userId: string;
   activeReturn: TaxReturn;
@@ -148,11 +131,10 @@ async function loadChatHistoryImpl(ctx: ChatCtx): Promise<void> {
     const converted = convertThreadMessages(res.messages);
     ctx.setMessages((current) => (current.length > 0 ? current : converted));
   } catch {
-    // Thread is missing or the request failed. Keep the buffer empty.
+    // No thread yet, or the request failed: keep the buffer empty.
   }
 }
 
-/* Stream one turn; append each text delta onto the assistant message. */
 async function streamTurn(
   ctx: ChatCtx,
   payload: unknown,
@@ -178,7 +160,6 @@ async function streamTurn(
   });
 }
 
-/* The guarded turn: payload build → auth check → stream → state refresh. */
 async function runTurn(ctx: ChatCtx, text: string, file: File | undefined, assistantId: string) {
   try {
     const payload = await buildPayload(text, file);
@@ -225,11 +206,6 @@ async function sendChatImpl(ctx: ChatCtx, sendOpts: SendChatOpts): Promise<void>
   const assistantMsg: ChatMessage = { id: freshId("a"), role: "assistant", content: "" };
   ctx.setMessages((m) => [...m, userMsg, assistantMsg]);
 
-  /*
-   * Write the file to user_documents in parallel. Then the Documents
-   * tab shows it. Skip this when the caller already uploaded the file
-   * (for example, the Requested Actions card).
-   */
   if (file && !sendOpts.skipUpload) {
     uploadDocument(file).catch((err) => {
       console.warn("[chat] upload to user-documents failed:", err);
@@ -253,12 +229,7 @@ export function useCadeChat(opts: {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [cadeBusy, setCadeBusy] = useState(false);
   const [turnTick, setTurnTick] = useState(0);
-  /*
-   * Synchronous gate against concurrent sendChat calls. setCadeBusy is
-   * asynchronous. Two calls in the same tick can both pass an
-   * `if (cadeBusy)` check. sendChatImpl sets this ref immediately and
-   * clears it in the finally block.
-   */
+  /* setCadeBusy is async: two calls in one tick both pass `if (cadeBusy)`. The ref is sync. */
   const sendingRef = useRef(false);
 
   const ctx: ChatCtx = {

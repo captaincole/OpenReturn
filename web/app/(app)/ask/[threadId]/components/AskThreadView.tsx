@@ -1,11 +1,5 @@
 "use client";
 
-/*
- * Loads one Q&A thread and polls it while a turn is running (the agent
- * answers in the background; see cade server/routes/ask.ts). A
- * follow-up bumps pollTick, which restarts the poll loop.
- */
-
 import { UnauthorizedError } from "@/lib/api";
 import { fetchAskThread, type AskThread } from "@/lib/ask";
 import { signOut } from "@/lib/auth";
@@ -59,7 +53,6 @@ export function AskThreadView({ threadId }: { threadId: string }) {
   const lastTurnRef = useRef<HTMLDivElement>(null);
   const turnCount = thread?.turns.length ?? 0;
 
-  // Bring a new follow-up into view; the first turn is already at the top.
   useEffect(() => {
     if (turnCount > 1) lastTurnRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [turnCount]);

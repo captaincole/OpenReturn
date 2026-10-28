@@ -1,12 +1,4 @@
 /*
- * Ingest the California FTB Tax Table (2025 540 booklet appendix) from a
- * cached PDF into a checked-in JSON file. Same shape as the federal
- * ingest-federal-tax-table pipeline, but it reads PDF text, not HTML.
- *
- * `--refresh` re-downloads from ftb.ca.gov. The default uses the cached
- * PDF in @openreturn/sources (<year>/forms/state/ca/tax-table.source.pdf); the JSON
- * goes to the engine's src/data/.
- *
  * Spot-checks are hand-keyed from pages 1, 3, 4, and 5 of the published
  * FTB table. Any change to the extraction logic must keep them passing.
  */
@@ -37,26 +29,22 @@ const SOURCES: Record<number, CATaxTableSource> = {
   2025: {
     url: "https://www.ftb.ca.gov/forms/2025/2025-540-taxtable.pdf",
     spotChecks: [
-      // Lowest band: $0 across all columns.
       { taxableIncome: 1, column: "single_or_mfs", expectedTax: 0 },
       { taxableIncome: 50, column: "hoh", expectedTax: 0 },
-      // Early rows.
       { taxableIncome: 100, column: "single_or_mfs", expectedTax: 1 },
       { taxableIncome: 6500, column: "single_or_mfs", expectedTax: 65 },
       { taxableIncome: 6500, column: "mfj_or_qss", expectedTax: 65 },
       { taxableIncome: 6500, column: "hoh", expectedTax: 65 },
-      // Mid range: single/MFS diverges from mfj/qss and hoh.
       { taxableIncome: 19500, column: "single_or_mfs", expectedTax: 279 },
       { taxableIncome: 19500, column: "mfj_or_qss", expectedTax: 195 },
       { taxableIncome: 19500, column: "hoh", expectedTax: 195 },
       { taxableIncome: 40500, column: "single_or_mfs", expectedTax: 984 },
       { taxableIncome: 40500, column: "mfj_or_qss", expectedTax: 588 },
       { taxableIncome: 40500, column: "hoh", expectedTax: 588 },
-      // Alex's row: the golden 540 has line 31 = $3,256 at $73,294 single.
+      // The alex golden 540 line 31.
       { taxableIncome: 73294, column: "single_or_mfs", expectedTax: 3256 },
       { taxableIncome: 73294, column: "mfj_or_qss", expectedTax: 1660 },
       { taxableIncome: 73294, column: "hoh", expectedTax: 1771 },
-      // Top of table.
       { taxableIncome: 99999, column: "single_or_mfs", expectedTax: 5736 },
       { taxableIncome: 99999, column: "mfj_or_qss", expectedTax: 3068 },
       { taxableIncome: 99999, column: "hoh", expectedTax: 3708 },
@@ -116,7 +104,6 @@ async function run(argv: string[]): Promise<void> {
   console.log(`${LOG} wrote ${path.relative(process.cwd(), jsonPath)}`);
 }
 
-/* Read the cached PDF, or re-download it on --refresh. */
 async function loadPdf(
   url: string,
   pdfPath: string,
@@ -144,7 +131,6 @@ async function loadPdf(
   return { pdfBytes, sha256 };
 }
 
-/* Parse the table and refuse to continue on coverage gaps/overlaps. */
 async function parseAndValidate(
   pdfBytes: Buffer,
 ): Promise<{ rows: CATaxTableRow[]; coverage: ReturnType<typeof validateCACoverage> }> {

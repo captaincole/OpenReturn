@@ -1,9 +1,3 @@
-/*
- * Model checks for the Alex run: what was stored and generated vs the
- * fixtures in engine/tests/scenarios/alex. Each returns a list of
- * problems (empty = pass).
- */
-
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { alexExpected } from "../../engine/tests/scenarios/alex/expected";
@@ -12,7 +6,6 @@ import { alexFacts } from "../../engine/tests/scenarios/alex/facts";
 import { latestDecisions, latestW2 } from "./appDb";
 import { DATA_ENV } from "./run";
 
-/* The decisions that change Alex's numbers. */
 const REQUIRED_DECISIONS: Record<string, unknown> = {
   "decisions.scope.filing_status": "single",
   "decisions.scope.must_file_federal": true,
@@ -34,10 +27,6 @@ const W2_BOXES = [
   "box17",
 ] as const;
 
-/*
- * Compare boxes in a stable form: box 13 as its checked flags only,
- * box 12 and box 14 as sorted "label amount" strings.
- */
 function normalizeBox(box: string, value: unknown): string {
   if (value === undefined || value === null) return "(missing)";
   if (box === "box13") {
@@ -94,9 +83,7 @@ export function fieldProblems(): string[] {
     .map(([fieldId, want]) => `${fieldId}: want ${want}, got ${String(values.get(fieldId))}`);
 }
 
-// ─── Generated files ─────────────────────────────────────────────────────
-
-/* Files under documents/<filingId>/<category>/, oldest first (ULID names sort by time). */
+/* ULID names sort by time, so oldest first. */
 export function findFiles(category: string, name: RegExp): string[] {
   const root = DATA_ENV.DOCUMENTS_PATH;
   const files = readdirSync(root, { recursive: true }) as string[];

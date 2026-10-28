@@ -1,28 +1,13 @@
-/*
- * HSA intake facts. Verbal answers, one scalar fact per question, so
- * Cade can record them one at a time. Form 8889 Part I and Part II read
- * them through getHsaCoverage().
- *
- * Convention:
- *   category: "hsa"
- *   keys:     see HSA_COVERAGE_KEYS
- *
- * Employer contributions are not here: they come from W-2 box 12 code W.
- * Form 5498-SA is not needed (document minimalism).
- */
+/* Employer HSA contributions come from W-2 box 12 code W, not from here. */
 
 import type { FactsView } from "../../types.js";
 
 export type HsaCoverageType = "self-only" | "family";
 
 export const HSA_COVERAGE_KEYS = {
-  /* Form 8889 line 1: HDHP coverage type for the year. */
   coverageType: "hsa.coverage_type",
-  /* Months of HDHP coverage (1–12). Drives the line 3 limit. */
   coverageMonths: "hsa.coverage_months",
-  /* Contributions the taxpayer made directly, outside payroll (line 2). */
   ownContributions: "hsa.own_contributions",
-  /* True when every HSA distribution paid qualified medical expenses (line 15). */
   distributionsAllQualified: "hsa.distributions_all_qualified",
 } as const;
 
@@ -31,11 +16,9 @@ export interface HsaCoverage {
   coverageMonths?: number;
   ownContributions?: number;
   distributionsAllQualified?: boolean;
-  /* Fact keys that were present, for the derivation audit trail. */
   factKeys: string[];
 }
 
-/** Read the HSA intake answers. Absent answers stay undefined. */
 export function getHsaCoverage(facts: FactsView): HsaCoverage {
   const out: HsaCoverage = { factKeys: [] };
   const read = (key: string): unknown => {

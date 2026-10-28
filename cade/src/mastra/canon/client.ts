@@ -10,34 +10,10 @@ import {
 } from "./schemas";
 
 /*
- * Cade's MCP client for Canon. Canon runs as its own process (port 4112)
- * and this is the only way Cade reaches the reference library: no
- * in-process import, no shared database. Two calls:
- *
- *   askCanon      Ask The Tax Code, one turn
- *   groundCanon   ground one decision: verdict, citations, step log
- *
- * (The builder searches Canon with its own client,
- * engine/builder/src/canonSearch.ts.)
- *
- * Both are workflow calls and return a run result: `status: "ok"` with the
- * result, or `status: "failed"` with Canon's error and the steps that
- * ran before it, so the caller keeps the log either way.
- *
- * Failure comes in two kinds, and the review workflow stamps them
- * differently:
- *
- *   CanonUnreachableError — the call never reached Canon or never came
- *       back (connection refused, timeout, a lost session). The work was
- *       not done; a retry is the fix.
- *   CanonToolError — Canon ran the tool and reported a failure (a judge
- *       threw, a schema did not match). A retry will likely fail again.
- *
- * Configuration: CANON_URL (default http://127.0.0.1:4112) and, when
- * Canon enforces one, CANON_API_TOKEN. CANON_TIMEOUT_MS caps one call
- * (default 5 min). A ground call that needs longer is the signal to cut
- * its iterations or use a faster judge, not to raise the cap: a timed-out
- * review is stamped review_unreached and retried.
+ * The only path from Cade to Canon: no in-process import, no shared database.
+ * CanonUnreachableError: the call never reached Canon or never came back, so a retry is the fix.
+ * CanonToolError: Canon ran the tool and failed, so a retry likely fails again.
+ * A ground call slower than CANON_TIMEOUT_MS needs fewer iterations, not a higher cap.
  */
 
 export class CanonUnreachableError extends Error {
@@ -51,7 +27,6 @@ export class CanonToolError extends Error {
   readonly name = "CanonToolError";
 }
 
-/** True when the error, or anything in its cause chain, is a CanonUnreachableError. */
 export function isCanonUnreachable(err: unknown): boolean {
   for (let e = err; e; e = (e as { cause?: unknown }).cause) {
     if ((e as { name?: string }).name === "CanonUnreachableError") return true;
@@ -62,7 +37,6 @@ export function isCanonUnreachable(err: unknown): boolean {
 const DEFAULT_URL = "http://127.0.0.1:4112";
 const DEFAULT_TIMEOUT_MS = 300_000;
 
-/* The MCP client's tools, narrowed to what we call: execute(input). */
 type CanonTool = { execute?: (input: unknown, context?: never) => Promise<unknown> };
 
 let client: MCPClient | undefined;
@@ -93,10 +67,8 @@ export const errorMessage = (err: unknown): string => {
 };
 
 /*
- * The tool list is fetched once and cached; a failed fetch is not cached,
- * so the next call tries Canon again. MCPClient does not throw when a
- * server is down (it logs and returns no tools), so the errors map is
- * what says "unreachable".
+ * A failed fetch is not cached, so the next call tries Canon again. MCPClient does not
+ * throw when a server is down: the errors map is what says "unreachable".
  */
 async function canonTool(name: string): Promise<CanonTool> {
   tools ??= getClient()
@@ -124,7 +96,6 @@ async function canonTool(name: string): Promise<CanonTool> {
 
 type McpResult = { isError?: boolean; content?: { type?: string; text?: string }[] };
 
-/* An MCP tool result that reports failure instead of throwing. */
 function toolErrorText(raw: unknown): string | null {
   const r = raw as McpResult | null;
   if (!r?.isError) return null;
@@ -132,11 +103,8 @@ function toolErrorText(raw: unknown): string | null {
 }
 
 /*
- * What the client hands back: a tool with an output schema arrives as
- * its structured object; a workflow tool has none, so its run result
- * arrives as JSON text in `content`. Unwrap the text, then the run:
- * { status: "success", result } carries the workflow's output, any
- * other status is Canon reporting a failure.
+ * A tool with an output schema arrives structured. A workflow tool has none, so its run
+ * arrives as JSON text in `content`; any status but "success" is a Canon failure.
  */
 function unwrap(name: string, raw: unknown): unknown {
   const r = raw as McpResult | null;
@@ -191,7 +159,6 @@ export async function groundCanon(input: GroundInput): Promise<GroundRunResult> 
   return callCanon("run_ground", input, groundRunResultSchema);
 }
 
-/** For scripts that exit: close the MCP session. */
 export async function disconnectCanon(): Promise<void> {
   await client?.disconnect();
   client = undefined;

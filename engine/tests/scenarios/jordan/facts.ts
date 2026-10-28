@@ -1,12 +1,6 @@
 /*
- * Jordan A. Sample — facts (the "data").
- *
- * A fake high-income persona. Every value comes from the fake
- * source PDFs in ./docs/; fixture.json beside them was generated from the
- * same data. Identity uses the IRS test SSN range (400-00-xxxx) and
- * EINs starting 00-.
- *
- * GENERATED once from fixture.json, then owned by hand. Edit freely.
+ * Fake persona: every value comes from the fake PDFs in docs/. Identity uses the
+ * IRS test SSN range (400-00-xxxx). Generated once from fixture.json; edit freely.
  */
 
 import {
@@ -36,7 +30,6 @@ export const JORDAN_TAX_YEAR = 2025;
 
 const CREATED_AT = "2026-10-15T00:00:00Z";
 
-/** One fact row. `id` is derived from the key so it stays stable. */
 const fact = (category: string, key: string, value: unknown, sourceNote: string): TaxFactRow => ({
   id: `f-${key.replace(/[^a-z0-9]+/gi, "-")}`,
   userId: JORDAN_USER_ID,
@@ -191,11 +184,7 @@ const hsaDist: HsaDistributionFactValue = {
   box5: "HSA",
 };
 
-/*
- * Sales. Form 8949 box per sale lives in decisions.ts (the broker-reported
- * box decision). Box E sales have no basis and no acquired date on the
- * 1099-B; the taxpayer reports basis separately (reportedBasis below).
- */
+// Box E sales have no basis on the 1099-B; the taxpayer reports it (reportedBasis below).
 interface Sale {
   accountSlug: string;
   doc: string;
@@ -604,7 +593,7 @@ export const JORDAN_SALES: Sale[] = [
   },
 ];
 
-/** Form 8949 box per tradeId, as the broker reported it. */
+/** As the broker reported it. */
 export const JORDAN_BOXES: Record<string, string> = {
   "exb-d-01": "partII.boxD",
   "exb-d-02": "partII.boxD",

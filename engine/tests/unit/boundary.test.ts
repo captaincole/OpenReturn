@@ -1,16 +1,6 @@
 /*
- * The engine boundary, enforced mechanically.
- *
- * The form engine is a pure library: fact/decision rows in, evaluated
- * forms out. It must never import application code: no Mastra, no db
- * layer, no AI, no network clients. This test walks every module under
- * src/ and fails on any import that escapes the directory, so the
- * boundary survives contributors who never read a README.
- *
- * Allowed imports:
- *   - anything inside src/
- *   - node builtins (node:*)
- *   - a short whitelist of pure libraries (zod, pdf-lib)
+ * The engine is a pure library. src/ may import only src/, node builtins, and
+ * pure libraries (zod, pdf-lib): no Mastra, db, AI, or network clients.
  */
 
 import { readdirSync, readFileSync } from "node:fs";
@@ -29,7 +19,6 @@ function walk(dir: string): string[] {
   });
 }
 
-/** Collect static, side-effect, re-export, and dynamic import specifiers. */
 function importSpecifiers(source: string): string[] {
   const specs: string[] = [];
   const patterns = [

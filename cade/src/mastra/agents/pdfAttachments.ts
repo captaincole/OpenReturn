@@ -4,25 +4,13 @@ import { createHash } from "node:crypto";
 import { modelReadsPdf } from "../models";
 
 /*
- * Claude reads PDF file parts natively; OpenAI-compatible servers
- * (Ollama, vLLM, LM Studio, …) accept images only. A PDF part makes the
- * AI SDK throw AI_UnsupportedFunctionalityError before the request even
- * leaves. This processor rasterizes PDF attachments to one PNG per page,
- * so document reading keeps working when CADE_MODEL points at a local
- * model.
- *
- * It runs at processInput (the new user message) AND processInputStep
- * (the full per-step message list) because thread history replays older
- * messages that never went through processInput. A PDF uploaded three
- * turns ago would otherwise crash every later turn. Rasterization is
- * cached by content hash, so each PDF renders once per process lifetime.
+ * OpenAI-compatible servers accept images only: a PDF part makes the AI SDK throw
+ * AI_UnsupportedFunctionalityError. Run at processInputStep too, because thread
+ * history replays old messages that never went through processInput.
  */
 
 const MAX_PAGES = 8;
-/*
- * 1.5× the 72dpi base ≈ 108dpi. Enough to read W-2 box numbers without
- * an oversized request payload (each page ≈ 150-400 KB of PNG).
- */
+/* About 108dpi: enough to read W-2 box numbers, about 150-400 KB of PNG per page. */
 const SCALE = 1.5;
 
 type FilePart = { type: "file"; mimeType?: string; data?: unknown };

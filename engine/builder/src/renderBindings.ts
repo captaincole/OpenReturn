@@ -1,48 +1,6 @@
 /*
- * Phase D — render typed bindings into TypeScript source for a per-form
- * `bindings.ts` file under the engine's `src/<jurisdiction>/<short>/`.
- *
- * The classifier outputs structured bindings (one of N rule shapes per
- * field) plus a confidence rating. This renderer translates each binding
- * into a typed TS function body for the `defineForm<TForm, TInfo>` shape.
- * It routes anything below `minConfidence` to a `todos` map. Fact /
- * decision keys without a known FilingInfo slot also become todos (with
- * rationale).
- *
- * Layout of the emitted file:
- *
- *   import { defineForm } from "<relative defineForm.ts>";
- *   import { atLeast, sum } from "<relative money.ts>";
- *   import { lookupTax } from "<relative data/taxTable.ts>";
- *   import type { Form540 } from "./types.js";
- *   import type { Form540FilingInfo } from "./filingInfo.js";
- *
- *   export function register(): void {
- *     defineForm<Form540, Form540FilingInfo>("form-540", {
- *       // Must-file: decisions.scope.must_file_ca_540 → the form's resolver.
- *       bindings: {
- *         "header.first_name": (_, info) => info.taxpayerFirstName,
- *         "line.12_state_wages": (_, info) => info.w2StateWages,
- *         "line.31_tax_amount": (f, info) => {
- *           if (!info.filingStatus) return undefined;
- *           const income = f["line.19_taxable_income"];
- *           if (typeof income !== "number") return undefined;
- *           const r = lookupTax("ca-2025", income, info.filingStatus);
- *           return r.ok ? r.tax : undefined;
- *         },
- *         …
- *       },
- *       unsupported: {
- *         "header.combat_zone_checkbox": "No combat-zone scenario built yet.",
- *       },
- *       todos: {
- *         "line.40_ctc": "fromFields with terms whose source form isn't ingested",
- *       },
- *     });
- *   }
- *
- * Each item the classifier rated below the minConfidence floor lands in
- * `todos`. Items whose rule is `unsupported` always land in `unsupported`.
+ * Bindings below minConfidence, and keys with no FilingInfo slot, go to
+ * `todos`. The `unsupported` rule always goes to `unsupported`.
  */
 
 import type { FieldInventory } from "@openreturn/engine/catalog";
@@ -50,8 +8,6 @@ import { engineSrcDir } from "@openreturn/engine/paths";
 import { dirname, relative, resolve } from "node:path";
 import type { ClassifiedBinding, Confidence } from "./classifyBindings.js";
 import { quote, shortKey, translate } from "./translateBinding.js";
-
-// ─── Public shapes ───────────────────────────────────────────────────────
 
 export interface RenderBindingsOpts {
   formId: string;
@@ -61,17 +17,9 @@ export interface RenderBindingsOpts {
   fields: FieldInventory[]; // catalog ordinal order
   bindings: ClassifiedBinding[];
   mustFile: { decisionKey: string; rationale: string };
-  /** Absolute output path for the rendered TS. Used for relative imports. */
+  /** Absolute; the relative imports resolve from it. */
   outputPath: string;
-  /**
-   * Minimum confidence to commit a binding into `bindings`. Anything below
-   * goes to `todos` for human review.
-   */
   minConfidence: Confidence;
-  /**
-   * Names of the Form-id-specific types to import — derived from the
-   * caller's per-form layout (e.g. `Form540`, `Form540FilingInfo`).
-   */
   typeInterfaceName: string;
   filingInfoInterfaceName: string;
 }
@@ -85,8 +33,6 @@ export interface RenderBindingsReport {
   confidenceBreakdown: Record<Confidence, number>;
   ruleBreakdown: Record<string, number>;
 }
-
-// ─── Entry point ─────────────────────────────────────────────────────────
 
 type RenderEntry =
   | { kind: "binding"; field: FieldInventory; body: string; rationale: string }
@@ -103,7 +49,6 @@ interface BucketResult {
   usesAtLeast: boolean;
 }
 
-/* Sort each catalog field into its bucket and tally the breakdowns. */
 function bucketFields(opts: RenderBindingsOpts): BucketResult {
   const bindingByFieldId = new Map<string, ClassifiedBinding>();
   for (const b of opts.bindings) {
@@ -133,13 +78,6 @@ function bucketFields(opts: RenderBindingsOpts): BucketResult {
   return result;
 }
 
-/*
- * Bucket one bound field. The `unsupported` rule always goes to the
- * unsupported map regardless of confidence; bindings below the
- * confidence floor become todos; the rest translate to TS bodies (and
- * failed translations become todos too). Sets the uses* flags on
- * `result` as translations require helpers.
- */
 function bucketOneField(
   field: FieldInventory,
   binding: ClassifiedBinding,
@@ -170,7 +108,6 @@ function bucketOneField(
   return { kind: "binding", field, body: translated.body, rationale: binding.rationale };
 }
 
-/* File header, imports, register() opener, and the must-file note. */
 function renderPreamble(opts: RenderBindingsOpts, b: BucketResult): string[] {
   const engineImport = relImport(opts.outputPath, "defineForm.ts");
   const taxTableImport = relImport(opts.outputPath, "data/taxTable.ts");
@@ -208,10 +145,6 @@ function renderPreamble(opts: RenderBindingsOpts, b: BucketResult): string[] {
     `  defineForm<${opts.typeInterfaceName}, ${opts.filingInfoInterfaceName}>(${quote(opts.formId)}, {`,
   );
 
-  /*
-   * Must-file is not a binding: the form's resolver writes it into
-   * FilingInfo.mustFile via resolveMustFile (resolverInputs.ts).
-   */
   out.push(
     `    // Must-file: ${opts.mustFile.decisionKey} → resolveMustFile in the form's resolver.`,
   );
@@ -220,7 +153,6 @@ function renderPreamble(opts: RenderBindingsOpts, b: BucketResult): string[] {
   return out;
 }
 
-/* The bindings / unsupported / todos sections of the defineForm spec. */
 function renderSpecSections(opts: RenderBindingsOpts, entries: RenderEntry[]): string[] {
   const out: string[] = [];
 
@@ -291,20 +223,13 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
   };
 }
 
-// ─── Helpers ─────────────────────────────────────────────────────────────
-
 const CONFIDENCE_ORDER: Record<Confidence, number> = {
   low: 0,
   medium: 1,
   high: 2,
 };
 
-/**
- * Compute an ESM-friendly relative import path from `fromFilePath` to an
- * engine module (`engineModule` is relative to the engine's src/, for
- * example "defineForm.ts"). Replaces the `.ts` extension with `.js` so
- * the runtime resolver works under tsx and in the compiled output.
- */
+/** `.ts` → `.js` so the import resolves under tsx and in the compiled output. */
 function relImport(fromFilePath: string, engineModule: string): string {
   let rel = relative(dirname(fromFilePath), resolve(engineSrcDir, engineModule));
   rel = rel.replace(/\.ts$/, ".js");

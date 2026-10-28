@@ -1,10 +1,5 @@
 "use client";
 
-/*
- * Single-user login: one password, one owner. If setup has not run yet,
- * the server layout for this route redirects to /setup first.
- */
-
 import { useRouter } from "next/navigation";
 import { type FormEvent, useState } from "react";
 
@@ -29,10 +24,7 @@ export default function LoginPage() {
       setSubmitting(false);
       return;
     }
-    /*
-     * refresh() re-runs Server Components with the new session cookie; push()
-     * navigates to the protected home page.
-     */
+    /* refresh() re-runs Server Components with the new session cookie. */
     router.refresh();
     router.push("/");
   }

@@ -10,19 +10,8 @@ import {
   type Scope,
 } from "./appDb";
 
-/*
- * All helpers take an explicit Scope { userId, filingId }, the
- * replacement for the RLS policies that scoped these queries in
- * Postgres. Reads filter on filing_id; writes stamp both user_id and
- * filing_id.
- */
+/* Explicit Scope everywhere: reads filter on filing_id, writes stamp user_id and filing_id. */
 
-/*
- * Confidence / Verdict / citation / row shapes are engine vocabulary:
- * the engine defines them (engine/src/facts/rows.ts), this module
- * persists them. Re-exported so db-side callers keep importing from
- * here.
- */
 import type {
   AIDecisionRow,
   AuthorityCitation,

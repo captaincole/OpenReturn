@@ -1,13 +1,3 @@
-/*
- * Assertion primitives the runner uses to check engine and render output
- * against a Scenario's ExpectedResults. All assertions append to a
- * failure list instead of throwing. The runner then reports every failure
- * at once instead of stopping at the first.
- *
- * Each helper takes an optional `prefix` (the formId). It is prepended to
- * failure messages so multi-form scenarios stay unambiguous.
- */
-
 import type { RenderedWidget } from "../../src/render/fillFromCatalog.js";
 import type { AnyFormField, EvaluatedForm } from "../../src/types.js";
 import type { GoldenValue } from "./goldenPdf.js";
@@ -36,30 +26,17 @@ export function assertEngineNumber(
     return;
   }
   if (!f.result.ok) {
-    /*
-     * Roadmap scenarios pass a notModeled list: an unsupported field is
-     * recorded there (zero or not) instead of failing.
-     */
     if (f.result.unsupported && notModeled) {
       notModeled.push(tag(prefix, `${fieldId} (expected ${expected})`));
       return;
     }
-    /*
-     * `unsupported` is a deliberate engine gap, not a "needs data" block.
-     * The rule library's fromFields contract treats unsupported terms as
-     * 0 downstream, so an unsupported field IS 0 semantically. Accept it
-     * as a pass when the expected value is 0. Genuinely blocked results
-     * (facts/decisions the user must still provide) fail.
-     */
+    /* fromFields treats an unsupported term as 0 downstream, so it passes an expected 0. */
     if (f.result.unsupported && expected === 0) return;
     failures.push(tag(prefix, `engine: ${fieldId} blocked — ${f.result.reason}.`));
     return;
   }
   const got = f.result.value;
-  /*
-   * 50¢ tolerance. Money lines round at render time, and table-derived
-   * tax values are already integers.
-   */
+  /* 50¢ tolerance: money lines round at render time. */
   if (typeof got !== "number" || Math.abs(got - expected) > 0.5) {
     failures.push(tag(prefix, `engine: ${fieldId} expected ${expected}, got ${String(got)}.`));
   }
@@ -121,31 +98,13 @@ export function assertRenderedChecked(
   }
 }
 
-/**
- * Diff our rendered values against a CPA-completed golden PDF, widget by
- * widget. This test layer catches catalog mislabels. Example: the catalog
- * says `first_name_mi → f1_01[0]`, but f1_01[0] is the year-begin widget.
- * The binding writes "Alex" to f1_01[0], the golden holds "01/01/2025",
- * and we report the mismatch.
- *
- * Comparison is per widget name (the deterministic PDF identifier), not
- * per fieldId. The catalog's labels are fully out of the loop.
- *
- * Emit a failure with the widget name and both values when: the golden
- * fills a widget and we do not, we fill a widget the golden does not, or
- * the two values disagree.
- */
+/** Compares per widget name, not per fieldId, so catalog mislabels show. */
 export function assertMatchesGolden(
   rendered: Map<string, RenderedWidget[]>,
   golden: Map<string, GoldenValue>,
   failures: string[],
   prefix?: string,
 ): void {
-  /*
-   * Index our rendered output by widget name, one row per widget written.
-   * A RenderedWidget carries `text` (text fields, dates), `checked`
-   * (checkboxes turned on), or a radio-option label.
-   */
   const ours = new Map<string, string | boolean>();
   for (const [, widgets] of rendered) {
     for (const w of widgets) {
@@ -162,11 +121,6 @@ export function assertMatchesGolden(
     const g = golden.get(widgetName);
     const o = ours.get(widgetName);
 
-    /*
-     * For checkboxes and radios, our renderer writes a value only when
-     * the box is "on". The golden's checkbox value is an explicit
-     * true/false.
-     */
     if (g?.kind === "checkbox") {
       const goldenChecked = g.value === true;
       const ourChecked = o === true;
@@ -194,12 +148,7 @@ export function assertMatchesGolden(
       continue;
     }
 
-    /*
-     * Default: text comparison. Covers text fields and widgets the golden
-     * did not classify cleanly. Blank on both sides is a pass. We do NOT
-     * treat "0" and "" as equal: a numeric line that computes to zero
-     * must render as "0" on both sides.
-     */
+    /* "0" and "" are NOT equal: a line that computes to zero must render "0". */
     const goldenText = normalizeForCompare(g?.value);
     const ourText = typeof o === "string" ? normalizeForCompare(o) : "";
     if (goldenText !== ourText) {

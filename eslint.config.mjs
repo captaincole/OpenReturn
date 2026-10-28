@@ -1,14 +1,5 @@
 /*
- * Small lint config, four jobs:
- *  1. Comment style — multi-line comments are starred blocks, not
- *     stacked // lines. JSDoc passes as-is. `npm run lint:fix` converts.
- *  2. Promise safety — no floating promises (type-aware: canon/, cade/, web/ and engine/).
- *  3. Size caps — 400 lines per file, 50 per function (100 in .tsx,
- *     where JSX inflates line counts without adding complexity).
- *     Form-specific engine files and tests are exempt. No grandfather
- *     list: existing offenders fail the gate until they are split up.
- *  4. Money rules — rounding and money formatting in the form engine go
- *     through engine/src/money.ts only.
+ * Four jobs: comment style, promise safety, size caps, engine money rules.
  * Formatting is Prettier's job; correctness is tsc + the golden tests.
  */
 import stylistic from "@stylistic/eslint-plugin";
@@ -39,10 +30,8 @@ export default [
     },
   },
   /*
-   * Type-aware rules. These need type information, so they run only on
-   * files a tsconfig covers (canon, cade, engine and engine/builder:
-   * src+tests+scripts; web: everything). Modeled on n8n's config: a floating promise is an
-   * error; an explicit `void` marks intentional fire-and-forget.
+   * Type-aware: runs only on files a tsconfig covers. An explicit `void`
+   * marks intentional fire-and-forget.
    */
   {
     files: ["canon/**/*.ts", "cade/**/*.ts", "web/**/*.ts", "web/**/*.tsx", "engine/**/*.ts"],
@@ -56,20 +45,12 @@ export default [
     plugins: { "@typescript-eslint": tsPlugin },
     rules: {
       "@typescript-eslint/no-floating-promises": ["error", { ignoreVoid: true }],
-      /*
-       * checksVoidReturn stays on — it is the one case tsc cannot catch
-       * (an async handler passed where () => void is expected). The
-       * conditional-promise case is mostly tsc's TS2801 already.
-       */
+      /* checksVoidReturn catches an async handler passed as () => void; tsc does not. */
       "@typescript-eslint/no-misused-promises": "error",
       "@typescript-eslint/await-thenable": "error",
     },
   },
-  /*
-   * React hooks correctness, web app only. A conditional hook is always a
-   * bug (error). Narrowed effect deps are sometimes deliberate — the rule
-   * warns, and intentional sites carry an eslint-disable with a reason.
-   */
+  /* Narrowed effect deps are sometimes deliberate: warn, and disable inline with a reason. */
   {
     files: ["web/**/*.tsx", "web/**/*.ts"],
     plugins: { "react-hooks": reactHooks },
@@ -78,11 +59,7 @@ export default [
       "react-hooks/exhaustive-deps": "warn",
     },
   },
-  /*
-   * Size caps. A file over 400 real lines is probably two modules; a
-   * function over 50 probably wants extraction. Counts skip blank lines
-   * and comments. Known exceptions carry an inline disable with a reason.
-   */
+  /* Size caps. No grandfather list: offenders fail until split. Exceptions disable inline with a reason. */
   {
     files: ["canon/**/*.ts", "cade/**/*.ts", "web/**/*.ts", "web/**/*.tsx", "engine/**/*.ts"],
     rules: {
@@ -125,11 +102,7 @@ export default [
     },
   },
   {
-    /*
-     * Exempt: per-form registries/bindings mirror the shape of the paper
-     * form and are long by nature; tests and fixtures optimize for
-     * readability over size.
-     */
+    /* Per-form files mirror the paper form; tests favor readability over size. */
     files: [
       "engine/src/federal/**",
       "engine/src/state/**",

@@ -1,31 +1,7 @@
 /*
- * Typed binding API (defineForm) — the public authoring surface for
- * per-form binding files.
- *
- * Each entry is a plain TS function `(f, info) => value`. `f` is a typed
- * proxy over the form's other field results; `info` is the form's
- * narrowed FilingInfo. The keys are typed against the per-form
- * `<FormName>` interface emitted from the catalog, so catalog drift (a
- * renamed field, a regenerated catalog) surfaces as a TS compile error
- * in the binding.
- *
- * Authoring contract:
- *   - Return `undefined` / `null` to block the field. The engine retries
- *     on the next fixpoint pass (use for "dependency not resolved yet").
- *   - Return a value to commit the field. The cache locks it (monotonic).
- *   - To write an explicit 0 / "" / etc., return the literal value, NOT
- *     undefined.
- *   - Money math (`sum`, `atLeast`, `roundDollars`, …) comes from
- *     money.ts, the one module for money rules.
- *   - `stubZero(reason)` commits a field to 0 when its real source is not
- *     ingested yet but the answer is 0 for every modeled scenario. Grep
- *     `stubZero` to audit these assumptions. Distinct from `unsupported`,
- *     which blocks the field.
- *
- * The evaluator (registry, evaluateForm, fixpoint orchestration) lives in
- * engine.ts; this module registers rules into it via bindField.
- * Must-file is not authored here: each form's resolver writes it into
- * FilingInfo.mustFile (resolverInputs.ts resolveMustFile).
+ * Binding contract: return undefined or null to block the field; the
+ * engine retries on the next pass. A returned value commits, and the cache
+ * locks it. To write an explicit 0 or "", return it, not undefined.
  */
 
 import { z } from "zod";
@@ -38,59 +14,28 @@ import {
 import type { BaseFilingInfo } from "./filingInfo.js";
 import { blocked } from "./types.js";
 
-// ─── Authoring types ─────────────────────────────────────────────────────
-
-/** Binding function. Takes the typed form accessor and resolved FilingInfo; returns the field's value, or undefined to block. */
 export type BindingFn<TForm, TInfo extends BaseFilingInfo, K extends keyof TForm> = (
   f: FormAccessor<TForm>,
   info: TInfo,
 ) => TForm[K] | undefined;
 
-/** Per-field formatter override. Receives the typed value (non-null). */
 export type FormatterFn<V> = (value: NonNullable<V>) => string;
 
 export interface FormSpec<TForm extends object, TInfo extends BaseFilingInfo> {
-  /** One entry per field; key is the short fieldId (form-id prefix stripped). */
   bindings: Partial<{ [K in keyof TForm]: BindingFn<TForm, TInfo, K> }>;
-  /**
-   * Optional per-field formatter overrides. Default formatters live with
-   * each value type (formatDollars in money.ts, SSN.digits, etc.). The renderer
-   * consults this map first.
-   */
   formatters?: Partial<{ [K in keyof TForm]: FormatterFn<TForm[K]> }>;
-  /**
-   * Fields the form intentionally does not compute yet. These surface as
-   * `blocked + unsupported:true` results, so the renderer skips them and
-   * caseState does not ask the user about them.
-   */
   unsupported?: Partial<{ [K in keyof TForm]: string }>;
-  /**
-   * Bindings the generator emitted as low-confidence stubs. At runtime the
-   * engine treats them like `unsupported`, so the form still loads. They
-   * are tracked separately so the bindings-review report can list them.
-   */
+  /** Generator stubs. Treated as `unsupported`; kept apart for the bindings-review report. */
   todos?: Partial<{ [K in keyof TForm]: string }>;
 }
 
-/**
- * Read-only view of a form's evaluated field values, keyed by short
- * fieldId. Reads return `T[K] | undefined`. Undefined means "binding not
- * yet evaluated this pass" or "binding produced a non-ok result".
- *
- * The accessor is also indexable by a full cross-form field id (for
- * example "form-1040.line.11b"), so binding bodies can read values from
- * related forms in the same scenario. The runtime proxy resolves both
- * shapes; the `string`-keyed fallback reflects that in the type system.
- */
+// Also indexable by a full cross-form field id ("form-1040.line.11b").
 export type FormAccessor<TForm> = {
   readonly [K in keyof TForm]: TForm[K] | undefined;
 } & {
   readonly [crossFormFieldId: string]: unknown;
 };
 
-// ─── Spec metadata (reporting / introspection) ───────────────────────────
-
-/** Per-form metadata for reporting and introspection. */
 interface FormSpecMeta {
   formId: string;
   bindingKeys: string[];
@@ -109,13 +54,6 @@ export function listFormSpecMeta(): FormSpecMeta[] {
   return Array.from(formSpecMeta.values());
 }
 
-// ─── Registration ────────────────────────────────────────────────────────
-
-/**
- * Walk a spec sub-map (bindings / unsupported / todos / formatters),
- * invoke `register` for each non-null entry, and return the short keys
- * that were registered.
- */
 function registerEntries<V>(
   entries: object | undefined,
   register: (shortKey: string, value: NonNullable<V>) => void,
@@ -129,10 +67,6 @@ function registerEntries<V>(
   return keys;
 }
 
-/**
- * Register a form's typed bindings. Idempotent: a second call with the
- * same formId overwrites the prior registration.
- */
 export function defineForm<TForm extends object, TInfo extends BaseFilingInfo>(
   formId: string,
   spec: FormSpec<TForm, TInfo>,
@@ -173,8 +107,6 @@ export function defineForm<TForm extends object, TInfo extends BaseFilingInfo>(
     formatterKeys,
   });
 }
-
-// ─── Internal: rule factories that wrap typed BindingFns ─────────────────
 
 function makeBindingRule(
   formId: string,
@@ -225,14 +157,7 @@ function makeUnsupportedRule(reason: string): Rule<unknown, unknown> {
   };
 }
 
-/*
- * ─── Form accessor proxy ─────────────────────────────────────────────────
- *
- * Bindings read other fields via `f["line.1z"]` (short key) or
- * `f["form-other.line.X"]` (cross-form full key). The proxy tells the two
- * apart by a "form-" / "schedule-" prefix.
- */
-
+// A "form-" or "schedule-" prefix marks a cross-form full key.
 function makeFormAccessor(formId: string, ctx: EngineContext): unknown {
   return new Proxy(
     {},
@@ -254,39 +179,21 @@ function isLikelyFullFieldId(key: string): boolean {
   return /^(form-|schedule-)/.test(key);
 }
 
-/**
- * Stub binding for a numeric field whose real data source is not ingested
- * yet, but whose value is 0 for every supported taxpayer scenario. The
- * `until` reason documents what must land to remove the stub. Grep for
- * `stubZero` to find every such assumption.
- *
- * Differs from `unsupported`:
- *   - `unsupported` blocks the field. The renderer leaves it blank, and
- *     caseState does not ask the user. Use it when the value is unknown.
- *   - `stubZero` commits the field to 0. Use it when the value IS zero
- *     for our worked scenarios. Example: CA 540 line 14 (Schedule CA
- *     subtractions) is always 0 for a single W-2 filer with no
- *     adjustments. Downstream sums get the same result either way; the
- *     difference is whether the form shows "0" or leaves the line blank.
- *
- * Example:
- *   "line.14_ca_adjustments_subtractions":
- *     stubZero("until Schedule CA Part I line 27 col B is ingested"),
+/*
+ * Commits 0 when the source is not ingested yet but the value is 0 for
+ * every modeled scenario. `unsupported` blocks instead (blank line). Grep
+ * `stubZero` to audit these assumptions.
  */
 export function stubZero(_until: string): () => number {
   return () => 0;
 }
 
-// ─── Formatter registry (consulted by the renderer) ──────────────────────
-
 const formatterRegistry = new Map<string, FormatterFn<unknown>>();
 
-/** Read a per-field formatter override, registered via FormSpec.formatters. */
 export function getFormatter(fieldId: string): FormatterFn<unknown> | undefined {
   return formatterRegistry.get(fieldId);
 }
 
-/** Test-only: clears all registrations. Production callers never use this. */
 export function _resetRegistryForTests(): void {
   _resetBindingRegistryForTests();
   formatterRegistry.clear();

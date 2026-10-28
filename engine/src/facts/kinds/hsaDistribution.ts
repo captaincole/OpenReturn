@@ -1,14 +1,4 @@
-/*
- * 1099-SA fact kind. One fact = one Form 1099-SA. A custodian issues one
- * form per distribution code, so the key carries a per-form id.
- *
- * Convention:
- *   category: "hsa"
- *   key:      "account.{accountSlug}.hsa_distributions.{distributionId}"
- *   value:    HsaDistributionFactValue
- *
- * Box 1 flows to Form 8889 line 14a. Box numbers follow the 2025 form.
- */
+/* One fact per 1099-SA. A custodian issues one form per distribution code, so the key carries a form id. */
 
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";

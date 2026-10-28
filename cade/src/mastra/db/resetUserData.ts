@@ -2,18 +2,7 @@ import { cade } from "../agents/cade";
 import { asNum, asStr, ensureAppSchema, getAppDb } from "./appDb";
 import { deleteBlob } from "./blobStore";
 
-/*
- * Per-user data reset is the only reset path. POST /app/session/reset
- * calls resetCurrentUserData below; the web UI no longer has a button
- * for it. There is no wholesale-truncate path; for that, delete
- * .data/app.db and reseed.
- *
- * Filings + filing_members are deliberately NOT wiped. A reset returns
- * the filing to a known-empty state (zero facts, decisions, questions,
- * documents, requests) and must not force the owner to re-create the
- * filing. The row and membership persist; everything inside the filing
- * is cleared.
- */
+/* Keeps filings and filing_members on purpose: a reset empties the filing, not removes it. */
 
 export interface PerUserResetResult {
   domainRowsDeleted: number;
@@ -21,27 +10,18 @@ export interface PerUserResetResult {
   documentsDeleted: number;
 }
 
-/*
- * Per-user data reset, used by /app/session/reset. Deletes only the
- * calling user's data: domain rows (explicit WHERE user_id, since RLS
- * left with Postgres), Mastra threads, and documents (metadata rows AND
- * their local blob files).
- */
+/* Deletes only the caller's data: every query scopes by user_id explicitly. */
 export async function resetCurrentUserData(userId: string): Promise<PerUserResetResult> {
   await ensureAppSchema();
   const db = getAppDb();
 
-  /*
-   * Capture document storage paths BEFORE the row deletes. Deleted rows
-   * lose the pointers to the bytes in storage and orphan them.
-   */
+  /* Read the storage paths BEFORE the row deletes, or the blobs are orphaned. */
   const docPaths = await db.execute({
     sql: `SELECT storage_path FROM user_documents WHERE user_id = ?`,
     args: [userId],
   });
   const storagePaths = docPaths.rows.map((r) => asStr(r.storage_path));
 
-  // Domain + document tables, with explicit user_id scoping.
   const tables = [
     "tax_facts",
     "open_questions",
@@ -60,19 +40,9 @@ export async function resetCurrentUserData(userId: string): Promise<PerUserReset
     counts[t] = asNum(res.rowsAffected);
   }
 
-  /*
-   * Blob files that match the deleted rows. Best-effort per file; a
-   * missing blob is already the desired end state.
-   */
   await Promise.all(storagePaths.map((p) => deleteBlob(p)));
 
-  /*
-   * Mastra memory cleanup goes through Memory.deleteThread(), not raw
-   * SQL. Mastra owns the cascade (messages, observational memory, vector
-   * embeddings when semantic recall is enabled). The documented API
-   * keeps us aligned with future additions to the teardown path. We list
-   * this user's threads, then delete each one.
-   */
+  /* Memory.deleteThread, not raw SQL: Mastra owns the cascade (messages, memory, vectors). */
   let mastraThreadsDeleted = 0;
   const memory = await cade.getMemory();
   if (memory) {

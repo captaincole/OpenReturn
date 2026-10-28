@@ -5,19 +5,12 @@ import {
   groundResultSchema,
 } from "../../canon/schemas";
 
-/*
- * The review-decision workflow's shapes. The judges' contract (what Canon
- * takes and returns) lives in canon/schemas.ts; this is Cade's side: which
- * decision, which filing, which review_runs row.
- */
-
 export const reviewInputSchema = z.object({
   decisionId: z.string(),
   userId: z.string(),
   filingId: z.string(),
 });
 
-/* What init loads and ground fills in; finalize reads it. */
 export const reviewCarrierSchema = reviewInputSchema.extend({
   reviewRunId: z.string(),
   decisionKey: z.string(),
@@ -44,10 +37,7 @@ export const reviewDecisionOutputSchema = z.object({
   finalVerdict: reviewVerdictSchema,
   reason: z.string(),
   citations: z.array(authorityCitationSchema),
-  /*
-   * openQuestionId is set for needs_more_facts and inaccurate verdicts.
-   * whatsMissing is set only for needs_more_facts.
-   */
+  /* openQuestionId: needs_more_facts and inaccurate only. whatsMissing: needs_more_facts only. */
   openQuestionId: z.string().optional(),
   whatsMissing: z.string().optional(),
 });

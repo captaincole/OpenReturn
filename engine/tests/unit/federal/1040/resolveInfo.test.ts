@@ -1,8 +1,3 @@
-/*
- * One 1099-R's taxable amount for 1040 lines 4b and 5b. Undefined
- * blocks the line.
- */
-
 import { describe, expect, it } from "vitest";
 import type { RetirementDistributionFactValue } from "../../../../src/facts/index.js";
 import { rowTaxable } from "../../../../src/federal/1040/resolveInfo.js";

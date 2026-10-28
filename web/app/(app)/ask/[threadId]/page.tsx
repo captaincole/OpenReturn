@@ -1,10 +1,3 @@
-/*
- * One tax-code Q&A thread: each question with its answer and numbered
- * reference cards, then a composer for a follow-up or a new question.
- * The parent (app)/layout.tsx gates auth. The thread itself loads and
- * polls on the client (components/AskThreadView.tsx).
- */
-
 import { getOwnerSession } from "@/lib/localAuth";
 import { deriveProfile } from "@/lib/profile";
 import { redirect } from "next/navigation";

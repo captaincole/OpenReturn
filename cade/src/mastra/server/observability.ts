@@ -2,24 +2,10 @@ import { type AnyExportedSpan, type CustomSpanFormatter } from "@mastra/core/obs
 import { ConsoleExporter, DefaultExporter, Observability } from "@mastra/observability";
 
 /*
- * ConsoleExporter dumps the full span (input, output, attributes) every
- * time a span starts, ends, or updates. Cade's multi-KB system prompt and
- * base64-encoded uploads land in that dump and make the dev terminal
- * unusable. We pipe spans through a whitelist filter first; only the
- * listed keys survive, at any depth. Keys that a future Mastra version
- * adds drop out automatically.
- *
- * DefaultExporter still writes the full, unstripped trace to
- * observability storage. Mastra Studio reads from there when you need
- * the rest.
- */
-
-/*
- * One flat union of keys to keep, wherever they appear in a span.
- * Add a key to surface it; remove one to suppress it.
+ * ConsoleExporter dumps whole spans, system prompt and base64 uploads included. An
+ * allowlist keeps the dev terminal readable; DefaultExporter keeps the full trace for Studio.
  */
 const ALLOW_KEYS = new Set([
-  // Span identity / timing
   "id",
   "type",
   "name",
@@ -28,22 +14,18 @@ const ALLOW_KEYS = new Set([
   "traceId",
   "parentSpanId",
   "isRootSpan",
-  // Error info (SpanErrorInfo fields)
   "errorInfo",
   "message",
   "stack",
   "details",
   "domain",
   "category",
-  // Span payload
   "input",
   "output",
-  // Message envelope + parts
   "messages",
   "role",
   "content",
   "text",
-  // Common output fields
   "warnings",
   "reasoning",
 ]);
@@ -56,10 +38,7 @@ function isPlainObject(v: unknown): v is Record<string, unknown> {
 
 function filter(value: unknown): unknown {
   if (Array.isArray(value)) {
-    /*
-     * Inside any messages array, drop role:'system' entries; they carry
-     * the system prompt. Other roles (user, assistant, tool) pass.
-     */
+    /* role:'system' entries carry the system prompt. */
     return value
       .filter(
         (item) =>
@@ -68,7 +47,6 @@ function filter(value: unknown): unknown {
       .map(filter);
   }
   if (isPlainObject(value)) {
-    // Whitelist: only keep keys in ALLOW_KEYS; recurse into their values.
     const out: Record<string, unknown> = {};
     for (const [k, v] of Object.entries(value)) {
       if (!ALLOW_KEYS.has(k)) continue;
@@ -76,7 +54,6 @@ function filter(value: unknown): unknown {
     }
     return out;
   }
-  // Primitives and class instances (Date, etc.) pass through.
   return value;
 }
 

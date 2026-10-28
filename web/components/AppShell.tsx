@@ -1,22 +1,5 @@
 "use client";
 
-/*
- * Return-scoped shell. It renders above every /r/[returnId]/* route.
- *
- * Layout:
- *   - TopBar: brand, return picker, tabs, right cluster.
- *   - Main, desktop: ChatPane on the left, {children} on the right.
- *   - Main, mobile: one pane. The bottom tab bar picks Chat or one of the
- *     workspace sections (Activity, Forms, Documents).
- *
- * AppShellContext supplies user state, the chat message buffer, cadeBusy,
- * turnTick, the mobile pane and its setter, and sendChat. The chat session itself
- * (buffer, history hydration, streaming) lives in useCadeChat.
- *
- * For placeholder returns (realDataAvailable=false), the shell does not
- * fetch /app/state and does not load chat history. sendChat is a no-op.
- */
-
 import { ChatPane } from "@/components/ChatPane";
 import { TopBar } from "@/components/TopBar";
 import { useCadeChat, type ChatMessage, type SendChatOpts } from "@/components/useCadeChat";
@@ -37,10 +20,7 @@ import {
 
 export type { ChatMessage, SendChatOpts };
 
-/*
- * Mobile only. The workspace page reads it to show one section; on
- * desktop every section renders and this value has no effect.
- */
+/* Mobile only: desktop renders every section. */
 export type MobilePane = "chat" | "activity" | "forms" | "documents";
 
 interface AppShellContextValue {
@@ -58,11 +38,7 @@ interface AppShellContextValue {
   cadeBusy: boolean;
   mobilePane: MobilePane;
   setMobilePane: Dispatch<SetStateAction<MobilePane>>;
-  /*
-   * The single entry point that sends a turn to Cade. The chat input and
-   * the Requested Actions card call it. It resolves when the stream ends.
-   * It is a no-op when Cade is busy or the return is a placeholder.
-   */
+  /* The one way to send a turn. Resolves when the stream ends; no-op while Cade is busy. */
   sendChat: (opts: SendChatOpts) => Promise<void>;
   onSignOut: () => Promise<void>;
 }
@@ -150,11 +126,7 @@ export function AppShell({
       <div className="flex h-screen w-screen flex-col overflow-hidden bg-bg-base text-ink-primary">
         <TopBar activeReturn={activeReturn} returns={returns} />
 
-        {/*
-         * Chat and workspace each render once. Below lg, CSS hides the
-         * pane the tab bar did not pick, so neither unmounts on a tab
-         * switch.
-         */}
+        {/* Below lg, CSS hides the unpicked pane, so neither unmounts on a tab switch. */}
         <main className="flex min-h-0 flex-1">
           <aside
             className={cn(

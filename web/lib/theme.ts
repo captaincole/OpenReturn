@@ -1,9 +1,4 @@
-/*
- * Light/dark theme. The theme is the data-theme attribute on <html>;
- * app/globals.css swaps the color variables on it. THEME_INIT_SCRIPT runs
- * before first paint (app/layout.tsx), so a page never flashes the wrong
- * theme: the saved choice wins, else the system preference.
- */
+/* THEME_INIT_SCRIPT runs before first paint, so a page never flashes the wrong theme. */
 
 export type Theme = "light" | "dark";
 
@@ -17,11 +12,7 @@ export const THEME_INIT_SCRIPT = `try {
       : matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 } catch (e) {}`;
 
-/*
- * Switch to the other theme and remember the choice. Transitions pause for
- * the switch (.theme-switching in globals.css): otherwise elements with
- * transition-colors fade while the rest of the page snaps.
- */
+/* Pause transitions for the switch: else transition-colors elements fade while the rest snaps. */
 export function toggleTheme(): Theme {
   const root = document.documentElement;
   const next: Theme = root.dataset.theme === "light" ? "dark" : "light";

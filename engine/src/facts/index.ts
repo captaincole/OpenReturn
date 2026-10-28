@@ -1,15 +1,4 @@
-/*
- * Fact catalog: the central registry of every "kind" of fact the engine
- * knows. Each kind defines:
- *   - Its category + key-shape convention (one regex, one file)
- *   - Its value-shape type
- *   - A typed read helper (getXFacts) used by form derivations
- *   - A typed key builder (makeXFactKey) used by ingest tools
- *
- * For a new fact kind, add a module under ./kinds/ and re-export it here.
- * This keeps the convention discoverable in one place and prevents
- * convention drift across forms.
- */
+/* Fact catalog. Add a new fact kind as a module under ./kinds/ and re-export it here. */
 
 export * from "./kinds/dividends.js";
 export * from "./kinds/homeEnergy.js";

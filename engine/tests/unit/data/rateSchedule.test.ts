@@ -1,8 +1,4 @@
-/*
- * Cross-check the rate-schedule lookup against the IRS-published formula
- * pieces. Each case picks a representative income inside one bracket and
- * confirms tax = income × rate − subtraction.
- */
+/* Source: the IRS-published rate-schedule pieces: tax = income × rate − subtraction. */
 
 import { describe, expect, it } from "vitest";
 import { FEDERAL_RATE_SCHEDULES_2025, lookupRateSchedule } from "../../../src/data/rateSchedule.js";
@@ -49,12 +45,7 @@ describe("lookupRateSchedule — 2025 federal", () => {
   });
 
   it("every printed constant continues the previous row (catches typos)", () => {
-    /*
-     * Tax is continuous at each bracket edge x: x·r₀ − d₀ = x·r₁ − d₁, so
-     * d₁ = d₀ + x·(r₁ − r₀). The IRS prints the constants; this re-derives
-     * each one from the row before it. The first row is checked against
-     * the Tax Table in taxTable.test.ts.
-     */
+    /* Continuity at each edge x: d₁ = d₀ + x·(r₁ − r₀). taxTable.test.ts checks the first row. */
     for (const [status, rows] of Object.entries(FEDERAL_RATE_SCHEDULES_2025)) {
       for (let i = 1; i < rows.length; i++) {
         const prev = rows[i - 1];

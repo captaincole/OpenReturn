@@ -1,16 +1,8 @@
 import { ensureAppSchema, getAppDb, nowIso, type Scope } from "./appDb";
 
 /*
- * Persistence for the review-decision workflow. Two tables:
- *   review_runs       — one row per workflow execution
- *   review_run_steps  — one row per step invocation across iterations
- *
- * Scoping is explicit via Scope { userId, filingId }; RLS left with
- * Postgres.
- *
- * review_run_steps rows are the training-data substrate for future
- * fine-tuning (filter by step_kind to extract per-step (input, output)
- * pairs). Keep the JSON columns raw; no summarization at write time.
+ * Every helper takes an explicit Scope. review_run_steps is future fine-tuning data:
+ * keep its JSON columns raw, never summarized at write time.
  */
 
 export type ReviewRunStatus = "running" | "completed" | "failed";

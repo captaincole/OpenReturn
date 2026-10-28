@@ -1,16 +1,6 @@
 import { agentUrl } from "@/lib/agentBase";
 import { authHeaders } from "@/lib/auth";
 
-/*
- * Browser-side client for the agent's /app routes. Every call goes
- * through the same-origin /api/agent proxy (lib/agentBase.ts). fetchState
- * runs the case engine on the agent side. resetSession wipes the user's
- * rows and deletes the Mastra threads on the agent side.
- *
- * Activity polling lives in lib/activity.ts (the /api/activity Route
- * Handler), not here.
- */
-
 export type PlanItemStatus = "todo" | "doing" | "done";
 
 export interface PlanItem {
@@ -20,15 +10,10 @@ export interface PlanItem {
   note?: string;
 }
 
-/*
- * Per-form summary. It mirrors the agent-side EvaluatedFormSummary in
- * cade/src/mastra/tools/caseState.ts. Keep the two in sync by hand
- * until the apps share a types package.
- */
+/* Keep in sync by hand with EvaluatedFormSummary in cade/src/mastra/tools/caseState.ts. */
 export interface FormSummary {
   formId: string;
   jurisdiction: string;
-  /** Official short name, e.g. "Form 1040" or "Schedule H". */
   displayName: string;
   title: string;
   mustFile:
@@ -54,7 +39,7 @@ export interface CaseState {
   pendingDecisions: string[];
   pendingFacts: string[];
   forms: FormSummary[];
-  /** null while anything is pending. Inside, null = the line is blank on the form. */
+  /** null while anything is pending. A null field = the line is blank on the form. */
   money: {
     totalWages: number | null;
     federalAgi: number | null;

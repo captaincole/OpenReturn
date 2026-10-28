@@ -6,14 +6,8 @@ import type { AnyFormField, DerivationContext, EvaluatedForm } from "../types.js
 import { fillFromCatalog, type FillFromCatalogResult } from "./fillFromCatalog.js";
 
 /*
- * Render a form that may need several copies (FormSpec.copies; today only
- * Form 8949). The engine keeps the form as ONE evaluated form: copy 0.
- * Here each further copy is evaluated on its own, with the FilingInfo
- * that selects it, filled, and appended. The result is one PDF.
- *
- * `rendered` and `warnings` come from copy 0, plus each later copy's
- * warnings prefixed with its number. Tests assert on copy 0, which is
- * the engine's form.
+ * The engine keeps a multi-copy form as one evaluated form (copy 0). Each
+ * later copy is evaluated here with its own FilingInfo and appended.
  */
 export async function renderFormCopies(opts: {
   spec: FormSpec;

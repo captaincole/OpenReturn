@@ -1,5 +1,3 @@
-// Row counts + per-doc embedding coverage for the local corpus DB.
-
 import { countBlocksByDoc, listDocuments, tableCounts } from "../../src/db/corpusStore";
 import type { Command } from "../lib/cli";
 

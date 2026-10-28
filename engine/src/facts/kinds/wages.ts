@@ -1,14 +1,3 @@
-/*
- * W-2 fact kind. Each W-2 the taxpayer received is stored as one
- * tax_facts row under category "wages". The structured value holds all
- * the boxes plus employer metadata.
- *
- * Convention:
- *   category: "wages"
- *   key:      "employer.{employerSlug}"
- *   value:    W2FactValue
- */
-
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
 
@@ -34,11 +23,7 @@ export interface W2FactValue {
   employerName: string;
   employerEin: string;
   employerAddress?: W2Address;
-  /*
-   * Employee identity: boxes (a) SSN, (e) name, (f) address. Captured
-   * here so a single W-2 ingest also populates the taxpayer's identity
-   * facts. The Cade flow then does not re-ask for name/SSN/address.
-   */
+  /* Boxes (a), (e), (f): one W-2 ingest also fills the identity facts. */
   employee?: {
     firstName: string;
     middleInitial?: string;
@@ -47,7 +32,6 @@ export interface W2FactValue {
     ssn: string;
     address?: W2Address;
   };
-  // Numeric boxes: required ones first, optional ones below.
   box1: number;
   box2: number;
   box3?: number;
@@ -83,7 +67,6 @@ export function makeW2FactKey(employerSlug: string): string {
   return `employer.${employerSlug}`;
 }
 
-/** Key-only test, for reads that already filtered by category. */
 export function isW2FactKey(key: string): boolean {
   return W2_KEY_RE.test(key);
 }

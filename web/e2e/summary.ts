@@ -1,13 +1,6 @@
 /*
- * Stage results for one E2E run, written to <runDir>/summary.md.
- *
- * Each stage has a kind:
- *   plumbing — the app itself (UI, proxy, agent, DB, document storage).
- *              A failure here means a code change probably broke something.
- *              The run stops at the first one.
- *   model    — what the model did (W-2 read, decisions, final values).
- *              A failure here can be a model mistake: run again before you
- *              debug. The run checks every model stage, then fails.
+ * plumbing: the app broke; the run stops at the first failure.
+ * model: can be a model mistake; every model stage runs, then the run fails.
  */
 
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
@@ -30,7 +23,6 @@ const notes: string[] = [];
 const firstLine = (err: unknown) =>
   (err instanceof Error ? err.message : String(err)).split("\n")[0].slice(0, 300);
 
-/* Run a plumbing stage. Records the result and rethrows on failure. */
 export async function plumbing<T>(name: string, fn: () => Promise<T>): Promise<T> {
   try {
     const value = await fn();
@@ -42,14 +34,12 @@ export async function plumbing<T>(name: string, fn: () => Promise<T>): Promise<T
   }
 }
 
-/* Record a stage from its list of problems (empty = pass). Does not throw. */
 export function check(name: string, kind: StageKind, problems: string[]): void {
   const shown = problems.slice(0, 6).join("; ");
   const more = problems.length > 6 ? ` (+${problems.length - 6} more)` : "";
   results.push({ name, kind, ok: problems.length === 0, detail: shown + more });
 }
 
-/* A warning that does not fail the run (for example an empty reply). */
 export function note(text: string): void {
   notes.push(text);
 }
@@ -63,7 +53,6 @@ function verdict(testError: string | undefined): string {
   return testError ? "FAIL (test error)" : "PASS";
 }
 
-/* The models this run used, from the env file servers.mjs wrote for the agent. */
 function models(): string {
   const file = join(RUN_DIR, "agent.env");
   if (!existsSync(file)) return "unknown";
@@ -76,7 +65,6 @@ function models(): string {
 }
 
 export function writeSummary(opts: { durationMs: number; testError?: string }): void {
-  /* Paths from the repo root, where `npm run e2e` runs. */
   const rel = (p: string) => relative(resolve(__dirname, "../.."), join(RUN_DIR, p));
   const rows = results.map(
     (r) => `| ${r.ok ? "pass" : "**FAIL**"} | ${r.kind} | ${r.name} | ${r.detail} |`,

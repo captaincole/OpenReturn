@@ -1,19 +1,4 @@
-/*
- * 1099-INT fact kind. One fact = one payer's full 1099-INT box totals.
- * Mirrors the 1099-DIV pattern (see dividends.ts): same category, same
- * per-payer key shape, same parse/get helpers.
- *
- * Convention:
- *   category: "investment_income"
- *   key:      "account.{accountSlug}.interest"
- *   value:    InterestFactValue
- *
- * TODO: Schedule B Part I requires per-payer rows when total interest
- * exceeds $1,500. Each fact already represents one payer, so the data
- * shape is right. The binding side needs a repeating-row mechanism that
- * does not exist yet; Schedule D capital-gain rows hit the same problem.
- * Until that lands, Schedule B Part I stays unsupported.
- */
+/* TODO: Schedule B Part I (interest over $1,500) needs repeating binding rows; unsupported until then. */
 
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
@@ -21,11 +6,6 @@ import type { TaxFactRow } from "../rows.js";
 export interface InterestFactValue {
   payerName: string;
   payerTin?: string;
-  /*
-   * 1099-INT box totals, all optional. Box 1 is the load-bearing field:
-   * taxable interest income, which flows to 1040 line 2b. Other boxes
-   * only populate when specific situations apply.
-   */
   box1?: number; // Interest income
   box2?: number; // Early withdrawal penalty (an above-the-line deduction)
   box3?: number; // US savings bond and Treasury interest
@@ -57,13 +37,7 @@ export function makeInterestFactKey(accountSlug: string): string {
   return `account.${accountSlug}.interest`;
 }
 
-/**
- * True when this key is a 1099-INT fact key. The resolver uses it to
- * filter `sumInvestmentBox` reads, so 1099-INT box totals do not mix
- * with 1099-DIV box totals that share a numeric suffix. box4 federal
- * withholding is shared by design; box1 is INT-only today, but the
- * filter still protects against future overlap.
- */
+/* Keeps 1099-INT box sums apart from 1099-DIV boxes with the same number. */
 export function isInterestFactKey(key: string): boolean {
   return INT_KEY_RE.test(key);
 }

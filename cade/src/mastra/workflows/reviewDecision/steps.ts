@@ -16,22 +16,7 @@ import {
   type ReviewVerdict,
 } from "./schemas";
 
-/*
- * init → ground → finalize. Cade's side of a review is the bookkeeping:
- * load the decision and its facts, open the review_runs row, hand the
- * decision to Canon, write the verdict back. The judges run in Canon
- * (workflows/ground); their step log comes back with the verdict and is
- * written to review_run_steps here, one row per judge step.
- */
-
 type Scope = { userId: string; filingId: string };
-
-/*
- * ---------------------------------------------------------------------------
- * init — load the decision and the facts it cites, allocate the review_runs
- * row, seed the carrier.
- * ---------------------------------------------------------------------------
- */
 
 export const initStep = createStep({
   id: "init",
@@ -51,7 +36,6 @@ export const initStep = createStep({
     await insertReviewRun(scope, { id: reviewRunId, decisionId: decision.id, userId, filingId });
     await setDecisionLatestRunId(scope, decision.id, reviewRunId);
 
-    /* The table is append-only; listFactsByKeys collapses to the latest row per key. */
     const facts = await listFactsByKeys(scope, decision.taxYear, decision.supportingFactKeys);
 
     const carrier: ReviewCarrier = {
@@ -91,21 +75,7 @@ export const initStep = createStep({
   },
 });
 
-/*
- * ---------------------------------------------------------------------------
- * ground — one call to Canon. Its step log lands in review_run_steps as if
- * the judges had run here, on success and on failure alike. Errors are
- * rethrown with the run id attached, so the wrapper can mark the run and
- * stamp review_unreached (the call never came back) or review_failed
- * (Canon ran it and a judge broke).
- * ---------------------------------------------------------------------------
- */
-
-/*
- * CANON_GROUND_MAX_ITERATIONS caps the judges' gather → assess → rule
- * rounds; unset leaves Canon's default (3). The e2e pins it to 1: it
- * tests that a review reaches Canon and comes back, not the verdict.
- */
+/* Unset leaves Canon's default (3). The e2e pins 1: it tests the round trip, not the verdict. */
 function groundMaxIterations(): number | undefined {
   const raw = process.env.CANON_GROUND_MAX_ITERATIONS;
   if (!raw) return undefined;
@@ -121,6 +91,10 @@ export const groundStep = createStep({
   outputSchema: reviewCarrierSchema,
   execute: async ({ inputData: carrier }) => {
     const scope = { userId: carrier.userId, filingId: carrier.filingId };
+    /*
+     * The run id lets the wrapper stamp review_unreached (no answer) or review_failed
+     * (a judge broke). Canon's step log is stored on failure too.
+     */
     const withRunId = (err: unknown) =>
       Object.assign(err instanceof Error ? err : new Error(String(err)), {
         reviewRunId: carrier.reviewRunId,
@@ -151,19 +125,7 @@ export const groundStep = createStep({
   },
 });
 
-/*
- * ---------------------------------------------------------------------------
- * finalize — persist the verdict to ai_decisions, optionally write an
- * open_questions row, complete the review_runs row, return the output.
- * ---------------------------------------------------------------------------
- */
-
-/*
- * Surface non-accurate outcomes to Cade via an open_questions row, so he
- * circles back with the user. Otherwise the verdict sits unread in the
- * ledger. Returns the open question's id, or undefined when the verdict
- * needs no follow-up.
- */
+/* Without an open question, a non-accurate verdict sits unread and Cade never circles back. */
 async function noteFollowUpQuestion(
   scope: Scope,
   carrier: ReviewCarrier,

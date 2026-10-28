@@ -87,11 +87,6 @@ function ReturnCard({ ret }: { ret: TaxReturn }) {
   );
 }
 
-/*
- * Large inline CTA when the user has no filings yet. It replaces the
- * returns grid. The page intentionally looks empty until the user starts
- * a filing; placeholder cards would hide that state.
- */
 function EmptyReturnsCta() {
   return (
     <div className="card flex flex-col items-start gap-5 p-8 sm:p-10">

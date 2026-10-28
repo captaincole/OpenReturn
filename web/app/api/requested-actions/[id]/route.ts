@@ -2,13 +2,7 @@ import { getOwnerSession } from "@/lib/localAuth";
 import { markActionProcessing, skipAction } from "@/lib/serverDb";
 import { type NextRequest, NextResponse } from "next/server";
 
-/*
- * Status transitions the browser can drive:
- *   processing — an upload for this card just landed (documentId required)
- *   skipped    — the user dismissed the card
- * Both UPDATEs scope by (id, user_id) in serverDb, so a caller can touch
- * only their own cards.
- */
+/* Both UPDATEs scope by (id, user_id), so a caller can touch only their own cards. */
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   if (!id) return NextResponse.json({ error: "missing id" }, { status: 400 });

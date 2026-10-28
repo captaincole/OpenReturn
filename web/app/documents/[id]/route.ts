@@ -4,19 +4,9 @@ import { getDocumentById, hasMembership } from "@/lib/serverDb";
 import { type NextRequest, NextResponse } from "next/server";
 
 /*
- * Same-origin Route Handler for document downloads. The browser sends
- * the session cookie on plain <a href> clicks, unlike a bearer header.
- * The handler validates the owner session, loads the row from the libsql
- * app DB, verifies a non-revoked membership on the document's filing
- * (the explicit RLS replacement), and streams the file from the local
- * documents dir — no bucket, no signed URLs.
- *
- * `?download=1` switches Content-Disposition to attachment, so the
- * Download button forces a save instead of inline rendering. Any type
- * not in INLINE_TYPES (HTML, SVG, anything unknown) always downloads, so
- * an upload cannot render as a page on this origin. The stored type is
- * the one the browser claimed; nosniff (next.config.ts) stops the browser
- * from reading the bytes as anything else.
+ * Any type not in INLINE_TYPES (HTML, SVG, anything unknown) always
+ * downloads, so an upload cannot render as a page on this origin. The
+ * stored type is the browser's claim; nosniff stops it reading past that.
  */
 const INLINE_TYPES = new Set([
   "application/pdf",
@@ -41,10 +31,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   if (!doc) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
-  /*
-   * Membership gate — return 404, not 403, so non-members cannot probe
-   * which document ids exist. This matches the old RLS behavior.
-   */
+  /* 404, not 403, so non-members cannot probe which document ids exist. */
   if (!(await hasMembership(doc.filingId, session.userId))) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
@@ -55,7 +42,6 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   try {
     bytes = await readBlob(doc.storagePath);
   } catch {
-    // Row exists but the file is gone — surface as 404, not 500.
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 

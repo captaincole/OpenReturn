@@ -2,19 +2,7 @@ import { Agent } from "@mastra/core/agent";
 import { modelFor } from "../../../models";
 import { CPA_RULES } from "./cpaRules";
 
-/*
- * Risk-tier assessor for the review-decision workflow. Reads the decision
- * plus the gathered evidence (facts + retrieved IRS blocks) and emits a tier
- * — low, medium, or high — based on (a) how much the return numbers move if
- * the decision is wrong, and (b) how well the evidence corroborates the
- * decision today. The rule step downstream uses the tier to set the evidence
- * bar.
- *
- * No tools — the agent reasons over the input it is given. It always emits
- * a tier, even on weak evidence; the rule step is the single source of loop
- * control.
- */
-
+// Always emits a tier: the rule step is the one source of loop control.
 const baseInstructions = `You are a tax risk assessor. Read one decision recorded by the tax agent, plus the supporting evidence (taxpayer-stated facts, retrieved IRS reference passages), and assign a risk tier.
 
 ## Tiers

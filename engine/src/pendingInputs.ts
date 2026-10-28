@@ -1,16 +1,8 @@
-/*
- * What the return still needs: every decision and fact key a filed form
- * is waiting for. Cade asks the user about these, and the agent renders
- * no documents until both lists are empty.
- */
-
 import type { FilingInfo } from "./filingInfo.js";
 import type { BaseFormField, EvaluatedForm } from "./types.js";
 
 export interface PendingInputs {
-  /** decisions.* keys, sorted. */
   pendingDecisions: string[];
-  /** Fact keys, sorted. */
   pendingFacts: string[];
 }
 
@@ -26,11 +18,6 @@ export function pendingInputs(scenario: {
   };
 }
 
-/*
- * Aggregate unique pending decisions and facts across every form:
- * must-file blockers, and for each filed form its missing required inputs
- * plus field blockers that name a key.
- */
 function collectPending(forms: Iterable<EvaluatedForm<BaseFormField>>): {
   pendingDecisions: Set<string>;
   pendingFacts: Set<string>;
@@ -56,13 +43,9 @@ function collectPending(forms: Iterable<EvaluatedForm<BaseFormField>>): {
 }
 
 /*
- * Identity gaps surface as pendingFacts. We check the RESOLVED filingInfo
- * slot, not raw fact presence. A fact with the right key but the wrong
- * value shape (e.g. identity.phone written as an object) would pass a
- * raw-presence gate even though the resolver cannot read it. With
- * filingInfo, pendingFacts reflects exactly what the engine consumes.
- * identity.email is intentionally NOT in this list — it is a courtesy
- * field that Cade auto-fills from authEmail at doc-generation time.
+ * Check the resolved filingInfo slot, not raw fact presence: a fact with
+ * the wrong value shape is still pending. identity.email is left out on
+ * purpose: Cade fills it from authEmail.
  */
 function addPendingIdentityFacts(filingInfo: FilingInfo, pendingFacts: Set<string>): void {
   const requiredSlots: Array<[string, unknown]> = [

@@ -1,21 +1,4 @@
-/*
- * Top-level test entry point. Runs every registered scenario and every
- * catalog-fill check, then prints one summary table. Designed for
- * pre-commit hooks: fast, deterministic, offline. Exits non-zero on any
- * failure.
- *
- * Positional args filter by check name (case-insensitive substring):
- *   npm test -- alex               → just the alex scenario
- *   npm test -- catalog-fill       → all catalog-fill checks
- *   npm test -- form-540 marcus    → any check matching either
- *
- * To add a scenario: add it to SCENARIOS in tests/scenarios/index.ts.
- *
- * To add a form's catalog-fill check: register the form in the engine
- * registry (src/registry.ts, via its jurisdiction index). CATALOGS
- * in tests/golden/catalogFill.ts mirrors that registry. The first run fails with
- * "no golden — run --update"; bootstrap the snapshot and commit it.
- */
+/* Positional args filter by check name (case-insensitive substring): npm test -- alex catalog-fill */
 
 import { SCENARIOS } from "../scenarios/index.js";
 import type { RunResult } from "../types.js";
@@ -72,7 +55,6 @@ async function main() {
         (r.notModeled?.length ? ` — ${r.notModeled.length} line(s) not modeled` : "");
       const tag = UNVERIFIED.has(r.name) ? " — unverified (locked engine output)" : "";
       console.log(`✓ ${r.name.padEnd(colWidth)} ${r.durationMs}ms${tag}${nm}`);
-      /* The full list only when the scenario was asked for by name. */
       if (filters.length > 0) {
         for (const line of r.knownMismatches ?? []) console.log(`    known: ${line}`);
         for (const line of r.notModeled ?? []) console.log(`    not modeled: ${line}`);
@@ -90,14 +72,8 @@ async function main() {
   };
 
   /*
-   * Catalog-fill checks run FIRST, before any scenario installs per-field
-   * formatter overrides into the engine's global registry. The overrides
-   * (e.g. SSN.format on 540 page 2) expect bare-digit input from the
-   * production filingInfo path, not the harness's human-readable
-   * synthetic. Run on the synthetic, they produce text that does not
-   * match the formatter-free golden. Catalog-fill therefore stays a pure
-   * catalog→widget check with no bindings registered, and the two test
-   * surfaces stay distinct.
+   * Catalog-fill runs FIRST: scenarios register formatter overrides in a global
+   * registry (e.g. SSN.format on 540 page 2), and those break the synthetic values.
    */
   for (const c of catalogs) record(await runCatalogFillCheck(c.formId));
   for (const s of scenarios) record(await runScenario(s));

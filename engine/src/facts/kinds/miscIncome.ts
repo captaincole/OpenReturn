@@ -1,17 +1,3 @@
-/*
- * 1099-MISC fact kind. One fact = one account's 1099-MISC box totals.
- * A broker's consolidated statement can carry a 1099-MISC section; a
- * standalone 1099-MISC is the same shape with its own account.
- *
- * Convention:
- *   category: "other"
- *   key:      "account.{accountSlug}.misc"
- *   value:    MiscIncomeFactValue
- *
- * Box 3 (other income) is the load-bearing field: it flows to Schedule 1
- * line 8z. Box numbers follow the 2025 Form 1099-MISC.
- */
-
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
 

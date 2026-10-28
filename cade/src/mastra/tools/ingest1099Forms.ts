@@ -11,25 +11,15 @@ import { z } from "zod";
 import { recordIngestFact, statementContext, statementFields } from "./ingestShared";
 
 /*
- * Ingest one 1099-INT, 1099-DIV or 1099-MISC as one box-totals fact. A
- * consolidated broker statement is several of these forms (plus a 1099-B,
- * see ingest1099B.ts) in one PDF: Cade makes one call per form on it.
- *
- * Short calls are the point. One call for a whole statement put the box
- * totals after a long list of trades, and local models (Gemma 4 31b)
- * broke the nesting there about half the time, which lost the whole call.
- *
- * Fact value: { payerName, payerTin, ...the non-zero boxes }.
+ * One call per form, not per statement: after a long trade list, local models
+ * broke the call's nesting about half the time and lost the whole call.
  */
 
 const ONLY_NON_ZERO = "Pass only the boxes that have non-zero values.";
 
 type Payer = "payerName" | "payerTin";
 
-/*
- * One schema per box of the engine's fact value: a missing box, an extra
- * box, or a box whose type differs from the engine's fails to compile.
- */
+/* A missing, extra or mistyped box (against the engine's fact value) fails to compile. */
 type BoxSchemas<V> = { [K in keyof Omit<V, Payer>]-?: z.ZodType<V[K]> };
 
 interface FormSpec<V> {

@@ -19,31 +19,13 @@ import {
 import { validateCitations } from "./validateCitations";
 
 /*
- * Grounding one decision: (gather → assess → rule) × up to maxIterations.
- *
- *   gather  deterministic — queries from the queryFormulator judge on the
- *           first iteration, from rule's suggestedQueries after; hybrid
- *           retrieval; the evidence bundle.
- *   assess  LLM — a risk tier for the decision.
- *   rule    LLM — a verdict with citations, or a request for another
- *           retrieval round; the citations are then checked against the
- *           retrieved blocks in code (validateCitations.ts).
- *
  * Each judge is one model call with the output schema as its response
- * format (judge.ts): no tools, no second structuring pass.
- *
- * Canon never sees app.db: the facts arrive with the decision, and the
- * verdict goes back with the step log for the caller to persist (Cade
- * writes it to review_run_steps, the fine-tuning substrate). Exposed as
- * the `ground` workflow, so MCP clients call it as run_ground.
+ * format (judge.ts): no tools, no second structuring pass. Retrieval runs
+ * in code, and so does the citation check (validateCitations.ts).
  */
 
 const HITS_PER_QUERY = 6;
 
-/*
- * Run each query and dedupe blocks across queries by blockId, keeping the
- * higher score when queries overlap.
- */
 async function retrieveBlocks(queries: string[]): Promise<EvidenceBundle["irsBlocks"]> {
   const blockMap = new Map<string, { docId: string; text: string; score: number }>();
   for (const q of queries) {
@@ -119,11 +101,6 @@ async function assess(
   return { ...carrier, riskAssessment };
 }
 
-/*
- * After a rule output: on need_more_evidence, bump the iteration and swap
- * in its suggested queries; the loop checks the cap. Otherwise keep the
- * carrier as is so the verdict can be read.
- */
 function advanceAfterRule(carrier: LoopCarrier, ruleOutput: RuleOutput): LoopCarrier {
   if (ruleOutput.kind !== "need_more_evidence") return { ...carrier, ruleOutput };
   return {
@@ -168,11 +145,6 @@ async function rule(
   return advanceAfterRule(carrier, ruleOutput);
 }
 
-/*
- * The final ruling. If rule still wanted more evidence after the last
- * iteration, collapse to needs_more_facts and summarize the accumulated
- * reasons as whatsMissing.
- */
 function resolve(carrier: LoopCarrier): Omit<GroundResult, "log"> {
   const ruleOutput = carrier.ruleOutput!;
   const riskTier = carrier.riskAssessment?.riskTier ?? null;
@@ -200,15 +172,10 @@ function resolve(carrier: LoopCarrier): Omit<GroundResult, "log"> {
 }
 
 export interface GroundDecisionOptions {
-  /**
-   * The step log, when the caller owns it: each judge step is pushed as it
-   * finishes, so a judge that throws still leaves the steps that ran with
-   * the caller. Otherwise the log comes back in the result only.
-   */
+  /** Steps are pushed as they finish, so a judge that throws keeps the steps that ran. */
   steps?: GroundStepLog[];
 }
 
-/* Grounds one decision. Throws when a judge fails; the caller records that. */
 export async function groundDecision(
   mastra: Mastra,
   rawInput: GroundInput,
@@ -233,7 +200,6 @@ export async function groundDecision(
   return { ...resolve(carrier), log: { steps } };
 }
 
-/* The MCP-facing step: a judge failure comes back with the steps that ran, not as a thrown error. */
 const groundStep = createStep({
   id: "ground",
   inputSchema: groundInputSchema,

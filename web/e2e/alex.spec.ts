@@ -1,14 +1,3 @@
-/*
- * Alex, end to end: create the owner, ask the tax code one question
- * (ask.ts), start a filing, talk Cade through
- * the intake with the W-2 upload, and wait for the generated forms. Then
- * check what the model stored and generated against Alex's fixtures
- * (engine/tests/scenarios/alex).
- *
- * Results go to <runDir>/summary.md, one row per stage. See summary.ts
- * for the plumbing / model split.
- */
-
 import { expect, test, type Page } from "@playwright/test";
 import { appendFileSync } from "node:fs";
 import { join } from "node:path";
@@ -64,7 +53,6 @@ async function createOwner(page: Page) {
   await expect(page.getByRole("heading", { name: "Hi, Alex." })).toBeVisible();
 }
 
-/* Returns the filing's path (for example /r/2025). */
 async function startFiling(page: Page): Promise<string> {
   await page
     .getByRole("button", { name: /Start filing/ })
@@ -75,12 +63,6 @@ async function startFiling(page: Page): Promise<string> {
   return new URL(page.url()).pathname;
 }
 
-/*
- * Scripted turns first, then answer-sheet replies, until the newest
- * sidecar holds every expected form. The first reply and the stored
- * upload are plumbing stages. Reaching generation is a model stage.
- * Returns true when the forms were generated.
- */
 async function runIntake(page: Page): Promise<boolean> {
   const script = [...OPENING_TURNS];
   let cadeSaid = "";
@@ -116,10 +98,8 @@ async function runIntake(page: Page): Promise<boolean> {
 const toTurn = (text: string | undefined): Turn | undefined => (text ? { text } : undefined);
 
 /*
- * Reviews run in the background and stop when the servers stop. Wait for
- * every verdict, so the run time and the API cost include them. A review
- * that never reached Canon, or broke, is a broken app, not a model
- * mistake: that is the one plumbing check on the reviews.
+ * Reviews stop when the servers stop: wait, so run time and API cost include
+ * them. An unreached or broken review is a broken app, not a model mistake.
  */
 async function waitForReviews() {
   const start = Date.now();
@@ -141,7 +121,6 @@ async function waitForReviews() {
   );
 }
 
-/* An agent error is a broken app, not a model mistake: fail plumbing and stop. */
 function noAgentErrors(turn: number) {
   const errors = agentStreamErrors();
   if (errors.length === 0) return;
@@ -149,7 +128,6 @@ function noAgentErrors(turn: number) {
   throw new Error(`turn ${turn}: agent error`);
 }
 
-/* Send one message and return Cade's reply once the turn ends. */
 async function send(page: Page, turn: Turn): Promise<string> {
   const box = page.getByLabel("Message Cade");
   if (turn.file) await page.getByLabel("Attach a file for Cade").setInputFiles(turn.file);
@@ -165,10 +143,6 @@ async function expectUploadStored() {
   expect(findFiles("uploads", /alex-w2/), "uploaded W-2 in documents/*/uploads").not.toEqual([]);
 }
 
-/*
- * The Forms section of the return page lists a PDF for each expected form
- * (plus the JSON sidecar), and each link serves its file.
- */
 async function checkFormsPage(page: Page, filingPath: string) {
   await page.goto(filingPath);
   const open = page.getByRole("region", { name: "Tax forms" }).getByRole("link", { name: "Open" });

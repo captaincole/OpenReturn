@@ -1,17 +1,7 @@
 /*
- * Parser for the California FTB Tax Table (2025 540 booklet appendix).
- * FTB publishes the table as a PDF only; we extract text via unpdf and
- * split each row by whitespace.
- *
- * The CA Tax Table differs from the IRS table in two ways that matter:
- *   - 5 numeric columns per row (low, high, single_or_mfs, mfj_or_qss,
- *     hoh) vs. IRS's 6. CA combines Single+MFS into one column and
- *     MFJ+QSS into another (those pairs always pay the same tax).
- *   - Row width is $100 instead of $50, and the first row covers $1..$50.
- *
- * Each text line is one row. The header repeats across pages, so we
- * filter by shape: exactly 5 comma-formatted integers per line with
- * low < high.
+ * FTB publishes the table only as a PDF. CA shares one column for
+ * Single+MFS and one for MFJ+QSS, so a row has 5 numbers, not 6.
+ * The header repeats on every page, so lines are filtered by shape.
  */
 
 import { extractText } from "unpdf";
@@ -86,8 +76,6 @@ function parseIntCell(raw: string): number | null {
   return n;
 }
 
-// ─── Coverage validation ─────────────────────────────────────────────────
-
 export interface CACoverageReport {
   ok: boolean;
   minIncome: number;
@@ -98,11 +86,8 @@ export interface CACoverageReport {
 }
 
 /**
- * Validates that rows form a contiguous sweep from $1 to ~$100,000. FTB's
- * convention is "at_least..but_not_over": row N's `high` equals row N+1's
- * `low` MINUS 1, because "but_not_over $50" + next row "at_least $51"
- * puts $50 in the first row. The call site normalizes to standard
- * half-open intervals and treats `high` as inclusive.
+ * FTB rows are "at least .. but not over": `high` is inclusive, so the
+ * next row's `low` is `high + 1` ($1–$50, then $51–$150).
  */
 export function validateCACoverage(rows: CATaxTableRow[]): CACoverageReport {
   if (rows.length === 0) {
@@ -120,7 +105,6 @@ export function validateCACoverage(rows: CATaxTableRow[]): CACoverageReport {
   for (let i = 1; i < rows.length; i++) {
     const prev = rows[i - 1];
     const cur = rows[i];
-    // FTB: prev.high = 50, cur.low = 51 → contiguous (no gap).
     if (cur.low > prev.high + 1) gaps.push({ after: prev.high, before: cur.low });
     else if (cur.low <= prev.high) overlaps.push({ row: cur, previousHigh: prev.high });
   }

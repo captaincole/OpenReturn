@@ -1,7 +1,4 @@
-/*
- * Schedule H must-file ("Who Must File", 2025 Schedule H instructions)
- * and the $1,000-quarter answer it needs.
- */
+/* Source: 2025 Schedule H instructions, "Who Must File". */
 
 import { describe, expect, it } from "vitest";
 import {
