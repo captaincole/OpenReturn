@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.91.1",
-    "@mastra/core": "^1.30.0",
-    "@mastra/mcp": "1.6.0",
+    "@mastra/core": "^1.79.0",
+    "@mastra/mcp": "^1.18.0",
     "@napi-rs/canvas": "^0.1.100",
     "@openreturn/engine": "0.1.0",
     "@openreturn/sources": "0.1.0",
@@ -20,7 +20,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^22",
     "tsx": "^4.20.5",
     "typescript": "^5"
   }

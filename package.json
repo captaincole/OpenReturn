@@ -41,7 +41,7 @@
     "typecheck": "npm -w @openreturn/engine run typecheck && npm -w @openreturn/builder run typecheck && npm -w canon run typecheck && npm -w cade run typecheck"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.13.0"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.10.0",
