@@ -1,7 +1,6 @@
 import { readBlob } from "@/lib/blobStore";
 import { getOwnerSession } from "@/lib/localAuth";
 import { getDocumentById, hasMembership } from "@/lib/serverDb";
-import { servesInline } from "@/lib/uploadTypes";
 import { type NextRequest, NextResponse } from "next/server";
 
 /*
@@ -13,10 +12,20 @@ import { type NextRequest, NextResponse } from "next/server";
  * documents dir — no bucket, no signed URLs.
  *
  * `?download=1` switches Content-Disposition to attachment, so the
- * Download button forces a save instead of inline rendering. Types that
- * could render as a page (HTML, SVG, anything unknown) always download,
- * and nosniff stops the browser from guessing past the declared type.
+ * Download button forces a save instead of inline rendering. Any type
+ * not in INLINE_TYPES (HTML, SVG, anything unknown) always downloads, so
+ * an upload cannot render as a page on this origin. The stored type is
+ * the one the browser claimed; nosniff (next.config.ts) stops the browser
+ * from reading the bytes as anything else.
  */
+const INLINE_TYPES = new Set([
+  "application/pdf",
+  "image/png",
+  "image/jpeg",
+  "image/webp",
+  "application/json",
+]);
+
 export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   if (!id) {
@@ -41,7 +50,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   }
 
   const wantsDownload =
-    request.nextUrl.searchParams.get("download") === "1" || !servesInline(doc.mimeType);
+    request.nextUrl.searchParams.get("download") === "1" || !INLINE_TYPES.has(doc.mimeType ?? "");
   let bytes: Buffer;
   try {
     bytes = await readBlob(doc.storagePath);
@@ -54,7 +63,6 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     "Content-Type": doc.mimeType ?? "application/octet-stream",
     "Content-Length": String(bytes.byteLength),
     "Cache-Control": "private, no-store",
-    "X-Content-Type-Options": "nosniff",
   });
   // RFC 5987 filename* handles non-ASCII (em-dashes in draft names).
   const encoded = encodeURIComponent(doc.filename);
