@@ -8,7 +8,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0-blue" alt="License: AGPL-3.0"></a>
   <img src="https://img.shields.io/badge/status-beta-orange" alt="Status: beta">
   <img src="https://img.shields.io/badge/tax%20year-2025-7c3aed" alt="Tax year 2025">
-  <img src="https://img.shields.io/badge/node-%E2%89%A520-339933?logo=node.js&logoColor=white" alt="Node 20 or later">
+  <img src="https://img.shields.io/badge/node-%E2%89%A522.13-339933?logo=node.js&logoColor=white" alt="Node 22.13 or later">
   <a href="https://mastra.ai"><img src="https://img.shields.io/badge/built%20with-Mastra-111111" alt="Built with Mastra"></a>
   <a href="https://nextjs.org"><img src="https://img.shields.io/badge/web-Next.js%2016-000000?logo=nextdotjs" alt="Next.js 16"></a>
 </p>
@@ -55,7 +55,7 @@ This project was going to be a startup, but life changed directions. Now I want 
 
 ## Quickstart
 
-You need Node.js 20 or later, and an Anthropic API key or [Ollama](https://ollama.com) with Gemma 4 31B.
+You need Node.js 22.13 or later, and an Anthropic API key or [Ollama](https://ollama.com) with Gemma 4 31B.
 
 ```bash
 git clone https://github.com/captaincole/OpenReturn.git
