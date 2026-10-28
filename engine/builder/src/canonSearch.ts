@@ -24,6 +24,7 @@ function getClient(): MCPClient {
       canon: {
         url: new URL("/api/mcp/canon/mcp", process.env.CANON_URL ?? DEFAULT_URL),
         enableServerLogs: false,
+        onToolError: "return", // a failed call is a result with isError; unwrap reads it
         ...(token ? { requestInit: { headers: { Authorization: `Bearer ${token}` } } } : {}),
       },
     },
