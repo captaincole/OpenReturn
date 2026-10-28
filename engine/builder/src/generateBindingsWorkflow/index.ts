@@ -1,3 +1,5 @@
+/* Overwrites the bindings file. Re-apply MANUAL EDIT blocks after a run. */
+
 import { createWorkflow } from "@mastra/core/workflows";
 import {
   workflowInputSchema,

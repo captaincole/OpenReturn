@@ -3,6 +3,7 @@
  * overwrites expected.ts with that output.
  * A zero is kept only where expected.ts already asserts it: a filed-return
  * comparison treats blank and 0 as equal, so it never verifies a zero.
+ * After a lock, rewrite the golden PDFs: renderScenario.ts --scenario=<name> --golden.
  */
 
 import { writeFileSync } from "node:fs";

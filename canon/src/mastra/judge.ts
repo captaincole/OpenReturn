@@ -4,9 +4,9 @@ import type { z } from "zod";
 /*
  * One request with the schema as response format. No tools and no second
  * structuring pass: on a local model that pass cost more than the judging
- * and could run away. "outputFormat" forces native structured output: for
- * Claude models Mastra does not know, it falls back to a JSON tool call that
- * sometimes sends an array as a string.
+ * and could run away. For a Claude model it does not know, Mastra falls back
+ * to a JSON tool call that can send an array as a string. "outputFormat"
+ * forces native mode; other providers ignore it.
  */
 export async function judge<S extends z.ZodTypeAny>(
   agent: Agent,

@@ -1,4 +1,4 @@
-/* Per-account 1099-DIV box totals. Per-payment detail (Schedule B above $1,500) is not modeled. */
+/* One fact per account: 1099-DIV box totals. Schedule B lists one row per fact. */
 
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
