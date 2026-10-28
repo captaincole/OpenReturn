@@ -8,17 +8,6 @@ import { z } from "zod";
 import { recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
-/*
- * Ingest one contractor invoice or receipt for home energy improvements
- * (Form 5695 Part II: doors, windows, insulation, central air, heat
- * pumps, water heaters, furnaces, energy audits). One fact per invoice,
- * one item per piece of property.
- *
- * Convention (see engine/src/facts/kinds/homeEnergy.ts):
- *   category: "home_energy"
- *   key:      "vendor.{vendorSlug}.energy_invoice"
- */
-
 const ItemSchema = z.object({
   kind: z.enum(ENERGY_ITEM_KINDS).describe("Form 5695 property type"),
   description: z.string().optional().describe("Item as printed on the invoice"),
@@ -33,11 +22,7 @@ const ItemSchema = z.object({
     ),
 });
 
-/*
- * The key slug: vendor plus invoice number, or vendor plus date when
- * there is no number. Two invoices from one vendor then get two keys;
- * one key would let the second replace the first.
- */
+/* Vendor alone is not unique: a second invoice from one vendor would replace the first. */
 export function energyInvoiceSlug(input: {
   vendorName: string;
   invoiceNumber?: string;

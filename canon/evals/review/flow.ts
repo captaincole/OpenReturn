@@ -1,8 +1,3 @@
-/*
- * The review flow's scores for the eval overview (lib/overview.ts). Each
- * capability is a share of runs; the flow score is their mean, so the
- * columns add up to it.
- */
 import { avg } from "../lib/markdown";
 import type { EvalModel } from "../lib/models";
 import type { FlowScores, ModelScores } from "../lib/overview";
@@ -10,7 +5,7 @@ import { CASES } from "./cases";
 import type { ReviewResult } from "./report";
 
 export const verdictOk = (r: ReviewResult) => r.verdict === r.expectedVerdict;
-/* Citations are graded only on an "accurate" verdict: that is when the workflow stores them. */
+/* Graded only on an "accurate" verdict: that is when the workflow stores citations. */
 export const groundedOk = (r: ReviewResult) =>
   r.expectedVerdict === "accurate" && r.verdict === "accurate" && r.citedAuthority;
 

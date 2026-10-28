@@ -1,7 +1,4 @@
-/*
- * Standard-deduction amounts, typed from the 2025 Form 1040 Instructions
- * (Standard Deduction chart, line 12d) and the 2025 540 booklet.
- */
+/* Source: 2025 Form 1040 instructions (line 12d chart) and the 2025 540 booklet. */
 
 import { describe, expect, it } from "vitest";
 import {

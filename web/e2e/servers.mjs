@@ -1,13 +1,7 @@
 /*
- * Starts one server for the E2E run: `node e2e/servers.mjs agent|web`.
- * Output goes to <E2E_RUN_DIR>/<name>.log.
- *
- *   agent — mastra dev. mastra copies its --env file over process.env,
- *           so the data paths cannot come from the environment. We
- *           write a copy of cade/.env.development with this run's
- *           data paths (into the gitignored run folder) and pass it.
- *   web   — next dev. Next.js lets process.env win over .env files, so
- *           the data paths pass straight through.
+ * mastra dev copies its --env file over process.env, so the agent gets a
+ * copy of its env file with this run's data paths. Next.js lets process.env
+ * win over .env files, so web needs no copy.
  */
 
 import { spawn, spawnSync } from "node:child_process";
@@ -19,27 +13,13 @@ const root = resolve(import.meta.dirname, "../..");
 const runDir = process.env.E2E_RUN_DIR;
 const DATA_KEYS = ["APP_DB_PATH", "MASTRA_DB_PATH", "DOCUMENTS_PATH"];
 
-/*
- * Decision reviews are off by default. On a local model they share the
- * GPU with Cade and make each turn several times slower, and the Alex
- * test does not test grounding. E2E_DECISION_REVIEW=on turns them on.
- */
+/* Off by default: on a local model reviews share the GPU and slow each turn several times. */
 const DECISION_REVIEW = process.env.E2E_DECISION_REVIEW ?? "off";
 
-/*
- * With reviews on, one judge round per decision: the run checks that a
- * review reaches Canon and comes back, not the verdict, and each extra
- * round is minutes on a local model. E2E_GROUND_MAX_ITERATIONS raises it.
- */
+/* One round: the run checks that a review comes back, not the verdict. */
 const GROUND_MAX_ITERATIONS = process.env.E2E_GROUND_MAX_ITERATIONS ?? "1";
 
-/*
- * E2E_CADE_MODEL / E2E_JUDGE_MODEL run a role on another model, for
- * example anthropic/claude-haiku-5-5. Its URL comes from
- * E2E_<ROLE>_MODEL_URL; without one, the model is a cloud model (key
- * from cade/.env). Defaults come from E2E_* lines in the gitignored
- * cade/.env (e.g. a model on a LAN machine); the shell wins.
- */
+/* E2E_* lines in the gitignored cade/.env are defaults; the shell wins. */
 function loadE2eDefaults() {
   const file = join(root, "cade/.env");
   if (!existsSync(file)) return;
@@ -73,12 +53,7 @@ function agentEnvFile() {
   return file;
 }
 
-/*
- * Canon runs on the normal corpus (CORPUS_DB_PATH from its own env file)
- * but its judge model follows E2E_JUDGE_MODEL, so the Ask step and the
- * reviews (Cade's ground calls over MCP) run on the chosen judge model.
- * Its Mastra state goes to the run folder.
- */
+/* Canon keeps the normal corpus; only its Mastra state goes to the run folder. */
 function canonEnvFile() {
   const replaced = ["MASTRA_DB_PATH", ...roleKeys];
   const source = readFileSync(join(root, "canon/.env.development"), "utf8");
@@ -93,11 +68,8 @@ function canonEnvFile() {
 }
 
 /*
- * API keys live in cade/.env. The agent's dotenv/config does not
- * find that file when mastra dev runs its bundle, so copy the *_API_KEY
- * entries into the agent's environment here. Only the keys: that file
- * also sets model URLs and data paths, which this run sets itself. The
- * keys stay in memory; agent.env never holds them.
+ * dotenv does not find cade/.env from mastra dev's bundle, so copy only the
+ * *_API_KEY entries. They stay in memory; agent.env never holds them.
  */
 function loadAgentKeys() {
   const file = join(root, "cade/.env");
@@ -126,7 +98,7 @@ if (!runDir || !COMMANDS[name]) {
 }
 mkdirSync(process.env.DOCUMENTS_PATH, { recursive: true });
 
-/* The agent reads blank PDFs from a gitignored runtime tree; build it first. */
+/* The agent reads blank PDFs from a gitignored tree; build it first. */
 if (name === "agent") {
   const sync = spawnSync("npm", ["--prefix", join(root, "cade"), "run", "sources:sync"], {
     stdio: "inherit",

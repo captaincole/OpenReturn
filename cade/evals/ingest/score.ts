@@ -2,12 +2,8 @@ import type { TaxFactRow } from "@openreturn/engine/facts";
 import { compareValues, shareCorrect, type FieldResult } from "../lib/compare";
 
 /*
- * Score the facts a run wrote against the facts the document should
- * produce. Keys hold slugs the tool derives from names the model reads
- * ("employer.example-corp", "account.x.trades.<id>"), so a fact is paired
- * by its kind (the key without the slugs), not its exact key. Within a
- * kind, each expected fact takes the unused written fact that matches
- * it best. An expected fact with no partner scores every field as wrong.
+ * Keys hold slugs from names the model reads, so facts pair by kind (the key without
+ * slugs), not exact key. Each expected fact takes the best unused match of its kind.
  */
 
 export interface FactResult {
@@ -19,24 +15,15 @@ export interface FactResult {
 export interface DocScore {
   score: number;
   facts: FactResult[];
-  /* Written facts no expected fact took: duplicates or the wrong tool. */
   extraFacts: string[];
 }
 
-/*
- * "account.x.trades.y" → "investment_income:account.trades". The slug
- * after the first segment and everything after a per-item segment are
- * names (a trade id can hold a dot: "q101.31").
- */
+/* "account.x.trades.y" → "investment_income:account.trades". A trade id can hold a dot. */
 const kindOf = (f: TaxFactRow) =>
   `${f.category}:${f.key
     .replace(/^(account|payer|employer|employee|vendor)\.[^.]+/, "$1")
     .replace(/\.(trades|distributions|hsa_distributions)\..*$/, ".$1")}`;
 
-/*
- * The form a fact comes from: on a consolidated 1099, each form is its
- * own ingest call. Facts from other documents return "document".
- */
 const FORM_BY_SUFFIX: [RegExp, string][] = [
   [/\.interest$/, "1099-INT"],
   [/\.dividends$/, "1099-DIV"],
@@ -46,7 +33,6 @@ const FORM_BY_SUFFIX: [RegExp, string][] = [
 export const formOf = (key: string) =>
   FORM_BY_SUFFIX.find(([re]) => re.test(key))?.[1] ?? "document";
 
-/* Each form's share of correct fields. A form with no written fact scores 0. */
 export function formScores(score: DocScore): Map<string, number> {
   const byForm = new Map<string, FactResult[]>();
   for (const f of score.facts) byForm.set(formOf(f.key), [...(byForm.get(formOf(f.key)) ?? []), f]);
@@ -55,7 +41,6 @@ export function formScores(score: DocScore): Map<string, number> {
   );
 }
 
-/* True when some form the document holds got no written fact: a skipped call. */
 export const missesForm = (score: DocScore) => {
   const forms = new Set(score.facts.map((f) => formOf(f.key)));
   return [...forms].some((form) =>

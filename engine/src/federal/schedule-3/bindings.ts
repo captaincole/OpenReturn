@@ -1,14 +1,3 @@
-/*
- * Schedule 3 (Form 1040) — Additional Credits and Payments, tax year
- * 2025. Drafted by `form-engine generate-bindings`, then written by
- * hand. Its instructions are in the Form 1040 instructions
- * (irs-1040-inst-2025).
- *
- * Modeled: line 5b (energy efficient home improvement credit, Form 5695
- * line 32) and the line 8 total that goes to Form 1040 line 20. Every
- * other credit and payment line waits for a scenario that needs it.
- */
-
 import { defineForm } from "../../defineForm.js";
 import { sum } from "../../money.js";
 import { SSN } from "../../values.js";
@@ -25,12 +14,10 @@ export function register(): void {
           ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
           : undefined,
       "0.header.ssn": (_, info) => info.taxpayerSSN,
-      // Line 5b = Form 5695 line 32; blank when Form 5695 is not filed.
       "0.line.5b": (f) => {
         const v = f["form-5695.3.line.32"];
         return typeof v === "number" ? v : undefined;
       },
-      // Line 7 = lines 6a through 6z. Blank while every line 6 credit is blank.
       "0.line.7": (f) => {
         const parts = [
           f["0.line.6a"],
@@ -49,7 +36,6 @@ export function register(): void {
         ];
         return parts.every((v) => v === undefined) ? undefined : sum(...parts);
       },
-      // Line 8 = lines 1–4, 5a, 5b, and 7. Goes to Form 1040 line 20.
       "0.line.8": (f) => {
         const parts = [
           f["0.line.1"],

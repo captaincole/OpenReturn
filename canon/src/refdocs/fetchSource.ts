@@ -6,19 +6,10 @@ import { cleanFtbHtml, type CleanedDoc } from "./html/cleanFtb";
 import type { CorpusEntry } from "./walkCorpus";
 
 /*
- * Make sure an entry's source file is on disk and is the file its sidecar
- * names (sha256). Source files are gitignored, so a missing one comes
- * from, in order:
- *   1. corpus.db, which stores every ingested source (corpusFiles.ts).
- *      This keeps re-ingests working after a publisher replaces the file
- *      at its URL with a newer edition, as the IRS and FTB both do.
- *   2. The sidecar's sourceUrl — in practice only for a new document. An
- *      HTML source is the cleaned page, so its sha256 is the cleaner's
- *      output (refdocs/html/cleanFtb.ts), not the raw download.
- * A sourceUrl mismatch means the publisher changed the file (or, for
- * HTML, the cleaner changed): point sourceUrl at a stable copy (IRS:
- * irs.gov/pub/irs-prior/<file>--<year>.pdf) or, for a new edition on
- * purpose, update the sidecar's sha256 (`corpus add-html` rewrites it).
+ * corpus.db comes before sourceUrl: publishers replace files at the same
+ * URL with new editions, so the stored copy keeps re-ingests working. On a
+ * sourceUrl mismatch, point it at a stable copy (IRS:
+ * irs.gov/pub/irs-prior/<file>--<year>.pdf) or update the sidecar's sha256.
  */
 
 /* Some publisher CDNs reject requests without a browser user agent. */
@@ -71,7 +62,6 @@ async function fetchBytes(url: string): Promise<Uint8Array> {
   return new Uint8Array(await res.arrayBuffer());
 }
 
-/* Download a publisher page and clean it (images inlined). */
 export async function fetchCleanHtml(url: string): Promise<CleanedDoc> {
   const raw = new TextDecoder().decode(await fetchBytes(url));
   return cleanFtbHtml(raw, url, async (imageUrl) => {

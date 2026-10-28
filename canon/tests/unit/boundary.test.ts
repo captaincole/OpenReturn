@@ -1,9 +1,4 @@
-/*
- * Canon is the library, not the tax return. Nothing under src/ or
- * scripts/ may reach into Cade (cade, app.db, ask threads), the
- * form engine, or agent memory. The MCP server is the only way out; the
- * corpus is the only thing in.
- */
+// Canon is the library, not the tax return: no Cade, app.db, engine or agent memory.
 
 import { readdirSync, readFileSync } from "node:fs";
 import { join, relative, resolve } from "node:path";

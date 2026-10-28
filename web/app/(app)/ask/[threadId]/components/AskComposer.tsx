@@ -1,13 +1,5 @@
 "use client";
 
-/*
- * The box under a thread. Two modes: "Follow up" adds a turn to this
- * thread (the answer reads the earlier turns as context); "Ask a
- * different question" starts a new thread. It floats at the bottom of
- * the viewport (sticky) so both stay in reach while reading. Enter
- * sends; Shift+Enter adds a line.
- */
-
 import { cn } from "@/lib/cn";
 import { useState } from "react";
 import { useAskSubmit } from "../../useAskSubmit";

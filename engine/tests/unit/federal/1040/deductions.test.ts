@@ -1,7 +1,4 @@
-/*
- * Form 1040 line 12e (standard deduction) and the line 14 senior
- * deduction block, 2025 instructions. One row per filer.
- */
+/* Source: 2025 Form 1040 instructions, lines 12e and 14. */
 
 import { describe, expect, it } from "vitest";
 import {

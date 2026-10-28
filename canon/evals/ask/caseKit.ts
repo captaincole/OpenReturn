@@ -1,8 +1,3 @@
-/*
- * Shared pieces of the Ask dataset (cases.ts): the case type, block-id
- * helpers, and passage groups more than one case accepts.
- */
-
 export type Coverage = "covered" | "partial" | "not_covered";
 export type Tier = 1 | 2 | 3;
 export type Kind = "standard" | "false_premise" | "insufficient";

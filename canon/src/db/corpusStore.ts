@@ -1,17 +1,6 @@
 import type { InValue } from "@libsql/client";
 import { ensureCorpusSchema, getCorpusDb } from "./libsql";
 
-/*
- * Corpus write + inspection side: document-tree ingest, embeddings,
- * ref_meta, and the read-only helpers the corpus CLI subcommands
- * (scripts/corpus/) use so they do not reach past this module into the
- * DB client directly. The runtime retrieval path lives in
- * corpusSearch.ts; it shares this module's types and low-level helpers.
- */
-
-// ─── Corpus row types — consumed by src/refdocs/ (ingest pipeline) ───────
-
-/** What a document's source file is: a PDF, or a cleaned publisher web page. */
 export type SourceFormat = "pdf" | "html";
 
 export interface RefDocument {
@@ -27,7 +16,6 @@ export interface RefDocument {
   canonicalTextPath: string;
   /** "html" documents have no pages: everything is page 1, cited by section. */
   format: SourceFormat;
-  /** YYYY-MM-DD the publisher issued the source; null when unknown. */
   published: string | null;
 }
 
@@ -70,22 +58,12 @@ export interface RefBlock {
   embedding?: number[] | null;
 }
 
-// ─── Low-level helpers (shared with corpusSearch.ts) ─────────────────────
-
-/*
- * libsql cell readers. Row values are typed
- * string | number | bigint | ArrayBuffer | null.
- */
 export const asStr = (v: unknown): string => (v == null ? "" : String(v));
 export const asStrOrNull = (v: unknown): string | null => (v == null ? null : String(v));
 export const asNum = (v: unknown): number => (v == null ? 0 : Number(v));
 export const asNumOrNull = (v: unknown): number | null => (v == null ? null : Number(v));
 
-/*
- * libsql's vector32() parses the canonical "[1,2,3]" text form into an
- * F32_BLOB. We pass the JSON literal and let SQL convert it, both on
- * insert and inside the vector_distance_cos() query argument.
- */
+// vector32() needs the "[1,2,3]" string form; a JS array silently fails.
 export function vectorLiteral(embedding: number[]): string {
   return `[${embedding.join(",")}]`;
 }
@@ -95,11 +73,6 @@ interface BatchStmt {
   args: InValue[];
 }
 
-/*
- * Chunked db.batch writes inside a transaction per chunk. The DB is a
- * local file with no network round-trip, so the concurrent-worker pool
- * from the Postgres version is not needed.
- */
 async function batchChunked<T>(
   rows: T[],
   chunkSize: number,
@@ -110,8 +83,6 @@ async function batchChunked<T>(
     await db.batch(rows.slice(i, i + chunkSize).flatMap(toStmts), "write");
   }
 }
-
-// ─── Single-row lookups ──────────────────────────────────────────────────
 
 export async function getDocument(docId: string): Promise<RefDocument | null> {
   await ensureCorpusSchema();
@@ -139,7 +110,6 @@ export async function getDocument(docId: string): Promise<RefDocument | null> {
   };
 }
 
-/* Sync re-applies a sidecar's date without re-ingesting the document. */
 export async function setDocumentPublished(docId: string, published: string | null) {
   await ensureCorpusSchema();
   await getCorpusDb().execute({
@@ -150,15 +120,10 @@ export async function setDocumentPublished(docId: string, published: string | nu
 
 export const asFormat = (v: unknown): SourceFormat => (v === "html" ? "html" : "pdf");
 
-// ─── Mutations — used by the ingest pipeline ─────────────────────────────
-
 export async function deleteDocument(docId: string): Promise<void> {
   await ensureCorpusSchema();
   const db = getCorpusDb();
-  /*
-   * FK ON DELETE CASCADE clears ref_pages/sections/blocks. The FTS5
-   * mirror has no FK relation, so delete its rows explicitly first.
-   */
+  // The FTS5 mirror has no FK, so the cascade does not reach it.
   await db.execute({ sql: `DELETE FROM ref_blocks_fts WHERE doc_id = ?`, args: [docId] });
   await db.execute({ sql: `DELETE FROM ref_documents WHERE doc_id = ?`, args: [docId] });
 }
@@ -175,11 +140,6 @@ export async function setBlockEmbeddings(
       args: [vectorLiteral(p.embedding), p.blockId],
     },
   ]);
-  /*
-   * Stamp the model that produced these vectors. The search path uses it
-   * to detect a model switch (see storedEmbeddingModel and
-   * hybridSearchRefDocs).
-   */
   if (opts.embeddingModel) {
     await setCorpusMeta("embedding_model", opts.embeddingModel);
   }
@@ -215,11 +175,7 @@ async function insertDocumentRow(d: RefDocument): Promise<void> {
   });
 }
 
-/**
- * Writes a full document tree. The write is not atomic across the tree.
- * Call deleteDocument() first to replace a doc. Re-run on partial
- * failure; the FK cascade cleans up orphans on the next delete.
- */
+/* Not atomic across the tree. Call deleteDocument() first to replace a doc. */
 export async function writeDocument(payload: IngestPayload): Promise<void> {
   await ensureCorpusSchema();
   const { document: d, pages, sections, blocks } = payload;
@@ -257,11 +213,6 @@ export async function writeDocument(payload: IngestPayload): Promise<void> {
   await batchChunked(blocks, 200, blockInsertStmts);
 }
 
-/*
- * One block insert plus its FTS5 mirror row. An embedding goes through
- * vector32() when present, else NULL (pre-embed ingest; the embed step
- * UPDATEs it later).
- */
 function blockInsertStmts(b: RefBlock): BatchStmt[] {
   const hasEmbedding = !!(b.embedding && b.embedding.length > 0);
   const embExpr = hasEmbedding ? "vector32(?)" : "NULL";
@@ -298,9 +249,6 @@ function blockInsertStmts(b: RefBlock): BatchStmt[] {
   ];
 }
 
-// ─── Corpus inspection — used by the corpus CLI subcommands ──────────────
-
-/** All ingested docs (doc_id + sha256). For `corpus status` drift detection and `corpus check`. */
 export async function listDocuments(): Promise<{ docId: string; sha256: string }[]> {
   await ensureCorpusSchema();
   const res = await getCorpusDb().execute(
@@ -309,7 +257,6 @@ export async function listDocuments(): Promise<{ docId: string; sha256: string }
   return res.rows.map((r) => ({ docId: asStr(r.doc_id), sha256: asStr(r.sha256) }));
 }
 
-/** Row counts per corpus table. For `corpus check`. */
 export async function tableCounts(): Promise<Record<string, number>> {
   await ensureCorpusSchema();
   const db = getCorpusDb();
@@ -322,7 +269,6 @@ export async function tableCounts(): Promise<Record<string, number>> {
   return out;
 }
 
-/** Block + embedded-block counts for one doc. For `corpus check`. */
 export async function countBlocksByDoc(
   docId: string,
 ): Promise<{ blocks: number; embedded: number }> {
@@ -339,11 +285,7 @@ export async function countBlocksByDoc(
   };
 }
 
-/**
- * Blocks with no embedding yet; the recovery input for `corpus reembed`.
- * Pass all=true to list every block, for a full re-embed after an
- * embedding-model switch.
- */
+/** all=true lists every block, for a full re-embed after a model switch. */
 export async function listBlocksWithoutEmbeddings(
   opts: { all?: boolean } = {},
 ): Promise<{ blockId: string; docId: string; contextualizedText: string | null; text: string }[]> {
@@ -360,8 +302,6 @@ export async function listBlocksWithoutEmbeddings(
     text: asStr(r.text),
   }));
 }
-
-// ─── Corpus metadata (ref_meta) ──────────────────────────────────────────
 
 async function getCorpusMeta(key: string): Promise<string | null> {
   await ensureCorpusSchema();
@@ -381,10 +321,6 @@ async function setCorpusMeta(key: string, value: string): Promise<void> {
   });
 }
 
-/**
- * The embedding-model id that built the stored vectors. Null means no
- * embed by current code has run; every writer stamps the id on embed.
- */
 export async function storedEmbeddingModel(): Promise<string | null> {
   return getCorpusMeta("embedding_model");
 }

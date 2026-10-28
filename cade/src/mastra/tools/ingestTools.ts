@@ -7,10 +7,6 @@ import { ingestHouseholdW2 } from "./ingestHouseholdW2";
 import { ingestSsa1099 } from "./ingestSsa1099";
 import { ingestW2 } from "./ingestW2";
 
-/*
- * Every document-ingest tool. Cade registers these, and the ingest eval
- * (evals/ingest/run.ts) runs the same set, so a new tool lands in both.
- */
 export const ingestTools = {
   ingestW2,
   ingest1099Int,
@@ -24,9 +20,5 @@ export const ingestTools = {
   ingestEnergyInvoice,
 };
 
-/*
- * The output limit an ingest call needs: twice the SDK's 4,096. One
- * ingest-1099-b call carries up to 20 trades, about 4,300 tokens; at
- * 4,096 a call with 21 trades came back with no trades.
- */
+/* Twice the SDK's 4,096: a 20-trade ingest-1099-b call is about 4,300 tokens. */
 export const INGEST_MAX_OUTPUT_TOKENS = 8192;

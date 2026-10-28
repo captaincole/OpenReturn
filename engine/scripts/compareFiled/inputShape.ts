@@ -1,20 +1,12 @@
-/*
- * The shape of the return's inputs, as counts only. Fact keys carry
- * payer and account names (`account.<name>.interest`), so the report
- * never prints a key: it prints the document type and how many.
- */
+/* PRIVACY: fact keys carry payer and account names, so print counts, never a key. */
 
 import { isDividendFactKey, isInterestFactKey } from "../../src/facts/index.js";
 import type { Scenario } from "../../tests/types.js";
 
 export interface InputShape {
-  /** Document type → count, e.g. { "W-2": 1, "1099-INT": 2 }. */
   documents: Record<string, number>;
-  /** Form 8949 box → number of sales. */
   salesByBox: Record<string, number>;
-  /** Scope decisions with a yes/no or short code value, e.g. filing_status → single. */
   scope: Record<string, string>;
-  /** Fact category → count, for facts that are not documents (identity left out). */
   otherFacts: Record<string, number>;
 }
 
@@ -48,7 +40,6 @@ export function inputShape(s: Scenario): InputShape {
   }
   for (const d of s.decisions) {
     if (/^decisions\.trade\..+\.form_8949_box$/.test(d.decisionKey)) {
-      /* "partII.boxD" → "D" */
       bump(shape.salesByBox, String(d.decision).replace(/^.*box/i, ""));
       continue;
     }

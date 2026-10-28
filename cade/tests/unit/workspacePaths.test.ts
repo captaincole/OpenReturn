@@ -1,10 +1,6 @@
 /*
- * tsconfig.json maps each @openreturn/* entry point to its source file. Mastra
- * dev reads the `server` config by bundling src/mastra/index.ts and
- * running the result with plain Node; without the alias it leaves
- * @openreturn/engine external, and Node cannot load the engine's TypeScript.
- * The alias makes Mastra bundle it instead. This test keeps the alias
- * equal to the packages' `exports` maps.
+ * Without the tsconfig alias, mastra dev leaves @openreturn/engine external, and
+ * plain Node cannot load its TypeScript. Keep the alias equal to the `exports` maps.
  */
 
 import { readFileSync } from "node:fs";

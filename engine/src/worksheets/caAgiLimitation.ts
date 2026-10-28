@@ -1,9 +1,6 @@
 /*
- * California AGI Limitation Worksheet (2025 Form 540 instructions,
- * line 32; corpus: ca-540-inst-2025::sec::agi-limitation-worksheet).
- * Phases out exemption credits when federal AGI (540 line 13) exceeds
- * the filing-status threshold: $6 per credit for each $2,500 ($1,250 MFS)
- * or part of it over the threshold. Whole dollars only.
+ * CA AGI Limitation Worksheet (540 instructions, line 32): $6 per credit for each $2,500
+ * ($1,250 MFS) or part of it over the threshold.
  */
 
 import { atLeast, stepsOf } from "../money.js";
@@ -19,19 +16,18 @@ const THRESHOLDS_2025: Record<FilingStatus, number> = {
 
 export interface CaAgiLimitationInputs {
   filingStatus: FilingStatus;
-  /** Line a: Form 540 line 13 (federal AGI). */
+  /** Line a: Form 540 line 13. */
   federalAgi: number;
-  /** Line f: number of exemptions in the boxes on lines 7, 8, 9. */
+  /** Line f: exemption count on lines 7, 8, 9. */
   personalCount: number;
   /** Line h: dollar total of lines 7, 8, 9. */
   personalAmount: number;
-  /** Line j: number of dependents on line 10. */
+  /** Line j: dependent count on line 10. */
   dependentCount: number;
-  /** Line l: dollar amount on line 10. */
+  /** Line l: line 10 amount. */
   dependentAmount: number;
 }
 
-/** Line n: exemption credits after the limitation (Form 540 line 32). */
 export function caExemptionCreditsAfterLimit(inputs: CaAgiLimitationInputs): number {
   const total = inputs.personalAmount + inputs.dependentAmount;
   const excess = inputs.federalAgi - THRESHOLDS_2025[inputs.filingStatus]; // line c

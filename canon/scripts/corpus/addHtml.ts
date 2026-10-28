@@ -1,17 +1,6 @@
 /*
- * Add (or refresh) a corpus document whose source is a publisher web page.
- * Fetches the page, cleans it (refdocs/html/cleanFtb.ts), and writes the
- * cleaned HTML plus its sidecar into a sources folder:
- *
- *   npm run corpus -- add-html <url> --dir 2025/forms/state/ca/540 --doc-id ca-540-inst-2025
- *
- * The HTML file is gitignored; the sidecar (with the cleaned file's
- * sha256 and "format": "html") is what gets committed. Run `corpus sync`
- * afterwards to ingest. On an existing sidecar, flags left out keep their
- * values, so a re-run after FTB edits the page only refreshes the sha256
- * and the date: the page's "Revised: MM/YYYY" line, or --published.
- * FTB's tax-year pages show no date, so their sidecars have none
- * (refdocs/published.ts).
+ * On an existing sidecar, flags left out keep their values, so a re-run
+ * after FTB edits the page refreshes only the sha256 and the date.
  */
 
 import { SOURCES_ROOT } from "@openreturn/sources";
@@ -31,7 +20,7 @@ async function readJson(path: string): Promise<Record<string, unknown> | null> {
   }
 }
 
-/* Left out of the sidecar when unknown: a fetch date is not a publication date. */
+/* A fetch date is not a publication date, so an unknown date is left out. */
 const withPublished = (published: unknown) => (isPublishedDate(published) ? { published } : {});
 
 async function run(argv: string[]): Promise<void> {

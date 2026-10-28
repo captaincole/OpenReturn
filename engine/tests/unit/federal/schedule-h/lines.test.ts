@@ -1,7 +1,4 @@
-/*
- * Schedule H lines A–C and the parts they open (2025 Schedule H). Each
- * row is one household-employee situation.
- */
+/* Source: 2025 Schedule H, lines A–C. */
 
 import { describe, expect, it } from "vitest";
 import type {

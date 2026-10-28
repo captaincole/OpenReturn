@@ -1,10 +1,6 @@
 "use client";
 
-/*
- * Light/dark switch for the top bars. The icon follows <html data-theme>
- * through the `light:` variant, so the button keeps no React state and
- * server and client render the same markup.
- */
+/* No React state: the icon follows data-theme via `light:`, so SSR and client markup match. */
 
 import { toggleTheme } from "@/lib/theme";
 

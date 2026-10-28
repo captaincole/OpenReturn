@@ -1,10 +1,3 @@
-/*
- * Top bar for the person-scope pages (home, /ask, /library — no active
- * return). Brand logo, page title, a link to the reference library, the
- * theme switch, avatar tag. The caller derives `initials` with deriveProfile
- * (display name, or email as the fallback).
- */
-
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
 

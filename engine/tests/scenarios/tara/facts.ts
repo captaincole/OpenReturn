@@ -1,10 +1,4 @@
-/*
- * Tara Black — facts (the "data").
- *
- * IRS ATS test scenario 1 (tax year 2025), moved from Ohio to
- * California. Every dollar amount is the IRS package's; see
- * docs/RELOCATION.md for what changed and what was added.
- */
+/* Source: IRS ATS test scenario 1 (2025), moved from OH to CA. Changes: docs/RELOCATION.md. */
 
 import {
   HOME_ENERGY_KEYS,
@@ -24,7 +18,6 @@ export const TARA_TAX_YEAR = 2025;
 
 const CREATED_AT = "2026-10-18T00:00:00Z";
 
-/** One fact row. `id` is derived from the key so it stays stable. */
 const fact = (category: string, key: string, value: unknown, sourceNote: string): TaxFactRow => ({
   id: `f-${key.replace(/[^a-z0-9]+/gi, "-")}`,
   userId: TARA_USER_ID,
@@ -75,10 +68,7 @@ const cAndR: W2FactValue = {
   box17: 416,
 };
 
-/*
- * docs/03-household-employee-w-2-copy-d.pdf (made by us from IRS
- * Schedule H, PDF page 9: $3,100 cash wages, no withholding).
- */
+// docs/03-household-employee-w-2-copy-d.pdf (made by us from IRS Schedule H, PDF page 9)
 const rosaDelgado: HouseholdEmployeeFactValue = {
   employeeName: "Rosa Delgado",
   employerEin: "00-0000029",
@@ -90,9 +80,8 @@ const rosaDelgado: HouseholdEmployeeFactValue = {
 };
 
 /*
- * docs/04–06 (made by us from IRS Form 5695, PDF pages 12–13). Door,
- * window, and insulation costs leave out installation labor; central
- * air costs include it.
+ * docs/04–06 (made by us from IRS Form 5695, PDF pages 12–13). Door, window, and
+ * insulation costs leave out installation labor; central air costs include it.
  */
 const doors: EnergyInvoiceFactValue = {
   vendorName: "Bay Area Door & Entry",

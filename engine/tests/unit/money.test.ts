@@ -25,10 +25,7 @@ describe("roundDollars", () => {
 
 describe("roundDollars on calculated lines (decided 2026-10-16)", () => {
   it("rounds a percentage to the nearest dollar, not up", () => {
-    /*
-     * Some preparers round a 20% line like this up. The IRS rule (1040
-     * instr., "Rounding Off to Whole Dollars") is nearest.
-     */
+    /* Some preparers round this up. IRS 1040 instr., "Rounding Off to Whole Dollars": nearest. */
     expect(roundDollars(70001 * 0.2)).toBe(14000); // 14,000.20
     expect(roundDollars(13885 * 0.15)).toBe(2083); // 2,082.75
   });
@@ -43,10 +40,8 @@ describe("sum", () => {
 
   it("counts a non-numeric term as 0 (a documented trade-off)", () => {
     /*
-     * Cross-form reads widen to `unknown`, so a text value can reach a
-     * sum. The engine drops it instead of throwing mid-evaluation. A
-     * string here is an upstream bug: the binding should read a numeric
-     * field. Pinned so a change to this choice is deliberate.
+     * A string here is an upstream bug, but the engine drops it instead of
+     * throwing mid-evaluation. Pinned so a change is deliberate.
      */
     expect(sum(100, "7")).toBe(100);
   });

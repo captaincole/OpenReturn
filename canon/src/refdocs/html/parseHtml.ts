@@ -4,31 +4,17 @@ import { MAX_BLOCK_CHARS, splitRange } from "../chunk";
 import type { ParsedDoc } from "../parse";
 
 /*
- * A cleaned HTML document (html/cleanFtb.ts) → the same rows the PDF
- * parser produces, so contextualize, embed and search need no changes.
- *
- * The canonical text is the document's readable text: one unit per
- * heading, paragraph, list item, definition pair or table row, joined by
- * blank lines. Sections are the h2–h4 headings (id = the heading's anchor,
- * which the cleaner set to its slug); parentSectionId follows the heading
- * levels. Blocks pack whole units of one section up to MAX_BLOCK_CHARS;
- * a table never shares a block with prose. Units that only make sense
- * together are packed as one: a list's items, and the paragraph before a
- * list with the list ("Note: You cannot report the following…" + its
- * items), so a block never holds a list without the sentence that says
- * what it is. A table
- * row carries its column headers ("(a) 1/1/25–3/31/25: 4"), so a row is
- * readable on its own. HTML has no pages: everything is page 1.
+ * Produces the same rows as the PDF parser. A list packs with the sentence
+ * that introduces it, and a table row carries its column headers, so each
+ * block reads on its own. HTML has no pages: everything is page 1.
  */
 
 type UnitKind = "heading" | "text" | "row";
 interface Unit {
   kind: UnitKind;
   text: string;
-  /** Headings only. */
   level?: number;
   anchor?: string;
-  /** The list or definition list the unit belongs to; its units pack together. */
   group?: Element;
 }
 
@@ -45,8 +31,6 @@ export function parseHtmlDoc(html: string, docId: string): ParsedHtml {
   const { canonicalText, spans } = layout(units);
   return { canonicalText, ...buildRows(docId, canonicalText, units, spans) };
 }
-
-/* ---------- units ---------- */
 
 function collectUnits($: cheerio.CheerioAPI, nodes: AnyNode[]): Unit[] {
   return nodes.flatMap((node): Unit[] => {
@@ -70,7 +54,7 @@ function collectUnits($: cheerio.CheerioAPI, nodes: AnyNode[]): Unit[] {
     if (tag === "table") return tableUnits($, el);
     if (tag === "img") return textUnit(imageText(el));
     if (["p", "h5", "h6", "blockquote", "figcaption"].includes(tag)) return textUnit(textOf($, el));
-    return collectUnits($, el.children); // figure, or a stray inline element
+    return collectUnits($, el.children);
   });
 }
 
@@ -98,7 +82,6 @@ function listMarker(type: string, n: number): string {
 
 const prefixed = (marker: string, text: string) => (text ? `${marker} ${text}` : "");
 
-/* "Yes: Complete the AGI Limitation Worksheet…" — one unit per term. */
 function definitionUnits($: cheerio.CheerioAPI, dl: Element): Unit[] {
   const groups: { term: string; details: string[] }[] = [];
   $(dl)
@@ -114,7 +97,6 @@ function definitionUnits($: cheerio.CheerioAPI, dl: Element): Unit[] {
     .map((u) => ({ ...u, group: dl }));
 }
 
-/* One unit per body row: the row label, then "header: value" for each filled cell. */
 function tableUnits($: cheerio.CheerioAPI, table: Element): Unit[] {
   const rows = $(table).find("tr").toArray();
   const grid = tableGrid($, rows);
@@ -138,12 +120,7 @@ function rowUnit(cells: string[], headers: string[]): Unit[] {
   return text ? [{ kind: "row", text }] : [];
 }
 
-/*
- * The table as a grid of one-line cell texts, one array per row, so a
- * value lines up with its header. A colspan cell fills its extra columns
- * with ""; a rowspan cell repeats into the rows below (a corner cell over
- * a two-row header, a label shared by two rows).
- */
+// Expands colspan and rowspan so each value lines up with its header.
 function tableGrid($: cheerio.CheerioAPI, rows: Element[]): string[][] {
   const carried = new Map<number, { text: string; rows: number }>();
   return rows.map((tr) => {
@@ -167,7 +144,6 @@ function tableGrid($: cheerio.CheerioAPI, rows: Element[]): string[][] {
   });
 }
 
-/* Element text with <br> and nested blocks as line breaks, spaces collapsed. */
 function textOf($: cheerio.CheerioAPI, el: Element): string {
   const clone = $(el).clone();
   clone.find("br").replaceWith("\n");
@@ -177,8 +153,6 @@ function textOf($: cheerio.CheerioAPI, el: Element): string {
 }
 
 const squash = (s: string) => s.replace(/\s+/g, " ").trim();
-
-/* ---------- text + rows ---------- */
 
 function layout(units: Unit[]): { canonicalText: string; spans: [number, number][] } {
   const spans: [number, number][] = [];
@@ -190,16 +164,11 @@ function layout(units: Unit[]): { canonicalText: string; spans: [number, number]
   return { canonicalText: units.map((u) => u.text).join(SEP), spans };
 }
 
-/* A heading, or a run of content units packed as one (see `glued`). */
 type Packet =
   | { kind: "heading"; unit: Unit; index: number; start: number }
   | { kind: "content"; table: boolean; start: number; end: number };
 
-/*
- * Must `next` share a block with `prev`? Yes for two units of one list,
- * and for a paragraph followed by a list (or anything after a line ending
- * in ":"): that paragraph is the list's lead-in.
- */
+// A paragraph before a list (or ending in ":") is the list's lead-in.
 function glued(prev: Unit, next: Unit): boolean {
   if (prev.kind === "heading" || next.kind === "heading" || prev.kind !== next.kind) return false;
   if (prev.group !== undefined) return prev.group === next.group;
@@ -293,7 +262,6 @@ function section(
   };
 }
 
-/* One pending range → block rows (split only if a single packet is over the cap). */
 function packBlock(
   text: string,
   sec: ParsedDoc["sections"][number],

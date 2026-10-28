@@ -8,25 +8,11 @@ export interface UserContext {
   userId: string;
   filingId: string;
   taxYear: number;
-  /**
-   * Explicit query scoping for the libsql domain helpers — the RLS
-   * replacement.
-   */
   scope: Scope;
-  /** JWT email claim — enrichment for the engine's authEmail field. */
   authEmail: string | null;
 }
 
-/*
- * Pulls the user identity from a tool's runtime context, then resolves the
- * caller's active owner filing for the current demo tax year from the
- * libsql app DB. ownerMiddleware populates the identity upstream (the
- * instance owner from app.db — single-user model).
- *
- * filingId comes from a DB lookup: one local libsql read per tool call.
- * Throws when a required value cannot resolve — that is a misconfiguration
- * we want to surface loudly, not paper over with defaults.
- */
+/* Throws when a value cannot resolve: a misconfiguration must surface, not hide behind defaults. */
 export async function requireUserContext(
   toolContext: { requestContext?: { get: (key: string) => unknown } } | undefined,
 ): Promise<UserContext> {

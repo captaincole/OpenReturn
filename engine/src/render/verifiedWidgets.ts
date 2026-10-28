@@ -1,49 +1,22 @@
 /*
- * Hand-verified fieldId → PDF widget mapping for known forms.
- *
- * Background: the forms-pipeline AI extraction labels each AcroForm
- * widget from nearby page text. On densely clustered widgets (header
- * block, line-by-line income section) it fence-posts: it confuses
- * `your first name` with `spouse's first name`, or `line 10` with
- * `line 9`. The deterministic widget LIST is correct, because pdf-lib's
- * AcroForm enumeration is reliable, but the label-to-widget pairing
- * drifts.
- *
- * This file overlays a hand-verified mapping for the fields the AI got
- * wrong. The renderer (fillFromCatalog) checks this map first and falls
- * back to the catalog's AI-supplied pdfWidgetName for fields not listed
- * here.
- *
- * TODO(forms-pipeline): improve extraction so the AI does not fence-post
- * on adjacent widgets. Possible approaches:
- *   - feed pdf-lib's full widget-name list + position table to Claude in
- *     one pass, instead of a scan-and-label loop
- *   - validate alignment against known IRS widget naming conventions
- *     (f1_14 = taxpayer, f1_19 = spouse, etc.)
- *   - require operator confirmation when adjacent widgets share labels
- * Delete this file when the pipeline maps widgets to fields reliably.
+ * Hand-verified widget names. AI labeling fence-posts on clustered widgets
+ * (taxpayer vs spouse name, line 9 vs 10), so this map wins over the
+ * catalog's pdfWidgetName. TODO(forms-pipeline): delete it once extraction
+ * pairs labels and widgets reliably.
  */
 
 export const VERIFIED_WIDGETS: Record<string, Record<string, string>> = {
-  /*
-   * 2025 IRS Form 1040. Mappings verified by manual inspection of
-   * forms/federal/1040/blank.pdf. These are the same widget names the
-   * pre-pipeline generateTaxDocuments hand-coded.
-   */
   "form-1040": {
-    // Primary identity
     "form-1040.header.first_name": "topmostSubform[0].Page1[0].f1_14[0]",
     "form-1040.header.last_name": "topmostSubform[0].Page1[0].f1_15[0]",
     "form-1040.header.ssn": "topmostSubform[0].Page1[0].f1_16[0]",
 
-    // Home address
     "form-1040.header.address_street": "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_20[0]",
     "form-1040.header.address_apt": "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_21[0]",
     "form-1040.header.address_city": "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_22[0]",
     "form-1040.header.address_state": "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_23[0]",
     "form-1040.header.address_zip": "topmostSubform[0].Page1[0].Address_ReadOrder[0].f1_24[0]",
 
-    // Filing status checkboxes
     "form-1040.header.filing_status_single":
       "topmostSubform[0].Page1[0].Checkbox_ReadOrder[0].c1_8[0]",
     "form-1040.header.filing_status_mfj":
@@ -53,7 +26,6 @@ export const VERIFIED_WIDGETS: Record<string, Record<string, string>> = {
     "form-1040.header.filing_status_hoh": "topmostSubform[0].Page1[0].c1_8[0]",
     "form-1040.header.filing_status_qss": "topmostSubform[0].Page1[0].c1_8[1]",
 
-    // Income — page 1
     "form-1040.line.1a": "topmostSubform[0].Page1[0].f1_47[0]",
     "form-1040.line.1z": "topmostSubform[0].Page1[0].f1_57[0]",
     "form-1040.line.3a": "topmostSubform[0].Page1[0].f1_60[0]",
@@ -63,7 +35,6 @@ export const VERIFIED_WIDGETS: Record<string, Record<string, string>> = {
     "form-1040.line.10": "topmostSubform[0].Page1[0].f1_74[0]",
     "form-1040.line.11a": "topmostSubform[0].Page1[0].f1_75[0]",
 
-    // Tax & credits — page 2
     "form-1040.line.11b": "topmostSubform[0].Page2[0].f2_01[0]",
     "form-1040.line.12e": "topmostSubform[0].Page2[0].f2_02[0]",
     "form-1040.line.14": "topmostSubform[0].Page2[0].f2_05[0]",
@@ -80,23 +51,14 @@ export const VERIFIED_WIDGETS: Record<string, Record<string, string>> = {
     "form-1040.line.37": "topmostSubform[0].Page2[0].f2_35[0]",
 
     /*
-     * Signing block. The AI extraction swapped occupation and "signature
-     * date" within each row. The wider widget at x=325 (w=135, no
-     * maxLength) is the OCCUPATION text field. The narrow widget at x=504
-     * (w=72, maxLength=6) is the 6-digit IRS-mailed IP PIN. The catalog
-     * has these reversed. Signature dates have no fillable widget on this
-     * form; they are handwritten.
+     * The catalog swaps these: the wide widget is occupation, the narrow
+     * maxLength=6 one is the IP PIN. Signature dates have no widget.
      */
     "form-1040.signing.taxpayer_occupation": "topmostSubform[0].Page2[0].f2_40[0]",
     "form-1040.signing.spouse_occupation": "topmostSubform[0].Page2[0].f2_42[0]",
   },
 };
 
-/**
- * Look up a verified widget name for a (formId, fieldId). Returns `null`
- * when no verified mapping exists, so the renderer can fall back to the
- * AI catalog's pdfWidgetName.
- */
 export function verifiedWidget(formId: string, fieldId: string): string | null {
   return VERIFIED_WIDGETS[formId]?.[fieldId] ?? null;
 }

@@ -1,7 +1,3 @@
-/*
- * Form 5695 must-file and the home answers it asks for.
- */
-
 import { describe, expect, it } from "vitest";
 import {
   HOME_ENERGY_KEYS,

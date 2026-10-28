@@ -13,7 +13,6 @@ import { loadAndEvaluateScenario } from "../loadScenario";
 import { buildCaseStateForScenario } from "./caseState";
 import { requireUserContext } from "./userContext";
 
-/** Identity of the render target — threaded through the render helpers. */
 interface RenderTarget {
   userId: string;
   filingId: string;
@@ -34,10 +33,6 @@ function serializeForm<F extends AnyFormField>(
   jurisdiction: string;
   title: string;
   mustFile: EvaluatedForm<F>["mustFile"];
-  /**
-   * Audit trail for the must-file determination. Present when the resolver
-   * populated it for this form. See EngineDerivation.
-   */
   mustFileDerivation: EvaluatedForm<F>["mustFileDerivation"];
   fields: Array<{
     fieldId: string;
@@ -89,11 +84,7 @@ function countFields(form: EvaluatedForm<AnyFormField>): {
   };
 }
 
-/*
- * Render one must-file form to PDF, store it as a drafts document, and
- * return the pieces the accumulator needs. Render warnings pass through
- * to the server log — a non-empty list is a soft regression.
- */
+/* A non-empty warnings list is a soft regression. */
 async function renderAndStoreForm(
   scenario: EvaluatedScenario,
   spec: (typeof FORMS)[number],
@@ -119,13 +110,6 @@ async function renderAndStoreForm(
   return { url: `/documents/${doc.id}`, filename, linesPopulated: rendered.size };
 }
 
-/*
- * ─── Render every form whose mustFile predicate evaluates true ───
- * Every scenario we model files the 1040; its mustFile reads the
- * decisions.scope.must_file_federal flag. Other forms gate per scenario
- * via their own mustFile decisions. Example: Alejandro files 8949,
- * Schedule D, Schedule CA, and 540; Alex files only 1040 + 540.
- */
 async function renderMustFileForms(scenario: EvaluatedScenario, target: RenderTarget) {
   const documents: Array<{ formId: string; url: string; filename: string }> = [];
   const blockers: Array<{ formId: string; reason: string; missingDecisionKey: string | null }> = [];
@@ -140,12 +124,7 @@ async function renderMustFileForms(scenario: EvaluatedScenario, target: RenderTa
       continue;
     }
     if (!form.mustFile.ok) {
-      /*
-       * Must-file could not evaluate. The usual cause is a missing
-       * decision (e.g. decisions.scope.must_file_federal was never
-       * recorded). Surface it so the agent records the decision instead
-       * of mistaking "nothing rendered" for a completed hand-off.
-       */
+      /* Surface it: the agent must record the decision, not read "nothing rendered" as done. */
       blockers.push({
         formId: spec.formId,
         reason: form.mustFile.reason,
@@ -153,7 +132,6 @@ async function renderMustFileForms(scenario: EvaluatedScenario, target: RenderTa
       });
       continue;
     }
-    /* mustFile false: out of scope — skip render, sidecar entry, counts. */
     if (!form.mustFile.value) continue;
 
     const { url, filename, linesPopulated } = await renderAndStoreForm(scenario, spec, target);
@@ -171,12 +149,7 @@ async function renderMustFileForms(scenario: EvaluatedScenario, target: RenderTa
   return { documents, blockers, sidecarForms, totalLinesPopulated, totalCounts };
 }
 
-/*
- * ─── Sidecar — every rendered form ───
- * The caller skips it when nothing rendered: an empty sidecar only
- * invites "here's your forms data" messages that point at a useless JSON
- * file.
- */
+/* Skipped when nothing rendered: an empty sidecar invites links to a useless JSON file. */
 async function writeSidecar(opts: {
   userId: string;
   filingId: string;
@@ -205,10 +178,8 @@ async function writeSidecar(opts: {
 }
 
 /*
- * ─── Gate: nothing renders while an input is pending ───
- * A form can compute with a missing input and show a wrong but plausible
- * number (no filing status → zero standard deduction and zero tax). So the
- * tool renders only when get-case-state reports nothing pending.
+ * Nothing renders while an input is pending: a missing input can give a wrong but plausible
+ * number (no filing status → zero standard deduction and zero tax).
  */
 function pendingInputsResult(pendingDecisions: string[], pendingFacts: string[]) {
   return {
@@ -236,17 +207,10 @@ export const generateTaxDocuments = createTool({
     year: z.number().int(),
   }),
   outputSchema: z.object({
-    /**
-     * "ok" — at least one form rendered. "pending_inputs" — nothing was
-     * generated; pendingDecisions / pendingFacts list what to record first.
-     * "no_forms_rendered" — nothing was generated; blockers explain why.
-     * Unless "ok", present no links and no numbers.
-     */
+    /** Unless "ok", nothing was generated: present no links and no numbers. */
     status: z.enum(["ok", "pending_inputs", "no_forms_rendered"]),
-    /** Same lists as get-case-state. Non-empty only with status "pending_inputs". */
     pendingDecisions: z.array(z.string()),
     pendingFacts: z.array(z.string()),
-    /** Forms whose must-file check could not evaluate — usually a missing decision. */
     blockers: z.array(
       z.object({
         formId: z.string(),
@@ -254,11 +218,9 @@ export const generateTaxDocuments = createTool({
         missingDecisionKey: z.string().nullable(),
       }),
     ),
-    /** Convenience: the 1040 URL ("" when the 1040 did not render). */
+    /** The 1040 URL, "" when it did not render. */
     url: z.string(),
-    /** Convenience: the 540 URL (null when not filed). Kept for prior consumers. */
     form540Url: z.string().nullable(),
-    /** Every rendered form keyed by formId — the canonical list going forward. */
     documents: z.array(
       z.object({
         formId: z.string(),
@@ -266,16 +228,9 @@ export const generateTaxDocuments = createTool({
         filename: z.string(),
       }),
     ),
-    /**
-     * Ready-to-paste markdown bullet list of the rendered documents. Paste
-     * it VERBATIM when presenting forms to the user — do not retype the
-     * URLs. Empty string when no forms rendered.
-     */
     markdownLinks: z.string(),
-    /** Null when no forms rendered (no sidecar is written). */
     sidecarUrl: z.string().nullable(),
     linesPopulated: z.number(),
-    /** Null when the 1040 did not render — there is no federal result to report. */
     federalRefundOrOwed: z
       .object({
         kind: z.enum(["refund", "owed", "balanced"]),
@@ -310,11 +265,7 @@ export const generateTaxDocuments = createTool({
     const sidecarUrl =
       documents.length > 0 ? await writeSidecar({ userId, filingId, year, sidecarForms }) : null;
 
-    /*
-     * ─── Refund/owed summaries ───
-     * Only compute these for forms that rendered. A blocked 1040 would
-     * otherwise report a vacuous "balanced $0".
-     */
+    /* Rendered forms only: a blocked 1040 would report a vacuous "balanced $0". */
     const form1040 = forms.get("form-1040");
     const form540 = forms.get("form-540");
     const federalRefundOrOwed =
@@ -330,16 +281,10 @@ export const generateTaxDocuments = createTool({
           )
         : null;
 
-    // ─── Backwards-compat URL fields ───
     const url1040 = documents.find((d) => d.formId === "form-1040")?.url ?? "";
     const url540 = documents.find((d) => d.formId === "form-540")?.url ?? null;
 
-    /*
-     * ─── Verbatim-paste markdown ───
-     * The ONLY link text the agent should put in chat. This prevents
-     * hand-composed document links, which were historically malformed or
-     * fabricated.
-     */
+    /* The ONLY link text the agent may paste: hand-composed links came out malformed or made up. */
     const markdownLinks = [
       ...documents.map((d) => `- [${d.filename}](${d.url})`),
       ...(sidecarUrl ? [`- [Forms data (JSON)](${sidecarUrl})`] : []),

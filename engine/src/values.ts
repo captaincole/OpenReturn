@@ -1,32 +1,4 @@
-/*
- * Branded primitive types for form fields and accounting slots.
- *
- * Each type is a phantom-branded primitive. The brand exists only in the
- * type checker, so runtime cost is zero, but TS treats the types as
- * nominally distinct: `SSN` cannot be assigned to `Phone`, and vice
- * versa. Bindings can return these directly into form fields whose
- * declared valueType matches the underlying primitive. The `Money`
- * brand lives in money.ts with the money rules.
- *
- * Every brand carries a default `format(value)` that the renderer uses
- * when it writes PDF widgets. Per-form overrides live next to each form's
- * bindings (see FormSpec.formatters) and take precedence over the
- * default.
- *
- * Add new brands here as the accounting layer grows. A binding that needs
- * a new shape should reference the brand in its return type, so the
- * renderer/formatter path stays exhaustive.
- */
-
-/*
- * ─── SSN ─────────────────────────────────────────────────────────────────
- * Canonical storage is the 9-digit string with NO separators
- * ("123456789"). Every per-form presentation derives from the bare
- * digits. ITINs use the same brand: both are 9 digits, and the IRS treats
- * them interchangeably on filing forms. Split the brand when a future
- * form distinguishes them.
- */
-
+// ITINs share the SSN brand: both are 9 digits on IRS forms.
 export type SSN = string & { readonly __brand: "SSN" };
 
 export const ssn = (s: string): SSN => {
@@ -38,17 +10,9 @@ export const ssn = (s: string): SSN => {
 };
 
 export const SSN = {
-  /** Default human-readable presentation: "123-45-6789". */
   format: (s: SSN): string => `${s.slice(0, 3)}-${s.slice(3, 5)}-${s.slice(5)}`,
-  /** Bare digits ("123456789"). Identity, since canonical storage IS digit-only. */
   digits: (s: SSN): string => s,
 };
-
-/*
- * ─── EIN ─────────────────────────────────────────────────────────────────
- * Employer identification number. Canonical storage is 9 bare digits.
- * Default presentation matches the IRS format "##-#######".
- */
 
 export type EIN = string & { readonly __brand: "EIN" };
 
@@ -61,19 +25,9 @@ export const ein = (s: string): EIN => {
 };
 
 export const EIN = {
-  /** Default presentation: "36-1234567". */
   format: (e: EIN): string => `${e.slice(0, 2)}-${e.slice(2)}`,
-  /** Bare digits. Identity. */
   digits: (e: EIN): string => e,
 };
-
-/*
- * ─── Phone ───────────────────────────────────────────────────────────────
- * Canonical storage is 10 bare digits ("7039530253"). Default
- * presentation is dashed "###-###-####". Per-form overrides can switch to
- * parens ("(703) 953-0253") or digit-only to match the widget's
- * convention.
- */
 
 export type Phone = string & { readonly __brand: "Phone" };
 
@@ -86,18 +40,10 @@ export const phone = (s: string): Phone => {
 };
 
 export const Phone = {
-  /** Default human-readable presentation: "703-953-0253". */
   format: (p: Phone): string => `${p.slice(0, 3)}-${p.slice(3, 6)}-${p.slice(6)}`,
-  /** Bare digits. Identity. */
   digits: (p: Phone): string => p,
-  /** Parens style: "(703) 953-0253". */
   parens: (p: Phone): string => `(${p.slice(0, 3)}) ${p.slice(3, 6)}-${p.slice(6)}`,
 };
-
-/*
- * ─── ISODate ─────────────────────────────────────────────────────────────
- * "YYYY-MM-DD". The renderer formats per form (some want "MM/DD/YYYY").
- */
 
 export type ISODate = string & { readonly __brand: "ISODate" };
 
@@ -110,7 +56,6 @@ export const isoDate = (s: string): ISODate => {
 
 export const ISODate = {
   format: (d: ISODate): string => d,
-  /** "MM/DD/YYYY", the format every IRS/FTB PDF widget expects. */
   usSlash: (d: ISODate): string => {
     const [y, m, day] = d.split("-");
     return `${m}/${day}/${y}`;
@@ -118,11 +63,8 @@ export const ISODate = {
 };
 
 /*
- * ─── FilingStatus ────────────────────────────────────────────────────────
- * Discriminated value, not a brand. The long form matches the AI decision
- * vocabulary (`decisions.scope.filing_status`) and the tax-table API's
- * column names. Keep them aligned so resolvers and table lookups need no
- * translation table.
+ * Matches `decisions.scope.filing_status` and the tax-table column names.
+ * Keep them aligned, so no translation table is needed.
  */
 
 export type FilingStatus =

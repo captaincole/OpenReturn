@@ -1,13 +1,7 @@
 /*
- * Form 8949 copy plan. The IRS allows one box per Form 8949 page and 11
- * rows per part, so a return with sales in several boxes files several
- * copies. The engine keeps Form 8949 as ONE form (copy 1, the
- * default `form8949CopyIndex`); the renderer evaluates it once per copy
- * and merges the pages. Schedule D reads the per-box totals.
- *
- * Plan: group the sales by box (letter order), cut each group into pages
- * of 11 rows, then pair Part I page n with Part II page n as copy n.
- * Rows keep the order the broker statement lists them (ingest order).
+ * IRS: one box per Form 8949 page, 11 rows per part. The engine keeps one
+ * form; the renderer evaluates it once per copy and merges the pages.
+ * Rows keep broker-statement (ingest) order.
  */
 
 import type { Form8949Box, TradeFactValue } from "../../facts/index.js";
@@ -32,7 +26,6 @@ const PART_II_BOXES: Form8949Box[] = [
   "partII.boxL",
 ];
 
-/** A sale with its Form 8949 box and the basis that applies (broker or taxpayer-reported). */
 export interface BoxedTrade {
   trade: TradeFactValue;
   box: Form8949Box;
@@ -49,7 +42,7 @@ export interface Form8949Copy {
   partII?: Form8949Page;
 }
 
-/** Column totals for one box across every copy, in cents (not rounded). */
+/** Across every copy; not rounded. */
 export interface BoxTotals {
   proceeds: number;
   cost: number;

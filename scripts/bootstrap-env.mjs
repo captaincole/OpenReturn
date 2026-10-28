@@ -1,14 +1,8 @@
 /*
- * Zero-config first boot: generate .env.development for each package
- * (canon, cade, web, engine/builder) when missing, with the .data paths filled in as absolute paths for THIS
- * clone. Module-relative defaults resolve differently inside Mastra's
- * bundled output than in tsx scripts. Pinned absolute paths keep every
- * entry point on the same files.
- *
- * Runs automatically via the root predev, predev:canon, predev:web and
- * preform-engine hooks.
- * Idempotent: an existing .env.development is never touched. Delete the
- * file to regenerate it.
+ * Writes each package's .env.development when missing (root predev hooks).
+ * The .data paths are absolute for this clone: module-relative defaults
+ * resolve differently inside Mastra's bundle than in tsx scripts.
+ * Never overwrites an existing file; delete it to regenerate.
  */
 
 import { existsSync, writeFileSync } from "node:fs";
@@ -20,7 +14,6 @@ const PRIVATE = 0o600;
 
 const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const DATA = join(ROOT, "cade", ".data");
-/* Canon owns the reference corpus. */
 const CANON_DATA = join(ROOT, "canon", ".data");
 
 const canonEnvPath = join(ROOT, "canon", ".env.development");

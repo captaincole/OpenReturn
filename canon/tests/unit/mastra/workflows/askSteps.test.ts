@@ -2,11 +2,7 @@ import type { Mastra } from "@mastra/core";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import type { AnswerQuestionInput, AskStepLog } from "../../../../src/mastra/workflows/ask";
 
-/*
- * The query log belongs to the caller: when a judge throws mid-pipeline,
- * the steps that ran must still be in the caller's array (Cade writes
- * them to the failed turn's log_json, the record we diagnose from).
- */
+// A failed turn's log is the record we diagnose from, so a throw must keep the steps.
 
 vi.mock("../../../../src/db/corpusSearch", () => ({
   hybridSearchRefDocs: async ({ query }: { query: string }) => [

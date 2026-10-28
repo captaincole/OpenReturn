@@ -1,23 +1,6 @@
-/*
- * Per-field IRS-instruction retrieval. Phase D feeds the binding
- * classifier the most relevant 2-3 blocks from the IRS reference corpus
- * for each form field. Claude then grounds rule + params choices in the
- * regulatory text instead of guessing from the field label alone.
- *
- * Uses Canon's searchRefDocs over MCP (hybrid retrieval: FTS leg + local
- * embedding vector leg, merged by reciprocal rank fusion), so Canon must
- * be running (npm run dev:canon). Fields run in parallel under a
- * concurrency cap.
- */
-
 import type { FieldInventory } from "@openreturn/engine/catalog";
 import { searchCanon } from "./canonSearch";
 
-/*
- * Minimal block shape. The classifier only needs the citation (for the
- * rationale's "ref:" tags) and the text body. The small shape lets the
- * workflow's Zod carrier schema match it exactly.
- */
 export interface RetrievedBlock {
   blockId: string;
   docId: string;
@@ -33,9 +16,7 @@ export interface RetrievedFieldContext {
 export interface RetrieveOpts {
   fields: FieldInventory[];
   formTitle: string;
-  /** Top-K blocks retained per field after merging. */
   topK?: number;
-  /** How many fields to retrieve for in parallel. */
   concurrency?: number;
 }
 
@@ -77,12 +58,7 @@ export async function retrieveContextPerField(
   return out;
 }
 
-/*
- * The retrieval query combines the form title and the field's label so
- * the embedding lands in the right neighborhood. The line number parsed
- * from the fieldId is included because IRS instructions reference specific
- * lines ("Line 1a", "Line 11"), which helps FTS find the right section.
- */
+/* "Line 1a" in the query helps FTS: the instructions name their lines that way. */
 function buildFieldQuery(field: FieldInventory, formTitle: string): string {
   const linePart = parseLineNumber(field.fieldId);
   const linePhrase = linePart ? `Line ${linePart}` : "";

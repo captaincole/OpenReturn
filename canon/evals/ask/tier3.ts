@@ -9,7 +9,6 @@ import {
   type AskCase,
 } from "./caseKit";
 
-/* Tier 3: two or more passages, usually federal and California. */
 export const TIER_3: AskCase[] = [
   {
     name: "$260k wages: Additional Medicare + CA exemption",

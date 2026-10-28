@@ -5,21 +5,6 @@ import type { Context } from "hono";
 import { addAskTurn, createAskThread, getAskThread } from "../../db/askThreads";
 import { runAskTurn } from "../../workflows/askTurn";
 
-/*
- * Tax-code Q&A ("Ask the tax code"), person-scoped:
- *
- *   POST /app/ask                    { question } → { threadId, turnId }
- *   POST /app/ask/:threadId/turns    { question } → { threadId, turnId }
- *   GET  /app/ask/:threadId          → AskThread (every turn, oldest first)
- *
- * The POSTs insert a 'running' turn, start the answer pipeline in the
- * background (workflows/askTurn) and return at once. The page polls the
- * GET until the turn is 'completed' or 'failed'.
- *
- * Errors: 401 no instance owner · 400 missing/too-long question ·
- * 404 unknown thread · 409 the thread already has a running turn.
- */
-
 const MAX_QUESTION_CHARS = 2000;
 
 function callerOf(c: Context): string | undefined {

@@ -1,11 +1,4 @@
-/*
- * The comparison report a checker sends to a maintainer.
- *
- * Two files: Markdown for people (renderReport) and JSON for a future
- * stats script (reportData, REPORT_SCHEMA). It never holds a dollar amount, a name, or a fact key:
- * only field ids, drift buckets, root causes, and input counts. The
- * checker reviews it before sending.
- */
+/* PRIVACY: the report never holds a dollar amount, a name, or a fact key. */
 
 import type { Preparer } from "../../tests/types.js";
 import type { CompareResult, LineDiff, LineStatus } from "./compare.js";
@@ -27,7 +20,6 @@ export interface ReportInput {
   result: CompareResult;
   roots: RootCause[];
   shape: InputShape;
-  /** Filed lines typed with cents (a filed return shows whole dollars). */
   centsLines: string[];
   support: SupportIssue[];
 }
@@ -55,7 +47,7 @@ function preparerLine(p: Preparer | undefined): string {
   return style.length > 0 ? `${who} (rounding: ${style.join(", ")})` : who;
 }
 
-/** Presence only, never an amount. (A blank return line is its own status.) */
+/** Presence only, never an amount. */
 function blankSide(d: LineDiff): string {
   return d.filed !== 0 && (d.engine === null || d.engine === 0) ? "engine leaves blank" : "";
 }
@@ -99,7 +91,6 @@ const SUPPORT_TEXT: Record<SupportIssue["kind"], string> = {
   form_not_modeled: "Form not modeled",
 };
 
-/** Does the engine cover this return? Differences caused by gaps here are expected. */
 export function supportSection(input: ReportInput): string[] {
   const out = ["## Support check", ""];
   for (const i of input.support) {
@@ -164,7 +155,6 @@ function diffTable(r: CompareResult, roots: RootCause[]): string[] {
   return [...out, ""];
 }
 
-/** The JSON file: the same facts as the Markdown, for a stats script. */
 export function reportData(input: ReportInput): Record<string, unknown> {
   const { result } = input;
   return {
@@ -181,7 +171,6 @@ export function reportData(input: ReportInput): Record<string, unknown> {
   };
 }
 
-/** The headline and summary sections; also printed to the terminal. */
 export function reportHead(input: ReportInput): string[] {
   const { result } = input;
   const matched = Object.values(result.matches).reduce((n, ids) => n + ids.length, 0);

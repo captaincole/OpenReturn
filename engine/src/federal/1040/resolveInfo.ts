@@ -1,8 +1,3 @@
-/*
- * Form 1040 slot resolver (composed by resolveFilingInfo). Lives next to
- * the form; the shared readers come from resolverInputs.ts.
- */
-
 import {
   SPOUSE_KEYS,
   isDividendFactKey,
@@ -30,12 +25,8 @@ import {
 import type { Form1040FilingInfo, RetirementLine } from "./filingInfo.js";
 
 /*
- * 1099-INT sums: box1 (taxable) and box8 (tax-exempt). The filter pins
- * each aggregate to its source section, because future 1099 sections
- * (OID, MISC) may reuse low-number box names. When the taxpayer has NO
- * interest facts at all, the slots stay undefined rather than 0. The
- * renderer then leaves the cells blank instead of writing "0", which
- * matches the CPA-golden convention.
+ * The filter pins each box to 1099-INT: other 1099 sections may reuse low
+ * box names. No interest facts: undefined, so the cells stay blank, not "0".
  */
 function resolveInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
   const hasInterest = inputs.facts.some(
@@ -61,21 +52,14 @@ function resolveInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
 }
 
 /*
- * 1099-R facts (category "retirement") → 1040 lines 4a–4c and 5a–5c.
- * Lines 4a/4b take IRA distributions: box 7 IRA/SEP/SIMPLE checked, or a
- * Roth IRA code (J, Q, T). The payer leaves that box blank for a Roth
- * IRA (1099-R instructions), but a Roth IRA is an IRA (1040
- * instructions, lines 4a and 4b). Every other 1099-R is a pension or
- * annuity (lines 5a/5b). Gross = box 1, taxable = box 2a. Codes G and H
- * are direct rollovers. No 1099-R facts: both stay blank.
+ * A Roth IRA is an IRA (1040 inst., lines 4a/4b), but the payer leaves box 7
+ * IRA/SEP/SIMPLE blank for one (1099-R inst.). Codes J, Q, T mark it.
  */
 const ROTH_IRA_CODES = /[JQT]/;
 
 /*
- * One 1099-R's taxable amount; undefined blocks the taxable line.
- * Code Q (qualified Roth IRA distribution) is not taxable by rule. For
- * codes J and T the taxable part comes from Form 8606 Part III, which is
- * not modeled, so box 2a is not used.
+ * Code Q is not taxable. Codes J and T take the taxable part from Form 8606
+ * Part III, which is not modeled, so box 2a is not used.
  */
 export function rowTaxable(r: RetirementDistributionFactValue): number | undefined {
   if (r.box7.includes("Q")) return 0;
@@ -113,10 +97,6 @@ function socialSecurityRows(inputs: ResolverInputs): SocialSecurityFactValue[] {
     .map((row) => row.value as SocialSecurityFactValue);
 }
 
-/*
- * Line 25b: box 4 of 1099-INT, 1099-DIV, 1099-B, and 1099-R, plus
- * SSA-1099 box 6. Blank (undefined) when nothing was withheld.
- */
 function form1099Withholding(
   inputs: ResolverInputs,
 ): Form1040FilingInfo["form1099FederalWithholding"] {
@@ -128,12 +108,7 @@ function form1099Withholding(
   return total > 0 ? (total as Form1040FilingInfo["form1099FederalWithholding"]) : undefined;
 }
 
-/*
- * Line 7a without Schedule D (1040 instructions, line 7a, Exception 1):
- * only capital gain distributions, none with a 1099-DIV box 2b, 2c, or
- * 2d amount. The Schedule D must-file decision makes that call; when it
- * says "do not file", 1099-DIV box 2a goes straight to line 7a.
- */
+/* 1040 inst. line 7a, Exception 1: without Schedule D, 1099-DIV box 2a goes to line 7a. */
 function capitalGainDistributionsNoScheduleD(
   inputs: ResolverInputs,
 ): Form1040FilingInfo["capitalGainDistributionsNoScheduleD"] {
@@ -192,7 +167,6 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
       }),
     },
     hasDigitalAssets,
-    // No W-2 at all: lines 1a and 25a stay blank, not "0".
     w2WagesTotal: hasW2(inputs)
       ? (sumW2Box(inputs, "box1") as Form1040FilingInfo["w2WagesTotal"])
       : undefined,

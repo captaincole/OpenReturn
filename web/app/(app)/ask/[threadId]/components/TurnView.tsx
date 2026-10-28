@@ -1,11 +1,5 @@
 "use client";
 
-/*
- * One question and its answer. The answer text carries `[n]` markers;
- * each one links to the numbered reference card below it. The cards show
- * the top few by default; a marker for a hidden card reveals the rest.
- */
-
 import type { AskCitation, AskStage, AskTurn } from "@/lib/ask";
 import Link from "next/link";
 import { Fragment, useState } from "react";
@@ -53,7 +47,6 @@ function CompletedAnswer({ turn }: { turn: AskTurn }) {
   const hiddenCount = Math.max(0, turn.citations.length - VISIBLE_REFERENCES);
   const visible = showAll ? turn.citations : turn.citations.slice(0, VISIBLE_REFERENCES);
 
-  // Reveal the card if it is hidden, then scroll to it after the render.
   function jumpTo(n: number) {
     if (n > VISIBLE_REFERENCES) setShowAll(true);
     setHighlighted(n);
@@ -105,7 +98,6 @@ function CompletedAnswer({ turn }: { turn: AskTurn }) {
   );
 }
 
-/* Partial or missing coverage: say so, and name the documents that would cover it. */
 function CoverageNote({ turn }: { turn: AskTurn }) {
   if (turn.coverage !== "partial" && turn.coverage !== "not_covered") return null;
   const docs = turn.missingDocuments;
@@ -122,7 +114,6 @@ function CoverageNote({ turn }: { turn: AskTurn }) {
   );
 }
 
-/* Splits on [n] markers; a marker with a matching citation becomes a button. */
 function AnswerText({
   text,
   citations,

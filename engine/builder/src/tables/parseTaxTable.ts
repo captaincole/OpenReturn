@@ -1,17 +1,7 @@
 /*
- * Parser for the IRS Pub 17 Tax Table (publication 17, "Your Federal
- * Income Tax", section "2025 Tax Table"). The IRS publishes the same
- * numbers as the i1040gi.pdf Tax Table, but in actual HTML tables. These
- * parse far more reliably than positional PDF text.
- *
- * The page contains MANY tables (standard-deduction worksheets, EIC
- * tables, etc.). We recognize a "tax table chunk" by its shape:
- *   - 6 numeric columns: low, high, single, mfj, mfs, hoh
- *   - thead text mentions "If line 15" or "taxable income" + "Your tax is"
- *
- * The full tax table is split across many of these chunks (one per $1000
- * of income, which mirrors the PDF's page layout). We concatenate them in
- * document order, then validate coverage from 0 to $100,000 with no gaps.
+ * Pub 17's HTML tables carry the same numbers as the i1040gi.pdf Tax Table
+ * and parse far more reliably than PDF text. The page has many other
+ * tables, so tax-table chunks are found by header clues and 6 numeric columns.
  */
 
 import { load, type CheerioAPI } from "cheerio";
@@ -54,10 +44,7 @@ export function parseTaxTable(html: string): ParseResult {
     diagnostics.tablesInspected++;
     const $table = $(el);
     if (!looksLikeTaxTable($, $table)) {
-      /*
-       * Do not record a per-table reason for every non-tax table; the
-       * page has dozens of unrelated tables.
-       */
+      /* No reason per non-tax table: the page has dozens of them. */
       return;
     }
     const collected = extractRows($, $table);
@@ -75,18 +62,12 @@ export function parseTaxTable(html: string): ParseResult {
   return { rows, diagnostics };
 }
 
-// ─── Heuristics ──────────────────────────────────────────────────────────
-
 function looksLikeTaxTable($: CheerioAPI, $table: ReturnType<CheerioAPI>): boolean {
   const headText = $table.find("thead").text().toLowerCase();
   if (!headText) return false;
   const cluesMatched = TAX_TABLE_HEADER_CLUES.filter((rx) => rx.test(headText));
   if (cluesMatched.length < 2) return false;
 
-  /*
-   * Confirm the body shape: the first row has exactly 6 td's whose
-   * contents all parse as non-negative integers (comma-formatted or not).
-   */
   const $firstBodyRow = $table.find("tbody > tr").first();
   if ($firstBodyRow.length === 0) return false;
   const cells = $firstBodyRow.find("td");
@@ -97,8 +78,6 @@ function looksLikeTaxTable($: CheerioAPI, $table: ReturnType<CheerioAPI>): boole
   return true;
 }
 
-// ─── Row extraction ──────────────────────────────────────────────────────
-
 function extractRows($: CheerioAPI, $table: ReturnType<CheerioAPI>): { rows: TaxTableRow[] } {
   const rows: TaxTableRow[] = [];
   $table.find("tbody > tr").each((_, tr) => {
@@ -107,7 +86,7 @@ function extractRows($: CheerioAPI, $table: ReturnType<CheerioAPI>): { rows: Tax
     const nums = [0, 1, 2, 3, 4, 5].map((i) => parseIntCell($(cells[i]).text()));
     if (nums.some((n) => n === null)) return;
     const [low, high, single, mfj, mfs, hoh] = nums as number[];
-    if (low >= high) return; // Malformed range; skip.
+    if (low >= high) return;
     rows.push({ low, high, single, mfj, mfs, hoh });
   });
   return { rows };
@@ -122,8 +101,6 @@ function parseIntCell(raw: string): number | null {
   return n;
 }
 
-// ─── Coverage validation ─────────────────────────────────────────────────
-
 export interface CoverageReport {
   ok: boolean;
   minIncome: number;
@@ -133,13 +110,7 @@ export interface CoverageReport {
   overlaps: { row: TaxTableRow; previousHigh: number }[];
 }
 
-/**
- * Reports whether the extracted rows cover [0, maxIncome) contiguously,
- * with no gaps or overlaps. The IRS table covers 0..100,000 in $50
- * increments for the higher bands and $25/$10/$5 increments for the
- * lowest band. The one invariant is "row[i].high === row[i+1].low" all
- * the way down.
- */
+/** IRS rows are half-open: row[i].high === row[i+1].low. Row widths vary in the lowest band. */
 export function validateCoverage(rows: TaxTableRow[]): CoverageReport {
   if (rows.length === 0) {
     return {

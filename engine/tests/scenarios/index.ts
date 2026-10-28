@@ -1,8 +1,3 @@
-/*
- * Every scenario, in run order. The golden suite (runAll.ts) and the
- * integration tests read this list. Add a new scenario here.
- */
-
 import type { Scenario } from "../types.js";
 import { alejandroScenario } from "./alejandro/index.js";
 import { alexScenario } from "./alex/index.js";

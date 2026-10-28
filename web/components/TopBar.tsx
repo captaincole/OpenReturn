@@ -1,20 +1,5 @@
 "use client";
 
-/*
- * Top bar for the return-scoped layout. It renders above the chat +
- * workspace split pane. It is the one source of truth for "where am I".
- * Per the labeling rule, chat and workspace headers DO NOT re-announce
- * the active return.
- *
- * Structure:
- *   [W → /]  [Return picker ▾]               [Cade is working] [☀] [AC]
- *
- * The return picker is the title-weight element. It uses font-semibold
- * sans because Fraunces renders numerals with cursive stylistic features
- * that read oddly on years like "2025". Activity, Forms, and Documents are
- * sections of one workspace page, not tabs here.
- */
-
 import { useAppShell } from "@/components/AppShell";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { deleteFiling, UnauthorizedError } from "@/lib/api";
@@ -30,7 +15,7 @@ interface TopBarProps {
   returns: TaxReturn[];
 }
 
-/* Active return + dropdown. The primary "where am I" cue. */
+/* Sans, not Fraunces: its cursive numerals read oddly on years like "2025". */
 function ReturnPicker({ activeReturn, returns }: TopBarProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -89,7 +74,6 @@ function ReturnPicker({ activeReturn, returns }: TopBarProps) {
   );
 }
 
-/* Avatar + account dropdown; owns the delete-filing flow. */
 function AccountMenu({ activeReturn }: { activeReturn: TaxReturn }) {
   const router = useRouter();
   const { profile, onSignOut } = useAppShell();
@@ -171,7 +155,6 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
 
   return (
     <header className="relative z-30 flex h-14 shrink-0 items-center gap-3 border-b border-border-subtle bg-bg-base/95 px-4 backdrop-blur-sm lg:px-6">
-      {/* Brand mark. Links to the all-returns page. */}
       <Link
         href="/"
         title="All returns"
@@ -186,7 +169,6 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
 
       <div className="flex-1" />
 
-      {/* Right cluster */}
       <div className="flex shrink-0 items-center gap-2">
         {cadeBusy && (
           <div className="hidden items-center gap-2 rounded-lg border border-warn/30 bg-warn/10 px-2.5 py-1.5 text-xs text-warn sm:flex">

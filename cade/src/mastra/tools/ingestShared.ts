@@ -3,12 +3,6 @@ import type { Scope } from "../db/appDb";
 import { recordFact } from "../db/taxFacts";
 import { requireUserContext } from "./userContext";
 
-/*
- * Shared pieces for the structured document-ingest tools (the 1099
- * forms, 1099-R, 1099-SA). Each tool maps one document to typed fact rows.
- */
-
-/** Shared write context for the per-section ingest helpers. */
 export interface IngestCtx {
   scope: Scope;
   userId: string;
@@ -17,7 +11,6 @@ export interface IngestCtx {
   sourceNote: string | undefined;
 }
 
-/** Write one fact row with the document's citation. */
 export async function recordIngestFact(
   ctx: IngestCtx,
   category: string,
@@ -57,11 +50,6 @@ export const slugify = (s: string): string =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-/*
- * The fields every 1099 call repeats. A consolidated statement is several
- * forms in one PDF, ingested with one call per form; the same payer and
- * accountSlug put all of them under one account.
- */
 export const statementFields = {
   year: z.number().int(),
   accountSlug: z
@@ -82,11 +70,9 @@ interface StatementInput {
   sourceNote?: string;
 }
 
-/* The account's slug in fact keys: the one the model passed, else the payer's name or TIN. */
 export const accountSlugFor = (input: Pick<StatementInput, "accountSlug" | "payer">): string =>
   input.accountSlug || slugify(input.payer.name) || `tin-${input.payer.tin.replace(/-/g, "")}`;
 
-/* The write context and account slug for one 1099 call. */
 export async function statementContext(
   input: StatementInput,
   toolContext: Parameters<typeof requireUserContext>[0],

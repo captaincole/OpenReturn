@@ -2,28 +2,11 @@ import type { EngineContext } from "./engine.js";
 import { blocked, type DerivationResult } from "./types.js";
 
 /*
- * Cross-form reads that are not ready yet. A binding that reads another
- * form's field before that form is evaluated sees `undefined`. `sum()`
- * counts it as 0 and returns ok, and the fixpoint never re-evaluates an
- * ok result. So the binding waits for the next pass instead.
- *
- * "No result" means one of three things:
- *   - The source form has no must-file result yet: not evaluated yet, so
- *     the read is pending.
- *   - The source form is filed but the field is missing: pending.
- *   - The source form is not filed, or its must-file can never resolve
- *     (a catalog-only form): `undefined` is final.
- * A read of a field that is itself waiting also waits, so the wait
- * passes through intra-form arithmetic.
- *
- * A source form outside the evaluated set never gets a must-file result,
- * so "not evaluated yet" can last forever. evaluateAllForms ends with a
- * settle pass (`ctx.settling`): reads no longer wait, and a missing value
- * counts as final, as `sum()` treats it.
- *
- * The tracker also records every field id the binding read (`readIds`).
- * The engine keeps them on the field (`reads`), so a report can tell a
- * root difference from one that only inherits an upstream difference.
+ * A cross-form read of a not-yet-evaluated form sees `undefined`. `sum()`
+ * counts it as 0 and returns ok, and the fixpoint never re-evaluates an ok
+ * result, so the binding must wait for the next pass instead. A form
+ * outside the evaluated set never gets a must-file result, so the final
+ * settle pass (`ctx.settling`) stops the wait.
  */
 
 const pendingResults = new WeakSet<object>();

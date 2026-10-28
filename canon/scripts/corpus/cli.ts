@@ -1,11 +1,4 @@
-/*
- * corpus — the RAG knowledge base, end to end. Gets instruction
- * documents into corpus.db (add-html/sync/ingest/status/reembed) and
- * operates on the db itself (fetch/check/search).
- *
- *   npm run corpus -- <command>       (or: npx tsx scripts/corpus/cli.ts)
- */
-
+// npm run corpus -- <command>
 import { config } from "dotenv";
 import { resolve } from "node:path";
 import { runCli } from "../lib/cli";
@@ -19,17 +12,14 @@ import { statusCommand } from "./status";
 import { syncCommand } from "./sync";
 
 /*
- * Same env files as Cade's and the builder's scripts: .env (personal
- * overrides) first, then .env.development (the file `mastra dev` reads,
- * written by scripts/bootstrap-env.mjs) fills the gaps. dotenv never overrides set
- * keys. Modules read the env at call time, so loading it here is early
- * enough.
+ * .env (personal overrides) first, then .env.development fills the gaps:
+ * dotenv never overrides a set key. This runs after the imports, so modules
+ * must read env at call time.
  */
 const CANON_ROOT = resolve(__dirname, "../..");
 config({ path: resolve(CANON_ROOT, ".env"), quiet: true });
 config({ path: resolve(CANON_ROOT, ".env.development"), quiet: true });
 
-// runCli catches subcommand errors and exits itself — safe to not await.
 void runCli({
   name: "corpus",
   bin: "npm run corpus --",

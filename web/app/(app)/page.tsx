@@ -1,22 +1,3 @@
-/*
- * Home-home — the person-scope landing page, above any single return.
- *
- * Server component, no client state. The parent (app)/layout.tsx gates
- * auth. No AppShell and no chat, because no return is active here.
- *
- * Sections:
- *   1. Tax code search   — question box; submitting opens /ask/<threadId>.
- *   2. Tax returns       — filings from listOwnerReturns; the empty state
- *                          shows one big "Start your 2025 filing" CTA.
- *   3. Tax estimates     — 1040-ES estimate card (placeholder, coming soon).
- *   4. Your tax picture  — four chart cards, overlay-locked until the
- *                          user has a filed return.
- *
- * The charts read mock data under the overlay because we do not capture
- * year-over-year history yet. When we do, replace the mock consts in
- * components/TaxPicture.tsx with a serverDb query and remove the overlay.
- */
-
 import { getOwnerSession } from "@/lib/localAuth";
 import { deriveProfile, type UserProfile } from "@/lib/profile";
 import { listOwnerReturns } from "@/lib/serverDb";

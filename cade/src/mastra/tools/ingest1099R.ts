@@ -7,18 +7,6 @@ import { z } from "zod";
 import { PayerSchema, recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
-/*
- * Ingest one Form 1099-R as a single structured tax_facts row. The Form
- * Engine reads it via `getRetirementDistributionFacts(facts)`.
- *
- * Convention (see engine/src/facts/kinds/retirementDistribution.ts):
- *   category: "retirement"
- *   key:      "payer.{payerSlug}.distributions.{distributionId}"
- *
- * The engine derives the 1040 treatment from the boxes (box 7 code, the
- * IRA/SEP/SIMPLE checkbox). The tool records no decisions.
- */
-
 const BoxesSchema = z.object({
   box1: z.number().describe("Gross distribution"),
   box2a: z.number().optional().describe("Taxable amount. Pass 0 when the form prints 0.00."),

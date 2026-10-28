@@ -1,10 +1,3 @@
-/*
- * Field-by-field comparison of an extracted fact value against the
- * scenario's ground truth. Pure and deterministic: no LLM judge. Only
- * fields present in the ground truth are scored, so a scenario that leaves
- * a box out does not punish a model for reading it.
- */
-
 export interface FieldResult {
   field: string;
   expected: unknown;
@@ -23,9 +16,8 @@ const normText = (v: unknown): string =>
     .replace(/[^a-z0-9]/g, "");
 
 /*
- * An unchecked checkbox may be left out: the tools treat absent as false.
- * A description is free text ("Front entry door" vs "Front entry door,
- * fiberglass"): it matches when one contains the other.
+ * The tools treat an absent checkbox as false. A free-text description matches
+ * when one contains the other.
  */
 const sameValue = (field: string, expected: unknown, got: unknown): boolean =>
   /description$/i.test(field) && got
@@ -51,9 +43,8 @@ type CodeAmount = { code: string; amount: number };
 type LabelAmount = { label: string; amount: number };
 
 /*
- * W-2 box 12 entries are keyed by code. Box 14 labels vary by employer
- * ("CA SDI" vs "SDI"), so box 14 is keyed by position after sorting by
- * amount. Other forms use box12/box14 as plain values (1099-R).
+ * Box 14 labels vary by employer ("CA SDI" vs "SDI"), so box 14 is keyed by position
+ * after a sort by amount. 1099-R uses box12/box14 as plain values.
  */
 const flattenValue = (value: unknown): Flat => {
   const v = (value ?? {}) as Record<string, unknown>;

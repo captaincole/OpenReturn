@@ -1,12 +1,3 @@
-/*
- * Generic scenario runner. Takes a Scenario (facts + decisions + per-form
- * expected results). Drives the full render pipeline (engine + PDF fill)
- * for every form in scenario.forms[], fully in memory. Asserts the actual
- * output against expected. Returns a RunResult for runAll.ts to aggregate.
- *
- * No network, no database, no LLM calls. Suitable for pre-commit hooks.
- */
-
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { ENGINE_ROOT } from "../../paths.js";
@@ -28,12 +19,7 @@ import { readGoldenPdfValues } from "../helpers/goldenPdf.js";
 import { decisionsWithPreparerStyle } from "../helpers/preparer.js";
 import type { RunResult, Scenario, ScenarioForm } from "../types.js";
 
-/*
- * Cache the combined catalog (all forms loaded into one), keyed on the
- * joined paths. Scenarios that touch different form sets get distinct
- * catalogs. evaluateAllForms needs every referenced form in one catalog
- * so that cross-form lookups resolve.
- */
+/* evaluateAllForms needs every referenced form in one catalog so cross-form lookups resolve. */
 const combinedCatalogCache = new Map<string, Promise<Catalog>>();
 function getCombinedCatalog(catalogPaths: string[]): Promise<Catalog> {
   const key = catalogPaths.slice().sort().join("|");
@@ -55,11 +41,6 @@ function getBlankPdf(blankPdfPath: string): Buffer {
 
 const registeredForms = new Set<string>();
 
-/*
- * Run the engine over a scenario's forms, in the order given (default:
- * the scenario's own order). No rendering. tests/integration/formOrder
- * calls it with the order reversed.
- */
 export async function evaluateScenarioForms(
   s: Scenario,
   formIds: string[] = s.forms.map((f) => f.formId),
@@ -69,12 +50,7 @@ export async function evaluateScenarioForms(
     taxYear: s.taxYear,
     facts: makeFactsView(s.facts),
     decisions: makeDecisionsView(decisions),
-    /*
-     * defineForm bindings read their inputs through ctx.filingInfo (the
-     * AI-resolver layer; a hand-coded stand-in today). Every registered
-     * form uses defineForm, and the engine throws when ctx.filingInfo is
-     * missing. Populate it here.
-     */
+    /* The engine throws when ctx.filingInfo is missing. */
     filingInfo: resolveFilingInfo({
       facts: s.facts.map((f) => ({
         key: f.key,
@@ -88,18 +64,9 @@ export async function evaluateScenarioForms(
     }),
   };
 
-  /*
-   * Look up each scenario form's static config (catalog/blank/register)
-   * from the shared registry. Scenarios list only `{ formId, expected }`;
-   * everything else comes from src/registry.ts.
-   */
   const specs = formIds.map((formId) => getFormSpec(formId));
 
-  /*
-   * Register bindings for every form once. evaluateAllForms reads
-   * bindings from the engine registry, so each form in the scenario
-   * needs its register() call to have run.
-   */
+  /* evaluateAllForms reads bindings from the global registry, so register() must run first. */
   for (const spec of specs) {
     if (!registeredForms.has(spec.formId)) {
       spec.register?.();
@@ -107,18 +74,8 @@ export async function evaluateScenarioForms(
     }
   }
 
-  /*
-   * One combined catalog across every form in the scenario. Cross-form
-   * lookups (e.g. CA 540 line 13 reads form-1040 line 11b) then find
-   * their target inventory rows in one place.
-   */
   const catalog = await getCombinedCatalog(specs.map(catalogPath));
 
-  /*
-   * Fixpoint loop: evaluate every form and iterate until cross-form refs
-   * converge. Returns a Map<formId, EvaluatedForm> plus passes and
-   * resolvedPerPass diagnostics for non-convergence debugging.
-   */
   return { ...evaluateAllForms(formIds, ctx, catalog), catalog };
 }
 
@@ -133,7 +90,6 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
   const specs = s.forms.map((sf) => ({ sf, spec: getFormSpec(sf.formId) }));
   const { forms, passes, resolvedPerPass, catalog } = await evaluateScenarioForms(s);
 
-  // Per-form rendering + assertions.
   for (const { sf, spec } of specs) {
     const evaluated = forms.get(sf.formId);
     if (!evaluated) {
@@ -172,10 +128,6 @@ async function assertForm(
   notModeled?: string[],
   known?: { causes: Record<string, string>; hits: string[] },
 ): Promise<void> {
-  /*
-   * fillFromCatalog walks the catalog inventory and writes each value into
-   * its PDF widget. One function handles every form.
-   */
   const { rendered, warnings } = await fillFromCatalog({
     blankPdfBytes: getBlankPdf(blankPdfPath),
     form,
@@ -185,10 +137,7 @@ async function assertForm(
   const prefix = sf.formId;
 
   if (notModeled) {
-    /*
-     * Not-modeled reporting hides a missing field, so a typo in an
-     * expected fieldId would hide too. Check every id against the catalog.
-     */
+    /* Not-modeled reporting would also hide a typo in an expected fieldId. */
     const known = new Set(catalog.getFields(sf.formId).map((f) => f.fieldId));
     const ids = [...Object.keys(sf.expected.engineFields), ...sf.expected.renderedChecked];
     for (const id of ids) {
@@ -227,12 +176,7 @@ async function assertForm(
     assertRenderedChecked(rendered, fieldId, failures, prefix);
   }
 
-  /*
-   * Golden-PDF widget-level diff, when a goldenPdfPath is provided. The
-   * fieldId-based assertions above trust the catalog's `fieldId → widget`
-   * mapping, so they cannot see catalog mislabels. This layer compares
-   * directly against a CPA-completed PDF and catches them.
-   */
+  /* The fieldId assertions above trust the catalog's widget mapping; the golden PDF catches mislabels. */
   if (sf.goldenPdfPath) {
     const golden = await readGoldenPdfValues(resolve(ENGINE_ROOT, sf.goldenPdfPath));
     assertMatchesGolden(rendered, golden, failures, prefix);

@@ -1,8 +1,6 @@
 /*
- * tsconfig.json maps @openreturn/sources to its source file so `mastra
- * dev` bundles it instead of leaving it external (Node cannot load the
- * package's TypeScript). This keeps the alias equal to the package's
- * `exports` map.
+ * The tsconfig alias makes `mastra dev` bundle @openreturn/sources: Node
+ * cannot load the package's TypeScript. It must equal the `exports` map.
  */
 
 import { readFileSync } from "node:fs";

@@ -15,7 +15,6 @@ describe("splitRange", () => {
       expect(e - s).toBeLessThanOrEqual(1200);
       expect(text.slice(s, e).trimEnd().endsWith(".")).toBe(true);
     }
-    // Only whitespace is skipped between pieces.
     const joined = pieces.map(([s, e]) => text.slice(s, e)).join("");
     expect(joined.replace(/\s/g, "")).toBe(text.replace(/\s/g, ""));
   });

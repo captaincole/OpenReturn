@@ -1,10 +1,3 @@
-/*
- * Reference library — every document tax-code Q&A searches, grouped by
- * publisher, each with a link to its source PDF. The parent
- * (app)/layout.tsx gates auth; the list loads on the client from the
- * agent's corpus (components/LibraryList.tsx).
- */
-
 import { getOwnerSession } from "@/lib/localAuth";
 import { deriveProfile } from "@/lib/profile";
 import { redirect } from "next/navigation";

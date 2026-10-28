@@ -2,13 +2,9 @@ import { createOwner, login, ownerExists } from "@/lib/localAuth";
 import { NextResponse } from "next/server";
 
 /*
- * First-run setup: create the instance owner. 409s once an owner exists —
- * this is a one-shot endpoint, not a signup system.
- *
- * It takes no credentials, so it accepts only a JSON body, which is what
- * the setup page sends. A page on another site can post a form here
- * (text/plain) but cannot send JSON without a CORS preflight, so it
- * cannot create an owner whose password it knows.
+ * One-shot, no credentials: accept only a JSON body. A cross-site form post
+ * cannot send JSON without a CORS preflight, so another site cannot create
+ * an owner whose password it knows.
  */
 export async function POST(request: Request) {
   if (!request.headers.get("content-type")?.startsWith("application/json")) {
@@ -33,7 +29,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "password must be at least 8 characters" }, { status: 400 });
   }
   await createOwner({ email, displayName, password });
-  // Log the new owner in immediately, so they do not retype the password.
   await login(password);
   return NextResponse.json({ ok: true });
 }

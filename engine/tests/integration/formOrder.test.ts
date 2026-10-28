@@ -1,10 +1,3 @@
-/*
- * The fixpoint evaluator must not depend on the order of the forms. For
- * every scenario, evaluate its forms in order and in reverse, and compare
- * every line. A settle-pass value that was cached before its inputs were
- * final once made Tara's 1040 line 22 depend on the order.
- */
-
 import { describe, expect, it } from "vitest";
 import { evaluateScenarioForms } from "../golden/runScenario.js";
 import { SCENARIOS } from "../scenarios/index.js";

@@ -1,24 +1,3 @@
-/*
- * AI enrichment of extracted form fields.
- *
- * Upstream (extractFormFields.ts) hands us the label deterministically
- * from /TU or vision, so this stage does not guess labels from page text.
- * Its job is three semantic decisions per field:
- *
- *   - fieldId — stable "<formId>.<section>.<key>" id we reference everywhere
- *   - category — which Filing-Status panel bucket the field rolls up into
- *   - valueType — what kind of value belongs in the field (money / count /
- *                 text / ssn / phone / email / date / boolean /
- *                 single_select / multi_select / signature)
- *
- * For radio groups we also assign stable snake_case keys to each option.
- *
- * The model is NOT responsible for:
- *   - Discovering field structure (pdf.js told us)
- *   - Inventing labels (extractFormFields tier-1/tier-2 produced them)
- *   - Inventing option labels for radios (radioOptions[] is ground truth)
- */
-
 import Anthropic from "@anthropic-ai/sdk";
 import type { ExtractedField } from "./extractFormFields.js";
 import { createStructured } from "./structuredOutput.js";
@@ -33,24 +12,6 @@ const FIELDS_PER_BATCH = 40;
 
 export type Category = "personal_info" | "filing_scope" | "income" | "deductions_credits" | "other";
 
-/**
- * Semantic value type. Coarser than the IRS schemas but rich enough to
- * drive the renderer's formatters and the engine's rule library without
- * label-pattern matching.
- *
- *   money         — dollar amount on a tax line; format with separators
- *   count         — small integer (number of dependents, exemptions)
- *   text          — free text (name, address line)
- *   ssn           — 9-digit identifier; renderer handles dashes per widget maxLength
- *   phone         — phone number; renderer formats per widget maxLength
- *   zip           — ZIP code, 5 or 9 digits
- *   email         — email address; verbatim
- *   date          — calendar date; renderer formats per widget(s)
- *   boolean       — single checkbox, on or off
- *   single_select — radio group OR checkbox group where only one is valid
- *   multi_select  — independent checkboxes where any subset can be set
- *   signature     — signature field, not autofilled
- */
 export type ValueType =
   | "money"
   | "count"
@@ -66,9 +27,8 @@ export type ValueType =
   | "signature";
 
 export interface FieldEnrichmentOption {
-  /** Stable identifier for this option (e.g. "single", "mfj"). */
   value: string;
-  /** Echo of the deterministic option label so we can verify alignment. */
+  /** Echo of the PDF option label, to verify alignment. */
   radioOption: string;
 }
 
@@ -77,7 +37,7 @@ export interface FieldEnrichment {
   fieldId: string;
   category: Category;
   valueType: ValueType;
-  /** For radio groups: per-option stable values, same length as radioOptions[]. */
+  /** Same length and order as radioOptions[]. */
   options?: FieldEnrichmentOption[];
 }
 
@@ -272,11 +232,7 @@ ${fieldsJson}
 For each field above, return one enrichment (or one skip). Reuse fieldIds from "Already-assigned fieldIds" when semantically equivalent.`;
 }
 
-/*
- * Coerce the tool input into RawEnrichInput. The model occasionally
- * returns the arrays as JSON strings; parse them back. Returns null when
- * the input is unusable — the caller skips the batch with a warning.
- */
+/* The model sometimes returns the arrays as JSON strings; parse them back. */
 function parseEnrichInput(input: unknown): RawEnrichInput | null {
   const raw = input as {
     enrichments?: RawEnrichInput["enrichments"] | string;
@@ -304,11 +260,6 @@ function parseEnrichInput(input: unknown): RawEnrichInput | null {
   };
 }
 
-/*
- * One enrichment batch: prompt → structured enrich_fields output → coerced
- * result. Returns null (batch skipped) when the model's output is
- * unusable; the pipeline continues with the remaining batches.
- */
 async function classifyOneFieldBatch(
   client: Anthropic,
   opts: ClassifyOpts,
@@ -336,11 +287,6 @@ async function classifyOneFieldBatch(
   return { raw, usage: response.usage };
 }
 
-/*
- * Fold one batch's raw output into the run accumulators: camelCase the
- * enrichments, carry radio options through, and record first-seen
- * fieldIds (with their label) so later batches can reuse them.
- */
 function accumulateBatch(
   raw: RawEnrichInput,
   batch: ExtractedField[],

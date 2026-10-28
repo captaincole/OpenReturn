@@ -1,33 +1,12 @@
 /*
- * Why we do not use @mastra/loggers PinoLogger:
- *   - Pino's default destination is async-buffered. On Vercel serverless
- *     the function freezes the moment a response is sent. That truncates
- *     the buffer and drops every log line on requests that error, which
- *     made production errors invisible (e.g. the 8949 catalog ENOENT
- *     that prompted this rewrite — see CLAUDE.md "Vercel logs
- *     (production debugging)" + project memory).
- *   - PinoLogger's `overrideDefaultTransports` + `pino.destination({ sync })`
- *     escape hatch works at runtime, but it requires a cast of a
- *     SonicBoom Writable to a Transform-typed LoggerTransport. That type
- *     lie says PinoLogger is the wrong tool when Pino's async behavior
- *     is unwanted — so we do not use it.
- *
- * This is the smallest logger that satisfies Mastra's contract: extend
- * MastraLogger, implement the four abstract methods. Output is one line
- * of JSON per log entry via `console.{log,warn,error}`, which Vercel
- * captures reliably (CLAUDE.md flags this as the only logging path that
- * survives serverless function exit). `vercel logs --json` parses each
- * line into its structured fields automatically.
+ * Not PinoLogger: its default destination is async-buffered, and on Vercel
+ * the function exit truncates the buffer and drops the log lines of failed
+ * requests. Synchronous console writes survive.
  */
 
 import { LogLevel, MastraLogger } from "@mastra/core/logger";
 
-/*
- * Pino's numeric level convention. Kept so JSON log records look the
- * same as the Pino output `vercel logs --json` already parses. Log
- * filters and downstream consumers can rely on the same
- * `level: 50 = error` mapping.
- */
+// Pino's numeric levels, so log filters keep the same mapping.
 const LEVEL_NUM: Record<LogLevel, number> = {
   debug: 20,
   info: 30,
@@ -70,12 +49,8 @@ export class ConsoleLogger extends MastraLogger {
 }
 
 /*
- * IMastraLogger types each method as `(message, ...args)`, but Mastra's
- * internals follow Pino's `(message, metaObject)` convention: the second
- * argument is the structured payload. Spread it inline so log records
- * look flat (`{...msg, foo: "bar"}`) rather than nested under an `args`
- * key. Anything that does not fit that convention falls back to an
- * `args` array, so no caller-provided data is silently dropped.
+ * IMastraLogger types `(message, ...args)`, but Mastra calls it Pino-style
+ * with `(message, metaObject)`. Spread that object flat; else keep `args`.
  */
 function extractMeta(args: unknown[]): Record<string, unknown> {
   if (args.length === 0) return {};
@@ -95,10 +70,7 @@ function stringify(record: Record<string, unknown>): string {
   try {
     return JSON.stringify(record, errorReplacer);
   } catch {
-    /*
-     * Cycles or non-serializable values fall through to a minimal
-     * record so the line still lands. A stripped log beats no log.
-     */
+    // A cycle or a non-serializable value still gets a minimal line.
     return JSON.stringify({
       time: record.time,
       level: record.level,

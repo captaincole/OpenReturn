@@ -8,15 +8,6 @@ import {
   type AskTurn,
 } from "../../db/askThreads";
 
-/*
- * One Ask The Tax Code turn, Cade's side: the thread rows in app.db are
- * the user's; the answer comes from Canon over MCP (run_ask). The routes
- * in server/routes/ask.ts fire this in the background and the page polls
- * the turn's stage. One call means one stage: the turn shows "searching"
- * until Canon answers, and the query log comes back with the answer, or
- * with the failure.
- */
-
 function history(earlier: AskTurn[]): AskHistoryTurn[] {
   return earlier
     .filter((t) => t.status === "completed" && t.answer)

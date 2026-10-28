@@ -11,34 +11,15 @@ import {
 import { uploadDocument } from "@/lib/uploads";
 import { useEffect, useRef, useState } from "react";
 
-/*
- * Short fixed poll against the /api routes. The libsql app DB has no push
- * channel (Supabase Realtime left with Postgres). For one user on one box
- * a short interval is indistinguishable from push.
- */
+/* app.db has no push channel. For one user on one box, a short poll is as good. */
 export const POLL_INTERVAL_MS = 3000;
 
-/*
- * Requested Actions — things Cade needs the user to DO. Pulls live rows
- * from requested_actions (status 'open' or 'processing') through
- * /api/requested-actions on a fast poll, plus an immediate refetch after
- * resets and turns.
- *
- * v1 handles only kind='upload' (document requests). Upload runs the
- * existing uploadDocument() flow, then marks the action 'processing'
- * with the new document id; the card stays visible until Cade dismisses
- * it after ingest. Skip sets status 'skipped', which removes the card
- * because the query returns only open and processing rows.
- */
 export function RequestedActionsCard() {
   const { cadeBusy, sendChat, setMobilePane, resetTick, turnTick } = useAppShell();
   const [actions, setActions] = useState<RequestedAction[] | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
 
-  /*
-   * Fetch on mount, reset, and turn, then poll. The poll replaces the
-   * old realtime channel and also catches Cade's background dismissals.
-   */
+  /* The poll also catches Cade's background dismissals. */
   useEffect(() => {
     let cancelled = false;
 
@@ -64,25 +45,12 @@ export function RequestedActionsCard() {
     setBusyId(action.id);
     try {
       const uploaded = await uploadDocument(file);
-      /*
-       * The card flips to "processing" and stays visible until Cade
-       * calls dismiss-requested-action after ingest. This update is
-       * optimistic; the next poll patches the same state.
-       */
       await markActionProcessing(action.id, uploaded.id);
       setActions((prev) =>
         prev ? prev.map((x) => (x.id === action.id ? { ...x, status: "processing" } : x)) : prev,
       );
-      /*
-       * Mobile users cannot see the chat from the workspace pane. Flip
-       * them to it so they see Cade react to the upload.
-       */
       setMobilePane("chat");
-      /*
-       * Same code path as the textarea — sendChat is the canonical
-       * entry point. skipUpload=true because we already wrote the file
-       * to user_documents above.
-       */
+      /* skipUpload: the file is already in user_documents. */
       await sendChat({
         text: action.documentType
           ? `Uploaded ${action.documentType} — ${file.name}`

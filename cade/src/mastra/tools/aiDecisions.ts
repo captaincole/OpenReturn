@@ -71,15 +71,9 @@ export const recordAIDecision = createTool({
     });
 
     /*
-     * Fire-and-forget the review. Self-host runs a long-lived process, so
-     * the promise runs in the background with no serverless keep-alive.
-     * The reviewDecision wrapper catches workflow failures itself and
-     * stamps the row (review_failed, or review_unreached when Canon was
-     * not reachable), so a failed review still shows in the activity
-     * feed. Reviews run one at a time through the review queue. When this
-     * review reached Canon, any earlier review that never did is queued
-     * again: that is the retry path, no scheduler. This catch only logs
-     * unexpected throws from the wrapper.
+     * Fire-and-forget: the wrapper stamps its own failures (review_failed / review_unreached).
+     * A review that reached Canon re-queues earlier unreached ones; there is no scheduler.
+     * This catch only logs unexpected throws.
      */
     // DECISION_REVIEW=off skips the review (the E2E run does this); the verdict stays "pending".
     const reviewOn = process.env.DECISION_REVIEW !== "off";

@@ -1,14 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 /*
- * Next.js 16 file convention: this is the renamed Middleware. It is an
- * optimistic gate only. The Edge runtime cannot read app.db to verify the
- * session HMAC, so this checks cookie PRESENCE and redirects. Every
- * layout and route handler re-verifies with getOwnerSession() in the Node
- * runtime.
- *
- * The cookie name is duplicated from lib/localAuth.ts on purpose. An
- * import of that module would pull node:crypto into the Edge bundle.
+ * Next.js 16 Middleware. Optimistic gate only: the Edge runtime cannot read
+ * app.db, so this checks cookie presence. Every layout and route handler
+ * verifies with getOwnerSession(). The cookie name is duplicated from
+ * lib/localAuth.ts on purpose: importing it pulls node:crypto into Edge.
  */
 
 const SESSION_COOKIE = "openreturn_session";
@@ -20,17 +16,10 @@ function isPublic(pathname: string): boolean {
 }
 
 /*
- * Content Security Policy for pages, the nonce pattern from the Next.js
- * CSP guide: only scripts that carry this request's nonce run, so markup
- * injected into a page (stored reference HTML, an XSS) cannot run script.
- * Images, fetches and form posts stay on this origin, which also stops
- * a prompt injection from sending data out in an image URL. Next.js reads
- * the nonce from the request header and puts it on its own scripts; the
- * root layout passes it to the theme script.
- *
- * Styles allow inline: React style props need it, and a style cannot
- * run script. No upgrade-insecure-requests: the app is plain http on
- * localhost and the LAN. Dev needs 'unsafe-eval' (React's dev stacks).
+ * Nonce CSP: injected markup (stored reference HTML, XSS) cannot run script,
+ * and same-origin img/connect stops a prompt injection from leaking data in
+ * an image URL. Inline styles: React style props need them. No
+ * upgrade-insecure-requests: the app is plain http on localhost and the LAN.
  */
 function contentSecurityPolicy(nonce: string): string {
   const dev = process.env.NODE_ENV === "development";
@@ -81,7 +70,6 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match everything except Next.js internals and static assets.
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
   ],
 };

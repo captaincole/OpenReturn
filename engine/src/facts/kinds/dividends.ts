@@ -1,14 +1,4 @@
-/*
- * 1099-DIV fact kind. One tax_facts row stores the per-account 1099-DIV
- * summary (box totals). Per-payment dividend detail, which some brokers
- * provide and Schedule B itemization above the $1,500 threshold uses,
- * would be a separate kind. It is not modeled yet.
- *
- * Convention:
- *   category: "investment_income"
- *   key:      "account.{accountSlug}.dividends"
- *   value:    DividendFactValue
- */
+/* Per-account 1099-DIV box totals. Per-payment detail (Schedule B above $1,500) is not modeled. */
 
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
@@ -16,10 +6,6 @@ import type { TaxFactRow } from "../rows.js";
 export interface DividendFactValue {
   payerName: string;
   payerTin?: string;
-  /*
-   * 1099-DIV box totals, all optional. Boxes 1a/1b are the common case.
-   * Other boxes only populate when specific situations apply.
-   */
   box1a?: number; // Total ordinary dividends
   box1b?: number; // Qualified dividends
   box2a?: number; // Total capital gain distributions
@@ -49,7 +35,6 @@ export function makeDividendFactKey(accountSlug: string): string {
   return `account.${accountSlug}.dividends`;
 }
 
-/** Key-only test, for sums that already filtered by category. */
 export function isDividendFactKey(key: string): boolean {
   return DIV_KEY_RE.test(key);
 }

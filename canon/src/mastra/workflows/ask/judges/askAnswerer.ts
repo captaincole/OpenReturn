@@ -3,16 +3,8 @@ import { z } from "zod";
 import { modelFor } from "../../../models";
 
 /*
- * Writes the answer to one tax-code question from numbered passages the
- * retrieve step found. Judge pattern: prompt + judge model + structured
- * output, no tools. The validate step (validate.ts) then drops any
- * marker or quote that does not trace back to a retrieved passage, so
- * this prompt states the rules and validate.ts enforces them. A "partial"
- * answer names its gaps as search queries; the pipeline searches once
- * more with them and asks again (index.ts).
- *
- * The lists default to empty: a model that leaves one out should not
- * fail the whole turn.
+ * The prompt states the citation rules; validate.ts enforces them. The lists
+ * default to empty: a model that leaves one out should not fail the turn.
  */
 
 export const askAnswerSchema = z.object({

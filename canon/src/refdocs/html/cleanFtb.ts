@@ -4,25 +4,10 @@ import { slugifyHeading } from "../parse";
 import { htmlPublished } from "../published";
 
 /*
- * An FTB instructions page → the HTML document the corpus stores and the
- * reference library shows. FTB pages share one template, which marks the
- * article body with Dreamweaver comments; everything outside it (menus,
- * footer, scripts) is dropped. Inside it we keep semantic markup only:
- *
- *   - tags on an allowlist; other containers are unwrapped (their content
- *     stays), and scripts, forms and embeds are removed with their content
- *   - no class/style attributes; ids, hrefs, image alt text, table spans
- *   - every heading gets id = slugifyHeading(text), the same slug the
- *     section id uses, so a citation's section is the page anchor
- *   - links: absolute https/mailto/tel only; an in-page link whose target
- *     is not on this page (FTB copied the booklet's cross-references)
- *     becomes plain text
- *   - images are inlined as data: URIs, so the document is one file
- *
- * The output is deterministic for the same article content. FTB pages
- * differ on every request outside the article (an Akamai script), so the
- * sidecar's sha256 is taken over this output, never the raw page.
- * Bump CLEANER_VERSION when a change here changes the output.
+ * The library renders this HTML, so only allowlisted tags, attributes and
+ * link schemes survive. The raw page differs on every request, so the
+ * sidecar's sha256 covers this output. Bump CLEANER_VERSION when the output
+ * changes.
  */
 
 export const CLEANER_VERSION = 1;
@@ -54,13 +39,10 @@ export class CleanError extends Error {}
 
 export interface CleanedDoc {
   html: string;
-  /** The page's h1, e.g. "2025 Instructions for Form 540 — California Resident Income Tax Return". */
   title: string;
-  /* The h1's "Revised: MM/YYYY" as "YYYY-MM" (refdocs/published.ts); tax-year pages have none. */
   published: string | null;
 }
 
-/* Returns an image as a data: URI. Injected so tests run offline. */
 export type FetchImage = (url: string) => Promise<string>;
 
 export async function cleanFtbHtml(
@@ -83,7 +65,7 @@ export async function cleanFtbHtml(
   return { html: `${html}\n`, title: kicker ? `${kicker} — ${title}` : title, published };
 }
 
-/* The h1, built from text: the title is page text, never markup. */
+/* Built from text: the title is page text, never markup. */
 function heading(kicker: string, title: string): string {
   const $ = cheerio.load("", null, false);
   const h1 = $("<h1></h1>").text(title);
@@ -103,7 +85,6 @@ function mainContent(raw: string): string {
 /*
  * FTB's h1 is "<small>2025 Instructions for Form 540</small> California
  * Resident…", sometimes with a second "<small>Revised: 01/2015</small>".
- * (The tax-year template's Revised line is inside a comment; text() skips it.)
  */
 function pageTitle(raw: string): Omit<CleanedDoc, "html"> & { kicker: string } {
   const $ = cheerio.load(raw);
@@ -149,10 +130,7 @@ function stripAttributes($: cheerio.CheerioAPI): void {
     });
 }
 
-/*
- * Heading ids become section slugs; links to a heading's old id follow
- * it. Other ids (footnote targets) stay unless a slug took the name.
- */
+// Heading id = section slug, so a citation's section is the page anchor.
 function anchorHeadings($: cheerio.CheerioAPI): void {
   const renamed = new Map<string, string>();
   const used = new Set<string>(["preamble"]);
@@ -178,6 +156,7 @@ function anchorHeadings($: cheerio.CheerioAPI): void {
   });
 }
 
+// An in-page link to a target not on this page becomes plain text.
 function fixLinks($: cheerio.CheerioAPI, pageUrl: string): void {
   const ids = new Set(
     $("[id]")
@@ -193,7 +172,7 @@ function fixLinks($: cheerio.CheerioAPI, pageUrl: string): void {
   });
 }
 
-/* FTB-hosted images only; anything else is dropped, alt text with it. */
+/* FTB-hosted images only. */
 async function inlineImages(
   $: cheerio.CheerioAPI,
   pageUrl: string,
@@ -208,7 +187,6 @@ async function inlineImages(
   }
 }
 
-/* Collapse template indentation; one element per line keeps diffs readable. */
 function tidy(html: string): string {
   return html
     .replace(/[ \t]*\n[ \t]*/g, "\n")

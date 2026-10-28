@@ -1,25 +1,6 @@
 /*
- * Form-field extraction via pdf.js (through unpdf).
- *
- * The pipeline is deterministic in structure. Only LABEL resolution
- * involves AI, and only for widgets without their own /TU alt-text.
- *
- * Two label tiers:
- *   tier 1 — annotation.alternativeText (/TU). Author-provided user name.
- *            CA 540 has these for every field; IRS 1040 strips them.
- *   tier 2 — vision LLM. We rasterize the page, overlay numbered badges on
- *            the widget rectangles, and Claude returns one label per
- *            widget. Widgets that already have a /TU value get it echoed
- *            back as a cross-check (the prompt says "defer to tu_label
- *            verbatim").
- *
- * Tier 3 (would-be positional inference) is disabled by policy. If vision
- * returns no label for a widget, we throw. The form needs human attention,
- * not a silent fallback.
- *
- * Field kind, max length, radio options, checkbox on-values, and widget
- * positions come straight from pdf.js's annotation objects. pdf-lib is not
- * used here.
+ * Labels come from /TU, else from vision (IRS 1040 strips /TU). There is no
+ * positional fallback by policy: a widget with no label throws for human review.
  */
 
 import { readFile } from "node:fs/promises";
@@ -32,33 +13,25 @@ export type FieldKind = "text" | "checkbox" | "radio" | "signature" | "other";
 export type LabelSource = "tu" | "vision";
 
 export interface ExtractedFieldWidget {
-  /** 0-indexed page where this visual occurrence lives. */
+  /** 0-based. */
   page: number;
   position: { x: number; y: number; width: number; height: number };
-  /** Radio buttons only — the option label for this specific widget. */
   buttonValue?: string;
 }
 
 export interface ExtractedField {
-  /** Full AcroForm field name — unique across the PDF. */
   fieldName: string;
-  /** Last segment of the name with the array suffix stripped (`f1_14`, `540_form_1018`). */
   shortName: string;
   fieldKind: FieldKind;
-  /** Author label resolved by tier-1 (/TU) or tier-2 (vision). */
   label: string;
   labelSource: LabelSource;
-  /** Text fields only. `null` when the field has no maxLength constraint. */
   maxLength?: number | null;
-  /** Text fields only. */
   multiline?: boolean;
-  /** Text fields only — combs are character-cell fixed-width text fields (SSN boxes). */
+  /** A comb field has fixed character cells (SSN boxes). */
   comb?: boolean;
-  /** Radio groups only — option labels in widget order. */
   radioOptions?: string[];
-  /** Checkboxes only — the "on" appearance state name (typically "Yes" or "1"). */
+  /** The "on" appearance state name, often "Yes" or "1". */
   checkboxOnValue?: string;
-  /** One widget per visual occurrence. Most fields have exactly one. */
   widgets: ExtractedFieldWidget[];
 }
 
@@ -74,7 +47,6 @@ export interface CoverageReport {
   tier2Count: number;
 }
 
-/** Error subclass so callers can `instanceof`-detect missing-label failures. */
 export class MissingLabelError extends Error {
   fieldName: string;
   pdfPath: string;
@@ -92,7 +64,7 @@ export class MissingLabelError extends Error {
 }
 
 interface PageWidget {
-  pdfWidgetId: number; // monotonic per page, used as overlay badge number
+  pdfWidgetId: number; // the overlay badge number
   annot: any;
   rect: [number, number, number, number];
 }
@@ -104,20 +76,14 @@ interface WidgetOccurrence {
 }
 
 interface CollectedWidgets {
-  /* Tier-1 labels are field-scoped: the same fieldName always gets the same /TU. */
   tier1Labels: Map<string, string>;
-  /* Grouped by fieldName for the final ExtractedField[]. */
   widgetsByFieldName: Map<string, WidgetOccurrence[]>;
-  /* Per page, badge-numbered in reading order, for the vision step. */
   widgetsByPage: Map<number, PageWidget[]>;
 }
 
 /*
- * Collect one page's fillable widgets. Skips ReadOnly widgets:
- * computed-output cells the form marks non-fillable (e.g. Form 8949
- * column (f) on the Totals row). Real PDF viewers grey them out. If we
- * include them, a renderer can write values into widgets that look
- * non-fillable to humans.
+ * Skip ReadOnly widgets (e.g. Form 8949 Totals row, column (f)). PDF viewers
+ * grey them out, so a value written there looks wrong to a person.
  */
 function collectPageWidgets(annots: any[], pageIdx: number, out: CollectedWidgets): PageWidget[] {
   const rawWidgets: Array<{ annot: any; rect: [number, number, number, number] }> = [];
@@ -143,11 +109,7 @@ function collectPageWidgets(annots: any[], pageIdx: number, out: CollectedWidget
     rawWidgets.push({ annot: a, rect });
   }
 
-  /*
-   * Number badges in reading order (y desc, then x asc) so the model can
-   * rely on "badge 1 is top-left, badge N is bottom-right". The PDF
-   * y-axis is bottom-up, so a larger y is higher on the page.
-   */
+  /* Reading order, as the vision prompt promises. PDF y is bottom-up: larger y is higher. */
   rawWidgets.sort((a, b) => {
     const ay = (a.rect[1] + a.rect[3]) / 2;
     const by = (b.rect[1] + b.rect[3]) / 2;
@@ -158,7 +120,6 @@ function collectPageWidgets(annots: any[], pageIdx: number, out: CollectedWidget
   return rawWidgets.map((w, i) => ({ pdfWidgetId: i + 1, annot: w.annot, rect: w.rect }));
 }
 
-/* Tier 2: call vision once per page with at least one /TU-less widget. */
 async function resolveTier2Labels(
   pdfPath: string,
   pdf: Awaited<ReturnType<typeof getDocumentProxy>>,
@@ -189,11 +150,7 @@ async function resolveTier2Labels(
       })),
     });
 
-    /*
-     * Apply vision labels back to fieldName. When widgets share a
-     * fieldName (e.g. CA 540's name field across pages 2-6), the first
-     * non-empty vision result wins.
-     */
+    /* Widgets can share a fieldName across pages; the first non-empty label wins. */
     for (const w of pageWidgets) {
       const fn = w.annot.fieldName as string;
       if (collected.tier1Labels.has(fn)) continue;
@@ -207,7 +164,6 @@ async function resolveTier2Labels(
   return tier2Labels;
 }
 
-/* /TU wins, vision fills the gaps, no label at all is a hard error. */
 function resolveLabel(
   pdfPath: string,
   fieldName: string,
@@ -221,7 +177,6 @@ function resolveLabel(
   throw new MissingLabelError({ fieldName, pdfPath });
 }
 
-/* Assemble one ExtractedField from a fieldName's widget occurrences. */
 function assembleField(
   pdfPath: string,
   fieldName: string,
@@ -272,10 +227,8 @@ function assembleField(
 export async function extractFormFields(pdfPath: string): Promise<ExtractedForm> {
   const bytes = await readFile(pdfPath);
   /*
-   * Pass CanvasFactory at document-load time so pdf.js's internal render
-   * path (text extraction, getAnnotations) has canvas available. Without
-   * it, forms whose annotations need transparency-group resolution fail
-   * with "@napi-rs/canvas is not available".
+   * pdf.js needs CanvasFactory at load time. Without it, some forms' annotations
+   * fail with "@napi-rs/canvas is not available".
    */
   const CanvasFactory = await createIsomorphicCanvasFactory(canvasImport);
   const pdf = await getDocumentProxy(new Uint8Array(bytes), {
@@ -301,7 +254,6 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
     fields.push(assembleField(pdfPath, fieldName, occurrences, collected.tier1Labels, tier2Labels));
   }
 
-  // Reading order across the whole form: page, then y desc, then x asc.
   fields.sort((a, b) => {
     const aw = a.widgets[0];
     const bw = b.widgets[0];

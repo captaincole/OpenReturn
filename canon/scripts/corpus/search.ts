@@ -1,9 +1,3 @@
-/*
- * Invoke the search-ref-docs Mastra tool directly. The tool wraps the
- * same hybridSearchRefDocs retrieval the review workflow runs. Use it
- * to eyeball what a query returns.
- */
-
 import { parseArgs } from "node:util";
 import { searchRefDocsTool } from "../../src/mastra/tools/refDocs";
 import type { Command } from "../lib/cli";
@@ -28,10 +22,7 @@ interface SearchToolOutput {
   }[];
 }
 
-/*
- * The tool's execute signature is Mastra-wrapped; the cast gives the CLI
- * a direct typed call (see CLAUDE.md on calling tools outside an agent).
- */
+// Mastra wraps the tool's execute type; the cast allows a direct call outside an agent.
 function execSearch(input: SearchToolInput): Promise<SearchToolOutput> {
   const tool = searchRefDocsTool as unknown as {
     execute: (input: SearchToolInput) => Promise<SearchToolOutput>;

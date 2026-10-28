@@ -1,11 +1,3 @@
-/*
- * Alex Morales — AI decisions (the "setup").
- *
- * These are the judgment calls Cade would record during a real intake.
- * The integration test sets them directly, so the engine has everything
- * it needs without the agent loop.
- */
-
 import type { AIDecisionRow } from "../../../src/facts/rows.js";
 import { decisionRow } from "../../helpers/fixtureBuilders.js";
 import { ALEX_TAX_YEAR, ALEX_USER_ID } from "./facts.js";
@@ -36,14 +28,6 @@ export const alexDecisions: AIDecisionRow[] = [
     false,
     "Alex reported no digital asset (crypto / NFT) transactions for 2025 — 1040 page 1 digital-assets question answered No.",
   ),
-  /*
-   * Form-scope decisions follow the convention
-   * `decisions.scope.must_file_<form_short_id>`. Each scenario records
-   * the gating decision for every form in the universe. True means the
-   * form is in this scenario's forms[] and asserted against. False means
-   * we declare it out of scope and do not list it. A grep then answers
-   * "why does Alex not file X?".
-   */
   dec(
     "decisions.scope.must_file_schedule_ca",
     false,

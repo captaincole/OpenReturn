@@ -3,16 +3,6 @@ import { z } from "zod";
 import { getAppDb, nowIso } from "../db/appDb";
 import { requireUserContext } from "./userContext";
 
-/*
- * request-document-upload: surface a structured "Cade needs you to upload
- * X" card on the user's dashboard. Use it when a specific tax document is
- * load-bearing for the return and the user has not already uploaded it.
- *
- * Do not use it for things the chat can capture — a yes/no scoping
- * question, a confirmation, a verbal value. This tool is the structured
- * escalation for "I literally need this PDF to fill these lines."
- */
-
 export const requestDocumentUpload = createTool({
   id: "request-document-upload",
   description:
@@ -43,15 +33,7 @@ export const requestDocumentUpload = createTool({
     const { userId, filingId } = await requireUserContext(context);
     const db = getAppDb();
 
-    /*
-     * Dedup: one open|processing card per documentType. When Cade calls
-     * this tool twice for "W-2" (same turn, or across turns before the
-     * upload), we return the existing card's id instead of stacking
-     * duplicates on the dashboard. The user only ever sees one Upload
-     * button per document. (The old PostgREST ilike had no wildcards, so
-     * the match was always case-insensitive equality; lower() = lower()
-     * preserves that.)
-     */
+    /* One open or processing card per documentType: a repeat call returns the existing card. */
     const existing = await db.execute({
       sql: `SELECT id FROM requested_actions
             WHERE user_id = ? AND tax_year = ?

@@ -4,16 +4,6 @@ import { deriveProfile } from "@/lib/profile";
 import { listOwnerReturns } from "@/lib/serverDb";
 import { redirect } from "next/navigation";
 
-/*
- * Return-scoped layout. It resolves the route param against the caller's
- * real filings (the filings + filing_members tables). If no filing exists
- * for the requested year, redirect to '/' so the user can start one; the
- * home-home page renders the empty-state CTA.
- *
- * The outer (app)/layout.tsx already gates auth. We call getOwnerSession
- * again to get the verified userId for AppShell. That costs one extra DB
- * roundtrip per navigation, acceptable for now.
- */
 export default async function ReturnLayout({
   children,
   params,

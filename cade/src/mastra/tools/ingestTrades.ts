@@ -8,11 +8,6 @@ import { z } from "zod";
 import { recordDecision } from "../db/aiDecisions";
 import { recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 
-/*
- * Per-sale ingest for 1099-B and 1099-DA sales (ingest-1099-b). Each sale becomes one trade fact plus one
- * broker-reported form_8949_box decision.
- */
-
 export const TradeInputSchema = z.object({
   description: z.string().describe("Security or digital asset description, e.g. 'APPLE INC'"),
   cusip: z.string().optional(),
@@ -49,7 +44,6 @@ export type TradeInput = z.infer<typeof TradeInputSchema>;
 
 const tradeIdFor = (t: TradeInput): string => {
   const ticker = t.symbol ?? t.cusip ?? slugify(t.description);
-  // MM/DD/YY → YYYY-MM-DD slug for stable, sortable IDs
   const slugDate = (d: string) => {
     const m = d.match(/^(\d{2})\/(\d{2})\/(\d{2})$/);
     if (!m) return slugify(d);
@@ -59,11 +53,7 @@ const tradeIdFor = (t: TradeInput): string => {
   return `${slugify(ticker)}-${slugDate(t.dateSold)}-q${t.quantity}`;
 };
 
-/*
- * Map the broker-reported (term, basisReported) pair to a Form 8949 box.
- * 1099-DA sales use the digital-asset boxes G/H (short) and J/K (long).
- * Unknown term falls back to the short-term boxes (conservative rate).
- */
+/* Unknown term falls back to the short-term boxes (the conservative rate). */
 const boxFor = (
   term: TradeInput["term"],
   basisReported: boolean,
@@ -81,12 +71,7 @@ const boxFor = (
 const termLabel = (term: TradeInput["term"]): string =>
   term === "long_term" ? "long-term" : term === "short_term" ? "short-term" : "unknown-term";
 
-/*
- * Write one trade's fact row plus its form_8949_box decision. The
- * decision is auto-recorded — the broker already classified the sale.
- * The write goes directly through recordDecision and skips the grounding
- * review; the input is broker-reported, not a judgment call.
- */
+/* The box decision skips the grounding review: the broker classified the sale, not Cade. */
 async function ingestOneTrade(
   ctx: IngestCtx,
   slug: string,
@@ -129,7 +114,6 @@ async function ingestOneTrade(
   return tradeId;
 }
 
-/** Record one scope decision with high confidence (broker-reported). */
 async function recordScopeDecision(
   ctx: IngestCtx,
   decisionKey: string,
@@ -150,12 +134,6 @@ async function recordScopeDecision(
   });
 }
 
-/*
- * Ingest every sale (one fact + one box decision each), then record the
- * has_reportable_sales scope decision that gates Form 8949 / Schedule D.
- * 1099-DA sales also record has_digital_assets (the 1040 digital asset
- * question is Yes).
- */
 export async function ingestTrades(
   ctx: IngestCtx,
   slug: string,

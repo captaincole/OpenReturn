@@ -1,35 +1,26 @@
 import { z } from "zod";
 
 /*
- * Cade's view of Canon's contract: the shapes it sends over MCP and the
- * shapes it parses on the way back. Canon owns the contract
- * (canon/src/mastra/workflows/{ask,ground}); this file is the consumer's
- * copy, so a change on Canon's side that Cade does not expect fails at
- * the parse, not deep in a step. Only the fields Cade uses are declared;
- * zod drops the rest.
+ * Cade's copy of Canon's MCP contract, so an unexpected change on Canon's side
+ * fails at the parse, not deep in a step.
  */
 
-/* ---------- ask ---------- */
-
 export type AskCoverage = "covered" | "partial" | "not_covered";
-/** Which pipeline step a running turn is in; the page shows it as progress. */
 export type AskStage = "formulating" | "retrieving" | "answering";
 export type SourceFormat = "pdf" | "html";
 
-/** One numbered reference behind an `[n]` marker in the answer. */
 export interface AskCitation {
   n: number;
   blockId: string;
   docId: string;
   documentTitle: string;
-  /** Missing on citations saved before HTML documents existed: read it as "pdf". */
+  /** Missing on older saved citations: read it as "pdf". */
   format?: SourceFormat;
   sectionHeading: string | null;
   pageNum: number;
   quote: string;
 }
 
-/** A completed earlier turn of the same conversation, oldest first. */
 export interface AskHistoryTurn {
   question: string;
   answer: string;
@@ -51,12 +42,10 @@ export const askResultSchema = z.object({
   coverage: z.enum(["covered", "partial", "not_covered"]),
   citations: z.array(askCitationSchema),
   missingDocuments: z.array(z.string()),
-  /** The query log: each step's input, output and timing. */
   log: z.object({ steps: z.array(z.record(z.unknown())) }),
 });
 export type AskResult = z.infer<typeof askResultSchema>;
 
-/* run_ask: the result, or the failure with the query log up to it. */
 export const askRunResultSchema = z.discriminatedUnion("status", [
   askResultSchema.extend({ status: z.literal("ok") }),
   z.object({
@@ -66,8 +55,6 @@ export const askRunResultSchema = z.discriminatedUnion("status", [
   }),
 ]);
 export type AskRunResult = z.infer<typeof askRunResultSchema>;
-
-/* ---------- ground ---------- */
 
 export const groundDecisionSchema = z.object({
   taxYear: z.number().int(),
@@ -89,7 +76,6 @@ export const taxFactSnapshotSchema = z.object({
 export const groundInputSchema = z.object({
   decision: groundDecisionSchema,
   facts: z.array(taxFactSnapshotSchema),
-  /** Retrieval rounds the judges may take (Canon's default: 3). */
   maxIterations: z.number().int().optional(),
 });
 export type GroundInput = z.infer<typeof groundInputSchema>;
@@ -119,7 +105,6 @@ export const groundResultSchema = z.object({
 });
 export type GroundResult = z.infer<typeof groundResultSchema>;
 
-/* run_ground: the result, or the failure with the judge steps that ran. */
 export const groundRunResultSchema = z.discriminatedUnion("status", [
   groundResultSchema.extend({ status: z.literal("ok") }),
   z.object({

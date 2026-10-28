@@ -1,14 +1,5 @@
 "use client";
 
-/*
- * Documents section of the return page — uploads only. Generated drafts
- * (1040, 540, sidecar) live in the Forms section, per Andrew's labeling
- * rule: inputs and outputs are different concerns.
- *
- * The drop zone wraps the existing uploadDocument flow. The card list
- * reads /api/uploads (libsql app DB, session-cookie auth).
- */
-
 import { useAppShell } from "@/components/AppShell";
 import { cn } from "@/lib/cn";
 import { uploadDocument } from "@/lib/uploads";
@@ -22,10 +13,7 @@ interface UploadRow {
   size_bytes: number | null;
 }
 
-/*
- * Load the uploads grid. Returns the cancel function the effect uses as
- * its cleanup, so a stale response cannot clobber a newer one.
- */
+/* Returns the effect cleanup, so a stale response cannot clobber a newer one. */
 function fetchUploads(setUploads: (rows: UploadRow[]) => void): () => void {
   let cancelled = false;
   fetch("/api/uploads", { cache: "no-store" })
@@ -55,19 +43,10 @@ export function DocumentsSection() {
 
   const loadUploads = useCallback(() => fetchUploads(setUploads), []);
 
-  /*
-   * turnTick: chat attachments and Requested Actions also upload, and
-   * this section stays mounted beside the chat, so reload after each turn.
-   */
+  /* turnTick: chat attachments also upload, and this section stays mounted. */
   useEffect(() => loadUploads(), [resetTick, turnTick, loadUploads]);
 
-  /*
-   * Mirrors the Requested Actions upload flow. Write to user_documents
-   * first, so the document appears in the grid with a real ID. Then hand
-   * the file to Cade via sendChat with skipUpload=true; he reacts to it
-   * exactly like a chat-attached upload. setMobilePane("chat") lets
-   * mobile users see Cade respond instead of the same grid.
-   */
+  /* Upload first so the grid gets a real ID; then sendChat with skipUpload=true. */
   async function handleFiles(files: FileList | null) {
     if (!files || files.length === 0) return;
     setUploading(true);

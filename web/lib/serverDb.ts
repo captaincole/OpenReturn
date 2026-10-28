@@ -5,18 +5,8 @@ import { createClient, type Client, type Row } from "@libsql/client";
 import { resolve } from "node:path";
 
 /*
- * SERVER-ONLY domain reads/writes against the shared libsql app DB
- * (.data/app.db under cade). The agent owns schema creation; this
- * module only queries. It replaces the per-table Postgres reads that
- * lived in lib/{activity,filings,returns,requestedActions}.ts.
- *
- * RLS left with Postgres, so every query here scopes explicitly by
- * userId / filingId. Callers (Server Components, Route Handlers) must
- * verify the owner session (lib/localAuth.ts) BEFORE they call in.
- *
- * Never import this from a client component. @libsql/client and
- * node:path do not exist in the browser bundle, and the DB file lives on
- * the server box.
+ * SERVER-ONLY. No RLS: every query scopes explicitly by userId / filingId.
+ * Callers must verify the owner session (lib/localAuth.ts) before they call in.
  */
 
 const DEFAULT_APP_DB = resolve(process.cwd(), "../cade/.data/app.db");
@@ -35,8 +25,6 @@ const strOrNull = (v: unknown): string | null => (v == null ? null : String(v));
 const num = (v: unknown): number => (v == null ? 0 : Number(v));
 const json = (v: unknown): unknown => (v == null ? null : JSON.parse(String(v)));
 
-// ─── Owner (single-user auth) ───────────────────────────────────────────
-
 export interface OwnerAuthRow {
   id: string;
   email: string;
@@ -46,10 +34,8 @@ export interface OwnerAuthRow {
 }
 
 /*
- * Idempotent. The agent's ensureAppSchema also creates this table, but
- * the web app's first-run /setup can happen before the agent ever boots,
- * so both sides CREATE IF NOT EXISTS. Keep the DDL in sync with
- * cade/src/mastra/db/appDb.ts.
+ * /setup can run before the agent ever boots, so both sides create this
+ * table. Keep the DDL in sync with cade/src/mastra/db/appDb.ts.
  */
 let ownerTableReady: Promise<unknown> | null = null;
 function ensureOwnerTable() {
@@ -99,8 +85,6 @@ export async function insertOwnerRow(row: OwnerAuthRow): Promise<void> {
     ],
   });
 }
-
-// ─── Filings / memberships ─────────────────────────────────────────────
 
 export interface FilingRow {
   id: string;
@@ -152,10 +136,7 @@ export async function getOwnerFilingForYear(userId: string, taxYear: number): Pr
   return { id: ret.filingId, taxYear: ret.year, status: ret.status };
 }
 
-/**
- * Non-revoked membership check. This is the explicit RLS replacement.
- * Run it before any read of a filing the caller does not own outright.
- */
+/** The RLS replacement: run it before any read of a filing the caller does not own outright. */
 export async function hasMembership(filingId: string, userId: string): Promise<boolean> {
   const res = await db().execute({
     sql: `SELECT 1 FROM filing_members
@@ -164,8 +145,6 @@ export async function hasMembership(filingId: string, userId: string): Promise<b
   });
   return res.rows.length > 0;
 }
-
-// ─── Activity feed ──────────────────────────────────────────────────────
 
 export async function fetchActivityItems(
   userId: string,
@@ -220,8 +199,6 @@ export async function fetchActivityItems(
     .slice(0, safeLimit);
 }
 
-// ─── Requested actions ──────────────────────────────────────────────────
-
 function rowToAction(r: Row): RequestedAction {
   return {
     id: str(r.id),
@@ -273,8 +250,6 @@ export async function skipAction(userId: string, actionId: string): Promise<void
   });
 }
 
-// ─── User documents ─────────────────────────────────────────────────────
-
 export interface DocumentLookup {
   id: string;
   filingId: string;
@@ -308,11 +283,6 @@ export interface UploadListRow {
   size_bytes: number | null;
 }
 
-/**
- * Uploaded (category='uploads') documents for a filing, newest first.
- * Feeds the Documents tab grid and the home-tab quick links. Keys stay
- * snake_case because the components already render that shape.
- */
 export async function listUploads(filingId: string): Promise<UploadListRow[]> {
   const res = await db().execute({
     sql: `SELECT id, filename, created_at, mime_type, size_bytes
@@ -338,10 +308,6 @@ export interface DraftListRow {
   metadata: Record<string, unknown> | null;
 }
 
-/**
- * Engine-generated drafts for a filing, newest first. Feeds the Forms
- * tab. Keys stay snake_case for the existing components.
- */
 export async function listDrafts(filingId: string): Promise<DraftListRow[]> {
   const res = await db().execute({
     sql: `SELECT id, filename, created_at, mime_type, size_bytes, metadata

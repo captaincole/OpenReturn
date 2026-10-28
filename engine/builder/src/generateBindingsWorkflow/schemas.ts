@@ -1,9 +1,3 @@
-/*
- * Phase D workflow carriers. Each step's outputSchema is the next step's
- * inputSchema. The carrier accumulates via .extend(), so we never thread
- * "optional fields filled in later".
- */
-
 import { z } from "zod";
 
 const categorySchema = z.enum([
@@ -59,14 +53,6 @@ const classifiedBindingSchema = z.object({
   ruleName: ruleNameSchema,
   params: z.record(z.string(), z.unknown()),
   rationale: z.string(),
-  /**
-   * Self-rated confidence in this binding:
-   *   high   — label + data path are both unambiguous; bind directly.
-   *   medium — label is clear but the fact/slot choice is a guess.
-   *   low    — label is ambiguous, OR unsupported because no path fits.
-   * The renderer routes ratings below `minConfidence` to a TODO map for
-   * human review.
-   */
   confidence: confidenceSchema,
 });
 
@@ -89,24 +75,12 @@ const usageSchema = z.object({
   cache_read_input_tokens: z.number().int(),
 });
 
-// ─── Step schemas ────────────────────────────────────────────────────────
-
 export const workflowInputSchema = z.object({
   formId: z.string(),
   taxYear: z.number().int(),
-  /** Path to the JSON catalog (e.g. engine/src/federal/1040/catalog.json). */
   catalogPath: z.string(),
-  /**
-   * Where to write the generated TS — e.g.
-   * engine/src/federal/1040/bindings.ts.
-   */
   outputPath: z.string(),
-  /**
-   * Minimum confidence to emit a binding. Anything below this threshold
-   * goes to the `todos` map for human review instead of into `bindings`.
-   * Default "high" is strict. A lower floor emits more bindings directly,
-   * at the cost of less human review before they ship.
-   */
+  /** Bindings below this go to `todos` for human review. */
   minConfidence: confidenceSchema.default("high"),
 });
 
@@ -132,13 +106,9 @@ export const afterClassifySchema = afterRetrieveSchema.extend({
 export const workflowOutputSchema = z.object({
   outputPath: z.string(),
   fieldCount: z.number().int(),
-  /** Bindings the renderer wrote into the `bindings` map (confidence ≥ floor). */
   emittedCount: z.number().int(),
-  /** Bindings the renderer pushed to `todos` (confidence < floor). */
   todoCount: z.number().int(),
-  /** Bindings the renderer pushed to `unsupported`. */
   unsupportedCount: z.number().int(),
-  /** Fields that had no AI binding at all (counted separately from todos). */
   unboundCount: z.number().int(),
   ruleBreakdown: z.record(z.string(), z.number().int()),
   confidenceBreakdown: z.record(z.string(), z.number().int()),

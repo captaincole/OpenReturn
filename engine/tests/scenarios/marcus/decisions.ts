@@ -1,14 +1,3 @@
-/*
- * Marcus Chen — AI decisions (the "setup").
- *
- * Scoped to what the current forms need: filing status, itemize-vs-
- * standard, and per-form must-file flags for the universe of forms the
- * engine knows. Schedule D / 8949 / Schedule CA are declared out of
- * scope here, so the scenario stays focused on Schedule A, Form 8959,
- * and Form 1040 line 12e. The wider Marcus return (Schedule B, 8889,
- * 8960, full 1040 line 23) lights up as those bindings land.
- */
-
 import type { AIDecisionRow } from "../../../src/facts/rows.js";
 import { decisionRow } from "../../helpers/fixtureBuilders.js";
 import { MARCUS_TAX_YEAR, MARCUS_USER_ID } from "./facts.js";

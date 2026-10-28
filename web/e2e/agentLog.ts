@@ -1,8 +1,6 @@
 /*
- * Errors the agent logged while it ran a turn: one JSON line per error,
- * with one of the messages below. The web app then shows an empty reply,
- * which looks like a model mistake but is a broken app (for example a
- * missing API key or a wrong model URL).
+ * With these errors the web app shows an empty reply. That looks like a model
+ * mistake but is a broken app (missing API key, wrong model URL).
  */
 
 import { existsSync, readFileSync } from "node:fs";

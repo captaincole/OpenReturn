@@ -1,7 +1,4 @@
-/*
- * Energy Efficient Home Improvement Credit Limit Worksheet—Line 31
- * (2025 Form 5695 instructions). Fake figures, checked by hand.
- */
+/* Source: 2025 Form 5695 instructions, Credit Limit Worksheet—Line 31. Fake figures, checked by hand. */
 
 import { describe, expect, it } from "vitest";
 import { computeEnergyCreditLimit } from "../../../src/worksheets/energyCreditLimit.js";

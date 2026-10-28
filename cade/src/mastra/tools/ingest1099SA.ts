@@ -8,17 +8,8 @@ import { PayerSchema, recordIngestFact, slugify, type IngestCtx } from "./ingest
 import { requireUserContext } from "./userContext";
 
 /*
- * Ingest one Form 1099-SA (HSA / Archer MSA / MA MSA distributions) as a
- * single structured tax_facts row. The Form Engine reads it via
- * `getHsaDistributionFacts(facts)`; box 1 feeds Form 8889 line 14a.
- *
- * Convention (see engine/src/facts/kinds/hsaDistribution.ts):
- *   category: "hsa"
- *   key:      "account.{accountSlug}.hsa_distributions.{distributionId}"
- *
- * Whether the distributions paid qualified medical expenses is a verbal
- * fact (hsa.distributions_all_qualified), not on this form. Form 5498-SA
- * is not needed: W-2 box 12 code W carries employer contributions.
+ * "Paid qualified medical expenses" is a verbal fact (hsa.distributions_all_qualified).
+ * Form 5498-SA is not needed: W-2 box 12 code W carries employer contributions.
  */
 
 export const ingest1099SA = createTool({

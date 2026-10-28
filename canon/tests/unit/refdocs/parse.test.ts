@@ -1,8 +1,3 @@
-/*
- * Heading detection and block ids. Synthetic one-page docs; each test pins
- * one rule. Real-doc behavior is measured by re-ingest stats, not here.
- */
-
 import { describe, expect, it } from "vitest";
 import { parseDoc, type ParserStyle } from "../../../src/refdocs/parse.js";
 

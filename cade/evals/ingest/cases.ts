@@ -2,17 +2,8 @@ import type { TaxFactRow } from "@openreturn/engine/facts";
 import { SCENARIOS } from "@openreturn/engine/scenarios";
 import path from "node:path";
 
-/*
- * The dataset: every source document in the engine scenarios, paired with
- * the facts it should produce. The facts are the scenario's ground truth
- * (facts.ts), selected by key. Verbal facts (reported basis, HSA coverage,
- * the home-energy questions) are not on a document, so no case asks for
- * them.
- */
-
 export interface IngestCase {
   doc: string;
-  /* In the quick tier: one document per type, the fast ones where there is a choice. */
   quick: boolean;
   type: string;
   pdf: string;
@@ -21,10 +12,7 @@ export interface IngestCase {
 
 const SCENARIO_DIR = path.resolve(__dirname, "../../../engine/tests/scenarios");
 
-/*
- * [scenario, file, document type, key patterns of the facts it produces].
- * QUICK names the quick-tier documents.
- */
+/* [scenario, file, document type, key patterns of the facts it produces] */
 const MANIFEST: [string, string, string, RegExp[]][] = [
   ["alex", "01-alex-w2.pdf", "W-2", [/^employer\./]],
   ["alejandro", "01-alejandro-w2.pdf", "W-2", [/^employer\./]],
@@ -74,10 +62,8 @@ const MANIFEST: [string, string, string, RegExp[]][] = [
   ["carter", "03-example-reit-fund-1099-div.pdf", "1099-DIV", [/^account\.example-reit-fund\./]],
   ["carter", "04-ssa-1099.pdf", "SSA-1099", [/^payer\.ssa\./]],
   /*
-   * Tara's two employer W-2s (01, 02) are left out for now: they hold an
-   * embedded image, and the page rasterizer for local models cannot draw
-   * it (unpdf reports "@napi-rs/canvas is not available", though it
-   * renders every PDF without images).
+   * Tara's employer W-2s (01, 02) are left out: unpdf cannot rasterize their embedded
+   * image ("@napi-rs/canvas is not available"), though it renders other PDFs.
    */
   ["tara", "03-household-employee-w-2-copy-d.pdf", "Household W-2", [/\.household_w2$/]],
   ["tara", "04-bay-area-door-invoice.pdf", "Energy invoice", [/^vendor\.bay-area-door/]],

@@ -1,8 +1,3 @@
-/*
- * pendingInputs: which keys a return still waits for. Only forms that
- * file (or may file) count, and engine gaps are not questions.
- */
-
 import { describe, expect, it } from "vitest";
 import type { FilingInfo } from "../../src/filingInfo.js";
 import { pendingInputs } from "../../src/pendingInputs.js";

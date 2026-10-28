@@ -5,20 +5,6 @@ import type { Scope } from "../db/appDb";
 import { recordFact } from "../db/taxFacts";
 import { requireUserContext } from "./userContext";
 
-/*
- * Ingest a W-2 as a single structured tax_facts row. The Form Engine reads
- * these via `getW2Facts(facts)` from the fact catalog.
- *
- * Convention (see engine/src/facts/kinds/wages.ts):
- *   category: "wages"
- *   key:      "employer.{employerSlug}"
- *   value:    W2FactValue
- *
- * Cade (vision-capable) reads the W-2 PDF and calls this tool with the
- * extracted values. The schema mirrors IRS-canonical box numbers, so any
- * W-2 layout maps to the same fields.
- */
-
 const AddressSchema = z.object({
   line1: z.string(),
   line2: z.string().optional(),
@@ -33,7 +19,6 @@ const slugify = (s: string): string =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-/* Flatten the tool input into the W2FactValue fact shape. */
 function toW2FactValue(input: {
   employer: { name: string; ein: string; address?: W2FactValue["employerAddress"] };
   employee?: W2FactValue["employee"];
@@ -182,13 +167,7 @@ export const ingestW2 = createTool({
   },
 });
 
-/*
- * Side effect of W-2 ingest: copy employee identity (boxes a/e/f) into
- * the `identity.*` fact keys that PDF renderers read to fill the
- * personal-info boxes at the top of every form. The most recent write
- * wins, so a later user-stated correction supersedes this. Returns the
- * number of identity facts written.
- */
+/* The latest write wins, so a later user-stated correction supersedes these. */
 async function writeIdentityFacts(opts: {
   scope: Scope;
   userId: string;
@@ -221,11 +200,7 @@ async function writeIdentityFacts(opts: {
   await writeIdentity("identity.name.first", e.firstName);
   await writeIdentity("identity.name.last", e.lastName);
   await writeIdentity("identity.ssn", e.ssn);
-  /*
-   * Store the address as one fact per line so each form field can bind to
-   * its own sub-fact via lookupFact. This keeps the renderer dumb — no
-   * parsing or decomposition at fill time.
-   */
+  /* One fact per address part: each form field binds to its own sub-fact. */
   if (e.address) {
     await writeIdentity("identity.address.street", e.address.line1);
     await writeIdentity("identity.address.apt", e.address.line2);

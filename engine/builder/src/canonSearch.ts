@@ -1,13 +1,6 @@
 import { MCPClient } from "@mastra/mcp";
 import { z } from "zod";
 
-/*
- * The builder's one call to Canon: hybrid search over the reference
- * corpus, over MCP (Canon's searchRefDocs tool). Canon must be running
- * (npm run dev:canon). Configuration: CANON_URL (default
- * http://127.0.0.1:4112) and, when Canon enforces one, CANON_API_TOKEN.
- */
-
 const DEFAULT_URL = "http://127.0.0.1:4112";
 
 const searchResultSchema = z.object({
@@ -52,10 +45,7 @@ async function searchTool(): Promise<SearchTool> {
 
 type McpResult = { isError?: boolean; content?: { type?: string; text?: string }[] } | null;
 
-/*
- * A result arrives as the structured object, or as JSON text in `content`.
- * A failed tool call arrives as `isError` with the error text in `content`.
- */
+/* A result arrives as the object, or as JSON text in `content`. */
 function unwrap(raw: unknown): unknown {
   const r = raw as McpResult;
   const text = r?.content?.map((c) => (c.type === "text" ? (c.text ?? "") : "")).join("") ?? "";

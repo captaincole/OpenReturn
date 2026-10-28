@@ -1,8 +1,3 @@
-/*
- * Form 8889 slot resolver (composed by resolveFilingInfo). Lives next to
- * the form; the shared readers come from resolverInputs.ts.
- */
-
 import { HSA_COVERAGE_KEYS, type HsaCoverageType } from "../../facts/index.js";
 import { sum } from "../../money.js";
 import {
@@ -15,10 +10,6 @@ import type { Form8889FilingInfo } from "./filingInfo.js";
 
 const SA_KEY_RE = /^account\.[^.]+\.hsa_distributions\.[^.]+$/;
 
-/*
- * Default: required when any HSA fact exists (coverage, W-2 box 12 code
- * W, or a 1099-SA). An explicit `decisions.scope.must_file_8889` wins.
- */
 export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
   const { factByKey } = inputs;
   const coverageType = factByKey.get(HSA_COVERAGE_KEYS.coverageType) as HsaCoverageType | undefined;
@@ -59,7 +50,6 @@ export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
   };
 }
 
-/* Sum of W-2 box 12 code W across employers; undefined when no W-2 has one. */
 function employerContributions(inputs: ResolverInputs): number | undefined {
   let total: number | undefined;
   for (const row of factsInCategory(inputs, "wages")) {

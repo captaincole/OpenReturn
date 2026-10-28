@@ -1,32 +1,18 @@
 /*
- * California tax rate schedules (Form 540 line 31) for taxable income
- * over $100,000. At or below $100,000, FTB instructs use of the Tax
- * Table (taxTable.ts, "ca-2025").
- *
- * Keyed exactly as FTB prints them — "base + rate × amount over" — not
- * converted to the federal "multiply and subtract" form, so every
- * number here can be checked against FTB's schedules by eye:
- *
- *     tax = base + rate × (income − overMin)
- *
- * Source: 2025 California Tax Rate Schedules X, Y, Z
- * (ftb.ca.gov/forms/2025/2025-540-tax-rate-schedules.pdf; also page 75
- * of the 540 Personal Income Tax Booklet). Not in the reference corpus.
- *
- * Rows below $100,000 are kept: the base of each higher row depends on
- * them, and a full copy is easier to verify against the page.
+ * CA 540 line 31 rate schedules X, Y, Z for income over $100,000 (below that, the Tax Table).
+ * Kept as FTB prints them (base + rate × amount over) so each number checks by eye.
+ * Source: ftb.ca.gov/forms/2025/2025-540-tax-rate-schedules.pdf. Not in the corpus.
+ * Rows below $100,000 stay: each higher row's base depends on them.
  */
 
 import type { FilingStatus } from "../values.js";
 
 export interface CaRateScheduleRow {
-  /** Bracket lower bound, exclusive: income > overMin. */
+  /** Exclusive: income > overMin. */
   overMin: number;
-  /** Bracket upper bound, inclusive. Infinity for the top bracket. */
+  /** Inclusive. */
   overMax: number;
-  /** Tax on income up to overMin. */
   base: number;
-  /** Marginal rate as a decimal (0.093 for 9.3%). */
   rate: number;
 }
 
@@ -71,7 +57,6 @@ const Z_2025: Schedule = [
   { overMin: 1010417, overMax: Infinity, base: 97472.91, rate: 0.123 },
 ];
 
-/** Exported for the data-integrity test only. */
 export const CA_RATE_SCHEDULES_2025 = { X: X_2025, Y: Y_2025, Z: Z_2025 };
 
 const SCHEDULES_BY_YEAR: Record<number, Record<FilingStatus, Schedule>> = {
@@ -84,11 +69,7 @@ const SCHEDULES_BY_YEAR: Record<number, Record<FilingStatus, Schedule>> = {
   },
 };
 
-/**
- * Form 540 line 31 tax for taxable income over $100,000. Returns the
- * un-rounded result; the caller rounds to the nearest dollar (CLAUDE.md). A call
- * at or below $100,000 throws: FTB instructs the Tax Table there.
- */
+/** Returns un-rounded tax; the caller rounds. */
 export function lookupCaRateSchedule(
   taxYear: number,
   filingStatus: FilingStatus,

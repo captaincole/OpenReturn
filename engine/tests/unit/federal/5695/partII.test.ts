@@ -1,7 +1,4 @@
-/*
- * Form 5695 Part II helpers: which section qualifies, item order, and the
- * "30%, but not more than $X" step (2025 Form 5695 and instructions).
- */
+/* Source: 2025 Form 5695 and instructions, Part II. */
 
 import { describe, expect, it } from "vitest";
 import type { EnergyImprovementItem } from "../../../../src/facts/index.js";

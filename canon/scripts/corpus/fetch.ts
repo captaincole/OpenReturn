@@ -1,25 +1,10 @@
-/*
- * Fetch the prebuilt reference corpus into .data/corpus.db.
- *
- * Resolution order:
- *   1. .data/corpus.db present and sha matches the manifest → done.
- *      A DIFFERENT sha is also fine: assume a locally extended corpus
- *      from `corpus sync` and do not clobber it. Use --force to replace.
- *   2. CORPUS_SEED_PATH env or a local seed file → copy.
- *   3. Manifest url (GitHub Release asset) → download and verify sha256.
- *
- * The corpus ships as a release asset, not in git, because it grows with
- * scenario coverage (50 states ≈ 50+ instruction booklets). See
- * seed/corpus.manifest.json.
- */
-
 import { createHash } from "node:crypto";
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Command } from "../lib/cli";
 
-const HERE = dirname(fileURLToPath(import.meta.url)); // canon/scripts/corpus
+const HERE = dirname(fileURLToPath(import.meta.url));
 const MANIFEST_PATH = resolve(HERE, "../../seed/corpus.manifest.json");
 const DEFAULT_TARGET = resolve(HERE, "../../.data/corpus.db");
 
@@ -41,7 +26,7 @@ async function run(argv: string[]): Promise<void> {
   const target = process.env.CORPUS_DB_PATH ? resolve(process.env.CORPUS_DB_PATH) : DEFAULT_TARGET;
   mkdirSync(dirname(target), { recursive: true });
 
-  // 1. Already present on disk.
+  // A different sha is a locally extended corpus: never clobber it without --force.
   if (existsSync(target) && !force) {
     const sha = sha256Of(target);
     if (sha === manifest.sha256) {
@@ -55,7 +40,6 @@ async function run(argv: string[]): Promise<void> {
     return;
   }
 
-  // 2. Local seed (dev / private-phase path).
   const seedPath = process.env.CORPUS_SEED_PATH
     ? resolve(process.env.CORPUS_SEED_PATH)
     : resolve(HERE, "../../seed/corpus.db");
@@ -66,7 +50,6 @@ async function run(argv: string[]): Promise<void> {
     return;
   }
 
-  // 3. Download from the release asset.
   if (!manifest.url) {
     console.error(
       `[corpus fetch] no corpus available: ${target} missing, no local seed at ` +
@@ -82,7 +65,6 @@ async function run(argv: string[]): Promise<void> {
   await checkEmbeddingStamp();
 }
 
-/* Download the release asset, verify its sha256, install to target. */
 async function downloadFromRelease(manifest: Manifest, target: string): Promise<void> {
   console.log(
     `[corpus fetch] downloading ${manifest.version} (${(manifest.sizeBytes / 1e6).toFixed(1)} MB)…`,
@@ -104,13 +86,7 @@ async function downloadFromRelease(manifest: Manifest, target: string): Promise<
   console.log(`[corpus fetch] installed ${manifest.version} → ${target}`);
 }
 
-/*
- * Compare the installed corpus's embedding-model stamp against the
- * active local model. On mismatch, search runs keyword-only until the
- * vectors are rebuilt (~4 min, free, needs Ollama). Say so now, not at
- * query time. getCorpusDb resolves the same CORPUS_DB_PATH/default this
- * script installed to.
- */
+// Warn now, not at query time, when search will run keyword-only.
 async function checkEmbeddingStamp(): Promise<void> {
   const { storedEmbeddingModel } = await import("../../src/db/corpusStore");
   const { resolveEmbeddings } = await import("../../src/refdocs/embeddings");

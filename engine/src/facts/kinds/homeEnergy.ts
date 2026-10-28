@@ -1,24 +1,8 @@
-/*
- * Home energy improvement fact kind (Form 5695, Part II). One fact =
- * one contractor invoice or receipt, with one item per piece of
- * qualifying property.
- *
- * Convention:
- *   category: "home_energy"
- *   key:      "vendor.{vendorSlug}.energy_invoice"
- *   value:    EnergyInvoiceFactValue
- *
- * Four verbal answers go with it (HOME_ENERGY_KEYS), one boolean fact
- * each. They answer Form 5695 lines 17a–17c, 17e, 21a, and 21b.
- *
- * Not modeled: Part I (solar, wind, geothermal, battery, fuel cell) and
- * enabling property (line 25: panelboards, branch circuits, feeders).
- */
+/* Form 5695 Part II, one fact per invoice. Not modeled: Part I and enabling property (line 25). */
 
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
 
-/* Form 5695 Part II property types. Each maps to one line group. */
 export const ENERGY_ITEM_KINDS = [
   "insulation", // line 18
   "exterior_door", // line 19
@@ -37,9 +21,8 @@ export type EnergyItemKind = (typeof ENERGY_ITEM_KINDS)[number];
 export interface EnergyImprovementItem {
   kind: EnergyItemKind;
   description?: string;
-  /* Qualified manufacturer identification number: 4 characters. */
   qmid?: string;
-  /* Cost in dollars. Lines 22–29 include onsite labor; lines 18–20 exclude it. */
+  /* Lines 22–29 include onsite labor; lines 18–20 exclude it. */
   cost: number;
 }
 
@@ -51,13 +34,13 @@ export interface EnergyInvoiceFactValue {
 }
 
 export const HOME_ENERGY_KEYS = {
-  /* Lines 17a and 21a: installed on the taxpayer's main home in the United States. */
+  /* Lines 17a and 21a. */
   mainHomeInUs: "home_energy.main_home_in_us",
-  /* Lines 17b and 21b: the taxpayer is the original user and placed it in service. */
+  /* Lines 17b and 21b. */
   originalUser: "home_energy.original_user",
-  /* Line 17c: components expected to last at least 5 years. */
+  /* Line 17c. */
   lastsFiveYears: "home_energy.lasts_five_years",
-  /* Line 17e: improvements are related to the construction of the main home. */
+  /* Line 17e. */
   newConstruction: "home_energy.new_home_construction",
 } as const;
 

@@ -2,17 +2,11 @@ import { agentUrl } from "@/lib/agentBase";
 import { UnauthorizedError } from "@/lib/api";
 import { canonUrl } from "@/lib/canonBase";
 
-/*
- * Browser-side client for tax-code Q&A and the reference library. The
- * types mirror cade/src/mastra/db/askThreads.ts and
- * db/refLibrary.ts; keep them in sync by hand until the apps share a
- * types package.
- */
+/* Types mirror cade/src/mastra/db/askThreads.ts and db/refLibrary.ts. Keep in sync by hand. */
 
 export type AskTurnStatus = "running" | "completed" | "failed";
 export type AskCoverage = "covered" | "partial" | "not_covered";
 export type AskStage = "formulating" | "retrieving" | "answering";
-/** A document's source: a PDF, or a cleaned HTML page the library renders. */
 export type SourceFormat = "pdf" | "html";
 
 export interface AskCitation {
@@ -20,7 +14,7 @@ export interface AskCitation {
   blockId: string;
   docId: string;
   documentTitle: string;
-  /** Missing on citations saved before HTML documents existed: read it as "pdf". */
+  /** Missing on older citations: read it as "pdf". */
   format?: SourceFormat;
   sectionHeading: string | null;
   pageNum: number;
@@ -57,13 +51,12 @@ export interface LibraryDocument {
   taxYear: number | null;
   sourceUrl: string | null;
   format: SourceFormat;
-  /** When the publisher issued it ("YYYY-MM[-DD]"); null when unknown. */
+  /** "YYYY-MM[-DD]" */
   published: string | null;
   totalPages: number;
   blockCount: number;
 }
 
-/** A heading in an HTML document; anchor is its id in the HTML. */
 export interface LibrarySection {
   anchor: string;
   heading: string;
@@ -103,12 +96,10 @@ function postQuestion(path: string, question: string): Promise<StartedTurn> {
   }).then((res) => readJson<StartedTurn>(res, "Ask"));
 }
 
-/** Starts a new thread with its first question. */
 export function askNewQuestion(question: string): Promise<StartedTurn> {
   return postQuestion("/app/ask", question);
 }
 
-/** Adds a follow-up question to an existing thread. */
 export function askFollowUp(threadId: string, question: string): Promise<StartedTurn> {
   return postQuestion(`/app/ask/${threadId}/turns`, question);
 }
@@ -128,23 +119,18 @@ export async function fetchLibraryDocument(docId: string): Promise<LibraryHtmlDo
   return readJson<LibraryHtmlDocument>(res, "Load document");
 }
 
-/** The library's page for an HTML document, optionally at a section anchor. */
 export function refDocPageUrl(docId: string, anchor?: string): string {
   const url = `/library/${encodeURIComponent(docId)}`;
   return anchor ? `${url}#${anchor}` : url;
 }
 
-/*
- * Where a citation opens: an HTML document's page at the cited section
- * (block ids are `<docId>::sec::<anchor>::bNN`), or the PDF on its page.
- */
+/* Block ids are `<docId>::sec::<anchor>::bNN`. */
 export function citationUrl(c: AskCitation): string {
   if (c.format !== "html") return refDocPdfUrl(c.docId, c.pageNum);
   const anchor = c.blockId.split("::")[2];
   return refDocPageUrl(c.docId, anchor === "preamble" ? undefined : anchor);
 }
 
-/** Opens the source PDF on the cited page (the browser viewer honors #page). */
 export function refDocPdfUrl(docId: string, pageNum?: number): string {
   const url = canonUrl(`/app/refdocs/${encodeURIComponent(docId)}/pdf`);
   return pageNum ? `${url}#page=${pageNum}` : url;

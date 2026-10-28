@@ -1,10 +1,5 @@
 "use client";
 
-/*
- * First-run setup: create the instance owner. One-shot — the API 409s
- * once an owner exists, and the server layout then redirects to /login.
- */
-
 import { useRouter } from "next/navigation";
 import { type FormEvent, useState } from "react";
 

@@ -1,12 +1,9 @@
 import type { AuthorityCitation, EvidenceBundle } from "./schemas";
 
 /*
- * The rule judge's hard rule, enforced in code: a citation must name a
- * block retrieved in this run, and a quote must appear word for word in
- * that block (case, spacing and typographic punctuation ignored). A
- * citation to an unknown block is dropped; a quote that does not match
- * is dropped from its citation, which stays. The judge sees the blocks'
- * text in its prompt, so it needs no tool to check them.
+ * The rule judge's hard rule, enforced in code instead of with a tool: a
+ * citation must name a block retrieved in this run, and its quote must
+ * appear word for word in that block.
  */
 
 export interface ValidatedCitations {

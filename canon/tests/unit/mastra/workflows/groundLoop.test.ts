@@ -2,12 +2,6 @@ import type { Mastra } from "@mastra/core";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import type { GroundInput, GroundStepLog } from "../../../../src/mastra/workflows/ground/schemas";
 
-/*
- * The ground loop with fake judges: it iterates while rule asks for more
- * evidence, stops at maxIterations, reports the step log in order, and
- * leaves the completed steps with the caller when a judge throws.
- */
-
 vi.mock("../../../../src/db/corpusSearch", () => ({
   hybridSearchRefDocs: async ({ query }: { query: string }) => [
     {

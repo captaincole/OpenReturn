@@ -1,6 +1,5 @@
 import { CA540, IRA_LIMIT, blocks, insufficient, type AskCase } from "./caseKit";
 
-/* Tier 1: one rule, one obvious passage. */
 export const TIER_1: AskCase[] = [
   {
     name: "HSA limit, self-only",

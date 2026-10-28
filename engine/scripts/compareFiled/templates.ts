@@ -1,12 +1,4 @@
-/*
- * --init: copy the jordan scenario into the data folder as a template.
- * Never overwrites a file.
- *
- * The copies hold jordan's FAKE values in the normal scenario format
- * (facts.ts, decisions.ts, expected.ts, index.ts). The taxpayer replaces
- * every value with their own; expected.ts holds the filed return.
- * AI_PROMPT.md is copied with the real folder and repo paths filled in.
- */
+/* --init: copy the jordan scenario (FAKE values) into the data folder. Never overwrites a file. */
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { relative, resolve } from "node:path";
@@ -21,7 +13,6 @@ const COPY_HEADER = `/*
 
 `;
 
-/* Re-point the scenario's relative imports at the repo. */
 function copyJordan(file: string, engineRel: string): string {
   /* Drop the file's own header (jordan's expected.ts says "generated, do not edit"). */
   const src = readFileSync(resolve(JORDAN_DIR, file), "utf8").replace(/^\/\*[\s\S]*?\*\/\n+/, "");
@@ -34,7 +25,6 @@ function copyJordan(file: string, engineRel: string): string {
   );
 }
 
-/* Who prepared the filed return. The report prints it next to the results. */
 const PREPARER_HINT =
   '// preparer: { kind: "software", name: "<software and version>" }, // or "cpa" | "enrolled_agent" | "self"';
 

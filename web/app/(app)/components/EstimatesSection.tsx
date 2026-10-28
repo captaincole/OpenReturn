@@ -1,8 +1,3 @@
-/*
- * Tax estimates — placeholder. An estimate works like a return but runs
- * on the 1040-ES estimated-tax worksheet for the year in progress.
- */
-
 import { CURRENT_TAX_YEAR } from "./constants";
 import { LockIcon } from "./Lock";
 import { Section } from "./Section";

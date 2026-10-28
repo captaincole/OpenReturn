@@ -2,12 +2,6 @@ import { formatPublished } from "../../../refdocs/published";
 import type { AskHistoryTurn } from "./types";
 import type { Passage } from "./validate";
 
-/*
- * Prompt rendering for the ask judges. The conversation's earlier turns
- * are the only context (no agent memory): the last few completed Q&A
- * pairs, markers stripped and answers trimmed.
- */
-
 const HISTORY_TURNS = 4;
 const HISTORY_ANSWER_CHARS = 600;
 
@@ -25,11 +19,7 @@ export function renderFormulatePrompt(history: string, question: string): string
   return `${history}Question: ${question}\n\nWrite the search queries.`;
 }
 
-/*
- * An HTML document has no pages, so its passages carry the section only.
- * The publication date lets the answerer prefer the newer of two passages
- * that disagree.
- */
+// The date lets the answerer prefer the newer of two passages that disagree.
 function renderPassage(p: Passage, n: number): string {
   const section =
     p.sectionHeading && p.sectionHeading !== "(Preamble)" ? `, § ${p.sectionHeading}` : "";

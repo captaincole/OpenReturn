@@ -1,10 +1,7 @@
 /*
- * End-to-end tests: the real web app + agent + local model, driven
- * through Chrome. Run with `npm run e2e` (stop `npm run dev:all` first).
- *
- * The run owns the normal ports (:4111 agent, :3000 web) but a throwaway
- * data folder (run.ts). `reuseExistingServer: false` makes the run fail
- * when dev:all is up, so a test can never write into your real app.db.
+ * The run uses the normal ports but a throwaway data folder (run.ts).
+ * `reuseExistingServer: false` fails the run when dev:all is up, so a test
+ * can never write into your real app.db.
  */
 
 import { defineConfig } from "@playwright/test";

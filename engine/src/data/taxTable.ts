@@ -1,15 +1,6 @@
 /*
- * Runtime loader for tax tables (Form 1040 line 16 / Form 540 line 31,
- * for taxable income under $100,000). A stable `tableId` identifies each
- * table (for example "federal-2025", "ca-2025"). Per-table JSON files
- * live next to this file. To add a jurisdiction or tax year, add a JSON
- * file and an import line below.
- *
- * Tables differ in column count and in which filing statuses share
- * columns. Federal has 4 columns; CA has 3, where Single+MFS share one
- * and MFJ+QSS share another. Each JSON carries its own
- * `filingStatusColumns` map, so the lookup code stays
- * jurisdiction-agnostic.
+ * Tax tables (1040 line 16, 540 line 31) for income under $100,000. Add a table as a JSON file plus an import.
+ * Each JSON carries its own filingStatusColumns map (CA shares columns), so lookup stays jurisdiction-agnostic.
  */
 
 import ca2025 from "./ca-tax-table-2025.json" with { type: "json" };
@@ -22,12 +13,6 @@ export type FilingStatus =
   | "head_of_household"
   | "qualifying_surviving_spouse";
 
-/*
- * Row column names are jurisdiction-specific (federal uses
- * "single"/"mfj"/"mfs"/"hoh"; CA uses "single_or_mfs"/"mfj_or_qss"/"hoh").
- * Treat per-row values as a string-keyed map. Resolve the column via the
- * table's own filingStatusColumns mapping at lookup time.
- */
 export interface TaxTableRow {
   low: number;
   high: number;
@@ -65,7 +50,6 @@ export interface TaxTableLookupOk {
   ok: true;
   tax: number;
   bracket: { low: number; high: number };
-  /** Provenance. Useful for AI rationale and grounding review. */
   source: { tableId: string; taxYear: number; jurisdiction: string; url: string };
 }
 
@@ -83,7 +67,6 @@ const err = (reason: TaxTableLookupErr["reason"], message: string): TaxTableLook
   message,
 });
 
-/* Resolve (tableId, filingStatus) to the table and its status column. */
 function resolveTableColumn(
   tableId: string,
   filingStatus: FilingStatus,
@@ -105,10 +88,6 @@ function resolveTableColumn(
   return { table, column };
 }
 
-/**
- * Look up tax for (tableId, taxableIncome, filingStatus). Returns a
- * discriminated result, so callers handle each failure mode explicitly.
- */
 export function lookupTax(
   tableId: string,
   taxableIncome: number,
@@ -156,21 +135,12 @@ export function lookupTax(
   };
 }
 
-/*
- * The ceiling is the last row's upper bound. A half-open table ends
- * before it (federal: the Tax Table is for income under $100,000); an
- * inclusive table includes it (CA: up to and including $100,000).
- */
+/* Federal stops below $100,000; CA includes $100,000. */
 function aboveCeiling(table: LoadedTaxTable, income: number): boolean {
   const max = table.coverage.maxIncome;
   return table.boundaryConvention === "half_open" ? income >= max : income > max;
 }
 
-/*
- * Linear scan with early exit. Rows sort by `low` ascending; the scan
- * stops as soon as it passes the target. The federal table has 2062 rows
- * and CA has 1001, well under any size where binary search would matter.
- */
 function findRow(
   rows: TaxTableRow[],
   income: number,
@@ -185,7 +155,6 @@ function findRow(
   return undefined;
 }
 
-/** Available tableIds. Useful for diagnostic output. */
 export function supportedTableIds(): string[] {
   return Object.keys(TABLES_BY_ID).sort();
 }

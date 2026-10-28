@@ -1,18 +1,6 @@
 /*
- * Grounding smoke test: three end-to-end review-decision workflow runs
- * against a THROWAWAY app DB. APP_DB_PATH points at a temp file before
- * any module loads, so the dev database is never touched. The judges run
- * in Canon, so Canon must be up (npm run dev:canon; CANON_URL to point
- * elsewhere); the script skips when it is not.
- *
- * Each case: seed facts → record a decision → run reviewDecision(scope, id)
- * directly (the same entry the record-ai-decision tool fires in the
- * background) → assert the verdict, persistence, citations, and the
- * open-question side effects.
- *
- * Costs real LLM calls (Canon's judge model × a few per case). Run on
- * demand, not in CI:
- *   npm run smoke:review
+ * npm run smoke:review. Costs real judge-model calls in Canon: run on demand, not in CI.
+ * Uses a throwaway app DB. Skips when Canon is not running.
  */
 
 import "dotenv/config";
@@ -30,13 +18,7 @@ const OWNER_ID = "smoke-owner";
 
 interface Case {
   name: string;
-  /*
-   * Any of these verdicts passes. The CA 540 booklet is in the corpus
-   * now, so the old "ungroundable" outcome is gone. Case 3 accepts all
-   * three verdicts; see its inline comment.
-   */
   acceptVerdicts: Array<"accurate" | "inaccurate" | "needs_more_facts">;
-  // Whether finalize must write an open_questions row.
   expectOpenQuestion: boolean | "if-not-accurate";
   facts: Array<{ category: string; key: string; value: unknown; sourceNote: string }>;
   decision: {
@@ -104,14 +86,8 @@ const CASES: Case[] = [
   },
   {
     /*
-     * Borderline by design. The 540 booklet has thin residency detail
-     * (FTB Pub 1031 is not ingested), so the judge lands differently run
-     * to run. accurate / needs_more_facts / inaccurate are all
-     * defensible. This case asserts PIPELINE MECHANICS: the 3-iteration
-     * loop, CA-corpus retrieval, persistence, and open-question side
-     * effects. It does not assert judge calibration. Calibration
-     * coverage belongs in a real eval dataset (see CLAUDE.md lessons:
-     * do not tune prompts off one smoke case).
+     * Borderline by design: the verdict varies run to run. This case asserts pipeline
+     * mechanics, not judge calibration. Do not tune prompts off it.
      */
     name: "CA residency call (mechanics only — borderline verdict accepted)",
     acceptVerdicts: ["accurate", "needs_more_facts", "inaccurate"],
@@ -144,7 +120,7 @@ const CASES: Case[] = [
 
 type SmokeCase = (typeof CASES)[number];
 
-/* The DB/workflow modules, imported AFTER the env override (see main). */
+/* Imported AFTER the env override (see main). */
 interface Deps {
   createOwnerFiling: typeof import("../src/mastra/db/filings").createOwnerFiling;
   recordFact: typeof import("../src/mastra/db/taxFacts").recordFact;
@@ -154,7 +130,6 @@ interface Deps {
   reviewDecision: typeof import("../src/mastra/workflows/reviewDecision").reviewDecision;
 }
 
-/* Seed the case's facts + decision into a fresh filing; return the decision id. */
 async function seedCase(
   deps: Deps,
   c: SmokeCase,
@@ -183,7 +158,6 @@ async function seedCase(
   return decisionId;
 }
 
-/* Check the four assertions, print the per-case report, return pass/fail. */
 function reportCase(
   c: SmokeCase,
   secs: string,
@@ -219,7 +193,6 @@ function reportCase(
 }
 
 async function runCase(deps: Deps, c: SmokeCase): Promise<boolean> {
-  // A fresh filing per case gives a clean fact/question space.
   const filingId = crypto.randomUUID();
   await deps.createOwnerFiling({ filingId, userId: OWNER_ID, taxYear: YEAR });
   const scope = { userId: OWNER_ID, filingId };
@@ -268,7 +241,6 @@ async function main() {
     if (await runCase(deps, c)) passed += 1;
   }
 
-  // Clean up the throwaway DBs.
   for (const suffix of ["", "-wal", "-shm"]) {
     await rm(`${SMOKE_DB}${suffix}`, { force: true }).catch(() => {});
     await rm(`${process.env.MASTRA_DB_PATH}${suffix}`, { force: true }).catch(() => {});
@@ -285,9 +257,8 @@ main().catch((err) => {
 });
 
 /*
- * A workflow runs registered on a Mastra instance. The app's instance
- * (src/mastra/index.ts) uses top-level await, which tsx cannot load in
- * this CommonJS script, so register the workflow on a small instance here.
+ * A workflow must be registered on a Mastra instance. The app's instance uses top-level
+ * await, which tsx cannot load in this CommonJS script.
  */
 async function registerReviewWorkflow(workflow: unknown) {
   const { Mastra } = await import("@mastra/core");

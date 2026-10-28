@@ -1,15 +1,3 @@
-/*
- * Schedule H (Form 1040) — Household Employment Taxes, tax year 2025.
- * Drafted by `form-engine generate-bindings`, then written by hand from
- * the 2025 Schedule H and its instructions (irs-1040sh-inst-2025).
- *
- * Modeled: lines A–C and Part I (social security, Medicare, and
- * withheld income tax, lines 1–9). Not modeled: Part II (FUTA tax,
- * lines 10–26), which applies when line 9 is Yes, and Part IV (address
- * and signature), which only employers who do not file Form 1040 use.
- * Schedule 2 line 9 reads line 8 when line 9 is No.
- */
-
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
@@ -45,22 +33,19 @@ export function register(): void {
       "0.line.B_no": (_, info) => no(lineB(info)),
       "0.line.C_yes": (_, info) => yes(lineC(info)),
       "0.line.C_no": (_, info) => no(lineC(info)),
-      // Line 1: W-2 box 3 of each line A employee. Document sum: round the total.
       "0.line.1": (_, info) =>
         partI(info)
           ? roundDollars(sum(...lineAEmployees(info).map((e) => e.socialSecurityWages)))
           : undefined,
-      // Line 2: line 1 × 12.4% (employee and employer share together).
+      // 12.4%: employee and employer share together.
       "0.line.2": (f) =>
         f["0.line.1"] === undefined ? undefined : roundDollars(f["0.line.1"] * 0.124),
       "0.line.3": (_, info) =>
         partI(info)
           ? roundDollars(sum(...lineAEmployees(info).map((e) => e.medicareWages)))
           : undefined,
-      // Line 4: line 3 × 2.9%.
       "0.line.4": (f) =>
         f["0.line.3"] === undefined ? undefined : roundDollars(f["0.line.3"] * 0.029),
-      // Line 5: each employee's Medicare wages over $200,000.
       "0.line.5": (_, info) =>
         partI(info)
           ? roundDollars(
@@ -71,10 +56,8 @@ export function register(): void {
               ),
             )
           : undefined,
-      // Line 6: line 5 × 0.9%.
       "0.line.6": (f) =>
         f["0.line.5"] === undefined ? undefined : roundDollars(f["0.line.5"] * 0.009),
-      // Line 7: W-2 box 2 of every household employee.
       "0.line.7": (_, info) =>
         lines7to9(info)
           ? roundDollars(sum(...(info.householdEmployees ?? []).map((e) => e.federalTaxWithheld)))

@@ -1,8 +1,3 @@
-/*
- * The Ask flow's scores for the eval overview (lib/overview.ts). The flow
- * score is the share of correct runs. Each capability is a share of runs
- * over the cases it applies to, and shows where the wrong runs went wrong.
- */
 import type { EvalModel } from "../lib/models";
 import type { FlowScores, ModelScores } from "../lib/overview";
 import { CASES } from "./cases";
@@ -10,14 +5,11 @@ import type { AskResult } from "./report";
 
 export const coverageOk = (r: AskResult) =>
   r.coverage !== null && r.expectedCoverage.includes(r.coverage);
-/* Grounding applies where an answer is expected: the case has authority and should be covered. */
 export const shouldGround = (r: AskResult) =>
   r.citedAuthority !== null && r.expectedCoverage.includes("covered");
 export const groundedOk = (r: AskResult) => r.citedAuthority === true;
-/* Correct: the right coverage label, the labeled passage cited, and every key fact stated. */
 export const correct = (r: AskResult) =>
   coverageOk(r) && (!shouldGround(r) || groundedOk(r)) && r.factsOk !== false;
-/* Confidently wrong: the answer says the library covers it, but the run is not correct. */
 export const coveredButWrong = (r: AskResult) => r.coverage === "covered" && !correct(r);
 
 const share = (rs: AskResult[], pred: (r: AskResult) => boolean) =>

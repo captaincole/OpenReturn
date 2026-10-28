@@ -4,16 +4,6 @@ import type { PlanItem, PlanItemStatus } from "@/lib/api";
 import { cn } from "@/lib/cn";
 import { useEffect, useRef, useState } from "react";
 
-/*
- * Renders Cade's rolling plan from /app/state. The parent page re-fetches
- * state after each chat turn or reset, and the card re-renders. Items keep
- * stable ids across status changes, so the same row visually transitions
- * todo → doing → done. When a row flips to done, it stays visible for
- * FADE_OUT_MS so the user sees the checkmark. Then it drops out.
- *
- * An empty plan renders the card with a short placeholder line.
- */
-
 const FADE_OUT_MS = 1100;
 
 interface PlanCardProps {
@@ -21,7 +11,6 @@ interface PlanCardProps {
 }
 
 interface DisplayItem extends PlanItem {
-  // Set when the row is done or dropped upstream. A timer then removes it.
   leaving?: boolean;
 }
 
@@ -30,37 +19,22 @@ export function PlanCard({ plan }: PlanCardProps) {
   const removalTimers = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
 
   /*
-   * Reconcile `display` when the upstream plan changes. Incoming items
-   * replace their display rows, except rows already marked leaving — those
-   * finish their fade. Items that the upstream plan dropped also get the
-   * leaving flag, so they fade instead of popping out.
+   * A row already leaving always finishes its fade. Rows the upstream plan
+   * dropped (deliberately or by a missed status flip) fade too, not pop out.
    */
   useEffect(() => {
     setDisplay((prev) => {
       const incomingById = new Map(plan.map((p) => [p.id, p]));
       const next: DisplayItem[] = [];
 
-      // Adopt the new status of items still present upstream.
       for (const incoming of plan) {
         const wasLeaving = prev.find((p) => p.id === incoming.id)?.leaving;
         if (wasLeaving) {
-          /*
-           * The row already fades out. Do not restore it because the
-           * upstream snapshot still includes it. A committed fade always
-           * completes.
-           */
           continue;
         }
         next.push(incoming);
       }
 
-      /*
-       * The upstream plan dropped these items, for example when Cade
-       * rewrote the array without them. Keep them briefly with their last
-       * status so the disappearance is not a hard pop-out. We cannot tell
-       * a deliberate drop from a missed status flip, so treat both the
-       * same.
-       */
       for (const old of prev) {
         if (incomingById.has(old.id)) continue;
         if (old.leaving) {
@@ -71,10 +45,6 @@ export function PlanCard({ plan }: PlanCardProps) {
         scheduleRemoval(old.id);
       }
 
-      /*
-       * Also schedule `done` items to leave. Keep them visible meanwhile
-       * so the checkmark animation is readable.
-       */
       for (const item of next) {
         if (item.status === "done" && !item.leaving) {
           item.leaving = true;
@@ -84,7 +54,7 @@ export function PlanCard({ plan }: PlanCardProps) {
 
       return next;
     });
-    // Deps are intentionally limited to `plan`. See the removal timers above.
+    // Deps are intentionally limited to `plan`.
   }, [plan]);
 
   function scheduleRemoval(id: string) {
@@ -96,10 +66,7 @@ export function PlanCard({ plan }: PlanCardProps) {
     removalTimers.current.set(id, timer);
   }
 
-  /*
-   * Capture the timers Map so the cleanup closure clears the same
-   * instance after re-renders.
-   */
+  /* Capture the Map so the cleanup clears the same instance after re-renders. */
   const timersAtCleanup = removalTimers.current;
   useEffect(() => {
     return () => {

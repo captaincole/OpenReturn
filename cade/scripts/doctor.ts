@@ -1,13 +1,4 @@
-/*
- * doctor — one-shot setup diagnostics. Reports machine info, env config,
- * data files, and local model servers (Ollama, LM Studio).
- *
- *   npm run doctor        (or: npx tsx scripts/doctor.ts from cade/)
- *
- * Read-only: the script probes the machine and local HTTP endpoints. It
- * writes nothing. Run it before deeper debugging. It answers "why does
- * semantic search fall back to keyword?" and "what is installed here?".
- */
+/* Read-only setup diagnostics: npm run doctor. It writes nothing. */
 
 import { config } from "dotenv";
 import { spawnSync } from "node:child_process";
@@ -16,10 +7,7 @@ import os from "node:os";
 import { resolve } from "node:path";
 import { projectRoot } from "../src/paths";
 
-/*
- * Load the same env layering the dev server sees. .env loads first, and
- * .env.development fills the gaps. dotenv never overrides set keys.
- */
+/* .env first, then .env.development fills the gaps: dotenv never overrides a set key. */
 config({ path: resolve(projectRoot, ".env"), quiet: true });
 config({ path: resolve(projectRoot, ".env.development"), quiet: true });
 
@@ -43,8 +31,6 @@ function mb(bytes: number): string {
   return `${(bytes / 1024 ** 2).toFixed(1)} MB`;
 }
 
-// ─── Machine ────────────────────────────────────────────────────────────
-
 function machineSection(): void {
   section("Machine");
   row("OS", `${os.platform()} ${os.release()} (${os.arch()})`);
@@ -53,8 +39,6 @@ function machineSection(): void {
   row("RAM", `${gb(os.totalmem())} total, ${gb(os.freemem())} free`);
   row("Node", process.version);
 }
-
-// ─── Config ─────────────────────────────────────────────────────────────
 
 const DEFAULT_EMBEDDINGS_MODEL = "ollama/embeddinggemma-2";
 
@@ -72,8 +56,6 @@ function configSection(): void {
   }
 }
 
-// ─── Data files ─────────────────────────────────────────────────────────
-
 function dataSection(): void {
   section("Data files");
   const entries: [string, string][] = [
@@ -89,8 +71,6 @@ function dataSection(): void {
     existsSync(docs) ? `${OK} ${readdirSync(docs).length} filing dir(s)` : `${DIM} none yet`,
   );
 }
-
-// ─── Model servers ──────────────────────────────────────────────────────
 
 function binaryVersion(bin: string, args: string[]): string | null {
   const res = spawnSync(bin, args, { encoding: "utf8", timeout: 5_000 });
@@ -111,7 +91,7 @@ interface OllamaStatus {
   binary: string | null;
   serverUrl: string;
   serverVersion: string | null;
-  // Pulled model names. Null when the server is down.
+  // Null when the server is down.
   models: string[] | null;
 }
 
@@ -138,10 +118,6 @@ async function probeLmStudio(): Promise<{ binary: string | null; serverUp: boole
   };
 }
 
-/*
- * The bare model name Ollama knows, e.g. "embeddinggemma-2" from
- * "ollama/embeddinggemma-2". Tags can carry a ":latest" suffix.
- */
 function embeddingModelName(): string {
   const raw = process.env.EMBEDDINGS_MODEL ?? DEFAULT_EMBEDDINGS_MODEL;
   return raw.replace(/^ollama\//, "");
@@ -150,8 +126,6 @@ function embeddingModelName(): string {
 function hasModel(models: string[], name: string): boolean {
   return models.some((m) => m === name || m.startsWith(`${name}:`));
 }
-
-// ─── Main ───────────────────────────────────────────────────────────────
 
 async function main(): Promise<void> {
   console.log("OpenReturn doctor — machine, config, and model-server diagnostics");

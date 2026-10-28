@@ -7,22 +7,8 @@ import type { ParserStyle } from "./parse";
 import { isPublishedDate } from "./published";
 
 /*
- * Walks the @openreturn/sources tree (sources/<year>/…) for corpus
- * sidecars: instructions.meta.json (form instructions, under forms/) and
- * publication.meta.json (an IRS/FTB publication, under publications/).
- * The sidecars are committed; their source files are not. A source file
- * is a PDF, or for "format": "html" a cleaned publisher web page
- * (refdocs/html/cleanFtb.ts), saved beside the sidecar as
- * instructions.pdf / instructions.html (publication.* likewise). A sidecar
- * is the source of truth for docId/title/publisher/taxYear/sourceUrl and
- * the source file's sha256, so `corpus status` needs no file on disk and
- * `corpus sync` fetches one only when it has to ingest
- * (refdocs/fetchSource.ts).
- *
- * A malformed sidecar, or a source file with no sidecar, is reported as
- * `unconfigured`, not skipped: it is almost always a mistake. blank.pdf
- * files (fillable form templates) are ignored; the engine renders into
- * them, the corpus does not ingest them.
+ * A malformed sidecar, or a source file with no sidecar, is `unconfigured`,
+ * not skipped: it is almost always a mistake.
  */
 
 export interface RefDocSidecar {
@@ -31,23 +17,17 @@ export interface RefDocSidecar {
   publisher: string;
   taxYear: number | null;
   sourceUrl: string | null;
-  /** sha256 of the source file: the corpus document's identity. */
   sha256: string;
-  /** "pdf" unless the sidecar says "html". */
   format: SourceFormat;
-  /*
-   * Heading-detection style. The sidecar may set "parserStyle"
-   * explicitly; otherwise it follows the publisher (FTB → "ftb").
-   */
   parserStyle: ParserStyle;
-  /** "YYYY-MM-DD" or "YYYY-MM" (refdocs/published.ts); null → derived from the source. */
+  /** null → derived from the source file. */
   published: string | null;
 }
 
 export interface CorpusEntry {
-  sourcePath: string; // absolute; the file may not be on disk (see sourceOnDisk)
-  sourceRelPath: string; // relative to the sources root, for display
-  sidecarPath: string; // absolute
+  sourcePath: string;
+  sourceRelPath: string;
+  sidecarPath: string;
   sidecar: RefDocSidecar;
   sourceOnDisk: boolean;
 }
@@ -114,7 +94,7 @@ export async function walkCorpus(sourcesRoot: string = SOURCES_ROOT): Promise<Wa
   return { entries, unconfigured };
 }
 
-/* The parsed sidecar, or the reason it is unusable (shown by `corpus status`). */
+/* Returns the sidecar, or the reason it is unusable. */
 async function loadSidecar(sidecarPath: string): Promise<RefDocSidecar | string> {
   let parsed: unknown;
   try {

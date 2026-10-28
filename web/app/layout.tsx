@@ -41,16 +41,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  /*
-   * The CSP nonce from proxy.ts. Reading a request header also makes
-   * every page render per request, which the nonce requires.
-   */
+  /* Reading a request header also makes every page render per request, which the nonce needs. */
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
-    /*
-     * suppressHydrationWarning: THEME_INIT_SCRIPT sets data-theme on <html>
-     * before React hydrates, so the attribute differs from the server render.
-     */
+    /* THEME_INIT_SCRIPT sets data-theme before hydration, so the attribute differs. */
     <html
       lang="en"
       suppressHydrationWarning

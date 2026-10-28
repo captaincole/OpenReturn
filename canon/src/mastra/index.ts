@@ -17,18 +17,12 @@ import { queryFormulator } from "./workflows/ground/judges/queryFormulator";
 import { ruleAgent } from "./workflows/ground/judges/ruleAgent";
 
 /*
- * Canon, the tax attorney. A Mastra project with no conversational agent
- * and no user data: five narrow judges, the Ask The Tax Code and ground
- * workflows, the reference-library routes the web app reads, and the
- * MCP server (mcp.ts) that is its contract with Cade and the engine
- * builder.
- *
- * Port 4112 (Cade is 4111). CANON_PORT overrides it.
+ * Canon, the tax attorney: no conversational agent and no user data. The
+ * MCP server (mcp.ts) is its contract with Cade and the engine builder.
  */
 
 const storage = await createStorage();
 
-/* Hoisted so the onError hook routes uncaught throws through the app logger. */
 const logger = new ConsoleLogger({ name: "canon", level: "info" });
 keepServingAfterClientLeft(logger);
 
@@ -41,13 +35,9 @@ export const mastra = new Mastra({
   observability: createObservability(),
   server: {
     port: Number(process.env.CANON_PORT ?? 4112),
-    /* Loopback only, as Cade (its index.ts says why). MASTRA_HOST opens it wider. */
+    /* Loopback only; MASTRA_HOST opens it wider. */
     host: process.env.MASTRA_HOST ?? "127.0.0.1",
-    /*
-     * Mastra wraps every route handler in its own try/catch before any
-     * middleware runs; an uncaught throw funnels through this hook.
-     * Without it Mastra returns a generic 500 with zero logging.
-     */
+    // Without this hook Mastra returns a generic 500 with no log line.
     onError: (err, c) => {
       logger.error("unhandled handler error", {
         method: c.req.method,
@@ -59,11 +49,9 @@ export const mastra = new Mastra({
     /* No CORS, as Cade: browsers reach Canon only through the web app's proxy. */
     cors: false,
     /*
-     * No user auth: corpus data is shared reference material, and the web
-     * app's proxy is what sits in front of this port. requestGuard refuses
-     * foreign Origin and Host headers. The token gate is the optional
-     * defense in depth when the port is reachable beyond localhost
-     * (CANON_API_TOKEN, same shape as Cade's AGENT_API_TOKEN).
+     * No user auth: the corpus is shared reference material behind the web
+     * app's proxy. requestGuard refuses foreign Origin and Host headers;
+     * CANON_API_TOKEN gates the port when it is reachable beyond localhost.
      */
     middleware: [requestGuard, tokenGate],
     apiRoutes: [listRefDocsRoute, refDocPdfRoute, refDocHtmlRoute],

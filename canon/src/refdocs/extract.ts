@@ -17,7 +17,7 @@ export interface ExtractedPdf {
   sha256: string;
 }
 
-/* When the PDF was made: metadata "D:20250205100010-05'00'" → "2025-02-05" (refdocs/published.ts). */
+/* Metadata "D:20250205100010-05'00'" → "2025-02-05". */
 export async function pdfPublished(bytes: Uint8Array): Promise<string | null> {
   const pdf = await getDocumentProxy(new Uint8Array(bytes));
   const { info } = (await pdf.getMetadata()) as { info?: { CreationDate?: unknown } };

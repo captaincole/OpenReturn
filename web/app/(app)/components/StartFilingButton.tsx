@@ -1,12 +1,5 @@
 "use client";
 
-/*
- * Client-side "Start a new filing" trigger. It posts to /app/filings on
- * the agent. The endpoint is idempotent: a re-click returns the existing
- * filing instead of an error. On success it navigates to /r/<year>.
- * Errors render inline below the button, not as a console warning.
- */
-
 import { createFiling, UnauthorizedError } from "@/lib/api";
 import { signOut } from "@/lib/auth";
 import { useRouter } from "next/navigation";

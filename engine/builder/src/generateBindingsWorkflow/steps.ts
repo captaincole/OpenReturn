@@ -1,14 +1,3 @@
-/*
- * Phase D workflow steps. Four sequential steps:
- *   prepare  — load the catalog from the JSON fixture
- *   retrieve — per-field hybridSearchRefDocs against the IRS corpus
- *   classify — batched Claude tool-use; returns {ruleName, params} per field
- *   write    — render bindings into TS source and write to disk
- *
- * Each step's outputSchema is the next step's inputSchema. The carrier
- * accumulates via .extend() (see schemas.ts).
- */
-
 import { createStep } from "@mastra/core/workflows";
 import { loadFromFixture, type FieldInventory } from "@openreturn/engine/catalog";
 import { promises as fs } from "node:fs";
@@ -24,8 +13,6 @@ import {
   workflowOutputSchema,
   type AfterRetrieve,
 } from "./schemas.js";
-
-// ─── prepare ─────────────────────────────────────────────────────────────
 
 export const prepareStep = createStep({
   id: "prepare",
@@ -51,8 +38,6 @@ export const prepareStep = createStep({
     };
   },
 });
-
-// ─── retrieve ────────────────────────────────────────────────────────────
 
 export const retrieveStep = createStep({
   id: "retrieve",
@@ -88,8 +73,6 @@ export const retrieveStep = createStep({
   },
 });
 
-// ─── classify ────────────────────────────────────────────────────────────
-
 export const classifyStep = createStep({
   id: "classify",
   inputSchema: afterRetrieveSchema,
@@ -117,14 +100,6 @@ export const classifyStep = createStep({
   },
 });
 
-// ─── write ───────────────────────────────────────────────────────────────
-
-/**
- * Derive the per-form TS interface name from the formId.
- *   form-540    → "Form540"
- *   form-1040   → "Form1040"
- *   schedule-d  → "ScheduleD"
- */
 function pascalFormName(formId: string): string {
   return formId
     .split(/[-_]/)
@@ -171,8 +146,5 @@ export const writeStep = createStep({
   },
 });
 
-/*
- * Unused here. Kept as a type re-export so adjacent modules do not have
- * to import the carrier types directly.
- */
+/* Unused here: a re-export so other modules need not import the carrier types. */
 export type { AfterRetrieve };

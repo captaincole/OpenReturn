@@ -1,13 +1,3 @@
-/*
- * Thin wrapper around the ingestFormWorkflow Mastra workflow. Extracts a
- * blank PDF's AcroForm widgets and AI-labels them into a catalog.json.
- *
- * Writes the classified catalog to
- *   engine/src/<jurisdiction>/<short>/catalog.json
- * where <short> is the formId with "form-" stripped. The catalog sits
- * next to the form's bindings.ts.
- */
-
 import { engineSrcDir } from "@openreturn/engine/paths";
 import { resolve } from "node:path";
 import { runIngestForm } from "../../src/ingestFormWorkflow/index.js";
@@ -45,7 +35,6 @@ function parseCmdArgs(argv: string[]): Args {
   };
 }
 
-/* The form's folder under the engine: federal/<short> or state/<st>/<short>. */
 function defaultOutputDir(jurisdiction: string, formId: string): string {
   const shortName = formId.replace(/^form-/, "");
   if (jurisdiction.startsWith("state-")) {

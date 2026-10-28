@@ -1,13 +1,6 @@
 import { asFormat, asNum, asNumOrNull, asStr, asStrOrNull, type SourceFormat } from "./corpusStore";
 import { ensureCorpusSchema, getCorpusDb } from "./libsql";
 
-/*
- * The reference library: every document in corpus.db, for the web app's
- * Reference Library page, federal (IRS) first, and one HTML document's
- * headings for the library's document page. Read-only; the corpus CLI
- * owns the writes.
- */
-
 export interface LibraryDocument {
   docId: string;
   title: string;
@@ -15,7 +8,6 @@ export interface LibraryDocument {
   taxYear: number | null;
   sourceUrl: string | null;
   format: SourceFormat;
-  /** When the publisher issued it ("YYYY-MM[-DD]"); null when unknown. */
   published: string | null;
   totalPages: number;
   blockCount: number;
@@ -43,15 +35,12 @@ export async function listLibrary(): Promise<LibraryDocument[]> {
   }));
 }
 
-/** A heading in an HTML document; anchor is the heading's id in the HTML. */
 export interface LibrarySection {
   anchor: string;
   heading: string;
-  /** Anchor of the enclosing heading, or null for a top-level one. */
   parent: string | null;
 }
 
-/* The headings of one document, in order, for the library page's contents rail. */
 export async function listSections(docId: string): Promise<LibrarySection[]> {
   await ensureCorpusSchema();
   const res = await getCorpusDb().execute({

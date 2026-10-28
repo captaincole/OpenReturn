@@ -1,11 +1,7 @@
 import { LockOverlay } from "./Lock";
 import { Section } from "./Section";
 
-/*
- * Mock historical data. Replace with a serverDb query when we capture
- * year-over-year aggregates. A "locked" overlay covers the charts, so
- * the user sees what comes next and we do not present the data as real.
- */
+/* Mock data. The lock overlay keeps it from passing as real. */
 const INCOME = [
   { year: 2021, value: 145000 },
   { year: 2022, value: 162000 },

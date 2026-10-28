@@ -1,20 +1,4 @@
-/*
- * Render every form in a scenario to disk for spot-checking.
- *
- *   npx tsx scripts/renderScenario.ts --scenario=alejandro
- *
- * Writes one PDF per form into the scenario's `docs/` folder with the
- * name pattern `<Scenario>-<FormShortName>-rendered.pdf`. It uses the
- * same engine and renderer as the tests. The output shows the current
- * state of the bindings, including current failures.
- *
- *   npx tsx scripts/renderScenario.ts --scenario=carter --golden
- *
- * --golden writes `<Scenario>-<FormShortName>-Golden.pdf` instead: the
- * locked output for a scenario with no CPA return (jordan, carter). The
- * scenario's goldenPdfPath points at it, so the test suite diffs every
- * widget. Run it with lockScenario, after the output is verified.
- */
+/* --golden overwrites the scenario's golden PDFs. Run it only after the output is verified. */
 
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -48,7 +32,6 @@ async function loadScenario(name: string): Promise<Scenario> {
   );
 }
 
-/* Same context construction as runScenario: facts/decisions views + resolver. */
 function buildContext(s: Scenario): DerivationContext {
   return {
     taxYear: s.taxYear,
@@ -68,11 +51,7 @@ function buildContext(s: Scenario): DerivationContext {
   };
 }
 
-/*
- * A golden is copy 0 only, unflattened: the same fill the test runner
- * makes, with the AcroForm kept so the runner can read each widget back.
- * Further copies (Form 8949 overflow) are in the -rendered.pdf only.
- */
+/* Unflattened copy 0 only: the test runner reads each widget back from the AcroForm. */
 async function renderGolden(
   form: EvaluatedForm<AnyFormField>,
   catalog: Catalog,
@@ -99,16 +78,9 @@ async function main() {
 
   const s = await loadScenario(name);
 
-  /*
-   * Look up each scenario form's static config in the shared registry.
-   * catalog/blank/register live there, not on ScenarioForm.
-   */
   const specs = s.forms.map((sf) => getFormSpec(sf.formId));
 
-  /*
-   * Register every form's bindings before evaluation. These calls have
-   * side effects and match what runScenario does.
-   */
+  /* Register every form's bindings before evaluation (side effects). */
   for (const spec of specs) spec.register?.();
 
   const ctx = buildContext(s);

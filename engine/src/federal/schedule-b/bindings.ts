@@ -1,14 +1,7 @@
 /*
- * Schedule B bindings. Written by hand (MANUAL EDIT, 2026-10-15): Parts I
- * and II are payer lists, which the generator cannot bind row by row.
- *
- * Rows come from FilingInfo payer lists (one per 1099-INT / 1099-DIV
- * fact, in fact order). Each row is whole dollars (IRS: "if you round,
- * round all amounts"). Lines 2 and 6 follow `info.rounding`: by default
- * they add the amounts with cents and round only the total (IRS rule);
- * "sum_rounded_rows" adds the printed rows instead. More payers than
- * rows: the rows show the first ones and the total still covers every
- * payer (an attached statement would list the rest; not modeled).
+ * MANUAL EDIT: written by hand; the generator cannot bind payer lists row by row.
+ * Rows are whole dollars (IRS: "if you round, round all amounts"). With more
+ * payers than rows, the total still covers every payer (no attached statement).
  */
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
@@ -22,7 +15,6 @@ type Bindings = Partial<{ [K in keyof ScheduleB]: BindingFn<ScheduleB, ScheduleB
 const INTEREST_ROWS = 14;
 const DIVIDEND_ROWS = 15;
 
-/* Payer rows for one list: name and amount per row. */
 function payerRows(
   line: string,
   rows: number,
@@ -36,7 +28,6 @@ function payerRows(
   return out;
 }
 
-/* Total of every payer (not only the printed rows), per the rounding choice. */
 function payerTotal(
   payers: PayerAmount[] | undefined,
   rounding: ScheduleBRounding | undefined,
@@ -46,16 +37,10 @@ function payerTotal(
   return roundDollars(sum(...payers.map((p) => p.amount)));
 }
 
-/* A Yes/No checkbox pair from one boolean decision. */
 function yesNo(answer: (info: ScheduleBFilingInfo) => boolean | undefined, yes: boolean): Fn {
   return (_, info) => (answer(info) === yes ? true : undefined);
 }
 
-/*
- * register() wraps the defineForm side effect. Callers import it and
- * run the registration once at startup. The call is idempotent; a
- * second call overwrites in place.
- */
 export function register(): void {
   const bindings: Record<string, Fn> = {
     "0.header.taxpayer_name": (_, info) =>
@@ -65,7 +50,6 @@ export function register(): void {
     "0.header.ssn": (_, info) => info.taxpayerSSN,
     ...payerRows("1", INTEREST_ROWS, (info) => info.interestPayers),
     "0.line.2_total_interest": (_, info) => payerTotal(info.interestPayers, info.rounding),
-    // Line 4 = line 2 − line 3 (Form 8815 exclusion, not modeled: 0).
     "0.line.4_taxable_interest": (f) => {
       const total = f["0.line.2_total_interest"];
       return typeof total === "number"

@@ -1,9 +1,4 @@
-/*
- * Jordan A. Sample — AI decisions (the "setup").
- *
- * Scope decisions mirror alejandro/decisions.ts. Each sale also carries
- * its broker-reported Form 8949 box decision, as ingest writes it.
- */
+/* Each sale carries its broker-reported Form 8949 box decision, as ingest writes it. */
 
 import { makeForm8949BoxDecisionKey } from "../../../src/facts/index.js";
 import type { AIDecisionRow } from "../../../src/facts/rows.js";

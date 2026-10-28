@@ -6,17 +6,9 @@ import { SCENARIOS } from "../scenarios/index";
 import type { Scenario } from "../types";
 
 /*
- * Every input a filed form reads must be reported when it is missing.
- * For each scenario, drop one answer (a decision, or a fact that is not a
- * document) and re-evaluate. When a filed form's output changes, the
- * pending lists must name a new key. Otherwise the form computes without
- * the input (a blank line, or a wrong but plausible number) and nothing
- * tells Cade to ask. Fix that with a missingInputs entry in the form's
- * resolver, or list the input below with the reason it is optional.
- *
- * Document facts (employer.*, account.*, payer.*, employee.*, vendor.*)
- * are skipped: dropping
- * one removes income, and the scope decisions cover whether it exists.
+ * On a failure, add a missingInputs entry in the form's resolver, or list the
+ * input here with the reason it is optional.
+ * Document facts are skipped: the scope decisions cover whether they exist.
  */
 const OPTIONAL: Array<[RegExp, string]> = [
   [/^decisions\.scope\.must_file_schedule_ca$/, "Schedule CA files with the 540 unless set false"],
@@ -60,7 +52,6 @@ function evaluate(s: Scenario, facts: TaxFactRow[], decisions: AIDecisionRow[]):
   return { values, pending: new Set([...pendingDecisions, ...pendingFacts]) };
 }
 
-/* Fields whose value changed, when no new pending key explains the change. */
 function unreported(base: Outcome, dropped: Outcome): string[] {
   if ([...dropped.pending].some((key) => !base.pending.has(key))) return [];
   const ids = new Set([...base.values.keys(), ...dropped.values.keys()]);

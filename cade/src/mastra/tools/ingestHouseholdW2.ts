@@ -7,16 +7,7 @@ import { z } from "zod";
 import { recordIngestFact, slugify, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
-/*
- * Ingest one W-2 that the user issued, as a household employer, to a
- * household employee (Schedule H). The user is the employer on this
- * W-2 (box c), not the employee, so it is not wage income: it records
- * a household_employment fact, never a wages fact or identity facts.
- *
- * Convention (see engine/src/facts/kinds/householdEmployment.ts):
- *   category: "household_employment"
- *   key:      "employee.{employeeSlug}.household_w2"
- */
+/* The user is the employer on this W-2 (Schedule H), so it is never a wages or identity fact. */
 
 export const ingestHouseholdW2 = createTool({
   id: "ingest-household-w2",

@@ -1,10 +1,3 @@
-/*
- * Manual single-doc ingest: the debugging seam under `sync`. Unlike
- * sync, it can ingest a source file (a PDF, or a cleaned HTML page with
- * --format html) from any path on disk, not just the sources tree. It can also skip the paid contextualization stage via
- * --no-contextualize.
- */
-
 import { parseArgs } from "node:util";
 import { ingestRefDoc } from "../../src/refdocs/ingest";
 import type { Command } from "../lib/cli";

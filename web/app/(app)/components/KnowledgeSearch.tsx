@@ -1,12 +1,5 @@
 "use client";
 
-/*
- * Tax-code search box on the home page. Submitting a question starts a
- * new Q&A thread and navigates to /ask/<threadId>, where the answer
- * renders with numbered references. The answer pipeline searches the
- * documents listed on /library.
- */
-
 import Link from "next/link";
 import { useState } from "react";
 import { useAskSubmit } from "../ask/useAskSubmit";

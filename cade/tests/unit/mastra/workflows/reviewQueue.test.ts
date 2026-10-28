@@ -3,13 +3,6 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 
-/*
- * The review workflow around a fake Canon: how a review's outcome maps to
- * the decision's verdict, that the step log is persisted on success and on
- * failure, that reviews run one at a time, and that the retry sweep
- * re-queues only what never reached Canon. app.db is a throwaway file.
- */
-
 const dir = mkdtempSync(path.join(tmpdir(), "openreturn-review-test-"));
 process.env.APP_DB_PATH = path.join(dir, "app.db");
 process.env.MASTRA_DB_PATH = path.join(dir, "mastra.db");
@@ -67,7 +60,6 @@ async function seedDecision(within = scope): Promise<string> {
   return id;
 }
 
-/* The judge steps of the decision's latest review run, in order. */
 async function stepKinds(decisionId: string): Promise<string[]> {
   const res = await db.getAppDb().execute({
     sql: `SELECT s.step_kind FROM review_run_steps s
@@ -184,7 +176,6 @@ describe("the review queue", () => {
     await review.retryAfter(own, last);
     expect((await decisions.getDecisionById(own, stale))?.verdict).toBe("review_unreached");
 
-    /* A sweep after a review that reached Canon re-queues the stale one, not the trigger. */
     const retried = await review.retryUnreachedReviews(own, current);
     expect(retried.map((r) => r.decisionId)).toEqual([stale]);
     expect((await decisions.getDecisionById(own, stale))?.verdict).toBe("accurate");

@@ -1,8 +1,3 @@
-/*
- * Schedule H slot resolver (composed by resolveFilingInfo). Reads the
- * household-employee W-2 facts and the line C / line 9 answer.
- */
-
 import {
   HOUSEHOLD_EMPLOYMENT_KEYS,
   isHouseholdEmployeeFactKey,
@@ -17,13 +12,6 @@ import {
 import type { HouseholdEmployee, ScheduleHFilingInfo } from "./filingInfo.js";
 import { paysLineA } from "./lines.js";
 
-/*
- * Default (Schedule H instructions, "Who Must File"): required when any
- * one household employee was paid $2,800 or more (line A), when federal
- * income tax was withheld (line B), or when total cash wages reached
- * $1,000 in a quarter (line C). An explicit
- * `decisions.scope.must_file_schedule_h` wins.
- */
 export function resolveScheduleHInfo(inputs: ResolverInputs): ScheduleHFilingInfo {
   const rows = factsInCategory(inputs, "household_employment").filter((row) =>
     isHouseholdEmployeeFactKey(row.key),

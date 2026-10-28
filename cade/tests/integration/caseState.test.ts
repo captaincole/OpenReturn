@@ -5,12 +5,7 @@ import { buildCaseStateForScenario } from "../../src/mastra/tools/caseState";
 
 const { facts: alexFacts, decisions: alexDecisions } = alexScenario;
 
-/*
- * generate-tax-documents renders only when nothing is pending, so the
- * pending lists are the hand-off gate. A complete return must pass it, and a
- * missing filing status must block it (without one, the 1040 computes
- * with zero standard deduction and zero tax).
- */
+/* generate-tax-documents renders only when nothing is pending, so these lists gate the hand-off. */
 function caseStateFor(decisions = alexDecisions) {
   const scenario = evaluateScenario({
     filing: { id: "alex", taxYear: 2025 },
@@ -38,7 +33,6 @@ describe("case-state pending lists", () => {
   });
 });
 
-/* money is final values only: null while anything is pending. */
 describe("case-state money", () => {
   it("holds the return's values when nothing is pending", () => {
     expect(caseStateFor().money).toMatchObject({

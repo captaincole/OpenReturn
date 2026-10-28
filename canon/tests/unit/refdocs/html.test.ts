@@ -1,9 +1,3 @@
-/*
- * FTB HTML documents: the cleaner (what we store and show) and the
- * parser (the corpus rows). A synthetic page in FTB's template; each test
- * pins one rule. Real pages are checked against their PDFs by hand.
- */
-
 import { describe, expect, it } from "vitest";
 import { CleanError, cleanFtbHtml } from "../../../src/refdocs/html/cleanFtb.js";
 import { parseHtmlDoc } from "../../../src/refdocs/html/parseHtml.js";

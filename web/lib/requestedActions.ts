@@ -1,13 +1,3 @@
-/*
- * Requested-action types + browser-side fetchers. Domain data lives in
- * the libsql app DB on the server. The browser goes through the
- * /api/requested-actions Route Handlers (session-cookie auth, then
- * lib/serverDb.ts queries).
- *
- * v1 only emits kind='upload'. The shape supports 'confirm' / 'decide'
- * for when Cade learns to surface structured non-document asks.
- */
-
 export type RequestedActionKind = "upload" | "confirm" | "decide";
 export type RequestedActionStatus = "open" | "processing" | "resolved" | "skipped" | "dismissed";
 
@@ -25,11 +15,6 @@ export interface RequestedAction {
   resolvedAt: string | null;
 }
 
-/*
- * "Open" in the UI sense: anything the user can still act on, or that is
- * in flight. Resolved / skipped / dismissed cards stay in the DB for
- * audit. The UI does not show them.
- */
 export async function fetchOpenActions(taxYear: number): Promise<RequestedAction[]> {
   const res = await fetch(`/api/requested-actions?year=${taxYear}`, {
     cache: "no-store",
@@ -38,11 +23,7 @@ export async function fetchOpenActions(taxYear: number): Promise<RequestedAction
   return (await res.json()) as RequestedAction[];
 }
 
-/*
- * Call this the moment the user's upload lands. The card stays visible
- * (status='processing' shows a "Cade is reviewing this" indicator) until
- * Cade calls dismiss-requested-action after ingest.
- */
+/* The card stays visible as "processing" until Cade dismisses it after ingest. */
 export async function markActionProcessing(actionId: string, documentId: string): Promise<void> {
   const res = await fetch(`/api/requested-actions/${encodeURIComponent(actionId)}`, {
     method: "PATCH",

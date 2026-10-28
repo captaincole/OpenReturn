@@ -1,15 +1,6 @@
-/*
- * Tiny subcommand dispatcher for the corpus CLI (the builder's
- * form-engine CLI has its own copy in engine/builder/scripts/lib/cli.ts).
- *
- * Each command module exports a `Command`: name, one-line summary,
- * options (for generated help), and a run(argv) that receives only the
- * args after the command name. The dispatcher handles `--help`/`-h` at
- * both levels, so every option is discoverable without reading source.
- */
+// The builder's form-engine CLI has its own copy of this dispatcher.
 
 export interface CliOption {
-  /** e.g. `--strict` or `--mode fts|vector|hybrid` */
   flag: string;
   desc: string;
 }
@@ -17,16 +8,13 @@ export interface CliOption {
 export interface Command {
   name: string;
   summary: string;
-  /** Args shown after the command name in usage, e.g. `"query"` */
   usage?: string;
   options?: CliOption[];
   run(argv: string[]): Promise<void>;
 }
 
 interface Cli {
-  // Short CLI name used in error prefixes, e.g. "corpus".
   name: string;
-  // How the user invokes this from the repo root, e.g. `npm run corpus --`.
   bin: string;
   description: string;
   commands: Command[];

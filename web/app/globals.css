@@ -6,11 +6,6 @@
   --color-bg-panel: #16161a;
   --color-bg-elevated: #1c1c22;
 
-  /* Borders bumped up the value scale to read clearly against the dark
-     bg-base / bg-subtle layers. The previous subtle border (#26262e) was
-     only ~28 units brighter than bg-subtle/40, which made the chat input
-     box and PlanRail edge nearly invisible. Subtle now sits ~50 units
-     brighter; regular and strong scale with it. */
   --color-border: #3f3f4a;
   --color-border-subtle: #353540;
   --color-border-strong: #54545f;
@@ -24,8 +19,7 @@
   --color-accent-hover: #8d6fff;
   --color-accent-subtle: rgba(124, 92, 255, 0.12);
 
-  /* Status colors. Use these, not Tailwind's red/amber/emerald: each theme
-     needs its own shade to stay readable (400s on dark, 600–700s on light). */
+  /* Use these, not Tailwind's red/amber/emerald: each theme needs its own shade. */
   --color-ok: #34d399;
   --color-warn: #fbbf24;
   --color-danger: #f87171;
@@ -70,13 +64,7 @@
   }
 }
 
-/*
- * Light theme. The @theme values above are the dark theme; light redefines
- * the same variables, so every bg-*, text-* and border-* utility follows.
- * lib/theme.ts sets <html data-theme> before first paint, from the saved
- * choice or else the system preference. `light:` styles one element per
- * theme (the toggle's icon).
- */
+/* The @theme values above are dark; light redefines the same variables. */
 @custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
 
 :root {
@@ -178,11 +166,7 @@
   }
 }
 
-/*
- * A reference document from the corpus (library/[docId]): the cleaned
- * publisher HTML, which carries no styles of its own. Scoped to .ref-doc
- * so its plain tags (h2, table, dl…) never style the rest of the app.
- */
+/* Publisher HTML has no styles. Scoped so its plain tags never style the rest of the app. */
 @layer components {
   .ref-doc {
     max-width: 72ch;
@@ -224,7 +208,6 @@
     font-weight: 600;
     color: var(--color-ink-secondary);
   }
-  /* The section a citation (or the contents rail) opened: RefDocView sets data-cited. */
   .ref-doc [data-cited] {
     color: var(--color-accent);
   }
@@ -266,13 +249,11 @@
   .ref-doc li::marker {
     color: var(--color-ink-muted);
   }
-  /* Worksheets are ordered lists of lines: number them like a form. */
   .ref-doc ol > li::marker {
     font-weight: 600;
     font-variant-numeric: tabular-nums;
     color: var(--color-accent);
   }
-  /* Yes/No branches: a label column, answers beside it. */
   .ref-doc dl {
     display: grid;
     grid-template-columns: max-content 1fr;
@@ -300,7 +281,7 @@
   .ref-doc dd > :last-child {
     margin-bottom: 0;
   }
-  /* Tables scroll sideways on a phone instead of widening the page. */
+  /* Scroll sideways on a phone instead of widening the page. */
   .ref-doc table {
     display: block;
     max-width: 100%;

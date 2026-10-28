@@ -1,9 +1,4 @@
-/*
- * Carter Lewis — AI decisions (the "setup").
- *
- * Filing status and scope from the IRS ATS scenario 8 cover page and
- * draft 1040. The California answers were added (docs/RELOCATION.md).
- */
+/* Source: the IRS ATS scenario 8 cover page; the CA answers are ours (docs/RELOCATION.md). */
 
 import type { AIDecisionRow } from "../../../src/facts/rows.js";
 import { decisionRow } from "../../helpers/fixtureBuilders.js";

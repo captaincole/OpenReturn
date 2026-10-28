@@ -1,14 +1,6 @@
 import { asNum, asStr, ensureAppSchema, getAppDb, nowIso } from "./appDb";
 
-/*
- * Filings — the ownership root. Every domain row (tax_facts,
- * ai_decisions, etc.) carries a filing_id. With RLS gone, explicit
- * filing_members lookups here gate access; the routes/tools call these
- * before they build a Scope.
- *
- * In the current single-owner flow there is one active filing per
- * (user, tax_year).
- */
+/* There is no RLS: routes and tools gate on these lookups before they build a Scope. */
 
 export type FilingMemberRole = "owner";
 
@@ -19,11 +11,7 @@ export interface FilingRow {
   createdAt: string;
 }
 
-/*
- * Resolve a user's active owner filing for a given tax year. Throws
- * unless exactly one exists; that misconfiguration must surface loudly,
- * not silently pick a filing.
- */
+/* Throws unless exactly one exists: never pick a filing silently. */
 export async function resolveOwnerFilingForYear(
   userId: string,
   taxYear: number,
@@ -56,11 +44,7 @@ export async function resolveOwnerFilingForYear(
   };
 }
 
-/**
- * Non-revoked membership for (filing, user, role). Returns the filing's
- * tax year, or null when no such membership exists — the routes' 403/404
- * gate.
- */
+/** The routes' 403/404 gate. */
 export async function getMembership(
   filingId: string,
   userId: string,
@@ -79,11 +63,6 @@ export async function getMembership(
   return r ? { filingId: asStr(r.id), taxYear: asNum(r.tax_year) } : null;
 }
 
-/**
- * Create a filing + owner membership. Used by the create-filing route
- * and the smokeReview diagnostic. The caller supplies the id
- * (crypto.randomUUID()).
- */
 export async function createOwnerFiling(args: {
   filingId: string;
   userId: string;
@@ -107,16 +86,10 @@ export async function createOwnerFiling(args: {
   );
 }
 
-/**
- * Delete a filing; FK ON DELETE CASCADE clears every domain row under
- * it. The caller must verify ownership (getMembership) first.
- */
+/** Clears every domain row of the filing. The caller must verify ownership first. */
 export async function deleteFilingCascade(filingId: string): Promise<void> {
   await ensureAppSchema();
   const db = getAppDb();
-  /*
-   * ensureAppSchema turned foreign_keys ON for this connection, so the
-   * cascade fires at the SQL level.
-   */
+  /* ensureAppSchema turned foreign_keys ON for this connection, so the cascade fires. */
   await db.execute({ sql: `DELETE FROM filings WHERE id = ?`, args: [filingId] });
 }

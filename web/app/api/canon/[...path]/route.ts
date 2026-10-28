@@ -2,13 +2,7 @@ import { getOwnerSession } from "@/lib/localAuth";
 import { proxyTarget } from "@/lib/proxyTarget";
 import { type NextRequest, NextResponse } from "next/server";
 
-/*
- * Server-side proxy to Canon, the reference library: the document list,
- * a document's PDF or cleaned HTML. Same shape as the Cade proxy
- * (/api/agent): the session cookie authenticates the browser, the Next
- * server forwards on localhost, and Canon's port never faces the browser.
- * Corpus data is not user data, but the gate keeps the instance private.
- */
+/* Corpus data is not user data, but the session gate keeps the instance private. */
 
 const CANON_INTERNAL_URL = process.env.CANON_INTERNAL_URL ?? "http://127.0.0.1:4112";
 
@@ -44,7 +38,6 @@ async function forward(
   return new Response(upstream.body, { status: upstream.status, headers: responseHeaders });
 }
 
-/* Read-only: the library has nothing for the browser to write. */
 export async function GET(req: NextRequest, ctx: { params: Promise<{ path: string[] }> }) {
   return forward(req, ctx.params);
 }

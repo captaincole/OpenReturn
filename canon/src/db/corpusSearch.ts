@@ -12,23 +12,11 @@ import {
 } from "./corpusStore";
 import { ensureCorpusSchema, getCorpusDb } from "./libsql";
 
-/*
- * Corpus retrieval side: hybrid search over ref_blocks (FTS5 leg ∪
- * native-vector leg) plus the block lookup the cite tool uses. Consumed
- * by src/mastra/tools/refDocs.ts (the MCP search tool, which the builder
- * calls) and the ask and ground workflows. The write/ingest/inspection side
- * lives in corpusStore.ts.
- */
-
-// ─── Public types ────────────────────────────────────────────────────────
-
 export interface SearchHit {
   blockId: string;
   docId: string;
   documentTitle: string;
-  /** "html" documents have no pages: cite them by section. */
   format: SourceFormat;
-  /** When the publisher issued the document ("YYYY-MM[-DD]"); null when unknown. */
   published: string | null;
   sectionId: string | null;
   sectionHeading: string | null;
@@ -57,8 +45,6 @@ export interface BlockDetail {
   citation: string;
 }
 
-// ─── Helpers ─────────────────────────────────────────────────────────────
-
 function buildCitation(
   documentTitle: string,
   sectionHeading: string | null,
@@ -74,20 +60,14 @@ function buildCitation(
 }
 
 /*
- * FTS5 MATCH has its own query grammar. It throws on bare operator
- * characters (-, ", *, :, etc). Queries arrive as free text, so we reduce
- * them to alphanumeric tokens, quote each token, and join them with OR
- * for recall. bm25 still ranks blocks that match more terms higher, and
- * rank fusion with the vector leg decides final order. Returns null when
- * no searchable token survives, so the caller skips the FTS leg.
+ * FTS5 MATCH throws on bare operator characters (-, ", *, :), so free text
+ * becomes quoted alphanumeric tokens joined with OR for recall.
  */
 function toFtsMatchQuery(raw: string): string | null {
   const terms = raw.toLowerCase().match(/[a-z0-9]+/g);
   if (!terms || terms.length === 0) return null;
   return terms.map((t) => `"${t}"`).join(" OR ");
 }
-
-// ─── Single-block lookup ─────────────────────────────────────────────────
 
 export async function getBlock(blockId: string): Promise<BlockDetail | null> {
   await ensureCorpusSchema();
@@ -126,15 +106,6 @@ export async function getBlock(blockId: string): Promise<BlockDetail | null> {
   };
 }
 
-/*
- * ---------------------------------------------------------------------------
- * Hybrid retrieval — the TS port of the Postgres match_ref_blocks() RPC.
- * It runs the FTS5 leg and the native-vector leg separately, merges and
- * dedupes the hits in JS, then joins back for display columns. FTS-only
- * and vector-only paths use the same call with one input set to null.
- * ---------------------------------------------------------------------------
- */
-
 export interface MatchRow {
   block_id: string;
   doc_id: string;
@@ -169,10 +140,7 @@ function rowToHit(row: MatchRow, score: number): SearchHit {
   };
 }
 
-/*
- * FTS leg. fts_rank: higher is better. bm25 is lower-is-better, so the
- * query negates it to match the orientation the rest of the code assumes.
- */
+// bm25 is lower-is-better; the query negates it so fts_rank is higher-is-better.
 async function ftsLeg(
   queryText: string,
   filterDocId: InValue,
@@ -194,7 +162,7 @@ async function ftsLeg(
   return ranks;
 }
 
-/* Vector leg: exact brute-force cosine scan (no ANN index). */
+// Exact brute-force scan on purpose: fast enough at low-thousands of blocks.
 async function vectorLeg(
   queryEmbedding: number[],
   filterDocId: InValue,
@@ -233,7 +201,6 @@ async function callMatch(args: {
   const blockIds = [...new Set([...ftsRank.keys(), ...vecDist.keys()])];
   if (blockIds.length === 0) return [];
 
-  // Fetch display columns for the union of hits.
   const placeholders = blockIds.map(() => "?").join(",");
   const res = await getCorpusDb().execute({
     sql: `SELECT b.block_id, b.doc_id, b.section_id, b.page_num, b.block_type,
@@ -266,18 +233,13 @@ async function callMatch(args: {
   });
 }
 
-// ─── Search entry points ─────────────────────────────────────────────────
-
 export interface SearchOpts {
   query: string;
   docId?: string;
   limit?: number;
 }
 
-/**
- * Legacy FTS-only search. It has no callers in the repo today; new code
- * uses hybridSearchRefDocs.
- */
+/** FTS-only. New code uses hybridSearchRefDocs. */
 export async function searchRefDocs(opts: SearchOpts): Promise<SearchHit[]> {
   const limit = Math.min(opts.limit ?? 5, 25);
   const rows = await callMatch({
@@ -289,10 +251,7 @@ export async function searchRefDocs(opts: SearchOpts): Promise<SearchHit[]> {
   return (
     rows
       .filter((r) => r.fts_rank != null)
-      /*
-       * fts_rank: higher is better. Sort descending, then return the
-       * negated value so the exposed score reads lower-is-better.
-       */
+      // The exposed score is negated back to lower-is-better.
       .sort((a, b) => (b.fts_rank ?? 0) - (a.fts_rank ?? 0))
       .slice(0, limit)
       .map((r) => rowToHit(r, -(r.fts_rank ?? 0)))
@@ -302,28 +261,14 @@ export async function searchRefDocs(opts: SearchOpts): Promise<SearchHit[]> {
 export interface HybridSearchOpts {
   query: string;
   docId?: string;
-  /** Top-K returned to the caller. Default 8. */
   limit?: number;
-  /**
-   * Candidate count pulled from each leg before the merge. More
-   * candidates give more recall. Default 50.
-   */
   candidatesPerLeg?: number;
-  /**
-   * Force a specific retrieval path. Default "hybrid", which degrades to
-   * FTS when the local embedding model is unavailable or stale.
-   */
   mode?: "fts" | "vector" | "hybrid";
 }
 
-/**
- * Hybrid retrieval: FTS top-N ∪ vector top-N → reciprocal rank fusion → top-K.
- *
- * Falls back to keyword (FTS-only) retrieval when the vector leg cannot
- * run. Search always works; only semantic quality degrades:
- *   - Ollama down or model not pulled → FTS-only with a warning.
- *   - Stored vectors built by a different embedding model than the active
- *     one → FTS-only with a warning. Fix: `npm run corpus -- reembed --all`.
+/*
+ * Falls back to FTS-only when the vector leg cannot run (Ollama down, or
+ * stored vectors from another model), so search always works.
  */
 export async function hybridSearchRefDocs(opts: HybridSearchOpts): Promise<SearchHit[]> {
   const limit = Math.min(opts.limit ?? 8, 25);
@@ -347,17 +292,11 @@ export async function hybridSearchRefDocs(opts: HybridSearchOpts): Promise<Searc
     .map(({ row, score }) => rowToHit(row, score));
 }
 
-/* Reciprocal rank fusion constant. 60 is the standard value. */
 const RRF_K = 60;
 
 /*
- * Merged ordering: reciprocal rank fusion. Each leg ranks its own hits
- * (bm25 for FTS, cosine distance for vectors), and a block scores
- * 1 / (RRF_K + rank) from each leg that returned it. The two legs count
- * equally, and their raw scores are never compared: bm25 runs ~10-30
- * while cosine similarity is at most 1, so a max() of the two let any
- * keyword hit outrank every block only the vector leg found. A block
- * that both legs found still ranks high, because it scores twice.
+ * Fuse by rank, never by raw score: bm25 runs ~10-30 and cosine is at most 1,
+ * so a max() of raw scores let any keyword hit outrank every vector-only hit.
  */
 export function fuseByRank(rows: MatchRow[]): { row: MatchRow; score: number }[] {
   const ranks = (value: (r: MatchRow) => number | null, higherIsBetter: boolean) => {
@@ -377,12 +316,7 @@ export function fuseByRank(rows: MatchRow[]): { row: MatchRow; score: number }[]
     .sort((a, b) => b.score - a.score);
 }
 
-/*
- * Embed the query only when the vector leg can actually run. Two guards:
- * the stored vectors must come from the active model (cross-model cosine
- * distances are meaningless), and the local embedding endpoint must
- * respond. Returns null — degrade to the FTS leg — when either fails.
- */
+// Cross-model cosine distances are meaningless, so a model mismatch skips the vector leg.
 async function embedQueryIfUsable(query: string): Promise<number[] | null> {
   const { resolveEmbeddings, embedQuery } = await import("../refdocs/embeddings");
   try {

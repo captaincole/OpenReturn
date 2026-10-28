@@ -1,12 +1,5 @@
 "use client";
 
-/*
- * A compact numbered reference behind an `[n]` marker: document,
- * section, page, the quoted passage (click to expand), and a link that
- * opens the source PDF on that page — or, for an HTML document (no
- * pages), the library's copy at that section.
- */
-
 import { citationUrl, type AskCitation } from "@/lib/ask";
 import { cn } from "@/lib/cn";
 import { useState } from "react";

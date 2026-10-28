@@ -3,20 +3,12 @@ import type { AskAnswerOutput } from "./judges/askAnswerer";
 import type { AskCitation, AskCoverage } from "./types";
 
 /*
- * The validate step: pure, deterministic checks on the answerer's output
- * before anything reaches the page. The rules:
- *   - A marker must name a passage the retrieve step found. Other
- *     markers are removed from the text.
- *   - Kept markers are renumbered 1..n in order of first appearance, so
- *     the cards read [1], [2], [3] whatever the passage numbers were.
- *   - A quote must appear word for word in its passage (case, spacing
- *     and typographic quotes ignored). A quote that does not falls back
- *     to the passage text.
- *   - An answer with no valid marker is not grounded: it becomes the
- *     not-covered message. A not_covered answer keeps no markers.
+ * Nothing the model says reaches the page untraced: a marker must name a
+ * retrieved passage, a quote must appear word for word in it (else the
+ * passage text replaces it), and an answer with no valid marker becomes the
+ * not-covered message.
  */
 
-/* The gap queries are for the pipeline, not the answer: validate does not read them. */
 type AnswerOutput = Omit<AskAnswerOutput, "gaps">;
 
 export interface Passage {
@@ -24,7 +16,6 @@ export interface Passage {
   docId: string;
   documentTitle: string;
   format: SourceFormat;
-  /* When the publisher issued the document; the answerer prefers the newer of two that disagree. */
   published?: string | null;
   sectionHeading: string | null;
   pageNum: number;
@@ -44,7 +35,6 @@ export const NOT_COVERED_ANSWER =
 
 const MARKER = /\s?\[(\d+)\]/g;
 
-/* "[1, 3]" and "[1,3]" → "[1][3]", so one marker regex handles both. */
 function splitMarkerLists(text: string): string {
   return text.replace(/\[(\d+(?:\s*,\s*\d+)+)\]/g, (_, list: string) =>
     list

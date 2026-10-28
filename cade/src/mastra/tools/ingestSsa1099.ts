@@ -4,20 +4,6 @@ import { z } from "zod";
 import { recordIngestFact, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
-/*
- * Ingest one Form SSA-1099 (Social Security benefits) as a single
- * structured tax_facts row. Box 5 (net benefits) feeds Form 1040 line 6a
- * and the Social Security Benefits Worksheet; box 6 (voluntary
- * withholding) feeds line 25b.
- *
- * Form RRB-1099 is not supported: its boxes differ (box 6 is the
- * workers' compensation offset; withholding is box 10).
- *
- * Convention (see engine/src/facts/kinds/socialSecurity.ts):
- *   category: "retirement"
- *   key:      "payer.ssa.social_security"
- */
-
 export const ingestSsa1099 = createTool({
   id: "ingest-ssa-1099",
   description:

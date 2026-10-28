@@ -10,20 +10,9 @@ import {
   nowIso,
 } from "./appDb";
 
-/*
- * Persistence for tax-code Q&A. Two tables (DDL in appDb.ts):
- *   ask_threads — one row per first question
- *   ask_turns   — one row per question in a thread
- *
- * Threads are person-scoped: every query filters by user_id. A turn is
- * inserted as 'running', and the answer pipeline (workflows/askTurn)
- * completes or fails it in the background. log_json holds the pipeline's
- * raw queries, retrieval and step timings — the query log we monitor
- * search quality from.
- */
+/* Threads are person-scoped: every read filters by user_id. */
 
 export type AskTurnStatus = "running" | "completed" | "failed";
-/* The answer's shape (coverage, stage, citations) is Canon's contract; re-exported for the routes. */
 export type { AskCitation, AskCoverage, AskStage };
 
 export interface AskTurn {
@@ -35,7 +24,6 @@ export interface AskTurn {
   answer: string | null;
   coverage: AskCoverage | null;
   citations: AskCitation[];
-  /** Documents that would cover what the library does not (partial / not_covered). */
   missingDocuments: string[];
   error: string | null;
   createdAt: string;
@@ -50,11 +38,7 @@ export interface AskThread {
   turns: AskTurn[];
 }
 
-/*
- * A turn still 'running' after this long lost its background run (a
- * dev-server reload or crash). Reads report it as failed so the page
- * stops polling.
- */
+/* A turn 'running' this long lost its background run (reload or crash): report it failed. */
 const STALE_RUNNING_MS = 10 * 60 * 1000;
 
 function rowToTurn(r: Record<string, unknown>): AskTurn {
@@ -82,7 +66,6 @@ function rowToTurn(r: Record<string, unknown>): AskTurn {
   };
 }
 
-/** Creates a thread and its first turn (status 'running'). */
 export async function createAskThread(
   userId: string,
   question: string,
@@ -110,10 +93,7 @@ export async function createAskThread(
 
 export type AddTurnResult = { turnId: string } | { error: "not_found" | "busy" };
 
-/*
- * Appends a follow-up turn. Refuses while the previous turn is still
- * running: each turn reads the earlier answers as context.
- */
+/* Refuses while a turn is running: each turn reads the earlier answers as context. */
 export async function addAskTurn(
   userId: string,
   threadId: string,

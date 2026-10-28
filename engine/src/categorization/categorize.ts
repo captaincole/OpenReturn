@@ -1,14 +1,3 @@
-/*
- * Filing Status panel rollup. Walks the evaluated forms, groups every
- * field by its `category`, and tallies complete vs. pending.
- *
- * A form contributes its fields only when `mustFile` is ok and true.
- * Forms the taxpayer does not need simply do not appear in the rollup.
- * Forms with a blocked mustFile (filing requirement still unknown) also
- * contribute no fields, but their must-file blocker still surfaces via
- * pendingDecisions on the case state.
- */
-
 import type { AnyFormField, BaseFormField, Category, EvaluatedForm } from "../types.js";
 
 export const CATEGORIES: readonly Category[] = [
@@ -28,19 +17,11 @@ const CATEGORY_LABEL: Record<Category, string> = {
 };
 
 export interface FilingStatusItem {
-  /** Stable id: the field's `fieldId`. */
   id: string;
-  /**
-   * Form this item belongs to, for example "form-1040". Empty when the
-   * item is not tied to a specific form. No such cases exist today; the
-   * option stays for future expansion.
-   */
   formId: string;
   label: string;
   state: "complete" | "pending";
-  /** When pending, why. Typically the field's blocked reason. */
   reason?: string;
-  /** When pending, the decision/fact keys the engine is waiting on. */
   missingDecisionKey?: string;
   missingFactKeys?: string[];
 }
@@ -48,9 +29,7 @@ export interface FilingStatusItem {
 export interface FilingStatusCategory {
   id: Category;
   label: string;
-  /** Total items the rollup considered for this category. */
   total: number;
-  /** Items in `complete` state. completed/total drives the bar fill. */
   completed: number;
   items: FilingStatusItem[];
 }
@@ -60,13 +39,6 @@ export interface FilingStatus {
   categories: FilingStatusCategory[];
 }
 
-/**
- * Produce the FilingStatus tree from a set of evaluated forms.
- *
- * Forms whose mustFile is blocked or false are skipped. Their fields do
- * not count toward any category total. That keeps the bar honest about
- * the work actually in progress.
- */
 export function categorizeFormProgress(
   forms: readonly EvaluatedForm<AnyFormField>[],
 ): FilingStatus {

@@ -1,12 +1,4 @@
-/*
- * Zod schemas for the form-ingest workflow. Each step's outputSchema is
- * the next step's inputSchema. State accumulates via .extend(), so the
- * workflow never threads "optional fields filled in later" through.
- */
-
 import { z } from "zod";
-
-// ─── Primitive shapes shared across steps ────────────────────────────────
 
 const fieldKindSchema = z.enum(["text", "checkbox", "radio", "signature", "other"]);
 
@@ -85,8 +77,6 @@ const usageSchema = z.object({
   cache_read_input_tokens: z.number().int(),
 });
 
-// ─── Step-by-step schemas ────────────────────────────────────────────────
-
 export const workflowInputSchema = z.object({
   pdfPath: z.string(),
   formId: z.string(),
@@ -116,7 +106,6 @@ export const workflowOutputSchema = z.object({
   catalogEntryCount: z.number().int(),
   usage: usageSchema,
   skipSample: z.array(fieldSkipSchema),
-  /** pdfFieldNames that had no enrichment and got a placeholder fieldId. */
   unenrichedSample: z.array(z.string()),
 });
 

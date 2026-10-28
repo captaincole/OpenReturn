@@ -1,8 +1,6 @@
 /*
- * Cade reaches Canon over MCP only (src/mastra/canon/client.ts). Nothing
- * under src/, scripts/ or evals/ may import Canon's code or open the
- * corpus: the reference library is Canon's process, and the two projects
- * are future repos.
+ * Cade reaches Canon over MCP only (src/mastra/canon/client.ts).
+ * It never imports Canon's code or opens the corpus.
  */
 
 import { readdirSync, readFileSync } from "node:fs";

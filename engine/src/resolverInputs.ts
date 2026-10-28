@@ -1,14 +1,6 @@
-/*
- * Shared inputs for the per-form slot resolvers (filingInfoResolvers.ts):
- * the ResolverInputs view over facts + decisions, typed fact readers,
- * and must-file resolution with provenance.
- */
-
 import { partitionTrades, type PartitionedTrades } from "./federal/8949/partitionTrades.js";
 import type { MustFileResolution } from "./filingInfo.js";
 import { sum } from "./money.js";
-
-// ─── Shared inputs view ──────────────────────────────────────────────────
 
 export interface ResolverInputs {
   facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
@@ -33,8 +25,6 @@ export function makeResolverInputs(opts: {
   };
 }
 
-// ─── Fact readers ────────────────────────────────────────────────────────
-
 export function text(inputs: ResolverInputs, key: string): string | undefined {
   const v = inputs.factByKey.get(key);
   if (v === undefined || v === null || v === "") return undefined;
@@ -48,10 +38,6 @@ export function text(inputs: ResolverInputs, key: string): string | undefined {
   return v;
 }
 
-/*
- * Single-key numeric read. Returns undefined when missing or
- * non-numeric. Callers use ?? 0 when they compose a sum.
- */
 export function num(inputs: ResolverInputs, key: string): number | undefined {
   const v = inputs.factByKey.get(key);
   return typeof v === "number" && Number.isFinite(v) ? v : undefined;
@@ -72,14 +58,7 @@ export function sumW2Box(inputs: ResolverInputs, boxKey: string): number {
   );
 }
 
-/*
- * Sum a numeric field across investment_income facts. The optional
- * `keyFilter` narrows the read to one 1099 section. 1099-DIV box1a does
- * not overlap 1099-INT box1 today, but the filter makes the read
- * explicit and protects against future box-name overlap. Returns 0 when
- * no facts match, same convention as sumW2Box: "no 1099-INT at all → 0
- * taxable interest" rather than "we do not know."
- */
+// No matching facts means 0 (no 1099-INT → no interest), not unknown.
 export function sumInvestmentBox(
   inputs: ResolverInputs,
   boxKey: string,
@@ -104,51 +83,21 @@ export function sumCaSdi(wageRows: Array<{ value: unknown }>): number {
   );
 }
 
-// ─── Required inputs ─────────────────────────────────────────────────────
-
-/**
- * The keys whose resolved value is still undefined: the inputs a form
- * needs before it is complete. Pass each required input's fact or
- * decision key with the value the resolver read for it. A 0 or false is
- * an input; only undefined is missing.
- */
+// A 0 or false is an input; only undefined is missing.
 export function missingInputs(required: Record<string, unknown>): string[] {
   return Object.entries(required)
     .filter(([, value]) => value === undefined)
     .map(([key]) => key);
 }
 
-// ─── Must-file resolution with provenance ────────────────────────────────
-
-/**
- * Resolve a must-file flag with explicit-decision-wins semantics, and
- * capture an audit trail (EngineDerivation) for the path that fired.
- *
- * Semantics:
- *  - An explicit boolean decision wins, even when false. This lets a
- *    scenario opt out of a form it would otherwise default into.
- *  - Otherwise, walk `fallbacks` in order and return the first whose
- *    `value` is true. Source order is the priority.
- *  - All fallbacks false → return false with a "no signal" derivation.
- *  - No fallbacks AND no explicit decision → value is undefined (caller
- *    decides), derivation is undefined.
- *
- * We record provenance even though the must_file_* keys are not in
- * ai_decisions. A CPA who reviews the doc-gen sidecar should see WHY
- * Schedule D was generated. The engine makes these scope calls today; the
- * EngineDerivation captures that honestly.
- */
 export interface MustFileFallback {
-  /** Plain-English description of the rule. CPA-readable. */
   rule: string;
-  /** True when this fallback signal currently fires. */
   value: boolean;
-  /** Fact keys this rule consumed. */
   triggeredByFactKeys?: readonly string[];
-  /** Decision keys this rule consumed. */
   triggeredByDecisionKeys?: readonly string[];
 }
 
+// An explicit boolean decision wins, even false, so a scenario can opt out of a form.
 export function resolveMustFile(
   decisions: Map<string, unknown>,
   opts: { explicitKey: string; fallbacks?: MustFileFallback[] },
@@ -197,11 +146,6 @@ export function resolveMustFile(
   return { decisionKey, value: undefined, derivation: undefined };
 }
 
-/*
- * Shared fallback pair for Form 8949 and Schedule D: trade facts win when
- * present (the more specific signal); has_reportable_sales is the safety
- * net.
- */
 export function reportableSalesFallbacks(inputs: ResolverInputs): MustFileFallback[] {
   const tradeCount = inputs.trades.short.length + inputs.trades.long.length;
   return [

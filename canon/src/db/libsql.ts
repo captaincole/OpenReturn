@@ -5,22 +5,11 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 /*
- * The reference corpus lives in a single local libsql/SQLite file — "the
- * DB is a file." This replaces the Supabase/Postgres corpus store (ref_*
- * tables + the match_ref_blocks RPC). One @libsql/client drives text
- * (FTS5), vectors (native F32_BLOB + vector_distance_cos), and the
- * relational doc graph.
- *
- * Path resolution:
- *   - CORPUS_DB_PATH env wins. Set it in .env.development so `mastra dev`
- *     and the corpus CLI agree on one file.
- *   - Otherwise default to <canon>/.data/corpus.db, anchored to this
- *     module's location. Then cwd (repo root vs canon vs mastra
- *     output) does not matter for local dev.
+ * Set CORPUS_DB_PATH so `mastra dev` and the corpus CLI agree on one file:
+ * the module-relative default resolves differently inside Mastra's bundle.
  */
-
-const MODULE_DIR = dirname(fileURLToPath(import.meta.url)); // …/canon/src/db
-const DEFAULT_DB_PATH = resolve(MODULE_DIR, "../../.data/corpus.db"); // …/canon/.data/corpus.db
+const MODULE_DIR = dirname(fileURLToPath(import.meta.url));
+const DEFAULT_DB_PATH = resolve(MODULE_DIR, "../../.data/corpus.db");
 
 function corpusDbPath(): string {
   return process.env.CORPUS_DB_PATH ? resolve(process.env.CORPUS_DB_PATH) : DEFAULT_DB_PATH;
@@ -37,11 +26,7 @@ export function getCorpusDb(): Client {
   return cached;
 }
 
-/*
- * Idempotent schema DDL. Safe to run on a prebuilt (shipped) .db — every
- * statement is CREATE … IF NOT EXISTS. ensureCorpusSchema executes the
- * list in one batch, in order.
- */
+// Every statement is IF NOT EXISTS, so it is safe on a prebuilt corpus.db.
 const CORPUS_SCHEMA_DDL: string[] = [
   `CREATE TABLE IF NOT EXISTS ref_documents (
            doc_id              TEXT PRIMARY KEY,
@@ -101,52 +86,28 @@ const CORPUS_SCHEMA_DDL: string[] = [
   `CREATE INDEX IF NOT EXISTS idx_ref_blocks_doc_ord ON ref_blocks(doc_id, ordinal)`,
   `CREATE INDEX IF NOT EXISTS idx_ref_blocks_section ON ref_blocks(section_id, ordinal)`,
   `CREATE INDEX IF NOT EXISTS idx_ref_blocks_page ON ref_blocks(doc_id, page_num)`,
-  /*
-   * FTS5 mirror of ref_blocks. content = coalesce(contextualized_text,
-   * text), populated at writeDocument time; SQLite FTS5 has no
-   * generated-column equivalent of Postgres's tsvector column. Porter
-   * stemming approximates Postgres's 'english' config. No vector
-   * index; brute-force vector_distance_cos is exact and fast at our
-   * scale (low thousands of blocks).
-   */
+  // FTS5 has no generated columns: writeDocument fills content itself.
   `CREATE VIRTUAL TABLE IF NOT EXISTS ref_blocks_fts USING fts5(
            block_id UNINDEXED,
            doc_id UNINDEXED,
            content,
            tokenize = 'porter unicode61'
          )`,
-  /*
-   * Corpus-level key/value metadata. Today: embedding_model, the
-   * "provider/model" that produced the stored vectors. Search uses it
-   * to refuse query vectors from a different model (db/corpusSearch.ts).
-   */
+  // embedding_model here stops search from mixing vectors of two models.
   `CREATE TABLE IF NOT EXISTS ref_meta (
            key   TEXT PRIMARY KEY,
            value TEXT NOT NULL
          )`,
-  /*
-   * Each document's source file, so the published corpus.db is the whole
-   * library: the files are not committed (sources keeps only
-   * their sidecars). A PDF's bytes, or a cleaned HTML page as UTF-8 —
-   * ref_documents.format says which. See db/corpusFiles.ts.
-   */
+  // The source files are not committed, so corpus.db is the whole library.
   `CREATE TABLE IF NOT EXISTS ref_document_files (
            doc_id TEXT PRIMARY KEY REFERENCES ref_documents(doc_id) ON DELETE CASCADE,
            source BLOB NOT NULL
          )`,
-  /*
-   * The form catalog (forms / form_fields) used to live here too. It is
-   * engine output: the forms pipeline writes catalog.json next to each
-   * form's bindings, and nothing read the tables. An older corpus.db may
-   * still carry them; they are harmless. To drop them, delete corpus.db
-   * and `corpus fetch` (or `corpus sync`) a fresh file.
-   */
 ];
 
 /*
  * Columns added after a corpus release shipped. CREATE TABLE IF NOT EXISTS
- * leaves an older file's table alone, so add them here; each is nullable
- * and `corpus sync` fills it.
+ * leaves an older file's table alone, so add them here.
  */
 const ADDED_COLUMNS: { table: string; column: string; ddl: string }[] = [
   { table: "ref_documents", column: "published", ddl: "published TEXT" },
@@ -161,26 +122,14 @@ async function addMissingColumns(db: Client): Promise<void> {
   }
 }
 
-/*
- * Idempotent schema init. Runs at most once per process.
- */
 export function ensureCorpusSchema(): Promise<void> {
   if (schemaReady) return schemaReady;
   schemaReady = (async () => {
     const db = getCorpusDb();
-    /*
-     * FK ON DELETE CASCADE (ref_pages/sections/blocks → ref_documents)
-     * needs this per connection. SQLite defaults it off.
-     */
+    // ON DELETE CASCADE needs this per connection; SQLite defaults it off.
     await db.execute("PRAGMA foreign_keys = ON");
     await db.batch(CORPUS_SCHEMA_DDL, "write");
     await addMissingColumns(db);
-    /*
-     * Warn once per process: an empty corpus means grounding reviews
-     * retrieve nothing (verdicts degrade to needs_more_facts). The app
-     * keeps working; this matches the graceful degrade when Ollama is
-     * down.
-     */
     const count = await db.execute(`SELECT count(*) AS n FROM ref_documents`);
     if (Number(count.rows[0]?.n ?? 0) === 0) {
       console.warn(

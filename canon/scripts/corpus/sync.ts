@@ -1,18 +1,3 @@
-/*
- * Idempotent corpus sync. Walks the sidecars under sources/
- * (instructions.meta.json under forms/, publication.meta.json under
- * publications/) and ingests anything missing or sha-drifted, fetching
- * the source file (a PDF, or an HTML page it cleans) from the sidecar's
- * sourceUrl when it is not on disk or in corpus.db. A
- * document that is already current costs one DB lookup, so the command
- * is cheap to run on every dev tick.
- *
- * The loop continues past per-doc failures, so one bad PDF does not
- * block the rest. The run exits non-zero at the end if any doc failed.
- * If a run dies at the embeddings step, `npm run corpus -- reembed`
- * finishes the job without re-paying for contextualization.
- */
-
 import { parseArgs } from "node:util";
 import { docIdsWithSource, getDocumentSource, setDocumentSource } from "../../src/db/corpusFiles";
 import { getDocument, setDocumentPublished, type RefDocument } from "../../src/db/corpusStore";
@@ -36,14 +21,8 @@ interface SyncFlags {
 }
 
 /*
- * One document. Current in corpus.db (same sha256 as the sidecar) → skip
- * without touching the source file, unless it is not stored yet
- * ("stored": a corpus ingested before the file tables existed).
- * Otherwise fetch the source file if it is not on disk
- * (refdocs/fetchSource.ts) and ingest. A source file that cannot be
- * stored for a current document is a warning, not a failure: the
- * document is ingested and searchable, and `corpus status` keeps listing
- * it under "no source".
+ * A current document whose source file cannot be stored is a warning, not a
+ * failure: it is still searchable.
  */
 async function syncOne(
   entry: CorpusEntry,
@@ -84,10 +63,6 @@ async function syncOne(
   return { docId, action: existing ? "replaced" : "ingested" };
 }
 
-/*
- * A current document's date: the sidecar's when it has one, else read
- * once from the stored source file (a corpus built before the column).
- */
 async function redate(entry: CorpusEntry, existing: RefDocument): Promise<boolean> {
   let published = entry.sidecar.published;
   if (!published) {

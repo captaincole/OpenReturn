@@ -3,15 +3,8 @@ import { proxyTarget } from "@/lib/proxyTarget";
 import { type NextRequest, NextResponse } from "next/server";
 
 /*
- * Server-side proxy to the Mastra agent — the single bridge between the
- * browser and the agent (chat streaming, /app/state, filing lifecycle,
- * thread history). The browser authenticates with the session cookie.
- * The agent never sees a browser credential and can bind to localhost.
- * If AGENT_API_TOKEN is set (agent port reachable beyond localhost), the
- * proxy attaches it server-side.
- *
- * Streaming: the upstream body passes straight through, so chat SSE
- * flows without buffering.
+ * The only bridge from the browser to the agent. The agent never sees a
+ * browser credential. The body passes straight through, so SSE does not buffer.
  */
 
 const AGENT_INTERNAL_URL = process.env.AGENT_INTERNAL_URL ?? "http://127.0.0.1:4111";
@@ -49,7 +42,6 @@ async function forward(
     ...(hasBody ? { duplex: "half" as const } : {}),
   });
 
-  // Pass status + body through; copy content headers so SSE stays SSE.
   const responseHeaders = new Headers();
   for (const h of ["content-type", "cache-control", "transfer-encoding"]) {
     const v = upstream.headers.get(h);

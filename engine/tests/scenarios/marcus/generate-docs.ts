@@ -1,31 +1,9 @@
-/*
- * Render Marcus Chen's source intake documents to disk for the CPA package.
- *
- *   npx tsx tests/scenarios/marcus/generate-docs.ts
- *
- * Emits:
- *   docs/01-marcus-w2.pdf               — Helix Software, Inc. W-2 (Copy B)
- *   docs/02-marcus-1099-wealthfront.pdf — Wealthfront-style consolidated 1099
- *                                         (only 1099-INT populated; all else
- *                                         $0 to mirror a HYSA-only account)
- *   docs/03-marcus-1099-schwab.pdf      — Schwab-style consolidated 1099
- *                                         (1099-DIV + 1099-B; mirrors the
- *                                         Apex/Alejandro layout)
- *
- * One-off generator. The CPA receives these PDFs as Marcus's "source
- * documents", next to the Markdown brief + cover note in the same folder.
- */
+/* Renders Marcus's fake source documents into docs/: npx tsx tests/scenarios/marcus/generate-docs.ts */
 
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from "pdf-lib";
-
-/*
- * ────────────────────────────────────────────────────────────────────────────
- * Constants — Marcus's identity and all doc-level data
- * ────────────────────────────────────────────────────────────────────────────
- */
 
 const PAGE_W = 612; // US Letter, points
 const PAGE_H = 792;
@@ -48,11 +26,7 @@ const HELIX = {
   stateId: "123-4567-8",
 };
 
-/*
- * W-2 numbers. Marcus's gross comp is $247,650 ($220k box-1 wages +
- * $23.5k 401(k) + $4,150 HSA). The 2025 SS wage base is $176,100
- * (capped). The 0.9% Additional Medicare Tax applies above $200k.
- */
+/* Gross $247,650 = $220k box 1 + $23.5k 401(k) + $4,150 HSA. 2025 SS wage base $176,100. */
 const W2 = {
   box1: 220_000.0,
   box2: 40_000.0,
@@ -187,15 +161,7 @@ const SCHWAB = {
   },
 };
 
-/*
- * ────────────────────────────────────────────────────────────────────────────
- * Drawing helpers. The coordinate system runs y-down from the top-left.
- * ty(yTopDown, fontSize) returns the pdf-lib bottom-up baseline coordinate.
- * yTopDown is the TOP of the text's em-box; the baseline sits one fontSize
- * below. To place a value inside a box of height h, pass
- * y_top = y_box + h - 4 - fontSize so descenders sit just inside the bottom.
- * ────────────────────────────────────────────────────────────────────────────
- */
+/* ty() turns a y-down coordinate (top of the em-box) into pdf-lib's bottom-up baseline. */
 
 interface Ctx {
   page: PDFPage;
@@ -259,7 +225,6 @@ function drawTextCenter(
   drawText(ctx, str, xCenter - widthOf(font, str, size) / 2, yTopDown, opts);
 }
 
-/** Greedy word-wrap. Each returned line fits within `maxWidth` at `size`. */
 function wrapText(font: PDFFont, text: string, maxWidth: number, size: number): string[] {
   const words = text.split(/\s+/);
   const lines: string[] = [];
@@ -277,7 +242,6 @@ function wrapText(font: PDFFont, text: string, maxWidth: number, size: number): 
   return lines;
 }
 
-/** Draw word-wrapped text. Returns the y one line-height below the last line. */
 function drawWrapped(
   ctx: Ctx,
   text: string,
@@ -367,12 +331,6 @@ function drawLabeledBox(
   }
 }
 
-/*
- * ────────────────────────────────────────────────────────────────────────────
- * Shared layout helpers
- * ────────────────────────────────────────────────────────────────────────────
- */
-
 interface LineRow {
   label: string;
   value: string;
@@ -399,11 +357,6 @@ function drawColumn(
   return y;
 }
 
-/**
- * Section title row, underlined. Title sits left at size 8 bold. An
- * optional subtitle follows the title after a measured gap. An optional
- * OMB note is right-aligned to the row width.
- */
 function drawSectionTitle(
   ctx: Ctx,
   x: number,
@@ -425,12 +378,6 @@ function drawSectionTitle(
   return y + 18;
 }
 
-/*
- * ────────────────────────────────────────────────────────────────────────────
- * W-2 (Helix Software, Inc.) — Copy B
- * ────────────────────────────────────────────────────────────────────────────
- */
-
 async function buildW2(): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   const page = doc.addPage([PAGE_W, PAGE_H]);
@@ -445,7 +392,6 @@ async function buildW2(): Promise<Uint8Array> {
   const X_BOX12 = 500;
   const X_END = 572;
 
-  // Top row: SSN + OMB notice
   drawLabeledBox(
     ctx,
     X0,
@@ -467,7 +413,6 @@ async function buildW2(): Promise<Uint8Array> {
   drawTextRight(ctx, "IRS e-file", X_END - 4, 92, { size: 9, bold: true });
   drawTextRight(ctx, "www.irs.gov/efile", X_END - 4, 104, { size: 6 });
 
-  // Row: EIN | Box 1 | Box 2
   let y = 112;
   drawLabeledBox(
     ctx,
@@ -498,7 +443,6 @@ async function buildW2(): Promise<Uint8Array> {
     fmtMoney(W2.box2),
   );
 
-  // Employer block (3 lines) spanning rows 2-4
   y += 24;
   drawLabeledBox(
     ctx,
@@ -553,13 +497,11 @@ async function buildW2(): Promise<Uint8Array> {
   drawLabeledBox(ctx, X_LEFT_END, y, X_PAIR_MID - X_LEFT_END, 24, "7  Social security tips", "");
   drawLabeledBox(ctx, X_PAIR_MID, y, X_END - X_PAIR_MID, 24, "8  Allocated tips", "");
 
-  // Row: Control number | Box 9 | Box 10
   y += 24;
   drawLabeledBox(ctx, X0, y, X_LEFT_END - X0, 24, "d  Control number", "");
   drawLabeledBox(ctx, X_LEFT_END, y, X_PAIR_MID - X_LEFT_END, 24, "9", "");
   drawLabeledBox(ctx, X_PAIR_MID, y, X_END - X_PAIR_MID, 24, "10  Dependent care benefits", "");
 
-  // Row: Employee name | Box 11 | Box 12a
   y += 24;
   drawBox(ctx, X0, y, X_LEFT_END - X0, 24);
   drawText(ctx, "e  Employee's first name and initial", X0 + 2, y + 2, { size: 6, bold: true });
@@ -573,7 +515,6 @@ async function buildW2(): Promise<Uint8Array> {
   drawTextRight(ctx, fmtMoney(W2.box12d), X_END - 4, y + 10, { size: 10 });
   drawLine(ctx, X_BOX12 + 24, y + 12, X_BOX12 + 24, y + 24);
 
-  // Row: Employee address line 1 | Box 13 checkboxes | Box 12b
   y += 24;
   drawLabeledBox(
     ctx,
@@ -603,7 +544,6 @@ async function buildW2(): Promise<Uint8Array> {
   drawTextRight(ctx, fmtMoney(W2.box12w), X_END - 4, y + 10, { size: 10 });
   drawLine(ctx, X_BOX12 + 24, y + 12, X_BOX12 + 24, y + 24);
 
-  // Row: Employee address line 2 | Box 14a | Box 12c
   y += 24;
   drawBox(ctx, X0, y, X_LEFT_END - X0, 24);
   drawText(ctx, MARCUS.cityStateZip, X0 + 4, y + 10, { size: 10 });
@@ -614,14 +554,12 @@ async function buildW2(): Promise<Uint8Array> {
   drawLabeledBox(ctx, X_BOX12, y, X_END - X_BOX12, 24, "12c", "");
   drawLine(ctx, X_BOX12 + 24, y + 12, X_BOX12 + 24, y + 24);
 
-  // Row: (blank) | (blank) | Box 12d
   y += 24;
   drawBox(ctx, X0, y, X_LEFT_END - X0, 24);
   drawBox(ctx, X_LEFT_END, y, X_BOX12 - X_LEFT_END, 24);
   drawLabeledBox(ctx, X_BOX12, y, X_END - X_BOX12, 24, "12d", "");
   drawLine(ctx, X_BOX12 + 24, y + 12, X_BOX12 + 24, y + 24);
 
-  // State row (15-20)
   y += 24;
   const stateCols = [
     { x: X0, w: 40, label: "15  State", value: "CA" },
@@ -652,7 +590,6 @@ async function buildW2(): Promise<Uint8Array> {
   y += 28;
   for (const c of stateCols) drawBox(ctx, c.x, y, c.w, 22);
 
-  // Footer
   y += 32;
   drawText(ctx, "Form", X0, y + 6, { size: 9 });
   drawText(ctx, "W-2", X0 + 24, y, { size: 16, bold: true });
@@ -673,12 +610,6 @@ async function buildW2(): Promise<Uint8Array> {
 
   return await doc.save();
 }
-
-/*
- * ────────────────────────────────────────────────────────────────────────────
- * Wealthfront-style consolidated 1099 — 6 pages
- * ────────────────────────────────────────────────────────────────────────────
- */
 
 interface WfHeaderOpts {
   page: number;
@@ -705,14 +636,12 @@ function drawWealthfrontHeader(ctx: Ctx, opts: WfHeaderOpts) {
     drawText(ctx, "Account  " + WEALTHFRONT.account, 240, top + 22, { size: 9, bold: true });
     drawText(ctx, "Statement Date:  " + WEALTHFRONT.statementDate, 380, top + 6, { size: 8 });
     drawText(ctx, "Document ID:  " + WEALTHFRONT.documentId, 380, top + 18, { size: 8 });
-    // Right-align "2025" just inside the band's right edge.
     drawTextRight(ctx, "2025", PAGE_W - 42, top + 4, { size: 22, bold: true });
     drawText(ctx, MARCUS.name, 240, top + 40, { size: 9 });
     drawText(ctx, MARCUS.street, 240, top + 52, { size: 9 });
     drawText(ctx, MARCUS.cityStateZip, 240, top + 64, { size: 9 });
     drawText(ctx, "RECIPIENT'S TIN: " + MARCUS.ssnMasked, 240, top + 75, { size: 8 });
   } else {
-    // Continuation band: 30pt tall, contents centered vertically.
     drawBox(ctx, 36, 32, PAGE_W - 72, 30, { fill: SHADE });
     drawText(ctx, WEALTHFRONT.payerName, 42, 38, { size: 9, bold: true });
     drawText(ctx, "2025", 42, 50, { size: 9, bold: true });
@@ -732,7 +661,6 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
   const bold = await doc.embedFont(StandardFonts.HelveticaBold);
   const italic = await doc.embedFont(StandardFonts.HelveticaOblique);
 
-  // ─── Page 1: Summary Information ────────────────────────────────────────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
@@ -848,10 +776,7 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     );
 
     const tHdrY = tableY + 32; // extra room for 2-line headers
-    /*
-     * Spread the numeric columns so wide headers and wide values do not
-     * collide: PROC(332) → BASIS(387) → MKT(442) → WASH(502) → NET(570).
-     */
+    /* Spread the numeric columns so wide headers and values do not collide. */
     const X_TERM = colLeftX;
     const X_TYPE = colLeftX + 60;
     const X_PROC = colLeftX + 290;
@@ -913,7 +838,6 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     );
   }
 
-  // ─── Page 2: Interest Income (the page that matters for Marcus) ──────────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
@@ -1022,7 +946,6 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       { label: "1099-B total withheld", value: "0.00" },
     ]);
 
-    // Right column
     let yR = drawSectionTitle(ctx, colRightX, 80, colW, "ORIGINAL ISSUE DISCOUNT AND ADJUSTMENTS");
     yR = drawWrapped(
       ctx,
@@ -1092,7 +1015,6 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     ]);
   }
 
-  // ─── Page 3: Detail for Interest Income (monthly table) ──────────────────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
@@ -1150,7 +1072,6 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     drawText(ctx, "Total Interest", x0 + 400, rowY, { size: 8, bold: true });
   }
 
-  // ─── Page 4: Schedule of Management Fees ─────────────────────────────────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
@@ -1202,7 +1123,6 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     });
   }
 
-  // ─── Page 5: Instructions for Recipient (abbreviated) ────────────────────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
@@ -1276,7 +1196,6 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     }
   }
 
-  // ─── Page 6: blank ────────────────────────────────────────────────────────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
@@ -1286,12 +1205,6 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
 
   return await doc.save();
 }
-
-/*
- * ────────────────────────────────────────────────────────────────────────────
- * Schwab-style consolidated 1099 — 5 pages
- * ────────────────────────────────────────────────────────────────────────────
- */
 
 function drawSchwabHeader(ctx: Ctx, page: number, totalPages: number) {
   const x0 = 36;
@@ -1329,7 +1242,6 @@ async function buildSchwab1099(): Promise<Uint8Array> {
   const x0 = 36;
   const xR = PAGE_W - 36;
 
-  // ─── Page 1: Cover ────────────────────────────────────────────────────────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
@@ -1429,7 +1341,6 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     });
   }
 
-  // ─── Page 2: Box-by-box totals (1099-DIV / -INT / -MISC / -OID / -B) ─────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
@@ -1542,7 +1453,6 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     ]);
 
     yR += 6;
-    // Shrink long title font so it fits the column
     drawBox(ctx, colRightX, yR, colW, 14, { fill: SHADE });
     drawText(
       ctx,
@@ -1576,7 +1486,6 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     );
   }
 
-  // ─── Page 3: 1099-DIV detail ─────────────────────────────────────────────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
@@ -1625,7 +1534,6 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     });
   }
 
-  // ─── Page 4: 1099-B totals summary ───────────────────────────────────────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
@@ -1644,11 +1552,6 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     );
     drawText(ctx, "purposes only.", x0, 195, { size: 7, italic: true });
 
-    /*
-     * Column x positions keep adjacent headers and values from
-     * overlapping. Layout: label area to ~270pt, then 5 numeric columns
-     * evenly spaced.
-     */
     const C_PROC = x0 + 290;
     const C_BASIS = x0 + 355;
     const C_MKT = x0 + 415;
@@ -1768,7 +1671,6 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     drawTextRight(ctx, "$0.00", C_PROC, rowY, { size: 7, bold: true });
   }
 
-  // ─── Page 5: 1099-B per-trade detail ─────────────────────────────────────
   {
     const page = doc.addPage([PAGE_W, PAGE_H]);
     const ctx: Ctx = { page, reg, bold, italic };
@@ -1782,13 +1684,7 @@ async function buildSchwab1099(): Promise<Uint8Array> {
 
     let y = 168;
 
-    /*
-     * 6 right-aligned numeric columns. Gaps are sized so size-8-bold
-     * totals ("$57,500.00" ≈ 45pt, "$(3,000.00)" ≈ 48pt) never collide
-     * with adjacent columns. PROC sits ≥10pt right of the SOLD date.
-     * GAIN sits far enough left of WHELD to clear the "TAX WITHHELD"
-     * header at size 6 bold.
-     */
+    /* Gaps fit size-8-bold totals ("$(3,000.00)" ≈ 48pt) without collisions. */
     const C_QTY = x0 + 140;
     const C_ACQ = x0 + 180;
     const C_SOLD = x0 + 240;
@@ -1801,10 +1697,7 @@ async function buildSchwab1099(): Promise<Uint8Array> {
 
     const moneyOrParen = (g: number) => (g < 0 ? "$(" + fmtMoney(-g) + ")" : "$" + fmtMoney(g));
 
-    /*
-     * Header font size. Smaller than 6 so neighbouring column labels
-     * like "DISALLOWED" / "TAX WITHHELD" fit.
-     */
+    // Below 6pt so "DISALLOWED" and "TAX WITHHELD" fit.
     const HSZ = 5.5;
     const drawTradeHeader = () => {
       drawText(ctx, "DESCRIPTION", x0, y, { size: HSZ, bold: true });
@@ -1901,12 +1794,6 @@ async function buildSchwab1099(): Promise<Uint8Array> {
 
   return await doc.save();
 }
-
-/*
- * ────────────────────────────────────────────────────────────────────────────
- * Main
- * ────────────────────────────────────────────────────────────────────────────
- */
 
 async function main() {
   const __filename = fileURLToPath(import.meta.url);

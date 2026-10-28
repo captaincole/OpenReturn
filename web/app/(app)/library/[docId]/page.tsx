@@ -1,11 +1,3 @@
-/*
- * One reference document whose source is an HTML page (sidecar format
- * "html"): the cleaned page in the app's reading style, with a contents
- * rail. Citations link here with the cited section as the #anchor. The
- * parent (app)/layout.tsx gates auth; the document loads on the client
- * (components/RefDocView.tsx).
- */
-
 import { getOwnerSession } from "@/lib/localAuth";
 import { deriveProfile } from "@/lib/profile";
 import { redirect } from "next/navigation";

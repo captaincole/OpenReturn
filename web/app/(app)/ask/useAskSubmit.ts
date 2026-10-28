@@ -6,12 +6,6 @@ import { signOut } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-/*
- * Sends a question. With no threadId it starts a new thread and
- * navigates to /ask/<threadId>. With a threadId it adds a follow-up and
- * calls onFollowUp so the thread view starts polling. Shared by the home
- * search box and the composer under a thread.
- */
 export function useAskSubmit(onFollowUp?: () => void) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);

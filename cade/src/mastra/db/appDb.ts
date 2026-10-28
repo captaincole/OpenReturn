@@ -5,20 +5,8 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 /*
- * Per-user DOMAIN data (tax_facts, ai_decisions, filings, …) lives in a
- * local libsql/SQLite file, separate from corpus.db, which is a prebuilt
- * shippable asset. This replaces the Supabase Postgres domain tables and
- * RLS.
- *
- * RLS left with Postgres, so scoping is explicit: every helper in
- * taxFacts/aiDecisions/etc. takes a `Scope { userId, filingId }` and
- * writes the WHERE clauses that RLS added before. filing_members holds
- * exactly one owner membership per filing; the CPA-reviewer multi-user
- * surface was removed with the self-hosted transition.
- *
- * Path resolution mirrors db/libsql.ts: APP_DB_PATH env wins, else
- * <cade>/.data/app.db anchored to this module so cwd does not
- * matter.
+ * There is no RLS: every domain helper takes a Scope and writes its own WHERE clauses.
+ * Set APP_DB_PATH: the module-relative default resolves differently in Mastra's bundle.
  */
 
 const MODULE_DIR = dirname(fileURLToPath(import.meta.url)); // …/src/mastra/db
@@ -28,30 +16,18 @@ function appDbPath(): string {
   return process.env.APP_DB_PATH ? resolve(process.env.APP_DB_PATH) : DEFAULT_DB_PATH;
 }
 
-/**
- * Explicit per-request scoping; the replacement for RLS. Built by
- * requireUserContext (agent) or the membership-verified route handlers.
- */
+/** Build only in requireUserContext or after a route's membership check. */
 export interface Scope {
   userId: string;
   filingId: string;
 }
 
-/*
- * Cell readers. libsql row values are typed string | number | bigint |
- * ArrayBuffer | null. Exported for the domain helper modules.
- */
 export const asStr = (v: unknown): string => (v == null ? "" : String(v));
 export const asStrOrNull = (v: unknown): string | null => (v == null ? null : String(v));
 export const asNum = (v: unknown): number => (v == null ? 0 : Number(v));
 export const asNumOrNull = (v: unknown): number | null => (v == null ? null : Number(v));
-/** Parse a TEXT column holding JSON; null stays null. */
 export const asJson = (v: unknown): unknown => (v == null ? null : JSON.parse(String(v)));
 
-/**
- * ISO timestamp written from JS. String ordering matches the old
- * Postgres timestamptz values the web app sorts on.
- */
 export const nowIso = (): string => new Date().toISOString();
 
 let cached: Client | null = null;
@@ -65,22 +41,10 @@ export function getAppDb(): Client {
   return cached;
 }
 
-/*
- * Idempotent schema DDL; every statement is CREATE … IF NOT EXISTS.
- * SQLite type mapping from the Postgres migrations: uuid → TEXT,
- * jsonb → TEXT (JSON.stringify at write, JSON.parse at read),
- * timestamptz → TEXT (ISO). ensureAppSchema executes the list in one
- * batch, in order.
- */
 const APP_SCHEMA_DDL: string[] = [
   /*
-   * The single owner of this instance. Identity = the instance. The
-   * row holds profile data (name/email, used for form prefill and
-   * authEmail) and the web gate's credentials (scrypt password hash
-   * plus the HMAC secret for session cookies). The web app's
-   * first-run /setup screen creates it. The agent only READS it;
-   * ownerMiddleware resolves the owner as the resource id for every
-   * request.
+   * Holds the web gate's credentials (scrypt hash, session-cookie HMAC secret).
+   * The web app's /setup creates the row; the agent only READS it.
    */
   `CREATE TABLE IF NOT EXISTS owner (
            id            TEXT PRIMARY KEY,
@@ -210,12 +174,7 @@ const APP_SCHEMA_DDL: string[] = [
            created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
          )`,
   `CREATE INDEX IF NOT EXISTS idx_review_run_steps_run ON review_run_steps(run_id, iteration)`,
-  /*
-   * Tax-code Q&A ("Ask the tax code"). Person-scoped, not filing-scoped.
-   * One thread per first question, one turn per question in it. The turn
-   * rows double as the query log: log_json keeps the pipeline's queries,
-   * retrieval and step timings raw. See db/askThreads.ts.
-   */
+  /* Ask threads are person-scoped, not filing-scoped. log_json is the raw query log. */
   `CREATE TABLE IF NOT EXISTS ask_threads (
            id         TEXT PRIMARY KEY,
            user_id    TEXT NOT NULL,
@@ -254,19 +213,12 @@ export function ensureAppSchema(): Promise<void> {
   return schemaReady;
 }
 
-/*
- * ---------------------------------------------------------------------------
- * Owner — the instance's single user. See the owner table comment above.
- * ---------------------------------------------------------------------------
- */
-
 export interface Owner {
   id: string;
   email: string;
   displayName: string;
 }
 
-/** The instance owner, or null before first-run setup completes. */
 export async function getOwner(): Promise<Owner | null> {
   await ensureAppSchema();
   const res = await getAppDb().execute(`SELECT id, email, display_name FROM owner LIMIT 1`);

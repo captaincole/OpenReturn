@@ -1,8 +1,4 @@
-/*
- * Cross-check the CA rate schedules against the booklet (2025 540
- * booklet p.75): continuity at every bracket edge, and the booklet's own
- * worked example.
- */
+/* Source: 2025 540 booklet p.75 (rate schedules and its worked example). */
 
 import { describe, expect, it } from "vitest";
 import { CA_RATE_SCHEDULES_2025, lookupCaRateSchedule } from "../../../src/data/caRateSchedule.js";

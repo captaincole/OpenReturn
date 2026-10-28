@@ -1,8 +1,5 @@
 /*
- * Renders the review-judge eval as docs/evals/review.md, and the review
- * flow's row in the eval overview (docs/evals/README.md, lib/overview.ts). Run directly to combine saved runs (a later file replaces a
- * model's rows for the cases it ran):
- *
+ * Combines saved runs; a later file replaces a model's rows for the cases it ran:
  *   npx tsx evals/review/report.ts <results.json>…   (from canon)
  */
 import { readFileSync, writeFileSync } from "node:fs";
@@ -104,11 +101,6 @@ export function renderReport(models: EvalModel[], results: ReviewResult[]): stri
   ].join("\n\n");
 }
 
-/*
- * Merge runs: a later run replaces a model's results for the cases it ran,
- * so one case can be rerun on its own. Write the doc and the overview;
- * return the doc's repo path.
- */
 export function publishReport(runs: ReviewRun[]): string {
   const models = new Map<string, EvalModel>();
   const results = new Map<string, ReviewResult[]>();

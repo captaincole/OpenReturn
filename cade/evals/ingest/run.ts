@@ -1,18 +1,6 @@
 /*
- * Document-ingest eval: each model reads every scenario source document
- * and calls the production ingest tools, which write facts to a
- * throwaway app.db. The scorer compares those facts to the scenario's
- * ground truth, field by field.
- *
- *   npx tsx --env-file=.env evals/ingest/run.ts [model…] [--full] [--runs=N] [--doc=…]   (from cade)
- *
- * Default is the quick tier (one document per type, 2 runs). --full runs
- * every document 5 times, with local models on a second machine only (see
- * lib/models.ts). --doc=<substring> runs only matching documents and does
- * not publish a report.
- *
- * Writes .scratch/evals/ingest/<runId>/results.json and
- * docs/evals/ingest[-quick].md.
+ * npx tsx --env-file=.env evals/ingest/run.ts [model…] [--full] [--runs=N] [--doc=…]   (from cade)
+ * --doc=<substring> runs only matching documents and publishes no report.
  */
 import { Agent } from "@mastra/core/agent";
 import { extractTrajectory } from "@mastra/core/evals";
@@ -34,7 +22,6 @@ import { scoreDoc } from "./score";
 
 const REPO = path.resolve(__dirname, "../../../..");
 
-/* Cade's own document rules, without the conversation around them. */
 const INSTRUCTIONS = `You ingest tax documents. The user uploads one document. Read it and call the matching ingest tools with every value on it.
 
 ${ingestingDocuments}
@@ -53,7 +40,7 @@ function agentFor(model: EvalModel): Agent {
   });
 }
 
-/* The same message shape the web app sends (useCadeChat.buildPayload). */
+/* Same shape as the web app's message (useCadeChat.buildPayload). */
 const toMessages = (c: IngestCase) => [
   {
     role: "user" as const,
@@ -69,7 +56,6 @@ const toMessages = (c: IngestCase) => [
   },
 ];
 
-/* Every run gets its own user and filing, so its facts start empty. */
 let runCounter = 0;
 async function freshScope() {
   const userId = `eval-${++runCounter}`;
@@ -95,11 +81,7 @@ async function evalDoc(
   const started = Date.now();
   const { scope, requestContext } = await freshScope();
   try {
-    /*
-     * Cade's output limit, not the SDK's 4,096. A consolidated 1099 takes
-     * one call per form and one per 20 trades (5 for jordan's), and a
-     * model can make them one step at a time.
-     */
+    /* maxSteps: a consolidated 1099 takes one call per form and per 20 trades (5 for jordan's). */
     const result = await agent.generate(toMessages(c), {
       requestContext,
       maxSteps: 8,

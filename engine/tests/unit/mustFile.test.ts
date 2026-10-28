@@ -2,12 +2,7 @@ import { describe, expect, it } from "vitest";
 import { resolveFilingInfo } from "../../src/filingInfo.js";
 import { FORMS } from "../../src/registry.js";
 
-/*
- * Every form with bindings needs a must-file entry, or the engine blocks
- * it with "No must-file rule resolved". The resolvers key the entries by
- * formId string, so this catches a typo or a resolver missing from
- * resolveFilingInfo.
- */
+/* Must-file entries are keyed by formId string, so a typo blocks the form. */
 describe("FilingInfo.mustFile", () => {
   const info = resolveFilingInfo({ facts: [], decisions: [] });
   const bound = FORMS.filter((spec) => spec.register).map((spec) => spec.formId);

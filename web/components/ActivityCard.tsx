@@ -6,20 +6,11 @@ import { timeAgo } from "@/lib/format";
 import { useEffect, useState } from "react";
 
 interface ActivityCardProps {
-  /*
-   * The parent bumps this when activity may have changed (new turn,
-   * reset). A bump also wipes and refetches after a session reset. The
-   * interval poll handles incremental updates between bumps.
-   */
   refreshKey: number;
 }
 
 const ACTIVITY_LIMIT = 50;
-/*
- * Plain interval polling against /api/activity. The libsql app DB has no
- * push channel (Supabase Realtime left with Postgres). For one user on
- * one box, a fast regular poll is indistinguishable from push.
- */
+/* app.db has no push channel. For one user on one box, a short poll is as good. */
 const POLL_INTERVAL_MS = 3000;
 
 const VERDICT_LABEL: Record<Verdict, string> = {
@@ -91,13 +82,7 @@ export function ActivityCard({ refreshKey }: ActivityCardProps) {
   const [items, setItems] = useState<ActivityItem[] | null>(null);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
-  /*
-   * Fetch on mount and on each refreshKey bump, then poll on a fast
-   * regular interval. Both paths replace the whole list. The endpoint
-   * returns the newest ACTIVITY_LIMIT rows already sorted, so there is no
-   * client-side merge to get wrong. Verdict updates (pending → grounded)
-   * arrive automatically.
-   */
+  /* Each fetch replaces the whole list: no client-side merge to get wrong. */
   useEffect(() => {
     let cancelled = false;
 
