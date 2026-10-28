@@ -53,6 +53,12 @@ function getClient(): MCPClient {
         url: new URL("/api/mcp/canon/mcp", process.env.CANON_URL ?? DEFAULT_URL),
         timeout: Number(process.env.CANON_TIMEOUT_MS ?? DEFAULT_TIMEOUT_MS),
         enableServerLogs: false,
+        /*
+         * A tool failure arrives as the result (isError + content), not as
+         * a throw. A throw means Canon was not reached; a failed result
+         * means it ran and failed. toolErrorText below reads the result.
+         */
+        onToolError: "return",
         ...(token ? { requestInit: { headers: { Authorization: `Bearer ${token}` } } } : {}),
       },
     },
