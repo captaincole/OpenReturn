@@ -107,7 +107,9 @@ const CORPUS_SCHEMA_DDL: string[] = [
 
 /*
  * Columns added after a corpus release shipped. CREATE TABLE IF NOT EXISTS
- * leaves an older file's table alone, so add them here.
+ * leaves an older file's table alone, so add them here. Each one must be
+ * nullable (SQLite refuses ADD COLUMN NOT NULL without a default); corpus
+ * sync fills it.
  */
 const ADDED_COLUMNS: { table: string; column: string; ddl: string }[] = [
   { table: "ref_documents", column: "published", ddl: "published TEXT" },

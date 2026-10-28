@@ -1,5 +1,3 @@
-/* TODO: Schedule B Part I (interest over $1,500) needs repeating binding rows; unsupported until then. */
-
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
 

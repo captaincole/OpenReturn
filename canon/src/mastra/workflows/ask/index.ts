@@ -19,6 +19,8 @@ import { NOT_COVERED_ANSWER, validateAnswer, type Passage } from "./validate";
 /*
  * No agent memory: the earlier turns are the only context, so Cade stays
  * the one conversational agent.
+ * Steps get judges with mastra.getAgent, not an import, so their calls get
+ * the app logger and traces.
  */
 
 const HITS_PER_QUERY = 6;

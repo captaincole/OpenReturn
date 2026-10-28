@@ -4,6 +4,8 @@ import { modelFor } from "../../../models";
 /*
  * The judges use Mastra's Agent class only as prompt + model: no memory, not
  * conversational. Cade is the one conversational agent.
+ * Steps get judges with mastra.getAgent, not an import, so their calls get
+ * the app logger and traces.
  */
 
 const instructions = `You write search queries against the IRS reference-document corpus that an automated grounding workflow will then run.

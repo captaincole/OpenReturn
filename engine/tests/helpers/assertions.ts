@@ -36,7 +36,7 @@ export function assertEngineNumber(
     return;
   }
   const got = f.result.value;
-  /* 50¢ tolerance: money lines round at render time. */
+  /* 50¢ tolerance for unrounded upstream values; table-derived tax is already whole dollars. */
   if (typeof got !== "number" || Math.abs(got - expected) > 0.5) {
     failures.push(tag(prefix, `engine: ${fieldId} expected ${expected}, got ${String(got)}.`));
   }

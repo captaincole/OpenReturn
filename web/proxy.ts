@@ -62,6 +62,7 @@ export function proxy(request: NextRequest) {
   const csp = contentSecurityPolicy(nonce);
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);
+  // Next.js reads the nonce from this request header and puts it on its own scripts.
   requestHeaders.set("Content-Security-Policy", csp);
   const response = NextResponse.next({ request: { headers: requestHeaders } });
   response.headers.set("Content-Security-Policy", csp);
