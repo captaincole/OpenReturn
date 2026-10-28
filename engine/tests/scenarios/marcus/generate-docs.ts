@@ -1,9 +1,9 @@
 /* Renders Marcus's fake source documents into docs/: npx tsx tests/scenarios/marcus/generate-docs.ts */
 
+import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from "@cantoo/pdf-lib";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from "pdf-lib";
 
 const PAGE_W = 612; // US Letter, points
 const PAGE_H = 792;

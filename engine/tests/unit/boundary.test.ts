@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 
 const ENGINE_ROOT = resolve(__dirname, "../../src");
 
-const ALLOWED_PACKAGES = new Set(["zod", "pdf-lib"]);
+const ALLOWED_PACKAGES = new Set(["zod", "@cantoo/pdf-lib"]);
 
 function walk(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {

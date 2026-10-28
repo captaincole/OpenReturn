@@ -36,9 +36,9 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@cantoo/pdf-lib": "^2.11.1",
     "@openreturn/sources": "0.1.0",
     "@types/node": "^20",
-    "pdf-lib": "^1.17.1",
     "tsx": "^4.20.5",
     "typescript": "^5",
     "vitest": "^3.2.4"
