@@ -1,5 +1,5 @@
+import { PDFCheckBox, PDFDocument, PDFRadioGroup, PDFTextField } from "@cantoo/pdf-lib";
 import { promises as fs } from "node:fs";
-import { PDFCheckBox, PDFDocument, PDFRadioGroup, PDFTextField } from "pdf-lib";
 
 export type GoldenKind = "text" | "checkbox" | "radio" | "other";
 

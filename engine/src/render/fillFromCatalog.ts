@@ -3,7 +3,13 @@
  * tests cannot read the widgets back. A locked golden passes flatten: false.
  */
 
-import { PDFCheckBox, PDFDocument, PDFRadioGroup, PDFTextField, type PDFForm } from "pdf-lib";
+import {
+  PDFCheckBox,
+  PDFDocument,
+  PDFRadioGroup,
+  PDFTextField,
+  type PDFForm,
+} from "@cantoo/pdf-lib";
 import { type Catalog, type FieldInventory } from "../catalog.js";
 import { getFormatter } from "../defineForm.js";
 import { formatDollars } from "../money.js";
