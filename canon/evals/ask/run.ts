@@ -10,6 +10,7 @@ import path from "node:path";
 import type { AskStepLog } from "../../src/mastra/workflows/ask";
 import { modelsFromArgs, tierFromArgs, useModel } from "../lib/models";
 import { CASES, casesFor, type AskCase } from "./cases";
+import { correct } from "./flow";
 import { publishReport, type AskResult } from "./report";
 import { scoreResult } from "./score";
 
@@ -83,6 +84,16 @@ async function evalCase(d: Deps, c: AskCase, run: number): Promise<AskResult> {
   });
 }
 
+/* One row per run for the lite summary (cade/evals/lite), which reads no eval code. */
+const liteCase = (r: AskResult) => ({
+  flow: "ask",
+  model: r.model,
+  name: r.case,
+  run: r.run,
+  score: correct(r) ? 1 : 0,
+  note: r.error ? `failed: ${r.error}` : `${r.coverage}, expected ${r.expectedCoverage.join("/")}`,
+});
+
 function logLine(c: AskCase, run: number, r: AskResult): string {
   const facts =
     r.factsOk === null
@@ -111,7 +122,7 @@ async function main() {
       results.push(r);
       writeFileSync(
         path.join(outDir, "results.json"),
-        JSON.stringify({ models: [model], results }, null, 2),
+        JSON.stringify({ models: [model], results, cases: results.map(liteCase) }, null, 2),
       );
     }
   console.log(`\nResults: ${path.relative(REPO, outDir)}/results.json`);
