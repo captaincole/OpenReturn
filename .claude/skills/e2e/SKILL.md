@@ -22,3 +22,13 @@ After a change to the web app, the agent tools, or document generation, run `npm
 - From `web/`: `npx playwright show-trace e2e/.run/<runId>/test-results/**/trace.zip`.
 - When Cade asks something new, the intake stage fails and the transcript shows the question. Add a keyword rule to `ANSWERS` in `web/e2e/alexAnswers.ts`.
 - The run copies `canon/.env.development` and `cade/.env.development` into its own env files, so a port or path override left in those files (for example from a worktree) carries into the run.
+
+## Before the full run: targeted calls
+
+A full run costs minutes; check the one path you changed first, against `npm run dev:all`.
+
+- Cade: `curl -s http://127.0.0.1:4111/app/state | head -c 400` returns the case state; a tool change shows in a chat turn, and `npm run smoke:review` exercises the review queue and Canon's `run_ground` tool.
+- Canon: `curl -s http://127.0.0.1:4112/health`; `npm run corpus -- search "<phrase>"` for retrieval; `npm run smoke:review` for the judges.
+- Web, through the same proxy the browser uses: create the owner with `curl` against `/api/auth/setup`, log in against `/api/auth/login` with `-c cookies.txt`, then `POST /api/agent/app/ask` with the cookie for an Ask turn and `GET /api/agent/app/ask/<threadId>` until the turn is completed. The browser tools cannot type into the password fields (a password-manager extension takes them), so the cookie path is the reliable one.
+
+Then the full run, with reviews on for a change to Canon, the review workflow or the MCP client, and off otherwise.

@@ -12,3 +12,8 @@ Production runtime logs for the agent come through `vercel logs`, but with gotch
 - **We don't use Mastra's `PinoLogger`** — its default destination is async-buffered and gets truncated on Vercel function exit, swallowing every log line on requests that error. We ship `ConsoleLogger` (`cade/src/mastra/server/consoleLogger.ts`) instead — a ~70-line `MastraLogger` subclass that writes single-line JSON via `console.{log,warn,error}`. `vercel logs --json` parses each line into its structured fields. Use `mastra.getLogger()` (or `logger.error("msg", { err })`) anywhere new error paths land; no need for ad-hoc `console.log`.
 - **Useful flags:** `--since 30m --limit 30 --expand` (historical), `--follow` (live tail), `--json` (richer per-request record incl. `responseStatusCode`, `cache`, structured `logs` array). No duration field — log timings yourself in middleware if needed.
 - **Build logs (separate from runtime):** `vercel inspect <deployment-url> --logs`.
+
+## Verify a logging change
+
+- Locally first: with `npm run dev` up, trigger the path (`curl -s http://127.0.0.1:4111/app/state`, or the failing `/api/*` route) and confirm the Mastra log shows the line as single-line JSON with the fields you expect.
+- Then on a preview deployment from `cade/` (`vercel deploy`): hit the same route, not `/health`, and `vercel logs --follow --json` from `cade/` shows the line with its structured fields. A line that appears locally and not here is the buffering problem the logger exists to avoid.

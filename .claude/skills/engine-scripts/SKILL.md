@@ -25,3 +25,11 @@ The form-engine CLI lives under `engine/builder/scripts/formEngine/`, Cade's too
 | `compareFiled/cli.ts <folder>` | private comparison kit: engine vs a real filed return (scenario format, kept outside the repo); writes a no-amounts report with root causes for the checker to send to a maintainer. Follow the `verify-with-filed-return` skill. |
 
 The comparison kit refuses a folder inside the project. Private tax data never enters the repo, not even `.scratch/`: never write real figures, or any hint that a real return shaped something, into a committed file, a code comment, or a commit message.
+
+## Verify your change
+
+- The golden suite: `npm test` (a positional filter narrows it: `npm test -- alex`). Every scenario must pass. A locked scenario that changes means the engine's output changed: lock it only after you verified the new value against the form instructions or a filed return (`verify-with-filed-return` skill).
+- `npm run test:unit` and `npm run test:integration` for the engine: the boundary test, the money rules, the bindings.
+- A catalog or bindings change: `npx tsx scripts/renderScenario.ts --scenario=<name>` from `engine/`, then open the PDF and find the value in the right widget. The goldens trust the catalog's field-to-widget mapping, so a mislabeled catalog passes them and still prints in the wrong box.
+- A tax-table ingest: check a few bracket boundaries by hand against the source PDF.
+- A change to the review diagnostics or the ground path: `npm run smoke:review` with Canon running.
