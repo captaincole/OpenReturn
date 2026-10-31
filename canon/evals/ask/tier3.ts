@@ -6,6 +6,7 @@ import {
   FEDERAL_110,
   insufficient,
   IRA_LIMIT,
+  lite,
   type AskCase,
 } from "./caseKit";
 
@@ -150,6 +151,7 @@ export const TIER_3: AskCase[] = [
      * selling stock alone is the confident wrong answer.
      */
     name: "ISOs after moving to Florida",
+    lite: true,
     tier: 3,
     kind: "standard",
     question:
@@ -181,6 +183,7 @@ export const TIER_3: AskCase[] = [
   },
   {
     name: "CA taxes long-term gains at 15%",
+    lite: true,
     tier: 3,
     kind: "false_premise",
     question:
@@ -234,11 +237,13 @@ export const TIER_3: AskCase[] = [
     ],
     facts: [["100%"], ["does not conform", "doesn't conform", "not conform"]],
   },
-  insufficient(
-    "CA resident with New York wages",
-    3,
-    "I'm a California resident who worked in New York for three months in 2025. How much New York tax do I owe, and what credit does California give me for it?",
-    ["partial", "not_covered"],
+  lite(
+    insufficient(
+      "CA resident with New York wages",
+      3,
+      "I'm a California resident who worked in New York for three months in 2025. How much New York tax do I owe, and what credit does California give me for it?",
+      ["partial", "not_covered"],
+    ),
   ),
   /*
    * California's half is covered (treaties do not bind California unless

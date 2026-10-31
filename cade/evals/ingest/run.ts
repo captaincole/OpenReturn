@@ -1,6 +1,7 @@
 /*
- * npx tsx --env-file=.env evals/ingest/run.ts [model…] [--full] [--runs=N] [--doc=…]   (from cade)
- * --doc=<substring> runs only matching documents and publishes no report.
+ * npx tsx --env-file=.env evals/ingest/run.ts [model…] [--full] [--runs=N] [--doc=…] [--out=dir]   (from cade)
+ * --doc=<substring> runs only matching documents. Only a full run without --doc
+ * publishes the report; the lite tier (the default) writes results.json only.
  */
 import { Agent } from "@mastra/core/agent";
 import { extractTrajectory } from "@mastra/core/evals";
@@ -13,6 +14,7 @@ import { createOwnerFiling } from "../../src/mastra/db/filings";
 import { listFacts } from "../../src/mastra/db/taxFacts";
 import { modelFor } from "../../src/mastra/models";
 import { DEMO_TAX_YEAR } from "../../src/mastra/server/demoSession";
+import { REQUEST_CONTEXT_KEYS } from "../../src/mastra/server/requestContext";
 import { INGEST_MAX_OUTPUT_TOKENS, ingestTools } from "../../src/mastra/tools/ingestTools";
 import { modelsFromArgs, tierFromArgs, useModel, type EvalModel } from "../lib/models";
 import "../lib/tempDb";
@@ -61,8 +63,11 @@ async function freshScope() {
   const userId = `eval-${++runCounter}`;
   const filingId = crypto.randomUUID();
   await createOwnerFiling({ filingId, userId, taxYear: DEMO_TAX_YEAR });
+  /* What ownerMiddleware sets on a real request; the tools' requestContextSchema requires the last two. */
   const requestContext = new RequestContext();
   requestContext.set(MASTRA_RESOURCE_ID_KEY, userId);
+  requestContext.set(REQUEST_CONTEXT_KEYS.userId, userId);
+  requestContext.set(REQUEST_CONTEXT_KEYS.userEmail, `${userId}@example.com`);
   return { scope: { userId, filingId }, requestContext };
 }
 
@@ -115,7 +120,9 @@ async function evalDoc(
 
 async function main() {
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
-  const outDir = path.join(REPO, ".scratch/evals/ingest", runId);
+  const outDir =
+    process.argv.find((a) => a.startsWith("--out="))?.slice(6) ??
+    path.join(REPO, ".scratch/evals/ingest", runId);
   mkdirSync(outDir, { recursive: true });
   const docFilter = process.argv.find((a) => a.startsWith("--doc="))?.slice(6);
   const tier = tierFromArgs(process.argv);
@@ -143,7 +150,8 @@ async function main() {
       }
     }
     /* Publish after each model, so a long run shows results early. */
-    if (!docFilter) console.log(`Report: ${publishReport(tier, [{ tier, models, results }])}`);
+    if (!docFilter && tier === "full")
+      console.log(`Report: ${publishReport([{ tier, models, results }])}`);
   }
   console.log(`\nResults: ${path.relative(REPO, outDir)}/results.json`);
 }

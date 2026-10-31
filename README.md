@@ -122,7 +122,7 @@ Every flow that uses a model has an eval: document ingest (Cade), decision revie
 | [Test OpenReturn against your filed return](docs/testing-with-your-return.md) | Check the engine against a return you already filed, privately, and send us the result |
 | [Add a scenario](docs/adding-a-scenario.md) | Add a new test taxpayer, with new forms or documents, and the tests that check each step |
 | [End-to-end tests](web/e2e/README.md) | The Playwright run that drives the whole stack with a real model |
-| [Model evals](docs/evals/README.md) | One score per model, by flow: document ingest ([full](docs/evals/ingest.md), [quick](docs/evals/ingest-quick.md)), [review judges](docs/evals/review.md) and [Ask The Tax Code](docs/evals/ask.md) |
+| [Model evals](docs/evals/README.md) | One score per model, by flow: [document ingest](docs/evals/ingest.md), [review judges](docs/evals/review.md) and [Ask The Tax Code](docs/evals/ask.md) |
 
 ## Contributing
 

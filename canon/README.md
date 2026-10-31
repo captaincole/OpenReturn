@@ -97,7 +97,7 @@ canon/
 └── tests/unit/                 search, parsing, Ask validation, the ground loop, the boundary
 ```
 
-Run an eval from this folder: `npx tsx --env-file=.env.development evals/review/run.ts <model>`. The reports are in [docs/evals](../docs/evals/README.md).
+Run the full tier of an eval from this folder: `npx tsx --env-file=.env.development evals/review/run.ts <model> --full`. The lite tier of all three evals is `npm run evals:lite` from the repo root. The reports are in [docs/evals](../docs/evals/README.md).
 
 ## Boundaries
 

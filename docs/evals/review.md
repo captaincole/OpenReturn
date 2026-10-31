@@ -35,5 +35,7 @@ Models: Gemma 4 31b Q4_K_M (`ollama/gemma4:31b`), Gemma 4 26b Q4_K_M (`ollama/ge
 From `canon`, with Ollama running (retrieval embeds queries locally):
 
 ```bash
-npx tsx --env-file=.env.development evals/review/run.ts <model-substring> [--runs=N]
+npx tsx --env-file=.env.development evals/review/run.ts <model-substring> --full [--runs=N]
 ```
+
+The lite tier is `npm run evals:lite` from the repo root.

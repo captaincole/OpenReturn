@@ -11,6 +11,7 @@
     "start": "cd .mastra/output && node index.mjs",
     "reset:data": "rm -f .data/app.db .data/app.db-shm .data/app.db-wal .data/mastra.db .data/mastra.db-shm .data/mastra.db-wal && rm -rf .data/documents && echo 'Factory reset done (corpus.db preserved). Restart the dev servers and visit http://localhost:3000/setup.'",
     "smoke:review": "tsx scripts/smokeReview.ts",
+    "evals:lite": "tsx evals/lite/run.ts",
     "doctor": "tsx scripts/doctor.ts",
     "test:unit": "vitest run tests/unit",
     "test:unit:watch": "vitest tests/unit",

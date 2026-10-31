@@ -1,8 +1,16 @@
-import { blocks, CA_EXEMPTION_LIMIT, FEDERAL_110, insufficient, type AskCase } from "./caseKit";
+import {
+  blocks,
+  CA_EXEMPTION_LIMIT,
+  FEDERAL_110,
+  insufficient,
+  lite,
+  type AskCase,
+} from "./caseKit";
 
 export const TIER_2: AskCase[] = [
   {
     name: "Child tax credit phase-out",
+    lite: true,
     tier: 2,
     kind: "standard",
     question: "At what income level would I no longer be able to take the child tax credit?",
@@ -27,6 +35,7 @@ export const TIER_2: AskCase[] = [
   },
   {
     name: "FTB 5805 annualization amounts",
+    lite: true,
     tier: 2,
     kind: "standard",
     question:
@@ -107,6 +116,7 @@ export const TIER_2: AskCase[] = [
   },
   {
     name: "Safe harbor is 100% over $150,000 AGI",
+    lite: true,
     tier: 2,
     kind: "false_premise",
     question:
@@ -126,9 +136,11 @@ export const TIER_2: AskCase[] = [
     "What is the 2025 federal per diem lodging rate for San Francisco?",
     ["not_covered", "partial"],
   ),
-  insufficient(
-    "Washington capital gains tax",
-    2,
-    "What is Washington state's capital gains tax rate for 2025?",
+  lite(
+    insufficient(
+      "Washington capital gains tax",
+      2,
+      "What is Washington state's capital gains tax rate for 2025?",
+    ),
   ),
 ];

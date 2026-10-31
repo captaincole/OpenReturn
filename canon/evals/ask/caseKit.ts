@@ -10,6 +10,8 @@ export interface AskCase {
   coverage: Coverage[];
   authority: string[][];
   facts: string[][];
+  /* In the lite tier: a case both models answered the same way on every full run. */
+  lite?: boolean;
 }
 
 export const CA540 = "ca-540-inst-2025::sec::";
@@ -46,3 +48,5 @@ export const insufficient = (
   question: string,
   coverage: Coverage[] = ["not_covered"],
 ): AskCase => ({ name, tier, kind: "insufficient", question, coverage, authority: [], facts: [] });
+
+export const lite = (c: AskCase): AskCase => ({ ...c, lite: true });

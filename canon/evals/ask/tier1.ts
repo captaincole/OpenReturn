@@ -1,8 +1,9 @@
-import { CA540, IRA_LIMIT, blocks, insufficient, type AskCase } from "./caseKit";
+import { blocks, CA540, insufficient, IRA_LIMIT, lite, type AskCase } from "./caseKit";
 
 export const TIER_1: AskCase[] = [
   {
     name: "HSA limit, self-only",
+    lite: true,
     tier: 1,
     kind: "standard",
     question: "What is the maximum HSA contribution for self-only coverage in 2025?",
@@ -18,6 +19,7 @@ export const TIER_1: AskCase[] = [
   },
   {
     name: "CA standard deduction, single",
+    lite: true,
     tier: 1,
     kind: "standard",
     question: "What is the California standard deduction for a single filer in 2025?",
@@ -27,6 +29,7 @@ export const TIER_1: AskCase[] = [
   },
   {
     name: "IRA contribution limit",
+    lite: true,
     tier: 1,
     kind: "standard",
     question: "I'm 40. How much can I contribute to an IRA for 2025?",
@@ -80,6 +83,7 @@ export const TIER_1: AskCase[] = [
   },
   {
     name: "Home sale exclusion is $500,000 (single)",
+    lite: true,
     tier: 1,
     kind: "false_premise",
     question:
@@ -112,10 +116,12 @@ export const TIER_1: AskCase[] = [
     ],
     facts: [["15,750"]],
   },
-  insufficient(
-    "New York standard deduction",
-    1,
-    "What is the New York State standard deduction for a single filer in 2025?",
+  lite(
+    insufficient(
+      "New York standard deduction",
+      1,
+      "What is the New York State standard deduction for a single filer in 2025?",
+    ),
   ),
   insufficient("Oregon top tax rate", 1, "What is Oregon's top income tax rate for 2025?"),
 ];

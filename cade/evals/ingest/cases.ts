@@ -4,7 +4,8 @@ import path from "node:path";
 
 export interface IngestCase {
   doc: string;
-  quick: boolean;
+  /* In the lite tier: one document per type. */
+  lite: boolean;
   type: string;
   pdf: string;
   expected: TaxFactRow[];
@@ -71,7 +72,8 @@ const MANIFEST: [string, string, string, RegExp[]][] = [
   ["tara", "06-valley-comfort-hvac-invoice.pdf", "Energy invoice", [/^vendor\.valley-comfort/]],
 ];
 
-const QUICK = new Set([
+/* One document per type. */
+const LITE = new Set([
   "jordan/01-example-corp-w2.pdf",
   "marcus/03-marcus-1099-schwab.pdf",
   "marcus/02-marcus-1099-wealthfront.pdf",
@@ -86,7 +88,7 @@ const QUICK = new Set([
   "tara/04-bay-area-door-invoice.pdf",
 ]);
 
-export function loadCases(tier: "quick" | "full"): IngestCase[] {
+export function loadCases(tier: "lite" | "full"): IngestCase[] {
   const cases = MANIFEST.map(([scenario, file, type, patterns]) => {
     const facts = SCENARIOS.find((s) => s.name === scenario)?.facts ?? [];
     const expected = facts.filter((f) => patterns.some((p) => p.test(f.key)));
@@ -94,13 +96,13 @@ export function loadCases(tier: "quick" | "full"): IngestCase[] {
     const doc = `${scenario}/${file}`;
     return {
       doc,
-      quick: QUICK.has(doc),
+      lite: LITE.has(doc),
       type,
       pdf: path.join(SCENARIO_DIR, scenario, "docs", file),
       expected,
     };
   });
-  const missing = [...QUICK].filter((d) => !cases.some((c) => c.doc === d));
-  if (missing.length) throw new Error(`QUICK names unknown documents: ${missing.join(", ")}`);
-  return tier === "full" ? cases : cases.filter((c) => c.quick);
+  const missing = [...LITE].filter((d) => !cases.some((c) => c.doc === d));
+  if (missing.length) throw new Error(`LITE names unknown documents: ${missing.join(", ")}`);
+  return tier === "full" ? cases : cases.filter((c) => c.lite);
 }
