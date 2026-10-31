@@ -468,6 +468,8 @@ Most readers open a PR on a phone and do not open the diff. The description must
 
 **Size**: the whole description fits in 250 words. Tables and code blocks count. If it does not fit, the PR is too big or the description explains the diff instead of the change.
 
+**Base branch**: every PR targets `main` unless the request names another base. Related changes are a sequence of PRs to main, each opened after the one before it merges, not a stack. The repo keeps head branches after a merge, so a PR based on a branch merges into that branch, not main.
+
 **Voice**
 
 - Each sentence builds on the one before it; say the specific thing, not the category ("the bundler validates the output by importing it", not "improves build robustness").
