@@ -87,7 +87,7 @@ web/                             # Next.js 16 (App Router) frontend → deployed
 (no other top-level infra — auth is a password gate in the web app; see below)
 package.json                     # workspace root: workspaces + thin delegating scripts (dev, dev:all, test, …)
 CLAUDE.md
-.claude/skills/                 # checked-in Claude skills (corpus, e2e, vercel-logs, engine-scripts): "must use" for those tasks
+.claude/skills/                 # checked-in Claude skills (corpus, e2e, vercel-logs, engine-scripts, verify-with-filed-return): "must use" for those tasks
 ```
 
 The agent uses the engine only through `@openreturn/engine`'s exports. The web app shares no source with either.
@@ -372,7 +372,7 @@ Rule of thumb: grep the bundled docs first (`Grep pattern path=node_modules/@mas
 
 All temporary work Claude produces or needs to save locally goes in **`.scratch/`** at the repo root — screenshots, verification artifacts, backups, one-off scripts, analysis output. It is gitignored and never committed. Make subfolders freely (e.g. `.scratch/readme-run-screenshots/`). Don't scatter temp files elsewhere in the repo, and don't use system temp dirs for anything worth keeping between sessions.
 
-**Private tax data is the exception: it never goes anywhere inside this project, not even `.scratch/`.** A real return (documents, filed values, notes that describe it) lives in a folder outside the project that Claude sessions here cannot read; tools point at it by path (`scripts/compareFiled/cli.ts <folder>` refuses a folder inside the project, and prints only no-amount reports). Never write real figures, or any hint that a real return shaped something, into a committed file, a code comment, or a commit message.
+**Private tax data is the exception: it never goes anywhere inside this project, not even `.scratch/`.** **Must use** the `verify-with-filed-return` skill (`.claude/skills/verify-with-filed-return/SKILL.md`) for any work with a real return. A real return (documents, filed values, notes that describe it) lives in a folder outside the project that Claude sessions here cannot read; tools point at it by path (`scripts/compareFiled/cli.ts <folder>` refuses a folder inside the project, and prints only no-amount reports). Never write real figures, or any hint that a real return shaped something, into a committed file, a code comment, or a commit message.
 
 ## Pull requests
 

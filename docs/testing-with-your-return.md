@@ -1,5 +1,7 @@
 # Test OpenReturn against your filed return
 
+> If you run Claude Code in this repo, it follows the `verify-with-filed-return` skill (`.claude/skills/verify-with-filed-return/SKILL.md`) for this: it runs the kit, reads the reports, and never reads your folder.
+
 [← Back to the README](../README.md)
 
 You can check the OpenReturn engine against a tax return you already filed.
