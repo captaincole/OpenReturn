@@ -160,7 +160,7 @@ export function renderReport(models: EvalModel[], results: AskResult[]): string 
     "## By case",
     caseTable(models, results),
     "## Run it",
-    "From `canon`, with Ollama running (retrieval embeds queries locally):\n\n```bash\nnpx tsx --env-file=.env.development evals/ask/run.ts <model-substring> [--runs=N] [--case=…]\n```",
+    "From `canon`, with Ollama running (retrieval embeds queries locally):\n\n```bash\nnpx tsx --env-file=.env.development evals/ask/run.ts <model-substring> --full [--runs=N] [--case=…]\n```\n\nThe lite tier is `npm run evals:lite` from the repo root.",
   ].join("\n\n");
 }
 

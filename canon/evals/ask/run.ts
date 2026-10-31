@@ -1,21 +1,23 @@
 /*
- *   npx tsx --env-file=.env.development evals/ask/run.ts <model-substring> [--runs=N] [--case=…]   (from canon)
+ *   npx tsx --env-file=.env.development evals/ask/run.ts <model-substring> [--full] [--runs=N] [--case=…] [--out=dir]   (from canon)
  *
  * One model per run: the judges read JUDGE_MODEL when their module loads.
- * For long runs, start one process per case with --case.
+ * For long runs, start one process per case with --case. Only a full run
+ * publishes the report; the lite tier (the default) writes results.json only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import type { AskStepLog } from "../../src/mastra/workflows/ask";
-import { modelsFromArgs, useModel } from "../lib/models";
-import { CASES, type AskCase } from "./cases";
+import { modelsFromArgs, tierFromArgs, useModel } from "../lib/models";
+import { CASES, casesFor, type AskCase } from "./cases";
 import { publishReport, type AskResult } from "./report";
 import { scoreResult } from "./score";
 
 const REPO = path.resolve(__dirname, "../../..");
 
-const [model] = modelsFromArgs(process.argv.slice(2));
-if (!model) throw new Error("name one model, e.g. gemma4:31b");
+const ARGS = process.argv.slice(2);
+const TIER = tierFromArgs(ARGS);
+const [model] = modelsFromArgs(ARGS);
 useModel("JUDGE", model);
 
 /* Imported after JUDGE_MODEL is set. */
@@ -94,11 +96,13 @@ async function main() {
   const d = await deps();
   await checkAuthority(d);
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
-  const outDir = path.join(REPO, ".scratch/evals/ask", runId);
+  const outDir =
+    ARGS.find((a) => a.startsWith("--out="))?.slice(6) ??
+    path.join(REPO, ".scratch/evals/ask", runId);
   mkdirSync(outDir, { recursive: true });
-  const caseFilter = process.argv.find((a) => a.startsWith("--case="))?.slice(7);
-  const cases = CASES.filter((c) => !caseFilter || c.name.includes(caseFilter));
-  console.log(`${cases.length} cases × ${model.runs} runs, ${model.label}`);
+  const caseFilter = ARGS.find((a) => a.startsWith("--case="))?.slice(7);
+  const cases = casesFor(TIER).filter((c) => !caseFilter || c.name.includes(caseFilter));
+  console.log(`${TIER} tier: ${cases.length} cases × ${model.runs} runs, ${model.label}`);
   const results: AskResult[] = [];
   for (const c of cases)
     for (let run = 1; run <= model.runs; run++) {
@@ -111,7 +115,8 @@ async function main() {
       );
     }
   console.log(`\nResults: ${path.relative(REPO, outDir)}/results.json`);
-  if (!caseFilter) console.log(`Report: ${publishReport([{ models: [model], results }])}`);
+  if (!caseFilter && TIER === "full")
+    console.log(`Report: ${publishReport([{ models: [model], results }])}`);
 }
 
 main().catch((err) => {

@@ -32,4 +32,4 @@ The comparison kit refuses a folder inside the project. Private tax data never e
 - `npm run test:unit` and `npm run test:integration` for the engine: the boundary test, the money rules, the bindings.
 - A catalog or bindings change: `npx tsx scripts/renderScenario.ts --scenario=<name>` from `engine/`, then open the PDF and find the value in the right widget. The goldens trust the catalog's field-to-widget mapping, so a mislabeled catalog passes them and still prints in the wrong box.
 - A tax-table ingest: check a few bracket boundaries by hand against the source PDF.
-- A change to the review diagnostics or the ground path: `npm run smoke:review` with Canon running.
+- A change to the review diagnostics or the ground path: `npm run smoke:review` with Canon running, then `npm run evals:lite --flow=review` for the verdicts.

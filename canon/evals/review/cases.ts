@@ -20,6 +20,8 @@ export interface ReviewCase {
   facts: ReviewFact[];
   decision: { decisionKey: string; decision: unknown; rationale: string };
   authority: string[][];
+  /* In the lite tier: two pairs both models judged the same way on every full run. */
+  lite?: boolean;
 }
 
 const withValue = (facts: ReviewFact[], key: string, patch: unknown) =>
@@ -130,6 +132,7 @@ const mustFileAuthority = [
 export const CASES: ReviewCase[] = [
   {
     name: "Schedule H: $3,100 cash wages to one household employee",
+    lite: true,
     expectedVerdict: "accurate",
     facts: scheduleHFacts,
     decision: {
@@ -142,6 +145,7 @@ export const CASES: ReviewCase[] = [
   },
   {
     name: "Schedule H: $2,500 cash wages (under the threshold)",
+    lite: true,
     expectedVerdict: "inaccurate",
     facts: withValue(scheduleHFacts, HOUSEHOLD_W2, {
       box1: 2500,
@@ -160,6 +164,7 @@ export const CASES: ReviewCase[] = [
   },
   {
     name: "Form 8959: $243,500 Medicare wages, single",
+    lite: true,
     expectedVerdict: "accurate",
     facts: form8959Facts,
     decision: {
@@ -172,6 +177,7 @@ export const CASES: ReviewCase[] = [
   },
   {
     name: "Form 8959: $180,000 Medicare wages, single",
+    lite: true,
     expectedVerdict: "inaccurate",
     facts: withValue(form8959Facts, MARCUS_W2, {
       box1: 156500,
@@ -211,3 +217,6 @@ export const CASES: ReviewCase[] = [
     authority: mustFileAuthority,
   },
 ];
+
+export const casesFor = (tier: "lite" | "full"): ReviewCase[] =>
+  tier === "full" ? CASES : CASES.filter((c) => c.lite);

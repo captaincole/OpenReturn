@@ -27,6 +27,7 @@
     "start": "npm --prefix cade run start",
     "form-engine": "npm --prefix engine/builder run form-engine --",
     "smoke:review": "npm --prefix cade run smoke:review",
+    "evals:lite": "npm --prefix cade run evals:lite --",
     "doctor": "npm --prefix cade run doctor",
     "test": "npm -w @openreturn/engine test",
     "test:unit": "npm -w @openreturn/engine run test:unit && npm -w canon run test:unit && npm -w cade run test:unit",
