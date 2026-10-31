@@ -452,6 +452,29 @@ All temporary work Claude produces or needs to save locally goes in **`.scratch/
 
 **Private tax data is the exception: it never goes anywhere inside this project, not even `.scratch/`.** A real return (documents, filed values, notes that describe it) lives in a folder outside the project that Claude sessions here cannot read; tools point at it by path (`scripts/compareFiled/cli.ts <folder>` refuses a folder inside the project, and prints only no-amount reports). Never write real figures, or any hint that a real return shaped something, into a committed file, a code comment, or a commit message.
 
+## Pull requests
+
+Most readers open a PR on a phone and do not open the diff. The description must let them judge the change on its own, so write it the way the issues are written (#34 is the model: plain goal title, "In order to …" why before how, an example of the outcome, refs).
+
+**Shape**
+
+1. **Title**: the goal in plain words, as an issue title. Not a file list, not a commit log.
+2. **Headline**, before any heading, under 60 words: what changes and why, then one labeled bullet on every PR:
+   - `Risk: routine` or `Risk: high — <what could break and for whom>`; add `Complex: <why>` when the reader needs more than a glance, and `Pattern change: <old → new>` when the PR changes how we do something. A pattern change also updates this file.
+3. **What changed**: one bullet per idea, in the order a reader would ask. Name a file only when the reader has to go there.
+4. **Example outcome** when a user or operator sees something different: the real screen text, log line or command output.
+5. **Verified**: what ran and what did not. Say "not run" out loud.
+6. **Refs**: the issue, the PRs it builds on, the doc that recommends the change.
+
+**Size**: the whole description fits in 250 words. Tables and code blocks count. If it does not fit, the PR is too big or the description explains the diff instead of the change.
+
+**Voice**
+
+- Each sentence builds on the one before it; say the specific thing, not the category ("the bundler validates the output by importing it", not "improves build robustness").
+- No AI voice: no "introduces", "leverages", "ensures", "seamless", "comprehensive", "robust", and no sentence that restates the diff.
+- Explain an internal term the first time (golden, binding, locked scenario), or use the plain word.
+- A stacked PR names its base PR in the headline.
+
 ## What belongs in CLAUDE.md vs memory
 
 - Architecture, file layout, commands, design principles → **this file** (checked in, visible to anyone).
