@@ -13,7 +13,8 @@ web/dist
 *.log
 cade/src/mastra/public/drafts/
 .DS_Store
-.claude/
+.claude/*
+!.claude/skills/
 .vercel
 supabase/
 
