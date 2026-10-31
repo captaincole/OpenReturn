@@ -87,6 +87,7 @@ web/                             # Next.js 16 (App Router) frontend → deployed
 (no other top-level infra — auth is a password gate in the web app; see below)
 package.json                     # workspace root: workspaces + thin delegating scripts (dev, dev:all, test, …)
 CLAUDE.md
+.claude/skills/                 # checked-in Claude skills (corpus, e2e, vercel-logs, engine-scripts): "must use" for those tasks
 ```
 
 The agent uses the engine only through `@openreturn/engine`'s exports. The web app shares no source with either.
@@ -155,7 +156,7 @@ Limits worth remembering:
 
 ### Claude verifies the whole stack with `npm run e2e`
 
-After a change to the web app, the agent tools, or document generation, run `npm run e2e` in the background (a few minutes; the models come from `cade/.env.development` (Canon's from `canon/.env.development`) and optional `E2E_*` lines in the gitignored `cade/.env`, see web/e2e/README.md). Read `web/e2e/.run/<runId>/summary.md`. A `plumbing` failure means the change probably broke the app. A `model` failure can be a model mistake: run again before you debug. `dev:all` must be stopped first.
+**Must use** the `e2e` skill (`.claude/skills/e2e/SKILL.md`) to run the suite and read its summary. Run it after a change to the web app, the agent tools, document generation or Canon's MCP surface; turn grounding reviews on for a change to Canon or the review path. `dev:all` must be stopped first.
 
 ### Resetting user data
 
@@ -211,13 +212,7 @@ const line18 = roundDollars(line17 * 0.15);                     // calculated li
 
 ## Vercel logs (production debugging)
 
-Production runtime logs for the agent come through `vercel logs`, but with gotchas:
-
-- **Run from `cade/`** — the linked project's directory. From the repo root, the CLI uses the wheel-of-finances project context and returns nothing for the agent. `cade/.vercel/project.json` (gitignored) is what scopes the call.
-- **`/health` bypasses user middleware.** Mastra special-cases its framework routes; a `/health` hit doesn't fire `server.middleware`, so it won't show your `console.log` lines. Test logging via `/api/*` or `/app/*` instead.
-- **We don't use Mastra's `PinoLogger`** — its default destination is async-buffered and gets truncated on Vercel function exit, swallowing every log line on requests that error. We ship `ConsoleLogger` (`cade/src/mastra/server/consoleLogger.ts`) instead — a ~70-line `MastraLogger` subclass that writes single-line JSON via `console.{log,warn,error}`. `vercel logs --json` parses each line into its structured fields. Use `mastra.getLogger()` (or `logger.error("msg", { err })`) anywhere new error paths land; no need for ad-hoc `console.log`.
-- **Useful flags:** `--since 30m --limit 30 --expand` (historical), `--follow` (live tail), `--json` (richer per-request record incl. `responseStatusCode`, `cache`, structured `logs` array). No duration field — log timings yourself in middleware if needed.
-- **Build logs (separate from runtime):** `vercel inspect <deployment-url> --logs`.
+**Must use** the `vercel-logs` skill (`.claude/skills/vercel-logs/SKILL.md`) to read Cade's runtime or build logs on Vercel. Cade logs through `ConsoleLogger` (`cade/src/mastra/server/consoleLogger.ts`), one JSON line per entry, because `PinoLogger`'s buffered output is truncated when a Vercel function exits. Use `mastra.getLogger()` for new error paths, not `console.log`.
 
 ## Design principles
 
@@ -281,50 +276,7 @@ Stable IDs — used everywhere as citations:
 
 ### Adding or updating a reference document
 
-Each form's instructions are described by `sources/<year>/forms/<jurisdiction>/<short>/instructions.meta.json`. Publications (IRS/FTB guides to a topic across forms) are described by `sources/<year>/publications/<jurisdiction>/<pub>/publication.meta.json`, and their docIds start `irs-pub-` / `ftb-pub-`. The sidecar names the source file by `sourceUrl` and `sha256` (plus `"format": "html"` for a web page); only the sidecar is committed:
-
-```json
-{
-  "docId": "irs-1040-inst-2025",
-  "title": "Instructions for Form 1040 (2025)",
-  "publisher": "IRS",
-  "taxYear": 2025,
-  "sourceUrl": "https://www.irs.gov/pub/irs-pdf/i1040gi.pdf",
-  "sha256": "<sha256 of the PDF>"
-}
-```
-
-When sync needs a source file that is not on disk, it takes it from corpus.db (every ingested file is stored there), else downloads `sourceUrl` (and cleans it, for HTML) and checks `sha256`. Publishers replace files at the same URL with new editions, so the stored copy is what keeps re-ingests working; a mismatch error names the fix (`canon/src/refdocs/fetchSource.ts`).
-
-Each document has a publication date (`ref_documents.published`, `refdocs/published.ts`). The Ask answerer sees it in each passage header and prefers the newer document when two passages disagree; the library shows it. A PDF's date is its creation date, read at ingest; a sidecar's optional `"published": "YYYY-MM[-DD]"` overrides it (set it when the PDF's metadata is older than its revision, e.g. 3921 "Rev. April 2025"). `add-html` records an FTB page's "Revised" date; FTB's tax-year pages show none, so they have no date.
-
-Operator flow (the `corpus` CLI — `npm run corpus` with no args lists all subcommands, `-- <cmd> --help` shows options):
-
-```bash
-# 1. Download the PDF and write its sidecar (docId, title, publisher, taxYear, sourceUrl,
-#    sha256) as instructions.meta.json in sources/<year>/forms/<jurisdiction>/<short>/,
-#    or publication.meta.json in sources/<year>/publications/<jurisdiction>/<pub>/.
-#    Leave the PDF beside it; it is gitignored. For an FTB web page instead:
-npm run corpus -- add-html <url> --dir 2025/forms/state/ca/540 --doc-id ca-540-inst-2025
-# 2. See what's drifted vs the corpus DB:
-npm run corpus -- status            # diff: present / missing / sha-drift / extra / unconfigured / no source
-npm run corpus -- status --strict   # exit non-zero on any drift (for CI/pre-push later)
-
-# 3. Sync changes into corpus.db (idempotent, sha-skips already-ingested docs):
-npm run corpus -- sync              # ~$0.50 + a few min per new/changed doc
-
-# 3b. Publish: corpus.db is a GitHub Release asset (canon/seed/corpus.manifest.json);
-#     a new release is how other clones get the new documents.
-
-# 4. If a previous sync wrote rows but embeddings failed (Ollama down),
-#    re-embed without re-paying for Haiku contextualization:
-npm run corpus -- reembed
-#    After switching EMBEDDINGS_MODEL (or fetching a corpus built with a
-#    different model), rebuild every vector:
-npm run corpus -- reembed --all
-```
-
-Cost: ~$0.50 Haiku contextualization per doc; embeddings are local and free (EmbeddingGemma 2 via Ollama). Sha-skip means re-runs are free.
+**Must use** the `corpus` skill (`.claude/skills/corpus/SKILL.md`). Each document is a committed sidecar — `sources/<year>/forms/<jurisdiction>/<short>/instructions.meta.json`, or `sources/<year>/publications/<jurisdiction>/<pub>/publication.meta.json` for a publication — that names the source file by `sourceUrl` and `sha256`. The skill has the flow (add, status, sync, reembed, publish), the publication-date rule and the costs.
 
 ### Ingest pipeline
 
@@ -374,37 +326,7 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 
 ### Operator CLIs and inspection scripts
 
-Canon's corpus CLI lives under `canon/scripts/corpus/`, the form-engine CLI under `engine/builder/scripts/formEngine/`, Cade's tooling under `cade/scripts/`, engine scripts under `engine/scripts/`. Two subcommand CLIs (each package has its own copy of the small dispatcher, `scripts/lib/cli.ts` — no args lists subcommands, `-- <cmd> --help` shows options) plus standalone diagnostics. All run from the repo root; `--` passes args through both npm layers.
-
-**`npm run corpus`** — the RAG knowledge base, end to end:
-
-| subcommand | use |
-|---|---|
-| `fetch` | install the prebuilt corpus.db (local seed or sha-verified release download) |
-| `sync` | idempotent corpus sync from the `sources/**/{instructions,publication}.meta.json` sidecars; fetches source files as needed |
-| `add-html <url> --dir …` | fetch + clean a publisher web page into a sources folder (HTML file + sidecar); re-run to refresh the sha256 |
-| `status [--strict]` | diff repo sidecars vs corpus.db (no source file needed) |
-| `ingest` | manual single-doc ingest (any PDF or HTML path; debug flags) |
-| `reembed [--all]` | re-embed NULL blocks; `--all` after a model switch |
-| `check` | row counts + per-doc embedding coverage |
-| `search "q" [--mode …]` | invoke the production search tool |
-
-**`npm run form-engine`** — source documents (`sources`) → engine assets (`engine/src`): `generate-catalog`, `generate-bindings`, `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`. It is the builder's CLI (`engine/builder/`): put `ANTHROPIC_API_KEY` in `engine/builder/.env.development` for the two AI commands, and run Canon (`npm run dev:canon`) for `generate-bindings`.
-
-**Standalone diagnostics** (run via `npx tsx` from `cade/`):
-
-| script | use |
-|---|---|
-| `smokeReview.ts` | three end-to-end review scenarios (npm: `smoke:review`; needs `npm run dev:canon`) |
-| `inspectLastReview.ts` | dump most recent review-decision workflow run + trace |
-
-**Engine scripts** (run via `npx tsx` from `engine/`):
-
-| script | use |
-|---|---|
-| `renderScenario.ts` | render every form in a scenario to PDF for spot-checking |
-| `lockScenario.ts --scenario=<name>` | rewrite a scenario's `expected.ts` engineFields from the engine's output — only after the output is verified (jordan pattern, see docs/contributing.md); then `renderScenario.ts --scenario=<name> --golden` rewrites its golden PDFs |
-| `compareFiled/cli.ts <folder>` | private comparison kit: engine vs a real filed return (scenario format, kept outside the repo); writes a no-amounts report with root causes for the checker to send to a maintainer |
+**Must use** the `corpus` skill for `npm run corpus`, and the `engine-scripts` skill (`.claude/skills/engine-scripts/SKILL.md`) for `npm run form-engine`, the engine's scenario scripts (`renderScenario`, `lockScenario`, `compareFiled`) and Cade's review diagnostics (`smoke:review`, `inspectLastReview`). All run from the repo root; `--` passes args through both npm layers.
 
 ### Lessons from this build (read before changing the pipeline)
 
