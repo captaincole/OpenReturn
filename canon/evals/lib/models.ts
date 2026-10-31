@@ -22,8 +22,8 @@ const HAIKU = "anthropic/claude-haiku-5-5";
 
 const MODELS: Omit<EvalModel, "runs">[] = [
   { label: "Haiku 5.5", id: HAIKU },
-  /* The one Mac model: the MLX build of the model the second machine runs. */
-  { label: "Gemma 4 31b MLX", id: "ollama/gemma4:31b-mlx", url: MAC },
+  /* The one Mac model: the 26b MLX build (the 31b takes too long on a laptop). */
+  { label: "Gemma 4 26b MLX", id: "ollama/gemma4:26b-mlx", url: MAC },
   /* On CUDA the plain tags resolve to Q4_K_M. */
   { label: "Gemma 4 26b QAT (4090)", id: "ollama/gemma4:26b-a4b-it-qat", url: PC },
   { label: "Gemma 4 26b Q4_K_M (4090)", id: "ollama/gemma4:26b", url: PC },
