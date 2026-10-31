@@ -156,7 +156,7 @@ Limits worth remembering:
 
 ### Claude verifies the whole stack with `npm run e2e`
 
-After a change to the web app, the agent tools, or document generation, run `npm run e2e` in the background (a few minutes; the models come from `cade/.env.development` (Canon's from `canon/.env.development`) and optional `E2E_*` lines in the gitignored `cade/.env`, see web/e2e/README.md). Read `web/e2e/.run/<runId>/summary.md`. A `plumbing` failure means the change probably broke the app. A `model` failure can be a model mistake: run again before you debug. `dev:all` must be stopped first.
+**Must use** the `e2e` skill (`.claude/skills/e2e/SKILL.md`) to run the suite and read its summary. Run it after a change to the web app, the agent tools, document generation or Canon's MCP surface; turn grounding reviews on for a change to Canon or the review path. `dev:all` must be stopped first.
 
 ### Resetting user data
 
