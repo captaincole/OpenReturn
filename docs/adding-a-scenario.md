@@ -1,5 +1,7 @@
 # Add a scenario
 
+Claude Code follows the `engine-scripts` skill (`.claude/skills/engine-scripts/SKILL.md`) for the scripts below, and the `verify-with-filed-return` skill for the comparison kit.
+
 [← Back to the README](../README.md)
 
 A scenario is one fake taxpayer. It holds their documents as facts,

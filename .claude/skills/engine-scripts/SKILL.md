@@ -22,6 +22,6 @@ The form-engine CLI lives under `engine/builder/scripts/formEngine/`, Cade's too
 |---|---|
 | `renderScenario.ts` | render every form in a scenario to PDF for spot-checking |
 | `lockScenario.ts --scenario=<name>` | rewrite a scenario's `expected.ts` engineFields from the engine's output — only after the output is verified (jordan pattern, see docs/contributing.md); then `renderScenario.ts --scenario=<name> --golden` rewrites its golden PDFs |
-| `compareFiled/cli.ts <folder>` | private comparison kit: engine vs a real filed return (scenario format, kept outside the repo); writes a no-amounts report with root causes for the checker to send to a maintainer |
+| `compareFiled/cli.ts <folder>` | private comparison kit: engine vs a real filed return (scenario format, kept outside the repo); writes a no-amounts report with root causes for the checker to send to a maintainer. Follow the `verify-with-filed-return` skill. |
 
 The comparison kit refuses a folder inside the project. Private tax data never enters the repo, not even `.scratch/`: never write real figures, or any hint that a real return shaped something, into a committed file, a code comment, or a commit message.

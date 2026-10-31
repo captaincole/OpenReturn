@@ -1,5 +1,7 @@
 # Private comparison kit
 
+Claude Code follows the `verify-with-filed-return` skill (`.claude/skills/verify-with-filed-return/SKILL.md`) when it uses this kit.
+
 Checks the OpenReturn engine against a tax return you already filed. The full
 guide is [docs/testing-with-your-return.md](../../../docs/testing-with-your-return.md).
 

@@ -1,5 +1,7 @@
 # End-to-end tests
 
+Claude Code follows the `e2e` skill (`.claude/skills/e2e/SKILL.md`) to run this suite and read its summary.
+
 Playwright drives the real web app, agent, Canon, and model through Chrome.
 
 ```bash

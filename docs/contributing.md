@@ -30,6 +30,8 @@ The current agent Cade is built off of the [Mastra](https://mastra.ai/docs) fram
 
 ### Generating The Corpus
 
+Claude Code follows the `corpus` skill (`.claude/skills/corpus/SKILL.md`) for this flow.
+
 The agent and the workflows use a corpus of IRS and FTB documents, form instructions and publications, to ground their information in truth and to generate the original bindings of the form engine. The corpus, its ingest pipeline and search live in Canon (`canon/`, see its [README](../canon/README.md)). Here is how that corpus is turned into our data model that the agents can then search. We store information in both vector format and in plain text format for two reasons. First, so there is a backup option if you aren't running a local embedding model, and second because if you add plain text search queries it makes the model's retrieval capabilities better for corpus search. 
 
 1. *Read* Each document has a committed sidecar (e.g. `sources/2025/forms/federal/1040/instructions.meta.json` or `sources/2025/publications/federal/p587/publication.meta.json`) that names its source file by URL and sha256: a PDF, or for most FTB instructions a cleaned web page. Sync gets the file (from corpus.db, or downloads it). unpdf turns a PDF into text; a web page is read from its own headings and paragraphs (`refdocs/html/`)
