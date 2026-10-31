@@ -1,6 +1,6 @@
 /*
- * The lite summary: one line per flow and model, the cases that changed since the
- * last lite run, and a short reading. One flip on a local model is normal variance.
+ * The lite summary: one line per flow and model, the cases that changed since
+ * earlier lite runs, and a short reading. One flip on a local model is normal variance.
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -8,7 +8,7 @@ import path from "node:path";
 export type Flow = "ingest" | "review" | "ask";
 export const FLOWS: Flow[] = ["ingest", "review", "ask"];
 
-/* One case of one model: pass/fail, or an ingest score in [0, 1]. */
+/* One case of one model, as each eval's run.ts writes it: pass/fail, or an ingest score in [0, 1]. */
 export interface CaseResult {
   flow: Flow;
   model: string;
@@ -23,53 +23,10 @@ interface Summary {
 
 const INGEST_DRIFT = 0.1;
 
-type Ask = {
-  model: string;
-  case: string;
-  coverage: string | null;
-  expectedCoverage: string[];
-  citedAuthority: boolean | null;
-  factsOk: boolean | null;
-  error: string | null;
-};
-type Review = { model: string; case: string; verdict: string; expectedVerdict: string };
-type Ingest = { model: string; doc: string; score: { score: number }; error?: string };
-
-/* The same rule as canon/evals/ask/flow.ts `correct`. */
-const askPassed = (r: Ask) =>
-  r.coverage !== null &&
-  r.expectedCoverage.includes(r.coverage) &&
-  (r.citedAuthority === null || !r.expectedCoverage.includes("covered") || r.citedAuthority) &&
-  r.factsOk !== false;
-
-export function fromResults(flow: Flow, file: string): CaseResult[] {
+export function fromResults(file: string): CaseResult[] {
   if (!existsSync(file)) return [];
-  const { results } = JSON.parse(readFileSync(file, "utf8")) as { results: unknown[] };
-  if (flow === "ask")
-    return (results as Ask[]).map((r) => ({
-      flow,
-      model: r.model,
-      name: r.case,
-      score: askPassed(r) ? 1 : 0,
-      note: r.error
-        ? `failed: ${r.error}`
-        : `${r.coverage}, expected ${r.expectedCoverage.join("/")}`,
-    }));
-  if (flow === "review")
-    return (results as Review[]).map((r) => ({
-      flow,
-      model: r.model,
-      name: r.case,
-      score: r.verdict === r.expectedVerdict ? 1 : 0,
-      note: `${r.verdict}, expected ${r.expectedVerdict}`,
-    }));
-  return (results as Ingest[]).map((r) => ({
-    flow,
-    model: r.model,
-    name: r.doc,
-    score: r.error ? 0 : r.score.score,
-    note: r.error ? `failed: ${r.error}` : `${Math.round(r.score.score * 100)}% of fields`,
-  }));
+  const { cases } = JSON.parse(readFileSync(file, "utf8")) as { cases?: CaseResult[] };
+  return cases ?? [];
 }
 
 const key = (c: CaseResult) => `${c.flow}\u0000${c.model}\u0000${c.name}`;
@@ -91,9 +48,9 @@ function totals(cases: CaseResult[]): string[] {
   });
 }
 
-function changes(now: CaseResult[], before: Summary | null): string[] {
-  if (!before) return ["First lite run: nothing to compare with."];
-  const prior = new Map(before.cases.map((c) => [key(c), c]));
+/* A subset run (--flow=, one model) covers some cases only, so each case's baseline is its newest earlier result. */
+function changes(now: CaseResult[], prior: Map<string, CaseResult>): string[] {
+  const fresh = now.filter((c) => !prior.has(key(c)));
   const lines = now.flatMap((c) => {
     const p = prior.get(key(c));
     if (!p) return [];
@@ -106,31 +63,39 @@ function changes(now: CaseResult[], before: Summary | null): string[] {
       `- ${c.model}, ${c.flow}, ${c.name}: ${c.score ? "now passes" : "now fails"} (${c.note})`,
     ];
   });
-  return lines.length ? lines : [`No case changed since ${before.runId}.`];
+  if (fresh.length === now.length) return ["No earlier lite run covers these cases."];
+  const noted = fresh.length ? [`${fresh.length} cases have no earlier result.`] : [];
+  return [...(lines.length ? lines : ["No case changed."]), ...noted];
 }
 
 const READING =
   "A flip or two on a local model is normal run-to-run variance. Several flips in one flow, or a Haiku flip, deserve a look: run that case alone (`--case=` or `--doc=`) before you debug.";
 
-export function previousRun(dir: string, runId: string): Summary | null {
+/* Every earlier run's cases, newest first, so each case's baseline is the last time it ran. */
+export function priorCases(dir: string, runId: string): Map<string, CaseResult> {
+  const prior = new Map<string, CaseResult>();
   const runs = readdirSync(dir)
-    .filter((d) => d !== runId && existsSync(path.join(dir, d, "summary.json")))
-    .sort();
-  const last = runs.at(-1);
-  return last
-    ? (JSON.parse(readFileSync(path.join(dir, last, "summary.json"), "utf8")) as Summary)
-    : null;
+    .filter((d) => d < runId && existsSync(path.join(dir, d, "summary.json")))
+    .sort()
+    .reverse();
+  for (const run of runs) {
+    const { cases } = JSON.parse(
+      readFileSync(path.join(dir, run, "summary.json"), "utf8"),
+    ) as Summary;
+    for (const c of cases) if (!prior.has(key(c))) prior.set(key(c), c);
+  }
+  return prior;
 }
 
 export function writeSummary(dir: string, runId: string, cases: CaseResult[]): string {
-  const before = previousRun(dir, runId);
+  const prior = priorCases(dir, runId);
   const failed = cases.filter((c) => c.flow !== "ingest" && c.score !== 1);
   const text = [
     `# Evals lite — ${runId}`,
     "## Totals",
     totals(cases).join("\n"),
-    `## Changes since the last lite run${before ? ` (${before.runId})` : ""}`,
-    changes(cases, before).join("\n"),
+    "## Changes since earlier lite runs",
+    changes(cases, prior).join("\n"),
     "## Failing now",
     failed.length
       ? failed.map((c) => `- ${c.model}, ${c.flow}, ${c.name}: ${c.note}`).join("\n")

@@ -1,5 +1,5 @@
 /*
- *   npm run evals:lite [model…] [--flow=ask,review,ingest] [--runs=N]   (from the repo root)
+ *   npm run evals:lite -- [model…] [--flow=ask,review,ingest]   (from the repo root)
  *
  * One run of the lite cases of each flow, on Haiku and the 31b on the second
  * machine (whichever is configured). Each flow runs in its own process: the
@@ -42,39 +42,29 @@ function runEval(cwd: string, script: string, args: string[]): void {
 
 const slug = (m: EvalModel) => m.label.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
-function runFlow(
-  flow: Flow,
-  models: EvalModel[],
-  runDir: string,
-  passThrough: string[],
-): CaseResult[] {
+function runFlow(flow: Flow, models: EvalModel[], runDir: string): CaseResult[] {
   if (flow === "ingest") {
     const out = path.join(runDir, "ingest");
-    runEval(CADE, "evals/ingest/run.ts", [
-      ...models.map((m) => m.id),
-      `--out=${out}`,
-      ...passThrough,
-    ]);
-    return fromResults(flow, path.join(out, "results.json"));
+    runEval(CADE, "evals/ingest/run.ts", [...models.map((m) => m.id), `--out=${out}`]);
+    return fromResults(path.join(out, "results.json"));
   }
   return models.flatMap((m) => {
     const out = path.join(runDir, `${flow}-${slug(m)}`);
-    runEval(CANON, `evals/${flow}/run.ts`, [m.id, `--out=${out}`, ...passThrough]);
-    return fromResults(flow, path.join(out, "results.json"));
+    runEval(CANON, `evals/${flow}/run.ts`, [m.id, `--out=${out}`]);
+    return fromResults(path.join(out, "results.json"));
   });
 }
 
 function main() {
   const models = modelsFromArgs(ARGS);
   const flows = flowsFromArgs(ARGS);
-  const passThrough = ARGS.filter((a) => a.startsWith("--runs="));
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
   const runDir = path.join(OUT, runId);
   mkdirSync(runDir, { recursive: true });
   console.log(`evals lite: ${flows.join(", ")} on ${models.map((m) => m.label).join(", ")}`);
   const cases = flows.flatMap((flow) => {
     console.log(`\n=== ${flow} ===`);
-    return runFlow(flow, models, runDir, passThrough);
+    return runFlow(flow, models, runDir);
   });
   console.log(`\n${writeSummary(OUT, runId, cases)}`);
   console.log(`\nSummary: ${path.relative(REPO, path.join(runDir, "summary.md"))}`);

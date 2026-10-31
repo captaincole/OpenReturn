@@ -11,6 +11,7 @@ import path from "node:path";
 import type { GroundStepLog } from "../../src/mastra/workflows/ground/schemas";
 import { modelsFromArgs, tierFromArgs, useModel } from "../lib/models";
 import { CASES, casesFor, type ReviewCase } from "./cases";
+import { verdictOk } from "./flow";
 import { publishReport, type ReviewResult } from "./report";
 
 const REPO = path.resolve(__dirname, "../../..");
@@ -94,6 +95,16 @@ async function evalCase(d: Deps, c: ReviewCase, run: number): Promise<ReviewResu
   };
 }
 
+/* One row per run for the lite summary (cade/evals/lite), which reads no eval code. */
+const liteCase = (r: ReviewResult) => ({
+  flow: "review",
+  model: r.model,
+  name: r.case,
+  run: r.run,
+  score: verdictOk(r) ? 1 : 0,
+  note: `${r.verdict}, expected ${r.expectedVerdict}`,
+});
+
 async function main() {
   const d = await deps();
   await checkAuthority(d);
@@ -115,7 +126,7 @@ async function main() {
       results.push(r);
       writeFileSync(
         path.join(outDir, "results.json"),
-        JSON.stringify({ models: [model], results }, null, 2),
+        JSON.stringify({ models: [model], results, cases: results.map(liteCase) }, null, 2),
       );
     }
   console.log(`\nResults: ${path.relative(REPO, outDir)}/results.json`);

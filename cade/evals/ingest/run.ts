@@ -118,6 +118,16 @@ async function evalDoc(
   }
 }
 
+/* One row per run for the lite summary (evals/lite): the share of fields, 0 on an error. */
+const liteCase = (r: IngestResult) => ({
+  flow: "ingest",
+  model: r.model,
+  name: r.doc,
+  run: r.run,
+  score: r.error ? 0 : r.score.score,
+  note: r.error ? `failed: ${r.error}` : `${Math.round(r.score.score * 100)}% of fields`,
+});
+
 async function main() {
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
   const outDir =
@@ -145,7 +155,7 @@ async function main() {
         results.push(r);
         writeFileSync(
           path.join(outDir, "results.json"),
-          JSON.stringify({ tier, models, results }, null, 2),
+          JSON.stringify({ tier, models, results, cases: results.map(liteCase) }, null, 2),
         );
       }
     }

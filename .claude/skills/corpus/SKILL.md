@@ -75,5 +75,5 @@ To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus --
 - `npm run corpus -- check` shows every document with full embedding coverage.
 - `npm run corpus -- search "<a phrase from the new or changed document>"` returns a block from it. Run it again with `--mode fts` and with `--mode vector`: both legs must find it, or one leg is broken.
 - `npm run test:unit` for Canon: the parser, the search merge and the Ask validation tests.
-- A parser, chunking or search change: `npm run evals:lite --flow=ask,review` (about 20 minutes with the 31b, 5 with Haiku alone). It prints the cases that flipped since the last lite run; a flip or two on the local model is normal, a Haiku flip or several flips in one flow is a regression. The full eval (`docs/evals/ask.md`) is for prompt work.
+- A parser, chunking or search change: `npm run evals:lite -- --flow=ask,review` (about 20 minutes with the 31b, 5 with Haiku alone). It prints the cases that flipped since the last lite run; a flip or two on the local model is normal, a Haiku flip or several flips in one flow is a regression. The full eval (`docs/evals/ask.md`) is for prompt work.
 - A change to what the judges read: with `npm run dev:canon` up, `npm run smoke:review` passes 3/3, then run the `e2e` skill with reviews on.
