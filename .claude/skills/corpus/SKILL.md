@@ -68,3 +68,12 @@ Cost: ~$0.50 Haiku contextualization per doc; embeddings are local and free (Emb
 ## Rebuilding
 
 To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). After any parser change: `corpus sync --force`, then re-point code citations to block ids. The corpus and `sources/` survive `npm run reset`.
+
+## Verify your change
+
+- `npm run corpus -- status --strict` exits 0: the sidecars and corpus.db agree.
+- `npm run corpus -- check` shows every document with full embedding coverage.
+- `npm run corpus -- search "<a phrase from the new or changed document>"` returns a block from it. Run it again with `--mode fts` and with `--mode vector`: both legs must find it, or one leg is broken.
+- `npm run test:unit` for Canon: the parser, the search merge and the Ask validation tests.
+- A parser, chunking or search change: run the ask eval (`canon/evals/ask`) and compare the report with `docs/evals/ask.md`. A retrieval regression shows there, not in the smoke checks.
+- A change to what the judges read: with `npm run dev:canon` up, `npm run smoke:review` passes 3/3, then run the `e2e` skill with reviews on.

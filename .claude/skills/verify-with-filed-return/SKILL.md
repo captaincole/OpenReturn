@@ -25,6 +25,13 @@ All commands run from `engine/`.
 5. **Fix, then ask for a re-run.** Run the engine's suites (`npm test`, `npm run test:unit`) and ask the user to run step 2 again. Repeat until the roots are gone or named as out of scope.
 6. **Lock the shape, not the numbers.** Build or extend a fake scenario with the same shape (`docs/adding-a-scenario.md`), lock the engine's output with `lockScenario` (see the `engine-scripts` skill), and record new rounding evidence in CLAUDE.md's rounding section without any real figure.
 
+## Verify your fix
+
+- Before the fix, note the root line ids from the report.
+- After the fix: `npm test` from the repo root. No locked scenario may change unless you verified the new value; `npm run test:unit` for the engine rules.
+- The user re-runs step 2. The old root ids are gone from the new report; a new root appearing downstream means the fix moved the error, not removed it.
+- The fake scenario you lock: `npm test -- <scenario>` passes, and `npx tsx scripts/renderScenario.ts --scenario=<name> --golden` from `engine/` writes its PDFs. Open one page and find a changed value in the right widget.
+
 ## Reporting
 
 Say which roots were found, which are fixed, which are preparer choices, and which are unsupported, by line id. The user decides what to send to a maintainer; both report files are already safe to share.
