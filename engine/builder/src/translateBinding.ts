@@ -174,12 +174,12 @@ function translateFromFields(binding: ClassifiedBinding, formId: string): Transl
     const sign = term.sign ?? 1;
     const key = shortOrFullKey(term.fieldId, formId);
     if (sign === 1) {
-      args.push(`f[${quote(key)}]`);
+      args.push(`form[${quote(key)}]`);
     } else if (sign === -1) {
       // sum() takes (number | undefined). Wrap to negate; undefined becomes 0.
-      args.push(`f[${quote(key)}] === undefined ? 0 : -f[${quote(key)}]`);
+      args.push(`form[${quote(key)}] === undefined ? 0 : -form[${quote(key)}]`);
     } else {
-      args.push(`f[${quote(key)}] === undefined ? 0 : ${sign} * f[${quote(key)}]`);
+      args.push(`form[${quote(key)}] === undefined ? 0 : ${sign} * form[${quote(key)}]`);
     }
   }
   const sumExpr = `sum(${args.join(", ")})`;
@@ -187,12 +187,12 @@ function translateFromFields(binding: ClassifiedBinding, formId: string): Transl
   if (typeof floorVal === "number") {
     return {
       kind: "body",
-      body: `(f) => atLeast(${floorVal}, ${sumExpr})`,
+      body: `(form) => atLeast(${floorVal}, ${sumExpr})`,
       usesSum: true,
       usesAtLeast: true,
     };
   }
-  return { kind: "body", body: `(f) => ${sumExpr}`, usesSum: true };
+  return { kind: "body", body: `(form) => ${sumExpr}`, usesSum: true };
 }
 
 function translateTaxTable(binding: ClassifiedBinding, formId: string): Translation {
@@ -213,12 +213,12 @@ function translateTaxTable(binding: ClassifiedBinding, formId: string): Translat
   return {
     kind: "body",
     body:
-      `(f, info) => {\n` +
+      `(form, info) => {\n` +
       `        if (!info.${slot}) return undefined;\n` +
-      `        const income = f[${quote(inputKey)}];\n` +
+      `        const income = form[${quote(inputKey)}];\n` +
       `        if (typeof income !== "number") return undefined;\n` +
-      `        const r = lookupTax(${quote(tableId)}, income, info.${slot});\n` +
-      `        return r.ok ? r.tax : undefined;\n` +
+      `        const lookup = lookupTax(${quote(tableId)}, income, info.${slot});\n` +
+      `        return lookup.ok ? lookup.tax : undefined;\n` +
       `      }`,
     usesLookupTax: true,
   };
