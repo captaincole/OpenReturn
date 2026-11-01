@@ -7,6 +7,7 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import type { Form8995AFilingInfo } from "./filingInfo.js";
+import { netCapitalGain } from "./lines.js";
 import type { Form8995A } from "./types.js";
 
 /* 2025 QBI threshold and phase-in range (8995-A lines 21 and 23). */
@@ -57,12 +58,13 @@ export function register(): void {
         if (typeof agi !== "number") return undefined;
         return atLeast(0, sum(agi, -sum(f["form-1040.line.12e"]), -sum(f["form-1040.line.13b"])));
       },
-      // Net capital gain: line 3a + the smaller of Schedule D lines 15 and 16, if both are gains.
       "1.line.34": (f) => {
-        const l15 = f["schedule-d.0.line.15_net_long_term_gain_loss"];
-        const l16 = f["schedule-d.1.line.16_combined_gain_loss"];
-        const gain =
-          typeof l15 === "number" && typeof l16 === "number" ? atLeast(0, Math.min(l15, l16)) : 0;
+        const num = (v: unknown) => (typeof v === "number" ? v : undefined);
+        const gain = netCapitalGain(
+          num(f["schedule-d.0.line.15_net_long_term_gain_loss"]),
+          num(f["schedule-d.1.line.16_combined_gain_loss"]),
+          num(f["form-1040.line.7a"]),
+        );
         return sum(f["form-1040.line.3a"], gain);
       },
       "1.line.36": (f) => {

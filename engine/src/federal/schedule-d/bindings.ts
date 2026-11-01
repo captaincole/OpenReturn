@@ -8,6 +8,7 @@ import { defineForm, type BindingFn } from "../../defineForm.js";
 import type { Form8949Box } from "../../facts/index.js";
 import { roundDollars, sum } from "../../money.js";
 import type { ScheduleDFilingInfo } from "./filingInfo.js";
+import { allowableLoss } from "./lines.js";
 import type { ScheduleD } from "./types.js";
 
 /*
@@ -105,6 +106,12 @@ export function register(): void {
         ),
       "1.line.16_combined_gain_loss": (f) =>
         sum(f["0.line.7_net_short_term_gain_loss"], f["0.line.15_net_long_term_gain_loss"]),
+      // MANUAL EDIT: routed to the FilingInfo slot (sum of 1099-DIV box 2a).
+      "0.line.13_capital_gain_distributions": (_, info) =>
+        roundDollars(info.capitalGainDistributions),
+      // MANUAL EDIT: a loss on line 16, limited to $3,000 ($1,500 MFS).
+      "1.line.21_allowable_loss": (f, info) =>
+        allowableLoss(f["1.line.16_combined_gain_loss"], info.filingStatus),
     },
 
     unsupported: {
@@ -152,8 +159,6 @@ export function register(): void {
         "Amount from line 18 of the Unrecaptured Section 1250 Gain Worksheet requires Form 4797 depreciation recapture and real-property sale data — no such fact ingestion path exists yet.",
       "1.line.20_use_qual_div_worksheet_no":
         "True when line 18 or 19 is non-zero OR Form 4952 is being filed. Requires conditional logic checking two computed fields and a form-presence flag — no such compound-conditional rule exists in the library yet.",
-      "1.line.21_allowable_loss":
-        "Requires a conditional min-of-two-values computation: the smaller of (a) the loss on Schedule D line 16 or (b) the filing-status-dependent cap ($3,000 or $1,500 MFS), and only applies when line 16 is negative. We have no 'minOf' or 'conditionalCap' rule yet. Will need a dedicated rule or computed-field support to implement correctly.",
       "1.line.22_qualified_dividends_yes":
         "This checkbox is true when Form 1040 line 3a (qualified dividends) is greater than zero. We have no 'greaterThanZero' comparison rule to drive a boolean checkbox from a numeric field. Needs a conditional/comparison rule.",
       "1.line.22_qualified_dividends_no":
@@ -165,8 +170,6 @@ export function register(): void {
         "confidence=low: Line 1a aggregates short-term proceeds for 1099-B/DA transactions where basis was reported and no adjustments needed; however, no fact fieldPath exists for this sub-bucket — unsupported until fact schema is extended.",
       "0.line.1a_gain_loss":
         "confidence=medium: Line 1a gain/loss is proceeds minus cost basis; computed from the two sibling fields on this line.",
-      "0.line.13_capital_gain_distributions":
-        "sumFacts: no FilingInfo slot for sumFacts(investment_income|account.|box2a). Add the aggregate to <Form>FilingInfo + the resolver, and map it in renderBindings.SUM_FACTS_TO_SLOT.",
     },
   });
 }
