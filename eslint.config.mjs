@@ -120,13 +120,4 @@ export default [
       "max-lines-per-function": "off",
     },
   },
-  {
-    /* scripts/lockScenario.ts writes these; its template emits short names. */
-    files: [
-      "engine/tests/scenarios/carter/expected.ts",
-      "engine/tests/scenarios/jordan/expected.ts",
-      "engine/tests/scenarios/tara/expected.ts",
-    ],
-    rules: { "id-length": "off" },
-  },
 ];
