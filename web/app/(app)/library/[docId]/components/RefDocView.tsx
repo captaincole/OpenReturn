@@ -81,11 +81,14 @@ function DocHeader({ doc }: { doc: LibraryHtmlDocument }) {
 }
 
 function contentsEntries(sections: LibrarySection[]): { s: LibrarySection; nested: boolean }[] {
-  const top = sections.filter((s) => s.parent === null);
-  const topIds = new Set(top.map((s) => s.anchor));
+  const top = sections.filter((section) => section.parent === null);
+  const topIds = new Set(top.map((section) => section.anchor));
   return sections
-    .filter((s) => s.parent === null || (top.length < SHALLOW_DOC && topIds.has(s.parent)))
-    .map((s) => ({ s, nested: s.parent !== null }));
+    .filter(
+      (section) =>
+        section.parent === null || (top.length < SHALLOW_DOC && topIds.has(section.parent)),
+    )
+    .map((section) => ({ s: section, nested: section.parent !== null }));
 }
 
 function useActiveAnchor(anchors: string[]): string | null {
@@ -93,7 +96,8 @@ function useActiveAnchor(anchors: string[]): string | null {
   useEffect(() => {
     const onScroll = () => {
       const passed = anchors.filter(
-        (a) => (document.getElementById(a)?.getBoundingClientRect().top ?? Infinity) < 120,
+        (anchor) =>
+          (document.getElementById(anchor)?.getBoundingClientRect().top ?? Infinity) < 120,
       );
       setActive(passed.at(-1) ?? null);
     };
@@ -106,7 +110,7 @@ function useActiveAnchor(anchors: string[]): string | null {
 
 function Contents({ sections }: { sections: LibrarySection[] }) {
   const entries = useMemo(() => contentsEntries(sections), [sections]);
-  const anchors = useMemo(() => entries.map((e) => e.s.anchor), [entries]);
+  const anchors = useMemo(() => entries.map((entry) => entry.s.anchor), [entries]);
   const active = useActiveAnchor(anchors);
   if (entries.length === 0) return <div className="hidden lg:block" />;
 

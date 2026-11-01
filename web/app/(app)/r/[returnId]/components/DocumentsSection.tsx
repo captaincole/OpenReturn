@@ -92,7 +92,7 @@ export function DocumentsSection() {
         multiple
         accept="application/pdf,image/png,image/jpeg,image/webp"
         className="hidden"
-        onChange={(e) => void handleFiles(e.target.files)}
+        onChange={(event) => void handleFiles(event.target.files)}
       />
 
       <UploadDropzone
@@ -188,10 +188,10 @@ function formatBytes(bytes: number | null): string {
 }
 
 function formatUploadedAt(iso: string): string {
-  const d = new Date(iso);
+  const date = new Date(iso);
   const opts: Intl.DateTimeFormatOptions = { month: "short", day: "numeric" };
-  if (d.getFullYear() !== new Date().getFullYear()) opts.year = "numeric";
-  return d.toLocaleDateString(undefined, opts);
+  if (date.getFullYear() !== new Date().getFullYear()) opts.year = "numeric";
+  return date.toLocaleDateString(undefined, opts);
 }
 
 function UploadDropzone({
@@ -213,15 +213,15 @@ function UploadDropzone({
     <button
       type="button"
       onClick={onBrowse}
-      onDragOver={(e) => {
-        e.preventDefault();
+      onDragOver={(event) => {
+        event.preventDefault();
         if (!cadeBusy) setDragOver(true);
       }}
       onDragLeave={() => setDragOver(false)}
-      onDrop={(e) => {
-        e.preventDefault();
+      onDrop={(event) => {
+        event.preventDefault();
         setDragOver(false);
-        if (!cadeBusy) onDrop(e.dataTransfer.files);
+        if (!cadeBusy) onDrop(event.dataTransfer.files);
       }}
       disabled={uploading || cadeBusy}
       className={cn(

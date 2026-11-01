@@ -20,10 +20,10 @@ function db(): Client {
   return cached;
 }
 
-const str = (v: unknown): string => (v == null ? "" : String(v));
-const strOrNull = (v: unknown): string | null => (v == null ? null : String(v));
-const num = (v: unknown): number => (v == null ? 0 : Number(v));
-const json = (v: unknown): unknown => (v == null ? null : JSON.parse(String(v)));
+const str = (value: unknown): string => (value == null ? "" : String(value));
+const strOrNull = (value: unknown): string | null => (value == null ? null : String(value));
+const num = (value: unknown): number => (value == null ? 0 : Number(value));
+const json = (value: unknown): unknown => (value == null ? null : JSON.parse(String(value)));
 
 export interface OwnerAuthRow {
   id: string;
@@ -59,14 +59,14 @@ export async function getOwnerAuthRow(): Promise<OwnerAuthRow | null> {
   const res = await db().execute(
     `SELECT id, email, display_name, password_hash, session_secret FROM owner LIMIT 1`,
   );
-  const r = res.rows[0];
-  if (!r) return null;
+  const row = res.rows[0];
+  if (!row) return null;
   return {
-    id: str(r.id),
-    email: str(r.email),
-    displayName: str(r.display_name),
-    passwordHash: str(r.password_hash),
-    sessionSecret: str(r.session_secret),
+    id: str(row.id),
+    email: str(row.email),
+    displayName: str(row.display_name),
+    passwordHash: str(row.password_hash),
+    sessionSecret: str(row.session_secret),
   };
 }
 
@@ -92,13 +92,13 @@ export interface FilingRow {
   status: string;
 }
 
-function rowToReturn(r: Row): TaxReturn {
-  const status = str(r.status);
+function rowToReturn(row: Row): TaxReturn {
+  const status = str(row.status);
   return {
-    id: String(num(r.tax_year)),
-    year: num(r.tax_year),
-    filingId: str(r.id),
-    label: `${num(r.tax_year)} Return`,
+    id: String(num(row.tax_year)),
+    year: num(row.tax_year),
+    filingId: str(row.id),
+    label: `${num(row.tax_year)} Return`,
     state: status === "filed" ? "filed" : "active",
     realDataAvailable: true,
     status,
@@ -168,50 +168,50 @@ export async function fetchActivityItems(
     }),
   ]);
 
-  const factItems: ActivityItem[] = facts.rows.map((r) => ({
+  const factItems: ActivityItem[] = facts.rows.map((row) => ({
     kind: "fact" as const,
-    id: str(r.id),
-    createdAt: str(r.created_at),
-    title: str(r.fact_key),
-    category: str(r.category),
-    value: json(r.fact_value),
-    sourceNote: strOrNull(r.source_note),
+    id: str(row.id),
+    createdAt: str(row.created_at),
+    title: str(row.fact_key),
+    category: str(row.category),
+    value: json(row.fact_value),
+    sourceNote: strOrNull(row.source_note),
   }));
-  const decisionItems: ActivityItem[] = decisions.rows.map((r) => {
-    const supporting = json(r.supporting_fact_keys);
+  const decisionItems: ActivityItem[] = decisions.rows.map((row) => {
+    const supporting = json(row.supporting_fact_keys);
     return {
       kind: "decision" as const,
-      id: str(r.id),
-      createdAt: str(r.created_at),
-      title: str(r.decision_key),
-      value: json(r.decision),
-      sourceNote: strOrNull(r.source_note),
-      rationale: strOrNull(r.rationale) ?? undefined,
+      id: str(row.id),
+      createdAt: str(row.created_at),
+      title: str(row.decision_key),
+      value: json(row.decision),
+      sourceNote: strOrNull(row.source_note),
+      rationale: strOrNull(row.rationale) ?? undefined,
       supportingFactKeys: Array.isArray(supporting) ? (supporting as string[]) : undefined,
-      confidence: (strOrNull(r.confidence) as ActivityItem["confidence"]) ?? undefined,
-      verdict: (strOrNull(r.verdict) as ActivityItem["verdict"]) ?? null,
-      verdictReason: strOrNull(r.verdict_reason),
+      confidence: (strOrNull(row.confidence) as ActivityItem["confidence"]) ?? undefined,
+      verdict: (strOrNull(row.verdict) as ActivityItem["verdict"]) ?? null,
+      verdictReason: strOrNull(row.verdict_reason),
     };
   });
 
   return [...factItems, ...decisionItems]
-    .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
+    .sort((left, right) => (left.createdAt < right.createdAt ? 1 : -1))
     .slice(0, safeLimit);
 }
 
-function rowToAction(r: Row): RequestedAction {
+function rowToAction(row: Row): RequestedAction {
   return {
-    id: str(r.id),
-    taxYear: num(r.tax_year),
-    kind: str(r.kind) as RequestedAction["kind"],
-    title: str(r.title),
-    detail: strOrNull(r.detail),
-    documentType: strOrNull(r.document_type),
-    acceptPattern: strOrNull(r.accept_pattern),
-    status: str(r.status) as RequestedAction["status"],
-    resolvedDocumentId: strOrNull(r.resolved_document_id),
-    createdAt: str(r.created_at),
-    resolvedAt: strOrNull(r.resolved_at),
+    id: str(row.id),
+    taxYear: num(row.tax_year),
+    kind: str(row.kind) as RequestedAction["kind"],
+    title: str(row.title),
+    detail: strOrNull(row.detail),
+    documentType: strOrNull(row.document_type),
+    acceptPattern: strOrNull(row.accept_pattern),
+    status: str(row.status) as RequestedAction["status"],
+    resolvedDocumentId: strOrNull(row.resolved_document_id),
+    createdAt: str(row.created_at),
+    resolvedAt: strOrNull(row.resolved_at),
   };
 }
 
@@ -264,14 +264,14 @@ export async function getDocumentById(id: string): Promise<DocumentLookup | null
           FROM user_documents WHERE id = ? LIMIT 1`,
     args: [id],
   });
-  const r = res.rows[0];
-  if (!r) return null;
+  const row = res.rows[0];
+  if (!row) return null;
   return {
-    id: str(r.id),
-    filingId: str(r.filing_id),
-    storagePath: str(r.storage_path),
-    filename: str(r.filename),
-    mimeType: strOrNull(r.mime_type),
+    id: str(row.id),
+    filingId: str(row.filing_id),
+    storagePath: str(row.storage_path),
+    filename: str(row.filename),
+    mimeType: strOrNull(row.mime_type),
   };
 }
 
@@ -290,12 +290,12 @@ export async function listUploads(filingId: string): Promise<UploadListRow[]> {
           ORDER BY created_at DESC`,
     args: [filingId],
   });
-  return res.rows.map((r) => ({
-    id: str(r.id),
-    filename: str(r.filename),
-    created_at: str(r.created_at),
-    mime_type: strOrNull(r.mime_type),
-    size_bytes: r.size_bytes == null ? null : num(r.size_bytes),
+  return res.rows.map((row) => ({
+    id: str(row.id),
+    filename: str(row.filename),
+    created_at: str(row.created_at),
+    mime_type: strOrNull(row.mime_type),
+    size_bytes: row.size_bytes == null ? null : num(row.size_bytes),
   }));
 }
 
@@ -315,13 +315,13 @@ export async function listDrafts(filingId: string): Promise<DraftListRow[]> {
           ORDER BY created_at DESC`,
     args: [filingId],
   });
-  return res.rows.map((r) => ({
-    id: str(r.id),
-    filename: str(r.filename),
-    created_at: str(r.created_at),
-    mime_type: strOrNull(r.mime_type),
-    size_bytes: r.size_bytes == null ? null : num(r.size_bytes),
-    metadata: json(r.metadata) as Record<string, unknown> | null,
+  return res.rows.map((row) => ({
+    id: str(row.id),
+    filename: str(row.filename),
+    created_at: str(row.created_at),
+    mime_type: strOrNull(row.mime_type),
+    size_bytes: row.size_bytes == null ? null : num(row.size_bytes),
+    metadata: json(row.metadata) as Record<string, unknown> | null,
   }));
 }
 

@@ -24,7 +24,7 @@ function useThread(threadId: string, pollTick: number) {
         const next = await fetchAskThread(threadId);
         if (cancelled) return;
         setThread(next);
-        if (next.turns.some((t) => t.status === "running")) {
+        if (next.turns.some((turn) => turn.status === "running")) {
           timer = setTimeout(() => void load(), POLL_MS);
         }
       } catch (err) {
@@ -71,7 +71,7 @@ export function AskThreadView({ threadId }: { threadId: string }) {
     return <div className="mx-auto max-w-3xl text-[14px] text-ink-muted">Loading…</div>;
   }
 
-  const running = thread.turns.some((t) => t.status === "running");
+  const running = thread.turns.some((turn) => turn.status === "running");
   return (
     // flex-1 + the composer's mt-auto: on a short thread the composer still sits at the bottom.
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-12">
@@ -83,7 +83,7 @@ export function AskThreadView({ threadId }: { threadId: string }) {
       <AskComposer
         threadId={thread.id}
         disabled={running}
-        onFollowUp={() => setPollTick((t) => t + 1)}
+        onFollowUp={() => setPollTick((tick) => tick + 1)}
       />
     </div>
   );

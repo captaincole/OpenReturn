@@ -62,7 +62,9 @@ const ANSWERS: Array<[RegExp, string]> = [
 
 /* An unmatched question returns undefined, so the test fails and shows the transcript. */
 export function replyTo(cadeMessage: string): string | undefined {
-  const matched = ANSWERS.filter(([pattern]) => pattern.test(cadeMessage)).map(([, a]) => a);
+  const matched = ANSWERS.filter(([pattern]) => pattern.test(cadeMessage)).map(
+    ([, answer]) => answer,
+  );
   if (matched.length > 0) return [...new Set(matched)].join(" ");
   return cadeMessage.includes("?") ? undefined : GENERATE;
 }

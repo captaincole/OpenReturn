@@ -50,15 +50,15 @@ function formatFieldLabel(key: string): string {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
-function formatScalar(v: unknown): string {
-  if (v === null || v === undefined) return "—";
-  if (typeof v === "boolean") return v ? "Yes" : "No";
-  if (typeof v === "number") return v.toLocaleString();
-  if (typeof v === "string") return v;
-  if (Array.isArray(v)) {
-    return v.length === 0 ? "—" : v.map(formatScalar).join(", ");
+function formatScalar(value: unknown): string {
+  if (value === null || value === undefined) return "—";
+  if (typeof value === "boolean") return value ? "Yes" : "No";
+  if (typeof value === "number") return value.toLocaleString();
+  if (typeof value === "string") return value;
+  if (Array.isArray(value)) {
+    return value.length === 0 ? "—" : value.map(formatScalar).join(", ");
   }
-  return JSON.stringify(v);
+  return JSON.stringify(value);
 }
 
 function brief(value: unknown): string {
@@ -70,12 +70,12 @@ function brief(value: unknown): string {
   if (entries.length === 0) return "—";
   return entries
     .slice(0, 2)
-    .map(([k, v]) => `${formatFieldLabel(k)}: ${formatScalar(v)}`)
+    .map(([key, fieldValue]) => `${formatFieldLabel(key)}: ${formatScalar(fieldValue)}`)
     .join(" · ");
 }
 
-function isObject(v: unknown): v is Record<string, unknown> {
-  return v !== null && typeof v === "object" && !Array.isArray(v);
+function isObject(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
 export function ActivityCard({ refreshKey }: ActivityCardProps) {
@@ -244,9 +244,9 @@ function ExpandedBody({ item }: { item: ActivityItem }) {
         item.supportingFactKeys.length > 0 && (
           <DetailBlock label="Supporting facts">
             <ul className="space-y-0.5">
-              {item.supportingFactKeys.map((k) => (
-                <li key={k} className="truncate font-mono text-[12px] text-ink-secondary">
-                  {k}
+              {item.supportingFactKeys.map((factKey) => (
+                <li key={factKey} className="truncate font-mono text-[12px] text-ink-secondary">
+                  {factKey}
                 </li>
               ))}
             </ul>
@@ -284,12 +284,12 @@ function ValueDisplay({ value }: { value: unknown }) {
     }
     return (
       <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5">
-        {entries.map(([k, v]) => (
-          <div key={k} className="contents">
+        {entries.map(([key, fieldValue]) => (
+          <div key={key} className="contents">
             <dt className="pt-0.5 text-[11px] tracking-wide text-ink-muted uppercase">
-              {formatFieldLabel(k)}
+              {formatFieldLabel(key)}
             </dt>
-            <dd className="break-words text-ink-primary">{formatScalar(v)}</dd>
+            <dd className="break-words text-ink-primary">{formatScalar(fieldValue)}</dd>
           </div>
         ))}
       </dl>

@@ -12,18 +12,18 @@ export function useAskSubmit(onFollowUp?: () => void) {
   const [error, setError] = useState<string | null>(null);
 
   async function submit(question: string, threadId?: string): Promise<boolean> {
-    const q = question.trim();
-    if (!q || busy) return false;
+    const trimmed = question.trim();
+    if (!trimmed || busy) return false;
     setBusy(true);
     setError(null);
     try {
       if (threadId) {
-        await askFollowUp(threadId, q);
+        await askFollowUp(threadId, trimmed);
         setBusy(false);
         onFollowUp?.();
       } else {
         // Stay busy through the navigation so a second click cannot fire.
-        const started = await askNewQuestion(q);
+        const started = await askNewQuestion(trimmed);
         router.push(`/ask/${started.threadId}`);
       }
       return true;

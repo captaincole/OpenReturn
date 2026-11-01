@@ -125,10 +125,10 @@ export function refDocPageUrl(docId: string, anchor?: string): string {
 }
 
 /* Block ids are `<docId>::sec::<anchor>::bNN`. */
-export function citationUrl(c: AskCitation): string {
-  if (c.format !== "html") return refDocPdfUrl(c.docId, c.pageNum);
-  const anchor = c.blockId.split("::")[2];
-  return refDocPageUrl(c.docId, anchor === "preamble" ? undefined : anchor);
+export function citationUrl(citation: AskCitation): string {
+  if (citation.format !== "html") return refDocPdfUrl(citation.docId, citation.pageNum);
+  const anchor = citation.blockId.split("::")[2];
+  return refDocPageUrl(citation.docId, anchor === "preamble" ? undefined : anchor);
 }
 
 export function refDocPdfUrl(docId: string, pageNum?: number): string {

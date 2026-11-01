@@ -20,15 +20,15 @@ function ReturnPicker({ activeReturn, returns }: TopBarProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  function pickReturn(r: TaxReturn) {
+  function pickReturn(taxReturn: TaxReturn) {
     setOpen(false);
-    router.push(`/r/${r.id}`);
+    router.push(`/r/${taxReturn.id}`);
   }
 
   return (
     <div className="relative shrink-0">
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => setOpen((prev) => !prev)}
         className="-mx-2 flex items-baseline gap-1.5 rounded-md px-2 py-1 transition-colors hover:bg-bg-elevated"
       >
         <span className="text-[15px] leading-none font-semibold tracking-tight text-ink-primary">
@@ -48,23 +48,23 @@ function ReturnPicker({ activeReturn, returns }: TopBarProps) {
               <span className="text-ink-muted">←</span>
               All returns
             </Link>
-            {returns.map((r) => (
+            {returns.map((taxReturn) => (
               <button
-                key={r.filingId}
-                onClick={() => pickReturn(r)}
+                key={taxReturn.filingId}
+                onClick={() => pickReturn(taxReturn)}
                 className={cn(
                   "flex w-full items-center justify-between gap-3 px-4 py-3 text-left",
                   "transition-colors hover:bg-bg-panel",
-                  r.id === activeReturn.id && "bg-bg-panel",
+                  taxReturn.id === activeReturn.id && "bg-bg-panel",
                 )}
               >
                 <div>
-                  <div className="text-sm text-ink-primary">{r.label}</div>
+                  <div className="text-sm text-ink-primary">{taxReturn.label}</div>
                   <div className="mt-0.5 text-[11px] text-ink-muted">
-                    {r.state === "active" ? "In progress" : "Filed"}
+                    {taxReturn.state === "active" ? "In progress" : "Filed"}
                   </div>
                 </div>
-                {r.id === activeReturn.id && <span className="text-sm text-accent">✓</span>}
+                {taxReturn.id === activeReturn.id && <span className="text-sm text-accent">✓</span>}
               </button>
             ))}
           </div>
@@ -109,7 +109,7 @@ function AccountMenu({ activeReturn }: { activeReturn: TaxReturn }) {
   return (
     <div className="relative">
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => setOpen((prev) => !prev)}
         className="flex h-8 w-8 items-center justify-center rounded-full border border-accent/40 bg-accent/20 text-xs font-medium text-accent transition-colors hover:bg-accent/30"
         title="Account"
       >

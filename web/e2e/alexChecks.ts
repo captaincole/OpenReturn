@@ -30,20 +30,22 @@ const W2_BOXES = [
 function normalizeBox(box: string, value: unknown): string {
   if (value === undefined || value === null) return "(missing)";
   if (box === "box13") {
-    const flags = Object.entries(value as Record<string, unknown>).filter(([, v]) => v === true);
+    const flags = Object.entries(value as Record<string, unknown>).filter(
+      ([, flag]) => flag === true,
+    );
     return (
       flags
-        .map(([k]) => k)
+        .map(([key]) => key)
         .sort()
         .join(",") || "(none)"
     );
   }
   if (box === "box12" || box === "box14") {
     const rows = (value as Array<Record<string, unknown>>).map(
-      (r) =>
-        `${String(r.code ?? r.label)
+      (row) =>
+        `${String(row.code ?? row.label)
           .replace(/\s+/g, "")
-          .toUpperCase()} ${r.amount}`,
+          .toUpperCase()} ${row.amount}`,
     );
     return rows.sort().join(", ") || "(none)";
   }
@@ -53,10 +55,13 @@ function normalizeBox(box: string, value: unknown): string {
 export function w2Problems(): string[] {
   const stored = latestW2();
   if (!stored) return ["no W-2 fact stored"];
-  const want = alexFacts.find((f) => f.category === "wages")!.value as Record<string, unknown>;
+  const want = alexFacts.find((fact) => fact.category === "wages")!.value as Record<
+    string,
+    unknown
+  >;
   return W2_BOXES.flatMap((box) => {
-    const [w, g] = [normalizeBox(box, want[box]), normalizeBox(box, stored[box])];
-    return w === g ? [] : [`${box}: want ${w}, got ${g}`];
+    const [wanted, got] = [normalizeBox(box, want[box]), normalizeBox(box, stored[box])];
+    return wanted === got ? [] : [`${box}: want ${wanted}, got ${got}`];
   });
 }
 
@@ -74,7 +79,9 @@ export function fieldProblems(): string[] {
   if (!sidecar) return ["no forms sidecar"];
   const values = new Map(
     Object.values(sidecar.forms).flatMap((form) =>
-      form.fields.map((f) => [f.fieldId, f.result.ok ? f.result.value : undefined] as const),
+      form.fields.map(
+        (field) => [field.fieldId, field.result.ok ? field.result.value : undefined] as const,
+      ),
     ),
   );
   const expected = { ...alexExpected.engineFields, ...alex540Expected.engineFields };
@@ -88,9 +95,9 @@ export function findFiles(category: string, name: RegExp): string[] {
   const root = DATA_ENV.DOCUMENTS_PATH;
   const files = readdirSync(root, { recursive: true }) as string[];
   return files
-    .filter((f) => f.split("/").at(-2) === category && name.test(f.split("/").pop()!))
+    .filter((file) => file.split("/").at(-2) === category && name.test(file.split("/").pop()!))
     .sort()
-    .map((f) => resolve(root, f));
+    .map((file) => resolve(root, file));
 }
 
 interface Sidecar {

@@ -89,7 +89,7 @@ async function runIntake(page: Page): Promise<boolean> {
     check("agent turns run without errors", "plumbing", []);
     throw new Error(`forms incomplete after ${MAX_TURNS} turns`);
   } catch (err) {
-    if (failedStages().some((s) => s.startsWith("plumbing"))) throw err;
+    if (failedStages().some((stage) => stage.startsWith("plumbing"))) throw err;
     check("intake reaches generated forms", "model", [(err as Error).message.split("\n")[0]]);
     return false;
   }
@@ -111,13 +111,15 @@ async function waitForReviews() {
   const counts = verdictCounts();
   note(
     `reviews: ${Object.entries(counts)
-      .map(([v, n]) => `${v} ${n}`)
+      .map(([verdict, count]) => `${verdict} ${count}`)
       .join(", ")}`,
   );
   check(
     "reviews reach Canon",
     "plumbing",
-    ["review_unreached", "review_failed"].filter((v) => counts[v]).map((v) => `${counts[v]} ${v}`),
+    ["review_unreached", "review_failed"]
+      .filter((verdict) => counts[verdict])
+      .map((verdict) => `${counts[verdict]} ${verdict}`),
   );
 }
 
@@ -150,12 +152,14 @@ async function checkFormsPage(page: Page, filingPath: string) {
     .poll(() => open.count(), { timeout: 30_000 })
     .toBeGreaterThanOrEqual(EXPECTED_FORMS.length);
   const types: string[] = [];
-  for (const href of await open.evaluateAll((els) => els.map((e) => e.getAttribute("href")!))) {
+  for (const href of await open.evaluateAll((els) =>
+    els.map((link) => link.getAttribute("href")!),
+  )) {
     const res = await page.request.get(href);
     expect(res.ok(), `GET ${href}`).toBe(true);
     types.push(res.headers()["content-type"] ?? "");
   }
-  const pdfs = types.filter((t) => t.includes("pdf")).length;
+  const pdfs = types.filter((contentType) => contentType.includes("pdf")).length;
   expect(pdfs, `PDF links (content types: ${types.join(", ")})`).toBeGreaterThanOrEqual(
     EXPECTED_FORMS.length,
   );

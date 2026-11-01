@@ -47,7 +47,11 @@ export function RequestedActionsCard() {
       const uploaded = await uploadDocument(file);
       await markActionProcessing(action.id, uploaded.id);
       setActions((prev) =>
-        prev ? prev.map((x) => (x.id === action.id ? { ...x, status: "processing" } : x)) : prev,
+        prev
+          ? prev.map((existing) =>
+              existing.id === action.id ? { ...existing, status: "processing" } : existing,
+            )
+          : prev,
       );
       setMobilePane("chat");
       /* skipUpload: the file is already in user_documents. */
@@ -69,7 +73,7 @@ export function RequestedActionsCard() {
     setBusyId(action.id);
     try {
       await skipAction(action.id);
-      setActions((prev) => (prev ? prev.filter((x) => x.id !== action.id) : prev));
+      setActions((prev) => (prev ? prev.filter((existing) => existing.id !== action.id) : prev));
     } catch (err) {
       console.warn("[actions] skip failed:", err);
     } finally {
@@ -93,13 +97,13 @@ export function RequestedActionsCard() {
         </div>
       ) : (
         <div className="space-y-2.5 px-5 pb-5">
-          {actions!.map((a) => (
+          {actions!.map((action) => (
             <ActionCard
-              key={a.id}
-              action={a}
-              busy={busyId === a.id || cadeBusy}
-              onUpload={(file) => void handleUpload(a, file)}
-              onSkip={() => void handleSkip(a)}
+              key={action.id}
+              action={action}
+              busy={busyId === action.id || cadeBusy}
+              onUpload={(file) => void handleUpload(action, file)}
+              onSkip={() => void handleSkip(action)}
             />
           ))}
         </div>
@@ -185,8 +189,8 @@ function ActionCard({
               type="file"
               accept={action.acceptPattern ?? "application/pdf,image/png,image/jpeg,image/webp"}
               className="hidden"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
+              onChange={(event) => {
+                const file = event.target.files?.[0];
                 if (file) onUpload(file);
               }}
             />

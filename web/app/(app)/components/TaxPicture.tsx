@@ -51,7 +51,7 @@ export function TaxPictureSection({ locked }: { locked: boolean }) {
         >
           <LineChart
             data={EFFECTIVE_RATE}
-            valueFormatter={(v) => `${v.toFixed(1)}%`}
+            valueFormatter={(pct) => `${pct.toFixed(1)}%`}
             domain={[20, 26]}
           />
         </ChartCard>
@@ -123,45 +123,45 @@ function BarChart({
   colorClass: string;
   valueFormatter: (v: number) => string;
 }) {
-  const max = Math.max(...data.map((d) => d.value)) * 1.18;
+  const max = Math.max(...data.map((entry) => entry.value)) * 1.18;
   const slotW = (CHART_W - 2 * CHART_PAD_X) / data.length;
   const barW = slotW * 0.55;
 
   return (
     <svg viewBox={`0 0 ${CHART_W} ${CHART_H + 24}`} className="w-full">
-      {data.map((d, i) => {
-        const x = CHART_PAD_X + slotW * i + (slotW - barW) / 2;
-        const h = (d.value / max) * (CHART_H - 2 * CHART_PAD_Y);
-        const y = CHART_H - CHART_PAD_Y - h;
+      {data.map((entry, i) => {
+        const barX = CHART_PAD_X + slotW * i + (slotW - barW) / 2;
+        const barH = (entry.value / max) * (CHART_H - 2 * CHART_PAD_Y);
+        const barY = CHART_H - CHART_PAD_Y - barH;
         const isCurrent = i === data.length - 1;
         return (
-          <g key={d.year}>
+          <g key={entry.year}>
             <rect
-              x={x}
-              y={y}
+              x={barX}
+              y={barY}
               width={barW}
-              height={h}
+              height={barH}
               rx={3}
               className={colorClass}
               opacity={isCurrent ? 0.55 : 1}
             />
             <text
-              x={x + barW / 2}
-              y={y - 6}
+              x={barX + barW / 2}
+              y={barY - 6}
               textAnchor="middle"
               className="fill-ink-secondary text-[10px]"
               style={{ fontVariantNumeric: "tabular-nums" }}
             >
-              {valueFormatter(d.value)}
+              {valueFormatter(entry.value)}
             </text>
             <text
-              x={x + barW / 2}
+              x={barX + barW / 2}
               y={CHART_H + 14}
               textAnchor="middle"
               className="fill-ink-muted text-[10px]"
               style={{ fontVariantNumeric: "tabular-nums" }}
             >
-              {d.year}
+              {entry.year}
             </text>
           </g>
         );
@@ -182,14 +182,15 @@ function LineChart({
   const [min, max] = domain;
   const slotW = (CHART_W - 2 * CHART_PAD_X) / (data.length - 1);
 
-  const points = data.map((d, i) => {
-    const x = CHART_PAD_X + slotW * i;
-    const y = CHART_H - CHART_PAD_Y - ((d.value - min) / (max - min)) * (CHART_H - 2 * CHART_PAD_Y);
-    return { x, y, d };
+  const points = data.map((entry, i) => {
+    const pointX = CHART_PAD_X + slotW * i;
+    const pointY =
+      CHART_H - CHART_PAD_Y - ((entry.value - min) / (max - min)) * (CHART_H - 2 * CHART_PAD_Y);
+    return { x: pointX, y: pointY, d: entry };
   });
 
   const linePath = points
-    .map((p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`))
+    .map((point, i) => (i === 0 ? `M ${point.x} ${point.y}` : `L ${point.x} ${point.y}`))
     .join(" ");
   const areaPath = `${linePath} L ${points[points.length - 1].x} ${CHART_H - CHART_PAD_Y} L ${points[0].x} ${CHART_H - CHART_PAD_Y} Z`;
 
@@ -210,33 +211,33 @@ function LineChart({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      {points.map((p) => (
-        <g key={p.d.year}>
+      {points.map((point) => (
+        <g key={point.d.year}>
           <circle
-            cx={p.x}
-            cy={p.y}
+            cx={point.x}
+            cy={point.y}
             r={3.5}
             className="fill-bg-base"
             stroke="rgb(124 92 255)"
             strokeWidth={1.5}
           />
           <text
-            x={p.x}
-            y={p.y - 10}
+            x={point.x}
+            y={point.y - 10}
             textAnchor="middle"
             className="fill-ink-secondary text-[10px]"
             style={{ fontVariantNumeric: "tabular-nums" }}
           >
-            {valueFormatter(p.d.value)}
+            {valueFormatter(point.d.value)}
           </text>
           <text
-            x={p.x}
+            x={point.x}
             y={CHART_H + 14}
             textAnchor="middle"
             className="fill-ink-muted text-[10px]"
             style={{ fontVariantNumeric: "tabular-nums" }}
           >
-            {p.d.year}
+            {point.d.year}
           </text>
         </g>
       ))}
@@ -251,8 +252,10 @@ function DivergentBarChart({
   data: { year: number; value: number | null }[];
   valueFormatter: (v: number) => string;
 }) {
-  const present = data.filter((d): d is { year: number; value: number } => d.value !== null);
-  const max = Math.max(...present.map((d) => Math.abs(d.value))) * 1.18;
+  const present = data.filter(
+    (entry): entry is { year: number; value: number } => entry.value !== null,
+  );
+  const max = Math.max(...present.map((entry) => Math.abs(entry.value))) * 1.18;
   const baseline = CHART_H / 2;
   const halfH = (CHART_H - 2 * CHART_PAD_Y) / 2;
   const slotW = (CHART_W - 2 * CHART_PAD_X) / data.length;
@@ -268,29 +271,29 @@ function DivergentBarChart({
         stroke="rgb(46 46 56)"
         strokeWidth={1}
       />
-      {data.map((d, i) => {
-        const x = CHART_PAD_X + slotW * i + (slotW - barW) / 2;
-        const isPending = d.value === null;
-        const v = d.value ?? 0;
-        const h = (Math.abs(v) / max) * halfH;
-        const y = v >= 0 ? baseline - h : baseline;
-        const labelY = v >= 0 ? y - 6 : y + h + 11;
+      {data.map((entry, i) => {
+        const barX = CHART_PAD_X + slotW * i + (slotW - barW) / 2;
+        const isPending = entry.value === null;
+        const value = entry.value ?? 0;
+        const barH = (Math.abs(value) / max) * halfH;
+        const barY = value >= 0 ? baseline - barH : baseline;
+        const labelY = value >= 0 ? barY - 6 : barY + barH + 11;
 
         return (
-          <g key={d.year}>
+          <g key={entry.year}>
             {!isPending && (
               <rect
-                x={x}
-                y={y}
+                x={barX}
+                y={barY}
                 width={barW}
-                height={h}
+                height={barH}
                 rx={3}
-                className={v >= 0 ? "fill-ok" : "fill-danger"}
+                className={value >= 0 ? "fill-ok" : "fill-danger"}
               />
             )}
             {isPending && (
               <rect
-                x={x}
+                x={barX}
                 y={baseline - 2}
                 width={barW}
                 height={4}
@@ -300,23 +303,23 @@ function DivergentBarChart({
             )}
             {!isPending && (
               <text
-                x={x + barW / 2}
+                x={barX + barW / 2}
                 y={labelY}
                 textAnchor="middle"
                 className="fill-ink-secondary text-[10px]"
                 style={{ fontVariantNumeric: "tabular-nums" }}
               >
-                {valueFormatter(v)}
+                {valueFormatter(value)}
               </text>
             )}
             <text
-              x={x + barW / 2}
+              x={barX + barW / 2}
               y={CHART_H + 14}
               textAnchor="middle"
               className="fill-ink-muted text-[10px]"
               style={{ fontVariantNumeric: "tabular-nums" }}
             >
-              {d.year}
+              {entry.year}
             </text>
           </g>
         );
@@ -325,15 +328,15 @@ function DivergentBarChart({
   );
 }
 
-function fmtCurrencyFull(n: number): string {
-  return `$${n.toLocaleString()}`;
+function fmtCurrencyFull(amount: number): string {
+  return `$${amount.toLocaleString()}`;
 }
-function fmtCurrencyShort(n: number): string {
-  if (Math.abs(n) >= 1000) return `$${(n / 1000).toFixed(0)}k`;
-  return `$${n}`;
+function fmtCurrencyShort(amount: number): string {
+  if (Math.abs(amount) >= 1000) return `$${(amount / 1000).toFixed(0)}k`;
+  return `$${amount}`;
 }
-function fmtSigned(n: number): string {
-  if (n > 0) return `+$${n.toLocaleString()}`;
-  if (n < 0) return `-$${Math.abs(n).toLocaleString()}`;
+function fmtSigned(amount: number): string {
+  if (amount > 0) return `+$${amount.toLocaleString()}`;
+  if (amount < 0) return `-$${Math.abs(amount).toLocaleString()}`;
   return "$0";
 }

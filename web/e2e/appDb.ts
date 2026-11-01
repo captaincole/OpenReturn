@@ -33,7 +33,7 @@ export function latestDecisions(): Map<string, unknown> {
   const rows = query<{ decision_key: string; decision: string | null }>(
     "SELECT decision_key, decision FROM ai_decisions ORDER BY created_at ASC",
   );
-  return new Map(rows.map((r) => [r.decision_key, parse(r.decision)]));
+  return new Map(rows.map((row) => [row.decision_key, parse(row.decision)]));
 }
 
 export function unreviewedDecisions(): number {
@@ -47,5 +47,5 @@ export function verdictCounts(): Record<string, number> {
   const rows = query<{ verdict: string | null; n: number }>(
     "SELECT verdict, count(*) AS n FROM ai_decisions GROUP BY verdict",
   );
-  return Object.fromEntries(rows.map((r) => [r.verdict ?? "null", r.n]));
+  return Object.fromEntries(rows.map((row) => [row.verdict ?? "null", row.n]));
 }

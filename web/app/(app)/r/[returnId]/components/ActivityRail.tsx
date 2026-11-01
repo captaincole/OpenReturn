@@ -184,9 +184,9 @@ function ActivityDetailPanel({ item, onClose }: { item: ActivityItem; onClose: (
         {isDecision && item.supportingFactKeys && item.supportingFactKeys.length > 0 && (
           <DetailBlock label="Supporting facts">
             <ul className="space-y-1">
-              {item.supportingFactKeys.map((k) => (
-                <li key={k} className="truncate font-mono text-[12px] text-ink-secondary">
-                  {k}
+              {item.supportingFactKeys.map((factKey) => (
+                <li key={factKey} className="truncate font-mono text-[12px] text-ink-secondary">
+                  {factKey}
                 </li>
               ))}
             </ul>
@@ -223,12 +223,12 @@ function ValueDisplay({ value }: { value: unknown }) {
     if (entries.length === 0) return <p className="text-ink-secondary">—</p>;
     return (
       <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5">
-        {entries.map(([k, v]) => (
-          <div key={k} className="contents">
+        {entries.map(([key, fieldValue]) => (
+          <div key={key} className="contents">
             <dt className="pt-0.5 text-[11px] tracking-wide text-ink-muted uppercase">
-              {k.replace(/_/g, " ")}
+              {key.replace(/_/g, " ")}
             </dt>
-            <dd className="break-words text-ink-primary">{briefValue(v)}</dd>
+            <dd className="break-words text-ink-primary">{briefValue(fieldValue)}</dd>
           </div>
         ))}
       </dl>

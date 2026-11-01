@@ -47,15 +47,15 @@ function CompletedAnswer({ turn }: { turn: AskTurn }) {
   const hiddenCount = Math.max(0, turn.citations.length - VISIBLE_REFERENCES);
   const visible = showAll ? turn.citations : turn.citations.slice(0, VISIBLE_REFERENCES);
 
-  function jumpTo(n: number) {
-    if (n > VISIBLE_REFERENCES) setShowAll(true);
-    setHighlighted(n);
+  function jumpTo(citationNum: number) {
+    if (citationNum > VISIBLE_REFERENCES) setShowAll(true);
+    setHighlighted(citationNum);
     setTimeout(() => {
       document
-        .getElementById(refAnchorId(turn.id, n))
+        .getElementById(refAnchorId(turn.id, citationNum))
         ?.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 0);
-    setTimeout(() => setHighlighted((h) => (h === n ? null : h)), HIGHLIGHT_MS);
+    setTimeout(() => setHighlighted((prev) => (prev === citationNum ? null : prev)), HIGHLIGHT_MS);
   }
 
   return (
@@ -74,19 +74,19 @@ function CompletedAnswer({ turn }: { turn: AskTurn }) {
             References · {turn.citations.length}
           </h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {visible.map((c) => (
+            {visible.map((citation) => (
               <ReferenceCard
-                key={c.n}
+                key={citation.n}
                 turnId={turn.id}
-                citation={c}
-                highlighted={highlighted === c.n}
+                citation={citation}
+                highlighted={highlighted === citation.n}
               />
             ))}
           </div>
           {hiddenCount > 0 && (
             <button
               type="button"
-              onClick={() => setShowAll((v) => !v)}
+              onClick={() => setShowAll((prev) => !prev)}
               className="text-[12px] text-ink-secondary hover:text-ink-primary"
             >
               {showAll ? "Show fewer" : `Show ${hiddenCount} more`}
@@ -123,19 +123,19 @@ function AnswerText({
   citations: AskCitation[];
   onMarker: (n: number) => void;
 }) {
-  const known = new Set(citations.map((c) => c.n));
+  const known = new Set(citations.map((citation) => citation.n));
   return text.split(/(\[\d+\])/).map((part, i) => {
-    const n = Number(/^\[(\d+)\]$/.exec(part)?.[1]);
-    if (!known.has(n)) return <Fragment key={i}>{part}</Fragment>;
+    const citationNum = Number(/^\[(\d+)\]$/.exec(part)?.[1]);
+    if (!known.has(citationNum)) return <Fragment key={i}>{part}</Fragment>;
     return (
       <button
         key={i}
         type="button"
-        onClick={() => onMarker(n)}
-        aria-label={`Reference ${n}`}
+        onClick={() => onMarker(citationNum)}
+        aria-label={`Reference ${citationNum}`}
         className="mx-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded bg-accent/15 px-1 align-text-top text-[11px] font-medium text-accent hover:bg-accent/25"
       >
-        {n}
+        {citationNum}
       </button>
     );
   });

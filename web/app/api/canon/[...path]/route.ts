@@ -31,9 +31,9 @@ async function forward(
   const upstream = await fetch(target, { method: "GET", headers });
 
   const responseHeaders = new Headers();
-  for (const h of ["content-type", "cache-control"]) {
-    const v = upstream.headers.get(h);
-    if (v) responseHeaders.set(h, v);
+  for (const header of ["content-type", "cache-control"]) {
+    const value = upstream.headers.get(header);
+    if (value) responseHeaders.set(header, value);
   }
   return new Response(upstream.body, { status: upstream.status, headers: responseHeaders });
 }

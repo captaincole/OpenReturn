@@ -36,36 +36,36 @@ export function AskComposer({
       className="sticky bottom-0 -mx-2 mt-auto bg-gradient-to-t from-bg-base from-75% to-transparent px-2 pt-8 pb-4"
     >
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
+        onSubmit={(event) => {
+          event.preventDefault();
           void send();
         }}
         className="card space-y-2.5 px-4 py-3 shadow-lg shadow-black/40 focus-within:border-accent/60 light:shadow-black/10"
       >
         <div className="flex flex-wrap gap-1.5">
-          {MODES.map((m) => (
+          {MODES.map((option) => (
             <button
-              key={m.mode}
+              key={option.mode}
               type="button"
-              onClick={() => setMode(m.mode)}
+              onClick={() => setMode(option.mode)}
               className={cn(
                 "rounded-full border px-3 py-1 text-[12px] transition-colors",
-                mode === m.mode
+                mode === option.mode
                   ? "border-accent/50 bg-accent/15 text-ink-primary"
                   : "border-border-subtle text-ink-secondary hover:border-border-strong hover:text-ink-primary",
               )}
             >
-              {m.label}
+              {option.label}
             </button>
           ))}
         </div>
         <div className="flex items-end gap-3">
           <textarea
             value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
+            onChange={(event) => setQuestion(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
                 void send();
               }
             }}
@@ -74,7 +74,7 @@ export function AskComposer({
             placeholder={
               disabled
                 ? "Wait for the answer to finish…"
-                : MODES.find((m) => m.mode === mode)?.placeholder
+                : MODES.find((option) => option.mode === mode)?.placeholder
             }
             className="[field-sizing:content] max-h-32 min-w-0 flex-1 resize-none bg-transparent py-1 text-[15px] text-ink-primary placeholder:text-ink-muted focus:outline-none"
           />

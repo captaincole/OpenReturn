@@ -238,22 +238,22 @@ const ORPHAN_LABELS: Record<string, { label: string; description: string }> = {
 function mergeFormsAndDrafts(forms: FormSummary[], drafts: DraftRow[]): FormItem[] {
   /* The engine regenerates every turn. Drafts sort newest first, so the first hit wins. */
   const draftByKey = new Map<string, DraftRow>();
-  for (const d of drafts) {
-    const key = draftKey(d);
-    if (!draftByKey.has(key)) draftByKey.set(key, d);
+  for (const draft of drafts) {
+    const key = draftKey(draft);
+    if (!draftByKey.has(key)) draftByKey.set(key, draft);
   }
 
   const items: FormItem[] = [];
   const claimedKeys = new Set<string>();
 
-  for (const f of forms) {
-    const key = formKey(f);
+  for (const form of forms) {
+    const key = formKey(form);
     claimedKeys.add(key);
     items.push({
       key,
-      label: f.displayName,
-      description: f.title,
-      form: f,
+      label: form.displayName,
+      description: form.title,
+      form: form,
       draft: draftByKey.get(key),
     });
   }

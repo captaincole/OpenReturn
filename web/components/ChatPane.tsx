@@ -101,8 +101,8 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
     if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
-  async function onSubmit(e?: FormEvent) {
-    e?.preventDefault();
+  async function onSubmit(event?: FormEvent) {
+    event?.preventDefault();
     if (isPlaceholder || cadeBusy) return;
     const text = input.trim();
     const file = attachment;
@@ -119,7 +119,7 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
       {attachment && <AttachmentChip attachment={attachment} onClear={clearAttachment} />}
 
       <form
-        onSubmit={(e) => void onSubmit(e)}
+        onSubmit={(event) => void onSubmit(event)}
         className={cn(
           "rounded-2xl border border-border-subtle bg-bg-panel transition-colors",
           "focus-within:border-border-strong",
@@ -133,17 +133,17 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
           type="file"
           aria-label="Attach a file for Cade"
           accept="application/pdf,image/png,image/jpeg,image/webp"
-          onChange={(e) => setAttachment(e.target.files?.[0] ?? null)}
+          onChange={(event) => setAttachment(event.target.files?.[0] ?? null)}
           className="hidden"
         />
         <textarea
           ref={messageInputRef}
           aria-label="Message Cade"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
+          onChange={(event) => setInput(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" && !event.shiftKey) {
+              event.preventDefault();
               void onSubmit();
             }
           }}
@@ -272,7 +272,7 @@ function SendIcon() {
 
 function PlanRail({ plan, hidden }: { plan: PlanItem[]; hidden: boolean }) {
   const [showAll, setShowAll] = useState(false);
-  const active = plan.filter((p) => p.status !== "done");
+  const active = plan.filter((item) => item.status !== "done");
   if (hidden || active.length === 0) return null;
 
   const CAP = 3;

@@ -13,7 +13,7 @@ const PUBLISHER_LABELS: Record<string, string> = {
 
 function groupByPublisher(docs: LibraryDocument[]): [string, LibraryDocument[]][] {
   const groups = new Map<string, LibraryDocument[]>();
-  for (const d of docs) groups.set(d.publisher, [...(groups.get(d.publisher) ?? []), d]);
+  for (const doc of docs) groups.set(doc.publisher, [...(groups.get(doc.publisher) ?? []), doc]);
   return [...groups.entries()];
 }
 
@@ -46,8 +46,8 @@ export function LibraryList() {
           right={<span className="text-[12px] text-ink-muted">{group.length} documents</span>}
         >
           <ul className="card divide-y divide-border-subtle">
-            {group.map((d) => (
-              <LibraryRow key={d.docId} doc={d} />
+            {group.map((doc) => (
+              <LibraryRow key={doc.docId} doc={doc} />
             ))}
           </ul>
         </Section>
