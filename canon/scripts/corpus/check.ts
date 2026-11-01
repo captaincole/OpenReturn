@@ -3,12 +3,12 @@ import type { Command } from "../lib/cli";
 
 async function run(): Promise<void> {
   const counts = await tableCounts();
-  for (const [t, n] of Object.entries(counts)) {
-    console.log(`${t}: count=${n}`);
+  for (const [table, count] of Object.entries(counts)) {
+    console.log(`${table}: count=${count}`);
   }
-  for (const d of await listDocuments()) {
-    const { blocks, embedded } = await countBlocksByDoc(d.docId);
-    console.log(`  ${d.docId}: blocks=${blocks}, embedded=${embedded}`);
+  for (const doc of await listDocuments()) {
+    const { blocks, embedded } = await countBlocksByDoc(doc.docId);
+    console.log(`  ${doc.docId}: blocks=${blocks}, embedded=${embedded}`);
   }
 }
 

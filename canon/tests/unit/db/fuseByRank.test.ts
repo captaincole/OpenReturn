@@ -17,7 +17,7 @@ const row = (id: string, fts: number | null, distance: number | null): MatchRow 
   vector_distance: distance,
 });
 
-const order = (rows: MatchRow[]) => fuseByRank(rows).map((r) => r.row.block_id);
+const order = (rows: MatchRow[]) => fuseByRank(rows).map((fused) => fused.row.block_id);
 
 describe("fuseByRank", () => {
   it("lets the best vector-only hit outrank a weak keyword-only hit", () => {

@@ -113,7 +113,7 @@ describe("parseHtmlDoc", () => {
 
   it("makes sections from h2–h4, nested by level, with the heading id as slug", async () => {
     const { sections } = await parse();
-    expect(sections.map((s) => [s.headingSlug, s.parentSectionId])).toEqual([
+    expect(sections.map((section) => [section.headingSlug, section.parentSectionId])).toEqual([
       ["preamble", null],
       ["filing-status", null],
       ["line-7-personal-exemptions", "doc::sec::filing-status"],
@@ -123,7 +123,7 @@ describe("parseHtmlDoc", () => {
 
   it("writes table rows with their column headers, in their own block", async () => {
     const { blocks } = await parse();
-    const table = blocks.find((b) => b.blockType === "table")!;
+    const table = blocks.find((block) => block.blockType === "table")!;
     expect(table.blockId).toBe("doc::sec::filing-status::b02");
     expect(table.text).toBe(
       "1 – Single | Enter On Line 18: $5,706\n\n2 – Married | Enter On Line 18: $11,412",
@@ -136,35 +136,35 @@ describe("parseHtmlDoc", () => {
 <tr><th>(a) 4/15/25</th><th>(b) 6/15/25</th></tr></thead>
 <tbody><tr><td>3. Enter line 9</td><td>N/A</td><td></td></tr></tbody></table>${FILLER}`;
     const { blocks } = parseHtmlDoc((await clean(table)).html, "doc");
-    expect(blocks.find((b) => b.blockType === "table")!.text).toBe(
+    expect(blocks.find((block) => block.blockType === "table")!.text).toBe(
       "3. Enter line 9 | (a) 4/15/25: N/A",
     );
   });
 
   it("keeps worksheet line letters and yes/no labels", async () => {
     const { blocks } = await parse();
-    const text = blocks.map((b) => b.text).join("\n\n");
+    const text = blocks.map((block) => block.text).join("\n\n");
     expect(text).toContain("a. Enter line 13.\n\nb. Subtract line b from line a.");
     expect(text).toContain("No: Follow the instructions.\n\nYes: Enter -0-.");
     expect(text).toContain("[Image: Sample check]");
   });
 
   it("keeps a list with its lead-in sentence in one block", async () => {
-    const item = (n: number) =>
-      `<li>Item ${n}: ${"a purchase you may not report here. ".repeat(4)}</li>`;
+    const item = (index: number) =>
+      `<li>Item ${index}: ${"a purchase you may not report here. ".repeat(4)}</li>`;
     const body = `<h2>Use Tax</h2><p>${"Report purchases from out-of-state sellers. ".repeat(20)}</p>
 <p>Note: You cannot report the following types of purchases.</p><ul>${[1, 2, 3].map(item).join("")}</ul>${FILLER}`;
     const { blocks } = parseHtmlDoc((await clean(body)).html, "doc");
-    const note = blocks.find((b) => b.text.includes("Note: You cannot report"))!;
+    const note = blocks.find((block) => block.text.includes("Note: You cannot report"))!;
     expect(note.text.startsWith("Note:")).toBe(true);
     expect(note.text).toContain("• Item 3:");
   });
 
   it("block text is a slice of the canonical text, on page 1", async () => {
     const { blocks, canonicalText } = await parse();
-    for (const b of blocks) {
-      expect(canonicalText.slice(b.charStart, b.charEnd)).toBe(b.text);
-      expect(b.pageNum).toBe(1);
+    for (const block of blocks) {
+      expect(canonicalText.slice(block.charStart, block.charEnd)).toBe(block.text);
+      expect(block.pageNum).toBe(1);
     }
   });
 });

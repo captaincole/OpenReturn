@@ -58,10 +58,12 @@ export interface RefBlock {
   embedding?: number[] | null;
 }
 
-export const asStr = (v: unknown): string => (v == null ? "" : String(v));
-export const asStrOrNull = (v: unknown): string | null => (v == null ? null : String(v));
-export const asNum = (v: unknown): number => (v == null ? 0 : Number(v));
-export const asNumOrNull = (v: unknown): number | null => (v == null ? null : Number(v));
+export const asStr = (value: unknown): string => (value == null ? "" : String(value));
+export const asStrOrNull = (value: unknown): string | null =>
+  value == null ? null : String(value);
+export const asNum = (value: unknown): number => (value == null ? 0 : Number(value));
+export const asNumOrNull = (value: unknown): number | null =>
+  value == null ? null : Number(value);
 
 // vector32() needs the "[1,2,3]" string form; a JS array silently fails.
 export function vectorLiteral(embedding: number[]): string {
@@ -92,21 +94,21 @@ export async function getDocument(docId: string): Promise<RefDocument | null> {
           FROM ref_documents WHERE doc_id = ? LIMIT 1`,
     args: [docId],
   });
-  const d = res.rows[0];
-  if (!d) return null;
+  const row = res.rows[0];
+  if (!row) return null;
   return {
-    docId: asStr(d.doc_id),
-    title: asStr(d.title),
-    publisher: asStr(d.publisher),
-    taxYear: asNumOrNull(d.tax_year),
-    sourcePath: asStr(d.source_path),
-    sourceUrl: asStrOrNull(d.source_url),
-    sha256: asStr(d.sha256),
-    totalPages: asNum(d.total_pages),
-    totalChars: asNum(d.total_chars),
-    canonicalTextPath: asStr(d.canonical_text_path),
-    format: asFormat(d.format),
-    published: asStrOrNull(d.published),
+    docId: asStr(row.doc_id),
+    title: asStr(row.title),
+    publisher: asStr(row.publisher),
+    taxYear: asNumOrNull(row.tax_year),
+    sourcePath: asStr(row.source_path),
+    sourceUrl: asStrOrNull(row.source_url),
+    sha256: asStr(row.sha256),
+    totalPages: asNum(row.total_pages),
+    totalChars: asNum(row.total_chars),
+    canonicalTextPath: asStr(row.canonical_text_path),
+    format: asFormat(row.format),
+    published: asStrOrNull(row.published),
   };
 }
 
@@ -118,7 +120,7 @@ export async function setDocumentPublished(docId: string, published: string | nu
   });
 }
 
-export const asFormat = (v: unknown): SourceFormat => (v === "html" ? "html" : "pdf");
+export const asFormat = (value: unknown): SourceFormat => (value === "html" ? "html" : "pdf");
 
 export async function deleteDocument(docId: string): Promise<void> {
   await ensureCorpusSchema();
@@ -134,10 +136,10 @@ export async function setBlockEmbeddings(
 ): Promise<void> {
   if (pairs.length === 0) return;
   await ensureCorpusSchema();
-  await batchChunked(pairs, 500, (p) => [
+  await batchChunked(pairs, 500, (pair) => [
     {
       sql: `UPDATE ref_blocks SET embedding = vector32(?) WHERE block_id = ?`,
-      args: [vectorLiteral(p.embedding), p.blockId],
+      args: [vectorLiteral(pair.embedding), pair.blockId],
     },
   ]);
   if (opts.embeddingModel) {
@@ -152,25 +154,25 @@ export interface IngestPayload {
   blocks: RefBlock[];
 }
 
-async function insertDocumentRow(d: RefDocument): Promise<void> {
+async function insertDocumentRow(doc: RefDocument): Promise<void> {
   await getCorpusDb().execute({
     sql: `INSERT INTO ref_documents
             (doc_id, title, publisher, tax_year, source_path, source_url,
              sha256, total_pages, total_chars, canonical_text_path, format, published)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     args: [
-      d.docId,
-      d.title,
-      d.publisher,
-      d.taxYear,
-      d.sourcePath,
-      d.sourceUrl,
-      d.sha256,
-      d.totalPages,
-      d.totalChars,
-      d.canonicalTextPath,
-      d.format,
-      d.published,
+      doc.docId,
+      doc.title,
+      doc.publisher,
+      doc.taxYear,
+      doc.sourcePath,
+      doc.sourceUrl,
+      doc.sha256,
+      doc.totalPages,
+      doc.totalChars,
+      doc.canonicalTextPath,
+      doc.format,
+      doc.published,
     ],
   });
 }
@@ -178,34 +180,34 @@ async function insertDocumentRow(d: RefDocument): Promise<void> {
 /* Not atomic across the tree. Call deleteDocument() first to replace a doc. */
 export async function writeDocument(payload: IngestPayload): Promise<void> {
   await ensureCorpusSchema();
-  const { document: d, pages, sections, blocks } = payload;
+  const { document: doc, pages, sections, blocks } = payload;
 
-  await insertDocumentRow(d);
+  await insertDocumentRow(doc);
 
-  await batchChunked(pages, 500, (p) => [
+  await batchChunked(pages, 500, (page) => [
     {
       sql: `INSERT INTO ref_pages (doc_id, page_num, char_start, char_end)
             VALUES (?, ?, ?, ?)`,
-      args: [p.docId, p.pageNum, p.charStart, p.charEnd],
+      args: [page.docId, page.pageNum, page.charStart, page.charEnd],
     },
   ]);
 
-  await batchChunked(sections, 500, (s) => [
+  await batchChunked(sections, 500, (section) => [
     {
       sql: `INSERT INTO ref_sections
               (section_id, doc_id, heading, heading_slug, parent_section_id,
                ordinal, first_page, char_start, char_end)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       args: [
-        s.sectionId,
-        s.docId,
-        s.heading,
-        s.headingSlug,
-        s.parentSectionId,
-        s.ordinal,
-        s.firstPage,
-        s.charStart,
-        s.charEnd,
+        section.sectionId,
+        section.docId,
+        section.heading,
+        section.headingSlug,
+        section.parentSectionId,
+        section.ordinal,
+        section.firstPage,
+        section.charStart,
+        section.charEnd,
       ],
     },
   ]);
@@ -213,25 +215,25 @@ export async function writeDocument(payload: IngestPayload): Promise<void> {
   await batchChunked(blocks, 200, blockInsertStmts);
 }
 
-function blockInsertStmts(b: RefBlock): BatchStmt[] {
-  const hasEmbedding = !!(b.embedding && b.embedding.length > 0);
+function blockInsertStmts(block: RefBlock): BatchStmt[] {
+  const hasEmbedding = !!(block.embedding && block.embedding.length > 0);
   const embExpr = hasEmbedding ? "vector32(?)" : "NULL";
   const blockArgs: InValue[] = [
-    b.blockId,
-    b.docId,
-    b.sectionId,
-    b.pageNum,
-    b.blockType,
-    b.ordinal,
-    b.text,
-    b.charStart,
-    b.charEnd,
-    b.metadata ? JSON.stringify(b.metadata) : null,
-    b.contextualSummary ?? null,
-    b.contextualizedText ?? null,
-    b.blockTextSha1 ?? null,
+    block.blockId,
+    block.docId,
+    block.sectionId,
+    block.pageNum,
+    block.blockType,
+    block.ordinal,
+    block.text,
+    block.charStart,
+    block.charEnd,
+    block.metadata ? JSON.stringify(block.metadata) : null,
+    block.contextualSummary ?? null,
+    block.contextualizedText ?? null,
+    block.blockTextSha1 ?? null,
   ];
-  if (hasEmbedding) blockArgs.push(vectorLiteral(b.embedding!));
+  if (hasEmbedding) blockArgs.push(vectorLiteral(block.embedding!));
   return [
     {
       sql: `INSERT INTO ref_blocks
@@ -244,7 +246,7 @@ function blockInsertStmts(b: RefBlock): BatchStmt[] {
     {
       sql: `INSERT INTO ref_blocks_fts (block_id, doc_id, content)
             VALUES (?, ?, ?)`,
-      args: [b.blockId, b.docId, b.contextualizedText ?? b.text],
+      args: [block.blockId, block.docId, block.contextualizedText ?? block.text],
     },
   ];
 }
@@ -254,7 +256,7 @@ export async function listDocuments(): Promise<{ docId: string; sha256: string }
   const res = await getCorpusDb().execute(
     `SELECT doc_id, sha256 FROM ref_documents ORDER BY doc_id`,
   );
-  return res.rows.map((r) => ({ docId: asStr(r.doc_id), sha256: asStr(r.sha256) }));
+  return res.rows.map((row) => ({ docId: asStr(row.doc_id), sha256: asStr(row.sha256) }));
 }
 
 export async function tableCounts(): Promise<Record<string, number>> {
@@ -262,9 +264,9 @@ export async function tableCounts(): Promise<Record<string, number>> {
   const db = getCorpusDb();
   const tables = ["ref_documents", "ref_pages", "ref_sections", "ref_blocks"];
   const out: Record<string, number> = {};
-  for (const t of tables) {
-    const res = await db.execute(`SELECT count(*) AS n FROM ${t}`);
-    out[t] = asNum(res.rows[0]?.n);
+  for (const table of tables) {
+    const res = await db.execute(`SELECT count(*) AS n FROM ${table}`);
+    out[table] = asNum(res.rows[0]?.n);
   }
   return out;
 }
@@ -295,11 +297,11 @@ export async function listBlocksWithoutEmbeddings(
     `SELECT block_id, doc_id, contextualized_text, text
      FROM ref_blocks ${where}ORDER BY block_id`,
   );
-  return res.rows.map((r) => ({
-    blockId: asStr(r.block_id),
-    docId: asStr(r.doc_id),
-    contextualizedText: asStrOrNull(r.contextualized_text),
-    text: asStr(r.text),
+  return res.rows.map((row) => ({
+    blockId: asStr(row.block_id),
+    docId: asStr(row.doc_id),
+    contextualizedText: asStrOrNull(row.contextualized_text),
+    text: asStr(row.text),
   }));
 }
 

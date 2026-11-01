@@ -6,11 +6,11 @@ const HISTORY_TURNS = 4;
 const HISTORY_ANSWER_CHARS = 600;
 
 export function renderHistory(earlier: AskHistoryTurn[]): string {
-  const done = earlier.filter((t) => t.answer).slice(-HISTORY_TURNS);
+  const done = earlier.filter((turn) => turn.answer).slice(-HISTORY_TURNS);
   if (done.length === 0) return "";
-  const pairs = done.map((t) => {
-    const answer = t.answer.replace(/\s?\[\d+\]/g, "").slice(0, HISTORY_ANSWER_CHARS);
-    return `Q: ${t.question}\nA: ${answer}`;
+  const pairs = done.map((turn) => {
+    const answer = turn.answer.replace(/\s?\[\d+\]/g, "").slice(0, HISTORY_ANSWER_CHARS);
+    return `Q: ${turn.question}\nA: ${answer}`;
   });
   return `Earlier in this conversation:\n\n${pairs.join("\n\n")}\n\n`;
 }
@@ -20,18 +20,20 @@ export function renderFormulatePrompt(history: string, question: string): string
 }
 
 // The date lets the answerer prefer the newer of two passages that disagree.
-function renderPassage(p: Passage, n: number): string {
+function renderPassage(passage: Passage, passageNum: number): string {
   const section =
-    p.sectionHeading && p.sectionHeading !== "(Preamble)" ? `, § ${p.sectionHeading}` : "";
-  const page = p.format === "html" ? "" : `, p. ${p.pageNum}`;
-  const published = p.published ? ` (published ${formatPublished(p.published)})` : "";
-  return `[${n}] ${p.documentTitle}${section}${page}${published}\n${p.text.trim()}`;
+    passage.sectionHeading && passage.sectionHeading !== "(Preamble)"
+      ? `, § ${passage.sectionHeading}`
+      : "";
+  const page = passage.format === "html" ? "" : `, p. ${passage.pageNum}`;
+  const published = passage.published ? ` (published ${formatPublished(passage.published)})` : "";
+  return `[${passageNum}] ${passage.documentTitle}${section}${page}${published}\n${passage.text.trim()}`;
 }
 
 export function renderAnswerPrompt(history: string, question: string, passages: Passage[]): string {
   return [
     history,
-    `Passages:\n\n${passages.map((p, i) => renderPassage(p, i + 1)).join("\n\n")}`,
+    `Passages:\n\n${passages.map((passage, i) => renderPassage(passage, i + 1)).join("\n\n")}`,
     `\n\nQuestion: ${question}\n\nAnswer from the passages above.`,
   ].join("");
 }

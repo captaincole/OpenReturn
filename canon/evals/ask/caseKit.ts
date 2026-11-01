@@ -17,7 +17,8 @@ export interface AskCase {
 }
 
 export const CA540 = "ca-540-inst-2025::sec::";
-export const blocks = (section: string, ns: number[]) => ns.map((n) => `${section}::b0${n}`);
+export const blocks = (section: string, ns: number[]) =>
+  ns.map((blockNumber) => `${section}::b0${blockNumber}`);
 
 export const IRA_LIMIT = anyOf(
   "irs-pub-590a-2025::sec::what-s-new-for-2025::b01",
@@ -51,4 +52,4 @@ export const insufficient = (
   coverage: Coverage[] = ["not_covered"],
 ): AskCase => ({ name, tier, kind: "insufficient", question, coverage, authority: [], facts: [] });
 
-export const lite = (c: AskCase): AskCase => ({ ...c, lite: true });
+export const lite = (testCase: AskCase): AskCase => ({ ...testCase, lite: true });

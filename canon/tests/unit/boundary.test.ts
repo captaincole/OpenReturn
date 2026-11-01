@@ -37,7 +37,7 @@ describe("canon boundary", () => {
   });
 
   it.each(FORBIDDEN)("never imports $why", ({ pattern }) => {
-    const offenders = files.filter((f) => pattern.test(readFileSync(f, "utf8")));
-    expect(offenders.map((f) => relative(CANON_ROOT, f))).toEqual([]);
+    const offenders = files.filter((file) => pattern.test(readFileSync(file, "utf8")));
+    expect(offenders.map((offender) => relative(CANON_ROOT, offender))).toEqual([]);
   });
 });

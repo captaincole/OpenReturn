@@ -85,19 +85,23 @@ async function contextualizeBlocks(
   const start = Date.now();
   const sectionTextById = new Map<string, string>();
   const sectionHeadingById = new Map<string, string>();
-  for (const s of sections) {
-    sectionTextById.set(s.sectionId, canonicalText.slice(s.charStart, s.charEnd));
-    sectionHeadingById.set(s.sectionId, s.heading);
+  for (const section of sections) {
+    sectionTextById.set(section.sectionId, canonicalText.slice(section.charStart, section.charEnd));
+    sectionHeadingById.set(section.sectionId, section.heading);
   }
 
   const summarized = await summarizeBlocks({
     documentTitle,
-    blocks: blocks.map((b) => {
-      const sectionText = b.sectionId ? (sectionTextById.get(b.sectionId) ?? b.text) : b.text;
-      const sectionHeading = b.sectionId ? (sectionHeadingById.get(b.sectionId) ?? null) : null;
+    blocks: blocks.map((block) => {
+      const sectionText = block.sectionId
+        ? (sectionTextById.get(block.sectionId) ?? block.text)
+        : block.text;
+      const sectionHeading = block.sectionId
+        ? (sectionHeadingById.get(block.sectionId) ?? null)
+        : null;
       return {
-        blockId: b.blockId,
-        text: b.text,
+        blockId: block.blockId,
+        text: block.text,
         sectionHeading,
         sectionText,
       };
@@ -109,13 +113,13 @@ async function contextualizeBlocks(
       }
     },
   });
-  const byId = new Map(summarized.map((s) => [s.blockId, s]));
-  for (const b of blocks) {
-    const s = byId.get(b.blockId);
-    if (!s) continue;
-    b.contextualSummary = s.summary;
-    b.contextualizedText = s.contextualizedText;
-    b.blockTextSha1 = s.blockTextSha1;
+  const byId = new Map(summarized.map((summary) => [summary.blockId, summary]));
+  for (const block of blocks) {
+    const summary = byId.get(block.blockId);
+    if (!summary) continue;
+    block.contextualSummary = summary.summary;
+    block.contextualizedText = summary.contextualizedText;
+    block.blockTextSha1 = summary.blockTextSha1;
   }
   console.log(`  contextualization done in ${Math.round((Date.now() - start) / 1000)}s`);
 }
@@ -125,12 +129,12 @@ async function embedBlocks(blocks: RefBlock[]): Promise<boolean> {
   try {
     const embedCfg = resolveEmbeddings();
     const start = Date.now();
-    const inputs = blocks.map((b) => b.contextualizedText ?? b.text);
+    const inputs = blocks.map((block) => block.contextualizedText ?? block.text);
     const vectors = await embedDocuments(embedCfg, inputs, (done, total) =>
       console.log(`  embedding ${done}/${total} blocks… (${embedCfg.id})`),
     );
     await setBlockEmbeddings(
-      blocks.map((b, i) => ({ blockId: b.blockId, embedding: vectors[i] })),
+      blocks.map((block, i) => ({ blockId: block.blockId, embedding: vectors[i] })),
       { embeddingModel: embedCfg.id },
     );
     console.log(`  embedding done in ${Math.round((Date.now() - start) / 1000)}s`);
@@ -210,9 +214,9 @@ function toRows(
   extracted: ExtractedDoc,
 ): { pages: RefPage[]; sections: RefSection[]; blocks: RefBlock[] } {
   return {
-    pages: extracted.pages.map((p) => ({ docId, ...p })),
-    sections: extracted.sections.map((s) => ({ docId, ...s })),
-    blocks: extracted.blocks.map((b) => ({ docId, ...b })),
+    pages: extracted.pages.map((page) => ({ docId, ...page })),
+    sections: extracted.sections.map((section) => ({ docId, ...section })),
+    blocks: extracted.blocks.map((block) => ({ docId, ...block })),
   };
 }
 
@@ -245,7 +249,7 @@ export async function ingestRefDoc(input: IngestInput): Promise<IngestResult> {
   if (!input.noContextualize) {
     await contextualizeBlocks(input.title, extracted.canonicalText, sections, blocks);
   } else {
-    for (const b of blocks) b.blockTextSha1 = sha1(b.text);
+    for (const block of blocks) block.blockTextSha1 = sha1(block.text);
   }
 
   // Write rows before embedding: an embed failure then keeps the Haiku summaries.

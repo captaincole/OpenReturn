@@ -5,7 +5,7 @@
 export function mergeByRank<T extends { blockId: string }>(lists: T[][], max: number): T[] {
   const seen = new Set<string>();
   const out: T[] = [];
-  const depth = Math.max(0, ...lists.map((l) => l.length));
+  const depth = Math.max(0, ...lists.map((list) => list.length));
   for (let rank = 0; rank < depth && out.length < max; rank++) {
     for (const list of lists) {
       const hit = list[rank];

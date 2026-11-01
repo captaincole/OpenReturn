@@ -55,8 +55,8 @@ function summaryLines(walk: Awaited<ReturnType<typeof walkCorpus>>, cats: Catego
     cats.missing.length +
     cats.extra.length +
     walk.unconfigured.length;
-  const row = (label: string, n: number, note: string) =>
-    `  ${label.padEnd(12)}${n.toString().padStart(3)} (${note})`;
+  const row = (label: string, count: number, note: string) =>
+    `  ${label.padEnd(12)}${count.toString().padStart(3)} (${note})`;
   return [
     `[corpus status] ${total} doc(s):`,
     row("present", cats.present.length, "sha matches DB"),
@@ -74,31 +74,31 @@ function format(walk: Awaited<ReturnType<typeof walkCorpus>>, cats: Categorized)
   if (cats.drift.length > 0) {
     lines.push("");
     lines.push("drift:");
-    for (const d of cats.drift) {
+    for (const drift of cats.drift) {
       lines.push(
-        `  ${d.entry.sidecar.docId}  db=${d.dbSha.slice(0, 12)}…  sidecar=${d.entry.sidecar.sha256.slice(0, 12)}…`,
+        `  ${drift.entry.sidecar.docId}  db=${drift.dbSha.slice(0, 12)}…  sidecar=${drift.entry.sidecar.sha256.slice(0, 12)}…`,
       );
     }
   }
   if (cats.missing.length > 0) {
     lines.push("");
     lines.push("missing:");
-    for (const m of cats.missing) {
-      lines.push(`  ${m.sidecar.docId}  ${m.sourceRelPath}`);
+    for (const entry of cats.missing) {
+      lines.push(`  ${entry.sidecar.docId}  ${entry.sourceRelPath}`);
     }
   }
   if (cats.extra.length > 0) {
     lines.push("");
     lines.push("extra (DB-only):");
-    for (const e of cats.extra) {
-      lines.push(`  ${e.docId}  sha=${e.sha.slice(0, 12)}…`);
+    for (const entry of cats.extra) {
+      lines.push(`  ${entry.docId}  sha=${entry.sha.slice(0, 12)}…`);
     }
   }
   if (walk.unconfigured.length > 0) {
     lines.push("");
     lines.push("unconfigured:");
-    for (const u of walk.unconfigured) {
-      lines.push(`  ${u.sourceRelPath} — ${u.reason}`);
+    for (const source of walk.unconfigured) {
+      lines.push(`  ${source.sourceRelPath} — ${source.reason}`);
     }
   }
   return lines.join("\n");

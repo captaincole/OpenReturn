@@ -52,18 +52,18 @@ async function retrieve(
   const log: unknown[] = [];
   for (const query of queries) {
     const hits = await hybridSearchRefDocs({ query, limit: HITS_PER_QUERY });
-    log.push({ query, hits: hits.map((h) => ({ blockId: h.blockId, score: h.score })) });
-    lists.push(hits.filter((h) => !skip.has(h.blockId)));
+    log.push({ query, hits: hits.map((hit) => ({ blockId: hit.blockId, score: hit.score })) });
+    lists.push(hits.filter((hit) => !skip.has(hit.blockId)));
   }
-  const passages = mergeByRank(lists, max).map((p) => ({
-    blockId: p.blockId,
-    docId: p.docId,
-    documentTitle: p.documentTitle,
-    format: p.format,
-    published: p.published,
-    sectionHeading: p.sectionHeading,
-    pageNum: p.pageNum,
-    text: p.text,
+  const passages = mergeByRank(lists, max).map((hit) => ({
+    blockId: hit.blockId,
+    docId: hit.docId,
+    documentTitle: hit.documentTitle,
+    format: hit.format,
+    published: hit.published,
+    sectionHeading: hit.sectionHeading,
+    pageNum: hit.pageNum,
+    text: hit.text,
   }));
   return { passages, log };
 }
@@ -93,7 +93,7 @@ async function answer(
     steps,
     kind,
     () => judge(mastra.getAgent("askAnswerer"), prompt, askAnswerSchema),
-    (out) => ({ passages: passages.map((p) => p.blockId), output: out }),
+    (out) => ({ passages: passages.map((passage) => passage.blockId), output: out }),
   );
 }
 
@@ -110,19 +110,19 @@ async function fillGaps(
   steps: StepLog[],
 ): Promise<{ raw: AskAnswerOutput; passages: Passage[] }> {
   const gaps = raw.gaps
-    .map((q) => q.trim())
+    .map((gap) => gap.trim())
     .filter(Boolean)
     .slice(0, MAX_QUERIES);
   if (raw.coverage !== "partial" || gaps.length === 0) return { raw, passages };
 
   try {
     await input.onStage?.("retrieving");
-    const skip = new Set(passages.map((p) => p.blockId));
+    const skip = new Set(passages.map((passage) => passage.blockId));
     const found = await timed(
       steps,
       "retrieve-gaps",
       () => retrieve(gaps, MAX_GAP_PASSAGES, skip),
-      (r) => ({ queries: r.log }),
+      (result) => ({ queries: result.log }),
     );
     if (found.passages.length === 0) return { raw, passages };
 
@@ -156,7 +156,7 @@ export async function answerQuestion(
     (out) => ({ prompt: formulatePrompt, output: out }),
   );
   const queries = formulated.queries
-    .map((q) => q.trim())
+    .map((query) => query.trim())
     .filter(Boolean)
     .slice(0, MAX_QUERIES);
 
@@ -165,7 +165,7 @@ export async function answerQuestion(
     steps,
     "retrieve",
     () => retrieve(queries.length > 0 ? queries : [input.question]),
-    (r) => ({ queries: r.log }),
+    (result) => ({ queries: result.log }),
   );
   if (passages.length === 0) {
     return {

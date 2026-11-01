@@ -90,18 +90,18 @@ async function run(argv: string[]): Promise<void> {
   const walk = await walkCorpus();
   const result: SyncResult = { ok: [], failed: [], unconfigured: [] };
 
-  for (const u of walk.unconfigured) {
-    console.warn(`[corpus sync] unconfigured: ${u.sourceRelPath} — ${u.reason}`);
-    result.unconfigured.push(u.sourceRelPath);
+  for (const source of walk.unconfigured) {
+    console.warn(`[corpus sync] unconfigured: ${source.sourceRelPath} — ${source.reason}`);
+    result.unconfigured.push(source.sourceRelPath);
   }
 
   console.log(`[corpus sync] processing ${walk.entries.length} doc(s)`);
   const stored = await docIdsWithSource();
   for (const entry of walk.entries) {
     try {
-      const r = await syncOne(entry, flags, stored);
-      result.ok.push(r);
-      console.log(`  ✓ ${r.docId} (${r.action})`);
+      const synced = await syncOne(entry, flags, stored);
+      result.ok.push(synced);
+      console.log(`  ✓ ${synced.docId} (${synced.action})`);
     } catch (err) {
       const msg =
         err instanceof Error
@@ -115,7 +115,7 @@ async function run(argv: string[]): Promise<void> {
   }
 
   const count = (...actions: SyncAction[]) =>
-    result.ok.filter((r) => actions.includes(r.action)).length;
+    result.ok.filter((synced) => actions.includes(synced.action)).length;
   console.log(
     `\n[corpus sync] done: ${count("ingested", "replaced")} ingested/replaced, ${count("stored")} source stored, ${count("dated")} dated, ${count("source-unavailable")} source unavailable, ${count("skipped")} skipped, ${result.failed.length} failed, ${result.unconfigured.length} unconfigured`,
   );

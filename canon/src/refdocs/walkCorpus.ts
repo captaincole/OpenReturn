@@ -58,12 +58,12 @@ async function walkSourceFiles(dir: string): Promise<string[]> {
 export async function walkCorpus(sourcesRoot: string = SOURCES_ROOT): Promise<WalkResult> {
   const root = resolve(sourcesRoot);
   const files = await walkSourceFiles(root);
-  const sources = new Set(files.filter((f) => !f.endsWith(".meta.json")));
+  const sources = new Set(files.filter((file) => !file.endsWith(".meta.json")));
 
   const entries: CorpusEntry[] = [];
   const unconfigured: WalkResult["unconfigured"] = [];
 
-  for (const sidecarPath of files.filter((f) => f.endsWith(".meta.json"))) {
+  for (const sidecarPath of files.filter((file) => file.endsWith(".meta.json"))) {
     const loaded = await loadSidecar(sidecarPath);
     const ext = typeof loaded === "string" ? "pdf" : loaded.format;
     const sourcePath = sidecarPath.replace(/\.meta\.json$/, `.${ext}`);
@@ -99,8 +99,8 @@ async function loadSidecar(sidecarPath: string): Promise<RefDocSidecar | string>
   let parsed: unknown;
   try {
     parsed = JSON.parse(await readFile(sidecarPath, "utf8"));
-  } catch (e) {
-    return `sidecar unreadable: ${(e as Error).message}`;
+  } catch (err) {
+    return `sidecar unreadable: ${(err as Error).message}`;
   }
   return (
     coerceSidecar(parsed) ??
@@ -108,36 +108,37 @@ async function loadSidecar(sidecarPath: string): Promise<RefDocSidecar | string>
   );
 }
 
-function coerceSidecar(v: unknown): RefDocSidecar | null {
-  if (!v || typeof v !== "object") return null;
-  const o = v as Record<string, unknown>;
+function coerceSidecar(value: unknown): RefDocSidecar | null {
+  if (!value || typeof value !== "object") return null;
+  const record = value as Record<string, unknown>;
   if (
-    typeof o.docId !== "string" ||
-    typeof o.title !== "string" ||
-    typeof o.publisher !== "string" ||
-    typeof o.sha256 !== "string"
+    typeof record.docId !== "string" ||
+    typeof record.title !== "string" ||
+    typeof record.publisher !== "string" ||
+    typeof record.sha256 !== "string"
   ) {
     return null;
   }
-  if (o.format !== undefined && o.format !== "pdf" && o.format !== "html") return null;
-  if (o.published !== undefined && !isPublishedDate(o.published)) return null;
-  const taxYear = typeof o.taxYear === "number" ? o.taxYear : null;
-  const sourceUrl = typeof o.sourceUrl === "string" ? o.sourceUrl : null;
+  if (record.format !== undefined && record.format !== "pdf" && record.format !== "html")
+    return null;
+  if (record.published !== undefined && !isPublishedDate(record.published)) return null;
+  const taxYear = typeof record.taxYear === "number" ? record.taxYear : null;
+  const sourceUrl = typeof record.sourceUrl === "string" ? record.sourceUrl : null;
   const parserStyle: ParserStyle =
-    o.parserStyle === "irs" || o.parserStyle === "ftb"
-      ? o.parserStyle
-      : o.publisher === "FTB"
+    record.parserStyle === "irs" || record.parserStyle === "ftb"
+      ? record.parserStyle
+      : record.publisher === "FTB"
         ? "ftb"
         : "irs";
   return {
-    docId: o.docId,
-    title: o.title,
-    publisher: o.publisher,
+    docId: record.docId,
+    title: record.title,
+    publisher: record.publisher,
     taxYear,
     sourceUrl,
-    sha256: o.sha256,
-    format: o.format === "html" ? "html" : "pdf",
+    sha256: record.sha256,
+    format: record.format === "html" ? "html" : "pdf",
     parserStyle,
-    published: isPublishedDate(o.published) ? o.published : null,
+    published: isPublishedDate(record.published) ? record.published : null,
   };
 }

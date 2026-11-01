@@ -26,13 +26,13 @@ const SECTION_LEVELS = new Set(["h2", "h3", "h4"]);
 const SEP = "\n\n";
 
 export function parseHtmlDoc(html: string, docId: string): ParsedHtml {
-  const $ = cheerio.load(html);
-  const units = collectUnits($, $("article").first().contents().toArray());
+  const dom = cheerio.load(html);
+  const units = collectUnits(dom, dom("article").first().contents().toArray());
   const { canonicalText, spans } = layout(units);
   return { canonicalText, ...buildRows(docId, canonicalText, units, spans) };
 }
 
-function collectUnits($: cheerio.CheerioAPI, nodes: AnyNode[]): Unit[] {
+function collectUnits(dom: cheerio.CheerioAPI, nodes: AnyNode[]): Unit[] {
   return nodes.flatMap((node): Unit[] => {
     if (node.type === "text") return textUnit(squash((node as unknown as { data: string }).data));
     if (node.type !== "tag") return [];
@@ -43,18 +43,19 @@ function collectUnits($: cheerio.CheerioAPI, nodes: AnyNode[]): Unit[] {
       return [
         {
           kind: "heading",
-          text: squash($(el).text()),
+          text: squash(dom(el).text()),
           level: Number(tag[1]),
           anchor: el.attribs.id,
         },
       ];
     }
-    if (tag === "ul" || tag === "ol") return listUnits($, el);
-    if (tag === "dl") return definitionUnits($, el);
-    if (tag === "table") return tableUnits($, el);
+    if (tag === "ul" || tag === "ol") return listUnits(dom, el);
+    if (tag === "dl") return definitionUnits(dom, el);
+    if (tag === "table") return tableUnits(dom, el);
     if (tag === "img") return textUnit(imageText(el));
-    if (["p", "h5", "h6", "blockquote", "figcaption"].includes(tag)) return textUnit(textOf($, el));
-    return collectUnits($, el.children);
+    if (["p", "h5", "h6", "blockquote", "figcaption"].includes(tag))
+      return textUnit(textOf(dom, el));
+    return collectUnits(dom, el.children);
   });
 }
 
@@ -63,48 +64,50 @@ const textUnit = (text: string): Unit[] => (text ? [{ kind: "text", text }] : []
 const imageText = (el: Element) => (el.attribs.alt ? `[Image: ${squash(el.attribs.alt)}]` : "");
 
 /* Ordered lists keep their line labels ("a. Enter…"): worksheets cite them. */
-function listUnits($: cheerio.CheerioAPI, list: Element): Unit[] {
+function listUnits(dom: cheerio.CheerioAPI, list: Element): Unit[] {
   const type = list.tagName === "ol" ? (list.attribs.type ?? "1") : "•";
   const start = Number(list.attribs.start ?? 1);
-  return $(list)
+  return dom(list)
     .children("li")
     .toArray()
-    .flatMap((li, i) => textUnit(prefixed(listMarker(type, start + i), textOf($, li))))
-    .map((u) => ({ ...u, group: list }));
+    .flatMap((li, i) => textUnit(prefixed(listMarker(type, start + i), textOf(dom, li))))
+    .map((unit) => ({ ...unit, group: list }));
 }
 
-function listMarker(type: string, n: number): string {
+function listMarker(type: string, position: number): string {
   if (type === "•") return "•";
-  if (type === "a") return `${String.fromCharCode(96 + n)}.`;
-  if (type === "A") return `${String.fromCharCode(64 + n)}.`;
-  return `${n}.`;
+  if (type === "a") return `${String.fromCharCode(96 + position)}.`;
+  if (type === "A") return `${String.fromCharCode(64 + position)}.`;
+  return `${position}.`;
 }
 
 const prefixed = (marker: string, text: string) => (text ? `${marker} ${text}` : "");
 
-function definitionUnits($: cheerio.CheerioAPI, dl: Element): Unit[] {
+function definitionUnits(dom: cheerio.CheerioAPI, dl: Element): Unit[] {
   const groups: { term: string; details: string[] }[] = [];
-  $(dl)
+  dom(dl)
     .children("dt, dd")
     .each((_, el) => {
-      const text = textOf($, el);
+      const text = textOf(dom, el);
       if (el.tagName === "dt") groups.push({ term: text, details: [] });
       else if (groups.length === 0) groups.push({ term: "", details: [text] });
       else groups[groups.length - 1].details.push(text);
     });
   return groups
-    .flatMap((g) => textUnit([g.term && `${g.term}:`, ...g.details].filter(Boolean).join(" ")))
-    .map((u) => ({ ...u, group: dl }));
+    .flatMap((group) =>
+      textUnit([group.term && `${group.term}:`, ...group.details].filter(Boolean).join(" ")),
+    )
+    .map((unit) => ({ ...unit, group: dl }));
 }
 
-function tableUnits($: cheerio.CheerioAPI, table: Element): Unit[] {
-  const rows = $(table).find("tr").toArray();
-  const grid = tableGrid($, rows);
-  const headRows = rows.filter((tr) => $(tr).closest("thead").length > 0);
-  const firstAllTh = rows[0] && $(rows[0]).children("td").length === 0 ? rows[0] : undefined;
+function tableUnits(dom: cheerio.CheerioAPI, table: Element): Unit[] {
+  const rows = dom(table).find("tr").toArray();
+  const grid = tableGrid(dom, rows);
+  const headRows = rows.filter((tr) => dom(tr).closest("thead").length > 0);
+  const firstAllTh = rows[0] && dom(rows[0]).children("td").length === 0 ? rows[0] : undefined;
   const headerRow = headRows.at(-1) ?? firstAllTh;
   const headers = headerRow ? grid[rows.indexOf(headerRow)] : [];
-  const caption = squash($(table).children("caption").text());
+  const caption = squash(dom(table).children("caption").text());
   const body = rows.flatMap((tr, i) =>
     headRows.includes(tr) || tr === headerRow ? [] : rowUnit(grid[i], headers),
   );
@@ -121,19 +124,19 @@ function rowUnit(cells: string[], headers: string[]): Unit[] {
 }
 
 // Expands colspan and rowspan so each value lines up with its header.
-function tableGrid($: cheerio.CheerioAPI, rows: Element[]): string[][] {
+function tableGrid(dom: cheerio.CheerioAPI, rows: Element[]): string[][] {
   const carried = new Map<number, { text: string; rows: number }>();
   return rows.map((tr) => {
     const out: string[] = [];
     const takeCarried = () => {
-      for (let c = carried.get(out.length); c; c = carried.get(out.length)) {
-        out.push(c.text);
-        if (--c.rows === 0) carried.delete(out.length - 1);
+      for (let cell = carried.get(out.length); cell; cell = carried.get(out.length)) {
+        out.push(cell.text);
+        if (--cell.rows === 0) carried.delete(out.length - 1);
       }
     };
-    for (const cell of $(tr).children("th, td").toArray()) {
+    for (const cell of dom(tr).children("th, td").toArray()) {
       takeCarried();
-      const text = squash(textOf($, cell));
+      const text = squash(textOf(dom, cell));
       const span = Math.max(1, Number(cell.attribs.colspan ?? 1));
       const down = Math.max(1, Number(cell.attribs.rowspan ?? 1));
       if (down > 1) carried.set(out.length, { text, rows: down - 1 });
@@ -144,24 +147,24 @@ function tableGrid($: cheerio.CheerioAPI, rows: Element[]): string[][] {
   });
 }
 
-function textOf($: cheerio.CheerioAPI, el: Element): string {
-  const clone = $(el).clone();
+function textOf(dom: cheerio.CheerioAPI, el: Element): string {
+  const clone = dom(el).clone();
   clone.find("br").replaceWith("\n");
-  clone.find("p, li, dt, dd, div").each((_, child) => void $(child).prepend("\n"));
-  clone.find("img").each((_, img) => void $(img).replaceWith(imageText(img as Element)));
+  clone.find("p, li, dt, dd, div").each((_, child) => void dom(child).prepend("\n"));
+  clone.find("img").each((_, img) => void dom(img).replaceWith(imageText(img as Element)));
   return clone.text().split("\n").map(squash).filter(Boolean).join("\n");
 }
 
-const squash = (s: string) => s.replace(/\s+/g, " ").trim();
+const squash = (text: string) => text.replace(/\s+/g, " ").trim();
 
 function layout(units: Unit[]): { canonicalText: string; spans: [number, number][] } {
   const spans: [number, number][] = [];
   let cursor = 0;
-  for (const u of units) {
-    spans.push([cursor, cursor + u.text.length]);
-    cursor += u.text.length + SEP.length;
+  for (const unit of units) {
+    spans.push([cursor, cursor + unit.text.length]);
+    cursor += unit.text.length + SEP.length;
   }
-  return { canonicalText: units.map((u) => u.text).join(SEP), spans };
+  return { canonicalText: units.map((unit) => unit.text).join(SEP), spans };
 }
 
 type Packet =
@@ -177,12 +180,12 @@ function glued(prev: Unit, next: Unit): boolean {
 
 function packets(units: Unit[], spans: [number, number][]): Packet[] {
   const out: Packet[] = [];
-  units.forEach((u, i) => {
+  units.forEach((unit, i) => {
     const [start, end] = spans[i];
     const last = out[out.length - 1];
-    if (u.kind === "heading") out.push({ kind: "heading", unit: u, index: i, start });
-    else if (last?.kind === "content" && glued(units[i - 1], u)) last.end = end;
-    else out.push({ kind: "content", table: u.kind === "row", start, end });
+    if (unit.kind === "heading") out.push({ kind: "heading", unit: unit, index: i, start });
+    else if (last?.kind === "content" && glued(units[i - 1], unit)) last.end = end;
+    else out.push({ kind: "content", table: unit.kind === "row", start, end });
   });
   return out;
 }
@@ -192,6 +195,7 @@ interface OpenSection {
   level: number;
 }
 
+// eslint-disable-next-line max-lines-per-function -- full names (id-length) wrap two lines past the cap; split it when the logic next changes
 function buildRows(
   docId: string,
   text: string,
@@ -211,35 +215,38 @@ function buildRows(
     pending = null;
   };
 
-  for (const p of packets(units, spans)) {
-    if (p.kind === "heading") {
+  for (const packet of packets(units, spans)) {
+    if (packet.kind === "heading") {
       flush();
-      current().row.charEnd = p.start;
-      const u = p.unit;
-      const parent = [...sections].reverse().find((s) => s !== preamble && s.level < u.level!);
+      current().row.charEnd = packet.start;
+      const unit = packet.unit;
+      const parent = [...sections]
+        .reverse()
+        .find((sec) => sec !== preamble && sec.level < unit.level!);
       sections.push({
-        level: u.level!,
+        level: unit.level!,
         row: section(
           docId,
-          u.anchor ?? `section-${p.index}`,
-          u.text,
+          unit.anchor ?? `section-${packet.index}`,
+          unit.text,
           parent?.row.sectionId ?? null,
           sections.length,
-          p.start,
+          packet.start,
         ),
       });
       continue;
     }
-    const fits = pending && pending.table === p.table && p.end - pending.start <= MAX_BLOCK_CHARS;
-    if (fits) pending!.end = p.end;
+    const fits =
+      pending && pending.table === packet.table && packet.end - pending.start <= MAX_BLOCK_CHARS;
+    if (fits) pending!.end = packet.end;
     else {
       flush();
-      pending = { start: p.start, end: p.end, table: p.table };
+      pending = { start: packet.start, end: packet.end, table: packet.table };
     }
   }
   flush();
   current().row.charEnd = text.length;
-  return { sections: sections.map((s) => s.row), blocks };
+  return { sections: sections.map((sec) => sec.row), blocks };
 }
 
 function section(
@@ -268,15 +275,15 @@ function packBlock(
   range: { start: number; end: number; table: boolean },
   existing: ParsedDoc["blocks"],
 ): ParsedDoc["blocks"] {
-  const inSection = existing.filter((b) => b.sectionId === sec.sectionId).length;
-  return splitRange(text, range.start, range.end).map(([s, e], k) => ({
-    blockId: `${sec.sectionId}::b${String(inSection + k + 1).padStart(2, "0")}`,
+  const inSection = existing.filter((block) => block.sectionId === sec.sectionId).length;
+  return splitRange(text, range.start, range.end).map(([from, to], index) => ({
+    blockId: `${sec.sectionId}::b${String(inSection + index + 1).padStart(2, "0")}`,
     sectionId: sec.sectionId,
     pageNum: 1,
     blockType: range.table ? "table" : "paragraph",
-    ordinal: existing.length + k,
-    text: text.slice(s, e),
-    charStart: s,
-    charEnd: e,
+    ordinal: existing.length + index,
+    text: text.slice(from, to),
+    charStart: from,
+    charEnd: to,
   }));
 }

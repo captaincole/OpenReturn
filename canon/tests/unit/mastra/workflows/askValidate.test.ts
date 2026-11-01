@@ -5,13 +5,13 @@ import {
   type Passage,
 } from "../../../../src/mastra/workflows/ask/validate";
 
-const passage = (n: number, text: string): Passage => ({
-  blockId: `doc::sec::b0${n}`,
+const passage = (passageNum: number, text: string): Passage => ({
+  blockId: `doc::sec::b0${passageNum}`,
   docId: "doc",
   documentTitle: "Doc",
   format: "pdf",
   sectionHeading: "Section",
-  pageNum: n,
+  pageNum: passageNum,
   text,
 });
 
@@ -36,7 +36,7 @@ describe("validateAnswer", () => {
       passages,
     );
     expect(out.answer).toBe("Self-only is $4,300 [1]. Family is $8,550 [2]. Again [1].");
-    expect(out.citations.map((c) => [c.n, c.blockId])).toEqual([
+    expect(out.citations.map((citation) => [citation.n, citation.blockId])).toEqual([
       [1, "doc::sec::b02"],
       [2, "doc::sec::b03"],
     ]);

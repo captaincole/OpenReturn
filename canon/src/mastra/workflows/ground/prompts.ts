@@ -4,25 +4,28 @@ import { judge } from "../../judge";
 import type { EvidenceBundle, LoopCarrier } from "./schemas";
 
 export function decisionSummary(carrier: LoopCarrier) {
-  const d = carrier.decision;
+  const decision = carrier.decision;
   return {
-    decisionKey: d.decisionKey,
-    decision: d.decision,
-    rationale: d.rationale,
-    confidence: d.confidence,
-    dissentingConsiderations: d.dissentingConsiderations,
-    supportingFactKeys: d.supportingFactKeys,
+    decisionKey: decision.decisionKey,
+    decision: decision.decision,
+    rationale: decision.rationale,
+    confidence: decision.confidence,
+    dissentingConsiderations: decision.dissentingConsiderations,
+    supportingFactKeys: decision.supportingFactKeys,
   };
 }
 
-export async function formulateQueries(queryFormulator: Agent, c: LoopCarrier): Promise<string[]> {
-  const d = c.decision;
+export async function formulateQueries(
+  queryFormulator: Agent,
+  carrier: LoopCarrier,
+): Promise<string[]> {
+  const decision = carrier.decision;
   const prompt = [
     `Decision to ground:`,
-    `  decisionKey: ${d.decisionKey}`,
-    `  value: ${JSON.stringify(d.decision)}`,
-    `  rationale: ${d.rationale}`,
-    `  supportingFactKeys: ${d.supportingFactKeys.join(", ") || "(none)"}`,
+    `  decisionKey: ${decision.decisionKey}`,
+    `  value: ${JSON.stringify(decision.decision)}`,
+    `  rationale: ${decision.rationale}`,
+    `  supportingFactKeys: ${decision.supportingFactKeys.join(", ") || "(none)"}`,
     ``,
     `Emit 1–2 search queries that would surface the IRS guidance governing this kind of decision.`,
   ].join("\n");
@@ -36,27 +39,27 @@ export async function formulateQueries(queryFormulator: Agent, c: LoopCarrier): 
   return queries.slice(0, 2);
 }
 
-export function renderAssessPrompt(c: LoopCarrier): string {
+export function renderAssessPrompt(carrier: LoopCarrier): string {
   return [
     `Decision under review:`,
-    JSON.stringify(decisionSummary(c), null, 2),
+    JSON.stringify(decisionSummary(carrier), null, 2),
     ``,
     `Supporting facts (from tax_facts):`,
-    factLines(c.evidence!.facts),
+    factLines(carrier.evidence!.facts),
     ``,
-    `Retrieved IRS passages (top hits across ${c.evidence!.queriesUsed.length} query/queries):`,
-    blockLines(c.evidence!.irsBlocks),
+    `Retrieved IRS passages (top hits across ${carrier.evidence!.queriesUsed.length} query/queries):`,
+    blockLines(carrier.evidence!.irsBlocks),
     ``,
     `Assess the risk tier of this decision per your instructions.`,
   ].join("\n");
 }
 
-export function renderRulePrompt(c: LoopCarrier): string {
-  const evidence = c.evidence!;
-  const risk = c.riskAssessment!;
+export function renderRulePrompt(carrier: LoopCarrier): string {
+  const evidence = carrier.evidence!;
+  const risk = carrier.riskAssessment!;
   return [
     `Decision under review:`,
-    JSON.stringify(decisionSummary(c), null, 2),
+    JSON.stringify(decisionSummary(carrier), null, 2),
     ``,
     `Risk tier: ${risk.riskTier}`,
     `  rationale: ${risk.rationale}`,
@@ -68,13 +71,13 @@ export function renderRulePrompt(c: LoopCarrier): string {
     `Supporting facts (from tax_facts):`,
     factLines(evidence.facts),
     ``,
-    `Retrieved IRS passages (this iteration: ${c.iteration}, queries: ${evidence.queriesUsed.join(" | ")}):`,
+    `Retrieved IRS passages (this iteration: ${carrier.iteration}, queries: ${evidence.queriesUsed.join(" | ")}):`,
     blockLines(evidence.irsBlocks),
     ``,
-    c.needMoreReasons.length
-      ? `Previous iterations asked for more evidence with these reasons:\n${c.needMoreReasons.map((r, i) => `  ${i + 1}. ${r}`).join("\n")}\n`
+    carrier.needMoreReasons.length
+      ? `Previous iterations asked for more evidence with these reasons:\n${carrier.needMoreReasons.map((reason, i) => `  ${i + 1}. ${reason}`).join("\n")}\n`
       : "",
-    `You are on iteration ${c.iteration} of ${c.maxIterations}. Decide: commit to a verdict, or request more evidence (with suggested queries).`,
+    `You are on iteration ${carrier.iteration} of ${carrier.maxIterations}. Decide: commit to a verdict, or request more evidence (with suggested queries).`,
   ]
     .filter((line) => line !== "")
     .join("\n");
@@ -84,9 +87,9 @@ function factLines(facts: EvidenceBundle["facts"]): string {
   if (!facts.length) return "  (none)";
   return facts
     .map(
-      (f) =>
-        `  - ${f.key} (${f.category}): ${JSON.stringify(f.value)}` +
-        (f.sourceNote ? ` [source: ${f.sourceNote}]` : ""),
+      (fact) =>
+        `  - ${fact.key} (${fact.category}): ${JSON.stringify(fact.value)}` +
+        (fact.sourceNote ? ` [source: ${fact.sourceNote}]` : ""),
     )
     .join("\n");
 }
@@ -95,8 +98,8 @@ function blockLines(blocks: EvidenceBundle["irsBlocks"]): string {
   if (!blocks.length) return "  (no IRS passages retrieved)";
   return blocks
     .map(
-      (b) =>
-        `  [${b.blockId}] ${b.text.replace(/\s+/g, " ").slice(0, 600)}${b.text.length > 600 ? "…" : ""}`,
+      (block) =>
+        `  [${block.blockId}] ${block.text.replace(/\s+/g, " ").slice(0, 600)}${block.text.length > 600 ? "…" : ""}`,
     )
     .join("\n");
 }
