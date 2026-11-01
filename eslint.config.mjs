@@ -1,5 +1,5 @@
 /*
- * Four jobs: comment style, promise safety, size caps, engine money rules.
+ * Five jobs: comment style, names, promise safety, size caps, engine money rules.
  * Formatting is Prettier's job; correctness is tsc + the golden tests.
  */
 import stylistic from "@stylistic/eslint-plugin";
@@ -19,6 +19,8 @@ export default [
       ".claude/**",
       "**/dist/**",
       "**/next-env.d.ts",
+      /* Playwright report bundles (minified JS). */
+      "web/e2e/.run/**",
     ],
   },
   {
@@ -27,6 +29,8 @@ export default [
     plugins: { "@stylistic": stylistic },
     rules: {
       "@stylistic/multiline-comment-style": ["error", "starred-block"],
+      /* A name says what the value is; `_` (ignored) and `i` (index) are the only short names. */
+      "id-length": ["error", { min: 2, properties: "never", exceptions: ["_", "i"] }],
     },
   },
   /*
@@ -115,5 +119,14 @@ export default [
       "max-lines": "off",
       "max-lines-per-function": "off",
     },
+  },
+  {
+    /* scripts/lockScenario.ts writes these; its template emits short names. */
+    files: [
+      "engine/tests/scenarios/carter/expected.ts",
+      "engine/tests/scenarios/jordan/expected.ts",
+      "engine/tests/scenarios/tara/expected.ts",
+    ],
+    rules: { "id-length": "off" },
   },
 ];
