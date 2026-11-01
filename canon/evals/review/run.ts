@@ -1,20 +1,27 @@
 /*
- *   npx tsx --env-file=.env.development evals/review/run.ts <model-substring> [--full] [--runs=N] [--case=…] [--out=dir]   (from canon)
+ *   npx tsx --env-file=.env.development evals/review/run.ts <model-id> [--full] [--runs=N] [--case=…] [--out=dir]   (from canon)
  *
- * One model per run: the judges read JUDGE_MODEL when their module loads.
- * Memory grows with each review in one process, so for long runs start one
+ * One model per run. Memory grows with each review in one process, so for long runs start one
  * process per case with --case. Only a full run publishes the report; the
  * lite tier (the default) writes results.json only.
  */
+import { Mastra } from "@mastra/core";
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { getCorpusDb } from "../../src/db/libsql";
+import { groundDecision } from "../../src/mastra/workflows/ground";
+import { assessRiskAgent } from "../../src/mastra/workflows/ground/judges/assessRiskAgent";
+import { queryFormulator } from "../../src/mastra/workflows/ground/judges/queryFormulator";
+import { ruleAgent } from "../../src/mastra/workflows/ground/judges/ruleAgent";
 import type { GroundStepLog } from "../../src/mastra/workflows/ground/schemas";
+import { hitsAll } from "../lib/anyOf";
 import { modelsFromArgs, tierFromArgs, useModel } from "../lib/models";
 import { CASES, casesFor, type ReviewCase } from "./cases";
 import { verdictOk } from "./flow";
 import { publishReport, type ReviewResult } from "./report";
 
 const REPO = path.resolve(__dirname, "../../..");
+const OUT_DIR = path.join(REPO, ".scratch/evals/review");
 const YEAR = 2025;
 
 const ARGS = process.argv.slice(2);
@@ -22,25 +29,12 @@ const TIER = tierFromArgs(ARGS);
 const [model] = modelsFromArgs(ARGS);
 useModel("JUDGE", model);
 
-/* Imported after JUDGE_MODEL is set. */
-const deps = async () => {
-  const { Mastra } = await import("@mastra/core");
-  const { queryFormulator } =
-    await import("../../src/mastra/workflows/ground/judges/queryFormulator");
-  const { assessRiskAgent } =
-    await import("../../src/mastra/workflows/ground/judges/assessRiskAgent");
-  const { ruleAgent } = await import("../../src/mastra/workflows/ground/judges/ruleAgent");
-  const { groundDecision } = await import("../../src/mastra/workflows/ground");
-  const { getCorpusDb } = await import("../../src/db/libsql");
-  const mastra = new Mastra({ agents: { queryFormulator, assessRiskAgent, ruleAgent } });
-  return { mastra, groundDecision, getCorpusDb };
-};
-type Deps = Awaited<ReturnType<typeof deps>>;
+const mastra = new Mastra({ agents: { queryFormulator, assessRiskAgent, ruleAgent } });
 
 /* Fail loudly when a labeled block is gone (a parser change renumbers blocks). */
-async function checkAuthority(d: Deps) {
+async function checkAuthority() {
   const ids = [...new Set(CASES.flatMap((c) => c.authority.flat()))];
-  const res = await d.getCorpusDb().execute({
+  const res = await getCorpusDb().execute({
     sql: `SELECT block_id FROM ref_blocks WHERE block_id IN (${ids.map(() => "?").join(",")})`,
     args: ids,
   });
@@ -55,10 +49,7 @@ function retrievedBlocks(steps: GroundStepLog[]): Set<string> {
   return new Set([...json.matchAll(/"blockId":"([^"]+)"/g)].map((m) => m[1]));
 }
 
-const hitsAll = (groups: string[][], ids: Set<string>) =>
-  groups.every((g) => g.some((id) => ids.has(id)));
-
-async function evalCase(d: Deps, c: ReviewCase, run: number): Promise<ReviewResult> {
+async function evalCase(c: ReviewCase, run: number): Promise<ReviewResult> {
   const steps: GroundStepLog[] = [];
   const started = Date.now();
   const input = {
@@ -71,7 +62,7 @@ async function evalCase(d: Deps, c: ReviewCase, run: number): Promise<ReviewResu
     },
     facts: c.facts.map((f) => ({ ...f, sourceNote: f.sourceNote ?? null })),
   };
-  const out = await d.groundDecision(d.mastra, input, { steps }).catch((err: unknown) => ({
+  const out = await groundDecision(mastra, input, { steps }).catch((err: unknown) => ({
     verdict: "review_failed",
     reason: err instanceof Error ? err.message : String(err),
     citations: [] as { blockId: string }[],
@@ -106,12 +97,9 @@ const liteCase = (r: ReviewResult) => ({
 });
 
 async function main() {
-  const d = await deps();
-  await checkAuthority(d);
+  await checkAuthority();
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
-  const outDir =
-    ARGS.find((a) => a.startsWith("--out="))?.slice(6) ??
-    path.join(REPO, ".scratch/evals/review", runId);
+  const outDir = ARGS.find((a) => a.startsWith("--out="))?.slice(6) ?? path.join(OUT_DIR, runId);
   mkdirSync(outDir, { recursive: true });
   const caseFilter = ARGS.find((a) => a.startsWith("--case="))?.slice(7);
   const cases = casesFor(TIER).filter((c) => !caseFilter || c.name.includes(caseFilter));
@@ -119,7 +107,7 @@ async function main() {
   const results: ReviewResult[] = [];
   for (const c of cases)
     for (let run = 1; run <= model.runs; run++) {
-      const r = await evalCase(d, c, run);
+      const r = await evalCase(c, run);
       console.log(
         `  ${c.name} #${run}: ${r.verdict} (expected ${r.expectedVerdict}), cited ${r.citedAuthority ? "yes" : "no"}, ${(r.latencyMs / 1000).toFixed(0)}s`,
       );

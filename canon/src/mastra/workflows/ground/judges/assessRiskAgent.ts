@@ -33,5 +33,5 @@ export const assessRiskAgent = new Agent({
   id: "assessRiskAgent",
   name: "Risk Assessor",
   instructions,
-  model: modelFor("judge"),
+  model: () => modelFor("judge"),
 });

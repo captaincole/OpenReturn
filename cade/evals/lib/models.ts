@@ -19,7 +19,7 @@ const RUNS: Record<Tier, number> = { lite: 1, full: 5 };
 const PC = process.env.EVAL_PC_OLLAMA_URL;
 const HAIKU = "anthropic/claude-haiku-5-5";
 
-const MODELS: Omit<EvalModel, "runs">[] = [
+const ALL_MODELS: Omit<EvalModel, "runs">[] = [
   { label: "Haiku 5.5", id: HAIKU },
   /* On CUDA the plain tags resolve to Q4_K_M. */
   { label: "Gemma 4 26b QAT (4090)", id: "ollama/gemma4:26b-a4b-it-qat", url: PC },
@@ -29,7 +29,11 @@ const MODELS: Omit<EvalModel, "runs">[] = [
   { label: "Gemma 4 31b QAT (4090)", id: "ollama/gemma4:31b-it-qat", url: PC },
   { label: "Gemma 4 e4b (4090)", id: "ollama/gemma4:e4b", url: PC },
   { label: "Gemma 4 e2b (4090)", id: "ollama/gemma4:e2b", url: PC },
-].filter((m) => (m.id.startsWith("ollama/") ? m.url : process.env.ANTHROPIC_API_KEY));
+];
+
+const configured = (m: Omit<EvalModel, "runs">) =>
+  m.id.startsWith("ollama/") ? Boolean(m.url) : Boolean(process.env.ANTHROPIC_API_KEY);
+const MODELS = ALL_MODELS.filter(configured);
 
 const LITE = new Set([HAIKU, "ollama/gemma4:31b"]);
 const isLite = (m: Omit<EvalModel, "runs">) => LITE.has(m.id);
@@ -49,19 +53,27 @@ export const tierFromArgs = (argv: string[]): Tier => (argv.includes("--full") ?
 const NONE =
   "no eval model is configured: set ANTHROPIC_API_KEY for Haiku, or EVAL_PC_OLLAMA_URL for the 31b on the second machine";
 
-// An exact tag ("gemma4:26b") picks one model; any other filter matches a substring.
+function setupHint(m: Omit<EvalModel, "runs">): string {
+  if (configured(m)) return "";
+  return m.id.startsWith("ollama/") ? "  (set EVAL_PC_OLLAMA_URL)" : "  (set ANTHROPIC_API_KEY)";
+}
+
+function unknownModelError(ids: string[]): Error {
+  const list = ALL_MODELS.map((m) => `  ${m.id}${setupHint(m)}`).join("\n");
+  return new Error(`unknown or unconfigured model: ${ids.join(", ")}. Pass an exact id:\n${list}`);
+}
+
 export function modelsFromArgs(argv: string[]): EvalModel[] {
   const tier = tierFromArgs(argv);
-  const override = Number(argv.find((a) => a.startsWith("--runs="))?.slice(7)) || undefined;
-  const filters = argv.filter((a) => !a.startsWith("--"));
-  const exact = (f: string) => MODELS.filter((m) => m.id === f || m.id.endsWith(`/${f}`));
-  const loose = (f: string) => MODELS.filter((m) => m.id.includes(f) || m.label.includes(f));
-  const picked = filters.length
-    ? MODELS.filter((m) => filters.some((f) => (exact(f).length ? exact(f) : loose(f)).includes(m)))
+  const runsOverride = Number(argv.find((a) => a.startsWith("--runs="))?.slice(7)) || undefined;
+  const ids = argv.filter((a) => !a.startsWith("--"));
+  const unknown = ids.filter((id) => !MODELS.some((m) => m.id === id));
+  if (unknown.length) throw unknownModelError(unknown);
+  const picked = ids.length
+    ? MODELS.filter((m) => ids.includes(m.id))
     : MODELS.filter((m) => tier === "full" || isLite(m));
-  if (!picked.length)
-    throw new Error(filters.length ? `no configured model matches ${filters.join(", ")}` : NONE);
-  return picked.map((m) => ({ ...m, runs: m.url ? (override ?? RUNS[tier]) : 1 }));
+  if (!picked.length) throw new Error(NONE);
+  return picked.map((m) => ({ ...m, runs: m.url ? (runsOverride ?? RUNS[tier]) : 1 }));
 }
 
 /*

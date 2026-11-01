@@ -1,13 +1,16 @@
 /*
- *   npx tsx --env-file=.env.development evals/ask/run.ts <model-substring> [--full] [--runs=N] [--case=…] [--out=dir]   (from canon)
+ *   npx tsx --env-file=.env.development evals/ask/run.ts <model-id> [--full] [--runs=N] [--case=…] [--out=dir]   (from canon)
  *
- * One model per run: the judges read JUDGE_MODEL when their module loads.
- * For long runs, start one process per case with --case. Only a full run
+ * One model per run. For long runs, start one process per case with --case. Only a full run
  * publishes the report; the lite tier (the default) writes results.json only.
  */
+import { Mastra } from "@mastra/core";
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import type { AskStepLog } from "../../src/mastra/workflows/ask";
+import { getCorpusDb } from "../../src/db/libsql";
+import { answerQuestion, type AskStepLog } from "../../src/mastra/workflows/ask";
+import { askAnswerer } from "../../src/mastra/workflows/ask/judges/askAnswerer";
+import { askQueryFormulator } from "../../src/mastra/workflows/ask/judges/askQueryFormulator";
 import { modelsFromArgs, tierFromArgs, useModel } from "../lib/models";
 import { CASES, casesFor, type AskCase } from "./cases";
 import { correct } from "./flow";
@@ -15,29 +18,19 @@ import { publishReport, type AskResult } from "./report";
 import { scoreResult } from "./score";
 
 const REPO = path.resolve(__dirname, "../../..");
+const OUT_DIR = path.join(REPO, ".scratch/evals/ask");
 
 const ARGS = process.argv.slice(2);
 const TIER = tierFromArgs(ARGS);
 const [model] = modelsFromArgs(ARGS);
 useModel("JUDGE", model);
 
-/* Imported after JUDGE_MODEL is set. */
-const deps = async () => {
-  const { Mastra } = await import("@mastra/core");
-  const { askQueryFormulator } =
-    await import("../../src/mastra/workflows/ask/judges/askQueryFormulator");
-  const { askAnswerer } = await import("../../src/mastra/workflows/ask/judges/askAnswerer");
-  const { answerQuestion } = await import("../../src/mastra/workflows/ask");
-  const { getCorpusDb } = await import("../../src/db/libsql");
-  const mastra = new Mastra({ agents: { askQueryFormulator, askAnswerer } });
-  return { mastra, answerQuestion, getCorpusDb };
-};
-type Deps = Awaited<ReturnType<typeof deps>>;
+const mastra = new Mastra({ agents: { askQueryFormulator, askAnswerer } });
 
 /* Fail loudly when a labeled block is gone (a parser change renumbers blocks). */
-async function checkAuthority(d: Deps) {
+async function checkAuthority() {
   const ids = [...new Set(CASES.flatMap((c) => c.authority.flat()))];
-  const res = await d.getCorpusDb().execute({
+  const res = await getCorpusDb().execute({
     sql: `SELECT block_id FROM ref_blocks WHERE block_id IN (${ids.map(() => "?").join(",")})`,
     args: ids,
   });
@@ -52,11 +45,10 @@ function retrievedBlocks(steps: AskStepLog[]): Set<string> {
   return new Set([...json.matchAll(/"blockId":"([^"]+)"/g)].map((m) => m[1]));
 }
 
-async function evalCase(d: Deps, c: AskCase, run: number): Promise<AskResult> {
+async function evalCase(c: AskCase, run: number): Promise<AskResult> {
   const steps: AskStepLog[] = [];
   const started = Date.now();
-  const result = await d
-    .answerQuestion(d.mastra, { question: c.question, steps })
+  const result = await answerQuestion(mastra, { question: c.question, steps })
     .then((r) => ({ ...r, error: null as string | null }))
     .catch((err: unknown) => ({
       answer: "",
@@ -104,12 +96,9 @@ function logLine(c: AskCase, run: number, r: AskResult): string {
 }
 
 async function main() {
-  const d = await deps();
-  await checkAuthority(d);
+  await checkAuthority();
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
-  const outDir =
-    ARGS.find((a) => a.startsWith("--out="))?.slice(6) ??
-    path.join(REPO, ".scratch/evals/ask", runId);
+  const outDir = ARGS.find((a) => a.startsWith("--out="))?.slice(6) ?? path.join(OUT_DIR, runId);
   mkdirSync(outDir, { recursive: true });
   const caseFilter = ARGS.find((a) => a.startsWith("--case="))?.slice(7);
   const cases = casesFor(TIER).filter((c) => !caseFilter || c.name.includes(caseFilter));
@@ -117,7 +106,7 @@ async function main() {
   const results: AskResult[] = [];
   for (const c of cases)
     for (let run = 1; run <= model.runs; run++) {
-      const r = await evalCase(d, c, run);
+      const r = await evalCase(c, run);
       console.log(logLine(c, run, r));
       results.push(r);
       writeFileSync(

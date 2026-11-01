@@ -24,5 +24,5 @@ export const queryFormulator = new Agent({
   id: "queryFormulator",
   name: "Query Formulator",
   instructions,
-  model: modelFor("judge"),
+  model: () => modelFor("judge"),
 });

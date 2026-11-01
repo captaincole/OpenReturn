@@ -1,3 +1,4 @@
+import { anyOf } from "../lib/anyOf";
 import {
   blocks,
   CA540,
@@ -19,10 +20,10 @@ export const TIER_3: AskCase[] = [
       "I'm single, a California resident, with $260,000 of W-2 wages and no other income. Do I owe Additional Medicare Tax, and is my California exemption credit limited?",
     coverage: ["covered"],
     authority: [
-      ["irs-8959-inst-2025::sec::threshold-amounts-for-additional-medicare-tax::b01"],
+      anyOf("irs-8959-inst-2025::sec::threshold-amounts-for-additional-medicare-tax::b01"),
       CA_EXEMPTION_LIMIT,
     ],
-    facts: [["200,000"], ["0.9%", "540"], ["252,203"]],
+    facts: [anyOf("200,000"), anyOf("0.9%", "540"), anyOf("252,203")],
   },
   {
     name: "Early IRA distribution, federal + CA",
@@ -32,22 +33,19 @@ export const TIER_3: AskCase[] = [
       "I'm 45 and took $20,000 out of my traditional IRA in 2025. No exception applies. What additional tax do I owe on my federal and California returns?",
     coverage: ["covered"],
     authority: [
-      [
+      anyOf(
         "irs-5329-inst-2025::sec::part-i-additional-tax-on-early::b01",
         "irs-5329-inst-2025::sec::who-must-file::b02",
         "irs-pub-17-2025::sec::early-distributions::b01",
         "irs-pub-590b-2025::sec::additional-10-tax::b01",
         "irs-pub-590b-2025::sec::age-591-2-rule::b01",
-      ],
-      [
+      ),
+      anyOf(
         "ftb-pub-1005-2025::sec::tax-on-early-distributions::b01",
         "ca-3805p-inst-2025::sec::line-1-early-distributions-included-in-income::b01",
-      ],
+      ),
     ],
-    facts: [
-      ["10%", "2,000"],
-      ["2½%", "2.5%", "2 1/2%", "500"],
-    ],
+    facts: [anyOf("10%", "2,000"), anyOf("2½%", "2.5%", "2 1/2%", "500")],
   },
   {
     name: "Excess IRA contribution",
@@ -57,15 +55,15 @@ export const TIER_3: AskCase[] = [
       "I'm 40 and put $8,000 into my traditional IRA for 2025, and I haven't taken any of it out. What tax applies, and how much is it?",
     coverage: ["covered"],
     authority: [
-      [
+      anyOf(
         "irs-pub-590a-2025::sec::tax-on-excess-contributions::b01",
         "irs-pub-590a-2025::sec::excess-contributions-tax::b01",
         "irs-pub-590a-2025::sec::excess-contributions-withdrawn-by-due::b01",
         "irs-pub-17-2025::sec::excess-contributions::b01",
-      ],
+      ),
       IRA_LIMIT,
     ],
-    facts: [["7,000", "1,000"], ["6%"]],
+    facts: [anyOf("7,000", "1,000"), anyOf("6%")],
   },
   {
     name: "Rental loss, federal + CA",
@@ -75,12 +73,12 @@ export const TIER_3: AskCase[] = [
       "I actively manage a rental that lost $30,000 in 2025. My modified AGI is $120,000 and I have no other passive income. How much of the loss can I deduct on my federal return, and does California allow the same?",
     coverage: ["covered"],
     authority: [
-      [
+      anyOf(
         "irs-8582-inst-2025::sec::special-allowance-for-rental-real::b03",
         "irs-pub-925-2025::sec::rental-activities::b09",
         "irs-pub-925-2025::sec::rental-activities::b11",
-      ],
-      ["ca-3801-inst-2025::sec::s-corporations::b01", "ca-3801-inst-2025::sec::part-ii::b01"],
+      ),
+      anyOf("ca-3801-inst-2025::sec::s-corporations::b01", "ca-3801-inst-2025::sec::part-ii::b01"),
     ],
     /*
      * California allows the $25,000 active-participation allowance too (FTB
@@ -89,9 +87,9 @@ export const TIER_3: AskCase[] = [
      * an answer that reads that as "no allowance" is wrong.
      */
     facts: [
-      ["25,000"],
-      ["100,000", "15,000"],
-      [
+      anyOf("25,000"),
+      anyOf("100,000", "15,000"),
+      anyOf(
         "California allows",
         "California also allows",
         "California does allow",
@@ -102,7 +100,7 @@ export const TIER_3: AskCase[] = [
         "same $25,000",
         "California, the $25,000",
         "California purposes, the $25,000",
-      ],
+      ),
     ],
   },
   {
@@ -113,18 +111,18 @@ export const TIER_3: AskCase[] = [
       "We're married filing jointly, both work, have AGI of $90,000, and paid a California daycare $9,000 for our 3-year-old. What child care credit can we get on our federal and California returns?",
     coverage: ["covered"],
     authority: [
-      [
+      anyOf(
         ...blocks("irs-pub-503-2025::sec::dollar-limit", [1, 2]),
         ...blocks("irs-2441-inst-2025::sec::worksheet-for-2024-expenses-paid-in-2025", [1, 3]),
         "irs-pub-503-2025::sec::randall-s-reduced-dollar-limit::b01",
-      ],
-      [
+      ),
+      anyOf(
         "ca-3506-inst-2025::sec::line-9::b02",
         "ca-3506-inst-2025::sec::a-purpose::b01",
         `${CA540}line-40-nonrefundable-child-and-dependent-care-expenses-credit-code-232::b01`,
-      ],
+      ),
     ],
-    facts: [["3,000"], ["20%", "600"], ["34%", "204"]],
+    facts: [anyOf("3,000"), anyOf("20%", "600"), anyOf("34%", "204")],
   },
   {
     name: "$1M AGI safe harbor, federal vs CA",
@@ -135,12 +133,12 @@ export const TIER_3: AskCase[] = [
     coverage: ["covered"],
     authority: [
       FEDERAL_110,
-      [
+      anyOf(
         "ca-540es-inst-2025::sec::c-limit-on-the-use-of-prior-year-s-tax::b01",
         "ca-5805-inst-2025::sec::general-information::b01",
-      ],
+      ),
     ],
-    facts: [["110%", "110 percent"]],
+    facts: [anyOf("110%", "110 percent")],
   },
   {
     /*
@@ -158,16 +156,16 @@ export const TIER_3: AskCase[] = [
       "Do I need to pay taxes on my ISOs if I no longer live in California? I now live in Florida but I was working for a tech company in San Francisco when I earned them.",
     coverage: ["covered"],
     authority: [
-      [
+      anyOf(
         "ftb-pub-1004-2025::sec::qualifying-disposition-3::b01",
         "ftb-pub-1004-2025::sec::disqualifying-disposition-3::b01",
         "ftb-pub-1004-2025::sec::equity-based-compensation-summary-table::b01",
         "ftb-pub-1004-2025::sec::equity-based-compensation-summary-table::b02",
         "ftb-pub-1100-2025::sec::e-stock-options::b01",
-      ],
+      ),
     ],
     facts: [
-      [
+      anyOf(
         "performed services",
         "services were performed",
         "services performed",
@@ -177,8 +175,8 @@ export const TIER_3: AskCase[] = [
         "California-source",
         "CA source",
         "source in California",
-      ],
-      ["AMT", "alternative minimum tax"],
+      ),
+      anyOf("AMT", "alternative minimum tax"),
     ],
   },
   {
@@ -191,7 +189,13 @@ export const TIER_3: AskCase[] = [
     coverage: ["covered"],
     authority: [CA_GAINS],
     facts: [
-      ["regular income", "ordinary income", "no special rate", "same rate", "same as other income"],
+      anyOf(
+        "regular income",
+        "ordinary income",
+        "no special rate",
+        "same rate",
+        "same as other income",
+      ),
     ],
   },
   {
@@ -202,21 +206,18 @@ export const TIER_3: AskCase[] = [
       "I paid $3,000 of margin interest and had $2,000 of net investment income in 2025. I can deduct all $3,000 on both my federal and California returns, right?",
     coverage: ["covered"],
     authority: [
-      [
+      anyOf(
         "irs-4952-form-2025::sec::general-instructions::b01",
         "irs-pub-550-2025::sec::limit-on-deduction::b01",
-      ],
-      [
+      ),
+      anyOf(
         "ca-3526-inst-2025::sec::specific-line-instructions::b01",
         "ca-3526-inst-2025::sec::a-purpose::b01",
         "ca-540-sched-ca-inst-2025::sec::line-9-investment-interest::b01",
         "ca-540nr-booklet-2025::sec::line-9-investment-interest::b01",
-      ],
+      ),
     ],
-    facts: [
-      ["2,000", "net investment income"],
-      ["1,000", "carry", "carried"],
-    ],
+    facts: [anyOf("2,000", "net investment income"), anyOf("1,000", "carry", "carried")],
   },
   {
     name: "QSBS gain is tax-free in California too",
@@ -226,16 +227,16 @@ export const TIER_3: AskCase[] = [
       "I founded a C corporation in 2018 and sold my original shares in 2025 for a $2 million gain. QSBS makes that gain tax-free on my federal and California returns, right?",
     coverage: ["covered"],
     authority: [
-      [
+      anyOf(
         "irs-1040sd-inst-2025::sec::exclusion-of-gain-on-qualified::b01",
         "irs-pub-550-2025::sec::section-1202-exclusion::b01",
-      ],
-      [
+      ),
+      anyOf(
         "ca-540-sched-d-inst-2025::sec::line-1::b05",
         "ftb-pub-1001-2025::sec::capital-gains-or-losses::b05",
-      ],
+      ),
     ],
-    facts: [["100%"], ["does not conform", "doesn't conform", "not conform"]],
+    facts: [anyOf("100%"), anyOf("does not conform", "doesn't conform", "not conform")],
   },
   lite(
     insufficient(

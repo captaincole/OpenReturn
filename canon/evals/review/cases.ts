@@ -5,6 +5,8 @@
  * group when it cites ANY block in it.
  */
 
+import { anyOf, type AnyOf } from "../lib/anyOf";
+
 type Verdict = "accurate" | "inaccurate" | "needs_more_facts";
 
 export interface ReviewFact {
@@ -19,7 +21,7 @@ export interface ReviewCase {
   expectedVerdict: Verdict;
   facts: ReviewFact[];
   decision: { decisionKey: string; decision: unknown; rationale: string };
-  authority: string[][];
+  authority: AnyOf[];
   /* In the lite tier: two pairs both models judged the same way on every full run. */
   lite?: boolean;
 }
@@ -61,14 +63,14 @@ const scheduleHFacts: ReviewFact[] = [
   },
 ];
 const scheduleHAuthority = [
-  [
+  anyOf(
     "irs-1040sh-inst-2025::sec::part-i::b03",
     "irs-1040sh-inst-2025::sec::what-s-new::b01",
     "irs-1040sh-inst-2025::sec::who-needs-to-file-form-w-2-and::b01",
     "irs-1040sh-inst-2025::sec::specific-instructions::b02",
     "irs-1040sh-inst-2025::sec::who-needs-to-file-schedule-h::b01",
     "irs-1040-inst-2025::sec::line-9-2::b01",
-  ],
+  ),
 ];
 
 const MARCUS_W2 = "employer.helix-software";
@@ -93,11 +95,11 @@ const form8959Facts: ReviewFact[] = [
   },
 ];
 const form8959Authority = [
-  [
+  anyOf(
     "irs-8959-inst-2025::sec::who-must-file::b01",
     "irs-8959-inst-2025::sec::threshold-amounts-for-additional-medicare-tax::b01",
     "irs-1040-inst-2025::sec::line-11::b01",
-  ],
+  ),
 ];
 
 const taraW2 = (key: string, employerName: string, box1: number, box2: number, box17: number) => ({
@@ -123,10 +125,10 @@ const mustFileFacts: ReviewFact[] = [
   ...scheduleHFacts.filter((f) => f.key === HOUSEHOLD_W2),
 ];
 const mustFileAuthority = [
-  [
+  anyOf(
     "irs-1040-inst-2025::sec::chart-a-for-most-people::b01",
     "irs-1040-inst-2025::sec::chart-c-other-situations-when-you-must-file::b01",
-  ],
+  ),
 ];
 
 export const CASES: ReviewCase[] = [

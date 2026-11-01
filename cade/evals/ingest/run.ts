@@ -23,6 +23,7 @@ import { publishReport, type IngestResult } from "./report";
 import { scoreDoc } from "./score";
 
 const REPO = path.resolve(__dirname, "../../..");
+const OUT_DIR = path.join(REPO, ".scratch/evals/ingest");
 
 const INSTRUCTIONS = `You ingest tax documents. The user uploads one document. Read it and call the matching ingest tools with every value on it.
 
@@ -131,8 +132,7 @@ const liteCase = (r: IngestResult) => ({
 async function main() {
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
   const outDir =
-    process.argv.find((a) => a.startsWith("--out="))?.slice(6) ??
-    path.join(REPO, ".scratch/evals/ingest", runId);
+    process.argv.find((a) => a.startsWith("--out="))?.slice(6) ?? path.join(OUT_DIR, runId);
   mkdirSync(outDir, { recursive: true });
   const docFilter = process.argv.find((a) => a.startsWith("--doc="))?.slice(6);
   const tier = tierFromArgs(process.argv);
