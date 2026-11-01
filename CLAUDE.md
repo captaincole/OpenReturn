@@ -46,7 +46,7 @@ engine/                          # @openreturn/engine — THE FORM ENGINE. Pure,
 │                                  next to its bindings.ts), worksheets, PDF fill.
 │                                  Boundary enforced by tests/unit/boundary.test.ts.
 ├── tests/                       # the engine's test pyramid: unit/, integration/, golden/, scenarios/
-├── scripts/                     # renderScenario, lockScenario, compareFiled
+├── scripts/                     # renderScenario, draftExpected, compareFiled
 ├── paths.ts                     # on-disk locations for offline tooling
 ├── README.md                    # contributor guide; public API = package.json "exports"
 └── builder/                     # @openreturn/builder — dev-time tools that build the engine's assets:
@@ -327,7 +327,7 @@ Falls back gracefully to keyword-only (searching always works; semantic quality 
 
 ### Operator CLIs and inspection scripts
 
-**Must use** the `corpus` skill for `npm run corpus`, and the `engine-scripts` skill (`.claude/skills/engine-scripts/SKILL.md`) for `npm run form-engine`, the engine's scenario scripts (`renderScenario`, `lockScenario`, `compareFiled`) and Cade's review diagnostics (`smoke:review`, `inspectLastReview`). All run from the repo root; `--` passes args through both npm layers.
+**Must use** the `corpus` skill for `npm run corpus`, and the `engine-scripts` skill (`.claude/skills/engine-scripts/SKILL.md`) for `npm run form-engine`, the engine's scenario scripts (`renderScenario`, `draftExpected`, `compareFiled`) and Cade's review diagnostics (`smoke:review`, `inspectLastReview`). All run from the repo root; `--` passes args through both npm layers.
 
 ### Lessons from this build (read before changing the pipeline)
 

@@ -37,7 +37,7 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
   - `alejandro` — adds 1099-INT/DIV investment income
   - `marcus` — adds capital gains (8949 / Schedule D)
   - `jordan` — high income: HSA, RSU and crypto sales, 401(k) rollovers,
-    1099-MISC (locked engine output, see `../scripts/lockScenario.ts`)
+    1099-MISC (locked engine output, drafted by `../scripts/draftExpected.ts`)
   - `carter` — **unverified**: IRS ATS test scenario 8 moved to CA. MFS,
     age 65+, Roth and rollover 1099-Rs, capital gain distribution, Social
     Security. No answer key: hand-checked, locked engine output
