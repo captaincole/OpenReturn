@@ -163,9 +163,6 @@ export function register(): void {
         "No Schedule K-1 (Form 1041) ingestion yet for box 11 code A excess deductions.",
       "1.line.24z_type": "No write-in other-adjustment scenario or facts yet.",
       "1.line.24z": "No write-in other-adjustment scenario or facts yet.",
-    },
-
-    todos: {
       "1.line.18":
         "confidence=medium: Sum of 1099-INT box 2 (early withdrawal penalty) across accounts.",
     },

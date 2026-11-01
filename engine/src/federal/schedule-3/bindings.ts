@@ -89,7 +89,5 @@ export function register(): void {
       "0.line.14": "Total of lines 13a–13z, which are not modeled.",
       "0.line.15": "Total of lines 9–14, which are not modeled.",
     },
-
-    todos: {},
   });
 }

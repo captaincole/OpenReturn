@@ -287,7 +287,5 @@ export function register(): void {
       "3.line.32a": "Joint occupants of one home: no scenario shares a home's credit yet.",
       "3.line.32b": "Condominium or cooperative fractional share: no scenario yet.",
     },
-
-    todos: {},
   });
 }

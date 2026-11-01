@@ -193,9 +193,6 @@ export function register(): void {
         "Section 199A(g) DPAD from an agricultural/horticultural cooperative (Form 1099-PATR). We don't ingest cooperative patron data and have no scenario for it.",
       "1.line.40":
         "Line 40 is min(line 28 + line 29, 0), the REIT/PTP loss carried forward. fromFields only supports a floor, not a ceiling at 0, and we don't ingest PTP losses or prior-year carryforwards.",
-    },
-
-    todos: {
       "0.line.3_a":
         "confidence=medium: Line 2 Column A multiplied by 0.20 (fractional sign used as multiplier).",
       "0.line.3_b":

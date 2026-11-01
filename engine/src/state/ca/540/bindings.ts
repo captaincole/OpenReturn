@@ -543,8 +543,6 @@ export function register(): void {
       "signing.third_party_designee_phone":
         "Third-party designee block — no designee ingestion scenario built yet.",
     },
-
-    todos: {},
   });
 }
 

@@ -80,7 +80,7 @@ export const workflowInputSchema = z.object({
   taxYear: z.number().int(),
   catalogPath: z.string(),
   outputPath: z.string(),
-  /** Bindings below this go to `todos` for human review. */
+  /** Bindings below this go to `unsupported` for human review. */
   minConfidence: confidenceSchema.default("high"),
 });
 
@@ -107,7 +107,6 @@ export const workflowOutputSchema = z.object({
   outputPath: z.string(),
   fieldCount: z.number().int(),
   emittedCount: z.number().int(),
-  todoCount: z.number().int(),
   unsupportedCount: z.number().int(),
   unboundCount: z.number().int(),
   ruleBreakdown: z.record(z.string(), z.number().int()),

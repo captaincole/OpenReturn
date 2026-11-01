@@ -167,7 +167,5 @@ export function register(): void {
       "1.line.25":
         "Part II/III (FUTA tax, lines 10–27) is not modeled. It applies when line 9 is Yes.",
     },
-
-    todos: {},
   });
 }
