@@ -9,6 +9,8 @@ PolicyEngine-US (github.com/PolicyEngine/policyengine-us) is an open policy simu
 
 ## Where it helps, and where it does not
 
+It starts later in the chain than we do. Its inputs are often amounts we compute from documents (taxable pension income, the HSA deduction, net capital gains), so it can check the back half of the return (AGI to total tax) but not the front half (documents to income lines).
+
 - **Helps:** constants by year (brackets, thresholds, phase-outs, OBBBA changes). Its parameter files cite the IRC section and often the form line. It also gives a second reading of a formula: a rule it has and we lack (the capital loss limit, the NIIT floor) points at a gap.
 - **Does not help:** form lines and per-line whole-dollar rounding, per-lot Form 8949, Schedule B, Schedule H, elections (the HSA last-month rule), or advance premium tax credit. Some variables are bare inputs with no formula, for example the HSA deduction. Where it has no formula, it cannot check ours.
 - **It follows the statute when the statute and a form disagree.** We fill the form, so the form's text decides for us. Name such a difference as a source conflict, not a bug on either side.
