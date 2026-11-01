@@ -85,18 +85,18 @@ function convertThreadMessages(
   }>,
 ): ChatMessage[] {
   const converted: ChatMessage[] = [];
-  for (const m of messages) {
-    if (m.role !== "user" && m.role !== "assistant") continue;
-    const parts = m.content?.parts ?? [];
+  for (const message of messages) {
+    if (message.role !== "user" && message.role !== "assistant") continue;
+    const parts = message.content?.parts ?? [];
     const text = parts
-      .filter((p): p is { type: "text"; text: string } => p.type === "text")
-      .map((p) => p.text)
+      .filter((part): part is { type: "text"; text: string } => part.type === "text")
+      .map((part) => part.text)
       .join("");
-    const attachmentName = m.content?.experimental_attachments?.[0]?.name ?? undefined;
+    const attachmentName = message.content?.experimental_attachments?.[0]?.name ?? undefined;
     if (!text && !attachmentName) continue;
     converted.push({
-      id: m.id,
-      role: m.role,
+      id: message.id,
+      role: message.role,
       content: text || (attachmentName ? `Uploaded ${attachmentName}` : ""),
       attachmentName,
     });
@@ -152,8 +152,10 @@ async function streamTurn(
     onChunk: async (chunk) => {
       if (chunk.type === "text-delta") {
         const delta = (chunk.payload as { text: string }).text;
-        ctx.setMessages((m) =>
-          m.map((msg) => (msg.id === assistantId ? { ...msg, content: msg.content + delta } : msg)),
+        ctx.setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === assistantId ? { ...msg, content: msg.content + delta } : msg,
+          ),
         );
       }
     },
@@ -170,7 +172,7 @@ async function runTurn(ctx: ChatCtx, text: string, file: File | undefined, assis
     }
     await streamTurn(ctx, payload, freshUserId, assistantId);
     await ctx.refreshState();
-    ctx.setTurnTick((t) => t + 1);
+    ctx.setTurnTick((tick) => tick + 1);
   } catch (err) {
     const message =
       err instanceof UnauthorizedError
@@ -178,8 +180,8 @@ async function runTurn(ctx: ChatCtx, text: string, file: File | undefined, assis
         : err instanceof Error
           ? err.message
           : "Something went wrong.";
-    ctx.setMessages((m) =>
-      m.map((msg) => (msg.id === assistantId ? { ...msg, content: `[${message}]` } : msg)),
+    ctx.setMessages((prev) =>
+      prev.map((msg) => (msg.id === assistantId ? { ...msg, content: `[${message}]` } : msg)),
     );
     if (err instanceof UnauthorizedError) {
       await ctx.onUnauthorized();
@@ -204,7 +206,7 @@ async function sendChatImpl(ctx: ChatCtx, sendOpts: SendChatOpts): Promise<void>
     attachmentName: file?.name,
   };
   const assistantMsg: ChatMessage = { id: freshId("a"), role: "assistant", content: "" };
-  ctx.setMessages((m) => [...m, userMsg, assistantMsg]);
+  ctx.setMessages((prev) => [...prev, userMsg, assistantMsg]);
 
   if (file && !sendOpts.skipUpload) {
     uploadDocument(file).catch((err) => {
@@ -249,7 +251,7 @@ export function useCadeChat(opts: {
     setMessages,
     cadeBusy,
     turnTick,
-    bumpTurn: () => setTurnTick((t) => t + 1),
+    bumpTurn: () => setTurnTick((tick) => tick + 1),
     sendChat: (sendOpts) => sendChatImpl(ctx, sendOpts),
     loadChatHistory: () => loadChatHistoryImpl(ctx),
   };

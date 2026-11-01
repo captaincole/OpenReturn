@@ -15,8 +15,8 @@ export default async function HomeHome() {
   const profile = deriveProfile(session);
 
   const returns = await listOwnerReturns(session.userId);
-  const hasCurrentYear = returns.some((r) => r.year === CURRENT_TAX_YEAR);
-  const hasAnyFiledReturn = returns.some((r) => r.state === "filed");
+  const hasCurrentYear = returns.some((taxReturn) => taxReturn.year === CURRENT_TAX_YEAR);
+  const hasAnyFiledReturn = returns.some((taxReturn) => taxReturn.state === "filed");
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-bg-base text-ink-primary">

@@ -30,10 +30,17 @@ function loadE2eDefaults() {
 loadE2eDefaults();
 
 const ROLES = ["CADE", "JUDGE"].filter((role) => process.env[`E2E_${role}_MODEL`]);
-const roleKeys = ROLES.flatMap((r) => [`${r}_MODEL`, `${r}_MODEL_URL`, `${r}_MODEL_API_KEY`]);
-const roleOverrides = ROLES.flatMap((r) => {
-  const url = process.env[`E2E_${r}_MODEL_URL`];
-  return [`${r}_MODEL=${process.env[`E2E_${r}_MODEL`]}`, ...(url ? [`${r}_MODEL_URL=${url}`] : [])];
+const roleKeys = ROLES.flatMap((role) => [
+  `${role}_MODEL`,
+  `${role}_MODEL_URL`,
+  `${role}_MODEL_API_KEY`,
+]);
+const roleOverrides = ROLES.flatMap((role) => {
+  const url = process.env[`E2E_${role}_MODEL_URL`];
+  return [
+    `${role}_MODEL=${process.env[`E2E_${role}_MODEL`]}`,
+    ...(url ? [`${role}_MODEL_URL=${url}`] : []),
+  ];
 });
 
 function agentEnvFile() {

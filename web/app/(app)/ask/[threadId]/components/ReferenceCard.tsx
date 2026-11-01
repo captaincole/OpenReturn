@@ -4,8 +4,8 @@ import { citationUrl, type AskCitation } from "@/lib/ask";
 import { cn } from "@/lib/cn";
 import { useState } from "react";
 
-export function refAnchorId(turnId: string, n: number): string {
-  return `ref-${turnId}-${n}`;
+export function refAnchorId(turnId: string, citationNum: number): string {
+  return `ref-${turnId}-${citationNum}`;
 }
 
 export function ReferenceCard({
@@ -50,7 +50,7 @@ export function ReferenceCard({
         </div>
       </div>
       <blockquote
-        onClick={() => setExpanded((v) => !v)}
+        onClick={() => setExpanded((prev) => !prev)}
         title={expanded ? "Show less" : "Show more"}
         className={cn(
           "mt-2.5 cursor-pointer border-l-2 border-border-strong pl-2.5 text-[12px] leading-relaxed text-ink-secondary",

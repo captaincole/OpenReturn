@@ -44,11 +44,12 @@ export function note(text: string): void {
   notes.push(text);
 }
 
-export const failedStages = () => results.filter((r) => !r.ok).map((r) => `${r.kind}: ${r.name}`);
+export const failedStages = () =>
+  results.filter((result) => !result.ok).map((result) => `${result.kind}: ${result.name}`);
 
 function verdict(testError: string | undefined): string {
-  const failed = results.filter((r) => !r.ok);
-  if (failed.some((r) => r.kind === "plumbing")) return "FAIL (plumbing)";
+  const failed = results.filter((result) => !result.ok);
+  if (failed.some((result) => result.kind === "plumbing")) return "FAIL (plumbing)";
   if (failed.length > 0) return "FAIL (model — run again before you debug)";
   return testError ? "FAIL (test error)" : "PASS";
 }
@@ -65,9 +66,10 @@ function models(): string {
 }
 
 export function writeSummary(opts: { durationMs: number; testError?: string }): void {
-  const rel = (p: string) => relative(resolve(__dirname, "../.."), join(RUN_DIR, p));
+  const rel = (file: string) => relative(resolve(__dirname, "../.."), join(RUN_DIR, file));
   const rows = results.map(
-    (r) => `| ${r.ok ? "pass" : "**FAIL**"} | ${r.kind} | ${r.name} | ${r.detail} |`,
+    (result) =>
+      `| ${result.ok ? "pass" : "**FAIL**"} | ${result.kind} | ${result.name} | ${result.detail} |`,
   );
   const lines = [
     `# Alex E2E — ${verdict(opts.testError)}`,
@@ -81,7 +83,7 @@ export function writeSummary(opts: { durationMs: number; testError?: string }): 
     ...rows,
     "",
     ...(opts.testError ? ["## Test error", "", "```", opts.testError, "```", ""] : []),
-    ...(notes.length ? ["## Notes", "", ...notes.map((n) => `- ${n}`), ""] : []),
+    ...(notes.length ? ["## Notes", "", ...notes.map((line) => `- ${line}`), ""] : []),
     "## Files",
     "",
     `- Transcript: ${rel("transcript.md")}`,

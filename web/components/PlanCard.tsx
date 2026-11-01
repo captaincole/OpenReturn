@@ -24,11 +24,11 @@ export function PlanCard({ plan }: PlanCardProps) {
    */
   useEffect(() => {
     setDisplay((prev) => {
-      const incomingById = new Map(plan.map((p) => [p.id, p]));
+      const incomingById = new Map(plan.map((item) => [item.id, item]));
       const next: DisplayItem[] = [];
 
       for (const incoming of plan) {
-        const wasLeaving = prev.find((p) => p.id === incoming.id)?.leaving;
+        const wasLeaving = prev.find((item) => item.id === incoming.id)?.leaving;
         if (wasLeaving) {
           continue;
         }
@@ -60,7 +60,7 @@ export function PlanCard({ plan }: PlanCardProps) {
   function scheduleRemoval(id: string) {
     if (removalTimers.current.has(id)) return;
     const timer = setTimeout(() => {
-      setDisplay((prev) => prev.filter((p) => p.id !== id));
+      setDisplay((prev) => prev.filter((item) => item.id !== id));
       removalTimers.current.delete(id);
     }, FADE_OUT_MS);
     removalTimers.current.set(id, timer);
@@ -70,12 +70,12 @@ export function PlanCard({ plan }: PlanCardProps) {
   const timersAtCleanup = removalTimers.current;
   useEffect(() => {
     return () => {
-      for (const t of timersAtCleanup.values()) clearTimeout(t);
+      for (const timer of timersAtCleanup.values()) clearTimeout(timer);
       timersAtCleanup.clear();
     };
   }, [timersAtCleanup]);
 
-  const activeCount = display.filter((d) => !d.leaving).length;
+  const activeCount = display.filter((item) => !item.leaving).length;
   const isEmpty = display.length === 0;
 
   return (

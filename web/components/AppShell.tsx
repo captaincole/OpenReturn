@@ -46,9 +46,9 @@ interface AppShellContextValue {
 const AppShellContext = createContext<AppShellContextValue | null>(null);
 
 export function useAppShell(): AppShellContextValue {
-  const v = useContext(AppShellContext);
-  if (!v) throw new Error("useAppShell must be used inside <AppShell>");
-  return v;
+  const context = useContext(AppShellContext);
+  if (!context) throw new Error("useAppShell must be used inside <AppShell>");
+  return context;
 }
 
 export function AppShell({
@@ -173,18 +173,18 @@ function MobileTabBar({
   ];
   return (
     <nav className="relative z-30 flex h-14 shrink-0 border-t border-border-subtle bg-bg-subtle/95 backdrop-blur-sm lg:hidden">
-      {tabs.map((t) => (
+      {tabs.map((tab) => (
         <button
-          key={t.id}
-          onClick={() => onChange(t.id)}
+          key={tab.id}
+          onClick={() => onChange(tab.id)}
           className={cn(
             "relative flex flex-1 flex-col items-center justify-center gap-0.5",
-            value === t.id ? "text-ink-primary" : "text-ink-muted",
+            value === tab.id ? "text-ink-primary" : "text-ink-muted",
           )}
         >
-          <span className="text-lg leading-none">{t.icon}</span>
-          <span className="text-[10px] tracking-wider uppercase">{t.label}</span>
-          {busy && t.id === "activity" && (
+          <span className="text-lg leading-none">{tab.icon}</span>
+          <span className="text-[10px] tracking-wider uppercase">{tab.label}</span>
+          {busy && tab.id === "activity" && (
             <span className="absolute top-1.5 right-[30%] h-1.5 w-1.5 animate-pulse-soft rounded-full bg-warn" />
           )}
         </button>

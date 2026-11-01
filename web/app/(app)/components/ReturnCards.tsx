@@ -22,7 +22,7 @@ export function ReturnsSection({
     <Section
       title="Tax returns"
       right={
-        returns.some((r) => r.state === "filed") ? (
+        returns.some((taxReturn) => taxReturn.state === "filed") ? (
           <button className="text-sm text-ink-secondary hover:text-ink-primary">
             View archive →
           </button>
@@ -30,8 +30,8 @@ export function ReturnsSection({
       }
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {returns.map((r) => (
-          <ReturnCard key={r.filingId} ret={r} />
+        {returns.map((taxReturn) => (
+          <ReturnCard key={taxReturn.filingId} ret={taxReturn} />
         ))}
         {hasCurrentYear ? <NewReturnTile /> : <StartReturnTile />}
       </div>

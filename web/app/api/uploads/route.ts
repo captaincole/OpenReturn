@@ -10,10 +10,10 @@ const ULID_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 function ulid(): string {
   const time = Date.now();
   let timeStr = "";
-  let t = time;
+  let remaining = time;
   for (let i = 9; i >= 0; i--) {
-    timeStr = ULID_ALPHABET[t % 32] + timeStr;
-    t = Math.floor(t / 32);
+    timeStr = ULID_ALPHABET[remaining % 32] + timeStr;
+    remaining = Math.floor(remaining / 32);
   }
   const rand = new Uint8Array(16);
   crypto.getRandomValues(rand);

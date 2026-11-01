@@ -12,7 +12,9 @@ const SESSION_COOKIE = "openreturn_session";
 const PUBLIC_PATHS = ["/login", "/setup", "/api/auth"];
 
 function isPublic(pathname: string): boolean {
-  return PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`));
+  return PUBLIC_PATHS.some(
+    (publicPath) => pathname === publicPath || pathname.startsWith(`${publicPath}/`),
+  );
 }
 
 /*

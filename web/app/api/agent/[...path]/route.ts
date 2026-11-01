@@ -43,9 +43,9 @@ async function forward(
   });
 
   const responseHeaders = new Headers();
-  for (const h of ["content-type", "cache-control", "transfer-encoding"]) {
-    const v = upstream.headers.get(h);
-    if (v) responseHeaders.set(h, v);
+  for (const header of ["content-type", "cache-control", "transfer-encoding"]) {
+    const value = upstream.headers.get(header);
+    if (value) responseHeaders.set(header, value);
   }
   return new Response(upstream.body, {
     status: upstream.status,

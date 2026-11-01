@@ -19,7 +19,7 @@ export default async function ReturnLayout({
   if (!session) redirect("/login");
 
   const returns = await listOwnerReturns(session.userId);
-  const activeReturn = returns.find((r) => r.year === year);
+  const activeReturn = returns.find((taxReturn) => taxReturn.year === year);
   if (!activeReturn) redirect("/");
 
   const profile = deriveProfile(session);

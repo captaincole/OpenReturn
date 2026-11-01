@@ -11,7 +11,7 @@ function deriveFromEmail(email: string | null): string {
   if (!local) return "there";
   return local
     .replace(/[._-]+/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .replace(/\b\w/g, (char) => char.toUpperCase())
     .trim();
 }
 

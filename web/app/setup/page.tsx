@@ -14,8 +14,8 @@ export default function SetupPage() {
 
   const canSubmit = displayName.trim() && email.trim() && password.length >= 8 && !submitting;
 
-  async function onSubmit(e: FormEvent) {
-    e.preventDefault();
+  async function onSubmit(event: FormEvent) {
+    event.preventDefault();
     if (!canSubmit) return;
     if (password !== confirm) {
       setError("Passwords don't match.");
@@ -60,11 +60,11 @@ export default function SetupPage() {
           </p>
         </div>
 
-        <form onSubmit={(e) => void onSubmit(e)} className="space-y-3">
+        <form onSubmit={(event) => void onSubmit(event)} className="space-y-3">
           <input
             type="text"
             value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
+            onChange={(event) => setDisplayName(event.target.value)}
             placeholder="Your name"
             autoFocus
             autoComplete="name"
@@ -73,7 +73,7 @@ export default function SetupPage() {
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
             placeholder="Email (used on your tax forms)"
             autoComplete="email"
             className="input-base"
@@ -81,7 +81,7 @@ export default function SetupPage() {
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
             placeholder="Password (8+ characters)"
             autoComplete="new-password"
             className="input-base"
@@ -89,7 +89,7 @@ export default function SetupPage() {
           <input
             type="password"
             value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
+            onChange={(event) => setConfirm(event.target.value)}
             placeholder="Confirm password"
             autoComplete="new-password"
             className="input-base"

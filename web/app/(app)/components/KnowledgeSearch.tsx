@@ -11,8 +11,8 @@ export function KnowledgeSearch() {
   return (
     <section aria-label="Tax code search">
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
+        onSubmit={(event) => {
+          event.preventDefault();
           void submit(question);
         }}
         className="card flex items-center gap-3 px-5 py-4 transition-colors focus-within:border-accent/60"
@@ -21,7 +21,7 @@ export function KnowledgeSearch() {
         <input
           type="search"
           value={question}
-          onChange={(e) => setQuestion(e.target.value)}
+          onChange={(event) => setQuestion(event.target.value)}
           disabled={busy}
           placeholder="Ask the tax code — e.g. can I deduct my home office?"
           className="min-w-0 flex-1 bg-transparent text-[15px] text-ink-primary placeholder:text-ink-muted focus:outline-none"

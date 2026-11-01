@@ -9,8 +9,8 @@ export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function onSubmit(e: FormEvent) {
-    e.preventDefault();
+  async function onSubmit(event: FormEvent) {
+    event.preventDefault();
     if (!password || submitting) return;
     setSubmitting(true);
     setError(null);
@@ -42,11 +42,11 @@ export default function LoginPage() {
           <p className="text-sm text-ink-secondary">Enter your password to unlock this instance.</p>
         </div>
 
-        <form onSubmit={(e) => void onSubmit(e)} className="space-y-3">
+        <form onSubmit={(event) => void onSubmit(event)} className="space-y-3">
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
             placeholder="Password"
             autoFocus
             autoComplete="current-password"

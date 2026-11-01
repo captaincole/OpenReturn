@@ -46,9 +46,9 @@ function verifyToken(token: string, secret: string): string | null {
   const [payload, sig] = token.split(".");
   if (!payload || !sig) return null;
   const expected = sign(payload, secret);
-  const a = Buffer.from(sig);
-  const b = Buffer.from(expected);
-  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  const sigBuf = Buffer.from(sig);
+  const expectedBuf = Buffer.from(expected);
+  if (sigBuf.length !== expectedBuf.length || !timingSafeEqual(sigBuf, expectedBuf)) return null;
   try {
     const parsed = JSON.parse(Buffer.from(payload, "base64url").toString()) as {
       uid?: string;
