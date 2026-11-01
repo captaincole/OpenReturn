@@ -53,7 +53,7 @@ describe("callCanon", () => {
   it("rejects a result that does not match the schema as a tool error", async () => {
     fakeTools = { run_ground: { execute: async () => ({ result: { verdict: 7 } }) } };
     const err = await callCanon("run_ground", {}, z.object({ verdict: z.string() })).catch(
-      (e: unknown) => e,
+      (caught: unknown) => caught,
     );
     expect((err as Error).name).toBe("CanonToolError");
     expect((err as Error).message).toContain("unexpected shape");
@@ -63,7 +63,7 @@ describe("callCanon", () => {
     fakeTools = {
       run_ground: { execute: async () => failed("ground failed: rule: no structured output") },
     };
-    const err = await callCanon("run_ground", {}, z.unknown()).catch((e: unknown) => e);
+    const err = await callCanon("run_ground", {}, z.unknown()).catch((caught: unknown) => caught);
     expect((err as Error).name).toBe("CanonToolError");
     expect((err as Error).message).toContain("rule: no structured output");
     expect(isCanonUnreachable(err)).toBe(false);
@@ -71,7 +71,7 @@ describe("callCanon", () => {
 
   it("is unreachable when the client cannot list tools, and tries again next time", async () => {
     listToolsError = new Error("fetch failed");
-    const err = await callCanon("run_ask", {}, z.unknown()).catch((e: unknown) => e);
+    const err = await callCanon("run_ask", {}, z.unknown()).catch((caught: unknown) => caught);
     expect(isCanonUnreachable(err)).toBe(true);
 
     listToolsError = undefined;
@@ -89,7 +89,7 @@ describe("callCanon", () => {
         },
       },
     };
-    const err = await callCanon("run_ask", {}, z.unknown()).catch((e: unknown) => e);
+    const err = await callCanon("run_ask", {}, z.unknown()).catch((caught: unknown) => caught);
     expect(isCanonUnreachable(err)).toBe(true);
   });
 });

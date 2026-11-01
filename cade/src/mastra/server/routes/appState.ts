@@ -30,12 +30,12 @@ async function readCadePlan(threadId: string): Promise<PlanItem[]> {
 
 export const appStateRoute = registerApiRoute("/app/state", {
   method: "GET",
-  handler: async (c) => {
-    const requestContext = c.get("requestContext");
+  handler: async (ctx) => {
+    const requestContext = ctx.get("requestContext");
     const userId = requestContext?.get(MASTRA_RESOURCE_ID_KEY) as string | undefined;
     const authEmail =
       (requestContext?.get(REQUEST_CONTEXT_KEYS.userEmail) as string | undefined) ?? null;
-    if (!userId) return c.json({ error: "unauthorized" }, 401);
+    if (!userId) return ctx.json({ error: "unauthorized" }, 401);
 
     const filing = await resolveOwnerFilingForYear(userId, DEMO_TAX_YEAR);
     const scope = { userId, filingId: filing.id };
@@ -47,16 +47,16 @@ export const appStateRoute = registerApiRoute("/app/state", {
 
     /* listDocuments returns newest first, so the first draft seen per formId is the latest. */
     const latestByForm = new Map<string, UserDocumentRow>();
-    for (const d of drafts) {
-      const formId = (d.metadata as { formId?: string } | null)?.formId;
-      if (formId && !latestByForm.has(formId)) latestByForm.set(formId, d);
+    for (const draft of drafts) {
+      const formId = (draft.metadata as { formId?: string } | null)?.formId;
+      if (formId && !latestByForm.has(formId)) latestByForm.set(formId, draft);
     }
     const urlFor = (formId: string) => {
-      const d = latestByForm.get(formId);
-      return d ? `/documents/${d.id}` : null;
+      const latest = latestByForm.get(formId);
+      return latest ? `/documents/${latest.id}` : null;
     };
 
-    return c.json({
+    return ctx.json({
       taxpayerFirstName: caseState.filingInfo.taxpayerFirstName ?? null,
       authEmail: caseState.authEmail,
       plan,

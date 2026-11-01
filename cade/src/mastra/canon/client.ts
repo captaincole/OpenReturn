@@ -28,8 +28,8 @@ export class CanonToolError extends Error {
 }
 
 export function isCanonUnreachable(err: unknown): boolean {
-  for (let e = err; e; e = (e as { cause?: unknown }).cause) {
-    if ((e as { name?: string }).name === "CanonUnreachableError") return true;
+  for (let cause = err; cause; cause = (cause as { cause?: unknown }).cause) {
+    if ((cause as { name?: string }).name === "CanonUnreachableError") return true;
   }
   return false;
 }
@@ -68,8 +68,8 @@ function getClient(): MCPClient {
 
 export const errorMessage = (err: unknown): string => {
   if (err instanceof Error) return err.message;
-  const m = (err as { message?: unknown } | null)?.message;
-  return typeof m === "string" ? m : String(err);
+  const message = (err as { message?: unknown } | null)?.message;
+  return typeof message === "string" ? message : String(err);
 };
 
 /*
@@ -103,9 +103,9 @@ async function canonTool(name: string): Promise<CanonTool> {
 type McpResult = { isError?: boolean; content?: { type?: string; text?: string }[] };
 
 function toolErrorText(raw: unknown): string | null {
-  const r = raw as McpResult | null;
-  if (!r?.isError) return null;
-  return r.content?.map((c) => c.text ?? "").join("\n") || "unknown error";
+  const result = raw as McpResult | null;
+  if (!result?.isError) return null;
+  return result.content?.map((part) => part.text ?? "").join("\n") || "unknown error";
 }
 
 /*

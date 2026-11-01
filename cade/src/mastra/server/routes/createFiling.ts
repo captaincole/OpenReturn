@@ -35,14 +35,14 @@ async function ensureThread(userId: string, taxYear: number): Promise<void> {
 
 export const createFilingRoute = registerApiRoute("/app/filings", {
   method: "POST",
-  handler: async (c) => {
-    const requestContext = c.get("requestContext");
+  handler: async (ctx) => {
+    const requestContext = ctx.get("requestContext");
     const callerId = requestContext?.get(MASTRA_RESOURCE_ID_KEY) as string | undefined;
-    if (!callerId) return c.json({ error: "unauthorized" }, 401);
+    if (!callerId) return ctx.json({ error: "unauthorized" }, 401);
 
     let body: unknown = undefined;
     try {
-      body = await c.req.json();
+      body = await ctx.req.json();
     } catch {
       body = {};
     }
@@ -52,7 +52,7 @@ export const createFilingRoute = registerApiRoute("/app/filings", {
         ? taxYearRaw
         : DEFAULT_TAX_YEAR;
     if (taxYear < MIN_TAX_YEAR || taxYear > MAX_TAX_YEAR) {
-      return c.json({ error: `taxYear out of range (${taxYear})` }, 400);
+      return ctx.json({ error: `taxYear out of range (${taxYear})` }, 400);
     }
 
     // Explicit membership predicate: there is no RLS.
@@ -70,7 +70,7 @@ export const createFilingRoute = registerApiRoute("/app/filings", {
       const row = existing.rows[0];
       /* An earlier thread bootstrap may have failed. */
       await ensureThread(callerId, Number(row.tax_year));
-      return c.json({
+      return ctx.json({
         filing: {
           id: String(row.id),
           taxYear: Number(row.tax_year),
@@ -85,7 +85,7 @@ export const createFilingRoute = registerApiRoute("/app/filings", {
 
     await ensureThread(callerId, taxYear);
 
-    return c.json({
+    return ctx.json({
       filing: { id: filingId, taxYear, status: "draft" },
       created: true,
     });

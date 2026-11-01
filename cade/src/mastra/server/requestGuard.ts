@@ -13,7 +13,7 @@ const LOOPBACK = ["localhost", "127.0.0.1", "[::1]"];
 function allowedHosts(): string[] {
   const extra = (process.env.ALLOWED_HOSTS ?? "")
     .split(",")
-    .map((h) => h.trim().toLowerCase())
+    .map((header) => header.trim().toLowerCase())
     .filter(Boolean);
   return [...LOOPBACK, ...extra];
 }
@@ -32,21 +32,21 @@ function hostnameOf(value: string, isUrl: boolean): string {
   }
 }
 
-export const requestGuard: MiddlewareHandler = async (c, next) => {
+export const requestGuard: MiddlewareHandler = async (ctx, next) => {
   const allowed = allowedHosts();
-  const host = c.req.header("Host");
+  const host = ctx.req.header("Host");
   if (host !== undefined && !isAllowed(hostnameOf(host, false), allowed)) {
-    return c.json({ error: "unknown host" }, 403);
+    return ctx.json({ error: "unknown host" }, 403);
   }
-  const origin = c.req.header("Origin");
+  const origin = ctx.req.header("Origin");
   if (origin !== undefined && !isAllowed(hostnameOf(origin, true), allowed)) {
-    return c.json({ error: "cross-origin request refused" }, 403);
+    return ctx.json({ error: "cross-origin request refused" }, 403);
   }
   await next();
 };
 
 /* Compares digests, so the time does not depend on the token. */
 export function bearerMatches(header: string | undefined, token: string): boolean {
-  const digest = (s: string) => createHash("sha256").update(s).digest();
+  const digest = (text: string) => createHash("sha256").update(text).digest();
   return timingSafeEqual(digest(header ?? ""), digest(`Bearer ${token}`));
 }

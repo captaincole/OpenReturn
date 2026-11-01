@@ -29,7 +29,7 @@ describe("PdfAttachmentRasterizer", () => {
     }>;
 
     const parts = out.content.parts;
-    expect(parts.filter((p) => p.mimeType === "image/png")).toHaveLength(1);
-    expect(parts.some((p) => p.mimeType === "application/pdf")).toBe(false);
+    expect(parts.filter((part) => part.mimeType === "image/png")).toHaveLength(1);
+    expect(parts.some((part) => part.mimeType === "application/pdf")).toBe(false);
   });
 });

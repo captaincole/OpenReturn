@@ -14,8 +14,8 @@ const AddressSchema = z.object({
   zip: z.string(),
 });
 
-const slugify = (s: string): string =>
-  s
+const slugify = (text: string): string =>
+  text
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
@@ -183,7 +183,7 @@ async function writeIdentityFacts(opts: {
     address?: { line1?: string; line2?: string; city?: string; state?: string; zip?: string };
   };
 }): Promise<number> {
-  const { scope, userId, filingId, year, employerName, employee: e } = opts;
+  const { scope, userId, filingId, year, employerName, employee: employee } = opts;
   let written = 0;
   const writeIdentity = async (key: string, value: unknown) => {
     if (value === undefined || value === null || value === "") return;
@@ -199,16 +199,16 @@ async function writeIdentityFacts(opts: {
     });
     written++;
   };
-  await writeIdentity("identity.name.first", e.firstName);
-  await writeIdentity("identity.name.last", e.lastName);
-  await writeIdentity("identity.ssn", e.ssn);
+  await writeIdentity("identity.name.first", employee.firstName);
+  await writeIdentity("identity.name.last", employee.lastName);
+  await writeIdentity("identity.ssn", employee.ssn);
   /* One fact per address part: each form field binds to its own sub-fact. */
-  if (e.address) {
-    await writeIdentity("identity.address.street", e.address.line1);
-    await writeIdentity("identity.address.apt", e.address.line2);
-    await writeIdentity("identity.address.city", e.address.city);
-    await writeIdentity("identity.address.state", e.address.state);
-    await writeIdentity("identity.address.zip", e.address.zip);
+  if (employee.address) {
+    await writeIdentity("identity.address.street", employee.address.line1);
+    await writeIdentity("identity.address.apt", employee.address.line2);
+    await writeIdentity("identity.address.city", employee.address.city);
+    await writeIdentity("identity.address.state", employee.address.state);
+    await writeIdentity("identity.address.zip", employee.address.zip);
   }
   return written;
 }

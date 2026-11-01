@@ -10,8 +10,8 @@ type Flat = Record<string, unknown>;
 /* Ids the model or the tool makes up; they are not on the document. */
 const IGNORED_FIELDS = new Set(["tradeId"]);
 
-const normText = (v: unknown): string =>
-  String(v ?? "")
+const normText = (value: unknown): string =>
+  String(value ?? "")
     .toLowerCase()
     .replace(/[^a-z0-9]/g, "");
 
@@ -30,12 +30,12 @@ const sameValue = (field: string, expected: unknown, got: unknown): boolean =>
 
 const flattenObject = (prefix: string, obj: unknown): Flat =>
   Object.fromEntries(
-    Object.entries(obj ?? {}).flatMap(([k, v]) =>
-      IGNORED_FIELDS.has(k)
+    Object.entries(obj ?? {}).flatMap(([key, value]) =>
+      IGNORED_FIELDS.has(key)
         ? []
-        : v !== null && typeof v === "object"
-          ? Object.entries(flattenObject(`${prefix}${k}.`, v))
-          : [[`${prefix}${k}`, v]],
+        : value !== null && typeof value === "object"
+          ? Object.entries(flattenObject(`${prefix}${key}.`, value))
+          : [[`${prefix}${key}`, value]],
     ),
   );
 
@@ -47,19 +47,23 @@ type LabelAmount = { label: string; amount: number };
  * after a sort by amount. 1099-R uses box12/box14 as plain values.
  */
 const flattenValue = (value: unknown): Flat => {
-  const v = (value ?? {}) as Record<string, unknown>;
-  const box12 = Array.isArray(v.box12) ? (v.box12 as CodeAmount[]) : [];
-  const box14 = Array.isArray(v.box14) ? (v.box14 as LabelAmount[]) : [];
+  const record = (value ?? {}) as Record<string, unknown>;
+  const box12 = Array.isArray(record.box12) ? (record.box12 as CodeAmount[]) : [];
+  const box14 = Array.isArray(record.box14) ? (record.box14 as LabelAmount[]) : [];
   const rest = Object.fromEntries(
-    Object.entries(v).filter(([k, x]) => !(["box12", "box14"].includes(k) && Array.isArray(x))),
+    Object.entries(record).filter(
+      ([key, fieldValue]) => !(["box12", "box14"].includes(key) && Array.isArray(fieldValue)),
+    ),
   );
   return {
     ...flattenObject("", rest),
-    ...Object.fromEntries(box12.map((e) => [`box12.${e.code.toUpperCase()}`, e.amount])),
+    ...Object.fromEntries(
+      box12.map((entry) => [`box12.${entry.code.toUpperCase()}`, entry.amount]),
+    ),
     ...Object.fromEntries(
       [...box14]
-        .sort((a, b) => a.amount - b.amount)
-        .map((e, i) => [`box14[${i}].amount`, e.amount]),
+        .sort((left, right) => left.amount - right.amount)
+        .map((entry, i) => [`box14[${i}].amount`, entry.amount]),
     ),
   };
 };
@@ -75,4 +79,4 @@ export function compareValues(truth: unknown, got: unknown): FieldResult[] {
 }
 
 export const shareCorrect = (fields: FieldResult[]) =>
-  fields.length ? fields.filter((f) => f.ok).length / fields.length : 0;
+  fields.length ? fields.filter((field) => field.ok).length / fields.length : 0;

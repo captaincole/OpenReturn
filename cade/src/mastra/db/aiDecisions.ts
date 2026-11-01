@@ -35,28 +35,28 @@ export interface AIDecision {
   sourceNote?: string;
 }
 
-function rowToDecision(r: Row): AIDecisionRow {
-  const supporting = asJson(r.supporting_fact_keys);
+function rowToDecision(row: Row): AIDecisionRow {
+  const supporting = asJson(row.supporting_fact_keys);
   return {
-    id: asStr(r.id),
-    userId: asStr(r.user_id),
-    taxYear: asNum(r.tax_year),
-    decisionKey: asStr(r.decision_key),
-    decision: asJson(r.decision),
-    rationale: asStr(r.rationale),
+    id: asStr(row.id),
+    userId: asStr(row.user_id),
+    taxYear: asNum(row.tax_year),
+    decisionKey: asStr(row.decision_key),
+    decision: asJson(row.decision),
+    rationale: asStr(row.rationale),
     supportingFactKeys: Array.isArray(supporting) ? (supporting as string[]) : [],
-    confidence: asStr(r.confidence) as Confidence,
-    dissentingConsiderations: asStrOrNull(r.dissenting_considerations),
-    authorityCitations: asJson(r.authority_citations) as AuthorityCitation[] | null,
-    sourceNote: asStrOrNull(r.source_note),
-    createdAt: asStr(r.created_at),
-    verdict: asStrOrNull(r.verdict) as Verdict | null,
-    verdictReason: asStrOrNull(r.verdict_reason),
-    verdictAt: asStrOrNull(r.verdict_at),
+    confidence: asStr(row.confidence) as Confidence,
+    dissentingConsiderations: asStrOrNull(row.dissenting_considerations),
+    authorityCitations: asJson(row.authority_citations) as AuthorityCitation[] | null,
+    sourceNote: asStrOrNull(row.source_note),
+    createdAt: asStr(row.created_at),
+    verdict: asStrOrNull(row.verdict) as Verdict | null,
+    verdictReason: asStrOrNull(row.verdict_reason),
+    verdictAt: asStrOrNull(row.verdict_at),
   };
 }
 
-export async function recordDecision(scope: Scope, d: AIDecision): Promise<void> {
+export async function recordDecision(scope: Scope, decision: AIDecision): Promise<void> {
   await ensureAppSchema();
   await getAppDb().execute({
     sql: `INSERT INTO ai_decisions
@@ -65,18 +65,18 @@ export async function recordDecision(scope: Scope, d: AIDecision): Promise<void>
              authority_citations, source_note, created_at)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     args: [
-      d.id,
-      d.userId,
-      d.filingId,
-      d.taxYear,
-      d.decisionKey,
-      JSON.stringify(d.decision ?? null),
-      d.rationale,
-      JSON.stringify(d.supportingFactKeys),
-      d.confidence,
-      d.dissentingConsiderations ?? null,
-      d.authorityCitations ? JSON.stringify(d.authorityCitations) : null,
-      d.sourceNote ?? null,
+      decision.id,
+      decision.userId,
+      decision.filingId,
+      decision.taxYear,
+      decision.decisionKey,
+      JSON.stringify(decision.decision ?? null),
+      decision.rationale,
+      JSON.stringify(decision.supportingFactKeys),
+      decision.confidence,
+      decision.dissentingConsiderations ?? null,
+      decision.authorityCitations ? JSON.stringify(decision.authorityCitations) : null,
+      decision.sourceNote ?? null,
       nowIso(),
     ],
   });

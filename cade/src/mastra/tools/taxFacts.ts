@@ -65,15 +65,15 @@ export const recordTaxFacts = createTool({
       );
     }
     const { scope, userId, filingId } = await requireUserContext(context);
-    const rows = facts.map((f) => ({
+    const rows = facts.map((fact) => ({
       id: crypto.randomUUID(),
       userId,
       filingId,
       taxYear: year,
-      category: f.category,
-      key: f.key,
-      value: f.value,
-      sourceNote: f.sourceNote,
+      category: fact.category,
+      key: fact.key,
+      value: fact.value,
+      sourceNote: fact.sourceNote,
     }));
     await recordFacts(scope, rows);
     return { recorded: rows.map(({ key, id }) => ({ key, id })) };

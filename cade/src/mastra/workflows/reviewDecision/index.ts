@@ -84,8 +84,8 @@ export async function retryUnreachedReviews(
 ): Promise<ReviewDecisionOutput[]> {
   const unreached = await listDecisions(scope, { verdict: "review_unreached" });
   const runs = unreached
-    .filter((d) => d.id !== except && !queued.has(d.id))
-    .map((d) => enqueueReview(scope, d.id));
+    .filter((decision) => decision.id !== except && !queued.has(decision.id))
+    .map((decision) => enqueueReview(scope, decision.id));
   return Promise.all(runs);
 }
 

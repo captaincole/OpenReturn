@@ -25,14 +25,14 @@ function sourceFiles(dir: string): string[] {
 }
 
 describe("cade boundary", () => {
-  const files = ["src", "scripts", "evals"].flatMap((d) => sourceFiles(join(AGENT_ROOT, d)));
+  const files = ["src", "scripts", "evals"].flatMap((dir) => sourceFiles(join(AGENT_ROOT, dir)));
 
   it("has source files to check", () => {
     expect(files.length).toBeGreaterThan(10);
   });
 
   it.each(FORBIDDEN)("never imports $why", ({ pattern }) => {
-    const offenders = files.filter((f) => pattern.test(readFileSync(f, "utf8")));
-    expect(offenders.map((f) => relative(AGENT_ROOT, f))).toEqual([]);
+    const offenders = files.filter((file) => pattern.test(readFileSync(file, "utf8")));
+    expect(offenders.map((offender) => relative(AGENT_ROOT, offender))).toEqual([]);
   });
 });

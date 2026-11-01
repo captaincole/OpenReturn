@@ -22,11 +22,14 @@ export interface Scope {
   filingId: string;
 }
 
-export const asStr = (v: unknown): string => (v == null ? "" : String(v));
-export const asStrOrNull = (v: unknown): string | null => (v == null ? null : String(v));
-export const asNum = (v: unknown): number => (v == null ? 0 : Number(v));
-export const asNumOrNull = (v: unknown): number | null => (v == null ? null : Number(v));
-export const asJson = (v: unknown): unknown => (v == null ? null : JSON.parse(String(v)));
+export const asStr = (value: unknown): string => (value == null ? "" : String(value));
+export const asStrOrNull = (value: unknown): string | null =>
+  value == null ? null : String(value);
+export const asNum = (value: unknown): number => (value == null ? 0 : Number(value));
+export const asNumOrNull = (value: unknown): number | null =>
+  value == null ? null : Number(value);
+export const asJson = (value: unknown): unknown =>
+  value == null ? null : JSON.parse(String(value));
 
 export const nowIso = (): string => new Date().toISOString();
 
@@ -222,7 +225,7 @@ export interface Owner {
 export async function getOwner(): Promise<Owner | null> {
   await ensureAppSchema();
   const res = await getAppDb().execute(`SELECT id, email, display_name FROM owner LIMIT 1`);
-  const r = res.rows[0];
-  if (!r) return null;
-  return { id: asStr(r.id), email: asStr(r.email), displayName: asStr(r.display_name) };
+  const row = res.rows[0];
+  if (!row) return null;
+  return { id: asStr(row.id), email: asStr(row.email), displayName: asStr(row.display_name) };
 }

@@ -41,7 +41,7 @@ function formTool<V extends { payerName: string; payerTin?: string }>(spec: Form
     outputSchema: z.object({ accountSlug: z.string(), factKey: z.string() }),
     execute: async (input, context) => {
       const { ctx, slug } = await statementContext(input, context, spec.form);
-      const boxes = Object.entries(input).filter(([k]) => k in spec.boxes);
+      const boxes = Object.entries(input).filter(([key]) => key in spec.boxes);
       const factKey = spec.factKey(slug);
       /* The boxes passed the schemas above, which BoxSchemas ties to V. */
       const value = {

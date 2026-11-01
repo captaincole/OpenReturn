@@ -26,16 +26,16 @@ export interface TaxFact {
   sourceNote?: string;
 }
 
-function rowToFact(r: Row): TaxFactRow {
+function rowToFact(row: Row): TaxFactRow {
   return {
-    id: asStr(r.id),
-    userId: asStr(r.user_id),
-    taxYear: asNum(r.tax_year),
-    category: asStr(r.category),
-    key: asStr(r.fact_key),
-    value: asJson(r.fact_value),
-    sourceNote: asStrOrNull(r.source_note),
-    createdAt: asStr(r.created_at),
+    id: asStr(row.id),
+    userId: asStr(row.user_id),
+    taxYear: asNum(row.tax_year),
+    category: asStr(row.category),
+    key: asStr(row.fact_key),
+    value: asJson(row.fact_value),
+    sourceNote: asStrOrNull(row.source_note),
+    createdAt: asStr(row.created_at),
   };
 }
 
@@ -115,10 +115,10 @@ export async function listFactsByKeys(
   });
   // tax_facts is append-only; collapse to the latest row per fact_key.
   const latest = new Map<string, TaxFactRow>();
-  for (const r of res.rows) {
-    const key = asStr(r.fact_key);
+  for (const row of res.rows) {
+    const key = asStr(row.fact_key);
     if (latest.has(key)) continue;
-    latest.set(key, rowToFact(r));
+    latest.set(key, rowToFact(row));
   }
   return Array.from(latest.values());
 }
@@ -143,31 +143,31 @@ export interface OpenQuestionRow {
   resolvedAt: string | null;
 }
 
-function rowToQuestion(r: Row): OpenQuestionRow {
+function rowToQuestion(row: Row): OpenQuestionRow {
   return {
-    id: asStr(r.id),
-    userId: asStr(r.user_id),
-    status: asStr(r.status),
-    question: asStr(r.question),
-    context: asStrOrNull(r.context),
-    createdAt: asStr(r.created_at),
-    resolvedAt: asStrOrNull(r.resolved_at),
+    id: asStr(row.id),
+    userId: asStr(row.user_id),
+    status: asStr(row.status),
+    question: asStr(row.question),
+    context: asStrOrNull(row.context),
+    createdAt: asStr(row.created_at),
+    resolvedAt: asStrOrNull(row.resolved_at),
   };
 }
 
-export async function noteQuestion(scope: Scope, q: OpenQuestion): Promise<void> {
+export async function noteQuestion(scope: Scope, question: OpenQuestion): Promise<void> {
   await ensureAppSchema();
   await getAppDb().execute({
     sql: `INSERT INTO open_questions
             (id, user_id, filing_id, status, question, context, decision_id, created_at)
           VALUES (?, ?, ?, 'open', ?, ?, ?, ?)`,
     args: [
-      q.id,
-      q.userId,
-      q.filingId,
-      q.question,
-      q.context ?? null,
-      q.decisionId ?? null,
+      question.id,
+      question.userId,
+      question.filingId,
+      question.question,
+      question.context ?? null,
+      question.decisionId ?? null,
       nowIso(),
     ],
   });

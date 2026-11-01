@@ -17,7 +17,7 @@ function caseStateFor(decisions = alexDecisions) {
 }
 
 const withoutFilingStatus = alexDecisions.filter(
-  (d) => d.decisionKey !== "decisions.scope.filing_status",
+  (decision) => decision.decisionKey !== "decisions.scope.filing_status",
 );
 
 describe("case-state pending lists", () => {

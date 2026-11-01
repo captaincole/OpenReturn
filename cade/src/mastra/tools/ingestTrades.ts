@@ -42,15 +42,15 @@ export const TradeInputSchema = z.object({
 });
 export type TradeInput = z.infer<typeof TradeInputSchema>;
 
-const tradeIdFor = (t: TradeInput): string => {
-  const ticker = t.symbol ?? t.cusip ?? slugify(t.description);
-  const slugDate = (d: string) => {
-    const m = d.match(/^(\d{2})\/(\d{2})\/(\d{2})$/);
-    if (!m) return slugify(d);
-    const [, mm, dd, yy] = m;
+const tradeIdFor = (trade: TradeInput): string => {
+  const ticker = trade.symbol ?? trade.cusip ?? slugify(trade.description);
+  const slugDate = (date: string) => {
+    const match = date.match(/^(\d{2})\/(\d{2})\/(\d{2})$/);
+    if (!match) return slugify(date);
+    const [, mm, dd, yy] = match;
     return `20${yy}-${mm}-${dd}`;
   };
-  return `${slugify(ticker)}-${slugDate(t.dateSold)}-q${t.quantity}`;
+  return `${slugify(ticker)}-${slugDate(trade.dateSold)}-q${trade.quantity}`;
 };
 
 /* Unknown term falls back to the short-term boxes (the conservative rate). */
@@ -75,27 +75,27 @@ const termLabel = (term: TradeInput["term"]): string =>
 async function ingestOneTrade(
   ctx: IngestCtx,
   slug: string,
-  t: TradeInput,
+  input: TradeInput,
   digitalAsset: boolean,
 ): Promise<string> {
-  const tradeId = tradeIdFor(t);
+  const tradeId = tradeIdFor(input);
   const trade: TradeFactValue = {
     tradeId,
-    description: t.description,
-    cusip: t.cusip,
-    symbol: t.symbol,
-    quantity: t.quantity,
-    dateAcquired: t.dateAcquired,
-    dateSold: t.dateSold,
-    proceeds: t.proceeds,
-    costBasis: t.costBasis,
-    adjustmentCode: t.adjustmentCode,
-    adjustmentAmount: t.adjustmentAmount,
+    description: input.description,
+    cusip: input.cusip,
+    symbol: input.symbol,
+    quantity: input.quantity,
+    dateAcquired: input.dateAcquired,
+    dateSold: input.dateSold,
+    proceeds: input.proceeds,
+    costBasis: input.costBasis,
+    adjustmentCode: input.adjustmentCode,
+    adjustmentAmount: input.adjustmentAmount,
   };
   const factKey = makeTradeFactKey(slug, tradeId);
   await recordIngestFact(ctx, "investment_income", factKey, trade);
 
-  const box = boxFor(t.term, t.basisReported, digitalAsset);
+  const box = boxFor(input.term, input.basisReported, digitalAsset);
   const form = digitalAsset ? "1099-DA" : "1099-B";
   await recordDecision(ctx.scope, {
     id: crypto.randomUUID(),
@@ -105,8 +105,8 @@ async function ingestOneTrade(
     decisionKey: makeForm8949BoxDecisionKey(tradeId),
     decision: box,
     rationale:
-      `${form} reports a ${termLabel(t.term)} ` +
-      `${t.basisReported ? "covered" : "noncovered"} sale → Form 8949 ${box}.`,
+      `${form} reports a ${termLabel(input.term)} ` +
+      `${input.basisReported ? "covered" : "noncovered"} sale → Form 8949 ${box}.`,
     supportingFactKeys: [factKey],
     confidence: "high",
     sourceNote: `Auto-classified during ${form} ingest (broker-reported section)`,
@@ -142,8 +142,8 @@ export async function ingestTrades(
   opts: { digitalAsset: boolean },
 ): Promise<{ tradeIds: string[]; decisionsWritten: number }> {
   const tradeIds: string[] = [];
-  for (const t of trades) {
-    tradeIds.push(await ingestOneTrade(ctx, slug, t, opts.digitalAsset));
+  for (const trade of trades) {
+    tradeIds.push(await ingestOneTrade(ctx, slug, trade, opts.digitalAsset));
   }
   const factKeys = tradeIds.map((id) => makeTradeFactKey(slug, id));
   const form = opts.digitalAsset ? "1099-DA" : "1099-B";

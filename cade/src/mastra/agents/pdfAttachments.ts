@@ -16,11 +16,11 @@ const SCALE = 1.5;
 type FilePart = { type: "file"; mimeType?: string; data?: unknown };
 
 function isPdfPart(part: unknown): part is FilePart & { data: string } {
-  const p = part as FilePart;
+  const filePart = part as FilePart;
   return (
-    p?.type === "file" &&
-    typeof p.data === "string" &&
-    (p.mimeType === "application/pdf" || p.data.startsWith("data:application/pdf"))
+    filePart?.type === "file" &&
+    typeof filePart.data === "string" &&
+    (filePart.mimeType === "application/pdf" || filePart.data.startsWith("data:application/pdf"))
   );
 }
 

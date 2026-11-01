@@ -90,8 +90,8 @@ const LITE = new Set([
 
 export function loadCases(tier: "lite" | "full"): IngestCase[] {
   const cases = MANIFEST.map(([scenario, file, type, patterns]) => {
-    const facts = SCENARIOS.find((s) => s.name === scenario)?.facts ?? [];
-    const expected = facts.filter((f) => patterns.some((p) => p.test(f.key)));
+    const facts = SCENARIOS.find((entry) => entry.name === scenario)?.facts ?? [];
+    const expected = facts.filter((fact) => patterns.some((pattern) => pattern.test(fact.key)));
     if (!expected.length) throw new Error(`${scenario}/${file}: no expected facts match`);
     const doc = `${scenario}/${file}`;
     return {
@@ -102,7 +102,7 @@ export function loadCases(tier: "lite" | "full"): IngestCase[] {
       expected,
     };
   });
-  const missing = [...LITE].filter((d) => !cases.some((c) => c.doc === d));
+  const missing = [...LITE].filter((doc) => !cases.some((testCase) => testCase.doc === doc));
   if (missing.length) throw new Error(`LITE names unknown documents: ${missing.join(", ")}`);
-  return tier === "full" ? cases : cases.filter((c) => c.lite);
+  return tier === "full" ? cases : cases.filter((testCase) => testCase.lite);
 }

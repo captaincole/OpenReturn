@@ -132,19 +132,19 @@ interface Deps {
 
 async function seedCase(
   deps: Deps,
-  c: SmokeCase,
+  testCase: SmokeCase,
   scope: { userId: string; filingId: string },
 ): Promise<string> {
-  for (const f of c.facts) {
+  for (const fact of testCase.facts) {
     await deps.recordFact(scope, {
       id: crypto.randomUUID(),
       userId: OWNER_ID,
       filingId: scope.filingId,
       taxYear: YEAR,
-      category: f.category,
-      key: f.key,
-      value: f.value,
-      sourceNote: f.sourceNote,
+      category: fact.category,
+      key: fact.key,
+      value: fact.value,
+      sourceNote: fact.sourceNote,
     });
   }
   const decisionId = crypto.randomUUID();
@@ -153,33 +153,33 @@ async function seedCase(
     userId: OWNER_ID,
     filingId: scope.filingId,
     taxYear: YEAR,
-    ...c.decision,
+    ...testCase.decision,
   });
   return decisionId;
 }
 
 function reportCase(
-  c: SmokeCase,
+  testCase: SmokeCase,
   secs: string,
   result: Awaited<ReturnType<Deps["reviewDecision"]>>,
   row: Awaited<ReturnType<Deps["getDecisionById"]>>,
   questions: Awaited<ReturnType<Deps["listOpenQuestions"]>>,
 ): boolean {
-  const passVerdict = (c.acceptVerdicts as string[]).includes(result.finalVerdict);
+  const passVerdict = (testCase.acceptVerdicts as string[]).includes(result.finalVerdict);
   const passPersist = row?.verdict === result.finalVerdict;
   const passCitations = result.finalVerdict !== "accurate" || result.citations.length > 0;
   const expectQ =
-    c.expectOpenQuestion === "if-not-accurate"
+    testCase.expectOpenQuestion === "if-not-accurate"
       ? result.finalVerdict !== "accurate"
-      : c.expectOpenQuestion;
+      : testCase.expectOpenQuestion;
   const passQuestion = expectQ ? questions.length > 0 : questions.length === 0;
   const pass = passVerdict && passPersist && passCitations && passQuestion;
 
   console.log(
-    `${pass ? "✓" : "✗"} ${c.name} (${secs}s, ${result.iterationCount} iter)\n` +
-      `    accept=[${c.acceptVerdicts.join("|")}]  got=${result.finalVerdict}` +
+    `${pass ? "✓" : "✗"} ${testCase.name} (${secs}s, ${result.iterationCount} iter)\n` +
+      `    accept=[${testCase.acceptVerdicts.join("|")}]  got=${result.finalVerdict}` +
       (result.citations.length
-        ? `\n    citations: ${result.citations.map((x) => x.blockId).join(", ")}`
+        ? `\n    citations: ${result.citations.map((citation) => citation.blockId).join(", ")}`
         : "") +
       `\n    reason: ${result.reason.slice(0, 180)}`,
   );
@@ -192,12 +192,12 @@ function reportCase(
   return pass;
 }
 
-async function runCase(deps: Deps, c: SmokeCase): Promise<boolean> {
+async function runCase(deps: Deps, testCase: SmokeCase): Promise<boolean> {
   const filingId = crypto.randomUUID();
   await deps.createOwnerFiling({ filingId, userId: OWNER_ID, taxYear: YEAR });
   const scope = { userId: OWNER_ID, filingId };
 
-  const decisionId = await seedCase(deps, c, scope);
+  const decisionId = await seedCase(deps, testCase, scope);
 
   const t0 = Date.now();
   const result = await deps.reviewDecision(scope, decisionId);
@@ -205,13 +205,13 @@ async function runCase(deps: Deps, c: SmokeCase): Promise<boolean> {
 
   const row = await deps.getDecisionById(scope, decisionId);
   const questions = await deps.listOpenQuestions(scope, "open");
-  return reportCase(c, secs, result, row, questions);
+  return reportCase(testCase, secs, result, row, questions);
 }
 
 async function main() {
   const canonUrl = process.env.CANON_URL ?? "http://127.0.0.1:4112";
   const canonUp = await fetch(`${canonUrl}/health`, { signal: AbortSignal.timeout(2_000) })
-    .then((r) => r.ok)
+    .then((res) => res.ok)
     .catch(() => false);
   if (!canonUp) {
     console.error(`Canon is not running at ${canonUrl} — skipping smoke test (npm run dev:canon)`);
@@ -237,8 +237,8 @@ async function main() {
 
   console.log(`[smoke:review] temp app DB: ${SMOKE_DB}`);
   let passed = 0;
-  for (const c of CASES) {
-    if (await runCase(deps, c)) passed += 1;
+  for (const testCase of CASES) {
+    if (await runCase(deps, testCase)) passed += 1;
   }
 
   for (const suffix of ["", "-wal", "-shm"]) {

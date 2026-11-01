@@ -44,8 +44,8 @@ export const PayerSchema = z.object({
   address: AddressSchema.optional(),
 });
 
-export const slugify = (s: string): string =>
-  s
+export const slugify = (text: string): string =>
+  text
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
