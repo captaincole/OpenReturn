@@ -33,34 +33,36 @@ const mastra = new Mastra({ agents: { queryFormulator, assessRiskAgent, ruleAgen
 
 /* Fail loudly when a labeled block is gone (a parser change renumbers blocks). */
 async function checkAuthority() {
-  const ids = [...new Set(CASES.flatMap((c) => c.authority.flat()))];
+  const ids = [...new Set(CASES.flatMap((testCase) => testCase.authority.flat()))];
   const res = await getCorpusDb().execute({
     sql: `SELECT block_id FROM ref_blocks WHERE block_id IN (${ids.map(() => "?").join(",")})`,
     args: ids,
   });
-  const found = new Set(res.rows.map((r) => String(r.block_id)));
+  const found = new Set(res.rows.map((row) => String(row.block_id)));
   const missing = ids.filter((id) => !found.has(id));
   if (missing.length)
     throw new Error(`labeled blocks missing from corpus.db: ${missing.join(", ")}`);
 }
 
 function retrievedBlocks(steps: GroundStepLog[]): Set<string> {
-  const json = JSON.stringify(steps.filter((s) => s.kind === "gather").map((s) => s.output));
-  return new Set([...json.matchAll(/"blockId":"([^"]+)"/g)].map((m) => m[1]));
+  const json = JSON.stringify(
+    steps.filter((step) => step.kind === "gather").map((step) => step.output),
+  );
+  return new Set([...json.matchAll(/"blockId":"([^"]+)"/g)].map((match) => match[1]));
 }
 
-async function evalCase(c: ReviewCase, run: number): Promise<ReviewResult> {
+async function evalCase(testCase: ReviewCase, run: number): Promise<ReviewResult> {
   const steps: GroundStepLog[] = [];
   const started = Date.now();
   const input = {
     decision: {
-      ...c.decision,
+      ...testCase.decision,
       taxYear: YEAR,
       confidence: "high",
       dissentingConsiderations: null,
-      supportingFactKeys: c.facts.map((f) => f.key),
+      supportingFactKeys: testCase.facts.map((fact) => fact.key),
     },
-    facts: c.facts.map((f) => ({ ...f, sourceNote: f.sourceNote ?? null })),
+    facts: testCase.facts.map((fact) => ({ ...fact, sourceNote: fact.sourceNote ?? null })),
   };
   const out = await groundDecision(mastra, input, { steps }).catch((err: unknown) => ({
     verdict: "review_failed",
@@ -68,16 +70,16 @@ async function evalCase(c: ReviewCase, run: number): Promise<ReviewResult> {
     citations: [] as { blockId: string }[],
     iterationCount: 0,
   }));
-  const cited = out.citations.map((x) => x.blockId);
+  const cited = out.citations.map((citation) => citation.blockId);
   const retrieved = retrievedBlocks(steps);
   return {
     model: model.label,
-    case: c.name,
+    case: testCase.name,
     run,
-    expectedVerdict: c.expectedVerdict,
+    expectedVerdict: testCase.expectedVerdict,
     verdict: out.verdict,
-    citedAuthority: hitsAll(c.authority, new Set(cited)),
-    retrievedAuthority: hitsAll(c.authority, retrieved),
+    citedAuthority: hitsAll(testCase.authority, new Set(cited)),
+    retrievedAuthority: hitsAll(testCase.authority, retrieved),
     cited,
     invalidCitations: cited.filter((id) => !retrieved.has(id)),
     iterations: out.iterationCount,
@@ -87,31 +89,34 @@ async function evalCase(c: ReviewCase, run: number): Promise<ReviewResult> {
 }
 
 /* One row per run for the lite summary (cade/evals/lite), which reads no eval code. */
-const liteCase = (r: ReviewResult) => ({
+const liteCase = (result: ReviewResult) => ({
   flow: "review",
-  model: r.model,
-  name: r.case,
-  run: r.run,
-  score: verdictOk(r) ? 1 : 0,
-  note: `${r.verdict}, expected ${r.expectedVerdict}`,
+  model: result.model,
+  name: result.case,
+  run: result.run,
+  score: verdictOk(result) ? 1 : 0,
+  note: `${result.verdict}, expected ${result.expectedVerdict}`,
 });
 
 async function main() {
   await checkAuthority();
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
-  const outDir = ARGS.find((a) => a.startsWith("--out="))?.slice(6) ?? path.join(OUT_DIR, runId);
+  const outDir =
+    ARGS.find((arg) => arg.startsWith("--out="))?.slice(6) ?? path.join(OUT_DIR, runId);
   mkdirSync(outDir, { recursive: true });
-  const caseFilter = ARGS.find((a) => a.startsWith("--case="))?.slice(7);
-  const cases = casesFor(TIER).filter((c) => !caseFilter || c.name.includes(caseFilter));
+  const caseFilter = ARGS.find((arg) => arg.startsWith("--case="))?.slice(7);
+  const cases = casesFor(TIER).filter(
+    (testCase) => !caseFilter || testCase.name.includes(caseFilter),
+  );
   console.log(`${TIER} tier: ${cases.length} cases × ${model.runs} runs, ${model.label}`);
   const results: ReviewResult[] = [];
-  for (const c of cases)
+  for (const testCase of cases)
     for (let run = 1; run <= model.runs; run++) {
-      const r = await evalCase(c, run);
+      const result = await evalCase(testCase, run);
       console.log(
-        `  ${c.name} #${run}: ${r.verdict} (expected ${r.expectedVerdict}), cited ${r.citedAuthority ? "yes" : "no"}, ${(r.latencyMs / 1000).toFixed(0)}s`,
+        `  ${testCase.name} #${run}: ${result.verdict} (expected ${result.expectedVerdict}), cited ${result.citedAuthority ? "yes" : "no"}, ${(result.latencyMs / 1000).toFixed(0)}s`,
       );
-      results.push(r);
+      results.push(result);
       writeFileSync(
         path.join(outDir, "results.json"),
         JSON.stringify({ models: [model], results, cases: results.map(liteCase) }, null, 2),

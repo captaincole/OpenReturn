@@ -49,8 +49,8 @@ interface BucketResult {
 
 function bucketFields(opts: RenderBindingsOpts): BucketResult {
   const bindingByFieldId = new Map<string, ClassifiedBinding>();
-  for (const b of opts.bindings) {
-    if (!bindingByFieldId.has(b.fieldId)) bindingByFieldId.set(b.fieldId, b);
+  for (const binding of opts.bindings) {
+    if (!bindingByFieldId.has(binding.fieldId)) bindingByFieldId.set(binding.fieldId, binding);
   }
   const minOrder = CONFIDENCE_ORDER[opts.minConfidence];
 
@@ -106,12 +106,12 @@ function bucketOneField(
   return { kind: "binding", field, body: translated.body, rationale: binding.rationale };
 }
 
-function renderPreamble(opts: RenderBindingsOpts, b: BucketResult): string[] {
+function renderPreamble(opts: RenderBindingsOpts, bucket: BucketResult): string[] {
   const engineImport = relImport(opts.outputPath, "defineForm.ts");
   const taxTableImport = relImport(opts.outputPath, "data/taxTable.ts");
 
   const moneyImport = relImport(opts.outputPath, "money.ts");
-  const moneySymbols = [b.usesAtLeast && "atLeast", b.usesSum && "sum"].filter(Boolean);
+  const moneySymbols = [bucket.usesAtLeast && "atLeast", bucket.usesSum && "sum"].filter(Boolean);
 
   const out: string[] = [];
   out.push(`/*`);
@@ -127,7 +127,7 @@ function renderPreamble(opts: RenderBindingsOpts, b: BucketResult): string[] {
   if (moneySymbols.length > 0) {
     out.push(`import { ${moneySymbols.join(", ")} } from "${moneyImport}";`);
   }
-  if (b.usesLookupTax) {
+  if (bucket.usesLookupTax) {
     out.push(`import { lookupTax } from "${taxTableImport}";`);
   }
   out.push(`import type { ${opts.typeInterfaceName} } from "./types.js";`);
@@ -155,19 +155,21 @@ function renderSpecSections(opts: RenderBindingsOpts, entries: RenderEntry[]): s
   const out: string[] = [];
 
   out.push(`    bindings: {`);
-  for (const e of entries) {
-    if (e.kind !== "binding") continue;
-    out.push(`      // ${e.rationale}`);
-    out.push(`      ${quote(shortKey(e.field.fieldId, opts.formId))}: ${e.body},`);
+  for (const entry of entries) {
+    if (entry.kind !== "binding") continue;
+    out.push(`      // ${entry.rationale}`);
+    out.push(`      ${quote(shortKey(entry.field.fieldId, opts.formId))}: ${entry.body},`);
   }
   out.push(`    },`);
   out.push("");
 
-  const unsupported = entries.filter((e) => e.kind === "unsupported");
+  const unsupported = entries.filter((entry) => entry.kind === "unsupported");
   if (unsupported.length > 0) {
     out.push(`    unsupported: {`);
-    for (const e of unsupported) {
-      out.push(`      ${quote(shortKey(e.field.fieldId, opts.formId))}: ${quote(e.reason)},`);
+    for (const entry of unsupported) {
+      out.push(
+        `      ${quote(shortKey(entry.field.fieldId, opts.formId))}: ${quote(entry.reason)},`,
+      );
     }
     out.push(`    },`);
     out.push("");
@@ -185,9 +187,9 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
 
   const out = [...renderPreamble(opts, bucketed), ...renderSpecSections(opts, entries)];
 
-  const emittedCount = entries.filter((e) => e.kind === "binding").length;
-  const unsupportedCount = entries.filter((e) => e.kind === "unsupported").length;
-  const unboundCount = entries.filter((e) => e.kind === "unbound").length;
+  const emittedCount = entries.filter((entry) => entry.kind === "binding").length;
+  const unsupportedCount = entries.filter((entry) => entry.kind === "unsupported").length;
+  const unboundCount = entries.filter((entry) => entry.kind === "unbound").length;
 
   out.push(`/*`);
   out.push(

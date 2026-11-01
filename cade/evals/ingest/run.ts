@@ -44,16 +44,16 @@ function agentFor(model: EvalModel): Agent {
 }
 
 /* Same shape as the web app's message (useCadeChat.buildPayload). */
-const toMessages = (c: IngestCase) => [
+const toMessages = (testCase: IngestCase) => [
   {
     role: "user" as const,
     content: [
       { type: "text" as const, text: "Here is one of my tax documents." },
       {
         type: "file" as const,
-        data: readFileSync(c.pdf).toString("base64"),
+        data: readFileSync(testCase.pdf).toString("base64"),
         mediaType: "application/pdf",
-        filename: path.basename(c.pdf),
+        filename: path.basename(testCase.pdf),
       },
     ],
   },
@@ -74,21 +74,21 @@ async function freshScope() {
 
 const ingestCalls = (messages: unknown) =>
   extractTrajectory(messages as never)
-    .steps.filter((s) => s.stepType === "tool_call" && s.name.startsWith("ingest"))
-    .map((s) => s.name);
+    .steps.filter((step) => step.stepType === "tool_call" && step.name.startsWith("ingest"))
+    .map((step) => step.name);
 
 async function evalDoc(
   agent: Agent,
   model: EvalModel,
-  c: IngestCase,
+  testCase: IngestCase,
   run: number,
 ): Promise<IngestResult> {
-  const base = { model: model.label, doc: c.doc, type: c.type, run };
+  const base = { model: model.label, doc: testCase.doc, type: testCase.type, run };
   const started = Date.now();
   const { scope, requestContext } = await freshScope();
   try {
     /* maxSteps: a consolidated 1099 takes one call per form and per 20 trades (5 for jordan's). */
-    const result = await agent.generate(toMessages(c), {
+    const result = await agent.generate(toMessages(testCase), {
       requestContext,
       maxSteps: 8,
       modelSettings: { maxOutputTokens: INGEST_MAX_OUTPUT_TOKENS },
@@ -101,7 +101,7 @@ async function evalDoc(
       latencyMs: Date.now() - started,
       inputTokens: usage?.inputTokens ?? 0,
       outputTokens: usage?.outputTokens ?? 0,
-      score: scoreDoc(c.expected, written),
+      score: scoreDoc(testCase.expected, written),
       replyText: result.text,
     };
   } catch (err) {
@@ -112,7 +112,7 @@ async function evalDoc(
       latencyMs: Date.now() - started,
       inputTokens: 0,
       outputTokens: 0,
-      score: scoreDoc(c.expected, []),
+      score: scoreDoc(testCase.expected, []),
       replyText: "",
       error: String((cause as Error).message ?? cause).slice(0, 200),
     };
@@ -120,39 +120,43 @@ async function evalDoc(
 }
 
 /* One row per run for the lite summary (evals/lite): the share of fields, 0 on an error. */
-const liteCase = (r: IngestResult) => ({
+const liteCase = (result: IngestResult) => ({
   flow: "ingest",
-  model: r.model,
-  name: r.doc,
-  run: r.run,
-  score: r.error ? 0 : r.score.score,
-  note: r.error ? `failed: ${r.error}` : `${Math.round(r.score.score * 100)}% of fields`,
+  model: result.model,
+  name: result.doc,
+  run: result.run,
+  score: result.error ? 0 : result.score.score,
+  note: result.error
+    ? `failed: ${result.error}`
+    : `${Math.round(result.score.score * 100)}% of fields`,
 });
 
 async function main() {
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
   const outDir =
-    process.argv.find((a) => a.startsWith("--out="))?.slice(6) ?? path.join(OUT_DIR, runId);
+    process.argv.find((arg) => arg.startsWith("--out="))?.slice(6) ?? path.join(OUT_DIR, runId);
   mkdirSync(outDir, { recursive: true });
-  const docFilter = process.argv.find((a) => a.startsWith("--doc="))?.slice(6);
+  const docFilter = process.argv.find((arg) => arg.startsWith("--doc="))?.slice(6);
   const tier = tierFromArgs(process.argv);
-  const cases = loadCases(tier).filter((c) => !docFilter || c.doc.includes(docFilter));
+  const cases = loadCases(tier).filter(
+    (testCase) => !docFilter || testCase.doc.includes(docFilter),
+  );
   const models = modelsFromArgs(process.argv.slice(2));
   console.log(
-    `${tier} tier: ${cases.length} documents, ${models.map((m) => `${m.label} ×${m.runs}`).join(", ")}`,
+    `${tier} tier: ${cases.length} documents, ${models.map((model) => `${model.label} ×${model.runs}`).join(", ")}`,
   );
 
   const results: IngestResult[] = [];
   for (const model of models) {
     console.log(`\n${model.label} (${model.id})`);
     const agent = agentFor(model);
-    for (const c of cases) {
+    for (const testCase of cases) {
       for (let run = 1; run <= model.runs; run++) {
-        const r = await evalDoc(agent, model, c, run);
+        const result = await evalDoc(agent, model, testCase, run);
         console.log(
-          `  ${c.doc} #${run}: ${r.error ? `ERROR ${r.error}` : r.score.score.toFixed(2)}`,
+          `  ${testCase.doc} #${run}: ${result.error ? `ERROR ${result.error}` : result.score.score.toFixed(2)}`,
         );
-        results.push(r);
+        results.push(result);
         writeFileSync(
           path.join(outDir, "results.json"),
           JSON.stringify({ tier, models, results, cases: results.map(liteCase) }, null, 2),
