@@ -38,10 +38,10 @@ export async function loadCatalogIndex(excludeFormId?: string): Promise<CatalogI
         jurisdiction: parsed.form.jurisdiction,
         title: parsed.form.title,
         catalogPath: file,
-        fields: parsed.fields.map((f) => ({
-          fieldId: f.fieldId,
-          label: f.label,
-          valueType: f.valueType,
+        fields: parsed.fields.map((field) => ({
+          fieldId: field.fieldId,
+          label: field.label,
+          valueType: field.valueType,
         })),
       });
     } catch (err) {
@@ -75,6 +75,8 @@ async function walkCatalogFiles(dir: string): Promise<string[]> {
 /** Same row shape as `buildInventoryBlock`, so the model reads both as one kind of context. */
 export function formatIndexedForm(form: IndexedForm): string {
   const header = `Form: ${form.title} (${form.formId}, ${form.jurisdiction}, tax year ${form.taxYear}) — ${form.fields.length} fields`;
-  const rows = form.fields.map((f) => `  ${f.fieldId} — "${f.label}" (valueType=${f.valueType})`);
+  const rows = form.fields.map(
+    (field) => `  ${field.fieldId} — "${field.label}" (valueType=${field.valueType})`,
+  );
   return [header, ...rows].join("\n");
 }

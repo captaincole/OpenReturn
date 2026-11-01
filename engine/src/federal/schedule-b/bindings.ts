@@ -21,9 +21,11 @@ function payerRows(
   payers: (info: ScheduleBFilingInfo) => PayerAmount[] | undefined,
 ): Record<string, Fn> {
   const out: Record<string, Fn> = {};
-  for (let n = 1; n <= rows; n++) {
-    out[`0.line.${line}_payer_name_${n}`] = (_, info) => payers(info)?.[n - 1]?.payerName;
-    out[`0.line.${line}_amount_${n}`] = (_, info) => roundDollars(payers(info)?.[n - 1]?.amount);
+  for (let rowNumber = 1; rowNumber <= rows; rowNumber++) {
+    out[`0.line.${line}_payer_name_${rowNumber}`] = (_, info) =>
+      payers(info)?.[rowNumber - 1]?.payerName;
+    out[`0.line.${line}_amount_${rowNumber}`] = (_, info) =>
+      roundDollars(payers(info)?.[rowNumber - 1]?.amount);
   }
   return out;
 }
@@ -33,8 +35,9 @@ function payerTotal(
   rounding: ScheduleBRounding | undefined,
 ): number | undefined {
   if (!payers || payers.length === 0) return undefined;
-  if (rounding === "sum_rounded_rows") return sum(...payers.map((p) => roundDollars(p.amount)));
-  return roundDollars(sum(...payers.map((p) => p.amount)));
+  if (rounding === "sum_rounded_rows")
+    return sum(...payers.map((payer) => roundDollars(payer.amount)));
+  return roundDollars(sum(...payers.map((payer) => payer.amount)));
 }
 
 function yesNo(answer: (info: ScheduleBFilingInfo) => boolean | undefined, yes: boolean): Fn {
@@ -50,10 +53,10 @@ export function register(): void {
     "0.header.ssn": (_, info) => info.taxpayerSSN,
     ...payerRows("1", INTEREST_ROWS, (info) => info.interestPayers),
     "0.line.2_total_interest": (_, info) => payerTotal(info.interestPayers, info.rounding),
-    "0.line.4_taxable_interest": (f) => {
-      const total = f["0.line.2_total_interest"];
+    "0.line.4_taxable_interest": (form) => {
+      const total = form["0.line.2_total_interest"];
       return typeof total === "number"
-        ? total - (f["0.line.3_excludable_savings_bond_interest"] ?? 0)
+        ? total - (form["0.line.3_excludable_savings_bond_interest"] ?? 0)
         : undefined;
     },
     ...payerRows("5", DIVIDEND_ROWS, (info) => info.dividendPayers),

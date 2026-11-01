@@ -27,27 +27,27 @@ export function makeHsaDistributionFactKey(accountSlug: string, distributionId: 
   return `account.${accountSlug}.hsa_distributions.${distributionId}`;
 }
 
-export function isHsaDistributionFact(f: TaxFactRow): boolean {
-  return f.category === SA_CATEGORY && SA_KEY_RE.test(f.key);
+export function isHsaDistributionFact(fact: TaxFactRow): boolean {
+  return fact.category === SA_CATEGORY && SA_KEY_RE.test(fact.key);
 }
 
-export function parseHsaDistributionFact(f: TaxFactRow): HsaDistributionFact | null {
-  if (f.category !== SA_CATEGORY) return null;
-  const match = f.key.match(SA_KEY_RE);
+export function parseHsaDistributionFact(fact: TaxFactRow): HsaDistributionFact | null {
+  if (fact.category !== SA_CATEGORY) return null;
+  const match = fact.key.match(SA_KEY_RE);
   if (!match) return null;
   const [, accountSlug, distributionId] = match;
   return {
     accountSlug,
     distributionId,
-    distribution: f.value as HsaDistributionFactValue,
-    sourceFact: f,
+    distribution: fact.value as HsaDistributionFactValue,
+    sourceFact: fact,
   };
 }
 
 export function getHsaDistributionFacts(facts: FactsView): HsaDistributionFact[] {
   const out: HsaDistributionFact[] = [];
-  for (const f of facts.byCategory(SA_CATEGORY)) {
-    const parsed = parseHsaDistributionFact(f);
+  for (const fact of facts.byCategory(SA_CATEGORY)) {
+    const parsed = parseHsaDistributionFact(fact);
     if (parsed !== null) out.push(parsed);
   }
   return out;

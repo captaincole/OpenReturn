@@ -17,12 +17,12 @@ describe("groupRootCauses", () => {
   const groups = groupRootCauses(["a", "b", "c", "d", "e"].map(diff), (id) => reads[id]);
 
   it("finds the lines whose inputs all match", () => {
-    expect(groups.map((g) => g.root.fieldId)).toEqual(["a", "c", "e"]);
+    expect(groups.map((group) => group.root.fieldId)).toEqual(["a", "c", "e"]);
   });
 
   it("lists every downstream line under each of its roots", () => {
     const down = Object.fromEntries(
-      groups.map((g) => [g.root.fieldId, g.downstream.map((d) => d.fieldId)]),
+      groups.map((group) => [group.root.fieldId, group.downstream.map((entry) => entry.fieldId)]),
     );
     expect(down).toEqual({ a: ["b", "d"], c: ["d"], e: [] });
   });

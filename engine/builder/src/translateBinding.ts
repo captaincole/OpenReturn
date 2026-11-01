@@ -49,24 +49,24 @@ export type Translation =
     }
   | { kind: "unsupported"; reason: string };
 
-export function translate(b: ClassifiedBinding, formId: string): Translation {
-  switch (b.ruleName) {
+export function translate(binding: ClassifiedBinding, formId: string): Translation {
+  switch (binding.ruleName) {
     case "lookupFact":
-      return translateLookupFact(b);
+      return translateLookupFact(binding);
     case "sumFacts":
-      return translateSumFacts(b);
+      return translateSumFacts(binding);
     case "lookupDecision":
-      return translateLookupDecision(b);
+      return translateLookupDecision(binding);
     case "decisionIfEquals":
-      return translateDecisionIfEquals(b);
+      return translateDecisionIfEquals(binding);
     case "tableLookupByDecision":
-      return translateTableLookupByDecision(b);
+      return translateTableLookupByDecision(binding);
     case "fromFields":
-      return translateFromFields(b, formId);
+      return translateFromFields(binding, formId);
     case "taxTable":
-      return translateTaxTable(b, formId);
+      return translateTaxTable(binding, formId);
     case "constant":
-      return translateConstant(b);
+      return translateConstant(binding);
     case "bracketLookup":
       return {
         kind: "unsupported",
@@ -79,8 +79,8 @@ export function translate(b: ClassifiedBinding, formId: string): Translation {
   }
 }
 
-function translateLookupFact(b: ClassifiedBinding): Translation {
-  const factKey = String(b.params.factKey ?? "");
+function translateLookupFact(binding: ClassifiedBinding): Translation {
+  const factKey = String(binding.params.factKey ?? "");
   const slot = FACT_TO_SLOT[factKey];
   if (!slot) {
     return {
@@ -91,10 +91,10 @@ function translateLookupFact(b: ClassifiedBinding): Translation {
   return { kind: "body", body: `(_, info) => info.${slot}` };
 }
 
-function translateSumFacts(b: ClassifiedBinding): Translation {
-  const category = String(b.params.category ?? "");
-  const keyPrefix = String(b.params.keyPrefix ?? "");
-  const fieldPath = String(b.params.fieldPath ?? "");
+function translateSumFacts(binding: ClassifiedBinding): Translation {
+  const category = String(binding.params.category ?? "");
+  const keyPrefix = String(binding.params.keyPrefix ?? "");
+  const fieldPath = String(binding.params.fieldPath ?? "");
   const key = `${category}|${keyPrefix}|${fieldPath}`;
   const slot = SUM_FACTS_TO_SLOT[key];
   if (!slot) {
@@ -106,8 +106,8 @@ function translateSumFacts(b: ClassifiedBinding): Translation {
   return { kind: "body", body: `(_, info) => info.${slot}` };
 }
 
-function translateLookupDecision(b: ClassifiedBinding): Translation {
-  const decisionKey = String(b.params.decisionKey ?? "");
+function translateLookupDecision(binding: ClassifiedBinding): Translation {
+  const decisionKey = String(binding.params.decisionKey ?? "");
   const slot = DECISION_TO_SLOT[decisionKey];
   if (!slot) {
     return {
@@ -118,8 +118,8 @@ function translateLookupDecision(b: ClassifiedBinding): Translation {
   return { kind: "body", body: `(_, info) => info.${slot}` };
 }
 
-function translateDecisionIfEquals(b: ClassifiedBinding): Translation {
-  const decisionKey = String(b.params.decisionKey ?? "");
+function translateDecisionIfEquals(binding: ClassifiedBinding): Translation {
+  const decisionKey = String(binding.params.decisionKey ?? "");
   const slot = DECISION_TO_SLOT[decisionKey];
   if (!slot) {
     return {
@@ -127,7 +127,7 @@ function translateDecisionIfEquals(b: ClassifiedBinding): Translation {
       reason: `no FilingInfo slot for decision "${decisionKey}".`,
     };
   }
-  const matchValue = b.params.matchValue;
+  const matchValue = binding.params.matchValue;
   if (matchValue === undefined) {
     // Mode 1: pass through the raw decision value (single/multi select).
     return { kind: "body", body: `(_, info) => info.${slot}` };
@@ -143,8 +143,8 @@ function translateDecisionIfEquals(b: ClassifiedBinding): Translation {
   };
 }
 
-function translateTableLookupByDecision(b: ClassifiedBinding): Translation {
-  const decisionKey = String(b.params.decisionKey ?? "");
+function translateTableLookupByDecision(binding: ClassifiedBinding): Translation {
+  const decisionKey = String(binding.params.decisionKey ?? "");
   const slot = DECISION_TO_SLOT[decisionKey];
   if (!slot) {
     return {
@@ -152,7 +152,7 @@ function translateTableLookupByDecision(b: ClassifiedBinding): Translation {
       reason: `no FilingInfo slot for decision "${decisionKey}".`,
     };
   }
-  const table = b.params.table;
+  const table = binding.params.table;
   if (!table || typeof table !== "object") {
     return { kind: "unsupported", reason: "tableLookupByDecision missing table param" };
   }
@@ -163,16 +163,16 @@ function translateTableLookupByDecision(b: ClassifiedBinding): Translation {
   };
 }
 
-function translateFromFields(b: ClassifiedBinding, formId: string): Translation {
-  const terms = b.params.terms as
+function translateFromFields(binding: ClassifiedBinding, formId: string): Translation {
+  const terms = binding.params.terms as
     Array<{ fieldId: string; sign?: number; whenSourceNotRequired?: unknown }> | undefined;
   if (!Array.isArray(terms) || terms.length === 0) {
     return { kind: "unsupported", reason: "fromFields missing terms" };
   }
   const args: string[] = [];
-  for (const t of terms) {
-    const sign = t.sign ?? 1;
-    const key = shortOrFullKey(t.fieldId, formId);
+  for (const term of terms) {
+    const sign = term.sign ?? 1;
+    const key = shortOrFullKey(term.fieldId, formId);
     if (sign === 1) {
       args.push(`f[${quote(key)}]`);
     } else if (sign === -1) {
@@ -183,7 +183,7 @@ function translateFromFields(b: ClassifiedBinding, formId: string): Translation 
     }
   }
   const sumExpr = `sum(${args.join(", ")})`;
-  const floorVal = b.params.floor;
+  const floorVal = binding.params.floor;
   if (typeof floorVal === "number") {
     return {
       kind: "body",
@@ -195,10 +195,10 @@ function translateFromFields(b: ClassifiedBinding, formId: string): Translation 
   return { kind: "body", body: `(f) => ${sumExpr}`, usesSum: true };
 }
 
-function translateTaxTable(b: ClassifiedBinding, formId: string): Translation {
-  const decisionKey = String(b.params.decisionKey ?? "");
-  const inputFieldId = String(b.params.inputFieldId ?? "");
-  const tableId = String(b.params.tableId ?? "federal-2025");
+function translateTaxTable(binding: ClassifiedBinding, formId: string): Translation {
+  const decisionKey = String(binding.params.decisionKey ?? "");
+  const inputFieldId = String(binding.params.inputFieldId ?? "");
+  const tableId = String(binding.params.tableId ?? "federal-2025");
   const slot = DECISION_TO_SLOT[decisionKey];
   if (!slot) {
     return {
@@ -224,8 +224,8 @@ function translateTaxTable(b: ClassifiedBinding, formId: string): Translation {
   };
 }
 
-function translateConstant(b: ClassifiedBinding): Translation {
-  const value = b.params.value;
+function translateConstant(binding: ClassifiedBinding): Translation {
+  const value = binding.params.value;
   if (value === undefined) {
     return { kind: "unsupported", reason: "constant missing value param" };
   }
@@ -244,6 +244,6 @@ function shortOrFullKey(fieldId: string, formId: string): string {
   return fieldId;
 }
 
-export function quote(s: string): string {
-  return JSON.stringify(s);
+export function quote(text: string): string {
+  return JSON.stringify(text);
 }

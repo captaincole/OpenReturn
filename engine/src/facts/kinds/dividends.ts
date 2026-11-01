@@ -39,26 +39,26 @@ export function isDividendFactKey(key: string): boolean {
   return DIV_KEY_RE.test(key);
 }
 
-export function isDividendFact(f: TaxFactRow): boolean {
-  return f.category === DIV_CATEGORY && DIV_KEY_RE.test(f.key);
+export function isDividendFact(fact: TaxFactRow): boolean {
+  return fact.category === DIV_CATEGORY && DIV_KEY_RE.test(fact.key);
 }
 
-export function parseDividendFact(f: TaxFactRow): DividendFact | null {
-  if (f.category !== DIV_CATEGORY) return null;
-  const match = f.key.match(DIV_KEY_RE);
+export function parseDividendFact(fact: TaxFactRow): DividendFact | null {
+  if (fact.category !== DIV_CATEGORY) return null;
+  const match = fact.key.match(DIV_KEY_RE);
   if (!match) return null;
   const [, accountSlug] = match;
   return {
     accountSlug,
-    dividends: f.value as DividendFactValue,
-    sourceFact: f,
+    dividends: fact.value as DividendFactValue,
+    sourceFact: fact,
   };
 }
 
 export function getDividendFacts(facts: FactsView): DividendFact[] {
   const out: DividendFact[] = [];
-  for (const f of facts.byCategory(DIV_CATEGORY)) {
-    const parsed = parseDividendFact(f);
+  for (const fact of facts.byCategory(DIV_CATEGORY)) {
+    const parsed = parseDividendFact(fact);
     if (parsed !== null) out.push(parsed);
   }
   return out;

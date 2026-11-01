@@ -54,8 +54,8 @@ interface CatalogPayload {
 
 function buildCatalog(payload: CatalogPayload): Catalog {
   const formsById = new Map<string, FormDefinition>();
-  for (const f of payload.forms) {
-    formsById.set(f.formId, f);
+  for (const form of payload.forms) {
+    formsById.set(form.formId, form);
   }
   const fieldsByForm = new Map<string, FieldInventory[]>();
   const fieldsById = new Map<string, FieldInventory>();
@@ -66,7 +66,7 @@ function buildCatalog(payload: CatalogPayload): Catalog {
     fieldsByForm.set(field.formId, list);
   }
   for (const list of fieldsByForm.values()) {
-    list.sort((a, b) => a.ordinal - b.ordinal);
+    list.sort((left, right) => left.ordinal - right.ordinal);
   }
   return {
     getForm: (formId) => formsById.get(formId),
@@ -156,9 +156,9 @@ export function buildCatalogFromFixtures(fixtures: FixtureFile[]): Catalog {
   const fields: FieldInventory[] = [];
   for (const fx of fixtures) {
     forms.push(fx.form);
-    fx.fields.forEach((f, i) => {
+    fx.fields.forEach((field, i) => {
       fields.push({
-        ...f,
+        ...field,
         formId: fx.form.formId,
         ordinal: i,
       });

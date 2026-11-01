@@ -10,7 +10,7 @@ function strictSchema(schema: unknown): unknown {
   if (Array.isArray(schema)) return schema.map(strictSchema);
   if (schema === null || typeof schema !== "object") return schema;
   const out: Record<string, unknown> = {};
-  for (const [k, v] of Object.entries(schema)) out[k] = strictSchema(v);
+  for (const [key, value] of Object.entries(schema)) out[key] = strictSchema(value);
   if (out.type === "object" && out.additionalProperties === undefined) {
     out.additionalProperties = false;
   }
@@ -39,7 +39,7 @@ export async function createStructured(
       },
     },
   });
-  const text = response.content.find((c) => c.type === "text");
+  const text = response.content.find((block) => block.type === "text");
   if (!text || text.type !== "text") return { input: null, response };
   try {
     return { input: JSON.parse(text.text) as unknown, response };

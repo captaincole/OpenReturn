@@ -46,7 +46,10 @@ const IDENTITY = {
 } as unknown as FilingInfo;
 
 const run = (forms: EvaluatedForm<BaseFormField>[], filingInfo = IDENTITY) =>
-  pendingInputs({ forms: new Map(forms.map((f) => [f.formId, f])), filingInfo });
+  pendingInputs({
+    forms: new Map(forms.map((evaluated) => [evaluated.formId, evaluated])),
+    filingInfo,
+  });
 
 describe("pendingInputs", () => {
   it("is empty for a complete return", () => {
@@ -57,12 +60,12 @@ describe("pendingInputs", () => {
   });
 
   it("asks for the must-file decision when it is missing", () => {
-    const f = form("a", blocked({ missingDecisionKey: "decisions.scope.must_file_a" }));
-    expect(run([f]).pendingDecisions).toEqual(["decisions.scope.must_file_a"]);
+    const evaluated = form("a", blocked({ missingDecisionKey: "decisions.scope.must_file_a" }));
+    expect(run([evaluated]).pendingDecisions).toEqual(["decisions.scope.must_file_a"]);
   });
 
   it("splits a filed form's blockers into decisions and facts, sorted and unique", () => {
-    const f = form(
+    const evaluated = form(
       "a",
       ok(true),
       [
@@ -72,7 +75,7 @@ describe("pendingInputs", () => {
       ],
       ["decisions.a"],
     );
-    expect(run([f])).toEqual({
+    expect(run([evaluated])).toEqual({
       pendingDecisions: ["decisions.a", "decisions.b"],
       pendingFacts: ["wages.a", "wages.z"],
     });

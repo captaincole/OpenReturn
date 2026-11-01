@@ -11,29 +11,31 @@ export function groupRootCauses(
   diffs: LineDiff[],
   readsOf: (fieldId: string) => string[] | undefined,
 ): RootCause[] {
-  const byId = new Map(diffs.map((d) => [d.fieldId, d]));
-  const parents = (id: string) => (readsOf(id) ?? []).filter((r) => r !== id && byId.has(r));
+  const byId = new Map(diffs.map((diff) => [diff.fieldId, diff]));
+  const parents = (id: string) =>
+    (readsOf(id) ?? []).filter((read) => read !== id && byId.has(read));
   const rootsMemo = new Map<string, Set<string>>();
 
   const rootsOf = (id: string, seen: Set<string>): Set<string> => {
     const memo = rootsMemo.get(id);
     if (memo) return memo;
-    const ps = parents(id).filter((p) => !seen.has(p));
+    const ps = parents(id).filter((parent) => !seen.has(parent));
     const out = new Set<string>();
     if (ps.length === 0) out.add(id);
-    for (const p of ps) for (const r of rootsOf(p, new Set([...seen, id]))) out.add(r);
+    for (const parent of ps)
+      for (const root of rootsOf(parent, new Set([...seen, id]))) out.add(root);
     rootsMemo.set(id, out);
     return out;
   };
 
   const groups = new Map<string, RootCause>();
-  for (const d of diffs) {
-    for (const rootId of rootsOf(d.fieldId, new Set())) {
+  for (const diff of diffs) {
+    for (const rootId of rootsOf(diff.fieldId, new Set())) {
       const group = groups.get(rootId) ?? { root: byId.get(rootId)!, downstream: [] };
-      if (rootId !== d.fieldId) group.downstream.push(d);
+      if (rootId !== diff.fieldId) group.downstream.push(diff);
       groups.set(rootId, group);
     }
   }
   /* Calculation order: the order the roots appear in `diffs`. */
-  return diffs.filter((d) => groups.has(d.fieldId)).map((d) => groups.get(d.fieldId)!);
+  return diffs.filter((diff) => groups.has(diff.fieldId)).map((diff) => groups.get(diff.fieldId)!);
 }

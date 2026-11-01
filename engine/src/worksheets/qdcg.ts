@@ -57,13 +57,13 @@ export interface QdcgResult {
 function taxByAmount(amount: number, filingStatus: FilingStatus, taxYear: number): number {
   if (amount < 0) return 0;
   if (amount < 100000) {
-    const r = lookupTax(`federal-${taxYear}`, amount, filingStatus);
-    if (!r.ok) {
+    const lookup = lookupTax(`federal-${taxYear}`, amount, filingStatus);
+    if (!lookup.ok) {
       throw new Error(
-        `QDCG worksheet: tax-table lookup for ${amount} (${filingStatus}, ${taxYear}) failed: ${r.message}`,
+        `QDCG worksheet: tax-table lookup for ${amount} (${filingStatus}, ${taxYear}) failed: ${lookup.message}`,
       );
     }
-    return r.tax;
+    return lookup.tax;
   }
   return roundDollars(lookupRateSchedule(taxYear, filingStatus, amount));
 }

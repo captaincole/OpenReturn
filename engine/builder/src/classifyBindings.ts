@@ -82,8 +82,8 @@ export async function classifyBindings(
   const inventoryBlock = buildInventoryBlock(opts, catalogIndex);
 
   const contextByFieldId = new Map<string, RetrievedFieldContext>();
-  for (const c of opts.retrievedContext ?? []) {
-    contextByFieldId.set(c.fieldId, c);
+  for (const context of opts.retrievedContext ?? []) {
+    contextByFieldId.set(context.fieldId, context);
   }
 
   const batches: FieldInventory[][] = [];
@@ -148,7 +148,7 @@ async function runBatchPool(
         ctx.contextByFieldId,
         ctx.catalogIndex,
       );
-      for (const b of result.bindings) allBindings.push(b);
+      for (const binding of result.bindings) allBindings.push(binding);
       if (result.mustFile && !mustFile) mustFile = result.mustFile;
       addUsage(usage, result.usage);
       onBatchComplete?.(i, batches.length, batch.length);
@@ -187,17 +187,17 @@ const zeroUsage = (): Usage => ({
 
 function addUsage(
   total: Usage,
-  u: {
+  usage: {
     input_tokens: number;
     output_tokens: number;
     cache_creation_input_tokens?: number | null;
     cache_read_input_tokens?: number | null;
   },
 ): void {
-  total.input_tokens += u.input_tokens;
-  total.output_tokens += u.output_tokens;
-  total.cache_creation_input_tokens += u.cache_creation_input_tokens ?? 0;
-  total.cache_read_input_tokens += u.cache_read_input_tokens ?? 0;
+  total.input_tokens += usage.input_tokens;
+  total.output_tokens += usage.output_tokens;
+  total.cache_creation_input_tokens += usage.cache_creation_input_tokens ?? 0;
+  total.cache_read_input_tokens += usage.cache_read_input_tokens ?? 0;
 }
 
 async function classifyOneBatch(
@@ -211,7 +211,7 @@ async function classifyOneBatch(
   catalogIndex: CatalogIndex,
 ): Promise<SingleBatchResult> {
   const fieldsTable = batch
-    .map((f, i) => renderFieldEntry(i + 1, f, contextByFieldId.get(f.fieldId)))
+    .map((field, i) => renderFieldEntry(i + 1, field, contextByFieldId.get(field.fieldId)))
     .join("\n\n");
 
   const userText = `Form: ${opts.formTitle} (${opts.formId}, tax year ${opts.taxYear}, jurisdiction ${opts.jurisdiction})
@@ -282,7 +282,7 @@ async function runBindingConversation(
     addUsage(usage, response.usage);
 
     const toolUses = response.content.filter(
-      (c): c is Anthropic.ToolUseBlock => c.type === "tool_use",
+      (block): block is Anthropic.ToolUseBlock => block.type === "tool_use",
     );
     if (toolUses.length === 0) {
       throw new Error(
@@ -290,7 +290,7 @@ async function runBindingConversation(
       );
     }
 
-    const emit = toolUses.find((t) => t.name === "emit_bindings");
+    const emit = toolUses.find((toolUse) => toolUse.name === "emit_bindings");
     if (emit) {
       return { payload: parseEmitPayload(emit, batchLabel, response.stop_reason), usage };
     }
@@ -382,14 +382,14 @@ function executeLookups(
 }
 
 function toClassifiedBindings(raw: EmitPayload["bindings"]): ClassifiedBinding[] {
-  return raw.map((b) => ({
-    fieldId: b.field_id,
-    ruleName: b.rule_name,
-    params: b.params,
+  return raw.map((binding) => ({
+    fieldId: binding.field_id,
+    ruleName: binding.rule_name,
+    params: binding.params,
     /* The AI sometimes omits this despite the schema; one gap must not fail the whole run. */
-    rationale: b.rationale ?? `(no rationale provided — rule=${b.rule_name})`,
+    rationale: binding.rationale ?? `(no rationale provided — rule=${binding.rule_name})`,
     /* Unrated means "low", so a human reviews it. */
-    confidence: b.confidence ?? "low",
+    confidence: binding.confidence ?? "low",
   }));
 }
 
@@ -403,10 +403,10 @@ function renderFieldEntry(
   const header = `${ordinal}. ${field.fieldId} — "${field.label}" (category=${field.category}, valueType=${field.valueType})`;
   if (!context || context.blocks.length === 0) return header;
   const blockLines = context.blocks
-    .map((b) => {
-      const text = b.text.replace(/\s+/g, " ").trim();
+    .map((block) => {
+      const text = block.text.replace(/\s+/g, " ").trim();
       const trimmed = text.length > MAX_BLOCK_CHARS ? text.slice(0, MAX_BLOCK_CHARS) + "…" : text;
-      return `     [${b.blockId}] ${trimmed}`;
+      return `     [${block.blockId}] ${trimmed}`;
     })
     .join("\n");
   return `${header}\n   IRS context:\n${blockLines}`;
@@ -414,10 +414,12 @@ function renderFieldEntry(
 
 function buildInventoryBlock(opts: ClassifyBindingsOpts, catalogIndex: CatalogIndex): string {
   const lines = opts.fields.map(
-    (f) => `  ${f.fieldId} — "${f.label}" (category=${f.category}, valueType=${f.valueType})`,
+    (field) =>
+      `  ${field.fieldId} — "${field.label}" (category=${field.category}, valueType=${field.valueType})`,
   );
   const otherForms = Array.from(catalogIndex.values()).map(
-    (f) => `  - ${f.formId} — ${f.title} (${f.jurisdiction}, ${f.fields.length} fields)`,
+    (form) =>
+      `  - ${form.formId} — ${form.title} (${form.jurisdiction}, ${form.fields.length} fields)`,
   );
   const otherFormsBlock =
     otherForms.length > 0

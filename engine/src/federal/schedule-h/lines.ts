@@ -8,8 +8,8 @@ export const ADDITIONAL_MEDICARE_WITHHOLDING_THRESHOLD = 200000;
 
 type Info = ScheduleHFilingInfo;
 
-export function paysLineA(e: HouseholdEmployee): boolean {
-  return Math.max(e.socialSecurityWages, e.medicareWages) >= HOUSEHOLD_WAGE_THRESHOLD;
+export function paysLineA(employee: HouseholdEmployee): boolean {
+  return Math.max(employee.socialSecurityWages, employee.medicareWages) >= HOUSEHOLD_WAGE_THRESHOLD;
 }
 
 export const lineAEmployees = (info: Info): HouseholdEmployee[] =>
@@ -20,7 +20,7 @@ export const lineA = (info: Info): boolean | undefined =>
 
 export const lineB = (info: Info): boolean | undefined =>
   lineA(info) === false
-    ? (info.householdEmployees ?? []).some((e) => e.federalTaxWithheld > 0)
+    ? (info.householdEmployees ?? []).some((employee) => employee.federalTaxWithheld > 0)
     : undefined;
 
 export const lineC = (info: Info): boolean | undefined =>

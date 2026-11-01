@@ -37,22 +37,22 @@ export function makeMiscIncomeFactKey(accountSlug: string): string {
   return `account.${accountSlug}.misc`;
 }
 
-export function isMiscIncomeFact(f: TaxFactRow): boolean {
-  return f.category === MISC_CATEGORY && MISC_KEY_RE.test(f.key);
+export function isMiscIncomeFact(fact: TaxFactRow): boolean {
+  return fact.category === MISC_CATEGORY && MISC_KEY_RE.test(fact.key);
 }
 
-export function parseMiscIncomeFact(f: TaxFactRow): MiscIncomeFact | null {
-  if (f.category !== MISC_CATEGORY) return null;
-  const match = f.key.match(MISC_KEY_RE);
+export function parseMiscIncomeFact(fact: TaxFactRow): MiscIncomeFact | null {
+  if (fact.category !== MISC_CATEGORY) return null;
+  const match = fact.key.match(MISC_KEY_RE);
   if (!match) return null;
   const [, accountSlug] = match;
-  return { accountSlug, misc: f.value as MiscIncomeFactValue, sourceFact: f };
+  return { accountSlug, misc: fact.value as MiscIncomeFactValue, sourceFact: fact };
 }
 
 export function getMiscIncomeFacts(facts: FactsView): MiscIncomeFact[] {
   const out: MiscIncomeFact[] = [];
-  for (const f of facts.byCategory(MISC_CATEGORY)) {
-    const parsed = parseMiscIncomeFact(f);
+  for (const fact of facts.byCategory(MISC_CATEGORY)) {
+    const parsed = parseMiscIncomeFact(fact);
     if (parsed !== null) out.push(parsed);
   }
   return out;

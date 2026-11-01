@@ -18,229 +18,246 @@ export function register(): void {
           ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
           : undefined,
       // Line 1: 540 line 48 + 61 (AMT) + 62 (behavioral health tax).
-      "1.part2.line_1": (f) => {
-        const tax = f["form-540.line.48_tax_after_credits"];
+      "1.part2.line_1": (form) => {
+        const tax = form["form-540.line.48_tax_after_credits"];
         if (typeof tax !== "number") return undefined;
         return sum(
           tax,
-          f["form-540.line.61_alternative_minimum_tax"],
-          f["form-540.line.62_behavioral_health_services_tax"],
+          form["form-540.line.61_alternative_minimum_tax"],
+          form["form-540.line.62_behavioral_health_services_tax"],
         );
       },
-      "1.part2.line_2": (f) => {
-        const v = f["1.part2.line_1"];
-        return typeof v === "number" ? roundDollars(v * 0.9) : undefined;
+      "1.part2.line_2": (form) => {
+        const value = form["1.part2.line_1"];
+        return typeof value === "number" ? roundDollars(value * 0.9) : undefined;
       },
       "1.part2.line_5": (_, info) =>
         info.priorYearCaTax !== undefined && info.priorYearSafeHarborRate !== undefined
           ? roundDollars(info.priorYearCaTax * info.priorYearSafeHarborRate)
           : undefined,
       // Line 6: line 2 alone when 2025 CA AGI is $1,000,000 or more.
-      "1.part2.line_6": (f) => {
-        const two = f["1.part2.line_2"];
-        const five = f["1.part2.line_5"];
-        const caAgi = f["form-540.line.17_ca_agi"];
+      "1.part2.line_6": (form) => {
+        const two = form["1.part2.line_2"];
+        const five = form["1.part2.line_5"];
+        const caAgi = form["form-540.line.17_ca_agi"];
         if (typeof two !== "number") return undefined;
         if (typeof five !== "number" || (typeof caAgi === "number" && caAgi >= 1000000)) return two;
         return Math.min(two, five);
       },
       // Line 11: line 10 × .05028767 (FTB 5805 rate).
-      "1.part2.line_11": (f) => {
-        const v = f["1.part2.line_10"];
-        return typeof v === "number" ? roundDollars(v * 0.05028767) : undefined;
+      "1.part2.line_11": (form) => {
+        const value = form["1.part2.line_10"];
+        return typeof value === "number" ? roundDollars(value * 0.05028767) : undefined;
       },
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       // 540 lines 71 + 73; estimated payments are excluded.
-      "1.part2.line_3": (f) =>
+      "1.part2.line_3": (form) =>
         sum(
-          f["form-540.line.71_ca_income_tax_withheld"],
-          f["form-540.line.73_withholding_592b_593"],
+          form["form-540.line.71_ca_income_tax_withheld"],
+          form["form-540.line.73_withholding_592b_593"],
         ),
-      "1.part2.line_4": (f) =>
-        sum(f["1.part2.line_1"], f["1.part2.line_3"] === undefined ? 0 : -f["1.part2.line_3"]),
-      "1.part2.line_7": (f) => sum(f["1.part2.line_3"]),
-      "1.part2.line_9": (f) => sum(f["1.part2.line_7"], f["1.part2.line_8"]),
-      "1.part2.line_10": (f) =>
+      "1.part2.line_4": (form) =>
+        sum(
+          form["1.part2.line_1"],
+          form["1.part2.line_3"] === undefined ? 0 : -form["1.part2.line_3"],
+        ),
+      "1.part2.line_7": (form) => sum(form["1.part2.line_3"]),
+      "1.part2.line_9": (form) => sum(form["1.part2.line_7"], form["1.part2.line_8"]),
+      "1.part2.line_10": (form) =>
         atLeast(
           0,
-          sum(f["1.part2.line_6"], f["1.part2.line_9"] === undefined ? 0 : -f["1.part2.line_9"]),
+          sum(
+            form["1.part2.line_6"],
+            form["1.part2.line_9"] === undefined ? 0 : -form["1.part2.line_9"],
+          ),
         ),
-      "1.part2.line_13": (f) =>
+      "1.part2.line_13": (form) =>
         atLeast(
           0,
-          sum(f["1.part2.line_11"], f["1.part2.line_12"] === undefined ? 0 : -f["1.part2.line_12"]),
+          sum(
+            form["1.part2.line_11"],
+            form["1.part2.line_12"] === undefined ? 0 : -form["1.part2.line_12"],
+          ),
         ),
-      "2.part3.line_9_col_b": (f) =>
+      "2.part3.line_9_col_b": (form) =>
         sum(
-          f["2.part3.line_3_col_b"],
-          f["2.part3.line_8_col_b"] === undefined ? 0 : -f["2.part3.line_8_col_b"],
+          form["2.part3.line_3_col_b"],
+          form["2.part3.line_8_col_b"] === undefined ? 0 : -form["2.part3.line_8_col_b"],
         ),
-      "2.part3.line_9_col_c": (f) =>
+      "2.part3.line_9_col_c": (form) =>
         sum(
-          f["2.part3.line_3_col_c"],
-          f["2.part3.line_8_col_c"] === undefined ? 0 : -f["2.part3.line_8_col_c"],
+          form["2.part3.line_3_col_c"],
+          form["2.part3.line_8_col_c"] === undefined ? 0 : -form["2.part3.line_8_col_c"],
         ),
-      "2.part3.line_9_col_d": (f) =>
+      "2.part3.line_9_col_d": (form) =>
         sum(
-          f["2.part3.line_3_col_d"],
-          f["2.part3.line_8_col_d"] === undefined ? 0 : -f["2.part3.line_8_col_d"],
+          form["2.part3.line_3_col_d"],
+          form["2.part3.line_8_col_d"] === undefined ? 0 : -form["2.part3.line_8_col_d"],
         ),
       // Form 540 line 32 goes in every column.
-      "2.part3.line_11_col_a": (f) => sum(f["form-540.line.32_exemption_credits"]),
-      "2.part3.line_11_col_b": (f) => sum(f["form-540.line.32_exemption_credits"]),
-      "2.part3.line_11_col_c": (f) => sum(f["form-540.line.32_exemption_credits"]),
-      "2.part3.line_11_col_d": (f) => sum(f["form-540.line.32_exemption_credits"]),
-      "2.part3.line_12_col_a": (f) =>
+      "2.part3.line_11_col_a": (form) => sum(form["form-540.line.32_exemption_credits"]),
+      "2.part3.line_11_col_b": (form) => sum(form["form-540.line.32_exemption_credits"]),
+      "2.part3.line_11_col_c": (form) => sum(form["form-540.line.32_exemption_credits"]),
+      "2.part3.line_11_col_d": (form) => sum(form["form-540.line.32_exemption_credits"]),
+      "2.part3.line_12_col_a": (form) =>
         sum(
-          f["2.part3.line_10_col_a"],
-          f["2.part3.line_11_col_a"] === undefined ? 0 : -f["2.part3.line_11_col_a"],
+          form["2.part3.line_10_col_a"],
+          form["2.part3.line_11_col_a"] === undefined ? 0 : -form["2.part3.line_11_col_a"],
         ),
-      "2.part3.line_12_col_b": (f) =>
+      "2.part3.line_12_col_b": (form) =>
         sum(
-          f["2.part3.line_10_col_b"],
-          f["2.part3.line_11_col_b"] === undefined ? 0 : -f["2.part3.line_11_col_b"],
+          form["2.part3.line_10_col_b"],
+          form["2.part3.line_11_col_b"] === undefined ? 0 : -form["2.part3.line_11_col_b"],
         ),
-      "2.part3.line_12_col_c": (f) =>
+      "2.part3.line_12_col_c": (form) =>
         sum(
-          f["2.part3.line_10_col_c"],
-          f["2.part3.line_11_col_c"] === undefined ? 0 : -f["2.part3.line_11_col_c"],
+          form["2.part3.line_10_col_c"],
+          form["2.part3.line_11_col_c"] === undefined ? 0 : -form["2.part3.line_11_col_c"],
         ),
-      "2.part3.line_12_col_d": (f) =>
+      "2.part3.line_12_col_d": (form) =>
         sum(
-          f["2.part3.line_10_col_d"],
-          f["2.part3.line_11_col_d"] === undefined ? 0 : -f["2.part3.line_11_col_d"],
+          form["2.part3.line_10_col_d"],
+          form["2.part3.line_11_col_d"] === undefined ? 0 : -form["2.part3.line_11_col_d"],
         ),
-      "3.part3.line_14a_col_a": (f) =>
+      "3.part3.line_14a_col_a": (form) =>
         atLeast(
           0,
           sum(
-            f["2.part3.line_12_col_a"],
-            f["2.part3.line_13_col_a"] === undefined ? 0 : -f["2.part3.line_13_col_a"],
+            form["2.part3.line_12_col_a"],
+            form["2.part3.line_13_col_a"] === undefined ? 0 : -form["2.part3.line_13_col_a"],
           ),
         ),
-      "3.part3.line_14a_col_b": (f) =>
+      "3.part3.line_14a_col_b": (form) =>
         atLeast(
           0,
           sum(
-            f["2.part3.line_12_col_b"],
-            f["2.part3.line_13_col_b"] === undefined ? 0 : -f["2.part3.line_13_col_b"],
+            form["2.part3.line_12_col_b"],
+            form["2.part3.line_13_col_b"] === undefined ? 0 : -form["2.part3.line_13_col_b"],
           ),
         ),
-      "3.part3.line_14a_col_c": (f) =>
+      "3.part3.line_14a_col_c": (form) =>
         atLeast(
           0,
           sum(
-            f["2.part3.line_12_col_c"],
-            f["2.part3.line_13_col_c"] === undefined ? 0 : -f["2.part3.line_13_col_c"],
+            form["2.part3.line_12_col_c"],
+            form["2.part3.line_13_col_c"] === undefined ? 0 : -form["2.part3.line_13_col_c"],
           ),
         ),
-      "3.part3.line_14a_col_d": (f) =>
+      "3.part3.line_14a_col_d": (form) =>
         atLeast(
           0,
           sum(
-            f["2.part3.line_12_col_d"],
-            f["2.part3.line_13_col_d"] === undefined ? 0 : -f["2.part3.line_13_col_d"],
+            form["2.part3.line_12_col_d"],
+            form["2.part3.line_13_col_d"] === undefined ? 0 : -form["2.part3.line_13_col_d"],
           ),
         ),
       // Col (d) only: 540 line 61 (AMT) + 62 (BHST).
-      "3.part3.line_14b_col_d": (f) =>
+      "3.part3.line_14b_col_d": (form) =>
         sum(
-          f["form-540.line.61_alternative_minimum_tax"],
-          f["form-540.line.62_behavioral_health_services_tax"],
+          form["form-540.line.61_alternative_minimum_tax"],
+          form["form-540.line.62_behavioral_health_services_tax"],
         ),
-      "3.part3.line_14c_col_a": (f) =>
-        sum(f["3.part3.line_14a_col_a"], f["3.part3.line_14b_col_a"]),
-      "3.part3.line_14c_col_b": (f) =>
-        sum(f["3.part3.line_14a_col_b"], f["3.part3.line_14b_col_b"]),
-      "3.part3.line_14c_col_c": (f) =>
-        sum(f["3.part3.line_14a_col_c"], f["3.part3.line_14b_col_c"]),
-      "3.part3.line_14c_col_d": (f) =>
-        sum(f["3.part3.line_14a_col_d"], f["3.part3.line_14b_col_d"]),
-      "3.part3.line_17_col_b": (f) => sum(f["3.part3.line_23_col_a"]),
-      "3.part3.line_17_col_c": (f) => sum(f["3.part3.line_23_col_a"], f["3.part3.line_23_col_b"]),
-      "3.part3.line_17_col_d": (f) =>
-        sum(f["3.part3.line_23_col_a"], f["3.part3.line_23_col_b"], f["3.part3.line_23_col_c"]),
-      "3.part3.line_18_col_a": (f) => atLeast(0, sum(f["3.part3.line_16_col_a"])),
-      "3.part3.line_18_col_b": (f) =>
+      "3.part3.line_14c_col_a": (form) =>
+        sum(form["3.part3.line_14a_col_a"], form["3.part3.line_14b_col_a"]),
+      "3.part3.line_14c_col_b": (form) =>
+        sum(form["3.part3.line_14a_col_b"], form["3.part3.line_14b_col_b"]),
+      "3.part3.line_14c_col_c": (form) =>
+        sum(form["3.part3.line_14a_col_c"], form["3.part3.line_14b_col_c"]),
+      "3.part3.line_14c_col_d": (form) =>
+        sum(form["3.part3.line_14a_col_d"], form["3.part3.line_14b_col_d"]),
+      "3.part3.line_17_col_b": (form) => sum(form["3.part3.line_23_col_a"]),
+      "3.part3.line_17_col_c": (form) =>
+        sum(form["3.part3.line_23_col_a"], form["3.part3.line_23_col_b"]),
+      "3.part3.line_17_col_d": (form) =>
+        sum(
+          form["3.part3.line_23_col_a"],
+          form["3.part3.line_23_col_b"],
+          form["3.part3.line_23_col_c"],
+        ),
+      "3.part3.line_18_col_a": (form) => atLeast(0, sum(form["3.part3.line_16_col_a"])),
+      "3.part3.line_18_col_b": (form) =>
         atLeast(
           0,
           sum(
-            f["3.part3.line_16_col_b"],
-            f["3.part3.line_17_col_b"] === undefined ? 0 : -f["3.part3.line_17_col_b"],
+            form["3.part3.line_16_col_b"],
+            form["3.part3.line_17_col_b"] === undefined ? 0 : -form["3.part3.line_17_col_b"],
           ),
         ),
-      "3.part3.line_18_col_c": (f) =>
+      "3.part3.line_18_col_c": (form) =>
         atLeast(
           0,
           sum(
-            f["3.part3.line_16_col_c"],
-            f["3.part3.line_17_col_c"] === undefined ? 0 : -f["3.part3.line_17_col_c"],
+            form["3.part3.line_16_col_c"],
+            form["3.part3.line_17_col_c"] === undefined ? 0 : -form["3.part3.line_17_col_c"],
           ),
         ),
-      "3.part3.line_18_col_d": (f) =>
+      "3.part3.line_18_col_d": (form) =>
         atLeast(
           0,
           sum(
-            f["3.part3.line_16_col_d"],
-            f["3.part3.line_17_col_d"] === undefined ? 0 : -f["3.part3.line_17_col_d"],
+            form["3.part3.line_16_col_d"],
+            form["3.part3.line_17_col_d"] === undefined ? 0 : -form["3.part3.line_17_col_d"],
           ),
         ),
       // The form tells filers to enter 0 in column (c).
       "3.part3.line_19_col_c": () => 0,
-      "3.part3.line_20_col_b": (f) => sum(f["3.part3.line_22_col_a"]),
-      "3.part3.line_20_col_c": (f) => sum(f["3.part3.line_22_col_b"]),
-      "3.part3.line_20_col_d": (f) => sum(f["3.part3.line_22_col_c"]),
-      "3.part3.line_21_col_a": (f) => sum(f["3.part3.line_19_col_a"]),
-      "3.part3.line_21_col_b": (f) => sum(f["3.part3.line_19_col_b"], f["3.part3.line_20_col_b"]),
-      "3.part3.line_21_col_c": (f) => sum(f["3.part3.line_19_col_c"], f["3.part3.line_20_col_c"]),
-      "3.part3.line_21_col_d": (f) => sum(f["3.part3.line_19_col_d"], f["3.part3.line_20_col_d"]),
-      "3.part3.line_22_col_a": (f) =>
+      "3.part3.line_20_col_b": (form) => sum(form["3.part3.line_22_col_a"]),
+      "3.part3.line_20_col_c": (form) => sum(form["3.part3.line_22_col_b"]),
+      "3.part3.line_20_col_d": (form) => sum(form["3.part3.line_22_col_c"]),
+      "3.part3.line_21_col_a": (form) => sum(form["3.part3.line_19_col_a"]),
+      "3.part3.line_21_col_b": (form) =>
+        sum(form["3.part3.line_19_col_b"], form["3.part3.line_20_col_b"]),
+      "3.part3.line_21_col_c": (form) =>
+        sum(form["3.part3.line_19_col_c"], form["3.part3.line_20_col_c"]),
+      "3.part3.line_21_col_d": (form) =>
+        sum(form["3.part3.line_19_col_d"], form["3.part3.line_20_col_d"]),
+      "3.part3.line_22_col_a": (form) =>
         atLeast(
           0,
           sum(
-            f["3.part3.line_21_col_a"],
-            f["3.part3.line_18_col_a"] === undefined ? 0 : -f["3.part3.line_18_col_a"],
+            form["3.part3.line_21_col_a"],
+            form["3.part3.line_18_col_a"] === undefined ? 0 : -form["3.part3.line_18_col_a"],
           ),
         ),
-      "3.part3.line_22_col_b": (f) =>
+      "3.part3.line_22_col_b": (form) =>
         atLeast(
           0,
           sum(
-            f["3.part3.line_21_col_b"],
-            f["3.part3.line_18_col_b"] === undefined ? 0 : -f["3.part3.line_18_col_b"],
+            form["3.part3.line_21_col_b"],
+            form["3.part3.line_18_col_b"] === undefined ? 0 : -form["3.part3.line_18_col_b"],
           ),
         ),
-      "3.part3.line_22_col_c": (f) =>
+      "3.part3.line_22_col_c": (form) =>
         atLeast(
           0,
           sum(
-            f["3.part3.line_21_col_c"],
-            f["3.part3.line_18_col_c"] === undefined ? 0 : -f["3.part3.line_18_col_c"],
+            form["3.part3.line_21_col_c"],
+            form["3.part3.line_18_col_c"] === undefined ? 0 : -form["3.part3.line_18_col_c"],
           ),
         ),
-      "3.part3.line_22_col_d": (f) =>
+      "3.part3.line_22_col_d": (form) =>
         atLeast(
           0,
           sum(
-            f["3.part3.line_21_col_d"],
-            f["3.part3.line_18_col_d"] === undefined ? 0 : -f["3.part3.line_18_col_d"],
+            form["3.part3.line_21_col_d"],
+            form["3.part3.line_18_col_d"] === undefined ? 0 : -form["3.part3.line_18_col_d"],
           ),
         ),
       // Line 23 = lesser of line 18 or 21, computed as line 21 − line 22.
-      "3.part3.line_23_col_a": (f) =>
+      "3.part3.line_23_col_a": (form) =>
         sum(
-          f["3.part3.line_21_col_a"],
-          f["3.part3.line_22_col_a"] === undefined ? 0 : -f["3.part3.line_22_col_a"],
+          form["3.part3.line_21_col_a"],
+          form["3.part3.line_22_col_a"] === undefined ? 0 : -form["3.part3.line_22_col_a"],
         ),
-      "3.part3.line_23_col_b": (f) =>
+      "3.part3.line_23_col_b": (form) =>
         sum(
-          f["3.part3.line_21_col_b"],
-          f["3.part3.line_22_col_b"] === undefined ? 0 : -f["3.part3.line_22_col_b"],
+          form["3.part3.line_21_col_b"],
+          form["3.part3.line_22_col_b"] === undefined ? 0 : -form["3.part3.line_22_col_b"],
         ),
-      "3.part3.line_23_col_c": (f) =>
+      "3.part3.line_23_col_c": (form) =>
         sum(
-          f["3.part3.line_21_col_c"],
-          f["3.part3.line_22_col_c"] === undefined ? 0 : -f["3.part3.line_22_col_c"],
+          form["3.part3.line_21_col_c"],
+          form["3.part3.line_22_col_c"] === undefined ? 0 : -form["3.part3.line_22_col_c"],
         ),
     },
 

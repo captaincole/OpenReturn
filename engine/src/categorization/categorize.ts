@@ -69,8 +69,8 @@ export function categorizeFormProgress(
     };
   });
 
-  const totalAll = categories.reduce((s, c) => s + c.total, 0);
-  const completedAll = categories.reduce((s, c) => s + c.completed, 0);
+  const totalAll = categories.reduce((total, category) => total + category.total, 0);
+  const completedAll = categories.reduce((total, category) => total + category.completed, 0);
   // eslint-disable-next-line no-restricted-properties -- a progress percent, not money
   const overallPct = totalAll === 0 ? 0 : Math.round((completedAll / totalAll) * 100);
 

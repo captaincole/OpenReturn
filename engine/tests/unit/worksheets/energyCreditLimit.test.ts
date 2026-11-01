@@ -9,7 +9,7 @@ describe("computeEnergyCreditLimit", () => {
   });
 
   it("subtracts every Schedule 3 credit on line 2", () => {
-    const r = computeEnergyCreditLimit({
+    const result = computeEnergyCreditLimit({
       tax: 5000,
       form8978Amount: 10,
       foreignTaxCredit: 100,
@@ -18,8 +18,8 @@ describe("computeEnergyCreditLimit", () => {
       educationCredits: 1000,
       retirementSavingsCredit: 200,
     });
-    expect(r.line2).toBe(1950);
-    expect(r.line3).toBe(3050);
+    expect(result.line2).toBe(1950);
+    expect(result.line3).toBe(3050);
   });
 
   it("is 0, not negative, when the credits use up the tax", () => {

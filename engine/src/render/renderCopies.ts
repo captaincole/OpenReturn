@@ -28,7 +28,7 @@ export async function renderFormCopies(opts: {
     const copyCtx = { ...ctx, filingInfo: spec.copies.select(ctx.filingInfo, i) };
     const copyForm = evaluateForm(spec.formId, copyCtx, catalog);
     const filled = await fillFromCatalog({ blankPdfBytes, form: copyForm, catalog });
-    warnings.push(...filled.warnings.map((w) => `copy ${i + 1}: ${w}`));
+    warnings.push(...filled.warnings.map((warning) => `copy ${i + 1}: ${warning}`));
     await appendPages(merged, filled.pdfBytes);
   }
   return {

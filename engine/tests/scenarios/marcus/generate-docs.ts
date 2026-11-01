@@ -177,9 +177,9 @@ function ty(yTopDown: number, fontSize = 0): number {
   return PAGE_H - yTopDown - fontSize;
 }
 
-function fmtMoney(n: number): string {
-  const abs = Math.abs(n);
-  const sign = n < 0 ? "-" : "";
+function fmtMoney(amount: number): string {
+  const abs = Math.abs(amount);
+  const sign = amount < 0 ? "-" : "";
   const fixed = abs.toFixed(2);
   const [whole, dec] = fixed.split(".");
   return sign + whole.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "." + dec;
@@ -192,13 +192,13 @@ function widthOf(font: PDFFont, str: string, size: number): number {
 function drawText(
   ctx: Ctx,
   str: string,
-  x: number,
+  xPos: number,
   yTopDown: number,
   opts: { size?: number; bold?: boolean; italic?: boolean; color?: ReturnType<typeof rgb> } = {},
 ) {
   const { size = 9, bold = false, italic = false, color = BLACK } = opts;
   const font = italic ? ctx.italic : bold ? ctx.bold : ctx.reg;
-  ctx.page.drawText(str, { x, y: ty(yTopDown, size), size, font, color });
+  ctx.page.drawText(str, { x: xPos, y: ty(yTopDown, size), size, font, color });
 }
 
 function drawTextRight(
@@ -245,7 +245,7 @@ function wrapText(font: PDFFont, text: string, maxWidth: number, size: number): 
 function drawWrapped(
   ctx: Ctx,
   text: string,
-  x: number,
+  xPos: number,
   yTopDown: number,
   maxWidth: number,
   opts: { size?: number; bold?: boolean; italic?: boolean; lineGap?: number } = {},
@@ -253,20 +253,20 @@ function drawWrapped(
   const { size = 7, bold = false, italic = false, lineGap = 2 } = opts;
   const font = italic ? ctx.italic : bold ? ctx.bold : ctx.reg;
   const lines = wrapText(font, text, maxWidth, size);
-  let y = yTopDown;
+  let yPos = yTopDown;
   for (const line of lines) {
-    drawText(ctx, line, x, y, opts);
-    y += size + lineGap;
+    drawText(ctx, line, xPos, yPos, opts);
+    yPos += size + lineGap;
   }
-  return y;
+  return yPos;
 }
 
 function drawBox(
   ctx: Ctx,
-  x: number,
+  xPos: number,
   yTopDown: number,
-  w: number,
-  h: number,
+  width: number,
+  height: number,
   opts: {
     fill?: ReturnType<typeof rgb>;
     borderColor?: ReturnType<typeof rgb>;
@@ -275,10 +275,10 @@ function drawBox(
 ) {
   const { fill, borderColor = BLACK, borderWidth = 0.5 } = opts;
   ctx.page.drawRectangle({
-    x,
-    y: PAGE_H - yTopDown - h,
-    width: w,
-    height: h,
+    x: xPos,
+    y: PAGE_H - yTopDown - height,
+    width: width,
+    height: height,
     color: fill,
     borderColor,
     borderWidth,
@@ -304,10 +304,10 @@ function drawLine(
 
 function drawLabeledBox(
   ctx: Ctx,
-  x: number,
-  y: number,
-  w: number,
-  h: number,
+  xPos: number,
+  yPos: number,
+  width: number,
+  height: number,
   label: string,
   value?: string,
   opts: {
@@ -318,16 +318,17 @@ function drawLabeledBox(
   } = {},
 ) {
   const { fill, valueAlign = "right", valueSize = 10, multilineValue } = opts;
-  drawBox(ctx, x, y, w, h, { fill });
-  drawText(ctx, label, x + 2, y + 2, { size: 6, bold: true });
+  drawBox(ctx, xPos, yPos, width, height, { fill });
+  drawText(ctx, label, xPos + 2, yPos + 2, { size: 6, bold: true });
   if (multilineValue) {
     multilineValue.forEach((line, i) => {
-      drawText(ctx, line, x + 4, y + 12 + i * 11, { size: 9 });
+      drawText(ctx, line, xPos + 4, yPos + 12 + i * 11, { size: 9 });
     });
   } else if (value) {
-    const valueY = y + h - 4 - valueSize;
-    if (valueAlign === "right") drawTextRight(ctx, value, x + w - 4, valueY, { size: valueSize });
-    else drawText(ctx, value, x + 4, valueY, { size: valueSize });
+    const valueY = yPos + height - 4 - valueSize;
+    if (valueAlign === "right")
+      drawTextRight(ctx, value, xPos + width - 4, valueY, { size: valueSize });
+    else drawText(ctx, value, xPos + 4, valueY, { size: valueSize });
   }
 }
 
@@ -340,42 +341,46 @@ interface LineRow {
 
 function drawColumn(
   ctx: Ctx,
-  x: number,
+  xPos: number,
   yStart: number,
   width: number,
   rows: LineRow[],
   opts: { size?: number; lineHeight?: number } = {},
 ): number {
   const { size = 8, lineHeight = 11 } = opts;
-  let y = yStart;
+  let yPos = yStart;
   for (const row of rows) {
-    drawText(ctx, row.label, x, y, { size, bold: row.bold, italic: row.italic });
+    drawText(ctx, row.label, xPos, yPos, { size, bold: row.bold, italic: row.italic });
     if (row.value)
-      drawTextRight(ctx, row.value, x + width, y, { size, bold: row.bold, italic: row.italic });
-    y += lineHeight;
+      drawTextRight(ctx, row.value, xPos + width, yPos, {
+        size,
+        bold: row.bold,
+        italic: row.italic,
+      });
+    yPos += lineHeight;
   }
-  return y;
+  return yPos;
 }
 
 function drawSectionTitle(
   ctx: Ctx,
-  x: number,
-  y: number,
+  xPos: number,
+  yPos: number,
   width: number,
   title: string,
   subtitle?: string,
   ombNote?: string,
 ): number {
-  drawText(ctx, title, x, y, { size: 8, bold: true });
+  drawText(ctx, title, xPos, yPos, { size: 8, bold: true });
   const titleW = widthOf(ctx.bold, title, 8);
   if (subtitle) {
-    drawText(ctx, subtitle, x + titleW + 8, y, { size: 8, bold: true });
+    drawText(ctx, subtitle, xPos + titleW + 8, yPos, { size: 8, bold: true });
   }
   if (ombNote) {
-    drawTextRight(ctx, ombNote, x + width, y + 2, { size: 6 });
+    drawTextRight(ctx, ombNote, xPos + width, yPos + 2, { size: 6 });
   }
-  drawLine(ctx, x, y + 12, x + width, y + 12, { thickness: 0.5 });
-  return y + 18;
+  drawLine(ctx, xPos, yPos + 12, xPos + width, yPos + 12, { thickness: 0.5 });
+  return yPos + 18;
 }
 
 async function buildW2(): Promise<Uint8Array> {
@@ -413,11 +418,11 @@ async function buildW2(): Promise<Uint8Array> {
   drawTextRight(ctx, "IRS e-file", X_END - 4, 92, { size: 9, bold: true });
   drawTextRight(ctx, "www.irs.gov/efile", X_END - 4, 104, { size: 6 });
 
-  let y = 112;
+  let yPos = 112;
   drawLabeledBox(
     ctx,
     X0,
-    y,
+    yPos,
     X_LEFT_END - X0,
     24,
     "b  Employer identification number (EIN)",
@@ -427,7 +432,7 @@ async function buildW2(): Promise<Uint8Array> {
   drawLabeledBox(
     ctx,
     X_LEFT_END,
-    y,
+    yPos,
     X_PAIR_MID - X_LEFT_END,
     24,
     "1  Wages, tips, other compensation",
@@ -436,18 +441,18 @@ async function buildW2(): Promise<Uint8Array> {
   drawLabeledBox(
     ctx,
     X_PAIR_MID,
-    y,
+    yPos,
     X_END - X_PAIR_MID,
     24,
     "2  Federal income tax withheld",
     fmtMoney(W2.box2),
   );
 
-  y += 24;
+  yPos += 24;
   drawLabeledBox(
     ctx,
     X0,
-    y,
+    yPos,
     X_LEFT_END - X0,
     72,
     "c  Employer's name, address, and ZIP code",
@@ -459,7 +464,7 @@ async function buildW2(): Promise<Uint8Array> {
   drawLabeledBox(
     ctx,
     X_LEFT_END,
-    y,
+    yPos,
     X_PAIR_MID - X_LEFT_END,
     24,
     "3  Social security wages",
@@ -468,17 +473,17 @@ async function buildW2(): Promise<Uint8Array> {
   drawLabeledBox(
     ctx,
     X_PAIR_MID,
-    y,
+    yPos,
     X_END - X_PAIR_MID,
     24,
     "4  Social security tax withheld",
     fmtMoney(W2.box4),
   );
-  y += 24;
+  yPos += 24;
   drawLabeledBox(
     ctx,
     X_LEFT_END,
-    y,
+    yPos,
     X_PAIR_MID - X_LEFT_END,
     24,
     "5  Medicare wages and tips",
@@ -487,80 +492,80 @@ async function buildW2(): Promise<Uint8Array> {
   drawLabeledBox(
     ctx,
     X_PAIR_MID,
-    y,
+    yPos,
     X_END - X_PAIR_MID,
     24,
     "6  Medicare tax withheld",
     fmtMoney(W2.box6),
   );
-  y += 24;
-  drawLabeledBox(ctx, X_LEFT_END, y, X_PAIR_MID - X_LEFT_END, 24, "7  Social security tips", "");
-  drawLabeledBox(ctx, X_PAIR_MID, y, X_END - X_PAIR_MID, 24, "8  Allocated tips", "");
+  yPos += 24;
+  drawLabeledBox(ctx, X_LEFT_END, yPos, X_PAIR_MID - X_LEFT_END, 24, "7  Social security tips", "");
+  drawLabeledBox(ctx, X_PAIR_MID, yPos, X_END - X_PAIR_MID, 24, "8  Allocated tips", "");
 
-  y += 24;
-  drawLabeledBox(ctx, X0, y, X_LEFT_END - X0, 24, "d  Control number", "");
-  drawLabeledBox(ctx, X_LEFT_END, y, X_PAIR_MID - X_LEFT_END, 24, "9", "");
-  drawLabeledBox(ctx, X_PAIR_MID, y, X_END - X_PAIR_MID, 24, "10  Dependent care benefits", "");
+  yPos += 24;
+  drawLabeledBox(ctx, X0, yPos, X_LEFT_END - X0, 24, "d  Control number", "");
+  drawLabeledBox(ctx, X_LEFT_END, yPos, X_PAIR_MID - X_LEFT_END, 24, "9", "");
+  drawLabeledBox(ctx, X_PAIR_MID, yPos, X_END - X_PAIR_MID, 24, "10  Dependent care benefits", "");
 
-  y += 24;
-  drawBox(ctx, X0, y, X_LEFT_END - X0, 24);
-  drawText(ctx, "e  Employee's first name and initial", X0 + 2, y + 2, { size: 6, bold: true });
-  drawText(ctx, "Last name", X0 + 130, y + 2, { size: 6, bold: true });
-  drawText(ctx, "Suff.", X_LEFT_END - 26, y + 2, { size: 6, bold: true });
-  drawText(ctx, MARCUS.firstName, X0 + 4, y + 10, { size: 10 });
-  drawText(ctx, MARCUS.lastName, X0 + 130, y + 10, { size: 10 });
-  drawLabeledBox(ctx, X_LEFT_END, y, X_BOX12 - X_LEFT_END, 24, "11  Nonqualified plans", "");
-  drawLabeledBox(ctx, X_BOX12, y, X_END - X_BOX12, 24, "12a  See instructions for box 12", "");
-  drawText(ctx, "D", X_BOX12 + 14, y + 10, { size: 10, bold: true });
-  drawTextRight(ctx, fmtMoney(W2.box12d), X_END - 4, y + 10, { size: 10 });
-  drawLine(ctx, X_BOX12 + 24, y + 12, X_BOX12 + 24, y + 24);
+  yPos += 24;
+  drawBox(ctx, X0, yPos, X_LEFT_END - X0, 24);
+  drawText(ctx, "e  Employee's first name and initial", X0 + 2, yPos + 2, { size: 6, bold: true });
+  drawText(ctx, "Last name", X0 + 130, yPos + 2, { size: 6, bold: true });
+  drawText(ctx, "Suff.", X_LEFT_END - 26, yPos + 2, { size: 6, bold: true });
+  drawText(ctx, MARCUS.firstName, X0 + 4, yPos + 10, { size: 10 });
+  drawText(ctx, MARCUS.lastName, X0 + 130, yPos + 10, { size: 10 });
+  drawLabeledBox(ctx, X_LEFT_END, yPos, X_BOX12 - X_LEFT_END, 24, "11  Nonqualified plans", "");
+  drawLabeledBox(ctx, X_BOX12, yPos, X_END - X_BOX12, 24, "12a  See instructions for box 12", "");
+  drawText(ctx, "D", X_BOX12 + 14, yPos + 10, { size: 10, bold: true });
+  drawTextRight(ctx, fmtMoney(W2.box12d), X_END - 4, yPos + 10, { size: 10 });
+  drawLine(ctx, X_BOX12 + 24, yPos + 12, X_BOX12 + 24, yPos + 24);
 
-  y += 24;
+  yPos += 24;
   drawLabeledBox(
     ctx,
     X0,
-    y,
+    yPos,
     X_LEFT_END - X0,
     24,
     "f  Employee's address and ZIP code",
     MARCUS.street,
     { valueAlign: "left", valueSize: 10 },
   );
-  drawBox(ctx, X_LEFT_END, y, X_BOX12 - X_LEFT_END, 24);
-  drawText(ctx, "13", X_LEFT_END + 2, y + 2, { size: 6, bold: true });
+  drawBox(ctx, X_LEFT_END, yPos, X_BOX12 - X_LEFT_END, 24);
+  drawText(ctx, "13", X_LEFT_END + 2, yPos + 2, { size: 6, bold: true });
   const cb = (cx: number, cy: number) => drawBox(ctx, cx, cy, 8, 8, { borderWidth: 0.4 });
-  cb(X_LEFT_END + 18, y + 12);
-  drawText(ctx, "Statutory", X_LEFT_END + 28, y + 8, { size: 6 });
-  drawText(ctx, "employee", X_LEFT_END + 28, y + 16, { size: 6 });
-  cb(X_LEFT_END + 62, y + 12);
-  drawText(ctx, "Retirement", X_LEFT_END + 72, y + 8, { size: 6 });
-  drawText(ctx, "plan", X_LEFT_END + 72, y + 16, { size: 6 });
-  drawText(ctx, "X", X_LEFT_END + 64, y + 13, { size: 7, bold: true });
-  cb(X_LEFT_END + 122, y + 12);
-  drawText(ctx, "Third-party", X_LEFT_END + 132, y + 8, { size: 6 });
-  drawText(ctx, "sick pay", X_LEFT_END + 132, y + 16, { size: 6 });
-  drawLabeledBox(ctx, X_BOX12, y, X_END - X_BOX12, 24, "12b", "");
-  drawText(ctx, "W", X_BOX12 + 14, y + 10, { size: 10, bold: true });
-  drawTextRight(ctx, fmtMoney(W2.box12w), X_END - 4, y + 10, { size: 10 });
-  drawLine(ctx, X_BOX12 + 24, y + 12, X_BOX12 + 24, y + 24);
+  cb(X_LEFT_END + 18, yPos + 12);
+  drawText(ctx, "Statutory", X_LEFT_END + 28, yPos + 8, { size: 6 });
+  drawText(ctx, "employee", X_LEFT_END + 28, yPos + 16, { size: 6 });
+  cb(X_LEFT_END + 62, yPos + 12);
+  drawText(ctx, "Retirement", X_LEFT_END + 72, yPos + 8, { size: 6 });
+  drawText(ctx, "plan", X_LEFT_END + 72, yPos + 16, { size: 6 });
+  drawText(ctx, "X", X_LEFT_END + 64, yPos + 13, { size: 7, bold: true });
+  cb(X_LEFT_END + 122, yPos + 12);
+  drawText(ctx, "Third-party", X_LEFT_END + 132, yPos + 8, { size: 6 });
+  drawText(ctx, "sick pay", X_LEFT_END + 132, yPos + 16, { size: 6 });
+  drawLabeledBox(ctx, X_BOX12, yPos, X_END - X_BOX12, 24, "12b", "");
+  drawText(ctx, "W", X_BOX12 + 14, yPos + 10, { size: 10, bold: true });
+  drawTextRight(ctx, fmtMoney(W2.box12w), X_END - 4, yPos + 10, { size: 10 });
+  drawLine(ctx, X_BOX12 + 24, yPos + 12, X_BOX12 + 24, yPos + 24);
 
-  y += 24;
-  drawBox(ctx, X0, y, X_LEFT_END - X0, 24);
-  drawText(ctx, MARCUS.cityStateZip, X0 + 4, y + 10, { size: 10 });
-  drawLabeledBox(ctx, X_LEFT_END, y, X_BOX12 - X_LEFT_END, 24, "14  Other", W2.box14, {
+  yPos += 24;
+  drawBox(ctx, X0, yPos, X_LEFT_END - X0, 24);
+  drawText(ctx, MARCUS.cityStateZip, X0 + 4, yPos + 10, { size: 10 });
+  drawLabeledBox(ctx, X_LEFT_END, yPos, X_BOX12 - X_LEFT_END, 24, "14  Other", W2.box14, {
     valueAlign: "left",
     valueSize: 9,
   });
-  drawLabeledBox(ctx, X_BOX12, y, X_END - X_BOX12, 24, "12c", "");
-  drawLine(ctx, X_BOX12 + 24, y + 12, X_BOX12 + 24, y + 24);
+  drawLabeledBox(ctx, X_BOX12, yPos, X_END - X_BOX12, 24, "12c", "");
+  drawLine(ctx, X_BOX12 + 24, yPos + 12, X_BOX12 + 24, yPos + 24);
 
-  y += 24;
-  drawBox(ctx, X0, y, X_LEFT_END - X0, 24);
-  drawBox(ctx, X_LEFT_END, y, X_BOX12 - X_LEFT_END, 24);
-  drawLabeledBox(ctx, X_BOX12, y, X_END - X_BOX12, 24, "12d", "");
-  drawLine(ctx, X_BOX12 + 24, y + 12, X_BOX12 + 24, y + 24);
+  yPos += 24;
+  drawBox(ctx, X0, yPos, X_LEFT_END - X0, 24);
+  drawBox(ctx, X_LEFT_END, yPos, X_BOX12 - X_LEFT_END, 24);
+  drawLabeledBox(ctx, X_BOX12, yPos, X_END - X_BOX12, 24, "12d", "");
+  drawLine(ctx, X_BOX12 + 24, yPos + 12, X_BOX12 + 24, yPos + 24);
 
-  y += 24;
+  yPos += 24;
   const stateCols = [
     { x: X0, w: 40, label: "15  State", value: "CA" },
     { x: X0 + 40, w: 100, label: "Employer's state ID number", value: HELIX.stateId },
@@ -582,29 +587,29 @@ async function buildW2(): Promise<Uint8Array> {
     { x: X0 + 380, w: 70, label: "19  Local income tax", value: "" },
     { x: X0 + 450, w: 82, label: "20  Locality name", value: "" },
   ];
-  for (const c of stateCols) {
-    drawLabeledBox(ctx, c.x, y, c.w, 28, c.label, c.value, {
-      valueAlign: (c as { valueAlign?: "left" | "right" }).valueAlign ?? "left",
+  for (const column of stateCols) {
+    drawLabeledBox(ctx, column.x, yPos, column.w, 28, column.label, column.value, {
+      valueAlign: (column as { valueAlign?: "left" | "right" }).valueAlign ?? "left",
     });
   }
-  y += 28;
-  for (const c of stateCols) drawBox(ctx, c.x, y, c.w, 22);
+  yPos += 28;
+  for (const column of stateCols) drawBox(ctx, column.x, yPos, column.w, 22);
 
-  y += 32;
-  drawText(ctx, "Form", X0, y + 6, { size: 9 });
-  drawText(ctx, "W-2", X0 + 24, y, { size: 16, bold: true });
-  drawText(ctx, "Wage and Tax Statement", X0 + 60, y + 6, { size: 10, bold: true });
-  drawText(ctx, "2025", X0 + 200, y - 2, { size: 16, bold: true });
-  drawTextRight(ctx, "Department of the Treasury—Internal Revenue Service", X_END, y + 8, {
+  yPos += 32;
+  drawText(ctx, "Form", X0, yPos + 6, { size: 9 });
+  drawText(ctx, "W-2", X0 + 24, yPos, { size: 16, bold: true });
+  drawText(ctx, "Wage and Tax Statement", X0 + 60, yPos + 6, { size: 10, bold: true });
+  drawText(ctx, "2025", X0 + 200, yPos - 2, { size: 16, bold: true });
+  drawTextRight(ctx, "Department of the Treasury—Internal Revenue Service", X_END, yPos + 8, {
     size: 8,
   });
-  y += 22;
-  drawText(ctx, "Copy B—To Be Filed With Employee's FEDERAL Tax Return.", X0, y, {
+  yPos += 22;
+  drawText(ctx, "Copy B—To Be Filed With Employee's FEDERAL Tax Return.", X0, yPos, {
     size: 9,
     bold: true,
   });
-  y += 11;
-  drawText(ctx, "This information is being furnished to the Internal Revenue Service.", X0, y, {
+  yPos += 11;
+  drawText(ctx, "This information is being furnished to the Internal Revenue Service.", X0, yPos, {
     size: 8,
   });
 
@@ -1087,7 +1092,7 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
     drawText(ctx, "Amount", x1, 90, { size: 8, bold: true });
     drawLine(ctx, x0, 101, PAGE_W - 100, 101);
 
-    let y = 110;
+    let yPos = 110;
     const rows: LineRow[] = [
       { label: "Total Regular Interest*", value: fmtMoney(WEALTHFRONT.interestTotal) },
       { label: "Total US Government Interest*", value: "0.00" },
@@ -1099,14 +1104,14 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       { label: "Miscellaneous Income", value: "0.00" },
       { label: "Total:", value: fmtMoney(WEALTHFRONT.interestTotal), bold: true },
     ];
-    for (const r of rows) {
-      drawText(ctx, r.label, x0, y, { size: 8, bold: r.bold });
-      drawTextRight(ctx, r.value, x1 + 70, y, { size: 8, bold: r.bold });
-      y += 12;
+    for (const row of rows) {
+      drawText(ctx, row.label, x0, yPos, { size: 8, bold: row.bold });
+      drawTextRight(ctx, row.value, x1 + 70, yPos, { size: 8, bold: row.bold });
+      yPos += 12;
     }
-    y += 14;
-    drawText(ctx, "Management Fees Paid", x0, y, { size: 8 });
-    drawTextRight(ctx, "0.00", x1 + 70, y, { size: 8 });
+    yPos += 14;
+    drawText(ctx, "Management Fees Paid", x0, yPos, { size: 8 });
+    drawTextRight(ctx, "0.00", x1 + 70, yPos, { size: 8 });
 
     const footY = 680;
     const footEnd = drawWrapped(
@@ -1132,10 +1137,10 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
 
     const x0 = 42;
     const x1 = 320;
-    let y = 110;
-    drawText(ctx, "Common Instructions for Recipient", x0, y, { size: 9, bold: true });
-    y += 12;
-    for (const l of [
+    let yPos = 110;
+    drawText(ctx, "Common Instructions for Recipient", x0, yPos, { size: 9, bold: true });
+    yPos += 12;
+    for (const line of [
       "Recipient's taxpayer identification number (TIN). For your protection,",
       "this form may show only the last four digits of your TIN.",
       "",
@@ -1148,13 +1153,13 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       "",
       "Keep tax documents for your records.",
     ]) {
-      drawText(ctx, l, x0, y, { size: 7 });
-      y += 9;
+      drawText(ctx, line, x0, yPos, { size: 7 });
+      yPos += 9;
     }
-    y += 8;
-    drawText(ctx, "1099-INT Instructions for Recipient", x0, y, { size: 9, bold: true });
-    y += 12;
-    for (const l of [
+    yPos += 8;
+    drawText(ctx, "1099-INT Instructions for Recipient", x0, yPos, { size: 9, bold: true });
+    yPos += 12;
+    for (const line of [
       "Box 1. Shows taxable interest paid to you during the calendar year by the",
       "payer. This does not include interest shown in box 3.",
       "",
@@ -1168,14 +1173,14 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       "Box 4. Shows backup withholding. Generally, a payer must backup withhold",
       "if you did not furnish your TIN.",
     ]) {
-      drawText(ctx, l, x0, y, { size: 7 });
-      y += 9;
+      drawText(ctx, line, x0, yPos, { size: 7 });
+      yPos += 9;
     }
 
-    y = 110;
-    drawText(ctx, "Additional Box Notes", x1, y, { size: 9, bold: true });
-    y += 12;
-    for (const l of [
+    yPos = 110;
+    drawText(ctx, "Additional Box Notes", x1, yPos, { size: 9, bold: true });
+    yPos += 12;
+    for (const line of [
       "Box 5-13. State withholding and bond-related boxes — see IRS instructions.",
       "",
       "Box 14. Shows CUSIP number(s) for tax-exempt bond(s) on which tax-exempt",
@@ -1191,8 +1196,8 @@ async function buildWealthfront1099(): Promise<Uint8Array> {
       "online federal tax preparation, e-filing, and direct deposit or payment",
       "options.",
     ]) {
-      drawText(ctx, l, x1, y, { size: 7 });
-      y += 9;
+      drawText(ctx, line, x1, yPos, { size: 7 });
+      yPos += 9;
     }
   }
 
@@ -1276,9 +1281,9 @@ async function buildSchwab1099(): Promise<Uint8Array> {
       ["Details of 1099-B Proceeds from Transactions", "5"],
     ];
     let listY = 186;
-    for (const [label, p] of included) {
+    for (const [label, pageNum] of included) {
       drawText(ctx, label, 320, listY, { size: 8 });
-      drawTextRight(ctx, p, xR, listY, { size: 8 });
+      drawTextRight(ctx, pageNum, xR, listY, { size: 8 });
       listY += 10;
     }
     drawText(ctx, "Non-Reportable to the IRS", 320, listY + 8, { size: 8, bold: true });
@@ -1463,10 +1468,10 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     );
     drawText(ctx, "BOX   OMB NO. 1545-0715", colRightX + 4, yR + 14 + 3, { size: 7, bold: true });
     yR += 24;
-    const stP = SCHWAB.trades.shortTerm.reduce((s, t) => s + t.proceeds, 0);
-    const stB = SCHWAB.trades.shortTerm.reduce((s, t) => s + t.basis, 0);
-    const ltP = SCHWAB.trades.longTerm.reduce((s, t) => s + t.proceeds, 0);
-    const ltB = SCHWAB.trades.longTerm.reduce((s, t) => s + t.basis, 0);
+    const stP = SCHWAB.trades.shortTerm.reduce((total, trade) => total + trade.proceeds, 0);
+    const stB = SCHWAB.trades.shortTerm.reduce((total, trade) => total + trade.basis, 0);
+    const ltP = SCHWAB.trades.longTerm.reduce((total, trade) => total + trade.proceeds, 0);
+    const ltB = SCHWAB.trades.longTerm.reduce((total, trade) => total + trade.basis, 0);
     yR = drawColumn(ctx, colRightX, yR, colW, [
       { label: "1d.  PROCEEDS", value: "$" + fmtMoney(stP + ltP) },
       { label: "       COVERED SECURITIES", value: "$" + fmtMoney(stP + ltP) },
@@ -1510,12 +1515,12 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     drawLine(ctx, x0, hdrY + 14, xR, hdrY + 14);
 
     let rowY = hdrY + 22;
-    for (const d of SCHWAB.div.detail) {
-      drawText(ctx, d.description, x0, rowY, { size: 7 });
-      drawText(ctx, d.cusip, x0 + 180, rowY, { size: 7 });
-      drawText(ctx, d.payDate, x0 + 235, rowY, { size: 7 });
-      drawTextRight(ctx, "$" + d.ord.toFixed(2), x0 + 350, rowY, { size: 7 });
-      drawTextRight(ctx, "$" + d.qual.toFixed(2), x0 + 420, rowY, { size: 7 });
+    for (const detail of SCHWAB.div.detail) {
+      drawText(ctx, detail.description, x0, rowY, { size: 7 });
+      drawText(ctx, detail.cusip, x0 + 180, rowY, { size: 7 });
+      drawText(ctx, detail.payDate, x0 + 235, rowY, { size: 7 });
+      drawTextRight(ctx, "$" + detail.ord.toFixed(2), x0 + 350, rowY, { size: 7 });
+      drawTextRight(ctx, "$" + detail.qual.toFixed(2), x0 + 420, rowY, { size: 7 });
       drawTextRight(ctx, "$0.00", x0 + 485, rowY, { size: 7 });
       drawTextRight(ctx, "$0.00", xR, rowY, { size: 7 });
       rowY += 12;
@@ -1567,13 +1572,14 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     drawTextRight(ctx, "REALIZED GAIN", C_NET, hdrY, { size: 7, bold: true });
     drawTextRight(ctx, "OR (LOSS)", C_NET, hdrY + 9, { size: 7, bold: true });
 
-    const stP = SCHWAB.trades.shortTerm.reduce((s, t) => s + t.proceeds, 0);
-    const stB = SCHWAB.trades.shortTerm.reduce((s, t) => s + t.basis, 0);
+    const stP = SCHWAB.trades.shortTerm.reduce((total, trade) => total + trade.proceeds, 0);
+    const stB = SCHWAB.trades.shortTerm.reduce((total, trade) => total + trade.basis, 0);
     const stG = stP - stB;
-    const ltP = SCHWAB.trades.longTerm.reduce((s, t) => s + t.proceeds, 0);
-    const ltB = SCHWAB.trades.longTerm.reduce((s, t) => s + t.basis, 0);
+    const ltP = SCHWAB.trades.longTerm.reduce((total, trade) => total + trade.proceeds, 0);
+    const ltB = SCHWAB.trades.longTerm.reduce((total, trade) => total + trade.basis, 0);
     const ltG = ltP - ltB;
-    const moneyOrParen = (g: number) => (g < 0 ? "$(" + fmtMoney(-g) + ")" : "$" + fmtMoney(g));
+    const moneyOrParen = (amount: number) =>
+      amount < 0 ? "$(" + fmtMoney(-amount) + ")" : "$" + fmtMoney(amount);
 
     let rowY = hdrY + 30;
     drawText(ctx, "SHORT-TERM GAIN OR (LOSSES) - REPORT ON FORM 8949, PART I", x0, rowY, {
@@ -1588,13 +1594,13 @@ async function buildSchwab1099(): Promise<Uint8Array> {
       ["Box B (basis not reported to the IRS)", 0, 0, 0],
       ["Box B - Ordinary - (basis not reported to the IRS)", 0, 0, 0],
     ];
-    for (const [lbl, p, c, g] of stRows) {
+    for (const [lbl, proceeds, basis, gain] of stRows) {
       drawText(ctx, lbl, x0, rowY, { size: 7 });
-      drawTextRight(ctx, "$" + fmtMoney(p), C_PROC, rowY, { size: 7 });
-      drawTextRight(ctx, "$" + fmtMoney(c), C_BASIS, rowY, { size: 7 });
+      drawTextRight(ctx, "$" + fmtMoney(proceeds), C_PROC, rowY, { size: 7 });
+      drawTextRight(ctx, "$" + fmtMoney(basis), C_BASIS, rowY, { size: 7 });
       drawTextRight(ctx, "$0.00", C_MKT, rowY, { size: 7 });
       drawTextRight(ctx, "$0.00", C_WASH, rowY, { size: 7 });
-      drawTextRight(ctx, moneyOrParen(g), C_NET, rowY, { size: 7 });
+      drawTextRight(ctx, moneyOrParen(gain), C_NET, rowY, { size: 7 });
       rowY += 11;
     }
     drawText(ctx, "Total Short - Term", x0 + 80, rowY, { size: 8, bold: true });
@@ -1617,13 +1623,13 @@ async function buildSchwab1099(): Promise<Uint8Array> {
       ["Box E (basis not reported to the IRS)", 0, 0, 0],
       ["Box E - Ordinary - (basis not reported to the IRS)", 0, 0, 0],
     ];
-    for (const [lbl, p, c, g] of ltRows) {
+    for (const [lbl, proceeds, basis, gain] of ltRows) {
       drawText(ctx, lbl, x0, rowY, { size: 7 });
-      drawTextRight(ctx, "$" + fmtMoney(p), C_PROC, rowY, { size: 7 });
-      drawTextRight(ctx, "$" + fmtMoney(c), C_BASIS, rowY, { size: 7 });
+      drawTextRight(ctx, "$" + fmtMoney(proceeds), C_PROC, rowY, { size: 7 });
+      drawTextRight(ctx, "$" + fmtMoney(basis), C_BASIS, rowY, { size: 7 });
       drawTextRight(ctx, "$0.00", C_MKT, rowY, { size: 7 });
       drawTextRight(ctx, "$0.00", C_WASH, rowY, { size: 7 });
-      drawTextRight(ctx, moneyOrParen(g), C_NET, rowY, { size: 7 });
+      drawTextRight(ctx, moneyOrParen(gain), C_NET, rowY, { size: 7 });
       rowY += 11;
     }
     drawText(ctx, "Total Long - Term", x0 + 80, rowY, { size: 8, bold: true });
@@ -1682,7 +1688,7 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     });
     drawLine(ctx, x0, 154, xR, 154);
 
-    let y = 168;
+    let yPos = 168;
 
     /* Gaps fit size-8-bold totals ("$(3,000.00)" ≈ 48pt) without collisions. */
     const C_QTY = x0 + 140;
@@ -1695,85 +1701,86 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     const C_GAIN = x0 + 490;
     const C_WHELD = xR; // 576
 
-    const moneyOrParen = (g: number) => (g < 0 ? "$(" + fmtMoney(-g) + ")" : "$" + fmtMoney(g));
+    const moneyOrParen = (amount: number) =>
+      amount < 0 ? "$(" + fmtMoney(-amount) + ")" : "$" + fmtMoney(amount);
 
     // Below 6pt so "DISALLOWED" and "TAX WITHHELD" fit.
     const HSZ = 5.5;
     const drawTradeHeader = () => {
-      drawText(ctx, "DESCRIPTION", x0, y, { size: HSZ, bold: true });
-      drawText(ctx, "(Box 1a)", x0, y + 7, { size: HSZ, bold: true });
-      drawTextRight(ctx, "QUANTITY", C_QTY, y, { size: HSZ, bold: true });
-      drawText(ctx, "DATE", C_ACQ - 5, y, { size: HSZ, bold: true });
-      drawText(ctx, "ACQUIRED", C_ACQ - 5, y + 7, { size: HSZ, bold: true });
-      drawText(ctx, "(Box 1b)", C_ACQ - 5, y + 14, { size: HSZ, bold: true });
-      drawText(ctx, "DATE", C_SOLD - 5, y, { size: HSZ, bold: true });
-      drawText(ctx, "SOLD", C_SOLD - 5, y + 7, { size: HSZ, bold: true });
-      drawText(ctx, "(Box 1c)", C_SOLD - 5, y + 14, { size: HSZ, bold: true });
-      drawTextRight(ctx, "PROCEEDS", C_PROC, y, { size: HSZ, bold: true });
-      drawTextRight(ctx, "(Box 1d)", C_PROC, y + 14, { size: HSZ, bold: true });
-      drawTextRight(ctx, "COST OR OTHER", C_BASIS, y, { size: HSZ, bold: true });
-      drawTextRight(ctx, "BASIS", C_BASIS, y + 7, { size: HSZ, bold: true });
-      drawTextRight(ctx, "(Box 1e)", C_BASIS, y + 14, { size: HSZ, bold: true });
-      drawTextRight(ctx, "ACCRUED", C_MKT, y, { size: HSZ, bold: true });
-      drawTextRight(ctx, "MKT DISC.", C_MKT, y + 7, { size: HSZ, bold: true });
-      drawTextRight(ctx, "(Box 1f)", C_MKT, y + 14, { size: HSZ, bold: true });
-      drawTextRight(ctx, "WASH SALE", C_WASH, y, { size: HSZ, bold: true });
-      drawTextRight(ctx, "DISALLOWED", C_WASH, y + 7, { size: HSZ, bold: true });
-      drawTextRight(ctx, "(Box 1g)", C_WASH, y + 14, { size: HSZ, bold: true });
-      drawTextRight(ctx, "GAIN/(LOSS)", C_GAIN, y, { size: HSZ, bold: true });
-      drawTextRight(ctx, "AMOUNT", C_GAIN, y + 7, { size: HSZ, bold: true });
-      drawTextRight(ctx, "FED INCOME", C_WHELD, y, { size: HSZ, bold: true });
-      drawTextRight(ctx, "TAX WITHHELD", C_WHELD, y + 7, { size: HSZ, bold: true });
-      drawTextRight(ctx, "(Box 4)", C_WHELD, y + 14, { size: HSZ, bold: true });
-      y += 26;
-      drawLine(ctx, x0, y - 2, xR, y - 2);
+      drawText(ctx, "DESCRIPTION", x0, yPos, { size: HSZ, bold: true });
+      drawText(ctx, "(Box 1a)", x0, yPos + 7, { size: HSZ, bold: true });
+      drawTextRight(ctx, "QUANTITY", C_QTY, yPos, { size: HSZ, bold: true });
+      drawText(ctx, "DATE", C_ACQ - 5, yPos, { size: HSZ, bold: true });
+      drawText(ctx, "ACQUIRED", C_ACQ - 5, yPos + 7, { size: HSZ, bold: true });
+      drawText(ctx, "(Box 1b)", C_ACQ - 5, yPos + 14, { size: HSZ, bold: true });
+      drawText(ctx, "DATE", C_SOLD - 5, yPos, { size: HSZ, bold: true });
+      drawText(ctx, "SOLD", C_SOLD - 5, yPos + 7, { size: HSZ, bold: true });
+      drawText(ctx, "(Box 1c)", C_SOLD - 5, yPos + 14, { size: HSZ, bold: true });
+      drawTextRight(ctx, "PROCEEDS", C_PROC, yPos, { size: HSZ, bold: true });
+      drawTextRight(ctx, "(Box 1d)", C_PROC, yPos + 14, { size: HSZ, bold: true });
+      drawTextRight(ctx, "COST OR OTHER", C_BASIS, yPos, { size: HSZ, bold: true });
+      drawTextRight(ctx, "BASIS", C_BASIS, yPos + 7, { size: HSZ, bold: true });
+      drawTextRight(ctx, "(Box 1e)", C_BASIS, yPos + 14, { size: HSZ, bold: true });
+      drawTextRight(ctx, "ACCRUED", C_MKT, yPos, { size: HSZ, bold: true });
+      drawTextRight(ctx, "MKT DISC.", C_MKT, yPos + 7, { size: HSZ, bold: true });
+      drawTextRight(ctx, "(Box 1f)", C_MKT, yPos + 14, { size: HSZ, bold: true });
+      drawTextRight(ctx, "WASH SALE", C_WASH, yPos, { size: HSZ, bold: true });
+      drawTextRight(ctx, "DISALLOWED", C_WASH, yPos + 7, { size: HSZ, bold: true });
+      drawTextRight(ctx, "(Box 1g)", C_WASH, yPos + 14, { size: HSZ, bold: true });
+      drawTextRight(ctx, "GAIN/(LOSS)", C_GAIN, yPos, { size: HSZ, bold: true });
+      drawTextRight(ctx, "AMOUNT", C_GAIN, yPos + 7, { size: HSZ, bold: true });
+      drawTextRight(ctx, "FED INCOME", C_WHELD, yPos, { size: HSZ, bold: true });
+      drawTextRight(ctx, "TAX WITHHELD", C_WHELD, yPos + 7, { size: HSZ, bold: true });
+      drawTextRight(ctx, "(Box 4)", C_WHELD, yPos + 14, { size: HSZ, bold: true });
+      yPos += 26;
+      drawLine(ctx, x0, yPos - 2, xR, yPos - 2);
     };
 
     const drawSection = (title: string, trades: typeof SCHWAB.trades.shortTerm) => {
-      drawText(ctx, title, x0, y, { size: 9, bold: true });
-      y += 14;
+      drawText(ctx, title, x0, yPos, { size: 9, bold: true });
+      yPos += 14;
       drawTradeHeader();
       let secP = 0,
         secB = 0,
         secG = 0;
-      for (const t of trades) {
-        drawText(ctx, t.description, x0, y, { size: 8, bold: true });
-        drawText(ctx, "CUSIP: " + t.cusip, x0 + 115, y, { size: 7 });
-        drawText(ctx, "Symbol: " + t.symbol, x0 + 215, y, { size: 7, bold: true });
-        y += 11;
-        drawTextRight(ctx, t.qty.toFixed(3), C_QTY, y, { size: 7 });
-        drawText(ctx, t.acquired, C_ACQ - 5, y, { size: 7 });
-        drawText(ctx, t.sold, C_SOLD - 5, y, { size: 7 });
-        drawTextRight(ctx, "$" + fmtMoney(t.proceeds), C_PROC, y, { size: 7 });
-        drawTextRight(ctx, "$" + fmtMoney(t.basis), C_BASIS, y, { size: 7 });
-        drawTextRight(ctx, "$0.00", C_MKT, y, { size: 7 });
-        drawTextRight(ctx, "$0.00", C_WASH, y, { size: 7 });
-        drawTextRight(ctx, moneyOrParen(t.gainLoss), C_GAIN, y, { size: 7 });
-        drawTextRight(ctx, "$0.00", C_WHELD, y, { size: 7 });
-        y += 12;
-        drawText(ctx, "Security Subtotal", x0 + 60, y, { size: 7, italic: true });
-        drawTextRight(ctx, "$" + fmtMoney(t.proceeds), C_PROC, y, { size: 7 });
-        drawTextRight(ctx, "$" + fmtMoney(t.basis), C_BASIS, y, { size: 7 });
-        drawTextRight(ctx, "$0.00", C_MKT, y, { size: 7 });
-        drawTextRight(ctx, "$0.00", C_WASH, y, { size: 7 });
-        drawTextRight(ctx, moneyOrParen(t.gainLoss), C_GAIN, y, { size: 7 });
-        drawTextRight(ctx, "$0.00", C_WHELD, y, { size: 7 });
-        y += 14;
-        secP += t.proceeds;
-        secB += t.basis;
-        secG += t.gainLoss;
+      for (const trade of trades) {
+        drawText(ctx, trade.description, x0, yPos, { size: 8, bold: true });
+        drawText(ctx, "CUSIP: " + trade.cusip, x0 + 115, yPos, { size: 7 });
+        drawText(ctx, "Symbol: " + trade.symbol, x0 + 215, yPos, { size: 7, bold: true });
+        yPos += 11;
+        drawTextRight(ctx, trade.qty.toFixed(3), C_QTY, yPos, { size: 7 });
+        drawText(ctx, trade.acquired, C_ACQ - 5, yPos, { size: 7 });
+        drawText(ctx, trade.sold, C_SOLD - 5, yPos, { size: 7 });
+        drawTextRight(ctx, "$" + fmtMoney(trade.proceeds), C_PROC, yPos, { size: 7 });
+        drawTextRight(ctx, "$" + fmtMoney(trade.basis), C_BASIS, yPos, { size: 7 });
+        drawTextRight(ctx, "$0.00", C_MKT, yPos, { size: 7 });
+        drawTextRight(ctx, "$0.00", C_WASH, yPos, { size: 7 });
+        drawTextRight(ctx, moneyOrParen(trade.gainLoss), C_GAIN, yPos, { size: 7 });
+        drawTextRight(ctx, "$0.00", C_WHELD, yPos, { size: 7 });
+        yPos += 12;
+        drawText(ctx, "Security Subtotal", x0 + 60, yPos, { size: 7, italic: true });
+        drawTextRight(ctx, "$" + fmtMoney(trade.proceeds), C_PROC, yPos, { size: 7 });
+        drawTextRight(ctx, "$" + fmtMoney(trade.basis), C_BASIS, yPos, { size: 7 });
+        drawTextRight(ctx, "$0.00", C_MKT, yPos, { size: 7 });
+        drawTextRight(ctx, "$0.00", C_WASH, yPos, { size: 7 });
+        drawTextRight(ctx, moneyOrParen(trade.gainLoss), C_GAIN, yPos, { size: 7 });
+        drawTextRight(ctx, "$0.00", C_WHELD, yPos, { size: 7 });
+        yPos += 14;
+        secP += trade.proceeds;
+        secB += trade.basis;
+        secG += trade.gainLoss;
       }
       const totalLabel = title.startsWith("Short")
         ? "Total Short Term - Covered Securities"
         : "Total Long Term - Covered Securities";
-      drawText(ctx, totalLabel, x0, y, { size: 8, bold: true });
-      drawTextRight(ctx, "$" + fmtMoney(secP), C_PROC, y, { size: 8, bold: true });
-      drawTextRight(ctx, "$" + fmtMoney(secB), C_BASIS, y, { size: 8, bold: true });
-      drawTextRight(ctx, "$0.00", C_MKT, y, { size: 8, bold: true });
-      drawTextRight(ctx, "$0.00", C_WASH, y, { size: 8, bold: true });
-      drawTextRight(ctx, moneyOrParen(secG), C_GAIN, y, { size: 8, bold: true });
-      drawTextRight(ctx, "$0.00", C_WHELD, y, { size: 8, bold: true });
-      y += 22;
+      drawText(ctx, totalLabel, x0, yPos, { size: 8, bold: true });
+      drawTextRight(ctx, "$" + fmtMoney(secP), C_PROC, yPos, { size: 8, bold: true });
+      drawTextRight(ctx, "$" + fmtMoney(secB), C_BASIS, yPos, { size: 8, bold: true });
+      drawTextRight(ctx, "$0.00", C_MKT, yPos, { size: 8, bold: true });
+      drawTextRight(ctx, "$0.00", C_WASH, yPos, { size: 8, bold: true });
+      drawTextRight(ctx, moneyOrParen(secG), C_GAIN, yPos, { size: 8, bold: true });
+      drawTextRight(ctx, "$0.00", C_WHELD, yPos, { size: 8, bold: true });
+      yPos += 22;
       return { secP, secB, secG };
     };
 
@@ -1783,13 +1790,13 @@ async function buildSchwab1099(): Promise<Uint8Array> {
     const totP = stT.secP + ltT.secP;
     const totB = stT.secB + ltT.secB;
     const totG = stT.secG + ltT.secG;
-    drawText(ctx, "Total Covered and Noncovered Securities", x0, y, { size: 9, bold: true });
-    drawTextRight(ctx, "$" + fmtMoney(totP), C_PROC, y, { size: 9, bold: true });
-    drawTextRight(ctx, "$" + fmtMoney(totB), C_BASIS, y, { size: 9, bold: true });
-    drawTextRight(ctx, "$0.00", C_MKT, y, { size: 9, bold: true });
-    drawTextRight(ctx, "$0.00", C_WASH, y, { size: 9, bold: true });
-    drawTextRight(ctx, moneyOrParen(totG), C_GAIN, y, { size: 9, bold: true });
-    drawTextRight(ctx, "$0.00", C_WHELD, y, { size: 9, bold: true });
+    drawText(ctx, "Total Covered and Noncovered Securities", x0, yPos, { size: 9, bold: true });
+    drawTextRight(ctx, "$" + fmtMoney(totP), C_PROC, yPos, { size: 9, bold: true });
+    drawTextRight(ctx, "$" + fmtMoney(totB), C_BASIS, yPos, { size: 9, bold: true });
+    drawTextRight(ctx, "$0.00", C_MKT, yPos, { size: 9, bold: true });
+    drawTextRight(ctx, "$0.00", C_WASH, yPos, { size: 9, bold: true });
+    drawTextRight(ctx, moneyOrParen(totG), C_GAIN, yPos, { size: 9, bold: true });
+    drawTextRight(ctx, "$0.00", C_WHELD, yPos, { size: 9, bold: true });
   }
 
   return await doc.save();
@@ -1813,7 +1820,7 @@ async function main() {
   console.log(`✓ 03-marcus-1099-schwab.pdf (${(schwab.length / 1024).toFixed(1)} KB)`);
 }
 
-main().catch((e) => {
-  console.error(e);
+main().catch((err) => {
+  console.error(err);
   process.exit(1);
 });

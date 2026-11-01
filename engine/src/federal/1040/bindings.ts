@@ -64,16 +64,16 @@ export function register(): void {
           : undefined,
       // MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar.
       "line.1a": (_, info) => roundDollars(info.w2WagesTotal),
-      "line.1z": (f) =>
+      "line.1z": (form) =>
         sum(
-          f["line.1a"],
-          f["line.1b"],
-          f["line.1c"],
-          f["line.1d"],
-          f["line.1e"],
-          f["line.1f"],
-          f["line.1g"],
-          f["line.1h_amount"],
+          form["line.1a"],
+          form["line.1b"],
+          form["line.1c"],
+          form["line.1d"],
+          form["line.1e"],
+          form["line.1f"],
+          form["line.1g"],
+          form["line.1h_amount"],
         ),
       // MANUAL EDIT: 1099-INT box 8 sum.
       "line.2a": (_, info) => roundDollars(info.taxExemptInterestTotal),
@@ -81,12 +81,12 @@ export function register(): void {
        * MANUAL EDIT: with Schedule B filed, lines 2b and 3b copy its lines 4
        * and 6, so its rounding choice carries through.
        */
-      "line.2b": (f, info) =>
-        fromScheduleB(f["schedule-b.0.line.4_taxable_interest"]) ??
+      "line.2b": (form, info) =>
+        fromScheduleB(form["schedule-b.0.line.4_taxable_interest"]) ??
         roundDollars(info.taxableInterestTotal),
       "line.3a": (_, info) => roundDollars(info.qualifiedDividends),
-      "line.3b": (f, info) =>
-        fromScheduleB(f["schedule-b.0.line.6_total_ordinary_dividends"]) ??
+      "line.3b": (form, info) =>
+        fromScheduleB(form["schedule-b.0.line.6_total_ordinary_dividends"]) ??
         roundDollars(info.ordinaryDividends),
       // MANUAL EDIT: lines 4a–5c from 1099-R facts.
       "line.4a": (_, info) => roundDollars(info.iraDistributions?.gross),
@@ -97,7 +97,7 @@ export function register(): void {
       "line.5c_rollover": (_, info) => (info.pensionDistributions?.rollover ? true : undefined),
       // MANUAL EDIT: for MFS, line 6b waits for the lived-apart answer; it picks the worksheet base.
       "line.6a": (_, info) => roundDollars(info.socialSecurityBenefits),
-      "line.6b": (f, info) => {
+      "line.6b": (form, info) => {
         const benefits = info.socialSecurityBenefits;
         if (benefits === undefined || !info.filingStatus) return undefined;
         const mfs = info.filingStatus === "married_filing_separately";
@@ -105,28 +105,28 @@ export function register(): void {
         return socialSecurityTaxable({
           benefits,
           otherIncome: sum(
-            f["line.1z"],
-            f["line.2b"],
-            f["line.3b"],
-            f["line.4b"],
-            f["line.5b"],
-            f["line.7a"],
-            f["line.8"],
+            form["line.1z"],
+            form["line.2b"],
+            form["line.3b"],
+            form["line.4b"],
+            form["line.5b"],
+            form["line.7a"],
+            form["line.8"],
           ),
-          taxExemptInterest: sum(f["line.2a"]),
+          taxExemptInterest: sum(form["line.2a"]),
           adjustments: sum(
-            f["schedule-1.1.line.11"],
-            f["schedule-1.1.line.12"],
-            f["schedule-1.1.line.13"],
-            f["schedule-1.1.line.14"],
-            f["schedule-1.1.line.15"],
-            f["schedule-1.1.line.16"],
-            f["schedule-1.1.line.17"],
-            f["schedule-1.1.line.18"],
-            f["schedule-1.1.line.19a"],
-            f["schedule-1.1.line.20"],
-            f["schedule-1.1.line.23"],
-            f["schedule-1.1.line.25"],
+            form["schedule-1.1.line.11"],
+            form["schedule-1.1.line.12"],
+            form["schedule-1.1.line.13"],
+            form["schedule-1.1.line.14"],
+            form["schedule-1.1.line.15"],
+            form["schedule-1.1.line.16"],
+            form["schedule-1.1.line.17"],
+            form["schedule-1.1.line.18"],
+            form["schedule-1.1.line.19a"],
+            form["schedule-1.1.line.20"],
+            form["schedule-1.1.line.23"],
+            form["schedule-1.1.line.25"],
           ),
           filingStatus: info.filingStatus,
           livedApartAllYear: info.livedApartFromSpouseAllYear,
@@ -139,30 +139,31 @@ export function register(): void {
           ? true
           : undefined,
       // MANUAL EDIT: line 7a = Schedule D line 16, or line 21 if line 16 is a loss.
-      "line.7a": (f, info) => {
-        const v = f["schedule-d.1.line.16_combined_gain_loss"];
-        if (typeof v === "number") {
-          const l21 = f["schedule-d.1.line.21_allowable_loss"];
-          return form1040Line7a(v, typeof l21 === "number" ? l21 : undefined);
+      "line.7a": (form, info) => {
+        const value = form["schedule-d.1.line.16_combined_gain_loss"];
+        if (typeof value === "number") {
+          const l21 = form["schedule-d.1.line.21_allowable_loss"];
+          return form1040Line7a(value, typeof l21 === "number" ? l21 : undefined);
         }
         // MANUAL EDIT: Exception 1 — capital gain distributions only, no Schedule D.
         return roundDollars(info.capitalGainDistributionsNoScheduleD);
       },
       "line.7b_schedule_d_not_required": (_, info) =>
         info.capitalGainDistributionsNoScheduleD !== undefined ? true : undefined,
-      "line.9": (f) =>
+      "line.9": (form) =>
         sum(
-          f["line.1z"],
-          f["line.2b"],
-          f["line.3b"],
-          f["line.4b"],
-          f["line.5b"],
-          f["line.6b"],
-          f["line.7a"],
-          f["line.8"],
+          form["line.1z"],
+          form["line.2b"],
+          form["line.3b"],
+          form["line.4b"],
+          form["line.5b"],
+          form["line.6b"],
+          form["line.7a"],
+          form["line.8"],
         ),
-      "line.11a": (f) => sum(f["line.9"], f["line.10"] === undefined ? 0 : -f["line.10"]),
-      "line.11b": (f) => sum(f["line.11a"]),
+      "line.11a": (form) =>
+        sum(form["line.9"], form["line.10"] === undefined ? 0 : -form["line.10"]),
+      "line.11b": (form) => sum(form["line.11a"]),
       /*
        * MANUAL EDIT: line 12e is the standard deduction or Schedule A line 17.
        * The worksheet for a filer someone can claim as a dependent is not modeled.
@@ -173,9 +174,9 @@ export function register(): void {
         info.filingStatus === "married_filing_separately" && info.spouseItemizesSeparately === true
           ? true
           : undefined,
-      "line.12e": (f, info) => {
+      "line.12e": (form, info) => {
         if (info.useItemizedDeductions === true) {
-          const itemized = f["schedule-a.0.line.17_total_itemized_deductions"];
+          const itemized = form["schedule-a.0.line.17_total_itemized_deductions"];
           return typeof itemized === "number" ? itemized : undefined;
         }
         return standardDeduction(info);
@@ -184,24 +185,26 @@ export function register(): void {
        * Blank when 12e is blank: sum() would count it as 0 and overstate
        * taxable income. Also blank when the filer may claim the senior deduction.
        */
-      "line.14": (f, info) => {
-        if (f["line.12e"] === undefined || mayClaimSeniorDeduction(info)) return undefined;
-        return sum(f["line.12e"], f["line.13a"], f["line.13b"]);
+      "line.14": (form, info) => {
+        if (form["line.12e"] === undefined || mayClaimSeniorDeduction(info)) return undefined;
+        return sum(form["line.12e"], form["line.13a"], form["line.13b"]);
       },
       // Blank when line 14 is blank: sum() would read it as 0 and tax all of 11b.
-      "line.15": (f) =>
-        f["line.14"] === undefined ? undefined : atLeast(0, sum(f["line.11b"], -f["line.14"])),
+      "line.15": (form) =>
+        form["line.14"] === undefined
+          ? undefined
+          : atLeast(0, sum(form["line.11b"], -form["line.14"])),
       /*
        * MANUAL EDIT: line 16 always uses the QDCG worksheet. With no
        * preferential income it gives the tax-table answer; one code path.
        */
-      "line.16": (f, info) => {
+      "line.16": (form, info) => {
         if (!info.filingStatus) return undefined;
-        const taxable = f["line.15"];
+        const taxable = form["line.15"];
         if (typeof taxable !== "number") return undefined;
 
-        const schDL15 = f["schedule-d.0.line.15_net_long_term_gain_loss"];
-        const schDL16 = f["schedule-d.1.line.16_combined_gain_loss"];
+        const schDL15 = form["schedule-d.0.line.15_net_long_term_gain_loss"];
+        const schDL16 = form["schedule-d.1.line.16_combined_gain_loss"];
         const candL15 = typeof schDL15 === "number" ? atLeast(0, schDL15) : 0;
         const candL16 = typeof schDL16 === "number" ? atLeast(0, schDL16) : 0;
         // Worksheet line 3 "No" branch: no Schedule D, so use line 7a.
@@ -209,12 +212,12 @@ export function register(): void {
           schDL15 !== undefined || schDL16 !== undefined
             ? Math.min(candL15, candL16)
             : (() => {
-                const l7a = f["line.7a"];
+                const l7a = form["line.7a"];
                 return typeof l7a === "number" ? atLeast(0, l7a) : 0;
               })();
 
         try {
-          const r = computeQdcg({
+          const qdcg = computeQdcg({
             taxableIncome: taxable,
             // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
             qualifiedDividends: roundDollars(info.qualifiedDividends) ?? 0,
@@ -224,86 +227,87 @@ export function register(): void {
             filingStatus: info.filingStatus,
             taxYear: 2025,
           });
-          return r.tax;
+          return qdcg.tax;
         } catch {
           // Unknown filing status or missing table data: use the plain tax table.
-          const r = lookupTax("federal-2025", taxable, info.filingStatus);
-          return r.ok ? r.tax : undefined;
+          const lookup = lookupTax("federal-2025", taxable, info.filingStatus);
+          return lookup.ok ? lookup.tax : undefined;
         }
       },
       // MANUAL EDIT: line 8 = Schedule 1 line 10; blank when Schedule 1 is not filed.
-      "line.8": (f) => {
-        const v = f["schedule-1.0.line.10"];
-        return typeof v === "number" ? v : undefined;
+      "line.8": (form) => {
+        const value = form["schedule-1.0.line.10"];
+        return typeof value === "number" ? value : undefined;
       },
       // MANUAL EDIT: line 10 = Schedule 1 line 26; blank when Schedule 1 is not filed.
-      "line.10": (f) => {
-        const v = f["schedule-1.1.line.26"];
-        return typeof v === "number" ? v : undefined;
+      "line.10": (form) => {
+        const value = form["schedule-1.1.line.26"];
+        return typeof value === "number" ? value : undefined;
       },
       // MANUAL EDIT: line 13a = Form 8995-A line 39 (QBI deduction); blank when 8995-A is not filed.
-      "line.13a": (f) => {
-        const v = f["form-8995-a.1.line.39"];
-        return typeof v === "number" ? v : undefined;
+      "line.13a": (form) => {
+        const value = form["form-8995-a.1.line.39"];
+        return typeof value === "number" ? value : undefined;
       },
       // MANUAL EDIT: line 17 = Schedule 2 line 3 (AMT + excess APTC); blank when Schedule 2 is not filed.
-      "line.17": (f) => {
-        const v = f["schedule-2.0.line.3_total_lines_1z_and_2"];
-        return typeof v === "number" ? v : undefined;
+      "line.17": (form) => {
+        const value = form["schedule-2.0.line.3_total_lines_1z_and_2"];
+        return typeof value === "number" ? value : undefined;
       },
-      "line.20": (f) => {
-        const v = f["schedule-3.0.line.8"];
-        return typeof v === "number" ? v : undefined;
+      "line.20": (form) => {
+        const value = form["schedule-3.0.line.8"];
+        return typeof value === "number" ? value : undefined;
       },
       // Line 19 (Schedule 8812) is not modeled.
-      "line.21": (f) =>
-        f["line.19"] === undefined && f["line.20"] === undefined
+      "line.21": (form) =>
+        form["line.19"] === undefined && form["line.20"] === undefined
           ? undefined
-          : sum(f["line.19"], f["line.20"]),
-      "line.18": (f) => (f["line.16"] === undefined ? undefined : sum(f["line.16"], f["line.17"])),
+          : sum(form["line.19"], form["line.20"]),
+      "line.18": (form) =>
+        form["line.16"] === undefined ? undefined : sum(form["line.16"], form["line.17"]),
       // MANUAL EDIT: line 23 = Schedule 2 line 21 (other taxes); blank when Schedule 2 is not filed.
-      "line.23": (f) => {
-        const v = f["schedule-2.1.line.21_total_other_taxes"];
-        return typeof v === "number" ? v : undefined;
+      "line.23": (form) => {
+        const value = form["schedule-2.1.line.21_total_other_taxes"];
+        return typeof value === "number" ? value : undefined;
       },
-      "line.22": (f) =>
-        f["line.18"] === undefined
+      "line.22": (form) =>
+        form["line.18"] === undefined
           ? undefined
-          : atLeast(0, sum(f["line.18"], f["line.21"] === undefined ? 0 : -f["line.21"])),
+          : atLeast(0, sum(form["line.18"], form["line.21"] === undefined ? 0 : -form["line.21"])),
       /*
        * Blank when Schedule H line 9 is Yes: Schedule 2 line 21 is blank then
        * (FUTA tax not modeled), and sum() would count it as 0.
        */
-      "line.24": (f) =>
-        f["line.22"] === undefined || f["schedule-h.0.line.9_yes"] === true
+      "line.24": (form) =>
+        form["line.22"] === undefined || form["schedule-h.0.line.9_yes"] === true
           ? undefined
-          : sum(f["line.22"], f["line.23"]),
+          : sum(form["line.22"], form["line.23"]),
       "line.25a": (_, info) => roundDollars(info.w2FederalWithholding),
       // MANUAL EDIT: line 25c = Form 8959 line 24 only; other sources are not modeled.
-      "line.25c": (f) => {
-        const m = f["form-8959.0.line.24_total_additional_medicare_tax_withholding"];
-        return typeof m === "number" ? m : undefined;
+      "line.25c": (form) => {
+        const withholding = form["form-8959.0.line.24_total_additional_medicare_tax_withholding"];
+        return typeof withholding === "number" ? withholding : undefined;
       },
-      "line.25d": (f) => sum(f["line.25a"], f["line.25b"], f["line.25c"]),
+      "line.25d": (form) => sum(form["line.25a"], form["line.25b"], form["line.25c"]),
       // MANUAL EDIT: 1099 box 4 and SSA-1099 box 6; blank when nothing was withheld.
       "line.25b": (_, info) => roundDollars(info.form1099FederalWithholding),
-      "line.33": (f) => sum(f["line.25d"], f["line.26"], f["line.32"]),
+      "line.33": (form) => sum(form["line.25d"], form["line.26"], form["line.32"]),
       // MANUAL EDIT: line 34 (overpaid) only when line 33 exceeds line 24; blank otherwise.
-      "line.34": (f) => {
-        const paid = f["line.33"];
-        const tax = f["line.24"];
+      "line.34": (form) => {
+        const paid = form["line.33"];
+        const tax = form["line.24"];
         if (typeof paid !== "number" || typeof tax !== "number") return undefined;
         return paid > tax ? paid - tax : undefined;
       },
       // MANUAL EDIT: line 37 includes the line 38 penalty (not modeled).
-      "line.37": (f) => {
-        const paid = f["line.33"];
-        const tax = f["line.24"];
+      "line.37": (form) => {
+        const paid = form["line.33"];
+        const tax = form["line.24"];
         if (typeof paid !== "number" || typeof tax !== "number") return undefined;
-        return tax > paid ? tax - paid + sum(f["line.38"]) : undefined;
+        return tax > paid ? tax - paid + sum(form["line.38"]) : undefined;
       },
       // MANUAL EDIT: line 35a = line 34 only when the full overpayment is refunded.
-      "line.35a": (f, info) => (info.refundFullOverpaymentFederal ? f["line.34"] : undefined),
+      "line.35a": (form, info) => (info.refundFullOverpaymentFederal ? form["line.34"] : undefined),
       "signing.taxpayer_occupation": (_, info) => info.taxpayerOccupation,
       "signing.taxpayer_phone": (_, info) => info.taxpayerPhone,
       "signing.taxpayer_email": (_, info) => info.taxpayerEmail,

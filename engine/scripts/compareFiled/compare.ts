@@ -48,15 +48,15 @@ function compareForm(
   catalog: Catalog,
   out: CompareResult,
 ): void {
-  const numeric = catalog.getFields(formId).filter((f) => f.valueType === "numeric");
-  const known = new Set(numeric.map((f) => f.fieldId));
+  const numeric = catalog.getFields(formId).filter((field) => field.valueType === "numeric");
+  const known = new Set(numeric.map((field) => field.fieldId));
   for (const id of Object.keys(filedLines)) {
     if (!known.has(id)) out.unknownFields.push(`[${formId}] ${id}`);
   }
   out.matches[formId] = [];
   for (const inv of numeric) {
     const filed = filedLines[inv.fieldId] ?? 0;
-    const value = engineValue(form?.fields.find((f) => f.fieldId === inv.fieldId));
+    const value = engineValue(form?.fields.find((field) => field.fieldId === inv.fieldId));
     const status = classify(filed, value);
     if (status === null) {
       if (filed !== 0) out.matches[formId].push(inv.fieldId);
@@ -69,7 +69,9 @@ function compareForm(
 
 function engineFills(form: EvaluatedForm<AnyFormField> | undefined): boolean {
   if (!form?.mustFile.ok || form.mustFile.value !== true) return false;
-  return form.fields.some((f) => f.valueType === "numeric" && f.result.ok && f.result.value !== 0);
+  return form.fields.some(
+    (field) => field.valueType === "numeric" && field.result.ok && field.result.value !== 0,
+  );
 }
 
 export function compareFiled(opts: {

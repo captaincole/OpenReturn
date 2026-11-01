@@ -7,15 +7,15 @@ import type { AIDecisionRow } from "../../src/facts/rows.js";
 import type { Scenario } from "../types.js";
 import { decisionRow } from "./fixtureBuilders.js";
 
-export function decisionsWithPreparerStyle(s: Scenario): AIDecisionRow[] {
-  const scheduleB = s.preparer?.rounding?.scheduleB;
-  if (!scheduleB) return s.decisions;
+export function decisionsWithPreparerStyle(scenario: Scenario): AIDecisionRow[] {
+  const scheduleB = scenario.preparer?.rounding?.scheduleB;
+  if (!scheduleB) return scenario.decisions;
   const style = decisionRow({
-    userId: s.userId,
-    taxYear: s.taxYear,
+    userId: scenario.userId,
+    taxYear: scenario.taxYear,
     key: "decisions.rounding.schedule_b",
     decision: scheduleB,
     rationale: "Preparer style (Scenario.preparer.rounding), not an AI decision.",
   });
-  return [...s.decisions, style];
+  return [...scenario.decisions, style];
 }

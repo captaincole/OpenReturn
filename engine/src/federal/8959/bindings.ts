@@ -31,90 +31,90 @@ export function register(): void {
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       // MANUAL EDIT: routed to the FilingInfo slot (sum of W-2 box 5).
       "0.line.1_medicare_wages_tips": (_, info) => roundDollars(info.w2MedicareWagesTotal),
-      "0.line.4_total_medicare_wages": (f) =>
+      "0.line.4_total_medicare_wages": (form) =>
         sum(
-          f["0.line.1_medicare_wages_tips"],
-          f["0.line.2_unreported_tips"],
-          f["0.line.3_wages_form_8919"],
+          form["0.line.1_medicare_wages_tips"],
+          form["0.line.2_unreported_tips"],
+          form["0.line.3_wages_form_8919"],
         ),
       "0.line.5_filing_status_threshold_wages": (_, info) =>
         info.filingStatus ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus] : undefined,
-      "0.line.6_excess_medicare_wages": (f) =>
+      "0.line.6_excess_medicare_wages": (form) =>
         excessMedicareWages(
-          f["0.line.4_total_medicare_wages"],
-          f["0.line.5_filing_status_threshold_wages"],
+          form["0.line.4_total_medicare_wages"],
+          form["0.line.5_filing_status_threshold_wages"],
         ),
       // MANUAL EDIT: inline math; the generator has no multiply rule.
-      "0.line.7_additional_medicare_tax_wages": (f) => {
-        const line6 = f["0.line.6_excess_medicare_wages"];
+      "0.line.7_additional_medicare_tax_wages": (form) => {
+        const line6 = form["0.line.6_excess_medicare_wages"];
         if (typeof line6 !== "number" || line6 === 0) return undefined;
         return roundDollars(line6 * 0.009);
       },
       // MANUAL EDIT: Part II gates on line 8 (SE income). Line 8 is unsupported, so Part II stays blank.
-      "0.line.9_filing_status_threshold_se": (f, info) => {
-        if (f["0.line.8_self_employment_income"] === undefined) return undefined;
+      "0.line.9_filing_status_threshold_se": (form, info) => {
+        if (form["0.line.8_self_employment_income"] === undefined) return undefined;
         return info.filingStatus ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus] : undefined;
       },
-      "0.line.10_medicare_wages_from_line4": (f) => {
-        if (f["0.line.8_self_employment_income"] === undefined) return undefined;
-        return f["0.line.4_total_medicare_wages"];
+      "0.line.10_medicare_wages_from_line4": (form) => {
+        if (form["0.line.8_self_employment_income"] === undefined) return undefined;
+        return form["0.line.4_total_medicare_wages"];
       },
-      "0.line.11_threshold_reduced_by_wages": (f) => {
-        if (f["0.line.8_self_employment_income"] === undefined) return undefined;
+      "0.line.11_threshold_reduced_by_wages": (form) => {
+        if (form["0.line.8_self_employment_income"] === undefined) return undefined;
         return atLeast(
           0,
           sum(
-            f["0.line.9_filing_status_threshold_se"],
-            f["0.line.10_medicare_wages_from_line4"] === undefined
+            form["0.line.9_filing_status_threshold_se"],
+            form["0.line.10_medicare_wages_from_line4"] === undefined
               ? 0
-              : -f["0.line.10_medicare_wages_from_line4"],
+              : -form["0.line.10_medicare_wages_from_line4"],
           ),
         );
       },
-      "0.line.12_excess_se_income": (f) => {
-        if (f["0.line.8_self_employment_income"] === undefined) return undefined;
+      "0.line.12_excess_se_income": (form) => {
+        if (form["0.line.8_self_employment_income"] === undefined) return undefined;
         return atLeast(
           0,
           sum(
-            f["0.line.8_self_employment_income"],
-            f["0.line.11_threshold_reduced_by_wages"] === undefined
+            form["0.line.8_self_employment_income"],
+            form["0.line.11_threshold_reduced_by_wages"] === undefined
               ? 0
-              : -f["0.line.11_threshold_reduced_by_wages"],
+              : -form["0.line.11_threshold_reduced_by_wages"],
           ),
         );
       },
-      "0.line.13_additional_medicare_tax_se": (f) => {
-        const line12 = f["0.line.12_excess_se_income"];
+      "0.line.13_additional_medicare_tax_se": (form) => {
+        const line12 = form["0.line.12_excess_se_income"];
         if (typeof line12 !== "number" || line12 === 0) return undefined;
         return roundDollars(line12 * 0.009);
       },
       // MANUAL EDIT: Part III gates on line 14 (RRTA compensation).
-      "0.line.15_filing_status_threshold_rrta": (f, info) => {
-        if (f["0.line.14_rrta_compensation_tips"] === undefined) return undefined;
+      "0.line.15_filing_status_threshold_rrta": (form, info) => {
+        if (form["0.line.14_rrta_compensation_tips"] === undefined) return undefined;
         return info.filingStatus ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus] : undefined;
       },
-      "0.line.16_excess_rrta_compensation": (f) => {
-        if (f["0.line.14_rrta_compensation_tips"] === undefined) return undefined;
+      "0.line.16_excess_rrta_compensation": (form) => {
+        if (form["0.line.14_rrta_compensation_tips"] === undefined) return undefined;
         return atLeast(
           0,
           sum(
-            f["0.line.14_rrta_compensation_tips"],
-            f["0.line.15_filing_status_threshold_rrta"] === undefined
+            form["0.line.14_rrta_compensation_tips"],
+            form["0.line.15_filing_status_threshold_rrta"] === undefined
               ? 0
-              : -f["0.line.15_filing_status_threshold_rrta"],
+              : -form["0.line.15_filing_status_threshold_rrta"],
           ),
         );
       },
-      "0.line.17_additional_medicare_tax_rrta": (f) => {
-        const line16 = f["0.line.16_excess_rrta_compensation"];
+      "0.line.17_additional_medicare_tax_rrta": (form) => {
+        const line16 = form["0.line.16_excess_rrta_compensation"];
         if (typeof line16 !== "number" || line16 === 0) return undefined;
         return roundDollars(line16 * 0.009);
       },
       // MANUAL EDIT: blank when no part applies.
-      "0.line.18_total_additional_medicare_tax": (f) => {
-        const seven = f["0.line.7_additional_medicare_tax_wages"];
-        const thirteen = f["0.line.13_additional_medicare_tax_se"];
-        const seventeen = f["0.line.17_additional_medicare_tax_rrta"];
+      "0.line.18_total_additional_medicare_tax": (form) => {
+        const seven = form["0.line.7_additional_medicare_tax_wages"];
+        const thirteen = form["0.line.13_additional_medicare_tax_se"];
+        const seventeen = form["0.line.17_additional_medicare_tax_rrta"];
         if (seven === undefined && thirteen === undefined && seventeen === undefined) {
           return undefined;
         }
@@ -122,27 +122,27 @@ export function register(): void {
       },
       // MANUAL EDIT: routed to the FilingInfo slot (sum of W-2 box 6).
       "0.line.19_medicare_tax_withheld": (_, info) => roundDollars(info.w2MedicareTaxWithheld),
-      "0.line.20_medicare_wages_from_line1": (f) => f["0.line.1_medicare_wages_tips"],
+      "0.line.20_medicare_wages_from_line1": (form) => form["0.line.1_medicare_wages_tips"],
       // MANUAL EDIT: line 21 = line 20 × 1.45%.
-      "0.line.21_regular_medicare_tax_on_wages": (f) => {
-        const line20 = f["0.line.20_medicare_wages_from_line1"];
+      "0.line.21_regular_medicare_tax_on_wages": (form) => {
+        const line20 = form["0.line.20_medicare_wages_from_line1"];
         if (typeof line20 !== "number" || line20 === 0) return undefined;
         return roundDollars(line20 * 0.0145);
       },
-      "0.line.22_additional_medicare_tax_withholding_wages": (f) =>
+      "0.line.22_additional_medicare_tax_withholding_wages": (form) =>
         atLeast(
           0,
           sum(
-            f["0.line.19_medicare_tax_withheld"],
-            f["0.line.21_regular_medicare_tax_on_wages"] === undefined
+            form["0.line.19_medicare_tax_withheld"],
+            form["0.line.21_regular_medicare_tax_on_wages"] === undefined
               ? 0
-              : -f["0.line.21_regular_medicare_tax_on_wages"],
+              : -form["0.line.21_regular_medicare_tax_on_wages"],
           ),
         ),
       // MANUAL EDIT: blank when lines 22 and 23 are both blank.
-      "0.line.24_total_additional_medicare_tax_withholding": (f) => {
-        const twentyTwo = f["0.line.22_additional_medicare_tax_withholding_wages"];
-        const twentyThree = f["0.line.23_additional_medicare_tax_withholding_rrta"];
+      "0.line.24_total_additional_medicare_tax_withholding": (form) => {
+        const twentyTwo = form["0.line.22_additional_medicare_tax_withholding_wages"];
+        const twentyThree = form["0.line.23_additional_medicare_tax_withholding_rrta"];
         if (twentyTwo === undefined && twentyThree === undefined) return undefined;
         return sum(twentyTwo, twentyThree);
       },

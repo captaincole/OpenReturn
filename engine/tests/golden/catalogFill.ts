@@ -14,7 +14,7 @@ interface Args {
 
 function parseArgs(argv: string[]): Args {
   const get = (flag: string): string | undefined => {
-    const arg = argv.find((a) => a.startsWith(`${flag}=`));
+    const arg = argv.find((candidate) => candidate.startsWith(`${flag}=`));
     return arg ? arg.slice(flag.length + 1) : undefined;
   };
   const formId = get("--form-id");
@@ -144,15 +144,15 @@ function toGolden(
   for (const [fieldId, widgets] of rendered) {
     entries.push({
       fieldId,
-      widgets: widgets.map((w) => {
-        const out: GoldenEntry["widgets"][number] = { widgetName: w.widgetName };
-        if (w.text !== undefined) out.text = w.text;
-        if (w.checked !== undefined) out.checked = w.checked;
+      widgets: widgets.map((widget) => {
+        const out: GoldenEntry["widgets"][number] = { widgetName: widget.widgetName };
+        if (widget.text !== undefined) out.text = widget.text;
+        if (widget.checked !== undefined) out.checked = widget.checked;
         return out;
       }),
     });
   }
-  entries.sort((a, b) => a.fieldId.localeCompare(b.fieldId));
+  entries.sort((left, right) => left.fieldId.localeCompare(right.fieldId));
   return { formId, fieldCount, entries };
 }
 
@@ -161,23 +161,23 @@ function diffGoldens(expected: Golden, actual: Golden): string[] {
   if (expected.fieldCount !== actual.fieldCount) {
     diffs.push(`fieldCount: expected=${expected.fieldCount} actual=${actual.fieldCount}`);
   }
-  const expById = new Map(expected.entries.map((e) => [e.fieldId, e]));
-  const actById = new Map(actual.entries.map((e) => [e.fieldId, e]));
+  const expById = new Map(expected.entries.map((entry) => [entry.fieldId, entry]));
+  const actById = new Map(actual.entries.map((entry) => [entry.fieldId, entry]));
   const allIds = new Set([...expById.keys(), ...actById.keys()]);
   for (const id of allIds) {
-    const a = expById.get(id);
-    const b = actById.get(id);
-    if (!a) {
+    const expectedEntry = expById.get(id);
+    const actualEntry = actById.get(id);
+    if (!expectedEntry) {
       diffs.push(`added field: ${id}`);
       continue;
     }
-    if (!b) {
+    if (!actualEntry) {
       diffs.push(`removed field: ${id}`);
       continue;
     }
-    if (JSON.stringify(a.widgets) !== JSON.stringify(b.widgets)) {
+    if (JSON.stringify(expectedEntry.widgets) !== JSON.stringify(actualEntry.widgets)) {
       diffs.push(
-        `changed: ${id}\n  expected: ${JSON.stringify(a.widgets)}\n  actual:   ${JSON.stringify(b.widgets)}`,
+        `changed: ${id}\n  expected: ${JSON.stringify(expectedEntry.widgets)}\n  actual:   ${JSON.stringify(actualEntry.widgets)}`,
       );
     }
   }
@@ -202,14 +202,14 @@ export async function runCatalogFillCheck(formId: string): Promise<RunResult> {
 
     await fs.writeFile(`/tmp/smoke-${formId}.pdf`, pdfBytes);
 
-    for (const w of warnings) failures.push(`render warning: ${w}`);
+    for (const warning of warnings) failures.push(`render warning: ${warning}`);
 
     /* The renderer silently skips fields with undefined values (e.g. selects with no options). */
     if (rendered.size !== fieldCount) {
       const renderedIds = new Set(rendered.keys());
       const missing = catalog
         .getFields(formId)
-        .map((f) => f.fieldId)
+        .map((field) => field.fieldId)
         .filter((id) => !renderedIds.has(id));
       const head = missing.slice(0, 5).join(", ");
       const tail = missing.length > 5 ? `…+${missing.length - 5}` : "";
@@ -236,8 +236,8 @@ export async function runCatalogFillCheck(formId: string): Promise<RunResult> {
     }
     const expected = JSON.parse(expectedRaw) as Golden;
     const diffs = diffGoldens(expected, actual);
-    for (const d of diffs.slice(0, 10)) {
-      failures.push(`diff: ${d.split("\n")[0]}`);
+    for (const diff of diffs.slice(0, 10)) {
+      failures.push(`diff: ${diff.split("\n")[0]}`);
     }
     if (diffs.length > 10) failures.push(`…and ${diffs.length - 10} more diffs`);
   } catch (err) {
@@ -275,14 +275,14 @@ async function main(): Promise<void> {
     await fs.writeFile(outPdfPath, pdfBytes);
     if (warnings.length > 0) {
       console.error(`\nFAIL: ${warnings.length} render warning(s):`);
-      for (const w of warnings) console.error(`  - ${w}`);
+      for (const warning of warnings) console.error(`  - ${warning}`);
       process.exit(1);
     }
     if (rendered.size !== fieldCount) {
       const renderedIds = new Set(rendered.keys());
       const missing = catalog
         .getFields(args.formId)
-        .map((f) => f.fieldId)
+        .map((field) => field.fieldId)
         .filter((id) => !renderedIds.has(id));
       console.error(
         `\nFAIL: rendered ${rendered.size}/${fieldCount} fields. ` +
@@ -306,7 +306,7 @@ async function main(): Promise<void> {
     return;
   }
   console.error(`\nFAIL: ${result.name} (${result.failures.length} failure(s)):`);
-  for (const f of result.failures) console.error(`  - ${f}`);
+  for (const failure of result.failures) console.error(`  - ${failure}`);
   console.error(`\nIf the change is intentional, re-run with --update to refresh the golden.`);
   process.exit(1);
 }

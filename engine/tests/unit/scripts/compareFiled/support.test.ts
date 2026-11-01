@@ -11,7 +11,7 @@ import type { Scenario } from "../../../types.js";
 const RESOLVERS = ["src/filingInfoResolvers.ts", "src/resolverInputs.ts"];
 
 const MODELED = new Set(
-  jordanScenario.forms.map((f) => f.formId).filter((id) => id !== "schedule-d-ca"),
+  jordanScenario.forms.map((form) => form.formId).filter((id) => id !== "schedule-d-ca"),
 );
 
 describe("checkSupport", () => {
@@ -20,17 +20,19 @@ describe("checkSupport", () => {
   });
 
   it("flags unknown facts with a masked key, and out-of-scope answers", () => {
-    const s: Scenario = {
+    const scenario: Scenario = {
       ...jordanScenario,
       facts: [
         ...jordanScenario.facts,
         { ...jordanScenario.facts[0], key: "account.some-partnership.k1" },
       ],
-      decisions: jordanScenario.decisions.map((d) =>
-        d.decisionKey === "decisions.scope.ca_residency" ? { ...d, decision: "part_year" } : d,
+      decisions: jordanScenario.decisions.map((decision) =>
+        decision.decisionKey === "decisions.scope.ca_residency"
+          ? { ...decision, decision: "part_year" }
+          : decision,
       ),
     };
-    const issues = checkSupport(s, MODELED).map((i) => `${i.kind} ${i.subject}`);
+    const issues = checkSupport(scenario, MODELED).map((i) => `${i.kind} ${i.subject}`);
     expect(issues).toEqual([
       "unknown_fact account.<name>.k1",
       "out_of_scope decisions.scope.ca_residency",
@@ -47,12 +49,12 @@ describe("checkSupport", () => {
 
 describe("SIMPLE_FACT_KEYS", () => {
   it("lists every single-value fact key the resolvers read", () => {
-    const read = RESOLVERS.flatMap((p) =>
-      [...readFileSync(p, "utf8").matchAll(/\b(?:num|text)\(inputs, "([a-z0-9_.]+)"/g)].map(
-        (m) => m[1],
+    const read = RESOLVERS.flatMap((path) =>
+      [...readFileSync(path, "utf8").matchAll(/\b(?:num|text)\(inputs, "([a-z0-9_.]+)"/g)].map(
+        (match) => match[1],
       ),
-    ).filter((k) => !k.startsWith("identity."));
+    ).filter((key) => !key.startsWith("identity."));
     expect(read.length).toBeGreaterThan(5);
-    expect(read.filter((k) => !SIMPLE_FACT_KEYS.has(k))).toEqual([]);
+    expect(read.filter((key) => !SIMPLE_FACT_KEYS.has(key))).toEqual([]);
   });
 });

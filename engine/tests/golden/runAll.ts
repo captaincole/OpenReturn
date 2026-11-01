@@ -6,29 +6,33 @@ import { CATALOGS, runCatalogFillCheck } from "./catalogFill.js";
 import { runScenario } from "./runScenario.js";
 
 const UNVERIFIED = new Set(
-  SCENARIOS.filter((s) => s.verification === "unverified").map((s) => s.name),
+  SCENARIOS.filter((scenario) => scenario.verification === "unverified").map(
+    (scenario) => scenario.name,
+  ),
 );
 
 async function main() {
   const filters = process.argv
     .slice(2)
-    .filter((a) => !a.startsWith("-"))
-    .map((f) => f.toLowerCase());
+    .filter((arg) => !arg.startsWith("-"))
+    .map((arg) => arg.toLowerCase());
   const matches = (name: string) =>
-    filters.length === 0 || filters.some((f) => name.toLowerCase().includes(f));
+    filters.length === 0 || filters.some((filter) => name.toLowerCase().includes(filter));
 
-  const catalogs = CATALOGS.filter((c) => matches(`catalog-fill:${c.formId}`));
+  const catalogs = CATALOGS.filter((catalog) => matches(`catalog-fill:${catalog.formId}`));
   /* A skipped scenario runs only when a filter names it. */
-  const scenarios = SCENARIOS.filter((s) =>
-    s.skip ? filters.some((f) => s.name.toLowerCase().includes(f)) : matches(s.name),
+  const scenarios = SCENARIOS.filter((scenario) =>
+    scenario.skip
+      ? filters.some((filter) => scenario.name.toLowerCase().includes(filter))
+      : matches(scenario.name),
   );
 
   if (catalogs.length + scenarios.length === 0) {
     console.error(`No checks match filter(s): ${filters.join(", ")}`);
     console.error(
       `Available: ${[
-        ...SCENARIOS.map((s) => s.name),
-        ...CATALOGS.map((c) => `catalog-fill:${c.formId}`),
+        ...SCENARIOS.map((scenario) => scenario.name),
+        ...CATALOGS.map((catalog) => `catalog-fill:${catalog.formId}`),
       ].join(", ")}`,
     );
     process.exit(1);
@@ -37,8 +41,8 @@ async function main() {
   const totalChecks = scenarios.length + catalogs.length;
   const colWidth = Math.max(
     16,
-    ...scenarios.map((s) => s.name.length),
-    ...catalogs.map((c) => `catalog-fill:${c.formId}`.length),
+    ...scenarios.map((scenario) => scenario.name.length),
+    ...catalogs.map((catalog) => `catalog-fill:${catalog.formId}`.length),
   );
 
   console.log(
@@ -47,26 +51,28 @@ async function main() {
   const t0 = Date.now();
   const results: RunResult[] = [];
 
-  const record = (r: RunResult) => {
-    results.push(r);
-    if (r.passed) {
+  const record = (result: RunResult) => {
+    results.push(result);
+    if (result.passed) {
       const nm =
-        (r.knownMismatches?.length ? ` — ${r.knownMismatches.length} known mismatch(es)` : "") +
-        (r.notModeled?.length ? ` — ${r.notModeled.length} line(s) not modeled` : "");
-      const tag = UNVERIFIED.has(r.name) ? " — unverified (locked engine output)" : "";
-      console.log(`✓ ${r.name.padEnd(colWidth)} ${r.durationMs}ms${tag}${nm}`);
+        (result.knownMismatches?.length
+          ? ` — ${result.knownMismatches.length} known mismatch(es)`
+          : "") +
+        (result.notModeled?.length ? ` — ${result.notModeled.length} line(s) not modeled` : "");
+      const tag = UNVERIFIED.has(result.name) ? " — unverified (locked engine output)" : "";
+      console.log(`✓ ${result.name.padEnd(colWidth)} ${result.durationMs}ms${tag}${nm}`);
       if (filters.length > 0) {
-        for (const line of r.knownMismatches ?? []) console.log(`    known: ${line}`);
-        for (const line of r.notModeled ?? []) console.log(`    not modeled: ${line}`);
+        for (const line of result.knownMismatches ?? []) console.log(`    known: ${line}`);
+        for (const line of result.notModeled ?? []) console.log(`    not modeled: ${line}`);
       }
     } else {
       console.error(
-        `✗ ${r.name.padEnd(colWidth)} ${r.durationMs}ms — ${r.failures.length} failure(s):`,
+        `✗ ${result.name.padEnd(colWidth)} ${result.durationMs}ms — ${result.failures.length} failure(s):`,
       );
-      for (const f of r.failures) console.error(`    ${f}`);
-      if (filters.length > 0 && r.notModeled?.length) {
-        console.error(`    — ${r.notModeled.length} line(s) not modeled:`);
-        for (const line of r.notModeled) console.error(`    ${line}`);
+      for (const failure of result.failures) console.error(`    ${failure}`);
+      if (filters.length > 0 && result.notModeled?.length) {
+        console.error(`    — ${result.notModeled.length} line(s) not modeled:`);
+        for (const line of result.notModeled) console.error(`    ${line}`);
       }
     }
   };
@@ -75,11 +81,11 @@ async function main() {
    * Catalog-fill runs FIRST: scenarios register formatter overrides in a global
    * registry (e.g. SSN.format on 540 page 2), and those break the synthetic values.
    */
-  for (const c of catalogs) record(await runCatalogFillCheck(c.formId));
-  for (const s of scenarios) record(await runScenario(s));
+  for (const catalog of catalogs) record(await runCatalogFillCheck(catalog.formId));
+  for (const scenario of scenarios) record(await runScenario(scenario));
 
   const totalMs = Date.now() - t0;
-  const passed = results.filter((r) => r.passed).length;
+  const passed = results.filter((result) => result.passed).length;
   const failed = results.length - passed;
 
   console.log("");

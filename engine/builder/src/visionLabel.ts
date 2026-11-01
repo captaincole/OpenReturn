@@ -52,9 +52,9 @@ export async function resolveLabelsForPage(opts: ResolveLabelsOpts): Promise<Map
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error("ANTHROPIC_API_KEY is not set");
 
-  const overlayWidgets: OverlayWidget[] = opts.widgets.map((w) => ({
-    id: w.id,
-    rect: w.rect,
+  const overlayWidgets: OverlayWidget[] = opts.widgets.map((widget) => ({
+    id: widget.id,
+    rect: widget.rect,
   }));
   const rendered = await renderPageWithOverlay({
     pdf: opts.pdf,
@@ -97,12 +97,12 @@ export async function resolveLabelsForPage(opts: ResolveLabelsOpts): Promise<Map
 }
 
 function buildLabelPrompt(opts: ResolveLabelsOpts): string {
-  const widgetTable = opts.widgets.map((w) => ({
-    id: w.id,
-    kind: w.kind,
-    tu_label: w.tuLabel,
-    ...(w.exportValue ? { export_value: w.exportValue } : {}),
-    ...(w.buttonValue ? { button_value: w.buttonValue } : {}),
+  const widgetTable = opts.widgets.map((widget) => ({
+    id: widget.id,
+    kind: widget.kind,
+    tu_label: widget.tuLabel,
+    ...(widget.exportValue ? { export_value: widget.exportValue } : {}),
+    ...(widget.buttonValue ? { button_value: widget.buttonValue } : {}),
   }));
 
   return `Form: ${opts.pdfPath}

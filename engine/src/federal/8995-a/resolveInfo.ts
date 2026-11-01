@@ -8,12 +8,12 @@ export function resolve8995AInfo(inputs: ResolverInputs): Form8995AFilingInfo {
     isDividendFactKey(row.key),
   );
   const reit = sum(...divs.map((row) => (row.value as { box5?: unknown }).box5));
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8995_a",
     fallbacks: [{ rule: `fallback: section 199A dividends $${reit} > 0`, value: reit > 0 }],
   });
   return {
-    mustFile: { "form-8995-a": r },
+    mustFile: { "form-8995-a": resolution },
     qualifiedReitDividends: divs.length > 0 ? reit : undefined,
   };
 }

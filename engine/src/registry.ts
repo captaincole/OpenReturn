@@ -13,11 +13,11 @@ export { makeFormSpec, type FormSpec } from "./formSpec.js";
 export const FORMS: FormSpec[] = [...FEDERAL_FORMS, ...STATE_FORMS];
 
 export function getFormSpec(formId: string): FormSpec {
-  const spec = FORMS.find((f) => f.formId === formId);
+  const spec = FORMS.find((candidate) => candidate.formId === formId);
   if (!spec) {
     throw new Error(
       `No FormSpec registered for formId "${formId}". ` +
-        `Known formIds: ${FORMS.map((f) => f.formId).join(", ")}. ` +
+        `Known formIds: ${FORMS.map((form) => form.formId).join(", ")}. ` +
         `Add an entry to the form's jurisdiction registry ` +
         `(src/federal/index.ts or src/state/<st>/index.ts) to support it.`,
     );

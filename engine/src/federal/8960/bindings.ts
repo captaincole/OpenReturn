@@ -14,28 +14,28 @@ export function register(): void {
   defineForm<Form8960, Form8960FilingInfo>("form-8960", {
     bindings: {
       "0.header.ssn_or_ein": (_, info) => info.taxpayerSSN,
-      "0.line.1": (f) => sum(f["form-1040.line.2b"]),
-      "0.line.2": (f) => sum(f["form-1040.line.3b"]),
-      "0.line.4a": (f) =>
-        sum(f["schedule-1.0.line.3"], f["schedule-1.0.line.5"], f["schedule-1.0.line.6"]),
-      "0.line.4c": (f) => sum(f["0.line.4a"], f["0.line.4b"]),
-      "0.line.5a": (f) => sum(f["form-1040.line.7a"], f["schedule-1.0.line.4"]),
-      "0.line.5d": (f) => sum(f["0.line.5a"], f["0.line.5b"], f["0.line.5c"]),
-      "0.line.8": (f) =>
+      "0.line.1": (form) => sum(form["form-1040.line.2b"]),
+      "0.line.2": (form) => sum(form["form-1040.line.3b"]),
+      "0.line.4a": (form) =>
+        sum(form["schedule-1.0.line.3"], form["schedule-1.0.line.5"], form["schedule-1.0.line.6"]),
+      "0.line.4c": (form) => sum(form["0.line.4a"], form["0.line.4b"]),
+      "0.line.5a": (form) => sum(form["form-1040.line.7a"], form["schedule-1.0.line.4"]),
+      "0.line.5d": (form) => sum(form["0.line.5a"], form["0.line.5b"], form["0.line.5c"]),
+      "0.line.8": (form) =>
         sum(
-          f["0.line.1"],
-          f["0.line.2"],
-          f["0.line.3"],
-          f["0.line.4c"],
-          f["0.line.5d"],
-          f["0.line.6"],
-          f["0.line.7"],
+          form["0.line.1"],
+          form["0.line.2"],
+          form["0.line.3"],
+          form["0.line.4c"],
+          form["0.line.5d"],
+          form["0.line.6"],
+          form["0.line.7"],
         ),
-      "0.line.9d": (f) => sum(f["0.line.9a"], f["0.line.9b"], f["0.line.9c"]),
-      "0.line.11": (f) => sum(f["0.line.9d"], f["0.line.10"]),
-      "0.line.12": (f) => netInvestmentIncome(f["0.line.8"], f["0.line.11"]),
+      "0.line.9d": (form) => sum(form["0.line.9a"], form["0.line.9b"], form["0.line.9c"]),
+      "0.line.11": (form) => sum(form["0.line.9d"], form["0.line.10"]),
+      "0.line.12": (form) => netInvestmentIncome(form["0.line.8"], form["0.line.11"]),
       // MAGI = AGI; the FEIE/CFC add-backs are not modeled.
-      "0.line.13": (f) => sum(f["form-1040.line.11b"]),
+      "0.line.13": (form) => sum(form["form-1040.line.11b"]),
       // Statutory thresholds; not indexed for inflation.
       "0.line.14": (_, info) =>
         info.filingStatus
@@ -50,25 +50,28 @@ export function register(): void {
             )[info.filingStatus]
           : undefined,
       // MANUAL EDIT: line 9a = Schedule A line 9; blank when Schedule A is not filed.
-      "0.line.9a": (f) => {
-        const v = f["schedule-a.0.line.9_investment_interest"];
-        return typeof v === "number" ? v : undefined;
+      "0.line.9a": (form) => {
+        const value = form["schedule-a.0.line.9_investment_interest"];
+        return typeof value === "number" ? value : undefined;
       },
       // MANUAL EDIT: line 16 = smaller of line 12 or line 15.
-      "0.line.16": (f) => {
-        const nii = f["0.line.12"];
-        const excess = f["0.line.15"];
+      "0.line.16": (form) => {
+        const nii = form["0.line.12"];
+        const excess = form["0.line.15"];
         return typeof nii === "number" && typeof excess === "number"
           ? Math.min(nii, excess)
           : undefined;
       },
       // MANUAL EDIT: line 17 = line 16 × 3.8%.
-      "0.line.17": (f) => {
-        const base = f["0.line.16"];
+      "0.line.17": (form) => {
+        const base = form["0.line.16"];
         return typeof base === "number" ? roundDollars(base * 0.038) : undefined;
       },
-      "0.line.15": (f) =>
-        atLeast(0, sum(f["0.line.13"], f["0.line.14"] === undefined ? 0 : -f["0.line.14"])),
+      "0.line.15": (form) =>
+        atLeast(
+          0,
+          sum(form["0.line.13"], form["0.line.14"] === undefined ? 0 : -form["0.line.14"]),
+        ),
     },
 
     unsupported: {

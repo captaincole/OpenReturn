@@ -14,39 +14,39 @@ export function register(): void {
           ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
           : undefined,
       "0.header.ssn": (_, info) => info.taxpayerSSN,
-      "0.line.5b": (f) => {
-        const v = f["form-5695.3.line.32"];
-        return typeof v === "number" ? v : undefined;
+      "0.line.5b": (form) => {
+        const value = form["form-5695.3.line.32"];
+        return typeof value === "number" ? value : undefined;
       },
-      "0.line.7": (f) => {
+      "0.line.7": (form) => {
         const parts = [
-          f["0.line.6a"],
-          f["0.line.6b"],
-          f["0.line.6c"],
-          f["0.line.6d"],
-          f["0.line.6f"],
-          f["0.line.6g"],
-          f["0.line.6h"],
-          f["0.line.6i"],
-          f["0.line.6j"],
-          f["0.line.6k"],
-          f["0.line.6l"],
-          f["0.line.6m"],
-          f["0.line.6z_amount"],
+          form["0.line.6a"],
+          form["0.line.6b"],
+          form["0.line.6c"],
+          form["0.line.6d"],
+          form["0.line.6f"],
+          form["0.line.6g"],
+          form["0.line.6h"],
+          form["0.line.6i"],
+          form["0.line.6j"],
+          form["0.line.6k"],
+          form["0.line.6l"],
+          form["0.line.6m"],
+          form["0.line.6z_amount"],
         ];
-        return parts.every((v) => v === undefined) ? undefined : sum(...parts);
+        return parts.every((part) => part === undefined) ? undefined : sum(...parts);
       },
-      "0.line.8": (f) => {
+      "0.line.8": (form) => {
         const parts = [
-          f["0.line.1"],
-          f["0.line.2"],
-          f["0.line.3"],
-          f["0.line.4"],
-          f["0.line.5a"],
-          f["0.line.5b"],
-          f["0.line.7"],
+          form["0.line.1"],
+          form["0.line.2"],
+          form["0.line.3"],
+          form["0.line.4"],
+          form["0.line.5a"],
+          form["0.line.5b"],
+          form["0.line.7"],
         ];
-        return parts.every((v) => v === undefined) ? undefined : sum(...parts);
+        return parts.every((part) => part === undefined) ? undefined : sum(...parts);
       },
     },
 

@@ -88,36 +88,40 @@ interface CollectedWidgets {
 function collectPageWidgets(annots: any[], pageIdx: number, out: CollectedWidgets): PageWidget[] {
   const rawWidgets: Array<{ annot: any; rect: [number, number, number, number] }> = [];
 
-  for (const a of annots) {
-    if (a.subtype !== "Widget") continue;
-    if (a.readOnly === true) continue;
-    const rect = a.rect as [number, number, number, number];
-    const fieldName = a.fieldName as string;
+  for (const annot of annots) {
+    if (annot.subtype !== "Widget") continue;
+    if (annot.readOnly === true) continue;
+    const rect = annot.rect as [number, number, number, number];
+    const fieldName = annot.fieldName as string;
 
     let bucket = out.widgetsByFieldName.get(fieldName);
     if (!bucket) {
       bucket = [];
       out.widgetsByFieldName.set(fieldName, bucket);
     }
-    bucket.push({ annot: a, page: pageIdx, rect });
+    bucket.push({ annot: annot, page: pageIdx, rect });
 
-    const alt = a.alternativeText;
+    const alt = annot.alternativeText;
     if (!out.tier1Labels.has(fieldName) && typeof alt === "string" && alt.trim().length > 0) {
       out.tier1Labels.set(fieldName, alt.trim());
     }
 
-    rawWidgets.push({ annot: a, rect });
+    rawWidgets.push({ annot: annot, rect });
   }
 
   /* Reading order, as the vision prompt promises. PDF y is bottom-up: larger y is higher. */
-  rawWidgets.sort((a, b) => {
-    const ay = (a.rect[1] + a.rect[3]) / 2;
-    const by = (b.rect[1] + b.rect[3]) / 2;
+  rawWidgets.sort((left, right) => {
+    const ay = (left.rect[1] + left.rect[3]) / 2;
+    const by = (right.rect[1] + right.rect[3]) / 2;
     if (Math.abs(ay - by) > 3) return by - ay;
-    return a.rect[0] - b.rect[0];
+    return left.rect[0] - right.rect[0];
   });
 
-  return rawWidgets.map((w, i) => ({ pdfWidgetId: i + 1, annot: w.annot, rect: w.rect }));
+  return rawWidgets.map((widget, i) => ({
+    pdfWidgetId: i + 1,
+    annot: widget.annot,
+    rect: widget.rect,
+  }));
 }
 
 async function resolveTier2Labels(
@@ -127,35 +131,37 @@ async function resolveTier2Labels(
   collected: CollectedWidgets,
 ): Promise<Map<string, string>> {
   const tier2Labels = new Map<string, string>();
-  for (let p = 0; p < totalPages; p++) {
-    const pageWidgets = collected.widgetsByPage.get(p) ?? [];
+  for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
+    const pageWidgets = collected.widgetsByPage.get(pageIndex) ?? [];
     if (pageWidgets.length === 0) continue;
-    const allHaveTu = pageWidgets.every((w) =>
-      collected.tier1Labels.has(w.annot.fieldName as string),
+    const allHaveTu = pageWidgets.every((widget) =>
+      collected.tier1Labels.has(widget.annot.fieldName as string),
     );
     if (allHaveTu) continue;
 
     const labels = await resolveLabelsForPage({
       pdfPath,
       pdf,
-      pageIndex: p,
-      widgets: pageWidgets.map((w) => ({
-        id: w.pdfWidgetId,
-        fieldName: w.annot.fieldName as string,
-        kind: classifyKind(w.annot),
-        rect: w.rect,
-        exportValue: typeof w.annot.exportValue === "string" ? w.annot.exportValue : undefined,
-        buttonValue: typeof w.annot.buttonValue === "string" ? w.annot.buttonValue : undefined,
-        tuLabel: collected.tier1Labels.get(w.annot.fieldName as string) ?? null,
+      pageIndex: pageIndex,
+      widgets: pageWidgets.map((widget) => ({
+        id: widget.pdfWidgetId,
+        fieldName: widget.annot.fieldName as string,
+        kind: classifyKind(widget.annot),
+        rect: widget.rect,
+        exportValue:
+          typeof widget.annot.exportValue === "string" ? widget.annot.exportValue : undefined,
+        buttonValue:
+          typeof widget.annot.buttonValue === "string" ? widget.annot.buttonValue : undefined,
+        tuLabel: collected.tier1Labels.get(widget.annot.fieldName as string) ?? null,
       })),
     });
 
     /* Widgets can share a fieldName across pages; the first non-empty label wins. */
-    for (const w of pageWidgets) {
-      const fn = w.annot.fieldName as string;
+    for (const widget of pageWidgets) {
+      const fn = widget.annot.fieldName as string;
       if (collected.tier1Labels.has(fn)) continue;
       if (tier2Labels.has(fn)) continue;
-      const lab = labels.get(w.pdfWidgetId);
+      const lab = labels.get(widget.pdfWidgetId);
       if (lab && lab.trim().length > 0) {
         tier2Labels.set(fn, lab.trim());
       }
@@ -188,7 +194,7 @@ function assembleField(
   const fieldKind = classifyKind(head);
   const { label, labelSource } = resolveLabel(pdfPath, fieldName, tier1Labels, tier2Labels);
 
-  const f: ExtractedField = {
+  const field: ExtractedField = {
     fieldName,
     shortName: shortenName(fieldName),
     fieldKind,
@@ -210,18 +216,18 @@ function assembleField(
 
   if (fieldKind === "text") {
     const ml = head.maxLen;
-    f.maxLength = typeof ml === "number" && ml > 0 ? ml : null;
-    f.multiline = !!head.multiLine;
-    if (head.comb) f.comb = true;
+    field.maxLength = typeof ml === "number" && ml > 0 ? ml : null;
+    field.multiline = !!head.multiLine;
+    if (head.comb) field.comb = true;
   } else if (fieldKind === "checkbox") {
-    if (typeof head.exportValue === "string") f.checkboxOnValue = head.exportValue;
+    if (typeof head.exportValue === "string") field.checkboxOnValue = head.exportValue;
   } else if (fieldKind === "radio") {
-    f.radioOptions = occurrences
+    field.radioOptions = occurrences
       .map((occ) => occ.annot.buttonValue)
-      .filter((v): v is string => typeof v === "string");
+      .filter((value): value is string => typeof value === "string");
   }
 
-  return f;
+  return field;
 }
 
 export async function extractFormFields(pdfPath: string): Promise<ExtractedForm> {
@@ -241,10 +247,10 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
     widgetsByFieldName: new Map(),
     widgetsByPage: new Map(),
   };
-  for (let p = 1; p <= totalPages; p++) {
-    const page = await pdf.getPage(p);
+  for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+    const page = await pdf.getPage(pageNum);
     const annots = await page.getAnnotations();
-    collected.widgetsByPage.set(p - 1, collectPageWidgets(annots, p - 1, collected));
+    collected.widgetsByPage.set(pageNum - 1, collectPageWidgets(annots, pageNum - 1, collected));
   }
 
   const tier2Labels = await resolveTier2Labels(pdfPath, pdf, totalPages, collected);
@@ -254,9 +260,9 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
     fields.push(assembleField(pdfPath, fieldName, occurrences, collected.tier1Labels, tier2Labels));
   }
 
-  fields.sort((a, b) => {
-    const aw = a.widgets[0];
-    const bw = b.widgets[0];
+  fields.sort((left, right) => {
+    const aw = left.widgets[0];
+    const bw = right.widgets[0];
     if (!aw || !bw) return 0;
     if (aw.page !== bw.page) return aw.page - bw.page;
     if (Math.abs(aw.position.y - bw.position.y) > 3) {
@@ -271,9 +277,9 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
 export function coverageReport(form: ExtractedForm): CoverageReport {
   let t1 = 0;
   let t2 = 0;
-  for (const f of form.fields) {
-    if (f.labelSource === "tu") t1++;
-    else if (f.labelSource === "vision") t2++;
+  for (const field of form.fields) {
+    if (field.labelSource === "tu") t1++;
+    else if (field.labelSource === "vision") t2++;
   }
   return { totalFields: form.fields.length, tier1Count: t1, tier2Count: t2 };
 }

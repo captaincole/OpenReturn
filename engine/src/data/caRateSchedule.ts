@@ -85,7 +85,7 @@ export function lookupCaRateSchedule(
     );
   }
   const row = byStatus[filingStatus].find(
-    (r) => taxableIncome > r.overMin && taxableIncome <= r.overMax,
+    (bracket) => taxableIncome > bracket.overMin && taxableIncome <= bracket.overMax,
   );
   if (!row) {
     throw new Error(`CA rate schedule: no row for ${taxableIncome} (${filingStatus}, ${taxYear}).`);

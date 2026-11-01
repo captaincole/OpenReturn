@@ -12,8 +12,8 @@ export type Money = number & { readonly __brand: "Money" };
  */
 export function sum(...values: unknown[]): number {
   let total = 0;
-  for (const v of values) {
-    if (typeof v === "number" && Number.isFinite(v)) total += v;
+  for (const value of values) {
+    if (typeof value === "number" && Number.isFinite(value)) total += value;
   }
   return total;
 }

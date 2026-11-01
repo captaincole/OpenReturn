@@ -15,14 +15,14 @@ const STATUSES: FilingStatus[] = [
 ];
 
 function tax(tableId: string, income: number, status: FilingStatus): number {
-  const r = lookupTax(tableId, income, status);
-  if (!r.ok) throw new Error(r.message);
-  return r.tax;
+  const lookup = lookupTax(tableId, income, status);
+  if (!lookup.ok) throw new Error(lookup.message);
+  return lookup.tax;
 }
 
 function outcome(tableId: string, income: number, status: FilingStatus = "single"): string {
-  const r = lookupTax(tableId, income, status);
-  return r.ok ? "ok" : r.reason;
+  const lookup = lookupTax(tableId, income, status);
+  return lookup.ok ? "ok" : lookup.reason;
 }
 
 describe("lookupTax — federal 2025", () => {
@@ -41,17 +41,17 @@ describe("lookupTax — federal 2025", () => {
   });
 
   it("rows are half-open: $84,600 belongs to the next row", () => {
-    const r = lookupTax("federal-2025", 84600, "single");
-    expect(r.ok && r.bracket).toEqual({ low: 84600, high: 84650 });
+    const lookup = lookupTax("federal-2025", 84600, "single");
+    expect(lookup.ok && lookup.bracket).toEqual({ low: 84600, high: 84650 });
     expect(tax("federal-2025", 84600, "single")).toBe(13532);
   });
 
   it("hands off to the rate schedule at exactly $100,000", () => {
     expect(outcome("federal-2025", 99999.99)).toBe("ok");
-    const r = lookupTax("federal-2025", 100000, "single");
-    expect(r.ok).toBe(false);
-    expect(!r.ok && r.reason).toBe("out_of_range");
-    expect(!r.ok && r.message).toMatch(/ceiling/);
+    const lookup = lookupTax("federal-2025", 100000, "single");
+    expect(lookup.ok).toBe(false);
+    expect(!lookup.ok && lookup.reason).toBe("out_of_range");
+    expect(!lookup.ok && lookup.message).toMatch(/ceiling/);
     expect(() => lookupRateSchedule(2025, "single", 100000)).not.toThrow();
   });
 
@@ -76,8 +76,8 @@ describe("lookupTax — CA 2025", () => {
   });
 
   it("rows are inclusive: $100,000 is in the last row, $100,001 is not", () => {
-    const r = lookupTax("ca-2025", 100000, "single");
-    expect(r.ok && r.bracket).toEqual({ low: 99951, high: 100000 });
+    const lookup = lookupTax("ca-2025", 100000, "single");
+    expect(lookup.ok && lookup.bracket).toEqual({ low: 99951, high: 100000 });
     expect(outcome("ca-2025", 100001)).toBe("out_of_range");
     expect(() => lookupCaRateSchedule(2025, "single", 100001)).not.toThrow();
   });
@@ -104,9 +104,9 @@ describe("lookupTax — errors", () => {
   });
 
   it("names an unknown table", () => {
-    const r = lookupTax("federal-1999", 50000, "single");
-    expect(!r.ok && r.reason).toBe("table_not_supported");
-    expect(!r.ok && r.message).toMatch(/federal-2025/);
+    const lookup = lookupTax("federal-1999", 50000, "single");
+    expect(!lookup.ok && lookup.reason).toBe("table_not_supported");
+    expect(!lookup.ok && lookup.message).toMatch(/federal-2025/);
   });
 
   it("lists the loaded tables", () => {

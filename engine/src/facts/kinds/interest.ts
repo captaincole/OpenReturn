@@ -40,26 +40,26 @@ export function isInterestFactKey(key: string): boolean {
   return INT_KEY_RE.test(key);
 }
 
-export function isInterestFact(f: TaxFactRow): boolean {
-  return f.category === INT_CATEGORY && INT_KEY_RE.test(f.key);
+export function isInterestFact(fact: TaxFactRow): boolean {
+  return fact.category === INT_CATEGORY && INT_KEY_RE.test(fact.key);
 }
 
-export function parseInterestFact(f: TaxFactRow): InterestFact | null {
-  if (f.category !== INT_CATEGORY) return null;
-  const match = f.key.match(INT_KEY_RE);
+export function parseInterestFact(fact: TaxFactRow): InterestFact | null {
+  if (fact.category !== INT_CATEGORY) return null;
+  const match = fact.key.match(INT_KEY_RE);
   if (!match) return null;
   const [, accountSlug] = match;
   return {
     accountSlug,
-    interest: f.value as InterestFactValue,
-    sourceFact: f,
+    interest: fact.value as InterestFactValue,
+    sourceFact: fact,
   };
 }
 
 export function getInterestFacts(facts: FactsView): InterestFact[] {
   const out: InterestFact[] = [];
-  for (const f of facts.byCategory(INT_CATEGORY)) {
-    const parsed = parseInterestFact(f);
+  for (const fact of facts.byCategory(INT_CATEGORY)) {
+    const parsed = parseInterestFact(fact);
     if (parsed !== null) out.push(parsed);
   }
   return out;

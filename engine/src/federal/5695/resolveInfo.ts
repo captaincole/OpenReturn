@@ -22,8 +22,8 @@ export function resolve5695Info(inputs: ResolverInputs): Form5695FilingInfo {
   );
   const energyItems = rows.flatMap((row) => (row.value as EnergyInvoiceFactValue).items ?? []);
   const answer = (key: string): boolean | undefined => {
-    const v = inputs.factByKey.get(key);
-    return typeof v === "boolean" ? v : undefined;
+    const value = inputs.factByKey.get(key);
+    return typeof value === "boolean" ? value : undefined;
   };
   const info: Form5695FilingInfo = {
     energyItems: energyItems.length > 0 ? energyItems : undefined,
@@ -32,7 +32,7 @@ export function resolve5695Info(inputs: ResolverInputs): Form5695FilingInfo {
     homeEnergyLastsFiveYears: answer(HOME_ENERGY_KEYS.lastsFiveYears),
     homeEnergyNewConstruction: answer(HOME_ENERGY_KEYS.newConstruction),
   };
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_5695",
     fallbacks: [
       {
@@ -57,7 +57,7 @@ export function resolve5695Info(inputs: ResolverInputs): Form5695FilingInfo {
         };
   return {
     ...info,
-    mustFile: { "form-5695": r },
+    mustFile: { "form-5695": resolution },
     missingInputs: { "form-5695": missingInputs(required) },
   };
 }

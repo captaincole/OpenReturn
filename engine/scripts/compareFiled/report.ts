@@ -40,30 +40,34 @@ const PREPARER_TEXT: Record<Preparer["kind"], string> = {
   self: "Self-prepared by hand",
 };
 
-function preparerLine(p: Preparer | undefined): string {
-  if (!p) return "**not stated** (add `preparer` to index.ts)";
-  const who = p.name ? `${PREPARER_TEXT[p.kind]} — ${p.name}` : PREPARER_TEXT[p.kind];
-  const style = Object.entries(p.rounding ?? {}).map(([k, v]) => `${k}: ${v}`);
+function preparerLine(preparer: Preparer | undefined): string {
+  if (!preparer) return "**not stated** (add `preparer` to index.ts)";
+  const who = preparer.name
+    ? `${PREPARER_TEXT[preparer.kind]} — ${preparer.name}`
+    : PREPARER_TEXT[preparer.kind];
+  const style = Object.entries(preparer.rounding ?? {}).map(([key, value]) => `${key}: ${value}`);
   return style.length > 0 ? `${who} (rounding: ${style.join(", ")})` : who;
 }
 
 /** Presence only, never an amount. */
-function blankSide(d: LineDiff): string {
-  return d.filed !== 0 && (d.engine === null || d.engine === 0) ? "engine leaves blank" : "";
+function blankSide(diff: LineDiff): string {
+  return diff.filed !== 0 && (diff.engine === null || diff.engine === 0)
+    ? "engine leaves blank"
+    : "";
 }
 
-function label(d: LineDiff): string {
-  const flat = d.label.replace(/\s+/g, " ").trim();
+function label(diff: LineDiff): string {
+  const flat = diff.label.replace(/\s+/g, " ").trim();
   return flat.length > 70 ? `${flat.slice(0, 69)}…` : flat;
 }
 
-function summaryTable(r: CompareResult): string[] {
+function summaryTable(result: CompareResult): string[] {
   const rows = ["| Form | Lines on return | Match | Differ |", "|---|---:|---:|---:|"];
-  const forms = Object.keys(r.matches);
+  const forms = Object.keys(result.matches);
   for (const formId of forms) {
-    const diffs = r.diffs.filter((d) => d.formId === formId);
-    const filled = r.matches[formId].length + diffs.filter((d) => d.filed !== 0).length;
-    rows.push(`| ${formId} | ${filled} | ${r.matches[formId].length} | ${diffs.length} |`);
+    const diffs = result.diffs.filter((diff) => diff.formId === formId);
+    const filled = result.matches[formId].length + diffs.filter((diff) => diff.filed !== 0).length;
+    rows.push(`| ${formId} | ${filled} | ${result.matches[formId].length} | ${diffs.length} |`);
   }
   return rows;
 }
@@ -77,7 +81,7 @@ function rootSection(roots: RootCause[]): string[] {
     out.push(`### ${i + 1}. \`${root.fieldId}\` — ${STATUS_TEXT[root.status]}`);
     out.push("", `${label(root)}${side ? ` (${side})` : ""}`, "");
     if (downstream.length > 0) {
-      const ids = downstream.map((d) => `\`${d.fieldId}\``).join(", ");
+      const ids = downstream.map((diff) => `\`${diff.fieldId}\``).join(", ");
       out.push(`Downstream (${downstream.length}): ${ids}`, "");
     }
   });
@@ -96,9 +100,9 @@ export function supportSection(input: ReportInput): string[] {
   for (const i of input.support) {
     out.push(`- **${SUPPORT_TEXT[i.kind]}:** \`${i.subject}\` — ${i.detail}`);
   }
-  const notModeled = input.result.diffs.filter((d) => d.status === "not_modeled");
+  const notModeled = input.result.diffs.filter((diff) => diff.status === "not_modeled");
   if (notModeled.length > 0) {
-    const ids = notModeled.map((d) => `\`${d.fieldId}\``).join(", ");
+    const ids = notModeled.map((diff) => `\`${diff.fieldId}\``).join(", ");
     out.push(`- **Lines not modeled (${notModeled.length}):** ${ids}`);
   }
   if (out.length === 2)
@@ -125,32 +129,34 @@ export function inputSection(input: ReportInput): string[] {
   return [...out, ""];
 }
 
-const counts = (m: Record<string, number>) =>
-  Object.entries(m)
-    .map(([k, n]) => `${k} ×${n}`)
+const counts = (tally: Record<string, number>) =>
+  Object.entries(tally)
+    .map(([key, count]) => `${key} ×${count}`)
     .join(", ") || "none";
 
-function shapeSection(s: InputShape): string[] {
-  const scope = Object.entries(s.scope)
-    .map(([k, v]) => `${k}: ${v}`)
+function shapeSection(shape: InputShape): string[] {
+  const scope = Object.entries(shape.scope)
+    .map(([key, value]) => `${key}: ${value}`)
     .join(", ");
   return [
     "## Return shape",
     "",
-    `- Documents: ${counts(s.documents)}`,
-    `- Sales by Form 8949 box: ${counts(s.salesByBox)}`,
-    `- Other facts: ${counts(s.otherFacts)}`,
+    `- Documents: ${counts(shape.documents)}`,
+    `- Sales by Form 8949 box: ${counts(shape.salesByBox)}`,
+    `- Other facts: ${counts(shape.otherFacts)}`,
     `- Scope decisions: ${scope || "none"}`,
     "",
   ];
 }
 
-function diffTable(r: CompareResult, roots: RootCause[]): string[] {
-  const rootIds = new Set(roots.map((g) => g.root.fieldId));
+function diffTable(result: CompareResult, roots: RootCause[]): string[] {
+  const rootIds = new Set(roots.map((root) => root.root.fieldId));
   const out = ["## All differences", "", "| Line | Status | Root | Note |", "|---|---|:-:|---|"];
-  for (const d of r.diffs) {
-    const root = rootIds.has(d.fieldId) ? "●" : "";
-    out.push(`| \`${d.fieldId}\` | ${STATUS_TEXT[d.status]} | ${root} | ${blankSide(d)} |`);
+  for (const diff of result.diffs) {
+    const root = rootIds.has(diff.fieldId) ? "●" : "";
+    out.push(
+      `| \`${diff.fieldId}\` | ${STATUS_TEXT[diff.status]} | ${root} | ${blankSide(diff)} |`,
+    );
   }
   return [...out, ""];
 }
@@ -164,8 +170,8 @@ export function reportData(input: ReportInput): Record<string, unknown> {
     engineCommit: input.engineCommit,
     preparer: input.preparer ?? null,
     matched: result.matches,
-    differing: result.diffs.map((d) => ({ fieldId: d.fieldId, status: d.status })),
-    roots: input.roots.map((g) => g.root.fieldId),
+    differing: result.diffs.map((diff) => ({ fieldId: diff.fieldId, status: diff.status })),
+    roots: input.roots.map((root) => root.root.fieldId),
     shape: input.shape,
     support: input.support,
   };
@@ -173,7 +179,7 @@ export function reportData(input: ReportInput): Record<string, unknown> {
 
 export function reportHead(input: ReportInput): string[] {
   const { result } = input;
-  const matched = Object.values(result.matches).reduce((n, ids) => n + ids.length, 0);
+  const matched = Object.values(result.matches).reduce((total, ids) => total + ids.length, 0);
   return [
     `# OpenReturn check — tax year ${input.taxYear}`,
     "",

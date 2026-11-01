@@ -30,7 +30,7 @@ import type { Form1040FilingInfo, RetirementLine } from "./filingInfo.js";
  */
 function resolveInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
   const hasInterest = inputs.facts.some(
-    (f) => f.category === "investment_income" && isInterestFactKey(f.key),
+    (fact) => fact.category === "investment_income" && isInterestFactKey(fact.key),
   );
   if (!hasInterest) {
     return { taxableInterestTotal: undefined, taxExemptInterestTotal: undefined };
@@ -61,11 +61,12 @@ const ROTH_IRA_CODES = /[JQT]/;
  * Code Q is not taxable. Codes J and T take the taxable part from Form 8606
  * Part III, which is not modeled, so box 2a is not used.
  */
-export function rowTaxable(r: RetirementDistributionFactValue): number | undefined {
-  if (r.box7.includes("Q")) return 0;
-  if (/[JT]/.test(r.box7)) return undefined;
-  if (r.box2a === undefined && r.box2b?.taxableAmountNotDetermined === true) return undefined;
-  return r.box2a ?? r.box1;
+export function rowTaxable(distribution: RetirementDistributionFactValue): number | undefined {
+  if (distribution.box7.includes("Q")) return 0;
+  if (/[JT]/.test(distribution.box7)) return undefined;
+  if (distribution.box2a === undefined && distribution.box2b?.taxableAmountNotDetermined === true)
+    return undefined;
+  return distribution.box2a ?? distribution.box1;
 }
 
 function retirementRows(inputs: ResolverInputs): RetirementDistributionFactValue[] {
@@ -76,16 +77,16 @@ function retirementRows(inputs: ResolverInputs): RetirementDistributionFactValue
 
 function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
   const rows = retirementRows(inputs);
-  const isIra = (r: RetirementDistributionFactValue) =>
-    r.box7IraSepSimple || ROTH_IRA_CODES.test(r.box7);
+  const isIra = (distribution: RetirementDistributionFactValue) =>
+    distribution.box7IraSepSimple || ROTH_IRA_CODES.test(distribution.box7);
   const line = (ira: boolean): RetirementLine | undefined => {
-    const group = rows.filter((r) => isIra(r) === ira);
+    const group = rows.filter((row) => isIra(row) === ira);
     if (group.length === 0) return undefined;
     const taxable = group.map(rowTaxable);
     return {
-      gross: sum(...group.map((r) => r.box1)),
+      gross: sum(...group.map((distribution) => distribution.box1)),
       taxable: taxable.includes(undefined) ? undefined : sum(...taxable),
-      rollover: group.some((r) => /[GH]/.test(r.box7)),
+      rollover: group.some((distribution) => /[GH]/.test(distribution.box7)),
     };
   };
   return { iraDistributions: line(true), pensionDistributions: line(false) };
@@ -102,8 +103,8 @@ function form1099Withholding(
 ): Form1040FilingInfo["form1099FederalWithholding"] {
   const total = sum(
     sumInvestmentBox(inputs, "box4"),
-    ...retirementRows(inputs).map((r) => r.box4),
-    ...socialSecurityRows(inputs).map((r) => r.box6),
+    ...retirementRows(inputs).map((row) => row.box4),
+    ...socialSecurityRows(inputs).map((row) => row.box6),
   );
   return total > 0 ? (total as Form1040FilingInfo["form1099FederalWithholding"]) : undefined;
 }
@@ -121,7 +122,7 @@ function capitalGainDistributionsNoScheduleD(
 
 export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
   const { decisionByKey, factByKey } = inputs;
-  const r = resolveMustFile(decisionByKey, {
+  const resolution = resolveMustFile(decisionByKey, {
     explicitKey: "decisions.scope.must_file_federal",
   });
   const filingStatus = filingStatusOf(inputs);
@@ -140,7 +141,7 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
   const livedApart = factByKey.get(SPOUSE_KEYS.livedApartAllYear) as boolean | undefined;
   const spouseItemizes = factByKey.get(SPOUSE_KEYS.itemizesSeparately) as boolean | undefined;
   return {
-    mustFile: { "form-1040": r },
+    mustFile: { "form-1040": resolution },
     missingInputs: {
       "form-1040": missingInputs({
         "decisions.scope.filing_status": filingStatus,
@@ -184,7 +185,9 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
     ...resolveRetirementSlots(inputs),
     socialSecurityBenefits:
       ss.length > 0
-        ? (sum(...ss.map((s) => s.box5)) as Form1040FilingInfo["socialSecurityBenefits"])
+        ? (sum(
+            ...ss.map((benefit) => benefit.box5),
+          ) as Form1040FilingInfo["socialSecurityBenefits"])
         : undefined,
     livedApartFromSpouseAllYear: livedApart,
     spouseItemizesSeparately: spouseItemizes,

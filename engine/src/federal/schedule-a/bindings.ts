@@ -23,24 +23,24 @@ export function register(): void {
       // MANUAL EDIT: routed to a FilingInfo slot.
       "0.line.1_medical_dental_expenses": (_, info) => info.medicalDentalExpenses,
       // MANUAL EDIT: Schedule A inst.: "if line 1 is blank, skip lines 2 through 4."
-      "0.line.2_agi_from_1040": (f) => {
-        if (f["0.line.1_medical_dental_expenses"] === undefined) return undefined;
-        const agi = f["form-1040.line.11b"];
+      "0.line.2_agi_from_1040": (form) => {
+        if (form["0.line.1_medical_dental_expenses"] === undefined) return undefined;
+        const agi = form["form-1040.line.11b"];
         return typeof agi === "number" ? agi : undefined;
       },
-      "0.line.3_agi_multiplied": (f) => {
-        if (f["0.line.1_medical_dental_expenses"] === undefined) return undefined;
-        const line2 = f["0.line.2_agi_from_1040"];
+      "0.line.3_agi_multiplied": (form) => {
+        if (form["0.line.1_medical_dental_expenses"] === undefined) return undefined;
+        const line2 = form["0.line.2_agi_from_1040"];
         if (typeof line2 !== "number") return undefined;
         return roundDollars(line2 * 0.075);
       },
-      "0.line.4_net_medical_dental": (f) => {
-        if (f["0.line.1_medical_dental_expenses"] === undefined) return undefined;
+      "0.line.4_net_medical_dental": (form) => {
+        if (form["0.line.1_medical_dental_expenses"] === undefined) return undefined;
         return atLeast(
           0,
           sum(
-            f["0.line.1_medical_dental_expenses"],
-            f["0.line.3_agi_multiplied"] === undefined ? 0 : -f["0.line.3_agi_multiplied"],
+            form["0.line.1_medical_dental_expenses"],
+            form["0.line.3_agi_multiplied"] === undefined ? 0 : -form["0.line.3_agi_multiplied"],
           ),
         );
       },
@@ -56,28 +56,28 @@ export function register(): void {
        * MANUAL EDIT: a subtotal stays blank, not "0", when every addend is
        * blank. Plain sum() returns 0 in that case.
        */
-      "0.line.5d_total_state_local_taxes": (f) => {
-        const a = f["0.line.5a_state_local_income_or_sales_tax"];
-        const b = f["0.line.5b_real_estate_taxes"];
-        const c = f["0.line.5c_personal_property_taxes"];
-        if (a === undefined && b === undefined && c === undefined) return undefined;
-        return sum(a, b, c);
+      "0.line.5d_total_state_local_taxes": (form) => {
+        const line5a = form["0.line.5a_state_local_income_or_sales_tax"];
+        const line5b = form["0.line.5b_real_estate_taxes"];
+        const line5c = form["0.line.5c_personal_property_taxes"];
+        if (line5a === undefined && line5b === undefined && line5c === undefined) return undefined;
+        return sum(line5a, line5b, line5c);
       },
       // MANUAL EDIT: the 2025 SALT worksheet. MAGI = AGI (no FEIE or territory exclusions are modeled).
-      "0.line.5e_salt_cap": (f, info) => {
-        const line5d = f["0.line.5d_total_state_local_taxes"];
+      "0.line.5e_salt_cap": (form, info) => {
+        const line5d = form["0.line.5d_total_state_local_taxes"];
         if (typeof line5d !== "number") return undefined;
-        const magi = f["form-1040.line.11b"];
+        const magi = form["form-1040.line.11b"];
         return Math.min(
           line5d,
           saltCap(typeof magi === "number" ? magi : undefined, info.filingStatus),
         );
       },
-      "0.line.7_total_taxes": (f) => {
-        const e = f["0.line.5e_salt_cap"];
-        const six = f["0.line.6_other_taxes_amount"];
-        if (e === undefined && six === undefined) return undefined;
-        return sum(e, six);
+      "0.line.7_total_taxes": (form) => {
+        const line5e = form["0.line.5e_salt_cap"];
+        const six = form["0.line.6_other_taxes_amount"];
+        if (line5e === undefined && six === undefined) return undefined;
+        return sum(line5e, six);
       },
       // MANUAL EDIT: routed to a FilingInfo slot. Only one 1098 is supported.
       "0.line.8a_mortgage_interest_form1098": (_, info) => info.mortgageInterestForm1098,
@@ -85,20 +85,20 @@ export function register(): void {
       "0.line.8b_mortgage_interest_not_form1098": (_, info) => info.mortgageInterestNotForm1098,
       // MANUAL EDIT: routed to FilingInfo slot.
       "0.line.8c_points_not_form1098": (_, info) => info.pointsNotForm1098,
-      "0.line.8e_total_mortgage_interest_points": (f) => {
-        const a = f["0.line.8a_mortgage_interest_form1098"];
-        const b = f["0.line.8b_mortgage_interest_not_form1098"];
-        const c = f["0.line.8c_points_not_form1098"];
-        if (a === undefined && b === undefined && c === undefined) return undefined;
-        return sum(a, b, c);
+      "0.line.8e_total_mortgage_interest_points": (form) => {
+        const line8a = form["0.line.8a_mortgage_interest_form1098"];
+        const line8b = form["0.line.8b_mortgage_interest_not_form1098"];
+        const line8c = form["0.line.8c_points_not_form1098"];
+        if (line8a === undefined && line8b === undefined && line8c === undefined) return undefined;
+        return sum(line8a, line8b, line8c);
       },
       // MANUAL EDIT: routed to a FilingInfo slot. Form 4952 is out of scope.
       "0.line.9_investment_interest": (_, info) => info.investmentInterest,
-      "0.line.10_total_interest": (f) => {
-        const e = f["0.line.8e_total_mortgage_interest_points"];
-        const nine = f["0.line.9_investment_interest"];
-        if (e === undefined && nine === undefined) return undefined;
-        return sum(e, nine);
+      "0.line.10_total_interest": (form) => {
+        const line8e = form["0.line.8e_total_mortgage_interest_points"];
+        const nine = form["0.line.9_investment_interest"];
+        if (line8e === undefined && nine === undefined) return undefined;
+        return sum(line8e, nine);
       },
       // MANUAL EDIT: routed to FilingInfo slot.
       "0.line.11_gifts_cash_check": (_, info) => info.giftsCashCheck,
@@ -106,23 +106,23 @@ export function register(): void {
       "0.line.12_gifts_other_than_cash": (_, info) => info.giftsOtherThanCash,
       // MANUAL EDIT: routed to FilingInfo slot.
       "0.line.13_gifts_carryover": (_, info) => info.giftsCarryover,
-      "0.line.14_total_gifts": (f) => {
-        const eleven = f["0.line.11_gifts_cash_check"];
-        const twelve = f["0.line.12_gifts_other_than_cash"];
-        const thirteen = f["0.line.13_gifts_carryover"];
+      "0.line.14_total_gifts": (form) => {
+        const eleven = form["0.line.11_gifts_cash_check"];
+        const twelve = form["0.line.12_gifts_other_than_cash"];
+        const thirteen = form["0.line.13_gifts_carryover"];
         if (eleven === undefined && twelve === undefined && thirteen === undefined) {
           return undefined;
         }
         return sum(eleven, twelve, thirteen);
       },
-      "0.line.17_total_itemized_deductions": (f) =>
+      "0.line.17_total_itemized_deductions": (form) =>
         sum(
-          f["0.line.4_net_medical_dental"],
-          f["0.line.7_total_taxes"],
-          f["0.line.10_total_interest"],
-          f["0.line.14_total_gifts"],
-          f["0.line.15_casualty_theft_loss"],
-          f["0.line.16_other_itemized_deductions_amount"],
+          form["0.line.4_net_medical_dental"],
+          form["0.line.7_total_taxes"],
+          form["0.line.10_total_interest"],
+          form["0.line.14_total_gifts"],
+          form["0.line.15_casualty_theft_loss"],
+          form["0.line.16_other_itemized_deductions_amount"],
         ),
     },
 

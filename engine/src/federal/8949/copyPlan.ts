@@ -59,10 +59,10 @@ export function totalsByBox(
   trades: readonly BoxedTrade[],
 ): Partial<Record<Form8949Box, BoxTotals>> {
   const out: Partial<Record<Form8949Box, BoxTotals>> = {};
-  for (const t of trades) {
-    const totals = (out[t.box] ??= { proceeds: 0, cost: 0 });
-    totals.proceeds = sum(totals.proceeds, t.trade.proceeds);
-    totals.cost = sum(totals.cost, t.basis);
+  for (const trade of trades) {
+    const totals = (out[trade.box] ??= { proceeds: 0, cost: 0 });
+    totals.proceeds = sum(totals.proceeds, trade.trade.proceeds);
+    totals.cost = sum(totals.cost, trade.basis);
   }
   return out;
 }
@@ -70,7 +70,7 @@ export function totalsByBox(
 function pagesFor(trades: readonly BoxedTrade[], boxes: Form8949Box[]): Form8949Page[] {
   const pages: Form8949Page[] = [];
   for (const box of boxes) {
-    const rows = trades.filter((t) => t.box === box);
+    const rows = trades.filter((trade) => trade.box === box);
     for (let i = 0; i < rows.length; i += ROWS_PER_PAGE) {
       pages.push({ box, rows: rows.slice(i, i + ROWS_PER_PAGE) });
     }

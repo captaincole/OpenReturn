@@ -10,7 +10,8 @@ export interface InputShape {
   otherFacts: Record<string, number>;
 }
 
-const bump = (m: Record<string, number>, k: string) => (m[k] = (m[k] ?? 0) + 1);
+const bump = (counts: Record<string, number>, key: string) =>
+  (counts[key] = (counts[key] ?? 0) + 1);
 
 function documentType(key: string, category: string): string | undefined {
   if (category === "wages" && key.startsWith("employer.")) return "W-2";
@@ -30,21 +31,21 @@ function shortCode(value: unknown): string | undefined {
   return undefined;
 }
 
-export function inputShape(s: Scenario): InputShape {
+export function inputShape(scenario: Scenario): InputShape {
   const shape: InputShape = { documents: {}, salesByBox: {}, scope: {}, otherFacts: {} };
-  for (const f of s.facts) {
-    if (f.key.endsWith(".reported_basis")) continue;
-    const doc = documentType(f.key, f.category);
+  for (const fact of scenario.facts) {
+    if (fact.key.endsWith(".reported_basis")) continue;
+    const doc = documentType(fact.key, fact.category);
     if (doc) bump(shape.documents, doc);
-    else if (f.category !== "identity") bump(shape.otherFacts, f.category);
+    else if (fact.category !== "identity") bump(shape.otherFacts, fact.category);
   }
-  for (const d of s.decisions) {
-    if (/^decisions\.trade\..+\.form_8949_box$/.test(d.decisionKey)) {
-      bump(shape.salesByBox, String(d.decision).replace(/^.*box/i, ""));
+  for (const decision of scenario.decisions) {
+    if (/^decisions\.trade\..+\.form_8949_box$/.test(decision.decisionKey)) {
+      bump(shape.salesByBox, String(decision.decision).replace(/^.*box/i, ""));
       continue;
     }
-    const scope = /^decisions\.scope\.(.+)$/.exec(d.decisionKey);
-    const value = shortCode(d.decision);
+    const scope = /^decisions\.scope\.(.+)$/.exec(decision.decisionKey);
+    const value = shortCode(decision.decision);
     if (scope && value) shape.scope[scope[1]] = value;
   }
   return shape;

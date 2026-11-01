@@ -16,8 +16,8 @@ type Bindings = Partial<{ [K in keyof Form8949]: BindingFn<Form8949, Form8949Fil
 type Notes = Partial<{ [K in keyof Form8949]: string }>;
 
 const PARTS = [
-  { prefix: "0.part1", page: (c: Form8949Copy) => c.partI },
-  { prefix: "1.part2", page: (c: Form8949Copy) => c.partII },
+  { prefix: "0.part1", page: (copy: Form8949Copy) => copy.partI },
+  { prefix: "1.part2", page: (copy: Form8949Copy) => copy.partII },
 ] as const;
 
 const BOX_FIELDS: Record<Form8949Box, keyof Form8949> = {
@@ -86,23 +86,29 @@ function boxBindings(): Record<string, Fn> {
 
 function rowBindings(prefix: string, page: (c: Form8949Copy) => Form8949Page | undefined) {
   const out: Record<string, Fn> = {};
-  for (let n = 1; n <= ROWS_PER_PAGE; n++) {
+  for (let rowNumber = 1; rowNumber <= ROWS_PER_PAGE; rowNumber++) {
     const row = (info: Form8949FilingInfo) => {
       const copy = currentCopy(info);
-      return copy ? page(copy)?.rows[n - 1] : undefined;
+      return copy ? page(copy)?.rows[rowNumber - 1] : undefined;
     };
-    const key = `${prefix}.row${n}`;
+    const key = `${prefix}.row${rowNumber}`;
     out[`${key}_description`] = (_, info) => {
-      const r = row(info);
-      return r ? describe(r.trade.quantity, r.trade.description) : undefined;
+      const boxedTrade = row(info);
+      return boxedTrade
+        ? describe(boxedTrade.trade.quantity, boxedTrade.trade.description)
+        : undefined;
     };
     out[`${key}_date_acquired`] = (_, info) => row(info)?.trade.dateAcquired;
     out[`${key}_date_sold`] = (_, info) => row(info)?.trade.dateSold;
     /* IRS: if you round, round all amounts. */
     out[`${key}_proceeds`] = (_, info) => roundDollars(row(info)?.trade.proceeds);
     out[`${key}_cost_basis`] = (_, info) => roundDollars(row(info)?.basis);
-    out[`${key}_gain_loss`] = (f) =>
-      rowGainLoss(f[`${key}_proceeds`], f[`${key}_cost_basis`], f[`${key}_adjustment_amount`]);
+    out[`${key}_gain_loss`] = (form) =>
+      rowGainLoss(
+        form[`${key}_proceeds`],
+        form[`${key}_cost_basis`],
+        form[`${key}_adjustment_amount`],
+      );
   }
   return out;
 }
@@ -120,11 +126,13 @@ function totalBindings(prefix: string, page: (c: Form8949Copy) => Form8949Page |
       return rs && rs.length > 0 ? roundDollars(sum(...rs.map(amount))) : undefined;
     };
   return {
-    [`${prefix}.totals_proceeds`]: total((r) => r.trade.proceeds),
-    [`${prefix}.totals_cost_basis`]: total((r) => r.basis),
-    [`${prefix}.totals_gain_loss`]: ((f) => {
-      const d = f[`${prefix}.totals_proceeds`];
-      return typeof d === "number" ? d - sum(f[`${prefix}.totals_cost_basis`]) : undefined;
+    [`${prefix}.totals_proceeds`]: total((boxedTrade) => boxedTrade.trade.proceeds),
+    [`${prefix}.totals_cost_basis`]: total((boxedTrade) => boxedTrade.basis),
+    [`${prefix}.totals_gain_loss`]: ((form) => {
+      const proceeds = form[`${prefix}.totals_proceeds`];
+      return typeof proceeds === "number"
+        ? proceeds - sum(form[`${prefix}.totals_cost_basis`])
+        : undefined;
     }) as Fn,
   };
 }
@@ -132,10 +140,10 @@ function totalBindings(prefix: string, page: (c: Form8949Copy) => Form8949Page |
 function adjustmentNotes(): Record<string, string> {
   const out: Record<string, string> = {};
   for (const { prefix } of PARTS) {
-    for (let n = 1; n <= ROWS_PER_PAGE; n++) {
-      out[`${prefix}.row${n}_adjustment_code`] =
+    for (let rowNumber = 1; rowNumber <= ROWS_PER_PAGE; rowNumber++) {
+      out[`${prefix}.row${rowNumber}_adjustment_code`] =
         "Adjustment codes (wash sale etc.) are not modeled yet.";
-      out[`${prefix}.row${n}_adjustment_amount`] =
+      out[`${prefix}.row${rowNumber}_adjustment_amount`] =
         "Adjustment amounts (column g) are not modeled yet.";
     }
     out[`${prefix}.totals_adjustment_amount`] =
@@ -148,8 +156,8 @@ export function register(): void {
   const bindings: Record<string, Fn> = {
     ...headerBindings(),
     ...boxBindings(),
-    ...PARTS.reduce((acc, p) => ({ ...acc, ...rowBindings(p.prefix, p.page) }), {}),
-    ...PARTS.reduce((acc, p) => ({ ...acc, ...totalBindings(p.prefix, p.page) }), {}),
+    ...PARTS.reduce((acc, part) => ({ ...acc, ...rowBindings(part.prefix, part.page) }), {}),
+    ...PARTS.reduce((acc, part) => ({ ...acc, ...totalBindings(part.prefix, part.page) }), {}),
   };
   defineForm<Form8949, Form8949FilingInfo>("form-8949", {
     bindings: bindings as Bindings,

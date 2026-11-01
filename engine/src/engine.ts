@@ -120,18 +120,18 @@ function resolveMustFile(
 
 function mustFileResult(
   formId: string,
-  r: MustFileResolution | undefined,
+  resolution: MustFileResolution | undefined,
   hasFilingInfo: boolean,
 ): DerivationResult<boolean> {
   if (!hasFilingInfo) return blocked(`${formId} mustFile: ctx.filingInfo is missing.`);
-  if (!r) return blocked(`No must-file rule resolved for ${formId}`);
-  if (r.value === undefined) {
-    return blocked(`${formId} mustFile: waiting on decision ${r.decisionKey}.`, {
-      decisionKey: r.decisionKey,
+  if (!resolution) return blocked(`No must-file rule resolved for ${formId}`);
+  if (resolution.value === undefined) {
+    return blocked(`${formId} mustFile: waiting on decision ${resolution.decisionKey}.`, {
+      decisionKey: resolution.decisionKey,
     });
   }
-  return ok(r.value, r.derivation?.rule ?? `must-file for ${formId}`, [
-    ...(r.derivation?.triggeredByFactKeys ?? []),
+  return ok(resolution.value, resolution.derivation?.rule ?? `must-file for ${formId}`, [
+    ...(resolution.derivation?.triggeredByFactKeys ?? []),
   ]);
 }
 
@@ -253,13 +253,13 @@ function hasPending(shared: EvaluateFormSharedState): boolean {
 }
 
 function countOk<V>(map: Map<string, DerivationResult<V>>): number {
-  let n = 0;
-  for (const r of map.values()) if (r.ok) n++;
-  return n;
+  let count = 0;
+  for (const result of map.values()) if (result.ok) count++;
+  return count;
 }
 
 function okValues(map: Map<string, DerivationResult<unknown>>): string {
   const out: Array<[string, unknown]> = [];
-  for (const [id, r] of map) if (r.ok) out.push([id, r.value]);
+  for (const [id, result] of map) if (result.ok) out.push([id, result.value]);
   return JSON.stringify(out);
 }

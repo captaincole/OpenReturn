@@ -72,12 +72,12 @@ async function readCache(url: string, abs: string): Promise<FetchHtmlResult | nu
       },
     };
   } catch (err: unknown) {
-    const e = err as NodeJS.ErrnoException;
-    if (e.code !== "ENOENT") throw err;
+    const errno = err as NodeJS.ErrnoException;
+    if (errno.code !== "ENOENT") throw err;
     return null;
   }
 }
 
-function sha256(s: string): string {
-  return createHash("sha256").update(s, "utf8").digest("hex");
+function sha256(text: string): string {
+  return createHash("sha256").update(text, "utf8").digest("hex");
 }

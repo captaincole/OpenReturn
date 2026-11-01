@@ -13,7 +13,7 @@ interface Args {
 
 function parseCmdArgs(argv: string[]): Args {
   const get = (flag: string): string | undefined => {
-    const arg = argv.find((a) => a.startsWith(`${flag}=`));
+    const arg = argv.find((candidate) => candidate.startsWith(`${flag}=`));
     return arg ? arg.slice(flag.length + 1) : undefined;
   };
   const pdf = get("--pdf");
@@ -73,15 +73,15 @@ async function run(argv: string[]): Promise<void> {
   );
   if (result.unenrichedSample.length > 0) {
     console.log(`  Unenriched fields (first ${result.unenrichedSample.length}):`);
-    for (const n of result.unenrichedSample) console.log(`    - ${n}`);
+    for (const name of result.unenrichedSample) console.log(`    - ${name}`);
     if (result.unenrichedCount > result.unenrichedSample.length) {
       console.log(`    … and ${result.unenrichedCount - result.unenrichedSample.length} more`);
     }
   }
   if (result.skipSample.length > 0) {
     console.log(`  Skipped fields (first ${result.skipSample.length}):`);
-    for (const s of result.skipSample) {
-      console.log(`    - ${s.pdfFieldName}: ${s.skipReason}`);
+    for (const skip of result.skipSample) {
+      console.log(`    - ${skip.pdfFieldName}: ${skip.skipReason}`);
     }
     if (result.skippedCount > result.skipSample.length) {
       console.log(`    … and ${result.skippedCount - result.skipSample.length} more`);
