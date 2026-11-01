@@ -139,8 +139,10 @@ function parseAndReport(html: string): TaxTableRow[] {
       `${LOG} ${diagnostics.tablesRejected.length} table(s) ` +
         `looked tax-table-shaped but produced no rows:`,
     );
-    for (const r of diagnostics.tablesRejected) {
-      console.warn(`  - ${r.reason}${r.sample ? `\n    sample: ${r.sample}` : ""}`);
+    for (const rejected of diagnostics.tablesRejected) {
+      console.warn(
+        `  - ${rejected.reason}${rejected.sample ? `\n    sample: ${rejected.sample}` : ""}`,
+      );
     }
   }
   return rows;
@@ -166,17 +168,19 @@ function assertCoverage(rows: TaxTableRow[]): ReturnType<typeof validateCoverage
 
 function runSpotChecks(source: (typeof SOURCES)[number], rows: TaxTableRow[]): void {
   const spotResults = source.spotChecks.map((sc) => {
-    const row = rows.find((r) => sc.taxableIncome >= r.low && sc.taxableIncome < r.high);
+    const row = rows.find(
+      (candidate) => sc.taxableIncome >= candidate.low && sc.taxableIncome < candidate.high,
+    );
     const got = row ? row[sc.filingStatus] : null;
     return { ...sc, got, pass: got === sc.expectedTax };
   });
-  const failed = spotResults.filter((r) => !r.pass);
+  const failed = spotResults.filter((spot) => !spot.pass);
   console.log(
     `${LOG} spot checks ${spotResults.length - failed.length}/${spotResults.length} pass`,
   );
-  for (const f of failed) {
+  for (const failure of failed) {
     console.error(
-      `  ✗ income=${f.taxableIncome} status=${f.filingStatus} expected=${f.expectedTax} got=${f.got}`,
+      `  ✗ income=${failure.taxableIncome} status=${failure.filingStatus} expected=${failure.expectedTax} got=${failure.got}`,
     );
   }
   if (failed.length > 0) {
@@ -190,8 +194,8 @@ function serializeWithCompactRows(header: Record<string, unknown>, rows: TaxTabl
   const headerOpen = headerJson.slice(0, headerJson.lastIndexOf("}"));
   const rowLines = rows
     .map(
-      (r) =>
-        `    {"low":${r.low},"high":${r.high},"single":${r.single},"mfj":${r.mfj},"mfs":${r.mfs},"hoh":${r.hoh}}`,
+      (row) =>
+        `    {"low":${row.low},"high":${row.high},"single":${row.single},"mfj":${row.mfj},"mfs":${row.mfs},"hoh":${row.hoh}}`,
     )
     .join(",\n");
   return `${headerOpen.trimEnd()},\n  "rows": [\n${rowLines}\n  ]\n}\n`;
@@ -201,15 +205,15 @@ function parseCmdArgs(argv: string[]): { year: number; refresh: boolean } {
   let year = 2025;
   let refresh = false;
   for (let i = 0; i < argv.length; i++) {
-    const a = argv[i];
-    if (a === "--year") {
-      const v = argv[++i];
-      if (!v || Number.isNaN(Number(v))) throw new Error(`--year requires a number`);
-      year = Number(v);
-    } else if (a === "--refresh") {
+    const arg = argv[i];
+    if (arg === "--year") {
+      const value = argv[++i];
+      if (!value || Number.isNaN(Number(value))) throw new Error(`--year requires a number`);
+      year = Number(value);
+    } else if (arg === "--refresh") {
       refresh = true;
     } else {
-      throw new Error(`Unknown arg: ${a}`);
+      throw new Error(`Unknown arg: ${arg}`);
     }
   }
   return { year, refresh };

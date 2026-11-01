@@ -27,7 +27,7 @@ function importSpecifiers(source: string): string[] {
     /import\s*\(\s*["']([^"']+)["']\s*\)/g,
   ];
   for (const re of patterns) {
-    for (const m of source.matchAll(re)) specs.push(m[1]);
+    for (const match of source.matchAll(re)) specs.push(match[1]);
   }
   return specs;
 }

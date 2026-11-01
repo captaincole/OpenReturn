@@ -11,80 +11,83 @@ import type { Schedule2 } from "./types.js";
 
 /* Blank, not 0, when every line is blank, as on the paper form. */
 const total = (...values: unknown[]): number | undefined =>
-  values.every((v) => v === undefined) ? undefined : sum(...values);
+  values.every((value) => value === undefined) ? undefined : sum(...values);
 
 export function register(): void {
   defineForm<Schedule2, Schedule2FilingInfo>("schedule-2", {
     bindings: {
       "0.header.ssn": (_, info) => info.taxpayerSSN,
-      "0.line.1z_total_lines_1a_through_1y": (f) =>
+      "0.line.1z_total_lines_1a_through_1y": (form) =>
         total(
-          f["0.line.1a_excess_aptc_repayment"],
-          f["0.line.1b_new_clean_vehicle_credit_repayment"],
-          f["0.line.1c_previously_owned_clean_vehicle_credit_repayment"],
-          f["0.line.1d_recapture_net_epe_form4255"],
-          f["0.line.1e_excessive_payments_epe_amount"],
-          f["0.line.1f_20pct_ep_amount"],
-          f["0.line.1y_other_additions_amount"],
+          form["0.line.1a_excess_aptc_repayment"],
+          form["0.line.1b_new_clean_vehicle_credit_repayment"],
+          form["0.line.1c_previously_owned_clean_vehicle_credit_repayment"],
+          form["0.line.1d_recapture_net_epe_form4255"],
+          form["0.line.1e_excessive_payments_epe_amount"],
+          form["0.line.1f_20pct_ep_amount"],
+          form["0.line.1y_other_additions_amount"],
         ),
-      "0.line.3_total_lines_1z_and_2": (f) =>
-        total(f["0.line.1z_total_lines_1a_through_1y"], f["0.line.2_alternative_minimum_tax"]),
-      "0.line.7_total_additional_ss_medicare_tax": (f) =>
+      "0.line.3_total_lines_1z_and_2": (form) =>
         total(
-          f["0.line.5_ss_medicare_tax_unreported_tips"],
-          f["0.line.6_uncollected_ss_medicare_tax_wages"],
+          form["0.line.1z_total_lines_1a_through_1y"],
+          form["0.line.2_alternative_minimum_tax"],
+        ),
+      "0.line.7_total_additional_ss_medicare_tax": (form) =>
+        total(
+          form["0.line.5_ss_medicare_tax_unreported_tips"],
+          form["0.line.6_uncollected_ss_medicare_tax_wages"],
         ),
       // Schedule H Part II (FUTA) is not modeled, so a line 9 Yes leaves this blank.
-      "0.line.9_household_employment_taxes": (f) =>
-        f["schedule-h.0.line.9_no"] === true ? total(f["schedule-h.0.line.8"]) : undefined,
-      "0.line.11_additional_medicare_tax": (f) =>
-        total(f["form-8959.0.line.18_total_additional_medicare_tax"]),
-      "0.line.12_net_investment_income_tax": (f) => total(f["form-8960.0.line.17"]),
-      "1.line.17c_additional_tax_hsa_distributions": (f) =>
-        total(f["form-8889.0.line.17b_additional_20pct_tax"]),
-      "1.line.17d_additional_tax_hsa_ineligible_individual": (f) =>
-        total(f["form-8889.0.line.21_additional_tax_10pct"]),
-      "1.line.18_total_additional_taxes": (f) =>
+      "0.line.9_household_employment_taxes": (form) =>
+        form["schedule-h.0.line.9_no"] === true ? total(form["schedule-h.0.line.8"]) : undefined,
+      "0.line.11_additional_medicare_tax": (form) =>
+        total(form["form-8959.0.line.18_total_additional_medicare_tax"]),
+      "0.line.12_net_investment_income_tax": (form) => total(form["form-8960.0.line.17"]),
+      "1.line.17c_additional_tax_hsa_distributions": (form) =>
+        total(form["form-8889.0.line.17b_additional_20pct_tax"]),
+      "1.line.17d_additional_tax_hsa_ineligible_individual": (form) =>
+        total(form["form-8889.0.line.21_additional_tax_10pct"]),
+      "1.line.18_total_additional_taxes": (form) =>
         total(
-          f["1.line.17a_recapture_other_credits_amount"],
-          f["1.line.17b_recapture_federal_mortgage_subsidy"],
-          f["1.line.17c_additional_tax_hsa_distributions"],
-          f["1.line.17d_additional_tax_hsa_ineligible_individual"],
-          f["1.line.17e_additional_tax_archer_msa_distributions"],
-          f["1.line.17f_additional_tax_medicare_advantage_msa_distributions"],
-          f["1.line.17g_recapture_charitable_contribution_fractional_interest"],
-          f["1.line.17h_income_nonqualified_deferred_compensation_409a"],
-          f["1.line.17i_compensation_nonqualified_deferred_compensation_457a"],
-          f["1.line.17j_section_72m5_excess_benefits_tax"],
-          f["1.line.17k_golden_parachute_payments"],
-          f["1.line.17l_tax_accumulation_distribution_trusts"],
-          f["1.line.17m_excise_tax_insider_stock_compensation_expatriated_corp"],
-          f["1.line.17n_lookback_interest_section_167g_460b"],
-          f["1.line.17o_tax_non_effectively_connected_income_nonresident_alien"],
-          f["1.line.17p_interest_form8621_line16f_section_1291_fund"],
-          f["1.line.17q_interest_form8621_line24"],
-          f["1.line.17z_other_taxes_amount"],
+          form["1.line.17a_recapture_other_credits_amount"],
+          form["1.line.17b_recapture_federal_mortgage_subsidy"],
+          form["1.line.17c_additional_tax_hsa_distributions"],
+          form["1.line.17d_additional_tax_hsa_ineligible_individual"],
+          form["1.line.17e_additional_tax_archer_msa_distributions"],
+          form["1.line.17f_additional_tax_medicare_advantage_msa_distributions"],
+          form["1.line.17g_recapture_charitable_contribution_fractional_interest"],
+          form["1.line.17h_income_nonqualified_deferred_compensation_409a"],
+          form["1.line.17i_compensation_nonqualified_deferred_compensation_457a"],
+          form["1.line.17j_section_72m5_excess_benefits_tax"],
+          form["1.line.17k_golden_parachute_payments"],
+          form["1.line.17l_tax_accumulation_distribution_trusts"],
+          form["1.line.17m_excise_tax_insider_stock_compensation_expatriated_corp"],
+          form["1.line.17n_lookback_interest_section_167g_460b"],
+          form["1.line.17o_tax_non_effectively_connected_income_nonresident_alien"],
+          form["1.line.17p_interest_form8621_line16f_section_1291_fund"],
+          form["1.line.17q_interest_form8621_line24"],
+          form["1.line.17z_other_taxes_amount"],
         ),
       /*
        * Blank when Schedule H line 9 is Yes: without the FUTA tax the total
        * would understate the tax. Line 10 has no field in the inventory.
        */
-      "1.line.21_total_other_taxes": (f) =>
-        f["schedule-h.0.line.9_yes"] === true
+      "1.line.21_total_other_taxes": (form) =>
+        form["schedule-h.0.line.9_yes"] === true
           ? undefined
           : total(
-              f["0.line.4_self_employment_tax"],
-              f["0.line.7_total_additional_ss_medicare_tax"],
-              f["0.line.8_additional_tax_iras_tax_favored_accounts"],
-              f["0.line.9_household_employment_taxes"],
-              f["0.line.11_additional_medicare_tax"],
-              f["0.line.12_net_investment_income_tax"],
-              f["0.line.13_uncollected_ss_medicare_rrta_tax_w2"],
-              f["0.line.14_interest_tax_installment_residential_lots"],
-              f["0.line.15_interest_deferred_tax_installment_sales"],
-              f["0.line.16_recapture_low_income_housing_credit"],
-              f["1.line.18_total_additional_taxes"],
-              f["1.line.19_recapture_net_epe_form4255_line1d"],
+              form["0.line.4_self_employment_tax"],
+              form["0.line.7_total_additional_ss_medicare_tax"],
+              form["0.line.8_additional_tax_iras_tax_favored_accounts"],
+              form["0.line.9_household_employment_taxes"],
+              form["0.line.11_additional_medicare_tax"],
+              form["0.line.12_net_investment_income_tax"],
+              form["0.line.13_uncollected_ss_medicare_rrta_tax_w2"],
+              form["0.line.14_interest_tax_installment_residential_lots"],
+              form["0.line.15_interest_deferred_tax_installment_sales"],
+              form["0.line.16_recapture_low_income_housing_credit"],
+              form["1.line.18_total_additional_taxes"],
+              form["1.line.19_recapture_net_epe_form4255_line1d"],
             ),
     },
 

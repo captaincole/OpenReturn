@@ -45,21 +45,29 @@ export function socialSecurityTaxable(i: SocialSecurityInputs): SocialSecurityBr
     return { line2, line5, line7: 0, line16: 0, line17, taxable: 0 };
   }
   const line7 = line5 - i.adjustments;
-  const b = bases(i);
-  if (b === undefined) {
+  const thresholds = bases(i);
+  if (thresholds === undefined) {
     // MFS and lived with the spouse: skip lines 8–15; line 16 = line 7 × 85%.
     const line16 = roundDollars(line7 * 0.85);
     return { line2, line5, line7, line16, line17, taxable: Math.min(line16, line17) };
   }
-  if (!(b.base < line7)) {
-    return { line2, line5, line7, line8: b.base, line16: 0, line17, taxable: 0 };
+  if (!(thresholds.base < line7)) {
+    return { line2, line5, line7, line8: thresholds.base, line16: 0, line17, taxable: 0 };
   }
-  const line9 = line7 - b.base;
-  const line11 = atLeast(0, line9 - b.adjusted);
-  const line12 = Math.min(line9, b.adjusted);
+  const line9 = line7 - thresholds.base;
+  const line11 = atLeast(0, line9 - thresholds.adjusted);
+  const line12 = Math.min(line9, thresholds.adjusted);
   const line13 = roundDollars(line12 * 0.5);
   const line14 = Math.min(line2, line13);
   const line15 = roundDollars(line11 * 0.85);
   const line16 = line14 + line15;
-  return { line2, line5, line7, line8: b.base, line16, line17, taxable: Math.min(line16, line17) };
+  return {
+    line2,
+    line5,
+    line7,
+    line8: thresholds.base,
+    line16,
+    line17,
+    taxable: Math.min(line16, line17),
+  };
 }

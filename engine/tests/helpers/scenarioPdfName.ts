@@ -6,10 +6,10 @@ const FORM_SHORT_NAME: Record<string, string> = {
   "schedule-ca": "ScheduleCA",
 };
 
-export function toPascal(s: string): string {
-  return s
+export function toPascal(text: string): string {
+  return text
     .split(/[-_]/)
-    .map((p) => (p ? p[0].toUpperCase() + p.slice(1) : ""))
+    .map((word) => (word ? word[0].toUpperCase() + word.slice(1) : ""))
     .join("");
 }
 

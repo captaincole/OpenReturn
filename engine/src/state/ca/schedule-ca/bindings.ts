@@ -12,10 +12,11 @@ import type { ScheduleCa } from "./types.js";
 
 /* Blank, not 0, when every term is blank (printed-zero rule). */
 function sumIfAny(...values: unknown[]): number | undefined {
-  return values.some((v) => typeof v === "number") ? sum(...values) : undefined;
+  return values.some((value) => typeof value === "number") ? sum(...values) : undefined;
 }
 
-const federal = (v: unknown): number | undefined => (typeof v === "number" ? v : undefined);
+const federal = (value: unknown): number | undefined =>
+  typeof value === "number" ? value : undefined;
 
 export function register(): void {
   defineForm<ScheduleCa, ScheduleCaFilingInfo>("schedule-ca", {
@@ -24,84 +25,84 @@ export function register(): void {
        * MANUAL EDIT: CA does not conform to HSAs. Employer contributions
        * (W-2 box 12 code W) are CA wages: line 1a col C, carried to line 27.
        */
-      "0.line.2b_federal": (f) => {
-        const v = f["form-1040.line.2b"];
-        return typeof v === "number" ? v : undefined;
+      "0.line.2b_federal": (form) => {
+        const value = form["form-1040.line.2b"];
+        return typeof value === "number" ? value : undefined;
       },
-      "1.line.b8z_federal": (f) => {
-        const v = f["schedule-1.0.line.8z"];
-        return typeof v === "number" ? v : undefined;
+      "1.line.b8z_federal": (form) => {
+        const value = form["schedule-1.0.line.8z"];
+        return typeof value === "number" ? value : undefined;
       },
-      "1.line.b8z_income_type": (f) => {
-        const v = f["schedule-1.0.line.8z_type"];
-        return typeof v === "string" ? v : undefined;
+      "1.line.b8z_income_type": (form) => {
+        const value = form["schedule-1.0.line.8z_type"];
+        return typeof value === "string" ? value : undefined;
       },
-      "2.line.b9a_federal": (f) => {
-        const v = f["schedule-1.0.line.9"];
-        return typeof v === "number" ? v : undefined;
+      "2.line.b9a_federal": (form) => {
+        const value = form["schedule-1.0.line.9"];
+        return typeof value === "number" ? value : undefined;
       },
       "0.line.1a_additions": (_, info) => roundDollars(info.hsaEmployerContributions),
-      "0.line.1z_additions": (f) =>
+      "0.line.1z_additions": (form) =>
         sumIfAny(
-          f["0.line.1a_additions"],
-          f["0.line.1b_additions"],
-          f["0.line.1c_additions"],
-          f["0.line.1d_additions"],
-          f["0.line.1e_additions"],
-          f["0.line.1f_additions"],
-          f["0.line.1g_additions"],
-          f["0.line.1h_additions"],
-          f["0.line.1i_additions"],
+          form["0.line.1a_additions"],
+          form["0.line.1b_additions"],
+          form["0.line.1c_additions"],
+          form["0.line.1d_additions"],
+          form["0.line.1e_additions"],
+          form["0.line.1f_additions"],
+          form["0.line.1g_additions"],
+          form["0.line.1h_additions"],
+          form["0.line.1i_additions"],
         ),
-      "2.line.b10_additions": (f) =>
+      "2.line.b10_additions": (form) =>
         sumIfAny(
-          f["0.line.1z_additions"],
-          f["0.line.2b_additions"],
-          f["0.line.3b_additions"],
-          f["0.line.4b_additions"],
-          f["0.line.5b_additions"],
-          f["0.line.7a_additions"],
-          f["0.line.b2a_additions"],
-          f["0.line.b3_additions"],
-          f["0.line.b4_additions"],
-          f["0.line.b5_additions"],
-          f["0.line.b6_additions"],
-          f["2.line.b9a_additions"],
+          form["0.line.1z_additions"],
+          form["0.line.2b_additions"],
+          form["0.line.3b_additions"],
+          form["0.line.4b_additions"],
+          form["0.line.5b_additions"],
+          form["0.line.7a_additions"],
+          form["0.line.b2a_additions"],
+          form["0.line.b3_additions"],
+          form["0.line.b4_additions"],
+          form["0.line.b5_additions"],
+          form["0.line.b6_additions"],
+          form["2.line.b9a_additions"],
         ),
       /*
        * MANUAL EDIT: col A copies 1040 lines 4a–6b, blank when the federal line
        * is blank. CA excludes Social Security: col B takes line 6b.
        */
-      "0.line.4a_federal": (f) => federal(f["form-1040.line.4a"]),
-      "0.line.4b_federal": (f) => federal(f["form-1040.line.4b"]),
-      "0.line.5a_federal": (f) => federal(f["form-1040.line.5a"]),
-      "0.line.5b_federal": (f) => federal(f["form-1040.line.5b"]),
-      "0.line.6a_federal": (f) => federal(f["form-1040.line.6a"]),
-      "0.line.6b_federal": (f) => federal(f["form-1040.line.6b"]),
-      "0.line.6b_subtractions": (f) => federal(f["0.line.6b_federal"]),
-      "2.line.b10_subtractions": (f) =>
+      "0.line.4a_federal": (form) => federal(form["form-1040.line.4a"]),
+      "0.line.4b_federal": (form) => federal(form["form-1040.line.4b"]),
+      "0.line.5a_federal": (form) => federal(form["form-1040.line.5a"]),
+      "0.line.5b_federal": (form) => federal(form["form-1040.line.5b"]),
+      "0.line.6a_federal": (form) => federal(form["form-1040.line.6a"]),
+      "0.line.6b_federal": (form) => federal(form["form-1040.line.6b"]),
+      "0.line.6b_subtractions": (form) => federal(form["0.line.6b_federal"]),
+      "2.line.b10_subtractions": (form) =>
         sumIfAny(
-          f["0.line.1z_subtractions"],
-          f["0.line.2b_subtractions"],
-          f["0.line.3b_subtractions"],
-          f["0.line.4b_subtractions"],
-          f["0.line.5b_subtractions"],
-          f["0.line.6b_subtractions"],
-          f["0.line.7a_subtractions"],
-          f["0.line.b2a_subtractions"],
-          f["0.line.b3_subtractions"],
-          f["0.line.b4_subtractions"],
-          f["0.line.b5_subtractions"],
-          f["0.line.b6_subtractions"],
-          f["2.line.b9a_subtractions"],
+          form["0.line.1z_subtractions"],
+          form["0.line.2b_subtractions"],
+          form["0.line.3b_subtractions"],
+          form["0.line.4b_subtractions"],
+          form["0.line.5b_subtractions"],
+          form["0.line.6b_subtractions"],
+          form["0.line.7a_subtractions"],
+          form["0.line.b2a_subtractions"],
+          form["0.line.b3_subtractions"],
+          form["0.line.b4_subtractions"],
+          form["0.line.b5_subtractions"],
+          form["0.line.b6_subtractions"],
+          form["2.line.b9a_subtractions"],
         ),
-      "3.line.c27_subtractions": (f) => {
-        const total = f["2.line.b10_subtractions"];
-        return typeof total === "number" ? total - sum(f["3.line.c26_subtractions"]) : undefined;
+      "3.line.c27_subtractions": (form) => {
+        const total = form["2.line.b10_subtractions"];
+        return typeof total === "number" ? total - sum(form["3.line.c26_subtractions"]) : undefined;
       },
-      "3.line.c27_additions": (f) => {
-        const total = f["2.line.b10_additions"];
-        return typeof total === "number" ? total - sum(f["3.line.c26_additions"]) : undefined;
+      "3.line.c27_additions": (form) => {
+        const total = form["2.line.b10_additions"];
+        return typeof total === "number" ? total - sum(form["3.line.c26_additions"]) : undefined;
       },
       // MANUAL EDIT: no combined-name fact exists; join first + last name.
       "0.header.name": (_, info) =>
@@ -109,55 +110,55 @@ export function register(): void {
           ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
           : undefined,
       "0.header.ssn": (_, info) => info.taxpayerSSN,
-      "0.line.1a_federal": (f) => sum(f["form-1040.line.1a"]),
+      "0.line.1a_federal": (form) => sum(form["form-1040.line.1a"]),
       // MANUAL EDIT: 1h type is a text field; read it as a string, not with sum().
-      "0.line.1h_income_type": (f) => {
-        const v = f["form-1040.line.1h_type"];
-        return typeof v === "string" ? v : undefined;
+      "0.line.1h_income_type": (form) => {
+        const value = form["form-1040.line.1h_type"];
+        return typeof value === "string" ? value : undefined;
       },
-      "0.line.1z_federal": (f) =>
+      "0.line.1z_federal": (form) =>
         sum(
-          f["0.line.1a_federal"],
-          f["0.line.1b_federal"],
-          f["0.line.1c_federal"],
-          f["0.line.1d_federal"],
-          f["0.line.1e_federal"],
-          f["0.line.1f_federal"],
-          f["0.line.1g_federal"],
-          f["0.line.1h_federal"],
+          form["0.line.1a_federal"],
+          form["0.line.1b_federal"],
+          form["0.line.1c_federal"],
+          form["0.line.1d_federal"],
+          form["0.line.1e_federal"],
+          form["0.line.1f_federal"],
+          form["0.line.1g_federal"],
+          form["0.line.1h_federal"],
         ),
-      "0.line.3b_federal": (f) => sum(f["form-1040.line.3b"]),
-      "0.line.7a_federal": (f) => sum(f["form-1040.line.7a"]),
-      "2.line.b10_federal": (f) =>
+      "0.line.3b_federal": (form) => sum(form["form-1040.line.3b"]),
+      "0.line.7a_federal": (form) => sum(form["form-1040.line.7a"]),
+      "2.line.b10_federal": (form) =>
         sum(
-          f["0.line.1z_federal"],
-          f["0.line.2b_federal"],
-          f["0.line.3b_federal"],
-          f["0.line.4b_federal"],
-          f["0.line.5b_federal"],
-          f["0.line.6b_federal"],
-          f["0.line.7a_federal"],
-          f["0.line.b1_federal"],
-          f["0.line.b2a_federal"],
-          f["0.line.b3_federal"],
-          f["0.line.b4_federal"],
-          f["0.line.b5_federal"],
-          f["0.line.b6_federal"],
-          f["0.line.b7_federal"],
-          f["2.line.b9a_federal"],
+          form["0.line.1z_federal"],
+          form["0.line.2b_federal"],
+          form["0.line.3b_federal"],
+          form["0.line.4b_federal"],
+          form["0.line.5b_federal"],
+          form["0.line.6b_federal"],
+          form["0.line.7a_federal"],
+          form["0.line.b1_federal"],
+          form["0.line.b2a_federal"],
+          form["0.line.b3_federal"],
+          form["0.line.b4_federal"],
+          form["0.line.b5_federal"],
+          form["0.line.b6_federal"],
+          form["0.line.b7_federal"],
+          form["2.line.b9a_federal"],
         ),
       // Line 27 col A equals federal AGI (form-1040 line 11b).
-      "3.line.c27_federal": (f) =>
+      "3.line.c27_federal": (form) =>
         sum(
-          f["2.line.b10_federal"],
-          f["3.line.c26_federal"] === undefined ? 0 : -f["3.line.c26_federal"],
+          form["2.line.b10_federal"],
+          form["3.line.c26_federal"] === undefined ? 0 : -form["3.line.c26_federal"],
         ),
       // MANUAL EDIT: the larger of the CA standard deduction and line 29. Form 540 line 18 reads this field.
-      "5.page2.total_itemized_30_standard_or_itemized": (f, info) => {
+      "5.page2.total_itemized_30_standard_or_itemized": (form, info) => {
         if (!info.filingStatus) return undefined;
         const stdDed = lookupStandardDeduction("state-ca", 2025, info.filingStatus);
         if (stdDed === undefined) return undefined;
-        const line29 = f["5.page2.total_itemized_29"];
+        const line29 = form["5.page2.total_itemized_29"];
         return atLeast(stdDed, typeof line29 === "number" ? line29 : 0);
       },
     },

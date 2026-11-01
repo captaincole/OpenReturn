@@ -60,7 +60,7 @@ export interface RenderedForm {
  * Catalog-only forms (no `register`) are not in the bundled catalog.
  * Evaluating them throws and fails the case-state build.
  */
-const SCENARIO_FORM_IDS = FORMS.filter((f) => f.register).map((f) => f.formId);
+const SCENARIO_FORM_IDS = FORMS.filter((spec) => spec.register).map((spec) => spec.formId);
 
 function supersede<T>(rows: T[], keyer: (row: T) => string): T[] {
   const seen = new Set<string>();
@@ -80,12 +80,15 @@ export function evaluateScenario(inputs: ScenarioInputs): EvaluatedScenario {
   // Idempotent and cheap: run per call, not as a module-load side effect.
   registerAllForms();
 
-  const facts = supersede(inputs.facts, (r) => r.key);
-  const decisions = supersede(inputs.decisions, (r) => r.decisionKey);
+  const facts = supersede(inputs.facts, (fact) => fact.key);
+  const decisions = supersede(inputs.decisions, (decision) => decision.decisionKey);
 
   const filingInfo = resolveFilingInfo({
-    facts: facts.map((f) => ({ key: f.key, value: f.value, category: f.category })),
-    decisions: decisions.map((d) => ({ decisionKey: d.decisionKey, decision: d.decision })),
+    facts: facts.map((fact) => ({ key: fact.key, value: fact.value, category: fact.category })),
+    decisions: decisions.map((decision) => ({
+      decisionKey: decision.decisionKey,
+      decision: decision.decision,
+    })),
   });
 
   const ctx: DerivationContext = {

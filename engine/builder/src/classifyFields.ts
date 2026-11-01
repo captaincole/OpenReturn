@@ -206,16 +206,16 @@ function buildBatchUserText(
   assignedFieldIds: Map<string, string>,
 ): string {
   const fieldsJson = JSON.stringify(
-    batch.map((f) => ({
-      pdf_field_name: f.fieldName,
-      short_name: f.shortName,
-      field_kind: f.fieldKind,
-      label: f.label,
-      ...(f.maxLength != null ? { max_length: f.maxLength } : {}),
-      ...(f.multiline ? { multiline: true } : {}),
-      ...(f.comb ? { comb: true } : {}),
-      ...(f.radioOptions ? { radio_options: f.radioOptions } : {}),
-      ...(f.checkboxOnValue ? { checkbox_on: f.checkboxOnValue } : {}),
+    batch.map((field) => ({
+      pdf_field_name: field.fieldName,
+      short_name: field.shortName,
+      field_kind: field.fieldKind,
+      label: field.label,
+      ...(field.maxLength != null ? { max_length: field.maxLength } : {}),
+      ...(field.multiline ? { multiline: true } : {}),
+      ...(field.comb ? { comb: true } : {}),
+      ...(field.radioOptions ? { radio_options: field.radioOptions } : {}),
+      ...(field.checkboxOnValue ? { checkbox_on: field.checkboxOnValue } : {}),
     })),
     null,
     2,
@@ -296,27 +296,27 @@ function accumulateBatch(
     assignedFieldIds: Map<string, string>;
   },
 ): void {
-  for (const f of raw.enrichments) {
+  for (const rawEnrichment of raw.enrichments) {
     const enrichment: FieldEnrichment = {
-      pdfFieldName: f.pdf_field_name,
-      fieldId: f.field_id,
-      category: f.category,
-      valueType: f.value_type,
+      pdfFieldName: rawEnrichment.pdf_field_name,
+      fieldId: rawEnrichment.field_id,
+      category: rawEnrichment.category,
+      valueType: rawEnrichment.value_type,
     };
-    if (Array.isArray(f.options) && f.options.length > 0) {
-      enrichment.options = f.options.map((o) => ({
-        value: o.value,
-        radioOption: o.radio_option,
+    if (Array.isArray(rawEnrichment.options) && rawEnrichment.options.length > 0) {
+      enrichment.options = rawEnrichment.options.map((option) => ({
+        value: option.value,
+        radioOption: option.radio_option,
       }));
     }
     acc.allEnrichments.push(enrichment);
-    if (!acc.assignedFieldIds.has(f.field_id)) {
-      const matched = batch.find((b) => b.fieldName === f.pdf_field_name);
-      acc.assignedFieldIds.set(f.field_id, matched?.label ?? "");
+    if (!acc.assignedFieldIds.has(rawEnrichment.field_id)) {
+      const matched = batch.find((field) => field.fieldName === rawEnrichment.pdf_field_name);
+      acc.assignedFieldIds.set(rawEnrichment.field_id, matched?.label ?? "");
     }
   }
-  for (const s of raw.skipped) {
-    acc.allSkipped.push({ pdfFieldName: s.pdf_field_name, skipReason: s.skip_reason });
+  for (const skipped of raw.skipped) {
+    acc.allSkipped.push({ pdfFieldName: skipped.pdf_field_name, skipReason: skipped.skip_reason });
   }
 }
 

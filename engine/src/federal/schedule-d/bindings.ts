@@ -35,19 +35,23 @@ function boxLineBindings(): Partial<{
     const column =
       (col: "proceeds" | "cost"): Fn =>
       (_, info) => {
-        const totals = boxes.map((b) => info.form8949BoxTotals?.[b]).filter((t) => t !== undefined);
-        return totals.length > 0 ? roundDollars(sum(...totals.map((t) => t[col]))) : undefined;
+        const totals = boxes
+          .map((box) => info.form8949BoxTotals?.[box])
+          .filter((total) => total !== undefined);
+        return totals.length > 0
+          ? roundDollars(sum(...totals.map((total) => total[col])))
+          : undefined;
       };
     out[`0.line.${line}_proceeds`] = column("proceeds");
     out[`0.line.${line}_cost`] = column("cost");
-    out[`0.line.${line}_gain_loss`] = (f) => {
-      const proceeds = f[`0.line.${line}_proceeds` as keyof ScheduleD];
+    out[`0.line.${line}_gain_loss`] = (form) => {
+      const proceeds = form[`0.line.${line}_proceeds` as keyof ScheduleD];
       if (typeof proceeds !== "number") return undefined;
-      const cost = f[`0.line.${line}_cost` as keyof ScheduleD];
+      const cost = form[`0.line.${line}_cost` as keyof ScheduleD];
       return sum(
         proceeds,
         typeof cost === "number" ? -cost : 0,
-        f[`0.line.${line}_adjustments` as keyof ScheduleD],
+        form[`0.line.${line}_adjustments` as keyof ScheduleD],
       );
     };
   }
@@ -64,9 +68,9 @@ export function register(): void {
           ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
           : undefined,
       // MANUAL EDIT: the generator has no conditional comparison rule.
-      "1.line.17_both_gains_yes": (f) => {
-        const l15 = f["0.line.15_net_long_term_gain_loss"];
-        const l16 = f["1.line.16_combined_gain_loss"];
+      "1.line.17_both_gains_yes": (form) => {
+        const l15 = form["0.line.15_net_long_term_gain_loss"];
+        const l16 = form["1.line.16_combined_gain_loss"];
         if (typeof l15 !== "number" || typeof l16 !== "number") return undefined;
         return l15 > 0 && l16 > 0 ? true : undefined;
       },
@@ -74,44 +78,44 @@ export function register(): void {
        * MANUAL EDIT: line 20 also needs "Form 4952 not filed". Form 4952 is
        * not modeled, so the check reduces to lines 18 and 19 zero or blank.
        */
-      "1.line.20_use_qual_div_worksheet_yes": (f) => {
-        if (f["1.line.17_both_gains_yes"] !== true) return undefined;
-        const l18 = f["1.line.18_rate_gain_worksheet_amount"];
-        const l19 = f["1.line.19_unrecaptured_sec1250_gain"];
+      "1.line.20_use_qual_div_worksheet_yes": (form) => {
+        if (form["1.line.17_both_gains_yes"] !== true) return undefined;
+        const l18 = form["1.line.18_rate_gain_worksheet_amount"];
+        const l19 = form["1.line.19_unrecaptured_sec1250_gain"];
         const l18Zero = l18 === undefined || l18 === 0;
         const l19Zero = l19 === undefined || l19 === 0;
         return l18Zero && l19Zero ? true : undefined;
       },
       "0.header.ssn": (_, info) => info.taxpayerSSN,
-      "0.line.7_net_short_term_gain_loss": (f) =>
+      "0.line.7_net_short_term_gain_loss": (form) =>
         sum(
-          f["0.line.1a_gain_loss"],
-          f["0.line.1b_gain_loss"],
-          f["0.line.2_gain_loss"],
-          f["0.line.3_gain_loss"],
-          f["0.line.4_short_term_gain_other_forms"],
-          f["0.line.5_net_short_term_passthrough"],
-          f["0.line.6_short_term_loss_carryover"],
+          form["0.line.1a_gain_loss"],
+          form["0.line.1b_gain_loss"],
+          form["0.line.2_gain_loss"],
+          form["0.line.3_gain_loss"],
+          form["0.line.4_short_term_gain_other_forms"],
+          form["0.line.5_net_short_term_passthrough"],
+          form["0.line.6_short_term_loss_carryover"],
         ),
-      "0.line.15_net_long_term_gain_loss": (f) =>
+      "0.line.15_net_long_term_gain_loss": (form) =>
         sum(
-          f["0.line.8a_gain_loss"],
-          f["0.line.8b_gain_loss"],
-          f["0.line.9_gain_loss"],
-          f["0.line.10_gain_loss"],
-          f["0.line.11_long_term_gain_other_forms"],
-          f["0.line.12_net_long_term_passthrough"],
-          f["0.line.13_capital_gain_distributions"],
-          f["0.line.14_long_term_loss_carryover"],
+          form["0.line.8a_gain_loss"],
+          form["0.line.8b_gain_loss"],
+          form["0.line.9_gain_loss"],
+          form["0.line.10_gain_loss"],
+          form["0.line.11_long_term_gain_other_forms"],
+          form["0.line.12_net_long_term_passthrough"],
+          form["0.line.13_capital_gain_distributions"],
+          form["0.line.14_long_term_loss_carryover"],
         ),
-      "1.line.16_combined_gain_loss": (f) =>
-        sum(f["0.line.7_net_short_term_gain_loss"], f["0.line.15_net_long_term_gain_loss"]),
+      "1.line.16_combined_gain_loss": (form) =>
+        sum(form["0.line.7_net_short_term_gain_loss"], form["0.line.15_net_long_term_gain_loss"]),
       // MANUAL EDIT: routed to the FilingInfo slot (sum of 1099-DIV box 2a).
       "0.line.13_capital_gain_distributions": (_, info) =>
         roundDollars(info.capitalGainDistributions),
       // MANUAL EDIT: a loss on line 16, limited to $3,000 ($1,500 MFS).
-      "1.line.21_allowable_loss": (f, info) =>
-        allowableLoss(f["1.line.16_combined_gain_loss"], info.filingStatus),
+      "1.line.21_allowable_loss": (form, info) =>
+        allowableLoss(form["1.line.16_combined_gain_loss"], info.filingStatus),
     },
 
     unsupported: {

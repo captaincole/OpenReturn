@@ -57,8 +57,8 @@ export function register(): void {
           : info.filingStatus
             ? 1
             : undefined,
-      "line.7_personal_exemption_amount": (f) => {
-        const count = f["line.7_personal_exemption_count"];
+      "line.7_personal_exemption_amount": (form) => {
+        const count = form["line.7_personal_exemption_count"];
         return typeof count === "number" ? count * 153 : undefined;
       },
       /*
@@ -70,8 +70,8 @@ export function register(): void {
         if (info.filingStatus === "qualifying_surviving_spouse") return undefined;
         return info.taxpayerBornBeforeJan2_1961 === true ? 1 : undefined;
       },
-      "line.9_senior_exemption_amount": (f) => {
-        const count = f["line.9_senior_exemption_count"];
+      "line.9_senior_exemption_amount": (form) => {
+        const count = form["line.9_senior_exemption_count"];
         return typeof count === "number" ? count * 153 : undefined;
       },
       // MANUAL EDIT: MFS puts the spouse's SSN in the header and full name on line 3.
@@ -93,73 +93,74 @@ export function register(): void {
           ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
           : undefined,
       // MANUAL EDIT: line 31 source checkbox: Tax Table up to $100,000, else Tax Rate Schedule.
-      "line.31_tax_from_tax_table": (f) => usesRateSchedule(f["line.19_taxable_income"]) === false,
-      "line.31_tax_from_rate_schedule": (f) => usesRateSchedule(f["line.19_taxable_income"]),
+      "line.31_tax_from_tax_table": (form) =>
+        usesRateSchedule(form["line.19_taxable_income"]) === false,
+      "line.31_tax_from_rate_schedule": (form) => usesRateSchedule(form["line.19_taxable_income"]),
       // MANUAL EDIT: Schedule CA line 27 col B / C; 0 when Schedule CA is not filed.
-      "line.14_ca_adjustments_subtractions": (f) => {
-        const v = f["schedule-ca.3.line.c27_subtractions"];
-        return typeof v === "number" ? v : 0;
+      "line.14_ca_adjustments_subtractions": (form) => {
+        const value = form["schedule-ca.3.line.c27_subtractions"];
+        return typeof value === "number" ? value : 0;
       },
-      "line.16_ca_adjustments_additions": (f) => {
-        const v = f["schedule-ca.3.line.c27_additions"];
-        return typeof v === "number" ? v : 0;
+      "line.16_ca_adjustments_additions": (form) => {
+        const value = form["schedule-ca.3.line.c27_additions"];
+        return typeof value === "number" ? value : 0;
       },
-      "line.11_total_exemption_amount": (f) =>
+      "line.11_total_exemption_amount": (form) =>
         sum(
-          f["line.7_personal_exemption_amount"],
-          f["line.8_blind_exemption_amount"],
-          f["line.9_senior_exemption_amount"],
-          f["line.10_dependent_exemption_amount"],
+          form["line.7_personal_exemption_amount"],
+          form["line.8_blind_exemption_amount"],
+          form["line.9_senior_exemption_amount"],
+          form["line.10_dependent_exemption_amount"],
         ),
       // MANUAL EDIT: round the W-2 box 16 sum to the nearest dollar.
       "line.12_state_wages": (_, info) => roundDollars(info.w2StateWages),
-      "line.13_federal_agi": (f) => sum(f["form-1040.line.11b"]),
-      "line.15_ca_agi_before_additions": (f) =>
+      "line.13_federal_agi": (form) => sum(form["form-1040.line.11b"]),
+      "line.15_ca_agi_before_additions": (form) =>
         sum(
-          f["line.13_federal_agi"],
-          f["line.14_ca_adjustments_subtractions"] === undefined
+          form["line.13_federal_agi"],
+          form["line.14_ca_adjustments_subtractions"] === undefined
             ? 0
-            : -f["line.14_ca_adjustments_subtractions"],
+            : -form["line.14_ca_adjustments_subtractions"],
         ),
-      "line.17_ca_agi": (f) =>
-        sum(f["line.15_ca_agi_before_additions"], f["line.16_ca_adjustments_additions"]),
+      "line.17_ca_agi": (form) =>
+        sum(form["line.15_ca_agi_before_additions"], form["line.16_ca_adjustments_additions"]),
       // MANUAL EDIT: Schedule CA line 30 when filed, else the standard deduction (same value for non-itemizers).
-      "line.18_deductions": (f, info) => {
-        const fromScheduleCA = f["schedule-ca.5.page2.total_itemized_30_standard_or_itemized"];
+      "line.18_deductions": (form, info) => {
+        const fromScheduleCA = form["schedule-ca.5.page2.total_itemized_30_standard_or_itemized"];
         if (typeof fromScheduleCA === "number") return fromScheduleCA;
         return info.filingStatus
           ? lookupStandardDeduction("state-ca", 2025, info.filingStatus)
           : undefined;
       },
-      "line.19_taxable_income": (f) =>
+      "line.19_taxable_income": (form) =>
         atLeast(
           0,
           sum(
-            f["line.17_ca_agi"],
-            f["line.18_deductions"] === undefined ? 0 : -f["line.18_deductions"],
+            form["line.17_ca_agi"],
+            form["line.18_deductions"] === undefined ? 0 : -form["line.18_deductions"],
           ),
         ),
       // MANUAL EDIT: Tax Table ("ca-2025") up to $100,000 of line 19; above it, Tax Rate Schedules X/Y/Z.
-      "line.31_tax_amount": (f, info) => {
+      "line.31_tax_amount": (form, info) => {
         if (!info.filingStatus) return undefined;
-        const income = f["line.19_taxable_income"];
+        const income = form["line.19_taxable_income"];
         if (typeof income !== "number") return undefined;
         if (income === 0) return 0; // the table starts at $1
         if (usesRateSchedule(income)) {
           return roundDollars(lookupCaRateSchedule(2025, info.filingStatus, income));
         }
-        const r = lookupTax("ca-2025", income, info.filingStatus);
-        return r.ok ? r.tax : undefined;
+        const lookup = lookupTax("ca-2025", income, info.filingStatus);
+        return lookup.ok ? lookup.tax : undefined;
       },
       /*
        * MANUAL EDIT: line 11, limited by the AGI Limitation Worksheet. Blind
        * (line 8) and dependents (line 10) count as 0 until those inputs exist.
        */
-      "line.32_exemption_credits": (f, info) => {
-        const agi = f["line.13_federal_agi"];
-        const count = f["line.7_personal_exemption_count"];
+      "line.32_exemption_credits": (form, info) => {
+        const agi = form["line.13_federal_agi"];
+        const count = form["line.7_personal_exemption_count"];
         if (!info.filingStatus || typeof agi !== "number" || typeof count !== "number") {
-          return sum(f["line.11_total_exemption_amount"]);
+          return sum(form["line.11_total_exemption_amount"]);
         }
         return caExemptionCreditsAfterLimit({
           filingStatus: info.filingStatus,
@@ -167,143 +168,145 @@ export function register(): void {
           // Worksheet line f: the exemptions on lines 7, 8, and 9.
           personalCount: sum(
             count,
-            f["line.8_blind_exemption_count"],
-            f["line.9_senior_exemption_count"],
+            form["line.8_blind_exemption_count"],
+            form["line.9_senior_exemption_count"],
           ),
           personalAmount: sum(
-            f["line.7_personal_exemption_amount"],
-            f["line.8_blind_exemption_amount"],
-            f["line.9_senior_exemption_amount"],
+            form["line.7_personal_exemption_amount"],
+            form["line.8_blind_exemption_amount"],
+            form["line.9_senior_exemption_amount"],
           ),
-          dependentCount: sum(f["line.10_dependent_exemption_count"]),
-          dependentAmount: sum(f["line.10_dependent_exemption_amount"]),
+          dependentCount: sum(form["line.10_dependent_exemption_count"]),
+          dependentAmount: sum(form["line.10_dependent_exemption_amount"]),
         });
       },
-      "line.33_tax_after_exemption_credits": (f) =>
+      "line.33_tax_after_exemption_credits": (form) =>
         atLeast(
           0,
           sum(
-            f["line.31_tax_amount"],
-            f["line.32_exemption_credits"] === undefined ? 0 : -f["line.32_exemption_credits"],
+            form["line.31_tax_amount"],
+            form["line.32_exemption_credits"] === undefined
+              ? 0
+              : -form["line.32_exemption_credits"],
           ),
         ),
-      "line.35_total_tax_after_credits": (f) =>
-        sum(f["line.33_tax_after_exemption_credits"], f["line.34_tax_amount"]),
-      "line.48_tax_after_credits": (f) =>
+      "line.35_total_tax_after_credits": (form) =>
+        sum(form["line.33_tax_after_exemption_credits"], form["line.34_tax_amount"]),
+      "line.48_tax_after_credits": (form) =>
         atLeast(
           0,
           sum(
-            f["line.35_total_tax_after_credits"],
-            f["line.47_total_credits"] === undefined ? 0 : -f["line.47_total_credits"],
+            form["line.35_total_tax_after_credits"],
+            form["line.47_total_credits"] === undefined ? 0 : -form["line.47_total_credits"],
           ),
         ),
-      "line.64_total_tax": (f) =>
+      "line.64_total_tax": (form) =>
         sum(
-          f["line.48_tax_after_credits"],
-          f["line.61_alternative_minimum_tax"],
-          f["line.62_behavioral_health_services_tax"],
-          f["line.63_other_taxes_credit_recapture"],
+          form["line.48_tax_after_credits"],
+          form["line.61_alternative_minimum_tax"],
+          form["line.62_behavioral_health_services_tax"],
+          form["line.63_other_taxes_credit_recapture"],
         ),
       // MANUAL EDIT: round the W-2 box 17 sum to the nearest dollar.
       "line.71_ca_income_tax_withheld": (_, info) => roundDollars(info.w2StateWithholding),
-      "line.78_total_payments": (f) =>
+      "line.78_total_payments": (form) =>
         sum(
-          f["line.71_ca_income_tax_withheld"],
-          f["line.72_ca_estimated_tax_payments"],
-          f["line.73_withholding_592b_593"],
-          f["line.74_motion_picture_production_credit"],
-          f["line.75_eitc"],
-          f["line.76_young_child_tax_credit"],
-          f["line.77_foster_youth_tax_credit"],
+          form["line.71_ca_income_tax_withheld"],
+          form["line.72_ca_estimated_tax_payments"],
+          form["line.73_withholding_592b_593"],
+          form["line.74_motion_picture_production_credit"],
+          form["line.75_eitc"],
+          form["line.76_young_child_tax_credit"],
+          form["line.77_foster_youth_tax_credit"],
         ),
       "line.91_use_tax": (_, info) => info.useTaxOwed,
       // MANUAL EDIT: bound by hand; the generator emitted a TODO here.
       "line.91_no_use_tax_owed": (_, info) => info.useTaxZeroReason,
       "line.92_full_year_health_coverage": (_, info) => info.fullYearMEC,
-      "line.93_payments_balance": (f) =>
+      "line.93_payments_balance": (form) =>
         atLeast(
           0,
           sum(
-            f["line.78_total_payments"],
-            f["line.91_use_tax"] === undefined ? 0 : -f["line.91_use_tax"],
+            form["line.78_total_payments"],
+            form["line.91_use_tax"] === undefined ? 0 : -form["line.91_use_tax"],
           ),
         ),
-      "line.95_payments_after_isr_penalty": (f) =>
+      "line.95_payments_after_isr_penalty": (form) =>
         atLeast(
           0,
           sum(
-            f["line.93_payments_balance"],
-            f["line.92_isr_penalty"] === undefined ? 0 : -f["line.92_isr_penalty"],
+            form["line.93_payments_balance"],
+            form["line.92_isr_penalty"] === undefined ? 0 : -form["line.92_isr_penalty"],
           ),
         ),
-      "line.97_overpaid_tax": (f) =>
+      "line.97_overpaid_tax": (form) =>
         atLeast(
           0,
           sum(
-            f["line.95_payments_after_isr_penalty"],
-            f["line.64_total_tax"] === undefined ? 0 : -f["line.64_total_tax"],
+            form["line.95_payments_after_isr_penalty"],
+            form["line.64_total_tax"] === undefined ? 0 : -form["line.64_total_tax"],
           ),
         ),
-      "line.99_overpaid_tax_available": (f) =>
+      "line.99_overpaid_tax_available": (form) =>
         atLeast(
           0,
           sum(
-            f["line.97_overpaid_tax"],
-            f["line.98_applied_to_2026_estimated_tax"] === undefined
+            form["line.97_overpaid_tax"],
+            form["line.98_applied_to_2026_estimated_tax"] === undefined
               ? 0
-              : -f["line.98_applied_to_2026_estimated_tax"],
+              : -form["line.98_applied_to_2026_estimated_tax"],
           ),
         ),
-      "line.100_tax_due": (f) => {
-        const r = sum(
-          f["line.64_total_tax"],
-          f["line.95_payments_after_isr_penalty"] === undefined
+      "line.100_tax_due": (form) => {
+        const taxDue = sum(
+          form["line.64_total_tax"],
+          form["line.95_payments_after_isr_penalty"] === undefined
             ? 0
-            : -f["line.95_payments_after_isr_penalty"],
+            : -form["line.95_payments_after_isr_penalty"],
         );
-        return r > 0 ? r : undefined;
+        return taxDue > 0 ? taxDue : undefined;
       },
       // 540 inst.: with no amount on line 99, amount owed = lines 94 + 96 + 100 + 110.
-      "line.111_amount_you_owe": (f) => {
-        const r = sum(
-          f["line.94_use_tax_balance"],
-          f["line.96_isr_penalty_balance"],
-          f["line.100_tax_due"],
-          f["line.110_total_contributions"],
+      "line.111_amount_you_owe": (form) => {
+        const owed = sum(
+          form["line.94_use_tax_balance"],
+          form["line.96_isr_penalty_balance"],
+          form["line.100_tax_due"],
+          form["line.110_total_contributions"],
         );
-        return r > 0 ? r : undefined;
+        return owed > 0 ? owed : undefined;
       },
       // MANUAL EDIT: FTB 5805 line 13; blank when 5805 is not filed.
-      "line.113_underpayment_estimated_tax": (f) => {
-        const v = f["form-5805.1.part2.line_13"];
-        return typeof v === "number" ? v : undefined;
+      "line.113_underpayment_estimated_tax": (form) => {
+        const value = form["form-5805.1.part2.line_13"];
+        return typeof value === "number" ? value : undefined;
       },
-      "line.114_total_amount_due": (f) => {
-        const r = atLeast(
+      "line.114_total_amount_due": (form) => {
+        const due = atLeast(
           0,
           sum(
-            f["line.100_tax_due"],
-            f["line.110_total_contributions"],
-            f["line.112_interest_and_late_penalties"],
-            f["line.113_underpayment_estimated_tax"],
+            form["line.100_tax_due"],
+            form["line.110_total_contributions"],
+            form["line.112_interest_and_late_penalties"],
+            form["line.113_underpayment_estimated_tax"],
           ),
         );
-        return r > 0 ? r : undefined;
+        return due > 0 ? due : undefined;
       },
-      "line.115_refund_or_no_amount_due": (f) =>
+      "line.115_refund_or_no_amount_due": (form) =>
         atLeast(
           0,
           sum(
-            f["line.99_overpaid_tax_available"],
-            f["line.110_total_contributions"] === undefined
+            form["line.99_overpaid_tax_available"],
+            form["line.110_total_contributions"] === undefined
               ? 0
-              : -f["line.110_total_contributions"],
-            f["line.112_interest_and_late_penalties"] === undefined
+              : -form["line.110_total_contributions"],
+            form["line.112_interest_and_late_penalties"] === undefined
               ? 0
-              : -f["line.112_interest_and_late_penalties"],
-            f["line.113_underpayment_estimated_tax"] === undefined
+              : -form["line.112_interest_and_late_penalties"],
+            form["line.113_underpayment_estimated_tax"] === undefined
               ? 0
-              : -f["line.113_underpayment_estimated_tax"],
+              : -form["line.113_underpayment_estimated_tax"],
           ),
         ),
       "signing.taxpayer_email": (_, info) => info.taxpayerEmail,

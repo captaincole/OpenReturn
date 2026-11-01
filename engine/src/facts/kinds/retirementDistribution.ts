@@ -53,27 +53,29 @@ export function makeRetirementDistributionFactKey(
   return `payer.${payerSlug}.distributions.${distributionId}`;
 }
 
-export function isRetirementDistributionFact(f: TaxFactRow): boolean {
-  return f.category === R_CATEGORY && R_KEY_RE.test(f.key);
+export function isRetirementDistributionFact(fact: TaxFactRow): boolean {
+  return fact.category === R_CATEGORY && R_KEY_RE.test(fact.key);
 }
 
-export function parseRetirementDistributionFact(f: TaxFactRow): RetirementDistributionFact | null {
-  if (f.category !== R_CATEGORY) return null;
-  const match = f.key.match(R_KEY_RE);
+export function parseRetirementDistributionFact(
+  fact: TaxFactRow,
+): RetirementDistributionFact | null {
+  if (fact.category !== R_CATEGORY) return null;
+  const match = fact.key.match(R_KEY_RE);
   if (!match) return null;
   const [, payerSlug, distributionId] = match;
   return {
     payerSlug,
     distributionId,
-    distribution: f.value as RetirementDistributionFactValue,
-    sourceFact: f,
+    distribution: fact.value as RetirementDistributionFactValue,
+    sourceFact: fact,
   };
 }
 
 export function getRetirementDistributionFacts(facts: FactsView): RetirementDistributionFact[] {
   const out: RetirementDistributionFact[] = [];
-  for (const f of facts.byCategory(R_CATEGORY)) {
-    const parsed = parseRetirementDistributionFact(f);
+  for (const fact of facts.byCategory(R_CATEGORY)) {
+    const parsed = parseRetirementDistributionFact(fact);
     if (parsed !== null) out.push(parsed);
   }
   return out;

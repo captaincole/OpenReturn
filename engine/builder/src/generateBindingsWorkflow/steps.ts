@@ -60,13 +60,13 @@ export const retrieveStep = createStep({
         }
       },
     );
-    const retrievedContext = retrieved.map((r) => ({
-      fieldId: r.fieldId,
-      blocks: r.blocks.map((b) => ({
-        blockId: b.blockId,
-        docId: b.docId,
-        text: b.text,
-        score: typeof b.score === "number" ? b.score : undefined,
+    const retrievedContext = retrieved.map((context) => ({
+      fieldId: context.fieldId,
+      blocks: context.blocks.map((block) => ({
+        blockId: block.blockId,
+        docId: block.docId,
+        text: block.text,
+        score: typeof block.score === "number" ? block.score : undefined,
       })),
     }));
     return { ...inputData, retrievedContext };
@@ -103,7 +103,7 @@ export const classifyStep = createStep({
 function pascalFormName(formId: string): string {
   return formId
     .split(/[-_]/)
-    .map((s) => (s.length > 0 ? s[0].toUpperCase() + s.slice(1) : ""))
+    .map((word) => (word.length > 0 ? word[0].toUpperCase() + word.slice(1) : ""))
     .join("");
 }
 

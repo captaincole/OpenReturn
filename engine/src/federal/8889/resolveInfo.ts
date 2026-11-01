@@ -15,7 +15,7 @@ export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
   const coverageType = factByKey.get(HSA_COVERAGE_KEYS.coverageType) as HsaCoverageType | undefined;
   const employer = employerContributions(inputs);
   const distributions = factsInCategory(inputs, "hsa").filter((row) => SA_KEY_RE.test(row.key));
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8889",
     fallbacks: [
       {
@@ -28,7 +28,7 @@ export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
   const allQualified = factByKey.get(HSA_COVERAGE_KEYS.distributionsAllQualified) as
     boolean | undefined;
   return {
-    mustFile: { "form-8889": r },
+    mustFile: { "form-8889": resolution },
     missingInputs: {
       "form-8889": missingInputs({
         [HSA_COVERAGE_KEYS.coverageType]: coverageType,
@@ -61,6 +61,6 @@ function employerContributions(inputs: ResolverInputs): number | undefined {
   return total;
 }
 
-function numberFact(v: unknown): number | undefined {
-  return typeof v === "number" && Number.isFinite(v) ? v : undefined;
+function numberFact(value: unknown): number | undefined {
+  return typeof value === "number" && Number.isFinite(value) ? value : undefined;
 }

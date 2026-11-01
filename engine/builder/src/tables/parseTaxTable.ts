@@ -31,7 +31,7 @@ const TAX_TABLE_HEADER_CLUES = [
 ];
 
 export function parseTaxTable(html: string): ParseResult {
-  const $ = load(html);
+  const dom = load(html);
   const diagnostics: ParseResult["diagnostics"] = {
     tablesInspected: 0,
     tablesAccepted: 0,
@@ -40,14 +40,14 @@ export function parseTaxTable(html: string): ParseResult {
 
   const rows: TaxTableRow[] = [];
 
-  $("table").each((_, el) => {
+  dom("table").each((_, el) => {
     diagnostics.tablesInspected++;
-    const $table = $(el);
-    if (!looksLikeTaxTable($, $table)) {
+    const $table = dom(el);
+    if (!looksLikeTaxTable(dom, $table)) {
       /* No reason per non-tax table: the page has dozens of them. */
       return;
     }
-    const collected = extractRows($, $table);
+    const collected = extractRows(dom, $table);
     if (collected.rows.length === 0) {
       diagnostics.tablesRejected.push({
         reason: "tax-table-shaped but produced zero parsable rows",
@@ -62,7 +62,7 @@ export function parseTaxTable(html: string): ParseResult {
   return { rows, diagnostics };
 }
 
-function looksLikeTaxTable($: CheerioAPI, $table: ReturnType<CheerioAPI>): boolean {
+function looksLikeTaxTable(dom: CheerioAPI, $table: ReturnType<CheerioAPI>): boolean {
   const headText = $table.find("thead").text().toLowerCase();
   if (!headText) return false;
   const cluesMatched = TAX_TABLE_HEADER_CLUES.filter((rx) => rx.test(headText));
@@ -73,18 +73,18 @@ function looksLikeTaxTable($: CheerioAPI, $table: ReturnType<CheerioAPI>): boole
   const cells = $firstBodyRow.find("td");
   if (cells.length !== 6) return false;
   for (let i = 0; i < cells.length; i++) {
-    if (parseIntCell($(cells[i]).text()) === null) return false;
+    if (parseIntCell(dom(cells[i]).text()) === null) return false;
   }
   return true;
 }
 
-function extractRows($: CheerioAPI, $table: ReturnType<CheerioAPI>): { rows: TaxTableRow[] } {
+function extractRows(dom: CheerioAPI, $table: ReturnType<CheerioAPI>): { rows: TaxTableRow[] } {
   const rows: TaxTableRow[] = [];
   $table.find("tbody > tr").each((_, tr) => {
-    const cells = $(tr).find("td");
+    const cells = dom(tr).find("td");
     if (cells.length !== 6) return;
-    const nums = [0, 1, 2, 3, 4, 5].map((i) => parseIntCell($(cells[i]).text()));
-    if (nums.some((n) => n === null)) return;
+    const nums = [0, 1, 2, 3, 4, 5].map((i) => parseIntCell(dom(cells[i]).text()));
+    if (nums.some((num) => num === null)) return;
     const [low, high, single, mfj, mfs, hoh] = nums as number[];
     if (low >= high) return;
     rows.push({ low, high, single, mfj, mfs, hoh });
@@ -93,12 +93,12 @@ function extractRows($: CheerioAPI, $table: ReturnType<CheerioAPI>): { rows: Tax
 }
 
 function parseIntCell(raw: string): number | null {
-  const s = raw.replace(/[\s,]/g, "").trim();
-  if (s === "") return null;
-  if (!/^-?\d+$/.test(s)) return null;
-  const n = Number(s);
-  if (!Number.isFinite(n) || n < 0) return null;
-  return n;
+  const cleaned = raw.replace(/[\s,]/g, "").trim();
+  if (cleaned === "") return null;
+  if (!/^-?\d+$/.test(cleaned)) return null;
+  const value = Number(cleaned);
+  if (!Number.isFinite(value) || value < 0) return null;
+  return value;
 }
 
 export interface CoverageReport {

@@ -71,26 +71,26 @@ export function isW2FactKey(key: string): boolean {
   return W2_KEY_RE.test(key);
 }
 
-export function isW2Fact(f: TaxFactRow): boolean {
-  return f.category === W2_CATEGORY && W2_KEY_RE.test(f.key);
+export function isW2Fact(fact: TaxFactRow): boolean {
+  return fact.category === W2_CATEGORY && W2_KEY_RE.test(fact.key);
 }
 
-export function parseW2Fact(f: TaxFactRow): W2Fact | null {
-  if (f.category !== W2_CATEGORY) return null;
-  const match = f.key.match(W2_KEY_RE);
+export function parseW2Fact(fact: TaxFactRow): W2Fact | null {
+  if (fact.category !== W2_CATEGORY) return null;
+  const match = fact.key.match(W2_KEY_RE);
   if (!match) return null;
   const [, employerSlug] = match;
   return {
     employerSlug,
-    w2: f.value as W2FactValue,
-    sourceFact: f,
+    w2: fact.value as W2FactValue,
+    sourceFact: fact,
   };
 }
 
 export function getW2Facts(facts: FactsView): W2Fact[] {
   const out: W2Fact[] = [];
-  for (const f of facts.byCategory(W2_CATEGORY)) {
-    const parsed = parseW2Fact(f);
+  for (const fact of facts.byCategory(W2_CATEGORY)) {
+    const parsed = parseW2Fact(fact);
     if (parsed !== null) out.push(parsed);
   }
   return out;

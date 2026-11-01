@@ -57,12 +57,12 @@ export function partitionTrades(
   return { short, long, boxed, factKeys };
 }
 
-function parseTradeDate(s: string): Date | null {
-  const m = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/.exec(s);
-  if (!m) return null;
-  const month = parseInt(m[1], 10);
-  const day = parseInt(m[2], 10);
-  let year = parseInt(m[3], 10);
+function parseTradeDate(text: string): Date | null {
+  const match = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/.exec(text);
+  if (!match) return null;
+  const month = parseInt(match[1], 10);
+  const day = parseInt(match[2], 10);
+  let year = parseInt(match[3], 10);
   if (year < 100) year += 2000;
   return new Date(year, month - 1, day);
 }
@@ -71,9 +71,9 @@ function parseTradeDate(s: string): Date | null {
  * IRC §1222: long-term means sold strictly after the anniversary date.
  * Missing dates default to short-term, the conservative (higher-rate) choice.
  */
-function isLongTermTrade(t: TradeFactValue): boolean {
-  const acq = t.dateAcquired === undefined ? null : parseTradeDate(t.dateAcquired);
-  const sold = parseTradeDate(t.dateSold);
+function isLongTermTrade(trade: TradeFactValue): boolean {
+  const acq = trade.dateAcquired === undefined ? null : parseTradeDate(trade.dateAcquired);
+  const sold = parseTradeDate(trade.dateSold);
   if (!acq || !sold) return false;
   const anniversary = new Date(acq);
   anniversary.setFullYear(anniversary.getFullYear() + 1);

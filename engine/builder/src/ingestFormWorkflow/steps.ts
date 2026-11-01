@@ -156,8 +156,9 @@ function assembleCatalog(inputData: {
   skipped: Array<{ pdfFieldName: string }>;
 }): { catalog: CatalogRow[]; unenriched: string[] } {
   const enrichmentByName = new Map<string, FieldEnrichment>();
-  for (const e of inputData.enrichments) enrichmentByName.set(e.pdfFieldName, e);
-  const skippedByName = new Set<string>(inputData.skipped.map((s) => s.pdfFieldName));
+  for (const enrichment of inputData.enrichments)
+    enrichmentByName.set(enrichment.pdfFieldName, enrichment);
+  const skippedByName = new Set<string>(inputData.skipped.map((skipped) => skipped.pdfFieldName));
 
   const catalog: CatalogRow[] = [];
   const unenriched: string[] = [];
@@ -170,10 +171,12 @@ function assembleCatalog(inputData: {
   }
 
   const expectedNames = new Set(
-    inputData.fields.filter((f) => !skippedByName.has(f.fieldName)).map((f) => f.fieldName),
+    inputData.fields
+      .filter((field) => !skippedByName.has(field.fieldName))
+      .map((field) => field.fieldName),
   );
-  const actualNames = new Set(catalog.map((r) => r.pdfWidgetName ?? "").filter(Boolean));
-  const missing = [...expectedNames].filter((n) => !actualNames.has(n));
+  const actualNames = new Set(catalog.map((row) => row.pdfWidgetName ?? "").filter(Boolean));
+  const missing = [...expectedNames].filter((name) => !actualNames.has(name));
   if (missing.length > 0) {
     throw new Error(
       `Round-trip invariant violated: ${missing.length} field(s) missing from catalog: ${missing.slice(0, 5).join(", ")}${missing.length > 5 ? "…" : ""}`,
@@ -229,7 +232,7 @@ function buildCatalogRow(
   if (field.fieldKind === "radio" && field.radioOptions) {
     /* When the AI's options are missing or misaligned, fall back to a slug of the label. */
     const enrichmentByRadioOption = new Map<string, string>(
-      (enrichment?.options ?? []).map((o) => [o.radioOption, o.value]),
+      (enrichment?.options ?? []).map((option) => [option.radioOption, option.value]),
     );
     row.options = field.radioOptions.map((radioOption) => ({
       value: enrichmentByRadioOption.get(radioOption) ?? slugifyOption(radioOption),

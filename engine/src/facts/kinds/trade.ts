@@ -31,8 +31,8 @@ export interface TradeFact {
   reportedBasis?: { costBasis: number; sourceFact: TaxFactRow };
 }
 
-export function basisOf(t: TradeFact): number | undefined {
-  return t.trade.costBasis ?? t.reportedBasis?.costBasis;
+export function basisOf(trade: TradeFact): number | undefined {
+  return trade.trade.costBasis ?? trade.reportedBasis?.costBasis;
 }
 
 export function isVariousDate(date: string): boolean {
@@ -71,36 +71,36 @@ export function makeReportedBasisFactKey(accountSlug: string, tradeId: string): 
   return `${makeTradeFactKey(accountSlug, tradeId)}.reported_basis`;
 }
 
-export function isReportedBasisFact(f: TaxFactRow): boolean {
-  return f.category === REPORTED_BASIS_CATEGORY && f.key.endsWith(".reported_basis");
+export function isReportedBasisFact(fact: TaxFactRow): boolean {
+  return fact.category === REPORTED_BASIS_CATEGORY && fact.key.endsWith(".reported_basis");
 }
 
 export function makeTradeFactKey(accountSlug: string, tradeId: string): string {
   return `account.${accountSlug}.trades.${tradeId}`;
 }
 
-export function isTradeFact(f: TaxFactRow): boolean {
-  return f.category === TRADE_CATEGORY && TRADE_KEY_RE.test(f.key);
+export function isTradeFact(fact: TaxFactRow): boolean {
+  return fact.category === TRADE_CATEGORY && TRADE_KEY_RE.test(fact.key);
 }
 
 /* Trusts the value shape: ingest writes it through typed helpers. */
-export function parseTradeFact(f: TaxFactRow): TradeFact | null {
-  if (f.category !== TRADE_CATEGORY) return null;
-  const match = f.key.match(TRADE_KEY_RE);
+export function parseTradeFact(fact: TaxFactRow): TradeFact | null {
+  if (fact.category !== TRADE_CATEGORY) return null;
+  const match = fact.key.match(TRADE_KEY_RE);
   if (!match) return null;
   const [, accountSlug, tradeId] = match;
   return {
     accountSlug,
     tradeId,
-    trade: f.value as TradeFactValue,
-    sourceFact: f,
+    trade: fact.value as TradeFactValue,
+    sourceFact: fact,
   };
 }
 
 export function getTradeFacts(facts: FactsView): TradeFact[] {
   const out: TradeFact[] = [];
-  for (const f of facts.byCategory(TRADE_CATEGORY)) {
-    const parsed = parseTradeFact(f);
+  for (const fact of facts.byCategory(TRADE_CATEGORY)) {
+    const parsed = parseTradeFact(fact);
     if (parsed === null) continue;
     const basisRow = facts.get(makeReportedBasisFactKey(parsed.accountSlug, parsed.tradeId));
     if (basisRow !== undefined && typeof basisRow.value === "number") {

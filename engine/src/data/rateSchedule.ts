@@ -98,11 +98,11 @@ export function lookupRateSchedule(
       `lookupRateSchedule called with taxableIncome=${taxableIncome} < $100,000. Use lookupTax (Tax Table) instead — the IRS only publishes the rate schedule for ≥ $100,000.`,
     );
   }
-  for (const r of rows) {
+  for (const row of rows) {
     // The worksheet's first row reads "At least $100,000"; the rest read "over".
-    const aboveMin = r === rows[0] ? taxableIncome >= r.overMin : taxableIncome > r.overMin;
-    if (aboveMin && taxableIncome <= r.overMax) {
-      return taxableIncome * r.rate - r.subtractAmount;
+    const aboveMin = row === rows[0] ? taxableIncome >= row.overMin : taxableIncome > row.overMin;
+    if (aboveMin && taxableIncome <= row.overMax) {
+      return taxableIncome * row.rate - row.subtractAmount;
     }
   }
   throw new Error(

@@ -36,18 +36,24 @@ describe("Schedule H lines A–C", () => {
     ["$2,000, a $1,000 quarter", info([employee(2000)], true), false, false, true, false, false],
     ["$2,000, quarter not answered", info([employee(2000)]), false, false, undefined, false, false],
     ["no household employees", {}, undefined, undefined, undefined, false, false],
-  ] as const)("%s", (_, i, a, b, c, part1, l7to9) => {
-    expect([lineA(i), lineB(i), lineC(i), partI(i), lines7to9(i)]).toEqual([a, b, c, part1, l7to9]);
+  ] as const)("%s", (_, i, expectedA, expectedB, expectedC, part1, l7to9) => {
+    expect([lineA(i), lineB(i), lineC(i), partI(i), lines7to9(i)]).toEqual([
+      expectedA,
+      expectedB,
+      expectedC,
+      part1,
+      l7to9,
+    ]);
   });
 
   it("puts only the employees paid $2,800 or more on lines 1, 3, and 5", () => {
     const i = info([employee(3100), employee(1200, 50)]);
-    expect(lineAEmployees(i).map((e) => e.socialSecurityWages)).toEqual([3100]);
+    expect(lineAEmployees(i).map((paid) => paid.socialSecurityWages)).toEqual([3100]);
   });
 
   it("counts Medicare wages toward the $2,800 when they are higher", () => {
-    const e = { ...employee(0), medicareWages: 2800 };
-    expect(lineA(info([e]))).toBe(true);
+    const medicareOnly = { ...employee(0), medicareWages: 2800 };
+    expect(lineA(info([medicareOnly]))).toBe(true);
   });
 });
 

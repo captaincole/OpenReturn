@@ -29,68 +29,71 @@ export function register(): void {
         return roundDollars((annual * (info.hsaCoverageMonths ?? 12)) / 12);
       },
       // The spouse split for family coverage is not modeled.
-      "0.line.6_adjusted_limit_separate_hsa": (f) => f["0.line.5_subtract_line4_from_line3"],
+      "0.line.6_adjusted_limit_separate_hsa": (form) => form["0.line.5_subtract_line4_from_line3"],
       "0.line.9_employer_contributions": (_, info) => roundDollars(info.hsaEmployerContributions),
-      "0.line.13_hsa_deduction": (f) => {
-        const own = f["0.line.2_hsa_contributions"];
-        const room = f["0.line.12_subtract_line11_from_line8"];
+      "0.line.13_hsa_deduction": (form) => {
+        const own = form["0.line.2_hsa_contributions"];
+        const room = form["0.line.12_subtract_line11_from_line8"];
         return typeof own === "number" && typeof room === "number"
           ? Math.min(own, room)
           : undefined;
       },
       "0.line.14a_total_distributions": (_, info) => roundDollars(info.hsaDistributionsTotal),
-      "0.line.15_qualified_medical_expenses": (f, info) =>
+      "0.line.15_qualified_medical_expenses": (form, info) =>
         info.hsaDistributionsAllQualified === true
-          ? f["0.line.14c_subtract_14b_from_14a"]
+          ? form["0.line.14c_subtract_14b_from_14a"]
           : undefined,
       // Assumes the taxpayer is the account beneficiary (single filer).
       "0.header.hsa_beneficiary_ssn": (_, info) => info.taxpayerSSN,
-      "0.line.5_subtract_line4_from_line3": (f) =>
+      "0.line.5_subtract_line4_from_line3": (form) =>
         sum(
-          f["0.line.3_annual_hsa_contribution_limit"],
-          f["0.line.4_archer_msa_contributions"] === undefined
+          form["0.line.3_annual_hsa_contribution_limit"],
+          form["0.line.4_archer_msa_contributions"] === undefined
             ? 0
-            : -f["0.line.4_archer_msa_contributions"],
+            : -form["0.line.4_archer_msa_contributions"],
         ),
-      "0.line.8_add_lines_6_and_7": (f) =>
+      "0.line.8_add_lines_6_and_7": (form) =>
         sum(
-          f["0.line.6_adjusted_limit_separate_hsa"],
-          f["0.line.7_additional_contribution_age_55"],
+          form["0.line.6_adjusted_limit_separate_hsa"],
+          form["0.line.7_additional_contribution_age_55"],
         ),
-      "0.line.11_add_lines_9_and_10": (f) =>
+      "0.line.11_add_lines_9_and_10": (form) =>
         sum(
-          f["0.line.9_employer_contributions"],
-          f["0.line.10_qualified_hsa_funding_distributions"],
+          form["0.line.9_employer_contributions"],
+          form["0.line.10_qualified_hsa_funding_distributions"],
         ),
-      "0.line.12_subtract_line11_from_line8": (f) =>
+      "0.line.12_subtract_line11_from_line8": (form) =>
         atLeast(
           0,
           sum(
-            f["0.line.8_add_lines_6_and_7"],
-            f["0.line.11_add_lines_9_and_10"] === undefined
+            form["0.line.8_add_lines_6_and_7"],
+            form["0.line.11_add_lines_9_and_10"] === undefined
               ? 0
-              : -f["0.line.11_add_lines_9_and_10"],
+              : -form["0.line.11_add_lines_9_and_10"],
           ),
         ),
-      "0.line.14c_subtract_14b_from_14a": (f) =>
+      "0.line.14c_subtract_14b_from_14a": (form) =>
         sum(
-          f["0.line.14a_total_distributions"],
-          f["0.line.14b_distributions_rolled_over"] === undefined
+          form["0.line.14a_total_distributions"],
+          form["0.line.14b_distributions_rolled_over"] === undefined
             ? 0
-            : -f["0.line.14b_distributions_rolled_over"],
+            : -form["0.line.14b_distributions_rolled_over"],
         ),
-      "0.line.16_taxable_hsa_distributions": (f) =>
+      "0.line.16_taxable_hsa_distributions": (form) =>
         atLeast(
           0,
           sum(
-            f["0.line.14c_subtract_14b_from_14a"],
-            f["0.line.15_qualified_medical_expenses"] === undefined
+            form["0.line.14c_subtract_14b_from_14a"],
+            form["0.line.15_qualified_medical_expenses"] === undefined
               ? 0
-              : -f["0.line.15_qualified_medical_expenses"],
+              : -form["0.line.15_qualified_medical_expenses"],
           ),
         ),
-      "0.line.20_total_income": (f) =>
-        sum(f["0.line.18_last_month_rule"], f["0.line.19_qualified_hsa_funding_distribution"]),
+      "0.line.20_total_income": (form) =>
+        sum(
+          form["0.line.18_last_month_rule"],
+          form["0.line.19_qualified_hsa_funding_distribution"],
+        ),
     },
 
     unsupported: {

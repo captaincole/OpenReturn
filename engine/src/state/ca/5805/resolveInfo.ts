@@ -8,7 +8,7 @@ const PRIOR_YEAR_CA_AGI = "prior_year.ca_agi";
 export function resolve5805Info(inputs: ResolverInputs): Form5805FilingInfo {
   const { factByKey, decisionByKey } = inputs;
   const priorYearCaTax = numberFact(factByKey.get(PRIOR_YEAR_KEYS.caTax));
-  const r = resolveMustFile(decisionByKey, {
+  const resolution = resolveMustFile(decisionByKey, {
     explicitKey: "decisions.scope.must_file_5805",
     fallbacks: [
       { rule: "fallback: prior-year CA tax is known", value: priorYearCaTax !== undefined },
@@ -19,7 +19,7 @@ export function resolve5805Info(inputs: ResolverInputs): Form5805FilingInfo {
   const agi = caAgi ?? fedAgi;
   const mfs = decisionByKey.get("decisions.scope.filing_status") === "married_filing_separately";
   return {
-    mustFile: { "form-5805": r },
+    mustFile: { "form-5805": resolution },
     /* Federal AGI stands in for CA AGI. */
     missingInputs: { "form-5805": missingInputs({ [PRIOR_YEAR_KEYS.federalAgi]: agi }) },
     priorYearCaTax,
@@ -29,6 +29,6 @@ export function resolve5805Info(inputs: ResolverInputs): Form5805FilingInfo {
   };
 }
 
-function numberFact(v: unknown): number | undefined {
-  return typeof v === "number" && Number.isFinite(v) ? v : undefined;
+function numberFact(value: unknown): number | undefined {
+  return typeof value === "number" && Number.isFinite(value) ? value : undefined;
 }

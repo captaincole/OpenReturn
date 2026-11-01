@@ -33,7 +33,7 @@ describe("planForm8949Copies", () => {
       ...trades("partI.boxB", 7),
       ...trades("partII.boxD", 9),
     ]);
-    expect(plan.map((c) => [c.partI?.box, c.partII?.box])).toEqual([
+    expect(plan.map((copy) => [copy.partI?.box, copy.partII?.box])).toEqual([
       ["partI.boxB", "partII.boxD"],
       ["partI.boxH", "partII.boxE"],
     ]);
@@ -41,7 +41,7 @@ describe("planForm8949Copies", () => {
 
   it("splits a box over 11 rows into more pages", () => {
     const plan = planForm8949Copies([...trades("partI.boxB", 7), ...trades("partII.boxD", 19)]);
-    expect(plan.map((c) => [c.partI?.rows.length, c.partII?.rows.length])).toEqual([
+    expect(plan.map((copy) => [copy.partI?.rows.length, copy.partII?.rows.length])).toEqual([
       [7, 11],
       [undefined, 8],
     ]);
@@ -49,7 +49,7 @@ describe("planForm8949Copies", () => {
 
   it("keeps the fact order within a box", () => {
     const plan = planForm8949Copies(trades("partI.boxA", 3));
-    expect(plan[0].partI?.rows.map((r) => r.trade.tradeId)).toEqual([
+    expect(plan[0].partI?.rows.map((row) => row.trade.tradeId)).toEqual([
       "partI.boxA-0",
       "partI.boxA-1",
       "partI.boxA-2",

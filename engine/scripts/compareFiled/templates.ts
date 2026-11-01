@@ -45,7 +45,7 @@ export function writeTemplates(dir: string): void {
       .replaceAll("{{FOLDER}}", dir)
       .replaceAll("{{ENGINE}}", ENGINE_ROOT),
   );
-  for (const name of readdirSync(JORDAN_DIR).filter((f) => f.endsWith(".ts"))) {
+  for (const name of readdirSync(JORDAN_DIR).filter((file) => file.endsWith(".ts"))) {
     writeOnce(resolve(dir, name), () => {
       const text = copyJordan(name, engineRel);
       if (name !== "index.ts") return text;

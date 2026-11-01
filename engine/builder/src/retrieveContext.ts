@@ -40,11 +40,11 @@ export async function retrieveContextPerField(
       const hits = await searchCanon({ query, limit: topK });
       out[i] = {
         fieldId: field.fieldId,
-        blocks: hits.map((h) => ({
-          blockId: h.blockId,
-          docId: h.docId,
-          text: h.text,
-          score: h.score,
+        blocks: hits.map((hit) => ({
+          blockId: hit.blockId,
+          docId: hit.docId,
+          text: hit.text,
+          score: hit.score,
         })),
       };
       done += 1;

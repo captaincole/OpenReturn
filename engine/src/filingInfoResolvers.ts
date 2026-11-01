@@ -52,8 +52,8 @@ export function bornBeforeJan2_1961(dob: string | undefined): boolean | undefine
   const iso = dob?.match(/^(\d{4})-(\d{2})-(\d{2})$/);
   const ymd = us ? [us[3], us[1], us[2]] : iso ? [iso[1], iso[2], iso[3]] : undefined;
   if (!ymd) return undefined;
-  const [y, m, d] = ymd.map(Number);
-  return y < 1961 || (y === 1961 && m === 1 && d < 2);
+  const [year, month, day] = ymd.map(Number);
+  return year < 1961 || (year === 1961 && month === 1 && day < 2);
 }
 
 export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
@@ -94,13 +94,13 @@ export function hasW2(inputs: ResolverInputs): boolean {
 
 export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
   const { decisionByKey, factByKey } = inputs;
-  const r = resolveMustFile(decisionByKey, {
+  const resolution = resolveMustFile(decisionByKey, {
     explicitKey: "decisions.scope.must_file_ca_540",
   });
   const useTaxOwed = num(inputs, "use_tax.owed_amount");
   const useTaxZeroReason = decisionByKey.get("decisions.scope.use_tax_zero_reason");
   return {
-    mustFile: { "form-540": r },
+    mustFile: { "form-540": resolution },
     missingInputs: {
       "form-540": missingInputs({
         "identity.address.county": text(inputs, "identity.address.county"),
@@ -145,7 +145,7 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
 
 // Default: file with Form 540. Set the explicit decision false to opt out.
 export function resolveScheduleCaInfo(inputs: ResolverInputs): ScheduleCaFilingInfo {
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_ca",
     fallbacks: [
       {
@@ -156,17 +156,17 @@ export function resolveScheduleCaInfo(inputs: ResolverInputs): ScheduleCaFilingI
     ],
   });
   return {
-    mustFile: { "schedule-ca": r },
+    mustFile: { "schedule-ca": resolution },
   };
 }
 
 export function resolve8949Info(inputs: ResolverInputs): Form8949FilingInfo {
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8949",
     fallbacks: reportableSalesFallbacks(inputs),
   });
   return {
-    mustFile: { "form-8949": r },
+    mustFile: { "form-8949": resolution },
     shortTermTrades: inputs.trades.short,
     longTermTrades: inputs.trades.long,
     form8949Copies: planForm8949Copies(inputs.trades.boxed),
@@ -176,13 +176,13 @@ export function resolve8949Info(inputs: ResolverInputs): Form8949FilingInfo {
 
 // Also fires for capital-gain distributions without 8949.
 export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInfo {
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_d",
     fallbacks: reportableSalesFallbacks(inputs),
   });
   const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
   return {
-    mustFile: { "schedule-d": r },
+    mustFile: { "schedule-d": resolution },
     capitalGainDistributions:
       distributions > 0
         ? (distributions as ScheduleDFilingInfo["capitalGainDistributions"])
@@ -196,7 +196,7 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
  */
 export function resolve8959Info(inputs: ResolverInputs): Form8959FilingInfo {
   const medicareWages = sumW2Box(inputs, "box5");
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8959",
     fallbacks: [
       {
@@ -206,7 +206,7 @@ export function resolve8959Info(inputs: ResolverInputs): Form8959FilingInfo {
     ],
   });
   return {
-    mustFile: { "form-8959": r },
+    mustFile: { "form-8959": resolution },
     w2MedicareWagesTotal: medicareWages as Form8959FilingInfo["w2MedicareWagesTotal"],
     w2MedicareTaxWithheld: sumW2Box(inputs, "box6") as Form8959FilingInfo["w2MedicareTaxWithheld"],
   };
@@ -218,12 +218,12 @@ export function resolve8959Info(inputs: ResolverInputs): Form8959FilingInfo {
  * capital gains; set decisions.scope.must_file_8960 for that case.
  */
 export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
-  const hasInvestment = inputs.facts.some((f) => f.category === "investment_income");
+  const hasInvestment = inputs.facts.some((fact) => fact.category === "investment_income");
   const income =
     sumW2Box(inputs, "box1") +
     sumInvestmentBox(inputs, "box1", isInterestFactKey) +
     sumInvestmentBox(inputs, "box1a", isDividendFactKey);
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8960",
     fallbacks: [
       {
@@ -233,7 +233,7 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
     ],
   });
   return {
-    mustFile: { "form-8960": r },
+    mustFile: { "form-8960": resolution },
   };
 }
 
@@ -247,7 +247,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
       : undefined;
   // Form 8889 lines 13 and 16 reach the 1040 only through Schedule 1.
   const form8889 = resolve8889Info(inputs).mustFile?.["form-8889"]?.value === true;
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
@@ -257,7 +257,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     ],
   });
   return {
-    mustFile: { "schedule-1": r },
+    mustFile: { "schedule-1": resolution },
     miscOtherIncome,
   };
 }
@@ -267,7 +267,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
   const form8959 = resolve8959Info(inputs).mustFile?.["form-8959"]?.value === true;
   const form8960 = resolve8960Info(inputs).mustFile?.["form-8960"]?.value === true;
   const scheduleH = resolveScheduleHInfo(inputs).mustFile?.["schedule-h"]?.value === true;
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_2",
     fallbacks: [
       {
@@ -277,14 +277,16 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     ],
   });
   return {
-    mustFile: { "schedule-2": r },
+    mustFile: { "schedule-2": resolution },
   };
 }
 
 // IRS Schedule B inst.: interest or dividends over $1,500, or a Part III "Yes".
 export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInfo {
-  const interestPayers = payerAmounts(inputs, isInterestFactKey, (v) => sum(v.box1, v.box3));
-  const dividendPayers = payerAmounts(inputs, isDividendFactKey, (v) => sum(v.box1a));
+  const interestPayers = payerAmounts(inputs, isInterestFactKey, (value) =>
+    sum(value.box1, value.box3),
+  );
+  const dividendPayers = payerAmounts(inputs, isDividendFactKey, (value) => sum(value.box1a));
   const hasForeignFinancialAccount = boolDecision(
     inputs,
     "decisions.scope.has_foreign_financial_account",
@@ -295,9 +297,9 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
     "decisions.scope.has_foreign_trust": hasForeignTrust,
   };
   const rounding = inputs.decisionByKey.get("decisions.rounding.schedule_b");
-  const interest = sum(...interestPayers.map((p) => p.amount));
-  const dividends = sum(...dividendPayers.map((p) => p.amount));
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const interest = sum(...interestPayers.map((interestPayer) => interestPayer.amount));
+  const dividends = sum(...dividendPayers.map((dividendPayer) => dividendPayer.amount));
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_b",
     fallbacks: [
       {
@@ -311,7 +313,7 @@ export function resolveScheduleBInfo(inputs: ResolverInputs): ScheduleBFilingInf
     ],
   });
   return {
-    mustFile: { "schedule-b": r },
+    mustFile: { "schedule-b": resolution },
     missingInputs: { "schedule-b": missingInputs(partIII) },
     interestPayers,
     rounding: rounding === "sum_rounded_rows" ? "sum_rounded_rows" : "round_total",
@@ -329,20 +331,20 @@ function payerAmounts(
   return factsInCategory(inputs, "investment_income")
     .filter((row) => isKind(row.key))
     .map((row) => {
-      const v = row.value as Record<string, unknown>;
-      return { payerName: String(v.payerName ?? ""), amount: amountOf(v) };
+      const value = row.value as Record<string, unknown>;
+      return { payerName: String(value.payerName ?? ""), amount: amountOf(value) };
     })
-    .filter((p) => p.amount !== 0);
+    .filter((payer) => payer.amount !== 0);
 }
 
 function boolDecision(inputs: ResolverInputs, key: string): boolean | undefined {
-  const v = inputs.decisionByKey.get(key);
-  return typeof v === "boolean" ? v : undefined;
+  const value = inputs.decisionByKey.get(key);
+  return typeof value === "boolean" ? value : undefined;
 }
 
 export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInfo {
   const { decisionByKey } = inputs;
-  const r = resolveMustFile(decisionByKey, {
+  const resolution = resolveMustFile(decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_a",
     fallbacks: [
       {
@@ -356,7 +358,7 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
   const caSdi = sumCaSdi(factsInCategory(inputs, "wages"));
   const estStateTax = num(inputs, "state_local_tax.estimated_payments");
   return {
-    mustFile: { "schedule-a": r },
+    mustFile: { "schedule-a": resolution },
     medicalDentalExpenses: num(inputs, "medical.expenses_total"),
     stateLocalIncomeTaxPaid: w2Box17 + caSdi + (estStateTax ?? 0),
     generalSalesTaxElection: decisionByKey.get("decisions.itemized.elect_general_sales_tax") as

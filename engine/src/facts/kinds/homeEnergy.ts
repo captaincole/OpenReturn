@@ -55,13 +55,13 @@ export function isEnergyInvoiceFactKey(key: string): boolean {
   return HE_KEY_RE.test(key);
 }
 
-export function isEnergyInvoiceFact(f: TaxFactRow): boolean {
-  return f.category === HE_CATEGORY && HE_KEY_RE.test(f.key);
+export function isEnergyInvoiceFact(fact: TaxFactRow): boolean {
+  return fact.category === HE_CATEGORY && HE_KEY_RE.test(fact.key);
 }
 
 export function getEnergyInvoiceFacts(facts: FactsView): EnergyInvoiceFactValue[] {
   return facts
     .byCategory(HE_CATEGORY)
     .filter(isEnergyInvoiceFact)
-    .map((f) => f.value as EnergyInvoiceFactValue);
+    .map((fact) => fact.value as EnergyInvoiceFactValue);
 }

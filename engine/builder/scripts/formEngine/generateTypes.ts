@@ -22,7 +22,7 @@ interface Args {
 
 function parseCmdArgs(argv: string[]): Args {
   const get = (flag: string): string | undefined => {
-    const arg = argv.find((a) => a.startsWith(`${flag}=`));
+    const arg = argv.find((candidate) => candidate.startsWith(`${flag}=`));
     return arg ? arg.slice(flag.length + 1) : undefined;
   };
   const catalog = get("--catalog");
@@ -80,10 +80,10 @@ function buildSource(args: Args, catalog: CatalogFile): string {
   lines.push(` */`);
   lines.push(``);
   lines.push(`export interface ${args.interfaceName} {`);
-  for (const f of fields) {
-    const key = shortKey(f.fieldId, form.formId);
-    const ty = tsType(f);
-    const label = f.label ? `  ${f.label.replace(/\*\//g, "*\\/")}` : "";
+  for (const field of fields) {
+    const key = shortKey(field.fieldId, form.formId);
+    const ty = tsType(field);
+    const label = field.label ? `  ${field.label.replace(/\*\//g, "*\\/")}` : "";
     if (label) {
       lines.push(`  /**${label} */`);
     }

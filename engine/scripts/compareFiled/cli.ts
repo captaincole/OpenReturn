@@ -58,20 +58,23 @@ const SKIP = ["form-8949"];
 
 function findScenario(mod: Record<string, unknown>): Scenario {
   const found = Object.values(mod).find(
-    (v) => typeof v === "object" && v !== null && Array.isArray((v as Scenario).forms),
+    (value) =>
+      typeof value === "object" && value !== null && Array.isArray((value as Scenario).forms),
   );
   if (!found) throw new Error("index.ts exports no Scenario (an object with forms[]).");
   return found as Scenario;
 }
 
-function filedFrom(s: Scenario): FiledReturn {
-  return Object.fromEntries(s.forms.map((f) => [f.formId, f.expected.engineFields]));
+function filedFrom(scenario: Scenario): FiledReturn {
+  return Object.fromEntries(
+    scenario.forms.map((form) => [form.formId, form.expected.engineFields]),
+  );
 }
 
 function centsLines(filed: FiledReturn): string[] {
   return Object.values(filed).flatMap((lines) =>
     Object.entries(lines)
-      .filter(([, v]) => !Number.isInteger(v))
+      .filter(([, value]) => !Number.isInteger(value))
       .map(([id]) => id),
   );
 }
@@ -86,46 +89,50 @@ function engineCommit(): string {
   }
 }
 
-const money = (n: number | null) => (n === null ? "—" : n.toLocaleString("en-US"));
+const money = (amount: number | null) => (amount === null ? "—" : amount.toLocaleString("en-US"));
 
 /* Terminal only. Amounts never go into the report file. */
 function printValues(result: CompareResult): void {
   console.log("\nAmounts (terminal only — do not paste into a model or a report):");
-  for (const d of result.diffs) {
-    const status = STATUS_TEXT[d.status].padEnd(13);
-    console.log(`  ${status} ${d.fieldId}  filed ${money(d.filed)}  engine ${money(d.engine)}`);
+  for (const diff of result.diffs) {
+    const status = STATUS_TEXT[diff.status].padEnd(13);
+    console.log(
+      `  ${status} ${diff.fieldId}  filed ${money(diff.filed)}  engine ${money(diff.engine)}`,
+    );
   }
 }
 
 async function buildReport(dir: string): Promise<{ s: Scenario; report: ReportInput }> {
-  const s = findScenario(await import(resolve(dir, "index.ts")));
+  const scenario = findScenario(await import(resolve(dir, "index.ts")));
   const evaluated = evaluateScenario({
-    filing: { id: "private-return", taxYear: s.taxYear },
-    facts: s.facts,
-    decisions: decisionsWithPreparerStyle(s),
+    filing: { id: "private-return", taxYear: scenario.taxYear },
+    facts: scenario.facts,
+    decisions: decisionsWithPreparerStyle(scenario),
   });
   const catalog = await loadFromFixtures(FORMS.map(catalogPath));
-  const formOrder = [...CALC_ORDER, ...FORMS.map((f) => f.formId)].filter(
+  const formOrder = [...CALC_ORDER, ...FORMS.map((spec) => spec.formId)].filter(
     (id, i, all) => all.indexOf(id) === i,
   );
-  const filed = filedFrom(s);
+  const filed = filedFrom(scenario);
   const result = compareFiled({ formOrder, forms: evaluated.forms, filed, catalog, skip: SKIP });
   const reads = new Map(
-    [...evaluated.forms.values()].flatMap((f) => f.fields.map((x) => [x.fieldId, x.reads])),
+    [...evaluated.forms.values()].flatMap((form) =>
+      form.fields.map((field) => [field.fieldId, field.reads]),
+    ),
   );
   const createdAt = new Date().toISOString().slice(0, 10);
   const report: ReportInput = {
-    taxYear: s.taxYear,
+    taxYear: scenario.taxYear,
     createdAt,
     engineCommit: engineCommit(),
-    preparer: s.preparer,
+    preparer: scenario.preparer,
     result,
     roots: groupRootCauses(result.diffs, (id) => reads.get(id)),
-    shape: inputShape(s),
+    shape: inputShape(scenario),
     centsLines: centsLines(filed),
-    support: checkSupport(s, new Set(evaluated.forms.keys())),
+    support: checkSupport(scenario, new Set(evaluated.forms.keys())),
   };
-  return { s, report };
+  return { s: scenario, report };
 }
 
 async function checkFolder(dir: string): Promise<number> {

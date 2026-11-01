@@ -24,7 +24,7 @@ describe("caExemptionCreditsAfterLimit", () => {
   });
 
   it("phases dependents separately, with $1,250 steps for MFS", () => {
-    const r = caExemptionCreditsAfterLimit({
+    const result = caExemptionCreditsAfterLimit({
       filingStatus: "married_filing_separately",
       federalAgi: 252203 + 1250 * 3, // d = 3, e = 18
       personalCount: 1,
@@ -32,6 +32,6 @@ describe("caExemptionCreditsAfterLimit", () => {
       dependentCount: 2,
       dependentAmount: 950,
     });
-    expect(r).toBe(153 - 18 + (950 - 36));
+    expect(result).toBe(153 - 18 + (950 - 36));
   });
 });

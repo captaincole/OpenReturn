@@ -114,19 +114,19 @@ export type FormEvaluator<F extends BaseFormField = AnyFormField> = (
 ) => EvaluatedForm<F>;
 
 export function makeFactsView(rows: TaxFactRow[]): FactsView {
-  const byKey = new Map(rows.map((r) => [r.key, r]));
+  const byKey = new Map(rows.map((row) => [row.key, row]));
   return {
     get: (key) => byKey.get(key),
-    byKeyPrefix: (prefix) => rows.filter((r) => r.key.startsWith(prefix)),
-    byCategory: (category) => rows.filter((r) => r.category === category),
+    byKeyPrefix: (prefix) => rows.filter((row) => row.key.startsWith(prefix)),
+    byCategory: (category) => rows.filter((row) => row.category === category),
     all: () => rows,
   };
 }
 
 export function makeDecisionsView(rows: AIDecisionRow[]): DecisionsView {
-  const byKey = new Map(rows.map((r) => [r.decisionKey, r]));
+  const byKey = new Map(rows.map((row) => [row.decisionKey, row]));
   return {
     get: (key) => byKey.get(key),
-    byKeyPrefix: (prefix) => rows.filter((r) => r.decisionKey.startsWith(prefix)),
+    byKeyPrefix: (prefix) => rows.filter((row) => row.decisionKey.startsWith(prefix)),
   };
 }

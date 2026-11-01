@@ -44,9 +44,9 @@ export async function readGoldenPdfValues(pdfPath: string): Promise<Map<string, 
   return out;
 }
 
-export function normalizeForCompare(v: unknown): string {
-  if (v === null || v === undefined) return "";
-  if (typeof v === "boolean") return v ? "true" : "false";
-  if (typeof v === "string") return v.trim();
-  return String(v);
+export function normalizeForCompare(value: unknown): string {
+  if (value === null || value === undefined) return "";
+  if (typeof value === "boolean") return value ? "true" : "false";
+  if (typeof value === "string") return value.trim();
+  return String(value);
 }

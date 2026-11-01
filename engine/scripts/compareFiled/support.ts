@@ -93,22 +93,22 @@ const DECISION_PATTERNS = [
 const OUT_OF_SCOPE: { key: string; supported: (v: unknown) => boolean; detail: string }[] = [
   {
     key: "decisions.scope.filing_status",
-    supported: (v) => v === "single" || v === "married_filing_separately",
+    supported: (value) => value === "single" || value === "married_filing_separately",
     detail: "Only single filers are tested (married filing separately: one unverified scenario).",
   },
   {
     key: "decisions.scope.ca_residency",
-    supported: (v) => v === "full_year",
+    supported: (value) => value === "full_year",
     detail: "Part-year and nonresident California returns (540NR) are not modeled.",
   },
   {
     key: "decisions.scope.has_foreign_financial_account",
-    supported: (v) => v !== true,
+    supported: (value) => value !== true,
     detail: "Foreign accounts: FBAR and Form 8938 are not modeled.",
   },
   {
     key: "decisions.scope.has_foreign_trust",
-    supported: (v) => v !== true,
+    supported: (value) => value !== true,
     detail: "Foreign trusts: Form 3520 is not modeled.",
   },
 ];
@@ -120,18 +120,20 @@ export function maskKey(key: string): string {
     .replace(/^decisions\.trade\.[^.]+/, "decisions.trade.<id>");
 }
 
-function isKnownFact(f: TaxFactRow): boolean {
-  if (f.key.startsWith("identity.")) return true;
-  return SIMPLE_FACT_KEYS.has(f.key) || DOCUMENT_FACTS.some((is) => is(f));
+function isKnownFact(fact: TaxFactRow): boolean {
+  if (fact.key.startsWith("identity.")) return true;
+  return SIMPLE_FACT_KEYS.has(fact.key) || DOCUMENT_FACTS.some((is) => is(fact));
 }
 
 function isKnownDecision(key: string): boolean {
   return DECISION_KEYS.has(key) || DECISION_PATTERNS.some((re) => re.test(key));
 }
 
-export function checkSupport(s: Scenario, modeledForms: Set<string>): SupportIssue[] {
+export function checkSupport(scenario: Scenario, modeledForms: Set<string>): SupportIssue[] {
   const issues: SupportIssue[] = [];
-  const unknownFacts = new Set(s.facts.filter((f) => !isKnownFact(f)).map((f) => maskKey(f.key)));
+  const unknownFacts = new Set(
+    scenario.facts.filter((fact) => !isKnownFact(fact)).map((fact) => maskKey(fact.key)),
+  );
   for (const key of unknownFacts) {
     issues.push({
       kind: "unknown_fact",
@@ -139,25 +141,25 @@ export function checkSupport(s: Scenario, modeledForms: Set<string>): SupportIss
       detail: "The engine does not read this fact.",
     });
   }
-  for (const d of s.decisions) {
-    if (!isKnownDecision(d.decisionKey)) {
+  for (const decision of scenario.decisions) {
+    if (!isKnownDecision(decision.decisionKey)) {
       issues.push({
         kind: "unknown_decision",
-        subject: maskKey(d.decisionKey),
+        subject: maskKey(decision.decisionKey),
         detail: "The engine does not read this decision.",
       });
     }
-    const rule = OUT_OF_SCOPE.find((r) => r.key === d.decisionKey);
-    if (rule && !rule.supported(d.decision)) {
-      issues.push({ kind: "out_of_scope", subject: d.decisionKey, detail: rule.detail });
+    const rule = OUT_OF_SCOPE.find((entry) => entry.key === decision.decisionKey);
+    if (rule && !rule.supported(decision.decision)) {
+      issues.push({ kind: "out_of_scope", subject: decision.decisionKey, detail: rule.detail });
     }
   }
-  for (const f of s.forms) {
-    const filled = Object.keys(f.expected.engineFields).length;
-    if (filled > 0 && !modeledForms.has(f.formId)) {
+  for (const form of scenario.forms) {
+    const filled = Object.keys(form.expected.engineFields).length;
+    if (filled > 0 && !modeledForms.has(form.formId)) {
       issues.push({
         kind: "form_not_modeled",
-        subject: f.formId,
+        subject: form.formId,
         detail: `The return fills ${filled} line(s) on it.`,
       });
     }

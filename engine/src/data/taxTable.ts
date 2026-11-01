@@ -142,9 +142,9 @@ function findRow(
 ): TaxTableRow | undefined {
   const includesHigh = (high: number): boolean =>
     convention === "inclusive" ? income <= high : income < high;
-  for (const r of rows) {
-    if (income >= r.low && includesHigh(r.high)) return r;
-    if (r.low > income) return undefined;
+  for (const row of rows) {
+    if (income >= row.low && includesHigh(row.high)) return row;
+    if (row.low > income) return undefined;
   }
   return undefined;
 }

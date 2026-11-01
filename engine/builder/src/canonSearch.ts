@@ -48,10 +48,11 @@ type McpResult = { isError?: boolean; content?: { type?: string; text?: string }
 
 /* A result arrives as the object, or as JSON text in `content`. */
 function unwrap(raw: unknown): unknown {
-  const r = raw as McpResult;
-  const text = r?.content?.map((c) => (c.type === "text" ? (c.text ?? "") : "")).join("") ?? "";
-  if (r?.isError) throw new Error(`Canon searchRefDocs failed: ${text || "unknown error"}`);
-  if (!Array.isArray(r?.content)) return raw;
+  const result = raw as McpResult;
+  const text =
+    result?.content?.map((part) => (part.type === "text" ? (part.text ?? "") : "")).join("") ?? "";
+  if (result?.isError) throw new Error(`Canon searchRefDocs failed: ${text || "unknown error"}`);
+  if (!Array.isArray(result?.content)) return raw;
   try {
     return JSON.parse(text);
   } catch {

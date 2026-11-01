@@ -160,17 +160,19 @@ async function parseAndValidate(
 
 function runSpotChecks(source: CATaxTableSource, rows: CATaxTableRow[]): void {
   const spotResults = source.spotChecks.map((sc) => {
-    const row = rows.find((r) => sc.taxableIncome >= r.low && sc.taxableIncome <= r.high);
+    const row = rows.find(
+      (candidate) => sc.taxableIncome >= candidate.low && sc.taxableIncome <= candidate.high,
+    );
     const got = row ? row[sc.column] : null;
     return { ...sc, got, pass: got === sc.expectedTax };
   });
-  const failed = spotResults.filter((r) => !r.pass);
+  const failed = spotResults.filter((spot) => !spot.pass);
   console.log(
     `${LOG} spot checks ${spotResults.length - failed.length}/${spotResults.length} pass`,
   );
-  for (const f of failed) {
+  for (const failure of failed) {
     console.error(
-      `  ✗ income=${f.taxableIncome} column=${f.column} expected=${f.expectedTax} got=${f.got}`,
+      `  ✗ income=${failure.taxableIncome} column=${failure.column} expected=${failure.expectedTax} got=${failure.got}`,
     );
   }
   if (failed.length > 0) {
@@ -183,8 +185,8 @@ function serializeWithCompactRows(header: Record<string, unknown>, rows: CATaxTa
   const headerOpen = headerJson.slice(0, headerJson.lastIndexOf("}"));
   const rowLines = rows
     .map(
-      (r) =>
-        `    {"low":${r.low},"high":${r.high},"single_or_mfs":${r.single_or_mfs},"mfj_or_qss":${r.mfj_or_qss},"hoh":${r.hoh}}`,
+      (row) =>
+        `    {"low":${row.low},"high":${row.high},"single_or_mfs":${row.single_or_mfs},"mfj_or_qss":${row.mfj_or_qss},"hoh":${row.hoh}}`,
     )
     .join(",\n");
   return `${headerOpen.trimEnd()},\n  "rows": [\n${rowLines}\n  ]\n}\n`;
@@ -199,15 +201,15 @@ function parseCmdArgs(argv: string[]): { year: number; refresh: boolean } {
   let year = 2025;
   let refresh = false;
   for (let i = 0; i < argv.length; i++) {
-    const a = argv[i];
-    if (a === "--year") {
-      const v = argv[++i];
-      if (!v || Number.isNaN(Number(v))) throw new Error(`--year requires a number`);
-      year = Number(v);
-    } else if (a === "--refresh") {
+    const arg = argv[i];
+    if (arg === "--year") {
+      const value = argv[++i];
+      if (!value || Number.isNaN(Number(value))) throw new Error(`--year requires a number`);
+      year = Number(value);
+    } else if (arg === "--refresh") {
       refresh = true;
     } else {
-      throw new Error(`Unknown arg: ${a}`);
+      throw new Error(`Unknown arg: ${arg}`);
     }
   }
   return { year, refresh };

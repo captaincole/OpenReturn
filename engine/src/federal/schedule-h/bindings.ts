@@ -14,8 +14,8 @@ import {
 } from "./lines.js";
 import type { ScheduleH } from "./types.js";
 
-const yes = (v: boolean | undefined) => (v === undefined ? undefined : v);
-const no = (v: boolean | undefined) => (v === undefined ? undefined : !v);
+const yes = (value: boolean | undefined) => (value === undefined ? undefined : value);
+const no = (value: boolean | undefined) => (value === undefined ? undefined : !value);
 
 export function register(): void {
   defineForm<ScheduleH, ScheduleHFilingInfo>("schedule-h", {
@@ -35,36 +35,42 @@ export function register(): void {
       "0.line.C_no": (_, info) => no(lineC(info)),
       "0.line.1": (_, info) =>
         partI(info)
-          ? roundDollars(sum(...lineAEmployees(info).map((e) => e.socialSecurityWages)))
+          ? roundDollars(
+              sum(...lineAEmployees(info).map((employee) => employee.socialSecurityWages)),
+            )
           : undefined,
       // 12.4%: employee and employer share together.
-      "0.line.2": (f) =>
-        f["0.line.1"] === undefined ? undefined : roundDollars(f["0.line.1"] * 0.124),
+      "0.line.2": (form) =>
+        form["0.line.1"] === undefined ? undefined : roundDollars(form["0.line.1"] * 0.124),
       "0.line.3": (_, info) =>
         partI(info)
-          ? roundDollars(sum(...lineAEmployees(info).map((e) => e.medicareWages)))
+          ? roundDollars(sum(...lineAEmployees(info).map((employee) => employee.medicareWages)))
           : undefined,
-      "0.line.4": (f) =>
-        f["0.line.3"] === undefined ? undefined : roundDollars(f["0.line.3"] * 0.029),
+      "0.line.4": (form) =>
+        form["0.line.3"] === undefined ? undefined : roundDollars(form["0.line.3"] * 0.029),
       "0.line.5": (_, info) =>
         partI(info)
           ? roundDollars(
               sum(
-                ...lineAEmployees(info).map((e) =>
-                  atLeast(0, e.medicareWages - ADDITIONAL_MEDICARE_WITHHOLDING_THRESHOLD),
+                ...lineAEmployees(info).map((employee) =>
+                  atLeast(0, employee.medicareWages - ADDITIONAL_MEDICARE_WITHHOLDING_THRESHOLD),
                 ),
               ),
             )
           : undefined,
-      "0.line.6": (f) =>
-        f["0.line.5"] === undefined ? undefined : roundDollars(f["0.line.5"] * 0.009),
+      "0.line.6": (form) =>
+        form["0.line.5"] === undefined ? undefined : roundDollars(form["0.line.5"] * 0.009),
       "0.line.7": (_, info) =>
         lines7to9(info)
-          ? roundDollars(sum(...(info.householdEmployees ?? []).map((e) => e.federalTaxWithheld)))
+          ? roundDollars(
+              sum(
+                ...(info.householdEmployees ?? []).map((employee) => employee.federalTaxWithheld),
+              ),
+            )
           : undefined,
-      "0.line.8": (f, info) =>
+      "0.line.8": (form, info) =>
         lines7to9(info)
-          ? sum(f["0.line.2"], f["0.line.4"], f["0.line.6"], f["0.line.7"])
+          ? sum(form["0.line.2"], form["0.line.4"], form["0.line.6"], form["0.line.7"])
           : undefined,
       "0.line.9_yes": (_, info) => yes(line9(info)),
       "0.line.9_no": (_, info) => no(line9(info)),

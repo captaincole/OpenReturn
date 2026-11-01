@@ -42,8 +42,8 @@ export async function renderPageWithOverlay(opts: {
   const ctx = canvas.getContext("2d");
   ctx.drawImage(img, 0, 0);
 
-  for (const w of opts.widgets) {
-    const [x1, y1, x2, y2] = w.rect;
+  for (const widget of opts.widgets) {
+    const [x1, y1, x2, y2] = widget.rect;
     const [vx1, vy1] = viewport.convertToViewportPoint(x1, y1);
     const [vx2, vy2] = viewport.convertToViewportPoint(x2, y2);
     const left = Math.min(vx1, vx2);
@@ -60,10 +60,10 @@ export async function renderPageWithOverlay(opts: {
      * The badge sits INSIDE the rectangle. Above the widget it covered label
      * text, and vision models paired it with the wrong label.
      */
-    const badge = String(w.id);
+    const badge = String(widget.id);
     ctx.font = "bold 13px sans-serif";
-    const m = ctx.measureText(badge);
-    const badgeW = Math.max(18, m.width + 8);
+    const metrics = ctx.measureText(badge);
+    const badgeW = Math.max(18, metrics.width + 8);
     const badgeH = Math.min(16, Math.max(12, height - 2));
     const badgeX = left;
     const badgeY = top;

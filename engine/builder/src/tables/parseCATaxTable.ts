@@ -45,13 +45,13 @@ export async function parseCATaxTable(pdfBytes: Uint8Array): Promise<CAParseResu
       const line = rawLine.trim();
       if (!line) continue;
       diagnostics.linesInspected++;
-      const m = line.match(ROW_RE);
-      if (!m) {
+      const match = line.match(ROW_RE);
+      if (!match) {
         diagnostics.linesRejected++;
         continue;
       }
-      const nums = [m[1], m[2], m[3], m[4], m[5]].map(parseIntCell);
-      if (nums.some((n) => n === null)) {
+      const nums = [match[1], match[2], match[3], match[4], match[5]].map(parseIntCell);
+      if (nums.some((num) => num === null)) {
         diagnostics.linesRejected++;
         continue;
       }
@@ -69,11 +69,11 @@ export async function parseCATaxTable(pdfBytes: Uint8Array): Promise<CAParseResu
 }
 
 function parseIntCell(raw: string): number | null {
-  const s = raw.replace(/,/g, "").trim();
-  if (!/^\d+$/.test(s)) return null;
-  const n = Number(s);
-  if (!Number.isFinite(n) || n < 0) return null;
-  return n;
+  const cleaned = raw.replace(/,/g, "").trim();
+  if (!/^\d+$/.test(cleaned)) return null;
+  const value = Number(cleaned);
+  if (!Number.isFinite(value) || value < 0) return null;
+  return value;
 }
 
 export interface CACoverageReport {

@@ -66,9 +66,9 @@ export async function fillFromCatalog(opts: {
 
 function setText(ctx: WriterCtx, fieldId: string, widgetName: string, value: string): void {
   if (!value) return;
-  let f;
+  let field;
   try {
-    f = ctx.pdfForm.getField(widgetName);
+    field = ctx.pdfForm.getField(widgetName);
   } catch (err) {
     ctx.warnings.push(
       `fieldId=${fieldId} widget=${widgetName} getField failed: ${
@@ -77,13 +77,13 @@ function setText(ctx: WriterCtx, fieldId: string, widgetName: string, value: str
     );
     return;
   }
-  if (!(f instanceof PDFTextField)) {
+  if (!(field instanceof PDFTextField)) {
     ctx.warnings.push(
-      `fieldId=${fieldId} widget=${widgetName} is ${f.constructor.name}, expected PDFTextField.`,
+      `fieldId=${fieldId} widget=${widgetName} is ${field.constructor.name}, expected PDFTextField.`,
     );
     return;
   }
-  const written = trySetTextWithFallback(f, value);
+  const written = trySetTextWithFallback(field, value);
   if (written === null) {
     ctx.warnings.push(
       `fieldId=${fieldId} widget=${widgetName} setText failed even after stripping separators (value="${value}").`,
@@ -95,13 +95,13 @@ function setText(ctx: WriterCtx, fieldId: string, widgetName: string, value: str
 
 function check(ctx: WriterCtx, fieldId: string, widgetName: string): void {
   try {
-    const f = ctx.pdfForm.getField(widgetName);
-    if (f instanceof PDFCheckBox) {
-      f.check();
+    const field = ctx.pdfForm.getField(widgetName);
+    if (field instanceof PDFCheckBox) {
+      field.check();
       appendRendered(ctx.rendered, fieldId, { widgetName, checked: true });
     } else {
       ctx.warnings.push(
-        `fieldId=${fieldId} widget=${widgetName} is ${f.constructor.name}, expected PDFCheckBox.`,
+        `fieldId=${fieldId} widget=${widgetName} is ${field.constructor.name}, expected PDFCheckBox.`,
       );
     }
   } catch (err) {
@@ -120,13 +120,13 @@ function selectRadio(
   radioOption: string,
 ): void {
   try {
-    const f = ctx.pdfForm.getField(widgetName);
-    if (f instanceof PDFRadioGroup) {
-      f.select(radioOption);
+    const field = ctx.pdfForm.getField(widgetName);
+    if (field instanceof PDFRadioGroup) {
+      field.select(radioOption);
       appendRendered(ctx.rendered, fieldId, { widgetName, text: radioOption });
     } else {
       ctx.warnings.push(
-        `fieldId=${fieldId} widget=${widgetName} is ${f.constructor.name}, expected PDFRadioGroup.`,
+        `fieldId=${fieldId} widget=${widgetName} is ${field.constructor.name}, expected PDFRadioGroup.`,
       );
     }
   } catch (err) {
@@ -143,9 +143,9 @@ function selectRadio(
  * then raise maxLength to fit: flattening hides the limit, and declared
  * limits are often too small (email widgets of 12–15 chars).
  */
-function trySetTextWithFallback(f: PDFTextField, value: string): string | null {
+function trySetTextWithFallback(field: PDFTextField, value: string): string | null {
   try {
-    f.setText(value);
+    field.setText(value);
     return value;
   } catch (err) {
     if (!isLengthOverflow(err)) return null;
@@ -153,15 +153,15 @@ function trySetTextWithFallback(f: PDFTextField, value: string): string | null {
   const stripped = value.replace(/[\s\-_.()]/g, "");
   if (stripped !== value) {
     try {
-      f.setText(stripped);
+      field.setText(stripped);
       return stripped;
     } catch (err) {
       if (!isLengthOverflow(err)) return null;
     }
   }
   try {
-    f.setMaxLength(value.length);
-    f.setText(value);
+    field.setMaxLength(value.length);
+    field.setText(value);
     return value;
   } catch {
     return null;
@@ -175,11 +175,11 @@ function isLengthOverflow(err: unknown): boolean {
 function appendRendered(
   map: Map<string, RenderedWidget[]>,
   fieldId: string,
-  w: RenderedWidget,
+  widget: RenderedWidget,
 ): void {
   const arr = map.get(fieldId);
-  if (arr) arr.push(w);
-  else map.set(fieldId, [w]);
+  if (arr) arr.push(widget);
+  else map.set(fieldId, [widget]);
 }
 
 /*
@@ -205,7 +205,7 @@ function fillSelect(
   const selectedValues = Array.isArray(value) ? value : [value];
   let touched = false;
   for (const selected of selectedValues) {
-    const opt = inv.options.find((o) => o.value === selected);
+    const opt = inv.options.find((option) => option.value === selected);
     if (!opt) continue;
     if (opt.radioOption && widgetName) {
       selectRadio(ctx, inv.fieldId, widgetName, opt.radioOption);

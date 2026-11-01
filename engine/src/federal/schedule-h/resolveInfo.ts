@@ -22,12 +22,12 @@ export function resolveScheduleHInfo(inputs: ResolverInputs): ScheduleHFilingInf
   const paid = inputs.factByKey.get(paidKey);
   const paid1000 = typeof paid === "boolean" ? paid : undefined;
   const factKeys = rows.map((row) => row.key);
-  const r = resolveMustFile(inputs.decisionByKey, {
+  const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_h",
     fallbacks: [
       {
         rule: "fallback: a household employee was paid $2,800 or more (line A) or had federal income tax withheld (line B)",
-        value: employees.some((e) => paysLineA(e) || e.federalTaxWithheld > 0),
+        value: employees.some((employee) => paysLineA(employee) || employee.federalTaxWithheld > 0),
         triggeredByFactKeys: factKeys,
       },
       {
@@ -38,21 +38,21 @@ export function resolveScheduleHInfo(inputs: ResolverInputs): ScheduleHFilingInf
     ],
   });
   return {
-    mustFile: { "schedule-h": r },
+    mustFile: { "schedule-h": resolution },
     missingInputs: {
       "schedule-h": missingInputs(rows.length > 0 ? { [paidKey]: paid1000 } : {}),
     },
     householdEmployees: employees.length > 0 ? employees : undefined,
-    householdEmployerEin: values.find((v) => v.employerEin)?.employerEin,
+    householdEmployerEin: values.find((value) => value.employerEin)?.employerEin,
     householdPaid1000InAQuarter: paid1000,
   };
 }
 
-function toEmployee(v: HouseholdEmployeeFactValue): HouseholdEmployee {
+function toEmployee(employee: HouseholdEmployeeFactValue): HouseholdEmployee {
   return {
-    name: v.employeeName,
-    socialSecurityWages: v.box3 ?? 0,
-    medicareWages: v.box5 ?? 0,
-    federalTaxWithheld: v.box2 ?? 0,
+    name: employee.employeeName,
+    socialSecurityWages: employee.box3 ?? 0,
+    medicareWages: employee.box5 ?? 0,
+    federalTaxWithheld: employee.box2 ?? 0,
   };
 }

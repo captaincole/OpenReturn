@@ -7,7 +7,9 @@ export const CREDIT_RATE = 0.3;
 const SECTION_A: readonly EnergyItemKind[] = ["insulation", "exterior_door", "window_skylight"];
 
 export function itemsOf(info: Form5695FilingInfo, kind: EnergyItemKind): EnergyImprovementItem[] {
-  return (info.energyItems ?? []).filter((i) => i.kind === kind).sort((a, b) => b.cost - a.cost);
+  return (info.energyItems ?? [])
+    .filter((i) => i.kind === kind)
+    .sort((left, right) => right.cost - left.cost);
 }
 
 export function hasSectionA(info: Form5695FilingInfo): boolean {
@@ -50,5 +52,5 @@ export function credit(amount: number | undefined, cap: number): number | undefi
 }
 
 export function total(...values: Array<number | undefined>): number | undefined {
-  return values.every((v) => v === undefined) ? undefined : sum(...values);
+  return values.every((value) => value === undefined) ? undefined : sum(...values);
 }

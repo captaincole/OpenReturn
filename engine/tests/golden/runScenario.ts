@@ -42,24 +42,24 @@ function getBlankPdf(blankPdfPath: string): Buffer {
 const registeredForms = new Set<string>();
 
 export async function evaluateScenarioForms(
-  s: Scenario,
-  formIds: string[] = s.forms.map((f) => f.formId),
+  scenario: Scenario,
+  formIds: string[] = scenario.forms.map((form) => form.formId),
 ): Promise<ReturnType<typeof evaluateAllForms> & { catalog: Catalog }> {
-  const decisions = decisionsWithPreparerStyle(s);
+  const decisions = decisionsWithPreparerStyle(scenario);
   const ctx: DerivationContext = {
-    taxYear: s.taxYear,
-    facts: makeFactsView(s.facts),
+    taxYear: scenario.taxYear,
+    facts: makeFactsView(scenario.facts),
     decisions: makeDecisionsView(decisions),
     /* The engine throws when ctx.filingInfo is missing. */
     filingInfo: resolveFilingInfo({
-      facts: s.facts.map((f) => ({
-        key: f.key,
-        value: f.value,
-        category: f.category,
+      facts: scenario.facts.map((fact) => ({
+        key: fact.key,
+        value: fact.value,
+        category: fact.category,
       })),
-      decisions: decisions.map((d) => ({
-        decisionKey: d.decisionKey,
-        decision: d.decision,
+      decisions: decisions.map((decision) => ({
+        decisionKey: decision.decisionKey,
+        decision: decision.decision,
       })),
     }),
   };
@@ -79,16 +79,16 @@ export async function evaluateScenarioForms(
   return { ...evaluateAllForms(formIds, ctx, catalog), catalog };
 }
 
-export async function runScenario(s: Scenario): Promise<RunResult> {
+export async function runScenario(scenario: Scenario): Promise<RunResult> {
   const t0 = Date.now();
   const failures: string[] = [];
-  const notModeled: string[] | undefined = s.allowNotModeled ? [] : undefined;
-  const known = s.allowNotModeled
-    ? { causes: s.knownMismatches ?? {}, hits: [] as string[] }
+  const notModeled: string[] | undefined = scenario.allowNotModeled ? [] : undefined;
+  const known = scenario.allowNotModeled
+    ? { causes: scenario.knownMismatches ?? {}, hits: [] as string[] }
     : undefined;
 
-  const specs = s.forms.map((sf) => ({ sf, spec: getFormSpec(sf.formId) }));
-  const { forms, passes, resolvedPerPass, catalog } = await evaluateScenarioForms(s);
+  const specs = scenario.forms.map((sf) => ({ sf, spec: getFormSpec(sf.formId) }));
+  const { forms, passes, resolvedPerPass, catalog } = await evaluateScenarioForms(scenario);
 
   for (const { sf, spec } of specs) {
     const evaluated = forms.get(sf.formId);
@@ -98,7 +98,7 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
     }
     await assertForm(
       sf,
-      blankPdfPath({ relativeDir: spec.relativeDir, taxYear: s.taxYear }),
+      blankPdfPath({ relativeDir: spec.relativeDir, taxYear: scenario.taxYear }),
       evaluated,
       catalog,
       failures,
@@ -108,7 +108,7 @@ export async function runScenario(s: Scenario): Promise<RunResult> {
   }
 
   return {
-    name: s.name,
+    name: scenario.name,
     passed: failures.length === 0,
     failures,
     durationMs: Date.now() - t0,
@@ -138,7 +138,7 @@ async function assertForm(
 
   if (notModeled) {
     /* Not-modeled reporting would also hide a typo in an expected fieldId. */
-    const known = new Set(catalog.getFields(sf.formId).map((f) => f.fieldId));
+    const known = new Set(catalog.getFields(sf.formId).map((field) => field.fieldId));
     const ids = [...Object.keys(sf.expected.engineFields), ...sf.expected.renderedChecked];
     for (const id of ids) {
       if (!known.has(id)) failures.push(`[${prefix}] unknown fieldId ${id} (not in catalog).`);
@@ -168,8 +168,8 @@ async function assertForm(
     assertNotRendered(rendered, fieldId, failures, prefix);
   }
   for (const fieldId of sf.expected.renderedChecked) {
-    const f = form.fields.find((x) => x.fieldId === fieldId);
-    if (notModeled && (!f || (!f.result.ok && f.result.unsupported))) {
+    const field = form.fields.find((candidate) => candidate.fieldId === fieldId);
+    if (notModeled && (!field || (!field.result.ok && field.result.unsupported))) {
       notModeled.push(`[${prefix}] ${fieldId} (expected checked)`);
       continue;
     }
@@ -184,6 +184,6 @@ async function assertForm(
 
   if (warnings.length > 0) {
     failures.push(`[${prefix}] fillForm produced ${warnings.length} warning(s):`);
-    for (const w of warnings) failures.push(`  - ${w}`);
+    for (const warning of warnings) failures.push(`  - ${warning}`);
   }
 }

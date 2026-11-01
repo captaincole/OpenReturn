@@ -32,20 +32,20 @@ async function loadScenario(name: string): Promise<Scenario> {
   );
 }
 
-function buildContext(s: Scenario): DerivationContext {
+function buildContext(scenario: Scenario): DerivationContext {
   return {
-    taxYear: s.taxYear,
-    facts: makeFactsView(s.facts),
-    decisions: makeDecisionsView(s.decisions),
+    taxYear: scenario.taxYear,
+    facts: makeFactsView(scenario.facts),
+    decisions: makeDecisionsView(scenario.decisions),
     filingInfo: resolveFilingInfo({
-      facts: s.facts.map((f) => ({
-        key: f.key,
-        value: f.value,
-        category: f.category,
+      facts: scenario.facts.map((fact) => ({
+        key: fact.key,
+        value: fact.value,
+        category: fact.category,
       })),
-      decisions: s.decisions.map((d) => ({
-        decisionKey: d.decisionKey,
-        decision: d.decision,
+      decisions: scenario.decisions.map((decision) => ({
+        decisionKey: decision.decisionKey,
+        decision: decision.decision,
       })),
     }),
   };
@@ -76,25 +76,25 @@ async function main() {
     throw new Error("usage: tsx scripts/renderScenario.ts --scenario=<name>");
   }
 
-  const s = await loadScenario(name);
+  const scenario = await loadScenario(name);
 
-  const specs = s.forms.map((sf) => getFormSpec(sf.formId));
+  const specs = scenario.forms.map((sf) => getFormSpec(sf.formId));
 
   /* Register every form's bindings before evaluation (side effects). */
   for (const spec of specs) spec.register?.();
 
-  const ctx = buildContext(s);
+  const ctx = buildContext(scenario);
 
   const catalog = await loadFromFixtures(specs.map(catalogPath));
 
   const { forms, passes } = evaluateAllForms(
-    s.forms.map((f) => f.formId),
+    scenario.forms.map((form) => form.formId),
     ctx,
     catalog,
   );
 
   console.log(
-    `Rendering ${s.forms.length} form(s) for scenario "${s.name}" (engine converged in ${passes} pass${passes === 1 ? "" : "es"}):\n`,
+    `Rendering ${scenario.forms.length} form(s) for scenario "${scenario.name}" (engine converged in ${passes} pass${passes === 1 ? "" : "es"}):\n`,
   );
 
   const docsDir = resolve(ENGINE_ROOT, `tests/scenarios/${name}/docs`);
@@ -107,17 +107,21 @@ async function main() {
     }
 
     const blankPdfBytes = await readFile(
-      blankPdfPath({ relativeDir: spec.relativeDir, taxYear: s.taxYear }),
+      blankPdfPath({ relativeDir: spec.relativeDir, taxYear: scenario.taxYear }),
     );
     const { pdfBytes, warnings, copies } = values.golden
       ? await renderGolden(evaluated, catalog, blankPdfBytes)
       : await renderFormCopies({ spec, form: evaluated, ctx, catalog, blankPdfBytes });
 
-    const outName = scenarioPdfName(s.name, spec.formId, values.golden ? "Golden" : "rendered");
+    const outName = scenarioPdfName(
+      scenario.name,
+      spec.formId,
+      values.golden ? "Golden" : "rendered",
+    );
     const outPath = resolve(docsDir, outName);
     await writeFile(outPath, pdfBytes);
 
-    const filled = evaluated.fields.filter((f) => f.result.ok).length;
+    const filled = evaluated.fields.filter((field) => field.result.ok).length;
     const total = evaluated.fields.length;
     console.log(
       `  ✓ ${spec.formId.padEnd(14)} → ${outName}  (${filled}/${total} fields filled${copies > 1 ? `, ${copies} copies` : ""}${warnings.length ? `, ${warnings.length} warning(s)` : ""})`,
@@ -125,7 +129,7 @@ async function main() {
   }
 }
 
-main().catch((e) => {
-  console.error(e);
+main().catch((err) => {
+  console.error(err);
   process.exit(1);
 });

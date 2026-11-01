@@ -34,13 +34,13 @@ export function isHouseholdEmployeeFactKey(key: string): boolean {
   return HH_KEY_RE.test(key);
 }
 
-export function isHouseholdEmployeeFact(f: TaxFactRow): boolean {
-  return f.category === HH_CATEGORY && HH_KEY_RE.test(f.key);
+export function isHouseholdEmployeeFact(fact: TaxFactRow): boolean {
+  return fact.category === HH_CATEGORY && HH_KEY_RE.test(fact.key);
 }
 
 export function getHouseholdEmployeeFacts(facts: FactsView): HouseholdEmployeeFactValue[] {
   return facts
     .byCategory(HH_CATEGORY)
     .filter(isHouseholdEmployeeFact)
-    .map((f) => f.value as HouseholdEmployeeFactValue);
+    .map((fact) => fact.value as HouseholdEmployeeFactValue);
 }

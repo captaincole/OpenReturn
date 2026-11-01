@@ -33,9 +33,13 @@ interface Outcome {
   pending: Set<string>;
 }
 
-function evaluate(s: Scenario, facts: TaxFactRow[], decisions: AIDecisionRow[]): Outcome {
+function evaluate(
+  baseScenario: Scenario,
+  facts: TaxFactRow[],
+  decisions: AIDecisionRow[],
+): Outcome {
   const scenario = evaluateScenario({
-    filing: { id: s.name, taxYear: s.taxYear },
+    filing: { id: baseScenario.name, taxYear: baseScenario.taxYear },
     facts,
     decisions,
     authEmail: null,
@@ -44,8 +48,8 @@ function evaluate(s: Scenario, facts: TaxFactRow[], decisions: AIDecisionRow[]):
   for (const [formId, form] of scenario.forms) {
     values.set(`${formId}.mustFile`, JSON.stringify(form.mustFile.ok && form.mustFile.value));
     if (!form.mustFile.ok || !form.mustFile.value) continue;
-    for (const f of form.fields) {
-      values.set(f.fieldId, f.result.ok ? JSON.stringify(f.result.value) : "(blank)");
+    for (const field of form.fields) {
+      values.set(field.fieldId, field.result.ok ? JSON.stringify(field.result.value) : "(blank)");
     }
   }
   const { pendingDecisions, pendingFacts } = pendingInputs(scenario);
@@ -60,31 +64,31 @@ function unreported(base: Outcome, dropped: Outcome): string[] {
     .map((id) => `${id}: ${base.values.get(id)} → ${dropped.values.get(id)}`);
 }
 
-describe.each(SCENARIOS)("required inputs: $name", (s) => {
-  const decisions = decisionsWithPreparerStyle(s);
-  const base = evaluate(s, s.facts, decisions);
+describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
+  const decisions = decisionsWithPreparerStyle(scenario);
+  const base = evaluate(scenario, scenario.facts, decisions);
   const answers = [
-    ...decisions.map((d) => ({
-      key: d.decisionKey,
+    ...decisions.map((decision) => ({
+      key: decision.decisionKey,
       drop: () =>
         evaluate(
-          s,
-          s.facts,
-          decisions.filter((x) => x !== d),
+          scenario,
+          scenario.facts,
+          decisions.filter((other) => other !== decision),
         ),
     })),
-    ...s.facts
-      .filter((f) => !isDocument(f.key))
-      .map((f) => ({
-        key: f.key,
+    ...scenario.facts
+      .filter((fact) => !isDocument(fact.key))
+      .map((fact) => ({
+        key: fact.key,
         drop: () =>
           evaluate(
-            s,
-            s.facts.filter((x) => x !== f),
+            scenario,
+            scenario.facts.filter((other) => other !== fact),
             decisions,
           ),
       })),
-  ].filter((a) => !isOptional(a.key));
+  ].filter((input) => !isOptional(input.key));
 
   it.each(answers)("missing $key is reported", ({ drop }) => {
     expect(unreported(base, drop()).slice(0, 3)).toEqual([]);

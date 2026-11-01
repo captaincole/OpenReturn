@@ -14,9 +14,9 @@ export function makeResolverInputs(opts: {
   decisions: ReadonlyArray<{ decisionKey: string; decision: unknown }>;
 }): ResolverInputs {
   const factByKey = new Map<string, unknown>();
-  for (const f of opts.facts) factByKey.set(f.key, f.value);
+  for (const fact of opts.facts) factByKey.set(fact.key, fact.value);
   const decisionByKey = new Map<string, unknown>();
-  for (const d of opts.decisions) decisionByKey.set(d.decisionKey, d.decision);
+  for (const decision of opts.decisions) decisionByKey.set(decision.decisionKey, decision.decision);
   return {
     facts: opts.facts,
     factByKey,
@@ -26,28 +26,28 @@ export function makeResolverInputs(opts: {
 }
 
 export function text(inputs: ResolverInputs, key: string): string | undefined {
-  const v = inputs.factByKey.get(key);
-  if (v === undefined || v === null || v === "") return undefined;
-  if (typeof v !== "string") {
+  const value = inputs.factByKey.get(key);
+  if (value === undefined || value === null || value === "") return undefined;
+  if (typeof value !== "string") {
     throw new Error(
-      `resolveFilingInfo: fact "${key}" expected string, got ${typeof v} ` +
-        `(value=${JSON.stringify(v).slice(0, 100)}). Re-record this fact as a ` +
+      `resolveFilingInfo: fact "${key}" expected string, got ${typeof value} ` +
+        `(value=${JSON.stringify(value).slice(0, 100)}). Re-record this fact as a ` +
         `plain string via record-tax-facts.`,
     );
   }
-  return v;
+  return value;
 }
 
 export function num(inputs: ResolverInputs, key: string): number | undefined {
-  const v = inputs.factByKey.get(key);
-  return typeof v === "number" && Number.isFinite(v) ? v : undefined;
+  const value = inputs.factByKey.get(key);
+  return typeof value === "number" && Number.isFinite(value) ? value : undefined;
 }
 
 export function factsInCategory(
   inputs: ResolverInputs,
   cat: string,
 ): Array<{ key: string; value: unknown }> {
-  return inputs.facts.filter((f) => f.category === cat);
+  return inputs.facts.filter((fact) => fact.category === cat);
 }
 
 export function sumW2Box(inputs: ResolverInputs, boxKey: string): number {
@@ -78,8 +78,8 @@ export function sumCaSdi(wageRows: Array<{ value: unknown }>): number {
   });
   return sum(
     ...box14
-      .filter((e) => typeof e?.label === "string" && /CA\s*SDI/i.test(e.label))
-      .map((e) => e.amount),
+      .filter((entry) => typeof entry?.label === "string" && /CA\s*SDI/i.test(entry.label))
+      .map((entry) => entry.amount),
   );
 }
 

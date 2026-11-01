@@ -22,13 +22,13 @@ export function isSocialSecurityFactKey(key: string): boolean {
   return SS_KEY_RE.test(key);
 }
 
-export function isSocialSecurityFact(f: TaxFactRow): boolean {
-  return f.category === SS_CATEGORY && SS_KEY_RE.test(f.key);
+export function isSocialSecurityFact(fact: TaxFactRow): boolean {
+  return fact.category === SS_CATEGORY && SS_KEY_RE.test(fact.key);
 }
 
 export function getSocialSecurityFacts(facts: FactsView): SocialSecurityFactValue[] {
   return facts
     .byCategory(SS_CATEGORY)
     .filter(isSocialSecurityFact)
-    .map((f) => f.value as SocialSecurityFactValue);
+    .map((fact) => fact.value as SocialSecurityFactValue);
 }

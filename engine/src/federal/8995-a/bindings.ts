@@ -25,21 +25,25 @@ function qbiLimits(info: Form8995AFilingInfo) {
   return info.filingStatus ? QBI_LIMITS[info.filingStatus] : undefined;
 }
 
-function taxableIncomeBeforeQbi(f: Read): number {
-  return sum(f["form-1040.line.11a"], -sum(f["form-1040.line.12e"]), -sum(f["form-1040.line.13b"]));
+function taxableIncomeBeforeQbi(form: Read): number {
+  return sum(
+    form["form-1040.line.11a"],
+    -sum(form["form-1040.line.12e"]),
+    -sum(form["form-1040.line.13b"]),
+  );
 }
 
 /*
  * 8995-A instr., Part III: only when taxable income is in the phase-in
  * range and line 10 is less than line 3.
  */
-function inPartIII<T>(f: Read, info: Form8995AFilingInfo, value: () => T): T | undefined {
+function inPartIII<T>(form: Read, info: Form8995AFilingInfo, value: () => T): T | undefined {
   const limits = qbiLimits(info);
   if (!limits) return undefined;
-  const income = taxableIncomeBeforeQbi(f);
+  const income = taxableIncomeBeforeQbi(form);
   if (income <= limits.threshold || income > limits.threshold + limits.range) return undefined;
   const limited = (["a", "b", "c"] as const).some(
-    (c) => sum(f[`0.line.10_${c}`]) < sum(f[`0.line.3_${c}`]),
+    (column) => sum(form[`0.line.10_${column}`]) < sum(form[`0.line.3_${column}`]),
   );
   return limited ? value() : undefined;
 }
@@ -49,69 +53,86 @@ export function register(): void {
     bindings: {
       // MANUAL EDIT: Part IV for the REIT-dividend path.
       "1.line.28": (_, info) => roundDollars(info.qualifiedReitDividends),
-      "1.line.31": (f) => {
-        const v = f["1.line.30"];
-        return typeof v === "number" ? roundDollars(v * 0.2) : undefined;
+      "1.line.31": (form) => {
+        const value = form["1.line.30"];
+        return typeof value === "number" ? roundDollars(value * 0.2) : undefined;
       },
-      "1.line.33": (f) => {
-        const agi = f["form-1040.line.11b"];
+      "1.line.33": (form) => {
+        const agi = form["form-1040.line.11b"];
         if (typeof agi !== "number") return undefined;
-        return atLeast(0, sum(agi, -sum(f["form-1040.line.12e"]), -sum(f["form-1040.line.13b"])));
-      },
-      "1.line.34": (f) => {
-        const num = (v: unknown) => (typeof v === "number" ? v : undefined);
-        const gain = netCapitalGain(
-          num(f["schedule-d.0.line.15_net_long_term_gain_loss"]),
-          num(f["schedule-d.1.line.16_combined_gain_loss"]),
-          num(f["form-1040.line.7a"]),
+        return atLeast(
+          0,
+          sum(agi, -sum(form["form-1040.line.12e"]), -sum(form["form-1040.line.13b"])),
         );
-        return sum(f["form-1040.line.3a"], gain);
       },
-      "1.line.36": (f) => {
-        const v = f["1.line.35"];
-        return typeof v === "number" ? roundDollars(v * 0.2) : undefined;
+      "1.line.34": (form) => {
+        const num = (value: unknown) => (typeof value === "number" ? value : undefined);
+        const gain = netCapitalGain(
+          num(form["schedule-d.0.line.15_net_long_term_gain_loss"]),
+          num(form["schedule-d.1.line.16_combined_gain_loss"]),
+          num(form["form-1040.line.7a"]),
+        );
+        return sum(form["form-1040.line.3a"], gain);
       },
-      "1.line.37": (f) => {
-        const a = f["1.line.32"];
-        const b = f["1.line.36"];
-        return typeof a === "number" && typeof b === "number" ? Math.min(a, b) : undefined;
+      "1.line.36": (form) => {
+        const value = form["1.line.35"];
+        return typeof value === "number" ? roundDollars(value * 0.2) : undefined;
+      },
+      "1.line.37": (form) => {
+        const line32 = form["1.line.32"];
+        const line36 = form["1.line.36"];
+        return typeof line32 === "number" && typeof line36 === "number"
+          ? Math.min(line32, line36)
+          : undefined;
       },
       "0.header.taxpayer_id": (_, info) => info.taxpayerSSN,
-      "0.line.9_a": (f) => sum(f["0.line.6_a"], f["0.line.8_a"]),
-      "0.line.9_b": (f) => sum(f["0.line.6_b"], f["0.line.8_b"]),
-      "0.line.9_c": (f) => sum(f["0.line.6_c"], f["0.line.8_c"]),
-      "0.line.12_a": (f) => sum(f["1.line.26_a"]),
-      "0.line.12_b": (f) => sum(f["1.line.26_b"]),
-      "0.line.12_c": (f) => sum(f["1.line.26_c"]),
-      "0.line.15_a": (f) =>
-        atLeast(0, sum(f["0.line.13_a"], f["0.line.14_a"] === undefined ? 0 : -f["0.line.14_a"])),
-      "0.line.15_b": (f) =>
-        atLeast(0, sum(f["0.line.13_b"], f["0.line.14_b"] === undefined ? 0 : -f["0.line.14_b"])),
-      "0.line.15_c": (f) =>
-        atLeast(0, sum(f["0.line.13_c"], f["0.line.14_c"] === undefined ? 0 : -f["0.line.14_c"])),
-      "0.line.16": (f) => sum(f["0.line.15_a"], f["0.line.15_b"], f["0.line.15_c"]),
+      "0.line.9_a": (form) => sum(form["0.line.6_a"], form["0.line.8_a"]),
+      "0.line.9_b": (form) => sum(form["0.line.6_b"], form["0.line.8_b"]),
+      "0.line.9_c": (form) => sum(form["0.line.6_c"], form["0.line.8_c"]),
+      "0.line.12_a": (form) => sum(form["1.line.26_a"]),
+      "0.line.12_b": (form) => sum(form["1.line.26_b"]),
+      "0.line.12_c": (form) => sum(form["1.line.26_c"]),
+      "0.line.15_a": (form) =>
+        atLeast(
+          0,
+          sum(form["0.line.13_a"], form["0.line.14_a"] === undefined ? 0 : -form["0.line.14_a"]),
+        ),
+      "0.line.15_b": (form) =>
+        atLeast(
+          0,
+          sum(form["0.line.13_b"], form["0.line.14_b"] === undefined ? 0 : -form["0.line.14_b"]),
+        ),
+      "0.line.15_c": (form) =>
+        atLeast(
+          0,
+          sum(form["0.line.13_c"], form["0.line.14_c"] === undefined ? 0 : -form["0.line.14_c"]),
+        ),
+      "0.line.16": (form) => sum(form["0.line.15_a"], form["0.line.15_b"], form["0.line.15_c"]),
       // MANUAL EDIT: Part III fills only through inPartIII. REIT/PTP-only filers skip Parts I–III.
-      "1.line.17_a": (f, info) => inPartIII(f, info, () => sum(f["0.line.3_a"])),
-      "1.line.17_b": (f, info) => inPartIII(f, info, () => sum(f["0.line.3_b"])),
-      "1.line.17_c": (f, info) => inPartIII(f, info, () => sum(f["0.line.3_c"])),
-      "1.line.18_a": (f, info) => inPartIII(f, info, () => sum(f["0.line.10_a"])),
-      "1.line.18_b": (f, info) => inPartIII(f, info, () => sum(f["0.line.10_b"])),
-      "1.line.18_c": (f, info) => inPartIII(f, info, () => sum(f["0.line.10_c"])),
-      "1.line.19_a": (f, info) =>
-        inPartIII(f, info, () => sum(f["1.line.17_a"], -sum(f["1.line.18_a"]))),
-      "1.line.19_b": (f, info) =>
-        inPartIII(f, info, () => sum(f["1.line.17_b"], -sum(f["1.line.18_b"]))),
-      "1.line.19_c": (f, info) =>
-        inPartIII(f, info, () => sum(f["1.line.17_c"], -sum(f["1.line.18_c"]))),
-      "1.line.20": (f, info) => inPartIII(f, info, () => taxableIncomeBeforeQbi(f)),
-      "1.line.21": (f, info) => inPartIII(f, info, () => qbiLimits(info)?.threshold),
-      "1.line.23": (f, info) => inPartIII(f, info, () => qbiLimits(info)?.range),
-      "1.line.27": (f) => sum(f["0.line.16"]),
-      "1.line.30": (f) => atLeast(0, sum(f["1.line.28"], f["1.line.29"])),
-      "1.line.32": (f) => sum(f["1.line.27"], f["1.line.31"]),
-      "1.line.35": (f) =>
-        atLeast(0, sum(f["1.line.33"], f["1.line.34"] === undefined ? 0 : -f["1.line.34"])),
-      "1.line.39": (f) => sum(f["1.line.37"], f["1.line.38"]),
+      "1.line.17_a": (form, info) => inPartIII(form, info, () => sum(form["0.line.3_a"])),
+      "1.line.17_b": (form, info) => inPartIII(form, info, () => sum(form["0.line.3_b"])),
+      "1.line.17_c": (form, info) => inPartIII(form, info, () => sum(form["0.line.3_c"])),
+      "1.line.18_a": (form, info) => inPartIII(form, info, () => sum(form["0.line.10_a"])),
+      "1.line.18_b": (form, info) => inPartIII(form, info, () => sum(form["0.line.10_b"])),
+      "1.line.18_c": (form, info) => inPartIII(form, info, () => sum(form["0.line.10_c"])),
+      "1.line.19_a": (form, info) =>
+        inPartIII(form, info, () => sum(form["1.line.17_a"], -sum(form["1.line.18_a"]))),
+      "1.line.19_b": (form, info) =>
+        inPartIII(form, info, () => sum(form["1.line.17_b"], -sum(form["1.line.18_b"]))),
+      "1.line.19_c": (form, info) =>
+        inPartIII(form, info, () => sum(form["1.line.17_c"], -sum(form["1.line.18_c"]))),
+      "1.line.20": (form, info) => inPartIII(form, info, () => taxableIncomeBeforeQbi(form)),
+      "1.line.21": (form, info) => inPartIII(form, info, () => qbiLimits(info)?.threshold),
+      "1.line.23": (form, info) => inPartIII(form, info, () => qbiLimits(info)?.range),
+      "1.line.27": (form) => sum(form["0.line.16"]),
+      "1.line.30": (form) => atLeast(0, sum(form["1.line.28"], form["1.line.29"])),
+      "1.line.32": (form) => sum(form["1.line.27"], form["1.line.31"]),
+      "1.line.35": (form) =>
+        atLeast(
+          0,
+          sum(form["1.line.33"], form["1.line.34"] === undefined ? 0 : -form["1.line.34"]),
+        ),
+      "1.line.39": (form) => sum(form["1.line.37"], form["1.line.38"]),
     },
 
     unsupported: {

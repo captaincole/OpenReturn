@@ -18,8 +18,8 @@ function ctx(opts: {
   } as unknown as EngineContext;
 }
 
-function readWaits(c: EngineContext, fieldId: string): boolean {
-  const reads = trackPendingReads(c, "form-8960");
+function readWaits(engineCtx: EngineContext, fieldId: string): boolean {
+  const reads = trackPendingReads(engineCtx, "form-8960");
   reads.ctx.fieldResult(fieldId);
   return reads.hadPendingRead();
 }

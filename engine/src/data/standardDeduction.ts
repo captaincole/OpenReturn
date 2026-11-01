@@ -53,7 +53,9 @@ export function lookupStandardDeduction(
   taxYear: number,
   filingStatus: FilingStatus,
 ): number | undefined {
-  const table = TABLES.find((t) => t.jurisdiction === jurisdiction && t.taxYear === taxYear);
+  const table = TABLES.find(
+    (entry) => entry.jurisdiction === jurisdiction && entry.taxYear === taxYear,
+  );
   return table?.byFilingStatus[filingStatus];
 }
 

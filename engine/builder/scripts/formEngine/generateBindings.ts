@@ -12,8 +12,8 @@ function findDefaultCatalog(formId: string, _taxYear: number): string {
     `state/ca/${shortName}/catalog.json`,
     `state/ny/${shortName}/catalog.json`,
   ];
-  for (const c of candidates) {
-    const abs = resolve(engineSrcDir, c);
+  for (const candidate of candidates) {
+    const abs = resolve(engineSrcDir, candidate);
     if (existsSync(abs)) return abs;
   }
   /* The federal fallback makes runGenerateBindings fail with a clear "file not found". */
@@ -34,7 +34,7 @@ function findDefaultOutput(catalogPath: string): string {
 
 function parseCmdArgs(argv: string[]): Args {
   const get = (flag: string): string | undefined => {
-    const arg = argv.find((a) => a.startsWith(`${flag}=`));
+    const arg = argv.find((candidate) => candidate.startsWith(`${flag}=`));
     return arg ? arg.slice(flag.length + 1) : undefined;
   };
   const formId = get("--form-id");
@@ -93,7 +93,7 @@ async function run(argv: string[]): Promise<void> {
     console.log(`    ${level}: ${result.confidenceBreakdown[level] ?? 0}`);
   }
   console.log(`  Rule breakdown:`);
-  const sorted = Object.entries(result.ruleBreakdown).sort((a, b) => b[1] - a[1]);
+  const sorted = Object.entries(result.ruleBreakdown).sort((left, right) => right[1] - left[1]);
   for (const [rule, count] of sorted) {
     console.log(`    ${rule}: ${count}`);
   }
