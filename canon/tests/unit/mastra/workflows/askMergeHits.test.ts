@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { mergeByRank } from "../../../../src/mastra/workflows/ask/mergeHits";
 
 const hits = (...ids: string[]) => ids.map((blockId) => ({ blockId }));
-const ids = (list: { blockId: string }[]) => list.map((h) => h.blockId);
+const ids = (list: { blockId: string }[]) => list.map((hit) => hit.blockId);
 
 describe("mergeByRank", () => {
   it("takes each query's top hits in turn, whatever the score scale", () => {

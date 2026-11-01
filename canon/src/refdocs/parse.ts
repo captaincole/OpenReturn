@@ -62,10 +62,10 @@ const RUN_IN_HEADING_RE = new RegExp(
 
 function detectRunInHeading(line: string): HeadingMatch | null {
   const lead = line.length - line.trimStart().length;
-  const m = line.trimStart().match(RUN_IN_HEADING_RE);
-  if (!m) return null;
-  const bodyOffset = lead + line.trimStart().indexOf(m[2], m[1].length);
-  return { heading: m[1], slug: slugifyHeading(m[1]), inlineBodyOffset: bodyOffset };
+  const match = line.trimStart().match(RUN_IN_HEADING_RE);
+  if (!match) return null;
+  const bodyOffset = lead + line.trimStart().indexOf(match[2], match[1].length);
+  return { heading: match[1], slug: slugifyHeading(match[1]), inlineBodyOffset: bodyOffset };
 }
 
 /*
@@ -73,50 +73,61 @@ function detectRunInHeading(line: string): HeadingMatch | null {
  * such as the second line of a Title Case bullet.
  */
 export function isProseHeading(line: string, prevLine: string | null): boolean {
-  const t = line.trim();
-  if (t.length < 3 || t.length > 60) return false;
-  if (/[.,;:]$/.test(t) || t.startsWith("•") || /^\d/.test(t) || /^See /.test(t)) return false;
-  if (!/^[A-Z]/.test(t) || !isTitleCaseLine(t)) return false;
+  const trimmed = line.trim();
+  if (trimmed.length < 3 || trimmed.length > 60) return false;
+  if (
+    /[.,;:]$/.test(trimmed) ||
+    trimmed.startsWith("•") ||
+    /^\d/.test(trimmed) ||
+    /^See /.test(trimmed)
+  )
+    return false;
+  if (!/^[A-Z]/.test(trimmed) || !isTitleCaseLine(trimmed)) return false;
   // Rejects one-word worksheet cells and flowchart answers ("Yes No").
-  const words = t.split(/\s+/);
-  if (words.length < 2 || words.every((w) => w === "Yes" || w === "No")) return false;
+  const words = trimmed.split(/\s+/);
+  if (words.length < 2 || words.every((word) => word === "Yes" || word === "No")) return false;
   // Table rows and dates are mostly numbers.
-  if (words.filter((w) => /\d/.test(w)).length * 2 > words.length) return false;
+  if (words.filter((word) => /\d/.test(word)).length * 2 > words.length) return false;
   if (prevLine === null) return true;
   return /[.:?!)]$/.test(prevLine.trim());
 }
 
 // Worksheet and table cells fail this: their neighbors are Title Case cells too.
 export function hasBodyAfter(lines: ReadonlyArray<{ text: string }>, i: number): boolean {
-  for (let j = i + 1; j < lines.length && j <= i + 1 + MAX_HEADING_CONTINUATION_LINES; j++) {
-    const t = lines[j].text.trim();
-    if (t.length === 0) continue;
-    if (!isTitleCaseLine(t) || /[.:]$/.test(t)) return /[a-z]/.test(t);
+  for (
+    let next = i + 1;
+    next < lines.length && next <= i + 1 + MAX_HEADING_CONTINUATION_LINES;
+    next++
+  ) {
+    const trimmed = lines[next].text.trim();
+    if (trimmed.length === 0) continue;
+    if (!isTitleCaseLine(trimmed) || /[.:]$/.test(trimmed)) return /[a-z]/.test(trimmed);
   }
   return false;
 }
 
-function detectFtbHeading(line: string, t: string): HeadingMatch | null {
-  if (FTB_KNOWN_PROSE_HEADINGS.has(t)) {
-    return { heading: t, slug: slugifyHeading(t) };
+function detectFtbHeading(line: string, trimmed: string): HeadingMatch | null {
+  if (FTB_KNOWN_PROSE_HEADINGS.has(trimmed)) {
+    return { heading: trimmed, slug: slugifyHeading(trimmed) };
   }
-  if (FTB_LINE_EN_DASH_RE.test(t)) {
+  if (FTB_LINE_EN_DASH_RE.test(trimmed)) {
     // "Line 2a – Alimony Received" is a title; "Line 1 – Enter your…" starts the body.
     const dash = line.indexOf("–");
     const rest = line.slice(dash + 1).trim();
     if (isTitleCaseLine(rest) && !/[.:]$/.test(rest)) {
-      return { heading: t, slug: slugifyHeading(t) };
+      return { heading: trimmed, slug: slugifyHeading(trimmed) };
     }
     const label = line.slice(0, dash).trim();
     let bodyOffset = dash + 1;
     while (bodyOffset < line.length && /\s/.test(line[bodyOffset])) bodyOffset += 1;
     return { heading: label, slug: slugifyHeading(label), inlineBodyOffset: bodyOffset };
   }
-  const m = t.match(FTB_INLINE_DASH_RE);
-  if (m) {
-    const prefix = m[1].trim();
+  const match = trimmed.match(FTB_INLINE_DASH_RE);
+  if (match) {
+    const prefix = match[1].trim();
     const prefixWords = prefix.split(/\s+/);
-    const mostlyNumbers = prefixWords.filter((w) => /\d/.test(w)).length * 2 > prefixWords.length;
+    const mostlyNumbers =
+      prefixWords.filter((word) => /\d/.test(word)).length * 2 > prefixWords.length;
     if (isTitleCaseLine(prefix) && !mostlyNumbers) {
       // Search the untrimmed line: the offset is relative to line.charStart.
       const dashIdx = line.indexOf("–");
@@ -144,33 +155,33 @@ function detectFtbHeading(line: string, t: string): HeadingMatch | null {
 const WORKSHEET_TITLE_RE =
   /^((\d{4} )?[A-Z][^.]{0,90}?(?:Worksheet|Tax Rate Schedules|Tax Table)(—Lines? \d+[a-z]?(?:,? (?:and|through) \d+[a-z]?)?)?)((?:\s*(?:Keep for Your Records|CAUTION))*)\s*!?$/;
 
-function detectWorksheetTitle(t: string): HeadingMatch | null {
-  const m = t.match(WORKSHEET_TITLE_RE);
-  if (!m || !(m[2] || m[3] || m[4])) return null;
-  return { heading: m[1], slug: slugifyHeading(m[1]) };
+function detectWorksheetTitle(text: string): HeadingMatch | null {
+  const match = text.match(WORKSHEET_TITLE_RE);
+  if (!match || !(match[2] || match[3] || match[4])) return null;
+  return { heading: match[1], slug: slugifyHeading(match[1]) };
 }
 
 function detectHeading(line: string, style: ParserStyle = "irs"): HeadingMatch | null {
-  const t = line.trim();
-  const runIn = detectRunInHeading(line) ?? detectWorksheetTitle(t);
+  const trimmed = line.trim();
+  const runIn = detectRunInHeading(line) ?? detectWorksheetTitle(trimmed);
   if (runIn) return runIn;
   if (
-    LINE_HEADING_RE.test(t) ||
-    LINE_DASH_HEADING_RE.test(t) ||
-    LINES_LIST_HEADING_RE.test(t) ||
-    LINES_RANGE_HEADING_RE.test(t) ||
-    PART_HEADING_RE.test(t) ||
-    SCHEDULE_HEADING_RE.test(t) ||
-    KNOWN_PROSE_HEADINGS.has(t)
+    LINE_HEADING_RE.test(trimmed) ||
+    LINE_DASH_HEADING_RE.test(trimmed) ||
+    LINES_LIST_HEADING_RE.test(trimmed) ||
+    LINES_RANGE_HEADING_RE.test(trimmed) ||
+    PART_HEADING_RE.test(trimmed) ||
+    SCHEDULE_HEADING_RE.test(trimmed) ||
+    KNOWN_PROSE_HEADINGS.has(trimmed)
   ) {
-    return { heading: t, slug: slugifyHeading(t) };
+    return { heading: trimmed, slug: slugifyHeading(trimmed) };
   }
-  if (style === "ftb") return detectFtbHeading(line, t);
+  if (style === "ftb") return detectFtbHeading(line, trimmed);
   return null;
 }
 
-export function slugifyHeading(s: string): string {
-  return s
+export function slugifyHeading(text: string): string {
+  return text
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
@@ -202,10 +213,10 @@ const TITLE_CASE_SMALL_WORDS = new Set([
   "vs",
 ]);
 
-function isTitleCaseLine(t: string): boolean {
-  const words = t.split(/\s+/);
-  for (const w of words) {
-    const bare = w.replace(/[^A-Za-z]/g, "");
+function isTitleCaseLine(text: string): boolean {
+  const words = text.split(/\s+/);
+  for (const word of words) {
+    const bare = word.replace(/[^A-Za-z]/g, "");
     if (bare.length === 0) continue;
     if (TITLE_CASE_SMALL_WORDS.has(bare.toLowerCase())) continue;
     if (!/^[A-Z]/.test(bare)) return false;
@@ -214,12 +225,12 @@ function isTitleCaseLine(t: string): boolean {
 }
 
 function isHeadingContinuation(lineText: string): boolean {
-  const t = lineText.trim();
-  if (t.length === 0 || t.length > 60) return false;
-  if (!/[A-Za-z]/.test(t)) return false;
-  if (/[.!?]$/.test(t)) return false;
-  if (/^[a-z]/.test(t)) return false;
-  if (!isTitleCaseLine(t)) return false;
+  const trimmed = lineText.trim();
+  if (trimmed.length === 0 || trimmed.length > 60) return false;
+  if (!/[A-Za-z]/.test(trimmed)) return false;
+  if (/[.!?]$/.test(trimmed)) return false;
+  if (/^[a-z]/.test(trimmed)) return false;
+  if (!isTitleCaseLine(trimmed)) return false;
   return true;
 }
 
@@ -235,14 +246,14 @@ const IRS_FOOTER_RE =
   /^(?:\d{1,3} )?Instructions for (?:Form|Schedule) .*\(\d{4}\)(?: \d{1,3}| Catalog Number \w+)?$/;
 
 function isStructuralNoise(line: string): boolean {
-  const t = line.trim();
-  if (t.length === 0) return true;
-  if (PAGE_NUM_RE.test(t)) return true;
-  if (FOOTER_RE.test(t)) return true;
-  if (HEADER_CONTINUED_RE.test(t)) return true;
-  if (IRS_FOOTER_RE.test(t)) return true;
-  if (FTB_RUNNING_RE.test(t)) return true;
-  if (/^This Page Intentionally Left Blank$/i.test(t)) return true;
+  const trimmed = line.trim();
+  if (trimmed.length === 0) return true;
+  if (PAGE_NUM_RE.test(trimmed)) return true;
+  if (FOOTER_RE.test(trimmed)) return true;
+  if (HEADER_CONTINUED_RE.test(trimmed)) return true;
+  if (IRS_FOOTER_RE.test(trimmed)) return true;
+  if (FTB_RUNNING_RE.test(trimmed)) return true;
+  if (/^This Page Intentionally Left Blank$/i.test(trimmed)) return true;
   return false;
 }
 
@@ -391,18 +402,18 @@ class DocParser {
     }
 
     const continuationTexts: string[] = [];
-    let j = i + 1;
+    let next = i + 1;
     let consumed = 0;
     let lastConsumedEnd = line.charEnd;
     while (
-      j < lines.length &&
+      next < lines.length &&
       consumed < MAX_HEADING_CONTINUATION_LINES &&
-      !isStructuralNoise(lines[j].text) &&
-      isHeadingContinuation(lines[j].text)
+      !isStructuralNoise(lines[next].text) &&
+      isHeadingContinuation(lines[next].text)
     ) {
-      continuationTexts.push(lines[j].text.trim());
-      lastConsumedEnd = lines[j].charEnd;
-      j += 1;
+      continuationTexts.push(lines[next].text.trim());
+      lastConsumedEnd = lines[next].charEnd;
+      next += 1;
       consumed += 1;
     }
     const fullHeading =
@@ -417,7 +428,7 @@ class DocParser {
       firstLineStart: lastConsumedEnd,
       lastLineEnd: lastConsumedEnd,
     };
-    return j;
+    return next;
   }
 
   private flushPendingBlock(): void {
@@ -425,7 +436,7 @@ class DocParser {
     const start = this.pendingBlock.firstLineStart;
     const end = this.pendingBlock.lastLineEnd;
     // Section-anchored ids: a parser change elsewhere in the doc does not renumber them.
-    for (const [s, e] of end > start ? splitRange(this.canonicalText, start, end) : []) {
+    for (const [from, to] of end > start ? splitRange(this.canonicalText, start, end) : []) {
       this.blockInSection += 1;
       this.blocks.push({
         blockId: `${this.currentSection.sectionId}::b${String(this.blockInSection).padStart(2, "0")}`,
@@ -433,9 +444,9 @@ class DocParser {
         pageNum: this.pendingBlock.pageNum,
         blockType: "paragraph",
         ordinal: this.blockOrdinal,
-        text: this.canonicalText.slice(s, e),
-        charStart: s,
-        charEnd: e,
+        text: this.canonicalText.slice(from, to),
+        charStart: from,
+        charEnd: to,
       });
       this.blockOrdinal += 1;
     }

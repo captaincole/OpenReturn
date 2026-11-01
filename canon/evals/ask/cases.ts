@@ -19,4 +19,4 @@ export type { AskCase, Kind, Tier } from "./caseKit";
 export const CASES: AskCase[] = [...TIER_1, ...TIER_2, ...TIER_3];
 
 export const casesFor = (tier: "lite" | "full"): AskCase[] =>
-  tier === "full" ? CASES : CASES.filter((c) => c.lite);
+  tier === "full" ? CASES : CASES.filter((testCase) => testCase.lite);

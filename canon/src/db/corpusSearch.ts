@@ -66,7 +66,7 @@ function buildCitation(
 function toFtsMatchQuery(raw: string): string | null {
   const terms = raw.toLowerCase().match(/[a-z0-9]+/g);
   if (!terms || terms.length === 0) return null;
-  return terms.map((t) => `"${t}"`).join(" OR ");
+  return terms.map((term) => `"${term}"`).join(" OR ");
 }
 
 export async function getBlock(blockId: string): Promise<BlockDetail | null> {
@@ -82,26 +82,26 @@ export async function getBlock(blockId: string): Promise<BlockDetail | null> {
           WHERE b.block_id = ? LIMIT 1`,
     args: [blockId],
   });
-  const d = res.rows[0];
-  if (!d) return null;
-  const documentTitle = asStr(d.doc_title) || "(unknown)";
-  const sectionHeading = asStrOrNull(d.section_heading);
-  const pageNum = asNum(d.page_num);
-  const format = asFormat(d.format);
+  const row = res.rows[0];
+  if (!row) return null;
+  const documentTitle = asStr(row.doc_title) || "(unknown)";
+  const sectionHeading = asStrOrNull(row.section_heading);
+  const pageNum = asNum(row.page_num);
+  const format = asFormat(row.format);
   return {
-    blockId: asStr(d.block_id),
-    docId: asStr(d.doc_id),
+    blockId: asStr(row.block_id),
+    docId: asStr(row.doc_id),
     documentTitle,
     format,
-    publisher: asStr(d.publisher) || "(unknown)",
-    taxYear: asNumOrNull(d.tax_year),
-    sectionId: asStrOrNull(d.section_id),
+    publisher: asStr(row.publisher) || "(unknown)",
+    taxYear: asNumOrNull(row.tax_year),
+    sectionId: asStrOrNull(row.section_id),
     sectionHeading,
     pageNum,
-    blockType: asStr(d.block_type) as RefBlockType,
-    text: asStr(d.text),
-    charStart: asNum(d.char_start),
-    charEnd: asNum(d.char_end),
+    blockType: asStr(row.block_type) as RefBlockType,
+    text: asStr(row.text),
+    charStart: asNum(row.char_start),
+    charEnd: asNum(row.char_end),
     citation: buildCitation(documentTitle, sectionHeading, pageNum, format),
   };
 }
@@ -158,7 +158,7 @@ async function ftsLeg(
           LIMIT ?`,
     args: [ftsQuery, filterDocId, filterDocId, matchCount],
   });
-  for (const r of res.rows) ranks.set(asStr(r.block_id), asNum(r.rank));
+  for (const row of res.rows) ranks.set(asStr(row.block_id), asNum(row.rank));
   return ranks;
 }
 
@@ -178,7 +178,7 @@ async function vectorLeg(
           LIMIT ?`,
     args: [vectorLiteral(queryEmbedding), filterDocId, filterDocId, matchCount],
   });
-  for (const r of res.rows) distances.set(asStr(r.block_id), asNum(r.distance));
+  for (const row of res.rows) distances.set(asStr(row.block_id), asNum(row.distance));
   return distances;
 }
 
@@ -213,20 +213,20 @@ async function callMatch(args: {
     args: blockIds,
   });
 
-  return res.rows.map((r: Row): MatchRow => {
-    const id = asStr(r.block_id);
+  return res.rows.map((row: Row): MatchRow => {
+    const id = asStr(row.block_id);
     return {
       block_id: id,
-      doc_id: asStr(r.doc_id),
-      section_id: asStrOrNull(r.section_id),
-      page_num: asNum(r.page_num),
-      block_type: asStr(r.block_type),
-      text: asStr(r.text),
-      contextualized_text: asStrOrNull(r.contextualized_text),
-      doc_title: asStr(r.doc_title),
-      section_heading: asStrOrNull(r.section_heading),
-      format: asFormat(r.format),
-      published: asStrOrNull(r.published),
+      doc_id: asStr(row.doc_id),
+      section_id: asStrOrNull(row.section_id),
+      page_num: asNum(row.page_num),
+      block_type: asStr(row.block_type),
+      text: asStr(row.text),
+      contextualized_text: asStrOrNull(row.contextualized_text),
+      doc_title: asStr(row.doc_title),
+      section_heading: asStrOrNull(row.section_heading),
+      format: asFormat(row.format),
+      published: asStrOrNull(row.published),
       fts_rank: ftsRank.has(id) ? ftsRank.get(id)! : null,
       vector_distance: vecDist.has(id) ? vecDist.get(id)! : null,
     };
@@ -250,11 +250,11 @@ export async function searchRefDocs(opts: SearchOpts): Promise<SearchHit[]> {
   });
   return (
     rows
-      .filter((r) => r.fts_rank != null)
+      .filter((row) => row.fts_rank != null)
       // The exposed score is negated back to lower-is-better.
-      .sort((a, b) => (b.fts_rank ?? 0) - (a.fts_rank ?? 0))
+      .sort((left, right) => (right.fts_rank ?? 0) - (left.fts_rank ?? 0))
       .slice(0, limit)
-      .map((r) => rowToHit(r, -(r.fts_rank ?? 0)))
+      .map((row) => rowToHit(row, -(row.fts_rank ?? 0)))
   );
 }
 
@@ -301,19 +301,21 @@ const RRF_K = 60;
 export function fuseByRank(rows: MatchRow[]): { row: MatchRow; score: number }[] {
   const ranks = (value: (r: MatchRow) => number | null, higherIsBetter: boolean) => {
     const ranked = rows
-      .filter((r) => value(r) != null)
-      .sort((a, b) => (higherIsBetter ? value(b)! - value(a)! : value(a)! - value(b)!));
-    return new Map(ranked.map((r, i) => [r.block_id, i + 1]));
+      .filter((row) => value(row) != null)
+      .sort((left, right) =>
+        higherIsBetter ? value(right)! - value(left)! : value(left)! - value(right)!,
+      );
+    return new Map(ranked.map((row, i) => [row.block_id, i + 1]));
   };
-  const ftsRanks = ranks((r) => r.fts_rank, true);
-  const vectorRanks = ranks((r) => r.vector_distance, false);
+  const ftsRanks = ranks((row) => row.fts_rank, true);
+  const vectorRanks = ranks((row) => row.vector_distance, false);
   const rrf = (rank: number | undefined) => (rank === undefined ? 0 : 1 / (RRF_K + rank));
   return rows
     .map((row) => ({
       row,
       score: rrf(ftsRanks.get(row.block_id)) + rrf(vectorRanks.get(row.block_id)),
     }))
-    .sort((a, b) => b.score - a.score);
+    .sort((left, right) => right.score - left.score);
 }
 
 // Cross-model cosine distances are meaningless, so a model mismatch skips the vector leg.

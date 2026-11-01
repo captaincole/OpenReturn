@@ -63,10 +63,14 @@ const assessor: Reply = async () => ({
   },
 });
 const needMore =
-  (n: number): Reply =>
+  (count: number): Reply =>
   async () => ({
     object: {
-      result: { kind: "need_more_evidence", reason: `thin ${n}`, suggestedQueries: [`query ${n}`] },
+      result: {
+        kind: "need_more_evidence",
+        reason: `thin ${count}`,
+        suggestedQueries: [`query ${count}`],
+      },
     },
   });
 const verdict: Reply = async () => ({
@@ -85,7 +89,7 @@ describe("groundDecision", () => {
     const out = await groundDecision(mastra, { decision });
     expect(out.verdict).toBe("accurate");
     expect(out.iterationCount).toBe(1);
-    expect(out.log.steps.map((s) => `${s.iteration}:${s.kind}`)).toEqual([
+    expect(out.log.steps.map((step) => `${step.iteration}:${step.kind}`)).toEqual([
       "1:gather",
       "1:assess",
       "1:rule",
@@ -105,8 +109,8 @@ describe("groundDecision", () => {
     expect(out.verdict).toBe("needs_more_facts");
     expect(out.iterationCount).toBe(2);
     expect(out.whatsMissing).toBe("thin 1 → thin 2");
-    const gathers = out.log.steps.filter((s) => s.kind === "gather");
-    expect(gathers.map((s) => (s.input as { queries: string[] }).queries)).toEqual([
+    const gathers = out.log.steps.filter((step) => step.kind === "gather");
+    expect(gathers.map((gather) => (gather.input as { queries: string[] }).queries)).toEqual([
       ["additional medicare tax"],
       ["query 1"],
     ]);
@@ -134,7 +138,7 @@ describe("groundDecision", () => {
     expect(out.citations).toEqual([
       { blockId: "block-for-additional-medicare-tax", quote: "PASSAGE for additional" },
     ]);
-    const rule = out.log.steps.find((s) => s.kind === "rule")!;
+    const rule = out.log.steps.find((step) => step.kind === "rule")!;
     expect((rule.output as { dropped: unknown }).dropped).toEqual({
       blockIds: ["invented"],
       quotes: [],
@@ -151,6 +155,6 @@ describe("groundDecision", () => {
       },
     });
     await expect(groundDecision(mastra, { decision }, { steps })).rejects.toThrow("model down");
-    expect(steps.map((s) => s.kind)).toEqual(["gather", "assess"]);
+    expect(steps.map((step) => step.kind)).toEqual(["gather", "assess"]);
   });
 });

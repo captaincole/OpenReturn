@@ -52,7 +52,7 @@ async function callMessages(body: unknown, attempt = 0): Promise<MessagesRespons
   const retryable = res.status === 429 || res.status >= 500;
   if (retryable && attempt < 4) {
     const wait = 500 * Math.pow(2, attempt);
-    await new Promise((r) => setTimeout(r, wait));
+    await new Promise((resolve) => setTimeout(resolve, wait));
     return callMessages(body, attempt + 1);
   }
   const text = await res.text().catch(() => "");
@@ -94,8 +94,8 @@ export async function summarizeBlock(opts: SummarizeOpts): Promise<string> {
     ],
   });
   const summary = res.content
-    .filter((c) => c.type === "text")
-    .map((c) => c.text)
+    .filter((part) => part.type === "text")
+    .map((part) => part.text)
     .join("")
     .trim();
   return summary;
@@ -131,13 +131,13 @@ export async function summarizeBlocks(opts: SummarizeAllOpts): Promise<Summarize
   const concurrency = Math.max(1, Math.min(opts.concurrency ?? 5, 16));
   // Same-section blocks run together so the rest hit the first one's prompt cache.
   const ordered = opts.blocks
-    .map((b, i) => ({ b, i }))
-    .sort((a, b) => {
-      const ka = a.b.sectionHeading ?? "";
-      const kb = b.b.sectionHeading ?? "";
+    .map((block, i) => ({ b: block, i }))
+    .sort((left, right) => {
+      const ka = left.b.sectionHeading ?? "";
+      const kb = right.b.sectionHeading ?? "";
       if (ka < kb) return -1;
       if (ka > kb) return 1;
-      return a.i - b.i;
+      return left.i - right.i;
     });
 
   const results: SummarizedBlock[] = new Array(opts.blocks.length);

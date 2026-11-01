@@ -118,7 +118,7 @@ const ADDED_COLUMNS: { table: string; column: string; ddl: string }[] = [
 async function addMissingColumns(db: Client): Promise<void> {
   for (const { table, column, ddl } of ADDED_COLUMNS) {
     const cols = await db.execute(`PRAGMA table_info(${table})`);
-    if (!cols.rows.some((r) => r.name === column)) {
+    if (!cols.rows.some((row) => row.name === column)) {
       await db.execute(`ALTER TABLE ${table} ADD COLUMN ${ddl}`);
     }
   }

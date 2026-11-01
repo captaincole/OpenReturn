@@ -11,18 +11,19 @@ describe("splitRange", () => {
     const text = sentence.repeat(60); // ~2,460 chars
     const pieces = splitRange(text, 0, text.length, 1200);
     expect(pieces.length).toBeGreaterThan(1);
-    for (const [s, e] of pieces) {
-      expect(e - s).toBeLessThanOrEqual(1200);
-      expect(text.slice(s, e).trimEnd().endsWith(".")).toBe(true);
+    for (const [from, to] of pieces) {
+      expect(to - from).toBeLessThanOrEqual(1200);
+      expect(text.slice(from, to).trimEnd().endsWith(".")).toBe(true);
     }
-    const joined = pieces.map(([s, e]) => text.slice(s, e)).join("");
+    const joined = pieces.map(([from, to]) => text.slice(from, to)).join("");
     expect(joined.replace(/\s/g, "")).toBe(text.replace(/\s/g, ""));
   });
 
   it("falls back to a line end, then a hard cut", () => {
     const lines = "x".repeat(50) + "\n";
     const t1 = lines.repeat(40);
-    for (const [s, e] of splitRange(t1, 0, t1.length, 500)) expect(e - s).toBeLessThanOrEqual(500);
+    for (const [from, to] of splitRange(t1, 0, t1.length, 500))
+      expect(to - from).toBeLessThanOrEqual(500);
     const t2 = "y".repeat(3000);
     expect(splitRange(t2, 0, 3000, 1200)).toEqual([
       [0, 1200],

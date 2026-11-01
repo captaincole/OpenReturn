@@ -21,8 +21,8 @@ export interface ExtractedPdf {
 export async function pdfPublished(bytes: Uint8Array): Promise<string | null> {
   const pdf = await getDocumentProxy(new Uint8Array(bytes));
   const { info } = (await pdf.getMetadata()) as { info?: { CreationDate?: unknown } };
-  const m = /^D:(\d{4})(\d{2})(\d{2})/.exec(String(info?.CreationDate ?? ""));
-  return m ? `${m[1]}-${m[2]}-${m[3]}` : null;
+  const match = /^D:(\d{4})(\d{2})(\d{2})/.exec(String(info?.CreationDate ?? ""));
+  return match ? `${match[1]}-${match[2]}-${match[3]}` : null;
 }
 
 export async function extractPdf(path: string): Promise<ExtractedPdf> {

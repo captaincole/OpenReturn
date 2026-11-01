@@ -47,6 +47,6 @@ describe("answerQuestion's query log", () => {
     });
 
     await expect(answerQuestion(mastra, { question: "?", steps })).rejects.toThrow("model down");
-    expect(steps.map((s) => s.kind)).toEqual(["formulate", "retrieve"]);
+    expect(steps.map((step) => step.kind)).toEqual(["formulate", "retrieve"]);
   });
 });

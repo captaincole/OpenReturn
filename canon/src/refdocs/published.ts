@@ -5,11 +5,12 @@
 
 const DATE = /^\d{4}-\d{2}(-\d{2})?$/;
 
-export const isPublishedDate = (v: unknown): v is string => typeof v === "string" && DATE.test(v);
+export const isPublishedDate = (value: unknown): value is string =>
+  typeof value === "string" && DATE.test(value);
 
 export function htmlPublished(html: string): string | null {
-  const m = /Revised:\s*(\d{2})\/(\d{4})/.exec(html);
-  return m ? `${m[2]}-${m[1]}` : null;
+  const match = /Revised:\s*(\d{2})\/(\d{4})/.exec(html);
+  return match ? `${match[2]}-${match[1]}` : null;
 }
 
 export function formatPublished(published: string): string {

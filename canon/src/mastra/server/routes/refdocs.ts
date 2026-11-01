@@ -10,19 +10,21 @@ import { listLibrary, listSections } from "../../../db/refLibrary";
 
 export const listRefDocsRoute = registerApiRoute("/app/refdocs", {
   method: "GET",
-  handler: async (c) => c.json({ documents: await listLibrary() }),
+  handler: async (ctx) => ctx.json({ documents: await listLibrary() }),
 });
 
 export const refDocPdfRoute = registerApiRoute("/app/refdocs/:docId/pdf", {
   method: "GET",
-  handler: async (c) => {
-    const doc = await getDocument(c.req.param("docId"));
-    if (!doc) return c.json({ error: "not found" }, 404);
+  handler: async (ctx) => {
+    const doc = await getDocument(ctx.req.param("docId"));
+    if (!doc) return ctx.json({ error: "not found" }, 404);
     const pdf = doc.format === "pdf" ? await getDocumentSource(doc.docId) : null;
     if (!pdf) {
-      return doc.sourceUrl ? c.redirect(doc.sourceUrl, 302) : c.json({ error: "not found" }, 404);
+      return doc.sourceUrl
+        ? ctx.redirect(doc.sourceUrl, 302)
+        : ctx.json({ error: "not found" }, 404);
     }
-    return c.body(pdf, 200, {
+    return ctx.body(pdf, 200, {
       "content-type": "application/pdf",
       "cache-control": "private, max-age=3600",
     });
@@ -35,12 +37,12 @@ export const refDocPdfRoute = registerApiRoute("/app/refdocs/:docId/pdf", {
  */
 export const refDocHtmlRoute = registerApiRoute("/app/refdocs/:docId/html", {
   method: "GET",
-  handler: async (c) => {
-    const doc = await getDocument(c.req.param("docId"));
+  handler: async (ctx) => {
+    const doc = await getDocument(ctx.req.param("docId"));
     const source = doc?.format === "html" ? await getDocumentSource(doc.docId) : null;
-    if (!doc || !source) return c.json({ error: "not found" }, 404);
+    if (!doc || !source) return ctx.json({ error: "not found" }, 404);
     const { docId, title, publisher, taxYear, sourceUrl, published } = doc;
-    return c.json({
+    return ctx.json({
       docId,
       title,
       publisher,

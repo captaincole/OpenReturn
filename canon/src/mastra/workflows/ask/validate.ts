@@ -39,13 +39,13 @@ function splitMarkerLists(text: string): string {
   return text.replace(/\[(\d+(?:\s*,\s*\d+)+)\]/g, (_, list: string) =>
     list
       .split(",")
-      .map((n) => `[${n.trim()}]`)
+      .map((num) => `[${num.trim()}]`)
       .join(""),
   );
 }
 
-function normalize(s: string): string {
-  return s
+function normalize(text: string): string {
+  return text
     .toLowerCase()
     .replace(/[‘’]/g, "'")
     .replace(/[“”]/g, '"')
@@ -58,25 +58,26 @@ function renumberMarkers(text: string, passageCount: number) {
   const order: number[] = [];
   const invalid: number[] = [];
   const answer = text.replace(MARKER, (match, raw: string) => {
-    const p = Number(raw);
-    if (p < 1 || p > passageCount) {
-      invalid.push(p);
+    const passage = Number(raw);
+    if (passage < 1 || passage > passageCount) {
+      invalid.push(passage);
       return "";
     }
-    if (!order.includes(p)) order.push(p);
-    return `${match.startsWith(" ") ? " " : ""}[${order.indexOf(p) + 1}]`;
+    if (!order.includes(passage)) order.push(passage);
+    return `${match.startsWith(" ") ? " " : ""}[${order.indexOf(passage) + 1}]`;
   });
   return { answer: answer.trim(), order, invalid };
 }
 
 function quoteFor(output: AnswerOutput, passageNum: number, passage: Passage) {
-  const quote = output.citations.find((c) => c.passage === passageNum)?.quote?.trim() ?? "";
+  const quote =
+    output.citations.find((citation) => citation.passage === passageNum)?.quote?.trim() ?? "";
   const ok = quote.length > 0 && normalize(passage.text).includes(normalize(quote));
   return { quote: ok ? quote : passage.text.trim(), ok };
 }
 
 export function validateAnswer(output: AnswerOutput, passages: Passage[]): ValidatedAnswer {
-  const missingDocuments = output.missingDocuments.map((d) => d.trim()).filter(Boolean);
+  const missingDocuments = output.missingDocuments.map((doc) => doc.trim()).filter(Boolean);
   const { answer, order, invalid } = renumberMarkers(
     splitMarkerLists(output.answer),
     passages.length,

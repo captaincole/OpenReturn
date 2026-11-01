@@ -27,10 +27,13 @@ export interface ReviewCase {
 }
 
 const withValue = (facts: ReviewFact[], key: string, patch: unknown) =>
-  facts.map((f) =>
-    f.key === key
-      ? { ...f, value: typeof patch === "object" ? { ...(f.value as object), ...patch } : patch }
-      : f,
+  facts.map((fact) =>
+    fact.key === key
+      ? {
+          ...fact,
+          value: typeof patch === "object" ? { ...(fact.value as object), ...patch } : patch,
+        }
+      : fact,
   );
 
 const single: ReviewFact = {
@@ -122,7 +125,7 @@ const mustFileFacts: ReviewFact[] = [
   { category: "identity", key: "identity.dob", value: "08/14/1985", sourceNote: "verbal" },
   taraW2("employer.the-green-ladies", "The Green Ladies", 22970, 1073, 320),
   taraW2("employer.c-r", "C&R", 19500, 1640, 416),
-  ...scheduleHFacts.filter((f) => f.key === HOUSEHOLD_W2),
+  ...scheduleHFacts.filter((fact) => fact.key === HOUSEHOLD_W2),
 ];
 const mustFileAuthority = [
   anyOf(
@@ -221,4 +224,4 @@ export const CASES: ReviewCase[] = [
 ];
 
 export const casesFor = (tier: "lite" | "full"): ReviewCase[] =>
-  tier === "full" ? CASES : CASES.filter((c) => c.lite);
+  tier === "full" ? CASES : CASES.filter((testCase) => testCase.lite);

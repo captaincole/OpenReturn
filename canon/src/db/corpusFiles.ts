@@ -22,5 +22,5 @@ export async function getDocumentSource(docId: string): Promise<Uint8Array<Array
 export async function docIdsWithSource(): Promise<Set<string>> {
   await ensureCorpusSchema();
   const res = await getCorpusDb().execute(`SELECT doc_id FROM ref_document_files`);
-  return new Set(res.rows.map((r) => String(r.doc_id)));
+  return new Set(res.rows.map((row) => String(row.doc_id)));
 }

@@ -52,25 +52,25 @@ const count = (rs: AskResult[], pred: (r: AskResult) => boolean) =>
 const where = (rs: AskResult[], pred: (r: AskResult) => boolean) => rs.filter(pred);
 
 function summaryTable(models: EvalModel[], results: AskResult[]): string {
-  const rows = models.map((m) => {
-    const mine = results.filter((r) => r.model === m.label);
+  const rows = models.map((model) => {
+    const mine = results.filter((result) => result.model === model.label);
     return [
-      m.label,
-      String(m.runs),
+      model.label,
+      String(model.runs),
       count(mine, correct),
       count(mine, coveredButWrong),
       count(mine, coverageOk),
       count(where(mine, shouldGround), groundedOk),
       count(
-        where(mine, (r) => r.retrievedAuthority !== null),
-        (r) => r.retrievedAuthority === true,
+        where(mine, (result) => result.retrievedAuthority !== null),
+        (result) => result.retrievedAuthority === true,
       ),
       count(
-        where(mine, (r) => r.factsOk !== null),
-        (r) => r.factsOk === true,
+        where(mine, (result) => result.factsOk !== null),
+        (result) => result.factsOk === true,
       ),
-      count(mine, (r) => r.error !== null),
-      `${(avg(mine.map((r) => r.latencyMs)) / 1000).toFixed(0)}s`,
+      count(mine, (result) => result.error !== null),
+      `${(avg(mine.map((result) => result.latencyMs)) / 1000).toFixed(0)}s`,
     ];
   });
   return table(
@@ -97,52 +97,56 @@ const KIND_LABEL: Record<Kind, string> = {
 };
 
 function groupTable(models: EvalModel[], results: AskResult[]): string {
-  const groups = [...new Set(results.map((r) => `${r.tier}\u0000${r.kind}`))];
+  const groups = [...new Set(results.map((result) => `${result.tier}\u0000${result.kind}`))];
   const cell = (rs: AskResult[]) => {
     if (!rs.length) return "—";
     const parts = [`correct ${count(rs, correct)}`, `label ${count(rs, coverageOk)}`];
     const grounded = where(rs, shouldGround);
     if (grounded.length) parts.push(`cited ${count(grounded, groundedOk)}`);
-    const facts = where(rs, (r) => r.factsOk !== null);
-    if (facts.length) parts.push(`facts ${count(facts, (r) => r.factsOk === true)}`);
+    const facts = where(rs, (result) => result.factsOk !== null);
+    if (facts.length) parts.push(`facts ${count(facts, (result) => result.factsOk === true)}`);
     return parts.join(" · ");
   };
-  const rows = groups.map((g) => {
-    const [tier, kind] = g.split("\u0000");
-    const mine = results.filter((r) => String(r.tier) === tier && r.kind === kind);
+  const rows = groups.map((group) => {
+    const [tier, kind] = group.split("\u0000");
+    const mine = results.filter((result) => String(result.tier) === tier && result.kind === kind);
     return [
       tier,
       KIND_LABEL[kind as Kind],
-      ...models.map((m) => cell(mine.filter((r) => r.model === m.label))),
+      ...models.map((model) => cell(mine.filter((result) => result.model === model.label))),
     ];
   });
-  return table(["Tier", "Kind", ...models.map((m) => m.label)], rows);
+  return table(["Tier", "Kind", ...models.map((model) => model.label)], rows);
 }
 
 function caseCell(rs: AskResult[]): string {
   if (!rs.length) return "—";
-  const labels = [...new Set(rs.map((r) => r.coverage ?? "failed"))].join(", ");
+  const labels = [...new Set(rs.map((result) => result.coverage ?? "failed"))].join(", ");
   const parts = [`**${count(rs, correct)}** · label ${count(rs, coverageOk)} (${labels})`];
   if (rs[0].citedAuthority !== null) parts.push(`cited ${count(rs, groundedOk)}`);
   if (rs[0].retrievedAuthority !== null)
-    parts.push(`retrieved ${count(rs, (r) => r.retrievedAuthority === true)}`);
-  if (rs[0].factsOk !== null) parts.push(`facts ${count(rs, (r) => r.factsOk === true)}`);
+    parts.push(`retrieved ${count(rs, (result) => result.retrievedAuthority === true)}`);
+  if (rs[0].factsOk !== null) parts.push(`facts ${count(rs, (result) => result.factsOk === true)}`);
   return parts.join(" · ");
 }
 
 function caseTable(models: EvalModel[], results: AskResult[]): string {
-  const cases = [...new Set(results.map((r) => r.case))];
-  const rows = cases.map((c) => {
-    const first = results.find((r) => r.case === c)!;
+  const cases = [...new Set(results.map((result) => result.case))];
+  const rows = cases.map((testCase) => {
+    const first = results.find((result) => result.case === testCase)!;
     return [
-      c,
+      testCase,
       String(first.tier),
       KIND_LABEL[first.kind],
       first.expectedCoverage.join(" or "),
-      ...models.map((m) => caseCell(results.filter((r) => r.model === m.label && r.case === c))),
+      ...models.map((model) =>
+        caseCell(
+          results.filter((result) => result.model === model.label && result.case === testCase),
+        ),
+      ),
     ];
   });
-  return table(["Case", "Tier", "Kind", "Expected", ...models.map((m) => m.label)], rows);
+  return table(["Case", "Tier", "Kind", "Expected", ...models.map((model) => model.label)], rows);
 }
 
 export function renderReport(models: EvalModel[], results: AskResult[]): string {
@@ -152,7 +156,7 @@ export function renderReport(models: EvalModel[], results: AskResult[]): string 
     "Each case asks one question through the production Ask pipeline (query formulator, hybrid retrieval over the IRS/FTB corpus, answerer, citation check). The cases, their expected passages and the facts each answer must state are in `canon/evals/ask/` (`cases.ts` and the tier files).",
     "Three tiers: (1) one rule, one obvious passage; (2) generally accepted answers that take a closer read or two passages; (3) two or more passages, usually federal and California. Each tier has 6 standard questions (tier 3 has 7), 2 that assert a wrong amount or rule the answer must correct (false premise; tier 3 has 3), and 2 the library cannot support (insufficient info: the right answer says not covered, or partial). Coverage is about the library: a question about the taxpayer's own numbers is covered when the passages give every rule and amount needed (the answer may state the rule instead of computing the total), and a fact the taxpayer left out does not make it partial.",
     "- **Correct:** the coverage label is right, the answer cites a labeled passage for each rule (on a question the library covers), and it states every key fact. This is the headline score; the other columns show which part failed.\n- **Covered but wrong:** the answer says the library covers the question, but the run is not correct. This is the confidently wrong answer.\n- **Coverage right:** the answer's covered / partial / not-covered label is one the case accepts.\n- **Grounded:** on a question the library covers, the answer cites a labeled passage for each rule.\n- **Authority retrieved:** the search, from the formulator's own queries, found a labeled passage at all. A miss here is a retrieval problem, not an answerer problem.\n- **Facts stated:** the answer states the key amount (any accepted spelling).",
-    `Models: ${models.map((m) => `${m.label} (\`${m.id}\`)`).join(", ")}.`,
+    `Models: ${models.map((model) => `${model.label} (\`${model.id}\`)`).join(", ")}.`,
     "## Summary",
     summaryTable(models, results),
     "## By tier and kind",
@@ -170,14 +174,16 @@ export function publishReport(runs: AskRun[]): string {
   for (const run of runs) {
     for (const model of run.models) models.set(model.label, model);
     const fresh = new Map<string, AskResult[]>();
-    for (const r of run.results) {
-      const key = `${r.model}\u0000${r.case}`;
-      fresh.set(key, [...(fresh.get(key) ?? []), scoreResult(r)]);
+    for (const result of run.results) {
+      const key = `${result.model}\u0000${result.case}`;
+      fresh.set(key, [...(fresh.get(key) ?? []), scoreResult(result)]);
     }
     for (const [key, rs] of fresh) results.set(key, rs);
   }
   const all = [...results.values()].flat();
-  const used = [...models.values()].filter((m) => all.some((r) => r.model === m.label));
+  const used = [...models.values()].filter((model) =>
+    all.some((result) => result.model === model.label),
+  );
   const shown = forDisplay(used, all);
   writeFileSync(OUT, renderReport(shown.models, shown.results) + "\n");
   publishOverview(askFlowScores(shown.models, shown.results));
@@ -185,6 +191,8 @@ export function publishReport(runs: AskRun[]): string {
 }
 
 if (require.main === module) {
-  const runs = process.argv.slice(2).map((f) => JSON.parse(readFileSync(f, "utf8")) as AskRun);
+  const runs = process.argv
+    .slice(2)
+    .map((file) => JSON.parse(readFileSync(file, "utf8")) as AskRun);
   console.log(publishReport(runs));
 }

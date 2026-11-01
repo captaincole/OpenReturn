@@ -28,15 +28,15 @@ const HITS_PER_QUERY = 6;
 
 async function retrieveBlocks(queries: string[]): Promise<EvidenceBundle["irsBlocks"]> {
   const blockMap = new Map<string, { docId: string; text: string; score: number }>();
-  for (const q of queries) {
-    const hits = await hybridSearchRefDocs({ query: q, limit: HITS_PER_QUERY });
-    for (const h of hits) {
-      const prev = blockMap.get(h.blockId);
-      if (prev && prev.score >= h.score) continue;
-      blockMap.set(h.blockId, { docId: h.docId, text: h.text, score: h.score });
+  for (const query of queries) {
+    const hits = await hybridSearchRefDocs({ query: query, limit: HITS_PER_QUERY });
+    for (const hit of hits) {
+      const prev = blockMap.get(hit.blockId);
+      if (prev && prev.score >= hit.score) continue;
+      blockMap.set(hit.blockId, { docId: hit.docId, text: hit.text, score: hit.score });
     }
   }
-  return Array.from(blockMap.entries()).map(([blockId, b]) => ({ blockId, ...b }));
+  return Array.from(blockMap.entries()).map(([blockId, block]) => ({ blockId, ...block }));
 }
 
 async function timed<T>(
@@ -140,7 +140,7 @@ async function rule(
       );
       return { ruleOutput: { ...result, citations }, dropped };
     },
-    (r) => r,
+    (result) => result,
   );
   return advanceAfterRule(carrier, ruleOutput);
 }

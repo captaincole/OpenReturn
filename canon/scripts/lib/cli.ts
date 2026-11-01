@@ -24,9 +24,9 @@ function printCliHelp(cli: Cli): void {
   console.log(`${cli.description}\n`);
   console.log(`usage: ${cli.bin} <command> [options]\n`);
   console.log("commands:");
-  const width = Math.max(...cli.commands.map((c) => c.name.length));
-  for (const c of cli.commands) {
-    console.log(`  ${c.name.padEnd(width)}  ${c.summary}`);
+  const width = Math.max(...cli.commands.map((command) => command.name.length));
+  for (const command of cli.commands) {
+    console.log(`  ${command.name.padEnd(width)}  ${command.summary}`);
   }
   console.log(`\nRun \`${cli.bin} <command> --help\` for that command's options.`);
 }
@@ -38,9 +38,9 @@ function printCommandHelp(cli: Cli, cmd: Command): void {
   );
   if (cmd.options?.length) {
     console.log("\noptions:");
-    const width = Math.max(...cmd.options.map((o) => o.flag.length));
-    for (const o of cmd.options) {
-      console.log(`  ${o.flag.padEnd(width)}  ${o.desc}`);
+    const width = Math.max(...cmd.options.map((option) => option.flag.length));
+    for (const option of cmd.options) {
+      console.log(`  ${option.flag.padEnd(width)}  ${option.desc}`);
     }
   }
 }
@@ -53,7 +53,7 @@ export async function runCli(cli: Cli): Promise<void> {
     return;
   }
 
-  const cmd = cli.commands.find((c) => c.name === name);
+  const cmd = cli.commands.find((command) => command.name === name);
   if (!cmd) {
     console.error(`unknown command: ${name}\n`);
     printCliHelp(cli);

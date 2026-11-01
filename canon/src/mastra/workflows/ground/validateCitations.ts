@@ -11,8 +11,8 @@ export interface ValidatedCitations {
   dropped: { blockIds: string[]; quotes: string[] };
 }
 
-function normalize(s: string): string {
-  return s
+function normalize(text: string): string {
+  return text
     .toLowerCase()
     .replace(/[‘’]/g, "'")
     .replace(/[“”]/g, '"')
@@ -25,21 +25,21 @@ export function validateCitations(
   citations: AuthorityCitation[],
   blocks: EvidenceBundle["irsBlocks"],
 ): ValidatedCitations {
-  const text = new Map(blocks.map((b) => [b.blockId, normalize(b.text)]));
+  const text = new Map(blocks.map((block) => [block.blockId, normalize(block.text)]));
   const dropped: ValidatedCitations["dropped"] = { blockIds: [], quotes: [] };
   const kept: AuthorityCitation[] = [];
-  for (const c of citations) {
-    const block = text.get(c.blockId);
+  for (const citation of citations) {
+    const block = text.get(citation.blockId);
     if (block === undefined) {
-      dropped.blockIds.push(c.blockId);
+      dropped.blockIds.push(citation.blockId);
       continue;
     }
-    if (c.quote === undefined || block.includes(normalize(c.quote))) {
-      kept.push(c);
+    if (citation.quote === undefined || block.includes(normalize(citation.quote))) {
+      kept.push(citation);
       continue;
     }
-    dropped.quotes.push(c.quote);
-    kept.push({ blockId: c.blockId });
+    dropped.quotes.push(citation.quote);
+    kept.push({ blockId: citation.blockId });
   }
   return { citations: kept, dropped };
 }

@@ -51,26 +51,26 @@ export async function cleanFtbHtml(
   fetchImage: FetchImage,
 ): Promise<CleanedDoc> {
   const { kicker, title, published } = pageTitle(raw);
-  const $ = cheerio.load(mainContent(raw), null, false);
-  removeComments($);
-  $(DROP_TAGS).remove();
-  unwrapDisallowed($);
-  stripAttributes($);
-  anchorHeadings($);
-  fixLinks($, pageUrl);
-  await inlineImages($, pageUrl, fetchImage);
+  const dom = cheerio.load(mainContent(raw), null, false);
+  removeComments(dom);
+  dom(DROP_TAGS).remove();
+  unwrapDisallowed(dom);
+  stripAttributes(dom);
+  anchorHeadings(dom);
+  fixLinks(dom, pageUrl);
+  await inlineImages(dom, pageUrl, fetchImage);
 
-  const html = tidy(`<article>\n${heading(kicker, title)}\n${$.html()}\n</article>`);
+  const html = tidy(`<article>\n${heading(kicker, title)}\n${dom.html()}\n</article>`);
   checkContent(html);
   return { html: `${html}\n`, title: kicker ? `${kicker} — ${title}` : title, published };
 }
 
 /* Built from text: the title is page text, never markup. */
 function heading(kicker: string, title: string): string {
-  const $ = cheerio.load("", null, false);
-  const h1 = $("<h1></h1>").text(title);
-  if (kicker) h1.prepend($("<small></small>").text(kicker), " ");
-  return $.html(h1);
+  const dom = cheerio.load("", null, false);
+  const h1 = dom("<h1></h1>").text(title);
+  if (kicker) h1.prepend(dom("<small></small>").text(kicker), " ");
+  return dom.html(h1);
 }
 
 function mainContent(raw: string): string {
@@ -87,9 +87,9 @@ function mainContent(raw: string): string {
  * Resident…", sometimes with a second "<small>Revised: 01/2015</small>".
  */
 function pageTitle(raw: string): Omit<CleanedDoc, "html"> & { kicker: string } {
-  const $ = cheerio.load(raw);
-  const h1 = $("main h1").first();
-  const squash = (s: string) => s.replace(/\s+/g, " ").trim();
+  const dom = cheerio.load(raw);
+  const h1 = dom("main h1").first();
+  const squash = (text: string) => text.replace(/\s+/g, " ").trim();
   const smalls = h1.find("small");
   const kicker = squash(smalls.first().text());
   const published = htmlPublished(smalls.slice(1).text());
@@ -99,91 +99,91 @@ function pageTitle(raw: string): Omit<CleanedDoc, "html"> & { kicker: string } {
   return { kicker, title, published };
 }
 
-function removeComments($: cheerio.CheerioAPI): void {
+function removeComments(dom: cheerio.CheerioAPI): void {
   const walk = (nodes: AnyNode[]): void =>
-    nodes.forEach((n) => {
-      if (n.type === "comment") $(n).remove();
-      else if ("children" in n) walk([...(n as Element).children]);
+    nodes.forEach((node) => {
+      if (node.type === "comment") dom(node).remove();
+      else if ("children" in node) walk([...(node as Element).children]);
     });
-  walk($.root().contents().toArray());
+  walk(dom.root().contents().toArray());
 }
 
 /* Deepest first, so an unwrapped container's children are already clean. */
-function unwrapDisallowed($: cheerio.CheerioAPI): void {
-  $("*")
+function unwrapDisallowed(dom: cheerio.CheerioAPI): void {
+  dom("*")
     .toArray()
     .filter(isTag)
     .reverse()
     .filter((el) => !ALLOWED_TAGS.has(el.tagName))
-    .forEach((el) => void $(el).replaceWith($(el).contents()));
+    .forEach((el) => void dom(el).replaceWith(dom(el).contents()));
 }
 
-function stripAttributes($: cheerio.CheerioAPI): void {
-  $("*")
+function stripAttributes(dom: cheerio.CheerioAPI): void {
+  dom("*")
     .toArray()
     .filter(isTag)
     .forEach((el) => {
       const keep = new Set([...KEEP_ATTRS["*"], ...(KEEP_ATTRS[el.tagName] ?? [])]);
       Object.keys(el.attribs)
         .filter((name) => !keep.has(name))
-        .forEach((name) => $(el).removeAttr(name));
+        .forEach((name) => dom(el).removeAttr(name));
     });
 }
 
 // Heading id = section slug, so a citation's section is the page anchor.
-function anchorHeadings($: cheerio.CheerioAPI): void {
+function anchorHeadings(dom: cheerio.CheerioAPI): void {
   const renamed = new Map<string, string>();
   const used = new Set<string>(["preamble"]);
-  $("h2, h3, h4, h5, h6").each((_, el) => {
-    const base = slugifyHeading($(el).text().replace(/\s+/g, " ").trim()) || "section";
+  dom("h2, h3, h4, h5, h6").each((_, el) => {
+    const base = slugifyHeading(dom(el).text().replace(/\s+/g, " ").trim()) || "section";
     let slug = base;
-    for (let n = 2; used.has(slug); n++) slug = `${base}-${n}`;
+    for (let suffix = 2; used.has(slug); suffix++) slug = `${base}-${suffix}`;
     used.add(slug);
-    const old = $(el).attr("id");
+    const old = dom(el).attr("id");
     if (old) renamed.set(old, slug);
-    $(el).attr("id", slug);
+    dom(el).attr("id", slug);
   });
-  $("[id]")
+  dom("[id]")
     .not("h2, h3, h4, h5, h6")
     .each((_, el) => {
-      const id = $(el).attr("id")!;
-      if (used.has(id)) $(el).removeAttr("id");
+      const id = dom(el).attr("id")!;
+      if (used.has(id)) dom(el).removeAttr("id");
       else used.add(id);
     });
-  $('a[href^="#"]').each((_, el) => {
-    const target = renamed.get($(el).attr("href")!.slice(1));
-    if (target) $(el).attr("href", `#${target}`);
+  dom('a[href^="#"]').each((_, el) => {
+    const target = renamed.get(dom(el).attr("href")!.slice(1));
+    if (target) dom(el).attr("href", `#${target}`);
   });
 }
 
 // An in-page link to a target not on this page becomes plain text.
-function fixLinks($: cheerio.CheerioAPI, pageUrl: string): void {
+function fixLinks(dom: cheerio.CheerioAPI, pageUrl: string): void {
   const ids = new Set(
-    $("[id]")
-      .map((_, el) => $(el).attr("id"))
+    dom("[id]")
+      .map((_, el) => dom(el).attr("id"))
       .get(),
   );
-  $("a").each((_, el) => {
-    const href = $(el).attr("href")?.trim() ?? "";
+  dom("a").each((_, el) => {
+    const href = dom(el).attr("href")?.trim() ?? "";
     const absolute = href && !href.startsWith("#") ? new URL(href, pageUrl).href : "";
     if (href.startsWith("#") && ids.has(href.slice(1))) return;
-    if (absolute && SAFE_LINK.test(absolute)) $(el).attr("href", absolute);
-    else $(el).replaceWith($(el).contents());
+    if (absolute && SAFE_LINK.test(absolute)) dom(el).attr("href", absolute);
+    else dom(el).replaceWith(dom(el).contents());
   });
 }
 
 /* FTB-hosted images only. */
 async function inlineImages(
-  $: cheerio.CheerioAPI,
+  dom: cheerio.CheerioAPI,
   pageUrl: string,
   fetchImage: FetchImage,
 ): Promise<void> {
   const origin = new URL(pageUrl).origin;
-  for (const el of $("img").toArray()) {
-    const raw = $(el).attr("src")?.trim();
+  for (const el of dom("img").toArray()) {
+    const raw = dom(el).attr("src")?.trim();
     const src = raw ? new URL(raw, pageUrl) : null;
-    if (!src || src.origin !== origin) $(el).remove();
-    else $(el).attr("src", await fetchImage(src.href));
+    if (!src || src.origin !== origin) dom(el).remove();
+    else dom(el).attr("src", await fetchImage(src.href));
   }
 }
 
@@ -196,8 +196,8 @@ function tidy(html: string): string {
 }
 
 function checkContent(html: string): void {
-  const $ = cheerio.load(html);
-  if ($("h2").length === 0) throw new CleanError("no h2 headings in the article");
-  const words = $.root().text().split(/\s+/).filter(Boolean).length;
+  const dom = cheerio.load(html);
+  if (dom("h2").length === 0) throw new CleanError("no h2 headings in the article");
+  const words = dom.root().text().split(/\s+/).filter(Boolean).length;
   if (words < MIN_WORDS) throw new CleanError(`only ${words} words in the article`);
 }

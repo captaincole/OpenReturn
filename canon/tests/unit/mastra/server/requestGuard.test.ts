@@ -3,10 +3,10 @@ import { afterEach, describe, expect, it } from "vitest";
 import { bearerMatches, requestGuard } from "../../../../src/mastra/server/requestGuard";
 
 function app() {
-  const a = new Hono();
-  a.use("*", requestGuard);
-  a.get("/app/state", (c) => c.json({ ok: true }));
-  return a;
+  const hono = new Hono();
+  hono.use("*", requestGuard);
+  hono.get("/app/state", (ctx) => ctx.json({ ok: true }));
+  return hono;
 }
 
 const get = (headers: Record<string, string>) =>

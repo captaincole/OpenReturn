@@ -40,13 +40,13 @@ export const mastra = new Mastra({
     /* Loopback only; MASTRA_HOST opens it wider. */
     host: process.env.MASTRA_HOST ?? "127.0.0.1",
     // Without this hook Mastra returns a generic 500 with no log line.
-    onError: (err, c) => {
+    onError: (err, ctx) => {
       logger.error("unhandled handler error", {
-        method: c.req.method,
-        path: c.req.path,
+        method: ctx.req.method,
+        path: ctx.req.path,
         err,
       });
-      return c.json({ error: "internal server error" }, 500);
+      return ctx.json({ error: "internal server error" }, 500);
     },
     /* No CORS, as Cade: browsers reach Canon only through the web app's proxy. */
     cors: false,

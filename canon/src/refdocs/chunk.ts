@@ -5,8 +5,9 @@ const MIN_PIECE_CHARS = 400;
 
 function lastSentenceEnd(text: string, lo: number, hi: number): number {
   for (let i = hi - 1; i > lo; i--) {
-    const c = text[i - 1];
-    if ((c === "." || c === "?" || c === "!" || c === ":") && /\s/.test(text[i] ?? " ")) return i;
+    const char = text[i - 1];
+    if ((char === "." || char === "?" || char === "!" || char === ":") && /\s/.test(text[i] ?? " "))
+      return i;
   }
   return -1;
 }
@@ -23,17 +24,17 @@ export function splitRange(
   maxChars = MAX_BLOCK_CHARS,
 ): Array<[number, number]> {
   const out: Array<[number, number]> = [];
-  let s = start;
-  while (end - s > maxChars) {
-    const hi = s + maxChars;
-    const lo = s + Math.min(MIN_PIECE_CHARS, maxChars - 1);
+  let cursor = start;
+  while (end - cursor > maxChars) {
+    const hi = cursor + maxChars;
+    const lo = cursor + Math.min(MIN_PIECE_CHARS, maxChars - 1);
     let cut = lastSentenceEnd(text, lo, hi);
     if (cut < 0) cut = lastLineEnd(text, lo, hi);
     if (cut < 0) cut = hi;
-    out.push([s, cut]);
-    s = cut;
-    while (s < end && /\s/.test(text[s])) s++;
+    out.push([cursor, cut]);
+    cursor = cut;
+    while (cursor < end && /\s/.test(text[cursor])) cursor++;
   }
-  if (end > s) out.push([s, end]);
+  if (end > cursor) out.push([cursor, end]);
   return out;
 }
