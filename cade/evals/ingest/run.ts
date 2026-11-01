@@ -22,7 +22,7 @@ import { loadCases, type IngestCase } from "./cases";
 import { publishReport, type IngestResult } from "./report";
 import { scoreDoc } from "./score";
 
-const REPO = path.resolve(__dirname, "../../../..");
+const REPO = path.resolve(__dirname, "../../..");
 
 const INSTRUCTIONS = `You ingest tax documents. The user uploads one document. Read it and call the matching ingest tools with every value on it.
 

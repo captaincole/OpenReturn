@@ -9,21 +9,18 @@ export interface EvalModel {
 /*
  * lite: one run of Haiku and the 31b on the second machine (whichever is configured);
  *       the check after a change. full: every configured model, five runs each; it takes
- *       hours, so its local models run on a second machine, plus one MLX build on the Mac.
+ *       hours, so its local models run on a second machine.
  */
 export type Tier = "lite" | "full";
 
 const RUNS: Record<Tier, number> = { lite: 1, full: 5 };
 
-const MAC = "http://localhost:11434/v1";
 // MLX-only tags (-mlx, -nvfp4) do not run on a CUDA machine; use the GGUF tags.
 const PC = process.env.EVAL_PC_OLLAMA_URL;
 const HAIKU = "anthropic/claude-haiku-5-5";
 
 const MODELS: Omit<EvalModel, "runs">[] = [
   { label: "Haiku 5.5", id: HAIKU },
-  /* The one Mac model: the 26b MLX build (the 31b takes too long on a laptop). */
-  { label: "Gemma 4 26b MLX", id: "ollama/gemma4:26b-mlx", url: MAC },
   /* On CUDA the plain tags resolve to Q4_K_M. */
   { label: "Gemma 4 26b QAT (4090)", id: "ollama/gemma4:26b-a4b-it-qat", url: PC },
   { label: "Gemma 4 26b Q4_K_M (4090)", id: "ollama/gemma4:26b", url: PC },
@@ -35,7 +32,7 @@ const MODELS: Omit<EvalModel, "runs">[] = [
 ].filter((m) => (m.id.startsWith("ollama/") ? m.url : process.env.ANTHROPIC_API_KEY));
 
 const LITE = new Set([HAIKU, "ollama/gemma4:31b"]);
-const isLite = (m: Omit<EvalModel, "runs">) => LITE.has(m.id) && m.url !== MAC;
+const isLite = (m: Omit<EvalModel, "runs">) => LITE.has(m.id);
 
 // The stored label keeps the machine tag: it keys merged runs.
 const shortLabel = (label: string) => label.replace(/ \(4090\)$/, "");

@@ -28,7 +28,7 @@ export interface IngestRun {
   results: IngestResult[];
 }
 
-const REPO = path.resolve(__dirname, "../../../..");
+const REPO = path.resolve(__dirname, "../../..");
 const OUT = path.join(REPO, "docs/evals/ingest.md");
 const TOP_FIELDS = 15;
 
@@ -163,7 +163,7 @@ export function renderReport(models: EvalModel[], results: IngestResult[]): stri
     `The ${TOP_FIELDS} most-missed fields: misses / scored runs.`,
     fieldMissTable(models, results),
     "## Run it",
-    "From `cade`, with Ollama running for the local models:\n\n```bash\nEVAL_PC_OLLAMA_URL=http://<host>:11434/v1 \\\n  npx tsx --env-file=.env evals/ingest/run.ts --full [model…]   # Haiku, the second-machine models and the Mac MLX build\n```\n\nThe lite tier is `npm run evals:lite` from the repo root.",
+    "From `cade`, with Ollama running for the local models:\n\n```bash\nEVAL_PC_OLLAMA_URL=http://<host>:11434/v1 \\\n  npx tsx --env-file=.env evals/ingest/run.ts --full [model…]   # Haiku and the second-machine models\n```\n\nThe lite tier is `npm run evals:lite` from the repo root.",
   ].join("\n\n");
 }
 
