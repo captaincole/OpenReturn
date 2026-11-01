@@ -9,6 +9,7 @@ import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
+import { form1040Line7a } from "../schedule-d/lines.js";
 import { mayClaimSeniorDeduction, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
@@ -137,10 +138,13 @@ export function register(): void {
         info.livedApartFromSpouseAllYear === true
           ? true
           : undefined,
-      // MANUAL EDIT: line 7a = Schedule D line 16.
+      // MANUAL EDIT: line 7a = Schedule D line 16, or line 21 if line 16 is a loss.
       "line.7a": (f, info) => {
         const v = f["schedule-d.1.line.16_combined_gain_loss"];
-        if (typeof v === "number") return v;
+        if (typeof v === "number") {
+          const l21 = f["schedule-d.1.line.21_allowable_loss"];
+          return form1040Line7a(v, typeof l21 === "number" ? l21 : undefined);
+        }
         // MANUAL EDIT: Exception 1 — capital gain distributions only, no Schedule D.
         return roundDollars(info.capitalGainDistributionsNoScheduleD);
       },

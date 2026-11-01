@@ -7,6 +7,7 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import type { Form8960FilingInfo } from "./filingInfo.js";
+import { netInvestmentIncome } from "./lines.js";
 import type { Form8960 } from "./types.js";
 
 export function register(): void {
@@ -32,7 +33,7 @@ export function register(): void {
         ),
       "0.line.9d": (f) => sum(f["0.line.9a"], f["0.line.9b"], f["0.line.9c"]),
       "0.line.11": (f) => sum(f["0.line.9d"], f["0.line.10"]),
-      "0.line.12": (f) => sum(f["0.line.8"], f["0.line.11"] === undefined ? 0 : -f["0.line.11"]),
+      "0.line.12": (f) => netInvestmentIncome(f["0.line.8"], f["0.line.11"]),
       // MAGI = AGI; the FEIE/CFC add-backs are not modeled.
       "0.line.13": (f) => sum(f["form-1040.line.11b"]),
       // Statutory thresholds; not indexed for inflation.

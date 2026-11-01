@@ -8,6 +8,7 @@ import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { Form8959FilingInfo } from "./filingInfo.js";
+import { excessMedicareWages } from "./lines.js";
 import type { Form8959 } from "./types.js";
 
 /* Statutory thresholds for lines 5, 9 and 15. Only Part II adjusts them (line 11). */
@@ -39,14 +40,9 @@ export function register(): void {
       "0.line.5_filing_status_threshold_wages": (_, info) =>
         info.filingStatus ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus] : undefined,
       "0.line.6_excess_medicare_wages": (f) =>
-        atLeast(
-          0,
-          sum(
-            f["0.line.4_total_medicare_wages"],
-            f["0.line.5_filing_status_threshold_wages"] === undefined
-              ? 0
-              : -f["0.line.5_filing_status_threshold_wages"],
-          ),
+        excessMedicareWages(
+          f["0.line.4_total_medicare_wages"],
+          f["0.line.5_filing_status_threshold_wages"],
         ),
       // MANUAL EDIT: inline math; the generator has no multiply rule.
       "0.line.7_additional_medicare_tax_wages": (f) => {

@@ -369,7 +369,7 @@
     },
     {
       "fieldId": "form-8960.0.line.12",
-      "label": "Line 12 — Net investment income. Subtract Part II, line 11, from Part I, line 8",
+      "label": "Line 12 — Net investment income. Subtract Part II, line 11, from Part I, line 8. If zero or less, enter -0-",
       "labelSource": "vision",
       "category": "income",
       "valueType": "numeric",

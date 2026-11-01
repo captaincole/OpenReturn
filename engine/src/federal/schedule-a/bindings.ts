@@ -8,6 +8,7 @@ import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
+import { saltCap } from "./saltCap.js";
 import type { ScheduleA } from "./types.js";
 
 export function register(): void {
@@ -62,24 +63,15 @@ export function register(): void {
         if (a === undefined && b === undefined && c === undefined) return undefined;
         return sum(a, b, c);
       },
-      /*
-       * MANUAL EDIT: OBBBA SALT cap for 2025: reduced by 30% of MAGI over the
-       * threshold, not below the floor. MAGI = AGI (no FEIE or territory
-       * exclusions are modeled).
-       */
+      // MANUAL EDIT: the 2025 SALT worksheet. MAGI = AGI (no FEIE or territory exclusions are modeled).
       "0.line.5e_salt_cap": (f, info) => {
         const line5d = f["0.line.5d_total_state_local_taxes"];
         if (typeof line5d !== "number") return undefined;
-        const mfs = info.filingStatus === "married_filing_separately";
-        const baseCap = mfs ? 20000 : 40000;
-        const threshold = mfs ? 250000 : 500000;
-        const capFloor = mfs ? 5000 : 10000;
         const magi = f["form-1040.line.11b"];
-        let cap = baseCap;
-        if (typeof magi === "number" && magi > threshold) {
-          cap = atLeast(capFloor, baseCap - 0.3 * (magi - threshold));
-        }
-        return Math.min(line5d, cap);
+        return Math.min(
+          line5d,
+          saltCap(typeof magi === "number" ? magi : undefined, info.filingStatus),
+        );
       },
       "0.line.7_total_taxes": (f) => {
         const e = f["0.line.5e_salt_cap"];

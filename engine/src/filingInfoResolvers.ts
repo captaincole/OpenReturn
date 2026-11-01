@@ -1,4 +1,5 @@
 import { SPOUSE_KEYS, isDividendFactKey, isInterestFactKey, isW2FactKey } from "./facts/index.js";
+import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import type { Form8959FilingInfo } from "./federal/8959/filingInfo.js";
@@ -179,8 +180,13 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
     explicitKey: "decisions.scope.must_file_schedule_d",
     fallbacks: reportableSalesFallbacks(inputs),
   });
+  const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
   return {
     mustFile: { "schedule-d": r },
+    capitalGainDistributions:
+      distributions > 0
+        ? (distributions as ScheduleDFilingInfo["capitalGainDistributions"])
+        : undefined,
   };
 }
 
@@ -239,12 +245,14 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     misc.length > 0
       ? sum(...misc.map((row) => (row.value as Record<string, unknown>).box3))
       : undefined;
+  // Form 8889 lines 13 and 16 reach the 1040 only through Schedule 1.
+  const form8889 = resolve8889Info(inputs).mustFile?.["form-8889"]?.value === true;
   const r = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
-        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0`,
-        value: (miscOtherIncome ?? 0) > 0,
+        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, or Form 8889 filed (${form8889})`,
+        value: (miscOtherIncome ?? 0) > 0 || form8889,
       },
     ],
   });
