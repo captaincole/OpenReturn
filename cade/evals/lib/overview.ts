@@ -21,7 +21,7 @@ export interface FlowScores {
   models: ModelScores[];
 }
 
-const REPO = path.resolve(__dirname, "../../../..");
+const REPO = path.resolve(__dirname, "../../..");
 const DIR = path.join(REPO, "docs/evals");
 const FLOWS: Flow[] = ["ingest", "review", "ask"];
 const scoresFile = (flow: Flow) => path.join(DIR, "scores", `${flow}.json`);
