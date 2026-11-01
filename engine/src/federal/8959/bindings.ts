@@ -165,7 +165,5 @@ export function register(): void {
       "0.line.23_additional_medicare_tax_withholding_rrta":
         "RRTA Additional Medicare Tax withholding from W-2 box 14 — same blocker as line 14.",
     },
-
-    todos: {},
   });
 }

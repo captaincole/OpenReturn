@@ -25,8 +25,6 @@ export interface FormSpec<TForm extends object, TInfo extends BaseFilingInfo> {
   bindings: Partial<{ [K in keyof TForm]: BindingFn<TForm, TInfo, K> }>;
   formatters?: Partial<{ [K in keyof TForm]: FormatterFn<TForm[K]> }>;
   unsupported?: Partial<{ [K in keyof TForm]: string }>;
-  /** Generator stubs. Treated as `unsupported`; kept apart for the bindings-review report. */
-  todos?: Partial<{ [K in keyof TForm]: string }>;
 }
 
 // Also indexable by a full cross-form field id ("form-1040.line.11b").
@@ -36,75 +34,36 @@ export type FormAccessor<TForm> = {
   readonly [crossFormFieldId: string]: unknown;
 };
 
-interface FormSpecMeta {
-  formId: string;
-  bindingKeys: string[];
-  unsupportedKeys: string[];
-  todoKeys: string[];
-  formatterKeys: string[];
-}
-
-const formSpecMeta = new Map<string, FormSpecMeta>();
-
-export function getFormSpecMeta(formId: string): FormSpecMeta | undefined {
-  return formSpecMeta.get(formId);
-}
-
-export function listFormSpecMeta(): FormSpecMeta[] {
-  return Array.from(formSpecMeta.values());
-}
-
 function registerEntries<V>(
   entries: object | undefined,
   register: (shortKey: string, value: NonNullable<V>) => void,
-): string[] {
-  const keys: string[] = [];
+): void {
   for (const [shortKey, value] of Object.entries(entries ?? {}) as Array<[string, V]>) {
     if (value === undefined || value === null) continue;
     register(shortKey, value as NonNullable<V>);
-    keys.push(shortKey);
   }
-  return keys;
 }
 
 export function defineForm<TForm extends object, TInfo extends BaseFilingInfo>(
   formId: string,
   spec: FormSpec<TForm, TInfo>,
 ): void {
-  const bindingKeys = registerEntries<BindingFn<TForm, TInfo, keyof TForm>>(
-    spec.bindings,
-    (shortKey, fn) => {
-      const fullId = `${formId}.${shortKey}`;
-      bindField(
-        formId,
-        fullId,
-        makeBindingRule(formId, fullId, fn as BindingFn<unknown, BaseFilingInfo, never>),
-        null,
-      );
-    },
-  );
+  registerEntries<BindingFn<TForm, TInfo, keyof TForm>>(spec.bindings, (shortKey, fn) => {
+    const fullId = `${formId}.${shortKey}`;
+    bindField(
+      formId,
+      fullId,
+      makeBindingRule(formId, fullId, fn as BindingFn<unknown, BaseFilingInfo, never>),
+      null,
+    );
+  });
 
-  const unsupportedKeys = registerEntries<string>(spec.unsupported, (shortKey, reason) => {
+  registerEntries<string>(spec.unsupported, (shortKey, reason) => {
     bindField(formId, `${formId}.${shortKey}`, makeUnsupportedRule(reason), null);
   });
 
-  const todoKeys = registerEntries<string>(spec.todos, (shortKey, reason) => {
-    bindField(formId, `${formId}.${shortKey}`, makeUnsupportedRule(`TODO: ${reason}`), null);
-  });
-
-  const formatterKeys = registerEntries<FormatterFn<unknown>>(
-    spec.formatters,
-    (shortKey, formatter) => {
-      formatterRegistry.set(`${formId}.${shortKey}`, formatter);
-    },
-  );
-
-  formSpecMeta.set(formId, {
-    formId,
-    bindingKeys,
-    unsupportedKeys,
-    todoKeys,
-    formatterKeys,
+  registerEntries<FormatterFn<unknown>>(spec.formatters, (shortKey, formatter) => {
+    formatterRegistry.set(`${formId}.${shortKey}`, formatter);
   });
 }
 
@@ -197,5 +156,4 @@ export function getFormatter(fieldId: string): FormatterFn<unknown> | undefined 
 export function _resetRegistryForTests(): void {
   _resetBindingRegistryForTests();
   formatterRegistry.clear();
-  formSpecMeta.clear();
 }

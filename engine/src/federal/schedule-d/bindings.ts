@@ -163,9 +163,6 @@ export function register(): void {
         "This checkbox is true when Form 1040 line 3a (qualified dividends) is greater than zero. We have no 'greaterThanZero' comparison rule to drive a boolean checkbox from a numeric field. Needs a conditional/comparison rule.",
       "1.line.22_qualified_dividends_no":
         "This checkbox is true when Form 1040 line 3a (qualified dividends) equals zero. We have no 'equalsZero' or 'not greaterThanZero' comparison rule to drive a boolean checkbox from a numeric field. Needs a conditional/comparison rule.",
-    },
-
-    todos: {
       "0.line.1a_proceeds":
         "confidence=low: Line 1a aggregates short-term proceeds for 1099-B/DA transactions where basis was reported and no adjustments needed; however, no fact fieldPath exists for this sub-bucket — unsupported until fact schema is extended.",
       "0.line.1a_gain_loss":

@@ -578,7 +578,5 @@ export function register(): void {
       "signing.preparer_firm_ein":
         "No paid-preparer ingestion path exists; firm EIN belongs to the paid preparer's practice, not the taxpayer.",
     },
-
-    todos: {},
   });
 }

@@ -608,9 +608,6 @@ export function register(): void {
         "Other CA itemized deduction adjustments (adoption credit, nontaxable income expenses, legislator travel, etc.). No fact ingestion path built for these CA-specific adjustments.",
       "5.page2.total_itemized_29":
         "Line 29 requires a conditional: if Form 540 line 13 (federal AGI) exceeds the filing-status threshold ($252,203 / $378,310 / $504,411), the taxpayer must complete the Itemized Deductions Worksheet (a multi-step phase-out calculation). The engine has no conditional-branch or worksheet rule. For below-threshold taxpayers, line 29 equals line 28, but we cannot implement the high-income phase-out path. Bind as unsupported until a conditional/worksheet rule is available.",
-    },
-
-    todos: {
       "4.page2.interest_8e_subtractions":
         "confidence=low: Lines 8a, 8b, 8c have no column B fields in the inventory; line 8e col B has no contributing subtraction terms currently — unsupported is more appropriate.",
       "5.page2.total_itemized_17_subtractions":

@@ -37,7 +37,7 @@ Add `policyengine_us/tests/policy/baseline/gov/irs` for its YAML test cases (inp
 
 ## Steps for one form
 
-1. Read the form's `engine/src/federal/<form>/bindings.ts`, including `unsupported` and `todos`. A todo prints blank, and the next line reads it as $0 with no warning.
+1. Read the form's `engine/src/federal/<form>/bindings.ts`, including `unsupported`. An unsupported line prints blank, and the next line reads it as $0 with no warning.
 2. Find the PolicyEngine variables and parameters for the same lines. Compare constants first, then logic.
 3. For each difference, find the rule in the corpus (`npm run corpus -- search "<phrase>"`) and quote its block id. Decide: our bug, their bug, or a scope difference.
 4. Check whether a wrong number can print today. Is the line reachable from a real fact path, or does a missing input put the return in pending first?

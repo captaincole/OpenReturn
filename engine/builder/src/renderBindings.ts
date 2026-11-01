@@ -1,6 +1,6 @@
 /*
  * Bindings below minConfidence, and keys with no FilingInfo slot, go to
- * `todos`. The `unsupported` rule always goes to `unsupported`.
+ * `unsupported`, with the `unsupported` rule.
  */
 
 import type { FieldInventory } from "@openreturn/engine/catalog";
@@ -27,7 +27,6 @@ export interface RenderBindingsOpts {
 export interface RenderBindingsReport {
   source: string;
   emittedCount: number;
-  todoCount: number;
   unsupportedCount: number;
   unboundCount: number;
   confidenceBreakdown: Record<Confidence, number>;
@@ -37,7 +36,6 @@ export interface RenderBindingsReport {
 type RenderEntry =
   | { kind: "binding"; field: FieldInventory; body: string; rationale: string }
   | { kind: "unsupported"; field: FieldInventory; reason: string }
-  | { kind: "todo"; field: FieldInventory; reason: string }
   | { kind: "unbound"; field: FieldInventory };
 
 interface BucketResult {
@@ -92,15 +90,15 @@ function bucketOneField(
 
   if (CONFIDENCE_ORDER[binding.confidence] < minOrder) {
     return {
-      kind: "todo",
+      kind: "unsupported",
       field,
       reason: `confidence=${binding.confidence}: ${binding.rationale}`,
     };
   }
 
   const translated = translate(binding, formId);
-  if (translated.kind === "todo") {
-    return { kind: "todo", field, reason: `${binding.ruleName}: ${translated.reason}` };
+  if (translated.kind === "unsupported") {
+    return { kind: "unsupported", field, reason: `${binding.ruleName}: ${translated.reason}` };
   }
   if (translated.usesLookupTax) result.usesLookupTax = true;
   if (translated.usesSum) result.usesSum = true;
@@ -175,16 +173,6 @@ function renderSpecSections(opts: RenderBindingsOpts, entries: RenderEntry[]): s
     out.push("");
   }
 
-  const todos = entries.filter((e) => e.kind === "todo");
-  if (todos.length > 0) {
-    out.push(`    todos: {`);
-    for (const e of todos) {
-      out.push(`      ${quote(shortKey(e.field.fieldId, opts.formId))}: ${quote(e.reason)},`);
-    }
-    out.push(`    },`);
-    out.push("");
-  }
-
   out.push(`  });`);
   out.push(`}`);
   out.push("");
@@ -198,13 +186,12 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
   const out = [...renderPreamble(opts, bucketed), ...renderSpecSections(opts, entries)];
 
   const emittedCount = entries.filter((e) => e.kind === "binding").length;
-  const todoCount = entries.filter((e) => e.kind === "todo").length;
   const unsupportedCount = entries.filter((e) => e.kind === "unsupported").length;
   const unboundCount = entries.filter((e) => e.kind === "unbound").length;
 
   out.push(`/*`);
   out.push(
-    ` * Summary: ${emittedCount} binding(s), ${todoCount} todo(s), ${unsupportedCount} unsupported, ${unboundCount} unbound.`,
+    ` * Summary: ${emittedCount} binding(s), ${unsupportedCount} unsupported, ${unboundCount} unbound.`,
   );
   out.push(
     ` * Confidence: ${bucketed.confidenceBreakdown.high} high, ${bucketed.confidenceBreakdown.medium} medium, ${bucketed.confidenceBreakdown.low} low.`,
@@ -215,7 +202,6 @@ export function renderBindings(opts: RenderBindingsOpts): RenderBindingsReport {
   return {
     source: out.join("\n"),
     emittedCount,
-    todoCount,
     unsupportedCount,
     unboundCount,
     confidenceBreakdown: bucketed.confidenceBreakdown,

@@ -6,6 +6,8 @@
 import { atLeast, stepsOf } from "../money.js";
 import type { FilingStatus } from "../values.js";
 
+const REDUCTION_PER_STEP = 6;
+
 const THRESHOLDS_2025: Record<FilingStatus, number> = {
   single: 252203,
   married_filing_separately: 252203,
@@ -33,8 +35,14 @@ export function caExemptionCreditsAfterLimit(inputs: CaAgiLimitationInputs): num
   const excess = inputs.federalAgi - THRESHOLDS_2025[inputs.filingStatus]; // line c
   if (excess <= 0) return total; // not over the threshold: line 32 = line 11
   const step = inputs.filingStatus === "married_filing_separately" ? 1250 : 2500;
-  const e = stepsOf(excess, step) * 6; // lines d, e
-  const i = atLeast(0, inputs.personalAmount - e * inputs.personalCount); // lines g, i
-  const m = atLeast(0, inputs.dependentAmount - e * inputs.dependentCount); // lines k, m
-  return i + m; // line n
+  const reductionPerCredit = stepsOf(excess, step) * REDUCTION_PER_STEP; // lines d, e
+  const personalAfterLimit = atLeast(
+    0,
+    inputs.personalAmount - reductionPerCredit * inputs.personalCount,
+  ); // lines g, i
+  const dependentAfterLimit = atLeast(
+    0,
+    inputs.dependentAmount - reductionPerCredit * inputs.dependentCount,
+  ); // lines k, m
+  return personalAfterLimit + dependentAfterLimit; // line n
 }

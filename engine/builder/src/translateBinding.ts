@@ -47,7 +47,7 @@ export type Translation =
       usesSum?: boolean;
       usesAtLeast?: boolean;
     }
-  | { kind: "todo"; reason: string };
+  | { kind: "unsupported"; reason: string };
 
 export function translate(b: ClassifiedBinding, formId: string): Translation {
   switch (b.ruleName) {
@@ -69,13 +69,13 @@ export function translate(b: ClassifiedBinding, formId: string): Translation {
       return translateConstant(b);
     case "bracketLookup":
       return {
-        kind: "todo",
+        kind: "unsupported",
         reason:
           "bracketLookup translation not implemented yet — typically progressive-bracket math (AMT, ≥$100k Tax Computation Worksheet)",
       };
     case "unsupported":
       // The caller routes `unsupported` to its own map; this must not run.
-      return { kind: "todo", reason: "unsupported routed to bindings path" };
+      return { kind: "unsupported", reason: "unsupported routed to bindings path" };
   }
 }
 
@@ -84,7 +84,7 @@ function translateLookupFact(b: ClassifiedBinding): Translation {
   const slot = FACT_TO_SLOT[factKey];
   if (!slot) {
     return {
-      kind: "todo",
+      kind: "unsupported",
       reason: `no FilingInfo slot for fact "${factKey}". Add the slot to BaseFilingInfo / <Form>FilingInfo and map it in renderBindings.FACT_TO_SLOT.`,
     };
   }
@@ -99,7 +99,7 @@ function translateSumFacts(b: ClassifiedBinding): Translation {
   const slot = SUM_FACTS_TO_SLOT[key];
   if (!slot) {
     return {
-      kind: "todo",
+      kind: "unsupported",
       reason: `no FilingInfo slot for sumFacts(${key}). Add the aggregate to <Form>FilingInfo + the resolver, and map it in renderBindings.SUM_FACTS_TO_SLOT.`,
     };
   }
@@ -111,7 +111,7 @@ function translateLookupDecision(b: ClassifiedBinding): Translation {
   const slot = DECISION_TO_SLOT[decisionKey];
   if (!slot) {
     return {
-      kind: "todo",
+      kind: "unsupported",
       reason: `no FilingInfo slot for decision "${decisionKey}". Add the slot to BaseFilingInfo / <Form>FilingInfo and map it in renderBindings.DECISION_TO_SLOT.`,
     };
   }
@@ -123,7 +123,7 @@ function translateDecisionIfEquals(b: ClassifiedBinding): Translation {
   const slot = DECISION_TO_SLOT[decisionKey];
   if (!slot) {
     return {
-      kind: "todo",
+      kind: "unsupported",
       reason: `no FilingInfo slot for decision "${decisionKey}".`,
     };
   }
@@ -148,13 +148,13 @@ function translateTableLookupByDecision(b: ClassifiedBinding): Translation {
   const slot = DECISION_TO_SLOT[decisionKey];
   if (!slot) {
     return {
-      kind: "todo",
+      kind: "unsupported",
       reason: `no FilingInfo slot for decision "${decisionKey}".`,
     };
   }
   const table = b.params.table;
   if (!table || typeof table !== "object") {
-    return { kind: "todo", reason: "tableLookupByDecision missing table param" };
+    return { kind: "unsupported", reason: "tableLookupByDecision missing table param" };
   }
   const tableLiteral = JSON.stringify(table);
   return {
@@ -167,7 +167,7 @@ function translateFromFields(b: ClassifiedBinding, formId: string): Translation 
   const terms = b.params.terms as
     Array<{ fieldId: string; sign?: number; whenSourceNotRequired?: unknown }> | undefined;
   if (!Array.isArray(terms) || terms.length === 0) {
-    return { kind: "todo", reason: "fromFields missing terms" };
+    return { kind: "unsupported", reason: "fromFields missing terms" };
   }
   const args: string[] = [];
   for (const t of terms) {
@@ -202,12 +202,12 @@ function translateTaxTable(b: ClassifiedBinding, formId: string): Translation {
   const slot = DECISION_TO_SLOT[decisionKey];
   if (!slot) {
     return {
-      kind: "todo",
+      kind: "unsupported",
       reason: `taxTable: no FilingInfo slot for decision "${decisionKey}".`,
     };
   }
   if (!inputFieldId) {
-    return { kind: "todo", reason: "taxTable missing inputFieldId" };
+    return { kind: "unsupported", reason: "taxTable missing inputFieldId" };
   }
   const inputKey = shortOrFullKey(inputFieldId, formId);
   return {
@@ -227,7 +227,7 @@ function translateTaxTable(b: ClassifiedBinding, formId: string): Translation {
 function translateConstant(b: ClassifiedBinding): Translation {
   const value = b.params.value;
   if (value === undefined) {
-    return { kind: "todo", reason: "constant missing value param" };
+    return { kind: "unsupported", reason: "constant missing value param" };
   }
   return { kind: "body", body: `() => ${JSON.stringify(value)}` };
 }

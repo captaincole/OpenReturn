@@ -82,7 +82,7 @@ async function run(argv: string[]): Promise<void> {
 
   console.log();
   console.log(
-    `  Fields: ${result.fieldCount}, emitted: ${result.emittedCount}, todos: ${result.todoCount}, unsupported: ${result.unsupportedCount}, unbound: ${result.unboundCount}`,
+    `  Fields: ${result.fieldCount}, emitted: ${result.emittedCount}, unsupported: ${result.unsupportedCount}, unbound: ${result.unboundCount}`,
   );
   console.log(`  Retrieved IRS context for ${result.retrievalCount} field(s)`);
   console.log(

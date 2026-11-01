@@ -309,9 +309,6 @@ export function register(): void {
         "Period-annualized AMT/behavioral health tax for 1/1–5/31 requires per-period income facts; annualized income installment method not modeled.",
       "3.part3.line_14b_col_c":
         "Period-annualized AMT/behavioral health tax for 1/1–8/31 requires per-period income facts; annualized income installment method not modeled.",
-    },
-
-    todos: {
       "1.part2.line_8":
         "confidence=medium: Total 2025 estimated payments from Form 540 line 72. Line 72 may also include extension or other payments.",
       "2.part3.line_3_col_a":

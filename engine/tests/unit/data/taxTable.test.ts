@@ -3,7 +3,8 @@
 import { describe, expect, it } from "vitest";
 import { lookupCaRateSchedule } from "../../../src/data/caRateSchedule.js";
 import { lookupRateSchedule } from "../../../src/data/rateSchedule.js";
-import { lookupTax, supportedTableIds, type FilingStatus } from "../../../src/data/taxTable.js";
+import { lookupTax, supportedTableIds } from "../../../src/data/taxTable.js";
+import type { FilingStatus } from "../../../src/values.js";
 
 const STATUSES: FilingStatus[] = [
   "single",

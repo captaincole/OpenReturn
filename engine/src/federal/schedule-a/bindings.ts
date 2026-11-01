@@ -149,7 +149,5 @@ export function register(): void {
       "0.line.18_elect_itemize_below_standard":
         "No decision or fact models the taxpayer's explicit election to itemize even when deductions are below the standard deduction. This is an uncommon voluntary election with no ingestion path yet — requires a dedicated ai_decision when a real scenario forces it.",
     },
-
-    todos: {},
   });
 }

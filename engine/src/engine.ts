@@ -49,8 +49,9 @@ export function _resetBindingRegistryForTests(): void {
 }
 
 /*
- * Monotonicity invariant: a later pass never overwrites an `ok` field
- * result. Fixpoint termination depends on it.
+ * Infinite-loop guard: a later pass never changes a field that is already
+ * `ok`. The pass loop stops only when a pass changes nothing, so without
+ * this rule two fields could flip each other forever.
  */
 export interface EvaluateFormSharedState {
   fieldResults: Map<string, DerivationResult<unknown>>;
@@ -161,7 +162,7 @@ function evaluateFields(
         result = blocked(
           `No binding registered for ${inv.fieldId}. ` +
             `Either remove it from the catalog or add an entry to the ` +
-            `form's defineForm spec (bindings/unsupported/todos).`,
+            `form's defineForm spec (bindings/unsupported).`,
         );
       } else {
         const reads = trackPendingReads({ ...engineCtx, field: inv }, formId);

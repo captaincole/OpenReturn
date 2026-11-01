@@ -135,7 +135,6 @@ export const writeStep = createStep({
       outputPath: inputData.outputPath,
       fieldCount: inputData.fields.length,
       emittedCount: report.emittedCount,
-      todoCount: report.todoCount,
       unsupportedCount: report.unsupportedCount,
       unboundCount: report.unboundCount,
       ruleBreakdown: report.ruleBreakdown,
