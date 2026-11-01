@@ -6,29 +6,29 @@ import type { AskResult } from "./report";
 const hitsAllOrNull = (groups: AnyOf[], ids: Set<string>) =>
   groups.length ? hitsAll(groups, ids) : null;
 
-function missingFacts(c: AskCase, answer: string): string[] {
+function missingFacts(testCase: AskCase, answer: string): string[] {
   const text = answer.toLowerCase();
-  return c.facts
-    .filter((group) => !group.some((f) => text.includes(f.toLowerCase())))
+  return testCase.facts
+    .filter((group) => !group.some((fact) => text.includes(fact.toLowerCase())))
     .map((group) => group[0]);
 }
 
 // validate drops unretrieved citations, so a cited passage counts as retrieved.
-export function scoreResult(r: AskResult): AskResult {
-  const c = CASES.find((x) => x.name === r.case);
-  if (!c) return r;
-  const missing = missingFacts(c, r.answer);
-  const citedAuthority = hitsAllOrNull(c.authority, new Set(r.cited));
+export function scoreResult(result: AskResult): AskResult {
+  const testCase = CASES.find((candidate) => candidate.name === result.case);
+  if (!testCase) return result;
+  const missing = missingFacts(testCase, result.answer);
+  const citedAuthority = hitsAllOrNull(testCase.authority, new Set(result.cited));
   return {
-    ...r,
-    tier: c.tier,
-    kind: c.kind,
-    expectedCoverage: c.coverage,
+    ...result,
+    tier: testCase.tier,
+    kind: testCase.kind,
+    expectedCoverage: testCase.coverage,
     citedAuthority,
-    retrievedAuthority: r.retrieved
-      ? hitsAllOrNull(c.authority, new Set([...r.retrieved, ...r.cited]))
-      : citedAuthority || r.retrievedAuthority,
-    factsOk: c.facts.length ? missing.length === 0 : null,
+    retrievedAuthority: result.retrieved
+      ? hitsAllOrNull(testCase.authority, new Set([...result.retrieved, ...result.cited]))
+      : citedAuthority || result.retrievedAuthority,
+    factsOk: testCase.facts.length ? missing.length === 0 : null,
     missingFacts: missing,
   };
 }

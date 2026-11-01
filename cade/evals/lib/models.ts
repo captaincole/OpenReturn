@@ -31,20 +31,20 @@ const ALL_MODELS: Omit<EvalModel, "runs">[] = [
   { label: "Gemma 4 e2b (4090)", id: "ollama/gemma4:e2b", url: PC },
 ];
 
-const configured = (m: Omit<EvalModel, "runs">) =>
-  m.id.startsWith("ollama/") ? Boolean(m.url) : Boolean(process.env.ANTHROPIC_API_KEY);
+const configured = (model: Omit<EvalModel, "runs">) =>
+  model.id.startsWith("ollama/") ? Boolean(model.url) : Boolean(process.env.ANTHROPIC_API_KEY);
 const MODELS = ALL_MODELS.filter(configured);
 
 const LITE = new Set([HAIKU, "ollama/gemma4:31b"]);
-const isLite = (m: Omit<EvalModel, "runs">) => LITE.has(m.id);
+const isLite = (model: Omit<EvalModel, "runs">) => LITE.has(model.id);
 
 // The stored label keeps the machine tag: it keys merged runs.
 const shortLabel = (label: string) => label.replace(/ \(4090\)$/, "");
 
 export function forDisplay<R extends { model: string }>(models: EvalModel[], results: R[]) {
   return {
-    models: models.map((m) => ({ ...m, label: shortLabel(m.label) })),
-    results: results.map((r) => ({ ...r, model: shortLabel(r.model) })),
+    models: models.map((model) => ({ ...model, label: shortLabel(model.label) })),
+    results: results.map((result) => ({ ...result, model: shortLabel(result.model) })),
   };
 }
 
@@ -53,27 +53,29 @@ export const tierFromArgs = (argv: string[]): Tier => (argv.includes("--full") ?
 const NONE =
   "no eval model is configured: set ANTHROPIC_API_KEY for Haiku, or EVAL_PC_OLLAMA_URL for the 31b on the second machine";
 
-function setupHint(m: Omit<EvalModel, "runs">): string {
-  if (configured(m)) return "";
-  return m.id.startsWith("ollama/") ? "  (set EVAL_PC_OLLAMA_URL)" : "  (set ANTHROPIC_API_KEY)";
+function setupHint(model: Omit<EvalModel, "runs">): string {
+  if (configured(model)) return "";
+  return model.id.startsWith("ollama/")
+    ? "  (set EVAL_PC_OLLAMA_URL)"
+    : "  (set ANTHROPIC_API_KEY)";
 }
 
 function unknownModelError(ids: string[]): Error {
-  const list = ALL_MODELS.map((m) => `  ${m.id}${setupHint(m)}`).join("\n");
+  const list = ALL_MODELS.map((model) => `  ${model.id}${setupHint(model)}`).join("\n");
   return new Error(`unknown or unconfigured model: ${ids.join(", ")}. Pass an exact id:\n${list}`);
 }
 
 export function modelsFromArgs(argv: string[]): EvalModel[] {
   const tier = tierFromArgs(argv);
-  const runsOverride = Number(argv.find((a) => a.startsWith("--runs="))?.slice(7)) || undefined;
-  const ids = argv.filter((a) => !a.startsWith("--"));
-  const unknown = ids.filter((id) => !MODELS.some((m) => m.id === id));
+  const runsOverride = Number(argv.find((arg) => arg.startsWith("--runs="))?.slice(7)) || undefined;
+  const ids = argv.filter((arg) => !arg.startsWith("--"));
+  const unknown = ids.filter((id) => !MODELS.some((model) => model.id === id));
   if (unknown.length) throw unknownModelError(unknown);
   const picked = ids.length
-    ? MODELS.filter((m) => ids.includes(m.id))
-    : MODELS.filter((m) => tier === "full" || isLite(m));
+    ? MODELS.filter((model) => ids.includes(model.id))
+    : MODELS.filter((model) => tier === "full" || isLite(model));
   if (!picked.length) throw new Error(NONE);
-  return picked.map((m) => ({ ...m, runs: m.url ? (runsOverride ?? RUNS[tier]) : 1 }));
+  return picked.map((model) => ({ ...model, runs: model.url ? (runsOverride ?? RUNS[tier]) : 1 }));
 }
 
 /*

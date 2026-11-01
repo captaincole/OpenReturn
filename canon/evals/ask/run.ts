@@ -29,27 +29,27 @@ const mastra = new Mastra({ agents: { askQueryFormulator, askAnswerer } });
 
 /* Fail loudly when a labeled block is gone (a parser change renumbers blocks). */
 async function checkAuthority() {
-  const ids = [...new Set(CASES.flatMap((c) => c.authority.flat()))];
+  const ids = [...new Set(CASES.flatMap((testCase) => testCase.authority.flat()))];
   const res = await getCorpusDb().execute({
     sql: `SELECT block_id FROM ref_blocks WHERE block_id IN (${ids.map(() => "?").join(",")})`,
     args: ids,
   });
-  const found = new Set(res.rows.map((r) => String(r.block_id)));
+  const found = new Set(res.rows.map((row) => String(row.block_id)));
   const missing = ids.filter((id) => !found.has(id));
   if (missing.length)
     throw new Error(`labeled blocks missing from corpus.db: ${missing.join(", ")}`);
 }
 
 function retrievedBlocks(steps: AskStepLog[]): Set<string> {
-  const json = JSON.stringify(steps.filter((s) => s.kind === "retrieve"));
-  return new Set([...json.matchAll(/"blockId":"([^"]+)"/g)].map((m) => m[1]));
+  const json = JSON.stringify(steps.filter((step) => step.kind === "retrieve"));
+  return new Set([...json.matchAll(/"blockId":"([^"]+)"/g)].map((match) => match[1]));
 }
 
-async function evalCase(c: AskCase, run: number): Promise<AskResult> {
+async function evalCase(testCase: AskCase, run: number): Promise<AskResult> {
   const steps: AskStepLog[] = [];
   const started = Date.now();
-  const result = await answerQuestion(mastra, { question: c.question, steps })
-    .then((r) => ({ ...r, error: null as string | null }))
+  const result = await answerQuestion(mastra, { question: testCase.question, steps })
+    .then((output) => ({ ...output, error: null as string | null }))
     .catch((err: unknown) => ({
       answer: "",
       coverage: null,
@@ -58,13 +58,13 @@ async function evalCase(c: AskCase, run: number): Promise<AskResult> {
     }));
   return scoreResult({
     model: model.label,
-    case: c.name,
+    case: testCase.name,
     run,
-    tier: c.tier,
-    kind: c.kind,
-    expectedCoverage: c.coverage,
+    tier: testCase.tier,
+    kind: testCase.kind,
+    expectedCoverage: testCase.coverage,
     coverage: result.coverage,
-    cited: result.citations.map((x) => x.blockId),
+    cited: result.citations.map((citation) => citation.blockId),
     retrieved: [...retrievedBlocks(steps)],
     citedAuthority: null,
     retrievedAuthority: null,
@@ -77,38 +77,44 @@ async function evalCase(c: AskCase, run: number): Promise<AskResult> {
 }
 
 /* One row per run for the lite summary (cade/evals/lite), which reads no eval code. */
-const liteCase = (r: AskResult) => ({
+const liteCase = (result: AskResult) => ({
   flow: "ask",
-  model: r.model,
-  name: r.case,
-  run: r.run,
-  score: correct(r) ? 1 : 0,
-  note: r.error ? `failed: ${r.error}` : `${r.coverage}, expected ${r.expectedCoverage.join("/")}`,
+  model: result.model,
+  name: result.case,
+  run: result.run,
+  score: correct(result) ? 1 : 0,
+  note: result.error
+    ? `failed: ${result.error}`
+    : `${result.coverage}, expected ${result.expectedCoverage.join("/")}`,
 });
 
-function logLine(c: AskCase, run: number, r: AskResult): string {
+function logLine(testCase: AskCase, run: number, result: AskResult): string {
   const facts =
-    r.factsOk === null
+    result.factsOk === null
       ? ""
-      : `, facts ${r.factsOk ? "yes" : `missing ${r.missingFacts.join(", ")}`}`;
-  const cited = r.citedAuthority === null ? "" : `, cited ${r.citedAuthority ? "yes" : "no"}`;
-  return `  ${c.name} #${run}: ${r.coverage ?? `failed (${r.error})`} (expected ${c.coverage.join("/")})${cited}${facts}, ${(r.latencyMs / 1000).toFixed(0)}s`;
+      : `, facts ${result.factsOk ? "yes" : `missing ${result.missingFacts.join(", ")}`}`;
+  const cited =
+    result.citedAuthority === null ? "" : `, cited ${result.citedAuthority ? "yes" : "no"}`;
+  return `  ${testCase.name} #${run}: ${result.coverage ?? `failed (${result.error})`} (expected ${testCase.coverage.join("/")})${cited}${facts}, ${(result.latencyMs / 1000).toFixed(0)}s`;
 }
 
 async function main() {
   await checkAuthority();
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
-  const outDir = ARGS.find((a) => a.startsWith("--out="))?.slice(6) ?? path.join(OUT_DIR, runId);
+  const outDir =
+    ARGS.find((arg) => arg.startsWith("--out="))?.slice(6) ?? path.join(OUT_DIR, runId);
   mkdirSync(outDir, { recursive: true });
-  const caseFilter = ARGS.find((a) => a.startsWith("--case="))?.slice(7);
-  const cases = casesFor(TIER).filter((c) => !caseFilter || c.name.includes(caseFilter));
+  const caseFilter = ARGS.find((arg) => arg.startsWith("--case="))?.slice(7);
+  const cases = casesFor(TIER).filter(
+    (testCase) => !caseFilter || testCase.name.includes(caseFilter),
+  );
   console.log(`${TIER} tier: ${cases.length} cases × ${model.runs} runs, ${model.label}`);
   const results: AskResult[] = [];
-  for (const c of cases)
+  for (const testCase of cases)
     for (let run = 1; run <= model.runs; run++) {
-      const r = await evalCase(c, run);
-      console.log(logLine(c, run, r));
-      results.push(r);
+      const result = await evalCase(testCase, run);
+      console.log(logLine(testCase, run, result));
+      results.push(result);
       writeFileSync(
         path.join(outDir, "results.json"),
         JSON.stringify({ models: [model], results, cases: results.map(liteCase) }, null, 2),
