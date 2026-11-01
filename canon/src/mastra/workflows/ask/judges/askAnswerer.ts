@@ -57,5 +57,5 @@ export const askAnswerer = new Agent({
   id: "askAnswerer",
   name: "Ask — Answerer",
   instructions,
-  model: modelFor("judge"),
+  model: () => modelFor("judge"),
 });

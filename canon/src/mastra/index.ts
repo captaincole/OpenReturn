@@ -1,6 +1,7 @@
 import { Mastra } from "@mastra/core";
 import "dotenv/config";
 import { canonMcp } from "./mcp";
+import { modelFor } from "./models";
 import { ConsoleLogger } from "./server/consoleLogger";
 import { createObservability } from "./server/observability";
 import { requestGuard } from "./server/requestGuard";
@@ -19,6 +20,9 @@ import { ruleAgent } from "./workflows/ground/judges/ruleAgent";
  * Canon, the tax attorney: no conversational agent and no user data. The
  * MCP server (mcp.ts) is its contract with Cade and the engine builder.
  */
+
+// Fail at startup when JUDGE_MODEL is wrong: the judges read it only when they run.
+modelFor("judge");
 
 const storage = await createStorage();
 

@@ -36,7 +36,7 @@ Models: Gemma 4 e4b (`ollama/gemma4:e4b`), Haiku 5.5 (`anthropic/claude-haiku-5-
 From `canon`, with Ollama running (retrieval embeds queries locally):
 
 ```bash
-npx tsx --env-file=.env.development evals/review/run.ts <model-substring> --full [--runs=N]
+npx tsx --env-file=.env.development evals/review/run.ts <model-id> --full [--runs=N]
 ```
 
 The lite tier is `npm run evals:lite` from the repo root.

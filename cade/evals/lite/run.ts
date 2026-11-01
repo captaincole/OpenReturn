@@ -19,7 +19,7 @@ const REPO = path.resolve(CADE, "..");
 const CANON = path.join(REPO, "canon");
 
 const ARGS = process.argv.slice(2);
-const OUT = path.join(REPO, ".scratch/evals/lite");
+const OUT_DIR = path.join(REPO, ".scratch/evals/lite");
 
 function flowsFromArgs(argv: string[]): Flow[] {
   const flag = argv.find((a) => a.startsWith("--flow="))?.slice(7);
@@ -59,14 +59,14 @@ function main() {
   const models = modelsFromArgs(ARGS);
   const flows = flowsFromArgs(ARGS);
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
-  const runDir = path.join(OUT, runId);
+  const runDir = path.join(OUT_DIR, runId);
   mkdirSync(runDir, { recursive: true });
   console.log(`evals lite: ${flows.join(", ")} on ${models.map((m) => m.label).join(", ")}`);
   const cases = flows.flatMap((flow) => {
     console.log(`\n=== ${flow} ===`);
     return runFlow(flow, models, runDir);
   });
-  console.log(`\n${writeSummary(OUT, runId, cases)}`);
+  console.log(`\n${writeSummary(OUT_DIR, runId, cases)}`);
   console.log(`\nSummary: ${path.relative(REPO, path.join(runDir, "summary.md"))}`);
 }
 

@@ -97,7 +97,7 @@ export function renderReport(models: EvalModel[], results: ReviewResult[]): stri
     "## By case",
     caseTable(models, results),
     "## Run it",
-    "From `canon`, with Ollama running (retrieval embeds queries locally):\n\n```bash\nnpx tsx --env-file=.env.development evals/review/run.ts <model-substring> --full [--runs=N]\n```\n\nThe lite tier is `npm run evals:lite` from the repo root.",
+    "From `canon`, with Ollama running (retrieval embeds queries locally):\n\n```bash\nnpx tsx --env-file=.env.development evals/review/run.ts <model-id> --full [--runs=N]\n```\n\nThe lite tier is `npm run evals:lite` from the repo root.",
   ].join("\n\n");
 }
 

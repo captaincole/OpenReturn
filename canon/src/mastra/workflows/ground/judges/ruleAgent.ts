@@ -48,5 +48,5 @@ export const ruleAgent = new Agent({
   id: "ruleAgent",
   name: "Rule Agent",
   instructions,
-  model: modelFor("judge"),
+  model: () => modelFor("judge"),
 });
