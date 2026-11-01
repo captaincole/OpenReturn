@@ -23,7 +23,7 @@ All commands run from `engine/`.
 3. **Work the root causes.** The report lists them after the per-form summary: a root line differs while every line it reads matches. One root often explains the lines after it. For each root, find the cause in the engine code: a binding, a worksheet step, a rounding choice, or a missing form.
 4. **Decide what each cause is.** An engine bug gets a fix. A preparer's choice (rounding, where a total lands) becomes an option with the IRS rule as the default; see the rounding convention in CLAUDE.md and the `preparer` field in the folder's `index.ts`. A line the engine does not model becomes an issue.
 5. **Fix, then ask for a re-run.** Run the engine's suites (`npm test`, `npm run test:unit`) and ask the user to run step 2 again. Repeat until the roots are gone or named as out of scope.
-6. **Lock the shape, not the numbers.** Build or extend a fake scenario with the same shape (`docs/adding-a-scenario.md`), lock the engine's output with `lockScenario` (see the `engine-scripts` skill), and record new rounding evidence in CLAUDE.md's rounding section without any real figure.
+6. **Lock the shape, not the numbers.** Build or extend a fake scenario with the same shape (`docs/adding-a-scenario.md`), draft its expected values from the engine's output with `draftExpected` (see the `engine-scripts` skill), and record new rounding evidence in CLAUDE.md's rounding section without any real figure.
 
 ## Verify your fix
 

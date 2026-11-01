@@ -75,18 +75,20 @@ never a tax-software export we cannot redistribute:
    (jordan).** A contributor runs the engine on their own return privately (see
    [Test OpenReturn against your filed return](testing-with-your-return.md)).
    When it matches, we run the engine on a *fake* scenario with the same
-   shape and lock its output as the expected values:
+   shape, draft its expected values from that output once, and check
+   each line:
 
    ```bash
    cd engine
-   npx tsx scripts/lockScenario.ts --scenario=jordan
-   npx tsx scripts/renderScenario.ts --scenario=jordan --golden
+   npx tsx scripts/draftExpected.ts --scenario=<name>
+   npx tsx scripts/renderScenario.ts --scenario=<name> --golden
    ```
 
-   The second command writes the golden PDFs (`docs/*-Golden.pdf`), which
+   The draft refuses a scenario that already has expected values. The
+   second command writes the golden PDFs (`docs/*-Golden.pdf`), which
    the tests diff widget by widget. Commit them with `expected.ts`. From
-   then on, any change to a locked line fails the tests until it is
-   verified again and re-locked. No real data enters the repo.
+   then on, any change to a locked line fails the tests until someone
+   verifies the new value and edits it in `expected.ts` by hand. No real data enters the repo.
 
 ### Understanding The Form Engine
 

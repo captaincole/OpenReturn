@@ -112,8 +112,11 @@ The expected values come from one of three sources:
 - **A CPA return** of the fake taxpayer. Type each filled line, in
   whole dollars as printed.
 - **A real filed return with the same shape.** Run the comparison kit on
-  it, privately, until every line matches. Then lock the engine's output
-  for the fake taxpayer: `npx tsx scripts/lockScenario.ts --scenario=<name>`.
+  it, privately, until every line matches. Then draft the expected values
+  for the fake taxpayer from the engine's output, with an expected.ts that
+  asserts nothing yet: `npx tsx scripts/draftExpected.ts --scenario=<name>`.
+  Check each drafted line before you commit it. This scenario is now
+  *locked*: its expected values are frozen engine output.
 - **No verified source yet** (a roadmap scenario). Set
   `allowNotModeled: true`. Each line the engine gets wrong goes in
   `knownMismatches.ts` with its cause.
@@ -140,8 +143,9 @@ A locked scenario writes its own:
 - A line you cannot fix now goes in `knownMismatches.ts`. When it starts
   to match, the test fails until you remove it, so the list only
   shrinks.
-- After the output is verified, lock it again with `lockScenario`, and
-  write the goldens again with `renderScenario --golden`.
+- When a fix changes a verified line, edit that value in `expected.ts` by
+  hand, then write the goldens again with `renderScenario --golden`. The
+  PR diff then shows each changed value.
 
 ### 8. Finish
 
