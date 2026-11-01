@@ -29,38 +29,38 @@ export function fromResults(file: string): CaseResult[] {
   return cases ?? [];
 }
 
-const key = (c: CaseResult) => `${c.flow}\u0000${c.model}\u0000${c.name}`;
-const pct = (n: number) => `${Math.round(n * 100)}%`;
+const key = (result: CaseResult) => `${result.flow}\u0000${result.model}\u0000${result.name}`;
+const pct = (share: number) => `${Math.round(share * 100)}%`;
 
 function totals(cases: CaseResult[]): string[] {
   const groups = new Map<string, CaseResult[]>();
-  for (const c of cases) {
-    const k = `${c.flow}\u0000${c.model}`;
-    groups.set(k, [...(groups.get(k) ?? []), c]);
+  for (const result of cases) {
+    const groupKey = `${result.flow}\u0000${result.model}`;
+    groups.set(groupKey, [...(groups.get(groupKey) ?? []), result]);
   }
-  return [...groups.entries()].map(([k, cs]) => {
-    const [flow, model] = k.split("\u0000");
+  return [...groups.entries()].map(([groupKey, cs]) => {
+    const [flow, model] = groupKey.split("\u0000");
     if (flow === "ingest") {
-      const mean = cs.reduce((s, c) => s + c.score, 0) / cs.length;
+      const mean = cs.reduce((total, result) => total + result.score, 0) / cs.length;
       return `- ${flow}, ${model}: ${pct(mean)} of fields over ${cs.length} documents`;
     }
-    return `- ${flow}, ${model}: ${cs.filter((c) => c.score === 1).length}/${cs.length} cases`;
+    return `- ${flow}, ${model}: ${cs.filter((result) => result.score === 1).length}/${cs.length} cases`;
   });
 }
 
 /* A subset run (--flow=, one model) covers some cases only, so each case's baseline is its newest earlier result. */
 function changes(now: CaseResult[], prior: Map<string, CaseResult>): string[] {
-  const fresh = now.filter((c) => !prior.has(key(c)));
-  const lines = now.flatMap((c) => {
-    const p = prior.get(key(c));
-    if (!p) return [];
-    if (c.flow === "ingest")
-      return Math.abs(c.score - p.score) >= INGEST_DRIFT
-        ? [`- ${c.model}, ${c.name}: ${pct(p.score)} → ${pct(c.score)}`]
+  const fresh = now.filter((result) => !prior.has(key(result)));
+  const lines = now.flatMap((result) => {
+    const previous = prior.get(key(result));
+    if (!previous) return [];
+    if (result.flow === "ingest")
+      return Math.abs(result.score - previous.score) >= INGEST_DRIFT
+        ? [`- ${result.model}, ${result.name}: ${pct(previous.score)} → ${pct(result.score)}`]
         : [];
-    if (c.score === p.score) return [];
+    if (result.score === previous.score) return [];
     return [
-      `- ${c.model}, ${c.flow}, ${c.name}: ${c.score ? "now passes" : "now fails"} (${c.note})`,
+      `- ${result.model}, ${result.flow}, ${result.name}: ${result.score ? "now passes" : "now fails"} (${result.note})`,
     ];
   });
   if (fresh.length === now.length) return ["No earlier lite run covers these cases."];
@@ -75,21 +75,21 @@ const READING =
 export function priorCases(dir: string, runId: string): Map<string, CaseResult> {
   const prior = new Map<string, CaseResult>();
   const runs = readdirSync(dir)
-    .filter((d) => d < runId && existsSync(path.join(dir, d, "summary.json")))
+    .filter((name) => name < runId && existsSync(path.join(dir, name, "summary.json")))
     .sort()
     .reverse();
   for (const run of runs) {
     const { cases } = JSON.parse(
       readFileSync(path.join(dir, run, "summary.json"), "utf8"),
     ) as Summary;
-    for (const c of cases) if (!prior.has(key(c))) prior.set(key(c), c);
+    for (const result of cases) if (!prior.has(key(result))) prior.set(key(result), result);
   }
   return prior;
 }
 
 export function writeSummary(dir: string, runId: string, cases: CaseResult[]): string {
   const prior = priorCases(dir, runId);
-  const failed = cases.filter((c) => c.flow !== "ingest" && c.score !== 1);
+  const failed = cases.filter((result) => result.flow !== "ingest" && result.score !== 1);
   const text = [
     `# Evals lite — ${runId}`,
     "## Totals",
@@ -98,7 +98,9 @@ export function writeSummary(dir: string, runId: string, cases: CaseResult[]): s
     changes(cases, prior).join("\n"),
     "## Failing now",
     failed.length
-      ? failed.map((c) => `- ${c.model}, ${c.flow}, ${c.name}: ${c.note}`).join("\n")
+      ? failed
+          .map((result) => `- ${result.model}, ${result.flow}, ${result.name}: ${result.note}`)
+          .join("\n")
       : "None.",
     READING,
   ].join("\n\n");

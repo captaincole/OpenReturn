@@ -1,6 +1,7 @@
-export const pct = (n: number) => `${(n * 100).toFixed(0)}%`;
+export const pct = (share: number) => `${(share * 100).toFixed(0)}%`;
 
-export const avg = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
+export const avg = (xs: number[]) =>
+  xs.length ? xs.reduce((total, value) => total + value, 0) / xs.length : 0;
 
 export function scoreCell(scores: number[]): string {
   const [lo, hi] = [Math.min(...scores), Math.max(...scores)];
@@ -11,5 +12,5 @@ export const table = (head: string[], rows: string[][]) =>
   [
     `| ${head.join(" | ")} |`,
     `|${head.map(() => " --- ").join("|")}|`,
-    ...rows.map((r) => `| ${r.join(" | ")} |`),
+    ...rows.map((row) => `| ${row.join(" | ")} |`),
   ].join("\n");

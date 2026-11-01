@@ -67,7 +67,7 @@ async function stepKinds(decisionId: string): Promise<string[]> {
           WHERE d.id = ? ORDER BY s.created_at, s.rowid`,
     args: [decisionId],
   });
-  return res.rows.map((r) => String(r.step_kind));
+  return res.rows.map((row) => String(row.step_kind));
 }
 
 beforeAll(async () => {
@@ -144,17 +144,17 @@ describe("the review queue", () => {
     ground = async () => {
       inFlight += 1;
       peak = Math.max(peak, inFlight);
-      await new Promise((r) => setTimeout(r, 20));
+      await new Promise((resolve) => setTimeout(resolve, 20));
       inFlight -= 1;
       return okRun;
     };
-    const a = await seedDecision();
-    const b = await seedDecision();
-    const first = review.enqueueReview(scope, a);
-    const second = review.enqueueReview(scope, b);
-    await expect(review.enqueueReview(scope, a)).rejects.toThrow("already queued");
+    const firstId = await seedDecision();
+    const secondId = await seedDecision();
+    const first = review.enqueueReview(scope, firstId);
+    const second = review.enqueueReview(scope, secondId);
+    await expect(review.enqueueReview(scope, firstId)).rejects.toThrow("already queued");
     const outs = await Promise.all([first, second]);
-    expect(outs.map((o) => o.finalVerdict)).toEqual(["accurate", "accurate"]);
+    expect(outs.map((out) => out.finalVerdict)).toEqual(["accurate", "accurate"]);
     expect(peak).toBe(1);
   });
 
@@ -177,7 +177,7 @@ describe("the review queue", () => {
     expect((await decisions.getDecisionById(own, stale))?.verdict).toBe("review_unreached");
 
     const retried = await review.retryUnreachedReviews(own, current);
-    expect(retried.map((r) => r.decisionId)).toEqual([stale]);
+    expect(retried.map((entry) => entry.decisionId)).toEqual([stale]);
     expect((await decisions.getDecisionById(own, stale))?.verdict).toBe("accurate");
     expect((await decisions.getDecisionById(own, current))?.verdict).toBe("review_unreached");
   });

@@ -51,11 +51,11 @@ export const initStep = createStep({
         dissentingConsiderations: decision.dissentingConsiderations,
         supportingFactKeys: decision.supportingFactKeys,
       },
-      facts: facts.map((f) => ({
-        key: f.key,
-        category: f.category,
-        value: f.value,
-        sourceNote: f.sourceNote,
+      facts: facts.map((fact) => ({
+        key: fact.key,
+        category: fact.category,
+        value: fact.value,
+        sourceNote: fact.sourceNote,
       })),
     };
 
@@ -79,10 +79,10 @@ export const initStep = createStep({
 function groundMaxIterations(): number | undefined {
   const raw = process.env.CANON_GROUND_MAX_ITERATIONS;
   if (!raw) return undefined;
-  const n = Number(raw);
-  if (!Number.isInteger(n) || n < 1)
+  const parsed = Number(raw);
+  if (!Number.isInteger(parsed) || parsed < 1)
     throw new Error(`CANON_GROUND_MAX_ITERATIONS: not a count: ${raw}`);
-  return n;
+  return parsed;
 }
 
 export const groundStep = createStep({

@@ -30,9 +30,9 @@ const ALLOW_KEYS = new Set([
   "reasoning",
 ]);
 
-function isPlainObject(v: unknown): v is Record<string, unknown> {
-  if (v === null || typeof v !== "object") return false;
-  const proto = Object.getPrototypeOf(v);
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  if (value === null || typeof value !== "object") return false;
+  const proto = Object.getPrototypeOf(value);
   return proto === Object.prototype || proto === null;
 }
 
@@ -48,9 +48,9 @@ function filter(value: unknown): unknown {
   }
   if (isPlainObject(value)) {
     const out: Record<string, unknown> = {};
-    for (const [k, v] of Object.entries(value)) {
-      if (!ALLOW_KEYS.has(k)) continue;
-      out[k] = filter(v);
+    for (const [key, fieldValue] of Object.entries(value)) {
+      if (!ALLOW_KEYS.has(key)) continue;
+      out[key] = filter(fieldValue);
     }
     return out;
   }

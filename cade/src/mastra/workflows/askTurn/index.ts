@@ -36,8 +36,8 @@ export type AskTurnOutput = z.infer<typeof askTurnOutputSchema>;
 
 function history(earlier: AskTurn[]): AskHistoryTurn[] {
   return earlier
-    .filter((t) => t.status === "completed" && t.answer)
-    .map((t) => ({ question: t.question, answer: t.answer ?? "" }));
+    .filter((turn) => turn.status === "completed" && turn.answer)
+    .map((turn) => ({ question: turn.question, answer: turn.answer ?? "" }));
 }
 
 const loadStep = createStep({
@@ -46,9 +46,9 @@ const loadStep = createStep({
   outputSchema: loadedTurnSchema,
   execute: async ({ inputData }) => {
     const thread = await getAskThread(inputData.userId, inputData.threadId);
-    const turn = thread?.turns.find((t) => t.id === inputData.turnId);
+    const turn = thread?.turns.find((candidate) => candidate.id === inputData.turnId);
     if (!thread || !turn) throw new Error(`ask turn ${inputData.turnId} not found`);
-    const earlier = thread.turns.filter((t) => t.index < turn.index);
+    const earlier = thread.turns.filter((prior) => prior.index < turn.index);
     await setAskTurnStage(turn.id, "retrieving");
     return {
       ...inputData,

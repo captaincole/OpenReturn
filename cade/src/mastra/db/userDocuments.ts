@@ -32,19 +32,19 @@ export interface UserDocumentRow {
   metadata: Record<string, unknown> | null;
 }
 
-function rowToDocument(r: Row): UserDocumentRow {
+function rowToDocument(row: Row): UserDocumentRow {
   return {
-    id: asStr(r.id),
-    userId: asStr(r.user_id),
-    category: asStr(r.category) as Category,
-    scenario: asStrOrNull(r.scenario),
-    filename: asStr(r.filename),
-    storagePath: asStr(r.storage_path),
-    sizeBytes: asNumOrNull(r.size_bytes),
-    mimeType: asStrOrNull(r.mime_type),
-    expiresAt: asStrOrNull(r.expires_at),
-    createdAt: asStr(r.created_at),
-    metadata: asJson(r.metadata) as Record<string, unknown> | null,
+    id: asStr(row.id),
+    userId: asStr(row.user_id),
+    category: asStr(row.category) as Category,
+    scenario: asStrOrNull(row.scenario),
+    filename: asStr(row.filename),
+    storagePath: asStr(row.storage_path),
+    sizeBytes: asNumOrNull(row.size_bytes),
+    mimeType: asStrOrNull(row.mime_type),
+    expiresAt: asStrOrNull(row.expires_at),
+    createdAt: asStr(row.created_at),
+    metadata: asJson(row.metadata) as Record<string, unknown> | null,
   };
 }
 
@@ -52,10 +52,10 @@ const ULID_ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 function ulid(): string {
   const time = Date.now();
   let timeStr = "";
-  let t = time;
+  let remaining = time;
   for (let i = 9; i >= 0; i--) {
-    timeStr = ULID_ALPHABET[t % 32] + timeStr;
-    t = Math.floor(t / 32);
+    timeStr = ULID_ALPHABET[remaining % 32] + timeStr;
+    remaining = Math.floor(remaining / 32);
   }
   let randStr = "";
   for (let i = 0; i < 16; i++) {

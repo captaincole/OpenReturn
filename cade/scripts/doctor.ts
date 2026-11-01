@@ -45,14 +45,14 @@ const DEFAULT_EMBEDDINGS_MODEL = "ollama/embeddinggemma-2";
 function configSection(): void {
   section("Config (.env + .env.development)");
   for (const key of ["CADE_MODEL"]) {
-    const v = process.env[key];
-    row(key, v ?? `${BAD} unset — the app refuses to start without it`);
+    const value = process.env[key];
+    row(key, value ?? `${BAD} unset — the app refuses to start without it`);
   }
   row("ANTHROPIC_API_KEY", process.env.ANTHROPIC_API_KEY ? `${OK} set` : `${DIM} unset`);
   row("CANON_URL", process.env.CANON_URL ?? "http://127.0.0.1:4112 (default)");
   for (const key of ["CADE_MODEL_URL", "EMBEDDINGS_MODEL_URL"]) {
-    const v = process.env[key];
-    if (v) row(key, v);
+    const value = process.env[key];
+    if (value) row(key, value);
   }
 }
 
@@ -107,7 +107,7 @@ async function probeOllama(): Promise<OllamaStatus> {
     binary: binaryVersion("ollama", ["--version"]),
     serverUrl,
     serverVersion: version?.version ?? null,
-    models: tags?.models?.flatMap((m) => (m.name ? [m.name] : [])) ?? null,
+    models: tags?.models?.flatMap((model) => (model.name ? [model.name] : [])) ?? null,
   };
 }
 
@@ -124,7 +124,7 @@ function embeddingModelName(): string {
 }
 
 function hasModel(models: string[], name: string): boolean {
-  return models.some((m) => m === name || m.startsWith(`${name}:`));
+  return models.some((model) => model === name || model.startsWith(`${name}:`));
 }
 
 async function main(): Promise<void> {

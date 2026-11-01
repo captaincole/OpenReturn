@@ -34,13 +34,13 @@ export const mastra = new Mastra({
      * Mastra catches handler throws before any middleware sees them; without this hook
      * they become a generic 500 with no log.
      */
-    onError: (err, c) => {
+    onError: (err, ctx) => {
       logger.error("unhandled handler error", {
-        method: c.req.method,
-        path: c.req.path,
+        method: ctx.req.method,
+        path: ctx.req.path,
         err,
       });
-      return c.json({ error: "internal server error" }, 500);
+      return ctx.json({ error: "internal server error" }, 500);
     },
     /* The browser never calls the agent. Else Mastra sends Access-Control-Allow-Origin: *. */
     cors: false,

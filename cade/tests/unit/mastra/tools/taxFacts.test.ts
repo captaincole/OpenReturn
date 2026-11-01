@@ -10,9 +10,9 @@ vi.mock("../../../../src/mastra/db/filings", () => ({
   },
 }));
 
-const fact = (n: number) => ({
+const fact = (index: number) => ({
   category: "identity" as const,
-  key: `identity.test_${n}`,
+  key: `identity.test_${index}`,
   value: "x",
   sourceNote: "test",
 });

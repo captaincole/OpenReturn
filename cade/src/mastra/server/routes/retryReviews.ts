@@ -6,21 +6,24 @@ import { retryUnreachedReviews } from "../../workflows/reviewDecision";
 /* Re-runs every review that never reached Canon (review_unreached); answers with each verdict. */
 export const retryReviewsRoute = registerApiRoute("/app/filings/:filingId/reviews/retry", {
   method: "POST",
-  handler: async (c) => {
-    const requestContext = c.get("requestContext");
+  handler: async (ctx) => {
+    const requestContext = ctx.get("requestContext");
     const callerId = requestContext?.get(MASTRA_RESOURCE_ID_KEY) as string | undefined;
-    if (!callerId) return c.json({ error: "unauthorized" }, 401);
+    if (!callerId) return ctx.json({ error: "unauthorized" }, 401);
 
-    const filingId = c.req.param("filingId");
-    if (!filingId) return c.json({ error: "missing filingId" }, 400);
+    const filingId = ctx.req.param("filingId");
+    if (!filingId) return ctx.json({ error: "missing filingId" }, 400);
     const ownership = await getMembership(filingId, callerId, "owner");
-    if (!ownership) return c.json({ error: "not found" }, 404);
+    if (!ownership) return ctx.json({ error: "not found" }, 404);
 
     const reviews = await retryUnreachedReviews({ userId: callerId, filingId });
-    return c.json({
+    return ctx.json({
       ok: true,
       retried: reviews.length,
-      reviews: reviews.map((r) => ({ decisionId: r.decisionId, verdict: r.finalVerdict })),
+      reviews: reviews.map((review) => ({
+        decisionId: review.decisionId,
+        verdict: review.finalVerdict,
+      })),
     });
   },
 });

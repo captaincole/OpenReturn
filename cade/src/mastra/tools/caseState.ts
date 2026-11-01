@@ -104,18 +104,18 @@ export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
 function summarizeForm(form: EvaluatedForm<BaseFormField>): EvaluatedFormSummary {
   /* Unsupported fields are engine gaps, not user-input gaps: they are not blockers. */
   const blockers = form.fields
-    .filter((l) => !l.result.ok && !l.result.unsupported)
-    .map((l) => {
-      const r = l.result as Extract<typeof l.result, { ok: false }>;
+    .filter((field) => !field.result.ok && !field.result.unsupported)
+    .map((field) => {
+      const blocked = field.result as Extract<typeof field.result, { ok: false }>;
       return {
-        fieldId: l.fieldId,
-        reason: r.reason,
-        missingDecisionKey: r.missingDecisionKey ?? null,
-        missingFactKeys: r.missingFactKeys ?? null,
+        fieldId: field.fieldId,
+        reason: blocked.reason,
+        missingDecisionKey: blocked.missingDecisionKey ?? null,
+        missingFactKeys: blocked.missingFactKeys ?? null,
       };
     });
   const unsupportedFieldCount = form.fields.filter(
-    (l) => !l.result.ok && l.result.unsupported,
+    (field) => !field.result.ok && field.result.unsupported,
   ).length;
   return {
     formId: form.formId,
@@ -139,10 +139,10 @@ function summarizeForm(form: EvaluatedForm<BaseFormField>): EvaluatedFormSummary
 }
 
 function numericField(fields: readonly BaseFormField[], fieldId: string): number | null {
-  const field = fields.find((f) => f.fieldId === fieldId);
+  const field = fields.find((candidate) => candidate.fieldId === fieldId);
   if (!field || !field.result.ok) return null;
-  const v = field.result.value;
-  return typeof v === "number" ? v : null;
+  const value = field.result.value;
+  return typeof value === "number" ? value : null;
 }
 
 const moneyLine = z
@@ -209,16 +209,16 @@ export const getCaseState = createTool({
       money,
       factCount,
       authEmail,
-      aiDecisions: decisionRows.map((d) => ({
-        id: d.id,
-        decisionKey: d.decisionKey,
-        decision: d.decision,
-        rationale: d.rationale,
-        supportingFactKeys: d.supportingFactKeys,
-        confidence: d.confidence,
-        dissentingConsiderations: d.dissentingConsiderations,
-        authorityCitations: d.authorityCitations,
-        createdAt: d.createdAt,
+      aiDecisions: decisionRows.map((row) => ({
+        id: row.id,
+        decisionKey: row.decisionKey,
+        decision: row.decision,
+        rationale: row.rationale,
+        supportingFactKeys: row.supportingFactKeys,
+        confidence: row.confidence,
+        dissentingConsiderations: row.dissentingConsiderations,
+        authorityCitations: row.authorityCitations,
+        createdAt: row.createdAt,
       })),
     };
   },

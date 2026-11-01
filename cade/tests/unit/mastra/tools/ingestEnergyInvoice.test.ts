@@ -21,8 +21,8 @@ describe("energyInvoiceSlug", () => {
   });
 
   it("gives two invoices from one vendor two keys", () => {
-    const a = energyInvoiceSlug({ vendorName: "Cool Air Co", invoiceDate: "03/02/2025" });
-    const b = energyInvoiceSlug({ vendorName: "Cool Air Co", invoiceDate: "06/10/2025" });
-    expect(a).not.toBe(b);
+    const marchSlug = energyInvoiceSlug({ vendorName: "Cool Air Co", invoiceDate: "03/02/2025" });
+    const juneSlug = energyInvoiceSlug({ vendorName: "Cool Air Co", invoiceDate: "06/10/2025" });
+    expect(marchSlug).not.toBe(juneSlug);
   });
 });

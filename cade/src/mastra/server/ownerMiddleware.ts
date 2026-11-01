@@ -13,15 +13,15 @@ import { bearerMatches } from "./requestGuard";
 
 const PROTECTED_PREFIXES = ["/api/", "/app/"];
 
-export const ownerMiddleware: MiddlewareHandler = async (c, next) => {
+export const ownerMiddleware: MiddlewareHandler = async (ctx, next) => {
   const token = process.env.AGENT_API_TOKEN;
-  if (token && PROTECTED_PREFIXES.some((p) => c.req.path.startsWith(p))) {
-    if (!bearerMatches(c.req.header("Authorization"), token)) {
-      return c.json({ error: "unauthorized" }, 401);
+  if (token && PROTECTED_PREFIXES.some((prefix) => ctx.req.path.startsWith(prefix))) {
+    if (!bearerMatches(ctx.req.header("Authorization"), token)) {
+      return ctx.json({ error: "unauthorized" }, 401);
     }
   }
 
-  const requestContext = c.get("requestContext");
+  const requestContext = ctx.get("requestContext");
   if (requestContext && typeof requestContext.set === "function") {
     const owner = await getOwner();
     if (owner) {

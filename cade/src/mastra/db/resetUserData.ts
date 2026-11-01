@@ -20,7 +20,7 @@ export async function resetCurrentUserData(userId: string): Promise<PerUserReset
     sql: `SELECT storage_path FROM user_documents WHERE user_id = ?`,
     args: [userId],
   });
-  const storagePaths = docPaths.rows.map((r) => asStr(r.storage_path));
+  const storagePaths = docPaths.rows.map((row) => asStr(row.storage_path));
 
   const tables = [
     "tax_facts",
@@ -32,15 +32,15 @@ export async function resetCurrentUserData(userId: string): Promise<PerUserReset
     "review_runs",
   ] as const;
   const counts: Record<string, number> = {};
-  for (const t of tables) {
+  for (const table of tables) {
     const res = await db.execute({
-      sql: `DELETE FROM ${t} WHERE user_id = ?`,
+      sql: `DELETE FROM ${table} WHERE user_id = ?`,
       args: [userId],
     });
-    counts[t] = asNum(res.rowsAffected);
+    counts[table] = asNum(res.rowsAffected);
   }
 
-  await Promise.all(storagePaths.map((p) => deleteBlob(p)));
+  await Promise.all(storagePaths.map((storagePath) => deleteBlob(storagePath)));
 
   /* Memory.deleteThread, not raw SQL: Mastra owns the cascade (messages, memory, vectors). */
   let mastraThreadsDeleted = 0;
@@ -50,7 +50,7 @@ export async function resetCurrentUserData(userId: string): Promise<PerUserReset
       filter: { resourceId: userId },
       perPage: false,
     });
-    await Promise.all(threads.map((t) => memory.deleteThread(t.id)));
+    await Promise.all(threads.map((thread) => memory.deleteThread(thread.id)));
     mastraThreadsDeleted = threads.length;
   }
   return {

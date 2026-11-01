@@ -41,28 +41,28 @@ export interface AskThread {
 /* A turn 'running' this long lost its background run (reload or crash): report it failed. */
 const STALE_RUNNING_MS = 10 * 60 * 1000;
 
-function rowToTurn(r: Record<string, unknown>): AskTurn {
-  const createdAt = asStr(r.created_at);
-  let status = asStr(r.status) as AskTurnStatus;
-  let error = asStrOrNull(r.error);
+function rowToTurn(row: Record<string, unknown>): AskTurn {
+  const createdAt = asStr(row.created_at);
+  let status = asStr(row.status) as AskTurnStatus;
+  let error = asStrOrNull(row.error);
   if (status === "running" && Date.now() - Date.parse(createdAt) > STALE_RUNNING_MS) {
     status = "failed";
     error = "The answer was interrupted. Ask again.";
   }
   return {
-    id: asStr(r.id),
-    index: asNum(r.turn_index),
-    question: asStr(r.question),
+    id: asStr(row.id),
+    index: asNum(row.turn_index),
+    question: asStr(row.question),
     status,
-    stage: status === "running" ? (asStrOrNull(r.stage) as AskStage | null) : null,
-    answer: asStrOrNull(r.answer),
-    coverage: asStrOrNull(r.coverage) as AskCoverage | null,
-    citations: (asJson(r.citations_json) as AskCitation[] | null) ?? [],
-    missingDocuments: (asJson(r.missing_docs_json) as string[] | null) ?? [],
+    stage: status === "running" ? (asStrOrNull(row.stage) as AskStage | null) : null,
+    answer: asStrOrNull(row.answer),
+    coverage: asStrOrNull(row.coverage) as AskCoverage | null,
+    citations: (asJson(row.citations_json) as AskCitation[] | null) ?? [],
+    missingDocuments: (asJson(row.missing_docs_json) as string[] | null) ?? [],
     error,
     createdAt,
-    completedAt: asStrOrNull(r.completed_at),
-    durationMs: asNumOrNull(r.duration_ms),
+    completedAt: asStrOrNull(row.completed_at),
+    durationMs: asNumOrNull(row.duration_ms),
   };
 }
 
@@ -101,7 +101,7 @@ export async function addAskTurn(
 ): Promise<AddTurnResult> {
   const thread = await getAskThread(userId, threadId);
   if (!thread) return { error: "not_found" };
-  if (thread.turns.some((t) => t.status === "running")) return { error: "busy" };
+  if (thread.turns.some((turn) => turn.status === "running")) return { error: "busy" };
   const turnId = crypto.randomUUID();
   await getAppDb().execute({
     sql: `INSERT INTO ask_turns (id, thread_id, user_id, turn_index, question, status, created_at)
@@ -114,11 +114,11 @@ export async function addAskTurn(
 export async function getAskThread(userId: string, threadId: string): Promise<AskThread | null> {
   await ensureAppSchema();
   const db = getAppDb();
-  const t = await db.execute({
+  const res = await db.execute({
     sql: `SELECT id, title, created_at FROM ask_threads WHERE id = ? AND user_id = ?`,
     args: [threadId, userId],
   });
-  const row = t.rows[0];
+  const row = res.rows[0];
   if (!row) return null;
   const turns = await db.execute({
     sql: `SELECT * FROM ask_turns WHERE thread_id = ? AND user_id = ? ORDER BY turn_index`,
@@ -128,7 +128,7 @@ export async function getAskThread(userId: string, threadId: string): Promise<As
     id: asStr(row.id),
     title: asStr(row.title),
     createdAt: asStr(row.created_at),
-    turns: turns.rows.map((r) => rowToTurn(r as Record<string, unknown>)),
+    turns: turns.rows.map((turnRow) => rowToTurn(turnRow as Record<string, unknown>)),
   };
 }
 

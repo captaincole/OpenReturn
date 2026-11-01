@@ -44,7 +44,7 @@ async function runTurn(question: string) {
   const run = await askTurnWorkflow.createRun({ resourceId: userId });
   const result = await run.start({ inputData: { userId, threadId, turnId } });
   const thread = await threads.getAskThread(userId, threadId);
-  return { result, turn: thread?.turns.find((t) => t.id === turnId) };
+  return { result, turn: thread?.turns.find((turn) => turn.id === turnId) };
 }
 
 beforeAll(async () => {

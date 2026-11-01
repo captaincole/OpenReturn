@@ -21,10 +21,10 @@ interface RenderTarget {
 }
 
 function lineValue(form: EvaluatedForm<AnyFormField>, fieldId: string): number | null {
-  const f = form.fields.find((x) => x.fieldId === fieldId);
-  if (!f || !f.result.ok) return null;
-  const v = f.result.value;
-  return typeof v === "number" ? v : null;
+  const field = form.fields.find((candidate) => candidate.fieldId === fieldId);
+  if (!field || !field.result.ok) return null;
+  const value = field.result.value;
+  return typeof value === "number" ? value : null;
 }
 
 function serializeForm<F extends AnyFormField>(
@@ -49,12 +49,12 @@ function serializeForm<F extends AnyFormField>(
     title: form.title,
     mustFile: form.mustFile,
     mustFileDerivation: form.mustFileDerivation,
-    fields: form.fields.map((f) => ({
-      fieldId: f.fieldId,
-      label: f.label,
-      category: f.category,
-      valueType: f.valueType,
-      result: f.result,
+    fields: form.fields.map((field) => ({
+      fieldId: field.fieldId,
+      label: field.label,
+      category: field.category,
+      valueType: field.valueType,
+      result: field.result,
     })),
   };
 }
@@ -76,8 +76,10 @@ function countFields(form: EvaluatedForm<AnyFormField>): {
   blocked: number;
   unsupported: number;
 } {
-  const ok = form.fields.filter((f) => f.result.ok).length;
-  const unsupported = form.fields.filter((f) => !f.result.ok && f.result.unsupported).length;
+  const ok = form.fields.filter((field) => field.result.ok).length;
+  const unsupported = form.fields.filter(
+    (field) => !field.result.ok && field.result.unsupported,
+  ).length;
   return {
     ok,
     blocked: form.fields.length - ok - unsupported,
@@ -92,8 +94,8 @@ async function renderAndStoreForm(
   target: RenderTarget,
 ): Promise<{ url: string; filename: string; linesPopulated: number }> {
   const { pdfBytes, rendered, warnings } = await renderForm(scenario, spec.formId, loadBlankPdf);
-  for (const w of warnings) {
-    console.warn(`[generate-tax-documents][${spec.formId}] ${w}`);
+  for (const warning of warnings) {
+    console.warn(`[generate-tax-documents][${spec.formId}] ${warning}`);
   }
   const filename = `${spec.displayName} — ${target.year}`;
   const doc = await createDocument({
@@ -283,12 +285,12 @@ export const generateTaxDocuments = createTool({
           )
         : null;
 
-    const url1040 = documents.find((d) => d.formId === "form-1040")?.url ?? "";
-    const url540 = documents.find((d) => d.formId === "form-540")?.url ?? null;
+    const url1040 = documents.find((document) => document.formId === "form-1040")?.url ?? "";
+    const url540 = documents.find((document) => document.formId === "form-540")?.url ?? null;
 
     /* The ONLY link text the agent may paste: hand-composed links came out malformed or made up. */
     const markdownLinks = [
-      ...documents.map((d) => `- [${d.filename}](${d.url})`),
+      ...documents.map((document) => `- [${document.filename}](${document.url})`),
       ...(sidecarUrl ? [`- [Forms data (JSON)](${sidecarUrl})`] : []),
     ].join("\n");
 

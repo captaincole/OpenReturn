@@ -35,12 +35,12 @@ export async function resolveOwnerFilingForYear(
       `Multiple owner filings for tax_year=${taxYear} (${res.rows.length}); ambiguous.`,
     );
   }
-  const r = res.rows[0];
+  const row = res.rows[0];
   return {
-    id: asStr(r.id),
-    taxYear: asNum(r.tax_year),
-    status: asStr(r.status),
-    createdAt: asStr(r.created_at),
+    id: asStr(row.id),
+    taxYear: asNum(row.tax_year),
+    status: asStr(row.status),
+    createdAt: asStr(row.created_at),
   };
 }
 
@@ -59,8 +59,8 @@ export async function getMembership(
           LIMIT 1`,
     args: [filingId, userId, role],
   });
-  const r = res.rows[0];
-  return r ? { filingId: asStr(r.id), taxYear: asNum(r.tax_year) } : null;
+  const row = res.rows[0];
+  return row ? { filingId: asStr(row.id), taxYear: asNum(row.tax_year) } : null;
 }
 
 export async function createOwnerFiling(args: {

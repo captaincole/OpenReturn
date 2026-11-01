@@ -22,12 +22,12 @@ const ARGS = process.argv.slice(2);
 const OUT_DIR = path.join(REPO, ".scratch/evals/lite");
 
 function flowsFromArgs(argv: string[]): Flow[] {
-  const flag = argv.find((a) => a.startsWith("--flow="))?.slice(7);
+  const flag = argv.find((arg) => arg.startsWith("--flow="))?.slice(7);
   if (!flag) return FLOWS;
-  const picked = flag.split(",").map((f) => f.trim());
-  const unknown = picked.filter((f) => !FLOWS.includes(f as Flow));
+  const picked = flag.split(",").map((name) => name.trim());
+  const unknown = picked.filter((name) => !FLOWS.includes(name as Flow));
   if (unknown.length) throw new Error(`unknown flow: ${unknown.join(", ")} (${FLOWS.join(", ")})`);
-  return FLOWS.filter((f) => picked.includes(f));
+  return FLOWS.filter((flow) => picked.includes(flow));
 }
 
 /* A child inherits this process's env; its --env-file fills in what is unset. */
@@ -40,17 +40,17 @@ function runEval(cwd: string, script: string, args: string[]): void {
   if (res.status !== 0) throw new Error(`${script} ${args.join(" ")} exited ${res.status}`);
 }
 
-const slug = (m: EvalModel) => m.label.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+const slug = (model: EvalModel) => model.label.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
 function runFlow(flow: Flow, models: EvalModel[], runDir: string): CaseResult[] {
   if (flow === "ingest") {
     const out = path.join(runDir, "ingest");
-    runEval(CADE, "evals/ingest/run.ts", [...models.map((m) => m.id), `--out=${out}`]);
+    runEval(CADE, "evals/ingest/run.ts", [...models.map((model) => model.id), `--out=${out}`]);
     return fromResults(path.join(out, "results.json"));
   }
-  return models.flatMap((m) => {
-    const out = path.join(runDir, `${flow}-${slug(m)}`);
-    runEval(CANON, `evals/${flow}/run.ts`, [m.id, `--out=${out}`]);
+  return models.flatMap((model) => {
+    const out = path.join(runDir, `${flow}-${slug(model)}`);
+    runEval(CANON, `evals/${flow}/run.ts`, [model.id, `--out=${out}`]);
     return fromResults(path.join(out, "results.json"));
   });
 }
@@ -61,7 +61,9 @@ function main() {
   const runId = new Date().toISOString().replace(/[:.]/g, "-");
   const runDir = path.join(OUT_DIR, runId);
   mkdirSync(runDir, { recursive: true });
-  console.log(`evals lite: ${flows.join(", ")} on ${models.map((m) => m.label).join(", ")}`);
+  console.log(
+    `evals lite: ${flows.join(", ")} on ${models.map((model) => model.label).join(", ")}`,
+  );
   const cases = flows.flatMap((flow) => {
     console.log(`\n=== ${flow} ===`);
     return runFlow(flow, models, runDir);
