@@ -8,6 +8,7 @@ import { z } from "zod";
 import {
   _resetBindingRegistryForTests,
   bindField,
+  UNSUPPORTED_RULE_NAME,
   type EngineContext,
   type Rule,
 } from "./engine.js";
@@ -106,7 +107,7 @@ function makeBindingRule(
 
 function makeUnsupportedRule(reason: string): Rule<unknown, unknown> {
   return {
-    name: "typed-unsupported",
+    name: UNSUPPORTED_RULE_NAME,
     paramsSchema: z.unknown(),
     evaluate: () => ({
       ok: false as const,

@@ -44,6 +44,14 @@ export function bindField<P>(formId: string, fieldId: string, ruleDef: Rule<P>, 
   });
 }
 
+export const UNSUPPORTED_RULE_NAME = "typed-unsupported";
+
+export function bindingKind(fieldId: string): "binding" | "unsupported" | undefined {
+  const binding = fieldBindings.get(fieldId);
+  if (!binding) return undefined;
+  return binding.rule.name === UNSUPPORTED_RULE_NAME ? "unsupported" : "binding";
+}
+
 export function _resetBindingRegistryForTests(): void {
   fieldBindings.clear();
 }

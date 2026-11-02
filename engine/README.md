@@ -25,8 +25,8 @@ engine/
 ```
 
 Other code imports only the `exports` in `package.json`:
-`@openreturn/engine` (evaluate, render, pendingInputs, FORMS, the FormField
-types), `@openreturn/engine/facts` (the fact vocabulary and row types),
+`@openreturn/engine` (evaluate, render, pendingInputs, FORMS, bindingKind,
+the FormField types), `@openreturn/engine/facts` (the fact vocabulary and row types),
 `@openreturn/engine/catalog` (for the builder, `builder/`),
 `@openreturn/engine/paths`, and `@openreturn/engine/scenarios` (test fixtures).
 A deep import does not resolve.
@@ -84,7 +84,8 @@ documents (`blank.pdf`, instructions) use the same subpath in
 
 1. Put `blank.pdf` in `sources/<year>/forms/<jurisdiction>/<short>/`.
    Generate `catalog.json` into `src/<jurisdiction>/<short>/` with
-   `npm run form-engine -- generate-catalog`.
+   `npm run form-engine -- generate-catalog`, or with no model calls:
+   `extract-widgets`, a `labels.json`, then `write-catalog` (`builder/README.md`).
 2. In `src/<jurisdiction>/<short>/`, add `types.ts` (the form's
    FormFields — every field must declare `category` and `valueType`; TS
    won't compile otherwise), `filingInfo.ts`, and `bindings.ts`.
