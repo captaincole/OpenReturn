@@ -53,7 +53,7 @@ npm run dev:canon          # Canon only, with Mastra Studio at http://localhost:
 npm run corpus             # the corpus CLI; no arguments lists its commands
 ```
 
-MCP clients connect to `http://localhost:4112/api/mcp/canon/mcp` (streamable HTTP, the MCP protocol of 2026-07-28; there is no `/sse` endpoint). Cade's client is `cade/src/mastra/canon/client.ts`. The web app reads the library through its `/api/canon` proxy.
+MCP clients connect to `http://localhost:4112/api/mcp/canon/mcp` (streamable HTTP, the MCP protocol of 2026-07-28; there is no `/sse` endpoint). Cade's client is `cade/src/mastra/canon/client.ts`, and Claude Code's is `.mcp.json` at the repo root. The web app reads the library through its `/api/canon` proxy.
 
 ## The corpus CLI
 
