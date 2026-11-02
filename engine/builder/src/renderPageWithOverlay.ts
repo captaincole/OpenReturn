@@ -19,14 +19,50 @@ export interface RenderedPage {
   scale: number;
 }
 
-export async function renderPageWithOverlay(opts: {
+interface OverlayOpts {
   /** A pdf.js PDFDocumentProxy. */
   pdf: any;
   /** 0-based; pdf.js pages are 1-based. */
   pageIndex: number;
   widgets: OverlayWidget[];
   scale?: number;
-}): Promise<RenderedPage> {
+}
+
+export async function renderPageWithOverlay(opts: OverlayOpts): Promise<RenderedPage> {
+  const { canvas, width, height, scale } = await drawOverlay(opts);
+  return { png: canvas.toBuffer("image/png"), width, height, scale };
+}
+
+export interface OverlayTile {
+  png: Buffer;
+  /** Canvas pixels from the top of the page. */
+  top: number;
+  bottom: number;
+}
+
+/*
+ * Horizontal bands of one overlay page. A reader shrinks a full page, and the
+ * badges on a dense page then become unreadable. The overlap keeps a box that
+ * sits on a band edge whole in one of the two bands.
+ */
+export async function renderOverlayTiles(
+  opts: OverlayOpts & { tileHeight?: number; overlap?: number },
+): Promise<OverlayTile[]> {
+  const { canvas, width, height } = await drawOverlay(opts);
+  const tileHeight = opts.tileHeight ?? 640;
+  const overlap = opts.overlap ?? 80;
+  const tiles: OverlayTile[] = [];
+  for (let top = 0; top < height; top += tileHeight - overlap) {
+    const bottom = Math.min(height, top + tileHeight);
+    const tile = createCanvas(width, bottom - top);
+    tile.getContext("2d").drawImage(canvas, 0, top, width, bottom - top, 0, 0, width, bottom - top);
+    tiles.push({ png: tile.toBuffer("image/png"), top, bottom });
+    if (bottom === height) break;
+  }
+  return tiles;
+}
+
+async function drawOverlay(opts: OverlayOpts) {
   const scale = opts.scale ?? 2.0;
   const page = await opts.pdf.getPage(opts.pageIndex + 1);
   const viewport = page.getViewport({ scale });
@@ -76,10 +112,5 @@ export async function renderPageWithOverlay(opts: {
     ctx.fillText(badge, badgeX + badgeW / 2, badgeY + badgeH / 2 + 1);
   }
 
-  return {
-    png: canvas.toBuffer("image/png"),
-    width: viewport.width,
-    height: viewport.height,
-    scale,
-  };
+  return { canvas, width: viewport.width as number, height: viewport.height as number, scale };
 }

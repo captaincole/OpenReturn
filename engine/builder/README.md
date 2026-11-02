@@ -28,12 +28,20 @@ blank.pdf ──ingest──► catalog.json ──promote──► runtime copy
   a human finishes and owns the bindings.
 - **`tables/`** — parsers for official rate/tax tables (IRS HTML, FTB PDF)
   into the JSON the engine's `data/` modules load.
-- **`renderPageWithOverlay.ts`** — debug renders with widget boxes drawn on
-  the page, for eyeballing label↔widget alignment.
+- **No-model catalog path** — `extract-widgets` writes `widgets.json` and
+  numbered overlay tiles (`renderOverlayTiles`) to `.scratch/forms/<year>/<subpath>/`;
+  whoever reads the tiles writes `labels.json` (schema in `labelsFile.ts`);
+  `catalogFromLabels.ts` checks every widget against it before `write-catalog`
+  writes `catalog.json`. `formStatus.ts` reports which steps of a form are done.
+- **`renderPageWithOverlay.ts`** — renders a page with its widget boxes drawn
+  on it, whole (for eyeballing label↔widget alignment) or as numbered tiles.
 
 ## Commands (from repo root)
 
 ```bash
+npm run form-engine -- form-status federal/8959     # which steps of a form are done, and what is next
+npm run form-engine -- extract-widgets federal/8959 # PDF → .scratch/forms/…/widgets.json + numbered overlay tiles
+npm run form-engine -- write-catalog federal/8959   # widgets.json + labels.json → catalog.json, every widget checked
 npm run form-engine -- generate-catalog           # PDF → catalog.json (Anthropic calls, costs money)
 npm run form-engine -- generate-bindings          # catalog → bindings.ts draft
 npm run form-engine -- ingest-federal-tax-table   # refresh the federal tax table JSON

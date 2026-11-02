@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.91.1",
+    "@cantoo/pdf-lib": "^2.11.1",
     "@mastra/core": "^1.79.0",
     "@mastra/mcp": "^2.5.0",
     "@napi-rs/canvas": "^0.1.100",

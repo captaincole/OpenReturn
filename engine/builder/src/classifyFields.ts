@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { ExtractedField } from "./extractFormFields.js";
+import type { Category, ValueType } from "./labelsFile.js";
 import { createStructured } from "./structuredOutput.js";
 
 /*
@@ -10,21 +11,7 @@ const model = () => process.env.FORMS_PIPELINE_MODEL ?? "claude-sonnet-5-5";
 const MAX_TOKENS = 16000;
 const FIELDS_PER_BATCH = 40;
 
-export type Category = "personal_info" | "filing_scope" | "income" | "deductions_credits" | "other";
-
-export type ValueType =
-  | "money"
-  | "count"
-  | "text"
-  | "ssn"
-  | "phone"
-  | "zip"
-  | "email"
-  | "date"
-  | "boolean"
-  | "single_select"
-  | "multi_select"
-  | "signature";
+export type { Category, ValueType };
 
 export interface FieldEnrichmentOption {
   value: string;

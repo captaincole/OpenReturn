@@ -4,7 +4,7 @@
  * and supply blank PDFs through a BlankPdfLoader.
  */
 
-import { evaluateAllForms } from "./engine.js";
+import { evaluateAllForms, bindingKind as registeredBindingKind } from "./engine.js";
 import type { AIDecisionRow, TaxFactRow } from "./facts/rows.js";
 import { resolveFilingInfo, type FilingInfo } from "./filingInfo.js";
 import { FORMS, catalog as bundledCatalog, getFormSpec, registerAllForms } from "./registry.js";
@@ -21,6 +21,12 @@ import {
 export { pendingInputs, type PendingInputs } from "./pendingInputs.js";
 export { FORMS, getFormSpec, type FormSpec } from "./registry.js";
 export type { AnyFormField, BaseFormField, EngineDerivation, EvaluatedForm } from "./types.js";
+
+/* Which kind of rule a catalog field has: a binding, an unsupported reason, or none yet. */
+export function bindingKind(fieldId: string): "binding" | "unsupported" | undefined {
+  registerAllForms();
+  return registeredBindingKind(fieldId);
+}
 
 export interface EngineFiling {
   id: string;

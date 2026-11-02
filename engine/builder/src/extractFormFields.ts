@@ -3,6 +3,7 @@
  * positional fallback by policy: a widget with no label throws for human review.
  */
 
+import { PDFDocument } from "@cantoo/pdf-lib";
 import { readFile } from "node:fs/promises";
 import { createIsomorphicCanvasFactory, getDocumentProxy } from "unpdf";
 import { resolveLabelsForPage } from "./visionLabel.js";
@@ -17,6 +18,8 @@ export interface ExtractedFieldWidget {
   page: number;
   position: { x: number; y: number; width: number; height: number };
   buttonValue?: string;
+  /** Radio widgets from extractWidgets: the option name pdf-lib selects this widget by. */
+  radioOption?: string;
 }
 
 export interface ExtractedField {
@@ -183,23 +186,41 @@ function resolveLabel(
   throw new MissingLabelError({ fieldName, pdfPath });
 }
 
-function assembleField(
-  pdfPath: string,
-  fieldName: string,
-  occurrences: WidgetOccurrence[],
-  tier1Labels: Map<string, string>,
-  tier2Labels: Map<string, string>,
-): ExtractedField {
+type FieldShape = Omit<ExtractedField, "label" | "labelSource">;
+
+/* A field before labeling: only the form author's /TU label, if the PDF has one. */
+export interface WidgetField extends FieldShape {
+  tuLabel: string | null;
+}
+
+/* One numbered box on a page overlay. Badges follow reading order. */
+export interface OverlayBadge {
+  badge: number;
+  fieldName: string;
+  kind: FieldKind;
+  rect: [number, number, number, number];
+  exportValue?: string;
+  buttonValue?: string;
+  /** Radio widgets: the name labels.json uses for this option. */
+  radioOption?: string;
+}
+
+export interface ExtractedWidgets {
+  /** A pdf.js PDFDocumentProxy, for rendering the page overlays. */
+  pdf: any;
+  totalPages: number;
+  fields: WidgetField[];
+  pages: Array<{ page: number; widgets: OverlayBadge[] }>;
+}
+
+function assembleField(fieldName: string, occurrences: WidgetOccurrence[]): FieldShape {
   const head = occurrences[0].annot;
   const fieldKind = classifyKind(head);
-  const { label, labelSource } = resolveLabel(pdfPath, fieldName, tier1Labels, tier2Labels);
 
-  const field: ExtractedField = {
+  const field: FieldShape = {
     fieldName,
     shortName: shortenName(fieldName),
     fieldKind,
-    label,
-    labelSource,
     widgets: occurrences.map((occ) => ({
       page: occ.page,
       position: {
@@ -230,7 +251,9 @@ function assembleField(
   return field;
 }
 
-export async function extractFormFields(pdfPath: string): Promise<ExtractedForm> {
+async function collectWidgets(
+  pdfPath: string,
+): Promise<{ pdf: any; totalPages: number; collected: CollectedWidgets }> {
   const bytes = await readFile(pdfPath);
   /*
    * pdf.js needs CanvasFactory at load time. Without it, some forms' annotations
@@ -252,25 +275,106 @@ export async function extractFormFields(pdfPath: string): Promise<ExtractedForm>
     const annots = await page.getAnnotations();
     collected.widgetsByPage.set(pageNum - 1, collectPageWidgets(annots, pageNum - 1, collected));
   }
+  return { pdf, totalPages, collected };
+}
 
-  const tier2Labels = await resolveTier2Labels(pdfPath, pdf, totalPages, collected);
-
-  const fields: ExtractedField[] = [];
-  for (const [fieldName, occurrences] of collected.widgetsByFieldName) {
-    fields.push(assembleField(pdfPath, fieldName, occurrences, collected.tier1Labels, tier2Labels));
+function byReadingOrder(left: FieldShape, right: FieldShape): number {
+  const aw = left.widgets[0];
+  const bw = right.widgets[0];
+  if (!aw || !bw) return 0;
+  if (aw.page !== bw.page) return aw.page - bw.page;
+  if (Math.abs(aw.position.y - bw.position.y) > 3) {
+    return bw.position.y - aw.position.y;
   }
+  return aw.position.x - bw.position.x;
+}
 
-  fields.sort((left, right) => {
-    const aw = left.widgets[0];
-    const bw = right.widgets[0];
-    if (!aw || !bw) return 0;
-    if (aw.page !== bw.page) return aw.page - bw.page;
-    if (Math.abs(aw.position.y - bw.position.y) > 3) {
-      return bw.position.y - aw.position.y;
-    }
-    return aw.position.x - bw.position.x;
-  });
+/*
+ * The renderer selects a radio option by pdf-lib's name for it. A PDF with an
+ * /Opt list names options by export value ("Yes", "No"), where pdf.js reports
+ * appearance states ("0", "1"); the catalog must hold the names pdf-lib selects.
+ * pdf-lib lists both in kid order, so the state finds the name.
+ */
+interface RadioNames {
+  options: string[];
+  byState: Map<string, string>;
+}
 
+async function radioNames(pdfPath: string, fields: FieldShape[]): Promise<Map<string, RadioNames>> {
+  const form = (await PDFDocument.load(await readFile(pdfPath))).getForm();
+  return new Map(
+    fields
+      .filter((field) => field.fieldKind === "radio")
+      .map((field) => {
+        const group = form.getRadioGroup(field.fieldName);
+        const options = group.getOptions();
+        const states = group.acroField.getOnValues().map((state) => state.decodeText());
+        return [
+          field.fieldName,
+          { options, byState: new Map(states.map((state, idx) => [state, options[idx]])) },
+        ];
+      }),
+  );
+}
+
+function withRadioNames(field: FieldShape, names: RadioNames | undefined): FieldShape {
+  if (!names) return field;
+  return {
+    ...field,
+    radioOptions: names.options,
+    widgets: field.widgets.map((widget) => ({
+      ...widget,
+      radioOption: widget.buttonValue ? names.byState.get(widget.buttonValue) : undefined,
+    })),
+  };
+}
+
+function overlayBadge(widget: PageWidget, names: RadioNames | undefined): OverlayBadge {
+  const { exportValue, buttonValue } = widget.annot;
+  return {
+    badge: widget.pdfWidgetId,
+    fieldName: widget.annot.fieldName as string,
+    kind: classifyKind(widget.annot),
+    rect: widget.rect,
+    ...(typeof exportValue === "string" ? { exportValue } : {}),
+    ...(typeof buttonValue === "string" ? { buttonValue } : {}),
+    ...(names && typeof buttonValue === "string"
+      ? { radioOption: names.byState.get(buttonValue) }
+      : {}),
+  };
+}
+
+/* The widgets with no model call: labels come later, from whoever reads the overlays. */
+export async function extractWidgets(pdfPath: string): Promise<ExtractedWidgets> {
+  const { pdf, totalPages, collected } = await collectWidgets(pdfPath);
+  const shapes = [...collected.widgetsByFieldName].map(([fieldName, occurrences]) =>
+    assembleField(fieldName, occurrences),
+  );
+  const names = await radioNames(pdfPath, shapes);
+  const fields = shapes
+    .map((shape) => ({
+      ...withRadioNames(shape, names.get(shape.fieldName)),
+      tuLabel: collected.tier1Labels.get(shape.fieldName) ?? null,
+    }))
+    .sort(byReadingOrder);
+  const pages = [...collected.widgetsByPage].map(([page, widgets]) => ({
+    page,
+    widgets: widgets.map((widget) =>
+      overlayBadge(widget, names.get(widget.annot.fieldName as string)),
+    ),
+  }));
+  return { pdf, totalPages, fields, pages };
+}
+
+export async function extractFormFields(pdfPath: string): Promise<ExtractedForm> {
+  const { pdf, totalPages, collected } = await collectWidgets(pdfPath);
+  const tier2Labels = await resolveTier2Labels(pdfPath, pdf, totalPages, collected);
+  const fields: ExtractedField[] = [...collected.widgetsByFieldName]
+    .map(([fieldName, occurrences]) => ({
+      ...assembleField(fieldName, occurrences),
+      ...resolveLabel(pdfPath, fieldName, collected.tier1Labels, tier2Labels),
+    }))
+    .sort(byReadingOrder);
   return { pdfPath, totalPages, fields };
 }
 
