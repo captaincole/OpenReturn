@@ -89,6 +89,8 @@ web/                             # Next.js 16 (App Router) frontend → deployed
 package.json                     # workspace root: workspaces + thin delegating scripts (dev, dev:all, test, …)
 CLAUDE.md
 .claude/skills/                 # checked-in Claude skills (corpus, e2e, vercel-logs, engine-scripts, verify-with-filed-return): "must use" for those tasks
+.claude/workflows/              # checked-in Claude Code workflows (pr-review, tax-correctness-review): multi-agent PR reviews
+.mcp.json                        # Canon as an MCP server for Claude Code (searchRefDocs, citeRefDoc); needs npm run dev:canon
 ```
 
 The agent uses the engine only through `@openreturn/engine`'s exports. The web app shares no source with either.

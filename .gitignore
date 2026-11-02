@@ -15,6 +15,7 @@ cade/src/mastra/public/drafts/
 .DS_Store
 .claude/*
 !.claude/skills/
+!.claude/workflows/
 .vercel
 supabase/
 
