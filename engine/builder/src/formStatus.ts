@@ -1,6 +1,6 @@
 import { bindingKind, FORMS } from "@openreturn/engine";
 import { existsSync, readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import type { FormTarget } from "./formTarget.js";
 import { labelsPath, widgetsPath } from "./workFiles.js";
 
@@ -12,6 +12,8 @@ export interface FormStatus {
   formId: string;
   subpath: string;
   blankPdf: boolean;
+  /** The corpus document a binding reads: npm run corpus -- outline <id>. */
+  instructionsDocId: string | null;
   widgetsJson: boolean;
   labelsJson: boolean;
   catalogFields: number | null;
@@ -33,6 +35,16 @@ function nextStep(status: Omit<FormStatus, "next">): string {
   return "form-verify";
 }
 
+/* Schedules 1, 2 and 3 have no instructions of their own: the Form 1040 instructions cover them. */
+const COVERED_BY_1040 = new Set(["federal/schedule-1", "federal/schedule-2", "federal/schedule-3"]);
+
+function instructionsDocId(target: FormTarget): string | null {
+  if (COVERED_BY_1040.has(target.subpath)) return `irs-1040-inst-${target.taxYear}`;
+  const sidecar = resolve(dirname(target.pdfPath), "instructions.meta.json");
+  if (!existsSync(sidecar)) return null;
+  return (JSON.parse(readFileSync(sidecar, "utf8")) as { docId: string }).docId;
+}
+
 function catalogFieldIds(target: FormTarget): string[] | null {
   if (!existsSync(target.catalogPath)) return null;
   const catalog = JSON.parse(readFileSync(target.catalogPath, "utf8"));
@@ -47,6 +59,7 @@ export function formStatus(target: FormTarget): FormStatus {
     formId: target.formId,
     subpath: target.subpath,
     blankPdf: existsSync(target.pdfPath),
+    instructionsDocId: instructionsDocId(target),
     widgetsJson: existsSync(widgetsPath(target)),
     labelsJson: existsSync(labelsPath(target)),
     catalogFields: fieldIds?.length ?? null,
@@ -65,6 +78,9 @@ const mark = (done: boolean) => (done ? "✓" : "·");
 export function formatStatus(status: FormStatus): string {
   const lines = [
     `${status.formId} (${status.subpath})`,
+    status.instructionsDocId
+      ? `  instructions  ${status.instructionsDocId}  (npm run corpus -- outline ${status.instructionsDocId})`
+      : "  instructions  · no instructions.meta.json in sources/",
     `  catalog   ${mark(status.catalogFields !== null)} ${status.catalogFields ?? 0} fields` +
       (status.catalogFields === null
         ? `  (widgets.json ${mark(status.widgetsJson)}, labels.json ${mark(status.labelsJson)})`

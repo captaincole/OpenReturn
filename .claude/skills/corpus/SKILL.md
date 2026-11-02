@@ -1,6 +1,6 @@
 ---
 name: corpus
-description: Add or update a reference document (IRS/FTB instructions, publications) and run the corpus CLI (status, sync, reembed, fetch, search). Use for any change to canon/.data/corpus.db or a sources/**/*.meta.json sidecar.
+description: Add or update a reference document (IRS/FTB instructions, publications) and run the corpus CLI (status, sync, reembed, fetch, search, outline, read). Use for any change to canon/.data/corpus.db or a sources/**/*.meta.json sidecar.
 ---
 
 # Corpus: reference documents and the `corpus` CLI
@@ -64,6 +64,8 @@ Cost: ~$0.50 Haiku contextualization per doc; embeddings are local and free (Emb
 | `reembed [--all]` | re-embed NULL blocks; `--all` after a model switch |
 | `check` | row counts + per-doc embedding coverage |
 | `search "q" [--mode …]` | invoke the production search tool |
+| `outline <docId>` | list a document's sections, with first page and size; fails when the document is not in corpus.db |
+| `read <blockId>` or `read <docId> <section> [--through <section>]` | print whole sections with block ids. Search with Canon (`mcp__canon__searchRefDocs`); when a hit needs more context, read its block's whole section, or a part with `--through` |
 
 ## Rebuilding
 

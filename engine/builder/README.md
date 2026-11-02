@@ -39,7 +39,7 @@ blank.pdf ──ingest──► catalog.json ──promote──► runtime copy
 ## Commands (from repo root)
 
 ```bash
-npm run form-engine -- form-status federal/8959     # which steps of a form are done, and what is next
+npm run form-engine -- form-status federal/8959     # which steps of a form are done, what is next, and its instructions doc
 npm run form-engine -- extract-widgets federal/8959 # PDF → .scratch/forms/…/widgets.json + numbered overlay tiles
 npm run form-engine -- write-catalog federal/8959   # widgets.json + labels.json → catalog.json, every widget checked
 npm run form-engine -- generate-catalog           # PDF → catalog.json (Anthropic calls, costs money)

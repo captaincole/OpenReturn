@@ -64,6 +64,8 @@ MCP clients connect to `http://localhost:4112/api/mcp/canon/mcp` (streamable HTT
 | `npm run corpus -- sync` | Ingest new or changed documents (skips the rest by sha256) |
 | `npm run corpus -- add-html <url> --dir …` | Fetch and clean an FTB web page into `sources/` |
 | `npm run corpus -- search "query"` | Run the production search (`--mode fts`, `vector` or `hybrid`) |
+| `npm run corpus -- outline <docId>` | List a document's sections with first page and size |
+| `npm run corpus -- read <blockId>` | Print a search hit's whole section with block ids (or `<docId> <section> [--through <section>]`) |
 | `npm run corpus -- reembed [--all]` | Embed the blocks again, for example after a model change |
 | `npm run corpus -- check` | Row counts and embedding coverage |
 
