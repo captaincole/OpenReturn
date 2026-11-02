@@ -28,7 +28,7 @@ blank.pdf ──ingest──► catalog.json ──promote──► runtime copy
   a human finishes and owns the bindings.
 - **`tables/`** — parsers for official rate/tax tables (IRS HTML, FTB PDF)
   into the JSON the engine's `data/` modules load.
-- **No-model catalog path** — `extract-widgets` writes `widgets.json` and
+- **Catalog path with no API calls** — `extract-widgets` writes `widgets.json` and
   numbered overlay tiles (`renderOverlayTiles`) to `.scratch/forms/<year>/<subpath>/`;
   whoever reads the tiles writes `labels.json` (schema in `labelsFile.ts`);
   `catalogFromLabels.ts` checks every widget against it before `write-catalog`

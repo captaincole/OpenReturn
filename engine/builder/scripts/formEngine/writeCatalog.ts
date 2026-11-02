@@ -32,8 +32,7 @@ async function run(argv: string[]): Promise<void> {
 
 export const writeCatalogCommand: Command = {
   name: "write-catalog",
-  summary:
-    "widgets.json + labels.json → catalog.json, after checking every widget (no model calls)",
+  summary: "widgets.json + labels.json → catalog.json, after checking every widget (no API calls)",
   usage: "<federal/<short> | state/<st>/<short>>",
   options: [
     { flag: "--out=<path>", desc: "write here instead of the form's catalog.json" },

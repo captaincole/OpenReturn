@@ -84,7 +84,7 @@ documents (`blank.pdf`, instructions) use the same subpath in
 
 1. Put `blank.pdf` in `sources/<year>/forms/<jurisdiction>/<short>/`.
    Generate `catalog.json` into `src/<jurisdiction>/<short>/` with
-   `npm run form-engine -- generate-catalog`, or with no model calls:
+   `npm run form-engine -- generate-catalog`, or with no API calls:
    `extract-widgets`, a `labels.json`, then `write-catalog` (`builder/README.md`).
 2. In `src/<jurisdiction>/<short>/`, add `types.ts` (the form's
    FormFields — every field must declare `category` and `valueType`; TS

@@ -344,7 +344,7 @@ function overlayBadge(widget: PageWidget, names: RadioNames | undefined): Overla
   };
 }
 
-/* The widgets with no model call: labels come later, from whoever reads the overlays. */
+/* The widgets with no API call: labels come later, from whoever reads the overlays. */
 export async function extractWidgets(pdfPath: string): Promise<ExtractedWidgets> {
   const { pdf, totalPages, collected } = await collectWidgets(pdfPath);
   const shapes = [...collected.widgetsByFieldName].map(([fieldName, occurrences]) =>
