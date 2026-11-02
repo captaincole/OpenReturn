@@ -91,8 +91,9 @@ model.
   Then generate the catalog (it lands next to the bindings) and sync the
   corpus: `npm run form-engine -- generate-catalog`, `npm run corpus -- sync`.
 - **5e. Engine form.** `types.ts`, `filingInfo.ts`, and `bindings.ts` in
-  `engine/src/<jurisdiction>/<short>/`. Draft the bindings with
-  `npm run form-engine -- generate-bindings`, then finish them by hand.
+  `engine/src/<jurisdiction>/<short>/`. Draft the bindings with the
+  `form-bindings` skill in Claude Code (`/form-bindings <form> [lines]`),
+  then check them by hand.
   All money math goes through `engine/src/money.ts`.
 - **5f. Resolver.** Write the must-file rule, and list each answer the
   form reads in `missingInputs`, so Cade asks for it.

@@ -88,7 +88,8 @@ documents (`blank.pdf`, instructions) use the same subpath in
    `extract-widgets`, a `labels.json`, then `write-catalog` (`builder/README.md`).
 2. In `src/<jurisdiction>/<short>/`, add `types.ts` (the form's
    FormFields — every field must declare `category` and `valueType`; TS
-   won't compile otherwise), `filingInfo.ts`, and `bindings.ts`.
+   won't compile otherwise), `filingInfo.ts`, and `bindings.ts`. Draft
+   the bindings with the `form-bindings` skill in Claude Code.
 3. Add a `resolve<Form>Info` function (in `filingInfoResolvers.ts` or the
    form's `resolveInfo.ts`) and list it in `resolveFilingInfo`
    (`filingInfo.ts`). Every form needs one: it writes the form's
