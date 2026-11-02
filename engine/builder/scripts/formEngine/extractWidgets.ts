@@ -70,7 +70,7 @@ async function run(argv: string[]): Promise<void> {
 
 export const extractWidgetsCommand: Command = {
   name: "extract-widgets",
-  summary: "Blank PDF → widgets.json + numbered overlay tiles in .scratch/forms (no model calls)",
+  summary: "Blank PDF → widgets.json + numbered overlay tiles in .scratch/forms (no API calls)",
   usage: "<federal/<short> | state/<st>/<short>>",
   options: [
     { flag: "--title=<title>", desc: "official form title (required for a form with no catalog)" },
