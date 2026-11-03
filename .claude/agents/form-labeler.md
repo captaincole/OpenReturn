@@ -1,6 +1,6 @@
 ---
 name: form-labeler
-description: Labels the widgets on one page of a blank IRS or FTB form from its numbered overlay tiles, and writes labels.page-<n>.json for write-catalog. The form-catalog skill starts one per page.
+description: Labels the widgets on one page of a blank IRS or FTB form from its numbered overlay tiles, and writes labels.page-<n>.json for write-catalog. The catalog-form-fields skill starts one per page.
 tools: Read, Write, Grep, Glob, Bash
 model: inherit
 ---

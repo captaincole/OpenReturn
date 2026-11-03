@@ -1,10 +1,10 @@
 ---
-name: form-catalog
+name: catalog-form-fields
 description: Build or rebuild a form's catalog.json (one row per PDF widget, with its fieldId, label, category and valueType) from the blank PDF, with no API calls, and regenerate its types.ts. Use for a new form, or when the IRS or FTB publishes a new blank PDF for a form the engine has.
 argument-hint: <form> [--title="<official form title>"]  e.g. federal/8959
 ---
 
-# Form catalog
+# Catalog form fields
 
 A form's `catalog.json` maps each PDF widget to a catalog field: its fieldId, label, category and valueType. `bindings.ts` and `types.ts` use the fieldIds, so a rebuild keeps every fieldId the catalog has now.
 
@@ -37,7 +37,7 @@ Start one `form-labeler` per page that needs labels, all at once: each writes it
 ## 5. Check and commit
 
 1. A form the engine has: run `npm -w @openreturn/engine run typecheck` and `npm test`. If the catalog-fill check fails, a widget moved. From `engine/`, run `npx tsx tests/golden/catalogFill.ts --form-id=<formId> --update`, read the PDF whose path it prints, and check that each value is in its box.
-2. A new form: the catalog-fill golden comes in `form-wiring`, after the form is registered.
+2. A new form: the catalog-fill golden comes in `register-form`, after the form is registered.
 3. Commit with the subject `<Form>: catalog`. In the body, list the fields added and the widgets skipped, with reasons.
 
-Next: `form-wiring` for a new form, or `form-bindings` for new fields.
+Next: `register-form` for a new form, or `write-binding-rules` for new fields.

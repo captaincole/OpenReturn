@@ -88,8 +88,8 @@ web/                             # Next.js 16 (App Router) frontend → deployed
 (no other top-level infra — auth is a password gate in the web app; see below)
 package.json                     # workspace root: workspaces + thin delegating scripts (dev, dev:all, test, …)
 CLAUDE.md
-.claude/skills/                 # checked-in Claude skills (corpus, e2e, vercel-logs, engine-scripts, verify-with-filed-return, form-catalog, form-wiring, form-bindings, form-verify): "must use" for those tasks
-.claude/agents/                 # checked-in Claude Code subagents (form-labeler, binding-drafter, binding-skeptic) that the form skills start
+.claude/skills/                 # checked-in Claude skills (corpus, e2e, vercel-logs, engine-scripts, verify-with-filed-return, catalog-form-fields, register-form, write-binding-rules, verify-form): "must use" for those tasks
+.claude/agents/                 # checked-in Claude Code subagents (form-labeler, line-rule-drafter, line-rule-skeptic) that the form skills start
 .claude/workflows/              # checked-in Claude Code workflows (pr-review, tax-correctness-review): multi-agent PR reviews
 .mcp.json                        # Canon as an MCP server for Claude Code (searchRefDocs, citeRefDoc); needs npm run dev:canon
 ```

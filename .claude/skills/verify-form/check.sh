@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Every gate a form change must pass, from the repo root: .claude/skills/form-verify/check.sh <form>
+# Every gate a form change must pass, from the repo root: .claude/skills/verify-form/check.sh <form>
 set -euo pipefail
 form="${1:?usage: check.sh <federal/<short> | state/<st>/<short>>}"
 cd "$(git rev-parse --show-toplevel)"

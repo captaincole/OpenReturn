@@ -1,6 +1,6 @@
 ---
-name: binding-skeptic
-description: Checks one drafted binding against the IRS or FTB instructions and returns agree, fix or unsupported. Read-only. The form-bindings skill starts it after each binding-drafter.
+name: line-rule-skeptic
+description: Checks one drafted binding against the IRS or FTB instructions and returns agree, fix or unsupported. Read-only. The write-binding-rules skill starts it after each line-rule-drafter.
 tools: Read, Grep, Glob, Bash, mcp__canon__searchRefDocs, mcp__canon__citeRefDoc
 model: inherit
 ---
