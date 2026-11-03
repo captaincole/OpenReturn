@@ -30,7 +30,9 @@ blank.pdf ──ingest──► catalog.json ──promote──► runtime copy
   into the JSON the engine's `data/` modules load.
 - **Catalog path with no API calls** — `extract-widgets` writes `widgets.json` and
   numbered overlay tiles (`renderOverlayTiles`) to `.scratch/forms/<year>/<subpath>/`;
-  whoever reads the tiles writes `labels.json` (schema in `labelsFile.ts`);
+  whoever reads the tiles writes `labels.json` (schema in `labelsFile.ts`), or
+  one `labels.page-<n>.json` per page; for a form with a catalog, `seed-labels`
+  writes `labels.json` from it, so a rebuild keeps every fieldId;
   `catalogFromLabels.ts` checks every widget against it before `write-catalog`
   writes `catalog.json`. `formStatus.ts` reports which steps of a form are done.
 - **`renderPageWithOverlay.ts`** — renders a page with its widget boxes drawn
@@ -41,6 +43,7 @@ blank.pdf ──ingest──► catalog.json ──promote──► runtime copy
 ```bash
 npm run form-engine -- form-status federal/8959     # which steps of a form are done, what is next, and its instructions doc
 npm run form-engine -- extract-widgets federal/8959 # PDF → .scratch/forms/…/widgets.json + numbered overlay tiles
+npm run form-engine -- seed-labels federal/8959     # catalog.json → labels.json; lists the widgets left to label
 npm run form-engine -- write-catalog federal/8959   # widgets.json + labels.json → catalog.json, every widget checked
 npm run form-engine -- generate-catalog           # PDF → catalog.json (Anthropic calls, costs money)
 npm run form-engine -- generate-bindings          # catalog → bindings.ts draft

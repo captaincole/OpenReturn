@@ -10,6 +10,7 @@ import { generateCatalogCommand } from "./generateCatalog";
 import { generateTypesCommand } from "./generateTypes";
 import { ingestCaTaxTableCommand } from "./ingestCaTaxTable";
 import { ingestFederalTaxTableCommand } from "./ingestFederalTaxTable";
+import { seedLabelsCommand } from "./seedLabels";
 import { writeCatalogCommand } from "./writeCatalog";
 
 /* .env (personal overrides) first, then .env.development. dotenv never overrides a set key. */
@@ -25,6 +26,7 @@ void runCli({
     "Form-engine asset pipeline: blank PDFs and tax tables → catalogs, bindings, types, runtime tree.",
   commands: [
     extractWidgetsCommand,
+    seedLabelsCommand,
     writeCatalogCommand,
     formStatusCommand,
     generateCatalogCommand,
