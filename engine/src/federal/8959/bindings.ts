@@ -20,6 +20,9 @@ const ADDITIONAL_MEDICARE_THRESHOLDS: Record<string, number> = {
   qualifying_surviving_spouse: 200000,
 };
 
+/* Line 21: the regular (non-Additional) Medicare tax rate on wages. */
+const REGULAR_MEDICARE_TAX_RATE = 0.0145;
+
 export function register(): void {
   defineForm<Form8959, Form8959FilingInfo>("form-8959", {
     bindings: {
@@ -123,22 +126,19 @@ export function register(): void {
       // MANUAL EDIT: routed to the FilingInfo slot (sum of W-2 box 6).
       "0.line.19_medicare_tax_withheld": (_, info) => roundDollars(info.w2MedicareTaxWithheld),
       "0.line.20_medicare_wages_from_line1": (form) => form["0.line.1_medicare_wages_tips"],
-      // MANUAL EDIT: line 21 = line 20 × 1.45%.
+      // MANUAL EDIT: Part V is blank without Medicare wages.
       "0.line.21_regular_medicare_tax_on_wages": (form) => {
         const line20 = form["0.line.20_medicare_wages_from_line1"];
         if (typeof line20 !== "number" || line20 === 0) return undefined;
-        return roundDollars(line20 * 0.0145);
+        return roundDollars(line20 * REGULAR_MEDICARE_TAX_RATE);
       },
-      "0.line.22_additional_medicare_tax_withholding_wages": (form) =>
-        atLeast(
-          0,
-          sum(
-            form["0.line.19_medicare_tax_withheld"],
-            form["0.line.21_regular_medicare_tax_on_wages"] === undefined
-              ? 0
-              : -form["0.line.21_regular_medicare_tax_on_wages"],
-          ),
-        ),
+      // MANUAL EDIT: blank when line 21 is blank (no Medicare wages); -0- when 21 exceeds 19.
+      "0.line.22_additional_medicare_tax_withholding_wages": (form) => {
+        const line19 = form["0.line.19_medicare_tax_withheld"];
+        const line21 = form["0.line.21_regular_medicare_tax_on_wages"];
+        if (line19 === undefined || line21 === undefined) return undefined;
+        return atLeast(0, line19 - line21);
+      },
       // MANUAL EDIT: blank when lines 22 and 23 are both blank.
       "0.line.24_total_additional_medicare_tax_withholding": (form) => {
         const twentyTwo = form["0.line.22_additional_medicare_tax_withholding_wages"];
