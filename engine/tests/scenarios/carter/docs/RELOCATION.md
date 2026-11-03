@@ -58,7 +58,7 @@ address.
 | `01-liberty-trust-1099-r-code-q.pdf` | values from IRS PDF page 4 | 1099-R, code Q (qualified Roth IRA) |
 | `02-jubilee-retirement-1099-r-code-g.pdf` | values from IRS PDF page 5 | 1099-R, code G (direct rollover) |
 | `03-example-reit-fund-1099-div.pdf` | made by us | 1099-DIV, box 2a only (IRS fillable Copy B) |
-| `04-ssa-1099.pdf` | made by us | SSA-1099, net benefits $1,000 (drawn; SSA has no public blank) |
+| `04-ssa-1099.pdf` | made by us (`carter/generate-docs.ts`) | SSA-1099, net benefits $1,000 (drawn; SSA has no public blank) |
 
 Pages 2–3 are the IRS draft Form 1040. They are not an input document,
 but they give the spouse's name and SSN. They stay in

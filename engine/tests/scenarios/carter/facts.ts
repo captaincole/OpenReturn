@@ -28,6 +28,17 @@ const fact = (category: string, key: string, value: unknown, sourceNote: string)
   createdAt: CREATED_AT,
 });
 
+/* The taxpayer as the documents print him (generate-docs.ts reads it too). */
+export const CARTER = {
+  firstName: "Carter",
+  lastName: "Lewis",
+  ssn: "400-00-1039",
+  street: "807 Sahara Drive",
+  city: "Sacramento",
+  state: "CA",
+  zip: "95814",
+};
+
 const idFact = (suffix: string, value: string) =>
   identityFact({ userId: CARTER_USER_ID, taxYear: CARTER_TAX_YEAR, suffix, value });
 
@@ -60,22 +71,22 @@ const reitDiv: DividendFactValue = {
   box2a: 7500,
 };
 
-// docs/04-ssa-1099.pdf (made by us from the cover page)
-const ssa: SocialSecurityFactValue = {
+// docs/04-ssa-1099.pdf (made by us from the cover page; carter/generate-docs.ts)
+export const ssa: SocialSecurityFactValue = {
   payerName: "Social Security Administration",
   box3: 1000,
   box5: 1000,
 };
 
 export const carterFacts: TaxFactRow[] = [
-  idFact("name.first", "Carter"),
-  idFact("name.last", "Lewis"),
-  idFact("ssn", "400-00-1039"),
+  idFact("name.first", CARTER.firstName),
+  idFact("name.last", CARTER.lastName),
+  idFact("ssn", CARTER.ssn),
   idFact("dob", "10/29/1953"),
-  idFact("address.street", "807 Sahara Drive"),
-  idFact("address.city", "Sacramento"),
-  idFact("address.state", "CA"),
-  idFact("address.zip", "95814"),
+  idFact("address.street", CARTER.street),
+  idFact("address.city", CARTER.city),
+  idFact("address.state", CARTER.state),
+  idFact("address.zip", CARTER.zip),
   idFact("address.county", "Sacramento"),
   fact(
     "identity",
