@@ -21,8 +21,10 @@ which keeps the data outside the project.
 
 Collect the W-2s and 1099s the taxpayer would hand to a preparer. Make
 them fake: invented names, employers, payers, and amounts. Put one PDF
-per document in `engine/tests/scenarios/<name>/docs/`. For an
-example generator, see `tests/scenarios/marcus/generate-docs.ts`.
+per document in `engine/tests/scenarios/<name>/docs/`. In Claude Code,
+the `create-input-documents` skill finds the missing documents and makes
+them from a generator in `tests/scenarios/documents/` (the SSA-1099 is
+the first); a person reviews the first document of each type.
 
 Every document value in `facts.ts` must come from one of these files. If
 your source gives only an amount (an SSA-1099 or a 1099-DIV, for
