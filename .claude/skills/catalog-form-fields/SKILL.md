@@ -1,6 +1,6 @@
 ---
 name: catalog-form-fields
-description: Build or rebuild a form's catalog.json (one row per PDF widget, with its fieldId, label, category and valueType) from the blank PDF, with no API calls, and regenerate its types.ts. Use for a new form, or when the IRS or FTB publishes a new blank PDF for a form the engine has.
+description: Build or rebuild a form's catalog.json (one row per PDF widget, with its fieldId, label, category and valueType) from the blank PDF, with no API calls, and regenerate its types.ts. Use for a new form, or when the IRS or FTB corrects the 2025 blank PDF of a form the engine has.
 argument-hint: <form> [--title="<official form title>"]  e.g. federal/8959
 ---
 
