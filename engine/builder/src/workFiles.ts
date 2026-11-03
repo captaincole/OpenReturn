@@ -1,4 +1,5 @@
-import { readFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { readdir, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import type { OverlayBadge, WidgetField } from "./extractFormFields.js";
 import type { FormTarget } from "./formTarget.js";
@@ -31,12 +32,8 @@ export async function readWidgetsFile(target: FormTarget): Promise<WidgetsFile> 
   return JSON.parse(text) as WidgetsFile;
 }
 
-export async function readLabelsFile(target: FormTarget): Promise<LabelsFile> {
-  const path = labelsPath(target);
-  const text = await readFile(path, "utf8").catch(() => {
-    throw new Error(`${path} not found: write the labels first`);
-  });
-  const parsed = labelsFileSchema.safeParse(JSON.parse(text));
+async function readOneLabelsFile(path: string): Promise<LabelsFile> {
+  const parsed = labelsFileSchema.safeParse(JSON.parse(await readFile(path, "utf8")));
   if (!parsed.success) {
     const issues = parsed.error.issues
       .slice(0, 10)
@@ -44,4 +41,20 @@ export async function readLabelsFile(target: FormTarget): Promise<LabelsFile> {
     throw new Error(`${path} does not match the labels schema:\n${issues.join("\n")}`);
   }
   return parsed.data;
+}
+
+/* labels.json plus each labels.page-<n>.json a form-labeler wrote, as one file. */
+export async function readLabelsFile(target: FormTarget): Promise<LabelsFile> {
+  const pageFiles = (await readdir(target.workDir).catch(() => []))
+    .filter((name) => /^labels\.page-\d+\.json$/.test(name))
+    .map((name) => resolve(target.workDir, name));
+  const paths = [labelsPath(target), ...pageFiles].filter((path) => existsSync(path));
+  if (paths.length === 0) {
+    throw new Error(`no labels.json in ${target.workDir}: write the labels first`);
+  }
+  const files = await Promise.all(paths.map(readOneLabelsFile));
+  return {
+    fields: files.flatMap((file) => file.fields),
+    skipped: files.flatMap((file) => file.skipped),
+  };
 }

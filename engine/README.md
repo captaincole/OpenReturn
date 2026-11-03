@@ -83,9 +83,9 @@ documents (`blank.pdf`, instructions) use the same subpath in
 ## Adding a form
 
 1. Put `blank.pdf` in `sources/<year>/forms/<jurisdiction>/<short>/`.
-   Generate `catalog.json` into `src/<jurisdiction>/<short>/` with
-   `npm run form-engine -- generate-catalog`, or with no API calls:
-   `extract-widgets`, a `labels.json`, then `write-catalog` (`builder/README.md`).
+   Build `catalog.json` and `types.ts` in `src/<jurisdiction>/<short>/` with
+   the `form-catalog` skill in Claude Code (no API calls), or with
+   `npm run form-engine -- generate-catalog` (`builder/README.md`).
 2. In `src/<jurisdiction>/<short>/`, add `types.ts` (the form's
    FormFields — every field must declare `category` and `valueType`; TS
    won't compile otherwise), `filingInfo.ts`, and `bindings.ts`. Draft
@@ -103,6 +103,10 @@ documents (`blank.pdf`, instructions) use the same subpath in
    `index.ts`.
 5. Add golden coverage under `tests/scenarios/`, and a catalog-fill golden
    (`tests/README.md`).
+
+In Claude Code, the `form-wiring` skill does steps 2–4 with an empty
+`bindings.ts` and the catalog-fill golden. `form-bindings` then drafts the
+lines, and `form-verify` runs every gate.
 
 If a new form makes you touch files outside its folder and its jurisdiction
 registry, the registry isn't doing its job — surface the missing abstraction
