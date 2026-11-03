@@ -106,7 +106,9 @@ documents (`blank.pdf`, instructions) use the same subpath in
 
 In Claude Code, the `register-form` skill does steps 2–4 with an empty
 `bindings.ts` and the catalog-fill golden. `write-binding-rules` then drafts the
-lines, and `verify-form` runs every gate.
+lines, and `verify-form` runs every gate. For a form the engine already has,
+`update-form` finds the lines a scenario needs that are blank, unsupported
+or wrong, and fixes them.
 
 If a new form makes you touch files outside its folder and its jurisdiction
 registry, the registry isn't doing its job — surface the missing abstraction
