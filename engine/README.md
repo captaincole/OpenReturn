@@ -84,12 +84,12 @@ documents (`blank.pdf`, instructions) use the same subpath in
 
 1. Put `blank.pdf` in `sources/<year>/forms/<jurisdiction>/<short>/`.
    Build `catalog.json` and `types.ts` in `src/<jurisdiction>/<short>/` with
-   the `form-catalog` skill in Claude Code (no API calls), or with
+   the `catalog-form-fields` skill in Claude Code (no API calls), or with
    `npm run form-engine -- generate-catalog` (`builder/README.md`).
 2. In `src/<jurisdiction>/<short>/`, add `types.ts` (the form's
    FormFields — every field must declare `category` and `valueType`; TS
    won't compile otherwise), `filingInfo.ts`, and `bindings.ts`. Draft
-   the bindings with the `form-bindings` skill in Claude Code.
+   the bindings with the `write-binding-rules` skill in Claude Code.
 3. Add a `resolve<Form>Info` function (in `filingInfoResolvers.ts` or the
    form's `resolveInfo.ts`) and list it in `resolveFilingInfo`
    (`filingInfo.ts`). Every form needs one: it writes the form's
@@ -104,9 +104,9 @@ documents (`blank.pdf`, instructions) use the same subpath in
 5. Add golden coverage under `tests/scenarios/`, and a catalog-fill golden
    (`tests/README.md`).
 
-In Claude Code, the `form-wiring` skill does steps 2–4 with an empty
-`bindings.ts` and the catalog-fill golden. `form-bindings` then drafts the
-lines, and `form-verify` runs every gate.
+In Claude Code, the `register-form` skill does steps 2–4 with an empty
+`bindings.ts` and the catalog-fill golden. `write-binding-rules` then drafts the
+lines, and `verify-form` runs every gate.
 
 If a new form makes you touch files outside its folder and its jurisdiction
 registry, the registry isn't doing its job — surface the missing abstraction

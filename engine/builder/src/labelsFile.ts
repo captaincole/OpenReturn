@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 /*
- * labels.json: what the form-catalog skill (or a person) decides for each
+ * labels.json: what the catalog-form-fields skill (or a person) decides for each
  * widget field that extract-widgets found. write-catalog turns it into
  * catalog.json. Every widget field appears exactly once, in fields or skipped.
  */

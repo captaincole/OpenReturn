@@ -29,10 +29,10 @@ export interface FormStatus {
 
 function nextStep(status: Omit<FormStatus, "next">): string {
   if (!status.blankPdf) return "add blank.pdf under sources/";
-  if (status.catalogFields === null) return "form-catalog";
-  if (!status.typesTs || !status.filingInfoTs || !status.registered) return "form-wiring";
-  if (status.notDrafted.length > 0) return `form-bindings (${status.notDrafted[0]})`;
-  return "form-verify";
+  if (status.catalogFields === null) return "catalog-form-fields";
+  if (!status.typesTs || !status.filingInfoTs || !status.registered) return "register-form";
+  if (status.notDrafted.length > 0) return `write-binding-rules (${status.notDrafted[0]})`;
+  return "verify-form";
 }
 
 /* Schedules 1, 2 and 3 have no instructions of their own: the Form 1040 instructions cover them. */

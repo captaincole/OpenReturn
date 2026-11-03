@@ -1,15 +1,15 @@
 ---
-name: form-bindings
-description: Draft or redraft the bindings of a form the engine already catalogs (the code in bindings.ts that computes each field), one field at a time, with a binding-drafter and a binding-skeptic subagent grounded in Canon. Use to bind lines a scenario needs, fix a wrong line, or finish a form's fields that are not drafted.
+name: write-binding-rules
+description: Draft or redraft the bindings of a form the engine already catalogs (the code in bindings.ts that computes each field), one field at a time, with a line-rule-drafter and a line-rule-skeptic subagent grounded in Canon. Use to bind lines a scenario needs, fix a wrong line, or finish a form's fields that are not drafted.
 argument-hint: <form> [lines…]  e.g. federal/8959 line.21 line.22
 ---
 
-# Form bindings
+# Write binding rules
 
 A binding is the function in `engine/src/<form>/bindings.ts` that computes one catalog field, or an `unsupported` entry that says why the engine does not compute it. This skill drafts them one field at a time:
 
-- A `binding-drafter` subagent writes one binding, grounded in the instructions through Canon.
-- A read-only `binding-skeptic` subagent checks it against the instructions.
+- A `line-rule-drafter` subagent writes one binding, grounded in the instructions through Canon.
+- A read-only `line-rule-skeptic` subagent checks it against the instructions.
 
 The repo holds the state: `form-status` lists the fields that are not drafted, so a new session continues where the last one stopped.
 
@@ -31,11 +31,11 @@ Arguments: `$ARGUMENTS`. The first is the form (`federal/<short>` or `state/<st>
 
 Draft one field at a time: the drafters edit the same files.
 
-1. Start a `binding-drafter` with the form, the fieldId, its catalog label and the instructions docId.
-2. Start a `binding-skeptic` with the same input and the drafter's report.
+1. Start a `line-rule-drafter` with the form, the fieldId, its catalog label and the instructions docId.
+2. Start a `line-rule-skeptic` with the same input and the drafter's report.
 3. Act on the skeptic's verdict:
    - `agree`: keep the binding.
-   - `fix`: start a new `binding-drafter` with the skeptic's reason, then a new `binding-skeptic`. If the skeptic still does not agree, replace the binding with an `unsupported` entry. Its reason is the skeptic's finding, in one sentence.
+   - `fix`: start a new `line-rule-drafter` with the skeptic's reason, then a new `line-rule-skeptic`. If the skeptic still does not agree, replace the binding with an `unsupported` entry. Its reason is the skeptic's finding, in one sentence.
    - `unsupported`: replace the binding with an `unsupported` entry and the skeptic's reason.
 4. Write one line for the field: `<fieldId>: bound | unsupported — <blockId>`.
 

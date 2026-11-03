@@ -1,15 +1,15 @@
 ---
-name: form-verify
+name: verify-form
 description: Run every gate for a form change (typecheck, lint, unit, integration, golden and catalog-fill tests) and list the form's unsupported lines for the PR body. Use as the last step before a PR that adds or changes a form.
 argument-hint: <form>  e.g. federal/8959
 ---
 
-# Form verify
+# Verify a form
 
 Arguments: `$ARGUMENTS`, the form (`federal/<short>` or `state/<st>/<short>`).
 
-1. Run `.claude/skills/form-verify/check.sh <form>` from the repo root. It stops at the first gate that fails. A person or another agent can run the same script.
-2. If a gate fails, report the gate and its output. Fix it with the skill that owns the part: `form-catalog`, `form-wiring` or `form-bindings`. Never edit an `expected.ts` to make a golden test pass.
+1. Run `.claude/skills/verify-form/check.sh <form>` from the repo root. It stops at the first gate that fails. A person or another agent can run the same script.
+2. If a gate fails, report the gate and its output. Fix it with the skill that owns the part: `catalog-form-fields`, `register-form` or `write-binding-rules`. Never edit an `expected.ts` to make a golden test pass.
 3. When every gate passes, read the `unsupported` entries in the form's `bindings.ts`. These lines are left for a person.
 4. Report:
    - each gate and its result

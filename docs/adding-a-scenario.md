@@ -89,12 +89,12 @@ model.
   For FTB instructions that are a web page, `npm run corpus -- add-html`
   writes the sidecar.
   Then build the catalog (it lands next to the bindings) with the
-  `form-catalog` skill (`/form-catalog <form> --title="…"`), and sync the
+  `catalog-form-fields` skill (`/catalog-form-fields <form> --title="…"`), and sync the
   corpus: `npm run corpus -- sync`.
 - **5e. Engine form.** `types.ts`, `filingInfo.ts`, and `bindings.ts` in
-  `engine/src/<jurisdiction>/<short>/`. The `form-wiring` skill writes
+  `engine/src/<jurisdiction>/<short>/`. The `register-form` skill writes
   them with no bindings, plus the resolver and the registry entry (5f, 5g). Draft the bindings with the
-  `form-bindings` skill in Claude Code (`/form-bindings <form> [lines]`),
+  `write-binding-rules` skill in Claude Code (`/write-binding-rules <form> [lines]`),
   then check them by hand.
   All money math goes through `engine/src/money.ts`.
 - **5f. Resolver.** Write the must-file rule, and list each answer the

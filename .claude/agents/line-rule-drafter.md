@@ -1,6 +1,6 @@
 ---
-name: binding-drafter
-description: Writes the binding for one form field in the engine's bindings.ts, grounded in the IRS or FTB instructions through Canon, and runs the type check and the golden tests. The form-bindings skill starts it once per field.
+name: line-rule-drafter
+description: Writes the binding for one form field in the engine's bindings.ts, grounded in the IRS or FTB instructions through Canon, and runs the type check and the golden tests. The write-binding-rules skill starts it once per field.
 tools: Read, Edit, Write, Grep, Glob, Bash, mcp__canon__searchRefDocs, mcp__canon__citeRefDoc
 model: inherit
 ---
