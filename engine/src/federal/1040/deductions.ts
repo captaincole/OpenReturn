@@ -25,11 +25,9 @@ export function standardDeduction(info: Form1040FilingInfo): number | undefined 
 }
 
 /*
- * The senior deduction (Schedule 1-A → line 13b) is not modeled, so line 14
- * stays blank for a filer who may claim it. MFS filers cannot.
+ * Line 14 adds 13b (Schedule 1-A line 38). While Schedule 1-A is filed but
+ * line 38 is blank, line 14 waits: adding 0 would understate the deduction.
  */
-export function mayClaimSeniorDeduction(info: Form1040FilingInfo): boolean {
-  return (
-    info.taxpayerBornBeforeJan2_1961 === true && info.filingStatus !== "married_filing_separately"
-  );
+export function awaitsSchedule1A(info: Form1040FilingInfo, line13b: unknown): boolean {
+  return info.mustFile?.["schedule-1-a"]?.value === true && typeof line13b !== "number";
 }

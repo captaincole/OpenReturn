@@ -14,7 +14,7 @@ export interface Form1040FilingInfo extends BaseFilingInfo {
   taxableInterestTotal?: Money;
   taxExemptInterestTotal?: Money;
   /** Lines 4a–4c. */
-  iraDistributions?: RetirementLine;
+  iraDistributions?: IraLine;
   /** Lines 5a–5c. */
   pensionDistributions?: RetirementLine;
   /** Line 6a. */
@@ -33,4 +33,10 @@ export interface RetirementLine {
   gross: number;
   taxable?: number;
   rollover: boolean;
+}
+
+/** `taxable` leaves out the traditional IRA rows of a Form 8606 filer: line 4b adds that form. */
+export interface IraLine extends RetirementLine {
+  /** People who file Form 8606 (0, 1 or 2). */
+  form8606Filers: number;
 }

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { RetirementDistributionFactValue } from "../../../../src/facts/index.js";
-import { rowTaxable } from "../../../../src/federal/1040/resolveInfo.js";
+import { rowTaxable, traditionalTaxable } from "../../../../src/federal/1040/resolveInfo.js";
 
 const distribution = (
   change: Partial<RetirementDistributionFactValue>,
@@ -30,4 +30,25 @@ describe("rowTaxable", () => {
       expect(rowTaxable(row)).toBe(expected);
     },
   );
+});
+
+describe("traditionalTaxable", () => {
+  const ira = (change: Partial<RetirementDistributionFactValue>) =>
+    distribution({ box7IraSepSimple: true, ...change });
+  const direct = ira({ box1: 20000, box2a: 0, box7: "G" });
+  const normal = ira({ box1: 10000, box2a: 10000, box7: "7" });
+
+  it("does not take a direct rollover off twice", () => {
+    expect(traditionalTaxable([direct, normal], 20000)).toBe(10000);
+  });
+  it("takes an indirect rollover off the other rows", () => {
+    expect(traditionalTaxable([direct, normal], 24000)).toBe(6000);
+  });
+  it("does not go below zero", () => {
+    expect(traditionalTaxable([normal], 15000)).toBe(0);
+  });
+  it("is undefined when a row's taxable amount is not determined", () => {
+    const unknown = ira({ box2b: { taxableAmountNotDetermined: true } });
+    expect(traditionalTaxable([direct, unknown], 20000)).toBeUndefined();
+  });
 });

@@ -5,17 +5,33 @@
  */
 
 import { lookupTax } from "../../data/taxTable.js";
-import { defineForm } from "../../defineForm.js";
+import { defineForm, type FormAccessor } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
 import { form1040Line7a } from "../schedule-d/lines.js";
-import { mayClaimSeniorDeduction, standardDeduction } from "./deductions.js";
+import { awaitsSchedule1A, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
 
 function fromScheduleB(value: unknown): number | undefined {
   return typeof value === "number" ? value : undefined;
+}
+
+// MANUAL EDIT: line 4b adds the Form 8606 filer's lines 15c and 18 (Part III, line 25c, is not modeled).
+function line4b(form: FormAccessor<Form1040>, info: Form1040FilingInfo): number | undefined {
+  const ira = info.iraDistributions;
+  if (ira?.taxable === undefined) return undefined;
+  if (ira.form8606Filers === 0) return roundDollars(ira.taxable);
+  // Only the first Form 8606 copy is evaluated, so two filers leave line 4b blank.
+  if (ira.form8606Filers > 1) return undefined;
+  const line15c = form["form-8606.1.line.15c_taxable_traditional_distributions"];
+  const line16 = form["form-8606.1.line.16_net_amount_converted"];
+  const line18 = form["form-8606.1.line.18_taxable_conversion_amount"];
+  if (typeof line15c !== "number") return undefined;
+  if (typeof line16 === "number" && typeof line18 !== "number") return undefined;
+  // 8606 inst. line 18: zero or less is not included on line 4b.
+  return roundDollars(sum(ira.taxable, line15c, atLeast(0, line18)));
 }
 
 export function register(): void {
@@ -90,7 +106,7 @@ export function register(): void {
         roundDollars(info.ordinaryDividends),
       // MANUAL EDIT: lines 4a–5c from 1099-R facts.
       "line.4a": (_, info) => roundDollars(info.iraDistributions?.gross),
-      "line.4b": (_, info) => roundDollars(info.iraDistributions?.taxable),
+      "line.4b": line4b,
       "line.4c_rollover": (_, info) => (info.iraDistributions?.rollover ? true : undefined),
       "line.5a": (_, info) => roundDollars(info.pensionDistributions?.gross),
       "line.5b": (_, info) => roundDollars(info.pensionDistributions?.taxable),
@@ -191,10 +207,12 @@ export function register(): void {
       },
       /*
        * Blank when 12e is blank: sum() would count it as 0 and overstate
-       * taxable income. Also blank when the filer may claim the senior deduction.
+       * taxable income. Also blank while Schedule 1-A is filed but 13b is blank.
        */
       "line.14": (form, info) => {
-        if (form["line.12e"] === undefined || mayClaimSeniorDeduction(info)) return undefined;
+        if (form["line.12e"] === undefined || awaitsSchedule1A(info, form["line.13b"])) {
+          return undefined;
+        }
         return sum(form["line.12e"], form["line.13a"], form["line.13b"]);
       },
       // Blank when line 14 is blank: sum() would read it as 0 and tax all of 11b.
@@ -255,6 +273,11 @@ export function register(): void {
       // MANUAL EDIT: line 13a = Form 8995-A line 39 (QBI deduction); blank when 8995-A is not filed.
       "line.13a": (form) => {
         const value = form["form-8995-a.1.line.39"];
+        return typeof value === "number" ? value : undefined;
+      },
+      // MANUAL EDIT: line 13b = Schedule 1-A line 38; blank when Schedule 1-A is not filed.
+      "line.13b": (form) => {
+        const value = form["schedule-1-a.1.line.38_total_additional_deductions"];
         return typeof value === "number" ? value : undefined;
       },
       // MANUAL EDIT: line 17 = Schedule 2 line 3 (AMT + excess APTC); blank when Schedule 2 is not filed.
@@ -509,8 +532,6 @@ export function register(): void {
         "No blindness fact ingested — we don't yet have a fact key for the taxpayer's blindness status.",
       "line.12d_spouse_blind":
         "No MFJ/spouse scenario ingested yet — spouse blindness fact does not exist.",
-      "line.13b":
-        "Schedule 1-A (new 2025 form) covers no-tax-on-tips, no-tax-on-overtime, car loan interest, and enhanced senior deductions — none of these scenarios are ingested yet. Line 14 stays blank for a filer born before January 2, 1961 who is not MFS, because they may qualify for the senior deduction.",
       "line.16_from_form_8814":
         "Checkbox indicating tax includes amounts from Form 8814 (child's interest/dividends election). No Form 8814 ingestion scenario built yet; requires dependent-with-investment-income data.",
       "line.16_from_form_4972":
