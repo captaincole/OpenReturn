@@ -1,0 +1,830 @@
+{
+  "form": {
+    "formId": "schedule-1-a",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Schedule 1-A (Form 1040), Additional Deductions"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-1-a.0.header.taxpayer_name",
+      "label": "Name(s) shown on Form 1040, 1040-SR, or 1040-NR",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 447.4,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.1_agi_form_1040",
+      "label": "Line 1 — Enter the amount from Form 1040, 1040-SR, or 1040-NR, line 11b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.2a_puerto_rico_excluded_income",
+      "label": "Line 2a — Enter any income from Puerto Rico that you excluded",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.2b_form_2555_line_45",
+      "label": "Line 2b — Enter the amount from Form 2555, line 45",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.2c_form_2555_line_50",
+      "label": "Line 2c — Enter the amount from Form 2555, line 50",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.2d_form_4563_line_15",
+      "label": "Line 2d — Enter the amount from Form 4563, line 15",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.2e_total_excluded_income",
+      "label": "Line 2e — Add lines 2a, 2b, 2c, and 2d",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.3_modified_agi",
+      "label": "Line 3 — Add lines 1 and 2e",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.4a_tips_form_w2_box_7",
+      "label": "Line 4a — Enter qualified tips included on Form W-2, box 7",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.4b_tips_form_4137",
+      "label": "Line 4b — Qualified tips included on Form 4137, line 1, row A, column (c). If Form 4137 is not filed, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.4c_employee_qualified_tips",
+      "label": "Line 4c — If you only received qualified tips as an employee with respect to employment with one employer, enter the larger of line 4a or line 4b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.5_business_qualified_tips",
+      "label": "Line 5 — Qualified tips received in the course of a trade or business (included in Form 1099-NEC, box 1; Form 1099-MISC, box 3; or Form 1099-K, box 1a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.6_total_qualified_tips",
+      "label": "Line 6 — Add lines 4c and 5",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.7_tips_capped_25000",
+      "label": "Line 7 — Enter the smaller of the amount on line 6 or $25,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.8_modified_agi_tips",
+      "label": "Line 8 — Enter the amount from line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.9_tips_magi_threshold",
+      "label": "Line 9 — Enter $150,000 ($300,000 if married filing jointly)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.10_tips_magi_excess",
+      "label": "Line 10 — Subtract line 9 from line 8. If zero or less, enter the amount from line 7 on line 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.11_tips_excess_thousands",
+      "label": "Line 11 — Divide line 10 by $1,000. If the resulting number isn't a whole number, decrease the result to the next lower whole number",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.12_tips_phaseout_reduction",
+      "label": "Line 12 — Multiply line 11 by $100",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.13_qualified_tips_deduction",
+      "label": "Line 13 — Qualified tips deduction. Subtract line 12 from line 7. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.14a_overtime_form_w2_box_1",
+      "label": "Line 14a — Qualified overtime compensation included in Form W-2, box 1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 168.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.14b_overtime_form_1099",
+      "label": "Line 14b — Qualified overtime compensation included in Form 1099-NEC, box 1, or Form 1099-MISC, box 3",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.14c_total_qualified_overtime",
+      "label": "Line 14c — Add lines 14a and 14b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 132.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.15_overtime_capped",
+      "label": "Line 15 — Enter the smaller of the amount on line 14c or $12,500 ($25,000 if married filing jointly)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.16_modified_agi_overtime",
+      "label": "Line 16 — Enter the amount from line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 108
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.17_overtime_magi_threshold",
+      "label": "Line 17 — Enter $150,000 ($300,000 if married filing jointly)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 96.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.18_overtime_magi_excess",
+      "label": "Line 18 — Subtract line 17 from line 16. If zero or less, enter the amount from line 15 on line 21",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 84.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.19_overtime_excess_thousands",
+      "label": "Line 19 — Divide line 18 by $1,000. If the resulting number isn't a whole number, decrease the result to the next lower whole number",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 60.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.20_overtime_phaseout_reduction",
+      "label": "Line 20 — Multiply line 19 by $100",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 48.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.21_qualified_overtime_deduction",
+      "label": "Line 21 — Qualified overtime compensation deduction. Subtract line 20 from line 15. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 36
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22a_vehicle_vin_col_i",
+      "label": "Line 22a — Applicable passenger vehicle: (i) Vehicle identification number (VIN)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].Table_Line22[0].Line22a[0].VIN-1_Comb[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 108,
+        "y": 620.998
+      },
+      "maxLength": 17
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22a_interest_deducted_elsewhere_col_ii",
+      "label": "Line 22a — Interest for this loan: (ii) Deducted on Schedule C, Schedule E, or Schedule F",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].Table_Line22[0].Line22a[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 617.998
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22a_interest_schedule_1a_col_iii",
+      "label": "Line 22a — Interest for this loan: (iii) Schedule 1-A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].Table_Line22[0].Line22a[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 617.998
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22b_vehicle_vin_col_i",
+      "label": "Line 22b — Applicable passenger vehicle: (i) Vehicle identification number (VIN)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].Table_Line22[0].Line22b[0].VIN-2_Comb[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 108,
+        "y": 602.998
+      },
+      "maxLength": 17
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22b_interest_deducted_elsewhere_col_ii",
+      "label": "Line 22b — Interest for this loan: (ii) Deducted on Schedule C, Schedule E, or Schedule F",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].Table_Line22[0].Line22b[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 599.998
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22b_interest_schedule_1a_col_iii",
+      "label": "Line 22b — Interest for this loan: (iii) Schedule 1-A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].Table_Line22[0].Line22b[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 599.998
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.23_total_car_loan_interest",
+      "label": "Line 23 — Add lines 22a and 22b, column (iii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.24_car_interest_capped",
+      "label": "Line 24 — Enter the smaller of the amount on line 23 or $10,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.25_magi_from_line_3",
+      "label": "Line 25 — Enter the amount from line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.26_car_interest_threshold",
+      "label": "Line 26 — Enter $100,000 ($200,000 if married filing jointly)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.27_magi_over_threshold",
+      "label": "Line 27 — Subtract line 26 from line 25",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 540
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.28_thousands_over_threshold",
+      "label": "Line 28 — Divide line 27 by $1,000. If the resulting number isn't a whole number, increase the result to the next higher whole number",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.29_car_interest_phaseout",
+      "label": "Line 29 — Multiply line 28 by $200",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 504
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.30_car_loan_interest_deduction",
+      "label": "Line 30 — Qualified passenger vehicle loan interest deduction. Subtract line 29 from line 24. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.31_magi_from_line_3",
+      "label": "Line 31 — Enter the amount from line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.32_senior_threshold",
+      "label": "Line 32 — Enter $75,000 ($150,000 if married filing jointly)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.33_magi_over_threshold",
+      "label": "Line 33 — Subtract line 32 from line 31. If zero or less, enter $6,000 on line 35",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.34_senior_phaseout",
+      "label": "Line 34 — Multiply line 33 by 6% (0.06)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.35_senior_amount_per_person",
+      "label": "Line 35 — Subtract line 34 from $6,000. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.36a_senior_deduction_you",
+      "label": "Line 36a — If you have a valid social security number and were born before January 2, 1961, enter the amount from line 35",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.36b_senior_deduction_spouse",
+      "label": "Line 36b — If you are married filing jointly, your spouse has a valid social security number and was born before January 2, 1961, enter the amount from line 35",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.37_enhanced_senior_deduction",
+      "label": "Line 37 — Enhanced deduction for seniors. Add lines 36a and 36b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.38_total_additional_deductions",
+      "label": "Line 38 — Add lines 13, 21, 30, and 37",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "form1[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 288
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/schedule-1-a/blank.pdf",
+    "ingestedAt": "2026-11-04T17:15:46.641Z",
+    "totalFields": 54,
+    "skipped": 0,
+    "catalogEntries": 54
+  }
+}
