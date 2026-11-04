@@ -1,0 +1,492 @@
+{
+  "formId": "schedule-1-a",
+  "fieldCount": 54,
+  "entries": [
+    {
+      "fieldId": "schedule-1-a.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_02[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_01[0]",
+          "text": "T-1A1XQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.1_agi_form_1040",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_03[0]",
+          "text": "7,173"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.10_tips_magi_excess",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_18[0]",
+          "text": "4,408"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.11_tips_excess_thousands",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_19[0]",
+          "text": "6,324"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.12_tips_phaseout_reduction",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_20[0]",
+          "text": "8,990"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.13_qualified_tips_deduction",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_21[0]",
+          "text": "5,924"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.14a_overtime_form_w2_box_1",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_22[0]",
+          "text": "7,024"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.14b_overtime_form_1099",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_23[0]",
+          "text": "3,718"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.14c_total_qualified_overtime",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_24[0]",
+          "text": "4,287"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.15_overtime_capped",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_25[0]",
+          "text": "2,600"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.16_modified_agi_overtime",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_26[0]",
+          "text": "1,718"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.17_overtime_magi_threshold",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_27[0]",
+          "text": "8,367"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.18_overtime_magi_excess",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_28[0]",
+          "text": "4,615"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.19_overtime_excess_thousands",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_29[0]",
+          "text": "9,555"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.20_overtime_phaseout_reduction",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_30[0]",
+          "text": "1,597"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.21_qualified_overtime_deduction",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_31[0]",
+          "text": "2,535"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.2a_puerto_rico_excluded_income",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_04[0]",
+          "text": "2,321"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.2b_form_2555_line_45",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_05[0]",
+          "text": "6,202"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.2c_form_2555_line_50",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_06[0]",
+          "text": "1,122"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.2d_form_4563_line_15",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_07[0]",
+          "text": "8,377"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.2e_total_excluded_income",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_08[0]",
+          "text": "8,431"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.3_modified_agi",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_09[0]",
+          "text": "6,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.4a_tips_form_w2_box_7",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_10[0]",
+          "text": "1,683"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.4b_tips_form_4137",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_11[0]",
+          "text": "3,599"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.4c_employee_qualified_tips",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_12[0]",
+          "text": "2,498"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.5_business_qualified_tips",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_13[0]",
+          "text": "1,523"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.6_total_qualified_tips",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_14[0]",
+          "text": "2,028"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.7_tips_capped_25000",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_15[0]",
+          "text": "5,764"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.8_modified_agi_tips",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_16[0]",
+          "text": "3,657"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.0.line.9_tips_magi_threshold",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page1[0].f1_17[0]",
+          "text": "3,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22a_interest_deducted_elsewhere_col_ii",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].Table_Line22[0].Line22a[0].f2_02[0]",
+          "text": "2,186"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22a_interest_schedule_1a_col_iii",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].Table_Line22[0].Line22a[0].f2_03[0]",
+          "text": "4,459"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22a_vehicle_vin_col_i",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].Table_Line22[0].Line22a[0].VIN-1_Comb[0].f2_01[0]",
+          "text": "T-UOVK5"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22b_interest_deducted_elsewhere_col_ii",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].Table_Line22[0].Line22b[0].f2_05[0]",
+          "text": "3,143"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22b_interest_schedule_1a_col_iii",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].Table_Line22[0].Line22b[0].f2_06[0]",
+          "text": "8,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.22b_vehicle_vin_col_i",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].Table_Line22[0].Line22b[0].VIN-2_Comb[0].f2_04[0]",
+          "text": "T-1C3U9"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.23_total_car_loan_interest",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_07[0]",
+          "text": "6,955"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.24_car_interest_capped",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_08[0]",
+          "text": "1,080"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.25_magi_from_line_3",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_09[0]",
+          "text": "3,980"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.26_car_interest_threshold",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_10[0]",
+          "text": "3,217"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.27_magi_over_threshold",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_11[0]",
+          "text": "8,030"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.28_thousands_over_threshold",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_12[0]",
+          "text": "9,297"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.29_car_interest_phaseout",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_13[0]",
+          "text": "3,256"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.30_car_loan_interest_deduction",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_14[0]",
+          "text": "1,002"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.31_magi_from_line_3",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_15[0]",
+          "text": "3,917"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.32_senior_threshold",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_16[0]",
+          "text": "9,051"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.33_magi_over_threshold",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_17[0]",
+          "text": "2,467"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.34_senior_phaseout",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_18[0]",
+          "text": "6,370"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.35_senior_amount_per_person",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_19[0]",
+          "text": "7,850"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.36a_senior_deduction_you",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_20[0]",
+          "text": "5,510"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.36b_senior_deduction_spouse",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_21[0]",
+          "text": "6,967"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.37_enhanced_senior_deduction",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_22[0]",
+          "text": "8,923"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-1-a.1.line.38_total_additional_deductions",
+      "widgets": [
+        {
+          "widgetName": "form1[0].Page2[0].f2_23[0]",
+          "text": "1,278"
+        }
+      ]
+    }
+  ]
+}

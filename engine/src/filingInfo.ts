@@ -8,6 +8,8 @@ import type { Form1040FilingInfo } from "./federal/1040/filingInfo.js";
 import { resolve1040Info } from "./federal/1040/resolveInfo.js";
 import type { Form5695FilingInfo } from "./federal/5695/filingInfo.js";
 import { resolve5695Info } from "./federal/5695/resolveInfo.js";
+import type { Form8606FilingInfo } from "./federal/8606/filingInfo.js";
+import { resolve8606Info } from "./federal/8606/resolveInfo.js";
 import type { Form8889FilingInfo } from "./federal/8889/filingInfo.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
@@ -15,6 +17,8 @@ import type { Form8959FilingInfo } from "./federal/8959/filingInfo.js";
 import type { Form8960FilingInfo } from "./federal/8960/filingInfo.js";
 import type { Form8995AFilingInfo } from "./federal/8995-a/filingInfo.js";
 import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
+import type { Schedule1AFilingInfo } from "./federal/schedule-1-a/filingInfo.js";
+import { resolveSchedule1AInfo } from "./federal/schedule-1-a/resolveInfo.js";
 import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
 import type { Schedule2FilingInfo } from "./federal/schedule-2/filingInfo.js";
 import type { Schedule3FilingInfo } from "./federal/schedule-3/filingInfo.js";
@@ -96,11 +100,13 @@ export type FilingInfo = BaseFilingInfo &
   ScheduleDFilingInfo &
   ScheduleAFilingInfo &
   ScheduleBFilingInfo &
+  Form8606FilingInfo &
   Form8889FilingInfo &
   Form8959FilingInfo &
   Form8960FilingInfo &
   Form8995AFilingInfo &
   Schedule1FilingInfo &
+  Schedule1AFilingInfo &
   Schedule2FilingInfo &
   Schedule3FilingInfo &
   ScheduleHFilingInfo &
@@ -119,11 +125,13 @@ export function resolveFilingInfo(opts: {
     resolveScheduleCaInfo(inputs),
     resolve8949Info(inputs),
     resolveScheduleDInfo(inputs),
+    resolve8606Info(inputs),
     resolve8889Info(inputs),
     resolve8959Info(inputs),
     resolve8960Info(inputs),
     resolve8995AInfo(inputs),
     resolveSchedule1Info(inputs),
+    resolveSchedule1AInfo(inputs),
     resolveSchedule2Info(inputs),
     resolveSchedule3Info(inputs),
     resolveScheduleHInfo(inputs),

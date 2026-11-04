@@ -1,0 +1,411 @@
+{
+  "formId": "form-8606",
+  "fieldCount": 45,
+  "entries": [
+    {
+      "fieldId": "form-8606.0.header.apt_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "T-1E9RX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.header.city_state_zip",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "T-GEMHT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.header.foreign_country_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "T-UUGWI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.header.foreign_postal_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "T-LWO2Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.header.foreign_province_state_county",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "T-Y018Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.header.home_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "T-1HEDC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-M1T6T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.1_nondeductible_traditional_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "1,542"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.10_nontaxable_ratio_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "T-W4MAH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.10_nontaxable_ratio_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.11_nontaxable_conversion_portion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "9,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.12_nontaxable_distribution_portion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "8,402"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.13_total_nontaxable_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "9,487"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.14_total_traditional_basis_end",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "4,389"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.2_total_traditional_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "5,807"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.3_total_contributions_and_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "9,993"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.4_contributions_made_in_2026",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "4,466"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.5_basis_less_2026_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "5,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.6_traditional_ira_year_end_value",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "9,716"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.7_traditional_ira_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "6,914"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.8_net_roth_conversion_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "4,678"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.0.line.9_total_value_distributions_conversions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "6,310"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.15a_line_7_minus_line_12",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+          "text": "2,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.15b_qualified_disaster_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+          "text": "1,144"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.15c_taxable_traditional_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+          "text": "8,619"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.16_net_amount_converted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+          "text": "3,694"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.17_basis_in_conversion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+          "text": "6,901"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.18_taxable_conversion_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+          "text": "4,970"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.19_nonqualified_roth_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+          "text": "1,559"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.20_first_time_homebuyer_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+          "text": "3,768"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.21_line_19_minus_line_20",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+          "text": "1,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.22_basis_roth_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "1,462"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.23_line_21_minus_line_22",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "3,140"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.24_basis_roth_conversions_rollovers",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "3,427"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.25a_line_23_minus_line_24",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "3,421"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.25b_roth_qualified_disaster_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "4,654"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.line.25c_taxable_roth_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "4,907"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.signing.firm_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+          "text": "T-WFV3W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.signing.firm_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "T-1A713"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.signing.firm_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "T-H0Q6G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.signing.firm_phone",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+          "text": "5551234567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.signing.preparer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "T-11B21"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.signing.preparer_ptin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "T-14PD3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8606.1.signing.preparer_self_employed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    }
+  ]
+}
