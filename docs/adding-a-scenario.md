@@ -1,6 +1,6 @@
 # Add a scenario
 
-Claude Code follows the `engine-scripts` skill (`.claude/skills/engine-scripts/SKILL.md`) for the scripts below, and the `verify-with-filed-return` skill for the comparison kit.
+In Claude Code, the `add-scenario` skill runs these steps for a real example with an answer key (a TaxCalcBench case, an IRS test package). Claude Code follows the `engine-scripts` skill (`.claude/skills/engine-scripts/SKILL.md`) for the scripts below, and the `verify-with-filed-return` skill for the comparison kit.
 
 [← Back to the README](../README.md)
 
