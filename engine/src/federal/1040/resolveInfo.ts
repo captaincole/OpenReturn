@@ -3,8 +3,11 @@ import {
   isDividendFactKey,
   isInterestFactKey,
   isSocialSecurityFactKey,
+  makeTraditionalIraFactKey,
+  type IraOwner,
   type RetirementDistributionFactValue,
   type SocialSecurityFactValue,
+  type TraditionalIraFactValue,
 } from "../../facts/index.js";
 import {
   filingStatusOf,
@@ -12,7 +15,7 @@ import {
   resolveScheduleAInfo,
   resolveScheduleDInfo,
 } from "../../filingInfoResolvers.js";
-import { sum } from "../../money.js";
+import { atLeast, sum } from "../../money.js";
 import {
   factsInCategory,
   missingInputs,
@@ -22,7 +25,10 @@ import {
   text,
   type ResolverInputs,
 } from "../../resolverInputs.js";
-import type { Form1040FilingInfo, RetirementLine } from "./filingInfo.js";
+import { form8606Persons } from "../8606/resolveInfo.js";
+import type { Form1040FilingInfo, IraLine } from "./filingInfo.js";
+
+const OWNERS: IraOwner[] = ["taxpayer", "spouse"];
 
 /*
  * The filter pins each box to 1099-INT: other 1099 sections may reuse low
@@ -75,21 +81,76 @@ function retirementRows(inputs: ResolverInputs): RetirementDistributionFactValue
     .map((row) => row.value as RetirementDistributionFactValue);
 }
 
+/*
+ * Exception 1: the part rolled over is not taxable. A code G row already shows
+ * 0 in box 2a (1099-R inst.), so only the rollover beyond its box 1 comes off
+ * the other rows. `rolledOver` counts direct rollovers, as Form 8606 line 7 does.
+ */
+export function traditionalTaxable(
+  rows: RetirementDistributionFactValue[],
+  rolledOver: number,
+): number | undefined {
+  const isDirect = (row: RetirementDistributionFactValue) => row.box7.includes("G");
+  const direct = rows.filter(isDirect);
+  const others = rows.filter((row) => !isDirect(row));
+  const directTaxable = direct.map(rowTaxable);
+  const othersTaxable = others.map(rowTaxable);
+  if ([...directTaxable, ...othersTaxable].includes(undefined)) return undefined;
+  const indirect = atLeast(0, rolledOver - sum(...direct.map((row) => row.box1)));
+  return sum(...directTaxable) + atLeast(0, sum(...othersTaxable) - indirect);
+}
+
+/*
+ * Exception 2: a person who files Form 8606 takes the traditional IRA part
+ * from it (the line 4b binding).
+ */
+function iraLine(inputs: ResolverInputs, rows: RetirementDistributionFactValue[]): IraLine {
+  const filers = new Set(form8606Persons(inputs).map((entry) => entry.owner));
+  const rolledOver = (owner: IraOwner) =>
+    (inputs.factByKey.get(makeTraditionalIraFactKey(owner)) as TraditionalIraFactValue | undefined)
+      ?.rolledOver ?? 0;
+  // A Form 8606 filer's traditional rows come from that form, so none are summed here.
+  const ownerTaxable = (owner: IraOwner): number | undefined => {
+    const own = rows.filter((row) => (row.owner ?? "taxpayer") === owner);
+    const roth = own.filter((row) => ROTH_IRA_CODES.test(row.box7)).map(rowTaxable);
+    const traditional = filers.has(owner)
+      ? 0
+      : traditionalTaxable(
+          own.filter((row) => !ROTH_IRA_CODES.test(row.box7)),
+          rolledOver(owner),
+        );
+    if ([...roth, traditional].includes(undefined)) return undefined;
+    return sum(...roth, traditional);
+  };
+  const perOwner = OWNERS.map(ownerTaxable);
+  return {
+    gross: sum(...rows.map((distribution) => distribution.box1)),
+    taxable: perOwner.includes(undefined) ? undefined : sum(...perOwner),
+    rollover:
+      rows.some((distribution) => /[GH]/.test(distribution.box7)) ||
+      OWNERS.some((owner) => rolledOver(owner) > 0),
+    form8606Filers: filers.size,
+  };
+}
+
 function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
   const rows = retirementRows(inputs);
   const isIra = (distribution: RetirementDistributionFactValue) =>
     distribution.box7IraSepSimple || ROTH_IRA_CODES.test(distribution.box7);
-  const line = (ira: boolean): RetirementLine | undefined => {
-    const group = rows.filter((row) => isIra(row) === ira);
-    if (group.length === 0) return undefined;
-    const taxable = group.map(rowTaxable);
-    return {
-      gross: sum(...group.map((distribution) => distribution.box1)),
-      taxable: taxable.includes(undefined) ? undefined : sum(...taxable),
-      rollover: group.some((distribution) => /[GH]/.test(distribution.box7)),
-    };
+  const iraRows = rows.filter(isIra);
+  const pensionRows = rows.filter((row) => !isIra(row));
+  const taxable = pensionRows.map(rowTaxable);
+  return {
+    iraDistributions: iraRows.length === 0 ? undefined : iraLine(inputs, iraRows),
+    pensionDistributions:
+      pensionRows.length === 0
+        ? undefined
+        : {
+            gross: sum(...pensionRows.map((distribution) => distribution.box1)),
+            taxable: taxable.includes(undefined) ? undefined : sum(...taxable),
+            rollover: pensionRows.some((distribution) => /[GH]/.test(distribution.box7)),
+          },
   };
-  return { iraDistributions: line(true), pensionDistributions: line(false) };
 }
 
 function socialSecurityRows(inputs: ResolverInputs): SocialSecurityFactValue[] {
