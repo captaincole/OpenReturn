@@ -25,7 +25,10 @@ before you start (see [Contributing](contributing.md#who-can-contribute)).
 ## What OpenReturn supports
 
 Tax year 2025, **single** filers, **California** full-year residents.
-Married filing separately has one unverified test scenario.
+Married filing separately has one unverified test scenario. Married
+filing jointly has one federal-only test scenario (TaxCalcBench), with
+Form 8606 (nondeductible IRA basis, Roth conversions) and Schedule 1-A
+(the senior deduction only).
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
 1099-SA, 1098, SSA-1099, a W-2 you issued to a household employee

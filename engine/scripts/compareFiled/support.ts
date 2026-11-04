@@ -21,6 +21,7 @@ import {
   isSocialSecurityFact,
   isTradeFact,
   isW2Fact,
+  makeTraditionalIraFactKey,
 } from "../../src/facts/index.js";
 import type { TaxFactRow } from "../../src/facts/rows.js";
 import type { Scenario } from "../../tests/types.js";
@@ -53,6 +54,8 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(HOME_ENERGY_KEYS),
   SPOUSE_KEYS.livedApartAllYear,
   SPOUSE_KEYS.itemizesSeparately,
+  makeTraditionalIraFactKey("taxpayer"),
+  makeTraditionalIraFactKey("spouse"),
   "prior_year.ca_agi",
   "medical.expenses_total",
   "mortgage.interest_form_1098",
@@ -93,8 +96,12 @@ const DECISION_PATTERNS = [
 const OUT_OF_SCOPE: { key: string; supported: (v: unknown) => boolean; detail: string }[] = [
   {
     key: "decisions.scope.filing_status",
-    supported: (value) => value === "single" || value === "married_filing_separately",
-    detail: "Only single filers are tested (married filing separately: one unverified scenario).",
+    supported: (value) =>
+      value === "single" ||
+      value === "married_filing_separately" ||
+      value === "married_filing_jointly",
+    detail:
+      "Only single filers are tested (married filing separately: one unverified scenario; jointly: one federal-only scenario).",
   },
   {
     key: "decisions.scope.ca_residency",
