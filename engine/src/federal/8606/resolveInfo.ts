@@ -18,30 +18,35 @@ const MUST_FILE_KEY = "decisions.scope.must_file_8606";
 const DISTRIBUTION_KEY_RE = /^payer\.[^.]+\.distributions\.[^.]+$/;
 /* Roth IRA codes (J, Q, T) belong to Part III, which is not modeled. */
 const ROTH_CODES = /[JQT]/;
+/* Roth IRA distributions that are not qualified (code Q is). */
+const NONQUALIFIED_ROTH_CODES = /[JT]/;
 
-function iraRows(inputs: ResolverInputs, owner: IraOwner): RetirementDistributionFactValue[] {
+function ownRows(inputs: ResolverInputs, owner: IraOwner): RetirementDistributionFactValue[] {
   return factsInCategory(inputs, "retirement")
     .filter((row) => DISTRIBUTION_KEY_RE.test(row.key))
     .map((row) => row.value as RetirementDistributionFactValue)
-    .filter((row) => row.box7IraSepSimple && !ROTH_CODES.test(row.box7))
     .filter((row) => (row.owner ?? "taxpayer") === owner);
 }
 
 function person(inputs: ResolverInputs, owner: IraOwner): Form8606Person {
-  const rows = iraRows(inputs, owner);
+  const own = ownRows(inputs, owner);
+  const rows = own.filter((row) => row.box7IraSepSimple && !ROTH_CODES.test(row.box7));
   return {
     owner,
     ira: inputs.factByKey.get(makeTraditionalIraFactKey(owner)) as
       TraditionalIraFactValue | undefined,
     iraDistributionsGross: rows.length === 0 ? 0 : sum(...rows.map((row) => row.box1)),
+    rothDistribution: own.some((row) => NONQUALIFIED_ROTH_CODES.test(row.box7)),
   };
 }
 
 /*
  * irs-8606-inst-2025::sec::who-must-file::b01–b02: nondeductible contributions;
  * a distribution with basis over zero (a rollover or a conversion is not a
- * distribution here); or a Roth conversion. Roth IRA distributions, inherited
- * IRAs and divorce transfers have no facts yet.
+ * distribution here); a Roth conversion; or a Roth IRA distribution (codes J,
+ * T). Part III is not modeled, so that copy shows Part III blank. No fact marks
+ * a Roth rollover or return of contributions, the bullet's exceptions.
+ * Inherited IRAs and divorce transfers have no facts yet.
  */
 export function mustFile8606(entry: Form8606Person): boolean {
   const ira = entry.ira ?? {};
@@ -51,8 +56,19 @@ export function mustFile8606(entry: Form8606Person): boolean {
   return (
     (ira.nondeductibleContributions ?? 0) > 0 ||
     (ira.convertedToRoth ?? 0) > 0 ||
-    (basis > 0 && distributed > 0)
+    (basis > 0 && distributed > 0) ||
+    entry.rothDistribution
   );
+}
+
+/* Line 6 decides lines 9–12 once Part I can apply: basis, and a distribution or a conversion. */
+function needsYearEndValue(entry: Form8606Person): boolean {
+  const ira = entry.ira;
+  if (!ira || ira.yearEndValue !== undefined) return false;
+  const basis = (ira.basisPriorYears ?? 0) + (ira.nondeductibleContributions ?? 0);
+  const converted = ira.convertedToRoth ?? 0;
+  const distributed = entry.iraDistributionsGross - (ira.rolledOver ?? 0) - converted;
+  return basis > 0 && (distributed > 0 || converted > 0);
 }
 
 export function form8606Persons(inputs: ResolverInputs): Form8606Person[] {
@@ -75,7 +91,7 @@ export function resolve8606Info(inputs: ResolverInputs): Form8606FilingInfo {
             explicitKey: MUST_FILE_KEY,
             fallbacks: [
               {
-                rule: "fallback: nondeductible contributions, a Roth conversion, or an IRA distribution with basis",
+                rule: "fallback: nondeductible contributions, a Roth conversion, an IRA distribution with basis, or a Roth IRA distribution (code J or T)",
                 value: persons.length > 0,
                 triggeredByFactKeys: OWNERS.map(makeTraditionalIraFactKey),
               },
@@ -84,9 +100,13 @@ export function resolve8606Info(inputs: ResolverInputs): Form8606FilingInfo {
     },
     missingInputs: {
       "form-8606": missingInputs(
-        Object.fromEntries(
-          withIra.map((entry) => [makeTraditionalIraFactKey(entry.owner), entry.ira]),
-        ),
+        Object.fromEntries([
+          ...withIra.map((entry) => [makeTraditionalIraFactKey(entry.owner), entry.ira]),
+          // The fact is there but line 6 is not: ask for the same fact again.
+          ...persons
+            .filter(needsYearEndValue)
+            .map((entry) => [makeTraditionalIraFactKey(entry.owner), undefined]),
+        ]),
       ),
     },
     form8606Persons: persons,

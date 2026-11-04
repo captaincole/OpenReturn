@@ -7,6 +7,8 @@ export interface Form8606Person {
   ira?: TraditionalIraFactValue;
   /* 1099-R box 1 of this person's traditional, SEP and SIMPLE IRA distributions, cents kept. */
   iraDistributionsGross: number;
+  /* A 1099-R with code J or T: a Roth IRA distribution that is not qualified (Part III). */
+  rothDistribution: boolean;
 }
 
 export interface Form8606FilingInfo extends BaseFilingInfo {
