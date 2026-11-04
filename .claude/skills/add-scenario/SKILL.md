@@ -1,0 +1,57 @@
+---
+name: add-scenario
+description: Add a golden scenario from a real example (a TaxCalcBench case, an IRS test package, a CPA return of a fake taxpayer) and grow the engine until it matches the example's answer key. Runs create-input-documents, the fact kinds, update-form and the new-form skills in order. Use when a new example should become a scenario.
+argument-hint: <source>  e.g. TaxCalcBench ty25-us-003
+---
+
+# Add a scenario
+
+A scenario is one fake taxpayer: their documents as facts, their answers as decisions, and the expected value of each line (`docs/adding-a-scenario.md`). This skill turns an example with an answer key into a scenario, and adds what the engine lacks until the scenario matches the key.
+
+Arguments: `$ARGUMENTS`, the source. The request may also say which forms to check.
+
+## 1. Read the source
+
+1. Read every file the source has: the documents, the answers (a JSON file, a cover page) and the answer key (an e-file XML, a CPA's PDFs).
+2. Name the scenario. A downloaded case keeps its id with a prefix (`tcb-us-003`); a hand-built one takes the taxpayer's first name.
+3. Choose the forms to check: only the forms the answer key has. A federal-only key makes a federal-only scenario: list only federal forms in `index.ts`, and decide `decisions.scope.must_file_ca_540` as `false` with the state the source gives.
+4. Make a table of the key: one row per line with a value, and the engine form and fieldId it maps to (the catalog label names the line). A line on a form the engine does not have goes in the table too: step 5 adds that form.
+5. Write the scenario's `README.md`: the source and its commit or date, the license (copy a downloaded set's license file next to its documents), the taxpayer in two sentences, and the forms checked.
+
+## 2. Make the input documents
+
+Run `create-input-documents <scenario>`. It sorts the inputs into documents and answers, copies or makes the PDFs in `docs/`, and stops for a person's review on the first document of a type. Last year's return is not supported (#79).
+
+## 3. Turn documents and answers into facts
+
+1. For each document, find its fact kind in `engine/src/facts/kinds/`. A box the return needs and the kind lacks is added to the kind, to Cade's ingest tool schema (`cade/src/mastra/tools/`) and to Cade's instructions where he must ask for it. A new document type gets a new kind and tool (`docs/adding-a-scenario.md`, step 5a–5c).
+2. For each answer, find the fact key or decision key the engine reads (the resolvers' `missingInputs`). An answer with no key gets one, next to the facts it belongs with, and goes in `missingInputs` of the form that reads it, so Cade asks for it.
+3. Facts hold what the documents print, even when the key disagrees. Note each disagreement in the README.
+
+## 4. Write the scenario
+
+1. `facts.ts`, `decisions.ts` and `index.ts` (copy the closest scenario), and the entry in `tests/scenarios/index.ts`. Each fact's `sourceNote` names its PDF or the answer it came from.
+2. `expected.ts`: each line of the table from step 1, as the key prints it. Comment each value with the line's label.
+3. Run `npm test -- <scenario>`. The failures are the work list for step 5.
+
+## 5. Grow the engine
+
+Work in form order: a form before the forms that read it (8606 before the 1040).
+
+- **A form the engine has:** `update-form <form>` with the scenario.
+- **A form the engine does not have:** `catalog-form-fields`, then `register-form`, then `write-binding-rules` for the lines the key fills. Its blank PDF goes in `sources/<year>/forms/<jurisdiction>/<short>/`, and its instructions must be in the corpus (`corpus` skill) before the bindings.
+- **A line the key fills that the instructions leave blank** (an e-file key often fills every line of a part the taxpayer skips): follow the instructions. Leave the line out of `expected.ts` and list it in the README.
+- **A line the engine cannot match now:** stop and ask the user. The fix may be a new form, a known mismatch (`knownMismatches.ts`, with `allowNotModeled`) or a key mistake to report upstream.
+
+Never change a value in `expected.ts` to match the engine. When the key and the instructions disagree, the instructions win: record it in the README, and ask the user before you change the key's value.
+
+## 6. Finish
+
+1. When every line matches, write the goldens: `npx tsx scripts/renderScenario.ts --scenario=<scenario> --golden` (from `engine/`), and point each form's `goldenPdfPath` at its PDF. Read the PDFs.
+2. Run `verify-form` for each form you changed. No other scenario's golden may change.
+3. Add new input documents to `docs/testing-with-your-return.md` ("What OpenReturn supports") and `engine/scripts/compareFiled/support.ts`.
+4. Commit each step on its own: the documents, the facts, the scenario, then each form.
+
+## 7. Report
+
+The key's lines and their result, the forms added and changed, the answers and fact kinds added, the key lines left out (with the reason) and the documents a person must review.
