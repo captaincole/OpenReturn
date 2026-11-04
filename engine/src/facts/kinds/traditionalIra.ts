@@ -13,7 +13,7 @@ export interface TraditionalIraFactValue {
   nondeductibleContributions?: number;
   /* Line 2: total basis in traditional IRAs (2024 Form 8606 line 14). */
   basisPriorYears?: number;
-  /* Line 6: value of all traditional, SEP and SIMPLE IRAs on December 31, 2025. */
+  /* Line 6: value of all traditional, SEP and SIMPLE IRAs on December 31, 2025, plus any outstanding rollovers. */
   yearEndValue?: number;
   /* 2025 distributions rolled over to another IRA or plan: not on line 7, not taxable. */
   rolledOver?: number;
