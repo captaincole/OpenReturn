@@ -7,6 +7,8 @@ export interface RetirementDistributionFactValue {
   payerName: string;
   payerTin?: string;
   planName?: string;
+  /* Whose 1099-R it is, from the recipient's name. Absent means the taxpayer. Form 8606 is per person. */
+  owner?: "taxpayer" | "spouse";
   box1: number; // Gross distribution (1040 line 4a or 5a)
   box2a?: number; // Taxable amount (1040 line 4b or 5b)
   box2b?: {

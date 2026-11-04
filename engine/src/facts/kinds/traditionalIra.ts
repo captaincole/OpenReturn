@@ -1,0 +1,42 @@
+/*
+ * One fact per person with a traditional, SEP or SIMPLE IRA: the answers Form 8606
+ * needs that no 1099-R prints. The taxpayer states them (or reads them from last
+ * year's Form 8606 and the December 31 account statements).
+ */
+
+import type { FactsView } from "../../types.js";
+
+export type IraOwner = "taxpayer" | "spouse";
+
+export interface TraditionalIraFactValue {
+  /* Form 8606 line 1: nondeductible contributions for 2025. */
+  nondeductibleContributions?: number;
+  /* Line 2: total basis in traditional IRAs (2024 Form 8606 line 14). */
+  basisPriorYears?: number;
+  /* Line 6: value of all traditional, SEP and SIMPLE IRAs on December 31, 2025. */
+  yearEndValue?: number;
+  /* 2025 distributions rolled over to another IRA or plan: not on line 7, not taxable. */
+  rolledOver?: number;
+  /* Line 8: converted to a Roth IRA in 2025. */
+  convertedToRoth?: number;
+}
+
+const IRA_CATEGORY = "retirement";
+const IRA_KEY_RE = /^retirement\.traditional_ira\.(taxpayer|spouse)$/;
+
+export function makeTraditionalIraFactKey(owner: IraOwner): string {
+  return `retirement.traditional_ira.${owner}`;
+}
+
+export function isTraditionalIraFactKey(key: string): boolean {
+  return IRA_KEY_RE.test(key);
+}
+
+export function getTraditionalIraFact(
+  facts: FactsView,
+  owner: IraOwner,
+): TraditionalIraFactValue | undefined {
+  const key = makeTraditionalIraFactKey(owner);
+  const fact = facts.byCategory(IRA_CATEGORY).find((row) => row.key === key);
+  return fact?.value as TraditionalIraFactValue | undefined;
+}

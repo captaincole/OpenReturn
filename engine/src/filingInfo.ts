@@ -73,6 +73,8 @@ export interface BaseFilingInfo {
   spouseMiddleInitial?: string;
   spouseLastName?: string;
   spouseSSN?: SSN;
+  spouseDateOfBirth?: string;
+  spouseBornBeforeJan2_1961?: boolean;
   spouseOccupation?: string;
 
   homeAddressLine1?: string;
