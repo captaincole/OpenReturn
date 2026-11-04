@@ -1,0 +1,696 @@
+{
+  "form": {
+    "formId": "form-8606",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8606, Nondeductible IRAs"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8606.0.header.taxpayer_name",
+      "label": "Name. If married, file a separate form for each spouse required to file 2025 Form 8606",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8606.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 461.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8606.0.header.home_address",
+      "label": "Home address (number and street, or P.O. box if mail is not delivered to your home)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 659.967
+      }
+    },
+    {
+      "fieldId": "form-8606.0.header.apt_no",
+      "label": "Apt. no.",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 497.8,
+        "y": 659.967
+      }
+    },
+    {
+      "fieldId": "form-8606.0.header.city_state_zip",
+      "label": "City, town or post office, state, and ZIP code",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 635.966
+      }
+    },
+    {
+      "fieldId": "form-8606.0.header.foreign_country_name",
+      "label": "Foreign country name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 123.4,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-8606.0.header.foreign_province_state_county",
+      "label": "Foreign province/state/county",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 303.4,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-8606.0.header.foreign_postal_code",
+      "label": "Foreign postal code",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 461.8,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.1_nondeductible_traditional_contributions",
+      "label": "Line 1 — Enter your nondeductible contributions to traditional IRAs for 2025, including those made for 2025 from January 1, 2026, through April 15, 2026",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.2_total_traditional_basis",
+      "label": "Line 2 — Enter your total basis in traditional IRAs",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.3_total_contributions_and_basis",
+      "label": "Line 3 — Add lines 1 and 2",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.4_contributions_made_in_2026",
+      "label": "Line 4 — Enter those contributions included on line 1 that were made from January 1, 2026, through April 15, 2026",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.5_basis_less_2026_contributions",
+      "label": "Line 5 — Subtract line 4 from line 3",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.6_traditional_ira_year_end_value",
+      "label": "Line 6 — Enter the value of all your traditional IRAs as of December 31, 2025, plus any outstanding rollovers",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.7_traditional_ira_distributions",
+      "label": "Line 7 — Enter your distributions from traditional IRAs in 2025",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.8_net_roth_conversion_amount",
+      "label": "Line 8 — Enter the net amount you converted from traditional IRAs to Roth IRAs in 2025",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.9_total_value_distributions_conversions",
+      "label": "Line 9 — Add lines 6, 7, and 8",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.10_nontaxable_ratio_whole",
+      "label": "Line 10 — Divide line 5 by line 9. Enter the result as a decimal rounded to at least 3 places. If the result is 1.000 or more, enter \"1.000\" (whole-number digit before the decimal point)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 167.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8606.0.line.10_nontaxable_ratio_decimal",
+      "label": "Line 10 — Divide line 5 by line 9. Enter the result as a decimal rounded to at least 3 places. If the result is 1.000 or more, enter \"1.000\" (digits after the decimal point)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.11_nontaxable_conversion_portion",
+      "label": "Line 11 — Multiply line 8 by line 10. This is the nontaxable portion of the amount you converted to Roth IRAs",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 143.968
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.12_nontaxable_distribution_portion",
+      "label": "Line 12 — Multiply line 7 by line 10. This is the nontaxable portion of your distributions that you did not convert to a Roth IRA",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.13_total_nontaxable_distributions",
+      "label": "Line 13 — Add lines 11 and 12. This is the nontaxable portion of all your distributions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-8606.0.line.14_total_traditional_basis_end",
+      "label": "Line 14 — Subtract line 13 from line 3. This is your total basis in traditional IRAs for 2025 and earlier years",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.15a_line_7_minus_line_12",
+      "label": "Line 15a — Subtract line 12 from line 7",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 719.968
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.15b_qualified_disaster_distributions",
+      "label": "Line 15b — Enter the amount on line 15a attributable to qualified disaster distributions, if any, from 2025 Form(s) 8915-F",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.15c_taxable_traditional_distributions",
+      "label": "Line 15c — Taxable amount. Subtract line 15b from line 15a. Reduce that amount by certain 2025 retirement plan distribution repayments (other than those reported on Form 8915-F) that are treated as rollovers",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.16_net_amount_converted",
+      "label": "Line 16 — If you completed Part I, enter the amount from line 8. Otherwise, enter the net amount you converted from traditional IRAs to Roth IRAs in 2025",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.17_basis_in_conversion",
+      "label": "Line 17 — If you completed Part I, enter the amount from line 11. Otherwise, enter your basis in the amount on line 16",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.18_taxable_conversion_amount",
+      "label": "Line 18 — Taxable amount. Subtract line 17 from line 16",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.19_nonqualified_roth_distributions",
+      "label": "Line 19 — Enter your total nonqualified distributions from Roth IRAs in 2025, including any qualified first-time homebuyer distributions, and any 2025 retirement plan distributions whose repayments are treated as rollovers",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.20_first_time_homebuyer_expenses",
+      "label": "Line 20 — Qualified first-time homebuyer expenses. Do not enter more than $10,000 reduced by the total of all your prior qualified first-time homebuyer distributions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.21_line_19_minus_line_20",
+      "label": "Line 21 — Subtract line 20 from line 19. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.22_basis_roth_contributions",
+      "label": "Line 22 — Enter your basis in Roth IRA contributions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.23_line_21_minus_line_22",
+      "label": "Line 23 — Subtract line 22 from line 21. If zero or less, enter -0- and skip lines 24 and 25",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.24_basis_roth_conversions_rollovers",
+      "label": "Line 24 — Enter your basis in conversions from traditional IRAs and rollovers from qualified retirement plans to a Roth IRA",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.25a_line_23_minus_line_24",
+      "label": "Line 25a — Subtract line 24 from line 23. If zero or less, enter -0- and skip lines 25b and 25c",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.25b_roth_qualified_disaster_distributions",
+      "label": "Line 25b — Enter the amount on line 25a attributable to qualified disaster distributions, if any, from 2025 Form(s) 8915-F",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "form-8606.1.line.25c_taxable_roth_distributions",
+      "label": "Line 25c — Taxable amount. Subtract line 25b from line 25a. Reduce that amount by certain 2025 retirement plan distribution repayments (other than those reported on Form 8915-F) that are treated as rollovers",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8606.1.signing.preparer_self_employed",
+      "label": "Check if self-employed",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 482.199,
+        "y": 156.97
+      }
+    },
+    {
+      "fieldId": "form-8606.1.signing.preparer_name",
+      "label": "Print/Type preparer's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 94.6,
+        "y": 143.968
+      }
+    },
+    {
+      "fieldId": "form-8606.1.signing.preparer_ptin",
+      "label": "PTIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 505,
+        "y": 143.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8606.1.signing.firm_name",
+      "label": "Firm's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 140.6,
+        "y": 131.969
+      }
+    },
+    {
+      "fieldId": "form-8606.1.signing.firm_ein",
+      "label": "Firm's EIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 493.6,
+        "y": 131.969
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8606.1.signing.firm_address",
+      "label": "Firm's address",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 148.6,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-8606.1.signing.firm_phone",
+      "label": "Phone no.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 493.6,
+        "y": 119.97
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8606/blank.pdf",
+    "ingestedAt": "2026-11-04T17:15:48.796Z",
+    "totalFields": 45,
+    "skipped": 0,
+    "catalogEntries": 45
+  }
+}
