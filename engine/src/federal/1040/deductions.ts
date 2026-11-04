@@ -6,7 +6,8 @@ import type { Form1040FilingInfo } from "./filingInfo.js";
 
 /*
  * 1040 inst. line 12e, Exception 2: MFS and the spouse itemizes → zero.
- * The blindness and spouse boxes of line 12d are not modeled.
+ * Exception 4 chart: one box per filer born before Jan 2, 1961. MANUAL EDIT:
+ * the spouse box counts on joint returns only; blindness boxes are not modeled.
  */
 export function standardDeduction(info: Form1040FilingInfo): number | undefined {
   if (info.filingStatus === "married_filing_separately") {
@@ -15,7 +16,10 @@ export function standardDeduction(info: Form1040FilingInfo): number | undefined 
   }
   if (!info.filingStatus || info.taxpayerBornBeforeJan2_1961 === undefined) return undefined;
   const base = lookupStandardDeduction("federal", 2025, info.filingStatus);
-  const boxes = info.taxpayerBornBeforeJan2_1961 ? 1 : 0;
+  const joint = info.filingStatus === "married_filing_jointly";
+  if (joint && info.spouseBornBeforeJan2_1961 === undefined) return undefined;
+  const boxes =
+    (info.taxpayerBornBeforeJan2_1961 ? 1 : 0) + (joint && info.spouseBornBeforeJan2_1961 ? 1 : 0);
   const extra = lookupAdditionalStandardDeduction(2025, info.filingStatus);
   return base === undefined || extra === undefined ? undefined : base + boxes * extra;
 }

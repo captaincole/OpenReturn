@@ -170,6 +170,14 @@ export function register(): void {
        */
       "line.12d_you_born_before_jan2_1961": (_, info) =>
         info.taxpayerBornBeforeJan2_1961 === true ? true : undefined,
+      /*
+       * MANUAL EDIT: joint returns only. The MFS case (spouse had no income,
+       * files no return) and a spouse's 2025 death are not modeled.
+       */
+      "line.12d_spouse_born_before_jan2_1961": (_, info) =>
+        info.filingStatus === "married_filing_jointly" && info.spouseBornBeforeJan2_1961 === true
+          ? true
+          : undefined,
       "line.12b_spouse_itemizes_separate": (_, info) =>
         info.filingStatus === "married_filing_separately" && info.spouseItemizesSeparately === true
           ? true
@@ -499,8 +507,6 @@ export function register(): void {
         "No dual-status alien scenario ingested yet — this checkbox requires a residency/immigration-status fact we don't model.",
       "line.12d_you_blind":
         "No blindness fact ingested — we don't yet have a fact key for the taxpayer's blindness status.",
-      "line.12d_spouse_born_before_jan2_1961":
-        "No MFJ/spouse scenario ingested yet — spouse DOB fact does not exist, and no date-comparison rule is available.",
       "line.12d_spouse_blind":
         "No MFJ/spouse scenario ingested yet — spouse blindness fact does not exist.",
       "line.13b":

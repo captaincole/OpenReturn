@@ -157,6 +157,10 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
               [SPOUSE_KEYS.ssn]: text(inputs, SPOUSE_KEYS.ssn),
             }
           : {}),
+        // Line 12d: on a joint return the spouse's age raises the standard deduction.
+        ...(filingStatus === "married_filing_jointly"
+          ? { [SPOUSE_KEYS.dob]: text(inputs, SPOUSE_KEYS.dob) }
+          : {}),
         // Line 12b: an MFS spouse who itemizes makes the standard deduction zero.
         ...(filingStatus === "married_filing_separately"
           ? { [SPOUSE_KEYS.itemizesSeparately]: spouseItemizes }
