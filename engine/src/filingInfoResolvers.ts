@@ -62,6 +62,7 @@ export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
   const spouseSsnRaw = text(inputs, SPOUSE_KEYS.ssn);
   const phoneRaw = text(inputs, "identity.phone");
   const dob = text(inputs, "identity.dob");
+  const spouseDob = text(inputs, SPOUSE_KEYS.dob);
 
   return {
     filingStatus,
@@ -75,6 +76,8 @@ export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
     spouseMiddleInitial: text(inputs, SPOUSE_KEYS.middleInitial),
     spouseLastName: text(inputs, SPOUSE_KEYS.lastName),
     spouseSSN: spouseSsnRaw ? ssn(spouseSsnRaw) : undefined,
+    spouseDateOfBirth: spouseDob,
+    spouseBornBeforeJan2_1961: bornBeforeJan2_1961(spouseDob),
     taxpayerOccupation: text(inputs, "identity.occupation"),
     taxpayerPhone: phoneRaw ? phone(phoneRaw) : undefined,
     taxpayerEmail: text(inputs, "identity.email"),

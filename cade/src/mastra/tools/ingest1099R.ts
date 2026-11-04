@@ -48,6 +48,10 @@ export const ingest1099R = createTool({
     year: z.number().int(),
     payer: PayerSchema,
     planName: z.string().optional().describe("Plan name, when printed"),
+    owner: z
+      .enum(["taxpayer", "spouse"])
+      .optional()
+      .describe("Whose 1099-R it is, from the recipient's name. Omit for the taxpayer."),
     accountNumber: z.string().optional(),
     distributionId: z
       .string()
@@ -75,6 +79,7 @@ export const ingest1099R = createTool({
       payerName: input.payer.name,
       payerTin: input.payer.tin,
       planName: input.planName,
+      owner: input.owner,
       ...input.boxes,
     };
     const factKey = makeRetirementDistributionFactKey(payerSlug, distributionId);
