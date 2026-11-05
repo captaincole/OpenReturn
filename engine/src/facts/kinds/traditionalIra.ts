@@ -4,13 +4,13 @@
  * year's Form 8606 and the December 31 account statements).
  */
 
-import type { FactsView } from "../../types.js";
-
 export type IraOwner = "taxpayer" | "spouse";
 
 export interface TraditionalIraFactValue {
   /* Form 8606 line 1: nondeductible contributions for 2025. */
   nondeductibleContributions?: number;
+  /* Line 4: the part of line 1 contributed from January 1 to April 15, 2026. */
+  contributionsMadeIn2026?: number;
   /* Line 2: total basis in traditional IRAs (2024 Form 8606 line 14). */
   basisPriorYears?: number;
   /* Line 6: value of all traditional, SEP and SIMPLE IRAs on December 31, 2025, plus any outstanding rollovers. */
@@ -21,22 +21,34 @@ export interface TraditionalIraFactValue {
   convertedToRoth?: number;
 }
 
-const IRA_CATEGORY = "retirement";
-const IRA_KEY_RE = /^retirement\.traditional_ira\.(taxpayer|spouse)$/;
+const AMOUNT_FIELDS: Array<keyof TraditionalIraFactValue> = [
+  "nondeductibleContributions",
+  "contributionsMadeIn2026",
+  "basisPriorYears",
+  "yearEndValue",
+  "rolledOver",
+  "convertedToRoth",
+];
 
 export function makeTraditionalIraFactKey(owner: IraOwner): string {
   return `retirement.traditional_ira.${owner}`;
 }
 
-export function isTraditionalIraFactKey(key: string): boolean {
-  return IRA_KEY_RE.test(key);
-}
+const isAmount = (value: unknown): boolean =>
+  value === undefined || (typeof value === "number" && Number.isFinite(value) && value >= 0);
 
-export function getTraditionalIraFact(
-  facts: FactsView,
+/*
+ * Cade records this fact as one object he writes himself, so check it. A field
+ * that is not an amount makes the whole fact missing, and Cade asks again.
+ */
+export function readTraditionalIraFact(
+  factByKey: ReadonlyMap<string, unknown>,
   owner: IraOwner,
 ): TraditionalIraFactValue | undefined {
-  const key = makeTraditionalIraFactKey(owner);
-  const fact = facts.byCategory(IRA_CATEGORY).find((row) => row.key === key);
-  return fact?.value as TraditionalIraFactValue | undefined;
+  const value = factByKey.get(makeTraditionalIraFactKey(owner));
+  if (typeof value !== "object" || value === null) return undefined;
+  const fields = value as Record<string, unknown>;
+  return AMOUNT_FIELDS.every((field) => isAmount(fields[field]))
+    ? (value as TraditionalIraFactValue)
+    : undefined;
 }

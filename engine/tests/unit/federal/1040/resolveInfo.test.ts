@@ -24,6 +24,7 @@ describe("rowTaxable", () => {
     ["Roth code Q: not taxable", distribution({ box7: "Q", box2a: 35800 }), 0],
     ["Roth code J: Form 8606 not modeled", distribution({ box7: "J", box2a: 35800 }), undefined],
     ["Roth code T: Form 8606 not modeled", distribution({ box7: "T" }), undefined],
+    ["code Y: charitable distribution not modeled", distribution({ box7: "7Y" }), undefined],
   ] as Array<[string, RetirementDistributionFactValue, number | undefined]>)(
     "%s",
     (_, row, expected) => {
