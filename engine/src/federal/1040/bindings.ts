@@ -170,20 +170,31 @@ export function register(): void {
       },
       "line.7b_schedule_d_not_required": (_, info) =>
         info.capitalGainDistributionsNoScheduleD !== undefined ? true : undefined,
-      "line.9": (form) =>
-        sum(
-          form["line.1z"],
-          form["line.2b"],
-          form["line.3b"],
-          form["line.4b"],
-          form["line.5b"],
-          form["line.6b"],
-          form["line.7a"],
-          form["line.8"],
-        ),
+      /*
+       * MANUAL EDIT: irs-1040-inst-2025::sec::instructions-for-schedule-1::b01. Line 8
+       * is Schedule 1 line 10. While Schedule 1 is filed and line 10 is blank, line 9
+       * waits: sum() would add 0 and give a total that looks complete.
+       */
+      "line.9": (form, info) =>
+        info.mustFile?.["schedule-1"]?.value === true && form["line.8"] === undefined
+          ? undefined
+          : sum(
+              form["line.1z"],
+              form["line.2b"],
+              form["line.3b"],
+              form["line.4b"],
+              form["line.5b"],
+              form["line.6b"],
+              form["line.7a"],
+              form["line.8"],
+            ),
+      // MANUAL EDIT: blank while line 9 is blank; sum() would leave only -line 10.
       "line.11a": (form) =>
-        sum(form["line.9"], form["line.10"] === undefined ? 0 : -form["line.10"]),
-      "line.11b": (form) => sum(form["line.11a"]),
+        form["line.9"] === undefined
+          ? undefined
+          : sum(form["line.9"], form["line.10"] === undefined ? 0 : -form["line.10"]),
+      // MANUAL EDIT: a copy of line 11a, blank while it is blank.
+      "line.11b": (form) => form["line.11a"],
       /*
        * MANUAL EDIT: line 12e is the standard deduction or Schedule A line 17.
        * The worksheet for a filer someone can claim as a dependent is not modeled.
@@ -211,17 +222,26 @@ export function register(): void {
       },
       /*
        * Blank when 12e is blank: sum() would count it as 0 and overstate
-       * taxable income. Also blank while Schedule 1-A is filed but 13b is blank.
+       * taxable income. Also blank while Schedule 1-A is filed but 13b is blank,
+       * and while Form 8995-A is filed but 13a (its line 39) is blank
+       * (irs-1040-inst-2025::sec::line-13a::b01, irs-8995a-inst-2025::sec::line-39::b01).
        */
       "line.14": (form, info) => {
-        if (form["line.12e"] === undefined || awaitsSchedule1A(info, form["line.13b"])) {
+        if (
+          form["line.12e"] === undefined ||
+          awaitsSchedule1A(info, form["line.13b"]) ||
+          (info.mustFile?.["form-8995-a"]?.value === true && form["line.13a"] === undefined)
+        ) {
           return undefined;
         }
         return sum(form["line.12e"], form["line.13a"], form["line.13b"]);
       },
-      // Blank when line 14 is blank: sum() would read it as 0 and tax all of 11b.
+      /*
+       * Blank when line 14 is blank: sum() would read it as 0 and tax all of 11b.
+       * MANUAL EDIT: also blank when 11b is blank; sum() would give 0 taxable income.
+       */
       "line.15": (form) =>
-        form["line.14"] === undefined
+        form["line.11b"] === undefined || form["line.14"] === undefined
           ? undefined
           : atLeast(0, sum(form["line.11b"], -form["line.14"])),
       /*
