@@ -9,6 +9,8 @@ import type { Scenario } from "../types";
  * On a failure, add a missingInputs entry in the form's resolver, or list the
  * input here with the reason it is optional.
  * Document facts are skipped: the scope decisions cover whether they exist.
+ * A business fact (Schedule C) is skipped too: it is the whole business, and
+ * whether one exists is Cade's self-employment question.
  */
 const OPTIONAL: Array<[RegExp, string]> = [
   [/^decisions\.scope\.must_file_schedule_ca$/, "Schedule CA files with the 540 unless set false"],
@@ -25,7 +27,8 @@ const OPTIONAL: Array<[RegExp, string]> = [
   ],
 ];
 
-const isDocument = (key: string) => /^(employer|account|payer|employee|vendor)\./.test(key);
+const isDocument = (key: string) =>
+  /^(employer|account|payer|employee|vendor|business)\./.test(key);
 const isOptional = (key: string) => OPTIONAL.some(([pattern]) => pattern.test(key));
 
 interface Outcome {

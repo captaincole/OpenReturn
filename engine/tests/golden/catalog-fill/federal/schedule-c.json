@@ -1,0 +1,951 @@
+{
+  "formId": "schedule-c",
+  "fieldCount": 105,
+  "entries": [
+    {
+      "fieldId": "schedule-c.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1QLHG"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "7,920"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.1_statutory_employee",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line1_ReadOrder[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines8-17[0].f1_19[0]",
+          "text": "4,416"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.11",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines8-17[0].f1_20[0]",
+          "text": "7,955"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.12",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines8-17[0].f1_21[0]",
+          "text": "1,798"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.13",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines8-17[0].f1_22[0]",
+          "text": "6,704"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.14",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines8-17[0].f1_23[0]",
+          "text": "7,537"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines8-17[0].f1_24[0]",
+          "text": "3,546"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.16a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines8-17[0].f1_25[0]",
+          "text": "3,588"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.16b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines8-17[0].f1_26[0]",
+          "text": "9,633"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.17",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines8-17[0].f1_27[0]",
+          "text": "7,310"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.18",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_28[0]",
+          "text": "6,460"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.19",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_29[0]",
+          "text": "5,636"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "3,787"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.20a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_30[0]",
+          "text": "4,464"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.20b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_31[0]",
+          "text": "1,068"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.21",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_32[0]",
+          "text": "9,912"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.22",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_33[0]",
+          "text": "9,517"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.23",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_34[0]",
+          "text": "1,965"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.24a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_35[0]",
+          "text": "1,066"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.24b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_36[0]",
+          "text": "3,997"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.25",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_37[0]",
+          "text": "9,148"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.26",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_38[0]",
+          "text": "1,743"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.27a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_40[0]",
+          "text": "1,482"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.27b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines18-27[0].f1_39[0]",
+          "text": "7,009"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.28",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_41[0]",
+          "text": "9,709"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.29",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_42[0]",
+          "text": "3,936"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "2,585"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.30",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_45[0]",
+          "text": "3,426"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.30_business_sq_ft",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line30_ReadOrder[0].f1_44[0]",
+          "text": "7,669"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.30_home_sq_ft",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line30_ReadOrder[0].f1_43[0]",
+          "text": "8,426"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.31",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_46[0]",
+          "text": "7,123"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.32a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.32b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "2,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "2,529"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "1,962"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "1,483"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.8",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines8-17[0].f1_17[0]",
+          "text": "9,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.9",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines8-17[0].f1_18[0]",
+          "text": "5,130"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.a_principal_business",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-37YWK"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.b_business_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].BComb[0].f1_4[0]",
+          "text": "T1FDM5"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.c_business_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-1RZ89"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.d_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].DComb[0].f1_6[0]",
+          "text": "T-C9ZIO"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.e_business_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "T-1L43S"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.e_city_state_zip",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-1BQOU"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.f_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.f_cash",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.f_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.f_other_specify",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "T-Y83JS"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.g_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.g_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.h_started_or_acquired",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.i_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.i_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.j_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.0.line.j_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.33a_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.33b_lower_of_cost_or_market",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.33c_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.34_inventory_change_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.34_inventory_change_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.35",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "8,190"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.36",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "3,303"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.37",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "5,105"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.38",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "5,691"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.39",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "9,189"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.40",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "6,146"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.41",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "5,994"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.42",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "5,510"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.43_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "39"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.43_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "46"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.43_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "6498"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.44a_business_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "4,558"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.44b_commuting_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "1,474"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.44c_other_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "9,141"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.45_personal_use_off_duty_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.45_personal_use_off_duty_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.46_another_vehicle_available_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.46_another_vehicle_available_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.47a_evidence_supports_deduction_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.47a_evidence_supports_deduction_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.47b_evidence_written_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.47b_evidence_written_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_33[0]",
+          "text": "3,556"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_amount_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item1[0].f2_16[0]",
+          "text": "9,633"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_amount_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item2[0].f2_18[0]",
+          "text": "8,954"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_amount_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item3[0].f2_20[0]",
+          "text": "6,991"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_amount_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item4[0].f2_22[0]",
+          "text": "5,266"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_amount_5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item5[0].f2_24[0]",
+          "text": "8,489"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_amount_6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item6[0].f2_26[0]",
+          "text": "2,038"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_amount_7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item7[0].f2_28[0]",
+          "text": "6,994"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_amount_8",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item8[0].f2_30[0]",
+          "text": "9,436"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_amount_9",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item9[0].f2_32[0]",
+          "text": "8,572"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_description_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item1[0].f2_15[0]",
+          "text": "T-1OE2X"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_description_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item2[0].f2_17[0]",
+          "text": "T-1G2AQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_description_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item3[0].f2_19[0]",
+          "text": "T-8GZY8"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_description_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item4[0].f2_21[0]",
+          "text": "T-1LKZ0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_description_5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item5[0].f2_23[0]",
+          "text": "T-YQSG5"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_description_6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item6[0].f2_25[0]",
+          "text": "T-5JC5H"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_description_7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item7[0].f2_27[0]",
+          "text": "T-GD39N"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_description_8",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item8[0].f2_29[0]",
+          "text": "T-18442"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-c.1.line.48_description_9",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].PartVTable[0].Item9[0].f2_31[0]",
+          "text": "T-2LSNF"
+        }
+      ]
+    }
+  ]
+}
