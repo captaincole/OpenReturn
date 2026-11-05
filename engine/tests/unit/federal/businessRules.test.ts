@@ -3,7 +3,7 @@
  * and Form 8995-A), by filing status, owner and the shape of the business.
  */
 import { describe, expect, it } from "vitest";
-import { makeBusinessFactKey } from "../../../src/facts/index.js";
+import { makeBusinessFactKey, makePaymentTransactionsFactKey } from "../../../src/facts/index.js";
 import { resolve8995AInfo } from "../../../src/federal/8995-a/resolveInfo.js";
 import { resolveScheduleCInfo } from "../../../src/federal/schedule-c/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../../../src/federal/schedule-se/resolveInfo.js";
@@ -25,10 +25,22 @@ const business = (id: string, value: Record<string, unknown> = {}): Fact => ({
   },
 });
 
-const inputs = (facts: Fact[], status?: string) =>
+/* A 1099-K for the business businessId names, or for none. */
+const form1099K = (formId: string, businessId?: string): Fact => ({
+  key: makePaymentTransactionsFactKey("tin-00-0000006", formId),
+  category: "self_employment",
+  value: { filerName: "Platform", box1a: 10000, businessId },
+});
+
+const inputs = (facts: Fact[], status?: string, scheduleC?: boolean) =>
   makeResolverInputs({
     facts,
-    decisions: status ? [{ decisionKey: "decisions.scope.filing_status", decision: status }] : [],
+    decisions: [
+      ...(status ? [{ decisionKey: "decisions.scope.filing_status", decision: status }] : []),
+      ...(scheduleC === undefined
+        ? []
+        : [{ decisionKey: "decisions.scope.must_file_schedule_c", decision: scheduleC }]),
+    ],
   });
 
 const spouseBusiness = business("tutoring", { owner: "spouse" });
@@ -52,6 +64,33 @@ describe("Schedule C must-file", () => {
     ["a spouse's business, status unknown", [spouseBusiness], undefined, true],
   ])("%s", (_, facts, status, expected) => {
     expect(mustFile(facts, status)).toBe(expected);
+  });
+});
+
+describe("Schedule C and a 1099-K", () => {
+  const resolve = (facts: Fact[], scheduleC?: boolean) =>
+    resolveScheduleCInfo(inputs(facts, "single", scheduleC));
+  const linked = form1099K("a", "rideshare");
+  const unlinked = form1099K("b");
+  const unknownBusiness = form1099K("c", "bakery");
+
+  it.each([
+    ["linked to a business", [business("rideshare"), linked], undefined, true, []],
+    ["no business named, no business", [unlinked], undefined, undefined, [unlinked.key]],
+    ["a business that has no fact", [unknownBusiness], undefined, undefined, [unknownBusiness.key]],
+    [
+      "no business named, beside a business",
+      [business("rideshare"), unlinked],
+      undefined,
+      true,
+      [unlinked.key],
+    ],
+    ["no business named, Schedule C decided false", [unlinked], false, false, []],
+    ["no business named, Schedule C decided true", [unlinked], true, true, [unlinked.key]],
+  ])("%s", (_, facts, scheduleC, mustFile, missing) => {
+    const info = resolve(facts, scheduleC);
+    expect(info.mustFile?.["schedule-c"]?.value).toBe(mustFile);
+    expect(info.missingInputs?.["schedule-c"]).toEqual(missing);
   });
 });
 

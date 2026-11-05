@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   makeGamblingWinningsFactKey,
+  makePaymentTransactionsFactKey,
   type GamblingWinningsFactValue,
   type RetirementDistributionFactValue,
 } from "../../../../src/facts/index.js";
@@ -79,5 +80,23 @@ describe("line 25c W-2G slot", () => {
   it("is blank when no W-2G has box 4", () => {
     expect(slot([w2g("a", {})])).toBeUndefined();
     expect(slot([])).toBeUndefined();
+  });
+});
+
+describe("line 25b 1099-K slot", () => {
+  const form1099K = (box4?: number) => ({
+    key: makePaymentTransactionsFactKey("tin-00-0000006", "a"),
+    category: "self_employment",
+    value: { filerName: "Platform", box1a: 20000, box4 },
+  });
+  const slot = (facts: ReturnType<typeof form1099K>[]) =>
+    resolve1040Info(makeResolverInputs({ facts, decisions: [] })).form1099FederalWithholding;
+
+  it("adds 1099-K box 4", () => {
+    expect(slot([form1099K(4800.25)])).toBeCloseTo(4800.25);
+  });
+
+  it("is blank when the 1099-K has no box 4", () => {
+    expect(slot([form1099K()])).toBeUndefined();
   });
 });
