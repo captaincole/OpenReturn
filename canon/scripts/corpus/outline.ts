@@ -1,8 +1,10 @@
 import { getDocument } from "../../src/db/corpusStore";
 import { readOutline } from "../../src/db/refSections";
 import type { Command } from "../lib/cli";
+import { requireCorpus } from "./requireCorpus";
 
 async function run(argv: string[]): Promise<void> {
+  await requireCorpus();
   const docId = argv.find((arg) => !arg.startsWith("--"));
   if (!docId) throw new Error("required: a docId (see --help)");
   const doc = await getDocument(docId);

@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 const MODULE_DIR = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_DB_PATH = resolve(MODULE_DIR, "../../.data/corpus.db");
 
-function corpusDbPath(): string {
+export function corpusDbPath(): string {
   return process.env.CORPUS_DB_PATH ? resolve(process.env.CORPUS_DB_PATH) : DEFAULT_DB_PATH;
 }
 

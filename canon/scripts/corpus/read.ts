@@ -1,6 +1,7 @@
 import { parseArgs } from "node:util";
 import { readSections, sectionOfBlock } from "../../src/db/refSections";
 import type { Command } from "../lib/cli";
+import { requireCorpus } from "./requireCorpus";
 
 /* <blockId> (from a Canon search hit) reads that block's section; <docId> <section> names it. */
 async function target(positionals: string[]): Promise<{ docId: string; section: string }> {
@@ -11,6 +12,7 @@ async function target(positionals: string[]): Promise<{ docId: string; section: 
 }
 
 async function run(argv: string[]): Promise<void> {
+  await requireCorpus();
   const { values, positionals } = parseArgs({
     args: argv,
     options: { through: { type: "string" } },
