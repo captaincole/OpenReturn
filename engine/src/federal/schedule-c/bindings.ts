@@ -22,6 +22,11 @@ const STATUTORY_EMPLOYEE =
   "No fact links a business to W-2 statutory-employee income; every business fact is self-employment income.";
 const COST_OF_GOODS_SOLD =
   "Part III (cost of goods sold) is not modeled: a business that sells goods, or has not said, leaves lines 5 and 7-31 blank.";
+const PART_III =
+  "Part III (cost of goods sold) is not modeled: no fact gives inventory, purchases or the valuation method.";
+const PART_IV =
+  "Part IV (vehicle information) is not modeled: no fact gives the vehicle's dates, mileage or the yes/no answers.";
+const PART_V = "Part V (other expenses) is not modeled: no fact lists other expenses.";
 const OTHER_EXPENSES =
   "Part V (other expenses, line 48) is not modeled: no fact lists other expenses.";
 const HOME_OFFICE =
@@ -150,6 +155,52 @@ export function register(): void {
       "0.header.ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
     },
     unsupported: {
+      "1.line.33a_cost": PART_III,
+      "1.line.33b_lower_of_cost_or_market": PART_III,
+      "1.line.33c_other": PART_III,
+      "1.line.34_inventory_change_yes": PART_III,
+      "1.line.34_inventory_change_no": PART_III,
+      "1.line.35": PART_III,
+      "1.line.36": PART_III,
+      "1.line.37": PART_III,
+      "1.line.38": PART_III,
+      "1.line.39": PART_III,
+      "1.line.40": PART_III,
+      "1.line.41": PART_III,
+      "1.line.42": PART_III,
+      "1.line.43_month": PART_IV,
+      "1.line.43_day": PART_IV,
+      "1.line.43_year": PART_IV,
+      "1.line.44a_business_miles": PART_IV,
+      "1.line.44b_commuting_miles": PART_IV,
+      "1.line.44c_other_miles": PART_IV,
+      "1.line.45_personal_use_off_duty_yes": PART_IV,
+      "1.line.45_personal_use_off_duty_no": PART_IV,
+      "1.line.46_another_vehicle_available_yes": PART_IV,
+      "1.line.46_another_vehicle_available_no": PART_IV,
+      "1.line.47a_evidence_supports_deduction_yes": PART_IV,
+      "1.line.47a_evidence_supports_deduction_no": PART_IV,
+      "1.line.47b_evidence_written_yes": PART_IV,
+      "1.line.47b_evidence_written_no": PART_IV,
+      "1.line.48_description_1": PART_V,
+      "1.line.48_amount_1": PART_V,
+      "1.line.48_description_2": PART_V,
+      "1.line.48_amount_2": PART_V,
+      "1.line.48_description_3": PART_V,
+      "1.line.48_amount_3": PART_V,
+      "1.line.48_description_4": PART_V,
+      "1.line.48_amount_4": PART_V,
+      "1.line.48_description_5": PART_V,
+      "1.line.48_amount_5": PART_V,
+      "1.line.48_description_6": PART_V,
+      "1.line.48_amount_6": PART_V,
+      "1.line.48_description_7": PART_V,
+      "1.line.48_amount_7": PART_V,
+      "1.line.48_description_8": PART_V,
+      "1.line.48_amount_8": PART_V,
+      "1.line.48_description_9": PART_V,
+      "1.line.48_amount_9": PART_V,
+      "1.line.48": PART_V,
       "0.line.f_other_specify": OTHER_METHOD,
       "0.line.1_statutory_employee": STATUTORY_EMPLOYEE,
       "0.line.4": COST_OF_GOODS_SOLD,
