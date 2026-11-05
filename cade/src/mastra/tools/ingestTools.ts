@@ -1,5 +1,6 @@
 import { ingest1099B } from "./ingest1099B";
 import { ingest1099Div, ingest1099Int, ingest1099Misc } from "./ingest1099Forms";
+import { ingest1099K } from "./ingest1099K";
 import { ingest1099R } from "./ingest1099R";
 import { ingest1099SA } from "./ingest1099SA";
 import { ingestEnergyInvoice } from "./ingestEnergyInvoice";
@@ -21,6 +22,7 @@ export const ingestTools = {
   ingestHouseholdW2,
   ingestEnergyInvoice,
   ingestW2G,
+  ingest1099K,
   recordBusiness,
 };
 
