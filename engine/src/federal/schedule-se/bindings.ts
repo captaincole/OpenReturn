@@ -4,7 +4,7 @@ import { defineForm, type FormAccessor } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { ScheduleSEFilingInfo } from "./filingInfo.js";
-import { MIN_NET_EARNINGS, NET_EARNINGS_RATE } from "./resolveInfo.js";
+import { MIN_NET_EARNINGS, netEarnings } from "./lines.js";
 import type { ScheduleSE } from "./types.js";
 
 /* Line 7 (printed): the 2025 social security wage base. */
@@ -51,7 +51,7 @@ function line3(form: Form): number | undefined {
 function line4a(form: Form): number | undefined {
   const line3Value = form["0.line.3"];
   if (line3Value === undefined) return undefined;
-  return line3Value > 0 ? roundDollars(line3Value * NET_EARNINGS_RATE) : line3Value;
+  return netEarnings(line3Value);
 }
 
 function line10(form: Form): number | undefined {

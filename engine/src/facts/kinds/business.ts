@@ -73,8 +73,12 @@ export interface BusinessFactValue {
 
 const BUSINESS_CATEGORY = "self_employment";
 
-export function makeBusinessFactKey(slug: string): string {
-  return `business.${slug}`;
+/*
+ * The key holds an id that Cade chooses once for the business (record-business),
+ * not its name or owner, so a correction to any field updates the same fact.
+ */
+export function makeBusinessFactKey(businessId: string): string {
+  return `business.${businessId}`;
 }
 
 export function isBusinessFactKey(key: string): boolean {
@@ -114,5 +118,34 @@ export function readBusinessFacts(facts: ReadonlyArray<FactRow>): {
       .filter((row) => isBusiness(row.value))
       .map((row) => ({ key: row.key, value: row.value as BusinessFactValue })),
     malformedKeys: rows.filter((row) => !isBusiness(row.value)).map((row) => row.key),
+  };
+}
+
+export type BusinessOwner = "taxpayer" | "spouse";
+
+export function ownerOf(business: BusinessFactValue): BusinessOwner {
+  return business.owner ?? "taxpayer";
+}
+
+/*
+ * The businesses on this return. Filing jointly, every business. On any other
+ * status, only the taxpayer's: a spouse's business belongs on the spouse's
+ * return, and its key is in spouseKeys so a form can wait on it.
+ */
+export function businessesOnReturn(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+): {
+  businesses: Array<{ key: string; value: BusinessFactValue }>;
+  spouseKeys: string[];
+  malformedKeys: string[];
+} {
+  const { businesses, malformedKeys } = readBusinessFacts(facts);
+  const offReturn = (business: { value: BusinessFactValue }) =>
+    !joint && ownerOf(business.value) === "spouse";
+  return {
+    businesses: businesses.filter((business) => !offReturn(business)),
+    spouseKeys: businesses.filter(offReturn).map((business) => business.key),
+    malformedKeys,
   };
 }

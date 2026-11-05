@@ -1,4 +1,5 @@
 import {
+  businessesOnReturn,
   getGamblingWinningsFacts,
   isDividendFactKey,
   isHsaDistributionFactKey,
@@ -6,7 +7,6 @@ import {
   isMiscIncomeFactKey,
   isRetirementDistributionFactKey,
   isSocialSecurityFactKey,
-  readBusinessFacts,
   type RetirementDistributionFactValue,
   type SocialSecurityFactValue,
 } from "../../facts/index.js";
@@ -31,9 +31,7 @@ const MAX_TAXABLE_SOCIAL_SECURITY = 0.85;
  * does not miss one. Income with no facts (rents, K-1s, alimony) is not counted.
  */
 export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
-  const businesses = readBusinessFacts(inputs.facts).businesses.filter(
-    ({ value }) => joint || value.owner !== "spouse",
-  );
+  const { businesses } = businessesOnReturn(inputs.facts, joint);
   const retirement = inputs.facts.filter(
     (fact) => fact.category === "retirement" && isRetirementDistributionFactKey(fact.key),
   );
@@ -81,11 +79,14 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
  * Mixed businesses (some line G "No") need no per-business line 4b: a business
  * without "Yes" leaves Schedule C line 31, so Schedule 1 line 3 and line 4a, blank.
  */
-export function investmentSignals(inputs: ResolverInputs): {
+export function investmentSignals(
+  inputs: ResolverInputs,
+  joint: boolean,
+): {
   scheduleCNonpassive: boolean;
   hasInvestment: boolean;
 } {
-  const { businesses } = readBusinessFacts(inputs.facts);
+  const { businesses } = businessesOnReturn(inputs.facts, joint);
   const scheduleCNonpassive =
     businesses.length > 0 && businesses.every(({ value }) => value.materiallyParticipated === true);
   const hasInvestment =

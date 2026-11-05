@@ -1,12 +1,11 @@
 import {
   SPOUSE_KEYS,
+  businessesOnReturn,
   getGamblingWinningsFacts,
   isDividendFactKey,
   isInterestFactKey,
   isMiscIncomeFactKey,
   isW2FactKey,
-  readBusinessFacts,
-  type BusinessFactValue,
 } from "./facts/index.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
@@ -213,11 +212,12 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
  * with no facts; set decisions.scope.must_file_8960 for that case.
  */
 export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
-  const { scheduleCNonpassive, hasInvestment } = investmentSignals(inputs);
   const status = filingStatusOf(inputs);
   const threshold = status ? NIIT_THRESHOLDS[status] : undefined;
   // With no filing status yet, count a spouse's income too, and test the lowest threshold.
-  const magi = magiUpperBound(inputs, status === undefined || status === "married_filing_jointly");
+  const joint = status === undefined || status === "married_filing_jointly";
+  const { scheduleCNonpassive, hasInvestment } = investmentSignals(inputs, joint);
+  const magi = magiUpperBound(inputs, joint);
   const underEvery = magi <= Math.min(...Object.values(NIIT_THRESHOLDS));
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8960",
@@ -245,13 +245,13 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
       : undefined;
   // Form 8889 lines 13 and 16 reach the 1040 only through Schedule 1.
   const form8889 = resolve8889Info(inputs).mustFile?.["form-8889"]?.value === true;
-  const { businesses, malformedKeys } = readBusinessFacts(inputs.facts);
-  const hasBusiness = businesses.length > 0 || malformedKeys.length > 0;
-  const businessIncome = scheduleCTotal(
-    businesses,
-    malformedKeys,
+  const onReturn = businessesOnReturn(
+    inputs.facts,
     filingStatusOf(inputs) === "married_filing_jointly",
   );
+  const hasBusiness =
+    onReturn.businesses.length + onReturn.spouseKeys.length + onReturn.malformedKeys.length > 0;
+  const businessIncome = scheduleCTotal(onReturn);
   const w2gs = getGamblingWinningsFacts(inputs.facts);
   const gamblingWinnings = w2gs.length > 0 ? sum(...w2gs.map((w2g) => w2g.box1)) : undefined;
   // Schedule SE line 13 reaches the 1040 only through Schedule 1 line 15.
@@ -279,23 +279,20 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
 }
 
 /*
- * Schedule 1 line 3: line 31 of every Schedule C, both spouses' on a joint return.
- * One blank line 31 (or a business fact that cannot be read) leaves the total blank.
+ * Schedule 1 line 3: line 31 of every Schedule C on this return, both spouses'
+ * on a joint return. One blank line 31, or a business fact that cannot be read,
+ * leaves the total blank. On any other status a spouse's business belongs on the
+ * spouse's return, but under community property part of it may belong here
+ * (Form 8958, not modeled), so a spouse's business also leaves line 3 blank.
  */
-/*
- * Line 3: every business's Schedule C line 31 on a joint return. On any other
- * status a spouse's business belongs on the spouse's return, and under community
- * property part of it may belong here (Form 8958, not modeled), so a spouse-owned
- * business leaves line 3 blank.
- */
-function scheduleCTotal(
-  businesses: ReadonlyArray<{ value: BusinessFactValue }>,
-  malformedKeys: ReadonlyArray<string>,
-  joint: boolean,
-): number | undefined {
-  if (businesses.length === 0 || malformedKeys.length > 0) return undefined;
-  const spouseOwned = businesses.some((business) => business.value.owner === "spouse");
-  if (!joint && spouseOwned) return undefined;
+function scheduleCTotal({
+  businesses,
+  spouseKeys,
+  malformedKeys,
+}: ReturnType<typeof businessesOnReturn>): number | undefined {
+  if (businesses.length === 0 || spouseKeys.length > 0 || malformedKeys.length > 0) {
+    return undefined;
+  }
   const profits = businesses.map((business) => netProfit(business.value));
   return profits.every((profit) => profit !== undefined) ? sum(...profits) : undefined;
 }
