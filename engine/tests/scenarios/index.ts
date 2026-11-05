@@ -6,6 +6,7 @@ import { jordanScenario } from "./jordan/index.js";
 import { marcusScenario } from "./marcus/index.js";
 import { taraScenario } from "./tara/index.js";
 import { tcbUs003Scenario } from "./tcb-us-003/index.js";
+import { tcbUs006Scenario } from "./tcb-us-006/index.js";
 
 export {
   alejandroScenario,
@@ -15,6 +16,7 @@ export {
   marcusScenario,
   taraScenario,
   tcbUs003Scenario,
+  tcbUs006Scenario,
 };
 export type { Scenario };
 
@@ -26,4 +28,5 @@ export const SCENARIOS: Scenario[] = [
   carterScenario,
   taraScenario,
   tcbUs003Scenario,
+  tcbUs006Scenario,
 ];
