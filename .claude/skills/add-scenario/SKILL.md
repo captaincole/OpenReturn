@@ -32,7 +32,8 @@ Run `create-input-documents <scenario>`. It sorts the inputs into documents and 
 
 1. `facts.ts`, `decisions.ts` and `index.ts` (copy the closest scenario), and the entry in `tests/scenarios/index.ts`. Each fact's `sourceNote` names its PDF or the answer it came from.
 2. `expected.ts`: each line of the table from step 1, as the key prints it. Comment each value with the line's label.
-3. Run `npm test -- <scenario>`. The failures are the work list for step 5.
+3. Set `skip: true` in `index.ts`. The pre-commit hook runs every golden test, and the new scenario fails until step 5 is done; a skipped scenario still runs when you name it.
+4. Run `npm test -- <scenario>`. The failures are the work list for step 5.
 
 ## 5. Grow the engine
 
@@ -47,7 +48,7 @@ Never change a value in `expected.ts` to match the engine. When the key and the 
 
 ## 6. Finish
 
-1. When every line matches, write the goldens: `npx tsx scripts/renderScenario.ts --scenario=<scenario> --golden` (from `engine/`), and point each form's `goldenPdfPath` at its PDF. Read the PDFs.
+1. When every line matches, remove `skip: true`. Then write the goldens: `npx tsx scripts/renderScenario.ts --scenario=<scenario> --golden` (from `engine/`), and point each form's `goldenPdfPath` at its PDF. Read the PDFs.
 2. Run `verify-form` for each form you changed. No other scenario's golden may change.
 3. Add new input documents to `docs/testing-with-your-return.md` ("What OpenReturn supports") and `engine/scripts/compareFiled/support.ts`.
 4. Commit each step on its own: the documents, the facts, the scenario, then each form.

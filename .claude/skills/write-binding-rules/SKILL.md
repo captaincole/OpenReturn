@@ -31,6 +31,8 @@ Arguments: `$ARGUMENTS`. The first is the form (`federal/<short>` or `state/<st>
 
 Draft one field at a time: the drafters edit the same files.
 
+A part of more than 8 fields that a scenario needs (a worksheet part, a threshold part) can go to one drafter as a group. Give the drafter and the skeptic every fieldId in the part. The skeptic returns one verdict per field, and steps 3–4 apply to each field. A field with its own gate or a read from another form stays on its own.
+
 1. Start a `line-rule-drafter` with the form, the fieldId, its catalog label and the instructions docId.
 2. Start a `line-rule-skeptic` with the same input and the drafter's report.
 3. Act on the skeptic's verdict:

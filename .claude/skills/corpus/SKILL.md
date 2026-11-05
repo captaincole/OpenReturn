@@ -67,6 +67,10 @@ Cost: ~$0.50 Haiku contextualization per doc; embeddings are local and free (Emb
 | `outline <docId>` | list a document's sections, with first page and size; fails when the document is not in corpus.db |
 | `read <blockId>` or `read <docId> <section> [--through <section>]` | print whole sections with block ids. Search with Canon (`mcp__canon__searchRefDocs`); when a hit needs more context, read its block's whole section, or a part with `--through` |
 
+## In a git worktree
+
+A worktree has no `canon/.data/`, so `read`, `search` and `outline` stop with "has no documents". Set `CORPUS_DB_PATH` in the worktree's `canon/.env` to the main checkout's `canon/.data/corpus.db`, or search with Canon MCP. Do not `fetch` a second copy.
+
 ## Rebuilding
 
 To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). After any parser change: `corpus sync --force`, then re-point code citations to block ids. The corpus and `sources/` survive `npm run reset`.
