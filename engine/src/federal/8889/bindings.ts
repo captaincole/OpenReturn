@@ -24,9 +24,9 @@ export function register(): void {
       "0.line.2_hsa_contributions": (_, info) => roundDollars(info.hsaOwnContributions),
       // 2025 limits, prorated by months of coverage. The last-month rule is not modeled.
       "0.line.3_annual_hsa_contribution_limit": (_, info) => {
-        if (!info.hsaCoverageType) return undefined;
+        if (!info.hsaCoverageType || info.hsaCoverageMonths === undefined) return undefined;
         const annual = info.hsaCoverageType === "family" ? 8550 : 4300;
-        return roundDollars((annual * (info.hsaCoverageMonths ?? 12)) / 12);
+        return roundDollars((annual * info.hsaCoverageMonths) / 12);
       },
       // The spouse split for family coverage is not modeled.
       "0.line.6_adjusted_limit_separate_hsa": (form) => form["0.line.5_subtract_line4_from_line3"],
