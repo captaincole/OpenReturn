@@ -9,6 +9,7 @@ export * from "./kinds/hsaCoverage.js";
 export * from "./kinds/hsaDistribution.js";
 export * from "./kinds/interest.js";
 export * from "./kinds/miscIncome.js";
+export * from "./kinds/paymentTransactions.js";
 export * from "./kinds/priorYear.js";
 export * from "./kinds/retirementDistribution.js";
 export * from "./kinds/socialSecurity.js";
