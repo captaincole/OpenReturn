@@ -1,6 +1,7 @@
 import { parseArgs } from "node:util";
 import { searchRefDocsTool } from "../../src/mastra/tools/refDocs";
 import type { Command } from "../lib/cli";
+import { requireCorpus } from "./requireCorpus";
 
 interface SearchToolInput {
   query: string;
@@ -31,6 +32,7 @@ function execSearch(input: SearchToolInput): Promise<SearchToolOutput> {
 }
 
 async function run(argv: string[]): Promise<void> {
+  await requireCorpus();
   const { values, positionals } = parseArgs({
     args: argv,
     options: {
