@@ -1,6 +1,7 @@
 import {
   ROTH_IRA_CODES,
   SPOUSE_KEYS,
+  getGamblingWinningsFacts,
   hasDistributionCode,
   isDividendFactKey,
   isInterestFactKey,
@@ -180,6 +181,12 @@ function form1099Withholding(
   return total > 0 ? (total as Form1040FilingInfo["form1099FederalWithholding"]) : undefined;
 }
 
+/* Line 25c (irs-1040-inst-2025::sec::line-25c-other-forms::b01): W-2G box 4. */
+function w2gWithholding(inputs: ResolverInputs): Form1040FilingInfo["w2gFederalWithholding"] {
+  const total = sum(...getGamblingWinningsFacts(inputs.facts).map((w2g) => w2g.box4));
+  return total > 0 ? (total as Form1040FilingInfo["w2gFederalWithholding"]) : undefined;
+}
+
 /* 1040 inst. line 7a, Exception 1: without Schedule D, 1099-DIV box 2a goes to line 7a. */
 function capitalGainDistributionsNoScheduleD(
   inputs: ResolverInputs,
@@ -255,6 +262,7 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
     ) as Form1040FilingInfo["qualifiedDividends"],
     ordinaryDividends: sumInvestmentBox(inputs, "box1a") as Form1040FilingInfo["ordinaryDividends"],
     form1099FederalWithholding: form1099Withholding(inputs),
+    w2gFederalWithholding: w2gWithholding(inputs),
     capitalGainDistributionsNoScheduleD: capitalGainDistributionsNoScheduleD(inputs),
     ...resolveInterestSlots(inputs),
     ...resolveRetirementSlots(inputs),

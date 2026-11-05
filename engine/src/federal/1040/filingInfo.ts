@@ -10,6 +10,8 @@ export interface Form1040FilingInfo extends BaseFilingInfo {
   qualifiedDividends?: Money;
   /** Line 25b. */
   form1099FederalWithholding?: Money;
+  /** Line 25c: W-2G box 4 sum, not rounded. */
+  w2gFederalWithholding?: Money;
   capitalGainDistributionsNoScheduleD?: Money;
   taxableInterestTotal?: Money;
   taxExemptInterestTotal?: Money;
