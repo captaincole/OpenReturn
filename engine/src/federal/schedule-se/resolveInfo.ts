@@ -1,7 +1,7 @@
 import { readBusinessFacts } from "../../facts/index.js";
 import { roundDollars, sum } from "../../money.js";
 import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
-import { netProfit } from "../schedule-c/lines.js";
+import { netProfit, tentativeProfit } from "../schedule-c/lines.js";
 import type { ScheduleSEFilingInfo } from "./filingInfo.js";
 
 /* Line 4a: 92.35% of line 3. */
@@ -23,9 +23,20 @@ export function resolveScheduleSEInfo(inputs: ResolverInputs): ScheduleSEFilingI
   const known = profits.every((profit) => profit !== undefined);
   const profit = own.length === 0 || !known ? undefined : sum(...profits);
   const line4a = profit !== undefined && profit > 0 ? roundDollars(profit * NET_EARNINGS_RATE) : 0;
+  /*
+   * A blank line 31 that is a tentative loss (line 29 < 0) can only add a limited
+   * loss, so when the known profits alone stay under $400 the answer is still no.
+   */
+  const knownProfit = sum(...profits.filter((value) => value !== undefined));
+  const onlyLossesUnknown = own.every(
+    (business, index) => profits[index] !== undefined || (tentativeProfit(business.value) ?? 0) < 0,
+  );
+  const decided =
+    known ||
+    (onlyLossesUnknown && roundDollars(knownProfit * NET_EARNINGS_RATE) < MIN_NET_EARNINGS);
   return {
     mustFile: {
-      // A business whose net profit is not known yet (line 5 waits) leaves the question open.
+      // A business whose line 31 is blank leaves the question open, unless only losses are unknown.
       "schedule-se": resolveMustFile(inputs.decisionByKey, {
         explicitKey: "decisions.scope.must_file_schedule_se",
         fallbacks: !known

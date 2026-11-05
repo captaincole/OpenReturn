@@ -29,8 +29,23 @@ export function grossIncome(business: BusinessFactValue): number | undefined {
   return line5 === undefined ? undefined : line5 + roundDollars(business.otherIncome ?? 0);
 }
 
-/* Line 31: line 7 (gross income) less line 28 (total expenses). */
-export function netProfit(business: BusinessFactValue): number | undefined {
+/* Line 29: line 7 (gross income) less line 28 (total expenses). */
+export function tentativeProfit(business: BusinessFactValue): number | undefined {
   const line7 = grossIncome(business);
   return line7 === undefined ? undefined : line7 - totalExpenses(business.expenses);
+}
+
+/*
+ * Line 31: line 29 less line 30 (zero, no home-office facts). irs-1040sc-inst-2025::sec::line-31::b01–b02:
+ * a loss waits for the at-risk and passive loss rules, and a business with line G
+ * "No" (or unanswered) may carry prior-year passive losses (Form 8582). Neither is
+ * modeled, so line 31 is blank in those cases. Schedule SE line 2 and Schedule 1
+ * line 3 take this amount.
+ */
+export function netProfit(business: BusinessFactValue): number | undefined {
+  const line29 = tentativeProfit(business);
+  if (line29 === undefined || line29 < 0 || business.materiallyParticipated !== true) {
+    return undefined;
+  }
+  return line29;
 }

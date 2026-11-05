@@ -1,11 +1,18 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm } from "../../defineForm.js";
-import type { BusinessFactValue } from "../../facts/index.js";
+import type { BusinessExpenses, BusinessFactValue } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
-import { grossIncome, grossProfit, netReceipts } from "./lines.js";
+import {
+  grossIncome,
+  grossProfit,
+  netProfit,
+  netReceipts,
+  tentativeProfit,
+  totalExpenses,
+} from "./lines.js";
 import type { ScheduleC } from "./types.js";
 
 const LINE_J =
@@ -14,7 +21,13 @@ const OTHER_METHOD = "The business fact has no field that names an 'other' accou
 const STATUTORY_EMPLOYEE =
   "No fact links a business to W-2 statutory-employee income; every business fact is self-employment income.";
 const COST_OF_GOODS_SOLD =
-  "Part III (cost of goods sold) is not modeled: a business that sells goods, or has not said, leaves lines 5-31 blank.";
+  "Part III (cost of goods sold) is not modeled: a business that sells goods, or has not said, leaves lines 5 and 7-31 blank.";
+const OTHER_EXPENSES =
+  "Part V (other expenses, line 48) is not modeled: no fact lists other expenses.";
+const HOME_OFFICE =
+  "No fact gives a business use of the home (Form 8829 or the simplified method); line 31 counts none.";
+const AT_RISK =
+  "No fact says whether all investment in the business is at risk (Form 6198); line 31 leaves a loss blank.";
 
 /* The business this copy is for. */
 export function businessOf(info: ScheduleCFilingInfo): BusinessFactValue | undefined {
@@ -37,6 +50,28 @@ function partI(
 ) {
   const business = businessOf(info);
   return business ? line(business) : undefined;
+}
+
+// A Part II line: the deductible amount the business fact states. Part III can capitalize these.
+function expense(info: ScheduleCFilingInfo, key: keyof BusinessExpenses) {
+  const business = businessOf(info);
+  return business?.sellsGoods === false ? roundDollars(business.expenses?.[key]) : undefined;
+}
+
+// Line 28: lines 8 through 27b; blank when the business states no expense.
+function line28(info: ScheduleCFilingInfo) {
+  const business = businessOf(info);
+  const stated = Object.values(business?.expenses ?? {}).some((amount) => amount !== undefined);
+  return business?.sellsGoods === false && stated ? totalExpenses(business.expenses) : undefined;
+}
+
+/*
+ * A loss reaches line 31 (then Schedule 1 line 3, Schedule SE line 2) only after the at-risk
+ * (Form 6198) and passive (Form 8582) limits; line G "No" can bring prior-year passive losses.
+ */
+function line31(info: ScheduleCFilingInfo) {
+  const business = businessOf(info);
+  return business ? netProfit(business) : undefined;
 }
 
 function method(info: ScheduleCFilingInfo, which: "cash" | "accrual" | "other") {
@@ -83,6 +118,32 @@ export function register(): void {
       "0.line.5": (_, info) => partI(info, grossProfit),
       "0.line.6": (_, info) => roundDollars(businessOf(info)?.otherIncome),
       "0.line.7": (_, info) => partI(info, grossIncome),
+      "0.line.8": (_, info) => expense(info, "advertising"),
+      "0.line.9": (_, info) => expense(info, "carAndTruck"),
+      "0.line.10": (_, info) => expense(info, "commissionsAndFees"),
+      "0.line.11": (_, info) => expense(info, "contractLabor"),
+      "0.line.12": (_, info) => expense(info, "depletion"),
+      "0.line.13": (_, info) => expense(info, "depreciation"),
+      "0.line.14": (_, info) => expense(info, "employeeBenefitPrograms"),
+      "0.line.15": (_, info) => expense(info, "insurance"),
+      "0.line.16a": (_, info) => expense(info, "mortgageInterest"),
+      "0.line.16b": (_, info) => expense(info, "otherInterest"),
+      "0.line.17": (_, info) => expense(info, "legalAndProfessional"),
+      "0.line.18": (_, info) => expense(info, "office"),
+      "0.line.19": (_, info) => expense(info, "pensionAndProfitSharing"),
+      "0.line.20a": (_, info) => expense(info, "rentVehiclesMachinery"),
+      "0.line.20b": (_, info) => expense(info, "rentOtherProperty"),
+      "0.line.21": (_, info) => expense(info, "repairs"),
+      "0.line.22": (_, info) => expense(info, "supplies"),
+      "0.line.23": (_, info) => expense(info, "taxesAndLicenses"),
+      "0.line.24a": (_, info) => expense(info, "travel"),
+      "0.line.24b": (_, info) => expense(info, "deductibleMeals"),
+      "0.line.25": (_, info) => expense(info, "utilities"),
+      "0.line.26": (_, info) => expense(info, "wages"),
+      "0.line.27a": (_, info) => expense(info, "energyEfficientBuildings"),
+      "0.line.28": (_, info) => line28(info),
+      "0.line.29": (_, info) => partI(info, tentativeProfit),
+      "0.line.31": (_, info) => line31(info),
     },
     formatters: {
       // The SSN renders with dashes; this form has no comb widget.
@@ -92,6 +153,12 @@ export function register(): void {
       "0.line.f_other_specify": OTHER_METHOD,
       "0.line.1_statutory_employee": STATUTORY_EMPLOYEE,
       "0.line.4": COST_OF_GOODS_SOLD,
+      "0.line.27b": OTHER_EXPENSES,
+      "0.line.30_home_sq_ft": HOME_OFFICE,
+      "0.line.30_business_sq_ft": HOME_OFFICE,
+      "0.line.30": HOME_OFFICE,
+      "0.line.32a": AT_RISK,
+      "0.line.32b": AT_RISK,
       "0.line.j_yes": LINE_J,
       "0.line.j_no": LINE_J,
     },

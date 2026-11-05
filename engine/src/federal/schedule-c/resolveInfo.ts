@@ -33,9 +33,13 @@ export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInf
       "schedule-c": missingInputs(
         Object.fromEntries([
           ...malformedKeys.map((key) => [key, undefined]),
-          // Line 5 waits for whether the business sells goods (Part III): ask for the fact again.
+          // Line 5 waits for "sells goods" (Part III) and line 31 for line G: ask for the fact again.
           ...businesses
-            .filter((business) => business.value.sellsGoods === undefined)
+            .filter(
+              (business) =>
+                business.value.sellsGoods === undefined ||
+                business.value.materiallyParticipated === undefined,
+            )
             .map((business) => [business.key, undefined]),
         ]),
       ),
