@@ -151,7 +151,7 @@ export const FEDERAL_FORMS: FormSpec[] = [
     relativeDir: "federal/8606",
     register: registerForm8606,
     copies: {
-      count: (info) => info?.form8606Persons?.length ?? 1,
+      count: (info) => info?.form8606Filers?.length ?? 1,
       select: (info, index) => info && { ...info, form8606CopyIndex: index },
     },
   }),

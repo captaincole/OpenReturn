@@ -55,6 +55,21 @@ export function makeRetirementDistributionFactKey(
   return `payer.${payerSlug}.distributions.${distributionId}`;
 }
 
+export function isRetirementDistributionFactKey(key: string): boolean {
+  return R_KEY_RE.test(key);
+}
+
+/* Roth IRA distributions (1099-R inst.): the payer leaves box 7 IRA/SEP/SIMPLE blank for them. */
+export const ROTH_IRA_CODES = ["J", "Q", "T"] as const;
+
+/* Box 7 holds up to two codes of one character each, e.g. "4G". */
+export function hasDistributionCode(
+  distribution: RetirementDistributionFactValue,
+  codes: readonly string[],
+): boolean {
+  return codes.some((code) => distribution.box7.includes(code));
+}
+
 export function isRetirementDistributionFact(fact: TaxFactRow): boolean {
   return fact.category === R_CATEGORY && R_KEY_RE.test(fact.key);
 }

@@ -24,7 +24,7 @@ const CREATED_AT = "2026-11-04T00:00:00Z";
 const ANSWERS = "TaxCalcBench answers (input/remaining_data.json)";
 
 const fact = (category: string, key: string, value: unknown, sourceNote: string): TaxFactRow => ({
-  id: `f-${key.replace(/[^a-z0-9]+/gi, "-")}`,
+  id: `f-${key}`,
   userId: TCB_US_003_USER_ID,
   taxYear: TCB_US_003_TAX_YEAR,
   category,
