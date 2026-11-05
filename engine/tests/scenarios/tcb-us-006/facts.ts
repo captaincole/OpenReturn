@@ -80,11 +80,12 @@ const rideshare: BusinessFactValue = {
   activity: "Rideshare",
   code: "721310",
   name: "Rideshare",
-  ein: PAYER_TIN,
+  ein: "12-3456789", // business_ein (the answers' fake number; the payers' forms use it too)
   address: { street: "20100 S western ave", city: "torrance", state: "FL", zip: "33033" },
   accountingMethod: "cash",
   materiallyParticipated: true,
   paymentsRequire1099: false,
+  sellsGoods: false, // Not in the answers: a rideshare sells a service; the key has no Part III.
   grossReceipts: 100000,
   specifiedService: false,
 };

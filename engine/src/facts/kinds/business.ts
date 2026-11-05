@@ -54,6 +54,8 @@ export interface BusinessFactValue {
   startedThisYear?: boolean;
   /* Line I: made payments that would require Form 1099. */
   paymentsRequire1099?: boolean;
+  /* Part III: the business sells goods or keeps inventory (cost of goods sold, line 4). */
+  sellsGoods?: boolean;
   /* Line 1. */
   grossReceipts: number;
   /* Line 2. */

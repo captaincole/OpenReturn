@@ -146,7 +146,51 @@ const FORM_8995A: Partial<ExpectedResults> = {
   },
 };
 
+/* No expenses: the key leaves line 28 blank. */
+const SCHEDULE_C: Partial<ExpectedResults> = {
+  engineFields: {
+    "schedule-c.0.line.1": 100000, // TotalGrossReceiptsAmt
+    "schedule-c.0.line.3": 100000, // NetGrossReceiptsAmt
+    "schedule-c.0.line.5": 100000, // GrossProfitAmt
+    "schedule-c.0.line.7": 100000, // GrossIncomeAmt
+    "schedule-c.0.line.29": 100000, // TentativeProfitOrLossAmt
+    "schedule-c.0.line.31": 100000, // NetProfitOrLossAmt
+  },
+  renderedText: {
+    "schedule-c.0.header.name": "Haizen Rath",
+    "schedule-c.0.line.a_principal_business": "Rideshare",
+    "schedule-c.0.line.b_business_code": "721310",
+    "schedule-c.0.line.c_business_name": "Rideshare",
+    "schedule-c.0.line.e_business_address": "20100 S western ave",
+  },
+  renderedChecked: [
+    "schedule-c.0.line.f_cash",
+    "schedule-c.0.line.g_yes",
+    "schedule-c.0.line.i_no",
+  ],
+};
+
+const SCHEDULE_SE: Partial<ExpectedResults> = {
+  engineFields: {
+    "schedule-se.0.line.2": 100000, // NetNonFarmProfitLossAmt
+    "schedule-se.0.line.3": 100000, // SETotalNetEarningsOrLossAmt
+    "schedule-se.0.line.4a": 92350, // MinimumProfitForSETaxAmt
+    "schedule-se.0.line.4c": 92350, // CombinedSEAmt
+    "schedule-se.0.line.6": 92350, // CombinedSEAndChurchWagesAmt
+    "schedule-se.0.line.8a": 80000, // SSTWagesRRTCompAmt
+    "schedule-se.0.line.8d": 80000, // TotalWagesAndUnreportedTipsAmt
+    "schedule-se.0.line.9": 96100, // AllowableSEAmt
+    "schedule-se.0.line.10": 11451, // TaxBaseAmt
+    "schedule-se.0.line.11": 2678, // SEBaseAmt
+    "schedule-se.0.line.12": 14129, // SelfEmploymentTaxAmt
+    "schedule-se.0.line.13": 7065, // DeductibleSelfEmploymentTaxAmt
+  },
+  renderedText: { "schedule-se.0.header.name": "Haizen Rath" },
+};
+
 const EXPECTED: Record<string, Partial<ExpectedResults>> = {
+  "schedule-c": SCHEDULE_C,
+  "schedule-se": SCHEDULE_SE,
   "form-1040": FORM_1040,
   "schedule-1": SCHEDULE_1,
   "schedule-2": SCHEDULE_2,

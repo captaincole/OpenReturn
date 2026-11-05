@@ -58,6 +58,10 @@ export const recordBusiness = createTool({
     materiallyParticipated: z.boolean().optional().describe("Line G"),
     startedThisYear: z.boolean().optional().describe("Line H"),
     paymentsRequire1099: z.boolean().optional().describe("Line I"),
+    sellsGoods: z
+      .boolean()
+      .optional()
+      .describe("Does the business sell goods or keep inventory? (cost of goods sold, Part III)"),
     grossReceipts: amount.describe("Line 1: gross receipts or sales"),
     returnsAndAllowances: amount.optional().describe("Line 2"),
     otherIncome: amount.optional().describe("Line 6"),
