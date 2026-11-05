@@ -18,7 +18,10 @@ function fromScheduleB(value: unknown): number | undefined {
   return typeof value === "number" ? value : undefined;
 }
 
-// MANUAL EDIT: line 4b adds the Form 8606 filer's lines 15c and 18 (Part III, line 25c, is not modeled).
+/*
+ * MANUAL EDIT: line 4b adds the Form 8606 filer's line 18, and line 15c when
+ * Part I applies (Part III, line 25c, is not modeled).
+ */
 function line4b(form: FormAccessor<Form1040>, info: Form1040FilingInfo): number | undefined {
   const ira = info.iraDistributions;
   if (ira?.taxable === undefined) return undefined;
@@ -28,10 +31,11 @@ function line4b(form: FormAccessor<Form1040>, info: Form1040FilingInfo): number 
   const line15c = form["form-8606.1.line.15c_taxable_traditional_distributions"];
   const line16 = form["form-8606.1.line.16_net_amount_converted"];
   const line18 = form["form-8606.1.line.18_taxable_conversion_amount"];
-  if (typeof line15c !== "number") return undefined;
+  if (ira.form8606PartI && typeof line15c !== "number") return undefined;
   if (typeof line16 === "number" && typeof line18 !== "number") return undefined;
   // 8606 inst. line 18: zero or less is not included on line 4b.
-  return roundDollars(sum(ira.taxable, line15c, atLeast(0, line18)));
+  const fromPartI = ira.form8606PartI ? line15c : 0;
+  return roundDollars(sum(ira.taxable, fromPartI, atLeast(0, line18 ?? 0)));
 }
 
 export function register(): void {

@@ -6,11 +6,10 @@ import {
   isInterestFactKey,
   isRetirementDistributionFactKey,
   isSocialSecurityFactKey,
-  makeTraditionalIraFactKey,
+  readTraditionalIraFact,
   type IraOwner,
   type RetirementDistributionFactValue,
   type SocialSecurityFactValue,
-  type TraditionalIraFactValue,
 } from "../../facts/index.js";
 import {
   filingStatusOf,
@@ -67,11 +66,12 @@ const ROLLOVER_CODES = ["G", "H"];
 
 /*
  * Code Q is not taxable. Codes J and T take the taxable part from Form 8606
- * Part III, which is not modeled, so box 2a is not used.
+ * Part III, which is not modeled, so box 2a is not used. Code Y, a qualified
+ * charitable distribution, is not modeled (1040 inst., lines 4a/4b, Exception 3).
  */
 export function rowTaxable(distribution: RetirementDistributionFactValue): number | undefined {
   if (distribution.box7.includes("Q")) return 0;
-  if (hasDistributionCode(distribution, ["J", "T"])) return undefined;
+  if (hasDistributionCode(distribution, ["J", "T", "Y"])) return undefined;
   if (distribution.box2a === undefined && distribution.box2b?.taxableAmountNotDetermined === true)
     return undefined;
   return distribution.box2a ?? distribution.box1;
@@ -103,23 +103,26 @@ export function traditionalTaxable(
 }
 
 /*
- * Exception 2: a person who files Form 8606 takes the traditional IRA part
- * from it (the line 4b binding).
+ * Exception 2: a person who files Form 8606 takes the taxable part from it
+ * (the line 4b binding): line 18 for a Roth conversion, and line 15c for the
+ * other distributions when Part I applies. Without Part I there is no basis
+ * to share out, so those distributions stay taxable as the 1099-Rs show.
  */
 function iraLine(inputs: ResolverInputs, rows: RetirementDistributionFactValue[]): IraLine {
-  const filers = new Set(form8606Filers(inputs).map((holder) => holder.owner));
-  const rolledOver = (owner: IraOwner) =>
-    (inputs.factByKey.get(makeTraditionalIraFactKey(owner)) as TraditionalIraFactValue | undefined)
-      ?.rolledOver ?? 0;
-  // A Form 8606 filer's traditional rows come from that form, so none are summed here.
+  const filers = form8606Filers(inputs);
+  const filerOf = (owner: IraOwner) => filers.find((holder) => holder.owner === owner);
   const ownerTaxable = (owner: IraOwner): number | undefined => {
     const own = rows.filter((row) => (row.owner ?? "taxpayer") === owner);
     const roth = own.filter(isRothIra).map(rowTaxable);
-    const traditional = filers.has(owner)
+    const ira = readTraditionalIraFact(inputs.factByKey, owner);
+    const filer = filerOf(owner);
+    // A conversion is taken off the rows here, because line 18 gives its taxable part.
+    const notOnRows = (ira?.rolledOver ?? 0) + (filer ? (ira?.convertedToRoth ?? 0) : 0);
+    const traditional = filer?.partI
       ? 0
       : traditionalTaxable(
           own.filter((row) => !isRothIra(row)),
-          rolledOver(owner),
+          notOnRows,
         );
     if ([...roth, traditional].includes(undefined)) return undefined;
     return sum(...roth, traditional);
@@ -130,8 +133,11 @@ function iraLine(inputs: ResolverInputs, rows: RetirementDistributionFactValue[]
     taxable: perOwner.includes(undefined) ? undefined : sum(...perOwner),
     rollover:
       rows.some((distribution) => hasDistributionCode(distribution, ROLLOVER_CODES)) ||
-      OWNERS.some((owner) => rolledOver(owner) > 0),
-    form8606Filers: filers.size,
+      OWNERS.some(
+        (owner) => (readTraditionalIraFact(inputs.factByKey, owner)?.rolledOver ?? 0) > 0,
+      ),
+    form8606Filers: filers.length,
+    form8606PartI: filers.length === 1 && filers[0].partI,
   };
 }
 

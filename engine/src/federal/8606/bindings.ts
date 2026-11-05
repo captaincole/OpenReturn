@@ -1,7 +1,7 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm, type FormAccessor } from "../../defineForm.js";
-import { atLeast, roundDollars } from "../../money.js";
+import { roundDollars } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { Form8606FilingInfo, IraHolder } from "./filingInfo.js";
 import type { Form8606 } from "./types.js";
@@ -24,31 +24,16 @@ export function holderOf(info: Form8606FilingInfo): IraHolder | undefined {
   return info.form8606Filers?.[info.form8606CopyIndex ?? 0];
 }
 
-/* Line 7: distributions less rollovers and Roth conversions, cents kept. */
-function distributions(person: IraHolder): number {
-  const ira = person.ira ?? {};
-  return atLeast(
-    0,
-    person.iraDistributionsGross - (ira.rolledOver ?? 0) - (ira.convertedToRoth ?? 0),
-  );
-}
-
-/* The Part I bullets on the form: each needs basis from 2025 or an earlier year. */
-function partIApplies(info: Form8606FilingInfo): boolean | undefined {
-  const person = holderOf(info);
-  const ira = person?.ira;
-  if (!person || !ira) return undefined;
-  const contributions = ira.nondeductibleContributions ?? 0;
-  const basis = contributions + (ira.basisPriorYears ?? 0);
-  const partialConversion = (ira.convertedToRoth ?? 0) > 0 && (ira.yearEndValue ?? 0) > 0;
-  return contributions > 0 || (basis > 0 && (distributions(person) > 0 || partialConversion));
+/* The Part I bullets on the form (the resolver decides). */
+function partIApplies(info: Form8606FilingInfo): boolean {
+  return holderOf(info)?.partI === true;
 }
 
 /* The question after line 3: a distribution or a Roth conversion means lines 4–13. */
 function distributedOrConverted(info: Form8606FilingInfo): boolean {
-  const person = holderOf(info);
-  if (!person || partIApplies(info) !== true) return false;
-  return distributions(person) > 0 || (person.ira?.convertedToRoth ?? 0) > 0;
+  const holder = holderOf(info);
+  if (!holder?.partI) return false;
+  return holder.line7 > 0 || (holder.ira?.convertedToRoth ?? 0) > 0;
 }
 
 function converted(info: Form8606FilingInfo): number {
@@ -95,12 +80,12 @@ export function register(): void {
         const line2 = form["0.line.2_total_traditional_basis"];
         return line1 === undefined || line2 === undefined ? undefined : line1 + line2;
       },
-      // No fact splits line 1 by payment date; with no line 1 there is nothing to split.
-      "0.line.4_contributions_made_in_2026": (form, info) =>
-        distributedOrConverted(info) &&
-        form["0.line.1_nondeductible_traditional_contributions"] === 0
-          ? 0
-          : undefined,
+      // irs-8606-inst-2025::sec::line-4::b01: the part of line 1 paid January 1 to April 15, 2026.
+      "0.line.4_contributions_made_in_2026": (form, info) => {
+        if (!distributedOrConverted(info)) return undefined;
+        if (form["0.line.1_nondeductible_traditional_contributions"] === 0) return 0;
+        return roundDollars(holderOf(info)?.ira?.contributionsMadeIn2026);
+      },
       "0.line.5_basis_less_2026_contributions": (form) => {
         const line3 = form["0.line.3_total_contributions_and_basis"];
         const line4 = form["0.line.4_contributions_made_in_2026"];
@@ -114,10 +99,8 @@ export function register(): void {
           : undefined;
       },
       "0.line.7_traditional_ira_distributions": (_, info) => {
-        const person = holderOf(info);
-        return person && distributedOrConverted(info)
-          ? roundDollars(distributions(person))
-          : undefined;
+        const holder = holderOf(info);
+        return holder && distributedOrConverted(info) ? roundDollars(holder.line7) : undefined;
       },
       "0.line.8_net_roth_conversion_amount": (_, info) =>
         distributedOrConverted(info) ? roundDollars(converted(info)) : undefined,

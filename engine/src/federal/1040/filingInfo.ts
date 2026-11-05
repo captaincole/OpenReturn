@@ -35,8 +35,13 @@ export interface RetirementLine {
   rollover: boolean;
 }
 
-/** `taxable` leaves out the traditional IRA rows of a Form 8606 filer: line 4b adds that form. */
+/**
+ * `taxable` leaves out a Form 8606 Part I filer's traditional IRA rows (line 4b
+ * adds line 15c) and every filer's Roth conversions (line 4b adds line 18).
+ */
 export interface IraLine extends RetirementLine {
   /** People who file Form 8606 (0, 1 or 2). */
   form8606Filers: number;
+  /** The one filer's traditional distributions come from Form 8606 line 15c. */
+  form8606PartI: boolean;
 }
