@@ -70,6 +70,14 @@ export const recordBusiness = createTool({
       .boolean()
       .optional()
       .describe("A specified service business (health, law, consulting, etc.), for Form 8995-A"),
+    w2WagesPaid: amount
+      .optional()
+      .describe("Form 8995-A line 4: W-2 wages the business paid its employees; 0 if none"),
+    qualifiedPropertyUbia: amount
+      .optional()
+      .describe(
+        "Form 8995-A line 7: original cost basis of business property still in its depreciable period (10 years, or the recovery period if longer); 0 if none",
+      ),
     sourceNote: z.string().default("Business answers stated by the user"),
   }),
   outputSchema: z.object({ factKey: z.string() }),

@@ -6,18 +6,28 @@
 
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
-import type { Form8995AFilingInfo } from "./filingInfo.js";
-import { netCapitalGain } from "./lines.js";
+import type { Form8995AFilingInfo, QbiBusiness } from "./filingInfo.js";
+import { netCapitalGain, QBI_LIMITS } from "./lines.js";
 import type { Form8995A } from "./types.js";
 
-/* 2025 QBI threshold and phase-in range (8995-A lines 21 and 23). */
-const QBI_LIMITS: Record<string, { threshold: number; range: number }> = {
-  single: { threshold: 197300, range: 50000 },
-  married_filing_separately: { threshold: 197300, range: 50000 },
-  head_of_household: { threshold: 197300, range: 50000 },
-  qualifying_surviving_spouse: { threshold: 197300, range: 50000 },
-  married_filing_jointly: { threshold: 394600, range: 100000 },
-};
+/* Part II rates: lines 3, 5, 6 and 8. */
+const QBI_RATE = 0.2;
+const WAGE_RATE = 0.5;
+const WAGE_WITH_UBIA_RATE = 0.25;
+const UBIA_RATE = 0.025;
+
+/* Line 24: the ratio to five decimal places, as the answer key carries it; the instructions give no rounding rule. */
+const PHASE_IN_SCALE = 100000;
+
+const COLUMNS = ["a", "b", "c"] as const;
+type Column = (typeof COLUMNS)[number];
+
+const AGGREGATION =
+  "No fact or decision elects to aggregate businesses (Schedule B (Form 8995-A)); each business is figured on its own.";
+const PATRON =
+  "No fact says whether the business is a patron of an agricultural or horticultural cooperative (Form 1099-PATR).";
+const PATRON_REDUCTION =
+  "No fact says whether the business is a cooperative patron, so there is no Schedule D (Form 8995-A) line 6.";
 
 type Read = Record<string, unknown>;
 
@@ -25,27 +35,199 @@ function qbiLimits(info: Form8995AFilingInfo) {
   return info.filingStatus ? QBI_LIMITS[info.filingStatus] : undefined;
 }
 
-function taxableIncomeBeforeQbi(form: Read): number {
-  return sum(
-    form["form-1040.line.11a"],
-    -sum(form["form-1040.line.12e"]),
-    -sum(form["form-1040.line.13b"]),
-  );
+const num = (value: unknown) => (typeof value === "number" ? value : undefined);
+
+/*
+ * irs-8995a-inst-2025::sec::specific-instructions::b01: 1040 line 11a minus lines
+ * 12e and 13b. It waits for 12e, and for 13b while Schedule 1-A must be filed, as
+ * 1040 line 14 does (awaitsSchedule1A); a blank is not a zero.
+ */
+function taxableIncomeBeforeQbi(form: Read, info: Form8995AFilingInfo): number | undefined {
+  const line11a = num(form["form-1040.line.11a"]);
+  const line12e = num(form["form-1040.line.12e"]);
+  const line13b = num(form["form-1040.line.13b"]);
+  const awaits13b = info.mustFile?.["schedule-1-a"]?.value === true && line13b === undefined;
+  if (line11a === undefined || line12e === undefined || awaits13b) return undefined;
+  return line11a - line12e - (line13b ?? 0);
+}
+
+const percentOf = (value: unknown, rate: number) =>
+  typeof value === "number" ? roundDollars(value * rate) : undefined;
+
+function businessIn(info: Form8995AFilingInfo, column: Column): QbiBusiness | undefined {
+  return info.qbiBusinesses?.[COLUMNS.indexOf(column)];
+}
+
+const businessColumns = (info: Form8995AFilingInfo) =>
+  COLUMNS.slice(0, info.qbiBusinesses?.length ?? 0);
+
+// Undefined while 1040 line 11a is blank.
+function aboveThreshold(form: Read, info: Form8995AFilingInfo): boolean | undefined {
+  const limits = qbiLimits(info);
+  const income = taxableIncomeBeforeQbi(form, info);
+  if (!limits || income === undefined) return undefined;
+  return income > limits.threshold;
 }
 
 /*
- * 8995-A instr., Part III: only when taxable income is in the phase-in
- * range and line 10 is less than line 3.
+ * Part III for one column (part-iii-phased-in-reduction::b01): income in the
+ * phase-in range and line 10 less than line 3. A column with line 10 at or above
+ * line 3 has no reduction (line 11 = line 3), so it skips Part III.
  */
-function inPartIII<T>(form: Read, info: Form8995AFilingInfo, value: () => T): T | undefined {
+function partIIIColumn(form: Read, info: Form8995AFilingInfo, column: Column): boolean | undefined {
   const limits = qbiLimits(info);
-  if (!limits) return undefined;
-  const income = taxableIncomeBeforeQbi(form);
-  if (income <= limits.threshold || income > limits.threshold + limits.range) return undefined;
-  const limited = (["a", "b", "c"] as const).some(
-    (column) => sum(form[`0.line.10_${column}`]) < sum(form[`0.line.3_${column}`]),
-  );
-  return limited ? value() : undefined;
+  const income = taxableIncomeBeforeQbi(form, info);
+  if (!limits || income === undefined) return undefined;
+  if (income <= limits.threshold || income > limits.threshold + limits.range) return false;
+  const line3 = num(form[`0.line.3_${column}`]);
+  const line10Value = num(form[`0.line.10_${column}`]);
+  return line3 === undefined || line10Value === undefined ? undefined : line10Value < line3;
+}
+
+// Lines 20–24: once any column completes Part III.
+function partIII(form: Read, info: Form8995AFilingInfo): boolean | undefined {
+  const columns = businessColumns(info).map((column) => partIIIColumn(form, info, column));
+  if (columns.includes(true)) return true;
+  return columns.includes(undefined) ? undefined : false;
+}
+
+function inPartIII<T>(form: Read, info: Form8995AFilingInfo, value: () => T): T | undefined {
+  return partIII(form, info) === true ? value() : undefined;
+}
+
+function inPartIIIColumn(
+  form: Read,
+  info: Form8995AFilingInfo,
+  column: Column,
+  value: () => number | undefined,
+): number | undefined {
+  return partIIIColumn(form, info, column) === true ? value() : undefined;
+}
+
+const difference = (minuend: unknown, subtrahend: unknown) =>
+  typeof minuend === "number" && typeof subtrahend === "number" ? minuend - subtrahend : undefined;
+
+// Line 24 scaled by PHASE_IN_SCALE: line 22 / line 23, rounded.
+function phaseInScaled(form: Read): number | undefined {
+  const line22 = num(form["1.line.22"]);
+  const line23 = num(form["1.line.23"]);
+  return line22 === undefined || !line23
+    ? undefined
+    : roundDollars((line22 * PHASE_IN_SCALE) / line23);
+}
+
+// The form prints "%" after the box, so line 24 is a percentage.
+function line24(form: Read): string | undefined {
+  const scaled = phaseInScaled(form);
+  return scaled === undefined ? undefined : String((scaled * 100) / PHASE_IN_SCALE);
+}
+
+function line25(form: Read, info: Form8995AFilingInfo, column: Column): number | undefined {
+  return inPartIIIColumn(form, info, column, () => {
+    const line19 = num(form[`1.line.19_${column}`]);
+    const scaled = phaseInScaled(form);
+    return line19 === undefined || scaled === undefined
+      ? undefined
+      : roundDollars((line19 * scaled) / PHASE_IN_SCALE);
+  });
+}
+
+/*
+ * The deductible part of SE tax attributable to the business (QBI, irs-8995a-inst-2025::sec::determining-your-qbi-deduction::b15).
+ * A spouse's Schedule SE is not modeled, and no corpus rule splits line 13 among several businesses.
+ */
+function selfEmploymentDeduction(
+  form: Read,
+  info: Form8995AFilingInfo,
+  business: QbiBusiness,
+): number | undefined {
+  if (business.owner === "spouse") return undefined;
+  if (info.qbiScheduleSEFiled === false) return 0;
+  if (!business.ownersOnlyBusiness || info.qbiScheduleSEFiled !== true) return undefined;
+  return num(form["schedule-se.0.line.13"]);
+}
+
+/*
+ * Line 2: Schedule C line 31 less the deductible part of SE tax. No facts give SE
+ * health insurance, SE retirement contributions or a prior-year qualified business
+ * loss carryforward (Schedule C (Form 8995-A)); line 2 counts none.
+ */
+function line2(form: Read, info: Form8995AFilingInfo, column: Column): number | undefined {
+  const business = businessIn(info, column);
+  if (business?.netProfit === undefined) return undefined;
+  // A loss (or a blank line 31) anywhere needs Schedule C (Form 8995-A) loss netting, not modeled.
+  if (info.qbiBusinesses?.some((other) => other.netProfit === undefined)) return undefined;
+  // An SSTB above the threshold needs Schedule A (Form 8995-A), not modeled.
+  if (business.specifiedService !== false && aboveThreshold(form, info) !== false) return undefined;
+  const deduction = selfEmploymentDeduction(form, info, business);
+  return deduction === undefined ? undefined : business.netProfit - deduction;
+}
+
+/* Lines 4 and 7: zero when line 2 is zero or less (line-4-3::b01, line-7::b02). */
+function limitInput(form: Read, column: Column, amount: number | undefined): number | undefined {
+  const line2Value = num(form[`0.line.2_${column}`]);
+  if (amount === undefined || line2Value === undefined) return undefined;
+  return line2Value <= 0 ? 0 : roundDollars(amount);
+}
+
+function line9(form: Read, column: Column): number | undefined {
+  const line6 = num(form[`0.line.6_${column}`]);
+  const line8 = num(form[`0.line.8_${column}`]);
+  return line6 === undefined || line8 === undefined ? undefined : line6 + line8;
+}
+
+function line10(form: Read, column: Column): number | undefined {
+  const line5 = num(form[`0.line.5_${column}`]);
+  const line9Value = num(form[`0.line.9_${column}`]);
+  if (line5 === undefined || line9Value === undefined) return undefined;
+  return Math.max(line5, line9Value);
+}
+
+function line11(form: Read, column: Column): number | undefined {
+  const line3 = num(form[`0.line.3_${column}`]);
+  const line10Value = num(form[`0.line.10_${column}`]);
+  return line3 === undefined || line10Value === undefined
+    ? undefined
+    : Math.min(line3, line10Value);
+}
+
+/*
+ * Line 13: the greater of lines 11 and 12. At or below the threshold the QBI is not
+ * reduced (irs-8995a-inst-2025::sec::determining-your-qbi-deduction::b01), so line 3.
+ * Above it, line 12 counts only when the column completes Part III.
+ */
+function line13(form: Read, info: Form8995AFilingInfo, column: Column): number | undefined {
+  const line3 = num(form[`0.line.3_${column}`]);
+  const above = aboveThreshold(form, info);
+  if (line3 === undefined || above === undefined) return undefined;
+  if (!above) return line3;
+  const line11Value = num(form[`0.line.11_${column}`]);
+  const phasedIn = partIIIColumn(form, info, column);
+  if (line11Value === undefined || phasedIn === undefined) return undefined;
+  if (!phasedIn) return line11Value;
+  const line12 = num(form[`0.line.12_${column}`]);
+  return line12 === undefined ? undefined : Math.max(line11Value, line12);
+}
+
+function line15(form: Read, column: Column): number | undefined {
+  const line13Value = num(form[`0.line.13_${column}`]);
+  if (line13Value === undefined) return undefined;
+  return atLeast(0, line13Value - (num(form[`0.line.14_${column}`]) ?? 0));
+}
+
+// Four or more businesses need an attached statement (line 16 instructions), not modeled.
+function line16(form: Read, info: Form8995AFilingInfo): number | undefined {
+  const count = info.qbiBusinesses?.length ?? 0;
+  if (count === 0 || count > COLUMNS.length) return undefined;
+  const amounts = COLUMNS.slice(0, count).map((column) => num(form[`0.line.15_${column}`]));
+  return amounts.every((amount) => amount !== undefined) ? sum(...amounts) : undefined;
+}
+
+// Line 1(d): the EIN, else the owner's SSN (line 1 instructions).
+function tin(info: Form8995AFilingInfo, column: Column): string | undefined {
+  const business = businessIn(info, column);
+  if (!business) return undefined;
+  return business.ein ?? (business.owner === "spouse" ? info.spouseSSN : info.taxpayerSSN);
 }
 
 export function register(): void {
@@ -57,13 +239,9 @@ export function register(): void {
         const value = form["1.line.30"];
         return typeof value === "number" ? roundDollars(value * 0.2) : undefined;
       },
-      "1.line.33": (form) => {
-        const agi = form["form-1040.line.11b"];
-        if (typeof agi !== "number") return undefined;
-        return atLeast(
-          0,
-          sum(agi, -sum(form["form-1040.line.12e"]), -sum(form["form-1040.line.13b"])),
-        );
+      "1.line.33": (form, info) => {
+        const income = taxableIncomeBeforeQbi(form, info);
+        return income === undefined ? undefined : atLeast(0, income);
       },
       "1.line.34": (form) => {
         const num = (value: unknown) => (typeof value === "number" ? value : undefined);
@@ -86,162 +264,141 @@ export function register(): void {
           : undefined;
       },
       "0.header.taxpayer_id": (_, info) => info.taxpayerSSN,
-      "0.line.9_a": (form) => sum(form["0.line.6_a"], form["0.line.8_a"]),
-      "0.line.9_b": (form) => sum(form["0.line.6_b"], form["0.line.8_b"]),
-      "0.line.9_c": (form) => sum(form["0.line.6_c"], form["0.line.8_c"]),
-      "0.line.12_a": (form) => sum(form["1.line.26_a"]),
-      "0.line.12_b": (form) => sum(form["1.line.26_b"]),
-      "0.line.12_c": (form) => sum(form["1.line.26_c"]),
-      "0.line.15_a": (form) =>
-        atLeast(
-          0,
-          sum(form["0.line.13_a"], form["0.line.14_a"] === undefined ? 0 : -form["0.line.14_a"]),
-        ),
-      "0.line.15_b": (form) =>
-        atLeast(
-          0,
-          sum(form["0.line.13_b"], form["0.line.14_b"] === undefined ? 0 : -form["0.line.14_b"]),
-        ),
-      "0.line.15_c": (form) =>
-        atLeast(
-          0,
-          sum(form["0.line.13_c"], form["0.line.14_c"] === undefined ? 0 : -form["0.line.14_c"]),
-        ),
-      "0.line.16": (form) => sum(form["0.line.15_a"], form["0.line.15_b"], form["0.line.15_c"]),
-      // MANUAL EDIT: Part III fills only through inPartIII. REIT/PTP-only filers skip Parts I–III.
-      "1.line.17_a": (form, info) => inPartIII(form, info, () => sum(form["0.line.3_a"])),
-      "1.line.17_b": (form, info) => inPartIII(form, info, () => sum(form["0.line.3_b"])),
-      "1.line.17_c": (form, info) => inPartIII(form, info, () => sum(form["0.line.3_c"])),
-      "1.line.18_a": (form, info) => inPartIII(form, info, () => sum(form["0.line.10_a"])),
-      "1.line.18_b": (form, info) => inPartIII(form, info, () => sum(form["0.line.10_b"])),
-      "1.line.18_c": (form, info) => inPartIII(form, info, () => sum(form["0.line.10_c"])),
+      // MANUAL EDIT: Parts I and II, one column per Schedule C business (info.qbiBusinesses).
+      "0.part1.business_a_name": (_, info) => businessIn(info, "a")?.name,
+      "0.part1.business_a_specified_service": (_, info) => businessIn(info, "a")?.specifiedService,
+      "0.part1.business_a_tin": (_, info) => tin(info, "a"),
+      "0.part1.business_b_name": (_, info) => businessIn(info, "b")?.name,
+      "0.part1.business_b_specified_service": (_, info) => businessIn(info, "b")?.specifiedService,
+      "0.part1.business_b_tin": (_, info) => tin(info, "b"),
+      "0.part1.business_c_name": (_, info) => businessIn(info, "c")?.name,
+      "0.part1.business_c_specified_service": (_, info) => businessIn(info, "c")?.specifiedService,
+      "0.part1.business_c_tin": (_, info) => tin(info, "c"),
+      "0.line.2_a": (form, info) => line2(form, info, "a"),
+      "0.line.2_b": (form, info) => line2(form, info, "b"),
+      "0.line.2_c": (form, info) => line2(form, info, "c"),
+      "0.line.3_a": (form) => percentOf(form["0.line.2_a"], QBI_RATE),
+      "0.line.3_b": (form) => percentOf(form["0.line.2_b"], QBI_RATE),
+      "0.line.3_c": (form) => percentOf(form["0.line.2_c"], QBI_RATE),
+      "0.line.4_a": (form, info) => limitInput(form, "a", businessIn(info, "a")?.w2WagesPaid),
+      "0.line.4_b": (form, info) => limitInput(form, "b", businessIn(info, "b")?.w2WagesPaid),
+      "0.line.4_c": (form, info) => limitInput(form, "c", businessIn(info, "c")?.w2WagesPaid),
+      "0.line.5_a": (form) => percentOf(form["0.line.4_a"], WAGE_RATE),
+      "0.line.5_b": (form) => percentOf(form["0.line.4_b"], WAGE_RATE),
+      "0.line.5_c": (form) => percentOf(form["0.line.4_c"], WAGE_RATE),
+      "0.line.6_a": (form) => percentOf(form["0.line.4_a"], WAGE_WITH_UBIA_RATE),
+      "0.line.6_b": (form) => percentOf(form["0.line.4_b"], WAGE_WITH_UBIA_RATE),
+      "0.line.6_c": (form) => percentOf(form["0.line.4_c"], WAGE_WITH_UBIA_RATE),
+      "0.line.7_a": (form, info) =>
+        limitInput(form, "a", businessIn(info, "a")?.qualifiedPropertyUbia),
+      "0.line.7_b": (form, info) =>
+        limitInput(form, "b", businessIn(info, "b")?.qualifiedPropertyUbia),
+      "0.line.7_c": (form, info) =>
+        limitInput(form, "c", businessIn(info, "c")?.qualifiedPropertyUbia),
+      "0.line.8_a": (form) => percentOf(form["0.line.7_a"], UBIA_RATE),
+      "0.line.8_b": (form) => percentOf(form["0.line.7_b"], UBIA_RATE),
+      "0.line.8_c": (form) => percentOf(form["0.line.7_c"], UBIA_RATE),
+      "0.line.9_a": (form) => line9(form, "a"),
+      "0.line.9_b": (form) => line9(form, "b"),
+      "0.line.9_c": (form) => line9(form, "c"),
+      "0.line.10_a": (form) => line10(form, "a"),
+      "0.line.10_b": (form) => line10(form, "b"),
+      "0.line.10_c": (form) => line10(form, "c"),
+      "0.line.11_a": (form) => line11(form, "a"),
+      "0.line.11_b": (form) => line11(form, "b"),
+      "0.line.11_c": (form) => line11(form, "c"),
+      // Blank until Part III fills line 26: a 0 here would commit before it.
+      "0.line.12_a": (form) => num(form["1.line.26_a"]),
+      "0.line.12_b": (form) => num(form["1.line.26_b"]),
+      "0.line.12_c": (form) => num(form["1.line.26_c"]),
+      "0.line.13_a": (form, info) => line13(form, info, "a"),
+      "0.line.13_b": (form, info) => line13(form, info, "b"),
+      "0.line.13_c": (form, info) => line13(form, info, "c"),
+      "0.line.15_a": (form) => line15(form, "a"),
+      "0.line.15_b": (form) => line15(form, "b"),
+      "0.line.15_c": (form) => line15(form, "c"),
+      "0.line.16": (form, info) => line16(form, info),
+      // MANUAL EDIT: Part III per column through partIIIColumn. REIT/PTP-only filers skip Parts I–III.
+      "1.line.17_a": (form, info) =>
+        inPartIIIColumn(form, info, "a", () => num(form["0.line.3_a"])),
+      "1.line.17_b": (form, info) =>
+        inPartIIIColumn(form, info, "b", () => num(form["0.line.3_b"])),
+      "1.line.17_c": (form, info) =>
+        inPartIIIColumn(form, info, "c", () => num(form["0.line.3_c"])),
+      "1.line.18_a": (form, info) =>
+        inPartIIIColumn(form, info, "a", () => num(form["0.line.10_a"])),
+      "1.line.18_b": (form, info) =>
+        inPartIIIColumn(form, info, "b", () => num(form["0.line.10_b"])),
+      "1.line.18_c": (form, info) =>
+        inPartIIIColumn(form, info, "c", () => num(form["0.line.10_c"])),
       "1.line.19_a": (form, info) =>
-        inPartIII(form, info, () => sum(form["1.line.17_a"], -sum(form["1.line.18_a"]))),
+        inPartIIIColumn(form, info, "a", () =>
+          difference(form["1.line.17_a"], form["1.line.18_a"]),
+        ),
       "1.line.19_b": (form, info) =>
-        inPartIII(form, info, () => sum(form["1.line.17_b"], -sum(form["1.line.18_b"]))),
+        inPartIIIColumn(form, info, "b", () =>
+          difference(form["1.line.17_b"], form["1.line.18_b"]),
+        ),
       "1.line.19_c": (form, info) =>
-        inPartIII(form, info, () => sum(form["1.line.17_c"], -sum(form["1.line.18_c"]))),
-      "1.line.20": (form, info) => inPartIII(form, info, () => taxableIncomeBeforeQbi(form)),
+        inPartIIIColumn(form, info, "c", () =>
+          difference(form["1.line.17_c"], form["1.line.18_c"]),
+        ),
+      "1.line.20": (form, info) => inPartIII(form, info, () => taxableIncomeBeforeQbi(form, info)),
       "1.line.21": (form, info) => inPartIII(form, info, () => qbiLimits(info)?.threshold),
+      "1.line.22": (form, info) =>
+        inPartIII(form, info, () => difference(form["1.line.20"], form["1.line.21"])),
       "1.line.23": (form, info) => inPartIII(form, info, () => qbiLimits(info)?.range),
-      "1.line.27": (form) => sum(form["0.line.16"]),
+      "1.line.24": (form, info) => inPartIII(form, info, () => line24(form)),
+      "1.line.25_a": (form, info) => line25(form, info, "a"),
+      "1.line.25_b": (form, info) => line25(form, info, "b"),
+      "1.line.25_c": (form, info) => line25(form, info, "c"),
+      "1.line.26_a": (form, info) =>
+        inPartIIIColumn(form, info, "a", () =>
+          difference(form["1.line.17_a"], form["1.line.25_a"]),
+        ),
+      "1.line.26_b": (form, info) =>
+        inPartIIIColumn(form, info, "b", () =>
+          difference(form["1.line.17_b"], form["1.line.25_b"]),
+        ),
+      "1.line.26_c": (form, info) =>
+        inPartIIIColumn(form, info, "c", () =>
+          difference(form["1.line.17_c"], form["1.line.25_c"]),
+        ),
+      // Line 16 is blank until every business column is known; with no business, line 27 is 0.
+      "1.line.27": (form, info) => (info.qbiBusinesses ? num(form["0.line.16"]) : 0),
       "1.line.30": (form) => atLeast(0, sum(form["1.line.28"], form["1.line.29"])),
-      "1.line.32": (form) => sum(form["1.line.27"], form["1.line.31"]),
+      "1.line.32": (form) =>
+        typeof form["1.line.27"] === "number"
+          ? sum(form["1.line.27"], form["1.line.31"])
+          : undefined,
       "1.line.35": (form) =>
         atLeast(
           0,
           sum(form["1.line.33"], form["1.line.34"] === undefined ? 0 : -form["1.line.34"]),
         ),
-      "1.line.39": (form) => sum(form["1.line.37"], form["1.line.38"]),
+      "1.line.39": (form) =>
+        typeof form["1.line.37"] === "number"
+          ? sum(form["1.line.37"], form["1.line.38"])
+          : undefined,
     },
 
     unsupported: {
+      "0.part1.business_a_aggregation": AGGREGATION,
+      "0.part1.business_a_patron": PATRON,
+      "0.part1.business_b_aggregation": AGGREGATION,
+      "0.part1.business_b_patron": PATRON,
+      "0.part1.business_c_aggregation": AGGREGATION,
+      "0.part1.business_c_patron": PATRON,
+      "0.line.14_a": PATRON_REDUCTION,
+      "0.line.14_b": PATRON_REDUCTION,
+      "0.line.14_c": PATRON_REDUCTION,
       "0.header.name":
         "Full name needs first and last name joined together. There is no single full-name fact and no rule to join text, and binding only first or last name would print a partial name.",
-      "0.part1.business_a_name":
-        "No ingestion yet for qualified trades or businesses (Schedule C/E/K-1 QBI sources).",
-      "0.part1.business_a_specified_service": "No SSTB determination or business ingestion yet.",
-      "0.part1.business_a_aggregation": "No Schedule B (Form 8995-A) aggregation scenario yet.",
-      "0.part1.business_a_tin": "No business EIN/TIN ingestion for QBI businesses yet.",
-      "0.part1.business_a_patron":
-        "No agricultural/horticultural cooperative patron scenario yet (Schedule D Form 8995-A).",
-      "0.part1.business_b_name":
-        "No ingestion yet for qualified trades or businesses (Schedule C/E/K-1 QBI sources).",
-      "0.part1.business_b_specified_service": "No SSTB determination or business ingestion yet.",
-      "0.part1.business_b_aggregation": "No Schedule B (Form 8995-A) aggregation scenario yet.",
-      "0.part1.business_b_tin":
-        "No QBI trade/business (Schedule C/E/K-1) ingestion yet — business EIN/TIN not modeled.",
-      "0.part1.business_b_patron":
-        "No agricultural/horticultural cooperative patron scenario modeled.",
-      "0.part1.business_c_name":
-        "No QBI trade/business (Schedule C/E/K-1) ingestion yet — business names not modeled.",
-      "0.part1.business_c_specified_service":
-        "No SSTB determination scenario modeled for QBI businesses.",
-      "0.part1.business_c_aggregation": "No Schedule B (Form 8995-A) aggregation scenario modeled.",
-      "0.part1.business_c_tin":
-        "No QBI trade/business (Schedule C/E/K-1) ingestion yet — business EIN/TIN not modeled.",
-      "0.part1.business_c_patron":
-        "No agricultural/horticultural cooperative patron scenario modeled.",
-      "0.line.2_a":
-        "No QBI source ingestion (Schedule C, Schedule E, K-1 box 20 code Z) and no Schedule C (Form 8995-A) loss-netting yet.",
-      "0.line.2_b":
-        "No QBI source ingestion (Schedule C, Schedule E, K-1 box 20 code Z) and no Schedule C (Form 8995-A) loss-netting yet.",
-      "0.line.2_c":
-        "No QBI source ingestion (Schedule C, Schedule E, K-1 box 20 code Z) and no Schedule C (Form 8995-A) loss-netting yet.",
-      "0.line.4_a":
-        "No K-1/Schedule C business ingestion yet — allocable share of business W-2 wages (Section 199A) not modeled; taxpayer's own W-2s are not this value.",
-      "0.line.4_b":
-        "No K-1/Schedule C business ingestion yet — allocable share of business W-2 wages (Section 199A) not modeled.",
-      "0.line.4_c":
-        "No K-1/Schedule C business ingestion yet — allocable share of business W-2 wages (Section 199A) not modeled.",
-      "0.line.7_a": "No business/K-1 ingestion for UBIA of qualified property yet.",
-      "0.line.7_b": "No business/K-1 ingestion for UBIA of qualified property yet.",
-      "0.line.7_c": "No business/K-1 ingestion for UBIA of qualified property yet.",
-      "0.line.10_a":
-        "Greater-of(line 5, line 9) needs a max operator, which the rule library lacks; no QBI/W-2-wage/UBIA business-fact ingestion yet either.",
-      "0.line.10_b":
-        "Greater-of(line 5, line 9) needs a max operator, which the rule library lacks; no QBI/W-2-wage/UBIA business-fact ingestion yet either.",
-      "0.line.10_c":
-        "Greater-of(line 5, line 9) needs a max operator, which the rule library lacks; no QBI/W-2-wage/UBIA business-fact ingestion yet either.",
-      "0.line.11_a":
-        "Smaller-of(line 3, line 10) needs a min operator, which the rule library lacks; no QBI business-fact ingestion yet.",
-      "0.line.11_b":
-        "Smaller-of(line 3, line 10) needs a min operator, which the rule library lacks; no QBI business-fact ingestion yet.",
-      "0.line.11_c":
-        "Smaller-of(line 3, line 10) needs a min operator, which the rule library lacks; no QBI business-fact ingestion yet.",
-      "0.line.13_a":
-        "Line 13 is the greater of line 11 or line 12. The rule library has no max() rule, and we have no QBI or Schedule C/E business-income scenario yet.",
-      "0.line.13_b":
-        "Line 13 is the greater of line 11 or line 12. The rule library has no max() rule, and we have no QBI or Schedule C/E business-income scenario yet.",
-      "0.line.13_c":
-        "Line 13 is the greater of line 11 or line 12. The rule library has no max() rule, and we have no QBI or Schedule C/E business-income scenario yet.",
-      "0.line.14_a":
-        "Patron reduction comes from Schedule D (Form 8995-A) line 6. That form isn't ingested, and we have no agricultural-cooperative patron scenario.",
-      "0.line.14_b":
-        "Patron reduction comes from Schedule D (Form 8995-A) line 6. That form isn't ingested, and we have no agricultural-cooperative patron scenario.",
-      "0.line.14_c":
-        "Patron reduction comes from Schedule D (Form 8995-A) line 6. That form isn't ingested, and we have no agricultural-cooperative patron scenario.",
-      "1.line.24":
-        "Requires dividing line 22 by line 23 (percentage); no division rule exists and there's no in-phase-in QBI scenario yet.",
-      "1.line.25_a":
-        "Requires multiplying line 19 by the line 24 percentage; no line-times-line rule exists and there's no phase-in QBI scenario yet.",
-      "1.line.25_b":
-        "Requires multiplying line 19 by the line 24 percentage; no line-times-line rule exists and there's no phase-in QBI scenario yet.",
-      "1.line.25_c":
-        "Requires multiplying line 19 by the line 24 percentage; no line-times-line rule exists and there's no phase-in QBI scenario yet.",
       "1.line.29": "No prior-year REIT/PTP loss carryforward fact ingested yet.",
       "1.line.38":
         "Section 199A(g) DPAD from an agricultural/horticultural cooperative (Form 1099-PATR). We don't ingest cooperative patron data and have no scenario for it.",
       "1.line.40":
         "Line 40 is min(line 28 + line 29, 0), the REIT/PTP loss carried forward. fromFields only supports a floor, not a ceiling at 0, and we don't ingest PTP losses or prior-year carryforwards.",
-      "0.line.3_a":
-        "confidence=medium: Line 2 Column A multiplied by 0.20 (fractional sign used as multiplier).",
-      "0.line.3_b":
-        "confidence=medium: Line 2 Column B multiplied by 0.20 (fractional sign used as multiplier).",
-      "0.line.3_c":
-        "confidence=medium: Line 2 Column C multiplied by 0.20 (fractional sign used as multiplier).",
-      "0.line.5_a": "confidence=medium: Line 4 Column A multiplied by 0.50.",
-      "0.line.5_b": "confidence=medium: Line 4 Column B multiplied by 0.50.",
-      "0.line.5_c": "confidence=medium: Line 4 Column C multiplied by 0.50.",
-      "0.line.6_a": "confidence=medium: Line 4 Column A multiplied by 0.25.",
-      "0.line.6_b":
-        "confidence=medium: Line 6 Column B = 25% of line 4 Column B (no dedicated multiply rule; uses fractional sign).",
-      "0.line.6_c":
-        "confidence=medium: Line 6 Column C = 25% of line 4 Column C (no dedicated multiply rule; uses fractional sign).",
-      "0.line.8_a":
-        "confidence=medium: Line 8 Column A = 2.5% of line 7 Column A (fractional sign as multiplier).",
-      "0.line.8_b":
-        "confidence=medium: Line 8 Column B = 2.5% of line 7 Column B (fractional sign as multiplier).",
-      "0.line.8_c":
-        "confidence=medium: Line 8 Column C = 2.5% of line 7 Column C (fractional sign as multiplier).",
-      "1.line.22":
-        "confidence=medium: Line 22 = line 20 − line 21 (floored at 0 since Part III applies only above the threshold).",
-      "1.line.26_a":
-        "confidence=medium: Line 26 = line 17 − line 25 (Col A). Line 25 is unsupported and counts as 0, so this would overstate the amount if Part III applies; needs review.",
-      "1.line.26_b":
-        "confidence=medium: Line 26 = line 17 − line 25 (Col B). Line 25 is unsupported and counts as 0, so this would overstate the amount if Part III applies; needs review.",
-      "1.line.26_c":
-        "confidence=medium: Line 26 = line 17 − line 25 (Col C). Line 25 is unsupported and counts as 0, so this would overstate the amount if Part III applies; needs review.",
     },
   });
 }

@@ -65,6 +65,10 @@ export interface BusinessFactValue {
   expenses?: BusinessExpenses;
   /* Form 8995-A: a specified service trade or business. */
   specifiedService?: boolean;
+  /* Form 8995-A line 4: W-2 wages the business paid its employees (their Forms W-2). */
+  w2WagesPaid?: number;
+  /* Form 8995-A line 7: UBIA (unadjusted basis immediately after acquisition) of qualified property. */
+  qualifiedPropertyUbia?: number;
 }
 
 const BUSINESS_CATEGORY = "self_employment";
@@ -90,6 +94,8 @@ function isBusiness(value: unknown): value is BusinessFactValue {
     isAmount(fields.grossReceipts) &&
     isAmount(fields.returnsAndAllowances) &&
     isAmount(fields.otherIncome) &&
+    isAmount(fields.w2WagesPaid) &&
+    isAmount(fields.qualifiedPropertyUbia) &&
     typeof expenses === "object" &&
     Object.values(expenses).every(isAmount)
   );

@@ -88,6 +88,9 @@ const rideshare: BusinessFactValue = {
   sellsGoods: false, // Not in the answers: a rideshare sells a service; the key has no Part III.
   grossReceipts: 100000,
   specifiedService: false,
+  // Not in the answers; the key's phase-in reduction uses a W-2 wage and UBIA limit of 0.
+  w2WagesPaid: 0,
+  qualifiedPropertyUbia: 0,
 };
 
 const idFact = (suffix: string, value: string) =>
