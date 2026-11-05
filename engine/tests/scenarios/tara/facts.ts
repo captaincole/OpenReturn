@@ -19,7 +19,7 @@ export const TARA_TAX_YEAR = 2025;
 const CREATED_AT = "2026-10-18T00:00:00Z";
 
 const fact = (category: string, key: string, value: unknown, sourceNote: string): TaxFactRow => ({
-  id: `f-${key.replace(/[^a-z0-9]+/gi, "-")}`,
+  id: `f-${key}`,
   userId: TARA_USER_ID,
   taxYear: TARA_TAX_YEAR,
   category,
