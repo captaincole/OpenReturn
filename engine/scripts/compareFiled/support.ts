@@ -18,6 +18,7 @@ import {
   isHsaDistributionFact,
   isInterestFact,
   isMiscIncomeFact,
+  isPaymentTransactionsFactKey,
   isReportedBasisFact,
   isRetirementDistributionFact,
   isSocialSecurityFact,
@@ -47,6 +48,7 @@ const DOCUMENT_FACTS = [
   isHouseholdEmployeeFact,
   isEnergyInvoiceFact,
   (fact: TaxFactRow) => isGamblingWinningsFactKey(fact.key),
+  (fact: TaxFactRow) => isPaymentTransactionsFactKey(fact.key),
   (fact: TaxFactRow) => isBusinessFactKey(fact.key),
 ];
 

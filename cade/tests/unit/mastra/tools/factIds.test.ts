@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { default1099KFormId } from "../../../../src/mastra/tools/ingest1099K.js";
 import { defaultWinId } from "../../../../src/mastra/tools/ingestW2G.js";
 import { businessIdCandidates } from "../../../../src/mastra/tools/recordBusiness.js";
 
@@ -28,5 +29,15 @@ describe("businessIdCandidates", () => {
       "consulting-2",
       "consulting-3",
     ]);
+  });
+});
+
+describe("default1099KFormId", () => {
+  it("uses the account number", () => {
+    expect(default1099KFormId({ accountNumber: "MR-20417", box1a: 100000 })).toBe("mr-20417");
+  });
+
+  it("uses the box 1a cents with no account number", () => {
+    expect(default1099KFormId({ box1a: 21500.25 })).toBe("gross-2150025");
   });
 });
