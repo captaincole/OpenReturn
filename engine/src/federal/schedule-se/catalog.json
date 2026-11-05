@@ -1,0 +1,393 @@
+{
+  "form": {
+    "formId": "schedule-se",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Schedule SE (Form 1040) — Self-Employment Tax"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-se.0.header.name",
+      "label": "Name of person with self-employment income (as shown on Form 1040, 1040-SR, 1040-SS, or 1040-NR)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.header.ssn",
+      "label": "Social security number of person with self-employment income",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-se.0.line.a_form_4361_exempt",
+      "label": "Line A — If you are a minister, member of a religious order, or Christian Science practitioner and you filed Form 4361, but you had $400 or more of other net earnings from self-employment, check here and continue with Part I",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 565,
+        "y": 626.002
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.1a",
+      "label": "Line 1a — Net farm profit or (loss) from Schedule F, line 34, and farm partnerships, Schedule K-1 (Form 1065), box 14, code A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.1b",
+      "label": "Line 1b — If you received social security retirement or disability benefits, enter the amount of Conservation Reserve Program payments included on Schedule F, line 4b, or listed on Schedule K-1 (Form 1065), box 20, code AQ",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 508,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.2",
+      "label": "Line 2 — Net profit or (loss) from Schedule C, line 31; and Schedule K-1 (Form 1065), box 14, code A (other than farming)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.3",
+      "label": "Line 3 — Combine lines 1a, 1b, and 2",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.4a",
+      "label": "Line 4a — If line 3 is more than zero, multiply line 3 by 92.35% (0.9235). Otherwise, enter amount from line 3",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 504
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.4b",
+      "label": "Line 4b — If you elect one or both of the optional methods, enter the total of lines 15 and 17 here",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.4c",
+      "label": "Line 4c — Combine lines 4a and 4b. If less than $400, stop; you don't owe self-employment tax",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.5a",
+      "label": "Line 5a — Enter your church employee income from Form W-2",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line5a_ReadOrder[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.5b",
+      "label": "Line 5b — Multiply line 5a by 92.35% (0.9235). If less than $100, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.6",
+      "label": "Line 6 — Add lines 4c and 5b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.8a",
+      "label": "Line 8a — Total social security wages and tips (total of boxes 3 and 7 on Form(s) W-2) and railroad retirement (tier 1) compensation",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line8a_ReadOrder[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.8b",
+      "label": "Line 8b — Unreported tips subject to social security tax from Form 4137, line 10",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.8c",
+      "label": "Line 8c — Wages subject to social security tax from Form 8919, line 10",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.8d",
+      "label": "Line 8d — Add lines 8a, 8b, and 8c",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.9",
+      "label": "Line 9 — Subtract line 8d from line 7. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.10",
+      "label": "Line 10 — Multiply the smaller of line 6 or line 9 by 12.4% (0.124)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.11",
+      "label": "Line 11 — Multiply line 6 by 2.9% (0.029)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.12",
+      "label": "Line 12 — Self-employment tax. Add lines 10 and 11",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "schedule-se.0.line.13",
+      "label": "Line 13 — Deduction for one-half of self-employment tax. Multiply line 12 by 50% (0.50)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 216
+      }
+    },
+    {
+      "fieldId": "schedule-se.1.line.15",
+      "label": "Line 15 — Enter the smaller of: two-thirds (2/3) of gross farm income (not less than zero) or $7,240",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "schedule-se.1.line.16",
+      "label": "Line 16 — Subtract line 15 from line 14",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "schedule-se.1.line.17",
+      "label": "Line 17 — Enter the smaller of: two-thirds (2/3) of gross nonfarm income (not less than zero) or the amount on line 16",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 600.001
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/schedule-se/blank.pdf",
+    "ingestedAt": "2026-11-05T04:17:47.018Z",
+    "totalFields": 25,
+    "skipped": 0,
+    "catalogEntries": 25
+  }
+}
