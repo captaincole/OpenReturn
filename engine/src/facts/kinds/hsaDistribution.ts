@@ -27,6 +27,10 @@ export function makeHsaDistributionFactKey(accountSlug: string, distributionId: 
   return `account.${accountSlug}.hsa_distributions.${distributionId}`;
 }
 
+export function isHsaDistributionFactKey(key: string): boolean {
+  return SA_KEY_RE.test(key);
+}
+
 export function isHsaDistributionFact(fact: TaxFactRow): boolean {
   return fact.category === SA_CATEGORY && SA_KEY_RE.test(fact.key);
 }

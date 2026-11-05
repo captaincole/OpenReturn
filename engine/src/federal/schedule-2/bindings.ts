@@ -32,6 +32,8 @@ export function register(): void {
           form["0.line.1z_total_lines_1a_through_1y"],
           form["0.line.2_alternative_minimum_tax"],
         ),
+      // MANUAL EDIT: irs-1040-inst-2025::sec::line-4-3::b01: Schedule SE line 12.
+      "0.line.4_self_employment_tax": (form) => total(form["schedule-se.0.line.12"]),
       "0.line.7_total_additional_ss_medicare_tax": (form) =>
         total(
           form["0.line.5_ss_medicare_tax_unreported_tips"],
@@ -125,8 +127,6 @@ export function register(): void {
         "No self-employment exemption scenario (EAS/EN notary) modeled yet.",
       "0.line.4_se_tax_exemption_other_form_number":
         "No self-employment exemption scenario (EAS/EN notary) modeled yet.",
-      "0.line.4_self_employment_tax":
-        "Schedule SE not ingested; no self-employment income scenario yet.",
       "0.line.5_ss_medicare_tax_unreported_tips":
         "Form 4137 (unreported tips) not ingested; no unreported-tip scenario yet.",
       "0.line.6_uncollected_ss_medicare_tax_wages":

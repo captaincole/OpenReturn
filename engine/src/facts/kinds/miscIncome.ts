@@ -37,6 +37,10 @@ export function makeMiscIncomeFactKey(accountSlug: string): string {
   return `account.${accountSlug}.misc`;
 }
 
+export function isMiscIncomeFactKey(key: string): boolean {
+  return MISC_KEY_RE.test(key);
+}
+
 export function isMiscIncomeFact(fact: TaxFactRow): boolean {
   return fact.category === MISC_CATEGORY && MISC_KEY_RE.test(fact.key);
 }
