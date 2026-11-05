@@ -1,4 +1,5 @@
-import { readBusinessFacts } from "../../facts/index.js";
+import { businessesOnReturn } from "../../facts/index.js";
+import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
 
@@ -9,10 +10,15 @@ const MUST_FILE_KEY = "decisions.scope.must_file_schedule_c";
  * Schedule C reports a business operated as a sole proprietor. A business fact
  * whose amounts are not numbers leaves the question open, so Cade asks again.
  * Statutory employees, qualified joint ventures and Form 1099 amounts reported
- * without a business fact have no facts yet.
+ * without a business fact have no facts yet. A spouse's business is on this
+ * return only when filing jointly; an unknown status counts it until it is known.
  */
 export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInfo {
-  const { businesses, malformedKeys } = readBusinessFacts(inputs.facts);
+  const status = filingStatusOf(inputs);
+  const { businesses, malformedKeys } = businessesOnReturn(
+    inputs.facts,
+    status === undefined || status === "married_filing_jointly",
+  );
   const open = malformedKeys.length > 0 && !inputs.decisionByKey.has(MUST_FILE_KEY);
   return {
     mustFile: {

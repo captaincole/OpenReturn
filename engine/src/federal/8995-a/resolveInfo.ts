@@ -1,4 +1,4 @@
-import { isDividendFactKey, readBusinessFacts } from "../../facts/index.js";
+import { businessesOnReturn, isDividendFactKey, ownerOf } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { sum } from "../../money.js";
 import {
@@ -46,16 +46,15 @@ export function resolve8995AInfo(inputs: ResolverInputs): Form8995AFilingInfo {
   };
 }
 
-/* A spouse's business is on this return only when filing jointly. */
 function qbiBusinesses(inputs: ResolverInputs): {
   businesses: QbiBusiness[];
   malformedKeys: string[];
 } {
-  const { businesses, malformedKeys } = readBusinessFacts(inputs.facts);
-  const joint = filingStatusOf(inputs) === "married_filing_jointly";
-  const onReturn = businesses
-    .map((business) => ({ ...business, owner: business.value.owner ?? "taxpayer" }))
-    .filter((business) => joint || business.owner === "taxpayer");
+  const { businesses, malformedKeys } = businessesOnReturn(
+    inputs.facts,
+    filingStatusOf(inputs) === "married_filing_jointly",
+  );
+  const onReturn = businesses.map((business) => ({ ...business, owner: ownerOf(business.value) }));
   const taxpayerCount = onReturn.filter((business) => business.owner === "taxpayer").length;
   return {
     businesses: onReturn.map(({ key, value, owner }) => ({
