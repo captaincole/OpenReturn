@@ -5,6 +5,8 @@ import {
   type BusinessFactValue,
 } from "@openreturn/engine/facts";
 import { z } from "zod";
+import type { Scope } from "../db/appDb";
+import { listFactsByKeys } from "../db/taxFacts";
 import { cadeRequestContextSchema } from "../server/requestContext";
 import { recordIngestFact, slugify } from "./ingestShared";
 import { requireUserContext } from "./userContext";
@@ -42,9 +44,15 @@ export const recordBusiness = createTool({
   id: "record-business",
   requestContextSchema: cadeRequestContextSchema,
   description:
-    "Record one sole-proprietor business (Schedule C) from the user's answers. Call once per business; call again with every field to correct it. Pass only the expenses the user has.",
+    "Record one sole-proprietor business (Schedule C) from the user's answers. Call once per business; to correct it, call again with every field and the businessId the first call returned. Pass only the expenses the user has.",
   inputSchema: z.object({
     year: z.number().int(),
+    businessId: z
+      .string()
+      .optional()
+      .describe(
+        "The businessId an earlier call returned for this business. Pass it to correct the business; leave it out for a new business.",
+      ),
     owner: z.enum(["taxpayer", "spouse"]).optional().describe("On a joint return, who runs it"),
     activity: z.string().describe("Line A: what the business does, e.g. 'Rideshare driver'"),
     code: z.string().optional().describe("Line B: six-digit code from the Schedule C instructions"),
@@ -80,17 +88,36 @@ export const recordBusiness = createTool({
       ),
     sourceNote: z.string().default("Business answers stated by the user"),
   }),
-  outputSchema: z.object({ factKey: z.string() }),
+  outputSchema: z.object({ factKey: z.string(), businessId: z.string() }),
   execute: async (input, context) => {
     const { scope, userId, filingId } = await requireUserContext(context);
-    const { year, sourceNote, ...value } = input;
-    const factKey = makeBusinessFactKey(slugify(input.name ?? input.activity) || "business");
+    const { year, sourceNote, businessId: givenId, ...value } = input;
+    const businessId =
+      givenId ?? (await unusedBusinessId(scope, year, slugify(input.activity) || "business"));
+    const factKey = makeBusinessFactKey(businessId);
     await recordIngestFact(
       { scope, userId, filingId, year, sourceNote },
       "self_employment",
       factKey,
       value satisfies BusinessFactValue,
     );
-    return { factKey };
+    return { factKey, businessId };
   },
 });
+
+const MAX_SAME_ACTIVITY = 20;
+
+/* The ids a new business can take, in order: the activity's slug, then the slug plus a number. */
+export function businessIdCandidates(base: string): string[] {
+  return Array.from({ length: MAX_SAME_ACTIVITY }, (_, index) =>
+    index === 0 ? base : `${base}-${index + 1}`,
+  );
+}
+
+async function unusedBusinessId(scope: Scope, year: number, base: string): Promise<string> {
+  const candidates = businessIdCandidates(base);
+  const taken = new Set(
+    (await listFactsByKeys(scope, year, candidates.map(makeBusinessFactKey))).map((row) => row.key),
+  );
+  return candidates.find((id) => !taken.has(makeBusinessFactKey(id))) ?? crypto.randomUUID();
+}

@@ -118,7 +118,7 @@ export const tcbUs006Facts: TaxFactRow[] = [
   fact("wages", makeW2FactKey("abc-co"), w2, "W-2 from ABC Co (docs/01-abc-co-w2.pdf)."),
   fact(
     "other",
-    makeGamblingWinningsFactKey("poker-club"),
+    makeGamblingWinningsFactKey("tin-12-3456789", "10-10-2025-5000000"),
     w2g,
     "W-2G (docs/02-poker-club-w2g.pdf).",
   ),
