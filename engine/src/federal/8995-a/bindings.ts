@@ -7,7 +7,7 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import type { Form8995AFilingInfo, QbiBusiness } from "./filingInfo.js";
-import { netCapitalGain, QBI_LIMITS } from "./lines.js";
+import { netCapitalGain, QBI_LIMITS, qualifiedBusinesses } from "./lines.js";
 import type { Form8995A } from "./types.js";
 
 /* Part II rates: lines 3, 5, 6 and 8. */
@@ -54,12 +54,24 @@ function taxableIncomeBeforeQbi(form: Read, info: Form8995AFilingInfo): number |
 const percentOf = (value: unknown, rate: number) =>
   typeof value === "number" ? roundDollars(value * rate) : undefined;
 
-function businessIn(info: Form8995AFilingInfo, column: Column): QbiBusiness | undefined {
-  return info.qbiBusinesses?.[COLUMNS.indexOf(column)];
+// MANUAL EDIT: an SSTB above the phase-in range is left off Part I (qualifiedBusinesses).
+function partIBusinesses(form: Read, info: Form8995AFilingInfo): QbiBusiness[] | undefined {
+  const income = taxableIncomeBeforeQbi(form, info);
+  return qualifiedBusinesses(info.qbiBusinesses ?? [], income, qbiLimits(info));
 }
 
-const businessColumns = (info: Form8995AFilingInfo) =>
-  COLUMNS.slice(0, info.qbiBusinesses?.length ?? 0);
+function businessIn(
+  form: Read,
+  info: Form8995AFilingInfo,
+  column: Column,
+): QbiBusiness | undefined {
+  return partIBusinesses(form, info)?.[COLUMNS.indexOf(column)];
+}
+
+function businessColumns(form: Read, info: Form8995AFilingInfo): Column[] | undefined {
+  const businesses = partIBusinesses(form, info);
+  return businesses && COLUMNS.slice(0, businesses.length);
+}
 
 // Undefined while 1040 line 11a is blank.
 function aboveThreshold(form: Read, info: Form8995AFilingInfo): boolean | undefined {
@@ -86,7 +98,8 @@ function partIIIColumn(form: Read, info: Form8995AFilingInfo, column: Column): b
 
 // Lines 20–24: once any column completes Part III.
 function partIII(form: Read, info: Form8995AFilingInfo): boolean | undefined {
-  const columns = businessColumns(info).map((column) => partIIIColumn(form, info, column));
+  const columns = businessColumns(form, info)?.map((column) => partIIIColumn(form, info, column));
+  if (!columns) return undefined;
   if (columns.includes(true)) return true;
   return columns.includes(undefined) ? undefined : false;
 }
@@ -153,11 +166,11 @@ function selfEmploymentDeduction(
  * loss carryforward (Schedule C (Form 8995-A)); line 2 counts none.
  */
 function line2(form: Read, info: Form8995AFilingInfo, column: Column): number | undefined {
-  const business = businessIn(info, column);
+  const business = businessIn(form, info, column);
   if (business?.netProfit === undefined) return undefined;
   // A loss (or a blank line 31) anywhere needs Schedule C (Form 8995-A) loss netting, not modeled.
-  if (info.qbiBusinesses?.some((other) => other.netProfit === undefined)) return undefined;
-  // An SSTB above the threshold needs Schedule A (Form 8995-A), not modeled.
+  if (partIBusinesses(form, info)?.some((other) => other.netProfit === undefined)) return undefined;
+  // MANUAL EDIT: an SSTB in the phase-in range needs Schedule A (Form 8995-A), not modeled.
   if (business.specifiedService !== false && aboveThreshold(form, info) !== false) return undefined;
   const deduction = selfEmploymentDeduction(form, info, business);
   return deduction === undefined ? undefined : business.netProfit - deduction;
@@ -217,15 +230,15 @@ function line15(form: Read, column: Column): number | undefined {
 
 // Four or more businesses need an attached statement (line 16 instructions), not modeled.
 function line16(form: Read, info: Form8995AFilingInfo): number | undefined {
-  const count = info.qbiBusinesses?.length ?? 0;
+  const count = partIBusinesses(form, info)?.length ?? 0;
   if (count === 0 || count > COLUMNS.length) return undefined;
   const amounts = COLUMNS.slice(0, count).map((column) => num(form[`0.line.15_${column}`]));
   return amounts.every((amount) => amount !== undefined) ? sum(...amounts) : undefined;
 }
 
 // Line 1(d): the EIN, else the owner's SSN (line 1 instructions).
-function tin(info: Form8995AFilingInfo, column: Column): string | undefined {
-  const business = businessIn(info, column);
+function tin(form: Read, info: Form8995AFilingInfo, column: Column): string | undefined {
+  const business = businessIn(form, info, column);
   if (!business) return undefined;
   return business.ein ?? (business.owner === "spouse" ? info.spouseSSN : info.taxpayerSSN);
 }
@@ -264,25 +277,28 @@ export function register(): void {
           : undefined;
       },
       "0.header.taxpayer_id": (_, info) => info.taxpayerSSN,
-      // MANUAL EDIT: Parts I and II, one column per Schedule C business (info.qbiBusinesses).
-      "0.part1.business_a_name": (_, info) => businessIn(info, "a")?.name,
-      "0.part1.business_a_specified_service": (_, info) => businessIn(info, "a")?.specifiedService,
-      "0.part1.business_a_tin": (_, info) => tin(info, "a"),
-      "0.part1.business_b_name": (_, info) => businessIn(info, "b")?.name,
-      "0.part1.business_b_specified_service": (_, info) => businessIn(info, "b")?.specifiedService,
-      "0.part1.business_b_tin": (_, info) => tin(info, "b"),
-      "0.part1.business_c_name": (_, info) => businessIn(info, "c")?.name,
-      "0.part1.business_c_specified_service": (_, info) => businessIn(info, "c")?.specifiedService,
-      "0.part1.business_c_tin": (_, info) => tin(info, "c"),
+      // MANUAL EDIT: Parts I and II, one column per Part I business (partIBusinesses).
+      "0.part1.business_a_name": (form, info) => businessIn(form, info, "a")?.name,
+      "0.part1.business_a_specified_service": (form, info) =>
+        businessIn(form, info, "a")?.specifiedService,
+      "0.part1.business_a_tin": (form, info) => tin(form, info, "a"),
+      "0.part1.business_b_name": (form, info) => businessIn(form, info, "b")?.name,
+      "0.part1.business_b_specified_service": (form, info) =>
+        businessIn(form, info, "b")?.specifiedService,
+      "0.part1.business_b_tin": (form, info) => tin(form, info, "b"),
+      "0.part1.business_c_name": (form, info) => businessIn(form, info, "c")?.name,
+      "0.part1.business_c_specified_service": (form, info) =>
+        businessIn(form, info, "c")?.specifiedService,
+      "0.part1.business_c_tin": (form, info) => tin(form, info, "c"),
       "0.line.2_a": (form, info) => line2(form, info, "a"),
       "0.line.2_b": (form, info) => line2(form, info, "b"),
       "0.line.2_c": (form, info) => line2(form, info, "c"),
       "0.line.3_a": (form) => percentOf(form["0.line.2_a"], QBI_RATE),
       "0.line.3_b": (form) => percentOf(form["0.line.2_b"], QBI_RATE),
       "0.line.3_c": (form) => percentOf(form["0.line.2_c"], QBI_RATE),
-      "0.line.4_a": (form, info) => limitInput(form, "a", businessIn(info, "a")?.w2WagesPaid),
-      "0.line.4_b": (form, info) => limitInput(form, "b", businessIn(info, "b")?.w2WagesPaid),
-      "0.line.4_c": (form, info) => limitInput(form, "c", businessIn(info, "c")?.w2WagesPaid),
+      "0.line.4_a": (form, info) => limitInput(form, "a", businessIn(form, info, "a")?.w2WagesPaid),
+      "0.line.4_b": (form, info) => limitInput(form, "b", businessIn(form, info, "b")?.w2WagesPaid),
+      "0.line.4_c": (form, info) => limitInput(form, "c", businessIn(form, info, "c")?.w2WagesPaid),
       "0.line.5_a": (form) => percentOf(form["0.line.4_a"], WAGE_RATE),
       "0.line.5_b": (form) => percentOf(form["0.line.4_b"], WAGE_RATE),
       "0.line.5_c": (form) => percentOf(form["0.line.4_c"], WAGE_RATE),
@@ -290,11 +306,11 @@ export function register(): void {
       "0.line.6_b": (form) => percentOf(form["0.line.4_b"], WAGE_WITH_UBIA_RATE),
       "0.line.6_c": (form) => percentOf(form["0.line.4_c"], WAGE_WITH_UBIA_RATE),
       "0.line.7_a": (form, info) =>
-        limitInput(form, "a", businessIn(info, "a")?.qualifiedPropertyUbia),
+        limitInput(form, "a", businessIn(form, info, "a")?.qualifiedPropertyUbia),
       "0.line.7_b": (form, info) =>
-        limitInput(form, "b", businessIn(info, "b")?.qualifiedPropertyUbia),
+        limitInput(form, "b", businessIn(form, info, "b")?.qualifiedPropertyUbia),
       "0.line.7_c": (form, info) =>
-        limitInput(form, "c", businessIn(info, "c")?.qualifiedPropertyUbia),
+        limitInput(form, "c", businessIn(form, info, "c")?.qualifiedPropertyUbia),
       "0.line.8_a": (form) => percentOf(form["0.line.7_a"], UBIA_RATE),
       "0.line.8_b": (form) => percentOf(form["0.line.7_b"], UBIA_RATE),
       "0.line.8_c": (form) => percentOf(form["0.line.7_c"], UBIA_RATE),
@@ -364,8 +380,12 @@ export function register(): void {
         inPartIIIColumn(form, info, "c", () =>
           difference(form["1.line.17_c"], form["1.line.25_c"]),
         ),
-      // Line 16 is blank until every business column is known; with no business, line 27 is 0.
-      "1.line.27": (form, info) => (info.qbiBusinesses ? num(form["0.line.16"]) : 0),
+      // Line 16 is blank until every business column is known; with no Part I business, line 27 is 0.
+      "1.line.27": (form, info) => {
+        const businesses = partIBusinesses(form, info);
+        if (!businesses) return undefined;
+        return businesses.length > 0 ? num(form["0.line.16"]) : 0;
+      },
       "1.line.30": (form) => atLeast(0, sum(form["1.line.28"], form["1.line.29"])),
       "1.line.32": (form) =>
         typeof form["1.line.27"] === "number"
