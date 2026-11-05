@@ -3,7 +3,7 @@
 import { defineForm, type FormAccessor } from "../../defineForm.js";
 import { atLeast, roundDollars } from "../../money.js";
 import { SSN } from "../../values.js";
-import type { Form8606FilingInfo, Form8606Person } from "./filingInfo.js";
+import type { Form8606FilingInfo, IraHolder } from "./filingInfo.js";
 import type { Form8606 } from "./types.js";
 
 type Form = FormAccessor<Form8606>;
@@ -19,13 +19,13 @@ const PREPARER =
 const PART_III =
   "Part III is not modeled: no fact gives first-time homebuyer expenses, Roth contribution basis or Roth conversion basis.";
 
-/* The person this copy is for. */
-export function personOf(info: Form8606FilingInfo): Form8606Person | undefined {
-  return info.form8606Persons?.[info.form8606CopyIndex ?? 0];
+/* The IRA holder this copy is for. */
+export function holderOf(info: Form8606FilingInfo): IraHolder | undefined {
+  return info.form8606Filers?.[info.form8606CopyIndex ?? 0];
 }
 
 /* Line 7: distributions less rollovers and Roth conversions, cents kept. */
-function distributions(person: Form8606Person): number {
+function distributions(person: IraHolder): number {
   const ira = person.ira ?? {};
   return atLeast(
     0,
@@ -35,7 +35,7 @@ function distributions(person: Form8606Person): number {
 
 /* The Part I bullets on the form: each needs basis from 2025 or an earlier year. */
 function partIApplies(info: Form8606FilingInfo): boolean | undefined {
-  const person = personOf(info);
+  const person = holderOf(info);
   const ira = person?.ira;
   if (!person || !ira) return undefined;
   const contributions = ira.nondeductibleContributions ?? 0;
@@ -46,13 +46,13 @@ function partIApplies(info: Form8606FilingInfo): boolean | undefined {
 
 /* The question after line 3: a distribution or a Roth conversion means lines 4–13. */
 function distributedOrConverted(info: Form8606FilingInfo): boolean {
-  const person = personOf(info);
+  const person = holderOf(info);
   if (!person || partIApplies(info) !== true) return false;
   return distributions(person) > 0 || (person.ira?.convertedToRoth ?? 0) > 0;
 }
 
 function converted(info: Form8606FilingInfo): number {
-  return personOf(info)?.ira?.convertedToRoth ?? 0;
+  return holderOf(info)?.ira?.convertedToRoth ?? 0;
 }
 
 /* Line 10 times RATIO_SCALE: a whole number from 0 to RATIO_SCALE. */
@@ -69,31 +69,27 @@ function timesRatio(amount: number | undefined, form: Form): number | undefined 
   return roundDollars((amount * scaled) / RATIO_SCALE);
 }
 
-function minus(left: number | undefined, right: number | undefined): number | undefined {
-  return left === undefined || right === undefined ? undefined : left - right;
-}
-
 export function register(): void {
   defineForm<Form8606, Form8606FilingInfo>("form-8606", {
     bindings: {
       // A joint return names only the spouse this copy reports.
       "0.header.taxpayer_name": (_, info) => {
-        const owner = personOf(info)?.owner;
+        const owner = holderOf(info)?.owner;
         const first = owner === "spouse" ? info.spouseFirstName : info.taxpayerFirstName;
         const last = owner === "spouse" ? info.spouseLastName : info.taxpayerLastName;
         return owner && first && last ? `${first} ${last}` : undefined;
       },
       "0.header.ssn": (_, info) => {
-        const owner = personOf(info)?.owner;
+        const owner = holderOf(info)?.owner;
         if (!owner) return undefined;
         return owner === "spouse" ? info.spouseSSN : info.taxpayerSSN;
       },
       "0.line.1_nondeductible_traditional_contributions": (_, info) =>
         partIApplies(info)
-          ? roundDollars(personOf(info)?.ira?.nondeductibleContributions ?? 0)
+          ? roundDollars(holderOf(info)?.ira?.nondeductibleContributions ?? 0)
           : undefined,
       "0.line.2_total_traditional_basis": (_, info) =>
-        partIApplies(info) ? roundDollars(personOf(info)?.ira?.basisPriorYears ?? 0) : undefined,
+        partIApplies(info) ? roundDollars(holderOf(info)?.ira?.basisPriorYears ?? 0) : undefined,
       "0.line.3_total_contributions_and_basis": (form) => {
         const line1 = form["0.line.1_nondeductible_traditional_contributions"];
         const line2 = form["0.line.2_total_traditional_basis"];
@@ -105,20 +101,20 @@ export function register(): void {
         form["0.line.1_nondeductible_traditional_contributions"] === 0
           ? 0
           : undefined,
-      "0.line.5_basis_less_2026_contributions": (form) =>
-        minus(
-          form["0.line.3_total_contributions_and_basis"],
-          form["0.line.4_contributions_made_in_2026"],
-        ),
+      "0.line.5_basis_less_2026_contributions": (form) => {
+        const line3 = form["0.line.3_total_contributions_and_basis"];
+        const line4 = form["0.line.4_contributions_made_in_2026"];
+        return line3 === undefined || line4 === undefined ? undefined : line3 - line4;
+      },
       // MANUAL EDIT: yearEndValue includes outstanding rollovers; absent, the line stays blank.
       "0.line.6_traditional_ira_year_end_value": (_, info) => {
-        const yearEndValue = personOf(info)?.ira?.yearEndValue;
+        const yearEndValue = holderOf(info)?.ira?.yearEndValue;
         return distributedOrConverted(info) && yearEndValue !== undefined
           ? roundDollars(yearEndValue)
           : undefined;
       },
       "0.line.7_traditional_ira_distributions": (_, info) => {
-        const person = personOf(info);
+        const person = holderOf(info);
         return person && distributedOrConverted(info)
           ? roundDollars(distributions(person))
           : undefined;
@@ -156,13 +152,14 @@ export function register(): void {
       "0.line.14_total_traditional_basis_end": (form, info) => {
         const line3 = form["0.line.3_total_contributions_and_basis"];
         if (!distributedOrConverted(info)) return line3;
-        return minus(line3, form["0.line.13_total_nontaxable_distributions"]);
+        const line13 = form["0.line.13_total_nontaxable_distributions"];
+        return line3 === undefined || line13 === undefined ? undefined : line3 - line13;
       },
-      "1.line.15a_line_7_minus_line_12": (form) =>
-        minus(
-          form["0.line.7_traditional_ira_distributions"],
-          form["0.line.12_nontaxable_distribution_portion"],
-        ),
+      "1.line.15a_line_7_minus_line_12": (form) => {
+        const line7 = form["0.line.7_traditional_ira_distributions"];
+        const line12 = form["0.line.12_nontaxable_distribution_portion"];
+        return line7 === undefined || line12 === undefined ? undefined : line7 - line12;
+      },
       // Line 15b and the repayment reduction have no facts; both read as zero.
       "1.line.15c_taxable_traditional_distributions": (form) => {
         const line15a = form["1.line.15a_line_7_minus_line_12"];
@@ -180,10 +177,13 @@ export function register(): void {
         if (converted(info) <= 0) return undefined;
         return partIApplies(info)
           ? form["0.line.11_nontaxable_conversion_portion"]
-          : roundDollars(personOf(info)?.ira?.basisPriorYears ?? 0);
+          : roundDollars(holderOf(info)?.ira?.basisPriorYears ?? 0);
       },
-      "1.line.18_taxable_conversion_amount": (form) =>
-        minus(form["1.line.16_net_amount_converted"], form["1.line.17_basis_in_conversion"]),
+      "1.line.18_taxable_conversion_amount": (form) => {
+        const line16 = form["1.line.16_net_amount_converted"];
+        const line17 = form["1.line.17_basis_in_conversion"];
+        return line16 === undefined || line17 === undefined ? undefined : line16 - line17;
+      },
     },
 
     formatters: {

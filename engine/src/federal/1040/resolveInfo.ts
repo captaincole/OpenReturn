@@ -1,7 +1,10 @@
 import {
+  ROTH_IRA_CODES,
   SPOUSE_KEYS,
+  hasDistributionCode,
   isDividendFactKey,
   isInterestFactKey,
+  isRetirementDistributionFactKey,
   isSocialSecurityFactKey,
   makeTraditionalIraFactKey,
   type IraOwner,
@@ -25,7 +28,7 @@ import {
   text,
   type ResolverInputs,
 } from "../../resolverInputs.js";
-import { form8606Persons } from "../8606/resolveInfo.js";
+import { form8606Filers } from "../8606/resolveInfo.js";
 import type { Form1040FilingInfo, IraLine } from "./filingInfo.js";
 
 const OWNERS: IraOwner[] = ["taxpayer", "spouse"];
@@ -57,11 +60,10 @@ function resolveInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
   };
 }
 
-/*
- * A Roth IRA is an IRA (1040 inst., lines 4a/4b), but the payer leaves box 7
- * IRA/SEP/SIMPLE blank for one (1099-R inst.). Codes J, Q, T mark it.
- */
-const ROTH_IRA_CODES = /[JQT]/;
+/* A Roth IRA is an IRA (1040 inst., lines 4a/4b), so ROTH_IRA_CODES rows go on line 4. */
+const isRothIra = (row: RetirementDistributionFactValue) =>
+  hasDistributionCode(row, ROTH_IRA_CODES);
+const ROLLOVER_CODES = ["G", "H"];
 
 /*
  * Code Q is not taxable. Codes J and T take the taxable part from Form 8606
@@ -69,7 +71,7 @@ const ROTH_IRA_CODES = /[JQT]/;
  */
 export function rowTaxable(distribution: RetirementDistributionFactValue): number | undefined {
   if (distribution.box7.includes("Q")) return 0;
-  if (/[JT]/.test(distribution.box7)) return undefined;
+  if (hasDistributionCode(distribution, ["J", "T"])) return undefined;
   if (distribution.box2a === undefined && distribution.box2b?.taxableAmountNotDetermined === true)
     return undefined;
   return distribution.box2a ?? distribution.box1;
@@ -77,7 +79,7 @@ export function rowTaxable(distribution: RetirementDistributionFactValue): numbe
 
 function retirementRows(inputs: ResolverInputs): RetirementDistributionFactValue[] {
   return factsInCategory(inputs, "retirement")
-    .filter((row) => /^payer\.[^.]+\.distributions\.[^.]+$/.test(row.key))
+    .filter((row) => isRetirementDistributionFactKey(row.key))
     .map((row) => row.value as RetirementDistributionFactValue);
 }
 
@@ -105,18 +107,18 @@ export function traditionalTaxable(
  * from it (the line 4b binding).
  */
 function iraLine(inputs: ResolverInputs, rows: RetirementDistributionFactValue[]): IraLine {
-  const filers = new Set(form8606Persons(inputs).map((entry) => entry.owner));
+  const filers = new Set(form8606Filers(inputs).map((holder) => holder.owner));
   const rolledOver = (owner: IraOwner) =>
     (inputs.factByKey.get(makeTraditionalIraFactKey(owner)) as TraditionalIraFactValue | undefined)
       ?.rolledOver ?? 0;
   // A Form 8606 filer's traditional rows come from that form, so none are summed here.
   const ownerTaxable = (owner: IraOwner): number | undefined => {
     const own = rows.filter((row) => (row.owner ?? "taxpayer") === owner);
-    const roth = own.filter((row) => ROTH_IRA_CODES.test(row.box7)).map(rowTaxable);
+    const roth = own.filter(isRothIra).map(rowTaxable);
     const traditional = filers.has(owner)
       ? 0
       : traditionalTaxable(
-          own.filter((row) => !ROTH_IRA_CODES.test(row.box7)),
+          own.filter((row) => !isRothIra(row)),
           rolledOver(owner),
         );
     if ([...roth, traditional].includes(undefined)) return undefined;
@@ -127,7 +129,7 @@ function iraLine(inputs: ResolverInputs, rows: RetirementDistributionFactValue[]
     gross: sum(...rows.map((distribution) => distribution.box1)),
     taxable: perOwner.includes(undefined) ? undefined : sum(...perOwner),
     rollover:
-      rows.some((distribution) => /[GH]/.test(distribution.box7)) ||
+      rows.some((distribution) => hasDistributionCode(distribution, ROLLOVER_CODES)) ||
       OWNERS.some((owner) => rolledOver(owner) > 0),
     form8606Filers: filers.size,
   };
@@ -136,7 +138,7 @@ function iraLine(inputs: ResolverInputs, rows: RetirementDistributionFactValue[]
 function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
   const rows = retirementRows(inputs);
   const isIra = (distribution: RetirementDistributionFactValue) =>
-    distribution.box7IraSepSimple || ROTH_IRA_CODES.test(distribution.box7);
+    distribution.box7IraSepSimple || isRothIra(distribution);
   const iraRows = rows.filter(isIra);
   const pensionRows = rows.filter((row) => !isIra(row));
   const taxable = pensionRows.map(rowTaxable);
@@ -148,7 +150,9 @@ function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
         : {
             gross: sum(...pensionRows.map((distribution) => distribution.box1)),
             taxable: taxable.includes(undefined) ? undefined : sum(...taxable),
-            rollover: pensionRows.some((distribution) => /[GH]/.test(distribution.box7)),
+            rollover: pensionRows.some((distribution) =>
+              hasDistributionCode(distribution, ROLLOVER_CODES),
+            ),
           },
   };
 }

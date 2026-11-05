@@ -1,4 +1,7 @@
 import {
+  ROTH_IRA_CODES,
+  hasDistributionCode,
+  isRetirementDistributionFactKey,
   makeTraditionalIraFactKey,
   type IraOwner,
   type RetirementDistributionFactValue,
@@ -11,32 +14,32 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../resolverInputs.js";
-import type { Form8606FilingInfo, Form8606Person } from "./filingInfo.js";
+import type { Form8606FilingInfo, IraHolder } from "./filingInfo.js";
 
 const OWNERS: IraOwner[] = ["taxpayer", "spouse"];
 const MUST_FILE_KEY = "decisions.scope.must_file_8606";
-const DISTRIBUTION_KEY_RE = /^payer\.[^.]+\.distributions\.[^.]+$/;
-/* Roth IRA codes (J, Q, T) belong to Part III, which is not modeled. */
-const ROTH_CODES = /[JQT]/;
 /* Roth IRA distributions that are not qualified (code Q is). */
-const NONQUALIFIED_ROTH_CODES = /[JT]/;
+const NONQUALIFIED_ROTH_CODES = ["J", "T"];
 
 function ownRows(inputs: ResolverInputs, owner: IraOwner): RetirementDistributionFactValue[] {
   return factsInCategory(inputs, "retirement")
-    .filter((row) => DISTRIBUTION_KEY_RE.test(row.key))
+    .filter((row) => isRetirementDistributionFactKey(row.key))
     .map((row) => row.value as RetirementDistributionFactValue)
     .filter((row) => (row.owner ?? "taxpayer") === owner);
 }
 
-function person(inputs: ResolverInputs, owner: IraOwner): Form8606Person {
+function iraHolder(inputs: ResolverInputs, owner: IraOwner): IraHolder {
   const own = ownRows(inputs, owner);
-  const rows = own.filter((row) => row.box7IraSepSimple && !ROTH_CODES.test(row.box7));
+  // Roth IRA rows belong to Part III, which is not modeled.
+  const rows = own.filter(
+    (row) => row.box7IraSepSimple && !hasDistributionCode(row, ROTH_IRA_CODES),
+  );
   return {
     owner,
     ira: inputs.factByKey.get(makeTraditionalIraFactKey(owner)) as
       TraditionalIraFactValue | undefined,
     iraDistributionsGross: rows.length === 0 ? 0 : sum(...rows.map((row) => row.box1)),
-    rothDistribution: own.some((row) => NONQUALIFIED_ROTH_CODES.test(row.box7)),
+    rothDistribution: own.some((row) => hasDistributionCode(row, NONQUALIFIED_ROTH_CODES)),
   };
 }
 
@@ -48,7 +51,7 @@ function person(inputs: ResolverInputs, owner: IraOwner): Form8606Person {
  * a Roth rollover or return of contributions, the bullet's exceptions.
  * Inherited IRAs and divorce transfers have no facts yet.
  */
-export function mustFile8606(entry: Form8606Person): boolean {
+export function mustFile8606(entry: IraHolder): boolean {
   const ira = entry.ira ?? {};
   const basis = (ira.basisPriorYears ?? 0) + (ira.nondeductibleContributions ?? 0);
   const distributed =
@@ -62,7 +65,7 @@ export function mustFile8606(entry: Form8606Person): boolean {
 }
 
 /* Line 6 decides lines 9–12 once Part I can apply: basis, and a distribution or a conversion. */
-function needsYearEndValue(entry: Form8606Person): boolean {
+function needsYearEndValue(entry: IraHolder): boolean {
   const ira = entry.ira;
   if (!ira || ira.yearEndValue !== undefined) return false;
   const basis = (ira.basisPriorYears ?? 0) + (ira.nondeductibleContributions ?? 0);
@@ -71,13 +74,13 @@ function needsYearEndValue(entry: Form8606Person): boolean {
   return basis > 0 && (distributed > 0 || converted > 0);
 }
 
-export function form8606Persons(inputs: ResolverInputs): Form8606Person[] {
-  return OWNERS.map((owner) => person(inputs, owner)).filter(mustFile8606);
+export function form8606Filers(inputs: ResolverInputs): IraHolder[] {
+  return OWNERS.map((owner) => iraHolder(inputs, owner)).filter(mustFile8606);
 }
 
 export function resolve8606Info(inputs: ResolverInputs): Form8606FilingInfo {
-  const persons = form8606Persons(inputs);
-  const withIra = OWNERS.map((owner) => person(inputs, owner)).filter(
+  const filers = form8606Filers(inputs);
+  const withIra = OWNERS.map((owner) => iraHolder(inputs, owner)).filter(
     (entry) => entry.iraDistributionsGross > 0,
   );
   /* An IRA distribution with no answers yet: whether the form files is still open. */
@@ -92,7 +95,7 @@ export function resolve8606Info(inputs: ResolverInputs): Form8606FilingInfo {
             fallbacks: [
               {
                 rule: "fallback: nondeductible contributions, a Roth conversion, an IRA distribution with basis, or a Roth IRA distribution (code J or T)",
-                value: persons.length > 0,
+                value: filers.length > 0,
                 triggeredByFactKeys: OWNERS.map(makeTraditionalIraFactKey),
               },
             ],
@@ -103,12 +106,12 @@ export function resolve8606Info(inputs: ResolverInputs): Form8606FilingInfo {
         Object.fromEntries([
           ...withIra.map((entry) => [makeTraditionalIraFactKey(entry.owner), entry.ira]),
           // The fact is there but line 6 is not: ask for the same fact again.
-          ...persons
+          ...filers
             .filter(needsYearEndValue)
             .map((entry) => [makeTraditionalIraFactKey(entry.owner), undefined]),
         ]),
       ),
     },
-    form8606Persons: persons,
+    form8606Filers: filers,
   };
 }
