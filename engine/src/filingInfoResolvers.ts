@@ -273,6 +273,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   return {
     mustFile: { "schedule-1": resolution },
     businessIncome,
+    hasBusiness,
     gamblingWinnings,
     miscOtherIncome,
   };

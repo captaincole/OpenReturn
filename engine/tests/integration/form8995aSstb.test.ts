@@ -38,6 +38,7 @@ function evaluate(opts: { wages: number; specifiedService?: boolean; reitDividen
   return {
     f8995a: (line: string) => value("form-8995-a", `form-8995-a.${line}`),
     line13a: value("form-1040", "form-1040.line.13a"),
+    line14: value("form-1040", "form-1040.line.14"),
   };
 }
 
@@ -70,6 +71,16 @@ describe("Form 8995-A with a specified service trade or business", () => {
     expect(result.f8995a("1.line.39")).toBeUndefined();
   });
 
+  it("leaves 1040 line 14 blank while Form 8995-A line 39 is blank", () => {
+    const sstb = evaluate({ wages: 80000, specifiedService: true });
+    expect(sstb.f8995a("1.line.39")).toBeUndefined();
+    expect(sstb.line13a).toBeUndefined();
+    expect(sstb.line14).toBeUndefined();
+    const unanswered = evaluate({ wages: 80000 });
+    expect(unanswered.f8995a("1.line.39")).toBeUndefined();
+    expect(unanswered.line14).toBeUndefined();
+  });
+
   it("figures an SSTB at or below the threshold like any business", () => {
     const result = evaluate({ wages: 30000, specifiedService: true });
     expect(result.f8995a("1.line.33")).toBe(184185);
@@ -77,5 +88,6 @@ describe("Form 8995-A with a specified service trade or business", () => {
     expect(result.f8995a("0.line.13_a")).toBe(18587);
     expect(result.f8995a("1.line.39")).toBe(18587);
     expect(result.line13a).toBe(18587);
+    expect(result.line14).toBeTypeOf("number");
   });
 });

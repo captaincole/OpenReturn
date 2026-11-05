@@ -54,17 +54,26 @@ export function register(): void {
           form["form-8889.0.line.16_taxable_hsa_distributions"],
           form["form-8889.0.line.20_total_income"],
         ),
-      "0.line.10": (form) =>
-        sum(
-          form["0.line.1"],
-          form["0.line.2a"],
-          form["0.line.3"],
-          form["0.line.4"],
-          form["0.line.5"],
-          form["0.line.6"],
-          form["0.line.7"],
-          form["0.line.9"],
-        ),
+      /*
+       * MANUAL EDIT: irs-1040-inst-2025::sec::line-3::b01. Line 3 is blank with no
+       * business (adds nothing) and blank while a business's line 31 waits. Then
+       * line 10 waits: sum() would add the loss as 0 and overstate income. The
+       * other terms are blank only when empty: 1, 2a, 4–7 are unsupported, and
+       * line 9 is a sum.
+       */
+      "0.line.10": (form, info) =>
+        info.hasBusiness === true && form["0.line.3"] === undefined
+          ? undefined
+          : sum(
+              form["0.line.1"],
+              form["0.line.2a"],
+              form["0.line.3"],
+              form["0.line.4"],
+              form["0.line.5"],
+              form["0.line.6"],
+              form["0.line.7"],
+              form["0.line.9"],
+            ),
       "1.line.13": (form) => sum(form["form-8889.0.line.13_hsa_deduction"]),
       "1.line.25": (form) =>
         sum(
