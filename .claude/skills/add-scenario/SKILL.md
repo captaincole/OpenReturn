@@ -52,6 +52,7 @@ Never change a value in `expected.ts` to match the engine. When the key and the 
 2. Run `verify-form` for each form you changed. No other scenario's golden may change.
 3. Add new input documents to `docs/testing-with-your-return.md` ("What OpenReturn supports") and `engine/scripts/compareFiled/support.ts`.
 4. Commit each step on its own: the documents, the facts, the scenario, then each form.
+5. Open the PR, then run the `pr-review` and `tax-correctness-review` workflows on it (the second needs `npm run dev:canon`). A scenario checks one taxpayer; the reviews find the rules that break for others. Report the findings to the user before you fix them.
 
 ## 7. Report
 
