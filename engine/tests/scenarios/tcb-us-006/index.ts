@@ -3,6 +3,7 @@
  * rideshare business, interest, dividends and a W-2G. Federal only.
  */
 
+import { lockedGoldenPath } from "../../helpers/scenarioPdfName.js";
 import type { Scenario } from "../../types.js";
 import { tcbUs006Decisions } from "./decisions.js";
 import { tcbUs006Expected } from "./expected.js";
@@ -29,9 +30,9 @@ export const tcbUs006Scenario: Scenario = {
   userId: TCB_US_006_USER_ID,
   facts: tcbUs006Facts,
   decisions: tcbUs006Decisions,
-  skip: true,
   forms: FORM_IDS.map((formId) => ({
     formId,
     expected: tcbUs006Expected(formId),
+    goldenPdfPath: lockedGoldenPath("tcb-us-006", formId),
   })),
 };

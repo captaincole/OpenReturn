@@ -28,12 +28,17 @@ Tax year 2025, **single** filers, **California** full-year residents.
 Married filing separately has one unverified test scenario. Married
 filing jointly has one federal-only test scenario (TaxCalcBench), with
 Form 8606 (nondeductible IRA basis, Roth conversions) and Schedule 1-A
-(the senior deduction only).
+(the senior deduction only). Married filing separately also has one
+federal-only TaxCalcBench scenario with a sole-proprietor business
+(Schedules C and SE, Form 8995-A).
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
-1099-SA, 1098, SSA-1099, a W-2 you issued to a household employee
+1099-SA, 1098, SSA-1099, W-2G, a W-2 you issued to a household employee
 (Schedule H, without FUTA tax), and invoices for home energy improvements
 (Form 5695 Part II). The last two have one unverified test scenario.
+A business you run yourself is answers, not a document: receipts and
+expenses by Schedule C line, with no home office, vehicle worksheet,
+depreciation form or cost of goods sold.
 
 A return outside this list still helps: the report shows what your
 return needs that OpenReturn lacks.

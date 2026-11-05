@@ -10,8 +10,10 @@ import {
   HSA_COVERAGE_KEYS,
   PRIOR_YEAR_KEYS,
   SPOUSE_KEYS,
+  isBusinessFactKey,
   isDividendFact,
   isEnergyInvoiceFact,
+  isGamblingWinningsFactKey,
   isHouseholdEmployeeFact,
   isHsaDistributionFact,
   isInterestFact,
@@ -44,6 +46,8 @@ const DOCUMENT_FACTS = [
   isSocialSecurityFact,
   isHouseholdEmployeeFact,
   isEnergyInvoiceFact,
+  (fact: TaxFactRow) => isGamblingWinningsFactKey(fact.key),
+  (fact: TaxFactRow) => isBusinessFactKey(fact.key),
 ];
 
 /* support.test.ts fails when a resolver reads a key that is missing here. */
