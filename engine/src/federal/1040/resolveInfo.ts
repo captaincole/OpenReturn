@@ -2,6 +2,7 @@ import {
   ROTH_IRA_CODES,
   SPOUSE_KEYS,
   getGamblingWinningsFacts,
+  getPaymentTransactionsFacts,
   hasDistributionCode,
   isDividendFactKey,
   isInterestFactKey,
@@ -170,6 +171,10 @@ function socialSecurityRows(inputs: ResolverInputs): SocialSecurityFactValue[] {
     .map((row) => row.value as SocialSecurityFactValue);
 }
 
+/*
+ * Line 25b (irs-1040-inst-2025::sec::line-25b-form-s-1099::b01): box 4 of each
+ * Form 1099 (1099-K too), SSA-1099 box 6.
+ */
 function form1099Withholding(
   inputs: ResolverInputs,
 ): Form1040FilingInfo["form1099FederalWithholding"] {
@@ -177,6 +182,7 @@ function form1099Withholding(
     sumInvestmentBox(inputs, "box4"),
     ...retirementRows(inputs).map((row) => row.box4),
     ...socialSecurityRows(inputs).map((row) => row.box6),
+    ...getPaymentTransactionsFacts(inputs.facts).map((form) => form.value.box4),
   );
   return total > 0 ? (total as Form1040FilingInfo["form1099FederalWithholding"]) : undefined;
 }
