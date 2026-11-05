@@ -297,20 +297,30 @@ function scheduleCTotal({
   return profits.every((profit) => profit !== undefined) ? sum(...profits) : undefined;
 }
 
-// Default: required when Schedule SE (line 4), Form 8959 (line 11), Form 8960 (line 12) or Schedule H (line 9) is filed.
+/*
+ * Default: required when Schedule SE (line 4), Form 8959 (line 11), Form 8960
+ * (line 12) or Schedule H (line 9) is filed. While none is filed and one is still
+ * undecided, Schedule 2 is undecided too.
+ */
 export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInfo {
-  const scheduleSE = resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value === true;
-  const form8959 = resolve8959Info(inputs).mustFile?.["form-8959"]?.value === true;
-  const form8960 = resolve8960Info(inputs).mustFile?.["form-8960"]?.value === true;
-  const scheduleH = resolveScheduleHInfo(inputs).mustFile?.["schedule-h"]?.value === true;
+  const feeders = [
+    resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value,
+    resolve8959Info(inputs).mustFile?.["form-8959"]?.value,
+    resolve8960Info(inputs).mustFile?.["form-8960"]?.value,
+    resolveScheduleHInfo(inputs).mustFile?.["schedule-h"]?.value,
+  ];
+  const required = feeders.some((value) => value === true);
+  const open = !required && feeders.some((value) => value === undefined);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_2",
-    fallbacks: [
-      {
-        rule: "fallback: Schedule SE (line 4), Form 8959 (line 11), Form 8960 (line 12), or Schedule H (line 9) is required",
-        value: scheduleSE || form8959 || form8960 || scheduleH,
-      },
-    ],
+    fallbacks: open
+      ? []
+      : [
+          {
+            rule: "fallback: Schedule SE (line 4), Form 8959 (line 11), Form 8960 (line 12), or Schedule H (line 9) is required",
+            value: required,
+          },
+        ],
   });
   return {
     mustFile: { "schedule-2": resolution },
