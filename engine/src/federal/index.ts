@@ -20,8 +20,10 @@ import { register as registerSchedule2 } from "./schedule-2/bindings.js";
 import { register as registerSchedule3 } from "./schedule-3/bindings.js";
 import { register as registerScheduleA } from "./schedule-a/bindings.js";
 import { register as registerScheduleB } from "./schedule-b/bindings.js";
+import { register as registerScheduleC } from "./schedule-c/bindings.js";
 import { register as registerScheduleD } from "./schedule-d/bindings.js";
 import { register as registerScheduleH } from "./schedule-h/bindings.js";
+import { register as registerScheduleSE } from "./schedule-se/bindings.js";
 
 /* Rollup inlines the JSON at build time; the process does not read it from disk. */
 import form1040CatalogJson from "./1040/catalog.json";
@@ -38,8 +40,10 @@ import schedule2CatalogJson from "./schedule-2/catalog.json";
 import schedule3CatalogJson from "./schedule-3/catalog.json";
 import scheduleACatalogJson from "./schedule-a/catalog.json";
 import scheduleBCatalogJson from "./schedule-b/catalog.json";
+import scheduleCCatalogJson from "./schedule-c/catalog.json";
 import scheduleDCatalogJson from "./schedule-d/catalog.json";
 import scheduleHCatalogJson from "./schedule-h/catalog.json";
+import scheduleSECatalogJson from "./schedule-se/catalog.json";
 
 /* parse() narrows the widened JSON types and fails at boot when a catalog drifts. */
 export const FEDERAL_CATALOGS = [
@@ -47,6 +51,8 @@ export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(scheduleDCatalogJson),
   fixtureFileSchema.parse(scheduleACatalogJson),
   fixtureFileSchema.parse(scheduleBCatalogJson),
+  fixtureFileSchema.parse(scheduleCCatalogJson),
+  fixtureFileSchema.parse(scheduleSECatalogJson),
   fixtureFileSchema.parse(form8606CatalogJson),
   fixtureFileSchema.parse(form8889CatalogJson),
   fixtureFileSchema.parse(form8959CatalogJson),
@@ -100,6 +106,24 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Schedule B",
     relativeDir: "federal/schedule-b",
     register: registerScheduleB,
+  }),
+  makeFormSpec({
+    formId: "schedule-c",
+    shortId: "schedule-c",
+    displayName: "Schedule C",
+    relativeDir: "federal/schedule-c",
+    register: registerScheduleC,
+    copies: {
+      count: (info) => info?.businesses?.length ?? 1,
+      select: (info, index) => info && { ...info, scheduleCCopyIndex: index },
+    },
+  }),
+  makeFormSpec({
+    formId: "schedule-se",
+    shortId: "schedule-se",
+    displayName: "Schedule SE",
+    relativeDir: "federal/schedule-se",
+    register: registerScheduleSE,
   }),
   makeFormSpec({
     formId: "schedule-1",
