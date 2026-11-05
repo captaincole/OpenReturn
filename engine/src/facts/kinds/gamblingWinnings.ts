@@ -1,4 +1,4 @@
-/* One fact per Form W-2G. Box 1 goes on Schedule 1 line 8b; box 4 on Form 1040 line 25b. */
+/* One fact per Form W-2G. Box 1 goes on Schedule 1 line 8b; box 4 on Form 1040 line 25c. */
 
 type FactRow = { key: string; value: unknown; category: string };
 
@@ -17,12 +17,14 @@ export interface GamblingWinningsFactValue {
 
 const W2G_CATEGORY = "other";
 
-export function makeGamblingWinningsFactKey(payerSlug: string): string {
-  return `payer.${payerSlug}.w2g`;
+/* One payer can send several W-2Gs (one per win), so the key also holds an id for the form. */
+export function makeGamblingWinningsFactKey(payerSlug: string, winId: string): string {
+  return `payer.${payerSlug}.w2g.${winId}`;
 }
 
 export function isGamblingWinningsFactKey(key: string): boolean {
-  return key.startsWith("payer.") && key.endsWith(".w2g") && key.split(".").length === 3;
+  const parts = key.split(".");
+  return parts.length === 4 && parts[0] === "payer" && parts[2] === "w2g";
 }
 
 export function getGamblingWinningsFacts(
