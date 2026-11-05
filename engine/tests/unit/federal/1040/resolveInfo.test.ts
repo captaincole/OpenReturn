@@ -1,6 +1,15 @@
 import { describe, expect, it } from "vitest";
-import type { RetirementDistributionFactValue } from "../../../../src/facts/index.js";
-import { rowTaxable, traditionalTaxable } from "../../../../src/federal/1040/resolveInfo.js";
+import {
+  makeGamblingWinningsFactKey,
+  type GamblingWinningsFactValue,
+  type RetirementDistributionFactValue,
+} from "../../../../src/facts/index.js";
+import {
+  resolve1040Info,
+  rowTaxable,
+  traditionalTaxable,
+} from "../../../../src/federal/1040/resolveInfo.js";
+import { makeResolverInputs } from "../../../../src/resolverInputs.js";
 
 const distribution = (
   change: Partial<RetirementDistributionFactValue>,
@@ -51,5 +60,24 @@ describe("traditionalTaxable", () => {
   it("is undefined when a row's taxable amount is not determined", () => {
     const unknown = ira({ box2b: { taxableAmountNotDetermined: true } });
     expect(traditionalTaxable([direct, unknown], 20000)).toBeUndefined();
+  });
+});
+
+describe("line 25c W-2G slot", () => {
+  const w2g = (winId: string, change: Partial<GamblingWinningsFactValue>) => ({
+    key: makeGamblingWinningsFactKey("casino", winId),
+    category: "other",
+    value: { payerName: "Casino", box1: 5000, ...change },
+  });
+  const slot = (facts: ReturnType<typeof w2g>[]) =>
+    resolve1040Info(makeResolverInputs({ facts, decisions: [] })).w2gFederalWithholding;
+
+  it("sums box 4 and keeps cents", () => {
+    expect(slot([w2g("a", { box4: 1200.4 }), w2g("b", { box4: 300.3 })])).toBeCloseTo(1500.7);
+  });
+
+  it("is blank when no W-2G has box 4", () => {
+    expect(slot([w2g("a", {})])).toBeUndefined();
+    expect(slot([])).toBeUndefined();
   });
 });

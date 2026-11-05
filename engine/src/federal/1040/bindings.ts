@@ -318,10 +318,15 @@ export function register(): void {
           ? undefined
           : sum(form["line.22"], form["line.23"]),
       "line.25a": (_, info) => roundDollars(info.w2FederalWithholding),
-      // MANUAL EDIT: line 25c = Form 8959 line 24 only; other sources are not modeled.
-      "line.25c": (form) => {
-        const withholding = form["form-8959.0.line.24_total_additional_medicare_tax_withholding"];
-        return typeof withholding === "number" ? withholding : undefined;
+      /*
+       * MANUAL EDIT: line 25c = W-2G box 4 (rounded sum) + Form 8959 line 24; blank
+       * when neither has an amount (irs-1040-inst-2025::sec::line-25c-other-forms::b01).
+       * Schedule K-1, 1042-S, 8805 and 8288-A withholding is not modeled: no facts.
+       */
+      "line.25c": (form, info) => {
+        const medicare = form["form-8959.0.line.24_total_additional_medicare_tax_withholding"];
+        const w2g = roundDollars(info.w2gFederalWithholding);
+        return typeof medicare !== "number" && w2g === undefined ? undefined : sum(medicare, w2g);
       },
       "line.25d": (form) => sum(form["line.25a"], form["line.25b"], form["line.25c"]),
       // MANUAL EDIT: 1099 box 4 and SSA-1099 box 6; blank when nothing was withheld.
