@@ -35,8 +35,13 @@ function nextStep(status: Omit<FormStatus, "next">): string {
   return "verify-form";
 }
 
-/* Schedules 1, 2 and 3 have no instructions of their own: the Form 1040 instructions cover them. */
-const COVERED_BY_1040 = new Set(["federal/schedule-1", "federal/schedule-2", "federal/schedule-3"]);
+/* Schedules 1, 1-A, 2 and 3 have no instructions of their own: the Form 1040 instructions cover them. */
+const COVERED_BY_1040 = new Set([
+  "federal/schedule-1",
+  "federal/schedule-1-a",
+  "federal/schedule-2",
+  "federal/schedule-3",
+]);
 
 function instructionsDocId(target: FormTarget): string | null {
   if (COVERED_BY_1040.has(target.subpath)) return `irs-1040-inst-${target.taxYear}`;

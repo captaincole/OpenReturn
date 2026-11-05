@@ -1,5 +1,5 @@
-import { writeFile } from "node:fs/promises";
-import { relative, resolve } from "node:path";
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, relative, resolve } from "node:path";
 import { catalogFromLabels } from "../../src/catalogFromLabels.js";
 import { formTargetFromArgv, REPO_ROOT } from "../../src/formTarget.js";
 import { readLabelsFile, readWidgetsFile } from "../../src/workFiles.js";
@@ -24,6 +24,7 @@ async function run(argv: string[]): Promise<void> {
       catalogEntries: fields.length,
     },
   };
+  await mkdir(dirname(outPath), { recursive: true }); // a new form has no engine folder yet
   await writeFile(outPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
   console.log(`write-catalog: ${target.formId} (${target.taxYear})`);
   console.log(`  ${fields.length} catalog entries, ${labels.skipped.length} skipped`);
