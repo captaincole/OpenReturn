@@ -64,6 +64,20 @@ export function resolveScheduleSEInfo(inputs: ResolverInputs): ScheduleSEFilingI
   };
 }
 
+/*
+ * Line 6 from facts, for Form 8959's Who Must File: line 4c (92.35% of the profit,
+ * 0 under $400); no optional methods or church income. 0 when Schedule SE is not
+ * filed, undefined while its must-file answer or line 31 is open.
+ */
+export function selfEmploymentIncome(info: ScheduleSEFilingInfo): number | undefined {
+  const filed = info.mustFile?.["schedule-se"]?.value;
+  if (filed === false) return 0;
+  const profit = info.scheduleCNetProfit;
+  if (filed === undefined || profit === undefined) return undefined;
+  const line4a = profit > 0 ? roundDollars(profit * NET_EARNINGS_RATE) : 0;
+  return line4a >= MIN_NET_EARNINGS ? line4a : 0;
+}
+
 /* The 9 digits of an SSN as entered, or undefined when it is missing or malformed. */
 function ssnOf(raw: string | undefined): SSN | undefined {
   if (!raw) return undefined;

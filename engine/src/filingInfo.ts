@@ -14,6 +14,7 @@ import type { Form8889FilingInfo } from "./federal/8889/filingInfo.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import type { Form8959FilingInfo } from "./federal/8959/filingInfo.js";
+import { resolve8959Info } from "./federal/8959/resolveInfo.js";
 import type { Form8960FilingInfo } from "./federal/8960/filingInfo.js";
 import type { Form8995AFilingInfo } from "./federal/8995-a/filingInfo.js";
 import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
@@ -36,7 +37,6 @@ import {
   makeResolverInputs,
   resolve540Info,
   resolve8949Info,
-  resolve8959Info,
   resolve8960Info,
   resolveBaseInfo,
   resolveSchedule1Info,

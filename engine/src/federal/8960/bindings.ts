@@ -7,7 +7,7 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import type { Form8960FilingInfo } from "./filingInfo.js";
-import { netInvestmentIncome } from "./lines.js";
+import { NIIT_THRESHOLDS, netInvestmentIncome } from "./lines.js";
 import type { Form8960 } from "./types.js";
 
 export function register(): void {
@@ -18,6 +18,18 @@ export function register(): void {
       "0.line.2": (form) => sum(form["form-1040.line.3b"]),
       "0.line.4a": (form) =>
         sum(form["schedule-1.0.line.3"], form["schedule-1.0.line.5"], form["schedule-1.0.line.6"]),
+      /*
+       * MANUAL EDIT: irs-8960-inst-2025::sec::line-4b-adjustment-for-net-income-or-loss::b01:
+       * a nonpassive section 162 business's net income goes on line 4b as a negative.
+       * Line G "Yes" makes every Schedule C business nonpassive; Schedules E and F are
+       * not modeled, and no fact marks a trader in financial instruments.
+       */
+      "0.line.4b": (form, info) => {
+        const scheduleC = form["schedule-1.0.line.3"];
+        return typeof scheduleC === "number" && info.scheduleCNonpassive === true
+          ? 0 - scheduleC
+          : undefined;
+      },
       "0.line.4c": (form) => sum(form["0.line.4a"], form["0.line.4b"]),
       "0.line.5a": (form) => sum(form["form-1040.line.7a"], form["schedule-1.0.line.4"]),
       "0.line.5d": (form) => sum(form["0.line.5a"], form["0.line.5b"], form["0.line.5c"]),
@@ -36,19 +48,9 @@ export function register(): void {
       "0.line.12": (form) => netInvestmentIncome(form["0.line.8"], form["0.line.11"]),
       // MAGI = AGI; the FEIE/CFC add-backs are not modeled.
       "0.line.13": (form) => sum(form["form-1040.line.11b"]),
-      // Statutory thresholds; not indexed for inflation.
+      // MANUAL EDIT: statutory thresholds; not indexed for inflation.
       "0.line.14": (_, info) =>
-        info.filingStatus
-          ? (
-              {
-                single: 200000,
-                head_of_household: 200000,
-                married_filing_jointly: 250000,
-                qualifying_surviving_spouse: 250000,
-                married_filing_separately: 125000,
-              } as Record<string, number>
-            )[info.filingStatus]
-          : undefined,
+        info.filingStatus ? NIIT_THRESHOLDS[info.filingStatus] : undefined,
       // MANUAL EDIT: line 9a = Schedule A line 9; blank when Schedule A is not filed.
       "0.line.9a": (form) => {
         const value = form["schedule-a.0.line.9_investment_interest"];
@@ -85,8 +87,6 @@ export function register(): void {
         "No CFC/QEF (PFIC) scenario yet; Reg. 1.1411-10(g) election not modeled.",
       "0.line.3":
         "Only nonqualified annuities count (not 401/403/IRA/457), and our 1099-R facts don't say which kind of plan paid the distribution; no nonqualified-annuity scenario yet.",
-      "0.line.4b":
-        "No scenario yet with nonpassive trade/business or SE income; the line 4b non-section-1411 adjustment is not modeled.",
       "0.line.5b":
         "Gains/losses excluded from NII (non-section 1411 trade or business, NUA, capital loss carryforward adjustments) — no scenario or facts modeled yet.",
       "0.line.5c":

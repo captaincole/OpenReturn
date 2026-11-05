@@ -3,6 +3,7 @@ import {
   getGamblingWinningsFacts,
   isDividendFactKey,
   isInterestFactKey,
+  isMiscIncomeFactKey,
   isW2FactKey,
   readBusinessFacts,
   type BusinessFactValue,
@@ -10,8 +11,10 @@ import {
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
-import type { Form8959FilingInfo } from "./federal/8959/filingInfo.js";
+import { resolve8959Info } from "./federal/8959/resolveInfo.js";
 import type { Form8960FilingInfo } from "./federal/8960/filingInfo.js";
+import { NIIT_THRESHOLDS } from "./federal/8960/lines.js";
+import { investmentSignals, magiUpperBound } from "./federal/8960/mustFile.js";
 import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
 import type { Schedule2FilingInfo } from "./federal/schedule-2/filingInfo.js";
 import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
@@ -204,56 +207,38 @@ export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInf
 }
 
 /*
- * Default: Medicare wages over $200,000, the single filer threshold (and
- * the employer-withholding line). Other statuses differ; set the decision.
- */
-export function resolve8959Info(inputs: ResolverInputs): Form8959FilingInfo {
-  const medicareWages = sumW2Box(inputs, "box5");
-  const resolution = resolveMustFile(inputs.decisionByKey, {
-    explicitKey: "decisions.scope.must_file_8959",
-    fallbacks: [
-      {
-        rule: `fallback: W-2 box 5 (Medicare wages) sum $${medicareWages} > $200,000`,
-        value: medicareWages > 200000,
-      },
-    ],
-  });
-  return {
-    mustFile: { "form-8959": resolution },
-    w2MedicareWagesTotal: medicareWages as Form8959FilingInfo["w2MedicareWagesTotal"],
-    w2MedicareTaxWithheld: sumW2Box(inputs, "box6") as Form8959FilingInfo["w2MedicareTaxWithheld"],
-  };
-}
-
-/*
- * Default: investment income, and wages + interest + dividends over the
- * $200,000 single threshold. It misses MAGI that crosses only through
- * capital gains; set decisions.scope.must_file_8960 for that case.
+ * irs-8960-inst-2025::sec::who-must-file::b01 and application-to-individuals::b01:
+ * MAGI over the filing-status threshold, with investment income (investmentSignals).
+ * MAGI is an upper bound from facts (magiUpperBound), so a missed 8960 needs income
+ * with no facts; set decisions.scope.must_file_8960 for that case.
  */
 export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
-  const hasInvestment = inputs.facts.some((fact) => fact.category === "investment_income");
-  const income =
-    sumW2Box(inputs, "box1") +
-    sumInvestmentBox(inputs, "box1", isInterestFactKey) +
-    sumInvestmentBox(inputs, "box1a", isDividendFactKey);
+  const { scheduleCNonpassive, hasInvestment } = investmentSignals(inputs);
+  const status = filingStatusOf(inputs);
+  const threshold = status ? NIIT_THRESHOLDS[status] : undefined;
+  // With no filing status yet, count a spouse's income too, and test the lowest threshold.
+  const magi = magiUpperBound(inputs, status === undefined || status === "married_filing_jointly");
+  const underEvery = magi <= Math.min(...Object.values(NIIT_THRESHOLDS));
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8960",
-    fallbacks: [
-      {
-        rule: `fallback: investment income present and wages + interest + dividends $${income} > $200,000`,
-        value: hasInvestment && income > 200000,
-      },
-    ],
+    fallbacks:
+      threshold === undefined && hasInvestment && !underEvery
+        ? []
+        : [
+            {
+              rule: `fallback: investment income present (${hasInvestment}) and MAGI (upper bound) $${magi} > $${threshold ?? "?"}`,
+              value: hasInvestment && threshold !== undefined && magi > threshold,
+            },
+          ],
   });
   return {
     mustFile: { "form-8960": resolution },
+    scheduleCNonpassive,
   };
 }
 
 export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInfo {
-  const misc = factsInCategory(inputs, "other").filter((row) =>
-    /^account\.[^.]+\.misc$/.test(row.key),
-  );
+  const misc = factsInCategory(inputs, "other").filter((row) => isMiscIncomeFactKey(row.key));
   const miscOtherIncome =
     misc.length > 0
       ? sum(...misc.map((row) => (row.value as Record<string, unknown>).box3))
@@ -315,8 +300,9 @@ function scheduleCTotal(
   return profits.every((profit) => profit !== undefined) ? sum(...profits) : undefined;
 }
 
-// Default: required when Form 8959 (line 11) or Form 8960 (line 12) is filed.
+// Default: required when Schedule SE (line 4), Form 8959 (line 11), Form 8960 (line 12) or Schedule H (line 9) is filed.
 export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInfo {
+  const scheduleSE = resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value === true;
   const form8959 = resolve8959Info(inputs).mustFile?.["form-8959"]?.value === true;
   const form8960 = resolve8960Info(inputs).mustFile?.["form-8960"]?.value === true;
   const scheduleH = resolveScheduleHInfo(inputs).mustFile?.["schedule-h"]?.value === true;
@@ -324,8 +310,8 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     explicitKey: "decisions.scope.must_file_schedule_2",
     fallbacks: [
       {
-        rule: "fallback: Form 8959 (line 11), Form 8960 (line 12), or Schedule H (line 9) is required",
-        value: form8959 || form8960 || scheduleH,
+        rule: "fallback: Schedule SE (line 4), Form 8959 (line 11), Form 8960 (line 12), or Schedule H (line 9) is required",
+        value: scheduleSE || form8959 || form8960 || scheduleH,
       },
     ],
   });

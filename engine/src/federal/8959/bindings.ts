@@ -8,17 +8,11 @@ import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { Form8959FilingInfo } from "./filingInfo.js";
-import { excessMedicareWages } from "./lines.js";
+import { ADDITIONAL_MEDICARE_THRESHOLDS, excessMedicareWages } from "./lines.js";
 import type { Form8959 } from "./types.js";
 
-/* Statutory thresholds for lines 5, 9 and 15. Only Part II adjusts them (line 11). */
-const ADDITIONAL_MEDICARE_THRESHOLDS: Record<string, number> = {
-  single: 200000,
-  married_filing_jointly: 250000,
-  married_filing_separately: 125000,
-  head_of_household: 200000,
-  qualifying_surviving_spouse: 200000,
-};
+/* Lines 7, 13 and 17: the Additional Medicare Tax rate. */
+const ADDITIONAL_MEDICARE_TAX_RATE = 0.009;
 
 /* Line 21: the regular (non-Additional) Medicare tax rate on wages. */
 const REGULAR_MEDICARE_TAX_RATE = 0.0145;
@@ -47,13 +41,22 @@ export function register(): void {
           form["0.line.4_total_medicare_wages"],
           form["0.line.5_filing_status_threshold_wages"],
         ),
-      // MANUAL EDIT: inline math; the generator has no multiply rule.
+      // MANUAL EDIT: irs-8959-inst-2025::sec::line-7::b01: "Enter the result", so a line 6 of 0 enters 0.
       "0.line.7_additional_medicare_tax_wages": (form) => {
         const line6 = form["0.line.6_excess_medicare_wages"];
-        if (typeof line6 !== "number" || line6 === 0) return undefined;
-        return roundDollars(line6 * 0.009);
+        return typeof line6 === "number"
+          ? roundDollars(line6 * ADDITIONAL_MEDICARE_TAX_RATE)
+          : undefined;
       },
-      // MANUAL EDIT: Part II gates on line 8 (SE income). Line 8 is unsupported, so Part II stays blank.
+      /*
+       * MANUAL EDIT: irs-8959-inst-2025::sec::line-8::b01. A loss is not considered
+       * (who-must-file::b01-b02), so it enters 0. Blank when Schedule SE is not filed.
+       */
+      "0.line.8_self_employment_income": (form) => {
+        const line6 = form["schedule-se.0.line.6"];
+        return typeof line6 === "number" ? atLeast(0, line6) : undefined;
+      },
+      // MANUAL EDIT: Part II gates on line 8 (SE income); without Schedule SE it stays blank.
       "0.line.9_filing_status_threshold_se": (form, info) => {
         if (form["0.line.8_self_employment_income"] === undefined) return undefined;
         return info.filingStatus ? ADDITIONAL_MEDICARE_THRESHOLDS[info.filingStatus] : undefined;
@@ -86,10 +89,12 @@ export function register(): void {
           ),
         );
       },
+      // MANUAL EDIT: irs-8959-inst-2025::sec::line-13::b01, as line 7.
       "0.line.13_additional_medicare_tax_se": (form) => {
         const line12 = form["0.line.12_excess_se_income"];
-        if (typeof line12 !== "number" || line12 === 0) return undefined;
-        return roundDollars(line12 * 0.009);
+        return typeof line12 === "number"
+          ? roundDollars(line12 * ADDITIONAL_MEDICARE_TAX_RATE)
+          : undefined;
       },
       // MANUAL EDIT: Part III gates on line 14 (RRTA compensation).
       "0.line.15_filing_status_threshold_rrta": (form, info) => {
@@ -158,8 +163,6 @@ export function register(): void {
         "Requires Form 4137 line 6 (unreported tips subject to Medicare tax). No Form 4137 ingestion path exists yet.",
       "0.line.3_wages_form_8919":
         "Requires Form 8919 line 6 (uncollected Social Security and Medicare tax on wages). No Form 8919 ingestion path exists yet.",
-      "0.line.8_self_employment_income":
-        "Requires Schedule SE Part I line 6 (self-employment income for Additional Medicare Tax). Schedule SE has not been ingested as a form in this system.",
       "0.line.14_rrta_compensation_tips":
         "Railroad retirement (RRTA) compensation from W-2 box 14 — no ingestion path for RRTA-specific box 14 data, and no railroad-worker scenario exists yet.",
       "0.line.23_additional_medicare_tax_withholding_rrta":
