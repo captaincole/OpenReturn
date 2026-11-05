@@ -1,5 +1,5 @@
 import { readBusinessFacts } from "../../facts/index.js";
-import { roundDollars } from "../../money.js";
+import { roundDollars, sum } from "../../money.js";
 import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { netProfit } from "../schedule-c/lines.js";
 import type { ScheduleSEFilingInfo } from "./filingInfo.js";
@@ -19,22 +19,24 @@ export function resolveScheduleSEInfo(inputs: ResolverInputs): ScheduleSEFilingI
   const own = readBusinessFacts(inputs.facts).businesses.filter(
     (business) => (business.value.owner ?? "taxpayer") === "taxpayer",
   );
-  const profit =
-    own.length === 0
-      ? undefined
-      : own.reduce((total, business) => total + netProfit(business.value), 0);
+  const profits = own.map((business) => netProfit(business.value));
+  const known = profits.every((profit) => profit !== undefined);
+  const profit = own.length === 0 || !known ? undefined : sum(...profits);
   const line4a = profit !== undefined && profit > 0 ? roundDollars(profit * NET_EARNINGS_RATE) : 0;
   return {
     mustFile: {
+      // A business whose net profit is not known yet (line 5 waits) leaves the question open.
       "schedule-se": resolveMustFile(inputs.decisionByKey, {
         explicitKey: "decisions.scope.must_file_schedule_se",
-        fallbacks: [
-          {
-            rule: "fallback: Schedule SE line 4c (92.35% of Schedule C net profit) is $400 or more",
-            value: line4a >= MIN_NET_EARNINGS,
-            triggeredByFactKeys: own.map((business) => business.key),
-          },
-        ],
+        fallbacks: !known
+          ? []
+          : [
+              {
+                rule: "fallback: Schedule SE line 4c (92.35% of Schedule C net profit) is $400 or more",
+                value: line4a >= MIN_NET_EARNINGS,
+                triggeredByFactKeys: own.map((business) => business.key),
+              },
+            ],
       }),
     },
     scheduleCNetProfit: profit,

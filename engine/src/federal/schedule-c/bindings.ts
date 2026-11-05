@@ -2,13 +2,19 @@
 
 import { defineForm } from "../../defineForm.js";
 import type { BusinessFactValue } from "../../facts/index.js";
+import { roundDollars } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
+import { grossIncome, grossProfit, netReceipts } from "./lines.js";
 import type { ScheduleC } from "./types.js";
 
 const LINE_J =
   "No fact says whether the required Forms 1099 were or will be filed; line J applies only when line I is Yes.";
 const OTHER_METHOD = "The business fact has no field that names an 'other' accounting method.";
+const STATUTORY_EMPLOYEE =
+  "No fact links a business to W-2 statutory-employee income; every business fact is self-employment income.";
+const COST_OF_GOODS_SOLD =
+  "Part III (cost of goods sold) is not modeled: a business that sells goods, or has not said, leaves lines 5-31 blank.";
 
 /* The business this copy is for. */
 export function businessOf(info: ScheduleCFilingInfo): BusinessFactValue | undefined {
@@ -23,6 +29,15 @@ function ownerOf(info: ScheduleCFilingInfo): "taxpayer" | "spouse" | undefined {
 
 const yes = (value: boolean | undefined) => value;
 const no = (value: boolean | undefined) => (value === undefined ? undefined : !value);
+
+// A computed Part I line, from this copy's business (lines.ts, each line rounded).
+function partI(
+  info: ScheduleCFilingInfo,
+  line: (business: BusinessFactValue) => number | undefined,
+) {
+  const business = businessOf(info);
+  return business ? line(business) : undefined;
+}
 
 function method(info: ScheduleCFilingInfo, which: "cash" | "accrual" | "other") {
   const chosen = businessOf(info)?.accountingMethod;
@@ -62,6 +77,12 @@ export function register(): void {
       "0.line.h_started_or_acquired": (_, info) => businessOf(info)?.startedThisYear,
       "0.line.i_yes": (_, info) => yes(businessOf(info)?.paymentsRequire1099),
       "0.line.i_no": (_, info) => no(businessOf(info)?.paymentsRequire1099),
+      "0.line.1": (_, info) => roundDollars(businessOf(info)?.grossReceipts),
+      "0.line.2": (_, info) => roundDollars(businessOf(info)?.returnsAndAllowances),
+      "0.line.3": (_, info) => partI(info, netReceipts),
+      "0.line.5": (_, info) => partI(info, grossProfit),
+      "0.line.6": (_, info) => roundDollars(businessOf(info)?.otherIncome),
+      "0.line.7": (_, info) => partI(info, grossIncome),
     },
     formatters: {
       // The SSN renders with dashes; this form has no comb widget.
@@ -69,6 +90,8 @@ export function register(): void {
     },
     unsupported: {
       "0.line.f_other_specify": OTHER_METHOD,
+      "0.line.1_statutory_employee": STATUTORY_EMPLOYEE,
+      "0.line.4": COST_OF_GOODS_SOLD,
       "0.line.j_yes": LINE_J,
       "0.line.j_no": LINE_J,
     },

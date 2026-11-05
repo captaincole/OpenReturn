@@ -9,6 +9,8 @@ import { tcbUs006Expected } from "./expected.js";
 import { TCB_US_006_TAX_YEAR, TCB_US_006_USER_ID, tcbUs006Facts } from "./facts.js";
 
 const FORM_IDS = [
+  "schedule-c",
+  "schedule-se",
   "form-8889",
   "form-8959",
   "form-8960",

@@ -30,7 +30,15 @@ export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInf
           }),
     },
     missingInputs: {
-      "schedule-c": missingInputs(Object.fromEntries(malformedKeys.map((key) => [key, undefined]))),
+      "schedule-c": missingInputs(
+        Object.fromEntries([
+          ...malformedKeys.map((key) => [key, undefined]),
+          // Line 5 waits for whether the business sells goods (Part III): ask for the fact again.
+          ...businesses
+            .filter((business) => business.value.sellsGoods === undefined)
+            .map((business) => [business.key, undefined]),
+        ]),
+      ),
     },
     businesses: businesses.map((business) => business.value),
   };
