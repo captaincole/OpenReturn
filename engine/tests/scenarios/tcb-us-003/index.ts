@@ -14,7 +14,7 @@ const FORM_IDS = ["form-8606", "form-1040", "schedule-1-a"];
 export const tcbUs003Scenario: Scenario = {
   name: "tcb-us-003",
   description:
-    "MFJ AL filers, spouse 65+: W-2, IRA rollover and Roth conversion (two 8606s), Social Security (TaxCalcBench).",
+    "MFJ AL filers, spouse 65+: W-2, IRA rollover and Roth conversion (the spouse's 8606), Social Security (TaxCalcBench).",
   taxYear: TCB_US_003_TAX_YEAR,
   userId: TCB_US_003_USER_ID,
   facts: tcbUs003Facts,

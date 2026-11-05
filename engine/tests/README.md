@@ -45,6 +45,11 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
   - `tara` — **unverified**: IRS ATS test scenario 1 moved to CA. Single,
     two W-2s, a household employee (Schedule H), home energy improvements
     (Form 5695 Part II, Schedule 3). Hand-checked, locked engine output
+  - `tcb-us-003` — TaxCalcBench case ty25-us-003, federal only. MFJ,
+    spouse 65+, an IRA rollover and a Roth conversion (Form 8606),
+    Social Security, the senior deduction (Schedule 1-A). Checked against
+    the case's answer key; its README lists where the engine follows the
+    instructions instead
 - **Catalog-fill checks** (`golden/catalogFill.ts`) — for every form in its
   `CATALOGS` registry: fill the blank PDF with synthetic values for every
   cataloged field and diff against a golden snapshot in

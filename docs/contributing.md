@@ -66,7 +66,7 @@ live in `engine/tests/scenarios/<name>/` (`facts.ts`, `decisions.ts`,
 The steps, with a diagram of the tests that check each one, are in
 [Add a scenario](adding-a-scenario.md).
 
-An expected value is only as good as its source. We use two sources, and
+An expected value is only as good as its source. We use three sources, and
 never a tax-software export we cannot redistribute:
 
 1. **A CPA-prepared return (alex, alejandro, marcus).** The CPA's filed
@@ -89,6 +89,12 @@ never a tax-software export we cannot redistribute:
    the tests diff widget by widget. Commit them with `expected.ts`. From
    then on, any change to a locked line fails the tests until someone
    verifies the new value and edits it in `expected.ts` by hand. No real data enters the repo.
+3. **A published answer key with an open license (tcb-us-003).** A
+   TaxCalcBench case (MIT) brings its documents and the correct return.
+   The `add-scenario` skill turns it into a scenario and grows the engine
+   until it matches. Where the answer key and the IRS instructions
+   disagree, the instructions win, and the scenario's README lists each
+   case.
 
 ### Understanding The Form Engine
 
