@@ -25,6 +25,3 @@ export const tcbUs003Scenario: Scenario = {
     goldenPdfPath: lockedGoldenPath("tcb-us-003", formId),
   })),
 };
-
-/* renderScenario finds a hyphenated scenario by this name. */
-export const scenario = tcbUs003Scenario;
