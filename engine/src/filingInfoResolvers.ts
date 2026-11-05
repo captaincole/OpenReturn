@@ -1,4 +1,12 @@
-import { SPOUSE_KEYS, isDividendFactKey, isInterestFactKey, isW2FactKey } from "./facts/index.js";
+import {
+  SPOUSE_KEYS,
+  getGamblingWinningsFacts,
+  isDividendFactKey,
+  isInterestFactKey,
+  isW2FactKey,
+  readBusinessFacts,
+  type BusinessFactValue,
+} from "./facts/index.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
@@ -8,8 +16,10 @@ import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
 import type { Schedule2FilingInfo } from "./federal/schedule-2/filingInfo.js";
 import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
 import type { PayerAmount, ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
+import { netProfit } from "./federal/schedule-c/lines.js";
 import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
 import { resolveScheduleHInfo } from "./federal/schedule-h/resolveInfo.js";
+import { resolveScheduleSEInfo } from "./federal/schedule-se/resolveInfo.js";
 import type { BaseFilingInfo } from "./filingInfo.js";
 import { sum } from "./money.js";
 import {
@@ -250,19 +260,59 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
       : undefined;
   // Form 8889 lines 13 and 16 reach the 1040 only through Schedule 1.
   const form8889 = resolve8889Info(inputs).mustFile?.["form-8889"]?.value === true;
+  const { businesses, malformedKeys } = readBusinessFacts(inputs.facts);
+  const hasBusiness = businesses.length > 0 || malformedKeys.length > 0;
+  const businessIncome = scheduleCTotal(
+    businesses,
+    malformedKeys,
+    filingStatusOf(inputs) === "married_filing_jointly",
+  );
+  const w2gs = getGamblingWinningsFacts(inputs.facts);
+  const gamblingWinnings = w2gs.length > 0 ? sum(...w2gs.map((w2g) => w2g.box1)) : undefined;
+  // Schedule SE line 13 reaches the 1040 only through Schedule 1 line 15.
+  const scheduleSE = resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value === true;
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
-        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, or Form 8889 filed (${form8889})`,
-        value: (miscOtherIncome ?? 0) > 0 || form8889,
+        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), or Form 8889 filed (${form8889})`,
+        value:
+          (miscOtherIncome ?? 0) > 0 ||
+          (gamblingWinnings ?? 0) > 0 ||
+          hasBusiness ||
+          scheduleSE ||
+          form8889,
       },
     ],
   });
   return {
     mustFile: { "schedule-1": resolution },
+    businessIncome,
+    gamblingWinnings,
     miscOtherIncome,
   };
+}
+
+/*
+ * Schedule 1 line 3: line 31 of every Schedule C, both spouses' on a joint return.
+ * One blank line 31 (or a business fact that cannot be read) leaves the total blank.
+ */
+/*
+ * Line 3: every business's Schedule C line 31 on a joint return. On any other
+ * status a spouse's business belongs on the spouse's return, and under community
+ * property part of it may belong here (Form 8958, not modeled), so a spouse-owned
+ * business leaves line 3 blank.
+ */
+function scheduleCTotal(
+  businesses: ReadonlyArray<{ value: BusinessFactValue }>,
+  malformedKeys: ReadonlyArray<string>,
+  joint: boolean,
+): number | undefined {
+  if (businesses.length === 0 || malformedKeys.length > 0) return undefined;
+  const spouseOwned = businesses.some((business) => business.value.owner === "spouse");
+  if (!joint && spouseOwned) return undefined;
+  const profits = businesses.map((business) => netProfit(business.value));
+  return profits.every((profit) => profit !== undefined) ? sum(...profits) : undefined;
 }
 
 // Default: required when Form 8959 (line 11) or Form 8960 (line 12) is filed.

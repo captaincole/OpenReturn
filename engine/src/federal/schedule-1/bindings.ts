@@ -12,6 +12,15 @@ import type { Schedule1 } from "./types.js";
 export function register(): void {
   defineForm<Schedule1, Schedule1FilingInfo>("schedule-1", {
     bindings: {
+      // MANUAL EDIT: line 3 = Schedule C line 31, every business (the engine evaluates one Schedule C copy).
+      "0.line.3": (_, info) => info.businessIncome,
+      // MANUAL EDIT: line 8b = W-2G box 1. Winnings with no W-2G have no fact and are not included.
+      "0.line.8b": (_, info) => roundDollars(info.gamblingWinnings),
+      // MANUAL EDIT: line 15 = Schedule SE line 13; blank when Schedule SE is not filed.
+      "1.line.15": (form) => {
+        const line13 = form["schedule-se.0.line.13"];
+        return typeof line13 === "number" ? line13 : undefined;
+      },
       // MANUAL EDIT: line 8z = 1099-MISC box 3 other income.
       "0.line.8z": (_, info) => roundDollars(info.miscOtherIncome),
       "0.line.8z_type": (_, info) => (info.miscOtherIncome ? "Form 1099-MISC" : undefined),
@@ -97,7 +106,6 @@ export function register(): void {
       "0.line.1": "No 1099-G or state-refund taxability worksheet scenario yet.",
       "0.line.2a": "No alimony-received scenario yet.",
       "0.line.2b": "No alimony scenario yet, so there is no divorce-agreement date fact.",
-      "0.line.3": "No Schedule C or self-employment scenario yet.",
       "0.line.4_form_4797": "No Form 4797 business-property sale scenario yet.",
       "0.line.4_form_4684": "No Form 4684 casualty/theft scenario yet.",
       "0.line.4": "No Form 4797 or Form 4684 scenario yet.",
@@ -108,7 +116,6 @@ export function register(): void {
       "0.line.7_amount_repaid": "No 1099-G / unemployment repayment ingestion yet",
       "0.line.7": "No 1099-G unemployment compensation ingestion yet",
       "0.line.8a": "No NOL carryforward scenario yet",
-      "0.line.8b": "No W-2G / gambling income ingestion yet",
       "0.line.8c": "No 1099-C cancellation-of-debt ingestion yet",
       "0.line.8d": "No Form 2555 foreign earned income exclusion scenario yet",
       "0.line.8e": "No Form 8853 (Archer MSA / LTC) scenario yet",
@@ -135,7 +142,6 @@ export function register(): void {
       "1.line.12": "No Form 2106 (reservist/performing artist/fee-basis official) scenario yet.",
       "1.line.14_storage_fees_only": "No Armed Forces moving-expense (Form 3903) scenario yet.",
       "1.line.14": "No Armed Forces moving-expense (Form 3903) scenario yet.",
-      "1.line.15": "No Schedule SE / self-employment scenario yet.",
       "1.line.16": "No self-employed retirement plan scenario yet.",
       "1.line.17": "No self-employed health insurance scenario yet.",
       "1.line.19a": "No alimony-paid fact ingestion or scenario yet.",
