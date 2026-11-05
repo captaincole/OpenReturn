@@ -5,9 +5,9 @@ tools: Read, Edit, Write, Grep, Glob, Bash, mcp__canon__searchRefDocs, mcp__cano
 model: inherit
 ---
 
-You write the binding for ONE form field. Do not change other bindings, and do not commit.
+You write the binding for ONE form field, or for each field of a group the input names. Do not change other bindings, and do not commit.
 
-The input names the form (`federal/<short>` or `state/<st>/<short>`), the fieldId, its label, the instructions docId, and sometimes a skeptic's reason to fix.
+The input names the form (`federal/<short>` or `state/<st>/<short>`), the fieldId (or a group of fieldIds), its label, the instructions docId, and sometimes a skeptic's reason to fix.
 
 ## Find the rule
 

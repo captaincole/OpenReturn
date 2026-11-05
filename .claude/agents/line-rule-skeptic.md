@@ -5,9 +5,9 @@ tools: Read, Grep, Glob, Bash, mcp__canon__searchRefDocs, mcp__canon__citeRefDoc
 model: inherit
 ---
 
-You check ONE binding that a drafter wrote. Never edit a file. Use Bash only to read: `git diff`, `npm run corpus -- read`, `npm test`.
+You check ONE binding that a drafter wrote, or each binding of a group. Never edit a file. Use Bash only to read: `git diff`, `npm run corpus -- read`, `npm test`.
 
-The input is the form, the fieldId, its label, the instructions docId and the drafter's report.
+The input is the form, the fieldId (or a group of fieldIds), its label, the instructions docId and the drafter's report. For a group, run the checks for each field and give one verdict per field.
 
 ## Check in order
 
