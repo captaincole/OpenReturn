@@ -9,6 +9,7 @@ import {
 } from "../../resolverInputs.js";
 import { magiUpperBound } from "../8960/mustFile.js";
 import { netProfit } from "../schedule-c/lines.js";
+import { scheduleCOpen } from "../schedule-c/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
 import type { Form8995AFilingInfo, QbiBusiness } from "./filingInfo.js";
 import { QBI_LIMITS } from "./lines.js";
@@ -26,16 +27,17 @@ export function resolve8995AInfo(inputs: ResolverInputs): Form8995AFilingInfo {
   const reit = sum(...divs.map((row) => (row.value as { box5?: unknown }).box5));
   const { businesses, malformedKeys } = qbiBusinesses(inputs);
   const businessKeys = [...businesses.map((business) => business.factKey), ...malformedKeys];
+  const reitFallback = { rule: `fallback: section 199A dividends $${reit} > 0`, value: reit > 0 };
+  const businessFallback = {
+    rule: "fallback: a Schedule C business (qualified business income)",
+    value: businessKeys.length > 0,
+    triggeredByFactKeys: businessKeys,
+  };
+  // While Schedule C is open, only REIT dividends can say yes; nothing can say no.
+  const open = scheduleCOpen(inputs);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_8995_a",
-    fallbacks: [
-      { rule: `fallback: section 199A dividends $${reit} > 0`, value: reit > 0 },
-      {
-        rule: "fallback: a Schedule C business (qualified business income)",
-        value: businessKeys.length > 0,
-        triggeredByFactKeys: businessKeys,
-      },
-    ],
+    fallbacks: open ? (reit > 0 ? [reitFallback] : []) : [reitFallback, businessFallback],
   });
   return {
     mustFile: { "form-8995-a": resolution },

@@ -9,11 +9,14 @@ const MUST_FILE_KEY = "decisions.scope.must_file_schedule_c";
  * irs-1040sc-inst-2025::sec::small-business-and-self-employed-sb-se-tax-center-do::b02:
  * Schedule C reports a business operated as a sole proprietor. A business fact
  * whose amounts are not numbers leaves the question open, so Cade asks again.
- * A 1099-K that names no business is open too: it can be business receipts or
- * personal sales. A false decision closes it (no Schedule C). Statutory
- * employees and qualified joint ventures have no facts yet. A spouse's business
- * is on this return only when filing jointly; an unknown status counts it until
- * it is known.
+ * A 1099-K that names no business is open too, while there is no business: its
+ * box 1a can be business receipts, personal sales or hobby income, and each
+ * goes on a different line (irs-1040-inst-2025::sec::form-s-1099-k::b01). The
+ * engine models only business receipts, so the 1099-K stays in missingInputs
+ * until it is linked to a business, even after a "no Schedule C" decision.
+ * Statutory employees and qualified joint ventures have no facts yet. A spouse's
+ * business is on this return only when filing jointly; an unknown status counts
+ * it until it is known.
  */
 export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInfo {
   const status = filingStatusOf(inputs);
@@ -22,30 +25,24 @@ export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInf
     status === undefined || status === "married_filing_jointly",
   );
   const unlinkedKeys = unlinkedPaymentTransactionsKeys(inputs.facts);
-  const decided = inputs.decisionByKey.has(MUST_FILE_KEY);
-  const open =
-    !decided && (malformedKeys.length > 0 || (unlinkedKeys.length > 0 && businesses.length === 0));
-  const noScheduleC = inputs.decisionByKey.get(MUST_FILE_KEY) === false;
+  const open = malformedKeys.length > 0 || (unlinkedKeys.length > 0 && businesses.length === 0);
+  const businessFallback = {
+    rule: "fallback: a sole-proprietor business fact",
+    value: businesses.length > 0,
+    triggeredByFactKeys: businesses.map((business) => business.key),
+  };
   return {
     mustFile: {
-      "schedule-c": open
-        ? resolveMustFile(inputs.decisionByKey, { explicitKey: MUST_FILE_KEY })
-        : resolveMustFile(inputs.decisionByKey, {
-            explicitKey: MUST_FILE_KEY,
-            fallbacks: [
-              {
-                rule: "fallback: a sole-proprietor business fact",
-                value: businesses.length > 0,
-                triggeredByFactKeys: businesses.map((business) => business.key),
-              },
-            ],
-          }),
+      "schedule-c": resolveMustFile(inputs.decisionByKey, {
+        explicitKey: MUST_FILE_KEY,
+        fallbacks: open ? [] : [businessFallback],
+      }),
     },
     missingInputs: {
       "schedule-c": missingInputs(
         Object.fromEntries([
           ...malformedKeys.map((key) => [key, undefined]),
-          ...(noScheduleC ? [] : unlinkedKeys).map((key) => [key, undefined]),
+          ...unlinkedKeys.map((key) => [key, undefined]),
           // Line 5 waits for "sells goods" (Part III) and line 31 for line G: ask for the fact again.
           ...businesses
             .filter(
@@ -59,4 +56,9 @@ export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInf
     },
     businesses: businesses.map((business) => business.value),
   };
+}
+
+/* Schedule SE and Form 8995-A wait while Schedule C's must-file answer is open. */
+export function scheduleCOpen(inputs: ResolverInputs): boolean {
+  return resolveScheduleCInfo(inputs).mustFile?.["schedule-c"]?.value === undefined;
 }
