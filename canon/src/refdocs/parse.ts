@@ -1,6 +1,7 @@
 import type { RefBlock, RefSection } from "../db/corpusStore";
 import { splitRange } from "./chunk";
 import type { PageSlice } from "./extract";
+import { isTitleCaseLine } from "./titleCase";
 
 /*
  * Keep heading rules conservative. A miss attaches content to the previous
@@ -28,6 +29,8 @@ const KNOWN_PROSE_HEADINGS = new Set<string>([
   "Qualifying Surviving Spouse",
   // The heading wraps after "Surviving"; the continuation rule adds "Spouse".
   "Qualifying Surviving",
+  // The back of an information return's Copy B (Form 1099-K).
+  "Instructions for Payee",
 ]);
 
 const LINE_HEADING_RE = /^Line \d+[a-z]?$/;
@@ -38,6 +41,18 @@ const LINES_RANGE_HEADING_RE = /^Lines \d+[a-z]? through \d+[a-z]?$/;
 // Alone on the line: body prose also starts "Part III, line 6".
 const PART_HEADING_RE = /^Part [IVXLCDM]+$/;
 const SCHEDULE_HEADING_RE = /^Schedule \d+[A-Z]?$/;
+
+/*
+ * Information-return boxes: "Box 1b. Card Not Present Transactions",
+ * "Box 2a—Ordinary Dividends", "Boxes 4a-4b. Type of Transfer", and a bare
+ * range "Boxes 5a Through 5l". The title must be Title Case and not end a
+ * sentence, so payee text such as "Box 1a. Shows the aggregate…" stays body.
+ */
+const BOX_REF = String.raw`\d+[a-z]?`;
+const BOX_HEADING_RE = new RegExp(
+  String.raw`^Box(?:es)? ${BOX_REF}(?:(?:-|–|,| and| through| Through) ?${BOX_REF})*(?:\.\s+|—)(\S.*)$`,
+);
+const BOXES_RANGE_HEADING_RE = new RegExp(String.raw`^Boxes ${BOX_REF} [Tt]hrough ${BOX_REF}$`);
 
 /*
  * FTB uses en-dash where IRS uses em-dash. The inline pattern is a Title Case
@@ -155,6 +170,13 @@ function detectFtbHeading(line: string, trimmed: string): HeadingMatch | null {
 const WORKSHEET_TITLE_RE =
   /^((\d{4} )?[A-Z][^.]{0,90}?(?:Worksheet|Tax Rate Schedules|Tax Table)(—Lines? \d+[a-z]?(?:,? (?:and|through) \d+[a-z]?)?)?)((?:\s*(?:Keep for Your Records|CAUTION))*)\s*!?$/;
 
+function isBoxHeading(text: string): boolean {
+  if (text.length > 90) return false;
+  if (BOXES_RANGE_HEADING_RE.test(text)) return true;
+  const title = text.match(BOX_HEADING_RE)?.[1];
+  return title !== undefined && !/[.:;,]$/.test(title) && isTitleCaseLine(title);
+}
+
 function detectWorksheetTitle(text: string): HeadingMatch | null {
   const match = text.match(WORKSHEET_TITLE_RE);
   if (!match || !(match[2] || match[3] || match[4])) return null;
@@ -172,6 +194,7 @@ function detectHeading(line: string, style: ParserStyle = "irs"): HeadingMatch |
     LINES_RANGE_HEADING_RE.test(trimmed) ||
     PART_HEADING_RE.test(trimmed) ||
     SCHEDULE_HEADING_RE.test(trimmed) ||
+    isBoxHeading(trimmed) ||
     KNOWN_PROSE_HEADINGS.has(trimmed)
   ) {
     return { heading: trimmed, slug: slugifyHeading(trimmed) };
@@ -192,38 +215,6 @@ export function slugifyHeading(text: string): string {
  * and create phantom sections. IRS headings are Title Case and body prose is
  * not, so the case test finds the wrap.
  */
-const TITLE_CASE_SMALL_WORDS = new Set([
-  "of",
-  "the",
-  "a",
-  "an",
-  "and",
-  "or",
-  "for",
-  "in",
-  "on",
-  "at",
-  "to",
-  "from",
-  "by",
-  "with",
-  "as",
-  "nor",
-  "but",
-  "vs",
-]);
-
-function isTitleCaseLine(text: string): boolean {
-  const words = text.split(/\s+/);
-  for (const word of words) {
-    const bare = word.replace(/[^A-Za-z]/g, "");
-    if (bare.length === 0) continue;
-    if (TITLE_CASE_SMALL_WORDS.has(bare.toLowerCase())) continue;
-    if (!/^[A-Z]/.test(bare)) return false;
-  }
-  return true;
-}
-
 function isHeadingContinuation(lineText: string): boolean {
   const trimmed = lineText.trim();
   if (trimmed.length === 0 || trimmed.length > 60) return false;
