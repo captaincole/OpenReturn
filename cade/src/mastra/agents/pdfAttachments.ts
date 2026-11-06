@@ -35,16 +35,22 @@ async function pdfToPngPages(base64: string): Promise<string[]> {
   const hit = pageCache.get(key);
   if (hit) return hit;
 
-  const { getDocumentProxy, renderPageAsImage } = await import("unpdf");
+  const { createIsomorphicCanvasFactory, getDocumentProxy, renderPageAsImage } =
+    await import("unpdf");
+  const canvasImport = () => import("@napi-rs/canvas");
   const bytes = Uint8Array.from(Buffer.from(base64, "base64"));
-  const doc = await getDocumentProxy(bytes);
+  /*
+   * pdf.js draws some embedded images (a scanned W-2) on a canvas of its own. unpdf's
+   * bundled pdf.js has no canvas for that and throws "@napi-rs/canvas is not available
+   * in this environment", so give it the same canvas the page renders on.
+   */
+  const doc = await getDocumentProxy(bytes, {
+    CanvasFactory: await createIsomorphicCanvasFactory(canvasImport),
+  });
   const pages = Math.min(doc.numPages, MAX_PAGES);
   const out: string[] = [];
   for (let page = 1; page <= pages; page++) {
-    const png = await renderPageAsImage(doc, page, {
-      canvasImport: () => import("@napi-rs/canvas"),
-      scale: SCALE,
-    });
+    const png = await renderPageAsImage(doc, page, { canvasImport, scale: SCALE });
     out.push(Buffer.from(png as ArrayBuffer).toString("base64"));
   }
   pageCache.set(key, out);
