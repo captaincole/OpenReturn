@@ -1,4 +1,13 @@
-import type { TaxFactRow } from "@openreturn/engine/facts";
+import {
+  makeDividendFactKey,
+  makeGamblingWinningsFactKey,
+  makeInterestFactKey,
+  makePaymentTransactionsFactKey,
+  makeRetirementDistributionFactKey,
+  makeSocialSecurityFactKey,
+  makeW2FactKey,
+  type TaxFactRow,
+} from "@openreturn/engine/facts";
 import { SCENARIOS } from "@openreturn/engine/scenarios";
 import path from "node:path";
 
@@ -13,8 +22,13 @@ export interface IngestCase {
 
 const SCENARIO_DIR = path.resolve(__dirname, "../../../engine/tests/scenarios");
 
-/* [scenario, file, document type, key patterns of the facts it produces] */
-const MANIFEST: [string, string, string, RegExp[]][] = [
+/* A fact key: the exact key, or a pattern for the older rows. */
+type KeyMatch = string | RegExp;
+const matchesKey = (match: KeyMatch, key: string) =>
+  typeof match === "string" ? match === key : match.test(key);
+
+/* [scenario, file, document type, the keys of the facts it produces] */
+const MANIFEST: [string, string, string, KeyMatch[]][] = [
   ["alex", "01-alex-w2.pdf", "W-2", [/^employer\./]],
   ["alejandro", "01-alejandro-w2.pdf", "W-2", [/^employer\./]],
   ["alejandro", "02-alejandro-1099.pdf", "Consolidated 1099", [/^account\.apex-individual\./]],
@@ -70,7 +84,62 @@ const MANIFEST: [string, string, string, RegExp[]][] = [
   ["tara", "04-bay-area-door-invoice.pdf", "Energy invoice", [/^vendor\.bay-area-door/]],
   ["tara", "05-sierra-window-invoice.pdf", "Energy invoice", [/^vendor\.sierra-window/]],
   ["tara", "06-valley-comfort-hvac-invoice.pdf", "Energy invoice", [/^vendor\.valley-comfort/]],
+  ["tcb-us-003", "01-test-w2.pdf", "W-2", [makeW2FactKey("test")]],
+  [
+    "tcb-us-003",
+    "02-fidelity-advisor-1099-r.pdf",
+    "1099-R",
+    [makeRetirementDistributionFactKey("fidelity-advisor", "code-1")],
+  ],
+  [
+    "tcb-us-003",
+    "03-charles-schwab-1099-r.pdf",
+    "1099-R",
+    [makeRetirementDistributionFactKey("charles-schwab", "code-7")],
+  ],
+  [
+    "tcb-us-003",
+    "04-capital-one-1099-r.pdf",
+    "1099-R",
+    [makeRetirementDistributionFactKey("capital-one", "code-4")],
+  ],
+  [
+    "tcb-us-003",
+    "05-the-roth-company-1099-r.pdf",
+    "1099-R",
+    [makeRetirementDistributionFactKey("the-roth-company", "code-c")],
+  ],
+  ["tcb-us-003", "06-ssa-1099.pdf", "SSA-1099", [makeSocialSecurityFactKey("ssa")]],
+  ["tcb-us-006", "01-abc-co-w2.pdf", "W-2", [makeW2FactKey("abc-co")]],
+  [
+    "tcb-us-006",
+    "02-poker-club-w2g.pdf",
+    "W-2G",
+    [makeGamblingWinningsFactKey("tin-12-3456789", "10-10-2025-5000000")],
+  ],
+  ["tcb-us-006", "03-azure-1099-int.pdf", "1099-INT", [makeInterestFactKey("azure")]],
+  ["tcb-us-006", "04-azure-1099-div.pdf", "1099-DIV", [makeDividendFactKey("azure")]],
+  [
+    "tcb-us-006",
+    "05-metro-rides-1099-k.pdf",
+    "1099-K",
+    [makePaymentTransactionsFactKey("tin-00-0000006", "mr-20417")],
+  ],
 ];
+
+/*
+ * Fields that need what the user said, not only the document: a 1099-K's businessId
+ * links it to a business Cade asked about, and a 1099-R's owner compares the
+ * recipient with the taxpayer's name. The eval asks no questions and gives no
+ * identity, so it does not score them.
+ */
+const ANSWER_FIELDS = ["businessId", "owner"];
+
+function documentValue(fact: TaxFactRow): TaxFactRow {
+  if (typeof fact.value !== "object" || fact.value === null) return fact;
+  const printed = Object.entries(fact.value).filter(([field]) => !ANSWER_FIELDS.includes(field));
+  return { ...fact, value: Object.fromEntries(printed) };
+}
 
 /* One document per type. */
 const LITE = new Set([
@@ -86,12 +155,16 @@ const LITE = new Set([
   "carter/04-ssa-1099.pdf",
   "tara/03-household-employee-w-2-copy-d.pdf",
   "tara/04-bay-area-door-invoice.pdf",
+  "tcb-us-006/02-poker-club-w2g.pdf",
+  "tcb-us-006/05-metro-rides-1099-k.pdf",
 ]);
 
 export function loadCases(tier: "lite" | "full"): IngestCase[] {
   const cases = MANIFEST.map(([scenario, file, type, patterns]) => {
     const facts = SCENARIOS.find((entry) => entry.name === scenario)?.facts ?? [];
-    const expected = facts.filter((fact) => patterns.some((pattern) => pattern.test(fact.key)));
+    const expected = facts
+      .filter((fact) => patterns.some((pattern) => matchesKey(pattern, fact.key)))
+      .map(documentValue);
     if (!expected.length) throw new Error(`${scenario}/${file}: no expected facts match`);
     const doc = `${scenario}/${file}`;
     return {

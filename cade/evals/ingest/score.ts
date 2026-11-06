@@ -22,13 +22,15 @@ export interface DocScore {
 const kindOf = (fact: TaxFactRow) =>
   `${fact.category}:${fact.key
     .replace(/^(account|payer|employer|employee|vendor)\.[^.]+/, "$1")
-    .replace(/\.(trades|distributions|hsa_distributions)\..*$/, ".$1")}`;
+    .replace(/\.(trades|distributions|hsa_distributions|w2g|1099k)\..*$/, ".$1")}`;
 
 const FORM_BY_SUFFIX: [RegExp, string][] = [
   [/\.interest$/, "1099-INT"],
   [/\.dividends$/, "1099-DIV"],
   [/\.misc$/, "1099-MISC"],
   [/\.trades\.[^.]+/, "1099-B"],
+  [/\.w2g\./, "W-2G"],
+  [/\.1099k\./, "1099-K"],
 ];
 export const formOf = (key: string) =>
   FORM_BY_SUFFIX.find(([re]) => re.test(key))?.[1] ?? "document";
