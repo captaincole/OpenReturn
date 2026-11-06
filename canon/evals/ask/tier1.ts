@@ -117,6 +117,37 @@ export const TIER_1: AskCase[] = [
     ],
     facts: [anyOf("15,750")],
   },
+  {
+    name: "1099-K box 1a includes the platform's fees",
+    tier: 1,
+    kind: "standard",
+    question:
+      "I drive for a rideshare app. Does the amount in box 1a of my Form 1099-K include the fees the app kept?",
+    coverage: ["covered"],
+    authority: [
+      anyOf(
+        "irs-1099k-form-2025::sec::instructions-for-payee::b02",
+        "irs-1099k-inst-2025::sec::box-1a-gross-payment-card-third-party::b01",
+      ),
+    ],
+    facts: [anyOf("fees")],
+  },
+  {
+    // The 1099-K instructions (Rev. March 2024) still say $600; the 2025 law and the 1040 instructions say $20,000.
+    name: "1099-K threshold is $600",
+    tier: 1,
+    kind: "false_premise",
+    question:
+      "A payment app must send me a Form 1099-K for 2025 once I receive more than $600 through it, right?",
+    coverage: ["covered"],
+    authority: [
+      anyOf(
+        "irs-1040-inst-2025::sec::form-s-1099-k::b02",
+        "irs-1040-inst-2025::sec::health-coverage-reporting::b11",
+      ),
+    ],
+    facts: [anyOf("20,000"), anyOf("200")],
+  },
   lite(
     insufficient(
       "New York standard deduction",

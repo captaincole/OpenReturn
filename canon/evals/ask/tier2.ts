@@ -137,6 +137,22 @@ export const TIER_2: AskCase[] = [
     "What is the 2025 federal per diem lodging rate for San Francisco?",
     ["not_covered", "partial"],
   ),
+  {
+    name: "Personal item sold at a loss on a 1099-K",
+    tier: 2,
+    kind: "standard",
+    question:
+      "I sold my old couch on an online marketplace for less than I paid for it, and I got a Form 1099-K. How do I report that on my 2025 return?",
+    coverage: ["covered"],
+    authority: [
+      anyOf(
+        ...blocks("irs-1040-inst-2025::sec::form-s-1099-k", [1, 2, 3]),
+        "irs-8949-inst-2025::sec::line-1::b02",
+        "irs-1040sd-inst-2025::sec::capital-assets-held-for::b02",
+      ),
+    ],
+    facts: [anyOf("Schedule 1")],
+  },
   lite(
     insufficient(
       "Washington capital gains tax",
