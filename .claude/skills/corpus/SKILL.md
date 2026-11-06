@@ -57,7 +57,7 @@ Cost: ~$0.50 Haiku contextualization per doc; embeddings are local and free (Emb
 | subcommand | use |
 |---|---|
 | `fetch` | install the prebuilt corpus.db (local seed or sha-verified release download) |
-| `sync` | idempotent corpus sync from the `sources/**/{instructions,publication}.meta.json` sidecars; fetches source files as needed |
+| `sync [--doc <docId>…]` | idempotent corpus sync from the `sources/**/{instructions,publication}.meta.json` sidecars; fetches source files as needed. `--doc` limits it to those documents |
 | `add-html <url> --dir …` | fetch + clean a publisher web page into a sources folder (HTML file + sidecar); re-run to refresh the sha256 |
 | `status [--strict]` | diff repo sidecars vs corpus.db (no source file needed) |
 | `ingest` | manual single-doc ingest (any PDF or HTML path; debug flags) |
@@ -73,7 +73,7 @@ A worktree has no `canon/.data/`, so `read`, `search` and `outline` stop with "h
 
 ## Rebuilding
 
-To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). After any parser change: `corpus sync --force`, then re-point code citations to block ids. The corpus and `sources/` survive `npm run reset`.
+To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). After a parser change, find the documents whose sections change: run the old and the new `parseDoc` over the PDFs stored in `ref_document_files`, and compare. Re-ingest only those: `corpus sync --force --doc <docId> --doc …` (Haiku cost is one call per block of each document). Then re-point code citations to block ids that went away. The corpus and `sources/` survive `npm run reset`.
 
 ## Verify your change
 
