@@ -52,7 +52,7 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
     instructions instead
   - `tcb-us-006` — TaxCalcBench case ty25-us-006, federal only. MFS, a
     W-2 with an HSA, a rideshare business (Schedule C, Schedule SE, Form
-    8995-A), a W-2G, interest and dividends (Forms 8959 and 8960). Checked
+    8995-A) with its 1099-K, a W-2G, interest and dividends (Forms 8959 and 8960). Checked
     against the case's answer key; its README lists where the engine
     follows the instructions instead
 - **Catalog-fill checks** (`golden/catalogFill.ts`) — for every form in its

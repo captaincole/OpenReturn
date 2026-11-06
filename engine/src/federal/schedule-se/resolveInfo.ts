@@ -4,6 +4,7 @@ import { sum } from "../../money.js";
 import { missingInputs, resolveMustFile, text, type ResolverInputs } from "../../resolverInputs.js";
 import { ssn, type SSN } from "../../values.js";
 import { netProfit, tentativeProfit } from "../schedule-c/lines.js";
+import { scheduleCOpen } from "../schedule-c/resolveInfo.js";
 import type { ScheduleSEFilingInfo } from "./filingInfo.js";
 import { MIN_NET_EARNINGS, netEarnings } from "./lines.js";
 
@@ -37,6 +38,7 @@ export function resolveScheduleSEInfo(inputs: ResolverInputs): ScheduleSEFilingI
   );
   const decided =
     !spouseBusiness &&
+    !scheduleCOpen(inputs) &&
     malformedKeys.length === 0 &&
     (known || (onlyLossesUnknown && netEarnings(knownProfit) < MIN_NET_EARNINGS));
   const wages = taxpayerSocialSecurityWages(inputs);
@@ -44,7 +46,8 @@ export function resolveScheduleSEInfo(inputs: ResolverInputs): ScheduleSEFilingI
     mustFile: {
       /*
        * A blank line 31 leaves the question open, unless only losses are unknown; so does a
-       * spouse's business on a joint return, or a business fact that cannot be read.
+       * spouse's business on a joint return, a business fact that cannot be read, or an
+       * open Schedule C (a 1099-K that names no business).
        */
       "schedule-se": resolveMustFile(inputs.decisionByKey, {
         explicitKey: "decisions.scope.must_file_schedule_se",

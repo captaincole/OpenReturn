@@ -1,9 +1,11 @@
 /*
  * One fact per Form 1099-K (payment card and third party network transactions),
  * from a card processor or a platform such as a rideshare app. Box 1a is the
- * gross amount, with the platform's fees in it, so it is where Schedule C line 1
- * starts, not the line itself: the user confirms gross receipts in the business
- * fact. businessId names the business (business.ts) the payments were for.
+ * gross amount "without regard to any adjustments for … fees, refunded amounts"
+ * (irs-1099k-form-2025::sec::instructions-for-payee::b02), so it is where
+ * Schedule C line 1 starts, not the line itself: the user confirms gross
+ * receipts in the business fact. businessId names the business (business.ts)
+ * the payments were for.
  */
 
 import { makeBusinessFactKey } from "./business.js";

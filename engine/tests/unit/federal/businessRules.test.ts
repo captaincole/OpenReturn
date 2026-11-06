@@ -85,12 +85,40 @@ describe("Schedule C and a 1099-K", () => {
       true,
       [unlinked.key],
     ],
-    ["no business named, Schedule C decided false", [unlinked], false, false, []],
+    ["no business named, Schedule C decided false", [unlinked], false, false, [unlinked.key]],
     ["no business named, Schedule C decided true", [unlinked], true, true, [unlinked.key]],
   ])("%s", (_, facts, scheduleC, mustFile, missing) => {
     const info = resolve(facts, scheduleC);
     expect(info.mustFile?.["schedule-c"]?.value).toBe(mustFile);
     expect(info.missingInputs?.["schedule-c"]).toEqual(missing);
+  });
+});
+
+describe("a 1099-K that names no business, with no business", () => {
+  const facts = [form1099K("b")];
+
+  it("leaves Schedule SE open", () => {
+    expect(resolveScheduleSEInfo(inputs(facts, "single")).mustFile?.["schedule-se"]?.value).toBe(
+      undefined,
+    );
+  });
+
+  it("leaves Schedule 2 open", () => {
+    expect(resolveSchedule2Info(inputs(facts, "single")).mustFile?.["schedule-2"]?.value).toBe(
+      undefined,
+    );
+  });
+
+  it("leaves Form 8995-A open", () => {
+    expect(resolve8995AInfo(inputs(facts, "single")).mustFile?.["form-8995-a"]?.value).toBe(
+      undefined,
+    );
+  });
+
+  it("closes Schedule SE after a no-Schedule-C decision", () => {
+    expect(
+      resolveScheduleSEInfo(inputs(facts, "single", false)).mustFile?.["schedule-se"]?.value,
+    ).toBe(false);
   });
 });
 

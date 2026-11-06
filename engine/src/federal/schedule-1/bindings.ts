@@ -111,7 +111,8 @@ export function register(): void {
     unsupported: {
       "0.header.name":
         "No combined full-name fact exists and lookupFact reads only one fact; it needs a first+last concatenation rule.",
-      "0.header.form_1099k_error_amount": "No 1099-K ingestion or personal-item-loss scenario yet.",
+      "0.header.form_1099k_error_amount":
+        "No fact for a 1099-K amount in error or for personal items sold at a loss; a 1099-K that names no business stays open on Schedule C.",
       "0.line.1": "No 1099-G or state-refund taxability worksheet scenario yet.",
       "0.line.2a": "No alimony-received scenario yet.",
       "0.line.2b": "No alimony scenario yet, so there is no divorce-agreement date fact.",
