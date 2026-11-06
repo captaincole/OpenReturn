@@ -11,47 +11,47 @@
   ],
   "models": [
     {
-      "label": "Gemma 4 26b Q4_K_M",
-      "id": "ollama/gemma4:26b",
-      "score": 0.73125,
+      "label": "Haiku 5.5",
+      "id": "anthropic/claude-haiku-5-5",
+      "score": 0.8,
       "capabilities": {
-        "Coverage": 0.94375,
-        "Grounding": 0.7923076923076923,
-        "Retrieval": 0.8538461538461538,
-        "Facts": 0.8538461538461538
+        "Coverage": 0.9142857142857143,
+        "Grounding": 0.8275862068965517,
+        "Retrieval": 0.896551724137931,
+        "Facts": 0.896551724137931
       }
     },
     {
-      "label": "Haiku 5.5",
-      "id": "anthropic/claude-haiku-5-5",
-      "score": 0.78125,
+      "label": "Gemma 4 26b Q4_K_M",
+      "id": "ollama/gemma4:26b",
+      "score": 0.7371428571428571,
       "capabilities": {
-        "Coverage": 0.90625,
-        "Grounding": 0.8846153846153846,
-        "Retrieval": 0.9615384615384616,
-        "Facts": 0.9615384615384616
+        "Coverage": 0.9428571428571428,
+        "Grounding": 0.7862068965517242,
+        "Retrieval": 0.8206896551724138,
+        "Facts": 0.8620689655172413
       }
     },
     {
       "label": "Gemma 4 31b Q4_K_M",
       "id": "ollama/gemma4:31b",
-      "score": 0.71875,
+      "score": 0.72,
       "capabilities": {
-        "Coverage": 0.95,
-        "Grounding": 0.7615384615384615,
-        "Retrieval": 0.7692307692307693,
-        "Facts": 0.8461538461538461
+        "Coverage": 0.9428571428571428,
+        "Grounding": 0.7862068965517242,
+        "Retrieval": 0.8068965517241379,
+        "Facts": 0.8344827586206897
       }
     },
     {
       "label": "Gemma 4 e4b",
       "id": "ollama/gemma4:e4b",
-      "score": 0.5625,
+      "score": 0.5657142857142857,
       "capabilities": {
-        "Coverage": 0.85625,
-        "Grounding": 0.6307692307692307,
-        "Retrieval": 0.7076923076923077,
-        "Facts": 0.676923076923077
+        "Coverage": 0.8514285714285714,
+        "Grounding": 0.6068965517241379,
+        "Retrieval": 0.7241379310344828,
+        "Facts": 0.6827586206896552
       }
     }
   ]
