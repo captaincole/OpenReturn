@@ -76,18 +76,31 @@ async function redate(entry: CorpusEntry, existing: RefDocument): Promise<boolea
   return true;
 }
 
+/* --doc limits the sync to those docIds; an unknown docId stops it before any work. */
+function onlyDocs(entries: CorpusEntry[], docIds: string[]): CorpusEntry[] {
+  if (docIds.length === 0) return entries;
+  const known = new Set(entries.map((entry) => entry.sidecar.docId));
+  const unknown = docIds.filter((docId) => !known.has(docId));
+  if (unknown.length > 0) {
+    throw new Error(`no sidecar for --doc ${unknown.join(", ")}`);
+  }
+  return entries.filter((entry) => docIds.includes(entry.sidecar.docId));
+}
+
 async function run(argv: string[]): Promise<void> {
   const { values } = parseArgs({
     args: argv,
     options: {
       force: { type: "boolean", default: false },
       "no-contextualize": { type: "boolean", default: false },
+      doc: { type: "string", multiple: true, default: [] },
     },
     strict: true,
     allowPositionals: false,
   });
   const flags: SyncFlags = { force: values.force, noContextualize: values["no-contextualize"] };
   const walk = await walkCorpus();
+  const entries = onlyDocs(walk.entries, values.doc);
   const result: SyncResult = { ok: [], failed: [], unconfigured: [] };
 
   for (const source of walk.unconfigured) {
@@ -95,9 +108,9 @@ async function run(argv: string[]): Promise<void> {
     result.unconfigured.push(source.sourceRelPath);
   }
 
-  console.log(`[corpus sync] processing ${walk.entries.length} doc(s)`);
+  console.log(`[corpus sync] processing ${entries.length} doc(s)`);
   const stored = await docIdsWithSource();
-  for (const entry of walk.entries) {
+  for (const entry of entries) {
     try {
       const synced = await syncOne(entry, flags, stored);
       result.ok.push(synced);
@@ -137,6 +150,10 @@ export const syncCommand: Command = {
     {
       flag: "--no-contextualize",
       desc: "skip the Haiku contextualization stage (parser iteration)",
+    },
+    {
+      flag: "--doc <docId>",
+      desc: "sync only this doc; repeat for more (with --force: re-ingest the docs a parser change touches)",
     },
   ],
   run,

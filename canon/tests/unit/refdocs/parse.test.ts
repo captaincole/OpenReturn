@@ -30,6 +30,34 @@ describe("parseDoc headings", () => {
     );
   });
 
+  it("box headings with a letter, a dash, a range or a wrapped title", () => {
+    const found = headings(
+      "See Regulations section 1.6050W-1(e).\n" +
+        "Box 1b. Card Not Present Transactions\nEnter the amount.\n" +
+        "Box 2a—Ordinary Dividends\nEnter the amount.\n" +
+        "Boxes 4a-4b. Type of Transfer\nCheck the box.\n" +
+        "Boxes 5a Through 5l\nEnter each month.\n" +
+        "3\nBox 1a. Gross Payment Card/Third Party\nNetwork Transactions\nEnter the gross amount.\n",
+    );
+    expect(found).toEqual(
+      expect.arrayContaining([
+        "Box 1b. Card Not Present Transactions",
+        "Box 2a—Ordinary Dividends",
+        "Boxes 4a-4b. Type of Transfer",
+        "Boxes 5a Through 5l",
+        "Box 1a. Gross Payment Card/Third Party Network Transactions",
+      ]),
+    );
+  });
+
+  it("payee box text that starts a sentence stays body", () => {
+    const found = headings(
+      "Instructions for Payee\nYou have received this form.\n" +
+        "Box 1a. Shows the aggregate gross amount of payment card\ntransactions made to you.\n",
+    );
+    expect(found).toEqual(["(Preamble)", "Instructions for Payee"]);
+  });
+
   it("rejects a wrapped bullet line (previous line has no period)", () => {
     const found = headings(
       "Intro.\n• Schedule D, Special Rules for Patrons of\nAgricultural or Horticultural Cooperatives\nmore body text here.\n",
