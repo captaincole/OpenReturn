@@ -1,9 +1,9 @@
 {
-  "version": "corpus-v8",
-  "description": "Prebuilt IRS/FTB reference corpus, tax year 2025: 168 documents (136 IRS, 32 FTB; 145 PDFs — form instructions and 51 IRS/FTB publications — and 23 FTB web pages: 22 instruction pages and Pub 1004), 22,915 passages, FTS5 + embeddinggemma-2 768-dim embeddings, Haiku contextual summaries, each document's source file (ref_document_files; ref_documents.format says pdf or html) and its publication date (ref_documents.published).",
+  "version": "corpus-v9",
+  "description": "Prebuilt IRS/FTB reference corpus, tax year 2025: 170 documents (138 IRS, 32 FTB; 147 PDFs — form instructions, forms with their instructions and 52 IRS/FTB publications — and 23 FTB web pages), 23,003 passages, FTS5 + embeddinggemma-2 768-dim embeddings, Haiku contextual summaries, each document's source file (ref_document_files; ref_documents.format says pdf or html) and its publication date (ref_documents.published).",
   "file": "corpus.db",
-  "sha256": "5d9cdfad894045e98d970df00941e27ae54e7831758eb2bb005240191e25affa",
-  "sizeBytes": 349351936,
-  "url": "https://github.com/captaincole/openreturn/releases/download/corpus-v8/corpus.db",
-  "_notes": "GitHub Release asset (corpus-v8 tag). Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in ref_meta), so clones running Ollama need no reembed. The source files live in the database, not in git; sources keeps their sidecars. corpus-v4 changed the schema (ref_documents.format, ref_document_files.source): replace an older corpus.db with `npm run corpus -- fetch --force`. Everyone downloads the full corpus; per-state packs are a future option if size demands it."
+  "sha256": "5a3b9b153c84ded58be2fb1ffd7d891b76218a5c2b92a8f9827db7bfbd1378eb",
+  "sizeBytes": 352047104,
+  "url": "https://github.com/captaincole/openreturn/releases/download/corpus-v9/corpus.db",
+  "_notes": "GitHub Release asset (corpus-v9 tag). Embeddings are EmbeddingGemma 2 (ollama/embeddinggemma-2, stamped in ref_meta), so clones running Ollama need no reembed. The source files live in the database, not in git; sources keeps their sidecars. corpus-v4 changed the schema (ref_documents.format, ref_document_files.source): replace an older corpus.db with `npm run corpus -- fetch --force`. Everyone downloads the full corpus; per-state packs are a future option if size demands it."
 }
