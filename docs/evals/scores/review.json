@@ -11,23 +11,12 @@
   ],
   "models": [
     {
-      "label": "Gemma 4 e4b",
-      "id": "ollama/gemma4:e4b",
-      "score": 0.8166666666666667,
-      "capabilities": {
-        "Verdict": 0.9666666666666667,
-        "Grounding": 0.4666666666666667,
-        "Retrieval": 0.8333333333333334,
-        "Citations": 1
-      }
-    },
-    {
       "label": "Haiku 5.5",
       "id": "anthropic/claude-haiku-5-5",
-      "score": 0.9583333333333334,
+      "score": 0.875,
       "capabilities": {
         "Verdict": 1,
-        "Grounding": 1,
+        "Grounding": 0.6666666666666666,
         "Retrieval": 0.8333333333333334,
         "Citations": 1
       }
@@ -35,22 +24,33 @@
     {
       "label": "Gemma 4 26b Q4_K_M",
       "id": "ollama/gemma4:26b",
-      "score": 0.8583333333333334,
+      "score": 0.85,
       "capabilities": {
-        "Verdict": 1,
-        "Grounding": 0.6,
-        "Retrieval": 0.8333333333333334,
+        "Verdict": 0.8666666666666667,
+        "Grounding": 0.6666666666666666,
+        "Retrieval": 0.8666666666666667,
         "Citations": 1
       }
     },
     {
       "label": "Gemma 4 31b Q4_K_M",
       "id": "ollama/gemma4:31b",
-      "score": 0.9583333333333334,
+      "score": 0.95,
       "capabilities": {
         "Verdict": 1,
         "Grounding": 0.9333333333333333,
-        "Retrieval": 0.9,
+        "Retrieval": 0.8666666666666667,
+        "Citations": 1
+      }
+    },
+    {
+      "label": "Gemma 4 e4b",
+      "id": "ollama/gemma4:e4b",
+      "score": 0.875,
+      "capabilities": {
+        "Verdict": 0.9666666666666667,
+        "Grounding": 0.7333333333333333,
+        "Retrieval": 0.8,
         "Citations": 1
       }
     }
