@@ -18,4 +18,8 @@ export const INVESTMENT_INTEREST_KEYS = {
    * miscellaneous itemized deductions, not allowed for 2025 (Form 4952, Line 5).
    */
   investmentExpenses: "investment_interest.investment_expenses",
+  /* FTB 3526 line 2: last year's FTB 3526 line 7, California's own carryover (it differs from the federal one). */
+  caDisallowedCarryover: "investment_interest.ca_disallowed_carryover",
+  /* FTB 3526 line 4e: a separate California election of net capital gain as investment income. */
+  caElectedNetCapitalGain: "investment_interest.ca_elected_net_capital_gain",
 } as const;

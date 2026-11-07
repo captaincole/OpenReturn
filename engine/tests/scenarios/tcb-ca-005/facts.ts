@@ -6,6 +6,7 @@
 import {
   AMT_KEYS,
   INVESTMENT_INTEREST_KEYS,
+  MORTGAGE_KEYS,
   SPOUSE_KEYS,
   makeDependentFactKey,
   makeDividendFactKey,
@@ -223,9 +224,21 @@ export const tcbCa005Facts: TaxFactRow[] = [
   ),
   fact(
     "mortgage",
-    "mortgage.interest_form_1098",
+    MORTGAGE_KEYS.interestForm1098,
     8059,
-    "Form 1098 from Chase Bank, box 1 (docs/07-chase-bank-1098.pdf).",
+    "Form 1098 from Chase Bank, box 1; no points in box 6 (docs/07-chase-bank-1098.pdf).",
+  ),
+  fact(
+    "mortgage",
+    MORTGAGE_KEYS.outstandingPrincipalForm1098,
+    245552,
+    "Form 1098 from Chase Bank, box 2 (docs/07-chase-bank-1098.pdf).",
+  ),
+  fact(
+    "mortgage",
+    MORTGAGE_KEYS.originationDateForm1098,
+    "10/10/2021",
+    "Form 1098 from Chase Bank, box 3 (docs/07-chase-bank-1098.pdf).",
   ),
   fact("retirement", makeSocialSecurityFactKey("ssa"), ssa, "SSA-1099 (docs/08-ssa-1099.pdf)."),
   fact(
@@ -280,6 +293,12 @@ export const tcbCa005Facts: TaxFactRow[] = [
     INVESTMENT_INTEREST_KEYS.investmentExpenses,
     0,
     `${ANSWERS}: no investment expenses given.`,
+  ),
+  fact(
+    "investment_income",
+    INVESTMENT_INTEREST_KEYS.caDisallowedCarryover,
+    650,
+    "The key's FTB 3526 line 2: the answers give one carryover (f4952.COfromBefore), and the key applies it to California.",
   ),
   fact(
     "state_local_tax",

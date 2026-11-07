@@ -32,6 +32,10 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Schedule P (540) reads it",
   ],
   [
+    /^mortgage\.origination_date_form_1098$/,
+    "the 1098's box 3, read only to pick the $1,000,000 limit for a loan from 2017 or earlier",
+  ],
+  [
     /^investment_interest\.ca_elected_net_capital_gain$/,
     "a separate California election on FTB 3526 line 4e, recorded only when the user states one",
   ],
