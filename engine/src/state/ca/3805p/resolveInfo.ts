@@ -1,6 +1,11 @@
-import { parseRetirementDistributionFact } from "../../../facts/index.js";
+import {
+  parseRetirementDistributionFact,
+  readTraditionalIraFact,
+  type RetirementDistributionFactValue,
+} from "../../../facts/index.js";
 import type { TaxFactRow } from "../../../facts/rows.js";
-import { rowTaxable } from "../../../federal/1040/resolveInfo.js";
+import { rowTaxable, traditionalTaxable } from "../../../federal/1040/resolveInfo.js";
+import { form8606Filers } from "../../../federal/8606/resolveInfo.js";
 import { sum } from "../../../money.js";
 import { factsInCategory, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
 import type { EarlyDistributionOwner, Form3805pFilingInfo } from "./filingInfo.js";
@@ -9,9 +14,10 @@ import type { EarlyDistributionOwner, Form3805pFilingInfo } from "./filingInfo.j
  * ca-3805p-inst-2025::sec::b-who-must-file::b01 and ::b02: file when an early
  * taxable distribution from a qualified plan shows a box 7 code other than 2, 3
  * or 4 (those codes claim an exception; a rollover, codes G and H, is not an early
- * distribution). Code 1 is "early distribution, no known exception" (with a
- * second letter too: 1B, 1D, 1L…); S is a SIMPLE IRA in its first two years.
- * Code J (early Roth IRA) takes line 1 from Form 8606 line 19
+ * distribution), and not when the taxable part was all rolled over within 60
+ * days. Code 1 is "early distribution, no known exception" (with a second
+ * letter too: 1B, 1D, 1L…); S is a SIMPLE IRA in its first two years. Code J
+ * (early Roth IRA) takes line 1 from Form 8606 line 19
  * (::sec::line-1-early-distributions-included-in-income::b05), which the engine
  * does not compute: a code J distribution is not counted here.
  */
@@ -21,9 +27,16 @@ const SIMPLE_IRA_CODE = "S";
 interface EarlyRow {
   key: string;
   owner: EarlyDistributionOwner;
-  /* The amount included in income, the 1040's rule; undefined while undetermined. */
-  taxable: number | undefined;
-  simpleIra: boolean;
+  distribution: RetirementDistributionFactValue;
+}
+
+const ownerOf = (distribution: RetirementDistributionFactValue): EarlyDistributionOwner =>
+  distribution.owner ?? "taxpayer";
+
+function parsedDistributions(distributions: TaxFactRow[]): RetirementDistributionFactValue[] {
+  return distributions
+    .map((fact) => parseRetirementDistributionFact(fact)?.distribution)
+    .filter((row): row is RetirementDistributionFactValue => row !== undefined);
 }
 
 function earlyRows(distributions: TaxFactRow[]): EarlyRow[] {
@@ -31,56 +44,91 @@ function earlyRows(distributions: TaxFactRow[]): EarlyRow[] {
   for (const fact of distributions) {
     const parsed = parseRetirementDistributionFact(fact);
     if (!parsed) continue;
-    const { box7, owner } = parsed.distribution;
+    const { box7 } = parsed.distribution;
     if (!EARLY_NO_EXCEPTION_CODES.some((code) => box7.includes(code))) continue;
     rows.push({
       key: fact.key,
-      owner: owner ?? "taxpayer",
-      taxable: rowTaxable(parsed.distribution),
-      simpleIra: box7.includes(SIMPLE_IRA_CODE),
+      owner: ownerOf(parsed.distribution),
+      distribution: parsed.distribution,
     });
   }
   return rows;
 }
 
 /*
- * Blank while a row's taxable amount is undetermined (box 2a blank, "taxable
- * amount not determined"): the 1040 leaves that row's line 4b or 5b open too,
- * and the engine never takes an unknown for 0.
+ * Line 1 is the amount included in income (::sec::line-1-early-distributions-included-in-income::b01),
+ * the 1040's rule. A pension or plan row takes its taxable amount. IRA rows
+ * follow 1040 line 4b: an indirect rollover (the traditional IRA fact's
+ * `rolledOver`) comes off their taxable total, and a Form 8606 Part I filer
+ * recovers basis on that form, which the engine leaves to the 1040: blank here.
+ * When the person also has IRA rows that are not early, the rollover cannot be
+ * split between them: blank. Blank, too, while any row's taxable amount is
+ * undetermined (box 2a blank, "taxable amount not determined"), as on the 1040.
  */
-function amountOf(rows: EarlyRow[]): number | undefined {
-  if (rows.some((row) => row.taxable === undefined)) return undefined;
-  return sum(...rows.map((row) => row.taxable ?? 0));
+function amountIncludedInIncome(
+  inputs: ResolverInputs,
+  owner: EarlyDistributionOwner,
+  rows: EarlyRow[],
+  allIraRowsOfOwner: RetirementDistributionFactValue[],
+): number | undefined {
+  const plan = rows
+    .filter((row) => !row.distribution.box7IraSepSimple)
+    .map((row) => rowTaxable(row.distribution));
+  if (plan.includes(undefined)) return undefined;
+  const iraRows = rows.filter((row) => row.distribution.box7IraSepSimple);
+  if (iraRows.length === 0) return sum(...plan);
+  if (form8606Filers(inputs).some((holder) => holder.owner === owner && holder.partI)) {
+    return undefined;
+  }
+  if (allIraRowsOfOwner.length !== iraRows.length) return undefined;
+  const rolledOver = readTraditionalIraFact(inputs.factByKey, owner)?.rolledOver ?? 0;
+  const ira = traditionalTaxable(
+    iraRows.map((row) => row.distribution),
+    rolledOver,
+  );
+  return ira === undefined ? undefined : sum(...plan, ira);
 }
 
 /*
  * MANUAL EDIT: the form is per person (ca-3805p-inst-2025::sec::b-who-must-file::b03,
  * "Each spouse/RDP must complete a separate form FTB 3805P"). When both spouses
  * took an early distribution two forms are needed, which the engine does not
- * model: the amounts stay blank, so Form 540 line 63 waits instead of carrying
+ * model: the amounts stay blank, so Form 540 line 64 waits instead of carrying
  * one combined, nameless form.
  */
 export function resolve3805pInfo(inputs: ResolverInputs): Form3805pFilingInfo {
   const distributions = factsInCategory(inputs, "retirement") as TaxFactRow[];
   const rows = earlyRows(distributions);
   const owners = [...new Set(rows.map((row) => row.owner))];
-  const onePerson = owners.length === 1;
+  const owner = owners.length === 1 ? owners[0] : undefined;
+  const allIraRowsOfOwner = parsedDistributions(distributions).filter(
+    (row) => row.box7IraSepSimple && ownerOf(row) === owner,
+  );
+  const amount =
+    owner === undefined
+      ? undefined
+      : amountIncludedInIncome(inputs, owner, rows, allIraRowsOfOwner);
+  const simpleIraAmount = rows
+    .filter((row) => row.distribution.box7.includes(SIMPLE_IRA_CODE))
+    .map((row) => rowTaxable(row.distribution));
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_3805p",
     fallbacks: [
       {
-        rule: `fallback: ${rows.length} early distribution(s) with no exception code`,
-        value: rows.length > 0,
+        rule: `fallback: ${rows.length} early distribution(s) with no exception code, $${amount ?? "?"} included in income`,
+        /* A full rollover leaves nothing in income: no form (::b02). Unknown amounts keep the form, and wait. */
+        value: rows.length > 0 && (amount === undefined || amount > 0),
         triggeredByFactKeys: rows.map((row) => row.key),
       },
     ],
   });
   return {
     mustFile: { "form-3805p": resolution },
-    earlyDistributionsInIncome: onePerson ? amountOf(rows) : undefined,
-    simpleIraEarlyDistributions: onePerson
-      ? amountOf(rows.filter((row) => row.simpleIra))
-      : undefined,
-    earlyDistributionOwner: onePerson ? owners[0] : undefined,
+    earlyDistributionsInIncome: amount,
+    simpleIraEarlyDistributions:
+      amount === undefined || simpleIraAmount.includes(undefined)
+        ? undefined
+        : Math.min(amount, sum(...simpleIraAmount)),
+    earlyDistributionOwner: owner,
   };
 }

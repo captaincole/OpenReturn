@@ -12,6 +12,7 @@ import {
   makeInterestFactKey,
   makeRetirementDistributionFactKey,
   makeTradeFactKey,
+  makeTraditionalIraFactKey,
 } from "../../../../src/facts/index.js";
 import { makeResolverInputs } from "../../../../src/resolverInputs.js";
 import { resolve3526Info } from "../../../../src/state/ca/3526/resolveInfo.js";
@@ -37,6 +38,29 @@ describe("resolve3805pInfo", () => {
     );
     expect(info.mustFile?.["form-3805p"]?.value).toBe(true);
     expect(info.earlyDistributionsInIncome).toBe(11207);
+  });
+
+  it("takes an indirect rollover off an early IRA distribution, and files no form when all was rolled over", () => {
+    const ira: Fact = {
+      key: makeRetirementDistributionFactKey("broker", "code-1-ira"),
+      category: "retirement",
+      value: { payerName: "Broker", box1: 10000, box2a: 10000, box7: "1", box7IraSepSimple: true },
+    };
+    const rolledOver = (amount: number): Fact => ({
+      key: makeTraditionalIraFactKey("taxpayer"),
+      category: "retirement",
+      value: { rolledOver: amount },
+    });
+    const all = resolve3805pInfo(
+      makeResolverInputs({ facts: [ira, rolledOver(10000)], decisions: [] }),
+    );
+    expect(all.mustFile?.["form-3805p"]?.value).toBe(false);
+    expect(all.earlyDistributionsInIncome).toBe(0);
+    const part = resolve3805pInfo(
+      makeResolverInputs({ facts: [ira, rolledOver(6000)], decisions: [] }),
+    );
+    expect(part.mustFile?.["form-3805p"]?.value).toBe(true);
+    expect(part.earlyDistributionsInIncome).toBe(4000);
   });
 
   it("files for an undetermined taxable amount but leaves line 1 unknown, like the 1040", () => {
@@ -143,6 +167,22 @@ describe("resolve3526Info", () => {
     );
     expect(info.mustFile?.["form-3526"]?.value).toBe(true);
     expect(info.caGrossInvestmentIncome).toBe(7000);
+  });
+
+  it("completes the form with no California expense when federal Form 4952 files (its deduction is subtracted)", () => {
+    const info = resolve3526Info(
+      makeResolverInputs({
+        facts: [
+          interest,
+          answer(INVESTMENT_INTEREST_KEYS.expensePaid, 0),
+          answer(INVESTMENT_INTEREST_KEYS.disallowedCarryover, 500),
+          answer(INVESTMENT_INTEREST_KEYS.caDisallowedCarryover, 0),
+          answer(INVESTMENT_INTEREST_KEYS.investmentExpenses, 0),
+        ],
+        decisions: [],
+      }),
+    );
+    expect(info.mustFile?.["form-3526"]?.value).toBe(true);
   });
 
   it("files and asks while California's own carryover is unanswered", () => {

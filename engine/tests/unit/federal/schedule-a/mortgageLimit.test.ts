@@ -40,6 +40,15 @@ describe("mortgageInterestWithinLimit", () => {
     expect(result.limited).toBe(false);
   });
 
+  it("reads the origination date in ISO form too", () => {
+    const result = mortgageInterestWithinLimit(
+      inputs([fact(MORTGAGE_KEYS.originationDateForm1098, "2016-06-01")]),
+      36000,
+      900000,
+    );
+    expect(result.interest).toBe(36000);
+  });
+
   it("halves both limits for married filing separately", () => {
     const separate = [
       { decisionKey: "decisions.scope.filing_status", decision: "married_filing_separately" },

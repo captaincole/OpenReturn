@@ -1,6 +1,10 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm } from "../../../defineForm.js";
+import {
+  netCapitalGainFromDispositions,
+  netGainFromDispositions,
+} from "../../../federal/4952/lines.js";
 import { atLeast, numberOrBlank, roundDollars, sumOrBlank } from "../../../money.js";
 import type { Form3526FilingInfo } from "./filingInfo.js";
 import type { Form3526 } from "./types.js";
@@ -47,19 +51,24 @@ export function register(): void {
       /*
        * ca-3526-inst-2025::sec::line-4b::b01: "the excess of total gains over
        * total losses from the disposition of property held for investment ...
-       * include capital gain distributions from mutual funds": federal line 4d,
-       * which reads Schedule D line 16 (else 1040 line 7a) and floors a net loss at 0.
+       * include capital gain distributions from mutual funds": Schedule D line 16
+       * (else 1040 line 7a), a net loss floored at 0, as federal line 4d.
        */
-      "0.line.4b_net_gain_investment_property": (form) =>
-        numberOrBlank(form["form-4952.0.line.4d_net_gain_investment_property"]),
+      "0.line.4b_net_gain_investment_property": (form) => {
+        const net = netGainFromDispositions(form);
+        return net === undefined ? undefined : atLeast(0, net);
+      },
       /*
        * ca-3526-inst-2025::sec::line-4c::b01: "the excess of your net long-term
-       * capital gain over net short-term capital loss". MANUAL EDIT: federal
-       * line 4e is the smaller of that and the net gain; the net capital gain
-       * never exceeds the net gain, so the two are equal.
+       * capital gain over net short-term capital loss", capped at line 4b as
+       * federal line 4e is; figured here so the line stands when Form 4952 does not file.
        */
-      "0.line.4c_net_capital_gain_investment_property": (form) =>
-        numberOrBlank(form["form-4952.0.line.4e_smaller_net_gain_or_capital_gain"]),
+      "0.line.4c_net_capital_gain_investment_property": (form) => {
+        const line4b = form["0.line.4b_net_gain_investment_property"];
+        return line4b === undefined
+          ? undefined
+          : Math.min(line4b, netCapitalGainFromDispositions(form));
+      },
       // ca-3526-inst-2025::sec::taxable-year::b02/b03: "Subtract line 4c from line 4b. If zero or less, enter 0".
       "0.line.4d_net_gain_less_capital_gain": (form) => {
         const line4b = form["0.line.4b_net_gain_investment_property"];
@@ -123,7 +132,13 @@ export function register(): void {
         return Math.min(line3, line6);
       },
       // ca-3526-inst-2025::sec::taxable-year::b03: "the amount from federal Form 4952, line 8".
+      /*
+       * MANUAL EDIT: the federal deduction is Schedule A line 9, which is Form
+       * 4952 line 8 or, under the federal Who Must File exception, the interest
+       * paid; without a Schedule A the Form 4952 line itself.
+       */
       "0.line.9_federal_4952_line_8": (form) =>
+        numberOrBlank(form["schedule-a.0.line.9_investment_interest"]) ??
         numberOrBlank(form["form-4952.0.line.8_investment_interest_deduction"]),
       /*
        * ca-3526-inst-2025::sec::line-10::b01: "the difference between the
