@@ -9,7 +9,6 @@ import type { Scenario } from "../../types.js";
 import { tcbUs004Decisions } from "./decisions.js";
 import { tcbUs004Expected } from "./expected.js";
 import { TCB_US_004_TAX_YEAR, TCB_US_004_USER_ID, tcbUs004Facts } from "./facts.js";
-import { tcbUs004KnownMismatches } from "./knownMismatches.js";
 
 const FORM_IDS = [
   "form-8949",
@@ -19,9 +18,11 @@ const FORM_IDS = [
   "schedule-se",
   "form-8960",
   "form-8995-a",
+  "form-4952",
   "schedule-a",
   "schedule-1",
   "schedule-2",
+  "schedule-8812",
   "form-1040",
 ];
 
@@ -33,8 +34,6 @@ export const tcbUs004Scenario: Scenario = {
   userId: TCB_US_004_USER_ID,
   facts: tcbUs004Facts,
   decisions: tcbUs004Decisions,
-  allowNotModeled: true,
-  knownMismatches: tcbUs004KnownMismatches,
   forms: FORM_IDS.map((formId) => ({
     formId,
     expected: tcbUs004Expected(formId),
