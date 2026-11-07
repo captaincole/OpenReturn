@@ -26,6 +26,8 @@ import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
 import type { Schedule2FilingInfo } from "./federal/schedule-2/filingInfo.js";
 import type { Schedule3FilingInfo } from "./federal/schedule-3/filingInfo.js";
 import { resolveSchedule3Info } from "./federal/schedule-3/resolveInfo.js";
+import type { Schedule8812FilingInfo } from "./federal/schedule-8812/filingInfo.js";
+import { resolveSchedule8812Info } from "./federal/schedule-8812/resolveInfo.js";
 import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
 import type { ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import type { ScheduleCFilingInfo } from "./federal/schedule-c/filingInfo.js";
@@ -112,6 +114,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8889FilingInfo &
   Form8959FilingInfo &
   Form4952FilingInfo &
+  Schedule8812FilingInfo &
   Form8960FilingInfo &
   Form8995AFilingInfo &
   Schedule1FilingInfo &
@@ -138,6 +141,7 @@ export function resolveFilingInfo(opts: {
     resolve8889Info(inputs),
     resolve8959Info(inputs),
     resolve4952Info(inputs),
+    resolveSchedule8812Info(inputs),
     resolve8960Info(inputs),
     resolve8995AInfo(inputs),
     resolveSchedule1Info(inputs),
