@@ -17,7 +17,7 @@ import { NIIT_THRESHOLDS } from "./federal/8960/lines.js";
 import { investmentSignals, magiUpperBound } from "./federal/8960/mustFile.js";
 import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
 import type { Schedule2FilingInfo } from "./federal/schedule-2/filingInfo.js";
-import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
+import { resolveScheduleAInfo } from "./federal/schedule-a/resolveInfo.js";
 import type { PayerAmount, ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import { netProfit } from "./federal/schedule-c/lines.js";
 import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
@@ -404,47 +404,4 @@ function payerAmounts(
 function boolDecision(inputs: ResolverInputs, key: string): boolean | undefined {
   const value = inputs.decisionByKey.get(key);
   return typeof value === "boolean" ? value : undefined;
-}
-
-export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInfo {
-  const { decisionByKey } = inputs;
-  const resolution = resolveMustFile(decisionByKey, {
-    explicitKey: "decisions.scope.must_file_schedule_a",
-    fallbacks: [
-      {
-        rule: "fallback: decisions.itemize_vs_standard = itemized",
-        value: decisionByKey.get("decisions.itemize_vs_standard") === "itemized",
-        triggeredByDecisionKeys: ["decisions.itemize_vs_standard"],
-      },
-    ],
-  });
-  const w2Box17 = sumW2Box(inputs, "box17");
-  const caSdi = sumCaSdi(factsInCategory(inputs, "wages"));
-  const estStateTax = num(inputs, "state_local_tax.estimated_payments");
-  const medicalDentalExpenses = num(inputs, "medical.expenses_total");
-  const giftsCashCheck = num(inputs, "charitable.cash");
-  const giftsOtherThanCash = num(inputs, "charitable.noncash");
-  return {
-    mustFile: { "schedule-a": resolution },
-    /* An itemizer answers these once; 0 is an answer. Blank lines would hide a deduction. */
-    missingInputs: {
-      "schedule-a": missingInputs({
-        "medical.expenses_total": medicalDentalExpenses,
-        "charitable.cash": giftsCashCheck,
-        "charitable.noncash": giftsOtherThanCash,
-      }),
-    },
-    medicalDentalExpenses,
-    stateLocalIncomeTaxPaid: w2Box17 + caSdi + (estStateTax ?? 0),
-    generalSalesTaxElection: decisionByKey.get("decisions.itemized.elect_general_sales_tax") as
-      boolean | undefined,
-    realEstateTaxes: num(inputs, "state_local_tax.real_estate"),
-    personalPropertyTaxes: num(inputs, "state_local_tax.personal_property"),
-    mortgageInterestForm1098: num(inputs, "mortgage.interest_form_1098"),
-    mortgageInterestNotForm1098: num(inputs, "mortgage.interest_not_form_1098"),
-    pointsNotForm1098: num(inputs, "mortgage.points_not_form_1098"),
-    giftsCashCheck,
-    giftsOtherThanCash,
-    giftsCarryover: num(inputs, "charitable.carryover"),
-  };
 }

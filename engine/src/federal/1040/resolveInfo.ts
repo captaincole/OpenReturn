@@ -13,12 +13,7 @@ import {
   type RetirementDistributionFactValue,
   type SocialSecurityFactValue,
 } from "../../facts/index.js";
-import {
-  filingStatusOf,
-  hasW2,
-  resolveScheduleAInfo,
-  resolveScheduleDInfo,
-} from "../../filingInfoResolvers.js";
+import { filingStatusOf, hasW2, resolveScheduleDInfo } from "../../filingInfoResolvers.js";
 import { atLeast, sum } from "../../money.js";
 import {
   factsInCategory,
@@ -30,6 +25,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { form8606Filers } from "../8606/resolveInfo.js";
+import { resolveScheduleAInfo } from "../schedule-a/resolveInfo.js";
 import type { Form1040FilingInfo, IraLine } from "./filingInfo.js";
 
 const OWNERS: IraOwner[] = ["taxpayer", "spouse"];
