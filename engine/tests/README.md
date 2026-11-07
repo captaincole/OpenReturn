@@ -50,6 +50,10 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
     Social Security, the senior deduction (Schedule 1-A). Checked against
     the case's answer key; its README lists where the engine follows the
     instructions instead
+  - `tcb-us-004` — TaxCalcBench case ty25-us-004, federal only. MFJ,
+    itemized deductions (Schedule A), two W-2s, a consulting business
+    (Schedule C, SE, 8995-A), a stock sale, Social Security. Checked
+    against the case's answer key; its README lists the known mismatches
   - `tcb-us-006` — TaxCalcBench case ty25-us-006, federal only. MFS, a
     W-2 with an HSA, a rideshare business (Schedule C, Schedule SE, Form
     8995-A) with its 1099-K, a W-2G, interest and dividends (Forms 8959 and 8960). Checked
