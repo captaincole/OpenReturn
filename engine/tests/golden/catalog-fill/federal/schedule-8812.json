@@ -1,0 +1,366 @@
+{
+  "formId": "schedule-8812",
+  "fieldCount": 40,
+  "entries": [
+    {
+      "fieldId": "schedule-8812.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-QC4JL"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.1_form_1040_line_11a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "5,492"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.10_excess_over_threshold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "8,509"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.11_phaseout_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "8,028"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.12_credit_after_phaseout",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "4,172"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.12_line8_more_than_line11_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.12_line8_more_than_line11_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.13_credit_limit_worksheet_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "6,076"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.14_child_tax_credit_and_other_dependents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "8,361"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.2a_puerto_rico_income_excluded",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "9,279"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.2b_form_2555_lines_45_50",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "5,997"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.2c_form_4563_line_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "4,641"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.2d_total_excluded_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "7,218"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.3_modified_agi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "7,767"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.4_qualifying_children_under_17",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "5,265"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.5_qualifying_children_times_2200",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "1,726"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.6_other_dependents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line6ReadOrder[0].f1_11[0]",
+          "text": "5,845"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.7_other_dependents_times_500",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "6,831"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.8_total_credit_before_limit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "4,700"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.0.line.9_filing_status_threshold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "5,309"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.16a_line12_minus_line14",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "5,258"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.16b_qualifying_children_count",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "6,425"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.16b_qualifying_children_times_1700",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "2,970"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.17_smaller_of_16a_16b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "3,395"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.18a_earned_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "5,653"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.18b_nontaxable_combat_pay",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "9,511"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.19_earned_income_over_2500",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "9,431"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.19_line18a_more_than_2500_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.19_line18a_more_than_2500_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.20_line16b_at_least_5100_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.20_line16b_at_least_5100_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.20_line19_times_15_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "5,492"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.21_withheld_ss_medicare_taxes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "8,953"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.22_schedule_1_and_2_taxes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "9,134"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.23_total_lines_21_22",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "3,047"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.24_eic_and_schedule_3_line_11",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "9,360"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.25_line23_minus_line24",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "2,664"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.26_larger_of_line20_line25",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "6,227"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-8812.1.line.27_additional_child_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "1,382"
+        }
+      ]
+    }
+  ]
+}

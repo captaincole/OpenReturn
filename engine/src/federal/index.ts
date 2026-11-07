@@ -19,6 +19,7 @@ import { register as registerSchedule1A } from "./schedule-1-a/bindings.js";
 import { register as registerSchedule1 } from "./schedule-1/bindings.js";
 import { register as registerSchedule2 } from "./schedule-2/bindings.js";
 import { register as registerSchedule3 } from "./schedule-3/bindings.js";
+import { register as registerSchedule8812 } from "./schedule-8812/bindings.js";
 import { register as registerScheduleA } from "./schedule-a/bindings.js";
 import { register as registerScheduleB } from "./schedule-b/bindings.js";
 import { register as registerScheduleC } from "./schedule-c/bindings.js";
@@ -40,6 +41,7 @@ import schedule1ACatalogJson from "./schedule-1-a/catalog.json";
 import schedule1CatalogJson from "./schedule-1/catalog.json";
 import schedule2CatalogJson from "./schedule-2/catalog.json";
 import schedule3CatalogJson from "./schedule-3/catalog.json";
+import schedule8812CatalogJson from "./schedule-8812/catalog.json";
 import scheduleACatalogJson from "./schedule-a/catalog.json";
 import scheduleBCatalogJson from "./schedule-b/catalog.json";
 import scheduleCCatalogJson from "./schedule-c/catalog.json";
@@ -59,6 +61,7 @@ export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(form8889CatalogJson),
   fixtureFileSchema.parse(form8959CatalogJson),
   fixtureFileSchema.parse(form4952CatalogJson),
+  fixtureFileSchema.parse(schedule8812CatalogJson),
   fixtureFileSchema.parse(form8960CatalogJson),
   fixtureFileSchema.parse(form8995ACatalogJson),
   fixtureFileSchema.parse(schedule1CatalogJson),
@@ -195,6 +198,13 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 4952",
     relativeDir: "federal/4952",
     register: registerForm4952,
+  }),
+  makeFormSpec({
+    formId: "schedule-8812",
+    shortId: "schedule-8812",
+    displayName: "Schedule 8812",
+    relativeDir: "federal/schedule-8812",
+    register: registerSchedule8812,
   }),
   makeFormSpec({
     formId: "form-8959",
