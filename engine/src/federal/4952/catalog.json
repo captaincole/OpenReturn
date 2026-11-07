@@ -1,0 +1,273 @@
+{
+  "form": {
+    "formId": "form-4952",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Investment Interest Expense Deduction"
+  },
+  "fields": [
+    {
+      "fieldId": "form-4952.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-4952.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-4952.0.line.1_investment_interest_paid",
+      "label": "Line 1 — Investment interest expense paid or accrued in 2025",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.2_disallowed_prior_year_interest",
+      "label": "Line 2 — Disallowed investment interest expense from 2024 Form 4952, line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.3_total_investment_interest",
+      "label": "Line 3 — Total investment interest expense. Add lines 1 and 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.4a_gross_investment_income",
+      "label": "Line 4a — Gross income from property held for investment (excluding any net gain from the disposition of property held for investment)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4a_ReadOrder[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.4b_qualified_dividends",
+      "label": "Line 4b — Qualified dividends included on line 4a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.4c_income_less_qualified_dividends",
+      "label": "Line 4c — Subtract line 4b from line 4a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.4d_net_gain_investment_property",
+      "label": "Line 4d — Net gain from the disposition of property held for investment",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.4e_smaller_net_gain_or_capital_gain",
+      "label": "Line 4e — Enter the smaller of line 4d or your net capital gain from the disposition of property held for investment",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.4f_net_gain_less_capital_gain",
+      "label": "Line 4f — Subtract line 4e from line 4d",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.4g_elected_investment_income",
+      "label": "Line 4g — Enter the amount from lines 4b and 4e that you elect to include in investment income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.4h_investment_income",
+      "label": "Line 4h — Investment income. Add lines 4c, 4f, and 4g",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.5_investment_expenses",
+      "label": "Line 5 — Investment expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.6_net_investment_income",
+      "label": "Line 6 — Net investment income. Subtract line 5 from line 4h. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.7_disallowed_interest_carryforward",
+      "label": "Line 7 — Disallowed investment interest expense to be carried forward to 2026. Subtract line 6 from line 3. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-4952.0.line.8_investment_interest_deduction",
+      "label": "Line 8 — Investment interest expense deduction. Enter the smaller of line 3 or line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 395.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/4952/blank.pdf",
+    "ingestedAt": "2026-11-07T05:40:16.412Z",
+    "totalFields": 17,
+    "skipped": 0,
+    "catalogEntries": 17
+  }
+}
