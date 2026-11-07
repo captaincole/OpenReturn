@@ -51,6 +51,19 @@ describe("livedWithTaxpayerOverHalfYear", () => {
     expect(livedWithTaxpayerOverHalfYear({ ...born, monthsLivedWithYou: 1 }, 2025)).toBe(false);
   });
 
+  it("counts the months since the placement for a child adopted or placed in the year", () => {
+    const foster = {
+      ...niece,
+      relationship: "Foster child",
+      dob: "03/03/2020",
+      placedWithYou: "09/01/2025",
+      monthsLivedWithYou: 4,
+    };
+    expect(livedWithTaxpayerOverHalfYear(foster, 2025)).toBe(true);
+    expect(dependentCredit(foster, 2025)).toBe("child_tax_credit");
+    expect(livedWithTaxpayerOverHalfYear({ ...foster, monthsLivedWithYou: 1 }, 2025)).toBe(false);
+  });
+
   it("is unknown without the months", () => {
     expect(livedWithTaxpayerOverHalfYear({ ...niece, monthsLivedWithYou: undefined }, 2025)).toBe(
       undefined,

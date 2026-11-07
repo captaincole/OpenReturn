@@ -20,6 +20,12 @@ export interface DependentFactValue {
   relationship: string;
   dob?: string; // MM/DD/YYYY
   monthsLivedWithYou?: number;
+  /*
+   * MM/DD/YYYY: the date in the tax year the child was adopted, lawfully placed
+   * for adoption, or placed as an eligible foster child. The half-year test then
+   * counts from that date (1040 instructions, Definitions and Special Rules).
+   */
+  placedWithYou?: string;
   livedInUs?: boolean;
   usCitizenOrResident?: boolean;
   fullTimeStudent?: boolean;
@@ -124,12 +130,19 @@ export function ageAtYearEnd(dob: string | undefined, taxYear: number): number |
   return born === undefined ? undefined : taxYear - born.year;
 }
 
+/* The months of the tax year from a date in it to December 31; 12 for a date in an earlier year. */
+function monthsFrom(date: { month: number; year: number }, taxYear: number): number {
+  return date.year === taxYear ? 12 - date.month + 1 : 12;
+}
+
 /*
  * Row (5)(a) of the Dependents table: lived with the taxpayer more than half the
- * year. A child born during the year counts the months it was alive (1040
- * instructions, Definitions and Special Rules: the home was the person's home
- * for more than half the time the person was alive). A death during the year
- * has no fact yet. Undefined while an answer is missing.
+ * year. A child born during the year counts the months it was alive, and a
+ * child adopted or placed during the year counts the months since the placement
+ * (1040 instructions, Definitions and Special Rules: the home was the person's
+ * home for more than half the time the person was alive, or since the person
+ * was adopted or placed). A death during the year has no fact yet. Undefined
+ * while an answer is missing.
  */
 export function livedWithTaxpayerOverHalfYear(
   dependent: DependentFactValue,
@@ -137,8 +150,12 @@ export function livedWithTaxpayerOverHalfYear(
 ): boolean | undefined {
   const born = parseDob(dependent.dob);
   if (born === undefined || dependent.monthsLivedWithYou === undefined) return undefined;
-  const monthsAlive = born.year === taxYear ? 12 - born.month + 1 : 12;
-  return dependent.monthsLivedWithYou > monthsAlive / 2;
+  const placed = parseDob(dependent.placedWithYou);
+  const monthsInScope = Math.min(
+    monthsFrom(born, taxYear),
+    placed === undefined ? 12 : monthsFrom(placed, taxYear),
+  );
+  return dependent.monthsLivedWithYou > monthsInScope / 2;
 }
 
 /* "none": a dependent who earns neither credit (no TIN, or not a citizen or resident). */

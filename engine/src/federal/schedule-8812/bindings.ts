@@ -18,6 +18,14 @@ const PHASEOUT_STEP = 1_000;
 // Line 11: "Multiply line 10 by 5% (0.05)".
 const PHASEOUT_RATE = 0.05;
 
+/*
+ * Part II-A, the additional child tax credit, applies when line 12 exceeds line
+ * 14 (the tax is smaller than the credit). No scenario reaches it yet; Form 1040
+ * line 28 stays unsupported until it is bound.
+ */
+const PART_II_NOT_BOUND =
+  "Schedule 8812 Part II (the additional child tax credit, when line 12 exceeds line 14) is not bound yet; no scenario reaches it.";
+
 export function register(): void {
   defineForm<Schedule8812, Schedule8812FilingInfo>("schedule-8812", {
     bindings: {
@@ -138,6 +146,25 @@ export function register(): void {
         "The foreign earned income and housing exclusions (Form 2555) have no fact kind.",
       "0.line.2c_form_4563_line_15":
         "The American Samoa income exclusion (Form 4563) has no fact kind.",
+      "1.line.16a_line12_minus_line14": PART_II_NOT_BOUND,
+      "1.line.16b_qualifying_children_count": PART_II_NOT_BOUND,
+      "1.line.16b_qualifying_children_times_1700": PART_II_NOT_BOUND,
+      "1.line.17_smaller_of_16a_16b": PART_II_NOT_BOUND,
+      "1.line.18a_earned_income": PART_II_NOT_BOUND,
+      "1.line.18b_nontaxable_combat_pay": PART_II_NOT_BOUND,
+      "1.line.19_line18a_more_than_2500_no": PART_II_NOT_BOUND,
+      "1.line.19_line18a_more_than_2500_yes": PART_II_NOT_BOUND,
+      "1.line.19_earned_income_over_2500": PART_II_NOT_BOUND,
+      "1.line.20_line19_times_15_percent": PART_II_NOT_BOUND,
+      "1.line.20_line16b_at_least_5100_no": PART_II_NOT_BOUND,
+      "1.line.20_line16b_at_least_5100_yes": PART_II_NOT_BOUND,
+      "1.line.21_withheld_ss_medicare_taxes": PART_II_NOT_BOUND,
+      "1.line.22_schedule_1_and_2_taxes": PART_II_NOT_BOUND,
+      "1.line.23_total_lines_21_22": PART_II_NOT_BOUND,
+      "1.line.24_eic_and_schedule_3_line_11": PART_II_NOT_BOUND,
+      "1.line.25_line23_minus_line24": PART_II_NOT_BOUND,
+      "1.line.26_larger_of_line20_line25": PART_II_NOT_BOUND,
+      "1.line.27_additional_child_tax_credit": PART_II_NOT_BOUND,
     },
 
     // This SSN widget (text, maxLength 11) keeps the dashes; the 1040 comb widget strips them.
