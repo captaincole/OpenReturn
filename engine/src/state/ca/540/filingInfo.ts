@@ -3,10 +3,13 @@
  * through FilingInfo.
  */
 
+import type { Schedule8812FilingInfo } from "../../../federal/schedule-8812/filingInfo.js";
 import type { BaseFilingInfo } from "../../../filingInfo.js";
 import type { Money } from "../../../money.js";
 
-export interface Form540FilingInfo extends BaseFilingInfo {
+/** Line 10's Dependents table reads Schedule 8812's `dependents` slot. */
+export interface Form540FilingInfo
+  extends BaseFilingInfo, Pick<Schedule8812FilingInfo, "dependents"> {
   /** "full_year" | "part_year" | "non_resident". */
   caResidencyStatus?: string;
 
