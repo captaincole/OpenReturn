@@ -152,7 +152,9 @@ A locked scenario writes its own:
   keeps the IRS rule as the default.
 - A line you cannot fix now goes in `knownMismatches.ts`. When it starts
   to match, the test fails until you remove it, so the list only
-  shrinks.
+  shrinks. A verified scenario may list a line too, when its preparer's
+  PDF and the instructions disagree (Alejandro's Schedule CA line 3a):
+  the entry also covers that line's widget in the golden PDF.
 - When a fix changes a verified line, edit that value in `expected.ts` by
   hand, then write the goldens again with `renderScenario --golden`. The
   PR diff then shows each changed value.
