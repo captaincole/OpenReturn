@@ -183,6 +183,8 @@ export function resolve8949Info(inputs: ResolverInputs): Form8949FilingInfo {
   });
   return {
     mustFile: { "form-8949": resolution },
+    /* Column (a) needs the number of shares; a trade with none asks for it. */
+    missingInputs: { "form-8949": inputs.trades.missingQuantityKeys },
     shortTermTrades: inputs.trades.short,
     longTermTrades: inputs.trades.long,
     form8949Copies: planForm8949Copies(inputs.trades.boxed),

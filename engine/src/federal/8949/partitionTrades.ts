@@ -17,6 +17,8 @@ export interface PartitionedTrades {
   long: TradeFactValue[];
   boxed: BoxedTrade[];
   factKeys: string[];
+  /* The stated-quantity key of each trade whose share count is unknown. */
+  missingQuantityKeys: string[];
 }
 
 /*
@@ -31,16 +33,21 @@ export function partitionTrades(
   const long: TradeFactValue[] = [];
   const boxed: BoxedTrade[] = [];
   const factKeys: string[] = [];
-  const reportedBasis = new Map<string, number>();
+  const missingQuantityKeys: string[] = [];
+  /* Reported basis and stated share counts: numeric facts keyed next to their trade. */
+  const stated = new Map<string, number>();
   for (const row of facts) {
     if (row.category === "capital_gains" && typeof row.value === "number") {
-      reportedBasis.set(row.key, row.value);
+      stated.set(row.key, row.value);
     }
   }
   for (const row of facts) {
     if (row.category !== "investment_income") continue;
     if (!TRADE_KEY_RE.test(row.key)) continue;
-    const trade = row.value as TradeFactValue;
+    const printed = row.value as TradeFactValue;
+    const quantity = printed.quantity ?? stated.get(`${row.key}.quantity`);
+    if (quantity === undefined) missingQuantityKeys.push(`${row.key}.quantity`);
+    const trade: TradeFactValue = { ...printed, quantity };
     const decided = decisionByKey.get(makeForm8949BoxDecisionKey(trade.tradeId));
     const longTerm = typeof decided === "string" ? isLongTermBox(decided) : isLongTermTrade(trade);
     (longTerm ? long : short).push(trade);
@@ -50,11 +57,11 @@ export function partitionTrades(
         : longTerm
           ? "partII.boxD"
           : "partI.boxA";
-    const basis = trade.costBasis ?? reportedBasis.get(`${row.key}.reported_basis`);
+    const basis = trade.costBasis ?? stated.get(`${row.key}.reported_basis`);
     boxed.push({ trade, box, basis });
     factKeys.push(row.key);
   }
-  return { short, long, boxed, factKeys };
+  return { short, long, boxed, factKeys, missingQuantityKeys };
 }
 
 function parseTradeDate(text: string): Date | null {

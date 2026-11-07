@@ -21,7 +21,8 @@ const OPTIONAL: Array<[RegExp, string]> = [
   [/^identity\.address\.apt$/, "not every address has an apartment"],
   [
     /^gambling\.winnings_not_on_w2g$/,
-    "rare; Cade asks about gambling at scoping, and the W-2G facts fill line 8b",
+    "an answer Cade records only when the user reports winnings with no W-2G; " +
+      "otherwise line 8b comes from the W-2G facts",
   ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [

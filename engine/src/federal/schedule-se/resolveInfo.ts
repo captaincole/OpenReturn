@@ -112,16 +112,17 @@ function taxpayerSocialSecurityWages(inputs: ResolverInputs): {
     .map((fact) => ({ key: fact.key, w2: fact.value as W2FactValue }));
   const joint = filingStatusOf(inputs) === "married_filing_jointly";
   const taxpayerSsn = ssnOf(text(inputs, "identity.ssn"));
+  /* The fact's owner places a W-2; the employee SSN against the taxpayer's is the fallback. */
+  const placeW2 = (w2: W2FactValue): "taxpayer" | "spouse" | undefined => {
+    if (w2.owner !== undefined) return w2.owner;
+    const ssn = ssnOf(w2.employee?.ssn);
+    if (ssn === undefined || taxpayerSsn === undefined) return undefined;
+    return ssn === taxpayerSsn ? "taxpayer" : "spouse";
+  };
   const unplacedW2Keys = joint
-    ? w2s
-        .filter(({ w2 }) => w2.owner === undefined && ssnOf(w2.employee?.ssn) === undefined)
-        .map(({ key }) => key)
+    ? w2s.filter(({ w2 }) => placeW2(w2) === undefined).map(({ key }) => key)
     : [];
-  const isTaxpayers = (w2: W2FactValue) =>
-    w2.owner === undefined
-      ? taxpayerSsn !== undefined && ssnOf(w2.employee?.ssn) === taxpayerSsn
-      : w2.owner === "taxpayer";
-  const own = joint ? w2s.filter(({ w2 }) => isTaxpayers(w2)) : w2s;
+  const own = joint ? w2s.filter(({ w2 }) => placeW2(w2) === "taxpayer") : w2s;
   const wages =
     own.length === 0 || unplacedW2Keys.length > 0
       ? undefined
