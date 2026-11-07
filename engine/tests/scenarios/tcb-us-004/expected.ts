@@ -2,7 +2,6 @@
  * tcb-us-004 — the TaxCalcBench answer key (output.xml, ty25-us-004), typed line by
  * line. The key is Column Tax's engine output, reviewed by their tax analysts.
  * Change a value only when the IRS instructions say the key is wrong (README.md).
- * Lines in knownMismatches.ts keep the key's value here and are reported, not failed.
  */
 
 import type { ExpectedResults } from "../../types.js";
@@ -64,6 +63,44 @@ const SCHEDULE_2: Partial<ExpectedResults> = {
     "schedule-2.0.line.12_net_investment_income_tax": 299, // IndivNetInvstIncomeTaxAmt
     "schedule-2.1.line.21_total_other_taxes": 848, // TotalOtherTaxesAmt
   },
+};
+
+const FORM_4952: Partial<ExpectedResults> = {
+  engineFields: {
+    "form-4952.0.line.2_disallowed_prior_year_interest": 650, // PriorYrDisallowInvsmtIntExpAmt
+    "form-4952.0.line.3_total_investment_interest": 650, // TotalInvestmentInterestExpAmt
+    "form-4952.0.line.4a_gross_investment_income": 5200, // InvestmentPropGrossIncomeAmt
+    "form-4952.0.line.4b_qualified_dividends": 4870, // InvestmentPropQualDividendsAmt
+    "form-4952.0.line.4c_income_less_qualified_dividends": 330, // InvestmentPropNetGrossIncAmt
+    "form-4952.0.line.4d_net_gain_investment_property": 37109, // InvestmentPropNetDispGainAmt
+    "form-4952.0.line.4e_smaller_net_gain_or_capital_gain": 37109, // PropertyDspstnCapGainInvIncAmt
+    "form-4952.0.line.4g_elected_investment_income": 320, // InvestmentIncomeElectionAmt
+    "form-4952.0.line.4h_investment_income": 650, // InvestmentIncomeAmt
+    "form-4952.0.line.6_net_investment_income": 650, // NetInvestmentIncomeAmt
+    "form-4952.0.line.8_investment_interest_deduction": 650, // InvestmentInterestExpDeductAmt
+  },
+  renderedBlank: [
+    // No interest paid this year: the key has no line 1.
+    "form-4952.0.line.1_investment_interest_paid",
+  ],
+};
+
+const SCHEDULE_8812: Partial<ExpectedResults> = {
+  engineFields: {
+    "schedule-8812.0.line.1_form_1040_line_11a": 257865, // AdjustedGrossIncomeAmt
+    "schedule-8812.0.line.3_modified_agi": 257865, // ModifiedAGIAmt
+    "schedule-8812.0.line.4_qualifying_children_under_17": 1, // QlfyChildUnderAgeSSNCnt
+    "schedule-8812.0.line.5_qualifying_children_times_2200": 2200, // QlfyChildUnderAgeSSNLimtAmt
+    "schedule-8812.0.line.8_total_credit_before_limit": 2200, // InitialCTCODCAmt
+    "schedule-8812.0.line.9_filing_status_threshold": 400000, // FilingStatusThresholdCd
+    "schedule-8812.0.line.12_credit_after_phaseout": 2200, // CTCODCAfterAGILimitAmt
+    "schedule-8812.0.line.13_credit_limit_worksheet_a": 34963, // ACTCTaxLiabiltyLimitAmt
+    "schedule-8812.0.line.14_child_tax_credit_and_other_dependents": 2200, // CTCODCAmt
+  },
+  renderedChecked: [
+    // CTCODCOverAGILimitInd true: line 8 is more than line 11
+    "schedule-8812.0.line.12_line8_more_than_line11_yes",
+  ],
 };
 
 const SCHEDULE_A: Partial<ExpectedResults> = {
@@ -216,7 +253,9 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   "schedule-se": SCHEDULE_SE,
   "form-8960": FORM_8960,
   "form-8995-a": FORM_8995_A,
+  "form-4952": FORM_4952,
   "schedule-a": SCHEDULE_A,
+  "schedule-8812": SCHEDULE_8812,
   "schedule-1": SCHEDULE_1,
   "schedule-2": SCHEDULE_2,
   "form-1040": FORM_1040,

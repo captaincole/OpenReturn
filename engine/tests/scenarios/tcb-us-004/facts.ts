@@ -5,14 +5,17 @@
 
 import {
   GAMBLING_KEYS,
+  INVESTMENT_INTEREST_KEYS,
   SPOUSE_KEYS,
   makeBusinessFactKey,
+  makeDependentFactKey,
   makeDividendFactKey,
   makeInterestFactKey,
   makeSocialSecurityFactKey,
   makeTradeFactKey,
   makeW2FactKey,
   type BusinessFactValue,
+  type DependentFactValue,
   type DividendFactValue,
   type InterestFactValue,
   type SocialSecurityFactValue,
@@ -123,6 +126,18 @@ export const ssa: SocialSecurityFactValue = {
   box6: 1986,
 };
 
+/* irs1040.dependent_detail[0]: the niece, born 2014, in the home all year. Names and SSN from the key's header. */
+const niece: DependentFactValue = {
+  firstName: "Jessica",
+  lastName: "Davies",
+  ssn: "900-45-6789",
+  relationship: "Niece",
+  dob: "08/12/2014",
+  monthsLivedWithYou: 12,
+  livedInUs: true,
+  usCitizenOrResident: true,
+};
+
 /* irs1040_schedulec[0]: a consulting business with receipts and no expenses. */
 const consulting: BusinessFactValue = {
   owner: "taxpayer",
@@ -206,6 +221,37 @@ export const tcbUs004Facts: TaxFactRow[] = [
     makeBusinessFactKey("consulting"),
     consulting,
     `${ANSWERS}: irs1040_schedulec[0].`,
+  ),
+  fact(
+    "dependents",
+    makeDependentFactKey("jessica-davies"),
+    niece,
+    `${ANSWERS}: irs1040.dependent_detail[0]; the name and SSN from the key's header.`,
+  ),
+  /* f4952: no interest paid this year; a $650 carryover; $320 of qualified dividends elected as investment income. */
+  fact(
+    "investment_income",
+    INVESTMENT_INTEREST_KEYS.disallowedCarryover,
+    650,
+    `${ANSWERS}: f4952.COfromBefore.`,
+  ),
+  fact(
+    "investment_income",
+    INVESTMENT_INTEREST_KEYS.electedQualifiedDividendsAndGain,
+    320,
+    `${ANSWERS}: f4952.qualDivLineElectedInvest.`,
+  ),
+  fact(
+    "investment_income",
+    INVESTMENT_INTEREST_KEYS.investmentExpenses,
+    0,
+    `${ANSWERS}: no investment expenses given.`,
+  ),
+  fact(
+    "state_local_tax",
+    "state_local_tax.allocable_to_investment_income",
+    1326,
+    `${ANSWERS}: f8960.stateIncTax.`,
   ),
   fact(
     "other",

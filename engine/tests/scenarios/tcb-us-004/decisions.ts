@@ -42,6 +42,11 @@ export const tcbUs004Decisions: AIDecisionRow[] = [
     "itemized",
     "Answers: maximize_deduction; the key's Schedule A total ($38,731) beats the $31,500 standard deduction.",
   ),
+  dec(
+    "decisions.scope.must_file_4952",
+    true,
+    "A $650 carryover of disallowed investment interest; the Who Must File exception does not apply.",
+  ),
   dec("decisions.scope.must_file_ca_540", false, "Full-year Tennessee residents."),
   dec("decisions.scope.ca_residency", "non_resident", "Lived in Knoxville, TN all of 2025."),
   dec(

@@ -32,7 +32,8 @@ Form 8606 (nondeductible IRA basis, Roth conversions) and Schedule 1-A
 federal-only TaxCalcBench scenario with a sole-proprietor business
 (Schedules C and SE, Form 8995-A). A second married-filing-jointly
 TaxCalcBench scenario itemizes (Schedule A: gifts, medical under the
-floor, state tax withheld) with a small business, Social Security and a
+floor, state tax withheld, investment interest on Form 4952) with a
+dependent (Schedule 8812), a small business, Social Security and a
 stock sale.
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
