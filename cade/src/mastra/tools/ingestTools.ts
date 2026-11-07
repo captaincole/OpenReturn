@@ -9,6 +9,7 @@ import { ingestSsa1099 } from "./ingestSsa1099";
 import { ingestW2 } from "./ingestW2";
 import { ingestW2G } from "./ingestW2G";
 import { recordBusiness } from "./recordBusiness";
+import { recordDependent } from "./recordDependent";
 
 export const ingestTools = {
   ingestW2,
@@ -24,6 +25,7 @@ export const ingestTools = {
   ingestW2G,
   ingest1099K,
   recordBusiness,
+  recordDependent,
 };
 
 /* Twice the SDK's 4,096: a 20-trade ingest-1099-b call is about 4,300 tokens. */
