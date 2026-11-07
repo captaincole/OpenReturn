@@ -5,7 +5,7 @@
  */
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
-import type { Form8949Box } from "../../facts/index.js";
+import { printsShareCount, type Form8949Box } from "../../facts/index.js";
 import { roundDollars, sum } from "../../money.js";
 import { ROWS_PER_PAGE, type Form8949Copy, type Form8949Page } from "./copyPlan.js";
 import type { Form8949FilingInfo } from "./filingInfo.js";
@@ -46,7 +46,7 @@ function currentCopy(info: Form8949FilingInfo): Form8949Copy | undefined {
  * Blank while the count is unknown, so the row waits for the taxpayer's answer.
  */
 function describe(quantity: number | undefined, description: string): string | undefined {
-  if (/^\d/.test(description)) return description;
+  if (printsShareCount(description)) return description;
   return quantity === undefined ? undefined : `${quantity} sh ${description}`;
 }
 

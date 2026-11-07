@@ -85,6 +85,11 @@ export function isStatedQuantityFact(fact: TaxFactRow): boolean {
   return fact.category === REPORTED_BASIS_CATEGORY && fact.key.endsWith(".quantity");
 }
 
+/* Box 1a sometimes carries the count already: "91.207 sh SAMPLE INC", "100 shares XYZ". */
+export function printsShareCount(description: string): boolean {
+  return /^\d[\d,.]*\s*(sh|shs|shares)\b/i.test(description);
+}
+
 export function makeTradeFactKey(accountSlug: string, tradeId: string): string {
   return `account.${accountSlug}.trades.${tradeId}`;
 }
