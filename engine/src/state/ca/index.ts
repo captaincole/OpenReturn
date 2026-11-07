@@ -5,18 +5,27 @@
 
 import { fixtureFileSchema } from "../../catalog.js";
 import { makeFormSpec, type FormSpec } from "../../formSpec.js";
+import { register as registerForm3526 } from "./3526/bindings.js";
+import { register as registerForm3805p } from "./3805p/bindings.js";
 import { register as registerForm540 } from "./540/bindings.js";
 import { register as registerForm5805 } from "./5805/bindings.js";
 import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
+import { register as registerScheduleP } from "./schedule-p/bindings.js";
 
+import form3526CatalogJson from "./3526/catalog.json";
+import form3805pCatalogJson from "./3805p/catalog.json";
 import form540CatalogJson from "./540/catalog.json";
 import form5805CatalogJson from "./5805/catalog.json";
 import scheduleCaCatalogJson from "./schedule-ca/catalog.json";
+import schedulePCatalogJson from "./schedule-p/catalog.json";
 
 export const CA_CATALOGS = [
   fixtureFileSchema.parse(scheduleCaCatalogJson),
   fixtureFileSchema.parse(form540CatalogJson),
   fixtureFileSchema.parse(form5805CatalogJson),
+  fixtureFileSchema.parse(form3526CatalogJson),
+  fixtureFileSchema.parse(form3805pCatalogJson),
+  fixtureFileSchema.parse(schedulePCatalogJson),
 ];
 
 export const CA_FORMS: FormSpec[] = [
@@ -34,12 +43,34 @@ export const CA_FORMS: FormSpec[] = [
     relativeDir: "state/ca/schedule-ca",
     register: registerScheduleCa,
   }),
+  /* FTB 3526 and 3805P feed the 540 (line 63 and Schedule CA line 9); Schedule P reads the 540 and feeds line 61. */
+  makeFormSpec({
+    formId: "form-3526",
+    shortId: "3526",
+    displayName: "FTB 3526",
+    relativeDir: "state/ca/3526",
+    register: registerForm3526,
+  }),
+  makeFormSpec({
+    formId: "form-3805p",
+    shortId: "3805p",
+    displayName: "FTB 3805P",
+    relativeDir: "state/ca/3805p",
+    register: registerForm3805p,
+  }),
   makeFormSpec({
     formId: "form-540",
     shortId: "540",
     displayName: "Form 540",
     relativeDir: "state/ca/540",
     register: registerForm540,
+  }),
+  makeFormSpec({
+    formId: "schedule-p",
+    shortId: "schedule-p",
+    displayName: "Schedule P (540)",
+    relativeDir: "state/ca/schedule-p",
+    register: registerScheduleP,
   }),
   makeFormSpec({
     formId: "form-5805",

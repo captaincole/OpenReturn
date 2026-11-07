@@ -29,6 +29,7 @@ import { resolveSchedule3Info } from "./federal/schedule-3/resolveInfo.js";
 import type { Schedule8812FilingInfo } from "./federal/schedule-8812/filingInfo.js";
 import { resolveSchedule8812Info } from "./federal/schedule-8812/resolveInfo.js";
 import type { ScheduleAFilingInfo } from "./federal/schedule-a/filingInfo.js";
+import { resolveScheduleAInfo } from "./federal/schedule-a/resolveInfo.js";
 import type { ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import type { ScheduleCFilingInfo } from "./federal/schedule-c/filingInfo.js";
 import { resolveScheduleCInfo } from "./federal/schedule-c/resolveInfo.js";
@@ -45,15 +46,20 @@ import {
   resolveBaseInfo,
   resolveSchedule1Info,
   resolveSchedule2Info,
-  resolveScheduleAInfo,
   resolveScheduleBInfo,
   resolveScheduleCaInfo,
   resolveScheduleDInfo,
 } from "./filingInfoResolvers.js";
+import type { Form3526FilingInfo } from "./state/ca/3526/filingInfo.js";
+import { resolve3526Info } from "./state/ca/3526/resolveInfo.js";
+import type { Form3805pFilingInfo } from "./state/ca/3805p/filingInfo.js";
+import { resolve3805pInfo } from "./state/ca/3805p/resolveInfo.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
 import type { Form5805FilingInfo } from "./state/ca/5805/filingInfo.js";
 import { resolve5805Info } from "./state/ca/5805/resolveInfo.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
+import type { SchedulePFilingInfo } from "./state/ca/schedule-p/filingInfo.js";
+import { resolveSchedulePInfo } from "./state/ca/schedule-p/resolveInfo.js";
 import type { EngineDerivation } from "./types.js";
 import type { FilingStatus, Phone, SSN } from "./values.js";
 
@@ -103,6 +109,9 @@ export type FilingInfo = BaseFilingInfo &
   Form1040FilingInfo &
   Form540FilingInfo &
   Form5805FilingInfo &
+  Form3526FilingInfo &
+  Form3805pFilingInfo &
+  SchedulePFilingInfo &
   ScheduleCaFilingInfo &
   Form8949FilingInfo &
   ScheduleDFilingInfo &
@@ -134,6 +143,9 @@ export function resolveFilingInfo(opts: {
     resolve1040Info(inputs),
     resolve540Info(inputs),
     resolve5805Info(inputs),
+    resolve3526Info(inputs),
+    resolve3805pInfo(inputs),
+    resolveSchedulePInfo(inputs),
     resolveScheduleCaInfo(inputs),
     resolve8949Info(inputs),
     resolveScheduleDInfo(inputs),
