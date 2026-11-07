@@ -43,6 +43,12 @@ export const recordDependent = createTool({
       .max(12)
       .optional()
       .describe("Months the person lived with the user in 2025"),
+    placedWithYou: z
+      .string()
+      .optional()
+      .describe(
+        "MM/DD/YYYY: the date in 2025 the child was adopted, placed for adoption or placed as a foster child, when that happened during the year",
+      ),
     livedInUs: z.boolean().optional().describe("Lived with the user in the United States"),
     usCitizenOrResident: z
       .boolean()

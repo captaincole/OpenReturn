@@ -561,7 +561,7 @@ export function register(): void {
       "line.28_no_actc_claim":
         "Opt-out checkbox for ACTC claim — no ACTC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
       "line.28":
-        "Additional Child Tax Credit from Schedule 8812 — Schedule 8812 not ingested and no qualifying-child dependent scenario built yet.",
+        "Additional child tax credit from Schedule 8812 line 27 — Part II of the schedule is not bound yet (no scenario has a credit larger than the tax).",
       "line.29":
         "American Opportunity Credit from Form 8863 line 8 — Form 8863 not ingested and no education-credit scenario built yet.",
       "line.30":
