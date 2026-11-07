@@ -1,5 +1,6 @@
 /* Fact catalog. Add a new fact kind as a module under ./kinds/ and re-export it here. */
 
+export * from "./kinds/alternativeMinimumTax.js";
 export * from "./kinds/business.js";
 export * from "./kinds/dependents.js";
 export * from "./kinds/dividends.js";
