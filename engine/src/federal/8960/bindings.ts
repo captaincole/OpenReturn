@@ -56,6 +56,14 @@ export function register(): void {
         const value = form["schedule-a.0.line.9_investment_interest"];
         return typeof value === "number" ? value : undefined;
       },
+      // MANUAL EDIT: line 9b = the taxpayer's allocation, capped at the SALT actually deducted (Schedule A line 5e).
+      "0.line.9b": (form, info) => {
+        const deducted = form["schedule-a.0.line.5e_salt_cap"];
+        const allocated = info.stateLocalTaxAllocableToInvestmentIncome;
+        return typeof deducted === "number" && typeof allocated === "number"
+          ? Math.min(allocated, deducted)
+          : undefined;
+      },
       // MANUAL EDIT: line 16 = smaller of line 12 or line 15.
       "0.line.16": (form) => {
         const nii = form["0.line.12"];
@@ -94,8 +102,6 @@ export function register(): void {
       "0.line.6": "CFC/PFIC adjustments — no CFC/PFIC ownership scenario yet.",
       "0.line.7":
         "Other NII modifications (section 1411 NOL, estate/trust distributions, section 404(k) dividends, etc.) — no scenario modeled yet.",
-      "0.line.9b":
-        "State/local/foreign income tax allocable to NII requires a reasonable-method allocation worksheet (and itemizing); allocation not modeled yet.",
       "0.line.9c":
         "Miscellaneous investment expenses are generally disallowed post-2017 (OBBBA made permanent); no ingestion path for allowable section 62/212 expenses.",
       "0.line.10":

@@ -234,9 +234,19 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
             },
           ],
   });
+  // Line 9b (…::sec::line-9b-state-local-and-foreign-income-tax::b02): the taxpayer's allocation.
+  const allocableTax = num(inputs, "state_local_tax.allocable_to_investment_income");
+  const itemizes = resolveScheduleAInfo(inputs).mustFile?.["schedule-a"]?.value === true;
+  const asked = resolution.value === true && itemizes;
   return {
     mustFile: { "form-8960": resolution },
+    missingInputs: {
+      "form-8960": asked
+        ? missingInputs({ "state_local_tax.allocable_to_investment_income": allocableTax })
+        : [],
+    },
     scheduleCNonpassive,
+    stateLocalTaxAllocableToInvestmentIncome: allocableTax,
   };
 }
 
@@ -433,7 +443,6 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
     mortgageInterestForm1098: num(inputs, "mortgage.interest_form_1098"),
     mortgageInterestNotForm1098: num(inputs, "mortgage.interest_not_form_1098"),
     pointsNotForm1098: num(inputs, "mortgage.points_not_form_1098"),
-    investmentInterest: num(inputs, "investment_income.investment_interest_expense"),
     giftsCashCheck,
     giftsOtherThanCash,
     giftsCarryover: num(inputs, "charitable.carryover"),
