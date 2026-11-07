@@ -1,5 +1,5 @@
 import { createTool } from "@mastra/core/tools";
-import { makeW2FactKey, type W2FactValue } from "@openreturn/engine/facts";
+import { SPOUSE_KEYS, makeW2FactKey, type W2FactValue } from "@openreturn/engine/facts";
 import { z } from "zod";
 import type { Scope } from "../db/appDb";
 import { recordFact } from "../db/taxFacts";
@@ -21,6 +21,7 @@ const slugify = (text: string): string =>
     .replace(/^-+|-+$/g, "");
 
 function toW2FactValue(input: {
+  owner?: W2FactValue["owner"];
   employer: { name: string; ein: string; address?: W2FactValue["employerAddress"] };
   employee?: W2FactValue["employee"];
   box1: number;
@@ -41,6 +42,7 @@ function toW2FactValue(input: {
   box17: number;
 }): W2FactValue {
   return {
+    owner: input.owner,
     employerName: input.employer.name,
     employerEin: input.employer.ein,
     employerAddress: input.employer.address,
@@ -71,6 +73,12 @@ export const ingestW2 = createTool({
     "Ingest a single W-2 as a structured tax fact. Cade (or whatever upstream extractor) reads the W-2 PDF and calls this with all the box values. Writes ONE tax_facts row with the full W-2 data; the Form Engine reads it via the fact catalog. Call once per W-2.",
   inputSchema: z.object({
     year: z.number().int(),
+    owner: z
+      .enum(["taxpayer", "spouse"])
+      .optional()
+      .describe(
+        "Whose W-2 this is. Pass it on a joint return: the spouse's W-2 fills identity.spouse.* instead of the taxpayer's identity facts, and Schedule SE counts only the taxpayer's wages.",
+      ),
     employer: z.object({
       name: z.string(),
       ein: z.string(),
@@ -162,6 +170,7 @@ export const ingestW2 = createTool({
           year,
           employerName: input.employer.name,
           employee: input.employee,
+          owner: input.owner,
         })
       : 0;
 
@@ -176,6 +185,7 @@ async function writeIdentityFacts(opts: {
   filingId: string;
   year: number;
   employerName: string;
+  owner?: W2FactValue["owner"];
   employee: {
     firstName?: string;
     lastName?: string;
@@ -183,7 +193,7 @@ async function writeIdentityFacts(opts: {
     address?: { line1?: string; line2?: string; city?: string; state?: string; zip?: string };
   };
 }): Promise<number> {
-  const { scope, userId, filingId, year, employerName, employee: employee } = opts;
+  const { scope, userId, filingId, year, employerName, employee, owner } = opts;
   let written = 0;
   const writeIdentity = async (key: string, value: unknown) => {
     if (value === undefined || value === null || value === "") return;
@@ -199,6 +209,13 @@ async function writeIdentityFacts(opts: {
     });
     written++;
   };
+  /* The spouse's W-2 names the spouse; the address is the household's and is left alone. */
+  if (owner === "spouse") {
+    await writeIdentity(SPOUSE_KEYS.firstName, employee.firstName);
+    await writeIdentity(SPOUSE_KEYS.lastName, employee.lastName);
+    await writeIdentity(SPOUSE_KEYS.ssn, employee.ssn);
+    return written;
+  }
   await writeIdentity("identity.name.first", employee.firstName);
   await writeIdentity("identity.name.last", employee.lastName);
   await writeIdentity("identity.ssn", employee.ssn);

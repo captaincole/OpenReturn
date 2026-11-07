@@ -98,9 +98,10 @@ function ssnOf(raw: string | undefined): SSN | undefined {
 
 /*
  * Line 8a: the taxpayer's W-2 social security wages and tips (boxes 3 and 7). On
- * a joint return only a W-2 with the taxpayer's SSN counts; a W-2 with no
- * employee SSN cannot be placed, so line 8a waits and Cade is asked about it. On
- * any other status every W-2 on the return is the filer's.
+ * a joint return only the taxpayer's W-2s count: the fact's owner when Cade
+ * recorded one, else the employee SSN. A W-2 with neither cannot be placed, so
+ * line 8a waits and Cade is asked about it. On any other status every W-2 on
+ * the return is the filer's.
  */
 function taxpayerSocialSecurityWages(inputs: ResolverInputs): {
   wages: number | undefined;
@@ -112,11 +113,15 @@ function taxpayerSocialSecurityWages(inputs: ResolverInputs): {
   const joint = filingStatusOf(inputs) === "married_filing_jointly";
   const taxpayerSsn = ssnOf(text(inputs, "identity.ssn"));
   const unplacedW2Keys = joint
-    ? w2s.filter(({ w2 }) => ssnOf(w2.employee?.ssn) === undefined).map(({ key }) => key)
+    ? w2s
+        .filter(({ w2 }) => w2.owner === undefined && ssnOf(w2.employee?.ssn) === undefined)
+        .map(({ key }) => key)
     : [];
-  const own = joint
-    ? w2s.filter(({ w2 }) => taxpayerSsn !== undefined && ssnOf(w2.employee?.ssn) === taxpayerSsn)
-    : w2s;
+  const isTaxpayers = (w2: W2FactValue) =>
+    w2.owner === undefined
+      ? taxpayerSsn !== undefined && ssnOf(w2.employee?.ssn) === taxpayerSsn
+      : w2.owner === "taxpayer";
+  const own = joint ? w2s.filter(({ w2 }) => isTaxpayers(w2)) : w2s;
   const wages =
     own.length === 0 || unplacedW2Keys.length > 0
       ? undefined

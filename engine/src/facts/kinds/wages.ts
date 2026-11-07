@@ -20,6 +20,8 @@ export interface W2Box14Entry {
 }
 
 export interface W2FactValue {
+  /* Whose W-2 on a joint return. Without it, the employee SSN (box a) places it. */
+  owner?: "taxpayer" | "spouse";
   employerName: string;
   employerEin: string;
   employerAddress?: W2Address;
