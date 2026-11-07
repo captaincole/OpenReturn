@@ -12,7 +12,8 @@ export interface TradeFactValue {
   description: string;
   cusip?: string;
   symbol?: string;
-  quantity: number;
+  /* Blank when the broker prints none (box 1a holds only a description). */
+  quantity?: number;
   /* "MM/DD/YY" as printed, or "VARIOUS". Noncovered sales can leave it blank. */
   dateAcquired?: string;
   dateSold: string;

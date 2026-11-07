@@ -40,8 +40,9 @@ function currentCopy(info: Form8949FilingInfo): Form8949Copy | undefined {
 }
 
 /* Brokers often print the quantity in box 1a already ("91.207 sh SAMPLE INC"). */
-function describe(quantity: number, description: string): string {
-  return /^\d/.test(description) ? description : `${quantity} sh ${description}`;
+function describe(quantity: number | undefined, description: string): string {
+  if (quantity === undefined || /^\d/.test(description)) return description;
+  return `${quantity} sh ${description}`;
 }
 
 /* Empty rows return undefined so unused widgets do not render "0". */
