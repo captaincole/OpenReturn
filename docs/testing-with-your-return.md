@@ -34,7 +34,11 @@ federal-only TaxCalcBench scenario with a sole-proprietor business
 TaxCalcBench scenario itemizes (Schedule A: gifts, medical under the
 floor, state tax withheld, investment interest on Form 4952) with a
 dependent (Schedule 8812), a small business, Social Security and a
-stock sale.
+stock sale. A third, married filing jointly in California, itemizes on
+the CA return (Schedule CA Part II, FTB 3526), takes the dependent
+exemption credit, owes the CA alternative minimum tax on an incentive
+stock option exercise (Schedule P) and the early-distribution tax on a
+1099-R (FTB 3805P).
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
 1099-SA, 1098, SSA-1099, W-2G, 1099-K, a W-2 you issued to a household employee
