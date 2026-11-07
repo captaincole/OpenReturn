@@ -1,0 +1,288 @@
+{
+  "form": {
+    "formId": "form-3526",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3526 — Investment Interest Expense Deduction"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3526.0.header.taxpayer_name",
+      "label": "Name(s) as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on tax return",
+      "position": {
+        "page": 0,
+        "x": 36.84,
+        "y": 683.51
+      }
+    },
+    {
+      "fieldId": "form-3526.0.header.ssn_itin_fein",
+      "label": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) or Federal Employer Identification Number (F E I N) (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) or Federal Employer Identification Number (F E I N) (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 415.827,
+        "y": 683.51
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3526.0.line.1_investment_interest_paid",
+      "label": "Line 1. Investment interest expense paid or accrued in 2025. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. Investment interest expense paid or accrued in 2025. See instructions",
+      "position": {
+        "page": 0,
+        "x": 486.027,
+        "y": 668.755
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.2_disallowed_prior_year_interest",
+      "label": "Line 2. Disallowed investment interest expense from 2024 form F T B 3526, line 7. If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Disallowed investment interest expense from 2024 form F T B 3526, line 7. If zero or less, enter 0",
+      "position": {
+        "page": 0,
+        "x": 485.986,
+        "y": 654.396
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.3_total_investment_interest",
+      "label": "Line 3. Total investment interest expense. Add line 1 and line 2.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Total investment interest expense. Add line 1 and line 2",
+      "position": {
+        "page": 0,
+        "x": 485.986,
+        "y": 642.396
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.4a_gross_investment_income",
+      "label": "Line 4a. Gross income from property held for investment (excluding any net gain from the disposition of property held for investment). See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4a. Gross income from property held for investment (excluding any net gain from the disposition of property held for investment). See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.986,
+        "y": 618.341
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.4b_net_gain_investment_property",
+      "label": "Line 4b. Net gain from the disposition of property held for investment. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4b. Net gain from the disposition of property held for investment. See instructions",
+      "position": {
+        "page": 0,
+        "x": 374.959,
+        "y": 606.396
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.4c_net_capital_gain_investment_property",
+      "label": "Line 4c. Net capital gain from the disposition of property held for investment. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4c. Net capital gain from the disposition of property held for investment. See instructions",
+      "position": {
+        "page": 0,
+        "x": 374.959,
+        "y": 594.369
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.4d_net_gain_less_capital_gain",
+      "label": "Line 4d. Subtract line 4c from line 4b. If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4d. Subtract line 4c from line 4b. If zero or less, enter 0",
+      "position": {
+        "page": 0,
+        "x": 485.986,
+        "y": 582.362
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.4e_elected_net_capital_gain",
+      "label": "Line 4e. Enter all or part of the amount on line 4c that you elect to include in investment income. Do not include more than the amount on line 4b. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4e. Enter all or part of the amount on line 4c that you elect to include in investment income. Do not include more than the amount on line 4b. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.986,
+        "y": 558.362
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.4f_investment_income",
+      "label": "Line 4f. Investment income. Add line 4a, line 4d, and line 4e.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4f. Investment income. Add line 4a, line 4d, and line 4e",
+      "position": {
+        "page": 0,
+        "x": 485.986,
+        "y": 546.334
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.5_investment_expenses",
+      "label": "Line 5. Investment expenses. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Investment expenses. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.986,
+        "y": 534.389
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.6_net_investment_income",
+      "label": "Line 6. Net investment income. Subtract line 5 from line 4f.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Net investment income. Subtract line 5 from line 4f",
+      "position": {
+        "page": 0,
+        "x": 485.986,
+        "y": 522.362
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.7_disallowed_interest_carryforward",
+      "label": "Line 7. Disallowed investment interest expense to be carried forward to 2026. Subtract line 6 from line 3. If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Disallowed investment interest expense to be carried forward to 2026. Subtract line 6 from line 3. If zero or less, enter 0",
+      "position": {
+        "page": 0,
+        "x": 485.986,
+        "y": 498.252
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.8_investment_interest_deduction",
+      "label": "Line 8. Investment interest expense deduction. Enter the smaller of line 3 or line 6. Form 541 filers, stop here and see instructions. All other filers, go to line 9.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Investment interest expense deduction. Enter the smaller of line 3 or line 6. Form 541 filers, stop here and see instructions. All other filers, go to line 9",
+      "position": {
+        "page": 0,
+        "x": 485.959,
+        "y": 474.198
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.9_federal_4952_line_8",
+      "label": "Line 9. Enter the amount from federal Form 4952, line 8.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Enter the amount from federal Form 4952, line 8",
+      "position": {
+        "page": 0,
+        "x": 485.959,
+        "y": 462.15
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3526.0.line.10_california_adjustment",
+      "label": "Line 10. California investment interest expense deduction adjustment. Enter the difference between line 8 and line 9. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. California investment interest expense deduction adjustment. Enter the difference between line 8 and line 9. See instructions",
+      "position": {
+        "page": 0,
+        "x": 485.959,
+        "y": 438.096
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3526/blank.pdf",
+    "ingestedAt": "2026-11-07T19:50:24.306Z",
+    "totalFields": 17,
+    "skipped": 0,
+    "catalogEntries": 17
+  }
+}

@@ -1,0 +1,441 @@
+{
+  "form": {
+    "formId": "form-3805p",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3805P — Additional Taxes on Qualified Plans (Including IRAs) and Other Tax-Favored Accounts"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3805p.0.header.first_name",
+      "label": "First name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1001",
+      "position": {
+        "page": 0,
+        "x": 36.5,
+        "y": 671.9
+      }
+    },
+    {
+      "fieldId": "form-3805p.0.header.middle_initial",
+      "label": "Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1002",
+      "position": {
+        "page": 0,
+        "x": 177.74,
+        "y": 671.9
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3805p.0.header.last_name",
+      "label": "Last name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1003",
+      "position": {
+        "page": 0,
+        "x": 194.88,
+        "y": 671.9
+      }
+    },
+    {
+      "fieldId": "form-3805p.0.header.ssn",
+      "label": "Social Security Number or Individual  Taxpayer  Identification  Number. Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1004",
+      "position": {
+        "page": 0,
+        "x": 424.32,
+        "y": 671.9
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3805p.0.header.is_amended_form",
+      "label": "Check this box if this is an amended form.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3805P Form 1007 CB",
+      "position": {
+        "page": 0,
+        "x": 514.66,
+        "y": 652.176
+      }
+    },
+    {
+      "fieldId": "form-3805p.0.header.address",
+      "label": "Address (number and street, Post Office Box, or Private Mail Box number).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1005",
+      "position": {
+        "page": 0,
+        "x": 36.5,
+        "y": 647.44
+      }
+    },
+    {
+      "fieldId": "form-3805p.0.header.apartment",
+      "label": "Apartment number or Suite number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1006",
+      "position": {
+        "page": 0,
+        "x": 359.1,
+        "y": 647.44
+      }
+    },
+    {
+      "fieldId": "form-3805p.0.header.city",
+      "label": "City.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1008",
+      "position": {
+        "page": 0,
+        "x": 36.5,
+        "y": 623.095
+      }
+    },
+    {
+      "fieldId": "form-3805p.0.header.state",
+      "label": "State. Enter two letter State abbreviation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1009",
+      "position": {
+        "page": 0,
+        "x": 398.7,
+        "y": 623.095
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3805p.0.header.zip",
+      "label": "ZIP code. Enter first 5 digits - last 4 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1010",
+      "position": {
+        "page": 0,
+        "x": 424.08,
+        "y": 623.095
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3805p.0.part1.line_1_early_distributions_in_income",
+      "label": "Part 1 Additional Tax on Early Distributions. Line 1 .  Early distributions included in income. For Roth IRA distributions, see instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1011",
+      "position": {
+        "page": 0,
+        "x": 483.36,
+        "y": 573.75
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805p.0.part1.line_2_exception_number",
+      "label": "Line 2 . Early distributions included on line 1 that are not subject to additional tax. See instructions. Enter the appropriate exception number from instructions. Enter 2 digits.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1012",
+      "position": {
+        "page": 0,
+        "x": 155.75,
+        "y": 549.569
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3805p.0.part1.line_2_distributions_not_subject_to_tax",
+      "label": "Line 2 . Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1013",
+      "position": {
+        "page": 0,
+        "x": 483.36,
+        "y": 550.14
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805p.0.part1.line_3_amount_subject_to_additional_tax",
+      "label": "Line 3 . Amount subject to additional tax. Subtract line 2 from line 1* \rIf any part of the amount on line 3 was a distribution from a SIMPLE IRA, you may have to include 6% (.06) of that amount on line 4 instead of 2½% (.025). See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1014",
+      "position": {
+        "page": 0,
+        "x": 483.36,
+        "y": 537.389
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805p.0.part1.line_4_early_distribution_tax_due",
+      "label": "Line 4 . Tax due. Multiply line 3 by 2½% (.025). Enter the amount here and include this amount in the total on Form 540, line 63 or Form 540NR, line 73 . If you are not required to file a California income tax return, sign this form below and refer to the instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1015",
+      "position": {
+        "page": 0,
+        "x": 483.36,
+        "y": 501.84
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805p.0.part2.line_5_education_able_distributions_in_income",
+      "label": "Part 2 Additional Tax on Certain Distributions from Education Accounts and ABLE Accounts. Line 5 . Distributions included in income from a Coverdell E S A, a QTP, or an ABLE account. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1016",
+      "position": {
+        "page": 0,
+        "x": 483.36,
+        "y": 441.52
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805p.0.part2.line_6_distributions_not_subject_to_tax",
+      "label": "Line 6 . Distributions included on line 5 that are not subject to additional tax. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1017",
+      "position": {
+        "page": 0,
+        "x": 483.36,
+        "y": 428.52
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805p.0.part2.line_7_amount_subject_to_additional_tax",
+      "label": "Line 7 . Amount subject to additional tax. Subtract line 6 from line 5 .",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1018",
+      "position": {
+        "page": 0,
+        "x": 483.36,
+        "y": 416.52
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805p.0.part2.line_8_education_able_tax_due",
+      "label": "Line 8 . Tax due. Multiply line 7 by 2½% (.025). Enter the amount here and include this amount in the total on Form 540, line 63 or Form 540NR, line 73 . If you are not required to file a California income tax return, sign this form below and refer to the instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1019",
+      "position": {
+        "page": 0,
+        "x": 483.36,
+        "y": 381.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805p.0.part3.line_9_taxable_archer_msa_distribution",
+      "label": "Part 3 . Additional Tax on Distributions from Archer and Medicare Advantage Medical Savings Accounts (MSAs). Line 9 . Taxable Archer M S A distribution from federal Form 8853, line 8 . See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1020",
+      "position": {
+        "page": 0,
+        "x": 483.36,
+        "y": 341.7
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805p.0.part3.line_10a_archer_msa_tax_exception",
+      "label": "Line 10 a.   If you meet any of the exceptions to the 12.5% tax (see instructions), check here.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3805P Form 1021 CB",
+      "position": {
+        "page": 0,
+        "x": 450.84,
+        "y": 331.44
+      }
+    },
+    {
+      "fieldId": "form-3805p.0.part3.line_10b_archer_msa_tax_due",
+      "label": "Line 10 b. Otherwise, multiply line 9 by 12.5% (.125). Enter the amount here and include this amount in the total on Form 540, line 63 or Form 540NR, line 73 . If you are not required to file a California income tax return, sign this form below and refer to the instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1022",
+      "position": {
+        "page": 0,
+        "x": 383.04,
+        "y": 293.28
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805p.0.part3.line_11_medicare_advantage_msa_tax_due",
+      "label": "Line 11 . Additional tax due from Medicare Advantage MSA distributions. Enter the amount from federal Form 8853, line 13b. Also, include this amount in the total on Form 540, line 63 or Form 540NR, line 73 . If you are not required to file a California income tax return, sign this form below and refer to the instructions. Form 540NR filers, see instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1023",
+      "position": {
+        "page": 0,
+        "x": 483.36,
+        "y": 257.48
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805p.0.signing.date_signed",
+      "label": "Signature date. Enter date as a two-digit month / two-digit day / four-digit year.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1024",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 191
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3805p.0.signing.preparer_ptin",
+      "label": "Preparer Taxpayer Identification Number. Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1025",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 160.143
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3805p.0.signing.preparer_firm_name_and_address",
+      "label": "Firm’s name (or yours if self-employed) and address.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1026",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 128.285
+      }
+    },
+    {
+      "fieldId": "form-3805p.0.signing.preparer_firm_ein",
+      "label": "Firm's Federal Employer Identification Number. Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805P Form 1027",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 128.285
+      },
+      "maxLength": 9
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3805p/blank.pdf",
+    "ingestedAt": "2026-11-07T19:50:37.359Z",
+    "totalFields": 27,
+    "skipped": 0,
+    "catalogEntries": 27
+  }
+}

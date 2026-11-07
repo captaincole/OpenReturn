@@ -1,0 +1,249 @@
+{
+  "formId": "form-3805p",
+  "fieldCount": 27,
+  "entries": [
+    {
+      "fieldId": "form-3805p.0.header.address",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1005",
+          "text": "T-1HED3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.header.apartment",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1006",
+          "text": "T-GS0BV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.header.city",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1008",
+          "text": "T-1K7U0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.header.first_name",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1001",
+          "text": "T-1RVXD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.header.is_amended_form",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1007 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.header.last_name",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1003",
+          "text": "T-19G3M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.header.middle_initial",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1002",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1004",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.header.state",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1009",
+          "text": "59"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.header.zip",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1010",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part1.line_1_early_distributions_in_income",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1011",
+          "text": "1,926"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part1.line_2_distributions_not_subject_to_tax",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1013",
+          "text": "6,844"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part1.line_2_exception_number",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1012",
+          "text": "61"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part1.line_3_amount_subject_to_additional_tax",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1014",
+          "text": "9,147"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part1.line_4_early_distribution_tax_due",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1015",
+          "text": "4,070"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part2.line_5_education_able_distributions_in_income",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1016",
+          "text": "6,629"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part2.line_6_distributions_not_subject_to_tax",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1017",
+          "text": "8,251"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part2.line_7_amount_subject_to_additional_tax",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1018",
+          "text": "2,401"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part2.line_8_education_able_tax_due",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1019",
+          "text": "4,915"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part3.line_10a_archer_msa_tax_exception",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1021 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part3.line_10b_archer_msa_tax_due",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1022",
+          "text": "8,645"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part3.line_11_medicare_advantage_msa_tax_due",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1023",
+          "text": "4,530"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.part3.line_9_taxable_archer_msa_distribution",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1020",
+          "text": "2,225"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.signing.date_signed",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1024",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.signing.preparer_firm_ein",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1027",
+          "text": "T-38EIZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.signing.preparer_firm_name_and_address",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1026",
+          "text": "T-1P3MO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805p.0.signing.preparer_ptin",
+      "widgets": [
+        {
+          "widgetName": "3805P Form 1025",
+          "text": "T-1EHPB"
+        }
+      ]
+    }
+  ]
+}
