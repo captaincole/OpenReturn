@@ -301,6 +301,12 @@ export const tcbCa005Facts: TaxFactRow[] = [
     "The key's FTB 3526 line 2: the answers give one carryover (f4952.COfromBefore), and the key applies it to California.",
   ),
   fact(
+    "investment_income",
+    INVESTMENT_INTEREST_KEYS.caAmtDisallowedCarryover,
+    650,
+    "The key's Schedule P line 7 is blank: the AMT carryover equals the regular one.",
+  ),
+  fact(
     "state_local_tax",
     "state_local_tax.allocable_to_investment_income",
     1151,

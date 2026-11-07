@@ -18,6 +18,16 @@ export function sum(...values: unknown[]): number {
   return total;
 }
 
+/* Blank, not 0, when every term is blank (the printed-zero rule): a total prints only when a line feeds it. */
+export function sumOrBlank(...values: unknown[]): number | undefined {
+  return values.some((value) => typeof value === "number") ? sum(...values) : undefined;
+}
+
+/* A cross-form read is typed unknown: a finite number passes, anything else is blank. */
+export function numberOrBlank(value: unknown): number | undefined {
+  return typeof value === "number" && Number.isFinite(value) ? value : undefined;
+}
+
 export function atLeast(min: number, value: unknown): number {
   if (typeof value !== "number" || !Number.isFinite(value)) return min;
   return Math.max(min, value);

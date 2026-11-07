@@ -2,7 +2,7 @@
 
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { defineForm, type BindingFn, type FormAccessor } from "../../../defineForm.js";
-import { atLeast, roundDollars, sum } from "../../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import type { FilingStatus } from "../../../values.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
 import { partIIICreditRows } from "./partIII.js";
@@ -45,12 +45,30 @@ const MEDICAL_AMT_FLOOR_RATE = 0.025;
 /* Part II line 24: "Multiply line 23 by 7.0% (.07)" (the form). */
 const TENTATIVE_MINIMUM_TAX_RATE = 0.07;
 
-const number = (value: unknown): number | undefined =>
-  typeof value === "number" && Number.isFinite(value) ? value : undefined;
+/*
+ * Line 7 refigures FTB 3526 for AMT. The only difference the engine has a fact
+ * for is line 2 (last year's AMT carryover instead of the regular one); the
+ * line 1 and line 4a–4c differences have no facts, so the two forms agree
+ * there. With a regular carryover and no AMT carryover stated, the adjustment,
+ * and so line 14, wait.
+ */
+function investmentInterestAdjustmentUnknown(form: Form, info: SchedulePFilingInfo): boolean {
+  const regularLine8 = numberOrBlank(form["form-3526.0.line.8_investment_interest_deduction"]);
+  const regularLine2 = numberOrBlank(form["form-3526.0.line.2_disallowed_prior_year_interest"]);
+  if (regularLine8 === undefined || regularLine2 === undefined || regularLine2 <= 0) return false;
+  return info.caAmtDisallowedInterestCarryover === undefined;
+}
 
-/* Blank, not 0, when every term is blank (printed-zero rule). */
-function sumIfAny(...values: unknown[]): number | undefined {
-  return values.some((value) => typeof value === "number") ? sum(...values) : undefined;
+/* The AMT FTB 3526 line 8: line 1 plus the AMT carryover, capped at line 6, as the regular form does. */
+function amtInvestmentInterestDeduction(form: Form, info: SchedulePFilingInfo): number | undefined {
+  const line1 = numberOrBlank(form["form-3526.0.line.1_investment_interest_paid"]) ?? 0;
+  const regularLine2 =
+    numberOrBlank(form["form-3526.0.line.2_disallowed_prior_year_interest"]) ?? 0;
+  const line6 = numberOrBlank(form["form-3526.0.line.6_net_investment_income"]);
+  if (line6 === undefined) return undefined;
+  const amtLine2 = regularLine2 > 0 ? info.caAmtDisallowedInterestCarryover : 0;
+  if (amtLine2 === undefined) return undefined;
+  return Math.min(line1 + atLeast(0, amtLine2), line6);
 }
 
 /* An add-back line prints only when there is an amount to add back. */
@@ -65,7 +83,7 @@ const positiveOrBlank = (value: number | undefined): number | undefined =>
  * itemizes for California when line 18 is above the standard deduction.
  */
 function itemizesForCalifornia(form: Form, info: SchedulePFilingInfo): boolean | undefined {
-  const line18 = number(form["form-540.line.18_deductions"]);
+  const line18 = numberOrBlank(form["form-540.line.18_deductions"]);
   if (line18 === undefined || !info.filingStatus) return undefined;
   const standard = lookupStandardDeduction("state-ca", 2025, info.filingStatus);
   if (standard === undefined) return undefined;
@@ -75,7 +93,7 @@ function itemizesForCalifornia(form: Form, info: SchedulePFilingInfo): boolean |
 /* The last filled column (c) among credit rows, read from the bottom up; else the section's opening balance. */
 function lastTaxBalance(form: Form, opening: number, rows: Array<keyof ScheduleP>): number {
   for (const row of rows) {
-    const balance = number(form[row]);
+    const balance = numberOrBlank(form[row]);
     if (balance !== undefined) return balance;
   }
   return opening;
@@ -95,7 +113,7 @@ const partI: Bindings = {
   "0.line.1_standard_deduction": (form, info) => {
     const itemizes = itemizesForCalifornia(form, info);
     if (itemizes === undefined) return undefined;
-    return itemizes ? undefined : number(form["form-540.line.18_deductions"]);
+    return itemizes ? undefined : numberOrBlank(form["form-540.line.18_deductions"]);
   },
   /*
    * The smaller of federal Schedule A line 4 (Schedule CA Part II line 4,
@@ -105,8 +123,8 @@ const partI: Bindings = {
    */
   "0.line.2_medical_dental_expenses": (form, info) => {
     if (itemizesForCalifornia(form, info) !== true) return undefined;
-    const scheduleALine4 = number(form["schedule-ca.4.page2.medical_line4_federal"]);
-    const federalAgi = number(form["form-540.line.13_federal_agi"]);
+    const scheduleALine4 = numberOrBlank(form["schedule-ca.4.page2.medical_line4_federal"]);
+    const federalAgi = numberOrBlank(form["form-540.line.13_federal_agi"]);
     if (scheduleALine4 === undefined || federalAgi === undefined) return undefined;
     const floor = roundDollars(federalAgi * MEDICAL_AMT_FLOOR_RATE);
     return positiveOrBlank(Math.min(scheduleALine4, floor));
@@ -118,7 +136,7 @@ const partI: Bindings = {
    */
   "0.line.3_personal_real_property_taxes": (form, info) => {
     if (itemizesForCalifornia(form, info) !== true) return undefined;
-    const columnA = sumIfAny(
+    const columnA = sumOrBlank(
       form["schedule-ca.4.page2.taxes_5b_federal"],
       form["schedule-ca.4.page2.taxes_5c_federal"],
       form["schedule-ca.4.page2.taxes_6_federal"],
@@ -131,7 +149,7 @@ const partI: Bindings = {
   // Schedule CA Part II line 25 (ca-540-sched-p-inst-2025::sec::line-5-miscellaneous-itemized-deductions::b01).
   "0.line.5_miscellaneous_itemized_deductions": (form, info) => {
     if (itemizesForCalifornia(form, info) !== true) return undefined;
-    return positiveOrBlank(number(form["schedule-ca.5.page2.job_expenses_25_net"]));
+    return positiveOrBlank(numberOrBlank(form["schedule-ca.5.page2.job_expenses_25_net"]));
   },
   /*
    * MANUAL EDIT: the AMT FTB 3526 line 8 less the regular FTB 3526 line 8
@@ -144,25 +162,20 @@ const partI: Bindings = {
    */
   "0.line.7_investment_interest_adjustment": (form, info) => {
     if (itemizesForCalifornia(form, info) !== true) return undefined;
-    const regularLine8 = number(form["form-3526.0.line.8_investment_interest_deduction"]);
-    if (regularLine8 === undefined) return undefined;
-    /*
-     * MANUAL EDIT: with a 2024 carryover, the AMT form's line 2 is the 2024 AMT
-     * disallowed amount, a different number the engine has no fact for; the
-     * adjustment is then unknown, not 0.
-     */
-    const regularLine2 = number(form["form-3526.0.line.2_disallowed_prior_year_interest"]);
-    return regularLine2 !== undefined && regularLine2 > 0 ? undefined : 0;
+    const regularLine8 = numberOrBlank(form["form-3526.0.line.8_investment_interest_deduction"]);
+    const amtLine8 = amtInvestmentInterestDeduction(form, info);
+    if (regularLine8 === undefined || amtLine8 === undefined) return undefined;
+    return roundDollars(amtLine8 - regularLine8);
   },
   /*
    * The ISO spread: fair market value at exercise over the amount paid, for
    * stock not sold in the year (ca-540-sched-p-inst-2025::sec::line-9-adjusted-gain-or-loss::b02,
    * the run-in "Line 10" heading; same-year sale needs no adjustment, …::b03).
    */
-  "0.line.10_iso_cqso": (_, info) => positiveOrBlank(number(info.isoExerciseSpread)),
+  "0.line.10_iso_cqso": (_, info) => positiveOrBlank(numberOrBlank(info.isoExerciseSpread)),
   // "Enter the total on line 13" (ca-540-sched-p-inst-2025::sec::line-13-other-adjustments-and-preferences::b01).
   "0.line.13_other_adjustments_total": (form) =>
-    sumIfAny(
+    sumOrBlank(
       form["0.line.13a_circulation_expenditures"],
       form["0.line.13b_depletion"],
       form["0.line.13c_installment_sales"],
@@ -177,8 +190,14 @@ const partI: Bindings = {
       form["0.line.13l_related_adjustments"],
     ),
   // "Combine line 1 through line 13" (the form).
-  "0.line.14_total_adjustments_preferences": (form) =>
-    sumIfAny(
+  "0.line.14_total_adjustments_preferences": (form, info) => {
+    if (
+      itemizesForCalifornia(form, info) === true &&
+      investmentInterestAdjustmentUnknown(form, info)
+    ) {
+      return undefined;
+    }
+    return sumOrBlank(
       form["0.line.1_standard_deduction"],
       form["0.line.2_medical_dental_expenses"],
       form["0.line.3_personal_real_property_taxes"],
@@ -192,24 +211,25 @@ const partI: Bindings = {
       form["0.line.11_passive_activities_adjustment"],
       form["0.line.12_estate_trust_beneficiaries"],
       form["0.line.13_other_adjustments_total"],
-    ),
+    );
+  },
   /*
    * Form 540 line 19; when that is zero, line 17 less line 18 as a negative
    * amount (ca-540-sched-p-inst-2025::sec::line-15-taxable-income::b01).
    */
   "0.line.15_taxable_income": (form) => {
-    const taxableIncome = number(form["form-540.line.19_taxable_income"]);
+    const taxableIncome = numberOrBlank(form["form-540.line.19_taxable_income"]);
     if (taxableIncome === undefined) return undefined;
     if (taxableIncome > 0) return taxableIncome;
-    const caAgi = number(form["form-540.line.17_ca_agi"]);
-    const deductions = number(form["form-540.line.18_deductions"]);
+    const caAgi = numberOrBlank(form["form-540.line.17_ca_agi"]);
+    const deductions = numberOrBlank(form["form-540.line.18_deductions"]);
     if (caAgi === undefined || deductions === undefined) return undefined;
     return Math.min(0, caAgi - deductions);
   },
   // Schedule CA Part I, Section B, lines 9b1–9b3, column B, "as a positive amount" (the form).
   "0.line.16_nol_deductions": (form) =>
     positiveOrBlank(
-      sumIfAny(
+      sumOrBlank(
         form["schedule-ca.2.line.b9b1_subtractions"],
         form["schedule-ca.2.line.b9b2_subtractions"],
         form["schedule-ca.2.line.b9b3_subtractions"],
@@ -226,8 +246,8 @@ const partI: Bindings = {
    */
   "1.line.18_itemized_deductions_limitation": (form, info) => {
     if (itemizesForCalifornia(form, info) !== true) return undefined;
-    const line28 = number(form["schedule-ca.5.page2.total_itemized_28"]);
-    const line29 = number(form["schedule-ca.5.page2.total_itemized_29"]);
+    const line28 = numberOrBlank(form["schedule-ca.5.page2.total_itemized_28"]);
+    const line29 = numberOrBlank(form["schedule-ca.5.page2.total_itemized_29"]);
     if (line28 === undefined || line29 === undefined) return undefined;
     return positiveOrBlank(roundDollars(line28 - line29));
   },
@@ -238,8 +258,8 @@ const partI: Bindings = {
    * so it enters as a negative term.
    */
   "1.line.19_combine_lines_14_through_18": (form) => {
-    const exclusion = number(form["0.line.17_amti_exclusion"]);
-    return sumIfAny(
+    const exclusion = numberOrBlank(form["0.line.17_amti_exclusion"]);
+    return sumOrBlank(
       form["0.line.14_total_adjustments_preferences"],
       form["0.line.15_taxable_income"],
       form["0.line.16_nol_deductions"],
@@ -253,7 +273,7 @@ const partI: Bindings = {
    * (ca-540-sched-p-inst-2025::sec::line-21-alternative-minimum-taxable-income-amti::b01).
    */
   "1.line.21_alternative_minimum_taxable_income": (form, info) => {
-    const line19 = number(form["1.line.19_combine_lines_14_through_18"]);
+    const line19 = numberOrBlank(form["1.line.19_combine_lines_14_through_18"]);
     if (line19 === undefined) return undefined;
     const amti = line19 - sum(form["1.line.20_amt_nol_deduction"]);
     const separate = info.filingStatus === "married_filing_separately";
@@ -272,7 +292,7 @@ const partII: Bindings = {
    * is not modeled: no age or support facts.
    */
   "1.line.22_exemption_amount": (form, info) => {
-    const amti = number(form["1.line.21_alternative_minimum_taxable_income"]);
+    const amti = numberOrBlank(form["1.line.21_alternative_minimum_taxable_income"]);
     if (amti === undefined || !info.filingStatus) return undefined;
     const { amount, phaseOutStart, zeroAt } = EXEMPTION[info.filingStatus];
     if (amti >= zeroAt) return 0;
@@ -282,23 +302,24 @@ const partII: Bindings = {
   },
   // "Subtract line 22 from line 21. If zero or less, enter -0-" (the form; ca-540-sched-p-inst-2025::sec::line-23::b01).
   "1.line.23_amti_less_exemption": (form) => {
-    const amti = number(form["1.line.21_alternative_minimum_taxable_income"]);
-    const exemption = number(form["1.line.22_exemption_amount"]);
+    const amti = numberOrBlank(form["1.line.21_alternative_minimum_taxable_income"]);
+    const exemption = numberOrBlank(form["1.line.22_exemption_amount"]);
     if (amti === undefined || exemption === undefined) return undefined;
     return atLeast(0, amti - exemption);
   },
   // "Multiply line 23 by 7.0% (.07)" (the form); -0- with line 23 (ca-540-sched-p-inst-2025::sec::line-23::b01).
   "1.line.24_tentative_minimum_tax": (form) => {
-    const base = number(form["1.line.23_amti_less_exemption"]);
+    const base = numberOrBlank(form["1.line.23_amti_less_exemption"]);
     if (base === undefined) return undefined;
     return base > 0 ? roundDollars(base * TENTATIVE_MINIMUM_TAX_RATE) : 0;
   },
   // "Regular tax before credits from Form 540, line 31" (the form).
-  "1.line.25_regular_tax_before_credits": (form) => number(form["form-540.line.31_tax_amount"]),
+  "1.line.25_regular_tax_before_credits": (form) =>
+    numberOrBlank(form["form-540.line.31_tax_amount"]),
   // "Subtract line 25 from line 24. If zero or less, enter -0-" (the form).
   "1.line.26_alternative_minimum_tax": (form) => {
-    const tentative = number(form["1.line.24_tentative_minimum_tax"]);
-    const regular = number(form["1.line.25_regular_tax_before_credits"]);
+    const tentative = numberOrBlank(form["1.line.24_tentative_minimum_tax"]);
+    const regular = numberOrBlank(form["1.line.25_regular_tax_before_credits"]);
     if (tentative === undefined || regular === undefined) return undefined;
     return atLeast(0, tentative - regular);
   },
@@ -307,13 +328,14 @@ const partII: Bindings = {
 const partIII: Bindings = {
   // "Enter the amount from Form 540, line 35" (the form; ca-540-sched-p-inst-2025::sec::before-you-begin-part-iii::b01).
   "1.part3.1_tax_from_form_540_line_35": (form) =>
-    number(form["form-540.line.35_total_tax_after_credits"]),
+    numberOrBlank(form["form-540.line.35_total_tax_after_credits"]),
   // "Enter the tentative minimum tax from Part II, line 24" (the form).
-  "1.part3.2_tentative_minimum_tax": (form) => number(form["1.line.24_tentative_minimum_tax"]),
+  "1.part3.2_tentative_minimum_tax": (form) =>
+    numberOrBlank(form["1.line.24_tentative_minimum_tax"]),
   // "Subtract line 2 from line 1. If the amount is zero or less than zero" enter -0- (ca-540-sched-p-inst-2025::sec::section-a-instructions::b01).
   "1.part3.3_excess_tax_offset_by_credits_col_c": (form) => {
-    const tax = number(form["1.part3.1_tax_from_form_540_line_35"]);
-    const tentative = number(form["1.part3.2_tentative_minimum_tax"]);
+    const tax = numberOrBlank(form["1.part3.1_tax_from_form_540_line_35"]);
+    const tentative = numberOrBlank(form["1.part3.2_tentative_minimum_tax"]);
     if (tax === undefined || tentative === undefined) return undefined;
     return atLeast(0, tax - tentative);
   },
@@ -323,9 +345,9 @@ const partIII: Bindings = {
    * (the form). With no Section A credit taken, the last entry is line 3.
    */
   "2.part3.11_tax_balance_col_c": (form) => {
-    const tax = number(form["1.part3.1_tax_from_form_540_line_35"]);
-    const tentative = number(form["1.part3.2_tentative_minimum_tax"]);
-    const excess = number(form["1.part3.3_excess_tax_offset_by_credits_col_c"]);
+    const tax = numberOrBlank(form["1.part3.1_tax_from_form_540_line_35"]);
+    const tentative = numberOrBlank(form["1.part3.2_tentative_minimum_tax"]);
+    const excess = numberOrBlank(form["1.part3.3_excess_tax_offset_by_credits_col_c"]);
     if (tax === undefined || tentative === undefined || excess === undefined) return undefined;
     if (excess === 0) return tax;
     return (
@@ -343,13 +365,13 @@ const partIII: Bindings = {
   },
   // "Enter your alternative minimum tax from Side 2, Part II, line 26" (the form).
   "3.part3.22_alternative_minimum_tax_col_c": (form) =>
-    number(form["1.line.26_alternative_minimum_tax"]),
+    numberOrBlank(form["1.line.26_alternative_minimum_tax"]),
   /*
    * "Enter the balance from line 24, column (c)" (the form): the AMT less the
    * Section C carryover credits taken; with none taken, line 22.
    */
   "3.part3.25_adjusted_amt_col_c": (form) => {
-    const amt = number(form["3.part3.22_alternative_minimum_tax_col_c"]);
+    const amt = numberOrBlank(form["3.part3.22_alternative_minimum_tax_col_c"]);
     if (amt === undefined) return undefined;
     return lastTaxBalance(form, amt, [
       "3.part3.24_commercial_solar_carryover_tax_balance_col_c",

@@ -34,9 +34,11 @@ export interface Scenario {
   skip?: boolean;
   /**
    * The ratchet: a listed line that now matches FAILS, so the list only shrinks.
-   * A listed line's expected value and its golden PDF widget both route here.
-   * A verified scenario lists a line when its preparer's PDF and the
-   * instructions disagree (Alejandro's Schedule CA line 3a).
+   * A listed line's expected value and its golden PDF widget both route here;
+   * the "now matches" check runs on the expected value only (a widget-only
+   * entry is not checked for staleness). A verified scenario lists a line when
+   * its preparer's PDF and the instructions disagree (Alejandro's Schedule CA
+   * line 3a).
    */
   knownMismatches?: Record<string, string>;
 }

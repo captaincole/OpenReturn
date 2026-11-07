@@ -9,7 +9,7 @@ import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { lookupTax } from "../../../data/taxTable.js";
 import { defineForm, type BindingFn, type FormAccessor } from "../../../defineForm.js";
 import type { DependentFactValue } from "../../../facts/kinds/dependents.js";
-import { atLeast, roundDollars, sum } from "../../../money.js";
+import { atLeast, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import { SSN, ssn, type FilingStatus } from "../../../values.js";
 import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitation.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
@@ -288,22 +288,30 @@ export function register(): void {
        * 4, 8, 10b and 11). NQDC income, IRC 453A interest and credit recapture
        * (::b02) have no facts. Blank when FTB 3805P is not filed.
        */
-      "line.63_other_taxes_credit_recapture": (form) => {
-        const parts = [
+      "line.63_other_taxes_credit_recapture": (form) =>
+        sumOrBlank(
           form["form-3805p.0.part1.line_4_early_distribution_tax_due"],
           form["form-3805p.0.part2.line_8_education_able_tax_due"],
           form["form-3805p.0.part3.line_10b_archer_msa_tax_due"],
           form["form-3805p.0.part3.line_11_medicare_advantage_msa_tax_due"],
-        ].filter((part): part is number => typeof part === "number");
-        return parts.length > 0 ? sum(...parts) : undefined;
-      },
-      "line.64_total_tax": (form) =>
-        sum(
+        ),
+      "line.64_total_tax": (form, info) => {
+        /*
+         * MANUAL EDIT: FTB 3805P files but its tax is still unknown (an
+         * undetermined taxable amount, or two spouses who need two forms):
+         * the total waits, because sum() would read the blank line 63 as 0.
+         */
+        const earlyTaxUnknown =
+          info.mustFile?.["form-3805p"]?.value === true &&
+          form["line.63_other_taxes_credit_recapture"] === undefined;
+        if (earlyTaxUnknown) return undefined;
+        return sum(
           form["line.48_tax_after_credits"],
           form["line.61_alternative_minimum_tax"],
           form["line.62_behavioral_health_services_tax"],
           form["line.63_other_taxes_credit_recapture"],
-        ),
+        );
+      },
       // MANUAL EDIT: round the W-2 box 17 sum to the nearest dollar.
       "line.71_ca_income_tax_withheld": (_, info) => roundDollars(info.w2StateWithholding),
       "line.78_total_payments": (form) =>
