@@ -7,7 +7,6 @@ import { sum } from "../../money.js";
 import {
   missingInputs,
   num,
-  onlyInterestOrDividendIncome,
   resolveMustFile,
   sumInvestmentBox,
   type ResolverInputs,
@@ -16,11 +15,10 @@ import type { Form4952FilingInfo } from "./filingInfo.js";
 
 /*
  * irs-4952-form-2025::sec::who-must-file::b01: an individual files Form 4952 to
- * deduct investment interest expense, except when the only investment income
- * was interest or ordinary dividends (no sale of investment property, no
- * capital gain distributions) and that income less qualified dividends exceeds
- * the expense, there are no other investment expenses, and there is no
- * carryover from last year. With no expense and no carryover there is nothing
+ * deduct investment interest expense, except when interest and ordinary
+ * dividends less qualified dividends exceed the expense, there are no other
+ * investment expenses, and there is no carryover from last year (the IRS
+ * exception does not ask for interest or dividends only; California's does). With no expense and no carryover there is nothing
  * to deduct. The exception needs both answers: while one is missing, the form
  * files and asks for it, so the engine never takes an unanswered question for 0.
  */
@@ -44,7 +42,6 @@ export function resolve4952Info(inputs: ResolverInputs): Form4952FilingInfo {
   const expense = sum(answers.expensePaid, answers.disallowedCarryover);
   const hasExpense = (answers.expensePaid ?? 0) > 0 || (answers.disallowedCarryover ?? 0) > 0;
   const exception =
-    onlyInterestOrDividendIncome(inputs) &&
     answers.investmentExpenses === 0 &&
     answers.disallowedCarryover === 0 &&
     sum(interest, ordinaryDividends, -qualifiedDividends) > expense;

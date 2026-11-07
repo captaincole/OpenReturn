@@ -26,9 +26,9 @@ export function register(): void {
       "0.line.1_investment_interest_paid": (_, info) => info.investmentInterestPaid,
       // ca-3526-inst-2025::sec::taxable-year::b02: "from 2024 form FTB 3526, line 7. If zero or less, enter 0".
       "0.line.2_disallowed_prior_year_interest": (_, info) =>
-        info.disallowedInterestCarryover === undefined
+        info.caDisallowedInterestCarryover === undefined
           ? undefined
-          : atLeast(0, info.disallowedInterestCarryover),
+          : atLeast(0, info.caDisallowedInterestCarryover),
       // ca-3526-inst-2025::sec::taxable-year::b02: "Add line 1 and line 2." Blank, not 0, when both are blank.
       "0.line.3_total_investment_interest": (form) => {
         const line1 = form["0.line.1_investment_interest_paid"];
@@ -39,11 +39,12 @@ export function register(): void {
       /*
        * ca-3526-inst-2025::sec::line-4a::b01: "gross income from property held
        * for investment ... from interest, dividends, annuities, and royalties".
-       * MANUAL EDIT: the slot is interest (1099-INT box 1 and 3) plus ordinary
-       * dividends (1099-DIV box 1a), as federal line 4a; annuities, royalties and
-       * K-1 investment income have no fact kind yet.
+       * MANUAL EDIT: California's own slot: 1099-INT box 1 plus ordinary
+       * dividends (1099-DIV box 1a); U.S. obligation interest (box 3) is not
+       * California income. Annuities, royalties and K-1 investment income have
+       * no fact kind yet.
        */
-      "0.line.4a_gross_investment_income": (_, info) => roundDollars(info.grossInvestmentIncome),
+      "0.line.4a_gross_investment_income": (_, info) => roundDollars(info.caGrossInvestmentIncome),
       /*
        * ca-3526-inst-2025::sec::line-4b::b01: "the excess of total gains over
        * total losses from the disposition of property held for investment ...
