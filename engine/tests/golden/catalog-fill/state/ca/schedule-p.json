@@ -1,0 +1,1185 @@
+{
+  "formId": "schedule-p",
+  "fieldCount": 131,
+  "entries": [
+    {
+      "fieldId": "schedule-p.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "540P-1001",
+          "text": "T-46X4J"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "540P-1002",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.1_standard_deduction",
+      "widgets": [
+        {
+          "widgetName": "540P-1003",
+          "text": "9,130"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.10_iso_cqso",
+      "widgets": [
+        {
+          "widgetName": "540P-1012",
+          "text": "8,689"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.11_passive_activities_adjustment",
+      "widgets": [
+        {
+          "widgetName": "540P-1013",
+          "text": "5,618"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.12_estate_trust_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "540P-1014",
+          "text": "6,201"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13_other_adjustments_total",
+      "widgets": [
+        {
+          "widgetName": "540P-1027",
+          "text": "1,255"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13a_circulation_expenditures",
+      "widgets": [
+        {
+          "widgetName": "540P-1015",
+          "text": "7,573"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13b_depletion",
+      "widgets": [
+        {
+          "widgetName": "540P-1016",
+          "text": "4,644"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13c_installment_sales",
+      "widgets": [
+        {
+          "widgetName": "540P-1017",
+          "text": "5,596"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13d_intangible_drilling_costs",
+      "widgets": [
+        {
+          "widgetName": "540P-1018",
+          "text": "1,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13e_long_term_contracts",
+      "widgets": [
+        {
+          "widgetName": "540P-1019",
+          "text": "1,474"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13f_loss_limitations",
+      "widgets": [
+        {
+          "widgetName": "540P-1020",
+          "text": "9,425"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13g_mining_costs",
+      "widgets": [
+        {
+          "widgetName": "540P-1021",
+          "text": "8,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13h_patrons_adjustment",
+      "widgets": [
+        {
+          "widgetName": "540P-1022",
+          "text": "5,862"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13i_pollution_control_facilities",
+      "widgets": [
+        {
+          "widgetName": "540P-1023",
+          "text": "2,484"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13j_research_experimental",
+      "widgets": [
+        {
+          "widgetName": "540P-1024",
+          "text": "8,342"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13k_tax_shelter_farm_activities",
+      "widgets": [
+        {
+          "widgetName": "540P-1025",
+          "text": "2,201"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.13l_related_adjustments",
+      "widgets": [
+        {
+          "widgetName": "540P-1026",
+          "text": "7,349"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.14_total_adjustments_preferences",
+      "widgets": [
+        {
+          "widgetName": "540P-1028",
+          "text": "4,433"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.15_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "540P-1029",
+          "text": "2,414"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.16_nol_deductions",
+      "widgets": [
+        {
+          "widgetName": "540P-1030",
+          "text": "8,131"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.17_amti_exclusion",
+      "widgets": [
+        {
+          "widgetName": "540P-1031",
+          "text": "9,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.2_medical_dental_expenses",
+      "widgets": [
+        {
+          "widgetName": "540P-1004",
+          "text": "3,858"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.3_personal_real_property_taxes",
+      "widgets": [
+        {
+          "widgetName": "540P-1005",
+          "text": "1,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.4_home_mortgage_interest",
+      "widgets": [
+        {
+          "widgetName": "540P-1006",
+          "text": "4,636"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.5_miscellaneous_itemized_deductions",
+      "widgets": [
+        {
+          "widgetName": "540P-1007",
+          "text": "8,056"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.6_property_tax_refund",
+      "widgets": [
+        {
+          "widgetName": "540P-1008",
+          "text": "1,919"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.7_investment_interest_adjustment",
+      "widgets": [
+        {
+          "widgetName": "540P-1009",
+          "text": "1,201"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.8_post_1986_depreciation",
+      "widgets": [
+        {
+          "widgetName": "540P-1010",
+          "text": "1,061"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.0.line.9_adjusted_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "540P-1011",
+          "text": "9,281"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.line.18_itemized_deductions_limitation",
+      "widgets": [
+        {
+          "widgetName": "540P-2001",
+          "text": "9,645"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.line.19_combine_lines_14_through_18",
+      "widgets": [
+        {
+          "widgetName": "540P-2002",
+          "text": "8,056"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.line.20_amt_nol_deduction",
+      "widgets": [
+        {
+          "widgetName": "540P-2003",
+          "text": "7,635"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.line.21_alternative_minimum_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "540P-2004",
+          "text": "9,361"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.line.22_exemption_amount",
+      "widgets": [
+        {
+          "widgetName": "540P-2005",
+          "text": "3,604"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.line.23_amti_less_exemption",
+      "widgets": [
+        {
+          "widgetName": "540P-2006",
+          "text": "7,826"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.line.24_tentative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "540P-2007",
+          "text": "9,041"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.line.25_regular_tax_before_credits",
+      "widgets": [
+        {
+          "widgetName": "540P-2008",
+          "text": "3,671"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.line.26_alternative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "540P-2009",
+          "text": "7,089"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.part3.1_tax_from_form_540_line_35",
+      "widgets": [
+        {
+          "widgetName": "540P-2010",
+          "text": "5,389"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.part3.2_tentative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "540P-2011",
+          "text": "6,328"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.part3.3_excess_tax_offset_by_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-2012",
+          "text": "9,872"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.part3.4_prison_inmate_labor_credit_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-2013",
+          "text": "3,200"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.part3.4_prison_inmate_labor_credit_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-2014",
+          "text": "2,822"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.part3.4_prison_inmate_labor_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-2015",
+          "text": "8,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.part3.5_child_dependent_care_credit_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-2016",
+          "text": "2,496"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.part3.5_child_dependent_care_credit_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-2017",
+          "text": "6,611"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.1.part3.5_child_dependent_care_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-2018",
+          "text": "3,129"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.10_prior_year_amt_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-3025",
+          "text": "1,948"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.10_prior_year_amt_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-3028",
+          "text": "7,196"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.10_prior_year_amt_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-3026",
+          "text": "3,261"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.10_prior_year_amt_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-3027",
+          "text": "4,087"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.11_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-3029",
+          "text": "7,850"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.12_joint_custody_hoh_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-3030",
+          "text": "2,409"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.12_joint_custody_hoh_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-3031",
+          "text": "1,553"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.12_joint_custody_hoh_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-3032",
+          "text": "3,242"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.13_dependent_parent_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-3033",
+          "text": "1,897"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.13_dependent_parent_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-3034",
+          "text": "1,074"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.13_dependent_parent_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-3035",
+          "text": "4,214"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.14_senior_hoh_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-3036",
+          "text": "2,365"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.14_senior_hoh_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-3037",
+          "text": "3,993"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.14_senior_hoh_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-3038",
+          "text": "6,296"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.15_renters_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-3039",
+          "text": "6,108"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.15_renters_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-3040",
+          "text": "7,628"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.15_renters_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-3041",
+          "text": "8,935"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.6_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-3003",
+          "text": "1,977"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.6_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-3006",
+          "text": "3,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.6_credit_code",
+      "widgets": [
+        {
+          "widgetName": "540P-3001",
+          "text": "873"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.6_credit_name",
+      "widgets": [
+        {
+          "widgetName": "540P-3002",
+          "text": "T-1NPBR"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.6_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-3004",
+          "text": "1,090"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.6_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-3005",
+          "text": "5,966"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.7_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-3009",
+          "text": "3,175"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.7_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-3012",
+          "text": "6,617"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.7_credit_code",
+      "widgets": [
+        {
+          "widgetName": "540P-3007",
+          "text": "905"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.7_credit_name",
+      "widgets": [
+        {
+          "widgetName": "540P-3008",
+          "text": "T-VI32H"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.7_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-3010",
+          "text": "3,031"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.7_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-3011",
+          "text": "7,944"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.8_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-3015",
+          "text": "6,804"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.8_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-3018",
+          "text": "3,873"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.8_credit_code",
+      "widgets": [
+        {
+          "widgetName": "540P-3013",
+          "text": "029"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.8_credit_name",
+      "widgets": [
+        {
+          "widgetName": "540P-3014",
+          "text": "T-1YDKJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.8_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-3016",
+          "text": "8,649"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.8_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-3017",
+          "text": "2,905"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.9_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-3021",
+          "text": "1,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.9_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-3024",
+          "text": "3,000"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.9_credit_code",
+      "widgets": [
+        {
+          "widgetName": "540P-3019",
+          "text": "778"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.9_credit_name",
+      "widgets": [
+        {
+          "widgetName": "540P-3020",
+          "text": "T-1J0TI"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.9_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-3022",
+          "text": "2,834"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.2.part3.9_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-3023",
+          "text": "1,043"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.16_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-4003",
+          "text": "6,643"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.16_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-4006",
+          "text": "2,888"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.16_credit_code",
+      "widgets": [
+        {
+          "widgetName": "540P-4001",
+          "text": "727"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.16_credit_name",
+      "widgets": [
+        {
+          "widgetName": "540P-4002",
+          "text": "T-11GP6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.16_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-4004",
+          "text": "7,225"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.16_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-4005",
+          "text": "3,760"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.17_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-4009",
+          "text": "3,217"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.17_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-4012",
+          "text": "4,642"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.17_credit_code",
+      "widgets": [
+        {
+          "widgetName": "540P-4007",
+          "text": "775"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.17_credit_name",
+      "widgets": [
+        {
+          "widgetName": "540P-4008",
+          "text": "T-ENNHH"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.17_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-4010",
+          "text": "5,256"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.17_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-4011",
+          "text": "7,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.18_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-4015",
+          "text": "2,550"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.18_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-4018",
+          "text": "5,516"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.18_credit_code",
+      "widgets": [
+        {
+          "widgetName": "540P-4013",
+          "text": "265"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.18_credit_name",
+      "widgets": [
+        {
+          "widgetName": "540P-4014",
+          "text": "T-3Z8W1"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.18_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-4016",
+          "text": "3,271"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.18_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-4017",
+          "text": "7,855"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.19_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-4021",
+          "text": "7,366"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.19_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-4024",
+          "text": "5,052"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.19_credit_code",
+      "widgets": [
+        {
+          "widgetName": "540P-4019",
+          "text": "915"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.19_credit_name",
+      "widgets": [
+        {
+          "widgetName": "540P-4020",
+          "text": "T-6G3Z5"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.19_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-4022",
+          "text": "5,068"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.19_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-4023",
+          "text": "2,574"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.20_other_state_tax_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-4025",
+          "text": "6,091"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.20_other_state_tax_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-4026",
+          "text": "6,054"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.20_other_state_tax_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-4027",
+          "text": "1,296"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.21_pte_elective_tax_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-4028",
+          "text": "8,448"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.21_pte_elective_tax_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-4031",
+          "text": "7,528"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.21_pte_elective_tax_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-4029",
+          "text": "2,794"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.21_pte_elective_tax_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-4030",
+          "text": "3,138"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.22_alternative_minimum_tax_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-4032",
+          "text": "3,974"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.23_solar_energy_carryover_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-4033",
+          "text": "6,947"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.23_solar_energy_carryover_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-4036",
+          "text": "2,883"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.23_solar_energy_carryover_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-4034",
+          "text": "1,103"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.23_solar_energy_carryover_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-4035",
+          "text": "7,507"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.24_commercial_solar_carryover_credit_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "540P-4037",
+          "text": "6,043"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.24_commercial_solar_carryover_credit_carryover_col_d",
+      "widgets": [
+        {
+          "widgetName": "540P-4040",
+          "text": "8,872"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.24_commercial_solar_carryover_credit_used_col_b",
+      "widgets": [
+        {
+          "widgetName": "540P-4038",
+          "text": "1,783"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.24_commercial_solar_carryover_tax_balance_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-4039",
+          "text": "5,444"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-p.3.part3.25_adjusted_amt_col_c",
+      "widgets": [
+        {
+          "widgetName": "540P-4041",
+          "text": "3,767"
+        }
+      ]
+    }
+  ]
+}

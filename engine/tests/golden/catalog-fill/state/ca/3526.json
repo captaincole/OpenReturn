@@ -1,0 +1,159 @@
+{
+  "formId": "form-3526",
+  "fieldCount": 17,
+  "entries": [
+    {
+      "fieldId": "form-3526.0.header.ssn_itin_fein",
+      "widgets": [
+        {
+          "widgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) or Federal Employer Identification Number (F E I N) (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on tax return",
+          "text": "T-1TSBL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.1_investment_interest_paid",
+      "widgets": [
+        {
+          "widgetName": "Line 1. Investment interest expense paid or accrued in 2025. See instructions",
+          "text": "5,004"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.10_california_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Line 10. California investment interest expense deduction adjustment. Enter the difference between line 8 and line 9. See instructions",
+          "text": "7,448"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.2_disallowed_prior_year_interest",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Disallowed investment interest expense from 2024 form F T B 3526, line 7. If zero or less, enter 0",
+          "text": "8,782"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.3_total_investment_interest",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Total investment interest expense. Add line 1 and line 2",
+          "text": "3,120"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.4a_gross_investment_income",
+      "widgets": [
+        {
+          "widgetName": "Line 4a. Gross income from property held for investment (excluding any net gain from the disposition of property held for investment). See instructions",
+          "text": "5,270"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.4b_net_gain_investment_property",
+      "widgets": [
+        {
+          "widgetName": "Line 4b. Net gain from the disposition of property held for investment. See instructions",
+          "text": "5,025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.4c_net_capital_gain_investment_property",
+      "widgets": [
+        {
+          "widgetName": "Line 4c. Net capital gain from the disposition of property held for investment. See instructions",
+          "text": "4,210"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.4d_net_gain_less_capital_gain",
+      "widgets": [
+        {
+          "widgetName": "Line 4d. Subtract line 4c from line 4b. If zero or less, enter 0",
+          "text": "2,653"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.4e_elected_net_capital_gain",
+      "widgets": [
+        {
+          "widgetName": "Line 4e. Enter all or part of the amount on line 4c that you elect to include in investment income. Do not include more than the amount on line 4b. See instructions",
+          "text": "5,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.4f_investment_income",
+      "widgets": [
+        {
+          "widgetName": "Line 4f. Investment income. Add line 4a, line 4d, and line 4e",
+          "text": "8,292"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.5_investment_expenses",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Investment expenses. See instructions",
+          "text": "7,475"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.6_net_investment_income",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Net investment income. Subtract line 5 from line 4f",
+          "text": "4,715"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.7_disallowed_interest_carryforward",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Disallowed investment interest expense to be carried forward to 2026. Subtract line 6 from line 3. If zero or less, enter 0",
+          "text": "5,735"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.8_investment_interest_deduction",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Investment interest expense deduction. Enter the smaller of line 3 or line 6. Form 541 filers, stop here and see instructions. All other filers, go to line 9",
+          "text": "8,890"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3526.0.line.9_federal_4952_line_8",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Enter the amount from federal Form 4952, line 8",
+          "text": "7,225"
+        }
+      ]
+    }
+  ]
+}
