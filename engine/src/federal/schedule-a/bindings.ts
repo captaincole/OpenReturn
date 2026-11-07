@@ -92,8 +92,19 @@ export function register(): void {
         if (line8a === undefined && line8b === undefined && line8c === undefined) return undefined;
         return sum(line8a, line8b, line8c);
       },
-      // MANUAL EDIT: routed to a FilingInfo slot. Form 4952 is out of scope.
-      "0.line.9_investment_interest": (_, info) => info.investmentInterest,
+      /*
+       * MANUAL EDIT: Form 4952 line 8 (irs-4952-form-2025::sec::part-iii-investment-interest-expense::b01).
+       * The no-file exception (irs-1040sa-inst-2025::sec::line-9::b01) deducts the
+       * interest paid without the form. Waits for line 8 while the form is filed.
+       */
+      "0.line.9_investment_interest": (form, info) => {
+        if (info.mustFile?.["form-4952"]?.value === true) {
+          const line8 = form["form-4952.0.line.8_investment_interest_deduction"];
+          return typeof line8 === "number" ? line8 : undefined;
+        }
+        // Without the form, only the exception allows the deduction (an opt-out decision does not).
+        return info.noFormException === true ? info.investmentInterestPaid : undefined;
+      },
       "0.line.10_total_interest": (form) => {
         const line8e = form["0.line.8e_total_mortgage_interest_points"];
         const nine = form["0.line.9_investment_interest"];

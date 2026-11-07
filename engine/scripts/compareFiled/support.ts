@@ -67,6 +67,7 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   "mortgage.interest_form_1098",
   "mortgage.interest_not_form_1098",
   "mortgage.points_not_form_1098",
+  "state_local_tax.allocable_to_investment_income",
   "state_local_tax.estimated_payments",
   "state_local_tax.personal_property",
   "state_local_tax.real_estate",

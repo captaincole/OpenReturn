@@ -1,6 +1,9 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Form4952FilingInfo } from "../4952/filingInfo.js";
 
-export interface ScheduleAFilingInfo extends BaseFilingInfo {
+/* Line 9 reads Form 4952 line 8 through the form accessor; the 4952 answer covers the no-file exception. */
+export interface ScheduleAFilingInfo
+  extends BaseFilingInfo, Pick<Form4952FilingInfo, "investmentInterestPaid" | "noFormException"> {
   /** Line 1. */
   medicalDentalExpenses?: number;
 
@@ -27,9 +30,6 @@ export interface ScheduleAFilingInfo extends BaseFilingInfo {
 
   /** Line 8c. */
   pointsNotForm1098?: number;
-
-  /** Line 9. */
-  investmentInterest?: number;
 
   /** Line 11. */
   giftsCashCheck?: number;
