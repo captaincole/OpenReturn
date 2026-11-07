@@ -6,7 +6,9 @@
 
 import { lookupTax } from "../../data/taxTable.js";
 import { defineForm, type FormAccessor } from "../../defineForm.js";
+import { dependentCredit, type DependentFactValue } from "../../facts/kinds/dependents.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
+import { ssn } from "../../values.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
 import { form1040Line7a } from "../schedule-d/lines.js";
@@ -14,8 +16,48 @@ import { awaitsSchedule1A, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
 
+// MANUAL EDIT: the Dependents table's row (7) and Schedule 8812 pin their age rules to 2025.
+const TAX_YEAR = 2025;
+
 function fromScheduleB(value: unknown): number | undefined {
   return typeof value === "number" ? value : undefined;
+}
+
+// MANUAL EDIT: the dependent printed on row 1 to 4 of the Dependents table; undefined past the list.
+function dependent(info: Form1040FilingInfo, row: number): DependentFactValue | undefined {
+  return info.dependents?.[row - 1]?.dependent;
+}
+
+/*
+ * MANUAL EDIT: column (2) prints the SSN, else the ITIN or ATIN (the 1040
+ * instructions: "You must enter each dependent's social security number").
+ * Like the header SSN, the comb widget takes the nine digits.
+ */
+function dependentTin(dep: DependentFactValue | undefined) {
+  const raw = dep?.ssn ?? dep?.tin;
+  return raw === undefined ? undefined : ssn(raw);
+}
+
+// Row (5)(a): lived with you more than half of 2025.
+function livedWithYou(dep: DependentFactValue | undefined): boolean | undefined {
+  return dep?.monthsLivedWithYou === undefined ? undefined : dep.monthsLivedWithYou > 6;
+}
+
+// Row (5)(b): "And in the U.S." is a sub-question of (a), so it needs (a) too.
+function livedWithYouInUs(dep: DependentFactValue | undefined): boolean | undefined {
+  const withYou = livedWithYou(dep);
+  if (withYou === undefined || dep?.livedInUs === undefined) return undefined;
+  return withYou && dep.livedInUs;
+}
+
+// Row (7): which credit box the dependent earns; neither while the date of birth is unknown.
+function earnsCredit(
+  dep: DependentFactValue | undefined,
+  credit: "child_tax_credit" | "other_dependents",
+): boolean | undefined {
+  if (dep === undefined) return undefined;
+  const earned = dependentCredit(dep, TAX_YEAR);
+  return earned === undefined ? undefined : earned === credit;
 }
 
 /*
@@ -82,6 +124,61 @@ export function register(): void {
         info.livedApartFromSpouseAllYear === true
           ? true
           : undefined,
+      /*
+       * MANUAL EDIT: the Dependents table, one row per dependent fact in the
+       * order recorded. A row with no dependent stays blank.
+       */
+      "dependents.dep1_first_name": (_, info) => dependent(info, 1)?.firstName,
+      "dependents.dep1_last_name": (_, info) => dependent(info, 1)?.lastName,
+      "dependents.dep1_ssn": (_, info) => dependentTin(dependent(info, 1)),
+      "dependents.dep1_relationship": (_, info) => dependent(info, 1)?.relationship,
+      "dependents.dep1_lived_with_you": (_, info) => livedWithYou(dependent(info, 1)),
+      "dependents.dep1_lived_in_us": (_, info) => livedWithYouInUs(dependent(info, 1)),
+      "dependents.dep1_full_time_student": (_, info) => dependent(info, 1)?.fullTimeStudent,
+      "dependents.dep1_permanently_disabled": (_, info) => dependent(info, 1)?.permanentlyDisabled,
+      "dependents.dep1_child_tax_credit": (_, info) =>
+        earnsCredit(dependent(info, 1), "child_tax_credit"),
+      "dependents.dep1_other_dependent_credit": (_, info) =>
+        earnsCredit(dependent(info, 1), "other_dependents"),
+      "dependents.dep2_first_name": (_, info) => dependent(info, 2)?.firstName,
+      "dependents.dep2_last_name": (_, info) => dependent(info, 2)?.lastName,
+      "dependents.dep2_ssn": (_, info) => dependentTin(dependent(info, 2)),
+      "dependents.dep2_relationship": (_, info) => dependent(info, 2)?.relationship,
+      "dependents.dep2_lived_with_you": (_, info) => livedWithYou(dependent(info, 2)),
+      "dependents.dep2_lived_in_us": (_, info) => livedWithYouInUs(dependent(info, 2)),
+      "dependents.dep2_full_time_student": (_, info) => dependent(info, 2)?.fullTimeStudent,
+      "dependents.dep2_permanently_disabled": (_, info) => dependent(info, 2)?.permanentlyDisabled,
+      "dependents.dep2_child_tax_credit": (_, info) =>
+        earnsCredit(dependent(info, 2), "child_tax_credit"),
+      "dependents.dep2_other_dependent_credit": (_, info) =>
+        earnsCredit(dependent(info, 2), "other_dependents"),
+      "dependents.dep3_first_name": (_, info) => dependent(info, 3)?.firstName,
+      "dependents.dep3_last_name": (_, info) => dependent(info, 3)?.lastName,
+      "dependents.dep3_ssn": (_, info) => dependentTin(dependent(info, 3)),
+      "dependents.dep3_relationship": (_, info) => dependent(info, 3)?.relationship,
+      "dependents.dep3_lived_with_you": (_, info) => livedWithYou(dependent(info, 3)),
+      "dependents.dep3_lived_in_us": (_, info) => livedWithYouInUs(dependent(info, 3)),
+      "dependents.dep3_full_time_student": (_, info) => dependent(info, 3)?.fullTimeStudent,
+      "dependents.dep3_permanently_disabled": (_, info) => dependent(info, 3)?.permanentlyDisabled,
+      "dependents.dep3_child_tax_credit": (_, info) =>
+        earnsCredit(dependent(info, 3), "child_tax_credit"),
+      "dependents.dep3_other_dependent_credit": (_, info) =>
+        earnsCredit(dependent(info, 3), "other_dependents"),
+      "dependents.dep4_first_name": (_, info) => dependent(info, 4)?.firstName,
+      "dependents.dep4_last_name": (_, info) => dependent(info, 4)?.lastName,
+      "dependents.dep4_ssn": (_, info) => dependentTin(dependent(info, 4)),
+      "dependents.dep4_relationship": (_, info) => dependent(info, 4)?.relationship,
+      "dependents.dep4_lived_with_you": (_, info) => livedWithYou(dependent(info, 4)),
+      "dependents.dep4_lived_in_us": (_, info) => livedWithYouInUs(dependent(info, 4)),
+      "dependents.dep4_full_time_student": (_, info) => dependent(info, 4)?.fullTimeStudent,
+      "dependents.dep4_permanently_disabled": (_, info) => dependent(info, 4)?.permanentlyDisabled,
+      "dependents.dep4_child_tax_credit": (_, info) =>
+        earnsCredit(dependent(info, 4), "child_tax_credit"),
+      "dependents.dep4_other_dependent_credit": (_, info) =>
+        earnsCredit(dependent(info, 4), "other_dependents"),
+      // The attached statement for the fifth dependent onward is not modeled.
+      "dependents.more_than_four_dependents": (_, info) =>
+        info.dependents === undefined ? undefined : info.dependents.length > 4,
       // MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar.
       "line.1a": (_, info) => roundDollars(info.w2WagesTotal),
       "line.1z": (form) =>
@@ -312,11 +409,15 @@ export function register(): void {
         const value = form["schedule-2.0.line.3_total_lines_1z_and_2"];
         return typeof value === "number" ? value : undefined;
       },
+      // MANUAL EDIT: line 19 = Schedule 8812 line 14; blank when Schedule 8812 is not filed.
+      "line.19": (form) => {
+        const value = form["schedule-8812.0.line.14_child_tax_credit_and_other_dependents"];
+        return typeof value === "number" ? value : undefined;
+      },
       "line.20": (form) => {
         const value = form["schedule-3.0.line.8"];
         return typeof value === "number" ? value : undefined;
       },
-      // Line 19 (Schedule 8812) is not modeled.
       "line.21": (form) =>
         form["line.19"] === undefined && form["line.20"] === undefined
           ? undefined
@@ -432,88 +533,6 @@ export function register(): void {
         "No nonresident/dual-status alien spouse scenario modeled yet — requires a specific MFJ+NRA-spouse fact we haven't ingested.",
       "header.nonresident_alien_spouse_name":
         "No nonresident/dual-status alien spouse scenario modeled yet — spouse name field only applies when the NRA-spouse checkbox is checked, which has no ingestion path.",
-      "dependents.dep1_first_name":
-        "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
-      "dependents.dep2_first_name":
-        "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
-      "dependents.dep3_first_name":
-        "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
-      "dependents.dep4_first_name":
-        "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
-      "dependents.dep1_last_name":
-        "No dependent data ingestion scenario built yet — requires per-dependent fact records (name, SSN, relationship, etc.) that we haven't modeled.",
-      "dependents.dep2_last_name":
-        "No dependent-data ingestion path exists yet — dependent last names are not modeled in the current fact schema.",
-      "dependents.dep3_last_name":
-        "No dependent-data ingestion path exists yet — dependent last names are not modeled in the current fact schema.",
-      "dependents.dep4_last_name":
-        "No dependent-data ingestion path exists yet — dependent last names are not modeled in the current fact schema.",
-      "dependents.dep1_ssn":
-        "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
-      "dependents.dep2_ssn":
-        "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
-      "dependents.dep3_ssn":
-        "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
-      "dependents.dep4_ssn":
-        "No dependent-data ingestion path exists yet — dependent SSNs are not modeled in the current fact schema.",
-      "dependents.dep1_relationship":
-        "No dependent-data ingestion path exists yet — dependent relationship is not modeled in the current fact schema.",
-      "dependents.dep2_relationship":
-        "No dependent-data ingestion path exists yet — dependent relationship is not modeled in the current fact schema.",
-      "dependents.dep3_relationship":
-        "No dependent-data ingestion path exists yet — dependent relationship is not modeled in the current fact schema.",
-      "dependents.dep4_relationship":
-        "No dependent data ingestion built yet — dependent 4 relationship requires a dependent-facts scenario.",
-      "dependents.dep1_lived_with_you":
-        "No dependent data ingestion built yet — whether dependent 1 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
-      "dependents.dep2_lived_with_you":
-        "No dependent data ingestion built yet — whether dependent 2 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
-      "dependents.dep3_lived_with_you":
-        "No dependent data ingestion built yet — whether dependent 3 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
-      "dependents.dep4_lived_with_you":
-        "No dependent data ingestion built yet — whether dependent 4 lived with taxpayer >half of 2025 requires a dependent-facts scenario.",
-      "dependents.more_than_four_dependents":
-        "No dependent data ingestion built yet — determining whether there are more than four dependents requires a dependent-facts scenario.",
-      "dependents.dep1_lived_in_us":
-        "No dependent data ingestion built yet — whether dependent 1 lived in the U.S. requires a dependent-facts scenario.",
-      "dependents.dep2_lived_in_us":
-        "No dependent data ingestion built yet — whether dependent 2 lived in the U.S. requires a dependent-facts scenario.",
-      "dependents.dep3_lived_in_us":
-        "No dependent data ingestion built yet — whether dependent 3 lived in the U.S. requires a dependent-facts scenario.",
-      "dependents.dep4_lived_in_us":
-        "No dependent data ingestion built yet — whether dependent 4 lived in the U.S. requires a dependent-facts scenario.",
-      "dependents.dep1_full_time_student":
-        "No dependent data ingestion model exists yet; full-time student status for Dependent 1 requires per-dependent fact facts we haven't built a scenario for.",
-      "dependents.dep1_permanently_disabled":
-        "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 1 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep2_full_time_student":
-        "No dependent data ingestion model exists yet; full-time student status for Dependent 2 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep2_permanently_disabled":
-        "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 2 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep3_full_time_student":
-        "No dependent data ingestion model exists yet; full-time student status for Dependent 3 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep3_permanently_disabled":
-        "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 3 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep4_full_time_student":
-        "No dependent data ingestion model exists yet; full-time student status for Dependent 4 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep4_permanently_disabled":
-        "No dependent data ingestion model exists yet; permanently and totally disabled status for Dependent 4 requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep1_child_tax_credit":
-        "No dependent data ingestion model exists yet; whether Dependent 1 qualifies for the child tax credit requires per-dependent facts (age, SSN validity, relationship) we haven't built a scenario for.",
-      "dependents.dep1_other_dependent_credit":
-        "No dependent data ingestion model exists yet; whether Dependent 1 qualifies for the credit for other dependents requires per-dependent facts we haven't built a scenario for.",
-      "dependents.dep2_child_tax_credit":
-        "No dependent-data ingestion yet — determining CTC eligibility (age, relationship, valid SSN) requires a dependent-intake scenario we haven't built.",
-      "dependents.dep2_other_dependent_credit":
-        "No dependent-data ingestion yet — credit for other dependents requires per-dependent qualifying-relative analysis not yet built.",
-      "dependents.dep3_child_tax_credit":
-        "No dependent-data ingestion yet — determining CTC eligibility (age, relationship, valid SSN) requires a dependent-intake scenario we haven't built.",
-      "dependents.dep3_other_dependent_credit":
-        "No dependent-data ingestion yet — credit for other dependents requires per-dependent qualifying-relative analysis not yet built.",
-      "dependents.dep4_child_tax_credit":
-        "No dependent-data ingestion yet — determining CTC eligibility (age, relationship, valid SSN) requires a dependent-intake scenario we haven't built.",
-      "dependents.dep4_other_dependent_credit":
-        "No dependent-data ingestion yet — credit for other dependents requires per-dependent qualifying-relative analysis not yet built.",
       "line.1b":
         "Household employee wages not reported on W-2 require a separate household-employer intake scenario not yet built; no fact key exists for this.",
       "line.1c":
@@ -572,8 +591,6 @@ export function register(): void {
         "Checkbox indicating tax includes amounts from a third special form (e.g. section 962 election, recapture). No ingestion scenario built for these edge cases.",
       "line.16_other_form_number":
         "Free-text entry for the form number associated with the third checkbox on line 16. Tied to special-form tax scenarios not yet ingested.",
-      "line.19":
-        "Child tax credit / credit for other dependents from Schedule 8812. Schedule 8812 has not been ingested and no dependent-with-CTC scenario has been built yet.",
       "line.26":
         "Estimated tax payments and prior-year overpayment applied forward have no ingestion path yet — no estimated_payments fact category exists.",
       "line.former_spouse_ssn":

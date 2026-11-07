@@ -1,7 +1,10 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Money } from "../../money.js";
+import type { Schedule8812FilingInfo } from "../schedule-8812/filingInfo.js";
 
-export interface Form1040FilingInfo extends BaseFilingInfo {
+/** The Dependents table reads Schedule 8812's `dependents` slot. */
+export interface Form1040FilingInfo
+  extends BaseFilingInfo, Pick<Schedule8812FilingInfo, "dependents"> {
   /** Every filer must answer. Undefined fills neither box, so the gap shows. */
   hasDigitalAssets?: boolean;
   w2WagesTotal?: Money;
