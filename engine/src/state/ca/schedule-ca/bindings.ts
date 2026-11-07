@@ -734,11 +734,11 @@ export function register(): void {
       "4.page2.taxes_6_additions":
         "Line 6 col C (foreign property taxes) has no fact kind or decision.",
       "4.page2.interest_8a_additions":
-        "Line 8a col C (interest over the federal $750,000 acquisition-debt limit, home equity interest, mortgage interest credit) needs the mortgage balance; no fact kind holds it.",
+        "Line 8a col C (the interest the federal $750,000 limit disallowed, home equity interest, the mortgage interest credit) needs the Pub. 936 average-balance worksheet and California's $1,000,000 limit; the engine knows only the 1098's January 1 principal.",
       "4.page2.interest_8b_additions":
-        "Line 8b col C needs the federal limit on non-1098 mortgage interest; no fact kind holds the mortgage balance.",
+        "Line 8b col C needs the federal limit on non-1098 mortgage interest (Pub. 936); not modeled.",
       "4.page2.interest_8c_additions":
-        "Line 8c col C needs the federal limit on non-1098 points; no fact kind holds the mortgage balance.",
+        "Line 8c col C needs the federal limit on non-1098 points (Pub. 936); not modeled.",
       "4.page2.interest_8e_subtractions":
         "Line 8e col B has no column B rows on lines 8a–8c, and the instructions name no subtraction for line 8.",
       "4.page2.interest_8e_additions":

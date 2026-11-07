@@ -58,7 +58,7 @@ src/
 ├── pendingInputs.ts  the decision and fact keys the filed forms still need
 ├── engine.ts         fixpoint evaluator (cross-form refs converge in ≤5 passes)
 ├── defineForm.ts     typed binding authoring API (defineForm, stubZero)
-├── money.ts          the one module for money math (sum, atLeast, roundDollars, stepsOf, formatDollars)
+├── money.ts          the one module for money math (sum, sumOrBlank, numberOrBlank, atLeast, roundDollars, stepsOf, formatDollars)
 ├── types.ts          FormField model, DerivationContext
 ├── filingInfo.ts     facts + decisions → typed FilingInfo projection
 ├── filingInfoResolvers.ts  per-form resolve<Form>Info slot resolvers

@@ -46,20 +46,12 @@ const MEDICAL_AMT_FLOOR_RATE = 0.025;
 const TENTATIVE_MINIMUM_TAX_RATE = 0.07;
 
 /*
- * Line 7 refigures FTB 3526 for AMT. The only difference the engine has a fact
- * for is line 2 (last year's AMT carryover instead of the regular one); the
- * line 1 and line 4a–4c differences have no facts, so the two forms agree
- * there. With a regular carryover and no AMT carryover stated, the adjustment,
- * and so line 14, wait.
+ * Line 7 refigures FTB 3526 for AMT: line 1 plus last year's AMT carryover
+ * (instead of the regular one), capped at line 6, as the regular form does. The
+ * line 1 and line 4a–4c differences have no facts, so the forms agree there.
+ * With a regular carryover and no AMT carryover stated the result is unknown,
+ * and lines 14 and 19 wait on line 7.
  */
-function investmentInterestAdjustmentUnknown(form: Form, info: SchedulePFilingInfo): boolean {
-  const regularLine8 = numberOrBlank(form["form-3526.0.line.8_investment_interest_deduction"]);
-  const regularLine2 = numberOrBlank(form["form-3526.0.line.2_disallowed_prior_year_interest"]);
-  if (regularLine8 === undefined || regularLine2 === undefined || regularLine2 <= 0) return false;
-  return info.caAmtDisallowedInterestCarryover === undefined;
-}
-
-/* The AMT FTB 3526 line 8: line 1 plus the AMT carryover, capped at line 6, as the regular form does. */
 function amtInvestmentInterestDeduction(form: Form, info: SchedulePFilingInfo): number | undefined {
   const line1 = numberOrBlank(form["form-3526.0.line.1_investment_interest_paid"]) ?? 0;
   const regularLine2 =
@@ -154,11 +146,10 @@ const partI: Bindings = {
   /*
    * MANUAL EDIT: the AMT FTB 3526 line 8 less the regular FTB 3526 line 8
    * (ca-540-sched-p-inst-2025::sec::line-7-investment-interest-expense-adjustment::b02).
-   * The AMT refiguring differs only in line 1 (Part I line 4 interest), line 2
-   * (the 2024 AMT disallowed amount) and lines 4a–4c (AMT adjustments to
-   * investment income) (…::b01); the engine has no fact for any of them, so
-   * the two forms agree and the adjustment is 0. Without itemizing, "do not
-   * enter an adjustment" (…::b02).
+   * The AMT refiguring differs in line 1 (Part I line 4 interest), line 2 (the
+   * 2024 AMT disallowed amount) and lines 4a–4c (AMT adjustments) (…::b01); only
+   * line 2 has a fact (amtInvestmentInterestDeduction). Without itemizing, "do
+   * not enter an adjustment" (…::b02).
    */
   "0.line.7_investment_interest_adjustment": (form, info) => {
     if (itemizesForCalifornia(form, info) !== true) return undefined;
@@ -191,12 +182,12 @@ const partI: Bindings = {
     ),
   // "Combine line 1 through line 13" (the form).
   "0.line.14_total_adjustments_preferences": (form, info) => {
-    if (
+    // Line 7 is unknown (not blank) while the return itemizes and FTB 3526 has a deduction.
+    const line7Waits =
       itemizesForCalifornia(form, info) === true &&
-      investmentInterestAdjustmentUnknown(form, info)
-    ) {
-      return undefined;
-    }
+      numberOrBlank(form["form-3526.0.line.8_investment_interest_deduction"]) !== undefined &&
+      form["0.line.7_investment_interest_adjustment"] === undefined;
+    if (line7Waits) return undefined;
     return sumOrBlank(
       form["0.line.1_standard_deduction"],
       form["0.line.2_medical_dental_expenses"],
@@ -257,7 +248,10 @@ const partI: Bindings = {
    * (ca-540-sched-p-inst-2025::sec::g-alternative-minimum-taxable-income-amti-exclusion::b01),
    * so it enters as a negative term.
    */
-  "1.line.19_combine_lines_14_through_18": (form) => {
+  "1.line.19_combine_lines_14_through_18": (form, info) => {
+    // Line 14 waits (an unknown adjustment) while the return itemizes: so does AMTI.
+    const line14 = form["0.line.14_total_adjustments_preferences"];
+    if (line14 === undefined && itemizesForCalifornia(form, info) === true) return undefined;
     const exclusion = numberOrBlank(form["0.line.17_amti_exclusion"]);
     return sumOrBlank(
       form["0.line.14_total_adjustments_preferences"],
