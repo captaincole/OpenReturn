@@ -3,7 +3,11 @@
  * and Form 8995-A), by filing status, owner and the shape of the business.
  */
 import { describe, expect, it } from "vitest";
-import { makeBusinessFactKey, makePaymentTransactionsFactKey } from "../../../src/facts/index.js";
+import {
+  makeBusinessFactKey,
+  makePaymentTransactionsFactKey,
+  makeW2FactKey,
+} from "../../../src/facts/index.js";
 import { resolve8995AInfo } from "../../../src/federal/8995-a/resolveInfo.js";
 import { resolveScheduleCInfo } from "../../../src/federal/schedule-c/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../../../src/federal/schedule-se/resolveInfo.js";
@@ -242,5 +246,51 @@ describe("Form 8995-A must-file and businesses", () => {
       inputs([business("rideshare"), spouseBusiness], "married_filing_separately"),
     );
     expect(info.qbiBusinesses?.map((qbi) => qbi.name)).toEqual(["rideshare"]);
+  });
+});
+
+describe("Schedule SE line 8a (the taxpayer's W-2 wages on a joint return)", () => {
+  const w2 = (slug: string, value: Record<string, unknown>): Fact => ({
+    key: makeW2FactKey(slug),
+    category: "wages",
+    value: {
+      employerName: slug,
+      employerEin: "00-0000001",
+      box1: 50000,
+      box2: 0,
+      box3: 50000,
+      ...value,
+    },
+  });
+  const taxpayerSsn: Fact = { key: "identity.ssn", category: "identity", value: "400-00-0001" };
+  const line8a = (facts: Fact[]) =>
+    resolveScheduleSEInfo(
+      inputs([business("rideshare"), taxpayerSsn, ...facts], "married_filing_jointly"),
+    ).w2SocialSecurityWagesAndTips;
+
+  it.each([
+    [
+      "placed by the employee SSN",
+      [
+        w2("a", { employee: { ssn: "400-00-0001" } }),
+        w2("b", { employee: { ssn: "400-00-0002" }, box3: 7000 }),
+      ],
+      50000,
+    ],
+    [
+      "placed by the owner when both W-2s print the taxpayer's SSN",
+      [
+        w2("a", { owner: "taxpayer", employee: { ssn: "400-00-0001" } }),
+        w2("b", { owner: "spouse", employee: { ssn: "400-00-0001" }, box3: 7000 }),
+      ],
+      50000,
+    ],
+    [
+      "waits for a W-2 with no owner and no SSN",
+      [w2("a", { employee: { ssn: "400-00-0001" } }), w2("b", { box3: 7000 })],
+      undefined,
+    ],
+  ])("%s", (_, facts, expected) => {
+    expect(line8a(facts)).toBe(expected);
   });
 });
