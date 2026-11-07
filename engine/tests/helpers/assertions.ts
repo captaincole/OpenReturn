@@ -98,13 +98,22 @@ export function assertRenderedChecked(
   }
 }
 
-/** Compares per widget name, not per fieldId, so catalog mislabels show. */
 /* Widgets whose golden mismatch is a known, listed cause (Scenario.knownMismatches). */
 export interface KnownWidgets {
   widgets: Map<string, { fieldId: string; cause: string }>;
   hits: string[];
 }
 
+interface WidgetMismatch {
+  widgetName: string;
+  message: string;
+}
+
+/*
+ * A mismatch on a listed widget is a known hit, not a failure. The "now
+ * matches" check lives on the expected-value ratchet only: a locked golden is
+ * the engine's own render, so its widget always matches once re-locked.
+ */
 export function assertMatchesGolden(
   rendered: Map<string, RenderedWidget[]>,
   golden: Map<string, GoldenValue>,
@@ -112,30 +121,20 @@ export function assertMatchesGolden(
   prefix?: string,
   known?: KnownWidgets,
 ): void {
-  const own: string[] = [];
-  compareWidgets(rendered, golden, own, prefix);
-  for (const failure of own) {
-    const entry = [...(known?.widgets ?? [])].find(([widgetName]) =>
-      failure.includes(`widget ${widgetName} `),
-    );
-    if (entry && known) known.hits.push(`[${prefix}] ${entry[1].fieldId} — ${entry[1].cause}`);
-    else failures.push(failure);
-  }
-  for (const [widgetName, { fieldId }] of known?.widgets ?? []) {
-    if (!own.some((failure) => failure.includes(`widget ${widgetName} `))) {
-      failures.push(
-        tag(prefix, `${fieldId} now matches the golden — remove it from knownMismatches.`),
-      );
-    }
+  for (const { widgetName, message } of compareWidgets(rendered, golden, prefix)) {
+    const entry = known?.widgets.get(widgetName);
+    if (entry && known) known.hits.push(tag(prefix, `${entry.fieldId} — ${entry.cause}`));
+    else failures.push(message);
   }
 }
 
+/** Compares per widget name, not per fieldId, so catalog mislabels show. */
 function compareWidgets(
   rendered: Map<string, RenderedWidget[]>,
   golden: Map<string, GoldenValue>,
-  failures: string[],
   prefix?: string,
-): void {
+): WidgetMismatch[] {
+  const mismatches: WidgetMismatch[] = [];
   const ours = new Map<string, string | boolean>();
   for (const [, widgets] of rendered) {
     for (const widget of widgets) {
@@ -147,6 +146,7 @@ function compareWidgets(
     }
   }
 
+  const report = (widgetName: string, message: string) => mismatches.push({ widgetName, message });
   const allWidgets = new Set<string>([...ours.keys(), ...golden.keys()]);
   for (const widgetName of allWidgets) {
     const goldenValue = golden.get(widgetName);
@@ -156,7 +156,8 @@ function compareWidgets(
       const goldenChecked = goldenValue.value === true;
       const ourChecked = ourValue === true;
       if (goldenChecked !== ourChecked) {
-        failures.push(
+        report(
+          widgetName,
           tag(
             prefix,
             `golden: widget ${widgetName} (checkbox) — golden=${goldenChecked} ours=${ourChecked}`,
@@ -169,7 +170,8 @@ function compareWidgets(
       const goldenSelected = normalizeForCompare(goldenValue.value);
       const ourSelected = typeof ourValue === "string" ? normalizeForCompare(ourValue) : "";
       if (goldenSelected !== ourSelected) {
-        failures.push(
+        report(
+          widgetName,
           tag(
             prefix,
             `golden: widget ${widgetName} (radio) — golden=${JSON.stringify(goldenValue.value)} ours=${JSON.stringify(ourValue ?? null)}`,
@@ -183,7 +185,8 @@ function compareWidgets(
     const goldenText = normalizeForCompare(goldenValue?.value);
     const ourText = typeof ourValue === "string" ? normalizeForCompare(ourValue) : "";
     if (goldenText !== ourText) {
-      failures.push(
+      report(
+        widgetName,
         tag(
           prefix,
           `golden: widget ${widgetName} — golden=${JSON.stringify(goldenText)} ours=${JSON.stringify(ourText)}`,
@@ -191,4 +194,5 @@ function compareWidgets(
       );
     }
   }
+  return mismatches;
 }

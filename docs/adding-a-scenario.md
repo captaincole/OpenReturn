@@ -45,7 +45,9 @@ tcb-us-003: MFJ, Roth conversion (Form 8606), senior deduction;
 tcb-us-004: MFJ, itemized deductions (Schedule A), investment interest
 (Form 4952), a dependent with the child tax credit (Schedule 8812);
 tcb-us-006: MFS, a sole-proprietor business (Schedule C, SE, 8995-A),
-gambling winnings, Additional Medicare Tax, NIIT).
+gambling winnings, Additional Medicare Tax, NIIT; tcb-ca-005: MFJ, CA
+itemized deductions (Schedule CA Part II, FTB 3526), CA AMT on an ISO
+exercise (Schedule P), early-distribution tax (FTB 3805P)).
 
 ### 3. Create `facts.ts` and `decisions.ts`
 

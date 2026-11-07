@@ -42,7 +42,7 @@ Work in form order: a form before the forms that read it (8606 before the 1040).
 - **A form the engine has:** `update-form <form>` with the scenario.
 - **A form the engine does not have:** `catalog-form-fields`, then `register-form`, then `write-binding-rules` for the lines the key fills. Its blank PDF goes in `sources/<year>/forms/<jurisdiction>/<short>/`, and its instructions must be in the corpus (`corpus` skill) before the bindings.
 - **A line the key fills that the instructions leave blank** (an e-file key often fills every line of a part the taxpayer skips): follow the instructions. Leave the line out of `expected.ts` and list it in the README.
-- **A line the engine cannot match now:** stop and ask the user. The fix may be a new form, a known mismatch (`knownMismatches.ts`, with `allowNotModeled`) or a key mistake to report upstream.
+- **A line the engine cannot match now:** stop and ask the user. The fix may be a new form, a known mismatch (`knownMismatches`) or a key mistake to report upstream.
 
 Never change a value in `expected.ts` to match the engine. When the key and the instructions disagree, the instructions win: record it in the README, and ask the user before you change the key's value.
 
