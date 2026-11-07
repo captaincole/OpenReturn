@@ -3,7 +3,7 @@ export const meta = {
   description:
     "Review an engine PR for IRS and FTB correctness; a skeptic refutes or scopes out each finding",
   whenToUse:
-    "On demand for a PR that changes engine/ or sources/. Needs Canon running (npm run dev:canon). args: {pr: <number>}. A strong pass (more than one high or more than three medium findings that stand) is fixed and re-run on the new head, up to three passes; then a person decides.",
+    "On demand for a PR that changes engine/ or sources/. Needs Canon running (npm run dev:canon). args: {pr: <number>}. Findings are scoped to the returns the scenarios cover and to common returns; a case only an unusual input produces is listed as uncovered for the tracking issue. A strong pass (more than one high or more than three medium findings that stand) is fixed and re-run on the new head, up to three passes; then a person decides.",
   phases: [
     { title: "Scope", detail: "split the diff into review units, tag IRS / FTB", model: "fable" },
     {
@@ -24,6 +24,15 @@ if (!PR) throw new Error("args.pr (the PR number) is required");
 const TAX_YEAR = (args && args.taxYear) || 2025;
 const MAX_FINDERS = (args && args.maxFinders) || 8;
 const MAX_FINDINGS = (args && args.maxFindings) || 8;
+
+/*
+ * The review's scope. The engine grows one scenario at a time, so a rule is
+ * checked for the returns the scenarios have and for common returns, not for
+ * every filer the Code describes: a finding that needs an input no scenario
+ * has and a common return would not have is listed, not fixed in this PR.
+ */
+const COVERED_SCOPE = `In scope: the facts of the scenarios in engine/tests/scenarios/ (read the facts.ts of the scenarios this PR adds or changes), and a common return: W-2 wages, interest and dividends, a brokerage 1099-B, a normal (code 7) or early (code 1) 1099-R, Social Security, one Form 1098 under the $750,000 limit, cash and noncash gifts, medical bills, a dependent, the standard deduction or Schedule A itemizing, a full-year California resident.
+Out of scope: a filer only an unusual input produces (a SIMPLE IRA in its first two years, Roth basis, a second mortgage or a jumbo loan, a K-1, foreign income, a child's investment income, a trade or business of gambling, two spouses with the same rare item). Name such a case in one sentence under "uncovered" instead of reporting a finding; the tracking issue collects them. An obvious mistake that a common return would hit (a reversed sign, a wrong constant, a line that reads a blank as 0) is always a finding.`;
 
 const AUTHORITY = {
   irs: {
@@ -112,6 +121,7 @@ const FINDINGS_SCHEMA = {
         ],
       },
     },
+    uncovered: { type: "array", items: { type: "string" } },
     ungroundable: {
       type: "array",
       items: {
@@ -189,8 +199,11 @@ Read the changed code at the head commit and the diff for these files. Then chec
 
 Report a finding only when:
 - you can quote the instructions verbatim (copy the exact text that citeRefDoc returns for blockId), and
-- you can give a concrete failure scenario: synthetic inputs → the engine's value vs the value the instructions require.
+- you can give a concrete failure scenario: synthetic inputs → the engine's value vs the value the instructions require, and
+- the failure scenario is in scope (below).
 Report problems in the changed code, plus problems the change exposes. If a rule depends on a source that is not in the library, list it under "ungroundable" instead.
+
+${COVERED_SCOPE}
 An empty findings list is a good result when the change is correct.
 
 ${RULES}`;
@@ -212,7 +225,8 @@ For each finding, check in order:
 
 Verdict:
 - "refuted" if the quote is missing or wrong, the rule does not apply, or the engine is correct.
-- "out_of_scope" if the problem is real but the same behavior exists at the base commit and this PR does not touch it.
+- "out_of_scope" if the problem is real but the same behavior exists at the base commit and this PR does not touch it, or if its failure scenario needs an input no scenario has and a common return would not have (say "uncovered" in the reason, with the input). The scope:
+${COVERED_SCOPE}
 - "stands" only if it survives every check.
 If two findings describe the same problem (for example an IRS and an FTB finder hitting shared code), let the better-grounded one stand and refute the other as a duplicate of its index.
 If you are unsure, choose "refuted". Give the evidence in "reason".
@@ -282,6 +296,14 @@ return {
   ),
   ungroundable: done.flatMap((r) =>
     r.found.ungroundable.map((u) => ({ authority: r.job.authority, ...u })),
+  ),
+  /* Cases outside the scope: for the tracking issue, not the fix loop. */
+  uncovered: done.flatMap((r) =>
+    (r.found.uncovered ?? []).map((text) => ({
+      authority: r.job.authority,
+      unit: r.job.unit.id,
+      text,
+    })),
   ),
   units: scope.units.map((u) => ({ id: u.id, title: u.title, authorities: u.authorities })),
   notReviewed: capped.map((j) => `${j.unit.id}/${j.authority}`),

@@ -53,7 +53,7 @@ Never change a value in `expected.ts` to match the engine. When the key and the 
 3. Add new input documents to `docs/testing-with-your-return.md` ("What OpenReturn supports") and `engine/scripts/compareFiled/support.ts`.
 4. Commit each step on its own: the documents, the facts, the scenario, then each form.
 5. Open the PR, then run the `pr-review` and `tax-correctness-review` workflows on it (the second needs `npm run dev:canon`). A scenario checks one taxpayer; the reviews find the rules that break for others. Report the findings to the user before you fix them.
-6. A pass is **strong** when the findings that stand (`keep` in pr-review, `survivors` in tax-correctness-review) include more than one of `high` severity or more than three of `medium`. After a strong pass: fix, commit, push, and run both workflows again on the new head. Three passes is the limit: when the third pass is still strong, stop and report it to the user. A pass with only `low` findings, or none, ends the loop. Each pass's applied and deferred findings go on the tracking issue.
+6. A pass is **strong** when the findings that stand (`keep` in pr-review, `survivors` in tax-correctness-review) include more than one of `high` severity or more than three of `medium`. After a strong pass: fix, commit, push, and run both workflows again on the new head. Three passes is the limit: when the third pass is still strong, stop and report it to the user. A pass with only `low` findings, or none, ends the loop. The tax review is scoped to the returns the scenarios cover and to common returns; its `uncovered` list and `out_of_scope` findings go on the tracking issue as checkboxes, not into the loop. Each pass's applied and deferred findings go on the tracking issue.
 
 ## 7. Report
 
