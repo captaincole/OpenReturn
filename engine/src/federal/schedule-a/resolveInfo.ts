@@ -20,12 +20,20 @@ const POST_2017_DEBT_LIMIT = 750000;
 const PRE_2018_DEBT_LIMIT = 1000000;
 const LIMIT_DATE = { year: 2017, month: 12, day: 15 };
 
-/* MM/DD/YYYY, as the Form 1098 prints box 3; false when missing or unreadable. */
+/* MM/DD/YYYY as the Form 1098 prints box 3, or YYYY-MM-DD; false when missing or unreadable. */
 function originatedOnOrBefore(date: string | undefined, cutoff: typeof LIMIT_DATE): boolean {
   if (date === undefined) return false;
-  const parts = date.trim().split("/").map(Number);
+  const iso = date.includes("-");
+  const parts = date
+    .trim()
+    .split(iso ? "-" : "/")
+    .map(Number);
   if (parts.length !== 3 || parts.some((part) => !Number.isFinite(part))) return false;
-  const [month, day, year] = parts as [number, number, number];
+  const [month, day, year] = (iso ? [parts[1], parts[2], parts[0]] : parts) as [
+    number,
+    number,
+    number,
+  ];
   if (year !== cutoff.year) return year < cutoff.year;
   if (month !== cutoff.month) return month < cutoff.month;
   return day <= cutoff.day;

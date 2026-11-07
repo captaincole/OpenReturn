@@ -1,9 +1,10 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
-import { defineForm, type FormAccessor } from "../../defineForm.js";
+import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { Form4952FilingInfo } from "./filingInfo.js";
+import { netCapitalGainFromDispositions, netGainFromDispositions } from "./lines.js";
 import type { Form4952 } from "./types.js";
 
 export function register(): void {
@@ -101,31 +102,4 @@ export function register(): void {
         SSN.format(value as Parameters<typeof SSN.format>[0]),
     },
   });
-}
-
-/*
- * Total gains over total losses from dispositions, with capital gain
- * distributions and loss carryovers: Schedule D line 16 includes all of them.
- * Without a Schedule D, 1040 line 7a is the capital gain distributions alone.
- */
-function netGainFromDispositions(form: FormAccessor<Form4952>): number | undefined {
-  const scheduleDLine16 = form["schedule-d.1.line.16_combined_gain_loss"];
-  if (typeof scheduleDLine16 === "number") return scheduleDLine16;
-  const form1040Line7a = form["form-1040.line.7a"];
-  return typeof form1040Line7a === "number" ? form1040Line7a : undefined;
-}
-
-/*
- * Net long-term capital gain over net short-term capital loss. Capital gain
- * distributions are long-term, so without a Schedule D the whole amount counts.
- */
-function netCapitalGainFromDispositions(form: FormAccessor<Form4952>): number {
-  const scheduleDLine15 = form["schedule-d.0.line.15_net_long_term_gain_loss"];
-  if (typeof scheduleDLine15 !== "number") {
-    return atLeast(0, form["form-1040.line.7a"]);
-  }
-  const scheduleDLine7 = form["schedule-d.0.line.7_net_short_term_gain_loss"];
-  const shortTermLoss =
-    typeof scheduleDLine7 === "number" && scheduleDLine7 < 0 ? -scheduleDLine7 : 0;
-  return atLeast(0, atLeast(0, scheduleDLine15) - shortTermLoss);
 }

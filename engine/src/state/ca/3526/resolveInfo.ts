@@ -39,7 +39,8 @@ function onlyInterestOrDividendIncome(inputs: ResolverInputs): boolean {
  * exception only waives the filing: the California deduction is still figured
  * on the form, and Schedule CA Part II line 9 takes the difference from the
  * federal deduction (ca-3526-inst-2025::sec::line-10::b01), so the form is
- * completed whenever federal Form 4952 files. While an answer the exception
+ * completed whenever federal Form 4952 files, even with no California expense
+ * (line 9 column B then subtracts the federal deduction). While an answer the exception
  * needs is missing, the form files and asks, as Form 4952 does.
  *
  * California's income has no qualified-dividend split and excludes U.S.
@@ -64,8 +65,8 @@ export function resolve3526Info(inputs: ResolverInputs): Form3526FilingInfo {
     explicitKey: "decisions.scope.must_file_3526",
     fallbacks: [
       {
-        rule: `fallback: investment interest expense $${expense} to deduct (${hasExpense}); the Who Must File exception does not apply (${!exception}) or federal Form 4952 files (${federalFiles})`,
-        value: hasExpense && (!exception || federalFiles),
+        rule: `fallback: investment interest expense $${expense} to deduct and the Who Must File exception does not apply (${hasExpense && !exception}), or federal Form 4952 files (${federalFiles})`,
+        value: (hasExpense && !exception) || federalFiles,
         triggeredByFactKeys: [
           INVESTMENT_INTEREST_KEYS.expensePaid,
           INVESTMENT_INTEREST_KEYS.caDisallowedCarryover,
