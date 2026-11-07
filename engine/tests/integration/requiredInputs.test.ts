@@ -19,6 +19,10 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "override; the default box comes from the 1099-B facts",
   ],
   [/^identity\.address\.apt$/, "not every address has an apartment"],
+  [
+    /^gambling\.winnings_not_on_w2g$/,
+    "rare; Cade asks about gambling at scoping, and the W-2G facts fill line 8b",
+  ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [
     /^prior_year\.ca_tax$/,
