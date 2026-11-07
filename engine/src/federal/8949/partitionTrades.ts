@@ -1,6 +1,7 @@
 import {
   isLongTermBox,
   makeForm8949BoxDecisionKey,
+  printsShareCount,
   type Form8949Box,
   type TradeFactValue,
 } from "../../facts/index.js";
@@ -46,7 +47,9 @@ export function partitionTrades(
     if (!TRADE_KEY_RE.test(row.key)) continue;
     const printed = row.value as TradeFactValue;
     const quantity = printed.quantity ?? stated.get(`${row.key}.quantity`);
-    if (quantity === undefined) missingQuantityKeys.push(`${row.key}.quantity`);
+    if (quantity === undefined && !printsShareCount(printed.description)) {
+      missingQuantityKeys.push(`${row.key}.quantity`);
+    }
     const trade: TradeFactValue = { ...printed, quantity };
     const decided = decisionByKey.get(makeForm8949BoxDecisionKey(trade.tradeId));
     const longTerm = typeof decided === "string" ? isLongTermBox(decided) : isLongTermTrade(trade);

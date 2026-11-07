@@ -41,6 +41,19 @@ describe("partitionTrades: the number of shares (Form 8949 column (a))", () => {
     expect(missingQuantityKeys).toEqual([]);
   });
 
+  it("does not ask when box 1a printed the count", () => {
+    const { missingQuantityKeys } = partitionTrades(
+      [sale({ description: "91.207 sh SAMPLE INC" })],
+      new Map(),
+    );
+    expect(missingQuantityKeys).toEqual([]);
+  });
+
+  it("asks for a name that starts with a digit but prints no count", () => {
+    const { missingQuantityKeys } = partitionTrades([sale({ description: "3M CO" })], new Map());
+    expect(missingQuantityKeys).toEqual([makeStatedQuantityFactKey("etrade", "etr-d-01")]);
+  });
+
   it("names the stated-quantity key while the count is unknown", () => {
     const { boxed, missingQuantityKeys } = partitionTrades([sale()], new Map());
     expect(boxed[0]?.trade.quantity).toBeUndefined();
