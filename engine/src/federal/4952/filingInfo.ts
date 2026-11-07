@@ -3,6 +3,8 @@ import type { BaseFilingInfo } from "../../filingInfo.js";
 export interface Form4952FilingInfo extends BaseFilingInfo {
   /** Line 1. */
   investmentInterestPaid?: number;
+  /** Who Must File's exception: the interest is deducted on Schedule A line 9 without the form. */
+  noFormException?: boolean;
   /** Line 2: last year's Form 4952 line 7. */
   disallowedInterestCarryover?: number;
   /** Line 4g: the amount of qualified dividends and net capital gain elected as investment income. */
