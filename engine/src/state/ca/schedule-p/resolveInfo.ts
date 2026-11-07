@@ -1,5 +1,10 @@
-import { AMT_KEYS } from "../../../facts/index.js";
-import { num, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
+import { AMT_KEYS, INVESTMENT_INTEREST_KEYS } from "../../../facts/index.js";
+import {
+  missingInputs,
+  num,
+  resolveMustFile,
+  type ResolverInputs,
+} from "../../../resolverInputs.js";
 import type { SchedulePFilingInfo } from "./filingInfo.js";
 
 /*
@@ -18,6 +23,11 @@ import type { SchedulePFilingInfo } from "./filingInfo.js";
  */
 export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInfo {
   const isoExerciseSpread = num(inputs, AMT_KEYS.isoExerciseSpread);
+  const caCarryover = num(inputs, INVESTMENT_INTEREST_KEYS.caDisallowedCarryover);
+  const caAmtDisallowedInterestCarryover = num(
+    inputs,
+    INVESTMENT_INTEREST_KEYS.caAmtDisallowedCarryover,
+  );
   const itemizes = inputs.decisionByKey.get("decisions.itemize_vs_standard") === "itemized";
   const files540 = inputs.decisionByKey.get("decisions.scope.must_file_ca_540") === true;
   const resolution = resolveMustFile(inputs.decisionByKey, {
@@ -34,8 +44,19 @@ export function resolveSchedulePInfo(inputs: ResolverInputs): SchedulePFilingInf
       },
     ],
   });
+  const files = resolution.value === true;
   return {
     mustFile: { "schedule-p": resolution },
+    /* Line 7 needs last year's AMT carryover only when there was a regular one. */
+    missingInputs: {
+      "schedule-p":
+        files && (caCarryover ?? 0) > 0
+          ? missingInputs({
+              [INVESTMENT_INTEREST_KEYS.caAmtDisallowedCarryover]: caAmtDisallowedInterestCarryover,
+            })
+          : [],
+    },
     isoExerciseSpread,
+    caAmtDisallowedInterestCarryover,
   };
 }

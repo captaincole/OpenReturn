@@ -1,5 +1,3 @@
-import { isDividendFactKey, isTradeFact } from "./facts/index.js";
-import type { TaxFactRow } from "./facts/rows.js";
 import { partitionTrades, type PartitionedTrades } from "./federal/8949/partitionTrades.js";
 import type { MustFileResolution } from "./filingInfo.js";
 import { sum } from "./money.js";
@@ -71,19 +69,6 @@ export function sumInvestmentBox(
       .filter((row) => !keyFilter || keyFilter(row.key))
       .map((row) => (row.value as Record<string, unknown>)?.[boxKey]),
   );
-}
-
-/*
- * The Form 4952 and FTB 3526 "Who Must File" exception needs investment income
- * from interest or dividends only: no sale of investment property (no trade
- * facts) and no capital gain distributions (1099-DIV box 2a).
- */
-export function onlyInterestOrDividendIncome(inputs: ResolverInputs): boolean {
-  const capitalGainDistributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
-  const trades = factsInCategory(inputs, "investment_income").filter((row) =>
-    isTradeFact(row as TaxFactRow),
-  );
-  return trades.length === 0 && capitalGainDistributions === 0;
 }
 
 export function sumCaSdi(wageRows: Array<{ value: unknown }>): number {

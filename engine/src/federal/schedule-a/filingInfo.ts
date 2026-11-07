@@ -24,6 +24,8 @@ export interface ScheduleAFilingInfo
 
   /** Line 8a: Form 1098 box 1. Only one 1098 is supported. */
   mortgageInterestForm1098?: number;
+  /** The 1098's principal is over the acquisition-debt limit: Pub. 936 is not modeled, so lines 8a, 8e, 10 and 17 wait. */
+  mortgageInterestLimited?: boolean;
 
   /** Line 8b. */
   mortgageInterestNotForm1098?: number;

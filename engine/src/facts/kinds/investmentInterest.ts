@@ -20,6 +20,12 @@ export const INVESTMENT_INTEREST_KEYS = {
   investmentExpenses: "investment_interest.investment_expenses",
   /* FTB 3526 line 2: last year's FTB 3526 line 7, California's own carryover (it differs from the federal one). */
   caDisallowedCarryover: "investment_interest.ca_disallowed_carryover",
+  /*
+   * Schedule P (540) line 7: last year's AMT FTB 3526 line 7, the carryover the
+   * AMT refiguring of the form starts from (the same as the regular one when no
+   * AMT form was filed last year).
+   */
+  caAmtDisallowedCarryover: "investment_interest.ca_amt_disallowed_carryover",
   /* FTB 3526 line 4e: a separate California election of net capital gain as investment income. */
   caElectedNetCapitalGain: "investment_interest.ca_elected_net_capital_gain",
 } as const;

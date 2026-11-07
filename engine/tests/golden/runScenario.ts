@@ -120,7 +120,7 @@ export async function runScenario(scenario: Scenario): Promise<RunResult> {
   };
 }
 
-/* The golden PDF widgets of the listed lines: a mismatch there is a known hit, a match a stale entry. */
+/* The golden PDF widgets of the listed lines: a mismatch there is a known hit (staleness is checked on the expected value). */
 function knownWidgets(
   formId: string,
   catalog: Catalog,

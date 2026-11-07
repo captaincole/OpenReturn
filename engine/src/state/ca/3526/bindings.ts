@@ -1,7 +1,7 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm } from "../../../defineForm.js";
-import { atLeast, roundDollars, sum } from "../../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sumOrBlank } from "../../../money.js";
 import type { Form3526FilingInfo } from "./filingInfo.js";
 import type { Form3526 } from "./types.js";
 
@@ -30,12 +30,11 @@ export function register(): void {
           ? undefined
           : atLeast(0, info.caDisallowedInterestCarryover),
       // ca-3526-inst-2025::sec::taxable-year::b02: "Add line 1 and line 2." Blank, not 0, when both are blank.
-      "0.line.3_total_investment_interest": (form) => {
-        const line1 = form["0.line.1_investment_interest_paid"];
-        const line2 = form["0.line.2_disallowed_prior_year_interest"];
-        if (line1 === undefined && line2 === undefined) return undefined;
-        return sum(line1, line2);
-      },
+      "0.line.3_total_investment_interest": (form) =>
+        sumOrBlank(
+          form["0.line.1_investment_interest_paid"],
+          form["0.line.2_disallowed_prior_year_interest"],
+        ),
       /*
        * ca-3526-inst-2025::sec::line-4a::b01: "gross income from property held
        * for investment ... from interest, dividends, annuities, and royalties".
@@ -52,7 +51,7 @@ export function register(): void {
        * which reads Schedule D line 16 (else 1040 line 7a) and floors a net loss at 0.
        */
       "0.line.4b_net_gain_investment_property": (form) =>
-        federalLine(form["form-4952.0.line.4d_net_gain_investment_property"]),
+        numberOrBlank(form["form-4952.0.line.4d_net_gain_investment_property"]),
       /*
        * ca-3526-inst-2025::sec::line-4c::b01: "the excess of your net long-term
        * capital gain over net short-term capital loss". MANUAL EDIT: federal
@@ -60,7 +59,7 @@ export function register(): void {
        * never exceeds the net gain, so the two are equal.
        */
       "0.line.4c_net_capital_gain_investment_property": (form) =>
-        federalLine(form["form-4952.0.line.4e_smaller_net_gain_or_capital_gain"]),
+        numberOrBlank(form["form-4952.0.line.4e_smaller_net_gain_or_capital_gain"]),
       // ca-3526-inst-2025::sec::taxable-year::b02/b03: "Subtract line 4c from line 4b. If zero or less, enter 0".
       "0.line.4d_net_gain_less_capital_gain": (form) => {
         const line4b = form["0.line.4b_net_gain_investment_property"];
@@ -83,13 +82,12 @@ export function register(): void {
         return Math.min(roundDollars(elected), cap);
       },
       // ca-3526-inst-2025::sec::taxable-year::b03: "Add line 4a, line 4d, and line 4e".
-      "0.line.4f_investment_income": (form) => {
-        const line4a = form["0.line.4a_gross_investment_income"];
-        const line4d = form["0.line.4d_net_gain_less_capital_gain"];
-        const line4e = form["0.line.4e_elected_net_capital_gain"];
-        if (line4a === undefined && line4d === undefined && line4e === undefined) return undefined;
-        return sum(line4a, line4d, line4e);
-      },
+      "0.line.4f_investment_income": (form) =>
+        sumOrBlank(
+          form["0.line.4a_gross_investment_income"],
+          form["0.line.4d_net_gain_less_capital_gain"],
+          form["0.line.4e_elected_net_capital_gain"],
+        ),
       /*
        * ca-3526-inst-2025::sec::line-5::b01: "allowed deductions, other than
        * interest expense, directly connected with the production of investment
@@ -126,7 +124,7 @@ export function register(): void {
       },
       // ca-3526-inst-2025::sec::taxable-year::b03: "the amount from federal Form 4952, line 8".
       "0.line.9_federal_4952_line_8": (form) =>
-        federalLine(form["form-4952.0.line.8_investment_interest_deduction"]),
+        numberOrBlank(form["form-4952.0.line.8_investment_interest_deduction"]),
       /*
        * ca-3526-inst-2025::sec::line-10::b01: "the difference between the
        * deduction allowed by California and federal law": the larger less the
@@ -144,6 +142,3 @@ export function register(): void {
 }
 
 // A line of another form is untyped; a Form 4952 that is not filed gives undefined.
-function federalLine(value: unknown): number | undefined {
-  return typeof value === "number" ? value : undefined;
-}

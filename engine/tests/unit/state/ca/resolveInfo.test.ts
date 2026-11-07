@@ -200,6 +200,32 @@ describe("resolveSchedulePInfo", () => {
     expect(info.isoExerciseSpread).toBe(275000);
   });
 
+  it("asks for last year's AMT carryover only when there is a regular California carryover", () => {
+    const withCarryover = resolveSchedulePInfo(
+      makeResolverInputs({
+        facts: [
+          { key: AMT_KEYS.isoExerciseSpread, category: "other", value: 275000 },
+          {
+            key: INVESTMENT_INTEREST_KEYS.caDisallowedCarryover,
+            category: "investment_income",
+            value: 650,
+          },
+        ],
+        decisions: [files540],
+      }),
+    );
+    expect(withCarryover.missingInputs?.["schedule-p"]).toEqual([
+      INVESTMENT_INTEREST_KEYS.caAmtDisallowedCarryover,
+    ]);
+    const without = resolveSchedulePInfo(
+      makeResolverInputs({
+        facts: [{ key: AMT_KEYS.isoExerciseSpread, category: "other", value: 275000 }],
+        decisions: [files540],
+      }),
+    );
+    expect(without.missingInputs?.["schedule-p"]).toEqual([]);
+  });
+
   it("completes the schedule for an itemizer and skips it for a standard-deduction filer with no preference", () => {
     const itemizer = resolveSchedulePInfo(
       makeResolverInputs({

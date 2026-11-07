@@ -20,7 +20,7 @@ const POST_2017_DEBT_LIMIT = 750000;
 const PRE_2018_DEBT_LIMIT = 1000000;
 const LIMIT_DATE = { year: 2017, month: 12, day: 15 };
 
-/* MM/DD/YYYY, as the Form 1098 prints box 3; undefined when unreadable. */
+/* MM/DD/YYYY, as the Form 1098 prints box 3; false when missing or unreadable. */
 function originatedOnOrBefore(date: string | undefined, cutoff: typeof LIMIT_DATE): boolean {
   if (date === undefined) return false;
   const parts = date.trim().split("/").map(Number);
@@ -35,21 +35,39 @@ function originatedOnOrBefore(date: string | undefined, cutoff: typeof LIMIT_DAT
  * irs-1040sa-inst-2025::sec::line-8a::b01: line 8a takes the Form 1098 interest
  * and points unless a limit applies; then Pub. 936 figures the deductible part,
  * which the engine does not model. The outstanding principal (box 2) says
- * whether the limit applies; above it the line waits.
+ * whether the limit applies: within it the interest; over it the line waits
+ * (`limited`); between the two limits the origination date decides, so it is
+ * asked when missing.
  */
-function mortgageInterestForm1098(
+interface MortgageLimit {
+  interest: number | undefined;
+  limited: boolean;
+  /* Box 3 is needed: the principal is over the post-2017 limit and within the earlier one. */
+  originationDateNeeded: boolean;
+}
+
+export function mortgageInterestWithinLimit(
   inputs: ResolverInputs,
   interestAndPoints: number | undefined,
   principal: number | undefined,
-): number | undefined {
-  if (interestAndPoints === undefined || principal === undefined) return undefined;
+): MortgageLimit {
+  const none = { interest: undefined, limited: false, originationDateNeeded: false };
+  if (interestAndPoints === undefined || principal === undefined) return none;
   const separate =
     inputs.decisionByKey.get("decisions.scope.filing_status") === "married_filing_separately";
+  const share = separate ? 2 : 1;
   const originated = text(inputs, MORTGAGE_KEYS.originationDateForm1098);
-  const limit = originatedOnOrBefore(originated, LIMIT_DATE)
-    ? PRE_2018_DEBT_LIMIT
-    : POST_2017_DEBT_LIMIT;
-  return principal <= (separate ? limit / 2 : limit) ? interestAndPoints : undefined;
+  const earlierLoan = originatedOnOrBefore(originated, LIMIT_DATE);
+  const limit = (earlierLoan ? PRE_2018_DEBT_LIMIT : POST_2017_DEBT_LIMIT) / share;
+  const inBand =
+    principal > POST_2017_DEBT_LIMIT / share && principal <= PRE_2018_DEBT_LIMIT / share;
+  if (principal <= limit)
+    return { interest: interestAndPoints, limited: false, originationDateNeeded: false };
+  return {
+    interest: undefined,
+    limited: !(inBand && originated === undefined),
+    originationDateNeeded: inBand && originated === undefined,
+  };
 }
 
 /* Schedule A files when the return itemizes (decisions.itemize_vs_standard), or when set explicitly. */
@@ -74,6 +92,7 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
   const realEstateTaxes = num(inputs, "state_local_tax.real_estate");
   const interestForm1098 = num(inputs, MORTGAGE_KEYS.interestForm1098);
   const principalForm1098 = num(inputs, MORTGAGE_KEYS.outstandingPrincipalForm1098);
+  const mortgage = mortgageInterestWithinLimit(inputs, interestForm1098, principalForm1098);
   return {
     mustFile: { "schedule-a": resolution },
     /* An itemizer answers these once; 0 is an answer. Blank lines would hide a deduction. */
@@ -86,6 +105,10 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
         ...((interestForm1098 ?? 0) > 0
           ? { [MORTGAGE_KEYS.outstandingPrincipalForm1098]: principalForm1098 }
           : {}),
+        /* Box 3 decides the limit for a loan between $750,000 and $1,000,000. */
+        ...(mortgage.originationDateNeeded
+          ? { [MORTGAGE_KEYS.originationDateForm1098]: undefined }
+          : {}),
         "charitable.cash": giftsCashCheck,
         "charitable.noncash": giftsOtherThanCash,
       }),
@@ -96,7 +119,8 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
       boolean | undefined,
     realEstateTaxes,
     personalPropertyTaxes: num(inputs, "state_local_tax.personal_property"),
-    mortgageInterestForm1098: mortgageInterestForm1098(inputs, interestForm1098, principalForm1098),
+    mortgageInterestForm1098: mortgage.interest,
+    mortgageInterestLimited: mortgage.limited,
     mortgageInterestNotForm1098: num(inputs, MORTGAGE_KEYS.interestNotForm1098),
     pointsNotForm1098: num(inputs, MORTGAGE_KEYS.pointsNotForm1098),
     giftsCashCheck,

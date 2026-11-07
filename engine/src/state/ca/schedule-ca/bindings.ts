@@ -6,7 +6,7 @@
 
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { defineForm } from "../../../defineForm.js";
-import { atLeast, roundDollars, sum } from "../../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import type { FilingStatus } from "../../../values.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import type { ScheduleCa } from "./types.js";
@@ -28,14 +28,6 @@ const WORKSHEET_LINE_4_RATE = 0.8;
 const WORKSHEET_LINE_8_RATE = 0.06;
 /* Part II line 24: the 2% floor on job expenses (the form; the line has no section). */
 const JOB_EXPENSES_FLOOR_RATE = 0.02;
-
-/* Blank, not 0, when every term is blank (printed-zero rule). */
-function sumIfAny(...values: unknown[]): number | undefined {
-  return values.some((value) => typeof value === "number") ? sum(...values) : undefined;
-}
-
-const federal = (value: unknown): number | undefined =>
-  typeof value === "number" ? value : undefined;
 
 const text = (value: unknown): string | undefined =>
   typeof value === "string" ? value : undefined;
@@ -94,7 +86,7 @@ export function register(): void {
       },
       "0.line.1a_additions": (_, info) => roundDollars(info.hsaEmployerContributions),
       "0.line.1z_additions": (form) =>
-        sumIfAny(
+        sumOrBlank(
           form["0.line.1a_additions"],
           form["0.line.1b_additions"],
           form["0.line.1c_additions"],
@@ -106,7 +98,7 @@ export function register(): void {
           form["0.line.1i_additions"],
         ),
       "2.line.b10_additions": (form) =>
-        sumIfAny(
+        sumOrBlank(
           form["0.line.1z_additions"],
           form["0.line.2b_additions"],
           form["0.line.3b_additions"],
@@ -124,15 +116,15 @@ export function register(): void {
        * MANUAL EDIT: col A copies 1040 lines 4a–6b, blank when the federal line
        * is blank. CA excludes Social Security: col B takes line 6b.
        */
-      "0.line.4a_federal": (form) => federal(form["form-1040.line.4a"]),
-      "0.line.4b_federal": (form) => federal(form["form-1040.line.4b"]),
-      "0.line.5a_federal": (form) => federal(form["form-1040.line.5a"]),
-      "0.line.5b_federal": (form) => federal(form["form-1040.line.5b"]),
-      "0.line.6a_federal": (form) => federal(form["form-1040.line.6a"]),
-      "0.line.6b_federal": (form) => federal(form["form-1040.line.6b"]),
-      "0.line.6b_subtractions": (form) => federal(form["0.line.6b_federal"]),
+      "0.line.4a_federal": (form) => numberOrBlank(form["form-1040.line.4a"]),
+      "0.line.4b_federal": (form) => numberOrBlank(form["form-1040.line.4b"]),
+      "0.line.5a_federal": (form) => numberOrBlank(form["form-1040.line.5a"]),
+      "0.line.5b_federal": (form) => numberOrBlank(form["form-1040.line.5b"]),
+      "0.line.6a_federal": (form) => numberOrBlank(form["form-1040.line.6a"]),
+      "0.line.6b_federal": (form) => numberOrBlank(form["form-1040.line.6b"]),
+      "0.line.6b_subtractions": (form) => numberOrBlank(form["0.line.6b_federal"]),
       "2.line.b10_subtractions": (form) =>
-        sumIfAny(
+        sumOrBlank(
           form["0.line.1z_subtractions"],
           form["0.line.2b_subtractions"],
           form["0.line.3b_subtractions"],
@@ -205,7 +197,7 @@ export function register(): void {
           form["3.line.c26_federal"] === undefined ? 0 : -form["3.line.c26_federal"],
         ),
       // MANUAL EDIT: col A copies 1040 line 3a (ca-540-sched-ca-inst-2025::sec::section-a-line-1a-through-line-7a-and-section-b-line-1-through-line-9a::b01).
-      "0.line.3a_federal": (form) => federal(form["form-1040.line.3a"]),
+      "0.line.3a_federal": (form) => numberOrBlank(form["form-1040.line.3a"]),
       /*
        * MANUAL EDIT: the Part II box: itemized for California while the federal
        * return took the standard deduction. Schedule A evaluated (line 17
@@ -214,8 +206,10 @@ export function register(): void {
        * (ca-540-sched-ca-inst-2025::sec::part-ii-adjustments-to-federal-itemized-deductions::b01).
        */
       "4.page2.itemize_ca_not_federal": (form) => {
-        const scheduleALine17 = federal(form["schedule-a.0.line.17_total_itemized_deductions"]);
-        const federalDeduction = federal(form["form-1040.line.12e"]);
+        const scheduleALine17 = numberOrBlank(
+          form["schedule-a.0.line.17_total_itemized_deductions"],
+        );
+        const federalDeduction = numberOrBlank(form["form-1040.line.12e"]);
         const line29 = form["5.page2.total_itemized_29"];
         const line30 = form["5.page2.total_itemized_30_standard_or_itemized"];
         if (scheduleALine17 === undefined || federalDeduction === undefined) return undefined;
@@ -228,24 +222,27 @@ export function register(): void {
        * Blank when Schedule A is not filed.
        */
       "4.page2.medical_dental_expenses": (form) =>
-        federal(form["schedule-a.0.line.1_medical_dental_expenses"]),
-      "4.page2.medical_agi_line11b": (form) => federal(form["schedule-a.0.line.2_agi_from_1040"]),
+        numberOrBlank(form["schedule-a.0.line.1_medical_dental_expenses"]),
+      "4.page2.medical_agi_line11b": (form) =>
+        numberOrBlank(form["schedule-a.0.line.2_agi_from_1040"]),
       "4.page2.medical_agi_threshold": (form) =>
-        federal(form["schedule-a.0.line.3_agi_multiplied"]),
+        numberOrBlank(form["schedule-a.0.line.3_agi_multiplied"]),
       "4.page2.medical_line4_federal": (form) =>
-        federal(form["schedule-a.0.line.4_net_medical_dental"]),
+        numberOrBlank(form["schedule-a.0.line.4_net_medical_dental"]),
       "4.page2.taxes_5a_federal": (form) =>
-        federal(form["schedule-a.0.line.5a_state_local_income_or_sales_tax"]),
+        numberOrBlank(form["schedule-a.0.line.5a_state_local_income_or_sales_tax"]),
       // MANUAL EDIT: CA allows no state/local income or sales tax deduction: col B takes all of col A (ca-540-sched-ca-inst-2025::sec::line-5a-state-and-local-taxes::b01).
-      "4.page2.taxes_5a_subtractions": (form) => federal(form["4.page2.taxes_5a_federal"]),
-      "4.page2.taxes_5b_federal": (form) => federal(form["schedule-a.0.line.5b_real_estate_taxes"]),
+      "4.page2.taxes_5a_subtractions": (form) => numberOrBlank(form["4.page2.taxes_5a_federal"]),
+      "4.page2.taxes_5b_federal": (form) =>
+        numberOrBlank(form["schedule-a.0.line.5b_real_estate_taxes"]),
       "4.page2.taxes_5c_federal": (form) =>
-        federal(form["schedule-a.0.line.5c_personal_property_taxes"]),
+        numberOrBlank(form["schedule-a.0.line.5c_personal_property_taxes"]),
       "4.page2.taxes_5d_federal": (form) =>
-        federal(form["schedule-a.0.line.5d_total_state_local_taxes"]),
-      "4.page2.taxes_5e_federal": (form) => federal(form["schedule-a.0.line.5e_salt_cap"]),
+        numberOrBlank(form["schedule-a.0.line.5d_total_state_local_taxes"]),
+      "4.page2.taxes_5e_federal": (form) => numberOrBlank(form["schedule-a.0.line.5e_salt_cap"]),
       // MANUAL EDIT: the form: "Enter the amount from line 5a, column B in line 5e, column B."
-      "4.page2.taxes_5e_subtractions": (form) => federal(form["4.page2.taxes_5a_subtractions"]),
+      "4.page2.taxes_5e_subtractions": (form) =>
+        numberOrBlank(form["4.page2.taxes_5a_subtractions"]),
       /*
        * MANUAL EDIT: CA does not conform to the federal SALT cap: col C takes the
        * amount over the cap, only when the cap applied
@@ -258,23 +255,24 @@ export function register(): void {
         return line5d > line5e ? line5d - line5e : undefined;
       },
       "4.page2.taxes_6_type": (form) => text(form["schedule-a.0.line.6_other_taxes_description"]),
-      "4.page2.taxes_6_federal": (form) => federal(form["schedule-a.0.line.6_other_taxes_amount"]),
-      "4.page2.taxes_7_federal": (form) => federal(form["schedule-a.0.line.7_total_taxes"]),
+      "4.page2.taxes_6_federal": (form) =>
+        numberOrBlank(form["schedule-a.0.line.6_other_taxes_amount"]),
+      "4.page2.taxes_7_federal": (form) => numberOrBlank(form["schedule-a.0.line.7_total_taxes"]),
       // Line 7: "Add line 5e and line 6" in each column (the form).
       "4.page2.taxes_7_subtractions": (form) =>
-        sumIfAny(form["4.page2.taxes_5e_subtractions"], form["4.page2.taxes_6_subtractions"]),
+        sumOrBlank(form["4.page2.taxes_5e_subtractions"], form["4.page2.taxes_6_subtractions"]),
       "4.page2.taxes_7_additions": (form) =>
-        sumIfAny(form["4.page2.taxes_5e_additions"], form["4.page2.taxes_6_additions"]),
+        sumOrBlank(form["4.page2.taxes_5e_additions"], form["4.page2.taxes_6_additions"]),
       "4.page2.interest_8a_federal": (form) =>
-        federal(form["schedule-a.0.line.8a_mortgage_interest_form1098"]),
+        numberOrBlank(form["schedule-a.0.line.8a_mortgage_interest_form1098"]),
       "4.page2.interest_8b_federal": (form) =>
-        federal(form["schedule-a.0.line.8b_mortgage_interest_not_form1098"]),
+        numberOrBlank(form["schedule-a.0.line.8b_mortgage_interest_not_form1098"]),
       "4.page2.interest_8c_federal": (form) =>
-        federal(form["schedule-a.0.line.8c_points_not_form1098"]),
+        numberOrBlank(form["schedule-a.0.line.8c_points_not_form1098"]),
       "4.page2.interest_8e_federal": (form) =>
-        federal(form["schedule-a.0.line.8e_total_mortgage_interest_points"]),
+        numberOrBlank(form["schedule-a.0.line.8e_total_mortgage_interest_points"]),
       "4.page2.interest_9_federal": (form) =>
-        federal(form["schedule-a.0.line.9_investment_interest"]),
+        numberOrBlank(form["schedule-a.0.line.9_investment_interest"]),
       /*
        * MANUAL EDIT: line 9 col B/C come from FTB 3526 line 10, the difference
        * between its line 8 (CA deduction) and line 9 (federal Form 4952 line 8):
@@ -286,33 +284,43 @@ export function register(): void {
         const ca = form["form-3526.0.line.8_investment_interest_deduction"];
         const fed = form["form-3526.0.line.9_federal_4952_line_8"];
         if (typeof ca !== "number" || typeof fed !== "number") return undefined;
-        return fed > ca ? federal(form["form-3526.0.line.10_california_adjustment"]) : undefined;
+        return fed > ca
+          ? numberOrBlank(form["form-3526.0.line.10_california_adjustment"])
+          : undefined;
       },
       "4.page2.interest_9_additions": (form) => {
         const ca = form["form-3526.0.line.8_investment_interest_deduction"];
         const fed = form["form-3526.0.line.9_federal_4952_line_8"];
         if (typeof ca !== "number" || typeof fed !== "number") return undefined;
-        return ca > fed ? federal(form["form-3526.0.line.10_california_adjustment"]) : undefined;
+        return ca > fed
+          ? numberOrBlank(form["form-3526.0.line.10_california_adjustment"])
+          : undefined;
       },
-      "4.page2.interest_10_federal": (form) => federal(form["schedule-a.0.line.10_total_interest"]),
+      "4.page2.interest_10_federal": (form) =>
+        numberOrBlank(form["schedule-a.0.line.10_total_interest"]),
       // Line 10: "Add line 8e and line 9" in each column (the form).
       "4.page2.interest_10_subtractions": (form) =>
-        sumIfAny(form["4.page2.interest_8e_subtractions"], form["4.page2.interest_9_subtractions"]),
+        sumOrBlank(
+          form["4.page2.interest_8e_subtractions"],
+          form["4.page2.interest_9_subtractions"],
+        ),
       "4.page2.interest_10_additions": (form) =>
-        sumIfAny(form["4.page2.interest_8e_additions"], form["4.page2.interest_9_additions"]),
+        sumOrBlank(form["4.page2.interest_8e_additions"], form["4.page2.interest_9_additions"]),
       "5.page2.charity_11_federal": (form) =>
-        federal(form["schedule-a.0.line.11_gifts_cash_check"]),
+        numberOrBlank(form["schedule-a.0.line.11_gifts_cash_check"]),
       "5.page2.charity_12_federal": (form) =>
-        federal(form["schedule-a.0.line.12_gifts_other_than_cash"]),
-      "5.page2.charity_13_federal": (form) => federal(form["schedule-a.0.line.13_gifts_carryover"]),
-      "5.page2.charity_14_federal": (form) => federal(form["schedule-a.0.line.14_total_gifts"]),
+        numberOrBlank(form["schedule-a.0.line.12_gifts_other_than_cash"]),
+      "5.page2.charity_13_federal": (form) =>
+        numberOrBlank(form["schedule-a.0.line.13_gifts_carryover"]),
+      "5.page2.charity_14_federal": (form) =>
+        numberOrBlank(form["schedule-a.0.line.14_total_gifts"]),
       "5.page2.casualty_15_federal": (form) =>
-        federal(form["schedule-a.0.line.15_casualty_theft_loss"]),
+        numberOrBlank(form["schedule-a.0.line.15_casualty_theft_loss"]),
       "5.page2.other_deductions_16_federal": (form) =>
-        federal(form["schedule-a.0.line.16_other_itemized_deductions_amount"]),
+        numberOrBlank(form["schedule-a.0.line.16_other_itemized_deductions_amount"]),
       // Line 17: "Add lines 4, 7, 10, 14, 15, and 16 in columns A, B, and C" (the form).
       "5.page2.total_itemized_17_federal": (form) =>
-        sumIfAny(
+        sumOrBlank(
           form["4.page2.medical_line4_federal"],
           form["4.page2.taxes_7_federal"],
           form["4.page2.interest_10_federal"],
@@ -321,7 +329,7 @@ export function register(): void {
           form["5.page2.other_deductions_16_federal"],
         ),
       "5.page2.total_itemized_17_subtractions": (form) =>
-        sumIfAny(
+        sumOrBlank(
           form["4.page2.taxes_7_subtractions"],
           form["4.page2.interest_10_subtractions"],
           form["5.page2.charity_14_subtractions"],
@@ -329,7 +337,7 @@ export function register(): void {
           form["5.page2.other_deductions_16_subtractions"],
         ),
       "5.page2.total_itemized_17_additions": (form) =>
-        sumIfAny(
+        sumOrBlank(
           form["4.page2.medical_line4_additions"],
           form["4.page2.taxes_7_additions"],
           form["4.page2.interest_10_additions"],
@@ -354,14 +362,14 @@ export function register(): void {
        * Line 25 is blank until line 22 has a value.
        */
       "5.page2.job_expenses_22_total": (form) =>
-        sumIfAny(
+        sumOrBlank(
           form["5.page2.job_expenses_19"],
           form["5.page2.job_expenses_20"],
           form["5.page2.job_expenses_21_amount"],
         ),
       "5.page2.job_expenses_23_agi": (form) => {
         if (form["schedule-a.0.line.17_total_itemized_deductions"] === undefined) return undefined;
-        return federal(form["form-1040.line.11b"]);
+        return numberOrBlank(form["form-1040.line.11b"]);
       },
       "5.page2.job_expenses_24_threshold": (form) => {
         const agi = form["5.page2.job_expenses_23_agi"];
@@ -376,10 +384,10 @@ export function register(): void {
       },
       // Line 26: "Add line 18 and line 25" (the form).
       "5.page2.total_itemized_26": (form) =>
-        sumIfAny(form["5.page2.total_itemized_18_combined"], form["5.page2.job_expenses_25_net"]),
+        sumOrBlank(form["5.page2.total_itemized_18_combined"], form["5.page2.job_expenses_25_net"]),
       // Line 28: "Combine line 26 and line 27" (the form). Line 27 may be negative.
       "5.page2.total_itemized_28": (form) =>
-        sumIfAny(form["5.page2.total_itemized_26"], form["5.page2.other_adjustments_27_amount"]),
+        sumOrBlank(form["5.page2.total_itemized_26"], form["5.page2.other_adjustments_27_amount"]),
       /*
        * MANUAL EDIT: line 28 when federal AGI is at or under the filing-status
        * threshold, else the Itemized Deductions Worksheet

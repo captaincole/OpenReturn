@@ -85,7 +85,13 @@ export function register(): void {
       "0.line.8b_mortgage_interest_not_form1098": (_, info) => info.mortgageInterestNotForm1098,
       // MANUAL EDIT: routed to FilingInfo slot.
       "0.line.8c_points_not_form1098": (_, info) => info.pointsNotForm1098,
-      "0.line.8e_total_mortgage_interest_points": (form) => {
+      /*
+       * MANUAL EDIT: a Form 1098 over the acquisition-debt limit leaves line 8a
+       * to Pub. 936, not modeled; lines 8e, 10 and 17 wait with it rather than
+       * add the other terms as if the interest were 0.
+       */
+      "0.line.8e_total_mortgage_interest_points": (form, info) => {
+        if (info.mortgageInterestLimited) return undefined;
         const line8a = form["0.line.8a_mortgage_interest_form1098"];
         const line8b = form["0.line.8b_mortgage_interest_not_form1098"];
         const line8c = form["0.line.8c_points_not_form1098"];
@@ -105,7 +111,8 @@ export function register(): void {
         // Without the form, only the exception allows the deduction (an opt-out decision does not).
         return info.noFormException === true ? info.investmentInterestPaid : undefined;
       },
-      "0.line.10_total_interest": (form) => {
+      "0.line.10_total_interest": (form, info) => {
+        if (info.mortgageInterestLimited) return undefined;
         const line8e = form["0.line.8e_total_mortgage_interest_points"];
         const nine = form["0.line.9_investment_interest"];
         if (line8e === undefined && nine === undefined) return undefined;
@@ -126,15 +133,17 @@ export function register(): void {
         }
         return sum(eleven, twelve, thirteen);
       },
-      "0.line.17_total_itemized_deductions": (form) =>
-        sum(
-          form["0.line.4_net_medical_dental"],
-          form["0.line.7_total_taxes"],
-          form["0.line.10_total_interest"],
-          form["0.line.14_total_gifts"],
-          form["0.line.15_casualty_theft_loss"],
-          form["0.line.16_other_itemized_deductions_amount"],
-        ),
+      "0.line.17_total_itemized_deductions": (form, info) =>
+        info.mortgageInterestLimited
+          ? undefined
+          : sum(
+              form["0.line.4_net_medical_dental"],
+              form["0.line.7_total_taxes"],
+              form["0.line.10_total_interest"],
+              form["0.line.14_total_gifts"],
+              form["0.line.15_casualty_theft_loss"],
+              form["0.line.16_other_itemized_deductions_amount"],
+            ),
     },
 
     // This SSN widget keeps the dashes; the 1040 comb widget strips them.

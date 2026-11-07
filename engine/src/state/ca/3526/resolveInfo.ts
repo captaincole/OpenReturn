@@ -2,18 +2,33 @@ import {
   INVESTMENT_INTEREST_KEYS,
   isDividendFactKey,
   isInterestFactKey,
+  isTradeFact,
 } from "../../../facts/index.js";
+import type { TaxFactRow } from "../../../facts/rows.js";
 import { resolve4952Info } from "../../../federal/4952/resolveInfo.js";
 import { sum } from "../../../money.js";
 import {
+  factsInCategory,
   missingInputs,
   num,
-  onlyInterestOrDividendIncome,
   resolveMustFile,
   sumInvestmentBox,
   type ResolverInputs,
 } from "../../../resolverInputs.js";
 import type { Form3526FilingInfo } from "./filingInfo.js";
+
+/*
+ * The FTB 3526 exception's first bullet: investment income from interest or
+ * dividends only, so no sale of investment property (no trade facts) and no
+ * capital gain distributions (1099-DIV box 2a).
+ */
+function onlyInterestOrDividendIncome(inputs: ResolverInputs): boolean {
+  const capitalGainDistributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
+  const trades = factsInCategory(inputs, "investment_income").filter((row) =>
+    isTradeFact(row as TaxFactRow),
+  );
+  return trades.length === 0 && capitalGainDistributions === 0;
+}
 
 /*
  * ca-3526-inst-2025::sec::b-who-must-file::b01: an individual who claims a
