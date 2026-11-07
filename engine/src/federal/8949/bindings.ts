@@ -5,7 +5,7 @@
  */
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
-import type { Form8949Box } from "../../facts/index.js";
+import { printsShareCount, type Form8949Box } from "../../facts/index.js";
 import { roundDollars, sum } from "../../money.js";
 import { ROWS_PER_PAGE, type Form8949Copy, type Form8949Page } from "./copyPlan.js";
 import type { Form8949FilingInfo } from "./filingInfo.js";
@@ -39,9 +39,15 @@ function currentCopy(info: Form8949FilingInfo): Form8949Copy | undefined {
   return info.form8949Copies?.[info.form8949CopyIndex ?? 0];
 }
 
-/* Brokers often print the quantity in box 1a already ("91.207 sh SAMPLE INC"). */
-function describe(quantity: number, description: string): string {
-  return /^\d/.test(description) ? description : `${quantity} sh ${description}`;
+/*
+ * Column (a): the number of shares and the description
+ * (irs-8949-inst-2025::sec::part-ii, "Column (a)—Description of Property").
+ * Brokers often print the count in box 1a already ("91.207 sh SAMPLE INC").
+ * Blank while the count is unknown, so the row waits for the taxpayer's answer.
+ */
+function describe(quantity: number | undefined, description: string): string | undefined {
+  if (printsShareCount(description)) return description;
+  return quantity === undefined ? undefined : `${quantity} sh ${description}`;
 }
 
 /* Empty rows return undefined so unused widgets do not render "0". */

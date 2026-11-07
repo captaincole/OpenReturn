@@ -34,3 +34,8 @@ export function getGamblingWinningsFacts(
     .filter((fact) => fact.category === W2G_CATEGORY && isGamblingWinningsFactKey(fact.key))
     .map((fact) => fact.value as GamblingWinningsFactValue);
 }
+
+/* Schedule 1 line 8b also takes winnings no payer reported on a W-2G (a verbal answer). */
+export const GAMBLING_KEYS = {
+  winningsNotOnW2G: "gambling.winnings_not_on_w2g",
+} as const;

@@ -42,6 +42,7 @@ covers (alex: one W-2; alejandro: investment income; marcus: capital
 gains; jordan: high income, HSA, rollovers, crypto; carter: MFS,
 Social Security, 1099-Rs; tara: household employee, home energy credit;
 tcb-us-003: MFJ, Roth conversion (Form 8606), senior deduction;
+tcb-us-004: MFJ, itemized deductions (Schedule A);
 tcb-us-006: MFS, a sole-proprietor business (Schedule C, SE, 8995-A),
 gambling winnings, Additional Medicare Tax, NIIT).
 

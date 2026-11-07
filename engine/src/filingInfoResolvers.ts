@@ -1,4 +1,5 @@
 import {
+  GAMBLING_KEYS,
   SPOUSE_KEYS,
   businessesOnReturn,
   getGamblingWinningsFacts,
@@ -182,6 +183,8 @@ export function resolve8949Info(inputs: ResolverInputs): Form8949FilingInfo {
   });
   return {
     mustFile: { "form-8949": resolution },
+    /* Column (a) needs the number of shares; a trade with none asks for it. */
+    missingInputs: { "form-8949": inputs.trades.missingQuantityKeys },
     shortTermTrades: inputs.trades.short,
     longTermTrades: inputs.trades.long,
     form8949Copies: planForm8949Copies(inputs.trades.boxed),
@@ -253,7 +256,11 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     onReturn.businesses.length + onReturn.spouseKeys.length + onReturn.malformedKeys.length > 0;
   const businessIncome = scheduleCTotal(onReturn);
   const w2gs = getGamblingWinningsFacts(inputs.facts);
-  const gamblingWinnings = w2gs.length > 0 ? sum(...w2gs.map((w2g) => w2g.box1)) : undefined;
+  const winningsNotOnW2G = num(inputs, GAMBLING_KEYS.winningsNotOnW2G);
+  const gamblingWinnings =
+    w2gs.length > 0 || winningsNotOnW2G !== undefined
+      ? sum(...w2gs.map((w2g) => w2g.box1), winningsNotOnW2G)
+      : undefined;
   // Schedule SE line 13 reaches the 1040 only through Schedule 1 line 15.
   const scheduleSE = resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value === true;
   const resolution = resolveMustFile(inputs.decisionByKey, {
@@ -404,9 +411,20 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
   const w2Box17 = sumW2Box(inputs, "box17");
   const caSdi = sumCaSdi(factsInCategory(inputs, "wages"));
   const estStateTax = num(inputs, "state_local_tax.estimated_payments");
+  const medicalDentalExpenses = num(inputs, "medical.expenses_total");
+  const giftsCashCheck = num(inputs, "charitable.cash");
+  const giftsOtherThanCash = num(inputs, "charitable.noncash");
   return {
     mustFile: { "schedule-a": resolution },
-    medicalDentalExpenses: num(inputs, "medical.expenses_total"),
+    /* An itemizer answers these once; 0 is an answer. Blank lines would hide a deduction. */
+    missingInputs: {
+      "schedule-a": missingInputs({
+        "medical.expenses_total": medicalDentalExpenses,
+        "charitable.cash": giftsCashCheck,
+        "charitable.noncash": giftsOtherThanCash,
+      }),
+    },
+    medicalDentalExpenses,
     stateLocalIncomeTaxPaid: w2Box17 + caSdi + (estStateTax ?? 0),
     generalSalesTaxElection: decisionByKey.get("decisions.itemized.elect_general_sales_tax") as
       boolean | undefined,
@@ -416,8 +434,8 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
     mortgageInterestNotForm1098: num(inputs, "mortgage.interest_not_form_1098"),
     pointsNotForm1098: num(inputs, "mortgage.points_not_form_1098"),
     investmentInterest: num(inputs, "investment_income.investment_interest_expense"),
-    giftsCashCheck: num(inputs, "charitable.cash"),
-    giftsOtherThanCash: num(inputs, "charitable.noncash"),
+    giftsCashCheck,
+    giftsOtherThanCash,
     giftsCarryover: num(inputs, "charitable.carryover"),
   };
 }

@@ -12,7 +12,8 @@ export interface TradeFactValue {
   description: string;
   cusip?: string;
   symbol?: string;
-  quantity: number;
+  /* Blank when the broker prints none (box 1a holds only a description). */
+  quantity?: number;
   /* "MM/DD/YY" as printed, or "VARIOUS". Noncovered sales can leave it blank. */
   dateAcquired?: string;
   dateSold: string;
@@ -73,6 +74,20 @@ export function makeReportedBasisFactKey(accountSlug: string, tradeId: string): 
 
 export function isReportedBasisFact(fact: TaxFactRow): boolean {
   return fact.category === REPORTED_BASIS_CATEGORY && fact.key.endsWith(".reported_basis");
+}
+
+/* Form 8949 column (a) wants the number of shares. When box 1a prints none, the taxpayer states it. */
+export function makeStatedQuantityFactKey(accountSlug: string, tradeId: string): string {
+  return `${makeTradeFactKey(accountSlug, tradeId)}.quantity`;
+}
+
+export function isStatedQuantityFact(fact: TaxFactRow): boolean {
+  return fact.category === REPORTED_BASIS_CATEGORY && fact.key.endsWith(".quantity");
+}
+
+/* Box 1a sometimes carries the count already: "91.207 sh SAMPLE INC", "100 shares XYZ". */
+export function printsShareCount(description: string): boolean {
+  return /^\d[\d,.]*\s*(sh|shs|shares)\b/i.test(description);
 }
 
 export function makeTradeFactKey(accountSlug: string, tradeId: string): string {

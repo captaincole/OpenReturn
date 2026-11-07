@@ -1,4 +1,5 @@
 import {
+  GAMBLING_KEYS,
   businessesOnReturn,
   getGamblingWinningsFacts,
   isDividendFactKey,
@@ -13,6 +14,7 @@ import {
 import { atLeast, sum } from "../../money.js";
 import {
   factsInCategory,
+  num,
   sumInvestmentBox,
   sumW2Box,
   type ResolverInputs,
@@ -57,6 +59,7 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
       atLeast(0, tentativeProfit(value) ?? sum(netReceipts(value), value.otherIncome)),
     ),
     ...getGamblingWinningsFacts(inputs.facts).map((w2g) => w2g.box1),
+    num(inputs, GAMBLING_KEYS.winningsNotOnW2G),
     ...misc.map((row) => (row.value as Record<string, unknown>).box3),
     ...retirement.map(({ value }) => {
       const distribution = value as RetirementDistributionFactValue;
