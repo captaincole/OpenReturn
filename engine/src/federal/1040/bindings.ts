@@ -6,11 +6,7 @@
 
 import { lookupTax } from "../../data/taxTable.js";
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
-import {
-  livedWithTaxpayerOverHalfYear,
-  type DependentCredit,
-  type DependentFactValue,
-} from "../../facts/kinds/dependents.js";
+import type { DependentCredit, DependentFactValue } from "../../facts/kinds/dependents.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { ssn } from "../../values.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
@@ -19,9 +15,6 @@ import { form1040Line7a } from "../schedule-d/lines.js";
 import { awaitsSchedule1A, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
-
-// MANUAL EDIT: the Dependents table pins its age rules to 2025, like Schedule 8812's resolver.
-const TAX_YEAR = 2025;
 
 type Bindings = Partial<{ [K in keyof Form1040]: BindingFn<Form1040, Form1040FilingInfo, K> }>;
 type RowBinding = (form: FormAccessor<Form1040>, info: Form1040FilingInfo) => unknown;
@@ -40,38 +33,28 @@ function dependentTin(dep: DependentFactValue | undefined) {
   return raw === undefined ? undefined : ssn(raw);
 }
 
-// Row (5)(a): lived with you more than half of 2025 (a child born in the year counts the months alive).
-function livedWithYou(dep: DependentFactValue | undefined): boolean | undefined {
-  return dep === undefined ? undefined : livedWithTaxpayerOverHalfYear(dep, TAX_YEAR);
-}
-
-// Row (5)(b): "And in the U.S." is a sub-question of (a), so it needs (a) too.
-function livedWithYouInUs(dep: DependentFactValue | undefined): boolean | undefined {
-  const withYou = livedWithYou(dep);
-  if (withYou === undefined || dep?.livedInUs === undefined) return undefined;
-  return withYou && dep.livedInUs;
-}
-
 /*
  * MANUAL EDIT: the Dependents table, rows 1 to 4, one row per dependent fact in
- * the order recorded. Row (7) prints the credit Schedule 8812's resolver
- * decided for the person; neither box while an answer is still missing. A row
- * with no dependent stays blank.
+ * the order recorded. Rows (5) and (7) print what Schedule 8812's resolver
+ * decided for the person (the one place that applies the tax year); a box stays
+ * blank while an answer is still missing. A row with no dependent stays blank.
  */
 function dependentRowBindings(): Bindings {
   const bindings: Record<string, RowBinding> = {};
   for (const row of [1, 2, 3, 4]) {
-    const dep = (info: Form1040FilingInfo) => info.dependents?.[row - 1]?.dependent;
+    const entry = (info: Form1040FilingInfo) => info.dependents?.[row - 1];
+    const dep = (info: Form1040FilingInfo) => entry(info)?.dependent;
     const checks = (info: Form1040FilingInfo, box: DependentCredit) => {
-      const credit = info.dependents?.[row - 1]?.credit;
+      const credit = entry(info)?.credit;
       return credit === undefined ? undefined : credit === box;
     };
     bindings[`dependents.dep${row}_first_name`] = (_, info) => dep(info)?.firstName;
     bindings[`dependents.dep${row}_last_name`] = (_, info) => dep(info)?.lastName;
     bindings[`dependents.dep${row}_ssn`] = (_, info) => dependentTin(dep(info));
     bindings[`dependents.dep${row}_relationship`] = (_, info) => dep(info)?.relationship;
-    bindings[`dependents.dep${row}_lived_with_you`] = (_, info) => livedWithYou(dep(info));
-    bindings[`dependents.dep${row}_lived_in_us`] = (_, info) => livedWithYouInUs(dep(info));
+    bindings[`dependents.dep${row}_lived_with_you`] = (_, info) =>
+      entry(info)?.livedWithYouOverHalfYear;
+    bindings[`dependents.dep${row}_lived_in_us`] = (_, info) => entry(info)?.livedWithYouInUs;
     bindings[`dependents.dep${row}_full_time_student`] = (_, info) => dep(info)?.fullTimeStudent;
     bindings[`dependents.dep${row}_permanently_disabled`] = (_, info) =>
       dep(info)?.permanentlyDisabled;
