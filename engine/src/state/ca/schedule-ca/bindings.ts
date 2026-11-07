@@ -7,8 +7,27 @@
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { defineForm } from "../../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../../money.js";
+import type { FilingStatus } from "../../../values.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import type { ScheduleCa } from "./types.js";
+
+/*
+ * MANUAL EDIT: Part II line 29. Federal AGI (Form 540 line 13) above this
+ * sends line 28 through the Itemized Deductions Worksheet
+ * (ca-540-sched-ca-inst-2025::sec::line-29-california-itemized-deductions::b02).
+ */
+const LINE_29_FEDERAL_AGI_THRESHOLD = {
+  single: 252203,
+  married_filing_separately: 252203,
+  head_of_household: 378310,
+  married_filing_jointly: 504411,
+  qualifying_surviving_spouse: 504411,
+} as const satisfies Record<FilingStatus, number>;
+/* Itemized Deductions Worksheet lines 4 and 8 (ca-540-sched-ca-inst-2025::sec::itemized-deductions-worksheet::b01). */
+const WORKSHEET_LINE_4_RATE = 0.8;
+const WORKSHEET_LINE_8_RATE = 0.06;
+/* Part II line 24: the 2% floor on job expenses (the form; the line has no section). */
+const JOB_EXPENSES_FLOOR_RATE = 0.02;
 
 /* Blank, not 0, when every term is blank (printed-zero rule). */
 function sumIfAny(...values: unknown[]): number | undefined {
@@ -17,6 +36,38 @@ function sumIfAny(...values: unknown[]): number | undefined {
 
 const federal = (value: unknown): number | undefined =>
   typeof value === "number" ? value : undefined;
+
+const text = (value: unknown): string | undefined =>
+  typeof value === "string" ? value : undefined;
+
+/*
+ * MANUAL EDIT: the Itemized Deductions Worksheet for Part II line 29
+ * (ca-540-sched-ca-inst-2025::sec::itemized-deductions-worksheet::b01).
+ * Worksheet line 2 adds Schedule A lines 4, 9, 15 and gambling losses in
+ * line 16; the engine cannot split gambling losses out of line 16, so a
+ * filled line 16 leaves line 29 blank.
+ */
+function itemizedDeductionsWorksheet(input: {
+  line28: number;
+  federalAgi: number;
+  threshold: number;
+  scheduleALine4: unknown;
+  scheduleALine9: unknown;
+  scheduleALine15: unknown;
+  scheduleALine16: unknown;
+}): number | undefined {
+  if (input.scheduleALine16 !== undefined) return undefined;
+  const line1 = input.line28;
+  const line2 = sum(input.scheduleALine4, input.scheduleALine9, input.scheduleALine15);
+  const line3 = line1 - line2;
+  if (line3 <= 0) return line1;
+  const line4 = roundDollars(line3 * WORKSHEET_LINE_4_RATE);
+  const line7 = input.federalAgi - input.threshold;
+  if (line7 <= 0) return line1;
+  const line8 = roundDollars(line7 * WORKSHEET_LINE_8_RATE);
+  const line9 = Math.min(line4, line8);
+  return line1 - line9;
+}
 
 export function register(): void {
   defineForm<ScheduleCa, ScheduleCaFilingInfo>("schedule-ca", {
@@ -153,6 +204,205 @@ export function register(): void {
           form["2.line.b10_federal"],
           form["3.line.c26_federal"] === undefined ? 0 : -form["3.line.c26_federal"],
         ),
+      // MANUAL EDIT: col A copies 1040 line 3a (ca-540-sched-ca-inst-2025::sec::section-a-line-1a-through-line-7a-and-section-b-line-1-through-line-9a::b01).
+      "0.line.3a_federal": (form) => federal(form["form-1040.line.3a"]),
+      /*
+       * MANUAL EDIT: the Part II box: itemized for California while the federal
+       * return took the standard deduction. Schedule A evaluated (line 17
+       * present) with 1040 line 12e not equal to it, and Form 540 line 18 taking
+       * the itemized total (line 30 = line 29)
+       * (ca-540-sched-ca-inst-2025::sec::part-ii-adjustments-to-federal-itemized-deductions::b01).
+       */
+      "4.page2.itemize_ca_not_federal": (form) => {
+        const scheduleALine17 = federal(form["schedule-a.0.line.17_total_itemized_deductions"]);
+        const federalDeduction = federal(form["form-1040.line.12e"]);
+        const line29 = form["5.page2.total_itemized_29"];
+        const line30 = form["5.page2.total_itemized_30_standard_or_itemized"];
+        if (scheduleALine17 === undefined || federalDeduction === undefined) return undefined;
+        if (typeof line29 !== "number" || typeof line30 !== "number") return undefined;
+        return federalDeduction !== scheduleALine17 && line30 === line29 ? true : undefined;
+      },
+      /*
+       * MANUAL EDIT: Part II col A, lines 1–16, copies federal Schedule A line
+       * for line (ca-540-sched-ca-inst-2025::sec::line-1-through-line-16::b01).
+       * Blank when Schedule A is not filed.
+       */
+      "4.page2.medical_dental_expenses": (form) =>
+        federal(form["schedule-a.0.line.1_medical_dental_expenses"]),
+      "4.page2.medical_agi_line11b": (form) => federal(form["schedule-a.0.line.2_agi_from_1040"]),
+      "4.page2.medical_agi_threshold": (form) =>
+        federal(form["schedule-a.0.line.3_agi_multiplied"]),
+      "4.page2.medical_line4_federal": (form) =>
+        federal(form["schedule-a.0.line.4_net_medical_dental"]),
+      "4.page2.taxes_5a_federal": (form) =>
+        federal(form["schedule-a.0.line.5a_state_local_income_or_sales_tax"]),
+      // MANUAL EDIT: CA allows no state/local income or sales tax deduction: col B takes all of col A (ca-540-sched-ca-inst-2025::sec::line-5a-state-and-local-taxes::b01).
+      "4.page2.taxes_5a_subtractions": (form) => federal(form["4.page2.taxes_5a_federal"]),
+      "4.page2.taxes_5b_federal": (form) => federal(form["schedule-a.0.line.5b_real_estate_taxes"]),
+      "4.page2.taxes_5c_federal": (form) =>
+        federal(form["schedule-a.0.line.5c_personal_property_taxes"]),
+      "4.page2.taxes_5d_federal": (form) =>
+        federal(form["schedule-a.0.line.5d_total_state_local_taxes"]),
+      "4.page2.taxes_5e_federal": (form) => federal(form["schedule-a.0.line.5e_salt_cap"]),
+      // MANUAL EDIT: the form: "Enter the amount from line 5a, column B in line 5e, column B."
+      "4.page2.taxes_5e_subtractions": (form) => federal(form["4.page2.taxes_5a_subtractions"]),
+      /*
+       * MANUAL EDIT: CA does not conform to the federal SALT cap: col C takes the
+       * amount over the cap, only when the cap applied
+       * (ca-540-sched-ca-inst-2025::sec::line-5a-state-and-local-taxes::b01).
+       */
+      "4.page2.taxes_5e_additions": (form) => {
+        const line5d = form["4.page2.taxes_5d_federal"];
+        const line5e = form["4.page2.taxes_5e_federal"];
+        if (typeof line5d !== "number" || typeof line5e !== "number") return undefined;
+        return line5d > line5e ? line5d - line5e : undefined;
+      },
+      "4.page2.taxes_6_type": (form) => text(form["schedule-a.0.line.6_other_taxes_description"]),
+      "4.page2.taxes_6_federal": (form) => federal(form["schedule-a.0.line.6_other_taxes_amount"]),
+      "4.page2.taxes_7_federal": (form) => federal(form["schedule-a.0.line.7_total_taxes"]),
+      // Line 7: "Add line 5e and line 6" in each column (the form).
+      "4.page2.taxes_7_subtractions": (form) =>
+        sumIfAny(form["4.page2.taxes_5e_subtractions"], form["4.page2.taxes_6_subtractions"]),
+      "4.page2.taxes_7_additions": (form) =>
+        sumIfAny(form["4.page2.taxes_5e_additions"], form["4.page2.taxes_6_additions"]),
+      "4.page2.interest_8a_federal": (form) =>
+        federal(form["schedule-a.0.line.8a_mortgage_interest_form1098"]),
+      "4.page2.interest_8b_federal": (form) =>
+        federal(form["schedule-a.0.line.8b_mortgage_interest_not_form1098"]),
+      "4.page2.interest_8c_federal": (form) =>
+        federal(form["schedule-a.0.line.8c_points_not_form1098"]),
+      "4.page2.interest_8e_federal": (form) =>
+        federal(form["schedule-a.0.line.8e_total_mortgage_interest_points"]),
+      "4.page2.interest_9_federal": (form) =>
+        federal(form["schedule-a.0.line.9_investment_interest"]),
+      /*
+       * MANUAL EDIT: line 9 col B/C come from FTB 3526 line 10, the difference
+       * between its line 8 (CA deduction) and line 9 (federal Form 4952 line 8):
+       * col C when CA allows more, col B when federal allows more
+       * (ca-540-sched-ca-inst-2025::sec::line-9-investment-interest::b01,
+       * ca-3526-inst-2025::sec::line-10::b01). Blank when FTB 3526 is not filed.
+       */
+      "4.page2.interest_9_subtractions": (form) => {
+        const ca = form["form-3526.0.line.8_investment_interest_deduction"];
+        const fed = form["form-3526.0.line.9_federal_4952_line_8"];
+        if (typeof ca !== "number" || typeof fed !== "number") return undefined;
+        return fed > ca ? federal(form["form-3526.0.line.10_california_adjustment"]) : undefined;
+      },
+      "4.page2.interest_9_additions": (form) => {
+        const ca = form["form-3526.0.line.8_investment_interest_deduction"];
+        const fed = form["form-3526.0.line.9_federal_4952_line_8"];
+        if (typeof ca !== "number" || typeof fed !== "number") return undefined;
+        return ca > fed ? federal(form["form-3526.0.line.10_california_adjustment"]) : undefined;
+      },
+      "4.page2.interest_10_federal": (form) => federal(form["schedule-a.0.line.10_total_interest"]),
+      // Line 10: "Add line 8e and line 9" in each column (the form).
+      "4.page2.interest_10_subtractions": (form) =>
+        sumIfAny(form["4.page2.interest_8e_subtractions"], form["4.page2.interest_9_subtractions"]),
+      "4.page2.interest_10_additions": (form) =>
+        sumIfAny(form["4.page2.interest_8e_additions"], form["4.page2.interest_9_additions"]),
+      "5.page2.charity_11_federal": (form) =>
+        federal(form["schedule-a.0.line.11_gifts_cash_check"]),
+      "5.page2.charity_12_federal": (form) =>
+        federal(form["schedule-a.0.line.12_gifts_other_than_cash"]),
+      "5.page2.charity_13_federal": (form) => federal(form["schedule-a.0.line.13_gifts_carryover"]),
+      "5.page2.charity_14_federal": (form) => federal(form["schedule-a.0.line.14_total_gifts"]),
+      "5.page2.casualty_15_federal": (form) =>
+        federal(form["schedule-a.0.line.15_casualty_theft_loss"]),
+      "5.page2.other_deductions_16_federal": (form) =>
+        federal(form["schedule-a.0.line.16_other_itemized_deductions_amount"]),
+      // Line 17: "Add lines 4, 7, 10, 14, 15, and 16 in columns A, B, and C" (the form).
+      "5.page2.total_itemized_17_federal": (form) =>
+        sumIfAny(
+          form["4.page2.medical_line4_federal"],
+          form["4.page2.taxes_7_federal"],
+          form["4.page2.interest_10_federal"],
+          form["5.page2.charity_14_federal"],
+          form["5.page2.casualty_15_federal"],
+          form["5.page2.other_deductions_16_federal"],
+        ),
+      "5.page2.total_itemized_17_subtractions": (form) =>
+        sumIfAny(
+          form["4.page2.taxes_7_subtractions"],
+          form["4.page2.interest_10_subtractions"],
+          form["5.page2.charity_14_subtractions"],
+          form["5.page2.casualty_15_subtractions"],
+          form["5.page2.other_deductions_16_subtractions"],
+        ),
+      "5.page2.total_itemized_17_additions": (form) =>
+        sumIfAny(
+          form["4.page2.medical_line4_additions"],
+          form["4.page2.taxes_7_additions"],
+          form["4.page2.interest_10_additions"],
+          form["5.page2.charity_14_additions"],
+          form["5.page2.casualty_15_additions"],
+          form["5.page2.other_deductions_16_additions"],
+        ),
+      // Line 18: "Combine line 17 column A less column B plus column C" (the form).
+      "5.page2.total_itemized_18_combined": (form) => {
+        const colA = form["5.page2.total_itemized_17_federal"];
+        const colB = form["5.page2.total_itemized_17_subtractions"];
+        const colC = form["5.page2.total_itemized_17_additions"];
+        if (colA === undefined && colB === undefined && colC === undefined) return undefined;
+        return sum(colA, colB === undefined ? 0 : -colB, colC);
+      },
+      /*
+       * MANUAL EDIT: lines 22–25, the job-expenses block CA keeps
+       * (ca-540-sched-ca-inst-2025::sec::line-19-through-line-22-job-expenses-and-certain-miscellaneous-deductions::b01).
+       * Lines 23 and 24 fill from federal AGI once Part II is in use, which
+       * needs a completed federal Schedule A
+       * (ca-540-sched-ca-inst-2025::sec::part-ii-adjustments-to-federal-itemized-deductions::b01).
+       * Line 25 is blank until line 22 has a value.
+       */
+      "5.page2.job_expenses_22_total": (form) =>
+        sumIfAny(
+          form["5.page2.job_expenses_19"],
+          form["5.page2.job_expenses_20"],
+          form["5.page2.job_expenses_21_amount"],
+        ),
+      "5.page2.job_expenses_23_agi": (form) => {
+        if (form["schedule-a.0.line.17_total_itemized_deductions"] === undefined) return undefined;
+        return federal(form["form-1040.line.11b"]);
+      },
+      "5.page2.job_expenses_24_threshold": (form) => {
+        const agi = form["5.page2.job_expenses_23_agi"];
+        return typeof agi === "number"
+          ? atLeast(0, roundDollars(agi * JOB_EXPENSES_FLOOR_RATE))
+          : undefined;
+      },
+      "5.page2.job_expenses_25_net": (form) => {
+        const line22 = form["5.page2.job_expenses_22_total"];
+        if (typeof line22 !== "number") return undefined;
+        return atLeast(0, line22 - sum(form["5.page2.job_expenses_24_threshold"]));
+      },
+      // Line 26: "Add line 18 and line 25" (the form).
+      "5.page2.total_itemized_26": (form) =>
+        sumIfAny(form["5.page2.total_itemized_18_combined"], form["5.page2.job_expenses_25_net"]),
+      // Line 28: "Combine line 26 and line 27" (the form). Line 27 may be negative.
+      "5.page2.total_itemized_28": (form) =>
+        sumIfAny(form["5.page2.total_itemized_26"], form["5.page2.other_adjustments_27_amount"]),
+      /*
+       * MANUAL EDIT: line 28 when federal AGI is at or under the filing-status
+       * threshold, else the Itemized Deductions Worksheet
+       * (ca-540-sched-ca-inst-2025::sec::line-29-california-itemized-deductions::b02).
+       * Form 540 line 13 is federal AGI, form-1040 line 11b.
+       */
+      "5.page2.total_itemized_29": (form, info) => {
+        const line28 = form["5.page2.total_itemized_28"];
+        if (typeof line28 !== "number" || !info.filingStatus) return undefined;
+        const federalAgi = form["form-1040.line.11b"];
+        if (typeof federalAgi !== "number") return undefined;
+        const threshold = LINE_29_FEDERAL_AGI_THRESHOLD[info.filingStatus];
+        if (federalAgi <= threshold) return line28;
+        return itemizedDeductionsWorksheet({
+          line28,
+          federalAgi,
+          threshold,
+          scheduleALine4: form["schedule-a.0.line.4_net_medical_dental"],
+          scheduleALine9: form["schedule-a.0.line.9_investment_interest"],
+          scheduleALine15: form["schedule-a.0.line.15_casualty_theft_loss"],
+          scheduleALine16: form["schedule-a.0.line.16_other_itemized_deductions_amount"],
+        });
+      },
       // MANUAL EDIT: the larger of the CA standard deduction and line 29. Form 540 line 18 reads this field.
       "5.page2.total_itemized_30_standard_or_itemized": (form, info) => {
         if (!info.filingStatus) return undefined;
@@ -203,50 +453,6 @@ export function register(): void {
         "Line 26 col B — aggregates 11-23+25 col B; all upstream rows are unsupported.",
       "3.line.c26_additions":
         "Line 26 col C — aggregates 11-23+25 col C; all upstream rows are unsupported.",
-      "4.page2.taxes_5d_federal":
-        "Schedule CA Part II line 5d (taxes paid, col A) — itemized-deduction workflow not supported yet.",
-      "4.page2.taxes_5e_subtractions":
-        "Schedule CA Part II line 5e col B — itemized-deduction workflow not supported yet.",
-      "4.page2.taxes_7_federal":
-        "Schedule CA Part II line 7 col A — itemized-deduction workflow not supported yet.",
-      "4.page2.taxes_7_subtractions":
-        "Schedule CA Part II line 7 col B — itemized-deduction workflow not supported yet.",
-      "4.page2.taxes_7_additions":
-        "Schedule CA Part II line 7 col C — itemized-deduction workflow not supported yet.",
-      "4.page2.interest_8e_federal":
-        "Schedule CA Part II line 8e col A (mortgage interest) — itemized-deduction workflow not supported yet.",
-      "4.page2.interest_10_federal":
-        "Schedule CA Part II line 10 col A — itemized-deduction workflow not supported yet.",
-      "4.page2.interest_10_subtractions":
-        "Schedule CA Part II line 10 col B — itemized-deduction workflow not supported yet.",
-      "4.page2.interest_10_additions":
-        "Schedule CA Part II line 10 col C — itemized-deduction workflow not supported yet.",
-      "5.page2.charity_14_federal":
-        "Schedule CA Part II line 14 col A (gifts to charity) — itemized-deduction workflow not supported yet.",
-      "5.page2.charity_14_subtractions":
-        "Schedule CA Part II line 14 col B — itemized-deduction workflow not supported yet.",
-      "5.page2.charity_14_additions":
-        "Schedule CA Part II line 14 col C — itemized-deduction workflow not supported yet.",
-      "5.page2.total_itemized_17_federal":
-        "Schedule CA Part II line 17 col A (total itemized) — itemized-deduction workflow not supported yet.",
-      "5.page2.total_itemized_17_additions":
-        "Schedule CA Part II line 17 col C — itemized-deduction workflow not supported yet.",
-      "5.page2.total_itemized_18_combined":
-        "Schedule CA Part II line 18 (combined) — itemized-deduction workflow not supported yet.",
-      "5.page2.job_expenses_22_total":
-        "Schedule CA Part II line 22 (job expenses subtotal) — itemized-deduction workflow not supported yet.",
-      "5.page2.job_expenses_25_net":
-        "Schedule CA Part II line 25 (net job expenses) — itemized-deduction workflow not supported yet.",
-      "5.page2.total_itemized_26":
-        "Schedule CA Part II line 26 (itemized + job expenses subtotal) — itemized-deduction workflow not supported yet.",
-      "5.page2.total_itemized_28":
-        "Schedule CA Part II line 28 — itemized-deduction workflow not supported yet.",
-      "0.line.3a_federal":
-        "Schedule CA Part I line 3a Column A (federal amounts) is conventionally left blank: per CA instructions, dividends generally match between federal and CA, so col A is only meaningful when there's a CA-specific adjustment in col B/C — which we don't model yet.",
-      "4.page2.medical_agi_line11b":
-        "Schedule CA Part II medical-deduction worksheet AGI input — only relevant when itemizing medical/dental expenses. We don't support non-standard-deduction workflows yet.",
-      "5.page2.job_expenses_23_agi":
-        "Schedule CA Part II job-expenses worksheet AGI input — only relevant when itemizing unreimbursed job expenses. We don't support non-standard-deduction workflows yet.",
       "0.line.1a_subtractions":
         "CA-specific subtraction adjustments to W-2 wages (e.g. active-duty military pay exclusions, combat zone exclusions) require specialized facts/scenarios not yet ingested.",
       "0.line.1b_subtractions":
@@ -513,106 +719,55 @@ export function register(): void {
         "Line 24z 'Other adjustments' Column B subtractions is a free-form catch-all for miscellaneous CA-specific subtraction adjustments not covered by lines 24a–24k. No fact or decision maps to this; needs scenario-specific ingestion.",
       "3.line.c24z_additions":
         "Line 24z 'Other adjustments' Column C additions is a free-form catch-all for miscellaneous CA-specific addition adjustments. No fact or decision maps to this; needs scenario-specific ingestion.",
-      "4.page2.itemize_ca_not_federal":
-        "No decision or scenario models the case where a taxpayer itemizes for CA but not federally. This checkbox requires a dedicated 'itemize_ca_not_federal' decision we haven't built yet.",
-      "4.page2.medical_dental_expenses":
-        "No medical/dental expense facts have been ingested. This field requires a separate fact-ingestion path for unreimbursed medical costs (e.g. from federal Schedule A).",
-      "4.page2.medical_agi_threshold":
-        "Requires multiplying line 2 by 7.5% — no multiply rule exists in the rule library. Cannot compute line 2 × 0.075 with available rules.",
-      "4.page2.medical_line4_federal":
-        "Requires subtracting the unsupported medical_agi_threshold (line 3) from the unsupported medical_dental_expenses (line 1), floored at 0. Both upstream lines are unsupported so this line cannot be computed.",
       "4.page2.medical_line4_additions":
-        "CA additions for Part 2 medical line 4 require knowing the CA-specific medical threshold difference vs. federal, which depends on the unsupported medical expense and threshold lines. No scenario or fact path exists yet.",
-      "4.page2.taxes_5a_federal":
-        "Requires federal Schedule A (Form 1040) line 5a (state and local income tax or general sales taxes). Schedule A has not been ingested as a catalog form; no fieldId available to reference.",
-      "4.page2.taxes_5a_subtractions":
-        "CA requires that the state/local income tax amount from line 5a column A be fully entered as a subtraction in column B. However, the source (Schedule A line 5a federal amount) is itself unsupported because Schedule A is not ingested.",
-      "4.page2.taxes_5b_federal":
-        "Requires federal Schedule A (Form 1040) line 5b (state and local real estate taxes). Schedule A has not been ingested as a catalog form; no fieldId available to reference.",
-      "4.page2.taxes_5c_federal":
-        "No ingested fact for state and local personal property taxes; would require a Schedule A / personal property tax fact category we haven't built yet.",
-      "4.page2.taxes_5e_federal":
-        "Requires min(line_5d, filing_status_cap) logic — the engine has no 'min of two values' rule. Line 5e Column A = smaller of line 5d or $40,000 ($20,000 MFS). Cannot express this with available rules.",
-      "4.page2.taxes_5e_additions":
-        "Line 5e Column C = difference between line 5d and line 5e Column A (i.e., amount of SALT deduction over the $40k/$20k federal cap). Requires subtraction of two computed fields and depends on line 5e_federal being computed first; no rule supports this derived difference today.",
-      "4.page2.taxes_6_type":
-        "Free-text description of 'other taxes' type (e.g., foreign income tax, generation-skipping tax). No ingested fact for this narrative field.",
-      "4.page2.taxes_6_federal":
-        "No ingested fact for other taxes (e.g., foreign income taxes, generation-skipping transfer taxes) from federal Schedule A line 6. Would require a Schedule A other-taxes fact category.",
+        "Line 4 col C takes CA-only medical expenses: self-employed health insurance for CA employees (no fact kind) and HSA-paid expenses over the floor (Form 8889 line 15 exists but is not wired to this line yet).",
       "4.page2.taxes_6_subtractions":
-        "CA subtraction for line 6 other taxes (e.g., foreign income taxes not deductible in CA, generation-skipping taxes). Requires Schedule A other-taxes fact ingestion and CA conformity logic not yet built.",
+        "Line 6 col B (foreign income taxes, generation-skipping transfer tax) needs Schedule A line 6 detail, which has no data path.",
       "4.page2.taxes_6_additions":
-        "CA addition for line 6 other taxes (e.g., foreign property taxes suspended federally but deductible in CA). Requires Schedule A foreign-property-tax fact ingestion not yet built.",
-      "4.page2.interest_8a_federal":
-        "No mortgage interest (Form 1098) fact ingestion path exists yet. Requires a 1098 fact category to populate home mortgage interest. Downstream sum (line 8e) will treat as 0.",
+        "Line 6 col C (foreign property taxes) has no fact kind or decision.",
       "4.page2.interest_8a_additions":
-        "CA conformity adjustment for mortgage interest (pre-TCJA $1M limit vs federal $750k limit, or home equity interest) requires 1098 fact ingestion and a scenario where federal and CA limits diverge. No such scenario or fact path exists yet.",
-      "4.page2.interest_8b_federal":
-        "Home mortgage interest not reported on Form 1098 requires a dedicated fact (e.g. seller-financed mortgage). No such fact ingestion path exists yet.",
+        "Line 8a col C (interest over the federal $750,000 acquisition-debt limit, home equity interest, mortgage interest credit) needs the mortgage balance; no fact kind holds it.",
       "4.page2.interest_8b_additions":
-        "CA conformity addition for line 8b requires 1098/non-1098 mortgage interest facts not yet ingested.",
-      "4.page2.interest_8c_federal":
-        "Points not reported on Form 1098 require a dedicated mortgage-points fact. No such fact ingestion path exists yet.",
+        "Line 8b col C needs the federal limit on non-1098 mortgage interest; no fact kind holds the mortgage balance.",
       "4.page2.interest_8c_additions":
-        "CA conformity addition for points (line 8c) requires mortgage-points facts not yet ingested.",
-      "4.page2.interest_8e_additions":
-        "CA additions to home mortgage interest (line 8e Col C) require taxpayer-specific adjustments per CA mortgage interest rules — no fact ingestion path exists for CA-specific home mortgage interest addition scenarios.",
-      "4.page2.interest_9_federal":
-        "Investment interest expense from federal Schedule A line 9 — no Schedule A ingestion exists; would require FTB 3526 data.",
-      "4.page2.interest_9_subtractions":
-        "CA investment interest subtractions per FTB 3526 — no FTB 3526 ingestion or investment-interest-expense fact path exists.",
-      "4.page2.interest_9_additions":
-        "CA investment interest additions per FTB 3526 — no FTB 3526 ingestion or investment-interest-expense fact path exists.",
-      "5.page2.charity_11_federal":
-        "Gifts by cash or check (federal Schedule A line 11) — no Schedule A ingestion exists; no charitable contribution fact path available.",
-      "5.page2.charity_11_subtractions":
-        "CA charitable contribution subtractions (line 11 Col B) — CA limits contributions to 50% of AGI per FTB 3526 guidance; no charitable-contribution fact or FTB worksheet ingestion exists.",
-      "5.page2.charity_11_additions":
-        "CA charitable contribution additions (line 11 Col C) — no scenario or fact path exists for charitable amounts that are higher for CA than federal.",
-      "5.page2.charity_12_federal":
-        "Non-cash charitable gifts (federal Schedule A line 12) — no fact ingestion path for non-cash charitable contribution amounts; requires taxpayer-provided data from Form 8283 or similar.",
-      "5.page2.charity_12_subtractions":
-        "CA adjustment for non-cash charitable gifts (line 12, col B) — requires FTB Pub. 1001 worksheet for CA-specific limitations (e.g., conservation easement 30% AGI cap vs. 50% federal); no scenario or ingestion path built yet.",
-      "5.page2.charity_12_additions":
-        "CA addition for non-cash charitable gifts (line 12, col C) — no ingestion path for CA-specific non-cash charitable contribution additions; requires FTB Pub. 1001 analysis.",
-      "5.page2.charity_13_federal":
-        "Charitable contribution carryover from prior year (federal Schedule A line 13, col A) — requires prior-year carryover data; no prior-year carryover ingestion path built yet.",
-      "5.page2.charity_13_subtractions":
-        "CA subtraction for charitable carryover (line 13, col B) — applies when CA carryover period (5 years) has expired but federal (15 years) has not, or for appreciated stock contributed to private foundation; requires prior-year carryover tracking not yet ingested.",
-      "5.page2.charity_13_additions":
-        "CA addition for charitable carryover (line 13, col C) — applies when CA carryover exceeds federal carryover; requires prior-year CA carryover tracking not yet ingested.",
-      "5.page2.casualty_15_federal":
-        "Casualty/theft loss from federal Form 4684 (Schedule A line 15, col A) — no fact ingestion path for casualty loss data; requires Form 4684 completion which we have no scenario for yet.",
-      "5.page2.casualty_15_subtractions":
-        "CA-specific subtraction for casualty/theft losses — requires FTB Form 4684 California conformity analysis; no ingestion path for casualty loss facts yet.",
-      "5.page2.casualty_15_additions":
-        "CA-specific addition for casualty/theft losses — requires FTB Form 4684 California conformity analysis; no ingestion path for casualty loss facts yet.",
-      "5.page2.other_deductions_16_federal":
-        "Other itemized deductions from federal Schedule A line 16 — no ingestion path for miscellaneous itemized deduction facts yet.",
-      "5.page2.other_deductions_16_subtractions":
-        "CA-specific subtraction for other itemized deductions — no ingestion path for these deduction facts yet.",
-      "5.page2.other_deductions_16_additions":
-        "CA-specific addition for other itemized deductions — no ingestion path for these deduction facts yet.",
-      "5.page2.job_expenses_19":
-        "Unreimbursed employee expenses (Schedule CA Part 2 line 19) — requires Form 2106 California-specific computation; no ingestion path for employee business expense facts yet.",
-      "5.page2.job_expenses_20":
-        "Tax preparation fees are a taxpayer-specific itemized deduction amount. No fact key exists for this; no ingestion path built yet.",
-      "5.page2.job_expenses_21_type":
-        "Free-text description of other miscellaneous deduction expenses (investment, safe deposit box, etc.). No fact ingestion path for this.",
-      "5.page2.job_expenses_21_amount":
-        "Amount for other miscellaneous itemized deductions (investment expenses, safe deposit box, etc.). No fact ingestion path built yet.",
-      "5.page2.job_expenses_24_threshold":
-        "This is a computed field requiring multiplication of line 23 by 2% (0.02). No multiply rule exists in the rule library; would need a formula/expression rule.",
-      "5.page2.other_adjustments_27_type":
-        "Free-text description of other CA-specific itemized deduction adjustments (e.g. adoption expenses, nontaxable income expenses). No fact or decision captures this.",
-      "5.page2.other_adjustments_27_amount":
-        "Other CA itemized deduction adjustments (adoption credit, nontaxable income expenses, legislator travel, etc.). No fact ingestion path built for these CA-specific adjustments.",
-      "5.page2.total_itemized_29":
-        "Line 29 requires a conditional: if Form 540 line 13 (federal AGI) exceeds the filing-status threshold ($252,203 / $378,310 / $504,411), the taxpayer must complete the Itemized Deductions Worksheet (a multi-step phase-out calculation). The engine has no conditional-branch or worksheet rule. For below-threshold taxpayers, line 29 equals line 28, but we cannot implement the high-income phase-out path. Bind as unsupported until a conditional/worksheet rule is available.",
+        "Line 8c col C needs the federal limit on non-1098 points; no fact kind holds the mortgage balance.",
       "4.page2.interest_8e_subtractions":
-        "confidence=low: Lines 8a, 8b, 8c have no column B fields in the inventory; line 8e col B has no contributing subtraction terms currently — unsupported is more appropriate.",
-      "5.page2.total_itemized_17_subtractions":
-        "confidence=medium: Sum of lines 4, 7, 10, 14, 15, and 16 Column B per Schedule CA (540) Part 2 line 17 instructions.",
+        "Line 8e col B has no column B rows on lines 8a–8c, and the instructions name no subtraction for line 8.",
+      "4.page2.interest_8e_additions":
+        "Line 8e col C totals lines 8a–8c col C; every upstream row is unsupported.",
+      "5.page2.charity_11_subtractions":
+        "Line 11 col B (the CA 50%-of-AGI contribution limit, College Access Tax Credit) needs the contribution limitation worksheet with CA percentages; not modeled.",
+      "5.page2.charity_11_additions": "The instructions name no column C adjustment for line 11.",
+      "5.page2.charity_12_subtractions":
+        "Line 12 col B (the CA 50%-of-AGI contribution limit, conservation easements at 30%) needs the contribution limitation worksheet with CA percentages; not modeled.",
+      "5.page2.charity_12_additions": "The instructions name no column C adjustment for line 12.",
+      "5.page2.charity_13_subtractions":
+        "Line 13 col B (expired CA conservation carryover, pre-2002 appreciated stock) needs a CA carryover history; no fact kind holds it.",
+      "5.page2.charity_13_additions":
+        "Line 13 col C (a CA carryover larger than the federal) needs a CA carryover history; no fact kind holds it.",
+      "5.page2.charity_14_subtractions":
+        "Line 14 col B totals lines 11–13 col B; every upstream row is unsupported.",
+      "5.page2.charity_14_additions":
+        "Line 14 col C totals lines 11–13 col C; every upstream row is unsupported.",
+      "5.page2.casualty_15_subtractions":
+        "Line 15 col B needs a Form 4684 recomputed with CA amounts; no Form 4684 data path exists.",
+      "5.page2.casualty_15_additions":
+        "Line 15 col C needs a Form 4684 recomputed with CA amounts; no Form 4684 data path exists.",
+      "5.page2.other_deductions_16_subtractions":
+        "Line 16 col B (CA lottery losses, federal estate tax, repaid Social Security) needs Schedule A line 16 detail, which has no data path.",
+      "5.page2.other_deductions_16_additions":
+        "Line 16 col C (claim-of-right deduction, Form 2106 recomputed with CA amounts) has no fact kind or decision.",
+      "5.page2.job_expenses_19":
+        "Line 19 needs federal Form 2106 line 10 recomputed with CA amounts; no Form 2106 or unreimbursed-employee-expense fact kind exists.",
+      "5.page2.job_expenses_20": "Line 20 tax preparation fees have no fact kind.",
+      "5.page2.job_expenses_21_type":
+        "Line 21 other expenses (investment expenses, safe deposit box, legal fees) have no fact kind.",
+      "5.page2.job_expenses_21_amount":
+        "Line 21 other expenses (investment expenses, safe deposit box, legal fees) have no fact kind.",
+      "5.page2.other_adjustments_27_type":
+        "Line 27 other adjustments (adoption cost credit, nontaxable-income expenses, legislator travel, utility-loan interest) have no fact kind or decision.",
+      "5.page2.other_adjustments_27_amount":
+        "Line 27 other adjustments (adoption cost credit, nontaxable-income expenses, legislator travel, utility-loan interest) have no fact kind or decision.",
     },
   });
 }
