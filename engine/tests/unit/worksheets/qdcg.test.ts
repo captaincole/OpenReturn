@@ -144,6 +144,58 @@ describe("computeQdcg", () => {
     expect(result.tax).toBe(result.breakdown.line24);
   });
 
+  it("Form 4952 line 4g election leaves the preferential total (tcb-us-004, MFJ)", () => {
+    // Schedule D Tax Worksheet lines 3–13: 4,870 + 37,109 − 320 = 41,659 preferential.
+    const result = computeQdcg({
+      taxableIncome: 218413,
+      qualifiedDividends: 4870,
+      netLongTermGain: 37109,
+      form4952Line4g: 320,
+      filingStatus: "married_filing_jointly",
+      taxYear: 2025,
+    });
+
+    expect(result.breakdown.form4952Line4g).toBe(320);
+    expect(result.breakdown.line4).toBe(41659);
+    expect(result.breakdown.line5).toBe(176754); // ordinary bucket
+    expect(result.breakdown.line9).toBe(0);
+    expect(result.breakdown.line17).toBe(41659);
+    expect(result.breakdown.line18).toBe(6249); // 41,659 × 15% = 6,248.85 → $6,249
+    expect(result.breakdown.line21).toBe(0);
+    expect(result.breakdown.line22).toBe(28714); // 2025 MFJ rate schedule on $176,754
+    expect(result.tax).toBe(34963);
+  });
+
+  it("no Form 4952 election → same tax as before the input existed", () => {
+    const inputs = {
+      taxableIncome: 218413,
+      qualifiedDividends: 4870,
+      netLongTermGain: 37109,
+      filingStatus: "married_filing_jointly" as const,
+      taxYear: 2025,
+    };
+    const without = computeQdcg(inputs);
+    const zero = computeQdcg({ ...inputs, form4952Line4g: 0 });
+
+    expect(without.breakdown.form4952Line4g).toBe(0);
+    expect(without.breakdown.line4).toBe(41979);
+    expect(without.tax).toBe(34940);
+    expect(zero.tax).toBe(without.tax);
+  });
+
+  it("throws on a negative Form 4952 line 4g", () => {
+    expect(() =>
+      computeQdcg({
+        taxableIncome: 50000,
+        qualifiedDividends: 0,
+        netLongTermGain: 0,
+        form4952Line4g: -1,
+        filingStatus: "single",
+        taxYear: 2025,
+      }),
+    ).toThrow(/form4952Line4g must be ≥ 0/);
+  });
+
   it("throws on negative taxable income", () => {
     expect(() =>
       computeQdcg({

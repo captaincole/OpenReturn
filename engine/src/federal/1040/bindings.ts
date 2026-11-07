@@ -266,12 +266,15 @@ export function register(): void {
                 return typeof l7a === "number" ? atLeast(0, l7a) : 0;
               })();
 
+        const form4952L4g = form["form-4952.0.line.4g_elected_investment_income"];
         try {
           const qdcg = computeQdcg({
             taxableIncome: taxable,
             // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
             qualifiedDividends: roundDollars(info.qualifiedDividends) ?? 0,
             netLongTermGain: netLtcg,
+            // MANUAL EDIT: Form 4952 line 4g leaves the preferential rates (Schedule D Tax Worksheet line 3).
+            form4952Line4g: typeof form4952L4g === "number" ? form4952L4g : 0,
             // TODO: the Foreign Earned Income Tax Worksheet, when Form 2555 lands.
             filingForm2555: false,
             filingStatus: info.filingStatus,

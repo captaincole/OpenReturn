@@ -1,4 +1,11 @@
-/* 1040 instructions (2025) p. 38, QDCG Tax Worksheet—Line 16. Breakdown lines match the worksheet 1:1. */
+/*
+ * 1040 instructions (2025) p. 38, QDCG Tax Worksheet—Line 16. Breakdown lines match the worksheet 1:1.
+ *
+ * MANUAL EDIT: a Form 4952 line 4g election routes the filer to the Schedule D Tax Worksheet
+ * (Schedule D instructions p. 15–16). With Schedule D lines 18 and 19 at zero, that worksheet is
+ * this one with the elected amount taken out of the preferential total (its lines 3–13), so the
+ * election is modeled here as a reduction of line 4.
+ */
 
 import { lookupPreferentialBrackets } from "../data/preferentialBrackets.js";
 import { lookupRateSchedule } from "../data/rateSchedule.js";
@@ -13,6 +20,8 @@ export interface QdcgInputs {
   qualifiedDividends: number;
   /** Line 3: the caller picks the smaller of Schedule D lines 15/16 (loss = 0), or 1040 line 7a without Schedule D. */
   netLongTermGain: number;
+  /** Form 4952 line 4g: qualified dividends and net capital gain elected as investment income. Taxed at ordinary rates. */
+  form4952Line4g?: number;
   /** Form 2555 re-routes lines 1 and 2 through the FEIE worksheet. Not modeled. */
   filingForm2555?: boolean;
   filingStatus: FilingStatus;
@@ -21,6 +30,8 @@ export interface QdcgInputs {
 
 export interface QdcgBreakdown {
   line1: number;
+  /** Schedule D Tax Worksheet line 3: the Form 4952 line 4g election, subtracted on line 4. */
+  form4952Line4g: number;
   line2: number;
   line3: number;
   line4: number;
@@ -79,6 +90,10 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
       `QDCG worksheet: preferential inputs must be ≥ 0 (got qd=${inputs.qualifiedDividends}, ltcg=${inputs.netLongTermGain}).`,
     );
   }
+  const elected = inputs.form4952Line4g ?? 0;
+  if (elected < 0) {
+    throw new Error(`QDCG worksheet: form4952Line4g must be ≥ 0 (got ${elected}).`);
+  }
   // TODO: with Form 2555, swap lines 1 and 2 for the FEIE worksheet outputs.
   void inputs.filingForm2555;
 
@@ -89,7 +104,9 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
   const line1 = roundDollars(inputs.taxableIncome);
   const line2 = roundDollars(inputs.qualifiedDividends);
   const line3 = roundDollars(inputs.netLongTermGain);
-  const line4 = line2 + line3;
+  // Schedule D Tax Worksheet lines 3–13: the elected amount leaves the preferential total.
+  const form4952Line4g = roundDollars(elected);
+  const line4 = atLeast(0, line2 + line3 - form4952Line4g);
   const line5 = atLeast(0, line1 - line4);
 
   const line6 = brackets.zeroRateCeiling;
@@ -121,6 +138,7 @@ export function computeQdcg(inputs: QdcgInputs): QdcgResult {
     ordinaryAlternativeTax: line24,
     breakdown: {
       line1,
+      form4952Line4g,
       line2,
       line3,
       line4,
