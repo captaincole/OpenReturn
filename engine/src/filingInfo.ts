@@ -6,6 +6,8 @@
 
 import type { Form1040FilingInfo } from "./federal/1040/filingInfo.js";
 import { resolve1040Info } from "./federal/1040/resolveInfo.js";
+import type { Form4952FilingInfo } from "./federal/4952/filingInfo.js";
+import { resolve4952Info } from "./federal/4952/resolveInfo.js";
 import type { Form5695FilingInfo } from "./federal/5695/filingInfo.js";
 import { resolve5695Info } from "./federal/5695/resolveInfo.js";
 import type { Form8606FilingInfo } from "./federal/8606/filingInfo.js";
@@ -109,6 +111,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8606FilingInfo &
   Form8889FilingInfo &
   Form8959FilingInfo &
+  Form4952FilingInfo &
   Form8960FilingInfo &
   Form8995AFilingInfo &
   Schedule1FilingInfo &
@@ -134,6 +137,7 @@ export function resolveFilingInfo(opts: {
     resolve8606Info(inputs),
     resolve8889Info(inputs),
     resolve8959Info(inputs),
+    resolve4952Info(inputs),
     resolve8960Info(inputs),
     resolve8995AInfo(inputs),
     resolveSchedule1Info(inputs),
