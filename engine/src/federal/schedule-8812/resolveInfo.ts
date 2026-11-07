@@ -42,6 +42,12 @@ export function resolveSchedule8812Info(inputs: ResolverInputs): Schedule8812Fil
   });
   return {
     mustFile: { "schedule-8812": resolution },
+    /* A dependent with no date of birth, months in the home or citizenship answer is asked for again. */
+    missingInputs: {
+      "schedule-8812": dependents
+        .filter((_, index) => credits[index] === undefined)
+        .map((fact) => fact.sourceFact.key),
+    },
     dependents,
     childTaxCreditCount: undecided ? undefined : childTaxCreditCount,
     otherDependentCount: undecided ? undefined : otherDependentCount,

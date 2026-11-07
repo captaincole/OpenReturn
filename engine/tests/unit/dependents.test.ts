@@ -50,8 +50,10 @@ describe("dependentCredit", () => {
     expect(dependentCredit({ ...niece, monthsLivedWithYou: 6 }, 2025)).toBe("other_dependents");
   });
 
-  it("waits while the date of birth is unknown", () => {
+  it("waits while the date of birth, the months in the home or the citizenship is unknown", () => {
     expect(dependentCredit({ ...niece, dob: undefined }, 2025)).toBeUndefined();
+    expect(dependentCredit({ ...niece, monthsLivedWithYou: undefined }, 2025)).toBeUndefined();
+    expect(dependentCredit({ ...niece, usCitizenOrResident: undefined }, 2025)).toBeUndefined();
   });
 
   it("gives nothing to a person with no taxpayer identification number", () => {

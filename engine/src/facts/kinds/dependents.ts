@@ -114,16 +114,23 @@ export type DependentCredit = "child_tax_credit" | "other_dependents";
  * Dependents (ODC)": the child tax credit needs a qualifying child under 17 at
  * the end of the year with an SSN; any other dependent who is a U.S. citizen,
  * national or resident alien with an SSN, ITIN or ATIN gets the credit for other
- * dependents. Undefined while the date of birth is unknown: the engine then waits.
+ * dependents. Undefined while the date of birth, the months in the home or the
+ * citizenship answer is unknown: the engine then waits and asks, never assumes.
  */
 export function dependentCredit(
   dependent: DependentFactValue,
   taxYear: number,
 ): DependentCredit | undefined {
-  const citizenOrResident = dependent.usCitizenOrResident !== false;
   const age = ageAtYearEnd(dependent.dob, taxYear);
-  if (age === undefined) return undefined;
-  const livedOverHalfYear = (dependent.monthsLivedWithYou ?? 12) > 6;
+  if (
+    age === undefined ||
+    dependent.monthsLivedWithYou === undefined ||
+    dependent.usCitizenOrResident === undefined
+  ) {
+    return undefined;
+  }
+  const citizenOrResident = dependent.usCitizenOrResident;
+  const livedOverHalfYear = dependent.monthsLivedWithYou > 6;
   const qualifyingChild =
     age < 17 &&
     isQualifyingChildRelationship(dependent.relationship) &&
