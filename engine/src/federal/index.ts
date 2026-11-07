@@ -7,6 +7,7 @@
 import { fixtureFileSchema } from "../catalog.js";
 import { makeFormSpec, type FormSpec } from "../formSpec.js";
 import { register as registerForm1040 } from "./1040/bindings.js";
+import { register as registerForm4952 } from "./4952/bindings.js";
 import { register as registerForm5695 } from "./5695/bindings.js";
 import { register as registerForm8606 } from "./8606/bindings.js";
 import { register as registerForm8889 } from "./8889/bindings.js";
@@ -27,6 +28,7 @@ import { register as registerScheduleSE } from "./schedule-se/bindings.js";
 
 /* Rollup inlines the JSON at build time; the process does not read it from disk. */
 import form1040CatalogJson from "./1040/catalog.json";
+import form4952CatalogJson from "./4952/catalog.json";
 import form5695CatalogJson from "./5695/catalog.json";
 import form8606CatalogJson from "./8606/catalog.json";
 import form8889CatalogJson from "./8889/catalog.json";
@@ -56,6 +58,7 @@ export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(form8606CatalogJson),
   fixtureFileSchema.parse(form8889CatalogJson),
   fixtureFileSchema.parse(form8959CatalogJson),
+  fixtureFileSchema.parse(form4952CatalogJson),
   fixtureFileSchema.parse(form8960CatalogJson),
   fixtureFileSchema.parse(form8995ACatalogJson),
   fixtureFileSchema.parse(schedule1CatalogJson),
@@ -185,6 +188,13 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8889",
     relativeDir: "federal/8889",
     register: registerForm8889,
+  }),
+  makeFormSpec({
+    formId: "form-4952",
+    shortId: "4952",
+    displayName: "Form 4952",
+    relativeDir: "federal/4952",
+    register: registerForm4952,
   }),
   makeFormSpec({
     formId: "form-8959",
