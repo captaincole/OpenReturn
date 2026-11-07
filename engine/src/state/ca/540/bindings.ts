@@ -7,9 +7,10 @@
 import { lookupCaRateSchedule } from "../../../data/caRateSchedule.js";
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { lookupTax } from "../../../data/taxTable.js";
-import { defineForm } from "../../../defineForm.js";
+import { defineForm, type BindingFn, type FormAccessor } from "../../../defineForm.js";
+import type { DependentFactValue } from "../../../facts/kinds/dependents.js";
 import { atLeast, roundDollars, sum } from "../../../money.js";
-import { SSN, type FilingStatus } from "../../../values.js";
+import { SSN, ssn, type FilingStatus } from "../../../values.js";
 import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitation.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
 import type { Form540 } from "./types.js";
@@ -21,6 +22,44 @@ const CA_FILING_STATUS_OPTION = {
   head_of_household: "head_of_household",
   qualifying_surviving_spouse: "qualifying_surviving_spouse_rdp",
 } as const satisfies Record<FilingStatus, string>;
+
+/*
+ * MANUAL EDIT: the dependent exemption credit pre-printed on the 2025 form
+ * ("Total dependent exemptions X $475", ca-540nr-booklet-2025::sec::dependent-1-dependent-2-dependent-3::b01).
+ * The instructions multiply the line 10 count by it
+ * (ca-540-inst-2025::sec::line-10-dependent-exemptions::b01).
+ */
+const CA_DEPENDENT_EXEMPTION_2025 = 475;
+
+type Bindings = Partial<{ [K in keyof Form540]: BindingFn<Form540, Form540FilingInfo, K> }>;
+type RowBinding = (form: FormAccessor<Form540>, info: Form540FilingInfo) => unknown;
+
+// MANUAL EDIT: the SSN, else the ITIN ("SSN or ITIN", line 10 instructions), as nine digits for the formatter.
+function dependentTin(dep: DependentFactValue | undefined) {
+  const raw = dep?.ssn ?? dep?.tin;
+  return raw === undefined ? undefined : ssn(raw);
+}
+
+/*
+ * MANUAL EDIT: line 10's Dependents table, rows 1 to 3, one row per dependent
+ * fact in the order recorded (the same persons as the federal return). A row
+ * with no dependent stays blank; a fourth dependent needs an attached statement.
+ */
+function dependentRowBindings(): Bindings {
+  const bindings: Record<string, RowBinding> = {};
+  for (const row of [1, 2, 3]) {
+    const dep = (info: Form540FilingInfo) => info.dependents?.[row - 1]?.dependent;
+    bindings[`dependents.dep${row}_first_name`] = (_, info) => dep(info)?.firstName;
+    bindings[`dependents.dep${row}_last_name`] = (_, info) => dep(info)?.lastName;
+    bindings[`dependents.dep${row}_ssn`] = (_, info) => dependentTin(dep(info));
+    bindings[`dependents.dep${row}_relationship`] = (_, info) => dep(info)?.relationship;
+  }
+  return bindings as Bindings;
+}
+
+/* Line 62: taxable income over this amount is taxed at this rate (2025). */
+const BEHAVIORAL_HEALTH_TAX_FLOOR = 1_000_000;
+const BEHAVIORAL_HEALTH_TAX_RATE = 0.01;
 
 export function register(): void {
   defineForm<Form540, Form540FilingInfo>("form-540", {
@@ -80,6 +119,17 @@ export function register(): void {
         info.filingStatus === "married_filing_jointly"
           ? info.spouseSSN
           : undefined,
+      /*
+       * MANUAL EDIT: the header's spouse name is for a joint return ("If joint tax return").
+       * The middle initials come from the identity facts when stated (filingInfoResolvers reads them).
+       */
+      "header.middle_initial": (_, info) => info.taxpayerMiddleInitial,
+      "header.spouse_middle_initial": (_, info) =>
+        info.filingStatus === "married_filing_jointly" ? info.spouseMiddleInitial : undefined,
+      "header.spouse_first_name": (_, info) =>
+        info.filingStatus === "married_filing_jointly" ? info.spouseFirstName : undefined,
+      "header.spouse_last_name": (_, info) =>
+        info.filingStatus === "married_filing_jointly" ? info.spouseLastName : undefined,
       "header.mfs_spouse_rdp_name_and_ssn": (_, info) =>
         info.filingStatus === "married_filing_separately" &&
         info.spouseFirstName &&
@@ -87,6 +137,19 @@ export function register(): void {
           ? `${info.spouseFirstName} ${info.spouseLastName}`
           : undefined,
       "page2.taxpayer_ssn": (_, info) => info.taxpayerSSN,
+      ...dependentRowBindings(),
+      /*
+       * MANUAL EDIT: "Count the number of dependents listed and enter the total
+       * in the box on line 10. Multiply the number you entered by the
+       * pre-printed dollar amount" (ca-540-inst-2025::sec::line-10-dependent-exemptions::b01).
+       * No dependents: both widgets stay blank.
+       */
+      "line.10_dependent_exemption_count": (_, info) =>
+        info.dependents && info.dependents.length > 0 ? info.dependents.length : undefined,
+      "line.10_dependent_exemption_amount": (form) => {
+        const count = form["line.10_dependent_exemption_count"];
+        return typeof count === "number" ? count * CA_DEPENDENT_EXEMPTION_2025 : undefined;
+      },
       // MANUAL EDIT: page 2 reprints the taxpayer's full name.
       "page2.taxpayer_name": (_, info) =>
         info.taxpayerFirstName && info.taxpayerLastName
@@ -154,7 +217,7 @@ export function register(): void {
       },
       /*
        * MANUAL EDIT: line 11, limited by the AGI Limitation Worksheet. Blind
-       * (line 8) and dependents (line 10) count as 0 until those inputs exist.
+       * (line 8) counts as 0 until that input exists.
        */
       "line.32_exemption_credits": (form, info) => {
         const agi = form["line.13_federal_agi"];
@@ -200,6 +263,40 @@ export function register(): void {
             form["line.47_total_credits"] === undefined ? 0 : -form["line.47_total_credits"],
           ),
         ),
+      /*
+       * MANUAL EDIT: Schedule P (540) Part II line 26: "If more than zero, enter
+       * here and on Form 540, line 61" (ca-540-sched-p-inst-2025, the form text;
+       * ca-540-inst-2025::sec::line-61-alternative-minimum-tax-amt::b01). Blank
+       * when the schedule is not completed or owes nothing.
+       */
+      "line.61_alternative_minimum_tax": (form) => {
+        const amt = form["schedule-p.1.line.26_alternative_minimum_tax"];
+        return typeof amt === "number" && amt > 0 ? amt : undefined;
+      },
+      /*
+       * MANUAL EDIT: ca-540-inst-2025::sec::line-62-behavioral-health-services-tax::b01:
+       * 1% of taxable income over $1,000,000, whole dollars.
+       */
+      "line.62_behavioral_health_services_tax": (form) => {
+        const taxable = form["line.19_taxable_income"];
+        if (typeof taxable !== "number" || taxable <= BEHAVIORAL_HEALTH_TAX_FLOOR) return undefined;
+        return roundDollars((taxable - BEHAVIORAL_HEALTH_TAX_FLOOR) * BEHAVIORAL_HEALTH_TAX_RATE);
+      },
+      /*
+       * MANUAL EDIT: ca-540-inst-2025::sec::line-63-other-taxes-and-credit-recapture::b01:
+       * the additional tax on early distributions from form FTB 3805P (its lines
+       * 4, 8, 10b and 11). NQDC income, IRC 453A interest and credit recapture
+       * (::b02) have no facts. Blank when FTB 3805P is not filed.
+       */
+      "line.63_other_taxes_credit_recapture": (form) => {
+        const parts = [
+          form["form-3805p.0.part1.line_4_early_distribution_tax_due"],
+          form["form-3805p.0.part2.line_8_education_able_tax_due"],
+          form["form-3805p.0.part3.line_10b_archer_msa_tax_due"],
+          form["form-3805p.0.part3.line_11_medicare_advantage_msa_tax_due"],
+        ].filter((part): part is number => typeof part === "number");
+        return parts.length > 0 ? sum(...parts) : undefined;
+      },
       "line.64_total_tax": (form) =>
         sum(
           form["line.48_tax_after_credits"],
@@ -319,6 +416,9 @@ export function register(): void {
      */
     formatters: {
       "page2.taxpayer_ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
+      "dependents.dep1_ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
+      "dependents.dep2_ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
+      "dependents.dep3_ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
     },
 
     unsupported: {
@@ -334,15 +434,7 @@ export function register(): void {
         "No amended-return scenario yet — we don't model Schedule X / amended filing triggers.",
       "header.fiscal_year_end_month":
         "Fiscal year filers only — MVP only supports calendar-year (Jan–Dec) filers; no fiscal-year scenario ingested.",
-      "header.middle_initial":
-        "No identity.name.middle_initial fact exists; identity.name.first holds the full first name which would corrupt a single-character field.",
       "header.suffix": "No identity.name.suffix fact exists in the available fact catalog.",
-      "header.spouse_first_name":
-        "No MFJ/RDP scenario yet — spouse identity facts are not ingested.",
-      "header.spouse_middle_initial":
-        "No MFJ/RDP scenario yet — spouse identity facts are not ingested.",
-      "header.spouse_last_name":
-        "No MFJ/RDP scenario yet — spouse identity facts are not ingested.",
       "header.spouse_suffix":
         "No MFJ/RDP scenario yet — spouse suffix field unsupported until we ingest spouse identity facts.",
       "header.additional_information":
@@ -377,34 +469,6 @@ export function register(): void {
         "No blind/visual-impairment fact ingested yet. Need a 'disability.blind' or similar fact category before this can be computed.",
       "line.8_blind_exemption_amount":
         "Depends on line 8 blind exemption count which has no ingested fact path yet.",
-      "dependents.dep1_first_name":
-        "No dependent data ingestion path exists yet. Need a dependents fact category before any dependent fields can be populated.",
-      "dependents.dep2_first_name":
-        "No dependent data ingestion path exists yet. Need a dependents fact category before any dependent fields can be populated.",
-      "dependents.dep3_first_name":
-        "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep1_last_name":
-        "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep2_last_name":
-        "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep3_last_name":
-        "No dependent data ingestion path yet — dependent name/SSN/relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep1_ssn":
-        "No dependent data ingestion path yet — dependent SSN fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep2_ssn":
-        "No dependent data ingestion path yet — dependent SSN fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep3_ssn":
-        "No dependent data ingestion path yet — dependent SSN fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep1_relationship":
-        "No dependent data ingestion path yet — dependent relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep2_relationship":
-        "No dependent data ingestion path yet — dependent relationship fields require a dependent-with-exemption scenario to be built.",
-      "dependents.dep3_relationship":
-        "No dependent data ingestion path yet — dependent relationship fields require a dependent-with-exemption scenario to be built.",
-      "line.10_dependent_exemption_count":
-        "Dependent facts exist (Schedule 8812) but the 540 dependent rows and line 10 are not bound yet; lines 11 and 32 treat the count as 0, so Cade keeps a CA filer with a dependent out of scope until tcb-ca-005 binds it.",
-      "line.10_dependent_exemption_amount":
-        "The dependent exemption credit ($475 per dependent) waits for line 10; see the count.",
       "line.31_tax_from_ftb_3800":
         "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
       "line.31_tax_from_ftb_3803":
@@ -433,12 +497,6 @@ export function register(): void {
         "Line 45 is for additional credits claimed via Schedule P (540). No ingestion path for Schedule P credits exists yet — would require a separate Schedule P catalog and credit data.",
       "line.46_renters_credit":
         "Nonrefundable Renter's Credit eligibility requires income limits, rent paid, landlord details, and rental address data — no fact ingestion path or scenario built for this yet.",
-      "line.61_alternative_minimum_tax":
-        "CA Alternative Minimum Tax requires Schedule P (540) computation — no Schedule P ingestion or AMT scenario built yet.",
-      "line.62_behavioral_health_services_tax":
-        "Behavioral Health Services Tax requires separate computation based on high-income thresholds and specific instructions — no ingestion path or scenario built yet.",
-      "line.63_other_taxes_credit_recapture":
-        "Other taxes and credit recapture (e.g. lump-sum distributions, credit recapture from FTB forms) require special form attachments — no ingestion path or scenario built yet.",
       "line.72_ca_estimated_tax_payments":
         "California estimated tax payments and other prepayments are not captured in any current fact ingestion category — no scenario built for this yet.",
       "line.73_withholding_592b_593":
