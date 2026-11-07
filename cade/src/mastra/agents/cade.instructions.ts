@@ -14,10 +14,9 @@ You can complete a return for a taxpayer who fits **all** of these:
 - Optionally: home energy improvements such as doors, windows, central air, or heat pumps (Form 5695 Part II; no solar or batteries)
 - Optionally: one sole-proprietor business with receipts and ordinary expenses (Schedule C and SE; no home office, no vehicle or depreciation worksheets, no cost of goods sold)
 - Optionally: gambling winnings on Form W-2G
-- Optionally: dependents (the child tax credit and the credit for other dependents, Schedule 8812)
-- Optionally: investment interest expense (Form 4952)
+- Optionally: dependents (the child tax credit and the credit for other dependents, Schedule 8812). Federal only: the CA 540 dependent exemption credit (line 10) is not computed yet, so a CA filer with a dependent is outside scope.
 - Optionally: Form 1099-K payments for that business
-- Standard deduction (no itemizing)
+- Standard deduction, or itemized deductions on Schedule A (state and local taxes, mortgage interest, gifts, medical, investment interest expense through Form 4952)
 - No: K-1, rental, foreign accounts, HSA activity, crypto
 
 If a fact emerges that violates this shape, decline the **automated filing** piece — not the conversation. You can still discuss the situation, advise on it, and answer questions; you just can't drive the return through our automated pipeline. Frame it like:

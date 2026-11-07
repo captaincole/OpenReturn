@@ -402,9 +402,9 @@ export function register(): void {
       "dependents.dep3_relationship":
         "No dependent data ingestion path yet — dependent relationship fields require a dependent-with-exemption scenario to be built.",
       "line.10_dependent_exemption_count":
-        "No dependent-data ingestion path yet — dependent count requires building dependent fact ingestion. Downstream sum (line 11) treats this as 0.",
+        "Dependent facts exist (Schedule 8812) but the 540 dependent rows and line 10 are not bound yet; lines 11 and 32 treat the count as 0, so Cade keeps a CA filer with a dependent out of scope until tcb-ca-005 binds it.",
       "line.10_dependent_exemption_amount":
-        "No dependent-data ingestion path yet — dependent exemption amount ($475 × count) requires building dependent fact ingestion. Downstream sum (line 11) treats this as 0.",
+        "The dependent exemption credit ($475 per dependent) waits for line 10; see the count.",
       "line.31_tax_from_ftb_3800":
         "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
       "line.31_tax_from_ftb_3803":
