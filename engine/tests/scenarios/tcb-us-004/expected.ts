@@ -155,7 +155,6 @@ const FORM_8949: Partial<ExpectedResults> = {
     "form-8949.1.part2.totals_cost_basis": 38991,
     "form-8949.1.part2.totals_gain_loss": 37109,
   },
-  renderedText: { "form-8949.1.part2.row1_description": "intuit stock" },
 };
 
 const SCHEDULE_D: Partial<ExpectedResults> = {

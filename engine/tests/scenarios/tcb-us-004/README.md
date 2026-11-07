@@ -22,6 +22,7 @@ Forms checked: Form 1040, Schedules 1, 2, A, B, C, D and SE, Forms 8949, 8960 an
 | Consulting business: cash method, material participation, $3,882 of receipts, no expenses | answers | `facts.ts` |
 | Gambling winnings not on a W-2G ($700) | answer | `facts.ts` (`gambling.winnings_not_on_w2g`) |
 | Gifts by cash ($25,000), gifts other than cash ($5,000), medical ($8,286) | answers | `facts.ts` |
+| Shares sold on the Etrade sale (Form 8949 column (a)) | not in the case | pending answer (`account.etrade.trades.etr-d-01.quantity`) |
 | Form 4952 inputs (carryover $650, investment income) | not modeled | not in the facts |
 | Dependent niece (Jessica Davies, born 2014) | not modeled | not in the facts |
 | Last year's Form 1040 | not supported (#79) | not copied |
@@ -42,6 +43,8 @@ Three causes. The listed lines keep the key's values in `expected.ts` and are re
 - **Form 8960 line 9b is not modeled.** The answers allocate $1,326 of state income tax to investment income (`f8960.stateIncTax`). Lines 9b, 9d, 11 and 12 differ; line 17 does not, because line 16 is the MAGI excess ($7,865) either way.
 
 ## Lines the key fills that the engine leaves blank, on purpose
+
+- Form 8949 column (a). The instructions want the number of shares for stock (`irs-8949-inst-2025::sec::part-ii`, "Column (a)—Description of Property"); the 1099-B and the key print only "intuit stock". The engine leaves the description blank and asks for the count, so the key's text is not checked. Every amount on the row matches.
 
 - Schedule A lines 2–4 print on the key with medical under the floor; the engine prints them too (line 1 is not blank), so they are checked.
 - Form 8995-A lines 4–11: the engine prints 0 where the key's short Form 8995 has no equivalent.

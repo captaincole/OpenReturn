@@ -39,10 +39,15 @@ function currentCopy(info: Form8949FilingInfo): Form8949Copy | undefined {
   return info.form8949Copies?.[info.form8949CopyIndex ?? 0];
 }
 
-/* Brokers often print the quantity in box 1a already ("91.207 sh SAMPLE INC"). */
-function describe(quantity: number | undefined, description: string): string {
-  if (quantity === undefined || /^\d/.test(description)) return description;
-  return `${quantity} sh ${description}`;
+/*
+ * Column (a): the number of shares and the description
+ * (irs-8949-inst-2025::sec::part-ii, "Column (a)—Description of Property").
+ * Brokers often print the count in box 1a already ("91.207 sh SAMPLE INC").
+ * Blank while the count is unknown, so the row waits for the taxpayer's answer.
+ */
+function describe(quantity: number | undefined, description: string): string | undefined {
+  if (/^\d/.test(description)) return description;
+  return quantity === undefined ? undefined : `${quantity} sh ${description}`;
 }
 
 /* Empty rows return undefined so unused widgets do not render "0". */

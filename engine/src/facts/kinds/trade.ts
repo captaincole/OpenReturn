@@ -76,6 +76,15 @@ export function isReportedBasisFact(fact: TaxFactRow): boolean {
   return fact.category === REPORTED_BASIS_CATEGORY && fact.key.endsWith(".reported_basis");
 }
 
+/* Form 8949 column (a) wants the number of shares. When box 1a prints none, the taxpayer states it. */
+export function makeStatedQuantityFactKey(accountSlug: string, tradeId: string): string {
+  return `${makeTradeFactKey(accountSlug, tradeId)}.quantity`;
+}
+
+export function isStatedQuantityFact(fact: TaxFactRow): boolean {
+  return fact.category === REPORTED_BASIS_CATEGORY && fact.key.endsWith(".quantity");
+}
+
 export function makeTradeFactKey(accountSlug: string, tradeId: string): string {
   return `account.${accountSlug}.trades.${tradeId}`;
 }

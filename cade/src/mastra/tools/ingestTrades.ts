@@ -12,7 +12,12 @@ export const TradeInputSchema = z.object({
   description: z.string().describe("Security or digital asset description, e.g. 'APPLE INC'"),
   cusip: z.string().optional(),
   symbol: z.string().optional().describe("Ticker or token symbol"),
-  quantity: z.number(),
+  quantity: z
+    .number()
+    .optional()
+    .describe(
+      "Number of shares or units. Omit when box 1a prints none; the engine then asks for it.",
+    ),
   dateAcquired: z
     .string()
     .optional()
@@ -50,7 +55,7 @@ const tradeIdFor = (trade: TradeInput): string => {
     const [, mm, dd, yy] = match;
     return `20${yy}-${mm}-${dd}`;
   };
-  return `${slugify(ticker)}-${slugDate(trade.dateSold)}-q${trade.quantity}`;
+  return `${slugify(ticker)}-${slugDate(trade.dateSold)}-q${trade.quantity ?? "none"}`;
 };
 
 /* Unknown term falls back to the short-term boxes (the conservative rate). */
