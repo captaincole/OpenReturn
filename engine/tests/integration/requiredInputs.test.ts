@@ -25,6 +25,16 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "otherwise line 8b comes from the W-2G facts",
   ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
+  [/^identity\.(spouse\.)?name\.middle_initial$/, "printed when stated; not every name has one"],
+  [
+    /^amt\.iso_exercise_spread$/,
+    "an answer Cade records only when the user exercised incentive stock options; " +
+      "Schedule P (540) reads it",
+  ],
+  [
+    /^investment_interest\.ca_elected_net_capital_gain$/,
+    "a separate California election on FTB 3526 line 4e, recorded only when the user states one",
+  ],
   [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +

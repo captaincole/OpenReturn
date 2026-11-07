@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { globSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   checkSupport,
@@ -8,7 +8,12 @@ import {
 import { jordanScenario } from "../../../scenarios/jordan/index.js";
 import type { Scenario } from "../../../types.js";
 
-const RESOLVERS = ["src/filingInfoResolvers.ts", "src/resolverInputs.ts"];
+/* The shared resolvers and every form's own resolveInfo.ts (Schedule A, FTB 3526, …). */
+const RESOLVERS = [
+  "src/filingInfoResolvers.ts",
+  "src/resolverInputs.ts",
+  ...globSync("src/**/resolveInfo.ts"),
+];
 
 const MODELED = new Set(
   jordanScenario.forms.map((form) => form.formId).filter((id) => id !== "schedule-d-ca"),
