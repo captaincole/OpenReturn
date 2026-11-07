@@ -3,7 +3,7 @@ export const meta = {
   description:
     "Review an engine PR for IRS and FTB correctness; a skeptic refutes or scopes out each finding",
   whenToUse:
-    "On demand for a PR that changes engine/ or sources/. Needs Canon running (npm run dev:canon). args: {pr: <number>}. A strong pass (one high or three medium findings that stand) is fixed and re-run on the new head, up to three passes; then a person decides.",
+    "On demand for a PR that changes engine/ or sources/. Needs Canon running (npm run dev:canon). args: {pr: <number>}. A strong pass (more than one high or more than three medium findings that stand) is fixed and re-run on the new head, up to three passes; then a person decides.",
   phases: [
     { title: "Scope", detail: "split the diff into review units, tag IRS / FTB", model: "fable" },
     {

@@ -3,7 +3,7 @@ export const meta = {
   description:
     "General PR review: quality, open-source hygiene, security, simplicity; a skeptic drops what is wrong, out of scope, or not worth it; one docs agent brings the documentation in line with the change",
   whenToUse:
-    "On demand. args: {pr: <number>} for a GitHub PR, or {base, head} for a local diff (defaults origin/main..HEAD). A strong pass (one high or three medium findings that stand) is fixed and re-run on the new head, up to three passes; then a person decides.",
+    "On demand. args: {pr: <number>} for a GitHub PR, or {base, head} for a local diff (defaults origin/main..HEAD). A strong pass (more than one high or more than three medium findings that stand) is fixed and re-run on the new head, up to three passes; then a person decides.",
   phases: [
     { title: "Find", detail: "one finder per dimension", model: "opus" },
     {
