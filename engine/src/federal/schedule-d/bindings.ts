@@ -4,7 +4,7 @@
  * them: a regen overwrites this file.
  */
 
-import { defineForm, type BindingFn } from "../../defineForm.js";
+import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import type { Form8949Box } from "../../facts/index.js";
 import { roundDollars, sum } from "../../money.js";
 import type { ScheduleDFilingInfo } from "./filingInfo.js";
@@ -58,6 +58,20 @@ function boxLineBindings(): Partial<{
   return out as Partial<{ [K in keyof ScheduleD]: BindingFn<ScheduleD, ScheduleDFilingInfo, K> }>;
 }
 
+// MANUAL EDIT: line 20, undefined until line 17 answers Yes.
+function qualifiedDividendsWorksheetApplies(
+  form: FormAccessor<ScheduleD>,
+  info: ScheduleDFilingInfo,
+): boolean | undefined {
+  if (form["1.line.17_both_gains_yes"] !== true) return undefined;
+  const l18 = form["1.line.18_rate_gain_worksheet_amount"];
+  const l19 = form["1.line.19_unrecaptured_sec1250_gain"];
+  const l18Zero = l18 === undefined || l18 === 0;
+  const l19Zero = l19 === undefined || l19 === 0;
+  const filesForm4952 = info.mustFile?.["form-4952"]?.value === true;
+  return l18Zero && l19Zero && !filesForm4952;
+}
+
 export function register(): void {
   defineForm<ScheduleD, ScheduleDFilingInfo>("schedule-d", {
     bindings: {
@@ -75,16 +89,18 @@ export function register(): void {
         return l15 > 0 && l16 > 0 ? true : undefined;
       },
       /*
-       * MANUAL EDIT: line 20 also needs "Form 4952 not filed". Form 4952 is
-       * not modeled, so the check reduces to lines 18 and 19 zero or blank.
+       * MANUAL EDIT: line 20 asks whether lines 18 and 19 are both zero or
+       * blank and Form 4952 is not filed, as the form prints it. The 1040 line
+       * 16 worksheet already takes Form 4952 line 4g, so the answer changes no
+       * tax figure.
        */
-      "1.line.20_use_qual_div_worksheet_yes": (form) => {
-        if (form["1.line.17_both_gains_yes"] !== true) return undefined;
-        const l18 = form["1.line.18_rate_gain_worksheet_amount"];
-        const l19 = form["1.line.19_unrecaptured_sec1250_gain"];
-        const l18Zero = l18 === undefined || l18 === 0;
-        const l19Zero = l19 === undefined || l19 === 0;
-        return l18Zero && l19Zero ? true : undefined;
+      "1.line.20_use_qual_div_worksheet_yes": (form, info) => {
+        const simple = qualifiedDividendsWorksheetApplies(form, info);
+        return simple === true ? true : undefined;
+      },
+      "1.line.20_use_qual_div_worksheet_no": (form, info) => {
+        const simple = qualifiedDividendsWorksheetApplies(form, info);
+        return simple === false ? true : undefined;
       },
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       "0.line.7_net_short_term_gain_loss": (form) =>
@@ -161,8 +177,6 @@ export function register(): void {
         "Amount from line 7 of the 28% Rate Gain Worksheet requires ingestion of collectibles gains and section 1202 QSB stock exclusion data — no such fact ingestion path exists yet.",
       "1.line.19_unrecaptured_sec1250_gain":
         "Amount from line 18 of the Unrecaptured Section 1250 Gain Worksheet requires Form 4797 depreciation recapture and real-property sale data — no such fact ingestion path exists yet.",
-      "1.line.20_use_qual_div_worksheet_no":
-        "True when line 18 or 19 is non-zero OR Form 4952 is being filed. Requires conditional logic checking two computed fields and a form-presence flag — no such compound-conditional rule exists in the library yet.",
       "1.line.22_qualified_dividends_yes":
         "This checkbox is true when Form 1040 line 3a (qualified dividends) is greater than zero. We have no 'greaterThanZero' comparison rule to drive a boolean checkbox from a numeric field. Needs a conditional/comparison rule.",
       "1.line.22_qualified_dividends_no":

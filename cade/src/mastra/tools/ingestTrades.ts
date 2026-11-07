@@ -58,6 +58,18 @@ const tradeIdFor = (trade: TradeInput): string => {
   return `${slugify(ticker)}-${slugDate(trade.dateSold)}-q${trade.quantity ?? "none"}`;
 };
 
+/*
+ * Two lots of the same security sold the same day in the same quantity share a
+ * base id; the second and later ones take a -2, -3 suffix so each lot keeps its
+ * own fact.
+ */
+export const uniqueTradeId = (base: string, used: ReadonlySet<string>): string => {
+  if (!used.has(base)) return base;
+  let suffix = 2;
+  while (used.has(`${base}-${suffix}`)) suffix += 1;
+  return `${base}-${suffix}`;
+};
+
 /* Unknown term falls back to the short-term boxes (the conservative rate). */
 const boxFor = (
   term: TradeInput["term"],
@@ -82,8 +94,9 @@ async function ingestOneTrade(
   slug: string,
   input: TradeInput,
   digitalAsset: boolean,
+  used: ReadonlySet<string>,
 ): Promise<string> {
-  const tradeId = tradeIdFor(input);
+  const tradeId = uniqueTradeId(tradeIdFor(input), used);
   const trade: TradeFactValue = {
     tradeId,
     description: input.description,
@@ -148,7 +161,7 @@ export async function ingestTrades(
 ): Promise<{ tradeIds: string[]; decisionsWritten: number }> {
   const tradeIds: string[] = [];
   for (const trade of trades) {
-    tradeIds.push(await ingestOneTrade(ctx, slug, trade, opts.digitalAsset));
+    tradeIds.push(await ingestOneTrade(ctx, slug, trade, opts.digitalAsset, new Set(tradeIds)));
   }
   const factKeys = tradeIds.map((id) => makeTradeFactKey(slug, id));
   const form = opts.digitalAsset ? "1099-DA" : "1099-B";

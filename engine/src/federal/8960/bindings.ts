@@ -61,7 +61,7 @@ export function register(): void {
         const deducted = form["schedule-a.0.line.5e_salt_cap"];
         const allocated = info.stateLocalTaxAllocableToInvestmentIncome;
         return typeof deducted === "number" && typeof allocated === "number"
-          ? Math.min(allocated, deducted)
+          ? Math.min(roundDollars(allocated), deducted)
           : undefined;
       },
       // MANUAL EDIT: line 16 = smaller of line 12 or line 15.

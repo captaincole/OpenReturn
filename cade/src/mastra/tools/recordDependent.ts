@@ -50,6 +50,12 @@ export const recordDependent = createTool({
       .describe("A U.S. citizen, U.S. national or U.S. resident alien"),
     fullTimeStudent: z.boolean().optional(),
     permanentlyDisabled: z.boolean().optional(),
+    form8332Release: z
+      .boolean()
+      .optional()
+      .describe(
+        "For a child who lived with the user half the year or less: the other parent released the claim on Form 8332",
+      ),
     sourceNote: z.string().default("Dependent answers stated by the user"),
   }),
   outputSchema: z.object({ factKey: z.string(), dependentId: z.string() }),

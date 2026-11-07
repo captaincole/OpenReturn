@@ -5,8 +5,12 @@
  */
 
 import { lookupTax } from "../../data/taxTable.js";
-import { defineForm, type FormAccessor } from "../../defineForm.js";
-import { dependentCredit, type DependentFactValue } from "../../facts/kinds/dependents.js";
+import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
+import {
+  livedWithTaxpayerOverHalfYear,
+  type DependentCredit,
+  type DependentFactValue,
+} from "../../facts/kinds/dependents.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { ssn } from "../../values.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
@@ -16,16 +20,14 @@ import { awaitsSchedule1A, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
 
-// MANUAL EDIT: the Dependents table's row (7) and Schedule 8812 pin their age rules to 2025.
+// MANUAL EDIT: the Dependents table pins its age rules to 2025, like Schedule 8812's resolver.
 const TAX_YEAR = 2025;
+
+type Bindings = Partial<{ [K in keyof Form1040]: BindingFn<Form1040, Form1040FilingInfo, K> }>;
+type RowBinding = (form: FormAccessor<Form1040>, info: Form1040FilingInfo) => unknown;
 
 function fromScheduleB(value: unknown): number | undefined {
   return typeof value === "number" ? value : undefined;
-}
-
-// MANUAL EDIT: the dependent printed on row 1 to 4 of the Dependents table; undefined past the list.
-function dependent(info: Form1040FilingInfo, row: number): DependentFactValue | undefined {
-  return info.dependents?.[row - 1]?.dependent;
 }
 
 /*
@@ -38,9 +40,9 @@ function dependentTin(dep: DependentFactValue | undefined) {
   return raw === undefined ? undefined : ssn(raw);
 }
 
-// Row (5)(a): lived with you more than half of 2025.
+// Row (5)(a): lived with you more than half of 2025 (a child born in the year counts the months alive).
 function livedWithYou(dep: DependentFactValue | undefined): boolean | undefined {
-  return dep?.monthsLivedWithYou === undefined ? undefined : dep.monthsLivedWithYou > 6;
+  return dep === undefined ? undefined : livedWithTaxpayerOverHalfYear(dep, TAX_YEAR);
 }
 
 // Row (5)(b): "And in the U.S." is a sub-question of (a), so it needs (a) too.
@@ -50,14 +52,35 @@ function livedWithYouInUs(dep: DependentFactValue | undefined): boolean | undefi
   return withYou && dep.livedInUs;
 }
 
-// Row (7): which credit box the dependent earns; neither while the date of birth is unknown.
-function earnsCredit(
-  dep: DependentFactValue | undefined,
-  credit: "child_tax_credit" | "other_dependents",
-): boolean | undefined {
-  if (dep === undefined) return undefined;
-  const earned = dependentCredit(dep, TAX_YEAR);
-  return earned === undefined ? undefined : earned === credit;
+/*
+ * MANUAL EDIT: the Dependents table, rows 1 to 4, one row per dependent fact in
+ * the order recorded. Row (7) prints the credit Schedule 8812's resolver
+ * decided for the person; neither box while an answer is still missing. A row
+ * with no dependent stays blank.
+ */
+function dependentRowBindings(): Bindings {
+  const bindings: Record<string, RowBinding> = {};
+  for (const row of [1, 2, 3, 4]) {
+    const dep = (info: Form1040FilingInfo) => info.dependents?.[row - 1]?.dependent;
+    const checks = (info: Form1040FilingInfo, box: DependentCredit) => {
+      const credit = info.dependents?.[row - 1]?.credit;
+      return credit === undefined ? undefined : credit === box;
+    };
+    bindings[`dependents.dep${row}_first_name`] = (_, info) => dep(info)?.firstName;
+    bindings[`dependents.dep${row}_last_name`] = (_, info) => dep(info)?.lastName;
+    bindings[`dependents.dep${row}_ssn`] = (_, info) => dependentTin(dep(info));
+    bindings[`dependents.dep${row}_relationship`] = (_, info) => dep(info)?.relationship;
+    bindings[`dependents.dep${row}_lived_with_you`] = (_, info) => livedWithYou(dep(info));
+    bindings[`dependents.dep${row}_lived_in_us`] = (_, info) => livedWithYouInUs(dep(info));
+    bindings[`dependents.dep${row}_full_time_student`] = (_, info) => dep(info)?.fullTimeStudent;
+    bindings[`dependents.dep${row}_permanently_disabled`] = (_, info) =>
+      dep(info)?.permanentlyDisabled;
+    bindings[`dependents.dep${row}_child_tax_credit`] = (_, info) =>
+      checks(info, "child_tax_credit");
+    bindings[`dependents.dep${row}_other_dependent_credit`] = (_, info) =>
+      checks(info, "other_dependents");
+  }
+  return bindings as Bindings;
 }
 
 /*
@@ -124,58 +147,7 @@ export function register(): void {
         info.livedApartFromSpouseAllYear === true
           ? true
           : undefined,
-      /*
-       * MANUAL EDIT: the Dependents table, one row per dependent fact in the
-       * order recorded. A row with no dependent stays blank.
-       */
-      "dependents.dep1_first_name": (_, info) => dependent(info, 1)?.firstName,
-      "dependents.dep1_last_name": (_, info) => dependent(info, 1)?.lastName,
-      "dependents.dep1_ssn": (_, info) => dependentTin(dependent(info, 1)),
-      "dependents.dep1_relationship": (_, info) => dependent(info, 1)?.relationship,
-      "dependents.dep1_lived_with_you": (_, info) => livedWithYou(dependent(info, 1)),
-      "dependents.dep1_lived_in_us": (_, info) => livedWithYouInUs(dependent(info, 1)),
-      "dependents.dep1_full_time_student": (_, info) => dependent(info, 1)?.fullTimeStudent,
-      "dependents.dep1_permanently_disabled": (_, info) => dependent(info, 1)?.permanentlyDisabled,
-      "dependents.dep1_child_tax_credit": (_, info) =>
-        earnsCredit(dependent(info, 1), "child_tax_credit"),
-      "dependents.dep1_other_dependent_credit": (_, info) =>
-        earnsCredit(dependent(info, 1), "other_dependents"),
-      "dependents.dep2_first_name": (_, info) => dependent(info, 2)?.firstName,
-      "dependents.dep2_last_name": (_, info) => dependent(info, 2)?.lastName,
-      "dependents.dep2_ssn": (_, info) => dependentTin(dependent(info, 2)),
-      "dependents.dep2_relationship": (_, info) => dependent(info, 2)?.relationship,
-      "dependents.dep2_lived_with_you": (_, info) => livedWithYou(dependent(info, 2)),
-      "dependents.dep2_lived_in_us": (_, info) => livedWithYouInUs(dependent(info, 2)),
-      "dependents.dep2_full_time_student": (_, info) => dependent(info, 2)?.fullTimeStudent,
-      "dependents.dep2_permanently_disabled": (_, info) => dependent(info, 2)?.permanentlyDisabled,
-      "dependents.dep2_child_tax_credit": (_, info) =>
-        earnsCredit(dependent(info, 2), "child_tax_credit"),
-      "dependents.dep2_other_dependent_credit": (_, info) =>
-        earnsCredit(dependent(info, 2), "other_dependents"),
-      "dependents.dep3_first_name": (_, info) => dependent(info, 3)?.firstName,
-      "dependents.dep3_last_name": (_, info) => dependent(info, 3)?.lastName,
-      "dependents.dep3_ssn": (_, info) => dependentTin(dependent(info, 3)),
-      "dependents.dep3_relationship": (_, info) => dependent(info, 3)?.relationship,
-      "dependents.dep3_lived_with_you": (_, info) => livedWithYou(dependent(info, 3)),
-      "dependents.dep3_lived_in_us": (_, info) => livedWithYouInUs(dependent(info, 3)),
-      "dependents.dep3_full_time_student": (_, info) => dependent(info, 3)?.fullTimeStudent,
-      "dependents.dep3_permanently_disabled": (_, info) => dependent(info, 3)?.permanentlyDisabled,
-      "dependents.dep3_child_tax_credit": (_, info) =>
-        earnsCredit(dependent(info, 3), "child_tax_credit"),
-      "dependents.dep3_other_dependent_credit": (_, info) =>
-        earnsCredit(dependent(info, 3), "other_dependents"),
-      "dependents.dep4_first_name": (_, info) => dependent(info, 4)?.firstName,
-      "dependents.dep4_last_name": (_, info) => dependent(info, 4)?.lastName,
-      "dependents.dep4_ssn": (_, info) => dependentTin(dependent(info, 4)),
-      "dependents.dep4_relationship": (_, info) => dependent(info, 4)?.relationship,
-      "dependents.dep4_lived_with_you": (_, info) => livedWithYou(dependent(info, 4)),
-      "dependents.dep4_lived_in_us": (_, info) => livedWithYouInUs(dependent(info, 4)),
-      "dependents.dep4_full_time_student": (_, info) => dependent(info, 4)?.fullTimeStudent,
-      "dependents.dep4_permanently_disabled": (_, info) => dependent(info, 4)?.permanentlyDisabled,
-      "dependents.dep4_child_tax_credit": (_, info) =>
-        earnsCredit(dependent(info, 4), "child_tax_credit"),
-      "dependents.dep4_other_dependent_credit": (_, info) =>
-        earnsCredit(dependent(info, 4), "other_dependents"),
+      ...dependentRowBindings(),
       // The attached statement for the fifth dependent onward is not modeled.
       "dependents.more_than_four_dependents": (_, info) =>
         info.dependents === undefined ? undefined : info.dependents.length > 4,

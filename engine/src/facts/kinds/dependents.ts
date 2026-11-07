@@ -5,8 +5,9 @@
  * conversation, not the engine's.
  */
 
-import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
+
+type FactRow = { key: string; value: unknown; category: string };
 
 export interface DependentFactValue {
   firstName: string;
@@ -23,12 +24,19 @@ export interface DependentFactValue {
   usCitizenOrResident?: boolean;
   fullTimeStudent?: boolean;
   permanentlyDisabled?: boolean;
+  /*
+   * A child who lived with the taxpayer half the year or less: true when the
+   * custodial parent released the claim on Form 8332 (1040 instructions,
+   * children of divorced or separated parents), which gives this parent the
+   * child tax credit.
+   */
+  form8332Release?: boolean;
 }
 
 export interface DependentFact {
   dependentSlug: string;
   dependent: DependentFactValue;
-  sourceFact: TaxFactRow;
+  sourceFact: FactRow;
 }
 
 const DEPENDENT_CATEGORY = "dependents";
@@ -46,7 +54,7 @@ export function isDependentFact(fact: TaxFactRow): boolean {
   return fact.category === DEPENDENT_CATEGORY && DEPENDENT_KEY_RE.test(fact.key);
 }
 
-export function parseDependentFact(fact: TaxFactRow): DependentFact | null {
+export function parseDependentFact(fact: FactRow): DependentFact | null {
   const match = DEPENDENT_KEY_RE.exec(fact.key);
   if (!match || fact.category !== DEPENDENT_CATEGORY) return null;
   return {
@@ -56,22 +64,24 @@ export function parseDependentFact(fact: TaxFactRow): DependentFact | null {
   };
 }
 
-export function getDependentFacts(facts: FactsView): DependentFact[] {
-  return facts
-    .byCategory(DEPENDENT_CATEGORY)
-    .map(parseDependentFact)
-    .filter((fact): fact is DependentFact => fact !== null);
+/* Every dependent fact, in the order recorded. */
+export function getDependentFacts(facts: ReadonlyArray<FactRow>): DependentFact[] {
+  return facts.map(parseDependentFact).filter((fact): fact is DependentFact => fact !== null);
 }
 
 /*
  * The relationships that make a qualifying child (1040 instructions, Who Qualifies
  * as Your Dependent, Step 1): a child, stepchild, foster child, sibling, half or
- * step sibling, or a descendant of any of them. Spelled as the 1040 prints them.
+ * step sibling, or a descendant of any of them. An adopted child is the
+ * taxpayer's own child. Spelled as the 1040 prints them, hyphens as spaces.
  */
 const QUALIFYING_CHILD_RELATIONSHIPS = new Set([
   "son",
   "daughter",
   "child",
+  "adopted son",
+  "adopted daughter",
+  "adopted child",
   "stepson",
   "stepdaughter",
   "stepchild",
@@ -85,28 +95,54 @@ const QUALIFYING_CHILD_RELATIONSHIPS = new Set([
   "grandson",
   "granddaughter",
   "grandchild",
-  "great-grandchild",
+  "great grandson",
+  "great granddaughter",
+  "great grandchild",
   "niece",
   "nephew",
+  "grandniece",
+  "grandnephew",
+  "great niece",
+  "great nephew",
 ]);
 
 export function isQualifyingChildRelationship(relationship: string): boolean {
-  return QUALIFYING_CHILD_RELATIONSHIPS.has(relationship.trim().toLowerCase());
+  const spelled = relationship.trim().toLowerCase().replace(/-/g, " ").replace(/\s+/g, " ");
+  return QUALIFYING_CHILD_RELATIONSHIPS.has(spelled);
+}
+
+function parseDob(dob: string | undefined): { month: number; year: number } | undefined {
+  if (dob === undefined) return undefined;
+  const match = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(dob.trim());
+  if (!match) return undefined;
+  return { month: Number(match[1]), year: Number(match[3]) };
 }
 
 /* Age on December 31 of the tax year; undefined when the date of birth is unknown or unreadable. */
 export function ageAtYearEnd(dob: string | undefined, taxYear: number): number | undefined {
-  if (dob === undefined) return undefined;
-  const match = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(dob.trim());
-  if (!match) return undefined;
-  const month = Number(match[1]);
-  const day = Number(match[2]);
-  const year = Number(match[3]);
-  const hadBirthday = month < 12 || (month === 12 && day <= 31);
-  return taxYear - year - (hadBirthday ? 0 : 1);
+  const born = parseDob(dob);
+  return born === undefined ? undefined : taxYear - born.year;
 }
 
-export type DependentCredit = "child_tax_credit" | "other_dependents";
+/*
+ * Row (5)(a) of the Dependents table: lived with the taxpayer more than half the
+ * year. A child born during the year counts the months it was alive (1040
+ * instructions, Definitions and Special Rules: the home was the person's home
+ * for more than half the time the person was alive). A death during the year
+ * has no fact yet. Undefined while an answer is missing.
+ */
+export function livedWithTaxpayerOverHalfYear(
+  dependent: DependentFactValue,
+  taxYear: number,
+): boolean | undefined {
+  const born = parseDob(dependent.dob);
+  if (born === undefined || dependent.monthsLivedWithYou === undefined) return undefined;
+  const monthsAlive = born.year === taxYear ? 12 - born.month + 1 : 12;
+  return dependent.monthsLivedWithYou > monthsAlive / 2;
+}
+
+/* "none": a dependent who earns neither credit (no TIN, or not a citizen or resident). */
+export type DependentCredit = "child_tax_credit" | "other_dependents" | "none";
 
 /*
  * Which box in row (7) of the 1040 Dependents table the engine checks, from
@@ -114,30 +150,35 @@ export type DependentCredit = "child_tax_credit" | "other_dependents";
  * Dependents (ODC)": the child tax credit needs a qualifying child under 17 at
  * the end of the year with an SSN; any other dependent who is a U.S. citizen,
  * national or resident alien with an SSN, ITIN or ATIN gets the credit for other
- * dependents. Undefined while the date of birth, the months in the home or the
- * citizenship answer is unknown: the engine then waits and asks, never assumes.
+ * dependents. Undefined while an answer the rule needs is unknown (the date of
+ * birth, the months in the home, the citizenship, or the Form 8332 release for a
+ * child who lived with the taxpayer half the year or less): the engine then waits
+ * and asks, never assumes. The taxpayer's own SSN must also be valid for
+ * employment; a taxpayer with only an ITIN has no fact yet.
  */
 export function dependentCredit(
   dependent: DependentFactValue,
   taxYear: number,
 ): DependentCredit | undefined {
   const age = ageAtYearEnd(dependent.dob, taxYear);
+  const livedOverHalfYear = livedWithTaxpayerOverHalfYear(dependent, taxYear);
   if (
     age === undefined ||
-    dependent.monthsLivedWithYou === undefined ||
+    livedOverHalfYear === undefined ||
     dependent.usCitizenOrResident === undefined
   ) {
     return undefined;
   }
   const citizenOrResident = dependent.usCitizenOrResident;
-  const livedOverHalfYear = dependent.monthsLivedWithYou > 6;
-  const qualifyingChild =
-    age < 17 &&
-    isQualifyingChildRelationship(dependent.relationship) &&
-    livedOverHalfYear &&
-    citizenOrResident &&
-    dependent.ssn !== undefined;
-  if (qualifyingChild) return "child_tax_credit";
   const hasTin = dependent.ssn !== undefined || dependent.tin !== undefined;
-  return citizenOrResident && hasTin ? "other_dependents" : undefined;
+  const childByRelationship = age < 17 && isQualifyingChildRelationship(dependent.relationship);
+  if (childByRelationship && !livedOverHalfYear && dependent.form8332Release === undefined) {
+    return undefined;
+  }
+  const qualifyingChild =
+    childByRelationship && (livedOverHalfYear || dependent.form8332Release === true);
+  if (qualifyingChild && citizenOrResident && dependent.ssn !== undefined) {
+    return "child_tax_credit";
+  }
+  return citizenOrResident && hasTin ? "other_dependents" : "none";
 }
