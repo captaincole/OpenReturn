@@ -60,6 +60,11 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
     8995-A) with its 1099-K, a W-2G, interest and dividends (Forms 8959 and 8960). Checked
     against the case's answer key; its README lists where the engine
     follows the instructions instead
+  - `tcb-ca-005` — TaxCalcBench case ty25-ca-005, CA checked only. MFJ,
+    a dependent, CA itemized deductions (Schedule CA Part II, FTB 3526),
+    the CA AMT on an ISO exercise (Schedule P), an early 1099-R (FTB
+    3805P). Every checked line matches the case's CA key; the federal
+    forms are inputs with locked goldens
 - **Catalog-fill checks** (`golden/catalogFill.ts`) — for every form in its
   `CATALOGS` registry: fill the blank PDF with synthetic values for every
   cataloged field and diff against a golden snapshot in

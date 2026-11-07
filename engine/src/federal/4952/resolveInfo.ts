@@ -2,14 +2,12 @@ import {
   INVESTMENT_INTEREST_KEYS,
   isDividendFactKey,
   isInterestFactKey,
-  isTradeFact,
 } from "../../facts/index.js";
-import type { TaxFactRow } from "../../facts/rows.js";
 import { sum } from "../../money.js";
 import {
-  factsInCategory,
   missingInputs,
   num,
+  onlyInterestOrDividendIncome,
   resolveMustFile,
   sumInvestmentBox,
   type ResolverInputs,
@@ -45,11 +43,8 @@ export function resolve4952Info(inputs: ResolverInputs): Form4952FilingInfo {
   const qualifiedDividends = sumInvestmentBox(inputs, "box1b", isDividendFactKey);
   const expense = sum(answers.expensePaid, answers.disallowedCarryover);
   const hasExpense = (answers.expensePaid ?? 0) > 0 || (answers.disallowedCarryover ?? 0) > 0;
-  const capitalGainDistributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
-  const trades = (factsInCategory(inputs, "investment_income") as TaxFactRow[]).filter(isTradeFact);
-  const onlyInterestOrDividends = trades.length === 0 && capitalGainDistributions === 0;
   const exception =
-    onlyInterestOrDividends &&
+    onlyInterestOrDividendIncome(inputs) &&
     answers.investmentExpenses === 0 &&
     answers.disallowedCarryover === 0 &&
     sum(interest, ordinaryDividends, -qualifiedDividends) > expense;

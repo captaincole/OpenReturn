@@ -2,13 +2,11 @@ import {
   INVESTMENT_INTEREST_KEYS,
   isDividendFactKey,
   isInterestFactKey,
-  isTradeFact,
 } from "../../../facts/index.js";
-import type { TaxFactRow } from "../../../facts/rows.js";
 import { sum } from "../../../money.js";
 import {
-  factsInCategory,
   num,
+  onlyInterestOrDividendIncome,
   resolveMustFile,
   sumInvestmentBox,
   type ResolverInputs,
@@ -37,13 +35,10 @@ export function resolve3526Info(inputs: ResolverInputs): Form3526FilingInfo {
     sumInvestmentBox(inputs, "box3", isInterestFactKey),
   );
   const dividends = sumInvestmentBox(inputs, "box1a", isDividendFactKey);
-  const capitalGainDistributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
-  const trades = (factsInCategory(inputs, "investment_income") as TaxFactRow[]).filter(isTradeFact);
-  const onlyInterestOrDividends = trades.length === 0 && capitalGainDistributions === 0;
   const expense = sum(expensePaid, carryover);
   const hasExpense = expense > 0;
   const exception =
-    onlyInterestOrDividends &&
+    onlyInterestOrDividendIncome(inputs) &&
     investmentExpenses === 0 &&
     carryover === 0 &&
     expense <= sum(interest, dividends);
