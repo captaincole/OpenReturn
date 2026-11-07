@@ -11,6 +11,11 @@ export const INVESTMENT_INTEREST_KEYS = {
   disallowedCarryover: "investment_interest.disallowed_carryover",
   /* Line 4g: qualified dividends and net capital gain elected as investment income. */
   electedQualifiedDividendsAndGain: "investment_interest.elected_qualified_dividends_and_gain",
-  /* Line 5: investment expenses other than interest. */
+  /*
+   * Line 5: allowed deductions directly connected with investment income, other
+   * than interest (depreciation, depletion, investment expenses from a K-1 that
+   * the return deducts). Not advisory, custodial or management fees: those are
+   * miscellaneous itemized deductions, not allowed for 2025 (Form 4952, Line 5).
+   */
   investmentExpenses: "investment_interest.investment_expenses",
 } as const;
