@@ -30,7 +30,11 @@ export function resolve4952Info(inputs: ResolverInputs): Form4952FilingInfo {
     ),
     investmentExpenses: num(inputs, INVESTMENT_INTEREST_KEYS.investmentExpenses),
   };
-  const interest = sumInvestmentBox(inputs, "box1", isInterestFactKey);
+  /* Interest as 1040 line 2b counts it: 1099-INT box 1 plus box 3 (Treasury and savings bonds). */
+  const interest = sum(
+    sumInvestmentBox(inputs, "box1", isInterestFactKey),
+    sumInvestmentBox(inputs, "box3", isInterestFactKey),
+  );
   const ordinaryDividends = sumInvestmentBox(inputs, "box1a", isDividendFactKey);
   const qualifiedDividends = sumInvestmentBox(inputs, "box1b", isDividendFactKey);
   const expense = sum(answers.expensePaid, answers.disallowedCarryover);
@@ -55,10 +59,12 @@ export function resolve4952Info(inputs: ResolverInputs): Form4952FilingInfo {
   const files = resolution.value === true;
   return {
     mustFile: { "form-4952": resolution },
-    /* The election (line 4g) and other expenses (line 5) are answers; 0 is an answer. */
+    /* Every line the taxpayer states is asked while the form files; 0 is an answer. */
     missingInputs: {
       "form-4952": files
         ? missingInputs({
+            [INVESTMENT_INTEREST_KEYS.expensePaid]: answers.expensePaid,
+            [INVESTMENT_INTEREST_KEYS.disallowedCarryover]: answers.disallowedCarryover,
             [INVESTMENT_INTEREST_KEYS.electedQualifiedDividendsAndGain]:
               answers.electedQualifiedDividendsAndGain,
             [INVESTMENT_INTEREST_KEYS.investmentExpenses]: answers.investmentExpenses,
@@ -66,6 +72,7 @@ export function resolve4952Info(inputs: ResolverInputs): Form4952FilingInfo {
         : [],
     },
     investmentInterestPaid: answers.expensePaid,
+    noFormException: hasExpense && exception,
     disallowedInterestCarryover: answers.disallowedCarryover,
     electedQualifiedDividendsAndGain: answers.electedQualifiedDividendsAndGain,
     investmentExpenses: answers.investmentExpenses,
