@@ -144,7 +144,8 @@ const partI: Bindings = {
     return positiveOrBlank(numberOrBlank(form["schedule-ca.5.page2.job_expenses_25_net"]));
   },
   /*
-   * MANUAL EDIT: the AMT FTB 3526 line 8 less the regular FTB 3526 line 8
+   * MANUAL EDIT: the difference between the regular FTB 3526 line 8 and the AMT
+   * one, "as a negative amount" when the AMT amount is the larger
    * (ca-540-sched-p-inst-2025::sec::line-7-investment-interest-expense-adjustment::b02).
    * The AMT refiguring differs in line 1 (Part I line 4 interest), line 2 (the
    * 2024 AMT disallowed amount) and lines 4a–4c (AMT adjustments) (…::b01); only
@@ -156,7 +157,7 @@ const partI: Bindings = {
     const regularLine8 = numberOrBlank(form["form-3526.0.line.8_investment_interest_deduction"]);
     const amtLine8 = amtInvestmentInterestDeduction(form, info);
     if (regularLine8 === undefined || amtLine8 === undefined) return undefined;
-    return roundDollars(amtLine8 - regularLine8);
+    return roundDollars(regularLine8 - amtLine8);
   },
   /*
    * The ISO spread: fair market value at exercise over the amount paid, for

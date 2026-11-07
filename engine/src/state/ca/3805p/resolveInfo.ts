@@ -19,9 +19,10 @@ import type { EarlyDistributionOwner, Form3805pFilingInfo } from "./filingInfo.j
  * letter too: 1B, 1D, 1L…); S is a SIMPLE IRA in its first two years. Code J
  * (early Roth IRA) takes line 1 from Form 8606 line 19
  * (::sec::line-1-early-distributions-included-in-income::b05), which the engine
- * does not compute: a code J distribution is not counted here.
+ * does not compute: the form files and its amount waits.
  */
-const EARLY_NO_EXCEPTION_CODES = ["1", "S"];
+const EARLY_NO_EXCEPTION_CODES = ["1", "S", "J"];
+const ROTH_IRA_EARLY_CODE = "J";
 const SIMPLE_IRA_CODE = "S";
 
 interface EarlyRow {
@@ -71,6 +72,7 @@ function amountIncludedInIncome(
   rows: EarlyRow[],
   allIraRowsOfOwner: RetirementDistributionFactValue[],
 ): number | undefined {
+  if (rows.some((row) => row.distribution.box7.includes(ROTH_IRA_EARLY_CODE))) return undefined;
   const plan = rows
     .filter((row) => !row.distribution.box7IraSepSimple)
     .map((row) => rowTaxable(row.distribution));
