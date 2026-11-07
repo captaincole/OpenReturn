@@ -34,7 +34,9 @@ export interface Scenario {
   skip?: boolean;
   /**
    * The ratchet: a listed line that now matches FAILS, so the list only shrinks.
-   * Requires allowNotModeled.
+   * A listed line's expected value and its golden PDF widget both route here.
+   * A verified scenario lists a line when its preparer's PDF and the
+   * instructions disagree (Alejandro's Schedule CA line 3a).
    */
   knownMismatches?: Record<string, string>;
 }

@@ -99,7 +99,38 @@ export function assertRenderedChecked(
 }
 
 /** Compares per widget name, not per fieldId, so catalog mislabels show. */
+/* Widgets whose golden mismatch is a known, listed cause (Scenario.knownMismatches). */
+export interface KnownWidgets {
+  widgets: Map<string, { fieldId: string; cause: string }>;
+  hits: string[];
+}
+
 export function assertMatchesGolden(
+  rendered: Map<string, RenderedWidget[]>,
+  golden: Map<string, GoldenValue>,
+  failures: string[],
+  prefix?: string,
+  known?: KnownWidgets,
+): void {
+  const own: string[] = [];
+  compareWidgets(rendered, golden, own, prefix);
+  for (const failure of own) {
+    const entry = [...(known?.widgets ?? [])].find(([widgetName]) =>
+      failure.includes(`widget ${widgetName} `),
+    );
+    if (entry && known) known.hits.push(`[${prefix}] ${entry[1].fieldId} — ${entry[1].cause}`);
+    else failures.push(failure);
+  }
+  for (const [widgetName, { fieldId }] of known?.widgets ?? []) {
+    if (!own.some((failure) => failure.includes(`widget ${widgetName} `))) {
+      failures.push(
+        tag(prefix, `${fieldId} now matches the golden — remove it from knownMismatches.`),
+      );
+    }
+  }
+}
+
+function compareWidgets(
   rendered: Map<string, RenderedWidget[]>,
   golden: Map<string, GoldenValue>,
   failures: string[],

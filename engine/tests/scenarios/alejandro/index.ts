@@ -12,6 +12,15 @@ export const alejandroScenario: Scenario = {
   description:
     "Single CA W-2 + 1099-DIV/B filer, $100k wages + $385 ordinary divs + $2,550 capital gain → $584 federal refund, $175 CA refund.",
   taxYear: ALEJANDRO_TAX_YEAR,
+  /*
+   * The CPA's Schedule CA left line 3a column A blank; the instructions copy
+   * federal line 3a there (ca-540-sched-ca-inst-2025::sec::section-a-line-1a-through-line-7a-and-section-b-line-1-through-line-9a::b01).
+   * The engine follows the instructions; the CPA PDF stays as filed.
+   */
+  knownMismatches: {
+    "schedule-ca.0.line.3a_federal":
+      "The CPA's PDF leaves line 3a column A blank; the instructions copy federal line 3a ($381).",
+  },
   userId: ALEJANDRO_USER_ID,
   facts: alejandroFacts,
   decisions: alejandroDecisions,
