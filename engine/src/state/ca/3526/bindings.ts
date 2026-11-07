@@ -155,5 +155,3 @@ export function register(): void {
     },
   });
 }
-
-// A line of another form is untyped; a Form 4952 that is not filed gives undefined.

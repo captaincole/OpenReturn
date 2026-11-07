@@ -61,6 +61,20 @@ describe("mortgageInterestWithinLimit", () => {
     expect(result.limited).toBe(true);
   });
 
+  it("waits while the principal is unanswered", () => {
+    const info = resolveScheduleAInfo(
+      inputs(
+        [fact(MORTGAGE_KEYS.interestForm1098, 8059)],
+        [{ decisionKey: "decisions.itemize_vs_standard", decision: "itemized" }],
+      ),
+    );
+    expect(info.mortgageInterestForm1098).toBeUndefined();
+    expect(info.mortgageInterestWaits).toBe(true);
+    expect(info.missingInputs?.["schedule-a"]).toContain(
+      MORTGAGE_KEYS.outstandingPrincipalForm1098,
+    );
+  });
+
   it("asks for the origination date between the two limits", () => {
     const info = resolveScheduleAInfo(
       inputs(
@@ -72,7 +86,7 @@ describe("mortgageInterestWithinLimit", () => {
       ),
     );
     expect(info.mortgageInterestForm1098).toBeUndefined();
-    expect(info.mortgageInterestLimited).toBe(false);
+    expect(info.mortgageInterestWaits).toBe(true);
     expect(info.missingInputs?.["schedule-a"]).toContain(MORTGAGE_KEYS.originationDateForm1098);
   });
 });

@@ -86,12 +86,13 @@ export function register(): void {
       // MANUAL EDIT: routed to FilingInfo slot.
       "0.line.8c_points_not_form1098": (_, info) => info.pointsNotForm1098,
       /*
-       * MANUAL EDIT: a Form 1098 over the acquisition-debt limit leaves line 8a
-       * to Pub. 936, not modeled; lines 8e, 10 and 17 wait with it rather than
-       * add the other terms as if the interest were 0.
+       * MANUAL EDIT: a Form 1098 whose interest cannot print yet (over the
+       * acquisition-debt limit, which Pub. 936 figures, or an open question on
+       * the principal or date) makes lines 8e, 10 and 17 wait with line 8a
+       * rather than add the other terms as if the interest were 0.
        */
       "0.line.8e_total_mortgage_interest_points": (form, info) => {
-        if (info.mortgageInterestLimited) return undefined;
+        if (info.mortgageInterestWaits) return undefined;
         const line8a = form["0.line.8a_mortgage_interest_form1098"];
         const line8b = form["0.line.8b_mortgage_interest_not_form1098"];
         const line8c = form["0.line.8c_points_not_form1098"];
@@ -112,7 +113,7 @@ export function register(): void {
         return info.noFormException === true ? info.investmentInterestPaid : undefined;
       },
       "0.line.10_total_interest": (form, info) => {
-        if (info.mortgageInterestLimited) return undefined;
+        if (info.mortgageInterestWaits) return undefined;
         const line8e = form["0.line.8e_total_mortgage_interest_points"];
         const nine = form["0.line.9_investment_interest"];
         if (line8e === undefined && nine === undefined) return undefined;
@@ -134,7 +135,7 @@ export function register(): void {
         return sum(eleven, twelve, thirteen);
       },
       "0.line.17_total_itemized_deductions": (form, info) =>
-        info.mortgageInterestLimited
+        info.mortgageInterestWaits
           ? undefined
           : sum(
               form["0.line.4_net_medical_dental"],

@@ -128,7 +128,7 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
     realEstateTaxes,
     personalPropertyTaxes: num(inputs, "state_local_tax.personal_property"),
     mortgageInterestForm1098: mortgage.interest,
-    mortgageInterestLimited: mortgage.limited,
+    mortgageInterestWaits: interestForm1098 !== undefined && mortgage.interest === undefined,
     mortgageInterestNotForm1098: num(inputs, MORTGAGE_KEYS.interestNotForm1098),
     pointsNotForm1098: num(inputs, MORTGAGE_KEYS.pointsNotForm1098),
     giftsCashCheck,

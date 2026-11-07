@@ -304,7 +304,11 @@ export function register(): void {
         const earlyTaxUnknown =
           info.mustFile?.["form-3805p"]?.value === true &&
           form["line.63_other_taxes_credit_recapture"] === undefined;
-        if (earlyTaxUnknown) return undefined;
+        // Schedule P completed with its AMT still unknown (Part I line 7 waiting): the same.
+        const amtUnknown =
+          info.mustFile?.["schedule-p"]?.value === true &&
+          form["schedule-p.1.line.26_alternative_minimum_tax"] === undefined;
+        if (earlyTaxUnknown || amtUnknown) return undefined;
         return sum(
           form["line.48_tax_after_credits"],
           form["line.61_alternative_minimum_tax"],
