@@ -12,7 +12,7 @@ Cade (`@openreturn/cade`) is OpenReturn's conversational agent. It interviews yo
 ## What Cade does
 
 - **Interviews you**, one step at a time. The form engine decides what to ask next; Cade does not guess the scope.
-- **Reads your documents.** W-2s, 1099s and photos of them go to the model directly. Structured ingest tools (`ingest-w2-structured`, `ingest-1099-b`, `ingest-w2g`, `ingest-1099-k`, …) store each value. A sole-proprietor business has no document: `record-business` stores the user's answers for Schedule C.
+- **Reads your documents.** W-2s, 1099s and photos of them go to the model directly. Structured ingest tools (`ingest-w2-structured`, `ingest-1099-b`, `ingest-w2g`, `ingest-1099-k`, …) store each value. A sole-proprietor business has no document: `record-business` stores the user's answers for Schedule C, and `record-dependent` stores each dependent for the 1040 and Schedule 8812.
 - **Records tax facts**, each with a citation: a document, a statement line, or "you told me, on this date". An unknown becomes an open question, never a guess.
 - **Makes decisions** where the facts leave a judgment call, such as filing status or California residency. Each decision has a rationale, its supporting facts, a confidence and what could make it wrong.
 - **Has each decision grounded.** `record-ai-decision` returns at once, and the review-decision workflow sends the decision to Canon's `ground` workflow over MCP. The verdict and citations come back to `app.db`.
