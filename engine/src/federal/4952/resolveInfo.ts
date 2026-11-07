@@ -18,7 +18,9 @@ import type { Form4952FilingInfo } from "./filingInfo.js";
  * deduct investment interest expense, except when interest and ordinary
  * dividends less qualified dividends exceed the expense, there are no other
  * investment expenses, and there is no carryover from last year. With no
- * expense and no carryover there is nothing to deduct.
+ * expense and no carryover there is nothing to deduct. The exception needs
+ * both answers: while one is missing, the form files and asks for it, so the
+ * engine never takes an unanswered question for 0.
  */
 export function resolve4952Info(inputs: ResolverInputs): Form4952FilingInfo {
   const answers = {
@@ -40,9 +42,9 @@ export function resolve4952Info(inputs: ResolverInputs): Form4952FilingInfo {
   const expense = sum(answers.expensePaid, answers.disallowedCarryover);
   const hasExpense = (answers.expensePaid ?? 0) > 0 || (answers.disallowedCarryover ?? 0) > 0;
   const exception =
-    sum(interest, ordinaryDividends, -qualifiedDividends) > expense &&
-    (answers.investmentExpenses ?? 0) === 0 &&
-    (answers.disallowedCarryover ?? 0) === 0;
+    answers.investmentExpenses === 0 &&
+    answers.disallowedCarryover === 0 &&
+    sum(interest, ordinaryDividends, -qualifiedDividends) > expense;
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_4952",
     fallbacks: [
