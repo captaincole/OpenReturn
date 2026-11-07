@@ -13,6 +13,7 @@ import {
   assertNotRendered,
   assertRenderedChecked,
   assertRenderedText,
+  type KnownWidgets,
 } from "../helpers/assertions.js";
 import { blankPdfPath, catalogPath } from "../helpers/formPaths.js";
 import { readGoldenPdfValues } from "../helpers/goldenPdf.js";
@@ -83,8 +84,8 @@ export async function runScenario(scenario: Scenario): Promise<RunResult> {
   const t0 = Date.now();
   const failures: string[] = [];
   const notModeled: string[] | undefined = scenario.allowNotModeled ? [] : undefined;
-  const known = scenario.allowNotModeled
-    ? { causes: scenario.knownMismatches ?? {}, hits: [] as string[] }
+  const known = scenario.knownMismatches
+    ? { causes: scenario.knownMismatches, hits: [] as string[] }
     : undefined;
 
   const specs = scenario.forms.map((sf) => ({ sf, spec: getFormSpec(sf.formId) }));
@@ -117,6 +118,23 @@ export async function runScenario(scenario: Scenario): Promise<RunResult> {
     notModeled,
     knownMismatches: known?.hits,
   };
+}
+
+/* The golden PDF widgets of the listed lines: a mismatch there is a known hit, a match a stale entry. */
+function knownWidgets(
+  formId: string,
+  catalog: Catalog,
+  known?: { causes: Record<string, string>; hits: string[] },
+): KnownWidgets | undefined {
+  if (!known) return undefined;
+  const widgets = new Map<string, { fieldId: string; cause: string }>();
+  for (const field of catalog.getFields(formId)) {
+    const cause = known.causes[field.fieldId];
+    if (cause !== undefined && field.pdfWidgetName) {
+      widgets.set(field.pdfWidgetName, { fieldId: field.fieldId, cause });
+    }
+  }
+  return { widgets, hits: known.hits };
 }
 
 async function assertForm(
@@ -179,7 +197,13 @@ async function assertForm(
   /* The fieldId assertions above trust the catalog's widget mapping; the golden PDF catches mislabels. */
   if (sf.goldenPdfPath) {
     const golden = await readGoldenPdfValues(resolve(ENGINE_ROOT, sf.goldenPdfPath));
-    assertMatchesGolden(rendered, golden, failures, prefix);
+    assertMatchesGolden(
+      rendered,
+      golden,
+      failures,
+      prefix,
+      knownWidgets(sf.formId, catalog, known),
+    );
   }
 
   if (warnings.length > 0) {
