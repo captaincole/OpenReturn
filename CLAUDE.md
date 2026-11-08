@@ -121,7 +121,7 @@ All persistent state lives in local files: user data under `cade/.data/`, the co
 | file | contents | owner |
 | --- | --- | --- |
 | `corpus.db` | reference corpus (ref_* tables, FTS5 + vectors); lives in `canon/.data/` | `canon/src/db/libsql.ts` |
-| `app.db` | domain data (tax_facts, ai_decisions, filings, ask_threads/ask_turns, …) | `db/appDb.ts` |
+| `app.db` | domain data (tax_facts, assumptions, ai_decisions, filings, ask_threads/ask_turns, …) | `db/appDb.ts` |
 | `mastra.db` | Mastra runtime (threads, messages, working memory) | `@mastra/libsql` |
 | `documents/` | document blobs `{filingId}/{category}/{slug}-{ulid}.{ext}` | `db/blobStore.ts` |
 
@@ -221,7 +221,7 @@ const line18 = roundDollars(line17 * 0.15);                     // calculated li
 
 ## Design principles
 
-- **Never invent a number.** If the taxpayer isn't sure, the agent records an open question, not a guess. This is enforced in the system prompt and should be enforced in prompt tests once we have them.
+- **Never invent a number.** If the taxpayer isn't sure, the agent records an open question, not a guess. A rough amount the taxpayer gives is an assumption (below), never a fact. This is enforced in the system prompt and should be enforced in prompt tests once we have them.
 - **Every fact has a citation.** The `source_note` field is required — document source, statement line number, or "verbal, date".
 - **Document minimalism — only ask for load-bearing forms.** Getting a form is expensive user labor (dig through email, HR portal, physical mail). The default is verbal confirmation; we escalate to "please upload X" only when (a) the form is required to compute or file the return, or (b) a fact on the form can't be reliably obtained another way. Example: don't ask for Form 1095-C if the only fact we need is "had coverage all year" — a yes/no scoping question gets it faster. Example: W-2 box 12 code D already proves 401(k) contribution, so we don't also ask for Form 5498.
 - **Bottom-up derivation, not top-down guessing.** The case engine computes state (draft 1040, scoping decisions, open asks) from facts via a graph of typed pure-function derivations. Cade *reads* the computed state to decide what to ask next; he doesn't invent scope or asks on his own.
@@ -236,6 +236,7 @@ The system separates two kinds of data:
 
 - **Tax facts** (`tax_facts` table) — things the taxpayer stated directly. Raw, verbatim. Written by `record-tax-facts` / `ingest-w2-structured`.
 - **AI decisions** (`ai_decisions` table) — judgment calls the agent made when facts were ambiguous or underdetermined. Every decision carries: `decisionKey`, `decision`, `rationale` (the agent's plain-English "why"), `supportingFactKeys[]` (which facts it used), `confidence` (low/medium/high), and `dissentingConsiderations` (what could make it wrong). Written by `record-ai-decision`.
+- **Assumptions** (`assumptions` table, the `tax_facts` shape) — rough amounts the taxpayer gave for planning and comparisons only ("about $12,000 of mortgage interest"). Written by `record-assumptions`. The engine fills a fact key that has no fact with its assumption and never overrides a fact, so the document replaces it with no cleanup. It reports the assumptions in use (`assumptionsInUse`, `pendingInputs().pendingAssumptions`); while any is in use, `readyToFile` is false and `generate-tax-documents` refuses. A common-case value Cade fills in himself (use tax $0) is a *default*: a fact, verified at summary. "Estimate" means estimated tax payments only; "scenario" means a golden test case only.
 
 Decisions flow back into the case engine: a decision with key `decisions.ca_residency` becomes a fact-like input that downstream derivations can consume. This means "is this person a full-year CA resident?" can be the output of AI reasoning, and the CA 540 scoping derivation reads it like any other fact.
 
