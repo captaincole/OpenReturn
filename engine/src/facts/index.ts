@@ -2,6 +2,7 @@
 
 export * from "./kinds/alternativeMinimumTax.js";
 export * from "./kinds/business.js";
+export * from "./kinds/caMiscellaneousDeductions.js";
 export * from "./kinds/dependents.js";
 export * from "./kinds/dividends.js";
 export * from "./kinds/gamblingWinnings.js";

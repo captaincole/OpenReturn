@@ -7,6 +7,7 @@
 import { describe, expect, it } from "vitest";
 import {
   AMT_KEYS,
+  CA_MISC_DEDUCTION_KEYS,
   INVESTMENT_INTEREST_KEYS,
   makeDividendFactKey,
   makeInterestFactKey,
@@ -14,6 +15,7 @@ import {
   makeTradeFactKey,
   makeTraditionalIraFactKey,
 } from "../../../../src/facts/index.js";
+import { resolveScheduleCaInfo } from "../../../../src/filingInfoResolvers.js";
 import { makeResolverInputs } from "../../../../src/resolverInputs.js";
 import { resolve3526Info } from "../../../../src/state/ca/3526/resolveInfo.js";
 import { resolve3805pInfo } from "../../../../src/state/ca/3805p/resolveInfo.js";
@@ -227,6 +229,34 @@ describe("resolve3526Info", () => {
 });
 
 const files540: Decision = { decisionKey: "decisions.scope.must_file_ca_540", decision: true };
+
+describe("resolveScheduleCaInfo", () => {
+  const itemizes: Decision = { decisionKey: "decisions.itemize_vs_standard", decision: "itemized" };
+
+  it("asks a California itemizer for the investment fees once", () => {
+    const info = resolveScheduleCaInfo(
+      makeResolverInputs({ facts: [], decisions: [files540, itemizes] }),
+    );
+    expect(info.missingInputs?.["schedule-ca"]).toEqual([CA_MISC_DEDUCTION_KEYS.investmentFees]);
+    const answered = resolveScheduleCaInfo(
+      makeResolverInputs({
+        facts: [{ key: CA_MISC_DEDUCTION_KEYS.investmentFees, category: "other", value: 1200 }],
+        decisions: [files540, itemizes],
+      }),
+    );
+    expect(answered.missingInputs?.["schedule-ca"]).toEqual([]);
+    expect(answered.caInvestmentFees).toBe(1200);
+  });
+
+  it("does not ask a standard-deduction filer or a non-California filer", () => {
+    const standard = resolveScheduleCaInfo(
+      makeResolverInputs({ facts: [], decisions: [files540] }),
+    );
+    expect(standard.missingInputs?.["schedule-ca"]).toEqual([]);
+    const other = resolveScheduleCaInfo(makeResolverInputs({ facts: [], decisions: [itemizes] }));
+    expect(other.missingInputs?.["schedule-ca"]).toEqual([]);
+  });
+});
 
 describe("resolveSchedulePInfo", () => {
   it("completes the schedule for an incentive stock option spread", () => {
