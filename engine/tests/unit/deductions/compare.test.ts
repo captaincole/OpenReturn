@@ -100,6 +100,18 @@ describe("compareDeductions", () => {
     expect(result.ca?.itemized).toBe(12132);
   });
 
+  it("never names a branch a return does not deduct as deciding it", () => {
+    // State income tax is an estimate before the W-2 arrives; California takes none of it.
+    const result = compareDeductions(
+      input({
+        amounts: { state_income_tax: 12000, real_estate_tax: 6000, mortgage_interest: 10000 },
+        estimated: new Set<BranchId>(["state_income_tax"]),
+        agi: 150000,
+      }),
+    );
+    expect(result.ca).toMatchObject({ itemized: 16000, decidingBranches: [] });
+  });
+
   it("has no California comparison without a 540", () => {
     expect(compareDeductions(input({ caStandard: undefined })).ca).toBeUndefined();
   });

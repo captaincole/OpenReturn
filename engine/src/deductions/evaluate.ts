@@ -61,10 +61,7 @@ function exactAmount(id: BranchId, info: FilingInfo, forms: Forms): number | und
             info.pointsNotForm1098,
           );
     case "investment_interest":
-      if (files(info, "form-4952")) {
-        return evaluatedNumber(forms, "form-4952.0.line.8_investment_interest_deduction");
-      }
-      return info.noFormException === true ? info.investmentInterestPaid : undefined;
+      return investmentInterest(info, forms);
     case "gifts_cash":
       return info.giftsCashCheck;
     case "gifts_property":
@@ -76,6 +73,22 @@ function exactAmount(id: BranchId, info: FilingInfo, forms: Forms): number | und
     case "ca_investment_fees":
       return info.caInvestmentFees;
   }
+}
+
+/*
+ * Schedule A line 9: Form 4952 line 8 when the form files, the interest paid
+ * under its no-file exception, and nothing when no expense or carryover is
+ * stated above 0 (the branch then closes instead of staying open).
+ */
+function investmentInterest(info: FilingInfo, forms: Forms): number | undefined {
+  if (files(info, "form-4952")) {
+    return evaluatedNumber(forms, "form-4952.0.line.8_investment_interest_deduction");
+  }
+  if (info.noFormException === true) return info.investmentInterestPaid;
+  const paid = info.investmentInterestPaid;
+  const carryover = info.disallowedInterestCarryover;
+  if (paid === undefined || carryover === undefined) return undefined;
+  return paid <= 0 && carryover <= 0 ? 0 : undefined;
 }
 
 /*
@@ -102,9 +115,16 @@ function missingFor(
   stated: Map<string, unknown>,
 ): string[] {
   const missing = branch.amountKeys.filter((key) => !stated.has(key));
+  if (branch.id === "investment_interest") {
+    // Form 4952's own answers (the election, other expenses) are what line 8 waits on.
+    const asked = files(info, "form-4952") ? (info.missingInputs?.["form-4952"] ?? []) : [];
+    return [...new Set([...missing, ...asked])];
+  }
   if (branch.id !== "mortgage_interest") return missing;
   const asked = info.missingInputs?.["schedule-a"] ?? [];
-  const principalNeeded = stated.has(MORTGAGE_KEYS.interestForm1098);
+  // As the Schedule A resolver asks: only with a 1098 interest above 0.
+  const interest = stated.get(MORTGAGE_KEYS.interestForm1098);
+  const principalNeeded = typeof interest === "number" && interest > 0;
   return [
     ...missing.filter(
       (key) => key !== MORTGAGE_KEYS.outstandingPrincipalForm1098 || principalNeeded,
@@ -154,9 +174,7 @@ export function evaluateDeductions(input: DeductionsInput): DeductionsSummary {
   for (const state of branches) {
     if (state.amount === undefined) continue;
     amounts[state.id] = state.amount;
-    if (state.status === "estimate" || state.status === "for_cpa") estimated.add(state.id);
-    if (state.status === "below_floor" && input.estimates?.[state.id] !== undefined)
-      estimated.add(state.id);
+    if (state.estimated) estimated.add(state.id);
   }
   const comparison = compareDeductions({
     amounts,

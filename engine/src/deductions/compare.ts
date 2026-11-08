@@ -97,23 +97,53 @@ export function caItemized(input: ComparisonInput): number | undefined {
   });
 }
 
-function judge(input: ComparisonInput, itemized: number, standard: number): JurisdictionComparison {
+/*
+ * An estimated branch decides the result when setting it to 0, or doubling
+ * it, flips the recommendation on this return: its document comes first. A
+ * branch this return does not deduct, or one under its floor either way,
+ * never does.
+ */
+function decidingBranches(
+  input: ComparisonInput,
+  total: (amounts: Amounts) => number | undefined,
+  standard: number,
+  itemizes: boolean,
+): BranchId[] {
+  const flips = (id: BranchId, amount: number) => {
+    const changed = total({ ...input.amounts, [id]: amount });
+    return changed !== undefined && changed > standard !== itemizes;
+  };
+  return [...input.estimated].filter((id) => {
+    const amount = amountOf(input.amounts, id);
+    return flips(id, 0) || flips(id, 2 * amount);
+  });
+}
+
+function judge(
+  input: ComparisonInput,
+  total: (amounts: Amounts) => number | undefined,
+  standard: number,
+): JurisdictionComparison | undefined {
+  const itemized = total(input.amounts);
+  if (itemized === undefined) return undefined;
   const margin = itemized - standard;
-  const decidingBranches = [...input.estimated].filter(
-    (id) => amountOf(input.amounts, id) >= Math.abs(margin),
-  );
+  const itemizes = margin > 0;
   return {
     itemized,
     standard,
     margin,
-    recommendation: margin > 0 ? "itemize" : "standard",
-    decidingBranches,
+    recommendation: itemizes ? "itemize" : "standard",
+    decidingBranches: decidingBranches(input, total, standard, itemizes),
   };
 }
 
 export function compareDeductions(input: ComparisonInput): DeductionsComparison {
-  const federal = judge(input, federalItemized(input), input.federalStandard);
+  const federal = judge(
+    input,
+    (amounts) => federalItemized({ ...input, amounts }),
+    input.federalStandard,
+  )!;
   if (input.caStandard === undefined) return { federal };
-  const ca = caItemized(input);
-  return ca === undefined ? { federal } : { federal, ca: judge(input, ca, input.caStandard) };
+  const ca = judge(input, (amounts) => caItemized({ ...input, amounts }), input.caStandard);
+  return ca === undefined ? { federal } : { federal, ca };
 }
