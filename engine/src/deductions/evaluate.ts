@@ -14,8 +14,9 @@ import type { FilingInfo } from "../filingInfo.js";
 import { sumOrBlank } from "../money.js";
 import type { AnyFormField, EvaluatedForm } from "../types.js";
 import { DEDUCTION_ITEMS, type DeductionItem, type ItemId } from "./catalog.js";
-import { compareDeductions, type Amounts, type DeductionsComparison } from "./compare.js";
+import { compareDeductions, type DeductionsComparison } from "./compare.js";
 import { itemState, type ItemState } from "./items.js";
+import type { Amounts } from "./rules.js";
 
 export interface DeductionsInput {
   facts: ReadonlyArray<{ key: string; value: unknown }>;
