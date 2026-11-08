@@ -7,59 +7,15 @@
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { defineForm } from "../../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
-import type { FilingStatus } from "../../../values.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
+import { caItemizedLine29 } from "./itemizedWorksheet.js";
 import type { ScheduleCa } from "./types.js";
 
-/*
- * MANUAL EDIT: Part II line 29. Federal AGI (Form 540 line 13) above this
- * sends line 28 through the Itemized Deductions Worksheet
- * (ca-540-sched-ca-inst-2025::sec::line-29-california-itemized-deductions::b02).
- */
-const LINE_29_FEDERAL_AGI_THRESHOLD = {
-  single: 252203,
-  married_filing_separately: 252203,
-  head_of_household: 378310,
-  married_filing_jointly: 504411,
-  qualifying_surviving_spouse: 504411,
-} as const satisfies Record<FilingStatus, number>;
-/* Itemized Deductions Worksheet lines 4 and 8 (ca-540-sched-ca-inst-2025::sec::itemized-deductions-worksheet::b01). */
-const WORKSHEET_LINE_4_RATE = 0.8;
-const WORKSHEET_LINE_8_RATE = 0.06;
 /* Part II line 24: the 2% floor on job expenses (the form; the line has no section). */
 const JOB_EXPENSES_FLOOR_RATE = 0.02;
 
 const text = (value: unknown): string | undefined =>
   typeof value === "string" ? value : undefined;
-
-/*
- * MANUAL EDIT: the Itemized Deductions Worksheet for Part II line 29
- * (ca-540-sched-ca-inst-2025::sec::itemized-deductions-worksheet::b01).
- * Worksheet line 2 adds Schedule A lines 4, 9, 15 and gambling losses in
- * line 16; the engine cannot split gambling losses out of line 16, so a
- * filled line 16 leaves line 29 blank.
- */
-function itemizedDeductionsWorksheet(input: {
-  line28: number;
-  federalAgi: number;
-  threshold: number;
-  scheduleALine4: unknown;
-  scheduleALine9: unknown;
-  scheduleALine15: unknown;
-  scheduleALine16: unknown;
-}): number | undefined {
-  if (input.scheduleALine16 !== undefined) return undefined;
-  const line1 = input.line28;
-  const line2 = sum(input.scheduleALine4, input.scheduleALine9, input.scheduleALine15);
-  const line3 = line1 - line2;
-  if (line3 <= 0) return line1;
-  const line4 = roundDollars(line3 * WORKSHEET_LINE_4_RATE);
-  const line7 = input.federalAgi - input.threshold;
-  if (line7 <= 0) return line1;
-  const line8 = roundDollars(line7 * WORKSHEET_LINE_8_RATE);
-  const line9 = Math.min(line4, line8);
-  return line1 - line9;
-}
 
 export function register(): void {
   defineForm<ScheduleCa, ScheduleCaFilingInfo>("schedule-ca", {
@@ -415,12 +371,10 @@ export function register(): void {
         if (typeof line28 !== "number" || !info.filingStatus) return undefined;
         const federalAgi = form["form-1040.line.11b"];
         if (typeof federalAgi !== "number") return undefined;
-        const threshold = LINE_29_FEDERAL_AGI_THRESHOLD[info.filingStatus];
-        if (federalAgi <= threshold) return line28;
-        return itemizedDeductionsWorksheet({
+        return caItemizedLine29({
           line28,
           federalAgi,
-          threshold,
+          filingStatus: info.filingStatus,
           scheduleALine4: form["schedule-a.0.line.4_net_medical_dental"],
           scheduleALine9: form["schedule-a.0.line.9_investment_interest"],
           scheduleALine15: form["schedule-a.0.line.15_casualty_theft_loss"],
