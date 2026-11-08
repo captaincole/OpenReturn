@@ -12,6 +12,7 @@ export * from "./kinds/hsaCoverage.js";
 export * from "./kinds/hsaDistribution.js";
 export * from "./kinds/interest.js";
 export * from "./kinds/investmentInterest.js";
+export * from "./kinds/lifeProbe.js";
 export * from "./kinds/miscIncome.js";
 export * from "./kinds/mortgage.js";
 export * from "./kinds/paymentTransactions.js";
