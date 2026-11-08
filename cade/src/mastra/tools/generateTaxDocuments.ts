@@ -1,17 +1,19 @@
 import { createTool } from "@mastra/core/tools";
 import {
   FORMS,
+  pendingInputs,
+  readyToFile,
   renderForm,
   type AnyFormField,
   type EvaluatedForm,
   type EvaluatedScenario,
+  type PendingInputs,
 } from "@openreturn/engine";
 import { z } from "zod";
 import { createDocument } from "../db/userDocuments";
 import { loadBlankPdf } from "../formAssets";
 import { loadAndEvaluateScenario } from "../loadScenario";
 import { cadeRequestContextSchema } from "../server/requestContext";
-import { buildCaseStateForScenario } from "./caseState";
 import { requireUserContext } from "./userContext";
 
 interface RenderTarget {
@@ -182,13 +184,13 @@ async function writeSidecar(opts: {
 
 /*
  * Nothing renders while an input is pending: a missing input can give a wrong but plausible
- * number (no filing status → zero standard deduction and zero tax).
+ * number (no filing status → zero standard deduction and zero tax), and an assumption in use
+ * is a rough amount, not a fact for the return.
  */
-function pendingInputsResult(pendingDecisions: string[], pendingFacts: string[]) {
+function pendingInputsResult(pending: PendingInputs) {
   return {
     status: "pending_inputs" as const,
-    pendingDecisions,
-    pendingFacts,
+    ...pending,
     blockers: [],
     url: "",
     form540Url: null,
@@ -206,7 +208,7 @@ export const generateTaxDocuments = createTool({
   id: "generate-tax-documents",
   requestContextSchema: cadeRequestContextSchema,
   description:
-    "Render the taxpayer's filed forms as PDFs using the form engine. Runs the multi-form evaluator against the current facts and decisions, looks up each catalog field's PDF widget, and writes the value. Returns a list of {formId, url} entries for each form whose mustFile predicate evaluates true, plus a JSON sidecar with the evaluated forms. Call at hand-off (no pending decisions, all required facts present). The tool refuses while any input is pending. Marked draft / not-for-filing — a CPA reviews before submission. Produces Form 1040, plus any of: Form 8949 / Schedule D when the taxpayer has reportable capital sales, Schedule CA (540) and Form 540 when the taxpayer is a CA filer. READ THE RESULT CAREFULLY: if status is 'pending_inputs', NO forms were generated — record each key in pendingDecisions (record-ai-decision) and pendingFacts (record-tax-facts, up to 5 per call; ask the user when you do not know the value), then call this tool again. If status is 'no_forms_rendered', NO forms were generated — tell the user that, report the blockers (record any missingDecisionKey listed), and do NOT present any links or dollar amounts. When forms ARE generated, present them by pasting markdownLinks verbatim — never compose or alter document URLs yourself.",
+    "Render the taxpayer's filed forms as PDFs using the form engine. Runs the multi-form evaluator against the current facts and decisions, looks up each catalog field's PDF widget, and writes the value. Returns a list of {formId, url} entries for each form whose mustFile predicate evaluates true, plus a JSON sidecar with the evaluated forms. Call at hand-off (no pending decisions, all required facts present). The tool refuses while any input is pending, including any assumption in use (pendingAssumptions): an assumption is a rough amount, never a number for the return. Marked draft / not-for-filing — a CPA reviews before submission. Produces Form 1040, plus any of: Form 8949 / Schedule D when the taxpayer has reportable capital sales, Schedule CA (540) and Form 540 when the taxpayer is a CA filer. READ THE RESULT CAREFULLY: if status is 'pending_inputs', NO forms were generated — record each key in pendingDecisions (record-ai-decision) and pendingFacts (record-tax-facts, up to 5 per call; ask the user when you do not know the value), and get the fact behind each key in pendingAssumptions (the document, or the exact amount), then call this tool again. If status is 'no_forms_rendered', NO forms were generated — tell the user that, report the blockers (record any missingDecisionKey listed), and do NOT present any links or dollar amounts. When forms ARE generated, present them by pasting markdownLinks verbatim — never compose or alter document URLs yourself.",
   inputSchema: z.object({
     year: z.number().int(),
   }),
@@ -215,6 +217,7 @@ export const generateTaxDocuments = createTool({
     status: z.enum(["ok", "pending_inputs", "no_forms_rendered"]),
     pendingDecisions: z.array(z.string()),
     pendingFacts: z.array(z.string()),
+    pendingAssumptions: z.array(z.string()),
     blockers: z.array(
       z.object({
         formId: z.string(),
@@ -259,10 +262,8 @@ export const generateTaxDocuments = createTool({
 
     const scenario = await loadAndEvaluateScenario(scope, { id: filingId, taxYear }, authEmail);
     const { forms } = scenario;
-    const { pendingDecisions, pendingFacts } = buildCaseStateForScenario(scenario);
-    if (pendingDecisions.length > 0 || pendingFacts.length > 0) {
-      return pendingInputsResult(pendingDecisions, pendingFacts);
-    }
+    const pending = pendingInputs(scenario);
+    if (!readyToFile(pending)) return pendingInputsResult(pending);
 
     const { documents, blockers, sidecarForms, totalLinesPopulated, totalCounts } =
       await renderMustFileForms(scenario, { userId, filingId, year });
@@ -298,6 +299,7 @@ export const generateTaxDocuments = createTool({
       status: documents.length > 0 ? ("ok" as const) : ("no_forms_rendered" as const),
       pendingDecisions: [],
       pendingFacts: [],
+      pendingAssumptions: [],
       blockers,
       url: url1040,
       form540Url: url540,

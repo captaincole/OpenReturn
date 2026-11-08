@@ -4,7 +4,7 @@ import { listFacts, listOpenQuestions, recordFacts, resolveQuestion } from "../d
 import { cadeRequestContextSchema } from "../server/requestContext";
 import { requireUserContext } from "./userContext";
 
-const CATEGORIES = [
+export const CATEGORIES = [
   "preferences",
   "identity",
   "filing_status",

@@ -3,6 +3,7 @@ import type { BaseFormField, EngineDerivation, EvaluatedForm } from "@openreturn
 import {
   getFormSpec,
   pendingInputs,
+  readyToFile,
   type EngineFiling,
   type EvaluatedScenario,
 } from "@openreturn/engine";
@@ -76,19 +77,31 @@ function extractMoney(
 }
 
 export function buildCaseStateForScenario(scenario: EvaluatedScenario) {
-  const { forms, facts, decisions, filingInfo, authEmail } = scenario;
+  const { forms, facts, assumptionsInUse, decisions, filingInfo, authEmail } = scenario;
   const form1040 = forms.get("form-1040")!;
   const form540 = forms.get("form-540")!;
 
   const summaries: EvaluatedFormSummary[] = [summarizeForm(form1040), summarizeForm(form540)];
 
-  const { pendingDecisions, pendingFacts } = pendingInputs(scenario);
+  const pending = pendingInputs(scenario);
+  const { pendingDecisions, pendingFacts, pendingAssumptions } = pending;
 
   return {
     summaries,
     pendingDecisions,
     pendingFacts,
-    /* Null while anything is pending: a missing input gives a wrong but plausible number. */
+    pendingAssumptions,
+    /* Each assumption the return rests on, with the taxpayer's words: Cade follows up on each. */
+    assumptionsInUse: assumptionsInUse.map(({ key, value, sourceNote }) => ({
+      key,
+      value,
+      sourceNote,
+    })),
+    readyToFile: readyToFile(pending),
+    /*
+     * Null while a decision or fact is pending: a missing input gives a wrong but
+     * plausible number. Assumptions do not null it: their numbers are the taxpayer's.
+     */
     money:
       pendingDecisions.length === 0 && pendingFacts.length === 0
         ? extractMoney(form1040, form540)
@@ -154,7 +167,7 @@ export const getCaseState = createTool({
   id: "get-case-state",
   requestContextSchema: cadeRequestContextSchema,
   description:
-    "Returns live case state: per-form summaries (must-file + line count + blockers), aggregated pending decisions and missing facts across all forms, and money convenience fields (wages, AGI, tax, withholding, refund/owed). Call at the start of every turn to know what's required, what's blocked, and what to ask next. The user is identified automatically — pass only the tax year.",
+    "Returns live case state: per-form summaries (must-file + line count + blockers), aggregated pending decisions and missing facts across all forms, the assumptions the return rests on, whether it is ready to file, and money convenience fields (wages, AGI, tax, withholding, refund/owed). Call at the start of every turn to know what's required, what's blocked, and what to ask next. The user is identified automatically — pass only the tax year.",
   inputSchema: z.object({
     year: z.number().int().describe("Tax year (e.g. 2025)"),
   }),
@@ -162,6 +175,15 @@ export const getCaseState = createTool({
     forms: z.array(z.any()),
     pendingDecisions: z.array(z.string()),
     pendingFacts: z.array(z.string()),
+    pendingAssumptions: z
+      .array(z.string())
+      .describe("Keys of the assumptions in use: each needs its fact before the return can file."),
+    assumptionsInUse: z.array(
+      z.object({ key: z.string(), value: z.any(), sourceNote: z.string().nullable() }),
+    ),
+    readyToFile: z
+      .boolean()
+      .describe("False while any decision, fact or assumption is pending. A CPA still reviews."),
     money: z
       .object({
         totalWages: moneyLine,
@@ -178,7 +200,7 @@ export const getCaseState = createTool({
       })
       .nullable()
       .describe(
-        "null while pendingDecisions or pendingFacts has entries: the values are not final.",
+        "null while pendingDecisions or pendingFacts has entries: the values are not final. With assumptions in use, the values rest on the taxpayer's rough amounts.",
       ),
     factCount: z.number(),
     authEmail: z.string().nullable(),
@@ -199,16 +221,19 @@ export const getCaseState = createTool({
   execute: async (_input, context) => {
     const { scope, filingId, taxYear, authEmail: jwtEmail } = await requireUserContext(context);
     const scenario = await loadAndEvaluateScenario(scope, { id: filingId, taxYear }, jwtEmail);
-    const { summaries, pendingDecisions, pendingFacts, money, factCount, decisionRows, authEmail } =
-      buildCaseStateForScenario(scenario);
+    const state = buildCaseStateForScenario(scenario);
+    const { summaries, pendingDecisions, pendingFacts, money, factCount, decisionRows } = state;
 
     return {
       forms: summaries,
       pendingDecisions,
       pendingFacts,
+      pendingAssumptions: state.pendingAssumptions,
+      assumptionsInUse: state.assumptionsInUse,
+      readyToFile: state.readyToFile,
       money,
       factCount,
-      authEmail,
+      authEmail: state.authEmail,
       aiDecisions: decisionRows.map((row) => ({
         id: row.id,
         decisionKey: row.decisionKey,

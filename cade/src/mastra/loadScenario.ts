@@ -3,6 +3,7 @@
 import { evaluateScenario, type EngineFiling, type EvaluatedScenario } from "@openreturn/engine";
 import { listDecisions } from "./db/aiDecisions";
 import type { Scope } from "./db/appDb";
+import { listAssumptions } from "./db/assumptions";
 import { listFacts } from "./db/taxFacts";
 
 export async function loadAndEvaluateScenario(
@@ -10,9 +11,10 @@ export async function loadAndEvaluateScenario(
   filing: EngineFiling,
   authEmail: string | null = null,
 ): Promise<EvaluatedScenario> {
-  const [facts, decisions] = await Promise.all([
+  const [facts, assumptions, decisions] = await Promise.all([
     listFacts(scope, { filingId: filing.id, limit: 500 }),
+    listAssumptions(scope),
     listDecisions(scope, { filingId: filing.id, limit: 500 }),
   ]);
-  return evaluateScenario({ filing, facts, decisions, authEmail });
+  return evaluateScenario({ filing, facts, assumptions, decisions, authEmail });
 }

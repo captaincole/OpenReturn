@@ -86,6 +86,19 @@ const APP_SCHEMA_DDL: string[] = [
          )`,
   `CREATE INDEX IF NOT EXISTS idx_tax_facts_filing ON tax_facts(filing_id, created_at)`,
   `CREATE INDEX IF NOT EXISTS idx_tax_facts_key ON tax_facts(filing_id, fact_key)`,
+  /* Numbers for calculations only (the engine's assumptions): the tax_facts shape, never read as facts. */
+  `CREATE TABLE IF NOT EXISTS assumptions (
+           id          TEXT PRIMARY KEY,
+           user_id     TEXT NOT NULL,
+           filing_id   TEXT NOT NULL REFERENCES filings(id) ON DELETE CASCADE,
+           tax_year    INTEGER NOT NULL,
+           category    TEXT NOT NULL,
+           fact_key    TEXT NOT NULL,
+           fact_value  TEXT,
+           source_note TEXT,
+           created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
+         )`,
+  `CREATE INDEX IF NOT EXISTS idx_assumptions_filing ON assumptions(filing_id, created_at)`,
   `CREATE TABLE IF NOT EXISTS open_questions (
            id          TEXT PRIMARY KEY,
            user_id     TEXT NOT NULL,
