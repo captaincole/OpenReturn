@@ -1,29 +1,29 @@
 /*
- * The branch states from fact lists: what Cade asks next for a mortgage and a
+ * The item states from fact lists: what Cade asks next for a mortgage and a
  * margin loan, and the estimates path. No forms are evaluated here (the
  * comparison needs AGI from the 1040); the integration test covers that.
  */
 
 import { describe, expect, it } from "vitest";
 import { evaluateDeductions } from "../../../src/deductions/evaluate.js";
-import { INVESTMENT_INTEREST_KEYS, LIFE_KEYS, MORTGAGE_KEYS } from "../../../src/facts/index.js";
+import { INVESTMENT_INTEREST_KEYS, MORTGAGE_KEYS } from "../../../src/facts/index.js";
 import { resolveFilingInfo } from "../../../src/filingInfo.js";
 
 type Fact = { key: string; category: string; value: unknown };
 
 const itemized = [{ decisionKey: "decisions.itemize_vs_standard", decision: "itemized" }];
 
-function branches(facts: Fact[], estimates = {}) {
+function items(facts: Fact[], estimates = {}) {
   const filingInfo = resolveFilingInfo({ facts, decisions: itemized });
-  return evaluateDeductions({ facts, filingInfo, forms: new Map(), estimates }).branches;
+  return evaluateDeductions({ facts, filingInfo, forms: new Map(), estimates }).items;
 }
 
 const fact = (key: string, value: unknown): Fact => ({ key, category: "mortgage", value });
 const state = (facts: Fact[], id: string, estimates = {}) =>
-  branches(facts, estimates).find((branch) => branch.id === id)!;
+  items(facts, estimates).find((item) => item.id === id)!;
 
-describe("evaluateDeductions branch states", () => {
-  it("opens the mortgage branch from a 1098 that arrives early, and asks its principal", () => {
+describe("evaluateDeductions item states", () => {
+  it("opens the mortgage item from a 1098 that arrives early, and asks its principal", () => {
     const mortgage = state([fact(MORTGAGE_KEYS.interestForm1098, 12000)], "mortgage_interest");
     expect(mortgage).toMatchObject({
       status: "open",
@@ -69,8 +69,7 @@ describe("evaluateDeductions branch states", () => {
   });
 
   it("takes a rough amount before any document", () => {
-    const owns = [fact(LIFE_KEYS.ownsHome, true)];
-    const mortgage = state(owns, "mortgage_interest", { mortgage_interest: 8000 });
+    const mortgage = state([], "mortgage_interest", { mortgage_interest: 8000 });
     expect(mortgage).toMatchObject({
       status: "estimate",
       amount: 8000,
@@ -79,7 +78,7 @@ describe("evaluateDeductions branch states", () => {
     });
   });
 
-  it("closes a margin-loan branch with no interest and no carryover", () => {
+  it("closes a margin-loan item with no interest and no carryover", () => {
     const margin = state(
       [
         fact(INVESTMENT_INTEREST_KEYS.expensePaid, 0),

@@ -9,15 +9,15 @@ import { saltCap } from "../federal/schedule-a/saltCap.js";
 import { atLeast, roundDollars, sum } from "../money.js";
 import { caItemizedLine29 } from "../state/ca/schedule-ca/itemizedWorksheet.js";
 import type { FilingStatus } from "../values.js";
-import { DEDUCTION_BRANCHES, type BranchId, type ReturnLine } from "./catalog.js";
+import { DEDUCTION_ITEMS, type ItemId, type ReturnLine } from "./catalog.js";
 
-export type Amounts = Partial<Record<BranchId, number>>;
+export type Amounts = Partial<Record<ItemId, number>>;
 
 export interface ComparisonInput {
-  /** Each branch's amount as stated (exact or estimate); a floor or cap is applied here. */
+  /** Each item's amount as stated (exact or estimate); a floor or cap is applied here. */
   amounts: Amounts;
-  /** The branches whose amount is an estimate. */
-  estimated: ReadonlySet<BranchId>;
+  /** The items whose amount is an estimate. */
+  estimated: ReadonlySet<ItemId>;
   /** Federal AGI (Form 1040 line 11b): the floors and the SALT cap read it. */
   agi: number;
   filingStatus: FilingStatus;
@@ -35,11 +35,11 @@ export interface JurisdictionComparison {
   margin: number;
   recommendation: "itemize" | "standard";
   /**
-   * Estimated branches whose amount is at least the margin: an error that size
+   * Estimated items whose amount is at least the margin: an error that size
    * could flip the recommendation, so their documents come first. Empty when
    * the recommendation holds whatever the estimates turn out to be.
    */
-  decidingBranches: BranchId[];
+  decidingItems: ItemId[];
 }
 
 export interface DeductionsComparison {
@@ -47,11 +47,11 @@ export interface DeductionsComparison {
   ca?: JurisdictionComparison;
 }
 
-const amountOf = (amounts: Amounts, id: BranchId): number => amounts[id] ?? 0;
+const amountOf = (amounts: Amounts, id: ItemId): number => amounts[id] ?? 0;
 
-const branchById = (id: BranchId) => DEDUCTION_BRANCHES.find((branch) => branch.id === id)!;
+const itemById = (id: ItemId) => DEDUCTION_ITEMS.find((item) => item.id === id)!;
 
-/* What one branch adds on one return: its amount, or the part over the AGI floor. */
+/* What one item adds on one return: its amount, or the part over the AGI floor. */
 function counted(line: ReturnLine, amount: number, agi: number): number {
   if (line.rule === "none") return 0;
   if (line.rule === "agi_floor")
@@ -61,10 +61,10 @@ function counted(line: ReturnLine, amount: number, agi: number): number {
 
 /* Schedule A line 17: the SALT pool under its cap, the rest as their rules say. */
 export function federalItemized(input: ComparisonInput): number {
-  const salt = DEDUCTION_BRANCHES.filter((branch) => branch.federal.rule === "salt");
-  const pool = sum(...salt.map((branch) => amountOf(input.amounts, branch.id)));
-  const others = DEDUCTION_BRANCHES.filter((branch) => branch.federal.rule !== "salt").map(
-    (branch) => counted(branch.federal, amountOf(input.amounts, branch.id), input.agi),
+  const salt = DEDUCTION_ITEMS.filter((item) => item.federal.rule === "salt");
+  const pool = sum(...salt.map((item) => amountOf(input.amounts, item.id)));
+  const others = DEDUCTION_ITEMS.filter((item) => item.federal.rule !== "salt").map((item) =>
+    counted(item.federal, amountOf(input.amounts, item.id), input.agi),
   );
   return sum(Math.min(pool, saltCap(input.agi, input.filingStatus)), ...others);
 }
@@ -75,10 +75,10 @@ export function federalItemized(input: ComparisonInput): number {
  */
 export function caItemized(input: ComparisonInput): number | undefined {
   const line28 = sum(
-    ...DEDUCTION_BRANCHES.map((branch) =>
-      branch.id === "investment_interest" && input.caInvestmentInterest !== undefined
+    ...DEDUCTION_ITEMS.map((item) =>
+      item.id === "investment_interest" && input.caInvestmentInterest !== undefined
         ? input.caInvestmentInterest
-        : counted(branch.ca, amountOf(input.amounts, branch.id), input.agi),
+        : counted(item.ca, amountOf(input.amounts, item.id), input.agi),
     ),
   );
   // Worksheet line 2 reads the federal Schedule A lines 4 and 9.
@@ -87,7 +87,7 @@ export function caItemized(input: ComparisonInput): number | undefined {
     federalAgi: input.agi,
     filingStatus: input.filingStatus,
     scheduleALine4: counted(
-      branchById("medical").federal,
+      itemById("medical").federal,
       amountOf(input.amounts, "medical"),
       input.agi,
     ),
@@ -98,18 +98,18 @@ export function caItemized(input: ComparisonInput): number | undefined {
 }
 
 /*
- * An estimated branch decides the result when setting it to 0, or doubling
+ * An estimated item decides the result when setting it to 0, or doubling
  * it, flips the recommendation on this return: its document comes first. A
- * branch this return does not deduct, or one under its floor either way,
+ * item this return does not deduct, or one under its floor either way,
  * never does.
  */
-function decidingBranches(
+function decidingItems(
   input: ComparisonInput,
   total: (amounts: Amounts) => number | undefined,
   standard: number,
   itemizes: boolean,
-): BranchId[] {
-  const flips = (id: BranchId, amount: number) => {
+): ItemId[] {
+  const flips = (id: ItemId, amount: number) => {
     const changed = total({ ...input.amounts, [id]: amount });
     return changed !== undefined && changed > standard !== itemizes;
   };
@@ -133,7 +133,7 @@ function judge(
     standard,
     margin,
     recommendation: itemizes ? "itemize" : "standard",
-    decidingBranches: decidingBranches(input, total, standard, itemizes),
+    decidingItems: decidingItems(input, total, standard, itemizes),
   };
 }
 

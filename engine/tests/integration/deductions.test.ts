@@ -5,8 +5,7 @@
  */
 
 import { describe, expect, it } from "vitest";
-import { LIFE_KEYS } from "../../src/facts/index.js";
-import { DEDUCTION_BRANCHES, evaluateScenario, type EvaluatedScenario } from "../../src/index.js";
+import { DEDUCTION_ITEMS, evaluateScenario, type EvaluatedScenario } from "../../src/index.js";
 import { SCENARIOS } from "../scenarios/index.js";
 
 function line(scenario: EvaluatedScenario, fieldId: string): number | undefined {
@@ -29,9 +28,9 @@ const evaluated = SCENARIOS.map((scenario) => ({
 }));
 
 describe("deductions module", () => {
-  it.each(evaluated)("$name: every catalog branch has a state", ({ result }) => {
-    expect(result.deductions.branches.map((branch) => branch.id)).toEqual(
-      DEDUCTION_BRANCHES.map((branch) => branch.id),
+  it.each(evaluated)("$name: every catalog item has a state", ({ result }) => {
+    expect(result.deductions.items.map((item) => item.id)).toEqual(
+      DEDUCTION_ITEMS.map((item) => item.id),
     );
   });
 
@@ -49,7 +48,7 @@ describe("deductions module", () => {
     expect(result.deductions.comparison?.federal.itemized).toBe(
       line(result, "schedule-a.0.line.17_total_itemized_deductions"),
     );
-    expect(result.deductions.comparison?.federal.decidingBranches).toEqual([]);
+    expect(result.deductions.comparison?.federal.decidingItems).toEqual([]);
   });
 
   const caItemizers = itemizers.filter(
@@ -62,12 +61,15 @@ describe("deductions module", () => {
     );
   });
 
-  it("tcb-ca-005: medical bills under the floor are closed; only the vehicle question is left", () => {
+  it("tcb-ca-005: medical bills under the floor are closed; two line questions are left", () => {
     const madison = evaluated.find(({ name }) => name === "tcb-ca-005")!.result.deductions;
-    const medical = madison.branches.find((branch) => branch.id === "medical");
+    const medical = madison.items.find((item) => item.id === "medical");
     expect(medical?.status).toBe("below_floor");
-    // The documents opened every other branch; the case says nothing about a California vehicle.
-    expect(madison.branches.flatMap((branch) => branch.missing)).toEqual([LIFE_KEYS.caVehicle]);
+    // The case says nothing about a vehicle license fee or a gift carryover.
+    expect(madison.items.flatMap((item) => item.missing)).toEqual([
+      "state_local_tax.personal_property",
+      "charitable.carryover",
+    ]);
     expect(madison.comparison?.federal.recommendation).toBe("itemize");
   });
 });

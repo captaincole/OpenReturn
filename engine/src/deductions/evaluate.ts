@@ -1,5 +1,5 @@
 /*
- * The deductions module's entry point: each catalog branch's state for this
+ * The deductions module's entry point: each catalog item's state for this
  * filer, and the itemized-or-standard comparison. It reads the same facts and
  * filing info the forms read, and the evaluated forms where a form applies a
  * limit (Form 4952, FTB 3526), so exact amounts are the forms' amounts. Its
@@ -13,20 +13,20 @@ import { standardDeduction } from "../federal/1040/deductions.js";
 import type { FilingInfo } from "../filingInfo.js";
 import { sumOrBlank } from "../money.js";
 import type { AnyFormField, EvaluatedForm } from "../types.js";
-import { branchState, type BranchState } from "./branches.js";
-import { DEDUCTION_BRANCHES, type BranchId, type DeductionBranch } from "./catalog.js";
+import { DEDUCTION_ITEMS, type DeductionItem, type ItemId } from "./catalog.js";
 import { compareDeductions, type Amounts, type DeductionsComparison } from "./compare.js";
+import { itemState, type ItemState } from "./items.js";
 
 export interface DeductionsInput {
   facts: ReadonlyArray<{ key: string; value: unknown }>;
   filingInfo: FilingInfo;
   forms: ReadonlyMap<string, EvaluatedForm<AnyFormField>>;
-  /** Rough amounts per branch, stated before the documents (the facts flagged as estimates, #92). */
+  /** Rough amounts per item, stated before the documents (the facts flagged as estimates, #92). */
   estimates?: Amounts;
 }
 
 export interface DeductionsSummary {
-  branches: BranchState[];
+  items: ItemState[];
   /** Undefined until AGI, the filing status and the standard deduction are known. */
   comparison?: DeductionsComparison;
 }
@@ -43,8 +43,8 @@ function evaluatedNumber(forms: Forms, fieldId: string): number | undefined {
 
 const files = (info: FilingInfo, formId: string) => info.mustFile?.[formId]?.value === true;
 
-/* The amount each branch's form line will use, from exact facts; undefined while open. */
-function exactAmount(id: BranchId, info: FilingInfo, forms: Forms): number | undefined {
+/* The amount each item's form line will use, from exact facts; undefined while open. */
+function exactAmount(id: ItemId, info: FilingInfo, forms: Forms): number | undefined {
   switch (id) {
     case "state_income_tax":
       return info.stateLocalIncomeTaxPaid;
@@ -78,7 +78,7 @@ function exactAmount(id: BranchId, info: FilingInfo, forms: Forms): number | und
 /*
  * Schedule A line 9: Form 4952 line 8 when the form files, the interest paid
  * under its no-file exception, and nothing when no expense or carryover is
- * stated above 0 (the branch then closes instead of staying open).
+ * stated above 0 (the item then closes instead of staying open).
  */
 function investmentInterest(info: FilingInfo, forms: Forms): number | undefined {
   if (files(info, "form-4952")) {
@@ -109,18 +109,14 @@ function mortgageForCpa(info: FilingInfo, stated: Map<string, unknown>): boolean
 }
 
 /* The principal is asked only with a 1098's interest; the date only between the two limits. */
-function missingFor(
-  branch: DeductionBranch,
-  info: FilingInfo,
-  stated: Map<string, unknown>,
-): string[] {
-  const missing = branch.amountKeys.filter((key) => !stated.has(key));
-  if (branch.id === "investment_interest") {
+function missingFor(item: DeductionItem, info: FilingInfo, stated: Map<string, unknown>): string[] {
+  const missing = item.amountKeys.filter((key) => !stated.has(key));
+  if (item.id === "investment_interest") {
     // Form 4952's own answers (the election, other expenses) are what line 8 waits on.
     const asked = files(info, "form-4952") ? (info.missingInputs?.["form-4952"] ?? []) : [];
     return [...new Set([...missing, ...asked])];
   }
-  if (branch.id !== "mortgage_interest") return missing;
+  if (item.id !== "mortgage_interest") return missing;
   const asked = info.missingInputs?.["schedule-a"] ?? [];
   // As the Schedule A resolver asks: only with a 1098 interest above 0.
   const interest = stated.get(MORTGAGE_KEYS.interestForm1098);
@@ -136,27 +132,23 @@ function missingFor(
 }
 
 function stateOf(
-  branch: DeductionBranch,
+  item: DeductionItem,
   input: DeductionsInput,
   stated: Map<string, unknown>,
   agi: number | undefined,
-): BranchState {
+): ItemState {
   const { filingInfo: info, forms } = input;
-  // A document or amount that arrives early opens the branch: the probe question is then moot.
-  const opened = branch.amountKeys.some((key) => stated.has(key));
-  const answer = branch.opensWith === undefined ? undefined : stated.get(branch.opensWith);
-  const opener = opened ? true : answer;
-  const forCpa = branch.id === "mortgage_interest" && mortgageForCpa(info, stated);
+  const forCpa = item.id === "mortgage_interest" && mortgageForCpa(info, stated);
   const statedInterest = stated.get(MORTGAGE_KEYS.interestForm1098);
   const estimate =
-    input.estimates?.[branch.id] ??
+    input.estimates?.[item.id] ??
     (forCpa && typeof statedInterest === "number" ? statedInterest : undefined);
-  return branchState(branch, {
-    opener: typeof opener === "boolean" ? opener : undefined,
-    exact: forCpa ? undefined : exactAmount(branch.id, info, forms),
+  return itemState(item, {
+    anyStated: item.amountKeys.some((key) => stated.has(key)),
+    exact: forCpa ? undefined : exactAmount(item.id, info, forms),
     estimate,
     forCpa,
-    missingAmountKeys: missingFor(branch, info, stated),
+    missingAmountKeys: missingFor(item, info, stated),
     agi,
     filesCa: files(info, "form-540"),
   });
@@ -166,12 +158,12 @@ export function evaluateDeductions(input: DeductionsInput): DeductionsSummary {
   const { filingInfo: info, forms } = input;
   const stated = new Map(input.facts.map((fact) => [fact.key, fact.value]));
   const agi = evaluatedNumber(forms, "form-1040.line.11b");
-  const branches = DEDUCTION_BRANCHES.map((branch) => stateOf(branch, input, stated, agi));
+  const items = DEDUCTION_ITEMS.map((item) => stateOf(item, input, stated, agi));
   const federalStandard = standardDeduction(info);
-  if (agi === undefined || !info.filingStatus || federalStandard === undefined) return { branches };
+  if (agi === undefined || !info.filingStatus || federalStandard === undefined) return { items };
   const amounts: Amounts = {};
-  const estimated = new Set<BranchId>();
-  for (const state of branches) {
+  const estimated = new Set<ItemId>();
+  for (const state of items) {
     if (state.amount === undefined) continue;
     amounts[state.id] = state.amount;
     if (state.estimated) estimated.add(state.id);
@@ -189,5 +181,5 @@ export function evaluateDeductions(input: DeductionsInput): DeductionsSummary {
       ? evaluatedNumber(forms, "form-3526.0.line.8_investment_interest_deduction")
       : undefined,
   });
-  return { branches, comparison };
+  return { items, comparison };
 }
