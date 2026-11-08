@@ -16,8 +16,8 @@ export type ItemStatus =
   | "closed"
   /** Some of the item's facts are in, but its line still waits on others. */
   | "open"
-  /** An estimate only: enough for the comparison, not for the return. */
-  | "estimate"
+  /** The amount rests on an assumption: enough for the comparison, not for filing. */
+  | "assumed"
   /** The documents or the taxpayer gave the amount. */
   | "exact"
   /** An amount under its AGI floor on every return: it cannot change the result. */
@@ -26,14 +26,17 @@ export type ItemStatus =
   | "for_cpa";
 
 export interface ItemInputs {
-  /** The amount from exact facts, as the form will use it. */
-  exact: number | undefined;
-  estimate: number | undefined;
-  /** At least one of the item's amount facts is stated. */
+  /** The amount the item's form line uses, from facts and the assumptions in use. */
+  amount: number | undefined;
+  /** At least one of the item's amount keys is filled by an assumption. */
+  assumed: boolean;
+  /** At least one of the item's amount keys is stated (a fact or an assumption). */
   anyStated: boolean;
   /** The engine waits on a line it cannot compute. */
   forCpa: boolean;
-  /** The amount facts not stated yet. */
+  /** For the CPA: the most the line can be (the Form 1098 interest). */
+  upperBound?: number;
+  /** The amount keys with no fact yet, and the ones an assumption fills. */
   missingAmountKeys: string[];
   agi: number | undefined;
   /** The filer has a California 540, so the item's California line counts too. */
@@ -44,11 +47,11 @@ export interface ItemState {
   id: DeductionItem["id"];
   title: string;
   status: ItemStatus;
-  /** The amount the comparison uses: exact, else the estimate. */
+  /** The amount the comparison uses; for the CPA, the upper bound. */
   amount?: number;
-  /** The amount is an estimate (or an upper bound, for the CPA), not the forms' amount. */
-  estimated: boolean;
-  /** What Cade asks next: the line-level facts not stated yet. */
+  /** The amount rests on an assumption. */
+  assumed: boolean;
+  /** What Cade asks next: the line-level facts not stated yet, or still assumed. */
   missing: string[];
   federalLine: string;
   caLine: string;
@@ -69,16 +72,11 @@ function belowFloor(item: DeductionItem, amount: number, inputs: ItemInputs): bo
   );
 }
 
-function settled(
-  item: DeductionItem,
-  amount: number,
-  exact: boolean,
-  inputs: ItemInputs,
-): ItemStatus {
+function settled(item: DeductionItem, amount: number, inputs: ItemInputs): ItemStatus {
   // Nothing to deduct, or a deduction no return of this filer takes (CA fees without a 540).
   if (amount <= 0 || countingLines(item, inputs).length === 0) return "closed";
   if (belowFloor(item, amount, inputs)) return "below_floor";
-  return exact ? "exact" : "estimate";
+  return inputs.assumed ? "assumed" : "exact";
 }
 
 export function itemState(item: DeductionItem, inputs: ItemInputs): ItemState {
@@ -89,22 +87,14 @@ export function itemState(item: DeductionItem, inputs: ItemInputs): ItemState {
     caLine: item.ca.line,
   };
   if (inputs.forCpa) {
-    return { ...base, status: "for_cpa", amount: inputs.estimate, estimated: true, missing: [] };
+    return { ...base, status: "for_cpa", amount: inputs.upperBound, assumed: false, missing: [] };
   }
-  if (inputs.exact !== undefined) {
-    return {
-      ...base,
-      status: settled(item, inputs.exact, true, inputs),
-      amount: inputs.exact,
-      estimated: false,
-      missing: [],
-    };
-  }
-  if (inputs.estimate !== undefined) {
-    const status = settled(item, inputs.estimate, false, inputs);
-    const missing = status === "estimate" ? inputs.missingAmountKeys : [];
-    return { ...base, status, amount: inputs.estimate, estimated: true, missing };
+  if (inputs.amount !== undefined) {
+    const status = settled(item, inputs.amount, inputs);
+    // An assumption that cannot change the result (closed, under the floor) needs no follow-up here.
+    const missing = status === "assumed" ? inputs.missingAmountKeys : [];
+    return { ...base, status, amount: inputs.amount, assumed: inputs.assumed, missing };
   }
   const status = inputs.anyStated ? "open" : "unasked";
-  return { ...base, status, estimated: false, missing: inputs.missingAmountKeys };
+  return { ...base, status, assumed: inputs.assumed, missing: inputs.missingAmountKeys };
 }

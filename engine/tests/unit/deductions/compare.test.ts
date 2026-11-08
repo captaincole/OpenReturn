@@ -10,7 +10,7 @@ import { compareDeductions, type ComparisonInput } from "../../../src/deductions
 
 const input = (overrides: Partial<ComparisonInput>): ComparisonInput => ({
   amounts: {},
-  estimated: new Set<ItemId>(),
+  unsettled: new Set<ItemId>(),
   agi: 100000,
   filingStatus: "single",
   federalStandard: 15750,
@@ -30,7 +30,7 @@ describe("compareDeductions", () => {
           gifts_cash: 30000,
           medical: 8000,
         },
-        estimated: new Set<ItemId>([
+        unsettled: new Set<ItemId>([
           "real_estate_tax",
           "mortgage_interest",
           "gifts_cash",
@@ -48,7 +48,7 @@ describe("compareDeductions", () => {
       recommendation: "itemize",
     });
     expect(result.federal.decidingItems).toEqual(["gifts_cash"]);
-    // California takes out the state income tax and itemizes whatever the estimates turn out to be.
+    // California takes out the state income tax and itemizes whatever the assumptions turn out to be.
     expect(result.ca).toMatchObject({
       itemized: 41900,
       recommendation: "itemize",
@@ -79,11 +79,11 @@ describe("compareDeductions", () => {
     expect(result.ca?.itemized).toBe(15000);
   });
 
-  it("recommends the standard deduction when it is larger, and names the estimates that could flip it", () => {
+  it("recommends the standard deduction when it is larger, and names the assumptions that could flip it", () => {
     const result = compareDeductions(
       input({
         amounts: { state_income_tax: 5000, gifts_cash: 9000 },
-        estimated: new Set<ItemId>(["gifts_cash"]),
+        unsettled: new Set<ItemId>(["gifts_cash"]),
       }),
     );
     expect(result.federal).toMatchObject({
@@ -101,11 +101,11 @@ describe("compareDeductions", () => {
   });
 
   it("never names a item a return does not deduct as deciding it", () => {
-    // State income tax is an estimate before the W-2 arrives; California takes none of it.
+    // State income tax is unsettled before the W-2 arrives; California takes none of it.
     const result = compareDeductions(
       input({
         amounts: { state_income_tax: 12000, real_estate_tax: 6000, mortgage_interest: 10000 },
-        estimated: new Set<ItemId>(["state_income_tax"]),
+        unsettled: new Set<ItemId>(["state_income_tax"]),
         agi: 150000,
       }),
     );

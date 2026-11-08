@@ -6,9 +6,9 @@ import { MORTGAGE_KEYS } from "../../../src/facts/index.js";
 const item = (id: ItemId) => DEDUCTION_ITEMS.find((candidate) => candidate.id === id)!;
 
 const inputs = (overrides: Partial<ItemInputs>): ItemInputs => ({
+  amount: undefined,
+  assumed: false,
   anyStated: false,
-  exact: undefined,
-  estimate: undefined,
   forCpa: false,
   missingAmountKeys: [],
   agi: 100000,
@@ -18,7 +18,7 @@ const inputs = (overrides: Partial<ItemInputs>): ItemInputs => ({
 
 describe("itemState", () => {
   it("closes a renter's mortgage item once Cade records 0 interest", () => {
-    const state = itemState(item("mortgage_interest"), inputs({ exact: 0, anyStated: true }));
+    const state = itemState(item("mortgage_interest"), inputs({ amount: 0, anyStated: true }));
     expect(state).toMatchObject({ status: "closed", missing: [] });
   });
 
@@ -44,35 +44,36 @@ describe("itemState", () => {
   it("closes medical bills under the 7.5% floor: no document is asked for", () => {
     const state = itemState(
       item("medical"),
-      inputs({ estimate: 6000, missingAmountKeys: ["medical.expenses_total"] }),
+      inputs({ amount: 6000, assumed: true, missingAmountKeys: ["medical.expenses_total"] }),
     );
     expect(state).toMatchObject({ status: "below_floor", missing: [] });
   });
 
-  it("keeps an estimate over the floor open for its document", () => {
+  it("keeps an assumption over the floor open for its document", () => {
     const state = itemState(
       item("medical"),
-      inputs({ estimate: 12000, missingAmountKeys: ["medical.expenses_total"] }),
+      inputs({ amount: 12000, assumed: true, missingAmountKeys: ["medical.expenses_total"] }),
     );
     expect(state).toMatchObject({
-      status: "estimate",
+      status: "assumed",
       amount: 12000,
+      assumed: true,
       missing: ["medical.expenses_total"],
     });
   });
 
   it("settles an exact amount, and closes an exact 0", () => {
-    expect(itemState(item("gifts_cash"), inputs({ exact: 25000 })).status).toBe("exact");
-    expect(itemState(item("gifts_cash"), inputs({ exact: 0 })).status).toBe("closed");
+    expect(itemState(item("gifts_cash"), inputs({ amount: 25000 })).status).toBe("exact");
+    expect(itemState(item("gifts_cash"), inputs({ amount: 0 })).status).toBe("closed");
   });
 
   it("closes California investment fees for a filer with no 540", () => {
-    const state = itemState(item("ca_investment_fees"), inputs({ exact: 5000, filesCa: false }));
+    const state = itemState(item("ca_investment_fees"), inputs({ amount: 5000, filesCa: false }));
     expect(state.status).toBe("closed");
   });
 
   it("hands a mortgage over the debt limit to the CPA", () => {
-    const state = itemState(item("mortgage_interest"), inputs({ forCpa: true, estimate: 40000 }));
+    const state = itemState(item("mortgage_interest"), inputs({ forCpa: true, upperBound: 40000 }));
     expect(state).toMatchObject({ status: "for_cpa", amount: 40000 });
   });
 });

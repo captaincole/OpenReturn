@@ -1,6 +1,6 @@
 /*
  * The item states from fact lists: what Cade asks next for a mortgage and a
- * margin loan, and the estimates path. No forms are evaluated here (the
+ * margin loan, and assumptions. No forms are evaluated here (the
  * comparison needs AGI from the 1040); the integration test covers that.
  */
 
@@ -13,14 +13,17 @@ type Fact = { key: string; category: string; value: unknown };
 
 const itemized = [{ decisionKey: "decisions.itemize_vs_standard", decision: "itemized" }];
 
-function items(facts: Fact[], estimates = {}) {
-  const filingInfo = resolveFilingInfo({ facts, decisions: itemized });
-  return evaluateDeductions({ facts, filingInfo, forms: new Map(), estimates }).items;
+/* As evaluateScenario passes them: the assumptions in use join the facts. */
+function items(facts: Fact[], assumptions: Fact[] = []) {
+  const filled = [...facts, ...assumptions];
+  const filingInfo = resolveFilingInfo({ facts: filled, decisions: itemized });
+  const assumedKeys = new Set(assumptions.map((assumption) => assumption.key));
+  return evaluateDeductions({ facts: filled, assumedKeys, filingInfo, forms: new Map() }).items;
 }
 
 const fact = (key: string, value: unknown): Fact => ({ key, category: "mortgage", value });
-const state = (facts: Fact[], id: string, estimates = {}) =>
-  items(facts, estimates).find((item) => item.id === id)!;
+const state = (facts: Fact[], id: string, assumptions: Fact[] = []) =>
+  items(facts, assumptions).find((item) => item.id === id)!;
 
 describe("evaluateDeductions item states", () => {
   it("opens the mortgage item from a 1098 that arrives early, and asks its principal", () => {
@@ -54,7 +57,7 @@ describe("evaluateDeductions item states", () => {
       ],
       "mortgage_interest",
     );
-    expect(mortgage).toMatchObject({ status: "for_cpa", amount: 60000, estimated: true });
+    expect(mortgage).toMatchObject({ status: "for_cpa", amount: 60000, assumed: false });
   });
 
   it("settles a 1098 within the limit as exact", () => {
@@ -65,17 +68,34 @@ describe("evaluateDeductions item states", () => {
       ],
       "mortgage_interest",
     );
-    expect(mortgage).toMatchObject({ status: "exact", amount: 8059, estimated: false });
+    expect(mortgage).toMatchObject({ status: "exact", amount: 8059, assumed: false });
   });
 
-  it("takes a rough amount before any document", () => {
-    const mortgage = state([], "mortgage_interest", { mortgage_interest: 8000 });
-    expect(mortgage).toMatchObject({
-      status: "estimate",
-      amount: 8000,
-      estimated: true,
-      missing: [MORTGAGE_KEYS.interestForm1098],
+  it("takes an assumption before any document, and asks for the fact behind it", () => {
+    const gifts = state([], "gifts_cash", [fact("charitable.cash", 25000)]);
+    expect(gifts).toMatchObject({
+      status: "assumed",
+      amount: 25000,
+      assumed: true,
+      missing: ["charitable.cash"],
     });
+  });
+
+  it("asks the principal with an assumed mortgage interest: the line needs both", () => {
+    const mortgage = state([], "mortgage_interest", [fact(MORTGAGE_KEYS.interestForm1098, 8000)]);
+    expect(mortgage).toMatchObject({
+      status: "open",
+      assumed: true,
+      missing: [MORTGAGE_KEYS.outstandingPrincipalForm1098, MORTGAGE_KEYS.interestForm1098],
+    });
+  });
+
+  it("settles a mortgage whose interest and principal are both assumed", () => {
+    const mortgage = state([], "mortgage_interest", [
+      fact(MORTGAGE_KEYS.interestForm1098, 8000),
+      fact(MORTGAGE_KEYS.outstandingPrincipalForm1098, 300000),
+    ]);
+    expect(mortgage).toMatchObject({ status: "assumed", amount: 8000 });
   });
 
   it("closes a margin-loan item with no interest and no carryover", () => {
