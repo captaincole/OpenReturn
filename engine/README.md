@@ -68,6 +68,7 @@ src/
 ├── facts/            fact vocabulary: row shapes + per-kind key conventions
 ├── data/             federal tables (rate schedules, tax table, std deduction)
 ├── worksheets/       IRS/FTB worksheets as pure functions (QDCG, 5695 line 31, …)
+├── deductions/       the itemized-deductions catalog, branch states and the itemize-or-standard comparison (#92)
 ├── render/           PDF fill (fillFromCatalog + hand-verified widget overrides)
 ├── federal/          one folder per federal form (catalog.json, bindings.ts, …) + registry (index.ts)
 └── state/

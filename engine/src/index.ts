@@ -4,6 +4,7 @@
  * and supply blank PDFs through a BlankPdfLoader.
  */
 
+import { evaluateDeductions, type DeductionsSummary } from "./deductions/evaluate.js";
 import { evaluateAllForms, bindingKind as registeredBindingKind } from "./engine.js";
 import type { AIDecisionRow, TaxFactRow } from "./facts/rows.js";
 import { resolveFilingInfo, type FilingInfo } from "./filingInfo.js";
@@ -18,6 +19,10 @@ import {
   type EvaluatedForm,
 } from "./types.js";
 
+export type { BranchState, BranchStatus } from "./deductions/branches.js";
+export { DEDUCTION_BRANCHES, type BranchId, type DeductionBranch } from "./deductions/catalog.js";
+export type { DeductionsComparison, JurisdictionComparison } from "./deductions/compare.js";
+export type { DeductionsSummary } from "./deductions/evaluate.js";
 export { pendingInputs, type PendingInputs } from "./pendingInputs.js";
 export { FORMS, getFormSpec, type FormSpec } from "./registry.js";
 export type { AnyFormField, BaseFormField, EngineDerivation, EvaluatedForm } from "./types.js";
@@ -49,6 +54,8 @@ export interface EvaluatedScenario {
   authEmail: string | null;
   forms: Map<string, EvaluatedForm<AnyFormField>>;
   ctx: DerivationContext;
+  /** The deductions catalog's branch states and the itemized-or-standard comparison (#92). */
+  deductions: DeductionsSummary;
 }
 
 export type BlankPdfLoader = (form: {
@@ -106,8 +113,9 @@ export function evaluateScenario(inputs: ScenarioInputs): EvaluatedScenario {
   };
 
   const { forms } = evaluateAllForms(SCENARIO_FORM_IDS, ctx, bundledCatalog);
+  const deductions = evaluateDeductions({ facts, filingInfo, forms });
 
-  return { filing, facts, decisions, filingInfo, authEmail, forms, ctx };
+  return { filing, facts, decisions, filingInfo, authEmail, forms, ctx, deductions };
 }
 
 // A non-empty warnings list means a soft regression.
