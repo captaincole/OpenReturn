@@ -10,7 +10,7 @@ import type { ItemId, ReturnLine } from "./catalog.js";
 export type Amounts = Partial<Record<ItemId, number>>;
 
 export interface ItemizedInput {
-  /** Each item's amount as stated (exact or estimate); the total applies the floors and caps. */
+  /** Each item's amount as stated (a fact or an assumption); the total applies the floors and caps. */
   amounts: Amounts;
   /** Federal AGI (Form 1040 line 11b): the floors, the SALT cap and the CA worksheet read it. */
   agi: number;

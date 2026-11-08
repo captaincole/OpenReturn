@@ -72,4 +72,15 @@ describe("deductions module", () => {
     ]);
     expect(madison.comparison?.federal.recommendation).toBe("itemize");
   });
+
+  it("jordan: SALT over $500k AGI drops to the $10,000 floor, so the standard deduction wins", () => {
+    // He takes the standard deduction, so the line 17 check above skips him.
+    const jordan = evaluated.find(({ name }) => name === "jordan")!.result.deductions;
+    expect(jordan.comparison?.federal).toMatchObject({
+      itemized: 10000,
+      standard: 15750,
+      recommendation: "standard",
+    });
+    expect(jordan.comparison?.ca).toMatchObject({ itemized: 0, recommendation: "standard" });
+  });
 });

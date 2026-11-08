@@ -4,18 +4,31 @@ import type { BaseFormField, EvaluatedForm } from "./types.js";
 export interface PendingInputs {
   pendingDecisions: string[];
   pendingFacts: string[];
+  /** Keys of the assumptions in use: each needs its fact before the return is ready to file. */
+  pendingAssumptions: string[];
 }
 
 export function pendingInputs(scenario: {
   forms: ReadonlyMap<string, EvaluatedForm<BaseFormField>>;
   filingInfo: FilingInfo;
+  assumptionsInUse: ReadonlyArray<{ key: string }>;
 }): PendingInputs {
   const { pendingDecisions, pendingFacts } = collectPending(scenario.forms.values());
   addPendingIdentityFacts(scenario.filingInfo, pendingFacts);
   return {
     pendingDecisions: Array.from(pendingDecisions).sort(),
     pendingFacts: Array.from(pendingFacts).sort(),
+    pendingAssumptions: scenario.assumptionsInUse.map((assumption) => assumption.key).sort(),
   };
+}
+
+/* Nothing pending: no decision, no fact and no assumption in use. A CPA still reviews. */
+export function readyToFile(pending: PendingInputs): boolean {
+  return (
+    pending.pendingDecisions.length === 0 &&
+    pending.pendingFacts.length === 0 &&
+    pending.pendingAssumptions.length === 0
+  );
 }
 
 function collectPending(forms: Iterable<EvaluatedForm<BaseFormField>>): {

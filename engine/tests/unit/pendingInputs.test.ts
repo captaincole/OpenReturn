@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { FilingInfo } from "../../src/filingInfo.js";
-import { pendingInputs } from "../../src/pendingInputs.js";
+import { pendingInputs, readyToFile } from "../../src/pendingInputs.js";
 import type { BaseFormField, DerivationResult, EvaluatedForm } from "../../src/types.js";
 
 const ok = <T>(value: T): DerivationResult<T> => ({
@@ -45,18 +45,31 @@ const IDENTITY = {
   taxpayerPhone: "555-0100",
 } as unknown as FilingInfo;
 
-const run = (forms: EvaluatedForm<BaseFormField>[], filingInfo = IDENTITY) =>
+const run = (
+  forms: EvaluatedForm<BaseFormField>[],
+  filingInfo = IDENTITY,
+  assumptionsInUse: { key: string }[] = [],
+) =>
   pendingInputs({
     forms: new Map(forms.map((evaluated) => [evaluated.formId, evaluated])),
     filingInfo,
+    assumptionsInUse,
   });
 
 describe("pendingInputs", () => {
   it("is empty for a complete return", () => {
-    expect(run([form("a", ok(true), [field("a.1", ok(5))])])).toEqual({
-      pendingDecisions: [],
-      pendingFacts: [],
-    });
+    const pending = run([form("a", ok(true), [field("a.1", ok(5))])]);
+    expect(pending).toEqual({ pendingDecisions: [], pendingFacts: [], pendingAssumptions: [] });
+    expect(readyToFile(pending)).toBe(true);
+  });
+
+  it("lists the assumptions in use: the return is not ready to file", () => {
+    const pending = run([form("a", ok(true), [field("a.1", ok(5))])], IDENTITY, [
+      { key: "mortgage.interest" },
+      { key: "charitable.cash" },
+    ]);
+    expect(pending.pendingAssumptions).toEqual(["charitable.cash", "mortgage.interest"]);
+    expect(readyToFile(pending)).toBe(false);
   });
 
   it("asks for the must-file decision when it is missing", () => {
@@ -78,6 +91,7 @@ describe("pendingInputs", () => {
     expect(run([evaluated])).toEqual({
       pendingDecisions: ["decisions.a", "decisions.b"],
       pendingFacts: ["wages.a", "wages.z"],
+      pendingAssumptions: [],
     });
   });
 
@@ -91,7 +105,11 @@ describe("pendingInputs", () => {
     const gap = form("b", ok(true), [
       field("b.1", blocked({ unsupported: true, missingFactKeys: ["z"] })),
     ]);
-    expect(run([notFiled, gap])).toEqual({ pendingDecisions: [], pendingFacts: [] });
+    expect(run([notFiled, gap])).toEqual({
+      pendingDecisions: [],
+      pendingFacts: [],
+      pendingAssumptions: [],
+    });
   });
 
   it("asks for identity slots the resolver could not read", () => {

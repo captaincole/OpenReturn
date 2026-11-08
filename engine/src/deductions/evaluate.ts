@@ -1,8 +1,9 @@
 /*
  * The deductions module's entry point: each catalog item's state for this
  * filer, and the itemized-or-standard comparison. It reads the same facts and
- * filing info the forms read, and the evaluated forms where a form applies a
- * limit (Form 4952, FTB 3526), so exact amounts are the forms' amounts. Its
+ * filing info the forms read (facts, and the assumptions in use), and the
+ * evaluated forms where a form applies a limit (Form 4952, FTB 3526), so its
+ * amounts are the forms' amounts. Its
  * only output back into the return is the recommendation Cade records as
  * decisions.itemize_vs_standard.
  */
@@ -19,11 +20,12 @@ import { itemState, type ItemState } from "./items.js";
 import type { Amounts } from "./rules.js";
 
 export interface DeductionsInput {
+  /** The facts and the assumptions in use, as the forms read them. */
   facts: ReadonlyArray<{ key: string; value: unknown }>;
+  /** The keys an assumption fills. */
+  assumedKeys: ReadonlySet<string>;
   filingInfo: FilingInfo;
   forms: ReadonlyMap<string, EvaluatedForm<AnyFormField>>;
-  /** Rough amounts per item, stated before the documents (the facts flagged as estimates, #92). */
-  estimates?: Amounts;
 }
 
 export interface DeductionsSummary {
@@ -44,8 +46,8 @@ function evaluatedNumber(forms: Forms, fieldId: string): number | undefined {
 
 const files = (info: FilingInfo, formId: string) => info.mustFile?.[formId]?.value === true;
 
-/* The amount each item's form line will use, from exact facts; undefined while open. */
-function exactAmount(id: ItemId, info: FilingInfo, forms: Forms): number | undefined {
+/* The amount each item's form line will use; undefined while open. */
+function lineAmount(id: ItemId, info: FilingInfo, forms: Forms): number | undefined {
   switch (id) {
     case "state_income_tax":
       return info.stateLocalIncomeTaxPaid;
@@ -109,8 +111,18 @@ function mortgageForCpa(info: FilingInfo, stated: Map<string, unknown>): boolean
   );
 }
 
-/* The principal is asked only with a 1098's interest; the date only between the two limits. */
-function missingFor(item: DeductionItem, info: FilingInfo, stated: Map<string, unknown>): string[] {
+/*
+ * The keys with no fact or assumption, and the keys an assumption fills. The
+ * principal is asked only with a 1098's interest; the date only between the
+ * two limits.
+ */
+function missingFor(item: DeductionItem, input: DeductionsInput, stated: Map<string, unknown>) {
+  const info = input.filingInfo;
+  const assumed = item.amountKeys.filter((key) => input.assumedKeys.has(key));
+  return [...new Set([...unstated(item, info, stated), ...assumed])];
+}
+
+function unstated(item: DeductionItem, info: FilingInfo, stated: Map<string, unknown>): string[] {
   const missing = item.amountKeys.filter((key) => !stated.has(key));
   if (item.id === "investment_interest") {
     // Form 4952's own answers (the election, other expenses) are what line 8 waits on.
@@ -141,15 +153,13 @@ function stateOf(
   const { filingInfo: info, forms } = input;
   const forCpa = item.id === "mortgage_interest" && mortgageForCpa(info, stated);
   const statedInterest = stated.get(MORTGAGE_KEYS.interestForm1098);
-  const estimate =
-    input.estimates?.[item.id] ??
-    (forCpa && typeof statedInterest === "number" ? statedInterest : undefined);
   return itemState(item, {
+    amount: forCpa ? undefined : lineAmount(item.id, info, forms),
+    assumed: item.amountKeys.some((key) => input.assumedKeys.has(key)),
     anyStated: item.amountKeys.some((key) => stated.has(key)),
-    exact: forCpa ? undefined : exactAmount(item.id, info, forms),
-    estimate,
     forCpa,
-    missingAmountKeys: missingFor(item, info, stated),
+    upperBound: forCpa && typeof statedInterest === "number" ? statedInterest : undefined,
+    missingAmountKeys: missingFor(item, input, stated),
     agi,
     filesCa: files(info, "form-540"),
   });
@@ -163,15 +173,16 @@ export function evaluateDeductions(input: DeductionsInput): DeductionsSummary {
   const federalStandard = standardDeduction(info);
   if (agi === undefined || !info.filingStatus || federalStandard === undefined) return { items };
   const amounts: Amounts = {};
-  const estimated = new Set<ItemId>();
+  // The amounts that can still change: an assumption, or the CPA's upper bound.
+  const unsettled = new Set<ItemId>();
   for (const state of items) {
     if (state.amount === undefined) continue;
     amounts[state.id] = state.amount;
-    if (state.estimated) estimated.add(state.id);
+    if (state.assumed || state.status === "for_cpa") unsettled.add(state.id);
   }
   const comparison = compareDeductions({
     amounts,
-    estimated,
+    unsettled,
     agi,
     filingStatus: info.filingStatus,
     federalStandard,

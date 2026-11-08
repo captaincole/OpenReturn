@@ -1,6 +1,6 @@
 /*
  * The comparison worksheet: itemized against standard, federal and California,
- * on exact amounts and estimates alike. The totals (federal.ts, ca.ts) use the
+ * on facts and assumptions alike. The totals (federal.ts, ca.ts) use the
  * forms' own rules and constants, so with exact facts they equal Schedule A
  * line 17 and Schedule CA line 29.
  */
@@ -11,8 +11,8 @@ import { federalItemized } from "./federal.js";
 import { amountOf, type Amounts } from "./rules.js";
 
 export interface ComparisonInput extends CaItemizedInput {
-  /** The items whose amount is an estimate. */
-  estimated: ReadonlySet<ItemId>;
+  /** The items whose amount can still change: an assumption, or the CPA's upper bound. */
+  unsettled: ReadonlySet<ItemId>;
   federalStandard: number;
   /** Undefined when the return has no California 540. */
   caStandard?: number;
@@ -25,9 +25,9 @@ export interface JurisdictionComparison {
   margin: number;
   recommendation: "itemize" | "standard";
   /**
-   * Estimated items that could flip the recommendation (see decidingItems):
+   * Unsettled items that could flip the recommendation (see decidingItems):
    * their documents come first. Empty when the recommendation holds whatever
-   * the estimates turn out to be.
+   * the assumptions turn out to be.
    */
   decidingItems: ItemId[];
 }
@@ -38,7 +38,7 @@ export interface DeductionsComparison {
 }
 
 /*
- * An estimated item decides the result when setting it to 0, or doubling
+ * An unsettled item decides the result when setting it to 0, or doubling
  * it, flips the recommendation on this return. An item this return does not
  * deduct, or one under its floor or over its cap either way, never does.
  */
@@ -52,7 +52,7 @@ function decidingItems(
     const changed = total({ ...input.amounts, [id]: amount });
     return changed !== undefined && changed > standard !== itemizes;
   };
-  return [...input.estimated].filter((id) => {
+  return [...input.unsettled].filter((id) => {
     const amount = amountOf(input.amounts, id);
     return flips(id, 0) || flips(id, 2 * amount);
   });
