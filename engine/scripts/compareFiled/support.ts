@@ -6,6 +6,7 @@
 
 import {
   AMT_KEYS,
+  CA_MISC_DEDUCTION_KEYS,
   GAMBLING_KEYS,
   HOME_ENERGY_KEYS,
   HOUSEHOLD_EMPLOYMENT_KEYS,
@@ -68,6 +69,7 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(HOME_ENERGY_KEYS),
   ...Object.values(INVESTMENT_INTEREST_KEYS),
   ...Object.values(AMT_KEYS),
+  ...Object.values(CA_MISC_DEDUCTION_KEYS),
   GAMBLING_KEYS.winningsNotOnW2G,
   SPOUSE_KEYS.livedApartAllYear,
   SPOUSE_KEYS.itemizesSeparately,

@@ -5,6 +5,7 @@
 
 import {
   AMT_KEYS,
+  CA_MISC_DEDUCTION_KEYS,
   INVESTMENT_INTEREST_KEYS,
   MORTGAGE_KEYS,
   SPOUSE_KEYS,
@@ -254,6 +255,12 @@ export const tcbCa005Facts: TaxFactRow[] = [
     `${ANSWERS}: ca_form540.full_year_health_coverage.`,
   ),
   fact("other", "use_tax.owed_amount", 0, `${ANSWERS}: ca_form540.use_tax.`),
+  fact(
+    "other",
+    CA_MISC_DEDUCTION_KEYS.investmentFees,
+    0,
+    `${ANSWERS}: no investment fees among the deductions (Schedule CA Part II line 21).`,
+  ),
   /* Schedule A answers (scha_tax, scha_gft, med_exp). Medical is the four med_exp boxes added. */
   fact("state_local_tax", "state_local_tax.real_estate", 1900, `${ANSWERS}: scha_tax.taxRE.`),
   fact("charitable", "charitable.cash", 25000, `${ANSWERS}: scha_gft.qualifiedContrCash.`),

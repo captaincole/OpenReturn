@@ -100,10 +100,21 @@ export function register(): void {
       /*
        * ca-3526-inst-2025::sec::line-5::b01: "allowed deductions, other than
        * interest expense, directly connected with the production of investment
-       * income". MANUAL EDIT: the Form 4952 answer; the Schedule CA Part II
-       * line 21 2% limitation is not modeled.
+       * income"; ca-3526-inst-2025::sec::line-5::b02: "the smaller of either the
+       * investment expenses included on Schedule CA (540), Part II, line 21 ...
+       * or the total on ... line 25" (the 2% floor). MANUAL EDIT: the Form 4952
+       * answer (depreciation, depletion, K-1 expenses) plus that smaller amount;
+       * blank while Part II's lines are not in. Line 21 holds only the stated
+       * investment fees today; if it ever carries other expenses, read the
+       * investment part, not the whole line.
        */
-      "0.line.5_investment_expenses": (_, info) => roundDollars(info.investmentExpenses),
+      "0.line.5_investment_expenses": (form, info) => {
+        if (info.investmentExpenses === undefined) return undefined;
+        const fees = numberOrBlank(form["schedule-ca.5.page2.job_expenses_21_amount"]) ?? 0;
+        const line25 = numberOrBlank(form["schedule-ca.5.page2.job_expenses_25_net"]);
+        if (fees > 0 && line25 === undefined) return undefined;
+        return roundDollars(info.investmentExpenses + Math.min(fees, line25 ?? 0));
+      },
       /*
        * ca-3526-inst-2025::sec::taxable-year::b03: "Subtract line 5 from line 4f."
        * MANUAL EDIT: floored at 0 as federal line 6 ("If zero or less, enter

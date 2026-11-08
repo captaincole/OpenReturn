@@ -1,4 +1,5 @@
 import {
+  CA_MISC_DEDUCTION_KEYS,
   GAMBLING_KEYS,
   SPOUSE_KEYS,
   businessesOnReturn,
@@ -161,18 +162,29 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
 
 // Default: file with Form 540. Set the explicit decision false to opt out.
 export function resolveScheduleCaInfo(inputs: ResolverInputs): ScheduleCaFilingInfo {
+  const files540 = inputs.decisionByKey.get("decisions.scope.must_file_ca_540") === true;
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_ca",
     fallbacks: [
       {
         rule: "fallback: must_file_ca_540 = true",
-        value: inputs.decisionByKey.get("decisions.scope.must_file_ca_540") === true,
+        value: files540,
         triggeredByDecisionKeys: ["decisions.scope.must_file_ca_540"],
       },
     ],
   });
+  const caInvestmentFees = num(inputs, CA_MISC_DEDUCTION_KEYS.investmentFees);
+  const itemizes = resolveScheduleAInfo(inputs).mustFile?.["schedule-a"]?.value === true;
   return {
     mustFile: { "schedule-ca": resolution },
+    /* A California itemizer states the fees once (Part II line 21); 0 is an answer. */
+    missingInputs: {
+      "schedule-ca":
+        files540 && itemizes
+          ? missingInputs({ [CA_MISC_DEDUCTION_KEYS.investmentFees]: caInvestmentFees })
+          : [],
+    },
+    caInvestmentFees,
   };
 }
 

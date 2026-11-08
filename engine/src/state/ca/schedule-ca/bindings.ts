@@ -361,6 +361,22 @@ export function register(): void {
        * (ca-540-sched-ca-inst-2025::sec::part-ii-adjustments-to-federal-itemized-deductions::b01).
        * Line 25 is blank until line 22 has a value.
        */
+      /*
+       * MANUAL EDIT: line 21, "Other Expenses": the amount paid to manage or
+       * protect property held for earning income, with its type beside it
+       * (ca-540-sched-ca-inst-2025::sec::line-21-other-expenses::b01). The
+       * engine knows one kind, the investment fees the taxpayer states; safe
+       * deposit boxes, legal fees and claim-of-right repayments have no fact.
+       */
+      "5.page2.job_expenses_21_amount": (form, info) => {
+        // Part II is in use only with a completed Schedule A (the same gate as line 23).
+        if (form["schedule-a.0.line.17_total_itemized_deductions"] === undefined) return undefined;
+        return info.caInvestmentFees !== undefined && info.caInvestmentFees > 0
+          ? roundDollars(info.caInvestmentFees)
+          : undefined;
+      },
+      "5.page2.job_expenses_21_type": (form) =>
+        form["5.page2.job_expenses_21_amount"] === undefined ? undefined : "Investment fees",
       "5.page2.job_expenses_22_total": (form) =>
         sumOrBlank(
           form["5.page2.job_expenses_19"],
@@ -768,10 +784,6 @@ export function register(): void {
       "5.page2.job_expenses_19":
         "Line 19 needs federal Form 2106 line 10 recomputed with CA amounts; no Form 2106 or unreimbursed-employee-expense fact kind exists.",
       "5.page2.job_expenses_20": "Line 20 tax preparation fees have no fact kind.",
-      "5.page2.job_expenses_21_type":
-        "Line 21 other expenses (investment expenses, safe deposit box, legal fees) have no fact kind.",
-      "5.page2.job_expenses_21_amount":
-        "Line 21 other expenses (investment expenses, safe deposit box, legal fees) have no fact kind.",
       "5.page2.other_adjustments_27_type":
         "Line 27 other adjustments (adoption cost credit, nontaxable-income expenses, legislator travel, utility-loan interest) have no fact kind or decision.",
       "5.page2.other_adjustments_27_amount":
