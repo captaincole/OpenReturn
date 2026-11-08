@@ -43,7 +43,8 @@ canon/                           # @openreturn/canon — CANON, the tax attorney
 engine/                          # @openreturn/engine — THE FORM ENGINE. Pure, deterministic, no AI/DB/network.
 ├── src/                           Owns the fact vocabulary (facts/), per-jurisdiction form
 │                                  registries (federal/, state/ca/; each form's catalog.json sits
-│                                  next to its bindings.ts), worksheets, PDF fill.
+│                                  next to its bindings.ts), worksheets, PDF fill, and
+│                                  deductions/ (itemize-or-standard comparison, #92).
 │                                  Boundary enforced by tests/unit/boundary.test.ts.
 ├── tests/                       # the engine's test pyramid: unit/, integration/, golden/, scenarios/
 ├── scripts/                     # renderScenario, draftExpected, compareFiled
