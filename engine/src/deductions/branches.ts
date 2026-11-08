@@ -45,6 +45,8 @@ export interface BranchState {
   status: BranchStatus;
   /** The amount the comparison uses: exact, else the estimate. */
   amount?: number;
+  /** The amount is an estimate (or an upper bound, for the CPA), not the forms' amount. */
+  estimated: boolean;
   /** What Cade asks next: the life-probe key, or the amount facts. */
   missing: string[];
   federalLine: string;
@@ -85,25 +87,28 @@ export function branchState(branch: DeductionBranch, inputs: BranchInputs): Bran
     federalLine: branch.federal.line,
     caLine: branch.ca.line,
   };
-  if (inputs.forCpa) return { ...base, status: "for_cpa", amount: inputs.estimate, missing: [] };
+  if (inputs.forCpa) {
+    return { ...base, status: "for_cpa", amount: inputs.estimate, estimated: true, missing: [] };
+  }
   if (inputs.exact !== undefined) {
     return {
       ...base,
       status: settled(branch, inputs.exact, true, inputs),
       amount: inputs.exact,
+      estimated: false,
       missing: [],
     };
   }
   if (inputs.estimate !== undefined) {
     const status = settled(branch, inputs.estimate, false, inputs);
     const missing = status === "estimate" ? inputs.missingAmountKeys : [];
-    return { ...base, status, amount: inputs.estimate, missing };
+    return { ...base, status, amount: inputs.estimate, estimated: true, missing };
   }
   if (branch.opensWith === undefined || inputs.opener === false) {
-    return { ...base, status: "closed", missing: [] };
+    return { ...base, status: "closed", estimated: false, missing: [] };
   }
   if (inputs.opener === undefined) {
-    return { ...base, status: "unasked", missing: [branch.opensWith] };
+    return { ...base, status: "unasked", estimated: false, missing: [branch.opensWith] };
   }
-  return { ...base, status: "open", missing: inputs.missingAmountKeys };
+  return { ...base, status: "open", estimated: false, missing: inputs.missingAmountKeys };
 }

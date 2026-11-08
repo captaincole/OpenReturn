@@ -8,11 +8,8 @@ import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { defineForm } from "../../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
-import { caItemizedLine29 } from "./itemizedWorksheet.js";
+import { CA_MISC_FLOOR_RATE, caItemizedLine29 } from "./itemizedWorksheet.js";
 import type { ScheduleCa } from "./types.js";
-
-/* Part II line 24: the 2% floor on job expenses (the form; the line has no section). */
-const JOB_EXPENSES_FLOOR_RATE = 0.02;
 
 const text = (value: unknown): string | undefined =>
   typeof value === "string" ? value : undefined;
@@ -346,7 +343,7 @@ export function register(): void {
       "5.page2.job_expenses_24_threshold": (form) => {
         const agi = form["5.page2.job_expenses_23_agi"];
         return typeof agi === "number"
-          ? atLeast(0, roundDollars(agi * JOB_EXPENSES_FLOOR_RATE))
+          ? atLeast(0, roundDollars(agi * CA_MISC_FLOOR_RATE))
           : undefined;
       },
       "5.page2.job_expenses_25_net": (form) => {

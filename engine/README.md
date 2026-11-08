@@ -7,7 +7,7 @@ forms come out. **No AI anywhere in the math** — every line on every form is
 computed by a typed, pure-function derivation you can read, test, and diff.
 
 ```
-evaluateScenario({ filing, facts, decisions })  →  EvaluatedScenario (all forms)
+evaluateScenario({ filing, facts, decisions })  →  EvaluatedScenario (all forms + deductions)
 pendingInputs(scenario)                         →  decision + fact keys still needed
 renderForm(scenario, formId, loadBlankPdf)      →  filled PDF bytes
 ```
@@ -26,7 +26,7 @@ engine/
 
 Other code imports only the `exports` in `package.json`:
 `@openreturn/engine` (evaluate, render, pendingInputs, FORMS, bindingKind,
-the FormField types), `@openreturn/engine/facts` (the fact vocabulary and row types),
+DEDUCTION_BRANCHES, the FormField and deductions types), `@openreturn/engine/facts` (the fact vocabulary and row types),
 `@openreturn/engine/catalog` (for the builder, `builder/`),
 `@openreturn/engine/paths`, and `@openreturn/engine/scenarios` (test fixtures).
 A deep import does not resolve.

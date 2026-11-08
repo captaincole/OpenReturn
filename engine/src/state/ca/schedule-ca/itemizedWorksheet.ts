@@ -14,6 +14,8 @@ export const LINE_29_FEDERAL_AGI_THRESHOLD = {
   married_filing_jointly: 504411,
   qualifying_surviving_spouse: 504411,
 } as const satisfies Record<FilingStatus, number>;
+/* Part II line 24: the 2% floor on job expenses and other miscellaneous deductions (the form). */
+export const CA_MISC_FLOOR_RATE = 0.02;
 /* Itemized Deductions Worksheet lines 4 and 8 (ca-540-sched-ca-inst-2025::sec::itemized-deductions-worksheet::b01). */
 const WORKSHEET_LINE_4_RATE = 0.8;
 const WORKSHEET_LINE_8_RATE = 0.06;

@@ -12,6 +12,8 @@ import {
   LIFE_KEYS,
   MORTGAGE_KEYS,
 } from "../facts/index.js";
+import { MEDICAL_FLOOR_RATE } from "../federal/schedule-a/rates.js";
+import { CA_MISC_FLOOR_RATE } from "../state/ca/schedule-ca/itemizedWorksheet.js";
 
 export type BranchId =
   | "state_income_tax"
@@ -52,11 +54,6 @@ export interface DeductionBranch {
   federal: ReturnLine;
   ca: ReturnLine;
 }
-
-/* Schedule A line 3 and Schedule CA Part II line 3: 7.5% of AGI. */
-export const MEDICAL_FLOOR_RATE = 0.075;
-/* Schedule CA Part II line 24: 2% of AGI. */
-export const CA_MISC_FLOOR_RATE = 0.02;
 
 export const DEDUCTION_BRANCHES: readonly DeductionBranch[] = [
   {

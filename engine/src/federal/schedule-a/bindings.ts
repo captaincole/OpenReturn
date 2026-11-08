@@ -8,6 +8,7 @@ import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
+import { MEDICAL_FLOOR_RATE } from "./rates.js";
 import { saltCap } from "./saltCap.js";
 import type { ScheduleA } from "./types.js";
 
@@ -32,7 +33,7 @@ export function register(): void {
         if (form["0.line.1_medical_dental_expenses"] === undefined) return undefined;
         const line2 = form["0.line.2_agi_from_1040"];
         if (typeof line2 !== "number") return undefined;
-        return roundDollars(line2 * 0.075);
+        return roundDollars(line2 * MEDICAL_FLOOR_RATE);
       },
       "0.line.4_net_medical_dental": (form) => {
         if (form["0.line.1_medical_dental_expenses"] === undefined) return undefined;
