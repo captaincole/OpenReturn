@@ -24,6 +24,7 @@ export async function resetCurrentUserData(userId: string): Promise<PerUserReset
 
   const tables = [
     "tax_facts",
+    "assumptions",
     "open_questions",
     "ai_decisions",
     "user_documents",
@@ -56,6 +57,7 @@ export async function resetCurrentUserData(userId: string): Promise<PerUserReset
   return {
     domainRowsDeleted:
       counts.tax_facts +
+      counts.assumptions +
       counts.open_questions +
       counts.ai_decisions +
       counts.requested_actions +

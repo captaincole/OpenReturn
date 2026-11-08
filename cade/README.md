@@ -57,7 +57,7 @@ Cade needs Canon (`npm run dev:canon`) to ground decisions and answer questions.
 cade/
 ├── src/mastra/
 │   ├── agents/       Cade: instructions, working memory, PDF-to-image for models without PDF input
-│   ├── tools/        ingest tools, record-tax-facts, record-ai-decision, case state, generate-tax-documents
+│   ├── tools/        ingest tools, record-tax-facts, record-assumptions, record-ai-decision, case state, generate-tax-documents
 │   ├── workflows/    reviewDecision (grounding through Canon), askTurn (Ask The Tax Code threads)
 │   ├── canon/        client.ts: the MCP client, Cade's only path to Canon
 │   ├── db/           app.db: facts, decisions, filings, Ask threads, review runs; the document store

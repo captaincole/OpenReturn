@@ -26,7 +26,7 @@ export interface TaxFact {
   sourceNote?: string;
 }
 
-function rowToFact(row: Row): TaxFactRow {
+export function rowToFact(row: Row): TaxFactRow {
   return {
     id: asStr(row.id),
     userId: asStr(row.user_id),

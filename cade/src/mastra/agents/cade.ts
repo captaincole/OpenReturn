@@ -3,6 +3,7 @@ import { Memory } from "@mastra/memory";
 import { modelFor } from "../models";
 import { cadeRequestContextSchema } from "../server/requestContext";
 import { listAIDecisions, recordAIDecision } from "../tools/aiDecisions";
+import { recordAssumptions } from "../tools/assumptions";
 import { getCaseState } from "../tools/caseState";
 import { dismissRequestedAction } from "../tools/dismissRequestedAction";
 import { generateTaxDocuments } from "../tools/generateTaxDocuments";
@@ -30,6 +31,7 @@ export const cade = new Agent({
     getCaseState,
     ...ingestTools,
     recordTaxFacts,
+    recordAssumptions,
     recordAIDecision,
     requestDocumentUpload,
     dismissRequestedAction,
