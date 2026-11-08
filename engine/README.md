@@ -26,7 +26,7 @@ engine/
 
 Other code imports only the `exports` in `package.json`:
 `@openreturn/engine` (evaluate, render, pendingInputs, FORMS, bindingKind,
-DEDUCTION_BRANCHES, the FormField and deductions types), `@openreturn/engine/facts` (the fact vocabulary and row types),
+DEDUCTION_ITEMS, the FormField and deductions types), `@openreturn/engine/facts` (the fact vocabulary and row types),
 `@openreturn/engine/catalog` (for the builder, `builder/`),
 `@openreturn/engine/paths`, and `@openreturn/engine/scenarios` (test fixtures).
 A deep import does not resolve.
@@ -68,7 +68,7 @@ src/
 ├── facts/            fact vocabulary: row shapes + per-kind key conventions
 ├── data/             federal tables (rate schedules, tax table, std deduction)
 ├── worksheets/       IRS/FTB worksheets as pure functions (QDCG, 5695 line 31, …)
-├── deductions/       the itemized-deductions catalog, branch states and the itemize-or-standard comparison (#92)
+├── deductions/       the itemized-deductions catalog, item states and the itemize-or-standard comparison (#92)
 ├── render/           PDF fill (fillFromCatalog + hand-verified widget overrides)
 ├── federal/          one folder per federal form (catalog.json, bindings.ts, …) + registry (index.ts)
 └── state/

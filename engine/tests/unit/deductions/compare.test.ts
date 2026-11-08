@@ -5,12 +5,12 @@
  */
 
 import { describe, expect, it } from "vitest";
-import type { BranchId } from "../../../src/deductions/catalog.js";
+import type { ItemId } from "../../../src/deductions/catalog.js";
 import { compareDeductions, type ComparisonInput } from "../../../src/deductions/compare.js";
 
 const input = (overrides: Partial<ComparisonInput>): ComparisonInput => ({
   amounts: {},
-  estimated: new Set<BranchId>(),
+  estimated: new Set<ItemId>(),
   agi: 100000,
   filingStatus: "single",
   federalStandard: 15750,
@@ -30,7 +30,7 @@ describe("compareDeductions", () => {
           gifts_cash: 30000,
           medical: 8000,
         },
-        estimated: new Set<BranchId>([
+        estimated: new Set<ItemId>([
           "real_estate_tax",
           "mortgage_interest",
           "gifts_cash",
@@ -47,12 +47,12 @@ describe("compareDeductions", () => {
       margin: 18481,
       recommendation: "itemize",
     });
-    expect(result.federal.decidingBranches).toEqual(["gifts_cash"]);
+    expect(result.federal.decidingItems).toEqual(["gifts_cash"]);
     // California takes out the state income tax and itemizes whatever the estimates turn out to be.
     expect(result.ca).toMatchObject({
       itemized: 41900,
       recommendation: "itemize",
-      decidingBranches: [],
+      decidingItems: [],
     });
   });
 
@@ -83,7 +83,7 @@ describe("compareDeductions", () => {
     const result = compareDeductions(
       input({
         amounts: { state_income_tax: 5000, gifts_cash: 9000 },
-        estimated: new Set<BranchId>(["gifts_cash"]),
+        estimated: new Set<ItemId>(["gifts_cash"]),
       }),
     );
     expect(result.federal).toMatchObject({
@@ -91,7 +91,7 @@ describe("compareDeductions", () => {
       margin: -1750,
       recommendation: "standard",
     });
-    expect(result.federal.decidingBranches).toEqual(["gifts_cash"]);
+    expect(result.federal.decidingItems).toEqual(["gifts_cash"]);
   });
 
   it("reduces California's total above the AGI threshold with the line 29 worksheet", () => {
@@ -100,16 +100,16 @@ describe("compareDeductions", () => {
     expect(result.ca?.itemized).toBe(12132);
   });
 
-  it("never names a branch a return does not deduct as deciding it", () => {
+  it("never names a item a return does not deduct as deciding it", () => {
     // State income tax is an estimate before the W-2 arrives; California takes none of it.
     const result = compareDeductions(
       input({
         amounts: { state_income_tax: 12000, real_estate_tax: 6000, mortgage_interest: 10000 },
-        estimated: new Set<BranchId>(["state_income_tax"]),
+        estimated: new Set<ItemId>(["state_income_tax"]),
         agi: 150000,
       }),
     );
-    expect(result.ca).toMatchObject({ itemized: 16000, decidingBranches: [] });
+    expect(result.ca).toMatchObject({ itemized: 16000, decidingItems: [] });
   });
 
   it("has no California comparison without a 540", () => {

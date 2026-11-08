@@ -19,10 +19,10 @@ import {
   type EvaluatedForm,
 } from "./types.js";
 
-export type { BranchState, BranchStatus } from "./deductions/branches.js";
-export { DEDUCTION_BRANCHES, type BranchId, type DeductionBranch } from "./deductions/catalog.js";
+export { DEDUCTION_ITEMS, type DeductionItem, type ItemId } from "./deductions/catalog.js";
 export type { DeductionsComparison, JurisdictionComparison } from "./deductions/compare.js";
 export type { DeductionsSummary } from "./deductions/evaluate.js";
+export type { ItemState, ItemStatus } from "./deductions/items.js";
 export { pendingInputs, type PendingInputs } from "./pendingInputs.js";
 export { FORMS, getFormSpec, type FormSpec } from "./registry.js";
 export type { AnyFormField, BaseFormField, EngineDerivation, EvaluatedForm } from "./types.js";
@@ -54,7 +54,7 @@ export interface EvaluatedScenario {
   authEmail: string | null;
   forms: Map<string, EvaluatedForm<AnyFormField>>;
   ctx: DerivationContext;
-  /** The deductions catalog's branch states and the itemized-or-standard comparison (#92). */
+  /** The deductions catalog's item states and the itemized-or-standard comparison (#92). */
   deductions: DeductionsSummary;
 }
 
