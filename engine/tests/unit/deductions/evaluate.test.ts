@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it } from "vitest";
-import { evaluateDeductions } from "../../../src/deductions/evaluate.js";
+import { evaluateDeductions, unsettledKeys } from "../../../src/deductions/evaluate.js";
 import { INVESTMENT_INTEREST_KEYS, MORTGAGE_KEYS } from "../../../src/facts/index.js";
 import type { TaxFactRow } from "../../../src/facts/rows.js";
 
@@ -122,5 +122,29 @@ describe("evaluateDeductions item states", () => {
     expect(margin.status).toBe("open");
     expect(margin.missing).toContain(INVESTMENT_INTEREST_KEYS.disallowedCarryover);
     expect(margin.missing).toContain(INVESTMENT_INTEREST_KEYS.investmentExpenses);
+  });
+});
+
+describe("unsettledKeys: what the comparison's what-ifs change", () => {
+  it("changes the assumed key, not a stated one, on an item with two amount keys", () => {
+    const facts = [fact(INVESTMENT_INTEREST_KEYS.expensePaid, 1250)];
+    const assumptions = [fact(INVESTMENT_INTEREST_KEYS.disallowedCarryover, 4000)];
+    const margin = state(facts, "investment_interest", assumptions);
+    const assumedKeys = new Set([INVESTMENT_INTEREST_KEYS.disallowedCarryover]);
+    expect(unsettledKeys(margin, assumedKeys)).toEqual([
+      INVESTMENT_INTEREST_KEYS.disallowedCarryover,
+    ]);
+  });
+
+  it("changes the 1098 interest of a loan over the limit: the upper bound", () => {
+    const mortgage = state(
+      [
+        fact(MORTGAGE_KEYS.interestForm1098, 60000),
+        fact(MORTGAGE_KEYS.outstandingPrincipalForm1098, 1200000),
+        fact(MORTGAGE_KEYS.originationDateForm1098, "03/01/2020"),
+      ],
+      "mortgage_interest",
+    );
+    expect(unsettledKeys(mortgage, new Set())).toEqual([MORTGAGE_KEYS.interestForm1098]);
   });
 });

@@ -77,17 +77,20 @@ function lineAmount(id: ItemId, info: FilingInfo, forms: Forms): number | undefi
       return info.caInvestmentFees;
   }
 }
+/* Form 4952's own answers (the election, other expenses), while it files: line 8 waits on them. */
+/* Form 4952's own answers (the election, other expenses): line 8 waits on them while the form files. */
+const form4952Asks = (info: FilingInfo): readonly string[] =>
+  files(info, "form-4952") ? (info.missingInputs?.["form-4952"] ?? []) : [];
 
 /*
  * Schedule A line 9: Form 4952 line 8 when the form files and has its
- * answers, the interest paid
- * under its no-file exception, and nothing when no expense or carryover is
- * stated above 0 (the item then closes instead of staying open).
+ * answers, the interest paid under its no-file exception, and nothing when no
+ * expense or carryover is stated above 0 (the item then closes instead of
+ * staying open).
  */
 function investmentInterest(info: FilingInfo, forms: Forms): number | undefined {
   if (files(info, "form-4952")) {
-    // Line 8 waits on the form's own answers (the election, other expenses), as the item does.
-    if ((info.missingInputs?.["form-4952"] ?? []).length > 0) return undefined;
+    if (form4952Asks(info).length > 0) return undefined;
     return evaluatedNumber(forms, "form-4952.0.line.8_investment_interest_deduction");
   }
   if (info.noFormException === true) return info.investmentInterestPaid;
@@ -131,11 +134,7 @@ function missingFor(
 
 function unstated(item: DeductionItem, info: FilingInfo, stated: Map<string, unknown>): string[] {
   const missing = item.amountKeys.filter((key) => !stated.has(key));
-  if (item.id === "investment_interest") {
-    // Form 4952's own answers (the election, other expenses) are what line 8 waits on.
-    const asked = files(info, "form-4952") ? (info.missingInputs?.["form-4952"] ?? []) : [];
-    return [...new Set([...missing, ...asked])];
-  }
+  if (item.id === "investment_interest") return [...new Set([...missing, ...form4952Asks(info)])];
   if (item.id !== "mortgage_interest") return missing;
   const asked = info.missingInputs?.["schedule-a"] ?? [];
   // As the Schedule A resolver asks: only with a 1098 interest above 0.
@@ -194,30 +193,40 @@ const totalsOf = (pass: FormsPass): Totals => ({
 const itemById = (id: ItemId) => DEDUCTION_ITEMS.find((item) => item.id === id)!;
 
 /*
- * The amounts that can still change: an assumption, or the CPA's upper bound.
- * Each one's first amount key (the amount itself, not a 1098's principal) is
- * set to 0 and to double, and the forms run again.
+ * The keys that can still change: each assumed amount key, or for the CPA the
+ * 1098's interest (the upper bound).
  */
+export function unsettledKeys(state: ItemState, assumedKeys: ReadonlySet<string>): string[] {
+  const keys = itemById(state.id).amountKeys;
+  if (state.status === "for_cpa") return keys.slice(0, 1);
+  return keys.filter((key) => assumedKeys.has(key));
+}
+
+/* Each unsettled key is set to 0 and to double, and the forms run again. */
 function whatIfs(
   items: ItemState[],
   stated: Map<string, unknown>,
+  assumedKeys: ReadonlySet<string>,
   run: ItemizedRun,
   bound: Changes,
 ) {
   return items
-    .filter((state) => state.amount !== undefined && (state.assumed || state.status === "for_cpa"))
-    .flatMap((state) => {
-      const key = itemById(state.id).amountKeys[0];
-      const value = key === undefined ? undefined : stated.get(key);
-      if (key === undefined || typeof value !== "number") return [];
-      const totals = [0, 2 * value].map((changed) => totalsOf(run({ ...bound, [key]: changed })));
-      return [{ id: state.id, totals }];
-    });
+    .filter((state) => state.amount !== undefined)
+    .map((state) => {
+      const totals = unsettledKeys(state, assumedKeys).flatMap((key) => {
+        const value = stated.get(key);
+        if (typeof value !== "number") return [];
+        return [0, 2 * value].map((changed) => totalsOf(run({ ...bound, [key]: changed })));
+      });
+      return { id: state.id, totals };
+    })
+    .filter((whatIf) => whatIf.totals.length > 0);
 }
 
 function comparisonOf(
   items: ItemState[],
   stated: Map<string, unknown>,
+  assumedKeys: ReadonlySet<string>,
   pass: FormsPass,
   run: ItemizedRun,
 ): DeductionsComparison | undefined {
@@ -241,7 +250,7 @@ function comparisonOf(
         ? lookupStandardDeduction("state-ca", 2025, info.filingStatus)
         : undefined,
     },
-    whatIfs: whatIfs(items, stated, run, bound),
+    whatIfs: whatIfs(items, stated, assumedKeys, run, bound),
   });
   return comparison.federal || comparison.ca ? comparison : undefined;
 }
@@ -251,6 +260,6 @@ export function evaluateDeductions(input: DeductionsInput): DeductionsSummary {
   const pass = run();
   const stated = new Map(input.facts.map((fact) => [fact.key, fact.value]));
   const items = DEDUCTION_ITEMS.map((item) => stateOf(item, input, stated, pass));
-  const comparison = comparisonOf(items, stated, pass, run);
+  const comparison = comparisonOf(items, stated, input.assumedKeys, pass, run);
   return comparison ? { items, comparison } : { items };
 }
