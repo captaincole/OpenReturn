@@ -20,7 +20,12 @@ import {
   type EvaluatedForm,
 } from "./types.js";
 
-export { DEDUCTION_ITEMS, type DeductionItem, type ItemId } from "./deductions/catalog.js";
+export {
+  ASSUMABLE_KEYS,
+  DEDUCTION_ITEMS,
+  type DeductionItem,
+  type ItemId,
+} from "./deductions/catalog.js";
 export type { DeductionsComparison, JurisdictionComparison } from "./deductions/compare.js";
 export type { DeductionsSummary } from "./deductions/evaluate.js";
 export type { ItemState, ItemStatus } from "./deductions/items.js";

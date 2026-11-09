@@ -26,7 +26,7 @@ export interface TaxFact {
   sourceNote?: string;
 }
 
-export function rowToFact(row: Row): TaxFactRow {
+function rowToFact(row: Row): TaxFactRow {
   return {
     id: asStr(row.id),
     userId: asStr(row.user_id),
@@ -39,9 +39,12 @@ export function rowToFact(row: Row): TaxFactRow {
   };
 }
 
-function insertFact(fact: TaxFact) {
+/* tax_facts and assumptions share one shape: one SQL path writes and reads both. */
+export type FactTable = "tax_facts" | "assumptions";
+
+function insertFact(fact: TaxFact, table: FactTable = "tax_facts") {
   return {
-    sql: `INSERT INTO tax_facts
+    sql: `INSERT INTO ${table}
             (id, user_id, filing_id, tax_year, category, fact_key, fact_value, source_note, created_at)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     args: [
@@ -65,9 +68,16 @@ export async function recordFact(scope: Scope, fact: TaxFact): Promise<void> {
 }
 
 /** One transaction: every row is stored, or none. */
-export async function recordFacts(scope: Scope, facts: TaxFact[]): Promise<void> {
+export async function recordFacts(
+  scope: Scope,
+  facts: TaxFact[],
+  table: FactTable = "tax_facts",
+): Promise<void> {
   await ensureAppSchema();
-  await getAppDb().batch(facts.map(insertFact), "write");
+  await getAppDb().batch(
+    facts.map((fact) => insertFact(fact, table)),
+    "write",
+  );
   void scope; // scoping is explicit via fact.userId/filingId on insert
 }
 
@@ -78,7 +88,11 @@ export interface ListFactsOpts {
   limit?: number;
 }
 
-export async function listFacts(scope: Scope, opts: ListFactsOpts = {}): Promise<TaxFactRow[]> {
+export async function listFacts(
+  scope: Scope,
+  opts: ListFactsOpts = {},
+  table: FactTable = "tax_facts",
+): Promise<TaxFactRow[]> {
   await ensureAppSchema();
   const conds: string[] = ["filing_id = ?"];
   const args: InValue[] = [opts.filingId ?? scope.filingId];
@@ -92,7 +106,7 @@ export async function listFacts(scope: Scope, opts: ListFactsOpts = {}): Promise
   }
   args.push(Math.min(opts.limit ?? 100, 500));
   const res = await getAppDb().execute({
-    sql: `SELECT * FROM tax_facts WHERE ${conds.join(" AND ")}
+    sql: `SELECT * FROM ${table} WHERE ${conds.join(" AND ")}
           ORDER BY created_at DESC LIMIT ?`,
     args,
   });

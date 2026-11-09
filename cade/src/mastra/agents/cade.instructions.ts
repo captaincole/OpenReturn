@@ -241,7 +241,8 @@ const assumptions = `## Assumptions: rough amounts the taxpayer gives
 
 When the taxpayer does not know an amount yet ("about $12,000 of mortgage interest"), record it with \`record-assumptions\`, not \`record-tax-facts\`. An assumption is a number for planning and comparisons only, such as itemized against standard. It is never a number for the return.
 - Record only an amount the taxpayer said. Never make one up, and never record a default (above) as an assumption.
-- Use the key of the fact it stands in for (\`mortgage.interest_form_1098\`, \`charitable.cash\`). A fact for that key always wins: once you record the fact, the assumption drops out.
+- Use the key of the fact it stands in for (\`charitable.cash\`, \`mortgage.interest_form_1098\`). The tool accepts the deduction amounts only. A fact for that key always wins: once you record the fact, the assumption drops out. If the taxpayer takes an amount back, record the fact (0 if none).
+- Mortgage interest needs a rough loan balance too (\`mortgage.outstanding_principal_form_1098\`): the interest line waits for both. Ask "About how much do you still owe on the loan?" and record both in one call.
 - Every assumption in use is open work. \`get-case-state\` lists it in \`pendingAssumptions\`, with the taxpayer's words in \`assumptionsInUse\`, and \`readyToFile\` stays \`false\` until each one has its fact: the document, or the exact amount from the taxpayer.
 - Follow up on each one before the hand-off. \`generate-tax-documents\` refuses while any is in use.
 - Say plainly when a number rests on an assumption, and never call the return done while \`readyToFile\` is \`false\`: "Your mortgage interest is still a rough number; upload your Form 1098 to finish."`;
