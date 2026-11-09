@@ -63,6 +63,7 @@ src/
 ├── pendingInputs.ts  the decision and fact keys the filed forms still need, the assumptions in use, readyToFile
 ├── assumptions.ts    fillGaps: each assumption fills a fact key that has no fact
 ├── engine.ts         fixpoint evaluator (cross-form refs converge in ≤5 passes)
+├── evaluateForms.ts  one pass of the forms: facts + decisions → filing info → every form
 ├── defineForm.ts     typed binding authoring API (defineForm, stubZero)
 ├── money.ts          the one module for money math (sum, sumOrBlank, numberOrBlank, atLeast, roundDollars, stepsOf, formatDollars)
 ├── types.ts          FormField model, DerivationContext
@@ -74,7 +75,7 @@ src/
 ├── facts/            fact vocabulary: row shapes + per-kind key conventions
 ├── data/             federal tables (rate schedules, tax table, std deduction)
 ├── worksheets/       IRS/FTB worksheets as pure functions (QDCG, 5695 line 31, …)
-├── deductions/       the itemized-deductions catalog, item states and the itemize-or-standard comparison (#92)
+├── deductions/       the itemized-deductions catalog, item states and the itemize-or-standard comparison (#92); the totals are Schedule A line 17 and Schedule CA line 29 from a pass as if the return itemizes
 ├── render/           PDF fill (fillFromCatalog + hand-verified widget overrides)
 ├── federal/          one folder per federal form (catalog.json, bindings.ts, …) + registry (index.ts)
 └── state/
