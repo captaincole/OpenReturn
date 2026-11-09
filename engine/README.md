@@ -7,10 +7,15 @@ forms come out. **No AI anywhere in the math** — every line on every form is
 computed by a typed, pure-function derivation you can read, test, and diff.
 
 ```
-evaluateScenario({ filing, facts, decisions })  →  EvaluatedScenario (all forms + deductions)
-pendingInputs(scenario)                         →  decision + fact keys still needed
-renderForm(scenario, formId, loadBlankPdf)      →  filled PDF bytes
+evaluateScenario({ filing, facts, assumptions?, decisions })  →  EvaluatedScenario (all forms + deductions)
+pendingInputs(scenario)                                       →  decision + fact keys still needed, assumptions in use
+readyToFile(pending)                                          →  true when nothing is pending
+renderForm(scenario, formId, loadBlankPdf)                    →  filled PDF bytes
 ```
+
+An assumption is a rough amount in the fact row shape. It fills a fact key
+that has no fact and never overrides one (`assumptions.ts`). While any is in
+use, `readyToFile` is false.
 
 ## The package
 
@@ -25,7 +30,7 @@ engine/
 ```
 
 Other code imports only the `exports` in `package.json`:
-`@openreturn/engine` (evaluate, render, pendingInputs, FORMS, bindingKind,
+`@openreturn/engine` (evaluate, render, pendingInputs, readyToFile, FORMS, bindingKind,
 DEDUCTION_ITEMS, the FormField and deductions types), `@openreturn/engine/facts` (the fact vocabulary and row types),
 `@openreturn/engine/catalog` (for the builder, `builder/`),
 `@openreturn/engine/paths`, and `@openreturn/engine/scenarios` (test fixtures).
@@ -42,7 +47,7 @@ Commands, from the repo root: `npm test` (golden), `npm run test:unit`,
    and `pdf-lib`. `tests/unit/boundary.test.ts` enforces this on every
    commit; if your change fails it, the fix is to move code or pass data in,
    never to widen the whitelist casually.
-2. **The engine does no I/O.** Callers load fact/decision rows and pass
+2. **The engine does no I/O.** Callers load fact, assumption and decision rows and pass
    them to `evaluateScenario` — the runtime bridge is the agent's
    `src/mastra/loadScenario.ts`, the only place db and engine meet.
    `renderForm` gets the blank PDF from the caller's `BlankPdfLoader`.
@@ -54,8 +59,9 @@ Commands, from the repo root: `npm test` (golden), `npm run test:unit`,
 
 ```
 src/
-├── index.ts          public API: evaluateScenario, renderForm, pendingInputs
-├── pendingInputs.ts  the decision and fact keys the filed forms still need
+├── index.ts          public API: evaluateScenario, renderForm, pendingInputs, readyToFile
+├── pendingInputs.ts  the decision and fact keys the filed forms still need, the assumptions in use, readyToFile
+├── assumptions.ts    fillGaps: each assumption fills a fact key that has no fact
 ├── engine.ts         fixpoint evaluator (cross-form refs converge in ≤5 passes)
 ├── defineForm.ts     typed binding authoring API (defineForm, stubZero)
 ├── money.ts          the one module for money math (sum, sumOrBlank, numberOrBlank, atLeast, roundDollars, stepsOf, formatDollars)

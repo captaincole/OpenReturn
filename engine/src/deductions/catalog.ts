@@ -125,3 +125,12 @@ export const DEDUCTION_ITEMS: readonly DeductionItem[] = [
     ca: { line: "Schedule CA Part II line 21", rule: "agi_floor", floorRate: CA_MISC_FLOOR_RATE },
   },
 ];
+
+/*
+ * The fact keys an assumption may fill today: the deduction items' amounts.
+ * Cade's record-assumptions tool accepts only these, so a mistyped key cannot
+ * stay pending forever. Projections (what-ifs, future years) widen the list.
+ */
+export const ASSUMABLE_KEYS: readonly string[] = [
+  ...new Set(DEDUCTION_ITEMS.flatMap((item) => item.amountKeys)),
+];

@@ -1,4 +1,5 @@
 import { RequestContext } from "@mastra/core/request-context";
+import { ASSUMABLE_KEYS } from "@openreturn/engine";
 import { describe, expect, it, vi } from "vitest";
 import type { CadeRequestContext } from "../../../../src/mastra/server/requestContext";
 import { recordAssumptions } from "../../../../src/mastra/tools/assumptions";
@@ -11,9 +12,9 @@ vi.mock("../../../../src/mastra/db/filings", () => ({
   },
 }));
 
-const assumption = (index: number) => ({
+const assumption = (index: number, key = ASSUMABLE_KEYS[index % ASSUMABLE_KEYS.length]) => ({
   category: "charitable" as const,
-  key: `charitable.test_${index}`,
+  key,
   value: 1000,
   sourceNote: "about $1,000, verbal",
 });
@@ -48,6 +49,15 @@ describe("record-assumptions", () => {
   it("passes the cap check with the maximum number of assumptions", async () => {
     /* Past the cap check, the next step is the filing lookup (stubbed above). */
     await expect(run(MAX_FACTS_PER_CALL)).rejects.toThrow(/filing lookup reached/);
+  });
+
+  it("refuses a key that is not a deduction amount: it could never be replaced", async () => {
+    const result = await (
+      recordAssumptions as unknown as {
+        execute: (input: unknown, context: unknown) => Promise<unknown>;
+      }
+    ).execute({ year: 2025, assumptions: [assumption(0, "mortgage.interest")] }, context);
+    expect(result).toMatchObject({ error: true });
   });
 
   it("refuses a call without the owner identity before running", async () => {
