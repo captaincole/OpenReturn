@@ -11,7 +11,7 @@ const inputs = (overrides: Partial<ItemInputs>): ItemInputs => ({
   anyStated: false,
   forCpa: false,
   missingAmountKeys: [],
-  agi: 100000,
+  belowFloor: false,
   filesCa: true,
   ...overrides,
 });
@@ -41,10 +41,15 @@ describe("itemState", () => {
     });
   });
 
-  it("closes medical bills under the 7.5% floor: no document is asked for", () => {
+  it("closes medical bills under the floor (the net line is 0): no document is asked for", () => {
     const state = itemState(
       item("medical"),
-      inputs({ amount: 6000, assumed: true, missingAmountKeys: ["medical.expenses_total"] }),
+      inputs({
+        amount: 6000,
+        assumed: true,
+        belowFloor: true,
+        missingAmountKeys: ["medical.expenses_total"],
+      }),
     );
     expect(state).toMatchObject({ status: "below_floor", missing: [] });
   });

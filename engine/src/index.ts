@@ -6,19 +6,14 @@
 
 import { fillGaps } from "./assumptions.js";
 import { evaluateDeductions, type DeductionsSummary } from "./deductions/evaluate.js";
-import { evaluateAllForms, bindingKind as registeredBindingKind } from "./engine.js";
+import { bindingKind as registeredBindingKind } from "./engine.js";
+import { evaluateForms } from "./evaluateForms.js";
 import type { AIDecisionRow, TaxFactRow } from "./facts/rows.js";
-import { resolveFilingInfo, type FilingInfo } from "./filingInfo.js";
-import { FORMS, catalog as bundledCatalog, getFormSpec, registerAllForms } from "./registry.js";
+import type { FilingInfo } from "./filingInfo.js";
+import { catalog as bundledCatalog, getFormSpec, registerAllForms } from "./registry.js";
 import { type RenderedWidget } from "./render/fillFromCatalog.js";
 import { renderFormCopies } from "./render/renderCopies.js";
-import {
-  makeDecisionsView,
-  makeFactsView,
-  type AnyFormField,
-  type DerivationContext,
-  type EvaluatedForm,
-} from "./types.js";
+import type { AnyFormField, DerivationContext, EvaluatedForm } from "./types.js";
 
 export {
   ASSUMABLE_KEYS,
@@ -83,12 +78,6 @@ export interface RenderedForm {
   warnings: string[];
 }
 
-/*
- * Catalog-only forms (no `register`) are not in the bundled catalog.
- * Evaluating them throws and fails the case-state build.
- */
-const SCENARIO_FORM_IDS = FORMS.filter((spec) => spec.register).map((spec) => spec.formId);
-
 function supersede<T>(rows: T[], keyer: (row: T) => string): T[] {
   const seen = new Set<string>();
   const out: T[] = [];
@@ -103,41 +92,17 @@ function supersede<T>(rows: T[], keyer: (row: T) => string): T[] {
 
 export function evaluateScenario(inputs: ScenarioInputs): EvaluatedScenario {
   const { filing, authEmail = null } = inputs;
-
-  // Idempotent and cheap: run per call, not as a module-load side effect.
-  registerAllForms();
-
   const facts = supersede(inputs.facts, (fact) => fact.key);
   const assumptions = supersede(inputs.assumptions ?? [], (assumption) => assumption.key);
   const filled = fillGaps(facts, assumptions);
   const decisions = supersede(inputs.decisions, (decision) => decision.decisionKey);
 
-  const filingInfo = resolveFilingInfo({
-    facts: filled.facts.map((fact) => ({
-      key: fact.key,
-      value: fact.value,
-      category: fact.category,
-    })),
-    decisions: decisions.map((decision) => ({
-      decisionKey: decision.decisionKey,
-      decision: decision.decision,
-    })),
-  });
-
-  const ctx: DerivationContext = {
-    taxYear: filing.taxYear,
-    facts: makeFactsView(filled.facts),
-    decisions: makeDecisionsView(decisions),
-    // Without it, every binding blocks with "filingInfo missing".
-    filingInfo,
-  };
-
-  const { forms } = evaluateAllForms(SCENARIO_FORM_IDS, ctx, bundledCatalog);
+  const { filingInfo, ctx, forms } = evaluateForms(filing.taxYear, filled.facts, decisions);
   const deductions = evaluateDeductions({
+    taxYear: filing.taxYear,
     facts: filled.facts,
     assumedKeys: new Set(filled.assumptionsInUse.map((assumption) => assumption.key)),
-    filingInfo,
-    forms,
+    decisions,
   });
 
   const { assumptionsInUse } = filled;

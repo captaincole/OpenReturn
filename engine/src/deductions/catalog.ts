@@ -1,16 +1,13 @@
 /*
  * The deductions catalog: one record per kind of itemized deduction the engine
  * supports, as data. An item names the facts that carry its amount (the
- * line-level question the engine asks) and where it lands on each return with
- * which rule. How to reach those facts in a conversation ("do you own your
- * home?") is Cade's job, not the engine's. The comparison (compare.ts) applies
- * the rules; the forms stay the only place a deduction is computed for the
- * return.
+ * line-level question the engine asks) and where it lands on each return. How
+ * to reach those facts in a conversation ("do you own your home?") is Cade's
+ * job, not the engine's. The catalog holds no tax rule: the forms are the only
+ * place a deduction is computed, and the comparison reads their totals.
  */
 
 import { CA_MISC_DEDUCTION_KEYS, INVESTMENT_INTEREST_KEYS, MORTGAGE_KEYS } from "../facts/index.js";
-import { MEDICAL_FLOOR_RATE } from "../federal/schedule-a/rates.js";
-import { CA_MISC_FLOOR_RATE } from "../state/ca/schedule-ca/itemizedWorksheet.js";
 
 export type ItemId =
   | "state_income_tax"
@@ -24,20 +21,16 @@ export type ItemId =
   | "medical"
   | "ca_investment_fees";
 
-/*
- * How an item counts on a return. "salt": in the state and local tax pool,
- * capped federally. "agi_floor": only the part over a share of AGI counts
- * (medical 7.5%, California miscellaneous 2%). "full": counts as stated (the
- * forms apply the form-specific limits, such as Form 4952). "none": not
- * deductible on that return.
- */
-export type ItemRule = "salt" | "full" | "agi_floor" | "none";
-
 export interface ReturnLine {
+  /** Where the amount lands on this return, in words. */
   line: string;
-  rule: ItemRule;
-  /** For "agi_floor": the share of AGI that does not count. */
-  floorRate?: number;
+  /** False when this return does not deduct the item (state income tax in California). */
+  deducts: boolean;
+  /**
+   * For an amount under an AGI floor (medical 7.5%, California miscellaneous
+   * 2%): the evaluated line that is 0 while the amount is under the floor.
+   */
+  netLine?: string;
 }
 
 export interface DeductionItem {
@@ -55,29 +48,29 @@ export const DEDUCTION_ITEMS: readonly DeductionItem[] = [
     id: "state_income_tax",
     title: "State income tax withheld or paid in 2025",
     amountKeys: [],
-    federal: { line: "Schedule A line 5a", rule: "salt" },
-    ca: { line: "Schedule CA Part II line 5a (column B takes it out)", rule: "none" },
+    federal: { line: "Schedule A line 5a", deducts: true },
+    ca: { line: "Schedule CA Part II line 5a (column B takes it out)", deducts: false },
   },
   {
     id: "real_estate_tax",
     title: "Real estate tax paid on your home or land",
     amountKeys: ["state_local_tax.real_estate"],
-    federal: { line: "Schedule A line 5b", rule: "salt" },
-    ca: { line: "Schedule CA Part II line 5b", rule: "full" },
+    federal: { line: "Schedule A line 5b", deducts: true },
+    ca: { line: "Schedule CA Part II line 5b", deducts: true },
   },
   {
     id: "personal_property_tax",
     title: "Vehicle license fee and other personal property tax",
     amountKeys: ["state_local_tax.personal_property"],
-    federal: { line: "Schedule A line 5c", rule: "salt" },
-    ca: { line: "Schedule CA Part II line 5c", rule: "full" },
+    federal: { line: "Schedule A line 5c", deducts: true },
+    ca: { line: "Schedule CA Part II line 5c", deducts: true },
   },
   {
     id: "mortgage_interest",
     title: "Mortgage interest on your home (Form 1098)",
     amountKeys: [MORTGAGE_KEYS.interestForm1098, MORTGAGE_KEYS.outstandingPrincipalForm1098],
-    federal: { line: "Schedule A line 8a", rule: "full" },
-    ca: { line: "Schedule CA Part II line 8a", rule: "full" },
+    federal: { line: "Schedule A line 8a", deducts: true },
+    ca: { line: "Schedule CA Part II line 8a", deducts: true },
   },
   {
     id: "investment_interest",
@@ -86,43 +79,56 @@ export const DEDUCTION_ITEMS: readonly DeductionItem[] = [
       INVESTMENT_INTEREST_KEYS.expensePaid,
       INVESTMENT_INTEREST_KEYS.disallowedCarryover,
     ],
-    federal: { line: "Schedule A line 9 (Form 4952)", rule: "full" },
-    ca: { line: "Schedule CA Part II line 9 (FTB 3526)", rule: "full" },
+    federal: { line: "Schedule A line 9 (Form 4952)", deducts: true },
+    ca: { line: "Schedule CA Part II line 9 (FTB 3526)", deducts: true },
   },
   {
     id: "gifts_cash",
     title: "Gifts to charity by cash, check or card",
     amountKeys: ["charitable.cash"],
-    federal: { line: "Schedule A line 11", rule: "full" },
-    ca: { line: "Schedule CA Part II line 11", rule: "full" },
+    federal: { line: "Schedule A line 11", deducts: true },
+    ca: { line: "Schedule CA Part II line 11", deducts: true },
   },
   {
     id: "gifts_property",
     title: "Gifts to charity of goods or securities",
     amountKeys: ["charitable.noncash"],
-    federal: { line: "Schedule A line 12", rule: "full" },
-    ca: { line: "Schedule CA Part II line 12", rule: "full" },
+    federal: { line: "Schedule A line 12", deducts: true },
+    ca: { line: "Schedule CA Part II line 12", deducts: true },
   },
   {
     id: "gift_carryover",
     title: "Gifts carried over from last year's return",
     amountKeys: ["charitable.carryover"],
-    federal: { line: "Schedule A line 13", rule: "full" },
-    ca: { line: "Schedule CA Part II line 13", rule: "full" },
+    federal: { line: "Schedule A line 13", deducts: true },
+    ca: { line: "Schedule CA Part II line 13", deducts: true },
   },
   {
     id: "medical",
     title: "Medical and dental bills you paid",
     amountKeys: ["medical.expenses_total"],
-    federal: { line: "Schedule A line 1", rule: "agi_floor", floorRate: MEDICAL_FLOOR_RATE },
-    ca: { line: "Schedule CA Part II line 1", rule: "agi_floor", floorRate: MEDICAL_FLOOR_RATE },
+    federal: {
+      line: "Schedule A line 1",
+      deducts: true,
+      netLine: "schedule-a.0.line.4_net_medical_dental",
+    },
+    // Column A copies Schedule A line 4; California makes no medical adjustment the engine models.
+    ca: {
+      line: "Schedule CA Part II line 1",
+      deducts: true,
+      netLine: "schedule-ca.4.page2.medical_line4_federal",
+    },
   },
   {
     id: "ca_investment_fees",
     title: "Investment advisory and management fees from taxable accounts",
     amountKeys: [CA_MISC_DEDUCTION_KEYS.investmentFees],
-    federal: { line: "not deductible (suspended through 2025)", rule: "none" },
-    ca: { line: "Schedule CA Part II line 21", rule: "agi_floor", floorRate: CA_MISC_FLOOR_RATE },
+    federal: { line: "not deductible (suspended through 2025)", deducts: false },
+    ca: {
+      line: "Schedule CA Part II line 21",
+      deducts: true,
+      netLine: "schedule-ca.5.page2.job_expenses_25_net",
+    },
   },
 ];
 

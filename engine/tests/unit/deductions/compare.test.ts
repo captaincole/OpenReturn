@@ -1,118 +1,79 @@
 /*
- * Sources: irs-1040sa-inst-2025 (the 7.5% medical floor, the 2025 SALT cap);
- * ca-540-sched-ca-inst-2025 (state income tax taken out, no SALT cap, the 2%
- * floor on line 24, the line 29 worksheet).
+ * The comparison judges totals the forms computed (Schedule A line 17,
+ * Schedule CA line 29); the forms' own tests cover the tax math. The
+ * integration tests run real passes.
  */
 
 import { describe, expect, it } from "vitest";
-import type { ItemId } from "../../../src/deductions/catalog.js";
 import { compareDeductions, type ComparisonInput } from "../../../src/deductions/compare.js";
 
 const input = (overrides: Partial<ComparisonInput>): ComparisonInput => ({
-  amounts: {},
-  unsettled: new Set<ItemId>(),
-  agi: 100000,
-  filingStatus: "single",
-  federalStandard: 15750,
-  caStandard: 5706,
+  totals: { federal: 49981, ca: 41900 },
+  standards: { federal: 31500, ca: 11412 },
+  whatIfs: [],
   ...overrides,
 });
 
 describe("compareDeductions", () => {
-  it("Madison before her documents: itemizing wins, and only the gifts could flip it", () => {
-    const result = compareDeductions(
-      input({
-        amounts: {
-          state_income_tax: 8081,
-          real_estate_tax: 2000,
-          mortgage_interest: 8000,
-          investment_interest: 1900,
-          gifts_cash: 30000,
-          medical: 8000,
-        },
-        unsettled: new Set<ItemId>([
-          "real_estate_tax",
-          "mortgage_interest",
-          "gifts_cash",
-          "medical",
-        ]),
-        agi: 264765,
-        filingStatus: "married_filing_jointly",
-        federalStandard: 31500,
-        caStandard: 11412,
-      }),
-    );
+  it("itemizes where the total is over the standard deduction", () => {
+    const result = compareDeductions(input({}));
     expect(result.federal).toMatchObject({
       itemized: 49981,
+      standard: 31500,
       margin: 18481,
-      recommendation: "itemize",
-    });
-    expect(result.federal.decidingItems).toEqual(["gifts_cash"]);
-    // California takes out the state income tax and itemizes whatever the assumptions turn out to be.
-    expect(result.ca).toMatchObject({
-      itemized: 41900,
       recommendation: "itemize",
       decidingItems: [],
     });
+    expect(result.ca).toMatchObject({ margin: 30488, recommendation: "itemize" });
   });
 
-  it("medical bills under 7.5% of AGI count for nothing", () => {
-    const result = compareDeductions(input({ amounts: { medical: 7000 } }));
-    expect(result.federal.itemized).toBe(0);
-    expect(result.ca?.itemized).toBe(0);
-    const over = compareDeductions(input({ amounts: { medical: 9500 } }));
-    expect(over.federal.itemized).toBe(2000);
+  it("recommends the standard deduction at a tie: itemizing must win", () => {
+    const result = compareDeductions(input({ totals: { federal: 31500 } }));
+    expect(result.federal?.recommendation).toBe("standard");
   });
 
-  it("investment fees count in California above 2% of AGI, and never federally", () => {
-    const result = compareDeductions(input({ amounts: { ca_investment_fees: 3000 } }));
-    expect(result.federal.itemized).toBe(0);
-    expect(result.ca?.itemized).toBe(1000);
-  });
-
-  it("the SALT cap binds federally; California takes no income tax and no cap", () => {
-    const result = compareDeductions(
-      // AGI under the CA line 29 threshold, so the worksheet does not reduce the CA total.
-      input({ amounts: { state_income_tax: 30000, real_estate_tax: 15000 }, agi: 250000 }),
-    );
-    expect(result.federal.itemized).toBe(40000);
-    expect(result.ca?.itemized).toBe(15000);
-  });
-
-  it("recommends the standard deduction when it is larger, and names the assumptions that could flip it", () => {
+  it("names an item deciding when its 0 or its double flips the result on that return", () => {
     const result = compareDeductions(
       input({
-        amounts: { state_income_tax: 5000, gifts_cash: 9000 },
-        unsettled: new Set<ItemId>(["gifts_cash"]),
+        whatIfs: [
+          // Gifts at 0 drop federal under the standard deduction; California still itemizes.
+          {
+            id: "gifts_cash",
+            totals: [
+              { federal: 19981, ca: 12000 },
+              { federal: 79981, ca: 71900 },
+            ],
+          },
+          {
+            id: "medical",
+            totals: [
+              { federal: 49981, ca: 41900 },
+              { federal: 57981, ca: 49900 },
+            ],
+          },
+        ],
       }),
     );
-    expect(result.federal).toMatchObject({
-      itemized: 14000,
-      margin: -1750,
-      recommendation: "standard",
-    });
-    expect(result.federal.decidingItems).toEqual(["gifts_cash"]);
+    expect(result.federal?.decidingItems).toEqual(["gifts_cash"]);
+    expect(result.ca?.decidingItems).toEqual([]);
   });
 
-  it("reduces California's total above the AGI threshold with the line 29 worksheet", () => {
-    // 15,000 less the smaller of 80% of it (12,000) or 6% of AGI over 252,203 (2,868).
-    const result = compareDeductions(input({ amounts: { real_estate_tax: 15000 }, agi: 300000 }));
-    expect(result.ca?.itemized).toBe(12132);
-  });
-
-  it("never names a item a return does not deduct as deciding it", () => {
-    // State income tax is unsettled before the W-2 arrives; California takes none of it.
+  it("names an item deciding when its double makes itemizing win", () => {
     const result = compareDeductions(
       input({
-        amounts: { state_income_tax: 12000, real_estate_tax: 6000, mortgage_interest: 10000 },
-        unsettled: new Set<ItemId>(["state_income_tax"]),
-        agi: 150000,
+        totals: { federal: 14000 },
+        standards: { federal: 15750 },
+        whatIfs: [{ id: "gifts_cash", totals: [{ federal: 5000 }, { federal: 23000 }] }],
       }),
     );
-    expect(result.ca).toMatchObject({ itemized: 16000, decidingItems: [] });
+    expect(result.federal).toMatchObject({ margin: -1750, recommendation: "standard" });
+    expect(result.federal?.decidingItems).toEqual(["gifts_cash"]);
   });
 
-  it("has no California comparison without a 540", () => {
-    expect(compareDeductions(input({ caStandard: undefined })).ca).toBeUndefined();
+  it("leaves out a return whose total waits, and California without a 540", () => {
+    const result = compareDeductions(
+      input({ totals: { ca: 41900 }, standards: { federal: 31500 } }),
+    );
+    expect(result).toEqual({});
   });
 });

@@ -1,28 +1,36 @@
 /*
  * The item states from fact lists: what Cade asks next for a mortgage and a
- * margin loan, and assumptions. No forms are evaluated here (the
- * comparison needs AGI from the 1040); the integration test covers that.
+ * margin loan, and assumptions. The facts here give no AGI, so the forms run
+ * but no comparison is made; the integration test covers that.
  */
 
 import { describe, expect, it } from "vitest";
 import { evaluateDeductions } from "../../../src/deductions/evaluate.js";
 import { INVESTMENT_INTEREST_KEYS, MORTGAGE_KEYS } from "../../../src/facts/index.js";
-import { resolveFilingInfo } from "../../../src/filingInfo.js";
-
-type Fact = { key: string; category: string; value: unknown };
-
-const itemized = [{ decisionKey: "decisions.itemize_vs_standard", decision: "itemized" }];
+import type { TaxFactRow } from "../../../src/facts/rows.js";
 
 /* As evaluateScenario passes them: the assumptions in use join the facts. */
-function items(facts: Fact[], assumptions: Fact[] = []) {
-  const filled = [...facts, ...assumptions];
-  const filingInfo = resolveFilingInfo({ facts: filled, decisions: itemized });
+function items(facts: TaxFactRow[], assumptions: TaxFactRow[] = []) {
   const assumedKeys = new Set(assumptions.map((assumption) => assumption.key));
-  return evaluateDeductions({ facts: filled, assumedKeys, filingInfo, forms: new Map() }).items;
+  return evaluateDeductions({
+    taxYear: 2025,
+    facts: [...facts, ...assumptions],
+    assumedKeys,
+    decisions: [],
+  }).items;
 }
 
-const fact = (key: string, value: unknown): Fact => ({ key, category: "mortgage", value });
-const state = (facts: Fact[], id: string, assumptions: Fact[] = []) =>
+const fact = (key: string, value: unknown): TaxFactRow => ({
+  id: key,
+  userId: "test",
+  taxYear: 2025,
+  category: "mortgage",
+  key,
+  value,
+  sourceNote: null,
+  createdAt: "2026-01-01",
+});
+const state = (facts: TaxFactRow[], id: string, assumptions: TaxFactRow[] = []) =>
   items(facts, assumptions).find((item) => item.id === id)!;
 
 describe("evaluateDeductions item states", () => {

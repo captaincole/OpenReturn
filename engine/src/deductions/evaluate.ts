@@ -1,31 +1,31 @@
 /*
  * The deductions module's entry point: each catalog item's state for this
- * filer, and the itemized-or-standard comparison. It reads the same facts and
- * filing info the forms read (facts, and the assumptions in use), and the
- * evaluated forms where a form applies a limit (Form 4952, FTB 3526), so its
- * amounts are the forms' amounts. Its
- * only output back into the return is the recommendation Cade records as
- * decisions.itemize_vs_standard.
+ * filer, and the itemized-or-standard comparison. Both read a pass of the
+ * forms as if the return itemizes (whatIf.ts), so every amount is the forms'
+ * amount. Its only output back into the return is the recommendation Cade
+ * records as decisions.itemize_vs_standard.
  */
 
 import { lookupStandardDeduction } from "../data/standardDeduction.js";
+import type { FormsPass } from "../evaluateForms.js";
 import { MORTGAGE_KEYS } from "../facts/index.js";
+import type { AIDecisionRow, TaxFactRow } from "../facts/rows.js";
 import { standardDeduction } from "../federal/1040/deductions.js";
 import type { FilingInfo } from "../filingInfo.js";
 import { sumOrBlank } from "../money.js";
-import type { AnyFormField, EvaluatedForm } from "../types.js";
 import { DEDUCTION_ITEMS, type DeductionItem, type ItemId } from "./catalog.js";
-import { compareDeductions, type DeductionsComparison } from "./compare.js";
-import { itemState, type ItemState } from "./items.js";
-import type { Amounts } from "./rules.js";
+import { compareDeductions, type DeductionsComparison, type Totals } from "./compare.js";
+import { countingLines, itemState, type ItemState } from "./items.js";
+import { itemizedRun, type Changes, type ItemizedRun } from "./whatIf.js";
 
 export interface DeductionsInput {
-  /** The facts and the assumptions in use, as the forms read them. */
-  facts: ReadonlyArray<{ key: string; value: unknown }>;
+  taxYear: number;
+  /** The facts and the assumptions in use, one row per key, as the forms read them. */
+  facts: TaxFactRow[];
   /** The keys an assumption fills. */
   assumedKeys: ReadonlySet<string>;
-  filingInfo: FilingInfo;
-  forms: ReadonlyMap<string, EvaluatedForm<AnyFormField>>;
+  /** One row per key. */
+  decisions: AIDecisionRow[];
 }
 
 export interface DeductionsSummary {
@@ -34,7 +34,7 @@ export interface DeductionsSummary {
   comparison?: DeductionsComparison;
 }
 
-type Forms = DeductionsInput["forms"];
+type Forms = FormsPass["forms"];
 
 /* An evaluated line's number, by its full field id ("schedule-a.0.line.17_…"). */
 function evaluatedNumber(forms: Forms, fieldId: string): number | undefined {
@@ -79,12 +79,15 @@ function lineAmount(id: ItemId, info: FilingInfo, forms: Forms): number | undefi
 }
 
 /*
- * Schedule A line 9: Form 4952 line 8 when the form files, the interest paid
+ * Schedule A line 9: Form 4952 line 8 when the form files and has its
+ * answers, the interest paid
  * under its no-file exception, and nothing when no expense or carryover is
  * stated above 0 (the item then closes instead of staying open).
  */
 function investmentInterest(info: FilingInfo, forms: Forms): number | undefined {
   if (files(info, "form-4952")) {
+    // Line 8 waits on the form's own answers (the election, other expenses), as the item does.
+    if ((info.missingInputs?.["form-4952"] ?? []).length > 0) return undefined;
     return evaluatedNumber(forms, "form-4952.0.line.8_investment_interest_deduction");
   }
   if (info.noFormException === true) return info.investmentInterestPaid;
@@ -116,8 +119,12 @@ function mortgageForCpa(info: FilingInfo, stated: Map<string, unknown>): boolean
  * principal is asked only with a 1098's interest; the date only between the
  * two limits.
  */
-function missingFor(item: DeductionItem, input: DeductionsInput, stated: Map<string, unknown>) {
-  const info = input.filingInfo;
+function missingFor(
+  item: DeductionItem,
+  input: DeductionsInput,
+  info: FilingInfo,
+  stated: Map<string, unknown>,
+) {
   const assumed = item.amountKeys.filter((key) => input.assumedKeys.has(key));
   return [...new Set([...unstated(item, info, stated), ...assumed])];
 }
@@ -144,13 +151,24 @@ function unstated(item: DeductionItem, info: FilingInfo, stated: Map<string, unk
   ];
 }
 
+/* On every return the item counts on, its net line is 0: the amount is under the AGI floor. */
+function belowFloor(item: DeductionItem, pass: FormsPass): boolean {
+  const lines = countingLines(item, files(pass.filingInfo, "form-540"));
+  return (
+    lines.length > 0 &&
+    lines.every(
+      (line) => line.netLine !== undefined && evaluatedNumber(pass.forms, line.netLine) === 0,
+    )
+  );
+}
+
 function stateOf(
   item: DeductionItem,
   input: DeductionsInput,
   stated: Map<string, unknown>,
-  agi: number | undefined,
+  pass: FormsPass,
 ): ItemState {
-  const { filingInfo: info, forms } = input;
+  const { filingInfo: info, forms } = pass;
   const forCpa = item.id === "mortgage_interest" && mortgageForCpa(info, stated);
   const statedInterest = stated.get(MORTGAGE_KEYS.interestForm1098);
   return itemState(item, {
@@ -159,39 +177,80 @@ function stateOf(
     anyStated: item.amountKeys.some((key) => stated.has(key)),
     forCpa,
     upperBound: forCpa && typeof statedInterest === "number" ? statedInterest : undefined,
-    missingAmountKeys: missingFor(item, input, stated),
-    agi,
+    missingAmountKeys: missingFor(item, input, info, stated),
+    belowFloor: belowFloor(item, pass),
     filesCa: files(info, "form-540"),
   });
 }
 
-export function evaluateDeductions(input: DeductionsInput): DeductionsSummary {
-  const { filingInfo: info, forms } = input;
-  const stated = new Map(input.facts.map((fact) => [fact.key, fact.value]));
-  const agi = evaluatedNumber(forms, "form-1040.line.11b");
-  const items = DEDUCTION_ITEMS.map((item) => stateOf(item, input, stated, agi));
+const FEDERAL_TOTAL = "schedule-a.0.line.17_total_itemized_deductions";
+const CA_TOTAL = "schedule-ca.5.page2.total_itemized_29";
+
+const totalsOf = (pass: FormsPass): Totals => ({
+  federal: evaluatedNumber(pass.forms, FEDERAL_TOTAL),
+  ca: files(pass.filingInfo, "form-540") ? evaluatedNumber(pass.forms, CA_TOTAL) : undefined,
+});
+
+const itemById = (id: ItemId) => DEDUCTION_ITEMS.find((item) => item.id === id)!;
+
+/*
+ * The amounts that can still change: an assumption, or the CPA's upper bound.
+ * Each one's first amount key (the amount itself, not a 1098's principal) is
+ * set to 0 and to double, and the forms run again.
+ */
+function whatIfs(
+  items: ItemState[],
+  stated: Map<string, unknown>,
+  run: ItemizedRun,
+  bound: Changes,
+) {
+  return items
+    .filter((state) => state.amount !== undefined && (state.assumed || state.status === "for_cpa"))
+    .flatMap((state) => {
+      const key = itemById(state.id).amountKeys[0];
+      const value = key === undefined ? undefined : stated.get(key);
+      if (key === undefined || typeof value !== "number") return [];
+      const totals = [0, 2 * value].map((changed) => totalsOf(run({ ...bound, [key]: changed })));
+      return [{ id: state.id, totals }];
+    });
+}
+
+function comparisonOf(
+  items: ItemState[],
+  stated: Map<string, unknown>,
+  pass: FormsPass,
+  run: ItemizedRun,
+): DeductionsComparison | undefined {
+  const info = pass.filingInfo;
+  const agi = evaluatedNumber(pass.forms, "form-1040.line.11b");
   const federalStandard = standardDeduction(info);
-  if (agi === undefined || !info.filingStatus || federalStandard === undefined) return { items };
-  const amounts: Amounts = {};
-  // The amounts that can still change: an assumption, or the CPA's upper bound.
-  const unsettled = new Set<ItemId>();
-  for (const state of items) {
-    if (state.amount === undefined) continue;
-    amounts[state.id] = state.amount;
-    if (state.assumed || state.status === "for_cpa") unsettled.add(state.id);
-  }
+  if (agi === undefined || !info.filingStatus || federalStandard === undefined) return undefined;
+  /*
+   * A loan over the debt limit leaves line 17 blank until the CPA figures it.
+   * The comparison counts the 1098's full interest, the most the line can be:
+   * it runs the forms with the principal under the limit.
+   */
+  const bound: Changes = items.some((state) => state.status === "for_cpa")
+    ? { [MORTGAGE_KEYS.outstandingPrincipalForm1098]: 0 }
+    : {};
   const comparison = compareDeductions({
-    amounts,
-    unsettled,
-    agi,
-    filingStatus: info.filingStatus,
-    federalStandard,
-    caStandard: files(info, "form-540")
-      ? lookupStandardDeduction("state-ca", 2025, info.filingStatus)
-      : undefined,
-    caInvestmentInterest: files(info, "form-3526")
-      ? evaluatedNumber(forms, "form-3526.0.line.8_investment_interest_deduction")
-      : undefined,
+    totals: totalsOf(Object.keys(bound).length > 0 ? run(bound) : pass),
+    standards: {
+      federal: federalStandard,
+      ca: files(info, "form-540")
+        ? lookupStandardDeduction("state-ca", 2025, info.filingStatus)
+        : undefined,
+    },
+    whatIfs: whatIfs(items, stated, run, bound),
   });
-  return { items, comparison };
+  return comparison.federal || comparison.ca ? comparison : undefined;
+}
+
+export function evaluateDeductions(input: DeductionsInput): DeductionsSummary {
+  const run = itemizedRun(input.taxYear, input.facts, input.decisions);
+  const pass = run();
+  const stated = new Map(input.facts.map((fact) => [fact.key, fact.value]));
+  const items = DEDUCTION_ITEMS.map((item) => stateOf(item, input, stated, pass));
+  const comparison = comparisonOf(items, stated, pass, run);
+  return comparison ? { items, comparison } : { items };
 }

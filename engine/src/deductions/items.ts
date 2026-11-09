@@ -6,7 +6,6 @@
  * other zero: Cade records mortgage interest of 0.
  */
 
-import { roundDollars } from "../money.js";
 import type { DeductionItem } from "./catalog.js";
 
 export type ItemStatus =
@@ -38,7 +37,8 @@ export interface ItemInputs {
   upperBound?: number;
   /** The amount keys with no fact yet, and the ones an assumption fills. */
   missingAmountKeys: string[];
-  agi: number | undefined;
+  /** On every return the item counts on, the form's net line is 0: the amount is under the AGI floor. */
+  belowFloor: boolean;
   /** The filer has a California 540, so the item's California line counts too. */
   filesCa: boolean;
 }
@@ -58,24 +58,15 @@ export interface ItemState {
 }
 
 /* The returns the item counts on: federal, and California when the 540 files. */
-function countingLines(item: DeductionItem, inputs: ItemInputs) {
-  const lines = [item.federal, ...(inputs.filesCa ? [item.ca] : [])];
-  return lines.filter((line) => line.rule !== "none");
-}
-
-/* Under its AGI floor on every return it counts on. */
-function belowFloor(item: DeductionItem, amount: number, inputs: ItemInputs): boolean {
-  const agi = inputs.agi;
-  if (agi === undefined) return false;
-  return countingLines(item, inputs).every(
-    (line) => line.rule === "agi_floor" && amount <= roundDollars(agi * (line.floorRate ?? 0)),
-  );
+export function countingLines(item: DeductionItem, filesCa: boolean) {
+  const lines = [item.federal, ...(filesCa ? [item.ca] : [])];
+  return lines.filter((line) => line.deducts);
 }
 
 function settled(item: DeductionItem, amount: number, inputs: ItemInputs): ItemStatus {
   // Nothing to deduct, or a deduction no return of this filer takes (CA fees without a 540).
-  if (amount <= 0 || countingLines(item, inputs).length === 0) return "closed";
-  if (belowFloor(item, amount, inputs)) return "below_floor";
+  if (amount <= 0 || countingLines(item, inputs.filesCa).length === 0) return "closed";
+  if (inputs.belowFloor) return "below_floor";
   return inputs.assumed ? "assumed" : "exact";
 }
 
