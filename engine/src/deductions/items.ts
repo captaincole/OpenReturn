@@ -47,7 +47,7 @@ export interface ItemState {
   id: DeductionItem["id"];
   title: string;
   status: ItemStatus;
-  /** The amount the comparison uses; for the CPA, the upper bound. */
+  /** The amount the item's form line uses; for the CPA, the upper bound. */
   amount?: number;
   /** The amount rests on an assumption. */
   assumed: boolean;
