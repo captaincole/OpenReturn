@@ -174,8 +174,8 @@ export function RecordsCard({ records }: { records: DeductionRecord[] }) {
                 {dollars(record.amount)}
               </span>
             </div>
-            {record.sourceNotes.map((note) => (
-              <div key={note} className="mt-0.5 text-[12px] leading-relaxed text-ink-muted">
+            {record.sourceNotes.map((note, index) => (
+              <div key={index} className="mt-0.5 text-[12px] leading-relaxed text-ink-muted">
                 {note}
               </div>
             ))}

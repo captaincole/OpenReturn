@@ -2,7 +2,7 @@
 
 import { useAppShell } from "@/components/AppShell";
 import { Markdown } from "@/components/Markdown";
-import { DEDUCTIONS_SEGMENT } from "@/lib/chatSession";
+import { deductionsHref } from "@/lib/chatSession";
 import { stepLabel } from "@/lib/deductions";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ import Link from "next/link";
  * its own tab.
  */
 export function DeductionsCard() {
-  const { state, activeReturn, setMobilePane } = useAppShell();
+  const { state, activeReturn } = useAppShell();
   const view = state?.deductions;
   if (!view) return null;
   const closed = view.next.step === "closed";
@@ -30,9 +30,7 @@ export function DeductionsCard() {
           {view.summary ? <Markdown>{view.summary}</Markdown> : stepLabel(view.next)}
         </div>
         <Link
-          href={`/r/${activeReturn.id}/${DEDUCTIONS_SEGMENT}`}
-          /* On a phone, the deductions route opens on the conversation, not the summary. */
-          onClick={() => setMobilePane("chat")}
+          href={deductionsHref(activeReturn.id)}
           className="shrink-0 rounded-lg bg-accent px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-accent-hover"
         >
           {closed ? "Open Deductions" : started ? "Continue in Deductions" : "Start Deductions"}

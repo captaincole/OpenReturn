@@ -58,7 +58,7 @@ Cade needs Canon (`npm run dev:canon`) to ground decisions and answer questions.
 cade/
 ├── src/mastra/
 │   ├── agents/       Cade: instructions, working memory, PDF-to-image for models without PDF input; cadeDeductions for the deductions thread
-│   ├── deductions/   the deductions conversation: its steps (flow.ts), life questions, open door and closing
+│   ├── deductions/   the deductions conversation: its steps (flow.ts), life questions, open door, closing, and the state that get-deductions and /app/state read (state.ts)
 │   ├── tools/        ingest tools, record-tax-facts, record-assumptions, record-ai-decision, case state, deductions, generate-tax-documents
 │   ├── workflows/    reviewDecision (grounding through Canon), askTurn (Ask The Tax Code threads)
 │   ├── canon/        client.ts: the MCP client, Cade's only path to Canon

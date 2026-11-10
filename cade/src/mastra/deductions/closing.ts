@@ -106,10 +106,16 @@ function recordsOf(scenario: EvaluatedScenario): DeductionRecord[] {
       item: item.id,
       title: item.title,
       amount: item.amount!,
-      sourceNotes: scenario.facts
-        .filter((fact) => amountKeysOf(item.id).includes(fact.key))
-        .flatMap((fact) => (fact.sourceNote ? [fact.sourceNote] : [])),
+      sourceNotes: sourceNotesOf(scenario, amountKeysOf(item.id)),
     }));
+}
+
+/* Each note once: two amounts from one document (a Form 1098) carry the same note. */
+function sourceNotesOf(scenario: EvaluatedScenario, factKeys: string[]): string[] {
+  const notes = scenario.facts
+    .filter((fact) => factKeys.includes(fact.key))
+    .flatMap((fact) => (fact.sourceNote ? [fact.sourceNote] : []));
+  return [...new Set(notes)];
 }
 
 function recorded(scenario: EvaluatedScenario, decisionKey: string): unknown {

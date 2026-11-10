@@ -14,11 +14,3 @@ export interface TaxReturn {
   realDataAvailable: boolean;
   status: string;
 }
-
-/*
- * Must match mainThreadId in cade/src/mastra/threads.ts. Keyed by year, not filing UUID, so
- * a reset that recreates the filing keeps the same thread.
- */
-export function threadIdFor(userId: string, returnId: string): string {
-  return `${userId}::${returnId}`;
-}

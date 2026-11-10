@@ -39,7 +39,7 @@ function Pane({
   className,
   children,
 }: {
-  id: Exclude<MobilePane, "chat">;
+  id: Exclude<MobilePane, "chat" | "summary">;
   className?: string;
   children: React.ReactNode;
 }) {
