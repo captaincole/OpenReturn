@@ -21,6 +21,7 @@ import {
   type LifeQuestionId,
   type LifeQuestionStatus,
 } from "./lifeQuestions";
+import { openDoorAsk, type OpenDoorAsk } from "./openDoor";
 
 export interface AmountAsk {
   item: ItemId;
@@ -32,6 +33,8 @@ export interface AmountAsk {
 export type NextStep =
   /** Ask these yes/no questions; they can go in one message. */
   | { step: "ask_life_questions"; questions: { id: LifeQuestionId; ask: string }[] }
+  /** The open door: ask what else the taxpayer paid that might count, until they say nothing else is left. */
+  | ({ step: "ask_anything_else" } & OpenDoorAsk)
   /** Ask each item's amounts: exact when the taxpayer knows it, rough when not. */
   | { step: "ask_amounts"; items: AmountAsk[] }
   /** The comparison needs the return's income and filing status: the return's conversation supplies them. */
@@ -147,6 +150,8 @@ function nextStep(scenario: EvaluatedScenario, questions: LifeQuestionState[]): 
   if (unasked.length > 0) {
     return { step: "ask_life_questions", questions: unasked.map(({ id, ask }) => ({ id, ask })) };
   }
+  const door = openDoorAsk(scenario.filing.taxYear, valuesByKey(scenario.facts));
+  if (door) return { step: "ask_anything_else", ...door };
   const toAsk = amountAsks(scenario, questions);
   if (toAsk.length > 0) return { step: "ask_amounts", items: toAsk };
   const closing = planClosing(scenario);

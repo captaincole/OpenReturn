@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
 import type { CadeRequestContext } from "../../src/mastra/server/requestContext";
-import { alexDecisions, alexFacts, HOME_AMOUNTS, YEAR } from "./deductionsFixtures";
+import { alexDecisions, alexFacts, fact, HOME_AMOUNTS, YEAR } from "./deductionsFixtures";
 
 /* The tools read and write a real app.db: a temp file, set before the db modules load. */
 const dir = mkdtempSync(path.join(tmpdir(), "openreturn-deductions-test-"));
@@ -17,6 +17,9 @@ const filings = await import("../../src/mastra/db/filings");
 const taxFacts = await import("../../src/mastra/db/taxFacts");
 const decisions = await import("../../src/mastra/db/aiDecisions");
 const tools = await import("../../src/mastra/tools/deductions");
+const { offerQuickReplies } = await import("../../src/mastra/tools/quickReplies");
+const { QuickReplyResolver } = await import("../../src/mastra/agents/quickReplyResolver");
+const { getAppDb } = await import("../../src/mastra/db/appDb");
 const { ITEMIZE_KEY, SCHEDULE_A_KEY } = await import("../../src/mastra/deductions/closing");
 
 const userId = "owner-test";
@@ -51,8 +54,11 @@ const seedFacts = (rows: typeof alexFacts) =>
     })),
   );
 
-const storedFacts = async () =>
-  new Map((await taxFacts.listFacts(scope, { filingId, limit: 500 })).map((row) => [row.key, row]));
+/* The newest row of each key: the rows come newest first, and a Map keeps the last entry. */
+const storedFacts = async () => {
+  const newestFirst = await taxFacts.listFacts(scope, { filingId, limit: 500 });
+  return new Map([...newestFirst].reverse().map((row) => [row.key, row]));
+};
 
 const storedDecisions = async (decisionKey: string) =>
   (await decisions.listDecisions(scope, { filingId, limit: 500 })).filter(
@@ -60,6 +66,29 @@ const storedDecisions = async (decisionKey: string) =>
   );
 
 const no = (id: string) => ({ id, answer: false, sourceNote: "No, verbal, 2026-11-09" });
+
+const named = (name: string, taxpayerWords: string, outcome: string, more: object = {}) => ({
+  name,
+  taxpayerWords,
+  outcome,
+  rationale: `Why ${name} is ${outcome}.`,
+  confidence: "medium",
+  ...more,
+});
+
+/* The quick-reply cards, oldest first. */
+const quickReplies = async () =>
+  (
+    await getAppDb().execute({
+      sql: `SELECT title, options_json, status FROM requested_actions
+            WHERE filing_id = ? AND kind = 'decide' ORDER BY rowid`,
+      args: [filingId],
+    })
+  ).rows.map((row) => ({
+    question: row.title,
+    options: JSON.parse(String(row.options_json)),
+    status: row.status,
+  }));
 
 beforeAll(async () => {
   await filings.createOwnerFiling({ ...owned });
@@ -145,11 +174,103 @@ describe("the deductions tools, over one filing", () => {
     });
   });
 
-  it("close-deductions records both decisions when only California itemizes", async () => {
+  it("record-named-expenses records each outcome as a decision over the taxpayer's words, and no amount", async () => {
     const answered = await call(tools.answerLifeQuestions, {
       answers: ["itemized_last_year", "margin_loan", "investment_fees"].map(no),
     });
-    expect(answered.next.step).toBe("close");
+    expect(answered.next).toMatchObject({ step: "ask_anything_else", done: "Nothing else" });
+
+    const result = await call(tools.recordNamedExpenses, {
+      expenses: [
+        named("Home office", "I work from a room at home", "not_sure"),
+        named("Student loan interest", "I paid interest on my student loan", "counts_elsewhere", {
+          where: "Schedule 1, student loan interest deduction",
+        }),
+        named("Commuting", "I drive to the office every day", "does_not_count"),
+        named("Church gift", "I gave $250 to my church", "counts_here", { item: "gifts_cash" }),
+        named("Union dues", "I pay union dues", "counts_here"),
+      ],
+      nothingElse: true,
+      sourceNote: "verbal, 2026-11-09",
+    });
+    expect(result.recorded).toEqual([
+      "deductions.named.home-office",
+      "deductions.named.student-loan-interest",
+      "deductions.named.commuting",
+      "deductions.named.church-gift",
+      "deductions.life.gave_money",
+    ]);
+    expect(result.decisions).toEqual([
+      "decisions.deductions.named.home-office",
+      "decisions.deductions.named.student-loan-interest",
+      "decisions.deductions.named.commuting",
+      "decisions.deductions.named.church-gift",
+    ]);
+    /* A problem records nothing for its expense, and keeps the door open. */
+    expect(result.problems).toEqual([
+      {
+        name: "Union dues",
+        problem: "counts_here needs `item`. An expense that no item covers is not_sure.",
+      },
+    ]);
+    expect(result.next).toMatchObject({ step: "ask_anything_else", ask: "Anything else?" });
+
+    const facts = await storedFacts();
+    expect(facts.get("deductions.named.church-gift")).toMatchObject({
+      category: "other",
+      value: "I gave $250 to my church",
+      sourceNote: "verbal, 2026-11-09",
+    });
+    expect(facts.has("deductions.named.union-dues")).toBe(false);
+    expect(facts.has("deductions.nothing_else")).toBe(false);
+    /* The door wrote the yes; the $250 in the taxpayer's words is not an amount on the item. */
+    expect(facts.get("deductions.life.gave_money")?.value).toBe(true);
+    expect(facts.get("charitable.cash")?.value).toBe(0);
+
+    const [loan] = await storedDecisions("decisions.deductions.named.student-loan-interest");
+    expect(loan).toMatchObject({
+      decision: {
+        outcome: "counts_elsewhere",
+        where: "Schedule 1, student loan interest deduction",
+      },
+      supportingFactKeys: ["deductions.named.student-loan-interest"],
+      confidence: "medium",
+    });
+    const [gift] = await storedDecisions("decisions.deductions.named.church-gift");
+    expect(gift.decision).toEqual({ outcome: "counts_here", item: "gifts_cash" });
+
+    /* Two notes: one for the return's conversation, one for the CPA. */
+    const questions = await taxFacts.listOpenQuestions(scope);
+    expect(questions.map((each) => each.question).sort()).toEqual([
+      'For the CPA: the taxpayer named "Home office" in the deductions conversation, and Cade could not say whether it counts.',
+      'The taxpayer named "Student loan interest" in the deductions conversation. It is not an itemized deduction, and it may count here: Schedule 1, student loan interest deduction. Take it up in the return\'s conversation.',
+    ]);
+    expect(questions.map((each) => each.context)).toContain(
+      '"I work from a room at home" (verbal, 2026-11-09)',
+    );
+  });
+
+  it("nothing else closes the door, and the item the door opened asks its exact amount", async () => {
+    const input = { expenses: [], nothingElse: true, sourceNote: "verbal, 2026-11-09" };
+    const result = await call(tools.recordNamedExpenses, input);
+    expect(result.recorded).toEqual(["deductions.nothing_else"]);
+    /* The fact of 0 from the earlier no is still there: only an exact amount replaces it. */
+    expect(result.next).toEqual({
+      step: "ask_amounts",
+      items: [
+        {
+          item: "gifts_cash",
+          title: expect.any(String),
+          keys: [{ key: "charitable.cash", category: "charitable", roughAllowed: false }],
+        },
+      ],
+    });
+    expect((await call(tools.recordNamedExpenses, input)).recorded).toEqual([]);
+  });
+
+  it("close-deductions records both decisions when only California itemizes", async () => {
+    await seedFacts([fact("charitable.cash", 250, "charitable")]);
+    expect((await call(tools.getDeductions)).next.step).toBe("close");
 
     const result = await call(tools.closeDeductions);
     expect(result).toMatchObject({
@@ -158,11 +279,12 @@ describe("the deductions tools, over one filing", () => {
       next: { step: "closed" },
     });
     expect(result.summary).toBe(
-      "Deductions are done. You take the standard deduction on the federal return ($15,750 against $14,035 itemized) and itemize on the California return ($10,000 against the $5,706 standard deduction). Schedule A is still filled in: the California return starts from it. 2 records are on the list for the CPA; nothing is attached to the return.",
+      "Deductions are done. You take the standard deduction on the federal return ($15,750 against $14,285 itemized) and itemize on the California return ($10,250 against the $5,706 standard deduction). Schedule A is still filled in: the California return starts from it. 3 records are on the list for the CPA; nothing is attached to the return.",
     );
     expect((result.records as { item: string }[]).map((record) => record.item)).toEqual([
       "real_estate_tax",
       "mortgage_interest",
+      "gifts_cash",
     ]);
 
     const [itemize] = await storedDecisions(ITEMIZE_KEY);
@@ -185,5 +307,44 @@ describe("the deductions tools, over one filing", () => {
     expect(again.summary).toContain("itemize on the California return");
     expect(await storedDecisions(ITEMIZE_KEY)).toHaveLength(1);
     expect(await storedDecisions(SCHEDULE_A_KEY)).toHaveLength(1);
+  });
+});
+
+describe("quick replies", () => {
+  const yesNo = (question: string) => ({ question, options: ["Yes", "No"] });
+
+  it("offer-quick-replies opens one card per question, and a new offer replaces the cards before it", async () => {
+    const first = await call(offerQuickReplies, {
+      replies: [yesNo("Do you own your home?"), yesNo("Did you give money to a charity?")],
+    });
+    expect(first.offered).toBe(2);
+
+    /* A question with no options gets no card. */
+    const second = await call(offerQuickReplies, {
+      replies: [
+        { question: "Anything else?", options: ["Home office", "That's all"] },
+        { question: "How much?", options: [] },
+      ],
+    });
+    expect(second.offered).toBe(1);
+    expect(await quickReplies()).toEqual([
+      { question: "Do you own your home?", options: ["Yes", "No"], status: "dismissed" },
+      { question: "Did you give money to a charity?", options: ["Yes", "No"], status: "dismissed" },
+      { question: "Anything else?", options: ["Home office", "That's all"], status: "open" },
+    ]);
+  });
+
+  it("the taxpayer's next message resolves the open cards", async () => {
+    const messages: never[] = [];
+    const passed = await new QuickReplyResolver().processInput({
+      messages,
+      requestContext: context.requestContext,
+    } as never);
+    expect(passed).toBe(messages);
+    expect((await quickReplies()).map((card) => card.status)).toEqual([
+      "dismissed",
+      "dismissed",
+      "resolved",
+    ]);
   });
 });
