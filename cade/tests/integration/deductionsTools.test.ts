@@ -137,7 +137,7 @@ describe("the deductions tools, over one filing", () => {
 
     /* The document is in: its card closes in both conversations. */
     const dismissed = await call(dismissRequestedAction, { documentType: "1098" });
-    expect(dismissed.dismissed).toBe(true);
+    expect(dismissed).toEqual({ dismissed: true, closed: 2 });
     expect(await cards()).toEqual(["deductions 1098 resolved", "return 1098 resolved"]);
   });
 
