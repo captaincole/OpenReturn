@@ -250,6 +250,8 @@ describe("the next step of the deductions conversation", () => {
     expect(planClosing(scenario)!.summary).toContain(
       "1 rough amount is still in use. They do not change this result, but each needs its exact amount before the return is ready to file.",
     );
+    /* The requested document still brings the exact amount, so its card stays. */
+    expect(planClosing(scenario)!.dismissRequests).toBe(false);
   });
 });
 
@@ -262,6 +264,7 @@ describe("closing the deductions conversation", () => {
       "Deductions are done. You take the standard deduction on both returns: federal $15,750 against $4,035 itemized, California $5,706 against $0 itemized.",
     );
     expect(plan.records).toEqual([]);
+    expect(plan.dismissRequests).toBe(true);
     expect(plan.decisions.map((each) => [each.decisionKey, each.decision])).toEqual([
       [ITEMIZE_KEY, "standard"],
     ]);

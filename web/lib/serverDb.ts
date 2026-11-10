@@ -203,6 +203,7 @@ function rowToAction(row: Row): RequestedAction {
   return {
     id: str(row.id),
     taxYear: num(row.tax_year),
+    conversation: str(row.conversation) as RequestedAction["conversation"],
     kind: str(row.kind) as RequestedAction["kind"],
     title: str(row.title),
     detail: strOrNull(row.detail),
@@ -215,15 +216,18 @@ function rowToAction(row: Row): RequestedAction {
   };
 }
 
+/* The cards one conversation shows: each request records the conversation that made it. */
 export async function fetchOpenActions(
   userId: string,
   taxYear: number,
+  conversation: RequestedAction["conversation"],
 ): Promise<RequestedAction[]> {
   const res = await db().execute({
     sql: `SELECT * FROM requested_actions
-          WHERE user_id = ? AND tax_year = ? AND status IN ('open','processing')
+          WHERE user_id = ? AND tax_year = ? AND conversation = ?
+            AND status IN ('open','processing')
           ORDER BY created_at DESC`,
-    args: [userId, taxYear],
+    args: [userId, taxYear, conversation],
   });
   return res.rows.map(rowToAction);
 }

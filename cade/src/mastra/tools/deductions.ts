@@ -8,6 +8,7 @@
 import { createTool } from "@mastra/core/tools";
 import type { EvaluatedScenario } from "@openreturn/engine";
 import { z } from "zod";
+import { dismissRequests } from "../db/requestedActions";
 import { noteQuestion, recordFacts } from "../db/taxFacts";
 import { planClosing } from "../deductions/closing";
 import { deductionsFlow, valuesByKey } from "../deductions/flow";
@@ -256,6 +257,7 @@ export const closeDeductions = createTool({
         ...decision,
       });
     }
+    if (plan.dismissRequests) await dismissRequests(user.scope, "deductions");
     return {
       closed: true,
       summary: plan.summary,

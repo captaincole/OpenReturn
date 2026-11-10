@@ -28,6 +28,10 @@ export const DEDUCTIONS_CONVERSATION: Conversation = {
   threadId: deductionsThreadId,
 };
 
+/* For a value from outside the app's own code, such as a query parameter. */
+export const isConversationId = (value: string | null): value is Conversation["id"] =>
+  value === RETURN_CONVERSATION.id || value === DEDUCTIONS_CONVERSATION.id;
+
 /* The route segment under /r/[returnId] that shows the deductions conversation. */
 export const DEDUCTIONS_SEGMENT = "deductions";
 

@@ -12,7 +12,7 @@ import {
 import { dismissRequestedAction } from "../tools/dismissRequestedAction";
 import { ingest1098 } from "../tools/ingest1098";
 import { INGEST_MAX_OUTPUT_TOKENS } from "../tools/ingestTools";
-import { requestDocumentUpload } from "../tools/requestDocument";
+import { requestDocumentUploadFor } from "../tools/requestDocument";
 import { recordTaxFacts } from "../tools/taxFacts";
 import { cadeDeductionsInstructions } from "./cadeDeductions.instructions";
 import { PdfAttachmentRasterizer } from "./pdfAttachments";
@@ -38,7 +38,7 @@ export const cadeDeductions = new Agent({
     recordTaxFacts,
     recordAssumptions,
     ingest1098,
-    requestDocumentUpload,
+    requestDocumentUpload: requestDocumentUploadFor("deductions"),
     dismissRequestedAction,
     closeDeductions,
   },
