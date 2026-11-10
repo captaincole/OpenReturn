@@ -5,6 +5,7 @@
 import { useAppShell, type MobilePane } from "@/components/AppShell";
 import { cn } from "@/lib/cn";
 import { ActivityTicker } from "./components/ActivityRail";
+import { DeductionsCard } from "./components/DeductionsCard";
 import { DocumentsSection } from "./components/DocumentsSection";
 import { FormsSection } from "./components/FormsSection";
 import { RequestedActionsCard } from "./components/RequestedActions";
@@ -21,6 +22,7 @@ export default function ReturnWorkspace() {
       <Pane id="activity" className="space-y-6">
         <ActivityTicker refreshKey={turnTick + resetTick * 10000} />
         <RequestedActionsCard />
+        <DeductionsCard />
       </Pane>
       <Pane id="forms">
         <FormsSection />

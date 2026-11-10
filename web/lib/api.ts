@@ -1,5 +1,6 @@
 import { agentUrl } from "@/lib/agentBase";
 import { authHeaders } from "@/lib/auth";
+import { type DeductionsView } from "@/lib/deductions";
 
 export type PlanItemStatus = "todo" | "doing" | "done";
 
@@ -53,6 +54,8 @@ export interface CaseState {
     stateRefund: number | null;
     stateOwed: number | null;
   } | null;
+  /** The deductions conversation: its step, the comparison, the items and the records. */
+  deductions: DeductionsView;
   documents: {
     form1040Url: string | null;
     form540Url: string | null;

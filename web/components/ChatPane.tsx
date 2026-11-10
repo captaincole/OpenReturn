@@ -1,8 +1,9 @@
 "use client";
 
 import { type ChatMessage, useAppShell } from "@/components/AppShell";
+import { DeductionReplies } from "@/components/DeductionReplies";
 import { Markdown } from "@/components/Markdown";
-import { type PlanItem } from "@/lib/api";
+import { PlanRail } from "@/components/PlanRail";
 import { cn } from "@/lib/cn";
 import { type TaxReturn } from "@/lib/returns";
 import { type FormEvent, useEffect, useRef, useState } from "react";
@@ -12,15 +13,16 @@ interface ChatPaneProps {
 }
 
 export function ChatPane({ activeReturn }: ChatPaneProps) {
-  const { messages, cadeBusy, mobilePane } = useAppShell();
+  const { messages, cadeBusy, mobilePane, conversation } = useAppShell();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const isPlaceholder = !activeReturn.realDataAvailable;
+  const inDeductions = conversation === "deductions";
 
   /* mobilePane: a hidden element cannot scroll, so scroll again when the Chat tab shows. */
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
-  }, [messages, mobilePane]);
+  }, [messages, mobilePane, conversation]);
 
   const renderMessages: ChatMessage[] = isPlaceholder
     ? [placeholderMessageFor(activeReturn)]
@@ -33,7 +35,11 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
         {isEmpty && (
           <div className="flex items-start gap-2.5 text-sm text-ink-muted">
             <CadeAvatar />
-            <div className="pt-0.5">Say hi to start.</div>
+            <div className="pt-0.5">
+              {inDeductions
+                ? "Here Cade finds out whether you itemize or take the standard deduction."
+                : "Say hi to start."}
+            </div>
           </div>
         )}
         {renderMessages.map((msg) => (
@@ -41,6 +47,7 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
         ))}
       </div>
 
+      {inDeductions && !isPlaceholder && <DeductionReplies />}
       <ChatComposer isPlaceholder={isPlaceholder} />
     </div>
   );
@@ -85,7 +92,7 @@ function MessageBubble({ msg, cadeBusy }: { msg: ChatMessage; cadeBusy: boolean 
 }
 
 function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
-  const { state, cadeBusy, sendChat } = useAppShell();
+  const { state, cadeBusy, sendChat, conversation } = useAppShell();
   const [input, setInput] = useState("");
   const [attachment, setAttachment] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -126,7 +133,7 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
           isPlaceholder && "opacity-60",
         )}
       >
-        <PlanRail plan={state?.plan ?? []} hidden={isPlaceholder} />
+        <PlanRail plan={state?.plan ?? []} hidden={isPlaceholder || conversation !== "return"} />
 
         <input
           ref={fileInputRef}
@@ -267,69 +274,6 @@ function SendIcon() {
       <line x1="12" y1="19" x2="12" y2="5" />
       <polyline points="5 12 12 5 19 12" />
     </svg>
-  );
-}
-
-function PlanRail({ plan, hidden }: { plan: PlanItem[]; hidden: boolean }) {
-  const [showAll, setShowAll] = useState(false);
-  const active = plan.filter((item) => item.status !== "done");
-  if (hidden || active.length === 0) return null;
-
-  const CAP = 3;
-  const visible = showAll ? active : active.slice(0, CAP);
-  const hiddenCount = active.length - visible.length;
-
-  return (
-    <div className="border-b border-border-subtle px-4 pt-3 pb-2.5">
-      <div className="mb-2 flex items-baseline justify-between">
-        <span className="text-[10px] tracking-[0.18em] text-ink-muted uppercase">Plan</span>
-        <span className="text-[10px] text-ink-muted tabular-nums">{active.length} active</span>
-      </div>
-      <ul className="space-y-1.5">
-        {visible.map((item) => (
-          <PlanRailRow key={item.id} item={item} />
-        ))}
-      </ul>
-      {hiddenCount > 0 && !showAll && (
-        <button
-          type="button"
-          onClick={() => setShowAll(true)}
-          className="mt-1.5 text-[11px] text-accent hover:text-accent-hover"
-        >
-          See {hiddenCount} more
-        </button>
-      )}
-      {showAll && active.length > CAP && (
-        <button
-          type="button"
-          onClick={() => setShowAll(false)}
-          className="mt-1.5 text-[11px] text-ink-muted hover:text-ink-secondary"
-        >
-          Show less
-        </button>
-      )}
-    </div>
-  );
-}
-
-function PlanRailRow({ item }: { item: PlanItem }) {
-  const isDoing = item.status === "doing";
-  return (
-    <li className="flex items-start gap-2">
-      {isDoing ? (
-        <span className="mt-[5px] h-2 w-2 shrink-0 animate-pulse-soft rounded-full bg-accent" />
-      ) : (
-        <span className="mt-[4px] h-2.5 w-2.5 shrink-0 rounded-full border border-border-strong" />
-      )}
-      <span
-        className={cn(
-          "truncate text-[12px] leading-snug",
-          isDoing ? "text-ink-primary" : "text-ink-secondary",
-        )}
-      >
-        {item.title}
-      </span>
-    </li>
   );
 }
 

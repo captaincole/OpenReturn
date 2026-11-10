@@ -4,9 +4,9 @@
 
 import { UnauthorizedError } from "@/lib/api";
 import { getUserId } from "@/lib/auth";
-import { CADE_AGENT_ID } from "@/lib/chatSession";
+import { DEDUCTIONS_CONVERSATION, RETURN_CONVERSATION, type Conversation } from "@/lib/chatSession";
 import { makeMastraClient } from "@/lib/mastraClient";
-import { threadIdFor, type TaxReturn } from "@/lib/returns";
+import { type TaxReturn } from "@/lib/returns";
 import { uploadDocument } from "@/lib/uploads";
 import { useRef, useState, type Dispatch, type SetStateAction } from "react";
 
@@ -105,6 +105,7 @@ function convertThreadMessages(
 }
 
 interface ChatCtx {
+  conversation: Conversation;
   userId: string;
   activeReturn: TaxReturn;
   realData: boolean;
@@ -124,8 +125,8 @@ async function loadChatHistoryImpl(ctx: ChatCtx): Promise<void> {
   try {
     const client = await makeMastraClient();
     const thread = client.getMemoryThread({
-      threadId: threadIdFor(ctx.userId, ctx.activeReturn.id),
-      agentId: CADE_AGENT_ID,
+      threadId: ctx.conversation.threadId(ctx.userId, ctx.activeReturn.id),
+      agentId: ctx.conversation.agentId,
     });
     const res = await thread.listMessages({ perPage: 200 });
     const converted = convertThreadMessages(res.messages);
@@ -142,9 +143,9 @@ async function streamTurn(
   assistantId: string,
 ): Promise<void> {
   const client = await makeMastraClient();
-  const stream = await client.getAgent(CADE_AGENT_ID).stream(payload as string, {
+  const stream = await client.getAgent(ctx.conversation.agentId).stream(payload as string, {
     memory: {
-      thread: threadIdFor(freshUserId, ctx.activeReturn.id),
+      thread: ctx.conversation.threadId(freshUserId, ctx.activeReturn.id),
       resource: freshUserId,
     },
   });
@@ -222,7 +223,9 @@ async function sendChatImpl(ctx: ChatCtx, sendOpts: SendChatOpts): Promise<void>
   }
 }
 
-export function useCadeChat(opts: {
+function useCadeChat(opts: {
+  /* Which of the filing's two conversations with Cade this buffer holds. */
+  conversation: Conversation;
   userId: string;
   activeReturn: TaxReturn;
   refreshState: () => Promise<void>;
@@ -235,6 +238,7 @@ export function useCadeChat(opts: {
   const sendingRef = useRef(false);
 
   const ctx: ChatCtx = {
+    conversation: opts.conversation,
     userId: opts.userId,
     activeReturn: opts.activeReturn,
     realData: opts.activeReturn.realDataAvailable,
@@ -254,5 +258,28 @@ export function useCadeChat(opts: {
     bumpTurn: () => setTurnTick((tick) => tick + 1),
     sendChat: (sendOpts) => sendChatImpl(ctx, sendOpts),
     loadChatHistory: () => loadChatHistoryImpl(ctx),
+  };
+}
+
+/*
+ * The filing's two conversations with Cade, each with its own buffer, so a
+ * switch between them loses no message. The chat pane shows one of them.
+ */
+export function useConversations(
+  opts: Omit<Parameters<typeof useCadeChat>[0], "conversation">,
+  shown: Conversation["id"],
+): CadeChat {
+  const returnChat = useCadeChat({ ...opts, conversation: RETURN_CONVERSATION });
+  const deductionsChat = useCadeChat({ ...opts, conversation: DEDUCTIONS_CONVERSATION });
+  const shownChat = shown === "deductions" ? deductionsChat : returnChat;
+  return {
+    ...shownChat,
+    /* One Cade: a turn in either conversation holds both composers. */
+    cadeBusy: returnChat.cadeBusy || deductionsChat.cadeBusy,
+    /* A turn in either conversation can change what the return page shows. */
+    turnTick: returnChat.turnTick + deductionsChat.turnTick,
+    loadChatHistory: async () => {
+      await Promise.all([returnChat.loadChatHistory(), deductionsChat.loadChatHistory()]);
+    },
   };
 }
