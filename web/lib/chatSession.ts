@@ -31,4 +31,7 @@ export const DEDUCTIONS_CONVERSATION: Conversation = {
 /* The route segment under /r/[returnId] that shows the deductions conversation. */
 export const DEDUCTIONS_SEGMENT = "deductions";
 
-export const deductionsHref = (returnId: string): string => `/r/${returnId}/${DEDUCTIONS_SEGMENT}`;
+export const returnHref = (returnId: string): string => `/r/${returnId}`;
+
+export const deductionsHref = (returnId: string): string =>
+  `${returnHref(returnId)}/${DEDUCTIONS_SEGMENT}`;
