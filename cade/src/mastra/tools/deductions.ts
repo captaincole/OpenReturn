@@ -9,7 +9,7 @@ import { createTool } from "@mastra/core/tools";
 import type { EvaluatedScenario } from "@openreturn/engine";
 import { z } from "zod";
 import { noteQuestion, recordFacts } from "../db/taxFacts";
-import { ITEMIZE_KEY, planClosing, SCHEDULE_A_KEY } from "../deductions/closing";
+import { planClosing } from "../deductions/closing";
 import { deductionsFlow, valuesByKey } from "../deductions/flow";
 import {
   LIFE_QUESTION_IDS,
@@ -23,6 +23,7 @@ import {
   planNamedExpenses,
   type PlannedExpense,
 } from "../deductions/openDoor";
+import { deductionsState } from "../deductions/state";
 import { loadAndEvaluateScenario } from "../loadScenario";
 import { cadeRequestContextSchema } from "../server/requestContext";
 import { recordAndReview } from "./aiDecisions";
@@ -67,30 +68,6 @@ const nextStep = z
   .describe(
     "What to do now. ask_life_questions: ask the listed yes/no questions. ask_anything_else: ask `ask` (the open door) and record what the taxpayer names with record-named-expenses. ask_amounts: ask each key of each item; a rough amount is allowed only where roughAllowed is true. wait_for_return: the comparison needs income and filing status from the return's conversation. get_exact_amounts: get the document or exact amount behind each rough amount listed. close: call close-deductions. closed: nothing to do.",
   );
-
-/* What Cade reads at the start of a turn. Every number is the engine's. */
-export function deductionsState(scenario: EvaluatedScenario) {
-  const { items, comparison } = scenario.deductions;
-  const recorded = (decisionKey: string) =>
-    scenario.decisions.find((decision) => decision.decisionKey === decisionKey)?.decision ?? null;
-  return {
-    taxYear: scenario.filing.taxYear,
-    ...deductionsFlow(scenario),
-    items: items.map(({ id, title, status, amount, assumed, missing }) => ({
-      id,
-      title,
-      status,
-      amount: amount ?? null,
-      assumed,
-      missing,
-    })),
-    comparison: { federal: comparison?.federal ?? null, ca: comparison?.ca ?? null },
-    recordedDecisions: {
-      itemizeOrStandard: recorded(ITEMIZE_KEY),
-      scheduleAFiles: recorded(SCHEDULE_A_KEY),
-    },
-  };
-}
 
 export const getDeductions = createTool({
   id: "get-deductions",

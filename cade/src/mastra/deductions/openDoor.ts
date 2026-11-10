@@ -33,7 +33,21 @@ const NAMED = "deductions.named.";
 export const namedFactKey = (slug: string): string => `${NAMED}${slug}`;
 export const namedDecisionKey = (slug: string): string => `decisions.${NAMED}${slug}`;
 
-/* Common expenses no life question covers: answers the taxpayer can tap, once the web app draws them. */
+/* The expenses the taxpayer named so far, each with its outcome: what the web app lists. */
+export function namedExpenses(
+  facts: ReadonlyMap<string, unknown>,
+  decisions: readonly { decisionKey: string; decision: unknown }[],
+) {
+  const named = [...facts].filter(([key]) => key.startsWith(NAMED));
+  return named.map(([key, words]) => {
+    const slug = key.slice(NAMED.length);
+    const decided = decisions.find((each) => each.decisionKey === namedDecisionKey(slug));
+    const { outcome, where } = (decided?.decision ?? {}) as { outcome?: Outcome; where?: string };
+    return { slug, words: String(words), outcome: outcome ?? null, where: where ?? null };
+  });
+}
+
+/* Common expenses no life question covers: the answers the taxpayer can tap in the web app. */
 const SUGGESTIONS = [
   "Home office",
   "Tax prep fee",

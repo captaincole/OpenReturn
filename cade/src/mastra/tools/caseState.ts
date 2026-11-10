@@ -9,7 +9,6 @@ import {
 } from "@openreturn/engine";
 import { z } from "zod";
 import type { Scope } from "../db/appDb";
-import { resolveOwnerFilingForYear } from "../db/filings";
 import { loadAndEvaluateScenario } from "../loadScenario";
 import { cadeRequestContextSchema } from "../server/requestContext";
 import { requireUserContext } from "./userContext";
@@ -34,17 +33,6 @@ type EvaluatedFormSummary = {
     missingFactKeys: string[] | null;
   }>;
 };
-
-export async function buildCaseState(
-  userId: string,
-  year: number,
-  authEmail: string | null = null,
-) {
-  const filingRow = await resolveOwnerFilingForYear(userId, year);
-  const filing: EngineFiling = { id: filingRow.id, taxYear: filingRow.taxYear };
-  const scope: Scope = { userId, filingId: filingRow.id };
-  return buildCaseStateForScenario(await loadAndEvaluateScenario(scope, filing, authEmail));
-}
 
 /* Trusts its inputs: the caller must verify filing_members membership BEFORE it calls this. */
 export async function buildCaseStateForFiling(

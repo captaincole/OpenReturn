@@ -3,6 +3,7 @@ import { tcbCa005Scenario } from "@openreturn/engine/scenarios";
 import { describe, expect, it } from "vitest";
 import { ITEMIZE_KEY, planClosing, SCHEDULE_A_KEY } from "../../src/mastra/deductions/closing";
 import { deductionsFlow } from "../../src/mastra/deductions/flow";
+import { deductionsView } from "../../src/mastra/deductions/state";
 import {
   alex,
   alexDecisions,
@@ -314,6 +315,56 @@ describe("closing the deductions conversation", () => {
       "itemized_last_year",
       "ca_vehicle",
       "gift_carryover",
+    ]);
+  });
+});
+
+describe("what the web app reads", () => {
+  it("holds the paragraph back until the conversation is closed, and lists the records before", () => {
+    const open = deductionsView(alex(HOMEOWNER));
+    expect(open.next.step).toBe("close");
+    expect(open.summary).toBeNull();
+    expect(open.records.map((record) => record.item)).toEqual([
+      "real_estate_tax",
+      "mortgage_interest",
+    ]);
+    expect(open.comparison.ca).toMatchObject({ itemized: 10000, recommendation: "itemize" });
+
+    const closed = deductionsView(alex(HOMEOWNER, recordedFrom(alex(HOMEOWNER))));
+    expect(closed.next.step).toBe("closed");
+    expect(closed.summary).toBe(planClosing(alex(HOMEOWNER))!.summary);
+  });
+
+  it("has no paragraph and no records while the comparison waits for the return", () => {
+    const view = deductionsView(alex());
+    expect(view.summary).toBeNull();
+    expect(view.records).toEqual([]);
+    expect(view.namedExpenses).toEqual([]);
+  });
+
+  it("lists each expense the taxpayer named, with its outcome once Cade decided it", () => {
+    const view = deductionsView(
+      alex(
+        [
+          fact("deductions.named.home-office", "I work from a room at home"),
+          fact("deductions.named.gym", "my gym membership"),
+        ],
+        [
+          decision("decisions.deductions.named.home-office", {
+            outcome: "counts_elsewhere",
+            where: "Schedule C, when you have a business",
+          }),
+        ],
+      ),
+    );
+    expect(view.namedExpenses).toEqual([
+      {
+        slug: "home-office",
+        words: "I work from a room at home",
+        outcome: "counts_elsewhere",
+        where: "Schedule C, when you have a business",
+      },
+      { slug: "gym", words: "my gym membership", outcome: null, where: null },
     ]);
   });
 });
