@@ -100,6 +100,7 @@ Each top-level folder builds and runs on its own, and each has its own README.
 | | |
 | --- | --- |
 | <img src="static/screenshots/home.png" alt="The home page: a tax code search box, the 2025 return card and the 2026 estimated taxes card" width="430"><br/>**Home.** Your returns, estimates and the tax-code search. | <img src="static/screenshots/ask-tax-code.png" alt="Ask Canon: the question 'What is the maximum HSA contribution for self-only coverage in 2025?' with a cited answer and three reference cards that quote Publication 969 and the Form 8889 instructions" width="430"><br/>**Ask The Tax Code.** Short answers with numbered citations into the IRS and FTB text. |
+| <img src="static/screenshots/deductions.png" alt="The Deductions tab: Cade asks for exact amounts on the left; on the right, the itemize-or-standard comparison for the federal and California returns, and the list of deductions with rough and exact amounts" width="430"><br/>**Deductions.** Itemize or take the standard deduction, compared on each return. | <img src="static/screenshots/deductions-questions.png" alt="The Deductions tab at the start: nine yes-or-no questions about the year, each with a Yes and a No button, and one button that sends the answers" width="430"><br/>**Answers to tap.** Yes or no for each question about your year. |
 
 ## Evals
 

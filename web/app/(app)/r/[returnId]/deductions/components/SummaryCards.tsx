@@ -1,3 +1,5 @@
+"use client";
+
 /* The cards of the Deductions summary. Every number comes from /app/state: the engine's. */
 
 import { cn } from "@/lib/cn";
@@ -15,25 +17,53 @@ import {
   type LifeQuestion,
   type NamedExpense,
 } from "@/lib/deductions";
+import { useState } from "react";
 
-function Card({
+function Card({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="card">
+      <div className="card-header">{title}</div>
+      {children}
+    </section>
+  );
+}
+
+/* A list the reader can close. The summary is long, and the comparison above the lists is the answer. */
+function ListCard({
   title,
   count,
+  startOpen = false,
   children,
 }: {
   title: string;
   count?: number;
+  startOpen?: boolean;
   children: React.ReactNode;
 }) {
+  const [open, setOpen] = useState(startOpen);
   return (
     <section className="card">
-      <div className="card-header">
-        <span>{title}</span>
-        {count !== undefined && (
-          <span className="tracking-normal text-ink-muted normal-case tabular-nums">{count}</span>
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        className={cn(
+          "card-header w-full text-left transition-colors hover:text-ink-secondary",
+          !open && "pb-4",
         )}
-      </div>
-      {children}
+      >
+        <span>{title}</span>
+        <span className="flex items-center gap-2.5 tracking-normal normal-case">
+          {count !== undefined && <span className="tabular-nums">{count}</span>}
+          <span
+            className={cn("text-xs transition-transform duration-150", open && "rotate-90")}
+            aria-hidden
+          >
+            ▸
+          </span>
+        </span>
+      </button>
+      {open && children}
     </section>
   );
 }
@@ -74,8 +104,8 @@ export function ComparisonCard({ view }: { view: DeductionsView }) {
         <thead>
           <tr className="text-[11px] text-ink-muted">
             <th className="px-5 pb-2 text-left font-normal" />
-            <th className="px-3 pb-2 text-right font-normal">Federal</th>
-            <th className="px-5 pb-2 text-right font-normal">California</th>
+            <th className="px-2 pb-2 text-right font-normal">Federal</th>
+            <th className="pr-5 pb-2 pl-2 text-right font-normal">California</th>
           </tr>
         </thead>
         <tbody>
@@ -84,9 +114,11 @@ export function ComparisonCard({ view }: { view: DeductionsView }) {
               key={row.label}
               className="border-t border-border-subtle last:font-medium last:text-ink-primary"
             >
-              <th className="px-5 py-2.5 text-left font-normal text-ink-secondary">{row.label}</th>
-              <td className="px-3 py-2.5 text-right tabular-nums">{cell(federal, row)}</td>
-              <td className="px-5 py-2.5 text-right tabular-nums">{cell(ca, row)}</td>
+              <th className="py-2.5 pr-2 pl-5 text-left font-normal text-ink-secondary">
+                {row.label}
+              </th>
+              <td className="px-2 py-2.5 text-right tabular-nums">{cell(federal, row)}</td>
+              <td className="py-2.5 pr-5 pl-2 text-right tabular-nums">{cell(ca, row)}</td>
             </tr>
           ))}
         </tbody>
@@ -113,24 +145,27 @@ const STATUS_TONES: Record<ItemStatus, string> = {
 
 export function ItemsCard({ items }: { items: DeductionItem[] }) {
   return (
-    <Card title="Deductions" count={items.length}>
+    <ListCard title="Deductions" count={items.length} startOpen>
       <ul className="pb-2">
         {items.map((item) => (
           <li
             key={item.id}
             className="flex items-baseline gap-3 border-t border-border-subtle px-5 py-2.5 text-sm"
           >
-            <span className="min-w-0 flex-1 text-ink-primary">{item.title}</span>
-            <span className={cn("shrink-0 text-[12px]", STATUS_TONES[item.status])}>
-              {statusLabel(item.status)}
-            </span>
+            {/* On a phone the status goes under the title: three columns leave the title no room. */}
+            <div className="min-w-0 flex-1 sm:flex sm:items-baseline sm:gap-3">
+              <span className="block min-w-0 flex-1 text-ink-primary">{item.title}</span>
+              <span className={cn("block shrink-0 text-[12px]", STATUS_TONES[item.status])}>
+                {statusLabel(item.status)}
+              </span>
+            </div>
             <span className="w-24 shrink-0 text-right text-ink-primary tabular-nums">
               {item.amount === null ? "—" : dollars(item.amount)}
             </span>
           </li>
         ))}
       </ul>
-    </Card>
+    </ListCard>
   );
 }
 
@@ -138,7 +173,7 @@ export function ItemsCard({ items }: { items: DeductionItem[] }) {
 export function NamedExpensesCard({ expenses }: { expenses: NamedExpense[] }) {
   if (expenses.length === 0) return null;
   return (
-    <Card title="What else you paid" count={expenses.length}>
+    <ListCard title="What else you paid" count={expenses.length}>
       <ul className="pb-2">
         {expenses.map((expense) => (
           <li key={expense.slug} className="border-t border-border-subtle px-5 py-2.5 text-sm">
@@ -156,7 +191,7 @@ export function NamedExpensesCard({ expenses }: { expenses: NamedExpense[] }) {
           </li>
         ))}
       </ul>
-    </Card>
+    </ListCard>
   );
 }
 
@@ -164,7 +199,7 @@ export function NamedExpensesCard({ expenses }: { expenses: NamedExpense[] }) {
 export function RecordsCard({ records }: { records: DeductionRecord[] }) {
   if (records.length === 0) return null;
   return (
-    <Card title="Records for the CPA" count={records.length}>
+    <ListCard title="Records for the CPA" count={records.length}>
       <ul className="pb-2">
         {records.map((record) => (
           <li key={record.item} className="border-t border-border-subtle px-5 py-2.5 text-sm">
@@ -182,13 +217,13 @@ export function RecordsCard({ records }: { records: DeductionRecord[] }) {
           </li>
         ))}
       </ul>
-    </Card>
+    </ListCard>
   );
 }
 
 export function LifeAnswersCard({ questions }: { questions: LifeQuestion[] }) {
   return (
-    <Card title="Your year">
+    <ListCard title="Your year">
       <ul className="pb-2">
         {questions.map((question) => (
           <li
@@ -207,6 +242,6 @@ export function LifeAnswersCard({ questions }: { questions: LifeQuestion[] }) {
           </li>
         ))}
       </ul>
-    </Card>
+    </ListCard>
   );
 }
