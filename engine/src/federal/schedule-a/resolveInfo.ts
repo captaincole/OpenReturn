@@ -60,7 +60,11 @@ export function mortgageInterestWithinLimit(
   principal: number | undefined,
 ): MortgageLimit {
   const none = { interest: undefined, limited: false, originationDateNeeded: false };
-  if (interestAndPoints === undefined || principal === undefined) return none;
+  if (interestAndPoints === undefined) return none;
+  /* No interest (a renter's 0) has no debt to limit: the line is 0 with no principal. */
+  if (interestAndPoints <= 0)
+    return { interest: interestAndPoints, limited: false, originationDateNeeded: false };
+  if (principal === undefined) return none;
   const separate =
     inputs.decisionByKey.get("decisions.scope.filing_status") === "married_filing_separately";
   const share = separate ? 2 : 1;

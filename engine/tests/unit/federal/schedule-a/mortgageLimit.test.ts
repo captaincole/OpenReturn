@@ -75,6 +75,20 @@ describe("mortgageInterestWithinLimit", () => {
     );
   });
 
+  it("needs no principal for an interest of 0: a renter's line is 0", () => {
+    const info = resolveScheduleAInfo(
+      inputs(
+        [fact(MORTGAGE_KEYS.interestForm1098, 0)],
+        [{ decisionKey: "decisions.itemize_vs_standard", decision: "itemized" }],
+      ),
+    );
+    expect(info.mortgageInterestForm1098).toBe(0);
+    expect(info.mortgageInterestWaits).toBe(false);
+    expect(info.missingInputs?.["schedule-a"]).not.toContain(
+      MORTGAGE_KEYS.outstandingPrincipalForm1098,
+    );
+  });
+
   it("asks for the origination date between the two limits", () => {
     const info = resolveScheduleAInfo(
       inputs(

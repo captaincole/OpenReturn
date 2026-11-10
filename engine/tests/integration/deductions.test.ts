@@ -46,4 +46,20 @@ describe("deductions module", () => {
     });
     expect(jordan.comparison?.ca).toMatchObject({ itemized: 0, recommendation: "standard" });
   });
+
+  it("jordan: a recorded 'Schedule A does not file' does not hide the comparison", () => {
+    const scenario = SCENARIOS.find(({ name }) => name === "jordan")!;
+    const optOut = {
+      ...scenario.decisions[0],
+      id: "schedule-a-opt-out",
+      decisionKey: "decisions.scope.must_file_schedule_a",
+      decision: false,
+    };
+    const { deductions } = evaluateScenario({
+      filing: { id: "jordan-filing", taxYear: scenario.taxYear },
+      facts: scenario.facts,
+      decisions: [optOut, ...scenario.decisions],
+    });
+    expect(deductions.comparison?.federal).toMatchObject({ itemized: 10000, standard: 15750 });
+  });
 });
