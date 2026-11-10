@@ -5,19 +5,23 @@ export const meta = {
   whenToUse:
     "On demand. args: {pr: <number>} for a GitHub PR, or {base, head} for a local diff (defaults origin/main..HEAD). A strong pass (more than one high or more than three medium findings that stand) is fixed and re-run on the new head, up to three passes; then a person decides.",
   phases: [
-    { title: "Find", detail: "one finder per dimension", model: "opus" },
+    { title: "Find", detail: "one finder per dimension" },
     {
       title: "Challenge",
       detail: "one skeptic per dimension: true, in scope, worth it?",
-      model: "opus",
     },
     {
       title: "Docs",
       detail: "one agent: check the docs against the change and update them in the working tree",
-      model: "opus",
     },
   ],
 };
+
+/*
+ * No agent here names a model. Each one runs on the session's model, or on the
+ * model in CLAUDE_CODE_SUBAGENT_MODEL when you set it (Claude Code docs, "Choose
+ * a model").
+ */
 
 const A = typeof args === "object" && args ? args : { pr: args };
 const TARGET = A.pr
@@ -169,7 +173,6 @@ const docsRun = agent(DOCS_PROMPT, {
   label: "docs",
   phase: "Docs",
   schema: DOCS_SCHEMA,
-  model: "opus",
 });
 
 const results = await pipeline(
@@ -181,7 +184,6 @@ const results = await pipeline(
         label: `find:${d.key}`,
         phase: "Find",
         schema: FINDINGS_SCHEMA,
-        model: "opus",
       },
     ),
   (found, d) => {
@@ -196,7 +198,6 @@ const results = await pipeline(
       label: `challenge:${d.key}`,
       phase: "Challenge",
       schema: VERDICTS_SCHEMA,
-      model: "opus",
     }).then((v) => ({
       d: d.key,
       found,

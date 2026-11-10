@@ -91,7 +91,8 @@ package.json                     # workspace root: workspaces + thin delegating 
 CLAUDE.md
 .claude/skills/                 # checked-in Claude skills (corpus, e2e, vercel-logs, engine-scripts, verify-with-filed-return, catalog-form-fields, register-form, write-binding-rules, update-form, verify-form, create-input-documents, add-scenario): "must use" for those tasks
 .claude/agents/                 # checked-in Claude Code subagents (form-labeler, line-rule-drafter, line-rule-skeptic) that the form skills start
-.claude/workflows/              # checked-in Claude Code workflows (pr-review, tax-correctness-review): multi-agent PR reviews
+.claude/workflows/              # checked-in Claude Code workflows (pr-review, tax-correctness-review): multi-agent PR reviews;
+                                # they name no model (CLAUDE_CODE_SUBAGENT_MODEL in your own settings picks one)
 .mcp.json                        # Canon as an MCP server for Claude Code (searchRefDocs, citeRefDoc); needs npm run dev:canon
 ```
 

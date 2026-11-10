@@ -5,19 +5,23 @@ export const meta = {
   whenToUse:
     "On demand for a PR that changes engine/ or sources/. Needs Canon running (npm run dev:canon). args: {pr: <number>}. Findings are scoped to the returns the scenarios cover and to common returns; a case only an unusual input produces is listed as uncovered for the tracking issue. A strong pass (more than one high or more than three medium findings that stand) is fixed and re-run on the new head, up to three passes; then a person decides.",
   phases: [
-    { title: "Scope", detail: "split the diff into review units, tag IRS / FTB", model: "fable" },
+    { title: "Scope", detail: "split the diff into review units, tag IRS / FTB" },
     {
       title: "Find",
       detail: "one finder per unit and authority, grounded in Canon's reference library",
-      model: "fable",
     },
     {
       title: "Challenge",
       detail: "one skeptic for the top findings: refuted / out_of_scope / stands",
-      model: "fable",
     },
   ],
 };
+
+/*
+ * No agent here names a model. Each one runs on the session's model, or on the
+ * model in CLAUDE_CODE_SUBAGENT_MODEL when you set it (Claude Code docs, "Choose
+ * a model").
+ */
 
 const PR = typeof args === "object" && args ? args.pr : args;
 if (!PR) throw new Error("args.pr (the PR number) is required");
@@ -167,7 +171,7 @@ const scope = await agent(
 5. Put in "skipped" (with a reason) every changed file that cannot change a tax result: pure renames or moves with no content change, import-path edits, docs, test harness plumbing, comments, formatting. Be strict: if a content change could alter a computed value, it is a unit.
 
 Return the head and base SHAs, the units, and the skipped files.`,
-  { label: "scope", phase: "Scope", schema: SCOPE_SCHEMA, model: "fable" },
+  { label: "scope", phase: "Scope", schema: SCOPE_SCHEMA },
 );
 // Without Canon every finder stops with no findings, which would read as a clean PR.
 if (!scope.canonAvailable)
@@ -241,7 +245,6 @@ const results = await parallel(
         label: `find:${job.unit.id}/${job.authority}`,
         phase: "Find",
         schema: FINDINGS_SCHEMA,
-        model: "fable",
       }).then((found) => found && { job, found }),
   ),
 );
@@ -268,7 +271,6 @@ const v = top.length
       label: "challenge",
       phase: "Challenge",
       schema: VERDICTS_SCHEMA,
-      model: "fable",
     })
   : null;
 const all = top.map((f, i) => ({
