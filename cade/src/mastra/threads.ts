@@ -1,6 +1,6 @@
 /*
  * Thread ids. A filing has two conversations: the return, and the deductions
- * conversation next to it. The web app builds the same ids (web/lib/returns.ts):
+ * conversation next to it. The web app builds the same ids (web/lib/chatSession.ts):
  * there is no shared package yet.
  */
 

@@ -1,5 +1,3 @@
-import { threadIdFor } from "@/lib/returns";
-
 /*
  * A filing has two conversations with Cade: the return, and the deductions
  * conversation next to it. Each has its own agent and its own thread. The
@@ -12,17 +10,25 @@ export interface Conversation {
   threadId: (userId: string, returnId: string) => string;
 }
 
+/* Keyed by year, not filing UUID, so a reset that recreates the filing keeps the same thread. */
+const mainThreadId = (userId: string, returnId: string): string => `${userId}::${returnId}`;
+
+const deductionsThreadId = (userId: string, returnId: string): string =>
+  `${mainThreadId(userId, returnId)}::deductions`;
+
 export const RETURN_CONVERSATION: Conversation = {
   id: "return",
   agentId: "cade",
-  threadId: threadIdFor,
+  threadId: mainThreadId,
 };
 
 export const DEDUCTIONS_CONVERSATION: Conversation = {
   id: "deductions",
   agentId: "cade-deductions",
-  threadId: (userId, returnId) => `${threadIdFor(userId, returnId)}::deductions`,
+  threadId: deductionsThreadId,
 };
 
 /* The route segment under /r/[returnId] that shows the deductions conversation. */
 export const DEDUCTIONS_SEGMENT = "deductions";
+
+export const deductionsHref = (returnId: string): string => `/r/${returnId}/${DEDUCTIONS_SEGMENT}`;

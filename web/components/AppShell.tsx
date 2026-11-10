@@ -22,8 +22,8 @@ import {
 
 export type { ChatMessage, SendChatOpts };
 
-/* Mobile only: desktop renders every section. */
-export type MobilePane = "chat" | "activity" | "forms" | "documents";
+/* Mobile only: desktop renders every section. "summary" is the deductions route's one section. */
+export type MobilePane = "chat" | "activity" | "forms" | "documents" | "summary";
 
 interface AppShellContextValue {
   userId: string;
@@ -40,8 +40,9 @@ interface AppShellContextValue {
   messages: ChatMessage[];
   setMessages: Dispatch<SetStateAction<ChatMessage[]>>;
   cadeBusy: boolean;
+  /* The phone's pane, kept per conversation: each route opens on its own. */
   mobilePane: MobilePane;
-  setMobilePane: Dispatch<SetStateAction<MobilePane>>;
+  setMobilePane: (pane: MobilePane) => void;
   /* The one way to send a turn. Resolves when the stream ends; no-op while Cade is busy. */
   sendChat: (opts: SendChatOpts) => Promise<void>;
   onSignOut: () => Promise<void>;
@@ -71,10 +72,15 @@ export function AppShell({
   const router = useRouter();
   const [state, setState] = useState<CaseState | null>(null);
   const [resetTick] = useState(0);
-  const [mobilePane, setMobilePane] = useState<MobilePane>("activity");
+  const [mobilePanes, setMobilePanes] = useState<Record<Conversation["id"], MobilePane>>({
+    return: "activity",
+    deductions: "chat",
+  });
   /* The segment under /r/[returnId]: null on the return page. */
   const conversation: Conversation["id"] =
     useSelectedLayoutSegment() === DEDUCTIONS_SEGMENT ? "deductions" : "return";
+  const setMobilePane = (pane: MobilePane) =>
+    setMobilePanes((panes) => ({ ...panes, [conversation]: pane }));
 
   async function onSignOut() {
     await signOut();
@@ -121,7 +127,7 @@ export function AppShell({
     messages: chat.messages,
     setMessages: chat.setMessages,
     cadeBusy: chat.cadeBusy,
-    mobilePane,
+    mobilePane: mobilePanes[conversation],
     setMobilePane,
     sendChat: chat.sendChat,
     onSignOut,
@@ -176,17 +182,17 @@ const RETURN_TABS: MobileTab[] = [
   { id: "documents", label: "Documents", icon: "▦" },
 ];
 
-/* The deductions route has one workspace pane, the summary: every pane but the chat shows it. */
 const DEDUCTIONS_TABS: MobileTab[] = [
   { id: "chat", label: "Chat", icon: "◐" },
-  { id: "activity", label: "Summary", icon: "≋" },
+  { id: "summary", label: "Summary", icon: "≋" },
 ];
+
+/* The tab that shows what Cade writes while a turn runs: it carries the busy dot. */
+const BUSY_TABS: MobilePane[] = ["activity", "summary"];
 
 function MobileTabBar() {
   const { conversation, mobilePane, setMobilePane, cadeBusy } = useAppShell();
-  const inDeductions = conversation === "deductions";
-  const tabs = inDeductions ? DEDUCTIONS_TABS : RETURN_TABS;
-  const picked = inDeductions && mobilePane !== "chat" ? "activity" : mobilePane;
+  const tabs = conversation === "deductions" ? DEDUCTIONS_TABS : RETURN_TABS;
   return (
     <nav className="relative z-30 flex h-14 shrink-0 border-t border-border-subtle bg-bg-subtle/95 backdrop-blur-sm lg:hidden">
       {tabs.map((tab) => (
@@ -195,12 +201,12 @@ function MobileTabBar() {
           onClick={() => setMobilePane(tab.id)}
           className={cn(
             "relative flex flex-1 flex-col items-center justify-center gap-0.5",
-            picked === tab.id ? "text-ink-primary" : "text-ink-muted",
+            mobilePane === tab.id ? "text-ink-primary" : "text-ink-muted",
           )}
         >
           <span className="text-lg leading-none">{tab.icon}</span>
           <span className="text-[10px] tracking-wider uppercase">{tab.label}</span>
-          {cadeBusy && tab.id === "activity" && (
+          {cadeBusy && BUSY_TABS.includes(tab.id) && (
             <span className="absolute top-1.5 right-[30%] h-1.5 w-1.5 animate-pulse-soft rounded-full bg-warn" />
           )}
         </button>

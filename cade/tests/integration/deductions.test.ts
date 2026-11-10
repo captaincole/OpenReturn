@@ -290,6 +290,16 @@ describe("closing the deductions conversation", () => {
     expect(deductionsFlow(closed).next.step).toBe("closed");
   });
 
+  it("names a document once in a record when two of its amounts feed the item", () => {
+    const fromOneForm = HOMEOWNER.map((row) =>
+      row.category === "mortgage" ? { ...row, sourceNote: "Form 1098, Example Bank" } : row,
+    );
+    const mortgage = planClosing(alex(fromOneForm))!.records.find(
+      (record) => record.item === "mortgage_interest",
+    );
+    expect(mortgage?.sourceNotes).toEqual(["Form 1098, Example Bank"]);
+  });
+
   it("without the Schedule A decision, California loses its itemized deductions", () => {
     const standardOnly = alex(HOMEOWNER, [decision(ITEMIZE_KEY, "standard")]);
     expect(lineValue(standardOnly, "form-540", "form-540.line.18_deductions")).toBe(5706);

@@ -27,6 +27,7 @@ The first run redirects to `/setup` to create the owner account. The env file is
 | `/setup`, `/login` | First-run owner account, then a password sign-in |
 | `/` | Home: tax returns, estimates, the tax code search box |
 | `/r/[returnId]` | A return: chat with Cade, activity, forms, documents |
+| `/r/[returnId]/deductions` | The return's deductions conversation: answers to tap, and the itemize-or-standard summary |
 | `/ask/[threadId]` | Ask Canon: cited answers and follow-up questions |
 | `/library` | The reference documents the answers can cite |
 | `/library/[docId]` | One HTML reference document (an FTB web page), opened at a cited section |
@@ -47,8 +48,8 @@ The first run redirects to `/setup` to create the owner account. The env file is
 ```
 web/
 ├── app/          the pages above, and the /api/* route handlers
-├── components/   AppShell, ChatPane, ActivityCard, PlanCard, TopBar, Markdown
-├── lib/          localAuth, serverDb, api, ask, activity, mastraClient, uploads
+├── components/   AppShell, ChatPane, DeductionReplies, ActivityCard, PlanCard, TopBar, Markdown
+├── lib/          localAuth, serverDb, api, ask, activity, chatSession, deductions, mastraClient, uploads
 ├── e2e/          Playwright: drives web + Cade + Canon + a real model (e2e/README.md)
 └── proxy.ts      the optimistic session-cookie gate
 ```
