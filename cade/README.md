@@ -59,7 +59,7 @@ cade/
 ├── src/mastra/
 │   ├── agents/       Cade: instructions, working memory, PDF-to-image for models without PDF input; cadeDeductions for the deductions thread
 │   ├── deductions/   the deductions conversation: its steps (flow.ts), life questions, open door and closing
-│   ├── tools/        ingest tools, record-tax-facts, record-assumptions, record-ai-decision, case state, deductions, quick replies, generate-tax-documents
+│   ├── tools/        ingest tools, record-tax-facts, record-assumptions, record-ai-decision, case state, deductions, generate-tax-documents
 │   ├── workflows/    reviewDecision (grounding through Canon), askTurn (Ask The Tax Code threads)
 │   ├── canon/        client.ts: the MCP client, Cade's only path to Canon
 │   ├── db/           app.db: facts, assumptions, decisions, filings, Ask threads, review runs; the document store

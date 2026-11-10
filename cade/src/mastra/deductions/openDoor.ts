@@ -33,7 +33,7 @@ const NAMED = "deductions.named.";
 export const namedFactKey = (slug: string): string => `${NAMED}${slug}`;
 export const namedDecisionKey = (slug: string): string => `decisions.${NAMED}${slug}`;
 
-/* Common expenses no life question covers; the web app offers them as quick replies. */
+/* Common expenses no life question covers: answers the taxpayer can tap, once the web app draws them. */
 const SUGGESTIONS = [
   "Home office",
   "Tax prep fee",

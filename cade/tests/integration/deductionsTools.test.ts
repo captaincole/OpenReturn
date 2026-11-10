@@ -17,9 +17,6 @@ const filings = await import("../../src/mastra/db/filings");
 const taxFacts = await import("../../src/mastra/db/taxFacts");
 const decisions = await import("../../src/mastra/db/aiDecisions");
 const tools = await import("../../src/mastra/tools/deductions");
-const { offerQuickReplies } = await import("../../src/mastra/tools/quickReplies");
-const { QuickReplyResolver } = await import("../../src/mastra/agents/quickReplyResolver");
-const { getAppDb } = await import("../../src/mastra/db/appDb");
 const { ITEMIZE_KEY, SCHEDULE_A_KEY } = await import("../../src/mastra/deductions/closing");
 
 const userId = "owner-test";
@@ -75,20 +72,6 @@ const named = (name: string, taxpayerWords: string, outcome: string, more: objec
   confidence: "medium",
   ...more,
 });
-
-/* The quick-reply cards, oldest first. */
-const quickReplies = async () =>
-  (
-    await getAppDb().execute({
-      sql: `SELECT title, options_json, status FROM requested_actions
-            WHERE filing_id = ? AND kind = 'decide' ORDER BY rowid`,
-      args: [filingId],
-    })
-  ).rows.map((row) => ({
-    question: row.title,
-    options: JSON.parse(String(row.options_json)),
-    status: row.status,
-  }));
 
 beforeAll(async () => {
   await filings.createOwnerFiling({ ...owned });
@@ -307,44 +290,5 @@ describe("the deductions tools, over one filing", () => {
     expect(again.summary).toContain("itemize on the California return");
     expect(await storedDecisions(ITEMIZE_KEY)).toHaveLength(1);
     expect(await storedDecisions(SCHEDULE_A_KEY)).toHaveLength(1);
-  });
-});
-
-describe("quick replies", () => {
-  const yesNo = (question: string) => ({ question, options: ["Yes", "No"] });
-
-  it("offer-quick-replies opens one card per question, and a new offer replaces the cards before it", async () => {
-    const first = await call(offerQuickReplies, {
-      replies: [yesNo("Do you own your home?"), yesNo("Did you give money to a charity?")],
-    });
-    expect(first.offered).toBe(2);
-
-    /* A question with no options gets no card. */
-    const second = await call(offerQuickReplies, {
-      replies: [
-        { question: "Anything else?", options: ["Home office", "That's all"] },
-        { question: "How much?", options: [] },
-      ],
-    });
-    expect(second.offered).toBe(1);
-    expect(await quickReplies()).toEqual([
-      { question: "Do you own your home?", options: ["Yes", "No"], status: "dismissed" },
-      { question: "Did you give money to a charity?", options: ["Yes", "No"], status: "dismissed" },
-      { question: "Anything else?", options: ["Home office", "That's all"], status: "open" },
-    ]);
-  });
-
-  it("the taxpayer's next message resolves the open cards", async () => {
-    const messages: never[] = [];
-    const passed = await new QuickReplyResolver().processInput({
-      messages,
-      requestContext: context.requestContext,
-    } as never);
-    expect(passed).toBe(messages);
-    expect((await quickReplies()).map((card) => card.status)).toEqual([
-      "dismissed",
-      "dismissed",
-      "resolved",
-    ]);
   });
 });

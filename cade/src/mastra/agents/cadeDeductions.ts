@@ -12,12 +12,10 @@ import {
 import { dismissRequestedAction } from "../tools/dismissRequestedAction";
 import { ingest1098 } from "../tools/ingest1098";
 import { INGEST_MAX_OUTPUT_TOKENS } from "../tools/ingestTools";
-import { offerQuickReplies } from "../tools/quickReplies";
 import { requestDocumentUpload } from "../tools/requestDocument";
 import { recordTaxFacts } from "../tools/taxFacts";
 import { cadeDeductionsInstructions } from "./cadeDeductions.instructions";
 import { PdfAttachmentRasterizer } from "./pdfAttachments";
-import { QuickReplyResolver } from "./quickReplyResolver";
 
 /*
  * Cade in the deductions conversation: the same persona and model as the main
@@ -31,13 +29,12 @@ export const cadeDeductions = new Agent({
   instructions: cadeDeductionsInstructions,
   model: modelFor("cade"),
   requestContextSchema: cadeRequestContextSchema,
-  inputProcessors: [new QuickReplyResolver(), new PdfAttachmentRasterizer()],
+  inputProcessors: [new PdfAttachmentRasterizer()],
   defaultOptions: { maxSteps: 20, modelSettings: { maxOutputTokens: INGEST_MAX_OUTPUT_TOKENS } },
   tools: {
     getDeductions,
     answerLifeQuestions,
     recordNamedExpenses,
-    offerQuickReplies,
     recordTaxFacts,
     recordAssumptions,
     ingest1098,
