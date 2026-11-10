@@ -61,21 +61,17 @@ export async function requestUpload(
 
 /*
  * The document is in. Both conversations read its facts, so its waiting cards
- * close in both. Returns their ids, newest first.
+ * close in both. Returns how many cards closed.
  */
-export async function resolveUploads(scope: Scope, documentType: string): Promise<string[]> {
+export async function resolveUploads(scope: Scope, documentType: string): Promise<number> {
   await ensureAppSchema();
   const res = await getAppDb().execute({
     sql: `UPDATE requested_actions SET status = 'resolved', resolved_at = ?
           WHERE filing_id = ? AND user_id = ?
-            AND lower(document_type) = lower(?) AND ${WAITING}
-          RETURNING id, created_at`,
+            AND lower(document_type) = lower(?) AND ${WAITING}`,
     args: [nowIso(), scope.filingId, scope.userId, documentType],
   });
-  return res.rows
-    .map((row) => ({ id: asStr(row.id), createdAt: asStr(row.created_at) }))
-    .sort((left, right) => (left.createdAt < right.createdAt ? 1 : -1))
-    .map((row) => row.id);
+  return res.rowsAffected;
 }
 
 /* The conversation no longer needs what it asked for. Returns how many cards closed. */
