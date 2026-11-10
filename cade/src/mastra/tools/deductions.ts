@@ -1,28 +1,64 @@
 /*
  * The deductions conversation's tools. The engine holds the state (item states
  * and the comparison); these tools read it, record the life answers as facts,
- * and close the conversation with the decisions the comparison gives.
+ * record what the open door finds as decisions, and close the conversation
+ * with the decisions the comparison gives.
  */
 
 import { createTool } from "@mastra/core/tools";
 import type { EvaluatedScenario } from "@openreturn/engine";
 import { z } from "zod";
-import { recordFacts } from "../db/taxFacts";
+import { noteQuestion, recordFacts } from "../db/taxFacts";
 import { ITEMIZE_KEY, planClosing, SCHEDULE_A_KEY } from "../deductions/closing";
 import { deductionsFlow, valuesByKey } from "../deductions/flow";
-import { LIFE_QUESTION_IDS, planLifeAnswers } from "../deductions/lifeQuestions";
+import {
+  LIFE_QUESTION_IDS,
+  planLifeAnswers,
+  type PlannedFact,
+  type StatedAmounts,
+} from "../deductions/lifeQuestions";
+import {
+  DOOR_ITEMS,
+  NOTHING_ELSE_KEY,
+  OUTCOMES,
+  planNamedExpenses,
+  type DoorPlan,
+  type PlannedExpense,
+} from "../deductions/openDoor";
 import { loadAndEvaluateScenario } from "../loadScenario";
 import { cadeRequestContextSchema } from "../server/requestContext";
 import { recordAndReview } from "./aiDecisions";
+import { slugify } from "./ingestShared";
 import { requireUserContext, type UserContext } from "./userContext";
 
 const loadScenario = ({ scope, filingId, taxYear, authEmail }: UserContext) =>
   loadAndEvaluateScenario(scope, { id: filingId, taxYear }, authEmail);
 
+const statedAmounts = (scenario: EvaluatedScenario): StatedAmounts => ({
+  facts: valuesByKey(scenario.facts),
+  assumptions: valuesByKey(scenario.assumptionsInUse),
+});
+
+const writeFacts = (
+  user: UserContext,
+  facts: readonly (Omit<PlannedFact, "value"> & { value: unknown })[],
+) =>
+  recordFacts(
+    user.scope,
+    facts.map((fact) => ({
+      id: crypto.randomUUID(),
+      userId: user.userId,
+      filingId: user.filingId,
+      taxYear: user.taxYear,
+      ...fact,
+    })),
+  );
+
 const nextStep = z
   .looseObject({
     step: z.enum([
       "ask_life_questions",
+      "ask_anything_else",
       "ask_amounts",
       "wait_for_return",
       "get_exact_amounts",
@@ -31,7 +67,7 @@ const nextStep = z
     ]),
   })
   .describe(
-    "What to do now. ask_life_questions: ask the listed yes/no questions. ask_amounts: ask each key of each item; a rough amount is allowed only where roughAllowed is true. wait_for_return: the comparison needs income and filing status from the return's conversation. get_exact_amounts: get the document or exact amount behind each rough amount listed. close: call close-deductions. closed: nothing to do.",
+    "What to do now. ask_life_questions: ask the listed yes/no questions. ask_anything_else: ask `ask` (the open door) and record what the taxpayer names with record-named-expenses. ask_amounts: ask each key of each item; a rough amount is allowed only where roughAllowed is true. wait_for_return: the comparison needs income and filing status from the return's conversation. get_exact_amounts: get the document or exact amount behind each rough amount listed. close: call close-deductions. closed: nothing to do.",
   );
 
 /* What Cade reads at the start of a turn. Every number is the engine's. */
@@ -100,27 +136,125 @@ export const answerLifeQuestions = createTool({
   }),
   execute: async (input, context) => {
     const user = await requireUserContext(context);
-    const before = await loadScenario(user);
-    const stated = {
-      facts: valuesByKey(before.facts),
-      assumptions: valuesByKey(before.assumptionsInUse),
-    };
+    const stated = statedAmounts(await loadScenario(user));
     const plan = planLifeAnswers(user.taxYear, input.answers, stated);
-    if (plan.facts.length > 0) {
-      await recordFacts(
-        user.scope,
-        plan.facts.map((fact) => ({
-          id: crypto.randomUUID(),
-          userId: user.userId,
-          filingId: user.filingId,
-          taxYear: user.taxYear,
-          ...fact,
-        })),
-      );
-    }
+    if (plan.facts.length > 0) await writeFacts(user, plan.facts);
     return {
       recorded: plan.facts.map((fact) => fact.key),
       conflicts: plan.conflicts,
+      next: deductionsFlow(await loadScenario(user)).next,
+    };
+  },
+});
+
+const namedExpense = z.object({
+  name: z.string().describe("The expense in a few plain words, e.g. 'home office'"),
+  taxpayerWords: z.string().describe("What the taxpayer said about it, word for word"),
+  outcome: z
+    .enum(OUTCOMES)
+    .describe(
+      "counts_here: one of the deduction items covers it. counts_elsewhere: it is not an itemized deduction, and it may count in a different place on the return. does_not_count: it is not deductible anywhere on the return. not_sure: it might count and no item covers it, or you cannot say; the CPA gets it.",
+    ),
+  item: z
+    .enum(DOOR_ITEMS)
+    .optional()
+    .describe("counts_here only: the id of the item that covers it, from get-deductions"),
+  where: z
+    .string()
+    .optional()
+    .describe("counts_elsewhere only: the place, e.g. 'Schedule 1, student loan interest'"),
+  rationale: z.string().describe("Why this outcome, in plain words"),
+  confidence: z.enum(["low", "medium", "high"]),
+});
+
+const DOOR_SOURCE_NOTE =
+  "The open door of the deductions conversation: Cade's classification of an expense the taxpayer named.";
+
+/* One named expense: the taxpayer's words, the decision that cites them, and the open question, when it has one. */
+async function recordExpense(user: UserContext, expense: PlannedExpense): Promise<void> {
+  const { userId, filingId, taxYear } = user;
+  await writeFacts(user, [expense.fact]);
+  const decision = await recordAndReview(user.scope, {
+    id: crypto.randomUUID(),
+    userId,
+    filingId,
+    taxYear,
+    sourceNote: DOOR_SOURCE_NOTE,
+    ...expense.decision,
+  });
+  if (!expense.question) return;
+  await noteQuestion(user.scope, {
+    id: crypto.randomUUID(),
+    userId,
+    filingId,
+    decisionId: decision.id,
+    ...expense.question,
+  });
+}
+
+/* An expense that counts under an item no yes has opened: record the yes, so the flow asks the amount. */
+async function openItems(
+  user: UserContext,
+  plan: DoorPlan,
+  sourceNote: string,
+  stated: StatedAmounts,
+): Promise<string[]> {
+  const opened = new Map(
+    plan.expenses.flatMap((expense) => (expense.opens ? [[expense.opens, expense.name]] : [])),
+  );
+  const answers = [...opened].map(([id, name]) => ({
+    id,
+    answer: true,
+    sourceNote: `The open door: the taxpayer named "${name}". ${sourceNote}`,
+  }));
+  const { facts } = planLifeAnswers(user.taxYear, answers, stated);
+  if (facts.length > 0) await writeFacts(user, facts);
+  return facts.map((fact) => fact.key);
+}
+
+export const recordNamedExpenses = createTool({
+  id: "record-named-expenses",
+  requestContextSchema: cadeRequestContextSchema,
+  description:
+    "Record what the taxpayer answered at the open door ('anything else you paid that might count?'). For each expense they name, record their words and your classification: one of four outcomes. The classification is a decision, so it gets the background grounding review. counts_here opens the item, and `next` asks its amount; when the item already has an amount, ask whether that amount includes this expense, and record a new total with record-tax-facts. counts_elsewhere leaves a note for the return's conversation. not_sure leaves the taxpayer's words for the CPA: use it for an expense that might count and that no item covers. This tool never records an amount. Set `nothingElse` when the taxpayer says that nothing else is left: it closes the door. Returns `problems` for each expense to send again; nothing was recorded for those.",
+  inputSchema: z.object({
+    // No .max(): Anthropic rejects maxItems on a tool schema.
+    expenses: z.array(namedExpense).describe("One entry per expense named; empty when none"),
+    nothingElse: z.boolean().describe("true when the taxpayer said that nothing else is left"),
+    sourceNote: z.string().describe("How and when the taxpayer said it, e.g. 'verbal, 2026-11-09'"),
+  }),
+  outputSchema: z.object({
+    recorded: z.array(z.string()).describe("The fact keys written"),
+    decisions: z.array(z.string()).describe("The decision keys written"),
+    problems: z.array(z.object({ name: z.string(), problem: z.string() })),
+    next: nextStep,
+  }),
+  execute: async (input, context) => {
+    const user = await requireUserContext(context);
+    const before = await loadScenario(user);
+    const statuses = new Map(
+      deductionsFlow(before).lifeQuestions.map((question) => [question.id, question.status]),
+    );
+    const named = input.expenses.map((expense) => ({ ...expense, slug: slugify(expense.name) }));
+    const plan = planNamedExpenses(named, input.sourceNote, statuses);
+    for (const expense of plan.expenses) await recordExpense(user, expense);
+    const recorded = plan.expenses.map((expense) => expense.fact.key);
+    recorded.push(...(await openItems(user, plan, input.sourceNote, statedAmounts(before))));
+    const closes =
+      input.nothingElse &&
+      plan.problems.length === 0 &&
+      valuesByKey(before.facts).get(NOTHING_ELSE_KEY) !== true;
+    if (closes) {
+      const sourceNote = `The open door: the taxpayer said that nothing else is left. ${input.sourceNote}`;
+      await writeFacts(user, [
+        { category: "other", key: NOTHING_ELSE_KEY, value: true, sourceNote },
+      ]);
+      recorded.push(NOTHING_ELSE_KEY);
+    }
+    return {
+      recorded,
+      decisions: plan.expenses.map((expense) => expense.decision.decisionKey),
+      problems: plan.problems,
       next: deductionsFlow(await loadScenario(user)).next,
     };
   },

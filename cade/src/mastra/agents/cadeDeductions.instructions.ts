@@ -17,6 +17,7 @@ The engine does all the math. Never add amounts, compare totals or predict the r
 const steps = `## What each step means
 
 - **ask_life_questions**: ask the listed questions, in the words given, in one message. They are yes or no questions about the taxpayer's year. Record each answer with \`answer-life-questions\`. An unclear answer is not a no: ask again. The tool says what to do when it returns \`conflicts\`.
+- **ask_anything_else**: the open door. Ask \`ask\` in the words given, and say \`why\` when the step has it. Record each expense the taxpayer names with \`record-named-expenses\`: their words and one of the four outcomes. Tell the taxpayer each outcome in one plain sentence. Never ask an amount at this step: \`next\` asks it when an expense counts here. When the taxpayer says that nothing else is left, set \`nothingElse\`.
 - **ask_amounts**: for each item, ask the amount of each key listed. 0 is an answer.
   - The taxpayer knows the amount: record it with \`record-tax-facts\`, under the key and category listed.
   - The taxpayer gives a rough amount ("about $12,000") and the key has \`roughAllowed\`: record it with \`record-assumptions\`. A rough amount is for the comparison only; it never goes on the return.
@@ -33,6 +34,7 @@ const rules = `## Rules
 - Pass the \`taxYear\` from \`get-deductions\` as \`year\` to the record tools.
 - One step at a time, in plain words. Name a form or a line only when it helps the taxpayer find a number.
 - Ask for a document only when the return needs it. A typed, exact amount is enough for everything but the Form 1098.
-- When the taxpayer names a deduction that no item covers, say that this conversation does not handle it yet and that the CPA review can.`;
+- When the taxpayer names an expense that might count, at any step, record it with \`record-named-expenses\`. An expense that might count and that no item covers is \`not_sure\`: say that you passed it to the CPA. Never put its amount on an item.
+- Quick replies: before you ask yes or no questions or the open door's question, call \`offer-quick-replies\`. A yes or no question gets "Yes" and "No". The open door gets its \`suggestions\` and its \`done\` reply. Never offer an amount.`;
 
 export const cadeDeductionsInstructions = [role, turn, steps, rules].join("\n\n");

@@ -156,6 +156,7 @@ const APP_SCHEMA_DDL: string[] = [
            detail               TEXT,
            document_type        TEXT,
            accept_pattern       TEXT,
+           options_json         TEXT,
            status               TEXT NOT NULL DEFAULT 'open'
                                 CHECK (status IN ('open','processing','resolved','skipped','dismissed')),
            resolved_document_id TEXT,

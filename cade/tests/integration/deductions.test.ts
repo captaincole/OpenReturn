@@ -12,6 +12,7 @@ import {
   HOME_AMOUNTS,
   HOMEOWNER,
   NOTHING_BUT_A_HOME,
+  NOTHING_ELSE,
   RENTER,
   type FactRow,
 } from "./deductionsFixtures";
@@ -58,8 +59,34 @@ describe("the next step of the deductions conversation", () => {
     );
   });
 
+  it("opens the door after the life questions, and keeps it open until nothing else is left", () => {
+    const answered = RENTER.filter((each) => each !== NOTHING_ELSE);
+    const first = deductionsFlow(alex(answered)).next;
+    expect(first).toMatchObject({
+      step: "ask_anything_else",
+      ask: "Anything else you paid for in 2025 that you think might count? Say it in your own words.",
+      done: "Nothing else",
+    });
+    expect(first.step === "ask_anything_else" && first.why).toBeTruthy();
+    expect(first.step === "ask_anything_else" && first.suggestions).toContain("Home office");
+
+    /* After one named expense the door asks again, in fewer words. */
+    const named = fact("deductions.named.home-office", "I work from a room at home");
+    const again = deductionsFlow(alex([named, ...answered])).next;
+    expect(again).toMatchObject({ step: "ask_anything_else", ask: "Anything else?" });
+    expect(again.step === "ask_anything_else" && again.why).toBeUndefined();
+
+    /* Nothing else is left: the door closes, and the named expense changes no later step. */
+    expect(deductionsFlow(alex([named, ...RENTER])).next.step).toBe("close");
+  });
+
   it("asks the amounts a yes opened, with each key's category", () => {
-    const answers = [fact("deductions.life.owns_home", true), ...EVERY_NO, ...NOTHING_BUT_A_HOME];
+    const answers = [
+      NOTHING_ELSE,
+      fact("deductions.life.owns_home", true),
+      ...EVERY_NO,
+      ...NOTHING_BUT_A_HOME,
+    ];
     expect(deductionsFlow(alex(answers)).next).toEqual({
       step: "ask_amounts",
       items: [

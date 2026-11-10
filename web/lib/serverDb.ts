@@ -219,9 +219,11 @@ export async function fetchOpenActions(
   userId: string,
   taxYear: number,
 ): Promise<RequestedAction[]> {
+  // 'decide' rows are the deductions conversation's quick replies: not asks for the return's rail.
   const res = await db().execute({
     sql: `SELECT * FROM requested_actions
           WHERE user_id = ? AND tax_year = ? AND status IN ('open','processing')
+            AND kind != 'decide'
           ORDER BY created_at DESC`,
     args: [userId, taxYear],
   });

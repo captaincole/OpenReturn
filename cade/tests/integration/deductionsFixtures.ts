@@ -72,7 +72,11 @@ export const NOTHING_BUT_A_HOME = [
   fact("misc_deductions.investment_fees", 0),
 ];
 
+/* The open door is closed: the taxpayer said that nothing else is left. */
+export const NOTHING_ELSE = fact("deductions.nothing_else", true);
+
 export const RENTER = [
+  NOTHING_ELSE,
   ...EVERY_NO,
   fact("mortgage.interest_form_1098", 0, "mortgage"),
   fact("state_local_tax.real_estate", 0, "state_local_tax"),
@@ -87,6 +91,7 @@ export const HOME_AMOUNTS = [
 ];
 
 export const HOMEOWNER = [
+  NOTHING_ELSE,
   fact("deductions.life.owns_home", true),
   ...EVERY_NO,
   ...HOME_AMOUNTS,
