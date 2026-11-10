@@ -88,7 +88,7 @@ export const answerLifeQuestions = createTool({
   id: "answer-life-questions",
   requestContextSchema: cadeRequestContextSchema,
   description:
-    "Record the taxpayer's yes or no to one or more life questions. Each answer becomes a fact. A no also records a fact of 0 for each amount the question covers (a renter: mortgage interest 0, real estate tax 0), which closes those items. A yes records only the answer: `next` then asks the amounts. Returns `conflicts` when a no disagrees with an amount already stated above 0: nothing was recorded for that question, so ask the taxpayer which is right. Returns `atZero` when a yes meets items an earlier no closed at 0: ask their amounts and record them. Record only what the taxpayer said; an unclear answer is not a no.",
+    "Record the taxpayer's yes or no to one or more life questions. Each answer becomes a fact. A no also records a fact of 0 for each amount the question covers (a renter: mortgage interest 0, real estate tax 0), which closes those items. A yes records only the answer: `next` then asks the amounts, also the ones an earlier no recorded as 0. Returns `conflicts` when a no disagrees with an amount already stated above 0: nothing was recorded for that question, so ask the taxpayer which is right. Record only what the taxpayer said; an unclear answer is not a no.",
   inputSchema: z.object({
     // No .max(): Anthropic rejects maxItems on a tool schema.
     answers: z.array(lifeAnswer).describe("One entry per question the taxpayer answered"),
@@ -96,7 +96,6 @@ export const answerLifeQuestions = createTool({
   outputSchema: z.object({
     recorded: z.array(z.string()).describe("The fact keys written"),
     conflicts: z.array(z.object({ id: z.string(), key: z.string(), stated: z.number() })),
-    atZero: z.array(z.object({ id: z.string(), items: z.array(z.string()) })),
     next: nextStep,
   }),
   execute: async (input, context) => {
@@ -106,7 +105,7 @@ export const answerLifeQuestions = createTool({
       facts: valuesByKey(before.facts),
       assumptions: valuesByKey(before.assumptionsInUse),
     };
-    const plan = planLifeAnswers(user.taxYear, input.answers, stated, before.deductions.items);
+    const plan = planLifeAnswers(user.taxYear, input.answers, stated);
     if (plan.facts.length > 0) {
       await recordFacts(
         user.scope,
@@ -122,7 +121,6 @@ export const answerLifeQuestions = createTool({
     return {
       recorded: plan.facts.map((fact) => fact.key),
       conflicts: plan.conflicts,
-      atZero: plan.atZero,
       next: deductionsFlow(await loadScenario(user)).next,
     };
   },

@@ -54,8 +54,10 @@ export const EVERY_NO = [
   "ca_vehicle",
   "gave_money",
   "gave_things",
+  "gift_carryover",
   "medical",
   "margin_loan",
+  "investment_fees",
 ].map((id) => fact(`deductions.life.${id}`, false));
 
 /* The facts of 0 those answers record, less the home's two. */
@@ -63,9 +65,11 @@ export const NOTHING_BUT_A_HOME = [
   fact("state_local_tax.personal_property", 0, "state_local_tax"),
   fact("charitable.cash", 0, "charitable"),
   fact("charitable.noncash", 0, "charitable"),
+  fact("charitable.carryover", 0, "charitable"),
   fact("medical.expenses_total", 0, "medical"),
   fact("investment_interest.expense_paid", 0, "investment_income"),
   fact("investment_interest.disallowed_carryover", 0, "investment_income"),
+  fact("misc_deductions.investment_fees", 0),
 ];
 
 export const RENTER = [

@@ -3,14 +3,17 @@
  * about the taxpayer's year, not about form lines. They are Cade's; the engine
  * asks only line-level amounts (its deductions catalog). A no becomes facts of
  * 0, which close the question's items (a renter: mortgage interest 0). A yes
- * leads to the amounts of the items it opens.
+ * leads to the amounts of the items it opens. Every catalog item with an
+ * amount to ask has a question that opens it (the unit test checks).
  */
 
 import type { ItemId, ItemState } from "@openreturn/engine";
-import { INVESTMENT_INTEREST_KEYS, MORTGAGE_KEYS } from "@openreturn/engine/facts";
-import type { CATEGORIES } from "../tools/taxFacts";
-
-type Category = (typeof CATEGORIES)[number];
+import {
+  CA_MISC_DEDUCTION_KEYS,
+  INVESTMENT_INTEREST_KEYS,
+  MORTGAGE_KEYS,
+} from "@openreturn/engine/facts";
+import { categoryOf, type Category } from "./categories";
 
 export const LIFE_QUESTION_IDS = [
   "itemized_last_year",
@@ -18,8 +21,10 @@ export const LIFE_QUESTION_IDS = [
   "ca_vehicle",
   "gave_money",
   "gave_things",
+  "gift_carryover",
   "medical",
   "margin_loan",
+  "investment_fees",
 ] as const;
 export type LifeQuestionId = (typeof LIFE_QUESTION_IDS)[number];
 
@@ -29,8 +34,8 @@ export interface LifeQuestion {
   ask: (year: number) => string;
   /** The catalog items a yes opens. Empty for a question that only gives context. */
   items: ItemId[];
-  /** The facts a no records as 0: each closes one of the items. */
-  zeroFacts: { category: Category; key: string }[];
+  /** The fact keys a no records as 0: each closes one of the items. */
+  zeroKeys: string[];
 }
 
 export const LIFE_QUESTIONS: readonly LifeQuestion[] = [
@@ -38,52 +43,60 @@ export const LIFE_QUESTIONS: readonly LifeQuestion[] = [
     id: "itemized_last_year",
     ask: () => "Did you itemize deductions on last year's return?",
     items: [],
-    zeroFacts: [],
+    zeroKeys: [],
   },
   {
     id: "owns_home",
     ask: (year) => `Did you own your home in ${year}?`,
     items: ["mortgage_interest", "real_estate_tax"],
-    zeroFacts: [
-      { category: "mortgage", key: MORTGAGE_KEYS.interestForm1098 },
-      { category: "state_local_tax", key: "state_local_tax.real_estate" },
-    ],
+    zeroKeys: [MORTGAGE_KEYS.interestForm1098, "state_local_tax.real_estate"],
   },
   {
     id: "ca_vehicle",
     ask: (year) => `Did you pay to register a car or other vehicle in California in ${year}?`,
     items: ["personal_property_tax"],
-    zeroFacts: [{ category: "state_local_tax", key: "state_local_tax.personal_property" }],
+    zeroKeys: ["state_local_tax.personal_property"],
   },
   {
     id: "gave_money",
     ask: (year) => `Did you give money to a charity in ${year}?`,
     items: ["gifts_cash"],
-    zeroFacts: [{ category: "charitable", key: "charitable.cash" }],
+    zeroKeys: ["charitable.cash"],
   },
   {
     id: "gave_things",
     ask: (year) =>
       `Did you give things to a charity in ${year}: clothes, furniture, a car, shares of stock?`,
     items: ["gifts_property"],
-    zeroFacts: [{ category: "charitable", key: "charitable.noncash" }],
+    zeroKeys: ["charitable.noncash"],
+  },
+  {
+    id: "gift_carryover",
+    ask: () =>
+      "Do you have gifts to charity carried over from an earlier year's return: gifts over that year's limit?",
+    items: ["gift_carryover"],
+    zeroKeys: ["charitable.carryover"],
   },
   {
     id: "medical",
     ask: (year) =>
       `Was ${year} a big year for medical or dental bills you paid yourself: more than about 7.5% of your income?`,
     items: ["medical"],
-    zeroFacts: [{ category: "medical", key: "medical.expenses_total" }],
+    zeroKeys: ["medical.expenses_total"],
   },
   {
     id: "margin_loan",
     ask: (year) =>
       `Did you pay interest in ${year} on a margin loan or other money you borrowed to buy investments, or carry such interest over from last year's Form 4952?`,
     items: ["investment_interest"],
-    zeroFacts: [
-      { category: "investment_income", key: INVESTMENT_INTEREST_KEYS.expensePaid },
-      { category: "investment_income", key: INVESTMENT_INTEREST_KEYS.disallowedCarryover },
-    ],
+    zeroKeys: [INVESTMENT_INTEREST_KEYS.expensePaid, INVESTMENT_INTEREST_KEYS.disallowedCarryover],
+  },
+  {
+    id: "investment_fees",
+    ask: (year) =>
+      `Did you pay fees in ${year} to an investment adviser, or to have a taxable investment account managed?`,
+    items: ["ca_investment_fees"],
+    zeroKeys: [CA_MISC_DEDUCTION_KEYS.investmentFees],
   },
 ];
 
@@ -131,8 +144,6 @@ export interface AnswerPlan {
   facts: PlannedFact[];
   /** A no against an amount already stated above 0: nothing is recorded for the question. */
   conflicts: { id: LifeQuestionId; key: string; stated: number }[];
-  /** A yes whose items are at 0 (an earlier no): Cade asks their amounts. */
-  atZero: { id: LifeQuestionId; items: ItemId[] }[];
 }
 
 export interface StatedAmounts {
@@ -145,27 +156,30 @@ export interface StatedAmounts {
 const above0 = (value: unknown): value is number => typeof value === "number" && value > 0;
 
 function planNo(question: LifeQuestion, answer: LifeAnswer, year: number, stated: StatedAmounts) {
-  const conflicts = question.zeroFacts.flatMap(({ key }) => {
+  const conflicts = question.zeroKeys.flatMap((key) => {
     const amount = [stated.facts.get(key), stated.assumptions.get(key)].find(above0);
     return amount === undefined ? [] : [{ id: question.id, key, stated: amount }];
   });
   if (conflicts.length > 0) return { facts: [], conflicts };
   const sourceNote = `"${question.ask(year)}" No. ${answer.sourceNote}`;
-  const zeros = question.zeroFacts
+  const zeros = question.zeroKeys
     // A fact of 0 is already there: the audit log needs no second row.
-    .filter(({ key }) => stated.facts.get(key) !== 0)
-    .map((zero) => ({ ...zero, value: 0, sourceNote }));
+    .filter((key) => stated.facts.get(key) !== 0)
+    .map((key) => ({ category: categoryOf(key), key, value: 0, sourceNote }));
   return { facts: zeros, conflicts };
 }
 
-/* What a batch of answers writes. Pure: the tool does the writes. */
+/*
+ * What a batch of answers writes. Pure: the tool does the writes. A yes writes
+ * only the answer; when an earlier no left facts of 0, the flow asks those
+ * amounts again (flow.ts).
+ */
 export function planLifeAnswers(
   year: number,
   answers: readonly LifeAnswer[],
   stated: StatedAmounts,
-  items: readonly ItemState[],
 ): AnswerPlan {
-  const plan: AnswerPlan = { facts: [], conflicts: [], atZero: [] };
+  const plan: AnswerPlan = { facts: [], conflicts: [] };
   for (const answer of answers) {
     const question = LIFE_QUESTIONS.find((candidate) => candidate.id === answer.id)!;
     const answerFact: PlannedFact = {
@@ -175,10 +189,6 @@ export function planLifeAnswers(
       sourceNote: answer.sourceNote,
     };
     if (answer.answer) {
-      const closed = itemsOf(question, items).filter((item) => item.status === "closed");
-      if (closed.length > 0) {
-        plan.atZero.push({ id: question.id, items: closed.map((item) => item.id) });
-      }
       plan.facts.push(answerFact);
       continue;
     }

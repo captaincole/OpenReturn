@@ -166,7 +166,7 @@ Limits worth remembering:
 ### Resetting user data
 
 Two paths:
-- **UI: Delete filing** (avatar menu) → `DELETE /app/filings/:id` — removes the filing's blob directory, cascades every domain row, deletes the Mastra thread. Start a fresh filing from the home page afterwards.
+- **UI: Delete filing** (avatar menu) → `DELETE /app/filings/:id` — removes the filing's blob directory, cascades every domain row, deletes both Mastra threads (the return and its deductions). Start a fresh filing from the home page afterwards.
 - **API: `POST /app/session/reset`** → `resetCurrentUserData` in `cade/src/mastra/db/resetUserData.ts` — wipes the user's rows but keeps the filing + memberships. No UI button anymore.
 
 **Reference corpus and `sources/` always survive.** To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete both `.data/` directories (`cade/`, `canon/`) and re-run `npm run reset`.
@@ -248,7 +248,7 @@ A filing has a second thread, `${userId}::${year}::deductions` (`cade/src/mastra
 
 **The flow is code, not prompt.** `get-deductions` returns `next`, the one step to take now, derived from the engine's item states and comparison (`cade/src/mastra/deductions/flow.ts`): `ask_life_questions` → `ask_amounts` → `wait_for_return` (no income or filing status yet) → `get_exact_amounts` → `close` → `closed`. The instructions say only how to carry out a step. A new step is a change to `flow.ts` and its tests, not a paragraph in the prompt.
 
-- **Life questions** (`deductions/lifeQuestions.ts`) are Cade's: yes/no questions about the year (own your home, gave money). The engine asks only line-level amounts. `answer-life-questions` records each answer as a fact `deductions.life.<id>`. A no also records a fact of 0 for each amount the question covers, which closes those items (a renter: mortgage interest 0). A no against an amount already stated above 0 records nothing and returns a conflict. A fact that arrives early (a Form 1098) settles its question, and Cade never asks it.
+- **Life questions** (`deductions/lifeQuestions.ts`) are Cade's: yes/no questions about the year (own your home, gave money). The engine asks only line-level amounts. `answer-life-questions` records each answer as a fact `deductions.life.<id>`. A no also records a fact of 0 for each amount the question covers, which closes those items (a renter: mortgage interest 0). A no against an amount already stated above 0 records nothing and returns a conflict. A fact that arrives early (a Form 1098) settles its question, and Cade never asks it. A yes after an earlier no records only the answer: the flow asks again each amount whose fact of 0 is older than the yes. Every catalog item with an amount to ask has a life question that opens it, and every key has a category (`deductions/categories.ts`); the unit test checks both, so a new catalog item needs a question.
 - **Closing** (`deductions/closing.ts`, `close-deductions`) records `decisions.itemize_vs_standard` from the comparison, with the summary paragraph as its rationale. When federal takes the standard deduction and California itemizes, it also records `decisions.scope.must_file_schedule_a` = true: California's itemized deductions start from Schedule A. Each decision goes through `recordAndReview` (`tools/aiDecisions.ts`), so it gets the background grounding review like any `record-ai-decision` call.
 
 ## Tax facts schema
