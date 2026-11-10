@@ -1,9 +1,13 @@
+import type { Conversation } from "@/lib/chatSession";
+
 export type RequestedActionKind = "upload" | "confirm" | "decide";
 export type RequestedActionStatus = "open" | "processing" | "resolved" | "skipped" | "dismissed";
 
 export interface RequestedAction {
   id: string;
   taxYear: number;
+  /** The conversation that made the request. The card shows next to it. */
+  conversation: Conversation["id"];
   kind: RequestedActionKind;
   title: string;
   detail: string | null;
@@ -15,8 +19,11 @@ export interface RequestedAction {
   resolvedAt: string | null;
 }
 
-export async function fetchOpenActions(taxYear: number): Promise<RequestedAction[]> {
-  const res = await fetch(`/api/requested-actions?year=${taxYear}`, {
+export async function fetchOpenActions(
+  taxYear: number,
+  conversation: Conversation["id"],
+): Promise<RequestedAction[]> {
+  const res = await fetch(`/api/requested-actions?year=${taxYear}&conversation=${conversation}`, {
     cache: "no-store",
   });
   if (!res.ok) throw new Error(`requested actions: ${res.status}`);

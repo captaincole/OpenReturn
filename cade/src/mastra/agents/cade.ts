@@ -8,7 +8,7 @@ import { getCaseState } from "../tools/caseState";
 import { dismissRequestedAction } from "../tools/dismissRequestedAction";
 import { generateTaxDocuments } from "../tools/generateTaxDocuments";
 import { INGEST_MAX_OUTPUT_TOKENS, ingestTools } from "../tools/ingestTools";
-import { requestDocumentUpload } from "../tools/requestDocument";
+import { requestDocumentUploadFor } from "../tools/requestDocument";
 import { listOpenQuestionsTool, recordTaxFacts, resolveOpenQuestion } from "../tools/taxFacts";
 import { cadeInstructions } from "./cade.instructions";
 import { cadeWorkingMemorySchema } from "./cade.workingMemory";
@@ -33,7 +33,7 @@ export const cade = new Agent({
     recordTaxFacts,
     recordAssumptions,
     recordAIDecision,
-    requestDocumentUpload,
+    requestDocumentUpload: requestDocumentUploadFor("return"),
     dismissRequestedAction,
     generateTaxDocuments,
     listOpenQuestions: listOpenQuestionsTool,

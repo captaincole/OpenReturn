@@ -17,6 +17,9 @@ const filings = await import("../../src/mastra/db/filings");
 const taxFacts = await import("../../src/mastra/db/taxFacts");
 const decisions = await import("../../src/mastra/db/aiDecisions");
 const tools = await import("../../src/mastra/tools/deductions");
+const { requestDocumentUploadFor } = await import("../../src/mastra/tools/requestDocument");
+const { dismissRequestedAction } = await import("../../src/mastra/tools/dismissRequestedAction");
+const { getAppDb } = await import("../../src/mastra/db/appDb");
 const { ITEMIZE_KEY, SCHEDULE_A_KEY } = await import("../../src/mastra/deductions/closing");
 
 const userId = "owner-test";
@@ -62,6 +65,22 @@ const storedDecisions = async (decisionKey: string) =>
     (row) => row.decisionKey === decisionKey,
   );
 
+/* Each requested action as "conversation document status", sorted. */
+const cards = async () => {
+  const res = await getAppDb().execute({
+    sql: "SELECT conversation, document_type, status FROM requested_actions WHERE filing_id = ?",
+    args: [filingId],
+  });
+  return res.rows.map((row) => `${row.conversation} ${row.document_type} ${row.status}`).sort();
+};
+
+const upload = (documentType: string) => ({
+  year: YEAR,
+  documentType,
+  title: `Upload your ${YEAR} Form ${documentType}`,
+  detail: "The return needs its amounts.",
+});
+
 const no = (id: string) => ({ id, answer: false, sourceNote: "No, verbal, 2026-11-09" });
 
 const named = (name: string, taxpayerWords: string, outcome: string, more: object = {}) => ({
@@ -106,6 +125,20 @@ describe("the deductions tools, over one filing", () => {
     expect(result).toMatchObject({ closed: false, recorded: [] });
     expect(result.next.step).toBe("ask_life_questions");
     expect(await storedDecisions(ITEMIZE_KEY)).toEqual([]);
+  });
+
+  it("a requested document records its conversation, and each conversation has one card", async () => {
+    const first = await call(requestDocumentUploadFor("deductions"), upload("1098"));
+    expect(first.requested).toBe(true);
+    const repeat = await call(requestDocumentUploadFor("deductions"), upload("1098"));
+    expect(repeat).toEqual({ id: first.id, requested: false });
+    expect((await call(requestDocumentUploadFor("return"), upload("1098"))).requested).toBe(true);
+    expect(await cards()).toEqual(["deductions 1098 open", "return 1098 open"]);
+
+    /* The document is in: its card closes in both conversations. */
+    const dismissed = await call(dismissRequestedAction, { documentType: "1098" });
+    expect(dismissed.dismissed).toBe(true);
+    expect(await cards()).toEqual(["deductions 1098 resolved", "return 1098 resolved"]);
   });
 
   it("answer-life-questions writes each no as facts of 0, and refuses a no against a stated amount", async () => {
@@ -254,6 +287,8 @@ describe("the deductions tools, over one filing", () => {
   it("close-deductions records both decisions when only California itemizes", async () => {
     await seedFacts([fact("charitable.cash", 250, "charitable")]);
     expect((await call(tools.getDeductions)).next.step).toBe("close");
+    await call(requestDocumentUploadFor("deductions"), upload("1098"));
+    await call(requestDocumentUploadFor("return"), upload("W-2"));
 
     const result = await call(tools.closeDeductions);
     expect(result).toMatchObject({
@@ -275,6 +310,14 @@ describe("the deductions tools, over one filing", () => {
     expect(itemize.rationale).toBe(result.summary);
     expect(itemize.sourceNote).toContain("Schedule A line 17");
     expect((await storedDecisions(SCHEDULE_A_KEY)).map((row) => row.decision)).toEqual([true]);
+
+    /* No rough amount is in use, so what this conversation asked for closes with it. */
+    expect(await cards()).toEqual([
+      "deductions 1098 dismissed",
+      "deductions 1098 resolved",
+      "return 1098 resolved",
+      "return W-2 open",
+    ]);
 
     const state = await call(tools.getDeductions);
     expect(state.next.step).toBe("closed");

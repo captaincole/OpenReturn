@@ -9,6 +9,7 @@
 import { useAppShell } from "@/components/AppShell";
 import { Markdown } from "@/components/Markdown";
 import { stepLabel } from "@/lib/deductions";
+import { RequestedActionsCard } from "../components/RequestedActions";
 import {
   ComparisonCard,
   ItemsCard,
@@ -36,6 +37,8 @@ export default function DeductionsWorkspace() {
               <Markdown>{view.summary}</Markdown>
             </section>
           )}
+          {/* What Cade asked for here, such as the Form 1098. Nothing shows when he asked for nothing. */}
+          <RequestedActionsCard hideWhenEmpty />
           <ComparisonCard view={view} />
           <ItemsCard items={view.items} done={view.next.step === "closed"} />
           <NamedExpensesCard expenses={view.namedExpenses} />

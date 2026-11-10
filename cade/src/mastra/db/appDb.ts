@@ -151,6 +151,7 @@ const APP_SCHEMA_DDL: string[] = [
            user_id              TEXT NOT NULL,
            filing_id            TEXT NOT NULL REFERENCES filings(id) ON DELETE CASCADE,
            tax_year             INTEGER NOT NULL,
+           conversation         TEXT NOT NULL CHECK (conversation IN ('return','deductions')),
            kind                 TEXT NOT NULL CHECK (kind IN ('upload','confirm','decide')),
            title                TEXT NOT NULL,
            detail               TEXT,

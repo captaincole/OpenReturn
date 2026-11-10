@@ -39,6 +39,11 @@ export interface ClosingPlan {
   records: DeductionRecord[];
   /** The decisions to record. Empty when the recorded ones already say this. */
   decisions: PlannedDecision[];
+  /**
+   * Whether the cards this conversation made close with it. False while a
+   * rough amount is in use: the requested document still brings its exact amount.
+   */
+  dismissRequests: boolean;
 }
 
 const wholeDollars = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -190,5 +195,6 @@ export function planClosing(scenario: EvaluatedScenario): ClosingPlan | undefine
       : [{ decisionKey: ITEMIZE_KEY, decision: itemizeValue, rationale: summary, ...shared }]),
     ...(scheduleA ? [{ decisionKey: SCHEDULE_A_KEY, ...scheduleA, ...shared }] : []),
   ];
-  return { summary, records, decisions };
+  const dismissRequests = items.every((item) => item.status !== "assumed");
+  return { summary, records, decisions, dismissRequests };
 }

@@ -8,3 +8,7 @@ export const mainThreadId = (userId: string, year: number | string): string => `
 
 export const deductionsThreadId = (userId: string, year: number | string): string =>
   `${mainThreadId(userId, year)}::deductions`;
+
+/* The two conversations by name. A requested action records the one that made it. */
+export const CONVERSATIONS = ["return", "deductions"] as const;
+export type Conversation = (typeof CONVERSATIONS)[number];

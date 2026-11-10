@@ -14,8 +14,12 @@ import { useEffect, useRef, useState } from "react";
 /* app.db has no push channel. For one user on one box, a short poll is as good. */
 export const POLL_INTERVAL_MS = 3000;
 
-export function RequestedActionsCard() {
-  const { cadeBusy, sendChat, setMobilePane, resetTick, turnTick } = useAppShell();
+/*
+ * The cards of the conversation this route shows. An upload goes to the same
+ * conversation as a chat message, so the Cade who asked reads the document.
+ */
+export function RequestedActionsCard({ hideWhenEmpty = false }: { hideWhenEmpty?: boolean }) {
+  const { conversation, cadeBusy, sendChat, setMobilePane, resetTick, turnTick } = useAppShell();
   const [actions, setActions] = useState<RequestedAction[] | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
 
@@ -25,7 +29,7 @@ export function RequestedActionsCard() {
 
     async function load() {
       try {
-        const rows = await fetchOpenActions(ACTIVITY_TAX_YEAR);
+        const rows = await fetchOpenActions(ACTIVITY_TAX_YEAR, conversation);
         if (!cancelled) setActions(rows);
       } catch (err) {
         console.warn("[actions] fetch failed:", err);
@@ -39,7 +43,7 @@ export function RequestedActionsCard() {
       cancelled = true;
       clearInterval(timer);
     };
-  }, [resetTick, turnTick]);
+  }, [conversation, resetTick, turnTick]);
 
   async function handleUpload(action: RequestedAction, file: File) {
     setBusyId(action.id);
@@ -82,6 +86,7 @@ export function RequestedActionsCard() {
   }
 
   const isEmpty = !actions || actions.length === 0;
+  if (isEmpty && hideWhenEmpty) return null;
 
   return (
     <section className="card">
