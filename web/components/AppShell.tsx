@@ -1,14 +1,16 @@
 "use client";
 
 import { ChatPane } from "@/components/ChatPane";
+import { ConversationSwitch } from "@/components/ConversationSwitch";
 import { TopBar } from "@/components/TopBar";
-import { useCadeChat, type ChatMessage, type SendChatOpts } from "@/components/useCadeChat";
+import { useConversations, type ChatMessage, type SendChatOpts } from "@/components/useCadeChat";
 import { fetchState, UnauthorizedError, type CaseState } from "@/lib/api";
 import { signOut } from "@/lib/auth";
+import { DEDUCTIONS_SEGMENT, type Conversation } from "@/lib/chatSession";
 import { cn } from "@/lib/cn";
 import { type UserProfile } from "@/lib/profile";
 import { type TaxReturn } from "@/lib/returns";
-import { useRouter } from "next/navigation";
+import { useRouter, useSelectedLayoutSegment } from "next/navigation";
 import {
   createContext,
   useContext,
@@ -33,6 +35,8 @@ interface AppShellContextValue {
   resetTick: number;
   turnTick: number;
   bumpTurn: () => void;
+  /* The conversation the chat pane shows: the route picks it. Messages and sendChat are its own. */
+  conversation: Conversation["id"];
   messages: ChatMessage[];
   setMessages: Dispatch<SetStateAction<ChatMessage[]>>;
   cadeBusy: boolean;
@@ -68,6 +72,9 @@ export function AppShell({
   const [state, setState] = useState<CaseState | null>(null);
   const [resetTick] = useState(0);
   const [mobilePane, setMobilePane] = useState<MobilePane>("activity");
+  /* The segment under /r/[returnId]: null on the return page. */
+  const conversation: Conversation["id"] =
+    useSelectedLayoutSegment() === DEDUCTIONS_SEGMENT ? "deductions" : "return";
 
   async function onSignOut() {
     await signOut();
@@ -89,12 +96,10 @@ export function AppShell({
     }
   }
 
-  const chat = useCadeChat({
-    userId,
-    activeReturn,
-    refreshState,
-    onUnauthorized: onSignOut,
-  });
+  const chat = useConversations(
+    { userId, activeReturn, refreshState, onUnauthorized: onSignOut },
+    conversation,
+  );
 
   useEffect(() => {
     void refreshState();
@@ -112,6 +117,7 @@ export function AppShell({
     resetTick,
     turnTick: chat.turnTick,
     bumpTurn: chat.bumpTurn,
+    conversation,
     messages: chat.messages,
     setMessages: chat.setMessages,
     cadeBusy: chat.cadeBusy,
@@ -125,66 +131,76 @@ export function AppShell({
     <AppShellContext.Provider value={ctx}>
       <div className="flex h-screen w-screen flex-col overflow-hidden bg-bg-base text-ink-primary">
         <TopBar activeReturn={activeReturn} returns={returns} />
-
-        {/* Below lg, CSS hides the unpicked pane, so neither unmounts on a tab switch. */}
-        <main className="flex min-h-0 flex-1">
-          <aside
-            className={cn(
-              "min-h-0 min-w-0 flex-1 flex-col lg:flex lg:w-[40%] lg:max-w-[640px] lg:min-w-[400px] lg:flex-none lg:shrink-0 lg:border-r lg:border-border-subtle lg:bg-bg-subtle/40",
-              mobilePane === "chat" ? "flex" : "hidden",
-            )}
-          >
-            <ChatPane activeReturn={activeReturn} />
-          </aside>
-          <section
-            className={cn(
-              "min-h-0 min-w-0 flex-1 flex-col lg:flex",
-              mobilePane === "chat" ? "hidden" : "flex",
-            )}
-          >
-            <WorkspaceFrame>{children}</WorkspaceFrame>
-          </section>
-        </main>
-
-        <MobileTabBar value={mobilePane} onChange={setMobilePane} busy={chat.cadeBusy} />
+        {/* The top bar has no room for the switch on a phone: it gets a row of its own. */}
+        <div className="shrink-0 border-b border-border-subtle px-4 py-1.5 sm:hidden">
+          <ConversationSwitch className="flex" />
+        </div>
+        <ShellPanes>{children}</ShellPanes>
+        <MobileTabBar />
       </div>
     </AppShellContext.Provider>
   );
 }
 
-function WorkspaceFrame({ children }: { children: React.ReactNode }) {
-  return <div className="min-h-0 flex-1 overflow-y-auto">{children}</div>;
+/* Below lg, CSS hides the unpicked pane, so neither unmounts on a tab switch. */
+function ShellPanes({ children }: { children: React.ReactNode }) {
+  const { activeReturn, mobilePane } = useAppShell();
+  return (
+    <main className="flex min-h-0 flex-1">
+      <aside
+        className={cn(
+          "min-h-0 min-w-0 flex-1 flex-col lg:flex lg:w-[40%] lg:max-w-[640px] lg:min-w-[400px] lg:flex-none lg:shrink-0 lg:border-r lg:border-border-subtle lg:bg-bg-subtle/40",
+          mobilePane === "chat" ? "flex" : "hidden",
+        )}
+      >
+        <ChatPane activeReturn={activeReturn} />
+      </aside>
+      <section
+        className={cn(
+          "min-h-0 min-w-0 flex-1 flex-col lg:flex",
+          mobilePane === "chat" ? "hidden" : "flex",
+        )}
+      >
+        <div className="min-h-0 flex-1 overflow-y-auto">{children}</div>
+      </section>
+    </main>
+  );
 }
 
-function MobileTabBar({
-  value,
-  onChange,
-  busy,
-}: {
-  value: MobilePane;
-  onChange: (id: MobilePane) => void;
-  busy: boolean;
-}) {
-  const tabs: { id: MobilePane; label: string; icon: string }[] = [
-    { id: "chat", label: "Chat", icon: "◐" },
-    { id: "activity", label: "Activity", icon: "≋" },
-    { id: "forms", label: "Forms", icon: "▤" },
-    { id: "documents", label: "Documents", icon: "▦" },
-  ];
+type MobileTab = { id: MobilePane; label: string; icon: string };
+
+const RETURN_TABS: MobileTab[] = [
+  { id: "chat", label: "Chat", icon: "◐" },
+  { id: "activity", label: "Activity", icon: "≋" },
+  { id: "forms", label: "Forms", icon: "▤" },
+  { id: "documents", label: "Documents", icon: "▦" },
+];
+
+/* The deductions route has one workspace pane, the summary: every pane but the chat shows it. */
+const DEDUCTIONS_TABS: MobileTab[] = [
+  { id: "chat", label: "Chat", icon: "◐" },
+  { id: "activity", label: "Summary", icon: "≋" },
+];
+
+function MobileTabBar() {
+  const { conversation, mobilePane, setMobilePane, cadeBusy } = useAppShell();
+  const inDeductions = conversation === "deductions";
+  const tabs = inDeductions ? DEDUCTIONS_TABS : RETURN_TABS;
+  const picked = inDeductions && mobilePane !== "chat" ? "activity" : mobilePane;
   return (
     <nav className="relative z-30 flex h-14 shrink-0 border-t border-border-subtle bg-bg-subtle/95 backdrop-blur-sm lg:hidden">
       {tabs.map((tab) => (
         <button
           key={tab.id}
-          onClick={() => onChange(tab.id)}
+          onClick={() => setMobilePane(tab.id)}
           className={cn(
             "relative flex flex-1 flex-col items-center justify-center gap-0.5",
-            value === tab.id ? "text-ink-primary" : "text-ink-muted",
+            picked === tab.id ? "text-ink-primary" : "text-ink-muted",
           )}
         >
           <span className="text-lg leading-none">{tab.icon}</span>
           <span className="text-[10px] tracking-wider uppercase">{tab.label}</span>
-          {busy && tab.id === "activity" && (
+          {cadeBusy && tab.id === "activity" && (
             <span className="absolute top-1.5 right-[30%] h-1.5 w-1.5 animate-pulse-soft rounded-full bg-warn" />
           )}
         </button>

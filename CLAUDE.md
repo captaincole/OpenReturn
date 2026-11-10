@@ -77,10 +77,10 @@ cade/                            # @openreturn/cade — CADE, the AI CPA. Mastra
 ├── package.json                 # agent deps + scripts (mastra dev, sources:sync)
 └── tsconfig.json                # "paths" aliases @openreturn/engine to source so `mastra dev` bundles it
 web/                             # Next.js 16 (App Router) frontend → deployed to Vercel
-├── app/                         # /setup, /login, (app)/{page (home), r/[returnId], ask/[threadId],
+├── app/                         # /setup, /login, (app)/{page (home), r/[returnId], r/[returnId]/deductions, ask/[threadId],
 │                                  library, library/[docId]}, /documents/[id] + /api/* route handlers
-├── components/                  # AppShell, ChatPane, ActivityCard, PlanCard, TopBar, Markdown
-├── lib/                         # localAuth, serverDb, api, ask, activity, mastraClient, uploads, …
+├── components/                  # AppShell, ChatPane, DeductionReplies, ActivityCard, PlanCard, TopBar, Markdown
+├── lib/                         # localAuth, serverDb, api, ask, activity, chatSession, deductions, mastraClient, …
 ├── e2e/                         # Playwright E2E: drives web + Cade + Canon + a real model (npm run e2e)
 ├── proxy.ts                     # Next.js 16 Proxy (renamed Middleware): optimistic session-cookie gate
 ├── package.json                 # web deps + scripts (next dev, next build, e2e)
@@ -250,8 +250,9 @@ A filing has a second thread, `${userId}::${year}::deductions` (`cade/src/mastra
 
 - **Life questions** (`deductions/lifeQuestions.ts`) are Cade's: yes/no questions about the year (own your home, gave money). The engine asks only line-level amounts. `answer-life-questions` records each answer as a fact `deductions.life.<id>`. A no also records a fact of 0 for each amount the question covers, which closes those items (a renter: mortgage interest 0). A no against an amount already stated above 0 records nothing and returns a conflict. A fact that arrives early (a Form 1098) settles its question, and Cade never asks it. A yes after an earlier no records only the answer: the flow asks again each amount whose fact of 0 is older than the yes. Every catalog item with an amount to ask has a life question that opens it, and every key has a category (`deductions/categories.ts`); the unit test checks both, so a new catalog item needs a question.
 - **The open door** (`deductions/openDoor.ts`, `record-named-expenses`) asks what else the taxpayer paid, in their own words, until they say that nothing else is left (the fact `deductions.nothing_else`). Each named expense is a fact `deductions.named.<slug>` (their words) and a decision `decisions.deductions.named.<slug>` with one of four outcomes: `counts_here` (a catalog item; a yes to that item's life question, so the flow asks the exact amount after the door closes), `counts_elsewhere` and `not_sure` (an open question, for the return's conversation or the CPA), `does_not_count`. The tool never records an amount, so nothing free-form reaches a form line. Each decision gets the grounding review.
-- **The answers to tap come from `next`,** not from a tool or a table: yes and no for each life question, and the open door's `suggestions` and `done`. The web app makes the buttons from `next` (not built yet), so Cade never writes them.
+- **The answers to tap come from `next`,** not from a tool or a table: yes and no for each life question, and the open door's `suggestions` and `done`. The web app makes the buttons from `next` (`web/components/DeductionReplies.tsx`), so Cade never writes them. A tap sends the answer as a user message; with several life questions open, one message carries each answer with its question.
 - **Closing** (`deductions/closing.ts`, `close-deductions`) records `decisions.itemize_vs_standard` from the comparison, with the summary paragraph as its rationale. When federal takes the standard deduction and California itemizes, it also records `decisions.scope.must_file_schedule_a` = true: California's itemized deductions start from Schedule A. Each decision goes through `recordAndReview` (`tools/aiDecisions.ts`), so it gets the background grounding review like any `record-ai-decision` call.
+- **The web app shows it on its own route,** `/r/[returnId]/deductions`. `AppShell` keeps one message buffer per conversation (`web/lib/chatSession.ts` names each agent and thread) and the route picks the one the chat pane shows. `/app/state` carries `deductions` (`deductions/state.ts`, `deductionsView`): the step, the comparison, the items, the named expenses and the closing's paragraph and records. The route's page shows them, and the Deductions card on the return page shows the step, then the paragraph. `web/lib/deductions.ts` mirrors the shape by hand.
 
 ## Tax facts schema
 

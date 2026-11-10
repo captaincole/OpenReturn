@@ -1,6 +1,7 @@
 "use client";
 
 import { useAppShell } from "@/components/AppShell";
+import { ConversationSwitch } from "@/components/ConversationSwitch";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { deleteFiling, UnauthorizedError } from "@/lib/api";
 import { signOut } from "@/lib/auth";
@@ -166,6 +167,9 @@ export function TopBar({ activeReturn, returns }: TopBarProps) {
       <div className="h-6 w-px shrink-0 bg-border-subtle" />
 
       <ReturnPicker activeReturn={activeReturn} returns={returns} />
+
+      {/* A phone has no room here: AppShell gives the switch a row of its own. */}
+      <ConversationSwitch className="hidden sm:flex" />
 
       <div className="flex-1" />
 
