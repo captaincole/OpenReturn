@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppShell } from "@/components/AppShell";
-import { deductionsHref, type Conversation } from "@/lib/chatSession";
+import { deductionsHref, returnHref, type Conversation } from "@/lib/chatSession";
 import { cn } from "@/lib/cn";
 import Link from "next/link";
 
@@ -9,7 +9,7 @@ import Link from "next/link";
 export function ConversationSwitch({ className }: { className?: string }) {
   const { activeReturn, conversation } = useAppShell();
   const tabs: { id: Conversation["id"]; label: string; href: string }[] = [
-    { id: "return", label: "Return", href: `/r/${activeReturn.id}` },
+    { id: "return", label: "Return", href: returnHref(activeReturn.id) },
     { id: "deductions", label: "Deductions", href: deductionsHref(activeReturn.id) },
   ];
   return (

@@ -189,7 +189,7 @@ function ChatComposer({ isPlaceholder }: { isPlaceholder: boolean }) {
 
           <div className="flex items-center gap-1.5 rounded-md px-2 py-1 text-[12px] text-ink-secondary">
             <span className="flex h-4 w-4 items-center justify-center rounded-full border border-accent/40 bg-accent/20">
-              <span className="font-serif text-[9px] leading-none text-accent">T</span>
+              <span className="font-serif text-[9px] leading-none text-accent">C</span>
             </span>
             <span>Cade</span>
           </div>
@@ -301,7 +301,7 @@ function TypingDots() {
 function CadeAvatar() {
   return (
     <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-accent/30 bg-accent/15">
-      <span className="font-serif text-[11px] leading-none text-accent">T</span>
+      <span className="font-serif text-[11px] leading-none text-accent">C</span>
     </div>
   );
 }

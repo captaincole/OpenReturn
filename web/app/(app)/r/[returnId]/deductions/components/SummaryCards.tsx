@@ -73,12 +73,16 @@ const RESULT_LABELS: Record<JurisdictionComparison["recommendation"], string> = 
 
 type ComparisonRow = { label: string; value: (side: JurisdictionComparison) => string };
 
-const COMPARISON_ROWS: ComparisonRow[] = [
+const AMOUNT_ROWS: ComparisonRow[] = [
   { label: "Itemized deductions", value: (side) => dollars(side.itemized) },
   { label: "Standard deduction", value: (side) => dollars(side.standard) },
   { label: "Itemized less standard", value: (side) => signedDollars(side.margin) },
-  { label: "Result", value: (side) => RESULT_LABELS[side.recommendation] },
 ];
+
+const RESULT_ROW: ComparisonRow = {
+  label: "Result",
+  value: (side) => RESULT_LABELS[side.recommendation],
+};
 
 export function ComparisonCard({ view }: { view: DeductionsView }) {
   const { federal, ca } = view.comparison;
@@ -107,11 +111,8 @@ export function ComparisonCard({ view }: { view: DeductionsView }) {
           </tr>
         </thead>
         <tbody>
-          {COMPARISON_ROWS.map((row) => (
-            <tr
-              key={row.label}
-              className="border-t border-border-subtle last:font-medium last:text-ink-primary"
-            >
+          {AMOUNT_ROWS.map((row) => (
+            <tr key={row.label} className="border-t border-border-subtle">
               <th className="py-2.5 pr-2 pl-5 text-left font-normal text-ink-secondary">
                 {row.label}
               </th>
@@ -119,6 +120,19 @@ export function ComparisonCard({ view }: { view: DeductionsView }) {
               <td className="py-2.5 pr-5 pl-2 text-right tabular-nums">{cell(ca, row)}</td>
             </tr>
           ))}
+          {/* A result that rests on a rough amount can change: it does not look final. */}
+          <tr
+            className={cn(
+              "border-t border-border-subtle font-medium",
+              anyRough ? "text-warn" : "text-ink-primary",
+            )}
+          >
+            <th className="py-2.5 pr-2 pl-5 text-left font-normal text-ink-secondary">
+              {anyRough ? "Result so far" : RESULT_ROW.label}
+            </th>
+            <td className="px-2 py-2.5 text-right">{cell(federal, RESULT_ROW)}</td>
+            <td className="py-2.5 pr-5 pl-2 text-right">{cell(ca, RESULT_ROW)}</td>
+          </tr>
         </tbody>
       </table>
       {anyRough && (
@@ -173,9 +187,10 @@ function ItemRow({ item }: { item: DeductionItem }) {
  */
 export function ItemsCard({ items, done }: { items: DeductionItem[]; done: boolean }) {
   const [picked, setPicked] = useState<boolean | null>(null);
-  const showAll = picked ?? !done;
   const kept = items.filter((item) => SHORT_LIST_STATUSES.has(item.status));
-  const canShorten = kept.length < items.length;
+  /* A short list with nothing in it shows nothing: then the list stays long. */
+  const canShorten = kept.length > 0 && kept.length < items.length;
+  const showAll = !canShorten || (picked ?? !done);
   const shown = showAll ? items : kept;
   return (
     <section className="card">

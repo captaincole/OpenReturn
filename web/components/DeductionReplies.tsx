@@ -7,18 +7,28 @@
  */
 
 import { useAppShell } from "@/components/AppShell";
+import { returnHref } from "@/lib/chatSession";
 import { cn } from "@/lib/cn";
 import { lifeAnswersMessage, type NextStep } from "@/lib/deductions";
+import Link from "next/link";
 import { useState } from "react";
 
 type LifeStep = Extract<NextStep, { step: "ask_life_questions" }>;
 type OpenDoorStep = Extract<NextStep, { step: "ask_anything_else" }>;
 
 export function DeductionReplies() {
-  const { state, messages, cadeBusy, sendChat } = useAppShell();
+  const { state, messages, cadeBusy, sendChat, activeReturn } = useAppShell();
   const next = state?.deductions.next;
-  if (!next || cadeBusy || next.step === "closed") return null;
+  if (!next || cadeBusy) return null;
   const send = (text: string) => void sendChat({ text });
+  const toReturn = (label: string) => (
+    <ReplyRow>
+      <ReplyLink label={label} href={returnHref(activeReturn.id)} />
+    </ReplyRow>
+  );
+
+  /* The conversation is done: the next action is on the return. */
+  if (next.step === "closed") return toReturn("Back to the return");
 
   /* Cade has asked nothing yet: the one answer is to start. */
   if (messages.length === 0) {
@@ -32,6 +42,8 @@ export function DeductionReplies() {
     return <LifeQuestionReplies questions={next.questions} send={send} />;
   }
   if (next.step === "ask_anything_else") return <OpenDoorReplies step={next} send={send} />;
+  /* The comparison waits for answers that the return's conversation asks for. */
+  if (next.step === "wait_for_return") return toReturn("Go to the return");
   return null;
 }
 
@@ -117,6 +129,21 @@ function ReplyRow({ children }: { children: React.ReactNode }) {
   return <div className="flex shrink-0 flex-wrap gap-1.5 px-3.5 pb-2">{children}</div>;
 }
 
+type ReplyTone = "plain" | "strong" | "picked";
+
+const REPLY_TONES: Record<ReplyTone, string> = {
+  plain:
+    "border-border-subtle bg-bg-panel text-ink-secondary hover:border-border-strong hover:text-ink-primary",
+  strong: "border-accent/40 bg-accent/15 text-accent hover:bg-accent/25",
+  picked: "border-accent bg-accent text-white",
+};
+
+const replyClasses = (tone: ReplyTone): string =>
+  cn(
+    "shrink-0 rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+    REPLY_TONES[tone],
+  );
+
 function ReplyButton({
   label,
   onClick,
@@ -134,16 +161,18 @@ function ReplyButton({
       type="button"
       onClick={onClick}
       aria-pressed={picked}
-      className={cn(
-        "shrink-0 rounded-full border px-3 py-1 text-xs font-medium transition-colors",
-        picked
-          ? "border-accent bg-accent text-white"
-          : strong
-            ? "border-accent/40 bg-accent/15 text-accent hover:bg-accent/25"
-            : "border-border-subtle bg-bg-panel text-ink-secondary hover:border-border-strong hover:text-ink-primary",
-      )}
+      className={replyClasses(picked ? "picked" : strong ? "strong" : "plain")}
     >
       {label}
     </button>
+  );
+}
+
+/* A reply that goes to another page and sends nothing to Cade. */
+function ReplyLink({ label, href }: { label: string; href: string }) {
+  return (
+    <Link href={href} className={replyClasses("strong")}>
+      {label}
+    </Link>
   );
 }
