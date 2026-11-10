@@ -4,14 +4,12 @@ import { cade } from "../../agents/cade";
 import { cadeWorkingMemorySchema, type PlanItem } from "../../agents/cade.workingMemory";
 import { resolveOwnerFilingForYear } from "../../db/filings";
 import { listDocuments, type UserDocumentRow } from "../../db/userDocuments";
-import { buildCaseState } from "../../tools/caseState";
+import { deductionsView } from "../../deductions/state";
+import { loadAndEvaluateScenario } from "../../loadScenario";
+import { mainThreadId } from "../../threads";
+import { buildCaseStateForScenario } from "../../tools/caseState";
 import { DEMO_TAX_YEAR } from "../demoSession";
 import { REQUEST_CONTEXT_KEYS } from "../requestContext";
-
-// Must match web/lib/returns.ts:threadIdFor — no shared package yet.
-function threadIdFor(userId: string, returnId: string | number): string {
-  return `${userId}::${returnId}`;
-}
 
 async function readCadePlan(threadId: string): Promise<PlanItem[]> {
   /* A missing or malformed plan must never take down the whole /app/state response. */
@@ -39,11 +37,13 @@ export const appStateRoute = registerApiRoute("/app/state", {
 
     const filing = await resolveOwnerFilingForYear(userId, DEMO_TAX_YEAR);
     const scope = { userId, filingId: filing.id };
-    const [caseState, plan, drafts] = await Promise.all([
-      buildCaseState(userId, DEMO_TAX_YEAR, authEmail),
-      readCadePlan(threadIdFor(userId, DEMO_TAX_YEAR)),
+    /* One evaluation serves the return's state and the deductions conversation's. */
+    const [scenario, plan, drafts] = await Promise.all([
+      loadAndEvaluateScenario(scope, { id: filing.id, taxYear: filing.taxYear }, authEmail),
+      readCadePlan(mainThreadId(userId, DEMO_TAX_YEAR)),
       listDocuments(scope, { category: "drafts", taxYear: DEMO_TAX_YEAR }),
     ]);
+    const caseState = buildCaseStateForScenario(scenario);
 
     /* listDocuments returns newest first, so the first draft seen per formId is the latest. */
     const latestByForm = new Map<string, UserDocumentRow>();
@@ -66,6 +66,7 @@ export const appStateRoute = registerApiRoute("/app/state", {
       pendingFacts: caseState.pendingFacts,
       forms: caseState.summaries,
       money: caseState.money,
+      deductions: deductionsView(scenario),
       documents: {
         form1040Url: urlFor("1040"),
         form540Url: urlFor("540"),
