@@ -12,7 +12,9 @@ import {
   LIFE_QUESTIONS,
   type LifeQuestionId,
   type LifeQuestionStatus,
+  planLifeAnswers,
   type PlannedFact,
+  type StatedAmounts,
 } from "./lifeQuestions";
 
 export const OUTCOMES = ["counts_here", "counts_elsewhere", "does_not_count", "not_sure"] as const;
@@ -103,12 +105,28 @@ export interface PlannedExpense {
 
 export interface DoorPlan {
   expenses: PlannedExpense[];
+  /** The facts to write after the expenses: each yes that opens an item, and the fact that closes the door. */
+  facts: PlannedFact[];
   /** An expense the call must send again: nothing is recorded for it. */
   problems: { name: string; problem: string }[];
 }
 
-function problemWith(expense: NamedExpense): string | undefined {
+/* One answer at the door, and what was known before it. */
+export interface DoorAnswer {
+  year: number;
+  /** How and when the taxpayer said it. */
+  sourceNote: string;
+  /** The taxpayer said that nothing else is left. */
+  nothingElse: boolean;
+  statuses: ReadonlyMap<LifeQuestionId, LifeQuestionStatus>;
+  stated: StatedAmounts;
+}
+
+function problemWith(expense: NamedExpense, slugsBefore: ReadonlySet<string>): string | undefined {
   if (expense.slug === "") return "The name needs a letter or a digit.";
+  if (slugsBefore.has(expense.slug)) {
+    return "An expense earlier in this call has the same name: the two would share one record. Give each expense its own name.";
+  }
   if (expense.outcome === "counts_here" && !expense.item) {
     return "counts_here needs `item`. An expense that no item covers is not_sure.";
   }
@@ -147,43 +165,73 @@ function questionToOpen(
   return status === "no" || status === "unasked" ? question.id : undefined;
 }
 
+/* One expense: the fact that holds the taxpayer's words, and the decision that cites it. */
+function planExpense(expense: NamedExpense, answer: DoorAnswer): PlannedExpense {
+  const factKey = namedFactKey(expense.slug);
+  const { outcome } = expense;
+  const { sourceNote } = answer;
+  return {
+    name: expense.name,
+    outcome,
+    fact: { category: "other", key: factKey, value: expense.taxpayerWords, sourceNote },
+    decision: {
+      decisionKey: namedDecisionKey(expense.slug),
+      decision: {
+        outcome,
+        ...(outcome === "counts_here" && { item: expense.item }),
+        ...(outcome === "counts_elsewhere" && { where: expense.where }),
+      },
+      rationale: expense.rationale,
+      supportingFactKeys: [factKey],
+      confidence: expense.confidence,
+    },
+    opens: questionToOpen(expense, answer.statuses),
+    question: questionFor(expense, sourceNote),
+  };
+}
+
+/* One yes per life question the expenses open: the flow then asks the item's exact amount. */
+function yesFacts(expenses: readonly PlannedExpense[], answer: DoorAnswer): PlannedFact[] {
+  const firstToOpen = new Map<LifeQuestionId, string>();
+  for (const { opens, name } of expenses) {
+    if (opens && !firstToOpen.has(opens)) firstToOpen.set(opens, name);
+  }
+  const answers = [...firstToOpen].map(([id, name]) => ({
+    id,
+    answer: true,
+    sourceNote: `The open door: the taxpayer named "${name}". ${answer.sourceNote}`,
+  }));
+  return planLifeAnswers(answer.year, answers, answer.stated).facts;
+}
+
+/* The door closes when the taxpayer said so, the call has no problem, and it is not closed already. */
+function closingFacts(plan: DoorPlan, answer: DoorAnswer): PlannedFact[] {
+  const closes =
+    answer.nothingElse &&
+    plan.problems.length === 0 &&
+    answer.stated.facts.get(NOTHING_ELSE_KEY) !== true;
+  if (!closes) return [];
+  const sourceNote = `The open door: the taxpayer said that nothing else is left. ${answer.sourceNote}`;
+  return [{ category: "other", key: NOTHING_ELSE_KEY, value: true, sourceNote }];
+}
+
 /*
- * What a batch of named expenses writes: for each, the fact that holds the
- * taxpayer's words and the decision that cites it. `sourceNote` says how and
- * when the taxpayer said them.
+ * What one answer at the door writes: for each expense, the fact that holds
+ * the taxpayer's words and the decision that cites it; then the yes for each
+ * item an expense opens; then the fact that closes the door.
  */
-export function planNamedExpenses(
-  expenses: readonly NamedExpense[],
-  sourceNote: string,
-  statuses: ReadonlyMap<LifeQuestionId, LifeQuestionStatus>,
-): DoorPlan {
-  const plan: DoorPlan = { expenses: [], problems: [] };
+export function planNamedExpenses(expenses: readonly NamedExpense[], answer: DoorAnswer): DoorPlan {
+  const plan: DoorPlan = { expenses: [], facts: [], problems: [] };
+  const slugs = new Set<string>();
   for (const expense of expenses) {
-    const problem = problemWith(expense);
+    const problem = problemWith(expense, slugs);
     if (problem) {
       plan.problems.push({ name: expense.name, problem });
       continue;
     }
-    const factKey = namedFactKey(expense.slug);
-    const { outcome } = expense;
-    plan.expenses.push({
-      name: expense.name,
-      outcome,
-      fact: { category: "other", key: factKey, value: expense.taxpayerWords, sourceNote },
-      decision: {
-        decisionKey: namedDecisionKey(expense.slug),
-        decision: {
-          outcome,
-          ...(outcome === "counts_here" && { item: expense.item }),
-          ...(outcome === "counts_elsewhere" && { where: expense.where }),
-        },
-        rationale: expense.rationale,
-        supportingFactKeys: [factKey],
-        confidence: expense.confidence,
-      },
-      opens: questionToOpen(expense, statuses),
-      question: questionFor(expense, sourceNote),
-    });
+    slugs.add(expense.slug);
+    plan.expenses.push(planExpense(expense, answer));
   }
+  plan.facts = [...yesFacts(plan.expenses, answer), ...closingFacts(plan, answer)];
   return plan;
 }

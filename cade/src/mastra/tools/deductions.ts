@@ -19,10 +19,8 @@ import {
 } from "../deductions/lifeQuestions";
 import {
   DOOR_ITEMS,
-  NOTHING_ELSE_KEY,
   OUTCOMES,
   planNamedExpenses,
-  type DoorPlan,
   type PlannedExpense,
 } from "../deductions/openDoor";
 import { loadAndEvaluateScenario } from "../loadScenario";
@@ -192,31 +190,11 @@ async function recordExpense(user: UserContext, expense: PlannedExpense): Promis
   });
 }
 
-/* An expense that counts under an item no yes has opened: record the yes, so the flow asks the amount. */
-async function openItems(
-  user: UserContext,
-  plan: DoorPlan,
-  sourceNote: string,
-  stated: StatedAmounts,
-): Promise<string[]> {
-  const opened = new Map(
-    plan.expenses.flatMap((expense) => (expense.opens ? [[expense.opens, expense.name]] : [])),
-  );
-  const answers = [...opened].map(([id, name]) => ({
-    id,
-    answer: true,
-    sourceNote: `The open door: the taxpayer named "${name}". ${sourceNote}`,
-  }));
-  const { facts } = planLifeAnswers(user.taxYear, answers, stated);
-  if (facts.length > 0) await writeFacts(user, facts);
-  return facts.map((fact) => fact.key);
-}
-
 export const recordNamedExpenses = createTool({
   id: "record-named-expenses",
   requestContextSchema: cadeRequestContextSchema,
   description:
-    "Record what the taxpayer answered at the open door ('anything else you paid that might count?'). For each expense they name, record their words and your classification: one of four outcomes. The classification is a decision, so it gets the background grounding review. counts_here opens the item, and `next` asks its amount; when the item already has an amount, ask whether that amount includes this expense, and record a new total with record-tax-facts. counts_elsewhere leaves a note for the return's conversation. not_sure leaves the taxpayer's words for the CPA: use it for an expense that might count and that no item covers. This tool never records an amount. Set `nothingElse` when the taxpayer says that nothing else is left: it closes the door. Returns `problems` for each expense to send again; nothing was recorded for those.",
+    "Record what the taxpayer answered at the open door ('anything else you paid that might count?'). For each expense they name, record their words and your classification: one of four outcomes. The classification is a decision, so it gets the background grounding review. counts_here opens the item: after the door closes, `next` asks its amount. When the item already has an amount, ask whether that amount includes this expense, and record a new total with record-tax-facts. counts_elsewhere leaves a note for the return's conversation. not_sure leaves the taxpayer's words for the CPA: use it for an expense that might count and that no item covers. This tool never records an amount. Set `nothingElse` when the taxpayer says that nothing else is left: it closes the door. Returns `problems` for each expense to send again; nothing was recorded for those.",
   inputSchema: z.object({
     // No .max(): Anthropic rejects maxItems on a tool schema.
     expenses: z.array(namedExpense).describe("One entry per expense named; empty when none"),
@@ -236,23 +214,20 @@ export const recordNamedExpenses = createTool({
       deductionsFlow(before).lifeQuestions.map((question) => [question.id, question.status]),
     );
     const named = input.expenses.map((expense) => ({ ...expense, slug: slugify(expense.name) }));
-    const plan = planNamedExpenses(named, input.sourceNote, statuses);
+    const plan = planNamedExpenses(named, {
+      year: user.taxYear,
+      sourceNote: input.sourceNote,
+      nothingElse: input.nothingElse,
+      statuses,
+      stated: statedAmounts(before),
+    });
     for (const expense of plan.expenses) await recordExpense(user, expense);
-    const recorded = plan.expenses.map((expense) => expense.fact.key);
-    recorded.push(...(await openItems(user, plan, input.sourceNote, statedAmounts(before))));
-    const closes =
-      input.nothingElse &&
-      plan.problems.length === 0 &&
-      valuesByKey(before.facts).get(NOTHING_ELSE_KEY) !== true;
-    if (closes) {
-      const sourceNote = `The open door: the taxpayer said that nothing else is left. ${input.sourceNote}`;
-      await writeFacts(user, [
-        { category: "other", key: NOTHING_ELSE_KEY, value: true, sourceNote },
-      ]);
-      recorded.push(NOTHING_ELSE_KEY);
-    }
+    if (plan.facts.length > 0) await writeFacts(user, plan.facts);
     return {
-      recorded,
+      recorded: [
+        ...plan.expenses.map((expense) => expense.fact.key),
+        ...plan.facts.map((fact) => fact.key),
+      ],
       decisions: plan.expenses.map((expense) => expense.decision.decisionKey),
       problems: plan.problems,
       next: deductionsFlow(await loadScenario(user)).next,
