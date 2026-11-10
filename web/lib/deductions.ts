@@ -122,7 +122,16 @@ const LIFE_ANSWER_LABELS: Record<LifeQuestion["status"], string> = {
 export const lifeAnswerLabel = (status: LifeQuestion["status"]): string =>
   LIFE_ANSWER_LABELS[status];
 
-export const dollars = (amount: number): string => `$${amount.toLocaleString("en-US")}`;
+/* The engine's amounts keep their cents. An amount with cents shows two digits ($6,184.30); a whole amount shows none. */
+export const dollars = (amount: number): string => {
+  const cents = Math.round(amount * 100);
+  const digits = cents % 100 === 0 ? 0 : 2;
+  const text = (cents / 100).toLocaleString("en-US", {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  });
+  return `$${text}`;
+};
 
 /* A difference: the sign shows which side is larger. */
 export const signedDollars = (amount: number): string =>

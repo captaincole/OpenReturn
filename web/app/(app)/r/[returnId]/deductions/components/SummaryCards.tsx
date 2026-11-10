@@ -28,19 +28,17 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
   );
 }
 
-/* A list the reader can close. The summary is long, and the comparison above the lists is the answer. */
+/* A list the reader opens. The summary is long, and the comparison above the lists is the answer. */
 function ListCard({
   title,
   count,
-  startOpen = false,
   children,
 }: {
   title: string;
   count?: number;
-  startOpen?: boolean;
   children: React.ReactNode;
 }) {
-  const [open, setOpen] = useState(startOpen);
+  const [open, setOpen] = useState(false);
   return (
     <section className="card">
       <button
@@ -143,29 +141,66 @@ const STATUS_TONES: Record<ItemStatus, string> = {
   for_cpa: "text-warn",
 };
 
-export function ItemsCard({ items }: { items: DeductionItem[] }) {
+/* The items the short list keeps: each has an amount in the comparison, or work left for Cade or the CPA. */
+const SHORT_LIST_STATUSES: ReadonlySet<ItemStatus> = new Set([
+  "open",
+  "assumed",
+  "exact",
+  "for_cpa",
+]);
+
+function ItemRow({ item }: { item: DeductionItem }) {
   return (
-    <ListCard title="Deductions" count={items.length} startOpen>
-      <ul className="pb-2">
-        {items.map((item) => (
-          <li
-            key={item.id}
-            className="flex items-baseline gap-3 border-t border-border-subtle px-5 py-2.5 text-sm"
-          >
-            {/* On a phone the status goes under the title: three columns leave the title no room. */}
-            <div className="min-w-0 flex-1 sm:flex sm:items-baseline sm:gap-3">
-              <span className="block min-w-0 flex-1 text-ink-primary">{item.title}</span>
-              <span className={cn("block shrink-0 text-[12px]", STATUS_TONES[item.status])}>
-                {statusLabel(item.status)}
-              </span>
-            </div>
-            <span className="w-24 shrink-0 text-right text-ink-primary tabular-nums">
-              {item.amount === null ? "—" : dollars(item.amount)}
-            </span>
-          </li>
+    <li className="flex items-baseline gap-3 border-t border-border-subtle px-5 py-2.5 text-sm">
+      {/* On a phone the status goes under the title: three columns leave the title no room. */}
+      <div className="min-w-0 flex-1 sm:flex sm:items-baseline sm:gap-3">
+        <span className="block min-w-0 flex-1 text-ink-primary">{item.title}</span>
+        <span className={cn("block shrink-0 text-[12px]", STATUS_TONES[item.status])}>
+          {statusLabel(item.status)}
+        </span>
+      </div>
+      <span className="w-24 shrink-0 text-right text-ink-primary tabular-nums">
+        {item.amount === null ? "—" : dollars(item.amount)}
+      </span>
+    </li>
+  );
+}
+
+/*
+ * The list gets shorter, but it does not close: the short list keeps the items
+ * that count. It is long while Cade asks, and short when the conversation is
+ * done, until the reader picks.
+ */
+export function ItemsCard({ items, done }: { items: DeductionItem[]; done: boolean }) {
+  const [picked, setPicked] = useState<boolean | null>(null);
+  const showAll = picked ?? !done;
+  const kept = items.filter((item) => SHORT_LIST_STATUSES.has(item.status));
+  const canShorten = kept.length < items.length;
+  const shown = showAll ? items : kept;
+  return (
+    <section className="card">
+      <div className="card-header">
+        <span>Deductions</span>
+        <span className="tracking-normal normal-case tabular-nums">
+          {shown.length < items.length ? `${shown.length} of ${items.length}` : items.length}
+        </span>
+      </div>
+      <ul className={cn(!canShorten && "pb-2")}>
+        {shown.map((item) => (
+          <ItemRow key={item.id} item={item} />
         ))}
       </ul>
-    </ListCard>
+      {canShorten && (
+        <button
+          type="button"
+          onClick={() => setPicked(!showAll)}
+          aria-expanded={showAll}
+          className="w-full border-t border-border-subtle px-5 py-3 text-left text-[12px] text-ink-secondary transition-colors hover:text-ink-primary"
+        >
+          {showAll ? "Show only the deductions that count" : `Show all ${items.length}`}
+        </button>
+      )}
+    </section>
   );
 }
 

@@ -37,7 +37,7 @@ export default function DeductionsWorkspace() {
             </section>
           )}
           <ComparisonCard view={view} />
-          <ItemsCard items={view.items} />
+          <ItemsCard items={view.items} done={view.next.step === "closed"} />
           <NamedExpensesCard expenses={view.namedExpenses} />
           <RecordsCard records={view.records} />
           <LifeAnswersCard questions={view.lifeQuestions} />
