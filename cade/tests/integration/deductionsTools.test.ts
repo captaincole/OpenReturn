@@ -84,7 +84,7 @@ describe("the deductions tools, over one filing", () => {
     expect(state.taxYear).toBe(YEAR);
     expect(state.next.step).toBe("ask_life_questions");
     expect((state.lifeQuestions as { status: string }[]).map((each) => each.status)).toEqual(
-      Array.from({ length: 7 }, () => "unasked"),
+      Array.from({ length: 9 }, () => "unasked"),
     );
     expect(state.recordedDecisions).toEqual({ itemizeOrStandard: null, scheduleAFiles: null });
   });
@@ -99,7 +99,14 @@ describe("the deductions tools, over one filing", () => {
   it("answer-life-questions writes each no as facts of 0, and refuses a no against a stated amount", async () => {
     await seedFacts(HOME_AMOUNTS);
     const result = await call(tools.answerLifeQuestions, {
-      answers: ["owns_home", "ca_vehicle", "gave_money", "gave_things", "medical"].map(no),
+      answers: [
+        "owns_home",
+        "ca_vehicle",
+        "gave_money",
+        "gave_things",
+        "gift_carryover",
+        "medical",
+      ].map(no),
     });
     expect(result.conflicts).toEqual([
       { id: "owns_home", key: "mortgage.interest_form_1098", stated: 7000 },
@@ -112,6 +119,8 @@ describe("the deductions tools, over one filing", () => {
       "charitable.cash",
       "deductions.life.gave_things",
       "charitable.noncash",
+      "deductions.life.gift_carryover",
+      "charitable.carryover",
       "deductions.life.medical",
       "medical.expenses_total",
     ]);
@@ -129,16 +138,16 @@ describe("the deductions tools, over one filing", () => {
       value: 0,
       sourceNote: '"Did you give money to a charity in 2025?" No. No, verbal, 2026-11-09',
     });
-    /* Two questions are left; the Form 1098 facts settled the home. */
+    /* Three questions are left; the Form 1098 facts settled the home. */
     expect(result.next).toMatchObject({
       step: "ask_life_questions",
-      questions: [{ id: "itemized_last_year" }, { id: "margin_loan" }],
+      questions: [{ id: "itemized_last_year" }, { id: "margin_loan" }, { id: "investment_fees" }],
     });
   });
 
   it("close-deductions records both decisions when only California itemizes", async () => {
     const answered = await call(tools.answerLifeQuestions, {
-      answers: ["itemized_last_year", "margin_loan"].map(no),
+      answers: ["itemized_last_year", "margin_loan", "investment_fees"].map(no),
     });
     expect(answered.next.step).toBe("close");
 

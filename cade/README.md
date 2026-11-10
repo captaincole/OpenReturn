@@ -16,6 +16,7 @@ Cade (`@openreturn/cade`) is OpenReturn's conversational agent. It interviews yo
 - **Records tax facts**, each with a citation: a document, a statement line, or "you told me, on this date". An unknown becomes an open question, never a guess. A rough amount ("about $12,000") is an assumption (`record-assumptions`): it serves comparisons, and Cade follows up until a fact replaces it.
 - **Makes decisions** where the facts leave a judgment call, such as filing status or California residency. Each decision has a rationale, its supporting facts, a confidence and what could make it wrong.
 - **Has each decision grounded.** `record-ai-decision` returns at once, and the review-decision workflow sends the decision to Canon's `ground` workflow over MCP. The verdict and citations come back to `app.db`.
+- **Settles deductions in a second conversation.** Each filing has a deductions thread, where the `cadeDeductions` agent finds out whether you itemize or take the standard deduction on each return. The engine derives each step; the web app does not open this thread yet.
 - **Generates the forms.** `generate-tax-documents` runs the form engine and writes the filled PDFs and a JSON of every line. It refuses while any input is pending, an assumption included.
 - **Answers tax-code questions** through Canon. The `askTurn` workflow keeps your threads in `app.db` and asks Canon's `ask` workflow for each answer.
 
@@ -56,12 +57,14 @@ Cade needs Canon (`npm run dev:canon`) to ground decisions and answer questions.
 ```
 cade/
 ├── src/mastra/
-│   ├── agents/       Cade: instructions, working memory, PDF-to-image for models without PDF input
-│   ├── tools/        ingest tools, record-tax-facts, record-assumptions, record-ai-decision, case state, generate-tax-documents
+│   ├── agents/       Cade: instructions, working memory, PDF-to-image for models without PDF input; cadeDeductions for the deductions thread
+│   ├── deductions/   the deductions conversation: its steps (flow.ts), life questions and closing
+│   ├── tools/        ingest tools, record-tax-facts, record-assumptions, record-ai-decision, case state, deductions, generate-tax-documents
 │   ├── workflows/    reviewDecision (grounding through Canon), askTurn (Ask The Tax Code threads)
 │   ├── canon/        client.ts: the MCP client, Cade's only path to Canon
 │   ├── db/           app.db: facts, assumptions, decisions, filings, Ask threads, review runs; the document store
 │   ├── server/       /app routes, the owner middleware, storage, the console logger
+│   ├── threads.ts    the two thread ids of a filing (the return, its deductions)
 │   └── loadScenario.ts   the one place app.db meets the form engine
 ├── scripts/          doctor, smokeReview, inspectLastReview, syncSources
 ├── evals/ingest/     the document-ingest eval (report in docs/evals/ingest.md)

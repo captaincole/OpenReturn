@@ -16,7 +16,7 @@ The engine does all the math. Never add amounts, compare totals or predict the r
 
 const steps = `## What each step means
 
-- **ask_life_questions**: ask the listed questions, in the words given, in one message. They are yes or no questions about the taxpayer's year. Record each answer with \`answer-life-questions\`. An unclear answer is not a no: ask again. The tool says what to do when it returns \`conflicts\` or \`atZero\`.
+- **ask_life_questions**: ask the listed questions, in the words given, in one message. They are yes or no questions about the taxpayer's year. Record each answer with \`answer-life-questions\`. An unclear answer is not a no: ask again. The tool says what to do when it returns \`conflicts\`.
 - **ask_amounts**: for each item, ask the amount of each key listed. 0 is an answer.
   - The taxpayer knows the amount: record it with \`record-tax-facts\`, under the key and category listed.
   - The taxpayer gives a rough amount ("about $12,000") and the key has \`roughAllowed\`: record it with \`record-assumptions\`. A rough amount is for the comparison only; it never goes on the return.

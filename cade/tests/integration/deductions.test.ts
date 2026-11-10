@@ -13,6 +13,7 @@ import {
   HOMEOWNER,
   NOTHING_BUT_A_HOME,
   RENTER,
+  type FactRow,
 } from "./deductionsFixtures";
 
 const statuses = (scenario: EvaluatedScenario) =>
@@ -41,8 +42,10 @@ describe("the next step of the deductions conversation", () => {
       "ca_vehicle",
       "gave_money",
       "gave_things",
+      "gift_carryover",
       "medical",
       "margin_loan",
+      "investment_fees",
     ]);
   });
 
@@ -90,6 +93,80 @@ describe("the next step of the deductions conversation", () => {
               roughAllowed: true,
             },
           ],
+        },
+      ],
+    });
+  });
+
+  it("asks the amounts of a no that became a yes, and does not close on the old facts of 0", () => {
+    const older = (row: FactRow): FactRow => ({ ...row, createdAt: "2026-11-01T10:00:00.000Z" });
+    const yes = {
+      ...fact("deductions.life.owns_home", true),
+      createdAt: "2026-11-02T10:00:00.000Z",
+    };
+    const afterYes = alex([yes, ...RENTER.map(older)]);
+    expect(deductionsFlow(afterYes).next).toEqual({
+      step: "ask_amounts",
+      items: [
+        {
+          item: "real_estate_tax",
+          title: "Real estate tax paid on your home or land",
+          keys: [
+            {
+              key: "state_local_tax.real_estate",
+              category: "state_local_tax",
+              roughAllowed: false,
+            },
+          ],
+        },
+        {
+          item: "mortgage_interest",
+          title: "Mortgage interest on your home (Form 1098)",
+          keys: [{ key: "mortgage.interest_form_1098", category: "mortgage", roughAllowed: false }],
+        },
+      ],
+    });
+
+    /* A 0 the taxpayer states after the yes is an answer: a home with no mortgage. */
+    const newer = (row: FactRow): FactRow => ({ ...row, createdAt: "2026-11-03T10:00:00.000Z" });
+    const answered = alex([
+      newer(fact("mortgage.interest_form_1098", 0, "mortgage")),
+      newer(fact("state_local_tax.real_estate", 3000, "state_local_tax")),
+      yes,
+      ...RENTER.map(older),
+    ]);
+    expect(deductionsFlow(answered).next.step).toBe("close");
+  });
+
+  it("does not close while a catalog item was never asked: the two with no document", () => {
+    const withoutTwo = RENTER.filter(
+      (each) =>
+        !each.key.endsWith("gift_carryover") &&
+        !each.key.endsWith("investment_fees") &&
+        each.key !== "charitable.carryover",
+    );
+    const { next } = deductionsFlow(alex(withoutTwo));
+    expect(next.step === "ask_life_questions" && next.questions.map(({ id }) => id)).toEqual([
+      "gift_carryover",
+      "investment_fees",
+    ]);
+
+    /* A yes asks the amount; the fees are recorded under "other". */
+    const yeses = ["gift_carryover", "investment_fees"].map((id) =>
+      fact(`deductions.life.${id}`, true),
+    );
+    expect(deductionsFlow(alex([...yeses, ...withoutTwo])).next).toEqual({
+      step: "ask_amounts",
+      items: [
+        {
+          item: "gift_carryover",
+          title: "Gifts carried over from last year's return",
+          keys: [{ key: "charitable.carryover", category: "charitable", roughAllowed: true }],
+        },
+        {
+          item: "ca_investment_fees",
+          title: "Investment advisory and management fees from taxable accounts",
+          keys: [{ key: "misc_deductions.investment_fees", category: "other", roughAllowed: true }],
         },
       ],
     });
@@ -204,11 +281,12 @@ describe("closing the deductions conversation", () => {
       "Deductions are done. You itemize on both returns: federal $49,940 against the $31,500 standard deduction, California $41,859 against $11,412. 5 records are on the list for the CPA; nothing is attached to the return.",
     );
     expect(plan.decisions).toEqual([]);
-    /* Her documents settled five questions; two were never answered. */
+    /* Her documents settled six questions; three were never answered. */
     const { next } = deductionsFlow(madison);
     expect(next.step === "ask_life_questions" && next.questions.map(({ id }) => id)).toEqual([
       "itemized_last_year",
       "ca_vehicle",
+      "gift_carryover",
     ]);
   });
 });

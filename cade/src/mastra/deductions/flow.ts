@@ -7,14 +7,16 @@
 
 import {
   ASSUMABLE_KEYS,
+  DEDUCTION_ITEMS,
   type EvaluatedScenario,
   type ItemId,
   type ItemState,
 } from "@openreturn/engine";
-import { MORTGAGE_KEYS } from "@openreturn/engine/facts";
+import { categoryOf } from "./categories";
 import { planClosing } from "./closing";
 import {
   LIFE_QUESTIONS,
+  lifeFactKey,
   lifeQuestionStatus,
   type LifeQuestionId,
   type LifeQuestionStatus,
@@ -26,14 +28,6 @@ export interface AmountAsk {
   /** The facts to ask for. A rough amount (an assumption) is allowed only where marked. */
   keys: { key: string; category: string; roughAllowed: boolean }[];
 }
-
-/* The category each amount is recorded under: the life questions name it for their facts of 0. */
-const CATEGORY_BY_KEY = new Map<string, string>([
-  ...LIFE_QUESTIONS.flatMap((question) =>
-    question.zeroFacts.map(({ key, category }) => [key, category] as const),
-  ),
-  [MORTGAGE_KEYS.outstandingPrincipalForm1098, "mortgage"],
-]);
 
 export type NextStep =
   /** Ask these yes/no questions; they can go in one message. */
@@ -72,19 +66,17 @@ function lifeQuestionStates(scenario: EvaluatedScenario): LifeQuestionState[] {
   }));
 }
 
+const askFor = (key: string, roughAllowed: boolean) => ({
+  key,
+  category: categoryOf(key),
+  roughAllowed: roughAllowed && ASSUMABLE_KEYS.includes(key),
+});
+
 function amountAsk(item: ItemState, assumedKeys: ReadonlySet<string>, exact: boolean): AmountAsk {
   // Asking amounts skips a key a rough amount already fills; getting exact amounts asks only those.
   const unstated = item.missing.filter((key) => !assumedKeys.has(key));
   const keys = exact || unstated.length === 0 ? item.missing : unstated;
-  return {
-    item: item.id,
-    title: item.title,
-    keys: keys.map((key) => ({
-      key,
-      category: CATEGORY_BY_KEY.get(key) ?? "other",
-      roughAllowed: !exact && ASSUMABLE_KEYS.includes(key),
-    })),
-  };
+  return { item: item.id, title: item.title, keys: keys.map((key) => askFor(key, !exact)) };
 }
 
 /* Items whose amounts Cade asks now: open ones, and unasked ones their life question opened. */
@@ -98,6 +90,43 @@ function itemsToAsk(scenario: EvaluatedScenario, questions: LifeQuestionState[])
   return scenario.deductions.items.filter(
     (item) => item.status === "open" || (item.status === "unasked" && opened.has(item.id)),
   );
+}
+
+/*
+ * A yes after an earlier no: the facts of 0 the no recorded are older than the
+ * yes, and no longer say what the taxpayer said.
+ */
+function staleZeroKeys(scenario: EvaluatedScenario): Set<string> {
+  const rows = new Map(scenario.facts.map((row) => [row.key, row]));
+  return new Set(
+    LIFE_QUESTIONS.flatMap((question) => {
+      const answer = rows.get(lifeFactKey(question.id));
+      if (answer?.value !== true) return [];
+      return question.zeroKeys.filter((key) => {
+        const zero = rows.get(key);
+        return zero?.value === 0 && zero.createdAt < answer.createdAt;
+      });
+    }),
+  );
+}
+
+const amountKeysOf = (id: ItemId) => DEDUCTION_ITEMS.find((item) => item.id === id)!.amountKeys;
+
+/*
+ * The amounts Cade asks now, by item. A stale 0 is asked again as an exact
+ * amount only: the fact of 0 is still there, and a rough amount never replaces
+ * a fact.
+ */
+function amountAsks(scenario: EvaluatedScenario, questions: LifeQuestionState[]): AmountAsk[] {
+  const assumedKeys = new Set(scenario.assumptionsInUse.map((assumption) => assumption.key));
+  const toAsk = new Set(itemsToAsk(scenario, questions).map((item) => item.id));
+  const stale = staleZeroKeys(scenario);
+  return scenario.deductions.items.flatMap((item) => {
+    const again = amountKeysOf(item.id).filter((key) => stale.has(key));
+    const missing = toAsk.has(item.id) ? amountAsk(item, assumedKeys, false).keys : [];
+    const keys = [...again.map((key) => askFor(key, false)), ...missing];
+    return keys.length > 0 ? [{ item: item.id, title: item.title, keys }] : [];
+  });
 }
 
 /*
@@ -118,11 +147,8 @@ function nextStep(scenario: EvaluatedScenario, questions: LifeQuestionState[]): 
   if (unasked.length > 0) {
     return { step: "ask_life_questions", questions: unasked.map(({ id, ask }) => ({ id, ask })) };
   }
-  const assumedKeys = new Set(scenario.assumptionsInUse.map((assumption) => assumption.key));
-  const toAsk = itemsToAsk(scenario, questions);
-  if (toAsk.length > 0) {
-    return { step: "ask_amounts", items: toAsk.map((item) => amountAsk(item, assumedKeys, false)) };
-  }
+  const toAsk = amountAsks(scenario, questions);
+  if (toAsk.length > 0) return { step: "ask_amounts", items: toAsk };
   const closing = planClosing(scenario);
   if (!closing) {
     return {
@@ -132,6 +158,7 @@ function nextStep(scenario: EvaluatedScenario, questions: LifeQuestionState[]): 
   }
   const toMakeExact = itemsToMakeExact(scenario);
   if (toMakeExact.length > 0) {
+    const assumedKeys = new Set(scenario.assumptionsInUse.map((assumption) => assumption.key));
     return {
       step: "get_exact_amounts",
       items: toMakeExact.map((item) => amountAsk(item, assumedKeys, true)),
