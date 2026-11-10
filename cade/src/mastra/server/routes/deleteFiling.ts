@@ -3,12 +3,9 @@ import { registerApiRoute } from "@mastra/core/server";
 import { cade } from "../../agents/cade";
 import { deleteFilingBlobs } from "../../db/blobStore";
 import { deleteFilingCascade, getMembership } from "../../db/filings";
+import { deductionsThreadId, mainThreadId } from "../../threads";
 
-/* The SQL cascade does not reach the blob files or the Mastra thread: this route deletes both. */
-
-function threadIdFor(userId: string, year: number | string): string {
-  return `${userId}::${year}`;
-}
+/* The SQL cascade does not reach the blob files or the Mastra threads: this route deletes both. */
 
 export const deleteFilingRoute = registerApiRoute("/app/filings/:filingId", {
   method: "DELETE",
@@ -29,14 +26,14 @@ export const deleteFilingRoute = registerApiRoute("/app/filings/:filingId", {
 
     await deleteFilingCascade(filingId);
 
-    /* The thread id must match web/lib/returns.ts:threadIdFor. */
-    try {
-      const memory = await cade.getMemory();
-      if (memory) {
-        await memory.deleteThread(threadIdFor(callerId, taxYear));
-      }
-    } catch {
+    /* Each thread on its own: a filing made before the deductions thread has only the first. */
+    const memory = await cade.getMemory().catch(() => undefined);
+    for (const threadId of [
+      mainThreadId(callerId, taxYear),
+      deductionsThreadId(callerId, taxYear),
+    ]) {
       // Best-effort.
+      await memory?.deleteThread(threadId).catch(() => undefined);
     }
 
     return ctx.json({ ok: true, filingId, taxYear });

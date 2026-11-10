@@ -3,6 +3,7 @@ import { registerApiRoute } from "@mastra/core/server";
 import { cade } from "../../agents/cade";
 import { ensureAppSchema, getAppDb } from "../../db/appDb";
 import { createOwnerFiling } from "../../db/filings";
+import { deductionsThreadId, mainThreadId } from "../../threads";
 
 /* Idempotent: a caller with an owner membership for the year gets that filing back. */
 
@@ -10,27 +11,24 @@ const DEFAULT_TAX_YEAR = 2025;
 const MIN_TAX_YEAR = 2020;
 const MAX_TAX_YEAR = 2030;
 
-// Must match web/lib/returns.ts:threadIdFor — no shared package yet.
-function threadIdFor(userId: string, year: number | string): string {
-  return `${userId}::${year}`;
-}
-
 /*
  * Without a thread, the chat-history fetch gets Mastra's "Thread not found" 500.
  * Best-effort: the first message creates the thread if this fails.
  */
-async function ensureThread(userId: string, taxYear: number): Promise<void> {
+async function ensureThread(userId: string, threadId: string, title: string): Promise<void> {
   try {
     const memory = await cade.getMemory();
     if (!memory) return;
-    await memory.createThread({
-      threadId: threadIdFor(userId, taxYear),
-      resourceId: userId,
-      title: `${taxYear} return`,
-    });
+    await memory.createThread({ threadId, resourceId: userId, title });
   } catch {
     // Best-effort.
   }
+}
+
+/* A filing has two conversations: the return, and its deductions. */
+async function ensureThreads(userId: string, taxYear: number): Promise<void> {
+  await ensureThread(userId, mainThreadId(userId, taxYear), `${taxYear} return`);
+  await ensureThread(userId, deductionsThreadId(userId, taxYear), `${taxYear} deductions`);
 }
 
 export const createFilingRoute = registerApiRoute("/app/filings", {
@@ -69,7 +67,7 @@ export const createFilingRoute = registerApiRoute("/app/filings", {
     if (existing.rows.length > 0) {
       const row = existing.rows[0];
       /* An earlier thread bootstrap may have failed. */
-      await ensureThread(callerId, Number(row.tax_year));
+      await ensureThreads(callerId, Number(row.tax_year));
       return ctx.json({
         filing: {
           id: String(row.id),
@@ -83,7 +81,7 @@ export const createFilingRoute = registerApiRoute("/app/filings", {
     const filingId = crypto.randomUUID();
     await createOwnerFiling({ filingId, userId: callerId, taxYear });
 
-    await ensureThread(callerId, taxYear);
+    await ensureThreads(callerId, taxYear);
 
     return ctx.json({
       filing: { id: filingId, taxYear, status: "draft" },

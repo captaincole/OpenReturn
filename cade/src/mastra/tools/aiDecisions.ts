@@ -1,9 +1,42 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import { listDecisions, recordDecision } from "../db/aiDecisions";
+import { listDecisions, recordDecision, type AIDecision } from "../db/aiDecisions";
+import type { Scope } from "../db/appDb";
 import { cadeRequestContextSchema } from "../server/requestContext";
 import { enqueueReview, retryAfter } from "../workflows/reviewDecision";
 import { requireUserContext } from "./userContext";
+
+/*
+ * Every recorded decision gets the background grounding review, whichever tool
+ * writes it. Returns at once with verdict 'pending'; the review re-stamps the row.
+ */
+export async function recordAndReview(scope: Scope, decision: AIDecision) {
+  await recordDecision(scope, decision);
+
+  /*
+   * Fire-and-forget: the wrapper stamps its own failures (review_failed / review_unreached).
+   * A review that reached Canon re-queues earlier unreached ones; there is no scheduler.
+   * This catch only logs unexpected throws.
+   */
+  // DECISION_REVIEW=off skips the review (the E2E run does this); the verdict stays "pending".
+  const reviewOn = process.env.DECISION_REVIEW !== "off";
+  if (reviewOn) {
+    void enqueueReview(scope, decision.id)
+      .then((out) => retryAfter(scope, out))
+      .catch((err) => {
+        console.error(`[review-decision] background run failed for decision ${decision.id}:`, err);
+      });
+  }
+
+  return {
+    id: decision.id,
+    recorded: true,
+    verdict: "pending" as const,
+    verdictReason: reviewOn
+      ? "Review running in background."
+      : "Review turned off (DECISION_REVIEW=off).",
+  };
+}
 
 export const recordAIDecision = createTool({
   id: "record-ai-decision",
@@ -57,9 +90,8 @@ export const recordAIDecision = createTool({
   }),
   execute: async (input, context) => {
     const { scope, userId, filingId } = await requireUserContext(context);
-    const id = crypto.randomUUID();
-    await recordDecision(scope, {
-      id,
+    return recordAndReview(scope, {
+      id: crypto.randomUUID(),
       userId,
       filingId,
       taxYear: input.year,
@@ -71,30 +103,6 @@ export const recordAIDecision = createTool({
       dissentingConsiderations: input.dissentingConsiderations,
       sourceNote: input.sourceNote,
     });
-
-    /*
-     * Fire-and-forget: the wrapper stamps its own failures (review_failed / review_unreached).
-     * A review that reached Canon re-queues earlier unreached ones; there is no scheduler.
-     * This catch only logs unexpected throws.
-     */
-    // DECISION_REVIEW=off skips the review (the E2E run does this); the verdict stays "pending".
-    const reviewOn = process.env.DECISION_REVIEW !== "off";
-    if (reviewOn) {
-      void enqueueReview(scope, id)
-        .then((out) => retryAfter(scope, out))
-        .catch((err) => {
-          console.error(`[review-decision] background run failed for decision ${id}:`, err);
-        });
-    }
-
-    return {
-      id,
-      recorded: true,
-      verdict: "pending" as const,
-      verdictReason: reviewOn
-        ? "Review running in background."
-        : "Review turned off (DECISION_REVIEW=off).",
-    };
   },
 });
 

@@ -1,6 +1,7 @@
 import { Mastra } from "@mastra/core";
 import "dotenv/config";
 import { cade } from "./agents/cade";
+import { cadeDeductions } from "./agents/cadeDeductions";
 import { ConsoleLogger } from "./server/consoleLogger";
 import { createObservability } from "./server/observability";
 import { ownerMiddleware } from "./server/ownerMiddleware";
@@ -21,8 +22,12 @@ const storage = await createStorage();
 const logger = new ConsoleLogger({ name: "openreturn", level: "info" });
 
 export const mastra = new Mastra({
-  /* The one agent. Grounding and tax-code answers come from Canon over MCP (canon/client.ts). */
-  agents: { cade },
+  /*
+   * Cade, once per conversation: the return's thread and its deductions thread
+   * (short instructions, few tools). Grounding and tax-code answers come from
+   * Canon over MCP (canon/client.ts).
+   */
+  agents: { cade, cadeDeductions },
   workflows: { reviewDecision: reviewDecisionWorkflow, askTurn: askTurnWorkflow },
   storage,
   logger,
