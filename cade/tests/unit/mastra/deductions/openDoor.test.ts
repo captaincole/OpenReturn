@@ -9,6 +9,7 @@ import {
   NOTHING_ELSE_KEY,
   openDoorAsk,
   planNamedExpenses,
+  type DoorAnswer,
   type NamedExpense,
 } from "../../../../src/mastra/deductions/openDoor";
 
@@ -32,6 +33,19 @@ const everyStatus = (status: LifeQuestionStatus, changed: Partial<Record<string,
       (changed[question.id] ?? status) as LifeQuestionStatus,
     ]),
   ) as ReadonlyMap<LifeQuestionId, LifeQuestionStatus>;
+
+/* One answer at the door: nothing stated before it, and the door stays open. */
+const answer = (
+  statuses: ReadonlyMap<LifeQuestionId, LifeQuestionStatus>,
+  more: Partial<DoorAnswer> = {},
+): DoorAnswer => ({
+  year: YEAR,
+  sourceNote: NOTE,
+  nothingElse: false,
+  statuses,
+  stated: { facts: new Map(), assumptions: new Map() },
+  ...more,
+});
 
 describe("the open door's question", () => {
   it("says what Cade does with an answer on the first ask only", () => {
@@ -60,8 +74,7 @@ describe("planning the named expenses", () => {
   it("plans one fact and one decision per expense, and the decision cites the fact", () => {
     const { expenses, problems } = planNamedExpenses(
       [expense("Commuting", "commuting", { outcome: "does_not_count" })],
-      NOTE,
-      everyStatus("no"),
+      answer(everyStatus("no")),
     );
     expect(problems).toEqual([]);
     expect(expenses).toEqual([
@@ -98,8 +111,7 @@ describe("planning the named expenses", () => {
         }),
         expense("Home office", "home-office", { outcome: "not_sure", where: "nowhere" }),
       ],
-      NOTE,
-      everyStatus("no"),
+      answer(everyStatus("no")),
     );
     const [loan, office] = expenses;
     expect(loan.decision.decision).toEqual({ outcome: "counts_elsewhere", where: "Schedule 1" });
@@ -116,12 +128,39 @@ describe("planning the named expenses", () => {
       item: "gifts_cash",
     });
     const opens = (statuses: ReadonlyMap<LifeQuestionId, LifeQuestionStatus>) =>
-      planNamedExpenses([gift], NOTE, statuses).expenses[0].opens;
+      planNamedExpenses([gift], answer(statuses)).expenses[0].opens;
     expect(opens(everyStatus("no"))).toBe("gave_money");
     expect(opens(everyStatus("unasked"))).toBe("gave_money");
     expect(opens(everyStatus("no", { gave_money: "yes" }))).toBeUndefined();
     expect(opens(everyStatus("no", { gave_money: "settled" }))).toBeUndefined();
-    expect(planNamedExpenses([gift], NOTE, everyStatus("no")).expenses[0].question).toBeUndefined();
+    expect(planNamedExpenses([gift], answer(everyStatus("no"))).expenses[0].question).toBe(
+      undefined,
+    );
+  });
+
+  it("plans one yes per life question, when two expenses open the same question", () => {
+    const { facts } = planNamedExpenses(
+      [
+        expense("Church gift", "church-gift", { outcome: "counts_here", item: "gifts_cash" }),
+        expense("School gift", "school-gift", { outcome: "counts_here", item: "gifts_cash" }),
+      ],
+      answer(everyStatus("no")),
+    );
+    expect(facts).toEqual([
+      {
+        category: "other",
+        key: "deductions.life.gave_money",
+        value: true,
+        sourceNote: `The open door: the taxpayer named "Church gift". ${NOTE}`,
+      },
+    ]);
+    /* A question that is already a yes gets no second yes. */
+    const open = everyStatus("no", { gave_money: "yes" });
+    const gift = expense("Church gift", "church-gift", {
+      outcome: "counts_here",
+      item: "gifts_cash",
+    });
+    expect(planNamedExpenses([gift], answer(open)).facts).toEqual([]);
   });
 
   it("returns a problem, and plans nothing, for an expense that lacks what its outcome needs", () => {
@@ -132,10 +171,52 @@ describe("planning the named expenses", () => {
         expense("Tutoring", "tutoring", { outcome: "counts_elsewhere" }),
         expense("Commuting", "commuting", { outcome: "does_not_count" }),
       ],
-      NOTE,
-      everyStatus("no"),
+      answer(everyStatus("no")),
     );
     expect(problems.map((each) => each.name)).toEqual(["???", "Union dues", "Tutoring"]);
     expect(expenses.map((each) => each.name)).toEqual(["Commuting"]);
+  });
+
+  it("returns a problem for a second expense with the same name: the two would share one record", () => {
+    const { expenses, problems } = planNamedExpenses(
+      [
+        expense("Gift", "gift", { outcome: "counts_here", item: "gifts_cash" }),
+        expense("gift", "gift", { outcome: "does_not_count" }),
+      ],
+      answer(everyStatus("no")),
+    );
+    expect(expenses.map((each) => [each.name, each.outcome])).toEqual([["Gift", "counts_here"]]);
+    expect(problems.map((each) => each.name)).toEqual(["gift"]);
+  });
+});
+
+describe("closing the open door", () => {
+  const closingFact = {
+    category: "other",
+    key: NOTHING_ELSE_KEY,
+    value: true,
+    sourceNote: `The open door: the taxpayer said that nothing else is left. ${NOTE}`,
+  };
+  const closing = (more: Partial<DoorAnswer> = {}) =>
+    answer(everyStatus("no"), { nothingElse: true, ...more });
+
+  it("closes when the taxpayer said that nothing else is left, after the yes an expense opens", () => {
+    expect(planNamedExpenses([], closing()).facts).toEqual([closingFact]);
+    expect(planNamedExpenses([], answer(everyStatus("no"))).facts).toEqual([]);
+
+    const gift = expense("Church gift", "church-gift", {
+      outcome: "counts_here",
+      item: "gifts_cash",
+    });
+    expect(planNamedExpenses([gift], closing()).facts.map((fact) => fact.key)).toEqual([
+      "deductions.life.gave_money",
+      NOTHING_ELSE_KEY,
+    ]);
+  });
+
+  it("stays open while the call has a problem, and writes no second closing fact", () => {
+    expect(planNamedExpenses([expense("???", "", {})], closing()).facts).toEqual([]);
+    const closed = { facts: new Map([[NOTHING_ELSE_KEY, true]]), assumptions: new Map() };
+    expect(planNamedExpenses([], closing({ stated: closed })).facts).toEqual([]);
   });
 });
