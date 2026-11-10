@@ -13,16 +13,21 @@ interface ChatPaneProps {
 }
 
 export function ChatPane({ activeReturn }: ChatPaneProps) {
-  const { messages, cadeBusy, mobilePane, conversation } = useAppShell();
+  const { messages, cadeBusy, mobilePane, conversation, state } = useAppShell();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const isPlaceholder = !activeReturn.realDataAvailable;
   const inDeductions = conversation === "deductions";
 
-  /* mobilePane: a hidden element cannot scroll, so scroll again when the Chat tab shows. */
+  /*
+   * mobilePane: a hidden element cannot scroll, so scroll again when the Chat tab shows.
+   * cadeBusy and the step: the answers to tap show when a turn ends and take room from the
+   * messages, so scroll again or they cover the end of Cade's message.
+   */
+  const deductionsStep = state?.deductions.next.step;
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
-  }, [messages, mobilePane, conversation]);
+  }, [messages, mobilePane, conversation, cadeBusy, deductionsStep]);
 
   const renderMessages: ChatMessage[] = isPlaceholder
     ? [placeholderMessageFor(activeReturn)]

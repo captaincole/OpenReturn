@@ -64,9 +64,9 @@ function LifeQuestionReplies({
 
   return (
     <div className="shrink-0 px-3.5 pb-2">
-      <ul className="max-h-[40vh] space-y-1.5 overflow-y-auto">
+      <ul className="max-h-[40vh] divide-y divide-border-subtle overflow-y-auto">
         {questions.map((question) => (
-          <li key={question.id} className="flex items-center gap-2">
+          <li key={question.id} className="flex items-center gap-2 py-2.5">
             <span className="min-w-0 flex-1 text-[12px] leading-snug text-ink-secondary">
               {question.ask}
             </span>
