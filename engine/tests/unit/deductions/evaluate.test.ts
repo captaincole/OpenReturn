@@ -42,6 +42,11 @@ describe("evaluateDeductions item states", () => {
     });
   });
 
+  it("closes the mortgage item for a renter: interest 0 asks no principal", () => {
+    const mortgage = state([fact(MORTGAGE_KEYS.interestForm1098, 0)], "mortgage_interest");
+    expect(mortgage).toMatchObject({ status: "closed", amount: 0, missing: [] });
+  });
+
   it("asks the origination date for a principal between the two limits", () => {
     const mortgage = state(
       [
