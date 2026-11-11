@@ -83,15 +83,19 @@ const asksOf = (info: FilingInfo, formId: string): readonly string[] =>
 
 /*
  * The item's answers on both returns: Form 4952's (the election, other
- * expenses) and FTB 3526's (California's own carryover).
+ * expenses) and, while a California return files, FTB 3526's (California's
+ * own carryover). FTB 3526 can file with no Form 540, so the 540 decides.
  */
 const investmentInterestAsks = (info: FilingInfo): string[] => [
-  ...new Set([...asksOf(info, "form-4952"), ...asksOf(info, "form-3526")]),
+  ...new Set([
+    ...asksOf(info, "form-4952"),
+    ...(files(info, "form-540") ? asksOf(info, "form-3526") : []),
+  ]),
 ];
 
 /*
- * Schedule A line 9: Form 4952 line 8 when the form files and has its
- * answers, the interest paid under its no-file exception, and nothing when no
+ * Schedule A line 9: Form 4952 line 8 when the form files and the item has
+ * its answers, the interest paid under its no-file exception, and nothing when no
  * expense or carryover is stated above 0 (the item then closes instead of
  * staying open).
  */
