@@ -1,3 +1,5 @@
+import { readdirSync } from "node:fs";
+import { resolve } from "node:path";
 import { DATA_ENV } from "./run";
 
 /* Playwright's module loader cannot load node:sqlite, so get the builtin directly. */
@@ -48,4 +50,24 @@ export function verdictCounts(): Record<string, number> {
     "SELECT verdict, count(*) AS n FROM ai_decisions GROUP BY verdict",
   );
   return Object.fromEntries(rows.map((row) => [row.verdict ?? "null", row.n]));
+}
+
+/* A run's stored documents in one category. ULID names sort by time, so oldest first. */
+export function findFiles(category: string, name: RegExp): string[] {
+  const root = DATA_ENV.DOCUMENTS_PATH;
+  const files = readdirSync(root, { recursive: true }) as string[];
+  return files
+    .filter((file) => file.split("/").at(-2) === category && name.test(file.split("/").pop()!))
+    .sort()
+    .map((file) => resolve(root, file));
+}
+
+/* The newest row of each fact key. */
+export function latestFacts(): Map<string, { category: string; value: unknown }> {
+  const rows = query<{ category: string; fact_key: string; fact_value: string | null }>(
+    "SELECT category, fact_key, fact_value FROM tax_facts ORDER BY created_at ASC",
+  );
+  return new Map(
+    rows.map((row) => [row.fact_key, { category: row.category, value: parse(row.fact_value) }]),
+  );
 }

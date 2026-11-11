@@ -5,8 +5,11 @@ Claude Code follows the `e2e` skill (`.claude/skills/e2e/SKILL.md`) to run this 
 Playwright drives the real web app, agent, Canon, and model through Chrome.
 
 ```bash
-npm run e2e        # stop `npm run dev:all` first — the run needs :3000, :4111 and :4112
+npm run e2e          # Alex; stop `npm run dev:all` first — the run needs :3000, :4111 and :4112
+npm run e2e:madison  # Madison and the Deductions tab
 ```
+
+Each command runs one test: a run has one data folder and one owner.
 
 The suite lives in the web app because it drives the web app; Playwright is a web dev dependency (`npm run install:all` installs it). The root `npm run e2e` runs `npm --prefix web run e2e`.
 
@@ -22,8 +25,10 @@ The suite lives in the web app because it drives the web app; Playwright is a we
 - **Grounding reviews:** off (`DECISION_REVIEW=off`). On a local model they share the GPU with Cade and make each turn several times slower. `E2E_DECISION_REVIEW=on npm run e2e` turns them on; that run exercises Cade's MCP call to Canon's `ground` workflow, and a decision that ends `review_unreached` or `review_failed` fails `plumbing`. The judges get one round per decision (`CANON_GROUND_MAX_ITERATIONS=1`; `E2E_GROUND_MAX_ITERATIONS` raises it): the run checks the plumbing, not the verdict.
 - **Data:** each run gets its own folder, `web/e2e/.run/<runId>/`, with `data/` (app.db, mastra.db, canon.db, documents), `canon.log`, `agent.log`, `web.log`, `transcript.md`, and Playwright output (`report/`, trace and video on failure). Your real `.data/` is never touched. Delete `web/e2e/.run/` freely.
 - **The Alex test** (`alex.spec.ts`): create owner → ask the tax code one question with a definite answer (`ask.ts`: the 2025 self-only HSA limit; the answer must cite a reference and state $4,300, and the reference PDF must open) → start filing → scripted intake with the W-2 upload (`alexAnswers.ts`) → wait for generated forms → check the stored W-2, the decisions, and the sidecar against `engine/tests/scenarios/alex/`.
+- **The Madison test** (`madison.spec.ts`): create owner → start filing → one message with her answers, then her seven income documents, one in each message (`madisonAnswers.ts`) → the Deductions tab: tap the answers to the life questions, name student loan interest at the open door, upload the Form 1098 and give the amounts in words → check the stored facts, the outcome of the named expense, the comparison and the closing paragraph against `engine/tests/scenarios/tcb-ca-005/`. It stops at the close: her return needs answers the case does not have, so it generates no forms.
+- **Prompt size:** the Notes give each agent's largest prompt in tokens, from Mastra's traces. Ollama cuts a prompt longer than its context without an error, so compare it with the model's context (`/api/ps` on the Ollama server shows `context_length`).
 - **Result:** `web/e2e/.run/<runId>/summary.md`, one row per stage:
   - `plumbing` — setup, filing, chat, upload, forms page. A failure means the app broke. The run stops there.
   - `model` — W-2 read, decisions, final values. A failure can be a model mistake. Run again before you debug.
-- **When Cade asks something new:** the intake stage fails and the transcript shows the question. Add a keyword rule to `ANSWERS` in `alexAnswers.ts`.
+- **When Cade asks something new:** the intake stage fails and the transcript shows the question. Add a keyword rule to `ANSWERS` in `alexAnswers.ts` (Madison: `AMOUNT_ANSWERS` or `LIFE_ANSWERS` in `madisonAnswers.ts`).
 - **Debug a failure:** from `web/`, `npx playwright show-trace e2e/.run/<runId>/test-results/**/trace.zip`.

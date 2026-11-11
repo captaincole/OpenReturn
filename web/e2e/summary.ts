@@ -65,14 +65,18 @@ function models(): string {
   return `Cade ${at("CADE")}, judges ${at("JUDGE")} (reviews ${env.DECISION_REVIEW ?? "on"})`;
 }
 
-export function writeSummary(opts: { durationMs: number; testError?: string }): void {
+export function writeSummary(opts: {
+  title: string;
+  durationMs: number;
+  testError?: string;
+}): void {
   const rel = (file: string) => relative(resolve(__dirname, "../.."), join(RUN_DIR, file));
   const rows = results.map(
     (result) =>
       `| ${result.ok ? "pass" : "**FAIL**"} | ${result.kind} | ${result.name} | ${result.detail} |`,
   );
   const lines = [
-    `# Alex E2E — ${verdict(opts.testError)}`,
+    `# ${opts.title} — ${verdict(opts.testError)}`,
     "",
     `Duration: ${Math.round(opts.durationMs / 1000)} s`,
     "",

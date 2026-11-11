@@ -1,10 +1,8 @@
-import { readdirSync, readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { readFileSync } from "node:fs";
 import { alexExpected } from "../../engine/tests/scenarios/alex/expected";
 import { alex540Expected } from "../../engine/tests/scenarios/alex/expected-540";
 import { alexFacts } from "../../engine/tests/scenarios/alex/facts";
-import { latestDecisions, latestW2 } from "./appDb";
-import { DATA_ENV } from "./run";
+import { findFiles, latestDecisions, latestW2 } from "./appDb";
 
 const REQUIRED_DECISIONS: Record<string, unknown> = {
   "decisions.scope.filing_status": "single",
@@ -88,16 +86,6 @@ export function fieldProblems(): string[] {
   return Object.entries(expected)
     .filter(([fieldId, want]) => values.get(fieldId) !== want)
     .map(([fieldId, want]) => `${fieldId}: want ${want}, got ${String(values.get(fieldId))}`);
-}
-
-/* ULID names sort by time, so oldest first. */
-export function findFiles(category: string, name: RegExp): string[] {
-  const root = DATA_ENV.DOCUMENTS_PATH;
-  const files = readdirSync(root, { recursive: true }) as string[];
-  return files
-    .filter((file) => file.split("/").at(-2) === category && name.test(file.split("/").pop()!))
-    .sort()
-    .map((file) => resolve(root, file));
 }
 
 interface Sidecar {

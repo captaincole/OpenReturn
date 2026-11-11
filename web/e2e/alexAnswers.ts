@@ -1,11 +1,7 @@
 /* Values match engine/tests/scenarios/alex/{facts,decisions}.ts. */
 
 import { resolve } from "node:path";
-
-export interface Turn {
-  text: string;
-  file?: string;
-}
+import type { Turn } from "./session";
 
 const W2_PDF = resolve(__dirname, "../../engine/tests/scenarios/alex/docs/01-alex-w2.pdf");
 
