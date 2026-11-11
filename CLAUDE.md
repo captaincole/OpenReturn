@@ -116,6 +116,7 @@ npm test             # engine golden suite; positional filters work (npm test --
 npm run test:unit    # engine + canon + agent unit tests (test:integration likewise)
 npm run typecheck    # tsc over engine + builder + canon + agent
 npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see web/e2e/README.md)
+npm run e2e:madison  # the same for Madison: her documents, then the Deductions tab to its close
 ```
 
 All persistent state lives in local files: user data under `cade/.data/`, the corpus under `canon/.data/` ("the DB is a file"):
@@ -163,7 +164,7 @@ Limits worth remembering:
 
 ### Claude verifies the whole stack with `npm run e2e`
 
-**Must use** the `e2e` skill (`.claude/skills/e2e/SKILL.md`) to run the suite and read its summary. Run it after a change to the web app, the agent tools, document generation or Canon's MCP surface; turn grounding reviews on for a change to Canon or the review path. `dev:all` must be stopped first.
+**Must use** the `e2e` skill (`.claude/skills/e2e/SKILL.md`) to run the suite and read its summary. Run it after a change to the web app, the agent tools, document generation or Canon's MCP surface; turn grounding reviews on for a change to Canon or the review path. Run `npm run e2e:madison` too after a change to the deductions conversation or its tab. `dev:all` must be stopped first.
 
 ### Resetting user data
 
