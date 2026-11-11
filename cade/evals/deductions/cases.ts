@@ -76,12 +76,6 @@ const NOT_SURE: DoorCase[] = [
     outcome: "not_sure",
     why: "Federal law does not allow an employee's home office. California does, as an unreimbursed employee expense (Schedule CA (540) Part II line 19). No item covers it.",
   },
-  {
-    name: "gambling-losses",
-    says: "I had gambling winnings this year, and I lost money gambling too.",
-    outcome: "not_sure",
-    why: "Gambling losses up to the winnings are an other itemized deduction (Schedule A line 16). No item covers it.",
-  },
 ];
 
 const DOES_NOT_COUNT: DoorCase[] = [

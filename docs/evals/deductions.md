@@ -16,7 +16,7 @@ Models: Haiku 5.5 (`anthropic/claude-haiku-5-5`).
 
 | Model | Runs per case | Correct | Counts here | Counts elsewhere | Does not count | Not sure | Avg time |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Haiku 5.5 | 1 | 10/12 | 3/3 | 3/3 | 3/3 | 1/3 | 5s |
+| Haiku 5.5 | 1 | 10/11 | 2/3 | 3/3 | 3/3 | 2/2 | 5s |
 
 ## By case
 
@@ -24,13 +24,12 @@ Models: Haiku 5.5 (`anthropic/claude-haiku-5-5`).
 | --- | --- | --- | --- |
 | tithe | Oh, I do tithe at my church every month. | counts_here (gifts_cash) | 1/1 |
 | goodwill-clothes | I dropped off a few bags of clothes at Goodwill in the spring. | counts_here (gifts_property) | 1/1 |
-| adviser-fee | My financial adviser takes a fee out of my brokerage account every quarter. | counts_here (ca_investment_fees) | 1/1 |
+| adviser-fee | My financial adviser takes a fee out of my brokerage account every quarter. | counts_here (ca_investment_fees) | 0/1 (recorded no expense) |
 | student-loan-interest | I paid interest on my student loans all year. | counts_elsewhere | 1/1 |
 | hsa-contribution | I put money into my HSA from my own bank account, not through payroll. | counts_elsewhere | 1/1 |
 | daycare | We pay for daycare for our daughter so that we can both work. | counts_elsewhere | 1/1 |
-| union-dues | I pay union dues, about $900 for the year. | not_sure | 0/1 (recorded does_not_count) |
-| home-office | I work from home most days for my employer, so I set up a home office. | not_sure | 0/1 (recorded does_not_count) |
-| gambling-losses | I had gambling winnings this year, and I lost money gambling too. | not_sure | 1/1 |
+| union-dues | I pay union dues, about $900 for the year. | not_sure | 1/1 |
+| home-office | I work from home most days for my employer, so I set up a home office. | not_sure | 1/1 |
 | gym | I pay for a gym membership to stay in shape. | does_not_count | 1/1 |
 | commuting | I spend a lot on gas and bridge tolls to get to the office. | does_not_count | 1/1 |
 | life-insurance | I pay the premiums on a term life insurance policy. | does_not_count | 1/1 |
