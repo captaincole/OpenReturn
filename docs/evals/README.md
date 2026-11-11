@@ -6,7 +6,7 @@ One number per model: the mean of its flow scores (shown only when the model ran
 
 | Model | **Overall** | Ingest | Deductions | Review | Ask |
 | --- | --- | --- | --- | --- | --- |
-| Haiku 5.5 | **88%** | 100% | 83% | 88% | 80% |
+| Haiku 5.5 | **90%** | 100% | 92% | 88% | 80% |
 | Gemma 4 26b Q4_K_M | **—** | 89% | — | 85% | 74% |
 | Gemma 4 31b Q4_K_M | **—** | 92% | — | 95% | 72% |
 | Gemma 4 e4b | **—** | 74% | — | 88% | 57% |
@@ -28,7 +28,7 @@ Each case is one expense a taxpayer names at the open door of the deductions con
 
 | Model | **Deductions** | Counts here | Counts elsewhere | Does not count | Not sure |
 | --- | --- | --- | --- | --- | --- |
-| Haiku 5.5 | **83%** | 100% | 100% | 100% | 33% |
+| Haiku 5.5 | **92%** | 67% | 100% | 100% | 100% |
 
 ## Review
 

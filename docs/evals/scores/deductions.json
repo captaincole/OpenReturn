@@ -13,12 +13,12 @@
     {
       "label": "Haiku 5.5",
       "id": "anthropic/claude-haiku-5-5",
-      "score": 0.8333333333333334,
+      "score": 0.9166666666666666,
       "capabilities": {
-        "Counts here": 1,
+        "Counts here": 0.6666666666666666,
         "Counts elsewhere": 1,
         "Does not count": 1,
-        "Not sure": 0.3333333333333333
+        "Not sure": 1
       }
     }
   ]
