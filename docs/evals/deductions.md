@@ -8,15 +8,15 @@ Each case is one expense a taxpayer names at the open door of the deductions con
 - **counts_here:** a deduction item covers the expense.
 - **counts_elsewhere:** it is not an itemized deduction, and it may count in a different place on the return.
 - **does_not_count:** it is not deductible anywhere on the return.
-- **not_sure:** it may count and no item covers it. The CPA gets it.
+- **not_sure:** it may count and no item covers it. The CPA gets it. No case expects it yet.
 
 Models: Haiku 5.5 (`anthropic/claude-haiku-5-5`).
 
 ## Summary
 
-| Model | Runs per case | Correct | Counts here | Counts elsewhere | Does not count | Not sure | Avg time |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Haiku 5.5 | 1 | 10/11 | 2/3 | 3/3 | 3/3 | 2/2 | 5s |
+| Model | Runs per case | Correct | Counts here | Counts elsewhere | Does not count | Avg time |
+| --- | --- | --- | --- | --- | --- | --- |
+| Haiku 5.5 | 1 | 8/9 | 2/3 | 3/3 | 3/3 | 5s |
 
 ## By case
 
@@ -28,8 +28,6 @@ Models: Haiku 5.5 (`anthropic/claude-haiku-5-5`).
 | student-loan-interest | I paid interest on my student loans all year. | counts_elsewhere | 1/1 |
 | hsa-contribution | I put money into my HSA from my own bank account, not through payroll. | counts_elsewhere | 1/1 |
 | daycare | We pay for daycare for our daughter so that we can both work. | counts_elsewhere | 1/1 |
-| union-dues | I pay union dues, about $900 for the year. | not_sure | 1/1 |
-| home-office | I work from home most days for my employer, so I set up a home office. | not_sure | 1/1 |
 | gym | I pay for a gym membership to stay in shape. | does_not_count | 1/1 |
 | commuting | I spend a lot on gas and bridge tolls to get to the office. | does_not_count | 1/1 |
 | life-insurance | I pay the premiums on a term life insurance policy. | does_not_count | 1/1 |

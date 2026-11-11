@@ -1,24 +1,22 @@
 {
   "flow": "deductions",
   "title": "Deductions",
-  "definition": "Each case is one expense a taxpayer names at the open door of the deductions conversation (\"anything else you paid that might count?\"). Cade, with the conversation's instructions and tools, must record one of four outcomes for it. A run is correct when the outcome matches the label (and the item, when the expense counts here), no amount is written, and the door stays open. Each capability is the share of correct runs for one expected outcome; the flow score is the mean of the four.",
+  "definition": "Each case is one expense a taxpayer names at the open door of the deductions conversation (\"anything else you paid that might count?\"). Cade, with the conversation's instructions and tools, must record one of four outcomes for it. A run is correct when the outcome matches the label (and the item, when the expense counts here), no amount is written, and the door stays open. Each capability is the share of correct runs for one expected outcome; the flow score is their mean. No case expects \"not sure\" yet: each such expense counts, and no deduction item covers it.",
   "report": "deductions.md",
   "capabilities": [
     "Counts here",
     "Counts elsewhere",
-    "Does not count",
-    "Not sure"
+    "Does not count"
   ],
   "models": [
     {
       "label": "Haiku 5.5",
       "id": "anthropic/claude-haiku-5-5",
-      "score": 0.9166666666666666,
+      "score": 0.8888888888888888,
       "capabilities": {
         "Counts here": 0.6666666666666666,
         "Counts elsewhere": 1,
-        "Does not count": 1,
-        "Not sure": 1
+        "Does not count": 1
       }
     }
   ]
