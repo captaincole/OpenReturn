@@ -16,6 +16,7 @@ From the repo root:
 npm run dev:all   # Canon (:4112) + Cade (:4111) + web (:3000)
 npm run dev:web   # web only
 npm run e2e       # Playwright E2E through the UI (see e2e/README.md)
+npm run e2e:madison  # the same for Madison and the Deductions tab
 ```
 
 The first run redirects to `/setup` to create the owner account. The env file is `.env.development` (see `.env.example`). `APP_DB_PATH` and `DOCUMENTS_PATH` must point at the same files as Cade's.

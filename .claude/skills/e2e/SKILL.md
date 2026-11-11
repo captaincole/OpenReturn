@@ -20,7 +20,7 @@ After a change to the web app, the agent tools, or document generation, run `npm
 
 - The run's folder holds `transcript.md`, the three server logs, `data/` (its own app.db, mastra.db, documents) and, on failure, Playwright's trace and video under `test-results/`. Your real `.data/` is never touched.
 - From `web/`: `npx playwright show-trace e2e/.run/<runId>/test-results/**/trace.zip`.
-- When Cade asks something new, the intake stage fails and the transcript shows the question. Add a keyword rule to `ANSWERS` in `web/e2e/alexAnswers.ts`.
+- When Cade asks something new, the intake stage fails and the transcript shows the question. Add a keyword rule to `ANSWERS` in `web/e2e/alexAnswers.ts` (Madison: `AMOUNT_ANSWERS` or `LIFE_ANSWERS` in `web/e2e/madisonAnswers.ts`).
 - The run copies `canon/.env.development` and `cade/.env.development` into its own env files, so a port or path override left in those files (for example from a worktree) carries into the run.
 
 ## Before the full run: targeted calls

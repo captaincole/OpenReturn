@@ -30,7 +30,7 @@ import {
   waitForReviews,
   type Turn,
 } from "./session";
-import { check, failedStages, plumbing, writeSummary } from "./summary";
+import { check, failedStages, note, plumbing, writeSummary } from "./summary";
 
 const OWNER = {
   name: "Madison Gray",
@@ -105,48 +105,42 @@ async function runDeductions(page: Page, filingPath: string): Promise<Deductions
   logTurn("Deductions 1", "Madison", { text: "Let's start" }, cadeSaid);
   noAgentErrors("deductions turn 1");
   const progress: Progress = { sent1098: false, answered: new Set(), named: false, back: false };
-  for (let turn = 2; turn <= MAX_DEDUCTION_TURNS; turn++) {
-    const view = await deductionsState(page);
-    if (view.next.step === "wait_for_return" && !progress.back) {
-      progress.back = true;
-      await finishReturn(page, filingPath);
-      continue;
-    }
-    const problem = stopReason(view);
-    if (problem !== undefined) return reachedClose(view, problem);
-    const sent = await deductionsTurn(page, view, cadeSaid, progress);
-    if (typeof sent === "string") return reachedClose(view, `turn ${turn}: ${sent}`);
+  let view = await deductionsState(page);
+  for (let turn = 2; view.next.step !== "closed" && turn <= MAX_DEDUCTION_TURNS; turn++) {
+    const sent = await deductionsTurn(page, filingPath, view, cadeSaid, progress);
+    if (!sent) break;
     cadeSaid = sent.reply;
     logTurn(`Deductions ${turn}`, "Madison", sent.turn, cadeSaid);
     noAgentErrors(`deductions turn ${turn}`);
     if (sent.turn.file) expectStored(sent.turn.file);
+    view = await deductionsState(page);
   }
-  return reachedClose(await deductionsState(page), `not closed after ${MAX_DEDUCTION_TURNS} turns`);
-}
-
-/* Empty: closed. Undefined: keep going. */
-function stopReason(view: DeductionsState): string | undefined {
-  if (view.next.step === "closed") return "";
-  if (view.next.step === "wait_for_return") return `waits for the return: ${view.next.why}`;
-  return undefined;
-}
-
-function reachedClose(view: DeductionsState, problem: string): DeductionsState {
-  check("deductions reach the close", "model", problem ? [problem] : []);
   return view;
 }
 
 type Progress = AmountProgress & { named: boolean; back: boolean };
 type Sent = { turn: Turn; reply: string };
 
-/* One turn of the deductions conversation, or why the answer sheet has none. */
+/* A run that stops before the close says why; closingProblems then fails it. */
+function stuck(why: string): undefined {
+  note(`deductions stopped: ${why}`);
+  return undefined;
+}
+
+/* One turn of the deductions conversation, or undefined when the answer sheet has none. */
 async function deductionsTurn(
   page: Page,
+  filingPath: string,
   view: DeductionsState,
   cadeSaid: string,
   progress: Progress,
-): Promise<Sent | string> {
+): Promise<Sent | undefined> {
   const { next } = view;
+  if (next.step === "wait_for_return") {
+    if (progress.back) return stuck(`the comparison still waits for the return: ${next.why}`);
+    progress.back = true;
+    return finishReturn(page, filingPath);
+  }
   if (next.step === "ask_life_questions") return answerLifeQuestions(page, next.questions ?? []);
   if (next.step === "ask_anything_else") {
     const name = progress.named ? next.done! : NAMED_EXPENSE;
@@ -156,7 +150,7 @@ async function deductionsTurn(
   const turn =
     amountReply(cadeSaid, progress) ??
     (next.step === "close" ? { text: "Please close the deductions." } : undefined);
-  if (!turn) return `no answer-sheet rule for Cade's message (step ${next.step})`;
+  if (!turn) return stuck(`no answer-sheet rule for Cade's message (step ${next.step})`);
   return { turn, reply: await send(page, turn) };
 }
 
@@ -164,7 +158,7 @@ async function deductionsTurn(
  * The comparison waits for the return: the tab's link goes back to it, Madison
  * answers its questions until the step moves on, and the tab picks up again.
  */
-async function finishReturn(page: Page, filingPath: string) {
+async function finishReturn(page: Page, filingPath: string): Promise<Sent> {
   await plumbing("the tab's link goes back to the return", async () => {
     await page.getByRole("link", { name: "Go to the return" }).click();
     await expect(page).toHaveURL(new RegExp(`${filingPath}$`));
@@ -181,18 +175,18 @@ async function finishReturn(page: Page, filingPath: string) {
   }
   await page.goto(`${filingPath}/deductions`);
   const back = { text: "I answered the return's questions. Please go on." };
-  logTurn("Deductions, back from the return", "Madison", back, await send(page, back));
+  return { turn: back, reply: await send(page, back) };
 }
 
 /* A tap on Yes or No in each question's row, then one message with every answer. */
 async function answerLifeQuestions(
   page: Page,
   questions: Array<{ ask: string }>,
-): Promise<Sent | string> {
+): Promise<Sent | undefined> {
   const words: string[] = [];
   for (const question of questions) {
     const answer = lifeAnswer(question.ask);
-    if (answer === undefined) return `no answer-sheet rule for "${question.ask}"`;
+    if (answer === undefined) return stuck(`no answer-sheet rule for "${question.ask}"`);
     const label = answer ? "Yes" : "No";
     const row = page.locator("li").filter({ hasText: question.ask });
     await row.getByRole("button", { name: label, exact: true }).click();
