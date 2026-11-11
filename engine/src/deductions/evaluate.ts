@@ -77,10 +77,17 @@ function lineAmount(id: ItemId, info: FilingInfo, forms: Forms): number | undefi
       return info.caInvestmentFees;
   }
 }
-/* Form 4952's own answers (the election, other expenses), while it files: line 8 waits on them. */
-/* Form 4952's own answers (the election, other expenses): line 8 waits on them while the form files. */
-const form4952Asks = (info: FilingInfo): readonly string[] =>
-  files(info, "form-4952") ? (info.missingInputs?.["form-4952"] ?? []) : [];
+/* A form's own answers while it files: its lines wait on them. */
+const asksOf = (info: FilingInfo, formId: string): readonly string[] =>
+  files(info, formId) ? (info.missingInputs?.[formId] ?? []) : [];
+
+/*
+ * The item's answers on both returns: Form 4952's (the election, other
+ * expenses) and FTB 3526's (California's own carryover).
+ */
+const investmentInterestAsks = (info: FilingInfo): string[] => [
+  ...new Set([...asksOf(info, "form-4952"), ...asksOf(info, "form-3526")]),
+];
 
 /*
  * Schedule A line 9: Form 4952 line 8 when the form files and has its
@@ -90,7 +97,7 @@ const form4952Asks = (info: FilingInfo): readonly string[] =>
  */
 function investmentInterest(info: FilingInfo, forms: Forms): number | undefined {
   if (files(info, "form-4952")) {
-    if (form4952Asks(info).length > 0) return undefined;
+    if (investmentInterestAsks(info).length > 0) return undefined;
     return evaluatedNumber(forms, "form-4952.0.line.8_investment_interest_deduction");
   }
   if (info.noFormException === true) return info.investmentInterestPaid;
@@ -134,7 +141,9 @@ function missingFor(
 
 function unstated(item: DeductionItem, info: FilingInfo, stated: Map<string, unknown>): string[] {
   const missing = item.amountKeys.filter((key) => !stated.has(key));
-  if (item.id === "investment_interest") return [...new Set([...missing, ...form4952Asks(info)])];
+  if (item.id === "investment_interest") {
+    return [...new Set([...missing, ...investmentInterestAsks(info)])];
+  }
   if (item.id !== "mortgage_interest") return missing;
   const asked = info.missingInputs?.["schedule-a"] ?? [];
   // As the Schedule A resolver asks: only with a 1098 interest above 0.
