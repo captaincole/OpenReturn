@@ -1,8 +1,12 @@
 /*
  * The open door's cases: one thing a taxpayer says, and the outcome Cade must
- * record for it. Each label is a tax judgment under the door's own rule (an
- * expense that might count and that no item covers is not_sure), so a change
- * here needs the same care as a change to a form line.
+ * record for it. Each label is a tax judgment, so a change here needs the same
+ * care as a change to a form line.
+ *
+ * No case expects not_sure. Union dues and an employee's home office (Schedule
+ * CA (540) Part II line 19) and gambling losses (Schedule A line 16) count, and
+ * the catalog has no item for them, so Cade cannot record the correct answer.
+ * Each comes back as counts_here when the catalog has its item.
  */
 import type { ItemId } from "@openreturn/engine";
 import type { Outcome } from "../../src/mastra/deductions/openDoor";
@@ -62,22 +66,6 @@ const COUNTS_ELSEWHERE: DoorCase[] = [
   },
 ];
 
-/* Each may count on a return, and the catalog has no item for it: the CPA gets it. */
-const NOT_SURE: DoorCase[] = [
-  {
-    name: "union-dues",
-    says: "I pay union dues, about $900 for the year.",
-    outcome: "not_sure",
-    why: "Federal law does not allow an employee's union dues. California does, as an unreimbursed employee expense (Schedule CA (540) Part II line 19). No item covers it, and the amount must not go on one.",
-  },
-  {
-    name: "home-office",
-    says: "I work from home most days for my employer, so I set up a home office.",
-    outcome: "not_sure",
-    why: "Federal law does not allow an employee's home office. California does, as an unreimbursed employee expense (Schedule CA (540) Part II line 19). No item covers it.",
-  },
-];
-
 const DOES_NOT_COUNT: DoorCase[] = [
   {
     name: "gym",
@@ -99,9 +87,4 @@ const DOES_NOT_COUNT: DoorCase[] = [
   },
 ];
 
-export const CASES: DoorCase[] = [
-  ...COUNTS_HERE,
-  ...COUNTS_ELSEWHERE,
-  ...NOT_SURE,
-  ...DOES_NOT_COUNT,
-];
+export const CASES: DoorCase[] = [...COUNTS_HERE, ...COUNTS_ELSEWHERE, ...DOES_NOT_COUNT];

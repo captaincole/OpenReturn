@@ -6,7 +6,7 @@ One number per model: the mean of its flow scores (shown only when the model ran
 
 | Model | **Overall** | Ingest | Deductions | Review | Ask |
 | --- | --- | --- | --- | --- | --- |
-| Haiku 5.5 | **90%** | 100% | 92% | 88% | 80% |
+| Haiku 5.5 | **89%** | 100% | 89% | 88% | 80% |
 | Gemma 4 26b Q4_K_M | **—** | 89% | — | 85% | 74% |
 | Gemma 4 31b Q4_K_M | **—** | 92% | — | 95% | 72% |
 | Gemma 4 e4b | **—** | 74% | — | 88% | 57% |
@@ -24,11 +24,11 @@ Each model reads every scenario source document and calls Cade's ingest tools. A
 
 ## Deductions
 
-Each case is one expense a taxpayer names at the open door of the deductions conversation ("anything else you paid that might count?"). Cade, with the conversation's instructions and tools, must record one of four outcomes for it. A run is correct when the outcome matches the label (and the item, when the expense counts here), no amount is written, and the door stays open. Each capability is the share of correct runs for one expected outcome; the flow score is the mean of the four. Raw numbers: [deductions.md](deductions.md).
+Each case is one expense a taxpayer names at the open door of the deductions conversation ("anything else you paid that might count?"). Cade, with the conversation's instructions and tools, must record one of four outcomes for it. A run is correct when the outcome matches the label (and the item, when the expense counts here), no amount is written, and the door stays open. Each capability is the share of correct runs for one expected outcome; the flow score is their mean. No case expects "not sure" yet: each such expense counts, and no deduction item covers it. Raw numbers: [deductions.md](deductions.md).
 
-| Model | **Deductions** | Counts here | Counts elsewhere | Does not count | Not sure |
-| --- | --- | --- | --- | --- | --- |
-| Haiku 5.5 | **92%** | 67% | 100% | 100% | 100% |
+| Model | **Deductions** | Counts here | Counts elsewhere | Does not count |
+| --- | --- | --- | --- | --- |
+| Haiku 5.5 | **89%** | 67% | 100% | 100% |
 
 ## Review
 

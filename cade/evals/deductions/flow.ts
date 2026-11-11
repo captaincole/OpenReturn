@@ -12,6 +12,11 @@ export const OUTCOME_TITLES: Record<Outcome, string> = {
   not_sure: "Not sure",
 };
 
+/* The outcomes that a case expects: the report's columns and the capabilities. */
+export const EXPECTED_OUTCOMES = OUTCOMES.filter((outcome) =>
+  CASES.some((testCase) => testCase.outcome === outcome),
+);
+
 /* Why a run fails; undefined when it passes. */
 export function failure(result: DoorResult): string | undefined {
   if (result.error) return `failed: ${result.error}`;
@@ -36,7 +41,7 @@ function modelScores(model: EvalModel, results: DoorResult[]): ModelScores {
   const mine = results.filter((result) => result.model === model.label);
   const cases = new Set(mine.map((result) => result.case)).size;
   const capabilities: Record<string, number> = {};
-  for (const outcome of OUTCOMES) {
+  for (const outcome of EXPECTED_OUTCOMES) {
     const runs = mine.filter((result) => result.expected === outcome);
     if (runs.length) capabilities[OUTCOME_TITLES[outcome]] = share(runs);
   }
@@ -54,9 +59,9 @@ export function deductionsFlowScores(models: EvalModel[], results: DoorResult[])
     flow: "deductions",
     title: "Deductions",
     definition:
-      'Each case is one expense a taxpayer names at the open door of the deductions conversation ("anything else you paid that might count?"). Cade, with the conversation\'s instructions and tools, must record one of four outcomes for it. A run is correct when the outcome matches the label (and the item, when the expense counts here), no amount is written, and the door stays open. Each capability is the share of correct runs for one expected outcome; the flow score is the mean of the four.',
+      'Each case is one expense a taxpayer names at the open door of the deductions conversation ("anything else you paid that might count?"). Cade, with the conversation\'s instructions and tools, must record one of four outcomes for it. A run is correct when the outcome matches the label (and the item, when the expense counts here), no amount is written, and the door stays open. Each capability is the share of correct runs for one expected outcome; the flow score is their mean. No case expects "not sure" yet: each such expense counts, and no deduction item covers it.',
     report: "deductions.md",
-    capabilities: OUTCOMES.map((outcome) => OUTCOME_TITLES[outcome]),
+    capabilities: EXPECTED_OUTCOMES.map((outcome) => OUTCOME_TITLES[outcome]),
     models: models.map((model) => modelScores(model, results)),
   };
 }
