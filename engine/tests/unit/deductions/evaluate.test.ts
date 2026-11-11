@@ -7,16 +7,21 @@
 import { describe, expect, it } from "vitest";
 import { evaluateDeductions, unsettledKeys } from "../../../src/deductions/evaluate.js";
 import { INVESTMENT_INTEREST_KEYS, MORTGAGE_KEYS } from "../../../src/facts/index.js";
-import type { TaxFactRow } from "../../../src/facts/rows.js";
+import type { AIDecisionRow, TaxFactRow } from "../../../src/facts/rows.js";
+import { decisionRow } from "../../helpers/fixtureBuilders.js";
 
 /* As evaluateScenario passes them: the assumptions in use join the facts. */
-function items(facts: TaxFactRow[], assumptions: TaxFactRow[] = []) {
+function items(
+  facts: TaxFactRow[],
+  assumptions: TaxFactRow[] = [],
+  decisions: AIDecisionRow[] = [],
+) {
   const assumedKeys = new Set(assumptions.map((assumption) => assumption.key));
   return evaluateDeductions({
     taxYear: 2025,
     facts: [...facts, ...assumptions],
     assumedKeys,
-    decisions: [],
+    decisions,
   }).items;
 }
 
@@ -127,6 +132,29 @@ describe("evaluateDeductions item states", () => {
     expect(margin.status).toBe("open");
     expect(margin.missing).toContain(INVESTMENT_INTEREST_KEYS.disallowedCarryover);
     expect(margin.missing).toContain(INVESTMENT_INTEREST_KEYS.investmentExpenses);
+  });
+
+  it("asks California's own carryover (FTB 3526) after every Form 4952 answer", () => {
+    const answered = [
+      fact(INVESTMENT_INTEREST_KEYS.expensePaid, 1250),
+      fact(INVESTMENT_INTEREST_KEYS.disallowedCarryover, 650),
+      fact(INVESTMENT_INTEREST_KEYS.electedQualifiedDividendsAndGain, 0),
+      fact(INVESTMENT_INTEREST_KEYS.investmentExpenses, 0),
+    ];
+    const filesCa = decisionRow({
+      userId: "test",
+      taxYear: 2025,
+      key: "decisions.scope.must_file_ca_540",
+      decision: true,
+      rationale: "A California resident.",
+    });
+    const margin = items(answered, [], [filesCa]).find(
+      (item) => item.id === "investment_interest",
+    )!;
+    expect(margin).toMatchObject({
+      status: "open",
+      missing: [INVESTMENT_INTEREST_KEYS.caDisallowedCarryover],
+    });
   });
 });
 
