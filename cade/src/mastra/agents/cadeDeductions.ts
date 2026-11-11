@@ -2,18 +2,8 @@ import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 import { modelFor } from "../models";
 import { cadeRequestContextSchema } from "../server/requestContext";
-import { recordAssumptions } from "../tools/assumptions";
-import {
-  answerLifeQuestions,
-  closeDeductions,
-  getDeductions,
-  recordNamedExpenses,
-} from "../tools/deductions";
-import { dismissRequestedAction } from "../tools/dismissRequestedAction";
-import { ingest1098 } from "../tools/ingest1098";
+import { deductionsTools } from "../tools/deductionsTools";
 import { INGEST_MAX_OUTPUT_TOKENS } from "../tools/ingestTools";
-import { requestDocumentUploadFor } from "../tools/requestDocument";
-import { recordTaxFacts } from "../tools/taxFacts";
 import { cadeDeductionsInstructions } from "./cadeDeductions.instructions";
 import { PdfAttachmentRasterizer } from "./pdfAttachments";
 
@@ -31,17 +21,7 @@ export const cadeDeductions = new Agent({
   requestContextSchema: cadeRequestContextSchema,
   inputProcessors: [new PdfAttachmentRasterizer()],
   defaultOptions: { maxSteps: 20, modelSettings: { maxOutputTokens: INGEST_MAX_OUTPUT_TOKENS } },
-  tools: {
-    getDeductions,
-    answerLifeQuestions,
-    recordNamedExpenses,
-    recordTaxFacts,
-    recordAssumptions,
-    ingest1098,
-    requestDocumentUpload: requestDocumentUploadFor("deductions"),
-    dismissRequestedAction,
-    closeDeductions,
-  },
+  tools: deductionsTools,
   /* No working memory: the engine's item states hold this conversation's place. */
   memory: new Memory(),
 });

@@ -104,7 +104,7 @@ Each top-level folder builds and runs on its own, and each has its own README.
 
 ## Evals
 
-Every flow that uses a model has an eval: document ingest (Cade), decision review and Ask The Tax Code (Canon). Each model gets one score per flow. Scores from 2026-10-23; the [eval reports](docs/evals/README.md) have the details.
+Every flow that uses a model has an eval: document ingest and the deductions conversation (Cade), decision review and Ask The Tax Code (Canon). Each model gets one score per flow. The table shows the scores from 2026-10-23, before the deductions eval; the [eval reports](docs/evals/README.md) have the details.
 
 | Model | Overall | Ingest | Review | Ask |
 | --- | --- | --- | --- | --- |
@@ -123,7 +123,7 @@ Every flow that uses a model has an eval: document ingest (Cade), decision revie
 | [Test OpenReturn against your filed return](docs/testing-with-your-return.md) | Check the engine against a return you already filed, privately, and send us the result |
 | [Add a scenario](docs/adding-a-scenario.md) | Add a new test taxpayer, with new forms or documents, and the tests that check each step |
 | [End-to-end tests](web/e2e/README.md) | The Playwright run that drives the whole stack with a real model |
-| [Model evals](docs/evals/README.md) | One score per model, by flow: [document ingest](docs/evals/ingest.md), [review judges](docs/evals/review.md) and [Ask The Tax Code](docs/evals/ask.md) |
+| [Model evals](docs/evals/README.md) | One score per model, by flow: [document ingest](docs/evals/ingest.md), [deductions](docs/evals/deductions.md), [review judges](docs/evals/review.md) and [Ask The Tax Code](docs/evals/ask.md) |
 
 ## Contributing
 

@@ -1,5 +1,5 @@
 /*
- *   npm run evals:lite -- [model…] [--flow=ask,review,ingest]   (from the repo root)
+ *   npm run evals:lite -- [model…] [--flow=ask,review,ingest,deductions]   (from the repo root)
  *
  * One run of the lite cases of each flow, on Haiku and the 31b on the second
  * machine (whichever is configured). Each flow runs in its own process: the
@@ -42,10 +42,13 @@ function runEval(cwd: string, script: string, args: string[]): void {
 
 const slug = (model: EvalModel) => model.label.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
+/* Cade's flows take every model in one process; Canon's take one model per process. */
+const CADE_FLOWS: Flow[] = ["ingest", "deductions"];
+
 function runFlow(flow: Flow, models: EvalModel[], runDir: string): CaseResult[] {
-  if (flow === "ingest") {
-    const out = path.join(runDir, "ingest");
-    runEval(CADE, "evals/ingest/run.ts", [...models.map((model) => model.id), `--out=${out}`]);
+  if (CADE_FLOWS.includes(flow)) {
+    const out = path.join(runDir, flow);
+    runEval(CADE, `evals/${flow}/run.ts`, [...models.map((model) => model.id), `--out=${out}`]);
     return fromResults(path.join(out, "results.json"));
   }
   return models.flatMap((model) => {
