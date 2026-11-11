@@ -214,7 +214,7 @@ flowchart TD
 | Catalog-fill | `npm test -- catalog-fill` | A widget that maps to the wrong PDF field |
 | Scenario goldens | `npm test -- <name>` | A changed line value, a changed PDF fill |
 | Comparison kit | `npx tsx scripts/compareFiled/cli.ts <folder>` | Lines that differ from a filed return, and their root causes |
-| E2E | `npm run e2e` | A broken app, ingest tool, or document generation. Covers Alex only today. |
+| E2E | `npm run e2e`, `npm run e2e:madison` | A broken app, ingest tool, or document generation. Covers Alex, and Madison (`tcb-ca-005`) through the Deductions tab. |
 
 `npm test` runs before every commit. Run the E2E test after a change to
 the web app, the agent tools, or document generation.
