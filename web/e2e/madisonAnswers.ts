@@ -52,15 +52,24 @@ const RETURN_ANSWERS: Array<[RegExp, string]> = [
   [/mailing|address/i, "Our mailing address is 1111 Grove Park Rd, where we live."],
   [/refund|2026 estimated|apply/i, "Refund the full federal and California overpayments."],
   [/stock option|incentive|3921/i, "We exercised incentive stock options: a $275,000 spread."],
+  [/shares|quantity/i, "The 1099-B does not show the number of shares, and I do not know it."],
+  [/\bhsa\b|health savings/i, "We have no HSA."],
+  [/last year's|prior.year|2024/i, "I do not have last year's return at hand."],
   [/deduction|itemiz|mortgage|charit|medical/i, "I will do deductions in the Deductions tab."],
 ];
 
-/* The return's conversation answers what it can; the next document goes with it. */
-export function returnReply(cadeMessage: string, next: Turn): Turn {
+/* Her answers to the questions in Cade's message, or undefined when no rule matches. */
+export function returnAnswer(cadeMessage: string): string | undefined {
   const answers = RETURN_ANSWERS.filter(([pattern]) => pattern.test(cadeMessage)).map(
     ([, answer]) => answer,
   );
-  return { ...next, text: [...new Set(answers), next.text].join(" ") };
+  return answers.length > 0 ? [...new Set(answers)].join(" ") : undefined;
+}
+
+/* The return's conversation answers what it can; the next document goes with it. */
+export function returnReply(cadeMessage: string, next: Turn): Turn {
+  const answers = returnAnswer(cadeMessage);
+  return { ...next, text: answers ? `${answers} ${next.text}` : next.text };
 }
 
 /* Each life question by its words; a question with no rule fails the run. */
@@ -95,16 +104,24 @@ const AMOUNT_ANSWERS: Array<[RegExp, string]> = [
   [/elect|qualified dividends/i, "We elect $1,570 of qualified dividends as investment income."],
   [/investment expenses/i, "We had no other investment expenses."],
   [/rough|exact|estimate/i, "These are exact amounts."],
-  [/close|wrap up|finish/i, "Yes, please close the deductions."],
+  [/\bclose\b/i, "Yes, please close the deductions."],
 ];
 
+export interface AmountProgress {
+  sent1098: boolean;
+  /** Each answer goes once, as a taxpayer gives it: Cade's summary of them asks nothing. */
+  answered: Set<string>;
+}
+
 /* The deductions conversation's amounts; the Form 1098 goes with the first ask for it. */
-export function amountReply(cadeMessage: string, sent1098: boolean): Turn | undefined {
-  const answers = AMOUNT_ANSWERS.filter(([pattern]) => pattern.test(cadeMessage)).map(
-    ([, answer]) => answer,
-  );
-  const asks1098 = !sent1098 && /1098|mortgage/i.test(cadeMessage);
+export function amountReply(cadeMessage: string, progress: AmountProgress): Turn | undefined {
+  const answers = AMOUNT_ANSWERS.filter(([pattern]) => pattern.test(cadeMessage))
+    .map(([, answer]) => answer)
+    .filter((answer) => !progress.answered.has(answer));
+  const asks1098 = !progress.sent1098 && /1098|mortgage/i.test(cadeMessage);
   const text = [...(asks1098 ? ["Here is our Form 1098 from Chase Bank."] : []), ...answers];
   if (text.length === 0) return undefined;
+  answers.forEach((answer) => progress.answered.add(answer));
+  if (asks1098) progress.sent1098 = true;
   return { text: [...new Set(text)].join(" "), ...(asks1098 ? { file: FORM_1098 } : {}) };
 }

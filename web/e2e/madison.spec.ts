@@ -7,7 +7,9 @@ import {
   NAMED_EXPENSE,
   OPENING,
   RETURN_DOCUMENTS,
+  returnAnswer,
   returnReply,
+  type AmountProgress,
 } from "./madisonAnswers";
 import {
   closingProblems,
@@ -36,6 +38,7 @@ const OWNER = {
   password: "e2e-madison-password",
 };
 const MAX_DEDUCTION_TURNS = 14;
+const MAX_RETURN_FOLLOW_UPS = 5;
 const CLOSED = "Deductions are done.";
 const started = Date.now();
 
@@ -101,9 +104,14 @@ async function runDeductions(page: Page, filingPath: string): Promise<Deductions
   );
   logTurn("Deductions 1", "Madison", { text: "Let's start" }, cadeSaid);
   noAgentErrors("deductions turn 1");
-  const progress = { sent1098: false, named: false };
+  const progress: Progress = { sent1098: false, answered: new Set(), named: false, back: false };
   for (let turn = 2; turn <= MAX_DEDUCTION_TURNS; turn++) {
     const view = await deductionsState(page);
+    if (view.next.step === "wait_for_return" && !progress.back) {
+      progress.back = true;
+      await finishReturn(page, filingPath);
+      continue;
+    }
     const problem = stopReason(view);
     if (problem !== undefined) return reachedClose(view, problem);
     const sent = await deductionsTurn(page, view, cadeSaid, progress);
@@ -128,7 +136,7 @@ function reachedClose(view: DeductionsState, problem: string): DeductionsState {
   return view;
 }
 
-type Progress = { sent1098: boolean; named: boolean };
+type Progress = AmountProgress & { named: boolean; back: boolean };
 type Sent = { turn: Turn; reply: string };
 
 /* One turn of the deductions conversation, or why the answer sheet has none. */
@@ -146,11 +154,34 @@ async function deductionsTurn(
     return { turn: { text: `[tap] ${name}` }, reply: await tap(page, name) };
   }
   const turn =
-    amountReply(cadeSaid, progress.sent1098) ??
+    amountReply(cadeSaid, progress) ??
     (next.step === "close" ? { text: "Please close the deductions." } : undefined);
   if (!turn) return `no answer-sheet rule for Cade's message (step ${next.step})`;
-  if (turn.file) progress.sent1098 = true;
   return { turn, reply: await send(page, turn) };
+}
+
+/*
+ * The comparison waits for the return: the tab's link goes back to it, Madison
+ * answers its questions until the step moves on, and the tab picks up again.
+ */
+async function finishReturn(page: Page, filingPath: string) {
+  await plumbing("the tab's link goes back to the return", async () => {
+    await page.getByRole("link", { name: "Go to the return" }).click();
+    await expect(page).toHaveURL(new RegExp(`${filingPath}$`));
+  });
+  let turn: Turn = {
+    text: "I am back from the Deductions tab. What else do you need for our return?",
+  };
+  for (let followUp = 1; followUp <= MAX_RETURN_FOLLOW_UPS; followUp++) {
+    const cadeSaid = await send(page, turn);
+    logTurn(`Return follow-up ${followUp}`, "Madison", turn, cadeSaid);
+    noAgentErrors(`return follow-up ${followUp}`);
+    if ((await deductionsState(page)).next.step !== "wait_for_return") break;
+    turn = { text: returnAnswer(cadeSaid) ?? "That is everything we have. Please record it." };
+  }
+  await page.goto(`${filingPath}/deductions`);
+  const back = { text: "I answered the return's questions. Please go on." };
+  logTurn("Deductions, back from the return", "Madison", back, await send(page, back));
 }
 
 /* A tap on Yes or No in each question's row, then one message with every answer. */

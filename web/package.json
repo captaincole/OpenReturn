@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "e2e": "playwright test -c e2e alex",
-    "e2e:madison": "playwright test -c e2e madison"
+    "e2e": "playwright test -c e2e alex.spec",
+    "e2e:madison": "playwright test -c e2e madison.spec"
   },
   "dependencies": {
     "@libsql/client": "^0.17.4",
