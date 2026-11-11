@@ -59,7 +59,10 @@ export const statementFields = {
       "Stable slug for this account in fact keys. Defaults to slugified payer name. Use a single short token like 'apex-individual' or 'fidelity-brokerage'. Pass the same slug in every call for one statement.",
     ),
   payer: PayerSchema,
-  accountNumber: z.string(),
+  accountNumber: z
+    .string()
+    .optional()
+    .describe("The account number as printed. Leave it out when the form prints none."),
   sourceNote: z.string().optional(),
 };
 
