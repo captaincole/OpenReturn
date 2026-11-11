@@ -246,7 +246,7 @@ Decisions flow back into the case engine: a decision with key `decisions.ca_resi
 
 ## The deductions conversation
 
-A filing has a second thread, `${userId}::${year}::deductions` (`cade/src/mastra/threads.ts` builds both thread ids; the filing routes create and delete both). It finds out whether the taxpayer itemizes or takes the standard deduction, on each return. The `cadeDeductions` agent runs it: Cade's name and model, short instructions (`agents/cadeDeductions.instructions.ts`) and nine tools. The return's long instructions never load there.
+A filing has a second thread, `${userId}::${year}::deductions` (`cade/src/mastra/threads.ts` builds both thread ids; the filing routes create and delete both). It finds out whether the taxpayer itemizes or takes the standard deduction, on each return. The `cadeDeductions` agent runs it: Cade's name and model, short instructions (`agents/cadeDeductions.instructions.ts`) and nine tools (`tools/deductionsTools.ts`, which its eval in `cade/evals/deductions/` uses too). The return's long instructions never load there.
 
 **The flow is code, not prompt.** `get-deductions` returns `next`, the one step to take now, derived from the engine's item states and comparison (`cade/src/mastra/deductions/flow.ts`): `ask_life_questions` → `ask_anything_else` (the open door) → `ask_amounts` → `wait_for_return` (no income or filing status yet) → `get_exact_amounts` → `close` → `closed`. The instructions say only how to carry out a step. A new step is a change to `flow.ts` and its tests, not a paragraph in the prompt.
 
