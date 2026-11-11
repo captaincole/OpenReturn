@@ -36,7 +36,7 @@ canon/                           # @openreturn/canon — CANON, the tax attorney
 ├── scripts/corpus/                the `corpus` CLI (npm run corpus)
 ├── seed/corpus.manifest.json      the prebuilt corpus.db release pointer
 ├── evals/                         model evals of Canon's pipelines (review = ground, ask); the
-│                                  reports land in docs/evals with Cade's ingest eval
+│                                  reports land in docs/evals with Cade's ingest and deductions evals
 ├── tests/unit/                    refdocs, search, ask validation, ground loop, boundary.test.ts
 │                                  (no Cade, no app.db, no engine imports)
 └── .data/                         corpus.db + mastra.db (gitignored)
@@ -71,8 +71,9 @@ cade/                            # @openreturn/cade — CADE, the AI CPA. Mastra
 │                                  by `npm --prefix cade run sources:sync` before dev/build).
 ├── scripts/                     # standalone diagnostics (doctor, smokeReview, inspectLastReview)
 │                                  and syncSources (the runtime copy of the blank PDFs)
-├── evals/                       # the ingest eval; review and ask evals are Canon's (canon/evals);
-│                                  evals/lite runs the lite tier of all three (npm run evals:lite)
+├── evals/                       # the ingest eval and the deductions eval (what Cade records for an
+│                                  expense named at the open door); review and ask evals are Canon's
+│                                  (canon/evals); evals/lite runs the lite tier of all four (npm run evals:lite)
 ├── tests/                       # agent tests (tools, db, boundary); corpus tests are in canon/, engine tests in engine
 ├── package.json                 # agent deps + scripts (mastra dev, sources:sync)
 └── tsconfig.json                # "paths" aliases @openreturn/engine to source so `mastra dev` bundles it

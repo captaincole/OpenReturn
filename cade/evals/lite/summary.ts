@@ -5,8 +5,8 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
-export type Flow = "ingest" | "review" | "ask";
-export const FLOWS: Flow[] = ["ingest", "review", "ask"];
+export type Flow = "ingest" | "deductions" | "review" | "ask";
+export const FLOWS: Flow[] = ["ingest", "deductions", "review", "ask"];
 
 /* One case of one model, as each eval's run.ts writes it: pass/fail, or an ingest score in [0, 1]. */
 export interface CaseResult {

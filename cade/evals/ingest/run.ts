@@ -5,18 +5,15 @@
  */
 import { Agent } from "@mastra/core/agent";
 import { extractTrajectory } from "@mastra/core/evals";
-import { MASTRA_RESOURCE_ID_KEY, RequestContext } from "@mastra/core/request-context";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { ingestingDocuments } from "../../src/mastra/agents/cade.instructions";
 import { PdfAttachmentRasterizer } from "../../src/mastra/agents/pdfAttachments";
-import { createOwnerFiling } from "../../src/mastra/db/filings";
 import { listFacts } from "../../src/mastra/db/taxFacts";
 import { modelFor } from "../../src/mastra/models";
-import { DEMO_TAX_YEAR } from "../../src/mastra/server/demoSession";
-import { REQUEST_CONTEXT_KEYS } from "../../src/mastra/server/requestContext";
 import { INGEST_MAX_OUTPUT_TOKENS, ingestTools } from "../../src/mastra/tools/ingestTools";
 import { modelsFromArgs, tierFromArgs, useModel, type EvalModel } from "../lib/models";
+import { freshScope } from "../lib/scope";
 import "../lib/tempDb";
 import { loadCases, type IngestCase } from "./cases";
 import { publishReport, type IngestResult } from "./report";
@@ -58,19 +55,6 @@ const toMessages = (testCase: IngestCase) => [
     ],
   },
 ];
-
-let runCounter = 0;
-async function freshScope() {
-  const userId = `eval-${++runCounter}`;
-  const filingId = crypto.randomUUID();
-  await createOwnerFiling({ filingId, userId, taxYear: DEMO_TAX_YEAR });
-  /* What ownerMiddleware sets on a real request; the tools' requestContextSchema requires the last two. */
-  const requestContext = new RequestContext();
-  requestContext.set(MASTRA_RESOURCE_ID_KEY, userId);
-  requestContext.set(REQUEST_CONTEXT_KEYS.userId, userId);
-  requestContext.set(REQUEST_CONTEXT_KEYS.userEmail, `${userId}@example.com`);
-  return { scope: { userId, filingId }, requestContext };
-}
 
 const ingestCalls = (messages: unknown) =>
   extractTrajectory(messages as never)

@@ -68,7 +68,8 @@ cade/
 │   └── loadScenario.ts   the one place app.db meets the form engine
 ├── scripts/          doctor, smokeReview, inspectLastReview, syncSources
 ├── evals/ingest/     the document-ingest eval (report in docs/evals/ingest.md)
-├── evals/lite/       `npm run evals:lite`: one run of the lite cases of all three evals
+├── evals/deductions/ the deductions eval: expenses named at the open door (report in docs/evals/deductions.md)
+├── evals/lite/       `npm run evals:lite`: one run of the lite cases of all four evals
 └── tests/            unit and integration tests (tests/README.md)
 ```
 
