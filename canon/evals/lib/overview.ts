@@ -6,6 +6,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pct, table } from "./markdown";
 
+/* The same list as cade/evals/lib/overview.ts: the two packages share no code. */
 export type Flow = "ingest" | "deductions" | "review" | "ask";
 
 export interface ModelScores {

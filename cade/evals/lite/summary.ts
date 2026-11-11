@@ -4,9 +4,9 @@
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { FLOWS, type Flow } from "../lib/overview";
 
-export type Flow = "ingest" | "deductions" | "review" | "ask";
-export const FLOWS: Flow[] = ["ingest", "deductions", "review", "ask"];
+export { FLOWS, type Flow };
 
 /* One case of one model, as each eval's run.ts writes it: pass/fail, or an ingest score in [0, 1]. */
 export interface CaseResult {

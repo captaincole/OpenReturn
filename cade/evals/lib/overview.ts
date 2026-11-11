@@ -2,7 +2,9 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pct, table } from "./markdown";
 
+/* The flows, in the overview's column order. Canon keeps its own copy (canon/evals/lib/overview.ts). */
 export type Flow = "ingest" | "deductions" | "review" | "ask";
+export const FLOWS: Flow[] = ["ingest", "deductions", "review", "ask"];
 
 export interface ModelScores {
   label: string;
@@ -23,7 +25,6 @@ export interface FlowScores {
 
 const REPO = path.resolve(__dirname, "../../..");
 const DIR = path.join(REPO, "docs/evals");
-const FLOWS: Flow[] = ["ingest", "deductions", "review", "ask"];
 const scoresFile = (flow: Flow) => path.join(DIR, "scores", `${flow}.json`);
 
 const cell = (scores: ModelScores | undefined) =>

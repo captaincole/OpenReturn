@@ -17,6 +17,7 @@ import { LIFE_QUESTION_IDS } from "../../src/mastra/deductions/lifeQuestions";
 import { namedDecisionKey, NOTHING_ELSE_KEY } from "../../src/mastra/deductions/openDoor";
 import { modelFor } from "../../src/mastra/models";
 import { deductionsTools } from "../../src/mastra/tools/deductionsTools";
+import { INGEST_MAX_OUTPUT_TOKENS } from "../../src/mastra/tools/ingestTools";
 import { modelsFromArgs, tierFromArgs, useModel, type EvalModel } from "../lib/models";
 import { freshScope } from "../lib/scope";
 import "../lib/tempDb";
@@ -99,10 +100,14 @@ async function evalCase(
   await seedEveryNo(requestContext);
   const seeded = new Set((await allFacts(scope)).map((fact) => fact.id));
   try {
-    /* maxSteps: read the step, record the expense, read the step again, reply. */
+    /*
+     * maxSteps: read the step, record the expense, read the step again, reply.
+     * modelSettings: the production agent's (agents/cadeDeductions.ts).
+     */
     const result = await agent.generate([{ role: "user" as const, content: testCase.says }], {
       requestContext,
       maxSteps: 8,
+      modelSettings: { maxOutputTokens: INGEST_MAX_OUTPUT_TOKENS },
     });
     return {
       ...base,
