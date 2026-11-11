@@ -134,26 +134,34 @@ describe("evaluateDeductions item states", () => {
     expect(margin.missing).toContain(INVESTMENT_INTEREST_KEYS.investmentExpenses);
   });
 
-  it("asks California's own carryover (FTB 3526) after every Form 4952 answer", () => {
+  describe("after every Form 4952 answer", () => {
     const answered = [
       fact(INVESTMENT_INTEREST_KEYS.expensePaid, 1250),
       fact(INVESTMENT_INTEREST_KEYS.disallowedCarryover, 650),
       fact(INVESTMENT_INTEREST_KEYS.electedQualifiedDividendsAndGain, 0),
       fact(INVESTMENT_INTEREST_KEYS.investmentExpenses, 0),
     ];
-    const filesCa = decisionRow({
-      userId: "test",
-      taxYear: 2025,
-      key: "decisions.scope.must_file_ca_540",
-      decision: true,
-      rationale: "A California resident.",
+    const margin = (filesCa: boolean) => {
+      const mustFileCa = decisionRow({
+        userId: "test",
+        taxYear: 2025,
+        key: "decisions.scope.must_file_ca_540",
+        decision: filesCa,
+        rationale: "The California return.",
+      });
+      return items(answered, [], [mustFileCa]).find((item) => item.id === "investment_interest")!;
+    };
+
+    it("asks California's own carryover (FTB 3526) while a California return files", () => {
+      expect(margin(true)).toMatchObject({
+        status: "open",
+        missing: [INVESTMENT_INTEREST_KEYS.caDisallowedCarryover],
+      });
     });
-    const margin = items(answered, [], [filesCa]).find(
-      (item) => item.id === "investment_interest",
-    )!;
-    expect(margin).toMatchObject({
-      status: "open",
-      missing: [INVESTMENT_INTEREST_KEYS.caDisallowedCarryover],
+
+    it("asks nothing more on a federal-only return", () => {
+      expect(margin(false).missing).toEqual([]);
+      expect(margin(false).status).not.toBe("open");
     });
   });
 });
