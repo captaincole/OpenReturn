@@ -1,5 +1,6 @@
 import type { FormAccessor } from "../../defineForm.js";
 import { unsupported, type Unsupported } from "../../types.js";
+import { schedule8812Line18aGap } from "../schedule-8812/earnedIncomeGap.js";
 import { eicOutcome } from "../schedule-eic/outcome.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import type { Form1040 } from "./types.js";
@@ -26,7 +27,8 @@ function partIIMayOpen(form: FormAccessor<Form1040>, info: Form1040FilingInfo): 
 /*
  * MANUAL EDIT: line 32 adds lines 27a and 28 only once both are final: a blank
  * line counts as 0 only when the credit is none. true when both are final;
- * undefined while one waits; the EIC's gap when line 27a is unsupported.
+ * undefined while one waits; the EIC's gap when line 27a is unsupported, and
+ * Schedule 8812 line 18a's gap when line 28 is blank for it.
  */
 export function refundableCreditsFinal(
   form: FormAccessor<Form1040>,
@@ -36,5 +38,8 @@ export function refundableCreditsFinal(
   if (eic.kind === "unsupported") return unsupported(eic.reason);
   if (eic.kind === "waiting") return undefined;
   if (eic.kind === "credit" && typeof form["line.27a"] !== "number") return undefined;
-  return typeof form["line.28"] !== "number" && partIIMayOpen(form, info) ? undefined : true;
+  if (typeof form["line.28"] === "number") return true;
+  const line18aGap = schedule8812Line18aGap(form, info);
+  if (line18aGap !== undefined) return unsupported(line18aGap);
+  return partIIMayOpen(form, info) ? undefined : true;
 }
