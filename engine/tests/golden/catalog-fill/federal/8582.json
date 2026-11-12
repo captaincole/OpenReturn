@@ -1,0 +1,1788 @@
+{
+  "formId": "form-8582",
+  "fieldCount": 198,
+  "entries": [
+    {
+      "fieldId": "form-8582.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-1AF69"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.10_income_lines_1a_2a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "8,906"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.11_total_losses_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "7,642"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.1a_rental_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "3,594"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.1b_rental_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "5,720"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.1c_rental_prior_unallowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "3,190"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.1d_rental_combined",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "9,826"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.2a_other_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "8,631"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.2b_other_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "4,752"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.2c_other_prior_unallowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "2,883"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.2d_other_combined",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "6,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.3_combined",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "5,301"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.4_smaller_loss_1d_or_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "3,779"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.5_allowance_threshold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "4,462"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.6_modified_agi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "2,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.7_line5_minus_line6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "2,344"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.8_half_of_line7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "9,787"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.line.9_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "5,208"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_21[0]",
+          "text": "2,657"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_22[0]",
+          "text": "9,550"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_23[0]",
+          "text": "9,838"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_col_d_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_24[0]",
+          "text": "8,871"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_col_e_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_25[0]",
+          "text": "9,492"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_20[0]",
+          "text": "T-1YZQQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_27[0]",
+          "text": "7,838"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_28[0]",
+          "text": "8,513"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_29[0]",
+          "text": "8,211"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_col_d_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_30[0]",
+          "text": "5,782"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_col_e_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_31[0]",
+          "text": "7,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_26[0]",
+          "text": "T-NYIIK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_33[0]",
+          "text": "9,125"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_34[0]",
+          "text": "1,662"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_35[0]",
+          "text": "8,115"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_col_d_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_36[0]",
+          "text": "3,876"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_col_e_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_37[0]",
+          "text": "4,675"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_32[0]",
+          "text": "T-1YIDH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_39[0]",
+          "text": "5,566"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_40[0]",
+          "text": "1,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_41[0]",
+          "text": "8,140"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_col_d_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_42[0]",
+          "text": "1,184"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_col_e_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_43[0]",
+          "text": "5,398"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_38[0]",
+          "text": "T-E9KJ6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_45[0]",
+          "text": "3,042"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_46[0]",
+          "text": "7,866"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_47[0]",
+          "text": "5,195"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_col_d_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_48[0]",
+          "text": "4,727"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_col_e_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_49[0]",
+          "text": "3,597"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_44[0]",
+          "text": "T-BH4Q4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.total_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row6[0].f1_50[0]",
+          "text": "5,063"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.total_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row6[0].f1_51[0]",
+          "text": "2,507"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.0.part4.total_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row6[0].f1_52[0]",
+          "text": "6,639"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_02[0]",
+          "text": "5,447"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_03[0]",
+          "text": "1,981"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_04[0]",
+          "text": "6,805"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_col_d_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_05[0]",
+          "text": "6,224"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_col_e_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_06[0]",
+          "text": "6,098"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_01[0]",
+          "text": "T-1DWZ9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_08[0]",
+          "text": "8,630"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_09[0]",
+          "text": "5,802"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_10[0]",
+          "text": "2,954"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_col_d_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_11[0]",
+          "text": "2,798"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_col_e_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_12[0]",
+          "text": "8,396"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_07[0]",
+          "text": "T-1KTM3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_14[0]",
+          "text": "3,964"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_15[0]",
+          "text": "2,231"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_16[0]",
+          "text": "2,897"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_col_d_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_17[0]",
+          "text": "8,048"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_col_e_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_18[0]",
+          "text": "5,158"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_13[0]",
+          "text": "T-YTYUA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_20[0]",
+          "text": "1,634"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_21[0]",
+          "text": "1,948"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_22[0]",
+          "text": "4,072"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_col_d_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_23[0]",
+          "text": "4,444"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_col_e_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_24[0]",
+          "text": "8,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_19[0]",
+          "text": "T-HDAV0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_26[0]",
+          "text": "8,856"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_27[0]",
+          "text": "2,073"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_28[0]",
+          "text": "6,749"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_col_d_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_29[0]",
+          "text": "4,530"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_col_e_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_30[0]",
+          "text": "3,847"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_25[0]",
+          "text": "T-1K4E5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.total_col_a_net_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Total[0].f2_31[0]",
+          "text": "7,015"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.total_col_b_net_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Total[0].f2_32[0]",
+          "text": "4,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part5.total_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Total[0].f2_33[0]",
+          "text": "3,605"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_38[0]",
+          "text": "9,784"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_39[0]",
+          "text": "T-14E8E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_40[0]",
+          "text": "8,671"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_col_d_subtract",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_41[0]",
+          "text": "8,586"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_37[0]",
+          "text": "T-187R0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_36[0]",
+          "text": "T-12CON"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_44[0]",
+          "text": "3,431"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_45[0]",
+          "text": "T-106D2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_46[0]",
+          "text": "5,205"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_col_d_subtract",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_47[0]",
+          "text": "9,001"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_43[0]",
+          "text": "T-12HS4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_42[0]",
+          "text": "T-3ORX2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_50[0]",
+          "text": "5,058"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_51[0]",
+          "text": "T-1VIUY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_52[0]",
+          "text": "7,058"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_col_d_subtract",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_53[0]",
+          "text": "4,404"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_49[0]",
+          "text": "T-16EJA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_48[0]",
+          "text": "T-DN2YR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_56[0]",
+          "text": "7,228"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_57[0]",
+          "text": "T-3XDXG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_58[0]",
+          "text": "2,167"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_col_d_subtract",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_59[0]",
+          "text": "2,136"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_55[0]",
+          "text": "T-1REMC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_54[0]",
+          "text": "T-NWKAS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_62[0]",
+          "text": "8,368"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_63[0]",
+          "text": "T-170HD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_64[0]",
+          "text": "9,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_col_d_subtract",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_65[0]",
+          "text": "3,665"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_61[0]",
+          "text": "T-6WO54"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_60[0]",
+          "text": "T-UD80U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.total_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_66[0]",
+          "text": "3,662"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.total_col_c_special_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_68[0]",
+          "text": "2,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part6.total_col_d_subtract",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_69[0]",
+          "text": "3,534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_1_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row1[0].f2_72[0]",
+          "text": "8,201"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_1_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row1[0].f2_73[0]",
+          "text": "T-M6OG9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_1_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row1[0].f2_74[0]",
+          "text": "7,647"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_1_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row1[0].f2_71[0]",
+          "text": "T-3BV7D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_1_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row1[0].f2_70[0]",
+          "text": "T-1MTC5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_2_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row2[0].f2_77[0]",
+          "text": "2,551"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_2_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row2[0].f2_78[0]",
+          "text": "T-MJGWH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_2_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row2[0].f2_79[0]",
+          "text": "9,291"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_2_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row2[0].f2_76[0]",
+          "text": "T-1DT2Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_2_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row2[0].f2_75[0]",
+          "text": "T-Z9ODT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_3_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row3[0].f2_82[0]",
+          "text": "4,887"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_3_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row3[0].f2_83[0]",
+          "text": "T-7X6PK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_3_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row3[0].f2_84[0]",
+          "text": "1,412"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_3_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row3[0].f2_81[0]",
+          "text": "T-KQGIO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_3_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row3[0].f2_80[0]",
+          "text": "T-1YVR0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_4_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row4[0].f2_87[0]",
+          "text": "9,088"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_4_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row4[0].f2_88[0]",
+          "text": "T-17H7K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_4_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row4[0].f2_89[0]",
+          "text": "7,245"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_4_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row4[0].f2_86[0]",
+          "text": "T-UFELM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_4_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row4[0].f2_85[0]",
+          "text": "T-F0CHR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_5_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row5[0].f2_92[0]",
+          "text": "1,082"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_5_col_b_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row5[0].f2_93[0]",
+          "text": "T-SH55Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_5_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row5[0].f2_94[0]",
+          "text": "9,311"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_5_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row5[0].f2_91[0]",
+          "text": "T-U33T9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_5_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row5[0].f2_90[0]",
+          "text": "T-1Y5ZL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.total_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_95[0]",
+          "text": "7,171"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part7.total_col_c_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_97[0]",
+          "text": "1,098"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_1_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row1[0].f2_100[0]",
+          "text": "4,030"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_1_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row1[0].f2_101[0]",
+          "text": "7,509"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_1_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row1[0].f2_102[0]",
+          "text": "2,128"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_1_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row1[0].f2_99[0]",
+          "text": "T-ZC8BF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_1_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row1[0].f2_98[0]",
+          "text": "T-1EQ5I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_2_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row2[0].f2_105[0]",
+          "text": "2,315"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_2_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row2[0].f2_106[0]",
+          "text": "7,593"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_2_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row2[0].f2_107[0]",
+          "text": "2,993"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_2_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row2[0].f2_104[0]",
+          "text": "T-STFIQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_2_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row2[0].f2_103[0]",
+          "text": "T-103N9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_3_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row3[0].f2_110[0]",
+          "text": "6,387"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_3_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row3[0].f2_111[0]",
+          "text": "9,940"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_3_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row3[0].f2_112[0]",
+          "text": "8,481"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_3_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row3[0].f2_109[0]",
+          "text": "T-15K5G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_3_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row3[0].f2_108[0]",
+          "text": "T-1PYJI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_4_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row4[0].f2_115[0]",
+          "text": "8,766"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_4_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row4[0].f2_116[0]",
+          "text": "4,595"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_4_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row4[0].f2_117[0]",
+          "text": "8,967"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_4_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row4[0].f2_114[0]",
+          "text": "T-1JJ1S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_4_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row4[0].f2_113[0]",
+          "text": "T-1AQUN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_5_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row5[0].f2_120[0]",
+          "text": "3,781"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_5_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row5[0].f2_121[0]",
+          "text": "1,028"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_5_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row5[0].f2_122[0]",
+          "text": "4,771"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_5_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row5[0].f2_119[0]",
+          "text": "T-RZZNY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_5_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row5[0].f2_118[0]",
+          "text": "T-C5S9S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.total_col_a_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_123[0]",
+          "text": "8,016"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.total_col_b_unallowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_124[0]",
+          "text": "3,005"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.1.part8.total_col_c_allowed_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_125[0]",
+          "text": "2,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.activity_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_01[0]",
+          "text": "T-GLVOQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_06[0]",
+          "text": "T-SRDAX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_07[0]",
+          "text": "9,883"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_08[0]",
+          "text": "4,763"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].Form1_ReadOrder[0].f3_02[0]",
+          "text": "T-2VI7B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_line_1a_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_03[0]",
+          "text": "5,030"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_line_1b_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_04[0]",
+          "text": "2,218"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_line_1c_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_05[0]",
+          "text": "1,849"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_13[0]",
+          "text": "T-7TW8H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_14[0]",
+          "text": "4,501"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_15[0]",
+          "text": "4,925"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].Form2_ReadOrder[0].f3_09[0]",
+          "text": "T-1MR7H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_line_1a_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_10[0]",
+          "text": "5,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_line_1b_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_11[0]",
+          "text": "1,489"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_line_1c_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_12[0]",
+          "text": "3,933"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_20[0]",
+          "text": "T-1FVG4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_21[0]",
+          "text": "1,929"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_22[0]",
+          "text": "9,510"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_form_or_schedule",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].Form3_ReadOrder[0].f3_16[0]",
+          "text": "T-D6XFG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_line_1a_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_17[0]",
+          "text": "2,875"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_line_1b_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_18[0]",
+          "text": "7,760"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_line_1c_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_19[0]",
+          "text": "1,110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.total_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_23[0]",
+          "text": "2,263"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.total_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_25[0]",
+          "text": "3,001"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8582.2.part9.total_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_26[0]",
+          "text": "6,850"
+        }
+      ]
+    }
+  ]
+}

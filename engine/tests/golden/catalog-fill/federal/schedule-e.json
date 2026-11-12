@@ -1,0 +1,1590 @@
+{
+  "formId": "schedule-e",
+  "fieldCount": 176,
+  "entries": [
+    {
+      "fieldId": "schedule-e.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-16GDD"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.10_legal_professional_fees_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line10[0].f1_37[0]",
+          "text": "7,513"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.10_legal_professional_fees_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line10[0].f1_38[0]",
+          "text": "1,024"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.10_legal_professional_fees_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line10[0].f1_39[0]",
+          "text": "6,777"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.11_management_fees_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line11[0].f1_40[0]",
+          "text": "3,561"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.11_management_fees_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line11[0].f1_41[0]",
+          "text": "2,315"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.11_management_fees_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line11[0].f1_42[0]",
+          "text": "3,213"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.12_mortgage_interest_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line12[0].f1_43[0]",
+          "text": "9,572"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.12_mortgage_interest_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line12[0].f1_44[0]",
+          "text": "7,654"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.12_mortgage_interest_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line12[0].f1_45[0]",
+          "text": "8,392"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.13_other_interest_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line13[0].f1_46[0]",
+          "text": "2,031"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.13_other_interest_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line13[0].f1_47[0]",
+          "text": "9,130"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.13_other_interest_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line13[0].f1_48[0]",
+          "text": "6,248"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.14_repairs_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line14[0].f1_49[0]",
+          "text": "6,783"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.14_repairs_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line14[0].f1_50[0]",
+          "text": "1,387"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.14_repairs_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line14[0].f1_51[0]",
+          "text": "2,701"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.15_supplies_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line15[0].f1_52[0]",
+          "text": "1,523"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.15_supplies_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line15[0].f1_53[0]",
+          "text": "4,032"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.15_supplies_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line15[0].f1_54[0]",
+          "text": "8,689"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.16_taxes_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line16[0].f1_55[0]",
+          "text": "2,349"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.16_taxes_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line16[0].f1_56[0]",
+          "text": "2,595"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.16_taxes_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line16[0].f1_57[0]",
+          "text": "4,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.17_utilities_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line17[0].f1_58[0]",
+          "text": "6,625"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.17_utilities_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line17[0].f1_59[0]",
+          "text": "7,279"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.17_utilities_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line17[0].f1_60[0]",
+          "text": "2,993"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.18_depreciation_or_depletion_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line18[0].f1_61[0]",
+          "text": "7,651"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.18_depreciation_or_depletion_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line18[0].f1_62[0]",
+          "text": "8,289"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.18_depreciation_or_depletion_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line18[0].f1_63[0]",
+          "text": "9,890"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.19_other_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line19[0].f1_65[0]",
+          "text": "7,523"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.19_other_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line19[0].f1_66[0]",
+          "text": "7,163"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.19_other_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line19[0].f1_67[0]",
+          "text": "9,690"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.19_other_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line19[0].f1_64[0]",
+          "text": "T-7ML3O"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.1a_address_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1a[0].RowA[0].f1_3[0]",
+          "text": "T-1A8S3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.1a_address_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1a[0].RowB[0].f1_4[0]",
+          "text": "T-1F8QC"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.1a_address_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1a[0].RowC[0].f1_5[0]",
+          "text": "T-1G7IR"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.1b_other_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "T-1HM5P"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.1b_property_type_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1b[0].RowA[0].f1_6[0]",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.1b_property_type_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1b[0].RowB[0].f1_7[0]",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.1b_property_type_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1b[0].RowC[0].f1_8[0]",
+          "text": "8"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_fair_rental_days_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowA[0].f1_9[0]",
+          "text": "8,800"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_fair_rental_days_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowB[0].f1_11[0]",
+          "text": "2,773"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_fair_rental_days_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowC[0].f1_13[0]",
+          "text": "5,120"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_personal_use_days_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowA[0].f1_10[0]",
+          "text": "7,386"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_personal_use_days_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowB[0].f1_12[0]",
+          "text": "1,182"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_personal_use_days_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowC[0].f1_14[0]",
+          "text": "9,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_qjv_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowA[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_qjv_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowB[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_qjv_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowC[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.20_total_expenses_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line20[0].f1_68[0]",
+          "text": "9,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.20_total_expenses_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line20[0].f1_69[0]",
+          "text": "6,018"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.20_total_expenses_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line20[0].f1_70[0]",
+          "text": "9,404"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.21_income_or_loss_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line21[0].f1_71[0]",
+          "text": "2,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.21_income_or_loss_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line21[0].f1_72[0]",
+          "text": "3,536"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.21_income_or_loss_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line21[0].f1_73[0]",
+          "text": "2,748"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.22_deductible_loss_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line22[0].f1_74[0]",
+          "text": "2,170"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.22_deductible_loss_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line22[0].f1_75[0]",
+          "text": "7,780"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.22_deductible_loss_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line22[0].f1_76[0]",
+          "text": "1,380"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.23a_total_rents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_77[0]",
+          "text": "6,692"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.23b_total_royalties",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_78[0]",
+          "text": "6,659"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.23c_total_mortgage_interest",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_79[0]",
+          "text": "6,271"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.23d_total_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_80[0]",
+          "text": "5,306"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.23e_total_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_81[0]",
+          "text": "9,515"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.24_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_82[0]",
+          "text": "6,878"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.25_losses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_83[0]",
+          "text": "9,625"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.26_total_income_or_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_84[0]",
+          "text": "2,325"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.3_rents_received_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line3[0].f1_16[0]",
+          "text": "1,592"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.3_rents_received_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line3[0].f1_17[0]",
+          "text": "8,999"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.3_rents_received_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line3[0].f1_18[0]",
+          "text": "4,518"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.4_royalties_received_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line4[0].f1_19[0]",
+          "text": "4,505"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.4_royalties_received_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line4[0].f1_20[0]",
+          "text": "4,052"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.4_royalties_received_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line4[0].f1_21[0]",
+          "text": "7,754"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.5_advertising_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line5[0].f1_22[0]",
+          "text": "3,526"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.5_advertising_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line5[0].f1_23[0]",
+          "text": "8,217"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.5_advertising_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line5[0].f1_24[0]",
+          "text": "6,062"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.6_auto_and_travel_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line6[0].f1_25[0]",
+          "text": "9,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.6_auto_and_travel_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line6[0].f1_26[0]",
+          "text": "3,390"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.6_auto_and_travel_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line6[0].f1_27[0]",
+          "text": "6,442"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.7_cleaning_and_maintenance_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line7[0].f1_28[0]",
+          "text": "8,767"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.7_cleaning_and_maintenance_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line7[0].f1_29[0]",
+          "text": "6,197"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.7_cleaning_and_maintenance_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line7[0].f1_30[0]",
+          "text": "3,517"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.8_commissions_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line8[0].f1_31[0]",
+          "text": "5,319"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.8_commissions_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line8[0].f1_32[0]",
+          "text": "4,695"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.8_commissions_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line8[0].f1_33[0]",
+          "text": "8,398"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.9_insurance_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line9[0].f1_34[0]",
+          "text": "4,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.9_insurance_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line9[0].f1_35[0]",
+          "text": "3,434"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.9_insurance_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line9[0].f1_36[0]",
+          "text": "2,950"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.a_payments_require_1099_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.a_payments_require_1099_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.b_filed_1099_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.0.line.b_filed_1099_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.header.name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "T-EI1QH"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.27_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.27_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_a_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].f2_3[0]",
+          "text": "T-1IWLQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_b_entity_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].f2_4[0]",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_c_foreign_partnership",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_d_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].f2_5[0]",
+          "text": "T-GF07W"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_e_basis_computation_required",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_f_amount_not_at_risk",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].c2_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_g_passive_loss_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowA[0].f2_15[0]",
+          "text": "1,180"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_h_passive_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowA[0].f2_16[0]",
+          "text": "7,288"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_i_nonpassive_loss_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowA[0].f2_17[0]",
+          "text": "8,877"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_j_section_179_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowA[0].f2_18[0]",
+          "text": "3,317"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_k_nonpassive_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowA[0].f2_19[0]",
+          "text": "1,308"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_a_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].f2_6[0]",
+          "text": "T-IL6L4"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_b_entity_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].f2_7[0]",
+          "text": "2"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_c_foreign_partnership",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].c2_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_d_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].f2_8[0]",
+          "text": "T-1IMOI"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_e_basis_computation_required",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].c2_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_f_amount_not_at_risk",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].c2_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_g_passive_loss_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowB[0].f2_20[0]",
+          "text": "4,709"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_h_passive_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowB[0].f2_21[0]",
+          "text": "9,081"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_i_nonpassive_loss_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowB[0].f2_22[0]",
+          "text": "1,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_j_section_179_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowB[0].f2_23[0]",
+          "text": "6,402"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_k_nonpassive_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowB[0].f2_24[0]",
+          "text": "8,744"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_a_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].f2_9[0]",
+          "text": "T-VK5ZH"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_b_entity_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].f2_10[0]",
+          "text": "6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_c_foreign_partnership",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].c2_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_d_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].f2_11[0]",
+          "text": "T-1NKS3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_e_basis_computation_required",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].c2_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_f_amount_not_at_risk",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].c2_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_g_passive_loss_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowC[0].f2_25[0]",
+          "text": "3,181"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_h_passive_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowC[0].f2_26[0]",
+          "text": "4,141"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_i_nonpassive_loss_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowC[0].f2_27[0]",
+          "text": "1,357"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_j_section_179_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowC[0].f2_28[0]",
+          "text": "7,532"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_k_nonpassive_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowC[0].f2_29[0]",
+          "text": "9,536"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_a_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].f2_12[0]",
+          "text": "T-1GI3B"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_b_entity_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].f2_13[0]",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_c_foreign_partnership",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].c2_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_d_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].f2_14[0]",
+          "text": "T-DLG9J"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_e_basis_computation_required",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].c2_12[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_f_amount_not_at_risk",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].c2_13[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_g_passive_loss_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowD[0].f2_30[0]",
+          "text": "2,094"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_h_passive_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowD[0].f2_31[0]",
+          "text": "3,338"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_i_nonpassive_loss_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowD[0].f2_32[0]",
+          "text": "4,622"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_j_section_179_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowD[0].f2_33[0]",
+          "text": "7,263"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_k_nonpassive_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowD[0].f2_34[0]",
+          "text": "2,078"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.29a_totals_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_36[0]",
+          "text": "2,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.29a_totals_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_39[0]",
+          "text": "8,146"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.29b_totals_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_40[0]",
+          "text": "7,472"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.29b_totals_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_42[0]",
+          "text": "1,779"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.29b_totals_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_43[0]",
+          "text": "4,527"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.30_add_income_columns",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_45[0]",
+          "text": "4,228"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.31_add_loss_columns",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_46[0]",
+          "text": "2,029"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.32_total_partnership_s_corp_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_47[0]",
+          "text": "6,837"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_a_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33a-b[0].RowA[0].f2_48[0]",
+          "text": "T-3X6LH"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_b_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33a-b[0].RowA[0].f2_49[0]",
+          "text": "T-1WA4W"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_c_passive_deduction_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowA[0].f2_52[0]",
+          "text": "6,793"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_d_passive_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowA[0].f2_53[0]",
+          "text": "1,131"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_e_nonpassive_deduction_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowA[0].f2_54[0]",
+          "text": "8,668"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_f_other_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowA[0].f2_55[0]",
+          "text": "8,771"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_a_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33a-b[0].RowB[0].f2_50[0]",
+          "text": "T-1RIF7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_b_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33a-b[0].RowB[0].f2_51[0]",
+          "text": "T-SVX0K"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_c_passive_deduction_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowB[0].f2_56[0]",
+          "text": "7,810"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_d_passive_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowB[0].f2_57[0]",
+          "text": "6,773"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_e_nonpassive_deduction_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowB[0].f2_58[0]",
+          "text": "5,473"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_f_other_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowB[0].f2_59[0]",
+          "text": "1,532"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.34a_totals_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_61[0]",
+          "text": "5,706"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.34a_totals_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_63[0]",
+          "text": "1,269"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.34b_totals_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_64[0]",
+          "text": "2,700"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.34b_totals_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_66[0]",
+          "text": "6,761"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.35_add_income_columns",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_68[0]",
+          "text": "7,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.36_add_loss_columns",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_69[0]",
+          "text": "1,955"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.37_total_estate_trust_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_70[0]",
+          "text": "4,129"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.38_col_a_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line38[0].Row1[0].f2_71[0]",
+          "text": "T-1YQXX"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.38_col_b_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line38[0].Row1[0].f2_72[0]",
+          "text": "T-5QY6T"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.38_col_c_excess_inclusion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line38[0].Row1[0].f2_73[0]",
+          "text": "6,061"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.38_col_d_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line38[0].Row1[0].f2_74[0]",
+          "text": "9,862"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.38_col_e_schedules_q_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line38[0].Row1[0].f2_75[0]",
+          "text": "4,900"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.39_remic_income_combined",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_76[0]",
+          "text": "5,590"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.40_net_farm_rental_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_77[0]",
+          "text": "4,887"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.41_total_income_or_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_78[0]",
+          "text": "7,413"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.42_farming_fishing_reconciliation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line42_ReadOrder[0].f2_79[0]",
+          "text": "2,897"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-e.1.line.43_real_estate_professional_reconciliation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_80[0]",
+          "text": "2,917"
+        }
+      ]
+    }
+  ]
+}
