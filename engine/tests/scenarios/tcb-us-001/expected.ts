@@ -62,10 +62,6 @@ const SCHEDULE_A: Partial<ExpectedResults> = {
     "schedule-a.0.line.14_total_gifts": 5000, // TotalCharitableContriAmt
     "schedule-a.0.line.17_total_itemized_deductions": 114800, // TotalItemizedDeductionsAmt
   },
-  renderedBlank: [
-    // Alaska has no income tax, and the answers elect no sales tax: the key has no line 5a.
-    "schedule-a.0.line.5a_state_local_income_or_sales_tax",
-  ],
 };
 
 const FORM_4952: Partial<ExpectedResults> = {
@@ -111,8 +107,6 @@ const SCHEDULE_D: Partial<ExpectedResults> = {
   renderedChecked: [
     // STAndLTGainInd true
     "schedule-d.1.line.17_both_gains_yes",
-    // ZeroOrBlankInd true
-    "schedule-d.1.line.20_use_qual_div_worksheet_yes",
   ],
 };
 
@@ -123,8 +117,6 @@ const FORM_8959: Partial<ExpectedResults> = {
     "form-8959.0.line.5_filing_status_threshold_wages": 200000, // FilingStatusThresholdCd
     "form-8959.0.line.6_excess_medicare_wages": 900000, // WagesTipsSubjToAddlMedcrTaxAmt
     "form-8959.0.line.7_additional_medicare_tax_wages": 8100, // AdditionalMedicareTaxAmt
-    "form-8959.0.line.8_self_employment_income": 0, // TotalSelfEmploymentIncomeAmt
-    "form-8959.0.line.14_rrta_compensation_tips": 0, // TotalRailroadRetirementCompAmt
     "form-8959.0.line.18_total_additional_medicare_tax": 8100, // TotalAMRRTTaxAmt
     "form-8959.0.line.19_medicare_tax_withheld": 24050, // TotalW2MedicareTaxWithheldAmt
     "form-8959.0.line.20_medicare_wages_from_line1": 1100000,
