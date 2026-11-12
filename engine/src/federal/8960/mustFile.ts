@@ -1,4 +1,5 @@
 import {
+  CAPITAL_LOSS_CARRYOVER_KEYS,
   GAMBLING_KEYS,
   businessesOnReturn,
   getGamblingWinningsFacts,
@@ -75,7 +76,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
 /*
  * Line 4b: every Schedule C business has line G "Yes", so its income is nonpassive.
  * Who Must File asks for investment income: an interest, dividend or sale fact
- * (category investment_income), or a business without line G "Yes" (passive).
+ * (category investment_income), a capital loss carried over from last year
+ * (it reaches line 5a through 1040 line 7a), or a business without line G "Yes" (passive).
  * This gate is stricter than who-must-file::b01, which states the MAGI test
  * alone: without investment income the tax is $0, and the gate keeps a $0
  * Form 8960 off high-wage returns. A person decides whether to drop it.
@@ -92,8 +94,12 @@ export function investmentSignals(
   const { businesses } = businessesOnReturn(inputs.facts, joint);
   const scheduleCNonpassive =
     businesses.length > 0 && businesses.every(({ value }) => value.materiallyParticipated === true);
+  const carryover = Object.values(CAPITAL_LOSS_CARRYOVER_KEYS).some(
+    (key) => (num(inputs, key) ?? 0) > 0,
+  );
   const hasInvestment =
     inputs.facts.some((fact) => fact.category === "investment_income") ||
+    carryover ||
     (businesses.length > 0 && !scheduleCNonpassive);
   return { scheduleCNonpassive, hasInvestment };
 }

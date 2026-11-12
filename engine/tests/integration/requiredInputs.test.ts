@@ -20,6 +20,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
   ],
   [/^identity\.address\.apt$/, "not every address has an apartment"],
   [
+    /^capital_gains\.(short|long)_term_loss_carryover$/,
+    "a prior-year answer Cade records when last year's return carried a capital loss over " +
+      "(last year's return is not read, #79); Schedule D files with it",
+  ],
+  [
     /^decisions\.scope\.must_file_8995(_a)?$/,
     "override; the QBI form follows the MAGI upper bound (federal/8995/whichForm.ts)",
   ],

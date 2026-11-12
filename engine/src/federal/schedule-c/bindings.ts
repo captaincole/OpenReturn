@@ -6,10 +6,13 @@ import { roundDollars } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
 import {
+  carAndTruckExpenses,
   grossIncome,
   grossProfit,
+  homeOfficeExpenses,
   netProfit,
   netReceipts,
+  otherExpensesTotal,
   tentativeProfit,
   totalExpenses,
 } from "./lines.js";
@@ -24,13 +27,11 @@ const COST_OF_GOODS_SOLD =
   "Part III (cost of goods sold) is not modeled: a business that sells goods, or has not said, leaves lines 5 and 7-31 blank.";
 const PART_III =
   "Part III (cost of goods sold) is not modeled: no fact gives inventory, purchases or the valuation method.";
+// MANUAL EDIT: the business fact now carries vehicles and otherExpenses; these rows wait for a drafter.
 const PART_IV =
-  "Part IV (vehicle information) is not modeled: no fact gives the vehicle's dates, mileage or the yes/no answers.";
-const PART_V = "Part V (other expenses) is not modeled: no fact lists other expenses.";
-const OTHER_EXPENSES =
-  "Part V (other expenses, line 48) is not modeled: no fact lists other expenses.";
-const HOME_OFFICE =
-  "No fact gives a business use of the home (Form 8829 or the simplified method); line 31 counts none.";
+  "Part IV (vehicle information) is not drafted yet: the business fact's vehicles give it, but no binding reads them.";
+const PART_V =
+  "Part V (other expenses) rows are not drafted yet: the business fact's otherExpenses give them, but no binding reads them.";
 const AT_RISK =
   "No fact says whether all investment in the business is at risk (Form 6198); line 31 leaves a loss blank.";
 
@@ -63,11 +64,18 @@ function expense(info: ScheduleCFilingInfo, key: keyof BusinessExpenses) {
   return business?.sellsGoods === false ? roundDollars(business.expenses?.[key]) : undefined;
 }
 
-// Line 28: lines 8 through 27b; blank when the business states no expense.
-function line28(info: ScheduleCFilingInfo) {
+// MANUAL EDIT: a computed Part II line (lines.ts). Part III can capitalize these, so it waits for "sells goods".
+function partII(
+  info: ScheduleCFilingInfo,
+  line: (business: BusinessFactValue) => number | undefined,
+) {
   const business = businessOf(info);
-  const stated = Object.values(business?.expenses ?? {}).some((amount) => amount !== undefined);
-  return business?.sellsGoods === false && stated ? totalExpenses(business.expenses) : undefined;
+  return business?.sellsGoods === false ? line(business) : undefined;
+}
+
+// MANUAL EDIT: the entry spaces are for the simplified method only, the one the fact models.
+function squareFeet(info: ScheduleCFilingInfo, which: "homeSquareFeet" | "businessSquareFeet") {
+  return businessOf(info)?.homeOffice?.[which];
 }
 
 /*
@@ -76,7 +84,13 @@ function line28(info: ScheduleCFilingInfo) {
  */
 function line31(info: ScheduleCFilingInfo) {
   const business = businessOf(info);
-  return business ? netProfit(business) : undefined;
+  return business ? netProfit(business, info.businesses ?? []) : undefined;
+}
+
+// MANUAL EDIT: the 300 square-foot cap is shared by the owner's other businesses, so line 30 reads them all.
+function line30(info: ScheduleCFilingInfo) {
+  const business = businessOf(info);
+  return business ? homeOfficeExpenses(business, info.businesses ?? []) : undefined;
 }
 
 function method(info: ScheduleCFilingInfo, which: "cash" | "accrual" | "other") {
@@ -124,7 +138,7 @@ export function register(): void {
       "0.line.6": (_, info) => roundDollars(businessOf(info)?.otherIncome),
       "0.line.7": (_, info) => partI(info, grossIncome),
       "0.line.8": (_, info) => expense(info, "advertising"),
-      "0.line.9": (_, info) => expense(info, "carAndTruck"),
+      "0.line.9": (_, info) => partII(info, carAndTruckExpenses),
       "0.line.10": (_, info) => expense(info, "commissionsAndFees"),
       "0.line.11": (_, info) => expense(info, "contractLabor"),
       "0.line.12": (_, info) => expense(info, "depletion"),
@@ -146,8 +160,12 @@ export function register(): void {
       "0.line.25": (_, info) => expense(info, "utilities"),
       "0.line.26": (_, info) => expense(info, "wages"),
       "0.line.27a": (_, info) => expense(info, "energyEfficientBuildings"),
-      "0.line.28": (_, info) => line28(info),
+      "0.line.27b": (_, info) => partII(info, otherExpensesTotal),
+      "0.line.28": (_, info) => partII(info, totalExpenses),
       "0.line.29": (_, info) => partI(info, tentativeProfit),
+      "0.line.30_home_sq_ft": (_, info) => squareFeet(info, "homeSquareFeet"),
+      "0.line.30_business_sq_ft": (_, info) => squareFeet(info, "businessSquareFeet"),
+      "0.line.30": (_, info) => line30(info),
       "0.line.31": (_, info) => line31(info),
     },
     formatters: {
@@ -204,10 +222,6 @@ export function register(): void {
       "0.line.f_other_specify": OTHER_METHOD,
       "0.line.1_statutory_employee": STATUTORY_EMPLOYEE,
       "0.line.4": COST_OF_GOODS_SOLD,
-      "0.line.27b": OTHER_EXPENSES,
-      "0.line.30_home_sq_ft": HOME_OFFICE,
-      "0.line.30_business_sq_ft": HOME_OFFICE,
-      "0.line.30": HOME_OFFICE,
       "0.line.32a": AT_RISK,
       "0.line.32b": AT_RISK,
       "0.line.j_yes": LINE_J,

@@ -10,7 +10,7 @@ type FactRow = { key: string; value: unknown; category: string };
 /* Schedule C lines 8–27a, one amount each. */
 export interface BusinessExpenses {
   advertising?: number; // 8
-  carAndTruck?: number; // 9: actual expenses; a standard-mileage vehicle adds its own amount (vehicles)
+  carAndTruck?: number; // 9: actual expenses other than parking fees and tolls (vehicles give those)
   commissionsAndFees?: number; // 10
   contractLabor?: number; // 11
   depletion?: number; // 12
@@ -34,7 +34,7 @@ export interface BusinessExpenses {
   energyEfficientBuildings?: number; // 27a
 }
 
-/* Part IV: one car or truck the business used. Line 9 takes its standard mileage amount. */
+/* Part IV: one car or truck the business used. Line 9 takes its parking and tolls, and its standard mileage amount. */
 export interface BusinessVehicle {
   /* Line 43: the date the vehicle was placed in service for the business, YYYY-MM-DD. */
   placedInService?: string;
@@ -46,7 +46,7 @@ export interface BusinessVehicle {
   otherMiles?: number;
   /* True when line 9 uses the standard mileage rate for this vehicle; false for actual expenses (expenses.carAndTruck). */
   standardMileageRate: boolean;
-  /* Business parking fees and tolls, added to the standard mileage amount on line 9. */
+  /* Business parking fees and tolls. Line 9 takes them on either method; expenses.carAndTruck leaves them out. */
   parkingAndTolls?: number;
   /* Line 45: the vehicle was available for personal use during off-duty hours. */
   availableForPersonalUse?: boolean;
@@ -66,6 +66,10 @@ export interface HomeOfficeSimplified {
   businessSquareFeet: number;
   /* True when the same area was used for the business all year (worksheet line 2). */
   sameAreaAllYear?: boolean;
+  /* Worksheet line 2 when the area was not the same all year: each month's allowable square feet (at most 300) summed, divided by 12. */
+  averageMonthlySquareFeet?: number;
+  /* True when all of the business's gross income is from this business use of the home (worksheet line 1). */
+  allGrossIncomeFromHome?: boolean;
 }
 
 /* Part V: one other expense, with the taxpayer's description. */
@@ -155,13 +159,19 @@ const isVehicle = (entry: Record<string, unknown>) =>
   isAmount(entry.parkingAndTolls) &&
   typeof entry.standardMileageRate === "boolean";
 
+const isOptionalBoolean = (value: unknown): boolean =>
+  value === undefined || typeof value === "boolean";
+
 const isHomeOffice = (value: unknown) =>
   value === undefined ||
   (isRecord(value) &&
     typeof value.homeSquareFeet === "number" &&
     isAmount(value.homeSquareFeet) &&
     typeof value.businessSquareFeet === "number" &&
-    isAmount(value.businessSquareFeet));
+    isAmount(value.businessSquareFeet) &&
+    isAmount(value.averageMonthlySquareFeet) &&
+    isOptionalBoolean(value.sameAreaAllYear) &&
+    isOptionalBoolean(value.allGrossIncomeFromHome));
 
 function isBusiness(value: unknown): value is BusinessFactValue {
   if (!isRecord(value)) return false;

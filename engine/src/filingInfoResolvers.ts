@@ -1,4 +1,5 @@
 import {
+  CAPITAL_LOSS_CARRYOVER_KEYS,
   CA_MISC_DEDUCTION_KEYS,
   GAMBLING_KEYS,
   SPOUSE_KEYS,
@@ -25,7 +26,7 @@ import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
 import { resolveScheduleHInfo } from "./federal/schedule-h/resolveInfo.js";
 import { resolveScheduleSEInfo } from "./federal/schedule-se/resolveInfo.js";
 import type { BaseFilingInfo } from "./filingInfo.js";
-import { sum } from "./money.js";
+import { sum, type Money } from "./money.js";
 import {
   factsInCategory,
   missingInputs,
@@ -204,19 +205,34 @@ export function resolve8949Info(inputs: ResolverInputs): Form8949FilingInfo {
   };
 }
 
-// Also fires for capital-gain distributions without 8949.
+/*
+ * Also fires for capital-gain distributions without 8949, and for a capital loss
+ * carried over from last year: Schedule D lines 6 and 14 take it
+ * (irs-1040sd-inst-2025::sec::capital-loss-carryover-worksheet-lines-6-and-14::b02).
+ */
 export function resolveScheduleDInfo(inputs: ResolverInputs): ScheduleDFilingInfo {
+  const carryoverKeys = Object.values(CAPITAL_LOSS_CARRYOVER_KEYS).filter(
+    (key) => (num(inputs, key) ?? 0) > 0,
+  );
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_d",
-    fallbacks: reportableSalesFallbacks(inputs),
+    fallbacks: [
+      ...reportableSalesFallbacks(inputs),
+      {
+        rule: "fallback: a capital loss carryover from last year",
+        value: carryoverKeys.length > 0,
+        triggeredByFactKeys: carryoverKeys,
+      },
+    ],
   });
   const distributions = sumInvestmentBox(inputs, "box2a", isDividendFactKey);
+  const positive = (value: number | undefined): Money | undefined =>
+    value !== undefined && value > 0 ? (value as Money) : undefined;
   return {
     mustFile: { "schedule-d": resolution },
-    capitalGainDistributions:
-      distributions > 0
-        ? (distributions as ScheduleDFilingInfo["capitalGainDistributions"])
-        : undefined,
+    capitalGainDistributions: positive(distributions),
+    shortTermLossCarryover: positive(num(inputs, CAPITAL_LOSS_CARRYOVER_KEYS.shortTerm)),
+    longTermLossCarryover: positive(num(inputs, CAPITAL_LOSS_CARRYOVER_KEYS.longTerm)),
   };
 }
 
@@ -323,7 +339,8 @@ function scheduleCTotal({
   if (businesses.length === 0 || spouseKeys.length > 0 || malformedKeys.length > 0) {
     return undefined;
   }
-  const profits = businesses.map((business) => netProfit(business.value));
+  const onReturn = businesses.map((business) => business.value);
+  const profits = onReturn.map((business) => netProfit(business, onReturn));
   return profits.every((profit) => profit !== undefined) ? sum(...profits) : undefined;
 }
 

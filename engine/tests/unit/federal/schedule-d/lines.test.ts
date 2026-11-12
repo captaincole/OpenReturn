@@ -7,10 +7,10 @@ import type { FilingStatus } from "../../../../src/values.js";
 describe("Schedule D line 21 (allowable loss)", () => {
   it.each([
     // label, line 16, status, line 21
-    ["loss over the cap, single", -20000, "single", -3000],
-    ["loss over the cap, MFJ", -20000, "married_filing_jointly", -3000],
-    ["loss over the cap, MFS", -20000, "married_filing_separately", -1500],
-    ["loss under the cap", -1200, "single", -1200],
+    ["loss over the cap, single", -20000, "single", 3000],
+    ["loss over the cap, MFJ", -20000, "married_filing_jointly", 3000],
+    ["loss over the cap, MFS", -20000, "married_filing_separately", 1500],
+    ["loss under the cap", -1200, "single", 1200],
     ["a gain: line 21 is blank", 5000, "single", undefined],
     ["zero: line 21 is blank", 0, "single", undefined],
     ["no filing status", -20000, undefined, undefined],
@@ -28,7 +28,7 @@ describe("Form 1040 line 7a from Schedule D", () => {
   });
 
   it("takes line 21 when line 16 is a loss", () => {
-    expect(form1040Line7a(-20000, -3000)).toBe(-3000);
+    expect(form1040Line7a(-20000, 3000)).toBe(-3000);
   });
 
   it("stays blank for a loss with no line 21", () => {

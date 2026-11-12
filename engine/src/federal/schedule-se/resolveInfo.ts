@@ -24,7 +24,8 @@ export function resolveScheduleSEInfo(inputs: ResolverInputs): ScheduleSEFilingI
   );
   const own = businesses.filter((business) => ownerOf(business.value) === "taxpayer");
   const spouseBusiness = businesses.length > own.length;
-  const profits = own.map((business) => netProfit(business.value));
+  const onReturn = businesses.map((business) => business.value);
+  const profits = own.map((business) => netProfit(business.value, onReturn));
   const known = profits.every((profit) => profit !== undefined);
   const profit = own.length === 0 || !known ? undefined : sum(...profits);
   const line4a = profit === undefined ? 0 : netEarnings(profit);
