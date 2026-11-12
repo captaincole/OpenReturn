@@ -1,11 +1,17 @@
 import {
   dependentCredit,
   getDependentFacts,
+  isW2FactKey,
   livedWithTaxpayerOverHalfYear,
   type DependentFactValue,
+  type W2FactValue,
 } from "../../facts/index.js";
-import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { sum, type Money } from "../../money.js";
+import { factsInCategory, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import type { DependentRow, Schedule8812FilingInfo } from "./filingInfo.js";
+
+// irs-1040s8-inst-2025::sec::line-18b::b01: nontaxable combat pay is "shown in Form W-2, box 12, with code Q".
+const COMBAT_PAY_CODE = "Q";
 
 /* Resolvers see no tax year; the 1040 pins its age rules to 2025 the same way (born before 1/2/1961). */
 const TAX_YEAR = 2025;
@@ -64,5 +70,22 @@ export function resolveSchedule8812Info(inputs: ResolverInputs): Schedule8812Fil
     dependents,
     childTaxCreditCount: undecided.length > 0 ? undefined : childTaxCreditCount,
     otherDependentCount: undecided.length > 0 ? undefined : otherDependentCount,
+    ...w2Amounts(inputs),
+  };
+}
+
+// Every W-2 counts, a spouse's too: lines 18b and 21 include a joint filer's spouse.
+function w2Amounts(inputs: ResolverInputs): Partial<Schedule8812FilingInfo> {
+  const w2s = factsInCategory(inputs, "wages")
+    .filter((row) => isW2FactKey(row.key))
+    .map((row) => row.value as W2FactValue);
+  const combatPay = w2s
+    .flatMap((w2) => w2.box12 ?? [])
+    .filter((entry) => entry.code.toUpperCase() === COMBAT_PAY_CODE);
+  return {
+    w2NontaxableCombatPay:
+      combatPay.length > 0 ? (sum(...combatPay.map((entry) => entry.amount)) as Money) : undefined,
+    w2SocialSecurityTaxWithheld: sum(...w2s.map((w2) => w2.box4)) as Money,
+    w2MedicareTaxWithheld: sum(...w2s.map((w2) => w2.box6)) as Money,
   };
 }
