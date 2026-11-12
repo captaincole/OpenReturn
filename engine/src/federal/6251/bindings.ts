@@ -85,11 +85,18 @@ const awaitsLine2c = (form: Form, info: Form6251FilingInfo): boolean =>
  * MANUAL EDIT: Exemption Worksheet—Line 5 (irs-6251-inst-2025::sec::exemption-worksheet::b01–b02).
  * 0 means the exemption is zero: the Note skips the worksheet and line 5.
  */
-function exemptionAmount(line4: number, status: FilingStatus): number {
+export function exemptionAmount(line4: number, status: FilingStatus): number {
   const row = EXEMPTION_BY_STATUS[status];
   if (line4 <= row.phaseOutStart) return row.exemption;
   const reduction = roundDollars((line4 - row.phaseOutStart) * EXEMPTION_PHASE_OUT_RATE);
   return atLeast(0, row.exemption - reduction);
+}
+
+/* Line 4's married-filing-separately add-on: 25% of the excess over $900,350, at most $68,500. */
+export function withMfsAddOn(combined: number, status: FilingStatus): number {
+  if (status !== "married_filing_separately" || combined <= MFS_ADD_ON_START) return combined;
+  const addOn = roundDollars((combined - MFS_ADD_ON_START) * MFS_ADD_ON_RATE);
+  return combined + Math.min(MFS_ADD_ON_MAX, addOn);
 }
 
 /* MANUAL EDIT: lines 7, 18 and 39: 26% up to the break, else 28% less the subtraction. */
@@ -110,7 +117,7 @@ const isPositive = (value: unknown): boolean => (numberOrBlank(value) ?? 0) > 0;
  * both Schedule D lines 15 and 16 (the AMT ones match: see regularWorksheet).
  * Line 6: "If zero or less, enter -0- here and on lines 7, 9, and 11, and go to line 10."
  */
-export function completesPartIII(form: Form): boolean {
+function completesPartIII(form: Form): boolean {
   if (!isPositive(form["0.line.6_amti_less_exemption"])) return false;
   return (
     isPositive(form["form-1040.line.3a"]) ||
@@ -262,11 +269,9 @@ export function register(): void {
           form["0.line.2t_intangible_drilling_costs"],
           form["0.line.3_other_adjustments"],
         );
-        if (info.filingStatus !== "married_filing_separately" || combined <= MFS_ADD_ON_START) {
-          return combined;
-        }
-        const addOn = roundDollars((combined - MFS_ADD_ON_START) * MFS_ADD_ON_RATE);
-        return combined + Math.min(MFS_ADD_ON_MAX, addOn);
+        return info.filingStatus === undefined
+          ? combined
+          : withMfsAddOn(combined, info.filingStatus);
       },
       // MANUAL EDIT: a zero exemption leaves line 5 blank; line 6 then takes line 4.
       "0.line.5_exemption": (form, info) => {
