@@ -66,6 +66,12 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
     8995-A) with its 1099-K, a W-2G, interest and dividends (Forms 8959 and 8960). Checked
     against the case's answer key; its README lists where the engine
     follows the instructions instead
+  - `tcb-us-005` — TaxCalcBench case ty25-us-005, federal only. MFJ, a
+    real estate professional's rental and a passive royalty (Schedule E,
+    Form 8582), a business whose QBI nets the rental's loss (Schedule C
+    (Form 8995-A)), a W-2 over the Additional Medicare threshold and a
+    child (Schedule 8812). Every line in the case's answer key matches;
+    its README lists what it leaves blank and two points to decide
   - `tcb-us-008` — TaxCalcBench case ty25-us-008, federal only. MFS, a
     W-2, a consulting business paid on a 1099-NEC (Schedule C with
     mileage and a simplified home office, Schedule SE, Form 8995), gifts
