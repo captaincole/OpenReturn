@@ -123,11 +123,17 @@ export function register(): void {
         info.spouseLastName
           ? `${info.spouseFirstName} ${info.spouseLastName}`
           : undefined,
-      // MANUAL EDIT: living apart all year covers "the last 6 months". Legal separation is not modeled.
+      /*
+       * MANUAL EDIT: the form's text: MFS or HOH, and lived apart the last 6 months
+       * (living apart all year covers it) or legally separated and apart at year end
+       * (irs-1040-inst-2025::sec::definitions-and-special-rules-2::b08).
+       */
       "header.lived_apart_mfs_hoh": (_, info) =>
         (info.filingStatus === "married_filing_separately" ||
           info.filingStatus === "head_of_household") &&
-        info.livedApartFromSpouseAllYear === true
+        (info.livedApartFromSpouseAllYear === true ||
+          info.livedApartFromSpouseLastSixMonths === true ||
+          info.legallySeparatedApartAtYearEnd === true)
           ? true
           : undefined,
       ...dependentRowBindings(),
@@ -275,14 +281,18 @@ export function register(): void {
       /*
        * Blank when 12e is blank: sum() would count it as 0 and overstate
        * taxable income. Also blank while Schedule 1-A is filed but 13b is blank,
-       * and while Form 8995-A is filed but 13a (its line 39) is blank
-       * (irs-1040-inst-2025::sec::line-13a::b01, irs-8995a-inst-2025::sec::line-39::b01).
+       * and while Form 8995 or 8995-A is filed but 13a (its line 15 or 39) is blank
+       * (irs-1040-inst-2025::sec::line-13a::b01, irs-8995-inst-2025::sec::line-15::b01,
+       * irs-8995a-inst-2025::sec::line-39::b01).
        */
       "line.14": (form, info) => {
+        const filesQbiForm =
+          info.mustFile?.["form-8995"]?.value === true ||
+          info.mustFile?.["form-8995-a"]?.value === true;
         if (
           form["line.12e"] === undefined ||
           awaitsSchedule1A(info, form["line.13b"]) ||
-          (info.mustFile?.["form-8995-a"]?.value === true && form["line.13a"] === undefined)
+          (filesQbiForm && form["line.13a"] === undefined)
         ) {
           return undefined;
         }
@@ -349,9 +359,9 @@ export function register(): void {
         const value = form["schedule-1.1.line.26"];
         return typeof value === "number" ? value : undefined;
       },
-      // MANUAL EDIT: line 13a = Form 8995-A line 39 (QBI deduction); blank when 8995-A is not filed.
+      // MANUAL EDIT: line 13a = Form 8995 line 15 or Form 8995-A line 39; at most one files (whichForm.ts).
       "line.13a": (form) => {
-        const value = form["form-8995-a.1.line.39"];
+        const value = form["form-8995.0.line.15"] ?? form["form-8995-a.1.line.39"];
         return typeof value === "number" ? value : undefined;
       },
       // MANUAL EDIT: line 13b = Schedule 1-A line 38; blank when Schedule 1-A is not filed.

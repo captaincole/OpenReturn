@@ -26,6 +26,10 @@ export interface Form1040FilingInfo
   socialSecurityBenefits?: Money;
   /** MFS: the line 6d box, and a $25,000 worksheet base instead of 0. */
   livedApartFromSpouseAllYear?: boolean;
+  /** MFS or HOH: the page 1 box (lived apart the last 6 months of the year). */
+  livedApartFromSpouseLastSixMonths?: boolean;
+  /** MFS or HOH: the page 1 box (legally separated, not in the spouse's household at year end). */
+  legallySeparatedApartAtYearEnd?: boolean;
   /** MFS: the line 12b box. */
   spouseItemizesSeparately?: boolean;
   /** Federal only. Form 540 has its own: a taxpayer can choose per jurisdiction. */
