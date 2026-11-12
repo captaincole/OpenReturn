@@ -1,0 +1,2988 @@
+{
+  "form": {
+    "formId": "form-8582",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Passive Activity Loss Limitations"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8582.0.header.name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 461.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8582.0.line.1a_rental_net_income",
+      "label": "Line 1a — Rental real estate activities with active participation: activities with net income (enter the amount from Part IV, column (a))",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 617.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.1b_rental_net_loss",
+      "label": "Line 1b — Rental real estate activities with active participation: activities with net loss (enter the amount from Part IV, column (b))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 413.4,
+        "y": 605.97
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.1c_rental_prior_unallowed",
+      "label": "Line 1c — Rental real estate activities with active participation: prior years' unallowed losses (enter the amount from Part IV, column (c))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 413.4,
+        "y": 593.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.1d_rental_combined",
+      "label": "Line 1d — Combine lines 1a, 1b, and 1c",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 581.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.2a_other_net_income",
+      "label": "Line 2a — All other passive activities: activities with net income (enter the amount from Part V, column (a))",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.2b_other_net_loss",
+      "label": "Line 2b — All other passive activities: activities with net loss (enter the amount from Part V, column (b))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 413.4,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.2c_other_prior_unallowed",
+      "label": "Line 2c — All other passive activities: prior years' unallowed losses (enter the amount from Part V, column (c))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 413.4,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.2d_other_combined",
+      "label": "Line 2d — Combine lines 2a, 2b, and 2c",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.3_combined",
+      "label": "Line 3 — Combine lines 1d and 2d and subtract any prior year unallowed CRD",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.4_smaller_loss_1d_or_3",
+      "label": "Line 4 — Enter the smaller of the loss on line 1d or the loss on line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.5_allowance_threshold",
+      "label": "Line 5 — Enter $150,000. If married filing separately, see instructions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.6_modified_agi",
+      "label": "Line 6 — Enter modified adjusted gross income, but not less than zero",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.7_line5_minus_line6",
+      "label": "Line 7 — Subtract line 6 from line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.8_half_of_line7",
+      "label": "Line 8 — Multiply line 7 by 50% (0.50). Do not enter more than $25,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.9_special_allowance",
+      "label": "Line 9 — Enter the smaller of line 4 or line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.10_income_lines_1a_2a",
+      "label": "Line 10 — Add the income, if any, on lines 1a and 2a and enter the total",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.line.11_total_losses_allowed",
+      "label": "Line 11 — Total losses allowed from all passive activities for 2025. Add lines 9 and 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_name",
+      "label": "Part IV Row 1 — Name of activity",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_col_a_net_income",
+      "label": "Part IV Row 1 — (a) Current year net income (line 1a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 216,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_col_b_net_loss",
+      "label": "Part IV Row 1 — (b) Current year net loss (line 1b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_col_c_unallowed_loss",
+      "label": "Part IV Row 1 — (c) Prior years unallowed loss (line 1c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_col_d_gain",
+      "label": "Part IV Row 1 — (d) Overall gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_1_col_e_loss",
+      "label": "Part IV Row 1 — (e) Overall loss",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_name",
+      "label": "Part IV Row 2 — Name of activity",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_col_a_net_income",
+      "label": "Part IV Row 2 — (a) Current year net income (line 1a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 216,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_col_b_net_loss",
+      "label": "Part IV Row 2 — (b) Current year net loss (line 1b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_col_c_unallowed_loss",
+      "label": "Part IV Row 2 — (c) Prior years unallowed loss (line 1c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_col_d_gain",
+      "label": "Part IV Row 2 — (d) Overall gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_2_col_e_loss",
+      "label": "Part IV Row 2 — (e) Overall loss",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row2[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_name",
+      "label": "Part IV Row 3 — Name of activity",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 155.97
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_col_a_net_income",
+      "label": "Part IV Row 3 — (a) Current year net income (line 1a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 216,
+        "y": 155.97
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_col_b_net_loss",
+      "label": "Part IV Row 3 — (b) Current year net loss (line 1b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 155.97
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_col_c_unallowed_loss",
+      "label": "Part IV Row 3 — (c) Prior years unallowed loss (line 1c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 155.97
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_col_d_gain",
+      "label": "Part IV Row 3 — (d) Overall gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 155.97
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_3_col_e_loss",
+      "label": "Part IV Row 3 — (e) Overall loss",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row3[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 155.97
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_name",
+      "label": "Part IV Row 4 — Name of activity",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 143.971
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_col_a_net_income",
+      "label": "Part IV Row 4 — (a) Current year net income (line 1a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 216,
+        "y": 143.971
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_col_b_net_loss",
+      "label": "Part IV Row 4 — (b) Current year net loss (line 1b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 143.971
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_col_c_unallowed_loss",
+      "label": "Part IV Row 4 — (c) Prior years unallowed loss (line 1c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 143.971
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_col_d_gain",
+      "label": "Part IV Row 4 — (d) Overall gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 143.971
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_4_col_e_loss",
+      "label": "Part IV Row 4 — (e) Overall loss",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row4[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 143.971
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_name",
+      "label": "Part IV Row 5 — Name of activity",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 131.972
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_col_a_net_income",
+      "label": "Part IV Row 5 — (a) Current year net income (line 1a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 216,
+        "y": 131.972
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_col_b_net_loss",
+      "label": "Part IV Row 5 — (b) Current year net loss (line 1b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 131.972
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_col_c_unallowed_loss",
+      "label": "Part IV Row 5 — (c) Prior years unallowed loss (line 1c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 131.972
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_col_d_gain",
+      "label": "Part IV Row 5 — (d) Overall gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 131.972
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.row_5_col_e_loss",
+      "label": "Part IV Row 5 — (e) Overall loss",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row5[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 131.972
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.total_col_a_net_income",
+      "label": "Part IV Total — (a) Current year net income (line 1a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row6[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 216,
+        "y": 107.971
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.total_col_b_net_loss",
+      "label": "Part IV Total — (b) Current year net loss (line 1b)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row6[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 107.971
+      }
+    },
+    {
+      "fieldId": "form-8582.0.part4.total_col_c_unallowed_loss",
+      "label": "Part IV Total — (c) Prior years unallowed loss (line 1c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part4[0].Row6[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 107.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_name",
+      "label": "Part V, row 1 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_col_a_net_income",
+      "label": "Part V, row 1 — (a) Current year net income (line 2a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_col_b_net_loss",
+      "label": "Part V, row 1 — (b) Current year net loss (line 2b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_col_c_unallowed_loss",
+      "label": "Part V, row 1 — (c) Prior years unallowed loss (line 2c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_col_d_gain",
+      "label": "Part V, row 1 — (d) Overall gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_1_col_e_loss",
+      "label": "Part V, row 1 — (e) Overall loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row1[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_name",
+      "label": "Part V, row 2 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_col_a_net_income",
+      "label": "Part V, row 2 — (a) Current year net income (line 2a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_col_b_net_loss",
+      "label": "Part V, row 2 — (b) Current year net loss (line 2b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_col_c_unallowed_loss",
+      "label": "Part V, row 2 — (c) Prior years unallowed loss (line 2c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_col_d_gain",
+      "label": "Part V, row 2 — (d) Overall gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_2_col_e_loss",
+      "label": "Part V, row 2 — (e) Overall loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_name",
+      "label": "Part V, row 3 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_col_a_net_income",
+      "label": "Part V, row 3 — (a) Current year net income (line 2a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_col_b_net_loss",
+      "label": "Part V, row 3 — (b) Current year net loss (line 2b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_col_c_unallowed_loss",
+      "label": "Part V, row 3 — (c) Prior years unallowed loss (line 2c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_col_d_gain",
+      "label": "Part V, row 3 — (d) Overall gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_3_col_e_loss",
+      "label": "Part V, row 3 — (e) Overall loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row3[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_name",
+      "label": "Part V, row 4 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_col_a_net_income",
+      "label": "Part V, row 4 — (a) Current year net income (line 2a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_col_b_net_loss",
+      "label": "Part V, row 4 — (b) Current year net loss (line 2b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_col_c_unallowed_loss",
+      "label": "Part V, row 4 — (c) Prior years unallowed loss (line 2c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_col_d_gain",
+      "label": "Part V, row 4 — (d) Overall gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_4_col_e_loss",
+      "label": "Part V, row 4 — (e) Overall loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row4[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_name",
+      "label": "Part V, row 5 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_col_a_net_income",
+      "label": "Part V, row 5 — (a) Current year net income (line 2a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_col_b_net_loss",
+      "label": "Part V, row 5 — (b) Current year net loss (line 2b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_col_c_unallowed_loss",
+      "label": "Part V, row 5 — (c) Prior years unallowed loss (line 2c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_col_d_gain",
+      "label": "Part V, row 5 — (d) Overall gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.row_5_col_e_loss",
+      "label": "Part V, row 5 — (e) Overall loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Row5[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.total_col_a_net_income",
+      "label": "Part V total — (a) Current year net income (line 2a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Total[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 599.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.total_col_b_net_loss",
+      "label": "Part V total — (b) Current year net loss (line 2b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Total[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 599.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part5.total_col_c_unallowed_loss",
+      "label": "Part V total — (c) Prior years unallowed loss (line 2c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part5[0].Total[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 599.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_name",
+      "label": "Part VI, row 1 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_form_or_schedule",
+      "label": "Part VI, row 1 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 217,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_col_a_loss",
+      "label": "Part VI, row 1 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_col_b_ratio",
+      "label": "Part VI, row 1 — (b) Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_col_c_special_allowance",
+      "label": "Part VI, row 1 — (c) Special allowance",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_1_col_d_subtract",
+      "label": "Part VI, row 1 — (d) Subtract column (c) from column (a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row1[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_name",
+      "label": "Part VI, row 2 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_form_or_schedule",
+      "label": "Part VI, row 2 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 217,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_col_a_loss",
+      "label": "Part VI, row 2 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_44[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_col_b_ratio",
+      "label": "Part VI, row 2 — (b) Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_col_c_special_allowance",
+      "label": "Part VI, row 2 — (c) Special allowance",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_2_col_d_subtract",
+      "label": "Part VI, row 2 — (d) Subtract column (c) from column (a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row2[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_name",
+      "label": "Part VI, row 3 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 503.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_form_or_schedule",
+      "label": "Part VI, row 3 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 217,
+        "y": 503.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_col_a_loss",
+      "label": "Part VI, row 3 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 503.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_col_b_ratio",
+      "label": "Part VI, row 3 — (b) Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 503.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_col_c_special_allowance",
+      "label": "Part VI, row 3 — (c) Special allowance",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 503.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_3_col_d_subtract",
+      "label": "Part VI, row 3 — (d) Subtract column (c) from column (a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row3[0].f2_53[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 503.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_name",
+      "label": "Part VI, row 4 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_54[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_form_or_schedule",
+      "label": "Part VI, row 4 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_55[0]",
+      "position": {
+        "page": 1,
+        "x": 217,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_col_a_loss",
+      "label": "Part VI, row 4 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_56[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_col_b_ratio",
+      "label": "Part VI, row 4 — (b) Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_57[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_col_c_special_allowance",
+      "label": "Part VI, row 4 — (c) Special allowance",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_58[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_4_col_d_subtract",
+      "label": "Part VI, row 4 — (d) Subtract column (c) from column (a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row4[0].f2_59[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_name",
+      "label": "Part VI, row 5 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_60[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 479.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_form_or_schedule",
+      "label": "Part VI, row 5 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_61[0]",
+      "position": {
+        "page": 1,
+        "x": 217,
+        "y": 479.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_col_a_loss",
+      "label": "Part VI, row 5 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_62[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 479.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_col_b_ratio",
+      "label": "Part VI, row 5 — (b) Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_63[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 479.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_col_c_special_allowance",
+      "label": "Part VI, row 5 — (c) Special allowance",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_64[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 479.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.row_5_col_d_subtract",
+      "label": "Part VI, row 5 — (d) Subtract column (c) from column (a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part6[0].Row5[0].f2_65[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 479.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.total_col_a_loss",
+      "label": "Part VI total — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_66[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 455.966
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.total_col_c_special_allowance",
+      "label": "Part VI total — (c) Special allowance",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_68[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 455.966
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part6.total_col_d_subtract",
+      "label": "Part VI total — (d) Subtract column (c) from column (a)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_69[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 455.966
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_1_name",
+      "label": "Part VII, row 1 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row1[0].f2_70[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_1_form_or_schedule",
+      "label": "Part VII, row 1 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row1[0].f2_71[0]",
+      "position": {
+        "page": 1,
+        "x": 231.4,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_1_col_a_loss",
+      "label": "Part VII, row 1 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row1[0].f2_72[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_1_col_b_ratio",
+      "label": "Part VII, row 1 — (b) Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row1[0].f2_73[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_1_col_c_unallowed_loss",
+      "label": "Part VII, row 1 — (c) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row1[0].f2_74[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_2_name",
+      "label": "Part VII, row 2 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row2[0].f2_75[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_2_form_or_schedule",
+      "label": "Part VII, row 2 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row2[0].f2_76[0]",
+      "position": {
+        "page": 1,
+        "x": 231.4,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_2_col_a_loss",
+      "label": "Part VII, row 2 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row2[0].f2_77[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_2_col_b_ratio",
+      "label": "Part VII, row 2 — (b) Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row2[0].f2_78[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_2_col_c_unallowed_loss",
+      "label": "Part VII, row 2 — (c) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row2[0].f2_79[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_3_name",
+      "label": "Part VII, row 3 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row3[0].f2_80[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_3_form_or_schedule",
+      "label": "Part VII, row 3 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row3[0].f2_81[0]",
+      "position": {
+        "page": 1,
+        "x": 231.4,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_3_col_a_loss",
+      "label": "Part VII, row 3 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row3[0].f2_82[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_3_col_b_ratio",
+      "label": "Part VII, row 3 — (b) Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row3[0].f2_83[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_3_col_c_unallowed_loss",
+      "label": "Part VII, row 3 — (c) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row3[0].f2_84[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 359.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_4_name",
+      "label": "Part VII, row 4 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row4[0].f2_85[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 347.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_4_form_or_schedule",
+      "label": "Part VII, row 4 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row4[0].f2_86[0]",
+      "position": {
+        "page": 1,
+        "x": 231.4,
+        "y": 347.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_4_col_a_loss",
+      "label": "Part VII, row 4 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row4[0].f2_87[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 347.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_4_col_b_ratio",
+      "label": "Part VII, row 4 — (b) Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row4[0].f2_88[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 347.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_4_col_c_unallowed_loss",
+      "label": "Part VII, row 4 — (c) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row4[0].f2_89[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 347.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_5_name",
+      "label": "Part VII, row 5 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row5[0].f2_90[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 335.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_5_form_or_schedule",
+      "label": "Part VII, row 5 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row5[0].f2_91[0]",
+      "position": {
+        "page": 1,
+        "x": 231.4,
+        "y": 335.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_5_col_a_loss",
+      "label": "Part VII, row 5 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row5[0].f2_92[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 335.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_5_col_b_ratio",
+      "label": "Part VII, row 5 — (b) Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row5[0].f2_93[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 335.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.row_5_col_c_unallowed_loss",
+      "label": "Part VII, row 5 — (c) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part7[0].Row5[0].f2_94[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 335.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.total_col_a_loss",
+      "label": "Part VII total — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_95[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 311.966
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part7.total_col_c_unallowed_loss",
+      "label": "Part VII total — (c) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_97[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 311.966
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_1_name",
+      "label": "Part VIII, row 1 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row1[0].f2_98[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_1_form_or_schedule",
+      "label": "Part VIII, row 1 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row1[0].f2_99[0]",
+      "position": {
+        "page": 1,
+        "x": 231.4,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_1_col_a_loss",
+      "label": "Part VIII, row 1 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row1[0].f2_100[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_1_col_b_unallowed_loss",
+      "label": "Part VIII, row 1 — (b) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row1[0].f2_101[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_1_col_c_allowed_loss",
+      "label": "Part VIII, row 1 — (c) Allowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row1[0].f2_102[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_2_name",
+      "label": "Part VIII, row 2 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row2[0].f2_103[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_2_form_or_schedule",
+      "label": "Part VIII, row 2 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row2[0].f2_104[0]",
+      "position": {
+        "page": 1,
+        "x": 231.4,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_2_col_a_loss",
+      "label": "Part VIII, row 2 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row2[0].f2_105[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_2_col_b_unallowed_loss",
+      "label": "Part VIII, row 2 — (b) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row2[0].f2_106[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_2_col_c_allowed_loss",
+      "label": "Part VIII, row 2 — (c) Allowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row2[0].f2_107[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_3_name",
+      "label": "Part VIII, row 3 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row3[0].f2_108[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 215.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_3_form_or_schedule",
+      "label": "Part VIII, row 3 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row3[0].f2_109[0]",
+      "position": {
+        "page": 1,
+        "x": 231.4,
+        "y": 215.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_3_col_a_loss",
+      "label": "Part VIII, row 3 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row3[0].f2_110[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 215.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_3_col_b_unallowed_loss",
+      "label": "Part VIII, row 3 — (b) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row3[0].f2_111[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 215.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_3_col_c_allowed_loss",
+      "label": "Part VIII, row 3 — (c) Allowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row3[0].f2_112[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 215.971
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_4_name",
+      "label": "Part VIII, row 4 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row4[0].f2_113[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 203.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_4_form_or_schedule",
+      "label": "Part VIII, row 4 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row4[0].f2_114[0]",
+      "position": {
+        "page": 1,
+        "x": 231.4,
+        "y": 203.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_4_col_a_loss",
+      "label": "Part VIII, row 4 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row4[0].f2_115[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 203.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_4_col_b_unallowed_loss",
+      "label": "Part VIII, row 4 — (b) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row4[0].f2_116[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 203.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_4_col_c_allowed_loss",
+      "label": "Part VIII, row 4 — (c) Allowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row4[0].f2_117[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 203.972
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_5_name",
+      "label": "Part VIII, row 5 — Name of activity",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row5[0].f2_118[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 191.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_5_form_or_schedule",
+      "label": "Part VIII, row 5 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row5[0].f2_119[0]",
+      "position": {
+        "page": 1,
+        "x": 231.4,
+        "y": 191.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_5_col_a_loss",
+      "label": "Part VIII, row 5 — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row5[0].f2_120[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 191.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_5_col_b_unallowed_loss",
+      "label": "Part VIII, row 5 — (b) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row5[0].f2_121[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 191.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.row_5_col_c_allowed_loss",
+      "label": "Part VIII, row 5 — (c) Allowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_PartVIII[0].Row5[0].f2_122[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 191.973
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.total_col_a_loss",
+      "label": "Part VIII total — (a) Loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_123[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 167.966
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.total_col_b_unallowed_loss",
+      "label": "Part VIII total — (b) Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_124[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 167.966
+      }
+    },
+    {
+      "fieldId": "form-8582.1.part8.total_col_c_allowed_loss",
+      "label": "Part VIII total — (c) Allowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_125[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 167.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.activity_name",
+      "label": "Part IX — Name of activity",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_01[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 707.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_form_or_schedule",
+      "label": "Part IX, form or schedule 1 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].Form1_ReadOrder[0].f3_02[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_line_1a_col_a",
+      "label": "Part IX, form or schedule 1 — Line 1a, column (a) — Net loss plus prior year unallowed loss from form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_03[0]",
+      "position": {
+        "page": 2,
+        "x": 208.8,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_line_1b_col_a",
+      "label": "Part IX, form or schedule 1 — Line 1b, column (a) — Net income from form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_04[0]",
+      "position": {
+        "page": 2,
+        "x": 208.8,
+        "y": 623.967
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_line_1c_col_b",
+      "label": "Part IX, form or schedule 1 — Line 1c, column (b) — Subtract line 1b from line 1a. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_05[0]",
+      "position": {
+        "page": 2,
+        "x": 288,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_col_c",
+      "label": "Part IX, form or schedule 1 — Line 1c, column (c) — Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_06[0]",
+      "position": {
+        "page": 2,
+        "x": 360,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_col_d",
+      "label": "Part IX, form or schedule 1 — Line 1c, column (d) — Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_07[0]",
+      "position": {
+        "page": 2,
+        "x": 432,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_1_col_e",
+      "label": "Part IX, form or schedule 1 — Line 1c, column (e) — Allowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form1_NotATable[0].f3_08[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_form_or_schedule",
+      "label": "Part IX, form or schedule 2 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].Form2_ReadOrder[0].f3_09[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_line_1a_col_a",
+      "label": "Part IX, form or schedule 2 — Line 1a, column (a) — Net loss plus prior year unallowed loss from form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 208.8,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_line_1b_col_a",
+      "label": "Part IX, form or schedule 2 — Line 1b, column (a) — Net income from form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_11[0]",
+      "position": {
+        "page": 2,
+        "x": 208.8,
+        "y": 515.967
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_line_1c_col_b",
+      "label": "Part IX, form or schedule 2 — Line 1c, column (b) — Subtract line 1b from line 1a. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 288,
+        "y": 491.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_col_c",
+      "label": "Part IX, form or schedule 2 — Line 1c, column (c) — Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 360,
+        "y": 491.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_col_d",
+      "label": "Part IX, form or schedule 2 — Line 1c, column (d) — Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_14[0]",
+      "position": {
+        "page": 2,
+        "x": 432,
+        "y": 491.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_2_col_e",
+      "label": "Part IX, form or schedule 2 — Line 1c, column (e) — Allowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form2_NotATable[0].f3_15[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 491.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_form_or_schedule",
+      "label": "Part IX, form or schedule 3 — Form or schedule and line number to be reported on",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].Form3_ReadOrder[0].f3_16[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_line_1a_col_a",
+      "label": "Part IX, form or schedule 3 — Line 1a, column (a) — Net loss plus prior year unallowed loss from form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_17[0]",
+      "position": {
+        "page": 2,
+        "x": 208.8,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_line_1b_col_a",
+      "label": "Part IX, form or schedule 3 — Line 1b, column (a) — Net income from form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_18[0]",
+      "position": {
+        "page": 2,
+        "x": 208.8,
+        "y": 407.967
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_line_1c_col_b",
+      "label": "Part IX, form or schedule 3 — Line 1c, column (b) — Subtract line 1b from line 1a. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_19[0]",
+      "position": {
+        "page": 2,
+        "x": 288,
+        "y": 383.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_col_c",
+      "label": "Part IX, form or schedule 3 — Line 1c, column (c) — Ratio",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_20[0]",
+      "position": {
+        "page": 2,
+        "x": 360,
+        "y": 383.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_col_d",
+      "label": "Part IX, form or schedule 3 — Line 1c, column (d) — Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_21[0]",
+      "position": {
+        "page": 2,
+        "x": 432,
+        "y": 383.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.block_3_col_e",
+      "label": "Part IX, form or schedule 3 — Line 1c, column (e) — Allowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Form3_NotATable[0].f3_22[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 383.966
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.total_col_b",
+      "label": "Part IX — Total, column (b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_23[0]",
+      "position": {
+        "page": 2,
+        "x": 288,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.total_col_d",
+      "label": "Part IX — Total, column (d) — Unallowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_25[0]",
+      "position": {
+        "page": 2,
+        "x": 432,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "form-8582.2.part9.total_col_e",
+      "label": "Part IX — Total, column (e) — Allowed loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_26[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 359.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8582/blank.pdf",
+    "ingestedAt": "2026-11-12T03:17:08.615Z",
+    "totalFields": 198,
+    "skipped": 0,
+    "catalogEntries": 198
+  }
+}
