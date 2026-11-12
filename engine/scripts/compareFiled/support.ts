@@ -14,6 +14,8 @@ import {
   HSA_COVERAGE_KEYS,
   INVESTMENT_INTEREST_KEYS,
   MORTGAGE_KEYS,
+  NET_INVESTMENT_INCOME_KEYS,
+  PREMIUM_TAX_CREDIT_KEYS,
   PRIOR_YEAR_KEYS,
   RENTAL_KEYS,
   SPOUSE_KEYS,
@@ -25,6 +27,7 @@ import {
   isHouseholdEmployeeFact,
   isHsaDistributionFact,
   isInterestFact,
+  isMarketplaceCoverageFactKey,
   isMiscIncomeFact,
   isNonemployeeCompensationFactKey,
   isPaymentTransactionsFactKey,
@@ -65,6 +68,7 @@ const DOCUMENT_FACTS = [
   (fact: TaxFactRow) => isNonemployeeCompensationFactKey(fact.key),
   (fact: TaxFactRow) => isBusinessFactKey(fact.key),
   (fact: TaxFactRow) => isRentalFactKey(fact.key),
+  (fact: TaxFactRow) => isMarketplaceCoverageFactKey(fact.key),
 ];
 
 /* support.test.ts fails when a resolver reads a key that is missing here. */
@@ -78,6 +82,8 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(CA_MISC_DEDUCTION_KEYS),
   ...Object.values(CAPITAL_LOSS_CARRYOVER_KEYS),
   ...Object.values(RENTAL_KEYS),
+  ...Object.values(PREMIUM_TAX_CREDIT_KEYS),
+  ...Object.values(NET_INVESTMENT_INCOME_KEYS),
   GAMBLING_KEYS.winningsNotOnW2G,
   SPOUSE_KEYS.livedApartAllYear,
   SPOUSE_KEYS.livedApartLastSixMonths,

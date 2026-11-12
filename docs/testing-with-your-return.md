@@ -34,7 +34,8 @@ federal-only TaxCalcBench scenario with a sole-proprietor business
 business (vehicle mileage, a home office), gifts on Schedule A, a
 capital loss carryover and Form 8995. A third married-filing-separately
 scenario lived with the spouse and has two self-rentals and a passive
-royalty (Schedule E, Form 8582).
+royalty (Schedule E, Form 8582). A fourth has two stock sales and
+Marketplace coverage whose advance payments are repaid on Form 8962.
 A second married-filing-jointly
 TaxCalcBench scenario itemizes (Schedule A: gifts, medical under the
 floor, state tax withheld, investment interest on Form 4952) with a
@@ -51,7 +52,7 @@ interest on a Form 1098, investment interest, and the alternative
 minimum tax on an incentive stock option exercise (Form 6251).
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
-1099-SA, 1098, SSA-1099, W-2G, 1099-K, 1099-NEC, a W-2 you issued to a household employee
+1099-SA, 1098, SSA-1099, W-2G, 1099-K, 1099-NEC, 1095-A, a W-2 you issued to a household employee
 (Schedule H, without FUTA tax), and invoices for home energy improvements
 (Form 5695 Part II). The last two have one unverified test scenario.
 A business you run yourself is answers, not a document: receipts and
