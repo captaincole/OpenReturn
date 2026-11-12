@@ -70,3 +70,22 @@ export function needsProfessionalAnswer(values: RentalFactValue[]): boolean {
     (value) => value.propertyType !== "royalties" && isRentalActivity(value) !== false,
   );
 }
+
+/*
+ * A self-rental (Schedule E code 7, irs-1040se-inst-2025::sec::line-1b::b01): its
+ * net rental income is nonpassive (irs-pub-925-2025::sec::rental-of-property-to::b01).
+ * Net income is line 21 over the prior-year unallowed loss: the activity's income and
+ * losses combine (irs-pub-925-2025::sec::disclosure-requirement::b05), as Worksheet A
+ * defines it (irs-pub-925-2025::sec::worksheet-a-complete-worksheet-a-significant-partici::b02).
+ * The exceptions (a binding contract before February 19, 1988; property incidental to
+ * a development activity) have no facts: they are taken not to apply. Undefined while
+ * line 21 is unknown.
+ */
+export function isSelfRentalNetIncome(
+  value: RentalFactValue,
+  line21: number | undefined,
+): boolean | undefined {
+  if (value.propertyType !== "self_rental") return false;
+  if (line21 === undefined) return undefined;
+  return line21 - (value.priorYearUnallowedLoss ?? 0) > 0;
+}

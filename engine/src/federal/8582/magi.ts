@@ -3,7 +3,8 @@
  * (irs-8582-inst-2025::sec::line-6::b01). It leaves out passive activity income
  * and loss (irs-pub-925-2025::sec::rental-activities::b10), so it reads no line
  * that Form 8582's allowed losses feed: not Form 1040 lines 8–11, not Schedule 1
- * line 5. Also left out: taxable social security (1040 line 6b), the IRA
+ * line 5. It adds recharacterized nonpassive income (line-6::b02). Also left
+ * out: taxable social security (1040 line 6b), the IRA
  * deduction (Schedule 1 line 20), section 501(c)(18) contributions (line 24f),
  * half of self-employment tax (line 15) and student loan interest (line 21).
  * The EE/I bond exclusion (Form 8815) and the FDII/GILTI deduction are not
@@ -12,7 +13,8 @@
 
 import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
-import { isRentalActivity } from "../rentals/passive.js";
+import { isRentalActivity, isSelfRentalNetIncome } from "../rentals/passive.js";
+import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
 import type { Form8582 } from "./types.js";
 
@@ -44,22 +46,39 @@ const SCHEDULE_1_ADJUSTMENTS = [
   "1.line.25",
 ];
 
+/* Line 6 reads line 21 of a nonpassive property and of a passive self-rental. */
+function readsLine21(property: RentalProperty): boolean {
+  if (property.passive === false) return true;
+  return property.passive === true && property.value.propertyType === "self_rental";
+}
+
 /*
- * Schedule E line 21 of the properties that are not passive. A nonpassive rental
+ * The part of a property's line 21 that line 6 counts. A nonpassive rental
  * activity is a real estate professional's (rental-activities::b01), whose loss
  * is left out, so it counts only as income. A royalty or a materially
- * participated short stay (not a rental activity) counts either way. Undefined
- * while a column is blank.
+ * participated short stay (not a rental activity) counts either way. A passive
+ * self-rental counts only its net income, recharacterized as nonpassive
+ * (line-6::b02); with a prior-year loss the property waits (placementOf).
  */
+function line6Amount(property: RentalProperty, net: number): number {
+  const { value } = property;
+  if (property.passive) {
+    const recharacterized =
+      isSelfRentalNetIncome(value, net) === true && (value.priorYearUnallowedLoss ?? 0) === 0;
+    return recharacterized ? net : 0;
+  }
+  const professionalRental = value.propertyType !== "royalties" && isRentalActivity(value) === true;
+  return professionalRental ? atLeast(0, net) : net;
+}
+
+/* Schedule E line 21 as line 6 counts it; undefined while a column it reads is blank. */
 function nonpassiveScheduleE(form: FormAccessor<Form8582>, info: Form8582FilingInfo) {
   let total = 0;
   for (const property of info.rentalProperties ?? []) {
-    if (property.passive !== false) continue;
+    if (!readsLine21(property)) continue;
     const net = numberOrBlank(form[`schedule-e.0.line.21_income_or_loss_${property.column}`]);
     if (net === undefined) return undefined;
-    const professionalRental =
-      property.value.propertyType !== "royalties" && isRentalActivity(property.value) === true;
-    total += professionalRental ? atLeast(0, net) : net;
+    total += line6Amount(property, net);
   }
   return total;
 }
