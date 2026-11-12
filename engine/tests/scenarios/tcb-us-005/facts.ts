@@ -116,7 +116,7 @@ export const multiFamily: RentalFactValue = {
   address: { street: "1 Add", city: "City", state: "FL", zip: "33003" },
   fairRentalDays: 365,
   personalUseDays: 0,
-  qualifiedJointVenture: true, // Not in the answers; the key checks the QJV box (README, Needs a decision).
+  qualifiedJointVenture: true, // Not in the answers; the key checks the QJV box (README).
   rentsReceived: 1000,
   expenses: { advertising: 30000 },
   activeParticipation: true,
