@@ -26,7 +26,7 @@ Forms checked: Form 1040, Schedules 2, A and D, Forms 4952, 6251, 8949, 8959 and
 ## Where the facts go past the answers
 
 - The Form 1098 leaves box 2 (outstanding principal) blank, and the engine needs it for the $750,000 debt limit. The facts state a $500,000 balance as the taxpayer's answer; the key deducts the full $32,000, and any balance up to the limit gives the same lines.
-- The answers give the child's date of birth, months in the home, support and citizenship, but no name, SSN or relationship, and the key lists no dependent. The facts name her "Child Four" with the taxpayer's fake SSN. The child tax credit phases out to $0 at this income, so no line changes.
+- The answers give the child's date of birth, months in the home, support and citizenship, but no name, SSN or relationship, and the key lists no dependent. The facts name her "Child Four" with a made-up SSN in the 900 range. The child tax credit phases out to $0 at this income, so no line changes.
 - The answers give no medical expenses, gifts other than cash, carryover of investment interest, investment expenses or state income tax for Form 8960 line 9b; the facts record 0 for each.
 - `decisions.scope.must_file_6251` is true: the engine cannot see Who Must File's test (line 7 more than line 10) before it evaluates the return, so Cade records the decision.
 
