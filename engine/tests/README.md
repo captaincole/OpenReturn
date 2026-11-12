@@ -51,6 +51,13 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
     investment interest on Form 4952), the AMT on an ISO exercise (Form
     6251). Checked against the case's answer key; its README lists where
     the engine follows the form instead
+  - `tcb-us-002` — TaxCalcBench case ty25-us-002, federal only. Head of
+    household in Alaska, a nephew, the Alaska Permanent Fund dividend,
+    three casualty losses (Form 4684), a qualified disaster loss that
+    raises the standard deduction (Schedule A line 16), the earned income
+    credit (Schedule EIC) and the additional child tax credit. Checked
+    against the case's answer key; its README lists the Schedule A lines
+    the instructions leave blank
   - `tcb-us-003` — TaxCalcBench case ty25-us-003, federal only. MFJ,
     spouse 65+, an IRA rollover and a Roth conversion (Form 8606),
     Social Security, the senior deduction (Schedule 1-A). Checked against
