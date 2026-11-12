@@ -75,7 +75,7 @@ src/
 ├── facts/            fact vocabulary: row shapes + per-kind key conventions
 ├── data/             federal tables (rate schedules, tax table, std deduction, EIC table)
 ├── worksheets/       IRS/FTB worksheets as pure functions (QDCG, 5695 line 31, …)
-├── deductions/       the itemized-deductions catalog, item states and the itemize-or-standard comparison (#92); the totals are Schedule A line 17 and Schedule CA line 29 from a pass as if the return itemizes
+├── deductions/       the itemized-deductions catalog, item states and the itemize-or-standard comparison (#92); the totals are Schedule A line 17 and Schedule CA line 29 from a pass as if the return itemizes, and the federal standard side adds a net qualified disaster loss (Form 4684)
 ├── render/           PDF fill (fillFromCatalog + hand-verified widget overrides)
 ├── federal/          one folder per federal form (catalog.json, bindings.ts, …) + registry (index.ts);
 │                     two folders are not forms: federal/qbi/ holds the code Forms 8995 and 8995-A
