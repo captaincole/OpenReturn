@@ -1,0 +1,2463 @@
+{
+  "form": {
+    "formId": "form-4684",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Casualties and Thefts"
+  },
+  "fields": [
+    {
+      "fieldId": "form-4684.0.header.name",
+      "label": "Name(s) shown on tax return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-4684.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-4684.0.header.federally_declared_disaster",
+      "label": "If the casualty or theft loss is attributable to a federally declared disaster, check here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 378,
+        "y": 613.968
+      }
+    },
+    {
+      "fieldId": "form-4684.0.header.fema_declaration_number_dr",
+      "label": "Enter the DR- declaration number assigned by FEMA",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 611.968
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-4684.0.header.fema_declaration_number_em",
+      "label": "Enter the EM- declaration number assigned by FEMA",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 525.6,
+        "y": 611.968
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_a_type",
+      "label": "Line 1 — Property A: Type of property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowA[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 101.8,
+        "y": 539.971
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_a_city_state",
+      "label": "Line 1 — Property A: City and state",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowA[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 245.8,
+        "y": 539.971
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_a_zip",
+      "label": "Line 1 — Property A: ZIP code",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowA[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 539.971
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_a_date_acquired",
+      "label": "Line 1 — Property A: Date acquired",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowA[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 539.971
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_b_type",
+      "label": "Line 1 — Property B: Type of property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowB[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 101.8,
+        "y": 527.972
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_b_city_state",
+      "label": "Line 1 — Property B: City and state",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowB[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 245.8,
+        "y": 527.972
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_b_zip",
+      "label": "Line 1 — Property B: ZIP code",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowB[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 527.972
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_b_date_acquired",
+      "label": "Line 1 — Property B: Date acquired",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowB[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 527.972
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_c_type",
+      "label": "Line 1 — Property C: Type of property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowC[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 101.8,
+        "y": 515.973
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_c_city_state",
+      "label": "Line 1 — Property C: City and state",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowC[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 245.8,
+        "y": 515.973
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_c_zip",
+      "label": "Line 1 — Property C: ZIP code",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowC[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 515.973
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_c_date_acquired",
+      "label": "Line 1 — Property C: Date acquired",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowC[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 515.973
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_d_type",
+      "label": "Line 1 — Property D: Type of property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowD[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 101.8,
+        "y": 503.974
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_d_city_state",
+      "label": "Line 1 — Property D: City and state",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowD[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 245.8,
+        "y": 503.974
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_d_zip",
+      "label": "Line 1 — Property D: ZIP code",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowD[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 503.974
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_d_date_acquired",
+      "label": "Line 1 — Property D: Date acquired",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowD[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 503.974
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.2_cost_basis_col_a",
+      "label": "Line 2 — Cost or other basis of each property, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line2[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.2_cost_basis_col_b",
+      "label": "Line 2 — Cost or other basis of each property, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line2[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.2_cost_basis_col_c",
+      "label": "Line 2 — Cost or other basis of each property, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line2[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.2_cost_basis_col_d",
+      "label": "Line 2 — Cost or other basis of each property, column D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line2[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.3_reimbursement_col_a",
+      "label": "Line 3 — Insurance or other reimbursement (whether or not you filed a claim), column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line3[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.3_reimbursement_col_b",
+      "label": "Line 3 — Insurance or other reimbursement (whether or not you filed a claim), column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line3[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.3_reimbursement_col_c",
+      "label": "Line 3 — Insurance or other reimbursement (whether or not you filed a claim), column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line3[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.3_reimbursement_col_d",
+      "label": "Line 3 — Insurance or other reimbursement (whether or not you filed a claim), column D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line3[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.4_gain_col_a",
+      "label": "Line 4 — Gain from casualty or theft. If line 3 is more than line 2, enter the difference here, column A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line4[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.4_gain_col_b",
+      "label": "Line 4 — Gain from casualty or theft. If line 3 is more than line 2, enter the difference here, column B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line4[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.4_gain_col_c",
+      "label": "Line 4 — Gain from casualty or theft. If line 3 is more than line 2, enter the difference here, column C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line4[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.4_gain_col_d",
+      "label": "Line 4 — Gain from casualty or theft. If line 3 is more than line 2, enter the difference here, column D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line4[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.5_fmv_before_col_a",
+      "label": "Line 5 — Fair market value before casualty or theft, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line5[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.5_fmv_before_col_b",
+      "label": "Line 5 — Fair market value before casualty or theft, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line5[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.5_fmv_before_col_c",
+      "label": "Line 5 — Fair market value before casualty or theft, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line5[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.5_fmv_before_col_d",
+      "label": "Line 5 — Fair market value before casualty or theft, column D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line5[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.6_fmv_after_col_a",
+      "label": "Line 6 — Fair market value after casualty or theft, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line6[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.6_fmv_after_col_b",
+      "label": "Line 6 — Fair market value after casualty or theft, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line6[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.6_fmv_after_col_c",
+      "label": "Line 6 — Fair market value after casualty or theft, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line6[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.6_fmv_after_col_d",
+      "label": "Line 6 — Fair market value after casualty or theft, column D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line6[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.7_fmv_decrease_col_a",
+      "label": "Line 7 — Subtract line 6 from line 5, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line7[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.7_fmv_decrease_col_b",
+      "label": "Line 7 — Subtract line 6 from line 5, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line7[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.7_fmv_decrease_col_c",
+      "label": "Line 7 — Subtract line 6 from line 5, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line7[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.7_fmv_decrease_col_d",
+      "label": "Line 7 — Subtract line 6 from line 5, column D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line7[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.8_smaller_of_2_or_7_col_a",
+      "label": "Line 8 — Enter the smaller of line 2 or line 7, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line8[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.8_smaller_of_2_or_7_col_b",
+      "label": "Line 8 — Enter the smaller of line 2 or line 7, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line8[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.8_smaller_of_2_or_7_col_c",
+      "label": "Line 8 — Enter the smaller of line 2 or line 7, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line8[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.8_smaller_of_2_or_7_col_d",
+      "label": "Line 8 — Enter the smaller of line 2 or line 7, column D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line8[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.9_loss_col_a",
+      "label": "Line 9 — Subtract line 3 from line 8. If zero or less, enter -0-, column A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line9[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.9_loss_col_b",
+      "label": "Line 9 — Subtract line 3 from line 8. If zero or less, enter -0-, column B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line9[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.9_loss_col_c",
+      "label": "Line 9 — Subtract line 3 from line 8. If zero or less, enter -0-, column C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line9[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.9_loss_col_d",
+      "label": "Line 9 — Subtract line 3 from line 8. If zero or less, enter -0-, column D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line9[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.10_casualty_theft_loss",
+      "label": "Line 10 — Casualty or theft loss. Add the amounts on line 9 in columns A through D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.11_100_or_500_floor",
+      "label": "Line 11 — Enter $100 ($500 if qualified disaster loss rules apply)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.12_loss_after_floor",
+      "label": "Line 12 — Subtract line 11 from line 10. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.13_total_gains",
+      "label": "Line 13 — Add the amounts on line 4 of all Forms 4684",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.14_total_losses",
+      "label": "Line 14 — Add the amounts on line 12 of all Forms 4684",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.15_net_gain_or_qualified_disaster_loss",
+      "label": "Line 15 — If line 13 is more than line 14, enter the difference; if equal, enter -0-; if less, enter -0- or, with qualified disaster losses subject to the $500 reduction, the smaller of line 14 minus line 13 or line 12 of the Form(s) 4684 reporting those losses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 155.97
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.16_losses_less_gains",
+      "label": "Line 16 — Add lines 13 and 15. Subtract the result from line 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.17_ten_percent_agi",
+      "label": "Line 17 — Enter 10% of your adjusted gross income from Form 1040, 1040-SR, or 1040-NR, line 11b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 59.969
+      }
+    },
+    {
+      "fieldId": "form-4684.0.line.18_deductible_loss",
+      "label": "Line 18 — Subtract line 17 from line 16. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_61[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 35.968
+      }
+    },
+    {
+      "fieldId": "form-4684.1.header.taxpayer_name",
+      "label": "Name(s) shown on tax return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 719.968
+      }
+    },
+    {
+      "fieldId": "form-4684.1.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 719.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-4684.1.line.19_property_a_description",
+      "label": "Line 19 — Description of properties (show type, location, and date acquired for each property): Property A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 100.8,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.19_property_b_description",
+      "label": "Line 19 — Description of properties (show type, location, and date acquired for each property): Property B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 100.8,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.19_property_c_description",
+      "label": "Line 19 — Description of properties (show type, location, and date acquired for each property): Property C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 100.8,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.19_property_d_description",
+      "label": "Line 19 — Description of properties (show type, location, and date acquired for each property): Property D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 100.8,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.20_cost_or_adjusted_basis_col_a",
+      "label": "Line 20 — Cost or adjusted basis of each property, Property A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line20[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.20_cost_or_adjusted_basis_col_b",
+      "label": "Line 20 — Cost or adjusted basis of each property, Property B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line20[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.20_cost_or_adjusted_basis_col_c",
+      "label": "Line 20 — Cost or adjusted basis of each property, Property C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line20[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.20_cost_or_adjusted_basis_col_d",
+      "label": "Line 20 — Cost or adjusted basis of each property, Property D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line20[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.21_insurance_or_other_reimbursement_col_a",
+      "label": "Line 21 — Insurance or other reimbursement (whether or not you filed a claim), Property A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line21[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.21_insurance_or_other_reimbursement_col_b",
+      "label": "Line 21 — Insurance or other reimbursement (whether or not you filed a claim), Property B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line21[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.21_insurance_or_other_reimbursement_col_c",
+      "label": "Line 21 — Insurance or other reimbursement (whether or not you filed a claim), Property C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line21[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.21_insurance_or_other_reimbursement_col_d",
+      "label": "Line 21 — Insurance or other reimbursement (whether or not you filed a claim), Property D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line21[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.22_gain_from_casualty_or_theft_col_a",
+      "label": "Line 22 — Gain from casualty or theft. If line 21 is more than line 20, enter the difference here, Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line22[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.22_gain_from_casualty_or_theft_col_b",
+      "label": "Line 22 — Gain from casualty or theft. If line 21 is more than line 20, enter the difference here, Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line22[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.22_gain_from_casualty_or_theft_col_c",
+      "label": "Line 22 — Gain from casualty or theft. If line 21 is more than line 20, enter the difference here, Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line22[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.22_gain_from_casualty_or_theft_col_d",
+      "label": "Line 22 — Gain from casualty or theft. If line 21 is more than line 20, enter the difference here, Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line22[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.23_fair_market_value_before_col_a",
+      "label": "Line 23 — Fair market value before casualty or theft, Property A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line23[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.23_fair_market_value_before_col_b",
+      "label": "Line 23 — Fair market value before casualty or theft, Property B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line23[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.23_fair_market_value_before_col_c",
+      "label": "Line 23 — Fair market value before casualty or theft, Property C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line23[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.23_fair_market_value_before_col_d",
+      "label": "Line 23 — Fair market value before casualty or theft, Property D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line23[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.24_fair_market_value_after_col_a",
+      "label": "Line 24 — Fair market value after casualty or theft, Property A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line24[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.24_fair_market_value_after_col_b",
+      "label": "Line 24 — Fair market value after casualty or theft, Property B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line24[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.24_fair_market_value_after_col_c",
+      "label": "Line 24 — Fair market value after casualty or theft, Property C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line24[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.24_fair_market_value_after_col_d",
+      "label": "Line 24 — Fair market value after casualty or theft, Property D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line24[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.25_decrease_in_fair_market_value_col_a",
+      "label": "Line 25 — Subtract line 24 from line 23, Property A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line25[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.25_decrease_in_fair_market_value_col_b",
+      "label": "Line 25 — Subtract line 24 from line 23, Property B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line25[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.25_decrease_in_fair_market_value_col_c",
+      "label": "Line 25 — Subtract line 24 from line 23, Property C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line25[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.25_decrease_in_fair_market_value_col_d",
+      "label": "Line 25 — Subtract line 24 from line 23, Property D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line25[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.26_smaller_of_line_20_or_25_col_a",
+      "label": "Line 26 — Enter the smaller of line 20 or line 25, Property A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line26[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 443.973
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.26_smaller_of_line_20_or_25_col_b",
+      "label": "Line 26 — Enter the smaller of line 20 or line 25, Property B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line26[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 443.973
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.26_smaller_of_line_20_or_25_col_c",
+      "label": "Line 26 — Enter the smaller of line 20 or line 25, Property C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line26[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 443.973
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.26_smaller_of_line_20_or_25_col_d",
+      "label": "Line 26 — Enter the smaller of line 20 or line 25, Property D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line26[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 443.973
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.27_loss_less_reimbursement_col_a",
+      "label": "Line 27 — Subtract line 21 from line 26. If zero or less, enter -0-, Property A",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line27[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 407.973
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.27_loss_less_reimbursement_col_b",
+      "label": "Line 27 — Subtract line 21 from line 26. If zero or less, enter -0-, Property B",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line27[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 407.973
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.27_loss_less_reimbursement_col_c",
+      "label": "Line 27 — Subtract line 21 from line 26. If zero or less, enter -0-, Property C",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line27[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 407.973
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.27_loss_less_reimbursement_col_d",
+      "label": "Line 27 — Subtract line 21 from line 26. If zero or less, enter -0-, Property D",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line27[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 407.973
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.28_casualty_or_theft_loss",
+      "label": "Line 28 — Casualty or theft loss. Add the amounts on line 27",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 395.968
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row1_col_a_casualty_or_theft",
+      "label": "Line 29 (held one year or less), row 1 — (a) Identify casualty or theft",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row1[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 57.6,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row1_col_b_i_business_loss",
+      "label": "Line 29 (held one year or less), row 1 — (b)(i) Losses from casualties or thefts: trade, business, rental, or royalty property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row1[0].bi[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row1_col_b_ii_income_producing_loss",
+      "label": "Line 29 (held one year or less), row 1 — (b)(ii) Losses from casualties or thefts: income-producing property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row1[0].bii[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row1_col_c_gain",
+      "label": "Line 29 (held one year or less), row 1 — (c) Gains from casualties or thefts includible in income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row1[0].c[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row2_col_a_casualty_or_theft",
+      "label": "Line 29 (held one year or less), row 2 — (a) Identify casualty or theft",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row2[0].f2_44[0]",
+      "position": {
+        "page": 1,
+        "x": 57.6,
+        "y": 323.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row2_col_b_i_business_loss",
+      "label": "Line 29 (held one year or less), row 2 — (b)(i) Losses from casualties or thefts: trade, business, rental, or royalty property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row2[0].bi[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 323.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row2_col_b_ii_income_producing_loss",
+      "label": "Line 29 (held one year or less), row 2 — (b)(ii) Losses from casualties or thefts: income-producing property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row2[0].bii[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 323.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row2_col_c_gain",
+      "label": "Line 29 (held one year or less), row 2 — (c) Gains from casualties or thefts includible in income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row2[0].c[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 323.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.30_totals_col_b_i_business_loss",
+      "label": "Line 30 — Totals. Add the amounts on line 29, column (b)(i)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.30_totals_col_b_ii_income_producing_loss",
+      "label": "Line 30 — Totals. Add the amounts on line 29, column (b)(ii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.30_totals_col_c_gain",
+      "label": "Line 30 — Totals. Add the amounts on line 29, column (c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.31_net_short_term_gain_or_loss",
+      "label": "Line 31 — Combine line 30, columns (b)(i) and (c). Enter the net gain or (loss) here",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.32_short_term_income_producing_loss",
+      "label": "Line 32 — Enter the amount from line 30, column (b)(ii), here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.33_gains_from_form_4797",
+      "label": "Line 33 — Casualty or theft gains from Form 4797, line 32",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line33_ReadOrder[0].f2_53[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row1_col_a_casualty_or_theft",
+      "label": "Line 34 (held more than one year), row 1 — (a) Identify casualty or theft",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row1[0].f2_54[0]",
+      "position": {
+        "page": 1,
+        "x": 57.6,
+        "y": 215.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row1_col_b_i_business_loss",
+      "label": "Line 34 (held more than one year), row 1 — (b)(i) Losses from casualties or thefts: trade, business, rental, or royalty property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row1[0].bi[0].f2_55[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 215.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row1_col_b_ii_income_producing_loss",
+      "label": "Line 34 (held more than one year), row 1 — (b)(ii) Losses from casualties or thefts: income-producing property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row1[0].bii[0].f2_56[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 215.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row1_col_c_gain",
+      "label": "Line 34 (held more than one year), row 1 — (c) Gains from casualties or thefts includible in income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row1[0].c[0].f2_57[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 215.971
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row2_col_a_casualty_or_theft",
+      "label": "Line 34 (held more than one year), row 2 — (a) Identify casualty or theft",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row2[0].f2_58[0]",
+      "position": {
+        "page": 1,
+        "x": 57.6,
+        "y": 203.972
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row2_col_b_i_business_loss",
+      "label": "Line 34 (held more than one year), row 2 — (b)(i) Losses from casualties or thefts: trade, business, rental, or royalty property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row2[0].bi[0].f2_59[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 203.972
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row2_col_b_ii_income_producing_loss",
+      "label": "Line 34 (held more than one year), row 2 — (b)(ii) Losses from casualties or thefts: income-producing property",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row2[0].bii[0].f2_60[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 203.972
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row2_col_c_gain",
+      "label": "Line 34 (held more than one year), row 2 — (c) Gains from casualties or thefts includible in income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row2[0].c[0].f2_61[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 203.972
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.35_total_losses_col_b_i_business",
+      "label": "Line 35 — Total losses. Add amounts on line 34, column (b)(i)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_62[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.35_total_losses_col_b_ii_income_producing",
+      "label": "Line 35 — Total losses. Add amounts on line 34, column (b)(ii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_63[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.36_total_gains",
+      "label": "Line 36 — Total gains. Add lines 33 and 34, column (c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_64[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.37_total_losses_line_35",
+      "label": "Line 37 — Add amounts on line 35, columns (b)(i) and (b)(ii)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_65[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.38a_net_long_term_business_gain_or_loss",
+      "label": "Line 38a — If the loss on line 37 is more than the gain on line 36: Combine line 35, column (b)(i), and line 36, and enter the net gain or (loss) here",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_66[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 125.968
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.38b_long_term_income_producing_loss",
+      "label": "Line 38b — If the loss on line 37 is more than the gain on line 36: Enter the amount from line 35, column (b)(ii), here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_67[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-4684.1.line.39_net_long_term_gain",
+      "label": "Line 39 — If the loss on line 37 is less than or equal to the gain on line 36, combine lines 36 and 37 and enter here",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_68[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 59.969
+      }
+    },
+    {
+      "fieldId": "form-4684.2.header.taxpayer_name",
+      "label": "Name(s) shown on tax return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 719.968
+      }
+    },
+    {
+      "fieldId": "form-4684.2.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 719.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-4684.2.line.40_initial_investment",
+      "label": "Line 40 — Initial investment",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-4684.2.line.41_subsequent_investments",
+      "label": "Line 41 — Subsequent investments",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-4684.2.line.42_income_reported_prior_years",
+      "label": "Line 42 — Income reported on your tax returns for tax years prior to the discovery year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-4684.2.line.43_total_invested_and_reported",
+      "label": "Line 43 — Add lines 40, 41, and 42",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-4684.2.line.44_withdrawals_all_years",
+      "label": "Line 44 — Withdrawals for all years",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-4684.2.line.45_total_qualified_investment",
+      "label": "Line 45 — Subtract line 44 from line 43. This is your total qualified investment",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-4684.2.line.46_recovery_factor_whole",
+      "label": "Line 46 — Enter 0.95 (95%) if you have no potential third-party recovery. Enter 0.75 (75%) if you have potential third-party recovery (digit before the decimal point)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 575.968
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-4684.2.line.46_recovery_factor_decimal",
+      "label": "Line 46 — Enter 0.95 (95%) if you have no potential third-party recovery. Enter 0.75 (75%) if you have potential third-party recovery (digits after the decimal point)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 475.2,
+        "y": 575.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-4684.2.line.47_line46_times_line45",
+      "label": "Line 47 — Multiply line 46 by line 45",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+      "position": {
+        "page": 2,
+        "x": 496.8,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-4684.2.line.48_actual_recovery",
+      "label": "Line 48 — Actual recovery",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-4684.2.line.49_potential_insurance_sipc_recovery",
+      "label": "Line 49 — Potential insurance/Securities Investor Protection Corporation (SIPC) recovery",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-4684.2.line.50_total_recovery",
+      "label": "Line 50 — Add lines 48 and 49. This is your total recovery",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_14[0]",
+      "position": {
+        "page": 2,
+        "x": 496.8,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-4684.2.line.51_deductible_theft_loss",
+      "label": "Line 51 — Subtract line 50 from line 47. This is your deductible theft loss",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_15[0]",
+      "position": {
+        "page": 2,
+        "x": 496.8,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-4684.2.part2.fraud_individual_or_entity_name",
+      "label": "Name of individual or entity that conducted the specified fraudulent arrangement",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].BulletedList2[0].Bullet1[0].f3_16[0]",
+      "position": {
+        "page": 2,
+        "x": 144,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-4684.2.part2.fraud_individual_or_entity_tin",
+      "label": "Taxpayer identification number (if known) of the individual or entity",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].BulletedList2[0].Bullet1[0].f3_17[0]",
+      "position": {
+        "page": 2,
+        "x": 193.6,
+        "y": 431.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-4684.2.part2.fraud_individual_or_entity_address",
+      "label": "Address of the individual or entity",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].BulletedList2[0].Bullet1[0].f3_18[0]",
+      "position": {
+        "page": 2,
+        "x": 79.2,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-4684.2.part2.prior_returns_years_and_dates_filed",
+      "label": "The tax year(s) for which I filed the return(s) or amended return(s) that do not satisfy section 6.02 of Revenue Procedure 2009-20, and the date(s) on which they were filed",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].ReturnDates[0].f3_19[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 287.968
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-4684.3.header.taxpayer_name",
+      "label": "Name(s) shown on tax return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_1[0]",
+      "position": {
+        "page": 3,
+        "x": 36,
+        "y": 719.968
+      }
+    },
+    {
+      "fieldId": "form-4684.3.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_2[0]",
+      "position": {
+        "page": 3,
+        "x": 453.6,
+        "y": 719.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-4684.3.line.52_disaster_name_description",
+      "label": "Line 52 — Provide the name or a description of the federally declared disaster",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_3[0]",
+      "position": {
+        "page": 3,
+        "x": 302.4,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-4684.3.line.52_disaster_name_description_cont",
+      "label": "Line 52 (continued) — Provide the name or a description of the federally declared disaster",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_4[0]",
+      "position": {
+        "page": 3,
+        "x": 57.6,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-4684.3.line.53_disaster_loss_dates",
+      "label": "Line 53 — Provide the date or dates (mm/dd/yyyy) of the loss or losses attributable to the federally declared disaster",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_5[0]",
+      "position": {
+        "page": 3,
+        "x": 439.2,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-4684.3.line.53_disaster_loss_dates_cont",
+      "label": "Line 53 (continued) — Provide the date or dates (mm/dd/yyyy) of the loss or losses attributable to the federally declared disaster",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_6[0]",
+      "position": {
+        "page": 3,
+        "x": 57.6,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-4684.3.line.54_damaged_property_address",
+      "label": "Line 54 — Specify the address, including the city or town, county or parish, state, and ZIP code where the damaged or destroyed property was located at the time of the disaster",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_7[0]",
+      "position": {
+        "page": 3,
+        "x": 144,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-4684.3.line.54_damaged_property_address_cont",
+      "label": "Line 54 (continued) — Specify the address, including the city or town, county or parish, state, and ZIP code where the damaged or destroyed property was located at the time of the disaster",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_8[0]",
+      "position": {
+        "page": 3,
+        "x": 57.6,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-4684.3.line.55_revoked_disaster_and_address",
+      "label": "Line 55 — Provide the name or a description of the federally declared disaster and the address of the property that was damaged or destroyed and for which the election was claimed",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_9[0]",
+      "position": {
+        "page": 3,
+        "x": 172.8,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-4684.3.line.55_revoked_disaster_and_address_cont",
+      "label": "Line 55 (continued) — Provide the name or a description of the federally declared disaster and the address of the property that was damaged or destroyed and for which the election was claimed",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_10[0]",
+      "position": {
+        "page": 3,
+        "x": 57.6,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "form-4684.3.line.56_prior_election_filed_date",
+      "label": "Line 56 — Specify the date (mm/dd/yyyy) you filed the prior election, which you are now revoking",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_11[0]",
+      "position": {
+        "page": 3,
+        "x": 136.8,
+        "y": 431.968
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-4684.3.line.57_repayment_arrangements",
+      "label": "Line 57 — Enclose your payment or otherwise provide evidence for, or explanation of, your arrangements for the repayment of the amount of any credit or refund which you received and which resulted from the prior election (which you are now revoking)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_12[0]",
+      "position": {
+        "page": 3,
+        "x": 417.6,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-4684.3.line.57_repayment_arrangements_cont",
+      "label": "Line 57 (continued) — Enclose your payment or otherwise provide evidence for, or explanation of, your arrangements for the repayment of the amount of any credit or refund which you received and which resulted from the prior election (which you are now revoking)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_13[0]",
+      "position": {
+        "page": 3,
+        "x": 57.6,
+        "y": 395.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/4684/blank.pdf",
+    "ingestedAt": "2026-11-12T03:27:50.010Z",
+    "totalFields": 162,
+    "skipped": 0,
+    "catalogEntries": 162
+  }
+}
