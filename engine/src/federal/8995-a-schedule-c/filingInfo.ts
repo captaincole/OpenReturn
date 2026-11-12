@@ -1,6 +1,5 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { QbiFilingInfo } from "../qbi/filingInfo.js";
-import type { ScheduleEFilingInfo } from "../schedule-e/filingInfo.js";
 
 /*
  * The rows are Form 8995-A's Part I businesses; its resolver fills these slots.
@@ -9,5 +8,4 @@ import type { ScheduleEFilingInfo } from "../schedule-e/filingInfo.js";
 export interface Form8995AScheduleCFilingInfo
   extends
     BaseFilingInfo,
-    Pick<QbiFilingInfo, "qbiBusinesses" | "qbiScheduleSEFiled">,
-    Pick<ScheduleEFilingInfo, "rentalProperties"> {}
+    Pick<QbiFilingInfo, "qbiBusinesses" | "qbiScheduleSEFiled" | "rentalProperties"> {}

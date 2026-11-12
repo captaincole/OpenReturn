@@ -1,7 +1,7 @@
 /* The QBI slots Form 8995 and Form 8995-A both read; resolveQbiInfo fills them. */
 
 import type { BaseFilingInfo } from "../../filingInfo.js";
-import type { PropertyColumn } from "../schedule-e/filingInfo.js";
+import type { PropertyColumn, RentalProperty } from "../schedule-e/filingInfo.js";
 
 /* One QBI trade or business on this return: a column of Parts I and II. */
 export interface QbiBusiness {
@@ -32,4 +32,6 @@ export interface QbiFilingInfo extends BaseFilingInfo {
   qbiBusinesses?: QbiBusiness[];
   /* Schedule SE must-file: false means no deductible SE tax. */
   qbiScheduleSEFiled?: boolean;
+  /* Schedule E's columns (its resolver fills them); a QBI rental reads its property. */
+  rentalProperties?: RentalProperty[];
 }

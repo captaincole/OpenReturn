@@ -9,14 +9,10 @@ import {
   qualifiedDividendsPlusNetCapitalGain,
   taxableIncomeBeforeQbi,
 } from "../qbi/lines.js";
-import type { ScheduleEFilingInfo } from "../schedule-e/filingInfo.js";
-import type { Form8995FilingInfo as BaseInfo } from "./filingInfo.js";
+import type { Form8995FilingInfo } from "./filingInfo.js";
 import type { Form8995 } from "./types.js";
 
 type Read = Record<string, unknown>;
-
-/* MANUAL EDIT: a QBI rental's row reads its Schedule E property (qbiOf). */
-type Form8995FilingInfo = BaseInfo & Pick<ScheduleEFilingInfo, "rentalProperties">;
 
 /* Lines 5, 9 and 14. */
 const QBI_RATE = 0.2;
