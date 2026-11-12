@@ -50,6 +50,10 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "a separate California election on FTB 3526 line 4e, recorded only when the user states one",
   ],
   [
+    /^investment_income\.niit_additional_modifications$/,
+    "Form 8960 line 10, recorded only when the user states additional modifications; blank otherwise",
+  ],
+  [
     /^decisions\.scope\.must_file_6251$/,
     "KNOWN GAP: an incentive stock option spread files Form 6251; a filer who owes AMT " +
       "for another reason (line 7 more than line 10) needs the explicit decision.",
