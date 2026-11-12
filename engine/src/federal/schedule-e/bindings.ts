@@ -4,6 +4,7 @@
 
 import { defineForm } from "../../defineForm.js";
 import type { RentalFactValue, RentalPropertyType } from "../../facts/index.js";
+import { rentalOwnerOf } from "../../facts/index.js";
 import { SSN } from "../../values.js";
 import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
 import { otherExpenseDescription, partIColumnBindings } from "./lines.js";
@@ -50,11 +51,15 @@ function address(info: ScheduleEFilingInfo, column: PropertyColumn) {
   return place ? `${place.street}, ${place.city}, ${place.state} ${place.zip}` : undefined;
 }
 
-// A QJV needs a joint return (irs-1040se-inst-2025::sec::qualified-joint-venture-qjv::b01).
+// MANUAL EDIT: joint return, joint owners (irs-1040se-inst-2025::sec::qualified-joint-venture-qjv::b01).
 function qjv(info: ScheduleEFilingInfo, column: PropertyColumn) {
   const property = realEstateIn(info, column);
   if (!property) return undefined;
-  return info.filingStatus === "married_filing_jointly" && property.qualifiedJointVenture === true;
+  return (
+    info.filingStatus === "married_filing_jointly" &&
+    rentalOwnerOf(property) === "joint" &&
+    property.qualifiedJointVenture === true
+  );
 }
 
 // One "8 Other (describe)" box serves all three columns; several are labeled by column.
