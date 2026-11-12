@@ -1,10 +1,23 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Money } from "../../money.js";
 import type { Schedule8812FilingInfo } from "../schedule-8812/filingInfo.js";
+import type { ScheduleAFilingInfo } from "../schedule-a/filingInfo.js";
+import type { EicLineSlot } from "../schedule-eic/eicAnswers.js";
+import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
 
-/** The Dependents table reads Schedule 8812's `dependents` slot. */
+/*
+ * The Dependents table reads Schedule 8812's `dependents` slot. Line 27a reads
+ * its combat pay (Step 5 line 4), Schedule SE's Schedule C net profit
+ * (Worksheet B line 2b) and the EIC answers and counts. Line 12e reads
+ * Schedule A's increased standard deduction mode.
+ */
 export interface Form1040FilingInfo
-  extends BaseFilingInfo, Pick<Schedule8812FilingInfo, "dependents"> {
+  extends
+    BaseFilingInfo,
+    EicLineSlot,
+    Pick<Schedule8812FilingInfo, "dependents" | "w2NontaxableCombatPay">,
+    Pick<ScheduleSEFilingInfo, "scheduleCNetProfit">,
+    Pick<ScheduleAFilingInfo, "increasedStandardDeduction"> {
   /** Every filer must answer. Undefined fills neither box, so the gap shows. */
   hasDigitalAssets?: boolean;
   w2WagesTotal?: Money;

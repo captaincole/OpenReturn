@@ -7,11 +7,12 @@
 import { lookupTax } from "../../data/taxTable.js";
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import type { DependentCredit, DependentFactValue } from "../../facts/kinds/dependents.js";
-import { atLeast, roundDollars, sum } from "../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { ssn } from "../../values.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
 import { form1040Line7a } from "../schedule-d/lines.js";
+import { eicOutcome } from "../schedule-eic/outcome.js";
 import { awaitsSchedule1A, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
 import { qdcgInputsFromReturn } from "./qdcgInputs.js";
@@ -255,7 +256,8 @@ export function register(): void {
       // MANUAL EDIT: a copy of line 11a, blank while it is blank.
       "line.11b": (form) => form["line.11a"],
       /*
-       * MANUAL EDIT: line 12e is the standard deduction or Schedule A line 17.
+       * MANUAL EDIT: line 12e is the standard deduction, Schedule A line 17, or
+       * the increased standard deduction on Schedule A line 16.
        * The worksheet for a filer someone can claim as a dependent is not modeled.
        */
       "line.12d_you_born_before_jan2_1961": (_, info) =>
@@ -276,6 +278,10 @@ export function register(): void {
         if (info.useItemizedDeductions === true) {
           const itemized = form["schedule-a.0.line.17_total_itemized_deductions"];
           return typeof itemized === "number" ? itemized : undefined;
+        }
+        // MANUAL EDIT: Exception 5 (irs-1040-inst-2025::sec::line-12c-2::b01): Schedule A line 16.
+        if (info.increasedStandardDeduction !== false) {
+          return numberOrBlank(form["schedule-a.0.line.16_other_itemized_deductions_amount"]);
         }
         return standardDeduction(info);
       },
@@ -404,6 +410,28 @@ export function register(): void {
       "line.25d": (form) => sum(form["line.25a"], form["line.25b"], form["line.25c"]),
       // MANUAL EDIT: 1099 box 4 and SSA-1099 box 6; blank when nothing was withheld.
       "line.25b": (_, info) => roundDollars(info.form1099FederalWithholding),
+      // MANUAL EDIT: line 27a's steps (schedule-eic/outcome.ts); blank when there is no credit.
+      "line.27a": (form, info) => {
+        const outcome = eicOutcome(form, info);
+        return outcome.kind === "credit" ? outcome.amount : undefined;
+      },
+      // MANUAL EDIT: checked where the line 27a steps say to; the opt-out has no fact.
+      "line.27c_no_eic_claim": (form, info) => {
+        const outcome = eicOutcome(form, info);
+        return outcome.kind === "none" && outcome.checkLine27c ? true : undefined;
+      },
+      // MANUAL EDIT: line 28 = Schedule 8812 line 27; blank when Schedule 8812 is not filed.
+      "line.28": (form) =>
+        numberOrBlank(form["schedule-8812.1.line.27_additional_child_tax_credit"]),
+      // MANUAL EDIT: lines 29–31 are not modeled; blank when every line is blank.
+      "line.32": (form) =>
+        sumOrBlank(
+          form["line.27a"],
+          form["line.28"],
+          form["line.29"],
+          form["line.30"],
+          form["line.31"],
+        ),
       "line.33": (form) => sum(form["line.25d"], form["line.26"], form["line.32"]),
       // MANUAL EDIT: line 34 (overpaid) only when line 33 exceeds line 24; blank otherwise.
       "line.34": (form) => {
@@ -544,18 +572,10 @@ export function register(): void {
         "Estimated tax payments and prior-year overpayment applied forward have no ingestion path yet — no estimated_payments fact category exists.",
       "line.former_spouse_ssn":
         "Former spouse SSN for joint estimated tax split — no MFS/divorce scenario with prior joint estimated payments modeled yet; requires separate fact ingestion for former spouse identity.",
-      "line.32":
-        "Line 32 — sum of other refundable credits / payments (27a + 28 + 29 + 30 + 31), all of which are individually unsupported.",
-      "line.27a":
-        "Earned Income Credit requires an EIC eligibility worksheet computation (earned income, AGI, filing status, number of qualifying children with valid SSNs) — no EIC worksheet or qualifying-child ingestion path built yet.",
       "line.27b_clergy_schedule_se":
         "Clergy/minister checkbox for Schedule SE filing — no clergy occupation scenario or Schedule SE ingestion built yet.",
-      "line.27c_no_eic_claim":
-        "Opt-out checkbox for EIC claim — no EIC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
       "line.28_no_actc_claim":
         "Opt-out checkbox for ACTC claim — no ACTC eligibility or opt-out decision modeled yet; requires taxpayer election fact.",
-      "line.28":
-        "Additional child tax credit from Schedule 8812 line 27 — Part II of the schedule is not bound yet (no scenario has a credit larger than the tax).",
       "line.29":
         "American Opportunity Credit from Form 8863 line 8 — Form 8863 not ingested and no education-credit scenario built yet.",
       "line.30":

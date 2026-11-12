@@ -3,6 +3,7 @@
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.js";
 import { SSN } from "../../values.js";
+import { eicOutcome } from "../schedule-eic/outcome.js";
 import type { Schedule8812FilingInfo } from "./filingInfo.js";
 import type { Schedule8812 } from "./types.js";
 
@@ -276,10 +277,15 @@ function partIIBBindings(): Bindings {
             form["1.line.22_schedule_1_and_2_taxes"],
           )
         : undefined,
-    // Waits for Form 1040 line 27a (the EIC), only on this branch.
-    "1.line.24_eic_and_schedule_3_line_11": (form) => {
+    /*
+     * MANUAL EDIT: Form 1040 line 27a is blank with no EIC, so its outcome tells no EIC (0)
+     * from an EIC still waiting; only on this branch.
+     */
+    "1.line.24_eic_and_schedule_3_line_11": (form, info) => {
       if (completesPartIIB(form) !== true) return undefined;
-      const line27a = numberOrBlank(form["form-1040.line.27a"]);
+      const eic = eicOutcome(form, info);
+      if (eic.kind === "waiting") return undefined;
+      const line27a = eic.kind === "credit" ? numberOrBlank(form["form-1040.line.27a"]) : 0;
       if (line27a === undefined) return undefined;
       return sum(line27a, form["schedule-3.0.line.11"]);
     },
