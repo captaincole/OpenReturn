@@ -5,7 +5,7 @@
 
 import type { FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, sum, sumOrBlank } from "../../money.js";
-import { passiveActivities } from "../8582/activities.js";
+import { activityLoss, passiveActivities } from "../8582/activities.js";
 import { allowedLossForColumn } from "../8582/allocation.js";
 import { isRentalActivity } from "../rentals/passive.js";
 import type { PropertyColumn, RentalProperty, ScheduleEFilingInfo } from "./filingInfo.js";
@@ -37,14 +37,6 @@ function columnsReady(form: Form, info: Info): RentalProperty[] | undefined {
     : undefined;
 }
 
-/* The column's loss on Form 8582, columns (b) and (c) of its Part IV and V rows. */
-function passiveLoss(form: Form, info: Info, column: PropertyColumn): number | undefined {
-  const activities = passiveActivities(info, (entry) => line21(form, entry));
-  if (!activities) return undefined;
-  const own = [...activities.part4, ...activities.part5].filter((row) => row.column === column);
-  return sum(...own.map((row) => row.netLoss + row.priorUnallowedLoss));
-}
-
 /*
  * An explicit no on Form 8582, the exception for certain rental real estate
  * (irs-8582-inst-2025::sec::who-must-file::b03): line 21's loss is not limited.
@@ -68,9 +60,9 @@ function allowedPassiveLoss(form: Form, info: Info, property: RentalProperty): A
     }
     return net < 0 ? -net : null;
   }
-  const loss = passiveLoss(form, info, column);
-  if (loss === undefined) return undefined;
-  if (loss === 0) return null;
+  const activities = passiveActivities(info, (entry) => line21(form, entry));
+  if (!activities) return undefined;
+  if ((activityLoss(activities, column) ?? 0) === 0) return null;
   const allowed = allowedLossForColumn((fieldId) => form[fieldId], info, column);
   return allowed ?? undefined;
 }

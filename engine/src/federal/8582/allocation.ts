@@ -12,6 +12,7 @@
 import { numberOrBlank, roundDollars, sum } from "../../money.js";
 import type { PropertyColumn } from "../schedule-e/filingInfo.js";
 import {
+  activityLoss,
   overallOf,
   passiveActivities,
   ROWS_PER_PART,
@@ -211,16 +212,10 @@ export function allowedLossForColumn(
     read(`schedule-e.0.line.21_income_or_loss_${entry}`),
   );
   if (!activities) return undefined;
-  const own = [...activities.part4, ...activities.part5].filter((row) => row.column === column);
-  if (own.length === 0) return null;
-  const allocation = allocateLosses(
-    activities,
-    read("form-8582.0.line.3_combined"),
-    read("form-8582.0.line.9_special_allowance"),
-  );
+  const loss = activityLoss(activities, column);
+  if (loss === undefined) return null;
+  const allocation = lossAllocation(read, info);
   if (!allocation) return undefined;
   const listed = allocation.part8.find((row) => row.column === column);
-  return listed
-    ? listed.allowed
-    : sum(...own.map((activity) => activity.netLoss + activity.priorUnallowedLoss));
+  return listed ? listed.allowed : loss;
 }

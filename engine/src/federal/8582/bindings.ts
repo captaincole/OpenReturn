@@ -5,6 +5,7 @@
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { SSN } from "../../values.js";
+import { namesOnReturn } from "../returnNames.js";
 import {
   activitiesByPart,
   overallOf,
@@ -51,17 +52,6 @@ function activitiesIn(form: FormAccessor<Form8582>, info: Form8582FilingInfo, pa
     info,
     (column) => form[`schedule-e.0.line.21_income_or_loss_${column}`],
   )?.[part];
-}
-
-// A joint return names both spouses, as on Schedule E.
-function names(info: Form8582FilingInfo) {
-  const { taxpayerFirstName, taxpayerLastName, spouseFirstName, spouseLastName } = info;
-  if (!taxpayerFirstName || !taxpayerLastName) return undefined;
-  const taxpayer = `${taxpayerFirstName} ${taxpayerLastName}`;
-  if (info.filingStatus !== "married_filing_jointly") return taxpayer;
-  return spouseFirstName && spouseLastName
-    ? `${taxpayer} & ${spouseFirstName} ${spouseLastName}`
-    : undefined;
 }
 
 // Rows 1–5: name, columns (a)–(c), then the overall gain (d) or loss (e).
@@ -202,7 +192,7 @@ const partsIIAndIII: Record<string, Fn> = {
 
 export function register(): void {
   const bindings: Record<string, Fn> = {
-    "0.header.name": (_, info) => names(info),
+    "0.header.name": (_, info) => namesOnReturn(info),
     // A joint return shows the SSN listed first on Form 1040, the taxpayer's.
     "0.header.identifying_number": (_, info) => info.taxpayerSSN,
     /*
