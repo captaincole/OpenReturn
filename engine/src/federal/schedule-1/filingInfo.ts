@@ -12,4 +12,6 @@ export interface Schedule1FilingInfo extends BaseFilingInfo {
   gamblingWinnings?: number;
   /** Line 8z: 1099-MISC box 3 sum, cents kept. */
   miscOtherIncome?: number;
+  /** Line 8g: the Alaska Permanent Fund dividend the taxpayer states, cents kept. */
+  alaskaPermanentFundDividends?: number;
 }
