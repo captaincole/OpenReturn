@@ -147,15 +147,20 @@ export function register(): void {
       // MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar.
       "line.1a": (_, info) => roundDollars(info.w2WagesTotal),
       /*
-       * MANUAL EDIT: line 1h holds the disability pensions received before the
-       * minimum retirement age (irs-1040-inst-2025::sec::line-1h::b02), their
-       * taxable amount. A corrective distribution or excess deferrals make it
-       * unsupported (line1hGaps.ts). Strike benefits have no fact, and a retired
-       * public safety officer's premium exclusion ("PSO",
+       * MANUAL EDIT: line 1h holds the taxable amount of the disability pensions
+       * received before the minimum retirement age (irs-1040-inst-2025::sec::line-1h::b02)
+       * and of corrective distributions (code 8, ::line-1h::b03). Code P or B and
+       * excess deferrals make it unsupported (line1hGaps.ts). Strike benefits have
+       * no fact, and a retired public safety officer's premium exclusion ("PSO",
        * irs-1040-inst-2025::sec::insurance-premiums-for-retired::b03) has no answer.
        */
-      "line.1h_amount": (_, info) =>
-        info.line1hGap ? unsupported(info.line1hGap) : roundDollars(info.disabilityPensionWages),
+      "line.1h_amount": (_, info) => {
+        if (info.line1hGap) return unsupported(info.line1hGap);
+        if (info.line1hWaits) return undefined;
+        return roundDollars(
+          sumOrBlank(info.disabilityPensionWages, info.correctiveDistributionWages),
+        );
+      },
       /*
        * MANUAL EDIT: "If line 26 is more than zero, you have taxable dependent
        * care benefits. Enter this amount on Form 1040 ... line 1e"
