@@ -114,7 +114,43 @@ const FORM_4952: Partial<ExpectedResults> = {
   },
 };
 
+/*
+ * Form 4684 copy 0 (the fire, DR/EM box checked, EM-1234). Copies 1 and 2 are
+ * appended at render; the golden checks copy 0, which alone carries lines 13–18.
+ */
+const FORM_4684: Partial<ExpectedResults> = {
+  engineFields: {
+    "form-4684.0.line.2_cost_basis_col_a": 15000, // CostOrOtherBasisAmt
+    "form-4684.0.line.3_reimbursement_col_a": 2000, // InsuranceOrOthReimbursementAmt
+    "form-4684.0.line.5_fmv_before_col_a": 14000, // FairMarketValueBeforeTheftAmt
+    "form-4684.0.line.6_fmv_after_col_a": 2000, // FairMarketValueAfterTheftAmt
+    "form-4684.0.line.7_fmv_decrease_col_a": 12000, // NetFairMarketValueAmt
+    "form-4684.0.line.8_smaller_of_2_or_7_col_a": 12000, // SmllrOfAdjOrNetFairMrktVlAmt
+    "form-4684.0.line.9_loss_col_a": 10000, // PropertyMinusInsuranceValueAmt
+    "form-4684.0.line.10_casualty_theft_loss": 10000, // TotalPrsnlPropertyTheftLossAmt
+    "form-4684.0.line.11_100_or_500_floor": 100, // CasualtyOrTheftLossLimitAmt
+    "form-4684.0.line.12_loss_after_floor": 9900, // NetCasualtyOrTheftLossAmt
+    "form-4684.0.line.14_total_losses": 12400, // TotalNetCasualtyOrTheftLossAmt
+    "form-4684.0.line.15_net_gain_or_qualified_disaster_loss": 2500, // TotalTheftGainLessTotalLossAmt
+    "form-4684.0.line.16_losses_less_gains": 9900, // TotalLossLessTotalTheftGainAmt
+    "form-4684.0.line.17_ten_percent_agi": 3365, // TenPercentOfAGIAmt
+    "form-4684.0.line.18_deductible_loss": 6535, // CalcAdjGroIncmMnsTotNetLossAmt
+  },
+  renderedText: {
+    // The key's FEMA declaration number, EM-1234: the digits after the printed "EM-".
+    "form-4684.0.header.fema_declaration_number_em": "1234",
+    "form-4684.0.line.1_property_a_type": "House",
+  },
+  // The key has no line 13: no Form 4684 reports a gain.
+  renderedBlank: ["form-4684.0.line.13_total_gains"],
+  renderedChecked: [
+    // FederallyDeclaredDisasterInd
+    "form-4684.0.header.federally_declared_disaster",
+  ],
+};
+
 const EXPECTED: Record<string, Partial<ExpectedResults>> = {
+  "form-4684": FORM_4684,
   "form-4952": FORM_4952,
   "schedule-a": SCHEDULE_A,
   "schedule-1": SCHEDULE_1,
