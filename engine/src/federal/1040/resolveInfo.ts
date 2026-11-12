@@ -224,6 +224,10 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
     filingStatus === "married_filing_separately" || filingStatus === "married_filing_jointly";
   const livedApart = factByKey.get(SPOUSE_KEYS.livedApartAllYear) as boolean | undefined;
   const spouseItemizes = factByKey.get(SPOUSE_KEYS.itemizesSeparately) as boolean | undefined;
+  const livedApartLastSix = factByKey.get(SPOUSE_KEYS.livedApartLastSixMonths) as
+    boolean | undefined;
+  const legallySeparated = factByKey.get(SPOUSE_KEYS.legallySeparatedApartAtYearEnd) as
+    boolean | undefined;
   return {
     mustFile: { "form-1040": resolution },
     missingInputs: {
@@ -253,6 +257,14 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
         ...(filingStatus === "married_filing_separately" && ss.length > 0
           ? { [SPOUSE_KEYS.livedApartAllYear]: livedApart }
           : {}),
+        // Page 1 box: asked of MFS only (married by definition); most HOH filers are unmarried.
+        ...(filingStatus === "married_filing_separately" && livedApart !== true
+          ? { [SPOUSE_KEYS.livedApartLastSixMonths]: livedApartLastSix }
+          : {}),
+        // Legal separation can still check the box when the 6-months answer is no.
+        ...(filingStatus === "married_filing_separately" && livedApartLastSix === false
+          ? { [SPOUSE_KEYS.legallySeparatedApartAtYearEnd]: legallySeparated }
+          : {}),
       }),
     },
     hasDigitalAssets,
@@ -279,6 +291,8 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
           ) as Form1040FilingInfo["socialSecurityBenefits"])
         : undefined,
     livedApartFromSpouseAllYear: livedApart,
+    livedApartFromSpouseLastSixMonths: livedApartLastSix,
+    legallySeparatedApartAtYearEnd: legallySeparated,
     spouseItemizesSeparately: spouseItemizes,
     refundFullOverpaymentFederal,
     useItemizedDeductions,
