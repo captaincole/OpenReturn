@@ -7,6 +7,7 @@ import { marcusScenario } from "./marcus/index.js";
 import { taraScenario } from "./tara/index.js";
 import { tcbCa005Scenario } from "./tcb-ca-005/index.js";
 import { tcbUs001Scenario } from "./tcb-us-001/index.js";
+import { tcbUs002Scenario } from "./tcb-us-002/index.js";
 import { tcbUs003Scenario } from "./tcb-us-003/index.js";
 import { tcbUs004Scenario } from "./tcb-us-004/index.js";
 import { tcbUs006Scenario } from "./tcb-us-006/index.js";
@@ -21,6 +22,7 @@ export {
   taraScenario,
   tcbCa005Scenario,
   tcbUs001Scenario,
+  tcbUs002Scenario,
   tcbUs003Scenario,
   tcbUs004Scenario,
   tcbUs006Scenario,
@@ -35,6 +37,7 @@ export const SCENARIOS: Scenario[] = [
   jordanScenario,
   carterScenario,
   taraScenario,
+  tcbUs002Scenario,
   tcbUs003Scenario,
   tcbUs006Scenario,
   tcbUs004Scenario,
