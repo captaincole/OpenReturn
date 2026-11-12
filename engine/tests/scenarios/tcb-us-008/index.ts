@@ -4,6 +4,7 @@
  * loss carryover. Federal only.
  */
 
+import { lockedGoldenPath } from "../../helpers/scenarioPdfName.js";
 import type { Scenario } from "../../types.js";
 import { tcbUs008Decisions } from "./decisions.js";
 import { tcbUs008Expected } from "./expected.js";
@@ -30,9 +31,9 @@ export const tcbUs008Scenario: Scenario = {
   userId: TCB_US_008_USER_ID,
   facts: tcbUs008Facts,
   decisions: tcbUs008Decisions,
-  skip: true,
   forms: FORM_IDS.map((formId) => ({
     formId,
     expected: tcbUs008Expected(formId),
+    goldenPdfPath: lockedGoldenPath("tcb-us-008", formId),
   })),
 };
