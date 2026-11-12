@@ -75,7 +75,8 @@ export function register(): void {
       "0.line.6m": NO_SCENARIO,
       "0.line.6z_description": NO_SCENARIO,
       "0.line.6z_amount": NO_SCENARIO,
-      "0.line.9": "Net premium tax credit (Form 8962): no Marketplace coverage scenario yet.",
+      "0.line.9":
+        "Net premium tax credit: Form 8962 line 26 is computed, but this line is not bound to it yet.",
       "0.line.10": "Extension payment: no estimated or extension payment facts yet.",
       "0.line.11":
         "Excess social security tax withheld (two or more employers): no scenario reaches the wage base yet.",
