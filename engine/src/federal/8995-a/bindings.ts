@@ -6,15 +6,16 @@
 
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
-import type { Form8995AFilingInfo, QbiBusiness } from "./filingInfo.js";
+import type { QbiBusiness } from "../qbi/filingInfo.js";
 import {
   businessQbi,
   businessTin,
   QBI_LIMITS,
-  qualifiedBusinesses,
   qualifiedDividendsPlusNetCapitalGain,
   taxableIncomeBeforeQbi,
-} from "./lines.js";
+} from "../qbi/lines.js";
+import type { Form8995AFilingInfo } from "./filingInfo.js";
+import { qualifiedBusinesses } from "./lines.js";
 import type { Form8995A } from "./types.js";
 
 /* Part II rates: lines 3, 5, 6 and 8. */

@@ -22,6 +22,8 @@ import type { Form8995AFilingInfo } from "./federal/8995-a/filingInfo.js";
 import { resolve8995AInfo } from "./federal/8995-a/resolveInfo.js";
 import type { Form8995FilingInfo } from "./federal/8995/filingInfo.js";
 import { resolve8995Info } from "./federal/8995/resolveInfo.js";
+import type { QbiFilingInfo } from "./federal/qbi/filingInfo.js";
+import { resolveQbiInfo } from "./federal/qbi/resolveInfo.js";
 import type { Schedule1AFilingInfo } from "./federal/schedule-1-a/filingInfo.js";
 import { resolveSchedule1AInfo } from "./federal/schedule-1-a/resolveInfo.js";
 import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
@@ -129,6 +131,7 @@ export type FilingInfo = BaseFilingInfo &
   Form8960FilingInfo &
   Form8995AFilingInfo &
   Form8995FilingInfo &
+  QbiFilingInfo &
   Schedule1FilingInfo &
   Schedule1AFilingInfo &
   Schedule2FilingInfo &
@@ -160,6 +163,7 @@ export function resolveFilingInfo(opts: {
     resolve8960Info(inputs),
     resolve8995AInfo(inputs),
     resolve8995Info(inputs),
+    resolveQbiInfo(inputs),
     resolveSchedule1Info(inputs),
     resolveSchedule1AInfo(inputs),
     resolveSchedule2Info(inputs),

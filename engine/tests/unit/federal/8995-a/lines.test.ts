@@ -1,11 +1,8 @@
 /* Source: 2025 Form 8995-A instructions, line 34 and Schedule A. */
 
 import { describe, expect, it } from "vitest";
-import {
-  netCapitalGain,
-  QBI_LIMITS,
-  qualifiedBusinesses,
-} from "../../../../src/federal/8995-a/lines.js";
+import { qualifiedBusinesses } from "../../../../src/federal/8995-a/lines.js";
+import { netCapitalGain, QBI_LIMITS } from "../../../../src/federal/qbi/lines.js";
 
 describe("Form 8995-A line 34 net capital gain", () => {
   it.each([
