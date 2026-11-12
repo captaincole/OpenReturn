@@ -1,0 +1,177 @@
+{
+  "formId": "form-8995-a-schedule-c",
+  "fieldCount": 19,
+  "entries": [
+    {
+      "fieldId": "form-8995-a-schedule-c.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-6Z8B8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.header.taxpayer_id",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-4NMYW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_a_qbi_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_04[0]",
+          "text": "5,424"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_a_qbi_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_08[0]",
+          "text": "8,297"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_a_qbi_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_12[0]",
+          "text": "3,095"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_b_loss_netting_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_05[0]",
+          "text": "5,251"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_b_loss_netting_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_09[0]",
+          "text": "3,947"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_b_loss_netting_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_13[0]",
+          "text": "3,482"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_c_adjusted_qbi_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_06[0]",
+          "text": "6,789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_c_adjusted_qbi_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_10[0]",
+          "text": "3,242"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_c_adjusted_qbi_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_14[0]",
+          "text": "7,343"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_name_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_03[0]",
+          "text": "T-10DOB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_name_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_07[0]",
+          "text": "T-1G2YG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_name_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_11[0]",
+          "text": "T-E2O7B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.2_prior_year_carryforward",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "8,162"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.3_total_losses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "2,868"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.4_total_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "5,616"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.5_losses_netted",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "9,301"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.6_net_loss_carryforward",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "4,518"
+        }
+      ]
+    }
+  ]
+}
