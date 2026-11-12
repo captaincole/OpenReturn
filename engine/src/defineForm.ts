@@ -14,12 +14,12 @@ import {
   type Rule,
 } from "./engine.js";
 import type { BaseFilingInfo } from "./filingInfo.js";
-import { blocked, type DerivationBlocked } from "./types.js";
+import { blocked, type Unsupported } from "./types.js";
 
 export type BindingFn<TForm, TInfo extends BaseFilingInfo, K extends keyof TForm> = (
   f: FormAccessor<TForm>,
   info: TInfo,
-) => TForm[K] | DerivationBlocked | undefined;
+) => TForm[K] | Unsupported | undefined;
 
 export type FormatterFn<V> = (value: NonNullable<V>) => string;
 
@@ -107,8 +107,8 @@ function makeBindingRule(
   };
 }
 
-function isUnsupported(value: unknown): value is DerivationBlocked {
-  return typeof value === "object" && (value as DerivationBlocked).unsupported === true;
+function isUnsupported(value: unknown): value is Unsupported {
+  return typeof value === "object" && (value as Unsupported | null)?.unsupported === true;
 }
 
 function makeUnsupportedRule(reason: string): Rule<unknown, unknown> {
