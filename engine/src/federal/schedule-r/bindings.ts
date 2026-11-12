@@ -3,6 +3,7 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
+import { namesOnReturn } from "../returnNames.js";
 import { disabledPeople, partIBox, type PartIBox } from "./boxes.js";
 import type { ScheduleRFilingInfo } from "./filingInfo.js";
 import type { ScheduleR } from "./types.js";
@@ -69,11 +70,8 @@ function disabilityIncome(info: ScheduleRFilingInfo): number | undefined {
 export function register(): void {
   defineForm<ScheduleR, ScheduleRFilingInfo>("schedule-r", {
     bindings: {
-      // MANUAL EDIT: no combined-name fact; concatenate first + last (as Form 8959).
-      "0.header.taxpayer_name": (_, info) =>
-        info.taxpayerFirstName && info.taxpayerLastName
-          ? `${info.taxpayerFirstName} ${info.taxpayerLastName}`
-          : undefined,
+      // MANUAL EDIT: "Name(s) shown on return": both names on a joint return.
+      "0.header.taxpayer_name": (_, info) => namesOnReturn(info),
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       "0.part1.box_1_single_65_or_older": (_, info) => checked(info, 1),
       "0.part1.box_2_single_under_65_disabled": (_, info) => checked(info, 2),
