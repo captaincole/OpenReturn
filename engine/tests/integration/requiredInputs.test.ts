@@ -34,6 +34,18 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "an answer Cade records only when the user reports winnings with no W-2G; " +
       "otherwise line 8b comes from the W-2G facts",
   ],
+  [
+    /^other_income\.alaska_permanent_fund_dividends$/,
+    "an answer Cade records only when the user received the dividend (Schedule 1 line 8g)",
+  ],
+  [
+    /^casualty\.[^.]+$/,
+    "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
+  ],
+  [
+    /^gambling\.losses$/,
+    "an answer Cade records only when the user reports gambling losses (Schedule A line 16)",
+  ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [/^identity\.(spouse\.)?name\.middle_initial$/, "printed when stated; not every name has one"],
   [

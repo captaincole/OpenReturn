@@ -3,6 +3,7 @@ import {
   CA_MISC_DEDUCTION_KEYS,
   GAMBLING_KEYS,
   NET_INVESTMENT_INCOME_KEYS,
+  OTHER_INCOME_KEYS,
   SPOUSE_KEYS,
   businessesOnReturn,
   getGamblingWinningsFacts,
@@ -316,6 +317,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     w2gs.length > 0 || winningsNotOnW2G !== undefined
       ? sum(...w2gs.map((w2g) => w2g.box1), winningsNotOnW2G)
       : undefined;
+  const alaskaPermanentFundDividends = num(inputs, OTHER_INCOME_KEYS.alaskaPermanentFundDividends);
   // Schedule SE line 13 reaches the 1040 only through Schedule 1 line 15.
   const scheduleSE = resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value === true;
   // Schedule E line 41 reaches the 1040 only through Schedule 1 line 5.
@@ -324,10 +326,11 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
-        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), or Form 8889 filed (${form8889})`,
+        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), or Form 8889 filed (${form8889})`,
         value:
           (miscOtherIncome ?? 0) > 0 ||
           (gamblingWinnings ?? 0) > 0 ||
+          (alaskaPermanentFundDividends ?? 0) > 0 ||
           hasBusiness ||
           scheduleSE ||
           scheduleE ||
@@ -341,6 +344,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     hasBusiness,
     gamblingWinnings,
     miscOtherIncome,
+    alaskaPermanentFundDividends,
   };
 }
 
