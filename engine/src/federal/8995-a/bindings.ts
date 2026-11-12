@@ -7,7 +7,14 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import type { Form8995AFilingInfo, QbiBusiness } from "./filingInfo.js";
-import { netCapitalGain, QBI_LIMITS, qualifiedBusinesses } from "./lines.js";
+import {
+  businessQbi,
+  businessTin,
+  QBI_LIMITS,
+  qualifiedBusinesses,
+  qualifiedDividendsPlusNetCapitalGain,
+  taxableIncomeBeforeQbi,
+} from "./lines.js";
 import type { Form8995A } from "./types.js";
 
 /* Part II rates: lines 3, 5, 6 and 8. */
@@ -36,20 +43,6 @@ function qbiLimits(info: Form8995AFilingInfo) {
 }
 
 const num = (value: unknown) => (typeof value === "number" ? value : undefined);
-
-/*
- * irs-8995a-inst-2025::sec::specific-instructions::b01: 1040 line 11a minus lines
- * 12e and 13b. It waits for 12e, and for 13b while Schedule 1-A must be filed, as
- * 1040 line 14 does (awaitsSchedule1A); a blank is not a zero.
- */
-function taxableIncomeBeforeQbi(form: Read, info: Form8995AFilingInfo): number | undefined {
-  const line11a = num(form["form-1040.line.11a"]);
-  const line12e = num(form["form-1040.line.12e"]);
-  const line13b = num(form["form-1040.line.13b"]);
-  const awaits13b = info.mustFile?.["schedule-1-a"]?.value === true && line13b === undefined;
-  if (line11a === undefined || line12e === undefined || awaits13b) return undefined;
-  return line11a - line12e - (line13b ?? 0);
-}
 
 const percentOf = (value: unknown, rate: number) =>
   typeof value === "number" ? roundDollars(value * rate) : undefined;
@@ -146,21 +139,6 @@ function line25(form: Read, info: Form8995AFilingInfo, column: Column): number |
 }
 
 /*
- * The deductible part of SE tax attributable to the business (QBI, irs-8995a-inst-2025::sec::determining-your-qbi-deduction::b15).
- * A spouse's Schedule SE is not modeled, and no corpus rule splits line 13 among several businesses.
- */
-function selfEmploymentDeduction(
-  form: Read,
-  info: Form8995AFilingInfo,
-  business: QbiBusiness,
-): number | undefined {
-  if (business.owner === "spouse") return undefined;
-  if (info.qbiScheduleSEFiled === false) return 0;
-  if (!business.ownersOnlyBusiness || info.qbiScheduleSEFiled !== true) return undefined;
-  return num(form["schedule-se.0.line.13"]);
-}
-
-/*
  * Line 2: Schedule C line 31 less the deductible part of SE tax. No facts give SE
  * health insurance, SE retirement contributions or a prior-year qualified business
  * loss carryforward (Schedule C (Form 8995-A)); line 2 counts none.
@@ -172,8 +150,7 @@ function line2(form: Read, info: Form8995AFilingInfo, column: Column): number | 
   if (partIBusinesses(form, info)?.some((other) => other.netProfit === undefined)) return undefined;
   // MANUAL EDIT: an SSTB in the phase-in range needs Schedule A (Form 8995-A), not modeled.
   if (business.specifiedService !== false && aboveThreshold(form, info) !== false) return undefined;
-  const deduction = selfEmploymentDeduction(form, info, business);
-  return deduction === undefined ? undefined : business.netProfit - deduction;
+  return businessQbi(form, info, business);
 }
 
 /* Lines 4 and 7: zero when line 2 is zero or less (line-4-3::b01, line-7::b02). */
@@ -239,8 +216,7 @@ function line16(form: Read, info: Form8995AFilingInfo): number | undefined {
 // Line 1(d): the EIN, else the owner's SSN (line 1 instructions).
 function tin(form: Read, info: Form8995AFilingInfo, column: Column): string | undefined {
   const business = businessIn(form, info, column);
-  if (!business) return undefined;
-  return business.ein ?? (business.owner === "spouse" ? info.spouseSSN : info.taxpayerSSN);
+  return business && businessTin(info, business);
 }
 
 export function register(): void {
@@ -256,15 +232,7 @@ export function register(): void {
         const income = taxableIncomeBeforeQbi(form, info);
         return income === undefined ? undefined : atLeast(0, income);
       },
-      "1.line.34": (form) => {
-        const num = (value: unknown) => (typeof value === "number" ? value : undefined);
-        const gain = netCapitalGain(
-          num(form["schedule-d.0.line.15_net_long_term_gain_loss"]),
-          num(form["schedule-d.1.line.16_combined_gain_loss"]),
-          num(form["form-1040.line.7a"]),
-        );
-        return sum(form["form-1040.line.3a"], gain);
-      },
+      "1.line.34": (form) => qualifiedDividendsPlusNetCapitalGain(form),
       "1.line.36": (form) => {
         const value = form["1.line.35"];
         return typeof value === "number" ? roundDollars(value * 0.2) : undefined;
