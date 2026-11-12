@@ -43,8 +43,12 @@ const COVERED_BY_1040 = new Set([
   "federal/schedule-3",
 ]);
 
+/* Schedule C (Form 8995-A) has no instructions of its own: the Form 8995-A instructions cover it. */
+const COVERED_BY_8995A = new Set(["federal/8995-a-schedule-c"]);
+
 function instructionsDocId(target: FormTarget): string | null {
   if (COVERED_BY_1040.has(target.subpath)) return `irs-1040-inst-${target.taxYear}`;
+  if (COVERED_BY_8995A.has(target.subpath)) return `irs-8995a-inst-${target.taxYear}`;
   const sidecar = resolve(dirname(target.pdfPath), "instructions.meta.json");
   if (!existsSync(sidecar)) return null;
   return (JSON.parse(readFileSync(sidecar, "utf8")) as { docId: string }).docId;

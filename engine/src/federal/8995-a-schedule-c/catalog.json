@@ -1,0 +1,303 @@
+{
+  "form": {
+    "formId": "form-8995-a-schedule-c",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Loss Netting and Carryforward"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8995-a-schedule-c.0.header.name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.header.taxpayer_id",
+      "label": "Your taxpayer identification number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_name_a",
+      "label": "Line 1, row A — Trade, business, or aggregation name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_a_qbi_a",
+      "label": "Line 1, row A (a) — Qualified business income/(loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_b_loss_netting_a",
+      "label": "Line 1, row A (b) — Reduction for loss netting",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 435.5,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_c_adjusted_qbi_a",
+      "label": "Line 1, row A (c) — Adjusted qualified business income. Combine (a) and (b). If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_name_b",
+      "label": "Line 1, row B — Trade, business, or aggregation name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_a_qbi_b",
+      "label": "Line 1, row B (a) — Qualified business income/(loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_b_loss_netting_b",
+      "label": "Line 1, row B (b) — Reduction for loss netting",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 435.5,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_c_adjusted_qbi_b",
+      "label": "Line 1, row B (c) — Adjusted qualified business income. Combine (a) and (b). If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row2[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_name_c",
+      "label": "Line 1, row C — Trade, business, or aggregation name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_a_qbi_c",
+      "label": "Line 1, row C (a) — Qualified business income/(loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_b_loss_netting_c",
+      "label": "Line 1, row C (b) — Reduction for loss netting",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 435.5,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.1_col_c_adjusted_qbi_c",
+      "label": "Line 1, row C (c) — Adjusted qualified business income. Combine (a) and (b). If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Row3[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.2_prior_year_carryforward",
+      "label": "Line 2 — Qualified business net (loss) carryforward from prior years",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 508,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.3_total_losses",
+      "label": "Line 3 — Total of the trades, businesses, or aggregations losses. Combine the negative amounts on lines 1, column (a), and 2 for all trades, businesses, or aggregations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 508,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.4_total_income",
+      "label": "Line 4 — Total of the trades, businesses, or aggregations income. Add the positive amounts on line 1, column (a), for all trades, businesses, or aggregations",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.5_losses_netted",
+      "label": "Line 5 — Losses netted with income of other trades, businesses, or aggregations. Enter in the parentheses on line 5 the smaller of the absolute value of line 3 or line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 508,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8995-a-schedule-c.0.line.6_net_loss_carryforward",
+      "label": "Line 6 — Qualified business net (loss) carryforward. Subtract line 5 from line 3. If zero or more, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 508,
+        "y": 395.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8995-a-schedule-c/blank.pdf",
+    "ingestedAt": "2026-11-12T03:38:48.628Z",
+    "totalFields": 19,
+    "skipped": 0,
+    "catalogEntries": 19
+  }
+}
