@@ -6,6 +6,8 @@
 
 import type { Form1040FilingInfo } from "./federal/1040/filingInfo.js";
 import { resolve1040Info } from "./federal/1040/resolveInfo.js";
+import type { Form4684FilingInfo } from "./federal/4684/filingInfo.js";
+import { resolve4684Info } from "./federal/4684/resolveInfo.js";
 import type { Form4952FilingInfo } from "./federal/4952/filingInfo.js";
 import { resolve4952Info } from "./federal/4952/resolveInfo.js";
 import type { Form5695FilingInfo } from "./federal/5695/filingInfo.js";
@@ -40,6 +42,8 @@ import type { ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import type { ScheduleCFilingInfo } from "./federal/schedule-c/filingInfo.js";
 import { resolveScheduleCInfo } from "./federal/schedule-c/resolveInfo.js";
 import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
+import type { ScheduleEICFilingInfo } from "./federal/schedule-eic/filingInfo.js";
+import { resolveScheduleEICInfo } from "./federal/schedule-eic/resolveInfo.js";
 import type { ScheduleHFilingInfo } from "./federal/schedule-h/filingInfo.js";
 import { resolveScheduleHInfo } from "./federal/schedule-h/resolveInfo.js";
 import type { ScheduleSEFilingInfo } from "./federal/schedule-se/filingInfo.js";
@@ -140,7 +144,9 @@ export type FilingInfo = BaseFilingInfo &
   Schedule3FilingInfo &
   ScheduleHFilingInfo &
   Form5695FilingInfo &
-  Form6251FilingInfo;
+  Form6251FilingInfo &
+  Form4684FilingInfo &
+  ScheduleEICFilingInfo;
 
 export function resolveFilingInfo(opts: {
   facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
@@ -178,6 +184,8 @@ export function resolveFilingInfo(opts: {
     resolveScheduleCInfo(inputs),
     resolveScheduleSEInfo(inputs),
     resolve6251Info(inputs),
+    resolve4684Info(inputs),
+    resolveScheduleEICInfo(inputs),
   ]);
 }
 
