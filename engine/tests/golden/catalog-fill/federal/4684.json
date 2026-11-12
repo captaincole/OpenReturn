@@ -1,0 +1,1464 @@
+{
+  "formId": "form-4684",
+  "fieldCount": 162,
+  "entries": [
+    {
+      "fieldId": "form-4684.0.header.federally_declared_disaster",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.header.fema_declaration_number_dr",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "1116"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.header.fema_declaration_number_em",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "8486"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-IO23U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-5HTHI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_a_city_state",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowA[0].f1_6[0]",
+          "text": "T-1R8O1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_a_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowA[0].f1_8[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_a_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowA[0].f1_5[0]",
+          "text": "T-M1SHR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_a_zip",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowA[0].f1_7[0]",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_b_city_state",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowB[0].f1_10[0]",
+          "text": "T-1LJFO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_b_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowB[0].f1_12[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_b_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowB[0].f1_9[0]",
+          "text": "T-169I4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_b_zip",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowB[0].f1_11[0]",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_c_city_state",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowC[0].f1_14[0]",
+          "text": "T-1UKV3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_c_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowC[0].f1_16[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_c_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowC[0].f1_13[0]",
+          "text": "T-NMQJO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_c_zip",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowC[0].f1_15[0]",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_d_city_state",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowD[0].f1_18[0]",
+          "text": "T-MXJOF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_d_date_acquired",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowD[0].f1_20[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_d_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowD[0].f1_17[0]",
+          "text": "T-1JBBB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.1_property_d_zip",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].RowD[0].f1_19[0]",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.10_casualty_theft_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_53[0]",
+          "text": "9,484"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.11_100_or_500_floor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_54[0]",
+          "text": "1,158"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.12_loss_after_floor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_55[0]",
+          "text": "6,639"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.13_total_gains",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_56[0]",
+          "text": "1,003"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.14_total_losses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_57[0]",
+          "text": "4,435"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.15_net_gain_or_qualified_disaster_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_58[0]",
+          "text": "2,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.16_losses_less_gains",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_59[0]",
+          "text": "4,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.17_ten_percent_agi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_60[0]",
+          "text": "5,348"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.18_deductible_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_61[0]",
+          "text": "4,358"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.2_cost_basis_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line2[0].f1_21[0]",
+          "text": "6,475"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.2_cost_basis_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line2[0].f1_22[0]",
+          "text": "4,574"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.2_cost_basis_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line2[0].f1_23[0]",
+          "text": "3,535"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.2_cost_basis_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line2[0].f1_24[0]",
+          "text": "6,197"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.3_reimbursement_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line3[0].f1_25[0]",
+          "text": "1,837"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.3_reimbursement_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line3[0].f1_26[0]",
+          "text": "7,141"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.3_reimbursement_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line3[0].f1_27[0]",
+          "text": "2,862"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.3_reimbursement_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line3[0].f1_28[0]",
+          "text": "2,038"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.4_gain_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line4[0].f1_29[0]",
+          "text": "3,047"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.4_gain_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line4[0].f1_30[0]",
+          "text": "8,764"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.4_gain_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line4[0].f1_31[0]",
+          "text": "3,082"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.4_gain_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line4[0].f1_32[0]",
+          "text": "2,225"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.5_fmv_before_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line5[0].f1_33[0]",
+          "text": "3,483"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.5_fmv_before_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line5[0].f1_34[0]",
+          "text": "6,779"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.5_fmv_before_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line5[0].f1_35[0]",
+          "text": "1,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.5_fmv_before_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line5[0].f1_36[0]",
+          "text": "8,760"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.6_fmv_after_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line6[0].f1_37[0]",
+          "text": "2,394"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.6_fmv_after_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line6[0].f1_38[0]",
+          "text": "7,762"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.6_fmv_after_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line6[0].f1_39[0]",
+          "text": "3,347"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.6_fmv_after_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line6[0].f1_40[0]",
+          "text": "5,812"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.7_fmv_decrease_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line7[0].f1_41[0]",
+          "text": "2,001"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.7_fmv_decrease_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line7[0].f1_42[0]",
+          "text": "3,049"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.7_fmv_decrease_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line7[0].f1_43[0]",
+          "text": "3,283"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.7_fmv_decrease_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line7[0].f1_44[0]",
+          "text": "1,310"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.8_smaller_of_2_or_7_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line8[0].f1_45[0]",
+          "text": "1,955"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.8_smaller_of_2_or_7_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line8[0].f1_46[0]",
+          "text": "3,504"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.8_smaller_of_2_or_7_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line8[0].f1_47[0]",
+          "text": "8,043"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.8_smaller_of_2_or_7_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line8[0].f1_48[0]",
+          "text": "4,497"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.9_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line9[0].f1_49[0]",
+          "text": "8,411"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.9_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line9[0].f1_50[0]",
+          "text": "6,348"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.9_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line9[0].f1_51[0]",
+          "text": "9,532"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.0.line.9_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines2-9[0].Line9[0].f1_52[0]",
+          "text": "2,185"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "T-LORIK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "T-IPWS8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.19_property_a_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "T-9JYMD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.19_property_b_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "T-OR573"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.19_property_c_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "T-1C73Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.19_property_d_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "T-JH8MA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.20_cost_or_adjusted_basis_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line20[0].f2_7[0]",
+          "text": "7,049"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.20_cost_or_adjusted_basis_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line20[0].f2_8[0]",
+          "text": "8,728"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.20_cost_or_adjusted_basis_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line20[0].f2_9[0]",
+          "text": "8,901"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.20_cost_or_adjusted_basis_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line20[0].f2_10[0]",
+          "text": "1,859"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.21_insurance_or_other_reimbursement_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line21[0].f2_11[0]",
+          "text": "2,202"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.21_insurance_or_other_reimbursement_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line21[0].f2_12[0]",
+          "text": "7,311"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.21_insurance_or_other_reimbursement_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line21[0].f2_13[0]",
+          "text": "1,073"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.21_insurance_or_other_reimbursement_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line21[0].f2_14[0]",
+          "text": "5,699"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.22_gain_from_casualty_or_theft_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line22[0].f2_15[0]",
+          "text": "4,618"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.22_gain_from_casualty_or_theft_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line22[0].f2_16[0]",
+          "text": "4,163"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.22_gain_from_casualty_or_theft_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line22[0].f2_17[0]",
+          "text": "4,576"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.22_gain_from_casualty_or_theft_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line22[0].f2_18[0]",
+          "text": "5,776"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.23_fair_market_value_before_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line23[0].f2_19[0]",
+          "text": "8,240"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.23_fair_market_value_before_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line23[0].f2_20[0]",
+          "text": "3,092"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.23_fair_market_value_before_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line23[0].f2_21[0]",
+          "text": "7,633"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.23_fair_market_value_before_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line23[0].f2_22[0]",
+          "text": "7,193"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.24_fair_market_value_after_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line24[0].f2_23[0]",
+          "text": "3,881"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.24_fair_market_value_after_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line24[0].f2_24[0]",
+          "text": "8,351"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.24_fair_market_value_after_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line24[0].f2_25[0]",
+          "text": "4,055"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.24_fair_market_value_after_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line24[0].f2_26[0]",
+          "text": "6,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.25_decrease_in_fair_market_value_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line25[0].f2_27[0]",
+          "text": "4,948"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.25_decrease_in_fair_market_value_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line25[0].f2_28[0]",
+          "text": "5,920"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.25_decrease_in_fair_market_value_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line25[0].f2_29[0]",
+          "text": "6,327"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.25_decrease_in_fair_market_value_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line25[0].f2_30[0]",
+          "text": "6,628"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.26_smaller_of_line_20_or_25_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line26[0].f2_31[0]",
+          "text": "3,210"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.26_smaller_of_line_20_or_25_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line26[0].f2_32[0]",
+          "text": "2,292"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.26_smaller_of_line_20_or_25_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line26[0].f2_33[0]",
+          "text": "8,024"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.26_smaller_of_line_20_or_25_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line26[0].f2_34[0]",
+          "text": "3,211"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.27_loss_less_reimbursement_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line27[0].f2_35[0]",
+          "text": "6,207"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.27_loss_less_reimbursement_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line27[0].f2_36[0]",
+          "text": "6,599"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.27_loss_less_reimbursement_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line27[0].f2_37[0]",
+          "text": "3,142"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.27_loss_less_reimbursement_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line20-27[0].Line27[0].f2_38[0]",
+          "text": "6,345"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.28_casualty_or_theft_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_39[0]",
+          "text": "8,094"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row1_col_a_casualty_or_theft",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row1[0].f2_40[0]",
+          "text": "T-1MM9S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row1_col_b_i_business_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row1[0].bi[0].f2_41[0]",
+          "text": "2,219"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row1_col_b_ii_income_producing_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row1[0].bii[0].f2_42[0]",
+          "text": "9,905"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row1_col_c_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row1[0].c[0].f2_43[0]",
+          "text": "5,373"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row2_col_a_casualty_or_theft",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row2[0].f2_44[0]",
+          "text": "T-1UFO3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row2_col_b_i_business_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row2[0].bi[0].f2_45[0]",
+          "text": "3,910"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row2_col_b_ii_income_producing_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row2[0].bii[0].f2_46[0]",
+          "text": "7,035"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.29_row2_col_c_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line29[0].Row2[0].c[0].f2_47[0]",
+          "text": "7,907"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.30_totals_col_b_i_business_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_48[0]",
+          "text": "5,375"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.30_totals_col_b_ii_income_producing_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_49[0]",
+          "text": "7,821"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.30_totals_col_c_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_50[0]",
+          "text": "3,045"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.31_net_short_term_gain_or_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_51[0]",
+          "text": "6,912"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.32_short_term_income_producing_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_52[0]",
+          "text": "3,140"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.33_gains_from_form_4797",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line33_ReadOrder[0].f2_53[0]",
+          "text": "8,028"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row1_col_a_casualty_or_theft",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row1[0].f2_54[0]",
+          "text": "T-ZRIDP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row1_col_b_i_business_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row1[0].bi[0].f2_55[0]",
+          "text": "5,122"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row1_col_b_ii_income_producing_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row1[0].bii[0].f2_56[0]",
+          "text": "2,258"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row1_col_c_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row1[0].c[0].f2_57[0]",
+          "text": "5,626"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row2_col_a_casualty_or_theft",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row2[0].f2_58[0]",
+          "text": "T-VHDIM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row2_col_b_i_business_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row2[0].bi[0].f2_59[0]",
+          "text": "3,202"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row2_col_b_ii_income_producing_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row2[0].bii[0].f2_60[0]",
+          "text": "2,327"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.34_row2_col_c_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line34[0].Row2[0].c[0].f2_61[0]",
+          "text": "3,929"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.35_total_losses_col_b_i_business",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_62[0]",
+          "text": "6,418"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.35_total_losses_col_b_ii_income_producing",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_63[0]",
+          "text": "7,524"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.36_total_gains",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_64[0]",
+          "text": "6,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.37_total_losses_line_35",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_65[0]",
+          "text": "6,044"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.38a_net_long_term_business_gain_or_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_66[0]",
+          "text": "7,388"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.38b_long_term_income_producing_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_67[0]",
+          "text": "5,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.1.line.39_net_long_term_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_68[0]",
+          "text": "8,476"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+          "text": "T-1CYYJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+          "text": "T-1E0VQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.40_initial_investment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+          "text": "8,854"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.41_subsequent_investments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+          "text": "7,209"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.42_income_reported_prior_years",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+          "text": "6,941"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.43_total_invested_and_reported",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+          "text": "6,256"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.44_withdrawals_all_years",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+          "text": "7,668"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.45_total_qualified_investment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+          "text": "5,363"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.46_recovery_factor_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+          "text": "36"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.46_recovery_factor_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+          "text": "8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.47_line46_times_line45",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+          "text": "6,979"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.48_actual_recovery",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+          "text": "7,592"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.49_potential_insurance_sipc_recovery",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+          "text": "1,185"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.50_total_recovery",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_14[0]",
+          "text": "7,871"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.line.51_deductible_theft_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_15[0]",
+          "text": "1,719"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.part2.fraud_individual_or_entity_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].BulletedList2[0].Bullet1[0].f3_18[0]",
+          "text": "T-7STSU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.part2.fraud_individual_or_entity_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].BulletedList2[0].Bullet1[0].f3_16[0]",
+          "text": "T-1HAD0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.part2.fraud_individual_or_entity_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].BulletedList2[0].Bullet1[0].f3_17[0]",
+          "text": "T-Y1NTO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.2.part2.prior_returns_years_and_dates_filed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].ReturnDates[0].f3_19[0]",
+          "text": "T-15EPQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_1[0]",
+          "text": "T-17O4I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.line.52_disaster_name_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_3[0]",
+          "text": "T-171XS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.line.52_disaster_name_description_cont",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_4[0]",
+          "text": "T-17RHP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.line.53_disaster_loss_dates",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_5[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.line.53_disaster_loss_dates_cont",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_6[0]",
+          "text": "T-KMUV4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.line.54_damaged_property_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_7[0]",
+          "text": "T-17RLX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.line.54_damaged_property_address_cont",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_8[0]",
+          "text": "T-1B7L0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.line.55_revoked_disaster_and_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_9[0]",
+          "text": "T-1JMNQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.line.55_revoked_disaster_and_address_cont",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_10[0]",
+          "text": "T-GXE1W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.line.56_prior_election_filed_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_11[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.line.57_repayment_arrangements",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_12[0]",
+          "text": "T-18513"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4684.3.line.57_repayment_arrangements_cont",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_13[0]",
+          "text": "T-1EP1C"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "formId": "schedule-eic",
+  "fieldCount": 38,
+  "entries": [
+    {
+      "fieldId": "schedule-eic.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-I4D63"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.1_name_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "T-1HY7N"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.1_name_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "T-5YM3F"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.1_name_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "T-1YAXK"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.2_ssn_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.2_ssn_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.2_ssn_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_1_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Year1_ReadOrder[0].f1_09[0]",
+          "text": "3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_1_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Year2_ReadOrder[0].f1_13[0]",
+          "text": "6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_1_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_2_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Year1_ReadOrder[0].f1_10[0]",
+          "text": "0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_2_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Year2_ReadOrder[0].f1_14[0]",
+          "text": "8"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_2_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "2"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_3_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Year1_ReadOrder[0].f1_11[0]",
+          "text": "1"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_3_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Year2_ReadOrder[0].f1_15[0]",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_3_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_4_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Year1_ReadOrder[0].f1_12[0]",
+          "text": "3"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_4_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Year2_ReadOrder[0].f1_16[0]",
+          "text": "0"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_4_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "6"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_no_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line4a_Child1_ReadOrder[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_no_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line4a_Child2_ReadOrder[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_no_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_yes_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line4a_Child1_ReadOrder[0].Yes_ReadOrder[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_yes_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line4a_Child2_ReadOrder[0].Yes_ReadOrder[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_yes_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line4a_Child3_Yes_ReadOrder[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_no_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line4b_Child1_ReadOrder[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_no_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line4b_Child2_ReadOrder[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_no_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_yes_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line4b_Child1_ReadOrder[0].Yes_ReadOrder[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_yes_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line4b_Child2_ReadOrder[0].Yes_ReadOrder[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_yes_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line4b_Child3_Yes_ReadOrder[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.5_relationship_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "T-8R1TF"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.5_relationship_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "T-1QLUU"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.5_relationship_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "T-WDPSN"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.6_months_lived_in_us_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line6_Child1_ReadOrder[0].f1_24[0]",
+          "text": "17"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.6_months_lived_in_us_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line6_Child2_ReadOrder[0].f1_25[0]",
+          "text": "36"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-eic.0.line.6_months_lived_in_us_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "84"
+        }
+      ]
+    }
+  ]
+}
