@@ -45,7 +45,9 @@ tcb-us-003: MFJ, Roth conversion (Form 8606), senior deduction;
 tcb-us-004: MFJ, itemized deductions (Schedule A), investment interest
 (Form 4952), a dependent with the child tax credit (Schedule 8812);
 tcb-us-006: MFS, a sole-proprietor business (Schedule C, SE, 8995-A),
-gambling winnings, Additional Medicare Tax, NIIT; tcb-us-008: MFS,
+gambling winnings, Additional Medicare Tax, NIIT; tcb-us-005: MFJ, a
+real estate professional's rental and a passive royalty (Schedule E,
+Form 8582), QBI loss netting (Schedule C (Form 8995-A)); tcb-us-008: MFS,
 a 1099-NEC business with mileage and a home office, gifts on
 Schedule A, a capital loss carryover, Form 8995; tcb-ca-005: MFJ, CA
 itemized deductions (Schedule CA Part II, FTB 3526), CA AMT on an ISO
