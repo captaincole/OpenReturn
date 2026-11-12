@@ -177,7 +177,11 @@ export function resolveScheduleCaInfo(inputs: ResolverInputs): ScheduleCaFilingI
     ],
   });
   const caInvestmentFees = num(inputs, CA_MISC_DEDUCTION_KEYS.investmentFees);
-  const itemizes = resolveScheduleAInfo(inputs).mustFile?.["schedule-a"]?.value === true;
+  const scheduleA = resolveScheduleAInfo(inputs);
+  /* Part II waits with the increased standard deduction, so line 21 asks nothing then. */
+  const itemizes =
+    scheduleA.mustFile?.["schedule-a"]?.value === true &&
+    scheduleA.increasedStandardDeduction === false;
   return {
     mustFile: { "schedule-ca": resolution },
     /* A California itemizer states the fees once (Part II line 21); 0 is an answer. */

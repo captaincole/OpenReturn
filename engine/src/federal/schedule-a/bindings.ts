@@ -4,17 +4,74 @@
  * them: a regen overwrites this file.
  */
 
-import { defineForm } from "../../defineForm.js";
-import { atLeast, roundDollars, sum } from "../../money.js";
+import { defineForm, type FormAccessor, type FormSpec } from "../../defineForm.js";
+import { atLeast, formatDollars, numberOrBlank, roundDollars, sum } from "../../money.js";
 import { SSN } from "../../values.js";
+import { standardDeduction } from "../1040/deductions.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
 import { MEDICAL_FLOOR_RATE } from "./rates.js";
 import { saltCap } from "./saltCap.js";
 import type { ScheduleA } from "./types.js";
 
+/* Line 16's descriptions (irs-1040sa-inst-2025::sec::other-itemized-deductions::b01). */
+const NET_QUALIFIED_DISASTER_LOSS = "Net Qualified Disaster Loss";
+const STANDARD_WITH_DISASTER_LOSS = "Standard Deduction Claimed With Qualified Disaster Loss";
+const GAMBLING_LOSSES = "Gambling Losses";
+
+type Bindings = FormSpec<ScheduleA, ScheduleAFilingInfo>["bindings"];
+
+interface Line16Item {
+  description: string;
+  amount: number;
+}
+
+/*
+ * MANUAL EDIT: line 16's entries; undefined while one waits. The net qualified
+ * disaster loss (Form 4684 line 15), then the standard deduction with it
+ * (other-itemized-deductions::b01) or, when itemizing, gambling losses up to
+ * Schedule 1 line 8b (other-itemized-deductions-2::b01). The list's other
+ * expenses have no fact.
+ */
+function line16Items(
+  form: FormAccessor<ScheduleA>,
+  info: ScheduleAFilingInfo,
+): Line16Item[] | undefined {
+  const loss = info.netQualifiedDisasterLoss;
+  if (loss === undefined) return undefined;
+  const disaster = loss > 0 ? [{ description: NET_QUALIFIED_DISASTER_LOSS, amount: loss }] : [];
+  if (info.increasedStandardDeduction === true) {
+    const standard = standardDeduction(info);
+    if (standard === undefined) return undefined;
+    return [...disaster, { description: STANDARD_WITH_DISASTER_LOSS, amount: standard }];
+  }
+  const winnings = numberOrBlank(form["schedule-1.0.line.8b"]) ?? 0;
+  const gambling = Math.min(info.gamblingLosses ?? 0, winnings);
+  return gambling > 0
+    ? [...disaster, { description: GAMBLING_LOSSES, amount: gambling }]
+    : disaster;
+}
+
+/*
+ * MANUAL EDIT: with the increased standard deduction, "Do not enter an amount
+ * on any other line of Schedule A" (other-itemized-deductions::b01): only the
+ * header and line 16 print. Undefined (Form 4684 waits) blanks them too.
+ */
+function onlyWhenItemizing(bindings: Bindings): Bindings {
+  const kept = (key: string) => key.startsWith("0.header.") || key.startsWith("0.line.16_");
+  return Object.fromEntries(
+    Object.entries(bindings).map(([key, bind]) => [
+      key,
+      kept(key) || !bind
+        ? bind
+        : (form: FormAccessor<ScheduleA>, info: ScheduleAFilingInfo) =>
+            info.increasedStandardDeduction === false ? bind(form, info) : undefined,
+    ]),
+  ) as Bindings;
+}
+
 export function register(): void {
   defineForm<ScheduleA, ScheduleAFilingInfo>("schedule-a", {
-    bindings: {
+    bindings: onlyWhenItemizing({
       // MANUAL EDIT: no combined-name fact; concatenate first + last.
       "0.header.taxpayer_name": (_, info) =>
         info.taxpayerFirstName && info.taxpayerLastName
@@ -135,8 +192,22 @@ export function register(): void {
         }
         return sum(eleven, twelve, thirteen);
       },
+      // MANUAL EDIT: Form 4684 line 18 only (irs-1040sa-inst-2025::sec::casualty-and-theft-losses::b01).
+      "0.line.15_casualty_theft_loss": (form) =>
+        numberOrBlank(form["form-4684.0.line.18_deductible_loss"]),
+      "0.line.16_other_itemized_deductions_description": (form, info) => {
+        const items = line16Items(form, info);
+        if (!items?.length) return undefined;
+        return items.map((item) => `${item.description} ${formatDollars(item.amount)}`).join("; ");
+      },
+      "0.line.16_other_itemized_deductions_amount": (form, info) => {
+        const items = line16Items(form, info);
+        if (!items?.length) return undefined;
+        return roundDollars(sum(...items.map((item) => item.amount)));
+      },
+      // MANUAL EDIT: waits with Form 4684's totals, which lines 15 and 16 read.
       "0.line.17_total_itemized_deductions": (form, info) =>
-        info.mortgageInterestWaits
+        info.mortgageInterestWaits || info.netQualifiedDisasterLoss === undefined
           ? undefined
           : sum(
               form["0.line.4_net_medical_dental"],
@@ -146,7 +217,7 @@ export function register(): void {
               form["0.line.15_casualty_theft_loss"],
               form["0.line.16_other_itemized_deductions_amount"],
             ),
-    },
+    }),
 
     // This SSN widget keeps the dashes; the 1040 comb widget strips them.
     formatters: {
@@ -162,12 +233,6 @@ export function register(): void {
         "Checkbox indicating mixed personal/business use of home mortgage — no fact or decision key exists for this. Requires a scenario where taxpayer has a home loan used partly for non-home purposes.",
       "0.line.8b_seller_name_address":
         "Name/address of seller for non-1098 mortgage interest — text field with no corresponding fact key. Only populated in seller-financed loan scenarios not yet modeled.",
-      "0.line.15_casualty_theft_loss":
-        "Casualty and theft losses require Form 4684 data; no Form 4684 ingestion path exists yet",
-      "0.line.16_other_itemized_deductions_description":
-        "Other itemized deductions are freeform (gambling losses, etc.); no ingestion path or scenario built yet",
-      "0.line.16_other_itemized_deductions_amount":
-        "Other itemized deductions amount is freeform (gambling losses, etc.); no ingestion path or scenario built yet",
       "0.line.18_elect_itemize_below_standard":
         "No decision or fact models the taxpayer's explicit election to itemize even when deductions are below the standard deduction. This is an uncommon voluntary election with no ingestion path yet — requires a dedicated ai_decision when a real scenario forces it.",
     },

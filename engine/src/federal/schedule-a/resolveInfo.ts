@@ -1,4 +1,4 @@
-import { MORTGAGE_KEYS } from "../../facts/index.js";
+import { GAMBLING_KEYS, MORTGAGE_KEYS } from "../../facts/index.js";
 import {
   factsInCategory,
   missingInputs,
@@ -9,6 +9,8 @@ import {
   text,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { netQualifiedDisasterLoss } from "../4684/lines.js";
+import { resolve4684Info } from "../4684/resolveInfo.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
 
 /*
@@ -82,10 +84,43 @@ export function mortgageInterestWithinLimit(
   };
 }
 
-/* Schedule A files when the return itemizes (decisions.itemize_vs_standard), or when set explicitly. */
-export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInfo {
-  const { decisionByKey } = inputs;
-  const resolution = resolveMustFile(decisionByKey, {
+/*
+ * Form 4684 line 15 when it is a net qualified disaster loss
+ * (irs-1040sa-inst-2025::sec::net-qualified-disaster-loss-reporting::b01), and
+ * whether one is possible while the totals wait: an event marked qualified.
+ */
+function disasterLoss(inputs: ResolverInputs) {
+  const form4684 = resolve4684Info(inputs);
+  const filed = form4684.mustFile?.["form-4684"]?.value === true;
+  const facts = filed ? (form4684.casualtyEvents ?? []) : [];
+  const events = facts.map((fact) => fact.event);
+  const amount = netQualifiedDisasterLoss(events);
+  const possible =
+    amount === undefined ? events.some((event) => event.qualifiedDisasterLoss) : amount > 0;
+  return { amount, possible, factKeys: facts.map((fact) => fact.factKey) };
+}
+
+/* The standard deduction with a net qualified disaster loss; undefined while the loss waits. */
+function increasedStandardMode(
+  files: boolean | undefined,
+  itemizeDecision: unknown,
+  loss: ReturnType<typeof disasterLoss>,
+): boolean | undefined {
+  if (files !== true || itemizeDecision !== "standard" || !loss.possible) return false;
+  return loss.amount === undefined ? undefined : true;
+}
+
+/*
+ * Schedule A files when the return itemizes (decisions.itemize_vs_standard), or
+ * when set explicitly, or with a net qualified disaster loss: a filer who does
+ * not itemize claims the increased standard deduction on it
+ * (irs-1040sa-inst-2025::sec::other-itemized-deductions::b01).
+ */
+function scheduleAMustFile(
+  decisionByKey: ResolverInputs["decisionByKey"],
+  loss: ReturnType<typeof disasterLoss>,
+) {
+  return resolveMustFile(decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_a",
     fallbacks: [
       {
@@ -93,54 +128,78 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
         value: decisionByKey.get("decisions.itemize_vs_standard") === "itemized",
         triggeredByDecisionKeys: ["decisions.itemize_vs_standard"],
       },
+      {
+        rule: `fallback: net qualified disaster loss $${loss.amount ?? "?"} (Form 4684 line 15)`,
+        value: loss.possible,
+        triggeredByFactKeys: loss.factKeys,
+      },
     ],
   });
+}
+
+/* An itemizer answers these once; 0 is an answer. Blank lines would hide a deduction. */
+function itemizerAnswers(inputs: ResolverInputs, mortgage: MortgageLimit): string[] {
+  const interestForm1098 = num(inputs, MORTGAGE_KEYS.interestForm1098);
+  return missingInputs({
+    "medical.expenses_total": num(inputs, "medical.expenses_total"),
+    "state_local_tax.real_estate": num(inputs, "state_local_tax.real_estate"),
+    "state_local_tax.personal_property": num(inputs, "state_local_tax.personal_property"),
+    [MORTGAGE_KEYS.interestForm1098]: interestForm1098,
+    /* The 1098's box 2: needed with its interest, for the acquisition-debt limit. */
+    ...((interestForm1098 ?? 0) > 0
+      ? {
+          [MORTGAGE_KEYS.outstandingPrincipalForm1098]: num(
+            inputs,
+            MORTGAGE_KEYS.outstandingPrincipalForm1098,
+          ),
+        }
+      : {}),
+    /* Box 3 decides the limit for a loan between $750,000 and $1,000,000. */
+    ...(mortgage.originationDateNeeded
+      ? { [MORTGAGE_KEYS.originationDateForm1098]: undefined }
+      : {}),
+    "charitable.cash": num(inputs, "charitable.cash"),
+    "charitable.noncash": num(inputs, "charitable.noncash"),
+    "charitable.carryover": num(inputs, "charitable.carryover"),
+  });
+}
+
+export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInfo {
+  const { decisionByKey } = inputs;
+  const loss = disasterLoss(inputs);
+  const resolution = scheduleAMustFile(decisionByKey, loss);
+  const increasedStandardDeduction = increasedStandardMode(
+    resolution.value,
+    decisionByKey.get("decisions.itemize_vs_standard"),
+    loss,
+  );
   const w2Box17 = sumW2Box(inputs, "box17");
   const caSdi = sumCaSdi(factsInCategory(inputs, "wages"));
   const estStateTax = num(inputs, "state_local_tax.estimated_payments");
-  const medicalDentalExpenses = num(inputs, "medical.expenses_total");
-  const giftsCashCheck = num(inputs, "charitable.cash");
-  const giftsOtherThanCash = num(inputs, "charitable.noncash");
-  const realEstateTaxes = num(inputs, "state_local_tax.real_estate");
-  const personalPropertyTaxes = num(inputs, "state_local_tax.personal_property");
-  const giftsCarryover = num(inputs, "charitable.carryover");
   const interestForm1098 = num(inputs, MORTGAGE_KEYS.interestForm1098);
   const principalForm1098 = num(inputs, MORTGAGE_KEYS.outstandingPrincipalForm1098);
   const mortgage = mortgageInterestWithinLimit(inputs, interestForm1098, principalForm1098);
   return {
     mustFile: { "schedule-a": resolution },
-    /* An itemizer answers these once; 0 is an answer. Blank lines would hide a deduction. */
+    /* The increased standard deduction prints no itemized line, so it asks none of their answers. */
     missingInputs: {
-      "schedule-a": missingInputs({
-        "medical.expenses_total": medicalDentalExpenses,
-        "state_local_tax.real_estate": realEstateTaxes,
-        "state_local_tax.personal_property": personalPropertyTaxes,
-        [MORTGAGE_KEYS.interestForm1098]: interestForm1098,
-        /* The 1098's box 2: needed with its interest, for the acquisition-debt limit. */
-        ...((interestForm1098 ?? 0) > 0
-          ? { [MORTGAGE_KEYS.outstandingPrincipalForm1098]: principalForm1098 }
-          : {}),
-        /* Box 3 decides the limit for a loan between $750,000 and $1,000,000. */
-        ...(mortgage.originationDateNeeded
-          ? { [MORTGAGE_KEYS.originationDateForm1098]: undefined }
-          : {}),
-        "charitable.cash": giftsCashCheck,
-        "charitable.noncash": giftsOtherThanCash,
-        "charitable.carryover": giftsCarryover,
-      }),
+      "schedule-a": increasedStandardDeduction === false ? itemizerAnswers(inputs, mortgage) : [],
     },
-    medicalDentalExpenses,
+    medicalDentalExpenses: num(inputs, "medical.expenses_total"),
     stateLocalIncomeTaxPaid: w2Box17 + caSdi + (estStateTax ?? 0),
     generalSalesTaxElection: decisionByKey.get("decisions.itemized.elect_general_sales_tax") as
       boolean | undefined,
-    realEstateTaxes,
-    personalPropertyTaxes,
+    realEstateTaxes: num(inputs, "state_local_tax.real_estate"),
+    personalPropertyTaxes: num(inputs, "state_local_tax.personal_property"),
     mortgageInterestForm1098: mortgage.interest,
     mortgageInterestWaits: interestForm1098 !== undefined && mortgage.interest === undefined,
     mortgageInterestNotForm1098: num(inputs, MORTGAGE_KEYS.interestNotForm1098),
     pointsNotForm1098: num(inputs, MORTGAGE_KEYS.pointsNotForm1098),
-    giftsCashCheck,
-    giftsOtherThanCash,
-    giftsCarryover,
+    giftsCashCheck: num(inputs, "charitable.cash"),
+    giftsOtherThanCash: num(inputs, "charitable.noncash"),
+    giftsCarryover: num(inputs, "charitable.carryover"),
+    netQualifiedDisasterLoss: loss.amount,
+    increasedStandardDeduction,
+    gamblingLosses: num(inputs, GAMBLING_KEYS.losses),
   };
 }
