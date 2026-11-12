@@ -71,7 +71,7 @@ const sharesSale: TradeFactValue = {
 const child: DependentFactValue = {
   firstName: "Child",
   lastName: "Four",
-  ssn: "900-45-6789",
+  ssn: "900-45-6790",
   relationship: "Child",
   dob: "02/02/2020",
   monthsLivedWithYou: 12,
