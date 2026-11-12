@@ -91,24 +91,49 @@ function allowableSquareFeet(office: HomeOfficeSimplified): number | undefined {
 }
 
 /*
- * Worksheet line 2 within the 300 square-foot cap for all of one person's
- * businesses in the home (irs-1040sc-inst-2025::sec::line-30::b03). Spouses each
- * elect (line-30::b02), so the cap is per owner. Above the cap the taxpayer
- * allocates the area among the businesses, and no fact gives that choice, so
- * line 2 is blank. The fact's homes are taken to be one home.
+ * Worksheet line 2 for this business and each other home office of its owner:
+ * spouses each elect (irs-1040sc-inst-2025::sec::line-30::b02), so the 300
+ * square-foot cap for all of one person's businesses in the home
+ * (line-30::b03) is per owner. The fact's homes are taken to be one home.
  */
+function ownerSquareFeet(
+  business: BusinessFactValue,
+  onReturn: readonly BusinessFactValue[],
+): Array<number | undefined> {
+  const sharing = onReturn.filter(
+    (other) => other !== business && other.homeOffice && ownerOf(other) === ownerOf(business),
+  );
+  return [business, ...sharing].map((each) =>
+    each.homeOffice ? allowableSquareFeet(each.homeOffice) : undefined,
+  );
+}
+
+/* Worksheet line 2 within the cap; blank while an area is unknown or above the cap. */
 function cappedSquareFeet(
   business: BusinessFactValue,
   onReturn: readonly BusinessFactValue[],
 ): number | undefined {
-  const sharing = onReturn.filter(
-    (other) => other !== business && other.homeOffice && ownerOf(other) === ownerOf(business),
-  );
-  const areas = [business, ...sharing].map((each) =>
-    each.homeOffice ? allowableSquareFeet(each.homeOffice) : undefined,
-  );
+  const areas = ownerSquareFeet(business, onReturn);
   if (areas.some((area) => area === undefined)) return undefined;
   return sum(...areas) > SIMPLIFIED_METHOD_MAX_SQUARE_FEET ? undefined : areas[0];
+}
+
+/*
+ * Why line 30 (and so line 31) is a case the engine does not handle: not all
+ * gross income is from the home (irs-1040sc-inst-2025::sec::line-1-2::b02), or
+ * the owner's offices exceed the cap and the allocation is the taxpayer's
+ * choice (line-30::b03). Undefined when line 30 can be figured or still waits
+ * for an answer.
+ */
+export function homeOfficeGap(
+  business: BusinessFactValue,
+  onReturn: readonly BusinessFactValue[],
+): "partOfIncomeFromHome" | "areaAllocation" | undefined {
+  if (!business.homeOffice) return undefined;
+  if (business.homeOffice.allGrossIncomeFromHome === false) return "partOfIncomeFromHome";
+  const areas = ownerSquareFeet(business, onReturn);
+  if (areas.some((area) => area === undefined)) return undefined;
+  return sum(...areas) > SIMPLIFIED_METHOD_MAX_SQUARE_FEET ? "areaAllocation" : undefined;
 }
 
 /*
@@ -117,8 +142,8 @@ function cappedSquareFeet(
  * gross income is from the home use (irs-1040sc-inst-2025::sec::line-1-2::b01),
  * and no fact ties a Form 8949 or 4797 gain or loss to the business. Otherwise
  * line 1 needs the part of gross income from the home (line-1-2::b02), which no
- * fact gives, so line 30 is blank. Line 3b is 1.0: the fact's area is used
- * regularly and exclusively. onReturn is every business on the return.
+ * fact gives, so line 30 is blank (homeOfficeGap says why). Line 3b is 1.0:
+ * the fact's area is used regularly and exclusively. onReturn is every business on the return.
  */
 export function homeOfficeExpenses(
   business: BusinessFactValue,

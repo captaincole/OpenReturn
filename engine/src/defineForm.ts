@@ -2,6 +2,7 @@
  * Binding contract: return undefined or null to block the field; the
  * engine retries on the next pass. A returned value commits, and the cache
  * locks it. To write an explicit 0 or "", return it, not undefined.
+ * Return unsupported(reason) for a case the engine does not handle.
  */
 
 import { z } from "zod";
@@ -13,12 +14,12 @@ import {
   type Rule,
 } from "./engine.js";
 import type { BaseFilingInfo } from "./filingInfo.js";
-import { blocked } from "./types.js";
+import { blocked, type DerivationBlocked } from "./types.js";
 
 export type BindingFn<TForm, TInfo extends BaseFilingInfo, K extends keyof TForm> = (
   f: FormAccessor<TForm>,
   info: TInfo,
-) => TForm[K] | undefined;
+) => TForm[K] | DerivationBlocked | undefined;
 
 export type FormatterFn<V> = (value: NonNullable<V>) => string;
 
@@ -95,6 +96,7 @@ function makeBindingRule(
       if (value === undefined || value === null) {
         return blocked(`${fieldFullId}: binding returned undefined (blocked).`);
       }
+      if (isUnsupported(value)) return value;
       return {
         ok: true,
         value,
@@ -103,6 +105,10 @@ function makeBindingRule(
       };
     },
   };
+}
+
+function isUnsupported(value: unknown): value is DerivationBlocked {
+  return typeof value === "object" && (value as DerivationBlocked).unsupported === true;
 }
 
 function makeUnsupportedRule(reason: string): Rule<unknown, unknown> {
