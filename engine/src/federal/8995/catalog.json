@@ -1,0 +1,523 @@
+{
+  "form": {
+    "formId": "form-8995",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Qualified Business Income Deduction Simplified Computation"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8995.0.header.name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.966
+      }
+    },
+    {
+      "fieldId": "form-8995.0.header.taxpayer_id",
+      "label": "Your taxpayer identification number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 440.2,
+        "y": 671.966
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8995.0.line.1i_a",
+      "label": "Line 1i — (a) Trade, business, or aggregation name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1i[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 551.967
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8995.0.line.1i_b",
+      "label": "Line 1i — (b) Taxpayer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1i[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 396.75,
+        "y": 551.967
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8995.0.line.1i_c",
+      "label": "Line 1i — (c) Qualified business income or (loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1i[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 551.967
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.1ii_a",
+      "label": "Line 1ii — (a) Trade, business, or aggregation name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1ii[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 527.966
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8995.0.line.1ii_b",
+      "label": "Line 1ii — (b) Taxpayer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1ii[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 396.75,
+        "y": 527.966
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8995.0.line.1ii_c",
+      "label": "Line 1ii — (c) Qualified business income or (loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1ii[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 527.966
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.1iii_a",
+      "label": "Line 1iii — (a) Trade, business, or aggregation name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1iii[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 503.965
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8995.0.line.1iii_b",
+      "label": "Line 1iii — (b) Taxpayer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1iii[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 396.75,
+        "y": 503.965
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8995.0.line.1iii_c",
+      "label": "Line 1iii — (c) Qualified business income or (loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1iii[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 503.965
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.1iv_a",
+      "label": "Line 1iv — (a) Trade, business, or aggregation name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1iv[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 479.964
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8995.0.line.1iv_b",
+      "label": "Line 1iv — (b) Taxpayer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1iv[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 396.75,
+        "y": 479.964
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8995.0.line.1iv_c",
+      "label": "Line 1iv — (c) Qualified business income or (loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1iv[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 479.964
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.1v_a",
+      "label": "Line 1v — (a) Trade, business, or aggregation name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1v[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 455.963
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8995.0.line.1v_b",
+      "label": "Line 1v — (b) Taxpayer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1v[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 396.75,
+        "y": 455.963
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8995.0.line.1v_c",
+      "label": "Line 1v — (c) Qualified business income or (loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table[0].Row1v[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 455.963
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.2",
+      "label": "Line 2 — Total qualified business income or (loss). Combine lines 1i through 1v, column (c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line2_ReadOrder[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.3",
+      "label": "Line 3 — Qualified business net (loss) carryforward from the prior year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 413.4,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.4",
+      "label": "Line 4 — Total qualified business income. Combine lines 2 and 3. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.5",
+      "label": "Line 5 — Qualified business income component. Multiply line 4 by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.6",
+      "label": "Line 6 — Qualified REIT dividends and publicly traded partnership (PTP) income or (loss)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line6_ReadOrder[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.7",
+      "label": "Line 7 — Qualified REIT dividends and qualified PTP (loss) carryforward from the prior year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 413.4,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.8",
+      "label": "Line 8 — Total qualified REIT dividends and PTP income. Combine lines 6 and 7. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.9",
+      "label": "Line 9 — REIT and PTP component. Multiply line 8 by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.10",
+      "label": "Line 10 — Qualified business income deduction before the income limitation. Add lines 5 and 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.11",
+      "label": "Line 11 — Taxable income before qualified business income deduction",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.12",
+      "label": "Line 12 — Enter your net capital gain, if any, increased by any qualified dividends",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.13",
+      "label": "Line 13 — Subtract line 12 from line 11. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.14",
+      "label": "Line 14 — Income limitation. Multiply line 13 by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.15",
+      "label": "Line 15 — Qualified business income deduction. Enter the smaller of line 10 or line 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.16",
+      "label": "Line 16 — Total qualified business (loss) carryforward. Combine lines 2 and 3. If greater than zero, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 507,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "form-8995.0.line.17",
+      "label": "Line 17 — Total qualified REIT dividends and PTP (loss) carryforward. Combine lines 6 and 7. If greater than zero, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 507,
+        "y": 179.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8995/blank.pdf",
+    "ingestedAt": "2026-11-12T03:33:45.920Z",
+    "totalFields": 33,
+    "skipped": 0,
+    "catalogEntries": 33
+  }
+}
