@@ -1,6 +1,8 @@
+import type { W2FactValue } from "./facts/index.js";
 import { partitionTrades, type PartitionedTrades } from "./federal/8949/partitionTrades.js";
 import type { MustFileResolution } from "./filingInfo.js";
 import { sum } from "./money.js";
+import { ssnOf } from "./values.js";
 
 export interface ResolverInputs {
   facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
@@ -23,6 +25,25 @@ export function makeResolverInputs(opts: {
     decisionByKey,
     trades: partitionTrades(opts.facts, decisionByKey),
   };
+}
+
+/*
+ * Whose W-2 it is. On a return that is not joint every W-2 is the filer's. On a
+ * joint return: the fact's owner when Cade recorded one, else the employee SSN
+ * (box a) against the taxpayer's; undefined when neither places it.
+ */
+export function w2Owner(
+  inputs: ResolverInputs,
+  w2: W2FactValue,
+): "taxpayer" | "spouse" | undefined {
+  if (inputs.decisionByKey.get("decisions.scope.filing_status") !== "married_filing_jointly") {
+    return "taxpayer";
+  }
+  if (w2.owner !== undefined) return w2.owner;
+  const employee = ssnOf(w2.employee?.ssn);
+  const taxpayer = ssnOf(text(inputs, "identity.ssn"));
+  if (employee === undefined || taxpayer === undefined) return undefined;
+  return employee === taxpayer ? "taxpayer" : "spouse";
 }
 
 export function text(inputs: ResolverInputs, key: string): string | undefined {

@@ -9,6 +9,16 @@ export const ssn = (raw: string): SSN => {
   return digits as SSN;
 };
 
+/* The 9 digits of an SSN as entered, or undefined when it is missing or malformed. */
+export function ssnOf(raw: string | undefined): SSN | undefined {
+  if (!raw) return undefined;
+  try {
+    return ssn(raw);
+  } catch {
+    return undefined;
+  }
+}
+
 export const SSN = {
   format: (value: SSN): string => `${value.slice(0, 3)}-${value.slice(3, 5)}-${value.slice(5)}`,
   digits: (value: SSN): string => value,

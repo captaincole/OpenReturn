@@ -16,11 +16,10 @@ import {
   missingInputs,
   num,
   resolveMustFile,
-  text,
+  w2Owner,
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import { disabilityPensions, disabilityWages } from "../1040/disabilityPensions.js";
-import { ssnOf } from "../schedule-se/resolveInfo.js";
 import type { DependentCarePersonRow, Form2441FilingInfo } from "./filingInfo.js";
 
 /* Resolvers see no tax year; the 1040 pins its age rules to 2025 the same way. */
@@ -78,26 +77,21 @@ function qualifies(row: DependentCarePersonRow): boolean {
   );
 }
 
-/* Each spouse's W-2 box 1 on a joint return: the fact's owner, else the employee SSN. */
+/* Each spouse's W-2 box 1 on a joint return (w2Owner); undefined while a W-2 cannot be placed. */
 function w2WagesByOwner(inputs: ResolverInputs): {
   taxpayer?: number;
   spouse?: number;
   unplacedKeys: string[];
 } {
-  const taxpayerSsn = ssnOf(text(inputs, "identity.ssn"));
   const w2s = factsInCategory(inputs, "wages")
     .filter((row) => isW2FactKey(row.key))
     .map((row) => ({ key: row.key, w2: row.value as W2FactValue }));
-  const place = (w2: W2FactValue): "taxpayer" | "spouse" | undefined => {
-    if (w2.owner !== undefined) return w2.owner;
-    const ssn = ssnOf(w2.employee?.ssn);
-    if (ssn === undefined || taxpayerSsn === undefined) return undefined;
-    return ssn === taxpayerSsn ? "taxpayer" : "spouse";
-  };
-  const unplacedKeys = w2s.filter(({ w2 }) => place(w2) === undefined).map(({ key }) => key);
+  const unplacedKeys = w2s
+    .filter(({ w2 }) => w2Owner(inputs, w2) === undefined)
+    .map(({ key }) => key);
   if (unplacedKeys.length > 0) return { unplacedKeys };
   const wages = (owner: "taxpayer" | "spouse") =>
-    sum(...w2s.filter(({ w2 }) => place(w2) === owner).map(({ w2 }) => w2.box1));
+    sum(...w2s.filter(({ w2 }) => w2Owner(inputs, w2) === owner).map(({ w2 }) => w2.box1));
   return { taxpayer: wages("taxpayer"), spouse: wages("spouse"), unplacedKeys };
 }
 
