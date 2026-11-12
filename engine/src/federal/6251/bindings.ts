@@ -3,8 +3,10 @@
 import { lookupPreferentialBrackets } from "../../data/preferentialBrackets.js";
 import { defineForm, type FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { SSN, type FilingStatus } from "../../values.js";
 import { computeQdcg, type QdcgBreakdown } from "../../worksheets/qdcg.js";
+import { standardDeduction } from "../1040/deductions.js";
 import { qdcgInputsFromReturn } from "../1040/qdcgInputs.js";
 import type { Form6251FilingInfo } from "./filingInfo.js";
 import type { Form6251 } from "./types.js";
@@ -44,6 +46,9 @@ const FIFTEEN_PERCENT = 0.15;
 const TWENTY_PERCENT = 0.2;
 const TWENTY_FIVE_PERCENT = 0.25;
 const TAX_YEAR = 2025;
+
+const LINE_3_UNSUPPORTED =
+  "No fact says whether a deducted mortgage is on a qualified dwelling, and the other line 3 items (pre-1987 depreciation, Form 8990, related adjustments) are not modeled.";
 
 /* An adjustment line prints only when there is an amount to adjust. */
 const nonZeroOrBlank = (value: number | undefined): number | undefined =>
@@ -203,17 +208,22 @@ export function register(): void {
       /*
        * MANUAL EDIT: irs-6251-inst-2025::sec::line-2a-taxes::b01. An itemizer adds back
        * Schedule A line 7; a standard-deduction filer adds back line 12e. Schedule A
+       * filed just for the increased standard deduction enters zero (line 3 takes the
+       * standard deduction), and the line waits while Form 4684's totals do. Schedule A
        * filed for California only does not itemize here. The gate matches 1040 line
        * 12e: no decision means the standard deduction. Schedule A line 6 is not
-       * modeled, so line 7 holds no generation-skipping taxes; a net qualified
-       * disaster loss and Form 1040-NR are not modeled.
+       * modeled, so line 7 holds no generation-skipping taxes; Form 1040-NR is not modeled.
        */
-      "0.line.2a_taxes_or_standard_deduction": (form, info) =>
-        numberOrBlank(
+      "0.line.2a_taxes_or_standard_deduction": (form, info) => {
+        if (info.increasedStandardDeduction !== false) {
+          return info.increasedStandardDeduction === true ? 0 : undefined;
+        }
+        return numberOrBlank(
           info.itemizesDeductions === true
             ? form["schedule-a.0.line.7_total_taxes"]
             : form["form-1040.line.12e"],
-        ),
+        );
+      },
       // MANUAL EDIT: see line2cOutcome; a waiting line stays blank.
       "0.line.2c_investment_interest_expense": (form, info) => {
         const outcome = line2cOutcome(form, info);
@@ -235,6 +245,18 @@ export function register(): void {
       "0.line.2i_incentive_stock_options": (_, info) => {
         const spread = roundDollars(info.isoExerciseSpread);
         return spread !== undefined && spread > 0 ? spread : undefined;
+      },
+      /*
+       * MANUAL EDIT: irs-6251-inst-2025::sec::net-qualified-disaster-loss::b01–b02. With the
+       * increased standard deduction, the standard deduction listed next to Schedule A line
+       * 16 (before the loss); that filer deducts no mortgage interest, and the other line 3
+       * items are not modeled. Waits while Form 4684's totals do.
+       */
+      "0.line.3_other_adjustments": (_, info) => {
+        if (info.increasedStandardDeduction === undefined) return undefined;
+        return info.increasedStandardDeduction
+          ? standardDeduction(info)
+          : unsupported(LINE_3_UNSUPPORTED);
       },
       /*
        * MANUAL EDIT: combine lines 1b through 3 (each negative line holds its own sign), then
@@ -502,8 +524,6 @@ export function register(): void {
         "No fact holds an installment sale made after August 16, 1986, and before 1987.",
       "0.line.2t_intangible_drilling_costs":
         "No fact holds intangible drilling costs for oil, gas or geothermal wells.",
-      "0.line.3_other_adjustments":
-        "No fact says whether a deducted mortgage is on a qualified dwelling, and the other line 3 items (pre-1987 depreciation, Form 8990, related adjustments) are not modeled.",
       "0.line.8_amt_foreign_tax_credit":
         "Schedule 3 line 1 (the regular foreign tax credit) is unsupported and Form 1116 is not modeled, so no AMT foreign tax credit can be figured.",
     },
