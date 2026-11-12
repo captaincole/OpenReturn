@@ -162,7 +162,25 @@ function itemizerAnswers(inputs: ResolverInputs, mortgage: MortgageLimit): strin
     "charitable.cash": num(inputs, "charitable.cash"),
     "charitable.noncash": num(inputs, "charitable.noncash"),
     "charitable.carryover": num(inputs, "charitable.carryover"),
+    ...generalSalesTaxAnswers(inputs),
   });
+}
+
+const GENERAL_SALES_TAX = "state_local_tax.general_sales_tax";
+const ELECT_GENERAL_SALES_TAX = "decisions.itemized.elect_general_sales_tax";
+
+/*
+ * Line 5a: income taxes or, by election, general sales taxes; not both
+ * (irs-1040sa-inst-2025::sec::line-5a::b01). The election is asked once a
+ * general sales tax amount is stated, and the amount once the election is made.
+ */
+function generalSalesTaxAnswers(inputs: ResolverInputs): Record<string, unknown> {
+  const amount = num(inputs, GENERAL_SALES_TAX);
+  const election = inputs.decisionByKey.get(ELECT_GENERAL_SALES_TAX);
+  return {
+    ...(amount !== undefined ? { [ELECT_GENERAL_SALES_TAX]: election } : {}),
+    ...(election === true ? { [GENERAL_SALES_TAX]: amount } : {}),
+  };
 }
 
 export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInfo {
@@ -188,8 +206,8 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
     },
     medicalDentalExpenses: num(inputs, "medical.expenses_total"),
     stateLocalIncomeTaxPaid: w2Box17 + caSdi + (estStateTax ?? 0),
-    generalSalesTaxElection: decisionByKey.get("decisions.itemized.elect_general_sales_tax") as
-      boolean | undefined,
+    generalSalesTaxElection: decisionByKey.get(ELECT_GENERAL_SALES_TAX) as boolean | undefined,
+    generalSalesTaxPaid: num(inputs, GENERAL_SALES_TAX),
     realEstateTaxes: num(inputs, "state_local_tax.real_estate"),
     personalPropertyTaxes: num(inputs, "state_local_tax.personal_property"),
     mortgageInterestForm1098: mortgage.interest,
