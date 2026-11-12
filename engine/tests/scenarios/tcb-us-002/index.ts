@@ -10,7 +10,14 @@ import { tcbUs002Decisions } from "./decisions.js";
 import { tcbUs002Expected } from "./expected.js";
 import { TCB_US_002_TAX_YEAR, TCB_US_002_USER_ID, tcbUs002Facts } from "./facts.js";
 
-const FORM_IDS = ["form-4952", "schedule-a", "schedule-1", "schedule-8812", "form-1040"];
+const FORM_IDS = [
+  "form-4684",
+  "form-4952",
+  "schedule-a",
+  "schedule-1",
+  "schedule-8812",
+  "form-1040",
+];
 
 export const tcbUs002Scenario: Scenario = {
   name: "tcb-us-002",
