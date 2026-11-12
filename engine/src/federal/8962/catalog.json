@@ -1,0 +1,2137 @@
+{
+  "form": {
+    "formId": "form-8962",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Premium Tax Credit (PTC)"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8962.0.header.taxpayer_name",
+      "label": "Name shown on your return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-8962.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8962.0.header.a_mfs_exception",
+      "label": "Line A — You cannot take the PTC if your filing status is married filing separately unless you qualify for an exception. If you qualify, check the box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 539.11,
+        "y": 674.251
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.1_tax_family_size",
+      "label": "Line 1 — Tax family size. Enter your tax family size",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.2a_modified_agi",
+      "label": "Line 2a — Modified AGI. Enter your modified AGI",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.2b_dependents_modified_agi",
+      "label": "Line 2b — Enter the total of your dependents' modified AGI",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.3_household_income",
+      "label": "Line 3 — Household income. Add the amounts on lines 2a and 2b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.4_alaska",
+      "label": "Line 4a — Federal poverty table used: Alaska",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 262.2,
+        "y": 590.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.4_hawaii",
+      "label": "Line 4b — Federal poverty table used: Hawaii",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 319.8,
+        "y": 590.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.4_other_48_states_dc",
+      "label": "Line 4c — Federal poverty table used: Other 48 states and DC",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[2]",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 590.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.4_federal_poverty_line",
+      "label": "Line 4 — Federal poverty line. Enter the federal poverty line amount from Table 1-1, 1-2, or 1-3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.5_household_income_percent_fpl",
+      "label": "Line 5 — Household income as a percentage of federal poverty line (%)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.7_applicable_figure",
+      "label": "Line 7 — Applicable figure. Using your line 5 percentage, locate your \"applicable figure\" on the table in the instructions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.8a_annual_contribution_amount",
+      "label": "Line 8a — Annual contribution amount. Multiply line 3 by line 7. Round to nearest whole dollar amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.8b_monthly_contribution_amount",
+      "label": "Line 8b — Monthly contribution amount. Divide line 8a by 12. Round to nearest whole dollar amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.9_allocate_or_alt_calc_yes",
+      "label": "Line 9 — Are you allocating policy amounts with another taxpayer or do you want to use the alternative calculation for year of marriage? Yes. Skip to Part IV, Allocation of Policy Amounts, or Part V, Alternative Calculation for Year of Marriage",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 494.001
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.9_allocate_or_alt_calc_no",
+      "label": "Line 9 — Are you allocating policy amounts with another taxpayer or do you want to use the alternative calculation for year of marriage? No. Continue to line 10",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 482.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.10_use_annual_calc_yes",
+      "label": "Line 10 — See the instructions to determine if you can use line 11 or must complete lines 12 through 23. Yes. Continue to line 11. Compute your annual PTC",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 457.998
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.10_use_annual_calc_no",
+      "label": "Line 10 — See the instructions to determine if you can use line 11 or must complete lines 12 through 23. No. Continue to lines 12–23. Compute your monthly PTC",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+      "position": {
+        "page": 0,
+        "x": 65.2,
+        "y": 446.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.11_col_a",
+      "label": "Line 11 — Annual totals, column (a) Annual enrollment premiums (Form(s) 1095-A, line 33A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table1[0].BodyRow1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.11_col_b",
+      "label": "Line 11 — Annual totals, column (b) Annual applicable SLCSP premium (Form(s) 1095-A, line 33B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table1[0].BodyRow1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.11_col_c",
+      "label": "Line 11 — Annual totals, column (c) Annual contribution amount (line 8a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table1[0].BodyRow1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.11_col_d",
+      "label": "Line 11 — Annual totals, column (d) Annual maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table1[0].BodyRow1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.11_col_e",
+      "label": "Line 11 — Annual totals, column (e) Annual PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table1[0].BodyRow1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.11_col_f",
+      "label": "Line 11 — Annual totals, column (f) Annual advance payment of PTC (Form(s) 1095-A, line 33C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table1[0].BodyRow1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.12_col_a",
+      "label": "Line 12 — January, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.12_col_b",
+      "label": "Line 12 — January, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.12_col_c",
+      "label": "Line 12 — January, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.12_col_d",
+      "label": "Line 12 — January, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.12_col_e",
+      "label": "Line 12 — January, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.12_col_f",
+      "label": "Line 12 — January, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 335.999
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.13_col_a",
+      "label": "Line 13 — February, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow2[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.13_col_b",
+      "label": "Line 13 — February, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow2[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.13_col_c",
+      "label": "Line 13 — February, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow2[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.13_col_d",
+      "label": "Line 13 — February, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow2[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.13_col_e",
+      "label": "Line 13 — February, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow2[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.13_col_f",
+      "label": "Line 13 — February, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow2[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.14_col_a",
+      "label": "Line 14 — March, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow3[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.14_col_b",
+      "label": "Line 14 — March, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow3[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.14_col_c",
+      "label": "Line 14 — March, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow3[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.14_col_d",
+      "label": "Line 14 — March, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow3[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.14_col_e",
+      "label": "Line 14 — March, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow3[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.14_col_f",
+      "label": "Line 14 — March, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow3[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.15_col_a",
+      "label": "Line 15 — April, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow4[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.15_col_b",
+      "label": "Line 15 — April, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow4[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.15_col_c",
+      "label": "Line 15 — April, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow4[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.15_col_d",
+      "label": "Line 15 — April, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow4[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.15_col_e",
+      "label": "Line 15 — April, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow4[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.15_col_f",
+      "label": "Line 15 — April, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow4[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.16_col_a",
+      "label": "Line 16 — May, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow5[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 288.003
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.16_col_b",
+      "label": "Line 16 — May, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow5[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 288.003
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.16_col_c",
+      "label": "Line 16 — May, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow5[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 288.003
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.16_col_d",
+      "label": "Line 16 — May, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow5[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 288.003
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.16_col_e",
+      "label": "Line 16 — May, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow5[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 288.003
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.16_col_f",
+      "label": "Line 16 — May, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow5[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 288.003
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.17_col_a",
+      "label": "Line 17 — June, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow6[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 276.004
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.17_col_b",
+      "label": "Line 17 — June, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow6[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 276.004
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.17_col_c",
+      "label": "Line 17 — June, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow6[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 276.004
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.17_col_d",
+      "label": "Line 17 — June, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow6[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 276.004
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.17_col_e",
+      "label": "Line 17 — June, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow6[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 276.004
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.17_col_f",
+      "label": "Line 17 — June, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow6[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 276.004
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.18_col_a",
+      "label": "Line 18 — July, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow7[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 264.005
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.18_col_b",
+      "label": "Line 18 — July, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow7[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 264.005
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.18_col_c",
+      "label": "Line 18 — July, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow7[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 264.005
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.18_col_d",
+      "label": "Line 18 — July, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow7[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 264.005
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.18_col_e",
+      "label": "Line 18 — July, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow7[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 264.005
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.18_col_f",
+      "label": "Line 18 — July, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow7[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 264.005
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.19_col_a",
+      "label": "Line 19 — August, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow8[0].f1_61[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 252.006
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.19_col_b",
+      "label": "Line 19 — August, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow8[0].f1_62[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 252.006
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.19_col_c",
+      "label": "Line 19 — August, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow8[0].f1_63[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 252.006
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.19_col_d",
+      "label": "Line 19 — August, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow8[0].f1_64[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 252.006
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.19_col_e",
+      "label": "Line 19 — August, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow8[0].f1_65[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 252.006
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.19_col_f",
+      "label": "Line 19 — August, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow8[0].f1_66[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 252.006
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.20_col_a",
+      "label": "Line 20 — September, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow9[0].f1_67[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 240.007
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.20_col_b",
+      "label": "Line 20 — September, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow9[0].f1_68[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 240.007
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.20_col_c",
+      "label": "Line 20 — September, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow9[0].f1_69[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 240.007
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.20_col_d",
+      "label": "Line 20 — September, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow9[0].f1_70[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 240.007
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.20_col_e",
+      "label": "Line 20 — September, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow9[0].f1_71[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 240.007
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.20_col_f",
+      "label": "Line 20 — September, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow9[0].f1_72[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 240.007
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.21_col_a",
+      "label": "Line 21 — October, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow10[0].f1_73[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 228.008
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.21_col_b",
+      "label": "Line 21 — October, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow10[0].f1_74[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 228.008
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.21_col_c",
+      "label": "Line 21 — October, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow10[0].f1_75[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 228.008
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.21_col_d",
+      "label": "Line 21 — October, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow10[0].f1_76[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 228.008
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.21_col_e",
+      "label": "Line 21 — October, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow10[0].f1_77[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 228.008
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.21_col_f",
+      "label": "Line 21 — October, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow10[0].f1_78[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 228.008
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.22_col_a",
+      "label": "Line 22 — November, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow11[0].f1_79[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 216.009
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.22_col_b",
+      "label": "Line 22 — November, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow11[0].f1_80[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 216.009
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.22_col_c",
+      "label": "Line 22 — November, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow11[0].f1_81[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 216.009
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.22_col_d",
+      "label": "Line 22 — November, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow11[0].f1_82[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 216.009
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.22_col_e",
+      "label": "Line 22 — November, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow11[0].f1_83[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 216.009
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.22_col_f",
+      "label": "Line 22 — November, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow11[0].f1_84[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 216.009
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.23_col_a",
+      "label": "Line 23 — December, column (a) Monthly enrollment premiums (Form(s) 1095-A, lines 21–32, column A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow12[0].f1_85[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 204.01
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.23_col_b",
+      "label": "Line 23 — December, column (b) Monthly applicable SLCSP premium (Form(s) 1095-A, lines 21–32, column B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow12[0].f1_86[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 204.01
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.23_col_c",
+      "label": "Line 23 — December, column (c) Monthly contribution amount (amount from line 8b or alternative marriage monthly calculation)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow12[0].f1_87[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 204.01
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.23_col_d",
+      "label": "Line 23 — December, column (d) Monthly maximum premium assistance (subtract (c) from (b); if zero or less, enter -0-)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow12[0].f1_88[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 204.01
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.23_col_e",
+      "label": "Line 23 — December, column (e) Monthly PTC allowed (smaller of (a) or (d))",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow12[0].f1_89[0]",
+      "position": {
+        "page": 0,
+        "x": 417.6,
+        "y": 204.01
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.23_col_f",
+      "label": "Line 23 — December, column (f) Monthly advance payment of PTC (Form(s) 1095-A, lines 21–32, column C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Part2Table2[0].BodyRow12[0].f1_90[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 204.01
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.24_total_ptc",
+      "label": "Line 24 — Total PTC. Enter the amount from line 11, column (e), or add lines 12 through 23, column (e), and enter the total here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_91[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 180
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.25_advance_payment_ptc",
+      "label": "Line 25 — Advance payment of PTC. Enter the amount from line 11, column (f), or add lines 12 through 23, column (f), and enter the total here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_92[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 155.999
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.26_net_ptc",
+      "label": "Line 26 — Net PTC. If line 24 is greater than line 25, subtract line 25 from line 24. If line 24 equals line 25, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_93[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 119.999
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.27_excess_advance_ptc",
+      "label": "Line 27 — Excess advance payment of PTC. If line 25 is greater than line 24, subtract line 24 from line 25",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_94[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 95.998
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.28_repayment_limitation",
+      "label": "Line 28 — Repayment limitation",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_95[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 83.999
+      }
+    },
+    {
+      "fieldId": "form-8962.0.line.29_excess_advance_ptc_repayment",
+      "label": "Line 29 — Excess advance PTC repayment. Enter the smaller of line 27 or line 28",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_96[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 71.997
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.30_col_a",
+      "label": "Line 30 — Allocation 1, (a) Policy Number (Form 1095-A, line 2)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.30_col_b",
+      "label": "Line 30 — Allocation 1, (b) SSN of other taxpayer",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8962.1.line.30_col_c",
+      "label": "Line 30 — Allocation 1, (c) Allocation start month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 361,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.30_col_d",
+      "label": "Line 30 — Allocation 1, (d) Allocation stop month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 469,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.30_col_e",
+      "label": "Line 30 — Allocation 1, (e) Allocation percentage applied to monthly amounts: Premium Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines30e-g[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.30_col_f",
+      "label": "Line 30 — Allocation 1, (f) Allocation percentage applied to monthly amounts: SLCSP Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines30e-g[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 302.4,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.30_col_g",
+      "label": "Line 30 — Allocation 1, (g) Allocation percentage applied to monthly amounts: Advance Payment of the PTC Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines30e-g[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.31_col_a",
+      "label": "Line 31 — Allocation 2, (a) Policy Number (Form 1095-A, line 2)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 599.998
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.31_col_b",
+      "label": "Line 31 — Allocation 2, (b) SSN of other taxpayer",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 599.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8962.1.line.31_col_c",
+      "label": "Line 31 — Allocation 2, (c) Allocation start month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 361,
+        "y": 599.998
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.31_col_d",
+      "label": "Line 31 — Allocation 2, (d) Allocation stop month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 469,
+        "y": 599.998
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.31_col_e",
+      "label": "Line 31 — Allocation 2, (e) Allocation percentage applied to monthly amounts: Premium Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines31e-g[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.31_col_f",
+      "label": "Line 31 — Allocation 2, (f) Allocation percentage applied to monthly amounts: SLCSP Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines31e-g[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 302.4,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.31_col_g",
+      "label": "Line 31 — Allocation 2, (g) Allocation percentage applied to monthly amounts: Advance Payment of the PTC Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines31e-g[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.32_col_a",
+      "label": "Line 32 — Allocation 3, (a) Policy Number (Form 1095-A, line 2)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 515.999
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.32_col_b",
+      "label": "Line 32 — Allocation 3, (b) SSN of other taxpayer",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 515.999
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8962.1.line.32_col_c",
+      "label": "Line 32 — Allocation 3, (c) Allocation start month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 361,
+        "y": 515.999
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.32_col_d",
+      "label": "Line 32 — Allocation 3, (d) Allocation stop month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 469,
+        "y": 515.999
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.32_col_e",
+      "label": "Line 32 — Allocation 3, (e) Allocation percentage applied to monthly amounts: Premium Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines32e-g[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.32_col_f",
+      "label": "Line 32 — Allocation 3, (f) Allocation percentage applied to monthly amounts: SLCSP Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines32e-g[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 302.4,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.32_col_g",
+      "label": "Line 32 — Allocation 3, (g) Allocation percentage applied to monthly amounts: Advance Payment of the PTC Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines32e-g[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.33_col_a",
+      "label": "Line 33 — Allocation 4, (a) Policy Number (Form 1095-A, line 2)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.33_col_b",
+      "label": "Line 33 — Allocation 4, (b) SSN of other taxpayer",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 432
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8962.1.line.33_col_c",
+      "label": "Line 33 — Allocation 4, (c) Allocation start month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 361,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.33_col_d",
+      "label": "Line 33 — Allocation 4, (d) Allocation stop month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 469,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.33_col_e",
+      "label": "Line 33 — Allocation 4, (e) Allocation percentage applied to monthly amounts: Premium Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines33e-g[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.33_col_f",
+      "label": "Line 33 — Allocation 4, (f) Allocation percentage applied to monthly amounts: SLCSP Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines33e-g[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 302.4,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.33_col_g",
+      "label": "Line 33 — Allocation 4, (g) Allocation percentage applied to monthly amounts: Advance Payment of the PTC Percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Lines33e-g[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.34_allocations_complete_yes",
+      "label": "Line 34 — Have you completed all policy amount allocations? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 65.2,
+        "y": 362
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.34_allocations_complete_no",
+      "label": "Line 34 — Have you completed all policy amount allocations? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 326
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.35_col_a",
+      "label": "Line 35 — Alternative entries for your SSN, (a) Alternative family size",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 144,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.35_col_b",
+      "label": "Line 35 — Alternative entries for your SSN, (b) Alternative monthly contribution amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 244.8,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.35_col_c",
+      "label": "Line 35 — Alternative entries for your SSN, (c) Alternative start month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 346.6,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.35_col_d",
+      "label": "Line 35 — Alternative entries for your SSN, (d) Alternative stop month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 461.8,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.36_col_a",
+      "label": "Line 36 — Alternative entries for your spouse's SSN, (a) Alternative family size",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 144,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.36_col_b",
+      "label": "Line 36 — Alternative entries for your spouse's SSN, (b) Alternative monthly contribution amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 244.8,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.36_col_c",
+      "label": "Line 36 — Alternative entries for your spouse's SSN, (c) Alternative start month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 346.6,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-8962.1.line.36_col_d",
+      "label": "Line 36 — Alternative entries for your spouse's SSN, (d) Alternative stop month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 461.8,
+        "y": 204.001
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8962/blank.pdf",
+    "ingestedAt": "2026-11-12T05:38:56.372Z",
+    "totalFields": 141,
+    "skipped": 0,
+    "catalogEntries": 141
+  }
+}
