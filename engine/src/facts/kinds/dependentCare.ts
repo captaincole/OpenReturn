@@ -35,7 +35,12 @@ export interface DependentCareQualifyingPersonFactValue {
    * for a person over age 12.
    */
   unableToCareForSelf?: boolean;
-  /* Column (d): qualified expenses incurred and paid in the year for this person. */
+  /*
+   * Column (d): qualified expenses incurred and paid in the year for this person,
+   * less any paid with dependent care benefits (irs-2441-inst-2025::sec::line-2::b03:
+   * none of line 28); for a child who turned 13, only the care before the birthday.
+   * Line 16 has its own answer (expensesIncurred).
+   */
   expensesPaid: number;
 }
 
