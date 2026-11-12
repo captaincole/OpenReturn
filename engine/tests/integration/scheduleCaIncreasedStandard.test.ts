@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { evaluateScenario } from "../../src";
 import { lookupStandardDeduction } from "../../src/data/standardDeduction.js";
 import type { AIDecisionRow } from "../../src/facts/rows";
+import { PART_II_BY_HAND } from "../../src/state/ca/schedule-ca/increasedStandard.js";
 import { decisionRow } from "../helpers/fixtureBuilders.js";
 import { tcbUs002Scenario as base } from "../scenarios/tcb-us-002/index.js";
 
@@ -10,7 +11,8 @@ import { tcbUs002Scenario as base } from "../scenarios/tcb-us-002/index.js";
  * disaster loss, $26,125 on Schedule A line 16) files Form 540 and itemizes
  * for California. Schedule CA Part II must not copy line 16, which holds the
  * federal standard deduction, and line 30 must not fall back to the California
- * standard deduction: Part II waits for a person, and Form 540 waits with it.
+ * standard deduction: a person completes Part II (unsupported), and Form 540
+ * line 18 with it. The lines after line 18 read it as blank and wait.
  */
 const INCREASED_STANDARD = 26125;
 const CHANGED: Record<string, unknown> = {
@@ -44,11 +46,18 @@ function evaluate(extra: Record<string, unknown> = {}) {
     decisions: [...kept, ...changed],
     authEmail: null,
   });
-  return (formId: string, fieldId: string) => {
-    const field = scenario.forms.get(formId)?.fields.find((each) => each.fieldId === fieldId);
-    return field?.result.ok ? field.result.value : undefined;
-  };
+  const result = (formId: string, fieldId: string) =>
+    scenario.forms.get(formId)?.fields.find((each) => each.fieldId === fieldId)?.result;
+  return Object.assign(
+    (formId: string, fieldId: string) => {
+      const found = result(formId, fieldId);
+      return found?.ok ? found.value : undefined;
+    },
+    { result },
+  );
 }
+
+const BY_HAND = { ok: false, unsupported: true, reason: PART_II_BY_HAND };
 
 describe("Schedule CA Part II with the federal increased standard deduction", () => {
   const value = evaluate();
@@ -60,27 +69,29 @@ describe("Schedule CA Part II with the federal increased standard deduction", ()
     expect(value("form-1040", "form-1040.line.12e")).toBe(INCREASED_STANDARD);
   });
 
-  it("leaves lines 16, 17 and 29 waiting, not the federal standard deduction", () => {
+  it("makes lines 16, 17 and 29 unsupported, not the federal standard deduction", () => {
     for (const line of [
       "5.page2.other_deductions_16_federal",
       "5.page2.total_itemized_17_federal",
       "5.page2.total_itemized_28",
       "5.page2.total_itemized_29",
     ]) {
-      expect(value("schedule-ca", `schedule-ca.${line}`), line).toBeUndefined();
+      expect(value.result("schedule-ca", `schedule-ca.${line}`), line).toEqual(BY_HAND);
     }
   });
 
-  it("leaves line 30 and Form 540 line 18 waiting, not the California standard deduction", () => {
+  it("makes line 30 and Form 540 line 18 unsupported, not the California standard deduction", () => {
     expect(
-      value("schedule-ca", "schedule-ca.5.page2.total_itemized_30_standard_or_itemized"),
-    ).toBeUndefined();
-    expect(value("form-540", "form-540.line.18_deductions")).toBeUndefined();
+      value.result("schedule-ca", "schedule-ca.5.page2.total_itemized_30_standard_or_itemized"),
+    ).toEqual(BY_HAND);
+    expect(value.result("form-540", "form-540.line.18_deductions")).toEqual(BY_HAND);
   });
 
-  it("leaves Form 540 taxable income and the lines after it waiting", () => {
+  it("leaves Form 540 taxable income and the lines after it waiting, not unsupported", () => {
     for (const line of AFTER_LINE_18) {
-      expect(value("form-540", `form-540.${line}`), line).toBeUndefined();
+      const found = value.result("form-540", `form-540.${line}`);
+      expect(found?.ok, line).toBe(false);
+      expect(found, line).not.toHaveProperty("unsupported", true);
     }
   });
 

@@ -57,6 +57,9 @@ export interface ScheduleAFilingInfo
   /** Line 16: Form 4684 line 15 when it is a net qualified disaster loss; 0 with none; undefined while its totals wait. */
   netQualifiedDisasterLoss?: number;
 
+  /** Why Form 4684's totals cannot be figured (an engine gap); undefined when they can, or only wait. */
+  disasterLossGap?: string;
+
   /**
    * Schedule A files only for the increased standard deduction: the return
    * takes the standard deduction with a net qualified disaster loss. Only line
