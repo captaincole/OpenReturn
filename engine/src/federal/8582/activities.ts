@@ -11,7 +11,7 @@
 
 import type { RentalFactValue } from "../../facts/index.js";
 import { numberOrBlank, roundDollars, sum } from "../../money.js";
-import { isRentalActivity } from "../rentals/passive.js";
+import { isRentalActivity, isSelfRentalNetIncome } from "../rentals/passive.js";
 import type { PropertyColumn, RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
 
@@ -61,9 +61,6 @@ export interface Placement {
 /* Why a property's place is undecided: its passive answer, another property answer, or living apart. */
 export type Undecided = "passive" | "property" | "lived_apart";
 
-/* Net income from these may be recharacterized as nonpassive (recharacterization-of-passive-income::b01). */
-const RECHARACTERIZED_TYPES = new Set(["land", "self_rental"]);
-
 const whole = (part: ActivityPart): Placement => ({ current: part, prior: part });
 
 /* Facts the engine does not model leave the property's place open. */
@@ -75,7 +72,23 @@ function unmodeled(value: RentalFactValue, net: number | undefined): boolean {
   const income = net === undefined || net > 0;
   // A passive trade or business may be a significant participation activity, whose income is recharacterized.
   if (value.propertyType !== "royalties" && isRentalActivity(value) === false) return income;
-  return RECHARACTERIZED_TYPES.has(value.propertyType) && income;
+  // Land's net income is nonpassive under 30% depreciable basis (rental-of-nondepreciable-property::b01): no fact holds it.
+  return value.propertyType === "land" && income;
+}
+
+/*
+ * A self-rental's net income is off Form 8582 (irs-pub-925-2025::sec::disclosure-requirement::b05);
+ * a net loss is placed as any passive rental (undefined here). Income over a prior-year
+ * loss allows that loss outside the form, which no line models: it waits, as does an unknown net.
+ */
+function selfRentalPlacement(
+  value: RentalFactValue,
+  net: number | undefined,
+): "property" | null | undefined {
+  const netIncome = isSelfRentalNetIncome(value, net);
+  if (netIncome === undefined) return "property";
+  if (!netIncome) return undefined;
+  return (value.priorYearUnallowedLoss ?? 0) > 0 ? "property" : null;
 }
 
 /* A passive rental real estate activity: Part IV with active participation (part-iv-2::b01). */
@@ -95,7 +108,7 @@ function realEstatePlacement(value: RentalFactValue, info: ActivitiesInfo): Plac
 
 /*
  * The parts of one property: null when it is not on Form 8582. net is Schedule E
- * line 21 (undefined while blank); only its sign is read here.
+ * line 21 (undefined while blank); its sign, or a self-rental's net with its prior-year loss.
  */
 export function placementOf(
   property: Pick<RentalProperty, "value" | "passive">,
@@ -107,6 +120,8 @@ export function placementOf(
   // A former passive activity's prior-year loss (former-passive-activities::b01) is not modeled.
   if (!property.passive) return (value.priorYearUnallowedLoss ?? 0) > 0 ? "property" : null;
   if (unmodeled(value, net)) return "property";
+  const selfRental = selfRentalPlacement(value, net);
+  if (selfRental !== undefined) return selfRental;
   if (value.propertyType === "royalties") return whole("part5");
   // Not a rental activity: a passive trade or business goes in Part V (reporting-income-and-losses-from-the::b01).
   if (isRentalActivity(value) === false) return whole("part5");

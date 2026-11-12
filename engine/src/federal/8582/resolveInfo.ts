@@ -17,6 +17,7 @@ import {
   booleanFact,
   isPassiveActivity,
   isRentalActivity,
+  isSelfRentalNetIncome,
   needsProfessionalAnswer,
   spousePropertiesOnReturn,
 } from "../rentals/passive.js";
@@ -102,7 +103,13 @@ export function resolve8582Info(inputs: ResolverInputs): Form8582FilingInfo {
     passive: isPassiveActivity(property.value, realEstateProfessional),
   }));
   const open = passive.filter((property) => property.passive === undefined);
-  const filing = passive.filter((property) => property.passive && hasDeductions(property.value));
+  // MANUAL EDIT: a self-rental's net income and its deductions stay off Form 8582 (disclosure-requirement::b05).
+  const filing = passive.filter(
+    (property) =>
+      property.passive &&
+      hasDeductions(property.value) &&
+      isSelfRentalNetIncome(property.value, netIncomeOrLoss(property.value)) !== true,
+  );
   const hasRental = needsProfessionalAnswer(properties.map((property) => property.value));
   const livedApart = booleanFact(inputs.factByKey.get(SPOUSE_KEYS.livedApartAllYear));
   const info: ActivitiesInfo = { filingStatus: status, livedApartFromSpouseAllYear: livedApart };

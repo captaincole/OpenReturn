@@ -10,6 +10,9 @@
  * - rental-activities::b01: an average customer use of 7 days or less is not a
  *   rental activity; reporting-income-and-losses-from-the::b01: as a trade or
  *   business it goes in Part V without material participation, and on no part with it.
+ * - irs-pub-925-2025::sec::rental-of-property-to::b01 and disclosure-requirement::b05:
+ *   a self-rental's net income (line 21 over the prior-year loss) is not on the form;
+ *   a net loss is placed as any passive rental.
  */
 
 import { describe, expect, it } from "vitest";
@@ -103,5 +106,53 @@ describe("Form 8582 Parts IV and V: a short stay (placementOf)", () => {
     ["8 days is a rental activity: Part IV", stay({ averageCustomerUseDays: 8 }), part4],
   ] as Array<[string, RentalFactValue, Expected]>)("%s", (_, value, expected) => {
     expect(place(value)).toEqual(expected);
+  });
+});
+
+describe("Form 8582 Parts IV and V: a self-rental (placementOf)", () => {
+  const selfRental: RentalFactValue = { ...house, propertyType: "self_rental" };
+  const place = (overrides: Partial<RentalFactValue>, net: number | undefined) =>
+    placementOf({ value: { ...selfRental, ...overrides }, passive: true }, single, net);
+
+  it.each([
+    ["net income, no prior-year loss: not on the form", {}, 10000, null],
+    ["net loss: Part IV with active participation", {}, -4000, part4],
+    ["net loss without active participation: Part V", { activeParticipation: false }, -4000, part5],
+    [
+      "income below the prior-year loss: a net loss, placed as any rental",
+      { priorYearUnallowedLoss: 6000, activeParticipationWhenLossArose: true },
+      4000,
+      part4,
+    ],
+    [
+      "income equal to the prior-year loss: no net income, placed",
+      { priorYearUnallowedLoss: 4000, activeParticipationWhenLossArose: false },
+      4000,
+      { current: "part4", prior: "part5" },
+    ],
+    [
+      "income over the prior-year loss: undecided",
+      { priorYearUnallowedLoss: 3000, activeParticipationWhenLossArose: true },
+      4000,
+      "property",
+    ],
+    ["unknown net: undecided", {}, undefined, "property"],
+  ] as Array<[string, Partial<RentalFactValue>, number | undefined, Expected]>)(
+    "%s",
+    (_, overrides, net, expected) => {
+      expect(place(overrides, net)).toEqual(expected);
+    },
+  );
+
+  it("follows the MFS caution on a net loss", () => {
+    const info: ActivitiesInfo = {
+      filingStatus: "married_filing_separately",
+      livedApartFromSpouseAllYear: false,
+    };
+    expect(placementOf({ value: selfRental, passive: true }, info, -4000)).toEqual(part5);
+  });
+
+  it("keeps land with net income undecided", () => {
+    expect(place({ propertyType: "land" }, 10000)).toEqual("property");
   });
 });
