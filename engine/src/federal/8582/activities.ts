@@ -63,8 +63,8 @@ export type Undecided = "passive" | "property" | "lived_apart";
 
 const whole = (part: ActivityPart): Placement => ({ current: part, prior: part });
 
-/* Facts the engine does not model leave the property's place open. */
-function unmodeled(value: RentalFactValue, net: number | undefined): boolean {
+/* Facts the engine does not model leave the property's place open; Pub. 596 Worksheet 1 reads it too. */
+export function unmodeled(value: RentalFactValue, net: number | undefined): boolean {
   // An entire disposition needs its Form 4797 or 8949 gain, which no fact links to the property.
   if (value.disposedOfEntirely) return true;
   // Type 8 can be real estate (Part IV) or personal property (Part V).

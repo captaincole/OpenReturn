@@ -98,6 +98,8 @@ export interface EicReturn {
   agi?: number;
   /** Step 2: lines 2a + 2b + 3b + 7a (a loss on 7a counts as 0). */
   investmentIncome: number;
+  /** Step 2, question 4: Pub. 596 Worksheet 1 (worksheet1.ts); undefined when the answer is no. */
+  worksheet1?: Worksheet1;
   /** Step 5 line 5, or Worksheet B line 4b for a self-employed filer. */
   earnedIncome?: number;
   /** The least earnedIncome can be while it waits on the combat pay election. */
@@ -117,6 +119,10 @@ export type EicOutcome =
   | { kind: "none"; checkLine27c: boolean }
   | { kind: "waiting" }
   | { kind: "unsupported"; reason: string };
+
+/** Pub. 596 Worksheet 1 line 14, or why it waits or is not modeled. */
+export type Worksheet1 =
+  { kind: "line14"; amount: number } | Extract<EicOutcome, { kind: "waiting" | "unsupported" }>;
 
 const WAITING: EicOutcome = { kind: "waiting" };
 const none = (checkLine27c: boolean): EicOutcome => ({ kind: "none", checkLine27c });
@@ -140,11 +146,22 @@ function step1(ret: EicReturn, answers: EicAnswers, joint: boolean): Step {
 }
 
 /*
- * Step 2. Form 4797, Schedule E, Form 8814 and passive activities are not
- * modeled, so a filer over the limit stops ("No. STOP") and question 4 is no.
+ * Step 2's sum or Worksheet 1 line 14 over $11,950: "You can't take the credit"
+ * (irs-pub-596-2025::sec::passive-activities::b01, line 15).
+ */
+function investmentIncomeOverLimit(ret: EicReturn): boolean {
+  const line14 = ret.worksheet1?.kind === "line14" ? ret.worksheet1.amount : 0;
+  return Math.max(ret.investmentIncome, line14) > INVESTMENT_INCOME_LIMIT;
+}
+
+/*
+ * Step 2. Form 4797 is not modeled, so a filer over the limit stops ("No.
+ * STOP"). Question 4 sends a Schedule E filer to Pub. 596 Worksheet 1, which
+ * waits or is a gap until its line 14 is known.
  */
 function step2(ret: EicReturn): Step {
-  return ret.investmentIncome > INVESTMENT_INCOME_LIMIT ? none(false) : undefined;
+  if (investmentIncomeOverLimit(ret)) return none(false);
+  return ret.worksheet1?.kind === "line14" ? undefined : ret.worksheet1;
 }
 
 /*
@@ -249,12 +266,19 @@ function earnedIncomeStop(ret: EicReturn, answers: EicAnswers, joint: boolean): 
   return earned >= eicIncomeLimit(children, joint) ? none(ret.worksheetB) : undefined;
 }
 
+/* AGI and earned income (or its gap) are known: a gap no answer settles can decide. */
+function linesKnown(ret: EicReturn): boolean {
+  const earnedKnown =
+    (ret.earnedIncome ?? ret.earnedIncomeAtLeast) !== undefined ||
+    ret.earnedIncomeGap !== undefined;
+  return ret.agi !== undefined && earnedKnown;
+}
+
 /*
  * Step 4 without a qualifying child, from data alone: question 1 stops MFS and a
  * married head of household, and question 2 stops a filer (and spouse) outside
  * ages 25–64. Else a head of household not known to be married is the gap
- * once AGI and earned income (or its gap) are known: a wait would be on
- * answers no one asks.
+ * once the lines are known: a wait would be on answers no one asks.
  */
 function noChildStop(ret: EicReturn, answers: EicAnswers, joint: boolean): Step {
   if (answers.qualifyingChildren > 0 || answers.childrenOpen) return undefined;
@@ -263,27 +287,26 @@ function noChildStop(ret: EicReturn, answers: EicAnswers, joint: boolean): Step 
   const ages = step4Ages(ret, joint);
   if (!ages.includes(true) && !ages.includes(undefined)) return none(false);
   // A gap in earned income comes at Step 5, after this one.
-  const earnedKnown =
-    (ret.earnedIncome ?? ret.earnedIncomeAtLeast) !== undefined ||
-    ret.earnedIncomeGap !== undefined;
-  const known = ret.agi !== undefined && earnedKnown;
-  return known ? question1 : undefined;
+  return linesKnown(ret) ? question1 : undefined;
 }
 
 /*
  * The stops the steps reach whatever the missing answers are, in step order:
- * Step 2's investment income, Step 4 without a child, and Step 5's earned
- * income at the limit or zero or less (Worksheet A line 2 or Worksheet B
- * line 4b checks line 27c).
+ * Step 2's investment income (or Worksheet 1 line 14), Step 4 without a child,
+ * and Step 5's earned income at the limit or zero or less (Worksheet A line 2
+ * or Worksheet B line 4b checks line 27c). Else a gap no answer settles
+ * decides once the lines are known: Worksheet 1's, then Step 4's.
  */
 function definiteStop(ret: EicReturn, answers: EicAnswers, joint: boolean): Step {
-  if (ret.investmentIncome > INVESTMENT_INCOME_LIMIT) return none(false);
+  if (investmentIncomeOverLimit(ret)) return none(false);
   const noChild = noChildStop(ret, answers, joint);
   if (noChild?.kind === "none") return noChild;
   const atLimit = earnedIncomeStop(ret, answers, joint);
   if (atLimit) return atLimit;
   if (ret.earnedIncome !== undefined && ret.earnedIncome <= 0) return none(true);
-  return noChild;
+  const { worksheet1 } = ret;
+  // Step 2's gap comes before Step 4's.
+  return worksheet1?.kind === "unsupported" && linesKnown(ret) ? worksheet1 : noChild;
 }
 
 /*
