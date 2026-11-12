@@ -73,6 +73,10 @@ export interface RentalFactValue {
   allInvestmentAtRisk?: boolean;
   /* Form 8582: losses from this activity not allowed in earlier years. */
   priorYearUnallowedLoss?: number;
+  /* Form 8582 Part IV column (c): the owner also actively participated in the year that loss arose. */
+  activeParticipationWhenLossArose?: boolean;
+  /* Form 8582: the average period of customer use, in days (a stay of 7 days or less is not a rental activity). */
+  averageCustomerUseDays?: number;
   /* Form 8582: the owner sold or disposed of the entire interest this year. */
   disposedOfEntirely?: boolean;
   /* Royalties only: how the royalty counts under the passive activity rules. */
@@ -139,6 +143,7 @@ function isRental(value: unknown): value is RentalFactValue {
     AMOUNT_FIELDS.every((field) => isAmount(fields[field])) &&
     isDays(fields.fairRentalDays) &&
     isDays(fields.personalUseDays) &&
+    isAmount(fields.averageCustomerUseDays) &&
     typeof expenses === "object" &&
     (otherDescription === undefined || typeof otherDescription === "string") &&
     Object.values(expenseAmounts).every(isAmount)
