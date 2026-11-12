@@ -71,7 +71,7 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
     Form 8582), a business whose QBI nets the rental's loss (Schedule C
     (Form 8995-A)), a W-2 over the Additional Medicare threshold and a
     child (Schedule 8812). Every line in the case's answer key matches;
-    its README lists what it leaves blank and two points to decide
+    its README lists what it leaves blank and the QJV box
   - `tcb-us-008` — TaxCalcBench case ty25-us-008, federal only. MFS, a
     W-2, a consulting business paid on a 1099-NEC (Schedule C with
     mileage and a simplified home office, Schedule SE, Form 8995), gifts
