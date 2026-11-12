@@ -17,6 +17,9 @@ export function register(): void {
   defineForm<Schedule2, Schedule2FilingInfo>("schedule-2", {
     bindings: {
       "0.header.ssn": (_, info) => info.taxpayerSSN,
+      // MANUAL EDIT: irs-1040-inst-2025::sec::line-1a-2::b01: Form 8962 line 29; blank when 8962 is not filed.
+      "0.line.1a_excess_aptc_repayment": (form) =>
+        total(form["form-8962.0.line.29_excess_advance_ptc_repayment"]),
       "0.line.1z_total_lines_1a_through_1y": (form) =>
         total(
           form["0.line.1a_excess_aptc_repayment"],
@@ -98,7 +101,6 @@ export function register(): void {
     unsupported: {
       "0.header.taxpayer_name":
         "Full name needs first + last name joined together. No single full-name fact exists and lookupFact can't concatenate, and form-1040 has no combined-name field to reference.",
-      "0.line.1a_excess_aptc_repayment": "No Form 8962 / 1095-A Marketplace coverage scenario yet.",
       "0.line.1b_new_clean_vehicle_credit_repayment":
         "No Form 8936 / Schedule A (8936) clean vehicle scenario yet.",
       "0.line.1c_previously_owned_clean_vehicle_credit_repayment":
