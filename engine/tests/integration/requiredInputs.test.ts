@@ -50,8 +50,8 @@ const OPTIONAL: Array<[RegExp, string]> = [
   ],
   [
     /^decisions\.scope\.must_file_6251$/,
-    "KNOWN GAP: Form 6251 files when its line 7 is more than line 10, which the " +
-      "resolver cannot see before evaluation; Cade records the decision.",
+    "KNOWN GAP: an incentive stock option spread files Form 6251; a filer who owes AMT " +
+      "for another reason (line 7 more than line 10) needs the explicit decision.",
   ],
   [
     /^prior_year\.ca_tax$/,

@@ -31,10 +31,20 @@ function facts(changes: Changes, drop: (fact: TaxFactRow) => boolean = () => fal
   return [...kept, ...added];
 }
 
+/* base's decisions with each changed key's value replaced (or added). */
 function decisions(changes: Changes): AIDecisionRow[] {
-  return base.decisions.map((row) =>
+  const kept = base.decisions.map((row) =>
     row.decisionKey in changes ? { ...row, decision: changes[row.decisionKey] } : row,
   );
+  const added = Object.entries(changes)
+    .filter(([key]) => !kept.some((row) => row.decisionKey === key))
+    .map(([decisionKey, decision]) => ({
+      ...kept[0]!,
+      id: `dec-${decisionKey}`,
+      decisionKey,
+      decision,
+    }));
+  return [...kept, ...added];
 }
 
 function evaluate(factRows: TaxFactRow[], decisionRows: AIDecisionRow[] = base.decisions) {
@@ -79,7 +89,7 @@ describe("Form 6251 evaluated", () => {
   });
 
   it("skips lines 33–37 when lines 32 and 12 are the same", () => {
-    // 15,750 of wages (the standard deduction) and a 300,000 long-term gain, no ISO spread.
+    // 15,750 of wages, a 300,000 long-term gain, no ISO spread: filed on the explicit decision.
     const w2 = base.facts.find((fact) => fact.category === "wages")!;
     const { line } = evaluate(
       facts({
@@ -99,6 +109,7 @@ describe("Form 6251 evaluated", () => {
         "decisions.scope.must_file_schedule_a": false,
         "decisions.itemize_vs_standard": "standard",
         "decisions.scope.must_file_4952": false,
+        "decisions.scope.must_file_6251": true,
       }),
     );
     expect(line("form-6251.0.line.6_amti_less_exemption")).toBe(227650);
