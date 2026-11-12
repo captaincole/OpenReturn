@@ -30,7 +30,9 @@ filing jointly has one federal-only test scenario (TaxCalcBench), with
 Form 8606 (nondeductible IRA basis, Roth conversions) and Schedule 1-A
 (the senior deduction only). Married filing separately also has one
 federal-only TaxCalcBench scenario with a sole-proprietor business
-(Schedules C and SE, Form 8995-A). A second married-filing-jointly
+(Schedules C and SE, Form 8995-A), and a second with a 1099-NEC
+business (vehicle mileage, a home office), gifts on Schedule A, a
+capital loss carryover and Form 8995. A second married-filing-jointly
 TaxCalcBench scenario itemizes (Schedule A: gifts, medical under the
 floor, state tax withheld, investment interest on Form 4952) with a
 dependent (Schedule 8812), a small business, Social Security and a
@@ -41,11 +43,12 @@ stock option exercise (Schedule P) and the early-distribution tax on a
 1099-R (FTB 3805P).
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
-1099-SA, 1098, SSA-1099, W-2G, 1099-K, a W-2 you issued to a household employee
+1099-SA, 1098, SSA-1099, W-2G, 1099-K, 1099-NEC, a W-2 you issued to a household employee
 (Schedule H, without FUTA tax), and invoices for home energy improvements
 (Form 5695 Part II). The last two have one unverified test scenario.
 A business you run yourself is answers, not a document: receipts and
-expenses by Schedule C line, with no home office, vehicle worksheet,
+expenses by Schedule C line, vehicles at the standard mileage rate and
+a home office by the simplified method, with no Form 8829,
 depreciation form or cost of goods sold.
 
 A return outside this list still helps: the report shows what your

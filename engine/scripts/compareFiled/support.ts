@@ -6,6 +6,7 @@
 
 import {
   AMT_KEYS,
+  CAPITAL_LOSS_CARRYOVER_KEYS,
   CA_MISC_DEDUCTION_KEYS,
   GAMBLING_KEYS,
   HOME_ENERGY_KEYS,
@@ -24,6 +25,7 @@ import {
   isHsaDistributionFact,
   isInterestFact,
   isMiscIncomeFact,
+  isNonemployeeCompensationFactKey,
   isPaymentTransactionsFactKey,
   isReportedBasisFact,
   isRetirementDistributionFact,
@@ -58,6 +60,7 @@ const DOCUMENT_FACTS = [
   isDependentFact,
   (fact: TaxFactRow) => isGamblingWinningsFactKey(fact.key),
   (fact: TaxFactRow) => isPaymentTransactionsFactKey(fact.key),
+  (fact: TaxFactRow) => isNonemployeeCompensationFactKey(fact.key),
   (fact: TaxFactRow) => isBusinessFactKey(fact.key),
 ];
 
@@ -70,8 +73,11 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(INVESTMENT_INTEREST_KEYS),
   ...Object.values(AMT_KEYS),
   ...Object.values(CA_MISC_DEDUCTION_KEYS),
+  ...Object.values(CAPITAL_LOSS_CARRYOVER_KEYS),
   GAMBLING_KEYS.winningsNotOnW2G,
   SPOUSE_KEYS.livedApartAllYear,
+  SPOUSE_KEYS.livedApartLastSixMonths,
+  SPOUSE_KEYS.legallySeparatedApartAtYearEnd,
   SPOUSE_KEYS.itemizesSeparately,
   makeTraditionalIraFactKey("taxpayer"),
   makeTraditionalIraFactKey("spouse"),
