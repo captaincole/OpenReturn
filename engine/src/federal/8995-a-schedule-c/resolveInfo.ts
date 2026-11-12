@@ -1,18 +1,11 @@
-import type { RentalFactValue } from "../../facts/index.js";
-import { sum } from "../../money.js";
 import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { qbiBusinesses } from "../qbi/resolveInfo.js";
 import { qbiMustFile } from "../qbi/whichForm.js";
+import { netIncomeOrLoss } from "../schedule-e/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import type { Form8995AScheduleCFilingInfo } from "./filingInfo.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_8995_a_schedule_c";
-
-/* Schedule E line 21 from the facts: rents and royalties less the expenses. */
-function netRentalIncome(property: RentalFactValue): number {
-  const { otherDescription: _description, ...expenses } = property.expenses ?? {};
-  return sum(property.rentsReceived, property.royaltiesReceived) - sum(...Object.values(expenses));
-}
 
 /*
  * irs-8995a-inst-2025::sec::schedule-c-form-8995-a-loss-netting-and::b01: complete
@@ -35,8 +28,12 @@ export function resolve8995AScheduleCInfo(inputs: ResolverInputs): Form8995ASche
       return { business, loss: profit === undefined ? undefined : profit < 0 };
     }
     const property = rentalOf(business.factKey);
-    const loss = property !== undefined && netRentalIncome(property.value) < 0;
-    return { business, loss: loss && property?.passive !== false ? undefined : loss };
+    if (property === undefined) return { business, loss: false };
+    // Schedule E line 21 before the at-risk test; undefined while an answer is open.
+    const net = netIncomeOrLoss(property.value);
+    if (net === undefined) return { business, loss: undefined };
+    const loss = net < 0;
+    return { business, loss: loss && property.passive !== false ? undefined : loss };
   });
   const open = losses.some((entry) => entry.loss === undefined);
   const withLoss = losses.filter((entry) => entry.loss === true);
