@@ -215,6 +215,22 @@ const FORM_8960: Partial<ExpectedResults> = {
 };
 
 /*
+ * Loss netting: the rental's $29,000 QBI loss offsets the business's QBI. Row A's
+ * column (c) and line 6 are 0 by the form's rule; the key leaves them blank.
+ */
+const FORM_8995A_SCHEDULE_C: Partial<ExpectedResults> = {
+  engineFields: {
+    "form-8995-a-schedule-c.0.line.1_col_a_qbi_a": -29000, // QlfyBusinessIncomeOrLossAmt
+    "form-8995-a-schedule-c.0.line.1_col_a_qbi_b": 48865, // QlfyBusinessIncomeOrLossAmt
+    "form-8995-a-schedule-c.0.line.1_col_b_loss_netting_b": 29000, // LossNettingReductionAmt
+    "form-8995-a-schedule-c.0.line.1_col_c_adjusted_qbi_b": 19865, // AdjQualifiedBusinessIncomeAmt
+    "form-8995-a-schedule-c.0.line.3_total_losses": 29000, // TotalTradeOrBusinessLossAmt
+    "form-8995-a-schedule-c.0.line.4_total_income": 48865, // TotalTradeOrBusinessIncomeAmt
+    "form-8995-a-schedule-c.0.line.5_losses_netted": 29000, // LossNettedIncomeOthTradeBusAmt
+  },
+};
+
+/*
  * Column A: the rental, whose $29,000 QBI loss is netted against the business on
  * Form 8995-A Schedule C (no amounts in column A). Column B: the business, after
  * netting. Line 10 is more than line 3, so Part III is skipped.
@@ -253,6 +269,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   "schedule-8812": SCHEDULE_8812,
   "form-8959": FORM_8959,
   "form-8960": FORM_8960,
+  "form-8995-a-schedule-c": FORM_8995A_SCHEDULE_C,
   "form-8995-a": FORM_8995A,
 };
 

@@ -116,7 +116,7 @@ export const multiFamily: RentalFactValue = {
   address: { street: "1 Add", city: "City", state: "FL", zip: "33003" },
   fairRentalDays: 365,
   personalUseDays: 0,
-  qualifiedJointVenture: true, // Not in the answers; the key checks the QJV box (README).
+  qualifiedJointVenture: true, // Not in the answers; the key checks the QJV box (README, Needs a decision).
   rentsReceived: 1000,
   expenses: { advertising: 30000 },
   activeParticipation: true,
@@ -137,6 +137,7 @@ export const royalty: RentalFactValue = {
   royaltiesReceived: 2000,
   expenses: { legalAndProfessional: 5000 },
   royaltyActivity: "passive", // royalty_passive_portfolio "Passive"
+  allInvestmentAtRisk: true, // Not in the answers; the key files no Form 6198.
   priorYearUnallowedLoss: 0, // Not in the answers; the key's Form 8582 has none.
   qualifiedBusiness: false,
   specifiedService: false,

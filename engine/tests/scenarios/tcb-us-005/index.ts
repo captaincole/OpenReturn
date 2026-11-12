@@ -4,6 +4,7 @@
  * loss, interest, dividends and a child. Federal only.
  */
 
+import { lockedGoldenPath } from "../../helpers/scenarioPdfName.js";
 import type { Scenario } from "../../types.js";
 import { tcbUs005Decisions } from "./decisions.js";
 import { tcbUs005Expected } from "./expected.js";
@@ -16,6 +17,7 @@ const FORM_IDS = [
   "schedule-e",
   "form-8959",
   "form-8960",
+  "form-8995-a-schedule-c",
   "form-8995-a",
   "schedule-1",
   "schedule-2",
@@ -31,8 +33,9 @@ export const tcbUs005Scenario: Scenario = {
   userId: TCB_US_005_USER_ID,
   facts: tcbUs005Facts,
   decisions: tcbUs005Decisions,
-  // Until Schedule E, Form 8582 and the lines that read them are bound (README).
-  skip: true,
-  // The golden PDFs (lockedGoldenPath) come when every line matches (add-scenario step 6).
-  forms: FORM_IDS.map((formId) => ({ formId, expected: tcbUs005Expected(formId) })),
+  forms: FORM_IDS.map((formId) => ({
+    formId,
+    expected: tcbUs005Expected(formId),
+    goldenPdfPath: lockedGoldenPath("tcb-us-005", formId),
+  })),
 };

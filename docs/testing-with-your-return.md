@@ -40,9 +40,12 @@ stock sale. A third, married filing jointly in California, itemizes on
 the CA return (Schedule CA Part II, FTB 3526), takes the dependent
 exemption credit, owes the CA alternative minimum tax on an incentive
 stock option exercise (Schedule P) and the early-distribution tax on a
-1099-R (FTB 3805P). Head of household has one federal-only TaxCalcBench
-scenario: mortgage interest on a Form 1098, investment interest, and the
-alternative minimum tax on an incentive stock option exercise (Form 6251).
+1099-R (FTB 3805P). A fourth, federal-only, has a real estate
+professional's rental and a passive royalty (Schedule E, Form 8582) and
+nets a rental's QBI loss against a business (Schedule C (Form 8995-A)).
+Head of household has one federal-only TaxCalcBench scenario: mortgage
+interest on a Form 1098, investment interest, and the alternative
+minimum tax on an incentive stock option exercise (Form 6251).
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
 1099-SA, 1098, SSA-1099, W-2G, 1099-K, 1099-NEC, a W-2 you issued to a household employee
@@ -52,6 +55,9 @@ A business you run yourself is answers, not a document: receipts and
 expenses by Schedule C line, vehicles at the standard mileage rate and
 a home office by the simplified method, with no Form 8829,
 depreciation form or cost of goods sold.
+A rental property or a royalty is answers too: rents, royalties and
+expenses by Schedule E line, with Form 8582 for passive losses and no
+depreciation, vehicle expenses or sale of the property.
 
 A return outside this list still helps: the report shows what your
 return needs that OpenReturn lacks.
