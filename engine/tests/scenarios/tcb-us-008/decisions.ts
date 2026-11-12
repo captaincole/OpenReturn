@@ -19,6 +19,11 @@ export const tcbUs008Decisions: AIDecisionRow[] = [
   dec("decisions.scope.has_digital_assets", false, "No digital asset activity in the answers."),
   dec("decisions.scope.has_reportable_sales", false, "No 1099-B or 1099-DA."),
   dec(
+    "decisions.scope.must_file_schedule_a",
+    true,
+    "Itemized deductions beat the standard deduction.",
+  ),
+  dec(
     "decisions.itemize_vs_standard",
     "itemized",
     "Answers: itemized; the key's Schedule A total ($37,704) beats the $15,750 MFS standard deduction.",
