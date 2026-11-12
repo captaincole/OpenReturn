@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  SPOUSE_KEYS,
   makeGamblingWinningsFactKey,
   makeNonemployeeCompensationFactKey,
   makePaymentTransactionsFactKey,
@@ -118,4 +119,53 @@ describe("line 25b 1099-NEC slot", () => {
   it("is blank when the 1099-NEC has no box 4", () => {
     expect(slot([form1099Nec()])).toBeUndefined();
   });
+});
+
+describe("the lived-apart answers a separate return asks", () => {
+  const fact = (key: string, value: boolean) => ({ key, category: "filing_status", value });
+  const pending = (status: string, facts: ReturnType<typeof fact>[]) =>
+    resolve1040Info(
+      makeResolverInputs({
+        facts,
+        decisions: [{ decisionKey: "decisions.scope.filing_status", decision: status }],
+      }),
+    ).missingInputs?.["form-1040"] ?? [];
+  const SIX = SPOUSE_KEYS.livedApartLastSixMonths;
+  const SEPARATED = SPOUSE_KEYS.legallySeparatedApartAtYearEnd;
+
+  it.each([
+    ["MFS with no answer: the six-months answer", "married_filing_separately", [], [SIX]],
+    [
+      "MFS, apart all year: covers the six months",
+      "married_filing_separately",
+      [fact(SPOUSE_KEYS.livedApartAllYear, true)],
+      [],
+    ],
+    [
+      "MFS, apart the last 6 months: nothing more",
+      "married_filing_separately",
+      [fact(SIX, true)],
+      [],
+    ],
+    [
+      "MFS, not apart the last 6 months: the legal-separation answer",
+      "married_filing_separately",
+      [fact(SIX, false)],
+      [SEPARATED],
+    ],
+    [
+      "MFS, both answered",
+      "married_filing_separately",
+      [fact(SIX, false), fact(SEPARATED, true)],
+      [],
+    ],
+    ["head of household: neither (most are unmarried)", "head_of_household", [], []],
+    ["single: neither", "single", [], []],
+  ] as Array<[string, string, ReturnType<typeof fact>[], string[]]>)(
+    "%s",
+    (_, status, facts, expected) => {
+      const asked = pending(status, facts).filter((key) => key === SIX || key === SEPARATED);
+      expect(asked).toEqual(expected);
+    },
+  );
 });
