@@ -1,4 +1,13 @@
-import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { AMT_KEYS, isDividendFactKey, isInterestFactKey } from "../../facts/index.js";
+import { sum } from "../../money.js";
+import {
+  missingInputs,
+  num,
+  resolveMustFile,
+  sumInvestmentBox,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
+import { resolveScheduleAInfo } from "../schedule-a/resolveInfo.js";
 import type { Form6251FilingInfo } from "./filingInfo.js";
 
 /*
@@ -21,5 +30,39 @@ export function resolve6251Info(inputs: ResolverInputs): Form6251FilingInfo {
       },
     ],
   });
-  return { mustFile: { "form-6251": resolution } };
+  const itemizeDecision = inputs.decisionByKey.get("decisions.itemize_vs_standard");
+  const itemizesDeductions =
+    itemizeDecision === "itemized" ? true : itemizeDecision === "standard" ? false : undefined;
+  const isoExerciseSpread = num(inputs, AMT_KEYS.isoExerciseSpread);
+  const filesScheduleA = resolveScheduleAInfo(inputs).mustFile?.["schedule-a"]?.value === true;
+  return {
+    mustFile: { "form-6251": resolution },
+    /*
+     * Line 2a needs the choice only when Schedule A files, as 1040 line 12e does.
+     * Line 2i needs the ISO spread: no document carries it, and 0 is an answer.
+     */
+    missingInputs: {
+      "form-6251": missingInputs({
+        ...(filesScheduleA ? { "decisions.itemize_vs_standard": itemizesDeductions } : {}),
+        [AMT_KEYS.isoExerciseSpread]: isoExerciseSpread,
+      }),
+    },
+    itemizesDeductions,
+    privateActivityBondInterest: privateActivityBondInterest(inputs),
+    isoExerciseSpread,
+  };
+}
+
+/* Line 2g: 1099-INT box 9 and 1099-DIV box 13; undefined when neither form is on file. */
+function privateActivityBondInterest(inputs: ResolverInputs): number | undefined {
+  const has1099 = inputs.facts.some(
+    (fact) =>
+      fact.category === "investment_income" &&
+      (isInterestFactKey(fact.key) || isDividendFactKey(fact.key)),
+  );
+  if (!has1099) return undefined;
+  return sum(
+    sumInvestmentBox(inputs, "box9", isInterestFactKey),
+    sumInvestmentBox(inputs, "box13", isDividendFactKey),
+  );
 }
