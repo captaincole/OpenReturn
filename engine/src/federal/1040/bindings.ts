@@ -16,6 +16,7 @@ import { form1040Line7a } from "../schedule-d/lines.js";
 import { eicOutcome } from "../schedule-eic/outcome.js";
 import { awaitsSchedule1A, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
+import { refundableCreditsFinal } from "./payments.js";
 import { qdcgInputsFromReturn } from "./qdcgInputs.js";
 import type { Form1040 } from "./types.js";
 
@@ -426,16 +427,26 @@ export function register(): void {
       // MANUAL EDIT: line 28 = Schedule 8812 line 27; blank when Schedule 8812 is not filed.
       "line.28": (form) =>
         numberOrBlank(form["schedule-8812.1.line.27_additional_child_tax_credit"]),
-      // MANUAL EDIT: lines 29–31 are not modeled; blank when every line is blank.
-      "line.32": (form) =>
-        sumOrBlank(
+      /*
+       * MANUAL EDIT: lines 29–31 are not modeled; blank when every line is blank.
+       * Waits while line 27a or 28 can still change (payments.ts).
+       */
+      "line.32": (form, info) => {
+        const final = refundableCreditsFinal(form, info);
+        if (final !== true) return final;
+        return sumOrBlank(
           form["line.27a"],
           form["line.28"],
           form["line.29"],
           form["line.30"],
           form["line.31"],
-        ),
-      "line.33": (form) => sum(form["line.25d"], form["line.26"], form["line.32"]),
+        );
+      },
+      // MANUAL EDIT: a blank line 32 counts as 0 only when it is final.
+      "line.33": (form, info) =>
+        refundableCreditsFinal(form, info) === true
+          ? sum(form["line.25d"], form["line.26"], form["line.32"])
+          : undefined,
       // MANUAL EDIT: line 34 (overpaid) only when line 33 exceeds line 24; blank otherwise.
       "line.34": (form) => {
         const paid = form["line.33"];
