@@ -199,6 +199,16 @@ TypeScript enforces both. Adding a field without declaring them is a compile err
 
 **Header fields** (top-of-form personal info, filing-status checkboxes) are modeled as FormFields too — text/single-select kinds that derive from identity facts / scope decisions. They sit in the same `EvaluatedForm.fields` array as the numeric lines. PDF renderers continue to read raw facts directly; the header fields exist for the Filing Status panel rollup.
 
+### What a binding returns
+
+A binding (a form's `bindings.ts`) computes one field. It returns one of three results:
+
+- **A value**: the line's amount, text or box.
+- **`undefined`**: the line is blank. Either nothing applies to this taxpayer, or the line waits for an answer. A line that waits has the answer's key in the form's `missingInputs` (the form's resolver lists it), so Cade asks for it. A line never waits with nothing to ask: `engine/tests/integration/requiredInputs.test.ts` fails when a form reads an answer that it does not list.
+- **`unsupported(reason)`** (from `engine/src/types.ts`): the engine does not handle this case. The reason is one sentence that says what is missing. Use it for one case of a line the engine otherwise computes; a field the engine never computes is an entry in the form's `unsupported` list.
+
+Do not use `undefined` for an engine gap: a blank line looks like "nothing applies", and the return prints without it.
+
 ### Whole-dollar rounding convention — nearest dollar
 
 Tax-form lines take whole dollars, rounded to the **nearest** dollar with `roundDollars()` in `engine/src/money.ts` (decided 2026-10-16). `money.ts` is the one module for engine money math: `sum`, `atLeast`, `roundDollars`, `stepsOf`, `formatDollars`, the printed-zero helpers `sumOrBlank` and `numberOrBlank` (blank, not 0, when no input is a number), and the `Money` brand. Lint bans `Math.round` / `ceil` / `floor` / `trunc`, `toFixed`, and `toLocaleString` elsewhere in the engine's `src/`. The IRS rule (1040 instructions, "Rounding Off to Whole Dollars"): drop amounts under 50 cents, raise 50–99 cents to the next dollar.
