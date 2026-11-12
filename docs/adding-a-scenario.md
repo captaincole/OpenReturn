@@ -49,7 +49,9 @@ gambling winnings, Additional Medicare Tax, NIIT; tcb-us-005: MFJ, a
 real estate professional's rental and a passive royalty (Schedule E,
 Form 8582), QBI loss netting (Schedule C (Form 8995-A)); tcb-us-008: MFS,
 a 1099-NEC business with mileage and a home office, gifts on
-Schedule A, a capital loss carryover, Form 8995; tcb-ca-005: MFJ, CA
+Schedule A, a capital loss carryover, Form 8995; tcb-us-009: MFS
+living with the spouse, self-rentals and a passive royalty (Schedule E,
+Form 8582, Form 8960 line 4b); tcb-ca-005: MFJ, CA
 itemized deductions (Schedule CA Part II, FTB 3526), CA AMT on an ISO
 exercise (Schedule P), early-distribution tax (FTB 3805P);
 tcb-us-001: HOH, mortgage interest (Form 1098), federal AMT on an ISO
