@@ -12,12 +12,12 @@ export const ingest1098 = createTool({
   id: "ingest-1098",
   requestContextSchema: cadeRequestContextSchema,
   description:
-    "Ingest one Form 1098 (Mortgage Interest Statement) from a lender. Call ONCE per form; a second mortgage is not supported yet (say so). Writes three facts under category 'mortgage': box 1 plus box 6 (interest and points, Schedule A line 8a), box 2 (outstanding principal, for the $750,000 acquisition-debt limit) and box 3 (origination date). When box 10 shows real estate taxes paid through escrow, ask the user for the real estate taxes they paid and record the answer.",
+    "Ingest one Form 1098 (Mortgage Interest Statement) from a lender. Call ONCE per form; a second mortgage is not supported yet (say so). Writes up to three facts under category 'mortgage': box 1 plus box 6 (interest and points, Schedule A line 8a), box 2 (outstanding principal, for the $750,000 acquisition-debt limit) and box 3 (origination date). When box 2 is blank, leave it out and ask the user how much they owed on the loan on January 1, 2025; record the answer as mortgage.outstanding_principal_form_1098. When box 10 shows real estate taxes paid through escrow, ask the user for the real estate taxes they paid and record the answer.",
   inputSchema: z.object({
     year: z.number().int(),
     lenderName: z.string().describe("Recipient/lender's name as printed"),
     box1: z.number().describe("Mortgage interest received from payer(s)/borrower(s)"),
-    box2: z.number().describe("Outstanding mortgage principal"),
+    box2: z.number().optional().describe("Outstanding mortgage principal; blank on some forms"),
     box3: z.string().optional().describe("Mortgage origination date, MM/DD/YYYY"),
     box6: z.number().optional().describe("Points paid on purchase of principal residence"),
     sourceNote: z.string().default("Form 1098 ingested via structured payload"),
@@ -38,7 +38,14 @@ export const ingest1098 = createTool({
       MORTGAGE_KEYS.interestForm1098,
       form1098Line8a(input.box1, input.box6),
     );
-    await recordIngestFact(ctx, "mortgage", MORTGAGE_KEYS.outstandingPrincipalForm1098, input.box2);
+    if (input.box2 !== undefined) {
+      await recordIngestFact(
+        ctx,
+        "mortgage",
+        MORTGAGE_KEYS.outstandingPrincipalForm1098,
+        input.box2,
+      );
+    }
     if (input.box3 !== undefined) {
       await recordIngestFact(ctx, "mortgage", MORTGAGE_KEYS.originationDateForm1098, input.box3);
     }
