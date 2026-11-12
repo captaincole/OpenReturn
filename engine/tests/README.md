@@ -77,6 +77,12 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
     mileage and a simplified home office, Schedule SE, Form 8995), gifts
     on Schedule A, a capital loss carryover on Schedule D. Checked
     against the case's answer key; its README lists the lines not checked
+  - `tcb-us-009` — TaxCalcBench case ty25-us-009, federal only. MFS,
+    born 1951, lived with the spouse; a W-2, interest, dividends, two
+    self-rentals and a passive royalty (Schedule E, Form 8582, Form 8960
+    line 4b, Form 8995). Every line matches the answer key except eight
+    Form 8582 lines in `knownMismatches`, where the engine follows the
+    instructions: Part V, not Part IV.
   - `tcb-ca-005` — TaxCalcBench case ty25-ca-005, CA checked only. MFJ,
     a dependent, CA itemized deductions (Schedule CA Part II, FTB 3526),
     the CA AMT on an ISO exercise (Schedule P), an early 1099-R (FTB
