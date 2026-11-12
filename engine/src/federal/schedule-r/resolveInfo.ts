@@ -1,23 +1,17 @@
 import {
   ELDERLY_OR_DISABLED_KEYS,
-  ROTH_IRA_CODES,
   SPOUSE_KEYS,
   hasDistributionCode,
-  isRetirementDistributionFactKey,
-  type RetirementDistributionFactValue,
+  isEmployerPlanDistribution,
+  parseRetirementDistributionFact,
 } from "../../facts/index.js";
 import { bornBeforeJan2_1961, filingStatusOf } from "../../filingInfoResolvers.js";
 import { roundDollars, sum } from "../../money.js";
-import {
-  factsInCategory,
-  missingInputs,
-  resolveMustFile,
-  text,
-  type ResolverInputs,
-} from "../../resolverInputs.js";
+import { missingInputs, resolveMustFile, text, type ResolverInputs } from "../../resolverInputs.js";
 import { disabilityPensions, disabilityWages } from "../1040/disabilityPensions.js";
 import { rowTaxable } from "../1040/resolveInfo.js";
 import { agiFloor } from "../schedule-eic/possible.js";
+import { personStatus } from "./boxes.js";
 import type { ScheduleRFilingInfo } from "./filingInfo.js";
 
 type Person = "taxpayer" | "spouse";
@@ -28,23 +22,20 @@ const RETIRED_KEY: Record<Person, string> = {
 };
 
 /*
- * A qualified individual (irs-1040sr-inst-2025::sec::qualified-individual::b01):
- * 65 or older at the end of 2025, or under 65, retired on permanent and total
- * disability, with taxable disability income. The disability income is the
- * pensions on Form 1040 line 1h: paid before the employer's minimum retirement
- * age, so before the mandatory retirement age too (disability-income::b02).
- * Disability pay reported on a W-2 has no answer and is not counted. U.S.
- * citizenship or residence is not asked. Undefined while an answer is missing.
+ * A qualified individual (personStatus, boxes.ts). The disability income is
+ * the pensions on Form 1040 line 1h: paid before the employer's minimum
+ * retirement age, so before the mandatory retirement age too
+ * (irs-1040sr-inst-2025::sec::disability-income::b02). Disability pay reported
+ * on a W-2 has no answer and is not counted. U.S. citizenship or residence is
+ * not asked. Undefined while an answer is missing.
  */
 function qualified(
   over65: boolean | undefined,
   disabilityIncome: number | undefined,
   retired: boolean | undefined,
 ): boolean | undefined {
-  if (over65 === true) return true;
-  if (over65 === undefined || disabilityIncome === undefined) return undefined;
-  if (disabilityIncome <= 0) return false;
-  return retired;
+  const status = personStatus(over65, disabilityIncome, retired);
+  return status === undefined ? undefined : status !== "not";
 }
 
 /*
@@ -66,12 +57,10 @@ function agiLimit(status: string, qualifiedCount: number): number {
 function scheduleRAgiFloor(inputs: ResolverInputs, joint: boolean): number | undefined {
   const floor = agiFloor(inputs, joint);
   if (floor === undefined) return undefined;
-  const pensions = factsInCategory(inputs, "retirement")
-    .filter((row) => isRetirementDistributionFactKey(row.key))
-    .map((row) => row.value as RetirementDistributionFactValue)
-    .filter(
-      (row) => !row.box7IraSepSimple && !hasDistributionCode(row, [...ROTH_IRA_CODES, "G", "H"]),
-    );
+  const pensions = inputs.facts
+    .map(parseRetirementDistributionFact)
+    .flatMap((fact) => (fact === null ? [] : [fact.distribution]))
+    .filter((row) => isEmployerPlanDistribution(row) && !hasDistributionCode(row, ["G", "H"]));
   return floor + sum(...pensions.map((row) => roundDollars(rowTaxable(row) ?? 0)));
 }
 

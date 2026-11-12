@@ -6,30 +6,42 @@ export type PartIBox = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 type Person = "taxpayer" | "spouse";
 
 /* "65": 65 or older. "disabled": under 65, retired on disability, with taxable disability income. */
-type PersonStatus = "65" | "disabled" | "not";
+export type PersonStatus = "65" | "disabled" | "not";
 
 /*
- * A qualified individual (irs-1040sr-inst-2025::sec::qualified-individual::b01).
- * The retired answer is asked only of a person under 65 with disability
- * income (resolveInfo.ts). Undefined while an answer is missing.
+ * A qualified individual (irs-1040sr-inst-2025::sec::qualified-individual::b01):
+ * 65 or older at the end of 2025, or under 65, retired on permanent and total
+ * disability, with taxable disability income. The retired answer is asked only
+ * of a person under 65 with disability income (resolveInfo.ts). Undefined while
+ * an answer is missing.
  */
-function personStatus(info: ScheduleRFilingInfo, person: Person): PersonStatus | undefined {
-  const taxpayer = person === "taxpayer";
-  const over65 = taxpayer ? info.taxpayerBornBeforeJan2_1961 : info.spouseBornBeforeJan2_1961;
+export function personStatus(
+  over65: boolean | undefined,
+  disabilityIncome: number | undefined,
+  retired: boolean | undefined,
+): PersonStatus | undefined {
   if (over65 === true) return "65";
-  const income = taxpayer
-    ? info.scheduleRTaxpayerDisabilityIncome
-    : info.scheduleRSpouseDisabilityIncome;
-  if (over65 === undefined || income === undefined) return undefined;
-  if (income <= 0) return "not";
-  const retired = taxpayer
-    ? info.scheduleRTaxpayerRetiredOnDisability
-    : info.scheduleRSpouseRetiredOnDisability;
+  if (over65 === undefined || disabilityIncome === undefined) return undefined;
+  if (disabilityIncome <= 0) return "not";
   if (retired === undefined) return undefined;
   return retired ? "disabled" : "not";
 }
 
-function jointBox(taxpayer: PersonStatus, spouse: PersonStatus): PartIBox | null {
+function statusOf(info: ScheduleRFilingInfo, person: Person): PersonStatus | undefined {
+  return person === "taxpayer"
+    ? personStatus(
+        info.taxpayerBornBeforeJan2_1961,
+        info.scheduleRTaxpayerDisabilityIncome,
+        info.scheduleRTaxpayerRetiredOnDisability,
+      )
+    : personStatus(
+        info.spouseBornBeforeJan2_1961,
+        info.scheduleRSpouseDisabilityIncome,
+        info.scheduleRSpouseRetiredOnDisability,
+      );
+}
+
+export function jointBox(taxpayer: PersonStatus, spouse: PersonStatus): PartIBox | null {
   const statuses = [taxpayer, spouse];
   const count = (status: PersonStatus) => statuses.filter((value) => value === status).length;
   if (count("65") === 2) return 3;
@@ -45,9 +57,9 @@ function jointBox(taxpayer: PersonStatus, spouse: PersonStatus): PartIBox | null
 export function partIBox(info: ScheduleRFilingInfo): PartIBox | null | undefined {
   const status = info.filingStatus;
   if (status === undefined) return undefined;
-  const taxpayer = personStatus(info, "taxpayer");
+  const taxpayer = statusOf(info, "taxpayer");
   if (status === "married_filing_jointly") {
-    const spouse = personStatus(info, "spouse");
+    const spouse = statusOf(info, "spouse");
     return taxpayer === undefined || spouse === undefined ? undefined : jointBox(taxpayer, spouse);
   }
   if (status === "married_filing_separately") {
@@ -64,5 +76,5 @@ export function partIBox(info: ScheduleRFilingInfo): PartIBox | null | undefined
 export function disabledPeople(info: ScheduleRFilingInfo): Person[] {
   const people: Person[] =
     info.filingStatus === "married_filing_jointly" ? ["taxpayer", "spouse"] : ["taxpayer"];
-  return people.filter((person) => personStatus(info, person) === "disabled");
+  return people.filter((person) => statusOf(info, person) === "disabled");
 }
