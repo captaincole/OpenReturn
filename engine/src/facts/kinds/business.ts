@@ -10,7 +10,7 @@ type FactRow = { key: string; value: unknown; category: string };
 /* Schedule C lines 8–27a, one amount each. */
 export interface BusinessExpenses {
   advertising?: number; // 8
-  carAndTruck?: number; // 9
+  carAndTruck?: number; // 9: actual expenses; a standard-mileage vehicle adds its own amount (vehicles)
   commissionsAndFees?: number; // 10
   contractLabor?: number; // 11
   depletion?: number; // 12
@@ -32,6 +32,46 @@ export interface BusinessExpenses {
   utilities?: number; // 25
   wages?: number; // 26
   energyEfficientBuildings?: number; // 27a
+}
+
+/* Part IV: one car or truck the business used. Line 9 takes its standard mileage amount. */
+export interface BusinessVehicle {
+  /* Line 43: the date the vehicle was placed in service for the business, YYYY-MM-DD. */
+  placedInService?: string;
+  /* Line 44a. */
+  businessMiles: number;
+  /* Line 44b. */
+  commutingMiles?: number;
+  /* Line 44c. */
+  otherMiles?: number;
+  /* True when line 9 uses the standard mileage rate for this vehicle; false for actual expenses (expenses.carAndTruck). */
+  standardMileageRate: boolean;
+  /* Business parking fees and tolls, added to the standard mileage amount on line 9. */
+  parkingAndTolls?: number;
+  /* Line 45: the vehicle was available for personal use during off-duty hours. */
+  availableForPersonalUse?: boolean;
+  /* Line 46: another vehicle was available for personal use. */
+  anotherVehicleAvailable?: boolean;
+  /* Line 47a. */
+  hasEvidence?: boolean;
+  /* Line 47b. */
+  evidenceIsWritten?: boolean;
+}
+
+/* Line 30 by the simplified method (the Simplified Method Worksheet). Form 8829 is not modeled. */
+export interface HomeOfficeSimplified {
+  /* Line 30 (a): the total area of the home, in square feet. */
+  homeSquareFeet: number;
+  /* Line 30 (b): the area used regularly and exclusively for the business, in square feet. */
+  businessSquareFeet: number;
+  /* True when the same area was used for the business all year (worksheet line 2). */
+  sameAreaAllYear?: boolean;
+}
+
+/* Part V: one other expense, with the taxpayer's description. */
+export interface BusinessOtherExpense {
+  description: string;
+  amount: number;
 }
 
 export interface BusinessFactValue {
@@ -63,6 +103,12 @@ export interface BusinessFactValue {
   /* Line 6: other income, such as a fuel tax credit or refund. */
   otherIncome?: number;
   expenses?: BusinessExpenses;
+  /* Part V (line 48), totaled on line 27b. */
+  otherExpenses?: BusinessOtherExpense[];
+  /* Part IV and line 9. */
+  vehicles?: BusinessVehicle[];
+  /* Line 30, simplified method. */
+  homeOffice?: HomeOfficeSimplified;
   /* Form 8995-A: a specified service trade or business. */
   specifiedService?: boolean;
   /* Form 8995-A line 4: W-2 wages the business paid its employees (their Forms W-2). */
@@ -88,9 +134,38 @@ export function isBusinessFactKey(key: string): boolean {
 const isAmount = (value: unknown): boolean =>
   value === undefined || (typeof value === "number" && Number.isFinite(value) && value >= 0);
 
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null;
+
+/* Undefined, or a list whose every entry passes the check. */
+const isListOf = (value: unknown, check: (entry: Record<string, unknown>) => boolean): boolean =>
+  value === undefined ||
+  (Array.isArray(value) && value.every((entry) => isRecord(entry) && check(entry)));
+
+const isOtherExpense = (entry: Record<string, unknown>) =>
+  typeof entry.description === "string" &&
+  typeof entry.amount === "number" &&
+  isAmount(entry.amount);
+
+const isVehicle = (entry: Record<string, unknown>) =>
+  typeof entry.businessMiles === "number" &&
+  isAmount(entry.businessMiles) &&
+  isAmount(entry.commutingMiles) &&
+  isAmount(entry.otherMiles) &&
+  isAmount(entry.parkingAndTolls) &&
+  typeof entry.standardMileageRate === "boolean";
+
+const isHomeOffice = (value: unknown) =>
+  value === undefined ||
+  (isRecord(value) &&
+    typeof value.homeSquareFeet === "number" &&
+    isAmount(value.homeSquareFeet) &&
+    typeof value.businessSquareFeet === "number" &&
+    isAmount(value.businessSquareFeet));
+
 function isBusiness(value: unknown): value is BusinessFactValue {
-  if (typeof value !== "object" || value === null) return false;
-  const fields = value as Record<string, unknown>;
+  if (!isRecord(value)) return false;
+  const fields = value;
   const expenses = (fields.expenses ?? {}) as Record<string, unknown>;
   return (
     typeof fields.activity === "string" &&
@@ -101,7 +176,10 @@ function isBusiness(value: unknown): value is BusinessFactValue {
     isAmount(fields.w2WagesPaid) &&
     isAmount(fields.qualifiedPropertyUbia) &&
     typeof expenses === "object" &&
-    Object.values(expenses).every(isAmount)
+    Object.values(expenses).every(isAmount) &&
+    isListOf(fields.otherExpenses, isOtherExpense) &&
+    isListOf(fields.vehicles, isVehicle) &&
+    isHomeOffice(fields.homeOffice)
   );
 }
 

@@ -3,6 +3,8 @@ import {
   makeBusinessFactKey,
   type BusinessExpenses,
   type BusinessFactValue,
+  type BusinessVehicle,
+  type HomeOfficeSimplified,
 } from "@openreturn/engine/facts";
 import { z } from "zod";
 import type { Scope } from "../db/appDb";
@@ -16,7 +18,11 @@ const amount = z.number().nonnegative();
 /* A missing, extra or mistyped expense (against the engine's type) fails to compile. */
 const expenses: { [K in keyof BusinessExpenses]-?: z.ZodType<BusinessExpenses[K]> } = {
   advertising: amount.optional().describe("Line 8"),
-  carAndTruck: amount.optional().describe("Line 9"),
+  carAndTruck: amount
+    .optional()
+    .describe(
+      "Line 9: actual expenses only; a vehicle at the standard mileage rate goes in vehicles",
+    ),
   commissionsAndFees: amount.optional().describe("Line 10"),
   contractLabor: amount.optional().describe("Line 11"),
   depletion: amount.optional().describe("Line 12"),
@@ -38,6 +44,36 @@ const expenses: { [K in keyof BusinessExpenses]-?: z.ZodType<BusinessExpenses[K]
   utilities: amount.optional().describe("Line 25"),
   wages: amount.optional().describe("Line 26"),
   energyEfficientBuildings: amount.optional().describe("Line 27a"),
+};
+
+/* A missing, extra or mistyped field (against the engine's type) fails to compile. */
+const vehicle: { [K in keyof BusinessVehicle]-?: z.ZodType<BusinessVehicle[K]> } = {
+  placedInService: z
+    .string()
+    .optional()
+    .describe("Line 43: the date first used for the business, YYYY-MM-DD"),
+  businessMiles: amount.describe("Line 44a: business miles in 2025"),
+  commutingMiles: amount.optional().describe("Line 44b"),
+  otherMiles: amount.optional().describe("Line 44c: personal miles"),
+  standardMileageRate: z
+    .boolean()
+    .describe("True when they use the standard mileage rate; false for actual expenses"),
+  parkingAndTolls: amount.optional().describe("Business parking fees and tolls"),
+  availableForPersonalUse: z.boolean().optional().describe("Line 45"),
+  anotherVehicleAvailable: z.boolean().optional().describe("Line 46"),
+  hasEvidence: z.boolean().optional().describe("Line 47a"),
+  evidenceIsWritten: z.boolean().optional().describe("Line 47b"),
+};
+
+const homeOffice: { [K in keyof HomeOfficeSimplified]-?: z.ZodType<HomeOfficeSimplified[K]> } = {
+  homeSquareFeet: amount.describe("Line 30 (a): total square feet of the home"),
+  businessSquareFeet: amount.describe(
+    "Line 30 (b): square feet used regularly and only for the business",
+  ),
+  sameAreaAllYear: z
+    .boolean()
+    .optional()
+    .describe("True when the same area was used for the business all year"),
 };
 
 export const recordBusiness = createTool({
@@ -74,6 +110,15 @@ export const recordBusiness = createTool({
     returnsAndAllowances: amount.optional().describe("Line 2"),
     otherIncome: amount.optional().describe("Line 6"),
     expenses: z.object(expenses).optional(),
+    otherExpenses: z
+      .array(z.object({ description: z.string(), amount }))
+      .optional()
+      .describe("Part V: each other expense with its description (line 27b)"),
+    vehicles: z.array(z.object(vehicle)).optional().describe("Part IV and line 9"),
+    homeOffice: z
+      .object(homeOffice)
+      .optional()
+      .describe("Line 30 by the simplified method; Form 8829 is not supported"),
     specifiedService: z
       .boolean()
       .optional()

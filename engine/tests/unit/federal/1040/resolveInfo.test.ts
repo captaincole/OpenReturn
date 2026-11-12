@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   makeGamblingWinningsFactKey,
+  makeNonemployeeCompensationFactKey,
   makePaymentTransactionsFactKey,
   type GamblingWinningsFactValue,
   type RetirementDistributionFactValue,
@@ -98,5 +99,23 @@ describe("line 25b 1099-K slot", () => {
 
   it("is blank when the 1099-K has no box 4", () => {
     expect(slot([form1099K()])).toBeUndefined();
+  });
+});
+
+describe("line 25b 1099-NEC slot", () => {
+  const form1099Nec = (box4?: number) => ({
+    key: makeNonemployeeCompensationFactKey("tin-12-3456789", "a"),
+    category: "self_employment",
+    value: { payerName: "Client", box1: 3882, box4 },
+  });
+  const slot = (facts: ReturnType<typeof form1099Nec>[]) =>
+    resolve1040Info(makeResolverInputs({ facts, decisions: [] })).form1099FederalWithholding;
+
+  it("adds 1099-NEC box 4", () => {
+    expect(slot([form1099Nec(388.2)])).toBeCloseTo(388.2);
+  });
+
+  it("is blank when the 1099-NEC has no box 4", () => {
+    expect(slot([form1099Nec()])).toBeUndefined();
   });
 });

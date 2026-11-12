@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { default1099KFormId } from "../../../../src/mastra/tools/ingest1099K.js";
+import { default1099NecFormId } from "../../../../src/mastra/tools/ingest1099Nec.js";
 import { defaultWinId } from "../../../../src/mastra/tools/ingestW2G.js";
 import { businessIdCandidates } from "../../../../src/mastra/tools/recordBusiness.js";
 
@@ -39,5 +40,15 @@ describe("default1099KFormId", () => {
 
   it("uses the box 1a cents with no account number", () => {
     expect(default1099KFormId({ box1a: 21500.25 })).toBe("gross-2150025");
+  });
+});
+
+describe("default1099NecFormId", () => {
+  it("uses the account number", () => {
+    expect(default1099NecFormId({ accountNumber: "C-118", box1: 3882 })).toBe("c-118");
+  });
+
+  it("uses the box 1 cents with no account number", () => {
+    expect(default1099NecFormId({ box1: 3882 })).toBe("nec-388200");
   });
 });

@@ -5,6 +5,7 @@
 import { describe, expect, it } from "vitest";
 import {
   makeBusinessFactKey,
+  makeNonemployeeCompensationFactKey,
   makePaymentTransactionsFactKey,
   makeW2FactKey,
 } from "../../../src/facts/index.js";
@@ -93,6 +94,31 @@ describe("Schedule C and a 1099-K", () => {
     ["no business named, Schedule C decided true", [unlinked], true, true, [unlinked.key]],
   ])("%s", (_, facts, scheduleC, mustFile, missing) => {
     const info = resolve(facts, scheduleC);
+    expect(info.mustFile?.["schedule-c"]?.value).toBe(mustFile);
+    expect(info.missingInputs?.["schedule-c"]).toEqual(missing);
+  });
+});
+
+describe("Schedule C and a 1099-NEC", () => {
+  const form1099Nec = (formId: string, businessId?: string): Fact => ({
+    key: makeNonemployeeCompensationFactKey("tin-12-3456789", formId),
+    category: "self_employment",
+    value: { payerName: "Client", box1: 3882, businessId },
+  });
+  const linked = form1099Nec("a", "consulting");
+  const unlinked = form1099Nec("b");
+
+  it.each([
+    ["linked to a business", [business("consulting"), linked], true, []],
+    ["no business named, no business", [unlinked], undefined, [unlinked.key]],
+    [
+      "no business named, beside a business",
+      [business("consulting"), unlinked],
+      true,
+      [unlinked.key],
+    ],
+  ])("%s", (_, facts, mustFile, missing) => {
+    const info = resolveScheduleCInfo(inputs(facts, "single"));
     expect(info.mustFile?.["schedule-c"]?.value).toBe(mustFile);
     expect(info.missingInputs?.["schedule-c"]).toEqual(missing);
   });
