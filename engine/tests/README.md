@@ -45,6 +45,12 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
   - `tara` — **unverified**: IRS ATS test scenario 1 moved to CA. Single,
     two W-2s, a household employee (Schedule H), home energy improvements
     (Form 5695 Part II, Schedule 3). Hand-checked, locked engine output
+  - `tcb-us-001` — TaxCalcBench case ty25-us-001, federal only. Head of
+    household, a dependent, a $5M long-term stock gain, itemized
+    deductions (Schedule A, with Form 1098 mortgage interest and
+    investment interest on Form 4952), the AMT on an ISO exercise (Form
+    6251). Checked against the case's answer key; its README lists where
+    the engine follows the form instead
   - `tcb-us-003` — TaxCalcBench case ty25-us-003, federal only. MFJ,
     spouse 65+, an IRA rollover and a Roth conversion (Form 8606),
     Social Security, the senior deduction (Schedule 1-A). Checked against
