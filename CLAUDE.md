@@ -408,9 +408,10 @@ Most readers open a PR on a phone and do not open the diff. The description must
 3. **What changed**: one bullet per idea, in the order a reader would ask. Name a file only when the reader has to go there.
 4. **Example outcome** when a user or operator sees something different: the real screen text, log line or command output.
 5. **Verified**: what ran and what did not. Say "not run" out loud.
-6. **Refs**: the issue, the PRs it builds on, the doc that recommends the change.
+6. **PDFs to review** when the PR adds or changes a PDF: one link for each file to its page on the PR's branch, `https://github.com/captaincole/OpenReturn/blob/<branch>/<path>`. GitHub's diff does not show a PDF; the file's page does. Put the files a person must read first (a made input document, the filled return of a new form), then the other filled returns, then blank forms. `git diff --name-only --diff-filter=AM origin/main...HEAD -- '*.pdf'` lists the files. After a push that changes the list, update it.
+7. **Refs**: the issue, the PRs it builds on, the doc that recommends the change.
 
-**Size**: the whole description fits in 250 words. Tables and code blocks count. If it does not fit, the PR is too big or the description explains the diff instead of the change.
+**Size**: the whole description fits in 250 words. Tables and code blocks count. The PDF links do not count. If it does not fit, the PR is too big or the description explains the diff instead of the change.
 
 **Base branch**: every PR targets `main` unless the request names another base. Related changes are a sequence of PRs to main, each opened after the one before it merges, not a stack. The repo keeps head branches after a merge, so a PR based on a branch merges into that branch, not main.
 
