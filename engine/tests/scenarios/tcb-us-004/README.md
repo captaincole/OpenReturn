@@ -6,7 +6,7 @@ A married couple filing jointly in Tennessee, born 1983 and 1986, with a niece a
 
 The answer key is the case's correct return: the IRS e-file XML in the case's `output.xml`. `expected.ts` copies its values. Every line the engine fills matches the key.
 
-Forms checked: Form 1040, Schedules 1, 2, A, B, C, D, SE and 8812, Forms 4952, 8949, 8960 and 8995-A (federal only; the case has no state answer key). The key files the short Form 8995; `decisions.ts` pins Form 8995-A (`decisions.scope.must_file_8995_a`), which gives the same figures, so the scenario keeps its goldens. Without the pin the engine files Form 8995, as the key does. Form 8283 (the non-cash gifts) is in the key and not modeled; it changes no line.
+Forms checked: Form 1040, Schedules 1, 2, A, B, C, D, SE and 8812, Forms 4952, 8949, 8960 and 8995 (federal only; the case has no state answer key). Form 8283 (the non-cash gifts) is in the key and not modeled; it changes no line.
 
 ## Inputs
 
@@ -42,4 +42,5 @@ Forms checked: Form 1040, Schedules 1, 2, A, B, C, D, SE and 8812, Forms 4952, 8
 - Form 4952 line 7 (the carryforward to 2026) is $0 by the form's rule; the key leaves it blank, so it is not checked.
 - Schedule 8812 lines 6 and 7 (other dependents) are 0; the key leaves them blank, so they are not checked.
 - Schedule A lines 2–4 print on the key with medical under the floor; the engine prints them too (line 1 is not blank), so they are checked.
-- Form 8995-A lines 4–11: the engine prints 0 where the key's short Form 8995 has no equivalent.
+- Form 8995 lines 6, 8, 9, 16 and 17 are 0 by the form's rule; the key leaves them blank, so they are not checked.
+- Form 8995 line 1i(a): the engine prints the business's activity ("consultant"); the key prints the owner's name. The answers give no business name.

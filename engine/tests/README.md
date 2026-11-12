@@ -59,7 +59,7 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
   - `tcb-us-004` — TaxCalcBench case ty25-us-004, federal only. MFJ,
     itemized deductions (Schedule A, with investment interest on Form
     4952), a dependent (Schedule 8812), two W-2s, a consulting business
-    (Schedule C, SE, 8995-A), a stock sale, Social Security. Every line
+    (Schedule C, SE, 8995), a stock sale, Social Security. Every line
     the engine fills matches the case's answer key
   - `tcb-us-006` — TaxCalcBench case ty25-us-006, federal only. MFS, a
     W-2 with an HSA, a rideshare business (Schedule C, Schedule SE, Form
