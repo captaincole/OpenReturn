@@ -8,4 +8,6 @@ export interface Form8960FilingInfo extends BaseFilingInfo {
   rentalProperties?: RentalProperty[];
   /** Line 9b: the part of the deducted Schedule A state and local taxes (line 5e, after the cap) allocated to NII (the taxpayer's answer). */
   stateLocalTaxAllocableToInvestmentIncome?: number;
+  /** Line 10: additional deductions or modifications properly allocable to NII (the taxpayer's answer). */
+  additionalModifications?: number;
 }
