@@ -27,6 +27,8 @@ export function register(): void {
           form["0.line.1f_20pct_ep_amount"],
           form["0.line.1y_other_additions_amount"],
         ),
+      // MANUAL EDIT: irs-1040-inst-2025::sec::line-2::b01: Form 6251 line 11, its -0- too.
+      "0.line.2_alternative_minimum_tax": (form) => total(form["form-6251.0.line.11_amt"]),
       "0.line.3_total_lines_1z_and_2": (form) =>
         total(
           form["0.line.1z_total_lines_1a_through_1y"],
@@ -118,7 +120,6 @@ export function register(): void {
         "No scenario for other additions to tax (Form 8911 ARPCR recapture, Form 8933 EPE)",
       "0.line.1y_other_additions_amount":
         "No scenario for other additions to tax (Form 8911 ARPCR recapture, Form 8933 EPE)",
-      "0.line.2_alternative_minimum_tax": "Form 6251 (AMT) not ingested; no AMT scenario yet",
       "0.line.4_se_tax_exemption_4361":
         "No self-employment / Form 4361 clergy-exemption scenario modeled yet.",
       "0.line.4_se_tax_exemption_4029":
