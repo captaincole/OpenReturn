@@ -6,6 +6,7 @@ import {
   makeRetirementDistributionFactKey,
   makeSocialSecurityFactKey,
   makeW2FactKey,
+  MORTGAGE_KEYS,
   type TaxFactRow,
 } from "@openreturn/engine/facts";
 import { SCENARIOS } from "@openreturn/engine/scenarios";
@@ -123,6 +124,16 @@ const MANIFEST: [string, string, string, KeyMatch[]][] = [
     "1099-K",
     [makePaymentTransactionsFactKey("tin-00-0000006", "mr-20417")],
   ],
+  [
+    "tcb-ca-005",
+    "07-chase-bank-1098.pdf",
+    "1098",
+    [
+      MORTGAGE_KEYS.interestForm1098,
+      MORTGAGE_KEYS.outstandingPrincipalForm1098,
+      MORTGAGE_KEYS.originationDateForm1098,
+    ],
+  ],
 ];
 
 /*
@@ -155,6 +166,7 @@ const LITE = new Set([
   "tara/04-bay-area-door-invoice.pdf",
   "tcb-us-006/02-poker-club-w2g.pdf",
   "tcb-us-006/05-metro-rides-1099-k.pdf",
+  "tcb-ca-005/07-chase-bank-1098.pdf",
 ]);
 
 export function loadCases(tier: "lite" | "full"): IngestCase[] {
