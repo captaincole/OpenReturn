@@ -4,6 +4,6 @@
  * leave out (irs-8960-inst-2025::sec::line-10-additional-modifications::b01).
  */
 export const NET_INVESTMENT_INCOME_KEYS = {
-  /* Line 10, category "investment_income": a number; 0 when there are none. */
+  /* Line 10, category "investment_income": a number, recorded only when the taxpayer states one. */
   additionalModifications: "investment_income.niit_additional_modifications",
 } as const;
