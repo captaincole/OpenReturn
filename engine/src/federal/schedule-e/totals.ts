@@ -58,8 +58,11 @@ function allowedPassiveLoss(form: Form, info: Info, property: RentalProperty): A
   const net = line21(form, column);
   if (net === undefined) return undefined;
   if (without8582(info)) {
-    // The exception needs no prior-year unallowed loss; with one, the no is in doubt.
+    /* The exception needs no prior-year loss and only actively managed rental real estate (who-must-file::b01). */
     if ((property.value.priorYearUnallowedLoss ?? 0) > 0) return undefined;
+    if (isRoyalty(property) || property.value.activeParticipation !== true) {
+      return net < 0 ? undefined : null;
+    }
     return net < 0 ? -net : null;
   }
   const loss = passiveLoss(form, info, column);
@@ -88,10 +91,12 @@ export function deductibleLoss(form: Form, info: Info, column: PropertyColumn): 
 /* A royalty's loss on line 25: nonpassive, line 21's; passive, the allowed loss. */
 function royaltyLoss(form: Form, info: Info, property: RentalProperty): Amount {
   const net = line21(form, property.column);
-  if (net === undefined) return undefined;
-  if (net >= 0) return null;
-  if (property.passive === undefined) return undefined;
-  return property.passive ? allowedPassiveLoss(form, info, property) : -net;
+  if (net === undefined || property.passive === undefined) return undefined;
+  // A passive royalty's allowed loss can include a prior-year loss even with income on line 21.
+  if (property.passive) return allowedPassiveLoss(form, info, property);
+  // A former passive activity's prior-year loss is not modeled.
+  if ((property.value.priorYearUnallowedLoss ?? 0) > 0) return undefined;
+  return net < 0 ? -net : null;
 }
 
 /* Line 25: royalty losses from line 21 and rental losses from line 22; total losses allowed (b03). */
