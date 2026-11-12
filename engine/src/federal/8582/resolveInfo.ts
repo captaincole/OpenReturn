@@ -13,45 +13,21 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import {
+  booleanFact,
+  isPassiveActivity,
+  isRentalActivity,
+  needsProfessionalAnswer,
+  spousePropertiesOnReturn,
+} from "../rentals/passive.js";
 import { netIncomeOrLoss } from "../schedule-e/lines.js";
-import { isRentalActivity, placementOf, type ActivitiesInfo } from "./activities.js";
+import { placementOf, type ActivitiesInfo } from "./activities.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_8582";
 
 /* Schedule E Part I has three columns; Form 8582 reads no property past them. */
 const SCHEDULE_E_COLUMNS = 3;
-
-const booleanFact = (value: unknown) => (typeof value === "boolean" ? value : undefined);
-
-/*
- * Whether a property is a passive activity, or undefined while an answer is missing.
- * A rental is passive unless the owner is a real estate professional who materially
- * participated in it (irs-8582-inst-2025::sec::activities-that-are-not-passive::b01, items 1–2);
- * a royalty is passive only when it comes from a trade or business the owner did
- * not materially participate in (royaltyActivity). A stay of 7 days or less is not a
- * rental activity (irs-8582-inst-2025::sec::rental-activities::b01): as a trade or
- * business it is passive unless the owner materially participated
- * (irs-8582-inst-2025::sec::reporting-income-and-losses-from-the::b01). A home with
- * personal use (item 4) has no rule here: Schedule E line 21 waits on personal-use days.
- */
-export function isPassiveActivity(
-  property: RentalFactValue,
-  realEstateProfessional: boolean | undefined,
-): boolean | undefined {
-  if (property.propertyType === "royalties") {
-    return property.royaltyActivity === undefined
-      ? undefined
-      : property.royaltyActivity === "passive";
-  }
-  const rental = isRentalActivity(property);
-  if (rental === undefined) return undefined;
-  if (rental && realEstateProfessional === undefined) return undefined;
-  if (rental && !realEstateProfessional) return true;
-  return property.materiallyParticipated === undefined
-    ? undefined
-    : !property.materiallyParticipated;
-}
 
 /* A missing passive answer that is on the property, not the return's professional answer. */
 function passiveAnswerOnProperty(
@@ -116,7 +92,7 @@ export function resolve8582Info(inputs: ResolverInputs): Form8582FilingInfo {
   const status = filingStatusOf(inputs);
   const { properties, malformedKeys } = rentalsOnReturn(
     inputs.facts,
-    status === undefined || status === "married_filing_jointly",
+    spousePropertiesOnReturn(status),
   );
   const realEstateProfessional = booleanFact(
     inputs.factByKey.get(RENTAL_KEYS.realEstateProfessional),
@@ -127,11 +103,7 @@ export function resolve8582Info(inputs: ResolverInputs): Form8582FilingInfo {
   }));
   const open = passive.filter((property) => property.passive === undefined);
   const filing = passive.filter((property) => property.passive && hasDeductions(property.value));
-  // The professional answer matters only for a rental activity (not a royalty or a short stay).
-  const hasRental = properties.some(
-    (property) =>
-      property.value.propertyType !== "royalties" && isRentalActivity(property.value) !== false,
-  );
+  const hasRental = needsProfessionalAnswer(properties.map((property) => property.value));
   const livedApart = booleanFact(inputs.factByKey.get(SPOUSE_KEYS.livedApartAllYear));
   const info: ActivitiesInfo = { filingStatus: status, livedApartFromSpouseAllYear: livedApart };
   // MANUAL EDIT: MFS spouses who lived together at any time use Part V, not Part IV (part-iv-2::b01).

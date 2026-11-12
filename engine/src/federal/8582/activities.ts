@@ -11,14 +11,12 @@
 
 import type { RentalFactValue } from "../../facts/index.js";
 import { numberOrBlank, roundDollars } from "../../money.js";
+import { isRentalActivity } from "../rentals/passive.js";
 import type { PropertyColumn, RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
 
 /* Each part prints five rows; more need an attached statement (not modeled). */
 export const ROWS_PER_PART = 5;
-
-/* rental-activities::b01, exception 1a: an average customer use of 7 days or less. */
-const SHORT_STAY_DAYS = 7;
 
 export type ActivityPart = "part4" | "part5";
 
@@ -67,19 +65,6 @@ export type Undecided = "passive" | "property" | "lived_apart";
 const RECHARACTERIZED_TYPES = new Set(["land", "self_rental"]);
 
 const whole = (part: ActivityPart): Placement => ({ current: part, prior: part });
-
-/*
- * Real estate only. rental-activities::b01: an average period of customer use of
- * 7 days or less is not a rental activity (exception 1a). Undefined while a
- * short-term rental's average is unstated. Exception 1b (30 days or less with
- * significant personal services) and exceptions 2–5 have no facts: they are
- * taken not to apply.
- */
-export function isRentalActivity(value: RentalFactValue): boolean | undefined {
-  const days = value.averageCustomerUseDays;
-  if (days === undefined) return value.propertyType === "vacation_short_term" ? undefined : true;
-  return days > SHORT_STAY_DAYS;
-}
 
 /* Facts the engine does not model leave the property's place open. */
 function unmodeled(value: RentalFactValue, net: number | undefined): boolean {

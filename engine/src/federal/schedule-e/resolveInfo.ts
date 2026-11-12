@@ -1,13 +1,16 @@
 import { RENTAL_KEYS, rentalsOnReturn, type RentalFactValue } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
-import { isPassiveActivity } from "../8582/resolveInfo.js";
+import {
+  booleanFact,
+  isPassiveActivity,
+  needsProfessionalAnswer,
+  spousePropertiesOnReturn,
+} from "../rentals/passive.js";
 import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
 import { netIncomeOrLoss, personalUseUnknown } from "./lines.js";
 
 const COLUMNS: PropertyColumn[] = ["a", "b", "c"];
-
-const booleanFact = (value: unknown) => (typeof value === "boolean" ? value : undefined);
 
 const MUST_FILE_KEY = "decisions.scope.must_file_schedule_e";
 
@@ -51,7 +54,7 @@ function passiveAnswers(
   columns: Array<{ key: string; value: RentalFactValue }>,
   professional: boolean | undefined,
 ): Record<string, unknown> {
-  const hasRental = columns.some(({ value }) => value.propertyType !== "royalties");
+  const hasRental = needsProfessionalAnswer(columns.map(({ value }) => value));
   const open = columns.filter(
     ({ value }) =>
       isPassiveActivity(value, professional) === undefined &&
@@ -77,7 +80,7 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
   const status = filingStatusOf(inputs);
   const { properties, malformedKeys } = rentalsOnReturn(
     inputs.facts,
-    status === undefined || status === "married_filing_jointly",
+    spousePropertiesOnReturn(status),
   );
   const paymentsRequire1099 = booleanFact(inputs.factByKey.get(RENTAL_KEYS.paymentsRequire1099));
   const filed1099s = booleanFact(inputs.factByKey.get(RENTAL_KEYS.filedRequired1099s));

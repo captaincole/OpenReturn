@@ -5,8 +5,9 @@
 
 import type { FormAccessor } from "../../defineForm.js";
 import { numberOrBlank, sum, sumOrBlank } from "../../money.js";
-import { isRentalActivity, passiveActivities } from "../8582/activities.js";
+import { passiveActivities } from "../8582/activities.js";
 import { allowedLossForColumn } from "../8582/allocation.js";
+import { isRentalActivity } from "../rentals/passive.js";
 import type { PropertyColumn, RentalProperty, ScheduleEFilingInfo } from "./filingInfo.js";
 import type { PartIBindings } from "./lines.js";
 import type { ScheduleE } from "./types.js";
