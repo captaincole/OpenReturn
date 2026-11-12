@@ -4,6 +4,7 @@
  * (Form 4952) and an incentive stock option exercise (Form 6251). Federal only.
  */
 
+import { lockedGoldenPath } from "../../helpers/scenarioPdfName.js";
 import type { Scenario } from "../../types.js";
 import { tcbUs001Decisions } from "./decisions.js";
 import { tcbUs001Expected } from "./expected.js";
@@ -29,9 +30,9 @@ export const tcbUs001Scenario: Scenario = {
   userId: TCB_US_001_USER_ID,
   facts: tcbUs001Facts,
   decisions: tcbUs001Decisions,
-  skip: true,
   forms: FORM_IDS.map((formId) => ({
     formId,
     expected: tcbUs001Expected(formId),
+    goldenPdfPath: lockedGoldenPath("tcb-us-001", formId),
   })),
 };

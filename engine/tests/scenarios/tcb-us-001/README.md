@@ -42,3 +42,12 @@ Forms checked: Form 1040, Schedules 2, A and D, Forms 4952, 6251, 8949, 8959 and
 ## Lines the key leaves out that the engine prints
 
 - Schedule A line 5a: the engine prints 0 (no W-2 box 17, no sales tax election); the key has no line 5a.
+- Form 6251 lines 21, 23, 26 and 29–32: the engine prints 0 (lines 21 and 29 say "enter -0-"); the key omits them.
+- Form 6251 line 5: the exemption phases out to zero, and the Exemption Worksheet's note says to skip it and carry line 4 to line 6 (`irs-6251-inst-2025::sec::exemption-worksheet::b01`), so the engine leaves line 5 blank, as the key does. Lines 14 and 35–37 are blank in both (line 14 is blank, so the form skips 35–37).
+
+## Open decisions
+
+- Form 6251 files on `decisions.scope.must_file_6251` only. Who Must File compares lines 7 and 10 (`irs-6251-inst-2025::sec::who-must-file::b01`), which the resolver cannot see before it evaluates the return. A fallback "file when there is an incentive stock option spread" would also compute the federal AMT for tcb-ca-005 ($275,000 spread) and change its locked federal goldens (Schedule 2 lines 2–3, Form 1040 lines 17, 18, 22, 24 and 37); that scenario is left as it is.
+- Schedule D line 20 (above): the key's Yes against the form's No; left out of `expected.ts`.
+- Schedule A line 5c: the personal property tax is on the integration test's optional list (the deductions conversation asks it), not in Schedule A's missing inputs, which would add it to tcb-us-004's and tcb-ca-005's pending inputs.
+- The made-up answers above: the $500,000 loan balance and the child's name.
