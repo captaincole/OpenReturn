@@ -56,7 +56,9 @@ Marketplace coverage repaid on Form 8962 (Form 1095-A); tcb-ca-005: MFJ, CA
 itemized deductions (Schedule CA Part II, FTB 3526), CA AMT on an ISO
 exercise (Schedule P), early-distribution tax (FTB 3805P);
 tcb-us-001: HOH, mortgage interest (Form 1098), federal AMT on an ISO
-exercise (Form 6251)).
+exercise (Form 6251); tcb-us-002: HOH, casualty losses (Form 4684), the
+increased standard deduction for a qualified disaster loss, the EIC
+(Schedule EIC), the additional child tax credit).
 
 ### 3. Create `facts.ts` and `decisions.ts`
 
