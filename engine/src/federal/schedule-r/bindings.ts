@@ -2,6 +2,7 @@
 
 import { defineForm } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
+import { SSN } from "../../values.js";
 import { disabledPeople, partIBox, type PartIBox } from "./boxes.js";
 import type { ScheduleRFilingInfo } from "./filingInfo.js";
 import type { ScheduleR } from "./types.js";
@@ -185,6 +186,10 @@ export function register(): void {
         const line21 = form["1.line.21_tax_liability_limit"];
         return line20 === undefined || line21 === undefined ? undefined : Math.min(line20, line21);
       },
+    },
+
+    formatters: {
+      "0.header.ssn": (value) => SSN.format(value as Parameters<typeof SSN.format>[0]),
     },
   });
 }
