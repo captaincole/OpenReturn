@@ -1,6 +1,10 @@
 import { missingInputs, type ResolverInputs } from "../../resolverInputs.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
-import { qbiBusinesses, rentalsWithoutQbiAnswer } from "../qbi/resolveInfo.js";
+import {
+  qbiBusinesses,
+  rentalsWithUnmodeledQbi,
+  rentalsWithoutQbiAnswer,
+} from "../qbi/resolveInfo.js";
 import { qbiIncomeMayExceedThreshold, qbiMustFile } from "../qbi/whichForm.js";
 import type { Form8995AFilingInfo } from "./filingInfo.js";
 
@@ -18,6 +22,7 @@ export function resolve8995AInfo(inputs: ResolverInputs): Form8995AFilingInfo {
       "form-8995-a": [
         ...missingBusinessAnswers(inputs, businesses),
         ...rentalsWithoutQbiAnswer(inputs),
+        ...rentalsWithUnmodeledQbi(inputs),
       ],
     },
   };

@@ -35,15 +35,30 @@ function missingPropertyAnswer(value: RentalFactValue): boolean {
  * line 21 loss waits on the at-risk answer (irs-1040se-inst-2025::sec::line-21::b01):
  * ask for the fact again.
  */
-function openPropertyKeys(properties: Array<{ key: string; value: RentalFactValue }>): string[] {
+function openPropertyKeys(
+  properties: Array<{ key: string; value: RentalFactValue }>,
+  professional: boolean | undefined,
+): string[] {
   return properties
     .filter(
       ({ value }) =>
         missingPropertyAnswer(value) ||
         personalUseUnknown(value) ||
-        (value.allInvestmentAtRisk === undefined && (netIncomeOrLoss(value) ?? 0) < 0),
+        (value.allInvestmentAtRisk === undefined && (netIncomeOrLoss(value) ?? 0) < 0) ||
+        formerPassiveActivity(value, professional),
     )
     .map((property) => property.key);
+}
+
+/*
+ * A nonpassive property with a prior-year unallowed loss is a former passive
+ * activity (irs-8582-inst-2025::sec::former-passive-activities::b01); its loss is not
+ * modeled, so lines 22 and 25 wait (totals.ts columnLoss): ask for it again.
+ */
+function formerPassiveActivity(value: RentalFactValue, professional: boolean | undefined): boolean {
+  return (
+    isPassiveActivity(value, professional) === false && (value.priorYearUnallowedLoss ?? 0) > 0
+  );
 }
 
 /*
@@ -119,7 +134,9 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
     missingInputs: {
       "schedule-e": missingInputs({
         ...Object.fromEntries([...malformedKeys, ...spouseKeys].map((key) => [key, undefined])),
-        ...Object.fromEntries(openPropertyKeys(columns).map((key) => [key, undefined])),
+        ...Object.fromEntries(
+          openPropertyKeys(columns, professional).map((key) => [key, undefined]),
+        ),
         ...Object.fromEntries(overflowKeys.map((key) => [key, undefined])),
         ...(files ? { [RENTAL_KEYS.paymentsRequire1099]: paymentsRequire1099 } : {}),
         ...passiveAnswers(columns, professional),
