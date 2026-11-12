@@ -97,3 +97,25 @@ export function getRetirementDistributionFacts(facts: FactsView): RetirementDist
   }
   return out;
 }
+
+/*
+ * A disability pension: box 7 code 3 on a 1099-R that is not from an IRA. Before
+ * the minimum retirement age set by the employer it is reported on Form 1040
+ * line 1h; after it, on lines 5a and 5b (irs-1040-inst-2025::sec::lines-5a-and-5b::b01,
+ * irs-1040-inst-2025::sec::line-1h::b02).
+ */
+export function isDisabilityPension(distribution: RetirementDistributionFactValue): boolean {
+  return (
+    !distribution.box7IraSepSimple &&
+    !hasDistributionCode(distribution, ROTH_IRA_CODES) &&
+    hasDistributionCode(distribution, ["3"])
+  );
+}
+
+/* The answer for one disability pension: true when received before the employer's minimum retirement age. */
+export function makeDisabilityBeforeMinimumRetirementAgeKey(
+  payerSlug: string,
+  distributionId: string,
+): string {
+  return `retirement.disability_pension.${payerSlug}.${distributionId}.before_minimum_retirement_age`;
+}
