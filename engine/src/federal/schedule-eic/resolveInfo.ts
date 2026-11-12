@@ -21,7 +21,8 @@ import { eicQualifyingChildren } from "./qualifyingChild.js";
  *   which a joint return is not asked (irs-1040-inst-2025::sec::step-2-2::b03),
  *   or an IRS notice that bars the credit.
  * The answers are asked only once the schedule can file. A dependent whose
- * answers are not all in is asked by Schedule 8812 and counts here when they are.
+ * answers are not all in is asked by Schedule 8812 or line 27a (eicQuestions)
+ * and counts here when they are.
  */
 export function resolveScheduleEICInfo(inputs: ResolverInputs): ScheduleEICFilingInfo {
   const status = filingStatusOf(inputs);

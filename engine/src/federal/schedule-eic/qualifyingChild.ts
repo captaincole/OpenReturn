@@ -96,7 +96,8 @@ export interface EicQualifyingChildren {
   children: DependentFact[];
   /** The qualifying children with an SSN. */
   withSsn: DependentFact[];
-  /** A dependent whose test is still open (an answer it needs is missing). */
+  /** The dependents whose test is still open (an answer it needs is missing). */
+  open: DependentFact[];
   childrenOpen: boolean;
 }
 
@@ -112,10 +113,12 @@ export function eicQualifyingChildren(inputs: ResolverInputs): EicQualifyingChil
     qualifies: isEicQualifyingChild(fact.dependent, filerDobs, TAX_YEAR),
   }));
   const children = tests.filter((test) => test.qualifies === true).map((test) => test.fact);
+  const open = tests.filter((test) => test.qualifies === undefined).map((test) => test.fact);
   return {
     children,
     withSsn: children.filter((child) => child.dependent.ssn !== undefined),
-    childrenOpen: tests.some((test) => test.qualifies === undefined),
+    open,
+    childrenOpen: open.length > 0,
   };
 }
 

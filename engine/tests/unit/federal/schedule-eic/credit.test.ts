@@ -12,6 +12,7 @@ import {
   type EicAnswers,
   type EicReturn,
 } from "../../../../src/federal/schedule-eic/credit.js";
+import { STATUTORY_EMPLOYEE_GAP } from "../../../../src/federal/schedule-eic/outcome.js";
 
 /*
  * Rows copied from the printed table: phase-in, plateau, phase-out, the
@@ -241,10 +242,80 @@ describe("earnedIncomeCredit", () => {
     expect(
       earnedIncomeCredit({ ...SINGLE, filingStatus: "married_filing_separately" }, NO_CHILD).kind,
     ).toBe("none");
-    // No fact says whether a head of household is married (Step 4, question 1).
+    // No fact says a head of household is unmarried (Step 4, question 1).
     expect(earnedIncomeCredit({ ...SINGLE, filingStatus: "head_of_household" }, NO_CHILD)).toEqual({
       kind: "unsupported",
       reason: MARRIED_HOH_GAP,
+    });
+  });
+
+  describe("a stop that needs no missing answer wins over an earlier wait", () => {
+    const UNANSWERED: EicAnswers = {
+      qualifyingChildren: 0,
+      childrenWithSsn: 0,
+      childrenOpen: false,
+    };
+    const NO_STOP = { kind: "none", checkLine27c: false };
+
+    it("stops MFS, a married head of household and a filer outside ages 25–64 at Step 4", () => {
+      const mfs = { ...SINGLE, filingStatus: "married_filing_separately" } as const;
+      expect(earnedIncomeCredit(mfs, UNANSWERED)).toEqual(NO_STOP);
+      expect(earnedIncomeCredit({ ...mfs, agi: undefined }, UNANSWERED)).toEqual(NO_STOP);
+      const hoh = { ...SINGLE, filingStatus: "head_of_household" } as const;
+      expect(earnedIncomeCredit(hoh, { ...UNANSWERED, livedApartLastSixMonths: true })).toEqual(
+        NO_STOP,
+      );
+      expect(earnedIncomeCredit({ ...hoh, taxpayerDob: "01/02/2001" }, UNANSWERED)).toEqual(
+        NO_STOP,
+      );
+      expect(earnedIncomeCredit({ ...SINGLE, taxpayerDob: "12/31/1960" }, UNANSWERED)).toEqual(
+        NO_STOP,
+      );
+    });
+
+    it("makes a head of household not known to be married the gap once AGI is known", () => {
+      const hoh = { ...SINGLE, filingStatus: "head_of_household" } as const;
+      expect(earnedIncomeCredit(hoh, UNANSWERED)).toEqual({
+        kind: "unsupported",
+        reason: MARRIED_HOH_GAP,
+      });
+      expect(earnedIncomeCredit({ ...hoh, agi: undefined }, UNANSWERED)).toEqual(WAITING_OUTCOME);
+      // A statutory employee with a business: Worksheet B's gap is Step 5, after Step 4.
+      const statutory = {
+        ...hoh,
+        worksheetB: true,
+        earnedIncome: undefined,
+        earnedIncomeGap: STATUTORY_EMPLOYEE_GAP,
+      };
+      expect(earnedIncomeCredit(statutory, UNANSWERED)).toEqual({
+        kind: "unsupported",
+        reason: MARRIED_HOH_GAP,
+      });
+      // An answered Step 1 stop comes first.
+      expect(earnedIncomeCredit(hoh, { ...UNANSWERED, nonresidentAlien: true })).toEqual({
+        kind: "none",
+        checkLine27c: true,
+      });
+    });
+
+    it("stops over the investment income limit, and on earned income of zero or less", () => {
+      expect(earnedIncomeCredit({ ...SINGLE, investmentIncome: 11_951 }, UNANSWERED)).toEqual(
+        NO_STOP,
+      );
+      expect(earnedIncomeCredit({ ...SINGLE, earnedIncome: 0 }, UNANSWERED)).toEqual({
+        kind: "none",
+        checkLine27c: true,
+      });
+    });
+
+    it("still waits when no stop is certain", () => {
+      expect(earnedIncomeCredit(SINGLE, UNANSWERED)).toEqual(WAITING_OUTCOME);
+      expect(earnedIncomeCredit({ ...SINGLE, taxpayerDob: undefined }, UNANSWERED)).toEqual(
+        WAITING_OUTCOME,
+      );
+      expect(earnedIncomeCredit(HOH, { ...ANSWERED, nonresidentAlien: undefined })).toEqual(
+        WAITING_OUTCOME,
+      );
     });
   });
 
