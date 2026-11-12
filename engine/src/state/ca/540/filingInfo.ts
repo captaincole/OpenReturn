@@ -4,12 +4,19 @@
  */
 
 import type { Schedule8812FilingInfo } from "../../../federal/schedule-8812/filingInfo.js";
+import type { ScheduleAFilingInfo } from "../../../federal/schedule-a/filingInfo.js";
 import type { BaseFilingInfo } from "../../../filingInfo.js";
 import type { Money } from "../../../money.js";
 
-/** Line 10's Dependents table reads Schedule 8812's `dependents` slot. */
+/**
+ * Line 10's Dependents table reads Schedule 8812's `dependents` slot. Line 18
+ * waits with Schedule CA line 30 under the federal increased standard deduction.
+ */
 export interface Form540FilingInfo
-  extends BaseFilingInfo, Pick<Schedule8812FilingInfo, "dependents"> {
+  extends
+    BaseFilingInfo,
+    Pick<Schedule8812FilingInfo, "dependents">,
+    Pick<ScheduleAFilingInfo, "increasedStandardDeduction"> {
   /** "full_year" | "part_year" | "non_resident". */
   caResidencyStatus?: string;
 

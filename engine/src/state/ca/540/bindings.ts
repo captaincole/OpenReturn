@@ -191,18 +191,21 @@ export function register(): void {
       "line.18_deductions": (form, info) => {
         const fromScheduleCA = form["schedule-ca.5.page2.total_itemized_30_standard_or_itemized"];
         if (typeof fromScheduleCA === "number") return fromScheduleCA;
+        // MANUAL EDIT: line 30 waits for a person to complete Part II; so does line 18.
+        const partIIWaits =
+          info.increasedStandardDeduction !== false &&
+          info.mustFile?.["schedule-ca"]?.value === true;
+        if (partIIWaits) return undefined;
         return info.filingStatus
           ? lookupStandardDeduction("state-ca", 2025, info.filingStatus)
           : undefined;
       },
-      "line.19_taxable_income": (form) =>
-        atLeast(
-          0,
-          sum(
-            form["line.17_ca_agi"],
-            form["line.18_deductions"] === undefined ? 0 : -form["line.18_deductions"],
-          ),
-        ),
+      // MANUAL EDIT: lines 19 to 115 wait with the line they read; 0 would print a wrong tax.
+      "line.19_taxable_income": (form) => {
+        const deductions = form["line.18_deductions"];
+        if (typeof deductions !== "number") return undefined;
+        return atLeast(0, sum(form["line.17_ca_agi"], -deductions));
+      },
       // MANUAL EDIT: Tax Table ("ca-2025") up to $100,000 of line 19; above it, Tax Rate Schedules X/Y/Z.
       "line.31_tax_amount": (form, info) => {
         if (!info.filingStatus) return undefined;
@@ -243,26 +246,34 @@ export function register(): void {
           dependentAmount: sum(form["line.10_dependent_exemption_amount"]),
         });
       },
-      "line.33_tax_after_exemption_credits": (form) =>
-        atLeast(
+      "line.33_tax_after_exemption_credits": (form) => {
+        const tax = form["line.31_tax_amount"];
+        if (typeof tax !== "number") return undefined;
+        return atLeast(
           0,
           sum(
-            form["line.31_tax_amount"],
+            tax,
             form["line.32_exemption_credits"] === undefined
               ? 0
               : -form["line.32_exemption_credits"],
           ),
-        ),
-      "line.35_total_tax_after_credits": (form) =>
-        sum(form["line.33_tax_after_exemption_credits"], form["line.34_tax_amount"]),
-      "line.48_tax_after_credits": (form) =>
-        atLeast(
+        );
+      },
+      "line.35_total_tax_after_credits": (form) => {
+        const tax = form["line.33_tax_after_exemption_credits"];
+        return typeof tax === "number" ? sum(tax, form["line.34_tax_amount"]) : undefined;
+      },
+      "line.48_tax_after_credits": (form) => {
+        const tax = form["line.35_total_tax_after_credits"];
+        if (typeof tax !== "number") return undefined;
+        return atLeast(
           0,
           sum(
-            form["line.35_total_tax_after_credits"],
+            tax,
             form["line.47_total_credits"] === undefined ? 0 : -form["line.47_total_credits"],
           ),
-        ),
+        );
+      },
       /*
        * MANUAL EDIT: Schedule P (540) Part II line 26: "If more than zero, enter
        * here and on Form 540, line 61" (ca-540-sched-p-inst-2025, the form text;
@@ -309,6 +320,7 @@ export function register(): void {
           info.mustFile?.["schedule-p"]?.value === true &&
           form["schedule-p.1.line.26_alternative_minimum_tax"] === undefined;
         if (earlyTaxUnknown || amtUnknown) return undefined;
+        if (typeof form["line.48_tax_after_credits"] !== "number") return undefined;
         return sum(
           form["line.48_tax_after_credits"],
           form["line.61_alternative_minimum_tax"],
@@ -348,25 +360,26 @@ export function register(): void {
             form["line.92_isr_penalty"] === undefined ? 0 : -form["line.92_isr_penalty"],
           ),
         ),
-      "line.97_overpaid_tax": (form) =>
-        atLeast(
+      "line.97_overpaid_tax": (form) => {
+        const totalTax = form["line.64_total_tax"];
+        if (typeof totalTax !== "number") return undefined;
+        return atLeast(0, sum(form["line.95_payments_after_isr_penalty"], -totalTax));
+      },
+      "line.99_overpaid_tax_available": (form) => {
+        const overpaid = form["line.97_overpaid_tax"];
+        if (typeof overpaid !== "number") return undefined;
+        return atLeast(
           0,
           sum(
-            form["line.95_payments_after_isr_penalty"],
-            form["line.64_total_tax"] === undefined ? 0 : -form["line.64_total_tax"],
-          ),
-        ),
-      "line.99_overpaid_tax_available": (form) =>
-        atLeast(
-          0,
-          sum(
-            form["line.97_overpaid_tax"],
+            overpaid,
             form["line.98_applied_to_2026_estimated_tax"] === undefined
               ? 0
               : -form["line.98_applied_to_2026_estimated_tax"],
           ),
-        ),
+        );
+      },
       "line.100_tax_due": (form) => {
+        if (typeof form["line.64_total_tax"] !== "number") return undefined;
         const taxDue = sum(
           form["line.64_total_tax"],
           form["line.95_payments_after_isr_penalty"] === undefined
@@ -402,11 +415,13 @@ export function register(): void {
         );
         return due > 0 ? due : undefined;
       },
-      "line.115_refund_or_no_amount_due": (form) =>
-        atLeast(
+      "line.115_refund_or_no_amount_due": (form) => {
+        const available = form["line.99_overpaid_tax_available"];
+        if (typeof available !== "number") return undefined;
+        return atLeast(
           0,
           sum(
-            form["line.99_overpaid_tax_available"],
+            available,
             form["line.110_total_contributions"] === undefined
               ? 0
               : -form["line.110_total_contributions"],
@@ -417,7 +432,8 @@ export function register(): void {
               ? 0
               : -form["line.113_underpayment_estimated_tax"],
           ),
-        ),
+        );
+      },
       "signing.taxpayer_email": (_, info) => info.taxpayerEmail,
       "signing.taxpayer_phone": (_, info) => info.taxpayerPhone,
     },
