@@ -48,8 +48,8 @@ const expenses: { [K in keyof BusinessExpenses]-?: z.ZodType<BusinessExpenses[K]
 
 /* A missing, extra or mistyped field (against the engine's type) fails to compile. */
 const vehicle: { [K in keyof BusinessVehicle]-?: z.ZodType<BusinessVehicle[K]> } = {
-  placedInService: z
-    .string()
+  placedInService: z.iso
+    .date()
     .optional()
     .describe("Line 43: the date first used for the business, YYYY-MM-DD"),
   businessMiles: amount.describe("Line 44a: business miles in 2025"),

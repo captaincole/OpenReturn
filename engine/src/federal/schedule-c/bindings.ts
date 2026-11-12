@@ -1,7 +1,7 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
-import { defineForm } from "../../defineForm.js";
-import type { BusinessExpenses, BusinessFactValue } from "../../facts/index.js";
+import { defineForm, type BindingFn } from "../../defineForm.js";
+import type { BusinessExpenses, BusinessFactValue, BusinessVehicle } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
@@ -27,11 +27,8 @@ const COST_OF_GOODS_SOLD =
   "Part III (cost of goods sold) is not modeled: a business that sells goods, or has not said, leaves lines 5 and 7-31 blank.";
 const PART_III =
   "Part III (cost of goods sold) is not modeled: no fact gives inventory, purchases or the valuation method.";
-// MANUAL EDIT: the business fact now carries vehicles and otherExpenses; these rows wait for a drafter.
-const PART_IV =
-  "Part IV (vehicle information) is not drafted yet: the business fact's vehicles give it, but no binding reads them.";
-const PART_V =
-  "Part V (other expenses) rows are not drafted yet: the business fact's otherExpenses give them, but no binding reads them.";
+// MANUAL EDIT: Part V has nine rows; the engine writes no attached statement for more.
+const PART_V_ROWS = 9;
 const AT_RISK =
   "No fact says whether all investment in the business is at risk (Form 6198); line 31 leaves a loss blank.";
 
@@ -91,6 +88,62 @@ function line31(info: ScheduleCFilingInfo) {
 function line30(info: ScheduleCFilingInfo) {
   const business = businessOf(info);
   return business ? homeOfficeExpenses(business, info.businesses ?? []) : undefined;
+}
+
+/*
+ * MANUAL EDIT: Part IV shows the first vehicle (the others go on an attached statement,
+ * irs-1040sc-inst-2025::sec::line-9::b03) when line 9 claims car or truck expenses and
+ * no Form 4562 is required (irs-4562-inst-2025::sec::part-v::b01). Any line 13
+ * depreciation can require Form 4562, whose Part V then takes the vehicle (line-9::b04,
+ * line-13::b01); the engine has no Form 4562, so Part IV is blank then. Gap: Form 4562 is
+ * also required for amortization that begins in 2025 (irs-4562-inst-2025::sec::who-must-file::b01),
+ * and no fact gives it. Part IV waits for the "sells goods" answer, as line 9 does.
+ */
+function partIVVehicle(info: ScheduleCFilingInfo): BusinessVehicle | undefined {
+  const business = businessOf(info);
+  const vehicle = business?.vehicles?.[0];
+  const line9 = partII(info, carAndTruckExpenses) ?? 0;
+  const depreciation = business?.expenses?.depreciation ?? 0;
+  return line9 > 0 && depreciation === 0 ? vehicle : undefined;
+}
+
+// MANUAL EDIT: line 43 is placedInService (YYYY-MM-DD); the year box takes four digits.
+function placedInService(info: ScheduleCFilingInfo, part: "year" | "month" | "day") {
+  const [year, month, day] = partIVVehicle(info)?.placedInService?.split("-") ?? [];
+  return { year, month, day }[part];
+}
+
+// MANUAL EDIT: line 47b asks only after a Yes on line 47a; otherwise both boxes stay unchecked.
+function evidenceWritten(info: ScheduleCFilingInfo, box: "yes" | "no") {
+  const vehicle = partIVVehicle(info);
+  if (vehicle?.hasEvidence === undefined) return undefined;
+  if (!vehicle.hasEvidence) return false;
+  return box === "yes" ? yes(vehicle.evidenceIsWritten) : no(vehicle.evidenceIsWritten);
+}
+
+/*
+ * MANUAL EDIT: Part V lists each other expense on its own row, in the order recorded
+ * (irs-1040sc-inst-2025::sec::part-v::b01). Line 48 is line 27b's amount, so the rows
+ * wait for the same "sells goods" answer. More than nine expenses leave the rows blank.
+ */
+function otherExpenseRow(info: ScheduleCFilingInfo, row: number) {
+  const business = businessOf(info);
+  const entries = business?.otherExpenses ?? [];
+  if (business?.sellsGoods !== false || entries.length > PART_V_ROWS) return undefined;
+  return entries[row - 1];
+}
+
+type Bindings = Partial<{ [K in keyof ScheduleC]: BindingFn<ScheduleC, ScheduleCFilingInfo, K> }>;
+type RowBinding = BindingFn<ScheduleC, ScheduleCFilingInfo, keyof ScheduleC>;
+
+function partVRowBindings(): Bindings {
+  const bindings: Record<string, RowBinding> = {};
+  for (let row = 1; row <= PART_V_ROWS; row++) {
+    bindings[`1.line.48_description_${row}`] = (_, info) => otherExpenseRow(info, row)?.description;
+    bindings[`1.line.48_amount_${row}`] = (_, info) =>
+      roundDollars(otherExpenseRow(info, row)?.amount);
+  }
+  return bindings as Bindings;
 }
 
 function method(info: ScheduleCFilingInfo, which: "cash" | "accrual" | "other") {
@@ -167,6 +220,28 @@ export function register(): void {
       "0.line.30_business_sq_ft": (_, info) => squareFeet(info, "businessSquareFeet"),
       "0.line.30": (_, info) => line30(info),
       "0.line.31": (_, info) => line31(info),
+      "1.line.43_month": (_, info) => placedInService(info, "month"),
+      "1.line.43_day": (_, info) => placedInService(info, "day"),
+      "1.line.43_year": (_, info) => placedInService(info, "year"),
+      "1.line.44a_business_miles": (_, info) => partIVVehicle(info)?.businessMiles,
+      "1.line.44b_commuting_miles": (_, info) => partIVVehicle(info)?.commutingMiles,
+      "1.line.44c_other_miles": (_, info) => partIVVehicle(info)?.otherMiles,
+      "1.line.45_personal_use_off_duty_yes": (_, info) =>
+        yes(partIVVehicle(info)?.availableForPersonalUse),
+      "1.line.45_personal_use_off_duty_no": (_, info) =>
+        no(partIVVehicle(info)?.availableForPersonalUse),
+      "1.line.46_another_vehicle_available_yes": (_, info) =>
+        yes(partIVVehicle(info)?.anotherVehicleAvailable),
+      "1.line.46_another_vehicle_available_no": (_, info) =>
+        no(partIVVehicle(info)?.anotherVehicleAvailable),
+      "1.line.47a_evidence_supports_deduction_yes": (_, info) =>
+        yes(partIVVehicle(info)?.hasEvidence),
+      "1.line.47a_evidence_supports_deduction_no": (_, info) =>
+        no(partIVVehicle(info)?.hasEvidence),
+      "1.line.47b_evidence_written_yes": (_, info) => evidenceWritten(info, "yes"),
+      "1.line.47b_evidence_written_no": (_, info) => evidenceWritten(info, "no"),
+      ...partVRowBindings(),
+      "1.line.48": (_, info) => partII(info, otherExpensesTotal),
     },
     formatters: {
       // The SSN renders with dashes; this form has no comb widget.
@@ -186,39 +261,6 @@ export function register(): void {
       "1.line.40": PART_III,
       "1.line.41": PART_III,
       "1.line.42": PART_III,
-      "1.line.43_month": PART_IV,
-      "1.line.43_day": PART_IV,
-      "1.line.43_year": PART_IV,
-      "1.line.44a_business_miles": PART_IV,
-      "1.line.44b_commuting_miles": PART_IV,
-      "1.line.44c_other_miles": PART_IV,
-      "1.line.45_personal_use_off_duty_yes": PART_IV,
-      "1.line.45_personal_use_off_duty_no": PART_IV,
-      "1.line.46_another_vehicle_available_yes": PART_IV,
-      "1.line.46_another_vehicle_available_no": PART_IV,
-      "1.line.47a_evidence_supports_deduction_yes": PART_IV,
-      "1.line.47a_evidence_supports_deduction_no": PART_IV,
-      "1.line.47b_evidence_written_yes": PART_IV,
-      "1.line.47b_evidence_written_no": PART_IV,
-      "1.line.48_description_1": PART_V,
-      "1.line.48_amount_1": PART_V,
-      "1.line.48_description_2": PART_V,
-      "1.line.48_amount_2": PART_V,
-      "1.line.48_description_3": PART_V,
-      "1.line.48_amount_3": PART_V,
-      "1.line.48_description_4": PART_V,
-      "1.line.48_amount_4": PART_V,
-      "1.line.48_description_5": PART_V,
-      "1.line.48_amount_5": PART_V,
-      "1.line.48_description_6": PART_V,
-      "1.line.48_amount_6": PART_V,
-      "1.line.48_description_7": PART_V,
-      "1.line.48_amount_7": PART_V,
-      "1.line.48_description_8": PART_V,
-      "1.line.48_amount_8": PART_V,
-      "1.line.48_description_9": PART_V,
-      "1.line.48_amount_9": PART_V,
-      "1.line.48": PART_V,
       "0.line.f_other_specify": OTHER_METHOD,
       "0.line.1_statutory_employee": STATUTORY_EMPLOYEE,
       "0.line.4": COST_OF_GOODS_SOLD,

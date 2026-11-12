@@ -151,7 +151,28 @@ const isOtherExpense = (entry: Record<string, unknown>) =>
   typeof entry.amount === "number" &&
   isAmount(entry.amount);
 
+const isDigits = (part: string, length: number): boolean =>
+  part.length === length && [...part].every((char) => char >= "0" && char <= "9");
+
+/* Undefined, or a YYYY-MM-DD date (Part IV line 43 splits it into its boxes). */
+const isOptionalIsoDate = (value: unknown): boolean => {
+  if (value === undefined) return true;
+  if (typeof value !== "string") return false;
+  const [year, month, day, ...rest] = value.split("-");
+  return (
+    rest.length === 0 &&
+    isDigits(year ?? "", 4) &&
+    isDigits(month ?? "", 2) &&
+    isDigits(day ?? "", 2) &&
+    Number(month) >= 1 &&
+    Number(month) <= 12 &&
+    Number(day) >= 1 &&
+    Number(day) <= 31
+  );
+};
+
 const isVehicle = (entry: Record<string, unknown>) =>
+  isOptionalIsoDate(entry.placedInService) &&
   typeof entry.businessMiles === "number" &&
   isAmount(entry.businessMiles) &&
   isAmount(entry.commutingMiles) &&
