@@ -88,7 +88,7 @@ export function selfEmploymentIncome(info: ScheduleSEFilingInfo): number | undef
 }
 
 /* The 9 digits of an SSN as entered, or undefined when it is missing or malformed. */
-function ssnOf(raw: string | undefined): SSN | undefined {
+export function ssnOf(raw: string | undefined): SSN | undefined {
   if (!raw) return undefined;
   try {
     return ssn(raw);

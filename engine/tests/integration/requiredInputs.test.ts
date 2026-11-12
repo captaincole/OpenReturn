@@ -43,6 +43,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
   [
+    /^dependent_care\.(provider|qualifying_person)\.[^.]+$/,
+    "each fact is a whole care provider or qualifying person (Form 2441 lines 1 and 2); " +
+      "whether one exists is Cade's question",
+  ],
+  [
     /^gambling\.losses$/,
     "an answer Cade records only when the user reports gambling losses (Schedule A line 16)",
   ],
