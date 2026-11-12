@@ -10,6 +10,7 @@ import {
   isMiscIncomeFactKey,
   isW2FactKey,
 } from "./facts/index.js";
+import { resolve6251Info } from "./federal/6251/resolveInfo.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
@@ -346,8 +347,10 @@ function scheduleCTotal({
 
 /*
  * Default: required when Schedule SE (line 4), Form 8959 (line 11), Form 8960
- * (line 12) or Schedule H (line 9) is filed. While none is filed and one is still
- * undecided, Schedule 2 is undecided too.
+ * (line 12), Schedule H (line 9) or Form 6251 (line 2) is filed. While none is
+ * filed and one is still undecided, Schedule 2 is undecided too. KNOWN GAP: the
+ * resolver cannot see Form 6251 line 11, so a filed Form 6251 with no AMT still
+ * files Schedule 2 with 0 on lines 2 and 3.
  */
 export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInfo {
   const feeders = [
@@ -355,6 +358,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
     resolve8959Info(inputs).mustFile?.["form-8959"]?.value,
     resolve8960Info(inputs).mustFile?.["form-8960"]?.value,
     resolveScheduleHInfo(inputs).mustFile?.["schedule-h"]?.value,
+    resolve6251Info(inputs).mustFile?.["form-6251"]?.value,
   ];
   const required = feeders.some((value) => value === true);
   const open = !required && feeders.some((value) => value === undefined);
@@ -364,7 +368,7 @@ export function resolveSchedule2Info(inputs: ResolverInputs): Schedule2FilingInf
       ? []
       : [
           {
-            rule: "fallback: Schedule SE (line 4), Form 8959 (line 11), Form 8960 (line 12), or Schedule H (line 9) is required",
+            rule: "fallback: Schedule SE (line 4), Form 8959 (line 11), Form 8960 (line 12), Schedule H (line 9), or Form 6251 (line 2) is required",
             value: required,
           },
         ],
