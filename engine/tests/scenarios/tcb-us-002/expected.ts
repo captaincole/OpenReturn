@@ -149,12 +149,35 @@ const FORM_4684: Partial<ExpectedResults> = {
   ],
 };
 
+/* IRS1040ScheduleEIC QualifyingChildInformation: the key prints the relationship code NEPHEW. */
+const SCHEDULE_EIC: Partial<ExpectedResults> = {
+  engineFields: {
+    "schedule-eic.0.line.6_months_lived_in_us_child_1": 12, // MonthsChildLivedWithYouCnt
+  },
+  renderedText: {
+    "schedule-eic.0.line.1_name_child_1": "Kiddo Ben", // PersonFirstNm, PersonLastNm
+    "schedule-eic.0.line.2_ssn_child_1": "900-45-6789", // QualifyingChildSSN
+    "schedule-eic.0.line.3_birth_year_digit_1_child_1": "2", // ChildBirthYr 2021
+    "schedule-eic.0.line.3_birth_year_digit_2_child_1": "0",
+    "schedule-eic.0.line.3_birth_year_digit_3_child_1": "2",
+    "schedule-eic.0.line.3_birth_year_digit_4_child_1": "1",
+    "schedule-eic.0.line.5_relationship_child_1": "Nephew", // ChildRelationshipCd NEPHEW
+  },
+  renderedBlank: [
+    // Born after 2006 and younger than the taxpayer: the schedule skips lines 4a and 4b.
+    "schedule-eic.0.line.4a_student_under_24_yes_child_1",
+    "schedule-eic.0.line.4a_student_under_24_no_child_1",
+    "schedule-eic.0.line.1_name_child_2",
+  ],
+};
+
 const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   "form-4684": FORM_4684,
   "form-4952": FORM_4952,
   "schedule-a": SCHEDULE_A,
   "schedule-1": SCHEDULE_1,
   "schedule-8812": SCHEDULE_8812,
+  "schedule-eic": SCHEDULE_EIC,
   "form-1040": FORM_1040,
 };
 

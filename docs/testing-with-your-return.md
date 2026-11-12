@@ -40,9 +40,12 @@ stock sale. A third, married filing jointly in California, itemizes on
 the CA return (Schedule CA Part II, FTB 3526), takes the dependent
 exemption credit, owes the CA alternative minimum tax on an incentive
 stock option exercise (Schedule P) and the early-distribution tax on a
-1099-R (FTB 3805P). Head of household has one federal-only TaxCalcBench
-scenario: mortgage interest on a Form 1098, investment interest, and the
-alternative minimum tax on an incentive stock option exercise (Form 6251).
+1099-R (FTB 3805P). Head of household has two federal-only TaxCalcBench
+scenarios: one with mortgage interest on a Form 1098, investment interest,
+and the alternative minimum tax on an incentive stock option exercise
+(Form 6251); one with casualty losses (Form 4684), a qualified disaster
+loss that raises the standard deduction (Schedule A line 16), the earned
+income credit (Schedule EIC) and the additional child tax credit.
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
 1099-SA, 1098, SSA-1099, W-2G, 1099-K, 1099-NEC, a W-2 you issued to a household employee

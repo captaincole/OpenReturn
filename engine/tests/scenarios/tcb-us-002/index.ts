@@ -5,6 +5,7 @@
  * earned income credit and the additional child tax credit. Federal only.
  */
 
+import { lockedGoldenPath } from "../../helpers/scenarioPdfName.js";
 import type { Scenario } from "../../types.js";
 import { tcbUs002Decisions } from "./decisions.js";
 import { tcbUs002Expected } from "./expected.js";
@@ -16,6 +17,7 @@ const FORM_IDS = [
   "schedule-a",
   "schedule-1",
   "schedule-8812",
+  "schedule-eic",
   "form-1040",
 ];
 
@@ -27,9 +29,9 @@ export const tcbUs002Scenario: Scenario = {
   userId: TCB_US_002_USER_ID,
   facts: tcbUs002Facts,
   decisions: tcbUs002Decisions,
-  skip: true,
   forms: FORM_IDS.map((formId) => ({
     formId,
     expected: tcbUs002Expected(formId),
+    goldenPdfPath: lockedGoldenPath("tcb-us-002", formId),
   })),
 };

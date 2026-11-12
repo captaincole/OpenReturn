@@ -8,15 +8,18 @@ import {
   AMT_KEYS,
   CAPITAL_LOSS_CARRYOVER_KEYS,
   CA_MISC_DEDUCTION_KEYS,
+  EIC_KEYS,
   GAMBLING_KEYS,
   HOME_ENERGY_KEYS,
   HOUSEHOLD_EMPLOYMENT_KEYS,
   HSA_COVERAGE_KEYS,
   INVESTMENT_INTEREST_KEYS,
   MORTGAGE_KEYS,
+  OTHER_INCOME_KEYS,
   PRIOR_YEAR_KEYS,
   SPOUSE_KEYS,
   isBusinessFactKey,
+  isCasualtyEventFactKey,
   isDependentFact,
   isDividendFact,
   isEnergyInvoiceFact,
@@ -62,6 +65,7 @@ const DOCUMENT_FACTS = [
   (fact: TaxFactRow) => isPaymentTransactionsFactKey(fact.key),
   (fact: TaxFactRow) => isNonemployeeCompensationFactKey(fact.key),
   (fact: TaxFactRow) => isBusinessFactKey(fact.key),
+  (fact: TaxFactRow) => isCasualtyEventFactKey(fact.key),
 ];
 
 /* support.test.ts fails when a resolver reads a key that is missing here. */
@@ -75,6 +79,9 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(CA_MISC_DEDUCTION_KEYS),
   ...Object.values(CAPITAL_LOSS_CARRYOVER_KEYS),
   GAMBLING_KEYS.winningsNotOnW2G,
+  GAMBLING_KEYS.losses,
+  ...Object.values(EIC_KEYS),
+  ...Object.values(OTHER_INCOME_KEYS),
   SPOUSE_KEYS.livedApartAllYear,
   SPOUSE_KEYS.livedApartLastSixMonths,
   SPOUSE_KEYS.legallySeparatedApartAtYearEnd,
@@ -125,7 +132,7 @@ const OUT_OF_SCOPE: { key: string; supported: (v: unknown) => boolean; detail: s
       value === "married_filing_jointly" ||
       value === "head_of_household",
     detail:
-      "Only single filers are tested (married filing separately: one unverified scenario; jointly: one federal-only scenario; head of household: one federal-only scenario).",
+      "Only single filers are tested (married filing separately: one unverified scenario; jointly: one federal-only scenario; head of household: two federal-only scenarios).",
   },
   {
     key: "decisions.scope.ca_residency",
