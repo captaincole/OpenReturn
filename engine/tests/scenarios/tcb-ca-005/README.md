@@ -47,4 +47,4 @@ Forms checked: Form 540, Schedule CA (540), Schedule P (540), FTB 3526 and FTB 3
 
 ## Federal lines the engine does not compute for this return
 
-The case has no federal key, so these are not checked, but a filer like this one would need them: the federal alternative minimum tax on the ISO spread (Form 6251, 1040 line 17) and the 10% additional tax on the early distribution (Schedule 2 line 8). Cade says so when it records the answers (#92).
+The case has no federal key, so these are not checked, but a filer like this one would need them: the federal alternative minimum tax on the ISO spread (Form 6251, 1040 line 17) and the 10% additional tax on the early distribution (Schedule 2 line 8). The engine fills Form 6251 only when `decisions.scope.must_file_6251` is recorded; this scenario does not record it, so its federal values stay as they are. Cade still says the 10% early-distribution tax is not computed (#92).
