@@ -19,6 +19,7 @@ const FORM_IDS = [
   "form-4952",
   "schedule-a",
   "form-8960",
+  "form-6251",
   "schedule-2",
   "schedule-8812",
   "form-1040",
