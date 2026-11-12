@@ -73,7 +73,7 @@ src/
 ├── formSpec.ts       FormSpec shape shared by jurisdiction registries
 ├── registry.ts       composes federal + state into the global FORMS list
 ├── facts/            fact vocabulary: row shapes + per-kind key conventions
-├── data/             federal tables (rate schedules, tax table, std deduction)
+├── data/             federal tables (rate schedules, tax table, std deduction, EIC table)
 ├── worksheets/       IRS/FTB worksheets as pure functions (QDCG, 5695 line 31, …)
 ├── deductions/       the itemized-deductions catalog, item states and the itemize-or-standard comparison (#92); the totals are Schedule A line 17 and Schedule CA line 29 from a pass as if the return itemizes
 ├── render/           PDF fill (fillFromCatalog + hand-verified widget overrides)
