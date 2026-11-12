@@ -1,0 +1,606 @@
+{
+  "form": {
+    "formId": "schedule-eic",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Earned Income Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-eic.0.header.name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 469,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-eic.0.line.1_name_child_1",
+      "label": "Line 1 — Child's name (first name and last name), Child 1",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 209.8,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.1_name_child_2",
+      "label": "Line 1 — Child's name (first name and last name), Child 2",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 332.2,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.1_name_child_3",
+      "label": "Line 1 — Child's name (first name and last name), Child 3",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 454.6,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.2_ssn_child_1",
+      "label": "Line 2 — Child's SSN, Child 1",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 209.8,
+        "y": 347.969
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-eic.0.line.2_ssn_child_2",
+      "label": "Line 2 — Child's SSN, Child 2",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 332.2,
+        "y": 347.969
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-eic.0.line.2_ssn_child_3",
+      "label": "Line 2 — Child's SSN, Child 3",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 454.6,
+        "y": 347.969
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_1_child_1",
+      "label": "Line 3 — Child's year of birth, digit 1 of 4, Child 1",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Year1_ReadOrder[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 244.8,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_2_child_1",
+      "label": "Line 3 — Child's year of birth, digit 2 of 4, Child 1",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Year1_ReadOrder[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_3_child_1",
+      "label": "Line 3 — Child's year of birth, digit 3 of 4, Child 1",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Year1_ReadOrder[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_4_child_1",
+      "label": "Line 3 — Child's year of birth, digit 4 of 4, Child 1",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Year1_ReadOrder[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_1_child_2",
+      "label": "Line 3 — Child's year of birth, digit 1 of 4, Child 2",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Year2_ReadOrder[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_2_child_2",
+      "label": "Line 3 — Child's year of birth, digit 2 of 4, Child 2",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Year2_ReadOrder[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 388.8,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_3_child_2",
+      "label": "Line 3 — Child's year of birth, digit 3 of 4, Child 2",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Year2_ReadOrder[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_4_child_2",
+      "label": "Line 3 — Child's year of birth, digit 4 of 4, Child 2",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Year2_ReadOrder[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_1_child_3",
+      "label": "Line 3 — Child's year of birth, digit 1 of 4, Child 3",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_2_child_3",
+      "label": "Line 3 — Child's year of birth, digit 2 of 4, Child 3",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 511.2,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_3_child_3",
+      "label": "Line 3 — Child's year of birth, digit 3 of 4, Child 3",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.3_birth_year_digit_4_child_3",
+      "label": "Line 3 — Child's year of birth, digit 4 of 4, Child 3",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 329.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_yes_child_1",
+      "label": "Line 4a — Was the child under age 24 at the end of 2025, a student, and younger than you (or your spouse if filing jointly)? Yes, Child 1",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4a_Child1_ReadOrder[0].Yes_ReadOrder[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 216,
+        "y": 266.468
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_no_child_1",
+      "label": "Line 4a — Was the child under age 24 at the end of 2025, a student, and younger than you (or your spouse if filing jointly)? No, Child 1",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4a_Child1_ReadOrder[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 277.2,
+        "y": 266.468
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_yes_child_2",
+      "label": "Line 4a — Was the child under age 24 at the end of 2025, a student, and younger than you (or your spouse if filing jointly)? Yes, Child 2",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4a_Child2_ReadOrder[0].Yes_ReadOrder[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 266.468
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_no_child_2",
+      "label": "Line 4a — Was the child under age 24 at the end of 2025, a student, and younger than you (or your spouse if filing jointly)? No, Child 2",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4a_Child2_ReadOrder[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 399.6,
+        "y": 266.468
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_yes_child_3",
+      "label": "Line 4a — Was the child under age 24 at the end of 2025, a student, and younger than you (or your spouse if filing jointly)? Yes, Child 3",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4a_Child3_Yes_ReadOrder[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 266.468
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4a_student_under_24_no_child_3",
+      "label": "Line 4a — Was the child under age 24 at the end of 2025, a student, and younger than you (or your spouse if filing jointly)? No, Child 3",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 522,
+        "y": 266.468
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_yes_child_1",
+      "label": "Line 4b — Was the child permanently and totally disabled during any part of 2025? Yes, Child 1",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4b_Child1_ReadOrder[0].Yes_ReadOrder[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 216,
+        "y": 224.467
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_no_child_1",
+      "label": "Line 4b — Was the child permanently and totally disabled during any part of 2025? No, Child 1",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4b_Child1_ReadOrder[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 277.2,
+        "y": 224.467
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_yes_child_2",
+      "label": "Line 4b — Was the child permanently and totally disabled during any part of 2025? Yes, Child 2",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4b_Child2_ReadOrder[0].Yes_ReadOrder[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 224.467
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_no_child_2",
+      "label": "Line 4b — Was the child permanently and totally disabled during any part of 2025? No, Child 2",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4b_Child2_ReadOrder[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 399.6,
+        "y": 224.467
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_yes_child_3",
+      "label": "Line 4b — Was the child permanently and totally disabled during any part of 2025? Yes, Child 3",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line4b_Child3_Yes_ReadOrder[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 224.467
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.4b_permanently_disabled_no_child_3",
+      "label": "Line 4b — Was the child permanently and totally disabled during any part of 2025? No, Child 3",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 522,
+        "y": 224.467
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.5_relationship_child_1",
+      "label": "Line 5 — Child's relationship to you (for example, son, daughter, grandchild, niece, nephew, eligible foster child, etc.), Child 1",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 209.8,
+        "y": 149.966
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.5_relationship_child_2",
+      "label": "Line 5 — Child's relationship to you (for example, son, daughter, grandchild, niece, nephew, eligible foster child, etc.), Child 2",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 332.2,
+        "y": 149.966
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.5_relationship_child_3",
+      "label": "Line 5 — Child's relationship to you (for example, son, daughter, grandchild, niece, nephew, eligible foster child, etc.), Child 3",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 454.6,
+        "y": 149.966
+      }
+    },
+    {
+      "fieldId": "schedule-eic.0.line.6_months_lived_in_us_child_1",
+      "label": "Line 6 — Number of months child lived with you in the United States during 2025, Child 1",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line6_Child1_ReadOrder[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 65.97
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "schedule-eic.0.line.6_months_lived_in_us_child_2",
+      "label": "Line 6 — Number of months child lived with you in the United States during 2025, Child 2",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line6_Child2_ReadOrder[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 352.8,
+        "y": 65.97
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "schedule-eic.0.line.6_months_lived_in_us_child_3",
+      "label": "Line 6 — Number of months child lived with you in the United States during 2025, Child 3",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 65.97
+      },
+      "maxLength": 2
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/schedule-eic/blank.pdf",
+    "ingestedAt": "2026-11-12T03:27:37.997Z",
+    "totalFields": 38,
+    "skipped": 0,
+    "catalogEntries": 38
+  }
+}
