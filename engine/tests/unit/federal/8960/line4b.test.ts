@@ -1,6 +1,8 @@
 /*
  * Source: irs-8960-inst-2025::sec::line-4b-adjustment-for-net-income-or-loss::b01, ::b02
- * (nonpassive rental income or loss that rises to a section 162 trade or business).
+ * (nonpassive rental income or loss that rises to a section 162 trade or business), and
+ * irs-8960-inst-2025::sec::special-rules-for-certain-rental-income::b01, ::b02 (a
+ * self-rental's recharacterized net income).
  */
 
 import { describe, expect, it } from "vitest";
@@ -80,6 +82,45 @@ describe("Form 8960 line 4b rental adjustments", () => {
   it("leaves a passive rental in net investment income", () => {
     expect(nonpassiveRentalAdjustments(scheduleE(21000), [property(true)])).toEqual([]);
   });
+
+  it("takes a self-rental's net income out with no trade-or-business answer", () => {
+    const selfRental = property(true, { propertyType: "self_rental" });
+    expect(nonpassiveRentalAdjustments(scheduleE(10000), [selfRental])).toEqual([-10000]);
+  });
+
+  it("leaves a self-rental's net loss in net investment income", () => {
+    const selfRental = property(true, { propertyType: "self_rental" });
+    expect(nonpassiveRentalAdjustments(scheduleE(-2000, 2000), [selfRental])).toEqual([]);
+  });
+
+  it("waits on a self-rental's income over a prior-year loss", () => {
+    const selfRental = property(true, {
+      propertyType: "self_rental",
+      priorYearUnallowedLoss: 3000,
+    });
+    expect(nonpassiveRentalAdjustments(scheduleE(10000), [selfRental])).toBeUndefined();
+  });
+
+  it("leaves a self-rental's income under its prior-year loss in net investment income", () => {
+    const selfRental = property(true, {
+      propertyType: "self_rental",
+      priorYearUnallowedLoss: 12000,
+    });
+    expect(nonpassiveRentalAdjustments(scheduleE(10000), [selfRental])).toEqual([]);
+  });
+
+  it("reads a nonpassive self-rental's trade-or-business answer, as any nonpassive rental", () => {
+    const selfRental = property(false, { propertyType: "self_rental" });
+    expect(nonpassiveRentalAdjustments(scheduleE(10000), [selfRental])).toBeUndefined();
+    const business = property(false, { propertyType: "self_rental", tradeOrBusiness: false });
+    expect(nonpassiveRentalAdjustments(scheduleE(10000), [business])).toEqual([]);
+  });
+
+  it("waits while a self-rental's line 21 is blank", () => {
+    const selfRental = property(true, { propertyType: "self_rental" });
+    const blank = {} as unknown as FormAccessor<Form8960>;
+    expect(nonpassiveRentalAdjustments(blank, [selfRental])).toBeUndefined();
+  });
 });
 
 describe("Form 8960 asks the trade-or-business answer", () => {
@@ -108,5 +149,9 @@ describe("Form 8960 asks the trade-or-business answer", () => {
 
   it("does not ask for a passive rental", () => {
     expect(missing(false)).not.toContain(key);
+  });
+
+  it("does not ask for a self-rental's net income", () => {
+    expect(missing(false, { propertyType: "self_rental" })).not.toContain(key);
   });
 });

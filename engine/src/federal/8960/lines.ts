@@ -1,5 +1,6 @@
 import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, sum } from "../../money.js";
+import { isSelfRentalNetIncome } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8960 } from "./types.js";
 
@@ -52,7 +53,12 @@ export function rentalsWithoutTradeOrBusinessAnswer(properties: RentalProperty[]
 /*
  * Line 4b: each section 162 nonpassive property's Schedule E amount as it reaches
  * Schedule 1 line 5 (line 21 income, or the line 22 deductible loss), income as a
- * negative and loss as a positive. Undefined while an answer or a line waits.
+ * negative and loss as a positive (b01). A self-rental's recharacterized net income
+ * counts with no section 162 answer: it is treated as derived in the ordinary course
+ * of a trade or business (irs-8960-inst-2025::sec::special-rules-for-certain-rental-income::b01,
+ * ::b02; b02, item 2). No fact marks a lessee business that trades financial
+ * instruments or commodities (special-rules-for-certain-rental-income::b02).
+ * Undefined while an answer or a line waits.
  */
 export function nonpassiveRentalAdjustments(
   form: FormAccessor<Form8960>,
@@ -60,13 +66,18 @@ export function nonpassiveRentalAdjustments(
 ): number[] | undefined {
   const adjustments: number[] = [];
   for (const property of properties) {
-    const counts = section162Nonpassive(property);
+    const line21 = form[`schedule-e.0.line.21_income_or_loss_${property.column}`];
+    const income = typeof line21 === "number" ? line21 : undefined;
+    // A passive self-rental only: a nonpassive one keeps the section 162 answer.
+    const recharacterized =
+      property.passive === true ? isSelfRentalNetIncome(property.value, income) : false;
+    if (recharacterized === undefined) return undefined;
+    const counts = recharacterized || section162Nonpassive(property);
     if (counts === undefined) return undefined;
     if (!counts) continue;
-    // A former passive activity's allowed prior-year loss is not modeled (b01, last bullet).
+    // A prior-year loss allowed this year (b01, last bullet; a self-rental's too) is not modeled.
     if ((property.value.priorYearUnallowedLoss ?? 0) > 0) return undefined;
-    const income = form[`schedule-e.0.line.21_income_or_loss_${property.column}`];
-    if (typeof income !== "number") return undefined;
+    if (income === undefined) return undefined;
     // A royalty has no line 22 (irs-1040se-inst-2025::sec::line-22::b01): its loss is on line 21.
     if (income >= 0 || property.value.propertyType === "royalties") {
       adjustments.push(0 - income);
