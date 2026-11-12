@@ -2,6 +2,7 @@ import {
   CAPITAL_LOSS_CARRYOVER_KEYS,
   CA_MISC_DEDUCTION_KEYS,
   GAMBLING_KEYS,
+  NET_INVESTMENT_INCOME_KEYS,
   SPOUSE_KEYS,
   businessesOnReturn,
   getGamblingWinningsFacts,
@@ -267,15 +268,26 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
   const allocableTax = num(inputs, "state_local_tax.allocable_to_investment_income");
   const itemizes = resolveScheduleAInfo(inputs).mustFile?.["schedule-a"]?.value === true;
   const asked = resolution.value === true && itemizes;
+  // Line 10 (…::sec::line-10-additional-modifications::b01): asked of every filer.
+  const additionalModifications = num(inputs, NET_INVESTMENT_INCOME_KEYS.additionalModifications);
+  const files = resolution.value === true;
   return {
     mustFile: { "form-8960": resolution },
     missingInputs: {
-      "form-8960": asked
-        ? missingInputs({ "state_local_tax.allocable_to_investment_income": allocableTax })
-        : [],
+      "form-8960": [
+        ...(asked
+          ? missingInputs({ "state_local_tax.allocable_to_investment_income": allocableTax })
+          : []),
+        ...(files
+          ? missingInputs({
+              [NET_INVESTMENT_INCOME_KEYS.additionalModifications]: additionalModifications,
+            })
+          : []),
+      ],
     },
     scheduleCNonpassive,
     stateLocalTaxAllocableToInvestmentIncome: allocableTax,
+    additionalModifications,
   };
 }
 
