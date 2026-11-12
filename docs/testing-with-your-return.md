@@ -53,6 +53,11 @@ alternative minimum tax on an incentive stock option exercise (Form
 6251); one with casualty losses (Form 4684), a qualified disaster loss
 that raises the standard deduction (Schedule A line 16), the earned
 income credit (Schedule EIC) and the additional child tax credit.
+Qualifying surviving spouse has one federal-only TaxCalcBench scenario:
+a filer under 65 retired on disability, with a disability pension on
+line 1h, forced itemizing with general sales tax, child and dependent
+care for a disabled adult son (Form 2441), the credit for the elderly
+or the disabled (Schedule R) and the earned income credit.
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
 1099-SA, 1098, SSA-1099, W-2G, 1099-K, 1099-NEC, 1095-A, a W-2 you issued to a household employee

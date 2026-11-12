@@ -112,10 +112,19 @@ export function isDisabilityPension(distribution: RetirementDistributionFactValu
   );
 }
 
+const DISABILITY_PREFIX = "retirement.disability_pension.";
+const DISABILITY_SUFFIX = ".before_minimum_retirement_age";
+
 /* The answer for one disability pension: true when received before the employer's minimum retirement age. */
 export function makeDisabilityBeforeMinimumRetirementAgeKey(
   payerSlug: string,
   distributionId: string,
 ): string {
-  return `retirement.disability_pension.${payerSlug}.${distributionId}.before_minimum_retirement_age`;
+  return `${DISABILITY_PREFIX}${payerSlug}.${distributionId}${DISABILITY_SUFFIX}`;
+}
+
+export function isDisabilityBeforeMinimumRetirementAgeKey(key: string): boolean {
+  if (!key.startsWith(DISABILITY_PREFIX) || !key.endsWith(DISABILITY_SUFFIX)) return false;
+  const ids = key.slice(DISABILITY_PREFIX.length, key.length - DISABILITY_SUFFIX.length);
+  return ids.split(".").length === 2 && !ids.split(".").includes("");
 }
