@@ -7,6 +7,7 @@ import { atLeast, roundDollars, sum } from "../../money.js";
 import { needsScheduleA, partIBusinesses } from "../8995-a/lines.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
 import { businessQbi, rentalQbi } from "../qbi/lines.js";
+import { namesOnReturn } from "../returnNames.js";
 import type { Form8995AScheduleCFilingInfo } from "./filingInfo.js";
 import type { Form8995AScheduleC } from "./types.js";
 
@@ -75,21 +76,10 @@ function qbiIn(form: Read, info: Info, row: Row): number | undefined {
   return business && qbiBeforeNetting(form, info, business);
 }
 
-// MANUAL EDIT: a joint return names both spouses, as Schedule E and Form 8582 do.
-function names(info: Info) {
-  const { taxpayerFirstName, taxpayerLastName, spouseFirstName, spouseLastName } = info;
-  if (!taxpayerFirstName || !taxpayerLastName) return undefined;
-  const taxpayer = `${taxpayerFirstName} ${taxpayerLastName}`;
-  if (info.filingStatus !== "married_filing_jointly") return taxpayer;
-  return spouseFirstName && spouseLastName
-    ? `${taxpayer} & ${spouseFirstName} ${spouseLastName}`
-    : undefined;
-}
-
 export function register(): void {
   defineForm<Form8995AScheduleC, Form8995AScheduleCFilingInfo>("form-8995-a-schedule-c", {
     bindings: {
-      "0.header.name": (_, info) => names(info),
+      "0.header.name": (_, info) => namesOnReturn(info),
       "0.header.taxpayer_id": (_, info) => info.taxpayerSSN,
       // MANUAL EDIT: one row per Form 8995-A Part I business, in its column order.
       "0.line.1_name_a": (form, info) => rowName(form, info, "a"),

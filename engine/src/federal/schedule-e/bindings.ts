@@ -6,6 +6,7 @@ import { defineForm } from "../../defineForm.js";
 import type { RentalFactValue, RentalPropertyType } from "../../facts/index.js";
 import { rentalOwnerOf } from "../../facts/index.js";
 import { SSN } from "../../values.js";
+import { namesOnReturn } from "../returnNames.js";
 import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
 import { otherExpenseDescription, partIColumnBindings } from "./lines.js";
 import { totalBindings } from "./totals.js";
@@ -75,21 +76,10 @@ function otherDescription(info: ScheduleEFilingInfo) {
     .join("; ");
 }
 
-// A joint return names both spouses; Part I holds both spouses' properties.
-function names(info: ScheduleEFilingInfo) {
-  const { taxpayerFirstName, taxpayerLastName, spouseFirstName, spouseLastName } = info;
-  if (!taxpayerFirstName || !taxpayerLastName) return undefined;
-  const taxpayer = `${taxpayerFirstName} ${taxpayerLastName}`;
-  if (info.filingStatus !== "married_filing_jointly") return taxpayer;
-  return spouseFirstName && spouseLastName
-    ? `${taxpayer} & ${spouseFirstName} ${spouseLastName}`
-    : undefined;
-}
-
 export function register(): void {
   defineForm<ScheduleE, ScheduleEFilingInfo>("schedule-e", {
     bindings: {
-      "0.header.name": (_, info) => names(info),
+      "0.header.name": (_, info) => namesOnReturn(info),
       // A joint return shows the SSN listed first on Form 1040, the taxpayer's.
       "0.header.ssn": (_, info) => info.taxpayerSSN,
       "0.line.a_payments_require_1099_yes": (_, info) => yes(info.rentalPaymentsRequire1099),
@@ -122,7 +112,7 @@ export function register(): void {
       "0.line.19_other_description": (_, info) => otherExpenseDescription(info),
       // MANUAL EDIT: lines 22–26, 41 and 43 (totals.ts).
       ...totalBindings(),
-      "1.header.name": (_, info) => names(info),
+      "1.header.name": (_, info) => namesOnReturn(info),
       "1.header.ssn": (_, info) => info.taxpayerSSN,
     },
     formatters: {

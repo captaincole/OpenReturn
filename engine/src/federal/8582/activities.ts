@@ -10,7 +10,7 @@
  */
 
 import type { RentalFactValue } from "../../facts/index.js";
-import { numberOrBlank, roundDollars } from "../../money.js";
+import { numberOrBlank, roundDollars, sum } from "../../money.js";
 import { isRentalActivity } from "../rentals/passive.js";
 import type { PropertyColumn, RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
@@ -177,6 +177,21 @@ export function passiveActivities(
 ): PassiveActivities | undefined {
   const parts = activitiesByPart(info, line21);
   return parts?.part4 && parts.part5 ? { part4: parts.part4, part5: parts.part5 } : undefined;
+}
+
+/*
+ * One Schedule E column's loss on the form: columns (b) and (c) of its Part IV
+ * and Part V rows (a prior-year loss can sit in Part V). Undefined when the
+ * column has no row: it is not a passive activity on Form 8582.
+ */
+export function activityLoss(
+  activities: PassiveActivities,
+  column: PropertyColumn,
+): number | undefined {
+  const own = [...activities.part4, ...activities.part5].filter((row) => row.column === column);
+  return own.length === 0
+    ? undefined
+    : sum(...own.map((row) => row.netLoss + row.priorUnallowedLoss));
 }
 
 /* Columns (d) and (e): (a) less (b) and (c). Positive is an overall gain. */
