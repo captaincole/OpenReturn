@@ -89,6 +89,17 @@ export const recordRental = createTool({
     priorYearUnallowedLoss: amount
       .optional()
       .describe("Losses not allowed in earlier years (last year's Form 8582); 0 if none"),
+    activeParticipationWhenLossArose: z
+      .boolean()
+      .optional()
+      .describe(
+        "With a prior-year unallowed loss: they also actively participated in the year it arose",
+      ),
+    averageCustomerUseDays: z
+      .number()
+      .nonnegative()
+      .optional()
+      .describe("A short-term or vacation rental: the average stay of a customer, in days"),
     disposedOfEntirely: z
       .boolean()
       .optional()
