@@ -1,12 +1,9 @@
-import { EIC_KEYS, SPOUSE_KEYS, getDependentFacts, type DependentFact } from "../../facts/index.js";
+import { EIC_KEYS } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
-import { missingInputs, resolveMustFile, text, type ResolverInputs } from "../../resolverInputs.js";
+import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { earnedIncomeMayBeUnderLimit } from "./eicAnswers.js";
 import type { ScheduleEICFilingInfo } from "./filingInfo.js";
-import { isEicQualifyingChild } from "./qualifyingChild.js";
-
-/* Resolvers see no tax year; Schedule 8812 pins its age rules to 2025 the same way. */
-const TAX_YEAR = 2025;
+import { eicQualifyingChildren } from "./qualifyingChild.js";
 
 /*
  * irs-1040-inst-2025::sec::what-is-the-eic::b01: "If you have at least one child
@@ -29,15 +26,9 @@ const TAX_YEAR = 2025;
 export function resolveScheduleEICInfo(inputs: ResolverInputs): ScheduleEICFilingInfo {
   const status = filingStatusOf(inputs);
   const joint = status === "married_filing_jointly";
-  const filerDobs = [
-    text(inputs, "identity.dob"),
-    ...(joint ? [text(inputs, SPOUSE_KEYS.dob)] : []),
-  ];
-  const children: DependentFact[] = getDependentFacts(inputs.facts).filter(
-    (fact) => isEicQualifyingChild(fact.dependent, filerDobs, TAX_YEAR) === true,
-  );
-  const withSsn = children.filter((child) => child.dependent.ssn !== undefined).length;
-  const possible = children.length > 0 && earnedIncomeMayBeUnderLimit(inputs, withSsn, joint);
+  const { children, withSsn } = eicQualifyingChildren(inputs);
+  const possible =
+    children.length > 0 && earnedIncomeMayBeUnderLimit(inputs, withSsn.length, joint);
   const answer = (key: string) => inputs.factByKey.get(key) as boolean | undefined;
   const answers = {
     [EIC_KEYS.nonresidentAlien]: answer(EIC_KEYS.nonresidentAlien),
