@@ -1,5 +1,6 @@
 import {
   businessesOnReturn,
+  type HomeOfficeSimplified,
   unlinkedNonemployeeCompensationKeys,
   unlinkedPaymentTransactionsKeys,
 } from "../../facts/index.js";
@@ -52,12 +53,13 @@ export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInf
         Object.fromEntries([
           ...malformedKeys.map((key) => [key, undefined]),
           ...unlinkedKeys.map((key) => [key, undefined]),
-          // Line 5 waits for "sells goods" (Part III) and line 31 for line G: ask for the fact again.
+          // MANUAL EDIT: line 5 waits for "sells goods", line 31 for line G, line 30 for the home office answers.
           ...businesses
             .filter(
               (business) =>
                 business.value.sellsGoods === undefined ||
-                business.value.materiallyParticipated === undefined,
+                business.value.materiallyParticipated === undefined ||
+                homeOfficeOpen(business.value.homeOffice),
             )
             .map((business) => [business.key, undefined]),
         ]),
@@ -65,6 +67,20 @@ export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInf
     },
     businesses: businesses.map((business) => business.value),
   };
+}
+
+/*
+ * Simplified Method Worksheet line 1 needs whether all gross income is from the
+ * home use (irs-1040sc-inst-2025::sec::line-1-2::b01); line 2 needs the same-area
+ * answer, and the average monthly area when the area changed (line-2-3::b06).
+ */
+function homeOfficeOpen(office: HomeOfficeSimplified | undefined): boolean {
+  if (office === undefined) return false;
+  return (
+    office.allGrossIncomeFromHome === undefined ||
+    office.sameAreaAllYear === undefined ||
+    (office.sameAreaAllYear === false && office.averageMonthlySquareFeet === undefined)
+  );
 }
 
 /* Schedule SE and Form 8995-A wait while Schedule C's must-file answer is open. */

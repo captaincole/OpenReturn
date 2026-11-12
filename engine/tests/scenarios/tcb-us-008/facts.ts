@@ -96,8 +96,13 @@ const consulting: BusinessFactValue = {
       evidenceIsWritten: true,
     },
   ],
-  // Not in the answers: sameAreaAllYear. The case gives one area for the year.
-  homeOffice: { homeSquareFeet: 2950, businessSquareFeet: 144, sameAreaAllYear: true },
+  // Not in the answers: sameAreaAllYear (one area for the year) and allGrossIncomeFromHome (no other place of business).
+  homeOffice: {
+    homeSquareFeet: 2950,
+    businessSquareFeet: 144,
+    sameAreaAllYear: true,
+    allGrossIncomeFromHome: true,
+  },
   specifiedService: false,
 };
 

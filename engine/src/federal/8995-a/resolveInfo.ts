@@ -35,6 +35,7 @@ function qbiBusinesses(inputs: ResolverInputs): {
   );
   const onReturn = businesses.map((business) => ({ ...business, owner: ownerOf(business.value) }));
   const taxpayerCount = onReturn.filter((business) => business.owner === "taxpayer").length;
+  const onReturnValues = businesses.map((business) => business.value);
   return {
     businesses: onReturn.map(({ key, value, owner }) => ({
       factKey: key,
@@ -42,7 +43,7 @@ function qbiBusinesses(inputs: ResolverInputs): {
       name: value.name ?? value.activity,
       ein: value.ein,
       specifiedService: value.specifiedService,
-      netProfit: netProfit(value),
+      netProfit: netProfit(value, onReturnValues),
       ownersOnlyBusiness: owner === "taxpayer" && taxpayerCount === 1,
       w2WagesPaid: value.w2WagesPaid,
       qualifiedPropertyUbia: value.qualifiedPropertyUbia,

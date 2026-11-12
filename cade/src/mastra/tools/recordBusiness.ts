@@ -21,7 +21,7 @@ const expenses: { [K in keyof BusinessExpenses]-?: z.ZodType<BusinessExpenses[K]
   carAndTruck: amount
     .optional()
     .describe(
-      "Line 9: actual expenses only; a vehicle at the standard mileage rate goes in vehicles",
+      "Line 9: actual car and truck expenses, without parking fees and tolls (those go in each vehicle's parkingAndTolls); a vehicle at the standard mileage rate goes in vehicles",
     ),
   commissionsAndFees: amount.optional().describe("Line 10"),
   contractLabor: amount.optional().describe("Line 11"),
@@ -58,7 +58,9 @@ const vehicle: { [K in keyof BusinessVehicle]-?: z.ZodType<BusinessVehicle[K]> }
   standardMileageRate: z
     .boolean()
     .describe("True when they use the standard mileage rate; false for actual expenses"),
-  parkingAndTolls: amount.optional().describe("Business parking fees and tolls"),
+  parkingAndTolls: amount
+    .optional()
+    .describe("Business parking fees and tolls, on either method; leave them out of carAndTruck"),
   availableForPersonalUse: z.boolean().optional().describe("Line 45"),
   anotherVehicleAvailable: z.boolean().optional().describe("Line 46"),
   hasEvidence: z.boolean().optional().describe("Line 47a"),
@@ -74,6 +76,17 @@ const homeOffice: { [K in keyof HomeOfficeSimplified]-?: z.ZodType<HomeOfficeSim
     .boolean()
     .optional()
     .describe("True when the same area was used for the business all year"),
+  averageMonthlySquareFeet: amount
+    .optional()
+    .describe(
+      "When the area was not the same all year: each month's business square feet (at most 300; 0 for a month used under 15 days) added up, divided by 12",
+    ),
+  allGrossIncomeFromHome: z
+    .boolean()
+    .optional()
+    .describe(
+      "True when all of the business's gross income is from its use of this home (no other place of business)",
+    ),
 };
 
 export const recordBusiness = createTool({

@@ -6,7 +6,7 @@
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import type { Form8949Box } from "../../facts/index.js";
-import { roundDollars, sum } from "../../money.js";
+import { numberOrBlank, roundDollars, sum } from "../../money.js";
 import type { ScheduleDFilingInfo } from "./filingInfo.js";
 import { allowableLoss } from "./lines.js";
 import type { ScheduleD } from "./types.js";
@@ -72,6 +72,15 @@ function qualifiedDividendsWorksheetApplies(
   return l18Zero && l19Zero && !filesForm4952;
 }
 
+// MANUAL EDIT: line 22, asked when line 17 is No (lines 15 and 16 not both gains).
+function qualifiedDividendsAnswer(form: FormAccessor<ScheduleD>): boolean | undefined {
+  const l15 = form["0.line.15_net_long_term_gain_loss"];
+  const l16 = form["1.line.16_combined_gain_loss"];
+  if (typeof l15 !== "number" || typeof l16 !== "number") return undefined;
+  if (l15 > 0 && l16 > 0) return undefined;
+  return (numberOrBlank(form["form-1040.line.3a"]) ?? 0) > 0;
+}
+
 export function register(): void {
   defineForm<ScheduleD, ScheduleDFilingInfo>("schedule-d", {
     bindings: {
@@ -103,6 +112,7 @@ export function register(): void {
         return simple === false ? true : undefined;
       },
       "0.header.ssn": (_, info) => info.taxpayerSSN,
+      // MANUAL EDIT: line 6 is entered in parentheses: it reduces line 7.
       "0.line.7_net_short_term_gain_loss": (form) =>
         sum(
           form["0.line.1a_gain_loss"],
@@ -111,8 +121,8 @@ export function register(): void {
           form["0.line.3_gain_loss"],
           form["0.line.4_short_term_gain_other_forms"],
           form["0.line.5_net_short_term_passthrough"],
-          form["0.line.6_short_term_loss_carryover"],
-        ),
+        ) - sum(form["0.line.6_short_term_loss_carryover"]),
+      // MANUAL EDIT: line 14 is entered in parentheses: it reduces line 15.
       "0.line.15_net_long_term_gain_loss": (form) =>
         sum(
           form["0.line.8a_gain_loss"],
@@ -122,16 +132,22 @@ export function register(): void {
           form["0.line.11_long_term_gain_other_forms"],
           form["0.line.12_net_long_term_passthrough"],
           form["0.line.13_capital_gain_distributions"],
-          form["0.line.14_long_term_loss_carryover"],
-        ),
+        ) - sum(form["0.line.14_long_term_loss_carryover"]),
       "1.line.16_combined_gain_loss": (form) =>
         sum(form["0.line.7_net_short_term_gain_loss"], form["0.line.15_net_long_term_gain_loss"]),
       // MANUAL EDIT: routed to the FilingInfo slot (sum of 1099-DIV box 2a).
       "0.line.13_capital_gain_distributions": (_, info) =>
         roundDollars(info.capitalGainDistributions),
-      // MANUAL EDIT: a loss on line 16, limited to $3,000 ($1,500 MFS).
+      // MANUAL EDIT: a loss on line 16, limited to $3,000 ($1,500 MFS), as a positive amount.
       "1.line.21_allowable_loss": (form, info) =>
         allowableLoss(form["1.line.16_combined_gain_loss"], info.filingStatus),
+      // MANUAL EDIT: last year's carryovers, as positive amounts (the form prints the parentheses).
+      "0.line.6_short_term_loss_carryover": (_, info) => roundDollars(info.shortTermLossCarryover),
+      "0.line.14_long_term_loss_carryover": (_, info) => roundDollars(info.longTermLossCarryover),
+      "1.line.22_qualified_dividends_yes": (form) =>
+        qualifiedDividendsAnswer(form) === true ? true : undefined,
+      "1.line.22_qualified_dividends_no": (form) =>
+        qualifiedDividendsAnswer(form) === false ? true : undefined,
     },
 
     unsupported: {
@@ -155,8 +171,6 @@ export function register(): void {
         "Requires data from Forms 6252, 4684, 6781, and 8824 — none of these forms are ingested in the current engine. No installment-sale, casualty/theft, straddle, or like-kind-exchange scenarios have been built yet.",
       "0.line.5_net_short_term_passthrough":
         "K-1 passthrough income/loss from partnerships, S-corps, estates, and trusts — no K-1 fact ingestion path built yet. Bind when K-1 scenario is modeled.",
-      "0.line.6_short_term_loss_carryover":
-        "Short-term capital loss carryover from prior year — requires prior-year Schedule D data (2024 line 16/21 and Form 1040 line 15). No prior-year carryover fact ingestion path built yet.",
       "0.line.8a_proceeds":
         "Line 8a covers long-term trades that bypass Form 8949 (basis IRS-reported, no adjustments). No fact-level flag distinguishes long-term bypass trades from short-term bypass trades — sumFacts cannot filter by the form_8949_box decision. Bind when a decision-filtered sum rule is available.",
       "0.line.8a_cost":
@@ -169,18 +183,12 @@ export function register(): void {
         "Requires gain figures from Form 4797 Part I, Forms 2439, 6252, 4684, 6781, and 8824 — none of these forms are ingested or have fact categories in the current inventory.",
       "0.line.12_net_long_term_passthrough":
         "Requires Schedule K-1 data from partnerships, S corporations, estates, and trusts — no K-1 fact category or ingestion path exists in the current inventory.",
-      "0.line.14_long_term_loss_carryover":
-        "Long-term capital loss carryover from 2024 requires prior-year Schedule D data (2024 Sch D line 15/16/21 and 2024 Form 1040 line 15). No prior-year fact ingestion path exists yet.",
       "1.line.17_both_gains_no":
         "This boolean is true when line 15 or line 16 is NOT a gain (i.e., zero or negative). Requires a conditional-comparison rule not yet in the library.",
       "1.line.18_rate_gain_worksheet_amount":
         "Amount from line 7 of the 28% Rate Gain Worksheet requires ingestion of collectibles gains and section 1202 QSB stock exclusion data — no such fact ingestion path exists yet.",
       "1.line.19_unrecaptured_sec1250_gain":
         "Amount from line 18 of the Unrecaptured Section 1250 Gain Worksheet requires Form 4797 depreciation recapture and real-property sale data — no such fact ingestion path exists yet.",
-      "1.line.22_qualified_dividends_yes":
-        "This checkbox is true when Form 1040 line 3a (qualified dividends) is greater than zero. We have no 'greaterThanZero' comparison rule to drive a boolean checkbox from a numeric field. Needs a conditional/comparison rule.",
-      "1.line.22_qualified_dividends_no":
-        "This checkbox is true when Form 1040 line 3a (qualified dividends) equals zero. We have no 'equalsZero' or 'not greaterThanZero' comparison rule to drive a boolean checkbox from a numeric field. Needs a conditional/comparison rule.",
       "0.line.1a_proceeds":
         "confidence=low: Line 1a aggregates short-term proceeds for 1099-B/DA transactions where basis was reported and no adjustments needed; however, no fact fieldPath exists for this sub-bucket — unsupported until fact schema is extended.",
       "0.line.1a_gain_loss":
