@@ -1,5 +1,6 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
+import type { PropertyColumn, ScheduleEFilingInfo } from "../schedule-e/filingInfo.js";
 import type { QbiBusiness, QbiFilingInfo } from "./filingInfo.js";
 
 export interface QbiLimits {
@@ -77,6 +78,8 @@ function selfEmploymentDeduction(
   info: QbiInfo,
   business: QbiBusiness,
 ): number | undefined {
+  // MANUAL EDIT: a rental has no SE tax.
+  if (business.kind === "rental") return 0;
   if (business.owner === "spouse") return undefined;
   if (info.qbiScheduleSEFiled === false) return 0;
   if (!business.ownersOnlyBusiness || info.qbiScheduleSEFiled !== true) return undefined;
@@ -102,4 +105,42 @@ export function businessQbi(
 // The business's TIN: the EIN, else the owner's SSN (Form 8995 line 1(b), Form 8995-A line 1(d)).
 export function businessTin(info: QbiInfo, business: QbiBusiness): string | undefined {
   return business.ein ?? (business.owner === "spouse" ? info.spouseSSN : info.taxpayerSSN);
+}
+
+/*
+ * A rental's QBI is its income or loss allowed this year (Schedule E line 21,
+ * else line 22's allowed loss); a loss Form 8582 suspends is not QBI
+ * (irs-8995a-inst-2025::sec::determining-your-qbi-deduction::b16). A blank line 22
+ * means not yet computed; a passive royalty's allowed loss is on no Schedule E
+ * line, so it waits.
+ */
+export function rentalQbi(
+  form: Record<string, unknown>,
+  info: Pick<ScheduleEFilingInfo, "rentalProperties">,
+  column: PropertyColumn,
+): number | undefined {
+  const rental = info.rentalProperties?.find((property) => property.column === column);
+  if (!rental) return undefined;
+  // A prior-year loss allowed this year goes on line 2 (QBI Loss Tracking Worksheet, not modeled).
+  if ((rental.value.priorYearUnallowedLoss ?? 0) > 0) return undefined;
+  const line21 = numberOrBlank(form[`schedule-e.0.line.21_income_or_loss_${column}`]);
+  if (line21 === undefined || line21 >= 0) return line21;
+  if (rental.value.propertyType === "royalties") {
+    return rental.passive === false ? line21 : undefined;
+  }
+  const allowedLoss = numberOrBlank(form[`schedule-e.0.line.22_deductible_loss_${column}`]);
+  return allowedLoss === undefined ? undefined : 0 - allowedLoss;
+}
+
+/*
+ * One trade or business's QBI, unrounded: a Schedule C business's (businessQbi)
+ * or a QBI rental's (rentalQbi). Undefined while it waits.
+ */
+export function qbiOf(
+  form: Record<string, unknown>,
+  info: QbiInfo & Pick<ScheduleEFilingInfo, "rentalProperties">,
+  business: QbiBusiness,
+): number | undefined {
+  if (business.kind === "business") return businessQbi(form, info, business);
+  return business.scheduleEColumn && rentalQbi(form, info, business.scheduleEColumn);
 }

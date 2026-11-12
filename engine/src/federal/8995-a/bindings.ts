@@ -10,13 +10,17 @@ import type { QbiBusiness } from "../qbi/filingInfo.js";
 import {
   businessQbi,
   businessTin,
-  QBI_LIMITS,
   qualifiedDividendsPlusNetCapitalGain,
+  rentalQbi,
   taxableIncomeBeforeQbi,
 } from "../qbi/lines.js";
+import type { ScheduleEFilingInfo } from "../schedule-e/filingInfo.js";
 import type { Form8995AFilingInfo } from "./filingInfo.js";
-import { qualifiedBusinesses } from "./lines.js";
+import { aboveThreshold, needsScheduleA, partIBusinesses, qbiLimits } from "./lines.js";
 import type { Form8995A } from "./types.js";
+
+/* Schedule E's resolver fills rentalProperties; a rental column reads its property. */
+type Info = Form8995AFilingInfo & Pick<ScheduleEFilingInfo, "rentalProperties">;
 
 /* Part II rates: lines 3, 5, 6 and 8. */
 const QBI_RATE = 0.2;
@@ -39,20 +43,10 @@ const PATRON_REDUCTION =
 
 type Read = Record<string, unknown>;
 
-function qbiLimits(info: Form8995AFilingInfo) {
-  return info.filingStatus ? QBI_LIMITS[info.filingStatus] : undefined;
-}
-
 const num = (value: unknown) => (typeof value === "number" ? value : undefined);
 
 const percentOf = (value: unknown, rate: number) =>
   typeof value === "number" ? roundDollars(value * rate) : undefined;
-
-// MANUAL EDIT: an SSTB above the phase-in range is left off Part I (qualifiedBusinesses).
-function partIBusinesses(form: Read, info: Form8995AFilingInfo): QbiBusiness[] | undefined {
-  const income = taxableIncomeBeforeQbi(form, info);
-  return qualifiedBusinesses(info.qbiBusinesses ?? [], income, qbiLimits(info));
-}
 
 function businessIn(
   form: Read,
@@ -65,14 +59,6 @@ function businessIn(
 function businessColumns(form: Read, info: Form8995AFilingInfo): Column[] | undefined {
   const businesses = partIBusinesses(form, info);
   return businesses && COLUMNS.slice(0, businesses.length);
-}
-
-// Undefined while 1040 line 11a is blank.
-function aboveThreshold(form: Read, info: Form8995AFilingInfo): boolean | undefined {
-  const limits = qbiLimits(info);
-  const income = taxableIncomeBeforeQbi(form, info);
-  if (!limits || income === undefined) return undefined;
-  return income > limits.threshold;
 }
 
 /*
@@ -140,18 +126,30 @@ function line25(form: Read, info: Form8995AFilingInfo, column: Column): number |
 }
 
 /*
- * Line 2: Schedule C line 31 less the deductible part of SE tax. No facts give SE
- * health insurance, SE retirement contributions or a prior-year qualified business
- * loss carryforward (Schedule C (Form 8995-A)); line 2 counts none.
+ * Line 2 without loss netting: a business's Schedule C line 31 less the deductible
+ * part of SE tax, or a rental's allowed income. No facts give SE health insurance,
+ * SE retirement contributions or a prior-year qualified business loss carryforward;
+ * line 2 counts none. An SSTB in the phase-in range needs Schedule A (Form 8995-A),
+ * not modeled.
  */
-function line2(form: Read, info: Form8995AFilingInfo, column: Column): number | undefined {
+function qbiWithoutNetting(form: Read, info: Info, business: QbiBusiness): number | undefined {
+  if (needsScheduleA(form, info, business)) return undefined;
+  if (business.kind === "business") return businessQbi(form, info, business);
+  if (!business.scheduleEColumn) return undefined;
+  const qbi = rentalQbi(form, info, business.scheduleEColumn);
+  // A loss needs Schedule C (Form 8995-A).
+  return qbi !== undefined && qbi < 0 ? undefined : qbi;
+}
+
+// MANUAL EDIT: with loss netting, line 2 is Schedule C (Form 8995-A) line 1 column (c) (line-2::b01).
+function line2(form: Read, info: Info, column: Column): number | undefined {
   const business = businessIn(form, info, column);
-  if (business?.netProfit === undefined) return undefined;
-  // A loss (or a blank line 31) anywhere needs Schedule C (Form 8995-A) loss netting, not modeled.
-  if (partIBusinesses(form, info)?.some((other) => other.netProfit === undefined)) return undefined;
-  // MANUAL EDIT: an SSTB in the phase-in range needs Schedule A (Form 8995-A), not modeled.
-  if (business.specifiedService !== false && aboveThreshold(form, info) !== false) return undefined;
-  return businessQbi(form, info, business);
+  if (!business) return undefined;
+  const netting = info.mustFile?.["form-8995-a-schedule-c"]?.value;
+  if (netting === true) {
+    return num(form[`form-8995-a-schedule-c.0.line.1_col_c_adjusted_qbi_${column}`]);
+  }
+  return netting === false ? qbiWithoutNetting(form, info, business) : undefined;
 }
 
 /* Lines 4 and 7: zero when line 2 is zero or less (line-4-3::b01, line-7::b02). */
@@ -221,7 +219,7 @@ function tin(form: Read, info: Form8995AFilingInfo, column: Column): string | un
 }
 
 export function register(): void {
-  defineForm<Form8995A, Form8995AFilingInfo>("form-8995-a", {
+  defineForm<Form8995A, Info>("form-8995-a", {
     bindings: {
       // MANUAL EDIT: Part IV for the REIT-dividend path.
       "1.line.28": (_, info) => roundDollars(info.qualifiedReitDividends),
