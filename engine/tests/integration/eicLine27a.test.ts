@@ -4,13 +4,24 @@ import { describe, expect, it } from "vitest";
 import { evaluateScenario, pendingInputs } from "../../src";
 import {
   EIC_KEYS,
+  RENTAL_KEYS,
   SPOUSE_KEYS,
   makeDependentFactKey,
+  makeRentalFactKey,
   type DependentFactValue,
+  type RentalFactValue,
 } from "../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
-import { MARRIED_HOH_GAP, type EicOutcome } from "../../src/federal/schedule-eic/credit.js";
+import {
+  MARRIED_HOH_GAP,
+  eicTableCredit,
+  type EicOutcome,
+} from "../../src/federal/schedule-eic/credit.js";
 import { eicOutcome } from "../../src/federal/schedule-eic/outcome.js";
+import {
+  RECHARACTERIZED_INCOME_GAP,
+  ROYALTIES_WITH_RENTS_GAP,
+} from "../../src/federal/schedule-eic/worksheet1.js";
 import { decisionRow } from "../helpers/fixtureBuilders.js";
 import { tcbUs002Scenario as base } from "../scenarios/tcb-us-002/index.js";
 
@@ -89,7 +100,9 @@ const fact = (key: string, value: unknown): TaxFactRow => ({
       ? "filing_status"
       : key === DEPENDENT_KEY
         ? "dependents"
-        : "other",
+        : key.startsWith("rental.")
+          ? "rental"
+          : "other",
   key,
   value,
 });
@@ -218,5 +231,65 @@ describe("Form 1040 line 27a never waits on an answer no one asks", () => {
         checkLine27c: false,
       });
     });
+  });
+});
+
+describe("Form 1040 line 27a for a Schedule E filer (Pub. 596 Worksheet 1)", () => {
+  // A passive single-family rental: no real estate professional, actively managed.
+  const house = (rentsReceived: number): RentalFactValue => ({
+    propertyType: "single_family",
+    address: { street: "1 Main St", city: "Town", state: "TX", zip: "75001" },
+    fairRentalDays: 365,
+    personalUseDays: 0,
+    rentsReceived,
+    expenses: { repairs: 1_000 },
+    activeParticipation: true,
+    materiallyParticipated: false,
+    allInvestmentAtRisk: true,
+    priorYearUnallowedLoss: 0,
+  });
+  const rentalShape = (rents: number): Shape => ({
+    status: "single",
+    dependent: "nephew",
+    wages: 15_000,
+    extra: {
+      [makeRentalFactKey("house")]: house(rents),
+      [RENTAL_KEYS.paymentsRequire1099]: false,
+      [RENTAL_KEYS.realEstateProfessional]: false,
+    },
+  });
+
+  it("credits a filer whose passive rental income keeps line 14 at $11,950 or less", () => {
+    // Line 13: the rental's $8,000; AGI $23,000 is under $23,350, so earned income decides.
+    const { outcome, askedEic } = settle(rentalShape(9_000));
+    expect(outcome).toEqual({ kind: "credit", amount: eicTableCredit(15_000, 1, false) });
+    expect(askedEic).toContain(EIC_KEYS.nonresidentAlien);
+  });
+
+  it("stops over $11,950 on line 14, though Step 2's sum is 0", () => {
+    expect(settle(rentalShape(13_000)).outcome).toEqual({ kind: "none", checkLine27c: false });
+  });
+
+  it("reaches the gap for a property with rents and royalties, asking no EIC answer", () => {
+    const shape = rentalShape(9_000);
+    const mixed = { ...house(9_000), royaltiesReceived: 500 };
+    const { outcome, askedEic } = settle({
+      ...shape,
+      extra: { ...shape.extra, [makeRentalFactKey("house")]: mixed },
+    });
+    expect(outcome).toEqual({ kind: "unsupported", reason: ROYALTIES_WITH_RENTS_GAP });
+    expect(askedEic.filter((key) => key.startsWith("eic."))).toEqual([]);
+  });
+
+  it("reaches the gap for a passive self-rental with income, asking no EIC answer", () => {
+    const shape = rentalShape(9_000);
+    // No deductions: Form 8582 does not file, so line 26 holds the income.
+    const selfRental = { ...house(9_000), propertyType: "self_rental" as const, expenses: {} };
+    const { outcome, askedEic } = settle({
+      ...shape,
+      extra: { ...shape.extra, [makeRentalFactKey("house")]: selfRental },
+    });
+    expect(outcome).toEqual({ kind: "unsupported", reason: RECHARACTERIZED_INCOME_GAP });
+    expect(askedEic.filter((key) => key.startsWith("eic."))).toEqual([]);
   });
 });

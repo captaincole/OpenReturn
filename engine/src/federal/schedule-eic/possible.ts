@@ -12,18 +12,25 @@
 import {
   CAPITAL_LOSS_CARRYOVER_KEYS,
   HSA_COVERAGE_KEYS,
+  RENTAL_KEYS,
   businessesOnReturn,
   isInterestFactKey,
+  readRentalFacts,
+  rentalsOnReturn,
+  type RentalFactValue,
 } from "../../facts/index.js";
 import { filingStatusOf, resolveScheduleBInfo } from "../../filingInfoResolvers.js";
 import { roundDollars, sum } from "../../money.js";
 import { num, sumInvestmentBox, sumW2Box, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
+import { booleanFact, isPassiveActivity, spousePropertiesOnReturn } from "../rentals/passive.js";
 import { resolveSchedule8812Info } from "../schedule-8812/resolveInfo.js";
 import type { PayerAmount } from "../schedule-b/filingInfo.js";
 import { tentativeProfit } from "../schedule-c/lines.js";
+import { netIncomeOrLoss } from "../schedule-e/lines.js";
 import { INVESTMENT_INCOME_LIMIT } from "./credit.js";
 import { eicIncomeLimit } from "./limits.js";
+import { incomeMayBeNonpassive, mixesRentsAndRoyalties } from "./worksheet1.js";
 
 // Schedule D line 21: a net capital loss enters line 7a as at most $3,000 ($1,500 MFS).
 const CAPITAL_LOSS_LIMIT = 3_000;
@@ -75,7 +82,8 @@ function incomeLines(inputs: ResolverInputs) {
 /*
  * Step 2's investment income (lines 2a + 2b + 3b + 7a, a loss on 7a as 0) is
  * at least lines 2a, 2b and 3b: Schedule B line 3 (Form 8815) is not modeled,
- * so line 2b subtracts nothing.
+ * so line 2b subtracts nothing. Pub. 596 Worksheet 1 line 14 adds lines 10 and
+ * 13, each at least 0, to the same lines (worksheet1.ts).
  */
 function investmentIncomeFloor(inputs: ResolverInputs): number {
   const { line2a, line2b, line3b } = incomeLines(inputs);
@@ -103,20 +111,63 @@ function hsaDeductionCeiling(inputs: ResolverInputs): number | undefined {
   return resolve8889Info(inputs).mustFile?.["form-8889"]?.value === false ? 0 : undefined;
 }
 
+/* Line 21 waits on a real estate property's personal-use days unless they are 0 (schedule-e/lines.ts). */
+const personalUseOpen = (value: RentalFactValue) =>
+  value.propertyType !== "royalties" && value.personalUseDays !== 0;
+
+/*
+ * Schedule 1 line 5's least amount: Schedule E line 41, which is line 26 (the
+ * engine fills no Part II–IV line). Each property adds at least its line 21
+ * loss (a profit counts as 0) less its prior-year unallowed loss, the most
+ * Form 8582 can free with it; the at-risk and passive rules only shrink a loss.
+ * Every property counts, a spouse's on a separate return too: a share of a
+ * loss is no lower than the whole. Undefined while a rental fact is malformed
+ * or a line 21 waits on personal-use days: then the loss has no bound.
+ */
+function rentalFloor(inputs: ResolverInputs): number | undefined {
+  const { properties, malformedKeys } = readRentalFacts(inputs.facts);
+  if (malformedKeys.length > 0) return undefined;
+  if (properties.some(({ value }) => personalUseOpen(value))) return undefined;
+  return sum(
+    ...properties.map(
+      ({ value }) =>
+        Math.min(0, netIncomeOrLoss(value) ?? 0) - roundDollars(value.priorYearUnallowedLoss ?? 0),
+    ),
+  );
+}
+
 /*
  * Line 11b's least amount: W-2 box 1 (line 1a), the taxable interest and
- * ordinary dividends (lines 2b and 3b), line 7a's least, and each business's
- * least, less the most the adjustments can be. Other income only adds, and is
- * left out. Of Schedule 1 Part II the engine fills line 13 (HSA) and line 15
- * (half of SE tax, covered by counting a profit as 0); a new adjustment line
- * must be subtracted here, or this bound is no longer a lower bound.
+ * ordinary dividends (lines 2b and 3b), line 7a's least, each business's
+ * least and the rentals' least (Schedule 1 line 5), less the most the
+ * adjustments can be. Other income only adds, and is left out. Of Schedule 1
+ * Part II the engine fills line 13 (HSA) and line 15 (half of SE tax, covered
+ * by counting a profit as 0); a new adjustment line, or an income line that can
+ * be negative, must be counted here, or this bound is no longer a lower bound.
  */
 function agiFloor(inputs: ResolverInputs, joint: boolean): number | undefined {
   const businesses = businessFloor(inputs, joint);
+  const rentals = rentalFloor(inputs);
   const hsa = hsaDeductionCeiling(inputs);
-  if (businesses === undefined || hsa === undefined) return undefined;
+  if (businesses === undefined || rentals === undefined || hsa === undefined) return undefined;
   const { line1a, line2b, line3b } = incomeLines(inputs);
-  return sum(line1a, line2b, line3b, capitalFloor(inputs), businesses, -hsa);
+  return sum(line1a, line2b, line3b, capitalFloor(inputs), businesses, rentals, -hsa);
+}
+
+/*
+ * A Schedule E property with royalties and rents, or a passive rental whose
+ * income may be nonpassive, makes Worksheet 1 a gap that no answer settles
+ * (worksheet1.ts): line 27a reports it, and nothing is asked.
+ */
+function worksheet1Gap(inputs: ResolverInputs): boolean {
+  const joint = spousePropertiesOnReturn(filingStatusOf(inputs));
+  const { properties } = rentalsOnReturn(inputs.facts, joint);
+  const professional = booleanFact(inputs.factByKey.get(RENTAL_KEYS.realEstateProfessional));
+  return properties.some(
+    ({ value }) =>
+      mixesRentsAndRoyalties(value) ||
+      incomeMayBeNonpassive(value, isPassiveActivity(value, professional), netIncomeOrLoss(value)),
+  );
 }
 
 /*
@@ -127,10 +178,13 @@ function agiFloor(inputs: ResolverInputs, joint: boolean): number | undefined {
  *   Worksheet B line 4b);
  * - Step 1, question 1: line 11b at or above the limit
  *   (irs-1040-inst-2025::sec::all-filers::b01);
- * - Step 2: investment income over $11,950;
+ * - Step 2: investment income over $11,950, or a Worksheet 1 gap;
  * - Step 5 or Worksheet B line 5: earned income (at least the wages plus each
  *   business's least) at or above the limit
  *   (irs-1040-inst-2025::sec::no-continue-7::b01, ::bworksheet-2025-eic-line-27a::b03).
+ *   Schedule E is not earned income: Step 5 starts from line 1z
+ *   (irs-1040-inst-2025::sec::step-5::b01) and Worksheet B adds only
+ *   self-employment (::bworksheet-2025-eic-line-27a::b01, ::b02).
  */
 export function eicMayApply(inputs: ResolverInputs, children: number): boolean {
   const joint = filingStatusOf(inputs) === "married_filing_jointly";
@@ -143,6 +197,7 @@ export function eicMayApply(inputs: ResolverInputs, children: number): boolean {
   const agi = agiFloor(inputs, joint);
   if (agi !== undefined && agi >= limit) return false;
   if (investmentIncomeFloor(inputs) > INVESTMENT_INCOME_LIMIT) return false;
+  if (worksheet1Gap(inputs)) return false;
   const businessLeast = businessFloor(inputs, joint);
   return businessLeast === undefined || line1a + businessLeast < limit;
 }

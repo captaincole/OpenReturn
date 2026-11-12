@@ -9,6 +9,7 @@ import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import type { Form1040FilingInfo } from "../1040/filingInfo.js";
 import { earnedIncomeCredit, type EicOutcome } from "./credit.js";
+import { worksheet1 } from "./worksheet1.js";
 
 type Lines = FormAccessor<object>;
 
@@ -29,6 +30,7 @@ export type EicOutcomeInfo = Pick<
   | "earnedIncomeCredit"
   | "w2NontaxableCombatPay"
   | "scheduleCNetProfit"
+  | "rentalProperties"
 >;
 
 /*
@@ -80,7 +82,8 @@ function earnedIncomeGap(info: EicOutcomeInfo, worksheetB: boolean): string | un
 }
 
 /*
- * Line 27a's steps (irs-1040-inst-2025, lines 27a–27c). Step 5, question 2: a
+ * Line 27a's steps (irs-1040-inst-2025, lines 27a–27c). Step 2, question 4: a
+ * Schedule E sends the filer to Pub. 596 Worksheet 1. Step 5, question 2: a
  * business, or a Schedule SE whose filing is still open, sends the filer to
  * Worksheet B.
  */
@@ -91,17 +94,19 @@ export function eicOutcome(form: Lines, info: EicOutcomeInfo): EicOutcome {
   const earned = (step5: number | undefined) =>
     worksheetB ? worksheetBEarnedIncome(form, info, step5) : step5;
   const lowestStep5 = numberOrBlank(form["form-1040.line.1z"]);
+  // Step 2: "If line 7a is a loss, enter -0-."
+  const investmentIncome = sum(
+    form["form-1040.line.2a"],
+    form["form-1040.line.2b"],
+    form["form-1040.line.3b"],
+    atLeast(0, form["form-1040.line.7a"]),
+  );
   return earnedIncomeCredit(
     {
       filingStatus: info.filingStatus,
       agi: numberOrBlank(form["form-1040.line.11b"]),
-      // Step 2: "If line 7a is a loss, enter -0-."
-      investmentIncome: sum(
-        form["form-1040.line.2a"],
-        form["form-1040.line.2b"],
-        form["form-1040.line.3b"],
-        atLeast(0, form["form-1040.line.7a"]),
-      ),
+      investmentIncome,
+      worksheet1: worksheet1(form, info, investmentIncome),
       earnedIncome: earned(step5EarnedIncome(form, info)),
       earnedIncomeAtLeast: earned(lowestStep5),
       earnedIncomeGap: earnedIncomeGap(info, worksheetB),

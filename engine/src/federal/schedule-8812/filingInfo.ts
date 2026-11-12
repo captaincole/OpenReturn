@@ -1,6 +1,7 @@
 import type { DependentCredit, DependentFactValue } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import type { Money } from "../../money.js";
+import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { EicLineSlot } from "../schedule-eic/eicAnswers.js";
 import type { ScheduleSEFilingInfo } from "../schedule-se/filingInfo.js";
 
@@ -19,9 +20,11 @@ export interface DependentRow {
   credit: DependentCredit | undefined;
 }
 
-/* Line 24 reads Form 1040 line 27a's outcome: the EIC slot and Schedule SE's net profit. */
+/* Line 24 reads Form 1040 line 27a's outcome: the EIC slot, Schedule SE's net profit and Schedule E's columns. */
 export interface Schedule8812FilingInfo
   extends BaseFilingInfo, EicLineSlot, Pick<ScheduleSEFilingInfo, "scheduleCNetProfit"> {
+  /** Schedule E's resolver fills it (Pub. 596 Worksheet 1). */
+  rentalProperties?: RentalProperty[];
   /** Every dependent claimed on the return, in the order recorded. */
   dependents?: DependentRow[];
   /** Line 4: dependents whose row (7) "Child tax credit" box is checked. */

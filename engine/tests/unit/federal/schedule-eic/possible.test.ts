@@ -10,9 +10,12 @@ import {
   makeDependentFactKey,
   makeDividendFactKey,
   makeInterestFactKey,
+  makeRentalFactKey,
   makeTradeFactKey,
   makeW2FactKey,
+  RENTAL_KEYS,
   type BusinessFactValue,
+  type RentalFactValue,
 } from "../../../../src/facts/index.js";
 import { resolve1040Info } from "../../../../src/federal/1040/resolveInfo.js";
 import { eicMayApply } from "../../../../src/federal/schedule-eic/possible.js";
@@ -60,6 +63,11 @@ const business = (value: Partial<BusinessFactValue>): Fact => ({
     materiallyParticipated: true,
     ...value,
   },
+});
+const rental = (value: Partial<RentalFactValue>): Fact => ({
+  key: makeRentalFactKey("house"),
+  category: "rental",
+  value: { propertyType: "single_family", personalUseDays: 0, ...value },
 });
 const sale: Fact = {
   key: makeTradeFactKey("broker", "xyz"),
@@ -118,6 +126,77 @@ describe("eicMayApply", () => {
     });
     expect(eicMayApply(inputs([...facts, hsa, contributed(3_000)]), 1)).toBe(true);
     expect(eicMayApply(inputs([...facts, hsa, contributed(2_000)]), 1)).toBe(false);
+  });
+
+  describe("a rental loss on Schedule 1 line 5 lowers AGI (Step 1)", () => {
+    // HOH, one son: $45,000 wages and $8,000 of interest and dividends are $53,000, over $50,434.
+    const facts = [w2(45_000), interest(5_000), dividends(3_000)];
+
+    it("keeps the EIC possible while a rental loss could bring AGI under the limit", () => {
+      const loss = rental({ rentsReceived: 1_000, expenses: { repairs: 6_000 } });
+      expect(eicMayApply(inputs([...facts, loss]), 1)).toBe(true);
+      expect(
+        resolveScheduleEICInfo(inputs([...facts, loss])).mustFile?.["schedule-eic"]?.value,
+      ).toBe(true);
+      // A $1,000 loss leaves AGI at least $52,000.
+      const small = rental({ rentsReceived: 1_000, expenses: { repairs: 2_000 } });
+      expect(eicMayApply(inputs([...facts, small]), 1)).toBe(false);
+    });
+
+    it("counts a prior-year unallowed loss Form 8582 can free, and no floor while line 21 waits", () => {
+      const prior = rental({
+        rentsReceived: 1_000,
+        expenses: { repairs: 1_000 },
+        priorYearUnallowedLoss: 5_000,
+      });
+      expect(eicMayApply(inputs([...facts, prior]), 1)).toBe(true);
+      const personalUseOpen = rental({ rentsReceived: 1_000, personalUseDays: undefined });
+      expect(eicMayApply(inputs([...facts, personalUseOpen]), 1)).toBe(true);
+    });
+
+    it("leaves a rental profit out, as other income", () => {
+      const profit = rental({ rentsReceived: 9_000, expenses: { repairs: 1_000 } });
+      expect(eicMayApply(inputs([w2(45_000), profit]), 1)).toBe(true);
+    });
+  });
+
+  describe("Step 2, question 4: a Schedule E filer goes to Pub. 596 Worksheet 1", () => {
+    it("asks the EIC answers when Worksheet 1 can be figured", () => {
+      const income = rental({ rentsReceived: 9_000, expenses: { repairs: 1_000 } });
+      expect(eicMayApply(inputs([w2(20_000), interest(1_000), income]), 1)).toBe(true);
+      expect(eicAsked([w2(20_000), interest(1_000), income])).not.toEqual([]);
+    });
+
+    it("asks nothing when a passive self-rental's net income may be nonpassive (a gap)", () => {
+      const selfRental = rental({
+        propertyType: "self_rental",
+        rentsReceived: 9_000,
+        expenses: { repairs: 1_000 },
+      });
+      const passive: Fact = {
+        key: RENTAL_KEYS.realEstateProfessional,
+        category: "rental",
+        value: false,
+      };
+      expect(eicMayApply(inputs([w2(20_000), selfRental, passive]), 1)).toBe(false);
+      expect(eicAsked([w2(20_000), selfRental, passive])).toEqual([]);
+      // A loss is not recharacterized: the questions are asked.
+      const loss = rental({
+        propertyType: "self_rental",
+        rentsReceived: 1_000,
+        expenses: { repairs: 3_000 },
+      });
+      expect(eicMayApply(inputs([w2(20_000), loss, passive]), 1)).toBe(true);
+    });
+
+    it("asks nothing and files no Schedule EIC when a property mixes rents and royalties (a gap)", () => {
+      const mixed = rental({ rentsReceived: 9_000, royaltiesReceived: 500 });
+      expect(eicMayApply(inputs([w2(20_000), mixed]), 1)).toBe(false);
+      expect(
+        resolveScheduleEICInfo(inputs([w2(20_000), mixed])).mustFile?.["schedule-eic"]?.value,
+      ).toBe(false);
+      expect(eicAsked([w2(20_000), mixed])).toEqual([]);
+    });
   });
 
   it("rules out investment income over $11,950 (Step 2)", () => {
