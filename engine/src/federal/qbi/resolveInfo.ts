@@ -47,6 +47,22 @@ export function rentalsWithoutQbiAnswer(inputs: ResolverInputs): string[] {
     .map((property) => property.factKey);
 }
 
+/*
+ * QBI rentals whose QBI waits on a prior-year unallowed loss: its QBI part goes on
+ * the loss-carryforward line through the QBI Loss Tracking Worksheet
+ * (irs-8995a-inst-2025::sec::line-2::b01), which is not modeled (rentalQbi waits).
+ * Listed so the return does not read as ready while the QBI form is blank.
+ */
+export function rentalsWithUnmodeledQbi(inputs: ResolverInputs): string[] {
+  return (resolveScheduleEInfo(inputs).rentalProperties ?? [])
+    .filter(
+      (property) =>
+        property.value.qualifiedBusiness === true &&
+        (property.value.priorYearUnallowedLoss ?? 0) > 0,
+    )
+    .map((property) => property.factKey);
+}
+
 export function qbiBusinesses(inputs: ResolverInputs): {
   businesses: QbiBusiness[];
   malformedKeys: string[];

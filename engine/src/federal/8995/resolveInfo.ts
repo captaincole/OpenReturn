@@ -1,5 +1,5 @@
 import type { ResolverInputs } from "../../resolverInputs.js";
-import { rentalsWithoutQbiAnswer } from "../qbi/resolveInfo.js";
+import { rentalsWithUnmodeledQbi, rentalsWithoutQbiAnswer } from "../qbi/resolveInfo.js";
 import { qbiMustFile } from "../qbi/whichForm.js";
 import type { Form8995FilingInfo } from "./filingInfo.js";
 
@@ -12,6 +12,8 @@ import type { Form8995FilingInfo } from "./filingInfo.js";
 export function resolve8995Info(inputs: ResolverInputs): Form8995FilingInfo {
   return {
     mustFile: { "form-8995": qbiMustFile(inputs, "form-8995") },
-    missingInputs: { "form-8995": rentalsWithoutQbiAnswer(inputs) },
+    missingInputs: {
+      "form-8995": [...rentalsWithoutQbiAnswer(inputs), ...rentalsWithUnmodeledQbi(inputs)],
+    },
   };
 }
