@@ -1,20 +1,8 @@
-import {
-  EIC_KEYS,
-  SPOUSE_KEYS,
-  businessesOnReturn,
-  getDependentFacts,
-  type DependentFact,
-} from "../../facts/index.js";
+import { EIC_KEYS, SPOUSE_KEYS, getDependentFacts, type DependentFact } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
-import {
-  missingInputs,
-  resolveMustFile,
-  sumW2Box,
-  text,
-  type ResolverInputs,
-} from "../../resolverInputs.js";
+import { missingInputs, resolveMustFile, text, type ResolverInputs } from "../../resolverInputs.js";
+import { earnedIncomeMayBeUnderLimit } from "./eicAnswers.js";
 import type { ScheduleEICFilingInfo } from "./filingInfo.js";
-import { eicIncomeLimit } from "./limits.js";
 import { isEicQualifyingChild } from "./qualifyingChild.js";
 
 /* Resolvers see no tax year; Schedule 8812 pins its age rules to 2025 the same way. */
@@ -25,14 +13,15 @@ const TAX_YEAR = 2025;
  * who meets the conditions to be your qualifying child for purposes of claiming
  * the EIC, complete and attach Schedule EIC." The schedule files when a
  * dependent passes isEicQualifyingChild and the EIC is still possible:
- * - W-2 wages under the Step 1 limit for that many children
- *   (irs-1040-inst-2025::sec::all-filers::b01). Earned income is at least the
- *   wages unless a business has a loss, so a return with a business is not
- *   gated. AGI and investment income (Step 2) are form lines, not facts: the
- *   1040's line 27a applies them.
+ * - Earned income can be under the Step 1 limit for that many children
+ *   (irs-1040-inst-2025::sec::all-filers::b01): W-2 wages under it, or a
+ *   business that may have a loss (earnedIncomeMayBeUnderLimit). AGI and
+ *   investment income (Step 2) are form lines, not facts: the 1040's line 27a
+ *   applies them.
  * - No answer rules the taxpayer out: a nonresident alien who does not file
  *   jointly (irs-1040-inst-2025::sec::no-continue-3::b01), a qualifying child
  *   of another person (irs-1040-inst-2025::sec::yes-continue-no-stop-10::b01),
+ *   which a joint return is not asked (irs-1040-inst-2025::sec::step-2-2::b03),
  *   or an IRS notice that bars the credit.
  * The answers are asked only once the schedule can file. A dependent whose
  * answers are not all in is asked by Schedule 8812 and counts here when they are.
@@ -47,14 +36,15 @@ export function resolveScheduleEICInfo(inputs: ResolverInputs): ScheduleEICFilin
   const children: DependentFact[] = getDependentFacts(inputs.facts).filter(
     (fact) => isEicQualifyingChild(fact.dependent, filerDobs, TAX_YEAR) === true,
   );
-  const hasBusiness = businessesOnReturn(inputs.facts, joint).businesses.length > 0;
   const withSsn = children.filter((child) => child.dependent.ssn !== undefined).length;
-  const underLimit = hasBusiness || sumW2Box(inputs, "box1") < eicIncomeLimit(withSsn, joint);
-  const possible = children.length > 0 && underLimit;
+  const possible = children.length > 0 && earnedIncomeMayBeUnderLimit(inputs, withSsn, joint);
   const answer = (key: string) => inputs.factByKey.get(key) as boolean | undefined;
   const answers = {
     [EIC_KEYS.nonresidentAlien]: answer(EIC_KEYS.nonresidentAlien),
-    [EIC_KEYS.qualifyingChildOfAnother]: answer(EIC_KEYS.qualifyingChildOfAnother),
+    // Step 3, question 2: a joint return skips questions 3–6.
+    ...(joint
+      ? {}
+      : { [EIC_KEYS.qualifyingChildOfAnother]: answer(EIC_KEYS.qualifyingChildOfAnother) }),
     [EIC_KEYS.deniedInEarlierYear]: answer(EIC_KEYS.deniedInEarlierYear),
     [EIC_KEYS.barredByIrs]: answer(EIC_KEYS.barredByIrs),
   };
