@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { atLeast, formatDollars, roundDollars, stepsOf, sum } from "../../src/money.js";
+import { atLeast, formatDollars, roundDollars, stepsOf, sum, wholePart } from "../../src/money.js";
 
 describe("roundDollars", () => {
   it("drops under 50 cents and raises 50–99 cents (IRS rule)", () => {
@@ -60,6 +60,16 @@ describe("stepsOf", () => {
     expect(stepsOf(2500, 2500)).toBe(1);
     expect(stepsOf(2501, 2500)).toBe(2);
     expect(stepsOf(1, 1250)).toBe(1);
+  });
+});
+
+describe("wholePart", () => {
+  it("drops the decimals without rounding (Form 8962 Worksheet 2)", () => {
+    expect(wholePart(99.84)).toBe(99);
+    expect(wholePart(185.65)).toBe(185);
+    expect(wholePart(399.7)).toBe(399);
+    expect(wholePart(200)).toBe(200);
+    expect(wholePart(0)).toBe(0);
   });
 });
 

@@ -50,6 +50,11 @@ export function stepsOf(amount: number, step: number): number {
   return Math.ceil(amount / step);
 }
 
+// "Do not round; drop any numbers after the decimal point" (Form 8962 Worksheet 2): toward zero.
+export function wholePart(value: number): number {
+  return Math.trunc(value);
+}
+
 // Zero prints "0" on purpose: "computed as zero", not "not filled".
 export function formatDollars(value: number | null | undefined): string {
   const dollars = roundDollars(value ?? undefined);
