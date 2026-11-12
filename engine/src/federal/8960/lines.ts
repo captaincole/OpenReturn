@@ -31,18 +31,21 @@ function nonpassive(property: RentalProperty): boolean | undefined {
   return activity === undefined ? undefined : activity === "nonpassive";
 }
 
-/* The property also rises to a section 162 trade or business (the QBI answer). */
+/*
+ * The property also rises to a section 162 trade or business (b01, b02), for a rental
+ * and a royalty alike. Not the QBI answer: Rev. Proc. 2019-38's safe harbor is section 199A only.
+ */
 function section162Nonpassive(property: RentalProperty): boolean | undefined {
   const isNonpassive = nonpassive(property);
   if (isNonpassive !== true) return isNonpassive;
-  return property.value.qualifiedBusiness;
+  return property.value.tradeOrBusiness;
 }
 
 /* Nonpassive properties whose section 162 answer is missing: Cade asks for the property again. */
 export function rentalsWithoutTradeOrBusinessAnswer(properties: RentalProperty[]): string[] {
   return properties
     .filter((property) => nonpassive(property) === true)
-    .filter((property) => property.value.qualifiedBusiness === undefined)
+    .filter((property) => property.value.tradeOrBusiness === undefined)
     .map((property) => property.factKey);
 }
 

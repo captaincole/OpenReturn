@@ -125,6 +125,8 @@ export const multiFamily: RentalFactValue = {
   priorYearUnallowedLoss: 0, // Not in the answers; the key's Form 8582 has none.
   disposedOfEntirely: false,
   qualifiedBusiness: true,
+  // Not in the answers; the key takes the rental out of net investment income on Form 8960 line 4b.
+  tradeOrBusiness: true,
   specifiedService: false,
   w2WagesPaid: 0, // Not in the answers; the key's Form 8995-A column A has no wages.
   qualifiedPropertyUbia: 0, // Not in the answers; likewise.

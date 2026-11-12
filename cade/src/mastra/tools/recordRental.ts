@@ -115,6 +115,12 @@ export const recordRental = createTool({
       .optional()
       .describe("The property is a trade or business for the QBI deduction (Form 8995-A)"),
     specifiedService: z.boolean().optional().describe("A specified service trade or business"),
+    tradeOrBusiness: z
+      .boolean()
+      .optional()
+      .describe(
+        "Form 8960: the property (a rental or a royalty) is a section 162 trade or business, run regularly and continuously for profit; also true for a real estate professional's rental with more than 500 hours this year or in any 5 of the last 10 years. Asked only when the property is not passive",
+      ),
     w2WagesPaid: amount.optional().describe("Form 8995-A line 4: W-2 wages paid; 0 if none"),
     qualifiedPropertyUbia: amount
       .optional()

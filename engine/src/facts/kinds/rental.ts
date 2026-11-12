@@ -83,6 +83,11 @@ export interface RentalFactValue {
   royaltyActivity?: RoyaltyActivityKind;
   /* Form 8995-A: the property is a trade or business for the QBI deduction. */
   qualifiedBusiness?: boolean;
+  /*
+   * Form 8960 line 4b: the property is a section 162 trade or business. Not the
+   * QBI answer, which can be yes through the Rev. Proc. 2019-38 safe harbor alone.
+   */
+  tradeOrBusiness?: boolean;
   /* Form 8995-A: a specified service trade or business. */
   specifiedService?: boolean;
   /* Form 8995-A line 4: W-2 wages paid for the property. */
