@@ -156,6 +156,15 @@ export function register(): void {
        */
       "line.1h_amount": (_, info) =>
         info.line1hGap ? unsupported(info.line1hGap) : roundDollars(info.disabilityPensionWages),
+      /*
+       * MANUAL EDIT: "If line 26 is more than zero, you have taxable dependent
+       * care benefits. Enter this amount on Form 1040 ... line 1e"
+       * (irs-2441-inst-2025::sec::line-26::b01).
+       */
+      "line.1e": (form) => {
+        const line26 = numberOrBlank(form["form-2441.1.line.26_taxable_benefits"]);
+        return line26 !== undefined && line26 > 0 ? line26 : undefined;
+      },
       "line.1z": (form) =>
         sum(
           form["line.1a"],
@@ -540,8 +549,6 @@ export function register(): void {
         "Unreported tip income (allocated tips, noncash tips) has no fact ingestion path; requires a tip-income intake scenario not yet built.",
       "line.1d":
         "No ingestion path for Medicaid waiver payments not reported on W-2 — no scenario built for this income type yet.",
-      "line.1e":
-        "Requires Form 2441 (Dependent Care Benefits) computation — no Form 2441 ingestion or scenario built yet.",
       "line.1f":
         "Requires Form 8839 (Adoption Benefits) computation — no Form 8839 ingestion or scenario built yet.",
       "line.1g":
