@@ -50,4 +50,4 @@ No document was made: the case has a PDF for each document the return needs. Las
 
 - Disability pay on a W-2 (third-party sick pay) is not taxable disability income for Schedule R: only a 1099-R disability pension (code 3) before the minimum retirement age is.
 - Schedule R files whenever the facts show a qualified individual and do not rule out the income limit, even when line 19 comes out zero or less; Schedule 3 then files with it. A 65-or-older filer whose pension needs the Simplified Method (scenario `carter`) now files a Schedule R with no credit and is asked line 13b.
-- A corrective distribution (1099-R code 8, not an IRA) stays on Form 1040 lines 5a/5b; line 1h, where it belongs, is unsupported with it.
+- On Form 1040 line 1h, a corrective distribution with code P or B, and elective deferrals over the limit, are unsupported; a code 8 corrective distribution is figured there.
