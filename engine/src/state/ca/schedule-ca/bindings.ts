@@ -33,6 +33,8 @@ export function register(): void {
         const value = form["schedule-1.0.line.8z_type"];
         return typeof value === "string" ? value : undefined;
       },
+      // MANUAL EDIT: col A copies federal Schedule 1 line 5; blank when it is blank.
+      "0.line.b5_federal": (form) => numberOrBlank(form["schedule-1.0.line.5"]),
       "2.line.b9a_federal": (form) => {
         const value = form["schedule-1.0.line.9"];
         return typeof value === "number" ? value : undefined;
@@ -502,8 +504,6 @@ export function register(): void {
         "Other gains/losses CA subtractions (Sch CA Section B line 4 col B) require CA-specific basis and depreciation adjustments for Form 4797 transactions; no ingestion path for Schedule 1 or Form 4797 yet.",
       "0.line.b4_additions":
         "Other gains/losses CA additions (Sch CA Section B line 4 col C) require CA-specific basis adjustments for Form 4797 transactions; no ingestion path for Schedule 1 or Form 4797 yet.",
-      "0.line.b5_federal":
-        "Rental real estate/partnerships/S-corps/trusts (Sch CA Section B line 5 col A) comes from federal Schedule 1 line 5 (Schedule E); federal Schedule 1 and Schedule E are not ingested forms and we have no K-1/pass-through fact ingestion path.",
       "0.line.b5_subtractions":
         "Rental/partnership/S-corp CA subtractions (Sch CA Section B line 5 col B) require FTB 3801/3885A passive activity and depreciation adjustments; no ingestion path for K-1 or Schedule E data yet.",
       "0.line.b5_additions":
