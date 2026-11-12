@@ -28,7 +28,13 @@ import {
 import { form8606Filers } from "../8606/resolveInfo.js";
 import { resolveScheduleAInfo } from "../schedule-a/resolveInfo.js";
 import { eicQuestions, resolveEicLineInfo } from "../schedule-eic/eicAnswers.js";
+import {
+  disabilityAnswersComplete,
+  disabilityPensions,
+  disabilityWages,
+} from "./disabilityPensions.js";
 import type { Form1040FilingInfo, IraLine } from "./filingInfo.js";
+import { line1hGap } from "./line1hGaps.js";
 
 const OWNERS: IraOwner[] = ["taxpayer", "spouse"];
 
@@ -141,17 +147,31 @@ function iraLine(inputs: ResolverInputs, rows: RetirementDistributionFactValue[]
   };
 }
 
+/*
+ * A disability pension before the minimum retirement age goes on line 1h, not
+ * line 5 (disabilityPensions.ts). While one's answer is missing, lines 1h and
+ * 5a–5b wait.
+ */
 function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
   const rows = retirementRows(inputs);
   const isIra = (distribution: RetirementDistributionFactValue) =>
     distribution.box7IraSepSimple || isRothIra(distribution);
   const iraRows = rows.filter(isIra);
-  const pensionRows = rows.filter((row) => !isIra(row));
+  const disability = disabilityPensions(inputs);
+  const onLine1h = new Set(
+    disability
+      .filter((pension) => pension.beforeMinimumRetirementAge === true)
+      .map((pension) => pension.distribution),
+  );
+  const pensionRows = rows.filter((row) => !isIra(row) && !onLine1h.has(row));
   const taxable = pensionRows.map(rowTaxable);
+  const answered = disabilityAnswersComplete(disability);
   return {
     iraDistributions: iraRows.length === 0 ? undefined : iraLine(inputs, iraRows),
+    disabilityPensionWages: onLine1h.size === 0 ? undefined : disabilityWages(disability),
+    line1hGap: line1hGap(inputs),
     pensionDistributions:
-      pensionRows.length === 0
+      pensionRows.length === 0 || !answered
         ? undefined
         : {
             gross: sum(...pensionRows.map((distribution) => distribution.box1)),
@@ -267,6 +287,13 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
         ...(filingStatus === "married_filing_separately" && livedApartLastSix === false
           ? { [SPOUSE_KEYS.legallySeparatedApartAtYearEnd]: legallySeparated }
           : {}),
+        // Lines 1h and 5a: each disability pension came before the minimum retirement age, or after.
+        ...Object.fromEntries(
+          disabilityPensions(inputs).map((pension) => [
+            pension.answerKey,
+            pension.beforeMinimumRetirementAge,
+          ]),
+        ),
         // Line 27a: asked only while the EIC is possible.
         ...eicQuestions(inputs, earnedIncomeCredit),
       }),
