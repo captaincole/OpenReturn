@@ -1,5 +1,6 @@
 import type { DependentCredit, DependentFactValue } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Money } from "../../money.js";
 
 /*
  * One dependent with every derived Dependents-table answer decided in one
@@ -23,4 +24,10 @@ export interface Schedule8812FilingInfo extends BaseFilingInfo {
   childTaxCreditCount?: number;
   /** Line 6: dependents whose row (7) "Credit for other dependents" box is checked. */
   otherDependentCount?: number;
+  /** Line 18b: W-2 box 12 code Q on every W-2; undefined when no W-2 has one. */
+  w2NontaxableCombatPay?: Money;
+  /** Line 21: W-2 box 4 (social security tax withheld) on every W-2. */
+  w2SocialSecurityTaxWithheld?: Money;
+  /** Line 21: W-2 box 6 (Medicare tax withheld) on every W-2. */
+  w2MedicareTaxWithheld?: Money;
 }

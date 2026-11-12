@@ -1,7 +1,7 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
-import { defineForm, type FormAccessor } from "../../defineForm.js";
-import { atLeast, roundDollars, stepsOf, sum } from "../../money.js";
+import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
+import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { Schedule8812FilingInfo } from "./filingInfo.js";
 import type { Schedule8812 } from "./types.js";
@@ -18,13 +18,19 @@ const PHASEOUT_STEP = 1_000;
 // Line 11: "Multiply line 10 by 5% (0.05)".
 const PHASEOUT_RATE = 0.05;
 
-/*
- * Part II-A, the additional child tax credit, applies when line 12 exceeds line
- * 14 (the tax is smaller than the credit). No scenario reaches it yet; Form 1040
- * line 28 stays unsupported until it is bound.
- */
-const PART_II_NOT_BOUND =
-  "Schedule 8812 Part II (the additional child tax credit, when line 12 exceeds line 14) is not bound yet; no scenario reaches it.";
+// MANUAL EDIT: line 16b, "x $1,700" for each qualifying child.
+const ADDITIONAL_CREDIT_PER_CHILD = 1_700;
+// Line 19: "Subtract $2,500 from the amount on line 18a".
+const EARNED_INCOME_FLOOR = 2_500;
+// Line 20: "Multiply the amount on line 19 by 15% (0.15)".
+const EARNED_INCOME_RATE = 0.15;
+// Line 20 Next: "On line 16b, is the amount $5,100 or more?"
+const PART_II_B_MINIMUM = 5_100;
+
+type Form = FormAccessor<Schedule8812>;
+type Bindings = Partial<{
+  [K in keyof Schedule8812]: BindingFn<Schedule8812, Schedule8812FilingInfo, K>;
+}>;
 
 export function register(): void {
   defineForm<Schedule8812, Schedule8812FilingInfo>("schedule-8812", {
@@ -137,6 +143,8 @@ export function register(): void {
         if (line12 === undefined || line13 === undefined) return undefined;
         return Math.min(line12, line13);
       },
+      ...partIIABindings(),
+      ...partIIBBindings(),
     },
 
     unsupported: {
@@ -146,25 +154,6 @@ export function register(): void {
         "The foreign earned income and housing exclusions (Form 2555) have no fact kind.",
       "0.line.2c_form_4563_line_15":
         "The American Samoa income exclusion (Form 4563) has no fact kind.",
-      "1.line.16a_line12_minus_line14": PART_II_NOT_BOUND,
-      "1.line.16b_qualifying_children_count": PART_II_NOT_BOUND,
-      "1.line.16b_qualifying_children_times_1700": PART_II_NOT_BOUND,
-      "1.line.17_smaller_of_16a_16b": PART_II_NOT_BOUND,
-      "1.line.18a_earned_income": PART_II_NOT_BOUND,
-      "1.line.18b_nontaxable_combat_pay": PART_II_NOT_BOUND,
-      "1.line.19_line18a_more_than_2500_no": PART_II_NOT_BOUND,
-      "1.line.19_line18a_more_than_2500_yes": PART_II_NOT_BOUND,
-      "1.line.19_earned_income_over_2500": PART_II_NOT_BOUND,
-      "1.line.20_line19_times_15_percent": PART_II_NOT_BOUND,
-      "1.line.20_line16b_at_least_5100_no": PART_II_NOT_BOUND,
-      "1.line.20_line16b_at_least_5100_yes": PART_II_NOT_BOUND,
-      "1.line.21_withheld_ss_medicare_taxes": PART_II_NOT_BOUND,
-      "1.line.22_schedule_1_and_2_taxes": PART_II_NOT_BOUND,
-      "1.line.23_total_lines_21_22": PART_II_NOT_BOUND,
-      "1.line.24_eic_and_schedule_3_line_11": PART_II_NOT_BOUND,
-      "1.line.25_line23_minus_line24": PART_II_NOT_BOUND,
-      "1.line.26_larger_of_line20_line25": PART_II_NOT_BOUND,
-      "1.line.27_additional_child_tax_credit": PART_II_NOT_BOUND,
     },
 
     // This SSN widget (text, maxLength 11) keeps the dashes; the 1040 comb widget strips them.
@@ -180,4 +169,178 @@ function line8MoreThanLine11(form: FormAccessor<Schedule8812>): boolean | undefi
   const line11 = form["0.line.11_phaseout_amount"];
   if (line8 === undefined || line11 === undefined) return undefined;
   return line8 > line11;
+}
+
+/*
+ * MANUAL EDIT: Part II-A (irs-1040s8-inst-2025::sec::part-ii-a-additional-child-tax-credit::b01)
+ * opens when line 12 is more than line 14; otherwise the part stays blank. A
+ * Form 2555 filer cannot claim it, but Form 2555 has no fact kind (line 2b).
+ */
+function partIIABindings(): Bindings {
+  return {
+    "1.line.16a_line12_minus_line14": (form) => {
+      const line12 = form["0.line.12_credit_after_phaseout"];
+      const line14 = form["0.line.14_child_tax_credit_and_other_dependents"];
+      if (line12 === undefined || line14 === undefined) return undefined;
+      return line12 > line14 ? line12 - line14 : undefined;
+    },
+    // The same count as line 4.
+    "1.line.16b_qualifying_children_count": (form) =>
+      form["1.line.16a_line12_minus_line14"] === undefined
+        ? undefined
+        : form["0.line.4_qualifying_children_under_17"],
+    "1.line.16b_qualifying_children_times_1700": (form) => {
+      const count = form["1.line.16b_qualifying_children_count"];
+      return count === undefined ? undefined : count * ADDITIONAL_CREDIT_PER_CHILD;
+    },
+    "1.line.17_smaller_of_16a_16b": (form) => {
+      if (!partIIAOpen(form)) return undefined;
+      return Math.min(
+        sum(form["1.line.16a_line12_minus_line14"]),
+        sum(form["1.line.16b_qualifying_children_times_1700"]),
+      );
+    },
+    "1.line.18a_earned_income": (form) => (partIIAOpen(form) ? earnedIncome(form) : undefined),
+    "1.line.18b_nontaxable_combat_pay": (form, info) =>
+      partIIAOpen(form) ? roundDollars(info.w2NontaxableCombatPay) : undefined,
+    "1.line.19_line18a_more_than_2500_no": (form) => {
+      const answer = line18aMoreThanFloor(form);
+      return answer === undefined ? undefined : !answer;
+    },
+    "1.line.19_line18a_more_than_2500_yes": (form) => line18aMoreThanFloor(form),
+    // "No. Leave line 19 blank".
+    "1.line.19_earned_income_over_2500": (form) =>
+      line18aMoreThanFloor(form)
+        ? sum(form["1.line.18a_earned_income"]) - EARNED_INCOME_FLOOR
+        : undefined,
+    // "No ... enter -0- on line 20".
+    "1.line.20_line19_times_15_percent": (form) => {
+      const answer = line18aMoreThanFloor(form);
+      if (answer === undefined) return undefined;
+      return answer
+        ? roundDollars(sum(form["1.line.19_earned_income_over_2500"]) * EARNED_INCOME_RATE)
+        : 0;
+    },
+    "1.line.20_line16b_at_least_5100_no": (form) => {
+      const answer = line16bAtLeastPartIIBMinimum(form);
+      return answer === undefined ? undefined : !answer;
+    },
+    "1.line.20_line16b_at_least_5100_yes": (form) => line16bAtLeastPartIIBMinimum(form),
+    "1.line.27_additional_child_tax_credit": (form) => {
+      const partIIB = completesPartIIB(form);
+      if (partIIB === undefined) return undefined;
+      const line17 = sum(form["1.line.17_smaller_of_16a_16b"]);
+      const line20Or26 = partIIB
+        ? form["1.line.26_larger_of_line20_line25"]
+        : form["1.line.20_line19_times_15_percent"];
+      return line20Or26 === undefined ? undefined : Math.min(line17, line20Or26);
+    },
+  };
+}
+
+// MANUAL EDIT: Part II-B lines stay blank when line 20 Next skips the part.
+function partIIBBindings(): Bindings {
+  return {
+    /*
+     * The Additional Medicare Tax and RRTA Tax Worksheet: W-2 boxes 4 and 6,
+     * plus Form 8959 line 7, less Form 8959 line 22, plus half of Form 8959
+     * line 13. Without Form 8959 it is boxes 4 and 6. Tier 1 RRTA has no fact.
+     */
+    "1.line.21_withheld_ss_medicare_taxes": (form, info) => {
+      if (completesPartIIB(form) !== true) return undefined;
+      const line22Of8959 = sum(
+        form["form-8959.0.line.22_additional_medicare_tax_withholding_wages"],
+      );
+      return roundDollars(
+        sum(
+          info.w2SocialSecurityTaxWithheld,
+          info.w2MedicareTaxWithheld,
+          form["form-8959.0.line.7_additional_medicare_tax_wages"],
+          sum(form["form-8959.0.line.13_additional_medicare_tax_se"]) / 2,
+        ) - line22Of8959,
+      );
+    },
+    "1.line.22_schedule_1_and_2_taxes": (form) =>
+      completesPartIIB(form) === true
+        ? sum(
+            form["schedule-1.1.line.15"],
+            form["schedule-2.0.line.5_ss_medicare_tax_unreported_tips"],
+            form["schedule-2.0.line.6_uncollected_ss_medicare_tax_wages"],
+            form["schedule-2.0.line.13_uncollected_ss_medicare_rrta_tax_w2"],
+          )
+        : undefined,
+    "1.line.23_total_lines_21_22": (form) =>
+      completesPartIIB(form) === true
+        ? sum(
+            form["1.line.21_withheld_ss_medicare_taxes"],
+            form["1.line.22_schedule_1_and_2_taxes"],
+          )
+        : undefined,
+    // Waits for Form 1040 line 27a (the EIC), only on this branch.
+    "1.line.24_eic_and_schedule_3_line_11": (form) => {
+      if (completesPartIIB(form) !== true) return undefined;
+      const line27a = numberOrBlank(form["form-1040.line.27a"]);
+      if (line27a === undefined) return undefined;
+      return sum(line27a, form["schedule-3.0.line.11"]);
+    },
+    "1.line.25_line23_minus_line24": (form) => {
+      const line23 = form["1.line.23_total_lines_21_22"];
+      const line24 = form["1.line.24_eic_and_schedule_3_line_11"];
+      if (line23 === undefined || line24 === undefined) return undefined;
+      return atLeast(0, line23 - line24);
+    },
+    "1.line.26_larger_of_line20_line25": (form) => {
+      const line25 = form["1.line.25_line23_minus_line24"];
+      if (line25 === undefined) return undefined;
+      return Math.max(sum(form["1.line.20_line19_times_15_percent"]), line25);
+    },
+  };
+}
+
+// Line 16b: "If zero, stop here; you cannot claim the additional child tax credit."
+function partIIAOpen(form: Form): boolean {
+  return sum(form["1.line.16b_qualifying_children_times_1700"]) > 0;
+}
+
+/*
+ * MANUAL EDIT: line 18a, the Earned Income Chart (irs-1040s8-inst-2025::sec::earned-income-chart-line-18a::b01):
+ * with no self-employment, EIC Step 5 and the Earned Income Worksheet both give
+ * Form 1040 line 1z plus all nontaxable combat pay (no line 1i election fact),
+ * less Medicaid waiver payments (Schedule 1 line 8s, unsupported). With a
+ * Schedule C or SE the worksheets differ and are not drafted, so the line waits.
+ */
+function earnedIncome(form: Form): number | undefined {
+  const selfEmployed =
+    numberOrBlank(form["schedule-c.0.line.31"]) !== undefined ||
+    numberOrBlank(form["schedule-se.0.line.3"]) !== undefined;
+  const line1z = numberOrBlank(form["form-1040.line.1z"]);
+  if (selfEmployed || line1z === undefined) return undefined;
+  return atLeast(0, sum(line1z, form["1.line.18b_nontaxable_combat_pay"]));
+}
+
+// Line 19: "Is the amount on line 18a more than $2,500?"
+function line18aMoreThanFloor(form: Form): boolean | undefined {
+  const line18a = form["1.line.18a_earned_income"];
+  return line18a === undefined ? undefined : line18a > EARNED_INCOME_FLOOR;
+}
+
+// Line 20 Next: "On line 16b, is the amount $5,100 or more?"
+function line16bAtLeastPartIIBMinimum(form: Form): boolean | undefined {
+  if (!partIIAOpen(form)) return undefined;
+  return sum(form["1.line.16b_qualifying_children_times_1700"]) >= PART_II_B_MINIMUM;
+}
+
+/*
+ * Line 20 Next: Part II-B applies when line 16b is $5,100 or more and line 20
+ * is less than line 17. A bona fide resident of Puerto Rico also completes it,
+ * but residence there has no fact.
+ */
+function completesPartIIB(form: Form): boolean | undefined {
+  const atLeastMinimum = line16bAtLeastPartIIBMinimum(form);
+  const line17 = form["1.line.17_smaller_of_16a_16b"];
+  const line20 = form["1.line.20_line19_times_15_percent"];
+  if (atLeastMinimum === undefined || line17 === undefined || line20 === undefined) {
+    return undefined;
+  }
+  return atLeastMinimum && line20 < line17;
 }
