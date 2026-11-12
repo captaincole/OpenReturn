@@ -145,7 +145,7 @@ function rentalFloor(inputs: ResolverInputs): number | undefined {
  * by counting a profit as 0); a new adjustment line, or an income line that can
  * be negative, must be counted here, or this bound is no longer a lower bound.
  */
-function agiFloor(inputs: ResolverInputs, joint: boolean): number | undefined {
+export function agiFloor(inputs: ResolverInputs, joint: boolean): number | undefined {
   const businesses = businessFloor(inputs, joint);
   const rentals = rentalFloor(inputs);
   const hsa = hsaDeductionCeiling(inputs);

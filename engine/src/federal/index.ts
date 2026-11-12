@@ -33,6 +33,7 @@ import { register as registerScheduleD } from "./schedule-d/bindings.js";
 import { register as registerScheduleE } from "./schedule-e/bindings.js";
 import { register as registerScheduleEIC } from "./schedule-eic/bindings.js";
 import { register as registerScheduleH } from "./schedule-h/bindings.js";
+import { register as registerScheduleR } from "./schedule-r/bindings.js";
 import { register as registerScheduleSE } from "./schedule-se/bindings.js";
 
 /* Rollup inlines the JSON at build time; the process does not read it from disk. */
@@ -63,6 +64,7 @@ import scheduleDCatalogJson from "./schedule-d/catalog.json";
 import scheduleECatalogJson from "./schedule-e/catalog.json";
 import scheduleEICCatalogJson from "./schedule-eic/catalog.json";
 import scheduleHCatalogJson from "./schedule-h/catalog.json";
+import scheduleRCatalogJson from "./schedule-r/catalog.json";
 import scheduleSECatalogJson from "./schedule-se/catalog.json";
 
 /* parse() narrows the widened JSON types and fails at boot when a catalog drifts. */
@@ -91,6 +93,7 @@ export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(scheduleHCatalogJson),
   fixtureFileSchema.parse(form5695CatalogJson),
   fixtureFileSchema.parse(form6251CatalogJson),
+  fixtureFileSchema.parse(scheduleRCatalogJson),
   fixtureFileSchema.parse(schedule3CatalogJson),
   fixtureFileSchema.parse(form4684CatalogJson),
   fixtureFileSchema.parse(scheduleEICCatalogJson),
@@ -197,6 +200,13 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Schedule 3",
     relativeDir: "federal/schedule-3",
     register: registerSchedule3,
+  }),
+  makeFormSpec({
+    formId: "schedule-r",
+    shortId: "schedule-r",
+    displayName: "Schedule R",
+    relativeDir: "federal/schedule-r",
+    register: registerScheduleR,
   }),
   makeFormSpec({
     formId: "schedule-h",
