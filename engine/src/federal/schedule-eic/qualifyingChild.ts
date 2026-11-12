@@ -10,11 +10,19 @@
  */
 
 import {
+  SPOUSE_KEYS,
   ageAtYearEnd,
+  getDependentFacts,
   isQualifyingChildRelationship,
   livedWithTaxpayerOverHalfYear,
+  type DependentFact,
   type DependentFactValue,
 } from "../../facts/index.js";
+import { filingStatusOf } from "../../filingInfoResolvers.js";
+import { text, type ResolverInputs } from "../../resolverInputs.js";
+
+/* Resolvers see no tax year; Schedule 8812 pins its age rules to 2025 the same way. */
+export const TAX_YEAR = 2025;
 
 /* MM/DD/YYYY as a sortable number (YYYYMMDD); undefined when unreadable. */
 function dateKey(date: string | undefined): number | undefined {
@@ -81,6 +89,34 @@ export function isEicQualifyingChild(
   const age = passesAgeTest(child, filerDobs, taxYear);
   if (age === false) return false;
   return age === undefined || residency === undefined ? undefined : true;
+}
+
+export interface EicQualifyingChildren {
+  /** Dependents who pass isEicQualifyingChild, in the order recorded. */
+  children: DependentFact[];
+  /** The qualifying children with an SSN. */
+  withSsn: DependentFact[];
+  /** A dependent whose test is still open (an answer it needs is missing). */
+  childrenOpen: boolean;
+}
+
+/* The dependents' EIC tests, against the taxpayer's age (and the spouse's on a joint return). */
+export function eicQualifyingChildren(inputs: ResolverInputs): EicQualifyingChildren {
+  const joint = filingStatusOf(inputs) === "married_filing_jointly";
+  const filerDobs = [
+    text(inputs, "identity.dob"),
+    ...(joint ? [text(inputs, SPOUSE_KEYS.dob)] : []),
+  ];
+  const tests = getDependentFacts(inputs.facts).map((fact) => ({
+    fact,
+    qualifies: isEicQualifyingChild(fact.dependent, filerDobs, TAX_YEAR),
+  }));
+  const children = tests.filter((test) => test.qualifies === true).map((test) => test.fact);
+  return {
+    children,
+    withSsn: children.filter((child) => child.dependent.ssn !== undefined),
+    childrenOpen: tests.some((test) => test.qualifies === undefined),
+  };
 }
 
 // Schedule EIC, line 1: "you have to list only three to get the maximum credit."

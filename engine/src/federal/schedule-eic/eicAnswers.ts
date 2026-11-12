@@ -9,7 +9,6 @@ import {
   EIC_KEYS,
   SPOUSE_KEYS,
   businessesOnReturn,
-  getDependentFacts,
   isW2FactKey,
   type W2FactValue,
 } from "../../facts/index.js";
@@ -18,10 +17,7 @@ import { factsInCategory, sumW2Box, text, type ResolverInputs } from "../../reso
 import { netProfit } from "../schedule-c/lines.js";
 import { noChildEicAge, type EicAnswers } from "./credit.js";
 import { eicIncomeLimit } from "./limits.js";
-import { isEicQualifyingChild } from "./qualifyingChild.js";
-
-/* Resolvers see no tax year; Schedule EIC's resolver pins 2025 the same way. */
-const TAX_YEAR = 2025;
+import { eicQualifyingChildren } from "./qualifyingChild.js";
 
 export interface EicLineInfo extends EicAnswers {
   /** A business on the return: Step 5, question 2 sends the filer to Worksheet B. */
@@ -40,22 +36,14 @@ const answer = (inputs: ResolverInputs, key: string) =>
 
 export function resolveEicLineInfo(inputs: ResolverInputs): EicLineInfo {
   const joint = filingStatusOf(inputs) === "married_filing_jointly";
-  const filerDobs = [
-    text(inputs, "identity.dob"),
-    ...(joint ? [text(inputs, SPOUSE_KEYS.dob)] : []),
-  ];
-  const tests = getDependentFacts(inputs.facts).map((fact) => ({
-    fact,
-    qualifies: isEicQualifyingChild(fact.dependent, filerDobs, TAX_YEAR),
-  }));
-  const children = tests.filter((test) => test.qualifies === true);
+  const { children, withSsn, childrenOpen } = eicQualifyingChildren(inputs);
   const w2s = factsInCategory(inputs, "wages")
     .filter((row) => isW2FactKey(row.key))
     .map((row) => row.value as W2FactValue);
   return {
     qualifyingChildren: children.length,
-    childrenWithSsn: children.filter((test) => test.fact.dependent.ssn !== undefined).length,
-    childrenOpen: tests.some((test) => test.qualifies === undefined),
+    childrenWithSsn: withSsn.length,
+    childrenOpen,
     nonresidentAlien: answer(inputs, EIC_KEYS.nonresidentAlien),
     qualifyingChildOfAnother: answer(inputs, EIC_KEYS.qualifyingChildOfAnother),
     mainHomeInUs: answer(inputs, EIC_KEYS.mainHomeInUs),
