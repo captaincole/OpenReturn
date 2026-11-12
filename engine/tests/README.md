@@ -71,6 +71,11 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
     mileage and a simplified home office, Schedule SE, Form 8995), gifts
     on Schedule A, a capital loss carryover on Schedule D. Checked
     against the case's answer key; its README lists the lines not checked
+  - `tcb-us-007` — TaxCalcBench case ty25-us-007, federal only. MFS, a
+    W-2, a consulting business, two 1099-B sales (Form 8949), a capital
+    loss carryover, NIIT with an additional modification, and a made
+    Form 1095-A whose advance payments are repaid on Form 8962. Checked
+    against the case's answer key; its README lists the lines not checked
   - `tcb-ca-005` — TaxCalcBench case ty25-ca-005, CA checked only. MFJ,
     a dependent, CA itemized deductions (Schedule CA Part II, FTB 3526),
     the CA AMT on an ISO exercise (Schedule P), an early 1099-R (FTB

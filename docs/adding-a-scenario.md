@@ -47,7 +47,8 @@ tcb-us-004: MFJ, itemized deductions (Schedule A), investment interest
 tcb-us-006: MFS, a sole-proprietor business (Schedule C, SE, 8995-A),
 gambling winnings, Additional Medicare Tax, NIIT; tcb-us-008: MFS,
 a 1099-NEC business with mileage and a home office, gifts on
-Schedule A, a capital loss carryover, Form 8995; tcb-ca-005: MFJ, CA
+Schedule A, a capital loss carryover, Form 8995; tcb-us-007: MFS,
+Marketplace coverage repaid on Form 8962 (Form 1095-A); tcb-ca-005: MFJ, CA
 itemized deductions (Schedule CA Part II, FTB 3526), CA AMT on an ISO
 exercise (Schedule P), early-distribution tax (FTB 3805P);
 tcb-us-001: HOH, mortgage interest (Form 1098), federal AMT on an ISO
