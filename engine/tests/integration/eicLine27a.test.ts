@@ -18,10 +18,7 @@ import {
   type EicOutcome,
 } from "../../src/federal/schedule-eic/credit.js";
 import { eicOutcome } from "../../src/federal/schedule-eic/outcome.js";
-import {
-  RECHARACTERIZED_INCOME_GAP,
-  ROYALTIES_WITH_RENTS_GAP,
-} from "../../src/federal/schedule-eic/worksheet1.js";
+import { ROYALTIES_WITH_RENTS_GAP } from "../../src/federal/schedule-eic/worksheet1.js";
 import { decisionRow } from "../helpers/fixtureBuilders.js";
 import { tcbUs002Scenario as base } from "../scenarios/tcb-us-002/index.js";
 
@@ -281,15 +278,17 @@ describe("Form 1040 line 27a for a Schedule E filer (Pub. 596 Worksheet 1)", () 
     expect(askedEic.filter((key) => key.startsWith("eic."))).toEqual([]);
   });
 
-  it("reaches the gap for a passive self-rental with income, asking no EIC answer", () => {
-    const shape = rentalShape(9_000);
-    // No deductions: Form 8582 does not file, so line 26 holds the income.
-    const selfRental = { ...house(9_000), propertyType: "self_rental" as const, expenses: {} };
+  it("leaves a self-rental's nonpassive net income out of line 13 and credits", () => {
+    // As a passive rental, $12,000 on line 13 stops the credit; as a self-rental it is "NPA".
+    const shape = rentalShape(13_000);
+    const selfRental = { ...house(13_000), propertyType: "self_rental" as const };
     const { outcome, askedEic } = settle({
       ...shape,
       extra: { ...shape.extra, [makeRentalFactKey("house")]: selfRental },
     });
-    expect(outcome).toEqual({ kind: "unsupported", reason: RECHARACTERIZED_INCOME_GAP });
-    expect(askedEic.filter((key) => key.startsWith("eic."))).toEqual([]);
+    // AGI $27,000 is over $23,350: the smaller of the two table amounts.
+    const credit = Math.min(eicTableCredit(15_000, 1, false), eicTableCredit(27_000, 1, false));
+    expect(outcome).toEqual({ kind: "credit", amount: credit });
+    expect(askedEic).toContain(EIC_KEYS.nonresidentAlien);
   });
 });

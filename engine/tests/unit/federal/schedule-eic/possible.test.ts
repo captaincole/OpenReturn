@@ -167,7 +167,7 @@ describe("eicMayApply", () => {
       expect(eicAsked([w2(20_000), interest(1_000), income])).not.toEqual([]);
     });
 
-    it("asks nothing when a passive self-rental's net income may be nonpassive (a gap)", () => {
+    it("asks the EIC answers for a passive self-rental: its net income is nonpassive, not a gap", () => {
       const selfRental = rental({
         propertyType: "self_rental",
         rentsReceived: 9_000,
@@ -178,9 +178,10 @@ describe("eicMayApply", () => {
         category: "rental",
         value: false,
       };
-      expect(eicMayApply(inputs([w2(20_000), selfRental, passive]), 1)).toBe(false);
-      expect(eicAsked([w2(20_000), selfRental, passive])).toEqual([]);
-      // A loss is not recharacterized: the questions are asked.
+      // Worksheet 1 leaves the net income out of line 13 (NPA): the questions are asked.
+      expect(eicMayApply(inputs([w2(20_000), selfRental, passive]), 1)).toBe(true);
+      expect(eicAsked([w2(20_000), selfRental, passive])).not.toEqual([]);
+      // A loss is passive, as any rental's: the questions are asked.
       const loss = rental({
         propertyType: "self_rental",
         rentsReceived: 1_000,
