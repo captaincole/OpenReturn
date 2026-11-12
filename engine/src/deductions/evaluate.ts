@@ -50,7 +50,10 @@ const files = (info: FilingInfo, formId: string) => info.mustFile?.[formId]?.val
 function lineAmount(id: ItemId, info: FilingInfo, forms: Forms): number | undefined {
   switch (id) {
     case "state_income_tax":
-      return info.stateLocalIncomeTaxPaid;
+      // Schedule A line 5a: general sales taxes instead, by election.
+      return info.generalSalesTaxElection === true
+        ? info.generalSalesTaxPaid
+        : info.stateLocalIncomeTaxPaid;
     case "real_estate_tax":
       return info.realEstateTaxes;
     case "personal_property_tax":
