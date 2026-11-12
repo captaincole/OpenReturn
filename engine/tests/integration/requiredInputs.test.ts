@@ -38,7 +38,7 @@ const OPTIONAL: Array<[RegExp, string]> = [
   [
     /^amt\.iso_exercise_spread$/,
     "an answer Cade records only when the user exercised incentive stock options; " +
-      "Schedule P (540) reads it",
+      "Schedule P (540) and Form 6251 read it (a spread above 0 files Form 6251)",
   ],
   [
     /^mortgage\.origination_date_form_1098$/,
