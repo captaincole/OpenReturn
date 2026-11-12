@@ -16,7 +16,7 @@ import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
 import { resolve8959Info } from "./federal/8959/resolveInfo.js";
 import type { Form8960FilingInfo } from "./federal/8960/filingInfo.js";
-import { NIIT_THRESHOLDS } from "./federal/8960/lines.js";
+import { NIIT_THRESHOLDS, rentalsWithoutTradeOrBusinessAnswer } from "./federal/8960/lines.js";
 import { investmentSignals, magiUpperBound } from "./federal/8960/mustFile.js";
 import type { Schedule1FilingInfo } from "./federal/schedule-1/filingInfo.js";
 import type { Schedule2FilingInfo } from "./federal/schedule-2/filingInfo.js";
@@ -24,6 +24,7 @@ import { resolveScheduleAInfo } from "./federal/schedule-a/resolveInfo.js";
 import type { PayerAmount, ScheduleBFilingInfo } from "./federal/schedule-b/filingInfo.js";
 import { netProfit } from "./federal/schedule-c/lines.js";
 import type { ScheduleDFilingInfo } from "./federal/schedule-d/filingInfo.js";
+import { resolveScheduleEInfo } from "./federal/schedule-e/resolveInfo.js";
 import { resolveScheduleHInfo } from "./federal/schedule-h/resolveInfo.js";
 import { resolveScheduleSEInfo } from "./federal/schedule-se/resolveInfo.js";
 import type { BaseFilingInfo } from "./filingInfo.js";
@@ -267,14 +268,24 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
   const allocableTax = num(inputs, "state_local_tax.allocable_to_investment_income");
   const itemizes = resolveScheduleAInfo(inputs).mustFile?.["schedule-a"]?.value === true;
   const asked = resolution.value === true && itemizes;
+  // Line 4b reads Schedule E's lines, so only while Schedule E files.
+  const scheduleE = resolveScheduleEInfo(inputs);
+  const rentalProperties =
+    scheduleE.mustFile?.["schedule-e"]?.value === true ? scheduleE.rentalProperties : undefined;
+  const openRentals =
+    resolution.value === true ? rentalsWithoutTradeOrBusinessAnswer(rentalProperties ?? []) : [];
   return {
     mustFile: { "form-8960": resolution },
     missingInputs: {
-      "form-8960": asked
-        ? missingInputs({ "state_local_tax.allocable_to_investment_income": allocableTax })
-        : [],
+      "form-8960": [
+        ...(asked
+          ? missingInputs({ "state_local_tax.allocable_to_investment_income": allocableTax })
+          : []),
+        ...openRentals,
+      ],
     },
     scheduleCNonpassive,
+    rentalProperties,
     stateLocalTaxAllocableToInvestmentIncome: allocableTax,
   };
 }
@@ -302,16 +313,19 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
       : undefined;
   // Schedule SE line 13 reaches the 1040 only through Schedule 1 line 15.
   const scheduleSE = resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value === true;
+  // Schedule E line 41 reaches the 1040 only through Schedule 1 line 5.
+  const scheduleE = resolveScheduleEInfo(inputs).mustFile?.["schedule-e"]?.value === true;
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
-        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), or Form 8889 filed (${form8889})`,
+        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), or Form 8889 filed (${form8889})`,
         value:
           (miscOtherIncome ?? 0) > 0 ||
           (gamblingWinnings ?? 0) > 0 ||
           hasBusiness ||
           scheduleSE ||
+          scheduleE ||
           form8889,
       },
     ],

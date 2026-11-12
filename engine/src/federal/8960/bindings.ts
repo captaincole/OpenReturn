@@ -7,7 +7,7 @@
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import type { Form8960FilingInfo } from "./filingInfo.js";
-import { NIIT_THRESHOLDS, netInvestmentIncome } from "./lines.js";
+import { NIIT_THRESHOLDS, netInvestmentIncome, nonpassiveRentalAdjustments } from "./lines.js";
 import type { Form8960 } from "./types.js";
 
 export function register(): void {
@@ -16,19 +16,33 @@ export function register(): void {
       "0.header.ssn_or_ein": (_, info) => info.taxpayerSSN,
       "0.line.1": (form) => sum(form["form-1040.line.2b"]),
       "0.line.2": (form) => sum(form["form-1040.line.3b"]),
-      "0.line.4a": (form) =>
-        sum(form["schedule-1.0.line.3"], form["schedule-1.0.line.5"], form["schedule-1.0.line.6"]),
+      // MANUAL EDIT: a filed Schedule E whose Schedule 1 line 5 is still blank makes line 4a wait.
+      "0.line.4a": (form, info) =>
+        info.mustFile?.["schedule-e"]?.value !== false && form["schedule-1.0.line.5"] === undefined
+          ? undefined
+          : sum(
+              form["schedule-1.0.line.3"],
+              form["schedule-1.0.line.5"],
+              form["schedule-1.0.line.6"],
+            ),
       /*
-       * MANUAL EDIT: irs-8960-inst-2025::sec::line-4b-adjustment-for-net-income-or-loss::b01:
-       * a nonpassive section 162 business's net income goes on line 4b as a negative.
-       * Line G "Yes" makes every Schedule C business nonpassive; Schedules E and F are
-       * not modeled, and no fact marks a trader in financial instruments.
+       * MANUAL EDIT: irs-8960-inst-2025::sec::line-4b-adjustment-for-net-income-or-loss::b01,
+       * ::b02: nonpassive section 162 income goes on line 4b as a negative, a loss as a
+       * positive. Line G "Yes" makes every Schedule C business nonpassive. Schedule F
+       * is not modeled, and no fact marks a trader in financial instruments.
        */
       "0.line.4b": (form, info) => {
         const scheduleC = form["schedule-1.0.line.3"];
-        return typeof scheduleC === "number" && info.scheduleCNonpassive === true
-          ? 0 - scheduleC
-          : undefined;
+        if (info.scheduleCNonpassive === true && typeof scheduleC !== "number") return undefined;
+        const rentals = nonpassiveRentalAdjustments(form, info.rentalProperties ?? []);
+        if (rentals === undefined) return undefined;
+        const business =
+          info.scheduleCNonpassive === true && typeof scheduleC === "number"
+            ? 0 - scheduleC
+            : undefined;
+        return business === undefined && rentals.length === 0
+          ? undefined
+          : sum(business, ...rentals);
       },
       "0.line.4c": (form) => sum(form["0.line.4a"], form["0.line.4b"]),
       "0.line.5a": (form) => sum(form["form-1040.line.7a"], form["schedule-1.0.line.4"]),
