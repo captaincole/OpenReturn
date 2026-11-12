@@ -92,6 +92,11 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
   const professional = booleanFact(inputs.factByKey.get(RENTAL_KEYS.realEstateProfessional));
   const files = properties.length + spouseKeys.length > 0;
   const columns = properties.slice(0, COLUMNS.length);
+  /*
+   * MANUAL EDIT: a fourth property needs another Schedule E, which the engine does not
+   * fill (irs-1040se-inst-2025::sec::income-or-loss-from-rental-real::b01): it stays open.
+   */
+  const overflowKeys = properties.slice(COLUMNS.length).map((property) => property.key);
   return {
     mustFile: {
       "schedule-e": resolveMustFile(inputs.decisionByKey, {
@@ -115,6 +120,7 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
       "schedule-e": missingInputs({
         ...Object.fromEntries([...malformedKeys, ...spouseKeys].map((key) => [key, undefined])),
         ...Object.fromEntries(openPropertyKeys(columns).map((key) => [key, undefined])),
+        ...Object.fromEntries(overflowKeys.map((key) => [key, undefined])),
         ...(files ? { [RENTAL_KEYS.paymentsRequire1099]: paymentsRequire1099 } : {}),
         ...passiveAnswers(columns, professional),
         ...(paymentsRequire1099 === true ? { [RENTAL_KEYS.filedRequired1099s]: filed1099s } : {}),

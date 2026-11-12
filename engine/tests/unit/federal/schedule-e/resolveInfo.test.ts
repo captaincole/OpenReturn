@@ -48,3 +48,34 @@ describe("Schedule E with a spouse's or joint property", () => {
     expect(info.rentalProperties?.map((property) => property.factKey)).toEqual([key]);
   });
 });
+
+describe("Schedule E with more than three properties", () => {
+  const withProperties = (count: number) =>
+    makeResolverInputs({
+      facts: [
+        ...Array.from({ length: count }, (_, index) => ({
+          key: makeRentalFactKey(`unit${index + 1}`),
+          category: "rental",
+          value: duplex,
+        })),
+        { key: "rental.payments_require_1099", category: "rental", value: false },
+        { key: "rental.real_estate_professional", category: "rental", value: false },
+      ],
+      decisions: [
+        { decisionKey: "decisions.scope.filing_status", decision: "married_filing_jointly" },
+      ],
+    });
+
+  it("waits on the fourth property, which needs another Schedule E", () => {
+    const info = resolveScheduleEInfo(withProperties(4));
+    expect(info.rentalPropertiesOverflow).toBe(true);
+    expect(info.rentalProperties).toHaveLength(3);
+    expect(info.missingInputs?.["schedule-e"]).toEqual([makeRentalFactKey("unit4")]);
+  });
+
+  it("has nothing pending with three properties", () => {
+    const info = resolveScheduleEInfo(withProperties(3));
+    expect(info.rentalPropertiesOverflow).toBe(false);
+    expect(info.missingInputs?.["schedule-e"]).toEqual([]);
+  });
+});

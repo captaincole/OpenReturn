@@ -28,6 +28,8 @@ const line21 = (form: Form, column: PropertyColumn) =>
 
 /* Every property's line 21 is a number: the columns are computed. */
 function columnsReady(form: Form, info: Info): RentalProperty[] | undefined {
+  // A fourth property needs another Schedule E (not modeled): no total leaves it out.
+  if (info.rentalPropertiesOverflow) return undefined;
   const properties = info.rentalProperties ?? [];
   if (properties.length === 0) return undefined;
   return properties.every((property) => line21(form, property.column) !== undefined)
