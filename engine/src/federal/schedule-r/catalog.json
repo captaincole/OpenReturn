@@ -1,0 +1,423 @@
+{
+  "form": {
+    "formId": "schedule-r",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Credit for the Elderly or the Disabled"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-r.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.966
+      }
+    },
+    {
+      "fieldId": "schedule-r.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 671.966
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-r.0.part1.box_1_single_65_or_older",
+      "label": "Box 1 — Single, head of household, or qualifying surviving spouse: You were 65 or older",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 553.97
+      }
+    },
+    {
+      "fieldId": "schedule-r.0.part1.box_2_single_under_65_disabled",
+      "label": "Box 2 — Single, head of household, or qualifying surviving spouse: You were under 65 and you retired on permanent and total disability",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 529.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.0.part1.box_3_mfj_both_65_or_older",
+      "label": "Box 3 — Married filing jointly: Both spouses were 65 or older",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Married[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 493.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.0.part1.box_4_mfj_both_under_65_one_disabled",
+      "label": "Box 4 — Married filing jointly: Both spouses were under 65, but only one spouse retired on permanent and total disability",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Married[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 457.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.0.part1.box_5_mfj_both_under_65_both_disabled",
+      "label": "Box 5 — Married filing jointly: Both spouses were under 65, and both retired on permanent and total disability",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Married[0].c1_1[2]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 421.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.0.part1.box_6_mfj_one_65_other_disabled",
+      "label": "Box 6 — Married filing jointly: One spouse was 65 or older, and the other spouse was under 65 and retired on permanent and total disability",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Married[0].c1_1[3]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 385.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.0.part1.box_7_mfj_one_65_other_not_disabled",
+      "label": "Box 7 — Married filing jointly: One spouse was 65 or older, and the other spouse was under 65 and not retired on permanent and total disability",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Married[0].c1_1[4]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 349.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.0.part1.box_8_mfs_65_or_older_lived_apart",
+      "label": "Box 8 — Married filing separately: You were 65 or older and you lived apart from your spouse for all of 2025",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].MarriedSeparate[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 313.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.0.part1.box_9_mfs_under_65_disabled_lived_apart",
+      "label": "Box 9 — Married filing separately: You were under 65, you retired on permanent and total disability, and you lived apart from your spouse for all of 2025",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].MarriedSeparate[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 277.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.0.part2.physician_statement_on_file",
+      "label": "Part II — You filed a physician's statement for this disability for 1983 or an earlier year, or you filed or got a statement for tax years after 1983 and your physician signed line B on the statement, and due to your continued disabled condition, you were unable to engage in any substantial gainful activity in 2025, check this box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 550.4,
+        "y": 133.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.10_initial_amount",
+      "label": "Line 10 — If you checked (in Part I) box 1, 2, 4, or 7, enter $5,000; box 3, 5, or 6, enter $7,500; box 8 or 9, enter $3,750",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 695.97
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.11_taxable_disability_income",
+      "label": "Line 11 — If you checked (in Part I) box 6, add $5,000 to the taxable disability income of the spouse who was under age 65; box 2, 4, or 9, enter your taxable disability income; box 5, add your taxable disability income to your spouse’s taxable disability income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.12_smaller_line_10_or_11",
+      "label": "Line 12 — If you completed line 11, enter the smaller of line 10 or line 11. All others, enter the amount from line 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.13a_nontaxable_social_security",
+      "label": "Line 13a — Nontaxable part of social security benefits and nontaxable part of railroad retirement benefits treated as social security",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.13b_nontaxable_pensions",
+      "label": "Line 13b — Nontaxable veterans’ pensions and any other pension, annuity, or disability benefit that is excluded from income under any other provision of law",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.13c_total_nontaxable_income",
+      "label": "Line 13c — Add lines 13a and 13b. If you didn’t receive any of the types of nontaxable income listed on line 13a or 13b, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.14_agi",
+      "label": "Line 14 — Enter the amount from Form 1040 or 1040-SR, line 11a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.15_agi_threshold",
+      "label": "Line 15 — If you checked (in Part I) box 1 or 2, enter $7,500; box 3, 4, 5, 6, or 7, enter $10,000; box 8 or 9, enter $5,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.16_excess_agi",
+      "label": "Line 16 — Subtract line 15 from line 14. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.17_half_excess_agi",
+      "label": "Line 17 — Enter one-half of line 16",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.18_total_reductions",
+      "label": "Line 18 — Add lines 13c and 17",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.19_amount_after_reductions",
+      "label": "Line 19 — Subtract line 18 from line 12. If zero or less, stop; you can’t take the credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.20_tentative_credit",
+      "label": "Line 20 — Multiply line 19 by 15% (0.15)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.21_tax_liability_limit",
+      "label": "Line 21 — Tax liability limit. Enter the amount from the Credit Limit Worksheet in the instructions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "schedule-r.1.line.22_credit",
+      "label": "Line 22 — Credit for the elderly or the disabled. Enter the smaller of line 20 or line 21",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 167.969
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/schedule-r/blank.pdf",
+    "ingestedAt": "2026-11-12T17:21:35.876Z",
+    "totalFields": 27,
+    "skipped": 0,
+    "catalogEntries": 27
+  }
+}

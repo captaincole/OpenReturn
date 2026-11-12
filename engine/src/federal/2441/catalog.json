@@ -1,0 +1,1137 @@
+{
+  "form": {
+    "formId": "form-2441",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Child and Dependent Care Expenses"
+  },
+  "fields": [
+    {
+      "fieldId": "form-2441.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-2441.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-2441.0.line.a_mfs_requirements_met",
+      "label": "Line A — Married filing separately: you meet the requirements listed in the instructions under Married Persons Filing Separately",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 564,
+        "y": 663
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.b_deemed_income",
+      "label": "Line B — You or your spouse was a student or was disabled during 2025 and you're entering deemed income of $250 or $500 a month",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 564,
+        "y": 638.999
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.1_more_than_three_providers",
+      "label": "Part I — You have more than three care providers (see the instructions)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartI[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 564,
+        "y": 615.001
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_1_household_employee_yes",
+      "label": "Line 1, row 1 — (d) Was the care provider your household employee in 2025? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow1[0].ColD[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 404.3,
+        "y": 547.501
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_1_household_employee_no",
+      "label": "Line 1, row 1 — (d) Was the care provider your household employee in 2025? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow1[0].ColD[0].c1_4[1]",
+      "position": {
+        "page": 0,
+        "x": 461.9,
+        "y": 547.501
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_1_provider_name",
+      "label": "Line 1, row 1 — (a) Care provider's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 540
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_1_address",
+      "label": "Line 1, row 1 — (b) Address (number, street, apt. no., city, state, and ZIP code)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow1[0].ColB[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 137.8,
+        "y": 540
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_1_tin",
+      "label": "Line 1, row 1 — (c) Identifying number (SSN or EIN)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 540
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_1_amount_paid",
+      "label": "Line 1, row 1 — (e) Amount paid",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 540
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_2_household_employee_yes",
+      "label": "Line 1, row 2 — (d) Was the care provider your household employee in 2025? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow2[0].ColD[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 404.3,
+        "y": 523.5
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_2_household_employee_no",
+      "label": "Line 1, row 2 — (d) Was the care provider your household employee in 2025? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow2[0].ColD[0].c1_5[1]",
+      "position": {
+        "page": 0,
+        "x": 461.9,
+        "y": 523.5
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_2_provider_name",
+      "label": "Line 1, row 2 — (a) Care provider's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow2[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 515.999
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_2_address",
+      "label": "Line 1, row 2 — (b) Address (number, street, apt. no., city, state, and ZIP code)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow2[0].ColB[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 137.8,
+        "y": 515.999
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_2_tin",
+      "label": "Line 1, row 2 — (c) Identifying number (SSN or EIN)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow2[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 515.999
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_2_amount_paid",
+      "label": "Line 1, row 2 — (e) Amount paid",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow2[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 515.999
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_3_household_employee_yes",
+      "label": "Line 1, row 3 — (d) Was the care provider your household employee in 2025? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow3[0].ColD[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 404.3,
+        "y": 499.499
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_3_household_employee_no",
+      "label": "Line 1, row 3 — (d) Was the care provider your household employee in 2025? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow3[0].ColD[0].c1_6[1]",
+      "position": {
+        "page": 0,
+        "x": 461.9,
+        "y": 499.499
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_3_provider_name",
+      "label": "Line 1, row 3 — (a) Care provider's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow3[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 491.998
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_3_address",
+      "label": "Line 1, row 3 — (b) Address (number, street, apt. no., city, state, and ZIP code)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow3[0].ColB[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 137.8,
+        "y": 491.998
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_3_tin",
+      "label": "Line 1, row 3 — (c) Identifying number (SSN or EIN)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow3[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 491.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-2441.0.line.1_row_3_amount_paid",
+      "label": "Line 1, row 3 — (e) Amount paid",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].PartITable[0].BodyRow3[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_more_than_three_persons",
+      "label": "Line 2 — You have more than three qualifying persons (see the instructions)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 564,
+        "y": 391.502
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_1_first_name",
+      "label": "Line 2, row 1 — (a) Qualifying person's first name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 342
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_1_last_name",
+      "label": "Line 2, row 1 — (a) Qualifying person's last name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 173.8,
+        "y": 342
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_1_ssn",
+      "label": "Line 2, row 1 — (b) Qualifying person's social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 342
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_1_over_12_disabled",
+      "label": "Line 2, row 1 — (c) Check here if the qualifying person was over age 12 and was disabled",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row1[0].c1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 434.7,
+        "y": 343.5
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_1_expenses",
+      "label": "Line 2, row 1 — (d) Qualified expenses you incurred and paid in 2025 for the person listed in column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 342
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_2_first_name",
+      "label": "Line 2, row 2 — (a) Qualifying person's first name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row2[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 330.001
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_2_last_name",
+      "label": "Line 2, row 2 — (a) Qualifying person's last name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row2[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 173.8,
+        "y": 330.001
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_2_ssn",
+      "label": "Line 2, row 2 — (b) Qualifying person's social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row2[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 330.001
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_2_over_12_disabled",
+      "label": "Line 2, row 2 — (c) Check here if the qualifying person was over age 12 and was disabled",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row2[0].c1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 434.7,
+        "y": 331.501
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_2_expenses",
+      "label": "Line 2, row 2 — (d) Qualified expenses you incurred and paid in 2025 for the person listed in column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row2[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 330.001
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_3_first_name",
+      "label": "Line 2, row 3 — (a) Qualifying person's first name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row3[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 318.002
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_3_last_name",
+      "label": "Line 2, row 3 — (a) Qualifying person's last name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row3[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 173.8,
+        "y": 318.002
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_3_ssn",
+      "label": "Line 2, row 3 — (b) Qualifying person's social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row3[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 318.002
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_3_over_12_disabled",
+      "label": "Line 2, row 3 — (c) Check here if the qualifying person was over age 12 and was disabled",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row3[0].c1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 434.7,
+        "y": 319.502
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.2_row_3_expenses",
+      "label": "Line 2, row 3 — (d) Qualified expenses you incurred and paid in 2025 for the person listed in column (a)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Row3[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 318.002
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.3_qualified_expenses_total",
+      "label": "Line 3 — Add the amounts in column (d) of line 2. Don't enter more than $3,000 if you had one qualifying person or $6,000 if you had two or more persons. If you completed Part III, enter the amount from line 31",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 294.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.0.line.4_earned_income",
+      "label": "Line 4 — Enter your earned income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 282.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.0.line.5_spouse_earned_income",
+      "label": "Line 5 — If married filing jointly, enter your spouse's earned income; all others, enter the amount from line 4",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 258.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.0.line.6_smallest_of_3_4_5",
+      "label": "Line 6 — Enter the smallest of line 3, 4, or 5. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 246.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.0.line.7_agi",
+      "label": "Line 7 — Enter the amount from Form 1040, 1040-SR, or 1040-NR, line 11a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 234
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.8_decimal_amount",
+      "label": "Line 8 — Enter the decimal amount from the table that applies to the amount on line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 162
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-2441.0.line.9a_line_6_times_line_8",
+      "label": "Line 9a — Multiply line 6 by the decimal amount on line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 108
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.0.line.9b_prior_year_expenses",
+      "label": "Line 9b — If you paid 2024 expenses in 2025, complete Worksheet A in the instructions. Enter the amount from line 13 of the worksheet here. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 84.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.0.line.9c_add_9a_9b",
+      "label": "Line 9c — Add lines 9a and 9b and enter the result",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 72
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.0.line.10_tax_liability_limit",
+      "label": "Line 10 — Tax liability limit. Enter the amount from the Credit Limit Worksheet in the instructions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 60.001
+      }
+    },
+    {
+      "fieldId": "form-2441.0.line.11_dependent_care_credit",
+      "label": "Line 11 — Credit for child and dependent care expenses. Enter the smaller of line 9c or line 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 36
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.12_benefits_received",
+      "label": "Line 12 — Enter the total amount of dependent care benefits you received in 2025",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 672.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.13_grace_period_carryover",
+      "label": "Line 13 — Enter the amount, if any, you carried over from 2024 and used in 2025 during the grace period",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 648
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.14_forfeited_or_carried_forward",
+      "label": "Line 14 — Enter the amount, if any, you forfeited or carried forward to 2026",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 485.4,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-2441.1.line.15_combined_benefits",
+      "label": "Line 15 — Combine lines 12 through 14",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 624.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.16_qualified_expenses",
+      "label": "Line 16 — Enter the total amount of qualified expenses incurred in 2025 for the care of the qualifying person(s)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line16_ReadOrder[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 600.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.17_smaller_line_15_16",
+      "label": "Line 17 — Enter the smaller of line 15 or 16",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 588.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.18_earned_income",
+      "label": "Line 18 — Enter your earned income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 576
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.19_spouse_earned_income",
+      "label": "Line 19 — Enter the amount shown below that applies to you: if married filing jointly, your spouse's earned income; if married filing separately, see instructions; all others, the amount from line 18",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 522
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.20_smallest_line_17_19",
+      "label": "Line 20 — Enter the smallest of line 17, 18, or 19. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 480.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.21_maximum_exclusion",
+      "label": "Line 21 — Enter $5,000 ($2,500 if married filing separately and you were required to enter your spouse's earned income on line 19). However, don't enter more than the maximum amount allowed under your dependent care plan",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 432
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.22_no",
+      "label": "Line 22 — Is any amount on line 12 or 13 from your sole proprietorship or partnership? No. Enter -0-",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 410.002
+      }
+    },
+    {
+      "fieldId": "form-2441.1.line.22_yes",
+      "label": "Line 22 — Is any amount on line 12 or 13 from your sole proprietorship or partnership? Yes. Enter the amount here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 397.999
+      }
+    },
+    {
+      "fieldId": "form-2441.1.line.22_amount",
+      "label": "Line 22 — Amount on line 12 or 13 from your sole proprietorship or partnership",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 396
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.23_line_15_minus_22",
+      "label": "Line 23 — Subtract line 22 from line 15",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 384.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.24_deductible_benefits",
+      "label": "Line 24 — Deductible benefits. Enter the smallest of line 20, 21, or 22",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 360
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.25_excluded_benefits",
+      "label": "Line 25 — Excluded benefits. If you checked \"No\" on line 22, enter the smaller of line 20 or line 21. Otherwise, subtract line 24 from the smaller of line 20 or line 21. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 336.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.26_taxable_benefits",
+      "label": "Line 26 — Taxable benefits. Subtract line 25 from line 23. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-2441.1.line.27_expense_limit",
+      "label": "Line 27 — Enter $3,000 ($6,000 if two or more qualifying persons)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 264.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.28_add_lines_24_25",
+      "label": "Line 28 — Add lines 24 and 25",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 252
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.29_line_27_minus_28",
+      "label": "Line 29 — Subtract line 28 from line 27. If zero or less, stop. You can't take the credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 228.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.30_line_2_col_d_total",
+      "label": "Line 30 — Complete line 2 on page 1 of this form. Don't include in column (d) any benefits shown on line 28 above. Then, add the amounts in column (d) and enter the total here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 204.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-2441.1.line.31_smaller_line_29_30",
+      "label": "Line 31 — Enter the smaller of line 29 or 30",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 180
+      },
+      "maxLength": 50
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/2441/blank.pdf",
+    "ingestedAt": "2026-11-12T17:22:01.119Z",
+    "totalFields": 72,
+    "skipped": 0,
+    "catalogEntries": 72
+  }
+}
