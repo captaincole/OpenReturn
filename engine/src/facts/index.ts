@@ -18,6 +18,7 @@ export * from "./kinds/mortgage.js";
 export * from "./kinds/nonemployeeCompensation.js";
 export * from "./kinds/paymentTransactions.js";
 export * from "./kinds/priorYear.js";
+export * from "./kinds/rental.js";
 export * from "./kinds/retirementDistribution.js";
 export * from "./kinds/socialSecurity.js";
 export * from "./kinds/spouse.js";

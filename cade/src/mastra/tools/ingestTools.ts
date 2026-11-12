@@ -12,6 +12,7 @@ import { ingestW2 } from "./ingestW2";
 import { ingestW2G } from "./ingestW2G";
 import { recordBusiness } from "./recordBusiness";
 import { recordDependent } from "./recordDependent";
+import { recordRental } from "./recordRental";
 
 export const ingestTools = {
   ingestW2,
@@ -30,6 +31,7 @@ export const ingestTools = {
   ingest1099Nec,
   recordBusiness,
   recordDependent,
+  recordRental,
 };
 
 /* Twice the SDK's 4,096: a 20-trade ingest-1099-b call is about 4,300 tokens. */
