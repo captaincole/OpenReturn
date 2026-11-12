@@ -1,48 +1,25 @@
-import { businessesOnReturn, isDividendFactKey, ownerOf } from "../../facts/index.js";
+import { businessesOnReturn, ownerOf } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
-import { sum } from "../../money.js";
-import {
-  factsInCategory,
-  missingInputs,
-  resolveMustFile,
-  type ResolverInputs,
-} from "../../resolverInputs.js";
+import { missingInputs, type ResolverInputs } from "../../resolverInputs.js";
 import { magiUpperBound } from "../8960/mustFile.js";
+import { qbiMustFile, qualifiedReitDividends } from "../8995/whichForm.js";
 import { netProfit } from "../schedule-c/lines.js";
-import { scheduleCOpen } from "../schedule-c/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
 import type { Form8995AFilingInfo, QbiBusiness } from "./filingInfo.js";
 import { QBI_LIMITS } from "./lines.js";
 
 /*
- * irs-8995a-inst-2025::sec::who-can-take-the-deduction::b01. The resolver cannot
- * read taxable income, and the engine has no Form 8995, so any Schedule C business
- * (QBI) files 8995-A. At or below the threshold line 13 takes line 3 unreduced,
- * the Form 8995 result. No fact says the taxpayer is a cooperative patron.
+ * irs-8995a-inst-2025::sec::who-can-take-the-deduction::b01: Form 8995-A files
+ * when Form 8995 does not (whichForm.ts, the rule both QBI forms share). At or
+ * below the threshold line 13 takes line 3 unreduced, the Form 8995 result. The
+ * QBI slots below are filled whichever form files: Form 8995 reads them too.
  */
 export function resolve8995AInfo(inputs: ResolverInputs): Form8995AFilingInfo {
-  const divs = factsInCategory(inputs, "investment_income").filter((row) =>
-    isDividendFactKey(row.key),
-  );
-  const reit = sum(...divs.map((row) => (row.value as { box5?: unknown }).box5));
-  const { businesses, malformedKeys } = qbiBusinesses(inputs);
-  const businessKeys = [...businesses.map((business) => business.factKey), ...malformedKeys];
-  const reitFallback = { rule: `fallback: section 199A dividends $${reit} > 0`, value: reit > 0 };
-  const businessFallback = {
-    rule: "fallback: a Schedule C business (qualified business income)",
-    value: businessKeys.length > 0,
-    triggeredByFactKeys: businessKeys,
-  };
-  // While Schedule C is open, only REIT dividends can say yes; nothing can say no.
-  const open = scheduleCOpen(inputs);
-  const resolution = resolveMustFile(inputs.decisionByKey, {
-    explicitKey: "decisions.scope.must_file_8995_a",
-    fallbacks: open ? (reit > 0 ? [reitFallback] : []) : [reitFallback, businessFallback],
-  });
+  const { businesses } = qbiBusinesses(inputs);
   return {
-    mustFile: { "form-8995-a": resolution },
+    mustFile: { "form-8995-a": qbiMustFile(inputs, "form-8995-a") },
     missingInputs: { "form-8995-a": missingBusinessAnswers(inputs, businesses) },
-    qualifiedReitDividends: divs.length > 0 ? reit : undefined,
+    qualifiedReitDividends: qualifiedReitDividends(inputs),
     qbiBusinesses: businesses.length > 0 ? businesses : undefined,
     qbiScheduleSEFiled: resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value,
   };
