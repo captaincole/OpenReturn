@@ -32,7 +32,9 @@ Form 8606 (nondeductible IRA basis, Roth conversions) and Schedule 1-A
 federal-only TaxCalcBench scenario with a sole-proprietor business
 (Schedules C and SE, Form 8995-A), and a second with a 1099-NEC
 business (vehicle mileage, a home office), gifts on Schedule A, a
-capital loss carryover and Form 8995. A second married-filing-jointly
+capital loss carryover and Form 8995. A third lived with the spouse
+and has two self-rentals and a passive royalty (Schedule E, Form 8582).
+A second married-filing-jointly
 TaxCalcBench scenario itemizes (Schedule A: gifts, medical under the
 floor, state tax withheld, investment interest on Form 4952) with a
 dependent (Schedule 8812), a small business, Social Security and a
