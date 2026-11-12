@@ -12,7 +12,7 @@
 
 import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
-import { isRentalActivity } from "./activities.js";
+import { isRentalActivity } from "../rentals/passive.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
 import type { Form8582 } from "./types.js";
 
