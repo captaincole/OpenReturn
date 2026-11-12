@@ -50,7 +50,10 @@ export const blocked = (
   missingFactKeys: opts.factKeys,
 });
 
-export const unsupported = (reason: string): DerivationBlocked => ({
+/* An engine gap with its reason: the only blocked result a binding may return. */
+export type Unsupported = DerivationBlocked & { unsupported: true };
+
+export const unsupported = (reason: string): Unsupported => ({
   ok: false,
   reason,
   unsupported: true,
