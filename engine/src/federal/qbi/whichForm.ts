@@ -4,8 +4,8 @@ import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { sum } from "../../money.js";
 import { factsInCategory, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { magiUpperBound } from "../8960/mustFile.js";
-import { QBI_LIMITS } from "../8995-a/lines.js";
 import { scheduleCOpen } from "../schedule-c/resolveInfo.js";
+import { QBI_LIMITS } from "./lines.js";
 
 /*
  * Form 8995 or Form 8995-A: the one rule for which of them figures the QBI
@@ -39,13 +39,18 @@ export function qualifiedReitDividends(inputs: ResolverInputs): number | undefin
  * threshold gives the Form 8995 result
  * (irs-8995a-inst-2025::sec::determining-your-qbi-deduction::b01). The engine
  * reads no Form 1099-PATR, so no taxpayer is a patron. An unknown filing status
- * counts a spouse's income and tests the lowest threshold.
+ * counts a spouse's income and tests the lowest threshold. Form 8995-A asks the
+ * W-2 wage and property answers by the same test.
  */
-export function qbiFormByIncome(inputs: ResolverInputs): QbiForm {
+export function qbiIncomeMayExceedThreshold(inputs: ResolverInputs): boolean {
   const status = filingStatusOf(inputs);
   const joint = status === undefined || status === "married_filing_jointly";
   const threshold = (status && QBI_LIMITS[status]?.threshold) || QBI_LIMITS.single.threshold;
-  return magiUpperBound(inputs, joint) <= threshold ? "form-8995" : "form-8995-a";
+  return magiUpperBound(inputs, joint) > threshold;
+}
+
+export function qbiFormByIncome(inputs: ResolverInputs): QbiForm {
+  return qbiIncomeMayExceedThreshold(inputs) ? "form-8995-a" : "form-8995";
 }
 
 /*

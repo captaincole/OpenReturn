@@ -2,13 +2,13 @@
 
 import { defineForm } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
-import type { QbiBusiness } from "../8995-a/filingInfo.js";
+import type { QbiBusiness } from "../qbi/filingInfo.js";
 import {
   businessQbi,
   businessTin,
   qualifiedDividendsPlusNetCapitalGain,
   taxableIncomeBeforeQbi,
-} from "../8995-a/lines.js";
+} from "../qbi/lines.js";
 import type { Form8995FilingInfo } from "./filingInfo.js";
 import type { Form8995 } from "./types.js";
 

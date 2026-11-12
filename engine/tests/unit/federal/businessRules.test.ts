@@ -11,6 +11,7 @@ import {
 } from "../../../src/facts/index.js";
 import { resolve8995AInfo } from "../../../src/federal/8995-a/resolveInfo.js";
 import { resolve8995Info } from "../../../src/federal/8995/resolveInfo.js";
+import { resolveQbiInfo } from "../../../src/federal/qbi/resolveInfo.js";
 import { resolveScheduleCInfo } from "../../../src/federal/schedule-c/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../../../src/federal/schedule-se/resolveInfo.js";
 import { resolveSchedule1Info, resolveSchedule2Info } from "../../../src/filingInfoResolvers.js";
@@ -294,7 +295,7 @@ describe("Form 8995-A must-file and businesses", () => {
   });
 
   it("leaves a spouse's business off a separate return", () => {
-    const info = resolve8995AInfo(
+    const info = resolveQbiInfo(
       inputs([business("rideshare"), spouseBusiness], "married_filing_separately"),
     );
     expect(info.qbiBusinesses?.map((qbi) => qbi.name)).toEqual(["rideshare"]);

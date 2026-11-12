@@ -26,7 +26,7 @@ const OPTIONAL: Array<[RegExp, string]> = [
   ],
   [
     /^decisions\.scope\.must_file_8995(_a)?$/,
-    "override; the QBI form follows the MAGI upper bound (federal/8995/whichForm.ts)",
+    "override; the QBI form follows the MAGI upper bound (federal/qbi/whichForm.ts)",
   ],
   [
     /^gambling\.winnings_not_on_w2g$/,
