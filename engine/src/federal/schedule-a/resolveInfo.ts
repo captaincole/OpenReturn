@@ -102,6 +102,8 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
   const giftsCashCheck = num(inputs, "charitable.cash");
   const giftsOtherThanCash = num(inputs, "charitable.noncash");
   const realEstateTaxes = num(inputs, "state_local_tax.real_estate");
+  const personalPropertyTaxes = num(inputs, "state_local_tax.personal_property");
+  const giftsCarryover = num(inputs, "charitable.carryover");
   const interestForm1098 = num(inputs, MORTGAGE_KEYS.interestForm1098);
   const principalForm1098 = num(inputs, MORTGAGE_KEYS.outstandingPrincipalForm1098);
   const mortgage = mortgageInterestWithinLimit(inputs, interestForm1098, principalForm1098);
@@ -112,6 +114,7 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
       "schedule-a": missingInputs({
         "medical.expenses_total": medicalDentalExpenses,
         "state_local_tax.real_estate": realEstateTaxes,
+        "state_local_tax.personal_property": personalPropertyTaxes,
         [MORTGAGE_KEYS.interestForm1098]: interestForm1098,
         /* The 1098's box 2: needed with its interest, for the acquisition-debt limit. */
         ...((interestForm1098 ?? 0) > 0
@@ -123,6 +126,7 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
           : {}),
         "charitable.cash": giftsCashCheck,
         "charitable.noncash": giftsOtherThanCash,
+        "charitable.carryover": giftsCarryover,
       }),
     },
     medicalDentalExpenses,
@@ -130,13 +134,13 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
     generalSalesTaxElection: decisionByKey.get("decisions.itemized.elect_general_sales_tax") as
       boolean | undefined,
     realEstateTaxes,
-    personalPropertyTaxes: num(inputs, "state_local_tax.personal_property"),
+    personalPropertyTaxes,
     mortgageInterestForm1098: mortgage.interest,
     mortgageInterestWaits: interestForm1098 !== undefined && mortgage.interest === undefined,
     mortgageInterestNotForm1098: num(inputs, MORTGAGE_KEYS.interestNotForm1098),
     pointsNotForm1098: num(inputs, MORTGAGE_KEYS.pointsNotForm1098),
     giftsCashCheck,
     giftsOtherThanCash,
-    giftsCarryover: num(inputs, "charitable.carryover"),
+    giftsCarryover,
   };
 }
