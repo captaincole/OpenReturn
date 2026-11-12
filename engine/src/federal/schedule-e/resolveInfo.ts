@@ -1,7 +1,12 @@
 import { RENTAL_KEYS, rentalsOnReturn } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
-import type { ScheduleEFilingInfo } from "./filingInfo.js";
+import { isPassiveActivity } from "../8582/resolveInfo.js";
+import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
+
+const COLUMNS: PropertyColumn[] = ["a", "b", "c"];
+
+const booleanFact = (value: unknown) => (typeof value === "boolean" ? value : undefined);
 
 const MUST_FILE_KEY = "decisions.scope.must_file_schedule_e";
 
@@ -21,7 +26,9 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
     inputs.facts,
     status === undefined || status === "married_filing_jointly",
   );
-  const paymentsRequire1099 = inputs.factByKey.get(RENTAL_KEYS.paymentsRequire1099);
+  const paymentsRequire1099 = booleanFact(inputs.factByKey.get(RENTAL_KEYS.paymentsRequire1099));
+  const filed1099s = booleanFact(inputs.factByKey.get(RENTAL_KEYS.filedRequired1099s));
+  const professional = booleanFact(inputs.factByKey.get(RENTAL_KEYS.realEstateProfessional));
   const files = properties.length > 0;
   return {
     mustFile: {
@@ -43,14 +50,20 @@ export function resolveScheduleEInfo(inputs: ResolverInputs): ScheduleEFilingInf
       "schedule-e": missingInputs({
         ...Object.fromEntries(malformedKeys.map((key) => [key, undefined])),
         ...(files ? { [RENTAL_KEYS.paymentsRequire1099]: paymentsRequire1099 } : {}),
-        ...(paymentsRequire1099 === true
-          ? {
-              [RENTAL_KEYS.filedRequired1099s]: inputs.factByKey.get(
-                RENTAL_KEYS.filedRequired1099s,
-              ),
-            }
-          : {}),
+        ...(paymentsRequire1099 === true ? { [RENTAL_KEYS.filedRequired1099s]: filed1099s } : {}),
       }),
     },
+    rentalProperties: files
+      ? properties.slice(0, COLUMNS.length).map((property, index) => ({
+          factKey: property.key,
+          column: COLUMNS[index],
+          value: property.value,
+          passive: isPassiveActivity(property.value, professional),
+        }))
+      : undefined,
+    rentalPropertiesOverflow: properties.length > COLUMNS.length,
+    rentalPaymentsRequire1099: paymentsRequire1099,
+    rentalFiled1099s: filed1099s,
+    realEstateProfessional: professional,
   };
 }
