@@ -17,6 +17,20 @@ export const QUALIFIED_DISASTER_FLOOR = 500;
 /* Line 17: 10% of Form 1040 line 11b. */
 export const AGI_FLOOR_RATE = 0.1;
 
+/* Section A: "If more than four items were lost or damaged, use additional sheets" (section-a-personal-use-property::b01). */
+export const ADDITIONAL_SHEETS_GAP =
+  "An event with more than four properties needs Form 4684's additional sheets, which the engine does not prepare.";
+
+/* Line 10 adds columns A through D only; more properties need the additional sheets. */
+export function needsAdditionalSheets(event: CasualtyEventFactValue): boolean {
+  return event.properties.length > COLUMNS;
+}
+
+/* Lines 13–18 read every event's line 12, so any event with additional sheets stops them. */
+export function additionalSheetsGap(events: readonly CasualtyEventFactValue[]): string | undefined {
+  return events.some(needsAdditionalSheets) ? ADDITIONAL_SHEETS_GAP : undefined;
+}
+
 export interface PropertyLines {
   line2: number;
   /* Blank when no reimbursement. */
@@ -84,9 +98,9 @@ function knownLine4Total(event: CasualtyEventFactValue): number {
   return sum(...event.properties.map((property) => propertyLines(property).line4));
 }
 
-/* Blocked with more than four properties: the additional sheets are not printed. */
+/* Undefined with more than four properties: the caller reports additionalSheetsGap. */
 export function line10(event: CasualtyEventFactValue): number | undefined {
-  if (event.properties.length > COLUMNS) return undefined;
+  if (needsAdditionalSheets(event)) return undefined;
   return sumOrBlank(...event.properties.map((property) => propertyLines(property).line9));
 }
 

@@ -12,7 +12,7 @@ export interface ScheduleCaFilingInfo
   extends
     BaseFilingInfo,
     Pick<Form8889FilingInfo, "hsaEmployerContributions">,
-    Pick<ScheduleAFilingInfo, "increasedStandardDeduction"> {
+    Pick<ScheduleAFilingInfo, "increasedStandardDeduction" | "disasterLossGap"> {
   /** Part II line 21: investment fees (misc_deductions.investment_fees), a California-only deduction. */
   caInvestmentFees?: number;
 }

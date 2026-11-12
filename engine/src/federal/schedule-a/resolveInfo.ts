@@ -9,7 +9,7 @@ import {
   text,
   type ResolverInputs,
 } from "../../resolverInputs.js";
-import { netQualifiedDisasterLoss } from "../4684/lines.js";
+import { additionalSheetsGap, netQualifiedDisasterLoss } from "../4684/lines.js";
 import { resolve4684Info } from "../4684/resolveInfo.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
 
@@ -97,7 +97,8 @@ function disasterLoss(inputs: ResolverInputs) {
   const amount = netQualifiedDisasterLoss(events);
   const possible =
     amount === undefined ? events.some((event) => event.qualifiedDisasterLoss) : amount > 0;
-  return { amount, possible, factKeys: facts.map((fact) => fact.factKey) };
+  const gap = additionalSheetsGap(events);
+  return { amount, possible, gap, factKeys: facts.map((fact) => fact.factKey) };
 }
 
 /* The standard deduction with a net qualified disaster loss; undefined while the loss waits. */
@@ -199,6 +200,7 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
     giftsOtherThanCash: num(inputs, "charitable.noncash"),
     giftsCarryover: num(inputs, "charitable.carryover"),
     netQualifiedDisasterLoss: loss.amount,
+    disasterLossGap: loss.gap,
     increasedStandardDeduction,
     gamblingLosses: num(inputs, GAMBLING_KEYS.losses),
   };

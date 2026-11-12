@@ -3,6 +3,9 @@
 import { describe, expect, it } from "vitest";
 import eicTable2025 from "../../../../src/data/eic-table-2025.json" with { type: "json" };
 import {
+  FORM_8862_GAP,
+  MARRIED_HOH_GAP,
+  SELF_ONLY_EIC_GAP,
   earnedIncomeCredit,
   eicTableCredit,
   worksheetCredit,
@@ -171,14 +174,52 @@ describe("earnedIncomeCredit", () => {
     });
   });
 
-  it("stops over the investment income limit, and on an IRS ban; waits on an earlier denial (Form 8862)", () => {
+  it("stops over the investment income limit, and on an IRS ban; an earlier denial (Form 8862) is unsupported", () => {
     expect(earnedIncomeCredit({ ...HOH, investmentIncome: 11_951 }, ANSWERED)).toEqual({
       kind: "none",
       checkLine27c: false,
     });
     expect(earnedIncomeCredit(HOH, { ...ANSWERED, barredByIrs: true }).kind).toBe("none");
     expect(earnedIncomeCredit(HOH, { ...ANSWERED, deniedInEarlierYear: true })).toEqual({
-      kind: "waiting",
+      kind: "unsupported",
+      reason: FORM_8862_GAP,
+    });
+  });
+
+  it("does not model the EIC without a qualifying child when no child has a valid SSN", () => {
+    const underNoChildLimit = { ...HOH, agi: 9_000, earnedIncome: 9_000 };
+    expect(earnedIncomeCredit(underNoChildLimit, { ...ANSWERED, childrenWithSsn: 0 })).toEqual({
+      kind: "unsupported",
+      reason: SELF_ONLY_EIC_GAP,
+    });
+  });
+
+  describe("Step 3, questions 4 and 5, married filing separately", () => {
+    const MFS: EicReturn = { ...HOH, filingStatus: "married_filing_separately" };
+    const credit = earnedIncomeCredit(HOH, ANSWERED);
+
+    it("goes on to question 6 when the spouses lived apart the last 6 months", () => {
+      expect(earnedIncomeCredit(MFS, { ...ANSWERED, livedApartLastSixMonths: true })).toEqual(
+        credit,
+      );
+    });
+
+    it("waits on question 4, then on question 5", () => {
+      expect(earnedIncomeCredit(MFS, ANSWERED)).toEqual(WAITING_OUTCOME);
+      expect(earnedIncomeCredit(MFS, { ...ANSWERED, livedApartLastSixMonths: false })).toEqual(
+        WAITING_OUTCOME,
+      );
+    });
+
+    it("goes on when legally separated and apart at year end, and stops otherwise", () => {
+      const together = { ...ANSWERED, livedApartLastSixMonths: false };
+      expect(
+        earnedIncomeCredit(MFS, { ...together, legallySeparatedApartAtYearEnd: true }),
+      ).toEqual(credit);
+      // "No. STOP You can't take the credit": no line 27c box.
+      expect(
+        earnedIncomeCredit(MFS, { ...together, legallySeparatedApartAtYearEnd: false }),
+      ).toEqual({ kind: "none", checkLine27c: false });
     });
   });
 
@@ -202,7 +243,8 @@ describe("earnedIncomeCredit", () => {
     ).toBe("none");
     // No fact says whether a head of household is married (Step 4, question 1).
     expect(earnedIncomeCredit({ ...SINGLE, filingStatus: "head_of_household" }, NO_CHILD)).toEqual({
-      kind: "waiting",
+      kind: "unsupported",
+      reason: MARRIED_HOH_GAP,
     });
   });
 
@@ -262,15 +304,19 @@ describe("earnedIncomeCredit", () => {
       expect(earnedIncomeCredit(MFJ, open)).toEqual({ kind: "none", checkLine27c: false });
     });
 
-    it("stops on line 1z while earned income waits on the combat pay election", () => {
-      const combat = { ...MFJ, earnedIncome: undefined };
+    it("stops on line 1z while the combat pay election is not modeled", () => {
+      const reason = "no election fact";
+      const combat = { ...MFJ, earnedIncome: undefined, earnedIncomeGap: reason };
       expect(earnedIncomeCredit({ ...combat, earnedIncomeAtLeast: 69_000 }, SIX)).toEqual({
         kind: "none",
         checkLine27c: false,
       });
-      expect(earnedIncomeCredit({ ...combat, earnedIncomeAtLeast: 60_000 }, SIX)).toEqual(
-        WAITING_OUTCOME,
-      );
+      // Every answer in, so Step 5 is reached.
+      const answered = { ...ANSWERED, ...SIX };
+      expect(earnedIncomeCredit({ ...combat, earnedIncomeAtLeast: 60_000 }, answered)).toEqual({
+        kind: "unsupported",
+        reason,
+      });
     });
   });
 });

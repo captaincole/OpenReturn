@@ -8,12 +8,15 @@
 import { describe, expect, it } from "vitest";
 import type { CasualtyEventFactValue, CasualtyPropertyValue } from "../../../../src/facts/index.js";
 import {
+  ADDITIONAL_SHEETS_GAP,
+  additionalSheetsGap,
   line10,
   line11,
   line12,
   line17,
   line4Total,
   mostAffectedZip,
+  needsAdditionalSheets,
   netQualifiedDisasterLoss,
   propertyLines,
   sectionATotals,
@@ -199,14 +202,21 @@ describe("Form 4684 lines 10–12", () => {
     expect(line11([monsoon, known, waiting], 0)).toBe(100);
   });
 
-  it("blocks line 10 with more than four properties (additional sheets)", () => {
+  it("reports the additional sheets gap with more than four properties", () => {
     const many = event(
       "Flood",
       true,
       Array.from({ length: 5 }, () => monsoon.properties[0]!),
     );
+    const four = event("Flood", true, many.properties.slice(0, 4));
+    expect(needsAdditionalSheets(many)).toBe(true);
+    expect(needsAdditionalSheets(four)).toBe(false);
+    expect(additionalSheetsGap([fire, many])).toBe(ADDITIONAL_SHEETS_GAP);
+    expect(additionalSheetsGap([fire, four])).toBeUndefined();
+    // The bindings report the gap; the pure lines stay blank.
     expect(line10(many)).toBeUndefined();
     expect(line11([many], 0)).toBeUndefined();
+    expect(sectionATotals([fire, many])).toBeUndefined();
   });
 
   it("leaves lines 10–12 blank when every column has a gain", () => {

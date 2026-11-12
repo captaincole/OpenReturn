@@ -8,6 +8,7 @@ import { lookupTax } from "../../data/taxTable.js";
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import type { DependentCredit, DependentFactValue } from "../../facts/kinds/dependents.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { ssn } from "../../values.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
@@ -413,11 +414,13 @@ export function register(): void {
       // MANUAL EDIT: line 27a's steps (schedule-eic/outcome.ts); blank when there is no credit.
       "line.27a": (form, info) => {
         const outcome = eicOutcome(form, info);
+        if (outcome.kind === "unsupported") return unsupported(outcome.reason);
         return outcome.kind === "credit" ? outcome.amount : undefined;
       },
       // MANUAL EDIT: checked where the line 27a steps say to; the opt-out has no fact.
       "line.27c_no_eic_claim": (form, info) => {
         const outcome = eicOutcome(form, info);
+        if (outcome.kind === "unsupported") return unsupported(outcome.reason);
         return outcome.kind === "none" && outcome.checkLine27c ? true : undefined;
       },
       // MANUAL EDIT: line 28 = Schedule 8812 line 27; blank when Schedule 8812 is not filed.
