@@ -72,6 +72,16 @@ export function needsProfessionalAnswer(values: RentalFactValue[]): boolean {
 }
 
 /*
+ * How the self-rental rule treats a property:
+ * - not_self_rental: not Schedule E code 7.
+ * - passive: a net loss, placed as any passive rental.
+ * - recharacterized: net income, nonpassive and off Form 8582.
+ * - waits: net income over a prior-year loss, which is then allowed outside Form 8582;
+ *   no line models that.
+ */
+export type SelfRentalState = "not_self_rental" | "passive" | "recharacterized" | "waits";
+
+/*
  * A self-rental (Schedule E code 7, irs-1040se-inst-2025::sec::line-1b::b01): its
  * net rental income is nonpassive (irs-pub-925-2025::sec::rental-of-property-to::b01).
  * Net income is line 21 over the prior-year unallowed loss: the activity's income and
@@ -81,11 +91,13 @@ export function needsProfessionalAnswer(values: RentalFactValue[]): boolean {
  * a development activity) have no facts: they are taken not to apply. Undefined while
  * line 21 is unknown.
  */
-export function isSelfRentalNetIncome(
+export function selfRentalState(
   value: RentalFactValue,
   line21: number | undefined,
-): boolean | undefined {
-  if (value.propertyType !== "self_rental") return false;
+): SelfRentalState | undefined {
+  if (value.propertyType !== "self_rental") return "not_self_rental";
   if (line21 === undefined) return undefined;
-  return line21 - (value.priorYearUnallowedLoss ?? 0) > 0;
+  const priorYearLoss = value.priorYearUnallowedLoss ?? 0;
+  if (line21 - priorYearLoss <= 0) return "passive";
+  return priorYearLoss > 0 ? "waits" : "recharacterized";
 }

@@ -11,7 +11,7 @@
 
 import type { RentalFactValue } from "../../facts/index.js";
 import { numberOrBlank, roundDollars, sum } from "../../money.js";
-import { isRentalActivity, isSelfRentalNetIncome } from "../rentals/passive.js";
+import { isRentalActivity, selfRentalState } from "../rentals/passive.js";
 import type { PropertyColumn, RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
 
@@ -85,10 +85,10 @@ function selfRentalPlacement(
   value: RentalFactValue,
   net: number | undefined,
 ): "property" | null | undefined {
-  const netIncome = isSelfRentalNetIncome(value, net);
-  if (netIncome === undefined) return "property";
-  if (!netIncome) return undefined;
-  return (value.priorYearUnallowedLoss ?? 0) > 0 ? "property" : null;
+  const state = selfRentalState(value, net);
+  if (state === "recharacterized") return null;
+  if (state === undefined || state === "waits") return "property";
+  return undefined;
 }
 
 /* A passive rental real estate activity: Part IV with active participation (part-iv-2::b01). */

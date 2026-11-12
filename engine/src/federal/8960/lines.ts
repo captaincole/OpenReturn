@@ -1,6 +1,6 @@
 import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, sum } from "../../money.js";
-import { isSelfRentalNetIncome } from "../rentals/passive.js";
+import { selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8960 } from "./types.js";
 
@@ -69,10 +69,10 @@ export function nonpassiveRentalAdjustments(
     const line21 = form[`schedule-e.0.line.21_income_or_loss_${property.column}`];
     const income = typeof line21 === "number" ? line21 : undefined;
     // A passive self-rental only: a nonpassive one keeps the section 162 answer.
-    const recharacterized =
-      property.passive === true ? isSelfRentalNetIncome(property.value, income) : false;
-    if (recharacterized === undefined) return undefined;
-    const counts = recharacterized || section162Nonpassive(property);
+    const state =
+      property.passive === true ? selfRentalState(property.value, income) : "not_self_rental";
+    if (state === undefined || state === "waits") return undefined;
+    const counts = state === "recharacterized" || section162Nonpassive(property);
     if (counts === undefined) return undefined;
     if (!counts) continue;
     // A prior-year loss allowed this year (b01, last bullet; a self-rental's too) is not modeled.
