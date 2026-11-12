@@ -61,7 +61,7 @@ const OPTIONAL: Array<[RegExp, string]> = [
 ];
 
 const isDocument = (key: string) =>
-  /^(employer|account|payer|employee|vendor|business|dependent)\./.test(key);
+  /^(employer|account|payer|employee|vendor|business|dependent|marketplace)\./.test(key);
 const isOptional = (key: string) => OPTIONAL.some(([pattern]) => pattern.test(key));
 
 interface Outcome {
