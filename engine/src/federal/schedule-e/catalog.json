@@ -1,0 +1,2673 @@
+{
+  "form": {
+    "formId": "schedule-e",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Supplemental Income and Loss"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-e.0.header.name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-e.0.line.a_payments_require_1099_yes",
+      "label": "Line A — Did you make any payments in 2025 that would require you to file Form(s) 1099? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 643.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.a_payments_require_1099_no",
+      "label": "Line A — Did you make any payments in 2025 that would require you to file Form(s) 1099? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 643.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.b_filed_1099_yes",
+      "label": "Line B — If \"Yes,\" did you or will you file required Form(s) 1099? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 632.218
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.b_filed_1099_no",
+      "label": "Line B — If \"Yes,\" did you or will you file required Form(s) 1099? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 632.218
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.1a_address_a",
+      "label": "Line 1a — Physical address of each property (street, city, state, ZIP code) (Property A)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1a[0].RowA[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.1a_address_b",
+      "label": "Line 1a — Physical address of each property (street, city, state, ZIP code) (Property B)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1a[0].RowB[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.1a_address_c",
+      "label": "Line 1a — Physical address of each property (street, city, state, ZIP code) (Property C)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1a[0].RowC[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 575.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.1b_property_type_a",
+      "label": "Line 1b — Type of Property (from list below) (Property A)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1b[0].RowA[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 539.968
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_fair_rental_days_a",
+      "label": "Line 2 — Fair Rental Days (Property A)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowA[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_personal_use_days_a",
+      "label": "Line 2 — Personal Use Days (Property A)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowA[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_qjv_a",
+      "label": "Line 2 — QJV: Check only if you meet the requirements to file as a qualified joint venture (Property A)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowA[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 546.8,
+        "y": 541.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.1b_property_type_b",
+      "label": "Line 1b — Type of Property (from list below) (Property B)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1b[0].RowB[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 527.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_fair_rental_days_b",
+      "label": "Line 2 — Fair Rental Days (Property B)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowB[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_personal_use_days_b",
+      "label": "Line 2 — Personal Use Days (Property B)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowB[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_qjv_b",
+      "label": "Line 2 — QJV: Check only if you meet the requirements to file as a qualified joint venture (Property B)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowB[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 546.8,
+        "y": 529.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.1b_property_type_c",
+      "label": "Line 1b — Type of Property (from list below) (Property C)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1b[0].RowC[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 515.97
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_fair_rental_days_c",
+      "label": "Line 2 — Fair Rental Days (Property C)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowC[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_personal_use_days_c",
+      "label": "Line 2 — Personal Use Days (Property C)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowC[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.2_qjv_c",
+      "label": "Line 2 — QJV: Check only if you meet the requirements to file as a qualified joint venture (Property C)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line2[0].RowC[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 546.8,
+        "y": 517.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.1b_other_description",
+      "label": "Type of Property: 8 Other (describe)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.3_rents_received_a",
+      "label": "Line 3 — Rents received (Property A)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line3[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 437.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.3_rents_received_b",
+      "label": "Line 3 — Rents received (Property B)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line3[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 437.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.3_rents_received_c",
+      "label": "Line 3 — Rents received (Property C)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line3[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 437.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.4_royalties_received_a",
+      "label": "Line 4 — Royalties received (Property A)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line4[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 425.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.4_royalties_received_b",
+      "label": "Line 4 — Royalties received (Property B)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line4[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 425.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.4_royalties_received_c",
+      "label": "Line 4 — Royalties received (Property C)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Income[0].Line4[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 425.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.5_advertising_a",
+      "label": "Line 5 — Advertising (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line5[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 401.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.5_advertising_b",
+      "label": "Line 5 — Advertising (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line5[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 401.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.5_advertising_c",
+      "label": "Line 5 — Advertising (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line5[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 401.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.6_auto_and_travel_a",
+      "label": "Line 6 — Auto and travel (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line6[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 389.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.6_auto_and_travel_b",
+      "label": "Line 6 — Auto and travel (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line6[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 389.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.6_auto_and_travel_c",
+      "label": "Line 6 — Auto and travel (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line6[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 389.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.7_cleaning_and_maintenance_a",
+      "label": "Line 7 — Cleaning and maintenance (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line7[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 377.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.7_cleaning_and_maintenance_b",
+      "label": "Line 7 — Cleaning and maintenance (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line7[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 377.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.7_cleaning_and_maintenance_c",
+      "label": "Line 7 — Cleaning and maintenance (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line7[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 377.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.8_commissions_a",
+      "label": "Line 8 — Commissions (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line8[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 365.972
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.8_commissions_b",
+      "label": "Line 8 — Commissions (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line8[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 365.972
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.8_commissions_c",
+      "label": "Line 8 — Commissions (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line8[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 365.972
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.9_insurance_a",
+      "label": "Line 9 — Insurance (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line9[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 353.973
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.9_insurance_b",
+      "label": "Line 9 — Insurance (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line9[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 353.973
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.9_insurance_c",
+      "label": "Line 9 — Insurance (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line9[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 353.973
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.10_legal_professional_fees_a",
+      "label": "Line 10 — Legal and other professional fees (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line10[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 341.974
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.10_legal_professional_fees_b",
+      "label": "Line 10 — Legal and other professional fees (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line10[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 341.974
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.10_legal_professional_fees_c",
+      "label": "Line 10 — Legal and other professional fees (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line10[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 341.974
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.11_management_fees_a",
+      "label": "Line 11 — Management fees (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line11[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 329.975
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.11_management_fees_b",
+      "label": "Line 11 — Management fees (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line11[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 329.975
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.11_management_fees_c",
+      "label": "Line 11 — Management fees (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line11[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 329.975
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.12_mortgage_interest_a",
+      "label": "Line 12 — Mortgage interest paid to banks, etc. (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line12[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 317.976
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.12_mortgage_interest_b",
+      "label": "Line 12 — Mortgage interest paid to banks, etc. (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line12[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 317.976
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.12_mortgage_interest_c",
+      "label": "Line 12 — Mortgage interest paid to banks, etc. (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line12[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 317.976
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.13_other_interest_a",
+      "label": "Line 13 — Other interest (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line13[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 305.977
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.13_other_interest_b",
+      "label": "Line 13 — Other interest (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line13[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 305.977
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.13_other_interest_c",
+      "label": "Line 13 — Other interest (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line13[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 305.977
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.14_repairs_a",
+      "label": "Line 14 — Repairs (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line14[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 293.978
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.14_repairs_b",
+      "label": "Line 14 — Repairs (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line14[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 293.978
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.14_repairs_c",
+      "label": "Line 14 — Repairs (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line14[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 293.978
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.15_supplies_a",
+      "label": "Line 15 — Supplies (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line15[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 281.979
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.15_supplies_b",
+      "label": "Line 15 — Supplies (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line15[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 281.979
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.15_supplies_c",
+      "label": "Line 15 — Supplies (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line15[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 281.979
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.16_taxes_a",
+      "label": "Line 16 — Taxes (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line16[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 269.98
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.16_taxes_b",
+      "label": "Line 16 — Taxes (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line16[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 269.98
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.16_taxes_c",
+      "label": "Line 16 — Taxes (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line16[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 269.98
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.17_utilities_a",
+      "label": "Line 17 — Utilities (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line17[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 257.981
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.17_utilities_b",
+      "label": "Line 17 — Utilities (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line17[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 257.981
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.17_utilities_c",
+      "label": "Line 17 — Utilities (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line17[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 257.981
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.18_depreciation_or_depletion_a",
+      "label": "Line 18 — Depreciation expense or depletion (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line18[0].f1_61[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 245.982
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.18_depreciation_or_depletion_b",
+      "label": "Line 18 — Depreciation expense or depletion (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line18[0].f1_62[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 245.982
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.18_depreciation_or_depletion_c",
+      "label": "Line 18 — Depreciation expense or depletion (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line18[0].f1_63[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 245.982
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.19_other_description",
+      "label": "Line 19 — Other (list): description",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line19[0].f1_64[0]",
+      "position": {
+        "page": 0,
+        "x": 108,
+        "y": 233.983
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.19_other_a",
+      "label": "Line 19 — Other (list) (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line19[0].f1_65[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 233.983
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.19_other_b",
+      "label": "Line 19 — Other (list) (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line19[0].f1_66[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 233.983
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.19_other_c",
+      "label": "Line 19 — Other (list) (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line19[0].f1_67[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 233.983
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.20_total_expenses_a",
+      "label": "Line 20 — Total expenses. Add lines 5 through 19 (Property A)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line20[0].f1_68[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 221.984
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.20_total_expenses_b",
+      "label": "Line 20 — Total expenses. Add lines 5 through 19 (Property B)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line20[0].f1_69[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 221.984
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.20_total_expenses_c",
+      "label": "Line 20 — Total expenses. Add lines 5 through 19 (Property C)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line20[0].f1_70[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 221.984
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.21_income_or_loss_a",
+      "label": "Line 21 — Subtract line 20 from line 3 (rents) and/or 4 (royalties) (Property A)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line21[0].f1_71[0]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 185.984
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.21_income_or_loss_b",
+      "label": "Line 21 — Subtract line 20 from line 3 (rents) and/or 4 (royalties) (Property B)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line21[0].f1_72[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 185.984
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.21_income_or_loss_c",
+      "label": "Line 21 — Subtract line 20 from line 3 (rents) and/or 4 (royalties) (Property C)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line21[0].f1_73[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 185.984
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.22_deductible_loss_a",
+      "label": "Line 22 — Deductible rental real estate loss after limitation, if any, on Form 8582 (Property A)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line22[0].f1_74[0]",
+      "position": {
+        "page": 0,
+        "x": 320.8,
+        "y": 161.983
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.22_deductible_loss_b",
+      "label": "Line 22 — Deductible rental real estate loss after limitation, if any, on Form 8582 (Property B)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line22[0].f1_75[0]",
+      "position": {
+        "page": 0,
+        "x": 407.2,
+        "y": 161.983
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.22_deductible_loss_c",
+      "label": "Line 22 — Deductible rental real estate loss after limitation, if any, on Form 8582 (Property C)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Expenses[0].Line22[0].f1_76[0]",
+      "position": {
+        "page": 0,
+        "x": 493.6,
+        "y": 161.983
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.23a_total_rents",
+      "label": "Line 23a — Total of all amounts reported on line 3 for all rental properties",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_77[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 149.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.23b_total_royalties",
+      "label": "Line 23b — Total of all amounts reported on line 4 for all royalty properties",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_78[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 137.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.23c_total_mortgage_interest",
+      "label": "Line 23c — Total of all amounts reported on line 12 for all properties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_79[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 125.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.23d_total_depreciation",
+      "label": "Line 23d — Total of all amounts reported on line 18 for all properties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_80[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 113.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.23e_total_expenses",
+      "label": "Line 23e — Total of all amounts reported on line 20 for all properties",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_81[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 101.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.24_income",
+      "label": "Line 24 — Income. Add positive amounts shown on line 21. Do not include any losses",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_82[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 89.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.25_losses",
+      "label": "Line 25 — Losses. Add royalty losses from line 21 and rental real estate losses from line 22. Enter total losses here",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_83[0]",
+      "position": {
+        "page": 0,
+        "x": 493.6,
+        "y": 77.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.0.line.26_total_income_or_loss",
+      "label": "Line 26 — Total rental real estate and royalty income or (loss). Combine lines 24 and 25",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_84[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 41.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.header.name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 719.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 719.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-e.1.line.27_yes",
+      "label": "Line 27 — Are you reporting any loss not allowed in a prior year due to the at-risk or basis limitations, a prior year unallowed loss from a passive activity (if that loss was not reported on Form 8582), or unreimbursed partnership expenses? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 511.2,
+        "y": 631.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.27_no",
+      "label": "Line 27 — Are you reporting any loss not allowed in a prior year due to the at-risk or basis limitations, a prior year unallowed loss from a passive activity (if that loss was not reported on Form 8582), or unreimbursed partnership expenses? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 631.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_a_name",
+      "label": "Line 28 row A — (a) Name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 593.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_b_entity_type",
+      "label": "Line 28 row A — (b) Enter P for partnership; S for S corporation",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 593.968
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_c_foreign_partnership",
+      "label": "Line 28 row A — (c) Check if foreign partnership",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 345.2,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_d_ein",
+      "label": "Line 28 row A — (d) Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 374.4,
+        "y": 593.968
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_e_basis_computation_required",
+      "label": "Line 28 row A — (e) Check if basis computation is required",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 489.2,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_f_amount_not_at_risk",
+      "label": "Line 28 row A — (f) Check if any amount is not at risk",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowA[0].c2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 546.8,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_a_name",
+      "label": "Line 28 row B — (a) Name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 581.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_b_entity_type",
+      "label": "Line 28 row B — (b) Enter P for partnership; S for S corporation",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 581.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_c_foreign_partnership",
+      "label": "Line 28 row B — (c) Check if foreign partnership",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].c2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 345.2,
+        "y": 583.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_d_ein",
+      "label": "Line 28 row B — (d) Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 374.4,
+        "y": 581.969
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_e_basis_computation_required",
+      "label": "Line 28 row B — (e) Check if basis computation is required",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].c2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 489.2,
+        "y": 583.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_f_amount_not_at_risk",
+      "label": "Line 28 row B — (f) Check if any amount is not at risk",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowB[0].c2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 546.8,
+        "y": 583.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_a_name",
+      "label": "Line 28 row C — (a) Name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 569.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_b_entity_type",
+      "label": "Line 28 row C — (b) Enter P for partnership; S for S corporation",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 569.97
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_c_foreign_partnership",
+      "label": "Line 28 row C — (c) Check if foreign partnership",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].c2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 345.2,
+        "y": 571.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_d_ein",
+      "label": "Line 28 row C — (d) Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 374.4,
+        "y": 569.97
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_e_basis_computation_required",
+      "label": "Line 28 row C — (e) Check if basis computation is required",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].c2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 489.2,
+        "y": 571.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_f_amount_not_at_risk",
+      "label": "Line 28 row C — (f) Check if any amount is not at risk",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowC[0].c2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 546.8,
+        "y": 571.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_a_name",
+      "label": "Line 28 row D — (a) Name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 557.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_b_entity_type",
+      "label": "Line 28 row D — (b) Enter P for partnership; S for S corporation",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 267.15,
+        "y": 557.971
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_c_foreign_partnership",
+      "label": "Line 28 row D — (c) Check if foreign partnership",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].c2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 345.2,
+        "y": 559.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_d_ein",
+      "label": "Line 28 row D — (d) Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 374.4,
+        "y": 557.971
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_e_basis_computation_required",
+      "label": "Line 28 row D — (e) Check if basis computation is required",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].c2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 489.2,
+        "y": 559.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_f_amount_not_at_risk",
+      "label": "Line 28 row D — (f) Check if any amount is not at risk",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28a-f[0].RowD[0].c2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 546.8,
+        "y": 559.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_g_passive_loss_allowed",
+      "label": "Line 28 row A — (g) Passive loss allowed (attach Form 8582 if required)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowA[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_h_passive_income",
+      "label": "Line 28 row A — (h) Passive income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowA[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 187.2,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_i_nonpassive_loss_allowed",
+      "label": "Line 28 row A — (i) Nonpassive loss allowed (see Schedule K-1)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowA[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_j_section_179_deduction",
+      "label": "Line 28 row A — (j) Section 179 expense deduction from Form 4562",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowA[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_a_col_k_nonpassive_income",
+      "label": "Line 28 row A — (k) Nonpassive income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowA[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_g_passive_loss_allowed",
+      "label": "Line 28 row B — (g) Passive loss allowed (attach Form 8582 if required)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowB[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 503.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_h_passive_income",
+      "label": "Line 28 row B — (h) Passive income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowB[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 187.2,
+        "y": 503.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_i_nonpassive_loss_allowed",
+      "label": "Line 28 row B — (i) Nonpassive loss allowed (see Schedule K-1)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowB[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 503.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_j_section_179_deduction",
+      "label": "Line 28 row B — (j) Section 179 expense deduction from Form 4562",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowB[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 503.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_b_col_k_nonpassive_income",
+      "label": "Line 28 row B — (k) Nonpassive income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowB[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 503.971
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_g_passive_loss_allowed",
+      "label": "Line 28 row C — (g) Passive loss allowed (attach Form 8582 if required)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowC[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_h_passive_income",
+      "label": "Line 28 row C — (h) Passive income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowC[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 187.2,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_i_nonpassive_loss_allowed",
+      "label": "Line 28 row C — (i) Nonpassive loss allowed (see Schedule K-1)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowC[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_j_section_179_deduction",
+      "label": "Line 28 row C — (j) Section 179 expense deduction from Form 4562",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowC[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_c_col_k_nonpassive_income",
+      "label": "Line 28 row C — (k) Nonpassive income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowC[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 491.972
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_g_passive_loss_allowed",
+      "label": "Line 28 row D — (g) Passive loss allowed (attach Form 8582 if required)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowD[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 479.973
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_h_passive_income",
+      "label": "Line 28 row D — (h) Passive income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowD[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 187.2,
+        "y": 479.973
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_i_nonpassive_loss_allowed",
+      "label": "Line 28 row D — (i) Nonpassive loss allowed (see Schedule K-1)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowD[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 479.973
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_j_section_179_deduction",
+      "label": "Line 28 row D — (j) Section 179 expense deduction from Form 4562",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowD[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 479.973
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.28_row_d_col_k_nonpassive_income",
+      "label": "Line 28 row D — (k) Nonpassive income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line28g-k[0].RowD[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 479.973
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.29a_totals_col_h",
+      "label": "Line 29a — Totals, column (h) passive income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 187.2,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.29a_totals_col_k",
+      "label": "Line 29a — Totals, column (k) nonpassive income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.29b_totals_col_g",
+      "label": "Line 29b — Totals, column (g) passive loss allowed",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 93.6,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.29b_totals_col_i",
+      "label": "Line 29b — Totals, column (i) nonpassive loss allowed",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.29b_totals_col_j",
+      "label": "Line 29b — Totals, column (j) section 179 expense deduction",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.30_add_income_columns",
+      "label": "Line 30 — Add columns (h) and (k) of line 29a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.31_add_loss_columns",
+      "label": "Line 31 — Add columns (g), (i), and (j) of line 29b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 493.6,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.32_total_partnership_s_corp_income",
+      "label": "Line 32 — Total partnership and S corporation income or (loss). Combine lines 30 and 31",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_a_name",
+      "label": "Line 33 row A — (a) Name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33a-b[0].RowA[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 377.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_b_ein",
+      "label": "Line 33 row A — (b) Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33a-b[0].RowA[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 377.968
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_a_name",
+      "label": "Line 33 row B — (a) Name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33a-b[0].RowB[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 65.8,
+        "y": 365.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_b_ein",
+      "label": "Line 33 row B — (b) Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33a-b[0].RowB[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 365.969
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_c_passive_deduction_allowed",
+      "label": "Line 33 row A — (c) Passive deduction or loss allowed (attach Form 8582 if required)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowA[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_d_passive_income",
+      "label": "Line 33 row A — (d) Passive income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowA[0].f2_53[0]",
+      "position": {
+        "page": 1,
+        "x": 223.2,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_e_nonpassive_deduction_loss",
+      "label": "Line 33 row A — (e) Deduction or loss from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowA[0].f2_54[0]",
+      "position": {
+        "page": 1,
+        "x": 345.6,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_a_col_f_other_income",
+      "label": "Line 33 row A — (f) Other income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowA[0].f2_55[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_c_passive_deduction_allowed",
+      "label": "Line 33 row B — (c) Passive deduction or loss allowed (attach Form 8582 if required)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowB[0].f2_56[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_d_passive_income",
+      "label": "Line 33 row B — (d) Passive income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowB[0].f2_57[0]",
+      "position": {
+        "page": 1,
+        "x": 223.2,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_e_nonpassive_deduction_loss",
+      "label": "Line 33 row B — (e) Deduction or loss from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowB[0].f2_58[0]",
+      "position": {
+        "page": 1,
+        "x": 345.6,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.33_row_b_col_f_other_income",
+      "label": "Line 33 row B — (f) Other income from Schedule K-1",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line33c-f[0].RowB[0].f2_59[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.34a_totals_col_d",
+      "label": "Line 34a — Totals, column (d) passive income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_61[0]",
+      "position": {
+        "page": 1,
+        "x": 223.2,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.34a_totals_col_f",
+      "label": "Line 34a — Totals, column (f) other income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_63[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.34b_totals_col_c",
+      "label": "Line 34b — Totals, column (c) passive deduction or loss allowed",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_64[0]",
+      "position": {
+        "page": 1,
+        "x": 93.6,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.34b_totals_col_e",
+      "label": "Line 34b — Totals, column (e) deduction or loss",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_66[0]",
+      "position": {
+        "page": 1,
+        "x": 345.6,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.35_add_income_columns",
+      "label": "Line 35 — Add columns (d) and (f) of line 34a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_68[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.36_add_loss_columns",
+      "label": "Line 36 — Add columns (c) and (e) of line 34b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_69[0]",
+      "position": {
+        "page": 1,
+        "x": 493.6,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.37_total_estate_trust_income",
+      "label": "Line 37 — Total estate and trust income or (loss). Combine lines 35 and 36",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_70[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.38_col_a_name",
+      "label": "Line 38 — (a) Name",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line38[0].Row1[0].f2_71[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.38_col_b_ein",
+      "label": "Line 38 — (b) Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line38[0].Row1[0].f2_72[0]",
+      "position": {
+        "page": 1,
+        "x": 230.4,
+        "y": 203.969
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "schedule-e.1.line.38_col_c_excess_inclusion",
+      "label": "Line 38 — (c) Excess inclusion from Schedules Q, line 2c (see instructions)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line38[0].Row1[0].f2_73[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.38_col_d_taxable_income",
+      "label": "Line 38 — (d) Taxable income (net loss) from Schedules Q, line 1b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line38[0].Row1[0].f2_74[0]",
+      "position": {
+        "page": 1,
+        "x": 403.2,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.38_col_e_schedules_q_income",
+      "label": "Line 38 — (e) Income from Schedules Q, line 3b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line38[0].Row1[0].f2_75[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.39_remic_income_combined",
+      "label": "Line 39 — Combine columns (d) and (e) only",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_76[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.40_net_farm_rental_income",
+      "label": "Line 40 — Net farm rental income or (loss) from Form 4835",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_77[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.41_total_income_or_loss",
+      "label": "Line 41 — Total income or (loss). Combine lines 26, 32, 37, 39, and 40",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_78[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 143.968
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.42_farming_fishing_reconciliation",
+      "label": "Line 42 — Reconciliation of farming and fishing income. Enter your gross farming and fishing income reported on Form 4835, line 7; Schedule K-1 (Form 1065), box 14, code B; Schedule K-1 (Form 1120-S), box 17, code AN; and Schedule K-1 (Form 1041), box 14, code F",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line42_ReadOrder[0].f2_79[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "schedule-e.1.line.43_real_estate_professional_reconciliation",
+      "label": "Line 43 — Reconciliation for real estate professionals. If you were a real estate professional, enter the net income or (loss) you reported anywhere on Form 1040, Form 1040-SR, or Form 1040-NR from all rental real estate activities in which you materially participated under the passive activity loss rules",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_80[0]",
+      "position": {
+        "page": 1,
+        "x": 381.6,
+        "y": 35.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/schedule-e/blank.pdf",
+    "ingestedAt": "2026-11-12T03:17:06.381Z",
+    "totalFields": 176,
+    "skipped": 0,
+    "catalogEntries": 176
+  }
+}
