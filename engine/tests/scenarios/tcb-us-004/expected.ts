@@ -226,23 +226,21 @@ const FORM_8960: Partial<ExpectedResults> = {
   },
 };
 
-/* The key files the short Form 8995; the engine files 8995-A with the same figures. */
-const FORM_8995_A: Partial<ExpectedResults> = {
+/* One business on line 1i; QBI is Schedule C line 31 less the deductible part of SE tax. */
+const FORM_8995: Partial<ExpectedResults> = {
   engineFields: {
-    "form-8995-a.0.line.2_a": 3607, // QlfyBusinessIncomeOrLossAmt (3,882 − 275)
-    "form-8995-a.0.line.3_a": 721, // QBIComponentAmt (20%)
-    "form-8995-a.0.line.13_a": 721,
-    "form-8995-a.0.line.15_a": 721,
-    "form-8995-a.0.line.16": 721,
-    "form-8995-a.1.line.27": 721,
-    "form-8995-a.1.line.32": 721, // QBIDedBfrIncomeLimitationAmt
-    "form-8995-a.1.line.33": 219134, // TaxableIncomeBeforeQBIDedAmt
-    "form-8995-a.1.line.34": 41979, // NetCapitalGainAmt (37,109 + 4,870)
-    "form-8995-a.1.line.35": 177155, // AdjustedTaxableIncomeAmt
-    "form-8995-a.1.line.36": 35431, // IncomeLimitationAmt
-    "form-8995-a.1.line.37": 721,
-    "form-8995-a.1.line.39": 721, // QualifiedBusinessIncomeDedAmt
+    "form-8995.0.line.1i_c": 3607, // QlfyBusinessIncomeOrLossAmt (3,882 − 275)
+    "form-8995.0.line.2": 3607, // TotQlfyBusinessIncomeOrLossAmt
+    "form-8995.0.line.4": 3607, // TotQualifiedBusinessIncomeAmt
+    "form-8995.0.line.5": 721, // QBIComponentAmt
+    "form-8995.0.line.10": 721, // QBIDedBfrIncomeLimitationAmt
+    "form-8995.0.line.11": 219134, // TaxableIncomeBeforeQBIDedAmt
+    "form-8995.0.line.12": 41979, // NetCapitalGainAmt (37,109 + 4,870)
+    "form-8995.0.line.13": 177155, // AdjustedTaxableIncomeAmt
+    "form-8995.0.line.14": 35431, // IncomeLimitationAmt
+    "form-8995.0.line.15": 721, // QualifiedBusinessIncomeDedAmt
   },
+  renderedText: { "form-8995.0.line.1i_b": "900456789" }, // SSN (no EIN: the owner's SSN)
 };
 
 const EXPECTED: Record<string, Partial<ExpectedResults>> = {
@@ -252,7 +250,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   "schedule-c": SCHEDULE_C,
   "schedule-se": SCHEDULE_SE,
   "form-8960": FORM_8960,
-  "form-8995-a": FORM_8995_A,
+  "form-8995": FORM_8995,
   "form-4952": FORM_4952,
   "schedule-a": SCHEDULE_A,
   "schedule-8812": SCHEDULE_8812,
