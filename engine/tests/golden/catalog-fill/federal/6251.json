@@ -1,0 +1,564 @@
+{
+  "formId": "form-6251",
+  "fieldCount": 62,
+  "entries": [
+    {
+      "fieldId": "form-6251.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1LZ97"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.10_regular_tax_less_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "5,986"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.11_amt",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "8,485"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.1a_deductions_less_schedule_1a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "7,783"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.1b_taxable_income_start",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "1,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2a_taxes_or_standard_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "1,351"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2b_tax_refund",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "9,101"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2c_investment_interest_expense",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "6,304"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2d_depletion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "8,093"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2e_net_operating_loss_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "2,252"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2f_alternative_tax_nol_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "5,733"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2g_private_activity_bond_interest",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "5,230"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2h_qualified_small_business_stock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "2,771"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2i_incentive_stock_options",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "7,096"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2j_estates_and_trusts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "8,680"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2k_disposition_of_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "7,563"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2l_post_1986_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "2,775"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2m_passive_activities",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "1,178"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2n_loss_limitations",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "6,626"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2o_circulation_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "3,288"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2p_long_term_contracts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "7,841"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2q_mining_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "9,561"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2r_research_experimental_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "5,370"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2s_pre_1987_installment_sales",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "8,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.2t_intangible_drilling_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "8,706"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.3_other_adjustments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "5,665"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.4_alternative_minimum_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "2,219"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.5_exemption",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "3,076"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.6_amti_less_exemption",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "8,900"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.7_tax_on_line_6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "4,737"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.8_amt_foreign_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "6,275"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.0.line.9_tentative_minimum_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "9,896"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.12_amount_from_line_6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "5,340"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.13_qualified_dividends_gain_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "5,179"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.14_schedule_d_line_19",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "5,324"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.15_adjusted_net_capital_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "9,632"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.16_smaller_line_12_or_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "7,282"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.17_line_12_minus_16",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "7,432"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.18_tax_on_line_17",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "9,394"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.19_zero_rate_threshold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "2,213"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.20_regular_tax_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "1,837"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.21_line_19_minus_20",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "5,481"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.22_smaller_line_12_or_13",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "7,654"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.23_amount_taxed_at_zero",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "9,184"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.24_line_22_minus_23",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "5,036"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.25_fifteen_rate_threshold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "4,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.26_amount_from_line_21",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "9,530"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.27_regular_tax_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "5,029"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.28_add_lines_26_27",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "7,922"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.29_line_25_minus_28",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "4,554"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.30_smaller_line_24_or_29",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "9,629"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.31_tax_at_fifteen_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+          "text": "8,864"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.32_add_lines_23_30",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+          "text": "6,690"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.33_line_22_minus_32",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+          "text": "1,774"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.34_tax_at_twenty_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+          "text": "6,668"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.35_add_lines_17_32_33",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+          "text": "1,782"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.36_line_12_minus_35",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+          "text": "5,420"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.37_tax_at_twenty_five_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+          "text": "8,529"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.38_add_lines_18_31_34_37",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+          "text": "8,743"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.39_tax_on_line_12",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+          "text": "3,050"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-6251.1.line.40_smaller_line_38_or_39",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+          "text": "1,574"
+        }
+      ]
+    }
+  ]
+}
