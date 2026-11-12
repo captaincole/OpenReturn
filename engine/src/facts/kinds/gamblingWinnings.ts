@@ -38,4 +38,6 @@ export function getGamblingWinningsFacts(
 /* Schedule 1 line 8b also takes winnings no payer reported on a W-2G (a verbal answer). */
 export const GAMBLING_KEYS = {
   winningsNotOnW2G: "gambling.winnings_not_on_w2g",
+  /* Schedule A line 16: gambling losses, deductible only up to the winnings on Schedule 1 line 8b. */
+  losses: "gambling.losses",
 } as const;
