@@ -45,6 +45,11 @@ export const tcbUs001Decisions: AIDecisionRow[] = [
     true,
     "$75,000 of investment interest to deduct; the Who Must File exception does not apply.",
   ),
+  dec(
+    "decisions.scope.must_file_6251",
+    true,
+    "A $250,000 incentive stock option spread (an AMT adjustment); the key files Form 6251.",
+  ),
   dec("decisions.scope.must_file_ca_540", false, "Full-year Alaska resident."),
   dec("decisions.scope.ca_residency", "non_resident", "Lived in Alaska all of 2025."),
 ];

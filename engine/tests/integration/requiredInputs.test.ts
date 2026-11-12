@@ -49,6 +49,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "a separate California election on FTB 3526 line 4e, recorded only when the user states one",
   ],
   [
+    /^decisions\.scope\.must_file_6251$/,
+    "KNOWN GAP: Form 6251 files when its line 7 is more than line 10, which the " +
+      "resolver cannot see before evaluation; Cade records the decision.",
+  ],
+  [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",
