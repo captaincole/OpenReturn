@@ -1,5 +1,6 @@
 import {
   EIC_KEYS,
+  SPOUSE_KEYS,
   businessesOnReturn,
   getDependentFacts,
   type DependentFact,
@@ -37,12 +38,15 @@ const TAX_YEAR = 2025;
  * answers are not all in is asked by Schedule 8812 and counts here when they are.
  */
 export function resolveScheduleEICInfo(inputs: ResolverInputs): ScheduleEICFilingInfo {
-  const taxpayerDob = text(inputs, "identity.dob");
-  const children: DependentFact[] = getDependentFacts(inputs.facts).filter(
-    (fact) => isEicQualifyingChild(fact.dependent, taxpayerDob, TAX_YEAR) === true,
-  );
   const status = filingStatusOf(inputs);
   const joint = status === "married_filing_jointly";
+  const filerDobs = [
+    text(inputs, "identity.dob"),
+    ...(joint ? [text(inputs, SPOUSE_KEYS.dob)] : []),
+  ];
+  const children: DependentFact[] = getDependentFacts(inputs.facts).filter(
+    (fact) => isEicQualifyingChild(fact.dependent, filerDobs, TAX_YEAR) === true,
+  );
   const hasBusiness = businessesOnReturn(inputs.facts, joint).businesses.length > 0;
   const withSsn = children.filter((child) => child.dependent.ssn !== undefined).length;
   const underLimit = hasBusiness || sumW2Box(inputs, "box1") < eicIncomeLimit(withSsn, joint);
