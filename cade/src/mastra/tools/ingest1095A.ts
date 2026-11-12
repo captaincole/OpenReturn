@@ -1,5 +1,6 @@
 import { createTool } from "@mastra/core/tools";
 import {
+  MARKETPLACE_MONTHS,
   makeMarketplaceCoverageFactKey,
   type MarketplaceCoverageFactValue,
 } from "@openreturn/engine/facts";
@@ -54,8 +55,10 @@ export const ingest1095A = createTool({
   execute: async (input, context) => {
     const { scope, userId, filingId } = await requireUserContext(context);
     const { year, sourceNote, ...value } = input;
-    if (value.months.length !== 12) {
-      throw new Error(`Part III has 12 months; got ${value.months.length} rows.`);
+    if (value.months.length !== MARKETPLACE_MONTHS) {
+      throw new Error(
+        `Part III has ${MARKETPLACE_MONTHS} months; got ${value.months.length} rows.`,
+      );
     }
     const factKey = makeMarketplaceCoverageFactKey(
       slugify(value.marketplaceId),

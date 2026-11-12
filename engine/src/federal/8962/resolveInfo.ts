@@ -1,7 +1,9 @@
 import {
+  MARKETPLACE_MONTHS,
   PREMIUM_TAX_CREDIT_KEYS,
   getDependentFacts,
   getMarketplaceCoverageFacts,
+  rowShowsCoverage,
   type MarketplaceCoverageAmounts,
   type MarketplaceCoverageFactValue,
 } from "../../facts/index.js";
@@ -24,12 +26,8 @@ function addRows(
   return out;
 }
 
-/* A month this form covers; the column (b) rules are per month (lines 12–23). */
-const showsCoverage = (month: MarketplaceCoverageAmounts | undefined): boolean =>
-  month?.enrollmentPremium !== undefined || month?.slcspPremium !== undefined;
-
 const sameEveryMonth = (statement: MarketplaceCoverageFactValue): boolean =>
-  statement.months.length === 12 &&
+  statement.months.length === MARKETPLACE_MONTHS &&
   statement.months.every(
     (month) =>
       month.enrollmentPremium !== undefined &&
@@ -45,12 +43,14 @@ const sameEveryMonth = (statement: MarketplaceCoverageFactValue): boolean =>
 export function resolve8962Info(inputs: ResolverInputs): Form8962FilingInfo {
   const statements = getMarketplaceCoverageFacts(inputs.facts).map((fact) => fact.value);
   const annual = addRows(statements.map((statement) => statement.annualTotals));
-  const monthly = Array.from({ length: 12 }, (_, index) =>
+  const monthly = Array.from({ length: MARKETPLACE_MONTHS }, (_, index) =>
     addRows(statements.map((statement) => statement.months[index])),
   );
   const monthlyCounts = Array.from(
-    { length: 12 },
-    (_, index) => statements.filter((statement) => showsCoverage(statement.months[index])).length,
+    { length: MARKETPLACE_MONTHS },
+    // The column (b) rules are per month (lines 12–23).
+    (_, index) =>
+      statements.filter((statement) => rowShowsCoverage(statement.months[index])).length,
   );
   const aptcPaid =
     (annual.advancePayment ?? 0) > 0 || monthly.some((month) => (month.advancePayment ?? 0) > 0);
