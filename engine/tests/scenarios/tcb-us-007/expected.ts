@@ -197,6 +197,30 @@ const FORM_8995: Partial<ExpectedResults> = {
   },
 };
 
+/*
+ * MFS with no exception: not an applicable taxpayer. Lines 1–5, then only column (f)
+ * of line 11; line 24 is 0 and the whole advance payment is repaid (line 5 is over 400,
+ * so line 28 is blank). Line 4 is a known mismatch (README).
+ */
+const FORM_8962: Partial<ExpectedResults> = {
+  engineFields: {
+    "form-8962.0.line.1_tax_family_size": 1, // TotalExemptionsCnt
+    "form-8962.0.line.2a_modified_agi": 181542, // ModifiedAGIAmt
+    "form-8962.0.line.3_household_income": 181542, // HouseholdIncomeAmt
+    "form-8962.0.line.4_federal_poverty_line": 14580, // PovertyLevelAmt (known mismatch: 15,060)
+    "form-8962.0.line.5_household_income_percent_fpl": 401, // FederalPovertyLevelPct
+    "form-8962.0.line.11_col_f": 6000, // AnnualAdvancedPTCAmt
+    "form-8962.0.line.25_advance_payment_ptc": 6000, // TotalAdvancedPTCAmt
+    "form-8962.0.line.27_excess_advance_ptc": 6000, // ExcessAdvncPaymentAmt
+    "form-8962.0.line.29_excess_advance_ptc_repayment": 6000, // PremiumTaxCreditTaxLiabAmt
+  },
+  renderedChecked: [
+    "form-8962.0.line.4_other_48_states_dc", // FederalPovertyTableLocCd C
+    "form-8962.0.line.9_allocate_or_alt_calc_no", // SharePolicyMarriedAltCalcInd false
+    "form-8962.0.line.10_use_annual_calc_yes", // FullYrCoverage1095AInd true
+  ],
+};
+
 const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   "form-1040": FORM_1040,
   "schedule-1": SCHEDULE_1,
@@ -208,6 +232,7 @@ const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   "form-8959": FORM_8959,
   "form-8960": FORM_8960,
   "form-8995": FORM_8995,
+  "form-8962": FORM_8962,
 };
 
 export function tcbUs007Expected(formId: string): ExpectedResults {
