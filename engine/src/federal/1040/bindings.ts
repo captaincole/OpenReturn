@@ -146,6 +146,16 @@ export function register(): void {
         info.dependents === undefined ? undefined : info.dependents.length > 4,
       // MANUAL EDIT: document sums (1a, 2a–3b, 25a) round to the nearest dollar.
       "line.1a": (_, info) => roundDollars(info.w2WagesTotal),
+      /*
+       * MANUAL EDIT: line 1h holds the disability pensions received before the
+       * minimum retirement age (irs-1040-inst-2025::sec::line-1h::b02), their
+       * taxable amount. A corrective distribution or excess deferrals make it
+       * unsupported (line1hGaps.ts). Strike benefits have no fact, and a retired
+       * public safety officer's premium exclusion ("PSO",
+       * irs-1040-inst-2025::sec::insurance-premiums-for-retired::b03) has no answer.
+       */
+      "line.1h_amount": (_, info) =>
+        info.line1hGap ? unsupported(info.line1hGap) : roundDollars(info.disabilityPensionWages),
       "line.1z": (form) =>
         sum(
           form["line.1a"],
@@ -538,8 +548,6 @@ export function register(): void {
         "Requires Form 8919 (Uncollected SS/Medicare Tax on Wages) — no Form 8919 ingestion or scenario built yet.",
       "line.1h_type":
         "Free-text label describing the type of other earned income on line 1h — no fact or decision maps to this descriptor field; no other-earned-income scenario built yet.",
-      "line.1h_amount":
-        "Other earned income (strike benefits, excess deferrals, etc.) — no ingestion path or scenario built for these miscellaneous earned income types yet.",
       "line.1i":
         "Nontaxable combat pay election — no combat pay fact ingestion or military-taxpayer scenario built yet.",
       "line.3c_box1":

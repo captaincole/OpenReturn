@@ -37,6 +37,10 @@ export interface Form1040FilingInfo
   taxExemptInterestTotal?: Money;
   /** Lines 4a–4c. */
   iraDistributions?: IraLine;
+  /** Line 1h: disability pensions before the minimum retirement age; undefined while an answer is missing. */
+  disabilityPensionWages?: number;
+  /** Line 1h: why it cannot be figured (a corrective distribution, excess deferrals); undefined when it can. */
+  line1hGap?: string;
   /** Lines 5a–5c. */
   pensionDistributions?: RetirementLine;
   /** Line 6a. */
