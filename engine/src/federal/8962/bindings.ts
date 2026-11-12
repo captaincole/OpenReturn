@@ -5,6 +5,8 @@ import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import type { Form8962FilingInfo } from "./filingInfo.js";
+// MANUAL EDIT: isApplicableTaxpayer moved to lines.ts, which binds lines 9–36.
+import { isApplicableTaxpayer, partsFourFiveBindings, partTwoBindings } from "./lines.js";
 import type { Form8962 } from "./types.js";
 
 /* Line 4, Tables 1-1 to 1-3 (the 2024 poverty lines): family size 1, and each person over 1. */
@@ -42,13 +44,6 @@ function povertyTable(info: Info) {
   if (info.homeAddressState === "AK") return POVERTY_LINE_ALASKA;
   if (info.homeAddressState === "HI") return POVERTY_LINE_HAWAII;
   return POVERTY_LINE_48_STATES_DC;
-}
-
-/* An MFS filer without Exception 2 is not an applicable taxpayer; undefined while unanswered. */
-function isApplicableTaxpayer(info: Info): boolean | undefined {
-  if (info.filingStatus === undefined) return undefined;
-  if (info.filingStatus !== "married_filing_separately") return true;
-  return info.ptcMfsException;
 }
 
 /* Table 2 for a line 5 percentage, in ten-thousandths, rounded half up (301 → 603, i.e. 0.0603). */
@@ -161,6 +156,8 @@ export function register(): void {
         const line8a = form["0.line.8a_annual_contribution_amount"];
         return line8a === undefined ? undefined : roundDollars(line8a / MONTHS_PER_YEAR);
       },
+      ...partTwoBindings(),
+      ...partsFourFiveBindings(),
     },
 
     // MANUAL EDIT: the SSN renders with dashes.
