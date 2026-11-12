@@ -1,0 +1,133 @@
+/*
+ * What Form 1040 line 27a reads from facts: the EIC answers (eic.* keys), the
+ * qualifying-child counts, and whether the filer is self-employed (Step 5,
+ * question 2). eicQuestions lists the answers to ask, only while the EIC is
+ * still possible, so a filer over the income limit is never asked.
+ */
+
+import {
+  EIC_KEYS,
+  SPOUSE_KEYS,
+  businessesOnReturn,
+  getDependentFacts,
+  isW2FactKey,
+  type W2FactValue,
+} from "../../facts/index.js";
+import { filingStatusOf } from "../../filingInfoResolvers.js";
+import { factsInCategory, sumW2Box, text, type ResolverInputs } from "../../resolverInputs.js";
+import { netProfit } from "../schedule-c/lines.js";
+import { noChildEicAge, type EicAnswers } from "./credit.js";
+import { eicIncomeLimit } from "./limits.js";
+import { isEicQualifyingChild } from "./qualifyingChild.js";
+
+/* Resolvers see no tax year; Schedule EIC's resolver pins 2025 the same way. */
+const TAX_YEAR = 2025;
+
+export interface EicLineInfo extends EicAnswers {
+  /** A business on the return: Step 5, question 2 sends the filer to Worksheet B. */
+  selfEmployed: boolean;
+  /** A W-2 with box 13 "Statutory employee" checked: Worksheet B Part 3, not modeled. */
+  statutoryEmployee: boolean;
+}
+
+/** Line 27a's slot, filled by the 1040 resolver; Schedule 8812 line 24 reads it too. */
+export interface EicLineSlot {
+  earnedIncomeCredit?: EicLineInfo;
+}
+
+const answer = (inputs: ResolverInputs, key: string) =>
+  inputs.factByKey.get(key) as boolean | undefined;
+
+export function resolveEicLineInfo(inputs: ResolverInputs): EicLineInfo {
+  const joint = filingStatusOf(inputs) === "married_filing_jointly";
+  const filerDobs = [
+    text(inputs, "identity.dob"),
+    ...(joint ? [text(inputs, SPOUSE_KEYS.dob)] : []),
+  ];
+  const tests = getDependentFacts(inputs.facts).map((fact) => ({
+    fact,
+    qualifies: isEicQualifyingChild(fact.dependent, filerDobs, TAX_YEAR),
+  }));
+  const children = tests.filter((test) => test.qualifies === true);
+  const w2s = factsInCategory(inputs, "wages")
+    .filter((row) => isW2FactKey(row.key))
+    .map((row) => row.value as W2FactValue);
+  return {
+    qualifyingChildren: children.length,
+    childrenWithSsn: children.filter((test) => test.fact.dependent.ssn !== undefined).length,
+    childrenOpen: tests.some((test) => test.qualifies === undefined),
+    nonresidentAlien: answer(inputs, EIC_KEYS.nonresidentAlien),
+    qualifyingChildOfAnother: answer(inputs, EIC_KEYS.qualifyingChildOfAnother),
+    mainHomeInUs: answer(inputs, EIC_KEYS.mainHomeInUs),
+    claimableAsDependent: answer(inputs, EIC_KEYS.claimableAsDependent),
+    deniedInEarlierYear: answer(inputs, EIC_KEYS.deniedInEarlierYear),
+    barredByIrs: answer(inputs, EIC_KEYS.barredByIrs),
+    livedApartFromSpouseAllYear: answer(inputs, SPOUSE_KEYS.livedApartAllYear),
+    selfEmployed: businessesOnReturn(inputs.facts, joint).businesses.length > 0,
+    statutoryEmployee: w2s.some((w2) => w2.box13?.statutoryEmployee === true),
+  };
+}
+
+/*
+ * Earned income can be under the Step 1 limit: W-2 box 1 is under it, or a
+ * business may have a loss. With no loss, Worksheet B line 1e is 0 or more,
+ * so earned income is at least the wages, and Worksheet B line 5 (or Step 5)
+ * stops the credit at the limit
+ * (irs-1040-inst-2025::sec::bworksheet-2025-eic-line-27a::b03).
+ */
+export function earnedIncomeMayBeUnderLimit(
+  inputs: ResolverInputs,
+  children: number,
+  joint: boolean,
+): boolean {
+  if (sumW2Box(inputs, "box1") < eicIncomeLimit(children, joint)) return true;
+  const { businesses, malformedKeys } = businessesOnReturn(inputs.facts, joint);
+  return (
+    malformedKeys.length > 0 ||
+    businesses.some((business) => netProfit(business.value) === undefined)
+  );
+}
+
+/* Step 4, question 2 for the taxpayer, or either spouse on a joint return; false while a date is missing. */
+function noChildAgeInRange(inputs: ResolverInputs, joint: boolean): boolean {
+  const dobs = [text(inputs, "identity.dob"), ...(joint ? [text(inputs, SPOUSE_KEYS.dob)] : [])];
+  return dobs.some((dob) => noChildEicAge(dob) === true);
+}
+
+/*
+ * The no-child EIC answers (Step 1 question 4, Step 4 questions 3, 5 and 6,
+ * Form 8862) for a filer whose earned income can be under the Step 1 limit,
+ * with the right filing status and age. A filer with a qualifying child is
+ * asked by Schedule EIC's resolver; an MFS filer with one is asked whether the
+ * spouses lived apart.
+ */
+export function eicQuestions(inputs: ResolverInputs, info: EicLineInfo): Record<string, unknown> {
+  const status = filingStatusOf(inputs);
+  const joint = status === "married_filing_jointly";
+  const wages = sumW2Box(inputs, "box1");
+  const earnsUnderLimit = (children: number) =>
+    (info.selfEmployed || wages > 0) && earnedIncomeMayBeUnderLimit(inputs, children, joint);
+  if (info.qualifyingChildren > 0) {
+    return status === "married_filing_separately" && earnsUnderLimit(info.childrenWithSsn)
+      ? { [SPOUSE_KEYS.livedApartAllYear]: info.livedApartFromSpouseAllYear }
+      : {};
+  }
+  const possible =
+    !info.childrenOpen &&
+    (status === "single" || status === "qualifying_surviving_spouse" || joint) &&
+    earnsUnderLimit(0) &&
+    noChildAgeInRange(inputs, joint);
+  if (!possible) return {};
+  return {
+    [EIC_KEYS.nonresidentAlien]: info.nonresidentAlien,
+    [EIC_KEYS.mainHomeInUs]: info.mainHomeInUs,
+    ...(joint
+      ? {}
+      : {
+          [EIC_KEYS.qualifyingChildOfAnother]: info.qualifyingChildOfAnother,
+          [EIC_KEYS.claimableAsDependent]: info.claimableAsDependent,
+        }),
+    [EIC_KEYS.deniedInEarlierYear]: info.deniedInEarlierYear,
+    [EIC_KEYS.barredByIrs]: info.barredByIrs,
+  };
+}

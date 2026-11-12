@@ -27,6 +27,7 @@ import {
 } from "../../resolverInputs.js";
 import { form8606Filers } from "../8606/resolveInfo.js";
 import { resolveScheduleAInfo } from "../schedule-a/resolveInfo.js";
+import { eicQuestions, resolveEicLineInfo } from "../schedule-eic/eicAnswers.js";
 import type { Form1040FilingInfo, IraLine } from "./filingInfo.js";
 
 const OWNERS: IraOwner[] = ["taxpayer", "spouse"];
@@ -228,6 +229,7 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
     boolean | undefined;
   const legallySeparated = factByKey.get(SPOUSE_KEYS.legallySeparatedApartAtYearEnd) as
     boolean | undefined;
+  const earnedIncomeCredit = resolveEicLineInfo(inputs);
   return {
     mustFile: { "form-1040": resolution },
     missingInputs: {
@@ -265,6 +267,8 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
         ...(filingStatus === "married_filing_separately" && livedApartLastSix === false
           ? { [SPOUSE_KEYS.legallySeparatedApartAtYearEnd]: legallySeparated }
           : {}),
+        // Line 27a: asked only while the EIC is possible.
+        ...eicQuestions(inputs, earnedIncomeCredit),
       }),
     },
     hasDigitalAssets,
@@ -296,5 +300,6 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
     spouseItemizesSeparately: spouseItemizes,
     refundFullOverpaymentFederal,
     useItemizedDeductions,
+    earnedIncomeCredit,
   };
 }
