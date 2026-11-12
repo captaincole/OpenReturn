@@ -6,7 +6,7 @@ A married couple filing jointly in Tennessee, born 1983 and 1986, with a niece a
 
 The answer key is the case's correct return: the IRS e-file XML in the case's `output.xml`. `expected.ts` copies its values. Every line the engine fills matches the key.
 
-Forms checked: Form 1040, Schedules 1, 2, A, B, C, D, SE and 8812, Forms 4952, 8949, 8960 and 8995-A (federal only; the case has no state answer key). The key files the short Form 8995; the engine files 8995-A with the same figures. Form 8283 (the non-cash gifts) is in the key and not modeled; it changes no line.
+Forms checked: Form 1040, Schedules 1, 2, A, B, C, D, SE and 8812, Forms 4952, 8949, 8960 and 8995-A (federal only; the case has no state answer key). The key files the short Form 8995; `decisions.ts` pins Form 8995-A (`decisions.scope.must_file_8995_a`), which gives the same figures, so the scenario keeps its goldens. Without the pin the engine files Form 8995, as the key does. Form 8283 (the non-cash gifts) is in the key and not modeled; it changes no line.
 
 ## Inputs
 

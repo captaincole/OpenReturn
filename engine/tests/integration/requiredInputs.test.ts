@@ -20,6 +20,10 @@ const OPTIONAL: Array<[RegExp, string]> = [
   ],
   [/^identity\.address\.apt$/, "not every address has an apartment"],
   [
+    /^decisions\.scope\.must_file_8995(_a)?$/,
+    "override; the QBI form follows the MAGI upper bound (federal/8995/whichForm.ts)",
+  ],
+  [
     /^gambling\.winnings_not_on_w2g$/,
     "an answer Cade records only when the user reports winnings with no W-2G; " +
       "otherwise line 8b comes from the W-2G facts",

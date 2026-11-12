@@ -10,6 +10,7 @@ import {
   makeW2FactKey,
 } from "../../../src/facts/index.js";
 import { resolve8995AInfo } from "../../../src/federal/8995-a/resolveInfo.js";
+import { resolve8995Info } from "../../../src/federal/8995/resolveInfo.js";
 import { resolveScheduleCInfo } from "../../../src/federal/schedule-c/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../../../src/federal/schedule-se/resolveInfo.js";
 import { resolveSchedule1Info, resolveSchedule2Info } from "../../../src/filingInfoResolvers.js";
@@ -258,9 +259,34 @@ describe("Schedule 1 line 3 (businessIncome)", () => {
 });
 
 describe("Form 8995-A must-file and businesses", () => {
-  it("files for any business", () => {
-    const info = resolve8995AInfo(inputs([business("rideshare")], "single"));
-    expect(info.mustFile?.["form-8995-a"]?.value).toBe(true);
+  it("files Form 8995, not 8995-A, for a business under the threshold", () => {
+    const facts = [business("rideshare")];
+    expect(resolve8995AInfo(inputs(facts, "single")).mustFile?.["form-8995-a"]?.value).toBe(false);
+    expect(resolve8995Info(inputs(facts, "single")).mustFile?.["form-8995"]?.value).toBe(true);
+  });
+
+  it("files Form 8995-A when MAGI's upper bound is above the threshold", () => {
+    const facts = [business("rideshare", { grossReceipts: 250000 })];
+    expect(resolve8995AInfo(inputs(facts, "single")).mustFile?.["form-8995-a"]?.value).toBe(true);
+    expect(resolve8995Info(inputs(facts, "single")).mustFile?.["form-8995"]?.value).toBe(false);
+  });
+
+  it("tests the married filing jointly threshold on a joint return", () => {
+    const facts = [business("rideshare", { grossReceipts: 250000 })];
+    const joint = inputs(facts, "married_filing_jointly");
+    expect(resolve8995Info(joint).mustFile?.["form-8995"]?.value).toBe(true);
+  });
+
+  it("files Form 8995-A when it is decided, and then not Form 8995", () => {
+    const decided = makeResolverInputs({
+      facts: [business("rideshare")],
+      decisions: [
+        { decisionKey: "decisions.scope.filing_status", decision: "single" },
+        { decisionKey: "decisions.scope.must_file_8995_a", decision: true },
+      ],
+    });
+    expect(resolve8995AInfo(decided).mustFile?.["form-8995-a"]?.value).toBe(true);
+    expect(resolve8995Info(decided).mustFile?.["form-8995"]?.value).toBe(false);
   });
 
   it("does not file with no business and no REIT dividends", () => {
