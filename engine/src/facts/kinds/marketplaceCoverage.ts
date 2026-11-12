@@ -5,8 +5,7 @@
  * Form 8962 answers a taxpayer states sit in PREMIUM_TAX_CREDIT_KEYS.
  */
 
-import type { FactsView } from "../../types.js";
-import type { TaxFactRow } from "../rows.js";
+type FactRow = { key: string; value: unknown; category: string };
 
 export interface MarketplacePerson {
   name: string;
@@ -59,11 +58,12 @@ export function isMarketplaceCoverageFactKey(key: string): boolean {
 }
 
 export function getMarketplaceCoverageFacts(
-  facts: FactsView,
+  facts: ReadonlyArray<FactRow>,
 ): Array<{ key: string; value: MarketplaceCoverageFactValue }> {
   return facts
-    .byCategory(MARKETPLACE_CATEGORY)
-    .filter((fact: TaxFactRow) => isMarketplaceCoverageFactKey(fact.key))
+    .filter(
+      (fact) => fact.category === MARKETPLACE_CATEGORY && isMarketplaceCoverageFactKey(fact.key),
+    )
     .map((fact) => ({ key: fact.key, value: fact.value as MarketplaceCoverageFactValue }));
 }
 
