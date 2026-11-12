@@ -29,6 +29,8 @@ export function register(): void {
       // MANUAL EDIT: line 8z = 1099-MISC box 3 other income.
       "0.line.8z": (_, info) => roundDollars(info.miscOtherIncome),
       "0.line.8z_type": (_, info) => (info.miscOtherIncome ? "Form 1099-MISC" : undefined),
+      // MANUAL EDIT: line 8g = the Alaska Permanent Fund dividend (irs-pub-525-2025::sec::other-income::b01).
+      "0.line.8g": (_, info) => roundDollars(info.alaskaPermanentFundDividends),
       // MANUAL EDIT: lines 8a, 8d and 8s are subtractions (printed in parentheses).
       "0.line.9": (form) =>
         sum(
@@ -134,7 +136,6 @@ export function register(): void {
       "0.line.8c": "No 1099-C cancellation-of-debt ingestion yet",
       "0.line.8d": "No Form 2555 foreign earned income exclusion scenario yet",
       "0.line.8e": "No Form 8853 (Archer MSA / LTC) scenario yet",
-      "0.line.8g": "No Alaska Permanent Fund dividend ingestion/scenario yet.",
       "0.line.8h": "No jury duty pay ingestion/scenario yet.",
       "0.line.8i":
         "No prizes/awards ingestion yet; 1099-MISC box 3 is routed to line 8z by convention.",
