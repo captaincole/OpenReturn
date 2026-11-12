@@ -105,8 +105,14 @@ export function register(): void {
       },
       // MANUAL EDIT: routed to FilingInfo.
       "0.line.5a_general_sales_tax_election": (_, info) => info.generalSalesTaxElection,
-      // MANUAL EDIT: with the sales-tax election set, this needs the sales-tax amount (not modeled).
-      "0.line.5a_state_local_income_or_sales_tax": (_, info) => info.stateLocalIncomeTaxPaid,
+      /*
+       * MANUAL EDIT: income taxes, or general sales taxes when the taxpayer elects
+       * them (irs-1040sa-inst-2025::sec::state-and-local-general-sales-taxes::b01).
+       */
+      "0.line.5a_state_local_income_or_sales_tax": (_, info) =>
+        info.generalSalesTaxElection === true
+          ? info.generalSalesTaxPaid
+          : info.stateLocalIncomeTaxPaid,
       // MANUAL EDIT: routed to FilingInfo slot.
       "0.line.5b_real_estate_taxes": (_, info) => info.realEstateTaxes,
       // MANUAL EDIT: routed to FilingInfo slot.
@@ -223,6 +229,19 @@ export function register(): void {
           form["0.line.16_other_itemized_deductions_amount"],
         );
       },
+      /*
+       * MANUAL EDIT: the federal return itemizes (1040 line 12e takes line 17)
+       * although line 17 is less than the standard deduction
+       * (irs-1040sa-inst-2025::sec::total-itemized-deductions::b01). A Schedule A
+       * filed only for California leaves it blank.
+       */
+      "0.line.18_elect_itemize_below_standard": (form, info) => {
+        if (info.useItemizedDeductions !== true) return false;
+        const line17 = form["0.line.17_total_itemized_deductions"];
+        const standard = standardDeduction(info);
+        if (typeof line17 !== "number" || standard === undefined) return undefined;
+        return line17 < standard;
+      },
     }),
 
     // This SSN widget keeps the dashes; the 1040 comb widget strips them.
@@ -239,8 +258,6 @@ export function register(): void {
         "Checkbox indicating mixed personal/business use of home mortgage — no fact or decision key exists for this. Requires a scenario where taxpayer has a home loan used partly for non-home purposes.",
       "0.line.8b_seller_name_address":
         "Name/address of seller for non-1098 mortgage interest — text field with no corresponding fact key. Only populated in seller-financed loan scenarios not yet modeled.",
-      "0.line.18_elect_itemize_below_standard":
-        "No decision or fact models the taxpayer's explicit election to itemize even when deductions are below the standard deduction. This is an uncommon voluntary election with no ingestion path yet — requires a dedicated ai_decision when a real scenario forces it.",
     },
   });
 }

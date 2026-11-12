@@ -5,13 +5,14 @@ import type { Form4952FilingInfo } from "../4952/filingInfo.js";
 /*
  * Line 9 reads Form 4952 line 8 through the form accessor; the 4952 answer
  * covers the no-file exception. Line 16 figures the standard deduction (line
- * 12b's MFS answer) for the increased standard deduction.
+ * 12b's MFS answer) for the increased standard deduction, and line 18 reads
+ * whether the federal return itemizes.
  */
 export interface ScheduleAFilingInfo
   extends
     BaseFilingInfo,
     Pick<Form4952FilingInfo, "investmentInterestPaid" | "noFormException">,
-    Pick<Form1040FilingInfo, "spouseItemizesSeparately"> {
+    Pick<Form1040FilingInfo, "spouseItemizesSeparately" | "useItemizedDeductions"> {
   /** Line 1. */
   medicalDentalExpenses?: number;
 
@@ -23,6 +24,9 @@ export interface ScheduleAFilingInfo
 
   /** Line 5a checkbox. */
   generalSalesTaxElection?: boolean;
+
+  /** Line 5a with the election: state and local general sales taxes paid. */
+  generalSalesTaxPaid?: number;
 
   /** Line 5b. */
   realEstateTaxes?: number;
