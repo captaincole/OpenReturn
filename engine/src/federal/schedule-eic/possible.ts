@@ -157,7 +157,9 @@ function agiFloor(inputs: ResolverInputs, joint: boolean): number | undefined {
 /*
  * A Schedule E property with royalties and rents, or a passive rental whose
  * income may be nonpassive, makes Worksheet 1 a gap that no answer settles
- * (worksheet1.ts): line 27a reports it, and nothing is asked.
+ * (worksheet1.ts): line 27a reports it, and nothing is asked. A self-rental is
+ * no gap: its net income is left out, and income over a prior-year loss waits
+ * while Schedule E asks for the property again.
  */
 function worksheet1Gap(inputs: ResolverInputs): boolean {
   const joint = spousePropertiesOnReturn(filingStatusOf(inputs));

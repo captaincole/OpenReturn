@@ -110,7 +110,6 @@ describe("worksheet1 (Pub. 596 Worksheet 1)", () => {
   });
 
   it.each([
-    ["a self-rental", { propertyType: "self_rental" }],
     ["land", { propertyType: "land" }],
     [
       "a stay of 7 days or less",
@@ -134,6 +133,47 @@ describe("worksheet1 (Pub. 596 Worksheet 1)", () => {
       "26_total_income_or_loss": -4_000,
     });
     expect(worksheet1(loss, info, 0)?.kind).not.toBe("unsupported");
+  });
+
+  it("leaves a self-rental's net income out of line 13 (NPA) and counts its net loss", () => {
+    const selfRental = { propertyType: "self_rental", rentsReceived: 9_000 } as const;
+    const info: Worksheet1Info = {
+      mustFile: filesE(true),
+      rentalProperties: [
+        property("a", selfRental, true),
+        property("b", { rentsReceived: 6_000 }, true),
+      ],
+    };
+    const form = lines({
+      "21_income_or_loss_a": 4_000,
+      "21_income_or_loss_b": 2_500,
+      "26_total_income_or_loss": 6_500,
+    });
+    // Line 13: property B's 2,500 only; A's 4,000 is nonpassive.
+    expect(worksheet1(form, info, 1_000)).toEqual({ kind: "line14", amount: 3_500 });
+    const loss = lines({
+      "21_income_or_loss_a": -3_000,
+      "22_deductible_loss_a": 3_000,
+      "21_income_or_loss_b": 2_500,
+      "26_total_income_or_loss": -500,
+    });
+    // A net loss is passive: line 13 is 2,500 − 3,000, entered as 0.
+    expect(worksheet1(loss, info, 1_000)).toEqual({ kind: "line14", amount: 1_000 });
+  });
+
+  it("waits on a self-rental's net income over a prior-year loss, as Schedule E line 22 does", () => {
+    const info: Worksheet1Info = {
+      mustFile: filesE(true),
+      rentalProperties: [
+        property(
+          "a",
+          { propertyType: "self_rental", rentsReceived: 9_000, priorYearUnallowedLoss: 1_000 },
+          true,
+        ),
+      ],
+    };
+    const form = lines({ "21_income_or_loss_a": 4_000, "26_total_income_or_loss": 4_000 });
+    expect(worksheet1(form, info, 0)).toEqual({ kind: "waiting" });
   });
 
   it("waits until Schedule E line 26 is a number", () => {

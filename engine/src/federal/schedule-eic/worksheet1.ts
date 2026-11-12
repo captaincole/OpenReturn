@@ -11,6 +11,7 @@ import type { RentalFactValue } from "../../facts/index.js";
 import type { MustFileResolution } from "../../filingInfo.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
 import { unmodeled } from "../8582/activities.js";
+import { selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Worksheet1 } from "./credit.js";
 
@@ -20,7 +21,7 @@ export const ROYALTIES_WITH_RENTS_GAP =
   "Pub. 596 Worksheet 1 needs a Schedule E property's royalties and their expenses apart from its rents, and the engine does not split them.";
 
 export const RECHARACTERIZED_INCOME_GAP =
-  "Pub. 596 Worksheet 1 leaves out a passive rental's income that is recharacterized as nonpassive (a self-rental, land, a stay of 7 days or less, a disposition or a type 8 property), which the engine does not model.";
+  "Pub. 596 Worksheet 1 leaves out a passive rental's income that is recharacterized as nonpassive (land, a stay of 7 days or less, a disposition or a type 8 property), which the engine does not model.";
 
 /* The slots Worksheet 1 reads: Schedule E's must-file and its columns. */
 export interface Worksheet1Info {
@@ -43,7 +44,8 @@ const isRoyalty = (property: RentalProperty) => hasRoyalties(property.value);
  * A passive rental's net income (line 21) that may be nonpassive: lines 11–12
  * leave it out as "NPA" (irs-pub-596-2025::sec::passive-activities::b02;
  * irs-8582-inst-2025::sec::recharacterization-of-passive-income::b01). Form
- * 8582's own test of what it does not model (8582/activities.ts) decides.
+ * 8582's own test of what it does not model (8582/activities.ts) decides; a
+ * self-rental is modeled (selfRentalState).
  */
 export function incomeMayBeNonpassive(
   value: RentalFactValue,
@@ -56,6 +58,14 @@ export function incomeMayBeNonpassive(
 
 const column = (form: Lines, line: string, property: RentalProperty) =>
   form[`schedule-e.0.line.${line}_${property.column}`];
+
+/*
+ * A self-rental's net income is nonpassive (irs-pub-925-2025::sec::rental-of-property-to::b01):
+ * "NPA", left out of lines 11–13. Net income over a prior-year loss waits, as
+ * Schedule E line 22 does; a net loss counts as any passive rental's.
+ */
+const selfRental = (form: Lines, property: RentalProperty) =>
+  selfRentalState(property.value, numberOrBlank(column(form, "21_income_or_loss", property)));
 
 /*
  * A passive rental's amount on Schedule E line 26: line 21's income less the
@@ -72,8 +82,9 @@ const onLine26 = (form: Lines, property: RentalProperty) =>
  * (irs-pub-596-2025::sec::interest-and-dividends::b01, ::capital-gain-net-income::b01).
  * Lines 8–10: Schedule E line 23b less the royalty columns' line 20, at least 0
  * (::royalties-and-rental-income-from-personal-property::b01). Lines 11–13: the
- * passive rentals' amounts on line 26, at least 0; a royalty and a rental that
- * is not passive ("NPA") are left out (::passive-activities::b01, ::b02).
+ * passive rentals' amounts on line 26, at least 0; a royalty, a rental that
+ * is not passive and a self-rental's net income ("NPA") are left out
+ * (::passive-activities::b01, ::b02).
  * Undefined when Schedule E does not file; waiting until its line 26 is a
  * number, which needs every column's line 21 and line 22. A gap decides
  * first: Form 8582 waits on a property whose income it does not model.
@@ -108,6 +119,9 @@ export function worksheet1(
   );
   const line10 = atLeast(0, sum(form["schedule-e.0.line.23b_total_royalties"]) - line9);
   const passive = rentals.filter((property) => property.passive === true);
-  const line13 = atLeast(0, sum(...passive.map((property) => onLine26(form, property))));
+  const states = passive.map((property) => selfRental(form, property));
+  if (states.some((state) => state === undefined || state === "waits")) return { kind: "waiting" };
+  const counted = passive.filter((_, index) => states[index] !== "recharacterized");
+  const line13 = atLeast(0, sum(...counted.map((property) => onLine26(form, property))));
   return { kind: "line14", amount: sum(step2InvestmentIncome, line10, line13) };
 }
