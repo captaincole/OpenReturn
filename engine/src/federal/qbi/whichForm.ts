@@ -1,4 +1,4 @@
-import { SPOUSE_KEYS, businessesOnReturn, isDividendFactKey } from "../../facts/index.js";
+import { SPOUSE_KEYS, isDividendFactKey } from "../../facts/index.js";
 import type { MustFileResolution } from "../../filingInfo.js";
 import { bornBeforeJan2_1961, filingStatusOf } from "../../filingInfoResolvers.js";
 import { atLeast, sum } from "../../money.js";
@@ -13,6 +13,7 @@ import { standardDeduction } from "../1040/deductions.js";
 import { magiUpperBound } from "../8960/mustFile.js";
 import { scheduleCOpen } from "../schedule-c/resolveInfo.js";
 import { QBI_LIMITS } from "./lines.js";
+import { qbiBusinesses, rentalsWithoutQbiAnswer } from "./resolveInfo.js";
 
 /*
  * Form 8995 or Form 8995-A: the one rule for which of them figures the QBI
@@ -98,18 +99,16 @@ export function qbiFormByIncome(inputs: ResolverInputs): QbiForm {
 }
 
 /*
- * The must-file answer for one of the two forms. Any Schedule C business is
- * QBI. While Schedule C is open only REIT dividends can say yes, and nothing can
- * say no. An explicit must-file decision for the other form takes the
- * deduction there.
+ * The must-file answer for one of the two forms. Any Schedule C business, and a
+ * rental the taxpayer calls a trade or business, is QBI. While Schedule C, or a
+ * rental's QBI answer with no business, is open only REIT dividends can say yes,
+ * and nothing can say no. An explicit must-file decision for the other form takes
+ * the deduction there.
  */
 export function qbiMustFile(inputs: ResolverInputs, form: QbiForm): MustFileResolution {
   const reit = qualifiedReitDividends(inputs) ?? 0;
-  const { businesses, malformedKeys } = businessesOnReturn(
-    inputs.facts,
-    filingStatusOf(inputs) === "married_filing_jointly",
-  );
-  const businessKeys = [...businesses.map((business) => business.key), ...malformedKeys];
+  const { businesses, malformedKeys } = qbiBusinesses(inputs);
+  const businessKeys = [...businesses.map((business) => business.factKey), ...malformedKeys];
   const other: QbiForm = form === "form-8995" ? "form-8995-a" : "form-8995";
   const here =
     qbiFormByIncome(inputs) === form && inputs.decisionByKey.get(EXPLICIT_KEYS[other]) !== true;
@@ -119,11 +118,12 @@ export function qbiMustFile(inputs: ResolverInputs, form: QbiForm): MustFileReso
     value: reit > 0 && here,
   };
   const businessFallback = {
-    rule: `fallback: a Schedule C business (qualified business income); ${choice}`,
+    rule: `fallback: a Schedule C business or a QBI rental (qualified business income); ${choice}`,
     value: businessKeys.length > 0 && here,
     triggeredByFactKeys: businessKeys,
   };
-  const open = scheduleCOpen(inputs);
+  const unanswered = rentalsWithoutQbiAnswer(inputs);
+  const open = scheduleCOpen(inputs) || (unanswered.length > 0 && businessKeys.length === 0);
   return resolveMustFile(inputs.decisionByKey, {
     explicitKey: EXPLICIT_KEYS[form],
     fallbacks: open ? (reit > 0 ? [reitFallback] : []) : [reitFallback, businessFallback],
