@@ -62,4 +62,30 @@ describe("deductions module", () => {
     });
     expect(deductions.comparison?.federal).toMatchObject({ itemized: 10000, standard: 15750 });
   });
+  it("tcb-us-002: the standard side adds the net qualified disaster loss", () => {
+    const ben = evaluated.find(({ name }) => name === "tcb-us-002")!.result.deductions;
+    // Standard deduction 23,625 plus Form 4684 line 15's 2,500; itemizing would give 24,761.
+    expect(ben.comparison?.federal).toMatchObject({
+      itemized: 24761,
+      standard: 26125,
+      recommendation: "standard",
+    });
+  });
+
+  it("tcb-us-002: no comparison while Form 4684 waits", () => {
+    const scenario = SCENARIOS.find(({ name }) => name === "tcb-us-002")!;
+    // Insurance over the basis with no amount received: line 4 waits, so the loss does too.
+    const facts = scenario.facts.map((fact) => {
+      if (fact.key !== "casualty.monsoon") return fact;
+      const event = fact.value as { properties: Array<Record<string, unknown>> };
+      const [shed] = event.properties;
+      return { ...fact, value: { ...event, properties: [{ ...shed, reimbursement: 13000 }] } };
+    });
+    const { deductions } = evaluateScenario({
+      filing: { id: "tcb-us-002-filing", taxYear: scenario.taxYear },
+      facts,
+      decisions: scenario.decisions,
+    });
+    expect(deductions.comparison).toBeUndefined();
+  });
 });
