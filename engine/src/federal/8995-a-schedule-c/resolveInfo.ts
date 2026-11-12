@@ -29,7 +29,11 @@ export function resolve8995AScheduleCInfo(inputs: ResolverInputs): Form8995ASche
   const properties = resolveScheduleEInfo(inputs).rentalProperties ?? [];
   const rentalOf = (factKey: string) => properties.find((property) => property.factKey === factKey);
   const losses = qbi.map((business) => {
-    if (business.kind === "business") return { business, loss: (business.netProfit ?? 0) < 0 };
+    if (business.kind === "business") {
+      // A blank line 31 may be a loss: the question stays open.
+      const profit = business.netProfit;
+      return { business, loss: profit === undefined ? undefined : profit < 0 };
+    }
     const property = rentalOf(business.factKey);
     const loss = property !== undefined && netRentalIncome(property.value) < 0;
     return { business, loss: loss && property?.passive !== false ? undefined : loss };

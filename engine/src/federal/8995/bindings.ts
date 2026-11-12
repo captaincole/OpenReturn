@@ -4,15 +4,19 @@ import { defineForm } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
 import {
-  businessQbi,
   businessTin,
+  qbiOf,
   qualifiedDividendsPlusNetCapitalGain,
   taxableIncomeBeforeQbi,
 } from "../qbi/lines.js";
-import type { Form8995FilingInfo } from "./filingInfo.js";
+import type { ScheduleEFilingInfo } from "../schedule-e/filingInfo.js";
+import type { Form8995FilingInfo as BaseInfo } from "./filingInfo.js";
 import type { Form8995 } from "./types.js";
 
 type Read = Record<string, unknown>;
+
+/* MANUAL EDIT: a QBI rental's row reads its Schedule E property (qbiOf). */
+type Form8995FilingInfo = BaseInfo & Pick<ScheduleEFilingInfo, "rentalProperties">;
 
 /* Lines 5, 9 and 14. */
 const QBI_RATE = 0.2;
@@ -37,7 +41,7 @@ const businessIn = (info: Form8995FilingInfo, row: Row): QbiBusiness | undefined
 // Line 1(c): QBI counts the deductible part of SE tax (determining-your-qualified-business::b01).
 function qbi(form: Read, info: Form8995FilingInfo, row: Row): number | undefined {
   const business = businessIn(info, row);
-  const amount = business && businessQbi(form, info, business);
+  const amount = business && qbiOf(form, info, business);
   return amount === undefined ? undefined : roundDollars(amount);
 }
 
@@ -54,7 +58,7 @@ function tin(info: Form8995FilingInfo, row: Row): string | undefined {
  */
 function line2(form: Read, info: Form8995FilingInfo): number | undefined {
   const amounts = (info.qbiBusinesses ?? []).map((business) =>
-    roundDollars(businessQbi(form, info, business)),
+    roundDollars(qbiOf(form, info, business)),
   );
   if (amounts.length === 0 || amounts.includes(undefined)) return undefined;
   return sum(...amounts);
