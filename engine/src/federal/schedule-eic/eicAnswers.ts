@@ -24,6 +24,8 @@ export interface EicLineInfo extends EicAnswers {
   selfEmployed: boolean;
   /** A W-2 with box 13 "Statutory employee" checked: Worksheet B Part 3, not modeled. */
   statutoryEmployee: boolean;
+  /** The dependent facts whose qualifying-child test waits on an answer. */
+  openDependentKeys: string[];
 }
 
 /** Line 27a's slot, filled by the 1040 resolver; Schedule 8812 line 24 reads it too. */
@@ -36,7 +38,7 @@ const answer = (inputs: ResolverInputs, key: string) =>
 
 export function resolveEicLineInfo(inputs: ResolverInputs): EicLineInfo {
   const joint = filingStatusOf(inputs) === "married_filing_jointly";
-  const { children, withSsn, childrenOpen } = eicQualifyingChildren(inputs);
+  const { children, withSsn, open, childrenOpen } = eicQualifyingChildren(inputs);
   const w2s = factsInCategory(inputs, "wages")
     .filter((row) => isW2FactKey(row.key))
     .map((row) => row.value as W2FactValue);
@@ -58,6 +60,7 @@ export function resolveEicLineInfo(inputs: ResolverInputs): EicLineInfo {
     legallySeparatedApartAtYearEnd: answer(inputs, SPOUSE_KEYS.legallySeparatedApartAtYearEnd),
     selfEmployed: businessesOnReturn(inputs.facts, joint).businesses.length > 0,
     statutoryEmployee: w2s.some((w2) => w2.box13?.statutoryEmployee === true),
+    openDependentKeys: open.map((dependent) => dependent.sourceFact.key),
   };
 }
 
@@ -101,28 +104,52 @@ function separatedSpouseQuestions(info: EicLineInfo): Record<string, unknown> {
   };
 }
 
+// Step 1, question 1: three or more children set the largest limit.
+const MOST_CHILDREN = 3;
+
+/* Earned income can be under the limit for that many children; no wages and no business is none. */
+function earnsUnderLimit(inputs: ResolverInputs, info: EicLineInfo, children: number): boolean {
+  const joint = filingStatusOf(inputs) === "married_filing_jointly";
+  return (
+    (info.selfEmployed || sumW2Box(inputs, "box1") > 0) &&
+    earnedIncomeMayBeUnderLimit(inputs, children, joint)
+  );
+}
+
 /*
- * The no-child EIC answers (Step 1 question 4, Step 4 questions 3, 5 and 6,
+ * A dependent whose qualifying-child test waits on its residency, student or
+ * disability answer holds Step 1 while the largest limit can be met. Schedule
+ * 8812 asks only the answers its own credits need, so line 27a asks again.
+ */
+function openDependentQuestions(
+  inputs: ResolverInputs,
+  info: EicLineInfo,
+): Record<string, unknown> {
+  if (!info.childrenOpen || !earnsUnderLimit(inputs, info, MOST_CHILDREN)) return {};
+  return Object.fromEntries(info.openDependentKeys.map((key) => [key, undefined]));
+}
+
+/*
+ * The no-child answers (Step 1 question 4, Step 4 questions 3, 5 and 6,
  * Form 8862) for a filer whose earned income can be under the Step 1 limit,
  * with the right filing status and age. A filer with a qualifying child is
  * asked by Schedule EIC's resolver; an MFS filer with one is asked Step 3's
- * questions 4 and 5.
+ * questions 4 and 5. A head of household without one is not asked: Step 4,
+ * question 1 stops the credit or is a gap.
  */
-export function eicQuestions(inputs: ResolverInputs, info: EicLineInfo): Record<string, unknown> {
+function answerQuestions(inputs: ResolverInputs, info: EicLineInfo): Record<string, unknown> {
   const status = filingStatusOf(inputs);
   const joint = status === "married_filing_jointly";
-  const wages = sumW2Box(inputs, "box1");
-  const earnsUnderLimit = (children: number) =>
-    (info.selfEmployed || wages > 0) && earnedIncomeMayBeUnderLimit(inputs, children, joint);
   if (info.qualifyingChildren > 0) {
-    return status === "married_filing_separately" && earnsUnderLimit(info.childrenWithSsn)
+    return status === "married_filing_separately" &&
+      earnsUnderLimit(inputs, info, info.childrenWithSsn)
       ? separatedSpouseQuestions(info)
       : {};
   }
   const possible =
     !info.childrenOpen &&
     (status === "single" || status === "qualifying_surviving_spouse" || joint) &&
-    earnsUnderLimit(0) &&
+    earnsUnderLimit(inputs, info, 0) &&
     noChildAgeInRange(inputs, joint);
   if (!possible) return {};
   return {
@@ -137,4 +164,9 @@ export function eicQuestions(inputs: ResolverInputs, info: EicLineInfo): Record<
     [EIC_KEYS.deniedInEarlierYear]: info.deniedInEarlierYear,
     [EIC_KEYS.barredByIrs]: info.barredByIrs,
   };
+}
+
+/* The EIC answers line 27a waits on, asked only while the EIC is still possible. */
+export function eicQuestions(inputs: ResolverInputs, info: EicLineInfo): Record<string, unknown> {
+  return { ...openDependentQuestions(inputs, info), ...answerQuestions(inputs, info) };
 }

@@ -30,7 +30,7 @@ export const SELF_ONLY_EIC_GAP =
   "The self-only EIC for a filer whose qualifying children have no valid SSN (Pub. 596) is not modeled.";
 // Step 4, question 1 (irs-1040-inst-2025::sec::filers-without-a-qualifying::b01).
 export const MARRIED_HOH_GAP =
-  "A married head of household with no qualifying child can't take the EIC, and no fact records whether a head of household is married.";
+  "A married head of household with no qualifying child can't take the EIC, and no fact records that a head of household is unmarried.";
 
 interface EicTable {
   // [at least, but less than, single/HOH/QSS 0–3 children, married filing jointly 0–3 children]
@@ -179,11 +179,28 @@ export function noChildEicAge(dob: string | undefined): boolean | undefined {
   return after === undefined || before === undefined ? undefined : after && before;
 }
 
+/*
+ * Step 4, question 1: "a married taxpayer whose filing status is married filing
+ * separately or head of household". A head of household who lived apart from a
+ * spouse the last 6 months (the 1040 page 1 box) is married; no fact says one
+ * is unmarried, so the others are a gap.
+ */
+function step4Question1(ret: EicReturn, answers: EicAnswers): Step {
+  if (ret.filingStatus === "married_filing_separately") return none(false);
+  if (ret.filingStatus !== "head_of_household") return undefined;
+  return answers.livedApartLastSixMonths === true ? none(false) : gap(MARRIED_HOH_GAP);
+}
+
+/* Step 4, question 2 for the taxpayer, or either spouse on a joint return. */
+function step4Ages(ret: EicReturn, joint: boolean): Array<boolean | undefined> {
+  return [noChildEicAge(ret.taxpayerDob), ...(joint ? [noChildEicAge(ret.spouseDob)] : [])];
+}
+
 /* Step 4, for a filer without a qualifying child. */
 function step4(ret: EicReturn, answers: EicAnswers, joint: boolean): Step {
-  if (ret.filingStatus === "married_filing_separately") return none(false);
-  if (ret.filingStatus === "head_of_household") return gap(MARRIED_HOH_GAP);
-  const ages = [noChildEicAge(ret.taxpayerDob), ...(joint ? [noChildEicAge(ret.spouseDob)] : [])];
+  const question1 = step4Question1(ret, answers);
+  if (question1) return question1;
+  const ages = step4Ages(ret, joint);
   if (!ages.includes(true)) return ages.includes(undefined) ? WAITING : none(false);
   if (answers.mainHomeInUs === undefined) return WAITING;
   if (!answers.mainHomeInUs) return none(true);
@@ -233,8 +250,45 @@ function earnedIncomeStop(ret: EicReturn, answers: EicAnswers, joint: boolean): 
 }
 
 /*
+ * Step 4 without a qualifying child, from data alone: question 1 stops MFS and a
+ * married head of household, and question 2 stops a filer (and spouse) outside
+ * ages 25–64. Else a head of household not known to be married is the gap
+ * once AGI and earned income (or its gap) are known: a wait would be on
+ * answers no one asks.
+ */
+function noChildStop(ret: EicReturn, answers: EicAnswers, joint: boolean): Step {
+  if (answers.qualifyingChildren > 0 || answers.childrenOpen) return undefined;
+  const question1 = step4Question1(ret, answers);
+  if (question1?.kind === "none") return question1;
+  const ages = step4Ages(ret, joint);
+  if (!ages.includes(true) && !ages.includes(undefined)) return none(false);
+  // A gap in earned income comes at Step 5, after this one.
+  const earnedKnown =
+    (ret.earnedIncome ?? ret.earnedIncomeAtLeast) !== undefined ||
+    ret.earnedIncomeGap !== undefined;
+  const known = ret.agi !== undefined && earnedKnown;
+  return known ? question1 : undefined;
+}
+
+/*
+ * The stops the steps reach whatever the missing answers are, in step order:
+ * Step 2's investment income, Step 4 without a child, and Step 5's earned
+ * income at the limit or zero or less (Worksheet A line 2 or Worksheet B
+ * line 4b checks line 27c).
+ */
+function definiteStop(ret: EicReturn, answers: EicAnswers, joint: boolean): Step {
+  if (ret.investmentIncome > INVESTMENT_INCOME_LIMIT) return none(false);
+  const noChild = noChildStop(ret, answers, joint);
+  if (noChild?.kind === "none") return noChild;
+  const atLimit = earnedIncomeStop(ret, answers, joint);
+  if (atLimit) return atLimit;
+  if (ret.earnedIncome !== undefined && ret.earnedIncome <= 0) return none(true);
+  return noChild;
+}
+
+/*
  * Line 27a's steps in order; the first that stops, waits or is not modeled
- * decides, and earned income at the limit stops a wait or a gap.
+ * decides, and a stop that needs no missing answer stops a wait or a gap.
  */
 export function earnedIncomeCredit(ret: EicReturn, answers: EicAnswers): EicOutcome {
   const joint = ret.filingStatus === "married_filing_jointly";
@@ -246,5 +300,5 @@ export function earnedIncomeCredit(ret: EicReturn, answers: EicAnswers): EicOutc
     earlierDenial(answers) ??
     step5(ret, answers, joint);
   if (outcome.kind === "credit" || outcome.kind === "none") return outcome;
-  return earnedIncomeStop(ret, answers, joint) ?? outcome;
+  return definiteStop(ret, answers, joint) ?? outcome;
 }
