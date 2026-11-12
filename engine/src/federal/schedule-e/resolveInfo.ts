@@ -4,6 +4,7 @@ import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resol
 import {
   booleanFact,
   isPassiveActivity,
+  isSelfRentalNetIncome,
   needsProfessionalAnswer,
   spousePropertiesOnReturn,
 } from "../rentals/passive.js";
@@ -45,7 +46,8 @@ function openPropertyKeys(
         missingPropertyAnswer(value) ||
         personalUseUnknown(value) ||
         (value.allInvestmentAtRisk === undefined && (netIncomeOrLoss(value) ?? 0) < 0) ||
-        formerPassiveActivity(value, professional),
+        formerPassiveActivity(value, professional) ||
+        selfRentalIncomeOverPriorLoss(value),
     )
     .map((property) => property.key);
 }
@@ -58,6 +60,18 @@ function openPropertyKeys(
 function formerPassiveActivity(value: RentalFactValue, professional: boolean | undefined): boolean {
   return (
     isPassiveActivity(value, professional) === false && (value.priorYearUnallowedLoss ?? 0) > 0
+  );
+}
+
+/*
+ * MANUAL EDIT: a self-rental's net income over a prior-year loss allows that loss
+ * outside Form 8582 (irs-pub-925-2025::sec::disclosure-requirement::b05), which is not
+ * modeled, so line 22 waits (totals.ts allowedPassiveLoss): ask for it again.
+ */
+function selfRentalIncomeOverPriorLoss(value: RentalFactValue): boolean {
+  return (
+    isSelfRentalNetIncome(value, netIncomeOrLoss(value)) === true &&
+    (value.priorYearUnallowedLoss ?? 0) > 0
   );
 }
 
