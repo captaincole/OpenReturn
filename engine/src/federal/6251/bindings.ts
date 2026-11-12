@@ -71,15 +71,25 @@ function amtInvestmentInterestDeduction(form: Form, info: Form6251FilingInfo): n
   return Math.min(line3, line6);
 }
 
+/* Line 2c either waits on an input or has its amount (blank when it does not apply). */
+type Line2cOutcome = { waits: true } | { waits: false; amount: number | undefined };
+
 /*
- * MANUAL EDIT: line 2c has an amount to figure (the return itemizes and a regular
- * Form 4952 files) but one of the two Forms 4952 is still waiting on an input.
+ * MANUAL EDIT: irs-6251-inst-2025::sec::line-2c-investment-interest::b03: regular
+ * Form 4952 line 8 less AMT line 8, negative when the AMT amount is larger. A filer
+ * who does not itemize enters nothing (Schedule E is not modeled), and no regular
+ * Form 4952 means no AMT one. With both, the line waits while either Form 4952's
+ * line 8 is still waiting on an input.
  */
-const awaitsLine2c = (form: Form, info: Form6251FilingInfo): boolean =>
-  info.itemizesDeductions === true &&
-  info.mustFile?.["form-4952"]?.value === true &&
-  (numberOrBlank(form["form-4952.0.line.8_investment_interest_deduction"]) === undefined ||
-    amtInvestmentInterestDeduction(form, info) === undefined);
+function line2cOutcome(form: Form, info: Form6251FilingInfo): Line2cOutcome {
+  if (info.itemizesDeductions !== true || info.mustFile?.["form-4952"]?.value !== true) {
+    return { waits: false, amount: undefined };
+  }
+  const regularLine8 = numberOrBlank(form["form-4952.0.line.8_investment_interest_deduction"]);
+  const amtLine8 = amtInvestmentInterestDeduction(form, info);
+  if (regularLine8 === undefined || amtLine8 === undefined) return { waits: true };
+  return { waits: false, amount: nonZeroOrBlank(roundDollars(regularLine8 - amtLine8)) };
+}
 
 /*
  * MANUAL EDIT: Exemption Worksheet—Line 5 (irs-6251-inst-2025::sec::exemption-worksheet::b01–b02).
@@ -204,20 +214,10 @@ export function register(): void {
             ? form["schedule-a.0.line.7_total_taxes"]
             : form["form-1040.line.12e"],
         ),
-      /*
-       * MANUAL EDIT: irs-6251-inst-2025::sec::line-2c-investment-interest::b03: regular
-       * Form 4952 line 8 less AMT line 8, negative when the AMT amount is larger. A
-       * filer who does not itemize enters nothing (Schedule E is not modeled), and no
-       * regular Form 4952 means no AMT one.
-       */
+      // MANUAL EDIT: see line2cOutcome; a waiting line stays blank.
       "0.line.2c_investment_interest_expense": (form, info) => {
-        if (info.itemizesDeductions !== true) return undefined;
-        const regularLine8 = numberOrBlank(
-          form["form-4952.0.line.8_investment_interest_deduction"],
-        );
-        const amtLine8 = amtInvestmentInterestDeduction(form, info);
-        if (regularLine8 === undefined || amtLine8 === undefined) return undefined;
-        return nonZeroOrBlank(roundDollars(regularLine8 - amtLine8));
+        const outcome = line2cOutcome(form, info);
+        return outcome.waits ? undefined : outcome.amount;
       },
       /*
        * MANUAL EDIT: irs-6251-inst-2025::sec::line-2g-interest-from-private-activity-bonds::b01–b02.
@@ -244,7 +244,7 @@ export function register(): void {
        */
       "0.line.4_alternative_minimum_taxable_income": (form, info) => {
         const line1b = numberOrBlank(form["0.line.1b_taxable_income_start"]);
-        if (line1b === undefined || awaitsLine2c(form, info)) return undefined;
+        if (line1b === undefined || line2cOutcome(form, info).waits) return undefined;
         const combined = sum(
           line1b,
           form["0.line.2a_taxes_or_standard_deduction"],
