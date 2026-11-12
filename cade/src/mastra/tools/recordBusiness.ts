@@ -85,7 +85,7 @@ const homeOffice: { [K in keyof HomeOfficeSimplified]-?: z.ZodType<HomeOfficeSim
     .boolean()
     .optional()
     .describe(
-      "True when all of the business's gross income is from its use of this home (no other place of business)",
+      "True when all of the business's gross income is from its use of this home (no other place of business). When it is false, or two or more businesses of one owner have home offices that total more than 300 square feet, tell the user we do not handle that yet.",
     ),
 };
 

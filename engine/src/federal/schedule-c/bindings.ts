@@ -3,6 +3,7 @@
 import { defineForm, type BindingFn } from "../../defineForm.js";
 import type { BusinessExpenses, BusinessFactValue, BusinessVehicle } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
 import {
@@ -10,6 +11,7 @@ import {
   grossIncome,
   grossProfit,
   homeOfficeExpenses,
+  homeOfficeGap,
   netProfit,
   netReceipts,
   otherExpensesTotal,
@@ -29,6 +31,13 @@ const PART_III =
   "Part III (cost of goods sold) is not modeled: no fact gives inventory, purchases or the valuation method.";
 // MANUAL EDIT: Part V has nine rows; the engine writes no attached statement for more.
 const PART_V_ROWS = 9;
+// MANUAL EDIT: line 30 cases the engine does not handle (lines.ts homeOfficeGap).
+const HOME_OFFICE_GAP = {
+  partOfIncomeFromHome:
+    "Not all of the business's gross income is from the home, and no fact gives the part that is (Simplified Method Worksheet line 1).",
+  areaAllocation:
+    "The home offices of two or more of the owner's businesses total more than 300 square feet, and no fact gives how the taxpayer allocates the 300 among the businesses.",
+} as const;
 const AT_RISK =
   "No fact says whether all investment in the business is at risk (Form 6198); line 31 leaves a loss blank.";
 
@@ -81,13 +90,23 @@ function squareFeet(info: ScheduleCFilingInfo, which: "homeSquareFeet" | "busine
  */
 function line31(info: ScheduleCFilingInfo) {
   const business = businessOf(info);
-  return business ? netProfit(business, info.businesses ?? []) : undefined;
+  if (!business) return undefined;
+  return homeOfficeUnsupported(business, info) ?? netProfit(business, info.businesses ?? []);
 }
 
 // MANUAL EDIT: the 300 square-foot cap is shared by the owner's other businesses, so line 30 reads them all.
 function line30(info: ScheduleCFilingInfo) {
   const business = businessOf(info);
-  return business ? homeOfficeExpenses(business, info.businesses ?? []) : undefined;
+  if (!business) return undefined;
+  return (
+    homeOfficeUnsupported(business, info) ?? homeOfficeExpenses(business, info.businesses ?? [])
+  );
+}
+
+// MANUAL EDIT: a home office case the engine does not handle makes lines 30 and 31 unsupported, with the reason.
+function homeOfficeUnsupported(business: BusinessFactValue, info: ScheduleCFilingInfo) {
+  const gap = homeOfficeGap(business, info.businesses ?? []);
+  return gap ? unsupported(HOME_OFFICE_GAP[gap]) : undefined;
 }
 
 /*
