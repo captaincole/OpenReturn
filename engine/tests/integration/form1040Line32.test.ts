@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { evaluateScenario } from "../../src";
 import { EIC_KEYS, makeBusinessFactKey, makeDependentFactKey } from "../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
+import { SELF_EMPLOYED_EARNED_INCOME } from "../../src/federal/schedule-8812/earnedIncomeGap.js";
 import { FORM_8862_GAP } from "../../src/federal/schedule-eic/credit.js";
 import { decisionRow } from "../helpers/fixtureBuilders.js";
 import { tcbUs002Scenario as base } from "../scenarios/tcb-us-002/index.js";
@@ -126,12 +127,20 @@ describe("Form 1040 line 32", () => {
     expect(result.form1040("line.35a")).toBeUndefined();
   });
 
-  it("waits while Schedule 8812 Part II is open and line 27 is blank", () => {
+  it("is unsupported when Schedule 8812 line 18a is a self-employment gap; lines 33–35a wait", () => {
     const result = evaluate([...withNephews(base.facts, 3), business]);
     expect(result.form1040("line.27a")).toBeTypeOf("number");
     expect(result.schedule8812("1.line.16a_line12_minus_line14")).toBeTypeOf("number");
     expect(result.form1040("line.28")).toBeUndefined();
-    for (const line of REFUND_LINES) expect(result.form1040(line)).toBeUndefined();
+    expect(result.form1040Result("line.32")).toEqual({
+      ok: false,
+      unsupported: true,
+      reason: SELF_EMPLOYED_EARNED_INCOME,
+    });
+    const line33 = result.form1040Result("line.33");
+    expect(line33?.ok).toBe(false);
+    expect(line33).not.toHaveProperty("unsupported", true);
+    expect(result.form1040("line.35a")).toBeUndefined();
   });
 
   it("stays blank, and line 33 adds 0, when there is no EIC and Part II is closed", () => {

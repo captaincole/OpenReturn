@@ -5,6 +5,7 @@ import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.
 import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { eicOutcome } from "../schedule-eic/outcome.js";
+import { SELF_EMPLOYED_EARNED_INCOME, selfEmployedForLine18a } from "./earnedIncomeGap.js";
 import type { Schedule8812FilingInfo } from "./filingInfo.js";
 import type { Schedule8812 } from "./types.js";
 
@@ -28,9 +29,6 @@ const EARNED_INCOME_FLOOR = 2_500;
 const EARNED_INCOME_RATE = 0.15;
 // Line 20 Next: "On line 16b, is the amount $5,100 or more?"
 const PART_II_B_MINIMUM = 5_100;
-// Line 18a, the Earned Income Chart (irs-1040s8-inst-2025::sec::earned-income-chart-line-18a::b01).
-const SELF_EMPLOYED_EARNED_INCOME =
-  "With self-employment, line 18a needs the Earned Income Worksheet, which is not modeled, or EIC Worksheet B line 4b, which this line does not read.";
 
 type Form = FormAccessor<Schedule8812>;
 type Bindings = Partial<{
@@ -322,11 +320,7 @@ function partIIAOpen(form: Form): boolean {
  * business or Schedule SE the worksheets differ and are not drafted: unsupported.
  */
 function earnedIncome(form: Form, info: Schedule8812FilingInfo): number | Unsupported | undefined {
-  const selfEmployed =
-    info.earnedIncomeCredit?.selfEmployed === true ||
-    numberOrBlank(form["schedule-c.0.line.31"]) !== undefined ||
-    numberOrBlank(form["schedule-se.0.line.3"]) !== undefined;
-  if (selfEmployed) return unsupported(SELF_EMPLOYED_EARNED_INCOME);
+  if (selfEmployedForLine18a(form, info)) return unsupported(SELF_EMPLOYED_EARNED_INCOME);
   const line1z = numberOrBlank(form["form-1040.line.1z"]);
   if (line1z === undefined) return undefined;
   return atLeast(0, sum(line1z, form["1.line.18b_nontaxable_combat_pay"]));
