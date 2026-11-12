@@ -42,6 +42,14 @@ export interface MarketplaceCoverageFactValue {
   annualTotals: MarketplaceCoverageAmounts; // line 33
 }
 
+/* Part III has one row per month, January first (lines 21–32). */
+export const MARKETPLACE_MONTHS = 12;
+
+/* A row with a column A or B amount: the form covers that month. */
+export function rowShowsCoverage(row: MarketplaceCoverageAmounts | undefined): boolean {
+  return row?.enrollmentPremium !== undefined || row?.slcspPremium !== undefined;
+}
+
 const MARKETPLACE_CATEGORY = "health_coverage";
 
 /* A taxpayer can get several 1095-As from one Marketplace (one per policy). */
