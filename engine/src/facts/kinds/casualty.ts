@@ -20,6 +20,11 @@ export interface CasualtyPropertyValue {
   costBasis: number;
   /* Line 3: received or expected, whether or not a claim was filed; 0 when none. */
   reimbursement: number;
+  /*
+   * The part of line 3 received in 2025: line 4's gain when line 3 is more than
+   * line 2 (irs-4684-inst-2025::sec::line-4::b01). Asked only then.
+   */
+  reimbursementReceived?: number;
   /* Lines 5 and 6. */
   fairMarketValueBefore: number;
   fairMarketValueAfter: number;

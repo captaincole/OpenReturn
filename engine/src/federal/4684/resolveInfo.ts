@@ -1,6 +1,18 @@
-import { getCasualtyEventFacts } from "../../facts/index.js";
+import { getCasualtyEventFacts, type CasualtyEventFact } from "../../facts/index.js";
 import { resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import type { Form4684FilingInfo } from "./filingInfo.js";
+import { hasGain } from "./lines.js";
+
+/* An event with a gain on line 4 needs the reimbursement received in 2025 (line-4::b01). */
+function missingReceived(events: readonly CasualtyEventFact[]): string[] {
+  return events
+    .filter(({ event }) =>
+      event.properties.some(
+        (property) => hasGain(property) && property.reimbursementReceived === undefined,
+      ),
+    )
+    .map((event) => event.factKey);
+}
 
 /*
  * irs-4684-inst-2025::sec::general-instructions::b01: "Use Form 4684 to report
@@ -23,7 +35,7 @@ export function resolve4684Info(inputs: ResolverInputs): Form4684FilingInfo {
   });
   return {
     mustFile: { "form-4684": resolution },
-    missingInputs: { "form-4684": [] },
+    missingInputs: { "form-4684": missingReceived(casualtyEvents) },
     casualtyEvents,
   };
 }
