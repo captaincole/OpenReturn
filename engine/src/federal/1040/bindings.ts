@@ -14,6 +14,7 @@ import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.j
 import { form1040Line7a } from "../schedule-d/lines.js";
 import { awaitsSchedule1A, standardDeduction } from "./deductions.js";
 import type { Form1040FilingInfo } from "./filingInfo.js";
+import { qdcgInputsFromReturn } from "./qdcgInputs.js";
 import type { Form1040 } from "./types.js";
 
 type Bindings = Partial<{ [K in keyof Form1040]: BindingFn<Form1040, Form1040FilingInfo, K> }>;
@@ -315,33 +316,16 @@ export function register(): void {
         const taxable = form["line.15"];
         if (typeof taxable !== "number") return undefined;
 
-        const schDL15 = form["schedule-d.0.line.15_net_long_term_gain_loss"];
-        const schDL16 = form["schedule-d.1.line.16_combined_gain_loss"];
-        const candL15 = typeof schDL15 === "number" ? atLeast(0, schDL15) : 0;
-        const candL16 = typeof schDL16 === "number" ? atLeast(0, schDL16) : 0;
-        // Worksheet line 3 "No" branch: no Schedule D, so use line 7a.
-        const netLtcg =
-          schDL15 !== undefined || schDL16 !== undefined
-            ? Math.min(candL15, candL16)
-            : (() => {
-                const l7a = form["line.7a"];
-                return typeof l7a === "number" ? atLeast(0, l7a) : 0;
-              })();
-
-        const form4952L4g = form["form-4952.0.line.4g_elected_investment_income"];
         try {
-          const qdcg = computeQdcg({
-            taxableIncome: taxable,
-            // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
-            qualifiedDividends: roundDollars(info.qualifiedDividends) ?? 0,
-            netLongTermGain: netLtcg,
-            // MANUAL EDIT: Form 4952 line 4g leaves the preferential rates (Schedule D Tax Worksheet line 3).
-            form4952Line4g: typeof form4952L4g === "number" ? form4952L4g : 0,
-            // TODO: the Foreign Earned Income Tax Worksheet, when Form 2555 lands.
-            filingForm2555: false,
-            filingStatus: info.filingStatus,
-            taxYear: 2025,
-          });
+          const qdcg = computeQdcg(
+            qdcgInputsFromReturn(
+              form,
+              taxable,
+              // MANUAL EDIT: worksheet line 2 = 1040 line 3a as entered (a rounded document sum).
+              roundDollars(info.qualifiedDividends) ?? 0,
+              info.filingStatus,
+            ),
+          );
           return qdcg.tax;
         } catch {
           // Unknown filing status or missing table data: use the plain tax table.
