@@ -1,6 +1,6 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
-import type { PropertyColumn, ScheduleEFilingInfo } from "../schedule-e/filingInfo.js";
+import type { PropertyColumn } from "../schedule-e/filingInfo.js";
 import type { QbiBusiness, QbiFilingInfo } from "./filingInfo.js";
 
 export interface QbiLimits {
@@ -67,7 +67,10 @@ export function taxableIncomeBeforeQbi(
   return line11a - line12e - (line13b ?? 0);
 }
 
-type QbiInfo = Pick<QbiFilingInfo, "qbiScheduleSEFiled" | "taxpayerSSN" | "spouseSSN">;
+type QbiInfo = Pick<
+  QbiFilingInfo,
+  "qbiScheduleSEFiled" | "taxpayerSSN" | "spouseSSN" | "rentalProperties"
+>;
 
 /*
  * The deductible part of SE tax attributable to the business (QBI, irs-8995a-inst-2025::sec::determining-your-qbi-deduction::b15).
@@ -116,7 +119,7 @@ export function businessTin(info: QbiInfo, business: QbiBusiness): string | unde
  */
 export function rentalQbi(
   form: Record<string, unknown>,
-  info: Pick<ScheduleEFilingInfo, "rentalProperties">,
+  info: Pick<QbiFilingInfo, "rentalProperties">,
   column: PropertyColumn,
 ): number | undefined {
   const rental = info.rentalProperties?.find((property) => property.column === column);
@@ -138,7 +141,7 @@ export function rentalQbi(
  */
 export function qbiOf(
   form: Record<string, unknown>,
-  info: QbiInfo & Pick<ScheduleEFilingInfo, "rentalProperties">,
+  info: QbiInfo,
   business: QbiBusiness,
 ): number | undefined {
   if (business.kind === "business") return businessQbi(form, info, business);

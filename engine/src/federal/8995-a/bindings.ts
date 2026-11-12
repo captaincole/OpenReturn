@@ -8,19 +8,17 @@ import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
 import {
-  businessQbi,
   businessTin,
+  qbiOf,
   qualifiedDividendsPlusNetCapitalGain,
-  rentalQbi,
   taxableIncomeBeforeQbi,
 } from "../qbi/lines.js";
-import type { ScheduleEFilingInfo } from "../schedule-e/filingInfo.js";
 import type { Form8995AFilingInfo } from "./filingInfo.js";
 import { aboveThreshold, needsScheduleA, partIBusinesses, qbiLimits } from "./lines.js";
 import type { Form8995A } from "./types.js";
 
 /* Schedule E's resolver fills rentalProperties; a rental column reads its property. */
-type Info = Form8995AFilingInfo & Pick<ScheduleEFilingInfo, "rentalProperties">;
+type Info = Form8995AFilingInfo;
 
 /* Part II rates: lines 3, 5, 6 and 8. */
 const QBI_RATE = 0.2;
@@ -134,11 +132,9 @@ function line25(form: Read, info: Form8995AFilingInfo, column: Column): number |
  */
 function qbiWithoutNetting(form: Read, info: Info, business: QbiBusiness): number | undefined {
   if (needsScheduleA(form, info, business)) return undefined;
-  if (business.kind === "business") return businessQbi(form, info, business);
-  if (!business.scheduleEColumn) return undefined;
-  const qbi = rentalQbi(form, info, business.scheduleEColumn);
-  // A loss needs Schedule C (Form 8995-A).
-  return qbi !== undefined && qbi < 0 ? undefined : qbi;
+  const qbi = qbiOf(form, info, business);
+  // A rental's loss needs Schedule C (Form 8995-A).
+  return business.kind === "rental" && qbi !== undefined && qbi < 0 ? undefined : qbi;
 }
 
 // MANUAL EDIT: with loss netting, line 2 is Schedule C (Form 8995-A) line 1 column (c) (line-2::b01).

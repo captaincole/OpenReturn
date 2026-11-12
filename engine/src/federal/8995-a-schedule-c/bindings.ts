@@ -6,7 +6,7 @@ import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { needsScheduleA, partIBusinesses } from "../8995-a/lines.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
-import { businessQbi, rentalQbi } from "../qbi/lines.js";
+import { qbiOf } from "../qbi/lines.js";
 import { namesOnReturn } from "../returnNames.js";
 import type { Form8995AScheduleCFilingInfo } from "./filingInfo.js";
 import type { Form8995AScheduleC } from "./types.js";
@@ -20,11 +20,10 @@ type Info = Form8995AScheduleCFilingInfo;
 const ROWS = ["a", "b", "c"] as const;
 type Row = (typeof ROWS)[number];
 
-// Column (a), the QBI before netting: a Schedule C business's is line 31 less the deductible SE tax.
+// Column (a), the QBI before netting, in whole dollars (qbiOf: a business or a rental).
 function qbiBeforeNetting(form: Read, info: Info, business: QbiBusiness): number | undefined {
   if (needsScheduleA(form, info, business)) return undefined;
-  if (business.kind === "business") return roundDollars(businessQbi(form, info, business));
-  return business.scheduleEColumn && rentalQbi(form, info, business.scheduleEColumn);
+  return roundDollars(qbiOf(form, info, business));
 }
 
 // Column (a) for every Part I business, undefined while any is blank.
