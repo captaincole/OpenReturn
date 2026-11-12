@@ -1,4 +1,9 @@
-import { AMT_KEYS, isDividendFactKey, isInterestFactKey } from "../../facts/index.js";
+import {
+  AMT_KEYS,
+  INVESTMENT_INTEREST_KEYS,
+  isDividendFactKey,
+  isInterestFactKey,
+} from "../../facts/index.js";
 import { sum } from "../../money.js";
 import {
   missingInputs,
@@ -35,19 +40,31 @@ export function resolve6251Info(inputs: ResolverInputs): Form6251FilingInfo {
     itemizeDecision === "itemized" ? true : itemizeDecision === "standard" ? false : undefined;
   const isoExerciseSpread = num(inputs, AMT_KEYS.isoExerciseSpread);
   const filesScheduleA = resolveScheduleAInfo(inputs).mustFile?.["schedule-a"]?.value === true;
+  const amtDisallowedInterestCarryover = num(
+    inputs,
+    INVESTMENT_INTEREST_KEYS.amtDisallowedCarryover,
+  );
+  const needsAmtCarryover =
+    itemizesDeductions === true &&
+    (num(inputs, INVESTMENT_INTEREST_KEYS.disallowedCarryover) ?? 0) > 0;
   return {
     mustFile: { "form-6251": resolution },
     /*
      * Line 2a needs the choice only when Schedule A files, as 1040 line 12e does.
+     * Line 2c needs last year's AMT carryover only when there was a regular one.
      * Line 2i needs the ISO spread: no document carries it, and 0 is an answer.
      */
     missingInputs: {
       "form-6251": missingInputs({
         ...(filesScheduleA ? { "decisions.itemize_vs_standard": itemizesDeductions } : {}),
+        ...(needsAmtCarryover
+          ? { [INVESTMENT_INTEREST_KEYS.amtDisallowedCarryover]: amtDisallowedInterestCarryover }
+          : {}),
         [AMT_KEYS.isoExerciseSpread]: isoExerciseSpread,
       }),
     },
     itemizesDeductions,
+    amtDisallowedInterestCarryover,
     privateActivityBondInterest: privateActivityBondInterest(inputs),
     isoExerciseSpread,
   };

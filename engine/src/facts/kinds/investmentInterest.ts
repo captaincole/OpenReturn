@@ -9,6 +9,12 @@ export const INVESTMENT_INTEREST_KEYS = {
   expensePaid: "investment_interest.expense_paid",
   /* Line 2: disallowed investment interest expense carried over from last year's line 7. */
   disallowedCarryover: "investment_interest.disallowed_carryover",
+  /*
+   * Form 6251 line 2c, AMT Form 4952 line 2: last year's AMT Form 4952 line 7, the
+   * carryover the AMT refiguring of the form starts from (the same as the regular
+   * one when no AMT Form 4952 was figured last year).
+   */
+  amtDisallowedCarryover: "investment_interest.amt_disallowed_carryover",
   /* Line 4g: qualified dividends and net capital gain elected as investment income. */
   electedQualifiedDividendsAndGain: "investment_interest.elected_qualified_dividends_and_gain",
   /*

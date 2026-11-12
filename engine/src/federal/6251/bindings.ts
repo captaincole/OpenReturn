@@ -51,17 +51,18 @@ const nonZeroOrBlank = (value: number | undefined): number | undefined =>
 
 /*
  * MANUAL EDIT: line 8 of the AMT Form 4952
- * (irs-6251-inst-2025::sec::line-2c-investment-interest::b01–b03). Line 4a adds
- * line 2g; the line 1 interest on private activity bonds, the refigured gains
- * (line 2k) and line 5 have no facts, so those lines match the regular form, and
- * line 4g keeps the regular election (it is within 4b + 4e). KNOWN GAP: no fact
- * holds last year's AMT carryover, so the line waits on a regular carryover.
+ * (irs-6251-inst-2025::sec::line-2c-investment-interest::b01–b03). Line 2 is last
+ * year's AMT carryover, taken as 0 when the regular one is 0; line 3 adds it
+ * to the regular line 1. Line 4a adds line 2g; the line 1 interest on private
+ * activity bonds, the refigured gains (line 2k) and line 5 have no facts, so those
+ * lines match the regular form, and line 4g keeps the regular election (it is
+ * within 4b + 4e). Undefined while either carryover is unstated.
  */
-function amtInvestmentInterestDeduction(form: Form): number | undefined {
+function amtInvestmentInterestDeduction(form: Form, info: Form6251FilingInfo): number | undefined {
   const regularLine2 = numberOrBlank(form["form-4952.0.line.2_disallowed_prior_year_interest"]);
-  if (regularLine2 === undefined || regularLine2 > 0) return undefined;
-  const line3 = numberOrBlank(form["form-4952.0.line.3_total_investment_interest"]);
-  if (line3 === undefined) return undefined;
+  const line2 = info.amtDisallowedInterestCarryover ?? (regularLine2 === 0 ? 0 : undefined);
+  if (line2 === undefined) return undefined;
+  const line3 = sum(form["form-4952.0.line.1_investment_interest_paid"], line2);
   const line4h = sum(
     form["form-4952.0.line.4h_investment_income"],
     form["0.line.2g_private_activity_bond_interest"],
@@ -69,6 +70,16 @@ function amtInvestmentInterestDeduction(form: Form): number | undefined {
   const line6 = atLeast(0, line4h - sum(form["form-4952.0.line.5_investment_expenses"]));
   return Math.min(line3, line6);
 }
+
+/*
+ * MANUAL EDIT: line 2c has an amount to figure (the return itemizes and a regular
+ * Form 4952 files) but one of the two Forms 4952 is still waiting on an input.
+ */
+const awaitsLine2c = (form: Form, info: Form6251FilingInfo): boolean =>
+  info.itemizesDeductions === true &&
+  info.mustFile?.["form-4952"]?.value === true &&
+  (numberOrBlank(form["form-4952.0.line.8_investment_interest_deduction"]) === undefined ||
+    amtInvestmentInterestDeduction(form, info) === undefined);
 
 /*
  * MANUAL EDIT: Exemption Worksheet—Line 5 (irs-6251-inst-2025::sec::exemption-worksheet::b01–b02).
@@ -197,7 +208,7 @@ export function register(): void {
         const regularLine8 = numberOrBlank(
           form["form-4952.0.line.8_investment_interest_deduction"],
         );
-        const amtLine8 = amtInvestmentInterestDeduction(form);
+        const amtLine8 = amtInvestmentInterestDeduction(form, info);
         if (regularLine8 === undefined || amtLine8 === undefined) return undefined;
         return nonZeroOrBlank(roundDollars(regularLine8 - amtLine8));
       },
@@ -221,11 +232,12 @@ export function register(): void {
       /*
        * MANUAL EDIT: combine lines 1b through 3 (each negative line holds its own sign), then
        * the MFS add-on (irs-6251-inst-2025::sec::line-4-alternative-minimum-taxable-income::b01).
+       * Blank while line 2c waits: sum() would count it as 0.
        * KNOWN GAP: Schedule E is not modeled, so the REMIC floor (Schedule E line 38(c)) never applies.
        */
       "0.line.4_alternative_minimum_taxable_income": (form, info) => {
         const line1b = numberOrBlank(form["0.line.1b_taxable_income_start"]);
-        if (line1b === undefined) return undefined;
+        if (line1b === undefined || awaitsLine2c(form, info)) return undefined;
         const combined = sum(
           line1b,
           form["0.line.2a_taxes_or_standard_deduction"],
