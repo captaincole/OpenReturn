@@ -8,7 +8,9 @@ import {
   AMT_KEYS,
   CAPITAL_LOSS_CARRYOVER_KEYS,
   CA_MISC_DEDUCTION_KEYS,
+  DEPENDENT_CARE_KEYS,
   EIC_KEYS,
+  ELDERLY_OR_DISABLED_KEYS,
   GAMBLING_KEYS,
   HOME_ENERGY_KEYS,
   HOUSEHOLD_EMPLOYMENT_KEYS,
@@ -23,7 +25,10 @@ import {
   SPOUSE_KEYS,
   isBusinessFactKey,
   isCasualtyEventFactKey,
+  isDependentCareProviderFactKey,
+  isDependentCareQualifyingPersonFactKey,
   isDependentFact,
+  isDisabilityBeforeMinimumRetirementAgeKey,
   isDividendFact,
   isEnergyInvoiceFact,
   isGamblingWinningsFactKey,
@@ -73,6 +78,9 @@ const DOCUMENT_FACTS = [
   (fact: TaxFactRow) => isRentalFactKey(fact.key),
   (fact: TaxFactRow) => isMarketplaceCoverageFactKey(fact.key),
   (fact: TaxFactRow) => isCasualtyEventFactKey(fact.key),
+  (fact: TaxFactRow) => isDisabilityBeforeMinimumRetirementAgeKey(fact.key),
+  (fact: TaxFactRow) => isDependentCareProviderFactKey(fact.key),
+  (fact: TaxFactRow) => isDependentCareQualifyingPersonFactKey(fact.key),
 ];
 
 /* support.test.ts fails when a resolver reads a key that is missing here. */
@@ -91,6 +99,8 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   GAMBLING_KEYS.winningsNotOnW2G,
   GAMBLING_KEYS.losses,
   ...Object.values(EIC_KEYS),
+  ...Object.values(ELDERLY_OR_DISABLED_KEYS),
+  ...Object.values(DEPENDENT_CARE_KEYS),
   ...Object.values(OTHER_INCOME_KEYS),
   SPOUSE_KEYS.livedApartAllYear,
   SPOUSE_KEYS.livedApartLastSixMonths,
@@ -103,6 +113,7 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(MORTGAGE_KEYS),
   "state_local_tax.allocable_to_investment_income",
   "state_local_tax.estimated_payments",
+  "state_local_tax.general_sales_tax",
   "state_local_tax.personal_property",
   "state_local_tax.real_estate",
   "charitable.cash",
@@ -140,9 +151,10 @@ const OUT_OF_SCOPE: { key: string; supported: (v: unknown) => boolean; detail: s
       value === "single" ||
       value === "married_filing_separately" ||
       value === "married_filing_jointly" ||
-      value === "head_of_household",
+      value === "head_of_household" ||
+      value === "qualifying_surviving_spouse",
     detail:
-      "Only single filers are tested (married filing separately: one unverified scenario; jointly: one federal-only scenario; head of household: two federal-only scenarios).",
+      "Only single filers are tested (married filing separately: one unverified scenario; jointly: one federal-only scenario; head of household: two federal-only scenarios; qualifying surviving spouse: one federal-only scenario).",
   },
   {
     key: "decisions.scope.ca_residency",
