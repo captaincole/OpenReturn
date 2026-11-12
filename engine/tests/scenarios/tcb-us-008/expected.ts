@@ -96,6 +96,9 @@ const SCHEDULE_C: Partial<ExpectedResults> = {
   renderedText: {
     "schedule-c.0.line.a_principal_business": "consultant",
     "schedule-c.0.line.b_business_code": "541219",
+    "schedule-c.1.line.43_month": "07", // VehiclePlacedInServiceDt 2022-07-29
+    "schedule-c.1.line.43_day": "29",
+    "schedule-c.1.line.43_year": "2022",
     "schedule-c.1.line.48_description_1": "test",
     "schedule-c.1.line.48_description_2": "test",
   },
