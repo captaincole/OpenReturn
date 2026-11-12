@@ -1,8 +1,18 @@
-/* Source: irs-1040-inst-2025, lines 27a–27c: Step 1 (income limits) and Step 4 (filers without a qualifying child). */
+/*
+ * Source: irs-1040-inst-2025, lines 27a–27c: Step 1 (income limits), Step 3
+ * questions 4 and 5 (no-continue-4::b01) and Step 4 (filers without a qualifying child).
+ */
 
 import { describe, expect, it } from "vitest";
-import { EIC_KEYS, makeBusinessFactKey, makeW2FactKey } from "../../../../src/facts/index.js";
+import {
+  EIC_KEYS,
+  SPOUSE_KEYS,
+  makeBusinessFactKey,
+  makeDependentFactKey,
+  makeW2FactKey,
+} from "../../../../src/facts/index.js";
 import { resolve1040Info } from "../../../../src/federal/1040/resolveInfo.js";
+import { resolveEicLineInfo } from "../../../../src/federal/schedule-eic/eicAnswers.js";
 import { makeResolverInputs } from "../../../../src/resolverInputs.js";
 
 const NO_CHILD_KEYS = [
@@ -93,5 +103,70 @@ describe("resolve1040Info: the EIC questions with a business (Worksheet B)", () 
 
   it("asks a filer whose wages are under the limit", () => {
     expect(askedWithBusiness(9_000, 0)).toEqual(expect.arrayContaining(NO_CHILD_KEYS));
+  });
+});
+
+/* An MFS filer aged 40 with $20,000 of wages and one son. */
+const mfsWithChild = (answers: Record<string, boolean>) =>
+  makeResolverInputs({
+    facts: [
+      { key: "identity.dob", category: "identity", value: "05/01/1985" },
+      { key: makeW2FactKey("acme"), category: "wages", value: { box1: 20_000 } },
+      {
+        key: makeDependentFactKey("kid"),
+        category: "dependents",
+        value: {
+          firstName: "Kid",
+          lastName: "Doe",
+          ssn: "900-12-3456",
+          relationship: "Son",
+          dob: "02/28/2018",
+          monthsLivedWithYou: 12,
+          livedInUs: true,
+          usCitizenOrResident: true,
+          fullTimeStudent: false,
+          permanentlyDisabled: false,
+        },
+      },
+      ...Object.entries(answers).map(([key, value]) => ({ key, category: "filing_status", value })),
+    ],
+    decisions: [
+      { decisionKey: "decisions.scope.filing_status", decision: "married_filing_separately" },
+    ],
+  });
+
+const separationAsked = (answers: Record<string, boolean>) =>
+  (resolve1040Info(mfsWithChild(answers)).missingInputs?.["form-1040"] ?? []).filter(
+    (key) =>
+      key === SPOUSE_KEYS.livedApartLastSixMonths ||
+      key === SPOUSE_KEYS.legallySeparatedApartAtYearEnd,
+  );
+
+describe("the EIC's Step 3 questions 4 and 5 for MFS with a qualifying child", () => {
+  it("asks the 1040 page 1 keys: the last 6 months, then legal separation", () => {
+    expect(separationAsked({})).toEqual([SPOUSE_KEYS.livedApartLastSixMonths]);
+    expect(separationAsked({ [SPOUSE_KEYS.livedApartLastSixMonths]: false })).toEqual([
+      SPOUSE_KEYS.legallySeparatedApartAtYearEnd,
+    ]);
+    expect(separationAsked({ [SPOUSE_KEYS.livedApartLastSixMonths]: true })).toEqual([]);
+  });
+
+  it("reads living apart all year as living apart the last 6 months", () => {
+    const info = resolveEicLineInfo(mfsWithChild({ [SPOUSE_KEYS.livedApartAllYear]: true }));
+    expect(info.livedApartLastSixMonths).toBe(true);
+    expect(separationAsked({ [SPOUSE_KEYS.livedApartAllYear]: true })).toEqual([]);
+  });
+
+  it("carries the legal separation answer", () => {
+    const info = resolveEicLineInfo(
+      mfsWithChild({
+        [SPOUSE_KEYS.livedApartLastSixMonths]: false,
+        [SPOUSE_KEYS.legallySeparatedApartAtYearEnd]: true,
+      }),
+    );
+    expect(info).toMatchObject({
+      livedApartLastSixMonths: false,
+      legallySeparatedApartAtYearEnd: true,
+    });
   });
 });

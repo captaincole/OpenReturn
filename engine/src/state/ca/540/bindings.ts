@@ -12,6 +12,7 @@ import type { DependentFactValue } from "../../../facts/kinds/dependents.js";
 import { atLeast, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import { SSN, ssn, type FilingStatus } from "../../../values.js";
 import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitation.js";
+import { partIIUnsupported } from "../schedule-ca/increasedStandard.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
 import type { Form540 } from "./types.js";
 
@@ -191,11 +192,11 @@ export function register(): void {
       "line.18_deductions": (form, info) => {
         const fromScheduleCA = form["schedule-ca.5.page2.total_itemized_30_standard_or_itemized"];
         if (typeof fromScheduleCA === "number") return fromScheduleCA;
-        // MANUAL EDIT: line 30 waits for a person to complete Part II; so does line 18.
-        const partIIWaits =
+        // MANUAL EDIT: a person completes Schedule CA Part II, line 30 included; so line 18 too.
+        const partIIOpen =
           info.increasedStandardDeduction !== false &&
           info.mustFile?.["schedule-ca"]?.value === true;
-        if (partIIWaits) return undefined;
+        if (partIIOpen) return partIIUnsupported(info);
         return info.filingStatus
           ? lookupStandardDeduction("state-ca", 2025, info.filingStatus)
           : undefined;

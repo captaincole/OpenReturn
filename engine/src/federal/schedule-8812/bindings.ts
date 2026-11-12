@@ -2,6 +2,7 @@
 
 import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, stepsOf, sum } from "../../money.js";
+import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { eicOutcome } from "../schedule-eic/outcome.js";
 import type { Schedule8812FilingInfo } from "./filingInfo.js";
@@ -27,6 +28,9 @@ const EARNED_INCOME_FLOOR = 2_500;
 const EARNED_INCOME_RATE = 0.15;
 // Line 20 Next: "On line 16b, is the amount $5,100 or more?"
 const PART_II_B_MINIMUM = 5_100;
+// Line 18a, the Earned Income Chart (irs-1040s8-inst-2025::sec::earned-income-chart-line-18a::b01).
+const SELF_EMPLOYED_EARNED_INCOME =
+  "With self-employment, line 18a needs the Earned Income Worksheet, which is not modeled, or EIC Worksheet B line 4b, which this line does not read.";
 
 type Form = FormAccessor<Schedule8812>;
 type Bindings = Partial<{
@@ -201,7 +205,8 @@ function partIIABindings(): Bindings {
         sum(form["1.line.16b_qualifying_children_times_1700"]),
       );
     },
-    "1.line.18a_earned_income": (form) => (partIIAOpen(form) ? earnedIncome(form) : undefined),
+    "1.line.18a_earned_income": (form, info) =>
+      partIIAOpen(form) ? earnedIncome(form, info) : undefined,
     "1.line.18b_nontaxable_combat_pay": (form, info) =>
       partIIAOpen(form) ? roundDollars(info.w2NontaxableCombatPay) : undefined,
     "1.line.19_line18a_more_than_2500_no": (form) => {
@@ -284,6 +289,7 @@ function partIIBBindings(): Bindings {
     "1.line.24_eic_and_schedule_3_line_11": (form, info) => {
       if (completesPartIIB(form) !== true) return undefined;
       const eic = eicOutcome(form, info);
+      if (eic.kind === "unsupported") return unsupported(eic.reason);
       if (eic.kind === "waiting") return undefined;
       const line27a = eic.kind === "credit" ? numberOrBlank(form["form-1040.line.27a"]) : 0;
       if (line27a === undefined) return undefined;
@@ -313,14 +319,16 @@ function partIIAOpen(form: Form): boolean {
  * with no self-employment, EIC Step 5 and the Earned Income Worksheet both give
  * Form 1040 line 1z plus all nontaxable combat pay (no line 1i election fact),
  * less Medicaid waiver payments (Schedule 1 line 8s, unsupported). With a
- * Schedule C or SE the worksheets differ and are not drafted, so the line waits.
+ * business or Schedule SE the worksheets differ and are not drafted: unsupported.
  */
-function earnedIncome(form: Form): number | undefined {
+function earnedIncome(form: Form, info: Schedule8812FilingInfo): number | Unsupported | undefined {
   const selfEmployed =
+    info.earnedIncomeCredit?.selfEmployed === true ||
     numberOrBlank(form["schedule-c.0.line.31"]) !== undefined ||
     numberOrBlank(form["schedule-se.0.line.3"]) !== undefined;
+  if (selfEmployed) return unsupported(SELF_EMPLOYED_EARNED_INCOME);
   const line1z = numberOrBlank(form["form-1040.line.1z"]);
-  if (selfEmployed || line1z === undefined) return undefined;
+  if (line1z === undefined) return undefined;
   return atLeast(0, sum(line1z, form["1.line.18b_nontaxable_combat_pay"]));
 }
 

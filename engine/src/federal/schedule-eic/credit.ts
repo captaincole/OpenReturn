@@ -3,7 +3,8 @@
  * 27b and 27c): the Steps 1 to 5 tests, Worksheet A or B, and the 2025 EIC
  * Table. Pure functions: the caller passes the return's lines and the answers.
  * The outcome is a credit, no credit (with the line 27c box when the steps say
- * to check it), or waiting while an answer is missing or the case is not modeled.
+ * to check it), waiting while an answer is missing, or unsupported (with the
+ * reason) for a case the engine does not model.
  */
 
 import eicTable2025 from "../../data/eic-table-2025.json" with { type: "json" };
@@ -21,6 +22,15 @@ const AGI_SECOND_LOOKUP = { other: [10_620, 23_350], joint: [17_730, 30_470] } a
 // Step 4, question 2: "born after December 31, 1960, and before January 2, 2001".
 const NO_CHILD_BORN_AFTER = "12/31/1960";
 const NO_CHILD_BORN_BEFORE = "01/02/2001";
+
+// Definitions and Special Rules, "Form 8862, who must file" (irs-1040-inst-2025::sec::definitions-and-special-rules-2::b04).
+export const FORM_8862_GAP =
+  "An EIC reduced or disallowed in an earlier year needs Form 8862, which the engine does not prepare.";
+export const SELF_ONLY_EIC_GAP =
+  "The self-only EIC for a filer whose qualifying children have no valid SSN (Pub. 596) is not modeled.";
+// Step 4, question 1 (irs-1040-inst-2025::sec::filers-without-a-qualifying::b01).
+export const MARRIED_HOH_GAP =
+  "A married head of household with no qualifying child can't take the EIC, and no fact records whether a head of household is married.";
 
 interface EicTable {
   // [at least, but less than, single/HOH/QSS 0–3 children, married filing jointly 0–3 children]
@@ -75,8 +85,10 @@ export interface EicAnswers {
   claimableAsDependent?: boolean;
   deniedInEarlierYear?: boolean;
   barredByIrs?: boolean;
-  /** MFS: lived apart from the spouse all year (Step 3, question 4). */
-  livedApartFromSpouseAllYear?: boolean;
+  /** MFS: lived apart from the spouse for the last 6 months, or all year (Step 3, question 4: "No"). */
+  livedApartLastSixMonths?: boolean;
+  /** MFS: legally separated and apart at the end of 2025 (Step 3, question 5). */
+  legallySeparatedApartAtYearEnd?: boolean;
 }
 
 /** The return's lines and identity the steps read. */
@@ -90,6 +102,8 @@ export interface EicReturn {
   earnedIncome?: number;
   /** The least earnedIncome can be while it waits on the combat pay election. */
   earnedIncomeAtLeast?: number;
+  /** Why earnedIncome cannot be figured (an engine gap); undefined when it only waits. */
+  earnedIncomeGap?: string;
   /** Step 5, question 2: Worksheet B, whose line 5 checks the box on 27c. */
   worksheetB: boolean;
   taxpayerSsn?: string;
@@ -101,10 +115,12 @@ export interface EicReturn {
 export type EicOutcome =
   | { kind: "credit"; amount: number }
   | { kind: "none"; checkLine27c: boolean }
-  | { kind: "waiting" };
+  | { kind: "waiting" }
+  | { kind: "unsupported"; reason: string };
 
 const WAITING: EicOutcome = { kind: "waiting" };
 const none = (checkLine27c: boolean): EicOutcome => ({ kind: "none", checkLine27c });
+const gap = (reason: string): EicOutcome => ({ kind: "unsupported", reason });
 
 /* Undefined when every answer is in and none stops the credit; else the outcome. */
 type Step = EicOutcome | undefined;
@@ -131,14 +147,25 @@ function step2(ret: EicReturn): Step {
   return ret.investmentIncome > INVESTMENT_INCOME_LIMIT ? none(false) : undefined;
 }
 
+/*
+ * Step 3, questions 4 and 5 for MFS (irs-1040-inst-2025::sec::no-continue-4::b01):
+ * living apart the last 6 months skips question 5; else legal separation and
+ * living apart at the end of 2025 go on, and "No. STOP" stops the credit.
+ */
+function separatedSpouse(answers: EicAnswers): Step {
+  if (answers.livedApartLastSixMonths === undefined) return WAITING;
+  if (answers.livedApartLastSixMonths) return undefined;
+  if (answers.legallySeparatedApartAtYearEnd === undefined) return WAITING;
+  return answers.legallySeparatedApartAtYearEnd ? undefined : none(false);
+}
+
 /* Step 3, questions 2–6, for a filer with a qualifying child. */
 function step3(ret: EicReturn, answers: EicAnswers): Step {
-  // The self-only EIC for a child without a valid SSN (Pub. 596) is not modeled.
-  if (answers.childrenWithSsn === 0) return WAITING;
+  if (answers.childrenWithSsn === 0) return gap(SELF_ONLY_EIC_GAP);
   if (ret.filingStatus === "married_filing_jointly") return undefined;
-  // MFS: a different home for the last 6 months skips question 5; else it waits.
-  if (ret.filingStatus === "married_filing_separately" && !answers.livedApartFromSpouseAllYear) {
-    return WAITING;
+  if (ret.filingStatus === "married_filing_separately") {
+    const stop = separatedSpouse(answers);
+    if (stop) return stop;
   }
   // A married head of household lived apart the last 6 months: question 4 is no.
   if (answers.qualifyingChildOfAnother === undefined) return WAITING;
@@ -155,8 +182,7 @@ export function noChildEicAge(dob: string | undefined): boolean | undefined {
 /* Step 4, for a filer without a qualifying child. */
 function step4(ret: EicReturn, answers: EicAnswers, joint: boolean): Step {
   if (ret.filingStatus === "married_filing_separately") return none(false);
-  // Question 1 stops a married head of household; no fact says whether one is married.
-  if (ret.filingStatus === "head_of_household") return WAITING;
+  if (ret.filingStatus === "head_of_household") return gap(MARRIED_HOH_GAP);
   const ages = [noChildEicAge(ret.taxpayerDob), ...(joint ? [noChildEicAge(ret.spouseDob)] : [])];
   if (!ages.includes(true)) return ages.includes(undefined) ? WAITING : none(false);
   if (answers.mainHomeInUs === undefined) return WAITING;
@@ -168,22 +194,20 @@ function step4(ret: EicReturn, answers: EicAnswers, joint: boolean): Step {
   return answers.claimableAsDependent ? none(false) : undefined;
 }
 
-/*
- * Form 8862 (Definitions and Special Rules): an earlier denial needs the form,
- * which is not modeled, so the line waits; a ban stops the credit.
- */
+/* Form 8862 (Definitions and Special Rules): a ban stops the credit; an earlier denial needs the form. */
 function earlierDenial(answers: EicAnswers): Step {
   if (answers.barredByIrs === undefined || answers.deniedInEarlierYear === undefined) {
     return WAITING;
   }
   if (answers.barredByIrs) return none(false);
-  return answers.deniedInEarlierYear ? WAITING : undefined;
+  return answers.deniedInEarlierYear ? gap(FORM_8862_GAP) : undefined;
 }
 
 /* Step 5, question 3 or Worksheet B line 5, then Worksheet A or B. */
 function step5(ret: EicReturn, answers: EicAnswers, joint: boolean): EicOutcome {
   const earned = ret.earnedIncome;
-  if (earned === undefined || ret.agi === undefined) return WAITING;
+  if (ret.agi === undefined) return WAITING;
+  if (earned === undefined) return ret.earnedIncomeGap ? gap(ret.earnedIncomeGap) : WAITING;
   // Worksheet B: "If line 4b is zero or less, … Check the box on … line 27c."
   if (ret.worksheetB && earned <= 0) return none(true);
   // Only Worksheet B's line 5 says to check the box; Step 5 says "STOP".
@@ -208,7 +232,10 @@ function earnedIncomeStop(ret: EicReturn, answers: EicAnswers, joint: boolean): 
   return earned >= eicIncomeLimit(children, joint) ? none(ret.worksheetB) : undefined;
 }
 
-/* Line 27a's steps in order; the first that stops or waits decides, and earned income at the limit stops a wait. */
+/*
+ * Line 27a's steps in order; the first that stops, waits or is not modeled
+ * decides, and earned income at the limit stops a wait or a gap.
+ */
 export function earnedIncomeCredit(ret: EicReturn, answers: EicAnswers): EicOutcome {
   const joint = ret.filingStatus === "married_filing_jointly";
   if (ret.filingStatus === undefined) return WAITING;
@@ -218,6 +245,6 @@ export function earnedIncomeCredit(ret: EicReturn, answers: EicAnswers): EicOutc
     (answers.qualifyingChildren > 0 ? step3(ret, answers) : step4(ret, answers, joint)) ??
     earlierDenial(answers) ??
     step5(ret, answers, joint);
-  if (outcome.kind !== "waiting") return outcome;
-  return earnedIncomeStop(ret, answers, joint) ?? WAITING;
+  if (outcome.kind === "credit" || outcome.kind === "none") return outcome;
+  return earnedIncomeStop(ret, answers, joint) ?? outcome;
 }

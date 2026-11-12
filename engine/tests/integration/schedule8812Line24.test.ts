@@ -2,12 +2,14 @@ import { describe, expect, it } from "vitest";
 import { evaluateScenario } from "../../src";
 import {
   EIC_KEYS,
+  makeBusinessFactKey,
   makeDependentFactKey,
   makeForm8949BoxDecisionKey,
   makeTradeFactKey,
   type TradeFactValue,
 } from "../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
+import { FORM_8862_GAP } from "../../src/federal/schedule-eic/credit.js";
 import { decisionRow } from "../helpers/fixtureBuilders.js";
 import { tcbUs002Scenario as base } from "../scenarios/tcb-us-002/index.js";
 
@@ -46,9 +48,25 @@ const lossDecisions: AIDecisionRow[] = [
 
 type Opts = {
   nephews: number;
-  eic: "barred" | "unanswered" | "allowed" | "not_asked";
+  eic: "barred" | "unanswered" | "allowed" | "not_asked" | "denied_before";
   wages?: number;
   capitalLoss?: boolean;
+  business?: boolean;
+};
+
+/* A side business with a profit: line 18a needs Worksheet B or the Earned Income Worksheet. */
+const business: TaxFactRow = {
+  ...base.facts[0]!,
+  id: "f-business",
+  category: "self_employment",
+  key: makeBusinessFactKey("side"),
+  value: {
+    activity: "Consulting",
+    grossReceipts: 5_000,
+    sellsGoods: false,
+    materiallyParticipated: true,
+    expenses: { supplies: 1_000 },
+  },
 };
 
 function withWages(fact: TaxFactRow, wages: number | undefined): TaxFactRow {
@@ -60,6 +78,9 @@ function withWages(fact: TaxFactRow, wages: number | undefined): TaxFactRow {
 function evaluate(opts: Opts) {
   const facts = base.facts.flatMap((fact): TaxFactRow[] => {
     if (opts.eic === "not_asked" && EIC_ANSWER_KEYS.includes(fact.key)) return [];
+    if (fact.key === EIC_KEYS.deniedInEarlierYear && opts.eic === "denied_before") {
+      return [{ ...fact, value: true }];
+    }
     if (fact.key === EIC_KEYS.barredByIrs) {
       if (opts.eic === "unanswered") return [];
       return [{ ...fact, value: opts.eic === "barred" }];
@@ -86,17 +107,21 @@ function evaluate(opts: Opts) {
   };
   const scenario = evaluateScenario({
     filing: { id: "schedule-8812-line-24-test", taxYear: base.taxYear },
-    facts: opts.capitalLoss ? [...facts, sale] : facts,
+    facts: [...facts, ...(opts.capitalLoss ? [sale] : []), ...(opts.business ? [business] : [])],
     decisions: opts.capitalLoss ? [...base.decisions, ...lossDecisions] : base.decisions,
     authEmail: null,
   });
+  const result = (formId: string, fieldId: string) =>
+    scenario.forms.get(formId)?.fields.find((each) => each.fieldId === fieldId)?.result;
   const value = (formId: string, fieldId: string) => {
-    const field = scenario.forms.get(formId)?.fields.find((each) => each.fieldId === fieldId);
-    return field?.result.ok ? field.result.value : undefined;
+    const found = result(formId, fieldId);
+    return found?.ok ? found.value : undefined;
   };
   return {
     schedule8812: (line: string) => value("schedule-8812", `schedule-8812.${line}`),
     form1040: (line: string) => value("form-1040", `form-1040.${line}`),
+    schedule8812Result: (line: string) => result("schedule-8812", `schedule-8812.${line}`),
+    form1040Result: (line: string) => result("form-1040", `form-1040.${line}`),
   };
 }
 
@@ -145,6 +170,30 @@ describe("Schedule 8812 line 24", () => {
   it("waits while an EIC answer is missing", () => {
     const result = evaluate({ nephews: 3, eic: "unanswered" });
     expect(result.schedule8812("1.line.24_eic_and_schedule_3_line_11")).toBeUndefined();
+    expect(result.schedule8812Result("1.line.24_eic_and_schedule_3_line_11")).not.toHaveProperty(
+      "unsupported",
+      true,
+    );
     expect(result.schedule8812("1.line.27_additional_child_tax_credit")).toBeUndefined();
+  });
+
+  it("is unsupported with the EIC when an earlier denial needs Form 8862", () => {
+    const result = evaluate({ nephews: 3, eic: "denied_before" });
+    const gap = { ok: false, unsupported: true, reason: FORM_8862_GAP };
+    expect(result.form1040Result("line.27a")).toEqual(gap);
+    expect(result.form1040Result("line.27c_no_eic_claim")).toEqual(gap);
+    expect(result.schedule8812Result("1.line.24_eic_and_schedule_3_line_11")).toEqual(gap);
+    // The lines after it read a blank line 24 and wait; nothing is asked for them.
+    const line27 = result.schedule8812Result("1.line.27_additional_child_tax_credit");
+    expect(line27?.ok).toBe(false);
+    expect(line27).not.toHaveProperty("unsupported", true);
+  });
+
+  it("makes line 18a unsupported for a filer with a business", () => {
+    const result = evaluate({ nephews: 3, eic: "allowed", business: true });
+    expect(result.schedule8812Result("1.line.18a_earned_income")).toMatchObject({
+      ok: false,
+      unsupported: true,
+    });
   });
 });

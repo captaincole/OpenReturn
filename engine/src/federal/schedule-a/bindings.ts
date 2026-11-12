@@ -6,6 +6,7 @@
 
 import { defineForm, type FormAccessor, type FormSpec } from "../../defineForm.js";
 import { atLeast, formatDollars, numberOrBlank, roundDollars, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { standardDeduction } from "../1040/deductions.js";
 import type { ScheduleAFilingInfo } from "./filingInfo.js";
@@ -196,27 +197,32 @@ export function register(): void {
       "0.line.15_casualty_theft_loss": (form) =>
         numberOrBlank(form["form-4684.0.line.18_deductible_loss"]),
       "0.line.16_other_itemized_deductions_description": (form, info) => {
+        if (info.disasterLossGap) return unsupported(info.disasterLossGap);
         const items = line16Items(form, info);
         if (!items?.length) return undefined;
         return items.map((item) => `${item.description} ${formatDollars(item.amount)}`).join("; ");
       },
       "0.line.16_other_itemized_deductions_amount": (form, info) => {
+        if (info.disasterLossGap) return unsupported(info.disasterLossGap);
         const items = line16Items(form, info);
         if (!items?.length) return undefined;
         return roundDollars(sum(...items.map((item) => item.amount)));
       },
-      // MANUAL EDIT: waits with Form 4684's totals, which lines 15 and 16 read.
-      "0.line.17_total_itemized_deductions": (form, info) =>
-        info.mortgageInterestWaits || info.netQualifiedDisasterLoss === undefined
-          ? undefined
-          : sum(
-              form["0.line.4_net_medical_dental"],
-              form["0.line.7_total_taxes"],
-              form["0.line.10_total_interest"],
-              form["0.line.14_total_gifts"],
-              form["0.line.15_casualty_theft_loss"],
-              form["0.line.16_other_itemized_deductions_amount"],
-            ),
+      // MANUAL EDIT: waits with Form 4684's totals, which lines 15 and 16 read; unsupported with their gap.
+      "0.line.17_total_itemized_deductions": (form, info) => {
+        if (info.disasterLossGap) return unsupported(info.disasterLossGap);
+        if (info.mortgageInterestWaits || info.netQualifiedDisasterLoss === undefined) {
+          return undefined;
+        }
+        return sum(
+          form["0.line.4_net_medical_dental"],
+          form["0.line.7_total_taxes"],
+          form["0.line.10_total_interest"],
+          form["0.line.14_total_gifts"],
+          form["0.line.15_casualty_theft_loss"],
+          form["0.line.16_other_itemized_deductions_amount"],
+        );
+      },
     }),
 
     // This SSN widget keeps the dashes; the 1040 comb widget strips them.

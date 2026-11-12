@@ -8,6 +8,7 @@ import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { defineForm, type FormAccessor, type FormSpec } from "../../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
+import { partIIUnsupported } from "./increasedStandard.js";
 import { CA_MISC_FLOOR_RATE, caItemizedLine29 } from "./itemizedWorksheet.js";
 import type { ScheduleCa } from "./types.js";
 
@@ -22,12 +23,12 @@ type Bindings = FormSpec<ScheduleCa, ScheduleCaFilingInfo>["bindings"];
  * (irs-1040sa-inst-2025::sec::other-itemized-deductions::b01). Part II needs
  * federal Schedule A completed as if itemizing
  * (ca-540-sched-ca-inst-2025::sec::part-ii-adjustments-to-federal-itemized-deductions::b01),
- * which the engine does not print, so lines 1–30 wait for a person to
- * complete them. Line 30 waits too: California allows the disaster loss only
- * to an itemizer
+ * which the engine does not print, so lines 1–30 are unsupported: a person
+ * completes them. Line 30 too: California allows the disaster loss only to an
+ * itemizer
  * (ca-540-inst-2025::sec::line-18-california-itemized-deductions-or-california-standard-deduction::b01),
  * so its standard deduction may understate the deduction. Undefined (Form 4684
- * waits) waits too.
+ * waits) waits too, or carries Form 4684's gap.
  */
 function waitsWithIncreasedStandard(bindings: Bindings): Bindings {
   const partII = (key: string) => key.startsWith("4.page2.") || key.startsWith("5.page2.");
@@ -37,7 +38,7 @@ function waitsWithIncreasedStandard(bindings: Bindings): Bindings {
       !partII(key) || !bind
         ? bind
         : (form: FormAccessor<ScheduleCa>, info: ScheduleCaFilingInfo) =>
-            info.increasedStandardDeduction === false ? bind(form, info) : undefined,
+            info.increasedStandardDeduction === false ? bind(form, info) : partIIUnsupported(info),
     ]),
   ) as Bindings;
 }

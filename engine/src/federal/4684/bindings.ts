@@ -3,14 +3,18 @@
 import { defineForm } from "../../defineForm.js";
 import type { CasualtyEventFactValue, CasualtyPropertyValue } from "../../facts/index.js";
 import { atLeast, numberOrBlank } from "../../money.js";
+import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import type { Form4684FilingInfo } from "./filingInfo.js";
 import {
+  ADDITIONAL_SHEETS_GAP,
+  additionalSheetsGap,
   line10,
   line11,
   line12,
   line17,
   mostAffectedZip,
+  needsAdditionalSheets,
   propertyLines,
   sectionATotals,
   type PropertyLines,
@@ -40,6 +44,26 @@ function events(info: Form4684FilingInfo): CasualtyEventFactValue[] {
 function totals(info: Form4684FilingInfo): SectionATotals | undefined {
   if ((info.form4684CopyIndex ?? 0) !== 0) return undefined;
   return sectionATotals(events(info));
+}
+
+/* Lines 10–12 of this copy: unsupported when its event has more than four properties. */
+function eventLine(
+  info: Form4684FilingInfo,
+  line: (events: CasualtyEventFactValue[], index: number) => number | undefined,
+): number | Unsupported | undefined {
+  const event = eventOf(info);
+  if (event && needsAdditionalSheets(event)) return unsupported(ADDITIONAL_SHEETS_GAP);
+  return line(events(info), info.form4684CopyIndex ?? 0);
+}
+
+/* Lines 13–18 on copy 0: unsupported when any event has more than four properties. */
+function totalsLine<T>(
+  info: Form4684FilingInfo,
+  line: () => T | undefined,
+): T | Unsupported | undefined {
+  if ((info.form4684CopyIndex ?? 0) !== 0) return undefined;
+  const gap = additionalSheetsGap(events(info));
+  return gap ? unsupported(gap) : line();
 }
 
 function property<T>(index: number, pick: (property: CasualtyPropertyValue) => T | undefined) {
@@ -139,28 +163,29 @@ export function register(): void {
       "0.line.9_loss_col_c": column(2, (lines) => lines.line9),
       "0.line.9_loss_col_d": column(3, (lines) => lines.line9),
 
-      "0.line.10_casualty_theft_loss": (_, info) => {
-        const event = eventOf(info);
-        return event && line10(event);
-      },
-      "0.line.11_100_or_500_floor": (_, info) => line11(events(info), info.form4684CopyIndex ?? 0),
-      "0.line.12_loss_after_floor": (_, info) => line12(events(info), info.form4684CopyIndex ?? 0),
+      "0.line.10_casualty_theft_loss": (_, info) =>
+        eventLine(info, (all, index) => all[index] && line10(all[index])),
+      "0.line.11_100_or_500_floor": (_, info) => eventLine(info, line11),
+      "0.line.12_loss_after_floor": (_, info) => eventLine(info, line12),
 
-      "0.line.13_total_gains": (_, info) => totals(info)?.line13,
-      "0.line.14_total_losses": (_, info) => totals(info)?.line14,
+      "0.line.13_total_gains": (_, info) => totalsLine(info, () => totals(info)?.line13),
+      "0.line.14_total_losses": (_, info) => totalsLine(info, () => totals(info)?.line14),
       // A net gain also goes to Schedule D lines 4 and 11, which the engine's Schedule D does not read yet.
-      "0.line.15_net_gain_or_qualified_disaster_loss": (_, info) => totals(info)?.line15,
-      "0.line.16_losses_less_gains": (_, info) => totals(info)?.line16,
-      "0.line.17_ten_percent_agi": (form) => {
-        if (form["0.line.16_losses_less_gains"] === undefined) return undefined;
-        return line17(numberOrBlank(form["form-1040.line.11b"]));
-      },
-      "0.line.18_deductible_loss": (form) => {
-        const loss = form["0.line.16_losses_less_gains"];
-        const floor = form["0.line.17_ten_percent_agi"];
-        if (typeof loss !== "number" || typeof floor !== "number") return undefined;
-        return atLeast(0, loss - floor);
-      },
+      "0.line.15_net_gain_or_qualified_disaster_loss": (_, info) =>
+        totalsLine(info, () => totals(info)?.line15),
+      "0.line.16_losses_less_gains": (_, info) => totalsLine(info, () => totals(info)?.line16),
+      "0.line.17_ten_percent_agi": (form, info) =>
+        totalsLine(info, () => {
+          if (form["0.line.16_losses_less_gains"] === undefined) return undefined;
+          return line17(numberOrBlank(form["form-1040.line.11b"]));
+        }),
+      "0.line.18_deductible_loss": (form, info) =>
+        totalsLine(info, () => {
+          const loss = form["0.line.16_losses_less_gains"];
+          const floor = form["0.line.17_ten_percent_agi"];
+          if (typeof loss !== "number" || typeof floor !== "number") return undefined;
+          return atLeast(0, loss - floor);
+        }),
     },
 
     formatters: {

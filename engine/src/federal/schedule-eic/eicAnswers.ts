@@ -62,7 +62,12 @@ export function resolveEicLineInfo(inputs: ResolverInputs): EicLineInfo {
     claimableAsDependent: answer(inputs, EIC_KEYS.claimableAsDependent),
     deniedInEarlierYear: answer(inputs, EIC_KEYS.deniedInEarlierYear),
     barredByIrs: answer(inputs, EIC_KEYS.barredByIrs),
-    livedApartFromSpouseAllYear: answer(inputs, SPOUSE_KEYS.livedApartAllYear),
+    // Living apart all year covers the last 6 months; the 1040 then skips that question.
+    livedApartLastSixMonths:
+      answer(inputs, SPOUSE_KEYS.livedApartAllYear) === true
+        ? true
+        : answer(inputs, SPOUSE_KEYS.livedApartLastSixMonths),
+    legallySeparatedApartAtYearEnd: answer(inputs, SPOUSE_KEYS.legallySeparatedApartAtYearEnd),
     selfEmployed: businessesOnReturn(inputs.facts, joint).businesses.length > 0,
     statutoryEmployee: w2s.some((w2) => w2.box13?.statutoryEmployee === true),
   };
@@ -82,9 +87,10 @@ export function earnedIncomeMayBeUnderLimit(
 ): boolean {
   if (sumW2Box(inputs, "box1") < eicIncomeLimit(children, joint)) return true;
   const { businesses, malformedKeys } = businessesOnReturn(inputs.facts, joint);
+  const onReturn = businesses.map((business) => business.value);
   return (
     malformedKeys.length > 0 ||
-    businesses.some((business) => netProfit(business.value) === undefined)
+    businesses.some((business) => netProfit(business.value, onReturn) === undefined)
   );
 }
 
@@ -95,11 +101,24 @@ function noChildAgeInRange(inputs: ResolverInputs, joint: boolean): boolean {
 }
 
 /*
+ * Step 3, questions 4 and 5 for MFS (irs-1040-inst-2025::sec::no-continue-4::b01):
+ * the 1040 page 1 asks the same two keys, so Cade asks them once.
+ */
+function separatedSpouseQuestions(info: EicLineInfo): Record<string, unknown> {
+  return {
+    [SPOUSE_KEYS.livedApartLastSixMonths]: info.livedApartLastSixMonths,
+    ...(info.livedApartLastSixMonths === false
+      ? { [SPOUSE_KEYS.legallySeparatedApartAtYearEnd]: info.legallySeparatedApartAtYearEnd }
+      : {}),
+  };
+}
+
+/*
  * The no-child EIC answers (Step 1 question 4, Step 4 questions 3, 5 and 6,
  * Form 8862) for a filer whose earned income can be under the Step 1 limit,
  * with the right filing status and age. A filer with a qualifying child is
- * asked by Schedule EIC's resolver; an MFS filer with one is asked whether the
- * spouses lived apart.
+ * asked by Schedule EIC's resolver; an MFS filer with one is asked Step 3's
+ * questions 4 and 5.
  */
 export function eicQuestions(inputs: ResolverInputs, info: EicLineInfo): Record<string, unknown> {
   const status = filingStatusOf(inputs);
@@ -109,7 +128,7 @@ export function eicQuestions(inputs: ResolverInputs, info: EicLineInfo): Record<
     (info.selfEmployed || wages > 0) && earnedIncomeMayBeUnderLimit(inputs, children, joint);
   if (info.qualifyingChildren > 0) {
     return status === "married_filing_separately" && earnsUnderLimit(info.childrenWithSsn)
-      ? { [SPOUSE_KEYS.livedApartAllYear]: info.livedApartFromSpouseAllYear }
+      ? separatedSpouseQuestions(info)
       : {};
   }
   const possible =
