@@ -6,6 +6,7 @@ import type { IngestResult } from "./report";
 const CAPABILITIES: [string, (type: string) => boolean][] = [
   ["W-2", (docType) => docType.includes("W-2")],
   ["1099", (docType) => docType.includes("1099")],
+  ["1098", (docType) => docType === "1098"],
   ["Invoices", (docType) => docType.includes("invoice")],
 ];
 const capabilityOf = (type: string) => CAPABILITIES.find(([, has]) => has(type))?.[0] ?? "Other";
