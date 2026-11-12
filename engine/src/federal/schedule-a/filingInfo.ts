@@ -1,9 +1,17 @@
 import type { BaseFilingInfo } from "../../filingInfo.js";
+import type { Form1040FilingInfo } from "../1040/filingInfo.js";
 import type { Form4952FilingInfo } from "../4952/filingInfo.js";
 
-/* Line 9 reads Form 4952 line 8 through the form accessor; the 4952 answer covers the no-file exception. */
+/*
+ * Line 9 reads Form 4952 line 8 through the form accessor; the 4952 answer
+ * covers the no-file exception. Line 16 figures the standard deduction (line
+ * 12b's MFS answer) for the increased standard deduction.
+ */
 export interface ScheduleAFilingInfo
-  extends BaseFilingInfo, Pick<Form4952FilingInfo, "investmentInterestPaid" | "noFormException"> {
+  extends
+    BaseFilingInfo,
+    Pick<Form4952FilingInfo, "investmentInterestPaid" | "noFormException">,
+    Pick<Form1040FilingInfo, "spouseItemizesSeparately"> {
   /** Line 1. */
   medicalDentalExpenses?: number;
 
@@ -45,4 +53,17 @@ export interface ScheduleAFilingInfo
 
   /** Line 13. */
   giftsCarryover?: number;
+
+  /** Line 16: Form 4684 line 15 when it is a net qualified disaster loss; 0 with none; undefined while its totals wait. */
+  netQualifiedDisasterLoss?: number;
+
+  /**
+   * Schedule A files only for the increased standard deduction: the return
+   * takes the standard deduction with a net qualified disaster loss. Only line
+   * 16 prints. Undefined while Form 4684's totals wait.
+   */
+  increasedStandardDeduction?: boolean;
+
+  /** Line 16: gambling losses as stated; the binding limits them to Schedule 1 line 8b. */
+  gamblingLosses?: number;
 }

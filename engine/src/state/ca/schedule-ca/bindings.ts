@@ -5,7 +5,7 @@
  */
 
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
-import { defineForm } from "../../../defineForm.js";
+import { defineForm, type FormAccessor, type FormSpec } from "../../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import { CA_MISC_FLOOR_RATE, caItemizedLine29 } from "./itemizedWorksheet.js";
@@ -14,9 +14,37 @@ import type { ScheduleCa } from "./types.js";
 const text = (value: unknown): string | undefined =>
   typeof value === "string" ? value : undefined;
 
+type Bindings = FormSpec<ScheduleCa, ScheduleCaFilingInfo>["bindings"];
+
+/*
+ * MANUAL EDIT: with the federal increased standard deduction, Schedule A
+ * prints only line 16, the loss plus the federal standard deduction
+ * (irs-1040sa-inst-2025::sec::other-itemized-deductions::b01). Part II needs
+ * federal Schedule A completed as if itemizing
+ * (ca-540-sched-ca-inst-2025::sec::part-ii-adjustments-to-federal-itemized-deductions::b01),
+ * which the engine does not print, so lines 1–30 wait for a person to
+ * complete them. Line 30 waits too: California allows the disaster loss only
+ * to an itemizer
+ * (ca-540-inst-2025::sec::line-18-california-itemized-deductions-or-california-standard-deduction::b01),
+ * so its standard deduction may understate the deduction. Undefined (Form 4684
+ * waits) waits too.
+ */
+function waitsWithIncreasedStandard(bindings: Bindings): Bindings {
+  const partII = (key: string) => key.startsWith("4.page2.") || key.startsWith("5.page2.");
+  return Object.fromEntries(
+    Object.entries(bindings).map(([key, bind]) => [
+      key,
+      !partII(key) || !bind
+        ? bind
+        : (form: FormAccessor<ScheduleCa>, info: ScheduleCaFilingInfo) =>
+            info.increasedStandardDeduction === false ? bind(form, info) : undefined,
+    ]),
+  ) as Bindings;
+}
+
 export function register(): void {
   defineForm<ScheduleCa, ScheduleCaFilingInfo>("schedule-ca", {
-    bindings: {
+    bindings: waitsWithIncreasedStandard({
       /*
        * MANUAL EDIT: CA does not conform to HSAs. Employer contributions
        * (W-2 box 12 code W) are CA wages: line 1a col C, carried to line 27.
@@ -388,7 +416,7 @@ export function register(): void {
         const line29 = form["5.page2.total_itemized_29"];
         return atLeast(stdDed, typeof line29 === "number" ? line29 : 0);
       },
-    },
+    }),
 
     unsupported: {
       "0.line.1b_federal":

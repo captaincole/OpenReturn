@@ -245,7 +245,15 @@ function comparisonOf(
 ): DeductionsComparison | undefined {
   const info = pass.filingInfo;
   const agi = evaluatedNumber(pass.forms, "form-1040.line.11b");
-  const federalStandard = standardDeduction(info);
+  /*
+   * The increased standard deduction adds the net qualified disaster loss
+   * (irs-1040sa-inst-2025::sec::other-itemized-deductions::b01), as the
+   * itemized side does on line 16.
+   */
+  const standard = standardDeduction(info);
+  const disasterLoss = info.netQualifiedDisasterLoss;
+  const federalStandard =
+    standard === undefined || disasterLoss === undefined ? undefined : standard + disasterLoss;
   if (agi === undefined || !info.filingStatus || federalStandard === undefined) return undefined;
   /*
    * A loan over the debt limit leaves line 17 blank until the CPA figures it.
