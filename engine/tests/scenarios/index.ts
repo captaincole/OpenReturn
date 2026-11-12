@@ -15,6 +15,7 @@ import { tcbUs006Scenario } from "./tcb-us-006/index.js";
 import { tcbUs007Scenario } from "./tcb-us-007/index.js";
 import { tcbUs008Scenario } from "./tcb-us-008/index.js";
 import { tcbUs009Scenario } from "./tcb-us-009/index.js";
+import { tcbUs010Scenario } from "./tcb-us-010/index.js";
 
 export {
   alejandroScenario,
@@ -33,6 +34,7 @@ export {
   tcbUs007Scenario,
   tcbUs008Scenario,
   tcbUs009Scenario,
+  tcbUs010Scenario,
 };
 export type { Scenario };
 
@@ -53,4 +55,5 @@ export const SCENARIOS: Scenario[] = [
   tcbUs001Scenario,
   tcbUs009Scenario,
   tcbUs007Scenario,
+  tcbUs010Scenario,
 ];
