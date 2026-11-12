@@ -269,22 +269,14 @@ export function resolve8960Info(inputs: ResolverInputs): Form8960FilingInfo {
   const allocableTax = num(inputs, "state_local_tax.allocable_to_investment_income");
   const itemizes = resolveScheduleAInfo(inputs).mustFile?.["schedule-a"]?.value === true;
   const asked = resolution.value === true && itemizes;
-  // Line 10 (…::sec::line-10-additional-modifications::b01): asked of every filer.
+  // Line 10 (…::sec::line-10-additional-modifications::b01): optional, recorded only when stated.
   const additionalModifications = num(inputs, NET_INVESTMENT_INCOME_KEYS.additionalModifications);
-  const files = resolution.value === true;
   return {
     mustFile: { "form-8960": resolution },
     missingInputs: {
-      "form-8960": [
-        ...(asked
-          ? missingInputs({ "state_local_tax.allocable_to_investment_income": allocableTax })
-          : []),
-        ...(files
-          ? missingInputs({
-              [NET_INVESTMENT_INCOME_KEYS.additionalModifications]: additionalModifications,
-            })
-          : []),
-      ],
+      "form-8960": asked
+        ? missingInputs({ "state_local_tax.allocable_to_investment_income": allocableTax })
+        : [],
     },
     scheduleCNonpassive,
     stateLocalTaxAllocableToInvestmentIncome: allocableTax,
