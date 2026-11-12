@@ -37,4 +37,4 @@ Forms checked: Form 1040, Schedules 1, 2, A, C, D and SE, Forms 8959, 8960 and 8
 
 ## Which QBI form
 
-The key files Form 8995. The engine files Form 8995 when MAGI's upper bound is at or below the threshold ($197,300 for MFS), and Form 8995-A otherwise (`src/federal/8995/whichForm.ts`).
+The key files Form 8995. The engine files Form 8995 when an upper bound on taxable income before the QBI deduction is at or below the threshold ($197,300 for MFS), and Form 8995-A otherwise (`src/federal/qbi/whichForm.ts`). The bound is MAGI's upper bound less the standard deduction when the return takes it; this return itemizes, so nothing is subtracted.

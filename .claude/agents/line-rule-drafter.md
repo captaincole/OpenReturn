@@ -30,6 +30,7 @@ Follow the patterns already in the file:
 
 - The key is the fieldId without the `<formId>.` prefix.
 - A binding is `(form, info) => value`. Returning `undefined` blocks the field, and the engine asks for its inputs.
+- For one case the engine does not handle, a binding returns `unsupported(reason)` (from `types.ts`) with a one-sentence reason.
 - Blank or zero: with no source data, return `undefined`, so the line stays blank. When source data computes to zero and the line says "enter -0-", return `0`.
 - Money math uses `sum`, `atLeast` and `roundDollars` from `money.ts`. Rounding is to the nearest dollar. When you add document amounts, keep the cents and round only the total.
 - A threshold or rate from the instructions goes in a named constant at the top of the file.
