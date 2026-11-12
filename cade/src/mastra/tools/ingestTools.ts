@@ -1,3 +1,4 @@
+import { ingest1095A } from "./ingest1095A";
 import { ingest1098 } from "./ingest1098";
 import { ingest1099B } from "./ingest1099B";
 import { ingest1099Div, ingest1099Int, ingest1099Misc } from "./ingest1099Forms";
@@ -28,6 +29,7 @@ export const ingestTools = {
   ingestW2G,
   ingest1099K,
   ingest1099Nec,
+  ingest1095A,
   recordBusiness,
   recordDependent,
 };
