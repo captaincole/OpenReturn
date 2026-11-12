@@ -96,9 +96,14 @@ describe("resolve1040Info: the EIC questions with a business (Worksheet B)", () 
     expect(askedWithBusiness(19_104, 5_000)).toEqual([]);
   });
 
-  it("asks while a business loss or an unknown line 31 could bring earned income under the limit", () => {
+  it("asks while a business loss could bring earned income under the limit", () => {
     expect(askedWithBusiness(20_000, 9_000)).toEqual(expect.arrayContaining(NO_CHILD_KEYS));
-    expect(askedWithBusiness(20_000, 0, false)).toEqual(expect.arrayContaining(NO_CHILD_KEYS));
+    // Line G "No": line 31 waits on the passive rules, but its loss is no more than line 29's.
+    expect(askedWithBusiness(20_000, 9_000, false)).toEqual(expect.arrayContaining(NO_CHILD_KEYS));
+  });
+
+  it("counts a business with a profit as 0, whether or not its line 31 is known", () => {
+    expect(askedWithBusiness(20_000, 0, false)).toEqual([]);
   });
 
   it("asks a filer whose wages are under the limit", () => {

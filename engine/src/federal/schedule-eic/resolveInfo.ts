@@ -1,8 +1,8 @@
 import { EIC_KEYS } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
-import { earnedIncomeMayBeUnderLimit } from "./eicAnswers.js";
 import type { ScheduleEICFilingInfo } from "./filingInfo.js";
+import { eicMayApply } from "./possible.js";
 import { eicQualifyingChildren } from "./qualifyingChild.js";
 
 /*
@@ -10,11 +10,10 @@ import { eicQualifyingChildren } from "./qualifyingChild.js";
  * who meets the conditions to be your qualifying child for purposes of claiming
  * the EIC, complete and attach Schedule EIC." The schedule files when a
  * dependent passes isEicQualifyingChild and the EIC is still possible:
- * - Earned income can be under the Step 1 limit for that many children
- *   (irs-1040-inst-2025::sec::all-filers::b01): W-2 wages under it, or a
- *   business that may have a loss (earnedIncomeMayBeUnderLimit). AGI and
- *   investment income (Step 2) are form lines, not facts: the 1040's line 27a
- *   applies them.
+ * - The facts do not show Step 1, Step 2 or Step 5 stopping the credit for
+ *   the children with valid SSNs (eicMayApply, the same test the line 27a
+ *   questions use): AGI, investment income and earned income are bounded
+ *   from facts, and line 27a applies the lines themselves.
  * - No answer rules the taxpayer out: a nonresident alien who does not file
  *   jointly (irs-1040-inst-2025::sec::no-continue-3::b01), a qualifying child
  *   of another person (irs-1040-inst-2025::sec::yes-continue-no-stop-10::b01),
@@ -28,8 +27,7 @@ export function resolveScheduleEICInfo(inputs: ResolverInputs): ScheduleEICFilin
   const status = filingStatusOf(inputs);
   const joint = status === "married_filing_jointly";
   const { children, withSsn } = eicQualifyingChildren(inputs);
-  const possible =
-    children.length > 0 && earnedIncomeMayBeUnderLimit(inputs, withSsn.length, joint);
+  const possible = children.length > 0 && eicMayApply(inputs, withSsn.length);
   const answer = (key: string) => inputs.factByKey.get(key) as boolean | undefined;
   const answers = {
     [EIC_KEYS.nonresidentAlien]: answer(EIC_KEYS.nonresidentAlien),

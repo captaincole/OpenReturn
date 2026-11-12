@@ -13,10 +13,9 @@ import {
   type W2FactValue,
 } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
-import { factsInCategory, sumW2Box, text, type ResolverInputs } from "../../resolverInputs.js";
-import { netProfit } from "../schedule-c/lines.js";
+import { factsInCategory, text, type ResolverInputs } from "../../resolverInputs.js";
 import { noChildEicAge, type EicAnswers } from "./credit.js";
-import { eicIncomeLimit } from "./limits.js";
+import { eicMayApply } from "./possible.js";
 import { eicQualifyingChildren } from "./qualifyingChild.js";
 
 export interface EicLineInfo extends EicAnswers {
@@ -64,27 +63,6 @@ export function resolveEicLineInfo(inputs: ResolverInputs): EicLineInfo {
   };
 }
 
-/*
- * Earned income can be under the Step 1 limit: W-2 box 1 is under it, or a
- * business may have a loss. With no loss, Worksheet B line 1e is 0 or more,
- * so earned income is at least the wages, and Worksheet B line 5 (or Step 5)
- * stops the credit at the limit
- * (irs-1040-inst-2025::sec::bworksheet-2025-eic-line-27a::b03).
- */
-export function earnedIncomeMayBeUnderLimit(
-  inputs: ResolverInputs,
-  children: number,
-  joint: boolean,
-): boolean {
-  if (sumW2Box(inputs, "box1") < eicIncomeLimit(children, joint)) return true;
-  const { businesses, malformedKeys } = businessesOnReturn(inputs.facts, joint);
-  const onReturn = businesses.map((business) => business.value);
-  return (
-    malformedKeys.length > 0 ||
-    businesses.some((business) => netProfit(business.value, onReturn) === undefined)
-  );
-}
-
 /* Step 4, question 2 for the taxpayer, or either spouse on a joint return; false while a date is missing. */
 function noChildAgeInRange(inputs: ResolverInputs, joint: boolean): boolean {
   const dobs = [text(inputs, "identity.dob"), ...(joint ? [text(inputs, SPOUSE_KEYS.dob)] : [])];
@@ -107,15 +85,6 @@ function separatedSpouseQuestions(info: EicLineInfo): Record<string, unknown> {
 // Step 1, question 1: three or more children set the largest limit.
 const MOST_CHILDREN = 3;
 
-/* Earned income can be under the limit for that many children; no wages and no business is none. */
-function earnsUnderLimit(inputs: ResolverInputs, info: EicLineInfo, children: number): boolean {
-  const joint = filingStatusOf(inputs) === "married_filing_jointly";
-  return (
-    (info.selfEmployed || sumW2Box(inputs, "box1") > 0) &&
-    earnedIncomeMayBeUnderLimit(inputs, children, joint)
-  );
-}
-
 /*
  * A dependent whose qualifying-child test waits on its residency, student or
  * disability answer holds Step 1 while the largest limit can be met. Schedule
@@ -125,13 +94,13 @@ function openDependentQuestions(
   inputs: ResolverInputs,
   info: EicLineInfo,
 ): Record<string, unknown> {
-  if (!info.childrenOpen || !earnsUnderLimit(inputs, info, MOST_CHILDREN)) return {};
+  if (!info.childrenOpen || !eicMayApply(inputs, MOST_CHILDREN)) return {};
   return Object.fromEntries(info.openDependentKeys.map((key) => [key, undefined]));
 }
 
 /*
  * The no-child answers (Step 1 question 4, Step 4 questions 3, 5 and 6,
- * Form 8862) for a filer whose earned income can be under the Step 1 limit,
+ * Form 8862) for a filer for whom the EIC is still possible (eicMayApply),
  * with the right filing status and age. A filer with a qualifying child is
  * asked by Schedule EIC's resolver; an MFS filer with one is asked Step 3's
  * questions 4 and 5. A head of household without one is not asked: Step 4,
@@ -141,15 +110,14 @@ function answerQuestions(inputs: ResolverInputs, info: EicLineInfo): Record<stri
   const status = filingStatusOf(inputs);
   const joint = status === "married_filing_jointly";
   if (info.qualifyingChildren > 0) {
-    return status === "married_filing_separately" &&
-      earnsUnderLimit(inputs, info, info.childrenWithSsn)
+    return status === "married_filing_separately" && eicMayApply(inputs, info.childrenWithSsn)
       ? separatedSpouseQuestions(info)
       : {};
   }
   const possible =
     !info.childrenOpen &&
     (status === "single" || status === "qualifying_surviving_spouse" || joint) &&
-    earnsUnderLimit(inputs, info, 0) &&
+    eicMayApply(inputs, 0) &&
     noChildAgeInRange(inputs, joint);
   if (!possible) return {};
   return {
