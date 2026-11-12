@@ -12,6 +12,8 @@ export interface Form8962FilingInfo extends BaseFilingInfo {
   marketplaceAnnualTotals?: MarketplaceCoverageAmounts;
   /** Form 1095-A lines 21–32, columns A–C, January first, added over every Form 1095-A. */
   marketplaceMonthlyTotals?: MarketplaceCoverageAmounts[];
+  /** Per month, January first: the Forms 1095-A with a column A or B amount that month. */
+  marketplaceMonthlyStatementCounts?: number[];
   /**
    * Line 10 "Yes" test from the documents: every Form 1095-A covers all 12
    * months, and columns A and B are each the same every month.

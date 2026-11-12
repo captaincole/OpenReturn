@@ -74,6 +74,17 @@ describe("resolve8962Info", () => {
     expect(info([form1095A(elevenMonths)]).marketplaceSameEveryMonth).toBe(false);
   });
 
+  it("counts per month the Forms 1095-A with a column A or B amount", () => {
+    const firstPlan = Array.from({ length: 12 }, (_, index) => (index < 4 ? month(100) : {}));
+    const secondPlan = Array.from({ length: 12 }, (_, index) => (index >= 3 ? month(50) : {}));
+    const result = info([
+      form1095A(firstPlan),
+      { ...form1095A(secondPlan), key: makeMarketplaceCoverageFactKey("ffm", "p-2") },
+    ]);
+    expect(result.marketplaceStatementCount).toBe(2);
+    expect(result.marketplaceMonthlyStatementCounts).toEqual([1, 1, 1, 2, ...Array(8).fill(1)]);
+  });
+
   it("asks the line A exception only when married filing separately", () => {
     const single = info([sameAllYear(500)]).missingInputs?.["form-8962"] ?? [];
     expect(single).toEqual([PREMIUM_TAX_CREDIT_KEYS.allocatesPolicyOrMarriageCalc]);
