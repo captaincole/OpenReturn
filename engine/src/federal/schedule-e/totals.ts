@@ -74,41 +74,31 @@ function allowedPassiveLoss(form: Form, info: Info, property: RentalProperty): A
 }
 
 /*
- * Line 22, a positive amount (irs-1040se-inst-2025::sec::line-22::b01): blank
- * for a royalty; a nonpassive rental's line 21 loss; a passive rental's allowed loss.
+ * A column's loss as the return deducts it, a positive amount: a nonpassive
+ * property's line 21 loss; a passive one's allowed loss, which can include a
+ * prior-year loss even with income on line 21. A former passive activity's
+ * prior-year loss is not modeled, so it waits.
  */
-export function deductibleLoss(form: Form, info: Info, column: PropertyColumn): Amount {
-  const property = info.rentalProperties?.find((entry) => entry.column === column);
-  if (!property) return undefined;
-  if (isRoyalty(property)) return null;
-  const net = line21(form, column);
+function columnLoss(form: Form, info: Info, property: RentalProperty): Amount {
+  const net = line21(form, property.column);
   if (net === undefined || property.passive === undefined) return undefined;
   if (property.passive) return allowedPassiveLoss(form, info, property);
-  // A former passive activity's prior-year loss is not modeled.
   if ((property.value.priorYearUnallowedLoss ?? 0) > 0) return undefined;
   return net < 0 ? -net : null;
 }
 
-/* A royalty's loss on line 25: nonpassive, line 21's; passive, the allowed loss. */
-function royaltyLoss(form: Form, info: Info, property: RentalProperty): Amount {
-  const net = line21(form, property.column);
-  if (net === undefined || property.passive === undefined) return undefined;
-  // A passive royalty's allowed loss can include a prior-year loss even with income on line 21.
-  if (property.passive) return allowedPassiveLoss(form, info, property);
-  // A former passive activity's prior-year loss is not modeled.
-  if ((property.value.priorYearUnallowedLoss ?? 0) > 0) return undefined;
-  return net < 0 ? -net : null;
+/* Line 22, a positive amount (irs-1040se-inst-2025::sec::line-22::b01): blank for a royalty. */
+export function deductibleLoss(form: Form, info: Info, column: PropertyColumn): Amount {
+  const property = info.rentalProperties?.find((entry) => entry.column === column);
+  if (!property) return undefined;
+  return isRoyalty(property) ? null : columnLoss(form, info, property);
 }
 
 /* Line 25: royalty losses from line 21 and rental losses from line 22; total losses allowed (b03). */
 function losses(form: Form, info: Info): Amount {
   const properties = columnsReady(form, info);
   if (!properties) return undefined;
-  const amounts: Amount[] = properties.map((property) =>
-    isRoyalty(property)
-      ? royaltyLoss(form, info, property)
-      : deductibleLoss(form, info, property.column),
-  );
+  const amounts: Amount[] = properties.map((property) => columnLoss(form, info, property));
   if (amounts.includes(undefined)) return undefined;
   return sumOrBlank(...amounts) ?? null;
 }
