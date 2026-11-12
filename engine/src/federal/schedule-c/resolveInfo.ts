@@ -1,4 +1,8 @@
-import { businessesOnReturn, unlinkedPaymentTransactionsKeys } from "../../facts/index.js";
+import {
+  businessesOnReturn,
+  unlinkedNonemployeeCompensationKeys,
+  unlinkedPaymentTransactionsKeys,
+} from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
@@ -13,7 +17,9 @@ const MUST_FILE_KEY = "decisions.scope.must_file_schedule_c";
  * box 1a can be business receipts, personal sales or hobby income, and each
  * goes on a different line (irs-1040-inst-2025::sec::form-s-1099-k::b01). The
  * engine models only business receipts, so the 1099-K stays in missingInputs
- * until it is linked to a business, even after a "no Schedule C" decision.
+ * until it is linked to a business, even after a "no Schedule C" decision. A
+ * 1099-NEC that names no business is open the same way: box 1 belongs on line 1
+ * (irs-1040sc-inst-2025::sec::line-1::b01) only when it is business income.
  * Statutory employees and qualified joint ventures have no facts yet. A spouse's
  * business is on this return only when filing jointly; an unknown status counts
  * it until it is known.
@@ -24,7 +30,10 @@ export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInf
     inputs.facts,
     status === undefined || status === "married_filing_jointly",
   );
-  const unlinkedKeys = unlinkedPaymentTransactionsKeys(inputs.facts);
+  const unlinkedKeys = [
+    ...unlinkedPaymentTransactionsKeys(inputs.facts),
+    ...unlinkedNonemployeeCompensationKeys(inputs.facts),
+  ];
   const open = malformedKeys.length > 0 || (unlinkedKeys.length > 0 && businesses.length === 0);
   const businessFallback = {
     rule: "fallback: a sole-proprietor business fact",

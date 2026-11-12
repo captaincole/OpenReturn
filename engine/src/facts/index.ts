@@ -3,6 +3,7 @@
 export * from "./kinds/alternativeMinimumTax.js";
 export * from "./kinds/business.js";
 export * from "./kinds/caMiscellaneousDeductions.js";
+export * from "./kinds/capitalLossCarryover.js";
 export * from "./kinds/dependents.js";
 export * from "./kinds/dividends.js";
 export * from "./kinds/gamblingWinnings.js";
@@ -14,6 +15,7 @@ export * from "./kinds/interest.js";
 export * from "./kinds/investmentInterest.js";
 export * from "./kinds/miscIncome.js";
 export * from "./kinds/mortgage.js";
+export * from "./kinds/nonemployeeCompensation.js";
 export * from "./kinds/paymentTransactions.js";
 export * from "./kinds/priorYear.js";
 export * from "./kinds/retirementDistribution.js";
