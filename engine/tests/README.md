@@ -95,6 +95,13 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
     loss carryover, NIIT with an additional modification, and a made
     Form 1095-A whose advance payments are repaid on Form 8962. Checked
     against the case's answer key; its README lists the lines not checked
+  - `tcb-us-010` — TaxCalcBench case ty25-us-010, federal only. Qualifying
+    surviving spouse under 65, retired on disability: a disability pension
+    on Form 1040 line 1h, itemizing below the standard deduction with
+    general sales tax (Schedule A), child and dependent care for a disabled
+    adult son (Form 2441), the credit for the elderly or the disabled
+    (Schedule R) and the EIC. Checked against the case's answer key; its
+    README lists the lines not checked
   - `tcb-ca-005` — TaxCalcBench case ty25-ca-005, CA checked only. MFJ,
     a dependent, CA itemized deductions (Schedule CA Part II, FTB 3526),
     the CA AMT on an ISO exercise (Schedule P), an early 1099-R (FTB
