@@ -1,7 +1,7 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm, type FormAccessor } from "../../defineForm.js";
-import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
+import { atLeast, numberOrBlank, roundDollars, sum, wholePart } from "../../money.js";
 import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import type { Form8962FilingInfo } from "./filingInfo.js";
@@ -19,16 +19,15 @@ const FPL_MULTIPLE_CAP = 4;
 const ABOVE_CAP_PERCENT = 401;
 const LOWEST_REGULAR_PERCENT = 100;
 
-/* Line 7, Table 2, in hundred-thousandths: 0 at 150 or less, +40 per point to 300, +25 per point to 400. */
+/* Line 7, Table 2, in ten-thousandths: 0 at 150 or less, +4 per point to 300, +2.5 per point to 400. */
 const TABLE_2_FLOOR_PERCENT = 150;
 const TABLE_2_BREAK_PERCENT = 300;
 const TABLE_2_CAP_PERCENT = 400;
-const TABLE_2_LOWER_STEP = 40;
-const TABLE_2_UPPER_STEP = 25;
-const TABLE_2_AT_BREAK = 6_000;
-const TABLE_2_AT_CAP = 8_500;
-const HUNDRED_THOUSANDTHS_PER_TEN_THOUSANDTH = 10;
-const TEN_THOUSANDTHS_PER_UNIT = 10_000;
+const TABLE_2_LOWER_RATE = 4;
+const TABLE_2_UPPER_RATE = 2.5;
+const TABLE_2_AT_BREAK = 600;
+const TABLE_2_AT_CAP = 850;
+const FIGURE_SCALE = 10_000;
 const MONTHS_PER_YEAR = 12;
 
 const DEPENDENTS_MAGI_NOT_ASKED =
@@ -48,19 +47,14 @@ function povertyTable(info: Info) {
 
 /* Table 2 for a line 5 percentage, in ten-thousandths, rounded half up (301 → 603, i.e. 0.0603). */
 function applicableFigure(percent: number): number {
-  let hundredThousandths: number;
-  if (percent <= TABLE_2_FLOOR_PERCENT) hundredThousandths = 0;
-  else if (percent <= TABLE_2_BREAK_PERCENT)
-    hundredThousandths = TABLE_2_LOWER_STEP * (percent - TABLE_2_FLOOR_PERCENT);
-  else if (percent < TABLE_2_CAP_PERCENT)
-    hundredThousandths = TABLE_2_AT_BREAK + TABLE_2_UPPER_STEP * (percent - TABLE_2_BREAK_PERCENT);
-  else hundredThousandths = TABLE_2_AT_CAP;
-  const half = HUNDRED_THOUSANDTHS_PER_TEN_THOUSANDTH / 2;
-  const raised = hundredThousandths + half;
-  return (
-    (raised - (raised % HUNDRED_THOUSANDTHS_PER_TEN_THOUSANDTH)) /
-    HUNDRED_THOUSANDTHS_PER_TEN_THOUSANDTH
-  );
+  if (percent <= TABLE_2_FLOOR_PERCENT) return 0;
+  if (percent <= TABLE_2_BREAK_PERCENT) {
+    return TABLE_2_LOWER_RATE * (percent - TABLE_2_FLOOR_PERCENT);
+  }
+  if (percent < TABLE_2_CAP_PERCENT) {
+    return roundDollars(TABLE_2_AT_BREAK + TABLE_2_UPPER_RATE * (percent - TABLE_2_BREAK_PERCENT));
+  }
+  return TABLE_2_AT_CAP;
 }
 
 /* Lines 7–8b: the applicable figure in ten-thousandths; blank when skipped (an MFS filer without Exception 2). */
@@ -128,16 +122,15 @@ export function register(): void {
         const table = povertyTable(info);
         return table.base + table.perPerson * (familySize - 1);
       },
-      // MANUAL EDIT: Worksheet 2. "Do not round"; drop the decimals with integer remainder math. Below 100 still prints.
+      // Worksheet 2: "Do not round"; drop the decimals. Below 100 still prints.
       "0.line.5_household_income_percent_fpl": (form) => {
         const line3 = form["0.line.3_household_income"];
         const line4 = form["0.line.4_federal_poverty_line"];
         if (line3 === undefined || line4 === undefined) return undefined;
         if (line3 > line4 * FPL_MULTIPLE_CAP) return ABOVE_CAP_PERCENT;
-        const scaled = line3 * 100;
-        return (scaled - (scaled % line4)) / line4;
+        return wholePart((line3 * 100) / line4);
       },
-      // MANUAL EDIT: printed as the table prints it ("0.0603"); toFixed is banned, so build the digits.
+      // Printed as Table 2 prints it ("0.0603").
       "0.line.7_applicable_figure": (form, info) => {
         const figure = contributionFigure(form, info);
         if (typeof figure !== "number") return figure;
@@ -148,7 +141,7 @@ export function register(): void {
         if (typeof figure !== "number") return figure;
         const line3 = form["0.line.3_household_income"];
         if (line3 === undefined) return undefined;
-        return roundDollars((line3 * figure) / TEN_THOUSANDTHS_PER_UNIT);
+        return roundDollars((line3 * figure) / FIGURE_SCALE);
       },
       "0.line.8b_monthly_contribution_amount": (form, info) => {
         const figure = contributionFigure(form, info);
