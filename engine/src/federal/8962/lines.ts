@@ -1,7 +1,11 @@
 /* MANUAL EDIT: Part II lines 9–29 and Parts IV–V, split from bindings.ts for the file-size cap. */
 
 import type { BindingFn, FormAccessor } from "../../defineForm.js";
-import type { MarketplaceCoverageAmounts } from "../../facts/index.js";
+import {
+  MARKETPLACE_MONTHS,
+  rowShowsCoverage,
+  type MarketplaceCoverageAmounts,
+} from "../../facts/index.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
 import type { Form8962FilingInfo } from "./filingInfo.js";
@@ -15,7 +19,6 @@ export type Bindings = Partial<{ [K in keyof Form8962]: BindingFn<Form8962, Info
 
 /* Lines 12–23 are January through December. */
 const FIRST_MONTH_LINE = 12;
-const MONTHS_PER_YEAR = 12;
 
 /* Line 28, Table 5: by line 5, single and any other filing status; 400 or more leaves it blank. */
 const TABLE_5 = [
@@ -49,9 +52,6 @@ const afterLine9 =
     return answer ? unsupported(PARTS_IV_V) : fn(form, info);
   };
 
-const hasPremiums = (row: Row | undefined): boolean =>
-  row?.enrollmentPremium !== undefined || row?.slcspPremium !== undefined;
-
 function columnA(row: Row | undefined) {
   if (row?.enrollmentPremium === undefined) return undefined;
   if (row.enrollmentPremium === 0) return unsupported(UNPAID_PREMIUM);
@@ -59,7 +59,7 @@ function columnA(row: Row | undefined) {
 }
 
 function columnB(row: Row | undefined, statementCount: number | undefined) {
-  if (!hasPremiums(row)) return undefined;
+  if (!rowShowsCoverage(row)) return undefined;
   // An unpaid premium makes column (b) -0- (…::sec::lines-12-through-23-monthly-calculation::b04–b05).
   if (row?.enrollmentPremium === 0) return unsupported(UNPAID_PREMIUM);
   if ((statementCount ?? 0) > 1) return unsupported(SEVERAL_STATEMENTS);
@@ -86,7 +86,7 @@ function columnBindings(
     [`${key}a`]: (form, info) => columnA(taking(form, info)),
     [`${key}b`]: (form, info) => columnB(taking(form, info), statementCount(info)),
     [`${key}c`]: (form, info) =>
-      hasPremiums(taking(form, info)) ? numberOrBlank(form[contribution]) : undefined,
+      rowShowsCoverage(taking(form, info)) ? numberOrBlank(form[contribution]) : undefined,
     [`${key}d`]: (form) => {
       const slcsp = numberOrBlank(form[`${key}b`]);
       const contributed = numberOrBlank(form[`${key}c`]);
@@ -124,7 +124,7 @@ function calculationBindings(): Record<string, Fn> {
     "0.line.8a_annual_contribution_amount",
     true,
   );
-  for (let index = 0; index < MONTHS_PER_YEAR; index++) {
+  for (let index = 0; index < MARKETPLACE_MONTHS; index++) {
     const month = (form: Form, info: Info) =>
       form["0.line.10_use_annual_calc_no"] === true
         ? info.marketplaceMonthlyTotals?.[index]
@@ -145,9 +145,9 @@ function columnTotal(form: Form, info: Info, column: "e" | "f"): number | undefi
     return numberOrBlank(form[`0.line.11_col_${column}`]);
   if (form["0.line.10_use_annual_calc_no"] !== true) return undefined;
   const amounts: number[] = [];
-  for (let index = 0; index < MONTHS_PER_YEAR; index++) {
+  for (let index = 0; index < MARKETPLACE_MONTHS; index++) {
     const month = info.marketplaceMonthlyTotals?.[index];
-    const filled = column === "e" ? hasPremiums(month) : month?.advancePayment !== undefined;
+    const filled = column === "e" ? rowShowsCoverage(month) : month?.advancePayment !== undefined;
     if (!filled) continue;
     const amount = numberOrBlank(form[`0.line.${FIRST_MONTH_LINE + index}_col_${column}`]);
     if (amount === undefined) return undefined;
