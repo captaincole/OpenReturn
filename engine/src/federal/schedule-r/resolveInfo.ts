@@ -116,7 +116,8 @@ export function resolveScheduleRInfo(inputs: ResolverInputs): ScheduleRFilingInf
   const overLimit =
     status !== undefined &&
     floor !== undefined &&
-    floor >= agiLimit(status, qualifies.filter((value) => value === true).length);
+    // A person whose answer is missing may qualify: count them, for the higher limit.
+    floor >= agiLimit(status, qualifies.filter((value) => value !== false).length);
   const cannot = anyQualified === false || statusAllows === false || overLimit;
   const agesKnown = people.every((person) => over65(person) !== undefined);
   const decided = cannot || (agesKnown && (anyQualified === undefined || status !== undefined));
