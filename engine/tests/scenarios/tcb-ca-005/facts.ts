@@ -314,6 +314,12 @@ export const tcbCa005Facts: TaxFactRow[] = [
     "The key's Schedule P line 7 is blank: the AMT carryover equals the regular one.",
   ),
   fact(
+    "investment_income",
+    INVESTMENT_INTEREST_KEYS.amtDisallowedCarryover,
+    650,
+    "Not in the case: the federal AMT Form 4952 carryover is taken equal to the regular one, as for Schedule P line 7.",
+  ),
+  fact(
     "state_local_tax",
     "state_local_tax.allocable_to_investment_income",
     1151,
