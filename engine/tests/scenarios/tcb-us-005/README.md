@@ -29,6 +29,7 @@ Forms checked: Form 1040, Schedules 1, 2, 8812, C, E and SE, Forms 8582, 8959, 8
 - The rental's QJV box (`qualifiedJointVenture`) is not in the answers; the key checks it (see "Needs a decision" below).
 - `allInvestmentAtRisk` for the royalty, `priorYearUnallowedLoss` 0 for both properties, and the rental's W-2 wages and UBIA of 0 are not in the answers: the key files no Form 6198, shows no prior-year passive loss, and has no wages or UBIA for the rental on Form 8995-A.
 - The business's `qualifiedPropertyUbia` is 0 (not in the answers; the key's Form 8995-A line 7 is blank).
+- The rental's `tradeOrBusiness` (a section 162 trade or business, for Form 8960 line 4b) is true: not in the answers; the key takes the rental out of net investment income on line 4b.
 
 ## Lines the key leaves blank that the engine fills, on purpose
 
