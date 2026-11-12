@@ -16,6 +16,11 @@ export function register(): void {
       "0.line.3": (_, info) => info.businessIncome,
       // MANUAL EDIT: line 8b = W-2G box 1. Winnings with no W-2G have no fact and are not included.
       "0.line.8b": (_, info) => roundDollars(info.gamblingWinnings),
+      // MANUAL EDIT: line 5 = Schedule E line 41; blank when Schedule E is not filed.
+      "0.line.5": (form) => {
+        const line41 = form["schedule-e.1.line.41_total_income_or_loss"];
+        return typeof line41 === "number" ? line41 : undefined;
+      },
       // MANUAL EDIT: line 15 = Schedule SE line 13; blank when Schedule SE is not filed.
       "1.line.15": (form) => {
         const line13 = form["schedule-se.0.line.13"];
@@ -58,11 +63,13 @@ export function register(): void {
        * MANUAL EDIT: irs-1040-inst-2025::sec::line-3::b01. Line 3 is blank with no
        * business (adds nothing) and blank while a business's line 31 waits. Then
        * line 10 waits: sum() would add the loss as 0 and overstate income. The
-       * other terms are blank only when empty: 1, 2a, 4–7 are unsupported, and
+       * other terms are blank only when empty: 1, 2a, 4, 6, 7 are unsupported, and
        * line 9 is a sum.
        */
       "0.line.10": (form, info) =>
-        info.hasBusiness === true && form["0.line.3"] === undefined
+        (info.hasBusiness === true && form["0.line.3"] === undefined) ||
+        // MANUAL EDIT: Schedule E filed or still open (an unreadable rental fact), line 41 blank: wait too.
+        (info.mustFile?.["schedule-e"]?.value !== false && form["0.line.5"] === undefined)
           ? undefined
           : sum(
               form["0.line.1"],
@@ -119,8 +126,6 @@ export function register(): void {
       "0.line.4_form_4797": "No Form 4797 business-property sale scenario yet.",
       "0.line.4_form_4684": "No Form 4684 casualty/theft scenario yet.",
       "0.line.4": "No Form 4797 or Form 4684 scenario yet.",
-      "0.line.5":
-        "No Schedule E / K-1 ingestion yet — rental, royalty, partnership, S-corp, trust income unsupported",
       "0.line.6": "No Schedule F / farm income scenario yet",
       "0.line.7_repaid_checkbox": "No 1099-G / unemployment repayment ingestion yet",
       "0.line.7_amount_repaid": "No 1099-G / unemployment repayment ingestion yet",
