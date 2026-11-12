@@ -51,8 +51,8 @@ describe("Form 8582 line 6 with a self-rental", () => {
     expect(line6(-4000, property({}))).toBe(120000);
   });
 
-  it("leaves out a self-rental's income when it has a prior-year loss", () => {
-    expect(line6(10000, property({ priorYearUnallowedLoss: 3000 }))).toBe(120000);
+  it("leaves out a self-rental's income below its prior-year loss (a net loss)", () => {
+    expect(line6(10000, property({ priorYearUnallowedLoss: 12000 }))).toBe(120000);
   });
 
   it("leaves out a passive rental's income that is not a self-rental", () => {
