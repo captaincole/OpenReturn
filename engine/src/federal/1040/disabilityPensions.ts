@@ -8,12 +8,12 @@
 
 import {
   isDisabilityPension,
-  isRetirementDistributionFactKey,
   makeDisabilityBeforeMinimumRetirementAgeKey,
+  parseRetirementDistributionFact,
   type RetirementDistributionFactValue,
 } from "../../facts/index.js";
 import { sum } from "../../money.js";
-import { factsInCategory, type ResolverInputs } from "../../resolverInputs.js";
+import type { ResolverInputs } from "../../resolverInputs.js";
 import { rowTaxable } from "./resolveInfo.js";
 
 export interface DisabilityPension {
@@ -25,13 +25,14 @@ export interface DisabilityPension {
 }
 
 export function disabilityPensions(inputs: ResolverInputs): DisabilityPension[] {
-  return factsInCategory(inputs, "retirement").flatMap((row) => {
-    if (!isRetirementDistributionFactKey(row.key)) return [];
-    const distribution = row.value as RetirementDistributionFactValue;
-    if (!isDisabilityPension(distribution)) return [];
-    // The key is payer.<payerSlug>.distributions.<distributionId>.
-    const [, payerSlug, , distributionId] = row.key.split(".");
-    const answerKey = makeDisabilityBeforeMinimumRetirementAgeKey(payerSlug, distributionId);
+  return inputs.facts.flatMap((row) => {
+    const fact = parseRetirementDistributionFact(row);
+    if (fact === null || !isDisabilityPension(fact.distribution)) return [];
+    const { distribution } = fact;
+    const answerKey = makeDisabilityBeforeMinimumRetirementAgeKey(
+      fact.payerSlug,
+      fact.distributionId,
+    );
     const answer = inputs.factByKey.get(answerKey);
     return [
       {

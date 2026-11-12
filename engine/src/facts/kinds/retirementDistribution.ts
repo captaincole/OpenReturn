@@ -38,11 +38,13 @@ export interface RetirementDistributionFactValue {
   box19?: number; // Local distribution
 }
 
+type FactRow = { key: string; value: unknown; category: string };
+
 export interface RetirementDistributionFact {
   payerSlug: string;
   distributionId: string;
   distribution: RetirementDistributionFactValue;
-  sourceFact: TaxFactRow;
+  sourceFact: FactRow;
 }
 
 const R_CATEGORY = "retirement";
@@ -74,9 +76,7 @@ export function isRetirementDistributionFact(fact: TaxFactRow): boolean {
   return fact.category === R_CATEGORY && R_KEY_RE.test(fact.key);
 }
 
-export function parseRetirementDistributionFact(
-  fact: TaxFactRow,
-): RetirementDistributionFact | null {
+export function parseRetirementDistributionFact(fact: FactRow): RetirementDistributionFact | null {
   if (fact.category !== R_CATEGORY) return null;
   const match = fact.key.match(R_KEY_RE);
   if (!match) return null;
@@ -99,17 +99,32 @@ export function getRetirementDistributionFacts(facts: FactsView): RetirementDist
 }
 
 /*
+ * A distribution from an employer plan (a pension, annuity, 401(k)), not from an
+ * IRA: the IRA/SEP/SIMPLE box is not checked and box 7 has no Roth IRA code.
+ * Form 1040 puts it on lines 5a/5b, or on line 1h for a disability pension
+ * before the minimum retirement age or a corrective distribution.
+ */
+export function isEmployerPlanDistribution(distribution: RetirementDistributionFactValue): boolean {
+  return !distribution.box7IraSepSimple && !hasDistributionCode(distribution, ROTH_IRA_CODES);
+}
+
+/*
  * A disability pension: box 7 code 3 on a 1099-R that is not from an IRA. Before
  * the minimum retirement age set by the employer it is reported on Form 1040
  * line 1h; after it, on lines 5a and 5b (irs-1040-inst-2025::sec::lines-5a-and-5b::b01,
  * irs-1040-inst-2025::sec::line-1h::b02).
  */
+/*
+ * A corrective distribution of excess deferrals or contributions (box 7 code 8,
+ * or P for a prior year) from an employer plan: Form 1040 line 1h, not lines
+ * 5a/5b (irs-1040-inst-2025::sec::lines-5a-and-5b::b01, ::line-1h::b03).
+ */
+export function isCorrectiveDistribution(distribution: RetirementDistributionFactValue): boolean {
+  return isEmployerPlanDistribution(distribution) && hasDistributionCode(distribution, ["8", "P"]);
+}
+
 export function isDisabilityPension(distribution: RetirementDistributionFactValue): boolean {
-  return (
-    !distribution.box7IraSepSimple &&
-    !hasDistributionCode(distribution, ROTH_IRA_CODES) &&
-    hasDistributionCode(distribution, ["3"])
-  );
+  return isEmployerPlanDistribution(distribution) && hasDistributionCode(distribution, ["3"]);
 }
 
 const DISABILITY_PREFIX = "retirement.disability_pension.";

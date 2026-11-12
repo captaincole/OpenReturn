@@ -5,6 +5,7 @@ import {
   getNonemployeeCompensationFacts,
   getPaymentTransactionsFacts,
   hasDistributionCode,
+  isCorrectiveDistribution,
   isDividendFactKey,
   isInterestFactKey,
   isRetirementDistributionFactKey,
@@ -149,7 +150,8 @@ function iraLine(inputs: ResolverInputs, rows: RetirementDistributionFactValue[]
 
 /*
  * A disability pension before the minimum retirement age goes on line 1h, not
- * line 5 (disabilityPensions.ts). While one's answer is missing, lines 1h and
+ * line 5 (disabilityPensions.ts), and so does a corrective distribution
+ * (isCorrectiveDistribution). While a pension's answer is missing, lines 1h and
  * 5a–5b wait.
  */
 function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
@@ -163,12 +165,25 @@ function resolveRetirementSlots(inputs: ResolverInputs): Form1040FilingInfo {
       .filter((pension) => pension.beforeMinimumRetirementAge === true)
       .map((pension) => pension.distribution),
   );
-  const pensionRows = rows.filter((row) => !isIra(row) && !onLine1h.has(row));
+  const corrective = rows.filter(isCorrectiveDistribution);
+  const pensionRows = rows.filter(
+    (row) => !isIra(row) && !onLine1h.has(row) && !isCorrectiveDistribution(row),
+  );
   const taxable = pensionRows.map(rowTaxable);
   const answered = disabilityAnswersComplete(disability);
+  const disabilityPensionWages = onLine1h.size === 0 ? undefined : disabilityWages(disability);
+  const correctiveTaxable = corrective.map(rowTaxable);
   return {
     iraDistributions: iraRows.length === 0 ? undefined : iraLine(inputs, iraRows),
-    disabilityPensionWages: onLine1h.size === 0 ? undefined : disabilityWages(disability),
+    disabilityPensionWages,
+    correctiveDistributionWages:
+      corrective.length === 0 || correctiveTaxable.includes(undefined)
+        ? undefined
+        : sum(...correctiveTaxable),
+    line1hWaits:
+      !answered ||
+      (onLine1h.size > 0 && disabilityPensionWages === undefined) ||
+      correctiveTaxable.includes(undefined),
     line1hGap: line1hGap(inputs),
     pensionDistributions:
       pensionRows.length === 0 || !answered

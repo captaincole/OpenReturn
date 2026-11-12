@@ -138,8 +138,9 @@ function selfEmploymentEarnings(
 
 /*
  * Each spouse's own earned income: their W-2 wages and line 1h disability pensions.
- * MANUAL EDIT: line 1z must equal lines 1a and 1h, so taxable dependent care
- * benefits (line 1e, from line 26) make lines 4 and 5 unsupported on a joint return.
+ * MANUAL EDIT: line 1z must equal line 1a plus the disability pensions, so
+ * taxable dependent care benefits (line 1e, from line 26) or a corrective
+ * distribution on line 1h make lines 4 and 5 unsupported on a joint return.
  */
 function jointEarnedIncome(
   form: FormAccessor<Form2441>,
@@ -152,7 +153,10 @@ function jointEarnedIncome(
   if (info.hasBusiness === true || form["schedule-se.0.line.3"] !== undefined) {
     return unsupported(JOINT_SELF_EMPLOYMENT);
   }
-  if (line1 !== sum(form["form-1040.line.1a"], form["form-1040.line.1h_amount"])) {
+  const pensions = roundDollars(
+    sum(info.dependentCareTaxpayerDisabilityWages, info.dependentCareSpouseDisabilityWages),
+  );
+  if (line1 !== sum(form["form-1040.line.1a"], pensions)) {
     return unsupported(JOINT_OTHER_EARNED_INCOME);
   }
   const amounts = [
