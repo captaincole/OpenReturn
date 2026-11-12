@@ -122,9 +122,10 @@ const OUT_OF_SCOPE: { key: string; supported: (v: unknown) => boolean; detail: s
     supported: (value) =>
       value === "single" ||
       value === "married_filing_separately" ||
-      value === "married_filing_jointly",
+      value === "married_filing_jointly" ||
+      value === "head_of_household",
     detail:
-      "Only single filers are tested (married filing separately: one unverified scenario; jointly: one federal-only scenario).",
+      "Only single filers are tested (married filing separately: one unverified scenario; jointly: one federal-only scenario; head of household: one federal-only scenario).",
   },
   {
     key: "decisions.scope.ca_residency",

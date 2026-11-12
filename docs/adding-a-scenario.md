@@ -49,7 +49,9 @@ gambling winnings, Additional Medicare Tax, NIIT; tcb-us-008: MFS,
 a 1099-NEC business with mileage and a home office, gifts on
 Schedule A, a capital loss carryover, Form 8995; tcb-ca-005: MFJ, CA
 itemized deductions (Schedule CA Part II, FTB 3526), CA AMT on an ISO
-exercise (Schedule P), early-distribution tax (FTB 3805P)).
+exercise (Schedule P), early-distribution tax (FTB 3805P);
+tcb-us-001: HOH, mortgage interest (Form 1098), federal AMT on an ISO
+exercise (Form 6251)).
 
 ### 3. Create `facts.ts` and `decisions.ts`
 
