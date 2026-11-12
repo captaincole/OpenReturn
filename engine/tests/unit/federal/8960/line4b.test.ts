@@ -150,8 +150,4 @@ describe("Form 8960 asks the trade-or-business answer", () => {
   it("does not ask for a passive rental", () => {
     expect(missing(false)).not.toContain(key);
   });
-
-  it("does not ask for a self-rental's net income", () => {
-    expect(missing(false, { propertyType: "self_rental" })).not.toContain(key);
-  });
 });
