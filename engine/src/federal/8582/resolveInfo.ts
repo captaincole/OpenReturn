@@ -17,8 +17,8 @@ import {
   booleanFact,
   isPassiveActivity,
   isRentalActivity,
-  isSelfRentalNetIncome,
   needsProfessionalAnswer,
+  selfRentalState,
   spousePropertiesOnReturn,
 } from "../rentals/passive.js";
 import { netIncomeOrLoss } from "../schedule-e/lines.js";
@@ -75,6 +75,12 @@ function adoptionBenefits(inputs: ResolverInputs): number | undefined {
   return amounts.length > 0 ? sum(...amounts) : undefined;
 }
 
+/* A self-rental with net income: recharacterized, or waiting on its prior-year loss. */
+function offFormSelfRental(value: RentalFactValue): boolean {
+  const state = selfRentalState(value, netIncomeOrLoss(value));
+  return state === "recharacterized" || state === "waits";
+}
+
 /* Expenses or a prior-year unallowed loss: the activity has passive activity deductions. */
 function hasDeductions(property: RentalFactValue): boolean {
   const { otherDescription: _description, ...amounts } = property.expenses ?? {};
@@ -106,9 +112,7 @@ export function resolve8582Info(inputs: ResolverInputs): Form8582FilingInfo {
   // MANUAL EDIT: a self-rental's net income and its deductions stay off Form 8582 (disclosure-requirement::b05).
   const filing = passive.filter(
     (property) =>
-      property.passive &&
-      hasDeductions(property.value) &&
-      isSelfRentalNetIncome(property.value, netIncomeOrLoss(property.value)) !== true,
+      property.passive && hasDeductions(property.value) && !offFormSelfRental(property.value),
   );
   const hasRental = needsProfessionalAnswer(properties.map((property) => property.value));
   const livedApart = booleanFact(inputs.factByKey.get(SPOUSE_KEYS.livedApartAllYear));

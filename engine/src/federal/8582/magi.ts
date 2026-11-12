@@ -13,7 +13,7 @@
 
 import type { FormAccessor } from "../../defineForm.js";
 import { atLeast, numberOrBlank, sum } from "../../money.js";
-import { isRentalActivity, isSelfRentalNetIncome } from "../rentals/passive.js";
+import { isRentalActivity, selfRentalState } from "../rentals/passive.js";
 import type { RentalProperty } from "../schedule-e/filingInfo.js";
 import type { Form8582FilingInfo } from "./filingInfo.js";
 import type { Form8582 } from "./types.js";
@@ -63,9 +63,7 @@ function readsLine21(property: RentalProperty): boolean {
 function line6Amount(property: RentalProperty, net: number): number {
   const { value } = property;
   if (property.passive) {
-    const recharacterized =
-      isSelfRentalNetIncome(value, net) === true && (value.priorYearUnallowedLoss ?? 0) === 0;
-    return recharacterized ? net : 0;
+    return selfRentalState(value, net) === "recharacterized" ? net : 0;
   }
   const professionalRental = value.propertyType !== "royalties" && isRentalActivity(value) === true;
   return professionalRental ? atLeast(0, net) : net;

@@ -4,8 +4,8 @@ import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resol
 import {
   booleanFact,
   isPassiveActivity,
-  isSelfRentalNetIncome,
   needsProfessionalAnswer,
+  selfRentalState,
   spousePropertiesOnReturn,
 } from "../rentals/passive.js";
 import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
@@ -69,10 +69,7 @@ function formerPassiveActivity(value: RentalFactValue, professional: boolean | u
  * modeled, so line 22 waits (totals.ts allowedPassiveLoss): ask for it again.
  */
 function selfRentalIncomeOverPriorLoss(value: RentalFactValue): boolean {
-  return (
-    isSelfRentalNetIncome(value, netIncomeOrLoss(value)) === true &&
-    (value.priorYearUnallowedLoss ?? 0) > 0
-  );
+  return selfRentalState(value, netIncomeOrLoss(value)) === "waits";
 }
 
 /*
