@@ -58,6 +58,11 @@ export function register(): void {
           form["0.line.7"],
         ),
       "0.line.9d": (form) => sum(form["0.line.9a"], form["0.line.9b"], form["0.line.9c"]),
+      // MANUAL EDIT: line 10 = the taxpayer's stated modifications; blank when they state none.
+      "0.line.10": (_, info) => {
+        const stated = info.additionalModifications;
+        return typeof stated === "number" && stated !== 0 ? roundDollars(stated) : undefined;
+      },
       "0.line.11": (form) => sum(form["0.line.9d"], form["0.line.10"]),
       "0.line.12": (form) => netInvestmentIncome(form["0.line.8"], form["0.line.11"]),
       // MAGI = AGI; the FEIE/CFC add-backs are not modeled.
@@ -118,8 +123,6 @@ export function register(): void {
         "Other NII modifications (section 1411 NOL, estate/trust distributions, section 404(k) dividends, etc.) — no scenario modeled yet.",
       "0.line.9c":
         "Miscellaneous investment expenses are generally disallowed post-2017 (OBBBA made permanent); no ingestion path for allowable section 62/212 expenses.",
-      "0.line.10":
-        "Additional properly allocable deductions/modifications (Reg 1.1411-4(f)/(g), trader Schedule C losses) — no scenario or ingestion yet.",
       "0.line.18a":
         "Lines 18–21 are completed only by estates and trusts (Form 1041 filers). We only model individual 1040 filers, so this stays blank.",
       "0.line.18b":
