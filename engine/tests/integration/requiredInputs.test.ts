@@ -55,6 +55,15 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^adjustments\.educator_expenses\.(taxpayer|spouse)$/,
     "an answer Cade records only for an eligible K-12 educator (Schedule 1 line 11)",
   ],
+  [
+    /^identity\.(spouse\.)?blind$/,
+    "KNOWN GAP: Cade asks once and records it; absent counts as not visually impaired " +
+      "(CA 540 line 8). Federal 1040 line 12d does not read it yet.",
+  ],
+  [
+    /^ca_payments\.(estimated_tax|prior_year_overpayment_applied|extension_payment)$/,
+    "an answer Cade records only when the user made that California payment (Form 540 line 72)",
+  ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [/^identity\.(spouse\.)?name\.middle_initial$/, "printed when stated; not every name has one"],
   [

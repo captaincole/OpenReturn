@@ -110,6 +110,22 @@ export function register(): void {
         if (info.filingStatus === "qualifying_surviving_spouse") return undefined;
         return info.taxpayerBornBeforeJan2_1961 === true ? 1 : undefined;
       },
+      /*
+       * MANUAL EDIT: "If you (or your spouse/RDP) are visually impaired, enter 1; if
+       * both are visually impaired, enter 2" (the form). Only a joint return counts
+       * the spouse. Blank when no one is (ca-540-inst-2025::sec::line-8-blind-exemptions::b01).
+       * Line 6 (claimed as a dependent) is not modeled, as for line 7.
+       */
+      "line.8_blind_exemption_count": (_, info) => {
+        const count =
+          (info.taxpayerBlind ? 1 : 0) +
+          (info.filingStatus === "married_filing_jointly" && info.spouseBlind ? 1 : 0);
+        return count > 0 ? count : undefined;
+      },
+      "line.8_blind_exemption_amount": (form) => {
+        const count = form["line.8_blind_exemption_count"];
+        return typeof count === "number" ? count * 153 : undefined;
+      },
       "line.9_senior_exemption_amount": (form) => {
         const count = form["line.9_senior_exemption_count"];
         return typeof count === "number" ? count * 153 : undefined;
@@ -220,8 +236,7 @@ export function register(): void {
         return lookup.ok ? lookup.tax : undefined;
       },
       /*
-       * MANUAL EDIT: line 11, limited by the AGI Limitation Worksheet. Blind
-       * (line 8) counts as 0 until that input exists.
+       * MANUAL EDIT: line 11, limited by the AGI Limitation Worksheet.
        */
       "line.32_exemption_credits": (form, info) => {
         const agi = form["line.13_federal_agi"];
@@ -331,6 +346,9 @@ export function register(): void {
       },
       // MANUAL EDIT: round the W-2 box 17 sum to the nearest dollar.
       "line.71_ca_income_tax_withheld": (_, info) => roundDollars(info.w2StateWithholding),
+      // MANUAL EDIT: the total of the stated payments (ca-540-inst-2025::sec::line-72-2025-california-estimated-tax-and-other-payments::b01).
+      "line.72_ca_estimated_tax_payments": (_, info) =>
+        roundDollars(info.caEstimatedAndOtherPayments),
       "line.78_total_payments": (form) =>
         sum(
           form["line.71_ca_income_tax_withheld"],
@@ -494,10 +512,6 @@ export function register(): void {
         "Static instructions reference label on the form; no computable value — no scenario for QSS filing status with deceased spouse data ingested.",
       "header.claimed_as_dependent":
         "No scenario yet where the taxpayer themselves is claimed as a dependent by another person — no fact or decision models this.",
-      "line.8_blind_exemption_count":
-        "No blind/visual-impairment fact ingested yet. Need a 'disability.blind' or similar fact category before this can be computed.",
-      "line.8_blind_exemption_amount":
-        "Depends on line 8 blind exemption count which has no ingested fact path yet.",
       "line.31_tax_from_ftb_3800":
         "Checkbox indicating tax includes FTB 3800 (tax on child's unearned income). No FTB 3800 scenario or fact-ingestion path exists yet.",
       "line.31_tax_from_ftb_3803":
@@ -526,8 +540,6 @@ export function register(): void {
         "Line 45 is for additional credits claimed via Schedule P (540). No ingestion path for Schedule P credits exists yet — would require a separate Schedule P catalog and credit data.",
       "line.46_renters_credit":
         "Nonrefundable Renter's Credit eligibility requires income limits, rent paid, landlord details, and rental address data — no fact ingestion path or scenario built for this yet.",
-      "line.72_ca_estimated_tax_payments":
-        "California estimated tax payments and other prepayments are not captured in any current fact ingestion category — no scenario built for this yet.",
       "line.73_withholding_592b_593":
         "Form 592-B and 593 withholding (partnership/LLC/real estate withholding) requires separate fact ingestion — no ingestion path or scenario built yet.",
       "line.74_motion_picture_production_credit":

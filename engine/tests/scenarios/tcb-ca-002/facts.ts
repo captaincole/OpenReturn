@@ -4,6 +4,8 @@
  */
 
 import {
+  BLINDNESS_KEYS,
+  CA_PAYMENT_KEYS,
   EDUCATOR_EXPENSE_KEYS,
   makeBusinessFactKey,
   makeDependentFactKey,
@@ -139,6 +141,8 @@ const IDENTITY: TaxFactRow[] = [
   idFact("address.state", HOME.state),
   idFact("address.zip", HOME.zip),
   idFact("address.county", HOME.county, `${ANSWERS}: ca_form540.county_in_ca.`),
+  /* Not in the answers: the key's 540 line 8 (Blind count 1), as last year's return checks "Are blind". */
+  fact("identity", BLINDNESS_KEYS.taxpayer, true, "The key's Form 540 line 8 (Exemptions/Blind)."),
 ];
 
 const DOCUMENTS: TaxFactRow[] = [
@@ -177,6 +181,13 @@ const ANSWER_FACTS: TaxFactRow[] = [
     `${ANSWERS}: ca_form540.full_year_health_coverage.`,
   ),
   fact("other", "use_tax.owed_amount", 0, `${ANSWERS}: ca_form540.use_tax.`),
+  /* ca_payments: no estimated payments, $0 applied from 2024, $42 sent with the extension. */
+  fact(
+    "estimated_payments",
+    CA_PAYMENT_KEYS.extensionPayment,
+    42,
+    `${ANSWERS}: ca_payments.paid_extension true, extension_payment.`,
+  ),
   fact(
     "other",
     EDUCATOR_EXPENSE_KEYS.taxpayer,

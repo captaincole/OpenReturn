@@ -32,6 +32,12 @@ export interface Form540FilingInfo
   /** Line 91 radio group: "no_use_tax_owed" | "paid_directly_to_cdtfa". */
   useTaxZeroReason?: string;
   mailingSameAsResidence?: boolean;
+  /** Line 8: the taxpayer is visually impaired. */
+  taxpayerBlind?: boolean;
+  /** Line 8: the spouse is visually impaired (a joint return counts it). */
+  spouseBlind?: boolean;
+  /** Line 72: the California payments the taxpayer states, summed; undefined when none is recorded. */
+  caEstimatedAndOtherPayments?: Money;
   /** Separate from the federal refund decision: the two can differ. */
   refundFullOverpaymentCA?: boolean;
 }
