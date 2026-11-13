@@ -13,7 +13,7 @@ A qualifying surviving spouse in California, born 1958, whose spouse died in 202
 
 The answer key is the case's correct **California** return: the FTB e-file XML in the case's `output.xml`. `expected.ts` copies its values. The case has no federal key: the federal forms are evaluated as inputs to the CA return (Schedule CA column A, Form 540 line 13) and not checked; their goldens are locked engine output.
 
-Forms checked: Form 540, Schedule CA (540) and Schedule P (540). Federal forms evaluated: Form 1040, Schedules 1, 2, A, B, D and 8812, Forms 6251, 8889 and 8949.
+Forms checked: Form 540, Schedule CA (540) and Schedule P (540). Federal forms evaluated: Form 1040, Schedules 1, 1-A, 2, A, B, D and 8812, Forms 6251, 8889, 8949 and 8960.
 
 ## Inputs
 
@@ -42,6 +42,7 @@ Forms checked: Form 540, Schedule CA (540) and Schedule P (540). Federal forms e
 - The answers give no real estate, personal property or mortgage amounts, no gifts other than cash and no investment fees; the facts state each as 0, so Schedule A and Schedule CA Part II print 0 on those lines where the key leaves them blank. None of them is a checked line.
 - The county is the answers' San Diego, although the address is in Los Angeles.
 - The son's name and SSN come from the key's dependent row.
+- Form 8889 line 3 prorates the self-only limit over the 6 months the answers give. The last-month rule treats a filer as eligible all year only if they were an eligible individual on December 1, and an eligible individual "cannot be enrolled in Medicare" (`irs-8889-inst-2025::sec::who-must-file::b02`). The answers give HDHP coverage on December 1 but only 6 months without Medicare for a 67-year-old, so the case does not show eligibility on December 1; the engine does not apply the rule. The deduction is $2,500 either way, since both limits ($2,650 prorated, $5,300 for the year) exceed it.
 - The $1,500 code 2 distribution is the answers' `hsaRolloverTP`; it goes on Form 8889 line 14b, which holds both rollovers and excess contributions withdrawn by the due date (`irs-8889-inst-2025::sec::line-14b::b01`).
 
 ## Lines the key fills that the engine leaves blank, on purpose
@@ -53,4 +54,4 @@ Forms checked: Form 540, Schedule CA (540) and Schedule P (540). Federal forms e
 
 ## Federal lines
 
-The case has no federal key, so the federal lines are not checked. Form 6251 files because the ISO spread is above 0, and the federal goldens carry $2,408 of alternative minimum tax. The answers also give Form 6251 adjustments the engine has no facts for (disposition of property $1,750, passive activities $56, post-1986 depreciation −$80, related adjustments $20), Form 8960 modifications (Form 8960 does not file: modified AGI is under $250,000), and a mortgage credit certificate (Form 8396, not modeled). Form 8889 line 17a (the age-65 exception to the 20% tax) is unsupported; with the exception the tax is 0, so no line changes.
+The case has no federal key, so the federal lines are not checked. The locked federal goldens show the engine's return: Schedule 1-A line 38 is 0 (the senior deduction phases out fully at this income), Form 1040 line 14 is $33,100, line 15 $216,008 and line 16 $33,165. Form 6251 files because the ISO spread is above 0, and its line 11 puts $2,408 of alternative minimum tax on Form 1040 line 17; line 24 is $35,573 and the return owes $26,578 (line 37). Form 8960 files because the engine tests an upper bound of modified AGI against the $250,000 threshold; it computes no tax (modified AGI is $249,108), and its line 9b waits for the state income tax allocable to investment income, which the case does not give. The answers also give Form 6251 adjustments the engine has no facts for (disposition of property $1,750, passive activities $56, post-1986 depreciation −$80, related adjustments $20), Form 8960 modifications (lines 5b, 5c, 6 and 7, unsupported), and a mortgage credit certificate (Form 8396, not modeled). Form 8889 line 17a (the age-65 exception to the 20% tax) is unsupported; with the exception the tax is 0, so no line changes.
