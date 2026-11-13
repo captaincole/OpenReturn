@@ -10,6 +10,7 @@ import {
   isInterestFactKey,
   isRetirementDistributionFactKey,
   isSocialSecurityFactKey,
+  readRothIraFact,
   readTraditionalIraFact,
   type IraOwner,
   type RetirementDistributionFactValue,
@@ -26,6 +27,7 @@ import {
   text,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "../8606/partIII.js";
 import { form8606Filers } from "../8606/resolveInfo.js";
 import { resolveScheduleAInfo } from "../schedule-a/resolveInfo.js";
 import { eicQuestions, resolveEicLineInfo } from "../schedule-eic/eicAnswers.js";
@@ -73,7 +75,7 @@ const ROLLOVER_CODES = ["G", "H"];
 
 /*
  * Code Q is not taxable. Codes J and T take the taxable part from Form 8606
- * Part III, which is not modeled, so box 2a is not used. Code Y, a qualified
+ * Part III (rothTaxable below), so box 2a is not used here. Code Y, a qualified
  * charitable distribution, is not modeled (1040 inst., lines 4a/4b, Exception 3).
  */
 export function rowTaxable(distribution: RetirementDistributionFactValue): number | undefined {
@@ -110,6 +112,24 @@ export function traditionalTaxable(
 }
 
 /*
+ * A person's Roth IRA rows: code Q is not taxable; codes J and T take Form 8606
+ * line 25c (Part III, partIII.ts), once for all of them, when the Roth IRA
+ * answers are there. Line 23 of zero means nothing is taxable.
+ */
+function rothTaxable(
+  inputs: ResolverInputs,
+  owner: IraOwner,
+  rows: RetirementDistributionFactValue[],
+): Array<number | undefined> {
+  const qualified = rows.filter((row) => !hasDistributionCode(row, NONQUALIFIED_ROTH_CODES));
+  const partIII = rows.filter((row) => hasDistributionCode(row, NONQUALIFIED_ROTH_CODES));
+  if (partIII.length === 0) return qualified.map(rowTaxable);
+  const answers = readRothIraFact(inputs.factByKey, owner);
+  const line25c = answers ? partIIIFigures(partIII, answers).line25c : undefined;
+  return [...qualified.map(rowTaxable), line25c];
+}
+
+/*
  * Exception 2: a person who files Form 8606 takes the taxable part from it
  * (the line 4b binding): line 18 for a Roth conversion, and line 15c for the
  * other distributions when Part I applies. Without Part I there is no basis
@@ -120,7 +140,7 @@ function iraLine(inputs: ResolverInputs, rows: RetirementDistributionFactValue[]
   const filerOf = (owner: IraOwner) => filers.find((holder) => holder.owner === owner);
   const ownerTaxable = (owner: IraOwner): number | undefined => {
     const own = rows.filter((row) => (row.owner ?? "taxpayer") === owner);
-    const roth = own.filter(isRothIra).map(rowTaxable);
+    const roth = rothTaxable(inputs, owner, own.filter(isRothIra));
     const ira = readTraditionalIraFact(inputs.factByKey, owner);
     const filer = filerOf(owner);
     // A conversion is taken off the rows here, because line 18 gives its taxable part.

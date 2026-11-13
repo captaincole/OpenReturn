@@ -17,10 +17,16 @@ import { resolve8889Info } from "../8889/resolveInfo.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
+import { schedule1Answers } from "./answers.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 
 export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInfo {
-  const misc = factsInCategory(inputs, "other").filter((row) => isMiscIncomeFactKey(row.key));
+  // A 1099-MISC that pays a business is in that business's gross receipts, not line 8z.
+  const misc = factsInCategory(inputs, "other").filter(
+    (row) =>
+      isMiscIncomeFactKey(row.key) &&
+      (row.value as Record<string, unknown>)?.businessId === undefined,
+  );
   const miscOtherIncome =
     misc.length > 0
       ? sum(...misc.map((row) => (row.value as Record<string, unknown>).box3))
@@ -45,12 +51,30 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   const scheduleSE = resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value === true;
   // Schedule E line 41 reaches the 1040 only through Schedule 1 line 5.
   const scheduleE = resolveScheduleEInfo(inputs).mustFile?.["schedule-e"]?.value === true;
+  const answers = schedule1Answers(inputs);
+  const stated = [
+    answers.alimonyReceived,
+    answers.juryDutyPay,
+    answers.prizesAndAwards,
+    answers.stockOptions,
+    ...(answers.otherIncomeItems ?? []).map((item) => item.amount),
+    answers.selfEmployedPlanDeduction,
+    answers.alimonyPaid,
+    answers.juryDutyPayToEmployer,
+    answers.reforestation,
+    answers.tradeActBenefitRepayment,
+    answers.section501c18dContributions,
+    answers.discriminationClaimFees,
+    answers.whistleblowerAwardFees,
+    answers.iraContributions,
+  ].some((amount) => (amount ?? 0) > 0);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
-        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), or Form 8889 filed (${form8889})`,
+        rule: `fallback: a stated Schedule 1 amount (${stated}), 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), or Form 8889 filed (${form8889})`,
         value:
+          stated ||
           (miscOtherIncome ?? 0) > 0 ||
           (gamblingWinnings ?? 0) > 0 ||
           (alaskaPermanentFundDividends ?? 0) > 0 ||
@@ -62,6 +86,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     ],
   });
   return {
+    ...answers,
     mustFile: { "schedule-1": resolution },
     businessIncome,
     hasBusiness,

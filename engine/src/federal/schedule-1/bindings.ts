@@ -6,6 +6,7 @@
 
 import { defineForm } from "../../defineForm.js";
 import { roundDollars, sum } from "../../money.js";
+import { answerBindings } from "./answerBindings.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import type { Schedule1 } from "./types.js";
 
@@ -26,9 +27,8 @@ export function register(): void {
         const line13 = form["schedule-se.0.line.13"];
         return typeof line13 === "number" ? line13 : undefined;
       },
-      // MANUAL EDIT: line 8z = 1099-MISC box 3 other income.
-      "0.line.8z": (_, info) => roundDollars(info.miscOtherIncome),
-      "0.line.8z_type": (_, info) => (info.miscOtherIncome ? "Form 1099-MISC" : undefined),
+      // MANUAL EDIT: lines 2a, 2b, 8h, 8i, 8k, 8z, 16, 19a–20 and 24a–24i from the answers (answerBindings.ts).
+      ...answerBindings(),
       // MANUAL EDIT: line 8g = the Alaska Permanent Fund dividend (irs-pub-525-2025::sec::other-income::b01).
       "0.line.8g": (_, info) => roundDollars(info.alaskaPermanentFundDividends),
       // MANUAL EDIT: lines 8a, 8d and 8s are subtractions (printed in parentheses).
@@ -123,8 +123,6 @@ export function register(): void {
       "0.header.form_1099k_error_amount":
         "No fact for a 1099-K amount in error or for personal items sold at a loss; a 1099-K that names no business stays open on Schedule C.",
       "0.line.1": "No 1099-G or state-refund taxability worksheet scenario yet.",
-      "0.line.2a": "No alimony-received scenario yet.",
-      "0.line.2b": "No alimony scenario yet, so there is no divorce-agreement date fact.",
       "0.line.4_form_4797": "No Form 4797 business-property sale scenario yet.",
       "0.line.4_form_4684": "No Form 4684 casualty/theft scenario yet.",
       "0.line.4": "No Form 4797 or Form 4684 scenario yet.",
@@ -136,11 +134,7 @@ export function register(): void {
       "0.line.8c": "No 1099-C cancellation-of-debt ingestion yet",
       "0.line.8d": "No Form 2555 foreign earned income exclusion scenario yet",
       "0.line.8e": "No Form 8853 (Archer MSA / LTC) scenario yet",
-      "0.line.8h": "No jury duty pay ingestion/scenario yet.",
-      "0.line.8i":
-        "No prizes/awards ingestion yet; 1099-MISC box 3 is routed to line 8z by convention.",
       "0.line.8j": "No hobby (not-for-profit activity) income scenario yet.",
-      "0.line.8k": "No stock option exercise income (not on W-2) scenario yet.",
       "0.line.8l": "No personal-property rental income scenario yet.",
       "0.line.8m": "No Olympic/Paralympic medal or USOC prize money scenario yet.",
       "0.line.8n": "No Form 5471 / CFC subpart F inclusion scenario yet.",
@@ -158,27 +152,12 @@ export function register(): void {
       "1.line.12": "No Form 2106 (reservist/performing artist/fee-basis official) scenario yet.",
       "1.line.14_storage_fees_only": "No Armed Forces moving-expense (Form 3903) scenario yet.",
       "1.line.14": "No Armed Forces moving-expense (Form 3903) scenario yet.",
-      "1.line.16": "No self-employed retirement plan scenario yet.",
       "1.line.17": "No self-employed health insurance scenario yet.",
-      "1.line.19a": "No alimony-paid fact ingestion or scenario yet.",
-      "1.line.19b": "No alimony-paid scenario yet; recipient SSN not ingested.",
-      "1.line.19c": "No alimony-paid scenario yet; divorce agreement date not ingested.",
-      "1.line.20_mfs_lived_apart":
-        "No MFS/IRA-deduction scenario yet; lived-apart status not captured.",
-      "1.line.20":
-        "No traditional IRA contribution facts or IRA Deduction Worksheet implementation yet.",
       "1.line.21": "No Form 1098-E student loan interest ingestion or worksheet yet.",
       "1.line.23": "Form 8853 (Archer MSA) not ingested; no scenario.",
-      "1.line.24a": "No jury duty pay facts or employer-remittance scenario yet.",
       "1.line.24b": "No personal-property rental scenario (line 8l) yet.",
       "1.line.24c": "No Olympic/Paralympic medal or USOC prize scenario (line 8m) yet.",
-      "1.line.24d": "No reforestation/Form 4562 timber property scenario or fact ingestion yet.",
-      "1.line.24e":
-        "No Trade Act supplemental unemployment benefit repayment scenario or facts yet.",
-      "1.line.24f": "No section 501(c)(18)(D) pension plan contribution facts ingested yet.",
       "1.line.24g": "No chaplain 403(b) contribution scenario or facts yet.",
-      "1.line.24h": "No unlawful-discrimination claim award/attorney fee scenario or facts yet.",
-      "1.line.24i": "No IRS whistleblower award attorney fee scenario or facts yet.",
       "1.line.24j":
         "Form 2555 (foreign housing deduction) not ingested; no foreign-income scenario yet.",
       "1.line.24k":
