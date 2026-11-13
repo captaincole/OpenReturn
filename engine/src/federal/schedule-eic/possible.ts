@@ -70,9 +70,17 @@ function businessFloor(inputs: ResolverInputs, joint: boolean): number | undefin
 /*
  * Schedule SE: the deduction for half of self-employment tax (Schedule 1 line
  * 15) is at most half of 15.3% of 92.35% of a profit, so line 31 less it is at
- * least this share of the profit.
+ * least this share of the profit, before rounding.
  */
 const PROFIT_AFTER_HALF_SE_TAX = 1 - (0.153 * 0.9235) / 2;
+
+/*
+ * Schedule SE rounds lines 4a, 10, 11 and 13 to whole dollars. Together they
+ * can raise half of SE tax by about $1.04 over the exact share (0.5 × 15.3% on
+ * line 4a, 0.5 on each of lines 10 and 11, halved, then 0.5 on line 13). Each
+ * profit takes off $2 more, so the bound stays below the real amount.
+ */
+const SE_ROUNDING_ALLOWANCE = 2;
 
 /*
  * The least each business adds to AGI: a loss as businessFloor counts it, and a
@@ -89,7 +97,8 @@ function businessIncomeFloor(inputs: ResolverInputs, joint: boolean): number | u
   return sum(
     ...onReturn.map((business, index) => {
       const line31 = netProfit(business, onReturn);
-      if (line31 !== undefined && line31 > 0) return line31 * PROFIT_AFTER_HALF_SE_TAX;
+      if (line31 !== undefined && line31 > 0)
+        return line31 * PROFIT_AFTER_HALF_SE_TAX - SE_ROUNDING_ALLOWANCE;
       return Math.min(0, line31 ?? lines29[index]!);
     }),
   );
