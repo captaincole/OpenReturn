@@ -591,7 +591,7 @@ export function register(): void {
       "line.12b_dual_status_alien":
         "No dual-status alien scenario ingested yet — this checkbox requires a residency/immigration-status fact we don't model.",
       "line.12d_you_blind":
-        "No blindness fact ingested — we don't yet have a fact key for the taxpayer's blindness status.",
+        "The blindness fact (identity.blind) feeds only CA 540 line 8; this box and the added standard deduction for blindness are not built yet.",
       "line.12d_spouse_blind":
         "No MFJ/spouse scenario ingested yet — spouse blindness fact does not exist.",
       "line.16_from_form_8814":
