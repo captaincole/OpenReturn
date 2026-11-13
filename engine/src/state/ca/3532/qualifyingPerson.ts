@@ -8,6 +8,8 @@ import {
   getDependentFacts,
   HEAD_OF_HOUSEHOLD_KEYS,
   makeDependentFactKey,
+  normalizeRelationship,
+  QUALIFYING_CHILD_RELATIONSHIPS,
   type CaHohMaritalStatus,
   type DependentFactValue,
 } from "../../../facts/index.js";
@@ -56,16 +58,12 @@ export function findQualifyingPerson(inputs: ResolverInputs): {
   };
 }
 
-const spelled = (relationship: string) =>
-  relationship
-    .toLowerCase()
-    .replaceAll("-", " ")
-    .split(" ")
-    .filter((word) => word !== "")
-    .join(" ");
-
-/* Line 2's boxes a–e, as the form lists each relationship (the 1040 spellings too). */
-const LINE_2_BOXES: ReadonlyArray<[string, ReadonlyArray<string>]> = [
+/*
+ * Line 2's boxes, as the form's own text lists each relationship (the 1040
+ * spellings too). Boxes a, b and c are the qualifying-child relationships
+ * (QUALIFYING_CHILD_RELATIONSHIPS); d and e are qualifying relatives.
+ */
+const QUALIFYING_CHILD_BOXES: ReadonlyArray<[string, ReadonlyArray<string>]> = [
   [
     "child_or_stepchild",
     [
@@ -96,7 +94,9 @@ const LINE_2_BOXES: ReadonlyArray<[string, ReadonlyArray<string>]> = [
       "niece",
     ],
   ],
-  ["foster_child", ["foster child", "eligible foster child"]],
+  ["foster_child", ["foster child"]],
+];
+const QUALIFYING_RELATIVE_BOXES: ReadonlyArray<[string, ReadonlyArray<string>]> = [
   [
     "parent_or_stepparent",
     ["father", "mother", "stepfather", "stepmother", "parent", "stepparent"],
@@ -119,10 +119,30 @@ const LINE_2_BOXES: ReadonlyArray<[string, ReadonlyArray<string>]> = [
   ],
 ];
 
-/* Line 2's option for the relationship, or undefined when no box names it. */
-export function relationshipBox(relationship: string): string | undefined {
-  const words = spelled(relationship);
-  return LINE_2_BOXES.find(([, names]) => names.includes(words))?.[0];
+const boxNaming = (boxes: ReadonlyArray<[string, ReadonlyArray<string>]>, words: string) =>
+  boxes.find(([, names]) => names.includes(words))?.[0];
+
+/*
+ * Line 2's option for the relationship, or the reason no box applies. A
+ * qualifying-child relationship the form's line 2 text does not name (a
+ * great-grandchild, a grandniece) has no box: the FTB 3532 instructions do not
+ * say which box it takes (ca-3532-inst-2025::sec::line-2::b01), and FTB Pub. 1540
+ * is not in the corpus.
+ */
+export function relationshipBox(relationship: string): { box?: string; gap?: string } {
+  const words = normalizeRelationship(relationship);
+  if (QUALIFYING_CHILD_RELATIONSHIPS.has(words)) {
+    const box = boxNaming(QUALIFYING_CHILD_BOXES, words);
+    return box
+      ? { box }
+      : {
+          gap: `Line 2 names no box for a qualifying child who is a "${relationship}"; a person checks the box.`,
+        };
+  }
+  const box = boxNaming(QUALIFYING_RELATIVE_BOXES, words);
+  return box
+    ? { box }
+    : { gap: `No line 2 box lists the relationship "${relationship}"; a person checks the box.` };
 }
 
 /* Line 3: "If your qualifying person is age 19 or older in 2025, go to line 3a. If not, go to line 4." */
@@ -143,8 +163,9 @@ const bornIn = (dob: string | undefined, year: number) => dob?.trim().endsWith(`
 
 /*
  * Line 5 (ca-3532-inst-2025::sec::line-5::b02, b04): the days the qualifying person
- * lived with the taxpayer. The stated days win. A birth during the year is 365
- * days. Otherwise twelve months in the home is every day of the year, but only for
+ * lived with the taxpayer. "In the event of a birth or death of your qualifying
+ * person during the year, enter 365 days" (b04): a birth in 2025 is 365 whatever
+ * days are stated; a death has no fact yet. Otherwise the stated days, or twelve months in the home is every day of the year, but only for
  * a taxpayer who did not live with a spouse/RDP during the year (boxes a, b, c,
  * e): boxes d and f count half the days the spouse/RDP also lived there, so they
  * need the stated days. Undefined while the days are not known.
@@ -153,8 +174,8 @@ export function daysLivedWithTaxpayer(
   dependent: DependentFactValue,
   maritalStatus: CaHohMaritalStatus | undefined,
 ): number | undefined {
-  if (dependent.daysLivedWithYou !== undefined) return dependent.daysLivedWithYou;
   if (bornIn(dependent.dob, TAX_YEAR)) return DAYS_IN_2025;
+  if (dependent.daysLivedWithYou !== undefined) return dependent.daysLivedWithYou;
   const countsEveryDay =
     maritalStatus !== undefined &&
     maritalStatus !== "divorced_or_separated" &&
