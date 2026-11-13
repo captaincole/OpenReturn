@@ -1,0 +1,349 @@
+{
+  "form": {
+    "formId": "form-3532",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Head of Household Filing Status Schedule"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3532.0.header.name",
+      "label": "Name or names as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1001",
+      "position": {
+        "page": 0,
+        "x": 36.5,
+        "y": 679.074
+      }
+    },
+    {
+      "fieldId": "form-3532.0.header.ssn",
+      "label": "Social Security Number or Individual Taxpayer Identification Number. Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1002",
+      "position": {
+        "page": 0,
+        "x": 466.48,
+        "y": 678.574
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3532.0.line.1_marital_status",
+      "label": "Line 1 — Check one box below to identify your marital status",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3532_1003 RB",
+      "position": {
+        "page": 0,
+        "x": 553,
+        "y": 631.125
+      },
+      "options": [
+        {
+          "value": "not_married",
+          "radioOption": "Line 1 A. Not legally married/Registered Domestic Partnership during 2025.",
+          "label": "1a — Not legally married/RDP during 2025"
+        },
+        {
+          "value": "surviving_spouse",
+          "radioOption": "Line 1 b . Surviving spouse/Registered Domestic Partner (my spouse/Registered Domestic Partner died before 01/01/2025).",
+          "label": "1b — Surviving spouse/RDP (my spouse/RDP died before 01/01/2025)"
+        },
+        {
+          "value": "annulled",
+          "radioOption": "Line 1 c. Marriage/Registered Domestic Partnership was annulled.",
+          "label": "1c — Marriage/RDP was annulled"
+        },
+        {
+          "value": "divorced_or_separated",
+          "radioOption": "Line 1 d. Received final decree of divorce, legal separation, dissolution, or termination of marriage/Registered Domestic Partnership by 12/31/2025 .\r",
+          "label": "1d — Received final decree of divorce, legal separation, dissolution, or termination of marriage/RDP by 12/31/2025"
+        },
+        {
+          "value": "married_lived_apart",
+          "radioOption": "Line 1 e. Legally married/Registered Domestic Partner and did not live with spouse/Registered Domestic Partner during 2025 .\r",
+          "label": "1e — Legally married/RDP and did not live with spouse/RDP during 2025"
+        },
+        {
+          "value": "married_lived_together",
+          "radioOption": "Line 1 f. Legally married/Registered Domestic Partner and lived with spouse/Registered Domestic Partner during 2025 . List the beginning and ending dates for each period when you lived together.",
+          "label": "1f — Legally married/RDP and lived with spouse/RDP during 2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.1f_from_1",
+      "label": "List the beginning FROM date as a two digit month/two digit day/four digit year.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1009",
+      "position": {
+        "page": 0,
+        "x": 192.75,
+        "y": 493.4
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3532.0.line.1f_to_1",
+      "label": "List the ending TO date as a two digit month/two digit day/four digit year.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1010",
+      "position": {
+        "page": 0,
+        "x": 284.75,
+        "y": 493.4
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3532.0.line.1f_from_2",
+      "label": "Second beginning date: List the second FROM date as a two digit month/two digit day/four digit year.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1011",
+      "position": {
+        "page": 0,
+        "x": 409.75,
+        "y": 493.4
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3532.0.line.1f_to_2",
+      "label": "Second ending date: List the second ending TO date as a two digit month/two digit day/four digit year.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1012",
+      "position": {
+        "page": 0,
+        "x": 500.75,
+        "y": 493.4
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3532.0.line.2_qualifying_person_relationship",
+      "label": "Line 2 — Check one box below to identify the relationship of the person that qualifies you for the head of household filing status",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3532_1013 RB",
+      "position": {
+        "page": 0,
+        "x": 552.625,
+        "y": 431.375
+      },
+      "options": [
+        {
+          "value": "child_or_stepchild",
+          "radioOption": "Line 2 a. Son, daughter, stepson, or stepdaughter.",
+          "label": "2a — Son, daughter, stepson, or stepdaughter"
+        },
+        {
+          "value": "grandchild_sibling_niece_nephew",
+          "radioOption": "Line 2 b. Grandchild, brother, sister, half brother, half sister, stepbrother, stepsister, nephew, or niece.",
+          "label": "2b — Grandchild, brother, sister, half brother, half sister, stepbrother, stepsister, nephew, or niece"
+        },
+        {
+          "value": "foster_child",
+          "radioOption": "Line 2 c. Eligible foster child.",
+          "label": "2c — Eligible foster child"
+        },
+        {
+          "value": "parent_or_stepparent",
+          "radioOption": "Line 2 d. Father, mother, stepfather, or stepmother.",
+          "label": "2d — Father, mother, stepfather, or stepmother"
+        },
+        {
+          "value": "other_relative",
+          "radioOption": "Line 2 e. Grandfather, grandmother, son-in-law, daughter-in-law, father-in-law, mother-in-law, brother-in-law, sister-in-law, uncle, or aunt.",
+          "label": "2e — Grandfather, grandmother, son-in-law, daughter-in-law, father-in-law, mother-in-law, brother-in-law, sister-in-law, uncle, or aunt"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.3_first_name",
+      "label": "Part three. Qualifying Person Information. Line 3 . First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1018",
+      "position": {
+        "page": 0,
+        "x": 467.75,
+        "y": 274.75
+      }
+    },
+    {
+      "fieldId": "form-3532.0.line.3_last_name",
+      "label": "Line 3 .  Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1019",
+      "position": {
+        "page": 0,
+        "x": 467.75,
+        "y": 253.75
+      }
+    },
+    {
+      "fieldId": "form-3532.0.line.3_ssn",
+      "label": "Line 3 . Social Security Number. Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1020",
+      "position": {
+        "page": 0,
+        "x": 467.75,
+        "y": 232.75
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3532.0.line.3_date_of_birth",
+      "label": "Line 3 . Date of birth. Enter date as a 2 digit month/2 digit day/4 digit year. If your qualifying person is age 19 or older in 2025, go to line 3a. If not, go to line 4 .",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1021",
+      "position": {
+        "page": 0,
+        "x": 467.75,
+        "y": 211.75
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3532.0.line.3a_full_time_student_under_24",
+      "label": "Line 3a — Was your qualifying person a full time student under age 24 in 2025?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3532_1022 RB",
+      "position": {
+        "page": 0,
+        "x": 484.05,
+        "y": 190.75
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.3b_permanently_disabled",
+      "label": "Line 3b — Was your qualifying person permanently and totally disabled in 2025?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3532_1023 RB",
+      "position": {
+        "page": 0,
+        "x": 484.05,
+        "y": 169.25
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.4_gross_income",
+      "label": "Line 4 . Enter qualifying person’s gross income in 2025 . See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1024",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 144.25
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3532.0.line.5_days_lived_with_you",
+      "label": "Line 5 . Number of days your qualifying person lived with you during 2025 . See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3532_1025",
+      "position": {
+        "page": 0,
+        "x": 467.75,
+        "y": 120.25
+      },
+      "maxLength": 3
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3532/blank.pdf",
+    "ingestedAt": "2026-11-13T04:50:49.678Z",
+    "totalFields": 16,
+    "skipped": 0,
+    "catalogEntries": 16
+  }
+}
