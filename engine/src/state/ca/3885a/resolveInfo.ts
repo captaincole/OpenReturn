@@ -1,7 +1,7 @@
-import { businessesOnReturn, rentalsOnReturn, type RentalFactValue } from "../../../facts/index.js";
+import type { RentalFactValue } from "../../../facts/index.js";
+import { depreciationActivities } from "../../../federal/4562/resolveInfo.js";
 import { selfRentalState } from "../../../federal/rentals/passive.js";
 import { netIncomeOrLoss } from "../../../federal/schedule-e/lines.js";
-import { filingStatusOf } from "../../../filingInfoResolvers.js";
 import { resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
 import type { Form3885AActivity, Form3885AFilingInfo } from "./filingInfo.js";
 import { form3885AFigures, mustFile3885A } from "./lines.js";
@@ -27,40 +27,17 @@ function rentalPassive(property: RentalFactValue): boolean | undefined {
   return selfRental !== "recharacterized";
 }
 
-/* Every business and rental of this return with depreciation answers, as FTB 3885A sees them. */
+/* Every business and rental of this return with depreciation answers (Form 4562's list), with line 1. */
 export function caDepreciationActivities(inputs: ResolverInputs): Form3885AActivity[] {
-  const status = filingStatusOf(inputs);
-  const joint = status === undefined || status === "married_filing_jointly";
-  const businesses = businessesOnReturn(inputs.facts, joint).businesses.flatMap(({ key, value }) =>
-    value.depreciation
-      ? [
-          {
-            factKey: key,
-            kind: "business" as const,
-            name: value.name ?? value.activity,
-            passive:
-              value.materiallyParticipated === undefined
-                ? undefined
-                : !value.materiallyParticipated,
-            depreciation: value.depreciation,
-          },
-        ]
-      : [],
-  );
-  const rentals = rentalsOnReturn(inputs.facts, joint).properties.flatMap(({ key, value }) =>
-    value.depreciation
-      ? [
-          {
-            factKey: key,
-            kind: "rental" as const,
-            name: value.address?.street ?? "Rental property",
-            passive: rentalPassive(value),
-            depreciation: value.depreciation,
-          },
-        ]
-      : [],
-  );
-  return [...businesses, ...rentals];
+  return depreciationActivities(inputs).map((activity) => ({
+    ...activity,
+    passive:
+      activity.kind === "rental"
+        ? rentalPassive(activity.rental)
+        : activity.business.materiallyParticipated === undefined
+          ? undefined
+          : !activity.business.materiallyParticipated,
+  }));
 }
 
 /*

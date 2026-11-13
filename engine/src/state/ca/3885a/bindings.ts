@@ -1,9 +1,9 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm, type BindingFn } from "../../../defineForm.js";
-import { RECOVERY_YEARS } from "../../../federal/4562/assets.js";
+import { METHOD_TEXT, RECOVERY_YEARS } from "../../../federal/4562/assets.js";
 import { unsupported } from "../../../types.js";
-import { SSN } from "../../../values.js";
+import { ISODate, isoDate, SSN } from "../../../values.js";
 import type { Form3885AFilingInfo } from "./filingInfo.js";
 import {
   CA_SECTION_179_GAP,
@@ -18,7 +18,6 @@ import type { Form3885A } from "./types.js";
 type Bindings = Partial<{ [K in keyof Form3885A]: BindingFn<Form3885A, Form3885AFilingInfo, K> }>;
 
 /* ca-3885a-inst-2025: the method as the federal Form 4562 column (f) prints it. */
-const METHOD_TEXT = { "200DB": "200 DB", "150DB": "150 DB", SL: "S/L" } as const;
 const MORE_ROWS =
   "The activity has more than four rows for this table; the engine writes no attached statement.";
 
@@ -32,11 +31,6 @@ const figuresOf = (info: Form3885AFilingInfo) => {
 
 /* Column (e) in years with one decimal, as 5.0 or 27.5. */
 const lifeText = (years: number) => (Number.isInteger(years) ? `${years}.0` : `${years}`);
-
-const formDate = (iso: string) => {
-  const [year, month, day] = iso.split("-");
-  return `${month}/${day}/${year}`;
-};
 
 /* A total line; unsupported with the activity's gap. */
 const total =
@@ -74,7 +68,7 @@ function rowBindings<Row>(
  */
 const line3Rows = rowBindings<CaliforniaAssetRow>("3", (figures) => figures.line3, {
   description: (row) => row.asset.description,
-  date_placed_in_service: (row) => formDate(row.asset.placedInService),
+  date_placed_in_service: (row) => ISODate.usSlash(isoDate(row.asset.placedInService)),
   california_basis: (row) => row.basis,
   method: (row) => METHOD_TEXT[row.asset.method],
   life_or_rate: (row) => lifeText(RECOVERY_YEARS[row.asset.recoveryClass]),
@@ -84,7 +78,7 @@ const line3Rows = rowBindings<CaliforniaAssetRow>("3", (figures) => figures.line
 /* Line 9 (::line-9::b01): each cost whose amortization begins in 2025; column (e) in months. */
 const line9Rows = rowBindings<CaliforniaAmortizationRow>("9", (figures) => figures.line9, {
   description: (row) => row.cost.description,
-  date_amortization_begins: (row) => formDate(row.cost.beginsOn),
+  date_amortization_begins: (row) => ISODate.usSlash(isoDate(row.cost.beginsOn)),
   california_basis: (row) => row.basis,
   code_section: (row) => row.cost.codeSection,
   period_or_percentage: (row) => `${row.cost.periodMonths} months`,

@@ -5,7 +5,12 @@
  * allowance (state/ca/3885a), so the rate functions take the basis as input.
  */
 
-import type { DepreciableAsset, DepreciationConvention, RecoveryClass } from "../../facts/index.js";
+import type {
+  DepreciableAsset,
+  DepreciationConvention,
+  DepreciationMethod,
+  RecoveryClass,
+} from "../../facts/index.js";
 import { roundDollars, stepsOf } from "../../money.js";
 
 /*
@@ -31,6 +36,13 @@ const MID_MONTH_CLASSES: readonly RecoveryClass[] = [
   "nonresidential_real",
   "50_year",
 ];
+
+/* ::b03: column (f) prints "200 DB", "150 DB" or "S/L". FTB 3885A column (d) uses the same text. */
+export const METHOD_TEXT: Record<DepreciationMethod, string> = {
+  "200DB": "200 DB",
+  "150DB": "150 DB",
+  SL: "S/L",
+};
 
 /* ::b05: water utility, residential rental, nonresidential real and railroad gradings take straight line only. */
 const STRAIGHT_LINE_CLASSES: readonly RecoveryClass[] = [
