@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   SPOUSE_KEYS,
   makeGamblingWinningsFactKey,
+  makeMiscIncomeFactKey,
   makeNonemployeeCompensationFactKey,
   makePaymentTransactionsFactKey,
   type GamblingWinningsFactValue,
@@ -100,6 +101,24 @@ describe("line 25b 1099-K slot", () => {
 
   it("is blank when the 1099-K has no box 4", () => {
     expect(slot([form1099K()])).toBeUndefined();
+  });
+});
+
+describe("line 25b 1099-MISC slot", () => {
+  const form1099Misc = (slug: string, box4?: number, businessId?: string) => ({
+    key: makeMiscIncomeFactKey(slug),
+    category: "other",
+    value: { payerName: "Payer", box3: 500, box4, businessId },
+  });
+  const slot = (facts: ReturnType<typeof form1099Misc>[]) =>
+    resolve1040Info(makeResolverInputs({ facts, decisions: [] })).form1099FederalWithholding;
+
+  it("adds box 4 with or without a business", () => {
+    expect(slot([form1099Misc("a", 3), form1099Misc("b", 4.5, "business-1")])).toBeCloseTo(7.5);
+  });
+
+  it("is blank when no 1099-MISC has box 4", () => {
+    expect(slot([form1099Misc("a")])).toBeUndefined();
   });
 });
 
