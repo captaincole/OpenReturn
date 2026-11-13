@@ -19,6 +19,7 @@ import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
 import { earlyWithdrawalPenalty, educatorExpenseDeduction } from "./adjustments.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
+import { resolveStudentLoanInterest } from "./studentLoanInterest.js";
 
 export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInfo {
   const misc = factsInCategory(inputs, "other").filter((row) => isMiscIncomeFactKey(row.key));
@@ -46,11 +47,13 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   const scheduleE = resolveScheduleEInfo(inputs).mustFile?.["schedule-e"]?.value === true;
   const educatorExpenses = educatorExpenseDeduction(inputs, jointReturn);
   const savingsPenalty = earlyWithdrawalPenalty(inputs);
+  const studentLoan = resolveStudentLoanInterest(inputs);
+  const studentLoanInterest = studentLoan.info.studentLoanInterestPaid;
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
-        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), Form 8889 filed (${form8889}), educator expenses $${educatorExpenses ?? 0} > 0, or an early withdrawal penalty $${savingsPenalty ?? 0} > 0`,
+        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), Form 8889 filed (${form8889}), educator expenses $${educatorExpenses ?? 0} > 0, an early withdrawal penalty $${savingsPenalty ?? 0} > 0, or student loan interest $${studentLoanInterest ?? 0} > 0`,
         value:
           (miscOtherIncome ?? 0) > 0 ||
           (gamblingWinnings ?? 0) > 0 ||
@@ -60,12 +63,14 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
           scheduleE ||
           form8889 ||
           (educatorExpenses ?? 0) > 0 ||
-          (savingsPenalty ?? 0) > 0,
+          (savingsPenalty ?? 0) > 0 ||
+          (studentLoanInterest ?? 0) > 0,
       },
     ],
   });
   return {
     mustFile: { "schedule-1": resolution },
+    missingInputs: { "schedule-1": studentLoan.missing },
     businessIncome,
     hasBusiness,
     gamblingWinnings,
@@ -73,6 +78,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     alaskaPermanentFundDividends,
     educatorExpenses,
     earlyWithdrawalPenalty: savingsPenalty,
+    ...studentLoan.info,
   };
 }
 
