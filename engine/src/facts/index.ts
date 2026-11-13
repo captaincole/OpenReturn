@@ -34,6 +34,7 @@ export * from "./kinds/rental.js";
 export * from "./kinds/retirementDistribution.js";
 export * from "./kinds/socialSecurity.js";
 export * from "./kinds/spouse.js";
+export * from "./kinds/studentLoanInterest.js";
 export * from "./kinds/trade.js";
 export * from "./kinds/traditionalIra.js";
 export * from "./kinds/wages.js";
