@@ -76,20 +76,27 @@ function parseIntCell(raw: string): number | null {
   return value;
 }
 
-export interface CACoverageReport {
+/** A printed row's "At least" and "But not over" amounts. */
+export interface CATableBand {
+  low: number;
+  high: number;
+}
+
+export interface CACoverageReport<Row extends CATableBand = CATaxTableRow> {
   ok: boolean;
   minIncome: number;
   maxIncome: number;
   rowCount: number;
   gaps: { after: number; before: number }[];
-  overlaps: { row: CATaxTableRow; previousHigh: number }[];
+  overlaps: { row: Row; previousHigh: number }[];
 }
 
 /**
  * FTB rows are "at least .. but not over": `high` is inclusive, so the
- * next row's `low` is `high + 1` ($1–$50, then $51–$150).
+ * next row's `low` is `high + 1` ($1–$50, then $51–$150). The FTB 3514
+ * EITC table prints its rows the same way.
  */
-export function validateCACoverage(rows: CATaxTableRow[]): CACoverageReport {
+export function validateCACoverage<Row extends CATableBand>(rows: Row[]): CACoverageReport<Row> {
   if (rows.length === 0) {
     return {
       ok: false,
@@ -100,8 +107,8 @@ export function validateCACoverage(rows: CATaxTableRow[]): CACoverageReport {
       overlaps: [],
     };
   }
-  const gaps: CACoverageReport["gaps"] = [];
-  const overlaps: CACoverageReport["overlaps"] = [];
+  const gaps: CACoverageReport<Row>["gaps"] = [];
+  const overlaps: CACoverageReport<Row>["overlaps"] = [];
   for (let i = 1; i < rows.length; i++) {
     const prev = rows[i - 1];
     const cur = rows[i];
