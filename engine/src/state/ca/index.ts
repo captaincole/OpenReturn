@@ -33,6 +33,8 @@ export const CA_CATALOGS = [
   fixtureFileSchema.parse(form3805pCatalogJson),
   fixtureFileSchema.parse(schedulePCatalogJson),
   fixtureFileSchema.parse(form3885aCatalogJson),
+  fixtureFileSchema.parse(form3532CatalogJson),
+  fixtureFileSchema.parse(form3514CatalogJson),
 ];
 
 export const CA_FORMS: FormSpec[] = [

@@ -543,8 +543,6 @@ export function register(): void {
       "0.line.2a_federal": "Tax-exempt interest (federal 1040 line 2a) — no scenario modeled yet.",
       "2.line.b9a_additions":
         "Section B line 9a col C — aggregates other-income additions we don't model yet.",
-      "2.line.c11_subtractions":
-        "CA disallows educator expenses; depends on line 11 col A federal echo which we don't ingest yet.",
       "3.line.c24j_subtractions":
         "Form 2555 housing deduction (line 24j) col B — no scenario modeled yet.",
       "3.line.c25_additions":
@@ -609,8 +607,6 @@ export function register(): void {
         "CA subtraction for state income tax refunds (not taxable in CA) requires knowledge of the taxable refund amount from federal Schedule 1 line 1, which is not ingested as a separate fact or field.",
       "0.line.b2a_additions":
         "CA addition for alimony received under post-2018 or post-2025 agreements requires alimony fact data and divorce agreement date logic not yet ingested or modeled.",
-      "0.line.b3_federal":
-        "Business income/(loss) from federal Schedule 1 line 3 (Schedule C) is not exposed as an individual fieldId in the ingested form-1040 catalog, and no Schedule C / self-employment business income fact key exists in the available facts.",
       "0.line.b4_federal":
         "Other gains/losses (Sch CA Section B line 4 col A) comes from federal Schedule 1 line 4 (Form 4797 gains/losses); federal Schedule 1 is not an ingested form and we have no Form 4797 fact ingestion path.",
       "0.line.b4_subtractions":
@@ -707,12 +703,8 @@ export function register(): void {
         "Requires Schedule 1 (Form 1040) line 14 (moving expenses, military only federally) — federal Schedule 1 is not an ingested form; also no FTB 3913 ingestion path yet.",
       "2.line.c14_additions":
         "CA moving expense addition (for non-military taxpayers who can deduct under CA but not federal) requires FTB 3913 data — no FTB 3913 ingestion path exists yet.",
-      "2.line.c15_federal":
-        "Requires federal Schedule 1 line 15 (deductible part of self-employment tax). Schedule 1 is not an ingested form and its individual line fieldIds are not available on form-1040; no ingestion path for self-employment tax data yet.",
       "2.line.c17_federal":
         "Requires federal Schedule 1 line 17 (self-employed health insurance deduction). Schedule 1 individual lines are not ingested; no self-employment health insurance scenario yet.",
-      "2.line.c18_federal":
-        "Requires federal Schedule 1 line 18 (penalty on early withdrawal of savings). Schedule 1 individual lines are not ingested as separate fieldIds; no early-withdrawal-penalty fact ingestion path exists yet.",
       "2.line.c19a_additions":
         "CA addition for alimony paid (post-2018/post-2025 divorce agreements differ between federal and CA law) requires an alimony scenario; no such scenario or fact ingestion path exists yet.",
       "2.line.c19b_recipient_last_name":

@@ -11,9 +11,6 @@ import { tcbCa007Decisions } from "./decisions.js";
 import { tcbCa007Expected } from "./expected.js";
 import { TCB_CA_007_TAX_YEAR, TCB_CA_007_USER_ID, tcbCa007Facts } from "./facts.js";
 
-const WAITS_FOR_SECTION_C =
-  "Schedule CA column A does not copy Schedule 1 line 3 or line 15 yet (PR #132 adds them).";
-
 /* The federal forms are inputs to the CA return: evaluated, not checked (the case has no federal key). */
 const FORM_IDS = [
   "form-4562",
@@ -46,17 +43,6 @@ export const tcbCa007Scenario: Scenario = {
   userId: TCB_CA_007_USER_ID,
   facts: tcbCa007Facts,
   decisions: tcbCa007Decisions,
-  /*
-   * Schedule CA line 3 and line 15 column A (and the totals that add them) are
-   * another lane's work, PR #132; until it merges they stay blank here.
-   */
-  knownMismatches: {
-    "schedule-ca.0.line.b3_federal": WAITS_FOR_SECTION_C,
-    "schedule-ca.2.line.c15_federal": WAITS_FOR_SECTION_C,
-    "schedule-ca.3.line.c26_federal": WAITS_FOR_SECTION_C,
-    "schedule-ca.2.line.b10_federal": WAITS_FOR_SECTION_C,
-    "schedule-ca.3.line.c27_federal": WAITS_FOR_SECTION_C,
-  },
   forms: FORM_IDS.map((formId) => ({
     formId,
     expected: tcbCa007Expected(formId),

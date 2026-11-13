@@ -169,10 +169,7 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
     caWithholdingOtherForms: californiaWithholdingOtherForms(inputs),
     w2CaSdiTotal: sumCaSdi(factsInCategory(inputs, "wages")) as Form540FilingInfo["w2CaSdiTotal"],
     useTaxOwed: useTaxOwed as Form540FilingInfo["useTaxOwed"],
-    noUseTaxOwed:
-      decisionByKey.get("decisions.scope.use_tax_zero_reason") === "no_use_tax_owed"
-        ? true
-        : undefined,
+    noUseTaxOwed: useTaxZeroReason === "no_use_tax_owed" ? true : undefined,
     useTaxZeroReason: typeof useTaxZeroReason === "string" ? useTaxZeroReason : undefined,
     mailingSameAsResidence: decisionByKey.get(
       "decisions.scope.mailing_same_as_principal_residence",

@@ -75,6 +75,7 @@ import {
   resolveScheduleBInfo,
   resolveScheduleCaInfo,
   resolveScheduleDInfo,
+  type ResolverInputs,
 } from "./filingInfoResolvers.js";
 import type { Form3514FilingInfo } from "./state/ca/3514/filingInfo.js";
 import { resolve3514Info } from "./state/ca/3514/resolveInfo.js";
@@ -181,56 +182,59 @@ export type FilingInfo = BaseFilingInfo &
   Form8829FilingInfo &
   Form3885AFilingInfo;
 
+/* One resolver per form. A new form adds its resolver here. */
+const RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
+  resolveBaseInfo,
+  resolve1040Info,
+  resolve540Info,
+  resolve5805Info,
+  resolve3514Info,
+  resolve3526Info,
+  resolve3805pInfo,
+  resolveSchedulePInfo,
+  resolve3532Info,
+  resolveScheduleCaInfo,
+  resolve8949Info,
+  resolveScheduleDInfo,
+  resolve8606Info,
+  resolve8889Info,
+  resolve8959Info,
+  resolve4952Info,
+  resolveSchedule8812Info,
+  resolve8960Info,
+  resolve8995AInfo,
+  resolve8995Info,
+  resolve8962Info,
+  resolveQbiInfo,
+  resolveSchedule1Info,
+  resolveSchedule1AInfo,
+  resolveSchedule2Info,
+  resolveSchedule3Info,
+  resolveScheduleHInfo,
+  resolve5695Info,
+  resolveScheduleAInfo,
+  resolveScheduleBInfo,
+  resolveScheduleCInfo,
+  resolveScheduleSEInfo,
+  resolve6251Info,
+  resolveScheduleEInfo,
+  resolve8582Info,
+  resolve8995AScheduleCInfo,
+  resolve4684Info,
+  resolveScheduleEICInfo,
+  resolveScheduleRInfo,
+  resolve2441Info,
+  resolve4562Info,
+  resolve8829Info,
+  resolve3885AInfo,
+];
+
 export function resolveFilingInfo(opts: {
   facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
   decisions: ReadonlyArray<{ decisionKey: string; decision: unknown }>;
 }): FilingInfo {
   const inputs = makeResolverInputs(opts);
-  return mergeInfo([
-    resolveBaseInfo(inputs),
-    resolve1040Info(inputs),
-    resolve540Info(inputs),
-    resolve5805Info(inputs),
-    resolve3514Info(inputs),
-    resolve3526Info(inputs),
-    resolve3805pInfo(inputs),
-    resolveSchedulePInfo(inputs),
-    resolve3532Info(inputs),
-    resolveScheduleCaInfo(inputs),
-    resolve8949Info(inputs),
-    resolveScheduleDInfo(inputs),
-    resolve8606Info(inputs),
-    resolve8889Info(inputs),
-    resolve8959Info(inputs),
-    resolve4952Info(inputs),
-    resolveSchedule8812Info(inputs),
-    resolve8960Info(inputs),
-    resolve8995AInfo(inputs),
-    resolve8995Info(inputs),
-    resolve8962Info(inputs),
-    resolveQbiInfo(inputs),
-    resolveSchedule1Info(inputs),
-    resolveSchedule1AInfo(inputs),
-    resolveSchedule2Info(inputs),
-    resolveSchedule3Info(inputs),
-    resolveScheduleHInfo(inputs),
-    resolve5695Info(inputs),
-    resolveScheduleAInfo(inputs),
-    resolveScheduleBInfo(inputs),
-    resolveScheduleCInfo(inputs),
-    resolveScheduleSEInfo(inputs),
-    resolve6251Info(inputs),
-    resolveScheduleEInfo(inputs),
-    resolve8582Info(inputs),
-    resolve8995AScheduleCInfo(inputs),
-    resolve4684Info(inputs),
-    resolveScheduleEICInfo(inputs),
-    resolveScheduleRInfo(inputs),
-    resolve2441Info(inputs),
-    resolve4562Info(inputs),
-    resolve8829Info(inputs),
-    resolve3885AInfo(inputs),
-  ]);
+  return mergeInfo(RESOLVERS.map((resolve) => resolve(inputs)));
 }
 
 function mergeInfo(parts: ReadonlyArray<BaseFilingInfo>): FilingInfo {

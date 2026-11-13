@@ -5,6 +5,7 @@ export * from "./kinds/adjustments.js";
 export * from "./kinds/alternativeMinimumTax.js";
 export * from "./kinds/blindness.js";
 export * from "./kinds/business.js";
+export * from "./kinds/caEarnedIncomeCredit.js";
 export * from "./kinds/caEmployeeClassification.js";
 export * from "./kinds/caMiscellaneousDeductions.js";
 export * from "./kinds/caPayments.js";

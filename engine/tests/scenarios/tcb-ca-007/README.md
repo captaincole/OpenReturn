@@ -51,10 +51,6 @@ Forms checked: Form 540, Schedule CA (540), FTB 3526, FTB 3805P and FTB 3885A (t
 - Form 540 lines 14 and 16: Schedule CA line 27 column B is −$47 (line 24i, the whistleblower fees California does not allow), so it moves to line 16 as a positive amount (`ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b08`): line 16 is $24,187.
 - FTB 3805P line 1 is $1,000: the Roth IRA distribution ($4,001) is all within the $5,000 contribution basis (Form 8606 line 23 is 0), and that part is not subject to the tax (`ca-3805p-inst-2025::sec::line-1-early-distributions-included-in-income::b06`).
 
-## Known mismatches
-
-Schedule CA line 3 and line 15 column A (and lines 10, 26 and 27 column A, which add them) wait for PR #132, which copies Schedule 1 lines 3 and 15 into Section B and C. The ratchet fails when they start to match.
-
 ## Lines the key fills that are not checked
 
 - Schedule CA line 19b's recipient last name (no fact gives the recipient's name), line 6's type ("OTHER") and line 8z's type: the engine prints the stated types.
