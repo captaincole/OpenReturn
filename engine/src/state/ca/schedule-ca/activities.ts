@@ -5,6 +5,7 @@
  */
 
 import { businessesOnReturn, CA_EMPLOYEE_CLASSIFICATION_KEYS } from "../../../facts/index.js";
+import { spousePropertiesOnReturn } from "../../../federal/rentals/passive.js";
 import { filingStatusOf } from "../../../filingInfoResolvers.js";
 import { sum } from "../../../money.js";
 import { missingInputs, num, type ResolverInputs } from "../../../resolverInputs.js";
@@ -69,8 +70,7 @@ function adjustmentFor(
 export function resolveActivityAdjustments(inputs: ResolverInputs) {
   const keys = CA_EMPLOYEE_CLASSIFICATION_KEYS;
   const files540 = inputs.decisionByKey.get("decisions.scope.must_file_ca_540") === true;
-  const status = filingStatusOf(inputs);
-  const joint = status === undefined || status === "married_filing_jointly";
+  const joint = spousePropertiesOnReturn(filingStatusOf(inputs));
   const hasBusiness = businessesOnReturn(inputs.facts, joint).businesses.length > 0;
   const classified = inputs.factByKey.get(keys.classifiedAsEmployee) as boolean | undefined;
   const amounts: CaEmployeeAmounts | undefined =

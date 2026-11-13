@@ -1,16 +1,11 @@
-import type { ActivityDepreciation } from "../../../facts/index.js";
+import type { Form4562Activity } from "../../../federal/4562/filingInfo.js";
 import type { BaseFilingInfo } from "../../../filingInfo.js";
 
-/* One business or rental whose California depreciation or amortization differs from federal. */
-export interface Form3885AActivity {
-  factKey: string;
-  kind: "business" | "rental";
-  /* The header's business or activity name. */
-  name: string;
+/* One business or rental of Form 4562's list, with FTB 3885A's line 1 answer. */
+export type Form3885AActivity = Form4562Activity & {
   /* Line 1: a passive activity; undefined while an answer is missing. */
   passive: boolean | undefined;
-  depreciation: ActivityDepreciation;
-}
+};
 
 export interface Form3885AFilingInfo extends BaseFilingInfo {
   /* One FTB 3885A per activity with a difference (ca-3885a-inst-2025::sec::specific-line-instructions::b01). */
