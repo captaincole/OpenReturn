@@ -8,7 +8,7 @@
  */
 
 import { statedBusinessesOnReturn, type BusinessFactValue } from "./business.js";
-import { placesPersonalProperty } from "./depreciation.js";
+import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
 
 type FactRow = { key: string; value: unknown; category: string };
@@ -34,7 +34,7 @@ function marked<T extends Activity>(activities: T[], shared: boolean): T[] {
             depreciation: {
               ...activity.value.depreciation,
               personalPropertyInOtherActivities: true,
-            },
+            } satisfies ScopedDepreciation,
           },
         }
       : activity,
