@@ -131,6 +131,14 @@ export function register(): void {
         const value = form["schedule-1.0.line.8z_type"];
         return typeof value === "string" ? value : undefined;
       },
+      /*
+       * MANUAL EDIT: col A copies federal Schedule 1 line 7. "California excludes
+       * unemployment compensation from taxable income. Enter on line 7, column B
+       * the amount of unemployment compensation shown in column A"
+       * (ca-540-sched-ca-inst-2025::sec::line-7-unemployment-compensation::b01).
+       */
+      "0.line.b7_federal": (form) => numberOrBlank(form["schedule-1.0.line.7"]),
+      "0.line.b7_subtractions": (form) => numberOrBlank(form["0.line.b7_federal"]),
       // MANUAL EDIT: col A copies federal Schedule 1 line 5; blank when it is blank.
       "0.line.b5_federal": (form) => numberOrBlank(form["schedule-1.0.line.5"]),
       "2.line.b9a_federal": (form) => {
@@ -211,6 +219,7 @@ export function register(): void {
           form["0.line.b4_subtractions"],
           form["0.line.b5_subtractions"],
           form["0.line.b6_subtractions"],
+          form["0.line.b7_subtractions"],
           form["2.line.b9a_subtractions"],
         ),
       /*
@@ -623,10 +632,6 @@ export function register(): void {
         "Farm income CA subtractions (Sch CA Section B line 6 col B) require FTB 3801 passive activity and CA depreciation adjustments for farm activities; no Schedule F or farm fact ingestion path yet.",
       "0.line.b6_additions":
         "Farm income CA additions (Sch CA Section B line 6 col C) require FTB 3801 passive activity and CA depreciation adjustments for farm activities; no Schedule F or farm fact ingestion path yet.",
-      "0.line.b7_federal":
-        "Unemployment compensation flows from federal Schedule 1 line 2, which is not yet ingested. No unemployment_income fact category exists in the current fact model.",
-      "0.line.b7_subtractions":
-        "CA subtracts all unemployment compensation (equals column A). However, column A (b7_federal) is itself unsupported because Schedule 1 is not ingested. Cannot derive this subtraction until the federal source is available.",
       "1.line.b8a_federal":
         "Federal net operating loss from Schedule 1 line 8a. Schedule 1 is not ingested and there is no NOL fact category in the current fact model.",
       "1.line.b8a_additions":
