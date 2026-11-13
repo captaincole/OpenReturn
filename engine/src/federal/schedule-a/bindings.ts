@@ -18,6 +18,7 @@ import type { ScheduleA } from "./types.js";
 const NET_QUALIFIED_DISASTER_LOSS = "Net Qualified Disaster Loss";
 const STANDARD_WITH_DISASTER_LOSS = "Standard Deduction Claimed With Qualified Disaster Loss";
 const GAMBLING_LOSSES = "Gambling Losses";
+const IMPAIRMENT_RELATED = "Impairment-Related Work Expenses";
 
 type Bindings = FormSpec<ScheduleA, ScheduleAFilingInfo>["bindings"];
 
@@ -30,8 +31,8 @@ interface Line16Item {
  * MANUAL EDIT: line 16's entries; undefined while one waits. The net qualified
  * disaster loss (Form 4684 line 15), then the standard deduction with it
  * (other-itemized-deductions::b01) or, when itemizing, gambling losses up to
- * Schedule 1 line 8b (other-itemized-deductions-2::b01). The list's other
- * expenses have no fact.
+ * Schedule 1 line 8b (other-itemized-deductions-2::b01), and impairment-related
+ * work expenses (::b03). The list's other expenses have no fact.
  */
 function line16Items(
   form: FormAccessor<ScheduleA>,
@@ -47,9 +48,12 @@ function line16Items(
   }
   const winnings = numberOrBlank(form["schedule-1.0.line.8b"]) ?? 0;
   const gambling = Math.min(info.gamblingLosses ?? 0, winnings);
-  return gambling > 0
-    ? [...disaster, { description: GAMBLING_LOSSES, amount: gambling }]
-    : disaster;
+  const impairment = info.impairmentRelatedWorkExpenses ?? 0;
+  return [
+    ...disaster,
+    ...(impairment > 0 ? [{ description: IMPAIRMENT_RELATED, amount: impairment }] : []),
+    ...(gambling > 0 ? [{ description: GAMBLING_LOSSES, amount: gambling }] : []),
+  ];
 }
 
 /*
@@ -138,6 +142,10 @@ export function register(): void {
           saltCap(typeof magi === "number" ? magi : undefined, info.filingStatus),
         );
       },
+      // MANUAL EDIT: line 6, one total with its type (irs-1040sa-inst-2025::sec::line-6-2::b01).
+      "0.line.6_other_taxes_amount": (_, info) => roundDollars(info.otherTaxes),
+      "0.line.6_other_taxes_description": (_, info) =>
+        info.otherTaxes ? info.otherTaxesDescription : undefined,
       "0.line.7_total_taxes": (form) => {
         const line5e = form["0.line.5e_salt_cap"];
         const six = form["0.line.6_other_taxes_amount"];
@@ -250,10 +258,6 @@ export function register(): void {
     },
 
     unsupported: {
-      "0.line.6_other_taxes_description":
-        "Free-text description of other taxes (e.g. foreign income taxes). No fact or decision key exists for this; requires a scenario with other taxes to model.",
-      "0.line.6_other_taxes_amount":
-        "Other taxes (e.g. foreign income taxes, generation-skipping taxes) — no fact category or decision key exists for these; requires a dedicated ingestion scenario.",
       "0.line.8_home_mortgage_partial_use_checkbox":
         "Checkbox indicating mixed personal/business use of home mortgage — no fact or decision key exists for this. Requires a scenario where taxpayer has a home loan used partly for non-home purposes.",
       "0.line.8b_seller_name_address":

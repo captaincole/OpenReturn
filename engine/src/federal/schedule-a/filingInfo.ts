@@ -73,4 +73,9 @@ export interface ScheduleAFilingInfo
 
   /** Line 16: gambling losses as stated; the binding limits them to Schedule 1 line 8b. */
   gamblingLosses?: number;
+  /** Line 6: other taxes and their type (irs-1040sa-inst-2025::sec::line-6-2::b01). */
+  otherTaxes?: number;
+  otherTaxesDescription?: string;
+  /** Line 16: impairment-related work expenses of a disabled person. */
+  impairmentRelatedWorkExpenses?: number;
 }
