@@ -8,6 +8,7 @@ import { roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported } from "../../types.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import { iraDeduction, JOINT_RETURN_GAP } from "./iraDeduction.js";
+import { PUB_590A_GAP } from "./pub590a.js";
 import type { Schedule1 } from "./types.js";
 
 type Bindings = Partial<{ [K in keyof Schedule1]: BindingFn<Schedule1, Schedule1FilingInfo, K> }>;
@@ -27,6 +28,7 @@ const monthYear = (date: string | undefined) => {
  */
 function line20(form: FormAccessor<Schedule1>, info: Schedule1FilingInfo) {
   if (!info.iraContributions) return undefined;
+  if (info.pub590aWorksheets) return unsupported(PUB_590A_GAP);
   if (info.filingStatus === "married_filing_jointly") return unsupported(JOINT_RETURN_GAP);
   const covered = info.iraCoveredAtWork === true || (info.selfEmployedPlanDeduction ?? 0) > 0;
   // irs-1040-inst-2025::sec::were-you-covered-by-a-retirement::b02: adoption benefits send a covered person to Pub. 590-A.
