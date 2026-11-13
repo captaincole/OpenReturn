@@ -3,6 +3,7 @@ import {
   OTHER_INCOME_KEYS,
   businessesOnReturn,
   getGamblingWinningsFacts,
+  getGovernmentPaymentsFacts,
   isMiscIncomeFactKey,
 } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
@@ -39,6 +40,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     w2gs.length > 0 || winningsNotOnW2G !== undefined
       ? sum(...w2gs.map((w2g) => w2g.box1), winningsNotOnW2G)
       : undefined;
+  const unemploymentCompensation = unemploymentOn1099G(inputs);
   const alaskaPermanentFundDividends = num(inputs, OTHER_INCOME_KEYS.alaskaPermanentFundDividends);
   // Schedule SE line 13 reaches the 1040 only through Schedule 1 line 15.
   const scheduleSE = resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value === true;
@@ -50,8 +52,9 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
-        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), Form 8889 filed (${form8889}), educator expenses $${educatorExpenses ?? 0} > 0, or an early withdrawal penalty $${savingsPenalty ?? 0} > 0`,
+        rule: `fallback: unemployment compensation $${unemploymentCompensation ?? 0} > 0, 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), Form 8889 filed (${form8889}), educator expenses $${educatorExpenses ?? 0} > 0, or an early withdrawal penalty $${savingsPenalty ?? 0} > 0`,
         value:
+          (unemploymentCompensation ?? 0) > 0 ||
           (miscOtherIncome ?? 0) > 0 ||
           (gamblingWinnings ?? 0) > 0 ||
           (alaskaPermanentFundDividends ?? 0) > 0 ||
@@ -68,6 +71,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     mustFile: { "schedule-1": resolution },
     businessIncome,
     hasBusiness,
+    unemploymentCompensation,
     gamblingWinnings,
     miscOtherIncome,
     alaskaPermanentFundDividends,
@@ -94,4 +98,19 @@ function scheduleCTotal({
   const onReturn = businesses.map((business) => business.value);
   const profits = onReturn.map((business) => netProfit(business, onReturn));
   return profits.every((profit) => profit !== undefined) ? sum(...profits) : undefined;
+}
+
+/*
+ * Line 7: box 1 of each Form 1099-G, cents kept (irs-1040-inst-2025::sec::line-7::b01:
+ * "You should receive a Form 1099-G showing in box 1 the total unemployment
+ * compensation paid to you in 2025. Report this amount on line 7."). A repayment
+ * and contributions to a governmental unemployment program reduce the line; they
+ * have no fact, and Cade says they are not supported. Undefined with no 1099-G
+ * box 1.
+ */
+function unemploymentOn1099G(inputs: ResolverInputs): number | undefined {
+  const box1s = getGovernmentPaymentsFacts(inputs.facts)
+    .map((form) => form.box1)
+    .filter((box1): box1 is number => typeof box1 === "number");
+  return box1s.length > 0 ? sum(...box1s) : undefined;
 }

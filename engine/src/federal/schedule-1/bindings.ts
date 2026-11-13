@@ -14,6 +14,8 @@ export function register(): void {
     bindings: {
       // MANUAL EDIT: line 3 = Schedule C line 31, every business (the engine evaluates one Schedule C copy).
       "0.line.3": (_, info) => info.businessIncome,
+      // MANUAL EDIT: line 7 = 1099-G box 1 (irs-1040-inst-2025::sec::line-7::b01).
+      "0.line.7": (_, info) => roundDollars(info.unemploymentCompensation),
       // MANUAL EDIT: line 8b = W-2G box 1. Winnings with no W-2G have no fact and are not included.
       "0.line.8b": (_, info) => roundDollars(info.gamblingWinnings),
       // MANUAL EDIT: line 5 = Schedule E line 41; blank when Schedule E is not filed.
@@ -65,8 +67,8 @@ export function register(): void {
        * MANUAL EDIT: irs-1040-inst-2025::sec::line-3::b01. Line 3 is blank with no
        * business (adds nothing) and blank while a business's line 31 waits. Then
        * line 10 waits: sum() would add the loss as 0 and overstate income. The
-       * other terms are blank only when empty: 1, 2a, 4, 6, 7 are unsupported, and
-       * line 9 is a sum.
+       * other terms are blank only when empty: 1, 2a, 4, 6 are unsupported, line
+       * 7 is blank with no 1099-G, and line 9 is a sum.
        */
       "0.line.10": (form, info) =>
         (info.hasBusiness === true && form["0.line.3"] === undefined) ||
@@ -133,9 +135,10 @@ export function register(): void {
       "0.line.4_form_4684": "No Form 4684 casualty/theft scenario yet.",
       "0.line.4": "No Form 4797 or Form 4684 scenario yet.",
       "0.line.6": "No Schedule F / farm income scenario yet",
-      "0.line.7_repaid_checkbox": "No 1099-G / unemployment repayment ingestion yet",
-      "0.line.7_amount_repaid": "No 1099-G / unemployment repayment ingestion yet",
-      "0.line.7": "No 1099-G unemployment compensation ingestion yet",
+      "0.line.7_repaid_checkbox":
+        "No fact for a repayment of unemployment compensation; Cade says a repayment is not supported.",
+      "0.line.7_amount_repaid":
+        "No fact for a repayment of unemployment compensation; Cade says a repayment is not supported.",
       "0.line.8a": "No NOL carryforward scenario yet",
       "0.line.8c": "No 1099-C cancellation-of-debt ingestion yet",
       "0.line.8d": "No Form 2555 foreign earned income exclusion scenario yet",

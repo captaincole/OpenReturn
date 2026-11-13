@@ -8,6 +8,8 @@ export interface Schedule1FilingInfo extends BaseFilingInfo {
    * tells a waiting line 3 (true) from no business (false).
    */
   hasBusiness?: boolean;
+  /** Line 7: 1099-G box 1 sum, cents kept. */
+  unemploymentCompensation?: number;
   /** Line 8b: W-2G box 1 sum, cents kept. */
   gamblingWinnings?: number;
   /** Line 8z: 1099-MISC box 3 sum, cents kept. */
