@@ -20,6 +20,9 @@ export interface Form1040FilingInfo
     Pick<Schedule8812FilingInfo, "dependents" | "w2NontaxableCombatPay">,
     Pick<ScheduleSEFilingInfo, "scheduleCNetProfit">,
     Pick<ScheduleAFilingInfo, "increasedStandardDeduction"> {
+  /** Social Security with a traditional IRA contribution and a plan: Pub. 590-A figures line 6b (schedule-1/pub590a.ts). */
+  pub590aWorksheets?: boolean;
+
   /** Every filer must answer. Undefined fills neither box, so the gap shows. */
   hasDigitalAssets?: boolean;
   /** Schedule E's resolver fills it (Pub. 596 Worksheet 1). */

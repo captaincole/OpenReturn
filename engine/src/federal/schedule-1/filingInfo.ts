@@ -48,4 +48,6 @@ export interface Schedule1FilingInfo extends BaseFilingInfo {
   /** W-2 box 12 code T: excluded adoption benefits send a covered person to Pub. 590-A. */
   iraAdoptionBenefits?: boolean;
   livedApartAllYear?: boolean;
+  /** Social Security with a traditional IRA contribution and a plan: Pub. 590-A figures line 20 (pub590a.ts). */
+  pub590aWorksheets?: boolean;
 }

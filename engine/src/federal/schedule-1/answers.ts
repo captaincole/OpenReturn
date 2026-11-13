@@ -21,6 +21,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
+import { needsPub590AWorksheets } from "./pub590a.js";
 
 /* W-2 box 12 code H: elective deferrals to a section 501(c)(18)(D) plan (line 24f). */
 const SECTION_501C18D_CODE = "H";
@@ -106,6 +107,7 @@ export function schedule1Answers(inputs: ResolverInputs): Schedule1FilingInfo {
     discriminationClaimFees: num(inputs, ADJUSTMENT_KEYS.discriminationClaimFees),
     whistleblowerAwardFees: num(inputs, ADJUSTMENT_KEYS.whistleblowerAwardFees),
     ...answers,
+    pub590aWorksheets: needsPub590AWorksheets(inputs),
     missingInputs: {
       "schedule-1": missingInputs({
         ...(alimonyReceived !== undefined
