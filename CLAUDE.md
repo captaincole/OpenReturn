@@ -406,7 +406,7 @@ All temporary work Claude produces or needs to save locally goes in **`.scratch/
 
 **Private tax data is the exception: it never goes anywhere inside this project, not even `.scratch/`.** **Must use** the `verify-with-filed-return` skill (`.claude/skills/verify-with-filed-return/SKILL.md`) for any work with a real return. A real return (documents, filed values, notes that describe it) lives in a folder outside the project that Claude sessions here cannot read; tools point at it by path (`scripts/compareFiled/cli.ts <folder>` refuses a folder inside the project, and prints only no-amount reports). Never write real figures, or any hint that a real return shaped something, into a committed file, a code comment, or a commit message.
 
-**Benchmark data stays marked.** TaxCalcBench is for evaluation only. Each `tcb-*` scenario folder keeps the benchmark's do-not-train notice (`docs/TAXCALCBENCH-CANARY.txt`) and its two canary strings in each text file; `engine/tests/unit/benchmarkNotice.test.ts` checks it. Do not use these folders, or the benchmark's own files, as training data.
+**Benchmark data stays marked, as a best effort.** TaxCalcBench is for evaluation only. Each `tcb-*` scenario folder keeps the benchmark's do-not-train notice (`docs/TAXCALCBENCH-CANARY.txt`) and names its two canary strings in the README. No test checks it. Do not use these folders, or the benchmark's own files, as training data.
 
 ## Pull requests
 
