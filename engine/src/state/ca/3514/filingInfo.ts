@@ -50,14 +50,14 @@ export interface Form3514FilingInfo extends BaseFilingInfo {
   caEitcChildrenOpen?: boolean;
   /** decisions.scope.ca_residency is full_year: Form 540, not 540NR (Steps 7, 9 and 11 are skipped). */
   caFullYearResident?: boolean;
-  /** Line 13: W-2 box 16 for California, plus disability pay before the minimum retirement age. */
+  /** Line 13: W-2 box 16 for California, plus disability pay before the minimum retirement age; undefined while a pension's age answer is missing. */
   caEitcWages?: number;
-  /** Line 13 waits on a disability pension's minimum-retirement-age answer. */
-  caEitcWagesWait?: boolean;
   /** W-2 box 11 on the California W-2s (line 15's nonqualified plan pension may be in it). */
   caNonqualifiedPlanBox11?: number;
   /** W-2 box 12 code Q, nontaxable combat pay (line 17's election). */
   caCombatPay?: number;
+  /** W-2 box 12 code II, Medicaid waiver payments (line 13 includes them; line 14's election). */
+  caMedicaidWaiverPayments?: number;
   /** Line 23a: W-2 box 1 on the W-2s with no California wages (wages not subject to CA withholding). */
   caWagesOutsideCalifornia?: number;
   /** Lines 18a–18e; undefined with no business, or while a net profit waits. */
