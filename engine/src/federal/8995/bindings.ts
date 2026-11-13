@@ -2,9 +2,11 @@
 
 import { defineForm } from "../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
 import {
   businessTin,
+  qbiGapOf,
   qbiOf,
   qualifiedDividendsPlusNetCapitalGain,
   taxableIncomeBeforeQbi,
@@ -35,8 +37,9 @@ const businessIn = (info: Form8995FilingInfo, row: Row): QbiBusiness | undefined
   info.qbiBusinesses?.[ROWS.indexOf(row)];
 
 // Line 1(c): QBI counts the deductible part of SE tax (determining-your-qualified-business::b01).
-function qbi(form: Read, info: Form8995FilingInfo, row: Row): number | undefined {
+function qbi(form: Read, info: Form8995FilingInfo, row: Row) {
   const business = businessIn(info, row);
+  if (business?.qbiGap) return unsupported(business.qbiGap);
   const amount = business && qbiOf(form, info, business);
   return amount === undefined ? undefined : roundDollars(amount);
 }
@@ -52,7 +55,9 @@ function tin(info: Form8995FilingInfo, row: Row): string | undefined {
  * attached statement (line-2::b01). Undefined with no business, or while any
  * business's QBI is unknown.
  */
-function line2(form: Read, info: Form8995FilingInfo): number | undefined {
+function line2(form: Read, info: Form8995FilingInfo) {
+  const gap = qbiGapOf(info.qbiBusinesses);
+  if (gap) return unsupported(gap);
   const amounts = (info.qbiBusinesses ?? []).map((business) =>
     roundDollars(qbiOf(form, info, business)),
   );

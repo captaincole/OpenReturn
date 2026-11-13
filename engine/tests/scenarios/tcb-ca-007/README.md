@@ -69,4 +69,5 @@ Schedule CA line 3 and line 15 column A (and lines 10, 26 and 27 column A, which
 - Form 4562 Part I lines 11–13 (the section 179 business income limitation), lines 20a–20e (ADS) and Part V (listed property) are unsupported; so are FTB 3885A line 2 and a passive activity's difference (FTB 3801).
 - Form 8829 for an owned home, a daycare or a casualty loss; a rental's amortization on Schedule E line 19; Form 6198 (Schedule C box 32b).
 - Schedule 1 line 20 and Form 1040 line 6b with Social Security, a traditional IRA contribution and a plan (Pub. 590-A).
+- Form 8995 lines 1(c) for the three businesses, and line 2, are unsupported: the $1,270 self-employed plan deduction comes off the QBI of the business the plan belongs to, and no answer names that business.
 - Schedule 2 line 21 and Form 1040 line 23 print $501. They leave out the 10% additional tax ($100) on the $1,000 early pension distribution (code 1; Schedule 2 line 8, which the engine does not figure). The instructions give $601.
