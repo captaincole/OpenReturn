@@ -1,5 +1,6 @@
 import type { FactsView } from "../../types.js";
 import type { TaxFactRow } from "../rows.js";
+import { makeBusinessFactKey } from "./business.js";
 
 export interface MiscIncomeFactValue {
   payerName: string;
@@ -62,4 +63,33 @@ export function getMiscIncomeFacts(facts: FactsView): MiscIncomeFact[] {
     if (parsed !== null) out.push(parsed);
   }
   return out;
+}
+
+type Row = { key: string; value: unknown; category: string };
+
+const businessIdOf = (row: Row): string | undefined =>
+  (row.value as MiscIncomeFactValue | undefined)?.businessId;
+
+/* The 1099-MISC facts: each with its key and businessId. */
+function miscRows(facts: ReadonlyArray<Row>): Row[] {
+  return facts.filter((fact) => fact.category === MISC_CATEGORY && MISC_KEY_RE.test(fact.key));
+}
+
+/* The 1099-MISCs that pay no business: their box 3 is Schedule 1 line 8z. */
+export function miscIncomeNotForBusiness(facts: ReadonlyArray<Row>): Row[] {
+  return miscRows(facts).filter((row) => businessIdOf(row) === undefined);
+}
+
+/*
+ * The keys of the 1099-MISCs whose businessId names no business fact. Cade must
+ * ask which business each one belongs to, as for a 1099-NEC.
+ */
+export function unlinkedMiscIncomeKeys(facts: ReadonlyArray<Row>): string[] {
+  const factKeys = new Set(facts.map((fact) => fact.key));
+  return miscRows(facts)
+    .filter((row) => {
+      const businessId = businessIdOf(row);
+      return businessId !== undefined && !factKeys.has(makeBusinessFactKey(businessId));
+    })
+    .map((row) => row.key);
 }

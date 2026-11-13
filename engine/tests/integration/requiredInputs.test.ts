@@ -90,7 +90,7 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "an answer Cade records only when the user had that income (Schedule 1 lines 2a, 8h, 8i, 8k, 8z)",
   ],
   [
-    /^adjustments\.[a-z_]+$/,
+    /^adjustments\.(self_employed_plan_deduction|alimony_paid|jury_duty_pay_to_employer|reforestation|trade_act_benefit_repayment|discrimination_claim_fees|whistleblower_award_fees)$/,
     "an answer Cade records only when the user had that adjustment (Schedule 1 lines 16, 19a, 24a–24i)",
   ],
   [

@@ -3,16 +3,12 @@ import {
   OTHER_INCOME_KEYS,
   businessesOnReturn,
   getGamblingWinningsFacts,
-  isMiscIncomeFactKey,
+  miscIncomeNotForBusiness,
+  unlinkedMiscIncomeKeys,
 } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { sum } from "../../money.js";
-import {
-  factsInCategory,
-  num,
-  resolveMustFile,
-  type ResolverInputs,
-} from "../../resolverInputs.js";
+import { num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
@@ -22,13 +18,11 @@ import type { Schedule1FilingInfo } from "./filingInfo.js";
 
 export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInfo {
   // A 1099-MISC that pays a business is in that business's gross receipts, not line 8z.
-  const misc = factsInCategory(inputs, "other").filter(
-    (row) =>
-      isMiscIncomeFactKey(row.key) &&
-      (row.value as Record<string, unknown>)?.businessId === undefined,
-  );
+  const misc = miscIncomeNotForBusiness(inputs.facts);
+  // One that names a business with no fact waits for Cade's answer (Schedule C asks it).
+  const unlinked = unlinkedMiscIncomeKeys(inputs.facts).length > 0;
   const miscOtherIncome =
-    misc.length > 0
+    misc.length > 0 && !unlinked
       ? sum(...misc.map((row) => (row.value as Record<string, unknown>).box3))
       : undefined;
   // Form 8889 lines 13 and 16 reach the 1040 only through Schedule 1.

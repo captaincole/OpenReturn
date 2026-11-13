@@ -2,6 +2,7 @@ import {
   businessesOnReturn,
   type BusinessFactValue,
   type HomeOfficeSimplified,
+  unlinkedMiscIncomeKeys,
   unlinkedNonemployeeCompensationKeys,
   unlinkedPaymentTransactionsKeys,
 } from "../../facts/index.js";
@@ -37,6 +38,7 @@ export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInf
   const unlinkedKeys = [
     ...unlinkedPaymentTransactionsKeys(inputs.facts),
     ...unlinkedNonemployeeCompensationKeys(inputs.facts),
+    ...unlinkedMiscIncomeKeys(inputs.facts),
   ];
   const open = malformedKeys.length > 0 || (unlinkedKeys.length > 0 && businesses.length === 0);
   const businessFallback = {
