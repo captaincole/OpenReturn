@@ -14,10 +14,9 @@ import type {
 } from "../../../facts/index.js";
 import { businessBasis, firstYearDepreciation } from "../../../federal/4562/assets.js";
 import {
-  activityDepreciationDeduction,
+  activityDepreciation,
   amortizationExact,
   amortizationThisYear,
-  depreciationPending,
   form4562Figures,
   line44,
 } from "../../../federal/4562/lines.js";
@@ -116,10 +115,11 @@ export function form3885AFigures(depreciation: ActivityDepreciation): Form3885AF
   );
   const line6 = gap ? undefined : sumOrBlank(line4, line5);
   // Line 7 waits with Form 4562; with nothing on Form 4562 line 22 the federal amount is 0.
-  const federalWaits = depreciationPending(depreciation);
-  const line7 = federalWaits
-    ? undefined
-    : (activityDepreciationDeduction(depreciation) ?? (line6 === undefined ? undefined : 0));
+  const federal = activityDepreciation(undefined, depreciation);
+  const line7 =
+    federal.kind !== "amount"
+      ? undefined
+      : (federal.amount ?? (line6 === undefined ? undefined : 0));
   const depreciationDifference = difference(line6, line7);
   const line9 = (depreciation.amortizedCosts ?? []).map(californiaAmortizationRow);
   /*
