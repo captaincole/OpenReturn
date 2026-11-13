@@ -32,6 +32,17 @@ const CA_FILING_STATUS_OPTION = {
  */
 const CA_DEPENDENT_EXEMPTION_2025 = 475;
 
+/*
+ * MANUAL EDIT: the personal, blind and senior exemption credit pre-printed on the
+ * 2025 form: "Multiply the number you put in the line 7 box by $153" (the form's
+ * lines 7, 8 and 9).
+ */
+const CA_EXEMPTION_CREDIT_2025 = 153;
+
+/* Lines 7, 8 and 9: the count times the exemption credit; blank with no count. */
+const exemptionCreditAmount = (count: unknown) =>
+  typeof count === "number" ? count * CA_EXEMPTION_CREDIT_2025 : undefined;
+
 type Bindings = Partial<{ [K in keyof Form540]: BindingFn<Form540, Form540FilingInfo, K> }>;
 type RowBinding = (form: FormAccessor<Form540>, info: Form540FilingInfo) => unknown;
 
@@ -92,7 +103,7 @@ export function register(): void {
       // MANUAL EDIT: line 5, the year the spouse/RDP died (identity.spouse.year_of_death).
       "header.spouse_rdp_year_of_death": (_, info) =>
         info.filingStatus === "qualifying_surviving_spouse" ? info.spouseYearOfDeath : undefined,
-      // MANUAL EDIT: the count widget gets the count; the amount widget gets count × $153.
+      // MANUAL EDIT: the count widget gets the count; the amount widget gets count × $153 (CA_EXEMPTION_CREDIT_2025).
       "line.7_personal_exemption_count": (_, info) =>
         info.filingStatus === "married_filing_jointly" ||
         info.filingStatus === "qualifying_surviving_spouse"
@@ -100,10 +111,8 @@ export function register(): void {
           : info.filingStatus
             ? 1
             : undefined,
-      "line.7_personal_exemption_amount": (form) => {
-        const count = form["line.7_personal_exemption_count"];
-        return typeof count === "number" ? count * 153 : undefined;
-      },
+      "line.7_personal_exemption_amount": (form) =>
+        exemptionCreditAmount(form["line.7_personal_exemption_count"]),
       /*
        * MANUAL EDIT: 65 or older on December 31, 2025 (ca-540-inst-2025::sec::line-9-senior-exemptions::b01).
        * MFJ stays blank: the spouse's age is not modeled here. A qualifying surviving
@@ -125,14 +134,10 @@ export function register(): void {
           (info.filingStatus === "married_filing_jointly" && info.spouseBlind ? 1 : 0);
         return count > 0 ? count : undefined;
       },
-      "line.8_blind_exemption_amount": (form) => {
-        const count = form["line.8_blind_exemption_count"];
-        return typeof count === "number" ? count * 153 : undefined;
-      },
-      "line.9_senior_exemption_amount": (form) => {
-        const count = form["line.9_senior_exemption_count"];
-        return typeof count === "number" ? count * 153 : undefined;
-      },
+      "line.8_blind_exemption_amount": (form) =>
+        exemptionCreditAmount(form["line.8_blind_exemption_count"]),
+      "line.9_senior_exemption_amount": (form) =>
+        exemptionCreditAmount(form["line.9_senior_exemption_count"]),
       // MANUAL EDIT: MFS puts the spouse's SSN in the header and full name on line 3.
       "header.spouse_ssn": (_, info) =>
         info.filingStatus === "married_filing_separately" ||
