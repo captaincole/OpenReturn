@@ -156,7 +156,7 @@ const OUT_OF_SCOPE: { key: string; supported: (v: unknown) => boolean; detail: s
       value === "head_of_household" ||
       value === "qualifying_surviving_spouse",
     detail:
-      "Only single filers are tested (married filing separately: one unverified scenario; jointly: one federal-only scenario; head of household: two federal-only scenarios; qualifying surviving spouse: one federal-only scenario and one California scenario).",
+      "Filing statuses other than single, married filing jointly or separately, head of household and qualifying surviving spouse are not modeled.",
   },
   {
     key: "decisions.scope.ca_residency",
