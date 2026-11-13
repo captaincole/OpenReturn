@@ -126,6 +126,18 @@ function spouseYearOfDeathInput(inputs: ResolverInputs): Record<string, unknown>
   return { [SPOUSE_KEYS.yearOfDeath]: text(inputs, SPOUSE_KEYS.yearOfDeath) };
 }
 
+/* Form 540 line 9: on a joint return the spouse's age adds a senior exemption. */
+function spouseDobInput(inputs: ResolverInputs): Record<string, unknown> {
+  if (filingStatusOf(inputs) !== "married_filing_jointly") return {};
+  return { [SPOUSE_KEYS.dob]: text(inputs, SPOUSE_KEYS.dob) };
+}
+
+/* The spouse answers Form 540 reads: lines 5 and 9. */
+const spouseInputs = (inputs: ResolverInputs) => ({
+  ...spouseYearOfDeathInput(inputs),
+  ...spouseDobInput(inputs),
+});
+
 export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
   const { decisionByKey, factByKey } = inputs;
   const resolution = resolveMustFile(decisionByKey, {
@@ -152,7 +164,7 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
         "decisions.refund.refund_full_overpayment_ca": decisionByKey.get(
           "decisions.refund.refund_full_overpayment_ca",
         ),
-        ...spouseYearOfDeathInput(inputs),
+        ...spouseInputs(inputs),
       }),
     },
     spouseYearOfDeath: text(inputs, SPOUSE_KEYS.yearOfDeath),
