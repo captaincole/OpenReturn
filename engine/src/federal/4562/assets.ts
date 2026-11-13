@@ -6,7 +6,7 @@
  */
 
 import type { DepreciableAsset, DepreciationConvention, RecoveryClass } from "../../facts/index.js";
-import { stepsOf } from "../../money.js";
+import { roundDollars, stepsOf } from "../../money.js";
 
 /*
  * irs-4562-inst-2025::sec::recovery-period-for-most-property::b01: the recovery
@@ -150,6 +150,16 @@ export function federalAssetFigures(asset: DepreciableAsset): FederalAssetFigure
     section179,
     specialAllowance,
     macrsBasis,
-    depreciation: macrsBasis === undefined ? undefined : macrsBasis * firstYearRate(asset),
+    depreciation: macrsBasis === undefined ? undefined : firstYearDepreciation(asset, macrsBasis),
   };
+}
+
+/*
+ * One asset's first-year deduction, the one rounding rule for it: column (c),
+ * the basis rounded to the dollar, times the rate, rounded ("Multiply column (c)
+ * by the applicable rate", irs-4562-inst-2025::sec::recovery-period-for-most-property::b05).
+ * Line 19's rows, their month cells and FTB 3885A's column (f) add these.
+ */
+export function firstYearDepreciation(asset: DepreciableAsset, basis: number): number {
+  return roundDollars(roundDollars(basis) * firstYearRate(asset));
 }

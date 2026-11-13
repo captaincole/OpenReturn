@@ -106,7 +106,9 @@ function monthGroup(
 /* A column of a month row, rounded; undefined while an asset waits. */
 function monthTotal(members: FederalAssetFigures[], part: "macrsBasis" | "depreciation") {
   const amounts = members.map((figures) => figures[part]);
-  return amounts.includes(undefined) ? undefined : roundDollars(sum(...amounts));
+  if (amounts.includes(undefined)) return undefined;
+  // Column (c) is rounded once; column (g) adds the assets' rounded deductions (assets.ts).
+  return part === "macrsBasis" ? roundDollars(sum(...amounts)) : sum(...amounts);
 }
 
 /* Lines 19h–19j: a row per month placed in service (the period, MM and S/L are printed). */
