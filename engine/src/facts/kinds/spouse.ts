@@ -5,6 +5,8 @@ export const SPOUSE_KEYS = {
   ssn: "identity.spouse.ssn",
   /* 1040 line 12d and Schedule 1-A line 36b: born before January 2, 1961. */
   dob: "identity.spouse.dob",
+  /* CA 540 line 5 (qualifying surviving spouse/RDP): the year the spouse died, as "2023". */
+  yearOfDeath: "identity.spouse.year_of_death",
   /* 1040 line 6d and the Social Security Benefits Worksheet base amount. */
   livedApartAllYear: "filing_status.lived_apart_from_spouse_all_year",
   /* 1040 page 1 (MFS or HOH): lived apart from the spouse for the last 6 months of the year. */

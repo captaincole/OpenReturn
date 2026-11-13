@@ -157,6 +157,13 @@ export const tcbCa009Facts: TaxFactRow[] = [
   idFact("name.last", HOUSEHOLD.taxpayer.lastName),
   idFact("ssn", HOUSEHOLD.taxpayer.ssn),
   idFact("dob", "07/07/1958"),
+  identityFact({
+    userId: TCB_CA_009_USER_ID,
+    taxYear: TCB_CA_009_TAX_YEAR,
+    suffix: "spouse.year_of_death",
+    value: "2023",
+    sourceNote: `${ANSWERS}: basic3.FilingStatus5YSDIED.`,
+  }),
   idFact("address.street", HOUSEHOLD.street),
   idFact("address.city", HOUSEHOLD.city),
   idFact("address.state", HOUSEHOLD.state),
