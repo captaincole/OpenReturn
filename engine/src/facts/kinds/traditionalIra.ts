@@ -7,9 +7,19 @@
 export type IraOwner = "taxpayer" | "spouse";
 
 export interface TraditionalIraFactValue {
-  /* Schedule 1 line 20 (IRA Deduction Worksheet line 11): traditional IRA contributions for 2025, deductible or not. */
+  /*
+   * IRA Deduction Worksheet line 11: the year's traditional IRA contributions,
+   * deductible or not. The worksheet decides the split: line 12 is Schedule 1
+   * line 20, and lines 10 and 11 less line 12 is Form 8606 line 1
+   * (irs-8606-inst-2025::sec::line-1::b01).
+   */
   contributions?: number;
-  /* Form 8606 line 1: nondeductible contributions for 2025. */
+  /*
+   * Form 8606 line 1: nondeductible contributions for 2025. Without
+   * `contributions`, it is line 1 as stated. With it, it must equal what the
+   * worksheet leaves, or Schedule 1 line 20 is a gap: a filer may choose to
+   * deduct less than the worksheet allows, and the engine does not model that.
+   */
   nondeductibleContributions?: number;
   /* Line 4: the part of line 1 contributed from January 1 to April 15, 2026. */
   contributionsMadeIn2026?: number;

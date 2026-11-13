@@ -1,8 +1,10 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
 import { defineForm, type FormAccessor } from "../../defineForm.js";
-import { roundDollars } from "../../money.js";
+import { roundDollars, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { nondeductibleLeftover, worksheetLine10 } from "../schedule-1/iraDeduction.js";
 import type { Form8606FilingInfo, IraHolder } from "./filingInfo.js";
 import { partIIIFigures, type PartIIIFigures } from "./partIII.js";
 import type { Form8606 } from "./types.js";
@@ -53,6 +55,32 @@ function timesRatio(amount: number | undefined, form: Form): number | undefined 
   return roundDollars((amount * scaled) / RATIO_SCALE);
 }
 
+/*
+ * MANUAL EDIT: line 1 (irs-8606-inst-2025::sec::line-1::b01). With only
+ * `contributions` stated, the IRA Deduction Worksheet's lines 10 and 11 less
+ * line 12 (Schedule 1 line 20); it waits while line 20 waits. Otherwise the
+ * stated nondeductible contributions.
+ */
+function line1(form: Form, info: Form8606FilingInfo) {
+  const holder = holderOf(info);
+  if (!holder || !partIApplies(info)) return undefined;
+  if (holder.line1Gap) return unsupported(holder.line1Gap);
+  if (!holder.line1FromWorksheet) return roundDollars(holder.ira?.nondeductibleContributions ?? 0);
+  const line12 = form["schedule-1.1.line.20"];
+  if (typeof line12 !== "number") return undefined;
+  const earnings =
+    sum(form["schedule-se.0.line.6"] as number | undefined) -
+    sum(
+      form["schedule-1.1.line.15"] as number | undefined,
+      form["schedule-1.1.line.16"] as number | undefined,
+    );
+  const line10 = worksheetLine10(
+    sum(holder.worksheetWages, form["schedule-1.0.line.2a"] as number | undefined),
+    earnings,
+  );
+  return roundDollars(nondeductibleLeftover(line10, holder.ira?.contributions ?? 0, line12));
+}
+
 /* MANUAL EDIT: Part III (irs-8606-inst-2025::sec::part-iii-distributions-from-roth-iras::b01), from partIII.ts. */
 function partIIIBindings() {
   const line =
@@ -96,10 +124,7 @@ export function register(): void {
         if (!owner) return undefined;
         return owner === "spouse" ? info.spouseSSN : info.taxpayerSSN;
       },
-      "0.line.1_nondeductible_traditional_contributions": (_, info) =>
-        partIApplies(info)
-          ? roundDollars(holderOf(info)?.ira?.nondeductibleContributions ?? 0)
-          : undefined,
+      "0.line.1_nondeductible_traditional_contributions": line1,
       "0.line.2_total_traditional_basis": (_, info) =>
         partIApplies(info) ? roundDollars(holderOf(info)?.ira?.basisPriorYears ?? 0) : undefined,
       "0.line.3_total_contributions_and_basis": (form) => {

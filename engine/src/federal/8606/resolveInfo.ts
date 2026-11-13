@@ -10,6 +10,7 @@ import {
   type RetirementDistributionFactValue,
   type TraditionalIraFactValue,
 } from "../../facts/index.js";
+import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { atLeast, sum } from "../../money.js";
 import {
   factsInCategory,
@@ -17,6 +18,9 @@ import {
   resolveMustFile,
   type ResolverInputs,
 } from "../../resolverInputs.js";
+import { iraAnswers } from "../schedule-1/answers.js";
+import { contributionLimit, iraWorksheetGap } from "../schedule-1/iraDeduction.js";
+import { needsPub590AWorksheets } from "../schedule-1/pub590a.js";
 import type { Form8606FilingInfo, IraHolder } from "./filingInfo.js";
 import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "./partIII.js";
 
@@ -44,6 +48,55 @@ function partIApplies(ira: TraditionalIraFactValue, basis: number, line7: number
   );
 }
 
+const SPOUSE_WORKSHEET_GAP =
+  "The engine figures the IRA Deduction Worksheet for the taxpayer's IRA only; the spouse's Form 8606 line 1 needs the stated nondeductible contributions.";
+const WORKSHEET_WITH_DISTRIBUTION_GAP =
+  "Traditional IRA contributions with a traditional IRA distribution or conversion: the IRA deduction and the taxable part depend on each other (Pub. 590-A and Pub. 590-B worksheets), which is not modeled.";
+
+/*
+ * Form 8606 line 1 from the IRA Deduction Worksheet (traditionalIra.ts): when
+ * only `contributions` is stated, line 1 is the worksheet's lines 10 and 11
+ * less line 12 (irs-8606-inst-2025::sec::line-1::b01). The form waits for the
+ * worksheet, so this decides only whether line 1 can be above 0. It is 0 for a
+ * person not covered by a plan whose contributions are within the limit and
+ * the W-2 wages; otherwise the form files and line 1 reads Schedule 1 line 20.
+ * Line 1 is a gap exactly when line 20 is, and when a distribution or a
+ * conversion would make line 1 and line 20 depend on each other.
+ */
+function worksheetLine1(
+  inputs: ResolverInputs,
+  owner: IraOwner,
+  ira: TraditionalIraFactValue,
+  line7: number,
+) {
+  const contributions = ira.contributions ?? 0;
+  const fromWorksheet = contributions > 0 && ira.nondeductibleContributions === undefined;
+  if (!fromWorksheet) return { line1FromWorksheet: false, worksheetWages: 0 };
+  if (owner === "spouse")
+    return { line1FromWorksheet: true, line1Gap: SPOUSE_WORKSHEET_GAP, worksheetWages: 0 };
+  const answers = iraAnswers(inputs);
+  const gap = iraWorksheetGap({
+    status: filingStatusOf(inputs),
+    coveredByPlan: answers.iraCoveredByPlan,
+    adoptionBenefits: answers.iraAdoptionBenefits,
+    livedApartAllYear: answers.livedApartAllYear,
+    pub590aWorksheets: needsPub590AWorksheets(inputs),
+  });
+  const possible =
+    gap !== undefined ||
+    answers.iraCoveredByPlan ||
+    contributions > contributionLimit(answers.iraAge50OrOlder) ||
+    contributions > answers.iraWages;
+  const linked = line7 > 0 || (ira.convertedToRoth ?? 0) > 0;
+  return {
+    line1FromWorksheet: possible,
+    line1Gap: possible
+      ? (gap ?? (linked ? WORKSHEET_WITH_DISTRIBUTION_GAP : undefined))
+      : undefined,
+    worksheetWages: answers.iraWages,
+  };
+}
+
 function iraHolder(inputs: ResolverInputs, owner: IraOwner): IraHolder {
   const own = ownRows(inputs, owner);
   // Roth IRA rows belong to Part III (partIII.ts); code Y rows are on no line.
@@ -55,13 +108,17 @@ function iraHolder(inputs: ResolverInputs, owner: IraOwner): IraHolder {
   const gross = rows.length === 0 ? 0 : sum(...rows.map((row) => row.box1));
   const basis = (ira?.nondeductibleContributions ?? 0) + (ira?.basisPriorYears ?? 0);
   const line7 = atLeast(0, gross - (ira?.rolledOver ?? 0) - (ira?.convertedToRoth ?? 0));
+  const worksheet = ira
+    ? worksheetLine1(inputs, owner, ira, line7)
+    : { line1FromWorksheet: false, worksheetWages: 0 };
   return {
     owner,
     ira,
     iraDistributionsGross: gross,
     basis,
     line7,
-    partI: ira !== undefined && partIApplies(ira, basis, line7),
+    partI: ira !== undefined && (partIApplies(ira, basis, line7) || worksheet.line1FromWorksheet),
+    ...worksheet,
     rothDistribution: rothRows.length > 0,
     rothRows,
     roth: readRothIraFact(inputs.factByKey, owner),
@@ -80,6 +137,7 @@ export function mustFile8606(holder: IraHolder): boolean {
   const ira = holder.ira ?? {};
   return (
     (ira.nondeductibleContributions ?? 0) > 0 ||
+    holder.line1FromWorksheet ||
     (ira.convertedToRoth ?? 0) > 0 ||
     (holder.basis > 0 && holder.line7 > 0) ||
     holder.rothDistribution

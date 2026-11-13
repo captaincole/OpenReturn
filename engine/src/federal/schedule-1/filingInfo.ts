@@ -42,7 +42,10 @@ export interface Schedule1FilingInfo extends BaseFilingInfo {
   whistleblowerAwardFees?: number;
   /** Line 20: the IRA Deduction Worksheet's answers for the taxpayer's IRA. */
   iraContributions?: number;
-  iraCoveredAtWork?: boolean;
+  /** Form 8606 line 1 as stated: it must match what the worksheet leaves. */
+  iraNondeductibleContributions?: number;
+  /** Line 1a: a plan at work or a self-employed plan. */
+  iraCoveredByPlan?: boolean;
   iraAge50OrOlder?: boolean;
   iraWages?: number;
   /** W-2 box 12 code T: excluded adoption benefits send a covered person to Pub. 590-A. */
