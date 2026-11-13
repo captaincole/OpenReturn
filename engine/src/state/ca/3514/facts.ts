@@ -22,6 +22,8 @@ import type { CaEitcBusiness } from "./filingInfo.js";
 
 // W-2 box 12 code Q: nontaxable combat pay.
 const COMBAT_PAY_CODE = "Q";
+// W-2 box 12 code II: Medicaid waiver payments excluded from income.
+const MEDICAID_WAIVER_CODE = "II";
 
 export function w2Facts(inputs: ResolverInputs): W2FactValue[] {
   return factsInCategory(inputs, "wages")
@@ -57,13 +59,20 @@ export function nonqualifiedPlanBox11(inputs: ResolverInputs): number {
   );
 }
 
-/* W-2 box 12 code Q on any W-2; undefined when no W-2 reports it. */
-export function combatPay(inputs: ResolverInputs): number | undefined {
+/* A W-2 box 12 code's amounts on any W-2; undefined when no W-2 reports the code. */
+function box12Code(inputs: ResolverInputs, code: string): number | undefined {
   const entries = w2Facts(inputs)
     .flatMap((w2) => w2.box12 ?? [])
-    .filter((entry) => entry.code.trim().toUpperCase() === COMBAT_PAY_CODE);
+    .filter((entry) => entry.code.trim().toUpperCase() === code);
   return entries.length === 0 ? undefined : sum(...entries.map((entry) => entry.amount));
 }
+
+/* W-2 box 12 code Q: nontaxable combat pay (line 17's election). */
+export const combatPay = (inputs: ResolverInputs) => box12Code(inputs, COMBAT_PAY_CODE);
+
+/* W-2 box 12 code II: Medicaid waiver payments excluded from income (lines 13 and 14). */
+export const medicaidWaiverPayments = (inputs: ResolverInputs) =>
+  box12Code(inputs, MEDICAID_WAIVER_CODE);
 
 /* Line 23a's "Wages not subject to California withholding": box 1 of the W-2s with no California box 15. */
 export function wagesOutsideCalifornia(inputs: ResolverInputs): number {

@@ -13,6 +13,7 @@ import {
   missingInputs,
   resolveMustFile,
   sumInvestmentBox,
+  sumW2Box,
   text,
   type ResolverInputs,
 } from "../../../resolverInputs.js";
@@ -21,6 +22,7 @@ import {
   caEitcWages,
   combatPay,
   largestBusiness,
+  medicaidWaiverPayments,
   nonqualifiedPlanBox11,
   wagesOutsideCalifornia,
 } from "./facts.js";
@@ -28,6 +30,7 @@ import type { CaEitcAnswers, Form3514FilingInfo } from "./filingInfo.js";
 import {
   CA_EITC_INCOME_LIMIT,
   CA_EITC_INVESTMENT_INCOME_LIMIT,
+  CA_YCTC_ZERO_INCOME_LIMIT,
   atLeast18,
   fosterYouthAge,
 } from "./limits.js";
@@ -69,27 +72,43 @@ function investmentIncomeFromDocuments(inputs: ResolverInputs): number {
 }
 
 /*
- * Whether the EITC is still possible from facts alone. Resolvers cannot read
- * form lines, so each test uses the facts' bound and errs toward filing:
- * - earned income: California W-2 wages, a business, nontaxable combat pay or
- *   a disability pension (line 13); with none, the EITC is 0 (worksheet line 1)
- *   and only the YCTC for a young child can apply (Step 8);
- * - Step 1, question a: federal AGI at least the federal EIC's lower bound
- *   (agiFloor), and California wages, at or over $32,901 with no business;
- * - Step 2: interest and dividends over $4,814;
+ * Step 1, question a, and Step 2 from facts, which both credits need (the
+ * YCTC only with the EITC allowed, or "otherwise allowed" at zero earned
+ * income, Step 8): federal AGI at least the federal EIC's lower bound
+ * (agiFloor) under $32,901, and the documents' interest and dividends at most
+ * $4,814. A bound that cannot be figured errs toward filing.
+ */
+function incomeTestsPass(inputs: ResolverInputs, joint: boolean): boolean {
+  const agi = agiFloor(inputs, joint);
+  if (agi !== undefined && agi >= CA_EITC_INCOME_LIMIT) return false;
+  return investmentIncomeFromDocuments(inputs) <= CA_EITC_INVESTMENT_INCOME_LIMIT;
+}
+
+/*
+ * Whether the EITC is still possible from facts alone, past the income tests:
+ * - earned income: California W-2 wages, a business, nontaxable combat pay,
+ *   Medicaid waiver payments or a disability pension (line 13); with none,
+ *   the EITC is 0 (worksheet line 1);
+ * - California wages at or over $32,901 with no business (B Differences);
  * - Step 4, question b, without a qualifying child: no filer is 18.
  */
 function caEitcMayApply(inputs: ResolverInputs, joint: boolean, children: number): boolean {
   const wages = caEitcWages(inputs) ?? 0;
   const { businesses } = businessesOnReturn(inputs.facts, joint);
-  if (wages <= 0 && businesses.length === 0 && combatPay(inputs) === undefined) return false;
-  const agi = agiFloor(inputs, joint);
-  if (agi !== undefined && agi >= CA_EITC_INCOME_LIMIT) return false;
+  const other = combatPay(inputs) !== undefined || medicaidWaiverPayments(inputs) !== undefined;
+  if (wages <= 0 && businesses.length === 0 && !other) return false;
   if (businesses.length === 0 && wages >= CA_EITC_INCOME_LIMIT) return false;
-  if (investmentIncomeFromDocuments(inputs) > CA_EITC_INVESTMENT_INCOME_LIMIT) return false;
   if (children > 0) return true;
   const dobs = [text(inputs, "identity.dob"), ...(joint ? [text(inputs, SPOUSE_KEYS.dob)] : [])];
   return dobs.some((dob) => atLeast18(dob) !== false);
+}
+
+/*
+ * The YCTC at zero earned income (Step 8, line 23a): a qualifying child under
+ * six, and W-2 wages of $35,640 or less.
+ */
+function yctcWithoutEarnedIncomeMayApply(inputs: ResolverInputs, youngChild: boolean): boolean {
+  return youngChild && sumW2Box(inputs, "box1") <= CA_YCTC_ZERO_INCOME_LIMIT;
 }
 
 /*
@@ -157,9 +176,10 @@ function caEitcQuestions(
  * completed form FTB 3514". The explicit key is
  * decisions.scope.must_file_3514. The fallback files the form when Form
  * 540 files for a full-year resident (Steps 7, 9 and 11 for Form 540NR are not
- * modeled) and either the EITC is still possible from facts (caEitcMayApply)
- * with no answer ruling it out, or a qualifying child younger than six may
- * bring the YCTC with no earned income (Step 8). The lines then decide the
+ * modeled), the income tests may pass (incomeTestsPass), no answer rules the
+ * credit out, and either the EITC is still possible from facts (caEitcMayApply)
+ * or a qualifying child younger than six may bring the YCTC with no earned
+ * income (Step 8). The lines then decide the
  * credits; the form can file with none, as Schedule EIC can.
  */
 export function resolve3514Info(inputs: ResolverInputs): Form3514FilingInfo {
@@ -171,13 +191,16 @@ export function resolve3514Info(inputs: ResolverInputs): Form3514FilingInfo {
   // A missing residency answer files the form and asks it; another residency is Form 540NR's.
   const fullYear = residency === undefined || residency === "full_year";
   const eitc = caEitcMayApply(inputs, joint, listed.length);
-  const youngChild = listed.some(isYoungChild);
-  const possible = (eitc || youngChild) && !ruledOut(inputs, answers, listed.length);
+  const youngChild = yctcWithoutEarnedIncomeMayApply(inputs, listed.some(isYoungChild));
+  const possible =
+    incomeTestsPass(inputs, joint) &&
+    (eitc || youngChild) &&
+    !ruledOut(inputs, answers, listed.length);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_3514",
     fallbacks: [
       {
-        rule: `fallback: Form 540 files for a full-year resident, or one whose residency is not yet known (${files540 && fullYear}), the EITC may apply (${eitc}) or a child under six may bring the YCTC (${youngChild}), and no answer rules the credit out`,
+        rule: `fallback: Form 540 files for a full-year resident, or one whose residency is not yet known (${files540 && fullYear}), AGI and investment income may be under the limits, the EITC may apply (${eitc}) or a child under six may bring the YCTC at zero earned income (${youngChild}), and no answer rules the credit out`,
         value: files540 && fullYear && possible,
         triggeredByFactKeys: listed.map((child) => child.sourceFact.key),
         triggeredByDecisionKeys: [
@@ -207,6 +230,7 @@ export function resolve3514Info(inputs: ResolverInputs): Form3514FilingInfo {
     caEitcWages: caEitcWages(inputs),
     caNonqualifiedPlanBox11: nonqualifiedPlanBox11(inputs),
     caCombatPay: combatPay(inputs),
+    caMedicaidWaiverPayments: medicaidWaiverPayments(inputs),
     caWagesOutsideCalifornia: wagesOutsideCalifornia(inputs),
     caEitcBusiness: largestBusiness(inputs, joint),
     caEitcHasBusiness: businessesOnReturn(inputs.facts, joint).businesses.length > 0,
