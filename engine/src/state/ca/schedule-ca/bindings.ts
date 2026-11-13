@@ -51,6 +51,14 @@ function amountIfNonzero(value: unknown): number | undefined {
   return amount === 0 ? undefined : amount;
 }
 
+/* Line 27, column B or C: line 10 less line 26; blank when both are blank. */
+function line27Total(line10: unknown, line26: unknown): number | undefined {
+  const income = numberOrBlank(line10);
+  const adjustments = numberOrBlank(line26);
+  if (income === undefined && adjustments === undefined) return undefined;
+  return sum(income) - sum(adjustments);
+}
+
 /* Line 9a col B: lines 8a through 8z, column B. */
 const OTHER_INCOME_SUBTRACTIONS = [
   "1.line.b8b_subtractions",
@@ -205,14 +213,16 @@ export function register(): void {
           form["0.line.b6_subtractions"],
           form["2.line.b9a_subtractions"],
         ),
-      "3.line.c27_subtractions": (form) => {
-        const total = form["2.line.b10_subtractions"];
-        return typeof total === "number" ? total - sum(form["3.line.c26_subtractions"]) : undefined;
-      },
-      "3.line.c27_additions": (form) => {
-        const total = form["2.line.b10_additions"];
-        return typeof total === "number" ? total - sum(form["3.line.c26_additions"]) : undefined;
-      },
+      /*
+       * MANUAL EDIT: "Subtract line 26 from line 10 in column B and column C"
+       * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b08). Blank only
+       * when both lines are blank: a column B adjustment alone (the HSA deduction)
+       * makes line 27 negative.
+       */
+      "3.line.c27_subtractions": (form) =>
+        line27Total(form["2.line.b10_subtractions"], form["3.line.c26_subtractions"]),
+      "3.line.c27_additions": (form) =>
+        line27Total(form["2.line.b10_additions"], form["3.line.c26_additions"]),
       // MANUAL EDIT: no combined-name fact exists; join first + last name.
       "0.header.name": (_, info) =>
         info.taxpayerFirstName && info.taxpayerLastName

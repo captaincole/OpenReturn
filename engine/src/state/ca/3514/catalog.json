@@ -1,0 +1,1576 @@
+{
+  "form": {
+    "formId": "form-3514",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3514 — California Earned Income Tax Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3514.0.header.names_on_return",
+      "label": "Name or Names as shown on tax return",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1000",
+      "position": {
+        "page": 0,
+        "x": 40.8,
+        "y": 681.14
+      }
+    },
+    {
+      "fieldId": "form-3514.0.header.ssn_or_itin",
+      "label": "Your Social Security Number or Individual Taxpayer Identification Number. Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1001",
+      "position": {
+        "page": 0,
+        "x": 465.12,
+        "y": 681.38
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3514.0.header.separated_spouse_eitc",
+      "label": "If you are separated from your spouse or registered domestic partner (R D P), filing a separate return and meet the requirements to claim the California Earned Income Tax Credit (E I T C) (see instructions), check here.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3514_Form_1002 CB",
+      "position": {
+        "page": 0,
+        "x": 549.96,
+        "y": 645.4
+      }
+    },
+    {
+      "fieldId": "form-3514.0.line.1a_irs_disallowed_federal_eic",
+      "label": "Line 1a — Has the Internal Revenue Service (IRS) previously disallowed your federal Earned Income Credit (EIC)?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3514_Form_1003 RB",
+      "position": {
+        "page": 0,
+        "x": 456.5,
+        "y": 526
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.1b_ftb_disallowed_ca_eitc",
+      "label": "Line 1b — Has the Franchise Tax Board (FTB) previously disallowed your California EITC?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3514_Form_1004 RB",
+      "position": {
+        "page": 0,
+        "x": 456.5,
+        "y": 502
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.2_federal_agi",
+      "label": "Line 2 . Federal Adjusted Gross Income (A G I) (federal Form 1040 or 1040-SR, line 11b).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1005",
+      "position": {
+        "page": 0,
+        "x": 458.64,
+        "y": 478
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.0.line.3_federal_eic",
+      "label": "Line 3 . Federal Earned Income Credit (federal Form 1040 or 1040-SR, line 27a).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1006",
+      "position": {
+        "page": 0,
+        "x": 458.64,
+        "y": 454
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.0.line.4_investment_income",
+      "label": "Part 2 . Investment Income Information. Line 4 . Investment Income. See instructions for Step 2 – Investment Income.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1007",
+      "position": {
+        "page": 0,
+        "x": 458.64,
+        "y": 406
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.0.line.5_first_name_child_1",
+      "label": "Part 3 . Qualifying Child Information  Line 5 . Child 1 . First name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1008",
+      "position": {
+        "page": 0,
+        "x": 127.34,
+        "y": 334.08
+      }
+    },
+    {
+      "fieldId": "form-3514.0.line.5_first_name_child_2",
+      "label": "Line 5 . Child 2 . First name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1016",
+      "position": {
+        "page": 0,
+        "x": 285.6,
+        "y": 334.08
+      }
+    },
+    {
+      "fieldId": "form-3514.0.line.5_first_name_child_3",
+      "label": "Line 5 . Child 3 . First name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1024",
+      "position": {
+        "page": 0,
+        "x": 444.24,
+        "y": 334.08
+      }
+    },
+    {
+      "fieldId": "form-3514.0.line.6_last_name_child_1",
+      "label": "Line 6 . Child 1 . Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1009",
+      "position": {
+        "page": 0,
+        "x": 127.34,
+        "y": 310
+      }
+    },
+    {
+      "fieldId": "form-3514.0.line.6_last_name_child_2",
+      "label": "Line 6 . Child 2 . Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1017",
+      "position": {
+        "page": 0,
+        "x": 285.6,
+        "y": 310
+      }
+    },
+    {
+      "fieldId": "form-3514.0.line.6_last_name_child_3",
+      "label": "Line 6 . Child 3 . Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1025",
+      "position": {
+        "page": 0,
+        "x": 444.24,
+        "y": 310
+      }
+    },
+    {
+      "fieldId": "form-3514.0.line.7_ssn_or_itin_child_1",
+      "label": "Line 7.  Child 1 . Social Security Number or Individual Taxpayer Identification Number. See instructions. Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1010",
+      "position": {
+        "page": 0,
+        "x": 127.34,
+        "y": 286
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3514.0.line.7_ssn_or_itin_child_2",
+      "label": "Line 7 .  Child 2 . Social Security Number or Individual Taxpayer Identification Number. See instructions. Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1018",
+      "position": {
+        "page": 0,
+        "x": 285.6,
+        "y": 286
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3514.0.line.7_ssn_or_itin_child_3",
+      "label": "Line 7 . Child 3 . Social Security Number or Individual Taxpayer Identification Number. See instructions. Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1026",
+      "position": {
+        "page": 0,
+        "x": 444.24,
+        "y": 286
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3514.0.line.8_date_of_birth_child_1",
+      "label": "Line 8 . Child 1 . Date of birth (mm/dd/yyyy). If born after 2006 and the child is younger than you (or your spouse/Registered Domestic Partner, if filing jointly), skip line 9a and line 9b, go to line 10 .  Enter date of birth as a two digit month/two digit day/four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1011",
+      "position": {
+        "page": 0,
+        "x": 127.2,
+        "y": 237.84
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3514.0.line.8_date_of_birth_child_2",
+      "label": "Line 8 . Child 2 . Date of birth (mm/dd/yyyy). If born after 2006 and the child is younger than you (or your spouse/Registered Domestic Partner, if filing jointly), skip line 9a and line 9b, go to line 10 . Enter date of birth as a two digit month/two digit day/four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1019",
+      "position": {
+        "page": 0,
+        "x": 285.6,
+        "y": 238.08
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3514.0.line.8_date_of_birth_child_3",
+      "label": "Line 8 . Child 3 . Date of birth (mm/dd/yyyy). If born after 2006 and the child is younger than you (or your spouse/Registered Domestic Partner, if filing jointly), skip line 9a and line 9b, go to line 10 . Enter date of birth as a two digit month/two digit day/four digit year.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1027",
+      "position": {
+        "page": 0,
+        "x": 444,
+        "y": 238.08
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3514.0.line.9a_student_under_24_child_1",
+      "label": "Line 9a — Child 1: Was the child under age 24 at the end of 2025, a student, and younger than you (or your spouse/RDP, if filing jointly)?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3514_Form_1012 RB",
+      "position": {
+        "page": 0,
+        "x": 132.12,
+        "y": 190.32
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.9a_student_under_24_child_2",
+      "label": "Line 9a — Child 2: Was the child under age 24 at the end of 2025, a student, and younger than you (or your spouse/RDP, if filing jointly)?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3514_Form_1020 RB",
+      "position": {
+        "page": 0,
+        "x": 290.94,
+        "y": 190.08
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.9a_student_under_24_child_3",
+      "label": "Line 9a — Child 3: Was the child under age 24 at the end of 2025, a student, and younger than you (or your spouse/RDP, if filing jointly)?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3514_Form_1028 RB",
+      "position": {
+        "page": 0,
+        "x": 448.75,
+        "y": 190.08
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.9b_permanently_disabled_child_1",
+      "label": "Line 9b — Child 1: Was the child permanently and totally disabled during any part of 2025?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3514_Form_1013 RB",
+      "position": {
+        "page": 0,
+        "x": 132.12,
+        "y": 142.08
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.9b_permanently_disabled_child_2",
+      "label": "Line 9b — Child 2: Was the child permanently and totally disabled during any part of 2025?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3514_Form_1021 RB",
+      "position": {
+        "page": 0,
+        "x": 290.94,
+        "y": 142.2
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.9b_permanently_disabled_child_3",
+      "label": "Line 9b — Child 3: Was the child permanently and totally disabled during any part of 2025?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3514_Form_1029 RB",
+      "position": {
+        "page": 0,
+        "x": 448.75,
+        "y": 142.2
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.10_relationship_child_1",
+      "label": "Line 10 . Child 1 . Child's relationship to you. See instructions.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1014",
+      "position": {
+        "page": 0,
+        "x": 127.2,
+        "y": 105.88
+      }
+    },
+    {
+      "fieldId": "form-3514.0.line.10_relationship_child_2",
+      "label": "Line 10 . Child 2 . Child's relationship to you. See instructions.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1022",
+      "position": {
+        "page": 0,
+        "x": 285.6,
+        "y": 105.88
+      }
+    },
+    {
+      "fieldId": "form-3514.0.line.10_relationship_child_3",
+      "label": "Line 10 . Child 3 . Child's relationship to you. See instructions.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1030",
+      "position": {
+        "page": 0,
+        "x": 444.24,
+        "y": 105.4
+      }
+    },
+    {
+      "fieldId": "form-3514.0.line.11_days_lived_in_ca_child_1",
+      "label": "Line 11 . Child 1 . Number of days child lived with you in California during 2025 . Do not enter more than 365 days (or more than 366 days if it is a leap year). See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1015",
+      "position": {
+        "page": 0,
+        "x": 127.44,
+        "y": 69.3
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-3514.0.line.11_days_lived_in_ca_child_2",
+      "label": "Line 11 . Child 2 . Number of days child lived with you in California during 2025 . Do not enter more than 365 days (or more than 366 days if it is a leap year). See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1023",
+      "position": {
+        "page": 0,
+        "x": 285.6,
+        "y": 69.3
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-3514.0.line.11_days_lived_in_ca_child_3",
+      "label": "Line 11 . Child 3 . Number of days child lived with you in California during 2025 . Do not enter more than 365 days (or more than 366 days if it is a leap year). See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_1031",
+      "position": {
+        "page": 0,
+        "x": 444.1,
+        "y": 69.3
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-3514.1.line.12a_street_address_child_1",
+      "label": "Line 12 a. Child 1 . Child’s physical address during 2025 . See Instructions. Street address (number, street, and apartment number/suite number).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2001",
+      "position": {
+        "page": 1,
+        "x": 105.36,
+        "y": 681.5
+      }
+    },
+    {
+      "fieldId": "form-3514.1.line.12b_city_child_1",
+      "label": "Line 12 b. Child 1 . City.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2002",
+      "position": {
+        "page": 1,
+        "x": 105.36,
+        "y": 645.243
+      }
+    },
+    {
+      "fieldId": "form-3514.1.line.12c_state_child_1",
+      "label": "Line 12 c. Child 1 . State. Enter two letter State abbreviation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2003",
+      "position": {
+        "page": 1,
+        "x": 256.3,
+        "y": 645.5
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3514.1.line.12d_zip_child_1",
+      "label": "Line 12 d. Child 1 . ZIP code.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2004",
+      "position": {
+        "page": 1,
+        "x": 298.8,
+        "y": 646.6
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3514.1.line.12a_street_address_child_2",
+      "label": "Line 12 a. Child 2 . Child’s physical address during 2025 . See instructions. Street address (number, street, and apartment number/suite number).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2005",
+      "position": {
+        "page": 1,
+        "x": 105.36,
+        "y": 609.24
+      }
+    },
+    {
+      "fieldId": "form-3514.1.line.12b_city_child_2",
+      "label": "Line 12 b. Child 2 . City.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2006",
+      "position": {
+        "page": 1,
+        "x": 105.24,
+        "y": 573
+      }
+    },
+    {
+      "fieldId": "form-3514.1.line.12c_state_child_2",
+      "label": "Line 12 c. Child 2 . State. Enter two letter State abbreviation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2007",
+      "position": {
+        "page": 1,
+        "x": 256.5,
+        "y": 572.8
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3514.1.line.12d_zip_child_2",
+      "label": "Line 12 d. Child 2 . ZIP code.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2008",
+      "position": {
+        "page": 1,
+        "x": 299.76,
+        "y": 573.4
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3514.1.line.12a_street_address_child_3",
+      "label": "Line 12 a. Child 3 . Child’s physical address during 2025 . See instructions. Street address (number, street, and apartment number/suite number).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2009",
+      "position": {
+        "page": 1,
+        "x": 105.24,
+        "y": 537.5
+      }
+    },
+    {
+      "fieldId": "form-3514.1.line.12b_city_child_3",
+      "label": "Line 12 b. Child 3 . City.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2010",
+      "position": {
+        "page": 1,
+        "x": 105.24,
+        "y": 501.16
+      }
+    },
+    {
+      "fieldId": "form-3514.1.line.12c_state_child_3",
+      "label": "Line 12 c. Child 3 . State. Enter two letter State abbreviation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2011",
+      "position": {
+        "page": 1,
+        "x": 256.32,
+        "y": 500.92
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3514.1.line.12d_zip_child_3",
+      "label": "Line 12 d. Child 3 . ZIP code.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2012",
+      "position": {
+        "page": 1,
+        "x": 299.8,
+        "y": 501.5
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3514.1.line.13_ca_wages",
+      "label": "Part 4 . California Earned Income  Line 13 . Wages, salaries, tips, and other employee compensation, subject to California withholding. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2013",
+      "position": {
+        "page": 1,
+        "x": 458.4,
+        "y": 453.52
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.1.line.14_ihss_payments",
+      "label": "Line 14 . In Home Supportive Services payments. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2014",
+      "position": {
+        "page": 1,
+        "x": 458.4,
+        "y": 429.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.1.line.15_inmate_wages_nonqualified_pension",
+      "label": "Line 15 . Prison inmate wages and/or pension or annuity from a nonqualified deferred compensation plan or a nongovernmental IRC Section 457 plan. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2015",
+      "position": {
+        "page": 1,
+        "x": 458.4,
+        "y": 405.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.1.line.16_wages_less_lines_14_15",
+      "label": "Line 16 . Subtract line 14 and line 15 from line 13 .",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2016",
+      "position": {
+        "page": 1,
+        "x": 458.4,
+        "y": 381.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.1.line.17_nontaxable_combat_pay",
+      "label": "Line 17 . Nontaxable combat pay. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2017",
+      "position": {
+        "page": 1,
+        "x": 458.4,
+        "y": 357.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.1.line.18_business_income",
+      "label": "Line 18 . Business income or (loss). Enter amount from Worksheet 3, line 5 . See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2018",
+      "position": {
+        "page": 1,
+        "x": 458.4,
+        "y": 333.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.1.line.18a_business_name",
+      "label": "Line 18 a. Business name.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2019",
+      "position": {
+        "page": 1,
+        "x": 198.65,
+        "y": 309.03
+      }
+    },
+    {
+      "fieldId": "form-3514.1.line.18b_business_address",
+      "label": "Line 18 b. Business address. Street address (number, street, and apartment number/suite number)",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2020",
+      "position": {
+        "page": 1,
+        "x": 198.5,
+        "y": 273.7
+      }
+    },
+    {
+      "fieldId": "form-3514.1.line.18b_business_city",
+      "label": "Line 18 b. City.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2021",
+      "position": {
+        "page": 1,
+        "x": 198.78,
+        "y": 237.4
+      }
+    },
+    {
+      "fieldId": "form-3514.1.line.18b_business_state",
+      "label": "Line 18 b. State. Enter two letter State abbreviation.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2022",
+      "position": {
+        "page": 1,
+        "x": 349.8,
+        "y": 237.46
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3514.1.line.18b_business_zip",
+      "label": "Line 18 b. ZIP code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2023",
+      "position": {
+        "page": 1,
+        "x": 393.25,
+        "y": 237.46
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3514.1.line.18c_business_license_number",
+      "label": "Line 18 c. Business license number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2024",
+      "position": {
+        "page": 1,
+        "x": 198.84,
+        "y": 213.42
+      }
+    },
+    {
+      "fieldId": "form-3514.1.line.18d_sein",
+      "label": "Line 18 d. State Employer Identification Number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2025",
+      "position": {
+        "page": 1,
+        "x": 198.88,
+        "y": 189.4
+      },
+      "maxLength": 8
+    },
+    {
+      "fieldId": "form-3514.1.line.18e_business_code",
+      "label": "Line 18 e. Business code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2026",
+      "position": {
+        "page": 1,
+        "x": 198.84,
+        "y": 165.5
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3514.1.line.19_ca_earned_income",
+      "label": "Line 19 . California earned income. Add line 16, line 17, and line 18 .",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2027",
+      "position": {
+        "page": 1,
+        "x": 458.46,
+        "y": 141.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.1.line.20_ca_eitc",
+      "label": "Part 5 . California Earned Income Tax Credit  Line 20 . California Earned Income Tax Credit. Enter amount from California Earned Income Tax Credit Worksheet, Part Three, line 6 . This amount should also be entered on Form 540, line 75, or Form 540 2 E Z, Line 23a.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_2028",
+      "position": {
+        "page": 1,
+        "x": 458.4,
+        "y": 93.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.2.line.21_ca_exemption_credit_percentage_whole",
+      "label": "Part 6 . Part-Year Resident California Earned Income Tax Credit   Line 21 . California exemption credit percentage from Form 540 N R, line 38 . See instructions. If more than 1, enter 1.0000 . Enter one digit before decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3000",
+      "position": {
+        "page": 2,
+        "x": 372,
+        "y": 681.439
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3514.2.line.21_ca_exemption_credit_percentage_decimal",
+      "label": "Line 21 . Enter 4 digits after decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3001",
+      "position": {
+        "page": 2,
+        "x": 386.03,
+        "y": 681.439
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3514.2.line.22_part_year_resident_eitc",
+      "label": "Line 22 . Part-Year Resident Earned Income Tax Credit. Multiply line 20 by line 21 . This amount should also be entered on Form 540 N R, line 85 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3002",
+      "position": {
+        "page": 2,
+        "x": 458.5,
+        "y": 657.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.2.line.23_ca_earned_income",
+      "label": "Part 7 . Young Child Tax Credit  Line 23 . California earned income. Enter the amount from form FTB 3514, line 19 . If the amount entered here  is greater than $0, do not complete line 23 a or line 23 b and continue on to line 24 .",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3003",
+      "position": {
+        "page": 2,
+        "x": 458.5,
+        "y": 597.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.2.line.23a_total_wages",
+      "label": "Line 23a. Total wages, salaries, tips, and other employee compensation. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3004",
+      "position": {
+        "page": 2,
+        "x": 371.94,
+        "y": 573.28
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.2.line.23b_net_loss_or_agi_over_limit",
+      "label": "Line 23b. If your total net loss exceeds $35,640 or your federal adjusted gross income exceeds $32,900, check the box. See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3514_Form_3005 CB",
+      "position": {
+        "page": 2,
+        "x": 372.03,
+        "y": 549.5
+      }
+    },
+    {
+      "fieldId": "form-3514.2.line.25_excess_over_threshold",
+      "label": "Line 25 . Excess earned income over threshold. Subtract $27,425 from line 23 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3007",
+      "position": {
+        "page": 2,
+        "x": 458.52,
+        "y": 453.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.2.line.26_excess_divided_by_100_whole",
+      "label": "Line 26 . Divide line 25 by 100 . Enter the result as a decimal out to two decimal places, do not round. Enter digits before decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3008",
+      "position": {
+        "page": 2,
+        "x": 530.4,
+        "y": 428.98
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3514.2.line.26_excess_divided_by_100_decimal",
+      "label": "Line 26 . Enter digits after decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3009",
+      "position": {
+        "page": 2,
+        "x": 552,
+        "y": 428.98
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3514.2.line.27_reduction_amount_dollars",
+      "label": "Line 27 . Reduction amount. Multiply line 26 by $21.71 . Enter the result as a decimal out to two decimal places, do not round.  Enter digits before decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3010",
+      "position": {
+        "page": 2,
+        "x": 458.34,
+        "y": 405.25
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.2.line.27_reduction_amount_cents",
+      "label": "Line 27 . Enter digits after decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3011",
+      "position": {
+        "page": 2,
+        "x": 552.24,
+        "y": 405.25
+      }
+    },
+    {
+      "fieldId": "form-3514.2.line.28_yctc",
+      "label": "Line 28 . Young Child Tax Credit. This amount should also be entered on Form 540, line 76, or Form 540 2 E Z, line 23b .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3012",
+      "position": {
+        "page": 2,
+        "x": 458.52,
+        "y": 332.68
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.2.line.29_ca_exemption_credit_percentage_whole",
+      "label": "Part 8 . Part-Year Resident Young Child Tax Credit  Line 29 . California exemption credit percentage from Form 540 N R, line 38 . See instructions. If more than 1, enter 1.0000 . Enter one digit before decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3013",
+      "position": {
+        "page": 2,
+        "x": 372,
+        "y": 285.28
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-3514.2.line.29_ca_exemption_credit_percentage_decimal",
+      "label": "Line 29 . Enter 4 digits after decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3014",
+      "position": {
+        "page": 2,
+        "x": 386.16,
+        "y": 285.28
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3514.2.line.30_part_year_resident_yctc",
+      "label": "Line 30 . Part-year resident Young Child Tax Credit. Multiply line 28 by line 29 . This amount should also be entered on Form 540 N R, line 86 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3015",
+      "position": {
+        "page": 2,
+        "x": 458.52,
+        "y": 261.28
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.2.line.31a_primary_taxpayer_claims_fytc",
+      "label": "Part 9 . Foster Youth Tax Credit   Line 31 . Who is claiming the Foster Youth Tax Credit? If both spouses/Registered Domestic Partners qualify, you must each check the box that applies to you. See instructions. a. Primary Taxpayer: My name is the first name listed on this return.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3514_Form_3016 CB",
+      "position": {
+        "page": 2,
+        "x": 372.03,
+        "y": 189.4
+      }
+    },
+    {
+      "fieldId": "form-3514.2.line.31b_spouse_claims_fytc",
+      "label": "Line 31. Who is claiming the Foster Youth Tax Credit? If both spouses/Registered Domestic Partners qualify, you must each check the box that applies to you. See instructions. b. Spouse/Registered Domestic Partner: My name is listed as the spouse/Registered Domestic Partner on this joint return.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3514_Form_3017 CB",
+      "position": {
+        "page": 2,
+        "x": 372.03,
+        "y": 165.28
+      }
+    },
+    {
+      "fieldId": "form-3514.2.line.32a_foster_first_name_taxpayer",
+      "label": "Line 32 . Qualifying foster youth information. See instructions. 32a. Primary Taxpayer First name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3018",
+      "position": {
+        "page": 2,
+        "x": 256.56,
+        "y": 129.22
+      }
+    },
+    {
+      "fieldId": "form-3514.2.line.32a_foster_first_name_spouse",
+      "label": "Line 32 . Qualifying foster youth information. See instructions. 32a. Spouse or Registered Domestic Partner First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3020",
+      "position": {
+        "page": 2,
+        "x": 430.14,
+        "y": 129.22
+      }
+    },
+    {
+      "fieldId": "form-3514.2.line.32b_foster_last_name_taxpayer",
+      "label": "Line 32 . Qualifying foster youth information. See instructions. 32b. Primary Taxpayer last name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3019",
+      "position": {
+        "page": 2,
+        "x": 256.68,
+        "y": 105.25
+      }
+    },
+    {
+      "fieldId": "form-3514.2.line.32b_foster_last_name_spouse",
+      "label": "Line 32 . Qualifying foster youth information. See instructions. 32b. Spouse or Registered Domestic Partner Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_3021",
+      "position": {
+        "page": 2,
+        "x": 430.14,
+        "y": 105.25
+      }
+    },
+    {
+      "fieldId": "form-3514.3.line.33a_taxpayer_cdss_consent",
+      "label": "Line 33 . To better assist us in verifying your eligibility, please check the applicable box or boxes below. See instructions. 33a. Primary Taxpayer. By checking the box and signing the tax return to which this form is attached, I certify that I am the primary taxpayer listed on this return and voluntarily consent and authorize the California Department of Social Services and any of its affiliated programs (including, but not limited to, CalWORKS and CalFRESH) to confirm or deny, and disclose relevant information to the State of California Franchise Tax Board regarding, my eligibility for the Foster Youth Tax Credit.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3514_Form_4001",
+      "position": {
+        "page": 3,
+        "x": 372.5,
+        "y": 645.5
+      }
+    },
+    {
+      "fieldId": "form-3514.3.line.33b_spouse_cdss_consent",
+      "label": "Line 33 . To better assist us in verifying your eligibility, please check the applicable box or boxes below. See instructions. 33b. Spouse/Registered Domestic Partner. By checking the box and signing the tax return to which this form is attached, I certify that I am the spouse or Registered Domestic Partner listed on this joint return and voluntarily consent and authorize the California Department of Social Services and any of its affiliated programs (including, but not limited to, CalWORKS and CalFRESH) to confirm or deny, and disclose relevant information to the State of California Franchise Tax Board regarding, my eligibility for the Foster Youth Tax Credit.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3514_Form_4002",
+      "position": {
+        "page": 3,
+        "x": 372.5,
+        "y": 573.4
+      }
+    },
+    {
+      "fieldId": "form-3514.3.line.34_ca_earned_income",
+      "label": "Line 34 . California earned income. Enter the amount from form FTB 3514, line 19 .",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_4003",
+      "position": {
+        "page": 3,
+        "x": 458.4,
+        "y": 513.52
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.3.line.35_available_fytc",
+      "label": "Line 35 . Available Foster Youth Tax Credit. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_4004",
+      "position": {
+        "page": 3,
+        "x": 458.4,
+        "y": 489.68
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.3.line.36_excess_over_threshold",
+      "label": "Line 36 . Excess earned income over threshold. Subtract $27,425 from line 34 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_4005",
+      "position": {
+        "page": 3,
+        "x": 458.5,
+        "y": 357.42
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.3.line.37_excess_divided_by_100_whole",
+      "label": "Line 37 . Divide line 36 by 100 . Enter the result as a decimal out to two decimal places, do not round. Enter digits before decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_4006",
+      "position": {
+        "page": 3,
+        "x": 530,
+        "y": 333.16
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3514.3.line.37_excess_divided_by_100_decimal",
+      "label": "Line 37 .  Enter digits after decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_4007",
+      "position": {
+        "page": 3,
+        "x": 553.2,
+        "y": 333.16
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3514.3.line.38_reduction_amount_dollars",
+      "label": "Line 38 . Reduction amount. Enter the result as a decimal out to two decimal places, do not round. Enter digits before decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_4008",
+      "position": {
+        "page": 3,
+        "x": 458.4,
+        "y": 308.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.3.line.38_reduction_amount_cents",
+      "label": "Line 38 . Enter digits after decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_4009",
+      "position": {
+        "page": 3,
+        "x": 553.2,
+        "y": 308.8
+      }
+    },
+    {
+      "fieldId": "form-3514.3.line.39_fytc",
+      "label": "Line 39 . Foster Youth Tax Credit. This amount should also be entered on Form 540, line 77, or Form 540 2 E Z, line 23c.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_4010",
+      "position": {
+        "page": 3,
+        "x": 458.64,
+        "y": 153.52
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3514.3.line.40_ca_exemption_credit_percentage_whole",
+      "label": "Part 10 . Part-Year Resident Foster Youth Tax  Credit  Line 40 . California exemption credit percentage from Form 540 N R, line 38 . If more than 1, enter 1.0000 . See instructions. Enter one digit before decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_4011",
+      "position": {
+        "page": 3,
+        "x": 371.61,
+        "y": 105.52
+      }
+    },
+    {
+      "fieldId": "form-3514.3.line.40_ca_exemption_credit_percentage_decimal",
+      "label": "Line 40 . Enter 4 digits after decimal point.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_4012",
+      "position": {
+        "page": 3,
+        "x": 387.54,
+        "y": 105.52
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3514.3.line.41_part_year_resident_fytc",
+      "label": "Line 41 . Part-year resident Foster Youth Tax Credit. Multiply line 39 by line 40 . This amount should also be entered on Form 540 N R, line 87 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3514_Form_4013",
+      "position": {
+        "page": 3,
+        "x": 458.52,
+        "y": 81.75
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3514/blank.pdf",
+    "ingestedAt": "2026-11-13T04:27:07.774Z",
+    "totalFields": 94,
+    "skipped": 0,
+    "catalogEntries": 94
+  }
+}

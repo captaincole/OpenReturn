@@ -3,6 +3,7 @@
 export * from "./kinds/alternativeMinimumTax.js";
 export * from "./kinds/blindness.js";
 export * from "./kinds/business.js";
+export * from "./kinds/caEarnedIncomeCredit.js";
 export * from "./kinds/caMiscellaneousDeductions.js";
 export * from "./kinds/caPayments.js";
 export * from "./kinds/capitalLossCarryover.js";
