@@ -2,6 +2,7 @@ import {
   ROTH_IRA_CODES,
   SPOUSE_KEYS,
   getGamblingWinningsFacts,
+  getGovernmentPaymentsFacts,
   getNonemployeeCompensationFacts,
   getPaymentTransactionsFacts,
   hasDistributionCode,
@@ -236,8 +237,7 @@ function socialSecurityRows(inputs: ResolverInputs): SocialSecurityFactValue[] {
  * Line 25b (irs-1040-inst-2025::sec::line-25b-form-s-1099::b01): box 4 of each
  * Form 1099, SSA-1099 box 6. 1099-K box 4 is backup withholding to "include …
  * as tax withheld" (irs-1099k-form-2025::sec::instructions-for-payee::b03).
- * 1099-NEC and 1099-MISC box 4 are Form 1099 box 4s too, whether or not the
- * 1099-MISC belongs to a business.
+ * 1099-NEC and 1099-G box 4 are Form 1099 box 4s too.
  */
 function form1099Withholding(
   inputs: ResolverInputs,
@@ -248,9 +248,7 @@ function form1099Withholding(
     ...socialSecurityRows(inputs).map((row) => row.box6),
     ...getPaymentTransactionsFacts(inputs.facts).map((form) => form.value.box4),
     ...getNonemployeeCompensationFacts(inputs.facts).map((form) => form.value.box4),
-    ...factsInCategory(inputs, "other")
-      .filter((row) => isMiscIncomeFactKey(row.key))
-      .map((row) => (row.value as MiscIncomeFactValue).box4),
+    ...getGovernmentPaymentsFacts(inputs.facts).map((form) => form.box4),
   );
   return total > 0 ? (total as Form1040FilingInfo["form1099FederalWithholding"]) : undefined;
 }
