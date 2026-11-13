@@ -37,6 +37,8 @@ import {
   type ResolverInputs,
 } from "./resolverInputs.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
+import { californiaWithholdingOtherForms } from "./state/ca/540/withholding.js";
+import { resolveActivityAdjustments } from "./state/ca/schedule-ca/activities.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
 import { phone, ssn, type FilingStatus } from "./values.js";
 
@@ -162,6 +164,7 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
     w2StateWithholding: hasW2(inputs)
       ? (sumW2Box(inputs, "box17") as Form540FilingInfo["w2StateWithholding"])
       : undefined,
+    caWithholdingOtherForms: californiaWithholdingOtherForms(inputs),
     w2CaSdiTotal: sumCaSdi(factsInCategory(inputs, "wages")) as Form540FilingInfo["w2CaSdiTotal"],
     useTaxOwed: useTaxOwed as Form540FilingInfo["useTaxOwed"],
     noUseTaxOwed:
@@ -194,16 +197,20 @@ export function resolveScheduleCaInfo(inputs: ResolverInputs): ScheduleCaFilingI
   // Part II waits with the increased standard deduction, so line 21 asks nothing then.
   const { mustFile, increasedStandardDeduction: raised } = resolveScheduleAInfo(inputs);
   const itemizes = mustFile?.["schedule-a"]?.value === true && raised === false;
+  const { activityMissingInputs, ...activities } = resolveActivityAdjustments(inputs);
   return {
     mustFile: { "schedule-ca": resolution },
     /* A California itemizer states the fees once (Part II line 21); 0 is an answer. */
     missingInputs: {
-      "schedule-ca":
-        files540 && itemizes
+      "schedule-ca": [
+        ...(files540 && itemizes
           ? missingInputs({ [CA_MISC_DEDUCTION_KEYS.investmentFees]: caInvestmentFees })
-          : [],
+          : []),
+        ...activityMissingInputs,
+      ],
     },
     caInvestmentFees,
+    ...activities,
   };
 }
 
