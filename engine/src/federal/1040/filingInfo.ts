@@ -79,6 +79,8 @@ export interface RetirementLine {
 export interface IraLine extends RetirementLine {
   /** People who file Form 8606 (0, 1 or 2). */
   form8606Filers: number;
-  /** The one filer's traditional distributions come from Form 8606 line 15c. */
+  /** The one filer's traditional distributions or conversion go through Form 8606 Part I (line 15c). */
   form8606PartI: boolean;
+  /** Why Form 8606 line 1, and so line 15c, is not figured (8606 resolveInfo worksheetLine1). */
+  form8606Line1Gap?: string;
 }

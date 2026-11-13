@@ -50,14 +50,21 @@ function w2s(inputs: ResolverInputs): W2FactValue[] {
   return factsInCategory(inputs, "wages").map((row) => row.value as W2FactValue);
 }
 
-/* The taxpayer's IRA Deduction Worksheet answers (one column: the taxpayer's IRA). */
-function iraAnswers(inputs: ResolverInputs) {
+/*
+ * The taxpayer's IRA Deduction Worksheet answers (one column: the taxpayer's
+ * IRA). Line 1a: a plan at work (W-2 box 13) or a self-employed SEP, SIMPLE or
+ * qualified plan.
+ */
+export function iraAnswers(inputs: ResolverInputs) {
   const ira = readTraditionalIraFact(inputs.factByKey, "taxpayer");
   const ownW2s = w2s(inputs).filter((w2) => (w2.owner ?? "taxpayer") === "taxpayer");
   const birthYear = yearOf(text(inputs, "identity.dob"));
   return {
     iraContributions: ira?.contributions,
-    iraCoveredAtWork: ownW2s.some((w2) => w2.box13?.retirementPlan === true),
+    iraNondeductibleContributions: ira?.nondeductibleContributions,
+    iraCoveredByPlan:
+      ownW2s.some((w2) => w2.box13?.retirementPlan === true) ||
+      (num(inputs, ADJUSTMENT_KEYS.selfEmployedPlanDeduction) ?? 0) > 0,
     iraAge50OrOlder: birthYear === undefined ? undefined : birthYear < BORN_BEFORE_FOR_AGE_50,
     // Worksheet line 8: box 1 less nonqualified plan income (box 11), plus nontaxable combat pay (box 12 code Q).
     iraWages: sum(

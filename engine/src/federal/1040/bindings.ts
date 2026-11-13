@@ -75,12 +75,13 @@ function dependentRowBindings(): Bindings {
  * MANUAL EDIT: line 4b adds the Form 8606 filer's line 18, and line 15c when
  * Part I applies (Part III, line 25c, is not modeled).
  */
-function line4b(form: FormAccessor<Form1040>, info: Form1040FilingInfo): number | undefined {
+function line4b(form: FormAccessor<Form1040>, info: Form1040FilingInfo) {
   const ira = info.iraDistributions;
   if (ira?.taxable === undefined) return undefined;
   if (ira.form8606Filers === 0) return roundDollars(ira.taxable);
   // Only the first Form 8606 copy is evaluated, so two filers leave line 4b blank.
   if (ira.form8606Filers > 1) return undefined;
+  if (ira.form8606PartI && ira.form8606Line1Gap) return unsupported(ira.form8606Line1Gap);
   const line15c = form["form-8606.1.line.15c_taxable_traditional_distributions"];
   const line16 = form["form-8606.1.line.16_net_amount_converted"];
   const line18 = form["form-8606.1.line.18_taxable_conversion_amount"];

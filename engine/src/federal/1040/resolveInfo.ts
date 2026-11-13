@@ -167,7 +167,12 @@ function iraLine(inputs: ResolverInputs, rows: RetirementDistributionFactValue[]
         (owner) => (readTraditionalIraFact(inputs.factByKey, owner)?.rolledOver ?? 0) > 0,
       ),
     form8606Filers: filers.length,
-    form8606PartI: filers.length === 1 && filers[0].partI,
+    // Part I without a distribution or a conversion leaves line 15c blank and adds nothing.
+    form8606PartI:
+      filers.length === 1 &&
+      filers[0].partI &&
+      (filers[0].line7 > 0 || (filers[0].ira?.convertedToRoth ?? 0) > 0),
+    form8606Line1Gap: filers.length === 1 ? filers[0].line1Gap : undefined,
   };
 }
 
