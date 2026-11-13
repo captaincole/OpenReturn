@@ -83,11 +83,14 @@ export interface ActivityDepreciation {
   californiaPriorYearDepreciation?: number;
   /* FTB 3885A line 11: California amortization of costs that began before 2025, when it differs from priorYearAmortization. */
   californiaPriorYearAmortization?: number;
-  /*
-   * Never stated: the engine sets it when another activity on the return also
-   * places personal property in service in 2025 (activitiesOnReturn.ts). The
-   * mid-quarter test then spans those activities.
-   */
+}
+
+/*
+ * The engine's reading of an activity's answers: the stated ones, plus what
+ * it adds from the rest of the return (activitiesOnReturn.ts). Never stated.
+ */
+export interface ScopedDepreciation extends ActivityDepreciation {
+  /* Another activity on the return also places personal property in service in 2025: the mid-quarter test spans them. */
   personalPropertyInOtherActivities?: boolean;
 }
 
