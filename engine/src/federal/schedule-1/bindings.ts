@@ -6,7 +6,7 @@
 
 import { defineForm } from "../../defineForm.js";
 import { roundDollars, sum } from "../../money.js";
-import { answerBindings } from "./answerBindings.js";
+import { unsupported } from "../../types.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import type { Schedule1 } from "./types.js";
 
@@ -29,8 +29,17 @@ export function register(): void {
         const line13 = form["schedule-se.0.line.13"];
         return typeof line13 === "number" ? line13 : undefined;
       },
-      // MANUAL EDIT: lines 2a, 2b, 8h, 8i, 8k, 8z, 16, 19a–20 and 24a–24i from the answers (answerBindings.ts).
-      ...answerBindings(),
+      /*
+       * MANUAL EDIT: line 8z = 1099-MISC box 3 other income. RTAA payments (1099-G
+       * box 5) belong here too (irs-pub-525-2025::sec::reemployment-trade-adjustment-assis::b01).
+       */
+      "0.line.8z": (_, info) =>
+        (info.rtaaPayments ?? 0) > 0
+          ? unsupported(
+              "Form 1099-G box 5 (RTAA payments) belongs on line 8z, and the engine does not add it yet.",
+            )
+          : roundDollars(info.miscOtherIncome),
+      "0.line.8z_type": (_, info) => (info.miscOtherIncome ? "Form 1099-MISC" : undefined),
       // MANUAL EDIT: line 8g = the Alaska Permanent Fund dividend (irs-pub-525-2025::sec::other-income::b01).
       "0.line.8g": (_, info) => roundDollars(info.alaskaPermanentFundDividends),
       // MANUAL EDIT: lines 8a, 8d and 8s are subtractions (printed in parentheses).
