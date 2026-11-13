@@ -1,6 +1,6 @@
-import { businessesOnReturn, ownerOf } from "../../facts/index.js";
+import { ADJUSTMENT_KEYS, businessesOnReturn, ownerOf } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
-import type { ResolverInputs } from "../../resolverInputs.js";
+import { num, type ResolverInputs } from "../../resolverInputs.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
@@ -63,6 +63,15 @@ export function rentalsWithUnmodeledQbi(inputs: ResolverInputs): string[] {
     .map((property) => property.factKey);
 }
 
+/*
+ * irs-8995-inst-2025::sec::determining-your-qualified-business::b01: QBI takes off
+ * the contributions to qualified retirement plans attributable to the business.
+ * The answer (Schedule 1 line 16) names no business: with one Schedule C business
+ * on the return it is that business's; with two or more, their QBI is a gap.
+ */
+export const PLAN_DEDUCTION_GAP =
+  "The self-employed retirement plan deduction (Schedule 1 line 16) comes off the QBI of the business the plan belongs to, and no answer says which of the return's businesses that is.";
+
 export function qbiBusinesses(inputs: ResolverInputs): {
   businesses: QbiBusiness[];
   malformedKeys: string[];
@@ -74,6 +83,8 @@ export function qbiBusinesses(inputs: ResolverInputs): {
   const onReturn = businesses.map((business) => ({ ...business, owner: ownerOf(business.value) }));
   const taxpayerCount = onReturn.filter((business) => business.owner === "taxpayer").length;
   const onReturnValues = businesses.map((business) => business.value);
+  const planDeduction = num(inputs, ADJUSTMENT_KEYS.selfEmployedPlanDeduction);
+  const sharedPlan = onReturn.length > 1 && (planDeduction ?? 0) > 0;
   return {
     businesses: [
       ...qbiRentals(inputs),
@@ -86,6 +97,8 @@ export function qbiBusinesses(inputs: ResolverInputs): {
         specifiedService: value.specifiedService,
         netProfit: netProfit(value, onReturnValues),
         ownersOnlyBusiness: owner === "taxpayer" && taxpayerCount === 1,
+        retirementPlanDeduction: onReturn.length === 1 ? planDeduction : undefined,
+        qbiGap: sharedPlan ? PLAN_DEDUCTION_GAP : undefined,
         w2WagesPaid: value.w2WagesPaid,
         qualifiedPropertyUbia: value.qualifiedPropertyUbia,
       })),

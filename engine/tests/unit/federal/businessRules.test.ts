@@ -4,6 +4,7 @@
  */
 import { describe, expect, it } from "vitest";
 import {
+  ADJUSTMENT_KEYS,
   makeBusinessFactKey,
   makeNonemployeeCompensationFactKey,
   makePaymentTransactionsFactKey,
@@ -11,7 +12,8 @@ import {
 } from "../../../src/facts/index.js";
 import { resolve8995AInfo } from "../../../src/federal/8995-a/resolveInfo.js";
 import { resolve8995Info } from "../../../src/federal/8995/resolveInfo.js";
-import { resolveQbiInfo } from "../../../src/federal/qbi/resolveInfo.js";
+import { businessQbi } from "../../../src/federal/qbi/lines.js";
+import { PLAN_DEDUCTION_GAP, resolveQbiInfo } from "../../../src/federal/qbi/resolveInfo.js";
 import { resolveScheduleCInfo } from "../../../src/federal/schedule-c/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../../../src/federal/schedule-se/resolveInfo.js";
 import { resolveSchedule1Info, resolveSchedule2Info } from "../../../src/filingInfoResolvers.js";
@@ -299,6 +301,34 @@ describe("Form 8995-A must-file and businesses", () => {
       inputs([business("rideshare"), spouseBusiness], "married_filing_separately"),
     );
     expect(info.qbiBusinesses?.map((qbi) => qbi.name)).toEqual(["rideshare"]);
+  });
+});
+
+describe("QBI and the self-employed plan deduction (Schedule 1 line 16)", () => {
+  const planDeduction: Fact = {
+    key: ADJUSTMENT_KEYS.selfEmployedPlanDeduction,
+    category: "other",
+    value: 1270,
+  };
+  // Schedule SE files with no line 13 on this form read: the deductible SE tax is 0 here.
+  const form = { "schedule-se.0.line.13": 0 };
+
+  it("takes it off the QBI of the return's only business", () => {
+    const info = resolveQbiInfo(inputs([business("rideshare"), planDeduction]));
+    const [rideshare] = info.qbiBusinesses ?? [];
+    expect(rideshare.qbiGap).toBeUndefined();
+    expect(businessQbi(form, { ...info, qbiScheduleSEFiled: true }, rideshare)).toBe(10000 - 1270);
+  });
+
+  it("is a gap for each business when the return has two or more", () => {
+    const info = resolveQbiInfo(
+      inputs([business("rideshare"), business("tutoring"), planDeduction]),
+    );
+    expect(info.qbiBusinesses?.map((qbi) => qbi.qbiGap)).toEqual([
+      PLAN_DEDUCTION_GAP,
+      PLAN_DEDUCTION_GAP,
+    ]);
+    expect(businessQbi(form, info, info.qbiBusinesses![0])).toBeUndefined();
   });
 });
 

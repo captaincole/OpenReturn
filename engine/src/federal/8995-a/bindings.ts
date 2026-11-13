@@ -6,6 +6,7 @@
 
 import { defineForm } from "../../defineForm.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
+import { unsupported } from "../../types.js";
 import type { QbiBusiness } from "../qbi/filingInfo.js";
 import {
   businessTin,
@@ -124,11 +125,11 @@ function line25(form: Read, info: Form8995AFilingInfo, column: Column): number |
 }
 
 /*
- * Line 2 without loss netting: a business's Schedule C line 31 less the deductible
- * part of SE tax, or a rental's allowed income. No facts give SE health insurance,
- * SE retirement contributions or a prior-year qualified business loss carryforward;
- * line 2 counts none. An SSTB in the phase-in range needs Schedule A (Form 8995-A),
- * not modeled.
+ * Line 2 without loss netting: a business's QBI (qbi/lines.ts businessQbi: Schedule
+ * C line 31 less the deductible part of SE tax and the self-employed plan
+ * deduction), or a rental's allowed income. No facts give SE health insurance or a
+ * prior-year qualified business loss carryforward; line 2 counts neither. An SSTB
+ * in the phase-in range needs Schedule A (Form 8995-A), not modeled.
  */
 function qbiWithoutNetting(form: Read, info: Info, business: QbiBusiness): number | undefined {
   if (needsScheduleA(form, info, business)) return undefined;
@@ -138,9 +139,10 @@ function qbiWithoutNetting(form: Read, info: Info, business: QbiBusiness): numbe
 }
 
 // MANUAL EDIT: with loss netting, line 2 is Schedule C (Form 8995-A) line 1 column (c) (line-2::b01).
-function line2(form: Read, info: Info, column: Column): number | undefined {
+function line2(form: Read, info: Info, column: Column) {
   const business = businessIn(form, info, column);
   if (!business) return undefined;
+  if (business.qbiGap) return unsupported(business.qbiGap);
   const netting = info.mustFile?.["form-8995-a-schedule-c"]?.value;
   if (netting === true) {
     return num(form[`form-8995-a-schedule-c.0.line.1_col_c_adjusted_qbi_${column}`]);
