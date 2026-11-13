@@ -13,4 +13,8 @@ export interface Form8889FilingInfo extends BaseFilingInfo {
   hsaDistributionsTotal?: number;
   /** Line 15: every distribution paid qualified medical expenses. */
   hsaDistributionsAllQualified?: boolean;
+  /** Line 14b: rolled over to another HSA, or excess contributions withdrawn by the due date. */
+  hsaRolledOverOrExcessWithdrawn?: number;
+  /** Line 3: 55 or older at the end of 2025 (the $1,000 additional contribution amount). */
+  taxpayerAge55AtYearEnd?: boolean;
 }

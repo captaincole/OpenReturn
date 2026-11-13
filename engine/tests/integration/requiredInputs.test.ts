@@ -21,6 +21,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
   ],
   [/^identity\.address\.apt$/, "not every address has an apartment"],
   [
+    /^hsa\.distributions_rolled_over$/,
+    "Form 8889 line 14b, recorded only when the user rolled a distribution over or took out " +
+      "an excess contribution by the due date; blank otherwise",
+  ],
+  [
     /^decisions\.scope\.must_file_schedule_a$/,
     "close-deductions records it when California itemizes and federal takes the standard " +
       "deduction (cade deductions/closing.ts); absent, Schedule A follows decisions.itemize_vs_standard",
