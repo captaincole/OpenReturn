@@ -11,6 +11,8 @@ import {
   type DependentFactValue,
 } from "../../src/facts/index.js";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
+import { MARRIED_HOH_GAP } from "../../src/state/ca/3514/credit.js";
+import { YCTC_ZERO_EARNED_INCOME_GAP } from "../../src/state/ca/3514/youngChildAndFosterYouth.js";
 import { decisionRow } from "../helpers/fixtureBuilders.js";
 import { tcbCa010Scenario as base } from "../scenarios/tcb-ca-010/index.js";
 
@@ -130,8 +132,11 @@ function evaluate(shape: Shape, facts: Map<string, TaxFactRow>) {
 }
 
 const MAX_ROUNDS = 6;
-const settled = (lines: ReturnType<typeof evaluate>["lines"]) =>
-  lines.get("form-540.line.78_total_payments")?.ok === true;
+/* Line 78 is known, or a gap: either way nothing more to ask. */
+const settled = (lines: ReturnType<typeof evaluate>["lines"]) => {
+  const line78 = lines.get("form-540.line.78_total_payments");
+  return line78?.ok === true || (line78 !== undefined && "unsupported" in line78);
+};
 
 /* Answer what the forms ask until Form 540 line 78 is known; fails when it waits with nothing asked. */
 function settle(shape: Shape) {
@@ -220,6 +225,52 @@ describe("FTB 3514", () => {
     const { lines } = evaluate({}, facts);
     expect(lines.get("form-3514.1.line.13_ca_wages")).toMatchObject({ ok: true, value: 13000 });
     expect(lines.get("form-540.line.78_total_payments")).toMatchObject({ unsupported: true });
+  });
+
+  /* Step 1, question d: a married filer filing separately needs a child and the separated-spouse rule. */
+  const separate = (apart: boolean, legallySeparated?: boolean): Shape => ({
+    status: "married_filing_separately",
+    child: YOUNG_CHILD,
+    extra: {
+      [SPOUSE_KEYS.livedApartLastSixMonths]: apart,
+      ...(legallySeparated === undefined
+        ? {}
+        : { [SPOUSE_KEYS.legallySeparatedApartAtYearEnd]: legallySeparated }),
+    },
+  });
+
+  it.each([
+    ["lived apart the last 6 months", separate(true), 599, true],
+    ["lived together, legally separated at year end", separate(false, true), 599, true],
+    ["lived together, not legally separated", separate(false, false), undefined, false],
+  ])("married filing separately with a young child, %s", (_, shape, credit, box) => {
+    const { lines } = settle(shape);
+    expect(value(lines, "form-3514.1.line.20_ca_eitc")).toBe(credit);
+    expect(value(lines, "form-3514.0.header.separated_spouse_eitc")).toBe(box);
+  });
+
+  it("leaves a head of household with no child and no unmarried fact a gap, through line 78", () => {
+    const extra = { [SPOUSE_KEYS.livedApartLastSixMonths]: false };
+    const { lines } = settle({ status: "head_of_household", extra });
+    const gap = { unsupported: true, reason: MARRIED_HOH_GAP };
+    expect(lines.get("form-3514.1.line.20_ca_eitc")).toMatchObject(gap);
+    expect(lines.get("form-540.line.78_total_payments")).toMatchObject(gap);
+  });
+
+  /*
+   * Zero earned income: a W-2 of $0 and $500 of interest. (A Schedule C loss
+   * would do too, but the engine leaves Schedule C line 31 blank for a loss,
+   * so Form 1040 line 11b never resolves.)
+   */
+  it("leaves line 23b a gap at zero earned income with a child under six", () => {
+    const interest = { payerName: "Bank", payerTin: "12-3456789", box1: 500 };
+    const extra = { [makeInterestFactKey("bank")]: interest };
+    const { lines } = settle({ wages: 0, child: YOUNG_CHILD, extra });
+    const gap = { unsupported: true, reason: YCTC_ZERO_EARNED_INCOME_GAP };
+    expect(value(lines, "form-3514.2.line.23a_total_wages")).toBe(0);
+    expect(lines.get("form-3514.2.line.23b_net_loss_or_agi_over_limit")).toMatchObject(gap);
+    expect(lines.get("form-3514.2.line.28_yctc")).toMatchObject(gap);
+    expect(lines.get("form-540.line.78_total_payments")).toMatchObject(gap);
   });
 
   it("does not file for a married filer filing separately with no qualifying child (Step 1, d)", () => {
