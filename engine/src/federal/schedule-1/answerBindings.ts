@@ -4,7 +4,7 @@
  */
 
 import type { BindingFn, FormAccessor } from "../../defineForm.js";
-import { roundDollars, sum, sumOrBlank } from "../../money.js";
+import { formatDollars, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported } from "../../types.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import { iraDeduction, JOINT_RETURN_GAP } from "./iraDeduction.js";
@@ -98,12 +98,21 @@ export function answerBindings(): Bindings {
           ...(info.otherIncomeItems ?? []).map((item) => item.amount),
         ),
       ),
+    /*
+     * "List the type and amount of income" (irs-1040-inst-2025::sec::line-8z::b01):
+     * with two or more items each type prints with its amount; one item's amount
+     * is line 8z itself.
+     */
     "0.line.8z_type": (_, info) => {
-      const types = [
-        ...(info.miscOtherIncome ? ["Form 1099-MISC"] : []),
-        ...(info.otherIncomeItems ?? []).map((item) => item.description),
+      const items = [
+        ...(info.miscOtherIncome
+          ? [{ description: "Form 1099-MISC", amount: info.miscOtherIncome }]
+          : []),
+        ...(info.otherIncomeItems ?? []),
       ];
-      return types.length > 0 ? types.join(", ") : undefined;
+      if (items.length === 0) return undefined;
+      if (items.length === 1) return items[0].description;
+      return items.map((item) => `${item.description} ${formatDollars(item.amount)}`).join(", ");
     },
     "1.line.16": (_, info) => roundDollars(info.selfEmployedPlanDeduction),
     // irs-1040-inst-2025::sec::lines-19a-19b-and-19c::b01: only under an agreement made before 2019.

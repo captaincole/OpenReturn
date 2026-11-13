@@ -1,6 +1,7 @@
 import { businessesOnReturn, rentalsOnReturn } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import type { Form4562Activity, Form4562FilingInfo } from "./filingInfo.js";
 import { assetsAwaitingAnswers, mustFile4562 } from "./lines.js";
 
@@ -12,23 +13,34 @@ const MUST_FILE_KEY = "decisions.scope.must_file_4562";
  * is on this return only when filing jointly, as for Schedules C and E.
  */
 export function depreciationActivities(inputs: ResolverInputs): Form4562Activity[] {
-  const status = filingStatusOf(inputs);
-  const joint = status === undefined || status === "married_filing_jointly";
-  const businesses = businessesOnReturn(inputs.facts, joint).businesses.flatMap(({ key, value }) =>
-    value.depreciation
-      ? [{ factKey: key, name: value.name ?? value.activity, depreciation: value.depreciation }]
-      : [],
+  const joint = spousePropertiesOnReturn(filingStatusOf(inputs));
+  const businesses = businessesOnReturn(inputs.facts, joint).businesses.flatMap(
+    ({ key, value }): Form4562Activity[] =>
+      value.depreciation
+        ? [
+            {
+              factKey: key,
+              kind: "business",
+              business: value,
+              name: value.name ?? value.activity,
+              depreciation: value.depreciation,
+            },
+          ]
+        : [],
   );
-  const rentals = rentalsOnReturn(inputs.facts, joint).properties.flatMap(({ key, value }) =>
-    value.depreciation
-      ? [
-          {
-            factKey: key,
-            name: value.address?.street ?? "Rental property",
-            depreciation: value.depreciation,
-          },
-        ]
-      : [],
+  const rentals = rentalsOnReturn(inputs.facts, joint).properties.flatMap(
+    ({ key, value }): Form4562Activity[] =>
+      value.depreciation
+        ? [
+            {
+              factKey: key,
+              kind: "rental",
+              rental: value,
+              name: value.address?.street ?? "Rental property",
+              depreciation: value.depreciation,
+            },
+          ]
+        : [],
   );
   return [...businesses, ...rentals];
 }

@@ -7,20 +7,14 @@ import type { BindingFn } from "../../defineForm.js";
 import type { DepreciationMethod } from "../../facts/index.js";
 import { roundDollars, sum } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
-import { RECOVERY_YEARS, type FederalAssetFigures } from "./assets.js";
+import { ISODate, isoDate } from "../../values.js";
+import { METHOD_TEXT, RECOVERY_YEARS, type FederalAssetFigures } from "./assets.js";
 import type { Form4562FilingInfo } from "./filingInfo.js";
 import { amortizationThisYear, form4562Figures, type Line19Row } from "./lines.js";
 import type { Form4562 } from "./types.js";
 
 type Bindings = Partial<{ [K in keyof Form4562]: BindingFn<Form4562, Form4562FilingInfo, K> }>;
 type AnyBinding = BindingFn<Form4562, Form4562FilingInfo, keyof Form4562>;
-
-/* irs-4562-inst-2025::sec::recovery-period-for-most-property::b03: "200 DB", "150 DB" or "S/L". */
-const METHOD_TEXT: Record<DepreciationMethod, string> = {
-  "200DB": "200 DB",
-  "150DB": "150 DB",
-  SL: "S/L",
-};
 
 const SPLIT_ROW =
   "The class has assets with different methods or conventions; its one row cannot show them, and the engine writes no attached statement.";
@@ -153,11 +147,6 @@ export function line19Bindings(): Bindings {
   ) as Bindings;
 }
 
-const isoToFormDate = (date: string) => {
-  const [year, month, day] = date.split("-");
-  return `${month}/${day}/${year}`;
-};
-
 /* Line 42: one row per cost whose amortization begins in 2025. */
 export function line42Bindings(): Bindings {
   const out: Record<string, AnyBinding> = {};
@@ -172,7 +161,7 @@ export function line42Bindings(): Bindings {
         return (cost ? read(cost) : undefined) as never;
       };
     out[`${prefix}_description`] = cell((cost) => cost.description);
-    out[`${prefix}_date_begins`] = cell((cost) => isoToFormDate(cost.beginsOn));
+    out[`${prefix}_date_begins`] = cell((cost) => ISODate.usSlash(isoDate(cost.beginsOn)));
     out[`${prefix}_amortizable_amount`] = cell((cost) => roundDollars(cost.amount));
     out[`${prefix}_code_section`] = cell((cost) => cost.codeSection);
     out[`${prefix}_period_or_percentage`] = cell((cost) => `${cost.periodMonths} months`);

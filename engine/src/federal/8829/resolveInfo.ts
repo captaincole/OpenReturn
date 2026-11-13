@@ -1,6 +1,7 @@
 import { businessesOnReturn } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import type { Form8829FilingInfo } from "./filingInfo.js";
 import { homeOfficeActualOpen } from "./lines.js";
 
@@ -15,8 +16,7 @@ const MUST_FILE_KEY = "decisions.scope.must_file_8829";
  * the business's gross income is from the home (line 8).
  */
 export function resolve8829Info(inputs: ResolverInputs): Form8829FilingInfo {
-  const status = filingStatusOf(inputs);
-  const joint = status === undefined || status === "married_filing_jointly";
+  const joint = spousePropertiesOnReturn(filingStatusOf(inputs));
   const withOffice = businessesOnReturn(inputs.facts, joint).businesses.filter(
     (business) => business.value.homeOfficeActual !== undefined,
   );
