@@ -228,6 +228,12 @@ export const tcbCa009Facts: TaxFactRow[] = [
     `${ANSWERS}: hsa_dist.unreimbQualMedExpORTP 0 (no qualified medical expenses paid from the HSA).`,
   ),
   fact(
+    "hsa",
+    HSA_COVERAGE_KEYS.rolledOverOrExcessWithdrawn,
+    1500,
+    `${ANSWERS}: hsa_dist.hsaRolloverTP (the code 2 distribution, docs/06).`,
+  ),
+  fact(
     "health_coverage",
     "health_coverage.full_year_mec",
     true,

@@ -22,10 +22,21 @@ export function register(): void {
       "0.line.1_family_coverage": (_, info) =>
         info.hsaCoverageType === "family" ? true : undefined,
       "0.line.2_hsa_contributions": (_, info) => roundDollars(info.hsaOwnContributions),
-      // 2025 limits, prorated by months of coverage. The last-month rule is not modeled.
+      /*
+       * MANUAL EDIT: 2025 limits, prorated by months of coverage. The last-month rule is not modeled.
+       * Age 55 or older at year end adds $1,000 a month-share, unless married with family
+       * coverage: that amount goes on line 7 (irs-8889-inst-2025::sec::line-3::b02, rule 6;
+       * irs-8889-inst-2025::sec::line-3::b03; irs-8889-inst-2025::sec::start-here::b01).
+       */
       "0.line.3_annual_hsa_contribution_limit": (_, info) => {
         if (!info.hsaCoverageType || info.hsaCoverageMonths === undefined) return undefined;
-        const annual = info.hsaCoverageType === "family" ? 8550 : 4300;
+        if (info.taxpayerAge55AtYearEnd === undefined) return undefined;
+        const family = info.hsaCoverageType === "family";
+        const married =
+          info.filingStatus === "married_filing_jointly" ||
+          info.filingStatus === "married_filing_separately";
+        const additional = info.taxpayerAge55AtYearEnd && !(married && family) ? 1000 : 0;
+        const annual = (family ? 8550 : 4300) + additional;
         return roundDollars((annual * info.hsaCoverageMonths) / 12);
       },
       // The spouse split for family coverage is not modeled.
@@ -39,6 +50,9 @@ export function register(): void {
           : undefined;
       },
       "0.line.14a_total_distributions": (_, info) => roundDollars(info.hsaDistributionsTotal),
+      // MANUAL EDIT: the stated rollover and timely excess withdrawal (irs-8889-inst-2025::sec::line-14b::b01).
+      "0.line.14b_distributions_rolled_over": (_, info) =>
+        roundDollars(info.hsaRolledOverOrExcessWithdrawn),
       "0.line.15_qualified_medical_expenses": (form, info) =>
         info.hsaDistributionsAllQualified === true
           ? form["0.line.14c_subtract_14b_from_14a"]
@@ -99,11 +113,9 @@ export function register(): void {
     unsupported: {
       "0.line.4_archer_msa_contributions": "No Archer MSA / Form 8853 scenario or ingestion yet.",
       "0.line.7_additional_contribution_age_55":
-        "Needs age-55-at-year-end from identity.dob plus months of eligibility; no rule computes age from a date of birth yet.",
+        "Only a married filer 55 or older with family coverage uses line 7 (the others add $1,000 on line 3); the spouse's coverage is not modeled.",
       "0.line.10_qualified_hsa_funding_distributions":
         "No IRA-to-HSA qualified funding distribution scenario or fact ingestion yet.",
-      "0.line.14b_distributions_rolled_over":
-        "No fact ingestion yet for HSA rollovers or excess contributions withdrawn by the due date.",
       "0.line.17a_exception_to_additional_tax":
         "No facts for death/disability/age-65 exceptions on HSA distributions yet.",
       "0.line.17b_additional_20pct_tax":

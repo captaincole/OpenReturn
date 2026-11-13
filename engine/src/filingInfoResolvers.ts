@@ -56,17 +56,27 @@ export function filingStatusOf(inputs: ResolverInputs): FilingStatus | undefined
   return FILING_STATUSES.has(raw) ? (raw as FilingStatus) : undefined;
 }
 
-/*
- * 65 or older at the end of 2025 (1040 line 12d). CA 540 line 9 counts a
- * January 1, 1961 birthday as 65 on December 31. Tax year 2025 only.
- */
-export function bornBeforeJan2_1961(dob: string | undefined): boolean | undefined {
+/* Born before January 2 of the given year: a January 1 birthday counts as the day before. */
+function bornBeforeJan2Of(dob: string | undefined, cutoffYear: number): boolean | undefined {
   const us = dob?.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
   const iso = dob?.match(/^(\d{4})-(\d{2})-(\d{2})$/);
   const ymd = us ? [us[3], us[1], us[2]] : iso ? [iso[1], iso[2], iso[3]] : undefined;
   if (!ymd) return undefined;
   const [year, month, day] = ymd.map(Number);
-  return year < 1961 || (year === 1961 && month === 1 && day < 2);
+  return year < cutoffYear || (year === cutoffYear && month === 1 && day < 2);
+}
+
+/*
+ * 65 or older at the end of 2025 (1040 line 12d). CA 540 line 9 counts a
+ * January 1, 1961 birthday as 65 on December 31. Tax year 2025 only.
+ */
+export function bornBeforeJan2_1961(dob: string | undefined): boolean | undefined {
+  return bornBeforeJan2Of(dob, 1961);
+}
+
+/* 55 or older at the end of 2025: the HSA additional contribution (Form 8889 line 3). Tax year 2025 only. */
+export function bornBeforeJan2_1971(dob: string | undefined): boolean | undefined {
+  return bornBeforeJan2Of(dob, 1971);
 }
 
 export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
