@@ -7,6 +7,7 @@ import {
   BLINDNESS_KEYS,
   CA_EITC_KEYS,
   EIC_KEYS,
+  ELDERLY_OR_DISABLED_KEYS,
   SPOUSE_KEYS,
   STUDENT_LOAN_KEYS,
   makeDependentFactKey,
@@ -226,6 +227,12 @@ const ANSWER_FACTS: TaxFactRow[] = [
   ),
   fact("other", EIC_KEYS.deniedInEarlierYear, false, `${ANSWERS}: irs1040.credit_denied_reduced.`),
   fact("other", EIC_KEYS.barredByIrs, false, `${ANSWERS}: irs1040.eic_not_allowed.`),
+  fact(
+    "other",
+    ELDERLY_OR_DISABLED_KEYS.nontaxablePensions,
+    0,
+    "Not in the case: the answers list no pension or disability benefit other than Social Security (Schedule R line 13b).",
+  ),
   fact(
     "other",
     CA_EITC_KEYS.ftbDisallowedEarlierYear,
