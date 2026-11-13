@@ -454,7 +454,7 @@ export function register(): void {
       "line.47_total_credits":
         "Form 540 line 47 (total credits) — aggregates lines 40-46; no CA credit scenario (child/dependent care, renters, etc.) is exercised yet.",
       "line.94_use_tax_balance":
-        "Form 540 line 94 (use tax balance) — use-tax-owed branch not yet exercised; current scenarios all have $0 use tax.",
+        "Form 540 line 94 (use tax balance) — no scenario has use tax above its payments (line 91 more than line 78), and the corpus has no FTB text for line 94 to ground the rule.",
       "line.96_isr_penalty_balance":
         "Form 540 line 96 (individual shared responsibility penalty balance) — ISR penalty / health-coverage-gap scenario not modeled yet.",
       "line.110_total_contributions":
