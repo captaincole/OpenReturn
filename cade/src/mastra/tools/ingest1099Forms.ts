@@ -115,6 +115,12 @@ export const ingest1099Misc = formTool<MiscIncomeFactValue>({
   description:
     "Ingest one 1099-MISC: a standalone form, or the 1099-MISC section of a consolidated statement.",
   boxes: {
+    businessId: z
+      .string()
+      .optional()
+      .describe(
+        "The businessId record-business returned, when the form reports income of that business (its amounts are in the business's gross receipts). Leave it out otherwise.",
+      ),
     box1: z.number().optional().describe("Rents"),
     box2: z.number().optional().describe("Royalties"),
     box3: z.number().optional().describe("Other income"),

@@ -7,6 +7,8 @@
 export type IraOwner = "taxpayer" | "spouse";
 
 export interface TraditionalIraFactValue {
+  /* Schedule 1 line 20 (IRA Deduction Worksheet line 11): traditional IRA contributions for 2025, deductible or not. */
+  contributions?: number;
   /* Form 8606 line 1: nondeductible contributions for 2025. */
   nondeductibleContributions?: number;
   /* Line 4: the part of line 1 contributed from January 1 to April 15, 2026. */
@@ -22,6 +24,7 @@ export interface TraditionalIraFactValue {
 }
 
 const AMOUNT_FIELDS: Array<keyof TraditionalIraFactValue> = [
+  "contributions",
   "nondeductibleContributions",
   "contributionsMadeIn2026",
   "basisPriorYears",
