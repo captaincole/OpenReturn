@@ -24,6 +24,12 @@ The form-engine CLI lives under `engine/builder/scripts/formEngine/`, Cade's too
 | `draftExpected.ts --scenario=<name>` | write a NEW scenario's first `expected.ts` from the engine's output (jordan pattern, see docs/contributing.md); it refuses a scenario that already asserts values. Check each drafted line, then `renderScenario.ts --scenario=<name> --golden` writes its golden PDFs |
 | `compareFiled/cli.ts <folder>` | private comparison kit: engine vs a real filed return (scenario format, kept outside the repo); writes a no-amounts report with root causes for the checker to send to a maintainer. Follow the `verify-with-filed-return` skill. |
 
+**Builder scripts** (run via `npx tsx` from `engine/builder/`):
+
+| script | use |
+|---|---|
+| `dumpCase.ts <case folder>` | print one downloaded test case (a TaxCalcBench case) as tables: its input files, its answers (`input/remaining_data.json`) and its answer key (`output.xml`) with one table per form. The `add-scenario` skill starts from it. |
+
 The comparison kit refuses a folder inside the project. Private tax data never enters the repo, not even `.scratch/`: never write real figures, or any hint that a real return shaped something, into a committed file, a code comment, or a commit message.
 
 ## Verify your change
