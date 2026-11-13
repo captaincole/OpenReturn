@@ -11,6 +11,8 @@ export interface Schedule1FilingInfo extends BaseFilingInfo {
   hasBusiness?: boolean;
   /** Line 7: 1099-G box 1 sum, cents kept. */
   unemploymentCompensation?: number;
+  /** Line 8z: 1099-G box 5 (RTAA payments) sum; the engine does not add it to line 8z yet. */
+  rtaaPayments?: number;
   /** Line 8b: W-2G box 1 sum, cents kept. */
   gamblingWinnings?: number;
   /** Line 8z: 1099-MISC box 3 sum, cents kept. */
