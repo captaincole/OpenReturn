@@ -10,6 +10,7 @@ import type {
   AmortizedCost,
   DepreciableAsset,
   RecoveryClass,
+  ScopedDepreciation,
 } from "../../facts/index.js";
 import { roundDollars, sum, sumOrBlank } from "../../money.js";
 import { assetGap, federalAssetFigures, type FederalAssetFigures } from "./assets.js";
@@ -89,7 +90,7 @@ export const MID_QUARTER_ACROSS_ACTIVITIES_GAP =
  * engine checks it, with two or more it is a gap. It returns the reason when a
  * stated convention disagrees.
  */
-function conventionGap(depreciation: ActivityDepreciation): string | undefined {
+function conventionGap(depreciation: ScopedDepreciation): string | undefined {
   const personal = (depreciation.assets ?? []).filter((asset) => asset.convention !== "MM");
   if (personal.length === 0) return undefined;
   if (depreciation.personalPropertyInOtherActivities) return MID_QUARTER_ACROSS_ACTIVITIES_GAP;
@@ -106,7 +107,7 @@ function conventionGap(depreciation: ActivityDepreciation): string | undefined {
 }
 
 /* Why the activity's line 22 is a case the engine does not handle. */
-function activityGap(depreciation: ActivityDepreciation): string | undefined {
+function activityGap(depreciation: ScopedDepreciation): string | undefined {
   const assets = depreciation.assets ?? [];
   const assetReason = assets.map(assetGap).find((reason) => reason !== undefined);
   if (assetReason) return assetReason;
@@ -142,7 +143,7 @@ function line19Rows(assets: FederalAssetFigures[]): Line19Row[] {
 }
 
 /* Part II–IV for one activity. Lines 15, 16, 20 and 21 are not modeled (no facts give them). */
-export function form4562Figures(depreciation: ActivityDepreciation): Form4562Figures {
+export function form4562Figures(depreciation: ScopedDepreciation): Form4562Figures {
   const assets = (depreciation.assets ?? []).map(federalAssetFigures);
   const gap = activityGap(depreciation);
   const waits = assets.some((figures) => figures.specialAllowance === undefined);

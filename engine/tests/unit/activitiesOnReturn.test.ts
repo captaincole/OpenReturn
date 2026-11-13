@@ -7,6 +7,7 @@ import {
   makeRentalFactKey,
   rentalsOnReturn,
   type DepreciableAsset,
+  type ScopedDepreciation,
 } from "../../src/facts/index.js";
 
 const equipment: DepreciableAsset = {
@@ -43,11 +44,11 @@ const rental = (assets: DepreciableAsset[]) => ({
   },
 });
 
+const scoped = (depreciation: unknown) =>
+  (depreciation as ScopedDepreciation | undefined)?.personalPropertyInOtherActivities;
 const marks = (facts: ReturnType<typeof business | typeof rental>[]) => ({
-  business: businessesOnReturn(facts, false).businesses[0]?.value.depreciation
-    ?.personalPropertyInOtherActivities,
-  rental: rentalsOnReturn(facts, false).properties[0]?.value.depreciation
-    ?.personalPropertyInOtherActivities,
+  business: scoped(businessesOnReturn(facts, false).businesses[0]?.value.depreciation),
+  rental: scoped(rentalsOnReturn(facts, false).properties[0]?.value.depreciation),
 });
 
 describe("the return's depreciation scope", () => {
