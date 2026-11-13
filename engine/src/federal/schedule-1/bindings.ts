@@ -83,7 +83,11 @@ export function register(): void {
               form["0.line.7"],
               form["0.line.9"],
             ),
+      // MANUAL EDIT: line 11, at most $300 per eligible educator (adjustments.ts).
+      "1.line.11": (_, info) => roundDollars(info.educatorExpenses),
       "1.line.13": (form) => sum(form["form-8889.0.line.13_hsa_deduction"]),
+      // MANUAL EDIT: line 18 = 1099-INT box 2 summed (irs-1040-inst-2025::sec::line-18::b01).
+      "1.line.18": (_, info) => roundDollars(info.earlyWithdrawalPenalty),
       "1.line.25": (form) =>
         sum(
           form["1.line.24a"],
@@ -154,7 +158,6 @@ export function register(): void {
       "0.line.8u": "No incarcerated-wages scenario yet.",
       "0.line.8v":
         "No ingestion for digital-asset ordinary income (staking, mining, forks) yet; 1099-DA covers only dispositions.",
-      "1.line.11": "No educator-expense fact ingestion yet.",
       "1.line.12": "No Form 2106 (reservist/performing artist/fee-basis official) scenario yet.",
       "1.line.14_storage_fees_only": "No Armed Forces moving-expense (Form 3903) scenario yet.",
       "1.line.14": "No Armed Forces moving-expense (Form 3903) scenario yet.",
@@ -185,8 +188,6 @@ export function register(): void {
         "No Schedule K-1 (Form 1041) ingestion yet for box 11 code A excess deductions.",
       "1.line.24z_type": "No write-in other-adjustment scenario or facts yet.",
       "1.line.24z": "No write-in other-adjustment scenario or facts yet.",
-      "1.line.18":
-        "confidence=medium: Sum of 1099-INT box 2 (early withdrawal penalty) across accounts.",
     },
   });
 }
