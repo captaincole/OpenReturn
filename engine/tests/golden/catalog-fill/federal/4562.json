@@ -1,0 +1,2166 @@
+{
+  "formId": "form-4562",
+  "fieldCount": 240,
+  "entries": [
+    {
+      "fieldId": "form-4562.0.header.business_or_activity",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-TEIEA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-1B1UL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-KK613"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.1_maximum_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "1,042"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.10_carryover_from_2024",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "8,573"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.11_business_income_limitation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "3,999"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.12_section_179_expense_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "7,659"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.13_carryover_to_2026",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "1,009"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.14_special_depreciation_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "1,017"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.15_section_168f1_election",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "7,959"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.16_other_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "2,221"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.17_macrs_prior_years",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "6,809"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.18_general_asset_account_election",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19a_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19a[0].f1_27[0]",
+          "text": "9,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19a_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19a[0].f1_29[0]",
+          "text": "T-96WVL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19a_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19a[0].f1_31[0]",
+          "text": "9,968"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19a_method",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19a[0].f1_30[0]",
+          "text": "T-15AOJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19a_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19a[0].f1_28[0]",
+          "text": "T-HZK0L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19b_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19b[0].f1_33[0]",
+          "text": "5,715"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19b_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19b[0].f1_35[0]",
+          "text": "T-319SU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19b_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19b[0].f1_37[0]",
+          "text": "7,788"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19b_method",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19b[0].f1_36[0]",
+          "text": "T-1MJ40"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19b_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19b[0].f1_34[0]",
+          "text": "T-1XNPV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19c_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19c[0].f1_39[0]",
+          "text": "7,537"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19c_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19c[0].f1_41[0]",
+          "text": "T-GG4JS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19c_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19c[0].f1_43[0]",
+          "text": "1,331"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19c_method",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19c[0].f1_42[0]",
+          "text": "T-1ICUW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19c_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19c[0].f1_40[0]",
+          "text": "T-QE40S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19d_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19d[0].f1_45[0]",
+          "text": "2,370"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19d_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19d[0].f1_47[0]",
+          "text": "T-8H3XC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19d_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19d[0].f1_49[0]",
+          "text": "1,703"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19d_method",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19d[0].f1_48[0]",
+          "text": "T-1IO2S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19d_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19d[0].f1_46[0]",
+          "text": "T-110VN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19e_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19e[0].f1_51[0]",
+          "text": "7,407"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19e_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19e[0].f1_53[0]",
+          "text": "T-MHK9L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19e_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19e[0].f1_55[0]",
+          "text": "1,928"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19e_method",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19e[0].f1_54[0]",
+          "text": "T-1SZT8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19e_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19e[0].f1_52[0]",
+          "text": "T-2Y87C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19f_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19f[0].f1_57[0]",
+          "text": "1,679"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19f_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19f[0].f1_59[0]",
+          "text": "T-1YBP6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19f_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19f[0].f1_61[0]",
+          "text": "8,151"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19f_method",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19f[0].f1_60[0]",
+          "text": "T-1J6QJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19f_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19f[0].f1_58[0]",
+          "text": "T-3Y6BP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19g_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19g[0].f1_63[0]",
+          "text": "2,078"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19g_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19g[0].f1_65[0]",
+          "text": "T-15CTJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19g_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19g[0].f1_67[0]",
+          "text": "3,744"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19h_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19h[0].f1_69[0]",
+          "text": "4,009"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19h_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19h[0].f1_73[0]",
+          "text": "7,868"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19h_month_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19h[0].f1_68[0]",
+          "text": "T-KQPB3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19i_row1_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19i_1[0].f1_75[0]",
+          "text": "5,200"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19i_row1_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19i_1[0].f1_79[0]",
+          "text": "1,513"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19i_row1_month_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19i_1[0].f1_74[0]",
+          "text": "T-TJZVX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19i_row2_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19i_2[0].f1_81[0]",
+          "text": "8,248"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19i_row2_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19i_2[0].f1_85[0]",
+          "text": "5,862"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19i_row2_month_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19i_2[0].f1_80[0]",
+          "text": "T-13CJC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19j_row1_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19j_1[0].f1_87[0]",
+          "text": "8,000"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19j_row1_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19j_1[0].f1_91[0]",
+          "text": "1,843"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19j_row1_month_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19j_1[0].f1_86[0]",
+          "text": "T-4F87Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19j_row2_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19j_2[0].f1_93[0]",
+          "text": "8,634"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19j_row2_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19j_2[0].f1_97[0]",
+          "text": "5,105"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19j_row2_month_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19j_2[0].f1_92[0]",
+          "text": "T-SSXC5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.19j_row2_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionBTable[0].Line19j_2[0].f1_94[0]",
+          "text": "T-14ILK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.2_total_cost_section_179_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "9,851"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20a_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20a[0].f1_99[0]",
+          "text": "8,778"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20a_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20a[0].f1_101[0]",
+          "text": "T-JH2X4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20a_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20a[0].f1_103[0]",
+          "text": "5,008"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20a_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20a[0].f1_100[0]",
+          "text": "T-5NQGP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20b_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20b[0].f1_105[0]",
+          "text": "4,586"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20b_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20b[0].f1_107[0]",
+          "text": "T-1XKTP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20b_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20b[0].f1_109[0]",
+          "text": "2,588"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20c_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20c[0].f1_111[0]",
+          "text": "2,864"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20c_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20c[0].f1_115[0]",
+          "text": "9,196"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20c_month_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20c[0].f1_110[0]",
+          "text": "T-10MME"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20d_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20d[0].f1_117[0]",
+          "text": "2,613"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20d_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20d[0].f1_121[0]",
+          "text": "8,466"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20d_month_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20d[0].f1_116[0]",
+          "text": "T-ICXP8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20e_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20e[0].f1_123[0]",
+          "text": "7,084"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20e_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20e[0].f1_127[0]",
+          "text": "5,752"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.20e_month_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].SectionCTable[0].Line20e[0].f1_122[0]",
+          "text": "T-1HB6T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.3_threshold_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "5,866"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.4_reduction_in_limitation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "9,838"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.5_dollar_limitation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "2,711"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.6_row1_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln6[0].BodyRow1[0].f1_10[0]",
+          "text": "9,261"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.6_row1_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln6[0].BodyRow1[0].f1_9[0]",
+          "text": "T-MAF44"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.6_row1_elected_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln6[0].BodyRow1[0].f1_11[0]",
+          "text": "4,357"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.6_row2_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln6[0].BodyRow2[0].f1_13[0]",
+          "text": "6,821"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.6_row2_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln6[0].BodyRow2[0].f1_12[0]",
+          "text": "T-1I3Y8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.6_row2_elected_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Ln6[0].BodyRow2[0].f1_14[0]",
+          "text": "2,858"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.7_listed_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "4,075"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.8_total_elected_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "1,869"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.0.line.9_tentative_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "8,000"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.21_listed_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "6,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.22_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "1,447"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.23a_section_263a_interest_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "7,606"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.23b_section_263a_other_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "8,051"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.24a_evidence_business_use_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.24a_evidence_business_use_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.24b_evidence_written_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.24b_evidence_written_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.24c_charter",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.24c_lease",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.24c_own",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.25_special_depreciation_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "9,363"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row1_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow1[0].f2_10[0]",
+          "text": "6,110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row1_business_use_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow1[0].f2_8[0]",
+          "text": "T-1Y28X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row1_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow1[0].f2_9[0]",
+          "text": "5,805"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row1_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow1[0].f2_7[0]",
+          "text": "T-Q08CP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row1_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow1[0].f2_13[0]",
+          "text": "3,239"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row1_elected_section_179",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow1[0].f2_14[0]",
+          "text": "5,933"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row1_method_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow1[0].f2_12[0]",
+          "text": "T-1Q2EJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row1_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow1[0].f2_11[0]",
+          "text": "T-1YRR5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row1_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow1[0].f2_6[0]",
+          "text": "T-2W70P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row2_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow2[0].f2_19[0]",
+          "text": "6,657"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row2_business_use_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow2[0].f2_17[0]",
+          "text": "T-9RQVZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row2_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow2[0].f2_18[0]",
+          "text": "6,838"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row2_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow2[0].f2_16[0]",
+          "text": "T-WHRFN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row2_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow2[0].f2_22[0]",
+          "text": "3,702"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row2_elected_section_179",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow2[0].f2_23[0]",
+          "text": "5,677"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row2_method_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow2[0].f2_21[0]",
+          "text": "T-1W8TQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row2_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow2[0].f2_20[0]",
+          "text": "T-17ZOR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row2_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow2[0].f2_15[0]",
+          "text": "T-1WYK3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row3_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow3[0].f2_28[0]",
+          "text": "8,305"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row3_business_use_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow3[0].f2_26[0]",
+          "text": "T-14ZH2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row3_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow3[0].f2_27[0]",
+          "text": "4,507"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row3_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow3[0].f2_25[0]",
+          "text": "T-1WYMU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row3_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow3[0].f2_31[0]",
+          "text": "4,675"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row3_elected_section_179",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow3[0].f2_32[0]",
+          "text": "5,107"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row3_method_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow3[0].f2_30[0]",
+          "text": "T-1J04V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row3_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow3[0].f2_29[0]",
+          "text": "T-EAC8A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.26_row3_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln26[0].BodyRow3[0].f2_24[0]",
+          "text": "T-1I8NE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row1_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow1[0].f2_37[0]",
+          "text": "4,130"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row1_business_use_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow1[0].f2_35[0]",
+          "text": "T-YFSHW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row1_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow1[0].f2_36[0]",
+          "text": "1,144"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row1_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow1[0].f2_34[0]",
+          "text": "T-18FYM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row1_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow1[0].f2_40[0]",
+          "text": "2,189"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row1_method_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow1[0].f2_39[0]",
+          "text": "T-6EBMJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row1_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow1[0].f2_38[0]",
+          "text": "T-NGDWX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row1_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow1[0].f2_33[0]",
+          "text": "T-1QU33"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row2_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow2[0].f2_45[0]",
+          "text": "8,619"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row2_business_use_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow2[0].f2_43[0]",
+          "text": "T-5LMPY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row2_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow2[0].f2_44[0]",
+          "text": "9,696"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row2_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow2[0].f2_42[0]",
+          "text": "T-1JCXG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row2_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow2[0].f2_48[0]",
+          "text": "3,280"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row2_method_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow2[0].f2_47[0]",
+          "text": "T-1O9JW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row2_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow2[0].f2_46[0]",
+          "text": "T-NSVSF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row2_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow2[0].f2_41[0]",
+          "text": "T-1AF75"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row3_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow3[0].f2_53[0]",
+          "text": "6,458"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row3_business_use_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow3[0].f2_51[0]",
+          "text": "T-18BWV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row3_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow3[0].f2_52[0]",
+          "text": "2,605"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row3_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow3[0].f2_50[0]",
+          "text": "T-1EWT6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row3_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow3[0].f2_56[0]",
+          "text": "2,295"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row3_method_convention",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow3[0].f2_55[0]",
+          "text": "T-1W7WR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row3_recovery_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow3[0].f2_54[0]",
+          "text": "T-QQD01"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.27_row3_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln27[0].BodyRow3[0].f2_49[0]",
+          "text": "T-1MJC8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.28_total_listed_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_57[0]",
+          "text": "6,910"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.29_total_section_179_listed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_58[0]",
+          "text": "6,062"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.30_vehicle1_business_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line30[0].f2_59[0]",
+          "text": "4,174"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.30_vehicle2_business_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line30[0].f2_60[0]",
+          "text": "5,532"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.30_vehicle3_business_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line30[0].f2_61[0]",
+          "text": "2,801"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.30_vehicle4_business_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line30[0].f2_62[0]",
+          "text": "6,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.30_vehicle5_business_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line30[0].f2_63[0]",
+          "text": "8,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.30_vehicle6_business_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line30[0].f2_64[0]",
+          "text": "9,438"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.31_vehicle1_commuting_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line31[0].f2_65[0]",
+          "text": "4,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.31_vehicle2_commuting_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line31[0].f2_66[0]",
+          "text": "7,417"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.31_vehicle3_commuting_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line31[0].f2_67[0]",
+          "text": "5,682"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.31_vehicle4_commuting_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line31[0].f2_68[0]",
+          "text": "9,642"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.31_vehicle5_commuting_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line31[0].f2_69[0]",
+          "text": "6,030"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.31_vehicle6_commuting_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line31[0].f2_70[0]",
+          "text": "5,792"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.32_vehicle1_personal_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line32[0].f2_71[0]",
+          "text": "6,793"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.32_vehicle2_personal_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line32[0].f2_72[0]",
+          "text": "7,987"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.32_vehicle3_personal_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line32[0].f2_73[0]",
+          "text": "5,315"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.32_vehicle4_personal_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line32[0].f2_74[0]",
+          "text": "7,650"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.32_vehicle5_personal_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line32[0].f2_75[0]",
+          "text": "8,316"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.32_vehicle6_personal_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line32[0].f2_76[0]",
+          "text": "4,775"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.33_vehicle1_total_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line33[0].f2_77[0]",
+          "text": "2,462"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.33_vehicle2_total_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line33[0].f2_78[0]",
+          "text": "4,601"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.33_vehicle3_total_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line33[0].f2_79[0]",
+          "text": "3,392"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.33_vehicle4_total_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line33[0].f2_80[0]",
+          "text": "3,829"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.33_vehicle5_total_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line33[0].f2_81[0]",
+          "text": "1,629"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.33_vehicle6_total_miles",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Ln30-33[0].Line33[0].f2_82[0]",
+          "text": "3,022"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle1_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle1_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle2_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle2_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle3_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle3_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle4_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle4_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle5_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle5_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle6_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_9[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.34_vehicle6_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line34[0].c2_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle1_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_10[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle1_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle2_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_11[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle2_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle3_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_12[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle3_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_12[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle4_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_13[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle4_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_13[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle5_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_14[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle5_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_14[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle6_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_15[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.35_vehicle6_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line35[0].c2_15[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle1_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_16[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle1_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_16[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle2_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_17[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle2_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_17[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle3_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_18[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle3_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_18[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle4_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_19[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle4_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_19[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle5_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_20[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle5_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_20[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle6_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_21[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.1.line.36_vehicle6_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].SectionBTable2[0].Line36[0].c2_21[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.37_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.37_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.38_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.38_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.39_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.39_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.40_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.40_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.41_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.41_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row1_amortizable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow1[0].f3_3[0]",
+          "text": "1,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row1_amortization",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow1[0].f3_6[0]",
+          "text": "2,852"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row1_code_section",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow1[0].f3_4[0]",
+          "text": "T-RJBUK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row1_date_begins",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow1[0].f3_2[0]",
+          "text": "T-K5OOU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row1_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow1[0].f3_1[0]",
+          "text": "T-1282M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row1_period_or_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow1[0].f3_5[0]",
+          "text": "T-185EI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row2_amortizable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow2[0].f3_9[0]",
+          "text": "6,861"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row2_amortization",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow2[0].f3_12[0]",
+          "text": "4,120"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row2_code_section",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow2[0].f3_10[0]",
+          "text": "T-6WTUW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row2_date_begins",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow2[0].f3_8[0]",
+          "text": "T-PQTS6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row2_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow2[0].f3_7[0]",
+          "text": "T-RO6PH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.42_row2_period_or_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].PartVITable[0].BodyRow2[0].f3_11[0]",
+          "text": "T-1HYP5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.43_prior_year_amortization",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+          "text": "4,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4562.2.line.44_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_14[0]",
+          "text": "9,027"
+        }
+      ]
+    }
+  ]
+}

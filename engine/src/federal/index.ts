@@ -8,12 +8,14 @@ import { fixtureFileSchema } from "../catalog.js";
 import { makeFormSpec, type FormSpec } from "../formSpec.js";
 import { register as registerForm1040 } from "./1040/bindings.js";
 import { register as registerForm2441 } from "./2441/bindings.js";
+import { register as registerForm4562 } from "./4562/bindings.js";
 import { register as registerForm4684 } from "./4684/bindings.js";
 import { register as registerForm4952 } from "./4952/bindings.js";
 import { register as registerForm5695 } from "./5695/bindings.js";
 import { register as registerForm6251 } from "./6251/bindings.js";
 import { register as registerForm8582 } from "./8582/bindings.js";
 import { register as registerForm8606 } from "./8606/bindings.js";
+import { register as registerForm8829 } from "./8829/bindings.js";
 import { register as registerForm8889 } from "./8889/bindings.js";
 import { register as registerForm8949 } from "./8949/bindings.js";
 import { register as registerForm8959 } from "./8959/bindings.js";
@@ -40,12 +42,14 @@ import { register as registerScheduleSE } from "./schedule-se/bindings.js";
 /* Rollup inlines the JSON at build time; the process does not read it from disk. */
 import form1040CatalogJson from "./1040/catalog.json";
 import form2441CatalogJson from "./2441/catalog.json";
+import form4562CatalogJson from "./4562/catalog.json";
 import form4684CatalogJson from "./4684/catalog.json";
 import form4952CatalogJson from "./4952/catalog.json";
 import form5695CatalogJson from "./5695/catalog.json";
 import form6251CatalogJson from "./6251/catalog.json";
 import form8582CatalogJson from "./8582/catalog.json";
 import form8606CatalogJson from "./8606/catalog.json";
+import form8829CatalogJson from "./8829/catalog.json";
 import form8889CatalogJson from "./8889/catalog.json";
 import form8949CatalogJson from "./8949/catalog.json";
 import form8959CatalogJson from "./8959/catalog.json";
@@ -80,6 +84,8 @@ export const FEDERAL_CATALOGS = [
   fixtureFileSchema.parse(form8582CatalogJson),
   fixtureFileSchema.parse(scheduleECatalogJson),
   fixtureFileSchema.parse(form8606CatalogJson),
+  fixtureFileSchema.parse(form4562CatalogJson),
+  fixtureFileSchema.parse(form8829CatalogJson),
   fixtureFileSchema.parse(form8889CatalogJson),
   fixtureFileSchema.parse(form8959CatalogJson),
   fixtureFileSchema.parse(form4952CatalogJson),
@@ -142,6 +148,29 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Schedule B",
     relativeDir: "federal/schedule-b",
     register: registerScheduleB,
+  }),
+  /* Form 4562 (one per activity) and Form 8829 (one per home office) feed Schedules C and E. */
+  makeFormSpec({
+    formId: "form-4562",
+    shortId: "4562",
+    displayName: "Form 4562",
+    relativeDir: "federal/4562",
+    register: registerForm4562,
+    copies: {
+      count: (info) => info?.form4562Activities?.length ?? 1,
+      select: (info, index) => info && { ...info, form4562CopyIndex: index },
+    },
+  }),
+  makeFormSpec({
+    formId: "form-8829",
+    shortId: "8829",
+    displayName: "Form 8829",
+    relativeDir: "federal/8829",
+    register: registerForm8829,
+    copies: {
+      count: (info) => info?.form8829Businesses?.length ?? 1,
+      select: (info, index) => info && { ...info, form8829CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "schedule-c",
