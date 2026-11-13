@@ -67,18 +67,26 @@ A second, checked on the California return only, is a filer of 67 with
 an HSA (Form 8889), a pension, Social Security and cash gifts, who
 itemizes for California only and completes the CA alternative minimum
 tax on an incentive stock option exercise (Schedule P).
+A fifth married-filing-separately scenario, checked on the California
+return only, has three businesses (a Form 8829 home office, amortization
+on Form 4562), a self-rental with a new asset (Form 4562, FTB 3885A), a
+Roth IRA distribution (Form 8606 Part III), alimony and other Schedule 1
+items, and itemizes.
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
 1099-SA, 1098, SSA-1099, W-2G, 1099-K, 1099-NEC, 1095-A, a W-2 you issued to a household employee
 (Schedule H, without FUTA tax), and invoices for home energy improvements
 (Form 5695 Part II). The last two have one unverified test scenario.
 A business you run yourself is answers, not a document: receipts and
-expenses by Schedule C line, vehicles at the standard mileage rate and
-a home office by the simplified method, with no Form 8829,
-depreciation form or cost of goods sold.
+expenses by Schedule C line, vehicles at the standard mileage rate, a
+home office by the simplified method or, in a rented home, by Form 8829,
+and depreciation and amortization on Form 4562 (no section 179 expense,
+listed property or cost of goods sold). A 1099-MISC can pay the business.
 A rental property or a royalty is answers too: rents, royalties and
-expenses by Schedule E line, with Form 8582 for passive losses and no
-depreciation, vehicle expenses or sale of the property.
+expenses by Schedule E line, with Form 8582 for passive losses,
+depreciation on Form 4562, and no vehicle expenses or sale of the
+property. California depreciation without the federal special allowance
+goes on FTB 3885A.
 
 A return outside this list still helps: the report shows what your
 return needs that OpenReturn lacks.

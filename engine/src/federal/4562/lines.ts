@@ -11,8 +11,13 @@ import type {
   DepreciableAsset,
   RecoveryClass,
 } from "../../facts/index.js";
-import { roundDollars, sum } from "../../money.js";
-import { assetGap, federalAssetFigures, type FederalAssetFigures } from "./assets.js";
+import { roundDollars, sum, sumOrBlank } from "../../money.js";
+import {
+  assetGap,
+  federalAssetFigures,
+  firstYearRate,
+  type FederalAssetFigures,
+} from "./assets.js";
 
 /* irs-4562-inst-2025::sec::line-11::b01: the business income limitation needs every active trade's taxable income. */
 export const SECTION_179_GAP =
@@ -69,11 +74,43 @@ export function mustFile4562(depreciation: ActivityDepreciation | undefined): bo
   );
 }
 
+const TAX_YEAR = "2025-";
+/* irs-4562-inst-2025::sec::recovery-period-for-most-property::b02: the mid-quarter test. */
+const MID_QUARTER_SHARE = 0.4;
+const LAST_QUARTER_START = "2025-10-01";
+
+/*
+ * The mid-quarter test: when the depreciable bases (before the special
+ * allowance) of property placed in service in October–December are more than
+ * 40% of the year's, the mid-quarter convention applies to all of it; else the
+ * half-year convention. Real property is left out. The engine checks the
+ * activity's own assets only (the test is the whole return's), and returns the
+ * reason when a stated convention disagrees.
+ */
+function conventionGap(assets: DepreciableAsset[]): string | undefined {
+  const personal = assets.filter((asset) => asset.convention !== "MM");
+  if (personal.length === 0) return undefined;
+  const basis = (asset: DepreciableAsset) =>
+    federalAssetFigures(asset).cost - federalAssetFigures(asset).section179;
+  const total = sum(...personal.map(basis));
+  const late = sum(
+    ...personal.filter((asset) => asset.placedInService >= LAST_QUARTER_START).map(basis),
+  );
+  const expected = total > 0 && late > MID_QUARTER_SHARE * total ? "MQ" : "HY";
+  return personal.some((asset) => asset.convention !== expected)
+    ? `The stated convention does not follow the mid-quarter test: ${expected} applies to this year's property (irs-4562-inst-2025::sec::recovery-period-for-most-property::b02).`
+    : undefined;
+}
+
 /* Why the activity's line 22 is a case the engine does not handle. */
 function activityGap(depreciation: ActivityDepreciation): string | undefined {
   const assets = depreciation.assets ?? [];
   const assetReason = assets.map(assetGap).find((reason) => reason !== undefined);
   if (assetReason) return assetReason;
+  const conventionReason = conventionGap(assets);
+  if (conventionReason) return conventionReason;
+  if ((depreciation.amortizedCosts ?? []).some((cost) => !cost.beginsOn.startsWith(TAX_YEAR)))
+    return "A cost listed as beginning amortization in 2025 began in another year; older amortization belongs in the line 43 amount.";
   const section179 =
     (depreciation.section179Carryover ?? 0) > 0 ||
     assets.some((asset) => (asset.section179Elected ?? 0) > 0);
@@ -97,7 +134,13 @@ function line19Rows(assets: FederalAssetFigures[]): Line19Row[] {
         basis: waits ? undefined : roundDollars(sum(...members.map((member) => member.macrsBasis))),
         deduction: waits
           ? undefined
-          : roundDollars(sum(...members.map((member) => member.depreciation))),
+          : roundDollars(
+              sum(
+                ...members.map(
+                  (member) => roundDollars(member.macrsBasis ?? 0) * firstYearRate(member.asset),
+                ),
+              ),
+            ),
       };
     });
 }
@@ -117,14 +160,19 @@ export function form4562Figures(depreciation: ActivityDepreciation): Form4562Fig
   const line22 =
     gap !== undefined || waits
       ? undefined
-      : sum(line14, line17, ...line19.map((row) => row.deduction));
+      : sumOrBlank(line14, line17, ...line19.map((row) => row.deduction));
   return { gap, assets, line14, line17, line19, line22 };
 }
 
-/* Line 42 column (f): the amount over the period, times the months of the period in 2025. */
-export function amortizationThisYear(cost: AmortizedCost, amount = cost.amount): number {
+/* Line 42 column (f), cents kept: the amount over the period, times the months of the period in 2025. */
+export function amortizationExact(cost: AmortizedCost, amount = cost.amount): number {
   const monthsIn2025 = Math.min(cost.periodMonths, MONTHS - amortizationMonth(cost) + 1);
-  return roundDollars((amount / cost.periodMonths) * monthsIn2025);
+  return (amount / cost.periodMonths) * monthsIn2025;
+}
+
+/* Line 42 column (f) as printed: rounded to the dollar. */
+export function amortizationThisYear(cost: AmortizedCost, amount = cost.amount): number {
+  return roundDollars(amortizationExact(cost, amount));
 }
 
 /*
@@ -132,13 +180,17 @@ export function amortizationThisYear(cost: AmortizedCost, amount = cost.amount):
  * irs-4562-inst-2025::sec::line-42 ("Dividing the amount in column (c) by the
  * number of months over which the costs are to be amortized and multiplying the
  * result by the number of months in the amortization period included in your
- * tax year"). Undefined when the activity amortizes nothing.
+ * tax year"). The total adds the column with its cents and rounds once:
+ * "If you have to add two or more amounts to figure the amount to enter on a
+ * line, include cents when adding the amounts and round off only the total"
+ * (irs-1040-inst-2025::sec::rounding-off-to-whole::b01). Undefined when the
+ * activity amortizes nothing.
  */
 export function line44(depreciation: ActivityDepreciation | undefined): number | undefined {
   const costs = depreciation?.amortizedCosts ?? [];
   const prior = depreciation?.priorYearAmortization;
   if (costs.length === 0 && prior === undefined) return undefined;
-  return sum(...costs.map((cost) => amortizationThisYear(cost)), roundDollars(prior));
+  return roundDollars(sum(...costs.map((cost) => amortizationExact(cost)), prior));
 }
 
 /* The depreciation deduction of an activity: line 22 when Form 4562 is filed, else the older assets' amount. */

@@ -15,7 +15,9 @@ import type {
 import { assetGap, businessBasis, firstYearRate } from "../../../federal/4562/assets.js";
 import {
   activityDepreciationDeduction,
+  amortizationExact,
   amortizationThisYear,
+  form4562Figures,
   line44,
 } from "../../../federal/4562/lines.js";
 import { roundDollars, sum, sumOrBlank } from "../../../money.js";
@@ -67,13 +69,20 @@ function californiaAssetRow(asset: DepreciableAsset): CaliforniaAssetRow {
   return { asset, basis, depreciation: roundDollars(basis * firstYearRate(asset)) };
 }
 
-/* ::line-9::b01: the California basis and recovery period; the period is the federal one. */
+/*
+ * ::line-9::b01: the California basis and recovery period. No fact gives a
+ * California period apart from the federal one, so a cost whose California
+ * period differs is recorded with its California amount only for the year.
+ */
 function californiaAmortizationRow(cost: AmortizedCost): CaliforniaAmortizationRow {
-  const basis = cost.californiaAmount ?? cost.amount;
+  const basis = roundDollars(cost.californiaAmount ?? cost.amount);
   return { cost, basis, amortization: amortizationThisYear(cost, basis) };
 }
 
 function gapOf(depreciation: ActivityDepreciation): string | undefined {
+  // Line 7 and line 13 read Form 4562; its gap is this form's too.
+  const federal = form4562Figures(depreciation).gap;
+  if (federal) return federal;
   const assets = depreciation.assets ?? [];
   const reason = assets.map(assetGap).find((each) => each !== undefined);
   if (reason) return reason;
@@ -104,7 +113,11 @@ export function form3885AFigures(depreciation: ActivityDepreciation): Form3885AF
   const line7 = activityDepreciationDeduction(depreciation);
   const depreciationDifference = difference(line6, line7);
   const line9 = (depreciation.amortizedCosts ?? []).map(californiaAmortizationRow);
-  const line10 = sumOrBlank(...line9.map((row) => row.amortization));
+  // Line 10 adds column (f) with its cents and rounds once, as Form 4562 line 44 does.
+  const line10 =
+    line9.length === 0
+      ? undefined
+      : roundDollars(sum(...line9.map((row) => amortizationExact(row.cost, row.basis))));
   const line11 = roundDollars(
     depreciation.californiaPriorYearAmortization ?? depreciation.priorYearAmortization,
   );

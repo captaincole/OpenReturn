@@ -18,7 +18,7 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import type { Form8606FilingInfo, IraHolder } from "./filingInfo.js";
-import { NONQUALIFIED_ROTH_CODES } from "./partIII.js";
+import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "./partIII.js";
 
 const OWNERS: IraOwner[] = ["taxpayer", "spouse"];
 const MUST_FILE_KEY = "decisions.scope.must_file_8606";
@@ -105,6 +105,14 @@ function needsMoreAnswers(holder: IraHolder): boolean {
   return needsYearEndValue || needsLine4;
 }
 
+/* Part III needs line 22's basis once line 21 is above 0, and line 24's once line 23 is. */
+function rothAnswersComplete(holder: IraHolder): boolean {
+  if (!holder.roth) return false;
+  const figures = partIIIFigures(holder.rothRows, holder.roth);
+  if (figures.line21 > 0 && figures.line22 === undefined) return false;
+  return !((figures.line23 ?? 0) > 0 && figures.line24 === undefined);
+}
+
 export function form8606Filers(inputs: ResolverInputs): IraHolder[] {
   return OWNERS.map((owner) => iraHolder(inputs, owner)).filter(mustFile8606);
 }
@@ -139,7 +147,10 @@ export function resolve8606Info(inputs: ResolverInputs): Form8606FilingInfo {
           // Part III needs the person's Roth IRA answers.
           ...filers
             .filter((holder) => holder.rothDistribution)
-            .map((holder) => [makeRothIraFactKey(holder.owner), holder.roth]),
+            .map((holder) => [
+              makeRothIraFactKey(holder.owner),
+              holder.roth && rothAnswersComplete(holder) ? holder.roth : undefined,
+            ]),
           // The fact is there but a line it gives is not: ask for the same fact again.
           ...filers
             .filter(needsMoreAnswers)
