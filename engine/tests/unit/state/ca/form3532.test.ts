@@ -7,6 +7,7 @@ import { describe, expect, it } from "vitest";
 import {
   HEAD_OF_HOUSEHOLD_KEYS,
   makeDependentFactKey,
+  QUALIFYING_CHILD_RELATIONSHIPS,
   type DependentFactValue,
 } from "../../../../src/facts/index.js";
 import { makeResolverInputs } from "../../../../src/resolverInputs.js";
@@ -121,8 +122,24 @@ describe("relationshipBox", () => {
     ["Mother", "parent_or_stepparent"],
     ["Mother-in-law", "other_relative"],
     ["Cousin", undefined],
+    ["Great-grandchild", undefined],
   ])("%s → %s", (relationship, box) => {
-    expect(relationshipBox(relationship)).toBe(box);
+    expect(relationshipBox(relationship).box).toBe(box);
+  });
+
+  it("gives every qualifying-child relationship a box, except the descendants line 2 does not name", () => {
+    const noBox = [...QUALIFYING_CHILD_RELATIONSHIPS].filter(
+      (relationship) => relationshipBox(relationship).box === undefined,
+    );
+    expect(noBox).toEqual([
+      "great grandson",
+      "great granddaughter",
+      "great grandchild",
+      "grandniece",
+      "grandnephew",
+      "great niece",
+      "great nephew",
+    ]);
   });
 });
 
@@ -130,7 +147,10 @@ describe("daysLivedWithTaxpayer", () => {
   it("counts twelve months as 365 days for an unmarried filer", () => {
     expect(daysLivedWithTaxpayer(child(), "not_married")).toBe(365);
   });
-  it("enters 365 for a child born during the year", () => {
+  it("enters 365 for a child born during the year, whatever days are stated", () => {
+    expect(
+      daysLivedWithTaxpayer(child({ dob: "11/01/2025", daysLivedWithYou: 61 }), "not_married"),
+    ).toBe(365);
     expect(
       daysLivedWithTaxpayer(child({ dob: "09/01/2025", monthsLivedWithYou: 4 }), "not_married"),
     ).toBe(365);

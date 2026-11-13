@@ -67,13 +67,8 @@ const partsIIAndIII: Bindings = {
    * (ca-3532-inst-2025::sec::line-2::b01). A relationship no box lists needs a person.
    */
   "0.line.2_qualifying_person_relationship": fromPerson(({ dependent }) => {
-    const box = relationshipBox(dependent.relationship);
-    return (
-      box ??
-      unsupported(
-        `No line 2 box lists the relationship "${dependent.relationship}"; a person checks the box.`,
-      )
-    );
+    const { box, gap } = relationshipBox(dependent.relationship);
+    return box ?? unsupported(gap ?? "No line 2 box applies.");
   }),
   // Line 3: name, SSN (or ITIN) and date of birth (ca-3532-inst-2025::sec::line-3::b01).
   "0.line.3_first_name": fromPerson(({ dependent }) => dependent.firstName),

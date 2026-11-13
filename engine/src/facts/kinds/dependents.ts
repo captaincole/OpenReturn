@@ -86,9 +86,10 @@ export function getDependentFacts(facts: ReadonlyArray<FactRow>): DependentFact[
  * The relationships that make a qualifying child (1040 instructions, Who Qualifies
  * as Your Dependent, Step 1): a child, stepchild, foster child, sibling, half or
  * step sibling, or a descendant of any of them. An adopted child is the
- * taxpayer's own child. Spelled as the 1040 prints them, hyphens as spaces.
+ * taxpayer's own child. Spelled as the 1040 prints them, hyphens as spaces
+ * (normalizeRelationship).
  */
-const QUALIFYING_CHILD_RELATIONSHIPS = new Set([
+export const QUALIFYING_CHILD_RELATIONSHIPS: ReadonlySet<string> = new Set([
   "son",
   "daughter",
   "child",
@@ -119,9 +120,18 @@ const QUALIFYING_CHILD_RELATIONSHIPS = new Set([
   "great nephew",
 ]);
 
+/* A relationship as the lists here spell it: lower case, hyphens as spaces, single spaces. */
+export function normalizeRelationship(relationship: string): string {
+  return relationship
+    .toLowerCase()
+    .replaceAll("-", " ")
+    .split(" ")
+    .filter((word) => word !== "")
+    .join(" ");
+}
+
 export function isQualifyingChildRelationship(relationship: string): boolean {
-  const spelled = relationship.trim().toLowerCase().replace(/-/g, " ").replace(/\s+/g, " ");
-  return QUALIFYING_CHILD_RELATIONSHIPS.has(spelled);
+  return QUALIFYING_CHILD_RELATIONSHIPS.has(normalizeRelationship(relationship));
 }
 
 function parseDob(dob: string | undefined): { month: number; year: number } | undefined {
