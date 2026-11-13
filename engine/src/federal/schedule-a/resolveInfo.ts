@@ -1,4 +1,4 @@
-import { GAMBLING_KEYS, MORTGAGE_KEYS } from "../../facts/index.js";
+import { GAMBLING_KEYS, ITEMIZED_OTHER_KEYS, MORTGAGE_KEYS } from "../../facts/index.js";
 import {
   factsInCategory,
   missingInputs,
@@ -221,5 +221,8 @@ export function resolveScheduleAInfo(inputs: ResolverInputs): ScheduleAFilingInf
     disasterLossGap: loss.gap,
     increasedStandardDeduction,
     gamblingLosses: num(inputs, GAMBLING_KEYS.losses),
+    otherTaxes: num(inputs, ITEMIZED_OTHER_KEYS.otherTaxes),
+    otherTaxesDescription: text(inputs, ITEMIZED_OTHER_KEYS.otherTaxesDescription),
+    impairmentRelatedWorkExpenses: num(inputs, ITEMIZED_OTHER_KEYS.impairmentRelatedWorkExpenses),
   };
 }
