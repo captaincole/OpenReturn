@@ -9,6 +9,7 @@ import {
   BOTH_DEPRECIATION_ANSWERS,
   form4562Figures,
   line44,
+  MID_QUARTER_ACROSS_ACTIVITIES_GAP,
   mustFile4562,
 } from "../../../../src/federal/4562/lines.js";
 
@@ -136,5 +137,21 @@ describe("an activity's depreciation line (Schedule C line 13, Schedule E line 1
     const waiting = { assets: [asset({ placedInService: "2025-03-01" })] };
     expect(activityDepreciationLine(undefined, waiting)).toBeUndefined();
     expect(activityDepreciationGap(undefined, waiting)).toBeUndefined();
+  });
+});
+
+describe("the mid-quarter test across activities", () => {
+  const assets = [asset({ placedInService: "2025-03-01", acquiredAfterJanuary19: true })];
+
+  it("is checked for one activity with 2025 personal property", () => {
+    expect(form4562Figures({ assets }).gap).toBeUndefined();
+    const late = [asset({ placedInService: "2025-11-01", acquiredAfterJanuary19: true })];
+    expect(form4562Figures({ assets: late }).gap).toContain("mid-quarter test");
+  });
+
+  it("is a gap when another activity also places personal property in service", () => {
+    const figures = form4562Figures({ assets, personalPropertyInOtherActivities: true });
+    expect(figures.gap).toBe(MID_QUARTER_ACROSS_ACTIVITIES_GAP);
+    expect(figures.line22).toBeUndefined();
   });
 });
