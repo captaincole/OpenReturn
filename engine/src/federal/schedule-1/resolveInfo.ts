@@ -41,6 +41,9 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
       ? sum(...w2gs.map((w2g) => w2g.box1), winningsNotOnW2G)
       : undefined;
   const unemploymentCompensation = unemploymentOn1099G(inputs);
+  const rtaaPayments = sumOrBlank(
+    ...getGovernmentPaymentsFacts(inputs.facts).map((form) => form.box5),
+  );
   const alaskaPermanentFundDividends = num(inputs, OTHER_INCOME_KEYS.alaskaPermanentFundDividends);
   // Schedule SE line 13 reaches the 1040 only through Schedule 1 line 15.
   const scheduleSE = resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value === true;
@@ -52,9 +55,10 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
-        rule: `fallback: unemployment compensation $${unemploymentCompensation ?? 0} > 0, 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), Form 8889 filed (${form8889}), educator expenses $${educatorExpenses ?? 0} > 0, or an early withdrawal penalty $${savingsPenalty ?? 0} > 0`,
+        rule: `fallback: unemployment compensation $${unemploymentCompensation ?? 0} > 0, RTAA payments $${rtaaPayments ?? 0} > 0, 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), Form 8889 filed (${form8889}), educator expenses $${educatorExpenses ?? 0} > 0, or an early withdrawal penalty $${savingsPenalty ?? 0} > 0`,
         value:
           (unemploymentCompensation ?? 0) > 0 ||
+          (rtaaPayments ?? 0) > 0 ||
           (miscOtherIncome ?? 0) > 0 ||
           (gamblingWinnings ?? 0) > 0 ||
           (alaskaPermanentFundDividends ?? 0) > 0 ||
@@ -72,6 +76,7 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     businessIncome,
     hasBusiness,
     unemploymentCompensation,
+    rtaaPayments,
     gamblingWinnings,
     miscOtherIncome,
     alaskaPermanentFundDividends,
