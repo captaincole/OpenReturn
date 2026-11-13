@@ -1,0 +1,888 @@
+{
+  "form": {
+    "formId": "form-8829",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8829 — Expenses for Business Use of Your Home"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8829.0.header.name",
+      "label": "Name(s) of proprietor(s)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 454.6,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8829.0.line.1_business_area",
+      "label": "Line 1 — Area used regularly and exclusively for business, regularly for daycare, or for storage of inventory or product samples",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.2_total_home_area",
+      "label": "Line 2 — Total area of home",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.3_business_percentage",
+      "label": "Line 3 — Divide line 1 by line 2. Enter the result as a percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.4_daycare_hours_used",
+      "label": "Line 4 — Multiply days used for daycare during year by hours used per day",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.5_daycare_hours_available",
+      "label": "Line 5 — If you started or stopped using your home for daycare during the year, see instructions; otherwise, enter 8,760",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.6_daycare_decimal",
+      "label": "Line 6 — Divide line 4 by line 5. Enter the result as a decimal amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 402.998,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.7_business_percentage",
+      "label": "Line 7 — Business percentage. For daycare facilities not used exclusively for business, multiply line 6 by line 3 (enter the result as a percentage). All others, enter the amount from line 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.8_tentative_profit",
+      "label": "Line 8 — Enter the amount from Schedule C, line 29, plus any gain derived from the business use of your home, minus any loss from the trade or business not derived from the business use of your home",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line8_ReadOrder[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.9_casualty_losses_col_a",
+      "label": "Line 9 — Casualty losses, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line9[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.9_casualty_losses_col_b",
+      "label": "Line 9 — Casualty losses, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line9[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.10_mortgage_interest_col_a",
+      "label": "Line 10 — Deductible mortgage interest, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line10[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.10_mortgage_interest_col_b",
+      "label": "Line 10 — Deductible mortgage interest, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line10[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.11_real_estate_taxes_col_a",
+      "label": "Line 11 — Real estate taxes, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line11[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.11_real_estate_taxes_col_b",
+      "label": "Line 11 — Real estate taxes, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line11[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.12_total_lines_9_11_col_a",
+      "label": "Line 12 — Add lines 9, 10, and 11, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line12[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 443.973
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.12_total_lines_9_11_col_b",
+      "label": "Line 12 — Add lines 9, 10, and 11, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line12[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 443.973
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.13_indirect_business_share",
+      "label": "Line 13 — Multiply line 12, column (b), by line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.14_direct_plus_line_13",
+      "label": "Line 14 — Add line 12, column (a), and line 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.15_limit_after_line_14",
+      "label": "Line 15 — Subtract line 14 from line 8. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.16_excess_mortgage_interest_col_a",
+      "label": "Line 16 — Excess mortgage interest, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line16[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 395.971
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.16_excess_mortgage_interest_col_b",
+      "label": "Line 16 — Excess mortgage interest, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line16[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 395.971
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.17_excess_real_estate_taxes_col_a",
+      "label": "Line 17 — Excess real estate taxes, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line17[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.17_excess_real_estate_taxes_col_b",
+      "label": "Line 17 — Excess real estate taxes, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line17[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.18_insurance_col_a",
+      "label": "Line 18 — Insurance, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line18[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.18_insurance_col_b",
+      "label": "Line 18 — Insurance, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line18[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.19_rent_col_a",
+      "label": "Line 19 — Rent, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line19[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.19_rent_col_b",
+      "label": "Line 19 — Rent, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line19[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.20_repairs_maintenance_col_a",
+      "label": "Line 20 — Repairs and maintenance, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line20[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.20_repairs_maintenance_col_b",
+      "label": "Line 20 — Repairs and maintenance, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line20[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.21_utilities_col_a",
+      "label": "Line 21 — Utilities, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line21[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.21_utilities_col_b",
+      "label": "Line 21 — Utilities, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line21[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.22_other_expenses_col_a",
+      "label": "Line 22 — Other expenses, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line22[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.22_other_expenses_col_b",
+      "label": "Line 22 — Other expenses, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line22[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.23_total_lines_16_22_col_a",
+      "label": "Line 23 — Add lines 16 through 22, column (a) direct expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line23[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 311.978
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.23_total_lines_16_22_col_b",
+      "label": "Line 23 — Add lines 16 through 22, column (b) indirect expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line23[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 311.978
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.24_indirect_operating_share",
+      "label": "Line 24 — Multiply line 23, column (b), by line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.25_operating_expense_carryover",
+      "label": "Line 25 — Carryover of prior year operating expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.26_total_operating_expenses",
+      "label": "Line 26 — Add line 23, column (a), line 24, and line 25",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.27_allowable_operating_expenses",
+      "label": "Line 27 — Allowable operating expenses. Enter the smaller of line 15 or line 26",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.28_casualty_depreciation_limit",
+      "label": "Line 28 — Limit on excess casualty losses and depreciation. Subtract line 27 from line 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.29_excess_casualty_losses",
+      "label": "Line 29 — Excess casualty losses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.30_home_depreciation",
+      "label": "Line 30 — Depreciation of your home from line 42",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.31_casualty_depreciation_carryover",
+      "label": "Line 31 — Carryover of prior year excess casualty losses and depreciation",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 381.6,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.32_total_lines_29_31",
+      "label": "Line 32 — Add lines 29 through 31",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.33_allowable_casualty_depreciation",
+      "label": "Line 33 — Allowable excess casualty losses and depreciation. Enter the smaller of line 28 or line 32",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.34_total_lines_14_27_33",
+      "label": "Line 34 — Add lines 14, 27, and 33",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.35_casualty_loss_portion",
+      "label": "Line 35 — Casualty loss portion, if any, from lines 14 and 33",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.36_allowable_expenses",
+      "label": "Line 36 — Allowable expenses for business use of your home. Subtract line 35 from line 34",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 143.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.37_home_basis_or_fmv",
+      "label": "Line 37 — Enter the smaller of your home’s adjusted basis or its fair market value",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.38_land_value",
+      "label": "Line 38 — Value of land included on line 37",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.39_building_basis",
+      "label": "Line 39 — Basis of building. Subtract line 38 from line 37",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.40_business_basis_building",
+      "label": "Line 40 — Business basis of building. Multiply line 39 by line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.41_depreciation_percentage",
+      "label": "Line 41 — Depreciation percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 71.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.42_depreciation_allowable",
+      "label": "Line 42 — Depreciation allowable. Multiply line 40 by line 41",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 59.969
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.43_operating_expense_carryover_2026",
+      "label": "Line 43 — Operating expenses. Subtract line 27 from line 26. If less than zero, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 35.968
+      }
+    },
+    {
+      "fieldId": "form-8829.0.line.44_casualty_depreciation_carryover_2026",
+      "label": "Line 44 — Excess casualty losses and depreciation. Subtract line 33 from line 32. If less than zero, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 23.969
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8829/blank.pdf",
+    "ingestedAt": "2026-11-13T04:58:07.963Z",
+    "totalFields": 58,
+    "skipped": 0,
+    "catalogEntries": 58
+  }
+}
