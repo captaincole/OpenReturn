@@ -2,6 +2,7 @@ import { ingest1095A } from "./ingest1095A";
 import { ingest1098 } from "./ingest1098";
 import { ingest1099B } from "./ingest1099B";
 import { ingest1099Div, ingest1099Int, ingest1099Misc } from "./ingest1099Forms";
+import { ingest1099G } from "./ingest1099G";
 import { ingest1099K } from "./ingest1099K";
 import { ingest1099Nec } from "./ingest1099Nec";
 import { ingest1099R } from "./ingest1099R";
@@ -30,6 +31,7 @@ export const ingestTools = {
   ingestW2G,
   ingest1099K,
   ingest1099Nec,
+  ingest1099G,
   ingest1095A,
   recordBusiness,
   recordDependent,
