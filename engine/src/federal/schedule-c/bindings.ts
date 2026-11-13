@@ -3,8 +3,10 @@
 import { defineForm, type BindingFn } from "../../defineForm.js";
 import type { BusinessExpenses, BusinessFactValue, BusinessVehicle } from "../../facts/index.js";
 import { roundDollars } from "../../money.js";
-import { unsupported } from "../../types.js";
+import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
+import { homeOfficeActualGap } from "../8829/lines.js";
+import { depreciationGap, depreciationLine, partVEntries } from "./attachments.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
 import {
   carAndTruckExpenses,
@@ -38,8 +40,6 @@ const HOME_OFFICE_GAP = {
   areaAllocation:
     "The home offices of two or more of the owner's businesses total more than 300 square feet, and no fact gives how the taxpayer allocates the 300 among the businesses.",
 } as const;
-const AT_RISK =
-  "No fact says whether all investment in the business is at risk (Form 6198); line 31 leaves a loss blank.";
 
 /* The business this copy is for. */
 export function businessOf(info: ScheduleCFilingInfo): BusinessFactValue | undefined {
@@ -91,7 +91,47 @@ function squareFeet(info: ScheduleCFilingInfo, which: "homeSquareFeet" | "busine
 function line31(info: ScheduleCFilingInfo) {
   const business = businessOf(info);
   if (!business) return undefined;
-  return homeOfficeUnsupported(business, info) ?? netProfit(business, info.businesses ?? []);
+  return (
+    attachmentUnsupported(business) ??
+    homeOfficeUnsupported(business, info) ??
+    netProfit(business, info.businesses ?? [])
+  );
+}
+
+/*
+ * MANUAL EDIT: a Form 4562 or Form 8829 case the engine does not handle makes
+ * the lines that read it unsupported, with the reason.
+ */
+function attachmentUnsupported(business: BusinessFactValue): Unsupported | undefined {
+  const gap =
+    depreciationGap(business) ??
+    (business.homeOfficeActual ? homeOfficeActualGap(business.homeOfficeActual) : undefined);
+  return gap ? unsupported(gap) : undefined;
+}
+
+// MANUAL EDIT: a line that reads line 13 (Form 4562 line 22) carries its gap.
+function afterDepreciation(
+  info: ScheduleCFilingInfo,
+  line: (business: BusinessFactValue) => number | undefined,
+) {
+  const business = businessOf(info);
+  if (!business) return undefined;
+  const gap = depreciationGap(business);
+  return gap ? unsupported(gap) : partII(info, line);
+}
+
+/*
+ * MANUAL EDIT: line 32 only for a loss (irs-1040sc-inst-2025::sec::line-32::b01:
+ * "You don't need to complete line 32 if line 7 is more than the total of lines
+ * 28 and 30"). Box 32a when all investment is at risk, 32b when some is not.
+ */
+function atRiskBox(info: ScheduleCFilingInfo, box: "all" | "some") {
+  const business = businessOf(info);
+  if (!business || business.allInvestmentAtRisk === undefined) return undefined;
+  const line29 = tentativeProfit(business);
+  const line30 = homeOfficeExpenses(business, info.businesses ?? []) ?? 0;
+  if (line29 === undefined || line29 - line30 >= 0) return undefined;
+  return box === "all" ? business.allInvestmentAtRisk : !business.allInvestmentAtRisk;
 }
 
 // MANUAL EDIT: the 300 square-foot cap is shared by the owner's other businesses, so line 30 reads them all.
@@ -99,7 +139,9 @@ function line30(info: ScheduleCFilingInfo) {
   const business = businessOf(info);
   if (!business) return undefined;
   return (
-    homeOfficeUnsupported(business, info) ?? homeOfficeExpenses(business, info.businesses ?? [])
+    attachmentUnsupported(business) ??
+    homeOfficeUnsupported(business, info) ??
+    homeOfficeExpenses(business, info.businesses ?? [])
   );
 }
 
@@ -122,7 +164,7 @@ function partIVVehicle(info: ScheduleCFilingInfo): BusinessVehicle | undefined {
   const business = businessOf(info);
   const vehicle = business?.vehicles?.[0];
   const line9 = partII(info, carAndTruckExpenses) ?? 0;
-  const depreciation = business?.expenses?.depreciation ?? 0;
+  const depreciation = business ? (depreciationLine(business) ?? 0) : 0;
   return line9 > 0 && depreciation === 0 ? vehicle : undefined;
 }
 
@@ -147,7 +189,7 @@ function evidenceWritten(info: ScheduleCFilingInfo, box: "yes" | "no") {
  */
 function otherExpenseRow(info: ScheduleCFilingInfo, row: number) {
   const business = businessOf(info);
-  const entries = business?.otherExpenses ?? [];
+  const entries = business ? partVEntries(business) : [];
   if (business?.sellsGoods !== false || entries.length > PART_V_ROWS) return undefined;
   return entries[row - 1];
 }
@@ -214,7 +256,9 @@ export function register(): void {
       "0.line.10": (_, info) => expense(info, "commissionsAndFees"),
       "0.line.11": (_, info) => expense(info, "contractLabor"),
       "0.line.12": (_, info) => expense(info, "depletion"),
-      "0.line.13": (_, info) => expense(info, "depreciation"),
+      // MANUAL EDIT: line 13 is Form 4562 line 22 when the business has depreciation answers.
+      "0.line.13": (_, info) =>
+        afterDepreciation(info, (business) => roundDollars(depreciationLine(business))),
       "0.line.14": (_, info) => expense(info, "employeeBenefitPrograms"),
       "0.line.15": (_, info) => expense(info, "insurance"),
       "0.line.16a": (_, info) => expense(info, "mortgageInterest"),
@@ -233,12 +277,14 @@ export function register(): void {
       "0.line.26": (_, info) => expense(info, "wages"),
       "0.line.27a": (_, info) => expense(info, "energyEfficientBuildings"),
       "0.line.27b": (_, info) => partII(info, otherExpensesTotal),
-      "0.line.28": (_, info) => partII(info, totalExpenses),
-      "0.line.29": (_, info) => partI(info, tentativeProfit),
+      "0.line.28": (_, info) => afterDepreciation(info, totalExpenses),
+      "0.line.29": (_, info) => afterDepreciation(info, tentativeProfit),
       "0.line.30_home_sq_ft": (_, info) => squareFeet(info, "homeSquareFeet"),
       "0.line.30_business_sq_ft": (_, info) => squareFeet(info, "businessSquareFeet"),
       "0.line.30": (_, info) => line30(info),
       "0.line.31": (_, info) => line31(info),
+      "0.line.32a": (_, info) => atRiskBox(info, "all"),
+      "0.line.32b": (_, info) => atRiskBox(info, "some"),
       "1.line.43_month": (_, info) => placedInService(info, "month"),
       "1.line.43_day": (_, info) => placedInService(info, "day"),
       "1.line.43_year": (_, info) => placedInService(info, "year"),
@@ -283,8 +329,6 @@ export function register(): void {
       "0.line.f_other_specify": OTHER_METHOD,
       "0.line.1_statutory_employee": STATUTORY_EMPLOYEE,
       "0.line.4": COST_OF_GOODS_SOLD,
-      "0.line.32a": AT_RISK,
-      "0.line.32b": AT_RISK,
       "0.line.j_yes": LINE_J,
       "0.line.j_no": LINE_J,
     },

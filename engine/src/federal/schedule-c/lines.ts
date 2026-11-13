@@ -2,7 +2,8 @@
  * Schedule C net profit from a business fact, for the forms that need it before
  * Schedule C is evaluated (Schedule SE must-file, Schedule 1 line 3). It follows
  * the form's lines with each line rounded. The home office (line 30) is the
- * simplified method only; Form 8829 is not modeled. Cost of goods sold (line 4,
+ * simplified method or Form 8829 (federal/8829/lines.ts); line 13 and the Part V
+ * amortization come from Form 4562 (attachments.ts). Cost of goods sold (line 4,
  * Part III) is not modeled: a business that sells goods, or has not said, has
  * no line 5 yet.
  */
@@ -14,6 +15,8 @@ import {
   type HomeOfficeSimplified,
 } from "../../facts/index.js";
 import { atLeast, roundDollars, sum, sumOrBlank } from "../../money.js";
+import { form8829Figures, homeOfficeActualGap } from "../8829/lines.js";
+import { depreciationLine, partVEntries } from "./attachments.js";
 
 // irs-1040sc-inst-2025::sec::what-s-new::b01: 70 cents per business mile for 2025.
 export const STANDARD_MILEAGE_RATE = 0.7;
@@ -40,20 +43,29 @@ export function carAndTruckExpenses(business: BusinessFactValue): number | undef
   return roundDollars(sumOrBlank(business.expenses?.carAndTruck, ...mileage, ...parkingAndTolls));
 }
 
-/* Line 27b: the Part V total (line 48), each listed amount rounded. */
+/* Line 27b: the Part V total (line 48), each listed amount rounded, amortization included. */
 export function otherExpensesTotal(business: BusinessFactValue): number | undefined {
-  return sumOrBlank(...(business.otherExpenses ?? []).map((entry) => roundDollars(entry.amount)));
+  return sumOrBlank(...partVEntries(business).map((entry) => roundDollars(entry.amount)));
 }
 
-const LINE_9_KEY: keyof BusinessExpenses = "carAndTruck";
+/* Line 9 and line 13 are figured, not read from expenses. */
+const FIGURED_LINES: ReadonlyArray<keyof BusinessExpenses> = ["carAndTruck", "depreciation"];
 
-/* Line 28: lines 8 through 27b; blank when the business states no expense. */
+/*
+ * Line 28: lines 8 through 27b; blank when the business states no expense, and
+ * undefined while line 13 waits for Form 4562 (an answer, or a gap).
+ */
 export function totalExpenses(business: BusinessFactValue): number | undefined {
   // Line 9 adds the standard mileage amounts to expenses.carAndTruck.
-  const partII = Object.entries(business.expenses ?? {}).filter(([key]) => key !== LINE_9_KEY);
+  const partII = Object.entries(business.expenses ?? {}).filter(
+    ([key]) => !FIGURED_LINES.includes(key as keyof BusinessExpenses),
+  );
+  const line13 = depreciationLine(business);
+  if (line13 === undefined && business.depreciation) return undefined;
   return sumOrBlank(
     ...partII.map(([, amount]) => roundDollars(amount)),
     carAndTruckExpenses(business),
+    roundDollars(line13),
     otherExpensesTotal(business),
   );
 }
@@ -77,6 +89,7 @@ export function grossIncome(business: BusinessFactValue): number | undefined {
 /* Line 29: line 7 (gross income) less line 28 (total expenses). */
 export function tentativeProfit(business: BusinessFactValue): number | undefined {
   const line7 = grossIncome(business);
+  if (business.depreciation && totalExpenses(business) === undefined) return undefined;
   return line7 === undefined ? undefined : line7 - (totalExpenses(business) ?? 0);
 }
 
@@ -137,6 +150,21 @@ export function homeOfficeGap(
 }
 
 /*
+ * Line 30 by Form 8829 (irs-1040sc-inst-2025::sec::line-30::b01: "include the
+ * amount from line 36 of your Form 8829 on line 30"), for a home office by actual
+ * expenses. Undefined while line 29 or an answer waits, or for a case Form 8829's
+ * lines do not handle (homeOfficeActualGap).
+ */
+function form8829Line36(business: BusinessFactValue): number | undefined {
+  const office = business.homeOfficeActual;
+  const line29 = tentativeProfit(business);
+  if (!office || line29 === undefined) return undefined;
+  if (office.ownsHome !== false || office.allGrossIncomeFromHome !== true) return undefined;
+  if (homeOfficeActualGap(office)) return undefined;
+  return form8829Figures(office, line29).line36;
+}
+
+/*
  * Line 30 by the Simplified Method Worksheet (line 5: the smaller of line 1 or
  * line 4, -0- if zero or less). Line 1 is line 29 only when all the business's
  * gross income is from the home use (irs-1040sc-inst-2025::sec::line-1-2::b01),
@@ -149,6 +177,7 @@ export function homeOfficeExpenses(
   business: BusinessFactValue,
   onReturn: readonly BusinessFactValue[],
 ): number | undefined {
+  if (business.homeOfficeActual) return form8829Line36(business);
   const office = business.homeOffice;
   const line29 = tentativeProfit(business);
   if (!office || office.allGrossIncomeFromHome !== true || line29 === undefined) return undefined;
@@ -160,11 +189,13 @@ export function homeOfficeExpenses(
 
 /*
  * Line 31: line 29 less line 30. irs-1040sc-inst-2025::sec::line-31::b01–b02:
- * a loss waits for the at-risk and passive loss rules, and a business with line G
- * "No" (or unanswered) may carry prior-year passive losses (Form 8582). Neither is
- * modeled, so line 31 is blank in those cases. A home office whose line 30 is
- * blank leaves line 31 blank too. Schedule SE line 2 and Schedule 1 line 3 take
- * this amount.
+ * a loss waits for the at-risk and passive loss rules. With line G "Yes" and all
+ * investment at risk (box 32a), neither reduces the loss
+ * (irs-1040sc-inst-2025::sec::line-32::b02), so line 31 takes it. Form 6198 (box
+ * 32b) and Form 8582 (line G "No") are not modeled: line 31 stays blank then, and
+ * a profit with line G "No" (or unanswered) may carry prior-year passive losses.
+ * A home office whose line 30 is blank leaves line 31 blank too. Schedule SE line
+ * 2 and Schedule 1 line 3 take this amount.
  */
 export function netProfit(
   business: BusinessFactValue,
@@ -173,7 +204,8 @@ export function netProfit(
   const line29 = tentativeProfit(business);
   const line30 = homeOfficeExpenses(business, onReturn);
   if (line29 === undefined || business.materiallyParticipated !== true) return undefined;
-  if (business.homeOffice && line30 === undefined) return undefined;
+  const hasOffice = business.homeOffice !== undefined || business.homeOfficeActual !== undefined;
+  if (hasOffice && line30 === undefined) return undefined;
   const line31 = line29 - (line30 ?? 0);
-  return line31 < 0 ? undefined : line31;
+  return line31 < 0 && business.allInvestmentAtRisk !== true ? undefined : line31;
 }
