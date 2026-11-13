@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { default1099GFormId } from "../../../../src/mastra/tools/ingest1099G.js";
 import { default1099KFormId } from "../../../../src/mastra/tools/ingest1099K.js";
 import { default1099NecFormId } from "../../../../src/mastra/tools/ingest1099Nec.js";
 import { defaultWinId } from "../../../../src/mastra/tools/ingestW2G.js";
@@ -50,5 +51,15 @@ describe("default1099NecFormId", () => {
 
   it("uses the box 1 cents with no account number", () => {
     expect(default1099NecFormId({ box1: 3882 })).toBe("nec-388200");
+  });
+});
+
+describe("default1099GFormId", () => {
+  it("uses the account number", () => {
+    expect(default1099GFormId({ accountNumber: "UI-2025-04", box1: 6878 })).toBe("ui-2025-04");
+  });
+
+  it("uses the box 1 cents with no account number", () => {
+    expect(default1099GFormId({ box1: 6878 })).toBe("unemployment-687800");
   });
 });
