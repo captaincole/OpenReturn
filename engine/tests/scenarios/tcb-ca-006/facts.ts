@@ -45,8 +45,8 @@ const address = {
 
 /*
  * docs/01-starbucks-w2.pdf. The PDF prints "CASDI 546" in the box 12d slot; box 12
- * takes only the IRS letter codes, and the key reads it as state disability
- * insurance, so the fact holds it in box 14 (README.md).
+ * takes only the IRS letter codes, and the key has it as DisabilityInsurance with
+ * PlanType CASDI, so the fact holds it in box 14 (README.md).
  */
 const starbucksW2: W2FactValue = {
   owner: "taxpayer",
@@ -73,7 +73,8 @@ const starbucksW2: W2FactValue = {
 
 /*
  * docs/02-microsoft-w2.pdf (the spouse's). The PDF prints "VP 725" in the box 12d
- * slot; the key reads it as a voluntary disability plan, so the fact holds it in box 14.
+ * slot; the key has it as DisabilityInsurance with PlanType VP, so the fact holds it
+ * in box 14 (README.md).
  */
 const microsoftW2: W2FactValue = {
   owner: "spouse",
