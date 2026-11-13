@@ -10,8 +10,11 @@ import { lookupTax } from "../../../data/taxTable.js";
 import { defineForm, type BindingFn, type FormAccessor } from "../../../defineForm.js";
 import type { DependentFactValue } from "../../../facts/kinds/dependents.js";
 import { atLeast, roundDollars, sum, sumOrBlank } from "../../../money.js";
+import { unsupported } from "../../../types.js";
 import { SSN, ssn, type FilingStatus } from "../../../values.js";
 import { caExemptionCreditsAfterLimit } from "../../../worksheets/caAgiLimitation.js";
+import { caEitcOutcome, creditLine, NONE, type CaCreditOutcome } from "../3514/credit.js";
+import { fytcOutcome, yctcOutcome } from "../3514/youngChildAndFosterYouth.js";
 import { partIIUnsupported } from "../schedule-ca/increasedStandard.js";
 import type { Form540FilingInfo } from "./filingInfo.js";
 import type { Form540 } from "./types.js";
@@ -56,6 +59,12 @@ function dependentRowBindings(): Bindings {
     bindings[`dependents.dep${row}_relationship`] = (_, info) => dep(info)?.relationship;
   }
   return bindings as Bindings;
+}
+
+/* MANUAL EDIT: FTB 3514's EITC, YCTC and FYTC; no credit when the form does not file. */
+function ftb3514Credits(form: FormAccessor<Form540>, info: Form540FilingInfo): CaCreditOutcome[] {
+  if (info.mustFile?.["form-3514"]?.value !== true) return [NONE, NONE, NONE];
+  return [caEitcOutcome(form, info), yctcOutcome(form, info), fytcOutcome(form, info)];
 }
 
 /* Line 62: taxable income over this amount is taxed at this rate (2025). */
@@ -334,8 +343,17 @@ export function register(): void {
       },
       // MANUAL EDIT: round the W-2 box 17 sum to the nearest dollar.
       "line.71_ca_income_tax_withheld": (_, info) => roundDollars(info.w2StateWithholding),
-      "line.78_total_payments": (form) =>
-        sum(
+      /*
+       * MANUAL EDIT: FTB 3514 files and a credit is still unknown: the total
+       * waits (or is a gap), because sum() would read its blank line as 0.
+       */
+      "line.78_total_payments": (form, info) => {
+        const credits = ftb3514Credits(form, info);
+        if (credits.some((outcome) => outcome.kind === "waiting")) return undefined;
+        // A credit the engine cannot figure would count as 0: the total is not known either.
+        const gap = credits.find((outcome) => outcome.kind === "unsupported");
+        if (gap?.kind === "unsupported") return unsupported(gap.reason);
+        return sum(
           form["line.71_ca_income_tax_withheld"],
           form["line.72_ca_estimated_tax_payments"],
           form["line.73_withholding_592b_593"],
@@ -343,7 +361,17 @@ export function register(): void {
           form["line.75_eitc"],
           form["line.76_young_child_tax_credit"],
           form["line.77_foster_youth_tax_credit"],
-        ),
+        );
+      },
+      /*
+       * MANUAL EDIT: lines 75–77 take FTB 3514 lines 20, 28 and 39
+       * (ca-540-inst-2025, lines 75–77; ca-3514-inst-2025::sec::part-iii-your-earned-income-tax-credit::b01,
+       * ::line-28-young-child-tax-credit::b01, ::line-39-foster-youth-tax-credit::b01).
+       * Blank when the form does not file or a credit does not apply.
+       */
+      "line.75_eitc": (form, info) => creditLine(ftb3514Credits(form, info)[0]!),
+      "line.76_young_child_tax_credit": (form, info) => creditLine(ftb3514Credits(form, info)[1]!),
+      "line.77_foster_youth_tax_credit": (form, info) => creditLine(ftb3514Credits(form, info)[2]!),
       "line.91_use_tax": (_, info) => info.useTaxOwed,
       // MANUAL EDIT: bound by hand; the generator emitted a TODO here.
       "line.91_no_use_tax_owed": (_, info) => info.useTaxZeroReason,
@@ -533,12 +561,6 @@ export function register(): void {
         "Form 592-B and 593 withholding (partnership/LLC/real estate withholding) requires separate fact ingestion — no ingestion path or scenario built yet.",
       "line.74_motion_picture_production_credit":
         "CA Motion Picture and Television Production Credit (FTB 3541) requires allocation/certification data from the California Film Commission — no ingestion path or scenario built yet.",
-      "line.75_eitc":
-        "CA EITC requires earned income, qualifying children counts and SSNs, and a separate FTB 3514 computation — no EITC-specific ingestion or decision built yet.",
-      "line.76_young_child_tax_credit":
-        "CA Young Child Tax Credit requires a qualifying child under age 6 and EITC eligibility — no dependent or YCTC ingestion/scenario built yet.",
-      "line.77_foster_youth_tax_credit":
-        "CA Foster Youth Tax Credit requires foster care history facts (aged out of foster care, etc.) — no foster-youth ingestion or scenario built yet.",
       "line.92_isr_penalty":
         "ISR penalty amount requires FTB 3853 computation (months without coverage × penalty rate per household member) — no FTB 3853 ingestion or partial-coverage scenario built yet.",
       "line.98_applied_to_2026_estimated_tax":
