@@ -85,7 +85,7 @@ function incomeLines(inputs: ResolverInputs) {
  * so line 2b subtracts nothing. Pub. 596 Worksheet 1 line 14 adds lines 10 and
  * 13, each at least 0, to the same lines (worksheet1.ts).
  */
-function investmentIncomeFloor(inputs: ResolverInputs): number {
+export function investmentIncomeFloor(inputs: ResolverInputs): number {
   const { line2a, line2b, line3b } = incomeLines(inputs);
   return sum(line2a, line2b, line3b);
 }
