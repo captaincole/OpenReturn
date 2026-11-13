@@ -1,0 +1,150 @@
+{
+  "formId": "form-3532",
+  "fieldCount": 16,
+  "entries": [
+    {
+      "fieldId": "form-3532.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "3532_1001",
+          "text": "T-1VFTD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "3532_1002",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.1_marital_status",
+      "widgets": [
+        {
+          "widgetName": "3532_1003 RB",
+          "text": "Line 1 A. Not legally married/Registered Domestic Partnership during 2025."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.1f_from_1",
+      "widgets": [
+        {
+          "widgetName": "3532_1009",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.1f_from_2",
+      "widgets": [
+        {
+          "widgetName": "3532_1011",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.1f_to_1",
+      "widgets": [
+        {
+          "widgetName": "3532_1010",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.1f_to_2",
+      "widgets": [
+        {
+          "widgetName": "3532_1012",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.2_qualifying_person_relationship",
+      "widgets": [
+        {
+          "widgetName": "3532_1013 RB",
+          "text": "Line 2 a. Son, daughter, stepson, or stepdaughter."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.3_date_of_birth",
+      "widgets": [
+        {
+          "widgetName": "3532_1021",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.3_first_name",
+      "widgets": [
+        {
+          "widgetName": "3532_1018",
+          "text": "T-38IRK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.3_last_name",
+      "widgets": [
+        {
+          "widgetName": "3532_1019",
+          "text": "T-1KMOX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.3_ssn",
+      "widgets": [
+        {
+          "widgetName": "3532_1020",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.3a_full_time_student_under_24",
+      "widgets": [
+        {
+          "widgetName": "3532_1022 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.3b_permanently_disabled",
+      "widgets": [
+        {
+          "widgetName": "3532_1023 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.4_gross_income",
+      "widgets": [
+        {
+          "widgetName": "3532_1024",
+          "text": "2,137"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3532.0.line.5_days_lived_with_you",
+      "widgets": [
+        {
+          "widgetName": "3532_1025",
+          "text": "237"
+        }
+      ]
+    }
+  ]
+}
