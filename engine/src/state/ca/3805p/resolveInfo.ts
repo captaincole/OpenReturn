@@ -6,7 +6,7 @@ import {
 } from "../../../facts/index.js";
 import type { TaxFactRow } from "../../../facts/rows.js";
 import { rowTaxable, traditionalTaxable } from "../../../federal/1040/resolveInfo.js";
-import { partIIIFigures } from "../../../federal/8606/partIII.js";
+import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "../../../federal/8606/partIII.js";
 import { form8606Filers } from "../../../federal/8606/resolveInfo.js";
 import { sum } from "../../../money.js";
 import { factsInCategory, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
@@ -73,9 +73,11 @@ function amountIncludedInIncome(
   owner: EarlyDistributionOwner,
   rows: EarlyRow[],
   allIraRowsOfOwner: RetirementDistributionFactValue[],
+  allRothRowsOfOwner: RetirementDistributionFactValue[],
 ): number | undefined {
   const roth = rows.filter((row) => row.distribution.box7.includes(ROTH_IRA_EARLY_CODE));
-  if (roth.length > 0 && rothEarlyAmount(inputs, owner, roth) === undefined) return undefined;
+  const rothAmount = roth.length === 0 ? 0 : rothEarlyAmount(inputs, owner, allRothRowsOfOwner);
+  if (rothAmount === undefined) return undefined;
   const plan = rows
     .filter((row) => !row.distribution.box7.includes(ROTH_IRA_EARLY_CODE))
     .filter((row) => !row.distribution.box7IraSepSimple)
@@ -85,7 +87,7 @@ function amountIncludedInIncome(
     (row) =>
       row.distribution.box7IraSepSimple && !row.distribution.box7.includes(ROTH_IRA_EARLY_CODE),
   );
-  if (iraRows.length === 0) return sum(...plan);
+  if (iraRows.length === 0) return sum(...plan, rothAmount);
   if (form8606Filers(inputs).some((holder) => holder.owner === owner && holder.partI)) {
     return undefined;
   }
@@ -95,7 +97,7 @@ function amountIncludedInIncome(
     iraRows.map((row) => row.distribution),
     rolledOver,
   );
-  return ira === undefined ? undefined : sum(...plan, ira);
+  return ira === undefined ? undefined : sum(...plan, ira, rothAmount);
 }
 
 /*
@@ -104,21 +106,21 @@ function amountIncludedInIncome(
  * contributions (line 22), which are not subject to the tax, then to amounts
  * that are (::line-1-early-distributions-included-in-income::b06–b07). When line 23
  * is 0, all of line 19 went to line 20 and line 22, so line 1 takes nothing.
- * Otherwise the allocation needs earlier years' Pub. 1005 worksheets, which no
- * fact gives: undefined.
+ * With no conversion or rollover basis (line 24 is 0) the rest is earnings,
+ * Form 8606 line 25c. Otherwise the allocation needs earlier years' Pub. 1005
+ * worksheets, which no fact gives: undefined. Line 19 counts every code J and
+ * T row of the person.
  */
 function rothEarlyAmount(
   inputs: ResolverInputs,
   owner: EarlyDistributionOwner,
-  rows: EarlyRow[],
+  rothRows: RetirementDistributionFactValue[],
 ): number | undefined {
   const answers = readRothIraFact(inputs.factByKey, owner);
   if (!answers) return undefined;
-  const line23 = partIIIFigures(
-    rows.map((row) => row.distribution),
-    answers,
-  ).line23;
-  return line23 === 0 ? 0 : undefined;
+  const figures = partIIIFigures(rothRows, answers);
+  if (figures.line23 === 0) return 0;
+  return figures.line24 === 0 ? figures.line25c : undefined;
 }
 
 /*
@@ -139,7 +141,17 @@ export function resolve3805pInfo(inputs: ResolverInputs): Form3805pFilingInfo {
   const amount =
     owner === undefined
       ? undefined
-      : amountIncludedInIncome(inputs, owner, rows, allIraRowsOfOwner);
+      : amountIncludedInIncome(
+          inputs,
+          owner,
+          rows,
+          allIraRowsOfOwner,
+          parsedDistributions(distributions).filter(
+            (row) =>
+              ownerOf(row) === owner &&
+              NONQUALIFIED_ROTH_CODES.some((code) => row.box7.includes(code)),
+          ),
+        );
   const simpleIraAmount = rows
     .filter((row) => row.distribution.box7.includes(SIMPLE_IRA_CODE))
     .map((row) => rowTaxable(row.distribution));

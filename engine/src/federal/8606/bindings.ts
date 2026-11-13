@@ -60,7 +60,9 @@ function partIIIBindings() {
     (_: unknown, info: Form8606FilingInfo) => {
       const holder = holderOf(info);
       if (!holder?.rothDistribution || !holder.roth) return undefined;
-      return read(partIIIFigures(holder.rothRows, holder.roth));
+      const figures = partIIIFigures(holder.rothRows, holder.roth);
+      // A line 19 of 0: "don't complete Part III" (irs-8606-inst-2025::sec::line-19::b02).
+      return figures.line19 === 0 ? undefined : read(figures);
     };
   return {
     "1.line.19_nonqualified_roth_distributions": line((figures) => figures.line19),
@@ -72,9 +74,9 @@ function partIIIBindings() {
     "1.line.23_line_21_minus_line_22": line((figures) => figures.line23),
     "1.line.24_basis_roth_conversions_rollovers": line((figures) => figures.line24),
     "1.line.25a_line_23_minus_line_24": line((figures) => figures.line25a),
-    // Line 23 of zero skips lines 24 and 25.
+    // Line 23 of zero skips lines 24 and 25; line 25a of zero skips 25b and 25c (the form's text).
     "1.line.25c_taxable_roth_distributions": line((figures) =>
-      figures.line23 === 0 ? undefined : figures.line25c,
+      figures.line23 === 0 || figures.line25a === 0 ? undefined : figures.line25c,
     ),
   };
 }

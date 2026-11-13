@@ -5,7 +5,7 @@
  * rounded amounts.
  */
 
-import type { HomeExpenses, HomeOfficeActual } from "../../facts/index.js";
+import type { BusinessFactValue, HomeExpenses, HomeOfficeActual } from "../../facts/index.js";
 import { atLeast, roundDollars, sum, sumOrBlank } from "../../money.js";
 
 /*
@@ -20,7 +20,24 @@ export const OWNED_HOME_GAP =
 export const PART_OF_INCOME_GAP =
   "Not all of the business's gross income is from the home, and no fact gives the part that is (line 8, irs-8829-inst-2025::sec::part-ii::b01).";
 
+export const SHARED_HOME_GAP =
+  "Two or more of the owner's businesses have a home office by actual expenses; one Form 8829 covers each home and line 36 is allocated among its businesses (irs-8829-inst-2025::sec::line-36::b01), and no fact says which offices share a home.";
+
 export type HomeExpenseLine = keyof HomeExpenses;
+
+/* Why one business's Form 8829 cannot stand alone: another of the owner's businesses has one too. */
+export function sharedHomeGap(
+  business: BusinessFactValue,
+  onReturn: readonly BusinessFactValue[],
+): string | undefined {
+  if (!business.homeOfficeActual) return undefined;
+  const owner = business.owner ?? "taxpayer";
+  const others = onReturn.filter(
+    (other) =>
+      other !== business && other.homeOfficeActual && (other.owner ?? "taxpayer") === owner,
+  );
+  return others.length > 0 ? SHARED_HOME_GAP : undefined;
+}
 
 /* Line 3 (and line 7, with no daycare) as a ratio with four decimal places: 0.1108 prints as 11.08. */
 export function businessPercentage(office: HomeOfficeActual): number | undefined {

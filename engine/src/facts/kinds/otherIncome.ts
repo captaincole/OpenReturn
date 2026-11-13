@@ -7,6 +7,8 @@ export const OTHER_INCOME_KEYS = {
   alimonyReceived: "other_income.alimony_received",
   /* Line 2b: the date of the original divorce or separation agreement, YYYY-MM-DD. */
   alimonyReceivedAgreementDate: "other_income.alimony_received_agreement_date",
+  /* A pre-2019 agreement changed after 2018 to say alimony is not income (boolean). */
+  alimonyReceivedAgreementExcludes: "other_income.alimony_received_agreement_excludes",
   /* Line 8h: jury duty pay (a number). */
   juryDutyPay: "other_income.jury_duty_pay",
   /* Line 8i: prizes and awards (a number). */

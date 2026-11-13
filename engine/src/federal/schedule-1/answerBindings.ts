@@ -28,6 +28,16 @@ const monthYear = (date: string | undefined) => {
 function line20(form: FormAccessor<Schedule1>, info: Schedule1FilingInfo) {
   if (!info.iraContributions) return undefined;
   if (info.filingStatus === "married_filing_jointly") return unsupported(JOINT_RETURN_GAP);
+  const covered = info.iraCoveredAtWork === true || (info.selfEmployedPlanDeduction ?? 0) > 0;
+  // irs-1040-inst-2025::sec::were-you-covered-by-a-retirement::b02: adoption benefits send a covered person to Pub. 590-A.
+  if (covered && info.iraAdoptionBenefits) return unsupported(ADOPTION_GAP);
+  // ::b02: married filing separately and living with the spouse, the spouse's coverage counts too.
+  if (
+    !covered &&
+    info.filingStatus === "married_filing_separately" &&
+    info.livedApartAllYear === false
+  )
+    return unsupported(SPOUSE_COVERAGE_GAP);
   const totalIncome = form["form-1040.line.9"];
   if (typeof totalIncome !== "number" || info.iraAge50OrOlder === undefined) return undefined;
   const otherAdjustments = sum(
@@ -44,18 +54,25 @@ function line20(form: FormAccessor<Schedule1>, info: Schedule1FilingInfo) {
     form["1.line.25"],
   );
   const earnings = sum(form["schedule-se.0.line.6"]) - sum(form["1.line.15"], form["1.line.16"]);
-  return iraDeduction({
-    status: info.filingStatus,
-    contributions: info.iraContributions,
-    coveredByPlan: info.iraCoveredAtWork === true || (info.selfEmployedPlanDeduction ?? 0) > 0,
-    age50OrOlder: info.iraAge50OrOlder,
-    livedApartAllYear: info.livedApartAllYear,
-    totalIncome,
-    otherAdjustments,
-    wagesAndAlimony: sum(info.iraWages, form["0.line.2a"]),
-    selfEmploymentEarnings: earnings,
-  });
+  return roundDollars(
+    iraDeduction({
+      status: info.filingStatus,
+      contributions: info.iraContributions,
+      coveredByPlan: covered,
+      age50OrOlder: info.iraAge50OrOlder,
+      livedApartAllYear: info.livedApartAllYear,
+      totalIncome,
+      otherAdjustments,
+      wagesAndAlimony: sum(info.iraWages, form["0.line.2a"]),
+      selfEmploymentEarnings: earnings,
+    }),
+  );
 }
+
+const ADOPTION_GAP =
+  "W-2 box 12 code T: a person covered by a plan who excludes adoption benefits figures the IRA deduction in Pub. 590-A, which is not modeled.";
+const SPOUSE_COVERAGE_GAP =
+  "Married filing separately and living with the spouse: the person counts as covered if the spouse was, and no fact gives the spouse's coverage.";
 
 export function answerBindings(): Bindings {
   return {

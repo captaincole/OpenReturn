@@ -77,7 +77,7 @@ describe("Form 4562 totals", () => {
   it("line 22 is a gap with a section 179 election (line 11 is not modeled)", () => {
     expect(form4562Figures({ assets: [asset({ section179Elected: 1000 })] }).gap).toBeDefined();
   });
-  it("line 44 rounds each line 42 row, then adds line 43", () => {
+  it("line 44 adds line 42 with its cents and line 43, then rounds", () => {
     const costs = [
       {
         description: "a",
@@ -94,7 +94,12 @@ describe("Form 4562 totals", () => {
         periodMonths: 12,
       },
     ];
-    expect(line44({ amortizedCosts: costs, priorYearAmortization: 2600 })).toBe(167 + 267 + 2600);
+    expect(line44({ amortizedCosts: costs, priorYearAmortization: 2600 })).toBe(3033);
+  });
+  it("is a gap when the stated convention fails the mid-quarter test", () => {
+    const late = asset({ placedInService: "2025-11-02", electedOutOfSpecialAllowance: true });
+    expect(form4562Figures({ assets: [late] }).gap).toContain("mid-quarter");
+    expect(form4562Figures({ assets: [{ ...late, convention: "MQ" }] }).line22).toBe(500);
   });
   it("older depreciation or amortization alone files no Form 4562", () => {
     expect(mustFile4562({ priorYearMacrs: 1000, priorYearAmortization: 100 })).toBe(false);

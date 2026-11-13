@@ -5,7 +5,7 @@ import type { BusinessExpenses, BusinessFactValue, BusinessVehicle } from "../..
 import { roundDollars } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
-import { homeOfficeActualGap } from "../8829/lines.js";
+import { homeOfficeActualGap, sharedHomeGap } from "../8829/lines.js";
 import { depreciationGap, depreciationLine, partVEntries } from "./attachments.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
 import {
@@ -91,10 +91,12 @@ function squareFeet(info: ScheduleCFilingInfo, which: "homeSquareFeet" | "busine
 function line31(info: ScheduleCFilingInfo) {
   const business = businessOf(info);
   if (!business) return undefined;
+  const onReturn = info.businesses ?? [];
   return (
-    attachmentUnsupported(business) ??
+    attachmentUnsupported(business, onReturn) ??
     homeOfficeUnsupported(business, info) ??
-    netProfit(business, info.businesses ?? [])
+    notAtRiskLoss(business, onReturn) ??
+    netProfit(business, onReturn)
   );
 }
 
@@ -102,11 +104,27 @@ function line31(info: ScheduleCFilingInfo) {
  * MANUAL EDIT: a Form 4562 or Form 8829 case the engine does not handle makes
  * the lines that read it unsupported, with the reason.
  */
-function attachmentUnsupported(business: BusinessFactValue): Unsupported | undefined {
+function attachmentUnsupported(
+  business: BusinessFactValue,
+  onReturn: readonly BusinessFactValue[],
+): Unsupported | undefined {
   const gap =
     depreciationGap(business) ??
-    (business.homeOfficeActual ? homeOfficeActualGap(business.homeOfficeActual) : undefined);
+    (business.homeOfficeActual ? homeOfficeActualGap(business.homeOfficeActual) : undefined) ??
+    sharedHomeGap(business, onReturn);
   return gap ? unsupported(gap) : undefined;
+}
+
+/* MANUAL EDIT: a loss with some investment not at risk needs Form 6198 (line 32b), which is not modeled. */
+const NOT_AT_RISK =
+  "Some investment is not at risk (box 32b): Form 6198 figures the loss for line 31 (irs-1040sc-inst-2025::sec::line-32::b03), and it is not modeled.";
+
+function notAtRiskLoss(business: BusinessFactValue, onReturn: readonly BusinessFactValue[]) {
+  const line29 = tentativeProfit(business);
+  const line30 = homeOfficeExpenses(business, onReturn) ?? 0;
+  return business.allInvestmentAtRisk === false && line29 !== undefined && line29 - line30 < 0
+    ? unsupported(NOT_AT_RISK)
+    : undefined;
 }
 
 // MANUAL EDIT: a line that reads line 13 (Form 4562 line 22) carries its gap.
@@ -139,7 +157,7 @@ function line30(info: ScheduleCFilingInfo) {
   const business = businessOf(info);
   if (!business) return undefined;
   return (
-    attachmentUnsupported(business) ??
+    attachmentUnsupported(business, info.businesses ?? []) ??
     homeOfficeUnsupported(business, info) ??
     homeOfficeExpenses(business, info.businesses ?? [])
   );
