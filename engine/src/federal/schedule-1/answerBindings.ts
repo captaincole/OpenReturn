@@ -7,8 +7,13 @@ import type { BindingFn, FormAccessor } from "../../defineForm.js";
 import { formatDollars, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported } from "../../types.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
-import { iraDeduction, JOINT_RETURN_GAP } from "./iraDeduction.js";
-import { PUB_590A_GAP } from "./pub590a.js";
+import {
+  iraDeduction,
+  iraWorksheetGap,
+  NONDEDUCTIBLE_DISAGREES,
+  nondeductibleLeftover,
+  worksheetLine10,
+} from "./iraDeduction.js";
 import type { Schedule1 } from "./types.js";
 
 type Bindings = Partial<{ [K in keyof Schedule1]: BindingFn<Schedule1, Schedule1FilingInfo, K> }>;
@@ -28,18 +33,15 @@ const monthYear = (date: string | undefined) => {
  */
 function line20(form: FormAccessor<Schedule1>, info: Schedule1FilingInfo) {
   if (!info.iraContributions) return undefined;
-  if (info.pub590aWorksheets) return unsupported(PUB_590A_GAP);
-  if (info.filingStatus === "married_filing_jointly") return unsupported(JOINT_RETURN_GAP);
-  const covered = info.iraCoveredAtWork === true || (info.selfEmployedPlanDeduction ?? 0) > 0;
-  // irs-1040-inst-2025::sec::were-you-covered-by-a-retirement::b02: adoption benefits send a covered person to Pub. 590-A.
-  if (covered && info.iraAdoptionBenefits) return unsupported(ADOPTION_GAP);
-  // ::b02: married filing separately and living with the spouse, the spouse's coverage counts too.
-  if (
-    !covered &&
-    info.filingStatus === "married_filing_separately" &&
-    info.livedApartAllYear === false
-  )
-    return unsupported(SPOUSE_COVERAGE_GAP);
+  const covered = info.iraCoveredByPlan === true;
+  const gap = iraWorksheetGap({
+    status: info.filingStatus,
+    coveredByPlan: covered,
+    adoptionBenefits: info.iraAdoptionBenefits === true,
+    livedApartAllYear: info.livedApartAllYear,
+    pub590aWorksheets: info.pub590aWorksheets === true,
+  });
+  if (gap) return unsupported(gap);
   const totalIncome = form["form-1040.line.9"];
   if (typeof totalIncome !== "number" || info.iraAge50OrOlder === undefined) return undefined;
   const otherAdjustments = sum(
@@ -56,7 +58,8 @@ function line20(form: FormAccessor<Schedule1>, info: Schedule1FilingInfo) {
     form["1.line.25"],
   );
   const earnings = sum(form["schedule-se.0.line.6"]) - sum(form["1.line.15"], form["1.line.16"]);
-  return roundDollars(
+  const wagesAndAlimony = sum(info.iraWages, form["0.line.2a"]);
+  const deduction = roundDollars(
     iraDeduction({
       status: info.filingStatus,
       contributions: info.iraContributions,
@@ -65,16 +68,17 @@ function line20(form: FormAccessor<Schedule1>, info: Schedule1FilingInfo) {
       livedApartAllYear: info.livedApartAllYear,
       totalIncome,
       otherAdjustments,
-      wagesAndAlimony: sum(info.iraWages, form["0.line.2a"]),
+      wagesAndAlimony,
       selfEmploymentEarnings: earnings,
     }),
   );
+  // A stated Form 8606 line 1 must be what the worksheet leaves (traditionalIra.ts).
+  const stated = info.iraNondeductibleContributions;
+  if (deduction === undefined || stated === undefined) return deduction;
+  const line10 = worksheetLine10(wagesAndAlimony, earnings);
+  const leftover = roundDollars(nondeductibleLeftover(line10, info.iraContributions, deduction));
+  return leftover === roundDollars(stated) ? deduction : unsupported(NONDEDUCTIBLE_DISAGREES);
 }
-
-const ADOPTION_GAP =
-  "W-2 box 12 code T: a person covered by a plan who excludes adoption benefits figures the IRA deduction in Pub. 590-A, which is not modeled.";
-const SPOUSE_COVERAGE_GAP =
-  "Married filing separately and living with the spouse: the person counts as covered if the spouse was, and no fact gives the spouse's coverage.";
 
 export function answerBindings(): Bindings {
   return {

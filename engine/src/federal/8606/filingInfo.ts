@@ -18,6 +18,15 @@ export interface IraHolder {
   line7: number;
   /* Part I applies (the bullets at the top of Part I). Then line 15c, not the 1099-Rs, gives 1040 line 4b. */
   partI: boolean;
+  /*
+   * Line 1 comes from the IRA Deduction Worksheet (only `contributions` is
+   * stated) and may be above 0: lines 10 and 11 less line 12.
+   */
+  line1FromWorksheet: boolean;
+  /* Why line 1 is a case the engine does not figure, or undefined. */
+  line1Gap?: string;
+  /* Worksheet line 8's wages (Schedule 1 answers.ts iraAnswers): line 10 adds alimony and self-employment earnings. */
+  worksheetWages: number;
   /* A 1099-R with code J or T: a Roth IRA distribution that is not qualified (Part III). */
   rothDistribution: boolean;
   /* Part III: the person's code J and T 1099-Rs and their Roth IRA answers. */
