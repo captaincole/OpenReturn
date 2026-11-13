@@ -78,9 +78,13 @@ function californiaAssetRow(asset: DepreciableAsset): CaliforniaAssetRow {
  * period differs is recorded with its California amount only for the year.
  */
 function californiaAmortizationRow(cost: AmortizedCost): CaliforniaAmortizationRow {
-  const basis = roundDollars(cost.californiaAmount ?? cost.amount);
-  return { cost, basis, amortization: amortizationThisYear(cost, basis) };
+  const amount = californiaAmortizable(cost);
+  // Column (c) prints rounded; column (f) takes the year's share of the amount with its cents.
+  return { cost, basis: roundDollars(amount), amortization: amortizationThisYear(cost, amount) };
 }
+
+/* The California amortizable amount, cents kept: the stated California amount, else the federal one. */
+const californiaAmortizable = (cost: AmortizedCost) => cost.californiaAmount ?? cost.amount;
 
 function gapOf(depreciation: ActivityDepreciation): string | undefined {
   // Line 7 and line 13 read Form 4562; its gap is this form's too.
@@ -118,15 +122,20 @@ export function form3885AFigures(depreciation: ActivityDepreciation): Form3885AF
     : (activityDepreciationDeduction(depreciation) ?? (line6 === undefined ? undefined : 0));
   const depreciationDifference = difference(line6, line7);
   const line9 = (depreciation.amortizedCosts ?? []).map(californiaAmortizationRow);
-  // Line 10 adds column (f) with its cents and rounds once, as Form 4562 line 44 does.
-  const line10 =
-    line9.length === 0
+  /*
+   * Lines 10 and 12 add with cents and round once, as Form 4562 line 44 does
+   * (irs-1040-inst-2025::sec::rounding-off-to-whole::b01), so equal federal and
+   * California amounts give equal totals.
+   */
+  const exact = line9.map((row) => amortizationExact(row.cost, californiaAmortizable(row.cost)));
+  const priorAmortization =
+    depreciation.californiaPriorYearAmortization ?? depreciation.priorYearAmortization;
+  const line10 = line9.length === 0 ? undefined : roundDollars(sum(...exact));
+  const line11 = roundDollars(priorAmortization);
+  const line12 =
+    line10 === undefined && line11 === undefined
       ? undefined
-      : roundDollars(sum(...line9.map((row) => amortizationExact(row.cost, row.basis))));
-  const line11 = roundDollars(
-    depreciation.californiaPriorYearAmortization ?? depreciation.priorYearAmortization,
-  );
-  const line12 = sumOrBlank(line10, line11);
+      : roundDollars(sum(...exact, priorAmortization));
   // With no federal amortization, line 13 is 0 against California's.
   const line13 = line44(depreciation) ?? (line12 === undefined ? undefined : 0);
   const amortizationDifference = difference(line12, line13);
