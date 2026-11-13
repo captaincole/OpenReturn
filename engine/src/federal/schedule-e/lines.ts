@@ -7,12 +7,7 @@ import type { BindingFn, FormAccessor } from "../../defineForm.js";
 import type { RentalExpenses, RentalFactValue } from "../../facts/index.js";
 import { roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported } from "../../types.js";
-import {
-  activityDepreciationGap,
-  activityDepreciationLine,
-  depreciationPending,
-  line44,
-} from "../4562/lines.js";
+import { activityDepreciation, line44 } from "../4562/lines.js";
 import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
 import type { ScheduleE } from "./types.js";
 
@@ -84,43 +79,51 @@ const rents = (property: RentalFactValue) =>
   rentsReported(property) ? roundDollars(property.rentsReceived) : undefined;
 
 /*
- * Line 18 (irs-1040se-inst-2025::sec::line-18): Form 4562 line 22 when the
- * property has depreciation answers (the depreciation of property placed in
- * service in 2025 needs the form), else the stated amount.
+ * Line 18 (irs-1040se-inst-2025::sec::line-18): the property's stated amount
+ * and its Form 4562 answers (the depreciation of property placed in service in
+ * 2025 needs the form).
  */
+const line18 = (property: RentalFactValue) =>
+  activityDepreciation(property.expenses?.depreciationOrDepletion, property.depreciation);
+
+const RENTAL_AMORTIZATION_GAP =
+  "Amortization (Form 4562 line 44) of a rental goes on line 19 with the other expenses; the engine does not add it there.";
+
+/*
+ * Line 18 when the engine figures it: undefined while it waits, or when it or
+ * the rental's amortization is a gap (rentalDepreciationGap says why).
+ */
+function knownLine18(property: RentalFactValue): { amount: number | undefined } | undefined {
+  const result = line18(property);
+  if (result.kind !== "amount" || (line44(property.depreciation) ?? 0) > 0) return undefined;
+  return { amount: result.amount };
+}
+
 const expense = (property: RentalFactValue, key: ExpenseKey) => {
   if (!expensesAsStated(property)) return undefined;
-  if (key === "depreciationOrDepletion")
-    return activityDepreciationLine(property.expenses?.[key], property.depreciation);
+  if (key === "depreciationOrDepletion") return knownLine18(property)?.amount;
   return roundDollars(property.expenses?.[key]);
 };
 
 /* Why the property's line 18 (and the lines after it) is a case the engine does not handle. */
 export function rentalDepreciationGap(property: RentalFactValue): string | undefined {
-  const gap = activityDepreciationGap(
-    property.expenses?.depreciationOrDepletion,
-    property.depreciation,
-  );
-  if (gap) return gap;
-  if ((line44(property.depreciation) ?? 0) > 0)
-    return "Amortization (Form 4562 line 44) of a rental goes on line 19 with the other expenses; the engine does not add it there.";
-  return undefined;
+  const result = line18(property);
+  if (result.kind === "gap") return result.reason;
+  return (line44(property.depreciation) ?? 0) > 0 ? RENTAL_AMORTIZATION_GAP : undefined;
 }
 
 // Line 20 adds the rounded lines 5–19; it waits while line 18 waits for Form 4562.
 function totalExpenses(property: RentalFactValue) {
-  if (!expensesAsStated(property)) return undefined;
-  if (depreciationPending(property.depreciation)) return undefined;
+  if (!expensesAsStated(property) || knownLine18(property) === undefined) return undefined;
   return sumOrBlank(...EXPENSE_LINES.map(([, key]) => expense(property, key)));
 }
 
 /* Line 3 and 4 less line 20, before the at-risk rules; undefined when blank or blocked. */
 export function netIncomeOrLoss(property: RentalFactValue): number | undefined {
   if (!rentsReported(property) || !expensesAsStated(property)) return undefined;
-  if (rentalDepreciationGap(property)) return undefined;
+  if (knownLine18(property) === undefined) return undefined;
   const income = sumOrBlank(rents(property), roundDollars(property.royaltiesReceived));
   const expenses = totalExpenses(property);
-  if (depreciationPending(property.depreciation)) return undefined;
   if (income === undefined && expenses === undefined) return undefined;
   return sum(income) - sum(expenses);
 }

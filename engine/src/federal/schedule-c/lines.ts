@@ -16,7 +16,7 @@ import {
 } from "../../facts/index.js";
 import { atLeast, roundDollars, sum, sumOrBlank } from "../../money.js";
 import { form8829Figures, homeOfficeActualGap, sharedHomeGap } from "../8829/lines.js";
-import { depreciationBlocks, depreciationLine, partVEntries } from "./attachments.js";
+import { line13Depreciation, partVEntries } from "./attachments.js";
 
 // irs-1040sc-inst-2025::sec::what-s-new::b01: 70 cents per business mile for 2025.
 export const STANDARD_MILEAGE_RATE = 0.7;
@@ -61,12 +61,12 @@ export function totalExpenses(business: BusinessFactValue): number | undefined {
   const partII = Object.entries(business.expenses ?? {}).filter(
     ([key]) => !FIGURED_LINES.includes(key as keyof BusinessExpenses),
   );
-  if (depreciationBlocks(business)) return undefined;
-  const line13 = depreciationLine(business);
+  const line13 = line13Depreciation(business);
+  if (line13.kind !== "amount") return undefined;
   return sumOrBlank(
     ...partII.map(([, amount]) => roundDollars(amount)),
     carAndTruckExpenses(business),
-    roundDollars(line13),
+    line13.amount,
     otherExpensesTotal(business),
   );
 }
@@ -90,8 +90,8 @@ export function grossIncome(business: BusinessFactValue): number | undefined {
 /* Line 29: line 7 (gross income) less line 28 (total expenses). */
 export function tentativeProfit(business: BusinessFactValue): number | undefined {
   const line7 = grossIncome(business);
-  if (depreciationBlocks(business)) return undefined;
-  return line7 === undefined ? undefined : line7 - (totalExpenses(business) ?? 0);
+  if (line7 === undefined || line13Depreciation(business).kind !== "amount") return undefined;
+  return line7 - (totalExpenses(business) ?? 0);
 }
 
 /*

@@ -189,53 +189,34 @@ export function line44(depreciation: ActivityDepreciation | undefined): number |
   return roundDollars(sum(...costs.map((cost) => amortizationExact(cost)), prior));
 }
 
-/*
- * Whether the activity's depreciation is not known yet: an asset waits for an
- * answer, or Form 4562 has a gap. A form that reads it waits (or carries the
- * gap) only then; a blank deduction (nothing to depreciate) is 0 to a total.
- */
-export function depreciationPending(depreciation: ActivityDepreciation | undefined): boolean {
-  if (!depreciation || !mustFile4562(depreciation)) return false;
-  const figures = form4562Figures(depreciation);
-  return figures.waits || figures.gap !== undefined;
-}
-
-/* The depreciation deduction of an activity: line 22 when Form 4562 is filed, else the older assets' amount. */
-export function activityDepreciationDeduction(
-  depreciation: ActivityDepreciation | undefined,
-): number | undefined {
-  if (!depreciation) return undefined;
-  if (mustFile4562(depreciation)) return form4562Figures(depreciation).line22;
-  return roundDollars(depreciation.priorYearMacrs);
-}
-
 export const BOTH_DEPRECIATION_ANSWERS =
   "The activity states both a depreciation amount and Form 4562 answers; the engine cannot tell whether one includes the other.";
 
-/*
- * An activity's depreciation line (Schedule C line 13, Schedule E line 18): the
- * stated amount when the activity has no depreciation answers, else Form 4562
- * line 22 (the older assets' amount when no Form 4562 is required). Undefined
- * while Form 4562 waits for an answer, or when both are given
- * (activityDepreciationGap says why).
- */
-export function activityDepreciationLine(
-  stated: number | undefined,
-  depreciation: ActivityDepreciation | undefined,
-): number | undefined {
-  if (!depreciation) return roundDollars(stated);
-  if (stated !== undefined || depreciationPending(depreciation)) return undefined;
-  return activityDepreciationDeduction(depreciation);
-}
+/* An activity's depreciation line: an amount (blank when nothing applies), waiting for an answer, or a gap with its reason. */
+export type ActivityDepreciationResult =
+  | { kind: "amount"; amount: number | undefined }
+  | { kind: "waits" }
+  | { kind: "gap"; reason: string };
 
-/* Why an activity's depreciation line is a case the engine does not handle, or undefined. */
-export function activityDepreciationGap(
+/*
+ * An activity's depreciation line (Schedule C line 13, Schedule E line 18,
+ * FTB 3885A line 7): the stated amount when the activity has no depreciation
+ * answers; else Form 4562 line 22, or the older assets' amount when no Form
+ * 4562 is required. Both given is a gap; the line waits while Form 4562 waits
+ * for an answer.
+ */
+export function activityDepreciation(
   stated: number | undefined,
   depreciation: ActivityDepreciation | undefined,
-): string | undefined {
-  if (!depreciation) return undefined;
-  if (stated !== undefined) return BOTH_DEPRECIATION_ANSWERS;
-  return form4562Figures(depreciation).gap;
+): ActivityDepreciationResult {
+  if (!depreciation) return { kind: "amount", amount: roundDollars(stated) };
+  if (stated !== undefined) return { kind: "gap", reason: BOTH_DEPRECIATION_ANSWERS };
+  if (!mustFile4562(depreciation))
+    return { kind: "amount", amount: roundDollars(depreciation.priorYearMacrs) };
+  const figures = form4562Figures(depreciation);
+  if (figures.gap !== undefined) return { kind: "gap", reason: figures.gap };
+  if (figures.waits) return { kind: "waits" };
+  return { kind: "amount", amount: figures.line22 };
 }
 
 /* Assets still waiting for the acquisition-date answer (the line 14 rate). */

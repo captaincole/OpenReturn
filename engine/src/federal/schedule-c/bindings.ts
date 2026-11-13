@@ -6,7 +6,7 @@ import { roundDollars } from "../../money.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { SSN } from "../../values.js";
 import { homeOfficeActualGap, sharedHomeGap } from "../8829/lines.js";
-import { depreciationGap, depreciationLine, partVEntries } from "./attachments.js";
+import { line13Depreciation, partVEntries } from "./attachments.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
 import {
   carAndTruckExpenses,
@@ -108,8 +108,9 @@ function attachmentUnsupported(
   business: BusinessFactValue,
   onReturn: readonly BusinessFactValue[],
 ): Unsupported | undefined {
+  const line13 = line13Depreciation(business);
   const gap =
-    depreciationGap(business) ??
+    (line13.kind === "gap" ? line13.reason : undefined) ??
     (business.homeOfficeActual ? homeOfficeActualGap(business.homeOfficeActual) : undefined) ??
     sharedHomeGap(business, onReturn);
   return gap ? unsupported(gap) : undefined;
@@ -134,8 +135,8 @@ function afterDepreciation(
 ) {
   const business = businessOf(info);
   if (!business) return undefined;
-  const gap = depreciationGap(business);
-  return gap ? unsupported(gap) : partII(info, line);
+  const line13 = line13Depreciation(business);
+  return line13.kind === "gap" ? unsupported(line13.reason) : partII(info, line);
 }
 
 /*
@@ -182,7 +183,8 @@ function partIVVehicle(info: ScheduleCFilingInfo): BusinessVehicle | undefined {
   const business = businessOf(info);
   const vehicle = business?.vehicles?.[0];
   const line9 = partII(info, carAndTruckExpenses) ?? 0;
-  const depreciation = business ? (depreciationLine(business) ?? 0) : 0;
+  const line13 = business ? line13Depreciation(business) : undefined;
+  const depreciation = line13?.kind === "amount" ? (line13.amount ?? 0) : 0;
   return line9 > 0 && depreciation === 0 ? vehicle : undefined;
 }
 
@@ -276,7 +278,10 @@ export function register(): void {
       "0.line.12": (_, info) => expense(info, "depletion"),
       // MANUAL EDIT: line 13 is Form 4562 line 22 when the business has depreciation answers.
       "0.line.13": (_, info) =>
-        afterDepreciation(info, (business) => roundDollars(depreciationLine(business))),
+        afterDepreciation(info, (business) => {
+          const line13 = line13Depreciation(business);
+          return line13.kind === "amount" ? line13.amount : undefined;
+        }),
       "0.line.14": (_, info) => expense(info, "employeeBenefitPrograms"),
       "0.line.15": (_, info) => expense(info, "insurance"),
       "0.line.16a": (_, info) => expense(info, "mortgageInterest"),
