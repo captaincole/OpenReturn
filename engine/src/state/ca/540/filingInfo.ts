@@ -29,6 +29,8 @@ export interface Form540FilingInfo
 
   useTaxOwed?: Money;
   noUseTaxOwed?: boolean;
+  /** Line 5: the year a qualifying surviving spouse/RDP's spouse died. */
+  spouseYearOfDeath?: string;
   /** Line 91 radio group: "no_use_tax_owed" | "paid_directly_to_cdtfa". */
   useTaxZeroReason?: string;
   mailingSameAsResidence?: boolean;
