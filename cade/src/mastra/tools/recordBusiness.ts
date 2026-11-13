@@ -4,12 +4,15 @@ import {
   type BusinessExpenses,
   type BusinessFactValue,
   type BusinessVehicle,
+  type HomeExpenses,
+  type HomeOfficeActual,
   type HomeOfficeSimplified,
 } from "@openreturn/engine/facts";
 import { z } from "zod";
 import type { Scope } from "../db/appDb";
 import { listFactsByKeys } from "../db/taxFacts";
 import { cadeRequestContextSchema } from "../server/requestContext";
+import { depreciationSchema } from "./depreciationSchema";
 import { recordIngestFact, slugify } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
@@ -89,6 +92,42 @@ const homeOffice: { [K in keyof HomeOfficeSimplified]-?: z.ZodType<HomeOfficeSim
     ),
 };
 
+const homeExpenses: { [K in keyof HomeExpenses]-?: z.ZodType<HomeExpenses[K]> } = {
+  insurance: amount.optional().describe("Form 8829 line 18"),
+  rent: amount.optional().describe("Line 19"),
+  repairsAndMaintenance: amount.optional().describe("Line 20"),
+  utilities: amount.optional().describe("Line 21"),
+  other: amount.optional().describe("Line 22"),
+};
+
+const homeOfficeActual: { [K in keyof HomeOfficeActual]-?: z.ZodType<HomeOfficeActual[K]> } = {
+  businessSquareFeet: amount.describe(
+    "Form 8829 line 1: square feet used regularly and only for the business",
+  ),
+  homeSquareFeet: amount.describe("Line 2: total square feet of the home"),
+  allGrossIncomeFromHome: z
+    .boolean()
+    .optional()
+    .describe("True when all of the business's gross income is from its use of this home"),
+  ownsHome: z
+    .boolean()
+    .optional()
+    .describe(
+      "True when they own the home. Mortgage interest, real estate taxes and home depreciation are not supported yet: say so.",
+    ),
+  direct: z
+    .object(homeExpenses)
+    .optional()
+    .describe("Expenses for the business part of the home only (column a)"),
+  indirect: z.object(homeExpenses).optional().describe("Expenses for the whole home (column b)"),
+  operatingExpenseCarryover: amount
+    .optional()
+    .describe("Operating expenses carried over from 2024 (2024 Form 8829 line 43)"),
+  casualtyAndDepreciationCarryover: amount
+    .optional()
+    .describe("Excess casualty losses and depreciation carried over (2024 Form 8829 line 44)"),
+};
+
 export const recordBusiness = createTool({
   id: "record-business",
   requestContextSchema: cadeRequestContextSchema,
@@ -131,7 +170,18 @@ export const recordBusiness = createTool({
     homeOffice: z
       .object(homeOffice)
       .optional()
-      .describe("Line 30 by the simplified method; Form 8829 is not supported"),
+      .describe("Line 30 by the simplified method; leave it out when they use Form 8829"),
+    homeOfficeActual: z
+      .object(homeOfficeActual)
+      .optional()
+      .describe("Line 30 by actual expenses (Form 8829), for a home office by that method"),
+    depreciation: depreciationSchema,
+    allInvestmentAtRisk: z
+      .boolean()
+      .optional()
+      .describe(
+        "For a loss: true when all of their investment in the business is at risk (line 32a)",
+      ),
     specifiedService: z
       .boolean()
       .optional()

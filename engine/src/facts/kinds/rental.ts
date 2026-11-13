@@ -6,6 +6,8 @@
  * by hand. Form 8582 reads the passive activity answers.
  */
 
+import { isActivityDepreciation, type ActivityDepreciation } from "./depreciation.js";
+
 type FactRow = { key: string; value: unknown; category: string };
 
 /* Schedule E line 1b, "Type of Property", codes 1–8. */
@@ -65,6 +67,8 @@ export interface RentalFactValue {
   /* Line 4. */
   royaltiesReceived?: number;
   expenses?: RentalExpenses;
+  /* Line 18 through Form 4562 (assets placed in service in 2025); expenses.depreciationOrDepletion is then left out. */
+  depreciation?: ActivityDepreciation;
   /* Form 8582: the owner actively participated (the $25,000 special allowance). */
   activeParticipation?: boolean;
   /* Form 8582 and Schedule E line 43: the owner materially participated. */
@@ -151,7 +155,8 @@ function isRental(value: unknown): value is RentalFactValue {
     isAmount(fields.averageCustomerUseDays) &&
     typeof expenses === "object" &&
     (otherDescription === undefined || typeof otherDescription === "string") &&
-    Object.values(expenseAmounts).every(isAmount)
+    Object.values(expenseAmounts).every(isAmount) &&
+    isActivityDepreciation(fields.depreciation)
   );
 }
 
