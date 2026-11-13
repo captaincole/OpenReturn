@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { evaluateScenario } from "../../src";
 import {
+  EDUCATOR_EXPENSE_KEYS,
   HSA_COVERAGE_KEYS,
   isW2FactKey,
   makeSocialSecurityFactKey,
@@ -43,10 +44,13 @@ const SOCIAL_SECURITY = fact("retirement", makeSocialSecurityFactKey("ssa"), {
   box5: 2000,
 });
 
-function evaluate(extra: TaxFactRow[]) {
+function evaluate(extra: TaxFactRow[], wagesAmount = 80000) {
   const wages = base.facts.map((row) =>
     isW2FactKey(row.key)
-      ? { ...row, value: { ...(row.value as W2FactValue), box1: 80000, box16: 80000 } }
+      ? {
+          ...row,
+          value: { ...(row.value as W2FactValue), box1: wagesAmount, box16: wagesAmount },
+        }
       : row,
   );
   const decisions: AIDecisionRow[] = [
@@ -90,6 +94,22 @@ describe("Schedule CA line 27 and Form 540 lines 14 and 16", () => {
     expect(value("form-540", "form-540.line.14_ca_adjustments_subtractions")).toBe(0);
     expect(value("form-540", "form-540.line.16_ca_adjustments_additions")).toBe(1300);
     expect(value("form-540", "form-540.line.17_ca_agi")).toBe(80000);
+  });
+
+  /*
+   * Educator expenses alone: California does not allow them, so Schedule CA line 11
+   * column B takes back column A (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b01).
+   * Line 10 column B is blank, line 27 column B is -300, and Form 540 line 16 adds it back.
+   */
+  it("takes back educator expenses with a blank line 10 column B", () => {
+    const value = evaluate([fact("other", EDUCATOR_EXPENSE_KEYS.taxpayer, 300)], 60000);
+    expect(value("form-1040", "form-1040.line.11b")).toBe(59700);
+    expect(value("schedule-ca", "schedule-ca.2.line.c11_subtractions")).toBe(300);
+    expect(value("schedule-ca", "schedule-ca.3.line.c26_subtractions")).toBe(300);
+    expect(value("schedule-ca", "schedule-ca.3.line.c27_subtractions")).toBe(-300);
+    expect(value("form-540", "form-540.line.14_ca_adjustments_subtractions")).toBe(0);
+    expect(value("form-540", "form-540.line.16_ca_adjustments_additions")).toBe(300);
+    expect(value("form-540", "form-540.line.17_ca_agi")).toBe(60000);
   });
 
   it("leaves line 27 column B blank when lines 10 and 26 are blank", () => {
