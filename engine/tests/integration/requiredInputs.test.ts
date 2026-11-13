@@ -51,6 +51,10 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^gambling\.losses$/,
     "an answer Cade records only when the user reports gambling losses (Schedule A line 16)",
   ],
+  [
+    /^adjustments\.educator_expenses\.(taxpayer|spouse)$/,
+    "an answer Cade records only for an eligible K-12 educator (Schedule 1 line 11)",
+  ],
   [/^identity\.email$/, "Cade records the login email at doc-gen time"],
   [/^identity\.(spouse\.)?name\.middle_initial$/, "printed when stated; not every name has one"],
   [
