@@ -3,6 +3,7 @@ import {
   GAMBLING_KEYS,
   businessesOnReturn,
   getGamblingWinningsFacts,
+  getGovernmentPaymentsFacts,
   isDividendFactKey,
   isHsaDistributionFactKey,
   isInterestFactKey,
@@ -61,6 +62,8 @@ export function magiUpperBound(inputs: ResolverInputs, joint: boolean): number {
     ),
     ...getGamblingWinningsFacts(inputs.facts).map((w2g) => w2g.box1),
     num(inputs, GAMBLING_KEYS.winningsNotOnW2G),
+    // Unemployment compensation reaches AGI through Schedule 1 line 7.
+    ...getGovernmentPaymentsFacts(inputs.facts).map((form) => form.box1),
     ...misc.map((row) => (row.value as Record<string, unknown>).box3),
     ...retirement.map(({ value }) => {
       const distribution = value as RetirementDistributionFactValue;
