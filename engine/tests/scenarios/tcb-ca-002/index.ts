@@ -5,6 +5,7 @@
  * payment. The key is the CA return.
  */
 
+import { lockedGoldenPath } from "../../helpers/scenarioPdfName.js";
 import type { Scenario } from "../../types.js";
 import { tcbCa002Decisions } from "./decisions.js";
 import { tcbCa002Expected } from "./expected.js";
@@ -33,9 +34,9 @@ export const tcbCa002Scenario: Scenario = {
   userId: TCB_CA_002_USER_ID,
   facts: tcbCa002Facts,
   decisions: tcbCa002Decisions,
-  skip: true,
   forms: FORM_IDS.map((formId) => ({
     formId,
     expected: tcbCa002Expected(formId),
+    goldenPdfPath: lockedGoldenPath("tcb-ca-002", formId),
   })),
 };
