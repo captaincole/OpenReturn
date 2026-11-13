@@ -176,19 +176,26 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
     ) as boolean | undefined,
     refundFullOverpaymentCA: decisionByKey.get("decisions.refund.refund_full_overpayment_ca") as
       boolean | undefined,
-    taxpayerBlind: factByKey.get(BLINDNESS_KEYS.taxpayer) === true,
-    spouseBlind: factByKey.get(BLINDNESS_KEYS.spouse) === true,
-    caEstimatedAndOtherPayments: caEstimatedAndOtherPayments(inputs),
+    ...blindnessAndCaPayments(inputs),
   };
 }
 
-/* Form 540 line 72: the California payments the taxpayer states; blank when none is recorded. */
-function caEstimatedAndOtherPayments(inputs: ResolverInputs): Money | undefined {
-  return sumOrBlank(
-    num(inputs, CA_PAYMENT_KEYS.estimatedTax),
-    num(inputs, CA_PAYMENT_KEYS.priorYearOverpaymentApplied),
-    num(inputs, CA_PAYMENT_KEYS.extensionPayment),
-  ) as Money | undefined;
+/*
+ * Line 8: who is visually impaired. Line 72: the California payments the taxpayer
+ * states, blank when none is recorded.
+ */
+function blindnessAndCaPayments(
+  inputs: ResolverInputs,
+): Pick<Form540FilingInfo, "taxpayerBlind" | "spouseBlind" | "caEstimatedAndOtherPayments"> {
+  return {
+    taxpayerBlind: inputs.factByKey.get(BLINDNESS_KEYS.taxpayer) === true,
+    spouseBlind: inputs.factByKey.get(BLINDNESS_KEYS.spouse) === true,
+    caEstimatedAndOtherPayments: sumOrBlank(
+      num(inputs, CA_PAYMENT_KEYS.estimatedTax),
+      num(inputs, CA_PAYMENT_KEYS.priorYearOverpaymentApplied),
+      num(inputs, CA_PAYMENT_KEYS.extensionPayment),
+    ) as Money | undefined,
+  };
 }
 
 // Default: file with Form 540. Set the explicit decision false to opt out.

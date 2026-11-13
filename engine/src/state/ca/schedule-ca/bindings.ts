@@ -107,7 +107,7 @@ function adjustmentsTotalFederal(form: FormAccessor<ScheduleCa>) {
   const federal = numberOrBlank(form["schedule-1.1.line.26"]);
   if (sum(total) === sum(federal)) return total;
   return unsupported(
-    "Schedule 1 line 26 holds an adjustment that Section C does not copy yet (only line 13 is copied).",
+    "Schedule 1 line 26 holds an adjustment that Section C does not copy yet (only lines 11, 13, 15 and 18 are copied).",
   );
 }
 
