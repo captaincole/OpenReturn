@@ -6,7 +6,9 @@
 import {
   AMT_KEYS,
   CAPITAL_LOSS_CARRYOVER_KEYS,
+  CA_MISC_DEDUCTION_KEYS,
   HSA_COVERAGE_KEYS,
+  MORTGAGE_KEYS,
   makeDependentFactKey,
   makeDividendFactKey,
   makeHsaDistributionFactKey,
@@ -32,6 +34,7 @@ export const TCB_CA_009_TAX_YEAR = 2025;
 
 const CREATED_AT = "2026-11-12T00:00:00Z";
 const ANSWERS = "TaxCalcBench answers (input/remaining_data.json)";
+const NO_AMOUNT = "TaxCalcBench answers: no amount given";
 const PAYER_TIN = "12-3456789";
 
 const fact = (category: string, key: string, value: unknown, sourceNote: string): TaxFactRow => ({
@@ -247,7 +250,29 @@ export const tcbCa009Facts: TaxFactRow[] = [
     `${ANSWERS}: ca_form540.full_year_health_coverage.`,
   ),
   fact("other", "use_tax.owed_amount", 0, `${ANSWERS}: ca_form540.use_tax.`),
+  /* Schedule A answers: only the cash gifts (scha_gft.cash60) have an amount; the rest are 0. */
   fact("charitable", "charitable.cash", 25000, `${ANSWERS}: scha_gft.cash60.`),
+  fact("charitable", "charitable.noncash", 0, `${NO_AMOUNT}: no gifts other than cash.`),
+  fact("charitable", "charitable.carryover", 0, `${NO_AMOUNT}: no gift carryover.`),
+  fact("state_local_tax", "state_local_tax.real_estate", 0, `${NO_AMOUNT}: no real estate taxes.`),
+  fact(
+    "state_local_tax",
+    "state_local_tax.personal_property",
+    0,
+    `${NO_AMOUNT}: no personal property taxes.`,
+  ),
+  fact(
+    "mortgage",
+    MORTGAGE_KEYS.interestForm1098,
+    0,
+    `${NO_AMOUNT}: no Form 1098 (the f8396 answers name a mortgage credit certificate, not interest on a 1098).`,
+  ),
+  fact(
+    "other",
+    CA_MISC_DEDUCTION_KEYS.investmentFees,
+    0,
+    `${NO_AMOUNT}: no investment fees (Schedule CA Part II line 21).`,
+  ),
   fact("medical", "medical.expenses_total", 0, `${ANSWERS}: med_exp.medExpDrDentistTP 0.`),
   /* f6251.stockOption: the incentive stock option spread (Schedule P (540) and Form 6251). */
   fact("other", AMT_KEYS.isoExerciseSpread, 50000, `${ANSWERS}: f6251.stockOption.`),

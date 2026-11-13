@@ -5,6 +5,7 @@
  * incentive stock option exercise (Schedule P (540)). The key is the CA return.
  */
 
+import { lockedGoldenPath } from "../../helpers/scenarioPdfName.js";
 import type { Scenario } from "../../types.js";
 import { tcbCa009Decisions } from "./decisions.js";
 import { tcbCa009Expected } from "./expected.js";
@@ -35,9 +36,9 @@ export const tcbCa009Scenario: Scenario = {
   userId: TCB_CA_009_USER_ID,
   facts: tcbCa009Facts,
   decisions: tcbCa009Decisions,
-  skip: true,
   forms: FORM_IDS.map((formId) => ({
     formId,
     expected: tcbCa009Expected(formId),
+    goldenPdfPath: lockedGoldenPath("tcb-ca-009", formId),
   })),
 };
