@@ -187,9 +187,11 @@ export function rentalOwnerOf(property: RentalFactValue): RentalOwner {
  * status, only the taxpayer's: a spouse's property belongs on the spouse's
  * return, and its key is in spouseKeys so a form can wait on it. A jointly
  * owned property on a separate return needs the taxpayer's share, which the
- * fact does not hold: it is listed in spouseKeys too.
+ * fact does not hold: it is listed in spouseKeys too. Forms read
+ * rentalsOnReturn (activitiesOnReturn.ts), which adds the return's
+ * depreciation scope.
  */
-export function rentalsOnReturn(
+export function statedRentalsOnReturn(
   facts: ReadonlyArray<FactRow>,
   joint: boolean,
 ): {
