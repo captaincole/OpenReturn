@@ -94,7 +94,8 @@ never a tax-software export we cannot redistribute:
    The `add-scenario` skill turns it into a scenario and grows the engine
    until it matches. Where the answer key and the IRS instructions
    disagree, the instructions win, and the scenario's README lists each
-   case.
+   case. TaxCalcBench is for evaluation only: each `tcb-*` folder keeps its
+   do-not-train notice.
 
 ### Understanding The Form Engine
 
