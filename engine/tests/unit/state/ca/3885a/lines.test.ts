@@ -58,3 +58,30 @@ describe("FTB 3885A with one side empty", () => {
     expect(californiaAdjustment({ assets: [june] })).toBeUndefined();
   });
 });
+
+describe("FTB 3885A amortization with cents", () => {
+  it("agrees with Form 4562 when the amounts are the same", () => {
+    const costs: ActivityDepreciation = {
+      amortizedCosts: [
+        {
+          description: "a",
+          beginsOn: "2025-03-03",
+          amount: 200.6,
+          codeSection: "195",
+          periodMonths: 12,
+        },
+        {
+          description: "b",
+          beginsOn: "2025-05-05",
+          amount: 400.6,
+          codeSection: "195",
+          periodMonths: 12,
+        },
+      ],
+      priorYearAmortization: 100.4,
+    };
+    const figures = form3885AFigures(costs);
+    expect(figures.line12).toBe(figures.line13);
+    expect(mustFile3885A(costs)).toBe(false);
+  });
+});
