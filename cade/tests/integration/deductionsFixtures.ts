@@ -5,7 +5,9 @@
  */
 
 import { evaluateScenario } from "@openreturn/engine";
-import { alexScenario } from "@openreturn/engine/scenarios";
+import { loadScenario } from "@openreturn/engine/scenarios";
+
+const alexScenario = await loadScenario("alex");
 
 export const YEAR = 2025;
 

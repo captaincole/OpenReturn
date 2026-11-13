@@ -11,7 +11,7 @@ import type { RentalFactValue } from "../../../../src/facts/index.js";
 import type { TaxFactRow } from "../../../../src/facts/rows.js";
 import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
-import { tcbUs005Scenario as scenario } from "../../../scenarios/index.js";
+import { tcbUs005Scenario as scenario } from "../../../scenarios/tcb-us-005/index.js";
 
 const FORM = "form-8995-a-schedule-c";
 

@@ -19,17 +19,8 @@ import {
 } from "../src/types.js";
 import { blankPdfPath, catalogPath } from "../tests/helpers/formPaths.js";
 import { scenarioPdfName } from "../tests/helpers/scenarioPdfName.js";
+import { loadScenario } from "../tests/scenarios/index.js";
 import type { Scenario } from "../tests/types.js";
-
-/* The scenario is the export whose name matches the folder, whatever the export is called. */
-async function loadScenario(name: string): Promise<Scenario> {
-  const mod: Record<string, unknown> = await import(`../tests/scenarios/${name}/index.js`);
-  const found = Object.values(mod).find(
-    (value): value is Scenario => (value as Scenario | undefined)?.name === name,
-  );
-  if (!found) throw new Error(`loadScenario("${name}"): no export has name "${name}"`);
-  return found;
-}
 
 function buildContext(scenario: Scenario): DerivationContext {
   return {

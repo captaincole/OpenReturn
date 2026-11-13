@@ -6,7 +6,9 @@
 
 import { describe, expect, it } from "vitest";
 import { DEDUCTION_ITEMS, evaluateScenario } from "../../src/index.js";
-import { SCENARIOS } from "../scenarios/index.js";
+import { loadScenarios } from "../scenarios/index.js";
+
+const SCENARIOS = await loadScenarios();
 
 const evaluated = SCENARIOS.map((scenario) => ({
   name: scenario.name,

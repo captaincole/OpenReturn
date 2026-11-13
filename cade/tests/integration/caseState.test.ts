@@ -1,7 +1,9 @@
 import { evaluateScenario } from "@openreturn/engine";
-import { alexScenario } from "@openreturn/engine/scenarios";
+import { loadScenario } from "@openreturn/engine/scenarios";
 import { describe, expect, it } from "vitest";
 import { buildCaseStateForScenario } from "../../src/mastra/tools/caseState";
+
+const alexScenario = await loadScenario("alex");
 
 const { facts: alexFacts, decisions: alexDecisions } = alexScenario;
 

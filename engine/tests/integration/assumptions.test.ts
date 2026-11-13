@@ -8,9 +8,9 @@ import { describe, expect, it } from "vitest";
 import { MORTGAGE_KEYS } from "../../src/facts/index.js";
 import type { TaxFactRow } from "../../src/facts/rows.js";
 import { evaluateScenario, pendingInputs, readyToFile } from "../../src/index.js";
-import { SCENARIOS } from "../scenarios/index.js";
+import { loadScenario } from "../scenarios/index.js";
 
-const madison = SCENARIOS.find((scenario) => scenario.name === "tcb-ca-005")!;
+const madison = await loadScenario("tcb-ca-005");
 const GIFTS = "charitable.cash";
 const LINE_11 = "schedule-a.0.line.11_gifts_cash_check";
 const LINE_17 = "schedule-a.0.line.17_total_itemized_deductions";

@@ -38,30 +38,7 @@ Decide what the return looks like: filing status, state, which forms
 it files, and which answers (decisions) it needs. Compare that with
 [What OpenReturn supports](testing-with-your-return.md#what-openreturn-supports).
 A scenario earns its place when it covers a shape no other scenario
-covers (alex: one W-2; alejandro: investment income; marcus: capital
-gains; jordan: high income, HSA, rollovers, crypto; carter: MFS,
-Social Security, 1099-Rs; tara: household employee, home energy credit;
-tcb-us-003: MFJ, Roth conversion (Form 8606), senior deduction;
-tcb-us-004: MFJ, itemized deductions (Schedule A), investment interest
-(Form 4952), a dependent with the child tax credit (Schedule 8812);
-tcb-us-006: MFS, a sole-proprietor business (Schedule C, SE, 8995-A),
-gambling winnings, Additional Medicare Tax, NIIT; tcb-us-005: MFJ, a
-real estate professional's rental and a passive royalty (Schedule E,
-Form 8582), QBI loss netting (Schedule C (Form 8995-A)); tcb-us-008: MFS,
-a 1099-NEC business with mileage and a home office, gifts on
-Schedule A, a capital loss carryover, Form 8995; tcb-us-009: MFS
-living with the spouse, self-rentals and a passive royalty (Schedule E,
-Form 8582, Form 8960 line 4b); tcb-us-007: MFS,
-Marketplace coverage repaid on Form 8962 (Form 1095-A); tcb-ca-005: MFJ, CA
-itemized deductions (Schedule CA Part II, FTB 3526), CA AMT on an ISO
-exercise (Schedule P), early-distribution tax (FTB 3805P);
-tcb-us-001: HOH, mortgage interest (Form 1098), federal AMT on an ISO
-exercise (Form 6251); tcb-us-002: HOH, casualty losses (Form 4684), the
-increased standard deduction for a qualified disaster loss, the EIC
-(Schedule EIC), the additional child tax credit; tcb-us-010: QSS, a
-disability pension on line 1h, forced itemizing with general sales tax,
-child and dependent care (Form 2441), the credit for the elderly or the
-disabled (Schedule R), the EIC).
+covers. `npm test -- --list` prints each scenario and what it covers.
 
 ### 3. Create `facts.ts` and `decisions.ts`
 
@@ -72,8 +49,10 @@ Create `tests/scenarios/<name>/` (copy `alex/`):
   residency, …). The engine cannot run without them.
 - `index.ts` — the scenario bundle and its forms in dependency order.
 
-Add the scenario to `SCENARIOS` in `tests/scenarios/index.ts`. If a document or value has
-no fact shape yet, note it for step 5.
+The folder registers itself: the golden and integration tests run every
+folder that has an `index.ts`. Give the scenario the folder's name, and a
+`description` that says what it covers (`npm test -- --list` prints it). If
+a document or value has no fact shape yet, note it for step 5.
 
 You can now render the forms before any expected values exist:
 `npx tsx scripts/renderScenario.ts --scenario=<name>` (from `engine/`).

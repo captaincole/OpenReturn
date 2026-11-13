@@ -1,59 +1,36 @@
-import type { Scenario } from "../types.js";
-import { alejandroScenario } from "./alejandro/index.js";
-import { alexScenario } from "./alex/index.js";
-import { carterScenario } from "./carter/index.js";
-import { jordanScenario } from "./jordan/index.js";
-import { marcusScenario } from "./marcus/index.js";
-import { taraScenario } from "./tara/index.js";
-import { tcbCa005Scenario } from "./tcb-ca-005/index.js";
-import { tcbUs001Scenario } from "./tcb-us-001/index.js";
-import { tcbUs002Scenario } from "./tcb-us-002/index.js";
-import { tcbUs003Scenario } from "./tcb-us-003/index.js";
-import { tcbUs004Scenario } from "./tcb-us-004/index.js";
-import { tcbUs005Scenario } from "./tcb-us-005/index.js";
-import { tcbUs006Scenario } from "./tcb-us-006/index.js";
-import { tcbUs007Scenario } from "./tcb-us-007/index.js";
-import { tcbUs008Scenario } from "./tcb-us-008/index.js";
-import { tcbUs009Scenario } from "./tcb-us-009/index.js";
-import { tcbUs010Scenario } from "./tcb-us-010/index.js";
+/*
+ * Every folder here that has an index.ts is a scenario. No list names them: a
+ * new folder is in the golden and integration suites by itself. Loading is
+ * async because tsx and vitest share no synchronous way to import a module by path.
+ */
 
-export {
-  alejandroScenario,
-  alexScenario,
-  carterScenario,
-  jordanScenario,
-  marcusScenario,
-  taraScenario,
-  tcbCa005Scenario,
-  tcbUs001Scenario,
-  tcbUs002Scenario,
-  tcbUs003Scenario,
-  tcbUs004Scenario,
-  tcbUs005Scenario,
-  tcbUs006Scenario,
-  tcbUs007Scenario,
-  tcbUs008Scenario,
-  tcbUs009Scenario,
-  tcbUs010Scenario,
-};
+import { existsSync, readdirSync } from "node:fs";
+import { join } from "node:path";
+import type { Scenario } from "../types.js";
+
 export type { Scenario };
 
-export const SCENARIOS: Scenario[] = [
-  alexScenario,
-  alejandroScenario,
-  marcusScenario,
-  jordanScenario,
-  carterScenario,
-  taraScenario,
-  tcbUs002Scenario,
-  tcbUs003Scenario,
-  tcbUs006Scenario,
-  tcbUs004Scenario,
-  tcbUs005Scenario,
-  tcbCa005Scenario,
-  tcbUs008Scenario,
-  tcbUs001Scenario,
-  tcbUs009Scenario,
-  tcbUs007Scenario,
-  tcbUs010Scenario,
-];
+export function scenarioNames(): string[] {
+  return readdirSync(__dirname, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && existsSync(join(__dirname, entry.name, "index.ts")))
+    .map((entry) => entry.name)
+    .sort();
+}
+
+/* The scenario is the export whose name matches the folder, whatever the export is called. */
+export async function loadScenario(name: string): Promise<Scenario> {
+  const names = scenarioNames();
+  if (!names.includes(name)) {
+    throw new Error(`loadScenario("${name}"): no such scenario. Scenarios: ${names.join(", ")}`);
+  }
+  const mod: Record<string, unknown> = await import(`./${name}/index.ts`);
+  const found = Object.values(mod).find(
+    (value): value is Scenario => (value as Scenario | undefined)?.name === name,
+  );
+  if (!found) throw new Error(`loadScenario("${name}"): no export has name "${name}"`);
+  return found;
+}
+
+export function loadScenarios(): Promise<Scenario[]> {
+  return Promise.all(scenarioNames().map(loadScenario));
+}
