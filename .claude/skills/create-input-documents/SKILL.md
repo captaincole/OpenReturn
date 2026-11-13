@@ -32,7 +32,7 @@ A later run of `write-binding-rules` or `catalog-form-fields` may find a line th
 
 ## 3. Make each missing document
 
-Use fake data only: invented names and addresses, and SSNs, EINs and TINs in the fake ranges the other scenarios use (`400-00-…`, `00-0000…`). A downloaded set (TaxCalcBench, an IRS package) keeps its license and source commit in the scenario's README.
+Use fake data only: invented names and addresses, and SSNs, EINs and TINs in the fake ranges the other scenarios use (`400-00-…`, `00-0000…`). A downloaded set (TaxCalcBench, an IRS package) keeps its license and source commit in the scenario's README; a TaxCalcBench case also keeps its do-not-train notice (`add-scenario`, step 1).
 
 - **The type has a generator** (`engine/tests/scenarios/documents/<type>.ts`): call it from the scenario's `generate-docs.ts` with the scenario's values.
 - **The first document of its type:** write the generator. It is one exported function that takes the fact's value object (the type from `engine/src/facts/kinds/`) and the names and addresses, and returns the PDF bytes. Then the document and the fact cannot disagree. Print only the values the fact holds; never work one out from the others. Copy the drawing helpers you need from `marcus/generate-docs.ts` into `documents/draw.ts`. Follow the official form's box numbers and labels.
