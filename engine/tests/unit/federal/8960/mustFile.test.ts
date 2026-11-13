@@ -1,7 +1,12 @@
 /* Source: irs-8960-inst-2025::sec::who-must-file::b01 (MAGI over the threshold, with investment income). */
 
 import { describe, expect, it } from "vitest";
-import { GAMBLING_KEYS, makeInterestFactKey, makeW2FactKey } from "../../../../src/facts/index.js";
+import {
+  GAMBLING_KEYS,
+  makeGovernmentPaymentsFactKey,
+  makeInterestFactKey,
+  makeW2FactKey,
+} from "../../../../src/facts/index.js";
 import { magiUpperBound } from "../../../../src/federal/8960/mustFile.js";
 import { makeResolverInputs } from "../../../../src/resolverInputs.js";
 
@@ -18,6 +23,14 @@ const interest: Fact = {
   value: { payerName: "Bank", box1: 500 },
 };
 const winnings: Fact = { key: GAMBLING_KEYS.winningsNotOnW2G, category: "other", value: 20000 };
+const unemployment: Fact = {
+  key: makeGovernmentPaymentsFactKey("tin-00-0000002", "unemployment-1500000"),
+  category: "other",
+  value: { payerName: "State EDD", box1: 15000 },
+};
+
+/* "Single or Head of household is $200,000" (irs-8960-inst-2025::sec::application-to-individuals::b01). */
+const SINGLE_THRESHOLD = 200000;
 
 const bound = (facts: Fact[]) =>
   magiUpperBound(makeResolverInputs({ facts, decisions: [] }), false);
@@ -29,5 +42,11 @@ describe("Form 8960 MAGI upper bound", () => {
 
   it("adds gambling winnings reported without a W-2G (Schedule 1 line 8b)", () => {
     expect(bound([w2, interest, winnings])).toBe(210500);
+  });
+
+  it("adds 1099-G unemployment compensation (Schedule 1 line 7), which takes the bound over the threshold", () => {
+    expect(bound([w2, interest])).toBeLessThan(SINGLE_THRESHOLD);
+    expect(bound([w2, interest, unemployment])).toBe(205500);
+    expect(bound([w2, interest, unemployment])).toBeGreaterThan(SINGLE_THRESHOLD);
   });
 });
