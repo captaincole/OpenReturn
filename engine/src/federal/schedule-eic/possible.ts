@@ -10,23 +10,33 @@
  */
 
 import {
+  ADJUSTMENT_KEYS,
   CAPITAL_LOSS_CARRYOVER_KEYS,
   HSA_COVERAGE_KEYS,
   RENTAL_KEYS,
   businessesOnReturn,
   isInterestFactKey,
   readRentalFacts,
+  readTraditionalIraFact,
   rentalsOnReturn,
   type RentalFactValue,
+  type W2FactValue,
 } from "../../facts/index.js";
 import { filingStatusOf, resolveScheduleBInfo } from "../../filingInfoResolvers.js";
 import { roundDollars, sum } from "../../money.js";
-import { num, sumInvestmentBox, sumW2Box, type ResolverInputs } from "../../resolverInputs.js";
+import {
+  factsInCategory,
+  num,
+  sumInvestmentBox,
+  sumW2Box,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
 import { booleanFact, isPassiveActivity, spousePropertiesOnReturn } from "../rentals/passive.js";
+import { SECTION_501C18D_CODE } from "../schedule-1/answers.js";
 import { resolveSchedule8812Info } from "../schedule-8812/resolveInfo.js";
 import type { PayerAmount } from "../schedule-b/filingInfo.js";
-import { tentativeProfit } from "../schedule-c/lines.js";
+import { netProfit, tentativeProfit } from "../schedule-c/lines.js";
 import { netIncomeOrLoss } from "../schedule-e/lines.js";
 import { INVESTMENT_INCOME_LIMIT } from "./credit.js";
 import { eicIncomeLimit } from "./limits.js";
@@ -55,6 +65,52 @@ function businessFloor(inputs: ResolverInputs, joint: boolean): number | undefin
   const lines29 = businesses.map((business) => tentativeProfit(business.value));
   if (lines29.some((line29) => line29 === undefined)) return undefined;
   return sum(...lines29.map((line29) => Math.min(0, line29!)));
+}
+
+/*
+ * Schedule SE: the deduction for half of self-employment tax (Schedule 1 line
+ * 15) is at most half of 15.3% of 92.35% of a profit, so line 31 less it is at
+ * least this share of the profit.
+ */
+const PROFIT_AFTER_HALF_SE_TAX = 1 - (0.153 * 0.9235) / 2;
+
+/*
+ * The least each business adds to AGI: a loss as businessFloor counts it, and a
+ * profit (line 31, where the engine figures it) less the most its half of SE
+ * tax can be. A business whose line 31 the engine leaves blank counts its
+ * line 29 loss, or 0.
+ */
+function businessIncomeFloor(inputs: ResolverInputs, joint: boolean): number | undefined {
+  const { businesses, malformedKeys } = businessesOnReturn(inputs.facts, joint);
+  if (malformedKeys.length > 0) return undefined;
+  const onReturn = businesses.map((business) => business.value);
+  const lines29 = onReturn.map((business) => tentativeProfit(business));
+  if (lines29.some((line29) => line29 === undefined)) return undefined;
+  return sum(
+    ...onReturn.map((business, index) => {
+      const line31 = netProfit(business, onReturn);
+      if (line31 !== undefined && line31 > 0) return line31 * PROFIT_AFTER_HALF_SE_TAX;
+      return Math.min(0, line31 ?? lines29[index]!);
+    }),
+  );
+}
+
+/*
+ * The most the stated Schedule 1 Part II answers can take off AGI: lines 16,
+ * 19a, 24a–24i (facts/kinds/adjustments.ts), 24f from W-2 box 12 code H, and
+ * line 20, at most the traditional IRA contributions.
+ */
+function statedAdjustmentsCeiling(inputs: ResolverInputs): number {
+  const amounts = Object.values(ADJUSTMENT_KEYS).map((key) => num(inputs, key));
+  const contributions = (["taxpayer", "spouse"] as const).map(
+    (owner) => readTraditionalIraFact(inputs.factByKey, owner)?.contributions,
+  );
+  const codeH = factsInCategory(inputs, "wages").flatMap((row) =>
+    ((row.value as W2FactValue)?.box12 ?? [])
+      .filter((entry) => entry.code === SECTION_501C18D_CODE)
+      .map((entry) => entry.amount),
+  );
+  return sum(...amounts, ...contributions, ...codeH);
 }
 
 /*
@@ -141,17 +197,20 @@ function rentalFloor(inputs: ResolverInputs): number | undefined {
  * ordinary dividends (lines 2b and 3b), line 7a's least, each business's
  * least and the rentals' least (Schedule 1 line 5), less the most the
  * adjustments can be. Other income only adds, and is left out. Of Schedule 1
- * Part II the engine fills line 13 (HSA) and line 15 (half of SE tax, covered
- * by counting a profit as 0); a new adjustment line, or an income line that can
- * be negative, must be counted here, or this bound is no longer a lower bound.
+ * Part II the engine fills line 13 (HSA), line 15 (half of SE tax, taken off
+ * each profit in businessIncomeFloor) and the stated lines 16, 19a, 20 and
+ * 24a–24i (statedAdjustmentsCeiling); a new adjustment line, or an income line
+ * that can be negative, must be counted here, or this bound is no longer a
+ * lower bound.
  */
 export function agiFloor(inputs: ResolverInputs, joint: boolean): number | undefined {
-  const businesses = businessFloor(inputs, joint);
+  const businesses = businessIncomeFloor(inputs, joint);
   const rentals = rentalFloor(inputs);
   const hsa = hsaDeductionCeiling(inputs);
   if (businesses === undefined || rentals === undefined || hsa === undefined) return undefined;
   const { line1a, line2b, line3b } = incomeLines(inputs);
-  return sum(line1a, line2b, line3b, capitalFloor(inputs), businesses, rentals, -hsa);
+  const adjustments = statedAdjustmentsCeiling(inputs);
+  return sum(line1a, line2b, line3b, capitalFloor(inputs), businesses, rentals, -hsa, -adjustments);
 }
 
 /*
