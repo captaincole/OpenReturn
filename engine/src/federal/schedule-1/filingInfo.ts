@@ -53,4 +53,8 @@ export interface Schedule1FilingInfo extends BaseFilingInfo {
   livedApartAllYear?: boolean;
   /** Social Security with a traditional IRA contribution and a plan: Pub. 590-A figures line 20 (pub590a.ts). */
   pub590aWorksheets?: boolean;
+  /** Line 11: the educator expense deduction, at most $300 per eligible educator. */
+  educatorExpenses?: number;
+  /** Line 18: 1099-INT box 2 sum, cents kept. */
+  earlyWithdrawalPenalty?: number;
 }
