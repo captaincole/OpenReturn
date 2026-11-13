@@ -12,6 +12,7 @@ import { unsupported } from "../../types.js";
 import { ssn } from "../../values.js";
 import { computeQdcg } from "../../worksheets/qdcg.js";
 import { socialSecurityTaxable } from "../../worksheets/socialSecurityBenefits.js";
+import { PUB_590A_GAP } from "../schedule-1/pub590a.js";
 import { form1040Line7a } from "../schedule-d/lines.js";
 import { eicOutcome } from "../schedule-eic/outcome.js";
 import { awaitsSchedule1A, standardDeduction } from "./deductions.js";
@@ -204,6 +205,9 @@ export function register(): void {
       // MANUAL EDIT: for MFS, line 6b waits for the lived-apart answer; it picks the worksheet base.
       "line.6a": (_, info) => roundDollars(info.socialSecurityBenefits),
       "line.6b": (form, info) => {
+        // MANUAL EDIT: Pub. 590-A's worksheets figure 6b with an IRA contribution (schedule-1/pub590a.ts).
+        if (info.socialSecurityBenefits !== undefined && info.pub590aWorksheets)
+          return unsupported(PUB_590A_GAP);
         const benefits = info.socialSecurityBenefits;
         if (benefits === undefined || !info.filingStatus) return undefined;
         const mfs = info.filingStatus === "married_filing_separately";

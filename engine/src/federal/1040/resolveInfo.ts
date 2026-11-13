@@ -29,6 +29,7 @@ import {
 } from "../../resolverInputs.js";
 import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "../8606/partIII.js";
 import { form8606Filers } from "../8606/resolveInfo.js";
+import { needsPub590AWorksheets } from "../schedule-1/pub590a.js";
 import { resolveScheduleAInfo } from "../schedule-a/resolveInfo.js";
 import { eicQuestions, resolveEicLineInfo } from "../schedule-eic/eicAnswers.js";
 import {
@@ -286,6 +287,7 @@ export function resolve1040Info(inputs: ResolverInputs): Form1040FilingInfo {
     boolean | undefined;
   const earnedIncomeCredit = resolveEicLineInfo(inputs);
   return {
+    pub590aWorksheets: needsPub590AWorksheets(inputs),
     mustFile: { "form-1040": resolution },
     missingInputs: {
       "form-1040": missingInputs({
