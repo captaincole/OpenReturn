@@ -382,11 +382,12 @@ export function register(): void {
           form["line.63_other_taxes_credit_recapture"],
         );
       },
-      // MANUAL EDIT: round the W-2 box 17 sum to the nearest dollar.
-      "line.71_ca_income_tax_withheld": (_, info) => roundDollars(info.w2StateWithholding),
-      // MANUAL EDIT: the total of the stated payments (ca-540-inst-2025::sec::line-72-2025-california-estimated-tax-and-other-payments::b01).
-      "line.72_ca_estimated_tax_payments": (_, info) =>
-        roundDollars(info.caEstimatedAndOtherPayments),
+      /*
+       * MANUAL EDIT: round the W-2 box 17 sum to the nearest dollar.
+       * MANUAL EDIT: W-2 box 17 and the other forms' California withholding (withholding.ts).
+       */
+      "line.71_ca_income_tax_withheld": (_, info) =>
+        roundDollars(sumOrBlank(info.w2StateWithholding, info.caWithholdingOtherForms)),
       /*
        * MANUAL EDIT: FTB 3514 files and a credit is still unknown: the total
        * waits (or is a gap), because sum() would read its blank line as 0.

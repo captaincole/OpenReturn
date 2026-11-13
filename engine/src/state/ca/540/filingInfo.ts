@@ -27,6 +27,8 @@ export interface Form540FilingInfo
   w2StateWages?: Money;
   /** W-2 Box 17 sum. */
   w2StateWithholding?: Money;
+  /** Line 71: California tax withheld on the W-2G and the 1099s (withholding.ts), cents kept. */
+  caWithholdingOtherForms?: number;
   /** W-2 Box 14 CA SDI sum. */
   w2CaSdiTotal?: Money;
 
