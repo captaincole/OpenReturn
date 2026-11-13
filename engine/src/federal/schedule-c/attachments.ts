@@ -6,7 +6,12 @@
  */
 
 import type { BusinessFactValue, BusinessOtherExpense } from "../../facts/index.js";
-import { activityDepreciationDeduction, form4562Figures, line44 } from "../4562/lines.js";
+import {
+  activityDepreciationDeduction,
+  depreciationPending,
+  form4562Figures,
+  line44,
+} from "../4562/lines.js";
 
 /* irs-4562-inst-2025::sec::line-44::b01: total amortization goes on the "Other Expenses" line (Part V). */
 export const AMORTIZATION_DESCRIPTION = "Amortization";
@@ -30,6 +35,14 @@ export function depreciationGap(business: BusinessFactValue): string | undefined
   if (!business.depreciation) return undefined;
   if (business.expenses?.depreciation !== undefined) return BOTH_DEPRECIATION_ANSWERS;
   return form4562Figures(business.depreciation).gap;
+}
+
+/*
+ * Line 13 is not known yet: Form 4562 waits for an answer or has a gap. Lines
+ * 28–31 wait with it. A business with nothing to depreciate is not pending.
+ */
+export function depreciationBlocks(business: BusinessFactValue): boolean {
+  return depreciationGap(business) !== undefined || depreciationPending(business.depreciation);
 }
 
 /* Part V: the stated other expenses, then the amortization (Form 4562 line 44) when there is any. */

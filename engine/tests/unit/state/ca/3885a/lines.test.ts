@@ -39,3 +39,22 @@ describe("FTB 3885A", () => {
     );
   });
 });
+
+describe("FTB 3885A with one side empty", () => {
+  it("takes line 13 as 0 when only California has amortization", () => {
+    const figures = form3885AFigures({ californiaPriorYearAmortization: 300 });
+    expect(figures.line12).toBe(300);
+    expect(figures.line13).toBe(0);
+    expect(figures.line14a).toBe(300);
+  });
+  it("takes line 7 as 0 when only California has older depreciation", () => {
+    const figures = form3885AFigures({ californiaPriorYearDepreciation: 400 });
+    expect(figures.line7).toBe(0);
+    expect(figures.line8a).toBe(400);
+  });
+  it("waits while Form 4562 waits for the acquisition answer", () => {
+    const june = { ...fiveYear.assets![0]!, placedInService: "2025-06-01" };
+    expect(form3885AFigures({ assets: [june] }).line7).toBeUndefined();
+    expect(californiaAdjustment({ assets: [june] })).toBeUndefined();
+  });
+});

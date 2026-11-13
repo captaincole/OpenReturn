@@ -7,7 +7,12 @@ import type { BindingFn, FormAccessor } from "../../defineForm.js";
 import type { RentalExpenses, RentalFactValue } from "../../facts/index.js";
 import { roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported } from "../../types.js";
-import { activityDepreciationDeduction, form4562Figures, line44 } from "../4562/lines.js";
+import {
+  activityDepreciationDeduction,
+  depreciationPending,
+  form4562Figures,
+  line44,
+} from "../4562/lines.js";
 import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
 import type { ScheduleE } from "./types.js";
 
@@ -103,8 +108,7 @@ export function rentalDepreciationGap(property: RentalFactValue): string | undef
 // Line 20 adds the rounded lines 5–19; it waits while line 18 waits for Form 4562.
 function totalExpenses(property: RentalFactValue) {
   if (!expensesAsStated(property)) return undefined;
-  if (property.depreciation && expense(property, "depreciationOrDepletion") === undefined)
-    return undefined;
+  if (depreciationPending(property.depreciation)) return undefined;
   return sumOrBlank(...EXPENSE_LINES.map(([, key]) => expense(property, key)));
 }
 
@@ -114,7 +118,7 @@ export function netIncomeOrLoss(property: RentalFactValue): number | undefined {
   if (rentalDepreciationGap(property)) return undefined;
   const income = sumOrBlank(rents(property), roundDollars(property.royaltiesReceived));
   const expenses = totalExpenses(property);
-  if (property.depreciation && expenses === undefined) return undefined;
+  if (depreciationPending(property.depreciation)) return undefined;
   if (income === undefined && expenses === undefined) return undefined;
   return sum(income) - sum(expenses);
 }
