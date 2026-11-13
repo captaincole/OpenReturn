@@ -58,6 +58,10 @@ a filer under 65 retired on disability, with a disability pension on
 line 1h, forced itemizing with general sales tax, child and dependent
 care for a disabled adult son (Form 2441), the credit for the elderly
 or the disabled (Schedule R) and the earned income credit.
+A second, checked on the California return only, is a filer of 67 with
+an HSA (Form 8889), a pension, Social Security and cash gifts, who
+itemizes for California only and completes the CA alternative minimum
+tax on an incentive stock option exercise (Schedule P).
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
 1099-SA, 1098, SSA-1099, W-2G, 1099-K, 1099-NEC, 1095-A, a W-2 you issued to a household employee
