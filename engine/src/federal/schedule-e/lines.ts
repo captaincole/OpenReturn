@@ -8,9 +8,9 @@ import type { RentalExpenses, RentalFactValue } from "../../facts/index.js";
 import { roundDollars, sum, sumOrBlank } from "../../money.js";
 import { unsupported } from "../../types.js";
 import {
-  activityDepreciationDeduction,
+  activityDepreciationGap,
+  activityDepreciationLine,
   depreciationPending,
-  form4562Figures,
   line44,
 } from "../4562/lines.js";
 import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
@@ -90,19 +90,21 @@ const rents = (property: RentalFactValue) =>
  */
 const expense = (property: RentalFactValue, key: ExpenseKey) => {
   if (!expensesAsStated(property)) return undefined;
-  if (key === "depreciationOrDepletion" && property.depreciation)
-    return activityDepreciationDeduction(property.depreciation);
+  if (key === "depreciationOrDepletion")
+    return activityDepreciationLine(property.expenses?.[key], property.depreciation);
   return roundDollars(property.expenses?.[key]);
 };
 
 /* Why the property's line 18 (and the lines after it) is a case the engine does not handle. */
 export function rentalDepreciationGap(property: RentalFactValue): string | undefined {
-  if (!property.depreciation) return undefined;
-  if (property.expenses?.depreciationOrDepletion !== undefined)
-    return "The property states both a line 18 amount and Form 4562 answers; the engine cannot tell whether one includes the other.";
+  const gap = activityDepreciationGap(
+    property.expenses?.depreciationOrDepletion,
+    property.depreciation,
+  );
+  if (gap) return gap;
   if ((line44(property.depreciation) ?? 0) > 0)
     return "Amortization (Form 4562 line 44) of a rental goes on line 19 with the other expenses; the engine does not add it there.";
-  return form4562Figures(property.depreciation).gap;
+  return undefined;
 }
 
 // Line 20 adds the rounded lines 5–19; it waits while line 18 waits for Form 4562.
