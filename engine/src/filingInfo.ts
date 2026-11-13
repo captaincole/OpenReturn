@@ -74,6 +74,8 @@ import {
 } from "./filingInfoResolvers.js";
 import type { Form3526FilingInfo } from "./state/ca/3526/filingInfo.js";
 import { resolve3526Info } from "./state/ca/3526/resolveInfo.js";
+import type { Form3532FilingInfo } from "./state/ca/3532/filingInfo.js";
+import { resolve3532Info } from "./state/ca/3532/resolveInfo.js";
 import type { Form3805pFilingInfo } from "./state/ca/3805p/filingInfo.js";
 import { resolve3805pInfo } from "./state/ca/3805p/resolveInfo.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
@@ -134,6 +136,7 @@ export type FilingInfo = BaseFilingInfo &
   Form3526FilingInfo &
   Form3805pFilingInfo &
   SchedulePFilingInfo &
+  Form3532FilingInfo &
   ScheduleCaFilingInfo &
   Form8949FilingInfo &
   ScheduleDFilingInfo &
@@ -179,6 +182,7 @@ export function resolveFilingInfo(opts: {
     resolve3526Info(inputs),
     resolve3805pInfo(inputs),
     resolveSchedulePInfo(inputs),
+    resolve3532Info(inputs),
     resolveScheduleCaInfo(inputs),
     resolve8949Info(inputs),
     resolveScheduleDInfo(inputs),
