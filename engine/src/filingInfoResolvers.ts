@@ -1,6 +1,8 @@
 import {
+  BLINDNESS_KEYS,
   CAPITAL_LOSS_CARRYOVER_KEYS,
   CA_MISC_DEDUCTION_KEYS,
+  CA_PAYMENT_KEYS,
   NET_INVESTMENT_INCOME_KEYS,
   SPOUSE_KEYS,
   isDividendFactKey,
@@ -23,7 +25,7 @@ import { resolveScheduleEInfo } from "./federal/schedule-e/resolveInfo.js";
 import { resolveScheduleHInfo } from "./federal/schedule-h/resolveInfo.js";
 import { resolveScheduleSEInfo } from "./federal/schedule-se/resolveInfo.js";
 import type { BaseFilingInfo } from "./filingInfo.js";
-import { sum, type Money } from "./money.js";
+import { sum, sumOrBlank, type Money } from "./money.js";
 import {
   factsInCategory,
   missingInputs,
@@ -174,7 +176,19 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
     ) as boolean | undefined,
     refundFullOverpaymentCA: decisionByKey.get("decisions.refund.refund_full_overpayment_ca") as
       boolean | undefined,
+    taxpayerBlind: factByKey.get(BLINDNESS_KEYS.taxpayer) === true,
+    spouseBlind: factByKey.get(BLINDNESS_KEYS.spouse) === true,
+    caEstimatedAndOtherPayments: caEstimatedAndOtherPayments(inputs),
   };
+}
+
+/* Form 540 line 72: the California payments the taxpayer states; blank when none is recorded. */
+function caEstimatedAndOtherPayments(inputs: ResolverInputs): Money | undefined {
+  return sumOrBlank(
+    num(inputs, CA_PAYMENT_KEYS.estimatedTax),
+    num(inputs, CA_PAYMENT_KEYS.priorYearOverpaymentApplied),
+    num(inputs, CA_PAYMENT_KEYS.extensionPayment),
+  ) as Money | undefined;
 }
 
 // Default: file with Form 540. Set the explicit decision false to opt out.

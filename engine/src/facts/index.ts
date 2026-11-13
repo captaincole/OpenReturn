@@ -1,9 +1,11 @@
 /* Fact catalog. Add a new fact kind as a module under ./kinds/ and re-export it here. */
 
 export * from "./kinds/alternativeMinimumTax.js";
+export * from "./kinds/blindness.js";
 export * from "./kinds/business.js";
 export * from "./kinds/caEarnedIncomeCredit.js";
 export * from "./kinds/caMiscellaneousDeductions.js";
+export * from "./kinds/caPayments.js";
 export * from "./kinds/capitalLossCarryover.js";
 export * from "./kinds/casualty.js";
 export * from "./kinds/dependentCare.js";
