@@ -163,23 +163,23 @@ export function register(): void {
       "line.31_tax_from_tax_table": (form) =>
         usesRateSchedule(form["line.19_taxable_income"]) === false,
       "line.31_tax_from_rate_schedule": (form) => usesRateSchedule(form["line.19_taxable_income"]),
-      // MANUAL EDIT: Schedule CA line 27 col B / C; 0 when Schedule CA is not filed.
       /*
        * MANUAL EDIT: line 14 takes Schedule CA line 27 column B, and line 16 column C.
-       * A negative column moves to the other line as a positive amount
+       * A negative column moves to the other line as a positive amount. Both lines
+       * are 0 when Schedule CA is not filed
        * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b08;
        * ca-540-inst-2025::sec::line-14-california-adjustments-subtractions-from-schedule-ca-540-part-i-line-27-column-b::b01;
        * ca-540-inst-2025::sec::line-16-california-adjustments-additions-from-schedule-ca-540-part-i-line-27-column-c::b01).
        */
       "line.14_ca_adjustments_subtractions": (form) =>
-        sum(
-          atLeast(0, form["schedule-ca.3.line.c27_subtractions"]),
-          negativeColumnAsPositive(form["schedule-ca.3.line.c27_additions"]),
+        adjustmentFromLine27(
+          form["schedule-ca.3.line.c27_subtractions"],
+          form["schedule-ca.3.line.c27_additions"],
         ),
       "line.16_ca_adjustments_additions": (form) =>
-        sum(
-          atLeast(0, form["schedule-ca.3.line.c27_additions"]),
-          negativeColumnAsPositive(form["schedule-ca.3.line.c27_subtractions"]),
+        adjustmentFromLine27(
+          form["schedule-ca.3.line.c27_additions"],
+          form["schedule-ca.3.line.c27_subtractions"],
         ),
       "line.11_total_exemption_amount": (form) =>
         sum(
@@ -646,12 +646,17 @@ export function register(): void {
   });
 }
 
-// MANUAL EDIT: FTB sends line 19 over $100,000 to the Tax Rate Schedules.
-/* A negative Schedule CA line 27 column, as the positive amount the other Form 540 line takes; else 0. */
-function negativeColumnAsPositive(column: unknown): number {
-  return typeof column === "number" && column < 0 ? -column : 0;
+/*
+ * The amount Form 540 line 14 or 16 takes from Schedule CA line 27: its own
+ * column when positive, plus the other column's negative as a positive amount.
+ */
+function adjustmentFromLine27(ownColumn: unknown, otherColumn: unknown): number {
+  const own = typeof ownColumn === "number" && ownColumn > 0 ? ownColumn : 0;
+  const other = typeof otherColumn === "number" && otherColumn < 0 ? -otherColumn : 0;
+  return own + other;
 }
 
+// MANUAL EDIT: FTB sends line 19 over $100,000 to the Tax Rate Schedules.
 function usesRateSchedule(taxableIncome: number | undefined): boolean | undefined {
   return typeof taxableIncome === "number" ? taxableIncome > 100000 : undefined;
 }
