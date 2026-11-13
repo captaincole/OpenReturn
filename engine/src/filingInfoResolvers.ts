@@ -118,6 +118,12 @@ export function hasW2(inputs: ResolverInputs): boolean {
   return factsInCategory(inputs, "wages").some((row) => isW2FactKey(row.key));
 }
 
+/* Form 540 line 5: a qualifying surviving spouse/RDP enters the year the spouse died. */
+function spouseYearOfDeathInput(inputs: ResolverInputs): Record<string, unknown> {
+  if (filingStatusOf(inputs) !== "qualifying_surviving_spouse") return {};
+  return { [SPOUSE_KEYS.yearOfDeath]: text(inputs, SPOUSE_KEYS.yearOfDeath) };
+}
+
 export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
   const { decisionByKey, factByKey } = inputs;
   const resolution = resolveMustFile(decisionByKey, {
@@ -144,8 +150,10 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
         "decisions.refund.refund_full_overpayment_ca": decisionByKey.get(
           "decisions.refund.refund_full_overpayment_ca",
         ),
+        ...spouseYearOfDeathInput(inputs),
       }),
     },
+    spouseYearOfDeath: text(inputs, SPOUSE_KEYS.yearOfDeath),
     caResidencyStatus: decisionByKey.get("decisions.scope.ca_residency") as string | undefined,
     // No W-2 at all: lines 12 and 71 stay blank, not "0".
     w2StateWages: hasW2(inputs)

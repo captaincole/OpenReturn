@@ -89,6 +89,9 @@ export function register(): void {
       // MANUAL EDIT: the 540 catalog's married and QSS options carry "rdp".
       "header.filing_status": (_, info) =>
         info.filingStatus ? CA_FILING_STATUS_OPTION[info.filingStatus] : undefined,
+      // MANUAL EDIT: line 5, the year the spouse/RDP died (identity.spouse.year_of_death).
+      "header.spouse_rdp_year_of_death": (_, info) =>
+        info.filingStatus === "qualifying_surviving_spouse" ? info.spouseYearOfDeath : undefined,
       // MANUAL EDIT: the count widget gets the count; the amount widget gets count × $153.
       "line.7_personal_exemption_count": (_, info) =>
         info.filingStatus === "married_filing_jointly" ||
@@ -102,12 +105,12 @@ export function register(): void {
         return typeof count === "number" ? count * 153 : undefined;
       },
       /*
-       * MANUAL EDIT: 65 or older on December 31, 2025. MFJ / QSS stay blank:
-       * the spouse's date of birth is not modeled.
+       * MANUAL EDIT: 65 or older on December 31, 2025 (ca-540-inst-2025::sec::line-9-senior-exemptions::b01).
+       * MFJ stays blank: the spouse's age is not modeled here. A qualifying surviving
+       * spouse is unmarried in 2025, so only the taxpayer counts.
        */
       "line.9_senior_exemption_count": (_, info) => {
         if (info.filingStatus === "married_filing_jointly") return undefined;
-        if (info.filingStatus === "qualifying_surviving_spouse") return undefined;
         return info.taxpayerBornBeforeJan2_1961 === true ? 1 : undefined;
       },
       "line.9_senior_exemption_amount": (form) => {
@@ -488,8 +491,6 @@ export function register(): void {
         "No separate principal-residence street address fact exists; the identity address facts represent the mailing address. A distinct principal-residence address scenario has no ingestion path yet.",
       "header.ca_filing_status_differs_from_federal":
         "No scenario yet where CA filing status differs from federal (e.g. RDP adjustments, community property MFS). MVP only handles matching statuses; this checkbox would require a dedicated ca_filing_status_differs decision.",
-      "header.spouse_rdp_year_of_death":
-        "No scenario yet for qualifying surviving spouse/RDP with a deceased spouse — year-of-death fact not ingested.",
       "header.qualifying_surviving_spouse_instructions_ref":
         "Static instructions reference label on the form; no computable value — no scenario for QSS filing status with deceased spouse data ingested.",
       "header.claimed_as_dependent":

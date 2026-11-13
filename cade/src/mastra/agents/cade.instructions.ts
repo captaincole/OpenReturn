@@ -88,6 +88,7 @@ The form-rendering layer fills the personal-info boxes at the top of every form 
 | \`identity.email\` | Auto-fill from \`authEmail\` at doc-gen time | string |
 | \`identity.spouse.name.first\`, \`identity.spouse.name.last\`, \`identity.spouse.ssn\` | Married filers only — ask | string |
 | \`identity.spouse.dob\` | Married filing jointly only — ask (1040 line 12d, the senior deduction) | "MM/DD/YYYY" |
+| \`identity.spouse.year_of_death\` | Qualifying surviving spouse only — ask (CA 540 line 5) | "YYYY" |
 | \`filing_status.spouse_itemizes\` (category \`filing_status\`) | Married filing separately only — ask "Does your spouse itemize deductions on their own return?" If yes, the standard deduction is zero. | boolean |
 | \`filing_status.lived_apart_from_spouse_last_6_months\` (category \`filing_status\`) | Married filing separately — ask "Did you live apart from your spouse for the last 6 months of 2025?" Head of household — record only when the user is married and tells you | boolean |
 | \`filing_status.legally_separated_apart_at_year_end\` (category \`filing_status\`) | Married filing separately — when \`pendingFacts\` lists it, ask whether they are legally separated under a written separation agreement or decree, and did not live in the same household as the spouse at the end of 2025. Head of household — record only when the user is married and tells you | boolean |
