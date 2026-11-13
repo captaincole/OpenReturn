@@ -13,7 +13,7 @@ A married person filing separately in Los Angeles, born 1982, who lived apart fr
 
 The answer key is the case's correct **California** return: the FTB e-file XML in the case's `output.xml`. `expected.ts` copies its values. The case has no federal key: the federal forms are evaluated as inputs to the CA return and not checked; their goldens are locked engine output.
 
-Forms checked: Form 540, Schedule CA (540), FTB 3526, FTB 3805P and FTB 3885A (the key's description and method are printed text, not checked). Forms evaluated: Forms 4562, 8829, 8606, 4952 and 1040, Schedules C (three copies), SE, E, 1 and A, and Schedule P (540).
+Forms checked: Form 540, Schedule CA (540), FTB 3526, FTB 3805P and FTB 3885A (the key's description and method are printed text, not checked). Forms evaluated: Forms 4562, 8829, 8606, 4952, 8995 and 1040, Schedules C (three copies), SE, E, 1, 2, A, 8812 and EIC, and Schedule P (540): every form the engine's must-file rules file.
 
 ## Inputs
 
@@ -60,4 +60,13 @@ Schedule CA line 3 and line 15 column A (and lines 10, 26 and 27 column A, which
 - Schedule CA line 19b's recipient last name (no fact gives the recipient's name), line 6's type ("OTHER") and line 8z's type: the engine prints the stated types.
 - Form 540 lines 12, 14, 33, 35 and 48 print 0 or are blank where the key omits them.
 - `FederalSchEICInd` has no line on Form 540.
-- The engine also files FTB 3514 (the fallback cannot see AGI before evaluation); its credit is 0 here, and it is not in this scenario's list.
+
+## Known gaps (for #126)
+
+- The mid-quarter convention test (Form 4562) is checked within one activity; the instructions apply it to all the return's property placed in service in 2025.
+- Form 8606 line 19 or line 21 of 0 leaves Form 1040 line 4b blank for a code J or T row, and nothing is asked.
+- California tax withheld on a 1099-DIV (box 16) or a 1099-OID (box 14) is not on Form 540 line 71: their facts have no state withholding box.
+- Schedule C Part IV reads whether line 13 has an amount, not whether Form 4562 is required.
+- Form 4562 Part I lines 11–13 (the section 179 business income limitation), lines 20a–20e (ADS) and Part V (listed property) are unsupported; so are FTB 3885A line 2 and a passive activity's difference (FTB 3801).
+- Form 8829 for an owned home, a daycare or a casualty loss; a rental's amortization on Schedule E line 19; Form 6198 (Schedule C box 32b).
+- Schedule 1 line 20 and Form 1040 line 6b with Social Security, a traditional IRA contribution and a plan (Pub. 590-A).
