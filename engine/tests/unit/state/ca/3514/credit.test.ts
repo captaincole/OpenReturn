@@ -54,6 +54,10 @@ describe("worksheetCredit", () => {
     expect(worksheetCredit(13_000, 13_600, 0)).toBe(178);
     expect(worksheetCredit(8_000, 9_850, 2)).toBe(caEitcTableCredit(8_000, 2));
   });
+  it("takes line 5 when it is smaller, with a child: $7,000 earned (2,016), AGI $13,000 (599)", () => {
+    expect(worksheetCredit(7_000, 13_000, 1)).toBe(599);
+    expect(worksheetCredit(9_850, 13_000, 3)).toBe(2551);
+  });
 });
 
 describe("YCTC and FYTC phase-out", () => {
