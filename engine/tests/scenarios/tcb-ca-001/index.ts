@@ -30,7 +30,6 @@ export const tcbCa001Scenario: Scenario = {
   userId: TCB_CA_001_USER_ID,
   facts: tcbCa001Facts,
   decisions: tcbCa001Decisions,
-  skip: true,
   forms: FORM_IDS.map((formId) => ({
     formId,
     expected: tcbCa001Expected(formId),
