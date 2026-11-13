@@ -7,6 +7,7 @@ import { fixtureFileSchema } from "../../catalog.js";
 import { makeFormSpec, type FormSpec } from "../../formSpec.js";
 import { register as registerForm3526 } from "./3526/bindings.js";
 import { register as registerForm3805p } from "./3805p/bindings.js";
+import { register as registerForm3885A } from "./3885a/bindings.js";
 import { register as registerForm540 } from "./540/bindings.js";
 import { register as registerForm5805 } from "./5805/bindings.js";
 import { register as registerScheduleCa } from "./schedule-ca/bindings.js";
@@ -14,6 +15,7 @@ import { register as registerScheduleP } from "./schedule-p/bindings.js";
 
 import form3526CatalogJson from "./3526/catalog.json";
 import form3805pCatalogJson from "./3805p/catalog.json";
+import form3885aCatalogJson from "./3885a/catalog.json";
 import form540CatalogJson from "./540/catalog.json";
 import form5805CatalogJson from "./5805/catalog.json";
 import scheduleCaCatalogJson from "./schedule-ca/catalog.json";
@@ -26,6 +28,7 @@ export const CA_CATALOGS = [
   fixtureFileSchema.parse(form3526CatalogJson),
   fixtureFileSchema.parse(form3805pCatalogJson),
   fixtureFileSchema.parse(schedulePCatalogJson),
+  fixtureFileSchema.parse(form3885aCatalogJson),
 ];
 
 export const CA_FORMS: FormSpec[] = [
@@ -35,6 +38,18 @@ export const CA_FORMS: FormSpec[] = [
     shortId: "schedule-d-ca",
     displayName: "Schedule D (540)",
     relativeDir: "state/ca/schedule-d-ca",
+  }),
+  /* FTB 3885A (one per activity) feeds Schedule CA lines 3 and 5. */
+  makeFormSpec({
+    formId: "form-3885a",
+    shortId: "3885a",
+    displayName: "FTB 3885A",
+    relativeDir: "state/ca/3885a",
+    register: registerForm3885A,
+    copies: {
+      count: (info) => info?.form3885aActivities?.length ?? 1,
+      select: (info, index) => info && { ...info, form3885aCopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "schedule-ca",

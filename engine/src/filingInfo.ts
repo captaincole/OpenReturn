@@ -8,6 +8,8 @@ import type { Form1040FilingInfo } from "./federal/1040/filingInfo.js";
 import { resolve1040Info } from "./federal/1040/resolveInfo.js";
 import type { Form2441FilingInfo } from "./federal/2441/filingInfo.js";
 import { resolve2441Info } from "./federal/2441/resolveInfo.js";
+import type { Form4562FilingInfo } from "./federal/4562/filingInfo.js";
+import { resolve4562Info } from "./federal/4562/resolveInfo.js";
 import type { Form4684FilingInfo } from "./federal/4684/filingInfo.js";
 import { resolve4684Info } from "./federal/4684/resolveInfo.js";
 import type { Form4952FilingInfo } from "./federal/4952/filingInfo.js";
@@ -20,6 +22,8 @@ import type { Form8582FilingInfo } from "./federal/8582/filingInfo.js";
 import { resolve8582Info } from "./federal/8582/resolveInfo.js";
 import type { Form8606FilingInfo } from "./federal/8606/filingInfo.js";
 import { resolve8606Info } from "./federal/8606/resolveInfo.js";
+import type { Form8829FilingInfo } from "./federal/8829/filingInfo.js";
+import { resolve8829Info } from "./federal/8829/resolveInfo.js";
 import type { Form8889FilingInfo } from "./federal/8889/filingInfo.js";
 import { resolve8889Info } from "./federal/8889/resolveInfo.js";
 import type { Form8949FilingInfo } from "./federal/8949/filingInfo.js";
@@ -76,6 +80,8 @@ import type { Form3526FilingInfo } from "./state/ca/3526/filingInfo.js";
 import { resolve3526Info } from "./state/ca/3526/resolveInfo.js";
 import type { Form3805pFilingInfo } from "./state/ca/3805p/filingInfo.js";
 import { resolve3805pInfo } from "./state/ca/3805p/resolveInfo.js";
+import type { Form3885AFilingInfo } from "./state/ca/3885a/filingInfo.js";
+import { resolve3885AInfo } from "./state/ca/3885a/resolveInfo.js";
 import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
 import type { Form5805FilingInfo } from "./state/ca/5805/filingInfo.js";
 import { resolve5805Info } from "./state/ca/5805/resolveInfo.js";
@@ -164,7 +170,10 @@ export type FilingInfo = BaseFilingInfo &
   Form4684FilingInfo &
   ScheduleEICFilingInfo &
   ScheduleRFilingInfo &
-  Form2441FilingInfo;
+  Form2441FilingInfo &
+  Form4562FilingInfo &
+  Form8829FilingInfo &
+  Form3885AFilingInfo;
 
 export function resolveFilingInfo(opts: {
   facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
@@ -210,6 +219,9 @@ export function resolveFilingInfo(opts: {
     resolveScheduleEICInfo(inputs),
     resolveScheduleRInfo(inputs),
     resolve2441Info(inputs),
+    resolve4562Info(inputs),
+    resolve8829Info(inputs),
+    resolve3885AInfo(inputs),
   ]);
 }
 
