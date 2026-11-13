@@ -1,4 +1,5 @@
 import { HSA_COVERAGE_KEYS, type HsaCoverageType } from "../../facts/index.js";
+import { bornBeforeJan2_1971 } from "../../filingInfoResolvers.js";
 import { sum } from "../../money.js";
 import {
   factsInCategory,
@@ -28,6 +29,7 @@ export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
   const coverageMonths = numberFact(factByKey.get(HSA_COVERAGE_KEYS.coverageMonths));
   const allQualified = factByKey.get(HSA_COVERAGE_KEYS.distributionsAllQualified) as
     boolean | undefined;
+  const dob = factByKey.get("identity.dob") as string | undefined;
   return {
     mustFile: { "form-8889": resolution },
     missingInputs: {
@@ -35,6 +37,8 @@ export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
         [HSA_COVERAGE_KEYS.coverageType]: coverageType,
         [HSA_COVERAGE_KEYS.coverageMonths]: coverageMonths,
         [HSA_COVERAGE_KEYS.ownContributions]: ownContributions,
+        /* Line 3: the additional contribution amount turns on age 55 at year end. */
+        ...(coverageType !== undefined ? { "identity.dob": dob } : {}),
         ...(distributions.length > 0
           ? { [HSA_COVERAGE_KEYS.distributionsAllQualified]: allQualified }
           : {}),
@@ -49,6 +53,10 @@ export function resolve8889Info(inputs: ResolverInputs): Form8889FilingInfo {
         ? sum(...distributions.map((row) => numberFact((row.value as { box1?: unknown }).box1)))
         : undefined,
     hsaDistributionsAllQualified: allQualified,
+    hsaRolledOverOrExcessWithdrawn: numberFact(
+      factByKey.get(HSA_COVERAGE_KEYS.rolledOverOrExcessWithdrawn),
+    ),
+    taxpayerAge55AtYearEnd: bornBeforeJan2_1971(dob),
   };
 }
 

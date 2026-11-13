@@ -7,6 +7,7 @@
 import { lookupStandardDeduction } from "../../../data/standardDeduction.js";
 import { defineForm, type FormAccessor, type FormSpec } from "../../../defineForm.js";
 import { atLeast, numberOrBlank, roundDollars, sum, sumOrBlank } from "../../../money.js";
+import { unsupported } from "../../../types.js";
 import type { ScheduleCaFilingInfo } from "./filingInfo.js";
 import { partIIUnsupported } from "./increasedStandard.js";
 import { CA_MISC_FLOOR_RATE, caItemizedLine29 } from "./itemizedWorksheet.js";
@@ -43,6 +44,64 @@ function waitsWithIncreasedStandard(bindings: Bindings): Bindings {
   ) as Bindings;
 }
 
+/* A copied federal amount prints only when it is not 0 (a fully qualified HSA leaves Form 8889 line 16 at 0). */
+function amountIfNonzero(value: unknown): number | undefined {
+  const amount = numberOrBlank(value);
+  return amount === 0 ? undefined : amount;
+}
+
+/* Line 9a col B: lines 8a through 8z, column B. */
+const OTHER_INCOME_SUBTRACTIONS = [
+  "1.line.b8b_subtractions",
+  "1.line.b8c_subtractions",
+  "1.line.b8f_subtractions",
+  "1.line.b8n_subtractions",
+  "1.line.b8o_subtractions",
+  "1.line.b8p_subtractions",
+  "1.line.b8v_subtractions",
+  "1.line.b8z_subtractions",
+] as const;
+
+/* Line 26: "Add line 11 through line 23 and line 25", column A and column B. */
+const ADJUSTMENTS_FEDERAL = [
+  "2.line.c11_federal",
+  "2.line.c12_federal",
+  "2.line.c13_federal",
+  "2.line.c14_federal",
+  "2.line.c15_federal",
+  "2.line.c16_federal",
+  "2.line.c17_federal",
+  "2.line.c18_federal",
+  "2.line.c19a_federal",
+  "2.line.c20_federal",
+  "2.line.c21_federal",
+  "2.line.c23_federal",
+  "3.line.c25_federal",
+] as const;
+const ADJUSTMENT_SUBTRACTIONS = [
+  "2.line.c11_subtractions",
+  "2.line.c12_subtractions",
+  "2.line.c13_subtractions",
+  "2.line.c15_subtractions",
+  "2.line.c17_subtractions",
+  "2.line.c20_subtractions",
+  "3.line.c25_subtractions",
+] as const;
+
+/*
+ * Line 26 col A adds the Section C lines. Most of them do not copy their
+ * Schedule 1 line yet, so the total holds only when it equals Schedule 1
+ * line 26; otherwise a federal adjustment is missing from Section C.
+ */
+function adjustmentsTotalFederal(form: FormAccessor<ScheduleCa>) {
+  const total = sumOrBlank(...ADJUSTMENTS_FEDERAL.map((id) => form[id]));
+  const federal = numberOrBlank(form["schedule-1.1.line.26"]);
+  if (sum(total) === sum(federal)) return total;
+  return unsupported(
+    "Schedule 1 line 26 holds an adjustment that Section C does not copy yet (only line 13 is copied).",
+  );
+}
+
 export function register(): void {
   defineForm<ScheduleCa, ScheduleCaFilingInfo>("schedule-ca", {
     bindings: waitsWithIncreasedStandard({
@@ -68,6 +127,27 @@ export function register(): void {
         const value = form["schedule-1.0.line.9"];
         return typeof value === "number" ? value : undefined;
       },
+      // MANUAL EDIT: col A copies Schedule 1 line 8f (income from Form 8889).
+      "1.line.b8f_federal": (form) => amountIfNonzero(form["schedule-1.0.line.8f"]),
+      /*
+       * MANUAL EDIT: HSA distributions not used for qualified medical expenses and
+       * included in federal income are not taxable for California
+       * (ca-540-sched-ca-inst-2025::sec::line-8-other-income::b03): Form 8889 line 16.
+       */
+      "1.line.b8f_subtractions": (form) =>
+        amountIfNonzero(form["form-8889.0.line.16_taxable_hsa_distributions"]),
+      "2.line.b9a_subtractions": (form) =>
+        sumOrBlank(...OTHER_INCOME_SUBTRACTIONS.map((id) => form[id])),
+      /*
+       * MANUAL EDIT: California does not conform to the HSA deduction: "Enter the
+       * amount from line 13, column A, on line 13, column B"
+       * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b01).
+       */
+      "2.line.c13_federal": (form) => amountIfNonzero(form["schedule-1.1.line.13"]),
+      "2.line.c13_subtractions": (form) => numberOrBlank(form["2.line.c13_federal"]),
+      "3.line.c26_federal": (form) => adjustmentsTotalFederal(form),
+      "3.line.c26_subtractions": (form) =>
+        sumOrBlank(...ADJUSTMENT_SUBTRACTIONS.map((id) => form[id])),
       "0.line.1a_additions": (_, info) => roundDollars(info.hsaEmployerContributions),
       "0.line.1z_additions": (form) =>
         sumOrBlank(
@@ -435,14 +515,10 @@ export function register(): void {
       "0.line.1z_subtractions":
         "Aggregate of line 1 subtractions; all upstream rows are unsupported.",
       "0.line.2a_federal": "Tax-exempt interest (federal 1040 line 2a) — no scenario modeled yet.",
-      "2.line.b9a_subtractions":
-        "Section B line 9a col B — aggregates other-income subtractions we don't model yet.",
       "2.line.b9a_additions":
         "Section B line 9a col C — aggregates other-income additions we don't model yet.",
       "2.line.c11_subtractions":
         "CA disallows educator expenses; depends on line 11 col A federal echo which we don't ingest yet.",
-      "2.line.c13_subtractions":
-        "CA disallows HSA deduction; depends on line 13 col A federal echo which we don't ingest yet.",
       "3.line.c24i_subtractions":
         "Form 2555 foreign housing deduction (line 24i) col B — no scenario modeled yet.",
       "3.line.c24j_subtractions":
@@ -453,10 +529,6 @@ export function register(): void {
         "Line 25 col B — aggregates 24a-24z col B; all upstream rows are unsupported.",
       "3.line.c25_additions":
         "Line 25 col C — aggregates 24a-24z col C; all upstream rows are unsupported.",
-      "3.line.c26_federal":
-        "Line 26 col A — aggregates 11-23+25 col A; all upstream rows are unsupported.",
-      "3.line.c26_subtractions":
-        "Line 26 col B — aggregates 11-23+25 col B; all upstream rows are unsupported.",
       "3.line.c26_additions":
         "Line 26 col C — aggregates 11-23+25 col C; all upstream rows are unsupported.",
       "0.line.1a_subtractions":
@@ -569,10 +641,6 @@ export function register(): void {
         "Income from federal Form 8853 (Archer MSAs and Long-Term Care Insurance Contracts) — no fact ingestion path for Form 8853 data exists yet.",
       "1.line.b8e_additions":
         "Column C additions for Form 8853 income — no fact ingestion path for Form 8853 scenarios yet.",
-      "1.line.b8f_federal":
-        "Income from federal Form 8889 (Health Savings Accounts) — no fact ingestion path for Form 8889 income/distribution data exists yet.",
-      "1.line.b8f_subtractions":
-        "Column B subtractions for Form 8889 HSA income — CA does not conform to federal HSA treatment, but no Form 8889 fact ingestion path exists yet.",
       "1.line.b8g_federal":
         "Alaska Permanent Fund dividends — niche income type specific to Alaska residents; no fact ingestion path exists.",
       "1.line.b8h_federal":
@@ -637,8 +705,6 @@ export function register(): void {
         "CA adjustment for reservist/performing artist business expenses requires FTB Pub. 1001 analysis and Schedule 1 line 12 source data — no ingestion path for either yet.",
       "2.line.c12_additions":
         "CA addition for reservist/performing artist business expenses (line 12, col C) requires FTB Pub. 1001 analysis and Schedule 1 line 12 source — no ingestion path yet.",
-      "2.line.c13_federal":
-        "Requires Schedule 1 (Form 1040) line 13 (HSA deduction) — federal Schedule 1 is not an ingested form; no fieldId available to reference.",
       "2.line.c14_federal":
         "Requires Schedule 1 (Form 1040) line 14 (moving expenses, military only federally) — federal Schedule 1 is not an ingested form; also no FTB 3913 ingestion path yet.",
       "2.line.c14_additions":

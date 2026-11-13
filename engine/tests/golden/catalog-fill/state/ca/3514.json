@@ -1,0 +1,852 @@
+{
+  "formId": "form-3514",
+  "fieldCount": 94,
+  "entries": [
+    {
+      "fieldId": "form-3514.0.header.names_on_return",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1000",
+          "text": "T-10LKU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.header.separated_spouse_eitc",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1002 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.header.ssn_or_itin",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1001",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.10_relationship_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1014",
+          "text": "T-1MHQR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.10_relationship_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1022",
+          "text": "T-ZTDP0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.10_relationship_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1030",
+          "text": "T-1M15F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.11_days_lived_in_ca_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1015",
+          "text": "580"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.11_days_lived_in_ca_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1023",
+          "text": "44"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.11_days_lived_in_ca_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1031",
+          "text": "115"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.1a_irs_disallowed_federal_eic",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1003 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.1b_ftb_disallowed_ca_eitc",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1004 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.2_federal_agi",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1005",
+          "text": "6,638"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.3_federal_eic",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1006",
+          "text": "4,474"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.4_investment_income",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1007",
+          "text": "7,420"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.5_first_name_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1008",
+          "text": "T-140YL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.5_first_name_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1016",
+          "text": "T-9UIS3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.5_first_name_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1024",
+          "text": "T-51VXD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.6_last_name_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1009",
+          "text": "T-1WWL6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.6_last_name_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1017",
+          "text": "T-13I3Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.6_last_name_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1025",
+          "text": "T-1B908"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.7_ssn_or_itin_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1010",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.7_ssn_or_itin_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1018",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.7_ssn_or_itin_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1026",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.8_date_of_birth_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1011",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.8_date_of_birth_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1019",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.8_date_of_birth_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1027",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.9a_student_under_24_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1012 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.9a_student_under_24_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1020 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.9a_student_under_24_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1028 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.9b_permanently_disabled_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1013 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.9b_permanently_disabled_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1021 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.0.line.9b_permanently_disabled_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_1029 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12a_street_address_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2001",
+          "text": "T-K4XX5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12a_street_address_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2005",
+          "text": "T-1GK8K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12a_street_address_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2009",
+          "text": "T-8ZB46"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12b_city_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2002",
+          "text": "T-B27NR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12b_city_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2006",
+          "text": "T-EIW4O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12b_city_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2010",
+          "text": "T-6A4Y3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12c_state_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2003",
+          "text": "78"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12c_state_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2007",
+          "text": "78"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12c_state_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2011",
+          "text": "08"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12d_zip_child_1",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2004",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12d_zip_child_2",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2008",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.12d_zip_child_3",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2012",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.13_ca_wages",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2013",
+          "text": "3,901"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.14_ihss_payments",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2014",
+          "text": "5,907"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.15_inmate_wages_nonqualified_pension",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2015",
+          "text": "2,488"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.16_wages_less_lines_14_15",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2016",
+          "text": "6,510"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.17_nontaxable_combat_pay",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2017",
+          "text": "4,197"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.18_business_income",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2018",
+          "text": "1,709"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.18a_business_name",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2019",
+          "text": "T-H6TQN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.18b_business_address",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2020",
+          "text": "T-O0G96"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.18b_business_city",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2021",
+          "text": "T-7S6PK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.18b_business_state",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2022",
+          "text": "46"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.18b_business_zip",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2023",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.18c_business_license_number",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2024",
+          "text": "T-E5PRY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.18d_sein",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2025",
+          "text": "T-GHXGJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.18e_business_code",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2026",
+          "text": "TJLZ5L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.19_ca_earned_income",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2027",
+          "text": "3,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.1.line.20_ca_eitc",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_2028",
+          "text": "2,002"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.21_ca_exemption_credit_percentage_decimal",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3001",
+          "text": "4816"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.21_ca_exemption_credit_percentage_whole",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3000",
+          "text": "5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.22_part_year_resident_eitc",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3002",
+          "text": "4,017"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.23_ca_earned_income",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3003",
+          "text": "8,051"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.23a_total_wages",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3004",
+          "text": "1,447"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.23b_net_loss_or_agi_over_limit",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3005 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.25_excess_over_threshold",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3007",
+          "text": "8,983"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.26_excess_divided_by_100_decimal",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3009",
+          "text": "59"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.26_excess_divided_by_100_whole",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3008",
+          "text": "43"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.27_reduction_amount_cents",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3011",
+          "text": "T-RNNEW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.27_reduction_amount_dollars",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3010",
+          "text": "8,313"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.28_yctc",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3012",
+          "text": "1,111"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.29_ca_exemption_credit_percentage_decimal",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3014",
+          "text": "7576"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.29_ca_exemption_credit_percentage_whole",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3013",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.30_part_year_resident_yctc",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3015",
+          "text": "8,992"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.31a_primary_taxpayer_claims_fytc",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3016 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.31b_spouse_claims_fytc",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3017 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.32a_foster_first_name_spouse",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3020",
+          "text": "T-144PR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.32a_foster_first_name_taxpayer",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3018",
+          "text": "T-1MCEQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.32b_foster_last_name_spouse",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3021",
+          "text": "T-THU7J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.2.line.32b_foster_last_name_taxpayer",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_3019",
+          "text": "T-MBKQN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.33a_taxpayer_cdss_consent",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4001",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.33b_spouse_cdss_consent",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4002",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.34_ca_earned_income",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4003",
+          "text": "1,315"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.35_available_fytc",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4004",
+          "text": "3,076"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.36_excess_over_threshold",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4005",
+          "text": "3,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.37_excess_divided_by_100_decimal",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4007",
+          "text": "82"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.37_excess_divided_by_100_whole",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4006",
+          "text": "47"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.38_reduction_amount_cents",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4009",
+          "text": "T-11TFS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.38_reduction_amount_dollars",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4008",
+          "text": "2,193"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.39_fytc",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4010",
+          "text": "1,360"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.40_ca_exemption_credit_percentage_decimal",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4012",
+          "text": "6925"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.40_ca_exemption_credit_percentage_whole",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4011",
+          "text": "4,918"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3514.3.line.41_part_year_resident_fytc",
+      "widgets": [
+        {
+          "widgetName": "3514_Form_4013",
+          "text": "5,066"
+        }
+      ]
+    }
+  ]
+}

@@ -60,7 +60,7 @@ setting. As in Canon and Cade, a `.env` file overrides it.
 so start it first with `npm run dev:canon`.
 
 Run `npm run form-engine` with no arguments for the full command list
-(including `generate-types` and `ingest-ca-tax-table`), and
+(including `generate-types`, `ingest-ca-tax-table` and `ingest-ca-eitc-table`), and
 `-- <command> --help` for a command's options.
 
 Inputs come from `sources/<year>/forms/` (the source documents); outputs

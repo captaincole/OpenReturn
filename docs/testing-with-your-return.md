@@ -25,6 +25,8 @@ before you start (see [Contributing](contributing.md#who-can-contribute)).
 ## What OpenReturn supports
 
 Tax year 2025, **single** filers, **California** full-year residents.
+A single California TaxCalcBench scenario with one small W-2 claims the
+California earned income tax credit (FTB 3514) with no qualifying child.
 Married filing separately has one unverified test scenario. Married
 filing jointly has one federal-only test scenario (TaxCalcBench), with
 Form 8606 (nondeductible IRA basis, Roth conversions) and Schedule 1-A
