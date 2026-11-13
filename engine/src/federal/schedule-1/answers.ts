@@ -71,6 +71,25 @@ function iraAnswers(inputs: ResolverInputs) {
   };
 }
 
+/*
+ * The answers lines 2a and 19a wait on: the agreement's date, and for an
+ * agreement made before 2019, whether it was changed to exclude alimony.
+ */
+function alimonyAgreementAnswers(
+  inputs: ResolverInputs,
+  amount: number | undefined,
+  dateKey: string,
+  excludesKey: string,
+): Record<string, unknown> {
+  if (amount === undefined) return {};
+  const date = text(inputs, dateKey);
+  const beforeChange = date !== undefined && date <= LAST_PRE_2019_AGREEMENT_DATE;
+  return {
+    [dateKey]: date,
+    ...(beforeChange ? { [excludesKey]: inputs.factByKey.get(excludesKey) } : {}),
+  };
+}
+
 export function schedule1Answers(inputs: ResolverInputs): Schedule1FilingInfo {
   const receivedDate = text(inputs, OTHER_INCOME_KEYS.alimonyReceivedAgreementDate);
   const paidDate = text(inputs, ADJUSTMENT_KEYS.alimonyPaidAgreementDate);
@@ -110,21 +129,20 @@ export function schedule1Answers(inputs: ResolverInputs): Schedule1FilingInfo {
     pub590aWorksheets: needsPub590AWorksheets(inputs),
     missingInputs: {
       "schedule-1": missingInputs({
-        ...(alimonyReceived !== undefined
-          ? { [OTHER_INCOME_KEYS.alimonyReceivedAgreementDate]: receivedDate }
-          : {}),
-        ...(alimonyReceived !== undefined &&
-        (receivedDate ?? "") <= LAST_PRE_2019_AGREEMENT_DATE &&
-        receivedDate
-          ? {
-              [OTHER_INCOME_KEYS.alimonyReceivedAgreementExcludes]: inputs.factByKey.get(
-                OTHER_INCOME_KEYS.alimonyReceivedAgreementExcludes,
-              ),
-            }
-          : {}),
+        ...alimonyAgreementAnswers(
+          inputs,
+          alimonyReceived,
+          OTHER_INCOME_KEYS.alimonyReceivedAgreementDate,
+          OTHER_INCOME_KEYS.alimonyReceivedAgreementExcludes,
+        ),
+        ...alimonyAgreementAnswers(
+          inputs,
+          alimonyPaid,
+          ADJUSTMENT_KEYS.alimonyPaidAgreementDate,
+          ADJUSTMENT_KEYS.alimonyPaidAgreementExcludes,
+        ),
         ...(alimonyPaid !== undefined
           ? {
-              [ADJUSTMENT_KEYS.alimonyPaidAgreementDate]: paidDate,
               [ADJUSTMENT_KEYS.alimonyRecipientSsn]: text(
                 inputs,
                 ADJUSTMENT_KEYS.alimonyRecipientSsn,
