@@ -160,11 +160,27 @@ const FORM_3805P: Partial<ExpectedResults> = {
   },
 };
 
+const FORM_3885A: Partial<ExpectedResults> = {
+  engineFields: {
+    "form-3885a.0.line.3_row1_california_basis": 10000, // CostOrOtherBasis
+    "form-3885a.0.line.3_row1_california_depreciation": 2000, // CurrYrDepreciation
+    "form-3885a.0.line.4_total_line_3": 2000, // TotalCurrYrDepreciation
+    "form-3885a.0.line.6_total_california_depreciation": 2000, // TotalCADepreciation
+    "form-3885a.0.line.7_federal_depreciation": 5200, // IRS4562Depreciation
+    "form-3885a.0.line.8b_california_less": 3200, // DepreciationDifference/CALessThanFed
+  },
+  renderedText: {
+    "form-3885a.0.line.3_row1_date_placed_in_service": "01/01/2025", // DatePlacedInService
+    "form-3885a.0.line.3_row1_life_or_rate": "5.0", // LifeOrRate
+  },
+};
+
 const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   "form-540": FORM_540,
   "schedule-ca": SCHEDULE_CA,
   "form-3526": FORM_3526,
   "form-3805p": FORM_3805P,
+  "form-3885a": FORM_3885A,
 };
 
 export function tcbCa007Expected(formId: string): ExpectedResults {

@@ -216,6 +216,7 @@ Tax-form lines take whole dollars, rounded to the **nearest** dollar with `round
 
 - **Document sums** keep the cents while adding and round only the total (IRS: "include cents when adding the amounts and round off only the total"). Example: interest $9.59 + $2,287.09 = $2,296.68 → $2,297. Verified: Alejandro's CPA return, 1040 line 3a $381.40 → $381.
 - **Calculated lines** (percentages, worksheet steps, rate-schedule tax) also round to nearest. Verified against a filed 2025 return (private comparison kit) and marcus's CPA (8959: 43,500 × 0.9% = 391.50 → 392; 243,500 × 1.45% = 3,530.75 → 3,531).
+- **A total of computed rows** (Form 4562 line 44 adds line 42's column (f)) keeps the rows' cents and rounds once, by the same 1040 rule; each row prints rounded. Verified: TaxCalcBench ty25-ca-007 ($166.67 + $266.67 + $2,600 → $3,033).
 - **Exception — step rules:** "for each $2,500 **or part** of $2,500" (CA AGI limitation) rounds up by definition (`stepsOf()`, a ceiling on the step count). That is the rule itself, not dollar rounding.
 
 Lines that the form defines as arithmetic on other lines use those lines' rounded values (Schedule D col (h) = rounded (d) − rounded (e)).
