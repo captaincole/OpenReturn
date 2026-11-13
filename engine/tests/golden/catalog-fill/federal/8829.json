@@ -1,0 +1,528 @@
+{
+  "formId": "form-8829",
+  "fieldCount": 58,
+  "entries": [
+    {
+      "fieldId": "form-8829.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-RHHK0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.1_business_area",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "4,030"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.10_mortgage_interest_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line10[0].f1_13[0]",
+          "text": "6,256"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.10_mortgage_interest_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line10[0].f1_14[0]",
+          "text": "7,900"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.11_real_estate_taxes_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line11[0].f1_15[0]",
+          "text": "3,956"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.11_real_estate_taxes_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line11[0].f1_16[0]",
+          "text": "3,661"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.12_total_lines_9_11_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line12[0].f1_17[0]",
+          "text": "1,121"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.12_total_lines_9_11_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line12[0].f1_18[0]",
+          "text": "8,160"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.13_indirect_business_share",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "1,473"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.14_direct_plus_line_13",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "7,781"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.15_limit_after_line_14",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "4,803"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.16_excess_mortgage_interest_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line16[0].f1_22[0]",
+          "text": "9,571"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.16_excess_mortgage_interest_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line16[0].f1_23[0]",
+          "text": "3,407"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.17_excess_real_estate_taxes_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line17[0].f1_24[0]",
+          "text": "3,060"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.17_excess_real_estate_taxes_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line17[0].f1_25[0]",
+          "text": "3,807"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.18_insurance_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line18[0].f1_26[0]",
+          "text": "7,178"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.18_insurance_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line18[0].f1_27[0]",
+          "text": "2,332"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.19_rent_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line19[0].f1_28[0]",
+          "text": "3,362"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.19_rent_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line19[0].f1_29[0]",
+          "text": "7,999"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.2_total_home_area",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "2,897"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.20_repairs_maintenance_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line20[0].f1_30[0]",
+          "text": "1,664"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.20_repairs_maintenance_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line20[0].f1_31[0]",
+          "text": "2,240"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.21_utilities_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line21[0].f1_32[0]",
+          "text": "8,855"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.21_utilities_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line21[0].f1_33[0]",
+          "text": "5,746"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.22_other_expenses_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line22[0].f1_34[0]",
+          "text": "6,319"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.22_other_expenses_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line22[0].f1_35[0]",
+          "text": "3,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.23_total_lines_16_22_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line23[0].f1_36[0]",
+          "text": "3,020"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.23_total_lines_16_22_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines16-23[0].Line23[0].f1_37[0]",
+          "text": "8,100"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.24_indirect_operating_share",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+          "text": "4,558"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.25_operating_expense_carryover",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_39[0]",
+          "text": "5,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.26_total_operating_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_40[0]",
+          "text": "1,208"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.27_allowable_operating_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_41[0]",
+          "text": "1,357"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.28_casualty_depreciation_limit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_42[0]",
+          "text": "1,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.29_excess_casualty_losses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_43[0]",
+          "text": "7,305"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.3_business_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "T-1RCT6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.30_home_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_44[0]",
+          "text": "2,662"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.31_casualty_depreciation_carryover",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_45[0]",
+          "text": "6,856"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.32_total_lines_29_31",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_46[0]",
+          "text": "2,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.33_allowable_casualty_depreciation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_47[0]",
+          "text": "4,770"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.34_total_lines_14_27_33",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_48[0]",
+          "text": "1,383"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.35_casualty_loss_portion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_49[0]",
+          "text": "6,940"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.36_allowable_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_50[0]",
+          "text": "1,719"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.37_home_basis_or_fmv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_51[0]",
+          "text": "5,261"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.38_land_value",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_52[0]",
+          "text": "9,677"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.39_building_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_53[0]",
+          "text": "5,711"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.4_daycare_hours_used",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "1,571"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.40_business_basis_building",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_54[0]",
+          "text": "4,138"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.41_depreciation_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_55[0]",
+          "text": "T-J2VEP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.42_depreciation_allowable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_56[0]",
+          "text": "1,720"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.43_operating_expense_carryover_2026",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_57[0]",
+          "text": "1,427"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.44_casualty_depreciation_carryover_2026",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_58[0]",
+          "text": "6,569"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.5_daycare_hours_available",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "3,461"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.6_daycare_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "T-VJKKE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.7_business_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "T-1EVAT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.8_tentative_profit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line8_ReadOrder[0].f1_10[0]",
+          "text": "9,053"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.9_casualty_losses_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line9[0].f1_11[0]",
+          "text": "9,700"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8829.0.line.9_casualty_losses_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Lines9-12[0].Line9[0].f1_12[0]",
+          "text": "3,433"
+        }
+      ]
+    }
+  ]
+}

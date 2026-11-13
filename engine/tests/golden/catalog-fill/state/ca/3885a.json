@@ -1,0 +1,591 @@
+{
+  "formId": "form-3885a",
+  "fieldCount": 65,
+  "entries": [
+    {
+      "fieldId": "form-3885a.0.header.business_or_activity",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1004",
+          "text": "T-MUIAB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1001",
+          "text": "T-KEJ4U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1002",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.1_activity_type",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1003 RB",
+          "text": "This form is being completed for a passive activity."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.10_total_line_9",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1060",
+          "text": "9,854"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.11_prior_year_amortization",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1061",
+          "text": "7,443"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.12_total_california_amortization",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1062",
+          "text": "9,238"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.13_federal_amortization",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1063",
+          "text": "9,650"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.14a_california_more",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1064",
+          "text": "3,656"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.14b_california_less",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1065",
+          "text": "4,222"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.2_section_179_expense",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1005",
+          "text": "1,641"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_california_basis",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1008",
+          "text": "3,215"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_california_depreciation",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1011",
+          "text": "3,944"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1007",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_description",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1006",
+          "text": "T-1VOGC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_life_or_rate",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1010",
+          "text": "T-1LC53"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_method",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1009",
+          "text": "T-1DPS7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_california_basis",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1014",
+          "text": "1,314"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_california_depreciation",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1017",
+          "text": "4,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1013",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_description",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1012",
+          "text": "T-J37G0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_life_or_rate",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1016",
+          "text": "T-URM49"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_method",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1015",
+          "text": "T-8H48M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_california_basis",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1020",
+          "text": "4,827"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_california_depreciation",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1023",
+          "text": "4,241"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1019",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_description",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1018",
+          "text": "T-KODW6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_life_or_rate",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1022",
+          "text": "T-O37RF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_method",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1021",
+          "text": "T-R503D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_california_basis",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1026",
+          "text": "9,899"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_california_depreciation",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1029",
+          "text": "1,700"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1025",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_description",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1024",
+          "text": "T-WNHZL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_life_or_rate",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1028",
+          "text": "T-19M35"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_method",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1027",
+          "text": "T-LKQI2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.4_total_line_3",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1030",
+          "text": "5,627"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.5_prior_year_depreciation",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1031",
+          "text": "9,742"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.6_total_california_depreciation",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1032",
+          "text": "1,475"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.7_federal_depreciation",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1033",
+          "text": "8,461"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.8a_california_more",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1034",
+          "text": "8,586"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.8b_california_less",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1035",
+          "text": "2,983"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_california_amortization",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1041",
+          "text": "7,055"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_california_basis",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1038",
+          "text": "3,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_code_section",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1039",
+          "text": "T-TYL9Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_date_amortization_begins",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1037",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_description",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1036",
+          "text": "T-1VJRO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_period_or_percentage",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1040",
+          "text": "T-LSBZY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_california_amortization",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1047",
+          "text": "5,360"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_california_basis",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1044",
+          "text": "6,646"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_code_section",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1045",
+          "text": "T-53X63"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_date_amortization_begins",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1043",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_description",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1042",
+          "text": "T-1A6XH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_period_or_percentage",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1046",
+          "text": "T-18DVE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_california_amortization",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1053",
+          "text": "6,968"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_california_basis",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1050",
+          "text": "3,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_code_section",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1051",
+          "text": "T-VIPUB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_date_amortization_begins",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1049",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_description",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1048",
+          "text": "T-1LRDJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_period_or_percentage",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1052",
+          "text": "T-EGIAC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_california_amortization",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1059",
+          "text": "5,415"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_california_basis",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1056",
+          "text": "3,938"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_code_section",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1057",
+          "text": "T-13PFW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_date_amortization_begins",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1055",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_description",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1054",
+          "text": "T-SETFE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_period_or_percentage",
+      "widgets": [
+        {
+          "widgetName": "3885A form - 1058",
+          "text": "T-1RH2T"
+        }
+      ]
+    }
+  ]
+}
