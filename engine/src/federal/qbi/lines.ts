@@ -92,17 +92,25 @@ function selfEmploymentDeduction(
 
 /*
  * One business's QBI, for Form 8995 line 1(c) and Form 8995-A line 2: Schedule C
- * line 31 less the deductible part of SE tax. No facts give SE health insurance or
- * SE retirement contributions; it counts neither. Unrounded.
+ * line 31 less the deductible part of SE tax and the self-employed plan
+ * deduction (Schedule 1 line 16) attributed to it (qbi/resolveInfo.ts). No fact
+ * gives SE health insurance (Schedule 1 line 17 is not modeled). Unrounded;
+ * undefined while it waits or when qbiGap says why it is a gap.
  */
 export function businessQbi(
   form: Record<string, unknown>,
   info: QbiInfo,
   business: QbiBusiness,
 ): number | undefined {
-  if (business.netProfit === undefined) return undefined;
+  if (business.netProfit === undefined || business.qbiGap) return undefined;
   const deduction = selfEmploymentDeduction(form, info, business);
-  return deduction === undefined ? undefined : business.netProfit - deduction;
+  if (deduction === undefined) return undefined;
+  return business.netProfit - deduction - (business.retirementPlanDeduction ?? 0);
+}
+
+/* The first business whose QBI is a gap: its reason, for the lines that add QBI. */
+export function qbiGapOf(businesses: readonly QbiBusiness[] | undefined): string | undefined {
+  return businesses?.find((business) => business.qbiGap !== undefined)?.qbiGap;
 }
 
 // The business's TIN: the EIN, else the owner's SSN (Form 8995 line 1(b), Form 8995-A line 1(d)).

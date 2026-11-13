@@ -19,6 +19,10 @@ export interface QbiBusiness {
   netProfit?: number;
   /* The owner's only business, so it carries all of the owner's Schedule SE line 13. */
   ownersOnlyBusiness: boolean;
+  /* Schedule 1 line 16 (self-employed plan contributions) this business's QBI takes off, cents kept. */
+  retirementPlanDeduction?: number;
+  /* Why the engine does not figure this business's QBI, or undefined. */
+  qbiGap?: string;
   /* Line 4: W-2 wages the business paid; undefined while unanswered. */
   w2WagesPaid?: number;
   /* Line 7: UBIA of qualified property; undefined while unanswered. */
