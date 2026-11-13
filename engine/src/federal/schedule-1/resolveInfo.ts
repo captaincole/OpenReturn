@@ -7,8 +7,13 @@ import {
   isMiscIncomeFactKey,
 } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
-import { sum } from "../../money.js";
-import { num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { sum, sumOrBlank } from "../../money.js";
+import {
+  factsInCategory,
+  num,
+  resolveMustFile,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
@@ -118,16 +123,9 @@ function scheduleCTotal({
 }
 
 /*
- * Line 7: box 1 of each Form 1099-G, cents kept (irs-1040-inst-2025::sec::line-7::b01:
- * "You should receive a Form 1099-G showing in box 1 the total unemployment
- * compensation paid to you in 2025. Report this amount on line 7."). A repayment
- * and contributions to a governmental unemployment program reduce the line; they
- * have no fact, and Cade says they are not supported. Undefined with no 1099-G
- * box 1.
+ * Line 7: box 1 of each Form 1099-G, cents kept (irs-1040-inst-2025::sec::line-7::b01).
+ * A repayment reduces the line; it has no fact, and Cade says it is not supported.
  */
 function unemploymentOn1099G(inputs: ResolverInputs): number | undefined {
-  const box1s = getGovernmentPaymentsFacts(inputs.facts)
-    .map((form) => form.box1)
-    .filter((box1): box1 is number => typeof box1 === "number");
-  return box1s.length > 0 ? sum(...box1s) : undefined;
+  return sumOrBlank(...getGovernmentPaymentsFacts(inputs.facts).map((form) => form.box1));
 }
