@@ -135,13 +135,20 @@ export function register(): void {
       "line.7_personal_exemption_amount": (form) =>
         exemptionCreditAmount(form["line.7_personal_exemption_count"]),
       /*
-       * MANUAL EDIT: 65 or older on December 31, 2025 (ca-540-inst-2025::sec::line-9-senior-exemptions::b01).
-       * MFJ stays blank: the spouse's age is not modeled here. A qualifying surviving
-       * spouse is unmarried in 2025, so only the taxpayer counts.
+       * MANUAL EDIT: 65 or older on December 31, 2025: "If you are married/or an RDP,
+       * each spouse/RDP 65 years of age or older should claim an additional credit"
+       * (ca-540-inst-2025::sec::line-9-senior-exemptions::b01). Only a joint return
+       * counts the spouse. It waits for each date of birth it reads. A qualifying
+       * surviving spouse is unmarried in 2025, so only the taxpayer counts.
        */
       "line.9_senior_exemption_count": (_, info) => {
-        if (info.filingStatus === "married_filing_jointly") return undefined;
-        return info.taxpayerBornBeforeJan2_1961 === true ? 1 : undefined;
+        const joint = info.filingStatus === "married_filing_jointly";
+        if (info.taxpayerBornBeforeJan2_1961 === undefined) return undefined;
+        if (joint && info.spouseBornBeforeJan2_1961 === undefined) return undefined;
+        const count =
+          (info.taxpayerBornBeforeJan2_1961 === true ? 1 : 0) +
+          (joint && info.spouseBornBeforeJan2_1961 === true ? 1 : 0);
+        return count > 0 ? count : undefined;
       },
       /*
        * MANUAL EDIT: "If you (or your spouse/RDP) are visually impaired, enter 1; if
