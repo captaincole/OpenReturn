@@ -24,7 +24,7 @@ import type { Schedule1FilingInfo } from "./filingInfo.js";
 import { needsPub590AWorksheets } from "./pub590a.js";
 
 /* W-2 box 12 code H: elective deferrals to a section 501(c)(18)(D) plan (line 24f). */
-const SECTION_501C18D_CODE = "H";
+export const SECTION_501C18D_CODE = "H";
 /* irs-1040-inst-2025::sec::your-ira-spouse-s-ira::b01: age 50 or older at the end of 2025. */
 const BORN_BEFORE_FOR_AGE_50 = 1976;
 
