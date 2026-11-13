@@ -88,9 +88,28 @@ const SCHEDULE_CA: Partial<ExpectedResults> = {
   },
 };
 
+/* FTB 3532. The key's relationship answer is "Stepson"; the box (2a) is the same as for "Son". */
+const FORM_3532: Partial<ExpectedResults> = {
+  engineFields: {
+    "form-3532.0.line.4_gross_income": 0, // QPGrossIncome
+    "form-3532.0.line.5_days_lived_with_you": 365, // TotalLivingWithDays
+  },
+  renderedChecked: [
+    "form-3532.0.line.1_marital_status", // MaritalStatus/NotMarriedRDPDuringYear X (box 1a; the golden pins the box)
+    "form-3532.0.line.2_qualifying_person_relationship", // SonDaughterStepsonStepdaughter X (box 2a)
+  ],
+  renderedText: {
+    "form-3532.0.line.3_first_name": "Only", // QualifyingPersonInformation/Name/FirstName
+    "form-3532.0.line.3_last_name": "Johnson", // Name/LastName
+    "form-3532.0.line.3_ssn": "900456789", // SSN
+    "form-3532.0.line.3_date_of_birth": "12/12/2024", // BirthDate 2024-12-12
+  },
+};
+
 const EXPECTED: Record<string, Partial<ExpectedResults>> = {
   "form-540": FORM_540,
   "schedule-ca": SCHEDULE_CA,
+  "form-3532": FORM_3532,
 };
 
 export function tcbCa002Expected(formId: string): ExpectedResults {
