@@ -596,6 +596,12 @@ const scheduleAAnswers: TaxFactRow[] = [
   ),
   fact(
     "investment_income",
+    INVESTMENT_INTEREST_KEYS.caAmtDisallowedCarryover,
+    60,
+    "Not in the case: Schedule P (540) line 7 takes last year's AMT carryover equal to the regular one.",
+  ),
+  fact(
+    "investment_income",
     INVESTMENT_INTEREST_KEYS.caElectedNetCapitalGain,
     20,
     "The key's FTB 3526 line 4e: the net capital gain elected for California.",
