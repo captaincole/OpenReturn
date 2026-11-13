@@ -49,6 +49,10 @@ stock option exercise (Schedule P) and the early-distribution tax on a
 1099-R (FTB 3805P). A fourth, federal-only, has a real estate
 professional's rental and a passive royalty (Schedule E, Form 8582) and
 nets a rental's QBI loss against a business (Schedule C (Form 8995-A)).
+A fifth, checked on the California return only, is a couple 65 or
+older and blind with a grandchild, Social Security and student loan
+interest (Form 1098-E), who get the California earned income and young
+child tax credits (FTB 3514).
 Head of household has two federal-only TaxCalcBench scenarios: one with
 mortgage interest on a Form 1098, investment interest, and the
 alternative minimum tax on an incentive stock option exercise (Form
@@ -74,7 +78,7 @@ Roth IRA distribution (Form 8606 Part III), alimony and other Schedule 1
 items, and itemizes.
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
-1099-SA, 1098, SSA-1099, W-2G, 1099-K, 1099-NEC, 1095-A, a W-2 you issued to a household employee
+1099-SA, 1098, 1098-E, SSA-1099, W-2G, 1099-K, 1099-NEC, 1095-A, a W-2 you issued to a household employee
 (Schedule H, without FUTA tax), and invoices for home energy improvements
 (Form 5695 Part II). The last two have one unverified test scenario.
 A business you run yourself is answers, not a document: receipts and
