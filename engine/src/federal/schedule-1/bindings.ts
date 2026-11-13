@@ -8,6 +8,7 @@ import { defineForm } from "../../defineForm.js";
 import { roundDollars, sum } from "../../money.js";
 import { answerBindings } from "./answerBindings.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
+import { line21 } from "./studentLoanInterest.js";
 import type { Schedule1 } from "./types.js";
 
 export function register(): void {
@@ -88,6 +89,8 @@ export function register(): void {
       "1.line.13": (form) => sum(form["form-8889.0.line.13_hsa_deduction"]),
       // MANUAL EDIT: line 18 = 1099-INT box 2 summed (irs-1040-inst-2025::sec::line-18::b01).
       "1.line.18": (_, info) => roundDollars(info.earlyWithdrawalPenalty),
+      // MANUAL EDIT: line 21, the Student Loan Interest Deduction Worksheet (studentLoanInterest.ts).
+      "1.line.21": line21,
       "1.line.25": (form) =>
         sum(
           form["1.line.24a"],
@@ -156,7 +159,13 @@ export function register(): void {
       "1.line.14_storage_fees_only": "No Armed Forces moving-expense (Form 3903) scenario yet.",
       "1.line.14": "No Armed Forces moving-expense (Form 3903) scenario yet.",
       "1.line.17": "No self-employed health insurance scenario yet.",
-      "1.line.21": "No Form 1098-E student loan interest ingestion or worksheet yet.",
+      "1.line.19a": "No alimony-paid fact ingestion or scenario yet.",
+      "1.line.19b": "No alimony-paid scenario yet; recipient SSN not ingested.",
+      "1.line.19c": "No alimony-paid scenario yet; divorce agreement date not ingested.",
+      "1.line.20_mfs_lived_apart":
+        "No MFS/IRA-deduction scenario yet; lived-apart status not captured.",
+      "1.line.20":
+        "No traditional IRA contribution facts or IRA Deduction Worksheet implementation yet.",
       "1.line.23": "Form 8853 (Archer MSA) not ingested; no scenario.",
       "1.line.24b": "No personal-property rental scenario (line 8l) yet.",
       "1.line.24c": "No Olympic/Paralympic medal or USOC prize scenario (line 8m) yet.",
