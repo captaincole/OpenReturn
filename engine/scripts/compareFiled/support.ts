@@ -7,6 +7,7 @@
 import {
   AMT_KEYS,
   CAPITAL_LOSS_CARRYOVER_KEYS,
+  CA_EITC_KEYS,
   CA_MISC_DEDUCTION_KEYS,
   DEPENDENT_CARE_KEYS,
   EIC_KEYS,
@@ -99,6 +100,7 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   GAMBLING_KEYS.winningsNotOnW2G,
   GAMBLING_KEYS.losses,
   ...Object.values(EIC_KEYS),
+  ...Object.values(CA_EITC_KEYS),
   ...Object.values(ELDERLY_OR_DISABLED_KEYS),
   ...Object.values(DEPENDENT_CARE_KEYS),
   ...Object.values(OTHER_INCOME_KEYS),

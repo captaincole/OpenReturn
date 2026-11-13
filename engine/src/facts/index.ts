@@ -2,6 +2,7 @@
 
 export * from "./kinds/alternativeMinimumTax.js";
 export * from "./kinds/business.js";
+export * from "./kinds/caEarnedIncomeCredit.js";
 export * from "./kinds/caMiscellaneousDeductions.js";
 export * from "./kinds/capitalLossCarryover.js";
 export * from "./kinds/casualty.js";
