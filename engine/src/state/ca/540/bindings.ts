@@ -185,14 +185,23 @@ export function register(): void {
         usesRateSchedule(form["line.19_taxable_income"]) === false,
       "line.31_tax_from_rate_schedule": (form) => usesRateSchedule(form["line.19_taxable_income"]),
       // MANUAL EDIT: Schedule CA line 27 col B / C; 0 when Schedule CA is not filed.
-      "line.14_ca_adjustments_subtractions": (form) => {
-        const value = form["schedule-ca.3.line.c27_subtractions"];
-        return typeof value === "number" ? value : 0;
-      },
-      "line.16_ca_adjustments_additions": (form) => {
-        const value = form["schedule-ca.3.line.c27_additions"];
-        return typeof value === "number" ? value : 0;
-      },
+      /*
+       * MANUAL EDIT: line 14 takes Schedule CA line 27 column B, and line 16 column C.
+       * A negative column moves to the other line as a positive amount
+       * (ca-540-sched-ca-inst-2025::sec::line-11-through-line-25::b08;
+       * ca-540-inst-2025::sec::line-14-california-adjustments-subtractions-from-schedule-ca-540-part-i-line-27-column-b::b01;
+       * ca-540-inst-2025::sec::line-16-california-adjustments-additions-from-schedule-ca-540-part-i-line-27-column-c::b01).
+       */
+      "line.14_ca_adjustments_subtractions": (form) =>
+        sum(
+          atLeast(0, form["schedule-ca.3.line.c27_subtractions"]),
+          negativeColumnAsPositive(form["schedule-ca.3.line.c27_additions"]),
+        ),
+      "line.16_ca_adjustments_additions": (form) =>
+        sum(
+          atLeast(0, form["schedule-ca.3.line.c27_additions"]),
+          negativeColumnAsPositive(form["schedule-ca.3.line.c27_subtractions"]),
+        ),
       "line.11_total_exemption_amount": (form) =>
         sum(
           form["line.7_personal_exemption_amount"],
@@ -674,6 +683,11 @@ export function register(): void {
 }
 
 // MANUAL EDIT: FTB sends line 19 over $100,000 to the Tax Rate Schedules.
+/* A negative Schedule CA line 27 column, as the positive amount the other Form 540 line takes; else 0. */
+function negativeColumnAsPositive(column: unknown): number {
+  return typeof column === "number" && column < 0 ? -column : 0;
+}
+
 function usesRateSchedule(taxableIncome: number | undefined): boolean | undefined {
   return typeof taxableIncome === "number" ? taxableIncome > 100000 : undefined;
 }
