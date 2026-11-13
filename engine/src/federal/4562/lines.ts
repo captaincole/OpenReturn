@@ -12,12 +12,7 @@ import type {
   RecoveryClass,
 } from "../../facts/index.js";
 import { roundDollars, sum, sumOrBlank } from "../../money.js";
-import {
-  assetGap,
-  federalAssetFigures,
-  firstYearRate,
-  type FederalAssetFigures,
-} from "./assets.js";
+import { assetGap, federalAssetFigures, type FederalAssetFigures } from "./assets.js";
 
 /* irs-4562-inst-2025::sec::line-11::b01: the business income limitation needs every active trade's taxable income. */
 export const SECTION_179_GAP =
@@ -53,8 +48,10 @@ export interface Form4562Figures {
   line14: number | undefined;
   line17: number | undefined;
   line19: Line19Row[];
-  /* Line 22, or undefined while an answer is missing or the activity has a gap. */
+  /* Line 22: blank when nothing adds to it, and undefined while an answer is missing or the activity has a gap. */
   line22: number | undefined;
+  /* An asset waits for the acquisition answer (line 14): line 22 is not known yet. */
+  waits: boolean;
 }
 
 const MONTHS = 12;
@@ -132,15 +129,8 @@ function line19Rows(assets: FederalAssetFigures[]): Line19Row[] {
         row,
         assets: members,
         basis: waits ? undefined : roundDollars(sum(...members.map((member) => member.macrsBasis))),
-        deduction: waits
-          ? undefined
-          : roundDollars(
-              sum(
-                ...members.map(
-                  (member) => roundDollars(member.macrsBasis ?? 0) * firstYearRate(member.asset),
-                ),
-              ),
-            ),
+        // Each asset's deduction is already rounded (assets.ts firstYearDepreciation).
+        deduction: waits ? undefined : sum(...members.map((member) => member.depreciation)),
       };
     });
 }
@@ -161,7 +151,7 @@ export function form4562Figures(depreciation: ActivityDepreciation): Form4562Fig
     gap !== undefined || waits
       ? undefined
       : sumOrBlank(line14, line17, ...line19.map((row) => row.deduction));
-  return { gap, assets, line14, line17, line19, line22 };
+  return { gap, assets, line14, line17, line19, line22, waits };
 }
 
 /* Line 42 column (f), cents kept: the amount over the period, times the months of the period in 2025. */
@@ -191,6 +181,17 @@ export function line44(depreciation: ActivityDepreciation | undefined): number |
   const prior = depreciation?.priorYearAmortization;
   if (costs.length === 0 && prior === undefined) return undefined;
   return roundDollars(sum(...costs.map((cost) => amortizationExact(cost)), prior));
+}
+
+/*
+ * Whether the activity's depreciation is not known yet: an asset waits for an
+ * answer, or Form 4562 has a gap. A form that reads it waits (or carries the
+ * gap) only then; a blank deduction (nothing to depreciate) is 0 to a total.
+ */
+export function depreciationPending(depreciation: ActivityDepreciation | undefined): boolean {
+  if (!depreciation || !mustFile4562(depreciation)) return false;
+  const figures = form4562Figures(depreciation);
+  return figures.waits || figures.gap !== undefined;
 }
 
 /* The depreciation deduction of an activity: line 22 when Form 4562 is filed, else the older assets' amount. */

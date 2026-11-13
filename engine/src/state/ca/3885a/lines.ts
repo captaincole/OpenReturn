@@ -12,11 +12,12 @@ import type {
   AmortizedCost,
   DepreciableAsset,
 } from "../../../facts/index.js";
-import { assetGap, businessBasis, firstYearRate } from "../../../federal/4562/assets.js";
+import { businessBasis, firstYearDepreciation } from "../../../federal/4562/assets.js";
 import {
   activityDepreciationDeduction,
   amortizationExact,
   amortizationThisYear,
+  depreciationPending,
   form4562Figures,
   line44,
 } from "../../../federal/4562/lines.js";
@@ -64,9 +65,11 @@ export interface Form3885AFigures {
 
 /* ::line-3::b01: the California basis is cost less the California section 179 expense. */
 function californiaAssetRow(asset: DepreciableAsset): CaliforniaAssetRow {
-  const basis =
-    (asset.californiaBasis ?? businessBasis(asset)) - (asset.californiaSection179Elected ?? 0);
-  return { asset, basis, depreciation: roundDollars(basis * firstYearRate(asset)) };
+  const basis = roundDollars(
+    (asset.californiaBasis ?? businessBasis(asset)) - (asset.californiaSection179Elected ?? 0),
+  );
+  // The same rounding rule as Form 4562 column (g), on the California basis.
+  return { asset, basis, depreciation: firstYearDepreciation(asset, basis) };
 }
 
 /*
@@ -84,8 +87,6 @@ function gapOf(depreciation: ActivityDepreciation): string | undefined {
   const federal = form4562Figures(depreciation).gap;
   if (federal) return federal;
   const assets = depreciation.assets ?? [];
-  const reason = assets.map(assetGap).find((each) => each !== undefined);
-  if (reason) return reason;
   return assets.some((asset) => (asset.californiaSection179Elected ?? 0) > 0)
     ? CA_SECTION_179_GAP
     : undefined;
@@ -110,7 +111,11 @@ export function form3885AFigures(depreciation: ActivityDepreciation): Form3885AF
     depreciation.californiaPriorYearDepreciation ?? depreciation.priorYearMacrs,
   );
   const line6 = gap ? undefined : sumOrBlank(line4, line5);
-  const line7 = activityDepreciationDeduction(depreciation);
+  // Line 7 waits with Form 4562; with nothing on Form 4562 line 22 the federal amount is 0.
+  const federalWaits = depreciationPending(depreciation);
+  const line7 = federalWaits
+    ? undefined
+    : (activityDepreciationDeduction(depreciation) ?? (line6 === undefined ? undefined : 0));
   const depreciationDifference = difference(line6, line7);
   const line9 = (depreciation.amortizedCosts ?? []).map(californiaAmortizationRow);
   // Line 10 adds column (f) with its cents and rounds once, as Form 4562 line 44 does.
@@ -122,7 +127,8 @@ export function form3885AFigures(depreciation: ActivityDepreciation): Form3885AF
     depreciation.californiaPriorYearAmortization ?? depreciation.priorYearAmortization,
   );
   const line12 = sumOrBlank(line10, line11);
-  const line13 = line44(depreciation);
+  // With no federal amortization, line 13 is 0 against California's.
+  const line13 = line44(depreciation) ?? (line12 === undefined ? undefined : 0);
   const amortizationDifference = difference(line12, line13);
   return {
     gap,
@@ -152,7 +158,12 @@ export function form3885AFigures(depreciation: ActivityDepreciation): Form3885AF
 export function californiaAdjustment(depreciation: ActivityDepreciation | undefined) {
   if (!depreciation) return { subtraction: 0, addition: 0 };
   const figures = form3885AFigures(depreciation);
-  if (figures.gap || (figures.line6 === undefined && figures.line4 !== undefined)) return undefined;
+  if (figures.gap) return undefined;
+  // A line that has a California amount but waits for the federal one waits too.
+  const waits =
+    (figures.line6 !== undefined && figures.line7 === undefined) ||
+    (figures.line12 !== undefined && figures.line13 === undefined);
+  if (waits) return undefined;
   return {
     subtraction: sum(figures.line8a, figures.line14a),
     addition: sum(figures.line8b, figures.line14b),
