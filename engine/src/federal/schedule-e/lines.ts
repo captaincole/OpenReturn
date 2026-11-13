@@ -6,6 +6,8 @@
 import type { BindingFn, FormAccessor } from "../../defineForm.js";
 import type { RentalExpenses, RentalFactValue } from "../../facts/index.js";
 import { roundDollars, sum, sumOrBlank } from "../../money.js";
+import { unsupported } from "../../types.js";
+import { activityDepreciationDeduction, form4562Figures, line44 } from "../4562/lines.js";
 import type { PropertyColumn, ScheduleEFilingInfo } from "./filingInfo.js";
 import type { ScheduleE } from "./types.js";
 
@@ -76,20 +78,43 @@ export function personalUseUnknown(property: RentalFactValue): boolean {
 const rents = (property: RentalFactValue) =>
   rentsReported(property) ? roundDollars(property.rentsReceived) : undefined;
 
-const expense = (property: RentalFactValue, key: ExpenseKey) =>
-  expensesAsStated(property) ? roundDollars(property.expenses?.[key]) : undefined;
+/*
+ * Line 18 (irs-1040se-inst-2025::sec::line-18): Form 4562 line 22 when the
+ * property has depreciation answers (the depreciation of property placed in
+ * service in 2025 needs the form), else the stated amount.
+ */
+const expense = (property: RentalFactValue, key: ExpenseKey) => {
+  if (!expensesAsStated(property)) return undefined;
+  if (key === "depreciationOrDepletion" && property.depreciation)
+    return activityDepreciationDeduction(property.depreciation);
+  return roundDollars(property.expenses?.[key]);
+};
 
-// Line 20 adds the rounded lines 5–19.
+/* Why the property's line 18 (and the lines after it) is a case the engine does not handle. */
+export function rentalDepreciationGap(property: RentalFactValue): string | undefined {
+  if (!property.depreciation) return undefined;
+  if (property.expenses?.depreciationOrDepletion !== undefined)
+    return "The property states both a line 18 amount and Form 4562 answers; the engine cannot tell whether one includes the other.";
+  if ((line44(property.depreciation) ?? 0) > 0)
+    return "Amortization (Form 4562 line 44) of a rental goes on line 19 with the other expenses; the engine does not add it there.";
+  return form4562Figures(property.depreciation).gap;
+}
+
+// Line 20 adds the rounded lines 5–19; it waits while line 18 waits for Form 4562.
 function totalExpenses(property: RentalFactValue) {
   if (!expensesAsStated(property)) return undefined;
+  if (property.depreciation && expense(property, "depreciationOrDepletion") === undefined)
+    return undefined;
   return sumOrBlank(...EXPENSE_LINES.map(([, key]) => expense(property, key)));
 }
 
 /* Line 3 and 4 less line 20, before the at-risk rules; undefined when blank or blocked. */
 export function netIncomeOrLoss(property: RentalFactValue): number | undefined {
   if (!rentsReported(property) || !expensesAsStated(property)) return undefined;
+  if (rentalDepreciationGap(property)) return undefined;
   const income = sumOrBlank(rents(property), roundDollars(property.royaltiesReceived));
   const expenses = totalExpenses(property);
+  if (property.depreciation && expenses === undefined) return undefined;
   if (income === undefined && expenses === undefined) return undefined;
   return sum(income) - sum(expenses);
 }
@@ -128,16 +153,26 @@ export function partIColumnBindings(column: PropertyColumn): PartIBindings {
       const property = info.rentalProperties?.find((entry) => entry.column === column)?.value;
       return property ? line(property) : undefined;
     };
+  // MANUAL EDIT: a Form 4562 case the engine does not handle makes lines 18, 20 and 21 unsupported.
+  const afterDepreciation =
+    (line: (property: RentalFactValue) => number | undefined): Fn =>
+    (form, info) => {
+      const property = info.rentalProperties?.find((entry) => entry.column === column)?.value;
+      const gap = property ? rentalDepreciationGap(property) : undefined;
+      return gap ? unsupported(gap) : amount(line)(form, info);
+    };
   const out: Record<string, Fn> = {
     [`0.line.3_rents_received_${column}`]: amount(rents),
     [`0.line.4_royalties_received_${column}`]: amount((property) =>
       roundDollars(property.royaltiesReceived),
     ),
-    [`0.line.20_total_expenses_${column}`]: amount(totalExpenses),
-    [`0.line.21_income_or_loss_${column}`]: amount(incomeOrLoss),
+    [`0.line.20_total_expenses_${column}`]: afterDepreciation(totalExpenses),
+    [`0.line.21_income_or_loss_${column}`]: afterDepreciation(incomeOrLoss),
   };
   for (const [line, key] of EXPENSE_LINES) {
-    out[`0.line.${line}_${column}`] = amount((property) => expense(property, key));
+    const read = (property: RentalFactValue) => expense(property, key);
+    out[`0.line.${line}_${column}`] =
+      key === "depreciationOrDepletion" ? afterDepreciation(read) : amount(read);
   }
   return out as PartIBindings;
 }

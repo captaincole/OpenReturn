@@ -1,12 +1,15 @@
 import {
   businessesOnReturn,
+  type BusinessFactValue,
   type HomeOfficeSimplified,
   unlinkedNonemployeeCompensationKeys,
   unlinkedPaymentTransactionsKeys,
 } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { homeOfficeActualOpen } from "../8829/lines.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
+import { tentativeProfit } from "./lines.js";
 
 const MUST_FILE_KEY = "decisions.scope.must_file_schedule_c";
 
@@ -53,13 +56,16 @@ export function resolveScheduleCInfo(inputs: ResolverInputs): ScheduleCFilingInf
         Object.fromEntries([
           ...malformedKeys.map((key) => [key, undefined]),
           ...unlinkedKeys.map((key) => [key, undefined]),
-          // MANUAL EDIT: line 5 waits for "sells goods", line 31 for line G, line 30 for the home office answers.
+          // MANUAL EDIT: line 5 waits for "sells goods", line 31 for line G and a loss for line 32, line 30 for the home office.
           ...businesses
             .filter(
               (business) =>
                 business.value.sellsGoods === undefined ||
                 business.value.materiallyParticipated === undefined ||
-                homeOfficeOpen(business.value.homeOffice),
+                homeOfficeOpen(business.value.homeOffice) ||
+                (business.value.homeOfficeActual !== undefined &&
+                  homeOfficeActualOpen(business.value.homeOfficeActual)) ||
+                atRiskOpen(business.value),
             )
             .map((business) => [business.key, undefined]),
         ]),
@@ -81,6 +87,12 @@ function homeOfficeOpen(office: HomeOfficeSimplified | undefined): boolean {
     office.sameAreaAllYear === undefined ||
     (office.sameAreaAllYear === false && office.averageMonthlySquareFeet === undefined)
   );
+}
+
+/* A loss (line 29 below 0) needs line 32: whether all investment is at risk. */
+function atRiskOpen(business: BusinessFactValue): boolean {
+  const line29 = tentativeProfit(business);
+  return line29 !== undefined && line29 < 0 && business.allInvestmentAtRisk === undefined;
 }
 
 /* Schedule SE and Form 8995-A wait while Schedule C's must-file answer is open. */
