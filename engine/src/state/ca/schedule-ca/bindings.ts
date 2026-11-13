@@ -107,7 +107,7 @@ function adjustmentsTotalFederal(form: FormAccessor<ScheduleCa>) {
   const federal = numberOrBlank(form["schedule-1.1.line.26"]);
   if (sum(total) === sum(federal)) return total;
   return unsupported(
-    "Schedule 1 line 26 holds an adjustment that Section C does not copy yet (only lines 11, 13, 15 and 18 are copied).",
+    "Schedule 1 line 26 holds an adjustment that Section C does not copy yet (only lines 11, 13, 15, 18 and 21 are copied).",
   );
 }
 
@@ -739,10 +739,6 @@ export function register(): void {
         "CA subtraction adjustment to IRA deduction (line 20 col B) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
       "2.line.c20_additions":
         "CA addition adjustment to IRA deduction (line 20 col C) — requires knowledge of CA vs. federal IRA deductibility differences and no fact ingestion path exists yet.",
-      "2.line.c21_federal":
-        "Student loan interest deduction (federal Schedule 1 line 21) — no student-loan fact ingestion path exists yet; requires a student-loan interest scenario.",
-      "2.line.c21_additions":
-        "CA addition for student loan interest (line 21 col C) — CA does not conform to federal student loan interest deduction for certain years; no student-loan fact ingestion path exists yet.",
       "2.line.c23_federal":
         "Archer MSA deduction (federal Schedule 1 line 23, from Form 8853) — no Archer MSA fact ingestion path exists; uncommon scenario not yet modeled.",
       "3.line.c24a_federal":
