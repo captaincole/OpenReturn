@@ -1,18 +1,9 @@
-import {
-  CA_EITC_KEYS,
-  EIC_KEYS,
-  SPOUSE_KEYS,
-  businessesOnReturn,
-  isDividendFactKey,
-  isInterestFactKey,
-} from "../../../facts/index.js";
-import { agiFloor } from "../../../federal/schedule-eic/possible.js";
+import { CA_EITC_KEYS, EIC_KEYS, SPOUSE_KEYS, businessesOnReturn } from "../../../facts/index.js";
+import { agiFloor, investmentIncomeFloor } from "../../../federal/schedule-eic/possible.js";
 import { filingStatusOf } from "../../../filingInfoResolvers.js";
-import { roundDollars, sum } from "../../../money.js";
 import {
   missingInputs,
   resolveMustFile,
-  sumInvestmentBox,
   sumW2Box,
   text,
   type ResolverInputs,
@@ -57,31 +48,18 @@ function caEitcAnswers(inputs: ResolverInputs): CaEitcAnswers {
   };
 }
 
-/* Form 1040 lines 2a, 2b and 3b from the documents (Worksheet 1 lines 1 and 3), each rounded. */
-function investmentIncomeFromDocuments(inputs: ResolverInputs): number {
-  return sum(
-    roundDollars(sumInvestmentBox(inputs, "box8", isInterestFactKey)),
-    roundDollars(
-      sum(
-        sumInvestmentBox(inputs, "box1", isInterestFactKey),
-        sumInvestmentBox(inputs, "box3", isInterestFactKey),
-      ),
-    ),
-    roundDollars(sumInvestmentBox(inputs, "box1a", isDividendFactKey)),
-  );
-}
-
 /*
  * Step 1, question a, and Step 2 from facts, which both credits need (the
  * YCTC only with the EITC allowed, or "otherwise allowed" at zero earned
  * income, Step 8): federal AGI at least the federal EIC's lower bound
- * (agiFloor) under $32,901, and the documents' interest and dividends at most
- * $4,814. A bound that cannot be figured errs toward filing.
+ * (agiFloor) under $32,901, and Form 1040 lines 2a, 2b and 3b at their least
+ * (investmentIncomeFloor, the federal Step 2 bound) at most $4,814. A bound
+ * that cannot be figured errs toward filing.
  */
 function incomeTestsPass(inputs: ResolverInputs, joint: boolean): boolean {
   const agi = agiFloor(inputs, joint);
   if (agi !== undefined && agi >= CA_EITC_INCOME_LIMIT) return false;
-  return investmentIncomeFromDocuments(inputs) <= CA_EITC_INVESTMENT_INCOME_LIMIT;
+  return investmentIncomeFloor(inputs) <= CA_EITC_INVESTMENT_INCOME_LIMIT;
 }
 
 /*
@@ -114,8 +92,8 @@ function yctcWithoutEarnedIncomeMayApply(inputs: ResolverInputs, youngChild: boo
 /*
  * A filing status or an answer that rules the credit out whatever the lines
  * are: Step 1 d (married filing separately with no qualifying child, or a head
- * of household who lived with the spouse in the last 6 months of 2025 and has
- * no qualifying child), Step 1 f, Step 4 e and f, and the questionnaire's f.
+ * of household with no qualifying child who lived apart from the spouse for
+ * the last 6 months of 2025: the answer that shows the filer is married), Step 1 f, Step 4 e and f, and the questionnaire's f.
  */
 function ruledOut(inputs: ResolverInputs, answers: CaEitcAnswers, children: number): boolean {
   const status = filingStatusOf(inputs);

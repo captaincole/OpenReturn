@@ -39,7 +39,9 @@ export const isCaliforniaW2 = (w2: W2FactValue) => w2.box15?.trim().toUpperCase(
  * California wages from your federal Form(s) W-2 ... box 16", plus a
  * disability payment on a 1099-R with code 3 before the minimum retirement
  * age. Undefined while a disability pension's age answer is missing. Medicaid
- * waiver and IHSS payments have no fact kind, and clergy wages are not modeled.
+ * waiver payments on a W-2 (box 12 code II, medicaidWaiverPayments) are a gap
+ * in partIV; IHSS payments with no W-2 have no fact kind, and clergy wages are
+ * not modeled.
  */
 export function caEitcWages(inputs: ResolverInputs): number | undefined {
   const pensions = disabilityPensions(inputs);

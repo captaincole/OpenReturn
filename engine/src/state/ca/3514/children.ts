@@ -23,7 +23,12 @@ export function childSsnOrItin(child: DependentFact): string | undefined {
   return digits?.length === 9 && digits.slice(3, 5) !== ATIN_GROUP ? tin : undefined;
 }
 
-/* Step 8: "younger than six years old as of the last day of the taxable year". */
+/*
+ * Step 8: "younger than six years old as of the last day of the taxable year"
+ * (ca-3514-inst-2025::sec::step-8-qualifications-for-young-child-tax::b01).
+ * Unlike Step 4, question b, the instructions give no birth date for the age,
+ * so the age is the birth-year difference: a child born January 1, 2020 is 5.
+ */
 export function isYoungChild(child: DependentFact): boolean {
   const age = ageAtYearEnd(child.dependent.dob, TAX_YEAR);
   return age !== undefined && age < 6;
