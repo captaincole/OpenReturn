@@ -203,6 +203,35 @@ export function activityDepreciationDeduction(
   return roundDollars(depreciation.priorYearMacrs);
 }
 
+export const BOTH_DEPRECIATION_ANSWERS =
+  "The activity states both a depreciation amount and Form 4562 answers; the engine cannot tell whether one includes the other.";
+
+/*
+ * An activity's depreciation line (Schedule C line 13, Schedule E line 18): the
+ * stated amount when the activity has no depreciation answers, else Form 4562
+ * line 22 (the older assets' amount when no Form 4562 is required). Undefined
+ * while Form 4562 waits for an answer, or when both are given
+ * (activityDepreciationGap says why).
+ */
+export function activityDepreciationLine(
+  stated: number | undefined,
+  depreciation: ActivityDepreciation | undefined,
+): number | undefined {
+  if (!depreciation) return roundDollars(stated);
+  if (stated !== undefined || depreciationPending(depreciation)) return undefined;
+  return activityDepreciationDeduction(depreciation);
+}
+
+/* Why an activity's depreciation line is a case the engine does not handle, or undefined. */
+export function activityDepreciationGap(
+  stated: number | undefined,
+  depreciation: ActivityDepreciation | undefined,
+): string | undefined {
+  if (!depreciation) return undefined;
+  if (stated !== undefined) return BOTH_DEPRECIATION_ANSWERS;
+  return form4562Figures(depreciation).gap;
+}
+
 /* Assets still waiting for the acquisition-date answer (the line 14 rate). */
 export function assetsAwaitingAnswers(depreciation: ActivityDepreciation | undefined) {
   return (depreciation?.assets ?? []).filter(

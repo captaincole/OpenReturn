@@ -3,7 +3,14 @@
 import { describe, expect, it } from "vitest";
 import type { DepreciableAsset } from "../../../../src/facts/index.js";
 import { federalAssetFigures, firstYearRate } from "../../../../src/federal/4562/assets.js";
-import { form4562Figures, line44, mustFile4562 } from "../../../../src/federal/4562/lines.js";
+import {
+  activityDepreciationGap,
+  activityDepreciationLine,
+  BOTH_DEPRECIATION_ANSWERS,
+  form4562Figures,
+  line44,
+  mustFile4562,
+} from "../../../../src/federal/4562/lines.js";
 
 const asset = (overrides: Partial<DepreciableAsset>): DepreciableAsset => ({
   description: "Equipment",
@@ -103,5 +110,31 @@ describe("Form 4562 totals", () => {
   });
   it("older depreciation or amortization alone files no Form 4562", () => {
     expect(mustFile4562({ priorYearMacrs: 1000, priorYearAmortization: 100 })).toBe(false);
+  });
+});
+
+describe("an activity's depreciation line (Schedule C line 13, Schedule E line 18)", () => {
+  const answers = {
+    assets: [asset({ placedInService: "2025-03-01", acquiredAfterJanuary19: true })],
+  };
+
+  it("is the stated amount when there are no depreciation answers", () => {
+    expect(activityDepreciationLine(1234.4, undefined)).toBe(1234);
+    expect(activityDepreciationGap(1234.4, undefined)).toBeUndefined();
+  });
+
+  it("is Form 4562 line 22 with answers and no stated amount", () => {
+    expect(activityDepreciationLine(undefined, answers)).toBe(form4562Figures(answers).line22);
+  });
+
+  it("is a gap when both are given", () => {
+    expect(activityDepreciationLine(500, answers)).toBeUndefined();
+    expect(activityDepreciationGap(500, answers)).toBe(BOTH_DEPRECIATION_ANSWERS);
+  });
+
+  it("waits while Form 4562 waits for an answer", () => {
+    const waiting = { assets: [asset({ placedInService: "2025-03-01" })] };
+    expect(activityDepreciationLine(undefined, waiting)).toBeUndefined();
+    expect(activityDepreciationGap(undefined, waiting)).toBeUndefined();
   });
 });
