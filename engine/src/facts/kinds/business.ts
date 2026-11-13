@@ -5,6 +5,8 @@
  * written by hand.
  */
 
+import { isActivityDepreciation, type ActivityDepreciation } from "./depreciation.js";
+
 type FactRow = { key: string; value: unknown; category: string };
 
 /* Schedule C lines 8–27a, one amount each. */
@@ -58,7 +60,7 @@ export interface BusinessVehicle {
   evidenceIsWritten?: boolean;
 }
 
-/* Line 30 by the simplified method (the Simplified Method Worksheet). Form 8829 is not modeled. */
+/* Line 30 by the simplified method (the Simplified Method Worksheet). */
 export interface HomeOfficeSimplified {
   /* Line 30 (a): the total area of the home, in square feet. */
   homeSquareFeet: number;
@@ -70,6 +72,35 @@ export interface HomeOfficeSimplified {
   averageMonthlySquareFeet?: number;
   /* True when all of the business's gross income is from this business use of the home (worksheet line 1). */
   allGrossIncomeFromHome?: boolean;
+}
+
+/* Form 8829 lines 18–22, one amount each, in column (a) (direct) or (b) (indirect). */
+export interface HomeExpenses {
+  insurance?: number; // 18
+  rent?: number; // 19
+  repairsAndMaintenance?: number; // 20
+  utilities?: number; // 21
+  other?: number; // 22
+}
+
+/* Line 30 by actual expenses: Form 8829, for one home. */
+export interface HomeOfficeActual {
+  /* Form 8829 line 1: the area used regularly and exclusively for the business. */
+  businessSquareFeet: number;
+  /* Line 2: the total area of the home. */
+  homeSquareFeet: number;
+  /* Line 8: all of the business's gross income is from this business use of the home. */
+  allGrossIncomeFromHome?: boolean;
+  /* The taxpayer owns the home. Mortgage interest, real estate taxes and depreciation (lines 10, 11, 16, 17, Part III) are not modeled. */
+  ownsHome?: boolean;
+  /* Column (a): expenses for the business part of the home only. */
+  direct?: HomeExpenses;
+  /* Column (b): expenses for the whole home. */
+  indirect?: HomeExpenses;
+  /* Line 25: operating expenses carried over (2024 Form 8829 line 43). */
+  operatingExpenseCarryover?: number;
+  /* Line 31: excess casualty losses and depreciation carried over (2024 Form 8829 line 44). */
+  casualtyAndDepreciationCarryover?: number;
 }
 
 /* Part V: one other expense, with the taxpayer's description. */
@@ -113,6 +144,12 @@ export interface BusinessFactValue {
   vehicles?: BusinessVehicle[];
   /* Line 30, simplified method. */
   homeOffice?: HomeOfficeSimplified;
+  /* Line 30 by actual expenses (Form 8829). A business has homeOffice or homeOfficeActual, not both. */
+  homeOfficeActual?: HomeOfficeActual;
+  /* Line 13 and Part V amortization through Form 4562; expenses.depreciation is then left out. */
+  depreciation?: ActivityDepreciation;
+  /* Line 32a (true) or 32b (false): all of the investment in the business is at risk. Asked for a loss. */
+  allInvestmentAtRisk?: boolean;
   /* Form 8995-A: a specified service trade or business. */
   specifiedService?: boolean;
   /* Form 8995-A line 4: W-2 wages the business paid its employees (their Forms W-2). */
@@ -194,6 +231,23 @@ const isHomeOffice = (value: unknown) =>
     isOptionalBoolean(value.sameAreaAllYear) &&
     isOptionalBoolean(value.allGrossIncomeFromHome));
 
+const isHomeExpenses = (value: unknown) =>
+  value === undefined || (isRecord(value) && Object.values(value).every(isAmount));
+
+const isHomeOfficeActual = (value: unknown) =>
+  value === undefined ||
+  (isRecord(value) &&
+    typeof value.homeSquareFeet === "number" &&
+    isAmount(value.homeSquareFeet) &&
+    typeof value.businessSquareFeet === "number" &&
+    isAmount(value.businessSquareFeet) &&
+    isOptionalBoolean(value.allGrossIncomeFromHome) &&
+    isOptionalBoolean(value.ownsHome) &&
+    isHomeExpenses(value.direct) &&
+    isHomeExpenses(value.indirect) &&
+    isAmount(value.operatingExpenseCarryover) &&
+    isAmount(value.casualtyAndDepreciationCarryover));
+
 function isBusiness(value: unknown): value is BusinessFactValue {
   if (!isRecord(value)) return false;
   const fields = value;
@@ -210,7 +264,12 @@ function isBusiness(value: unknown): value is BusinessFactValue {
     Object.values(expenses).every(isAmount) &&
     isListOf(fields.otherExpenses, isOtherExpense) &&
     isListOf(fields.vehicles, isVehicle) &&
-    isHomeOffice(fields.homeOffice)
+    isHomeOffice(fields.homeOffice) &&
+    isHomeOfficeActual(fields.homeOfficeActual) &&
+    // One method for line 30: the simplified method or Form 8829.
+    (fields.homeOffice === undefined || fields.homeOfficeActual === undefined) &&
+    isActivityDepreciation(fields.depreciation) &&
+    isOptionalBoolean(fields.allInvestmentAtRisk)
   );
 }
 

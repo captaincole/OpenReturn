@@ -4,6 +4,8 @@ import type { TaxFactRow } from "../rows.js";
 export interface MiscIncomeFactValue {
   payerName: string;
   payerTin?: string;
+  /* The businessId (business.ts) when the form reports Schedule C income: its boxes are in that business's gross receipts. */
+  businessId?: string;
   box1?: number; // Rents
   box2?: number; // Royalties
   box3?: number; // Other income

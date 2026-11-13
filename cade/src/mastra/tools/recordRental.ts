@@ -8,6 +8,7 @@ import { z } from "zod";
 import type { Scope } from "../db/appDb";
 import { listFactsByKeys } from "../db/taxFacts";
 import { cadeRequestContextSchema } from "../server/requestContext";
+import { depreciationSchema } from "./depreciationSchema";
 import { recordIngestFact, slugify } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
@@ -77,6 +78,7 @@ export const recordRental = createTool({
     rentsReceived: amount.optional().describe("Line 3: rents received"),
     royaltiesReceived: amount.optional().describe("Line 4: royalties received (1099-MISC box 2)"),
     expenses: z.object(expenses).optional(),
+    depreciation: depreciationSchema,
     activeParticipation: z
       .boolean()
       .optional()

@@ -1,15 +1,17 @@
 /* Fact catalog. Add a new fact kind as a module under ./kinds/ and re-export it here. */
 
+export * from "./kinds/adjustments.js";
 export * from "./kinds/alternativeMinimumTax.js";
 export * from "./kinds/blindness.js";
 export * from "./kinds/business.js";
-export * from "./kinds/caEarnedIncomeCredit.js";
+export * from "./kinds/caEmployeeClassification.js";
 export * from "./kinds/caMiscellaneousDeductions.js";
 export * from "./kinds/caPayments.js";
 export * from "./kinds/capitalLossCarryover.js";
 export * from "./kinds/casualty.js";
 export * from "./kinds/dependentCare.js";
 export * from "./kinds/dependents.js";
+export * from "./kinds/depreciation.js";
 export * from "./kinds/dividends.js";
 export * from "./kinds/earnedIncomeCredit.js";
 export * from "./kinds/educatorExpenses.js";
@@ -22,6 +24,7 @@ export * from "./kinds/hsaCoverage.js";
 export * from "./kinds/hsaDistribution.js";
 export * from "./kinds/interest.js";
 export * from "./kinds/investmentInterest.js";
+export * from "./kinds/itemizedOther.js";
 export * from "./kinds/marketplaceCoverage.js";
 export * from "./kinds/miscIncome.js";
 export * from "./kinds/mortgage.js";
@@ -32,6 +35,7 @@ export * from "./kinds/paymentTransactions.js";
 export * from "./kinds/priorYear.js";
 export * from "./kinds/rental.js";
 export * from "./kinds/retirementDistribution.js";
+export * from "./kinds/rothIra.js";
 export * from "./kinds/socialSecurity.js";
 export * from "./kinds/spouse.js";
 export * from "./kinds/trade.js";
