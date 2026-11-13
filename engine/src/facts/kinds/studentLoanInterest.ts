@@ -8,9 +8,6 @@
  * (irs-1040-inst-2025::sec::line-21::b02).
  */
 
-import type { FactsView } from "../../types.js";
-import type { TaxFactRow } from "../rows.js";
-
 export interface StudentLoanInterestFactValue {
   lenderName: string;
   /* Box 1: student loan interest received by the lender in the year. */
@@ -42,10 +39,12 @@ export function isStudentLoanInterestFactKey(key: string): boolean {
   );
 }
 
-/* Every Form 1098-E on the return, in the order recorded. */
-export function getStudentLoanInterestFacts(facts: FactsView): StudentLoanInterestFactValue[] {
-  return facts
-    .byCategory(STUDENT_LOAN_CATEGORY)
-    .filter((fact: TaxFactRow) => isStudentLoanInterestFactKey(fact.key))
-    .map((fact) => fact.value as StudentLoanInterestFactValue);
+/* Every Form 1098-E among the fact rows, in the order recorded. */
+export function studentLoanInterestForms(
+  rows: readonly { key: string; value: unknown; category: string }[],
+): StudentLoanInterestFactValue[] {
+  return rows
+    .filter((row) => row.category === STUDENT_LOAN_CATEGORY)
+    .filter((row) => isStudentLoanInterestFactKey(row.key))
+    .map((row) => row.value as StudentLoanInterestFactValue);
 }
