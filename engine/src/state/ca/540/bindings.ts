@@ -62,9 +62,21 @@ function dependentRowBindings(): Bindings {
 }
 
 /* MANUAL EDIT: FTB 3514's EITC, YCTC and FYTC; no credit when the form does not file. */
+type Ftb3514Outcome = (form: FormAccessor<Form540>, info: Form540FilingInfo) => CaCreditOutcome;
+
+const ftb3514Credit =
+  (outcome: Ftb3514Outcome): Ftb3514Outcome =>
+  (form, info) =>
+    info.mustFile?.["form-3514"]?.value === true ? outcome(form, info) : NONE;
+
+const FTB_3514_CREDITS = {
+  eitc: ftb3514Credit(caEitcOutcome),
+  yctc: ftb3514Credit(yctcOutcome),
+  fytc: ftb3514Credit(fytcOutcome),
+};
+
 function ftb3514Credits(form: FormAccessor<Form540>, info: Form540FilingInfo): CaCreditOutcome[] {
-  if (info.mustFile?.["form-3514"]?.value !== true) return [NONE, NONE, NONE];
-  return [caEitcOutcome(form, info), yctcOutcome(form, info), fytcOutcome(form, info)];
+  return Object.values(FTB_3514_CREDITS).map((credit) => credit(form, info));
 }
 
 /* Line 62: taxable income over this amount is taxed at this rate (2025). */
@@ -369,9 +381,11 @@ export function register(): void {
        * ::line-28-young-child-tax-credit::b01, ::line-39-foster-youth-tax-credit::b01).
        * Blank when the form does not file or a credit does not apply.
        */
-      "line.75_eitc": (form, info) => creditLine(ftb3514Credits(form, info)[0]!),
-      "line.76_young_child_tax_credit": (form, info) => creditLine(ftb3514Credits(form, info)[1]!),
-      "line.77_foster_youth_tax_credit": (form, info) => creditLine(ftb3514Credits(form, info)[2]!),
+      "line.75_eitc": (form, info) => creditLine(FTB_3514_CREDITS.eitc(form, info)),
+      "line.76_young_child_tax_credit": (form, info) =>
+        creditLine(FTB_3514_CREDITS.yctc(form, info)),
+      "line.77_foster_youth_tax_credit": (form, info) =>
+        creditLine(FTB_3514_CREDITS.fytc(form, info)),
       "line.91_use_tax": (_, info) => info.useTaxOwed,
       // MANUAL EDIT: bound by hand; the generator emitted a TODO here.
       "line.91_no_use_tax_owed": (_, info) => info.useTaxZeroReason,
