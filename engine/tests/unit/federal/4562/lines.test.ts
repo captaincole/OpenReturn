@@ -4,8 +4,7 @@ import { describe, expect, it } from "vitest";
 import type { DepreciableAsset } from "../../../../src/facts/index.js";
 import { federalAssetFigures, firstYearRate } from "../../../../src/federal/4562/assets.js";
 import {
-  activityDepreciationGap,
-  activityDepreciationLine,
+  activityDepreciation,
   BOTH_DEPRECIATION_ANSWERS,
   form4562Figures,
   line44,
@@ -120,23 +119,33 @@ describe("an activity's depreciation line (Schedule C line 13, Schedule E line 1
   };
 
   it("is the stated amount when there are no depreciation answers", () => {
-    expect(activityDepreciationLine(1234.4, undefined)).toBe(1234);
-    expect(activityDepreciationGap(1234.4, undefined)).toBeUndefined();
+    expect(activityDepreciation(1234.4, undefined)).toEqual({ kind: "amount", amount: 1234 });
   });
 
   it("is Form 4562 line 22 with answers and no stated amount", () => {
-    expect(activityDepreciationLine(undefined, answers)).toBe(form4562Figures(answers).line22);
+    expect(activityDepreciation(undefined, answers)).toEqual({
+      kind: "amount",
+      amount: form4562Figures(answers).line22,
+    });
+  });
+
+  it("is the older assets' amount when no Form 4562 is required", () => {
+    expect(activityDepreciation(undefined, { priorYearMacrs: 300.6 })).toEqual({
+      kind: "amount",
+      amount: 301,
+    });
   });
 
   it("is a gap when both are given", () => {
-    expect(activityDepreciationLine(500, answers)).toBeUndefined();
-    expect(activityDepreciationGap(500, answers)).toBe(BOTH_DEPRECIATION_ANSWERS);
+    expect(activityDepreciation(500, answers)).toEqual({
+      kind: "gap",
+      reason: BOTH_DEPRECIATION_ANSWERS,
+    });
   });
 
   it("waits while Form 4562 waits for an answer", () => {
     const waiting = { assets: [asset({ placedInService: "2025-03-01" })] };
-    expect(activityDepreciationLine(undefined, waiting)).toBeUndefined();
-    expect(activityDepreciationGap(undefined, waiting)).toBeUndefined();
+    expect(activityDepreciation(undefined, waiting)).toEqual({ kind: "waits" });
   });
 });
 
