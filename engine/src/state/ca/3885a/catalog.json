@@ -1,0 +1,1042 @@
+{
+  "form": {
+    "formId": "form-3885a",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3885A — Depreciation and Amortization Adjustments"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3885a.0.header.name",
+      "label": "Name or names as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1001",
+      "position": {
+        "page": 0,
+        "x": 39,
+        "y": 687.1
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.header.ssn",
+      "label": "Social Security Number or Individual Taxpayer Identification Number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1002",
+      "position": {
+        "page": 0,
+        "x": 462.6,
+        "y": 687.1
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-3885a.0.line.1_activity_type",
+      "label": "Line 1 — Identify the activity as passive or nonpassive",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3885A form - 1003 RB",
+      "position": {
+        "page": 0,
+        "x": 55.08,
+        "y": 665.472
+      },
+      "options": [
+        {
+          "value": "passive",
+          "radioOption": "This form is being completed for a passive activity.",
+          "label": "This form is being completed for a passive activity."
+        },
+        {
+          "value": "nonpassive",
+          "radioOption": "This form is being completed for a nonpassive activity.",
+          "label": "This form is being completed for a nonpassive activity."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3885a.0.header.business_or_activity",
+      "label": "Business or activity to which form FTB 3885A relates.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1004",
+      "position": {
+        "page": 0,
+        "x": 350.4,
+        "y": 649.8
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.2_section_179_expense",
+      "label": "Part Two. Election to Expense Certain Tangible Property (IRC Section 179) Line 2 . Enter the amount from line 12 of the Tangible Property Expense Worksheet in the instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1005",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 626.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_description",
+      "label": "Part Three. Depreciation. Line 3 . Row 1 . Column (a). Description of property placed in service.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1006",
+      "position": {
+        "page": 0,
+        "x": 51,
+        "y": 559.9
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_date_placed_in_service",
+      "label": "Line 3 . Row 1 . Column (b). Date placed in service. Enter date as 2 digit month / 2 digit day / 4 digit year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1007",
+      "position": {
+        "page": 0,
+        "x": 248.4,
+        "y": 559.9
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_california_basis",
+      "label": "Line 3 . Row 1 . Column (c). California basis for depreciation.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1008",
+      "position": {
+        "page": 0,
+        "x": 311.4,
+        "y": 559.9
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_method",
+      "label": "Line 3 . Row 1 . Column (d). Method.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1009",
+      "position": {
+        "page": 0,
+        "x": 406.8,
+        "y": 559.9
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_life_or_rate",
+      "label": "Line 3 . Row 1 . Column (e). Life or rate.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1010",
+      "position": {
+        "page": 0,
+        "x": 443.22,
+        "y": 559.9
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row1_california_depreciation",
+      "label": "Line 3 . Row 1 . Column (f). California depreciation deduction.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1011",
+      "position": {
+        "page": 0,
+        "x": 482,
+        "y": 559.9
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_description",
+      "label": "Line 3 . Row 2 . Column (a). Description of property placed in service.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1012",
+      "position": {
+        "page": 0,
+        "x": 39,
+        "y": 541.9
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_date_placed_in_service",
+      "label": "Line 3 . Row 2 . Column (b). Date placed in service. Enter date as 2 digit month / 2 digit day / 4 digit year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1013",
+      "position": {
+        "page": 0,
+        "x": 248.4,
+        "y": 541.9
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_california_basis",
+      "label": "Line 3 . Row 2 . Column (c). California basis for depreciation.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1014",
+      "position": {
+        "page": 0,
+        "x": 311.4,
+        "y": 541.9
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_method",
+      "label": "Line 3 . Row 2 . Column (d). Method.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1015",
+      "position": {
+        "page": 0,
+        "x": 406.8,
+        "y": 541.9
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_life_or_rate",
+      "label": "Line 3 . Row 2 . Column (e). Life or rate.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1016",
+      "position": {
+        "page": 0,
+        "x": 443.22,
+        "y": 541.9
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row2_california_depreciation",
+      "label": "Line 3 . Row 2 . Column (f). California depreciation deduction.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1017",
+      "position": {
+        "page": 0,
+        "x": 482,
+        "y": 541.9
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_description",
+      "label": "Line 3 . Row 3 . Column (a). Description of property placed in service.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1018",
+      "position": {
+        "page": 0,
+        "x": 39,
+        "y": 524.5
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_date_placed_in_service",
+      "label": "Line 3 . Row 3 . Column (b). Date placed in service. Enter date as 2 digit month / 2 digit day / 4 digit year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1019",
+      "position": {
+        "page": 0,
+        "x": 248.4,
+        "y": 524.5
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_california_basis",
+      "label": "Line 3 . Row 3 . Column (c). California basis for depreciation.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1020",
+      "position": {
+        "page": 0,
+        "x": 311.4,
+        "y": 524.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_method",
+      "label": "Line 3 . Row 3 . Column (d). Method.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1021",
+      "position": {
+        "page": 0,
+        "x": 406.8,
+        "y": 524.5
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_life_or_rate",
+      "label": "Line 3 . Row 3 . Column (e). Life or rate.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1022",
+      "position": {
+        "page": 0,
+        "x": 443.22,
+        "y": 524.5
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row3_california_depreciation",
+      "label": "Line 3 . Row 3 . Column (f). California depreciation deduction.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1023",
+      "position": {
+        "page": 0,
+        "x": 482,
+        "y": 524.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_description",
+      "label": "Line 3 . Row 4 . Column (a). Description of property placed in service.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1024",
+      "position": {
+        "page": 0,
+        "x": 39,
+        "y": 505.9
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_date_placed_in_service",
+      "label": "Line 3 . Row 4 . Column (b). Date placed in service. Enter date as 2 digit month / 2 digit day / 4 digit year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1025",
+      "position": {
+        "page": 0,
+        "x": 248.4,
+        "y": 505.9
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_california_basis",
+      "label": "Line 3 . Row 4 . Column (c). California basis for depreciation.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1026",
+      "position": {
+        "page": 0,
+        "x": 311.4,
+        "y": 505.9
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_method",
+      "label": "Line 3 . Row 4 . Column (d). Method.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1027",
+      "position": {
+        "page": 0,
+        "x": 406.8,
+        "y": 505.9
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_life_or_rate",
+      "label": "Line 3 . Row 4 . Column (e). Life or rate.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1028",
+      "position": {
+        "page": 0,
+        "x": 443.22,
+        "y": 505.9
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.3_row4_california_depreciation",
+      "label": "Line 3 . Row 4 . Column (f). California depreciation deduction.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1029",
+      "position": {
+        "page": 0,
+        "x": 482,
+        "y": 505.9
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.4_total_line_3",
+      "label": "Line 4 . Add the amounts on line 3, column (f).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1030",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 489.2
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.5_prior_year_depreciation",
+      "label": "Line 5 . California depreciation for assets placed in service prior to 2025.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1031",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 473.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.6_total_california_depreciation",
+      "label": "Line 6 . Total California depreciation from this activity. Add the amounts on line 2, line 4, and line 5 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1032",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 457.56
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.7_federal_depreciation",
+      "label": "Line 7 . Total federal depreciation from this activity. Enter depreciation from federal Form 4562, line 22 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1033",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 441.48
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.8a_california_more",
+      "label": "Line 8 a. If line 6 is more than line 7, enter the difference here and see instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1034",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 425.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.8b_california_less",
+      "label": "Line 8 b. If line 6 is less than line 7, enter the difference here and see instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1035",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 409.56
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_description",
+      "label": "Part Four. Amortization. Line 9 . Row 1 . Column (a). Description of cost.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1036",
+      "position": {
+        "page": 0,
+        "x": 51,
+        "y": 342
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_date_amortization_begins",
+      "label": "Line 9 . Row 1 . Column (b). Date amortization begins. Enter date as 2 digit month / 2 digit day / 4 digit year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1037",
+      "position": {
+        "page": 0,
+        "x": 248.4,
+        "y": 342
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_california_basis",
+      "label": "Line 9 . Row 1 . Column (c). California basis for amortization.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1038",
+      "position": {
+        "page": 0,
+        "x": 311.4,
+        "y": 342
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_code_section",
+      "label": "Line 9 . Row 1 . Column (d). Code section.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1039",
+      "position": {
+        "page": 0,
+        "x": 406.8,
+        "y": 342
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_period_or_percentage",
+      "label": "Line 9 . Row 1 . Column (e). Period or percentage.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1040",
+      "position": {
+        "page": 0,
+        "x": 443.22,
+        "y": 342
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row1_california_amortization",
+      "label": "Line 9 . Row 1 . Column (f). California amortization deduction.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1041",
+      "position": {
+        "page": 0,
+        "x": 482,
+        "y": 342
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_description",
+      "label": "Line 9 . Row 2 . Column (a). Description of cost.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1042",
+      "position": {
+        "page": 0,
+        "x": 39,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_date_amortization_begins",
+      "label": "Line 9 . Row 2 . Column (b). Date amortization begins. Enter date as 2 digit month / 2 digit day / 4 digit year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1043",
+      "position": {
+        "page": 0,
+        "x": 248.4,
+        "y": 324
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_california_basis",
+      "label": "Line 9 . Row 2 . Column (c). California basis for amortization.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1044",
+      "position": {
+        "page": 0,
+        "x": 311.4,
+        "y": 324
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_code_section",
+      "label": "Line 9 . Row 2 . Column (d). Code section.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1045",
+      "position": {
+        "page": 0,
+        "x": 406.8,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_period_or_percentage",
+      "label": "Line 9 . Row 2 . Column (e). Period or percentage.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1046",
+      "position": {
+        "page": 0,
+        "x": 443.22,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row2_california_amortization",
+      "label": "Line 9 . Row 2 . Column (f). California amortization deduction.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1047",
+      "position": {
+        "page": 0,
+        "x": 482,
+        "y": 324
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_description",
+      "label": "Line 9 . Row 3 . Column (a). Description of cost.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1048",
+      "position": {
+        "page": 0,
+        "x": 39,
+        "y": 306
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_date_amortization_begins",
+      "label": "Line 9 . Row 3 . Column (b). Date amortization begins. Enter date as 2 digit month / 2 digit day / 4 digit year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1049",
+      "position": {
+        "page": 0,
+        "x": 248.4,
+        "y": 306
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_california_basis",
+      "label": "Line 9 . Row 3 . Column (c). California basis for amortization.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1050",
+      "position": {
+        "page": 0,
+        "x": 311.4,
+        "y": 306
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_code_section",
+      "label": "Line 9 . Row 3 . Column (d). Code section.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1051",
+      "position": {
+        "page": 0,
+        "x": 406.8,
+        "y": 306
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_period_or_percentage",
+      "label": "Line 9 . Row 3 . Column (e). Period or percentage.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1052",
+      "position": {
+        "page": 0,
+        "x": 443.22,
+        "y": 306
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row3_california_amortization",
+      "label": "Line 9 . Row 3 . Column (f). California amortization deduction.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1053",
+      "position": {
+        "page": 0,
+        "x": 482,
+        "y": 306
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_description",
+      "label": "Line 9 . Row 4 . Column (a). Description of cost.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1054",
+      "position": {
+        "page": 0,
+        "x": 39,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_date_amortization_begins",
+      "label": "Line 9 . Row 4 . Column (b). Date amortization begins. Enter date as 2 digit month / 2 digit day / 4 digit year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1055",
+      "position": {
+        "page": 0,
+        "x": 248.4,
+        "y": 288
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_california_basis",
+      "label": "Line 9 . Row 4 . Column (c). California basis for amortization.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1056",
+      "position": {
+        "page": 0,
+        "x": 311.4,
+        "y": 288
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_code_section",
+      "label": "Line 9 . Row 4 . Column (d). Code section.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1057",
+      "position": {
+        "page": 0,
+        "x": 406.8,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_period_or_percentage",
+      "label": "Line 9 . Row 4 . Column (e). Period or percentage.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1058",
+      "position": {
+        "page": 0,
+        "x": 443.22,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-3885a.0.line.9_row4_california_amortization",
+      "label": "Line 9 . Row 4 . Column (f). California amortization deduction.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1059",
+      "position": {
+        "page": 0,
+        "x": 482,
+        "y": 288
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.10_total_line_9",
+      "label": "Line 10 . Total California amortization from this activity. Add the amounts on line 9, column (f).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1060",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 271.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.11_prior_year_amortization",
+      "label": "Line 11 . California amortization of costs that began before 2025.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1061",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 255.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.12_total_california_amortization",
+      "label": "Line 12 . Total California amortization from this activity. Add the amounts on line 10 and line 11 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1062",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 239.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.13_federal_amortization",
+      "label": "Line 13 . Total federal amortization from this activity. Enter amortization from federal Form 4562, line 44 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1063",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 223.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.14a_california_more",
+      "label": "Line 14a.  If line 12 is more than line 13, enter the difference here and see instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1064",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 207.72
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3885a.0.line.14b_california_less",
+      "label": "Line 14b. If line 12 is less than line 13, enter the difference here and see instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3885A form - 1065",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 191.64
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3885a/blank.pdf",
+    "ingestedAt": "2026-11-13T04:58:09.667Z",
+    "totalFields": 65,
+    "skipped": 0,
+    "catalogEntries": 65
+  }
+}
