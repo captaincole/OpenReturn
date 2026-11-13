@@ -76,17 +76,23 @@ const TAX_YEAR = "2025-";
 const MID_QUARTER_SHARE = 0.4;
 const LAST_QUARTER_START = "2025-10-01";
 
+/* The mid-quarter test across activities is not built. */
+export const MID_QUARTER_ACROSS_ACTIVITIES_GAP =
+  "Two or more of the return's activities place personal property in service in 2025, and the engine does not run the mid-quarter test across them.";
+
 /*
  * The mid-quarter test: when the depreciable bases (before the special
  * allowance) of property placed in service in October–December are more than
  * 40% of the year's, the mid-quarter convention applies to all of it; else the
- * half-year convention. Real property is left out. The engine checks the
- * activity's own assets only (the test is the whole return's), and returns the
- * reason when a stated convention disagrees.
+ * half-year convention. Real property is left out. The test covers the whole
+ * return: with one activity that places personal property in service the
+ * engine checks it, with two or more it is a gap. It returns the reason when a
+ * stated convention disagrees.
  */
-function conventionGap(assets: DepreciableAsset[]): string | undefined {
-  const personal = assets.filter((asset) => asset.convention !== "MM");
+function conventionGap(depreciation: ActivityDepreciation): string | undefined {
+  const personal = (depreciation.assets ?? []).filter((asset) => asset.convention !== "MM");
   if (personal.length === 0) return undefined;
+  if (depreciation.personalPropertyInOtherActivities) return MID_QUARTER_ACROSS_ACTIVITIES_GAP;
   const basis = (asset: DepreciableAsset) =>
     federalAssetFigures(asset).cost - federalAssetFigures(asset).section179;
   const total = sum(...personal.map(basis));
@@ -104,7 +110,7 @@ function activityGap(depreciation: ActivityDepreciation): string | undefined {
   const assets = depreciation.assets ?? [];
   const assetReason = assets.map(assetGap).find((reason) => reason !== undefined);
   if (assetReason) return assetReason;
-  const conventionReason = conventionGap(assets);
+  const conventionReason = conventionGap(depreciation);
   if (conventionReason) return conventionReason;
   if ((depreciation.amortizedCosts ?? []).some((cost) => !cost.beginsOn.startsWith(TAX_YEAR)))
     return "A cost listed as beginning amortization in 2025 began in another year; older amortization belongs in the line 43 amount.";

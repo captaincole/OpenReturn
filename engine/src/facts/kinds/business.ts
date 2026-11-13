@@ -298,9 +298,11 @@ export function ownerOf(business: BusinessFactValue): BusinessOwner {
 /*
  * The businesses on this return. Filing jointly, every business. On any other
  * status, only the taxpayer's: a spouse's business belongs on the spouse's
- * return, and its key is in spouseKeys so a form can wait on it.
+ * return, and its key is in spouseKeys so a form can wait on it. Forms read
+ * businessesOnReturn (activitiesOnReturn.ts), which adds the return's
+ * depreciation scope.
  */
-export function businessesOnReturn(
+export function statedBusinessesOnReturn(
   facts: ReadonlyArray<FactRow>,
   joint: boolean,
 ): {

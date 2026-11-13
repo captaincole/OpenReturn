@@ -83,6 +83,17 @@ export interface ActivityDepreciation {
   californiaPriorYearDepreciation?: number;
   /* FTB 3885A line 11: California amortization of costs that began before 2025, when it differs from priorYearAmortization. */
   californiaPriorYearAmortization?: number;
+  /*
+   * Never stated: the engine sets it when another activity on the return also
+   * places personal property in service in 2025 (activitiesOnReturn.ts). The
+   * mid-quarter test then spans those activities.
+   */
+  personalPropertyInOtherActivities?: boolean;
+}
+
+/* Personal property (not mid-month real property) placed in service in 2025: what the mid-quarter test counts. */
+export function placesPersonalProperty(depreciation: ActivityDepreciation | undefined): boolean {
+  return (depreciation?.assets ?? []).some((asset) => asset.convention !== "MM");
 }
 
 const RECOVERY_CLASSES: readonly string[] = [

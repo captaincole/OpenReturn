@@ -63,7 +63,6 @@ Schedule CA line 3 and line 15 column A (and lines 10, 26 and 27 column A, which
 
 ## Known gaps (for #126)
 
-- The mid-quarter convention test (Form 4562) is checked within one activity; the instructions apply it to all the return's property placed in service in 2025.
 - Form 8606 line 19 or line 21 of 0 leaves Form 1040 line 4b blank for a code J or T row, and nothing is asked.
 - California tax withheld on a 1099-DIV (box 16) or a 1099-OID (box 14) is not on Form 540 line 71: their facts have no state withholding box.
 - Schedule C Part IV reads whether line 13 has an amount, not whether Form 4562 is required.
