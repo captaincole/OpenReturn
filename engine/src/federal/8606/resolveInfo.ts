@@ -2,7 +2,9 @@ import {
   ROTH_IRA_CODES,
   hasDistributionCode,
   isRetirementDistributionFactKey,
+  makeRothIraFactKey,
   makeTraditionalIraFactKey,
+  readRothIraFact,
   readTraditionalIraFact,
   type IraOwner,
   type RetirementDistributionFactValue,
@@ -16,11 +18,10 @@ import {
   type ResolverInputs,
 } from "../../resolverInputs.js";
 import type { Form8606FilingInfo, IraHolder } from "./filingInfo.js";
+import { NONQUALIFIED_ROTH_CODES } from "./partIII.js";
 
 const OWNERS: IraOwner[] = ["taxpayer", "spouse"];
 const MUST_FILE_KEY = "decisions.scope.must_file_8606";
-/* Roth IRA distributions that are not qualified (code Q is). */
-const NONQUALIFIED_ROTH_CODES = ["J", "T"];
 
 function ownRows(inputs: ResolverInputs, owner: IraOwner): RetirementDistributionFactValue[] {
   return factsInCategory(inputs, "retirement")
@@ -45,11 +46,12 @@ function partIApplies(ira: TraditionalIraFactValue, basis: number, line7: number
 
 function iraHolder(inputs: ResolverInputs, owner: IraOwner): IraHolder {
   const own = ownRows(inputs, owner);
-  // Roth IRA rows belong to Part III, which is not modeled; code Y rows are on no line.
+  // Roth IRA rows belong to Part III (partIII.ts); code Y rows are on no line.
   const rows = own.filter(
     (row) => row.box7IraSepSimple && !hasDistributionCode(row, NOT_ON_FORM_8606),
   );
   const ira = readTraditionalIraFact(inputs.factByKey, owner);
+  const rothRows = own.filter((row) => hasDistributionCode(row, NONQUALIFIED_ROTH_CODES));
   const gross = rows.length === 0 ? 0 : sum(...rows.map((row) => row.box1));
   const basis = (ira?.nondeductibleContributions ?? 0) + (ira?.basisPriorYears ?? 0);
   const line7 = atLeast(0, gross - (ira?.rolledOver ?? 0) - (ira?.convertedToRoth ?? 0));
@@ -60,7 +62,9 @@ function iraHolder(inputs: ResolverInputs, owner: IraOwner): IraHolder {
     basis,
     line7,
     partI: ira !== undefined && partIApplies(ira, basis, line7),
-    rothDistribution: own.some((row) => hasDistributionCode(row, NONQUALIFIED_ROTH_CODES)),
+    rothDistribution: rothRows.length > 0,
+    rothRows,
+    roth: readRothIraFact(inputs.factByKey, owner),
   };
 }
 
@@ -68,8 +72,8 @@ function iraHolder(inputs: ResolverInputs, owner: IraOwner): IraHolder {
  * irs-8606-inst-2025::sec::who-must-file::b01–b02: nondeductible contributions;
  * a distribution with basis over zero (a rollover or a conversion is not a
  * distribution here); a Roth conversion; or a Roth IRA distribution (codes J,
- * T). Part III is not modeled, so that copy shows Part III blank. No fact marks
- * a Roth rollover or return of contributions, the bullet's exceptions.
+ * T). Part III reads the Roth IRA answers (partIII.ts); their notOnLine19 holds a
+ * Roth rollover or a return of contributions, the bullet's exceptions.
  * Inherited IRAs and divorce transfers have no facts yet.
  */
 export function mustFile8606(holder: IraHolder): boolean {
@@ -132,6 +136,10 @@ export function resolve8606Info(inputs: ResolverInputs): Form8606FilingInfo {
       "form-8606": missingInputs(
         Object.fromEntries([
           ...withIra.map((holder) => [makeTraditionalIraFactKey(holder.owner), holder.ira]),
+          // Part III needs the person's Roth IRA answers.
+          ...filers
+            .filter((holder) => holder.rothDistribution)
+            .map((holder) => [makeRothIraFactKey(holder.owner), holder.roth]),
           // The fact is there but a line it gives is not: ask for the same fact again.
           ...filers
             .filter(needsMoreAnswers)

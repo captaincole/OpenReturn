@@ -1,0 +1,112 @@
+/*
+ * MANUAL EDIT: Schedule 1 lines from the taxpayer's answers (answers.ts), spread
+ * into bindings.ts. Each line follows irs-1040-inst-2025 for that line.
+ */
+
+import type { BindingFn, FormAccessor } from "../../defineForm.js";
+import { roundDollars, sum, sumOrBlank } from "../../money.js";
+import { unsupported } from "../../types.js";
+import type { Schedule1FilingInfo } from "./filingInfo.js";
+import { iraDeduction, JOINT_RETURN_GAP } from "./iraDeduction.js";
+import type { Schedule1 } from "./types.js";
+
+type Bindings = Partial<{ [K in keyof Schedule1]: BindingFn<Schedule1, Schedule1FilingInfo, K> }>;
+
+/* Lines 2b and 19c: the month and year of the agreement (irs-1040-inst-2025::sec::line-19c::b01). */
+const monthYear = (date: string | undefined) => {
+  if (!date) return undefined;
+  const [year, month] = date.split("-");
+  return `${month}/${year}`;
+};
+
+/*
+ * Line 20 (irs-1040-inst-2025::sec::line-20::b01 and the IRA Deduction
+ * Worksheet): the taxpayer's traditional IRA contributions, limited by the
+ * worksheet. Line 3 is Form 1040 line 9; line 4 is lines 11–19a, 23 and 25 of
+ * this schedule; line 9 is Schedule SE line 6 less lines 15 and 16.
+ */
+function line20(form: FormAccessor<Schedule1>, info: Schedule1FilingInfo) {
+  if (!info.iraContributions) return undefined;
+  if (info.filingStatus === "married_filing_jointly") return unsupported(JOINT_RETURN_GAP);
+  const totalIncome = form["form-1040.line.9"];
+  if (typeof totalIncome !== "number" || info.iraAge50OrOlder === undefined) return undefined;
+  const otherAdjustments = sum(
+    form["1.line.11"],
+    form["1.line.12"],
+    form["1.line.13"],
+    form["1.line.14"],
+    form["1.line.15"],
+    form["1.line.16"],
+    form["1.line.17"],
+    form["1.line.18"],
+    form["1.line.19a"],
+    form["1.line.23"],
+    form["1.line.25"],
+  );
+  const earnings = sum(form["schedule-se.0.line.6"]) - sum(form["1.line.15"], form["1.line.16"]);
+  return iraDeduction({
+    status: info.filingStatus,
+    contributions: info.iraContributions,
+    coveredByPlan: info.iraCoveredAtWork === true || (info.selfEmployedPlanDeduction ?? 0) > 0,
+    age50OrOlder: info.iraAge50OrOlder,
+    livedApartAllYear: info.livedApartAllYear,
+    totalIncome,
+    otherAdjustments,
+    wagesAndAlimony: sum(info.iraWages, form["0.line.2a"]),
+    selfEmploymentEarnings: earnings,
+  });
+}
+
+export function answerBindings(): Bindings {
+  return {
+    // irs-1040-inst-2025::sec::lines-2a-and-2b::b01: only under an agreement made before 2019.
+    "0.line.2a": (_, info) =>
+      info.alimonyReceived === undefined || info.alimonyReceivedTaxable === undefined
+        ? undefined
+        : info.alimonyReceivedTaxable
+          ? roundDollars(info.alimonyReceived)
+          : undefined,
+    "0.line.2b": (_, info) =>
+      info.alimonyReceivedTaxable ? monthYear(info.alimonyReceivedAgreementDate) : undefined,
+    "0.line.8h": (_, info) => roundDollars(info.juryDutyPay),
+    "0.line.8i": (_, info) => roundDollars(info.prizesAndAwards),
+    "0.line.8k": (_, info) => roundDollars(info.stockOptions),
+    // irs-1040-inst-2025::sec::line-8z::b01: "List the type and amount of income."
+    "0.line.8z": (_, info) =>
+      roundDollars(
+        sumOrBlank(
+          info.miscOtherIncome,
+          ...(info.otherIncomeItems ?? []).map((item) => item.amount),
+        ),
+      ),
+    "0.line.8z_type": (_, info) => {
+      const types = [
+        ...(info.miscOtherIncome ? ["Form 1099-MISC"] : []),
+        ...(info.otherIncomeItems ?? []).map((item) => item.description),
+      ];
+      return types.length > 0 ? types.join(", ") : undefined;
+    },
+    "1.line.16": (_, info) => roundDollars(info.selfEmployedPlanDeduction),
+    // irs-1040-inst-2025::sec::lines-19a-19b-and-19c::b01: only under an agreement made before 2019.
+    "1.line.19a": (_, info) =>
+      info.alimonyPaid === undefined || !info.alimonyPaidDeductible
+        ? undefined
+        : roundDollars(info.alimonyPaid),
+    "1.line.19b": (form, info) =>
+      typeof form["1.line.19a"] === "number" ? info.alimonyRecipientSsn : undefined,
+    "1.line.19c": (form, info) =>
+      typeof form["1.line.19a"] === "number" ? monthYear(info.alimonyPaidAgreementDate) : undefined,
+    // irs-1040-inst-2025::sec::were-you-covered-by-a-retirement::b02: check the box when married filing separately and apart all year.
+    "1.line.20_mfs_lived_apart": (_, info) =>
+      info.filingStatus === "married_filing_separately" && info.iraContributions
+        ? info.livedApartAllYear
+        : undefined,
+    "1.line.20": line20,
+    "1.line.24a": (_, info) => roundDollars(info.juryDutyPayToEmployer),
+    "1.line.24d": (_, info) => roundDollars(info.reforestation),
+    "1.line.24e": (_, info) => roundDollars(info.tradeActBenefitRepayment),
+    "1.line.24f": (_, info) => roundDollars(info.section501c18dContributions),
+    "1.line.24h": (_, info) => roundDollars(info.discriminationClaimFees),
+    "1.line.24i": (_, info) => roundDollars(info.whistleblowerAwardFees),
+  };
+}

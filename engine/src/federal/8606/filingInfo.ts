@@ -1,4 +1,9 @@
-import type { IraOwner, TraditionalIraFactValue } from "../../facts/index.js";
+import type {
+  IraOwner,
+  RetirementDistributionFactValue,
+  RothIraFactValue,
+  TraditionalIraFactValue,
+} from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 
 /* A person with a traditional IRA: their answers and 1099-R totals. */
@@ -15,6 +20,9 @@ export interface IraHolder {
   partI: boolean;
   /* A 1099-R with code J or T: a Roth IRA distribution that is not qualified (Part III). */
   rothDistribution: boolean;
+  /* Part III: the person's code J and T 1099-Rs and their Roth IRA answers. */
+  rothRows: RetirementDistributionFactValue[];
+  roth?: RothIraFactValue;
 }
 
 export interface Form8606FilingInfo extends BaseFilingInfo {

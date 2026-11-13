@@ -4,6 +4,7 @@ import { defineForm, type FormAccessor } from "../../defineForm.js";
 import { roundDollars } from "../../money.js";
 import { SSN } from "../../values.js";
 import type { Form8606FilingInfo, IraHolder } from "./filingInfo.js";
+import { partIIIFigures, type PartIIIFigures } from "./partIII.js";
 import type { Form8606 } from "./types.js";
 
 type Form = FormAccessor<Form8606>;
@@ -16,8 +17,6 @@ const FILED_ALONE =
   "Filled only when Form 8606 is filed by itself, without a return; the engine files it with Form 1040.";
 const PREPARER =
   "No paid-preparer facts; this block is signed only when Form 8606 is filed by itself.";
-const PART_III =
-  "Part III is not modeled: no fact gives first-time homebuyer expenses, Roth contribution basis or Roth conversion basis.";
 
 /* The IRA holder this copy is for. */
 export function holderOf(info: Form8606FilingInfo): IraHolder | undefined {
@@ -52,6 +51,32 @@ function timesRatio(amount: number | undefined, form: Form): number | undefined 
   const scaled = scaledRatio(form);
   if (amount === undefined || scaled === undefined) return undefined;
   return roundDollars((amount * scaled) / RATIO_SCALE);
+}
+
+/* MANUAL EDIT: Part III (irs-8606-inst-2025::sec::part-iii-distributions-from-roth-iras::b01), from partIII.ts. */
+function partIIIBindings() {
+  const line =
+    (read: (figures: PartIIIFigures) => number | undefined) =>
+    (_: unknown, info: Form8606FilingInfo) => {
+      const holder = holderOf(info);
+      if (!holder?.rothDistribution || !holder.roth) return undefined;
+      return read(partIIIFigures(holder.rothRows, holder.roth));
+    };
+  return {
+    "1.line.19_nonqualified_roth_distributions": line((figures) => figures.line19),
+    "1.line.20_first_time_homebuyer_expenses": line((figures) =>
+      figures.line20 > 0 ? figures.line20 : undefined,
+    ),
+    "1.line.21_line_19_minus_line_20": line((figures) => figures.line21),
+    "1.line.22_basis_roth_contributions": line((figures) => figures.line22),
+    "1.line.23_line_21_minus_line_22": line((figures) => figures.line23),
+    "1.line.24_basis_roth_conversions_rollovers": line((figures) => figures.line24),
+    "1.line.25a_line_23_minus_line_24": line((figures) => figures.line25a),
+    // Line 23 of zero skips lines 24 and 25.
+    "1.line.25c_taxable_roth_distributions": line((figures) =>
+      figures.line23 === 0 ? undefined : figures.line25c,
+    ),
+  };
 }
 
 export function register(): void {
@@ -167,6 +192,7 @@ export function register(): void {
         const line17 = form["1.line.17_basis_in_conversion"];
         return line16 === undefined || line17 === undefined ? undefined : line16 - line17;
       },
+      ...partIIIBindings(),
     },
 
     formatters: {
@@ -183,16 +209,8 @@ export function register(): void {
       "0.header.foreign_postal_code": FILED_ALONE,
       "1.line.15b_qualified_disaster_distributions":
         "No fact records qualified disaster distributions (Form 8915-F); line 15c reads this line as zero.",
-      "1.line.19_nonqualified_roth_distributions":
-        "A code J 1099-R gives the gross amount, but no fact gives the rollovers or the 1998–2020 contribution exclusions to take out, or the Roth basis Part III needs.",
-      "1.line.20_first_time_homebuyer_expenses": PART_III,
-      "1.line.21_line_19_minus_line_20": PART_III,
-      "1.line.22_basis_roth_contributions": PART_III,
-      "1.line.23_line_21_minus_line_22": PART_III,
-      "1.line.24_basis_roth_conversions_rollovers": PART_III,
-      "1.line.25a_line_23_minus_line_24": PART_III,
-      "1.line.25b_roth_qualified_disaster_distributions": PART_III,
-      "1.line.25c_taxable_roth_distributions": PART_III,
+      "1.line.25b_roth_qualified_disaster_distributions":
+        "No fact records qualified disaster distributions from a Roth IRA; line 25c reads this line as zero.",
       "1.signing.preparer_self_employed": PREPARER,
       "1.signing.preparer_name": PREPARER,
       "1.signing.preparer_ptin": PREPARER,

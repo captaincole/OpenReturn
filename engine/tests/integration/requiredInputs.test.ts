@@ -99,6 +99,24 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "for another reason (line 7 more than line 10) needs the explicit decision.",
   ],
   [
+    /^other_income\.(alimony_received|jury_duty_pay|prizes_and_awards|stock_options|other_items)$/,
+    "an answer Cade records only when the user had that income (Schedule 1 lines 2a, 8h, 8i, 8k, 8z)",
+  ],
+  [
+    /^adjustments\.[a-z_]+$/,
+    "an answer Cade records only when the user had that adjustment (Schedule 1 lines 16, 19a, 24a–24i)",
+  ],
+  [
+    /^retirement\.traditional_ira\.(taxpayer|spouse)$/,
+    "recorded when the person has a traditional IRA; Form 8606 asks it for an IRA distribution, " +
+      "and Schedule 1 line 20 reads its contributions",
+  ],
+  [
+    /^(state_local_tax\.other_taxes(_description)?|other_itemized\.impairment_related_work_expenses)$/,
+    "an answer Cade records only when the user paid other taxes or has impairment-related work " +
+      "expenses (Schedule A lines 6 and 16)",
+  ],
+  [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",
