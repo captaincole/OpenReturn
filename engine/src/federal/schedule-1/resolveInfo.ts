@@ -17,6 +17,7 @@ import { resolve8889Info } from "../8889/resolveInfo.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
+import { earlyWithdrawalPenalty, educatorExpenseDeduction } from "./adjustments.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 
 export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInfo {
@@ -27,10 +28,8 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
       : undefined;
   // Form 8889 lines 13 and 16 reach the 1040 only through Schedule 1.
   const form8889 = resolve8889Info(inputs).mustFile?.["form-8889"]?.value === true;
-  const onReturn = businessesOnReturn(
-    inputs.facts,
-    filingStatusOf(inputs) === "married_filing_jointly",
-  );
+  const jointReturn = filingStatusOf(inputs) === "married_filing_jointly";
+  const onReturn = businessesOnReturn(inputs.facts, jointReturn);
   const hasBusiness =
     onReturn.businesses.length + onReturn.spouseKeys.length + onReturn.malformedKeys.length > 0;
   const businessIncome = scheduleCTotal(onReturn);
@@ -45,11 +44,13 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
   const scheduleSE = resolveScheduleSEInfo(inputs).mustFile?.["schedule-se"]?.value === true;
   // Schedule E line 41 reaches the 1040 only through Schedule 1 line 5.
   const scheduleE = resolveScheduleEInfo(inputs).mustFile?.["schedule-e"]?.value === true;
+  const educatorExpenses = educatorExpenseDeduction(inputs, jointReturn);
+  const savingsPenalty = earlyWithdrawalPenalty(inputs);
   const resolution = resolveMustFile(inputs.decisionByKey, {
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
-        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), or Form 8889 filed (${form8889})`,
+        rule: `fallback: 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), Form 8889 filed (${form8889}), educator expenses $${educatorExpenses ?? 0} > 0, or an early withdrawal penalty $${savingsPenalty ?? 0} > 0`,
         value:
           (miscOtherIncome ?? 0) > 0 ||
           (gamblingWinnings ?? 0) > 0 ||
@@ -57,7 +58,9 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
           hasBusiness ||
           scheduleSE ||
           scheduleE ||
-          form8889,
+          form8889 ||
+          (educatorExpenses ?? 0) > 0 ||
+          (savingsPenalty ?? 0) > 0,
       },
     ],
   });
@@ -68,6 +71,8 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     gamblingWinnings,
     miscOtherIncome,
     alaskaPermanentFundDividends,
+    educatorExpenses,
+    earlyWithdrawalPenalty: savingsPenalty,
   };
 }
 

@@ -4,6 +4,7 @@
  */
 
 import {
+  EDUCATOR_EXPENSE_KEYS,
   makeBusinessFactKey,
   makeDependentFactKey,
   makeInterestFactKey,
@@ -176,6 +177,12 @@ const ANSWER_FACTS: TaxFactRow[] = [
     `${ANSWERS}: ca_form540.full_year_health_coverage.`,
   ),
   fact("other", "use_tax.owed_amount", 0, `${ANSWERS}: ca_form540.use_tax.`),
+  fact(
+    "other",
+    EDUCATOR_EXPENSE_KEYS.taxpayer,
+    400,
+    `${ANSWERS}: irs1040_schedule1.qualified_educator true, tp_educator_exp_amount.`,
+  ),
 ];
 
 export const tcbCa002Facts: TaxFactRow[] = [...IDENTITY, ...DOCUMENTS, ...ANSWER_FACTS];

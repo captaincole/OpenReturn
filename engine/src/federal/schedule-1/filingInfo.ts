@@ -14,4 +14,8 @@ export interface Schedule1FilingInfo extends BaseFilingInfo {
   miscOtherIncome?: number;
   /** Line 8g: the Alaska Permanent Fund dividend the taxpayer states, cents kept. */
   alaskaPermanentFundDividends?: number;
+  /** Line 11: the educator expense deduction, at most $300 per eligible educator. */
+  educatorExpenses?: number;
+  /** Line 18: 1099-INT box 2 sum, cents kept. */
+  earlyWithdrawalPenalty?: number;
 }
