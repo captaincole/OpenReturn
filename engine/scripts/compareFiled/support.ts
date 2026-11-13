@@ -30,6 +30,7 @@ import {
   PRIOR_YEAR_KEYS,
   RENTAL_KEYS,
   SPOUSE_KEYS,
+  STUDENT_LOAN_KEYS,
   isBusinessFactKey,
   isCasualtyEventFactKey,
   isDependentCareProviderFactKey,
@@ -52,6 +53,7 @@ import {
   isRetirementDistributionFact,
   isSocialSecurityFact,
   isStatedQuantityFact,
+  isStudentLoanInterestFactKey,
   isTradeFact,
   isW2Fact,
   makeRothIraFactKey,
@@ -91,6 +93,7 @@ const DOCUMENT_FACTS = [
   (fact: TaxFactRow) => isDisabilityBeforeMinimumRetirementAgeKey(fact.key),
   (fact: TaxFactRow) => isDependentCareProviderFactKey(fact.key),
   (fact: TaxFactRow) => isDependentCareQualifyingPersonFactKey(fact.key),
+  (fact: TaxFactRow) => isStudentLoanInterestFactKey(fact.key),
 ];
 
 /* support.test.ts fails when a resolver reads a key that is missing here. */
@@ -121,6 +124,7 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(EDUCATOR_EXPENSE_KEYS),
   ...Object.values(CA_PAYMENT_KEYS),
   ...Object.values(HEAD_OF_HOUSEHOLD_KEYS),
+  ...Object.values(STUDENT_LOAN_KEYS),
   SPOUSE_KEYS.livedApartAllYear,
   SPOUSE_KEYS.livedApartLastSixMonths,
   SPOUSE_KEYS.legallySeparatedApartAtYearEnd,
