@@ -8,10 +8,18 @@ import { businessesOnReturn, CA_EMPLOYEE_CLASSIFICATION_KEYS } from "../../../fa
 import { filingStatusOf } from "../../../filingInfoResolvers.js";
 import { sum } from "../../../money.js";
 import { missingInputs, num, type ResolverInputs } from "../../../resolverInputs.js";
-import { californiaAdjustment } from "../3885a/lines.js";
+import { californiaAdjustment, form3885AFigures } from "../3885a/lines.js";
 import { caDepreciationActivities } from "../3885a/resolveInfo.js";
 
-/* ca-3885a-inst-2025::sec::line-8a-and-line-8b::b01: a passive activity's difference goes to FTB 3801. */
+/*
+ * ca-3885a-inst-2025::sec::line-8a-and-line-8b::b01: a passive activity's
+ * difference goes to FTB 3801. Gap: with another passive loss activity on the
+ * return, FTB 3801 figures all of line 5 (ca-3801-inst-2025::sec::step-4::b01);
+ * the engine checks only the activity that has the difference. A business that
+ * is also reclassified for California (worker status) adds its stated loss and
+ * its FTB 3885A difference both; the taxpayer's stated amounts are taken to
+ * leave depreciation out.
+ */
 export const PASSIVE_GAP =
   "A passive activity's California depreciation difference goes through form FTB 3801 (passive activity loss limitations), which is not modeled.";
 
@@ -40,6 +48,8 @@ function adjustmentFor(
   const activities = caDepreciationActivities(inputs).filter((activity) => activity.kind === kind);
   const totals: DepreciationAdjustment = { subtraction: 0, addition: 0 };
   for (const activity of activities) {
+    const gap = form3885AFigures(activity.depreciation).gap;
+    if (gap) return { ...totals, gap };
     const adjustment = californiaAdjustment(activity.depreciation);
     if (adjustment === undefined) return { ...totals, waits: true };
     const differs = adjustment.subtraction > 0 || adjustment.addition > 0;

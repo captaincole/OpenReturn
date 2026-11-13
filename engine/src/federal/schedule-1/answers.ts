@@ -27,9 +27,16 @@ const SECTION_501C18D_CODE = "H";
 /* irs-1040-inst-2025::sec::your-ira-spouse-s-ira::b01: age 50 or older at the end of 2025. */
 const BORN_BEFORE_FOR_AGE_50 = 1976;
 
-/* An agreement entered into on or before December 31, 2018 (lines 2a and 19a). */
-const beforeAlimonyChange = (date: string | undefined) =>
-  date === undefined ? undefined : date <= LAST_PRE_2019_AGREEMENT_DATE;
+/*
+ * Lines 2a and 19a: an agreement entered into on or before December 31, 2018,
+ * unless changed after that date to say alimony is not income
+ * (irs-1040-inst-2025::sec::lines-2a-and-2b::b01). Undefined while an answer is missing.
+ */
+function alimonyCounts(date: string | undefined, excludes: unknown): boolean | undefined {
+  if (date === undefined) return undefined;
+  if (date > LAST_PRE_2019_AGREEMENT_DATE) return false;
+  return typeof excludes === "boolean" ? !excludes : undefined;
+}
 
 const yearOf = (dob: string | undefined): number | undefined => {
   if (!dob) return undefined;
@@ -51,7 +58,14 @@ function iraAnswers(inputs: ResolverInputs) {
     iraContributions: ira?.contributions,
     iraCoveredAtWork: ownW2s.some((w2) => w2.box13?.retirementPlan === true),
     iraAge50OrOlder: birthYear === undefined ? undefined : birthYear < BORN_BEFORE_FOR_AGE_50,
-    iraWages: sum(...ownW2s.map((w2) => w2.box1)),
+    // Worksheet line 8: box 1 less nonqualified plan income (box 11), plus nontaxable combat pay (box 12 code Q).
+    iraWages: sum(
+      ...ownW2s.map((w2) => w2.box1 - (w2.box11 ?? 0)),
+      ...ownW2s.flatMap((w2) =>
+        (w2.box12 ?? []).filter((entry) => entry.code === "Q").map((entry) => entry.amount),
+      ),
+    ),
+    iraAdoptionBenefits: ownW2s.some((w2) => (w2.box12 ?? []).some((entry) => entry.code === "T")),
     livedApartAllYear: inputs.factByKey.get(SPOUSE_KEYS.livedApartAllYear) as boolean | undefined,
   };
 }
@@ -67,7 +81,10 @@ export function schedule1Answers(inputs: ResolverInputs): Schedule1FilingInfo {
   const answers = iraAnswers(inputs);
   return {
     alimonyReceived,
-    alimonyReceivedTaxable: beforeAlimonyChange(receivedDate),
+    alimonyReceivedTaxable: alimonyCounts(
+      receivedDate,
+      inputs.factByKey.get(OTHER_INCOME_KEYS.alimonyReceivedAgreementExcludes),
+    ),
     alimonyReceivedAgreementDate: receivedDate,
     juryDutyPay: num(inputs, OTHER_INCOME_KEYS.juryDutyPay),
     prizesAndAwards: num(inputs, OTHER_INCOME_KEYS.prizesAndAwards),
@@ -75,7 +92,10 @@ export function schedule1Answers(inputs: ResolverInputs): Schedule1FilingInfo {
     otherIncomeItems: readOtherIncomeItems(inputs.factByKey.get(OTHER_INCOME_KEYS.otherItems)),
     selfEmployedPlanDeduction: num(inputs, ADJUSTMENT_KEYS.selfEmployedPlanDeduction),
     alimonyPaid,
-    alimonyPaidDeductible: beforeAlimonyChange(paidDate),
+    alimonyPaidDeductible: alimonyCounts(
+      paidDate,
+      inputs.factByKey.get(ADJUSTMENT_KEYS.alimonyPaidAgreementExcludes),
+    ),
     alimonyPaidAgreementDate: paidDate,
     alimonyRecipientSsn: text(inputs, ADJUSTMENT_KEYS.alimonyRecipientSsn),
     juryDutyPayToEmployer: num(inputs, ADJUSTMENT_KEYS.juryDutyPayToEmployer),
@@ -90,6 +110,15 @@ export function schedule1Answers(inputs: ResolverInputs): Schedule1FilingInfo {
       "schedule-1": missingInputs({
         ...(alimonyReceived !== undefined
           ? { [OTHER_INCOME_KEYS.alimonyReceivedAgreementDate]: receivedDate }
+          : {}),
+        ...(alimonyReceived !== undefined &&
+        (receivedDate ?? "") <= LAST_PRE_2019_AGREEMENT_DATE &&
+        receivedDate
+          ? {
+              [OTHER_INCOME_KEYS.alimonyReceivedAgreementExcludes]: inputs.factByKey.get(
+                OTHER_INCOME_KEYS.alimonyReceivedAgreementExcludes,
+              ),
+            }
           : {}),
         ...(alimonyPaid !== undefined
           ? {

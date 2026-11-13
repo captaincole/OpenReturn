@@ -15,7 +15,7 @@ import {
   type HomeOfficeSimplified,
 } from "../../facts/index.js";
 import { atLeast, roundDollars, sum, sumOrBlank } from "../../money.js";
-import { form8829Figures, homeOfficeActualGap } from "../8829/lines.js";
+import { form8829Figures, homeOfficeActualGap, sharedHomeGap } from "../8829/lines.js";
 import { depreciationLine, partVEntries } from "./attachments.js";
 
 // irs-1040sc-inst-2025::sec::what-s-new::b01: 70 cents per business mile for 2025.
@@ -155,12 +155,15 @@ export function homeOfficeGap(
  * expenses. Undefined while line 29 or an answer waits, or for a case Form 8829's
  * lines do not handle (homeOfficeActualGap).
  */
-function form8829Line36(business: BusinessFactValue): number | undefined {
+function form8829Line36(
+  business: BusinessFactValue,
+  onReturn: readonly BusinessFactValue[],
+): number | undefined {
   const office = business.homeOfficeActual;
   const line29 = tentativeProfit(business);
   if (!office || line29 === undefined) return undefined;
   if (office.ownsHome !== false || office.allGrossIncomeFromHome !== true) return undefined;
-  if (homeOfficeActualGap(office)) return undefined;
+  if (homeOfficeActualGap(office) || sharedHomeGap(business, onReturn)) return undefined;
   return form8829Figures(office, line29).line36;
 }
 
@@ -177,7 +180,7 @@ export function homeOfficeExpenses(
   business: BusinessFactValue,
   onReturn: readonly BusinessFactValue[],
 ): number | undefined {
-  if (business.homeOfficeActual) return form8829Line36(business);
+  if (business.homeOfficeActual) return form8829Line36(business, onReturn);
   const office = business.homeOffice;
   const line29 = tentativeProfit(business);
   if (!office || office.allGrossIncomeFromHome !== true || line29 === undefined) return undefined;

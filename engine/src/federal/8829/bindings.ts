@@ -12,6 +12,7 @@ import {
   form8829Figures,
   homeOfficeActualGap,
   OWNED_HOME_GAP,
+  sharedHomeGap,
   type Form8829Figures,
   type HomeExpenseLine,
 } from "./lines.js";
@@ -36,7 +37,7 @@ function figuresOf(info: Form8829FilingInfo) {
   const business = businessOf(info);
   const office = business?.homeOfficeActual;
   if (!business || !office) return undefined;
-  const gap = homeOfficeActualGap(office);
+  const gap = homeOfficeActualGap(office) ?? sharedHomeGap(business, info.form8829Businesses ?? []);
   if (gap) return unsupported(gap);
   const line29 = tentativeProfit(business);
   if (line29 === undefined || office.ownsHome === undefined) return undefined;

@@ -45,5 +45,7 @@ export interface Schedule1FilingInfo extends BaseFilingInfo {
   iraCoveredAtWork?: boolean;
   iraAge50OrOlder?: boolean;
   iraWages?: number;
+  /** W-2 box 12 code T: excluded adoption benefits send a covered person to Pub. 590-A. */
+  iraAdoptionBenefits?: boolean;
   livedApartAllYear?: boolean;
 }

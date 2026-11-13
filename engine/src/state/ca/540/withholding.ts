@@ -1,15 +1,17 @@
 /*
  * Form 540 line 71 from the information returns other than the W-2
  * (ca-540-inst-2025::sec::line-71-california-income-tax-withheld::b01): W-2G box
- * 15, 1099-INT box 17, 1099-MISC box 16, 1099-NEC box 5 and 1099-R box 14.
+ * 15, 1099-INT box 17, 1099-K box 8, 1099-MISC box 16, 1099-NEC box 5 and
+ * 1099-R box 14.
  * Withholding by another state is left out: a form whose state box names a
- * state other than California does not count. 1099-DIV, 1099-K and 1099-OID
- * have no state withholding box in their facts.
+ * state other than California does not count. 1099-DIV and 1099-OID have no
+ * state withholding box in their facts.
  */
 
 import {
   getGamblingWinningsFacts,
   getNonemployeeCompensationFacts,
+  getPaymentTransactionsFacts,
   isInterestFactKey,
   isMiscIncomeFactKey,
   isRetirementDistributionFactKey,
@@ -41,6 +43,11 @@ export function californiaWithholdingOtherForms(inputs: ResolverInputs): number 
     ...withheld(getGamblingWinningsFacts(inputs.facts) as unknown as Box[], "box15", "box13"),
     ...withheld(boxes(inputs, "investment_income", isInterestFactKey), "box17", "box15"),
     ...withheld(boxes(inputs, "other", isMiscIncomeFactKey), "box16", "box17"),
+    ...withheld(
+      getPaymentTransactionsFacts(inputs.facts).map((form) => form.value as unknown as Box),
+      "box8",
+      "box6",
+    ),
     ...withheld(
       getNonemployeeCompensationFacts(inputs.facts).map((form) => form.value as unknown as Box),
       "box5",

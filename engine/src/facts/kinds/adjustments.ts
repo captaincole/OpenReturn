@@ -9,6 +9,8 @@ export const ADJUSTMENT_KEYS = {
   alimonyRecipientSsn: "adjustments.alimony_recipient_ssn",
   /* Line 19c: the date of the original divorce or separation agreement, YYYY-MM-DD. */
   alimonyPaidAgreementDate: "adjustments.alimony_paid_agreement_date",
+  /* A pre-2019 agreement changed after 2018 to say alimony is not income to the recipient (boolean). */
+  alimonyPaidAgreementExcludes: "adjustments.alimony_paid_agreement_excludes",
   /* Line 24a: jury duty pay given to the employer, because the employer paid the salary. */
   juryDutyPayToEmployer: "adjustments.jury_duty_pay_to_employer",
   /* Line 24d: reforestation amortization and expenses. */

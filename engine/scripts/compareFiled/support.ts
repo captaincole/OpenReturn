@@ -5,9 +5,11 @@
  */
 
 import {
+  ADJUSTMENT_KEYS,
   AMT_KEYS,
   CAPITAL_LOSS_CARRYOVER_KEYS,
   CA_EITC_KEYS,
+  CA_EMPLOYEE_CLASSIFICATION_KEYS,
   CA_MISC_DEDUCTION_KEYS,
   DEPENDENT_CARE_KEYS,
   EIC_KEYS,
@@ -17,6 +19,7 @@ import {
   HOUSEHOLD_EMPLOYMENT_KEYS,
   HSA_COVERAGE_KEYS,
   INVESTMENT_INTEREST_KEYS,
+  ITEMIZED_OTHER_KEYS,
   MORTGAGE_KEYS,
   NET_INVESTMENT_INCOME_KEYS,
   OTHER_INCOME_KEYS,
@@ -47,6 +50,7 @@ import {
   isStatedQuantityFact,
   isTradeFact,
   isW2Fact,
+  makeRothIraFactKey,
   makeTraditionalIraFactKey,
 } from "../../src/facts/index.js";
 import type { TaxFactRow } from "../../src/facts/rows.js";
@@ -104,6 +108,11 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(ELDERLY_OR_DISABLED_KEYS),
   ...Object.values(DEPENDENT_CARE_KEYS),
   ...Object.values(OTHER_INCOME_KEYS),
+  ...Object.values(ADJUSTMENT_KEYS),
+  ...Object.values(ITEMIZED_OTHER_KEYS),
+  ...Object.values(CA_EMPLOYEE_CLASSIFICATION_KEYS),
+  makeRothIraFactKey("taxpayer"),
+  makeRothIraFactKey("spouse"),
   SPOUSE_KEYS.livedApartAllYear,
   SPOUSE_KEYS.livedApartLastSixMonths,
   SPOUSE_KEYS.legallySeparatedApartAtYearEnd,

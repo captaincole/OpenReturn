@@ -1,6 +1,6 @@
 /* Drafted by the write-binding-rules skill. Mark hand edits with // MANUAL EDIT:. */
 
-import { defineForm, type BindingFn } from "../../defineForm.js";
+import { defineForm, type BindingFn, type FormAccessor } from "../../defineForm.js";
 import type { DepreciableAsset } from "../../facts/index.js";
 import { atLeast, roundDollars, sum } from "../../money.js";
 import { unsupported } from "../../types.js";
@@ -31,21 +31,27 @@ const LISTED = "Listed property (Part V) is not modeled.";
 const PART_V = "Part V (listed property and vehicles) is not modeled.";
 
 const assetsOf = (info: Form4562FilingInfo) => activityOf(info)?.depreciation.assets ?? [];
-const electing = (asset: DepreciableAsset) => (asset.section179Elected ?? 0) > 0;
+// Line 6 leaves out listed property (irs-4562-inst-2025::sec::line-6::b01); line 7 takes it.
+const electing = (asset: DepreciableAsset) =>
+  (asset.section179Elected ?? 0) > 0 && !asset.listedProperty;
+const electingAny = (asset: DepreciableAsset) => (asset.section179Elected ?? 0) > 0;
 
 /* Part I applies when an asset of this activity has a section 179 election, or a carryover exists. */
 function partI(info: Form4562FilingInfo): boolean {
   const depreciation = activityOf(info)?.depreciation;
-  return assetsOf(info).some(electing) || (depreciation?.section179Carryover ?? 0) > 0;
+  return assetsOf(info).some(electingAny) || (depreciation?.section179Carryover ?? 0) > 0;
 }
 
 /* A Part I line, blank without a section 179 election and unsupported married filing separately. */
 const partILine =
-  (line: (info: Form4562FilingInfo) => unknown) => (_: unknown, info: Form4562FilingInfo) => {
+  (line: (info: Form4562FilingInfo, form: FormAccessor<Form4562>) => unknown) =>
+  (form: FormAccessor<Form4562>, info: Form4562FilingInfo) => {
     if (!partI(info)) return undefined;
     if (info.filingStatus === "married_filing_separately") return unsupported(SPOUSE_SHARE);
-    return line(info) as never;
+    return line(info, form) as never;
   };
+
+const amount = (value: unknown) => (typeof value === "number" ? value : undefined);
 
 /* Line 2: the business-use cost of every activity's personal property placed in service in 2025. */
 function section179PropertyCost(info: Form4562FilingInfo): number {
@@ -99,32 +105,42 @@ export function register(): void {
       "0.header.business_or_activity": (_, info) => activityOf(info)?.name,
       "0.header.identifying_number": (_, info) =>
         info.taxpayerSSN ? SSN.format(info.taxpayerSSN) : undefined,
-      // Part I (irs-4562-inst-2025::sec::line-1::b01 through ::line-12::b01).
-      "0.line.1_maximum_amount": partILine(() => SECTION_179_MAXIMUM),
+      /*
+       * Part I (irs-4562-inst-2025::sec::line-1::b01 through ::line-12::b01).
+       * Worksheet 1 (::line-3::b01–b02): the smaller of the property's cost and $2,500,000.
+       */
+      "0.line.1_maximum_amount": partILine((info) =>
+        Math.min(section179PropertyCost(info), SECTION_179_MAXIMUM),
+      ),
       "0.line.2_total_cost_section_179_property": partILine(section179PropertyCost),
       "0.line.3_threshold_cost": partILine(() => SECTION_179_THRESHOLD),
-      "0.line.4_reduction_in_limitation": (form) =>
-        typeof form["0.line.2_total_cost_section_179_property"] === "number"
-          ? atLeast(0, form["0.line.2_total_cost_section_179_property"] - SECTION_179_THRESHOLD)
-          : undefined,
-      "0.line.5_dollar_limitation": (form) =>
-        typeof form["0.line.4_reduction_in_limitation"] === "number"
-          ? atLeast(0, SECTION_179_MAXIMUM - form["0.line.4_reduction_in_limitation"])
-          : undefined,
+      "0.line.4_reduction_in_limitation": partILine((_, form) => {
+        const line2 = amount(form["0.line.2_total_cost_section_179_property"]);
+        return line2 === undefined ? undefined : atLeast(0, line2 - SECTION_179_THRESHOLD);
+      }),
+      "0.line.5_dollar_limitation": partILine((_, form) => {
+        const line1 = amount(form["0.line.1_maximum_amount"]);
+        const line4 = amount(form["0.line.4_reduction_in_limitation"]);
+        return line1 === undefined || line4 === undefined ? undefined : atLeast(0, line1 - line4);
+      }),
       ...line6Bindings(),
       "0.line.7_listed_property": partILine((info) =>
         assetsOf(info).some((asset) => asset.listedProperty) ? unsupported(LISTED) : undefined,
       ),
       "0.line.8_total_elected_cost": partILine((info) =>
-        roundDollars(sum(...assetsOf(info).map((asset) => asset.section179Elected))),
+        roundDollars(
+          sum(
+            ...assetsOf(info)
+              .filter(electing)
+              .map((asset) => asset.section179Elected),
+          ),
+        ),
       ),
-      "0.line.9_tentative_deduction": (form) => {
-        const line5 = form["0.line.5_dollar_limitation"];
-        const line8 = form["0.line.8_total_elected_cost"];
-        return typeof line5 === "number" && typeof line8 === "number"
-          ? Math.min(line5, line8)
-          : undefined;
-      },
+      "0.line.9_tentative_deduction": partILine((_, form) => {
+        const line5 = amount(form["0.line.5_dollar_limitation"]);
+        const line8 = amount(form["0.line.8_total_elected_cost"]);
+        return line5 === undefined || line8 === undefined ? undefined : Math.min(line5, line8);
+      }),
       "0.line.10_carryover_from_2024": partILine((info) =>
         roundDollars(activityOf(info)?.depreciation.section179Carryover),
       ),
