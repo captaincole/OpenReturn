@@ -13,6 +13,8 @@ import { TCB_CA_007_TAX_YEAR, TCB_CA_007_USER_ID, tcbCa007Facts } from "./facts.
 
 /* The federal forms are inputs to the CA return: evaluated, not checked (the case has no federal key). */
 const FORM_IDS = [
+  "form-4562",
+  "form-8829",
   "schedule-c",
   "schedule-se",
   "schedule-e",
@@ -21,6 +23,7 @@ const FORM_IDS = [
   "form-4952",
   "schedule-a",
   "form-1040",
+  "form-3885a",
   "schedule-ca",
   "form-3526",
   "form-3805p",
