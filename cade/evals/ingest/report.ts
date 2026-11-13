@@ -4,7 +4,7 @@ import path from "node:path";
 import { avg, scoreCell, table } from "../lib/markdown";
 import { forDisplay, type EvalModel, type Tier } from "../lib/models";
 import { publishOverview } from "../lib/overview";
-import { loadCases } from "./cases";
+import { ALL_DOCS } from "./cases";
 import { ingestFlowScores } from "./flow";
 import { formScores, missesForm, type DocScore } from "./score";
 
@@ -182,7 +182,7 @@ export function renderReport(models: EvalModel[], results: IngestResult[]): stri
 
 /* A later run replaces a model's results for the documents it ran, so one can rerun alone. */
 export function publishReport(runs: IngestRun[]): string {
-  const docs = new Set(loadCases("full").map((testCase) => testCase.doc));
+  const docs = new Set(ALL_DOCS);
   const models = new Map<string, EvalModel>();
   const results = new Map<string, IngestResult[]>();
   for (const run of runs) {

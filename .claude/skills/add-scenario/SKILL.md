@@ -30,7 +30,7 @@ Run `create-input-documents <scenario>`. It sorts the inputs into documents and 
 
 ## 4. Write the scenario
 
-1. `facts.ts`, `decisions.ts` and `index.ts` (copy the closest scenario), and the entry in `tests/scenarios/index.ts`. Each fact's `sourceNote` names its PDF or the answer it came from.
+1. `facts.ts`, `decisions.ts` and `index.ts` (copy the closest scenario). The folder registers itself; no list names the scenarios. The scenario's `name` is the folder's name, and its `description` says what it covers. Each fact's `sourceNote` names its PDF or the answer it came from.
 2. `expected.ts`: each line of the table from step 1, as the key prints it. Comment each value with the line's label.
 3. Set `skip: true` in `index.ts`. The pre-commit hook runs every golden test, and the new scenario fails until step 5 is done; a skipped scenario still runs when you name it.
 4. Run `npm test -- <scenario>`. The failures are the work list for step 5.

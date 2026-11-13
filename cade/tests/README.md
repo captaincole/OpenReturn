@@ -15,5 +15,5 @@ integration, golden, and the scenarios) are in
 corpus.db; Cade reaches Canon only over MCP.
 
 No test file goes under `src/` or `scripts/`; `unit/layout.test.ts` fails
-on one. Scenario data comes from `@openreturn/engine/scenarios`; do not copy it
-here.
+on one. Scenario data comes from `@openreturn/engine/scenarios`
+(`loadScenario("<name>")`); do not copy it here.

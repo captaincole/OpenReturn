@@ -13,7 +13,7 @@ import { modifiedAgi } from "../../../../src/federal/8582/magi.js";
 import type { Form8582 } from "../../../../src/federal/8582/types.js";
 import type { RentalProperty } from "../../../../src/federal/schedule-e/filingInfo.js";
 import { evaluateScenario } from "../../../../src/index.js";
-import { tcbUs009Scenario as scenario } from "../../../scenarios/index.js";
+import { tcbUs009Scenario as scenario } from "../../../scenarios/tcb-us-009/index.js";
 
 const selfRental: RentalFactValue = {
   propertyType: "self_rental",

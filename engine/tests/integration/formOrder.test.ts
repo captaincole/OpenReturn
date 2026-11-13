@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { evaluateScenarioForms } from "../golden/runScenario.js";
-import { SCENARIOS } from "../scenarios/index.js";
+import { loadScenarios } from "../scenarios/index.js";
+
+const SCENARIOS = await loadScenarios();
 
 async function lineValues(...args: Parameters<typeof evaluateScenarioForms>) {
   const { forms } = await evaluateScenarioForms(...args);

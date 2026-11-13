@@ -10,7 +10,7 @@ import type { RentalFactValue } from "../../../../src/facts/index.js";
 import type { TaxFactRow } from "../../../../src/facts/rows.js";
 import { resolveFilingInfo } from "../../../../src/filingInfo.js";
 import { evaluateScenario, pendingInputs } from "../../../../src/index.js";
-import { tcbUs009Scenario as scenario } from "../../../scenarios/index.js";
+import { tcbUs009Scenario as scenario } from "../../../scenarios/tcb-us-009/index.js";
 
 const RENTAL_KEY = "rental.property.2-add";
 

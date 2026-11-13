@@ -1,5 +1,5 @@
 import { evaluateScenario, type EvaluatedScenario } from "@openreturn/engine";
-import { tcbCa005Scenario } from "@openreturn/engine/scenarios";
+import { loadScenario } from "@openreturn/engine/scenarios";
 import { describe, expect, it } from "vitest";
 import { ITEMIZE_KEY, planClosing, SCHEDULE_A_KEY } from "../../src/mastra/deductions/closing";
 import { deductionsFlow } from "../../src/mastra/deductions/flow";
@@ -17,6 +17,8 @@ import {
   RENTER,
   type FactRow,
 } from "./deductionsFixtures";
+
+const tcbCa005Scenario = await loadScenario("tcb-ca-005");
 
 const statuses = (scenario: EvaluatedScenario) =>
   Object.fromEntries(

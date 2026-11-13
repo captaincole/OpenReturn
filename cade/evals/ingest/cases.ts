@@ -9,7 +9,7 @@ import {
   MORTGAGE_KEYS,
   type TaxFactRow,
 } from "@openreturn/engine/facts";
-import { SCENARIOS } from "@openreturn/engine/scenarios";
+import { loadScenarios } from "@openreturn/engine/scenarios";
 import path from "node:path";
 
 export interface IngestCase {
@@ -169,7 +169,11 @@ const LITE = new Set([
   "tcb-ca-005/07-chase-bank-1098.pdf",
 ]);
 
-export function loadCases(tier: "lite" | "full"): IngestCase[] {
+/* Every document in the full tier, as "<scenario>/<file>". */
+export const ALL_DOCS = MANIFEST.map(([scenario, file]) => `${scenario}/${file}`);
+
+export async function loadCases(tier: "lite" | "full"): Promise<IngestCase[]> {
+  const SCENARIOS = await loadScenarios();
   const cases = MANIFEST.map(([scenario, file, type, patterns]) => {
     const facts = SCENARIOS.find((entry) => entry.name === scenario)?.facts ?? [];
     const expected = facts

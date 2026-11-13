@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { evaluateScenario, pendingInputs } from "../../src";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
 import { decisionsWithPreparerStyle } from "../helpers/preparer";
-import { SCENARIOS } from "../scenarios/index";
+import { loadScenarios } from "../scenarios/index";
 import type { Scenario } from "../types";
 
 /*
@@ -123,6 +123,8 @@ function unreported(base: Outcome, dropped: Outcome): string[] {
     .filter((id) => base.values.get(id) !== dropped.values.get(id))
     .map((id) => `${id}: ${base.values.get(id)} → ${dropped.values.get(id)}`);
 }
+
+const SCENARIOS = await loadScenarios();
 
 describe.each(SCENARIOS)("required inputs: $name", (scenario) => {
   const decisions = decisionsWithPreparerStyle(scenario);

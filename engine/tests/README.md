@@ -11,7 +11,7 @@ are in `cade/tests/`; the corpus tests are in `canon/tests/`.
 | `unit/` | One module, its own small inputs. The same folders as `src/` and `scripts/`. | `npm run test:unit` |
 | `integration/` | The whole engine over every scenario. | `npm run test:integration` |
 | `golden/` | Every scenario and catalog, against locked values and PDFs. | `npm test` |
-| `scenarios/` | The scenario data. `scenarios/index.ts` lists them all. | — |
+| `scenarios/` | The scenario data. Each folder with an `index.ts` is a scenario; `scenarios/index.ts` finds them. | — |
 | `helpers/` | Shared assertion, fixture, and golden-PDF code. | — |
 
 The pre-commit hook runs all three. All are offline: no network, no AI.
@@ -33,80 +33,9 @@ check name: `npm test -- alex`, `npm test -- catalog-fill`,
   `golden/runScenario.ts` runs the engine over them and asserts every
   field, then diffs the filled PDF against a golden. These are the ground
   truth for "did the math change".
-  - `alex` — single CA filer, one W-2, standard deduction (the canonical case)
-  - `alejandro` — adds 1099-INT/DIV investment income
-  - `marcus` — adds capital gains (8949 / Schedule D)
-  - `jordan` — high income: HSA, RSU and crypto sales, 401(k) rollovers,
-    1099-MISC (locked engine output, drafted by `../scripts/draftExpected.ts`)
-  - `carter` — **unverified**: IRS ATS test scenario 8 moved to CA. MFS,
-    age 65+, Roth and rollover 1099-Rs, capital gain distribution, Social
-    Security. No answer key: hand-checked, locked engine output
-    (`verification: "unverified"`; the summary line says so)
-  - `tara` — **unverified**: IRS ATS test scenario 1 moved to CA. Single,
-    two W-2s, a household employee (Schedule H), home energy improvements
-    (Form 5695 Part II, Schedule 3). Hand-checked, locked engine output
-  - `tcb-us-001` — TaxCalcBench case ty25-us-001, federal only. Head of
-    household, a dependent, a $5M long-term stock gain, itemized
-    deductions (Schedule A, with Form 1098 mortgage interest and
-    investment interest on Form 4952), the AMT on an ISO exercise (Form
-    6251). Checked against the case's answer key; its README lists where
-    the engine follows the form instead
-  - `tcb-us-002` — TaxCalcBench case ty25-us-002, federal only. Head of
-    household in Alaska, a nephew, the Alaska Permanent Fund dividend,
-    three casualty losses (Form 4684), a qualified disaster loss that
-    raises the standard deduction (Schedule A line 16), the earned income
-    credit (Schedule EIC) and the additional child tax credit. Checked
-    against the case's answer key; its README lists the Schedule A lines
-    the instructions leave blank
-  - `tcb-us-003` — TaxCalcBench case ty25-us-003, federal only. MFJ,
-    spouse 65+, an IRA rollover and a Roth conversion (Form 8606),
-    Social Security, the senior deduction (Schedule 1-A). Checked against
-    the case's answer key; its README lists where the engine follows the
-    instructions instead
-  - `tcb-us-004` — TaxCalcBench case ty25-us-004, federal only. MFJ,
-    itemized deductions (Schedule A, with investment interest on Form
-    4952), a dependent (Schedule 8812), two W-2s, a consulting business
-    (Schedule C, SE, 8995), a stock sale, Social Security. Every line
-    the engine fills matches the case's answer key
-  - `tcb-us-006` — TaxCalcBench case ty25-us-006, federal only. MFS, a
-    W-2 with an HSA, a rideshare business (Schedule C, Schedule SE, Form
-    8995-A) with its 1099-K, a W-2G, interest and dividends (Forms 8959 and 8960). Checked
-    against the case's answer key; its README lists where the engine
-    follows the instructions instead
-  - `tcb-us-005` — TaxCalcBench case ty25-us-005, federal only. MFJ, a
-    real estate professional's rental and a passive royalty (Schedule E,
-    Form 8582), a business whose QBI nets the rental's loss (Schedule C
-    (Form 8995-A)), a W-2 over the Additional Medicare threshold and a
-    child (Schedule 8812). Every line in the case's answer key matches;
-    its README lists what it leaves blank and the QJV box
-  - `tcb-us-008` — TaxCalcBench case ty25-us-008, federal only. MFS, a
-    W-2, a consulting business paid on a 1099-NEC (Schedule C with
-    mileage and a simplified home office, Schedule SE, Form 8995), gifts
-    on Schedule A, a capital loss carryover on Schedule D. Checked
-    against the case's answer key; its README lists the lines not checked
-  - `tcb-us-009` — TaxCalcBench case ty25-us-009, federal only. MFS,
-    born 1951, lived with the spouse; a W-2, interest, dividends, two
-    self-rentals and a passive royalty (Schedule E, Form 8582, Form 8960
-    line 4b, Form 8995). Every line matches the answer key except eight
-    Form 8582 lines in `knownMismatches`, where the engine follows the
-    instructions: Part V, not Part IV.
-  - `tcb-us-007` — TaxCalcBench case ty25-us-007, federal only. MFS, a
-    W-2, a consulting business, two 1099-B sales (Form 8949), a capital
-    loss carryover, NIIT with an additional modification, and a made
-    Form 1095-A whose advance payments are repaid on Form 8962. Checked
-    against the case's answer key; its README lists the lines not checked
-  - `tcb-us-010` — TaxCalcBench case ty25-us-010, federal only. Qualifying
-    surviving spouse under 65, retired on disability: a disability pension
-    on Form 1040 line 1h, itemizing below the standard deduction with
-    general sales tax (Schedule A), child and dependent care for a disabled
-    adult son (Form 2441), the credit for the elderly or the disabled
-    (Schedule R) and the EIC. Checked against the case's answer key; its
-    README lists the lines not checked
-  - `tcb-ca-005` — TaxCalcBench case ty25-ca-005, CA checked only. MFJ,
-    a dependent, CA itemized deductions (Schedule CA Part II, FTB 3526),
-    the CA AMT on an ISO exercise (Schedule P), an early 1099-R (FTB
-    3805P). Every checked line matches the case's CA key; the federal
-    forms are inputs with locked goldens
+  `npm test -- --list` prints each scenario and what it covers. A scenario
+  from a published example has a `README.md` that names its source and
+  the lines where the engine follows the instructions and not the answer key.
 - **Catalog-fill checks** (`golden/catalogFill.ts`) — for every form in its
   `CATALOGS` registry: fill the blank PDF with synthetic values for every
   cataloged field and diff against a golden snapshot in
@@ -120,9 +49,9 @@ Blank PDFs come from `@openreturn/sources` (`sources/<year>/forms/…`), through
 
 - **New scenario**: follow [Add a scenario](../../docs/adding-a-scenario.md).
   In short: create `scenarios/<name>/` (see `alex/` for the file shape:
-  `facts.ts`, `decisions.ts`, `expected.ts`, `index.ts`), and add it to
-  `SCENARIOS` in `scenarios/index.ts`. The golden and integration tests
-  then run it.
+  `facts.ts`, `decisions.ts`, `expected.ts`, `index.ts`). The folder
+  registers itself: the golden and integration tests run every folder
+  that has an `index.ts`. The scenario's `name` is the folder's name.
 - **New form's catalog check**: `CATALOGS` in `golden/catalogFill.ts`
   mirrors the engine registry, so a registered form gets a check by
   itself. The first run fails with "no golden — run --update"; run

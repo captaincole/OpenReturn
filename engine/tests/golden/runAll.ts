@@ -1,17 +1,28 @@
-/* Positional args filter by check name (case-insensitive substring): npm test -- alex catalog-fill */
+/*
+ * Positional args filter by check name (case-insensitive substring): npm test -- alex catalog-fill
+ * --list prints each scenario and what it covers, and runs nothing.
+ */
 
-import { SCENARIOS } from "../scenarios/index.js";
+import { loadScenarios } from "../scenarios/index.js";
 import type { RunResult } from "../types.js";
 import { CATALOGS, runCatalogFillCheck } from "./catalogFill.js";
 import { runScenario } from "./runScenario.js";
 
-const UNVERIFIED = new Set(
-  SCENARIOS.filter((scenario) => scenario.verification === "unverified").map(
-    (scenario) => scenario.name,
-  ),
-);
-
 async function main() {
+  const SCENARIOS = await loadScenarios();
+  const UNVERIFIED = new Set(
+    SCENARIOS.filter((scenario) => scenario.verification === "unverified").map(
+      (scenario) => scenario.name,
+    ),
+  );
+  if (process.argv.includes("--list")) {
+    for (const scenario of SCENARIOS) {
+      const tag = UNVERIFIED.has(scenario.name) ? " (unverified: locked engine output)" : "";
+      console.log(`${scenario.name}${tag}: ${scenario.description}`);
+    }
+    return;
+  }
+
   const filters = process.argv
     .slice(2)
     .filter((arg) => !arg.startsWith("-"))

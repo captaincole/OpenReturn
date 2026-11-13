@@ -122,7 +122,7 @@ async function main() {
   mkdirSync(outDir, { recursive: true });
   const docFilter = process.argv.find((arg) => arg.startsWith("--doc="))?.slice(6);
   const tier = tierFromArgs(process.argv);
-  const cases = loadCases(tier).filter(
+  const cases = (await loadCases(tier)).filter(
     (testCase) => !docFilter || testCase.doc.includes(docFilter),
   );
   const models = modelsFromArgs(process.argv.slice(2));

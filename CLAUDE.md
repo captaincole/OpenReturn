@@ -47,6 +47,7 @@ engine/                          # @openreturn/engine — THE FORM ENGINE. Pure,
 │                                  deductions/ (itemize-or-standard comparison, #92).
 │                                  Boundary enforced by tests/unit/boundary.test.ts.
 ├── tests/                       # the engine's test pyramid: unit/, integration/, golden/, scenarios/
+│                                  (a scenario folder registers itself; `npm test -- --list` prints them)
 ├── scripts/                     # renderScenario, draftExpected, compareFiled
 ├── paths.ts                     # on-disk locations for offline tooling
 ├── README.md                    # contributor guide; public API = package.json "exports"
