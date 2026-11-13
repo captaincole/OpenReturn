@@ -8,10 +8,13 @@ import {
   AMT_KEYS,
   CAPITAL_LOSS_CARRYOVER_KEYS,
   CA_MISC_DEDUCTION_KEYS,
+  CA_PAYMENT_KEYS,
   DEPENDENT_CARE_KEYS,
+  EDUCATOR_EXPENSE_KEYS,
   EIC_KEYS,
   ELDERLY_OR_DISABLED_KEYS,
   GAMBLING_KEYS,
+  HEAD_OF_HOUSEHOLD_KEYS,
   HOME_ENERGY_KEYS,
   HOUSEHOLD_EMPLOYMENT_KEYS,
   HSA_COVERAGE_KEYS,
@@ -102,6 +105,9 @@ export const SIMPLE_FACT_KEYS = new Set<string>([
   ...Object.values(ELDERLY_OR_DISABLED_KEYS),
   ...Object.values(DEPENDENT_CARE_KEYS),
   ...Object.values(OTHER_INCOME_KEYS),
+  ...Object.values(EDUCATOR_EXPENSE_KEYS),
+  ...Object.values(CA_PAYMENT_KEYS),
+  ...Object.values(HEAD_OF_HOUSEHOLD_KEYS),
   SPOUSE_KEYS.livedApartAllYear,
   SPOUSE_KEYS.livedApartLastSixMonths,
   SPOUSE_KEYS.legallySeparatedApartAtYearEnd,
@@ -154,7 +160,7 @@ const OUT_OF_SCOPE: { key: string; supported: (v: unknown) => boolean; detail: s
       value === "head_of_household" ||
       value === "qualifying_surviving_spouse",
     detail:
-      "Only single filers are tested (married filing separately: one unverified scenario; jointly: one federal-only scenario; head of household: two federal-only scenarios; qualifying surviving spouse: one federal-only scenario).",
+      "Only single filers are tested (married filing separately: one unverified scenario; jointly: one federal-only scenario; head of household: two federal-only scenarios and one California scenario; qualifying surviving spouse: one federal-only scenario).",
   },
   {
     key: "decisions.scope.ca_residency",

@@ -7,6 +7,7 @@ import {
   BLINDNESS_KEYS,
   CA_PAYMENT_KEYS,
   EDUCATOR_EXPENSE_KEYS,
+  HEAD_OF_HOUSEHOLD_KEYS,
   makeBusinessFactKey,
   makeDependentFactKey,
   makeInterestFactKey,
@@ -119,6 +120,7 @@ const son: DependentFactValue = {
   usCitizenOrResident: true,
   fullTimeStudent: false,
   permanentlyDisabled: false,
+  grossIncome: 0, // ca_form3532.qpgross_income
 };
 
 const idFact = (suffix: string, value: string, sourceNote?: string) =>
@@ -181,6 +183,12 @@ const ANSWER_FACTS: TaxFactRow[] = [
     `${ANSWERS}: ca_form540.full_year_health_coverage.`,
   ),
   fact("other", "use_tax.owed_amount", 0, `${ANSWERS}: ca_form540.use_tax.`),
+  fact(
+    "filing_status",
+    HEAD_OF_HOUSEHOLD_KEYS.caMaritalStatus,
+    "not_married",
+    `${ANSWERS}: ca_form3532.marital_status "Not legally married/RDP during the tax year".`,
+  ),
   /* ca_payments: no estimated payments, $0 applied from 2024, $42 sent with the extension. */
   fact(
     "estimated_payments",
