@@ -1,10 +1,12 @@
 import {
   parseRetirementDistributionFact,
+  readRothIraFact,
   readTraditionalIraFact,
   type RetirementDistributionFactValue,
 } from "../../../facts/index.js";
 import type { TaxFactRow } from "../../../facts/rows.js";
 import { rowTaxable, traditionalTaxable } from "../../../federal/1040/resolveInfo.js";
+import { partIIIFigures } from "../../../federal/8606/partIII.js";
 import { form8606Filers } from "../../../federal/8606/resolveInfo.js";
 import { sum } from "../../../money.js";
 import { factsInCategory, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
@@ -18,8 +20,8 @@ import type { EarlyDistributionOwner, Form3805pFilingInfo } from "./filingInfo.j
  * days. Code 1 is "early distribution, no known exception" (with a second
  * letter too: 1B, 1D, 1L…); S is a SIMPLE IRA in its first two years. Code J
  * (early Roth IRA) takes line 1 from Form 8606 line 19
- * (::sec::line-1-early-distributions-included-in-income::b05), which the engine
- * does not compute: the form files and its amount waits.
+ * (::sec::line-1-early-distributions-included-in-income::b05); rothEarlyAmount
+ * says how much of it counts.
  */
 const EARLY_NO_EXCEPTION_CODES = ["1", "S", "J"];
 const ROTH_IRA_EARLY_CODE = "J";
@@ -72,12 +74,17 @@ function amountIncludedInIncome(
   rows: EarlyRow[],
   allIraRowsOfOwner: RetirementDistributionFactValue[],
 ): number | undefined {
-  if (rows.some((row) => row.distribution.box7.includes(ROTH_IRA_EARLY_CODE))) return undefined;
+  const roth = rows.filter((row) => row.distribution.box7.includes(ROTH_IRA_EARLY_CODE));
+  if (roth.length > 0 && rothEarlyAmount(inputs, owner, roth) === undefined) return undefined;
   const plan = rows
+    .filter((row) => !row.distribution.box7.includes(ROTH_IRA_EARLY_CODE))
     .filter((row) => !row.distribution.box7IraSepSimple)
     .map((row) => rowTaxable(row.distribution));
   if (plan.includes(undefined)) return undefined;
-  const iraRows = rows.filter((row) => row.distribution.box7IraSepSimple);
+  const iraRows = rows.filter(
+    (row) =>
+      row.distribution.box7IraSepSimple && !row.distribution.box7.includes(ROTH_IRA_EARLY_CODE),
+  );
   if (iraRows.length === 0) return sum(...plan);
   if (form8606Filers(inputs).some((holder) => holder.owner === owner && holder.partI)) {
     return undefined;
@@ -89,6 +96,29 @@ function amountIncludedInIncome(
     rolledOver,
   );
   return ira === undefined ? undefined : sum(...plan, ira);
+}
+
+/*
+ * MANUAL EDIT: an early Roth IRA distribution (code J). Line 1 takes Form 8606
+ * line 19 allocated in order: first to line 20 and to the basis in regular
+ * contributions (line 22), which are not subject to the tax, then to amounts
+ * that are (::line-1-early-distributions-included-in-income::b06–b07). When line 23
+ * is 0, all of line 19 went to line 20 and line 22, so line 1 takes nothing.
+ * Otherwise the allocation needs earlier years' Pub. 1005 worksheets, which no
+ * fact gives: undefined.
+ */
+function rothEarlyAmount(
+  inputs: ResolverInputs,
+  owner: EarlyDistributionOwner,
+  rows: EarlyRow[],
+): number | undefined {
+  const answers = readRothIraFact(inputs.factByKey, owner);
+  if (!answers) return undefined;
+  const line23 = partIIIFigures(
+    rows.map((row) => row.distribution),
+    answers,
+  ).line23;
+  return line23 === 0 ? 0 : undefined;
 }
 
 /*
