@@ -1,3 +1,4 @@
+import type { OtherIncomeItem } from "../../facts/index.js";
 import type { BaseFilingInfo } from "../../filingInfo.js";
 
 export interface Schedule1FilingInfo extends BaseFilingInfo {
@@ -14,8 +15,35 @@ export interface Schedule1FilingInfo extends BaseFilingInfo {
   miscOtherIncome?: number;
   /** Line 8g: the Alaska Permanent Fund dividend the taxpayer states, cents kept. */
   alaskaPermanentFundDividends?: number;
-  /** Line 11: the educator expense deduction, at most $300 per eligible educator. */
-  educatorExpenses?: number;
-  /** Line 18: 1099-INT box 2 sum, cents kept. */
-  earlyWithdrawalPenalty?: number;
+  /** Line 2a: alimony received, and whether its agreement predates 2019 (undefined while the date is missing). */
+  alimonyReceived?: number;
+  alimonyReceivedTaxable?: boolean;
+  /** Line 2b: YYYY-MM-DD. */
+  alimonyReceivedAgreementDate?: string;
+  /** Lines 8h, 8i, 8k. */
+  juryDutyPay?: number;
+  prizesAndAwards?: number;
+  stockOptions?: number;
+  /** Line 8z: other income the taxpayer lists. */
+  otherIncomeItems?: OtherIncomeItem[];
+  /** Line 16. */
+  selfEmployedPlanDeduction?: number;
+  /** Lines 19a–19c. */
+  alimonyPaid?: number;
+  alimonyPaidDeductible?: boolean;
+  alimonyPaidAgreementDate?: string;
+  alimonyRecipientSsn?: string;
+  /** Lines 24a, 24d, 24e, 24f (W-2 box 12 code H), 24h, 24i. */
+  juryDutyPayToEmployer?: number;
+  reforestation?: number;
+  tradeActBenefitRepayment?: number;
+  section501c18dContributions?: number;
+  discriminationClaimFees?: number;
+  whistleblowerAwardFees?: number;
+  /** Line 20: the IRA Deduction Worksheet's answers for the taxpayer's IRA. */
+  iraContributions?: number;
+  iraCoveredAtWork?: boolean;
+  iraAge50OrOlder?: boolean;
+  iraWages?: number;
+  livedApartAllYear?: boolean;
 }
