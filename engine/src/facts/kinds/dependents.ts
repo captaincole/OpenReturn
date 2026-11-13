@@ -30,6 +30,13 @@ export interface DependentFactValue {
   usCitizenOrResident?: boolean;
   fullTimeStudent?: boolean;
   permanentlyDisabled?: boolean;
+  /* The person's gross income for the year (FTB 3532 line 4; the qualifying relative test). */
+  grossIncome?: number;
+  /*
+   * Days the person lived with the taxpayer during the year, by the FTB 3532 line 5
+   * rules (a married filer counts half the days the spouse also lived there).
+   */
+  daysLivedWithYou?: number;
   /*
    * A child who lived with the taxpayer half the year or less: true when the
    * custodial parent released the claim on Form 8332 (1040 instructions,

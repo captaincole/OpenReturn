@@ -15,12 +15,14 @@ const FORM_IDS = [
   "schedule-b",
   "schedule-c",
   "schedule-se",
+  "form-8995",
   "schedule-1",
   "schedule-2",
   "schedule-8812",
   "form-1040",
   "schedule-ca",
   "form-540",
+  "form-3532",
 ];
 
 export const tcbCa002Scenario: Scenario = {

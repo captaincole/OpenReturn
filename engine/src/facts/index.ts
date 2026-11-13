@@ -15,6 +15,7 @@ export * from "./kinds/earnedIncomeCredit.js";
 export * from "./kinds/educatorExpenses.js";
 export * from "./kinds/elderlyOrDisabledCredit.js";
 export * from "./kinds/gamblingWinnings.js";
+export * from "./kinds/headOfHousehold.js";
 export * from "./kinds/homeEnergy.js";
 export * from "./kinds/householdEmployment.js";
 export * from "./kinds/hsaCoverage.js";

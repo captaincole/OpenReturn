@@ -56,6 +56,20 @@ export const recordDependent = createTool({
       .describe("A U.S. citizen, U.S. national or U.S. resident alien"),
     fullTimeStudent: z.boolean().optional(),
     permanentlyDisabled: z.boolean().optional(),
+    grossIncome: z
+      .number()
+      .min(0)
+      .optional()
+      .describe("The person's own gross income for 2025 (FTB 3532 line 4); 0 for none"),
+    daysLivedWithYou: z
+      .number()
+      .int()
+      .min(0)
+      .max(366)
+      .optional()
+      .describe(
+        "Days the person lived with the user in 2025 (FTB 3532 line 5). A user who was married or an RDP during the year counts half the days the spouse also lived there",
+      ),
     form8332Release: z
       .boolean()
       .optional()

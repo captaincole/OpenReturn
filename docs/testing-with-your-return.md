@@ -55,6 +55,9 @@ alternative minimum tax on an incentive stock option exercise (Form
 6251); one with casualty losses (Form 4684), a qualified disaster loss
 that raises the standard deduction (Schedule A line 16), the earned
 income credit (Schedule EIC) and the additional child tax credit.
+A third head of household scenario is a California return (FTB 3532)
+with a business, Social Security, educator expenses, a penalty on early
+withdrawal of savings, the blind exemption and an extension payment.
 Qualifying surviving spouse has one federal-only TaxCalcBench scenario:
 a filer under 65 retired on disability, with a disability pension on
 line 1h, forced itemizing with general sales tax, child and dependent
