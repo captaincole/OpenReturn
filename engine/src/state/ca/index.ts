@@ -7,6 +7,7 @@ import { fixtureFileSchema } from "../../catalog.js";
 import { makeFormSpec, type FormSpec } from "../../formSpec.js";
 import { register as registerForm3514 } from "./3514/bindings.js";
 import { register as registerForm3526 } from "./3526/bindings.js";
+import { register as registerForm3532 } from "./3532/bindings.js";
 import { register as registerForm3805p } from "./3805p/bindings.js";
 import { register as registerForm540 } from "./540/bindings.js";
 import { register as registerForm5805 } from "./5805/bindings.js";
@@ -15,6 +16,7 @@ import { register as registerScheduleP } from "./schedule-p/bindings.js";
 
 import form3514CatalogJson from "./3514/catalog.json";
 import form3526CatalogJson from "./3526/catalog.json";
+import form3532CatalogJson from "./3532/catalog.json";
 import form3805pCatalogJson from "./3805p/catalog.json";
 import form540CatalogJson from "./540/catalog.json";
 import form5805CatalogJson from "./5805/catalog.json";
@@ -28,6 +30,7 @@ export const CA_CATALOGS = [
   fixtureFileSchema.parse(form3526CatalogJson),
   fixtureFileSchema.parse(form3805pCatalogJson),
   fixtureFileSchema.parse(schedulePCatalogJson),
+  fixtureFileSchema.parse(form3532CatalogJson),
   fixtureFileSchema.parse(form3514CatalogJson),
 ];
 
@@ -89,5 +92,12 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "FTB 5805",
     relativeDir: "state/ca/5805",
     register: registerForm5805,
+  }),
+  makeFormSpec({
+    formId: "form-3532",
+    shortId: "3532",
+    displayName: "FTB 3532",
+    relativeDir: "state/ca/3532",
+    register: registerForm3532,
   }),
 ];
