@@ -32,7 +32,6 @@ export const tcbCa003Scenario: Scenario = {
     "MFJ San Francisco County couple with two sons: two W-2s with dependent care benefits (Form 2441 Part III), a Schedule C loss, the federal EIC and the California EITC on FTB 3514 (TaxCalcBench).",
   taxYear: TCB_CA_003_TAX_YEAR,
   userId: TCB_CA_003_USER_ID,
-  skip: true,
   facts: tcbCa003Facts,
   decisions: tcbCa003Decisions,
   forms: FORM_IDS.map((formId) => ({
