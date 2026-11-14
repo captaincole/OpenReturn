@@ -33,10 +33,13 @@ const FORM_1040 = {
   "form-1040.line.1z": 82000,
 };
 
-/* Evaluates the Part III bindings against each other and the 1040 lines above. */
-function evaluate(info: Form2441FilingInfo): Record<string, unknown> {
+/* Evaluates the Part III bindings against each other and the federal lines given (the 1040 lines above). */
+function evaluate(
+  info: Form2441FilingInfo,
+  federal: Record<string, unknown> = FORM_1040,
+): Record<string, unknown> {
   const bindings = partIIIBindings() as Record<string, Binding>;
-  const form: Record<string, unknown> = new Proxy(FORM_1040, {
+  const form: Record<string, unknown> = new Proxy(federal, {
     get: (values: Record<string, unknown>, key: string) =>
       key in bindings ? bindings[key](form, info) : values[key],
   });
@@ -100,6 +103,35 @@ describe("Form 2441 Part III", () => {
     expect(pick(lines, ["12", "15", "17", "18", "19", "20", "21", "25", "26"])).toEqual([
       8000, 8000, 8000, 50000, 30000, 8000, 5000, 5000, 3000,
     ]);
+  });
+
+  it("takes the taxpayer's business loss off his own earned income on a joint return", () => {
+    const info: Form2441FilingInfo = {
+      ...BASE,
+      filingStatus: "married_filing_jointly",
+      hasBusiness: true,
+      qbiScheduleSEFiled: false,
+      dependentCareSpouseHasBusiness: false,
+      dependentCareBenefits: 6000,
+      dependentCareBenefitsByW2: [3000, 3000],
+      dependentCareExpensesIncurred: 5000,
+      dependentCareStudentOrDisabledSpouse: false,
+      dependentCareTaxpayerW2Wages: 19500,
+      dependentCareSpouseW2Wages: 22000,
+      dependentCareTaxpayerDisabilityWages: 0,
+      dependentCareSpouseDisabilityWages: 0,
+    };
+    const federal = {
+      "form-1040.line.1a": 41500,
+      "form-1040.line.1e": 6000,
+      "form-1040.line.1z": 47500,
+      "schedule-1.0.line.3": -31000,
+    };
+    expect(pick(evaluate(info, federal), ["18", "19", "20", "25", "26"])).toEqual([
+      -11500, 22000, 0, 0, 6000,
+    ]);
+    const spouseBusiness = evaluate({ ...info, dependentCareSpouseHasBusiness: true }, federal);
+    expect(spouseBusiness["18_earned_income"]).toHaveProperty("unsupported");
   });
 
   it("names the gaps: box 10 over the plan limit, two plans' limit, MFS spouse's earned income", () => {

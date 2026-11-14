@@ -43,6 +43,8 @@ export interface Form2441FilingInfo
   /** Lines 4 and 5 on a joint return: each spouse's disability pensions on Form 1040 line 1h; undefined while an answer is missing. */
   dependentCareTaxpayerDisabilityWages?: number;
   dependentCareSpouseDisabilityWages?: number;
+  /** Lines 4, 5, 18 and 19 on a joint return: a business on the return is the spouse's. */
+  dependentCareSpouseHasBusiness?: boolean;
   /** Line 9b. */
   dependentCarePriorYearExpensesPaid?: number;
   /** Line A (MFS). */
