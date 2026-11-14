@@ -5,13 +5,21 @@ import { cadeRequestContextSchema } from "../server/requestContext";
 import { recordIngestFact, type IngestCtx } from "./ingestShared";
 import { requireUserContext } from "./userContext";
 
+/* One fact per beneficiary: the spouse's SSA-1099 must not replace the taxpayer's. */
+export const ssaSlug = (owner: "taxpayer" | "spouse"): string =>
+  owner === "spouse" ? "ssa-spouse" : "ssa";
+
 export const ingestSsa1099 = createTool({
   id: "ingest-ssa-1099",
   requestContextSchema: cadeRequestContextSchema,
   description:
-    "Ingest one Form SSA-1099. Not for Form RRB-1099 (railroad retirement), which is not supported. Call ONCE per form. Writes one fact under category 'retirement'. If the filing status is married filing separately, also ask whether the user lived apart from their spouse for all of 2025.",
+    "Ingest one Form SSA-1099. Not for Form RRB-1099 (railroad retirement), which is not supported. Call ONCE per form. Writes one fact under category 'retirement'. On a joint return, set owner from the beneficiary's name: each spouse's form is its own fact. If the filing status is married filing separately, also ask whether the user lived apart from their spouse for all of 2025.",
   inputSchema: z.object({
     year: z.number().int(),
+    owner: z
+      .enum(["taxpayer", "spouse"])
+      .default("taxpayer")
+      .describe("Whose benefits: the beneficiary named on the form"),
     box3: z.number().optional().describe("Benefits paid in the year"),
     box4: z.number().optional().describe("Benefits repaid to SSA in the year"),
     box5: z.number().describe("Net benefits (box 3 minus box 4)"),
@@ -35,7 +43,7 @@ export const ingestSsa1099 = createTool({
       box5: input.box5,
       box6: input.box6,
     };
-    const factKey = makeSocialSecurityFactKey("ssa");
+    const factKey = makeSocialSecurityFactKey(ssaSlug(input.owner));
     await recordIngestFact(ctx, "retirement", factKey, value);
     return { factKey };
   },
