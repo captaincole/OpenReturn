@@ -105,6 +105,8 @@ export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
     spouseSSN: spouseSsnRaw ? ssn(spouseSsnRaw) : undefined,
     spouseDateOfBirth: spouseDob,
     spouseBornBeforeJan2_1961: bornBeforeJan2_1961(spouseDob),
+    taxpayerBlind: inputs.factByKey.get(BLINDNESS_KEYS.taxpayer) === true,
+    spouseBlind: inputs.factByKey.get(BLINDNESS_KEYS.spouse) === true,
     taxpayerOccupation: text(inputs, "identity.occupation"),
     taxpayerPhone: phoneRaw ? phone(phoneRaw) : undefined,
     taxpayerEmail: text(inputs, "identity.email"),
@@ -188,20 +190,15 @@ export function resolve540Info(inputs: ResolverInputs): Form540FilingInfo {
     ) as boolean | undefined,
     refundFullOverpaymentCA: decisionByKey.get("decisions.refund.refund_full_overpayment_ca") as
       boolean | undefined,
-    ...blindnessAndCaPayments(inputs),
+    ...caPayments(inputs),
   };
 }
 
-/*
- * Line 8: who is visually impaired. Line 72: the California payments the taxpayer
- * states, blank when none is recorded.
- */
-function blindnessAndCaPayments(
+/* Line 72: the California payments the taxpayer states, blank when none is recorded. */
+function caPayments(
   inputs: ResolverInputs,
-): Pick<Form540FilingInfo, "taxpayerBlind" | "spouseBlind" | "caEstimatedAndOtherPayments"> {
+): Pick<Form540FilingInfo, "caEstimatedAndOtherPayments"> {
   return {
-    taxpayerBlind: inputs.factByKey.get(BLINDNESS_KEYS.taxpayer) === true,
-    spouseBlind: inputs.factByKey.get(BLINDNESS_KEYS.spouse) === true,
     caEstimatedAndOtherPayments: sumOrBlank(
       num(inputs, CA_PAYMENT_KEYS.estimatedTax),
       num(inputs, CA_PAYMENT_KEYS.priorYearOverpaymentApplied),

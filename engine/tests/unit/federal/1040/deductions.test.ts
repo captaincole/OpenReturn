@@ -30,6 +30,64 @@ describe("standardDeduction (line 12e)", () => {
       { filingStatus: MFS, taxpayerBornBeforeJan2_1961: true },
       undefined,
     ],
+    /*
+     * One box for each filer who is blind, at the age box's amount: "multiply the
+     * number on line 1 by $1,600 ($2,000 if single or head of household)"
+     * (irs-1040-inst-2025::sec::line-16::b03, and the chart in b04).
+     */
+    [
+      "single, blind",
+      { filingStatus: "single", taxpayerBornBeforeJan2_1961: false, taxpayerBlind: true },
+      17750,
+    ],
+    [
+      "single, born before 1961 and blind",
+      { filingStatus: "single", taxpayerBornBeforeJan2_1961: true, taxpayerBlind: true },
+      19750,
+    ],
+    [
+      "joint, both born before 1961 and blind",
+      {
+        filingStatus: "married_filing_jointly",
+        taxpayerBornBeforeJan2_1961: true,
+        spouseBornBeforeJan2_1961: true,
+        taxpayerBlind: true,
+        spouseBlind: true,
+      },
+      37900,
+    ],
+    [
+      "joint, only the spouse is blind",
+      {
+        filingStatus: "married_filing_jointly",
+        taxpayerBornBeforeJan2_1961: false,
+        spouseBornBeforeJan2_1961: false,
+        spouseBlind: true,
+      },
+      33100,
+    ],
+    // "Don't check any boxes for your spouse if your filing status is head of household" (line-12d::b01).
+    [
+      "head of household, blind: a spouse box does not count",
+      {
+        filingStatus: "head_of_household",
+        taxpayerBornBeforeJan2_1961: false,
+        taxpayerBlind: true,
+        spouseBlind: true,
+      },
+      25625,
+    ],
+    [
+      "MFS, blind: the spouse box does not count",
+      {
+        filingStatus: MFS,
+        spouseItemizesSeparately: false,
+        taxpayerBornBeforeJan2_1961: false,
+        taxpayerBlind: true,
+        spouseBlind: true,
+      },
+      17350,
+    ],
     ["no filing status", { taxpayerBornBeforeJan2_1961: false }, undefined],
     ["birth date missing", { filingStatus: "single" }, undefined],
   ] as Array<[string, Form1040FilingInfo, number | undefined]>)("%s", (_, info, expected) => {
