@@ -114,6 +114,35 @@ describe("Form 2441 lines 4 and 5", () => {
   });
 });
 
+describe("Form 2441 lines 4 and 5 with Schedule SE on a joint return", () => {
+  /*
+   * irs-2441-inst-2025::sec::lines-4-and-5::b01: each spouse's earned income
+   * separately; the taxpayer's is his part of line 1z plus Schedule SE line 3
+   * less Schedule 1 line 15.
+   */
+  it("adds the taxpayer's Schedule SE line 3 less Schedule 1 line 15 to his wages", () => {
+    const lines = evaluate(
+      {
+        ...BASE,
+        filingStatus: "married_filing_jointly",
+        dependentCareStudentOrDisabledSpouse: false,
+        hasBusiness: true,
+        qbiScheduleSEFiled: true,
+        dependentCareSpouseHasBusiness: false,
+        dependentCareTaxpayerW2Wages: 3000,
+        dependentCareSpouseW2Wages: 2000,
+        dependentCareTaxpayerDisabilityWages: 0,
+        dependentCareSpouseDisabilityWages: 0,
+      },
+      { ...OTHER_FORMS, "schedule-se.0.line.3": 20000, "schedule-1.1.line.15": 1413 },
+    );
+    expect([lines["0.line.4_earned_income"], lines["0.line.5_spouse_earned_income"]]).toEqual([
+      3000 + 20000 - 1413,
+      2000,
+    ]);
+  });
+});
+
 describe("Form 2441 Part II gates", () => {
   it("figures the credit with a provider and a qualifying person", () => {
     const lines = evaluate(BASE);
