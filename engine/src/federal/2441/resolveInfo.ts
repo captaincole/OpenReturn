@@ -97,7 +97,10 @@ function w2WagesByOwner(inputs: ResolverInputs): {
   return { taxpayer: wages("taxpayer"), spouse: wages("spouse"), unplacedKeys };
 }
 
-/* A business on a joint return that is the spouse's (statedBusinessesOnReturn keeps both spouses'). */
+/*
+ * A business on a joint return that is the spouse's. businessesOnReturn's
+ * second argument, true, means a joint return: it keeps both spouses' businesses.
+ */
 function spouseHasBusiness(inputs: ResolverInputs): boolean {
   const { businesses } = businessesOnReturn(inputs.facts, true);
   return businesses.some((business) => ownerOf(business.value) === "spouse");
