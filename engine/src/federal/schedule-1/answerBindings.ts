@@ -94,14 +94,22 @@ export function answerBindings(): Bindings {
     "0.line.8h": (_, info) => roundDollars(info.juryDutyPay),
     "0.line.8i": (_, info) => roundDollars(info.prizesAndAwards),
     "0.line.8k": (_, info) => roundDollars(info.stockOptions),
-    // irs-1040-inst-2025::sec::line-8z::b01: "List the type and amount of income."
+    /*
+     * irs-1040-inst-2025::sec::line-8z::b01: "List the type and amount of income."
+     * RTAA payments (1099-G box 5) belong here too
+     * (irs-pub-525-2025::sec::reemployment-trade-adjustment-assis::b01).
+     */
     "0.line.8z": (_, info) =>
-      roundDollars(
-        sumOrBlank(
-          info.miscOtherIncome,
-          ...(info.otherIncomeItems ?? []).map((item) => item.amount),
-        ),
-      ),
+      (info.rtaaPayments ?? 0) > 0
+        ? unsupported(
+            "Form 1099-G box 5 (RTAA payments) belongs on line 8z, and the engine does not add it yet.",
+          )
+        : roundDollars(
+            sumOrBlank(
+              info.miscOtherIncome,
+              ...(info.otherIncomeItems ?? []).map((item) => item.amount),
+            ),
+          ),
     /*
      * "List the type and amount of income" (irs-1040-inst-2025::sec::line-8z::b01):
      * with two or more items each type prints with its amount; one item's amount

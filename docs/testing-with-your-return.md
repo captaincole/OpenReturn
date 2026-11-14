@@ -58,6 +58,10 @@ income credit (Schedule EIC) and the additional child tax credit.
 A third head of household scenario is a California return (FTB 3532)
 with a business, Social Security, educator expenses, a penalty on early
 withdrawal of savings, the blind exemption and an extension payment.
+A fourth, also a California return, has three sons, a small W-2 and
+unemployment compensation (Form 1099-G), which California does not tax,
+and claims the California earned income tax credit and the young child
+tax credit (FTB 3514).
 Qualifying surviving spouse has one federal-only TaxCalcBench scenario:
 a filer under 65 retired on disability, with a disability pension on
 line 1h, forced itemizing with general sales tax, child and dependent
@@ -74,7 +78,8 @@ Roth IRA distribution (Form 8606 Part III), alimony and other Schedule 1
 items, and itemizes.
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
-1099-SA, 1098, SSA-1099, W-2G, 1099-K, 1099-NEC, 1095-A, a W-2 you issued to a household employee
+1099-SA, 1098, SSA-1099, W-2G, 1099-K, 1099-NEC, 1099-G (box 1
+unemployment compensation and box 4), 1095-A, a W-2 you issued to a household employee
 (Schedule H, without FUTA tax), and invoices for home energy improvements
 (Form 5695 Part II). The last two have one unverified test scenario.
 A business you run yourself is answers, not a document: receipts and
