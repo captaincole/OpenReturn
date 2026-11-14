@@ -49,4 +49,4 @@ Forms checked: Form 540, Schedule CA (540) and FTB 3532. Federal forms evaluated
 
 ## Federal lines
 
-The case has no federal key, so the federal lines are not checked. Form 1040 line 12d (blind) and the added standard deduction for blindness are not built, so the federal standard deduction is too small and the federal tax too large. Form 8995 line 3 (the QBI loss carryforward) is not built.
+The case has no federal key, so the federal lines are not checked. Form 1040 line 12d checks "You are blind", so the standard deduction on line 12e is $25,625: $23,625 plus one box at $2,000 (irs-1040-inst-2025::sec::line-16::b03). Form 8995 line 3 (the QBI loss carryforward) is not built.

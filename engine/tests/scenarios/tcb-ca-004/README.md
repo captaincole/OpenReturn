@@ -49,4 +49,4 @@ Forms checked: Form 540, Schedule CA (540) and FTB 3514. Federal forms evaluated
 
 ## Federal lines
 
-The case has no federal key, so the federal lines are not checked. Form 1040 line 12d (blind) and the added standard deduction for blindness are not built, so line 12e is $34,700 where the instructions give $37,900. No line changes: taxable income is 0 either way. The earned income credit is $1,879 (line 27a) and the additional child tax credit $450 (line 28). Schedule R files for two filers 65 or older, and its credit is 0: the nontaxable Social Security on line 13a is more than line 12.
+The case has no federal key, so the federal lines are not checked. Form 1040 line 12d checks all four boxes (both born before January 2, 1961, both blind), so the standard deduction on line 12e is $37,900: $31,500 plus four boxes at $1,600 (irs-1040-inst-2025::sec::line-16::b03). Taxable income is 0. The earned income credit is $1,879 (line 27a) and the additional child tax credit $450 (line 28). Schedule R files for two filers 65 or older, and its credit is 0: the nontaxable Social Security on line 13a is more than line 12.
