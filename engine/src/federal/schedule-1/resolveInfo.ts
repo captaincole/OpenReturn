@@ -4,16 +4,12 @@ import {
   businessesOnReturn,
   getGamblingWinningsFacts,
   getGovernmentPaymentsFacts,
-  isMiscIncomeFactKey,
+  miscIncomeNotForBusiness,
+  unlinkedMiscIncomeKeys,
 } from "../../facts/index.js";
 import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { sum, sumOrBlank } from "../../money.js";
-import {
-  factsInCategory,
-  num,
-  resolveMustFile,
-  type ResolverInputs,
-} from "../../resolverInputs.js";
+import { num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
@@ -76,8 +72,9 @@ export function resolveSchedule1Info(inputs: ResolverInputs): Schedule1FilingInf
     explicitKey: "decisions.scope.must_file_schedule_1",
     fallbacks: [
       {
-        rule: `fallback: unemployment compensation $${unemploymentCompensation ?? 0} > 0, RTAA payments $${rtaaPayments ?? 0} > 0, 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), Form 8889 filed (${form8889}), educator expenses $${educatorExpenses ?? 0} > 0, or an early withdrawal penalty $${savingsPenalty ?? 0} > 0`,
+        rule: `fallback: a stated Schedule 1 amount (${stated}), unemployment compensation $${unemploymentCompensation ?? 0} > 0, RTAA payments $${rtaaPayments ?? 0} > 0, 1099-MISC other income $${miscOtherIncome ?? 0} > 0, W-2G winnings $${gamblingWinnings ?? 0} > 0, Alaska Permanent Fund dividends $${alaskaPermanentFundDividends ?? 0} > 0, a Schedule C business (${hasBusiness}), Schedule SE filed (${scheduleSE}), Schedule E filed (${scheduleE}), Form 8889 filed (${form8889}), educator expenses $${educatorExpenses ?? 0} > 0, or an early withdrawal penalty $${savingsPenalty ?? 0} > 0`,
         value:
+          stated ||
           (unemploymentCompensation ?? 0) > 0 ||
           (rtaaPayments ?? 0) > 0 ||
           (miscOtherIncome ?? 0) > 0 ||
