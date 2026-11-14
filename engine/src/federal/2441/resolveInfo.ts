@@ -1,10 +1,12 @@
 import {
   DEPENDENT_CARE_KEYS,
   ageAtYearEnd,
+  businessesOnReturn,
   getDependentCareProviderFacts,
   getDependentCareQualifyingPersonFacts,
   isW2FactKey,
   makeDependentFactKey,
+  ownerOf,
   type DependentCareQualifyingPersonFactValue,
   type DependentFactValue,
   type W2FactValue,
@@ -95,6 +97,12 @@ function w2WagesByOwner(inputs: ResolverInputs): {
   return { taxpayer: wages("taxpayer"), spouse: wages("spouse"), unplacedKeys };
 }
 
+/* A business on a joint return that is the spouse's (statedBusinessesOnReturn keeps both spouses'). */
+function spouseHasBusiness(inputs: ResolverInputs): boolean {
+  const { businesses } = businessesOnReturn(inputs.facts, true);
+  return businesses.some((business) => ownerOf(business.value) === "spouse");
+}
+
 /*
  * Form 2441 files to claim the credit for a qualifying person's care, or when
  * the taxpayer received dependent care benefits (irs-2441-inst-2025::sec::purpose-of-form::b01):
@@ -177,6 +185,7 @@ export function resolve2441Info(inputs: ResolverInputs): Form2441FilingInfo {
     dependentCareSpouseW2Wages: owners.spouse,
     dependentCareTaxpayerDisabilityWages: joint ? disabilityWages(pensions, "taxpayer") : undefined,
     dependentCareSpouseDisabilityWages: joint ? disabilityWages(pensions, "spouse") : undefined,
+    dependentCareSpouseHasBusiness: joint ? spouseHasBusiness(inputs) : undefined,
     dependentCarePriorYearExpensesPaid: num(inputs, DEPENDENT_CARE_KEYS.priorYearExpensesPaid),
     dependentCareMfsTreatedAsUnmarried: answer(
       DEPENDENT_CARE_KEYS.marriedSeparatelyTreatedAsUnmarried,

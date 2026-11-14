@@ -91,18 +91,26 @@ describe("Form 2441 lines 4 and 5", () => {
     expect(lines["0.line.4_earned_income"]).toBeUndefined();
   });
 
-  it("names the gap for a business on a joint return with no Schedule SE", () => {
-    const lines = evaluate(
-      {
-        ...BASE,
-        filingStatus: "married_filing_jointly",
-        dependentCareStudentOrDisabledSpouse: false,
-        hasBusiness: true,
-        qbiScheduleSEFiled: false,
-      },
-      { ...OTHER_FORMS, "schedule-1.0.line.3": 300 },
-    );
-    expect(lines["0.line.4_earned_income"]).toHaveProperty("unsupported");
+  it("adds the taxpayer's business to his earned income on a joint return with no Schedule SE", () => {
+    const joint: Form2441FilingInfo = {
+      ...BASE,
+      filingStatus: "married_filing_jointly",
+      dependentCareStudentOrDisabledSpouse: false,
+      hasBusiness: true,
+      qbiScheduleSEFiled: false,
+      dependentCareSpouseHasBusiness: false,
+      dependentCareTaxpayerW2Wages: 3000,
+      dependentCareSpouseW2Wages: 2000,
+      dependentCareTaxpayerDisabilityWages: 0,
+      dependentCareSpouseDisabilityWages: 0,
+    };
+    const federal = { ...OTHER_FORMS, "schedule-1.0.line.3": 300 };
+    const lines = evaluate(joint, federal);
+    expect([lines["0.line.4_earned_income"], lines["0.line.5_spouse_earned_income"]]).toEqual([
+      3300, 2000,
+    ]);
+    const spouseBusiness = evaluate({ ...joint, dependentCareSpouseHasBusiness: true }, federal);
+    expect(spouseBusiness["0.line.4_earned_income"]).toHaveProperty("unsupported");
   });
 });
 
@@ -173,5 +181,27 @@ describe("Form 2441 line 2 qualifying persons", () => {
 
   it("keeps a disabled person over 12", () => {
     expect(resolve(30, true)).toEqual({ listed: 1, mustFile: true });
+  });
+});
+
+describe("Form 2441 businesses on a joint return", () => {
+  const spouseHasBusiness = (owner: "taxpayer" | "spouse", status: string) =>
+    resolve2441Info(
+      makeResolverInputs({
+        facts: [
+          {
+            key: "business.shop",
+            category: "self_employment",
+            value: { owner, activity: "Shop", grossReceipts: 1000 },
+          },
+        ],
+        decisions: [{ decisionKey: "decisions.scope.filing_status", decision: status }],
+      }),
+    ).dependentCareSpouseHasBusiness;
+
+  it("says whether a business is the spouse's", () => {
+    expect(spouseHasBusiness("taxpayer", "married_filing_jointly")).toBe(false);
+    expect(spouseHasBusiness("spouse", "married_filing_jointly")).toBe(true);
+    expect(spouseHasBusiness("spouse", "single")).toBeUndefined();
   });
 });

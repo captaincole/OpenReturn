@@ -33,8 +33,8 @@ const LINE_1_WITHOUT_BENEFITS = [
 
 export const DEEMED_INCOME =
   "Deemed earned income of $250 or $500 a month for a spouse who was a student or disabled (line B) is not modeled.";
-const JOINT_SELF_EMPLOYMENT =
-  "Splitting self-employment earnings (Schedule C or Schedule SE) between spouses on a joint return is not modeled.";
+const SPOUSE_SELF_EMPLOYMENT =
+  "A spouse's business on a joint return is not modeled: Schedule SE and its deduction are the taxpayer's only, so the spouse's self-employment earnings have no line.";
 const JOINT_OTHER_EARNED_INCOME =
   "On a joint return only W-2 wages and line 1h disability pensions are split by spouse; another Form 1040 line 1 amount is not.";
 
@@ -141,6 +141,11 @@ function selfEmploymentEarnings(
  * MANUAL EDIT: line 1z must equal line 1a plus the disability pensions, so
  * taxable dependent care benefits (line 1e, from line 26) or a corrective
  * distribution on line 1h make lines 4 and 5 unsupported on a joint return.
+ * MANUAL EDIT: "figure your and your spouse's earned income separately"
+ * (irs-2441-inst-2025::sec::lines-4-and-5::b01). The engine's Schedule SE is the
+ * taxpayer's, so with every business the taxpayer's, the self-employment
+ * earnings (selfEmploymentEarnings, a loss too: ::lines-4-and-5::b02) are the
+ * taxpayer's; a spouse's business is a gap.
  */
 function jointEarnedIncome(
   form: FormAccessor<Form2441>,
@@ -150,9 +155,9 @@ function jointEarnedIncome(
   const studentOrDisabled = info.dependentCareStudentOrDisabledSpouse;
   if (studentOrDisabled === undefined) return undefined;
   if (studentOrDisabled) return unsupported(DEEMED_INCOME);
-  if (info.hasBusiness === true || form["schedule-se.0.line.3"] !== undefined) {
-    return unsupported(JOINT_SELF_EMPLOYMENT);
-  }
+  if (info.dependentCareSpouseHasBusiness === true) return unsupported(SPOUSE_SELF_EMPLOYMENT);
+  const selfEmployment = selfEmploymentEarnings(form, info);
+  if (selfEmployment === undefined) return undefined;
   const pensions = roundDollars(
     sum(info.dependentCareTaxpayerDisabilityWages, info.dependentCareSpouseDisabilityWages),
   );
@@ -168,7 +173,7 @@ function jointEarnedIncome(
   if (amounts.includes(undefined)) return undefined;
   const [yourWages, yourPensions, spouseWages, spousePensions] = amounts;
   return {
-    yours: roundDollars(sum(yourWages, yourPensions)),
+    yours: roundDollars(sum(yourWages, yourPensions)) + selfEmployment,
     spouse: roundDollars(sum(spouseWages, spousePensions)),
   };
 }
