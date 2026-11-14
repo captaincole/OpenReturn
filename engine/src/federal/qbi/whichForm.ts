@@ -1,4 +1,4 @@
-import { SPOUSE_KEYS, isDividendFactKey } from "../../facts/index.js";
+import { BLINDNESS_KEYS, SPOUSE_KEYS, isDividendFactKey } from "../../facts/index.js";
 import type { MustFileResolution } from "../../filingInfo.js";
 import { bornBeforeJan2_1961, filingStatusOf } from "../../filingInfoResolvers.js";
 import { atLeast, sum } from "../../money.js";
@@ -62,6 +62,8 @@ function certainStandardDeduction(inputs: ResolverInputs): number {
       (inputs.factByKey.get(SPOUSE_KEYS.itemizesSeparately) as boolean | undefined) ?? true,
     taxpayerBornBeforeJan2_1961: bornBeforeJan2_1961(text(inputs, "identity.dob")) ?? false,
     spouseBornBeforeJan2_1961: bornBeforeJan2_1961(text(inputs, SPOUSE_KEYS.dob)) ?? false,
+    taxpayerBlind: inputs.factByKey.get(BLINDNESS_KEYS.taxpayer) === true,
+    spouseBlind: inputs.factByKey.get(BLINDNESS_KEYS.spouse) === true,
   });
   const dependentFloor = atLeast(
     DEPENDENT_MINIMUM_STANDARD_DEDUCTION,

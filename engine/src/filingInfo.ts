@@ -126,6 +126,10 @@ export interface BaseFilingInfo {
   spouseSSN?: SSN;
   spouseDateOfBirth?: string;
   spouseBornBeforeJan2_1961?: boolean;
+  // Visually impaired (identity.blind facts): 1040 line 12d, CA 540 line 8.
+  taxpayerBlind?: boolean;
+  /** A joint return counts it (1040 line 12d, CA 540 line 8). */
+  spouseBlind?: boolean;
   spouseOccupation?: string;
 
   homeAddressLine1?: string;

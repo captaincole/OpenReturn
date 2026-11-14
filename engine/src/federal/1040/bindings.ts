@@ -301,6 +301,14 @@ export function register(): void {
         info.filingStatus === "married_filing_jointly" && info.spouseBornBeforeJan2_1961 === true
           ? true
           : undefined,
+      /*
+       * MANUAL EDIT: "were blind at the end of 2025, check the appropriate box(es)
+       * on line 12d" (irs-1040-inst-2025::sec::line-12d::b01). The spouse box is
+       * for a joint return only, as for the age box.
+       */
+      "line.12d_you_blind": (_, info) => (info.taxpayerBlind ? true : undefined),
+      "line.12d_spouse_blind": (_, info) =>
+        info.filingStatus === "married_filing_jointly" && info.spouseBlind ? true : undefined,
       "line.12b_spouse_itemizes_separate": (_, info) =>
         info.filingStatus === "married_filing_separately" && info.spouseItemizesSeparately === true
           ? true
@@ -595,10 +603,6 @@ export function register(): void {
         "No MFJ scenario ingested yet — spouse-as-dependent checkbox requires a joint-return scenario where the spouse can be claimed by a third party.",
       "line.12b_dual_status_alien":
         "No dual-status alien scenario ingested yet — this checkbox requires a residency/immigration-status fact we don't model.",
-      "line.12d_you_blind":
-        "The blindness fact (identity.blind) feeds only CA 540 line 8; this box and the added standard deduction for blindness are not built yet.",
-      "line.12d_spouse_blind":
-        "No MFJ/spouse scenario ingested yet — spouse blindness fact does not exist.",
       "line.16_from_form_8814":
         "Checkbox indicating tax includes amounts from Form 8814 (child's interest/dividends election). No Form 8814 ingestion scenario built yet; requires dependent-with-investment-income data.",
       "line.16_from_form_4972":
