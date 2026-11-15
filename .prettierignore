@@ -6,6 +6,7 @@
 **/.vercel/
 **/dist/
 .scratch/
+engine/coverage/
 
 # Generated files — regeneration would undo formatting
 engine/src/federal/*/types.ts

@@ -15,6 +15,7 @@
     "test:unit": "vitest run tests/unit",
     "test:unit:watch": "vitest tests/unit",
     "test:integration": "vitest run tests/integration",
+    "coverage": "c8 tsx tests/golden/runAll.ts && tsx scripts/coverage/cli.ts",
     "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@openreturn/sources": "0.1.0",
     "@types/node": "^22",
+    "c8": "^12.0.0",
     "tsx": "^4.20.5",
     "typescript": "^5",
     "vitest": "^3.2.4"

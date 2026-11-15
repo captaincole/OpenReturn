@@ -48,7 +48,7 @@ engine/                          # @openreturn/engine — THE FORM ENGINE. Pure,
 │                                  Boundary enforced by tests/unit/boundary.test.ts.
 ├── tests/                       # the engine's test pyramid: unit/, integration/, golden/, scenarios/
 │                                  (a scenario folder registers itself; `npm test -- --list` prints them)
-├── scripts/                     # renderScenario, draftExpected, compareFiled
+├── scripts/                     # renderScenario, draftExpected, compareFiled, coverage (docs/coverage.md)
 ├── paths.ts                     # on-disk locations for offline tooling
 ├── README.md                    # contributor guide; public API = package.json "exports"
 └── builder/                     # @openreturn/builder — dev-time tools that build the engine's assets:
@@ -116,6 +116,7 @@ npm run dev:web      # next only
 npm test             # engine golden suite; positional filters work (npm test -- alex)
 npm run test:unit    # engine + canon + agent unit tests (test:integration likewise)
 npm run typecheck    # tsc over engine + builder + canon + agent
+npm run coverage     # golden suite under c8; rewrites docs/coverage.md (lines, branches, fields supported, by form)
 npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see web/e2e/README.md)
 npm run e2e:madison  # the same for Madison: her documents, then the Deductions tab to its close
 ```

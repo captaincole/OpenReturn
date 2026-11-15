@@ -123,6 +123,7 @@ Every flow that uses a model has an eval: document ingest and the deductions con
 | [Test OpenReturn against your filed return](docs/testing-with-your-return.md) | Check the engine against a return you already filed, privately, and send us the result |
 | [Add a scenario](docs/adding-a-scenario.md) | Add a new test taxpayer, with new forms or documents, and the tests that check each step |
 | [End-to-end tests](web/e2e/README.md) | The Playwright run that drives the whole stack with a real model |
+| [Engine coverage](docs/coverage.md) | How much of the form code the test scenarios run, and how many fields of each form the engine supports |
 | [Model evals](docs/evals/README.md) | One score per model, by flow: [document ingest](docs/evals/ingest.md), [deductions](docs/evals/deductions.md), [review judges](docs/evals/review.md) and [Ask The Tax Code](docs/evals/ask.md) |
 
 ## Contributing

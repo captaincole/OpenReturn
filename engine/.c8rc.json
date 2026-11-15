@@ -1,0 +1,6 @@
+{
+  "include": ["src/federal/**", "src/state/**"],
+  "reporter": ["text", "html", "json-summary"],
+  "reports-dir": "coverage",
+  "temp-directory": "coverage/tmp"
+}
