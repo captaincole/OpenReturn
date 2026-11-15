@@ -15,6 +15,7 @@ You can complete a return for a taxpayer who fits **all** of these:
 - Optionally: one sole-proprietor business with receipts and ordinary expenses (Schedule C and SE; a home office by the simplified method and vehicles at the standard mileage rate; no Form 8829, no depreciation, no cost of goods sold)
 - Optionally: gambling winnings on Form W-2G
 - Optionally: student loan interest on Form 1098-E (Schedule 1 line 21)
+- Optionally: unemployment compensation on Form 1099-G
 - Optionally: dependents (the child tax credit and the credit for other dependents, Schedule 8812; the CA 540 dependent exemption credit)
 - Optionally: an early distribution from a retirement plan (1099-R code 1): the CA 2.5% additional tax (FTB 3805P). The federal 10% tax (Form 5329, Schedule 2 line 8) is not computed yet: say so.
 - Optionally: an incentive stock option exercised and held at year end: the California alternative minimum tax (Schedule P (540)). The federal AMT (Form 6251) is not computed yet: say so.
