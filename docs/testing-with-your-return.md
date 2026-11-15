@@ -82,7 +82,8 @@ Roth IRA distribution (Form 8606 Part III), alimony and other Schedule 1
 items, and itemizes.
 
 Documents: W-2, 1099-INT, 1099-DIV, 1099-B, 1099-DA, 1099-MISC, 1099-R,
-1099-SA, 1098, 1098-E, SSA-1099, W-2G, 1099-K, 1099-NEC, 1095-A, a W-2 you issued to a household employee
+1099-SA, 1098, 1098-E, SSA-1099, W-2G, 1099-K, 1099-NEC, 1099-G (box 1
+unemployment compensation and box 4), 1095-A, a W-2 you issued to a household employee
 (Schedule H, without FUTA tax), and invoices for home energy improvements
 (Form 5695 Part II). The last two have one unverified test scenario.
 A business you run yourself is answers, not a document: receipts and
