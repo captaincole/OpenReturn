@@ -107,7 +107,9 @@ const INTRO = `This report shows how much of the form code the scenarios run, an
 - **Scenarios:** the scenarios that file the form.
 - **Lines:** the share of the code lines that ran. A rule of one line counts when its file loads, so this number is high.
 - **Branches:** the share of the code paths that ran. A rule that never ran is one path not taken, so this number shows the cases that no scenario has.
-- **Fields supported:** the share of the form's fields that the engine computes. The engine declares each other field unsupported and leaves it blank. A supported field can still stop at a case that the engine does not handle.`;
+- **Fields supported:** the share of the form's fields that the engine computes. The engine declares each other field unsupported and leaves it blank. A supported field can still stop at a case that the engine does not handle.
+
+A dash means that there is nothing to measure: the form has a field list and no code yet.`;
 
 const OUTRO = `For the lines and paths that did not run, run \`npm run coverage\`. It prints one row for each file with the line numbers, and writes a page for each file to \`engine/coverage/index.html\`.`;
 

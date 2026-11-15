@@ -6,8 +6,10 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { relative, resolve } from "node:path";
 import { ENGINE_ROOT, engineSrcDir } from "../../paths.js";
+import { loadFromFixtures, type Catalog } from "../../src/catalog.js";
 import { bindingKind } from "../../src/engine.js";
-import { catalog, FORMS, registerAllForms } from "../../src/registry.js";
+import { FORMS, registerAllForms } from "../../src/registry.js";
+import { catalogPath } from "../../tests/helpers/formPaths.js";
 import { loadScenarios } from "../../tests/scenarios/index.js";
 import type { Scenario } from "../../tests/types.js";
 import {
@@ -30,7 +32,7 @@ async function readFilesBySrcPath(): Promise<Record<string, FileCoverage>> {
   );
 }
 
-function formInputs(scenarios: Scenario[]): FormInput[] {
+function formInputs(scenarios: Scenario[], catalog: Catalog): FormInput[] {
   return FORMS.map((spec) => {
     const fields = catalog.getFields(spec.formId);
     return {
@@ -50,7 +52,12 @@ function formInputs(scenarios: Scenario[]): FormInput[] {
 async function main() {
   registerAllForms();
   const scenarios = (await loadScenarios()).filter((scenario) => !scenario.skip);
-  const report = buildCoverageReport(await readFilesBySrcPath(), formInputs(scenarios));
+  /*
+   * Each form's own catalog.json, not the engine's built catalog: a form with a
+   * catalog and no bindings yet is missing there, and its fields count as 0 supported.
+   */
+  const catalog = await loadFromFixtures(FORMS.map(catalogPath));
+  const report = buildCoverageReport(await readFilesBySrcPath(), formInputs(scenarios, catalog));
   await writeFile(
     REPORT_PATH,
     renderCoverageReport({

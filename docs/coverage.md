@@ -9,11 +9,13 @@ This report shows how much of the form code the scenarios run, and how many fiel
 - **Branches:** the share of the code paths that ran. A rule that never ran is one path not taken, so this number shows the cases that no scenario has.
 - **Fields supported:** the share of the form's fields that the engine computes. The engine declares each other field unsupported and leaves it blank. A supported field can still stop at a case that the engine does not handle.
 
+A dash means that there is nothing to measure: the form has a field list and no code yet.
+
 ## Summary
 
 | Scenarios | Forms | Lines | Branches | Fields supported |
 | --- | --- | --- | --- | --- |
-| 25 | 42 | 97.5% (22,062 of 22,624) | 81.4% (6,529 of 8,025) | 2,238 of 3,546 (63%) |
+| 25 | 42 | 97.5% (22,062 of 22,624) | 81.4% (6,529 of 8,025) | 2,238 of 3,671 (61%) |
 
 ## By form
 
@@ -51,7 +53,7 @@ This report shows how much of the form code the scenarios run, and how many fiel
 | Form 8962 | 1 | 93.6% | 69.6% | 141 of 141 (100%) |
 | Form 4684 | 1 | 96.5% | 76.5% | 62 of 162 (38%) |
 | Schedule EIC | 5 | 97.3% | 76.8% | 38 of 38 (100%) |
-| Schedule D (540) | 1 | — | — | — |
+| Schedule D (540) | 1 | — | — | 0 of 125 (0%) |
 | FTB 3885A | 1 | 97.4% | 75.6% | 65 of 65 (100%) |
 | Schedule CA (540) | 10 | 97.3% | 87.9% | 118 of 253 (47%) |
 | FTB 3526 | 2 | 98.8% | 85.9% | 17 of 17 (100%) |
