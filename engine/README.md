@@ -40,6 +40,12 @@ Commands, from the repo root: `npm test` (golden), `npm run test:unit`,
 `npm run test:integration`, `npm run typecheck`. From this folder:
 `npx tsx scripts/renderScenario.ts --scenario=<name>`.
 
+`npm run coverage` runs the golden suite under c8 and rewrites
+[`docs/coverage.md`](../docs/coverage.md): the lines and branches of the form
+code that the scenarios run, and the fields each form supports. It prints one
+row for each file with the lines that did not run, and writes a page for each
+file to `coverage/index.html` (not committed).
+
 ## The three rules
 
 1. **The engine imports nothing outside `src/`** — no Mastra, no db

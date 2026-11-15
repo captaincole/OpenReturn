@@ -23,6 +23,9 @@ supabase/
 # Claude's local scratch space — temp artifacts, screenshots, backups. Never committed.
 .scratch/
 
+# c8's output from `npm run coverage`: raw V8 data and the HTML pages. docs/coverage.md is the committed part.
+engine/coverage/
+
 # E2E run folders: data, logs, transcripts, Playwright output.
 web/e2e/.run/
 

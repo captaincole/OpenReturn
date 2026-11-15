@@ -32,6 +32,7 @@
     "test": "npm -w @openreturn/engine test",
     "test:unit": "npm -w @openreturn/engine run test:unit && npm -w canon run test:unit && npm -w cade run test:unit",
     "test:integration": "npm -w @openreturn/engine run test:integration && npm -w cade run test:integration",
+    "coverage": "npm -w @openreturn/engine run coverage",
     "e2e": "npm --prefix web run e2e",
     "e2e:madison": "npm --prefix web run e2e:madison",
     "install:all": "npm install && npm --prefix web install",

@@ -21,6 +21,8 @@ export default [
       "**/next-env.d.ts",
       /* Playwright report bundles (minified JS). */
       "web/e2e/.run/**",
+      /* c8's HTML report (npm run coverage). */
+      "engine/coverage/**",
     ],
   },
   {
