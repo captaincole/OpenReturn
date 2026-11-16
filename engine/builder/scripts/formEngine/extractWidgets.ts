@@ -2,9 +2,9 @@ import { SOURCES_ROOT } from "@openreturn/sources";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { relative, resolve } from "node:path";
-import { extractWidgets } from "../../src/extractFormFields.js";
+import { extractWidgets } from "../../src/extractWidgets.js";
 import { formTargetFromArgv, REPO_ROOT, type FormTarget } from "../../src/formTarget.js";
-import { renderOverlayTiles } from "../../src/renderPageWithOverlay.js";
+import { renderOverlayTiles } from "../../src/overlayTiles.js";
 import { tilesDir, widgetsPath, type WidgetsFile } from "../../src/workFiles.js";
 import type { Command } from "../lib/cli";
 
@@ -70,7 +70,7 @@ async function run(argv: string[]): Promise<void> {
 
 export const extractWidgetsCommand: Command = {
   name: "extract-widgets",
-  summary: "Blank PDF → widgets.json + numbered overlay tiles in .scratch/forms (no API calls)",
+  summary: "Blank PDF → widgets.json + numbered overlay tiles in .scratch/forms",
   usage: "<federal/<short> | state/<st>/<short>>",
   options: [
     { flag: "--title=<title>", desc: "official form title (required for a form with no catalog)" },

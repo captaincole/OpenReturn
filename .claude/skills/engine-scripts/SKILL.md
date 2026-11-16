@@ -1,13 +1,13 @@
 ---
 name: engine-scripts
-description: Run the form-engine CLI (catalogs, bindings, tax tables), the engine's scenario scripts (render, lock, compare a filed return) and Cade's review diagnostics (smoke:review, inspectLastReview). Use for any engine asset, scenario, golden, or review-pipeline check.
+description: Run the form-engine CLI (catalogs, field types, tax tables), the engine's scenario scripts (render, lock, compare a filed return) and Cade's review diagnostics (smoke:review, inspectLastReview). Use for any engine asset, scenario, golden, or review-pipeline check.
 ---
 
 # Engine, builder and review scripts
 
 The form-engine CLI lives under `engine/builder/scripts/formEngine/`, Cade's tooling under `cade/scripts/`, engine scripts under `engine/scripts/`. The subcommand CLI has its own copy of the small dispatcher, `scripts/lib/cli.ts` — no args lists subcommands, `-- <cmd> --help` shows options. All run from the repo root; `--` passes args through both npm layers.
 
-**`npm run form-engine`** — source documents (`sources`) → engine assets (`engine/src`): `form-status`, `extract-widgets`, `seed-labels`, `write-catalog` (no API calls; a form is `federal/<short>` or `state/<st>/<short>`), `generate-catalog`, `generate-bindings`, `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`, `ingest-ca-eitc-table` (the FTB 3514 EITC table, from the booklet in the corpus). It is the builder's CLI (`engine/builder/`): put `ANTHROPIC_API_KEY` in `engine/builder/.env.development` for the two AI commands, and run Canon (`npm run dev:canon`) for `generate-bindings`.
+**`npm run form-engine`** — source documents (`sources`) → engine assets (`engine/src`): `form-status`, `extract-widgets`, `seed-labels`, `write-catalog` (a form is `federal/<short>` or `state/<st>/<short>`), `generate-types`, `ingest-federal-tax-table`, `ingest-ca-tax-table`, `ingest-ca-eitc-table` (the FTB 3514 EITC table, from the booklet in the corpus). It is the builder's CLI (`engine/builder/`). No command calls a model, and the builder has no env file: the `catalog-form-fields` and `write-binding-rules` skills do the labels and the bindings.
 
 **Standalone diagnostics** (run via `npx tsx` from `cade/`):
 

@@ -1,4 +1,7 @@
 /*
+ * A page of the blank PDF with a numbered box on each widget, cut into bands.
+ * Whoever labels the form reads these tiles.
+ *
  * convertToViewportPoint flips PDF space (y-up) to canvas space (y-down).
  * The min/max of both corners keeps the box right for any rect orientation.
  */
@@ -12,13 +15,6 @@ export interface OverlayWidget {
   rect: [number, number, number, number];
 }
 
-export interface RenderedPage {
-  png: Buffer;
-  width: number;
-  height: number;
-  scale: number;
-}
-
 interface OverlayOpts {
   /** A pdf.js PDFDocumentProxy. */
   pdf: any;
@@ -26,11 +22,6 @@ interface OverlayOpts {
   pageIndex: number;
   widgets: OverlayWidget[];
   scale?: number;
-}
-
-export async function renderPageWithOverlay(opts: OverlayOpts): Promise<RenderedPage> {
-  const { canvas, width, height, scale } = await drawOverlay(opts);
-  return { png: canvas.toBuffer("image/png"), width, height, scale };
 }
 
 export interface OverlayTile {
@@ -94,7 +85,7 @@ async function drawOverlay(opts: OverlayOpts) {
 
     /*
      * The badge sits INSIDE the rectangle. Above the widget it covered label
-     * text, and vision models paired it with the wrong label.
+     * text, and a reader paired it with the wrong label.
      */
     const badge = String(widget.id);
     ctx.font = "bold 13px sans-serif";

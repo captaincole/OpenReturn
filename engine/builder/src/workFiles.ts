@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import type { OverlayBadge, WidgetField } from "./extractFormFields.js";
+import type { OverlayBadge, WidgetField } from "./extractWidgets.js";
 import type { FormTarget } from "./formTarget.js";
 import { labelsFileSchema, type LabelsFile } from "./labelsFile.js";
 

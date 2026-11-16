@@ -39,7 +39,7 @@ async function run(argv: string[]): Promise<void> {
 
 export const seedLabelsCommand: Command = {
   name: "seed-labels",
-  summary: "catalog.json + widgets.json → labels.json, keeping every fieldId (no API calls)",
+  summary: "catalog.json + widgets.json → labels.json, keeping every fieldId",
   usage: "<federal/<short> | state/<st>/<short>>",
   options: [
     { flag: "--json", desc: "print the widgets left to label, and the stale rows, as JSON" },

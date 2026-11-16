@@ -15,7 +15,6 @@
     "paths": {
       "@openreturn/engine": ["../engine/src/index.ts"],
       "@openreturn/engine/facts": ["../engine/src/facts/index.ts"],
-      "@openreturn/engine/catalog": ["../engine/src/catalog.ts"],
       "@openreturn/engine/paths": ["../engine/paths.ts"],
       "@openreturn/engine/scenarios": ["../engine/tests/scenarios/index.ts"],
       "@openreturn/sources": ["../sources/index.ts"]

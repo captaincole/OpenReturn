@@ -6,7 +6,6 @@
   "exports": {
     ".": "./src/index.ts",
     "./facts": "./src/facts/index.ts",
-    "./catalog": "./src/catalog.ts",
     "./paths": "./paths.ts",
     "./scenarios": "./tests/scenarios/index.ts"
   },

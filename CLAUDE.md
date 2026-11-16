@@ -53,9 +53,9 @@ engine/                          # @openreturn/engine — THE FORM ENGINE. Pure,
 ├── README.md                    # contributor guide; public API = package.json "exports"
 └── builder/                     # @openreturn/builder — dev-time tools that build the engine's assets:
                                    the `form-engine` CLI (scripts/formEngine/) and the forms pipeline
-                                   (src/: widget extraction, AI labeling, bindings drafts, tax-table
-                                   parsers). Calls Anthropic; searches Canon over MCP (src/canonSearch.ts).
-                                   Its own env files (below). Never runs in production.
+                                   (src/: widget extraction, overlay tiles, the labels.json check,
+                                   tax-table parsers). No model calls and no env file: the form
+                                   skills do the labels and the bindings. Never runs in production.
 sources/                         # @openreturn/sources — data only: what the IRS/FTB publish, by tax year.
                                    <year>/forms/federal/<short>/ and <year>/forms/state/<st>/<short>/
                                    hold blank.pdf, the instructions sidecar (instructions.meta.json)
@@ -133,7 +133,7 @@ All persistent state lives in local files: user data under `cade/.data/`, the co
 
 Pin all four paths via env (`CORPUS_DB_PATH` in Canon's env file; `APP_DB_PATH` / `MASTRA_DB_PATH` / `DOCUMENTS_PATH` in Cade's) — module-relative defaults resolve differently inside Mastra's bundled output than in tsx scripts. Cade finds Canon at `CANON_URL` (default `http://127.0.0.1:4112`).
 
-**Env files, the same in every package** (`canon/`, `cade/`, `web/`, `engine/builder/`): `.env.example` (committed) lists every setting; `.env.development` (gitignored) is written on first run by `scripts/bootstrap-env.mjs` and is the file `mastra dev` reads; a gitignored `.env` holds personal overrides. The CLIs (`corpus`, `form-engine`, `doctor`) load `.env` first, then `.env.development` (dotenv never overrides a set key). They load them after their imports run, so read env at call time, not in a module-level constant. There are **no external services**: no Docker, no Postgres, no Supabase.
+**Env files, the same in every package that has settings** (`canon/`, `cade/`, `web/`; the engine and its builder read no env): `.env.example` (committed) lists every setting; `.env.development` (gitignored) is written on first run by `scripts/bootstrap-env.mjs` and is the file `mastra dev` reads; a gitignored `.env` holds personal overrides. The CLIs (`corpus`, `doctor`) load `.env` first, then `.env.development` (dotenv never overrides a set key). They load them after their imports run, so read env at call time, not in a module-level constant. There are **no external services**: no Docker, no Postgres, no Supabase.
 
 **Auth (single-user):** identity = the instance. One `owner` row in `app.db` holds profile data (name/email) plus an scrypt password hash and the session-cookie HMAC secret — all created by the web app's first-run `/setup` screen. Login = one password → signed httpOnly cookie (`lib/localAuth.ts`, ~100 lines, node:crypto only). `proxy.ts` does an optimistic cookie-presence redirect; layouts/route handlers verify for real via `getOwnerSession()`.
 

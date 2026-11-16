@@ -1,5 +1,4 @@
-import { assembleCatalog, type CatalogRow } from "./catalogRows.js";
-import type { ExtractedField } from "./extractFormFields.js";
+import { catalogRow, type CatalogRow } from "./catalogRows.js";
 import type { LabelsFile } from "./labelsFile.js";
 import type { WidgetsFile } from "./workFiles.js";
 
@@ -59,25 +58,15 @@ function fieldProblems(widgets: WidgetsFile, labels: LabelsFile): string[] {
   return problems;
 }
 
-/* The /TU label wins: it is the form author's text. */
-function labeledFields(widgets: WidgetsFile, labels: LabelsFile): ExtractedField[] {
-  const byName = new Map(labels.fields.map((label) => [label.pdfFieldName, label]));
-  return widgets.fields.map(({ tuLabel, ...field }) => ({
-    ...field,
-    label: tuLabel ?? byName.get(field.fieldName)?.label?.trim() ?? "",
-    labelSource: tuLabel ? ("tu" as const) : ("vision" as const),
-  }));
-}
-
 export function catalogFromLabels(widgets: WidgetsFile, labels: LabelsFile): CatalogRow[] {
   const problems = labelProblems(widgets, labels);
   if (problems.length > 0) {
     throw new Error(`labels.json has ${problems.length} problem(s):\n  ${problems.join("\n  ")}`);
   }
-  return assembleCatalog({
-    formId: widgets.form.formId,
-    fields: labeledFields(widgets, labels),
-    enrichments: labels.fields,
-    skipped: labels.skipped,
-  }).catalog;
+  /* A widget with no label is in skipped: labelProblems checked that each is in one of the two. */
+  const labelByFieldName = new Map(labels.fields.map((label) => [label.pdfFieldName, label]));
+  return widgets.fields.flatMap((field) => {
+    const label = labelByFieldName.get(field.fieldName);
+    return label ? [catalogRow(field, label)] : [];
+  });
 }
