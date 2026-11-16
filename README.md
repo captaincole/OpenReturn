@@ -14,6 +14,13 @@
 </p>
 
 <p align="center">
+  <!-- coverage-chips:start -->
+  <a href="#form-support"><img src="https://img.shields.io/badge/federal%202025-66%25-0f766e" alt="Federal 2025: 66% of form fields supported"></a>
+  <a href="#form-support"><img src="https://img.shields.io/badge/california%202025-49%25-0f766e" alt="California 2025: 49% of form fields supported"></a>
+  <!-- coverage-chips:end -->
+</p>
+
+<p align="center">
   <a href="cade/README.md">Cade</a> ·
   <a href="canon/README.md">Canon</a> ·
   <a href="engine/README.md">Form engine</a> ·
@@ -102,6 +109,22 @@ Each top-level folder builds and runs on its own, and each has its own README.
 | <img src="static/screenshots/home.png" alt="The home page: a tax code search box, the 2025 return card and the 2026 estimated taxes card" width="430"><br/>**Home.** Your returns, estimates and the tax-code search. | <img src="static/screenshots/ask-tax-code.png" alt="Ask Canon: the question 'What is the maximum HSA contribution for self-only coverage in 2025?' with a cited answer and three reference cards that quote Publication 969 and the Form 8889 instructions" width="430"><br/>**Ask The Tax Code.** Short answers with numbered citations into the IRS and FTB text. |
 | <img src="static/screenshots/deductions.png" alt="The Deductions tab: Cade asks for exact amounts on the left; on the right, the itemize-or-standard comparison for the federal and California returns, and the list of deductions with rough and exact amounts" width="430"><br/>**Deductions.** Itemize or take the standard deduction, compared on each return. | <img src="static/screenshots/deductions-questions.png" alt="The Deductions tab at the start: nine yes-or-no questions about the year, each with a Yes and a No button, and one button that sends the answers" width="430"><br/>**Answers to tap.** Yes or no for each question about your year. |
 
+## Form support
+
+The form engine computes the return. The table shows how much of each form it handles, by jurisdiction and tax year.
+
+<!-- coverage-table:start -->
+| Jurisdiction | Forms | Fields supported | Tested |
+| --- | --- | --- | --- |
+| Federal 2025 | 32 | **66%** (1,749 of 2,663) | 81.7% |
+| California 2025 | 10 | **49%** (489 of 1,008) | 80.1% |
+<!-- coverage-table:end -->
+
+- **Fields supported:** the share of the form fields that the engine computes. It leaves each other field blank and says so.
+- **Tested:** the share of the form code paths that the test scenarios run.
+
+The numbers count only the forms that the engine has. Those are the most common IRS and FTB forms, not all of them. `npm run coverage` writes the table; [Engine coverage](docs/coverage.md) has the numbers for each form.
+
 ## Evals
 
 Every flow that uses a model has an eval: document ingest and the deductions conversation (Cade), decision review and Ask The Tax Code (Canon). Each model gets one score per flow. The table shows the scores from 2026-10-23, before the deductions eval; the [eval reports](docs/evals/README.md) have the details.
@@ -123,7 +146,7 @@ Every flow that uses a model has an eval: document ingest and the deductions con
 | [Test OpenReturn against your filed return](docs/testing-with-your-return.md) | Check the engine against a return you already filed, privately, and send us the result |
 | [Add a scenario](docs/adding-a-scenario.md) | Add a new test taxpayer, with new forms or documents, and the tests that check each step |
 | [End-to-end tests](web/e2e/README.md) | The Playwright run that drives the whole stack with a real model |
-| [Engine coverage](docs/coverage.md) | How much of the form code the test scenarios run, and how many fields of each form the engine supports |
+| [Engine coverage](docs/coverage.md) | For each form: how many fields the engine supports, and how much of the form code the test scenarios run |
 | [Model evals](docs/evals/README.md) | One score per model, by flow: [document ingest](docs/evals/ingest.md), [deductions](docs/evals/deductions.md), [review judges](docs/evals/review.md) and [Ask The Tax Code](docs/evals/ask.md) |
 
 ## Contributing

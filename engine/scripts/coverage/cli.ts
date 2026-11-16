@@ -1,5 +1,5 @@
 /*
- * Writes docs/coverage.md from the c8 run of the golden suite (coverage/coverage-summary.json).
+ * Writes docs/coverage.md, and the chips and the table in the root README, from the c8 run of the golden suite (coverage/coverage-summary.json).
  * `npm run coverage` runs both; this file alone reads the last run.
  */
 
@@ -9,11 +9,13 @@ import { ENGINE_ROOT, engineSrcDir } from "../../paths.js";
 import { loadFromFixtures, type Catalog } from "../../src/catalog.js";
 import { bindingKind } from "../../src/engine.js";
 import { FORMS, registerAllForms } from "../../src/registry.js";
-import { catalogPath } from "../../tests/helpers/formPaths.js";
+import { catalogPath, catalogTaxYear } from "../../tests/helpers/formPaths.js";
 import { loadScenarios } from "../../tests/scenarios/index.js";
 import type { Scenario } from "../../tests/types.js";
+import { updateReadme } from "./readme.js";
 import {
   buildCoverageReport,
+  jurisdictionOf,
   renderCoverageReport,
   type FileCoverage,
   type FormInput,
@@ -21,6 +23,7 @@ import {
 
 const SUMMARY_PATH = resolve(ENGINE_ROOT, "coverage/coverage-summary.json");
 const REPORT_PATH = resolve(ENGINE_ROOT, "../docs/coverage.md");
+const README_PATH = resolve(ENGINE_ROOT, "../README.md");
 
 /* c8 keys each file by its absolute path, and adds one "total" entry. */
 async function readFilesBySrcPath(): Promise<Record<string, FileCoverage>> {
@@ -38,6 +41,7 @@ function formInputs(scenarios: Scenario[], catalog: Catalog): FormInput[] {
     return {
       displayName: spec.displayName,
       relativeDir: spec.relativeDir,
+      jurisdiction: jurisdictionOf(spec.relativeDir, catalogTaxYear(spec)),
       scenarios: scenarios.filter((scenario) =>
         scenario.forms.some((form) => form.formId === spec.formId),
       ).length,
@@ -67,7 +71,13 @@ async function main() {
       scenarioCount: scenarios.length,
     }),
   );
-  console.log(`Wrote ${relative(process.cwd(), REPORT_PATH)}`);
+  await writeFile(
+    README_PATH,
+    updateReadme(await readFile(README_PATH, "utf8"), report.jurisdictions),
+  );
+  console.log(
+    `Wrote ${relative(process.cwd(), REPORT_PATH)} and ${relative(process.cwd(), README_PATH)}`,
+  );
 }
 
 main().catch((err) => {

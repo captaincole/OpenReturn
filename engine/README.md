@@ -42,7 +42,9 @@ Commands, from the repo root: `npm test` (golden), `npm run test:unit`,
 
 `npm run coverage` runs the golden suite under c8 and rewrites
 [`docs/coverage.md`](../docs/coverage.md): the lines and branches of the form
-code that the scenarios run, and the fields each form supports. It prints one
+code that the scenarios run, and the fields each form supports. It also
+rewrites the chips and the "Form support" table in the root README: the share
+of supported fields for each jurisdiction and tax year. It prints one
 row for each file with the lines that did not run, and writes a page for each
 file to `coverage/index.html` (not committed).
 
