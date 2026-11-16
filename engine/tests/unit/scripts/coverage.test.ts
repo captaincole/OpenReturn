@@ -133,11 +133,7 @@ describe("renderCoverageReport", () => {
 
 describe("updateReadme", () => {
   const README = [
-    "<p>",
-    "  <!-- coverage-chips:start -->",
-    "  an old chip",
-    "  <!-- coverage-chips:end -->",
-    "</p>",
+    "before",
     "## Form support",
     "<!-- coverage-table:start -->",
     "an old table",
@@ -145,14 +141,6 @@ describe("updateReadme", () => {
     "after",
   ].join("\n");
   const text = updateReadme(README, buildCoverageReport(FILES, FORMS).jurisdictions);
-
-  it("writes one chip for each jurisdiction with the share of fields supported", () => {
-    expect(text).toContain(
-      '  <a href="#form-support"><img src="https://img.shields.io/badge/federal%202025-88%25-0f766e" alt="Federal 2025: 88% of form fields supported"></a>',
-    );
-    expect(text).toContain("badge/california%202025-50%25-0f766e");
-    expect(text).not.toContain("an old chip");
-  });
 
   it("writes the table, and keeps the marker lines and the text around them", () => {
     expect(text).toContain(
@@ -166,7 +154,8 @@ describe("updateReadme", () => {
         "after",
       ].join("\n"),
     );
-    expect(text).toContain("  <!-- coverage-chips:end -->\n</p>");
+    expect(text).toContain("before\n## Form support\n<!-- coverage-table:start -->");
+    expect(text).not.toContain("an old table");
   });
 
   it("writes the same text on a second run", () => {
