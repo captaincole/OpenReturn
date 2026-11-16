@@ -117,7 +117,7 @@ npm test             # engine golden suite; positional filters work (npm test --
 npm run test:unit    # engine + canon + agent unit tests (test:integration likewise)
 npm run typecheck    # tsc over engine + builder + canon + agent
 npm run coverage     # golden suite under c8; rewrites docs/coverage.md (fields supported, branches, lines, by form)
-                     # and the README chips and table (fields supported, by jurisdiction and tax year)
+                     # and the README "Form support" table (by jurisdiction and tax year)
 npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see web/e2e/README.md)
 npm run e2e:madison  # the same for Madison: her documents, then the Deductions tab to its close
 ```

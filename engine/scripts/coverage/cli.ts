@@ -1,5 +1,5 @@
 /*
- * Writes docs/coverage.md, and the chips and the table in the root README, from the c8 run of the golden suite (coverage/coverage-summary.json).
+ * Writes docs/coverage.md, and the table in the root README, from the c8 run of the golden suite (coverage/coverage-summary.json).
  * `npm run coverage` runs both; this file alone reads the last run.
  */
 

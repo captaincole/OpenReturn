@@ -14,13 +14,6 @@
 </p>
 
 <p align="center">
-  <!-- coverage-chips:start -->
-  <a href="#form-support"><img src="https://img.shields.io/badge/federal%202025-66%25-0f766e" alt="Federal 2025: 66% of form fields supported"></a>
-  <a href="#form-support"><img src="https://img.shields.io/badge/california%202025-49%25-0f766e" alt="California 2025: 49% of form fields supported"></a>
-  <!-- coverage-chips:end -->
-</p>
-
-<p align="center">
   <a href="cade/README.md">Cade</a> ·
   <a href="canon/README.md">Canon</a> ·
   <a href="engine/README.md">Form engine</a> ·
