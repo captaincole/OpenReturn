@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
+import { replaceBetween, updateReadme } from "../../../scripts/coverage/readme.js";
 import {
   buildCoverageReport,
+  jurisdictionOf,
   renderCoverageReport,
   type FileCoverage,
   type FormInput,
@@ -20,6 +22,7 @@ const form = (displayName: string, relativeDir: string, supported: number, field
   ({
     displayName,
     relativeDir,
+    jurisdiction: jurisdictionOf(relativeDir, 2025),
     scenarios: 2,
     fields: { covered: supported, total: fields },
   }) satisfies FormInput;
@@ -30,11 +33,13 @@ const FILES: Record<string, FileCoverage> = {
   "federal/8995-a/bindings.ts": file(50, 50, 8, 10),
   "federal/qbi/shared.ts": file(20, 25, 1, 2),
   "federal/index.ts": file(5, 5, 1, 1),
+  "state/ca/540/bindings.ts": file(8, 10, 3, 4),
 };
 
 const FORMS = [
   form("Form 8995", "federal/8995", 31, 33),
   form("Form 8995-A", "federal/8995-a", 81, 94),
+  form("Form 540", "state/ca/540", 5, 10),
   form("Schedule D (540)", "state/ca/schedule-d-ca", 0, 0),
 ];
 
@@ -61,9 +66,37 @@ describe("buildCoverageReport", () => {
 
   it("totals every file and every form's fields", () => {
     expect(report.total).toEqual({
-      lines: { covered: 175, total: 280 },
-      branches: { covered: 50, total: 113 },
-      fields: { covered: 112, total: 127 },
+      name: "All",
+      forms: 4,
+      lines: { covered: 183, total: 290 },
+      branches: { covered: 53, total: 117 },
+      fields: { covered: 117, total: 137 },
+    });
+  });
+
+  it("makes one row for each jurisdiction and tax year, with the code that its forms share", () => {
+    expect(report.jurisdictions).toEqual([
+      {
+        name: "Federal 2025",
+        forms: 2,
+        lines: { covered: 175, total: 280 },
+        branches: { covered: 50, total: 113 },
+        fields: { covered: 112, total: 127 },
+      },
+      {
+        name: "California 2025",
+        forms: 2,
+        lines: { covered: 8, total: 10 },
+        branches: { covered: 3, total: 4 },
+        fields: { covered: 5, total: 10 },
+      },
+    ]);
+  });
+
+  it("names a jurisdiction that has no name here by its folder", () => {
+    expect(jurisdictionOf("state/ny/it-201", 2026)).toEqual({
+      name: "state/ny 2026",
+      dir: "state/ny",
     });
   });
 });
@@ -75,17 +108,74 @@ describe("renderCoverageReport", () => {
     scenarioCount: 2,
   });
 
-  it("writes the summary row with the counts", () => {
-    expect(text).toContain("| 2 | 3 | 62.5% (175 of 280) | 44.2% (50 of 113) | 112 of 127 (88%) |");
+  it("writes one summary row for each jurisdiction, then the total", () => {
+    expect(text).toContain(
+      "| Federal 2025 | 2 | 112 of 127 (88%) | 44.2% (50 of 113) | 62.5% (175 of 280) |",
+    );
+    expect(text).toContain(
+      "| California 2025 | 2 | 5 of 10 (50%) | 75.0% (3 of 4) | 80.0% (8 of 10) |",
+    );
+    expect(text).toContain(
+      "| All | 4 | 117 of 137 (85%) | 45.3% (53 of 117) | 63.1% (183 of 290) |",
+    );
   });
 
   it("writes one row for each form, and a dash where a form has no code or fields", () => {
-    expect(text).toContain("| Form 8995 | 2 | 50.0% | 40.0% | 31 of 33 (94%) |");
-    expect(text).toContain("| Schedule D (540) | 2 | — | — | — |");
-    expect(text).toContain("| Code that forms share | — | 83.3% | 66.7% | — |");
+    expect(text).toContain("| Form 8995 | Federal 2025 | 2 | 31 of 33 (94%) | 40.0% | 50.0% |");
+    expect(text).toContain("| Schedule D (540) | California 2025 | 2 | — | — | — |");
+    expect(text).toContain("| Code that forms share | — | — | — | 66.7% | 83.3% |");
   });
 
   it("names the date of the run", () => {
     expect(text).toContain("on 2026-01-02.");
+  });
+});
+
+describe("updateReadme", () => {
+  const README = [
+    "<p>",
+    "  <!-- coverage-chips:start -->",
+    "  an old chip",
+    "  <!-- coverage-chips:end -->",
+    "</p>",
+    "## Form support",
+    "<!-- coverage-table:start -->",
+    "an old table",
+    "<!-- coverage-table:end -->",
+    "after",
+  ].join("\n");
+  const text = updateReadme(README, buildCoverageReport(FILES, FORMS).jurisdictions);
+
+  it("writes one chip for each jurisdiction with the share of fields supported", () => {
+    expect(text).toContain(
+      '  <a href="#form-support"><img src="https://img.shields.io/badge/federal%202025-88%25-0f766e" alt="Federal 2025: 88% of form fields supported"></a>',
+    );
+    expect(text).toContain("badge/california%202025-50%25-0f766e");
+    expect(text).not.toContain("an old chip");
+  });
+
+  it("writes the table, and keeps the marker lines and the text around them", () => {
+    expect(text).toContain(
+      [
+        "<!-- coverage-table:start -->",
+        "| Jurisdiction | Forms | Fields supported | Tested |",
+        "| --- | --- | --- | --- |",
+        "| Federal 2025 | 2 | **88%** (112 of 127) | 44.2% |",
+        "| California 2025 | 2 | **50%** (5 of 10) | 75.0% |",
+        "<!-- coverage-table:end -->",
+        "after",
+      ].join("\n"),
+    );
+    expect(text).toContain("  <!-- coverage-chips:end -->\n</p>");
+  });
+
+  it("writes the same text on a second run", () => {
+    expect(updateReadme(text, buildCoverageReport(FILES, FORMS).jurisdictions)).toBe(text);
+  });
+
+  it("fails when the README has lost a marker", () => {
+    expect(() => replaceBetween("no markers", { start: "<a>", end: "</a>" }, "x")).toThrow(
+      "The README has no <a>",
+    );
   });
 });
