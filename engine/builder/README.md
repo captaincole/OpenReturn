@@ -6,37 +6,32 @@ Dev-time tooling (`@openreturn/builder`) that turns a blank IRS/FTB PDF
 into the assets the form engine consumes. Nothing here runs in production — the engine reads the
 finished artifacts (`catalog.json`, data tables), never this code.
 
-NOTE: This is still a work in progress. I use this part of the project to get started, specifically to create typed fields for all forms I want to ingest. The rules part (bindings) of this form engine doesn't work well yet and still needs to be hand verified after generation but the types are normally pretty good. 
+The builder calls no model and has no env file. The judgment steps belong to the
+Claude Code skills in `.claude/skills/`: `catalog-form-fields` labels the fields,
+and `write-binding-rules` drafts the rules in `bindings.ts`. The builder does the
+steps around them that need no judgment.
 
 ```
-blank.pdf ──ingest──► catalog.json ──promote──► runtime copy ──bind──► bindings.ts draft
+blank.pdf ──extract-widgets──► widgets.json + tiles ──labels.json──► write-catalog ──► catalog.json
 ```
 
 ## Pieces (`src/`)
 
-- **`ingestFormWorkflow/`** — Mastra workflow (run standalone from the CLI,
-  not registered on the production instance): extract AcroForm widgets from
-  the PDF (`extractFormFields.ts`), AI-label and classify each field
-  (`visionLabel.ts`, `classifyFields.ts`), persist a `catalog.json` to
-  the engine, next to the form's bindings
-  (`engine/src/<jurisdiction>/<short>/`).
-- **`generateBindingsWorkflow/`** — drafts a `bindings.ts` skeleton for a
-  cataloged form: retrieves instruction context through Canon's MCP
-  search (`retrieveContext.ts`; run `npm run dev:canon` first),
-  classifies which fields are derivable (`classifyBindings.ts`),
-  renders the draft (`renderBindings.ts`). Output is a starting point —
-  a human finishes and owns the bindings.
+- **`extractWidgets.ts`** — the fillable widgets of a blank PDF: name, kind,
+  position, radio options, and the form author's /TU label when the PDF has one.
+- **`overlayTiles.ts`** — a page with a numbered box on each widget, cut into
+  bands that stay readable.
+- **`labelsFile.ts`** — the schema of `labels.json`: the fieldId, label, category
+  and value type that the labeler decides for each widget.
+- **`seedLabels.ts`** — `labels.json` from a committed catalog, so a rebuild
+  keeps every fieldId that `bindings.ts` refers to.
+- **`catalogFromLabels.ts`**, **`catalogRows.ts`** — check every widget against
+  `labels.json`, then build the catalog rows.
+- **`workFiles.ts`**, **`formTarget.ts`** — where a form's files are: the work
+  files in `.scratch/forms/<year>/<subpath>/`, the blank PDF, the catalog.
+- **`formStatus.ts`** — which steps of a form are done.
 - **`tables/`** — parsers for official rate/tax tables (IRS HTML, FTB PDF)
   into the JSON the engine's `data/` modules load.
-- **Catalog path with no API calls** — `extract-widgets` writes `widgets.json` and
-  numbered overlay tiles (`renderOverlayTiles`) to `.scratch/forms/<year>/<subpath>/`;
-  whoever reads the tiles writes `labels.json` (schema in `labelsFile.ts`), or
-  one `labels.page-<n>.json` per page; for a form with a catalog, `seed-labels`
-  writes `labels.json` from it, so a rebuild keeps every fieldId;
-  `catalogFromLabels.ts` checks every widget against it before `write-catalog`
-  writes `catalog.json`. `formStatus.ts` reports which steps of a form are done.
-- **`renderPageWithOverlay.ts`** — renders a page with its widget boxes drawn
-  on it, whole (for eyeballing label↔widget alignment) or as numbered tiles.
 
 ## Commands (from repo root)
 
@@ -45,19 +40,8 @@ npm run form-engine -- form-status federal/8959     # which steps of a form are 
 npm run form-engine -- extract-widgets federal/8959 # PDF → .scratch/forms/…/widgets.json + numbered overlay tiles
 npm run form-engine -- seed-labels federal/8959     # catalog.json → labels.json; lists the widgets left to label
 npm run form-engine -- write-catalog federal/8959   # widgets.json + labels.json → catalog.json, every widget checked
-npm run form-engine -- generate-catalog           # PDF → catalog.json (Anthropic calls, costs money)
-npm run form-engine -- generate-bindings          # catalog → bindings.ts draft
-npm run form-engine -- ingest-federal-tax-table   # refresh the federal tax table JSON
+npm run form-engine -- ingest-federal-tax-table     # refresh the federal tax table JSON
 ```
-
-## Setup
-
-Set `ANTHROPIC_API_KEY` in `.env.development` here
-(`generate-catalog` and `generate-bindings` call Anthropic). The first
-`npm run form-engine` writes that file; `.env.example` lists every
-setting. As in Canon and Cade, a `.env` file overrides it.
-`generate-bindings` also searches Canon over MCP (`src/canonSearch.ts`),
-so start it first with `npm run dev:canon`.
 
 Run `npm run form-engine` with no arguments for the full command list
 (including `generate-types`, `ingest-ca-tax-table` and `ingest-ca-eitc-table`), and
@@ -65,7 +49,7 @@ Run `npm run form-engine` with no arguments for the full command list
 
 Inputs come from `sources/<year>/forms/` (the source documents); outputs
 go to `engine/src/`. A new catalog reaches the runtime in the
-same commit as its tests: the engine imports it directly. AI labeling
-fence-posts on dense widget clusters — hand-verified corrections live in
+same commit as its tests: the engine imports it directly. A label can land on
+the wrong widget in a dense cluster — hand-verified corrections live in
 `engine/src/render/verifiedWidgets.ts` and take precedence over
 catalog widget names at render time.

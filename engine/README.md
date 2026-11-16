@@ -26,13 +26,12 @@ engine/
 ├── scripts/    renderScenario, draftExpected, compareFiled
 ├── paths.ts    where the package sits on disk, for offline tooling
 └── builder/    @openreturn/builder: dev-time tools that build the engine's
-                assets (catalog.json, bindings drafts, tax tables; builder/README.md)
+                assets (catalog.json, field types, tax tables; builder/README.md)
 ```
 
 Other code imports only the `exports` in `package.json`:
 `@openreturn/engine` (evaluate, render, pendingInputs, readyToFile, FORMS, bindingKind,
 DEDUCTION_ITEMS, the FormField and deductions types), `@openreturn/engine/facts` (the fact vocabulary and row types),
-`@openreturn/engine/catalog` (for the builder, `builder/`),
 `@openreturn/engine/paths`, and `@openreturn/engine/scenarios` (test fixtures).
 A deep import does not resolve.
 
@@ -102,8 +101,8 @@ documents (`blank.pdf`, instructions) use the same subpath in
 
 1. Put `blank.pdf` in `sources/<year>/forms/<jurisdiction>/<short>/`.
    Build `catalog.json` and `types.ts` in `src/<jurisdiction>/<short>/` with
-   the `catalog-form-fields` skill in Claude Code (no API calls), or with
-   `npm run form-engine -- generate-catalog` (`builder/README.md`).
+   the `catalog-form-fields` skill in Claude Code (no API calls;
+   `builder/README.md` has the commands it runs).
 2. In `src/<jurisdiction>/<short>/`, add `types.ts` (the form's
    FormFields — every field must declare `category` and `valueType`; TS
    won't compile otherwise), `filingInfo.ts`, and `bindings.ts`. Draft

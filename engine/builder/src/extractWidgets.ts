@@ -1,33 +1,33 @@
 /*
- * Labels come from /TU, else from vision (IRS 1040 strips /TU). There is no
- * positional fallback by policy: a widget with no label throws for human review.
+ * The fillable widgets of a blank PDF. The only label here is the form
+ * author's /TU text. IRS PDFs have none: those labels come later, from
+ * whoever reads the overlay tiles (labels.json).
  */
 
 import { PDFDocument } from "@cantoo/pdf-lib";
 import { readFile } from "node:fs/promises";
 import { createIsomorphicCanvasFactory, getDocumentProxy } from "unpdf";
-import { resolveLabelsForPage } from "./visionLabel.js";
 
 const canvasImport = () => import("@napi-rs/canvas");
 
 export type FieldKind = "text" | "checkbox" | "radio" | "signature" | "other";
-export type LabelSource = "tu" | "vision";
 
-export interface ExtractedFieldWidget {
+export interface FieldWidget {
   /** 0-based. */
   page: number;
   position: { x: number; y: number; width: number; height: number };
   buttonValue?: string;
-  /** Radio widgets from extractWidgets: the option name pdf-lib selects this widget by. */
+  /** Radio widgets: the option name pdf-lib selects this widget by. */
   radioOption?: string;
 }
 
-export interface ExtractedField {
+/* A field before labeling. */
+export interface WidgetField {
   fieldName: string;
   shortName: string;
   fieldKind: FieldKind;
-  label: string;
-  labelSource: LabelSource;
+  /** The form author's /TU label, if the PDF has one. */
+  tuLabel: string | null;
   maxLength?: number | null;
   multiline?: boolean;
   /** A comb field has fixed character cells (SSN boxes). */
@@ -35,36 +35,30 @@ export interface ExtractedField {
   radioOptions?: string[];
   /** The "on" appearance state name, often "Yes" or "1". */
   checkboxOnValue?: string;
-  widgets: ExtractedFieldWidget[];
+  widgets: FieldWidget[];
 }
 
-export interface ExtractedForm {
-  pdfPath: string;
-  totalPages: number;
-  fields: ExtractedField[];
-}
-
-export interface CoverageReport {
-  totalFields: number;
-  tier1Count: number;
-  tier2Count: number;
-}
-
-export class MissingLabelError extends Error {
+/* One numbered box on a page overlay. Badges follow reading order. */
+export interface OverlayBadge {
+  badge: number;
   fieldName: string;
-  pdfPath: string;
-  constructor(opts: { fieldName: string; pdfPath: string }) {
-    super(
-      `extractFormFields(${opts.pdfPath}): widget "${opts.fieldName}" has no ` +
-        `label after tier-1 (/TU) and tier-2 (vision). The vision step did ` +
-        `not return a label for this widget. Investigate the page render + ` +
-        `overlay or escalate to manual review.`,
-    );
-    this.name = "MissingLabelError";
-    this.fieldName = opts.fieldName;
-    this.pdfPath = opts.pdfPath;
-  }
+  kind: FieldKind;
+  rect: [number, number, number, number];
+  exportValue?: string;
+  buttonValue?: string;
+  /** Radio widgets: the name labels.json uses for this option. */
+  radioOption?: string;
 }
+
+export interface ExtractedWidgets {
+  /** A pdf.js PDFDocumentProxy, for rendering the page overlays. */
+  pdf: any;
+  totalPages: number;
+  fields: WidgetField[];
+  pages: Array<{ page: number; widgets: OverlayBadge[] }>;
+}
+
+type FieldShape = Omit<WidgetField, "tuLabel">;
 
 interface PageWidget {
   pdfWidgetId: number; // the overlay badge number
@@ -79,7 +73,7 @@ interface WidgetOccurrence {
 }
 
 interface CollectedWidgets {
-  tier1Labels: Map<string, string>;
+  tuLabels: Map<string, string>;
   widgetsByFieldName: Map<string, WidgetOccurrence[]>;
   widgetsByPage: Map<number, PageWidget[]>;
 }
@@ -105,14 +99,14 @@ function collectPageWidgets(annots: any[], pageIdx: number, out: CollectedWidget
     bucket.push({ annot: annot, page: pageIdx, rect });
 
     const alt = annot.alternativeText;
-    if (!out.tier1Labels.has(fieldName) && typeof alt === "string" && alt.trim().length > 0) {
-      out.tier1Labels.set(fieldName, alt.trim());
+    if (!out.tuLabels.has(fieldName) && typeof alt === "string" && alt.trim().length > 0) {
+      out.tuLabels.set(fieldName, alt.trim());
     }
 
     rawWidgets.push({ annot: annot, rect });
   }
 
-  /* Reading order, as the vision prompt promises. PDF y is bottom-up: larger y is higher. */
+  /* Reading order, which the badge numbers follow. PDF y is bottom-up: larger y is higher. */
   rawWidgets.sort((left, right) => {
     const ay = (left.rect[1] + left.rect[3]) / 2;
     const by = (right.rect[1] + right.rect[3]) / 2;
@@ -125,92 +119,6 @@ function collectPageWidgets(annots: any[], pageIdx: number, out: CollectedWidget
     annot: widget.annot,
     rect: widget.rect,
   }));
-}
-
-async function resolveTier2Labels(
-  pdfPath: string,
-  pdf: Awaited<ReturnType<typeof getDocumentProxy>>,
-  totalPages: number,
-  collected: CollectedWidgets,
-): Promise<Map<string, string>> {
-  const tier2Labels = new Map<string, string>();
-  for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
-    const pageWidgets = collected.widgetsByPage.get(pageIndex) ?? [];
-    if (pageWidgets.length === 0) continue;
-    const allHaveTu = pageWidgets.every((widget) =>
-      collected.tier1Labels.has(widget.annot.fieldName as string),
-    );
-    if (allHaveTu) continue;
-
-    const labels = await resolveLabelsForPage({
-      pdfPath,
-      pdf,
-      pageIndex: pageIndex,
-      widgets: pageWidgets.map((widget) => ({
-        id: widget.pdfWidgetId,
-        fieldName: widget.annot.fieldName as string,
-        kind: classifyKind(widget.annot),
-        rect: widget.rect,
-        exportValue:
-          typeof widget.annot.exportValue === "string" ? widget.annot.exportValue : undefined,
-        buttonValue:
-          typeof widget.annot.buttonValue === "string" ? widget.annot.buttonValue : undefined,
-        tuLabel: collected.tier1Labels.get(widget.annot.fieldName as string) ?? null,
-      })),
-    });
-
-    /* Widgets can share a fieldName across pages; the first non-empty label wins. */
-    for (const widget of pageWidgets) {
-      const fn = widget.annot.fieldName as string;
-      if (collected.tier1Labels.has(fn)) continue;
-      if (tier2Labels.has(fn)) continue;
-      const lab = labels.get(widget.pdfWidgetId);
-      if (lab && lab.trim().length > 0) {
-        tier2Labels.set(fn, lab.trim());
-      }
-    }
-  }
-  return tier2Labels;
-}
-
-function resolveLabel(
-  pdfPath: string,
-  fieldName: string,
-  tier1Labels: Map<string, string>,
-  tier2Labels: Map<string, string>,
-): { label: string; labelSource: LabelSource } {
-  const t1 = tier1Labels.get(fieldName);
-  if (t1) return { label: t1, labelSource: "tu" };
-  const t2 = tier2Labels.get(fieldName);
-  if (t2) return { label: t2, labelSource: "vision" };
-  throw new MissingLabelError({ fieldName, pdfPath });
-}
-
-type FieldShape = Omit<ExtractedField, "label" | "labelSource">;
-
-/* A field before labeling: only the form author's /TU label, if the PDF has one. */
-export interface WidgetField extends FieldShape {
-  tuLabel: string | null;
-}
-
-/* One numbered box on a page overlay. Badges follow reading order. */
-export interface OverlayBadge {
-  badge: number;
-  fieldName: string;
-  kind: FieldKind;
-  rect: [number, number, number, number];
-  exportValue?: string;
-  buttonValue?: string;
-  /** Radio widgets: the name labels.json uses for this option. */
-  radioOption?: string;
-}
-
-export interface ExtractedWidgets {
-  /** A pdf.js PDFDocumentProxy, for rendering the page overlays. */
-  pdf: any;
-  totalPages: number;
-  fields: WidgetField[];
-  pages: Array<{ page: number; widgets: OverlayBadge[] }>;
 }
 
 function assembleField(fieldName: string, occurrences: WidgetOccurrence[]): FieldShape {
@@ -266,7 +174,7 @@ async function collectWidgets(
   const totalPages = pdf.numPages;
 
   const collected: CollectedWidgets = {
-    tier1Labels: new Map(),
+    tuLabels: new Map(),
     widgetsByFieldName: new Map(),
     widgetsByPage: new Map(),
   };
@@ -344,7 +252,6 @@ function overlayBadge(widget: PageWidget, names: RadioNames | undefined): Overla
   };
 }
 
-/* The widgets with no API call: labels come later, from whoever reads the overlays. */
 export async function extractWidgets(pdfPath: string): Promise<ExtractedWidgets> {
   const { pdf, totalPages, collected } = await collectWidgets(pdfPath);
   const shapes = [...collected.widgetsByFieldName].map(([fieldName, occurrences]) =>
@@ -354,7 +261,7 @@ export async function extractWidgets(pdfPath: string): Promise<ExtractedWidgets>
   const fields = shapes
     .map((shape) => ({
       ...withRadioNames(shape, names.get(shape.fieldName)),
-      tuLabel: collected.tier1Labels.get(shape.fieldName) ?? null,
+      tuLabel: collected.tuLabels.get(shape.fieldName) ?? null,
     }))
     .sort(byReadingOrder);
   const pages = [...collected.widgetsByPage].map(([page, widgets]) => ({
@@ -364,28 +271,6 @@ export async function extractWidgets(pdfPath: string): Promise<ExtractedWidgets>
     ),
   }));
   return { pdf, totalPages, fields, pages };
-}
-
-export async function extractFormFields(pdfPath: string): Promise<ExtractedForm> {
-  const { pdf, totalPages, collected } = await collectWidgets(pdfPath);
-  const tier2Labels = await resolveTier2Labels(pdfPath, pdf, totalPages, collected);
-  const fields: ExtractedField[] = [...collected.widgetsByFieldName]
-    .map(([fieldName, occurrences]) => ({
-      ...assembleField(fieldName, occurrences),
-      ...resolveLabel(pdfPath, fieldName, collected.tier1Labels, tier2Labels),
-    }))
-    .sort(byReadingOrder);
-  return { pdfPath, totalPages, fields };
-}
-
-export function coverageReport(form: ExtractedForm): CoverageReport {
-  let t1 = 0;
-  let t2 = 0;
-  for (const field of form.fields) {
-    if (field.labelSource === "tu") t1++;
-    else if (field.labelSource === "vision") t2++;
-  }
-  return { totalFields: form.fields.length, tier1Count: t1, tier2Count: t2 };
 }
 
 function classifyKind(annot: any): FieldKind {
