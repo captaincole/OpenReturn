@@ -6,6 +6,7 @@ import { askTheTaxCode } from "./ask";
 import { notePromptSizes } from "./prompts";
 import {
   createOwner,
+  expectOtherRoutesRefused,
   logTurn,
   noAgentErrors,
   send,
@@ -32,6 +33,7 @@ test.afterEach(async ({}, testInfo) => {
 test("Alex: intake through generated forms", async ({ page }) => {
   test.setTimeout(90 * 60_000);
   await plumbing("setup page creates the owner", () => createOwner(page, OWNER));
+  await plumbing("proxies refuse a route off their list", () => expectOtherRoutesRefused(page));
   await askTheTaxCode(page);
   const filingPath = await plumbing("start a filing", () => startFiling(page));
   const generated = await runIntake(page);

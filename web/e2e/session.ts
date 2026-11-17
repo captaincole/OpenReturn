@@ -34,6 +34,16 @@ export async function createOwner(page: Page, owner: Owner) {
   await expect(page.getByRole("heading", { name: `Hi, ${firstName}.` })).toBeVisible();
 }
 
+/* Cade and Canon also serve Mastra's own routes; the proxies forward only the app's. */
+const ROUTES_NOT_FORWARDED = ["/api/agent/api/memory/threads", "/api/canon/api/workflows"];
+
+export async function expectOtherRoutesRefused(page: Page) {
+  for (const path of ROUTES_NOT_FORWARDED) {
+    const res = await page.request.get(path);
+    expect(res.status(), `GET ${path}`).toBe(404);
+  }
+}
+
 export async function startFiling(page: Page): Promise<string> {
   await page
     .getByRole("button", { name: /Start filing/ })

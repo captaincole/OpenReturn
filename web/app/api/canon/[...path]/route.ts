@@ -1,8 +1,12 @@
 import { getOwnerSession } from "@/lib/localAuth";
+import { CANON_ROUTES, isProxyRoute } from "@/lib/proxyRoutes";
 import { proxyTarget } from "@/lib/proxyTarget";
 import { type NextRequest, NextResponse } from "next/server";
 
-/* Corpus data is not user data, but the session gate keeps the instance private. */
+/*
+ * Corpus data is not user data, but the session gate keeps the instance private.
+ * Only the library's routes in CANON_ROUTES pass: Canon also serves MCP and Mastra's own.
+ */
 
 const CANON_INTERNAL_URL = process.env.CANON_INTERNAL_URL ?? "http://127.0.0.1:4112";
 
@@ -16,6 +20,9 @@ async function forward(
   }
 
   const { path } = await params;
+  if (!isProxyRoute(CANON_ROUTES, request.method, path)) {
+    return NextResponse.json({ error: "not found" }, { status: 404 });
+  }
   const target = proxyTarget(path, request.nextUrl.search, CANON_INTERNAL_URL);
   if (!target) {
     return NextResponse.json({ error: "bad path" }, { status: 400 });

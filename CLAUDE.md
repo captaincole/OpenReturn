@@ -114,7 +114,7 @@ npm run dev          # Cade only — also opens Mastra Studio at :4111
 npm run dev:web      # next only
 
 npm test             # engine golden suite; positional filters work (npm test -- alex)
-npm run test:unit    # engine + canon + agent unit tests (test:integration likewise)
+npm run test:unit    # engine + canon + agent unit tests, then the web app's (web/lib/*.test.ts); test:integration likewise, without web
 npm run typecheck    # tsc over engine + builder + canon + agent
 npm run coverage     # golden suite under c8; rewrites docs/coverage.md (fields supported, branches, lines, by form)
                      # and the README "Form support" table (by jurisdiction and tax year)
@@ -138,6 +138,8 @@ Pin all four paths via env (`CORPUS_DB_PATH` in Canon's env file; `APP_DB_PATH` 
 **Auth (single-user):** identity = the instance. One `owner` row in `app.db` holds profile data (name/email) plus an scrypt password hash and the session-cookie HMAC secret — all created by the web app's first-run `/setup` screen. Login = one password → signed httpOnly cookie (`lib/localAuth.ts`, ~100 lines, node:crypto only). `proxy.ts` does an optimistic cookie-presence redirect; layouts/route handlers verify for real via `getOwnerSession()`.
 
 **The browser never talks to the agent.** All agent calls (chat streaming, `/app/state`, filing lifecycle, thread history) go through the same-origin `/api/agent/[...path]` proxy — session-cookie authenticated, forwarded server-side to `AGENT_INTERNAL_URL` (default `http://127.0.0.1:4111`), streaming passed through. The agent itself has no user auth; `ownerMiddleware` resolves the instance owner from `app.db` for memory scoping, and an optional `AGENT_API_TOKEN` gates the port when it's reachable beyond localhost. Everything non-agent — activity, drafts, uploads, filings lists — is read from `app.db` directly: Server Components via `lib/serverDb.ts`, browser code via the `/api/*` Route Handlers (no realtime channel — client components poll on a short interval). With RLS gone, **every query scopes explicitly** by `userId`/`filingId` (`Scope` in `db/appDb.ts`), and routes gate with membership checks before touching another filing's data. Reference-library calls (`/library`, Open PDF) go through a second proxy, `/api/canon/[...path]`, to Canon at `CANON_INTERNAL_URL` (default `http://127.0.0.1:4112`); it is read-only and gated by the same session cookie.
+
+**Each proxy forwards only the routes on its list** (`web/lib/proxyRoutes.ts`: `AGENT_ROUTES`, `CANON_ROUTES`). Cade and Canon are Mastra servers, so next to the app's routes they serve Mastra's own (every thread, traces, tools, workflows, the agent's model). A request for a route that is not on the list gets a 404 from the proxy and never reaches the server. When browser code calls a new route, add it to the list and to `web/lib/proxyRoutes.test.ts`.
 
 ## First run / factory reset
 
@@ -173,7 +175,7 @@ Limits worth remembering:
 
 Two paths:
 - **UI: Delete filing** (avatar menu) → `DELETE /app/filings/:id` — removes the filing's blob directory, cascades every domain row, deletes both Mastra threads (the return and its deductions). Start a fresh filing from the home page afterwards.
-- **API: `POST /app/session/reset`** → `resetCurrentUserData` in `cade/src/mastra/db/resetUserData.ts` — wipes the user's rows but keeps the filing + memberships. No UI button anymore.
+- **API: `POST /app/session/reset`** → `resetCurrentUserData` in `cade/src/mastra/db/resetUserData.ts` — wipes the user's rows but keeps the filing + memberships. No UI button, and the web proxy does not forward it: call Cade at `:4111`.
 
 **Reference corpus and `sources/` always survive.** To rebuild the corpus, delete `canon/.data/corpus.db` and run `npm run corpus -- sync` (or `npm run corpus -- fetch` for the prebuilt release). To nuke everything, delete both `.data/` directories (`cade/`, `canon/`) and re-run `npm run reset`.
 

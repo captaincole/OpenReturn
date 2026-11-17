@@ -77,15 +77,6 @@ export async function fetchState(): Promise<CaseState> {
   return res.json();
 }
 
-export async function resetSession(): Promise<void> {
-  const res = await fetch(agentUrl("/app/session/reset"), {
-    method: "POST",
-    headers: await authHeaders(),
-  });
-  if (res.status === 401) throw new UnauthorizedError();
-  if (!res.ok) throw new Error(`Reset failed: ${res.status}`);
-}
-
 export interface CreatedFiling {
   filing: { id: string; taxYear: number; status: string };
   created: boolean;

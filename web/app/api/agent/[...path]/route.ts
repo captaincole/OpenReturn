@@ -1,10 +1,12 @@
 import { getOwnerSession } from "@/lib/localAuth";
+import { AGENT_ROUTES, isProxyRoute } from "@/lib/proxyRoutes";
 import { proxyTarget } from "@/lib/proxyTarget";
 import { type NextRequest, NextResponse } from "next/server";
 
 /*
  * The only bridge from the browser to the agent. The agent never sees a
  * browser credential. The body passes straight through, so SSE does not buffer.
+ * Only the routes in AGENT_ROUTES pass: the agent also serves Mastra's own.
  */
 
 const AGENT_INTERNAL_URL = process.env.AGENT_INTERNAL_URL ?? "http://127.0.0.1:4111";
@@ -19,6 +21,9 @@ async function forward(
   }
 
   const { path } = await params;
+  if (!isProxyRoute(AGENT_ROUTES, request.method, path)) {
+    return NextResponse.json({ error: "not found" }, { status: 404 });
+  }
   const target = proxyTarget(path, request.nextUrl.search, AGENT_INTERNAL_URL);
   if (!target) {
     return NextResponse.json({ error: "bad path" }, { status: 400 });
@@ -57,12 +62,6 @@ export async function GET(req: NextRequest, ctx: { params: Promise<{ path: strin
   return forward(req, ctx.params);
 }
 export async function POST(req: NextRequest, ctx: { params: Promise<{ path: string[] }> }) {
-  return forward(req, ctx.params);
-}
-export async function PUT(req: NextRequest, ctx: { params: Promise<{ path: string[] }> }) {
-  return forward(req, ctx.params);
-}
-export async function PATCH(req: NextRequest, ctx: { params: Promise<{ path: string[] }> }) {
   return forward(req, ctx.params);
 }
 export async function DELETE(req: NextRequest, ctx: { params: Promise<{ path: string[] }> }) {
