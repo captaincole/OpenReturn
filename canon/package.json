@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit -p ."
   },
   "engines": {
-    "node": ">=22.13.0"
+    "node": ">=24.0.0"
   },
   "dependencies": {
     "@libsql/client": "^0.17.4",
@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@openreturn/sources": "0.1.0",
-    "@types/node": "^22",
+    "@types/node": "^24",
     "cheerio": "^1.2.0",
     "domhandler": "^5.0.3",
     "tsx": "^4.20.5",
