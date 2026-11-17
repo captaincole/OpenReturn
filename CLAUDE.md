@@ -82,7 +82,7 @@ web/                             # Next.js 16 (App Router) frontend → deployed
 ├── app/                         # /setup, /login, (app)/{page (home), r/[returnId], r/[returnId]/deductions, ask/[threadId],
 │                                  library, library/[docId]}, /documents/[id] + /api/* route handlers
 ├── components/                  # AppShell, ChatPane, DeductionReplies, ActivityCard, PlanCard, TopBar, Markdown
-├── lib/                         # localAuth, serverDb, api, ask, activity, chatSession, deductions, mastraClient, …
+├── lib/                         # localAuth, sessionToken, userStore, serverDb, api, ask, activity, chatSession, deductions, mastraClient, …
 ├── e2e/                         # Playwright E2E: drives web + Cade + Canon + a real model (npm run e2e)
 ├── proxy.ts                     # Next.js 16 Proxy (renamed Middleware): optimistic session-cookie gate
 ├── package.json                 # web deps + scripts (next dev, next build, test:unit, e2e)
@@ -143,7 +143,7 @@ Pin all four paths via env (`CORPUS_DB_PATH` in Canon's env file; `APP_DB_PATH` 
 
 ## First run / factory reset
 
-`npm run reset` wipes user data (app.db, mastra.db, documents/, and Canon's mastra.db, whose ground-run snapshots carry the facts Cade sent) while **preserving corpus.db** (rebuilding it costs Haiku money for contextualization). After a reset, the web app redirects to `/setup` — create the owner account (name, email, password) — then start a filing from the home page. No seed scripts, no test users; the setup screen IS the seeding.
+`npm run reset` wipes user data (app.db, mastra.db, documents/, and Canon's mastra.db, whose ground-run snapshots carry the facts Cade sent) while **preserving corpus.db** (rebuilding it costs Haiku money for contextualization). After a reset, the web app redirects to `/setup` — create the local user (name, email, password) — then start a filing from the home page. No seed scripts, no test users; the setup screen IS the seeding.
 
 ## Development workflow
 
@@ -154,7 +154,7 @@ We're building agent + UI together. When changes touch both, expect to:
    - **Mastra log** — backend errors, agent traces, tool-call output. When Claude runs mastra in the background it writes to that background task's output file; otherwise it's whatever terminal you started `npm run dev` in.
    - **Mastra Studio** at http://localhost:4111 (Canon's at :4112) — the **Observability** tab shows full agent traces (which tools fired, with what args, in what order). This is the right place to debug "why did Cade do X?".
    - **Browser console + Network panel** — frontend errors and HTTP failures (401s from a wrong passcode, 404s from a missing proxy entry, etc.).
-3. **Verify the change in the browser** at http://localhost:3000. Sign in with the owner password (session cookie persists across reloads). To wipe state between test runs use **Delete filing** (avatar menu, top-right) and start a fresh filing from the home page. The activity rail and header counters refresh after each agent turn (plus a short client-side poll).
+3. **Verify the change in the browser** at http://localhost:3000. Sign in with the local user's password (session cookie persists across reloads). To wipe state between test runs use **Delete filing** (avatar menu, top-right) and start a fresh filing from the home page. The activity rail and header counters refresh after each agent turn (plus a short client-side poll).
 
 For backend-only changes you don't always need to open the browser — `curl` against `http://localhost:4111/app/state` (or `/api/agents/cade/stream`) with `Authorization: Bearer <DEMO_PASSCODE>` is faster.
 

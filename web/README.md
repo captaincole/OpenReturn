@@ -20,13 +20,13 @@ npm run e2e       # Playwright E2E through the UI (see e2e/README.md)
 npm run e2e:madison  # the same for Madison and the Deductions tab
 ```
 
-The first run redirects to `/setup` to create the owner account. The env file is `.env.development` (see `.env.example`). `APP_DB_PATH` and `DOCUMENTS_PATH` must point at the same files as Cade's.
+The first run redirects to `/setup` to create the local user. The env file is `.env.development` (see `.env.example`). `APP_DB_PATH` and `DOCUMENTS_PATH` must point at the same files as Cade's.
 
 ## Pages
 
 | Route | What it shows |
 | --- | --- |
-| `/setup`, `/login` | First-run owner account, then a password sign-in |
+| `/setup`, `/login` | First-run local user, then a password sign-in |
 | `/` | Home: tax returns, estimates, the tax code search box |
 | `/r/[returnId]` | A return: chat with Cade, activity, forms, documents |
 | `/r/[returnId]/deductions` | The return's deductions conversation: answers to tap, the documents Cade asks for there, and the itemize-or-standard summary |
@@ -52,7 +52,7 @@ The first run redirects to `/setup` to create the owner account. The env file is
 web/
 ├── app/          the pages above, and the /api/* route handlers
 ├── components/   AppShell, ChatPane, DeductionReplies, ActivityCard, PlanCard, TopBar, Markdown
-├── lib/          localAuth, serverDb, api, ask, activity, chatSession, deductions, mastraClient, proxyRoutes, uploads
+├── lib/          localAuth, sessionToken, userStore, serverDb, api, ask, activity, chatSession, deductions, mastraClient, proxyRoutes, uploads
 ├── e2e/          Playwright: drives web + Cade + Canon + a real model (e2e/README.md)
 └── proxy.ts      the optimistic session-cookie gate
 ```
