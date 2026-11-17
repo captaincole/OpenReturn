@@ -85,7 +85,7 @@ web/                             # Next.js 16 (App Router) frontend → deployed
 ├── lib/                         # localAuth, serverDb, api, ask, activity, chatSession, deductions, mastraClient, …
 ├── e2e/                         # Playwright E2E: drives web + Cade + Canon + a real model (npm run e2e)
 ├── proxy.ts                     # Next.js 16 Proxy (renamed Middleware): optimistic session-cookie gate
-├── package.json                 # web deps + scripts (next dev, next build, e2e)
+├── package.json                 # web deps + scripts (next dev, next build, test:unit, e2e)
 └── next.config.ts
 
 (no other top-level infra — auth is a password gate in the web app; see below)
