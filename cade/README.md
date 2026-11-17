@@ -82,10 +82,10 @@ Your data stays in `cade/.data/`: `app.db` (facts, decisions, filings), `mastra.
 | `npm run doctor` | Checks the machine, the configuration, the data files and the local model servers |
 | `npm run smoke:review` | Three grounding reviews end to end, on a temporary database (needs Canon) |
 | `npm run reset` | Deletes your data (and Canon's run history); keeps the reference library |
-| `npm run test:unit`, `npm run test:integration` | The tests, with the engine's and Canon's |
+| `npm run test:unit`, `npm run test:integration` | The tests, with the engine's and Canon's; `test:unit` also runs the web app's |
 
 ## Boundaries
 
 - Cade reaches Canon only over MCP. `tests/unit/boundary.test.ts` fails if Cade imports Canon's code or opens `corpus.db`.
 - Cade uses the form engine only through `@openreturn/engine`'s exports.
-- The browser never calls Cade directly. The web app forwards each call through its session-checked `/api/agent` proxy.
+- The browser never calls Cade directly. The web app's session-checked `/api/agent` proxy forwards only the routes on its list (`web/lib/proxyRoutes.ts`).
