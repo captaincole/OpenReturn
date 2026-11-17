@@ -5,6 +5,11 @@ import { NextResponse, type NextRequest } from "next/server";
  * app.db, so this checks cookie presence. Every layout and route handler
  * verifies with getUserSession(). The cookie name is duplicated from
  * lib/localAuth.ts on purpose: importing it pulls node:crypto into Edge.
+ *
+ * A cookie never sends /login or /setup to the home page from here. After a
+ * reset the browser still holds its old cookie; the home page then sends it
+ * back to /login, and the two redirects made a loop. The login layout sends a
+ * signed-in user home, because it can check the cookie.
  */
 
 const SESSION_COOKIE = "openreturn_session";
@@ -51,11 +56,6 @@ export function proxy(request: NextRequest) {
   if (!hasCookie && !isPublic(pathname)) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
-    return NextResponse.redirect(url);
-  }
-  if (hasCookie && (pathname === "/login" || pathname === "/setup")) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/";
     return NextResponse.redirect(url);
   }
   if (!isPage(pathname)) return NextResponse.next();
