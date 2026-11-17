@@ -1,7 +1,7 @@
 import { businessesOnReturn, isW2FactKey, ownerOf, type W2FactValue } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { sum } from "../../money.js";
 import {
+  filingStatusOf,
   missingInputs,
   resolveMustFile,
   w2Owner,

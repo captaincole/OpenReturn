@@ -19,10 +19,12 @@ import {
   type RetirementDistributionFactValue,
   type SocialSecurityFactValue,
 } from "../../facts/index.js";
-import { filingStatusOf, hasW2, resolveScheduleDInfo } from "../../filingInfoResolvers.js";
+import { resolveScheduleDInfo } from "../../filingInfoResolvers.js";
 import { atLeast, sum } from "../../money.js";
 import {
   factsInCategory,
+  filingStatusOf,
+  hasW2,
   missingInputs,
   resolveMustFile,
   sumInvestmentBox,
@@ -42,6 +44,7 @@ import {
 } from "./disabilityPensions.js";
 import type { Form1040FilingInfo, IraLine } from "./filingInfo.js";
 import { line1hGap } from "./line1hGaps.js";
+import { rowTaxable } from "./rowTaxable.js";
 
 const OWNERS: IraOwner[] = ["taxpayer", "spouse"];
 
@@ -76,19 +79,6 @@ function resolveInterestSlots(inputs: ResolverInputs): Form1040FilingInfo {
 const isRothIra = (row: RetirementDistributionFactValue) =>
   hasDistributionCode(row, ROTH_IRA_CODES);
 const ROLLOVER_CODES = ["G", "H"];
-
-/*
- * Code Q is not taxable. Codes J and T take the taxable part from Form 8606
- * Part III (rothTaxable below), so box 2a is not used here. Code Y, a qualified
- * charitable distribution, is not modeled (1040 inst., lines 4a/4b, Exception 3).
- */
-export function rowTaxable(distribution: RetirementDistributionFactValue): number | undefined {
-  if (distribution.box7.includes("Q")) return 0;
-  if (hasDistributionCode(distribution, ["J", "T", "Y"])) return undefined;
-  if (distribution.box2a === undefined && distribution.box2b?.taxableAmountNotDetermined === true)
-    return undefined;
-  return distribution.box2a ?? distribution.box1;
-}
 
 function retirementRows(inputs: ResolverInputs): RetirementDistributionFactValue[] {
   return factsInCategory(inputs, "retirement")

@@ -1,3 +1,4 @@
+import { bornBeforeJan2_1961 } from "./birthDate.js";
 import {
   BLINDNESS_KEYS,
   CAPITAL_LOSS_CARRYOVER_KEYS,
@@ -7,7 +8,6 @@ import {
   SPOUSE_KEYS,
   isDividendFactKey,
   isInterestFactKey,
-  isW2FactKey,
 } from "./facts/index.js";
 import { resolve6251Info } from "./federal/6251/resolveInfo.js";
 import { planForm8949Copies, totalsByBox } from "./federal/8949/copyPlan.js";
@@ -28,6 +28,8 @@ import type { BaseFilingInfo } from "./filingInfo.js";
 import { sum, sumOrBlank, type Money } from "./money.js";
 import {
   factsInCategory,
+  filingStatusOf,
+  hasW2,
   missingInputs,
   num,
   reportableSalesFallbacks,
@@ -42,46 +44,10 @@ import type { Form540FilingInfo } from "./state/ca/540/filingInfo.js";
 import { californiaWithholdingOtherForms } from "./state/ca/540/withholding.js";
 import { resolveActivityAdjustments } from "./state/ca/schedule-ca/activities.js";
 import type { ScheduleCaFilingInfo } from "./state/ca/schedule-ca/filingInfo.js";
-import { phone, ssn, type FilingStatus } from "./values.js";
+import { phone, ssn } from "./values.js";
 
 export { resolveSchedule1Info } from "./federal/schedule-1/resolveInfo.js";
 export { makeResolverInputs, type ResolverInputs } from "./resolverInputs.js";
-
-const FILING_STATUSES: ReadonlySet<unknown> = new Set<FilingStatus>([
-  "single",
-  "married_filing_jointly",
-  "married_filing_separately",
-  "head_of_household",
-  "qualifying_surviving_spouse",
-]);
-
-export function filingStatusOf(inputs: ResolverInputs): FilingStatus | undefined {
-  const raw = inputs.decisionByKey.get("decisions.scope.filing_status");
-  return FILING_STATUSES.has(raw) ? (raw as FilingStatus) : undefined;
-}
-
-/* Born before January 2 of the given year: a January 1 birthday counts as the day before. */
-function bornBeforeJan2Of(dob: string | undefined, cutoffYear: number): boolean | undefined {
-  const us = dob?.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-  const iso = dob?.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  const ymd = us ? [us[3], us[1], us[2]] : iso ? [iso[1], iso[2], iso[3]] : undefined;
-  if (!ymd) return undefined;
-  const [year, month, day] = ymd.map(Number);
-  return year < cutoffYear || (year === cutoffYear && month === 1 && day < 2);
-}
-
-/*
- * 65 or older at the end of 2025 (1040 line 12d). CA 540 line 9 counts a
- * January 1, 1961 birthday as 65 on December 31. Tax year 2025 only.
- */
-export function bornBeforeJan2_1961(dob: string | undefined): boolean | undefined {
-  return bornBeforeJan2Of(dob, 1961);
-}
-
-/* 55 or older at the end of 2025: the HSA additional contribution (Form 8889 line 3). Tax year 2025 only. */
-export function bornBeforeJan2_1971(dob: string | undefined): boolean | undefined {
-  return bornBeforeJan2Of(dob, 1971);
-}
 
 export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
   const filingStatus = filingStatusOf(inputs);
@@ -118,10 +84,6 @@ export function resolveBaseInfo(inputs: ResolverInputs): BaseFilingInfo {
     homeAddressCounty: text(inputs, "identity.address.county"),
     fullYearMEC: inputs.factByKey.get("health_coverage.full_year_mec") as boolean | undefined,
   };
-}
-
-export function hasW2(inputs: ResolverInputs): boolean {
-  return factsInCategory(inputs, "wages").some((row) => isW2FactKey(row.key));
 }
 
 /* Form 540 line 5: a qualifying surviving spouse/RDP enters the year the spouse died. */

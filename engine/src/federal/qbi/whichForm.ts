@@ -1,9 +1,9 @@
-import { BLINDNESS_KEYS, SPOUSE_KEYS, isDividendFactKey } from "../../facts/index.js";
+import { bornBeforeJan2_1961 } from "../../birthDate.js";
+import { BLINDNESS_KEYS, SPOUSE_KEYS } from "../../facts/index.js";
 import type { MustFileResolution } from "../../filingInfo.js";
-import { bornBeforeJan2_1961, filingStatusOf } from "../../filingInfoResolvers.js";
 import { atLeast, sum } from "../../money.js";
 import {
-  factsInCategory,
+  filingStatusOf,
   resolveMustFile,
   sumW2Box,
   text,
@@ -13,7 +13,7 @@ import { standardDeduction } from "../1040/deductions.js";
 import { magiUpperBound } from "../8960/mustFile.js";
 import { scheduleCOpen } from "../schedule-c/resolveInfo.js";
 import { QBI_LIMITS } from "./lines.js";
-import { qbiBusinesses, rentalsWithoutQbiAnswer } from "./resolveInfo.js";
+import { qbiBusinesses, qualifiedReitDividends, rentalsWithoutQbiAnswer } from "./resolveInfo.js";
 
 /*
  * Form 8995 or Form 8995-A: the one rule for which of them figures the QBI
@@ -30,16 +30,6 @@ const EXPLICIT_KEYS: Record<QbiForm, string> = {
   "form-8995": "decisions.scope.must_file_8995",
   "form-8995-a": "decisions.scope.must_file_8995_a",
 };
-
-/* Qualified REIT dividends: 1099-DIV box 5, cents kept. Undefined with no 1099-DIV. */
-export function qualifiedReitDividends(inputs: ResolverInputs): number | undefined {
-  const divs = factsInCategory(inputs, "investment_income").filter((row) =>
-    isDividendFactKey(row.key),
-  );
-  return divs.length > 0
-    ? sum(...divs.map((row) => (row.value as { box5?: unknown }).box5))
-    : undefined;
-}
 
 /*
  * The part of line 12e that is certain before evaluation. Only a "standard"

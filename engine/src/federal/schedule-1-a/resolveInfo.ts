@@ -1,6 +1,11 @@
+import { bornBeforeJan2_1961 } from "../../birthDate.js";
 import { SPOUSE_KEYS } from "../../facts/index.js";
-import { bornBeforeJan2_1961, filingStatusOf } from "../../filingInfoResolvers.js";
-import { resolveMustFile, text, type ResolverInputs } from "../../resolverInputs.js";
+import {
+  filingStatusOf,
+  resolveMustFile,
+  text,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
 import type { Schedule1AFilingInfo } from "./filingInfo.js";
 
 /*

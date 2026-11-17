@@ -22,10 +22,11 @@ import {
   type RentalFactValue,
   type W2FactValue,
 } from "../../facts/index.js";
-import { filingStatusOf, resolveScheduleBInfo } from "../../filingInfoResolvers.js";
+import { resolveScheduleBInfo } from "../../filingInfoResolvers.js";
 import { roundDollars, sum } from "../../money.js";
 import {
   factsInCategory,
+  filingStatusOf,
   num,
   sumInvestmentBox,
   sumW2Box,

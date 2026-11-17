@@ -6,9 +6,13 @@
 
 import { businessesOnReturn, CA_EMPLOYEE_CLASSIFICATION_KEYS } from "../../../facts/index.js";
 import { spousePropertiesOnReturn } from "../../../federal/rentals/passive.js";
-import { filingStatusOf } from "../../../filingInfoResolvers.js";
 import { sum } from "../../../money.js";
-import { missingInputs, num, type ResolverInputs } from "../../../resolverInputs.js";
+import {
+  filingStatusOf,
+  missingInputs,
+  num,
+  type ResolverInputs,
+} from "../../../resolverInputs.js";
 import { californiaAdjustment, form3885AFigures } from "../3885a/lines.js";
 import { caDepreciationActivities } from "../3885a/resolveInfo.js";
 

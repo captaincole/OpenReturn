@@ -7,9 +7,8 @@ import {
   miscIncomeNotForBusiness,
   unlinkedMiscIncomeKeys,
 } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { sum, sumOrBlank } from "../../money.js";
-import { num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import { filingStatusOf, num, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { resolve8889Info } from "../8889/resolveInfo.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";

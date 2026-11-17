@@ -1,7 +1,7 @@
 import { CA_EITC_KEYS, EIC_KEYS, SPOUSE_KEYS, businessesOnReturn } from "../../../facts/index.js";
 import { agiFloor, investmentIncomeFloor } from "../../../federal/schedule-eic/possible.js";
-import { filingStatusOf } from "../../../filingInfoResolvers.js";
 import {
+  filingStatusOf,
   missingInputs,
   resolveMustFile,
   sumW2Box,

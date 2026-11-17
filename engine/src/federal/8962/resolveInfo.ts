@@ -7,9 +7,13 @@ import {
   type MarketplaceCoverageAmounts,
   type MarketplaceCoverageFactValue,
 } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { sum } from "../../money.js";
-import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import {
+  filingStatusOf,
+  missingInputs,
+  resolveMustFile,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
 import type { Form8962FilingInfo } from "./filingInfo.js";
 
 const COLUMNS = ["enrollmentPremium", "slcspPremium", "advancePayment"] as const;

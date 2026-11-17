@@ -1,3 +1,4 @@
+import { bornBeforeJan2_1961 } from "../../birthDate.js";
 import {
   ELDERLY_OR_DISABLED_KEYS,
   SPOUSE_KEYS,
@@ -5,11 +6,16 @@ import {
   isEmployerPlanDistribution,
   parseRetirementDistributionFact,
 } from "../../facts/index.js";
-import { bornBeforeJan2_1961, filingStatusOf } from "../../filingInfoResolvers.js";
 import { roundDollars, sum } from "../../money.js";
-import { missingInputs, resolveMustFile, text, type ResolverInputs } from "../../resolverInputs.js";
+import {
+  filingStatusOf,
+  missingInputs,
+  resolveMustFile,
+  text,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
 import { disabilityPensions, disabilityWages } from "../1040/disabilityPensions.js";
-import { rowTaxable } from "../1040/resolveInfo.js";
+import { rowTaxable } from "../1040/rowTaxable.js";
 import { agiFloor } from "../schedule-eic/possible.js";
 import { personStatus } from "./boxes.js";
 import type { ScheduleRFilingInfo } from "./filingInfo.js";

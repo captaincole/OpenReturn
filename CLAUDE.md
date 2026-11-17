@@ -45,7 +45,8 @@ engine/                          # @openreturn/engine — THE FORM ENGINE. Pure,
 │                                  registries (federal/, state/ca/; each form's catalog.json sits
 │                                  next to its bindings.ts), worksheets, PDF fill, and
 │                                  deductions/ (itemize-or-standard comparison, #92).
-│                                  Boundary enforced by tests/unit/boundary.test.ts.
+│                                  Boundary enforced by tests/unit/boundary.test.ts;
+│                                  no import circles (tests/unit/importCycles.test.ts).
 ├── tests/                       # the engine's test pyramid: unit/, integration/, golden/, scenarios/
 │                                  (a scenario folder registers itself; `npm test -- --list` prints them)
 ├── scripts/                     # renderScenario, draftExpected, compareFiled, coverage (docs/coverage.md)

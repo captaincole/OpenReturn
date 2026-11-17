@@ -10,10 +10,10 @@ import {
   type RetirementDistributionFactValue,
   type TraditionalIraFactValue,
 } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { atLeast, sum } from "../../money.js";
 import {
   factsInCategory,
+  filingStatusOf,
   missingInputs,
   resolveMustFile,
   type ResolverInputs,

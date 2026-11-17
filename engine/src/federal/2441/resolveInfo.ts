@@ -11,10 +11,10 @@ import {
   type DependentFactValue,
   type W2FactValue,
 } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { sum } from "../../money.js";
 import {
   factsInCategory,
+  filingStatusOf,
   missingInputs,
   num,
   resolveMustFile,

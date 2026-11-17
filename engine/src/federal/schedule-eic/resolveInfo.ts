@@ -1,6 +1,10 @@
 import { EIC_KEYS } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
-import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import {
+  filingStatusOf,
+  missingInputs,
+  resolveMustFile,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
 import type { ScheduleEICFilingInfo } from "./filingInfo.js";
 import { eicMayApply } from "./possible.js";
 import { eicQualifyingChildren } from "./qualifyingChild.js";

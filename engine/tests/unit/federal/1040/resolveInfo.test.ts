@@ -8,11 +8,8 @@ import {
   type GamblingWinningsFactValue,
   type RetirementDistributionFactValue,
 } from "../../../../src/facts/index.js";
-import {
-  resolve1040Info,
-  rowTaxable,
-  traditionalTaxable,
-} from "../../../../src/federal/1040/resolveInfo.js";
+import { resolve1040Info, traditionalTaxable } from "../../../../src/federal/1040/resolveInfo.js";
+import { rowTaxable } from "../../../../src/federal/1040/rowTaxable.js";
 import { makeResolverInputs } from "../../../../src/resolverInputs.js";
 
 const distribution = (

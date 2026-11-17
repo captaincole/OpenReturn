@@ -54,6 +54,9 @@ file to `coverage/index.html` (not committed).
    and `pdf-lib`. `tests/unit/boundary.test.ts` enforces this on every
    commit; if your change fails it, the fix is to move code or pass data in,
    never to widen the whitelist casually.
+   No two modules import each other, directly or through other modules
+   (`tests/unit/importCycles.test.ts`): put a helper that many forms use in a
+   file that imports no form, such as `resolverInputs.ts`.
 2. **The engine does no I/O.** Callers load fact, assumption and decision rows and pass
    them to `evaluateScenario` — the runtime bridge is the agent's
    `src/mastra/loadScenario.ts`, the only place db and engine meet.
