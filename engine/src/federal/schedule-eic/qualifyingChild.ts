@@ -18,8 +18,7 @@ import {
   type DependentFact,
   type DependentFactValue,
 } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
-import { text, type ResolverInputs } from "../../resolverInputs.js";
+import { filingStatusOf, text, type ResolverInputs } from "../../resolverInputs.js";
 
 /* Resolvers see no tax year; Schedule 8812 pins its age rules to 2025 the same way. */
 export const TAX_YEAR = 2025;

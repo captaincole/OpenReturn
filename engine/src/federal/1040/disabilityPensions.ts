@@ -14,7 +14,7 @@ import {
 } from "../../facts/index.js";
 import { sum } from "../../money.js";
 import type { ResolverInputs } from "../../resolverInputs.js";
-import { rowTaxable } from "./resolveInfo.js";
+import { rowTaxable } from "./rowTaxable.js";
 
 export interface DisabilityPension {
   distribution: RetirementDistributionFactValue;

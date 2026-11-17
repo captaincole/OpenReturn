@@ -5,7 +5,8 @@ import {
   type RetirementDistributionFactValue,
 } from "../../../facts/index.js";
 import type { TaxFactRow } from "../../../facts/rows.js";
-import { rowTaxable, traditionalTaxable } from "../../../federal/1040/resolveInfo.js";
+import { traditionalTaxable } from "../../../federal/1040/resolveInfo.js";
+import { rowTaxable } from "../../../federal/1040/rowTaxable.js";
 import { NONQUALIFIED_ROTH_CODES, partIIIFigures } from "../../../federal/8606/partIII.js";
 import { form8606Filers } from "../../../federal/8606/resolveInfo.js";
 import { sum } from "../../../money.js";

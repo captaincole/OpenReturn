@@ -1,6 +1,10 @@
 import { RENTAL_KEYS, rentalsOnReturn, type RentalFactValue } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
-import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import {
+  filingStatusOf,
+  missingInputs,
+  resolveMustFile,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
 import {
   booleanFact,
   isPassiveActivity,

@@ -5,10 +5,10 @@ import {
   SPOUSE_KEYS,
   type RentalFactValue,
 } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { sum } from "../../money.js";
 import {
   factsInCategory,
+  filingStatusOf,
   missingInputs,
   resolveMustFile,
   type ResolverInputs,

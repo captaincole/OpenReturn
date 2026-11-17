@@ -6,8 +6,12 @@ import {
   unlinkedNonemployeeCompensationKeys,
   unlinkedPaymentTransactionsKeys,
 } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
-import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import {
+  filingStatusOf,
+  missingInputs,
+  resolveMustFile,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
 import { homeOfficeActualOpen } from "../8829/lines.js";
 import type { ScheduleCFilingInfo } from "./filingInfo.js";
 import { tentativeProfit } from "./lines.js";

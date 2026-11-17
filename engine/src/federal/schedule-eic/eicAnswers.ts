@@ -12,8 +12,12 @@ import {
   isW2FactKey,
   type W2FactValue,
 } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
-import { factsInCategory, text, type ResolverInputs } from "../../resolverInputs.js";
+import {
+  factsInCategory,
+  filingStatusOf,
+  text,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
 import { noChildEicAge, type EicAnswers } from "./credit.js";
 import { eicMayApply } from "./possible.js";
 import { eicQualifyingChildren } from "./qualifyingChild.js";

@@ -1,6 +1,10 @@
 import { businessesOnReturn, rentalsOnReturn } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
-import { missingInputs, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
+import {
+  filingStatusOf,
+  missingInputs,
+  resolveMustFile,
+  type ResolverInputs,
+} from "../../resolverInputs.js";
 import { spousePropertiesOnReturn } from "../rentals/passive.js";
 import type { Form4562Activity, Form4562FilingInfo } from "./filingInfo.js";
 import { assetsAwaitingAnswers, mustFile4562 } from "./lines.js";

@@ -1,8 +1,8 @@
-import type { W2FactValue } from "./facts/index.js";
+import { isW2FactKey, type W2FactValue } from "./facts/index.js";
 import { partitionTrades, type PartitionedTrades } from "./federal/8949/partitionTrades.js";
 import type { MustFileResolution } from "./filingInfo.js";
 import { sum } from "./money.js";
-import { ssnOf } from "./values.js";
+import { ssnOf, type FilingStatus } from "./values.js";
 
 export interface ResolverInputs {
   facts: ReadonlyArray<{ key: string; value: unknown; category: string }>;
@@ -181,4 +181,21 @@ export function reportableSalesFallbacks(inputs: ResolverInputs): MustFileFallba
       triggeredByDecisionKeys: ["decisions.scope.has_reportable_sales"],
     },
   ];
+}
+
+const FILING_STATUSES: ReadonlySet<unknown> = new Set<FilingStatus>([
+  "single",
+  "married_filing_jointly",
+  "married_filing_separately",
+  "head_of_household",
+  "qualifying_surviving_spouse",
+]);
+
+export function filingStatusOf(inputs: ResolverInputs): FilingStatus | undefined {
+  const raw = inputs.decisionByKey.get("decisions.scope.filing_status");
+  return FILING_STATUSES.has(raw) ? (raw as FilingStatus) : undefined;
+}
+
+export function hasW2(inputs: ResolverInputs): boolean {
+  return factsInCategory(inputs, "wages").some((row) => isW2FactKey(row.key));
 }

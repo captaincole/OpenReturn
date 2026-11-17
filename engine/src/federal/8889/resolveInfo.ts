@@ -1,5 +1,5 @@
+import { bornBeforeJan2_1971 } from "../../birthDate.js";
 import { HSA_COVERAGE_KEYS, type HsaCoverageType } from "../../facts/index.js";
-import { bornBeforeJan2_1971 } from "../../filingInfoResolvers.js";
 import { sum } from "../../money.js";
 import {
   factsInCategory,

@@ -3,8 +3,12 @@ import {
   isCaHohMaritalStatus,
   type LivedWithSpousePeriod,
 } from "../../../facts/index.js";
-import { filingStatusOf } from "../../../filingInfoResolvers.js";
-import { missingInputs, resolveMustFile, type ResolverInputs } from "../../../resolverInputs.js";
+import {
+  filingStatusOf,
+  missingInputs,
+  resolveMustFile,
+  type ResolverInputs,
+} from "../../../resolverInputs.js";
 import type { Form3532FilingInfo } from "./filingInfo.js";
 import {
   asksLines3aAnd3b,

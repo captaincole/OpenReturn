@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { bornBeforeJan2_1961 } from "../../../src/filingInfoResolvers.js";
+import { bornBeforeJan2_1961 } from "../../../src/birthDate.js";
 import { socialSecurityTaxable } from "../../../src/worksheets/socialSecurityBenefits.js";
 
 const base = { taxExemptInterest: 0, adjustments: 0 };

@@ -1,8 +1,8 @@
 import { isW2FactKey, type W2FactValue } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { sum } from "../../money.js";
 import {
   factsInCategory,
+  filingStatusOf,
   resolveMustFile,
   sumW2Box,
   type ResolverInputs,

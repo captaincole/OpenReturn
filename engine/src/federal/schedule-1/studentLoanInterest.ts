@@ -6,9 +6,8 @@
 
 import type { FormAccessor } from "../../defineForm.js";
 import { STUDENT_LOAN_KEYS, studentLoanInterestForms } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
 import { roundDollars, sum } from "../../money.js";
-import { missingInputs, type ResolverInputs } from "../../resolverInputs.js";
+import { filingStatusOf, missingInputs, type ResolverInputs } from "../../resolverInputs.js";
 import { unsupported } from "../../types.js";
 import type { Schedule1FilingInfo } from "./filingInfo.js";
 import type { Schedule1 } from "./types.js";

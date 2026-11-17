@@ -1,11 +1,25 @@
-import { ADJUSTMENT_KEYS, businessesOnReturn, ownerOf } from "../../facts/index.js";
-import { filingStatusOf } from "../../filingInfoResolvers.js";
-import { num, type ResolverInputs } from "../../resolverInputs.js";
+import {
+  ADJUSTMENT_KEYS,
+  businessesOnReturn,
+  isDividendFactKey,
+  ownerOf,
+} from "../../facts/index.js";
+import { sum } from "../../money.js";
+import { factsInCategory, filingStatusOf, num, type ResolverInputs } from "../../resolverInputs.js";
 import { netProfit } from "../schedule-c/lines.js";
 import { resolveScheduleEInfo } from "../schedule-e/resolveInfo.js";
 import { resolveScheduleSEInfo } from "../schedule-se/resolveInfo.js";
 import type { QbiBusiness, QbiFilingInfo } from "./filingInfo.js";
-import { qualifiedReitDividends } from "./whichForm.js";
+
+/* Qualified REIT dividends: 1099-DIV box 5, cents kept. Undefined with no 1099-DIV. */
+export function qualifiedReitDividends(inputs: ResolverInputs): number | undefined {
+  const divs = factsInCategory(inputs, "investment_income").filter((row) =>
+    isDividendFactKey(row.key),
+  );
+  return divs.length > 0
+    ? sum(...divs.map((row) => (row.value as { box5?: unknown }).box5))
+    : undefined;
+}
 
 /* The shared QBI slots, filled whichever QBI form files (Form 8995 or 8995-A). */
 export function resolveQbiInfo(inputs: ResolverInputs): QbiFilingInfo {
