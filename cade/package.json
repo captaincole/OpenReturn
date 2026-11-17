@@ -20,7 +20,7 @@
     "sources:sync": "tsx scripts/syncSources.ts"
   },
   "engines": {
-    "node": ">=22.13.0"
+    "node": ">=24.0.0"
   },
   "dependencies": {
     "@libsql/client": "^0.17.4",
@@ -40,7 +40,7 @@
   "devDependencies": {
     "@cantoo/pdf-lib": "^2.11.1",
     "@openreturn/sources": "0.1.0",
-    "@types/node": "^22",
+    "@types/node": "^24",
     "tsx": "^4.20.5",
     "typescript": "^5",
     "vitest": "^3.2.4"
