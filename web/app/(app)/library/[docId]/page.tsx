@@ -1,4 +1,4 @@
-import { getOwnerSession } from "@/lib/localAuth";
+import { getUserSession } from "@/lib/localAuth";
 import { deriveProfile } from "@/lib/profile";
 import { redirect } from "next/navigation";
 import { HomeTopBar } from "../../HomeTopBar";
@@ -6,7 +6,7 @@ import { RefDocView } from "./components/RefDocView";
 
 export default async function RefDocPage({ params }: { params: Promise<{ docId: string }> }) {
   const { docId } = await params;
-  const session = await getOwnerSession();
+  const session = await getUserSession();
   if (!session) redirect("/login");
   const profile = deriveProfile(session);
 

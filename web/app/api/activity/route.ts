@@ -1,10 +1,10 @@
 import { ACTIVITY_TAX_YEAR } from "@/lib/activity";
-import { getOwnerSession } from "@/lib/localAuth";
+import { getUserSession } from "@/lib/localAuth";
 import { fetchActivityItems } from "@/lib/serverDb";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const session = await getOwnerSession();
+  const session = await getUserSession();
   if (!session) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }

@@ -1,5 +1,5 @@
 import { AppShell } from "@/components/AppShell";
-import { getOwnerSession } from "@/lib/localAuth";
+import { getUserSession } from "@/lib/localAuth";
 import { deriveProfile } from "@/lib/profile";
 import { listOwnerReturns } from "@/lib/serverDb";
 import { redirect } from "next/navigation";
@@ -15,7 +15,7 @@ export default async function ReturnLayout({
   const year = Number.parseInt(returnId, 10);
   if (!Number.isInteger(year)) redirect("/");
 
-  const session = await getOwnerSession();
+  const session = await getUserSession();
   if (!session) redirect("/login");
 
   const returns = await listOwnerReturns(session.userId);

@@ -6,14 +6,15 @@ import { resolve } from "node:path";
 
 /*
  * SERVER-ONLY. No RLS: every query scopes explicitly by userId / filingId.
- * Callers must verify the owner session (lib/localAuth.ts) before they call in.
+ * Callers must verify the user's session (lib/localAuth.ts) before they call in.
+ * The users themselves are in lib/userStore.ts.
  */
 
 const DEFAULT_APP_DB = resolve(process.cwd(), "../cade/.data/app.db");
 
 let cached: Client | null = null;
 
-function db(): Client {
+export function appDb(): Client {
   if (cached) return cached;
   const path = process.env.APP_DB_PATH ? resolve(process.env.APP_DB_PATH) : DEFAULT_APP_DB;
   cached = createClient({ url: `file:${path}` });
@@ -24,67 +25,6 @@ const str = (value: unknown): string => (value == null ? "" : String(value));
 const strOrNull = (value: unknown): string | null => (value == null ? null : String(value));
 const num = (value: unknown): number => (value == null ? 0 : Number(value));
 const json = (value: unknown): unknown => (value == null ? null : JSON.parse(String(value)));
-
-export interface OwnerAuthRow {
-  id: string;
-  email: string;
-  displayName: string;
-  passwordHash: string;
-  sessionSecret: string;
-}
-
-/*
- * /setup can run before the agent ever boots, so both sides create this
- * table. Keep the DDL in sync with cade/src/mastra/db/appDb.ts.
- */
-let ownerTableReady: Promise<unknown> | null = null;
-function ensureOwnerTable() {
-  if (!ownerTableReady) {
-    ownerTableReady = db().execute(
-      `CREATE TABLE IF NOT EXISTS owner (
-         id            TEXT PRIMARY KEY,
-         email         TEXT NOT NULL,
-         display_name  TEXT NOT NULL,
-         password_hash TEXT NOT NULL,
-         session_secret TEXT NOT NULL,
-         created_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
-       )`,
-    );
-  }
-  return ownerTableReady;
-}
-
-export async function getOwnerAuthRow(): Promise<OwnerAuthRow | null> {
-  await ensureOwnerTable();
-  const res = await db().execute(
-    `SELECT id, email, display_name, password_hash, session_secret FROM owner LIMIT 1`,
-  );
-  const row = res.rows[0];
-  if (!row) return null;
-  return {
-    id: str(row.id),
-    email: str(row.email),
-    displayName: str(row.display_name),
-    passwordHash: str(row.password_hash),
-    sessionSecret: str(row.session_secret),
-  };
-}
-
-export async function insertOwnerRow(row: OwnerAuthRow): Promise<void> {
-  await ensureOwnerTable();
-  await db().execute({
-    sql: `INSERT INTO owner (id, email, display_name, password_hash, session_secret, created_at)
-          VALUES (?, ?, ?, ?, ?, ?)`,
-    args: [
-      row.id,
-      row.email,
-      row.displayName,
-      row.passwordHash,
-      row.sessionSecret,
-      new Date().toISOString(),
-    ],
-  });
-}
 
 export interface FilingRow {
   id: string;
@@ -106,7 +46,7 @@ function rowToReturn(row: Row): TaxReturn {
 }
 
 export async function listOwnerReturns(userId: string): Promise<TaxReturn[]> {
-  const res = await db().execute({
+  const res = await appDb().execute({
     sql: `SELECT f.id, f.tax_year, f.status
           FROM filings f JOIN filing_members m ON m.filing_id = f.id
           WHERE m.user_id = ? AND m.role = 'owner' AND m.revoked_at IS NULL
@@ -120,7 +60,7 @@ export async function getOwnerReturnByYear(
   userId: string,
   taxYear: number,
 ): Promise<TaxReturn | null> {
-  const res = await db().execute({
+  const res = await appDb().execute({
     sql: `SELECT f.id, f.tax_year, f.status
           FROM filings f JOIN filing_members m ON m.filing_id = f.id
           WHERE m.user_id = ? AND m.role = 'owner' AND m.revoked_at IS NULL
@@ -138,7 +78,7 @@ export async function getOwnerFilingForYear(userId: string, taxYear: number): Pr
 
 /** The RLS replacement: run it before any read of a filing the caller does not own outright. */
 export async function hasMembership(filingId: string, userId: string): Promise<boolean> {
-  const res = await db().execute({
+  const res = await appDb().execute({
     sql: `SELECT 1 FROM filing_members
           WHERE filing_id = ? AND user_id = ? AND revoked_at IS NULL LIMIT 1`,
     args: [filingId, userId],
@@ -153,13 +93,13 @@ export async function fetchActivityItems(
 ): Promise<ActivityItem[]> {
   const safeLimit = Math.min(limit, 200);
   const [facts, decisions] = await Promise.all([
-    db().execute({
+    appDb().execute({
       sql: `SELECT id, created_at, fact_key, category, fact_value, source_note
             FROM tax_facts WHERE user_id = ? AND tax_year = ?
             ORDER BY created_at DESC LIMIT ?`,
       args: [userId, taxYear, safeLimit],
     }),
-    db().execute({
+    appDb().execute({
       sql: `SELECT id, created_at, decision_key, decision, rationale,
                    supporting_fact_keys, confidence, verdict, verdict_reason, source_note
             FROM ai_decisions WHERE user_id = ? AND tax_year = ?
@@ -222,7 +162,7 @@ export async function fetchOpenActions(
   taxYear: number,
   conversation: RequestedAction["conversation"],
 ): Promise<RequestedAction[]> {
-  const res = await db().execute({
+  const res = await appDb().execute({
     sql: `SELECT * FROM requested_actions
           WHERE user_id = ? AND tax_year = ? AND conversation = ?
             AND status IN ('open','processing')
@@ -237,7 +177,7 @@ export async function markActionProcessing(
   actionId: string,
   documentId: string,
 ): Promise<void> {
-  await db().execute({
+  await appDb().execute({
     sql: `UPDATE requested_actions
           SET status = 'processing', resolved_document_id = ?
           WHERE id = ? AND user_id = ?`,
@@ -246,7 +186,7 @@ export async function markActionProcessing(
 }
 
 export async function skipAction(userId: string, actionId: string): Promise<void> {
-  await db().execute({
+  await appDb().execute({
     sql: `UPDATE requested_actions
           SET status = 'skipped', resolved_at = ?
           WHERE id = ? AND user_id = ?`,
@@ -263,7 +203,7 @@ export interface DocumentLookup {
 }
 
 export async function getDocumentById(id: string): Promise<DocumentLookup | null> {
-  const res = await db().execute({
+  const res = await appDb().execute({
     sql: `SELECT id, filing_id, storage_path, filename, mime_type
           FROM user_documents WHERE id = ? LIMIT 1`,
     args: [id],
@@ -288,7 +228,7 @@ export interface UploadListRow {
 }
 
 export async function listUploads(filingId: string): Promise<UploadListRow[]> {
-  const res = await db().execute({
+  const res = await appDb().execute({
     sql: `SELECT id, filename, created_at, mime_type, size_bytes
           FROM user_documents WHERE filing_id = ? AND category = 'uploads'
           ORDER BY created_at DESC`,
@@ -313,7 +253,7 @@ export interface DraftListRow {
 }
 
 export async function listDrafts(filingId: string): Promise<DraftListRow[]> {
-  const res = await db().execute({
+  const res = await appDb().execute({
     sql: `SELECT id, filename, created_at, mime_type, size_bytes, metadata
           FROM user_documents WHERE filing_id = ? AND category = 'drafts'
           ORDER BY created_at DESC`,
@@ -338,7 +278,7 @@ export async function insertUploadedDocument(args: {
   mimeType: string | null;
 }): Promise<string> {
   const id = crypto.randomUUID();
-  await db().execute({
+  await appDb().execute({
     sql: `INSERT INTO user_documents
             (id, user_id, filing_id, category, filename, storage_path,
              size_bytes, mime_type, created_at)

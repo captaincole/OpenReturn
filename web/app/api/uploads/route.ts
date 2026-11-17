@@ -1,5 +1,5 @@
 import { deleteBlob, writeBlob } from "@/lib/blobStore";
-import { getOwnerSession } from "@/lib/localAuth";
+import { getUserSession } from "@/lib/localAuth";
 import { getOwnerFilingForYear, insertUploadedDocument, listUploads } from "@/lib/serverDb";
 import { NextResponse } from "next/server";
 
@@ -43,7 +43,7 @@ function extensionOf(filename: string, mimeType: string): string {
 }
 
 export async function GET() {
-  const session = await getOwnerSession();
+  const session = await getUserSession();
   if (!session) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
@@ -52,7 +52,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const session = await getOwnerSession();
+  const session = await getUserSession();
   if (!session) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }

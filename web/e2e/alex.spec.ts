@@ -3,6 +3,7 @@ import { OPENING_TURNS, replyTo } from "./alexAnswers";
 import { decisionProblems, fieldProblems, latestSidecar, w2Problems } from "./alexChecks";
 import { findFiles } from "./appDb";
 import { askTheTaxCode } from "./ask";
+import { expectConversationPrivate } from "./isolation";
 import { notePromptSizes } from "./prompts";
 import {
   createOwner,
@@ -36,6 +37,9 @@ test("Alex: intake through generated forms", async ({ page }) => {
   await plumbing("proxies refuse a route off their list", () => expectOtherRoutesRefused(page));
   await askTheTaxCode(page);
   const filingPath = await plumbing("start a filing", () => startFiling(page));
+  await plumbing("a second user cannot read the conversation", () =>
+    expectConversationPrivate(page),
+  );
   const generated = await runIntake(page);
   if (generated)
     await plumbing("forms page serves the PDFs", () => checkFormsPage(page, filingPath));

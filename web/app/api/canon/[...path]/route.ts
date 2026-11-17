@@ -1,4 +1,4 @@
-import { getOwnerSession } from "@/lib/localAuth";
+import { getUserSession } from "@/lib/localAuth";
 import { CANON_ROUTES, isProxyRoute } from "@/lib/proxyRoutes";
 import { proxyTarget } from "@/lib/proxyTarget";
 import { type NextRequest, NextResponse } from "next/server";
@@ -14,7 +14,7 @@ async function forward(
   request: NextRequest,
   params: Promise<{ path: string[] }>,
 ): Promise<Response> {
-  const session = await getOwnerSession();
+  const session = await getUserSession();
   if (!session) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }

@@ -1,4 +1,4 @@
-import { getOwnerSession } from "@/lib/localAuth";
+import { getUserSession } from "@/lib/localAuth";
 import { markActionProcessing, skipAction } from "@/lib/serverDb";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -7,7 +7,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
   const { id } = await params;
   if (!id) return NextResponse.json({ error: "missing id" }, { status: 400 });
 
-  const session = await getOwnerSession();
+  const session = await getUserSession();
   if (!session) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }

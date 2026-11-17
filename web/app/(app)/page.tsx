@@ -1,4 +1,4 @@
-import { getOwnerSession } from "@/lib/localAuth";
+import { getUserSession } from "@/lib/localAuth";
 import { deriveProfile, type UserProfile } from "@/lib/profile";
 import { listOwnerReturns } from "@/lib/serverDb";
 import { redirect } from "next/navigation";
@@ -10,7 +10,7 @@ import { TaxPictureSection } from "./components/TaxPicture";
 import { HomeTopBar } from "./HomeTopBar";
 
 export default async function HomeHome() {
-  const session = await getOwnerSession();
+  const session = await getUserSession();
   if (!session) redirect("/login");
   const profile = deriveProfile(session);
 

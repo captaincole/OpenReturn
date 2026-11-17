@@ -44,7 +44,7 @@ The first run redirects to `/setup` to create the owner account. The env file is
 - **The reference library comes from Canon.** `/api/canon/[...path]` (read-only, same cookie check) forwards to `CANON_INTERNAL_URL` (default `http://127.0.0.1:4112`).
 - **Each proxy forwards only the routes on its list** (`lib/proxyRoutes.ts`) and answers 404 for any other route: Cade and Canon also serve Mastra's own routes. A new browser call needs a line there and in `lib/proxyRoutes.test.ts`.
 - **Everything else reads `app.db` directly:** Server Components through `lib/serverDb.ts`, browser code through the other `/api/*` route handlers.
-- **Auth** is one owner and one password (`lib/localAuth.ts`). `proxy.ts` checks only that the cookie exists; layouts and route handlers verify it with `getOwnerSession()`.
+- **Auth** is a `users` table and, by default, one user with one password (`lib/localAuth.ts`, `lib/userStore.ts`). `proxy.ts` checks only that the cookie exists; layouts and route handlers verify it with `getUserSession()`. The agent proxy names the session's user to Cade in the `x-openreturn-user-id` header.
 
 ## Inside
 

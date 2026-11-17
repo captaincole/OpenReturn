@@ -8,6 +8,13 @@ export const RUN_DIR = resolve(__dirname, ".run", process.env.E2E_RUN_ID);
 
 const DATA_DIR = resolve(RUN_DIR, "data");
 
+/*
+ * Cade believes the web app's user header only from a caller with this token,
+ * so the run sets one: every turn goes the way a shared instance's turn goes.
+ */
+export const AGENT_TOKEN = "e2e-agent-token";
+export const AGENT_URL = "http://127.0.0.1:4111";
+
 export const DATA_ENV = {
   APP_DB_PATH: resolve(DATA_DIR, "app.db"),
   MASTRA_DB_PATH: resolve(DATA_DIR, "mastra.db"),

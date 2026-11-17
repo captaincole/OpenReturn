@@ -1,4 +1,4 @@
-import { getOwnerSession } from "@/lib/localAuth";
+import { getUserSession } from "@/lib/localAuth";
 import { AGENT_ROUTES, isProxyRoute } from "@/lib/proxyRoutes";
 import { proxyTarget } from "@/lib/proxyTarget";
 import { type NextRequest, NextResponse } from "next/server";
@@ -7,7 +7,13 @@ import { type NextRequest, NextResponse } from "next/server";
  * The only bridge from the browser to the agent. The agent never sees a
  * browser credential. The body passes straight through, so SSE does not buffer.
  * Only the routes in AGENT_ROUTES pass: the agent also serves Mastra's own.
+ *
+ * The agent has no login: this proxy names the session's user in
+ * USER_ID_HEADER (cade/src/mastra/server/userMiddleware.ts reads it). No
+ * header of the browser's request passes, so the browser cannot name a user.
  */
+
+const USER_ID_HEADER = "x-openreturn-user-id";
 
 const AGENT_INTERNAL_URL = process.env.AGENT_INTERNAL_URL ?? "http://127.0.0.1:4111";
 
@@ -15,7 +21,7 @@ async function forward(
   request: NextRequest,
   params: Promise<{ path: string[] }>,
 ): Promise<Response> {
-  const session = await getOwnerSession();
+  const session = await getUserSession();
   if (!session) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
@@ -34,6 +40,7 @@ async function forward(
   if (contentType) headers.set("content-type", contentType);
   const accept = request.headers.get("accept");
   if (accept) headers.set("accept", accept);
+  headers.set(USER_ID_HEADER, session.userId);
   if (process.env.AGENT_API_TOKEN) {
     headers.set("authorization", `Bearer ${process.env.AGENT_API_TOKEN}`);
   }

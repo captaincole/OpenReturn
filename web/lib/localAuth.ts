@@ -1,17 +1,24 @@
-import { getOwnerAuthRow, insertOwnerRow, type OwnerAuthRow } from "@/lib/serverDb";
+import { claimedUserId, mintToken, SESSION_TTL_MS, verifyToken } from "@/lib/sessionToken";
+import {
+  getLocalLogin,
+  getOnlyLocalLogin,
+  hasUsers,
+  insertLocalUser,
+  type LocalLogin,
+} from "@/lib/userStore";
 import { cookies } from "next/headers";
-import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
+import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 
 /*
- * Single-user auth. The owner row holds the scrypt hash and the cookie HMAC
- * secret (made at setup, no env var). Keep this module small enough to audit.
- * Only getOwnerSession() verifies; proxy.ts checks cookie presence only.
+ * Password sign-in. A user's local_logins row holds the scrypt hash and the
+ * cookie HMAC secret (made at setup, no env var). Keep this module small
+ * enough to audit. Only getUserSession() verifies; proxy.ts checks cookie
+ * presence only.
  */
 
 export const SESSION_COOKIE = "openreturn_session";
-const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
-export interface OwnerSession {
+export interface UserSession {
   userId: string;
   email: string;
   displayName: string;
@@ -31,67 +38,42 @@ function verifyPassword(password: string, stored: string): boolean {
   return timingSafeEqual(actual, expected);
 }
 
-function sign(payload: string, secret: string): string {
-  return createHmac("sha256", secret).update(payload).digest("base64url");
-}
+const toSession = (login: LocalLogin): UserSession => ({
+  userId: login.id,
+  email: login.email,
+  displayName: login.displayName,
+});
 
-function mintToken(userId: string, secret: string): string {
-  const payload = Buffer.from(
-    JSON.stringify({ uid: userId, exp: Date.now() + SESSION_TTL_MS }),
-  ).toString("base64url");
-  return `${payload}.${sign(payload, secret)}`;
-}
+export { hasUsers };
 
-function verifyToken(token: string, secret: string): string | null {
-  const [payload, sig] = token.split(".");
-  if (!payload || !sig) return null;
-  const expected = sign(payload, secret);
-  const sigBuf = Buffer.from(sig);
-  const expectedBuf = Buffer.from(expected);
-  if (sigBuf.length !== expectedBuf.length || !timingSafeEqual(sigBuf, expectedBuf)) return null;
-  try {
-    const parsed = JSON.parse(Buffer.from(payload, "base64url").toString()) as {
-      uid?: string;
-      exp?: number;
-    };
-    if (!parsed.uid || !parsed.exp || parsed.exp < Date.now()) return null;
-    return parsed.uid;
-  } catch {
-    return null;
-  }
-}
-
-export async function ownerExists(): Promise<boolean> {
-  return (await getOwnerAuthRow()) !== null;
-}
-
-export async function createOwner(input: {
+/* The /setup screen's one account. Refused when the instance has a user. */
+export async function createLocalUser(input: {
   email: string;
   displayName: string;
   password: string;
-}): Promise<OwnerSession> {
-  if (await ownerExists()) throw new Error("owner already exists");
-  const row: OwnerAuthRow = {
+}): Promise<UserSession> {
+  if (await hasUsers()) throw new Error("a user already exists");
+  const login: LocalLogin = {
     id: crypto.randomUUID(),
     email: input.email,
     displayName: input.displayName,
     passwordHash: hashPassword(input.password),
     sessionSecret: randomBytes(32).toString("hex"),
   };
-  await insertOwnerRow(row);
-  return { userId: row.id, email: row.email, displayName: row.displayName };
+  await insertLocalUser(login);
+  return toSession(login);
 }
 
-export async function login(password: string): Promise<OwnerSession | null> {
-  const owner = await getOwnerAuthRow();
-  if (!owner || !verifyPassword(password, owner.passwordHash)) return null;
-  await setSessionCookie(owner);
-  return { userId: owner.id, email: owner.email, displayName: owner.displayName };
+export async function login(password: string): Promise<UserSession | null> {
+  const found = await getOnlyLocalLogin();
+  if (!found || !verifyPassword(password, found.passwordHash)) return null;
+  await setSessionCookie(found);
+  return toSession(found);
 }
 
-export async function setSessionCookie(owner: OwnerAuthRow): Promise<void> {
+async function setSessionCookie(user: LocalLogin): Promise<void> {
   const store = await cookies();
-  store.set(SESSION_COOKIE, mintToken(owner.id, owner.sessionSecret), {
+  store.set(SESSION_COOKIE, mintToken(user.id, user.sessionSecret), {
     httpOnly: true,
     sameSite: "lax",
     path: "/",
@@ -105,12 +87,13 @@ export async function logout(): Promise<void> {
   (await cookies()).delete(SESSION_COOKIE);
 }
 
-export async function getOwnerSession(): Promise<OwnerSession | null> {
+/* The token names its user; that user's secret must have signed it. */
+export async function getUserSession(): Promise<UserSession | null> {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token) return null;
-  const owner = await getOwnerAuthRow();
-  if (!owner) return null;
-  const uid = verifyToken(token, owner.sessionSecret);
-  if (!uid || uid !== owner.id) return null;
-  return { userId: owner.id, email: owner.email, displayName: owner.displayName };
+  const claimed = claimedUserId(token);
+  if (!claimed) return null;
+  const found = await getLocalLogin(claimed);
+  if (!found || verifyToken(token, found.sessionSecret) !== found.id) return null;
+  return toSession(found);
 }

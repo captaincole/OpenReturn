@@ -20,7 +20,7 @@ export const cade = new Agent({
   instructions: cadeInstructions,
   model: modelFor("cade"),
   /*
-   * The owner identity ownerMiddleware sets, validated before the first
+   * The user identity userMiddleware sets, validated before the first
    * model call (server/requestContext.ts). Every tool declares the same.
    */
   requestContextSchema: cadeRequestContextSchema,

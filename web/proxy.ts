@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 /*
  * Next.js 16 Middleware. Optimistic gate only: the Edge runtime cannot read
  * app.db, so this checks cookie presence. Every layout and route handler
- * verifies with getOwnerSession(). The cookie name is duplicated from
+ * verifies with getUserSession(). The cookie name is duplicated from
  * lib/localAuth.ts on purpose: importing it pulls node:crypto into Edge.
  */
 

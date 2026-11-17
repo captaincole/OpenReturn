@@ -1,16 +1,16 @@
-import { createOwner, login, ownerExists } from "@/lib/localAuth";
+import { createLocalUser, hasUsers, login } from "@/lib/localAuth";
 import { NextResponse } from "next/server";
 
 /*
  * One-shot, no credentials: accept only a JSON body. A cross-site form post
  * cannot send JSON without a CORS preflight, so another site cannot create
- * an owner whose password it knows.
+ * a user whose password it knows.
  */
 export async function POST(request: Request) {
   if (!request.headers.get("content-type")?.startsWith("application/json")) {
     return NextResponse.json({ error: "body must be JSON" }, { status: 415 });
   }
-  if (await ownerExists()) {
+  if (await hasUsers()) {
     return NextResponse.json({ error: "already set up" }, { status: 409 });
   }
   let body: { email?: string; displayName?: string; password?: string };
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
   if (password.length < 8) {
     return NextResponse.json({ error: "password must be at least 8 characters" }, { status: 400 });
   }
-  await createOwner({ email, displayName, password });
+  await createLocalUser({ email, displayName, password });
   await login(password);
   return NextResponse.json({ ok: true });
 }
