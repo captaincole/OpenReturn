@@ -4,7 +4,6 @@ import { cade } from "./agents/cade";
 import { cadeDeductions } from "./agents/cadeDeductions";
 import { ConsoleLogger } from "./server/consoleLogger";
 import { createObservability } from "./server/observability";
-import { ownerMiddleware } from "./server/ownerMiddleware";
 import { requestGuard } from "./server/requestGuard";
 import { appStateRoute } from "./server/routes/appState";
 import { addAskTurnRoute, createAskRoute, getAskThreadRoute } from "./server/routes/ask";
@@ -13,6 +12,7 @@ import { deleteFilingRoute } from "./server/routes/deleteFiling";
 import { retryReviewsRoute } from "./server/routes/retryReviews";
 import { sessionResetRoute } from "./server/routes/sessionReset";
 import { createStorage } from "./server/storage";
+import { userMiddleware } from "./server/userMiddleware";
 import { askTurnWorkflow } from "./workflows/askTurn";
 import { reviewDecisionWorkflow } from "./workflows/reviewDecision";
 
@@ -50,9 +50,9 @@ export const mastra = new Mastra({
     /* The browser never calls the agent. Else Mastra sends Access-Control-Allow-Origin: *. */
     cors: false,
     middleware: [
-      /* First: refuse foreign Origin and Host headers before anything reads the owner. */
+      /* First: refuse foreign Origin and Host headers before anything reads the user. */
       requestGuard,
-      ownerMiddleware,
+      userMiddleware,
     ],
     apiRoutes: [
       appStateRoute,

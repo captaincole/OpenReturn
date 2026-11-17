@@ -46,15 +46,13 @@ export function getAppDb(): Client {
 
 const APP_SCHEMA_DDL: string[] = [
   /*
-   * Holds the web gate's credentials (scrypt hash, session-cookie HMAC secret).
-   * The web app's /setup creates the row; the agent only READS it.
+   * The people of this instance. The web app writes the rows (its /setup screen);
+   * Cade only reads them (db/users.ts). Keep the DDL in sync with web/lib/userStore.ts.
    */
-  `CREATE TABLE IF NOT EXISTS owner (
+  `CREATE TABLE IF NOT EXISTS users (
            id            TEXT PRIMARY KEY,
-           email         TEXT NOT NULL,
+           email         TEXT NOT NULL UNIQUE,
            display_name  TEXT NOT NULL,
-           password_hash TEXT NOT NULL,
-           session_secret TEXT NOT NULL,
            created_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
          )`,
   `CREATE TABLE IF NOT EXISTS filings (
@@ -228,18 +226,4 @@ export function ensureAppSchema(): Promise<void> {
     await db.batch(APP_SCHEMA_DDL, "write");
   })();
   return schemaReady;
-}
-
-export interface Owner {
-  id: string;
-  email: string;
-  displayName: string;
-}
-
-export async function getOwner(): Promise<Owner | null> {
-  await ensureAppSchema();
-  const res = await getAppDb().execute(`SELECT id, email, display_name FROM owner LIMIT 1`);
-  const row = res.rows[0];
-  if (!row) return null;
-  return { id: asStr(row.id), email: asStr(row.email), displayName: asStr(row.display_name) };
 }

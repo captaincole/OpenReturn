@@ -17,7 +17,7 @@ const fact = (index: number) => ({
   sourceNote: "test",
 });
 
-/* The owner identity ownerMiddleware would have set; the tool's schema requires it. */
+/* The user identity userMiddleware would have set; the tool's schema requires it. */
 const context = {
   requestContext: new RequestContext<CadeRequestContext>([
     ["userId", "owner-test"],
@@ -43,7 +43,7 @@ describe("record-tax-facts", () => {
     await expect(run(MAX_FACTS_PER_CALL)).rejects.toThrow(/filing lookup reached/);
   });
 
-  it("refuses a call without the owner identity before running", async () => {
+  it("refuses a call without the user identity before running", async () => {
     const result = await (
       recordTaxFacts as unknown as {
         execute: (input: unknown, context: unknown) => Promise<unknown>;

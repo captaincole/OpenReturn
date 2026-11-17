@@ -16,10 +16,10 @@ function deriveFromEmail(email: string | null): string {
 }
 
 export function deriveProfile(
-  owner: { email: string | null; displayName?: string | null } | null,
+  user: { email: string | null; displayName?: string | null } | null,
 ): UserProfile {
-  const email = owner?.email ?? null;
-  const explicitName = owner?.displayName;
+  const email = user?.email ?? null;
+  const explicitName = user?.displayName;
   const displayName =
     explicitName && explicitName.trim().length > 0 ? explicitName.trim() : deriveFromEmail(email);
   const firstName = displayName.split(/\s+/)[0] ?? displayName;

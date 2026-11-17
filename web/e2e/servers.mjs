@@ -1,7 +1,7 @@
 /*
  * mastra dev copies its --env file over process.env, so the agent gets a
- * copy of its env file with this run's data paths. Next.js lets process.env
- * win over .env files, so web needs no copy.
+ * copy of its env file with this run's data paths and its agent token. Next.js
+ * lets process.env win over .env files, so web needs no copy.
  */
 
 import { spawn, spawnSync } from "node:child_process";
@@ -44,13 +44,20 @@ const roleOverrides = ROLES.flatMap((role) => {
 });
 
 function agentEnvFile() {
-  const replaced = [...DATA_KEYS, "DECISION_REVIEW", "CANON_GROUND_MAX_ITERATIONS", ...roleKeys];
+  const replaced = [
+    ...DATA_KEYS,
+    "AGENT_API_TOKEN",
+    "DECISION_REVIEW",
+    "CANON_GROUND_MAX_ITERATIONS",
+    ...roleKeys,
+  ];
   const source = readFileSync(join(root, "cade/.env.development"), "utf8");
   const kept = source
     .split("\n")
     .filter((line) => !replaced.some((key) => line.startsWith(`${key}=`)));
   const pinned = [
     ...DATA_KEYS.map((key) => `${key}=${process.env[key]}`),
+    `AGENT_API_TOKEN=${process.env.AGENT_API_TOKEN}`,
     `DECISION_REVIEW=${DECISION_REVIEW}`,
     `CANON_GROUND_MAX_ITERATIONS=${GROUND_MAX_ITERATIONS}`,
     ...roleOverrides.filter((line) => line.startsWith("CADE_")),

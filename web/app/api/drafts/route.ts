@@ -1,11 +1,11 @@
-import { getOwnerSession } from "@/lib/localAuth";
+import { getUserSession } from "@/lib/localAuth";
 import { getOwnerFilingForYear, listDrafts } from "@/lib/serverDb";
 import { NextResponse } from "next/server";
 
 const DEMO_TAX_YEAR = 2025;
 
 export async function GET() {
-  const session = await getOwnerSession();
+  const session = await getUserSession();
   if (!session) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }

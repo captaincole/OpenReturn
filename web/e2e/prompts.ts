@@ -7,9 +7,10 @@
  * a local model the size is an estimate from the prompt's characters.
  */
 
+import { AGENT_TOKEN, AGENT_URL } from "./run";
 import { note } from "./summary";
 
-const AGENT_URL = "http://127.0.0.1:4111/api/observability";
+const TRACES_URL = `${AGENT_URL}/api/observability`;
 /*
  * Checked against Gemma 4's own count on a replayed deductions prompt: 7,802
  * estimated, 7,883 counted. Plain prose runs about 3.6 characters a token.
@@ -35,7 +36,9 @@ interface PromptSize {
 }
 
 async function json<T>(path: string): Promise<T> {
-  const res = await fetch(`${AGENT_URL}${path}`);
+  const res = await fetch(`${TRACES_URL}${path}`, {
+    headers: { Authorization: `Bearer ${AGENT_TOKEN}` },
+  });
   if (!res.ok) throw new Error(`GET ${path}: ${res.status}`);
   return (await res.json()) as T;
 }

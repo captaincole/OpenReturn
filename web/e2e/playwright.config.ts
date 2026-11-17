@@ -6,13 +6,14 @@
 
 import { defineConfig } from "@playwright/test";
 import { resolve } from "node:path";
-import { DATA_ENV, RUN_DIR } from "./run";
+import { AGENT_TOKEN, AGENT_URL, DATA_ENV, RUN_DIR } from "./run";
 
 const SERVER_START_MS = 5 * 60_000; // mastra dev bundles on first start
 
 const serverEnv = {
   ...(process.env as Record<string, string>),
   ...DATA_ENV,
+  AGENT_API_TOKEN: AGENT_TOKEN,
   E2E_RUN_DIR: RUN_DIR,
 };
 
@@ -40,7 +41,7 @@ export default defineConfig({
   },
   webServer: [
     server("canon", "http://127.0.0.1:4112/health"),
-    server("agent", "http://127.0.0.1:4111/health"),
+    server("agent", `${AGENT_URL}/health`),
     server("web", "http://localhost:3000/login"),
   ],
 });

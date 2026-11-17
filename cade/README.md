@@ -50,7 +50,7 @@ Cade needs Canon (`npm run dev:canon`) to ground decisions and answer questions.
 | `CANON_TIMEOUT_MS` | The cap on one call to Canon (default 5 minutes) |
 | `DECISION_REVIEW` | `off` skips grounding; the verdict stays `pending` |
 | `APP_DB_PATH`, `MASTRA_DB_PATH`, `DOCUMENTS_PATH` | Your data files |
-| `AGENT_API_TOKEN` | Gates the port when it is reachable beyond localhost |
+| `AGENT_API_TOKEN` | Gates the port when it is reachable beyond localhost. With it, Cade believes the web app's `x-openreturn-user-id` header; an instance with more than one user needs it |
 
 ## Inside
 
@@ -63,7 +63,7 @@ cade/
 │   ├── workflows/    reviewDecision (grounding through Canon), askTurn (Ask The Tax Code threads)
 │   ├── canon/        client.ts: the MCP client, Cade's only path to Canon
 │   ├── db/           app.db: facts, assumptions, decisions, filings, Ask threads, review runs; the document store
-│   ├── server/       /app routes, the owner middleware, storage, the console logger
+│   ├── server/       /app routes, the user middleware, storage, the console logger
 │   ├── threads.ts    the two thread ids of a filing (the return, its deductions)
 │   └── loadScenario.ts   the one place app.db meets the form engine
 ├── scripts/          doctor, smokeReview, inspectLastReview, syncSources

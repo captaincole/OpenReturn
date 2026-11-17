@@ -14,6 +14,32 @@ function query<T>(sql: string): T[] {
   }
 }
 
+/* The agent has the file open: wait for its write to end, not fail. */
+const WRITE_WAIT_MS = 5_000;
+
+function write(sql: string, ...values: string[]): void {
+  const db = new DatabaseSync(DATA_ENV.APP_DB_PATH, { timeout: WRITE_WAIT_MS });
+  try {
+    db.prepare(sql).run(...values);
+  } finally {
+    db.close();
+  }
+}
+
+/* A second person, as a shared instance has. The web app has no screen that adds one yet. */
+export function addUser(user: { id: string; email: string; name: string }): void {
+  write(
+    "INSERT INTO users (id, email, display_name) VALUES (?, ?, ?)",
+    user.id,
+    user.email,
+    user.name,
+  );
+}
+
+export function removeUser(id: string): void {
+  write("DELETE FROM users WHERE id = ?", id);
+}
+
 const parse = (text: string | null): unknown => {
   if (text === null) return undefined;
   try {

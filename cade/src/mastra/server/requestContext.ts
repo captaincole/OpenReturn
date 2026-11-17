@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 /*
- * What ownerMiddleware puts on every request's context, as the schema
+ * What userMiddleware puts on every request's context, as the schema
  * Cade's agent and tools declare (`requestContextSchema`). Mastra
  * validates it before the agent's first model call and before a tool
  * runs, and `requestContext.get` is typed by it. MASTRA_RESOURCE_ID_KEY
@@ -13,9 +13,9 @@ export const REQUEST_CONTEXT_KEYS = {
 } as const;
 
 export const cadeRequestContextSchema = z.object({
-  /** The instance owner's id (app.db `owner.id`). */
+  /** The user's id (app.db `users.id`). */
   userId: z.string().min(1),
-  /** The owner's email: the engine's authEmail enrichment. */
+  /** The user's email: the engine's authEmail enrichment. */
   userEmail: z.string(),
 });
 export type CadeRequestContext = z.infer<typeof cadeRequestContextSchema>;

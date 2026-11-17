@@ -1,11 +1,11 @@
-import { getOwnerSession } from "@/lib/localAuth";
+import { getUserSession } from "@/lib/localAuth";
 import { deriveProfile } from "@/lib/profile";
 import { redirect } from "next/navigation";
 import { HomeTopBar } from "../HomeTopBar";
 import { LibraryList } from "./components/LibraryList";
 
 export default async function LibraryPage() {
-  const session = await getOwnerSession();
+  const session = await getUserSession();
   if (!session) redirect("/login");
   const profile = deriveProfile(session);
 
