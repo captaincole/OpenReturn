@@ -2,6 +2,7 @@ import { Mastra } from "@mastra/core";
 import "dotenv/config";
 import { cade } from "./agents/cade";
 import { cadeDeductions } from "./agents/cadeDeductions";
+import { ensureAppSchema } from "./db/appDb";
 import { ConsoleLogger } from "./server/consoleLogger";
 import { createObservability } from "./server/observability";
 import { requestGuard } from "./server/requestGuard";
@@ -17,6 +18,13 @@ import { askTurnWorkflow } from "./workflows/askTurn";
 import { reviewDecisionWorkflow } from "./workflows/reviewDecision";
 
 const storage = await createStorage();
+
+/*
+ * app.db gets its tables before the server listens. The web app reads the same
+ * file, and its first page can load before Cade's first request. The health
+ * check does not help: the built server answers it before any middleware runs.
+ */
+await ensureAppSchema();
 
 /* Hoisted for onError: Mastra does not log unhandled handler exceptions before its 500. */
 const logger = new ConsoleLogger({ name: "openreturn", level: "info" });

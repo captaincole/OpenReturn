@@ -116,6 +116,9 @@ npm run dev:canon    # Canon only — Mastra Studio at :4112, MCP at /api/mcp/ca
 npm run dev          # Cade only — also opens Mastra Studio at :4111
 npm run dev:web      # next only
 
+npm run build:all    # builds the three services for a production run (canon, cade, web)
+npm run start:all    # runs the built services on the same three ports; see "Production run" below
+
 npm test             # engine golden suite; positional filters work (npm test -- alex)
 npm run test:unit    # engine + canon + agent unit tests, then the web app's (web/lib/*.test.ts); test:integration likewise, without web
 npm run typecheck    # tsc over engine + builder + canon + agent
@@ -125,6 +128,8 @@ npm run e2e          # Playwright E2E through the UI + real model (stop dev:all 
 npm run e2e:madison  # the same for Madison: her documents, then the Deductions tab to its close
 npm run e2e:access   # an instance behind Cloudflare Access: two guests, the notice, separate data; no model
 ```
+
+**Production run.** `npm run build:all`, then `npm run start:all`, runs the built servers: no file watching, no recompile on a page's first load, no Next.js dev overlay. Use it for an instance that other people reach; use `dev:all` to develop. It reads the same env files as `dev:all` (each package's `.env.development`, which is this clone's settings in both modes), so run it after every pull: `build:all` again, then `start:all`. Cade's build includes Mastra Studio at `:4111`, which shows every thread; Cade listens on `127.0.0.1` only, so keep it that way. The session cookie is `Secure` in a production run: Chrome and Firefox accept that on `http://localhost`, Safari does not (set `FORCE_INSECURE_COOKIE=1` in `web/.env.development`). `E2E_SERVERS=built npm run e2e` runs the e2e against the built servers.
 
 All persistent state lives in local files: user data under `cade/.data/`, the corpus under `canon/.data/` ("the DB is a file"):
 

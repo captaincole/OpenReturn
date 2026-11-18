@@ -39,11 +39,7 @@ async function requestUser(
 }
 
 export const userMiddleware: MiddlewareHandler = async (ctx, next) => {
-  /*
-   * Every request makes sure app.db has its tables, the health check too: the
-   * web app reads the same file, and its first page can load before Cade's
-   * first user request.
-   */
+  /* The server made the tables at start (index.ts); this is for a test that mounts the middleware alone. */
   await ensureAppSchema();
   if (!isProtected(ctx.req.path)) return next();
 

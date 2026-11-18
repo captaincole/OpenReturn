@@ -5,7 +5,7 @@
  * Never overwrites an existing file; delete it to regenerate.
  */
 
-import { existsSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -19,6 +19,12 @@ const CANON_DATA = join(ROOT, "canon", ".data");
 const canonEnvPath = join(ROOT, "canon", ".env.development");
 const agentEnvPath = join(ROOT, "cade", ".env.development");
 const webEnvPath = join(ROOT, "web", ".env.development");
+
+/*
+ * The data folders exist before any server starts: the built web server is
+ * ready in under a second and opens app.db, which fails in a missing folder.
+ */
+for (const folder of [DATA, CANON_DATA]) mkdirSync(folder, { recursive: true });
 
 let wrote = false;
 
