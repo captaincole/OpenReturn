@@ -1,4 +1,5 @@
 import { createTool } from "@mastra/core/tools";
+import { ssnOf } from "@openreturn/engine";
 import { z } from "zod";
 import { listFacts, listOpenQuestions, recordFacts, resolveQuestion } from "../db/taxFacts";
 import { cadeRequestContextSchema } from "../server/requestContext";
@@ -45,6 +46,20 @@ const factInput = z.object({
   sourceNote: z.string().describe("Where this came from — document, statement, or conversation"),
 });
 
+/*
+ * The facts that hold a Social Security number. The engine cannot compute a
+ * return from one that is not 9 digits, so the tool refuses it here, where
+ * Cade sees the error and can ask again.
+ */
+const SSN_KEYS = new Set([
+  "identity.ssn",
+  "identity.spouse.ssn",
+  "adjustments.alimony_recipient_ssn",
+]);
+
+const isBadSsnFact = (fact: z.infer<typeof factInput>) =>
+  SSN_KEYS.has(fact.key) && ssnOf(String(fact.value)) === undefined;
+
 export const recordTaxFacts = createTool({
   id: "record-tax-facts",
   requestContextSchema: cadeRequestContextSchema,
@@ -62,6 +77,12 @@ export const recordTaxFacts = createTool({
     if (facts.length === 0 || facts.length > MAX_FACTS_PER_CALL) {
       throw new Error(
         `record-tax-facts takes 1 to ${MAX_FACTS_PER_CALL} facts; got ${facts.length}. Nothing was recorded. Split the facts into calls of ${MAX_FACTS_PER_CALL} or fewer.`,
+      );
+    }
+    const badSsnKeys = facts.filter(isBadSsnFact).map((fact) => fact.key);
+    if (badSsnKeys.length > 0) {
+      throw new Error(
+        `${badSsnKeys.join(", ")} must be a Social Security number of 9 digits. Nothing was recorded. Ask the user for the number; never record a placeholder or an example.`,
       );
     }
     const { scope, userId, filingId } = await requireUserContext(context);

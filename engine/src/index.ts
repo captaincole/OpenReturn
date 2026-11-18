@@ -27,6 +27,7 @@ export type { ItemState, ItemStatus } from "./deductions/items.js";
 export { pendingInputs, readyToFile, type PendingInputs } from "./pendingInputs.js";
 export { FORMS, getFormSpec, type FormSpec } from "./registry.js";
 export type { AnyFormField, BaseFormField, EngineDerivation, EvaluatedForm } from "./types.js";
+export { ssnOf } from "./values.js";
 
 /* Which kind of rule a catalog field has: a binding, an unsupported reason, or none yet. */
 export function bindingKind(fieldId: string): "binding" | "unsupported" | undefined {
