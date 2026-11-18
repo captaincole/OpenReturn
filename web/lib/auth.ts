@@ -10,6 +10,13 @@ export async function authHeaders(): Promise<HeadersInit> {
   return {};
 }
 
+/*
+ * Ends the session and leaves the app. The server names the next page: the
+ * login screen, or Cloudflare's sign-out when the instance is behind Access.
+ * A full page load: no client state of the old session stays.
+ */
 export async function signOut(): Promise<void> {
-  await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
+  const res = await fetch("/api/auth/logout", { method: "POST" }).catch(() => null);
+  const body = res?.ok ? ((await res.json()) as { next?: string }) : {};
+  window.location.assign(body.next ?? "/login");
 }

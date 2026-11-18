@@ -84,8 +84,6 @@ export function AppShell({
 
   async function onSignOut() {
     await signOut();
-    router.refresh();
-    router.push("/login");
   }
 
   async function refreshState() {

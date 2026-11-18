@@ -31,7 +31,6 @@ export function useAskSubmit(onFollowUp?: () => void) {
       setBusy(false);
       if (err instanceof UnauthorizedError) {
         await signOut();
-        router.push("/login");
         return false;
       }
       setError(err instanceof Error ? err.message : String(err));

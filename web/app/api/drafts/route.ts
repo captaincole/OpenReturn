@@ -1,5 +1,5 @@
-import { getUserSession } from "@/lib/localAuth";
 import { getOwnerFilingForYear, listDrafts } from "@/lib/serverDb";
+import { getUserSession } from "@/lib/session";
 import { NextResponse } from "next/server";
 
 const DEMO_TAX_YEAR = 2025;

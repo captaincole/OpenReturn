@@ -1,6 +1,6 @@
-import { getUserSession } from "@/lib/localAuth";
 import { CANON_ROUTES, isProxyRoute } from "@/lib/proxyRoutes";
 import { proxyTarget } from "@/lib/proxyTarget";
+import { getUserSession } from "@/lib/session";
 import { type NextRequest, NextResponse } from "next/server";
 
 /*

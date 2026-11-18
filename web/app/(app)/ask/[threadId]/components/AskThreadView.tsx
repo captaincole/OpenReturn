@@ -31,7 +31,6 @@ function useThread(threadId: string, pollTick: number) {
         if (cancelled) return;
         if (err instanceof UnauthorizedError) {
           await signOut();
-          router.push("/login");
           return;
         }
         setLoadError(err instanceof Error ? err.message : String(err));

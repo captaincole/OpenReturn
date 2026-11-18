@@ -124,4 +124,9 @@ describe("userMiddleware with AGENT_API_TOKEN", () => {
   it("answers 401 with no user header when there are two users", async () => {
     expect((await get("/app/state", withToken())).status).toBe(401);
   });
+
+  it("answers 401 with no user header when there is one user: the web app always names one", async () => {
+    await db.getAppDb().execute({ sql: `DELETE FROM users WHERE id = ?`, args: [MADISON.id] });
+    expect((await get("/app/state", withToken())).status).toBe(401);
+  });
 });

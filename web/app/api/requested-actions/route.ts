@@ -1,6 +1,6 @@
 import { isConversationId } from "@/lib/chatSession";
-import { getUserSession } from "@/lib/localAuth";
 import { fetchOpenActions } from "@/lib/serverDb";
+import { getUserSession } from "@/lib/session";
 import { type NextRequest, NextResponse } from "next/server";
 
 /* The open cards of one conversation: the return's page and the Deductions tab each ask for their own. */

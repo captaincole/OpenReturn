@@ -32,6 +32,7 @@ export async function expectConversationPrivate(page: Page) {
   );
   expect(await statusAs(userId, thread), "its user").toBe(200);
   expect(await statusAs("nobody", thread), "a user id not in the table").toBe(401);
+  expect(await statusAs(null, thread), "one user and no user named").toBe(401);
   expect(await statusAs(userId, thread, "wrong-token"), "a caller without the token").toBe(401);
 
   addUser(SECOND_USER);

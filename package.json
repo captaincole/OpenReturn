@@ -34,6 +34,7 @@
     "coverage": "npm -w @openreturn/engine run coverage",
     "e2e": "npm --prefix web run e2e",
     "e2e:madison": "npm --prefix web run e2e:madison",
+    "e2e:access": "npm --prefix web run e2e:access",
     "install:all": "npm install && npm --prefix web install",
     "prepare": "husky",
     "lint": "eslint . --max-warnings 0",

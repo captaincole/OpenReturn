@@ -1,4 +1,5 @@
-import { createLocalUser, hasUsers, login } from "@/lib/localAuth";
+import { behindAccess } from "@/lib/authMode";
+import { createLocalUser, hasLocalLogin, login } from "@/lib/localAuth";
 import { NextResponse } from "next/server";
 
 /*
@@ -7,10 +8,11 @@ import { NextResponse } from "next/server";
  * a user whose password it knows.
  */
 export async function POST(request: Request) {
+  if (behindAccess()) return NextResponse.json({ error: "not found" }, { status: 404 });
   if (!request.headers.get("content-type")?.startsWith("application/json")) {
     return NextResponse.json({ error: "body must be JSON" }, { status: 415 });
   }
-  if (await hasUsers()) {
+  if (await hasLocalLogin()) {
     return NextResponse.json({ error: "already set up" }, { status: 409 });
   }
   let body: { email?: string; displayName?: string; password?: string };

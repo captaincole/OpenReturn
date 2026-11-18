@@ -7,6 +7,7 @@ Playwright drives the real web app, agent, Canon, and model through Chrome.
 ```bash
 npm run e2e          # Alex; stop `npm run dev:all` first — the run needs :3000, :4111 and :4112
 npm run e2e:madison  # Madison and the Deductions tab
+npm run e2e:access   # sign-in through Cloudflare Access: two guests, no model
 ```
 
 Each command runs one test: a run has one data folder and one owner.
@@ -26,6 +27,7 @@ The suite lives in the web app because it drives the web app; Playwright is a we
 - **Data:** each run gets its own folder, `web/e2e/.run/<runId>/`, with `data/` (app.db, mastra.db, canon.db, documents), `canon.log`, `agent.log`, `web.log`, `transcript.md`, and Playwright output (`report/`, trace and video on failure). Your real `.data/` is never touched. Delete `web/e2e/.run/` freely.
 - **The Alex test** (`alex.spec.ts`): create owner → check that each proxy refuses a route off its list → ask the tax code one question with a definite answer (`ask.ts`: the 2025 self-only HSA limit; the answer must cite a reference and state $4,300, and the reference PDF must open) → start filing → check that a second user cannot read the conversation (`isolation.ts`) → scripted intake with the W-2 upload (`alexAnswers.ts`) → wait for generated forms → check the stored W-2, the decisions, and the sidecar against `engine/tests/scenarios/alex/`.
 - **The Madison test** (`madison.spec.ts`): create owner → start filing → one message with her answers, then her seven income documents, one in each message (`madisonAnswers.ts`) → the Deductions tab: tap the answers to the life questions, name student loan interest at the open door, upload the Form 1098 and give the amounts in words → check the stored facts, the outcome of the named expense, the comparison and the closing paragraph against `engine/tests/scenarios/tcb-ca-005/`. It stops at the close: her return needs answers the case does not have, so it generates no forms.
+- **The Access test** (`access.spec.ts`): the web server runs with `AUTH_MODE=cloudflare-access`, and `fakeAccess.ts` stands in for Cloudflare Access: it serves a team's public keys and signs the token Access adds to each request. The test checks that a request with no token or a forged token is refused, that each guest gets the first-visit notice and nothing reaches Cade before they accept, that `/setup` and `/login` are off, and that a second guest cannot read the first guest's conversation. It sends no message to Cade, so it needs no model.
 - **The agent token:** the run sets `AGENT_API_TOKEN` for Cade and the web app (`run.ts`), so Cade takes the user of each request from the web app, as a shared instance does.
 - **Prompt size:** the Notes give each agent's largest prompt in tokens, from Mastra's traces. Ollama cuts a prompt longer than its context without an error, so compare it with the model's context (`/api/ps` on the Ollama server shows `context_length`).
 - **Result:** `web/e2e/.run/<runId>/summary.md`, one row per stage:

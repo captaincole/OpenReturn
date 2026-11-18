@@ -1,5 +1,5 @@
-import { getUserSession } from "@/lib/localAuth";
 import { markActionProcessing, skipAction } from "@/lib/serverDb";
+import { getUserSession } from "@/lib/session";
 import { type NextRequest, NextResponse } from "next/server";
 
 /* Both UPDATEs scope by (id, user_id), so a caller can touch only their own cards. */

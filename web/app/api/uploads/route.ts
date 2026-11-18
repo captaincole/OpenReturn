@@ -1,6 +1,6 @@
 import { deleteBlob, writeBlob } from "@/lib/blobStore";
-import { getUserSession } from "@/lib/localAuth";
 import { getOwnerFilingForYear, insertUploadedDocument, listUploads } from "@/lib/serverDb";
+import { getUserSession } from "@/lib/session";
 import { NextResponse } from "next/server";
 
 const DEMO_TAX_YEAR = 2025;

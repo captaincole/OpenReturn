@@ -1,6 +1,6 @@
-import { getUserSession } from "@/lib/localAuth";
 import { deriveProfile, type UserProfile } from "@/lib/profile";
 import { listOwnerReturns } from "@/lib/serverDb";
+import { getUserSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { CURRENT_TAX_YEAR } from "./components/constants";
 import { EstimatesSection } from "./components/EstimatesSection";

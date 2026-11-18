@@ -1,5 +1,5 @@
-import { getUserSession } from "@/lib/localAuth";
 import { deriveProfile } from "@/lib/profile";
+import { getUserSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { HomeTopBar } from "../../HomeTopBar";
 import { RefDocView } from "./components/RefDocView";

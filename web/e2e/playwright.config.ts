@@ -6,7 +6,7 @@
 
 import { defineConfig } from "@playwright/test";
 import { resolve } from "node:path";
-import { AGENT_TOKEN, AGENT_URL, DATA_ENV, RUN_DIR } from "./run";
+import { ACCESS_AUD, ACCESS_TEAM_DOMAIN, AGENT_TOKEN, AGENT_URL, DATA_ENV, RUN_DIR } from "./run";
 
 const SERVER_START_MS = 5 * 60_000; // mastra dev bundles on first start
 
@@ -14,6 +14,8 @@ const serverEnv = {
   ...(process.env as Record<string, string>),
   ...DATA_ENV,
   AGENT_API_TOKEN: AGENT_TOKEN,
+  CF_ACCESS_TEAM_DOMAIN: ACCESS_TEAM_DOMAIN,
+  CF_ACCESS_AUD: ACCESS_AUD,
   E2E_RUN_DIR: RUN_DIR,
 };
 

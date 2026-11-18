@@ -7,6 +7,7 @@
  * a local model the size is an estimate from the prompt's characters.
  */
 
+import { firstUserId } from "./appDb";
 import { AGENT_TOKEN, AGENT_URL } from "./run";
 import { note } from "./summary";
 
@@ -37,7 +38,7 @@ interface PromptSize {
 
 async function json<T>(path: string): Promise<T> {
   const res = await fetch(`${TRACES_URL}${path}`, {
-    headers: { Authorization: `Bearer ${AGENT_TOKEN}` },
+    headers: { Authorization: `Bearer ${AGENT_TOKEN}`, "x-openreturn-user-id": firstUserId() },
   });
   if (!res.ok) throw new Error(`GET ${path}: ${res.status}`);
   return (await res.json()) as T;
