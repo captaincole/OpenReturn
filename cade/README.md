@@ -12,7 +12,7 @@ Cade (`@openreturn/cade`) is OpenReturn's conversational agent. It interviews yo
 ## What Cade does
 
 - **Interviews you**, one step at a time. The form engine decides what to ask next; Cade does not guess the scope.
-- **Reads your documents.** W-2s, 1099s and photos of them go to the model directly. Structured ingest tools (`ingest-w2-structured`, `ingest-1099-b`, `ingest-1098`, `ingest-1098-e`, `ingest-w2g`, `ingest-1099-k`, `ingest-1099-nec`, `ingest-1095-a`, …) store each value. A sole-proprietor business has no document: `record-business` stores the user's answers for Schedule C, Form 8829 and Form 4562, `record-rental` stores each rental or royalty property for Schedule E, Form 8582 and Form 4562, and `record-dependent` stores each dependent for the 1040, Schedule 8812 and FTB 3532.
+- **Reads your documents.** W-2s, 1099s and photos of them go to the model directly. Structured ingest tools (`ingest-w2-structured`, `ingest-1099-b`, `ingest-1098`, `ingest-1098-e`, `ingest-w2g`, `ingest-1099-k`, `ingest-1099-nec`, `ingest-1095-a`, …) store each value. A sole-proprietor business has no document: `record-business` stores the user's answers for Schedule C, Form 8829 and Form 4562, `record-rental` stores each rental or royalty property for Schedule E, Form 8582 and Form 4562, and `record-dependent` stores each dependent for the 1040, Schedule 8812 and FTB 3532. The rules for each document type and topic are skills (`src/mastra/skills/`): Cade's prompt lists them in one line each, and he loads a skill's rules and its tools when that document or topic comes up.
 - **Records tax facts**, each with a citation: a document, a statement line, or "you told me, on this date". An unknown becomes an open question, never a guess. A rough amount ("about $12,000") is an assumption (`record-assumptions`): it serves comparisons, and Cade follows up until a fact replaces it.
 - **Makes decisions** where the facts leave a judgment call, such as filing status or California residency. Each decision has a rationale, its supporting facts, a confidence and what could make it wrong.
 - **Has each decision grounded.** `record-ai-decision` returns at once, and the review-decision workflow sends the decision to Canon's `ground` workflow over MCP. The verdict and citations come back to `app.db`.
@@ -59,6 +59,7 @@ cade/
 ├── src/mastra/
 │   ├── agents/       Cade: instructions, working memory, PDF-to-image for models without PDF input; cadeDeductions for the deductions thread
 │   ├── deductions/   the deductions conversation: its steps (flow.ts), life questions, open door, closing, and the state that get-deductions and /app/state read (state.ts)
+│   ├── skills/       the rules for each document type and topic, loaded when one comes up
 │   ├── tools/        ingest tools, record-tax-facts, record-assumptions, record-ai-decision, case state, deductions, generate-tax-documents
 │   ├── workflows/    reviewDecision (grounding through Canon), askTurn (Ask The Tax Code threads)
 │   ├── canon/        client.ts: the MCP client, Cade's only path to Canon

@@ -2,12 +2,13 @@ import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 import { modelFor } from "../models";
 import { cadeRequestContextSchema } from "../server/requestContext";
+import { topicSkillList } from "../skills";
 import { listAIDecisions, recordAIDecision } from "../tools/aiDecisions";
 import { recordAssumptions } from "../tools/assumptions";
 import { getCaseState } from "../tools/caseState";
 import { dismissRequestedAction } from "../tools/dismissRequestedAction";
 import { generateTaxDocuments } from "../tools/generateTaxDocuments";
-import { INGEST_MAX_OUTPUT_TOKENS, ingestTools } from "../tools/ingestTools";
+import { INGEST_MAX_OUTPUT_TOKENS, ingestToolLoader } from "../tools/ingestTools";
 import { requestDocumentUploadFor } from "../tools/requestDocument";
 import { listOpenQuestionsTool, recordTaxFacts, resolveOpenQuestion } from "../tools/taxFacts";
 import { cadeInstructions } from "./cade.instructions";
@@ -24,12 +25,16 @@ export const cade = new Agent({
    * model call (server/requestContext.ts). Every tool declares the same.
    */
   requestContextSchema: cadeRequestContextSchema,
-  inputProcessors: [new PdfAttachmentRasterizer()],
+  /*
+   * The rules for each document type and topic. The prompt carries one line
+   * for each skill; Cade loads the rules when the document or topic comes up.
+   */
+  skills: topicSkillList,
+  inputProcessors: [new PdfAttachmentRasterizer(), ingestToolLoader()],
   /* A turn is about 5 steps; 20 leaves room for batched scope decisions. */
   defaultOptions: { maxSteps: 20, modelSettings: { maxOutputTokens: INGEST_MAX_OUTPUT_TOKENS } },
   tools: {
     getCaseState,
-    ...ingestTools,
     recordTaxFacts,
     recordAssumptions,
     recordAIDecision,
