@@ -18,7 +18,7 @@ export const OPENING: Turn = {
     "We are married filing jointly. I am Madison Gray, born 03/10/1983. My spouse is " +
     "Salvester Slone, born 09/22/1986. We lived at 1111 Grove Park Rd, Los Angeles, CA 90210 " +
     "(Los Angeles County) all of 2025, so we are full-year California residents, and our " +
-    "mailing address is the same. Our niece Jessica Davies (SSN 900-45-6789, born 08/12/2014, " +
+    "mailing address is the same. Our niece Jessica Davies (SSN 900-45-6788, born 08/12/2014, " +
     "a U.S. citizen) lived with us all year. We had health coverage all 12 months, owe no " +
     "use tax, and had no crypto and no foreign accounts. Refund any overpayment. I will " +
     "upload seven tax documents, one in each message. I will do our deductions in the " +
