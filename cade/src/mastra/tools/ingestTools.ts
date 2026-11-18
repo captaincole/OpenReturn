@@ -1,3 +1,4 @@
+import { ToolSearchProcessor, type ToolSearchProcessorOptions } from "@mastra/core/processors";
 import { ingest1095A } from "./ingest1095A";
 import { ingest1098 } from "./ingest1098";
 import { ingest1098E } from "./ingest1098E";
@@ -39,6 +40,19 @@ export const ingestTools = {
   recordDependent,
   recordRental,
 };
+
+/*
+ * The ingest tools stay out of the prompt until Cade loads one by name
+ * (`load_tool`); each skill names its tools. "context" storage: a tool is
+ * loaded while its `load_tool` result is in the conversation, so the loaded
+ * set follows the thread's messages and survives a restart.
+ */
+export const ingestToolLoader = () =>
+  new ToolSearchProcessor({
+    /* The processor's type has no request context; each tool still validates its own. */
+    tools: ingestTools as unknown as ToolSearchProcessorOptions["tools"],
+    storage: "context",
+  });
 
 /* Twice the SDK's 4,096: a 20-trade ingest-1099-b call is about 4,300 tokens. */
 export const INGEST_MAX_OUTPUT_TOKENS = 8192;

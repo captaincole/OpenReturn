@@ -11,7 +11,8 @@ import { ingestingDocuments } from "../../src/mastra/agents/cade.instructions";
 import { PdfAttachmentRasterizer } from "../../src/mastra/agents/pdfAttachments";
 import { listFacts } from "../../src/mastra/db/taxFacts";
 import { modelFor } from "../../src/mastra/models";
-import { INGEST_MAX_OUTPUT_TOKENS, ingestTools } from "../../src/mastra/tools/ingestTools";
+import { topicSkillList } from "../../src/mastra/skills";
+import { INGEST_MAX_OUTPUT_TOKENS, ingestToolLoader } from "../../src/mastra/tools/ingestTools";
 import { modelsFromArgs, tierFromArgs, useModel, type EvalModel } from "../lib/models";
 import { freshScope } from "../lib/scope";
 import "../lib/tempDb";
@@ -35,8 +36,9 @@ function agentFor(model: EvalModel): Agent {
     name: "Ingest eval",
     instructions: INSTRUCTIONS,
     model: modelFor("cade"),
-    tools: ingestTools,
-    inputProcessors: [new PdfAttachmentRasterizer()],
+    /* The skills and the tool loading Cade has, so the eval reads a document the way he does. */
+    skills: topicSkillList,
+    inputProcessors: [new PdfAttachmentRasterizer(), ingestToolLoader()],
   });
 }
 
@@ -71,10 +73,13 @@ async function evalDoc(
   const started = Date.now();
   const { scope, requestContext } = await freshScope();
   try {
-    /* maxSteps: a consolidated 1099 takes one call per form and per 20 trades (5 for jordan's). */
+    /*
+     * maxSteps: the skill, the tool load, then one call per form and per 20
+     * trades of a consolidated 1099 (5 for jordan's).
+     */
     const result = await agent.generate(toMessages(testCase), {
       requestContext,
-      maxSteps: 8,
+      maxSteps: 10,
       modelSettings: { maxOutputTokens: INGEST_MAX_OUTPUT_TOKENS },
     });
     const usage = result.totalUsage ?? result.usage;

@@ -1,0 +1,10 @@
+import { ingest1099R } from "../tools/ingest1099R";
+import { topicSkill } from "./topicSkill";
+
+export const form1099RSkill = topicSkill({
+  name: "form-1099-r",
+  description:
+    "A Form 1099-R: a distribution from a pension, an annuity, an IRA or a Roth IRA, and the questions that follow it.",
+  tools: { ingest1099R },
+  instructions: `- **1099-R** → \`ingest-1099-r\`. One call per form, even when one payer sends two (e.g. codes G and H). Copy box 7 exactly as printed and set \`box7IraSepSimple\` from the checkbox. On a joint return, set \`owner\` from the recipient's name. When the IRA/SEP/SIMPLE box is checked, ask that person how much they rolled over or converted to a Roth IRA, their IRA basis (last year's Form 8606 line 14, or 0), their nondeductible contributions for 2025 (not when \`contributions\` is recorded: the IRA Deduction Worksheet figures them) and the part of those paid from January 1 to April 15, 2026, and the value of all their traditional, SEP and SIMPLE IRAs on December 31, plus any outstanding rollovers. Record them as one \`retirement.traditional_ira.taxpayer\` (or \`.spouse\`) fact, category \`retirement\`, with each amount a number: \`{ basisPriorYears, yearEndValue, rolledOver, convertedToRoth, nondeductibleContributions, contributionsMadeIn2026 }\`. A disability pension (box 7 code 3, the IRA box not checked) is wages on line 1h until the person reaches the minimum retirement age set by their employer: when \`pendingFacts\` lists \`retirement.disability_pension.<payer>.<id>.before_minimum_retirement_age\`, ask whether they had not yet reached that age when paid and record a boolean under that key, category \`retirement\`. A Roth IRA distribution that is not qualified (code J or T): ask that person their basis in regular Roth IRA contributions (Form 8606 line 22), their basis in conversions and rollovers to Roth IRAs (line 24), any qualified first-time homebuyer expenses, and any part rolled over; record \`retirement.roth_ira.taxpayer\` (or \`.spouse\`), category \`retirement\`: \`{ contributionBasis, conversionAndRolloverBasis, firstTimeHomebuyerExpenses, notOnLine19 }\`.`,
+});

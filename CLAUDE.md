@@ -14,6 +14,8 @@ There is exactly **one** conversational persona (Cade), in two conversations per
 
 Note: the Unix working directory is still `project-merrilin` (the product's earliest name; later "Wheel of Time," then "Summa," now "OpenReturn"). The directory name was left alone to avoid churning local paths/configs. Internal names / IDs / docs use "openreturn" or "OpenReturn". The agent was "Luca" before it was Cade; old threads in mastra.db carry that id.
 
+**Cade's rules for a document or a topic are skills, loaded by need.** The return agent's instructions (`agents/cade.instructions.ts`) hold only what every turn needs. The rules for each document type (W-2, 1099-B, Form 1098, …) and each topic (self-employment, dependents, credit questions) are Mastra skills in `cade/src/mastra/skills/`, one file each. The prompt lists each skill's name and description; Cade loads the rules with the `skill` tool. The ingest tools and `record-business` / `record-rental` / `record-dependent` are not in the prompt either: a skill names its tools and Cade loads them with `load_tool` (`ingestToolLoader` in `tools/ingestTools.ts`, Mastra's `ToolSearchProcessor`). A new ingest tool needs a skill that names it (`cade/tests/unit/mastra/skills/topicSkills.test.ts`). Put new document or topic rules in a skill, not in the main instructions; a question Cade must ask on every return with nothing to trigger it stays in the instructions.
+
 The end goal is a three-stage workflow:
 
 1. **Gatherer** (Stage 1, where we are now) — Cade runs conversational intake that captures structured tax facts with citations and produces a live-updating case state (draft 1040, open asks, decisions).
