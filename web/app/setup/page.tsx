@@ -1,24 +1,21 @@
 "use client";
 
+import { readSetupForm } from "@/lib/authForms";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useState } from "react";
 
 export default function SetupPage() {
   const router = useRouter();
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const canSubmit = displayName.trim() && email.trim() && password.length >= 8 && !submitting;
-
-  async function onSubmit(event: FormEvent) {
+  /* The form is read when it is sent (lib/authForms.ts): autofill may fill it with no input event. */
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!canSubmit) return;
-    if (password !== confirm) {
-      setError("Passwords don't match.");
+    if (submitting) return;
+    const read = readSetupForm(new FormData(event.currentTarget));
+    if ("error" in read) {
+      setError(read.error);
       return;
     }
     setSubmitting(true);
@@ -26,7 +23,7 @@ export default function SetupPage() {
     const res = await fetch("/api/auth/setup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ displayName, email, password }),
+      body: JSON.stringify(read.values),
     });
     if (!res.ok) {
       let message = `Setup failed (${res.status}).`;
@@ -60,11 +57,11 @@ export default function SetupPage() {
           </p>
         </div>
 
-        <form onSubmit={(event) => void onSubmit(event)} className="space-y-3">
+        {/* method="post": a form sent before the script runs never puts a password in the URL. */}
+        <form method="post" onSubmit={(event) => void onSubmit(event)} className="space-y-3">
           <input
             type="text"
-            value={displayName}
-            onChange={(event) => setDisplayName(event.target.value)}
+            name="displayName"
             placeholder="Your name"
             autoFocus
             autoComplete="name"
@@ -72,30 +69,27 @@ export default function SetupPage() {
           />
           <input
             type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            name="email"
             placeholder="Email (used on your tax forms)"
             autoComplete="email"
             className="input-base"
           />
           <input
             type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            name="password"
             placeholder="Password (8+ characters)"
             autoComplete="new-password"
             className="input-base"
           />
           <input
             type="password"
-            value={confirm}
-            onChange={(event) => setConfirm(event.target.value)}
+            name="confirm"
             placeholder="Confirm password"
             autoComplete="new-password"
             className="input-base"
           />
           {error && <div className="px-1 text-sm text-danger">{error}</div>}
-          <button type="submit" disabled={!canSubmit} className="btn-primary">
+          <button type="submit" disabled={submitting} className="btn-primary">
             {submitting ? "Setting up…" : "Create owner account"}
           </button>
         </form>

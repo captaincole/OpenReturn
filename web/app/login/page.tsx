@@ -1,23 +1,29 @@
 "use client";
 
+import { readLoginForm } from "@/lib/authForms";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useState } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function onSubmit(event: FormEvent) {
+  /* The form is read when it is sent (lib/authForms.ts): autofill may fill it with no input event. */
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!password || submitting) return;
+    if (submitting) return;
+    const read = readLoginForm(new FormData(event.currentTarget));
+    if ("error" in read) {
+      setError(read.error);
+      return;
+    }
     setSubmitting(true);
     setError(null);
     const res = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
+      body: JSON.stringify(read.values),
     });
     if (!res.ok) {
       setError(res.status === 401 ? "Wrong password." : `Login failed (${res.status}).`);
@@ -42,18 +48,17 @@ export default function LoginPage() {
           <p className="text-sm text-ink-secondary">Enter your password to unlock this instance.</p>
         </div>
 
-        <form onSubmit={(event) => void onSubmit(event)} className="space-y-3">
+        <form method="post" onSubmit={(event) => void onSubmit(event)} className="space-y-3">
           <input
             type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            name="password"
             placeholder="Password"
             autoFocus
             autoComplete="current-password"
             className="input-base"
           />
           {error && <div className="px-1 text-sm text-danger">{error}</div>}
-          <button type="submit" disabled={submitting || !password} className="btn-primary">
+          <button type="submit" disabled={submitting} className="btn-primary">
             {submitting ? "Signing in…" : "Sign in"}
           </button>
         </form>
