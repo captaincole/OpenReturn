@@ -90,19 +90,18 @@ export async function hasLocalLogin(): Promise<boolean> {
   return res.rows.length > 0;
 }
 
-const nameFromEmail = (email: string): string => email.split("@")[0] || email;
-
 /*
  * The user with this email; the first call makes the row. The caller has
- * proof of the email (lib/accessAuth.ts). Two first requests can arrive
- * together, so the insert steps aside for a row that is already there.
+ * proof of the email (lib/accessAuth.ts) and no name, so the email is the
+ * display name too. Two first requests can arrive together, so the insert
+ * steps aside for a row that is already there.
  */
 export async function getOrCreateUserByEmail(email: string): Promise<UserRow> {
   await ensureUserTables();
   await appDb().execute({
     sql: `INSERT INTO users (id, email, display_name, created_at) VALUES (?, ?, ?, ?)
           ON CONFLICT(email) DO NOTHING`,
-    args: [crypto.randomUUID(), email, nameFromEmail(email), new Date().toISOString()],
+    args: [crypto.randomUUID(), email, email, new Date().toISOString()],
   });
   const res = await appDb().execute({
     sql: `SELECT id, email, display_name FROM users WHERE email = ?`,

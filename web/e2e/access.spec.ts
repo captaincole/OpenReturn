@@ -71,7 +71,7 @@ async function acceptNotice(page: Page, email: string) {
   await expect(page.getByText(`You are signed in as ${email}.`)).toBeVisible();
   expect((await page.request.get("/api/agent/app/state")).status(), "before the notice").toBe(403);
   await page.getByRole("button", { name: "I understand" }).click();
-  await expect(page.getByRole("button", { name: /Start filing/ }).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: `Hi, ${email}.` })).toBeVisible();
   await page.goto("/notice");
   await expect(page).toHaveURL(`${BASE_URL}/`);
 }
