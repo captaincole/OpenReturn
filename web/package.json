@@ -8,12 +8,14 @@
     "start": "next start",
     "test:unit": "vitest run lib",
     "e2e": "playwright test -c e2e alex.spec",
-    "e2e:madison": "playwright test -c e2e madison.spec"
+    "e2e:madison": "playwright test -c e2e madison.spec",
+    "e2e:access": "AUTH_MODE=cloudflare-access playwright test -c e2e access.spec"
   },
   "dependencies": {
     "@libsql/client": "^0.17.4",
     "@mastra/client-js": "^1.56.0",
     "clsx": "^2.1.1",
+    "jose": "^6.2.17",
     "next": "16.4.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",

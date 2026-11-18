@@ -99,7 +99,6 @@ function AccountMenu({ activeReturn }: { activeReturn: TaxReturn }) {
     } catch (err) {
       if (err instanceof UnauthorizedError) {
         await signOut();
-        router.push("/login");
         return;
       }
       alert(err instanceof Error ? err.message : String(err));

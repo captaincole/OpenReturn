@@ -56,6 +56,26 @@ export async function listOwnerReturns(userId: string): Promise<TaxReturn[]> {
   return res.rows.map(rowToReturn);
 }
 
+function textOfFact(value: unknown): string | null {
+  try {
+    const parsed: unknown = JSON.parse(String(value));
+    return typeof parsed === "string" && parsed.trim() ? parsed.trim() : null;
+  } catch {
+    return null;
+  }
+}
+
+/* The taxpayer's first name, once Cade has recorded it on any of the user's filings. */
+export async function latestTaxpayerFirstName(userId: string): Promise<string | null> {
+  const res = await appDb().execute({
+    sql: `SELECT fact_value FROM tax_facts
+          WHERE user_id = ? AND fact_key = 'identity.name.first'
+          ORDER BY created_at DESC LIMIT 1`,
+    args: [userId],
+  });
+  return res.rows[0] ? textOfFact(res.rows[0].fact_value) : null;
+}
+
 export async function getOwnerReturnByYear(
   userId: string,
   taxYear: number,

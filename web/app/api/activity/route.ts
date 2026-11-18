@@ -1,6 +1,6 @@
 import { ACTIVITY_TAX_YEAR } from "@/lib/activity";
-import { getUserSession } from "@/lib/localAuth";
 import { fetchActivityItems } from "@/lib/serverDb";
+import { getUserSession } from "@/lib/session";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {

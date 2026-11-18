@@ -29,7 +29,6 @@ export function StartFilingButton({
     } catch (err) {
       if (err instanceof UnauthorizedError) {
         await signOut();
-        router.push("/login");
         return;
       }
       setError(err instanceof Error ? err.message : String(err));

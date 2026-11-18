@@ -1,7 +1,7 @@
 import { AppShell } from "@/components/AppShell";
-import { getUserSession } from "@/lib/localAuth";
 import { deriveProfile } from "@/lib/profile";
 import { listOwnerReturns } from "@/lib/serverDb";
+import { getUserSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 
 export default async function ReturnLayout({

@@ -27,6 +27,7 @@ The first run redirects to `/setup` to create the local user. The env file is `.
 | Route | What it shows |
 | --- | --- |
 | `/setup`, `/login` | First-run local user, then a password sign-in |
+| `/notice` | First-visit notice on an instance behind Cloudflare Access (`AUTH_MODE=cloudflare-access`, see `.env.example`) |
 | `/` | Home: tax returns, estimates, the tax code search box |
 | `/r/[returnId]` | A return: chat with Cade, activity, forms, documents |
 | `/r/[returnId]/deductions` | The return's deductions conversation: answers to tap, the documents Cade asks for there, and the itemize-or-standard summary |

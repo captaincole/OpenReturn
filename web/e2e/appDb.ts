@@ -26,6 +26,13 @@ function write(sql: string, ...values: string[]): void {
   }
 }
 
+/* The user the setup page made. A call to Cade with the web app's token must name a user. */
+export function firstUserId(): string {
+  const [user] = query<{ id: string }>("SELECT id FROM users ORDER BY created_at LIMIT 1");
+  if (!user) throw new Error("app.db has no user");
+  return user.id;
+}
+
 /* A second person, as a shared instance has. The web app has no screen that adds one yet. */
 export function addUser(user: { id: string; email: string; name: string }): void {
   write(

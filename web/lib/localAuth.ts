@@ -2,9 +2,11 @@ import { claimedUserId, mintToken, SESSION_TTL_MS, verifyToken } from "@/lib/ses
 import {
   getLocalLogin,
   getOnlyLocalLogin,
-  hasUsers,
+  hasLocalLogin,
   insertLocalUser,
+  toSession,
   type LocalLogin,
+  type UserSession,
 } from "@/lib/userStore";
 import { cookies } from "next/headers";
 import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
@@ -12,17 +14,11 @@ import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 /*
  * Password sign-in. A user's local_logins row holds the scrypt hash and the
  * cookie HMAC secret (made at setup, no env var). Keep this module small
- * enough to audit. Only getUserSession() verifies; proxy.ts checks cookie
- * presence only.
+ * enough to audit. Only getLocalSession() verifies; proxy.ts checks cookie
+ * presence only. Callers ask lib/session.ts, which picks the sign-in mode.
  */
 
 export const SESSION_COOKIE = "openreturn_session";
-
-export interface UserSession {
-  userId: string;
-  email: string;
-  displayName: string;
-}
 
 function hashPassword(password: string): string {
   const salt = randomBytes(16);
@@ -38,21 +34,15 @@ function verifyPassword(password: string, stored: string): boolean {
   return timingSafeEqual(actual, expected);
 }
 
-const toSession = (login: LocalLogin): UserSession => ({
-  userId: login.id,
-  email: login.email,
-  displayName: login.displayName,
-});
+export { hasLocalLogin };
 
-export { hasUsers };
-
-/* The /setup screen's one account. Refused when the instance has a user. */
+/* The /setup screen's one account. Refused when the instance has a password user. */
 export async function createLocalUser(input: {
   email: string;
   displayName: string;
   password: string;
 }): Promise<UserSession> {
-  if (await hasUsers()) throw new Error("a user already exists");
+  if (await hasLocalLogin()) throw new Error("a user already exists");
   const login: LocalLogin = {
     id: crypto.randomUUID(),
     email: input.email,
@@ -88,7 +78,7 @@ export async function logout(): Promise<void> {
 }
 
 /* The token names its user; that user's secret must have signed it. */
-export async function getUserSession(): Promise<UserSession | null> {
+export async function getLocalSession(): Promise<UserSession | null> {
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token) return null;
   const claimed = claimedUserId(token);

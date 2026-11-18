@@ -1,6 +1,6 @@
 import { readBlob } from "@/lib/blobStore";
-import { getUserSession } from "@/lib/localAuth";
 import { getDocumentById, hasMembership } from "@/lib/serverDb";
+import { getUserSession } from "@/lib/session";
 import { type NextRequest, NextResponse } from "next/server";
 
 /*

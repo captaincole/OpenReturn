@@ -1,7 +1,9 @@
+import { behindAccess } from "@/lib/authMode";
 import { login } from "@/lib/localAuth";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
+  if (behindAccess()) return NextResponse.json({ error: "not found" }, { status: 404 });
   let body: { password?: string };
   try {
     body = (await request.json()) as typeof body;

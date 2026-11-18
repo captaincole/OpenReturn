@@ -10,7 +10,8 @@ import { bearerMatches } from "./requestGuard";
  * the session and names the user in USER_ID_HEADER.
  *
  * - With AGENT_API_TOKEN set, a caller with the token is the web app, so Cade
- *   believes the header.
+ *   believes the header. The header is required: a call that names no user is
+ *   for no user, also on an instance with one user.
  * - Without a token (the local default), any local process can call, so Cade
  *   ignores the header. The request is for the instance's one user.
  *
@@ -29,8 +30,12 @@ const PROTECTED_PREFIXES = ["/api/", "/app/"];
 const isProtected = (path: string): boolean =>
   PROTECTED_PREFIXES.some((prefix) => path.startsWith(prefix));
 
-function requestUser(namedUserId: string | undefined, callerHasToken: boolean) {
-  return callerHasToken && namedUserId ? getUserById(namedUserId) : getOnlyUser();
+async function requestUser(
+  namedUserId: string | undefined,
+  callerHasToken: boolean,
+): Promise<User | null> {
+  if (!callerHasToken) return getOnlyUser();
+  return namedUserId ? getUserById(namedUserId) : null;
 }
 
 export const userMiddleware: MiddlewareHandler = async (ctx, next) => {
@@ -48,7 +53,7 @@ export const userMiddleware: MiddlewareHandler = async (ctx, next) => {
     return ctx.json({ error: "unauthorized" }, 401);
   }
 
-  const user: User | null = await requestUser(ctx.req.header(USER_ID_HEADER), Boolean(token));
+  const user = await requestUser(ctx.req.header(USER_ID_HEADER), Boolean(token));
   if (!user) return ctx.json({ error: "no user" }, 401);
 
   const requestContext = ctx.get("requestContext");

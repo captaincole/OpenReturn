@@ -1,3 +1,5 @@
+import { ACCESS_JWT_HEADER, behindAccess } from "@/lib/authMode";
+import { isCrossSiteWrite } from "@/lib/crossSite";
 import { NextResponse, type NextRequest } from "next/server";
 
 /*
@@ -10,6 +12,11 @@ import { NextResponse, type NextRequest } from "next/server";
  * reset the browser still holds its old cookie; the home page then sends it
  * back to /login, and the two redirects made a loop. The login layout sends a
  * signed-in user home, because it can check the cookie.
+ *
+ * Behind Cloudflare Access (lib/authMode.ts) there is no cookie of ours and no
+ * login page: a request without Access's token did not come through Access,
+ * and gets a 403. lib/accessAuth.ts checks the token itself. A write from
+ * another site gets a 403 too (lib/crossSite.ts).
  */
 
 const SESSION_COOKIE = "openreturn_session";
@@ -49,15 +56,27 @@ function isPage(pathname: string): boolean {
   return !pathname.startsWith("/api/") && !pathname.startsWith("/documents/");
 }
 
-export function proxy(request: NextRequest) {
-  const hasCookie = request.cookies.has(SESSION_COOKIE);
-  const { pathname } = request.nextUrl;
-
-  if (!hasCookie && !isPublic(pathname)) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    return NextResponse.redirect(url);
+/* The answer for a request that may not go on, or null when it may. */
+function refusal(request: NextRequest): NextResponse | null {
+  if (behindAccess()) {
+    const { headers, method } = request;
+    if (!headers.has(ACCESS_JWT_HEADER)) {
+      return new NextResponse("Sign in through Cloudflare Access.", { status: 403 });
+    }
+    return isCrossSiteWrite(method, headers.get("origin"), headers.get("host"))
+      ? new NextResponse("This request came from another site.", { status: 403 })
+      : null;
   }
+  if (request.cookies.has(SESSION_COOKIE) || isPublic(request.nextUrl.pathname)) return null;
+  const url = request.nextUrl.clone();
+  url.pathname = "/login";
+  return NextResponse.redirect(url);
+}
+
+export function proxy(request: NextRequest) {
+  const refused = refusal(request);
+  if (refused) return refused;
+  const { pathname } = request.nextUrl;
   if (!isPage(pathname)) return NextResponse.next();
 
   const nonce = btoa(crypto.randomUUID());
