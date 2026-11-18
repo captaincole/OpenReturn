@@ -43,6 +43,34 @@ describe("record-tax-facts", () => {
     await expect(run(MAX_FACTS_PER_CALL)).rejects.toThrow(/filing lookup reached/);
   });
 
+  const recordSsn = (key: string, value: unknown) =>
+    (
+      recordTaxFacts as unknown as {
+        execute: (input: unknown, context: unknown) => Promise<unknown>;
+      }
+    ).execute(
+      { year: 2025, facts: [{ category: "identity", key, value, sourceNote: "test" }] },
+      context,
+    );
+
+  it.each(["###-##-####", "123-45-678", ""])(
+    "refuses the SSN %j and records nothing",
+    async (value) => {
+      await expect(recordSsn("identity.ssn", value)).rejects.toThrow(
+        /9 digits.*Nothing was recorded/,
+      );
+    },
+  );
+
+  it("refuses a spouse SSN that is not 9 digits", async () => {
+    await expect(recordSsn("identity.spouse.ssn", "XXX-XX-1234")).rejects.toThrow(/9 digits/);
+  });
+
+  it.each(["123-45-6789", "123456789"])("accepts the SSN %j", async (value) => {
+    /* Past the SSN check, the next step is the filing lookup (stubbed above). */
+    await expect(recordSsn("identity.ssn", value)).rejects.toThrow(/filing lookup reached/);
+  });
+
   it("refuses a call without the user identity before running", async () => {
     const result = await (
       recordTaxFacts as unknown as {
