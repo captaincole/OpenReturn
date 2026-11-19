@@ -42,13 +42,24 @@ function extensionOf(filename: string, mimeType: string): string {
   return "bin";
 }
 
+/* A failed step answers 500 with its reason, and writes one line to the server log. */
+function failed(step: string, err: unknown): NextResponse {
+  const message = err instanceof Error ? err.message : String(err);
+  console.error(`[uploads] ${step} failed: ${message}`);
+  return NextResponse.json({ error: `${step} failed: ${message}` }, { status: 500 });
+}
+
 export async function GET() {
   const session = await getUserSession();
   if (!session) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
-  const filing = await getOwnerFilingForYear(session.userId, DEMO_TAX_YEAR);
-  return NextResponse.json(await listUploads(filing.id));
+  try {
+    const filing = await getOwnerFilingForYear(session.userId, DEMO_TAX_YEAR);
+    return NextResponse.json(await listUploads(filing.id));
+  } catch (err) {
+    return failed("list", err);
+  }
 }
 
 export async function POST(request: Request) {
@@ -68,7 +79,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "file is required" }, { status: 400 });
   }
 
-  const filing = await getOwnerFilingForYear(session.userId, DEMO_TAX_YEAR);
+  let filing: Awaited<ReturnType<typeof getOwnerFilingForYear>>;
+  try {
+    filing = await getOwnerFilingForYear(session.userId, DEMO_TAX_YEAR);
+  } catch (err) {
+    return failed("find the filing", err);
+  }
 
   const slug = slugify(file.name);
   const ext = extensionOf(file.name, file.type);
@@ -77,8 +93,7 @@ export async function POST(request: Request) {
   try {
     await writeBlob(storagePath, Buffer.from(await file.arrayBuffer()));
   } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
-    return NextResponse.json({ error: `upload failed: ${message}` }, { status: 500 });
+    return failed("store the file", err);
   }
 
   try {
@@ -94,10 +109,6 @@ export async function POST(request: Request) {
   } catch (err) {
     /* Roll back, so a metadata failure leaves no unreachable bytes on disk. */
     await deleteBlob(storagePath);
-    const message = err instanceof Error ? err.message : String(err);
-    return NextResponse.json(
-      { error: `upload metadata insert failed: ${message}` },
-      { status: 500 },
-    );
+    return failed("record the file", err);
   }
 }

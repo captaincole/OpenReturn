@@ -15,6 +15,8 @@ export interface ChatMessage {
   role: "user" | "assistant";
   content: string;
   attachmentName?: string;
+  /* Why the attachment is not in the filing's documents, when its upload failed. */
+  attachmentError?: string;
 }
 
 export interface SendChatOpts {
@@ -210,8 +212,13 @@ async function sendChatImpl(ctx: ChatCtx, sendOpts: SendChatOpts): Promise<void>
   ctx.setMessages((prev) => [...prev, userMsg, assistantMsg]);
 
   if (file && !sendOpts.skipUpload) {
+    /* Cade still gets the file in the message; the user must know it was not stored. */
     uploadDocument(file).catch((err) => {
       console.warn("[chat] upload to user-documents failed:", err);
+      const attachmentError = err instanceof Error ? err.message : "upload failed";
+      ctx.setMessages((prev) =>
+        prev.map((msg) => (msg.id === userMsg.id ? { ...msg, attachmentError } : msg)),
+      );
     });
   }
 
