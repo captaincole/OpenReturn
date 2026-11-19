@@ -4,18 +4,65 @@ import { type PlanItem } from "@/lib/api";
 import { cn } from "@/lib/cn";
 import { useState } from "react";
 
+const CAP = 3;
+
 /* The return's open plan items, at the top of the composer. */
 export function PlanRail({ plan, hidden }: { plan: PlanItem[]; hidden: boolean }) {
   const [showAll, setShowAll] = useState(false);
   const active = plan.filter((item) => item.status !== "done");
   if (hidden || active.length === 0) return null;
 
-  const CAP = 3;
   const visible = showAll ? active : active.slice(0, CAP);
-  const hiddenCount = active.length - visible.length;
 
   return (
-    <div className="border-b border-border-subtle px-4 pt-3 pb-2.5">
+    <div className="border-b border-border-subtle px-4 py-2 sm:pt-3 sm:pb-2.5">
+      {!showAll && <PhonePlanLine active={active} onShowAll={() => setShowAll(true)} />}
+      <div className={cn(!showAll && "hidden sm:block")}>
+        <PlanList
+          active={active}
+          visible={visible}
+          showAll={showAll}
+          onToggle={() => setShowAll(!showAll)}
+        />
+      </div>
+    </div>
+  );
+}
+
+/*
+ * A phone with the keyboard up has room for one line: the item Cade is on,
+ * and a button that opens the list.
+ */
+function PhonePlanLine({ active, onShowAll }: { active: PlanItem[]; onShowAll: () => void }) {
+  return (
+    <div className="flex items-center gap-2 sm:hidden">
+      <ul className="min-w-0 flex-1">
+        <PlanRailRow item={active[0]} />
+      </ul>
+      {active.length > 1 && (
+        <button
+          type="button"
+          onClick={onShowAll}
+          className="shrink-0 text-[11px] text-accent hover:text-accent-hover"
+        >
+          +{active.length - 1} more
+        </button>
+      )}
+    </div>
+  );
+}
+
+interface PlanListProps {
+  active: PlanItem[];
+  visible: PlanItem[];
+  showAll: boolean;
+  onToggle: () => void;
+}
+
+function PlanList({ active, visible, showAll, onToggle }: PlanListProps) {
+  const hiddenCount = active.length - visible.length;
+  return (
+    <>
       <div className="mb-2 flex items-baseline justify-between">
         <span className="text-[10px] tracking-[0.18em] text-ink-muted uppercase">Plan</span>
         <span className="text-[10px] text-ink-muted tabular-nums">{active.length} active</span>
@@ -25,25 +72,25 @@ export function PlanRail({ plan, hidden }: { plan: PlanItem[]; hidden: boolean }
           <PlanRailRow key={item.id} item={item} />
         ))}
       </ul>
-      {hiddenCount > 0 && !showAll && (
+      {hiddenCount > 0 && (
         <button
           type="button"
-          onClick={() => setShowAll(true)}
+          onClick={onToggle}
           className="mt-1.5 text-[11px] text-accent hover:text-accent-hover"
         >
           See {hiddenCount} more
         </button>
       )}
-      {showAll && active.length > CAP && (
+      {showAll && active.length > 1 && (
         <button
           type="button"
-          onClick={() => setShowAll(false)}
+          onClick={onToggle}
           className="mt-1.5 text-[11px] text-ink-muted hover:text-ink-secondary"
         >
           Show less
         </button>
       )}
-    </div>
+    </>
   );
 }
 
