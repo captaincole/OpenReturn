@@ -13,8 +13,15 @@ interface UploadRow {
   size_bytes: number | null;
 }
 
-/* Returns the effect cleanup, so a stale response cannot clobber a newer one. */
-function fetchUploads(setUploads: (rows: UploadRow[]) => void): () => void {
+/*
+ * Returns the effect cleanup, so a stale response cannot clobber a newer one.
+ * A failed load keeps the list and says so: an empty list would read as "no
+ * documents".
+ */
+function fetchUploads(
+  setUploads: (rows: UploadRow[]) => void,
+  setError: (message: string | null) => void,
+): () => void {
   let cancelled = false;
   fetch("/api/uploads", { cache: "no-store" })
     .then(async (res) => {
@@ -26,7 +33,8 @@ function fetchUploads(setUploads: (rows: UploadRow[]) => void): () => void {
     })
     .catch((err) => {
       console.warn("[documents] failed to load uploads:", err);
-      if (!cancelled) setUploads([]);
+      const reason = err instanceof Error ? err.message : "unknown error";
+      if (!cancelled) setError(`Could not load your documents (${reason}).`);
     });
   return () => {
     cancelled = true;
@@ -41,7 +49,7 @@ export function DocumentsSection() {
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const loadUploads = useCallback(() => fetchUploads(setUploads), []);
+  const loadUploads = useCallback(() => fetchUploads(setUploads, setError), []);
 
   /* turnTick: chat attachments also upload, and this section stays mounted. */
   useEffect(() => loadUploads(), [resetTick, turnTick, loadUploads]);

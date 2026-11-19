@@ -82,6 +82,11 @@ function MessageBubble({ msg, cadeBusy }: { msg: ChatMessage; cadeBusy: boolean 
             <span className="truncate">{msg.attachmentName}</span>
           </div>
         )}
+        {msg.attachmentError && (
+          <div role="alert" className="mb-1.5 rounded-md bg-bg-panel px-2 py-1 text-xs text-danger">
+            Not saved to your documents: {msg.attachmentError}
+          </div>
+        )}
         {msg.content ? (
           msg.role === "assistant" ? (
             <Markdown>{msg.content}</Markdown>
