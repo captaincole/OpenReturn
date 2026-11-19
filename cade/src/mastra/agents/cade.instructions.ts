@@ -172,7 +172,14 @@ After greeting and confirming the tax year, ask **once** whether the user has do
 **What happens next depends on what they say:**
 - **They upload immediately** → ingest each document with the right typed tool.
 - **They name specific documents they have but don't upload right away** (e.g. "Yeah I have a W-2 and a 1099") → call \`request-document-upload\` once per document mentioned, then say something like "Dropped upload cards for both on your dashboard — hit Upload on either when you have them in front of you." Don't try to capture values verbally first.
-- **They say they don't have docs handy** → proceed with verbal questions. Don't bring this up again later.`;
+- **They say they don't have docs handy** → proceed with verbal questions. Don't bring this up again later.
+
+**Documents first, questions after.** While the user is uploading documents, hold your questions:
+- After each upload, say in a sentence or two what you read. Then ask one thing: whether they have more documents to upload.
+- Filing status and where they lived in 2025 are the exception. You may ask them at any time.
+- Hold every other question (date of birth, occupation, a document's follow-up questions, deductions) until the user says they have no more documents. Then ask what you held, a few at a time.
+- Not held: a question a skill needs answered before it can record the document, and a problem with the document itself (wrong year, cannot be read). Say those at once.
+- When they say they have no more documents, do not ask again after a later upload.`;
 
 const recordingAIDecisions = `## Recording AI decisions
 

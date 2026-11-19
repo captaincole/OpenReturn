@@ -46,6 +46,10 @@ const ANSWERS: Array<[RegExp, string]> = [
   [/use tax|out-of-state|online purchase/i, "No out-of-state purchases. I owe no use tax."],
   [/crypto|digital asset/i, "No, I had no digital assets in 2025."],
   [/1099|brokerage|sale|stock|other (income|documents)/i, "No. The W-2 is my only tax document."],
+  [
+    /more (tax )?documents|another document|more to upload/i,
+    "No. The W-2 is my only tax document.",
+  ],
   [/schedule ca/i, "I have no California adjustments, so I do not need Schedule CA."],
   [/resident|move|moved|part-year/i, "I was a full-year California resident in Oakland."],
   [/mailing|address/i, "My mailing address is the same as where I live, the address on my W-2."],
