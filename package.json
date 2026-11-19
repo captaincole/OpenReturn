@@ -27,7 +27,7 @@
     "start": "npm --prefix cade run start",
     "start:canon": "npm --prefix canon run start",
     "start:web": "npm --prefix web run start",
-    "prestart:all": "node scripts/bootstrap-env.mjs",
+    "prestart:all": "node scripts/bootstrap-env.mjs .env",
     "start:all": "concurrently -k -n canon,cade,web -c yellow,cyan,magenta \"npm:start:canon\" \"npm:start\" \"npm:start:web\"",
     "form-engine": "npm --prefix engine/builder run form-engine --",
     "smoke:review": "npm --prefix cade run smoke:review",

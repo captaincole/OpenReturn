@@ -1,5 +1,7 @@
 /*
- * Writes each package's .env.development when missing (root predev hooks).
+ * Writes each package's env file when missing: .env.development for the dev
+ * servers (root predev hooks), or the file named as the first argument
+ * (\`.env\` for the built servers, root prestart:all).
  * The .data paths are absolute for this clone: module-relative defaults
  * resolve differently inside Mastra's bundle than in tsx scripts.
  * Never overwrites an existing file; delete it to regenerate.
@@ -16,9 +18,11 @@ const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
 const DATA = join(ROOT, "cade", ".data");
 const CANON_DATA = join(ROOT, "canon", ".data");
 
-const canonEnvPath = join(ROOT, "canon", ".env.development");
-const agentEnvPath = join(ROOT, "cade", ".env.development");
-const webEnvPath = join(ROOT, "web", ".env.development");
+const ENV_FILE = process.argv[2] ?? ".env.development";
+
+const canonEnvPath = join(ROOT, "canon", ENV_FILE);
+const agentEnvPath = join(ROOT, "cade", ENV_FILE);
+const webEnvPath = join(ROOT, "web", ENV_FILE);
 
 /*
  * The data folders exist before any server starts: the built web server is
@@ -69,7 +73,7 @@ ANTHROPIC_API_KEY=
 CADE_MODEL=anthropic/claude-sonnet-4-6
 
 # Canon (the reference library and the judges) runs as its own process and
-# Cade reaches it over MCP. Its models and corpus live in canon/.env.development.
+# Cade reaches it over MCP. Its models and corpus live in canon/${ENV_FILE}.
 # CANON_URL=http://127.0.0.1:4112
 
 # Local data files.
@@ -98,7 +102,7 @@ DOCUMENTS_PATH=${DATA}/documents
 
 if (wrote) {
   console.log(
-    "[bootstrap] first run: set ANTHROPIC_API_KEY in canon/.env.development and" +
-      " cade/.env.development, then `npm run corpus -- fetch` for the prebuilt reference corpus.",
+    `[bootstrap] first run: set ANTHROPIC_API_KEY in canon/${ENV_FILE} and` +
+      ` cade/${ENV_FILE}, then \`npm run corpus -- fetch\` for the prebuilt reference corpus.`,
   );
 }
