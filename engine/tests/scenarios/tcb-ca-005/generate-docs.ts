@@ -7,8 +7,16 @@ import { PDFArray, PDFDocument, PDFRawStream, PDFRef, decodePDFRawStream } from 
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { form3921Pdf } from "../documents/form3921.js";
 import { ssa1099Pdf } from "../documents/ssa1099.js";
-import { BENCHMARK_SSN, HOUSEHOLD, TCB_CA_005_TAX_YEAR, ssa } from "./facts.js";
+import {
+  BENCHMARK_SSN,
+  HOUSEHOLD,
+  MADISON_EMPLOYER_ADDRESS,
+  TCB_CA_005_TAX_YEAR,
+  madisonIsoExercise,
+  ssa,
+} from "./facts.js";
 
 const docsDir = join(dirname(fileURLToPath(import.meta.url)), "docs");
 
@@ -58,6 +66,18 @@ async function main() {
   const pdf = await ssa1099Pdf(ssa, beneficiary, TCB_CA_005_TAX_YEAR);
   await writeFile(join(docsDir, "08-ssa-1099.pdf"), pdf);
   console.log(`✓ 08-ssa-1099.pdf (${pdf.length} bytes)`);
+
+  const employer = MADISON_EMPLOYER_ADDRESS;
+  const form3921 = await form3921Pdf(madisonIsoExercise, {
+    employerStreet: employer.line1,
+    employerCityStateZip: `${employer.city}, ${employer.state} ${employer.zip}`,
+    employeeName: beneficiary.name,
+    employeeTin: beneficiary.ssn,
+    employeeStreet: beneficiary.street,
+    employeeCityStateZip: beneficiary.cityStateZip,
+  });
+  await writeFile(join(docsDir, "09-employers-name-3921.pdf"), form3921);
+  console.log(`✓ 09-employers-name-3921.pdf (${form3921.length} bytes)`);
 }
 
 main().catch((err) => {
