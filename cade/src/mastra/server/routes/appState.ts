@@ -8,6 +8,7 @@ import { deductionsView } from "../../deductions/state";
 import { loadAndEvaluateScenario } from "../../loadScenario";
 import { mainThreadId } from "../../threads";
 import { buildCaseStateForScenario } from "../../tools/caseState";
+import { incomeSoFar } from "../../tools/incomeSoFar";
 import { DEMO_TAX_YEAR } from "../demoSession";
 import { REQUEST_CONTEXT_KEYS } from "../requestContext";
 
@@ -66,6 +67,7 @@ export const appStateRoute = registerApiRoute("/app/state", {
       pendingFacts: caseState.pendingFacts,
       forms: caseState.summaries,
       money: caseState.money,
+      incomeSoFar: incomeSoFar(scenario),
       deductions: deductionsView(scenario),
       documents: {
         form1040Url: urlFor("1040"),

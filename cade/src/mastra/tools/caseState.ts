@@ -139,7 +139,7 @@ function summarizeForm(form: EvaluatedForm<BaseFormField>): EvaluatedFormSummary
   };
 }
 
-function numericField(fields: readonly BaseFormField[], fieldId: string): number | null {
+export function numericField(fields: readonly BaseFormField[], fieldId: string): number | null {
   const field = fields.find((candidate) => candidate.fieldId === fieldId);
   if (!field || !field.result.ok) return null;
   const value = field.result.value;
