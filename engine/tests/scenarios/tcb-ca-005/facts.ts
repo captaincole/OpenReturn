@@ -45,10 +45,18 @@ const fact = (category: string, key: string, value: unknown, sourceNote: string)
   createdAt: CREATED_AT,
 });
 
+/*
+ * The benchmark gives the taxpayer, the spouse and the niece one SSN. Three
+ * people with one number is not a real case, and Cade rightly objects, so the
+ * spouse and the niece have their own. No amount depends on them.
+ */
+export const BENCHMARK_SSN = "900-45-6789";
+const NIECE_SSN = "900-45-6788";
+
 /* The couple as the documents print them (generate-docs.ts reads it too). */
 export const HOUSEHOLD = {
-  taxpayer: { firstName: "Madison", lastName: "Gray", ssn: "900-45-6789" },
-  spouse: { firstName: "Salvester", lastName: "Slone", ssn: "900-45-6789" },
+  taxpayer: { firstName: "Madison", lastName: "Gray", ssn: BENCHMARK_SSN },
+  spouse: { firstName: "Salvester", lastName: "Slone", ssn: "900-45-6787" },
   street: "1111 Grove Park Rd",
   city: "Los Angeles",
   state: "CA",
@@ -148,11 +156,11 @@ export const ssa: SocialSecurityFactValue = {
   box6: 1986,
 };
 
-/* irs1040.dependent_detail[0]: the niece, born 2014, in the home all year. Names and SSN from the key. */
+/* irs1040.dependent_detail[0]: the niece, born 2014, in the home all year. Her name is from the key. */
 const niece: DependentFactValue = {
   firstName: "Jessica",
   lastName: "Davies",
-  ssn: "900-45-6789",
+  ssn: NIECE_SSN,
   relationship: "Niece",
   dob: "08/12/2014",
   monthsLivedWithYou: 12,
