@@ -31,6 +31,15 @@ export interface FormSummary {
   }>;
 }
 
+export interface IncomeSoFar {
+  wages: number;
+  interest: number;
+  dividends: number;
+  capitalGains: number;
+  other: number;
+  total: number;
+}
+
 export interface CaseState {
   taxpayerFirstName: string | null;
   authEmail: string | null;
@@ -54,6 +63,8 @@ export interface CaseState {
     stateRefund: number | null;
     stateOwed: number | null;
   } | null;
+  /** A running total from the draft Form 1040, also while questions are open. Not final. */
+  incomeSoFar: IncomeSoFar;
   /** The deductions conversation: its step, the comparison, the items and the records. */
   deductions: DeductionsView;
   documents: {

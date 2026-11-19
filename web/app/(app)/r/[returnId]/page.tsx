@@ -8,6 +8,7 @@ import { ActivityTicker } from "./components/ActivityRail";
 import { DeductionsCard } from "./components/DeductionsCard";
 import { DocumentsSection } from "./components/DocumentsSection";
 import { FormsSection } from "./components/FormsSection";
+import { IncomeCard } from "./components/IncomeCard";
 import { RequestedActionsCard } from "./components/RequestedActions";
 
 export default function ReturnWorkspace() {
@@ -20,6 +21,7 @@ export default function ReturnWorkspace() {
   return (
     <div className="mx-auto max-w-5xl space-y-10 px-6 pt-4 pb-10 lg:px-10 lg:pt-6">
       <Pane id="activity" className="space-y-6">
+        <IncomeCard />
         <ActivityTicker refreshKey={turnTick + resetTick * 10000} />
         <RequestedActionsCard />
         <DeductionsCard />
