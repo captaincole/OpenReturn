@@ -22,6 +22,7 @@ The suite lives in the web app because it drives the web app; Playwright is a we
   E2E_JUDGE_MODEL_URL=http://<host>:11434/v1
   ```
   Small local models fail the intake often; a model the size of Gemma 4 31b passes most runs.
+- **The built servers:** `npm run build:all`, then `E2E_SERVERS=built npm run e2e` (or `e2e:access`, `e2e:madison`). The run starts `mastra start` and `next start` where it otherwise starts the dev servers. Build again after each code change: the run does not.
 - **Another model for one run:** set the same variables in the shell; the shell wins. For example `E2E_CADE_MODEL=anthropic/claude-haiku-5-5 npm run e2e` (a cloud model needs no URL). `summary.md` names the models each run used.
 - **Grounding reviews:** off (`DECISION_REVIEW=off`). On a local model they share the GPU with Cade and make each turn several times slower. `E2E_DECISION_REVIEW=on npm run e2e` turns them on; that run exercises Cade's MCP call to Canon's `ground` workflow, and a decision that ends `review_unreached` or `review_failed` fails `plumbing`. The judges get one round per decision (`CANON_GROUND_MAX_ITERATIONS=1`; `E2E_GROUND_MAX_ITERATIONS` raises it): the run checks the plumbing, not the verdict.
 - **Data:** each run gets its own folder, `web/e2e/.run/<runId>/`, with `data/` (app.db, mastra.db, canon.db, documents), `canon.log`, `agent.log`, `web.log`, `transcript.md`, and Playwright output (`report/`, trace and video on failure). Your real `.data/` is never touched. Delete `web/e2e/.run/` freely.

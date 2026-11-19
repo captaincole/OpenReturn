@@ -93,16 +93,23 @@ function loadAgentKeys() {
   }
 }
 
+/*
+ * E2E_SERVERS=built runs the built servers (`npm run build:all` first), the
+ * way `npm run start:all` does. The default is the dev servers.
+ */
+const BUILT = process.env.E2E_SERVERS === "built";
+const MASTRA_COMMAND = BUILT ? "start" : "dev";
+
 const COMMANDS = {
   canon: () => {
     loadAgentKeys();
-    return { cwd: join(root, "canon"), args: ["mastra", "dev", "--env", canonEnvFile()] };
+    return { cwd: join(root, "canon"), args: ["mastra", MASTRA_COMMAND, "--env", canonEnvFile()] };
   },
   agent: () => {
     loadAgentKeys();
-    return { cwd: join(root, "cade"), args: ["mastra", "dev", "--env", agentEnvFile()] };
+    return { cwd: join(root, "cade"), args: ["mastra", MASTRA_COMMAND, "--env", agentEnvFile()] };
   },
-  web: () => ({ cwd: join(root, "web"), args: ["next", "dev"] }),
+  web: () => ({ cwd: join(root, "web"), args: ["next", BUILT ? "start" : "dev"] }),
 };
 
 const name = process.argv[2];
@@ -112,8 +119,8 @@ if (!runDir || !COMMANDS[name]) {
 }
 mkdirSync(process.env.DOCUMENTS_PATH, { recursive: true });
 
-/* The agent reads blank PDFs from a gitignored tree; build it first. */
-if (name === "agent") {
+/* The agent reads blank PDFs from a gitignored tree; build it first. The built agent has its copy. */
+if (name === "agent" && !BUILT) {
   const sync = spawnSync("npm", ["--prefix", join(root, "cade"), "run", "sources:sync"], {
     stdio: "inherit",
   });

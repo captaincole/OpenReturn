@@ -116,6 +116,9 @@ npm run dev:canon    # Canon only — Mastra Studio at :4112, MCP at /api/mcp/ca
 npm run dev          # Cade only — also opens Mastra Studio at :4111
 npm run dev:web      # next only
 
+npm run build:all    # builds the three services for a production run (canon, cade, web)
+npm run start:all    # runs the built services on the same three ports; see "Production run" below
+
 npm test             # engine golden suite; positional filters work (npm test -- alex)
 npm run test:unit    # engine + canon + agent unit tests, then the web app's (web/lib/*.test.ts); test:integration likewise, without web
 npm run typecheck    # tsc over engine + builder + canon + agent
@@ -125,6 +128,8 @@ npm run e2e          # Playwright E2E through the UI + real model (stop dev:all 
 npm run e2e:madison  # the same for Madison: her documents, then the Deductions tab to its close
 npm run e2e:access   # an instance behind Cloudflare Access: two guests, the notice, separate data; no model
 ```
+
+**Production run.** `npm run build:all`, then `npm run start:all`, runs the built servers: no file watching, no recompile on a page's first load, no Next.js dev overlay. Use it for an instance that other people reach; use `dev:all` to develop. The built servers read each package's `.env`, not `.env.development`; `start:all` writes a `.env` that is missing and never changes one that exists. Run `build:all` again after every pull. Cade's build includes Mastra Studio at `:4111`, which shows every thread; Cade listens on `127.0.0.1` only, so keep it that way. The session cookie is `Secure` in a production run: Chrome and Firefox accept that on `http://localhost`, Safari does not (set `FORCE_INSECURE_COOKIE=1` in `web/.env`). `E2E_SERVERS=built npm run e2e` runs the e2e against the built servers.
 
 All persistent state lives in local files: user data under `cade/.data/`, the corpus under `canon/.data/` ("the DB is a file"):
 
@@ -137,7 +142,7 @@ All persistent state lives in local files: user data under `cade/.data/`, the co
 
 Pin all four paths via env (`CORPUS_DB_PATH` in Canon's env file; `APP_DB_PATH` / `MASTRA_DB_PATH` / `DOCUMENTS_PATH` in Cade's) — module-relative defaults resolve differently inside Mastra's bundled output than in tsx scripts. Cade finds Canon at `CANON_URL` (default `http://127.0.0.1:4112`).
 
-**Env files, the same in every package that has settings** (`canon/`, `cade/`, `web/`; the engine and its builder read no env): `.env.example` (committed) lists every setting; `.env.development` (gitignored) is written on first run by `scripts/bootstrap-env.mjs` and is the file `mastra dev` reads; a gitignored `.env` holds personal overrides. The CLIs (`corpus`, `doctor`) load `.env` first, then `.env.development` (dotenv never overrides a set key). They load them after their imports run, so read env at call time, not in a module-level constant. There are **no external services**: no Docker, no Postgres, no Supabase.
+**Env files, the same in every package that has settings** (`canon/`, `cade/`, `web/`; the engine and its builder read no env): `.env.example` (committed) lists every setting; `.env.development` (gitignored) is written on first run by `scripts/bootstrap-env.mjs` and is the file `mastra dev` reads; a gitignored `.env` is the file the built servers read (`mastra start`, `next start`), and on a machine that develops it holds personal overrides: `next dev` and the CLIs read it too. The CLIs (`corpus`, `doctor`) load `.env` first, then `.env.development` (dotenv never overrides a set key). They load them after their imports run, so read env at call time, not in a module-level constant. There are **no external services**: no Docker, no Postgres, no Supabase.
 
 **Auth: a `users` table, one password by default.** `app.db` has two tables for people. `users` holds who a person is (id, email, name); Cade reads it. `local_logins` holds the scrypt password hash and the session-cookie HMAC secret of a user who signs in with a password; only the web app reads it (`web/lib/userStore.ts`), so Cade never sees a secret. The web app's first-run `/setup` screen creates the one local user, and refuses when a password user exists. Login = one password → signed httpOnly cookie that names its user (`lib/localAuth.ts`, `lib/sessionToken.ts`, node:crypto only). `proxy.ts` does an optimistic cookie-presence redirect; layouts/route handlers verify for real via `getUserSession()`. "Owner" is now only a filing role (`filing_members.role`).
 
