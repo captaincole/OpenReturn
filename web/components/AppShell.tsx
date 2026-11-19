@@ -133,7 +133,8 @@ export function AppShell({
 
   return (
     <AppShellContext.Provider value={ctx}>
-      <div className="flex h-screen w-screen flex-col overflow-hidden bg-bg-base text-ink-primary">
+      {/* h-dvh, not h-screen: a phone browser's bars cover the bottom of 100vh, and with it the reply box. */}
+      <div className="flex h-dvh w-screen flex-col overflow-hidden bg-bg-base text-ink-primary">
         <TopBar activeReturn={activeReturn} returns={returns} />
         {/* The top bar has no room for the switch on a phone: it gets a row of its own. */}
         <div className="shrink-0 border-b border-border-subtle px-4 py-1.5 sm:hidden">
