@@ -4,6 +4,7 @@ import { type ChatMessage, useAppShell } from "@/components/AppShell";
 import { DeductionReplies } from "@/components/DeductionReplies";
 import { Markdown } from "@/components/Markdown";
 import { PlanRail } from "@/components/PlanRail";
+import { useStickToBottom } from "@/components/useStickToBottom";
 import { cn } from "@/lib/cn";
 import { type TaxReturn } from "@/lib/returns";
 import { type FormEvent, useEffect, useRef, useState } from "react";
@@ -24,6 +25,7 @@ export function ChatPane({ activeReturn }: ChatPaneProps) {
    * cadeBusy and the step: the answers to tap show when a turn ends and take room from the
    * messages, so scroll again or they cover the end of Cade's message.
    */
+  useStickToBottom(scrollRef);
   const deductionsStep = state?.deductions.next.step;
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
