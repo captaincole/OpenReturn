@@ -1,0 +1,1256 @@
+{
+  "form": {
+    "formId": "form-2106",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 2106, Employee Business Expenses"
+  },
+  "fields": [
+    {
+      "fieldId": "form-2106.0.header.taxpayer_name",
+      "label": "Your name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.966
+      }
+    },
+    {
+      "fieldId": "form-2106.0.header.occupation",
+      "label": "Occupation in which you incurred expenses",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 317.8,
+        "y": 671.966
+      }
+    },
+    {
+      "fieldId": "form-2106.0.header.ssn_first_3_digits",
+      "label": "Social security number (first 3 digits)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 671.969
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-2106.0.header.ssn_middle_2_digits",
+      "label": "Social security number (middle 2 digits)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 671.969
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-2106.0.header.ssn_last_4_digits",
+      "label": "Social security number (last 4 digits)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 671.969
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-2106.0.line.1_vehicle_expense_col_a",
+      "label": "Line 1, Column A (Other Than Meals) — Vehicle expense from line 22 or line 29",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.2_parking_tolls_transportation_col_a",
+      "label": "Line 2, Column A (Other Than Meals) — Parking fees, tolls, and transportation, including trains, buses, etc., that didn't involve overnight travel or commuting to and from work",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line2[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 563.966
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.3_travel_expense_overnight_col_a",
+      "label": "Line 3, Column A (Other Than Meals) — Travel expense while away from home overnight, including lodging, airfare, car rental, etc. Don't include meals",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line3[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 539.965
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.4_other_business_expenses_col_a",
+      "label": "Line 4, Column A (Other Than Meals) — Business expenses not included on lines 1 through 3. Don't include meals",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line4[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 515.964
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.5_meals_expenses_col_b",
+      "label": "Line 5, Column B (Meals) — Meals expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line5[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 491.963
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.6_total_expenses_col_a",
+      "label": "Line 6, Column A (Other Than Meals) — Total expenses. In Column A, add lines 1 through 4 and enter the result",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line6[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 467.962
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.6_total_expenses_col_b",
+      "label": "Line 6, Column B (Meals) — Total expenses. In Column B, enter the amount from line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step1[0].Line6[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 467.962
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.7_employer_reimbursements_col_a",
+      "label": "Line 7, Column A (Other Than Meals) — Reimbursements received from employer. Include reimbursements reported on Form W-2, box 12, code \"L.\" Do not include amounts reported on Form W-2, box 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step2[0].Line7[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.7_employer_reimbursements_col_b",
+      "label": "Line 7, Column B (Meals) — Reimbursements received from employer. Include reimbursements reported on Form W-2, box 12, code \"L.\" Do not include amounts reported on Form W-2, box 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step2[0].Line7[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.8_expenses_less_reimbursements_col_a",
+      "label": "Line 8, Column A (Other Than Meals) — Subtract line 7 from line 6. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step3[0].Line8[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.8_expenses_less_reimbursements_col_b",
+      "label": "Line 8, Column B (Meals) — Subtract line 7 from line 6. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step3[0].Line8[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.9_deductible_amount_col_a",
+      "label": "Line 9, Column A (Other Than Meals) — In Column A, enter the amount from line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step3[0].Line9[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.9_deductible_amount_col_b",
+      "label": "Line 9, Column B (Meals) — In Column B, see the instructions for the amount to enter",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Step3[0].Line9[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-2106.0.line.10_total_employee_business_expenses",
+      "label": "Line 10 — Add the amounts on line 9 for both columns and enter the total here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_month_col_a",
+      "label": "Line 11 — Enter the date the vehicle was placed in service, (a) Vehicle 1 — month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColA[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 683.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_day_col_a",
+      "label": "Line 11 — Enter the date the vehicle was placed in service, (a) Vehicle 1 — day",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColA[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 683.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_year_col_a",
+      "label": "Line 11 — Enter the date the vehicle was placed in service, (a) Vehicle 1 — year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColA[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 683.968
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_month_col_b",
+      "label": "Line 11 — Enter the date the vehicle was placed in service, (b) Vehicle 2 — month",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColB[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 683.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_day_col_b",
+      "label": "Line 11 — Enter the date the vehicle was placed in service, (b) Vehicle 2 — day",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColB[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 518.4,
+        "y": 683.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-2106.1.line.11_date_placed_in_service_year_col_b",
+      "label": "Line 11 — Enter the date the vehicle was placed in service, (b) Vehicle 2 — year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line11[0].ColB[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 683.968
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-2106.1.line.12_total_miles_driven_col_a",
+      "label": "Line 12 — Total miles the vehicle was driven during 2025, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line12[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.12_total_miles_driven_col_b",
+      "label": "Line 12 — Total miles the vehicle was driven during 2025, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line12[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 483.4,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.13_business_miles_col_a",
+      "label": "Line 13 — Business miles included on line 12, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line13[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.13_business_miles_col_b",
+      "label": "Line 13 — Business miles included on line 12, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line13[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 483.4,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.14_percent_business_use_col_a",
+      "label": "Line 14 — Percent of business use. Divide line 13 by line 12, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line14[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.14_percent_business_use_col_b",
+      "label": "Line 14 — Percent of business use. Divide line 13 by line 12, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line14[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 483.4,
+        "y": 647.971
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.15_daily_commuting_distance_col_a",
+      "label": "Line 15 — Average daily roundtrip commuting distance, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line15[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.15_daily_commuting_distance_col_b",
+      "label": "Line 15 — Average daily roundtrip commuting distance, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line15[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 483.4,
+        "y": 635.972
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.16_commuting_miles_col_a",
+      "label": "Line 16 — Commuting miles included on line 12, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line16[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.16_commuting_miles_col_b",
+      "label": "Line 16 — Commuting miles included on line 12, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line16[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 483.4,
+        "y": 623.973
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.17_other_miles_col_a",
+      "label": "Line 17 — Other miles. Add lines 13 and 16 and subtract the total from line 12, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line17[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 611.974
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.17_other_miles_col_b",
+      "label": "Line 17 — Other miles. Add lines 13 and 16 and subtract the total from line 12, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionA[0].Line17[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 483.4,
+        "y": 611.974
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.18_available_personal_use_yes",
+      "label": "Line 18 — Was your vehicle available for personal use during off-duty hours? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 601.969
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.18_available_personal_use_no",
+      "label": "Line 18 — Was your vehicle available for personal use during off-duty hours? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 601.969
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.19_another_vehicle_personal_use_yes",
+      "label": "Line 19 — Do you (or your spouse) have another vehicle available for personal use? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 589.97
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.19_another_vehicle_personal_use_no",
+      "label": "Line 19 — Do you (or your spouse) have another vehicle available for personal use? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[1]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 589.97
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.20_evidence_support_deduction_yes",
+      "label": "Line 20 — Do you have evidence to support your deduction? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 577.968
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.20_evidence_support_deduction_no",
+      "label": "Line 20 — Do you have evidence to support your deduction? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 577.968
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.21_evidence_written_yes",
+      "label": "Line 21 — If \"Yes,\" is the evidence written? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.21_evidence_written_no",
+      "label": "Line 21 — If \"Yes,\" is the evidence written? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_4[1]",
+      "position": {
+        "page": 1,
+        "x": 547.2,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.22_standard_mileage_rate_amount",
+      "label": "Line 22 — Multiply line 13 by 70¢ (0.70)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.23_gasoline_oil_repairs_insurance_col_a",
+      "label": "Line 23 — Gasoline, oil, repairs, vehicle insurance, etc., (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Row23[0].ColA[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 491.966
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.23_gasoline_oil_repairs_insurance_col_b",
+      "label": "Line 23 — Gasoline, oil, repairs, vehicle insurance, etc., (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Row23[0].ColB[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 491.966
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.24a_vehicle_rentals_col_a",
+      "label": "Line 24a — Vehicle rentals, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24a[0].ColA[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.24a_vehicle_rentals_col_b",
+      "label": "Line 24a — Vehicle rentals, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24a[0].ColB[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.24b_inclusion_amount_col_a",
+      "label": "Line 24b — Inclusion amount, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24b[0].ColA[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.24b_inclusion_amount_col_b",
+      "label": "Line 24b — Inclusion amount, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24b[0].ColB[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 467.971
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.24c_net_vehicle_rentals_col_a",
+      "label": "Line 24c — Subtract line 24b from line 24a, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24c[0].ColA[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.24c_net_vehicle_rentals_col_b",
+      "label": "Line 24c — Subtract line 24b from line 24a, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line24c[0].ColB[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 455.972
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.25_employer_provided_vehicle_value_col_a",
+      "label": "Line 25 — Value of employer-provided vehicle, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line25[0].ColA[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 419.972
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.25_employer_provided_vehicle_value_col_b",
+      "label": "Line 25 — Value of employer-provided vehicle, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line25[0].ColB[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 419.972
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.26_total_actual_expenses_col_a",
+      "label": "Line 26 — Add lines 23, 24c, and 25, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line26[0].ColA[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 407.973
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.26_total_actual_expenses_col_b",
+      "label": "Line 26 — Add lines 23, 24c, and 25, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line26[0].ColB[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 407.973
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.27_business_share_expenses_col_a",
+      "label": "Line 27 — Multiply line 26 by the percentage on line 14, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line27[0].ColA[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 395.974
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.27_business_share_expenses_col_b",
+      "label": "Line 27 — Multiply line 26 by the percentage on line 14, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line27[0].ColB[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 395.974
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.28_depreciation_col_a",
+      "label": "Line 28 — Depreciation, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line28[0].ColA[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 383.975
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.28_depreciation_col_b",
+      "label": "Line 28 — Depreciation, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line28[0].ColB[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 383.975
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.29_total_vehicle_expenses_col_a",
+      "label": "Line 29 — Add lines 27 and 28, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line29[0].ColA[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 371.976
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.29_total_vehicle_expenses_col_b",
+      "label": "Line 29 — Add lines 27 and 28, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionC[0].Line29[0].ColB[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 371.976
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.30_cost_or_other_basis_col_a",
+      "label": "Line 30 — Enter cost or other basis, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line30[0].ColA[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.30_cost_or_other_basis_col_b",
+      "label": "Line 30 — Enter cost or other basis, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line30[0].ColB[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.31_section_179_special_allowance_col_a",
+      "label": "Line 31 — Enter section 179 deduction and special allowance, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line31[0].ColA[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.31_section_179_special_allowance_col_b",
+      "label": "Line 31 — Enter section 179 deduction and special allowance, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line31[0].ColB[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.32_business_basis_col_a",
+      "label": "Line 32 — Multiply line 30 by line 14, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line32[0].ColA[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.32_business_basis_col_b",
+      "label": "Line 32 — Multiply line 30 by line 14, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line32[0].ColB[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.33_depreciation_method_percentage_col_a",
+      "label": "Line 33 — Enter depreciation method and percentage, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line33[0].ColA[0].f2_44[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 227.967
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.33_depreciation_method_percentage_col_b",
+      "label": "Line 33 — Enter depreciation method and percentage, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line33[0].ColB[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 227.967
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.34_depreciation_before_limit_col_a",
+      "label": "Line 34 — Multiply line 32 by the percentage on line 33, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line34[0].ColA[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 203.966
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.34_depreciation_before_limit_col_b",
+      "label": "Line 34 — Multiply line 32 by the percentage on line 33, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line34[0].ColB[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 203.966
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.35_total_depreciation_section_179_col_a",
+      "label": "Line 35 — Add lines 31 and 34, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line35[0].ColA[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 191.967
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.35_total_depreciation_section_179_col_b",
+      "label": "Line 35 — Add lines 31 and 34, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line35[0].ColB[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 191.967
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.36_applicable_limit_col_a",
+      "label": "Line 36 — Enter the applicable limit explained in the line 36 instructions, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line36[0].ColA[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 167.966
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.36_applicable_limit_col_b",
+      "label": "Line 36 — Enter the applicable limit explained in the line 36 instructions, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line36[0].ColB[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 167.966
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.37_business_share_limit_col_a",
+      "label": "Line 37 — Multiply line 36 by the percentage on line 14, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line37[0].ColA[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 155.967
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.37_business_share_limit_col_b",
+      "label": "Line 37 — Multiply line 36 by the percentage on line 14, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line37[0].ColB[0].f2_53[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 155.967
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.38_allowed_depreciation_col_a",
+      "label": "Line 38 — Enter the smaller of line 35 or line 37, (a) Vehicle 1",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line38[0].ColA[0].f2_54[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 119.967
+      }
+    },
+    {
+      "fieldId": "form-2106.1.line.38_allowed_depreciation_col_b",
+      "label": "Line 38 — Enter the smaller of line 35 or line 37, (b) Vehicle 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_SectionD[0].Line38[0].ColB[0].f2_55[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 119.967
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/2106/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:38.003Z",
+    "totalFields": 82,
+    "skipped": 0,
+    "catalogEntries": 82
+  }
+}

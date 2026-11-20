@@ -1,0 +1,4353 @@
+{
+  "formId": "form-4255",
+  "fieldCount": 483,
+  "entries": [
+    {
+      "fieldId": "form-4255.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-14TJN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-1Y6XN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1a_form_7207_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1a[0].f1_03[0]",
+          "text": "2,424"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1a_form_7207_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1a[0].f1_04[0]",
+          "text": "8,227"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1a_form_7207_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1a[0].f1_05[0]",
+          "text": "3,649"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1a_form_7207_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1a[0].f1_06[0]",
+          "text": "4,930"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1a_form_7207_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1a[0].f1_07[0]",
+          "text": "4,639"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1a_form_7207_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1a[0].f1_08[0]",
+          "text": "8,457"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1b_form_3468_part_iii_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1b[0].f1_12[0]",
+          "text": "2,515"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1b_form_3468_part_iii_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1b[0].f1_13[0]",
+          "text": "6,284"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1b_form_3468_part_iii_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1b[0].f1_14[0]",
+          "text": "8,190"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1b_form_3468_part_iii_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1b[0].f1_15[0]",
+          "text": "1,745"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1b_form_3468_part_iii_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1b[0].f1_16[0]",
+          "text": "9,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1b_form_3468_part_iii_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1b[0].f1_17[0]",
+          "text": "8,378"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1b_form_3468_part_iii_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1b[0].f1_18[0]",
+          "text": "T-1E2ZH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1b_form_3468_part_iii_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1b[0].f1_19[0]",
+          "text": "5,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1b_form_3468_part_iii_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1b[0].f1_20[0]",
+          "text": "1,187"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1c_form_7210_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1c[0].f1_21[0]",
+          "text": "2,433"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1c_form_7210_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1c[0].f1_22[0]",
+          "text": "7,249"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1c_form_7210_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1c[0].f1_23[0]",
+          "text": "1,064"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1c_form_7210_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1c[0].f1_24[0]",
+          "text": "8,402"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1c_form_7210_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1c[0].f1_25[0]",
+          "text": "5,801"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1c_form_7210_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1c[0].f1_26[0]",
+          "text": "3,389"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1d_form_3468_part_iv_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1d[0].f1_30[0]",
+          "text": "5,923"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1d_form_3468_part_iv_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1d[0].f1_31[0]",
+          "text": "8,083"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1d_form_3468_part_iv_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1d[0].f1_32[0]",
+          "text": "4,410"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1d_form_3468_part_iv_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1d[0].f1_33[0]",
+          "text": "8,923"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1d_form_3468_part_iv_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1d[0].f1_34[0]",
+          "text": "9,341"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1d_form_3468_part_iv_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1d[0].f1_35[0]",
+          "text": "2,640"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1d_form_3468_part_iv_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1d[0].f1_36[0]",
+          "text": "T-1YD1V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1d_form_3468_part_iv_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1d[0].f1_37[0]",
+          "text": "8,159"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1d_form_3468_part_iv_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1d[0].f1_38[0]",
+          "text": "9,666"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1e_form_7218_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1e[0].f1_39[0]",
+          "text": "2,684"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1e_form_7218_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1e[0].f1_40[0]",
+          "text": "8,122"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1e_form_7218_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1e[0].f1_41[0]",
+          "text": "4,939"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1e_form_7218_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1e[0].f1_42[0]",
+          "text": "3,547"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1e_form_7218_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1e[0].f1_43[0]",
+          "text": "4,690"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1e_form_7218_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1e[0].f1_44[0]",
+          "text": "1,097"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1f_form_7213_part_ii_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1f[0].f1_48[0]",
+          "text": "1,192"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1f_form_7213_part_ii_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1f[0].f1_49[0]",
+          "text": "2,695"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1f_form_7213_part_ii_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1f[0].f1_50[0]",
+          "text": "6,832"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1f_form_7213_part_ii_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1f[0].f1_51[0]",
+          "text": "1,120"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1f_form_7213_part_ii_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1f[0].f1_52[0]",
+          "text": "7,903"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1f_form_7213_part_ii_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1f[0].f1_53[0]",
+          "text": "6,917"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1g_form_3468_part_v_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1g[0].f1_57[0]",
+          "text": "2,733"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1g_form_3468_part_v_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1g[0].f1_58[0]",
+          "text": "5,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1g_form_3468_part_v_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1g[0].f1_59[0]",
+          "text": "5,874"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1g_form_3468_part_v_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1g[0].f1_60[0]",
+          "text": "3,523"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1g_form_3468_part_v_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1g[0].f1_61[0]",
+          "text": "5,291"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1g_form_3468_part_v_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1g[0].f1_62[0]",
+          "text": "4,887"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1g_form_3468_part_v_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1g[0].f1_63[0]",
+          "text": "T-OZ7ER"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1g_form_3468_part_v_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1g[0].f1_64[0]",
+          "text": "8,091"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1g_form_3468_part_v_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1g[0].f1_65[0]",
+          "text": "2,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1h_form_8936_part_v_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1h[0].f1_66[0]",
+          "text": "1,536"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1h_form_8936_part_v_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1h[0].f1_67[0]",
+          "text": "8,171"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1h_form_8936_part_v_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1h[0].f1_68[0]",
+          "text": "2,743"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1h_form_8936_part_v_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1h[0].f1_69[0]",
+          "text": "2,160"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1h_form_8936_part_v_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1h[0].f1_70[0]",
+          "text": "7,572"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1h_form_8936_part_v_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1h[0].f1_71[0]",
+          "text": "9,698"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1h_form_8936_part_v_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1h[0].f1_72[0]",
+          "text": "T-11AMA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1h_form_8936_part_v_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1h[0].f1_73[0]",
+          "text": "9,724"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1h_form_8936_part_v_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1h[0].f1_74[0]",
+          "text": "4,595"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1i_form_7211_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1i[0].f1_75[0]",
+          "text": "3,902"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1i_form_7211_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1i[0].f1_76[0]",
+          "text": "4,539"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1i_form_7211_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1i[0].f1_77[0]",
+          "text": "5,063"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1i_form_7211_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1i[0].f1_78[0]",
+          "text": "6,209"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1i_form_7211_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1i[0].f1_79[0]",
+          "text": "7,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1i_form_7211_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1i[0].f1_80[0]",
+          "text": "7,450"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1j_form_3468_part_vi_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1j[0].f1_84[0]",
+          "text": "3,601"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1j_form_3468_part_vi_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1j[0].f1_85[0]",
+          "text": "2,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1j_form_3468_part_vi_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1j[0].f1_86[0]",
+          "text": "5,076"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1j_form_3468_part_vi_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1j[0].f1_87[0]",
+          "text": "4,238"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1j_form_3468_part_vi_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1j[0].f1_88[0]",
+          "text": "2,710"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1j_form_3468_part_vi_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1j[0].f1_89[0]",
+          "text": "8,993"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1j_form_3468_part_vi_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1j[0].f1_90[0]",
+          "text": "T-BABQ1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1j_form_3468_part_vi_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1j[0].f1_91[0]",
+          "text": "8,331"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1j_form_3468_part_vi_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1j[0].f1_92[0]",
+          "text": "1,138"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1k_form_8835_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1k[0].f1_93[0]",
+          "text": "2,961"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1k_form_8835_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1k[0].f1_94[0]",
+          "text": "7,848"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1k_form_8835_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1k[0].f1_95[0]",
+          "text": "2,573"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1k_form_8835_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1k[0].f1_96[0]",
+          "text": "3,216"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1k_form_8835_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1k[0].f1_97[0]",
+          "text": "9,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1k_form_8835_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1k[0].f1_98[0]",
+          "text": "4,596"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1l_form_3468_part_ii_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1l[0].f1_102[0]",
+          "text": "5,434"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1l_form_3468_part_ii_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1l[0].f1_106[0]",
+          "text": "6,620"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1l_form_3468_part_ii_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1l[0].f1_107[0]",
+          "text": "7,210"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1l_form_3468_part_ii_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1l[0].f1_108[0]",
+          "text": "T-C6XOM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1l_form_3468_part_ii_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1l[0].f1_109[0]",
+          "text": "7,986"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1l_form_3468_part_ii_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1l[0].f1_110[0]",
+          "text": "4,580"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1m_form_3468_part_vii_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1m[0].f1_111[0]",
+          "text": "9,066"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1m_form_3468_part_vii_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1m[0].f1_115[0]",
+          "text": "4,346"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1m_form_3468_part_vii_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1m[0].f1_116[0]",
+          "text": "1,319"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1m_form_3468_part_vii_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1m[0].f1_117[0]",
+          "text": "T-RB3V6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1m_form_3468_part_vii_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1m[0].f1_118[0]",
+          "text": "6,259"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1m_form_3468_part_vii_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1m[0].f1_119[0]",
+          "text": "2,468"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1z_other_line_1_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1z[0].f1_138[0]",
+          "text": "2,948"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1z_other_line_1_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1z[0].f1_139[0]",
+          "text": "2,308"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1z_other_line_1_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1z[0].f1_140[0]",
+          "text": "6,298"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1z_other_line_1_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1z[0].f1_141[0]",
+          "text": "2,530"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1z_other_line_1_amount_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1z[0].f1_142[0]",
+          "text": "4,900"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1z_other_line_1_amount_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1z[0].f1_143[0]",
+          "text": "1,876"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1z_other_line_1_amount_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1z[0].f1_144[0]",
+          "text": "T-15OJH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1z_other_line_1_amount_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1z[0].f1_145[0]",
+          "text": "5,287"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.1z_other_line_1_amount_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row1z[0].f1_146[0]",
+          "text": "8,974"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2a_form_8933_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2a[0].f1_147[0]",
+          "text": "8,414"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2a_form_8933_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2a[0].f1_148[0]",
+          "text": "8,530"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2a_form_8933_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2a[0].f1_149[0]",
+          "text": "7,925"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2a_form_8933_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2a[0].f1_150[0]",
+          "text": "4,255"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2a_form_8933_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2a[0].f1_151[0]",
+          "text": "7,701"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2a_form_8933_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2a[0].f1_152[0]",
+          "text": "2,983"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2a_form_8933_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2a[0].f1_153[0]",
+          "text": "T-16KK0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2a_form_8933_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2a[0].f1_154[0]",
+          "text": "4,043"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2a_form_8933_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2a[0].f1_155[0]",
+          "text": "1,524"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2b_form_8911_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2b[0].f1_156[0]",
+          "text": "4,518"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2b_form_8911_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2b[0].f1_157[0]",
+          "text": "4,667"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2b_form_8911_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2b[0].f1_158[0]",
+          "text": "5,635"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2b_form_8911_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2b[0].f1_159[0]",
+          "text": "9,809"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2b_form_8911_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2b[0].f1_160[0]",
+          "text": "6,305"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2b_form_8911_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2b[0].f1_161[0]",
+          "text": "6,830"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2b_form_8911_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2b[0].f1_162[0]",
+          "text": "T-VNEM0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2b_form_8911_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2b[0].f1_163[0]",
+          "text": "3,560"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2b_form_8911_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2b[0].f1_164[0]",
+          "text": "3,190"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2z_other_line_2_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2z[0].f1_165[0]",
+          "text": "4,890"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2z_other_line_2_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2z[0].f1_166[0]",
+          "text": "6,170"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2z_other_line_2_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2z[0].f1_167[0]",
+          "text": "6,936"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2z_other_line_2_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2z[0].f1_168[0]",
+          "text": "7,324"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2z_other_line_2_amount_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2z[0].f1_169[0]",
+          "text": "2,002"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2z_other_line_2_amount_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2z[0].f1_170[0]",
+          "text": "9,443"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2z_other_line_2_amount_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2z[0].f1_171[0]",
+          "text": "T-1AL2G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2z_other_line_2_amount_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2z[0].f1_172[0]",
+          "text": "9,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.2z_other_line_2_amount_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row2z[0].f1_173[0]",
+          "text": "6,043"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.3_total_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row3[0].f1_174[0]",
+          "text": "7,864"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.3_total_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row3[0].f1_175[0]",
+          "text": "9,280"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.3_total_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row3[0].f1_176[0]",
+          "text": "9,109"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.3_total_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row3[0].f1_177[0]",
+          "text": "2,702"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.3_total_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row3[0].f1_178[0]",
+          "text": "8,792"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.3_total_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row3[0].f1_179[0]",
+          "text": "6,365"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.3_total_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row3[0].f1_181[0]",
+          "text": "5,634"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.0.part1.3_total_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1_ColA-I[0].Row3[0].f1_182[0]",
+          "text": "7,421"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1a_form_7207_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1a[0].f2_04[0]",
+          "text": "5,803"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1a_form_7207_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1a[0].f2_05[0]",
+          "text": "8,897"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1a_form_7207_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1a[0].f2_07[0]",
+          "text": "2,761"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1a_form_7207_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1a[0].f2_08[0]",
+          "text": "2,763"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1a_form_7207_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1a[0].f2_09[0]",
+          "text": "5,167"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1b_form_3468_part_iii_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1b[0].f2_10[0]",
+          "text": "1,068"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1b_form_3468_part_iii_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1b[0].f2_11[0]",
+          "text": "5,038"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1b_form_3468_part_iii_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1b[0].f2_12[0]",
+          "text": "3,731"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1b_form_3468_part_iii_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1b[0].f2_13[0]",
+          "text": "3,088"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1b_form_3468_part_iii_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1b[0].f2_14[0]",
+          "text": "2,535"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1b_form_3468_part_iii_col_m3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1b[0].f2_15[0]",
+          "text": "5,546"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1b_form_3468_part_iii_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1b[0].f2_16[0]",
+          "text": "4,294"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1b_form_3468_part_iii_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1b[0].f2_17[0]",
+          "text": "7,309"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1b_form_3468_part_iii_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1b[0].f2_18[0]",
+          "text": "5,926"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1c_form_7210_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1c[0].f2_22[0]",
+          "text": "5,764"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1c_form_7210_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1c[0].f2_23[0]",
+          "text": "5,364"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1c_form_7210_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1c[0].f2_25[0]",
+          "text": "8,751"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1c_form_7210_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1c[0].f2_26[0]",
+          "text": "9,188"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1c_form_7210_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1c[0].f2_27[0]",
+          "text": "5,039"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1d_form_3468_part_iv_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1d[0].f2_28[0]",
+          "text": "5,911"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1d_form_3468_part_iv_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1d[0].f2_29[0]",
+          "text": "8,652"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1d_form_3468_part_iv_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1d[0].f2_30[0]",
+          "text": "6,526"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1d_form_3468_part_iv_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1d[0].f2_34[0]",
+          "text": "6,022"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1d_form_3468_part_iv_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1d[0].f2_35[0]",
+          "text": "4,271"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1d_form_3468_part_iv_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1d[0].f2_36[0]",
+          "text": "5,587"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1e_form_7218_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1e[0].f2_40[0]",
+          "text": "1,862"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1e_form_7218_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1e[0].f2_41[0]",
+          "text": "4,584"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1e_form_7218_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1e[0].f2_43[0]",
+          "text": "8,695"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1e_form_7218_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1e[0].f2_44[0]",
+          "text": "1,298"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1e_form_7218_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1e[0].f2_45[0]",
+          "text": "1,906"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1f_form_7213_part_ii_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1f[0].f2_49[0]",
+          "text": "8,442"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1f_form_7213_part_ii_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1f[0].f2_50[0]",
+          "text": "6,677"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1f_form_7213_part_ii_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1f[0].f2_52[0]",
+          "text": "2,860"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1f_form_7213_part_ii_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1f[0].f2_53[0]",
+          "text": "8,101"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1f_form_7213_part_ii_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1f[0].f2_54[0]",
+          "text": "4,140"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1g_form_3468_part_v_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1g[0].f2_55[0]",
+          "text": "3,435"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1g_form_3468_part_v_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1g[0].f2_56[0]",
+          "text": "3,247"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1g_form_3468_part_v_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1g[0].f2_57[0]",
+          "text": "3,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1g_form_3468_part_v_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1g[0].f2_58[0]",
+          "text": "2,026"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1g_form_3468_part_v_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1g[0].f2_59[0]",
+          "text": "5,962"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1g_form_3468_part_v_col_m3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1g[0].f2_60[0]",
+          "text": "1,660"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1g_form_3468_part_v_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1g[0].f2_61[0]",
+          "text": "2,250"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1g_form_3468_part_v_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1g[0].f2_62[0]",
+          "text": "3,633"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1g_form_3468_part_v_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1g[0].f2_63[0]",
+          "text": "7,670"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1h_form_8936_part_v_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1h[0].f2_64[0]",
+          "text": "2,896"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1h_form_8936_part_v_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1h[0].f2_65[0]",
+          "text": "9,019"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1h_form_8936_part_v_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1h[0].f2_66[0]",
+          "text": "5,830"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1h_form_8936_part_v_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1h[0].f2_70[0]",
+          "text": "2,441"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1h_form_8936_part_v_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1h[0].f2_71[0]",
+          "text": "8,002"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1h_form_8936_part_v_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1h[0].f2_72[0]",
+          "text": "4,421"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1i_form_7211_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1i[0].f2_76[0]",
+          "text": "1,782"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1i_form_7211_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1i[0].f2_77[0]",
+          "text": "1,489"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1i_form_7211_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1i[0].f2_79[0]",
+          "text": "5,965"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1i_form_7211_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1i[0].f2_80[0]",
+          "text": "9,480"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1i_form_7211_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1i[0].f2_81[0]",
+          "text": "6,943"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1j_form_3468_part_vi_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1j[0].f2_82[0]",
+          "text": "8,994"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1j_form_3468_part_vi_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1j[0].f2_83[0]",
+          "text": "6,085"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1j_form_3468_part_vi_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1j[0].f2_84[0]",
+          "text": "7,885"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1j_form_3468_part_vi_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1j[0].f2_85[0]",
+          "text": "8,558"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1j_form_3468_part_vi_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1j[0].f2_86[0]",
+          "text": "7,273"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1j_form_3468_part_vi_col_m3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1j[0].f2_87[0]",
+          "text": "9,467"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1j_form_3468_part_vi_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1j[0].f2_88[0]",
+          "text": "2,860"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1j_form_3468_part_vi_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1j[0].f2_89[0]",
+          "text": "6,815"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1j_form_3468_part_vi_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1j[0].f2_90[0]",
+          "text": "4,341"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1k_form_8835_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1k[0].f2_94[0]",
+          "text": "3,306"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1k_form_8835_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1k[0].f2_95[0]",
+          "text": "4,451"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1k_form_8835_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1k[0].f2_97[0]",
+          "text": "6,650"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1k_form_8835_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1k[0].f2_98[0]",
+          "text": "7,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1k_form_8835_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1k[0].f2_99[0]",
+          "text": "9,424"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1l_form_3468_part_ii_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1l[0].f2_100[0]",
+          "text": "7,435"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1m_form_3468_part_vii_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1m[0].f2_109[0]",
+          "text": "4,476"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1z_other_line_1_amount_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1z[0].f2_136[0]",
+          "text": "9,626"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1z_other_line_1_amount_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1z[0].f2_137[0]",
+          "text": "7,894"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1z_other_line_1_amount_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1z[0].f2_138[0]",
+          "text": "7,518"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1z_other_line_1_amount_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1z[0].f2_139[0]",
+          "text": "3,293"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1z_other_line_1_amount_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1z[0].f2_140[0]",
+          "text": "1,856"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1z_other_line_1_amount_col_m3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1z[0].f2_141[0]",
+          "text": "6,259"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1z_other_line_1_amount_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1z[0].f2_142[0]",
+          "text": "8,363"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1z_other_line_1_amount_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1z[0].f2_143[0]",
+          "text": "1,163"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.1z_other_line_1_amount_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row1z[0].f2_144[0]",
+          "text": "7,015"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2a_form_8933_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2a[0].f2_145[0]",
+          "text": "1,232"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2a_form_8933_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2a[0].f2_146[0]",
+          "text": "3,411"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2a_form_8933_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2a[0].f2_147[0]",
+          "text": "8,897"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2a_form_8933_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2a[0].f2_148[0]",
+          "text": "6,333"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2a_form_8933_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2a[0].f2_149[0]",
+          "text": "5,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2a_form_8933_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2a[0].f2_151[0]",
+          "text": "6,540"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2a_form_8933_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2a[0].f2_152[0]",
+          "text": "6,004"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2a_form_8933_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2a[0].f2_153[0]",
+          "text": "2,890"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2b_form_8911_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2b[0].f2_154[0]",
+          "text": "5,296"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2b_form_8911_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2b[0].f2_155[0]",
+          "text": "3,016"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2b_form_8911_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2b[0].f2_156[0]",
+          "text": "6,629"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2b_form_8911_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2b[0].f2_157[0]",
+          "text": "8,756"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2b_form_8911_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2b[0].f2_158[0]",
+          "text": "1,197"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2b_form_8911_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2b[0].f2_160[0]",
+          "text": "4,198"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2b_form_8911_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2b[0].f2_161[0]",
+          "text": "2,013"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2b_form_8911_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2b[0].f2_162[0]",
+          "text": "4,477"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2z_other_line_2_amount_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2z[0].f2_163[0]",
+          "text": "5,999"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2z_other_line_2_amount_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2z[0].f2_164[0]",
+          "text": "1,421"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2z_other_line_2_amount_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2z[0].f2_165[0]",
+          "text": "4,073"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2z_other_line_2_amount_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2z[0].f2_166[0]",
+          "text": "1,789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2z_other_line_2_amount_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2z[0].f2_167[0]",
+          "text": "4,467"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2z_other_line_2_amount_col_m3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2z[0].f2_168[0]",
+          "text": "2,308"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2z_other_line_2_amount_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2z[0].f2_169[0]",
+          "text": "2,220"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2z_other_line_2_amount_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2z[0].f2_170[0]",
+          "text": "2,277"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.2z_other_line_2_amount_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row2z[0].f2_171[0]",
+          "text": "5,125"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.3_total_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row3[0].f2_172[0]",
+          "text": "7,737"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.3_total_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row3[0].f2_173[0]",
+          "text": "5,502"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.3_total_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row3[0].f2_174[0]",
+          "text": "4,147"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.3_total_col_m1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row3[0].f2_175[0]",
+          "text": "6,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.3_total_col_m2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row3[0].f2_176[0]",
+          "text": "7,190"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.3_total_col_m3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row3[0].f2_177[0]",
+          "text": "6,809"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.3_total_col_n1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row3[0].f2_178[0]",
+          "text": "6,100"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.3_total_col_n2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row3[0].f2_179[0]",
+          "text": "9,926"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.1.part1.3_total_col_n3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part1_ColJ-N3[0].Row3[0].f2_180[0]",
+          "text": "3,090"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1a_form_7207_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1a[0].f3_07[0]",
+          "text": "3,972"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1a_form_7207_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1a[0].f3_08[0]",
+          "text": "1,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1a_form_7207_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1a[0].f3_09[0]",
+          "text": "2,528"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1a_form_7207_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1a[0].f3_10[0]",
+          "text": "2,639"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1b_form_3468_part_iii_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1b[0].f3_11[0]",
+          "text": "8,275"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1b_form_3468_part_iii_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1b[0].f3_12[0]",
+          "text": "2,381"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1b_form_3468_part_iii_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1b[0].f3_13[0]",
+          "text": "7,249"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1b_form_3468_part_iii_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1b[0].f3_14[0]",
+          "text": "4,286"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1b_form_3468_part_iii_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1b[0].f3_15[0]",
+          "text": "9,529"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1b_form_3468_part_iii_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1b[0].f3_16[0]",
+          "text": "1,048"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1b_form_3468_part_iii_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1b[0].f3_17[0]",
+          "text": "2,017"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1b_form_3468_part_iii_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1b[0].f3_18[0]",
+          "text": "7,499"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1b_form_3468_part_iii_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1b[0].f3_19[0]",
+          "text": "3,635"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1b_form_3468_part_iii_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1b[0].f3_20[0]",
+          "text": "7,628"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1c_form_7210_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1c[0].f3_21[0]",
+          "text": "6,820"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1c_form_7210_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1c[0].f3_22[0]",
+          "text": "3,957"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1c_form_7210_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1c[0].f3_23[0]",
+          "text": "6,176"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1c_form_7210_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1c[0].f3_24[0]",
+          "text": "2,442"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1c_form_7210_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1c[0].f3_25[0]",
+          "text": "2,037"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1c_form_7210_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1c[0].f3_26[0]",
+          "text": "2,516"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1c_form_7210_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1c[0].f3_27[0]",
+          "text": "8,313"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1c_form_7210_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1c[0].f3_28[0]",
+          "text": "6,776"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1c_form_7210_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1c[0].f3_29[0]",
+          "text": "3,342"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1c_form_7210_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1c[0].f3_30[0]",
+          "text": "1,601"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1d_form_3468_part_iv_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1d[0].f3_37[0]",
+          "text": "9,466"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1d_form_3468_part_iv_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1d[0].f3_38[0]",
+          "text": "2,979"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1d_form_3468_part_iv_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1d[0].f3_39[0]",
+          "text": "7,830"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1d_form_3468_part_iv_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1d[0].f3_40[0]",
+          "text": "2,407"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1e_form_7218_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1e[0].f3_41[0]",
+          "text": "4,999"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1e_form_7218_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1e[0].f3_42[0]",
+          "text": "5,293"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1e_form_7218_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1e[0].f3_43[0]",
+          "text": "1,876"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1e_form_7218_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1e[0].f3_44[0]",
+          "text": "1,793"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1e_form_7218_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1e[0].f3_45[0]",
+          "text": "5,630"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1e_form_7218_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1e[0].f3_46[0]",
+          "text": "8,195"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1e_form_7218_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1e[0].f3_47[0]",
+          "text": "3,578"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1e_form_7218_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1e[0].f3_48[0]",
+          "text": "8,365"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1e_form_7218_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1e[0].f3_49[0]",
+          "text": "4,245"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1e_form_7218_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1e[0].f3_50[0]",
+          "text": "2,520"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1f_form_7213_part_ii_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1f[0].f3_51[0]",
+          "text": "6,865"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1f_form_7213_part_ii_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1f[0].f3_52[0]",
+          "text": "6,166"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1f_form_7213_part_ii_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1f[0].f3_53[0]",
+          "text": "2,748"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1f_form_7213_part_ii_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1f[0].f3_57[0]",
+          "text": "1,282"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1f_form_7213_part_ii_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1f[0].f3_58[0]",
+          "text": "9,830"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1f_form_7213_part_ii_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1f[0].f3_59[0]",
+          "text": "6,492"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1f_form_7213_part_ii_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1f[0].f3_60[0]",
+          "text": "5,585"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1g_form_3468_part_v_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1g[0].f3_61[0]",
+          "text": "3,996"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1g_form_3468_part_v_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1g[0].f3_62[0]",
+          "text": "1,366"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1g_form_3468_part_v_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1g[0].f3_63[0]",
+          "text": "8,726"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1g_form_3468_part_v_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1g[0].f3_64[0]",
+          "text": "6,182"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1g_form_3468_part_v_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1g[0].f3_65[0]",
+          "text": "1,922"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1g_form_3468_part_v_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1g[0].f3_66[0]",
+          "text": "5,209"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1g_form_3468_part_v_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1g[0].f3_67[0]",
+          "text": "1,315"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1g_form_3468_part_v_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1g[0].f3_68[0]",
+          "text": "5,403"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1g_form_3468_part_v_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1g[0].f3_69[0]",
+          "text": "7,420"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1g_form_3468_part_v_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1g[0].f3_70[0]",
+          "text": "8,633"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1h_form_8936_part_v_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1h[0].f3_77[0]",
+          "text": "6,484"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1h_form_8936_part_v_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1h[0].f3_78[0]",
+          "text": "8,313"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1h_form_8936_part_v_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1h[0].f3_79[0]",
+          "text": "9,421"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1h_form_8936_part_v_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1h[0].f3_80[0]",
+          "text": "7,483"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1i_form_7211_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1i[0].f3_81[0]",
+          "text": "3,093"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1i_form_7211_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1i[0].f3_82[0]",
+          "text": "1,197"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1i_form_7211_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1i[0].f3_83[0]",
+          "text": "1,941"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1i_form_7211_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1i[0].f3_84[0]",
+          "text": "8,057"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1i_form_7211_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1i[0].f3_85[0]",
+          "text": "7,132"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1i_form_7211_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1i[0].f3_86[0]",
+          "text": "1,876"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1i_form_7211_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1i[0].f3_87[0]",
+          "text": "6,004"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1i_form_7211_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1i[0].f3_88[0]",
+          "text": "8,985"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1i_form_7211_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1i[0].f3_89[0]",
+          "text": "1,398"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1i_form_7211_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1i[0].f3_90[0]",
+          "text": "3,680"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1j_form_3468_part_vi_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1j[0].f3_91[0]",
+          "text": "5,126"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1j_form_3468_part_vi_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1j[0].f3_92[0]",
+          "text": "6,660"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1j_form_3468_part_vi_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1j[0].f3_93[0]",
+          "text": "9,004"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1j_form_3468_part_vi_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1j[0].f3_94[0]",
+          "text": "1,674"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1j_form_3468_part_vi_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1j[0].f3_95[0]",
+          "text": "6,732"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1j_form_3468_part_vi_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1j[0].f3_96[0]",
+          "text": "5,795"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1j_form_3468_part_vi_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1j[0].f3_97[0]",
+          "text": "4,196"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1j_form_3468_part_vi_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1j[0].f3_98[0]",
+          "text": "1,812"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1j_form_3468_part_vi_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1j[0].f3_99[0]",
+          "text": "7,382"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1j_form_3468_part_vi_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1j[0].f3_100[0]",
+          "text": "7,301"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1k_form_8835_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1k[0].f3_101[0]",
+          "text": "4,324"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1k_form_8835_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1k[0].f3_102[0]",
+          "text": "4,752"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1k_form_8835_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1k[0].f3_103[0]",
+          "text": "9,063"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1k_form_8835_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1k[0].f3_104[0]",
+          "text": "3,446"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1k_form_8835_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1k[0].f3_105[0]",
+          "text": "3,267"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1k_form_8835_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1k[0].f3_106[0]",
+          "text": "3,729"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1k_form_8835_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1k[0].f3_107[0]",
+          "text": "7,132"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1k_form_8835_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1k[0].f3_108[0]",
+          "text": "8,329"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1k_form_8835_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1k[0].f3_109[0]",
+          "text": "9,012"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1k_form_8835_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1k[0].f3_110[0]",
+          "text": "9,327"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1l_form_3468_part_ii_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1l[0].f3_118[0]",
+          "text": "5,297"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1m_form_3468_part_vii_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1m[0].f3_128[0]",
+          "text": "2,097"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1n_form_8908_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1n[0].f3_133[0]",
+          "text": "5,099"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1n_form_8908_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1n[0].f3_138[0]",
+          "text": "7,560"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1o_form_7205_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1o[0].f3_143[0]",
+          "text": "8,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1o_form_7205_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1o[0].f3_146[0]",
+          "text": "3,760"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1o_form_7205_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1o[0].f3_148[0]",
+          "text": "6,699"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1z_other_line_1_amount_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1z[0].f3_151[0]",
+          "text": "7,341"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1z_other_line_1_amount_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1z[0].f3_152[0]",
+          "text": "6,038"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1z_other_line_1_amount_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1z[0].f3_153[0]",
+          "text": "7,013"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1z_other_line_1_amount_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1z[0].f3_154[0]",
+          "text": "7,993"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1z_other_line_1_amount_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1z[0].f3_155[0]",
+          "text": "7,332"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1z_other_line_1_amount_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1z[0].f3_156[0]",
+          "text": "6,442"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1z_other_line_1_amount_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1z[0].f3_157[0]",
+          "text": "2,624"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1z_other_line_1_amount_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1z[0].f3_158[0]",
+          "text": "1,382"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1z_other_line_1_amount_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1z[0].f3_159[0]",
+          "text": "9,022"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.1z_other_line_1_amount_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row1z[0].f3_160[0]",
+          "text": "1,290"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2a_form_8933_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2a[0].f3_161[0]",
+          "text": "7,719"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2a_form_8933_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2a[0].f3_162[0]",
+          "text": "7,025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2a_form_8933_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2a[0].f3_163[0]",
+          "text": "8,959"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2a_form_8933_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2a[0].f3_164[0]",
+          "text": "8,421"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2a_form_8933_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2a[0].f3_165[0]",
+          "text": "1,555"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2a_form_8933_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2a[0].f3_166[0]",
+          "text": "3,765"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2a_form_8933_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2a[0].f3_167[0]",
+          "text": "9,924"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2a_form_8933_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2a[0].f3_168[0]",
+          "text": "8,612"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2a_form_8933_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2a[0].f3_169[0]",
+          "text": "9,766"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2a_form_8933_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2a[0].f3_170[0]",
+          "text": "7,605"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2b_form_8911_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2b[0].f3_171[0]",
+          "text": "4,058"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2b_form_8911_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2b[0].f3_172[0]",
+          "text": "5,476"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2b_form_8911_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2b[0].f3_173[0]",
+          "text": "4,623"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2b_form_8911_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2b[0].f3_174[0]",
+          "text": "7,177"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2b_form_8911_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2b[0].f3_175[0]",
+          "text": "7,407"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2b_form_8911_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2b[0].f3_176[0]",
+          "text": "1,842"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2b_form_8911_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2b[0].f3_177[0]",
+          "text": "3,215"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2b_form_8911_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2b[0].f3_178[0]",
+          "text": "5,316"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2b_form_8911_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2b[0].f3_179[0]",
+          "text": "2,926"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2b_form_8911_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2b[0].f3_180[0]",
+          "text": "6,399"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2z_other_line_2_amount_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2z[0].f3_181[0]",
+          "text": "1,414"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2z_other_line_2_amount_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2z[0].f3_182[0]",
+          "text": "9,625"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2z_other_line_2_amount_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2z[0].f3_183[0]",
+          "text": "1,490"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2z_other_line_2_amount_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2z[0].f3_184[0]",
+          "text": "4,311"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2z_other_line_2_amount_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2z[0].f3_185[0]",
+          "text": "9,833"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2z_other_line_2_amount_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2z[0].f3_186[0]",
+          "text": "4,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2z_other_line_2_amount_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2z[0].f3_187[0]",
+          "text": "4,296"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2z_other_line_2_amount_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2z[0].f3_188[0]",
+          "text": "7,938"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2z_other_line_2_amount_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2z[0].f3_189[0]",
+          "text": "4,597"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.2z_other_line_2_amount_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row2z[0].f3_190[0]",
+          "text": "9,475"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.3_total_col_o1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row3[0].f3_191[0]",
+          "text": "5,643"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.3_total_col_o2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row3[0].f3_192[0]",
+          "text": "4,578"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.3_total_col_o3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row3[0].f3_193[0]",
+          "text": "5,729"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.3_total_col_p1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row3[0].f3_194[0]",
+          "text": "2,469"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.3_total_col_p2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row3[0].f3_195[0]",
+          "text": "8,755"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.3_total_col_p3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row3[0].f3_196[0]",
+          "text": "4,779"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.3_total_col_q",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row3[0].f3_197[0]",
+          "text": "3,397"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.3_total_col_r",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row3[0].f3_198[0]",
+          "text": "3,457"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.3_total_col_s",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row3[0].f3_199[0]",
+          "text": "6,866"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.2.part1.3_total_col_t",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Part1_ColO1-T[0].Row3[0].f3_200[0]",
+          "text": "8,700"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.1_original_rate_of_credit_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line1[0].f4_05[0]",
+          "text": "T-1UDNP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.1_original_rate_of_credit_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line1[0].f4_06[0]",
+          "text": "T-7HUN4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.1_original_rate_of_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line1[0].f4_07[0]",
+          "text": "T-1FTIR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.1_original_rate_of_credit_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line1[0].f4_08[0]",
+          "text": "T-W0N2B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.10_date_placed_in_service_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line10[0].f4_41[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.10_date_placed_in_service_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line10[0].f4_42[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.10_date_placed_in_service_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line10[0].f4_43[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.10_date_placed_in_service_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line10[0].f4_44[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.11_date_ceased_to_qualify_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line11[0].f4_45[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.11_date_ceased_to_qualify_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line11[0].f4_46[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.11_date_ceased_to_qualify_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line11[0].f4_47[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.11_date_ceased_to_qualify_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line11[0].f4_48[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.12_full_years_in_service_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line12[0].f4_49[0]",
+          "text": "4,544"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.12_full_years_in_service_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line12[0].f4_50[0]",
+          "text": "6,376"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.12_full_years_in_service_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line12[0].f4_51[0]",
+          "text": "1,425"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.12_full_years_in_service_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line12[0].f4_52[0]",
+          "text": "7,829"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.13_unused_credits_without_property_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line13[0].f4_53[0]",
+          "text": "3,310"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.13_unused_credits_without_property_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line13[0].f4_54[0]",
+          "text": "8,458"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.13_unused_credits_without_property_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line13[0].f4_55[0]",
+          "text": "2,521"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.13_unused_credits_without_property_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line13[0].f4_56[0]",
+          "text": "8,411"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.14_line_6_minus_line_13_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line14[0].f4_57[0]",
+          "text": "8,140"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.14_line_6_minus_line_13_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line14[0].f4_58[0]",
+          "text": "9,081"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.14_line_6_minus_line_13_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line14[0].f4_59[0]",
+          "text": "6,220"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.14_line_6_minus_line_13_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line14[0].f4_60[0]",
+          "text": "5,031"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.15_recapture_percentage_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line15[0].f4_61[0]",
+          "text": "T-1X03T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.15_recapture_percentage_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line15[0].f4_62[0]",
+          "text": "T-10IVJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.15_recapture_percentage_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line15[0].f4_63[0]",
+          "text": "T-9JO91"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.15_recapture_percentage_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line15[0].f4_64[0]",
+          "text": "T-1U5IL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.16_recapture_tax_disposition_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line16[0].f4_65[0]",
+          "text": "9,684"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.16_recapture_tax_disposition_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line16[0].f4_66[0]",
+          "text": "2,812"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.16_recapture_tax_disposition_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line16[0].f4_67[0]",
+          "text": "3,299"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.16_recapture_tax_disposition_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line16[0].f4_68[0]",
+          "text": "2,682"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.17_irs_registration_number_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line17[0].f4_69[0]",
+          "text": "T-2KP9E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.17_irs_registration_number_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line17[0].f4_70[0]",
+          "text": "T-1LP6E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.17_irs_registration_number_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line17[0].f4_71[0]",
+          "text": "T-1HRLD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.17_irs_registration_number_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionD[0].Line17[0].f4_72[0]",
+          "text": "T-2SQ8X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.18_total_line_9_all_properties",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_73[0]",
+          "text": "5,344"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.19_total_line_16_all_properties",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_74[0]",
+          "text": "7,092"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.2_credit_base_previous_year_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line2[0].f4_09[0]",
+          "text": "4,926"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.2_credit_base_previous_year_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line2[0].f4_10[0]",
+          "text": "3,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.2_credit_base_previous_year_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line2[0].f4_11[0]",
+          "text": "7,921"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.2_credit_base_previous_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line2[0].f4_12[0]",
+          "text": "4,219"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.20_total_increase_in_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_75[0]",
+          "text": "7,878"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.3_net_change_nonrecourse_financing_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line3[0].f4_13[0]",
+          "text": "7,760"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.3_net_change_nonrecourse_financing_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line3[0].f4_14[0]",
+          "text": "5,010"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.3_net_change_nonrecourse_financing_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line3[0].f4_15[0]",
+          "text": "8,454"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.3_net_change_nonrecourse_financing_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line3[0].f4_16[0]",
+          "text": "1,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.4_credit_base_current_year_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line4[0].f4_17[0]",
+          "text": "1,127"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.4_credit_base_current_year_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line4[0].f4_18[0]",
+          "text": "7,315"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.4_credit_base_current_year_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line4[0].f4_19[0]",
+          "text": "6,070"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.4_credit_base_current_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line4[0].f4_20[0]",
+          "text": "1,910"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.5_refigured_credit_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line5[0].f4_21[0]",
+          "text": "9,904"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.5_refigured_credit_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line5[0].f4_22[0]",
+          "text": "5,236"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.5_refigured_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line5[0].f4_23[0]",
+          "text": "4,328"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.5_refigured_credit_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line5[0].f4_24[0]",
+          "text": "7,074"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.6_credit_taken_prior_years_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line6[0].f4_25[0]",
+          "text": "6,942"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.6_credit_taken_prior_years_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line6[0].f4_26[0]",
+          "text": "4,097"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.6_credit_taken_prior_years_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line6[0].f4_27[0]",
+          "text": "7,853"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.6_credit_taken_prior_years_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].SectionC_ReadOrder[0].Table_SectionB[0].Line6[0].f4_28[0]",
+          "text": "9,828"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.7_credit_subject_to_recapture_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line7[0].f3_29[0]",
+          "text": "9,902"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.7_credit_subject_to_recapture_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line7[0].f3_30[0]",
+          "text": "8,589"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.7_credit_subject_to_recapture_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line7[0].f3_31[0]",
+          "text": "9,995"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.7_credit_subject_to_recapture_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line7[0].f3_32[0]",
+          "text": "8,513"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.8_unused_credits_current_base_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line8[0].f3_33[0]",
+          "text": "8,807"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.8_unused_credits_current_base_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line8[0].f3_34[0]",
+          "text": "2,549"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.8_unused_credits_current_base_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line8[0].f3_35[0]",
+          "text": "2,548"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.8_unused_credits_current_base_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line8[0].f3_36[0]",
+          "text": "3,906"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.9_recapture_tax_nonrecourse_financing_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line9[0].f3_37[0]",
+          "text": "7,418"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.9_recapture_tax_nonrecourse_financing_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line9[0].f3_38[0]",
+          "text": "4,651"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.9_recapture_tax_nonrecourse_financing_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line9[0].f3_39[0]",
+          "text": "7,700"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.9_recapture_tax_nonrecourse_financing_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionC[0].Line9[0].f3_40[0]",
+          "text": "8,550"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.section_a_property_a_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionA[0].RowA[0].f4_01[0]",
+          "text": "T-OPND6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.section_a_property_b_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionA[0].RowB[0].f4_02[0]",
+          "text": "T-KPTMX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.section_a_property_c_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionA[0].RowC[0].f4_03[0]",
+          "text": "T-XQ1S2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.3.part2.section_a_property_d_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_SectionA[0].RowD[0].f4_04[0]",
+          "text": "T-MCSP5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.4.part3.1_designed_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_01[0]",
+          "text": "T-ZYA2R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.4.part3.2_basis_property_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_02[0]",
+          "text": "2,833"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.4.part3.3_energy_percentage_credit_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_03[0]",
+          "text": "T-1JFFT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.4.part3.4_basis_times_energy_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_04[0]",
+          "text": "8,802"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.4.part3.5_current_year_emissions_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_05[0]",
+          "text": "T-1Q05K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.4.part3.6_current_year_energy_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_06[0]",
+          "text": "T-1SDRR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.4.part3.7_current_percentage_times_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_07[0]",
+          "text": "5,894"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.4.part3.8_credit_difference",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_08[0]",
+          "text": "1,607"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4255.4.part3.9_emissions_tier_recapture_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page5[0].f5_09[0]",
+          "text": "1,757"
+        }
+      ]
+    }
+  ]
+}

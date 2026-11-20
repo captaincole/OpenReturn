@@ -1,0 +1,348 @@
+{
+  "formId": "form-8853",
+  "fieldCount": 38,
+  "entries": [
+    {
+      "fieldId": "form-8853.0.header.msa_account_holder_ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-RP3G0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.1_employer_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "5,098"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.10_total_medicare_advantage_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "6,733"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.11_medicare_advantage_medical_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "2,802"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.12_taxable_medicare_advantage_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "7,606"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.13a_exception_additional_50_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line13a_ReadOrder[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.13b_additional_50_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "7,280"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.2_archer_msa_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "1,949"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.3_limitation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "1,925"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.4_compensation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "1,296"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.5_archer_msa_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "2,273"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.6a_total_archer_msa_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "2,886"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.6b_rollovers_excess_withdrawn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "9,234"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.6c_net_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "5,730"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.7_archer_qualified_medical_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "5,231"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.8_taxable_archer_msa_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "4,139"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.9a_exception_additional_20_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line9a_ReadOrder[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.0.line.9b_additional_20_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "3,394"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.header.more_than_one_section_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.header.policyholder_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "T-1FZO8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.header.policyholder_ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.14a_insured_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "T-BZNBV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.14b_insured_ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.15_other_person_received_payments_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.15_other_person_received_payments_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.16_insured_terminally_ill_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.16_insured_terminally_ill_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.17_gross_ltc_per_diem_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "7,622"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.18_qualified_ltc_contract_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "3,244"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.19_accelerated_death_benefits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "6,643"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.20_total_per_diem_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "5,157"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.21_per_day_limit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "8,247"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.22_qualified_ltc_service_costs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "7,986"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.23_larger_of_line_21_or_22",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "4,621"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.24_ltc_service_reimbursements",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "6,261"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.25_per_diem_limitation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "3,869"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8853.1.line.26_taxable_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "3,411"
+        }
+      ]
+    }
+  ]
+}

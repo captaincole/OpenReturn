@@ -1,0 +1,2490 @@
+{
+  "formId": "form-4136",
+  "fieldCount": 276,
+  "entries": [
+    {
+      "fieldId": "form-4136.0.header.a_qualifying_business_activity_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.header.a_qualifying_business_activity_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.header.b_number_of_business_activities",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "7,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.header.c_business_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-4PDY6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.header.d_business_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-FLVBN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.header.e_principal_business_activity_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-XC6CF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.header.f_i_equipment_make",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "T-1CCQ3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.header.f_ii_equipment_model",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-D62VG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.header.f_iii_equipment_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "T-9ESA5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.header.taxpayer_identification_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-1N37C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-JPTCX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1a_gasoline_off_highway_business_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1a[0].f1_12[0]",
+          "text": "3,661"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1b_gasoline_farm_use_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1b[0].f1_15[0]",
+          "text": "2,962"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].f1_17[0]",
+          "text": "T-1YG7I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].f1_19[0]",
+          "text": "5,794"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].ColD[0].f1_20[0]",
+          "text": "6,321"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].ColD[0].f1_21[0]",
+          "text": "372"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].ColE[0].f1_22[0]",
+          "text": "1,027"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1c_gasoline_other_nontaxable_use_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1c[0].ColE[0].f1_23[0]",
+          "text": "325"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1d_gasoline_exported_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].f1_26[0]",
+          "text": "3,063"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1d_gasoline_exported_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].ColD[0].f1_27[0]",
+          "text": "8,601"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1d_gasoline_exported_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].ColD[0].f1_28[0]",
+          "text": "936"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1d_gasoline_exported_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].ColE[0].f1_29[0]",
+          "text": "9,180"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.1d_gasoline_exported_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].Line1d[0].ColE[0].f1_30[0]",
+          "text": "508"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2a_aviation_gasoline_commercial_aviation_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].f1_34[0]",
+          "text": "2,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2a_aviation_gasoline_commercial_aviation_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].ColD[0].f1_35[0]",
+          "text": "2,413"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2a_aviation_gasoline_commercial_aviation_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].ColD[0].f1_36[0]",
+          "text": "561"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2a_aviation_gasoline_commercial_aviation_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].ColE[0].f1_37[0]",
+          "text": "6,927"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2a_aviation_gasoline_commercial_aviation_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2a[0].ColE[0].f1_38[0]",
+          "text": "961"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].f1_40[0]",
+          "text": "T-181LU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].f1_42[0]",
+          "text": "2,969"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].ColD[0].f1_43[0]",
+          "text": "3,862"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].ColD[0].f1_44[0]",
+          "text": "367"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].ColE[0].f1_45[0]",
+          "text": "5,500"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2b_aviation_gasoline_other_nontaxable_use_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2b[0].ColE[0].f1_46[0]",
+          "text": "952"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2c_aviation_gasoline_exported_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].f1_50[0]",
+          "text": "8,024"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2c_aviation_gasoline_exported_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].ColD[0].f1_51[0]",
+          "text": "5,109"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2c_aviation_gasoline_exported_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].ColD[0].f1_52[0]",
+          "text": "924"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2c_aviation_gasoline_exported_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].ColE[0].f1_53[0]",
+          "text": "3,135"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2c_aviation_gasoline_exported_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2c[0].ColE[0].f1_54[0]",
+          "text": "168"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2d_aviation_gasoline_lust_foreign_trade_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].f1_58[0]",
+          "text": "1,047"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2d_aviation_gasoline_lust_foreign_trade_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].ColD[0].f1_59[0]",
+          "text": "3,522"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2d_aviation_gasoline_lust_foreign_trade_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].ColD[0].f1_60[0]",
+          "text": "837"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2d_aviation_gasoline_lust_foreign_trade_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].ColE[0].f1_61[0]",
+          "text": "7,001"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.2d_aviation_gasoline_lust_foreign_trade_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line2[0].Line2d[0].ColE[0].f1_62[0]",
+          "text": "785"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3_undyed_diesel_dye_exception",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3a_undyed_diesel_nontaxable_use_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3a[0].f1_64[0]",
+          "text": "T-FWKWC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3a_undyed_diesel_nontaxable_use_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3a[0].f1_66[0]",
+          "text": "1,981"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3b_undyed_diesel_farm_use_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3b[0].f1_69[0]",
+          "text": "2,358"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3b_undyed_diesel_farm_use_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3b[0].ColD[0].f1_70[0]",
+          "text": "4,750"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3b_undyed_diesel_farm_use_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3b[0].ColD[0].f1_71[0]",
+          "text": "118"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3b_undyed_diesel_farm_use_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3b[0].ColE[0].f1_72[0]",
+          "text": "9,444"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3b_undyed_diesel_farm_use_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3b[0].ColE[0].f1_73[0]",
+          "text": "410"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3c_undyed_diesel_trains_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3c[0].f1_77[0]",
+          "text": "1,622"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3c_undyed_diesel_trains_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3c[0].ColD[0].f1_78[0]",
+          "text": "4,415"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3c_undyed_diesel_trains_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3c[0].ColD[0].f1_79[0]",
+          "text": "555"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3c_undyed_diesel_trains_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3c[0].ColE[0].f1_80[0]",
+          "text": "3,381"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3c_undyed_diesel_trains_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3c[0].ColE[0].f1_81[0]",
+          "text": "537"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3d_undyed_diesel_intercity_local_buses_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3d[0].f1_85[0]",
+          "text": "2,454"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3d_undyed_diesel_intercity_local_buses_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3d[0].ColD[0].f1_86[0]",
+          "text": "7,168"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3d_undyed_diesel_intercity_local_buses_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3d[0].ColD[0].f1_87[0]",
+          "text": "821"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3d_undyed_diesel_intercity_local_buses_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3d[0].ColE[0].f1_88[0]",
+          "text": "5,094"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3d_undyed_diesel_intercity_local_buses_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3d[0].ColE[0].f1_89[0]",
+          "text": "840"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3e_undyed_diesel_exported_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3e[0].f1_93[0]",
+          "text": "5,322"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3e_undyed_diesel_exported_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3e[0].ColD[0].f1_94[0]",
+          "text": "1,947"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3e_undyed_diesel_exported_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3e[0].ColD[0].f1_95[0]",
+          "text": "596"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3e_undyed_diesel_exported_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3e[0].ColE[0].f1_96[0]",
+          "text": "1,199"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.0.line.3e_undyed_diesel_exported_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line3[0].Line3e[0].ColE[0].f1_97[0]",
+          "text": "598"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4_kerosene_dye_exception",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4a_nontaxable_use_244_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4a[0].f2_1[0]",
+          "text": "T-ANX72"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4a_nontaxable_use_244_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4a[0].f2_3[0]",
+          "text": "8,433"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4b_farm_use_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4b[0].f2_6[0]",
+          "text": "4,811"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4b_farm_use_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4b[0].ColD[0].f2_7[0]",
+          "text": "7,377"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4b_farm_use_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4b[0].ColD[0].f2_8[0]",
+          "text": "555"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4b_farm_use_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4b[0].ColE[0].f2_9[0]",
+          "text": "8,244"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4b_farm_use_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4b[0].ColE[0].f2_10[0]",
+          "text": "834"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4c_intercity_local_buses_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4c[0].f2_14[0]",
+          "text": "3,405"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4c_intercity_local_buses_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4c[0].ColD[0].f2_15[0]",
+          "text": "3,267"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4c_intercity_local_buses_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4c[0].ColD[0].f2_16[0]",
+          "text": "579"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4c_intercity_local_buses_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4c[0].ColE[0].f2_17[0]",
+          "text": "4,831"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4c_intercity_local_buses_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4c[0].ColE[0].f2_18[0]",
+          "text": "203"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4d_exported_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4d[0].f2_22[0]",
+          "text": "4,229"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4d_exported_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4d[0].ColD[0].f2_23[0]",
+          "text": "2,311"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4d_exported_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4d[0].ColD[0].f2_24[0]",
+          "text": "539"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4d_exported_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4d[0].ColE[0].f2_25[0]",
+          "text": "6,883"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4d_exported_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4d[0].ColE[0].f2_26[0]",
+          "text": "390"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].f2_28[0]",
+          "text": "T-TFAGI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].f2_30[0]",
+          "text": "2,181"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].ColD[0].f2_31[0]",
+          "text": "9,585"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].ColD[0].f2_32[0]",
+          "text": "716"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].ColE[0].f2_33[0]",
+          "text": "5,432"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4e_nontaxable_use_044_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4e[0].ColE[0].f2_34[0]",
+          "text": "665"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].f2_36[0]",
+          "text": "T-1MR4C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].f2_38[0]",
+          "text": "3,158"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].ColD[0].f2_39[0]",
+          "text": "2,244"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].ColD[0].f2_40[0]",
+          "text": "474"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].ColE[0].f2_41[0]",
+          "text": "3,874"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.4f_nontaxable_use_219_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line4[0].Line4f[0].ColE[0].f2_42[0]",
+          "text": "879"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5a_commercial_aviation_244_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].f2_46[0]",
+          "text": "1,037"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5a_commercial_aviation_244_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].ColD[0].f2_47[0]",
+          "text": "3,106"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5a_commercial_aviation_244_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].ColD[0].f2_48[0]",
+          "text": "329"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5a_commercial_aviation_244_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].ColE[0].f2_49[0]",
+          "text": "7,385"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5a_commercial_aviation_244_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5a[0].ColE[0].f2_50[0]",
+          "text": "923"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5b_commercial_aviation_219_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].f2_54[0]",
+          "text": "3,120"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5b_commercial_aviation_219_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].ColD[0].f2_55[0]",
+          "text": "2,903"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5b_commercial_aviation_219_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].ColD[0].f2_56[0]",
+          "text": "580"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5b_commercial_aviation_219_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].ColE[0].f2_57[0]",
+          "text": "4,723"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5b_commercial_aviation_219_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5b[0].ColE[0].f2_58[0]",
+          "text": "619"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].f2_60[0]",
+          "text": "T-11W0X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].f2_62[0]",
+          "text": "3,587"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].ColD[0].f2_63[0]",
+          "text": "1,921"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].ColD[0].f2_64[0]",
+          "text": "949"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].ColE[0].f2_65[0]",
+          "text": "8,075"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5c_nontaxable_use_244_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5c[0].ColE[0].f2_66[0]",
+          "text": "173"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].f2_68[0]",
+          "text": "T-LKIO1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].f2_70[0]",
+          "text": "5,522"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].ColD[0].f2_71[0]",
+          "text": "5,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].ColD[0].f2_72[0]",
+          "text": "212"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].ColE[0].f2_73[0]",
+          "text": "6,166"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5d_nontaxable_use_219_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5d[0].ColE[0].f2_74[0]",
+          "text": "802"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5e_lust_tax_foreign_trade_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5e[0].f2_78[0]",
+          "text": "2,260"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5e_lust_tax_foreign_trade_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5e[0].ColD[0].f2_79[0]",
+          "text": "3,488"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5e_lust_tax_foreign_trade_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5e[0].ColD[0].f2_80[0]",
+          "text": "696"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5e_lust_tax_foreign_trade_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5e[0].ColE[0].f2_81[0]",
+          "text": "9,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.5e_lust_tax_foreign_trade_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line5[0].Line5e[0].ColE[0].f2_82[0]",
+          "text": "032"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6_diesel_dye_exception",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6_diesel_vendor_registration_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_84[0]",
+          "text": "T-8O3MF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6a_state_local_government_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].f2_86[0]",
+          "text": "2,210"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6a_state_local_government_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].ColD[0].f2_87[0]",
+          "text": "4,530"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6a_state_local_government_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].ColD[0].f2_88[0]",
+          "text": "034"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6a_state_local_government_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].ColE[0].f2_89[0]",
+          "text": "5,400"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6a_state_local_government_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6a[0].ColE[0].f2_90[0]",
+          "text": "032"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6b_intercity_local_buses_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].f2_93[0]",
+          "text": "4,280"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6b_intercity_local_buses_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].ColD[0].f2_94[0]",
+          "text": "1,544"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6b_intercity_local_buses_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].ColD[0].f2_95[0]",
+          "text": "798"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6b_intercity_local_buses_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].ColE[0].f2_96[0]",
+          "text": "2,469"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.6b_intercity_local_buses_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line6[0].Line6b[0].ColE[0].f2_97[0]",
+          "text": "017"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7_kerosene_dye_exception",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7_kerosene_vendor_registration_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_99[0]",
+          "text": "T-1P2WV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7a_state_local_government_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7a[0].f2_101[0]",
+          "text": "7,805"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7b_blocked_pump_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7b[0].f2_103[0]",
+          "text": "7,928"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7b_blocked_pump_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7b[0].ColD[0].f2_104[0]",
+          "text": "3,046"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7b_blocked_pump_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7b[0].ColD[0].f2_105[0]",
+          "text": "243"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7b_blocked_pump_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7b[0].ColE[0].f2_106[0]",
+          "text": "1,988"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7b_blocked_pump_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7b[0].ColE[0].f2_107[0]",
+          "text": "455"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7c_intercity_local_buses_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7c[0].f2_110[0]",
+          "text": "1,590"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7c_intercity_local_buses_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7c[0].ColD[0].f2_111[0]",
+          "text": "9,938"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7c_intercity_local_buses_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7c[0].ColD[0].f2_112[0]",
+          "text": "452"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7c_intercity_local_buses_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7c[0].ColE[0].f2_113[0]",
+          "text": "5,839"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.1.line.7c_intercity_local_buses_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line7[0].Line7c[0].ColE[0].f2_114[0]",
+          "text": "819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].f3_79[0]",
+          "text": "T-1ABMI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].f3_81[0]",
+          "text": "6,729"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].ColD[0].f3_82[0]",
+          "text": "2,669"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].ColD[0].f3_83[0]",
+          "text": "091"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].ColE[0].f3_84[0]",
+          "text": "9,986"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11a_lpg_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11a[0].ColE[0].f3_85[0]",
+          "text": "246"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].f3_87[0]",
+          "text": "T-1W7IW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].f3_89[0]",
+          "text": "4,732"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].ColD[0].f3_90[0]",
+          "text": "2,774"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].ColD[0].f3_91[0]",
+          "text": "110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].ColE[0].f3_92[0]",
+          "text": "5,965"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11b_p_series_fuels_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11b[0].ColE[0].f3_93[0]",
+          "text": "962"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].f3_95[0]",
+          "text": "T-KIWKC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].f3_97[0]",
+          "text": "2,780"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].ColD[0].f3_98[0]",
+          "text": "1,407"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].ColD[0].f3_99[0]",
+          "text": "861"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].ColE[0].f3_100[0]",
+          "text": "5,512"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11c_cng_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11c[0].ColE[0].f3_101[0]",
+          "text": "344"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].f3_103[0]",
+          "text": "T-EZKY1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].f3_105[0]",
+          "text": "5,942"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].ColD[0].f3_106[0]",
+          "text": "1,118"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].ColD[0].f3_107[0]",
+          "text": "496"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].ColE[0].f3_108[0]",
+          "text": "8,332"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11d_liquefied_hydrogen_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11d[0].ColE[0].f3_109[0]",
+          "text": "215"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].f3_111[0]",
+          "text": "T-1BGS7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].f3_113[0]",
+          "text": "7,217"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].ColD[0].f3_114[0]",
+          "text": "5,783"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].ColD[0].f3_115[0]",
+          "text": "200"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].ColE[0].f3_116[0]",
+          "text": "4,020"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11e_fischer_tropsch_coal_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11e[0].ColE[0].f3_117[0]",
+          "text": "145"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].f3_119[0]",
+          "text": "T-2AQI9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].f3_121[0]",
+          "text": "6,783"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].ColD[0].f3_122[0]",
+          "text": "2,852"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].ColD[0].f3_123[0]",
+          "text": "870"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].ColE[0].f3_124[0]",
+          "text": "6,520"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11f_biomass_liquid_fuel_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11f[0].ColE[0].f3_125[0]",
+          "text": "562"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].f3_127[0]",
+          "text": "T-DC3FQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].f3_129[0]",
+          "text": "2,291"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].ColD[0].f3_130[0]",
+          "text": "4,882"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].ColD[0].f3_131[0]",
+          "text": "977"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].ColE[0].f3_132[0]",
+          "text": "9,963"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11g_lng_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11g[0].ColE[0].f3_133[0]",
+          "text": "954"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].f3_135[0]",
+          "text": "T-1GE2L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].f3_137[0]",
+          "text": "1,048"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].ColD[0].f3_138[0]",
+          "text": "5,342"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].ColD[0].f3_139[0]",
+          "text": "229"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].ColE[0].f3_140[0]",
+          "text": "8,578"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.11h_biomass_liquefied_gas_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line11[0].Line11h[0].ColE[0].f3_141[0]",
+          "text": "482"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+          "text": "T-1BMFM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8a_commercial_aviation_219_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8a[0].f3_4[0]",
+          "text": "2,059"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8a_commercial_aviation_219_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8a[0].ColD[0].f3_5[0]",
+          "text": "9,974"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8a_commercial_aviation_219_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8a[0].ColD[0].f3_6[0]",
+          "text": "134"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8a_commercial_aviation_219_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8a[0].ColE[0].f3_7[0]",
+          "text": "3,967"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8a_commercial_aviation_219_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8a[0].ColE[0].f3_8[0]",
+          "text": "001"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8b_commercial_aviation_244_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8b[0].f3_12[0]",
+          "text": "9,890"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8b_commercial_aviation_244_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8b[0].ColD[0].f3_13[0]",
+          "text": "5,102"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8b_commercial_aviation_244_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8b[0].ColD[0].f3_14[0]",
+          "text": "077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8b_commercial_aviation_244_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8b[0].ColE[0].f3_15[0]",
+          "text": "2,462"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8b_commercial_aviation_244_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8b[0].ColE[0].f3_16[0]",
+          "text": "022"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8c_nonexempt_noncommercial_aviation_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8c[0].f3_20[0]",
+          "text": "9,651"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8c_nonexempt_noncommercial_aviation_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8c[0].ColD[0].f3_21[0]",
+          "text": "5,341"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8c_nonexempt_noncommercial_aviation_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8c[0].ColD[0].f3_22[0]",
+          "text": "493"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8c_nonexempt_noncommercial_aviation_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8c[0].ColE[0].f3_23[0]",
+          "text": "1,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8c_nonexempt_noncommercial_aviation_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8c[0].ColE[0].f3_24[0]",
+          "text": "141"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].f3_26[0]",
+          "text": "T-1WRW2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].f3_28[0]",
+          "text": "6,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].ColD[0].f3_29[0]",
+          "text": "8,121"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].ColD[0].f3_30[0]",
+          "text": "317"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].ColE[0].f3_31[0]",
+          "text": "8,623"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8d_other_nontaxable_244_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8d[0].ColE[0].f3_32[0]",
+          "text": "772"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].f3_34[0]",
+          "text": "T-3WFAC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].f3_36[0]",
+          "text": "1,577"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].ColD[0].f3_37[0]",
+          "text": "5,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].ColD[0].f3_38[0]",
+          "text": "011"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].ColE[0].f3_39[0]",
+          "text": "7,481"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8e_other_nontaxable_219_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8e[0].ColE[0].f3_40[0]",
+          "text": "653"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8f_lust_tax_foreign_trade_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8f[0].f3_44[0]",
+          "text": "6,689"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8f_lust_tax_foreign_trade_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8f[0].ColD[0].f3_45[0]",
+          "text": "1,112"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8f_lust_tax_foreign_trade_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8f[0].ColD[0].f3_46[0]",
+          "text": "629"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8f_lust_tax_foreign_trade_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8f[0].ColE[0].f3_47[0]",
+          "text": "6,995"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.2.line.8f_lust_tax_foreign_trade_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Table_Line8[0].Line8f[0].ColE[0].f3_48[0]",
+          "text": "308"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13_registration_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_64[0]",
+          "text": "T-6SZND"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13a_diesel_state_local_government_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13a[0].f4_66[0]",
+          "text": "T-1XIJF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13a_diesel_state_local_government_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13a[0].ColD[0].f4_67[0]",
+          "text": "6,948"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13a_diesel_state_local_government_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13a[0].ColD[0].f4_68[0]",
+          "text": "163"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13a_diesel_state_local_government_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13a[0].ColE[0].f4_69[0]",
+          "text": "7,369"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13a_diesel_state_local_government_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13a[0].ColE[0].f4_70[0]",
+          "text": "084"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13b_kerosene_state_local_government_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13b[0].f4_73[0]",
+          "text": "T-1Q6OS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13b_kerosene_state_local_government_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13b[0].ColD[0].f4_74[0]",
+          "text": "1,204"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13b_kerosene_state_local_government_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13b[0].ColD[0].f4_75[0]",
+          "text": "053"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13b_kerosene_state_local_government_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13b[0].ColE[0].f4_76[0]",
+          "text": "8,370"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13b_kerosene_state_local_government_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13b[0].ColE[0].f4_77[0]",
+          "text": "547"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13c_aviation_kerosene_state_local_government_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13c[0].f4_80[0]",
+          "text": "T-O0FNR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13c_aviation_kerosene_state_local_government_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13c[0].ColD[0].f4_81[0]",
+          "text": "5,781"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13c_aviation_kerosene_state_local_government_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13c[0].ColD[0].f4_82[0]",
+          "text": "998"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13c_aviation_kerosene_state_local_government_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13c[0].ColE[0].f4_83[0]",
+          "text": "8,490"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.13c_aviation_kerosene_state_local_government_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line13[0].Line13c[0].ColE[0].f4_84[0]",
+          "text": "020"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].f4_86[0]",
+          "text": "T-XG7EC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].f4_88[0]",
+          "text": "T-1M5IE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].ColD[0].f4_89[0]",
+          "text": "6,570"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].ColD[0].f4_90[0]",
+          "text": "700"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].ColE[0].f4_91[0]",
+          "text": "5,334"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.14a_nontaxable_use_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14a[0].ColE[0].f4_92[0]",
+          "text": "883"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.14b_exported_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14b[0].f4_96[0]",
+          "text": "T-WN767"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.14b_exported_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14b[0].ColD[0].f4_97[0]",
+          "text": "8,907"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.14b_exported_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14b[0].ColD[0].f4_98[0]",
+          "text": "359"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.14b_exported_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14b[0].ColE[0].f4_99[0]",
+          "text": "7,429"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.14b_exported_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line14[0].Line14b[0].ColE[0].f4_100[0]",
+          "text": "071"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.15_registration_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_102[0]",
+          "text": "T-HWPM7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.15a_blender_credit_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line15[0].Line15a[0].f4_104[0]",
+          "text": "T-OYKVB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.15a_blender_credit_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line15[0].Line15a[0].ColD[0].f4_105[0]",
+          "text": "5,706"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.15a_blender_credit_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line15[0].Line15a[0].ColD[0].f4_106[0]",
+          "text": "621"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.15a_blender_credit_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line15[0].Line15a[0].ColE[0].f4_107[0]",
+          "text": "5,191"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.15a_blender_credit_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line15[0].Line15a[0].ColE[0].f4_108[0]",
+          "text": "615"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.16a_exported_dyed_diesel_blendstocks_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16a[0].f4_111[0]",
+          "text": "T-1L2BX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.16a_exported_dyed_diesel_blendstocks_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16a[0].ColD[0].f4_112[0]",
+          "text": "1,501"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.16a_exported_dyed_diesel_blendstocks_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16a[0].ColD[0].f4_113[0]",
+          "text": "862"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.16a_exported_dyed_diesel_blendstocks_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16a[0].ColE[0].f4_114[0]",
+          "text": "4,232"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.16a_exported_dyed_diesel_blendstocks_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16a[0].ColE[0].f4_115[0]",
+          "text": "880"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.16b_exported_dyed_kerosene_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16b[0].f4_118[0]",
+          "text": "T-DOAP9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.16b_exported_dyed_kerosene_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16b[0].ColD[0].f4_119[0]",
+          "text": "3,140"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.16b_exported_dyed_kerosene_col_d_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16b[0].ColD[0].f4_120[0]",
+          "text": "230"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.16b_exported_dyed_kerosene_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16b[0].ColE[0].f4_121[0]",
+          "text": "3,766"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.16b_exported_dyed_kerosene_col_e_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line16[0].Line16b[0].ColE[0].f4_122[0]",
+          "text": "540"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.17_total_income_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_124[0]",
+          "text": "7,337"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4136.3.line.17_total_income_tax_credit_cents",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_125[0]",
+          "text": "992"
+        }
+      ]
+    }
+  ]
+}

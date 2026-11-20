@@ -1,0 +1,240 @@
+{
+  "formId": "form-8396",
+  "fieldCount": 26,
+  "entries": [
+    {
+      "fieldId": "form-8396.0.header.certificate_issue_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.header.certificate_issuer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-RM8PD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.header.certificate_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-1CGKT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.header.main_home_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-1VC2M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1XEM9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.1_interest_paid_certified_indebtedness",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "7,071"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.10_add_lines_3_and_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "3,742"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.11_amount_from_line_7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "4,040"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.12_larger_of_line_9_or_10",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "8,725"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.13_line_11_minus_line_12",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "4,681"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.14_2024_carryforward_to_2026",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "2,608"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.15_line_13_minus_line_14",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "9,243"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.16_2023_carryforward_to_2026",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "6,140"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.17_2025_carryforward_to_2026",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "9,588"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.2_certificate_credit_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-10B1M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.3_interest_times_credit_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "9,653"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.4_carryforward_from_2022",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "5,546"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.5_carryforward_from_2023",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "6,044"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.6_carryforward_from_2024",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "6,393"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.7_total_credit_available",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "6,023"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.8_tax_liability_limitation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "1,194"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.0.line.9_current_year_mortgage_interest_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "7,567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.1.line8_worksheet.1_form_1040_line_18",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Col2[0].Line8_Worksheet[0].Line1[0].f2_1[0]",
+          "text": "6,736"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.1.line8_worksheet.2_total_other_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Col2[0].Line8_Worksheet[0].Line2[0].f2_2[0]",
+          "text": "7,990"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8396.1.line8_worksheet.3_credit_limit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Col2[0].Line8_Worksheet[0].Line3[0].f2_3[0]",
+          "text": "4,434"
+        }
+      ]
+    }
+  ]
+}

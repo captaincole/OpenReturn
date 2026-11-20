@@ -1,0 +1,1365 @@
+{
+  "formId": "form-8621",
+  "fieldCount": 151,
+  "entries": [
+    {
+      "fieldId": "form-8621.0.header.excepted_specified_foreign_assets",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-A9JD4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress2[0].f1_15[0]",
+          "text": "T-HWYTI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "T-51981"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress2[0].f1_14[0]",
+          "text": "T-12OU2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_reference_id_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "T-OB0KT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_tax_year_begin_month_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].TaxYearOfPFIC[0].f1_19[0]",
+          "text": "T-1K530"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_tax_year_begin_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].TaxYearOfPFIC[0].f1_20[0]",
+          "text": "89"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_tax_year_calendar_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].TaxYearOfPFIC[0].f1_18[0]",
+          "text": "89"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_tax_year_end_month_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].TaxYearOfPFIC[0].f1_21[0]",
+          "text": "T-1RFLH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.pfic_tax_year_end_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].TaxYearOfPFIC[0].f1_22[0]",
+          "text": "53"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.qualifying_insurance_corporation_election",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_city",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_4[0]",
+          "text": "T-10B94"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_country",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_6[0]",
+          "text": "T-1WFAJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_1[0]",
+          "text": "T-MFVNZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_room_suite",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_3[0]",
+          "text": "T-1KKYC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_state_province",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_5[0]",
+          "text": "T-1LYAI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_street_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_2[0]",
+          "text": "T-1OYZM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_tax_year_begin_month_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].ShareholderTaxYear[0].f1_10[0]",
+          "text": "T-STQ0E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_tax_year_begin_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].ShareholderTaxYear[0].f1_11[0]",
+          "text": "46"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_tax_year_calendar_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].ShareholderTaxYear[0].f1_9[0]",
+          "text": "73"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_tax_year_end_month_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].ShareholderTaxYear[0].f1_12[0]",
+          "text": "T-1TJ67"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_tax_year_end_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].ShareholderTaxYear[0].f1_13[0]",
+          "text": "87"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_corporation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_estate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[5]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_individual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_nongrantor_trust",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[4]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_partnership",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_type_s_corporation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.header.shareholder_zip_postal_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAddress[0].f1_7[0]",
+          "text": "T-10SHF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.1_share_class_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "T-9HB62"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.1_shares_jointly_owned_spouse",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.2_date_shares_acquired",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.3_shares_held_year_end",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "T-1FUDR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.4a_share_value_0_to_50000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.4b_share_value_50001_to_100000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.4c_share_value_100001_to_150000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.4d_share_value_150001_to_200000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.4e_share_value_over_200000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "5,270"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.5a_section_1291_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "7,071"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.5a_section_1291_box",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.5b_section_1293_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "9,005"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.5b_section_1293_box",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.5c_section_1296_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "8,345"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.5c_section_1296_box",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.election_a_treat_pfic_as_qef",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.election_b_extend_time_payment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.election_c_mark_to_market",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.election_d_deemed_sale",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_12[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.election_e_deemed_dividend",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_13[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.election_f_gain_deemed_sale_pfic",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_14[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.election_g_deemed_dividend_1297e_pfic",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_15[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.0.line.election_h_deemed_dividend_former_pfic",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_16[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.10a_pfic_stock_fmv_year_end",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "8,020"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.10b_adjusted_basis_year_end",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "3,641"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.10c_mark_to_market_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "2,657"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.11_unreversed_inclusions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "2,953"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.12_mark_to_market_ordinary_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "7,097"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.13a_stock_fmv_at_disposition",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+          "text": "8,674"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.13b_adjusted_basis_at_disposition",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+          "text": "4,181"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.13c_disposition_gain_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+          "text": "3,145"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.14a_unreversed_inclusions_at_disposition",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+          "text": "1,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.14b_disposition_ordinary_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+          "text": "9,454"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.14c_disposition_loss_over_inclusions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+          "text": "5,496"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.6a_qef_ordinary_earnings_share",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "8,245"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.6b_ordinary_earnings_section_951_portion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "5,468"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.6c_qef_ordinary_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "6,455"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.7a_qef_net_capital_gain_share",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "9,106"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.7b_capital_gain_section_951_portion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "5,464"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.7c_qef_net_long_term_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "9,870"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.8a_total_qef_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "8,590"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.8b_qef_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "8,459"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.8c_income_from_shares_disposed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "5,567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.8d_distributions_and_dispositions_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "3,254"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.8e_undistributed_qef_earnings",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "8,208"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.9a_total_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "3,075"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.9b_total_tax_without_line_8e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "4,715"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.1.line.9c_deferred_tax_election_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "9,712"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.15a_total_distributions_current_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+          "text": "1,983"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.15b_total_distributions_preceding_3_years",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+          "text": "1,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.15c_average_preceding_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+          "text": "3,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.15d_125_percent_of_average",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+          "text": "5,316"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.15e1_excess_distribution",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+          "text": "1,317"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.15e2_excess_distribution_us_dollars",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+          "text": "6,058"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.15f_gain_or_loss_disposition",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+          "text": "1,761"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.16b_current_year_and_pre_pfic_amounts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+          "text": "7,621"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.16c_aggregate_increases_in_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+          "text": "8,900"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.16d_foreign_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+          "text": "8,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.16e_additional_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+          "text": "8,189"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.16f_interest_on_tax_increases",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+          "text": "1,413"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.2.line.part5_currency_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+          "text": "T-17Z6G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_1[0]",
+          "text": "T-K35JH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_2[0]",
+          "text": "T-11NBF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_3[0]",
+          "text": "T-M38JL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_4[0]",
+          "text": "T-SQKPD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_v",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_5[0]",
+          "text": "T-1D51F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.17_tax_year_outstanding_election_col_vi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row2[0].f4_6[0]",
+          "text": "T-15MQB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_7[0]",
+          "text": "6,112"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_8[0]",
+          "text": "3,762"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_9[0]",
+          "text": "6,488"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_10[0]",
+          "text": "2,015"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_v",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_11[0]",
+          "text": "5,260"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.18_undistributed_earnings_col_vi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row3[0].f4_12[0]",
+          "text": "6,473"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_13[0]",
+          "text": "4,652"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_14[0]",
+          "text": "6,224"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_15[0]",
+          "text": "9,791"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_16[0]",
+          "text": "6,238"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_v",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_17[0]",
+          "text": "9,523"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.19_deferred_tax_col_vi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row4[0].f4_18[0]",
+          "text": "2,954"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_19[0]",
+          "text": "4,375"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_20[0]",
+          "text": "1,902"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_21[0]",
+          "text": "6,843"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_22[0]",
+          "text": "3,377"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_v",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_23[0]",
+          "text": "3,564"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.20_interest_accrued_deferred_tax_col_vi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_17-20[0].Row5[0].f4_24[0]",
+          "text": "9,570"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_25[0]",
+          "text": "T-WTV7P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_26[0]",
+          "text": "T-15XRS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_27[0]",
+          "text": "T-5VT1S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_28[0]",
+          "text": "T-7KIRQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_v",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_29[0]",
+          "text": "T-1MOJX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.21_event_terminating_election_col_vi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row2[0].f4_30[0]",
+          "text": "T-1FYCZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_31[0]",
+          "text": "6,568"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_32[0]",
+          "text": "6,048"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_33[0]",
+          "text": "3,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_34[0]",
+          "text": "4,747"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_v",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_35[0]",
+          "text": "8,675"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.22_earnings_distributed_col_vi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row3[0].f4_36[0]",
+          "text": "7,530"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_37[0]",
+          "text": "6,656"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_38[0]",
+          "text": "4,346"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_39[0]",
+          "text": "1,426"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_40[0]",
+          "text": "5,539"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_v",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_41[0]",
+          "text": "4,509"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.23_deferred_tax_due_col_vi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row4[0].f4_42[0]",
+          "text": "3,315"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_43[0]",
+          "text": "5,340"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_44[0]",
+          "text": "6,003"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_45[0]",
+          "text": "5,263"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_46[0]",
+          "text": "9,406"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_v",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_47[0]",
+          "text": "8,586"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.24_accrued_interest_due_col_vi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines21-24[0].Row5[0].f4_48[0]",
+          "text": "2,809"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_49[0]",
+          "text": "5,968"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_50[0]",
+          "text": "4,581"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_51[0]",
+          "text": "2,371"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_52[0]",
+          "text": "2,957"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_v",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_53[0]",
+          "text": "3,689"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.25_deferred_tax_outstanding_col_vi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row2[0].f4_54[0]",
+          "text": "2,719"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_55[0]",
+          "text": "3,177"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_56[0]",
+          "text": "5,459"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_57[0]",
+          "text": "8,825"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_58[0]",
+          "text": "4,242"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_v",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_59[0]",
+          "text": "6,686"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8621.3.line.26_interest_accrued_after_termination_col_vi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Lines25-26[0].Row3[0].f4_60[0]",
+          "text": "6,963"
+        }
+      ]
+    }
+  ]
+}

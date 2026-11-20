@@ -1,0 +1,1203 @@
+{
+  "form": {
+    "formId": "form-8863",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8863, Education Credits"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8863.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8863.0.header.ssn_first_3_digits",
+      "label": "Your social security number — first 3 digits",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].SocialSecurity[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 461.001,
+        "y": 683.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8863.0.header.ssn_middle_2_digits",
+      "label": "Your social security number — middle 2 digits",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].SocialSecurity[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 683.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8863.0.header.ssn_last_4_digits",
+      "label": "Your social security number — last 4 digits",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].SocialSecurity[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 533.001,
+        "y": 683.968
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8863.0.line.1_total_part3_line_30",
+      "label": "Line 1 — After completing Part III for each student, enter the total of all amounts from all Parts III, line 30",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.2_filing_status_limit",
+      "label": "Line 2 — Enter $180,000 if married filing jointly; or $90,000 if single, head of household, or qualifying surviving spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.3_modified_agi",
+      "label": "Line 3 — Enter the amount from Form 1040 or 1040-SR, line 11b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.4_limit_minus_agi",
+      "label": "Line 4 — Subtract line 3 from line 2. If zero or less, stop; you can't take any education credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.5_phaseout_range",
+      "label": "Line 5 — Enter $20,000 if married filing jointly; or $10,000 if single, head of household, or qualifying surviving spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.6_phaseout_decimal_whole",
+      "label": "Line 6 — If line 4 is equal to or more than line 5, enter 1.000; if less than line 5, divide line 4 by line 5. Enter the result as a decimal (rounded to at least three places) — digits before the decimal point",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.6_phaseout_decimal_fraction",
+      "label": "Line 6 — If line 4 is equal to or more than line 5, enter 1.000; if less than line 5, divide line 4 by line 5. Enter the result as a decimal (rounded to at least three places) — digits after the decimal point",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.7_under_24_no_refundable_credit",
+      "label": "Line 7 — If you were under age 24 at the end of the year and meet the conditions described in the instructions, you can't take the refundable American opportunity credit; skip line 8, enter the amount from line 7 on line 9, and check this box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 464,
+        "y": 433.968
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.7_tentative_american_opportunity_credit",
+      "label": "Line 7 — Multiply line 1 by line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.8_refundable_american_opportunity_credit",
+      "label": "Line 8 — Refundable American opportunity credit. Multiply line 7 by 40% (0.40)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.9_nonrefundable_american_opportunity_credit",
+      "label": "Line 9 — Subtract line 8 from line 7",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.10_total_part3_line_31",
+      "label": "Line 10 — After completing Part III for each student, enter the total of all amounts from all Parts III, line 31",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.11_smaller_of_line_10_or_10000",
+      "label": "Line 11 — Enter the smaller of line 10 or $10,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.12_tentative_lifetime_learning_credit",
+      "label": "Line 12 — Multiply line 11 by 20% (0.20)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.13_filing_status_limit",
+      "label": "Line 13 — Enter $180,000 if married filing jointly; or $90,000 if single, head of household, or qualifying surviving spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.14_modified_agi",
+      "label": "Line 14 — Enter the amount from Form 1040 or 1040-SR, line 11b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.15_limit_minus_agi",
+      "label": "Line 15 — Subtract line 14 from line 13",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.16_phaseout_range",
+      "label": "Line 16 — Enter $20,000 if married filing jointly; or $10,000 if single, head of household, or qualifying surviving spouse",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.17_phaseout_decimal_whole",
+      "label": "Line 17 — If line 15 is equal to or more than line 16, enter 1.000; if less than line 16, divide line 15 by line 16. Enter the result as a decimal (rounded to at least three places) — digits before the decimal point",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.17_phaseout_decimal_fraction",
+      "label": "Line 17 — If line 15 is equal to or more than line 16, enter 1.000; if less than line 16, divide line 15 by line 16. Enter the result as a decimal (rounded to at least three places) — digits after the decimal point",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.18_lifetime_learning_credit_after_phaseout",
+      "label": "Line 18 — Multiply line 12 by line 17",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8863.0.line.19_nonrefundable_education_credits",
+      "label": "Line 19 — Nonrefundable education credits. Enter the amount from line 7 of the Credit Limit Worksheet",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 143.968
+      }
+    },
+    {
+      "fieldId": "form-8863.1.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 719.968
+      }
+    },
+    {
+      "fieldId": "form-8863.1.header.ssn_part1",
+      "label": "Your social security number (first 3 digits)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].SSN[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 460.8,
+        "y": 719.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8863.1.header.ssn_part2",
+      "label": "Your social security number (middle 2 digits)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].SSN[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 719.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8863.1.header.ssn_part3",
+      "label": "Your social security number (last 4 digits)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].SSN[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 532.8,
+        "y": 719.968
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8863.1.line.20_student_name",
+      "label": "Line 20 — Student name (as shown on page 1 of your tax return)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2-5[0]",
+      "position": {
+        "page": 1,
+        "x": 50.4,
+        "y": 635.969
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.21_student_ssn_part1",
+      "label": "Line 21 — Student social security number (as shown on page 1 of your tax return) (first 3 digits)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].StudentSSN[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 324,
+        "y": 635.969
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8863.1.line.21_student_ssn_part2",
+      "label": "Line 21 — Student social security number (as shown on page 1 of your tax return) (middle 2 digits)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].StudentSSN[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 417.6,
+        "y": 635.969
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8863.1.line.21_student_ssn_part3",
+      "label": "Line 21 — Student social security number (as shown on page 1 of your tax return) (last 4 digits)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].StudentSSN[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 635.969
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_first_institution_name",
+      "label": "Line 22a — Name of first educational institution",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_second_institution_name",
+      "label": "Line 22b — Name of second educational institution (if any)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 310.6,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_1_first_institution_address",
+      "label": "Line 22a(1) — Address. Number and street (or P.O. box). City, town or post office, state, and ZIP code",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 539.968
+      },
+      "maxLength": 255,
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_1_second_institution_address",
+      "label": "Line 22b(1) — Address. Number and street (or P.O. box). City, town or post office, state, and ZIP code",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 310.6,
+        "y": 539.968
+      },
+      "maxLength": 257,
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_2_received_1098t_2025_yes",
+      "label": "Line 22a(2) — Did the student receive Form 1098-T from this institution for 2025? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 226.4,
+        "y": 523.968
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_2_received_1098t_2025_no",
+      "label": "Line 22a(2) — Did the student receive Form 1098-T from this institution for 2025? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 269.6,
+        "y": 523.968
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_2_received_1098t_2025_yes",
+      "label": "Line 22b(2) — Did the student receive Form 1098-T from this institution for 2025? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 500,
+        "y": 523.968
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_2_received_1098t_2025_no",
+      "label": "Line 22b(2) — Did the student receive Form 1098-T from this institution for 2025? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].c2_3[1]",
+      "position": {
+        "page": 1,
+        "x": 543.2,
+        "y": 523.968
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_3_received_1098t_2024_box7_yes",
+      "label": "Line 22a(3) — Did the student receive Form 1098-T from this institution for 2024 with box 7 checked? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 226.4,
+        "y": 493.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_3_received_1098t_2024_box7_no",
+      "label": "Line 22a(3) — Did the student receive Form 1098-T from this institution for 2024 with box 7 checked? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].c2_2[1]",
+      "position": {
+        "page": 1,
+        "x": 269.6,
+        "y": 493.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_3_received_1098t_2024_box7_yes",
+      "label": "Line 22b(3) — Did the student receive Form 1098-T from this institution for 2024 with box 7 checked? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].c2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 500,
+        "y": 493.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_3_received_1098t_2024_box7_no",
+      "label": "Line 22b(3) — Did the student receive Form 1098-T from this institution for 2024 with box 7 checked? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].c2_4[1]",
+      "position": {
+        "page": 1,
+        "x": 543.2,
+        "y": 493.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_4_first_institution_ein_digit1",
+      "label": "Line 22a(4) — Enter the institution's employer identification number (EIN) (digit 1)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_4_first_institution_ein_digit2",
+      "label": "Line 22a(4) — Enter the institution's employer identification number (EIN) (digit 2)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 86.4,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_4_first_institution_ein_digit3",
+      "label": "Line 22a(4) — Enter the institution's employer identification number (EIN) (digit 3)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 122.4,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_4_first_institution_ein_digit4",
+      "label": "Line 22a(4) — Enter the institution's employer identification number (EIN) (digit 4)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 144,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_4_first_institution_ein_digit5",
+      "label": "Line 22a(4) — Enter the institution's employer identification number (EIN) (digit 5)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_4_first_institution_ein_digit6",
+      "label": "Line 22a(4) — Enter the institution's employer identification number (EIN) (digit 6)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 187.2,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_4_first_institution_ein_digit7",
+      "label": "Line 22a(4) — Enter the institution's employer identification number (EIN) (digit 7)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 208.8,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_4_first_institution_ein_digit8",
+      "label": "Line 22a(4) — Enter the institution's employer identification number (EIN) (digit 8)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 230.4,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22a_4_first_institution_ein_digit9",
+      "label": "Line 22a(4) — Enter the institution's employer identification number (EIN) (digit 9)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22a[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_4_second_institution_ein_digit1",
+      "label": "Line 22b(4) — Enter the institution's employer identification number (EIN) (digit 1)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 338.4,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_4_second_institution_ein_digit2",
+      "label": "Line 22b(4) — Enter the institution's employer identification number (EIN) (digit 2)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_4_second_institution_ein_digit3",
+      "label": "Line 22b(4) — Enter the institution's employer identification number (EIN) (digit 3)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_4_second_institution_ein_digit4",
+      "label": "Line 22b(4) — Enter the institution's employer identification number (EIN) (digit 4)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 417.6,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_4_second_institution_ein_digit5",
+      "label": "Line 22b(4) — Enter the institution's employer identification number (EIN) (digit 5)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_4_second_institution_ein_digit6",
+      "label": "Line 22b(4) — Enter the institution's employer identification number (EIN) (digit 6)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 460.8,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_4_second_institution_ein_digit7",
+      "label": "Line 22b(4) — Enter the institution's employer identification number (EIN) (digit 7)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_4_second_institution_ein_digit8",
+      "label": "Line 22b(4) — Enter the institution's employer identification number (EIN) (digit 8)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.22b_4_second_institution_ein_digit9",
+      "label": "Line 22b(4) — Enter the institution's employer identification number (EIN) (digit 9)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line22b[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 525.6,
+        "y": 419.969
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8863.1.line.23_aoc_claimed_4_prior_years_yes",
+      "label": "Line 23 — Has the American opportunity credit been claimed for this student for any 4 prior tax years? Yes — Stop! Go to line 31 for this student.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 315.4,
+        "y": 384.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.23_aoc_claimed_4_prior_years_no",
+      "label": "Line 23 — Has the American opportunity credit been claimed for this student for any 4 prior tax years? No — Go to line 24.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+      "position": {
+        "page": 1,
+        "x": 452.2,
+        "y": 384.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.24_enrolled_at_least_half_time_yes",
+      "label": "Line 24 — Was the student enrolled at least half-time for at least one academic period that began or is treated as having begun in 2025 at an eligible educational institution in a program leading toward a postsecondary degree, certificate, or other recognized postsecondary educational credential? Yes — Go to line 25.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 315.4,
+        "y": 330.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.24_enrolled_at_least_half_time_no",
+      "label": "Line 24 — Was the student enrolled at least half-time for at least one academic period that began or is treated as having begun in 2025 at an eligible educational institution in a program leading toward a postsecondary degree, certificate, or other recognized postsecondary educational credential? No — Stop! Go to line 31 for this student.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[1]",
+      "position": {
+        "page": 1,
+        "x": 452.2,
+        "y": 330.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.25_completed_first_4_years_yes",
+      "label": "Line 25 — Did the student complete the first 4 years of postsecondary education before 2025? Yes — Stop! Go to line 31 for this student.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 315.4,
+        "y": 276.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.25_completed_first_4_years_no",
+      "label": "Line 25 — Did the student complete the first 4 years of postsecondary education before 2025? No — Go to line 26.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_7[1]",
+      "position": {
+        "page": 1,
+        "x": 452.2,
+        "y": 276.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.26_felony_drug_conviction_yes",
+      "label": "Line 26 — Was the student convicted, before the end of 2025, of a felony for possession or distribution of a controlled substance? Yes — Stop! Go to line 31 for this student.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 315.4,
+        "y": 240.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.26_felony_drug_conviction_no",
+      "label": "Line 26 — Was the student convicted, before the end of 2025, of a felony for possession or distribution of a controlled substance? No — Complete lines 27 through 30 for this student.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_8[1]",
+      "position": {
+        "page": 1,
+        "x": 452.2,
+        "y": 240.967
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.27_aoc_adjusted_qualified_expenses",
+      "label": "Line 27 — American Opportunity Credit: Adjusted qualified education expenses. Don't enter more than $4,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.28_subtract_2000_from_line27",
+      "label": "Line 28 — Subtract $2,000 from line 27. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 155.97
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.29_multiply_line28_by_25_percent",
+      "label": "Line 29 — Multiply line 28 by 25% (0.25)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 143.968
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.30_aoc_tentative_credit_student",
+      "label": "Line 30 — If line 28 is zero, enter the amount from line 27. Otherwise, add $2,000 to the amount on line 29 and enter the result",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-8863.1.line.31_llc_adjusted_qualified_expenses",
+      "label": "Line 31 — Lifetime Learning Credit: Adjusted qualified education expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 83.97
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8863/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:59.011Z",
+    "totalFields": 77,
+    "skipped": 0,
+    "catalogEntries": 77
+  }
+}

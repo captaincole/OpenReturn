@@ -1,0 +1,888 @@
+{
+  "formId": "form-8697",
+  "fieldCount": 98,
+  "entries": [
+    {
+      "fieldId": "form-8697.0.header.a_identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-1553W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.b_taxpayer_type_corporation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].ReadOrder[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.b_taxpayer_type_estate_or_trust",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].ReadOrder[0].c1_1[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.b_taxpayer_type_individual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].ReadOrder[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.b_taxpayer_type_partnership",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.b_taxpayer_type_s_corporation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.c_pass_through_entity_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "T-1EFWK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.c_pass_through_entity_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "T-1HGE4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.city_or_town",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAndAddress[0].f1_5[0]",
+          "text": "T-1EXBU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.filing_year_beginning",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.filing_year_ending",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAndAddress[0].f1_3[0]",
+          "text": "T-CGMJN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.state_or_province",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAndAddress[0].f1_6[0]",
+          "text": "T-1HGH8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.street_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAndAddress[0].f1_4[0]",
+          "text": "T-1XNPN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.header.zip_or_postal_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].NameAndAddress[0].f1_7[0]",
+          "text": "T-GPH4D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.1_prior_year_taxable_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line1[0].f1_18[0]",
+          "text": "7,183"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.1_prior_year_taxable_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line1[0].f1_19[0]",
+          "text": "4,213"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.1_prior_year_taxable_income_filing_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line1[0].f1_17[0]",
+          "text": "5,682"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.10_net_interest_owed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_52[0]",
+          "text": "6,987"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.2_adjustment_to_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line2[0].f1_22[0]",
+          "text": "9,923"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.2_adjustment_to_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line2[0].f1_23[0]",
+          "text": "4,075"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.2_adjustment_to_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line2[0].f1_24[0]",
+          "text": "4,980"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.2_adjustment_to_income_filing_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line2[0].f1_21[0]",
+          "text": "3,156"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.3_adjusted_taxable_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line3[0].f1_26[0]",
+          "text": "1,682"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.3_adjusted_taxable_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line3[0].f1_27[0]",
+          "text": "4,498"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.3_adjusted_taxable_income_filing_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line3[0].f1_25[0]",
+          "text": "1,629"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.4_tax_on_line_3_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line4[0].f1_30[0]",
+          "text": "7,324"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.4_tax_on_line_3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line4[0].f1_31[0]",
+          "text": "5,875"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.4_tax_on_line_3_filing_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line4[0].f1_29[0]",
+          "text": "4,972"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.5_tax_shown_on_return_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line5[0].f1_34[0]",
+          "text": "4,415"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.5_tax_shown_on_return_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line5[0].f1_35[0]",
+          "text": "9,994"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.6_increase_or_decrease_in_tax_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line6[0].f1_38[0]",
+          "text": "1,716"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.6_increase_or_decrease_in_tax_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line6[0].f1_39[0]",
+          "text": "6,807"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.7_interest_due_on_increase_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line7[0].f1_42[0]",
+          "text": "1,548"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.7_interest_due_on_increase_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line7[0].f1_43[0]",
+          "text": "1,021"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.7_interest_due_on_increase_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line7[0].f1_44[0]",
+          "text": "6,818"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.8_interest_refunded_on_decrease_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line8[0].f1_46[0]",
+          "text": "7,212"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.8_interest_refunded_on_decrease_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line8[0].f1_47[0]",
+          "text": "3,124"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.8_interest_refunded_on_decrease_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Line8[0].f1_48[0]",
+          "text": "5,330"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.9a_net_interest_refunded",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_49[0]",
+          "text": "1,060"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.9b_routing_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].RoutingNo[0].f1_50[0]",
+          "text": "T-7WY14"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.9c_account_type_checking",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.9c_account_type_savings",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.9d_account_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].AccountNo[0].f1_51[0]",
+          "text": "T-1757J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_month_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].RedeterminationA[0].f1_13[0]",
+          "text": "04"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_month_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].RedeterminationB[0].f1_15[0]",
+          "text": "81"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_month_filing_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].FilingYear[0].f1_11[0]",
+          "text": "37"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_year_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].RedeterminationA[0].f1_14[0]",
+          "text": "5942"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_year_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].RedeterminationB[0].f1_16[0]",
+          "text": "2588"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.0.part1.year_ended_year_filing_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].HeaderRow[0].FilingYear[0].f1_12[0]",
+          "text": "1600"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.1_regular_taxable_income_adjustment_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line1[0].f2_7[0]",
+          "text": "2,656"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.1_regular_taxable_income_adjustment_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line1[0].f2_8[0]",
+          "text": "5,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.1_regular_taxable_income_adjustment_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line1[0].f2_9[0]",
+          "text": "1,401"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.10a_net_interest_refunded",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_43[0]",
+          "text": "3,993"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.10b_routing_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].RoutingNo[0].f2_44[0]",
+          "text": "T-1AF6E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.10c_account_type_checking",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.10c_account_type_savings",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.10d_account_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].AccountNo[0].f2_45[0]",
+          "text": "T-ZU9CW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.11_net_interest_owed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_46[0]",
+          "text": "9,614"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.2_regular_tax_increase_decrease_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line2[0].f2_11[0]",
+          "text": "7,996"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.2_regular_tax_increase_decrease_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line2[0].f2_12[0]",
+          "text": "3,971"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.2_regular_tax_increase_decrease_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line2[0].f2_13[0]",
+          "text": "4,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.3_amti_adjustment_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line3[0].f2_15[0]",
+          "text": "8,191"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.3_amti_adjustment_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line3[0].f2_16[0]",
+          "text": "3,453"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.3_amti_adjustment_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line3[0].f2_17[0]",
+          "text": "4,746"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.4_amt_increase_decrease_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line4[0].f2_19[0]",
+          "text": "3,777"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.4_amt_increase_decrease_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line4[0].f2_20[0]",
+          "text": "7,989"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.4_amt_increase_decrease_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line4[0].f2_21[0]",
+          "text": "2,178"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.5_larger_of_line_2_or_4_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line5[0].f2_23[0]",
+          "text": "5,292"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.5_larger_of_line_2_or_4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line5[0].f2_24[0]",
+          "text": "1,308"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.5_larger_of_line_2_or_4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line5[0].f2_25[0]",
+          "text": "7,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.6_overpayment_ceiling_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line6[0].f2_27[0]",
+          "text": "5,785"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.6_overpayment_ceiling_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line6[0].f2_28[0]",
+          "text": "8,003"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.6_overpayment_ceiling_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line6[0].f2_29[0]",
+          "text": "7,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.7_tax_increase_decrease_prior_years_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line7[0].f2_31[0]",
+          "text": "6,772"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.7_tax_increase_decrease_prior_years_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line7[0].f2_32[0]",
+          "text": "3,901"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.7_tax_increase_decrease_prior_years_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line7[0].f2_33[0]",
+          "text": "7,069"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.8_interest_due_on_increase_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line8[0].f2_35[0]",
+          "text": "2,435"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.8_interest_due_on_increase_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line8[0].f2_36[0]",
+          "text": "8,542"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.8_interest_due_on_increase_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line8[0].f2_37[0]",
+          "text": "4,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.8_interest_due_on_increase_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line8[0].f2_38[0]",
+          "text": "9,921"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.9_interest_refunded_on_decrease_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line9[0].f2_39[0]",
+          "text": "4,133"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.9_interest_refunded_on_decrease_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line9[0].f2_40[0]",
+          "text": "5,172"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.9_interest_refunded_on_decrease_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line9[0].f2_41[0]",
+          "text": "6,337"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.9_interest_refunded_on_decrease_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].Line9[0].f2_42[0]",
+          "text": "8,759"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_month_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateA[0].f2_1[0]",
+          "text": "17"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_month_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateB[0].f2_3[0]",
+          "text": "89"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_month_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateC[0].f2_5[0]",
+          "text": "42"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_year_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateA[0].f2_2[0]",
+          "text": "8626"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_year_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateB[0].f2_4[0]",
+          "text": "4696"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.part2.year_ended_year_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part2[0].HeaderRow[0].DateC[0].f2_6[0]",
+          "text": "4998"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.signing.firm_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_50[0]",
+          "text": "T-2LUDI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.signing.firm_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_51[0]",
+          "text": "T-1RENJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.signing.firm_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_49[0]",
+          "text": "T-499WY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.signing.firm_phone",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_52[0]",
+          "text": "5551234567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.signing.preparer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_47[0]",
+          "text": "T-V28VX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.signing.preparer_ptin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_48[0]",
+          "text": "T-1RVH3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8697.1.signing.preparer_self_employed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    }
+  ]
+}

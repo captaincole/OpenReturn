@@ -1,0 +1,861 @@
+{
+  "formId": "form-8915-f",
+  "fieldCount": 95,
+  "entries": [
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2021",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2022",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2023",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2024",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2025",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[4]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2026",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[5]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2027",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[6]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2028",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[7]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[8]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_other_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "5463"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2020",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2021",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2022",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2023",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2024",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[4]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2025",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[5]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2026",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[6]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2027",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[7]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[8]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_other_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "5534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "T-11J9Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "T-1FYKQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "T-MWENL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "T-13HE0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "T-O2QKK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "T-1IA6R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_d_coronavirus",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-1QO0R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.1a_disaster_distribution_limit_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row1a[0].f2_09[0]",
+          "text": "1,186"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.1b_prior_year_disaster_distributions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row1b[0].f2_11[0]",
+          "text": "3,068"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.1c_limit_less_prior_distributions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row1c[0].f2_13[0]",
+          "text": "1,601"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.1d_limit_for_new_disasters_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row1d[0].f2_15[0]",
+          "text": "6,983"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.1e_total_available_disaster_distribution_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row1e[0].f2_17[0]",
+          "text": "2,057"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.2_retirement_plan_distributions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row2[0].f2_18[0]",
+          "text": "7,953"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.2_retirement_plan_distributions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row2[0].f2_19[0]",
+          "text": "8,737"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.3_traditional_ira_distributions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row3[0].f2_20[0]",
+          "text": "6,564"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.3_traditional_ira_distributions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row3[0].f2_21[0]",
+          "text": "2,476"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.4_roth_ira_distributions_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row4[0].f2_22[0]",
+          "text": "9,798"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.4_roth_ira_distributions_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row4[0].f2_23[0]",
+          "text": "9,867"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.5a_distributions_not_disaster_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row5a[0].f2_22[0]",
+          "text": "4,769"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.5b_distributions_less_line_5a_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row5b[0].f2_24[0]",
+          "text": "2,155"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.5b_distributions_less_line_5a_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row5b[0].f2_25[0]",
+          "text": "5,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.6_total_qualified_disaster_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+          "text": "9,841"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.7_taxable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+          "text": "4,947"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_more_than_two_disasters",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row1_beginning_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row1[0].f2_03[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row1_declaration_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row1[0].f2_02[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row1_fema_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row1[0].f2_01[0]",
+          "text": "T-UC32T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row2_beginning_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row2[0].f2_06[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row2_declaration_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row2[0].f2_05[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row2_fema_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row2[0].f2_04[0]",
+          "text": "T-EEWWA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_distribution_dates_this_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].DatesOfDistributions_ReadOrder[0].f2_07[0]",
+          "text": "T-TR9UX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.10_taxable_amount_other_than_ira",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_03[0]",
+          "text": "2,317"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.11_elect_not_to_spread",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line11_ReadOrder[0].c3_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.11_taxable_amount_this_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_04[0]",
+          "text": "1,063"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.12_income_for_prior_years",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_05[0]",
+          "text": "9,731"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.13_total_income_this_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_06[0]",
+          "text": "5,498"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.14_total_repayment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_07[0]",
+          "text": "6,758"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.15_amount_subject_to_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_08[0]",
+          "text": "1,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.16_amount_on_line_3_or_4_col_b_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.16_amount_on_line_3_or_4_col_b_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.17_ira_distribution_on_form_8606_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.17_ira_distribution_on_form_8606_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.18_form_8606_line_15b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_09[0]",
+          "text": "7,218"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.19_form_8606_line_25b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+          "text": "7,177"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.20_amount_from_line_3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+          "text": "7,521"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.21_taxable_amount_ira",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+          "text": "1,274"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.22_elect_not_to_spread",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line22_ReadOrder[0].c3_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.22_taxable_amount_this_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+          "text": "8,606"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.23_income_for_prior_years",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_14[0]",
+          "text": "3,679"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.24_total_income_this_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_15[0]",
+          "text": "2,939"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.25_total_repayment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_16[0]",
+          "text": "5,711"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.26_amount_subject_to_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_17[0]",
+          "text": "8,252"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.8_amount_from_line_2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_01[0]",
+          "text": "3,917"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.8_amount_on_line_2_col_b_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.8_amount_on_line_2_col_b_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.2.line.9_applicable_cost_of_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_02[0]",
+          "text": "1,694"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.27_ira_distribution_on_8606_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].c4_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.27_ira_distribution_on_8606_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].c4_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.28_total_qualified_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_10[0]",
+          "text": "3,058"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.29_applicable_cost_of_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_11[0]",
+          "text": "4,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.30_distributions_less_cost",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_12[0]",
+          "text": "9,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.31_total_repayments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_13[0]",
+          "text": "5,532"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.32_taxable_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_15[0]",
+          "text": "2,741"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.32_taxable_amount_write_in",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Line32_ReadOrder[0].f4_14[0]",
+          "text": "T-A47P2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row1_beginning_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row1[0].f4_03[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row1_declaration_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row1[0].f4_02[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row1_ending_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row1[0].f4_04[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row1_fema_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row1[0].f4_01[0]",
+          "text": "T-16UR8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row2_beginning_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row2[0].f4_07[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row2_declaration_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row2[0].f4_06[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row2_ending_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row2[0].f4_08[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row2_fema_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row2[0].f4_05[0]",
+          "text": "T-1G9K2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_qualified_distribution_dates",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_09[0]",
+          "text": "T-18UU2"
+        }
+      ]
+    }
+  ]
+}

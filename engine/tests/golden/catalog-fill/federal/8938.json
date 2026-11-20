@@ -1,0 +1,1185 @@
+{
+  "formId": "form-8938",
+  "fieldCount": 131,
+  "entries": [
+    {
+      "fieldId": "form-8938.0.header.additional_statements_attached",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.header.calendar_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Header[0].f1_01[0]",
+          "text": "12"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.header.number_of_additional_statements",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "3,524"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.header.tax_year_beginning",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Header[0].f1_02[0]",
+          "text": "T-1Y94M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.header.tax_year_beginning_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Header[0].f1_03[0]",
+          "text": "51"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.header.tax_year_ending",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Header[0].f1_04[0]",
+          "text": "T-VM3J9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.header.tax_year_ending_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Header[0].f1_05[0]",
+          "text": "25"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "T-1NZ54"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.header.tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "T-SDAAY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.10_number_foreign_assets",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "8,723"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.11_max_value_foreign_assets",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "8,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.12_assets_acquired_sold_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.12_assets_acquired_sold_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13a_accounts_interest_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13a[0].f1_17[0]",
+          "text": "4,015"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13a_accounts_interest_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13a[0].f1_18[0]",
+          "text": "T-15PRS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13a_accounts_interest_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13a[0].f1_19[0]",
+          "text": "T-ADU69"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13b_accounts_dividends_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13b[0].f1_20[0]",
+          "text": "4,916"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13b_accounts_dividends_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13b[0].f1_21[0]",
+          "text": "T-A63XJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13b_accounts_dividends_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13b[0].f1_22[0]",
+          "text": "T-1ILVO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13c_accounts_royalties_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13c[0].f1_23[0]",
+          "text": "9,363"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13c_accounts_royalties_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13c[0].f1_24[0]",
+          "text": "T-1BH1T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13c_accounts_royalties_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13c[0].f1_25[0]",
+          "text": "T-93HZB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13d_accounts_other_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13d[0].f1_26[0]",
+          "text": "9,645"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13d_accounts_other_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13d[0].f1_27[0]",
+          "text": "T-94HY7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13d_accounts_other_income_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13d[0].f1_28[0]",
+          "text": "T-UDK0D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13e_accounts_gains_losses_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13e[0].f1_29[0]",
+          "text": "9,876"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13e_accounts_gains_losses_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13e[0].f1_30[0]",
+          "text": "T-104JR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13e_accounts_gains_losses_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13e[0].f1_31[0]",
+          "text": "T-EX8S1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13f_accounts_deductions_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13f[0].f1_32[0]",
+          "text": "8,943"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13f_accounts_deductions_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13f[0].f1_33[0]",
+          "text": "T-5K5DV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13f_accounts_deductions_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13f[0].f1_34[0]",
+          "text": "T-1C74R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13g_accounts_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13g[0].f1_35[0]",
+          "text": "9,177"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13g_accounts_credits_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13g[0].f1_36[0]",
+          "text": "T-1WHXK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.13g_accounts_credits_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13g[0].f1_37[0]",
+          "text": "T-17IBS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14a_other_assets_interest_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14a[0].f1_38[0]",
+          "text": "4,037"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14a_other_assets_interest_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14a[0].f1_39[0]",
+          "text": "T-W1S73"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14a_other_assets_interest_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14a[0].f1_40[0]",
+          "text": "T-1RK0W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14b_other_assets_dividends_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14b[0].f1_41[0]",
+          "text": "8,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14b_other_assets_dividends_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14b[0].f1_42[0]",
+          "text": "T-9I3W2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14b_other_assets_dividends_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14b[0].f1_43[0]",
+          "text": "T-W4Z2F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14c_other_assets_royalties_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14c[0].f1_44[0]",
+          "text": "8,786"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14c_other_assets_royalties_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14c[0].f1_45[0]",
+          "text": "T-86LVH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14c_other_assets_royalties_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14c[0].f1_46[0]",
+          "text": "T-144IK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14d_other_assets_other_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14d[0].f1_47[0]",
+          "text": "6,869"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14d_other_assets_other_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14d[0].f1_48[0]",
+          "text": "T-D2YHZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14d_other_assets_other_income_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14d[0].f1_49[0]",
+          "text": "T-1IK47"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14e_other_assets_gains_losses_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14e[0].f1_50[0]",
+          "text": "8,429"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14e_other_assets_gains_losses_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14e[0].f1_51[0]",
+          "text": "T-Y28YP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14e_other_assets_gains_losses_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14e[0].f1_52[0]",
+          "text": "T-4I8ZD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14f_other_assets_deductions_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14f[0].f1_53[0]",
+          "text": "3,914"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14f_other_assets_deductions_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14f[0].f1_54[0]",
+          "text": "T-1Q03N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14f_other_assets_deductions_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14f[0].f1_55[0]",
+          "text": "T-1QALQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14g_other_assets_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14g[0].f1_56[0]",
+          "text": "1,751"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14g_other_assets_credits_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14g[0].f1_57[0]",
+          "text": "T-YUSZI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.14g_other_assets_credits_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14g[0].f1_58[0]",
+          "text": "T-N2V0J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.15_number_forms_3520",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_59[0]",
+          "text": "2,459"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.16_number_forms_3520a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_60[0]",
+          "text": "6,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.17_number_forms_5471",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_61[0]",
+          "text": "1,828"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.18_number_forms_8621",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_62[0]",
+          "text": "1,676"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.19_number_forms_8865",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_63[0]",
+          "text": "6,685"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.3a_filer_specified_individual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.3b_filer_partnership",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.3c_filer_corporation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.3d_filer_trust",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.4a_specified_person_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "T-135GA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.4b_specified_person_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "T-NVQAS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.5_number_deposit_accounts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "3,152"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.6_max_value_deposit_accounts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "4,151"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.7_number_custodial_accounts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "5,488"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.8_max_value_custodial_accounts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "8,660"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.9_accounts_closed_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.0.line.9_accounts_closed_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.20a_type_of_account_deposit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line20_ReadOrder[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.20b_type_of_account_custodial",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line20_ReadOrder[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.21_account_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+          "text": "T-15PRI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.22a_account_opened_during_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.22b_account_closed_during_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.22c_account_jointly_owned_spouse",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.22d_account_no_tax_item",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.23_account_maximum_value",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+          "text": "7,425"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.24_account_exchange_rate_used_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.24_account_exchange_rate_used_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.25_account_exchange_rate_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+          "text": "T-HQSB0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.25_account_exchange_rate_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+          "text": "T-PT6S6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.25_account_exchange_rate_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+          "text": "T-1NS2D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.26a_financial_institution_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+          "text": "T-J3IRU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.26b_institution_giin_segment_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+          "text": "T10Z9Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.26b_institution_giin_segment_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+          "text": "T-1TE2W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.26b_institution_giin_segment_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+          "text": "88"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.26b_institution_giin_segment_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "977"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.27_financial_institution_street_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "T-172P2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.28_financial_institution_city_country",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "T-16SG1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.29_description_of_asset",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "T-3VEYR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.30_asset_identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "T-FSTAT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.31a_date_asset_acquired",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.31b_date_asset_disposed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.31c_asset_jointly_owned_spouse",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.31d_asset_no_tax_item",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.32a_asset_maximum_value_0_to_50000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.32b_asset_maximum_value_50001_to_100000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.32c_asset_maximum_value_100001_to_150000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.32d_asset_maximum_value_150001_to_200000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.32e_asset_maximum_value_over_200000",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "3,070"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.33_asset_exchange_rate_used_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_10[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.33_asset_exchange_rate_used_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.34_asset_exchange_rate_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "T-HSYF2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.34_asset_exchange_rate_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "T-Q8XMJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.34_asset_exchange_rate_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+          "text": "T-1MB8G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.35a_foreign_entity_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+          "text": "T-YHYZ3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.35b_entity_giin_segment_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+          "text": "T11DKY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.35b_entity_giin_segment_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+          "text": "T-15CE3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.35b_entity_giin_segment_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+          "text": "68"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.35b_entity_giin_segment_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+          "text": "285"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.35c_foreign_entity_type_corporation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_11[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.35c_foreign_entity_type_estate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_11[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.35c_foreign_entity_type_partnership",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.35c_foreign_entity_type_trust",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_11[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.35d_foreign_entity_street_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+          "text": "T-DA8OI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.35e_foreign_entity_city_country",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+          "text": "T-TE8HA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36a_information_is_for_counterparty",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_12[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36a_information_is_for_issuer",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_12[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36a_issuer_or_counterparty_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+          "text": "T-J77GG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36b_issuer_counterparty_type_corporation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_13[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36b_issuer_counterparty_type_estate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_13[4]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36b_issuer_counterparty_type_individual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_13[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36b_issuer_counterparty_type_partnership",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_13[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36b_issuer_counterparty_type_trust",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_13[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36c_issuer_counterparty_foreign_person",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_14[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36c_issuer_counterparty_us_person",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_14[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36d_issuer_counterparty_street_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+          "text": "T-1VQVA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8938.1.line.36e_issuer_counterparty_city_country",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+          "text": "T-1X1KY"
+        }
+      ]
+    }
+  ]
+}

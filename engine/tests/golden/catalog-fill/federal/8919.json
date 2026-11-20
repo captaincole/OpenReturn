@@ -1,0 +1,357 @@
+{
+  "formId": "form-8919",
+  "fieldCount": 39,
+  "entries": [
+    {
+      "fieldId": "form-8919.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-7NGAY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.1_firm_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row1[0].f1_3[0]",
+          "text": "T-123NQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.1_firm_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row1[0].f1_4[0]",
+          "text": "T-8ZU19"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.1_firm_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row1[0].f1_5[0]",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.1_firm_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row1[0].f1_6[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.1_firm_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.1_firm_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row1[0].f1_7[0]",
+          "text": "1,455"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.10_wages_subject_social_security_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "4,484"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.11_social_security_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "1,152"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.12_medicare_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+          "text": "6,362"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.13_total_uncollected_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+          "text": "3,792"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.2_firm_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row2[0].f1_8[0]",
+          "text": "T-L9J8C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.2_firm_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row2[0].f1_9[0]",
+          "text": "T-BZJEM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.2_firm_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row2[0].f1_10[0]",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.2_firm_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row2[0].f1_11[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.2_firm_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row2[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.2_firm_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row2[0].f1_12[0]",
+          "text": "3,980"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.3_firm_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row3[0].f1_13[0]",
+          "text": "T-P5ODX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.3_firm_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row3[0].f1_14[0]",
+          "text": "T-PX8Y4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.3_firm_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row3[0].f1_15[0]",
+          "text": "2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.3_firm_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row3[0].f1_16[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.3_firm_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row3[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.3_firm_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row3[0].f1_17[0]",
+          "text": "8,409"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.4_firm_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row4[0].f1_18[0]",
+          "text": "T-10MTZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.4_firm_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row4[0].f1_19[0]",
+          "text": "T-122MX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.4_firm_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row4[0].f1_20[0]",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.4_firm_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row4[0].f1_21[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.4_firm_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row4[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.4_firm_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row4[0].f1_22[0]",
+          "text": "5,309"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.5_firm_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row5[0].f1_23[0]",
+          "text": "T-MBAEH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.5_firm_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row5[0].f1_24[0]",
+          "text": "T-47M11"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.5_firm_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row5[0].f1_25[0]",
+          "text": "0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.5_firm_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row5[0].f1_26[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.5_firm_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row5[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.5_firm_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Pg1Table[0].Row5[0].f1_27[0]",
+          "text": "4,870"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.6_total_wages",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "7,040"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.8_total_social_security_wages_tips",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "8,463"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8919.0.line.9_subtract_line_8_from_7",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "1,800"
+        }
+      ]
+    }
+  ]
+}

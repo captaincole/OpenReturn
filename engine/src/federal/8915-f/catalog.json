@@ -1,0 +1,1445 @@
+{
+  "form": {
+    "formId": "form-8915-f",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8915-F, Qualified Disaster Retirement Plan Distributions and Repayments"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8915-f.0.header.taxpayer_name",
+      "label": "Name. If married, file a separate form for each spouse required to file Form 8915-F",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2021",
+      "label": "Item A — Tax year for which you are filing form (check only one box): 2021",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2022",
+      "label": "Item A — Tax year for which you are filing form (check only one box): 2022",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 100.8,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2023",
+      "label": "Item A — Tax year for which you are filing form (check only one box): 2023",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[2]",
+      "position": {
+        "page": 0,
+        "x": 144,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2024",
+      "label": "Item A — Tax year for which you are filing form (check only one box): 2024",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[3]",
+      "position": {
+        "page": 0,
+        "x": 187.2,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2025",
+      "label": "Item A — Tax year for which you are filing form (check only one box): 2025",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[4]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2026",
+      "label": "Item A — Tax year for which you are filing form (check only one box): 2026",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[5]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2027",
+      "label": "Item A — Tax year for which you are filing form (check only one box): 2027",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[6]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_2028",
+      "label": "Item A — Tax year for which you are filing form (check only one box): 2028",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[7]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_other",
+      "label": "Item A — Tax year for which you are filing form (check only one box): Other",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[8]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 595.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_a_tax_year_other_year",
+      "label": "Item A — Tax year for which you are filing form: Other (enter year)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 593.968
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2020",
+      "label": "Item B — Calendar year in which qualified disaster(s) began (check only one box): 2020",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 57.6,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2021",
+      "label": "Item B — Calendar year in which qualified disaster(s) began (check only one box): 2021",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 100.8,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2022",
+      "label": "Item B — Calendar year in which qualified disaster(s) began (check only one box): 2022",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[2]",
+      "position": {
+        "page": 0,
+        "x": 144,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2023",
+      "label": "Item B — Calendar year in which qualified disaster(s) began (check only one box): 2023",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[3]",
+      "position": {
+        "page": 0,
+        "x": 187.2,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2024",
+      "label": "Item B — Calendar year in which qualified disaster(s) began (check only one box): 2024",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[4]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2025",
+      "label": "Item B — Calendar year in which qualified disaster(s) began (check only one box): 2025",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[5]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2026",
+      "label": "Item B — Calendar year in which qualified disaster(s) began (check only one box): 2026",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[6]",
+      "position": {
+        "page": 0,
+        "x": 316.8,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_2027",
+      "label": "Item B — Calendar year in which qualified disaster(s) began (check only one box): 2027",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[7]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_other",
+      "label": "Item B — Calendar year in which qualified disaster(s) began (check only one box): Other",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[8]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 565.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_b_disaster_year_other_year",
+      "label": "Item B — Calendar year in which qualified disaster(s) began: Other (enter year)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 563.969
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_1",
+      "label": "Item C — FEMA number for each of your qualified disasters for the year checked in item B above: (1)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 69.6,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_2",
+      "label": "Item C — FEMA number for each of your qualified disasters for the year checked in item B above: (2)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 156,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_3",
+      "label": "Item C — FEMA number for each of your qualified disasters for the year checked in item B above: (3)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 242.4,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_4",
+      "label": "Item C — FEMA number for each of your qualified disasters for the year checked in item B above: (4)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 328.8,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_5",
+      "label": "Item C — FEMA number for each of your qualified disasters for the year checked in item B above: (5)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 415.2,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_c_fema_number_6",
+      "label": "Item C — FEMA number for each of your qualified disasters for the year checked in item B above: (6)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 501.6,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.0.header.item_d_coronavirus",
+      "label": "Item D — If your only disaster, or one of your disasters, is the coronavirus, check this box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 386,
+        "y": 511.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row1_fema_number",
+      "label": "Part I Disaster Table, row 1 — Disaster FEMA number",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row1[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 677.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row1_declaration_date",
+      "label": "Part I Disaster Table, row 1 — Disaster declaration date",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row1[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 677.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row1_beginning_date",
+      "label": "Part I Disaster Table, row 1 — Disaster beginning date",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row1[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 677.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row2_fema_number",
+      "label": "Part I Disaster Table, row 2 — Disaster FEMA number",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row2[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 665.971
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row2_declaration_date",
+      "label": "Part I Disaster Table, row 2 — Disaster declaration date",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row2[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 665.971
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_row2_beginning_date",
+      "label": "Part I Disaster Table, row 2 — Disaster beginning date",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table1_Part1[0].Row2[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 665.971
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_disaster_table_more_than_two_disasters",
+      "label": "Part I Disaster Table — If more than two disasters, see instructions and check this box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 566,
+        "y": 649.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.part1_distribution_dates_this_year",
+      "label": "Part I — Date(s) of distribution(s) made this year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].DatesOfDistributions_ReadOrder[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 171,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.1a_disaster_distribution_limit_col_b",
+      "label": "Line 1a, column (b) — Qualified disaster distribution limit ($22,000, or $100,000 for 2020 disasters, times the number of disasters; see line 1a text)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row1a[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 377.965
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.1b_prior_year_disaster_distributions_col_b",
+      "label": "Line 1b, column (b) — Enter the total qualified disaster distributions made to you in prior year(s) for all disasters in the Part I Disaster Table",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row1b[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 353.964
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.1c_limit_less_prior_distributions_col_b",
+      "label": "Line 1c, column (b) — Subtract line 1b from line 1a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row1c[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 341.965
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.1d_limit_for_new_disasters_col_b",
+      "label": "Line 1d, column (b) — Enter $22,000 ($100,000 if you checked 2020 in item B) times the number of qualified disasters that you entered in the Part I Disaster Table but didn't enter in item C on a prior year's Form 8915-F, or in Part I of 2020 Form 8915-E if you checked 2020 in item B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row1d[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 311.966
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.1e_total_available_disaster_distribution_col_b",
+      "label": "Line 1e, column (b) — Total available qualified disaster distribution amount for this year. Enter the sum of lines 1c and 1d",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row1e[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 269.965
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.2_retirement_plan_distributions_col_a",
+      "label": "Line 2, column (a) Available distributions for this year — Distributions from retirement plans (other than IRAs) made this year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 257.966
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.2_retirement_plan_distributions_col_b",
+      "label": "Line 2, column (b) Qualified disaster distributions for the disasters in the Part I Disaster Table — Distributions from retirement plans (other than IRAs) made this year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 257.966
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.3_traditional_ira_distributions_col_a",
+      "label": "Line 3, column (a) Available distributions for this year — Distributions from traditional IRAs made this year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row3[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 233.965
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.3_traditional_ira_distributions_col_b",
+      "label": "Line 3, column (b) Qualified disaster distributions for the disasters in the Part I Disaster Table — Distributions from traditional IRAs made this year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row3[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 233.965
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.4_roth_ira_distributions_col_a",
+      "label": "Line 4, column (a) Available distributions for this year — Distributions from Roth IRAs made this year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row4[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 209.964
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.4_roth_ira_distributions_col_b",
+      "label": "Line 4, column (b) Qualified disaster distributions for the disasters in the Part I Disaster Table — Distributions from Roth IRAs made this year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row4[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 209.964
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.5a_distributions_not_disaster_col_a",
+      "label": "Line 5a, column (a) — The total distributions from lines 2 through 4 in column (a) that aren't qualified disaster distributions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row5a[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 185.963
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.5b_distributions_less_line_5a_col_a",
+      "label": "Line 5b, column (a) — The sum of lines 2 through 4 in column (a) reduced by the amount on line 5a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row5b[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 107.959
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.5b_distributions_less_line_5a_col_b",
+      "label": "Line 5b, column (b) — The smaller of the amount on line 5b, column (a), or line 1e",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Lines1-5[0].Row5b[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 107.959
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.6_total_qualified_disaster_distributions",
+      "label": "Line 6 — Total qualified disaster distributions. Enter the amount from line 5b, column (b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 77.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.1.line.7_taxable_amount",
+      "label": "Line 7 — Taxable amount. Enter the excess of the sum of lines 2 through 4 in column (a) over the amount on line 6",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 35.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.8_amount_on_line_2_col_b_no",
+      "label": "Line 8 — Did you enter an amount on line 2, column (b)? No. Skip lines 8 through 11, and go to line 12",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 68,
+        "y": 697.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.8_amount_on_line_2_col_b_yes",
+      "label": "Line 8 — Did you enter an amount on line 2, column (b)? Yes. Enter the amount from line 2, column (b)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_1[1]",
+      "position": {
+        "page": 2,
+        "x": 269.6,
+        "y": 697.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.8_amount_from_line_2_col_b",
+      "label": "Line 8 — Enter the amount from line 2, column (b)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_01[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 695.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.9_applicable_cost_of_distributions",
+      "label": "Line 9 — Enter the applicable cost of distributions, if any",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_02[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.10_taxable_amount_other_than_ira",
+      "label": "Line 10 — Subtract line 9 from line 8. This is the taxable amount of your other-than-IRA retirement plan qualified disaster distributions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_03[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.11_elect_not_to_spread",
+      "label": "Line 11 — If you elect NOT to spread the taxable amount over 3 years, check this box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Line11_ReadOrder[0].c3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 373.3,
+        "y": 639.468
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.11_taxable_amount_this_year",
+      "label": "Line 11 — If you elect NOT to spread the taxable amount over 3 years, enter the amount from line 10. Otherwise, enter the amount from line 10 divided by 3.0",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_04[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 617.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.12_income_for_prior_years",
+      "label": "Line 12 — Enter the amount, if any, from Worksheet 2 in the instructions. This is your income for prior years from other-than-IRA retirement plan qualified disaster distributions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_05[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 581.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.13_total_income_this_year",
+      "label": "Line 13 — Add lines 11 and 12. This is your total income this year from other-than-IRA retirement plan qualified disaster distributions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_06[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 557.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.14_total_repayment",
+      "label": "Line 14 — Total repayment. Enter the amount, if any, from Worksheet 3",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_07[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 521.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.15_amount_subject_to_tax",
+      "label": "Line 15 — Amount subject to tax this year. Subtract line 14 from line 13. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_08[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 497.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.16_amount_on_line_3_or_4_col_b_yes",
+      "label": "Line 16 — Did you enter an amount on line 3, column (b), or line 4, column (b)? Yes. Go to line 17",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 68,
+        "y": 451.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.16_amount_on_line_3_or_4_col_b_no",
+      "label": "Line 16 — Did you enter an amount on line 3, column (b), or line 4, column (b)? No. Skip lines 17 through 22, and go to line 23",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_3[1]",
+      "position": {
+        "page": 2,
+        "x": 176,
+        "y": 451.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.17_ira_distribution_on_form_8606_yes",
+      "label": "Line 17 — Did you receive a qualified disaster distribution from an IRA that is required to be reported on this year's Form 8606? Yes. Go to line 18",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 68,
+        "y": 416.468
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.17_ira_distribution_on_form_8606_no",
+      "label": "Line 17 — Did you receive a qualified disaster distribution from an IRA that is required to be reported on this year's Form 8606? No. Skip lines 18 and 19, and go to line 20",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_4[1]",
+      "position": {
+        "page": 2,
+        "x": 176,
+        "y": 416.468
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.18_form_8606_line_15b",
+      "label": "Line 18 — Enter the amount, if any, from this year's Form 8606, line 15b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_09[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 377.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.19_form_8606_line_25b",
+      "label": "Line 19 — Enter the amount, if any, from this year's Form 8606, line 25b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 341.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.20_amount_from_line_3_col_b",
+      "label": "Line 20 — Enter the amount from line 3, column (b), if any. Don't include on line 20 any amounts reported on Form 8606",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 317.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.21_taxable_amount_ira",
+      "label": "Line 21 — Add lines 18, 19, and 20. This is the taxable amount of your IRA qualified disaster distributions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 305.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.22_elect_not_to_spread",
+      "label": "Line 22 — If you elect NOT to spread the taxable amount over 3 years, check this box",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Line22_ReadOrder[0].c3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 373.3,
+        "y": 285.469
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.22_taxable_amount_this_year",
+      "label": "Line 22 — If you elect NOT to spread the taxable amount over 3 years, enter the amount from line 21. Otherwise, enter the amount from line 21 divided by 3.0",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.23_income_for_prior_years",
+      "label": "Line 23 — Enter the amount, if any, from Worksheet 4 in the instructions. This is your income for prior years from IRA qualified disaster distributions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_14[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.24_total_income_this_year",
+      "label": "Line 24 — Add lines 22 and 23. This is your total income this year from IRA qualified disaster distributions",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_15[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.25_total_repayment",
+      "label": "Line 25 — Total repayment. Enter the amount, if any, from Worksheet 5",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_16[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.2.line.26_amount_subject_to_tax",
+      "label": "Line 26 — Amount subject to tax. Subtract line 25 from line 24. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_17[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 167.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row1_fema_number",
+      "label": "Part IV Disaster Table, row 1 — Disaster FEMA number",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row1[0].f4_01[0]",
+      "position": {
+        "page": 3,
+        "x": 36,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row1_declaration_date",
+      "label": "Part IV Disaster Table, row 1 — Disaster declaration date",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row1[0].f4_02[0]",
+      "position": {
+        "page": 3,
+        "x": 208.8,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row1_beginning_date",
+      "label": "Part IV Disaster Table, row 1 — Disaster beginning date",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row1[0].f4_03[0]",
+      "position": {
+        "page": 3,
+        "x": 331.2,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row1_ending_date",
+      "label": "Part IV Disaster Table, row 1 — Disaster ending date",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row1[0].f4_04[0]",
+      "position": {
+        "page": 3,
+        "x": 453.6,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row2_fema_number",
+      "label": "Part IV Disaster Table, row 2 — Disaster FEMA number",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row2[0].f4_05[0]",
+      "position": {
+        "page": 3,
+        "x": 36,
+        "y": 611.971
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row2_declaration_date",
+      "label": "Part IV Disaster Table, row 2 — Disaster declaration date",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row2[0].f4_06[0]",
+      "position": {
+        "page": 3,
+        "x": 208.8,
+        "y": 611.971
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row2_beginning_date",
+      "label": "Part IV Disaster Table, row 2 — Disaster beginning date",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row2[0].f4_07[0]",
+      "position": {
+        "page": 3,
+        "x": 331.2,
+        "y": 611.971
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_disaster_row2_ending_date",
+      "label": "Part IV Disaster Table, row 2 — Disaster ending date",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Table1_Part4[0].Row2[0].f4_08[0]",
+      "position": {
+        "page": 3,
+        "x": 453.6,
+        "y": 611.971
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.part4_qualified_distribution_dates",
+      "label": "Part IV — Date(s) of qualified distribution(s) received this year",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_09[0]",
+      "position": {
+        "page": 3,
+        "x": 223.2,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.27_ira_distribution_on_8606_yes",
+      "label": "Line 27 — Did you receive a qualified distribution, for the purchase or construction of a main home in the area of a disaster listed in the Part IV Disaster Table, that is from an IRA and that is required to be reported on this year's Form 8606? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].c4_1[0]",
+      "position": {
+        "page": 3,
+        "x": 67.95,
+        "y": 512.469
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.27_ira_distribution_on_8606_no",
+      "label": "Line 27 — Did you receive a qualified distribution, for the purchase or construction of a main home in the area of a disaster listed in the Part IV Disaster Table, that is from an IRA and that is required to be reported on this year's Form 8606? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].c4_1[1]",
+      "position": {
+        "page": 3,
+        "x": 68,
+        "y": 488.718
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.28_total_qualified_distributions",
+      "label": "Line 28 — Enter the total amount of qualified distributions you received this year for the purchase or construction of a main home in the area of disaster(s) listed in the Part IV Disaster Table",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_10[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.29_applicable_cost_of_distributions",
+      "label": "Line 29 — Enter the applicable cost of distributions, if any",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_11[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.30_distributions_less_cost",
+      "label": "Line 30 — Subtract line 29 from line 28",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_12[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 407.967
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.31_total_repayments",
+      "label": "Line 31 — Enter the total amount of any repayments you made",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_13[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.32_taxable_amount_write_in",
+      "label": "Line 32 — Taxable amount: write-in line to the left of the amount",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].Line32_ReadOrder[0].f4_14[0]",
+      "position": {
+        "page": 3,
+        "x": 64.8,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-8915-f.3.line.32_taxable_amount",
+      "label": "Line 32 — Taxable amount. Subtract line 31 from line 30",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page4[0].f4_15[0]",
+      "position": {
+        "page": 3,
+        "x": 504,
+        "y": 323.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8915-f/blank.pdf",
+    "ingestedAt": "2026-11-20T15:34:02.741Z",
+    "totalFields": 95,
+    "skipped": 0,
+    "catalogEntries": 95
+  }
+}

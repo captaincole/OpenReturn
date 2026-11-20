@@ -1,0 +1,1275 @@
+{
+  "formId": "form-8933",
+  "fieldCount": 141,
+  "entries": [
+    {
+      "fieldId": "form-8933.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-16F9R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-1LB0A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.1_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "T-DB1DS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.10_direct_air_capture_facility_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.10_direct_air_capture_facility_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.11_nature_of_facility",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line11_ReadOrder[0].f1_20[0]",
+          "text": "T-JX0AP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.12_gas_from_underground_deposits_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.12_gas_from_underground_deposits_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.12a_gas_from_production_well_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.12a_gas_from_production_well_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.12c_attest_commercially_viable_exception_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.12c_attest_commercially_viable_exception_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.12d_engineer_attestation_attached_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.12d_engineer_attestation_attached_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.13_carbon_oxide_emissions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line13_ReadOrder[0].f1_21[0]",
+          "text": "T-9R5U4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.13a_carbon_dioxide_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "T-1K4JQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.13b_carbon_monoxide_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "T-4XLGW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.14_first_year_emissions_annualized_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.14_first_year_emissions_annualized_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.14a_annualized_emissions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line14a[0].f1_24[0]",
+          "text": "T-ITCSF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.15_aggregation_multiple_facilities_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.15_aggregation_multiple_facilities_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.2_epa_eggrt_id_numbers",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "T-1EQVC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.3_facility_type_entry1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Entry1[0].f1_05[0]",
+          "text": "181"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.3_facility_type_entry2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Entry2[0].f1_06[0]",
+          "text": "971"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.3_facility_type_entry3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Entry3[0].f1_07[0]",
+          "text": "326"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.4a_owner_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "T-1ACXV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.4a_owner_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "T-87LJ1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.4b_facility_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "T-1FZLG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.4c_latitude_decimals",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_13[0]",
+          "text": "TRHXZL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.4c_latitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_12[0]",
+          "text": "10"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.4c_latitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_11[0]",
+          "text": "3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.4c_longitude_decimals",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_16[0]",
+          "text": "T1DLWW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.4c_longitude_degrees",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_15[0]",
+          "text": "335"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.4c_longitude_sign",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_14[0]",
+          "text": "7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.5_date_construction_began",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.6_date_placed_in_service",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.7_total_metric_tons_captured",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "T-1HK58"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.9_electricity_generating_facility_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.0.line.9_electricity_generating_facility_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.16_carbon_captured_dac_facility_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.16_carbon_captured_dac_facility_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.18_equipment_placed_2018_to_2022_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.18_equipment_placed_2018_to_2022_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.20_owner_of_capture_equipment_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.20_owner_of_capture_equipment_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.20a_authority_for_claiming_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+          "text": "T-RLQFT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.22_carbon_capture_capacity",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+          "text": "T-HWMJO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.23_additional_equipment_installed_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.23_additional_equipment_installed_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.23c_placed_in_service_80_20_rule_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.23c_placed_in_service_80_20_rule_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.23d_i_investment_new_capture_equipment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+          "text": "3,401"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.23d_ii_fmv_preexisting_capture_equipment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+          "text": "6,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.23e_pipeline_investment_included_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.23e_pipeline_investment_included_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.23f_investment_transportation_pipeline",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+          "text": "3,984"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.24_total_carbon_oxide_captured",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+          "text": "T-1DV1J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.24a_carbon_dioxide_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+          "text": "T-CQ7SQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.24b_carbon_monoxide_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+          "text": "T-132FR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.25_first_year_emissions_annualized_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.25_first_year_emissions_annualized_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.25a_annualized_carbon_oxide_emissions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+          "text": "T-DRK3G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.26_other_parties_contractually_ensuring_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_8[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.26_other_parties_contractually_ensuring_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.27_elect_parties_claim_credit_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.27_elect_parties_claim_credit_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.28_elect_section_45q_b_3_rates_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_10[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.28_elect_section_45q_b_3_rates_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.29_applicable_facility_45q_f_6_election_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_11[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.29_applicable_facility_45q_f_6_election_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.30_dispose_secure_geological_storage_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_12[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.30_dispose_secure_geological_storage_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_12[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.31_tertiary_injectant_and_storage_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_13[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.31_tertiary_injectant_and_storage_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_13[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.32_utilize_section_45q_f_5_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_14[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.32_utilize_section_45q_f_5_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_14[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.33_prevailing_wage_apprenticeship_requirement_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_15[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.1.line.33_prevailing_wage_apprenticeship_requirement_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_15[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part2.1_lca_approved_by_irs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part2.2_ensured_capture",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part2.3_ensured_disposal_or_use",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part2.4_elected_allow_another_taxpayer",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part2.5_another_taxpayer_elected_allow_you",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part2.6_election_section_45q_b_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part2.7_election_section_45q_f_6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part2.8_election_section_45q_f_9",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.1a_tons_captured_at_disposal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_01[0]",
+          "text": "T-1TGFX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.1b_tons_stored_by_you",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line1b_ReadOrder[0].f3_02[0]",
+          "text": "T-RD6ZZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.1c_tons_stored_by_another",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_03[0]",
+          "text": "T-PMX1I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.1d_total_tons_stored",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_04[0]",
+          "text": "T-RVJ6B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.1e_tons_credit_allowed_to_another",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line1e_ReadOrder[0].f3_05[0]",
+          "text": "T-PJ7BE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.1f_net_tons_stored",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_06[0]",
+          "text": "T-LV3KW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.1g_credit_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_07[0]",
+          "text": "5,377"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.1h_tons_times_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_08[0]",
+          "text": "1,004"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.1i_increased_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_09[0]",
+          "text": "3,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.2a_tons_captured_at_injection",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+          "text": "T-14TYD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.2b_tons_injected_by_you",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+          "text": "T-KDHD2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.2c_tons_injected_by_another",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+          "text": "T-174MM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.2d_total_tons_injected",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+          "text": "T-1LM9A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.2e_tons_credit_allowed_to_another",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line2e_ReadOrder[0].f3_14[0]",
+          "text": "T-CQJCL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.2f_net_tons_injected",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_15[0]",
+          "text": "T-89Z6L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.2g_credit_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_16[0]",
+          "text": "3,833"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.2h_tons_times_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_17[0]",
+          "text": "2,650"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.2.part3.2i_increased_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_18[0]",
+          "text": "1,769"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.10_credit_recaptured",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_36[0]",
+          "text": "2,768"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3a_tons_measured_at_utilization",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_01[0]",
+          "text": "T-PPL0K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3b_tons_utilized_by_you",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_02[0]",
+          "text": "T-L8TMI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3c_tons_utilized_by_another",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_03[0]",
+          "text": "T-N4BKL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3d_add_lines_3b_3c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_04[0]",
+          "text": "T-Z31YT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3e_tons_credit_allowed_to_another",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Line3e_ReadOrder[0].f4_05[0]",
+          "text": "T-SZNOX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3f_subtract_3e_from_3d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_06[0]",
+          "text": "T-DYX4T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3g_displacement_factor_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_08[0]",
+          "text": "97"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3g_displacement_factor_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_07[0]",
+          "text": "3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3h_multiply_3f_by_3g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_09[0]",
+          "text": "T-KUV1K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3i_credit_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_10[0]",
+          "text": "T-1IY53"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3j_multiply_3h_by_3i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_11[0]",
+          "text": "3,385"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.3k_increased_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_12[0]",
+          "text": "5,612"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.4_credit_before_reduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_13[0]",
+          "text": "8,364"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.5a_tax_exempt_bond_ratio",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_14[0]",
+          "text": "T-O1269"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.5b_multiply_4_by_5a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_15[0]",
+          "text": "9,391"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.5c_multiply_4_by_15_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_16[0]",
+          "text": "5,443"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.5d_smaller_of_5b_5c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_17[0]",
+          "text": "1,422"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.6_subtract_5d_from_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_18[0]",
+          "text": "4,749"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7a_credit_elected_by_another_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7a[0].f4_19[0]",
+          "text": "T-193NL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7a_credit_elected_by_another_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7a[0].f4_20[0]",
+          "text": "T-1UW8M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7a_credit_elected_by_another_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7a[0].f4_21[0]",
+          "text": "T-HY88X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7a_credit_elected_by_another_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7a[0].f4_22[0]",
+          "text": "6,624"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7b_credit_elected_by_another_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7b[0].f4_23[0]",
+          "text": "T-VMS9P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7b_credit_elected_by_another_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7b[0].f4_24[0]",
+          "text": "T-1BXWB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7b_credit_elected_by_another_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7b[0].f4_25[0]",
+          "text": "T-OH6YD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7b_credit_elected_by_another_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7b[0].f4_26[0]",
+          "text": "7,270"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7c_credit_elected_by_another_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7c[0].f4_27[0]",
+          "text": "T-17M1A"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7c_credit_elected_by_another_col_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7c[0].f4_28[0]",
+          "text": "T-12PQ8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7c_credit_elected_by_another_col_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7c[0].f4_29[0]",
+          "text": "T-1M1RL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7c_credit_elected_by_another_col_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].Table_Line7[0].Row7c[0].f4_30[0]",
+          "text": "2,079"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7d_add_lines_7a_7b_7c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_31[0]",
+          "text": "1,188"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7e_other_credit_elected_by_another",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_32[0]",
+          "text": "3,386"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.7f_add_lines_7d_7e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_33[0]",
+          "text": "9,067"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.8_credit_from_partnerships_s_corporations",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_34[0]",
+          "text": "5,163"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933.3.part3.9_add_lines_6_7f_8",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page4[0].f4_35[0]",
+          "text": "9,165"
+        }
+      ]
+    }
+  ]
+}

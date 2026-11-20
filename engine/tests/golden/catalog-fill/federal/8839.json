@@ -1,0 +1,906 @@
+{
+  "formId": "form-8839",
+  "fieldCount": 100,
+  "entries": [
+    {
+      "fieldId": "form-8839.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-V9J9I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_a_first",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].f1_3[0]",
+          "text": "T-1AKT1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_a_last",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].f1_4[0]",
+          "text": "T-1YQN2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].f1_5[0]",
+          "text": "5745"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].f1_6[0]",
+          "text": "T-1W744"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_a_first",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].f1_7[0]",
+          "text": "T-1RZOY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_a_last",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].f1_8[0]",
+          "text": "T-19T2S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].f1_9[0]",
+          "text": "6670"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].f1_10[0]",
+          "text": "T-YPLSV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].c1_8[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_a_first",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].f1_11[0]",
+          "text": "T-RD0I2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_a_last",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].f1_12[0]",
+          "text": "T-1G15N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].f1_13[0]",
+          "text": "1651"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].c1_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].c1_10[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].c1_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].f1_14[0]",
+          "text": "T-EFX9X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].c1_12[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.10_phaseout_reduction_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+          "text": "8,594"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.10_phaseout_reduction_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+          "text": "2,807"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.10_phaseout_reduction_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+          "text": "1,402"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.11a_credit_after_phaseout_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+          "text": "6,109"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.11a_credit_after_phaseout_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+          "text": "6,998"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.11a_credit_after_phaseout_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_39[0]",
+          "text": "9,804"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.11b_smaller_of_11a_or_5000_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_40[0]",
+          "text": "8,943"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.11b_smaller_of_11a_or_5000_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_41[0]",
+          "text": "3,956"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.11b_smaller_of_11a_or_5000_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_42[0]",
+          "text": "5,985"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.11c_total_line_11b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_43[0]",
+          "text": "3,979"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.12_total_line_11a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_44[0]",
+          "text": "8,543"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.13_refundable_adoption_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_45[0]",
+          "text": "8,269"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.14_credit_less_refundable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_46[0]",
+          "text": "7,863"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.15_credit_carryforward_prior_years",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_47[0]",
+          "text": "2,228"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.16_add_lines_14_and_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_48[0]",
+          "text": "4,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.17_credit_limit_worksheet_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_49[0]",
+          "text": "9,793"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.18_nonrefundable_adoption_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_50[0]",
+          "text": "9,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.2_maximum_adoption_credit_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child1[0].f1_15[0]",
+          "text": "1,191"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.2_maximum_adoption_credit_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child2[0].f1_16[0]",
+          "text": "6,861"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.2_maximum_adoption_credit_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Child3[0].f1_17[0]",
+          "text": "2,959"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.3_prior_year_amount_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "9,189"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.3_prior_year_amount_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "3,296"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.3_prior_year_amount_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "2,816"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.3_prior_year_form_8839_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line3_ReadOrder[0].Line3Checkboxes_ReadOrder[0].c1_13[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.3_prior_year_form_8839_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line3_ReadOrder[0].Line3Checkboxes_ReadOrder[0].c1_13[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.4_credit_limit_remaining_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "1,552"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.4_credit_limit_remaining_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "2,053"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.4_credit_limit_remaining_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "9,278"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.5_qualified_adoption_expenses_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "3,281"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.5_qualified_adoption_expenses_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "5,324"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.5_qualified_adoption_expenses_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "7,127"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.6_smaller_of_4_or_5_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "9,107"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.6_smaller_of_4_or_5_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "7,018"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.6_smaller_of_4_or_5_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "4,062"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.7_modified_adjusted_gross_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "8,290"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.8_magi_excess_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "9,485"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.8_magi_over_threshold_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line8_ReadOrder[0].c1_14[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.8_magi_over_threshold_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line8_ReadOrder[0].c1_14[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.9_phaseout_decimal_fraction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "T-KUC3I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.0.line.9_phaseout_decimal_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.19_maximum_exclusion_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Child1[0].f2_1[0]",
+          "text": "6,413"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.19_maximum_exclusion_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Child2[0].f2_2[0]",
+          "text": "8,693"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.19_maximum_exclusion_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Child3[0].f2_3[0]",
+          "text": "4,324"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.20_prior_year_benefits_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "8,496"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.20_prior_year_benefits_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "2,592"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.20_prior_year_benefits_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "2,424"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.20_prior_year_benefits_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line20_ReadOrder[0].Line20Checkboxes_ReadOrder[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.20_prior_year_benefits_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line20_ReadOrder[0].Line20Checkboxes_ReadOrder[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.21_subtract_line_20_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "1,085"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.21_subtract_line_20_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "8,404"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.21_subtract_line_20_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "1,638"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.22_employer_benefits_received_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "5,259"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.22_employer_benefits_received_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "9,728"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.22_employer_benefits_received_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "5,506"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.23_total_employer_benefits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "4,949"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.24_smaller_of_21_or_22_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "2,579"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.24_smaller_of_21_or_22_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "1,365"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.24_smaller_of_21_or_22_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "5,825"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.25_modified_agi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line25_ReadOrder[0].f2_17[0]",
+          "text": "4,373"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.26_magi_over_259190",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "7,302"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.26_more_than_259190_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line26_ReadOrder[0].c2_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.26_more_than_259190_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line26_ReadOrder[0].c2_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.27_phaseout_decimal_fraction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+          "text": "T-BSKPW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.27_phaseout_decimal_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.28_multiply_line_24_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+          "text": "3,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.28_multiply_line_24_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+          "text": "1,695"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.28_multiply_line_24_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+          "text": "7,275"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.29_excluded_benefits_child_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+          "text": "2,418"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.29_excluded_benefits_child_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+          "text": "2,718"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.29_excluded_benefits_child_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+          "text": "9,310"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.30_total_excluded_benefits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+          "text": "8,549"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.31_line_30_more_than_23_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line31_ReadOrder[0].Line29Checkboxes_ReadOrder[0].c2_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.31_line_30_more_than_23_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line31_ReadOrder[0].Line29Checkboxes_ReadOrder[0].c2_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8839.1.line.31_taxable_benefits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+          "text": "6,854"
+        }
+      ]
+    }
+  ]
+}

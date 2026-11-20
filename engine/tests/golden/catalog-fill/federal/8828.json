@@ -1,0 +1,303 @@
+{
+  "formId": "form-8828",
+  "fieldCount": 33,
+  "entries": [
+    {
+      "fieldId": "form-8828.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-27LOB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.1_property_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-SXUD8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.10_expenses_of_sale",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "5,639"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.11_amount_realized",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "8,630"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.12_adjusted_basis",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "1,301"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.13_gain_or_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "3,001"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.14_half_of_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "6,385"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.15_modified_agi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "6,634"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.16_adjusted_qualifying_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "8,085"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.17_income_over_qualifying",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "5,417"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.18_income_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "T-1CHYY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.19_federally_subsidized_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "6,712"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.20_holding_period_percentage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "T-1QGJK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.21_subsidized_amount_times_holding",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "4,459"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.22_recapture_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "5,843"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.23_recapture_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "4,240"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.2a_tax_exempt_bond_loan",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_01[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.2b_mortgage_credit_certificate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_01[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.3_bond_certificate_issuer",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-TZHTT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.4_original_lender_name_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-YITPP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.5_loan_closing_date_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "67"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.5_loan_closing_date_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-1E79R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.5_loan_closing_date_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "3304"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.6_sale_disposition_date_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "89"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.6_sale_disposition_date_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "T-FNCF9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.6_sale_disposition_date_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "0028"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.7_holding_period_full_months",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "4,215"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.7_holding_period_years",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "1,995"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.8_full_repayment_date_day",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "46"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.8_full_repayment_date_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "T-6X1I6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.8_full_repayment_date_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "3498"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8828.0.line.9_sales_price",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "6,490"
+        }
+      ]
+    }
+  ]
+}

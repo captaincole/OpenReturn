@@ -1,0 +1,3329 @@
+{
+  "form": {
+    "formId": "form-8912",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8912, Credit to Holders of Tax Credit Bonds"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8912.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.998
+      }
+    },
+    {
+      "fieldId": "form-8912.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 671.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8912.0.line.1_bond_credits_part_iii",
+      "label": "Line 1 — Bond credit(s) from Part III. Enter the amount from line 14",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.2_bond_credits_part_iv",
+      "label": "Line 2 — Bond credit(s) from Part IV. Enter the amount from line 20",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.3_carryforward_of_credits",
+      "label": "Line 3 — Carryforward of credits for qualified tax credit bonds and build America bonds to 2021",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.4_total_credit",
+      "label": "Line 4 — Total credit. Add lines 1 through 3",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 540
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.5_allocated_to_beneficiaries",
+      "label": "Line 5 — Amount allocated to the beneficiaries of the estate or trust",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.6_estates_trusts_credit",
+      "label": "Line 6 — Estates and trusts. Subtract line 5 from line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.7_regular_tax_before_credits",
+      "label": "Line 7 — Regular tax before credits",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.8_alternative_minimum_tax",
+      "label": "Line 8 — Alternative minimum tax",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.9_regular_tax_plus_amt",
+      "label": "Line 9 — Add line 7 and line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.10a_foreign_tax_credit",
+      "label": "Line 10a — Foreign tax credit",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.10b_certain_allowable_credits",
+      "label": "Line 10b — Certain allowable credits (see instructions)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.10c_general_business_credit",
+      "label": "Line 10c — General business credit (see instructions)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.10d_prior_year_minimum_tax_credit",
+      "label": "Line 10d — Credit for prior year minimum tax (Form 8801 or Form 8827)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.10e_total_credits",
+      "label": "Line 10e — Add lines 10a through 10d",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 216
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.11_net_income_tax",
+      "label": "Line 11 — Net income tax. Subtract line 10e from line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-8912.0.line.12_credit_allowed_current_year",
+      "label": "Line 12 — Credit to holders of tax credit bonds allowed for the current year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "form-8912.1.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f1_1[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 720
+      }
+    },
+    {
+      "fieldId": "form-8912.1.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f1_2[0]",
+      "position": {
+        "page": 1,
+        "x": 453.6,
+        "y": 720
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row1_col_a",
+      "label": "Line 13, row 1 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 57.6,
+        "y": 623.999
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row1_col_b1",
+      "label": "Line 13, row 1 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 623.999
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row1_col_b2",
+      "label": "Line 13, row 1 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 623.999
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row1_col_c",
+      "label": "Line 13, row 1 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row1[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 623.999
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row2_col_a",
+      "label": "Line 13, row 2 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 599.998
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row2_col_b1",
+      "label": "Line 13, row 2 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 599.998
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row2_col_b2",
+      "label": "Line 13, row 2 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 599.998
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row2_col_c",
+      "label": "Line 13, row 2 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 599.998
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row3_col_a",
+      "label": "Line 13, row 3 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 575.997
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row3_col_b1",
+      "label": "Line 13, row 3 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 575.997
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row3_col_b2",
+      "label": "Line 13, row 3 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 575.997
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row3_col_c",
+      "label": "Line 13, row 3 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row3[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 575.997
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row4_col_a",
+      "label": "Line 13, row 4 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 551.996
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row4_col_b1",
+      "label": "Line 13, row 4 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 551.996
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row4_col_b2",
+      "label": "Line 13, row 4 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 551.996
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row4_col_c",
+      "label": "Line 13, row 4 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row4[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 551.996
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row5_col_a",
+      "label": "Line 13, row 5 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 527.995
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row5_col_b1",
+      "label": "Line 13, row 5 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 527.995
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row5_col_b2",
+      "label": "Line 13, row 5 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 527.995
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row5_col_c",
+      "label": "Line 13, row 5 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row5[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 527.995
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row6_col_a",
+      "label": "Line 13, row 6 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 503.994
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row6_col_b1",
+      "label": "Line 13, row 6 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 503.994
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row6_col_b2",
+      "label": "Line 13, row 6 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 503.994
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row6_col_c",
+      "label": "Line 13, row 6 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row6[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 503.994
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row7_col_a",
+      "label": "Line 13, row 7 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 479.993
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row7_col_b1",
+      "label": "Line 13, row 7 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 479.993
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row7_col_b2",
+      "label": "Line 13, row 7 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 479.993
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row7_col_c",
+      "label": "Line 13, row 7 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row7[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 479.993
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row8_col_a",
+      "label": "Line 13, row 8 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 455.992
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row8_col_b1",
+      "label": "Line 13, row 8 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 455.992
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row8_col_b2",
+      "label": "Line 13, row 8 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 455.992
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row8_col_c",
+      "label": "Line 13, row 8 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row8[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 455.992
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row9_col_a",
+      "label": "Line 13, row 9 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 431.991
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row9_col_b1",
+      "label": "Line 13, row 9 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 431.991
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row9_col_b2",
+      "label": "Line 13, row 9 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 431.991
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row9_col_c",
+      "label": "Line 13, row 9 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row9[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 431.991
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row10_col_a",
+      "label": "Line 13, row 10 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 407.99
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row10_col_b1",
+      "label": "Line 13, row 10 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 407.99
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row10_col_b2",
+      "label": "Line 13, row 10 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 407.99
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row10_col_c",
+      "label": "Line 13, row 10 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row10[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 407.99
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row11_col_a",
+      "label": "Line 13, row 11 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 383.989
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row11_col_b1",
+      "label": "Line 13, row 11 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 383.989
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row11_col_b2",
+      "label": "Line 13, row 11 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 383.989
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row11_col_c",
+      "label": "Line 13, row 11 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row11[0].f2_44[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 383.989
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row12_col_a",
+      "label": "Line 13, row 12 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 359.988
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row12_col_b1",
+      "label": "Line 13, row 12 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 359.988
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row12_col_b2",
+      "label": "Line 13, row 12 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 359.988
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row12_col_c",
+      "label": "Line 13, row 12 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row12[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 359.988
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row13_col_a",
+      "label": "Line 13, row 13 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 335.987
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row13_col_b1",
+      "label": "Line 13, row 13 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 335.987
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row13_col_b2",
+      "label": "Line 13, row 13 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 335.987
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row13_col_c",
+      "label": "Line 13, row 13 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row13[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 335.987
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row14_col_a",
+      "label": "Line 13, row 14 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_53[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 311.986
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row14_col_b1",
+      "label": "Line 13, row 14 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_54[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 311.986
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row14_col_b2",
+      "label": "Line 13, row 14 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_55[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 311.986
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row14_col_c",
+      "label": "Line 13, row 14 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row14[0].f2_56[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 311.986
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row15_col_a",
+      "label": "Line 13, row 15 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_57[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 287.985
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row15_col_b1",
+      "label": "Line 13, row 15 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_58[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 287.985
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row15_col_b2",
+      "label": "Line 13, row 15 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_59[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 287.985
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row15_col_c",
+      "label": "Line 13, row 15 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row15[0].f2_60[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 287.985
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row16_col_a",
+      "label": "Line 13, row 16 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_61[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 263.984
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row16_col_b1",
+      "label": "Line 13, row 16 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_62[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 263.984
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row16_col_b2",
+      "label": "Line 13, row 16 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_63[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 263.984
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row16_col_c",
+      "label": "Line 13, row 16 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row16[0].f2_64[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 263.984
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row17_col_a",
+      "label": "Line 13, row 17 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_65[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 239.983
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row17_col_b1",
+      "label": "Line 13, row 17 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_66[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 239.983
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row17_col_b2",
+      "label": "Line 13, row 17 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_67[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 239.983
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row17_col_c",
+      "label": "Line 13, row 17 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row17[0].f2_68[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 239.983
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row18_col_a",
+      "label": "Line 13, row 18 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_69[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 215.982
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row18_col_b1",
+      "label": "Line 13, row 18 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_70[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 215.982
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row18_col_b2",
+      "label": "Line 13, row 18 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_71[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 215.982
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row18_col_c",
+      "label": "Line 13, row 18 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row18[0].f2_72[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 215.982
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row19_col_a",
+      "label": "Line 13, row 19 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_73[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 191.981
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row19_col_b1",
+      "label": "Line 13, row 19 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_74[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 191.981
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row19_col_b2",
+      "label": "Line 13, row 19 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_75[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 191.981
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row19_col_c",
+      "label": "Line 13, row 19 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row19[0].f2_76[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 191.981
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row20_col_a",
+      "label": "Line 13, row 20 — (a) Name of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_77[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 167.98
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row20_col_b1",
+      "label": "Line 13, row 20 — (b1) Identifying number of issuer of Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_78[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 167.98
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row20_col_b2",
+      "label": "Line 13, row 20 — (b2) Unique identifier",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_79[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 167.98
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.13_row20_col_c",
+      "label": "Line 13, row 20 — (c) Amount reported on Form(s) 1097-BTC",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Part3[0].Row20[0].f2_80[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 167.98
+      }
+    },
+    {
+      "fieldId": "form-8912.1.line.14_total_bond_credits_1097_btc",
+      "label": "Line 14 — Total. Combine the amounts in column (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_81[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-8912.2.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f1_1[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 720
+      }
+    },
+    {
+      "fieldId": "form-8912.2.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f1_2[0]",
+      "position": {
+        "page": 2,
+        "x": 453.6,
+        "y": 720
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8912.2.line.15a_bond_issuer_name_city_state",
+      "label": "Line 15a — Bond Issuer's name, city or town, and state",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 259.2,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.15b_bond_issuer_ein",
+      "label": "Line 15b — Bond Issuer's employer identification number",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 266.4,
+        "y": 648
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8912.2.line.16a_date_bond_issued",
+      "label": "Line 16a — Date bond issued",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 158.4,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.16b_date_bond_matures",
+      "label": "Line 16b — Date bond matures",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 165.6,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.17_date_bond_disposed",
+      "label": "Line 17 — Date bond disposed of (if applicable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 230.4,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row1_col_a",
+      "label": "Line 18, row 1 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row1[0].f3_6[0]",
+      "position": {
+        "page": 2,
+        "x": 57.6,
+        "y": 515.999
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row1_col_b",
+      "label": "Line 18, row 1 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row1[0].f3_7[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 515.999
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row1_col_c",
+      "label": "Line 18, row 1 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row1[0].f3_8[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 515.999
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row1_col_d",
+      "label": "Line 18, row 1 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row1[0].f3_9[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 515.999
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row1_col_e",
+      "label": "Line 18, row 1 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row1[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 515.999
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row1_col_f",
+      "label": "Line 18, row 1 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row1[0].f3_11[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 515.999
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row2_col_a",
+      "label": "Line 18, row 2 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row2[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 491.998
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row2_col_b",
+      "label": "Line 18, row 2 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row2[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row2_col_c",
+      "label": "Line 18, row 2 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row2[0].f3_14[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row2_col_d",
+      "label": "Line 18, row 2 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row2[0].f3_15[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row2_col_e",
+      "label": "Line 18, row 2 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row2[0].f3_16[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row2_col_f",
+      "label": "Line 18, row 2 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row2[0].f3_17[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 491.998
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row3_col_a",
+      "label": "Line 18, row 3 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row3[0].f3_18[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 467.997
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row3_col_b",
+      "label": "Line 18, row 3 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row3[0].f3_19[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 467.997
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row3_col_c",
+      "label": "Line 18, row 3 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row3[0].f3_20[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 467.997
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row3_col_d",
+      "label": "Line 18, row 3 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row3[0].f3_21[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 467.997
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row3_col_e",
+      "label": "Line 18, row 3 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row3[0].f3_22[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 467.997
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row3_col_f",
+      "label": "Line 18, row 3 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row3[0].f3_23[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 467.997
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row4_col_a",
+      "label": "Line 18, row 4 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row4[0].f3_24[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 443.996
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row4_col_b",
+      "label": "Line 18, row 4 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row4[0].f3_25[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 443.996
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row4_col_c",
+      "label": "Line 18, row 4 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row4[0].f3_26[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 443.996
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row4_col_d",
+      "label": "Line 18, row 4 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row4[0].f3_27[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 443.996
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row4_col_e",
+      "label": "Line 18, row 4 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row4[0].f3_28[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 443.996
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row4_col_f",
+      "label": "Line 18, row 4 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row4[0].f3_29[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 443.996
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row5_col_a",
+      "label": "Line 18, row 5 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row5[0].f3_30[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 419.995
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row5_col_b",
+      "label": "Line 18, row 5 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row5[0].f3_31[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 419.995
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row5_col_c",
+      "label": "Line 18, row 5 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row5[0].f3_32[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 419.995
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row5_col_d",
+      "label": "Line 18, row 5 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row5[0].f3_33[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 419.995
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row5_col_e",
+      "label": "Line 18, row 5 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row5[0].f3_34[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 419.995
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row5_col_f",
+      "label": "Line 18, row 5 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row5[0].f3_35[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 419.995
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row6_col_a",
+      "label": "Line 18, row 6 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row6[0].f3_36[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 395.994
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row6_col_b",
+      "label": "Line 18, row 6 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row6[0].f3_37[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 395.994
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row6_col_c",
+      "label": "Line 18, row 6 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row6[0].f3_38[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 395.994
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row6_col_d",
+      "label": "Line 18, row 6 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row6[0].f3_39[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 395.994
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row6_col_e",
+      "label": "Line 18, row 6 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row6[0].f3_40[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 395.994
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row6_col_f",
+      "label": "Line 18, row 6 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row6[0].f3_41[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 395.994
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row7_col_a",
+      "label": "Line 18, row 7 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row7[0].f3_42[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 371.993
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row7_col_b",
+      "label": "Line 18, row 7 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row7[0].f3_43[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 371.993
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row7_col_c",
+      "label": "Line 18, row 7 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row7[0].f3_44[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 371.993
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row7_col_d",
+      "label": "Line 18, row 7 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row7[0].f3_45[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 371.993
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row7_col_e",
+      "label": "Line 18, row 7 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row7[0].f3_46[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 371.993
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row7_col_f",
+      "label": "Line 18, row 7 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row7[0].f3_47[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 371.993
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row8_col_a",
+      "label": "Line 18, row 8 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row8[0].f3_48[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 347.992
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row8_col_b",
+      "label": "Line 18, row 8 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row8[0].f3_49[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 347.992
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row8_col_c",
+      "label": "Line 18, row 8 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row8[0].f3_50[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 347.992
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row8_col_d",
+      "label": "Line 18, row 8 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row8[0].f3_51[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 347.992
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row8_col_e",
+      "label": "Line 18, row 8 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row8[0].f3_52[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 347.992
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row8_col_f",
+      "label": "Line 18, row 8 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row8[0].f3_53[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 347.992
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row9_col_a",
+      "label": "Line 18, row 9 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row9[0].f3_54[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 323.991
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row9_col_b",
+      "label": "Line 18, row 9 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row9[0].f3_55[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 323.991
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row9_col_c",
+      "label": "Line 18, row 9 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row9[0].f3_56[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 323.991
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row9_col_d",
+      "label": "Line 18, row 9 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row9[0].f3_57[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 323.991
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row9_col_e",
+      "label": "Line 18, row 9 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row9[0].f3_58[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 323.991
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row9_col_f",
+      "label": "Line 18, row 9 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row9[0].f3_59[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 323.991
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row10_col_a",
+      "label": "Line 18, row 10 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row10[0].f3_60[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 299.99
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row10_col_b",
+      "label": "Line 18, row 10 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row10[0].f3_61[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 299.99
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row10_col_c",
+      "label": "Line 18, row 10 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row10[0].f3_62[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 299.99
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row10_col_d",
+      "label": "Line 18, row 10 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row10[0].f3_63[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 299.99
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row10_col_e",
+      "label": "Line 18, row 10 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row10[0].f3_64[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 299.99
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row10_col_f",
+      "label": "Line 18, row 10 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row10[0].f3_65[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 299.99
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row11_col_a",
+      "label": "Line 18, row 11 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row11[0].f3_66[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 275.989
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row11_col_b",
+      "label": "Line 18, row 11 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row11[0].f3_67[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 275.989
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row11_col_c",
+      "label": "Line 18, row 11 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row11[0].f3_68[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 275.989
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row11_col_d",
+      "label": "Line 18, row 11 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row11[0].f3_69[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 275.989
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row11_col_e",
+      "label": "Line 18, row 11 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row11[0].f3_70[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 275.989
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row11_col_f",
+      "label": "Line 18, row 11 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row11[0].f3_71[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 275.989
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row12_col_a",
+      "label": "Line 18, row 12 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row12[0].f3_72[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 251.988
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row12_col_b",
+      "label": "Line 18, row 12 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row12[0].f3_73[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 251.988
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row12_col_c",
+      "label": "Line 18, row 12 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row12[0].f3_74[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 251.988
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row12_col_d",
+      "label": "Line 18, row 12 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row12[0].f3_75[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 251.988
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row12_col_e",
+      "label": "Line 18, row 12 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row12[0].f3_76[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 251.988
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row12_col_f",
+      "label": "Line 18, row 12 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row12[0].f3_77[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 251.988
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row13_col_a",
+      "label": "Line 18, row 13 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row13[0].f3_78[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 227.987
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row13_col_b",
+      "label": "Line 18, row 13 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row13[0].f3_79[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 227.987
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row13_col_c",
+      "label": "Line 18, row 13 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row13[0].f3_80[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 227.987
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row13_col_d",
+      "label": "Line 18, row 13 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row13[0].f3_81[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 227.987
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row13_col_e",
+      "label": "Line 18, row 13 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row13[0].f3_82[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 227.987
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row13_col_f",
+      "label": "Line 18, row 13 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row13[0].f3_83[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 227.987
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row14_col_a",
+      "label": "Line 18, row 14 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row14[0].f3_84[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 203.986
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row14_col_b",
+      "label": "Line 18, row 14 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row14[0].f3_85[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 203.986
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row14_col_c",
+      "label": "Line 18, row 14 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row14[0].f3_86[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 203.986
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row14_col_d",
+      "label": "Line 18, row 14 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row14[0].f3_87[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 203.986
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row14_col_e",
+      "label": "Line 18, row 14 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row14[0].f3_88[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 203.986
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row14_col_f",
+      "label": "Line 18, row 14 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row14[0].f3_89[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 203.986
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row15_col_a",
+      "label": "Line 18, row 15 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row15[0].f3_90[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 179.985
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row15_col_b",
+      "label": "Line 18, row 15 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row15[0].f3_91[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 179.985
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row15_col_c",
+      "label": "Line 18, row 15 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row15[0].f3_92[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 179.985
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row15_col_d",
+      "label": "Line 18, row 15 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row15[0].f3_93[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 179.985
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row15_col_e",
+      "label": "Line 18, row 15 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row15[0].f3_94[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 179.985
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row15_col_f",
+      "label": "Line 18, row 15 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row15[0].f3_95[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 179.985
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row16_col_a",
+      "label": "Line 18, row 16 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row16[0].f3_96[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 155.984
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row16_col_b",
+      "label": "Line 18, row 16 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row16[0].f3_97[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 155.984
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row16_col_c",
+      "label": "Line 18, row 16 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row16[0].f3_98[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 155.984
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row16_col_d",
+      "label": "Line 18, row 16 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row16[0].f3_99[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 155.984
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row16_col_e",
+      "label": "Line 18, row 16 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row16[0].f3_100[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 155.984
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row16_col_f",
+      "label": "Line 18, row 16 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row16[0].f3_101[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 155.984
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row17_col_a",
+      "label": "Line 18, row 17 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row17[0].f3_102[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 131.983
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row17_col_b",
+      "label": "Line 18, row 17 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row17[0].f3_103[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 131.983
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row17_col_c",
+      "label": "Line 18, row 17 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row17[0].f3_104[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 131.983
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row17_col_d",
+      "label": "Line 18, row 17 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row17[0].f3_105[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 131.983
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row17_col_e",
+      "label": "Line 18, row 17 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row17[0].f3_106[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 131.983
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row17_col_f",
+      "label": "Line 18, row 17 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row17[0].f3_107[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 131.983
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row18_col_a",
+      "label": "Line 18, row 18 — (a) CUSIP number. If CUSIP number not issued, enter principal payment dates",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row18[0].f3_108[0]",
+      "position": {
+        "page": 2,
+        "x": 36,
+        "y": 107.982
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row18_col_b",
+      "label": "Line 18, row 18 — (b) Outstanding bond principal (or for build America bonds, interest payable)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row18[0].f3_109[0]",
+      "position": {
+        "page": 2,
+        "x": 187.2,
+        "y": 107.982
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row18_col_c",
+      "label": "Line 18, row 18 — (c) Credit rate",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row18[0].f3_110[0]",
+      "position": {
+        "page": 2,
+        "x": 280.8,
+        "y": 107.982
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row18_col_d",
+      "label": "Line 18, row 18 — (d) Multiply (b) x (c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row18[0].f3_111[0]",
+      "position": {
+        "page": 2,
+        "x": 345.6,
+        "y": 107.982
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row18_col_e",
+      "label": "Line 18, row 18 — (e) %",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row18[0].f3_112[0]",
+      "position": {
+        "page": 2,
+        "x": 417.6,
+        "y": 107.982
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.18_row18_col_f",
+      "label": "Line 18, row 18 — (f) Multiply (d) x (e)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Table1[0].Row18[0].f3_113[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 107.982
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.19_add_line_18_col_f",
+      "label": "Line 19 — Add the amounts on line 18, column (f)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_114[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 96.001
+      }
+    },
+    {
+      "fieldId": "form-8912.2.line.20_bond_credit_not_on_1097btc",
+      "label": "Line 20 — For a new clean renewable energy bond or a qualified energy conservation bond, multiply the amount on line 19 by 70% (0.70) and enter the result here. For a clean renewable energy bond, qualified zone academy bond, qualified school construction bond, or build America bond, enter the amount from line 19 here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_115[0]",
+      "position": {
+        "page": 2,
+        "x": 489.6,
+        "y": 36
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8912/blank.pdf",
+    "ingestedAt": "2026-11-20T15:34:02.065Z",
+    "totalFields": 218,
+    "skipped": 0,
+    "catalogEntries": 218
+  }
+}

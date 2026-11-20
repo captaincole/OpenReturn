@@ -1,0 +1,285 @@
+{
+  "formId": "form-8936",
+  "fieldCount": 31,
+  "entries": [
+    {
+      "fieldId": "form-8936.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-6MH2V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-2DLUY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.10_form_1040_line_18",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "5,451"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.11_personal_credits_form_1040",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "3,050"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.12_tax_less_personal_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "9,172"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.13_personal_use_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "4,945"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.14_previously_owned_credit_schedule_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "5,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.15_form_1040_line_18",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "3,759"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.16_personal_credits_form_1040",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "1,877"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.17_tax_less_personal_credits",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "3,934"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.18_previously_owned_vehicle_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "1,633"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.19_commercial_vehicle_credit_schedule_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "9,421"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.1a_2025_form_1040_line_11a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line1a_ReadOrder[0].f1_3[0]",
+          "text": "4,591"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.1b_2025_puerto_rico_income_excluded",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "5,925"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.1c_2025_form_2555_line_45",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "2,336"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.1d_2025_form_2555_line_50",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "8,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.1e_2025_form_4563_line_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "8,692"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.2_2025_magi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "1,335"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.20_commercial_credit_partnerships_s_corps",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "3,279"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.21_commercial_vehicle_credit_total",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "4,736"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.3a_2024_form_1040_line_11",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Line3a_ReadOrder[0].f1_9[0]",
+          "text": "1,314"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.3b_2024_puerto_rico_income_excluded",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "9,517"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.3c_2024_form_2555_line_45",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "8,273"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.3d_2024_form_2555_line_50",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "7,280"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.3e_2024_form_4563_line_15",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "6,230"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.4_2024_magi",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "1,075"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.5_2024_filing_status",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "T-P29QJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.6_business_use_credit_schedule_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "9,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.7_new_vehicle_credit_partnerships_s_corps",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "2,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.8_business_investment_use_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "5,348"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8936.0.line.9_personal_use_credit_schedule_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "7,582"
+        }
+      ]
+    }
+  ]
+}

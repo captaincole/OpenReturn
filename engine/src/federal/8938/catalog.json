@@ -1,0 +1,1995 @@
+{
+  "form": {
+    "formId": "form-8938",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8938, Statement of Specified Foreign Financial Assets"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8938.0.header.calendar_year",
+      "label": "For calendar year 20__ (last two digits of the year)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Pg1Header[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 199.4,
+        "y": 707.969
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8938.0.header.tax_year_beginning",
+      "label": "Or tax year beginning (month and day)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Pg1Header[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 295,
+        "y": 707.969
+      }
+    },
+    {
+      "fieldId": "form-8938.0.header.tax_year_beginning_year",
+      "label": "Tax year beginning, 20__ (last two digits of the year)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Pg1Header[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 353.4,
+        "y": 707.969
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8938.0.header.tax_year_ending",
+      "label": "Tax year ending (month and day)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Pg1Header[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 414.2,
+        "y": 707.969
+      }
+    },
+    {
+      "fieldId": "form-8938.0.header.tax_year_ending_year",
+      "label": "Tax year ending, 20__ (last two digits of the year)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Pg1Header[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 472.2,
+        "y": 707.969
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8938.0.header.additional_statements_attached",
+      "label": "If you have attached additional statements, check here",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 295.699,
+        "y": 694.969
+      }
+    },
+    {
+      "fieldId": "form-8938.0.header.number_of_additional_statements",
+      "label": "Number of additional statements",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 693.969
+      }
+    },
+    {
+      "fieldId": "form-8938.0.header.taxpayer_name",
+      "label": "Line 1 — Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 665.968
+      }
+    },
+    {
+      "fieldId": "form-8938.0.header.tin",
+      "label": "Line 2 — Taxpayer identification number (TIN)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 374.4,
+        "y": 665.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8938.0.line.3a_filer_specified_individual",
+      "label": "Line 3a — Type of filer: Specified individual",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 80.2,
+        "y": 643.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.3b_filer_partnership",
+      "label": "Line 3b — Type of filer: Partnership",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 224.2,
+        "y": 643.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.3c_filer_corporation",
+      "label": "Line 3c — Type of filer: Corporation",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[2]",
+      "position": {
+        "page": 0,
+        "x": 339.4,
+        "y": 643.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.3d_filer_trust",
+      "label": "Line 3d — Type of filer: Trust",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[3]",
+      "position": {
+        "page": 0,
+        "x": 454.6,
+        "y": 643.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.4a_specified_person_name",
+      "label": "Line 4a — Name of the specified individual who closely holds the partnership or corporation, or of the specified person who is a current beneficiary of the trust",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 109.2,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.4b_specified_person_tin",
+      "label": "Line 4b — TIN of the specified individual who closely holds the partnership or corporation, or of the specified person who is a current beneficiary of the trust",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 457.2,
+        "y": 587.97
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8938.0.line.5_number_deposit_accounts",
+      "label": "Line 5 — Number of deposit accounts (reported in Part V)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.6_max_value_deposit_accounts",
+      "label": "Line 6 — Maximum value of all deposit accounts",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 499.6,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.7_number_custodial_accounts",
+      "label": "Line 7 — Number of custodial accounts (reported in Part V)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.8_max_value_custodial_accounts",
+      "label": "Line 8 — Maximum value of all custodial accounts",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 499.6,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.9_accounts_closed_yes",
+      "label": "Line 9 — Were any foreign deposit or custodial accounts closed during the tax year? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 498.8,
+        "y": 517.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.9_accounts_closed_no",
+      "label": "Line 9 — Were any foreign deposit or custodial accounts closed during the tax year? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 542,
+        "y": 517.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.10_number_foreign_assets",
+      "label": "Line 10 — Number of foreign assets (reported in Part VI)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.11_max_value_foreign_assets",
+      "label": "Line 11 — Maximum value of all assets (reported in Part VI)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 499.6,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.12_assets_acquired_sold_yes",
+      "label": "Line 12 — Were any foreign assets acquired or sold during the tax year? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 498.8,
+        "y": 469.968
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.12_assets_acquired_sold_no",
+      "label": "Line 12 — Were any foreign assets acquired or sold during the tax year? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+      "position": {
+        "page": 0,
+        "x": 542,
+        "y": 469.968
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13a_accounts_interest_col_c",
+      "label": "Line 13a — Foreign deposit and custodial accounts: Interest — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13a[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13a_accounts_interest_col_d",
+      "label": "Line 13a — Foreign deposit and custodial accounts: Interest — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13a[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13a_accounts_interest_col_e",
+      "label": "Line 13a — Foreign deposit and custodial accounts: Interest — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13a[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13b_accounts_dividends_col_c",
+      "label": "Line 13b — Foreign deposit and custodial accounts: Dividends — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13b[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13b_accounts_dividends_col_d",
+      "label": "Line 13b — Foreign deposit and custodial accounts: Dividends — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13b[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13b_accounts_dividends_col_e",
+      "label": "Line 13b — Foreign deposit and custodial accounts: Dividends — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13b[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13c_accounts_royalties_col_c",
+      "label": "Line 13c — Foreign deposit and custodial accounts: Royalties — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13c[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 395.971
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13c_accounts_royalties_col_d",
+      "label": "Line 13c — Foreign deposit and custodial accounts: Royalties — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13c[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 395.971
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13c_accounts_royalties_col_e",
+      "label": "Line 13c — Foreign deposit and custodial accounts: Royalties — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13c[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 395.971
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13d_accounts_other_income_col_c",
+      "label": "Line 13d — Foreign deposit and custodial accounts: Other income — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13d[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13d_accounts_other_income_col_d",
+      "label": "Line 13d — Foreign deposit and custodial accounts: Other income — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13d[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13d_accounts_other_income_col_e",
+      "label": "Line 13d — Foreign deposit and custodial accounts: Other income — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13d[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 383.972
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13e_accounts_gains_losses_col_c",
+      "label": "Line 13e — Foreign deposit and custodial accounts: Gains (losses) — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13e[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13e_accounts_gains_losses_col_d",
+      "label": "Line 13e — Foreign deposit and custodial accounts: Gains (losses) — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13e[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13e_accounts_gains_losses_col_e",
+      "label": "Line 13e — Foreign deposit and custodial accounts: Gains (losses) — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13e[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 371.973
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13f_accounts_deductions_col_c",
+      "label": "Line 13f — Foreign deposit and custodial accounts: Deductions — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13f[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13f_accounts_deductions_col_d",
+      "label": "Line 13f — Foreign deposit and custodial accounts: Deductions — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13f[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13f_accounts_deductions_col_e",
+      "label": "Line 13f — Foreign deposit and custodial accounts: Deductions — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13f[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 359.974
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13g_accounts_credits_col_c",
+      "label": "Line 13g — Foreign deposit and custodial accounts: Credits — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13g[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13g_accounts_credits_col_d",
+      "label": "Line 13g — Foreign deposit and custodial accounts: Credits — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13g[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.13g_accounts_credits_col_e",
+      "label": "Line 13g — Foreign deposit and custodial accounts: Credits — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow13g[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 347.975
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14a_other_assets_interest_col_c",
+      "label": "Line 14a — Other foreign assets: Interest — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14a[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14a_other_assets_interest_col_d",
+      "label": "Line 14a — Other foreign assets: Interest — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14a[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14a_other_assets_interest_col_e",
+      "label": "Line 14a — Other foreign assets: Interest — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14a[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 335.976
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14b_other_assets_dividends_col_c",
+      "label": "Line 14b — Other foreign assets: Dividends — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14b[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14b_other_assets_dividends_col_d",
+      "label": "Line 14b — Other foreign assets: Dividends — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14b[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14b_other_assets_dividends_col_e",
+      "label": "Line 14b — Other foreign assets: Dividends — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14b[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 323.977
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14c_other_assets_royalties_col_c",
+      "label": "Line 14c — Other foreign assets: Royalties — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14c[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 311.978
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14c_other_assets_royalties_col_d",
+      "label": "Line 14c — Other foreign assets: Royalties — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14c[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 311.978
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14c_other_assets_royalties_col_e",
+      "label": "Line 14c — Other foreign assets: Royalties — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14c[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 311.978
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14d_other_assets_other_income_col_c",
+      "label": "Line 14d — Other foreign assets: Other income — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14d[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 299.979
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14d_other_assets_other_income_col_d",
+      "label": "Line 14d — Other foreign assets: Other income — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14d[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 299.979
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14d_other_assets_other_income_col_e",
+      "label": "Line 14d — Other foreign assets: Other income — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14d[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 299.979
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14e_other_assets_gains_losses_col_c",
+      "label": "Line 14e — Other foreign assets: Gains (losses) — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14e[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 287.98
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14e_other_assets_gains_losses_col_d",
+      "label": "Line 14e — Other foreign assets: Gains (losses) — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14e[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 287.98
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14e_other_assets_gains_losses_col_e",
+      "label": "Line 14e — Other foreign assets: Gains (losses) — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14e[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 287.98
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14f_other_assets_deductions_col_c",
+      "label": "Line 14f — Other foreign assets: Deductions — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14f[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 275.981
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14f_other_assets_deductions_col_d",
+      "label": "Line 14f — Other foreign assets: Deductions — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14f[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 275.981
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14f_other_assets_deductions_col_e",
+      "label": "Line 14f — Other foreign assets: Deductions — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14f[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 275.981
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14g_other_assets_credits_col_c",
+      "label": "Line 14g — Other foreign assets: Credits — (c) Amount reported on form or schedule",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14g[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 274.4,
+        "y": 263.982
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14g_other_assets_credits_col_d",
+      "label": "Line 14g — Other foreign assets: Credits — (d) Where reported: form and line",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14g[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 367.95,
+        "y": 263.982
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.14g_other_assets_credits_col_e",
+      "label": "Line 14g — Other foreign assets: Credits — (e) Where reported: schedule and line",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Part3[0].BodyRow14g[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 475.95,
+        "y": 263.982
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.15_number_forms_3520",
+      "label": "Line 15 — Number of Forms 3520",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 161.2,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.16_number_forms_3520a",
+      "label": "Line 16 — Number of Forms 3520-A",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 348.4,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.17_number_forms_5471",
+      "label": "Line 17 — Number of Forms 5471",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_61[0]",
+      "position": {
+        "page": 0,
+        "x": 535.6,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.18_number_forms_8621",
+      "label": "Line 18 — Number of Forms 8621",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_62[0]",
+      "position": {
+        "page": 0,
+        "x": 161.2,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "form-8938.0.line.19_number_forms_8865",
+      "label": "Line 19 — Number of Forms 8865",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_63[0]",
+      "position": {
+        "page": 0,
+        "x": 348.4,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.20a_type_of_account_deposit",
+      "label": "Line 20a — Type of account: Deposit",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line20_ReadOrder[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 172.8,
+        "y": 697.97
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.20b_type_of_account_custodial",
+      "label": "Line 20b — Type of account: Custodial",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line20_ReadOrder[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 172.8,
+        "y": 685.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.21_account_number",
+      "label": "Line 21 — Account number or other designation",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+      "position": {
+        "page": 1,
+        "x": 331.2,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.22a_account_opened_during_year",
+      "label": "Line 22a — Account opened during tax year",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 172.8,
+        "y": 673.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.22b_account_closed_during_year",
+      "label": "Line 22b — Account closed during tax year",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 345.6,
+        "y": 673.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.22c_account_jointly_owned_spouse",
+      "label": "Line 22c — Account jointly owned with spouse",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 172.8,
+        "y": 662.22
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.22d_account_no_tax_item",
+      "label": "Line 22d — No tax item reported in Part III with respect to this asset",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 345.6,
+        "y": 662.22
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.23_account_maximum_value",
+      "label": "Line 23 — Maximum value of account during tax year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+      "position": {
+        "page": 1,
+        "x": 499.6,
+        "y": 647.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.24_account_exchange_rate_used_yes",
+      "label": "Line 24 — Did you use a foreign currency exchange rate to convert the value of the account into U.S. dollars? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 498.8,
+        "y": 637.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.24_account_exchange_rate_used_no",
+      "label": "Line 24 — Did you use a foreign currency exchange rate to convert the value of the account into U.S. dollars? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[1]",
+      "position": {
+        "page": 1,
+        "x": 542,
+        "y": 637.967
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.25_account_exchange_rate_col_a",
+      "label": "Line 25(a) — Foreign currency in which account is maintained",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.25_account_exchange_rate_col_b",
+      "label": "Line 25(b) — Foreign currency exchange rate used to convert to U.S. dollars",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.25_account_exchange_rate_col_c",
+      "label": "Line 25(c) — Source of exchange rate used if not from U.S. Treasury Department's Bureau of the Fiscal Service",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+      "position": {
+        "page": 1,
+        "x": 368.2,
+        "y": 587.967
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.26a_financial_institution_name",
+      "label": "Line 26a — Name of financial institution in which account is maintained",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 563.966
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.26b_institution_giin_segment_1",
+      "label": "Line 26b — Global Intermediary Identification Number (GIIN) (Optional), first segment (6 characters)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+      "position": {
+        "page": 1,
+        "x": 352.8,
+        "y": 563.969
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-8938.1.line.26b_institution_giin_segment_2",
+      "label": "Line 26b — Global Intermediary Identification Number (GIIN) (Optional), second segment (5 characters)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 563.969
+      },
+      "maxLength": 5
+    },
+    {
+      "fieldId": "form-8938.1.line.26b_institution_giin_segment_3",
+      "label": "Line 26b — Global Intermediary Identification Number (GIIN) (Optional), third segment (2 characters)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_09[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 563.969
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8938.1.line.26b_institution_giin_segment_4",
+      "label": "Line 26b — Global Intermediary Identification Number (GIIN) (Optional), fourth segment (3 characters)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 460.8,
+        "y": 563.969
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8938.1.line.27_financial_institution_street_address",
+      "label": "Line 27 — Mailing address of financial institution in which account is maintained. Number, street, and room or suite no.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.28_financial_institution_city_country",
+      "label": "Line 28 — City or town, state or province, country, and ZIP or foreign postal code",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 515.967
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.29_description_of_asset",
+      "label": "Line 29 — Description of asset",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.30_asset_identifying_number",
+      "label": "Line 30 — Identifying number or other designation",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 331.2,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.31a_date_asset_acquired",
+      "label": "Line 31a — Date asset acquired during tax year, if applicable",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 476.8,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.31b_date_asset_disposed",
+      "label": "Line 31b — Date asset disposed of during tax year, if applicable",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 476.8,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.31c_asset_jointly_owned_spouse",
+      "label": "Line 31c — Check if asset jointly owned with spouse",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 421.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.31d_asset_no_tax_item",
+      "label": "Line 31d — Check if no tax item reported in Part III with respect to this asset",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 295.2,
+        "y": 421.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.32a_asset_maximum_value_0_to_50000",
+      "label": "Line 32a — Maximum value of asset during tax year: $0–$50,000",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 397.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.32b_asset_maximum_value_50001_to_100000",
+      "label": "Line 32b — Maximum value of asset during tax year: $50,001–$100,000",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_9[1]",
+      "position": {
+        "page": 1,
+        "x": 165.6,
+        "y": 397.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.32c_asset_maximum_value_100001_to_150000",
+      "label": "Line 32c — Maximum value of asset during tax year: $100,001–$150,000",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_9[2]",
+      "position": {
+        "page": 1,
+        "x": 295.2,
+        "y": 397.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.32d_asset_maximum_value_150001_to_200000",
+      "label": "Line 32d — Maximum value of asset during tax year: $150,001–$200,000",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_9[3]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 397.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.32e_asset_maximum_value_over_200000",
+      "label": "Line 32e — If more than $200,000, list value",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 499.6,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.33_asset_exchange_rate_used_yes",
+      "label": "Line 33 — Did you use a foreign currency exchange rate to convert the value of the asset into U.S. dollars? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 498.8,
+        "y": 373.97
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.33_asset_exchange_rate_used_no",
+      "label": "Line 33 — Did you use a foreign currency exchange rate to convert the value of the asset into U.S. dollars? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_10[1]",
+      "position": {
+        "page": 1,
+        "x": 542,
+        "y": 373.97
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.34_asset_exchange_rate_col_a",
+      "label": "Line 34(a) — Foreign currency in which asset is denominated",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.34_asset_exchange_rate_col_b",
+      "label": "Line 34(b) — Foreign currency exchange rate used to convert to U.S. dollars",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.34_asset_exchange_rate_col_c",
+      "label": "Line 34(c) — Source of exchange rate used if not from U.S. Treasury Department's Bureau of the Fiscal Service",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 368.2,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.35a_foreign_entity_name",
+      "label": "Line 35a — Name of foreign entity",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.35b_entity_giin_segment_1",
+      "label": "Line 35b — GIIN (Optional), first segment (6 characters)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 352.8,
+        "y": 287.971
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-8938.1.line.35b_entity_giin_segment_2",
+      "label": "Line 35b — GIIN (Optional), second segment (5 characters)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 396,
+        "y": 287.971
+      },
+      "maxLength": 5
+    },
+    {
+      "fieldId": "form-8938.1.line.35b_entity_giin_segment_3",
+      "label": "Line 35b — GIIN (Optional), third segment (2 characters)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 287.971
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8938.1.line.35b_entity_giin_segment_4",
+      "label": "Line 35b — GIIN (Optional), fourth segment (3 characters)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 460.8,
+        "y": 287.971
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8938.1.line.35c_foreign_entity_type_partnership",
+      "label": "Line 35c(1) — Type of foreign entity: Partnership",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 182,
+        "y": 277.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.35c_foreign_entity_type_corporation",
+      "label": "Line 35c(2) — Type of foreign entity: Corporation",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_11[1]",
+      "position": {
+        "page": 1,
+        "x": 275.6,
+        "y": 277.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.35c_foreign_entity_type_trust",
+      "label": "Line 35c(3) — Type of foreign entity: Trust",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_11[2]",
+      "position": {
+        "page": 1,
+        "x": 369.2,
+        "y": 277.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.35c_foreign_entity_type_estate",
+      "label": "Line 35c(4) — Type of foreign entity: Estate",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_11[3]",
+      "position": {
+        "page": 1,
+        "x": 434,
+        "y": 277.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.35d_foreign_entity_street_address",
+      "label": "Line 35d — Mailing address of foreign entity. Number, street, and room or suite no.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.35e_foreign_entity_city_country",
+      "label": "Line 35e — City or town, state or province, country, and ZIP or foreign postal code",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 227.967
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36a_issuer_or_counterparty_name",
+      "label": "Line 36a — Name of issuer or counterparty",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 191.8,
+        "y": 167.966
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36a_information_is_for_issuer",
+      "label": "Line 36a — Check if information is for: Issuer",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 182,
+        "y": 157.97
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36a_information_is_for_counterparty",
+      "label": "Line 36a — Check if information is for: Counterparty",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_12[1]",
+      "position": {
+        "page": 1,
+        "x": 232.4,
+        "y": 157.97
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36b_issuer_counterparty_type_individual",
+      "label": "Line 36b(1) — Type of issuer or counterparty: Individual",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 81.2,
+        "y": 133.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36b_issuer_counterparty_type_partnership",
+      "label": "Line 36b(2) — Type of issuer or counterparty: Partnership",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_13[1]",
+      "position": {
+        "page": 1,
+        "x": 174.8,
+        "y": 133.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36b_issuer_counterparty_type_corporation",
+      "label": "Line 36b(3) — Type of issuer or counterparty: Corporation",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_13[2]",
+      "position": {
+        "page": 1,
+        "x": 275.603,
+        "y": 133.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36b_issuer_counterparty_type_trust",
+      "label": "Line 36b(4) — Type of issuer or counterparty: Trust",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_13[3]",
+      "position": {
+        "page": 1,
+        "x": 376.4,
+        "y": 133.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36b_issuer_counterparty_type_estate",
+      "label": "Line 36b(5) — Type of issuer or counterparty: Estate",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_13[4]",
+      "position": {
+        "page": 1,
+        "x": 448.4,
+        "y": 133.969
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36c_issuer_counterparty_us_person",
+      "label": "Line 36c — Check if issuer or counterparty is a U.S. person",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 218,
+        "y": 121.97
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36c_issuer_counterparty_foreign_person",
+      "label": "Line 36c — Check if issuer or counterparty is a Foreign person",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_14[1]",
+      "position": {
+        "page": 1,
+        "x": 290,
+        "y": 121.97
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36d_issuer_counterparty_street_address",
+      "label": "Line 36d — Mailing address of issuer or counterparty. Number, street, and room or suite no.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 95.966
+      }
+    },
+    {
+      "fieldId": "form-8938.1.line.36e_issuer_counterparty_city_country",
+      "label": "Line 36e — City or town, state or province, country, and ZIP or foreign postal code",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 71.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8938/blank.pdf",
+    "ingestedAt": "2026-11-20T15:34:05.528Z",
+    "totalFields": 131,
+    "skipped": 0,
+    "catalogEntries": 131
+  }
+}
