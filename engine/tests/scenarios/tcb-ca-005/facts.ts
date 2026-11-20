@@ -12,6 +12,7 @@ import {
   makeDependentFactKey,
   makeDividendFactKey,
   makeInterestFactKey,
+  makeIsoExerciseFactKey,
   makeRetirementDistributionFactKey,
   makeSocialSecurityFactKey,
   makeTradeFactKey,
@@ -19,6 +20,7 @@ import {
   type DependentFactValue,
   type DividendFactValue,
   type InterestFactValue,
+  type IsoExerciseFactValue,
   type RetirementDistributionFactValue,
   type SocialSecurityFactValue,
   type TradeFactValue,
@@ -85,6 +87,22 @@ const madisonW2: W2FactValue = {
   box16: 160368,
   box17: 6794,
 };
+
+/*
+ * docs/09-employers-name-3921.pdf: Madison's one exercise of incentive stock
+ * options. The case gives only the spread ($275,000, f6251.stockOption). The
+ * dates, the two prices and the share count are ours: ($75 - $20) x 5,000 shares.
+ */
+export const madisonIsoExercise: IsoExerciseFactValue = {
+  employerName: madisonW2.employerName,
+  employerTin: PAYER_TIN,
+  box1: "03/15/2021",
+  box2: "06/16/2025",
+  box3: 20,
+  box4: 75,
+  box5: 5000,
+};
+export const MADISON_EMPLOYER_ADDRESS = madisonW2.employerAddress!;
 
 // docs/02-temp-agency-w2.pdf (the spouse's)
 const salvesterW2: W2FactValue = {
@@ -333,6 +351,20 @@ export const tcbCa005Facts: TaxFactRow[] = [
     1151,
     `${ANSWERS}: f8960.stateIncTax.`,
   ),
-  /* f6251.stockOption: the incentive stock option spread (Schedule P (540) and Form 6251). */
-  fact("other", AMT_KEYS.isoExerciseSpread, 275000, `${ANSWERS}: f6251.stockOption.`),
+  /*
+   * f6251.stockOption: the incentive stock option spread ($275,000; Schedule P
+   * (540) and Form 6251). The Form 3921 carries it, and the shares were not sold.
+   */
+  fact(
+    "other",
+    makeIsoExerciseFactKey("employers-name", "2025-06-16"),
+    madisonIsoExercise,
+    "Form 3921 from Employers Name (docs/09-employers-name-3921.pdf).",
+  ),
+  fact(
+    "other",
+    AMT_KEYS.isoSharesHeldAtYearEnd,
+    true,
+    `${ANSWERS}: f6251.stockOption is an adjustment, so the shares were held at year end.`,
+  ),
 ];

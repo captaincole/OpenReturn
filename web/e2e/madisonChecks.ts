@@ -14,7 +14,8 @@ export interface DeductionsState {
   summary: string | null;
 }
 
-const DOCUMENT_CATEGORIES = ["wages", "investment_income", "retirement"];
+/* "other" holds the Form 3921: of its facts, only a document is an object. */
+const DOCUMENT_CATEGORIES = ["wages", "investment_income", "retirement", "other"];
 
 /* The numbers a document prints: its top-level number fields. */
 const numbersOf = (value: unknown): Array<[string, number]> =>

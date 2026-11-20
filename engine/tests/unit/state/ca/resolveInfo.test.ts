@@ -274,7 +274,7 @@ describe("resolveSchedulePInfo", () => {
     const withCarryover = resolveSchedulePInfo(
       makeResolverInputs({
         facts: [
-          { key: AMT_KEYS.isoExerciseSpread, category: "other", value: 275000 },
+          { key: AMT_KEYS.isoExerciseSpread, category: "other", value: 9000 },
           {
             key: INVESTMENT_INTEREST_KEYS.caDisallowedCarryover,
             category: "investment_income",
@@ -289,7 +289,7 @@ describe("resolveSchedulePInfo", () => {
     ]);
     const without = resolveSchedulePInfo(
       makeResolverInputs({
-        facts: [{ key: AMT_KEYS.isoExerciseSpread, category: "other", value: 275000 }],
+        facts: [{ key: AMT_KEYS.isoExerciseSpread, category: "other", value: 9000 }],
         decisions: [files540],
       }),
     );

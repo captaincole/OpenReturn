@@ -27,6 +27,7 @@ export * from "./kinds/hsaCoverage.js";
 export * from "./kinds/hsaDistribution.js";
 export * from "./kinds/interest.js";
 export * from "./kinds/investmentInterest.js";
+export * from "./kinds/isoExercise.js";
 export * from "./kinds/itemizedOther.js";
 export * from "./kinds/marketplaceCoverage.js";
 export * from "./kinds/miscIncome.js";

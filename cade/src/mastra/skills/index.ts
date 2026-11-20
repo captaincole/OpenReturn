@@ -8,6 +8,7 @@ import { form1098ESkill } from "./form1098E";
 import { form1099GSkill } from "./form1099G";
 import { form1099RSkill } from "./form1099R";
 import { form1099SASkill } from "./form1099SA";
+import { form3921Skill } from "./form3921";
 import { gamblingSkill } from "./gambling";
 import { investmentsSkill } from "./investments";
 import { otherIncomeSkill } from "./otherIncome";
@@ -33,6 +34,7 @@ export const topicSkills = [
   gamblingSkill,
   form1099GSkill,
   form1095ASkill,
+  form3921Skill,
   selfEmploymentSkill,
   rentalSkill,
   dependentsSkill,
