@@ -32,7 +32,19 @@ export interface GraphMissingForm {
   waitingForms: string[];
 }
 
-type Node = { kind: "form"; form: GraphForm } | { kind: "missing"; form: GraphMissingForm };
+/* The one box for the forms of the other returns. It opens their graph. */
+export interface GraphOutside {
+  formId: string;
+  displayName: string;
+  jurisdiction: string;
+  formCount: number;
+  href: string;
+}
+
+type Node =
+  | { kind: "form"; form: GraphForm }
+  | { kind: "missing"; form: GraphMissingForm }
+  | { kind: "outside"; form: GraphOutside };
 
 interface Box {
   node: Node;
@@ -60,19 +72,25 @@ const idOf = (box: Box): string => box.node.form.formId;
  * The forms the engine lacks make the first column. Each other column is centered
  * on the tallest one. The forms with no reads make the last row.
  */
-function placeForms(forms: GraphForm[], links: GraphLink[], missing: GraphMissingForm[]) {
+function placeForms(
+  forms: GraphForm[],
+  links: GraphLink[],
+  missing: GraphMissingForm[],
+  outside: GraphOutside | undefined,
+) {
   const layout = layoutForms(
-    forms.map((form) => form.formId),
+    [...forms.map((form) => form.formId), ...(outside ? [outside.formId] : [])],
     links,
   );
-  const byId = new Map(forms.map((form) => [form.formId, form]));
+  const byId = new Map<string, Node>(forms.map((form) => [form.formId, { kind: "form", form }]));
+  if (outside) byId.set(outside.formId, { kind: "outside", form: outside });
   const rows = Math.max(layout.rows, missing.length);
   const start = PAD + (missing.length > 0 ? PITCH.x + 14 : 0);
   const top = PAD + HEADING;
   const centered = (row: number, size: number): number => top + (row + (rows - size) / 2) * PITCH.y;
   const sizeOf = (column: number) => layout.placed.filter((at) => at.column === column).length;
   const formBox = (formId: string, left: number, upper: number): Box => ({
-    node: { kind: "form", form: byId.get(formId) as GraphForm },
+    node: byId.get(formId) as Node,
     x: left,
     y: upper,
   });
@@ -131,10 +149,36 @@ function StateSegments({ states, total }: { states: StateCounts; total: number }
   ));
 }
 
-const cardLabel = (node: Node): string =>
-  node.kind === "form"
-    ? `${node.form.displayName}: ${node.form.states.verified} of ${node.form.fieldCount} fields verified`
-    : `${node.form.displayName}, a form the engine lacks: ${node.form.waitingCount} fields wait for it`;
+const formCount = (count: number): string => `${count} ${count === 1 ? "form" : "forms"}`;
+
+function cardLabel(node: Node): string {
+  const name = node.form.displayName;
+  if (node.kind === "form")
+    return `${name}: ${node.form.states.verified} of ${node.form.fieldCount} fields verified`;
+  if (node.kind === "missing")
+    return `${name}, a form the engine lacks: ${node.form.waitingCount} fields wait for it`;
+  return `${name}: the ${formCount(node.form.formCount)} of ${node.form.jurisdiction}`;
+}
+
+const cardHref = (node: Node): string =>
+  node.kind === "outside"
+    ? node.form.href
+    : `/library/graph?form=${encodeURIComponent(node.form.formId)}`;
+
+/* The box of another return has round ends, so its text starts further in. */
+const textLeft = (node: Node): number => (node.kind === "outside" ? 16 : BAR.inset);
+
+function CardLine({ node }: { node: Node }) {
+  if (node.kind === "form")
+    return <StateSegments states={node.form.states} total={node.form.fieldCount} />;
+  return (
+    <text x={textLeft(node)} y={32} className="fill-ink-muted text-[10px]">
+      {node.kind === "outside"
+        ? formCount(node.form.formCount)
+        : `${node.form.waitingCount} ${node.form.waitingCount === 1 ? "field waits" : "fields wait"}`}
+    </text>
+  );
+}
 
 function FormCard(props: {
   box: Box;
@@ -146,8 +190,8 @@ function FormCard(props: {
   const formId = node.form.formId;
   return (
     <Link
-      href={`/library/graph?form=${encodeURIComponent(formId)}`}
-      scroll={false}
+      href={cardHref(node)}
+      scroll={node.kind === "outside"}
       aria-label={cardLabel(node)}
       onMouseEnter={() => props.onActive(formId)}
       onMouseLeave={() => props.onActive(null)}
@@ -159,7 +203,7 @@ function FormCard(props: {
         <rect
           width={CARD.width}
           height={CARD.height}
-          rx={8}
+          rx={node.kind === "outside" ? CARD.height / 2 : 8}
           strokeDasharray={node.kind === "missing" ? "4 3" : undefined}
           className={cn(
             node.kind === "missing" ? "fill-bg-base" : "fill-bg-panel",
@@ -167,16 +211,10 @@ function FormCard(props: {
             node.kind === "form" && !props.selected && "stroke-border",
           )}
         />
-        <text x={BAR.inset} y={17} className="fill-ink-primary text-[11px] font-medium">
+        <text x={textLeft(node)} y={17} className="fill-ink-primary text-[11px] font-medium">
           {shortName(node.form.displayName)}
         </text>
-        {node.kind === "form" ? (
-          <StateSegments states={node.form.states} total={node.form.fieldCount} />
-        ) : (
-          <text x={BAR.inset} y={32} className="fill-ink-muted text-[10px]">
-            {node.form.waitingCount} {node.form.waitingCount === 1 ? "field waits" : "fields wait"}
-          </text>
-        )}
+        <CardLine node={node} />
       </g>
     </Link>
   );
@@ -187,6 +225,17 @@ function Readout({ node }: { node: Node | undefined }) {
     return (
       <p className="text-[13px] text-ink-muted">
         Point at a form to see its numbers. Select it to list its fields.
+      </p>
+    );
+  }
+  if (node.kind === "outside") {
+    return (
+      <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-ink-secondary">
+        <span className="font-medium text-ink-primary">{node.form.displayName}</span>
+        <span>
+          stands for the {formCount(node.form.formCount)} of {node.form.jurisdiction} · select it to
+          go to their graph
+        </span>
       </p>
     );
   }
@@ -218,7 +267,7 @@ function Readout({ node }: { node: Node | undefined }) {
   );
 }
 
-function Legend({ drawn, total }: { drawn: number; total: number }) {
+export function Legend() {
   return (
     <ul className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[12px] text-ink-secondary">
       {FIELD_STATES.map((state) => (
@@ -227,12 +276,14 @@ function Legend({ drawn, total }: { drawn: number; total: number }) {
           {STATE_LABELS[state]}
         </li>
       ))}
-      {drawn > 0 && (
-        <li className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-4 rounded-[3px] border border-dashed border-border-strong" />
-          A form the engine lacks ({drawn} of {total} drawn)
-        </li>
-      )}
+      <li className="flex items-center gap-1.5">
+        <span className="inline-block h-2.5 w-4 rounded-[3px] border border-dashed border-border-strong" />
+        A form the engine lacks
+      </li>
+      <li className="flex items-center gap-1.5">
+        <span className="inline-block h-2.5 w-4 rounded-full border border-border-strong" />
+        The forms of another return
+      </li>
       <li className="text-ink-muted">An arrow goes from a form to a form that reads it.</li>
     </ul>
   );
@@ -288,13 +339,13 @@ export function FormGraphView(props: {
   forms: GraphForm[];
   links: GraphLink[];
   missing: GraphMissingForm[];
-  missingTotal: number;
+  outside?: GraphOutside;
   selected?: string;
 }) {
   const [hovered, setHovered] = useState<string | null>(null);
   const placed = useMemo(
-    () => placeForms(props.forms, props.links, props.missing),
-    [props.forms, props.links, props.missing],
+    () => placeForms(props.forms, props.links, props.missing, props.outside),
+    [props.forms, props.links, props.missing, props.outside],
   );
   const boxOf = useMemo(() => new Map(placed.boxes.map((box) => [idOf(box), box])), [placed]);
   const links: DrawnLink[] = useMemo(
@@ -315,7 +366,6 @@ export function FormGraphView(props: {
 
   return (
     <div className="space-y-3">
-      <Legend drawn={props.missing.length} total={props.missingTotal} />
       <div className="min-h-10">
         <Readout node={active ? boxOf.get(active)?.node : undefined} />
       </div>

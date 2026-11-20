@@ -211,3 +211,93 @@ export function layoutForms(formIds: string[], links: Link[]): Layout {
     rows: Math.max(...placed.map((node) => node.row)) + 1,
   };
 }
+
+/* The one box that stands for the forms of the other returns: federal forms in a state's graph, state forms in the federal graph. */
+export const OUTSIDE_ID = "other-return";
+
+export interface OutsideForms {
+  formId: typeof OUTSIDE_ID;
+  displayName: string;
+  /* The jurisdiction whose graph the box opens. */
+  jurisdiction: string;
+  formCount: number;
+}
+
+/* One jurisdiction's part of the graph. */
+export interface JurisdictionGraph {
+  jurisdiction: string;
+  forms: FormNode[];
+  links: Link[];
+  /* Given when a form here reads, or feeds, a form of another return. */
+  outside?: OutsideForms;
+  /* The forms of this jurisdiction that the engine lacks and that a form here waits for. */
+  missing: MissingFormNode[];
+}
+
+export const isFederal = (jurisdiction: string): boolean => jurisdiction.startsWith("Federal");
+
+/* "California 2025" is "california-2025": the id of the jurisdiction's section on the page. */
+export const jurisdictionId = (jurisdiction: string): string =>
+  jurisdiction.toLowerCase().split(" ").join("-");
+
+const sameLink = (one: Link, two: Link): boolean =>
+  one.source === two.source && one.reader === two.reader;
+
+const distinct = (links: Link[]): Link[] =>
+  links.filter((link, index) => links.findIndex((other) => sameLink(other, link)) === index);
+
+/*
+ * The federal graph has one "State return" box for every state form, because the
+ * state is not always the same one. A state's graph has one "Federal return" box.
+ * A read between two states is in neither graph.
+ */
+function jurisdictionGraph(
+  graph: Pick<FormGraph, "forms" | "edges" | "missing">,
+  jurisdiction: string,
+): JurisdictionGraph {
+  const of = new Map(graph.forms.map((form) => [form.formId, form.jurisdiction]));
+  const inside = (formId: string): boolean => of.get(formId) === jurisdiction;
+  const outside = (formId: string): boolean => {
+    const other = of.get(formId);
+    return other !== undefined && !inside(formId) && isFederal(other) !== isFederal(jurisdiction);
+  };
+  const end = (formId: string): string => (inside(formId) ? formId : OUTSIDE_ID);
+  const links = distinct(
+    graph.edges
+      .filter(
+        (edge) =>
+          (inside(edge.source) && (inside(edge.reader) || outside(edge.reader))) ||
+          (inside(edge.reader) && outside(edge.source)),
+      )
+      .map((edge) => ({ source: end(edge.source), reader: end(edge.reader) })),
+  );
+  const others = graph.forms.filter((form) => outside(form.formId));
+  const linked = links.some((link) => link.source === OUTSIDE_ID || link.reader === OUTSIDE_ID);
+  return {
+    jurisdiction,
+    forms: graph.forms.filter((form) => inside(form.formId)),
+    links,
+    outside: linked
+      ? {
+          formId: OUTSIDE_ID,
+          displayName: isFederal(jurisdiction) ? "State return" : "Federal return",
+          jurisdiction: others[0].jurisdiction,
+          formCount: others.length,
+        }
+      : undefined,
+    missing: graph.missing.filter(
+      (form) =>
+        form.jurisdiction === jurisdiction && form.waiting.some((group) => inside(group.formId)),
+    ),
+  };
+}
+
+/* One graph for each jurisdiction, the federal one first. */
+export function splitByJurisdiction(
+  graph: Pick<FormGraph, "forms" | "edges" | "missing">,
+): JurisdictionGraph[] {
+  const names = [...new Set(graph.forms.map((form) => form.jurisdiction))];
+  return [...names.filter(isFederal), ...names.filter((name) => !isFederal(name))].map((name) =>
+    jurisdictionGraph(graph, name),
+  );
+}
