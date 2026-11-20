@@ -37,6 +37,7 @@
     "test:unit": "npm -w @openreturn/engine run test:unit && npm -w canon run test:unit && npm -w cade run test:unit && npm --prefix web run test:unit",
     "test:integration": "npm -w @openreturn/engine run test:integration && npm -w cade run test:integration",
     "coverage": "npm -w @openreturn/engine run coverage",
+    "form-graph": "npm -w @openreturn/engine run form-graph",
     "e2e": "npm --prefix web run e2e",
     "e2e:madison": "npm --prefix web run e2e:madison",
     "e2e:access": "npm --prefix web run e2e:access",
