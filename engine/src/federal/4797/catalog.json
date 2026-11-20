@@ -1,0 +1,2761 @@
+{
+  "form": {
+    "formId": "form-4797",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 4797, Sales of Business Property"
+  },
+  "fields": [
+    {
+      "fieldId": "form-4797.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.998
+      }
+    },
+    {
+      "fieldId": "form-4797.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 671.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-4797.0.line.1a_gross_proceeds_1099b_1099s",
+      "label": "Line 1a — Enter the gross proceeds from sales or exchanges reported to you for 2025 on Form(s) 1099-B or 1099-S (or substitute statement) that you are including on line 2, 10, or 20",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 648
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.0.line.1b_gain_macrs_partial_dispositions",
+      "label": "Line 1b — Enter the total amount of gain that you are including on lines 2, 10, and 24 due to the partial dispositions of MACRS assets",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 624.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.0.line.1c_loss_macrs_partial_dispositions",
+      "label": "Line 1c — Enter the total amount of loss that you are including on lines 2 and 10 due to the partial dispositions of MACRS assets",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 600.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row1_col_a",
+      "label": "Line 2, row 1 — (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row1_col_b",
+      "label": "Line 2, row 1 — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 158.4,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row1_col_c",
+      "label": "Line 2, row 1 — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row1_col_d",
+      "label": "Line 2, row 1 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row1_col_e",
+      "label": "Line 2, row 1 — (e) Depreciation allowed or allowable since acquisition",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row1_col_f",
+      "label": "Line 2, row 1 — (f) Cost or other basis, plus improvements and expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row1_col_g",
+      "label": "Line 2, row 1 — (g) Gain or (loss). Subtract (f) from the sum of (d) and (e)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row2_col_a",
+      "label": "Line 2, row 2 — (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row2[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row2_col_b",
+      "label": "Line 2, row 2 — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row2[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 158.4,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row2_col_c",
+      "label": "Line 2, row 2 — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row2[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row2_col_d",
+      "label": "Line 2, row 2 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row2[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row2_col_e",
+      "label": "Line 2, row 2 — (e) Depreciation allowed or allowable since acquisition",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row2[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row2_col_f",
+      "label": "Line 2, row 2 — (f) Cost or other basis, plus improvements and expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row2[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row2_col_g",
+      "label": "Line 2, row 2 — (g) Gain or (loss). Subtract (f) from the sum of (d) and (e)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row2[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row3_col_a",
+      "label": "Line 2, row 3 — (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row3[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 504.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row3_col_b",
+      "label": "Line 2, row 3 — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row3[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 158.4,
+        "y": 504.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row3_col_c",
+      "label": "Line 2, row 3 — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row3[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 504.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row3_col_d",
+      "label": "Line 2, row 3 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row3[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 504.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row3_col_e",
+      "label": "Line 2, row 3 — (e) Depreciation allowed or allowable since acquisition",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row3[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 504.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row3_col_f",
+      "label": "Line 2, row 3 — (f) Cost or other basis, plus improvements and expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row3[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 504.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row3_col_g",
+      "label": "Line 2, row 3 — (g) Gain or (loss). Subtract (f) from the sum of (d) and (e)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row3[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 504.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row4_col_a",
+      "label": "Line 2, row 4 — (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row4[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 492.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row4_col_b",
+      "label": "Line 2, row 4 — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row4[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 158.4,
+        "y": 492.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row4_col_c",
+      "label": "Line 2, row 4 — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row4[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 492.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row4_col_d",
+      "label": "Line 2, row 4 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row4[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 492.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row4_col_e",
+      "label": "Line 2, row 4 — (e) Depreciation allowed or allowable since acquisition",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row4[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 492.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row4_col_f",
+      "label": "Line 2, row 4 — (f) Cost or other basis, plus improvements and expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row4[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 492.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.2_row4_col_g",
+      "label": "Line 2, row 4 — (g) Gain or (loss). Subtract (f) from the sum of (d) and (e)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine2[0].Row4[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 492.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.3_gain_form_4684",
+      "label": "Line 3 — Gain, if any, from Form 4684, line 39",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 480.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.0.line.4_section_1231_gain_installment_sales",
+      "label": "Line 4 — Section 1231 gain from installment sales from Form 6252, line 26 or 37",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 468
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.0.line.5_section_1231_like_kind_exchanges",
+      "label": "Line 5 — Section 1231 gain or (loss) from like-kind exchanges from Form 8824",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 456.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.0.line.6_gain_from_line_32",
+      "label": "Line 6 — Gain, if any, from line 32, from other than casualty or theft",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 444.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.0.line.7_net_section_1231_gain_loss",
+      "label": "Line 7 — Combine lines 2 through 6. Enter the gain or (loss) here and on the appropriate line",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 432
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.0.line.8_nonrecaptured_section_1231_losses",
+      "label": "Line 8 — Nonrecaptured net section 1231 losses from prior years",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 348.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.0.line.9_line_7_minus_line_8",
+      "label": "Line 9 — Subtract line 8 from line 7. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 312.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row1_col_a",
+      "label": "Line 10, row 1 — Ordinary gains and losses not included on lines 11 through 16: (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row1[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row1_col_b",
+      "label": "Line 10, row 1 — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row1[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 158.4,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row1_col_c",
+      "label": "Line 10, row 1 — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row1[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row1_col_d",
+      "label": "Line 10, row 1 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row1[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row1_col_e",
+      "label": "Line 10, row 1 — (e) Depreciation allowed or allowable since acquisition",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row1[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row1_col_f",
+      "label": "Line 10, row 1 — (f) Cost or other basis, plus improvements and expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row1[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row1_col_g",
+      "label": "Line 10, row 1 — (g) Gain or (loss). Subtract (f) from the sum of (d) and (e)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row1[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row2_col_a",
+      "label": "Line 10, row 2 — Ordinary gains and losses not included on lines 11 through 16: (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row2[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row2_col_b",
+      "label": "Line 10, row 2 — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row2[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 158.4,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row2_col_c",
+      "label": "Line 10, row 2 — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row2[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row2_col_d",
+      "label": "Line 10, row 2 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row2[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row2_col_e",
+      "label": "Line 10, row 2 — (e) Depreciation allowed or allowable since acquisition",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row2[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row2_col_f",
+      "label": "Line 10, row 2 — (f) Cost or other basis, plus improvements and expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row2[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row2_col_g",
+      "label": "Line 10, row 2 — (g) Gain or (loss). Subtract (f) from the sum of (d) and (e)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row2[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row3_col_a",
+      "label": "Line 10, row 3 — Ordinary gains and losses not included on lines 11 through 16: (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row3[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 252.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row3_col_b",
+      "label": "Line 10, row 3 — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row3[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 158.4,
+        "y": 252.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row3_col_c",
+      "label": "Line 10, row 3 — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row3[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 252.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row3_col_d",
+      "label": "Line 10, row 3 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row3[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 252.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row3_col_e",
+      "label": "Line 10, row 3 — (e) Depreciation allowed or allowable since acquisition",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row3[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 252.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row3_col_f",
+      "label": "Line 10, row 3 — (f) Cost or other basis, plus improvements and expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row3[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 252.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row3_col_g",
+      "label": "Line 10, row 3 — (g) Gain or (loss). Subtract (f) from the sum of (d) and (e)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row3[0].f1_61[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 252.003
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row4_col_a",
+      "label": "Line 10, row 4 — Ordinary gains and losses not included on lines 11 through 16: (a) Description of property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row4[0].f1_62[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 240.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row4_col_b",
+      "label": "Line 10, row 4 — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row4[0].f1_63[0]",
+      "position": {
+        "page": 0,
+        "x": 158.4,
+        "y": 240.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row4_col_c",
+      "label": "Line 10, row 4 — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row4[0].f1_64[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 240.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row4_col_d",
+      "label": "Line 10, row 4 — (d) Gross sales price",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row4[0].f1_65[0]",
+      "position": {
+        "page": 0,
+        "x": 288,
+        "y": 240.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row4_col_e",
+      "label": "Line 10, row 4 — (e) Depreciation allowed or allowable since acquisition",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row4[0].f1_66[0]",
+      "position": {
+        "page": 0,
+        "x": 360,
+        "y": 240.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row4_col_f",
+      "label": "Line 10, row 4 — (f) Cost or other basis, plus improvements and expense of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row4[0].f1_67[0]",
+      "position": {
+        "page": 0,
+        "x": 432,
+        "y": 240.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.10_row4_col_g",
+      "label": "Line 10, row 4 — (g) Gain or (loss). Subtract (f) from the sum of (d) and (e)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].TableLine10[0].Row4[0].f1_68[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 240.004
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.11_loss_from_line_7",
+      "label": "Line 11 — Loss, if any, from line 7",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_69[0]",
+      "position": {
+        "page": 0,
+        "x": 508,
+        "y": 228.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.12_gain_from_line_7_or_8",
+      "label": "Line 12 — Gain, if any, from line 7 or amount from line 8, if applicable",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_70[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 216
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.13_gain_from_line_31",
+      "label": "Line 13 — Gain, if any, from line 31",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_71[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.14_net_gain_loss_form_4684",
+      "label": "Line 14 — Net gain or (loss) from Form 4684, lines 31 and 38a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_72[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.15_ordinary_gain_installment_sales",
+      "label": "Line 15 — Ordinary gain from installment sales from Form 6252, line 25 or 36",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_73[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 180
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.16_ordinary_like_kind_exchanges",
+      "label": "Line 16 — Ordinary gain or (loss) from like-kind exchanges from Form 8824",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_74[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 168.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.17_ordinary_gain_loss_total",
+      "label": "Line 17 — Combine lines 10 through 16",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_75[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 156.002
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.18a_loss_form_4684_income_producing",
+      "label": "Line 18a — If the loss on line 11 includes a loss from Form 4684, line 35, column (b)(ii), enter that part of the loss here",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_76[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 96.001
+      }
+    },
+    {
+      "fieldId": "form-4797.0.line.18b_redetermined_ordinary_gain_loss",
+      "label": "Line 18b — Redetermine the gain or (loss) on line 17 excluding the loss, if any, on line 18a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_77[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 72
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19a_property_col_a",
+      "label": "Line 19A — (a) Description of section 1245, 1250, 1252, 1254, or 1255 property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row1[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 57.6,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19a_property_col_b",
+      "label": "Line 19A — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row1[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19a_property_col_c",
+      "label": "Line 19A — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row1[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19b_property_col_a",
+      "label": "Line 19B — (a) Description of section 1245, 1250, 1252, 1254, or 1255 property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 57.6,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19b_property_col_b",
+      "label": "Line 19B — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19b_property_col_c",
+      "label": "Line 19B — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 672.001
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19c_property_col_a",
+      "label": "Line 19C — (a) Description of section 1245, 1250, 1252, 1254, or 1255 property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row3[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 57.6,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19c_property_col_b",
+      "label": "Line 19C — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row3[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19c_property_col_c",
+      "label": "Line 19C — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row3[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 660.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19d_property_col_a",
+      "label": "Line 19D — (a) Description of section 1245, 1250, 1252, 1254, or 1255 property",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row4[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 57.6,
+        "y": 648.003
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19d_property_col_b",
+      "label": "Line 19D — (b) Date acquired (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row4[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 648.003
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.19d_property_col_c",
+      "label": "Line 19D — (c) Date sold (mo., day, yr.)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable1[0].Row4[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 648.003
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.20_gross_sales_price_col_a",
+      "label": "Line 20 — Gross sales price — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row20[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.20_gross_sales_price_col_b",
+      "label": "Line 20 — Gross sales price — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row20[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.20_gross_sales_price_col_c",
+      "label": "Line 20 — Gross sales price — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row20[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.20_gross_sales_price_col_d",
+      "label": "Line 20 — Gross sales price — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row20[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.21_cost_basis_plus_expense_col_a",
+      "label": "Line 21 — Cost or other basis plus expense of sale — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row21[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.21_cost_basis_plus_expense_col_b",
+      "label": "Line 21 — Cost or other basis plus expense of sale — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row21[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.21_cost_basis_plus_expense_col_c",
+      "label": "Line 21 — Cost or other basis plus expense of sale — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row21[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.21_cost_basis_plus_expense_col_d",
+      "label": "Line 21 — Cost or other basis plus expense of sale — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row21[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.22_depreciation_allowed_col_a",
+      "label": "Line 22 — Depreciation (or depletion) allowed or allowable — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row22[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.22_depreciation_allowed_col_b",
+      "label": "Line 22 — Depreciation (or depletion) allowed or allowable — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row22[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.22_depreciation_allowed_col_c",
+      "label": "Line 22 — Depreciation (or depletion) allowed or allowable — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row22[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.22_depreciation_allowed_col_d",
+      "label": "Line 22 — Depreciation (or depletion) allowed or allowable — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row22[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.23_adjusted_basis_col_a",
+      "label": "Line 23 — Adjusted basis. Subtract line 22 from line 21 — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row23[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 576.003
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.23_adjusted_basis_col_b",
+      "label": "Line 23 — Adjusted basis. Subtract line 22 from line 21 — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row23[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 576.003
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.23_adjusted_basis_col_c",
+      "label": "Line 23 — Adjusted basis. Subtract line 22 from line 21 — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row23[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 576.003
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.23_adjusted_basis_col_d",
+      "label": "Line 23 — Adjusted basis. Subtract line 22 from line 21 — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row23[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 576.003
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.24_total_gain_col_a",
+      "label": "Line 24 — Total gain. Subtract line 23 from line 20 — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row24[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.24_total_gain_col_b",
+      "label": "Line 24 — Total gain. Subtract line 23 from line 20 — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row24[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.24_total_gain_col_c",
+      "label": "Line 24 — Total gain. Subtract line 23 from line 20 — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row24[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.24_total_gain_col_d",
+      "label": "Line 24 — Total gain. Subtract line 23 from line 20 — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row24[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.25a_sec_1245_depreciation_col_a",
+      "label": "Line 25a — If section 1245 property: Depreciation allowed or allowable from line 22 — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row25a[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 528.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.25a_sec_1245_depreciation_col_b",
+      "label": "Line 25a — If section 1245 property: Depreciation allowed or allowable from line 22 — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row25a[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 528.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.25a_sec_1245_depreciation_col_c",
+      "label": "Line 25a — If section 1245 property: Depreciation allowed or allowable from line 22 — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row25a[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 528.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.25a_sec_1245_depreciation_col_d",
+      "label": "Line 25a — If section 1245 property: Depreciation allowed or allowable from line 22 — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row25a[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 528.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.25b_sec_1245_smaller_amount_col_a",
+      "label": "Line 25b — If section 1245 property: Enter the smaller of line 24 or 25a — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row25b[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 516.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.25b_sec_1245_smaller_amount_col_b",
+      "label": "Line 25b — If section 1245 property: Enter the smaller of line 24 or 25a — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row25b[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 516.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.25b_sec_1245_smaller_amount_col_c",
+      "label": "Line 25b — If section 1245 property: Enter the smaller of line 24 or 25a — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row25b[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 516.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.25b_sec_1245_smaller_amount_col_d",
+      "label": "Line 25b — If section 1245 property: Enter the smaller of line 24 or 25a — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row25b[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 516.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26a_sec_1250_additional_depreciation_after_1975_col_a",
+      "label": "Line 26a — If section 1250 property: Additional depreciation after 1975 — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26a[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 480.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26a_sec_1250_additional_depreciation_after_1975_col_b",
+      "label": "Line 26a — If section 1250 property: Additional depreciation after 1975 — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26a[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 480.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26a_sec_1250_additional_depreciation_after_1975_col_c",
+      "label": "Line 26a — If section 1250 property: Additional depreciation after 1975 — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26a[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 480.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26a_sec_1250_additional_depreciation_after_1975_col_d",
+      "label": "Line 26a — If section 1250 property: Additional depreciation after 1975 — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26a[0].f2_44[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 480.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26b_sec_1250_applicable_percentage_amount_col_a",
+      "label": "Line 26b — If section 1250 property: Applicable percentage multiplied by the smaller of line 24 or line 26a — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26b[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 456.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26b_sec_1250_applicable_percentage_amount_col_b",
+      "label": "Line 26b — If section 1250 property: Applicable percentage multiplied by the smaller of line 24 or line 26a — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26b[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 456.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26b_sec_1250_applicable_percentage_amount_col_c",
+      "label": "Line 26b — If section 1250 property: Applicable percentage multiplied by the smaller of line 24 or line 26a — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26b[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 456.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26b_sec_1250_applicable_percentage_amount_col_d",
+      "label": "Line 26b — If section 1250 property: Applicable percentage multiplied by the smaller of line 24 or line 26a — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26b[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 456.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26c_sec_1250_gain_less_26a_col_a",
+      "label": "Line 26c — If section 1250 property: Subtract line 26a from line 24 — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26c[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26c_sec_1250_gain_less_26a_col_b",
+      "label": "Line 26c — If section 1250 property: Subtract line 26a from line 24 — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26c[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26c_sec_1250_gain_less_26a_col_c",
+      "label": "Line 26c — If section 1250 property: Subtract line 26a from line 24 — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26c[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26c_sec_1250_gain_less_26a_col_d",
+      "label": "Line 26c — If section 1250 property: Subtract line 26a from line 24 — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26c[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26d_sec_1250_additional_depreciation_1970_1975_col_a",
+      "label": "Line 26d — If section 1250 property: Additional depreciation after 1969 and before 1976 — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26d[0].f2_53[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26d_sec_1250_additional_depreciation_1970_1975_col_b",
+      "label": "Line 26d — If section 1250 property: Additional depreciation after 1969 and before 1976 — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26d[0].f2_54[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26d_sec_1250_additional_depreciation_1970_1975_col_c",
+      "label": "Line 26d — If section 1250 property: Additional depreciation after 1969 and before 1976 — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26d[0].f2_55[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26d_sec_1250_additional_depreciation_1970_1975_col_d",
+      "label": "Line 26d — If section 1250 property: Additional depreciation after 1969 and before 1976 — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26d[0].f2_56[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26e_sec_1250_smaller_amount_col_a",
+      "label": "Line 26e — If section 1250 property: Enter the smaller of line 26c or 26d — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26e[0].f2_57[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 408.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26e_sec_1250_smaller_amount_col_b",
+      "label": "Line 26e — If section 1250 property: Enter the smaller of line 26c or 26d — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26e[0].f2_58[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 408.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26e_sec_1250_smaller_amount_col_c",
+      "label": "Line 26e — If section 1250 property: Enter the smaller of line 26c or 26d — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26e[0].f2_59[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 408.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26e_sec_1250_smaller_amount_col_d",
+      "label": "Line 26e — If section 1250 property: Enter the smaller of line 26c or 26d — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26e[0].f2_60[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 408.005
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26f_sec_291_amount_col_a",
+      "label": "Line 26f — If section 1250 property: Section 291 amount (corporations only) — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26f[0].f2_61[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 396.006
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26f_sec_291_amount_col_b",
+      "label": "Line 26f — If section 1250 property: Section 291 amount (corporations only) — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26f[0].f2_62[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 396.006
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26f_sec_291_amount_col_c",
+      "label": "Line 26f — If section 1250 property: Section 291 amount (corporations only) — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26f[0].f2_63[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 396.006
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26f_sec_291_amount_col_d",
+      "label": "Line 26f — If section 1250 property: Section 291 amount (corporations only) — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26f[0].f2_64[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 396.006
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26g_sec_1250_total_col_a",
+      "label": "Line 26g — If section 1250 property: Add lines 26b, 26e, and 26f — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26g[0].f2_65[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 384.007
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26g_sec_1250_total_col_b",
+      "label": "Line 26g — If section 1250 property: Add lines 26b, 26e, and 26f — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26g[0].f2_66[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 384.007
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26g_sec_1250_total_col_c",
+      "label": "Line 26g — If section 1250 property: Add lines 26b, 26e, and 26f — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26g[0].f2_67[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 384.007
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.26g_sec_1250_total_col_d",
+      "label": "Line 26g — If section 1250 property: Add lines 26b, 26e, and 26f — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row26g[0].f2_68[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 384.007
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27a_sec_1252_land_clearing_expenses_col_a",
+      "label": "Line 27a — If section 1252 property: Soil, water, and land clearing expenses — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27a[0].f2_69[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 336.008
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27a_sec_1252_land_clearing_expenses_col_b",
+      "label": "Line 27a — If section 1252 property: Soil, water, and land clearing expenses — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27a[0].f2_70[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 336.008
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27a_sec_1252_land_clearing_expenses_col_c",
+      "label": "Line 27a — If section 1252 property: Soil, water, and land clearing expenses — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27a[0].f2_71[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 336.008
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27a_sec_1252_land_clearing_expenses_col_d",
+      "label": "Line 27a — If section 1252 property: Soil, water, and land clearing expenses — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27a[0].f2_72[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 336.008
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27b_sec_1252_applicable_percentage_amount_col_a",
+      "label": "Line 27b — If section 1252 property: Line 27a multiplied by applicable percentage — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27b[0].f2_73[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 324.009
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27b_sec_1252_applicable_percentage_amount_col_b",
+      "label": "Line 27b — If section 1252 property: Line 27a multiplied by applicable percentage — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27b[0].f2_74[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 324.009
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27b_sec_1252_applicable_percentage_amount_col_c",
+      "label": "Line 27b — If section 1252 property: Line 27a multiplied by applicable percentage — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27b[0].f2_75[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 324.009
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27b_sec_1252_applicable_percentage_amount_col_d",
+      "label": "Line 27b — If section 1252 property: Line 27a multiplied by applicable percentage — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27b[0].f2_76[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 324.009
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27c_sec_1252_smaller_amount_col_a",
+      "label": "Line 27c — If section 1252 property: Enter the smaller of line 24 or 27b — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27c[0].f2_77[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 312.01
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27c_sec_1252_smaller_amount_col_b",
+      "label": "Line 27c — If section 1252 property: Enter the smaller of line 24 or 27b — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27c[0].f2_78[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 312.01
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27c_sec_1252_smaller_amount_col_c",
+      "label": "Line 27c — If section 1252 property: Enter the smaller of line 24 or 27b — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27c[0].f2_79[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 312.01
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.27c_sec_1252_smaller_amount_col_d",
+      "label": "Line 27c — If section 1252 property: Enter the smaller of line 24 or 27b — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row27c[0].f2_80[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 312.01
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.28a_sec_1254_drilling_mining_costs_col_a",
+      "label": "Line 28a — If section 1254 property: Intangible drilling and development costs, expenditures for development of mines and other natural deposits, mining exploration costs, and depletion — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row28a[0].f2_81[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 264.011
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.28a_sec_1254_drilling_mining_costs_col_b",
+      "label": "Line 28a — If section 1254 property: Intangible drilling and development costs, expenditures for development of mines and other natural deposits, mining exploration costs, and depletion — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row28a[0].f2_82[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 264.011
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.28a_sec_1254_drilling_mining_costs_col_c",
+      "label": "Line 28a — If section 1254 property: Intangible drilling and development costs, expenditures for development of mines and other natural deposits, mining exploration costs, and depletion — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row28a[0].f2_83[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 264.011
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.28a_sec_1254_drilling_mining_costs_col_d",
+      "label": "Line 28a — If section 1254 property: Intangible drilling and development costs, expenditures for development of mines and other natural deposits, mining exploration costs, and depletion — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row28a[0].f2_84[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 264.011
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.28b_sec_1254_smaller_amount_col_a",
+      "label": "Line 28b — If section 1254 property: Enter the smaller of line 24 or 28a — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row28b[0].f2_85[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 252.012
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.28b_sec_1254_smaller_amount_col_b",
+      "label": "Line 28b — If section 1254 property: Enter the smaller of line 24 or 28a — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row28b[0].f2_86[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 252.012
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.28b_sec_1254_smaller_amount_col_c",
+      "label": "Line 28b — If section 1254 property: Enter the smaller of line 24 or 28a — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row28b[0].f2_87[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 252.012
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.28b_sec_1254_smaller_amount_col_d",
+      "label": "Line 28b — If section 1254 property: Enter the smaller of line 24 or 28a — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row28b[0].f2_88[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 252.012
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.29a_sec_1255_excluded_payments_percentage_col_a",
+      "label": "Line 29a — If section 1255 property: Applicable percentage of payments excluded from income under section 126 — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row29a[0].f2_89[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 216.012
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.29a_sec_1255_excluded_payments_percentage_col_b",
+      "label": "Line 29a — If section 1255 property: Applicable percentage of payments excluded from income under section 126 — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row29a[0].f2_90[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 216.012
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.29a_sec_1255_excluded_payments_percentage_col_c",
+      "label": "Line 29a — If section 1255 property: Applicable percentage of payments excluded from income under section 126 — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row29a[0].f2_91[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 216.012
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.29a_sec_1255_excluded_payments_percentage_col_d",
+      "label": "Line 29a — If section 1255 property: Applicable percentage of payments excluded from income under section 126 — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row29a[0].f2_92[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 216.012
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.29b_sec_1255_smaller_amount_col_a",
+      "label": "Line 29b — If section 1255 property: Enter the smaller of line 24 or 29a — Property A",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row29b[0].f2_93[0]",
+      "position": {
+        "page": 1,
+        "x": 288,
+        "y": 204.013
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.29b_sec_1255_smaller_amount_col_b",
+      "label": "Line 29b — If section 1255 property: Enter the smaller of line 24 or 29a — Property B",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row29b[0].f2_94[0]",
+      "position": {
+        "page": 1,
+        "x": 360,
+        "y": 204.013
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.29b_sec_1255_smaller_amount_col_c",
+      "label": "Line 29b — If section 1255 property: Enter the smaller of line 24 or 29a — Property C",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row29b[0].f2_95[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 204.013
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.29b_sec_1255_smaller_amount_col_d",
+      "label": "Line 29b — If section 1255 property: Enter the smaller of line 24 or 29a — Property D",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIIITable2[0].Row29b[0].f2_96[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 204.013
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.30_total_gains_all_properties",
+      "label": "Line 30 — Total gains for all properties. Add property columns A through D, line 24",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_97[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 168.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.1.line.31_total_recapture_amounts",
+      "label": "Line 31 — Add property columns A through D, lines 25b, 26g, 27c, 28b, and 29b",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_98[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 156.002
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.1.line.32_gain_less_recapture",
+      "label": "Line 32 — Subtract line 31 from line 30",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_99[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 132.001
+      },
+      "maxLength": 50
+    },
+    {
+      "fieldId": "form-4797.1.line.33_sec_179_or_depreciation_prior_years_col_a",
+      "label": "Line 33 — Section 179 expense deduction or depreciation allowable in prior years — (a) Section 179",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIVTable[0].Row33[0].f2_100[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 72
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.33_sec_179_or_depreciation_prior_years_col_b",
+      "label": "Line 33 — Section 179 expense deduction or depreciation allowable in prior years — (b) Section 280F(b)(2)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIVTable[0].Row33[0].f2_101[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 72
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.34_recomputed_depreciation_col_a",
+      "label": "Line 34 — Recomputed depreciation — (a) Section 179",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIVTable[0].Row34[0].f2_102[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 60.001
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.34_recomputed_depreciation_col_b",
+      "label": "Line 34 — Recomputed depreciation — (b) Section 280F(b)(2)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIVTable[0].Row34[0].f2_103[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 60.001
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.35_recapture_amount_col_a",
+      "label": "Line 35 — Recapture amount. Subtract line 34 from line 33 — (a) Section 179",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIVTable[0].Row35[0].f2_104[0]",
+      "position": {
+        "page": 1,
+        "x": 432,
+        "y": 48.002
+      }
+    },
+    {
+      "fieldId": "form-4797.1.line.35_recapture_amount_col_b",
+      "label": "Line 35 — Recapture amount. Subtract line 34 from line 33 — (b) Section 280F(b)(2)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].PartIVTable[0].Row35[0].f2_105[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 48.002
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/4797/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:44.328Z",
+    "totalFields": 182,
+    "skipped": 0,
+    "catalogEntries": 182
+  }
+}

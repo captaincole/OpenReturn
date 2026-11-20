@@ -1,0 +1,96 @@
+{
+  "formId": "form-3903",
+  "fieldCount": 10,
+  "entries": [
+    {
+      "fieldId": "form-3903.0.header.armed_forces_move_certification",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3903.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3903.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-42WN8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3903.0.line.1_transportation_storage_household_goods",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "7,556"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3903.0.line.2_travel_lodging",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "2,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3903.0.line.3_total_moving_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "1,663"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3903.0.line.4_government_paid_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "2,070"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3903.0.line.5_line_3_more_than_line_4_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3903.0.line.5_line_3_more_than_line_4_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3903.0.line.5_moving_expense_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "7,240"
+        }
+      ]
+    }
+  ]
+}

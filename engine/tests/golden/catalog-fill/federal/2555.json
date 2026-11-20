@@ -1,0 +1,1446 @@
+{
+  "formId": "form-2555",
+  "fieldCount": 160,
+  "entries": [
+    {
+      "fieldId": "form-2555.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-H12V0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.1_foreign_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-CN77I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.10_bona_fide_residence_began",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.10_bona_fide_residence_ended",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.11a_living_quarters_purchased_house",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_11[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.11b_living_quarters_rented_house",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_11[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.11c_living_quarters_rented_room",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_11[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.11d_living_quarters_employer_furnished",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_11[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.12a_family_lived_abroad_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_15[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.12a_family_lived_abroad_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_15[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.12b_family_who_and_period",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "T-VZQN4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.13a_nonresident_statement_submitted_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_17[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.13a_nonresident_statement_submitted_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_17[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.13b_foreign_income_tax_required_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_19[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.13b_foreign_income_tax_required_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_19[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row1_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow1[0].f1_18[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow1[0].f1_19[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow1[0].f1_20[0]",
+          "text": "3,576"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow1[0].f1_21[0]",
+          "text": "3,031"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row2_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow2[0].f1_22[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow2[0].f1_23[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow2[0].f1_24[0]",
+          "text": "4,088"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow2[0].f1_25[0]",
+          "text": "8,456"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row3_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow3[0].f1_26[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow3[0].f1_27[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow3[0].f1_28[0]",
+          "text": "1,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow3[0].f1_29[0]",
+          "text": "9,476"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row4_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow4[0].f1_30[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow4[0].f1_31[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow4[0].f1_32[0]",
+          "text": "8,212"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow4[0].f1_33[0]",
+          "text": "1,270"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row5_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow5[0].f1_34[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row5_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow5[0].f1_35[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row5_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow5[0].f1_36[0]",
+          "text": "1,745"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row5_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow5[0].f1_37[0]",
+          "text": "7,151"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row6_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow6[0].f1_38[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row6_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow6[0].f1_39[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row6_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow6[0].f1_40[0]",
+          "text": "9,540"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row6_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow6[0].f1_41[0]",
+          "text": "8,222"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row7_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow7[0].f1_42[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row7_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow7[0].f1_43[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row7_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow7[0].f1_44[0]",
+          "text": "5,517"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row7_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow7[0].f1_45[0]",
+          "text": "3,177"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row8_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow8[0].f1_46[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row8_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow8[0].f1_47[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row8_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow8[0].f1_48[0]",
+          "text": "3,657"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row8_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow8[0].f1_49[0]",
+          "text": "3,471"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.15a_employment_contract_terms",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_50[0]",
+          "text": "T-QOF73"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.15a_employment_contract_terms_line2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_51[0]",
+          "text": "T-1D0MP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.15b_visa_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_52[0]",
+          "text": "T-1WM61"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.15c_visa_limited_stay_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_21[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.15c_visa_limited_stay_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_21[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.15d_maintained_us_home_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_23[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.15d_maintained_us_home_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_23[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.15e_us_home_address_occupants",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_53[0]",
+          "text": "T-4TWN9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.15e_us_home_address_occupants_line2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_54[0]",
+          "text": "T-3IUGF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.2_occupation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-3E5HR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.3_employer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-1EKK3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.4a_employer_us_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-1XP9K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.4b_employer_foreign_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "T-19GM1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.5a_employer_foreign_entity",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.5b_employer_us_company",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.5c_employer_self",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.5d_employer_foreign_affiliate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.5e_employer_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.5e_employer_other_specify",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-90GCX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.6a_last_year_filed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "2393"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.6b_not_previously_filed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.6c_revoked_exclusions_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.6c_revoked_exclusions_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.6d_revocation_type_and_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "T-1EBP3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.7_country_of_citizenship",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "T-11LL5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.8a_separate_foreign_residence_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_9[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.8a_separate_foreign_residence_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_9[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.8b_separate_residence_city_country_days",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "T-EFMQX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.9_tax_homes_dates_established",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "T-152RA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.0.line.9_tax_homes_dates_established_line2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "T-15ISA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.16_physical_presence_period_from",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.16_physical_presence_period_through",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.17_principal_country_of_employment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "T-12UDI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_4[0]",
+          "text": "T-1J9HH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_5[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_6[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_7[0]",
+          "text": "5,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_8[0]",
+          "text": "2,849"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_9[0]",
+          "text": "4,303"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_10[0]",
+          "text": "T-1CFYH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_11[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_12[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_13[0]",
+          "text": "1,049"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_14[0]",
+          "text": "5,987"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_15[0]",
+          "text": "5,062"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_16[0]",
+          "text": "T-W6HZO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_17[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_18[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_19[0]",
+          "text": "2,386"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_20[0]",
+          "text": "2,063"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_21[0]",
+          "text": "1,305"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_22[0]",
+          "text": "T-1VF7C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_23[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_24[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_25[0]",
+          "text": "4,981"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_26[0]",
+          "text": "7,156"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_27[0]",
+          "text": "2,331"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.19_total_wages_salaries_bonuses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+          "text": "2,866"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.20a_business_or_profession_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+          "text": "2,627"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.20b_partnership_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_32[0]",
+          "text": "4,217"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.20b_partnership_name_address_type_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+          "text": "T-10AAW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.20b_partnership_name_address_type_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+          "text": "T-5KLKK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.21a_noncash_home_lodging",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_33[0]",
+          "text": "1,763"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.21b_noncash_meals",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_34[0]",
+          "text": "7,103"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.21c_noncash_car",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_35[0]",
+          "text": "8,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.21d_noncash_other_property",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_38[0]",
+          "text": "1,240"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.21d_other_property_type_amount_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_36[0]",
+          "text": "T-1SNE5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.21d_other_property_type_amount_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_37[0]",
+          "text": "T-4GLG2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.22a_cost_of_living_differential",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_39[0]",
+          "text": "5,004"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.22b_family_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_40[0]",
+          "text": "7,427"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.22c_education_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_41[0]",
+          "text": "7,504"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.22d_home_leave_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_42[0]",
+          "text": "8,444"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.22e_quarters_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_43[0]",
+          "text": "9,668"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.22f_other_purpose_allowance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_46[0]",
+          "text": "4,759"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.22f_other_purpose_type_amount_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_44[0]",
+          "text": "T-ZHFJS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.22f_other_purpose_type_amount_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_45[0]",
+          "text": "T-1SYD4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.22g_total_allowances",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_47[0]",
+          "text": "8,918"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.23_other_foreign_earned_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_50[0]",
+          "text": "2,240"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.23_other_income_type_amount_1",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_48[0]",
+          "text": "T-1FO14"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.23_other_income_type_amount_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_49[0]",
+          "text": "T-197VS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.24_total_before_excludable_meals_lodging",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_51[0]",
+          "text": "9,847"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.25_excludable_meals_lodging",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_52[0]",
+          "text": "3,169"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.1.line.26_foreign_earned_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_53[0]",
+          "text": "6,515"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.27_amount_from_line_26",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line27TagCorrectingSubform[0].f3_1[0]",
+          "text": "1,834"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.27_claiming_housing_exclusion_deduction_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.27_claiming_housing_exclusion_deduction_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.28_qualified_housing_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].Line28TagCorrectingSubform[0].f3_2[0]",
+          "text": "9,620"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.29a_housing_expenses_location",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+          "text": "T-18GAR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.29b_housing_expenses_limit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+          "text": "1,852"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.30_smaller_of_line_28_or_29b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+          "text": "6,248"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.31_qualifying_period_days",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+          "text": "8,523"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.32_base_housing_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+          "text": "7,666"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.33_housing_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+          "text": "7,389"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.34_employer_provided_amounts",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+          "text": "1,221"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.35_employer_provided_ratio_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+          "text": "265"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.35_employer_provided_ratio_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+          "text": "0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.36_housing_exclusion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+          "text": "7,692"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.37_maximum_foreign_earned_income_exclusion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+          "text": "6,647"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.38_qualifying_period_days",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_14[0]",
+          "text": "6,501"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.39_qualifying_days_ratio_decimal",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_16[0]",
+          "text": "888"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.39_qualifying_days_ratio_whole",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_15[0]",
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.40_prorated_maximum_exclusion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_17[0]",
+          "text": "1,923"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.41_income_less_housing_exclusion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_18[0]",
+          "text": "2,617"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.42_foreign_earned_income_exclusion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_19[0]",
+          "text": "3,095"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.43_total_exclusions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_20[0]",
+          "text": "7,735"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.44_deductions_allocable_excluded_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_21[0]",
+          "text": "8,164"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.45_net_exclusion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_22[0]",
+          "text": "3,446"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.46_housing_amount_less_exclusion",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_23[0]",
+          "text": "8,698"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.47_income_less_total_exclusions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_24[0]",
+          "text": "8,271"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.48_smaller_of_line_46_or_47",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_25[0]",
+          "text": "6,925"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.49_housing_deduction_carryover",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_26[0]",
+          "text": "8,958"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-2555.2.line.50_housing_deduction",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_27[0]",
+          "text": "7,139"
+        }
+      ]
+    }
+  ]
+}

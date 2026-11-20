@@ -1,0 +1,1355 @@
+{
+  "form": {
+    "formId": "schedule-f",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Schedule F (Form 1040), Profit or Loss From Farming"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-f.0.header.name_of_proprietor",
+      "label": "Name of proprietor",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.header.ssn",
+      "label": "Social security number (SSN)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-f.0.header.a_principal_crop_activity",
+      "label": "A — Principal crop or activity",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 659.967
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.header.b_code_from_part_iv",
+      "label": "B — Enter code from Part IV",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].CombField_LineB[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 259.2,
+        "y": 659.97
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "schedule-f.0.header.c_accounting_method_cash",
+      "label": "C — Accounting method: Cash",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].LineC_ReadOrder[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 359.6,
+        "y": 662.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.header.c_accounting_method_accrual",
+      "label": "C — Accounting method: Accrual",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].LineC_ReadOrder[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 398,
+        "y": 662.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.header.d_ein",
+      "label": "D — Employer ID number (EIN)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].CombField_LineD[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 659.967
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "schedule-f.0.header.e_materially_participate_yes",
+      "label": "E — Did you \"materially participate\" in the operation of this business during 2025? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 511.2,
+        "y": 649.468
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.header.e_materially_participate_no",
+      "label": "E — Did you \"materially participate\" in the operation of this business during 2025? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 649.468
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.header.f_payments_require_1099_yes",
+      "label": "F — Did you make any payments in 2025 that would require you to file Form(s) 1099? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 511.2,
+        "y": 637.469
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.header.f_payments_require_1099_no",
+      "label": "F — Did you make any payments in 2025 that would require you to file Form(s) 1099? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 637.469
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.header.g_file_required_1099_yes",
+      "label": "G — If \"Yes,\" did you or will you file required Form(s) 1099? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 511.2,
+        "y": 625.47
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.header.g_file_required_1099_no",
+      "label": "G — If \"Yes,\" did you or will you file required Form(s) 1099? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 625.47
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.1a_sales_purchased_livestock",
+      "label": "Line 1a — Sales of purchased livestock and other resale items",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.1b_cost_purchased_livestock",
+      "label": "Line 1b — Cost or other basis of purchased livestock or other items reported on line 1a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 587.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.1c_subtract_1b_from_1a",
+      "label": "Line 1c — Subtract line 1b from line 1a",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.2_sales_products_raised",
+      "label": "Line 2 — Sales of livestock, produce, grains, and other products you raised",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.3a_cooperative_distributions",
+      "label": "Line 3a — Cooperative distributions (Form(s) 1099-PATR)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.3b_cooperative_distributions_taxable",
+      "label": "Line 3b — Cooperative distributions: Taxable amount",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.4a_agricultural_program_payments",
+      "label": "Line 4a — Agricultural program payments",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.4b_agricultural_program_taxable",
+      "label": "Line 4b — Agricultural program payments: Taxable amount",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.5a_ccc_loans_under_election",
+      "label": "Line 5a — Commodity Credit Corporation (CCC) loans reported under election",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.5b_ccc_loans_forfeited",
+      "label": "Line 5b — CCC loans forfeited",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.5c_ccc_loans_forfeited_taxable",
+      "label": "Line 5c — CCC loans forfeited: Taxable amount",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.6a_crop_insurance_received",
+      "label": "Line 6a — Crop insurance proceeds and federal crop disaster payments: Amount received in 2025",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 273.6,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.6b_crop_insurance_taxable",
+      "label": "Line 6b — Crop insurance proceeds and federal crop disaster payments: Taxable amount",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.6c_election_to_defer",
+      "label": "Line 6c — If election to defer to 2026 is attached, check here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 335.6,
+        "y": 481.47
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.6d_amount_deferred_from_2024",
+      "label": "Line 6d — Crop insurance proceeds and federal crop disaster payments: Amount deferred from 2024",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.7_custom_hire_income",
+      "label": "Line 7 — Custom hire (machine work) income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 467.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.8_other_income",
+      "label": "Line 8 — Other income, including federal and state gasoline or fuel tax credit or refund",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.9_gross_income",
+      "label": "Line 9 — Gross income. Add amounts in the right column (lines 1c, 2, 3b, 4b, 5a, 5c, 6b, 6d, 7, and 8)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.23_pension_profit_sharing",
+      "label": "Line 23 — Pension and profit-sharing plans",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.10_car_truck_expenses",
+      "label": "Line 10 — Car and truck expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.11_chemicals",
+      "label": "Line 11 — Chemicals",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.24a_rent_vehicles_machinery_equipment",
+      "label": "Line 24a — Rent or lease: Vehicles, machinery, equipment",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.12_conservation_expenses",
+      "label": "Line 12 — Conservation expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.24b_rent_other",
+      "label": "Line 24b — Rent or lease: Other (land, animals, etc.)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.13_custom_hire_expense",
+      "label": "Line 13 — Custom hire (machine work)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.25_repairs_maintenance",
+      "label": "Line 25 — Repairs and maintenance",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.26_seeds_plants",
+      "label": "Line 26 — Seeds and plants",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.14_depreciation_section_179",
+      "label": "Line 14 — Depreciation and section 179 expense",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.27_storage_warehousing",
+      "label": "Line 27 — Storage and warehousing",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 335.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.28_supplies",
+      "label": "Line 28 — Supplies",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.15_employee_benefit_programs",
+      "label": "Line 15 — Employee benefit programs other than on line 23",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.29_taxes",
+      "label": "Line 29 — Taxes",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.16_feed",
+      "label": "Line 16 — Feed",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.30_utilities",
+      "label": "Line 30 — Utilities",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.17_fertilizers_lime",
+      "label": "Line 17 — Fertilizers and lime",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.31_veterinary_breeding_medicine",
+      "label": "Line 31 — Veterinary, breeding, and medicine",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.18_freight_trucking",
+      "label": "Line 18 — Freight and trucking",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 275.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.19_gasoline_fuel_oil",
+      "label": "Line 19 — Gasoline, fuel, and oil",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32a_other_expenses_description",
+      "label": "Line 32a — Other expenses (specify): description",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32a_other_expenses_amount",
+      "label": "Line 32a — Other expenses (specify): amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.20_insurance_other_than_health",
+      "label": "Line 20 — Insurance (other than health)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32b_other_expenses_description",
+      "label": "Line 32b — Other expenses (specify): description",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32b_other_expenses_amount",
+      "label": "Line 32b — Other expenses (specify): amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32c_other_expenses_description",
+      "label": "Line 32c — Other expenses (specify): description",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32c_other_expenses_amount",
+      "label": "Line 32c — Other expenses (specify): amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 239.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.21a_interest_mortgage",
+      "label": "Line 21a — Interest: Mortgage (paid to banks, etc.)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32d_other_expenses_description",
+      "label": "Line 32d — Other expenses (specify): description",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32d_other_expenses_amount",
+      "label": "Line 32d — Other expenses (specify): amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.21b_interest_other",
+      "label": "Line 21b — Interest: Other",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32e_other_expenses_description",
+      "label": "Line 32e — Other expenses (specify): description",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_55[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32e_other_expenses_amount",
+      "label": "Line 32e — Other expenses (specify): amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_56[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 215.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.22_labor_hired",
+      "label": "Line 22 — Labor hired (less employment credits)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 230.4,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32f_other_expenses_description",
+      "label": "Line 32f — Other expenses (specify): description",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_57[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.32f_other_expenses_amount",
+      "label": "Line 32f — Other expenses (specify): amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_58[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 203.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.33_total_expenses",
+      "label": "Line 33 — Total expenses. Add lines 10 through 32f",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_59[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 191.967
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.34_net_farm_profit_loss",
+      "label": "Line 34 — Net farm profit or (loss). Subtract line 33 from line 9",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_60[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.36a_all_investment_at_risk",
+      "label": "Line 36a — All investment is at risk",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 134.469
+      }
+    },
+    {
+      "fieldId": "schedule-f.0.line.36b_some_investment_not_at_risk",
+      "label": "Line 36b — Some investment is not at risk",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 134.469
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.37_sales_livestock_produce_accrual",
+      "label": "Line 37 — Sales of livestock, produce, grains, and other products",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 707.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.38a_cooperative_distributions_accrual",
+      "label": "Line 38a — Cooperative distributions (Form(s) 1099-PATR)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line38a_ReadOrder[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 273.6,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.38b_cooperative_distributions_taxable_accrual",
+      "label": "Line 38b — Cooperative distributions: taxable amount",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.39a_agricultural_program_payments_accrual",
+      "label": "Line 39a — Agricultural program payments",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line39a_ReadOrder[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 273.6,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.39b_agricultural_program_payments_taxable_accrual",
+      "label": "Line 39b — Agricultural program payments: taxable amount",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 659.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.40a_ccc_loans_under_election_accrual",
+      "label": "Line 40a — Commodity Credit Corporation (CCC) loans reported under election",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 623.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.40b_ccc_loans_forfeited_accrual",
+      "label": "Line 40b — Commodity Credit Corporation (CCC) loans forfeited",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line40b_ReadOrder[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 273.6,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.40c_ccc_loans_forfeited_taxable_accrual",
+      "label": "Line 40c — Commodity Credit Corporation (CCC) loans forfeited: taxable amount",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.41_crop_insurance_proceeds_accrual",
+      "label": "Line 41 — Crop insurance proceeds",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.42_custom_hire_income_accrual",
+      "label": "Line 42 — Custom hire (machine work) income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.43_other_income_accrual",
+      "label": "Line 43 — Other income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.44_total_income_accrual",
+      "label": "Line 44 — Add amounts in the right column for lines 37 through 43 (lines 37, 38b, 39b, 40a, 40c, 41, 42, and 43)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.45_inventory_beginning_of_year",
+      "label": "Line 45 — Inventory of livestock, produce, grains, and other products at beginning of the year. Do not include sales reported on Form 4797",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line45_ReadOrder[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.46_cost_products_purchased",
+      "label": "Line 46 — Cost of livestock, produce, grains, and other products purchased during the year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.47_add_lines_45_46",
+      "label": "Line 47 — Add lines 45 and 46",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.48_inventory_end_of_year",
+      "label": "Line 48 — Inventory of livestock, produce, grains, and other products at end of year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 407.97
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.49_cost_products_sold",
+      "label": "Line 49 — Cost of livestock, produce, grains, and other products sold. Subtract line 48 from line 47",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "schedule-f.1.line.50_gross_income_accrual",
+      "label": "Line 50 — Gross income. Subtract line 49 from line 44",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 359.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/schedule-f/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:35.516Z",
+    "totalFields": 89,
+    "skipped": 0,
+    "catalogEntries": 89
+  }
+}

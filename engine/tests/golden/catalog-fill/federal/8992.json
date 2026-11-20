@@ -1,0 +1,132 @@
+{
+  "formId": "form-8992",
+  "fieldCount": 14,
+  "entries": [
+    {
+      "fieldId": "form-8992.0.header.a_filer_identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-8NKUZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.header.b_us_shareholder_identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-WP718"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.header.filer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-EA5DW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.header.us_shareholder_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-1J3JW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.part1.1_sum_net_tested_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "7,607"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.part1.2_sum_net_tested_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "7,293"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.part1.3_net_cfc_tested_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "1,854"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.part2.1_net_cfc_tested_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "5,741"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.part2.2_deemed_tangible_income_return",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "3,127"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.part2.3a_sum_tested_interest_expense",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "9,910"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.part2.3b_sum_tested_interest_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "5,041"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.part2.3c_specified_interest_expense",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "9,966"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.part2.4_net_dtir",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "8,659"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8992.0.part2.5_gilti",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "9,688"
+        }
+      ]
+    }
+  ]
+}

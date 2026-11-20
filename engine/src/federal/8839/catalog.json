@@ -1,0 +1,1528 @@
+{
+  "form": {
+    "formId": "form-8839",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 8839, Qualified Adoption Expenses"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8839.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-8839.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 684
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_c",
+      "label": "Line 1, Child 1 — (c) Check if child was born before 2008 and disabled",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 296.4,
+        "y": 593.998
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_d",
+      "label": "Line 1, Child 1 — (d) Check if child was a child with special needs",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 339.6,
+        "y": 593.998
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_e",
+      "label": "Line 1, Child 1 — (e) Check if child was a foreign child",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 382.8,
+        "y": 593.998
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_g",
+      "label": "Line 1, Child 1 — (g) Check if adoption became final in 2025 or earlier",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 544.8,
+        "y": 593.998
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_a_first",
+      "label": "Line 1, Child 1 — (a) Child's name: First",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 58.6,
+        "y": 587.996
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_a_last",
+      "label": "Line 1, Child 1 — (a) Child's name: Last",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 137.8,
+        "y": 587.996
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_b",
+      "label": "Line 1, Child 1 — (b) Child's year of birth",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 231.15,
+        "y": 587.996
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row1_col_f",
+      "label": "Line 1, Child 1 — (f) Child's identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 411.15,
+        "y": 587.996
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_c",
+      "label": "Line 1, Child 2 — (c) Check if child was born before 2008 and disabled",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 296.4,
+        "y": 569.994
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_d",
+      "label": "Line 1, Child 2 — (d) Check if child was a child with special needs",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 339.6,
+        "y": 569.994
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_e",
+      "label": "Line 1, Child 2 — (e) Check if child was a foreign child",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].c1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 382.8,
+        "y": 569.994
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_g",
+      "label": "Line 1, Child 2 — (g) Check if adoption became final in 2025 or earlier",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].c1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 544.8,
+        "y": 569.994
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_a_first",
+      "label": "Line 1, Child 2 — (a) Child's name: First",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 58.6,
+        "y": 563.992
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_a_last",
+      "label": "Line 1, Child 2 — (a) Child's name: Last",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 137.8,
+        "y": 563.992
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_b",
+      "label": "Line 1, Child 2 — (b) Child's year of birth",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 231.15,
+        "y": 563.992
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row2_col_f",
+      "label": "Line 1, Child 2 — (f) Child's identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child2[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 411.15,
+        "y": 563.992
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_c",
+      "label": "Line 1, Child 3 — (c) Check if child was born before 2008 and disabled",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].c1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 296.4,
+        "y": 545.99
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_d",
+      "label": "Line 1, Child 3 — (d) Check if child was a child with special needs",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].c1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 339.6,
+        "y": 545.99
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_e",
+      "label": "Line 1, Child 3 — (e) Check if child was a foreign child",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].c1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 382.8,
+        "y": 545.99
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_g",
+      "label": "Line 1, Child 3 — (g) Check if adoption became final in 2025 or earlier",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].c1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 544.8,
+        "y": 545.99
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_a_first",
+      "label": "Line 1, Child 3 — (a) Child's name: First",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 58.6,
+        "y": 539.988
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_a_last",
+      "label": "Line 1, Child 3 — (a) Child's name: Last",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 137.8,
+        "y": 539.988
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_b",
+      "label": "Line 1, Child 3 — (b) Child's year of birth",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 231.15,
+        "y": 539.988
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8839.0.line.1_row3_col_f",
+      "label": "Line 1, Child 3 — (f) Child's identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_PartI[0].BodyRow_Child3[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 411.15,
+        "y": 539.988
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8839.0.line.2_maximum_adoption_credit_child_1",
+      "label": "Line 2, Child 1 — Maximum adoption credit per child. Enter $17,280",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.2_maximum_adoption_credit_child_2",
+      "label": "Line 2, Child 2 — Maximum adoption credit per child. Enter $17,280",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child2[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.2_maximum_adoption_credit_child_3",
+      "label": "Line 2, Child 3 — Maximum adoption credit per child. Enter $17,280",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Child3[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.3_prior_year_form_8839_no",
+      "label": "Line 3 — Did you file Form 8839 for a prior year for the same child? No. Enter -0-",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line3_ReadOrder[0].Line3Checkboxes_ReadOrder[0].c1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 93.6,
+        "y": 446.001
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.3_prior_year_form_8839_yes",
+      "label": "Line 3 — Did you file Form 8839 for a prior year for the same child? Yes. See instructions for the amount to enter",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line3_ReadOrder[0].Line3Checkboxes_ReadOrder[0].c1_13[1]",
+      "position": {
+        "page": 0,
+        "x": 93.6,
+        "y": 432.999
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.3_prior_year_amount_child_1",
+      "label": "Line 3, Child 1 — Did you file Form 8839 for a prior year for the same child? Amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.3_prior_year_amount_child_2",
+      "label": "Line 3, Child 2 — Did you file Form 8839 for a prior year for the same child? Amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.3_prior_year_amount_child_3",
+      "label": "Line 3, Child 3 — Did you file Form 8839 for a prior year for the same child? Amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.4_credit_limit_remaining_child_1",
+      "label": "Line 4, Child 1 — Subtract line 3 from line 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.4_credit_limit_remaining_child_2",
+      "label": "Line 4, Child 2 — Subtract line 3 from line 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.4_credit_limit_remaining_child_3",
+      "label": "Line 4, Child 3 — Subtract line 3 from line 2",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.5_qualified_adoption_expenses_child_1",
+      "label": "Line 5, Child 1 — Qualified adoption expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.5_qualified_adoption_expenses_child_2",
+      "label": "Line 5, Child 2 — Qualified adoption expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.5_qualified_adoption_expenses_child_3",
+      "label": "Line 5, Child 3 — Qualified adoption expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.6_smaller_of_4_or_5_child_1",
+      "label": "Line 6, Child 1 — Enter the smaller of line 4 or line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.6_smaller_of_4_or_5_child_2",
+      "label": "Line 6, Child 2 — Enter the smaller of line 4 or line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.6_smaller_of_4_or_5_child_3",
+      "label": "Line 6, Child 3 — Enter the smaller of line 4 or line 5",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.7_modified_adjusted_gross_income",
+      "label": "Line 7 — Enter modified adjusted gross income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.8_magi_over_threshold_no",
+      "label": "Line 8 — Is line 7 more than $259,190? No. Skip lines 8 and 9, and enter -0- on line 10",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line8_ReadOrder[0].c1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 325.999
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.8_magi_over_threshold_yes",
+      "label": "Line 8 — Is line 7 more than $259,190? Yes. Subtract $259,190 from line 7",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line8_ReadOrder[0].c1_14[1]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 314
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.8_magi_excess_amount",
+      "label": "Line 8 — Is line 7 more than $259,190? Yes. Subtract $259,190 from line 7",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.9_phaseout_decimal_whole",
+      "label": "Line 9 — Divide line 8 by $40,000. Enter the result as a decimal (rounded to at least three places). Do not enter more than 1.000 (digit before the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 532.8,
+        "y": 288
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8839.0.line.9_phaseout_decimal_fraction",
+      "label": "Line 9 — Divide line 8 by $40,000. Enter the result as a decimal (rounded to at least three places). Do not enter more than 1.000 (digits after the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 550.8,
+        "y": 288
+      },
+      "maxLength": 5
+    },
+    {
+      "fieldId": "form-8839.0.line.10_phaseout_reduction_child_1",
+      "label": "Line 10, Child 1 — Multiply each amount on line 6 by line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.10_phaseout_reduction_child_2",
+      "label": "Line 10, Child 2 — Multiply each amount on line 6 by line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.10_phaseout_reduction_child_3",
+      "label": "Line 10, Child 3 — Multiply each amount on line 6 by line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.11a_credit_after_phaseout_child_1",
+      "label": "Line 11a, Child 1 — Subtract line 10 from line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.11a_credit_after_phaseout_child_2",
+      "label": "Line 11a, Child 2 — Subtract line 10 from line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.11a_credit_after_phaseout_child_3",
+      "label": "Line 11a, Child 3 — Subtract line 10 from line 6",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.11b_smaller_of_11a_or_5000_child_1",
+      "label": "Line 11b, Child 1 — Enter the smaller of the amount on line 11a or $5,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.11b_smaller_of_11a_or_5000_child_2",
+      "label": "Line 11b, Child 2 — Enter the smaller of the amount on line 11a or $5,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 367.2,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.11b_smaller_of_11a_or_5000_child_3",
+      "label": "Line 11b, Child 3 — Enter the smaller of the amount on line 11a or $5,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.11c_total_line_11b",
+      "label": "Line 11c — Add the amounts on line 11b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.12_total_line_11a",
+      "label": "Line 12 — Add the amounts on line 11a",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 228.002
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.13_refundable_adoption_credit",
+      "label": "Line 13 — Refundable adoption credit. Enter the amount from line 11(c)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.14_credit_less_refundable",
+      "label": "Line 14 — Subtract line 13 from line 12. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 180
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.15_credit_carryforward_prior_years",
+      "label": "Line 15 — Credit carryforward, if any, from prior years",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 156.002
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.16_add_lines_14_and_15",
+      "label": "Line 16 — Add lines 14 and 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.17_credit_limit_worksheet_amount",
+      "label": "Line 17 — Enter the amount from line 5 of the Credit Limit Worksheet in the instructions",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 132.001
+      }
+    },
+    {
+      "fieldId": "form-8839.0.line.18_nonrefundable_adoption_credit",
+      "label": "Line 18 — Nonrefundable adoption credit. Enter the smaller of line 16 or line 17",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 108
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.19_maximum_exclusion_child_1",
+      "label": "Line 19 — Maximum exclusion per child. Enter $17,280 (Child 1)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Child1[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 309.6,
+        "y": 695.999
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.19_maximum_exclusion_child_2",
+      "label": "Line 19 — Maximum exclusion per child. Enter $17,280 (Child 2)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Child2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 695.999
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.19_maximum_exclusion_child_3",
+      "label": "Line 19 — Maximum exclusion per child. Enter $17,280 (Child 3)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Child3[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 695.999
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.20_prior_year_benefits_no",
+      "label": "Line 20 — Did you receive employer-provided adoption benefits for a prior year for the same child? No. Enter -0-",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line20_ReadOrder[0].Line20Checkboxes_ReadOrder[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 662.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.20_prior_year_benefits_yes",
+      "label": "Line 20 — Did you receive employer-provided adoption benefits for a prior year for the same child? Yes. See instructions for the amount to enter",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line20_ReadOrder[0].Line20Checkboxes_ReadOrder[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 649.999
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.20_prior_year_benefits_child_1",
+      "label": "Line 20 — Employer-provided adoption benefits received for a prior year for the same child (Child 1)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 309.6,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.20_prior_year_benefits_child_2",
+      "label": "Line 20 — Employer-provided adoption benefits received for a prior year for the same child (Child 2)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.20_prior_year_benefits_child_3",
+      "label": "Line 20 — Employer-provided adoption benefits received for a prior year for the same child (Child 3)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.21_subtract_line_20_child_1",
+      "label": "Line 21 — Subtract line 20 from line 19 (Child 1)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 309.6,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.21_subtract_line_20_child_2",
+      "label": "Line 21 — Subtract line 20 from line 19 (Child 2)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.21_subtract_line_20_child_3",
+      "label": "Line 21 — Subtract line 20 from line 19 (Child 3)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.22_employer_benefits_received_child_1",
+      "label": "Line 22 — Employer-provided adoption benefits you received in 2025 (Child 1)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 309.6,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.22_employer_benefits_received_child_2",
+      "label": "Line 22 — Employer-provided adoption benefits you received in 2025 (Child 2)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.22_employer_benefits_received_child_3",
+      "label": "Line 22 — Employer-provided adoption benefits you received in 2025 (Child 3)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.23_total_employer_benefits",
+      "label": "Line 23 — Add the amounts on line 22",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.24_smaller_of_21_or_22_child_1",
+      "label": "Line 24 — Enter the smaller of line 21 or line 22. But if the child was a child with special needs and the adoption became final in 2025, enter the amount from line 21 (Child 1)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 309.6,
+        "y": 551.999
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.24_smaller_of_21_or_22_child_2",
+      "label": "Line 24 — Enter the smaller of line 21 or line 22. But if the child was a child with special needs and the adoption became final in 2025, enter the amount from line 21 (Child 2)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 551.999
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.24_smaller_of_21_or_22_child_3",
+      "label": "Line 24 — Enter the smaller of line 21 or line 22. But if the child was a child with special needs and the adoption became final in 2025, enter the amount from line 21 (Child 3)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 551.999
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.25_modified_agi",
+      "label": "Line 25 — Enter modified adjusted gross income (from the worksheet in the instructions)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line25_ReadOrder[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 345.6,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.26_more_than_259190_no",
+      "label": "Line 26 — Is line 25 more than $259,190? No. Skip lines 26 and 27, and enter -0- on line 28",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line26_ReadOrder[0].c2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 505.999
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.26_more_than_259190_yes",
+      "label": "Line 26 — Is line 25 more than $259,190? Yes. Subtract $259,190 from line 25",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line26_ReadOrder[0].c2_2[1]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 494
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.26_magi_over_259190",
+      "label": "Line 26 — Subtract $259,190 from line 25",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 345.6,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.27_phaseout_decimal_whole",
+      "label": "Line 27 — Divide line 26 by $40,000. Enter the result as a decimal (rounded to at least three places). Do not enter more than 1.000 (digit before the decimal point)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 468
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8839.1.line.27_phaseout_decimal_fraction",
+      "label": "Line 27 — Divide line 26 by $40,000. Enter the result as a decimal (rounded to at least three places). Do not enter more than 1.000 (digits after the decimal point)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 457.2,
+        "y": 468
+      },
+      "maxLength": 5
+    },
+    {
+      "fieldId": "form-8839.1.line.28_multiply_line_24_child_1",
+      "label": "Line 28 — Multiply each amount on line 24 by line 27 (Child 1)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 309.6,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.28_multiply_line_24_child_2",
+      "label": "Line 28 — Multiply each amount on line 24 by line 27 (Child 2)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.28_multiply_line_24_child_3",
+      "label": "Line 28 — Multiply each amount on line 24 by line 27 (Child 3)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.29_excluded_benefits_child_1",
+      "label": "Line 29 — Excluded benefits. Subtract line 28 from line 24 (Child 1)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 309.6,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.29_excluded_benefits_child_2",
+      "label": "Line 29 — Excluded benefits. Subtract line 28 from line 24 (Child 2)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.29_excluded_benefits_child_3",
+      "label": "Line 29 — Excluded benefits. Subtract line 28 from line 24 (Child 3)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 424.8,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.30_total_excluded_benefits",
+      "label": "Line 30 — Add the amounts on line 29",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.31_line_30_more_than_23_no",
+      "label": "Line 31 — Taxable benefits. Is line 30 more than line 23? No. Subtract line 30 from line 23",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line31_ReadOrder[0].Line29Checkboxes_ReadOrder[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 410.501
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.31_taxable_benefits",
+      "label": "Line 31 — Taxable benefits",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 390.002
+      }
+    },
+    {
+      "fieldId": "form-8839.1.line.31_line_30_more_than_23_yes",
+      "label": "Line 31 — Taxable benefits. Is line 30 more than line 23? Yes. Subtract line 23 from line 30. Enter the result as a negative number",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Line31_ReadOrder[0].Line29Checkboxes_ReadOrder[0].c2_3[1]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 386.5
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8839/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:56.807Z",
+    "totalFields": 100,
+    "skipped": 0,
+    "catalogEntries": 100
+  }
+}

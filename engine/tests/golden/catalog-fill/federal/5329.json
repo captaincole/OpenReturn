@@ -1,0 +1,681 @@
+{
+  "formId": "form-5329",
+  "fieldCount": 75,
+  "entries": [
+    {
+      "fieldId": "form-5329.0.header.amended_return",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.header.apt_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "T-1EMON"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.header.city_state_zip",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "T-19A9O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.header.foreign_country_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "T-1R41F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.header.foreign_postal_code",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "T-GKBY6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.header.foreign_province_state_county",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "T-1AOVM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.header.home_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-ZM5IC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-RIMDD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.1_early_distributions_in_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "8,535"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.10_traditional_ira_contribution_shortfall",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "1,157"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.11_traditional_ira_distributions_in_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "1,866"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.12_traditional_ira_prior_excess_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "7,282"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.13_traditional_ira_add_lines_10_12",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "5,460"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.14_traditional_ira_prior_year_excess",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "3,097"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.15_traditional_ira_excess_2025",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "9,955"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.16_traditional_ira_total_excess",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "9,669"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.17_additional_tax_traditional_ira",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "5,787"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.18_roth_ira_prior_excess",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "1,278"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.19_roth_ira_contribution_shortfall",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+          "text": "5,394"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.2_early_distributions_not_subject",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "7,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.2_exception_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "T-SL5BP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.20_roth_ira_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "2,946"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.21_roth_ira_add_lines_19_20",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "3,966"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.22_roth_ira_prior_year_excess",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "7,081"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.23_roth_ira_excess_2025",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "1,750"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.24_roth_ira_total_excess",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "4,181"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.25_additional_tax_roth_ira",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+          "text": "1,361"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.3_amount_subject_to_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "2,697"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.4_additional_tax_early_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "6,442"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.5_education_able_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "2,939"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.6_education_able_not_subject",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "7,519"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.7_education_able_amount_subject",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "8,096"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.8_additional_tax_education_able",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "5,657"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.0.line.9_traditional_ira_prior_excess",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "9,203"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.26_coverdell_prior_excess_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "3,745"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.27_coverdell_contributions_under_maximum",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+          "text": "3,537"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.28_coverdell_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "7,969"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.29_coverdell_add_lines_27_28",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+          "text": "6,110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.30_coverdell_prior_year_excess",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "5,214"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.31_coverdell_excess_contributions_2025",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "7,296"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.32_coverdell_total_excess_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_7[0]",
+          "text": "9,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.33_coverdell_additional_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "7,873"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.34_archer_msa_prior_excess_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "2,486"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.35_archer_msa_contributions_under_maximum",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "3,370"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.36_archer_msa_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "9,767"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.37_archer_msa_add_lines_35_36",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "3,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.38_archer_msa_prior_year_excess",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_13[0]",
+          "text": "9,795"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.39_archer_msa_excess_contributions_2025",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "1,387"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.40_archer_msa_total_excess_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "8,349"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.41_archer_msa_additional_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "2,612"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.42_hsa_prior_excess_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "5,684"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.43_hsa_contributions_under_maximum",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "6,798"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.44_hsa_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_19[0]",
+          "text": "6,090"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.45_hsa_add_lines_43_44",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_20[0]",
+          "text": "4,106"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.46_hsa_prior_year_excess",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_21[0]",
+          "text": "7,030"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.47_hsa_excess_contributions_2025",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_22[0]",
+          "text": "8,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.48_hsa_total_excess_contributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_23[0]",
+          "text": "3,093"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.49_hsa_additional_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_24[0]",
+          "text": "9,810"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.50_able_excess_contributions_2025",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_25[0]",
+          "text": "5,148"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.1.line.51_able_additional_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_26[0]",
+          "text": "6,021"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.line.52a_minimum_required_distribution_corrected",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+          "text": "8,636"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.line.52b_minimum_required_distribution_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+          "text": "1,633"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.line.53a_amount_distributed_corrected",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+          "text": "3,889"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.line.53b_amount_distributed_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+          "text": "1,424"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.line.54a_tax_10_percent_corrected",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+          "text": "4,066"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.line.54b_tax_25_percent_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+          "text": "3,050"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.line.55_excess_accumulation_additional_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+          "text": "1,575"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.signing.firm_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+          "text": "T-NWDAU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.signing.firm_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+          "text": "T-A7NYF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.signing.firm_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+          "text": "T-1Y8BS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.signing.firm_phone",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+          "text": "5551234567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.signing.preparer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+          "text": "T-C4JRY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.signing.preparer_ptin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+          "text": "T-IIVQ3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5329.2.signing.preparer_self_employed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+          "checked": true
+        }
+      ]
+    }
+  ]
+}

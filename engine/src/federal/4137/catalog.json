@@ -1,0 +1,523 @@
+{
+  "form": {
+    "formId": "form-4137",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 4137, Social Security and Medicare Tax on Unreported Tip Income"
+  },
+  "fields": [
+    {
+      "fieldId": "form-4137.0.header.taxpayer_name",
+      "label": "Name of person who received tips",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 677.999
+      }
+    },
+    {
+      "fieldId": "form-4137.0.header.ssn",
+      "label": "Social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 468,
+        "y": 677.999
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_a_employer_tips_col_a",
+      "label": "Line 1, row A, column (a) — Name of employer to whom you were required to but didn't report all your tips",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 65.55,
+        "y": 611.997
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_a_employer_tips_col_b",
+      "label": "Line 1, row A, column (b) — Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 302.4,
+        "y": 611.997
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_a_employer_tips_col_c",
+      "label": "Line 1, row A, column (c) — Total cash and charge tips you received (including unreported tips)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 388.8,
+        "y": 611.997
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_a_employer_tips_col_d",
+      "label": "Line 1, row A, column (d) — Total cash and charge tips you reported to your employer",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 611.997
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_b_employer_tips_col_a",
+      "label": "Line 1, row B, column (a) — Name of employer to whom you were required to but didn't report all your tips",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow2[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 65.55,
+        "y": 587.996
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_b_employer_tips_col_b",
+      "label": "Line 1, row B, column (b) — Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow2[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 302.4,
+        "y": 587.996
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_b_employer_tips_col_c",
+      "label": "Line 1, row B, column (c) — Total cash and charge tips you received (including unreported tips)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow2[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 388.8,
+        "y": 587.996
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_b_employer_tips_col_d",
+      "label": "Line 1, row B, column (d) — Total cash and charge tips you reported to your employer",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow2[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 587.996
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_c_employer_tips_col_a",
+      "label": "Line 1, row C, column (a) — Name of employer to whom you were required to but didn't report all your tips",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow3[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 65.55,
+        "y": 563.995
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_c_employer_tips_col_b",
+      "label": "Line 1, row C, column (b) — Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow3[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 302.4,
+        "y": 563.995
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_c_employer_tips_col_c",
+      "label": "Line 1, row C, column (c) — Total cash and charge tips you received (including unreported tips)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow3[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 388.8,
+        "y": 563.995
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_c_employer_tips_col_d",
+      "label": "Line 1, row C, column (d) — Total cash and charge tips you reported to your employer",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow3[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 563.995
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_d_employer_tips_col_a",
+      "label": "Line 1, row D, column (a) — Name of employer to whom you were required to but didn't report all your tips",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow4[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 65.55,
+        "y": 539.994
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_d_employer_tips_col_b",
+      "label": "Line 1, row D, column (b) — Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow4[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 302.4,
+        "y": 539.994
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_d_employer_tips_col_c",
+      "label": "Line 1, row D, column (c) — Total cash and charge tips you received (including unreported tips)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow4[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 388.8,
+        "y": 539.994
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_d_employer_tips_col_d",
+      "label": "Line 1, row D, column (d) — Total cash and charge tips you reported to your employer",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow4[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 539.994
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_e_employer_tips_col_a",
+      "label": "Line 1, row E, column (a) — Name of employer to whom you were required to but didn't report all your tips",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow5[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 65.55,
+        "y": 515.993
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_e_employer_tips_col_b",
+      "label": "Line 1, row E, column (b) — Employer identification number",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow5[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 302.4,
+        "y": 515.993
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_e_employer_tips_col_c",
+      "label": "Line 1, row E, column (c) — Total cash and charge tips you received (including unreported tips)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow5[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 388.8,
+        "y": 515.993
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_e_employer_tips_col_d",
+      "label": "Line 1, row E, column (d) — Total cash and charge tips you reported to your employer",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow5[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 482.4,
+        "y": 515.993
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.2_total_tips_received",
+      "label": "Line 2 — Total cash and charge tips you received in 2025. Add the amounts from line 1, column (c)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 492.001
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.3_total_tips_reported",
+      "label": "Line 3 — Total cash and charge tips you reported to your employer(s) in 2025. Add the amounts from line 1, column (d)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.4_unreported_tips",
+      "label": "Line 4 — Subtract line 3 from line 2",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.5_tips_under_20_month",
+      "label": "Line 5 — Cash and charge tips you received but didn't report to your employer because the total was less than $20 in a calendar month",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.6_tips_subject_medicare_tax",
+      "label": "Line 6 — Unreported tips subject to Medicare tax. Subtract line 5 from line 4",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.8_social_security_wages_tips",
+      "label": "Line 8 — Total social security wages and social security tips (total of your Form(s) W-2, boxes 3 and 7) and railroad retirement (RRTA) compensation (subject to 6.2% rate)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.9_remaining_social_security_base",
+      "label": "Line 9 — Subtract line 8 from line 7. If line 8 is more than line 7, enter -0-",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.10_tips_subject_social_security_tax",
+      "label": "Line 10 — Unreported tips subject to social security tax. Enter the smaller of line 6 or line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.11_social_security_tax",
+      "label": "Line 11 — Multiply line 10 by 0.062 (social security tax rate)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.12_medicare_tax",
+      "label": "Line 12 — Multiply line 6 by 0.0145 (Medicare tax rate)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-4137.0.line.13_total_tax_unreported_tips",
+      "label": "Line 13 — Add lines 11 and 12",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 276.001
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/4137/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:42.087Z",
+    "totalFields": 33,
+    "skipped": 0,
+    "catalogEntries": 33
+  }
+}

@@ -1,0 +1,807 @@
+{
+  "formId": "schedule-f",
+  "fieldCount": 89,
+  "entries": [
+    {
+      "fieldId": "schedule-f.0.header.a_principal_crop_activity",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "T-3E9EK"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.b_code_from_part_iv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].CombField_LineB[0].f1_4[0]",
+          "text": "T6GAAW"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.c_accounting_method_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].LineC_ReadOrder[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.c_accounting_method_cash",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].LineC_ReadOrder[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.d_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].CombField_LineD[0].f1_5[0]",
+          "text": "T-SGG9U"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.e_materially_participate_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.e_materially_participate_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.f_payments_require_1099_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.f_payments_require_1099_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.g_file_required_1099_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.g_file_required_1099_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.name_of_proprietor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-1JJWK"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.10_car_truck_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_23[0]",
+          "text": "6,184"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.11_chemicals",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_24[0]",
+          "text": "6,340"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.12_conservation_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_25[0]",
+          "text": "1,334"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.13_custom_hire_expense",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_26[0]",
+          "text": "4,313"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.14_depreciation_section_179",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_27[0]",
+          "text": "4,414"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.15_employee_benefit_programs",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_28[0]",
+          "text": "1,022"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.16_feed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_29[0]",
+          "text": "3,809"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.17_fertilizers_lime",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_30[0]",
+          "text": "1,799"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.18_freight_trucking",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_31[0]",
+          "text": "2,082"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.19_gasoline_fuel_oil",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_32[0]",
+          "text": "7,780"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.1a_sales_purchased_livestock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "5,516"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.1b_cost_purchased_livestock",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "4,189"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.1c_subtract_1b_from_1a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "5,407"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.2_sales_products_raised",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "2,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.20_insurance_other_than_health",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_33[0]",
+          "text": "4,405"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.21a_interest_mortgage",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_34[0]",
+          "text": "8,833"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.21b_interest_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_35[0]",
+          "text": "6,058"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.22_labor_hired",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Lines10-22[0].f1_36[0]",
+          "text": "1,602"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.23_pension_profit_sharing",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+          "text": "8,807"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.24a_rent_vehicles_machinery_equipment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+          "text": "1,845"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.24b_rent_other",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_39[0]",
+          "text": "2,155"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.25_repairs_maintenance",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_40[0]",
+          "text": "6,298"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.26_seeds_plants",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_41[0]",
+          "text": "6,507"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.27_storage_warehousing",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_42[0]",
+          "text": "4,303"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.28_supplies",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_43[0]",
+          "text": "2,072"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.29_taxes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_44[0]",
+          "text": "7,969"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.30_utilities",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_45[0]",
+          "text": "5,461"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.31_veterinary_breeding_medicine",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_46[0]",
+          "text": "4,814"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32a_other_expenses_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_48[0]",
+          "text": "1,829"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32a_other_expenses_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_47[0]",
+          "text": "T-1C7Z9"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32b_other_expenses_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_50[0]",
+          "text": "5,259"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32b_other_expenses_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_49[0]",
+          "text": "T-1IMM9"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32c_other_expenses_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_52[0]",
+          "text": "9,895"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32c_other_expenses_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_51[0]",
+          "text": "T-1L4JL"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32d_other_expenses_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_54[0]",
+          "text": "5,769"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32d_other_expenses_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_53[0]",
+          "text": "T-JWVNF"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32e_other_expenses_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_56[0]",
+          "text": "1,031"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32e_other_expenses_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_55[0]",
+          "text": "T-Y8L06"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32f_other_expenses_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_58[0]",
+          "text": "6,975"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.32f_other_expenses_description",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_57[0]",
+          "text": "T-C94J2"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.33_total_expenses",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_59[0]",
+          "text": "9,707"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.34_net_farm_profit_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_60[0]",
+          "text": "4,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.36a_all_investment_at_risk",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.36b_some_investment_not_at_risk",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.3a_cooperative_distributions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "5,204"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.3b_cooperative_distributions_taxable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "7,706"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.4a_agricultural_program_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "9,297"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.4b_agricultural_program_taxable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "2,907"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.5a_ccc_loans_under_election",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "3,511"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.5b_ccc_loans_forfeited",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "9,105"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.5c_ccc_loans_forfeited_taxable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "3,661"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.6a_crop_insurance_received",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "2,530"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.6b_crop_insurance_taxable",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "3,186"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.6c_election_to_defer",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.6d_amount_deferred_from_2024",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "8,014"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.7_custom_hire_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "5,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.8_other_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "6,883"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.0.line.9_gross_income",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "4,621"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.37_sales_livestock_produce_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+          "text": "1,261"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.38a_cooperative_distributions_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line38a_ReadOrder[0].f2_2[0]",
+          "text": "4,905"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.38b_cooperative_distributions_taxable_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+          "text": "1,512"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.39a_agricultural_program_payments_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line39a_ReadOrder[0].f2_4[0]",
+          "text": "4,265"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.39b_agricultural_program_payments_taxable_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+          "text": "4,814"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.40a_ccc_loans_under_election_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+          "text": "1,953"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.40b_ccc_loans_forfeited_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line40b_ReadOrder[0].f2_7[0]",
+          "text": "3,686"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.40c_ccc_loans_forfeited_taxable_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+          "text": "3,921"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.41_crop_insurance_proceeds_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_9[0]",
+          "text": "9,792"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.42_custom_hire_income_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_10[0]",
+          "text": "7,445"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.43_other_income_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_11[0]",
+          "text": "4,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.44_total_income_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_12[0]",
+          "text": "4,917"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.45_inventory_beginning_of_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Line45_ReadOrder[0].f2_13[0]",
+          "text": "3,810"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.46_cost_products_purchased",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_14[0]",
+          "text": "3,071"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.47_add_lines_45_46",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_15[0]",
+          "text": "6,444"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.48_inventory_end_of_year",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_16[0]",
+          "text": "9,468"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.49_cost_products_sold",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_17[0]",
+          "text": "4,600"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-f.1.line.50_gross_income_accrual",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_18[0]",
+          "text": "7,102"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2423 @@
+{
+  "form": {
+    "formId": "form-2555",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 2555, Foreign Earned Income"
+  },
+  "fields": [
+    {
+      "fieldId": "form-2555.0.header.taxpayer_name",
+      "label": "Name shown on Form 1040 or 1040-SR",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.998
+      }
+    },
+    {
+      "fieldId": "form-2555.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 671.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-2555.0.line.1_foreign_address",
+      "label": "Line 1 — Your foreign address (including country)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 635.998
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.2_occupation",
+      "label": "Line 2 — Your occupation",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 454.6,
+        "y": 635.998
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.3_employer_name",
+      "label": "Line 3 — Employer's name",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 136.8,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.4a_employer_us_address",
+      "label": "Line 4a — Employer's U.S. address",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 165.6,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.4b_employer_foreign_address",
+      "label": "Line 4b — Employer's foreign address",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.5a_employer_foreign_entity",
+      "label": "Line 5a — Employer is a foreign entity",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 175.8,
+        "y": 590.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.5b_employer_us_company",
+      "label": "Line 5b — Employer is a U.S. company",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 590.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.5c_employer_self",
+      "label": "Line 5c — Employer is self",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 507,
+        "y": 590.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.5d_employer_foreign_affiliate",
+      "label": "Line 5d — Employer is a foreign affiliate of a U.S. company",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 175.8,
+        "y": 578
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.5e_employer_other",
+      "label": "Line 5e — Employer is other (specify)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 377.4,
+        "y": 578
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.5e_employer_other_specify",
+      "label": "Line 5e — Other employer type (specify)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.6a_last_year_filed",
+      "label": "Line 6a — If you previously filed Form 2555 or Form 2555-EZ, enter the last year you filed the form",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 564.001
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-2555.0.line.6b_not_previously_filed",
+      "label": "Line 6b — If you didn't previously file Form 2555 or Form 2555-EZ to claim either of the exclusions, check here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 471.4,
+        "y": 554.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.6c_revoked_exclusions_yes",
+      "label": "Line 6c — Have you ever revoked either of the exclusions? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 542
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.6c_revoked_exclusions_no",
+      "label": "Line 6c — Have you ever revoked either of the exclusions? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 542
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.6d_revocation_type_and_year",
+      "label": "Line 6d — If you answered \"Yes,\" enter the type of exclusion and the tax year for which the revocation was effective",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.7_country_of_citizenship",
+      "label": "Line 7 — Of what country are you a citizen/national?",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 237.6,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.8a_separate_foreign_residence_yes",
+      "label": "Line 8a — Did you maintain a separate foreign residence for your family because of adverse living conditions at your tax home? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 494.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.8a_separate_foreign_residence_no",
+      "label": "Line 8a — Did you maintain a separate foreign residence for your family because of adverse living conditions at your tax home? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_9[1]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 494.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.8b_separate_residence_city_country_days",
+      "label": "Line 8b — If \"Yes,\" enter city and country of the separate foreign residence. Also, enter the number of days during your tax year that you maintained a second household at that address",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 468
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.9_tax_homes_dates_established",
+      "label": "Line 9 — List your tax home(s) during your tax year and date(s) established",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 331.2,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.9_tax_homes_dates_established_line2",
+      "label": "Line 9 — List your tax home(s) during your tax year and date(s) established (second line)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.10_bona_fide_residence_began",
+      "label": "Line 10 — Date bona fide residence began",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 194.4,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.10_bona_fide_residence_ended",
+      "label": "Line 10 — Date bona fide residence ended",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 396,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.11a_living_quarters_purchased_house",
+      "label": "Line 11a — Kind of living quarters in foreign country: Purchased house",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 247.8,
+        "y": 350.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.11b_living_quarters_rented_house",
+      "label": "Line 11b — Kind of living quarters in foreign country: Rented house or apartment",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_11[1]",
+      "position": {
+        "page": 0,
+        "x": 355.8,
+        "y": 350.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.11c_living_quarters_rented_room",
+      "label": "Line 11c — Kind of living quarters in foreign country: Rented room",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_11[2]",
+      "position": {
+        "page": 0,
+        "x": 507,
+        "y": 350.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.11d_living_quarters_employer_furnished",
+      "label": "Line 11d — Kind of living quarters in foreign country: Quarters furnished by employer",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_11[3]",
+      "position": {
+        "page": 0,
+        "x": 247.8,
+        "y": 338.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.12a_family_lived_abroad_yes",
+      "label": "Line 12a — Did any of your family live with you abroad during any part of the tax year? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 326
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.12a_family_lived_abroad_no",
+      "label": "Line 12a — Did any of your family live with you abroad during any part of the tax year? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_15[1]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 326
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.12b_family_who_and_period",
+      "label": "Line 12b — If \"Yes,\" who and for what period?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 208.8,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.13a_nonresident_statement_submitted_yes",
+      "label": "Line 13a — Have you submitted a statement to the authorities of the foreign country where you claim bona fide residence that you aren't a resident of that country? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 290
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.13a_nonresident_statement_submitted_no",
+      "label": "Line 13a — Have you submitted a statement to the authorities of the foreign country where you claim bona fide residence that you aren't a resident of that country? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_17[1]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 290
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.13b_foreign_income_tax_required_yes",
+      "label": "Line 13b — Are you required to pay income tax to the country where you claim bona fide residence? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 278.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.13b_foreign_income_tax_required_no",
+      "label": "Line 13b — Are you required to pay income tax to the country where you claim bona fide residence? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_19[1]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 278.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row1_col_a",
+      "label": "Line 14, row 1 — (a) Date arrived in U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row1_col_b",
+      "label": "Line 14, row 1 — (b) Date left U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 100.8,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row1_col_c",
+      "label": "Line 14, row 1 — (c) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 165.6,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row1_col_d",
+      "label": "Line 14, row 1 — (d) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row5_col_a",
+      "label": "Line 14, row 5 — (a) Date arrived in U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow5[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row5_col_b",
+      "label": "Line 14, row 5 — (b) Date left U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow5[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 374.4,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row5_col_c",
+      "label": "Line 14, row 5 — (c) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow5[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row5_col_d",
+      "label": "Line 14, row 5 — (d) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow5[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row2_col_a",
+      "label": "Line 14, row 2 — (a) Date arrived in U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow2[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 180.003
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row2_col_b",
+      "label": "Line 14, row 2 — (b) Date left U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow2[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 100.8,
+        "y": 180.003
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row2_col_c",
+      "label": "Line 14, row 2 — (c) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow2[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 165.6,
+        "y": 180.003
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row2_col_d",
+      "label": "Line 14, row 2 — (d) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow2[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 180.003
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row6_col_a",
+      "label": "Line 14, row 6 — (a) Date arrived in U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow6[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 180.003
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row6_col_b",
+      "label": "Line 14, row 6 — (b) Date left U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow6[0].f1_39[0]",
+      "position": {
+        "page": 0,
+        "x": 374.4,
+        "y": 180.003
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row6_col_c",
+      "label": "Line 14, row 6 — (c) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow6[0].f1_40[0]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 180.003
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row6_col_d",
+      "label": "Line 14, row 6 — (d) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow6[0].f1_41[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 180.003
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row3_col_a",
+      "label": "Line 14, row 3 — (a) Date arrived in U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow3[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 168.004
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row3_col_b",
+      "label": "Line 14, row 3 — (b) Date left U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow3[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 100.8,
+        "y": 168.004
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row3_col_c",
+      "label": "Line 14, row 3 — (c) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow3[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 165.6,
+        "y": 168.004
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row3_col_d",
+      "label": "Line 14, row 3 — (d) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow3[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 168.004
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row7_col_a",
+      "label": "Line 14, row 7 — (a) Date arrived in U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow7[0].f1_42[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 168.004
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row7_col_b",
+      "label": "Line 14, row 7 — (b) Date left U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow7[0].f1_43[0]",
+      "position": {
+        "page": 0,
+        "x": 374.4,
+        "y": 168.004
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row7_col_c",
+      "label": "Line 14, row 7 — (c) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow7[0].f1_44[0]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 168.004
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row7_col_d",
+      "label": "Line 14, row 7 — (d) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow7[0].f1_45[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 168.004
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row4_col_a",
+      "label": "Line 14, row 4 — (a) Date arrived in U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow4[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 156.005
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row4_col_b",
+      "label": "Line 14, row 4 — (b) Date left U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow4[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 100.8,
+        "y": 156.005
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row4_col_c",
+      "label": "Line 14, row 4 — (c) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow4[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 165.6,
+        "y": 156.005
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row4_col_d",
+      "label": "Line 14, row 4 — (d) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table1_Line14[0].BodyRow4[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 223.2,
+        "y": 156.005
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row8_col_a",
+      "label": "Line 14, row 8 — (a) Date arrived in U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow8[0].f1_46[0]",
+      "position": {
+        "page": 0,
+        "x": 309.6,
+        "y": 156.005
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row8_col_b",
+      "label": "Line 14, row 8 — (b) Date left U.S.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow8[0].f1_47[0]",
+      "position": {
+        "page": 0,
+        "x": 374.4,
+        "y": 156.005
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row8_col_c",
+      "label": "Line 14, row 8 — (c) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow8[0].f1_48[0]",
+      "position": {
+        "page": 0,
+        "x": 439.2,
+        "y": 156.005
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.14_row8_col_d",
+      "label": "Line 14, row 8 — (d) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table2_Line14[0].BodyRow8[0].f1_49[0]",
+      "position": {
+        "page": 0,
+        "x": 496.8,
+        "y": 156.005
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.15a_employment_contract_terms",
+      "label": "Line 15a — List any contractual terms or other conditions relating to the length of your employment abroad",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_50[0]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.15a_employment_contract_terms_line2",
+      "label": "Line 15a — List any contractual terms or other conditions relating to the length of your employment abroad (second line)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_51[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 132.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.15b_visa_type",
+      "label": "Line 15b — Enter the type of visa under which you entered the foreign country",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_52[0]",
+      "position": {
+        "page": 0,
+        "x": 338.4,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.15c_visa_limited_stay_yes",
+      "label": "Line 15c — Did your visa limit the length of your stay or employment in a foreign country? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 110
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.15c_visa_limited_stay_no",
+      "label": "Line 15c — Did your visa limit the length of your stay or employment in a foreign country? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_21[1]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 110
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.15d_maintained_us_home_yes",
+      "label": "Line 15d — Did you maintain a home in the United States while living abroad? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 98.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.15d_maintained_us_home_no",
+      "label": "Line 15d — Did you maintain a home in the United States while living abroad? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_23[1]",
+      "position": {
+        "page": 0,
+        "x": 540,
+        "y": 98.001
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.15e_us_home_address_occupants",
+      "label": "Line 15e — If \"Yes,\" enter address of your home, whether it was rented, the names of the occupants, and their relationship to you",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_53[0]",
+      "position": {
+        "page": 0,
+        "x": 100.8,
+        "y": 72
+      }
+    },
+    {
+      "fieldId": "form-2555.0.line.15e_us_home_address_occupants_line2",
+      "label": "Line 15e — If \"Yes,\" enter address of your home, whether it was rented, the names of the occupants, and their relationship to you (second line)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_54[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 60.001
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.16_physical_presence_period_from",
+      "label": "Line 16 — The physical presence test is based on the 12-month period from",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 331.2,
+        "y": 708.001
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.16_physical_presence_period_through",
+      "label": "Line 16 — The physical presence test is based on the 12-month period through",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 482.4,
+        "y": 708.001
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.17_principal_country_of_employment",
+      "label": "Line 17 — Enter your principal country of employment during your tax year",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 331.2,
+        "y": 696.002
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_a",
+      "label": "Line 18, row 1 — (a) Name of country (including U.S.)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 612.003
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_b",
+      "label": "Line 18, row 1 — (b) Date arrived",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 244.8,
+        "y": 612.003
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_c",
+      "label": "Line 18, row 1 — (c) Date left",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 612.003
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_d",
+      "label": "Line 18, row 1 — (d) Full days present in country",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 612.003
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_e",
+      "label": "Line 18, row 1 — (e) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 612.003
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row1_col_f",
+      "label": "Line 18, row 1 — (f) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow1[0].f2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 612.003
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_a",
+      "label": "Line 18, row 2 — (a) Name of country (including U.S.)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_10[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 600.004
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_b",
+      "label": "Line 18, row 2 — (b) Date arrived",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_11[0]",
+      "position": {
+        "page": 1,
+        "x": 244.8,
+        "y": 600.004
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_c",
+      "label": "Line 18, row 2 — (c) Date left",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_12[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 600.004
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_d",
+      "label": "Line 18, row 2 — (d) Full days present in country",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_13[0]",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 600.004
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_e",
+      "label": "Line 18, row 2 — (e) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_14[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 600.004
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row2_col_f",
+      "label": "Line 18, row 2 — (f) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow2[0].f2_15[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 600.004
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_a",
+      "label": "Line 18, row 3 — (a) Name of country (including U.S.)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_16[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 588.005
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_b",
+      "label": "Line 18, row 3 — (b) Date arrived",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_17[0]",
+      "position": {
+        "page": 1,
+        "x": 244.8,
+        "y": 588.005
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_c",
+      "label": "Line 18, row 3 — (c) Date left",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_18[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 588.005
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_d",
+      "label": "Line 18, row 3 — (d) Full days present in country",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_19[0]",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 588.005
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_e",
+      "label": "Line 18, row 3 — (e) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_20[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 588.005
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row3_col_f",
+      "label": "Line 18, row 3 — (f) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow3[0].f2_21[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 588.005
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_a",
+      "label": "Line 18, row 4 — (a) Name of country (including U.S.)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_22[0]",
+      "position": {
+        "page": 1,
+        "x": 36,
+        "y": 576.006
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_b",
+      "label": "Line 18, row 4 — (b) Date arrived",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_23[0]",
+      "position": {
+        "page": 1,
+        "x": 244.8,
+        "y": 576.006
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_c",
+      "label": "Line 18, row 4 — (c) Date left",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_24[0]",
+      "position": {
+        "page": 1,
+        "x": 316.8,
+        "y": 576.006
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_d",
+      "label": "Line 18, row 4 — (d) Full days present in country",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_25[0]",
+      "position": {
+        "page": 1,
+        "x": 388.8,
+        "y": 576.006
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_e",
+      "label": "Line 18, row 4 — (e) Number of days in U.S. on business",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_26[0]",
+      "position": {
+        "page": 1,
+        "x": 439.2,
+        "y": 576.006
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.18_row4_col_f",
+      "label": "Line 18, row 4 — (f) Income earned in U.S. on business (attach computation)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].Table_Line18[0].BodyRow4[0].f2_27[0]",
+      "position": {
+        "page": 1,
+        "x": 489.6,
+        "y": 576.006
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.19_total_wages_salaries_bonuses",
+      "label": "Line 19 — Total wages, salaries, bonuses, commissions, etc.",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_28[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.20a_business_or_profession_income",
+      "label": "Line 20a — Allowable share of income for personal services performed: In a business (including farming) or profession",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_29[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 420.001
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.20b_partnership_name_address_type_1",
+      "label": "Line 20b — In a partnership. List partnership's name and address and type of income (first line)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_30[0]",
+      "position": {
+        "page": 1,
+        "x": 367.2,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.20b_partnership_name_address_type_2",
+      "label": "Line 20b — In a partnership. List partnership's name and address and type of income (second line)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_31[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.20b_partnership_income",
+      "label": "Line 20b — Allowable share of income for personal services performed: In a partnership",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_32[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.21a_noncash_home_lodging",
+      "label": "Line 21a — Noncash income: Home (lodging)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_33[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.21b_noncash_meals",
+      "label": "Line 21b — Noncash income: Meals",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_34[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.21c_noncash_car",
+      "label": "Line 21c — Noncash income: Car",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_35[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.21d_other_property_type_amount_1",
+      "label": "Line 21d — Other property or facilities. List type and amount (first line)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_36[0]",
+      "position": {
+        "page": 1,
+        "x": 266.4,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.21d_other_property_type_amount_2",
+      "label": "Line 21d — Other property or facilities. List type and amount (second line)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_37[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.21d_noncash_other_property",
+      "label": "Line 21d — Noncash income: Other property or facilities",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_38[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 288
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.22a_cost_of_living_differential",
+      "label": "Line 22a — Allowances, reimbursements, or expenses paid on your behalf: Cost of living and overseas differential",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_39[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 264.002
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.22b_family_allowance",
+      "label": "Line 22b — Allowances, reimbursements, or expenses paid on your behalf: Family",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_40[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 252
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.22c_education_allowance",
+      "label": "Line 22c — Allowances, reimbursements, or expenses paid on your behalf: Education",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_41[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.22d_home_leave_allowance",
+      "label": "Line 22d — Allowances, reimbursements, or expenses paid on your behalf: Home leave",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_42[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 228.002
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.22e_quarters_allowance",
+      "label": "Line 22e — Allowances, reimbursements, or expenses paid on your behalf: Quarters",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_43[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 216
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.22f_other_purpose_type_amount_1",
+      "label": "Line 22f — For any other purpose. List type and amount (first line)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_44[0]",
+      "position": {
+        "page": 1,
+        "x": 252,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.22f_other_purpose_type_amount_2",
+      "label": "Line 22f — For any other purpose. List type and amount (second line)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_45[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.22f_other_purpose_allowance",
+      "label": "Line 22f — Allowances, reimbursements, or expenses paid on your behalf: For any other purpose",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_46[0]",
+      "position": {
+        "page": 1,
+        "x": 410.4,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.22g_total_allowances",
+      "label": "Line 22g — Add lines 22a through 22f",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_47[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 168.001
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.23_other_income_type_amount_1",
+      "label": "Line 23 — Other foreign earned income. List type and amount (first line)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_48[0]",
+      "position": {
+        "page": 1,
+        "x": 276.724,
+        "y": 156.002
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.23_other_income_type_amount_2",
+      "label": "Line 23 — Other foreign earned income. List type and amount (second line)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_49[0]",
+      "position": {
+        "page": 1,
+        "x": 64.8,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.23_other_foreign_earned_income",
+      "label": "Line 23 — Other foreign earned income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_50[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 144
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.24_total_before_excludable_meals_lodging",
+      "label": "Line 24 — Add lines 19 through 21d, line 22g, and line 23",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_51[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.25_excludable_meals_lodging",
+      "label": "Line 25 — Total amount of meals and lodging included on line 24 that is excludable",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_52[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 96.001
+      }
+    },
+    {
+      "fieldId": "form-2555.1.line.26_foreign_earned_income",
+      "label": "Line 26 — Subtract line 25 from line 24. This is your 2025 foreign earned income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_53[0]",
+      "position": {
+        "page": 1,
+        "x": 504,
+        "y": 72
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.27_amount_from_line_26",
+      "label": "Line 27 — Enter the amount from line 26",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Line27TagCorrectingSubform[0].f3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 708.001
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.27_claiming_housing_exclusion_deduction_yes",
+      "label": "Are you claiming the housing exclusion or housing deduction? Yes. Complete Part VI.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 64.8,
+        "y": 686
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.27_claiming_housing_exclusion_deduction_no",
+      "label": "Are you claiming the housing exclusion or housing deduction? No. Go to Part VII.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_1[1]",
+      "position": {
+        "page": 2,
+        "x": 64.8,
+        "y": 674.001
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.28_qualified_housing_expenses",
+      "label": "Line 28 — Qualified housing expenses for the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].Line28TagCorrectingSubform[0].f3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 636.001
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.29a_housing_expenses_location",
+      "label": "Line 29a — Enter location where housing expenses incurred",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 331.2,
+        "y": 624.002
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.29b_housing_expenses_limit",
+      "label": "Line 29b — Enter limit on housing expenses",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 612
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.30_smaller_of_line_28_or_29b",
+      "label": "Line 30 — Enter the smaller of line 28 or line 29b",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.31_qualifying_period_days",
+      "label": "Line 31 — Number of days in your qualifying period that fall within your 2025 tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+      "position": {
+        "page": 2,
+        "x": 410.4,
+        "y": 576
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.32_base_housing_amount",
+      "label": "Line 32 — Multiply $56.99 by the number of days on line 31. If 365 is entered on line 31, enter $20,800 here",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 564.001
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.33_housing_amount",
+      "label": "Line 33 — Subtract line 32 from line 30",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 540
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.34_employer_provided_amounts",
+      "label": "Line 34 — Enter employer-provided amounts",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+      "position": {
+        "page": 2,
+        "x": 410.4,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.35_employer_provided_ratio_whole",
+      "label": "Line 35 — Divide line 34 by line 27. Enter the result as a decimal (rounded to at least three places), but don't enter more than \"1.000\" (digit before the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 504
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-2555.2.line.35_employer_provided_ratio_decimal",
+      "label": "Line 35 — Divide line 34 by line 27. Enter the result as a decimal (rounded to at least three places), but don't enter more than \"1.000\" (digits after the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_11[0]",
+      "position": {
+        "page": 2,
+        "x": 554.4,
+        "y": 504
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-2555.2.line.36_housing_exclusion",
+      "label": "Line 36 — Housing exclusion. Multiply line 33 by line 35. Enter the result but don't enter more than the amount on line 34",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_12[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.37_maximum_foreign_earned_income_exclusion",
+      "label": "Line 37 — Maximum foreign earned income exclusion. Enter $130,000",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_13[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.38_qualifying_period_days",
+      "label": "Line 38 — If you completed Part VI, enter the number from line 31. All others, enter the number of days in your qualifying period that fall within your 2025 tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_14[0]",
+      "position": {
+        "page": 2,
+        "x": 410.4,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.39_qualifying_days_ratio_whole",
+      "label": "Line 39 — If line 38 and the number of days in your 2025 tax year (usually 365) are the same, enter \"1.000.\" Otherwise, divide line 38 by the number of days in your 2025 tax year and enter the result as a decimal (rounded to at least three places) (digit before the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_15[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 372.002
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-2555.2.line.39_qualifying_days_ratio_decimal",
+      "label": "Line 39 — If line 38 and the number of days in your 2025 tax year (usually 365) are the same, enter \"1.000.\" Otherwise, divide line 38 by the number of days in your 2025 tax year and enter the result as a decimal (rounded to at least three places) (digits after the decimal point)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_16[0]",
+      "position": {
+        "page": 2,
+        "x": 554.4,
+        "y": 372.002
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-2555.2.line.40_prorated_maximum_exclusion",
+      "label": "Line 40 — Multiply line 37 by line 39",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_17[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.41_income_less_housing_exclusion",
+      "label": "Line 41 — Subtract line 36 from line 27",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_18[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.42_foreign_earned_income_exclusion",
+      "label": "Line 42 — Foreign earned income exclusion. Enter the smaller of line 40 or line 41",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_19[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.43_total_exclusions",
+      "label": "Line 43 — Add lines 36 and 42",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_20[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.44_deductions_allocable_excluded_income",
+      "label": "Line 44 — Deductions allowed in figuring your adjusted gross income (Form 1040 or 1040-SR, line 11) that are allocable to the excluded income",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_21[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 276.001
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.45_net_exclusion",
+      "label": "Line 45 — Subtract line 44 from line 43",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_22[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 240.001
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.46_housing_amount_less_exclusion",
+      "label": "Line 46 — Subtract line 36 from line 33",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_23[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 204.001
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.47_income_less_total_exclusions",
+      "label": "Line 47 — Subtract line 43 from line 27",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_24[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 192.002
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.48_smaller_of_line_46_or_47",
+      "label": "Line 48 — Enter the smaller of line 46 or line 47",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_25[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 180
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.49_housing_deduction_carryover",
+      "label": "Line 49 — Housing deduction carryover from 2024 (from the Housing Deduction Carryover Worksheet in the instructions)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_26[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 120.002
+      }
+    },
+    {
+      "fieldId": "form-2555.2.line.50_housing_deduction",
+      "label": "Line 50 — Housing deduction. Add lines 48 and 49",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_27[0]",
+      "position": {
+        "page": 2,
+        "x": 504,
+        "y": 84.002
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/2555/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:38.877Z",
+    "totalFields": 160,
+    "skipped": 0,
+    "catalogEntries": 160
+  }
+}

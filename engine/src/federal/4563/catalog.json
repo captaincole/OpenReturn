@@ -1,0 +1,694 @@
+{
+  "form": {
+    "formId": "form-4563",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 4563, Exclusion of Income for Bona Fide Residents of American Samoa"
+  },
+  "fields": [
+    {
+      "fieldId": "form-4563.0.header.taxpayer_name",
+      "label": "Name(s) shown on Form 1040 or 1040-SR",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.998
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-4563.0.header.ssn",
+      "label": "Your social security number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 461.8,
+        "y": 671.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-4563.0.line.1_bona_fide_residence_began",
+      "label": "Line 1 — Date bona fide residence began",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 196.8,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.1_bona_fide_residence_ended",
+      "label": "Line 1 — Date bona fide residence ended",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 415,
+        "y": 648
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.2_living_quarters_rented_room",
+      "label": "Line 2 — Type of living quarters in American Samoa: Rented room",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 626.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.2_living_quarters_rented_house_apartment",
+      "label": "Line 2 — Type of living quarters in American Samoa: Rented house or apartment",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 151.2,
+        "y": 626.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.2_living_quarters_furnished_employer",
+      "label": "Line 2 — Type of living quarters in American Samoa: Quarters furnished by employer",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[2]",
+      "position": {
+        "page": 0,
+        "x": 295.2,
+        "y": 626.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.2_living_quarters_purchased_home",
+      "label": "Line 2 — Type of living quarters in American Samoa: Purchased home",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[3]",
+      "position": {
+        "page": 0,
+        "x": 453.6,
+        "y": 626.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.3a_family_lived_with_you_yes",
+      "label": "Line 3a — Did any of your family live with you in American Samoa during any part of the tax year? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 511.2,
+        "y": 614
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.3a_family_lived_with_you_no",
+      "label": "Line 3a — Did any of your family live with you in American Samoa during any part of the tax year? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 614
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.3b_family_who_and_period",
+      "label": "Line 3b — If \"Yes,\" who and for what period?",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 208.8,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.3b_family_who_and_period_cont",
+      "label": "Line 3b — If \"Yes,\" who and for what period? (continued)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 588.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.4a_home_outside_samoa_yes",
+      "label": "Line 4a — Did you maintain any home(s) outside American Samoa? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 511.2,
+        "y": 578
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.4a_home_outside_samoa_no",
+      "label": "Line 4a — Did you maintain any home(s) outside American Samoa? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 578
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.4b_homes_outside_samoa",
+      "label": "Line 4b — If \"Yes,\" show address of your home(s), whether it was rented, the name of each occupant, and their relationship to you",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 552.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.4b_homes_outside_samoa_cont",
+      "label": "Line 4b — If \"Yes,\" show address of your home(s), whether it was rented, the name of each occupant, and their relationship to you (continued)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 540
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.5_employer_name_address",
+      "label": "Line 5 — Name and address of employer (state if self-employed)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 290.8,
+        "y": 528.001
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.5_employer_name_address_cont",
+      "label": "Line 5 — Name and address of employer (state if self-employed) (continued)",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 516.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row1_date_left_col_a",
+      "label": "Line 6, row 1 (a) — Date left",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row1_date_returned_col_b",
+      "label": "Line 6, row 1 (b) — Date returned",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 101.55,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row1_days_absent_col_c",
+      "label": "Line 6, row 1 (c) — Number of days absent",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 166.35,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row1_reason_for_absence_col_d",
+      "label": "Line 6, row 1 (d) — Reason for absence",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 224.2,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row2_date_left_col_a",
+      "label": "Line 6, row 2 (a) — Date left",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row2[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row2_date_returned_col_b",
+      "label": "Line 6, row 2 (b) — Date returned",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row2[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 101.55,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row2_days_absent_col_c",
+      "label": "Line 6, row 2 (c) — Number of days absent",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row2[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 166.35,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row2_reason_for_absence_col_d",
+      "label": "Line 6, row 2 (d) — Reason for absence",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row2[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 224.2,
+        "y": 444.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row3_date_left_col_a",
+      "label": "Line 6, row 3 (a) — Date left",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row3[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row3_date_returned_col_b",
+      "label": "Line 6, row 3 (b) — Date returned",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row3[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 101.55,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row3_days_absent_col_c",
+      "label": "Line 6, row 3 (c) — Number of days absent",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row3[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 166.35,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row3_reason_for_absence_col_d",
+      "label": "Line 6, row 3 (d) — Reason for absence",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row3[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 224.2,
+        "y": 432.003
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row4_date_left_col_a",
+      "label": "Line 6, row 4 (a) — Date left",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row4[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row4_date_returned_col_b",
+      "label": "Line 6, row 4 (b) — Date returned",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row4[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 101.55,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row4_days_absent_col_c",
+      "label": "Line 6, row 4 (c) — Number of days absent",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row4[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 166.35,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.6_row4_reason_for_absence_col_d",
+      "label": "Line 6, row 4 (d) — Reason for absence",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Table_Line6[0].Row4[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 224.2,
+        "y": 420.004
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.7_wages_salaries_tips",
+      "label": "Line 7 — Wages, salaries, tips, etc.",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 396
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.8_taxable_interest",
+      "label": "Line 8 — Taxable interest",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.9_ordinary_dividends",
+      "label": "Line 9 — Ordinary dividends",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 372.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.10_business_income",
+      "label": "Line 10 — Business income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 360
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.11_capital_gain",
+      "label": "Line 11 — Capital gain",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 348.001
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.12_rental_real_estate_royalties",
+      "label": "Line 12 — Rental real estate, royalties, etc.",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 336.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.13_farm_income",
+      "label": "Line 13 — Farm income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 324
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.14_other_income_type",
+      "label": "Line 14 — Other income. List type and amount",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 214.8,
+        "y": 312.001
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.14_other_income_type_cont",
+      "label": "Line 14 — Other income. List type and amount (continued)",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.14_other_income",
+      "label": "Line 14 — Other income",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 300.002
+      }
+    },
+    {
+      "fieldId": "form-4563.0.line.15_total_exclusion",
+      "label": "Line 15 — Add lines 7 through 14. This is the amount you may exclude from your gross income this tax year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 288
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/4563/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:43.533Z",
+    "totalFields": 45,
+    "skipped": 0,
+    "catalogEntries": 45
+  }
+}

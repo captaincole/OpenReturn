@@ -1,0 +1,150 @@
+{
+  "formId": "form-461",
+  "fieldCount": 16,
+  "entries": [
+    {
+      "fieldId": "form-461.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-GT0AE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-UOV5P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.10_nonbusiness_income_gain",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "2,966"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.11_nonbusiness_losses_deductions",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "2,503"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.12_nonbusiness_net_adjustment",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "9,767"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.13_line_12_sign_reversed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "3,230"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.14_net_business_income_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "4,308"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.15_threshold_amount",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+          "text": "4,843"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.16_excess_business_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+          "text": "6,003"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.2_schedule_1_line_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "6,962"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.3_form_1040_line_7a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "1,396"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.4_schedule_1_line_4",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "8,417"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.5_schedule_1_line_5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "3,680"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.6_schedule_1_line_6",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "8,201"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.8_other_business_income_loss",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "2,002"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-461.0.line.9_total_income_loss_items",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "8,053"
+        }
+      ]
+    }
+  ]
+}

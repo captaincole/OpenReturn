@@ -1,0 +1,756 @@
+{
+  "form": {
+    "formId": "form-6252",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Form 6252, Installment Sale Income"
+  },
+  "fields": [
+    {
+      "fieldId": "form-6252.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 460.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-6252.0.line.1_description_of_property",
+      "label": "Line 1 — Description of property",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 158.4,
+        "y": 671.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.2a_date_acquired",
+      "label": "Line 2a — Date acquired (mm/dd/yyyy)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 659.97
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-6252.0.line.2b_date_sold",
+      "label": "Line 2b — Date sold (mm/dd/yyyy)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 659.97
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-6252.0.line.3_sold_to_related_party_yes",
+      "label": "Line 3 — Was the property sold to a related party? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 518.4,
+        "y": 637.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.3_sold_to_related_party_no",
+      "label": "Line 3 — Was the property sold to a related party? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 637.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.4_selling_price_determinable_yes",
+      "label": "Line 4 — Can the total selling price be determined by the close of the tax year in which such sale or other disposition occurs? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 518.4,
+        "y": 626.22
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.4_selling_price_determinable_no",
+      "label": "Line 4 — Can the total selling price be determined by the close of the tax year in which such sale or other disposition occurs? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 626.22
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.5_selling_price",
+      "label": "Line 5 — Selling price including mortgages and other debts",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.6_liabilities_buyer_assumed",
+      "label": "Line 6 — Mortgages, debts, and other liabilities the buyer assumed or took the property subject to",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.7_price_less_liabilities",
+      "label": "Line 7 — Subtract line 6 from line 5",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 563.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.8_cost_or_other_basis",
+      "label": "Line 8 — Cost or other basis of property sold",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 551.97
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.9_depreciation_allowed",
+      "label": "Line 9 — Depreciation allowed or allowable",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 539.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.10_adjusted_basis",
+      "label": "Line 10 — Adjusted basis. Subtract line 9 from line 8",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 527.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.11_commissions_expenses_of_sale",
+      "label": "Line 11 — Commissions and other expenses of sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 515.97
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.12_income_recapture_form_4797",
+      "label": "Line 12 — Income recapture from Form 4797, Part III",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.13_basis_expenses_recapture_total",
+      "label": "Line 13 — Add lines 10, 11, and 12",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 491.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.14_price_less_line_13",
+      "label": "Line 14 — Subtract line 13 from line 5",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 479.97
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.15_excluded_gain_main_home",
+      "label": "Line 15 — If the property described on line 1 above was your main home, enter the amount of your excluded gain. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 455.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.16_gross_profit",
+      "label": "Line 16 — Gross profit. Subtract line 15 from line 14",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 443.97
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.17_liabilities_over_basis",
+      "label": "Line 17 — Subtract line 13 from line 6. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 431.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.18_contract_price",
+      "label": "Line 18 — Contract price. Add line 7 and line 17",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 419.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.19_gross_profit_percentage",
+      "label": "Line 19 — Gross profit percentage (expressed as a decimal amount). Divide line 16 by line 18",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.20_year_of_sale_line_17",
+      "label": "Line 20 — If this is the year of sale, enter the amount from line 17. Otherwise, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.21_payments_received_during_year",
+      "label": "Line 21 — Payments received during year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.22_total_payments_this_year",
+      "label": "Line 22 — Add lines 20 and 21",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.23_payments_received_prior_years",
+      "label": "Line 23 — Payments received in prior years",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 323.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.24_installment_sale_income",
+      "label": "Line 24 — Installment sale income. Multiply line 22 by line 19",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.25_ordinary_income_recapture",
+      "label": "Line 25 — Enter the part of line 24 that is ordinary income under the recapture rules",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.26_income_less_recapture",
+      "label": "Line 26 — Subtract line 25 from line 24",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 287.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.27_related_party_row1",
+      "label": "Line 27 — Name, address, and taxpayer identifying number of related party (first line)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_28[0]",
+      "position": {
+        "page": 0,
+        "x": 331.2,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.27_related_party_row2",
+      "label": "Line 27 — Name, address, and taxpayer identifying number of related party (second line)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.28_related_party_resold_yes",
+      "label": "Line 28 — Did the related party resell or dispose of the property (\"second disposition\") during this tax year? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 518.4,
+        "y": 241.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.28_related_party_resold_no",
+      "label": "Line 28 — Did the related party resell or dispose of the property (\"second disposition\") during this tax year? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 554.4,
+        "y": 241.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.29a_second_disposition_after_2_years",
+      "label": "Line 29a — The second disposition was more than 2 years after the first disposition (other than dispositions of marketable securities)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 66.799,
+        "y": 205.469
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.29a_date_of_disposition",
+      "label": "Line 29a — If this box is checked, enter the date of disposition (mm/dd/yyyy)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 191.97
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-6252.0.line.29b_stock_sold_to_issuer",
+      "label": "Line 29b — The first disposition was a sale or exchange of stock to the issuing corporation",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+      "position": {
+        "page": 0,
+        "x": 66.799,
+        "y": 181.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.29c_involuntary_conversion",
+      "label": "Line 29c — The second disposition was an involuntary conversion and the threat of conversion occurred after the first disposition",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[2]",
+      "position": {
+        "page": 0,
+        "x": 66.799,
+        "y": 169.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.29d_after_death_of_party",
+      "label": "Line 29d — The second disposition occurred after the death of the original seller or buyer",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[3]",
+      "position": {
+        "page": 0,
+        "x": 66.799,
+        "y": 157.97
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.29e_no_tax_avoidance_purpose",
+      "label": "Line 29e — It can be established to the satisfaction of the IRS that tax avoidance wasn't a principal purpose for either of the dispositions",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[4]",
+      "position": {
+        "page": 0,
+        "x": 66.799,
+        "y": 145.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.30_related_party_selling_price",
+      "label": "Line 30 — Selling price of property sold by related party",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 119.97
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.31_contract_price_first_sale",
+      "label": "Line 31 — Enter contract price from line 18 for year of first sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 107.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.32_smaller_of_30_or_31",
+      "label": "Line 32 — Enter the smaller of line 30 or line 31",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 95.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.33_total_payments_received",
+      "label": "Line 33 — Total payments received by the end of this tax year",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.34_line_32_less_payments",
+      "label": "Line 34 — Subtract line 33 from line 32. If zero or less, enter -0-",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_35[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 71.968
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.35_related_party_sale_income",
+      "label": "Line 35 — Multiply line 34 by the gross profit percentage on line 19 for year of first sale",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_36[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 59.969
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.36_ordinary_income_recapture",
+      "label": "Line 36 — Enter the part of line 35 that is ordinary income under the recapture rules",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_37[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 47.97
+      }
+    },
+    {
+      "fieldId": "form-6252.0.line.37_income_less_recapture",
+      "label": "Line 37 — Subtract line 36 from line 35",
+      "labelSource": "vision",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_38[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 35.968
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/6252/blank.pdf",
+    "ingestedAt": "2026-11-20T15:33:49.896Z",
+    "totalFields": 49,
+    "skipped": 0,
+    "catalogEntries": 49
+  }
+}

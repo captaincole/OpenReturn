@@ -1,0 +1,303 @@
+{
+  "formId": "form-4137",
+  "fieldCount": 33,
+  "entries": [
+    {
+      "fieldId": "form-4137.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-15S13"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_a_employer_tips_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow1[0].f1_3[0]",
+          "text": "T-EYQ2X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_a_employer_tips_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow1[0].f1_4[0]",
+          "text": "T-KD5NT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_a_employer_tips_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow1[0].f1_5[0]",
+          "text": "1,870"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_a_employer_tips_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow1[0].f1_6[0]",
+          "text": "1,848"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_b_employer_tips_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow2[0].f1_7[0]",
+          "text": "T-YPWMX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_b_employer_tips_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow2[0].f1_8[0]",
+          "text": "T-ZCM9R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_b_employer_tips_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow2[0].f1_9[0]",
+          "text": "7,460"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_b_employer_tips_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow2[0].f1_10[0]",
+          "text": "4,580"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_c_employer_tips_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow3[0].f1_11[0]",
+          "text": "T-DCV1F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_c_employer_tips_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow3[0].f1_12[0]",
+          "text": "T-9WS0Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_c_employer_tips_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow3[0].f1_13[0]",
+          "text": "7,826"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_c_employer_tips_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow3[0].f1_14[0]",
+          "text": "4,136"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_d_employer_tips_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow4[0].f1_15[0]",
+          "text": "T-1UZPA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_d_employer_tips_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow4[0].f1_16[0]",
+          "text": "T-1AHTM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_d_employer_tips_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow4[0].f1_17[0]",
+          "text": "2,534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_d_employer_tips_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow4[0].f1_18[0]",
+          "text": "4,450"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_e_employer_tips_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow5[0].f1_19[0]",
+          "text": "T-80LT6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_e_employer_tips_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow5[0].f1_20[0]",
+          "text": "T-JRL56"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_e_employer_tips_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow5[0].f1_21[0]",
+          "text": "6,750"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.1_row_e_employer_tips_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Line1[0].BodyRow5[0].f1_22[0]",
+          "text": "7,375"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.10_tips_subject_social_security_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_31[0]",
+          "text": "4,273"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.11_social_security_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_32[0]",
+          "text": "4,619"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.12_medicare_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_33[0]",
+          "text": "4,302"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.13_total_tax_unreported_tips",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_34[0]",
+          "text": "7,991"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.2_total_tips_received",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "2,838"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.3_total_tips_reported",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "8,493"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.4_unreported_tips",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+          "text": "1,638"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.5_tips_under_20_month",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+          "text": "4,198"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.6_tips_subject_medicare_tax",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+          "text": "1,559"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.8_social_security_wages_tips",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+          "text": "2,134"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4137.0.line.9_remaining_social_security_base",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_30[0]",
+          "text": "7,555"
+        }
+      ]
+    }
+  ]
+}
