@@ -4,10 +4,17 @@ import { cn } from "@/lib/cn";
 import {
   FIELD_STATES,
   STATE_LABELS,
-  layoutForms,
   type Link as GraphLink,
   type StateCounts,
 } from "@/lib/formGraph";
+import {
+  CARD,
+  SECTION_LABELS,
+  drawLanes,
+  lanesOf,
+  linkPath,
+  type LaneBox,
+} from "@/lib/formGraphLayout";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { STATE_FILL, StateDot } from "./StateBar";
@@ -15,16 +22,20 @@ import { STATE_FILL, StateDot } from "./StateBar";
 export interface GraphForm {
   formId: string;
   displayName: string;
+  /* The part of the return that the form belongs to, and its place in that part. */
+  section: string;
+  rank: number;
   fieldCount: number;
   states: StateCounts;
   reads: number;
   feeds: number;
 }
 
-/* A form the engine lacks: drawn with a dashed border, in its own column at the left. */
+/* A form the engine lacks: drawn with a dashed border, in the lane of its section. */
 export interface GraphMissingForm {
   formId: string;
   displayName: string;
+  section: string;
   about: string;
   waitingCount: number;
   feeds: number;
@@ -56,10 +67,6 @@ interface DrawnLink extends GraphLink {
   missing: boolean;
 }
 
-const CARD = { width: 104, height: 40 };
-const PITCH = { x: 122, y: 54 };
-const PAD = 10;
-const HEADING = 22;
 const BAR = { inset: 8, top: 26, height: 6, gap: 2 };
 const NAME_LENGTH = 16;
 
@@ -69,8 +76,9 @@ const shortName = (name: string): string =>
 const idOf = (box: Box): string => box.node.form.formId;
 
 /*
- * The forms the engine lacks make the first column. Each other column is centered
- * on the tallest one. The forms with no reads make the last row.
+ * The main form is at the top, with the box of the other return at its side.
+ * Each other form is in the lane of its section; a form the engine lacks comes
+ * after the forms the engine has.
  */
 function placeForms(
   forms: GraphForm[],
@@ -78,56 +86,24 @@ function placeForms(
   missing: GraphMissingForm[],
   outside: GraphOutside | undefined,
 ) {
-  const layout = layoutForms(
-    [...forms.map((form) => form.formId), ...(outside ? [outside.formId] : [])],
-    links,
-  );
-  const byId = new Map<string, Node>(forms.map((form) => [form.formId, { kind: "form", form }]));
-  if (outside) byId.set(outside.formId, { kind: "outside", form: outside });
-  const rows = Math.max(layout.rows, missing.length);
-  const start = PAD + (missing.length > 0 ? PITCH.x + 14 : 0);
-  const top = PAD + HEADING;
-  const centered = (row: number, size: number): number => top + (row + (rows - size) / 2) * PITCH.y;
-  const sizeOf = (column: number) => layout.placed.filter((at) => at.column === column).length;
-  const formBox = (formId: string, left: number, upper: number): Box => ({
-    node: byId.get(formId) as Node,
-    x: left,
-    y: upper,
-  });
-  const aloneTop = top + rows * PITCH.y + 26;
-  const boxes: Box[] = [
-    ...missing.map((form, row) => ({
-      node: { kind: "missing" as const, form },
-      x: PAD,
-      y: centered(row, missing.length),
-    })),
-    ...layout.placed.map((at) =>
-      formBox(at.formId, start + at.column * PITCH.x, centered(at.row, sizeOf(at.column))),
-    ),
-    ...layout.alone.map((formId, index) => formBox(formId, start + index * PITCH.x, aloneTop)),
+  const nodes: Node[] = [
+    ...forms.map((form) => ({ kind: "form" as const, form })),
+    ...missing.map((form) => ({ kind: "missing" as const, form })),
+    ...(outside ? [{ kind: "outside" as const, form: outside }] : []),
   ];
-  const hasAlone = layout.alone.length > 0;
+  const byId = new Map(nodes.map((node) => [node.form.formId, node]));
+  const { main, lanes } = lanesOf([...forms, ...missing]);
+  const feedsMain = links.some((link) => link.source === outside?.formId);
+  const drawing = drawLanes(
+    main,
+    lanes,
+    outside && { formId: outside.formId, side: feedsMain ? "left" : "right" },
+  );
   return {
-    boxes,
-    left: start,
-    aloneTop: hasAlone ? aloneTop : undefined,
-    width: start + Math.max(layout.columns, layout.alone.length) * PITCH.x - 18 + PAD,
-    height: (hasAlone ? aloneTop + CARD.height : top + rows * PITCH.y) + PAD,
+    ...drawing,
+    main,
+    boxes: drawing.slots.map((slot) => ({ ...slot, node: byId.get(slot.formId) as Node })),
   };
-}
-
-/* From the source's right side to the reader's left side; a read that goes back leaves from the left. */
-function linkPath(source: Box, reader: Box): string {
-  const middle = CARD.height / 2;
-  const forward = reader.x > source.x;
-  const sameColumn = reader.x === source.x;
-  const startX = forward || sameColumn ? source.x + CARD.width : source.x;
-  const endX = forward ? reader.x : reader.x + CARD.width;
-  const [startY, endY] = [source.y + middle, reader.y + middle];
-  const bend = sameColumn ? 34 : Math.max(Math.abs(endX - startX) / 2, 18);
-  const startPull = forward || sameColumn ? startX + bend : startX - bend;
-  const endPull = forward ? endX - bend : endX + bend;
-  return `M ${startX} ${startY} C ${startPull} ${startY}, ${endPull} ${endY}, ${endX} ${endY}`;
 }
 
 function StateSegments({ states, total }: { states: StateCounts; total: number }) {
@@ -224,7 +200,7 @@ function Readout({ node }: { node: Node | undefined }) {
   if (!node) {
     return (
       <p className="text-[13px] text-ink-muted">
-        Point at a form to see its numbers. Select it to list its fields.
+        Point at a form to see its arrows and its numbers. Select it to list its fields.
       </p>
     );
   }
@@ -289,6 +265,25 @@ export function Legend() {
   );
 }
 
+/* The frame of one part of the return, with its name. */
+function LaneFrame({ lane }: { lane: LaneBox }) {
+  return (
+    <g>
+      <rect
+        x={lane.x}
+        y={lane.y}
+        width={lane.width}
+        height={lane.height}
+        rx={10}
+        className="fill-bg-base stroke-border-subtle"
+      />
+      <text x={lane.x + 8} y={lane.y + 16} className="fill-ink-muted text-[11px]">
+        {SECTION_LABELS[lane.section] ?? lane.section}
+      </text>
+    </g>
+  );
+}
+
 function ArrowHeads() {
   return (
     <defs>
@@ -313,13 +308,7 @@ function ArrowHeads() {
   );
 }
 
-function LinkLine(props: {
-  link: DrawnLink;
-  source: Box;
-  reader: Box;
-  on: boolean;
-  rest: boolean;
-}) {
+function LinkLine(props: { link: DrawnLink; source: Box; reader: Box; on: boolean }) {
   return (
     <path
       d={linkPath(props.source, props.reader)}
@@ -327,9 +316,8 @@ function LinkLine(props: {
       strokeDasharray={props.link.missing ? "4 3" : undefined}
       markerEnd={`url(#form-graph-arrow-${props.on ? "active" : "rest"})`}
       className={cn(
-        "transition-opacity",
-        props.on ? "stroke-ink-primary" : "stroke-border-strong",
-        props.on ? "stroke-[1.5]" : props.rest ? "opacity-60" : "opacity-15",
+        "pointer-events-none",
+        props.on ? "stroke-ink-primary stroke-[1.5]" : "stroke-border-strong",
       )}
     />
   );
@@ -361,8 +349,11 @@ export function FormGraphView(props: {
   const active = hovered ?? (props.selected && boxOf.has(props.selected) ? props.selected : null);
   const touches = (link: GraphLink) => link.source === active || link.reader === active;
   const near = new Set(links.filter(touches).flatMap((link) => [link.source, link.reader]));
-  /* At rest the dashed lines stay faint. The active form's lines are drawn last, over the others. */
-  const ordered = [...links.filter((link) => !touches(link)), ...links.filter(touches)];
+  /* At rest the one arrow is between the main form and the other return. The active form shows all of its arrows. */
+  const joinsReturns = (link: GraphLink) =>
+    [link.source, link.reader].includes(placed.main ?? "") &&
+    [link.source, link.reader].includes(props.outside?.formId ?? "");
+  const drawn = links.filter((link) => touches(link) || (active === null && joinsReturns(link)));
 
   return (
     <div className="space-y-3">
@@ -374,33 +365,17 @@ export function FormGraphView(props: {
           width={placed.width}
           height={placed.height}
           viewBox={`0 0 ${placed.width} ${placed.height}`}
+          className="mx-auto block"
           role="group"
           aria-label="Which form reads which form"
         >
           <ArrowHeads />
-          {props.missing.length > 0 && (
-            <text x={PAD} y={PAD + 10} className="fill-ink-muted text-[11px]">
-              Not in the engine
-            </text>
-          )}
-          <text x={placed.left} y={PAD + 10} className="fill-ink-muted text-[11px]">
-            In the engine
-          </text>
-          {ordered.map((link) => (
-            <LinkLine
-              key={`${link.source}|${link.reader}`}
-              link={link}
-              source={boxOf.get(link.source) as Box}
-              reader={boxOf.get(link.reader) as Box}
-              on={touches(link)}
-              rest={active === null && !link.missing}
-            />
+          {placed.trunk.map((path) => (
+            <path key={path} d={path} fill="none" className="stroke-border-strong" />
           ))}
-          {placed.aloneTop !== undefined && (
-            <text x={placed.left} y={placed.aloneTop - 9} className="fill-ink-muted text-[11px]">
-              No field read to or from another form
-            </text>
-          )}
+          {placed.lanes.map((lane) => (
+            <LaneFrame key={lane.section} lane={lane} />
+          ))}
           {placed.boxes.map((box) => (
             <FormCard
               key={idOf(box)}
@@ -408,6 +383,15 @@ export function FormGraphView(props: {
               selected={idOf(box) === props.selected}
               dimmed={active !== null && idOf(box) !== active && !near.has(idOf(box))}
               onActive={setHovered}
+            />
+          ))}
+          {drawn.map((link) => (
+            <LinkLine
+              key={`${link.source}|${link.reader}`}
+              link={link}
+              source={boxOf.get(link.source) as Box}
+              reader={boxOf.get(link.reader) as Box}
+              on={touches(link)}
             />
           ))}
         </svg>

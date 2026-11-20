@@ -103,6 +103,8 @@ function JurisdictionSection(props: {
           forms={part.forms.map((form) => ({
             formId: form.formId,
             displayName: form.displayName,
+            section: form.section,
+            rank: form.rank,
             fieldCount: form.fieldCount,
             states: form.states,
             reads: form.reads.length,
@@ -112,6 +114,7 @@ function JurisdictionSection(props: {
           missing={missing.map((form) => ({
             formId: form.formId,
             displayName: form.displayName,
+            section: form.section,
             about: form.about,
             waitingCount: form.waitingCount,
             feeds: form.feeds,

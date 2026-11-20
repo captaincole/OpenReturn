@@ -25,6 +25,7 @@ import {
 } from "./graph.js";
 import { MISSING_FORMS, missingFormId, namesOf, NOT_RETURN_FORMS } from "./missingForms.js";
 import { renderFormGraph } from "./render.js";
+import { sectionOf } from "./sections.js";
 
 const REPORT_PATH = resolve(ENGINE_ROOT, "../docs/form-graph.md");
 /* In the web app: its Form graph page draws the graph from this file. */
@@ -35,6 +36,7 @@ function formInputs(catalog: Catalog): FormInput[] {
     formId: spec.formId,
     displayName: spec.displayName,
     jurisdiction: jurisdictionOf(spec.relativeDir, catalogTaxYear(spec)).name,
+    ...sectionOf(spec.formId),
     fields: catalog.getFields(spec.formId).map((field) => ({
       fieldId: field.fieldId,
       label: field.label,
@@ -94,6 +96,7 @@ function missingFormInputs(forms: FormInput[]): MissingFormInput[] {
       displayName: form.name,
       about: form.about,
       jurisdiction: jurisdictionOf(form.jurisdiction, taxYear).name,
+      section: form.section,
       names: namesOf(form),
     };
   });

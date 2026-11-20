@@ -21,6 +21,9 @@ export interface FormInput {
   displayName: string;
   /* For example "Federal 2025". */
   jurisdiction: string;
+  /* The part of the return that the form belongs to, and its place in that part. */
+  section: string;
+  rank: number;
   fields: Array<{
     fieldId: string;
     label: string;
@@ -52,6 +55,7 @@ export interface MissingFormInput {
   displayName: string;
   about: string;
   jurisdiction: string;
+  section: string;
   names: string[];
 }
 
@@ -70,6 +74,9 @@ export interface FormNode {
   formId: string;
   displayName: string;
   jurisdiction: string;
+  /* The part of the return that the form belongs to, and its place in that part. */
+  section: string;
+  rank: number;
   scenarios: string[];
   fieldCount: number;
   states: StateCounts;
@@ -114,6 +121,7 @@ export interface MissingFormNode {
   displayName: string;
   about: string;
   jurisdiction: string;
+  section: string;
   /* The blank fields that name it, by their form. */
   waiting: Array<{ formId: string; fieldIds: string[] }>;
   waitingCount: number;
@@ -293,6 +301,7 @@ function buildMissing(
       displayName: form.displayName,
       about: form.about,
       jurisdiction: form.jurisdiction,
+      section: form.section,
       waiting: sorted(waiting.map((field) => field.formId)).map((formId) => ({
         formId,
         fieldIds: waiting.filter((field) => field.formId === formId).map((field) => field.fieldId),
@@ -337,6 +346,8 @@ function buildForms(input: GraphInput, fields: FieldNode[], edges: FormEdge[]): 
       formId: form.formId,
       displayName: form.displayName,
       jurisdiction: form.jurisdiction,
+      section: form.section,
+      rank: form.rank,
       scenarios: input.runs
         .filter((run) => run.formIds.includes(form.formId))
         .map((run) => run.name)
