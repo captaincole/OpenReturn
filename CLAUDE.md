@@ -83,8 +83,9 @@ cade/                            # @openreturn/cade — CADE, the AI CPA. Mastra
 └── tsconfig.json                # "paths" aliases @openreturn/engine to source so `mastra dev` bundles it
 web/                             # Next.js 16 (App Router) frontend → deployed to Vercel
 ├── app/                         # /setup, /login, /notice, (app)/{page (home), r/[returnId], r/[returnId]/deductions, ask/[threadId],
-│                                  library, library/[docId]}, /documents/[id] + /api/* route handlers
+│                                  library, library/[docId], library/graph}, /documents/[id] + /api/* route handlers
 ├── components/                  # AppShell, ChatPane, DeductionReplies, ActivityCard, PlanCard, TopBar, Markdown
+├── data/                        # form-graph.json: written by `npm run form-graph`, drawn at /library/graph
 ├── lib/                         # session, authMode, localAuth, accessAuth, sessionToken, userStore, serverDb, api, ask, activity, chatSession, deductions, mastraClient, …
 ├── e2e/                         # Playwright E2E: drives web + Cade + Canon + a real model (npm run e2e)
 ├── proxy.ts                     # Next.js 16 Proxy (renamed Middleware): optimistic session-cookie gate
@@ -124,8 +125,8 @@ npm run test:unit    # engine + canon + agent unit tests, then the web app's (we
 npm run typecheck    # tsc over engine + builder + canon + agent
 npm run coverage     # golden suite under c8; rewrites docs/coverage.md (fields supported, branches, lines, by form)
                      # and the README "Form support" table (by jurisdiction and tax year)
-npm run form-graph   # runs the scenarios; rewrites docs/form-graph.md and .json (which form reads which form,
-                     # and the fields that no scenario has checked)
+npm run form-graph   # runs the scenarios; rewrites docs/form-graph.md and web/data/form-graph.json (which form
+                     # reads which form, and the fields that no scenario has checked); the web app draws it at /library/graph
 npm run e2e          # Playwright E2E through the UI + real model (stop dev:all first; see web/e2e/README.md)
 npm run e2e:madison  # the same for Madison: her documents, then the Deductions tab to its close
 npm run e2e:access   # an instance behind Cloudflare Access: two guests, the notice, separate data; no model

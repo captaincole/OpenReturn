@@ -1,5 +1,5 @@
 /*
- * Writes docs/form-graph.md and docs/form-graph.json: which form reads which form,
+ * Writes docs/form-graph.md and web/data/form-graph.json: which form reads which form,
  * and which fields no scenario has checked. `npm run form-graph` runs it.
  */
 
@@ -25,7 +25,8 @@ import {
 import { renderFormGraph } from "./render.js";
 
 const REPORT_PATH = resolve(ENGINE_ROOT, "../docs/form-graph.md");
-const JSON_PATH = resolve(ENGINE_ROOT, "../docs/form-graph.json");
+/* In the web app: its Form graph page draws the graph from this file. */
+const JSON_PATH = resolve(ENGINE_ROOT, "../web/data/form-graph.json");
 
 function formInputs(catalog: Catalog): FormInput[] {
   return FORMS.map((spec) => ({

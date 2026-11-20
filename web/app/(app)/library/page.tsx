@@ -3,6 +3,7 @@ import { getUserSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { HomeTopBar } from "../HomeTopBar";
 import { LibraryList } from "./components/LibraryList";
+import { LibraryTabs } from "./components/LibraryTabs";
 
 export default async function LibraryPage() {
   const session = await getUserSession();
@@ -21,6 +22,7 @@ export default async function LibraryPage() {
               document we do not have yet gets a partial answer, or none.
             </p>
           </header>
+          <LibraryTabs active="documents" />
           <LibraryList />
         </div>
       </main>
