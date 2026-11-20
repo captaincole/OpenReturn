@@ -182,25 +182,53 @@ export function drawLanes(
   };
 }
 
+/* The last part of an arrow is straight, so the line goes into the base of the arrowhead. */
+const STUB = 8;
+/* Less room than this between two rows: the arrow joins the sides of the forms. */
+const ROOM = 30;
+
+const centerX = (at: Point): number => at.x + CARD.width / 2;
+
+/* Over the row, from the top of one form to the top of the other. */
+function overPath(source: Point, reader: Point): string {
+  const [startX, endX] = [centerX(source), centerX(reader)];
+  const lift = source.y - STUB - 18;
+  return `M ${startX} ${source.y} C ${startX} ${lift}, ${endX} ${lift}, ${endX} ${reader.y - STUB} V ${reader.y}`;
+}
+
+/* From the side of one form to the side of the other that faces it. */
+function sidePath(source: Point, reader: Point): string {
+  const way = reader.x > source.x ? 1 : -1;
+  const startX = way === 1 ? source.x + CARD.width : source.x;
+  const endX = way === 1 ? reader.x : reader.x + CARD.width;
+  const [startY, endY] = [source.y + CARD.height / 2, reader.y + CARD.height / 2];
+  const stubX = endX - STUB * way;
+  const bend = (Math.abs(stubX - startX) / 2) * way;
+  return `M ${startX} ${startY} C ${startX + bend} ${startY}, ${stubX - bend} ${endY}, ${stubX} ${endY} H ${endX}`;
+}
+
+/* From the top or the bottom of one form to the bottom or the top of the other. */
+function upDownPath(source: Point, reader: Point): string {
+  const way = reader.y > source.y ? 1 : -1;
+  const [startX, endX] = [centerX(source), centerX(reader)];
+  const startY = way === 1 ? source.y + CARD.height : source.y;
+  const endY = way === 1 ? reader.y : reader.y + CARD.height;
+  const stubY = endY - STUB * way;
+  const bend = (Math.abs(stubY - startY) / 2) * way;
+  return `M ${startX} ${startY} C ${startX} ${startY + bend}, ${endX} ${stubY - bend}, ${endX} ${stubY} V ${endY}`;
+}
+
 /*
- * The arrow from a form to a form that reads it. Two forms in one row join at
- * their sides. Other forms join at the top and the bottom.
+ * The arrow from a form to a form that reads it. Two forms in one row join over
+ * the row, or at their sides when no form is between them. Two forms in one column, or with room between their rows, join at the
+ * top and the bottom. Other forms join at their sides.
  */
 export function linkPath(source: Point, reader: Point): string {
-  const sameRow = Math.abs(reader.y - source.y) < CARD.height;
-  if (sameRow) {
-    const forward = reader.x > source.x;
-    const startX = forward ? source.x + CARD.width : source.x;
-    const endX = forward ? reader.x : reader.x + CARD.width;
-    const [startY, endY] = [source.y + CARD.height / 2, reader.y + CARD.height / 2];
-    const bend = Math.abs(endX - startX) / 2;
-    const pull = forward ? bend : -bend;
-    return `M ${startX} ${startY} C ${startX + pull} ${startY - 14}, ${endX - pull} ${endY - 14}, ${endX} ${endY}`;
+  const apart = Math.abs(reader.x - source.x) - CARD.width;
+  if (source.y === reader.y) {
+    /* With no form between them, the two join at their sides. */
+    return apart < CARD.width ? sidePath(source, reader) : overPath(source, reader);
   }
-  const up = reader.y < source.y;
-  const [startX, endX] = [source.x + CARD.width / 2, reader.x + CARD.width / 2];
-  const startY = up ? source.y : source.y + CARD.height;
-  const endY = up ? reader.y + CARD.height : reader.y;
-  const bend = Math.max(Math.abs(endY - startY) / 2, 14) * (up ? -1 : 1);
-  return `M ${startX} ${startY} C ${startX} ${startY + bend}, ${endX} ${endY - bend}, ${endX} ${endY}`;
+  const room = Math.abs(reader.y - source.y) - CARD.height;
+  return apart < 0 || room >= ROOM ? upDownPath(source, reader) : sidePath(source, reader);
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CARD, MAX_WIDTH, drawLanes, lanesOf, rowsFor } from "./formGraphLayout";
+import { CARD, MAX_WIDTH, drawLanes, lanesOf, linkPath, rowsFor } from "./formGraphLayout";
 
 describe("lanesOf", () => {
   const { main, lanes } = lanesOf([
@@ -88,5 +88,20 @@ describe("rowsFor", () => {
     expect(rowsFor(lanes, MAX_WIDTH)).toBeGreaterThan(4);
     expect(drawing.width).toBeLessThanOrEqual(MAX_WIDTH);
     expect(drawing.slots).toHaveLength(201);
+  });
+});
+
+describe("linkPath", () => {
+  it("ends with a straight part into the bottom of a form above", () => {
+    expect(linkPath({ x: 300, y: 300 }, { x: 0, y: 0 }).endsWith(`V ${CARD.height}`)).toBe(true);
+  });
+
+  it("ends with a straight part into the side of a form in the next row", () => {
+    const path = linkPath({ x: 300, y: 52 }, { x: 0, y: 0 });
+    expect(path.endsWith(`H ${CARD.width}`)).toBe(true);
+  });
+
+  it("goes over the row to the top of a form in the same row", () => {
+    expect(linkPath({ x: 0, y: 100 }, { x: 300, y: 100 }).endsWith("V 100")).toBe(true);
   });
 });
