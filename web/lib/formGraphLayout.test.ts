@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CARD, drawLanes, lanesOf } from "./formGraphLayout";
+import { CARD, MAX_WIDTH, drawLanes, lanesOf, rowsFor } from "./formGraphLayout";
 
 describe("lanesOf", () => {
   const { main, lanes } = lanesOf([
@@ -48,7 +48,7 @@ describe("drawLanes", () => {
     expect(at("other-return")?.x).toBeGreaterThan((at("form-1040")?.x ?? 0) + CARD.width);
   });
 
-  it("fills a lane of more than six forms in two columns, each row from the left", () => {
+  it("fills a lane of more forms than rows in two columns, each row from the left", () => {
     expect(at("b")?.y).toBe(at("a")?.y);
     expect(at("b")?.x).toBeGreaterThan(at("a")?.x ?? 0);
     expect(at("c")?.x).toBe(at("a")?.x);
@@ -64,5 +64,29 @@ describe("drawLanes", () => {
 
   it("draws one line to each lane", () => {
     expect(drawing.trunk).toHaveLength(2 + drawing.lanes.length);
+  });
+});
+
+describe("rowsFor", () => {
+  const lane = (section: string, count: number) => ({
+    section,
+    formIds: Array.from({ length: count }, (_, index) => `${section}-${index}`),
+  });
+
+  it("uses four rows when the lanes fit", () => {
+    expect(rowsFor([lane("income", 7), lane("tax", 2)], MAX_WIDTH)).toBe(4);
+  });
+
+  it("adds rows, not width, for 200 forms", () => {
+    const lanes = [
+      lane("income", 80),
+      lane("deductions", 30),
+      lane("tax", 40),
+      lane("credits", 50),
+    ];
+    const drawing = drawLanes("form-1040", lanes);
+    expect(rowsFor(lanes, MAX_WIDTH)).toBeGreaterThan(4);
+    expect(drawing.width).toBeLessThanOrEqual(MAX_WIDTH);
+    expect(drawing.slots).toHaveLength(201);
   });
 });

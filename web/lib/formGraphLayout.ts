@@ -7,11 +7,13 @@
 
 export const CARD = { width: 104, height: 40 };
 
-const PAD = 10;
-const GAP = 8;
-const LANE = { pad: 8, head: 24, gap: 14, rows: 6, columns: 3 };
+const PAD = 14;
+const GAP = 12;
+const LANE = { pad: 12, head: 30, gap: 24, minRows: 4 };
 /* The line from the main form to the lanes. */
-const TRUNK = 16;
+const TRUNK = 22;
+/* The lanes get more rows, not more width, when the forms do not fit in this width. */
+export const MAX_WIDTH = 1240;
 const OUTSIDE_GAP = 64;
 
 export const LANE_SECTIONS = ["income", "deductions", "tax", "credits", "payments", "other"];
@@ -84,23 +86,33 @@ export function lanesOf(forms: LaneForm[]): { main?: string; lanes: Lane[] } {
   };
 }
 
-const columnsOf = (count: number): number =>
-  Math.min(LANE.columns, Math.max(1, Math.ceil(count / LANE.rows)));
-
 const span = (count: number, size: number): number => count * size + (count - 1) * GAP;
 
-function laneSize(lane: Lane): { width: number; height: number } {
-  const columns = columnsOf(lane.formIds.length);
-  const rows = Math.ceil(lane.formIds.length / columns);
-  return {
-    width: span(columns, CARD.width) + LANE.pad * 2,
-    height: LANE.head + span(rows, CARD.height) + LANE.pad,
-  };
+const columnsOf = (lane: Lane, rows: number): number => Math.ceil(lane.formIds.length / rows);
+
+const laneWidth = (lane: Lane, rows: number): number =>
+  span(columnsOf(lane, rows), CARD.width) + LANE.pad * 2;
+
+const lanesWidth = (lanes: Lane[], rows: number): number =>
+  lanes.reduce((sum, lane) => sum + laneWidth(lane, rows) + LANE.gap, -LANE.gap);
+
+/*
+ * The count of rows that every lane may use. A lane with more forms than rows
+ * gets more columns. The count grows until the lanes fit in the width, so the
+ * drawing gets taller, not wider, as the engine gets more forms.
+ */
+export function rowsFor(lanes: Lane[], maxWidth: number): number {
+  const most = Math.max(LANE.minRows, ...lanes.map((lane) => lane.formIds.length));
+  const counts = Array.from(
+    { length: most - LANE.minRows + 1 },
+    (_, index) => LANE.minRows + index,
+  );
+  return counts.find((rows) => lanesWidth(lanes, rows) + PAD * 2 <= maxWidth) ?? most;
 }
 
 /* The forms of a lane fill each row from the left, then the next row. */
-function laneSlots(lane: Lane, box: LaneBox): Slot[] {
-  const columns = columnsOf(lane.formIds.length);
+function laneSlots(lane: Lane, box: LaneBox, rows: number): Slot[] {
+  const columns = columnsOf(lane, rows);
   return lane.formIds.map((formId, index) => ({
     formId,
     x: box.x + LANE.pad + (index % columns) * (CARD.width + GAP),
@@ -108,13 +120,17 @@ function laneSlots(lane: Lane, box: LaneBox): Slot[] {
   }));
 }
 
-function laneBoxes(lanes: Lane[], top: number, left: number): LaneBox[] {
-  const sizes = lanes.map(laneSize);
+function laneBoxes(lanes: Lane[], rows: number, top: number, left: number): LaneBox[] {
+  const widths = lanes.map((lane) => laneWidth(lane, rows));
   return lanes.map((lane, index) => ({
     section: lane.section,
-    x: sizes.slice(0, index).reduce((at, size) => at + size.width + LANE.gap, left),
+    x: widths.slice(0, index).reduce((at, width) => at + width + LANE.gap, left),
     y: top,
-    ...sizes[index],
+    width: widths[index],
+    height:
+      LANE.head +
+      span(Math.ceil(lane.formIds.length / columnsOf(lane, rows)), CARD.height) +
+      LANE.pad,
   }));
 }
 
@@ -141,23 +157,23 @@ export function drawLanes(
   main: string | undefined,
   lanes: Lane[],
   outside?: { formId: string; side: "left" | "right" },
+  maxWidth: number = MAX_WIDTH,
 ): Drawing {
+  const rows = rowsFor(lanes, maxWidth);
   const hasTop = main !== undefined || outside !== undefined;
   const topRoom = CARD.width / 2 + (outside ? OUTSIDE_GAP + CARD.width : 0);
-  const lanesWidth = lanes
-    .map(laneSize)
-    .reduce((sum, size) => sum + size.width + LANE.gap, -LANE.gap);
-  const inner = Math.max(lanesWidth, topRoom * 2);
+  const lanesSpan = lanesWidth(lanes, rows);
+  const inner = Math.max(lanesSpan, topRoom * 2);
   const center = PAD + inner / 2;
   const laneTop = PAD + (hasTop ? CARD.height + TRUNK * 2 : 0);
-  const boxes = laneBoxes(lanes, laneTop, PAD + (inner - lanesWidth) / 2);
+  const boxes = laneBoxes(lanes, rows, laneTop, PAD + (inner - lanesSpan) / 2);
   const mainX = center - CARD.width / 2;
   const shift = (CARD.width + OUTSIDE_GAP) * (outside?.side === "left" ? -1 : 1);
   return {
     slots: [
       ...(main !== undefined ? [{ formId: main, x: mainX, y: PAD }] : []),
       ...(outside ? [{ formId: outside.formId, x: mainX + shift, y: PAD }] : []),
-      ...lanes.flatMap((lane, index) => laneSlots(lane, boxes[index])),
+      ...lanes.flatMap((lane, index) => laneSlots(lane, boxes[index], rows)),
     ],
     lanes: boxes,
     trunk: main !== undefined ? trunkPaths(center, PAD + CARD.height, boxes) : [],

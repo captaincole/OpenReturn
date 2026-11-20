@@ -9,7 +9,6 @@ import {
   splitByJurisdiction,
   type FormGraph,
   type JurisdictionGraph,
-  type MissingFormNode,
 } from "@/lib/formGraph";
 import { deriveProfile } from "@/lib/profile";
 import { getUserSession } from "@/lib/session";
@@ -23,16 +22,6 @@ import { StateBar, StateDot } from "./components/StateBar";
 
 /* `npm run form-graph` writes the file; lib/formGraph.ts mirrors its shape. */
 const graph = graphData as unknown as FormGraph;
-
-/* Each graph draws the most waited-for of the forms the engine lacks; the table lists all. */
-const MISSING_IN_GRAPH = 10;
-
-/* A selected form the engine lacks is always drawn, in place of the last of the ten. */
-function drawnMissing(part: JurisdictionGraph, selected: string | undefined): MissingFormNode[] {
-  const top = part.missing.slice(0, MISSING_IN_GRAPH);
-  const chosen = part.missing.find((form) => form.formId === selected);
-  return chosen && !top.includes(chosen) ? [...top.slice(0, MISSING_IN_GRAPH - 1), chosen] : top;
-}
 
 const viewHref = (jurisdiction: string): string =>
   `/library/graph?view=${jurisdictionId(jurisdiction)}`;
@@ -87,9 +76,8 @@ function JurisdictionSection(props: {
   selected?: string;
 }) {
   const { part, selected } = props;
-  const missing = drawnMissing(part, selected);
-  const lacks =
-    part.missing.length > 0 ? ` · ${missing.length} of ${part.missing.length} missing drawn` : "";
+  const { missing } = part;
+  const lacks = missing.length > 0 ? ` · ${missing.length} forms the engine lacks` : "";
   return (
     <div id="form-graph" className="scroll-mt-6 space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
