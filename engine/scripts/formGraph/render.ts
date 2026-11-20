@@ -90,6 +90,27 @@ function formSection(graph: FormGraph, form: FormNode): string {
   return lines.join("\n");
 }
 
+function missingSection(graph: FormGraph): string {
+  if (graph.missing.length === 0) return "No blank field names a form that the engine lacks.";
+  const rows = graph.missing.map(
+    (form) =>
+      `| ${form.displayName} | ${form.about} | ${form.jurisdiction} | ${form.waitingCount} | ${form.feeds} | ${namesOf(
+        graph,
+        form.waiting.map((group) => group.formId),
+      )} |`,
+  );
+  return [
+    "| Form | About | Jurisdiction | Fields that wait | Fields they feed | Forms that wait |",
+    "| --- | --- | --- | --- | --- | --- |",
+    ...rows,
+  ].join("\n");
+}
+
+function unclassifiedSection(graph: FormGraph): string {
+  if (graph.unclassified.length === 0) return "Every form name in a blank field is on a list.";
+  return graph.unclassified.map((entry) => `- ${entry.name} (${entry.fields} fields)`).join("\n");
+}
+
 function loopSection(graph: FormGraph): string {
   if (graph.loops.length === 0)
     return "No field reads itself through other fields in a scenario run.";
@@ -105,6 +126,12 @@ export function renderFormGraph(graph: FormGraph): string {
     "## By form",
     "For each form: the fields that are not verified and that other fields read, by the count of fields they feed.",
     ...graph.forms.map((form) => formSection(graph, form)),
+    "## Forms the engine lacks",
+    "A blank field names the form that it waits for, in its label or its reason. Each form here is on the list in `engine/scripts/formGraph/missingForms.ts`. **Fields that wait** is the count of blank fields that name the form. **Fields they feed** is the count of other fields that read those blank fields, directly or through other fields. The About column is a short description, not the form's official title.",
+    missingSection(graph),
+    "### Names not classified",
+    "A form name in a blank field that no list has. Add it to `missingForms.ts`: as a form the engine lacks, or as a name that is not a form on the return.",
+    unclassifiedSection(graph),
     "## Loops",
     loopSection(graph),
     "",

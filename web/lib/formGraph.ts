@@ -51,6 +51,19 @@ export interface FieldNode {
   reads: string[];
   feeds: number;
   feedsForms: string[];
+  /* The forms the engine lacks that this blank field names. */
+  needsForms?: string[];
+}
+
+/* A form that the engine lacks, with the blank fields that name it. */
+export interface MissingFormNode {
+  formId: string;
+  displayName: string;
+  about: string;
+  jurisdiction: string;
+  waiting: Array<{ formId: string; fieldIds: string[] }>;
+  waitingCount: number;
+  feeds: number;
 }
 
 export interface FormGraph {
@@ -58,6 +71,8 @@ export interface FormGraph {
   forms: FormNode[];
   edges: FormEdge[];
   fields: FieldNode[];
+  missing: MissingFormNode[];
+  unclassified: Array<{ name: string; fields: number }>;
   loops: string[][];
 }
 

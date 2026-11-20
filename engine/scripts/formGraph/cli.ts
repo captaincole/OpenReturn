@@ -20,8 +20,10 @@ import {
   type CodeRead,
   type FormGraph,
   type FormInput,
+  type MissingFormInput,
   type ScenarioRun,
 } from "./graph.js";
+import { MISSING_FORMS, missingFormId, namesOf, NOT_RETURN_FORMS } from "./missingForms.js";
 import { renderFormGraph } from "./render.js";
 
 const REPORT_PATH = resolve(ENGINE_ROOT, "../docs/form-graph.md");
@@ -80,6 +82,23 @@ function codeReads(forms: FormInput[]): CodeRead[] {
   });
 }
 
+/* The forms the engine lacks carry the tax year of the forms it has. */
+function missingFormInputs(forms: FormInput[]): MissingFormInput[] {
+  const taxYear = Math.max(...FORMS.map(catalogTaxYear));
+  const have = new Set(forms.map((form) => form.formId));
+  return MISSING_FORMS.map((form) => {
+    const formId = missingFormId(form);
+    if (have.has(formId)) throw new Error(`missingForms.ts lists ${form.name}: the engine has it.`);
+    return {
+      formId,
+      displayName: form.name,
+      about: form.about,
+      jurisdiction: jurisdictionOf(form.jurisdiction, taxYear).name,
+      names: namesOf(form),
+    };
+  });
+}
+
 /* One form, edge or field on each line, so a change shows as a short diff. */
 function graphJson(graph: FormGraph): string {
   const rows = (items: unknown[]): string =>
@@ -89,6 +108,8 @@ function graphJson(graph: FormGraph): string {
     `"forms":${rows(graph.forms)}`,
     `"edges":${rows(graph.edges)}`,
     `"fields":${rows(graph.fields)}`,
+    `"missing":${rows(graph.missing)}`,
+    `"unclassified":${rows(graph.unclassified)}`,
     `"loops":${rows(graph.loops)}}\n`,
   ].join(",\n");
 }
@@ -102,7 +123,13 @@ async function main() {
   const runs: ScenarioRun[] = [];
   for (const scenario of scenarios) runs.push(await runScenario(scenario));
 
-  const graph = buildFormGraph({ forms, runs, codeReads: codeReads(forms) });
+  const graph = buildFormGraph({
+    forms,
+    runs,
+    codeReads: codeReads(forms),
+    missingForms: missingFormInputs(forms),
+    otherNames: NOT_RETURN_FORMS,
+  });
   await writeFile(REPORT_PATH, renderFormGraph(graph));
   await writeFile(JSON_PATH, graphJson(graph));
   console.log(

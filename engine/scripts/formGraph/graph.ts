@@ -4,6 +4,8 @@
  * edge is "this form reads that form". The web app draws the graph from the JSON.
  */
 
+import { formNamesIn, namesForm } from "./missingForms.js";
+
 export type FieldState =
   /* A scenario with an answer key gives the field a value. */
   | "verified"
@@ -44,10 +46,22 @@ export interface CodeRead {
   fieldId: string;
 }
 
+/* A form that the engine lacks, with every way a field names it. */
+export interface MissingFormInput {
+  formId: string;
+  displayName: string;
+  about: string;
+  jurisdiction: string;
+  names: string[];
+}
+
 export interface GraphInput {
   forms: FormInput[];
   runs: ScenarioRun[];
   codeReads: CodeRead[];
+  missingForms: MissingFormInput[];
+  /* Names that a field uses and that are not a missing form: a document, another filer's return. */
+  otherNames: string[];
 }
 
 export type StateCounts = Record<FieldState, number>;
@@ -90,6 +104,21 @@ export interface FieldNode {
   feeds: number;
   /* The other forms that read it, in a run or in the code. */
   feedsForms: string[];
+  /* The forms the engine lacks that this blank field names. */
+  needsForms?: string[];
+}
+
+/* A form that the engine lacks. Its weight is the fields that wait for it and the fields they feed. */
+export interface MissingFormNode {
+  formId: string;
+  displayName: string;
+  about: string;
+  jurisdiction: string;
+  /* The blank fields that name it, by their form. */
+  waiting: Array<{ formId: string; fieldIds: string[] }>;
+  waitingCount: number;
+  /* The count of other fields that read the waiting fields, directly or through other fields. */
+  feeds: number;
 }
 
 export interface FormGraph {
@@ -97,6 +126,10 @@ export interface FormGraph {
   forms: FormNode[];
   edges: FormEdge[];
   fields: FieldNode[];
+  /* The forms the engine lacks, the most waited-for first. */
+  missing: MissingFormNode[];
+  /* Form names in blank fields that no list has, with the count of fields that use each. */
+  unclassified: Array<{ name: string; fields: number }>;
   /* Fields that read themselves through other fields in one scenario run. Each entry is one loop. */
   loops: string[][];
 }
@@ -232,6 +265,65 @@ function buildFields(forms: FormInput[], facts: RunFacts, edges: FormEdge[]): Fi
   );
 }
 
+/* A blank field names the form it waits for in its label or its reason. */
+const blankText = (field: FieldNode): string => `${field.label} . ${field.reason ?? ""}`;
+
+function withNeeds(fields: FieldNode[], missingForms: MissingFormInput[]): FieldNode[] {
+  return fields.map((field) => {
+    if (field.state !== "unsupported") return field;
+    const text = blankText(field);
+    const needsForms = missingForms
+      .filter((form) => form.names.some((name) => namesForm(text, name)))
+      .map((form) => form.formId);
+    return needsForms.length === 0 ? field : { ...field, needsForms };
+  });
+}
+
+function buildMissing(
+  fields: FieldNode[],
+  missingForms: MissingFormInput[],
+  readers: Map<string, Set<string>>,
+): MissingFormNode[] {
+  const nodes = missingForms.map((form) => {
+    const waiting = fields.filter((field) => field.needsForms?.includes(form.formId));
+    const waitingIds = new Set(waiting.map((field) => field.fieldId));
+    const fed = new Set(waiting.flatMap((field) => [...downstreamOf(field.fieldId, readers)]));
+    return {
+      formId: form.formId,
+      displayName: form.displayName,
+      about: form.about,
+      jurisdiction: form.jurisdiction,
+      waiting: sorted(waiting.map((field) => field.formId)).map((formId) => ({
+        formId,
+        fieldIds: waiting.filter((field) => field.formId === formId).map((field) => field.fieldId),
+      })),
+      waitingCount: waiting.length,
+      feeds: [...fed].filter((fieldId) => !waitingIds.has(fieldId)).length,
+    };
+  });
+  return nodes
+    .filter((node) => node.waitingCount > 0)
+    .sort((left, right) => right.feeds - left.feeds || right.waitingCount - left.waitingCount);
+}
+
+/* "Schedule CA" is known when the engine has "Schedule CA (540)". */
+function unclassifiedNames(fields: FieldNode[], input: GraphInput): FormGraph["unclassified"] {
+  const known = [
+    ...input.forms.map((form) => form.displayName),
+    ...input.missingForms.flatMap((form) => form.names),
+    ...input.otherNames,
+  ];
+  const isKnown = (name: string): boolean =>
+    known.some((other) => other === name || other.startsWith(`${name} `));
+  const counts = new Map<string, number>();
+  for (const field of fields.filter((one) => one.state === "unsupported")) {
+    for (const name of formNamesIn(blankText(field)).filter((one) => !isKnown(one))) {
+      counts.set(name, (counts.get(name) ?? 0) + 1);
+    }
+  }
+  return sorted(counts.keys()).map((name) => ({ name, fields: counts.get(name) ?? 0 }));
+}
+
 function countStates(fields: FieldNode[]): StateCounts {
   const counts: StateCounts = { verified: 0, locked: 0, not_run: 0, unsupported: 0 };
   for (const field of fields) counts[field.state] += 1;
@@ -285,12 +377,14 @@ function loopsOf(runs: ScenarioRun[]): string[][] {
 export function buildFormGraph(input: GraphInput): FormGraph {
   const facts = collectRunFacts(input.runs);
   const edges = buildEdges(facts, input.codeReads);
-  const fields = buildFields(input.forms, facts, edges);
+  const fields = withNeeds(buildFields(input.forms, facts, edges), input.missingForms);
   return {
     scenarios: input.runs.length,
     forms: buildForms(input, fields, edges),
     edges,
     fields,
+    missing: buildMissing(fields, input.missingForms, facts.readers),
+    unclassified: unclassifiedNames(fields, input),
     loops: loopsOf(input.runs),
   };
 }

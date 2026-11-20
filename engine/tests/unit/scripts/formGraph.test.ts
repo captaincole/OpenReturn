@@ -61,6 +61,8 @@ const INPUT: GraphInput = {
     },
   ],
   codeReads: [{ readerFormId: "form-a", fieldId: "schedule-b.line.8" }],
+  missingForms: [],
+  otherNames: [],
 };
 
 describe("buildFormGraph", () => {
@@ -127,6 +129,86 @@ describe("buildFormGraph", () => {
       half("form-a.line.2", "form-a.line.1"),
     ];
     expect(buildFormGraph({ ...INPUT, runs: twoRuns }).loops).toEqual([]);
+  });
+});
+
+describe("the forms the engine lacks", () => {
+  const blank = (fieldId: string, label: string) => ({
+    fieldId,
+    label,
+    kind: "unsupported" as const,
+  });
+  const input: GraphInput = {
+    forms: [
+      {
+        formId: "schedule-3",
+        displayName: "Schedule 3",
+        jurisdiction: "Federal 2025",
+        fields: [
+          blank("schedule-3.line.1", "Foreign tax credit. Attach Form 1116 if required"),
+          blank("schedule-3.line.3", "Education credits from Form 8863, line 19"),
+          blank("schedule-3.line.6", "Amount from Schedule K-1 or Form 9999"),
+          field("schedule-3.line.8"),
+        ],
+      },
+    ],
+    runs: [
+      {
+        name: "keyed",
+        hasAnswerKey: true,
+        formIds: ["schedule-3"],
+        fields: [ran("schedule-3.line.8", ["schedule-3.line.1", "schedule-3.line.3"])],
+      },
+    ],
+    codeReads: [],
+    missingForms: [
+      {
+        formId: "form-1116",
+        displayName: "Form 1116",
+        about: "Foreign tax credit",
+        jurisdiction: "Federal 2025",
+        names: ["Form 1116"],
+      },
+      {
+        formId: "form-111",
+        displayName: "Form 111",
+        about: "A shorter number",
+        jurisdiction: "Federal 2025",
+        names: ["Form 111"],
+      },
+    ],
+    otherNames: ["Schedule K-1"],
+  };
+  const graph = buildFormGraph(input);
+
+  it("makes a node for a form that a blank field names, with the fields that wait", () => {
+    expect(graph.missing).toEqual([
+      {
+        formId: "form-1116",
+        displayName: "Form 1116",
+        about: "Foreign tax credit",
+        jurisdiction: "Federal 2025",
+        waiting: [{ formId: "schedule-3", fieldIds: ["schedule-3.line.1"] }],
+        waitingCount: 1,
+        feeds: 1,
+      },
+    ]);
+    expect(graph.fields[0].needsForms).toEqual(["form-1116"]);
+  });
+
+  it("lists a form name that no list has, and not a document", () => {
+    expect(graph.unclassified).toEqual([
+      { name: "Form 8863", fields: 1 },
+      { name: "Form 9999", fields: 1 },
+    ]);
+  });
+
+  it("puts both in the report", () => {
+    const text = renderFormGraph(graph);
+    expect(text).toContain(
+      "| Form 1116 | Foreign tax credit | Federal 2025 | 1 | 1 | Schedule 3 |",
+    );
+    expect(text).toContain("- Form 8863 (1 fields)");
   });
 });
 

@@ -2,42 +2,53 @@ import {
   STATE_LABELS,
   shortFieldId,
   type FieldNode,
-  type FormEdge,
   type FormGraph,
   type FormNode,
+  type MissingFormNode,
 } from "@/lib/formGraph";
 import Link from "next/link";
 import { Section } from "../../../components/Section";
 import { StateBar, StateCountsLine, StateDot } from "./StateBar";
 
-const formHref = (formId: string): string => `/library/graph?form=${encodeURIComponent(formId)}`;
+export const formHref = (formId: string): string =>
+  `/library/graph?form=${encodeURIComponent(formId)}`;
 
-function FormLinks(props: {
+/* The engine's forms and the forms it lacks, by id. */
+function formNames(graph: FormGraph): Map<string, string> {
+  return new Map([...graph.forms, ...graph.missing].map((form) => [form.formId, form.displayName]));
+}
+
+interface FormChip {
+  formId: string;
+  /* The count of fields behind the link. */
+  fields: number;
+}
+
+function FormChips(props: {
   graph: FormGraph;
   title: string;
-  edges: FormEdge[];
-  other: (edge: FormEdge) => string;
+  chips: FormChip[];
+  dashed?: boolean;
 }) {
-  const nameOf = (formId: string): string =>
-    props.graph.forms.find((form) => form.formId === formId)?.displayName ?? formId;
+  const names = formNames(props.graph);
   return (
     <div>
       <h3 className="text-[12px] text-ink-muted">{props.title}</h3>
-      {props.edges.length === 0 ? (
+      {props.chips.length === 0 ? (
         <p className="mt-1.5 text-[13px] text-ink-secondary">None</p>
       ) : (
         <ul className="mt-1.5 flex flex-wrap gap-1.5">
-          {props.edges.map((edge) => (
-            <li key={props.other(edge)}>
+          {props.chips.map((chip) => (
+            <li key={chip.formId}>
               <Link
-                href={formHref(props.other(edge))}
+                href={formHref(chip.formId)}
                 scroll={false}
-                className="inline-flex items-baseline gap-1.5 rounded-lg border border-border-subtle px-2.5 py-1 text-[13px] text-ink-primary transition-colors hover:border-border-strong"
+                className={`inline-flex items-baseline gap-1.5 rounded-lg border px-2.5 py-1 text-[13px] text-ink-primary transition-colors hover:border-border-strong ${
+                  props.dashed ? "border-dashed border-border" : "border-border-subtle"
+                }`}
               >
-                {nameOf(props.other(edge))}
-                <span className="text-[11px] text-ink-muted tabular-nums">
-                  {edge.fields.length}
-                </span>
+                {names.get(chip.formId) ?? chip.formId}
+                <span className="text-[11px] text-ink-muted tabular-nums">{chip.fields}</span>
               </Link>
             </li>
           ))}
@@ -47,7 +58,12 @@ function FormLinks(props: {
   );
 }
 
-function FieldRows({ fields, withReason }: { fields: FieldNode[]; withReason: boolean }) {
+function FieldRows(props: {
+  fields: FieldNode[];
+  withReason: boolean;
+  /* Given when the rows are of more than one form: each row names its form. */
+  formNames?: Map<string, string>;
+}) {
   return (
     <div className="card overflow-x-auto">
       <table className="w-full min-w-[640px] text-left text-[13px]">
@@ -56,16 +72,22 @@ function FieldRows({ fields, withReason }: { fields: FieldNode[]; withReason: bo
             <th className="px-4 py-2.5 font-medium">Field</th>
             <th className="px-4 py-2.5 font-medium">State</th>
             <th className="px-4 py-2.5 text-right font-medium">Feeds</th>
-            {withReason && <th className="px-4 py-2.5 font-medium">Why it is blank</th>}
+            {props.withReason && <th className="px-4 py-2.5 font-medium">Why it is blank</th>}
           </tr>
         </thead>
         <tbody className="divide-y divide-border-subtle">
-          {fields.map((field) => (
+          {props.fields.map((field) => (
             <tr key={field.fieldId} className="align-top">
               <td className="px-4 py-2.5">
                 <div className="text-ink-primary">{field.label}</div>
-                <div className="mt-0.5 font-mono text-[11px] text-ink-muted">
-                  {shortFieldId(field)}
+                <div className="mt-0.5 text-[11px] text-ink-muted">
+                  {props.formNames && (
+                    <Link href={formHref(field.formId)} scroll={false} className="hover:underline">
+                      {props.formNames.get(field.formId)}
+                    </Link>
+                  )}
+                  {props.formNames && " · "}
+                  <span className="font-mono">{shortFieldId(field)}</span>
                 </div>
               </td>
               <td className="px-4 py-2.5 whitespace-nowrap text-ink-secondary">
@@ -77,7 +99,7 @@ function FieldRows({ fields, withReason }: { fields: FieldNode[]; withReason: bo
               <td className="px-4 py-2.5 text-right text-ink-primary tabular-nums">
                 {field.feeds}
               </td>
-              {withReason && (
+              {props.withReason && (
                 <td className="max-w-xs px-4 py-2.5 text-ink-secondary">{field.reason ?? ""}</td>
               )}
             </tr>
@@ -90,14 +112,29 @@ function FieldRows({ fields, withReason }: { fields: FieldNode[]; withReason: bo
 
 const byFeeds = (left: FieldNode, right: FieldNode): number => right.feeds - left.feeds;
 
+/* The forms the engine lacks that this form's blank fields name. */
+function waitsFor(graph: FormGraph, formId: string): FormChip[] {
+  return graph.missing.flatMap((missing) =>
+    missing.waiting
+      .filter((group) => group.formId === formId)
+      .map((group) => ({ formId: missing.formId, fields: group.fieldIds.length })),
+  );
+}
+
 export function FormDetail({ graph, form }: { graph: FormGraph; form: FormNode }) {
   const fields = graph.fields.filter((field) => field.formId === form.formId);
   const open = fields.filter((field) => field.state !== "verified").sort(byFeeds);
   const verified = fields.filter((field) => field.state === "verified").sort(byFeeds);
   const scenarios = form.scenarios.length;
+  const reads = graph.edges
+    .filter((edge) => edge.reader === form.formId)
+    .map((edge) => ({ formId: edge.source, fields: edge.fields.length }));
+  const feeds = graph.edges
+    .filter((edge) => edge.source === form.formId)
+    .map((edge) => ({ formId: edge.reader, fields: edge.fields.length }));
 
   return (
-    <div className="space-y-8">
+    <div id="form-detail" className="scroll-mt-6 space-y-8">
       <div className="card space-y-5 p-5">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <h2 className="font-serif text-2xl text-ink-primary">{form.displayName}</h2>
@@ -110,18 +147,14 @@ export function FormDetail({ graph, form }: { graph: FormGraph; form: FormNode }
           <StateBar states={form.states} />
           <StateCountsLine states={form.states} />
         </div>
-        <div className="grid gap-5 sm:grid-cols-2">
-          <FormLinks
+        <div className="grid gap-5 sm:grid-cols-3">
+          <FormChips graph={graph} title="Reads (fields read)" chips={reads} />
+          <FormChips graph={graph} title="Feeds (fields read)" chips={feeds} />
+          <FormChips
             graph={graph}
-            title="Reads (fields read)"
-            edges={graph.edges.filter((edge) => edge.reader === form.formId)}
-            other={(edge) => edge.source}
-          />
-          <FormLinks
-            graph={graph}
-            title="Feeds (fields read)"
-            edges={graph.edges.filter((edge) => edge.source === form.formId)}
-            other={(edge) => edge.reader}
+            title="Waits for (blank fields)"
+            chips={waitsFor(graph, form.formId)}
+            dashed
           />
         </div>
       </div>
@@ -152,5 +185,96 @@ export function FormDetail({ graph, form }: { graph: FormGraph; form: FormNode }
         </details>
       )}
     </div>
+  );
+}
+
+export function MissingFormDetail({ graph, form }: { graph: FormGraph; form: MissingFormNode }) {
+  const waiting = graph.fields
+    .filter((field) => field.needsForms?.includes(form.formId))
+    .sort(byFeeds);
+
+  return (
+    <div id="form-detail" className="scroll-mt-6 space-y-8">
+      <div className="card space-y-4 border-dashed p-5">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 className="font-serif text-2xl text-ink-primary">{form.displayName}</h2>
+          <span className="text-[12px] text-ink-muted">
+            {form.jurisdiction} · the engine lacks this form
+          </span>
+        </div>
+        <p className="text-[14px] text-ink-secondary">{form.about}</p>
+        <p className="text-[13px] text-ink-secondary">
+          <span className="text-ink-primary tabular-nums">{form.waitingCount}</span> blank{" "}
+          {form.waitingCount === 1 ? "field names" : "fields name"} this form. They feed{" "}
+          <span className="text-ink-primary tabular-nums">{form.feeds}</span> other fields.
+        </p>
+        <FormChips
+          graph={graph}
+          title="Forms that wait (blank fields)"
+          chips={form.waiting.map((group) => ({
+            formId: group.formId,
+            fields: group.fieldIds.length,
+          }))}
+        />
+      </div>
+
+      <Section
+        title="Fields that wait for it"
+        right={<span className="text-[12px] text-ink-muted">the most fed first</span>}
+      >
+        <FieldRows fields={waiting} withReason formNames={formNames(graph)} />
+      </Section>
+    </div>
+  );
+}
+
+export function MissingFormsTable({ graph }: { graph: FormGraph }) {
+  const names = formNames(graph);
+  return (
+    <Section
+      title="Forms the engine lacks"
+      right={
+        <span className="text-[12px] text-ink-muted">
+          {graph.missing.length} forms, by the fields they would open
+        </span>
+      }
+    >
+      <div className="card overflow-x-auto">
+        <table className="w-full min-w-[720px] text-left text-[13px]">
+          <thead className="text-[11px] text-ink-muted">
+            <tr className="border-b border-border-subtle">
+              <th className="px-4 py-2.5 font-medium">Form</th>
+              <th className="px-4 py-2.5 text-right font-medium">Fields that wait</th>
+              <th className="px-4 py-2.5 text-right font-medium">Fields they feed</th>
+              <th className="px-4 py-2.5 font-medium">Forms that wait</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border-subtle">
+            {graph.missing.map((form) => (
+              <tr key={form.formId} className="align-top">
+                <td className="px-4 py-2.5">
+                  <Link
+                    href={`${formHref(form.formId)}#form-detail`}
+                    className="text-ink-primary hover:text-accent"
+                  >
+                    {form.displayName}
+                  </Link>
+                  <div className="mt-0.5 text-[12px] text-ink-muted">{form.about}</div>
+                </td>
+                <td className="px-4 py-2.5 text-right text-ink-primary tabular-nums">
+                  {form.waitingCount}
+                </td>
+                <td className="px-4 py-2.5 text-right text-ink-primary tabular-nums">
+                  {form.feeds}
+                </td>
+                <td className="px-4 py-2.5 text-ink-secondary">
+                  {form.waiting.map((group) => names.get(group.formId)).join(", ")}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Section>
   );
 }
