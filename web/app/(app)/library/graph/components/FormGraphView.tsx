@@ -191,7 +191,7 @@ function FormCard(props: {
   return (
     <Link
       href={cardHref(node)}
-      scroll={node.kind === "outside"}
+      scroll={false}
       aria-label={cardLabel(node)}
       onMouseEnter={() => props.onActive(formId)}
       onMouseLeave={() => props.onActive(null)}

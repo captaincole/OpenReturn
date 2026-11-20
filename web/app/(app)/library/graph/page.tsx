@@ -1,4 +1,5 @@
 import graphData from "@/data/form-graph.json";
+import { cn } from "@/lib/cn";
 import {
   FIELD_STATES,
   STATE_LABELS,
@@ -12,9 +13,9 @@ import {
 } from "@/lib/formGraph";
 import { deriveProfile } from "@/lib/profile";
 import { getUserSession } from "@/lib/session";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { HomeTopBar } from "../../HomeTopBar";
-import { Section } from "../../components/Section";
 import { LibraryTabs } from "../components/LibraryTabs";
 import { FormDetail, MissingFormDetail, MissingFormsTable } from "./components/FormDetail";
 import { FormGraphView, Legend } from "./components/FormGraphView";
@@ -33,21 +34,71 @@ function drawnMissing(part: JurisdictionGraph, selected: string | undefined): Mi
   return chosen && !top.includes(chosen) ? [...top.slice(0, MISSING_IN_GRAPH - 1), chosen] : top;
 }
 
-/* One jurisdiction's forms: federal, or a state. */
-function JurisdictionSection({ part, selected }: { part: JurisdictionGraph; selected?: string }) {
+const viewHref = (jurisdiction: string): string =>
+  `/library/graph?view=${jurisdictionId(jurisdiction)}`;
+
+/* The switch between the graphs: federal, or a state. */
+function JurisdictionToggle({ parts, shown }: { parts: JurisdictionGraph[]; shown: string }) {
+  return (
+    <nav
+      aria-label="The forms to draw"
+      className="inline-flex rounded-lg border border-border-subtle p-0.5"
+    >
+      {parts.map((part) => (
+        <Link
+          key={part.jurisdiction}
+          href={viewHref(part.jurisdiction)}
+          scroll={false}
+          aria-current={part.jurisdiction === shown ? "page" : undefined}
+          className={cn(
+            "rounded-md px-3 py-1 text-[13px] transition-colors",
+            part.jurisdiction === shown
+              ? "bg-bg-panel text-ink-primary"
+              : "text-ink-secondary hover:text-ink-primary",
+          )}
+        >
+          {part.jurisdiction}
+        </Link>
+      ))}
+    </nav>
+  );
+}
+
+/*
+ * The graph to draw: the one that has the selected form, then the one that the
+ * address names, then the federal one.
+ */
+function shownPart(
+  parts: JurisdictionGraph[],
+  selectedJurisdiction: string | undefined,
+  view: string | undefined,
+): JurisdictionGraph {
+  return (
+    parts.find((part) => part.jurisdiction === selectedJurisdiction) ??
+    parts.find((part) => jurisdictionId(part.jurisdiction) === view) ??
+    parts[0]
+  );
+}
+
+/* One jurisdiction's forms, with the switch to the other graphs. */
+function JurisdictionSection(props: {
+  parts: JurisdictionGraph[];
+  part: JurisdictionGraph;
+  selected?: string;
+}) {
+  const { part, selected } = props;
   const missing = drawnMissing(part, selected);
   const lacks =
     part.missing.length > 0 ? ` · ${missing.length} of ${part.missing.length} missing drawn` : "";
   return (
-    <div id={jurisdictionId(part.jurisdiction)} className="scroll-mt-6">
-      <Section
-        title={part.jurisdiction}
-        right={
-          <span className="text-[12px] text-ink-muted">
-            {part.forms.length} forms{lacks}
-          </span>
-        }
-      >
+    <div id="form-graph" className="scroll-mt-6 space-y-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <JurisdictionToggle parts={props.parts} shown={part.jurisdiction} />
+        <span className="text-[12px] text-ink-muted">
+          {part.forms.length} forms{lacks}
+        </span>
+      </div>
+      <div>
         <FormGraphView
           forms={part.forms.map((form) => ({
             formId: form.formId,
@@ -69,12 +120,12 @@ function JurisdictionSection({ part, selected }: { part: JurisdictionGraph; sele
           outside={
             part.outside && {
               ...part.outside,
-              href: `/library/graph#${jurisdictionId(part.outside.jurisdiction)}`,
+              href: viewHref(part.outside.jurisdiction),
             }
           }
           selected={selected}
         />
-      </Section>
+      </div>
     </div>
   );
 }
@@ -105,15 +156,20 @@ function Totals() {
 export default async function FormGraphPage({
   searchParams,
 }: {
-  searchParams: Promise<{ form?: string | string[] }>;
+  searchParams: Promise<{ form?: string | string[]; view?: string | string[] }>;
 }) {
   const session = await getUserSession();
   if (!session) redirect("/login");
   const profile = deriveProfile(session);
-  const { form: formParam } = await searchParams;
+  const { form: formParam, view } = await searchParams;
   const selected = graph.forms.find((form) => form.formId === formParam);
   const selectedMissing = graph.missing.find((form) => form.formId === formParam);
   const parts = splitByJurisdiction(graph);
+  const part = shownPart(
+    parts,
+    (selected ?? selectedMissing)?.jurisdiction,
+    typeof view === "string" ? view : undefined,
+  );
   const selectedId = selected?.formId ?? selectedMissing?.formId;
 
   return (
@@ -134,9 +190,7 @@ export default async function FormGraphPage({
           </header>
           <Totals />
           <Legend />
-          {parts.map((part) => (
-            <JurisdictionSection key={part.jurisdiction} part={part} selected={selectedId} />
-          ))}
+          <JurisdictionSection parts={parts} part={part} selected={selectedId} />
           {selected && <FormDetail graph={graph} form={selected} />}
           {selectedMissing && <MissingFormDetail graph={graph} form={selectedMissing} />}
           <MissingFormsTable graph={graph} />
