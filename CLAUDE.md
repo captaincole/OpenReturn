@@ -83,8 +83,9 @@ cade/                            # @openreturn/cade — CADE, the AI CPA. Mastra
 └── tsconfig.json                # "paths" aliases @openreturn/engine to source so `mastra dev` bundles it
 web/                             # Next.js 16 (App Router) frontend → deployed to Vercel
 ├── app/                         # /setup, /login, /notice, (app)/{page (home), r/[returnId], r/[returnId]/deductions, ask/[threadId],
-│                                  library, library/[docId]}, /documents/[id] + /api/* route handlers
+│                                  library, library/[docId], library/graph}, /documents/[id] + /api/* route handlers
 ├── components/                  # AppShell, ChatPane, DeductionReplies, ActivityCard, PlanCard, TopBar, Markdown
+├── data/                        # form-graph.json: written by `npm run form-graph`, drawn at /library/graph
 ├── lib/                         # session, authMode, localAuth, accessAuth, sessionToken, userStore, serverDb, api, ask, activity, chatSession, deductions, mastraClient, …
 ├── e2e/                         # Playwright E2E: drives web + Cade + Canon + a real model (npm run e2e)
 ├── proxy.ts                     # Next.js 16 Proxy (renamed Middleware): optimistic session-cookie gate
