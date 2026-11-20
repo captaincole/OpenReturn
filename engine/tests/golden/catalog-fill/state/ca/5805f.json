@@ -1,0 +1,195 @@
+{
+  "formId": "form-5805f",
+  "fieldCount": 21,
+  "entries": [
+    {
+      "fieldId": "form-5805f.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on return",
+          "text": "T-1GK6T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.header.ssn_or_itin",
+      "widgets": [
+        {
+          "widgetName": "Your S S N or I T I N (9 digits)",
+          "text": "T-1GNO6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.1_current_year_tax_after_credits",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1. 2025 tax after credits from Form 540, line 48, line 61, line 62, and any I R C Section 453A interest from line 63; Form 540NR, line 63, line 71, line 72, and any I R C Section 453A interest from line 73; or Form 541, line 28",
+          "text": "5,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.10_required_annual_payment",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Enter the smaller of line 4 or line 9. (If your California A G I is equal to or greater than $1,000,000/$500,000 for married filing a separate return, use line 4.)",
+          "text": "5,728"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.11_withholding_and_estimated_payments",
+      "widgets": [
+        {
+          "widgetName": "Line 11. 2025 withholding taxes and estimated tax payments made on or before January 15, 2026, from Form 540, line 71, line 72, and line 73; Form 540NR, line 81, line 82, and line 83; or Form 541, line 29, line 31, and line 32",
+          "text": "2,877"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.12_underpayment",
+      "widgets": [
+        {
+          "widgetName": "Line 12. Underpayment. Subtract line 11 from line 10. If zero or less, you do not owe a penalty. Be sure to check the box on Form 540, line 113; Form 540NR, line 123; or Form 541, line 45",
+          "text": "2,513"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.13_date_underpayment_paid",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 13. Enter the date (mm/dd/yyyy) the amount on line 12 was paid or April 15, 2026, whichever is earlier",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.14_number_of_days",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Number of days after January 15, 2026, to and including the date on line 13",
+          "text": "2,049"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.15_penalty",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Penalty: Number of days on line 14 divided by 365 multiplied by 0.7 multiplied by underpayment on line 12. Enter the result here. If you are requesting a waiver, go to line 16. Otherwise, enter this amount on Form 540, line 113; Form 540NR, line 123; or Form 541, line 45. Also, check the box on that line to show that form F T B 5805F is attached to the return",
+          "text": "5,504"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.16_waiver_amount",
+      "widgets": [
+        {
+          "widgetName": "Line 16. To request a waiver, check the box on this line and provide an explanation below. Be sure to check the box on Form 540, line 113; Form 540NR, line 123; or Form 541, line 45. See General Information E",
+          "text": "4,259"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.16_waiver_explanation_row1",
+      "widgets": [
+        {
+          "widgetName": "Enter explanation for waiver (1):",
+          "text": "T-11RHW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.16_waiver_explanation_row2",
+      "widgets": [
+        {
+          "widgetName": "Enter explanation for waiver (2):",
+          "text": "T-BXF9N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.16_waiver_request_checkbox",
+      "widgets": [
+        {
+          "widgetName": "Line 16 - To request a waiver, check the box on this line",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.2_current_year_lump_sum_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 2. 2025 tax on lump-sum distributions and accumulation distribution of trusts from Form 540, line 34; Form 540NR, line 41; or Form 541, line 21b",
+          "text": "7,237"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.3_current_year_tax_less_lump_sum",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Subtract line 2 from line 1",
+          "text": "2,460"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.4_two_thirds_of_current_year_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Multiply line 3 by 66 and two-thirds % (.6667)",
+          "text": "8,113"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.5_current_year_withholding",
+      "widgets": [
+        {
+          "widgetName": "Line 5. 2025 withholding taxes from Form 540, line 71 and line 73; Form 540NR, line 81 and line 83; or Form 541, line 29 and line 31",
+          "text": "6,109"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.6_current_year_tax_less_withholding",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Subtract line 5 from line 3. If less than $500 ($250 if married/R D P filing separately), STOP. You do not owe a penalty",
+          "text": "5,967"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.7_prior_year_tax_after_credits",
+      "widgets": [
+        {
+          "widgetName": "Line 7. 2024 tax after credits from Form 540, line 48, line 61, line 62, and any I R C Section 453A interest from line 63; Form 540NR, line 63, line 71, line 72, and any I R C Section 453A interest from line 73; or Form 541, line 28. (If you did not file a return for 2024 or if your 2024 taxable year was less than 12 months, do not complete line 7 through line 9. Instead, enter the amount from line 4 on line 10.)",
+          "text": "3,337"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.8_prior_year_lump_sum_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 8. 2024 tax on lump-sum distributions and accumulation distribution of trusts from Form 540, line 34; Form 540NR, line 41; or Form 541, line 21b",
+          "text": "3,024"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5805f.0.line.9_prior_year_tax_less_lump_sum",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Subtract line 8 from line 7. If less than $500 ($250 if married/R D P filing separately), STOP. You do not owe a penalty",
+          "text": "5,566"
+        }
+      ]
+    }
+  ]
+}

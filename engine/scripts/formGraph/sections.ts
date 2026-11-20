@@ -39,6 +39,9 @@ const FORM_SECTIONS: Record<Exclude<Section, "other">, string[]> = {
     "form-3885a",
     "schedule-ca-540nr",
     "form-3801",
+    "form-3461",
+    "form-3805v",
+    "form-3913",
   ],
   deductions: [
     "schedule-a",
@@ -63,6 +66,10 @@ const FORM_SECTIONS: Record<Exclude<Section, "other">, string[]> = {
     "form-3805p",
     "form-8814",
     "form-3803",
+    "form-3800-ca",
+    "schedule-g-1",
+    "form-5870a",
+    "form-3853",
   ],
   credits: [
     "schedule-3",
@@ -77,9 +84,16 @@ const FORM_SECTIONS: Record<Exclude<Section, "other">, string[]> = {
     "form-8801",
     "schedule-s",
     "form-3510",
+    "form-3506",
+    "form-3507",
+    "form-3541",
+    "form-3804-cr",
+    "form-3805z",
+    "form-3807",
+    "form-3809",
   ],
   /* Payments and penalties. */
-  payments: ["form-5805", "form-2210"],
+  payments: ["form-5805", "form-2210", "form-5805f"],
 };
 
 export interface SectionPlace {

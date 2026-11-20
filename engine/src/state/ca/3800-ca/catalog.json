@@ -1,0 +1,425 @@
+{
+  "form": {
+    "formId": "form-3800-ca",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3800, Tax Computation for Certain Children with Unearned Income"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3800-ca.0.header.child_name",
+      "label": "Child's name as shown on return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Child's name as shown on return",
+      "position": {
+        "page": 0,
+        "x": 35.9891,
+        "y": 683.74
+      }
+    },
+    {
+      "fieldId": "form-3800-ca.0.header.child_ssn",
+      "label": "Child's Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Child's Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 442.917,
+        "y": 683.74
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3800-ca.0.header.parent_name",
+      "label": "Parent's name (first, initial, and last). (Caution: See instructions before completing).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Parent's name (first, initial, and last). (Caution: See instructions before completing)",
+      "position": {
+        "page": 0,
+        "x": 35.9891,
+        "y": 659.74
+      }
+    },
+    {
+      "fieldId": "form-3800-ca.0.header.parent_ssn",
+      "label": "Parent's S S N or I T I N (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Parent's S S N or I T I N (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 442.917,
+        "y": 659.74
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3800-ca.0.header.parent_filing_status",
+      "label": "Parent's filing status (check one)",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Parent's filing status",
+      "position": {
+        "page": 0,
+        "x": 36.7226,
+        "y": 628.222
+      },
+      "options": [
+        {
+          "value": "single",
+          "radioOption": "Single.",
+          "label": "Single"
+        },
+        {
+          "value": "married_rdp_filing_jointly",
+          "radioOption": "Married/R D P filing jointly.",
+          "label": "Married/RDP filing jointly"
+        },
+        {
+          "value": "married_rdp_filing_separately",
+          "radioOption": "Married/R D P filing separately.",
+          "label": "Married/RDP filing separately"
+        },
+        {
+          "value": "head_of_household",
+          "radioOption": "Head of household.",
+          "label": "Head of household"
+        },
+        {
+          "value": "qualifying_surviving_spouse_rdp",
+          "radioOption": "Qualifying surviving spouse/R D P.",
+          "label": "Qualifying surviving spouse/RDP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.1_child_unearned_income",
+      "label": "Part I, Line 1. Enter the child's unearned income, such as taxable interest, ordinary dividends, and capital gains. See instructions. If this amount is $2,700 or less, stop here; do not file this form.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1. Enter the child's unearned income, such as taxable interest, ordinary dividends, and capital gains. See instructions. If this amount is $2,700 or less, stop here; do not file this form",
+      "position": {
+        "page": 0,
+        "x": 464.755,
+        "y": 582.161
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.2_unearned_income_deduction",
+      "label": "Line 2. If the child did not itemize deductions on Form 540 or Form 540N R, enter $2,700. If the child itemized deductions, see instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. If the child did not itemize deductions on Form 540 or Form 540N R, enter $2,700. If the child itemized deductions, see instructions",
+      "position": {
+        "page": 0,
+        "x": 464.755,
+        "y": 558.164
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.3_unearned_income_less_deduction",
+      "label": "Line 3. Subtract line 2 from line 1. If zero or less, stop here; do not complete the rest of this form but attach it to the child's return.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Subtract line 2 from line 1. If zero or less, stop here; do not complete the rest of this form but attach it to the child's return",
+      "position": {
+        "page": 0,
+        "x": 464.755,
+        "y": 534.162
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.4_child_taxable_income",
+      "label": "Line 4. Enter the child's taxable income from Form 540, line 19 or total taxable income from Form 540N R, line 19.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Enter the child's taxable income from Form 540, line 19 or total taxable income from Form 540N R, line 19",
+      "position": {
+        "page": 0,
+        "x": 464.755,
+        "y": 510.157
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.5_net_unearned_income",
+      "label": "Line 5. Net unearned income. Enter the smaller of line 3 or line 4. If zero or less, stop here; do not complete the rest of this form but attach it to the child's return.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Net unearned income. Enter the smaller of line 3 or line 4. If zero or less, stop here; do not complete the rest of this form but attach it to the child's return",
+      "position": {
+        "page": 0,
+        "x": 464.755,
+        "y": 474.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.6_parent_taxable_income",
+      "label": "Part II, Line 6. Enter the parent's taxable income from Form 540, line 19; or total taxable income from Form 540NR, line 19. If zero or less, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 6. Enter the parent's taxable income from Form 540, line 19; or total taxable income from Form 540NR, line 19. If zero or less, enter 0. See instructions",
+      "position": {
+        "page": 0,
+        "x": 464.765,
+        "y": 426.145
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.7_other_children_net_unearned_income",
+      "label": "Line 7. Enter the total net unearned income, if any, from form(s) F T B 3800, line 5, of all other children of the parent identified above. Do not include the amount from line 5 above.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Enter the total net unearned income, if any, from form(s) F T B 3800, line 5, of all other children of the parent identified above. Do not include the amount from line 5 above",
+      "position": {
+        "page": 0,
+        "x": 464.765,
+        "y": 402.155
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.8_total_income_at_parent_rate",
+      "label": "Line 8. Add line 5 through line 7.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Add line 5 through line 7",
+      "position": {
+        "page": 0,
+        "x": 464.765,
+        "y": 378.148
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.9_tax_on_line_8",
+      "label": "Line 9. Enter the tax on the amount on line 8 based on the parent's filing status. Use the tax table or tax rate schedules found in the 2025 instructions for Form 540. See instructions for Form 540N R filers.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Enter the tax on the amount on line 8 based on the parent's filing status. Use the tax table or tax rate schedules found in the 2025 instructions for Form 540. See instructions for Form 540N R filers",
+      "position": {
+        "page": 0,
+        "x": 464.765,
+        "y": 354.154
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.10_parent_tax",
+      "label": "Line 10. Enter the parent's tax from Form 540, line 31. See instructions for Form 540N R filers. Do not include any tax from form F T B 3803.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Enter the parent's tax from Form 540, line 31. See instructions for Form 540N R filers. Do not include any tax from form F T B 3803",
+      "position": {
+        "page": 0,
+        "x": 464.765,
+        "y": 330.151
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.11_tax_difference_at_parent_rate",
+      "label": "Line 11. Subtract line 10 from line 9. If you did not enter an amount on line 7, then enter the amount from line 11 on line 13 and skip line 12a and line 12b.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Subtract line 10 from line 9. If you did not enter an amount on line 7, then enter the amount from line 11 on line 13 and skip line 12a and line 12b",
+      "position": {
+        "page": 0,
+        "x": 464.765,
+        "y": 306.152
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.12a_all_children_net_unearned_income",
+      "label": "Line 12a. Add line 5 and line 7.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12a. Add line 5 and line 7",
+      "position": {
+        "page": 0,
+        "x": 335.766,
+        "y": 282.162
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.12b_child_share_decimal",
+      "label": "Line 12b. Divide line 5 by line 12a. Enter the result as a decimal (rounded to four places).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12b. Divide line 5 by line 12a. Enter the result as a decimal (rounded to four places)",
+      "position": {
+        "page": 0,
+        "x": 470.462,
+        "y": 270.481
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.13_child_share_of_tentative_tax",
+      "label": "Line 13. Multiply line 11 by the decimal amount on line 12b.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Multiply line 11 by the decimal amount on line 12b",
+      "position": {
+        "page": 0,
+        "x": 464.773,
+        "y": 246.158
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.14_taxable_income_less_net_unearned",
+      "label": "Part III, Line 14. Subtract line 5 from line 4.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, Line 14. Subtract line 5 from line 4",
+      "position": {
+        "page": 0,
+        "x": 335.773,
+        "y": 198.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.15_tax_on_line_14",
+      "label": "Line 15. Enter the tax on the amount on line 14 based on the child's filing status. Use the tax table or tax rate schedules found in the 2025 instructions for Form 540. See instructions for Form 540N R filers.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Enter the tax on the amount on line 14 based on the child's filing status. Use the tax table or tax rate schedules found in the 2025 instructions for Form 540. See instructions for Form 540N R filers",
+      "position": {
+        "page": 0,
+        "x": 464.77,
+        "y": 174.162
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.16_tax_at_parent_rate_total",
+      "label": "Line 16. Add line 13 and line 15.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Add line 13 and line 15",
+      "position": {
+        "page": 0,
+        "x": 464.77,
+        "y": 150.164
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.17_tax_on_line_4",
+      "label": "Line 17. Enter the tax on the amount on line 4 based on the child's filing status. Use the tax table or tax rate schedules found in the 2025 instructions for Form 540. See instructions for Form 540N R filers.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Enter the tax on the amount on line 4 based on the child's filing status. Use the tax table or tax rate schedules found in the 2025 instructions for Form 540. See instructions for Form 540N R filers",
+      "position": {
+        "page": 0,
+        "x": 464.77,
+        "y": 126.133
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.18_child_tax",
+      "label": "Line 18. Compare the amounts on line 16 and line 17. Enter the larger of the two amounts here and on the child's Form 540, line 31. Also, check the box labeled \"F T B 3800\" on the child's tax return. See instructions for Form 540N R filers.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Compare the amounts on line 16 and line 17. Enter the larger of the two amounts here and on the child's Form 540, line 31. Also, check the box labeled \"F T B 3800\" on the child's tax return. See instructions for Form 540N R filers",
+      "position": {
+        "page": 0,
+        "x": 464.77,
+        "y": 90.1374
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3800-ca/blank.pdf",
+    "ingestedAt": "2026-11-20T15:43:39.966Z",
+    "totalFields": 24,
+    "skipped": 0,
+    "catalogEntries": 24
+  }
+}

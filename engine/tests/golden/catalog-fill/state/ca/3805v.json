@@ -1,0 +1,2004 @@
+{
+  "formId": "form-3805v",
+  "fieldCount": 222,
+  "entries": [
+    {
+      "fieldId": "form-3805v.0.header.fein",
+      "widgets": [
+        {
+          "widgetName": "Federal Employer Identification Number (F E I N) (9 digits)",
+          "text": "T-197VK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Names as shown on tax return",
+          "text": "T-1SQJZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.1_adjusted_gross_income",
+      "widgets": [
+        {
+          "widgetName": "Part I, Section A, Line 1. Adjusted gross income from 2025 Form 540, line 17. If negative, use brackets. Estates and Trusts, begin on line 3",
+          "text": "9,939"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.10_nonbusiness_income_total",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Add line 7 and line 9",
+          "text": "5,760"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.11_nonbusiness_deductions_excess",
+      "widgets": [
+        {
+          "widgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0",
+          "text": "3,290"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.12_nonbusiness_income_excess",
+      "widgets": [
+        {
+          "widgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0",
+          "text": "2,795"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.13_business_capital_losses",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Business capital losses",
+          "text": "7,508"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.14_business_capital_gains",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Business capital gains",
+          "text": "5,954"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.15_income_against_business_losses",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Add line 12 and line 14",
+          "text": "6,804"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.16_business_capital_loss_excess",
+      "widgets": [
+        {
+          "widgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0. See instructions",
+          "text": "7,587"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.17_capital_loss_excess_total",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Add line 6 and line 16",
+          "text": "4,826"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.18_schedule_d_line_8_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Enter the loss, if any, from Schedule D (540), line 8. Estates and Trusts, enter the loss, if any, from Schedule D (541), line 9, column (c). If you do not have a loss on that line, skip line 18 through line 21 and enter on line 22 the amount from line 17",
+          "text": "5,032"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.19_schedule_d_line_9_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Enter the loss, if any, from Schedule D (540), line 9. Estates and Trusts, enter the loss, if any, from Schedule D (541), line 10. Enter as a positive number",
+          "text": "6,812"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.2_itemized_or_standard_deduction",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Itemized deductions or standard deduction from 2025 Form 540, line 18",
+          "text": "4,774"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.20_line_18_over_line_19",
+      "widgets": [
+        {
+          "widgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0",
+          "text": "6,808"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.21_line_19_over_line_18",
+      "widgets": [
+        {
+          "widgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0",
+          "text": "1,072"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.22_capital_loss_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0",
+          "text": "2,967"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.23_prior_year_nol_carryovers",
+      "widgets": [
+        {
+          "widgetName": "Line 23. N O L and disaster loss carryovers from prior years. See instructions",
+          "text": "9,378"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.24_total_adjustments",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Add lines 11, 21, 22, and 23",
+          "text": "3,104"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.25_current_year_nol",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. You do not have a current year N O L to carryover. See instructions",
+          "text": "7,386"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.3a_agi_less_deductions",
+      "widgets": [
+        {
+          "widgetName": "Line 3a. Combine line 1 and line 2. (Estates and Trusts, enter taxable income, see instructions.) If negative, use brackets. If positive, enter 0 here and on line 25. Do not complete the rest of Section A. You do not have a current year N O L. Complete Part II and Part III if you have a carryover from prior years",
+          "text": "6,067"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.3b_declared_disaster_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number",
+          "text": "2,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.3c_loss_without_disaster_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4. If zero or more, do not complete the rest of Part I. Enter the amount from line 3b, if any, in Part III, line 3, column (d) and complete Part II and Part III as instructed",
+          "text": "5,851"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.4_nonbusiness_capital_losses",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Nonbusiness capital losses",
+          "text": "8,850"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.5_nonbusiness_capital_gains",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Nonbusiness capital gains",
+          "text": "8,668"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.6_nonbusiness_capital_loss_excess",
+      "widgets": [
+        {
+          "widgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0",
+          "text": "8,109"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.7_nonbusiness_capital_gain_excess",
+      "widgets": [
+        {
+          "widgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0",
+          "text": "2,469"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.8_nonbusiness_deductions",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Nonbusiness deductions. See instructions",
+          "text": "6,691"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.0.part1.9_nonbusiness_income_other",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Nonbusiness income other than capital gains. See instructions",
+          "text": "5,680"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.1_adjusted_gross_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "Section B, Line 1. Adjusted gross income. See instructions. If negative, use brackets, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "3,998"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.1_adjusted_gross_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "6,387"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.1_adjusted_gross_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "1,760"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.1_adjusted_gross_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "6,132"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.1_adjusted_gross_income_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (e) Total. Combine columns (c) and (d)",
+          "text": "2,853"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.10_add_lines_7_and_9_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Add line 7 and line 9, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "4,118"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.10_add_lines_7_and_9_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Add line 7 and line 9, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "5,457"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.10_add_lines_7_and_9_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Add line 7 and line 9, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "9,631"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.10_add_lines_7_and_9_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Add line 7 and line 9, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "2,660"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.10_add_lines_7_and_9_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Add line 7 and line 9, (e) Total. Combine columns (c) and (d)",
+          "text": "4,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.11_nonbusiness_deductions_excess_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "9,444"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.11_nonbusiness_deductions_excess_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "9,605"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.11_nonbusiness_deductions_excess_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "8,775"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.11_nonbusiness_deductions_excess_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "9,131"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.11_nonbusiness_deductions_excess_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+          "text": "7,955"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.12_nonbusiness_income_excess_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "7,234"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.12_nonbusiness_income_excess_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "5,807"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.12_nonbusiness_income_excess_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "8,583"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.12_nonbusiness_income_excess_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "1,960"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.12_nonbusiness_income_excess_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+          "text": "4,990"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.13_business_capital_losses_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Business capital losses, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "9,661"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.13_business_capital_losses_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Business capital losses, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "1,784"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.13_business_capital_losses_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Business capital losses, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "9,465"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.13_business_capital_losses_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Business capital losses, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "1,913"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.13_business_capital_losses_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Business capital losses, (e) Total. Combine columns (c) and (d)",
+          "text": "9,020"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.14_business_capital_gains_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Business capital gains, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "9,284"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.14_business_capital_gains_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Business capital gains, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "8,588"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.14_business_capital_gains_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Business capital gains, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "7,524"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.14_business_capital_gains_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Business capital gains, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "6,376"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.14_business_capital_gains_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Business capital gains, (e) Total. Combine columns (c) and (d)",
+          "text": "9,117"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.15_add_lines_12_and_14_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Add line 12 and line 14, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "1,423"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.15_add_lines_12_and_14_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Add line 12 and line 14, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "8,411"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.15_add_lines_12_and_14_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Add line 12 and line 14, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "1,860"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.15_add_lines_12_and_14_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Add line 12 and line 14, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "6,865"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.15_add_lines_12_and_14_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Add line 12 and line 14, (e) Total. Combine columns (c) and (d)",
+          "text": "2,367"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.16_business_capital_loss_excess_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "5,512"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.16_business_capital_loss_excess_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "4,677"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.16_business_capital_loss_excess_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "6,907"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.16_business_capital_loss_excess_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "1,325"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.16_business_capital_loss_excess_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+          "text": "2,845"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.17_add_lines_6_and_16_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Add line 6 and line 16, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "7,611"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.17_add_lines_6_and_16_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Add line 6 and line 16, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "3,017"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.17_add_lines_6_and_16_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Add line 6 and line 16, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "3,458"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.17_add_lines_6_and_16_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Add line 6 and line 16, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "6,859"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.17_add_lines_6_and_16_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Add line 6 and line 16, (e) Total. Combine columns (c) and (d)",
+          "text": "6,389"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.18_schedule_d_line_4_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "7,933"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.18_schedule_d_line_4_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "4,244"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.18_schedule_d_line_4_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "5,909"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.18_schedule_d_line_4_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "6,249"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.18_schedule_d_line_4_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (e) Total. Combine columns (c) and (d)",
+          "text": "2,939"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.19_schedule_d_line_5_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "3,319"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.19_schedule_d_line_5_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "5,327"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.19_schedule_d_line_5_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "7,277"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.19_schedule_d_line_5_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "1,245"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.19_schedule_d_line_5_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (e) Total. Combine columns (c) and (d)",
+          "text": "7,123"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.2_itemized_or_standard_deduction_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Itemized deductions or standard deduction. See instructions, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "1,046"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.2_itemized_or_standard_deduction_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Itemized deductions or standard deduction. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "3,985"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.2_itemized_or_standard_deduction_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Itemized deductions or standard deduction. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "5,727"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.2_itemized_or_standard_deduction_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Itemized deductions or standard deduction. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "1,385"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.2_itemized_or_standard_deduction_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Itemized deductions or standard deduction. See instructions, (e) Total. Combine columns (c) and (d)",
+          "text": "5,338"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.20_line_18_over_line_19_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "9,806"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.20_line_18_over_line_19_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "4,089"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.20_line_18_over_line_19_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "2,719"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.20_line_18_over_line_19_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "8,475"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.20_line_18_over_line_19_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+          "text": "1,180"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.21_line_19_over_line_18_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "8,482"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.21_line_19_over_line_18_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "4,076"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.21_line_19_over_line_18_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "1,317"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.21_line_19_over_line_18_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "1,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.21_line_19_over_line_18_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+          "text": "7,028"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.22_capital_loss_adjustment_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "2,619"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.22_capital_loss_adjustment_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "2,695"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.22_capital_loss_adjustment_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "8,328"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.22_capital_loss_adjustment_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "2,200"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.22_capital_loss_adjustment_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (e) Total. Combine columns (c) and (d)",
+          "text": "7,126"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.23_nol_disaster_loss_carryovers_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 23. N O L and disaster loss carryovers from prior years, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "8,281"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.23_nol_disaster_loss_carryovers_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 23. N O L and disaster loss carryovers from prior years, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "6,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.23_nol_disaster_loss_carryovers_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 23. N O L and disaster loss carryovers from prior years, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "5,254"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.23_nol_disaster_loss_carryovers_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 23. N O L and disaster loss carryovers from prior years, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "1,833"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.23_nol_disaster_loss_carryovers_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 23. N O L and disaster loss carryovers from prior years, (e) Total. Combine columns (c) and (d)",
+          "text": "4,394"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.24_add_lines_11_21_22_23_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Add lines 11, 21, 22, 23, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "4,557"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.24_add_lines_11_21_22_23_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Add lines 11, 21, 22, 23, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "6,481"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.24_add_lines_11_21_22_23_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Add lines 11, 21, 22, 23, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "8,165"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.24_add_lines_11_21_22_23_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Add lines 11, 21, 22, 23, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "8,185"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.24_add_lines_11_21_22_23_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 24. Add lines 11, 21, 22, 23, (e) Total. Combine columns (c) and (d)",
+          "text": "6,559"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.25_current_year_nol_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "1,007"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.25_current_year_nol_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "8,639"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.25_current_year_nol_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "4,142"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.25_current_year_nol_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "9,057"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.25_current_year_nol_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (e) Total. Combine columns (c) and (d)",
+          "text": "5,420"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3a_combine_lines_1_and_2_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 3a. Combine line 1 and line 2. See instructions, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "8,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3a_combine_lines_1_and_2_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 3a. Combine line 1 and line 2. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "3,155"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3a_combine_lines_1_and_2_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 3a. Combine line 1 and line 2. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "3,635"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3a_combine_lines_1_and_2_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 3a. Combine line 1 and line 2. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "3,279"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3a_combine_lines_1_and_2_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 3a. Combine line 1 and line 2. See instructions, (e) Total. Combine columns (c) and (d)",
+          "text": "3,654"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3b_declared_disaster_loss_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "8,938"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3b_declared_disaster_loss_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "8,273"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3b_declared_disaster_loss_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "9,155"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3b_declared_disaster_loss_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "4,109"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3b_declared_disaster_loss_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (e) Total. Combine columns (c) and (d)",
+          "text": "7,051"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3c_combine_lines_3a_and_3b_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "5,173"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3c_combine_lines_3a_and_3b_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "4,055"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3c_combine_lines_3a_and_3b_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "5,970"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3c_combine_lines_3a_and_3b_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "9,685"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3c_combine_lines_3a_and_3b_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (e) Total. Combine columns (c) and (d)",
+          "text": "4,447"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.4_nonbusiness_capital_losses_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Nonbusiness capital losses, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "7,396"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.4_nonbusiness_capital_losses_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Nonbusiness capital losses, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "7,381"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.4_nonbusiness_capital_losses_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Nonbusiness capital losses, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "6,906"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.4_nonbusiness_capital_losses_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Nonbusiness capital losses, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "1,733"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.4_nonbusiness_capital_losses_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Nonbusiness capital losses, (e) Total. Combine columns (c) and (d)",
+          "text": "8,401"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.5_nonbusiness_capital_gains_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Nonbusiness capital gains, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "7,592"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.5_nonbusiness_capital_gains_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Nonbusiness capital gains, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "1,280"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.5_nonbusiness_capital_gains_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Nonbusiness capital gains, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "4,287"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.5_nonbusiness_capital_gains_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Nonbusiness capital gains, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "1,007"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.5_nonbusiness_capital_gains_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Nonbusiness capital gains, (e) Total. Combine columns (c) and (d)",
+          "text": "5,473"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.6_nonbusiness_capital_loss_excess_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "3,650"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.6_nonbusiness_capital_loss_excess_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "1,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.6_nonbusiness_capital_loss_excess_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "8,702"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.6_nonbusiness_capital_loss_excess_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "7,348"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.6_nonbusiness_capital_loss_excess_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+          "text": "6,551"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.7_nonbusiness_capital_gain_excess_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "8,658"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.7_nonbusiness_capital_gain_excess_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "5,507"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.7_nonbusiness_capital_gain_excess_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "1,204"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.7_nonbusiness_capital_gain_excess_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "2,709"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.7_nonbusiness_capital_gain_excess_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+          "text": "2,958"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.8_nonbusiness_deductions_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Nonbusiness deductions, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "1,701"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.8_nonbusiness_deductions_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Nonbusiness deductions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "5,896"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.8_nonbusiness_deductions_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Nonbusiness deductions, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "9,745"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.8_nonbusiness_deductions_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Nonbusiness deductions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "6,568"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.8_nonbusiness_deductions_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Nonbusiness deductions, (e) Total. Combine columns (c) and (d)",
+          "text": "4,310"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.9_nonbusiness_income_other_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Nonbusiness income other than capital gains, (a) Enter total amounts as if you were a C A resident for entire year",
+          "text": "5,490"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.9_nonbusiness_income_other_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Nonbusiness income other than capital gains, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+          "text": "9,745"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.9_nonbusiness_income_other_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Nonbusiness income other than capital gains, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+          "text": "8,895"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.9_nonbusiness_income_other_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Nonbusiness income other than capital gains, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+          "text": "3,466"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.9_nonbusiness_income_other_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Nonbusiness income other than capital gains, (e) Total. Combine columns (c) and (d)",
+          "text": "8,529"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part2.1_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 1. Taxable income. See instructions",
+          "text": "7,494"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part2.2_capital_loss_deduction",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Capital loss deduction included in line 1",
+          "text": "2,225"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part2.3_disaster_loss_carryover",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Disaster loss carryover included in line 1",
+          "text": "5,006"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part2.4_nol_carryover",
+      "widgets": [
+        {
+          "widgetName": "Line 4. N O L carryover included in line 1",
+          "text": "6,174"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part2.5_itemized_deduction_adjustments",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Adjustments to itemized deductions. See instructions",
+          "text": "9,656"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part2.6_modified_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "Line 6. M T I. Combine line 1 through line 5. If line 6 is zero or less, enter 0",
+          "text": "3,483"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.1_mti_available_balance_col_g",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 1.  MT I from Part II, line 6. If your net business income is $1,000,000 or more and modified adjusted gross income (AGI) is $1,000,000 or more for the taxable year, see instructions, (g) Available balance",
+          "text": "3,385"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_a",
+      "widgets": [
+        {
+          "widgetName": "Prior Year N O Ls, Line 2. (a) Year of loss (yyyy) (1)",
+          "text": "4915"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (b) Code See instructions (1)",
+          "text": "T-8QAVV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (c) Type of N O L See below (1)",
+          "text": "T-9CB9J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (d) Initial loss (1)",
+          "text": "5,386"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (e) Carryover from 2024 (1)",
+          "text": "8,851"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (f) Amount used in 2025 (1)",
+          "text": "1,759"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (g) Available balance (1)",
+          "text": "5,571"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_h",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (1)",
+          "text": "6,077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (a) Year of loss (yyyy) (2)",
+          "text": "0358"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (b) Code See instructions (2)",
+          "text": "T-X02PR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (c) Type of N O L See below (2)",
+          "text": "T-50Y5T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (d) Initial loss (2)",
+          "text": "2,296"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (e) Carryover from 2024 (2)",
+          "text": "5,822"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (f) Amount used in 2025 (2)",
+          "text": "3,799"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (g) Available balance (2)",
+          "text": "8,118"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_h",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (2)",
+          "text": "6,984"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (a) Year of loss (yyyy) (3)",
+          "text": "9553"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (b) Code See instructions (3)",
+          "text": "T-7XTR9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (c) Type of N O L See below (3)",
+          "text": "T-Q50FS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (d) Initial loss (3)",
+          "text": "7,679"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (e) Carryover from 2024 (3)",
+          "text": "6,399"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (f) Amount used in 2025 (3)",
+          "text": "2,615"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (g) Available balance (3)",
+          "text": "7,958"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_h",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (3)",
+          "text": "7,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (a) Year of loss (yyyy) (4)",
+          "text": "3598"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (b) Code See instructions (4)",
+          "text": "T-T33WK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (c) Type of N O L See below (4)",
+          "text": "T-1GKYH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (d) Initial loss (4)",
+          "text": "8,592"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (e) Carryover from 2024 (4)",
+          "text": "3,952"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (f) Amount used in 2025 (4)",
+          "text": "1,378"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_g",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (g) Available balance (4)",
+          "text": "9,697"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_h",
+      "widgets": [
+        {
+          "widgetName": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (4)",
+          "text": "7,794"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.3_current_year_disaster_nol_col_b",
+      "widgets": [
+        {
+          "widgetName": "Current Year N O Ls, Line 3. (b) Code See instructions",
+          "text": "T-1YA2J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.3_current_year_disaster_nol_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (d) Initial loss",
+          "text": "9,292"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.3_current_year_disaster_nol_col_f",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (f) Amount used in 2025",
+          "text": "9,731"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.3_current_year_disaster_nol_col_h",
+      "widgets": [
+        {
+          "widgetName": "Line 3. (h) Column (d) minus column (f) See instructions",
+          "text": "6,468"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row1_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (b) Code See instructions (1)",
+          "text": "T-1EAY1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row1_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (c) Type of N O L See below (1)",
+          "text": "T-12UN3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row1_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (d) Initial loss (1)",
+          "text": "5,254"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row1_col_h",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (h) Column (d) minus column (f) See instructions (1)",
+          "text": "3,324"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row2_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (b) Code See instructions (2)",
+          "text": "T-1JK19"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row2_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (c) Type of N O L See below (2)",
+          "text": "T-13DC7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row2_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (d) Initial loss (2)",
+          "text": "7,476"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row2_col_h",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (h) Column (d) minus column (f) See instructions (2)",
+          "text": "3,418"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row3_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (b) Code See instructions (3)",
+          "text": "T-1KB5Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row3_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (c) Type of N O L See below (3)",
+          "text": "T-LYCYX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row3_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (d) Initial loss (3)",
+          "text": "7,396"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row3_col_h",
+      "widgets": [
+        {
+          "widgetName": "Line 4. (h) Column (d) minus column (f) See instructions (3)",
+          "text": "9,533"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.5_nol_carryover",
+      "widgets": [
+        {
+          "widgetName": "Line 5. N O L carryover. Add the carryover amounts in column (h) that are not the result of a disaster loss",
+          "text": "3,979"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805v.2.part3.6_disaster_loss_carryover",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Disaster loss carryover. Enter the total loss carryover amounts in column (h) that are the result of disaster losses",
+          "text": "3,689"
+        }
+      ]
+    }
+  ]
+}

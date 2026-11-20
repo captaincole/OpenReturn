@@ -1,0 +1,2031 @@
+{
+  "formId": "form-5870a",
+  "fieldCount": 225,
+  "entries": [
+    {
+      "fieldId": "form-5870a.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1001",
+          "text": "T-M5HCE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.header.number_of_trusts",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1009",
+          "text": "1,052"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.header.ssn_or_itin",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1002",
+          "text": "T-1KET0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.header.trust_address",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1005",
+          "text": "T-2CURO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.header.trust_city",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1006",
+          "text": "T-1UKZI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.header.trust_fein",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1004",
+          "text": "T-1I8KW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.header.trust_name",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1003",
+          "text": "T-1KEMB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.header.trust_state",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1007",
+          "text": "92"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.header.trust_zip",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1008",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.1_current_distribution_earlier_years",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1010",
+          "text": "7,677"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.10_average_amount_recomputing_tax",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1019",
+          "text": "9,078"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.11_taxable_income_2020",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1024",
+          "text": "7,327"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.11_taxable_income_2021",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1023",
+          "text": "5,068"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.11_taxable_income_2022",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1022",
+          "text": "8,358"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.11_taxable_income_2023",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1021",
+          "text": "7,042"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.11_taxable_income_2024",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1020",
+          "text": "5,694"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.12_taxable_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1028",
+          "text": "2,371"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.12_taxable_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1029",
+          "text": "7,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.12_taxable_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1030",
+          "text": "4,630"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.13_amount_from_line_10_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1031",
+          "text": "6,546"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.13_amount_from_line_10_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1032",
+          "text": "8,362"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.13_amount_from_line_10_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1033",
+          "text": "8,667"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.14_recomputed_taxable_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1034",
+          "text": "8,735"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.14_recomputed_taxable_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1035",
+          "text": "1,804"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.14_recomputed_taxable_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1036",
+          "text": "6,248"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.15_tax_on_line_14_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1037",
+          "text": "9,228"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.15_tax_on_line_14_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1038",
+          "text": "9,295"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.15_tax_on_line_14_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1039",
+          "text": "4,974"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.16_tax_before_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1040",
+          "text": "2,719"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.16_tax_before_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1041",
+          "text": "2,062"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.16_tax_before_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1042",
+          "text": "7,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.17_additional_tax_before_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1043",
+          "text": "5,215"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.17_additional_tax_before_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1044",
+          "text": "7,233"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.17_additional_tax_before_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1045",
+          "text": "7,745"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.18_tax_credit_adjustment_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1046",
+          "text": "1,903"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.18_tax_credit_adjustment_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1047",
+          "text": "4,686"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.18_tax_credit_adjustment_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1048",
+          "text": "9,432"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.19_see_instructions_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1049",
+          "text": "2,892"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.19_see_instructions_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1050",
+          "text": "6,348"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.19_see_instructions_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1051",
+          "text": "5,768"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.2_taxes_imposed_on_trust",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1011",
+          "text": "3,855"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.20_amt_adjustments_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1052",
+          "text": "8,906"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.20_amt_adjustments_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1053",
+          "text": "8,996"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.20_amt_adjustments_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1054",
+          "text": "1,175"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.21_combine_lines_19_20_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1055",
+          "text": "2,572"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.21_combine_lines_19_20_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1056",
+          "text": "5,881"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.21_combine_lines_19_20_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1057",
+          "text": "8,368"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.22_total_line_21_columns",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1058",
+          "text": "2,292"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.23_line_22_divided_by_3",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1059",
+          "text": "7,149"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.24_line_23_times_years",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1060",
+          "text": "8,556"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.25_amount_from_line_2",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1061",
+          "text": "7,365"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.26_partial_tax_accumulation_distribution",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1062",
+          "text": "1,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.3_total",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1012",
+          "text": "6,514"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.4_tax_exempt_interest",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1013",
+          "text": "5,368"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.5_taxable_part",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1014",
+          "text": "6,191"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.6_earlier_years_distributed",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1015",
+          "text": "3,450"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.7_average_annual_amount",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1016",
+          "text": "2,889"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.8_line_7_times_25_percent",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1017",
+          "text": "9,206"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.9_earlier_years_taken_into_account",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1018",
+          "text": "9,202"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.section_b_year_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1025",
+          "text": "3801"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.section_b_year_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1026",
+          "text": "6488"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.0.part1.section_b_year_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 1027",
+          "text": "3293"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.1_income_accumulated_five_or_more",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2001",
+          "text": "3,363"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.10_tax_credit_adjustment_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2038",
+          "text": "7,765"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.10_tax_credit_adjustment_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2039",
+          "text": "6,691"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.10_tax_credit_adjustment_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2040",
+          "text": "2,571"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.10_tax_credit_adjustment_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2041",
+          "text": "8,258"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.10_tax_credit_adjustment_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2042",
+          "text": "1,742"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.11_additional_tax_after_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2043",
+          "text": "5,907"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.11_additional_tax_after_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2044",
+          "text": "3,328"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.11_additional_tax_after_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2045",
+          "text": "9,321"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.11_additional_tax_after_credits_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2046",
+          "text": "6,137"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.11_additional_tax_after_credits_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2047",
+          "text": "1,524"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.12_amt_adjustments_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2048",
+          "text": "5,094"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.12_amt_adjustments_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2049",
+          "text": "4,057"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.12_amt_adjustments_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2050",
+          "text": "2,689"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.12_amt_adjustments_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2051",
+          "text": "7,559"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.12_amt_adjustments_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2052",
+          "text": "2,571"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.13_additional_tax_with_amt_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2053",
+          "text": "3,717"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.13_additional_tax_with_amt_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2054",
+          "text": "5,075"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.13_additional_tax_with_amt_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2055",
+          "text": "1,683"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.13_additional_tax_with_amt_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2056",
+          "text": "7,729"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.13_additional_tax_with_amt_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2057",
+          "text": "9,904"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.14_total_additional_tax",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2058",
+          "text": "6,816"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.2_line_1_divided_by_six",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2002",
+          "text": "4,995"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.3_resident_or_part_year_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2003 RB",
+          "text": "Were you a resident or part-year resident? Check Yes or No for each year. (Answer No for nonresident years.). Column (a) 2024. Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.3_resident_or_part_year_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2004 RB",
+          "text": "Were you a resident or part-year resident? Check Yes or No for each year. (Answer No for nonresident years.). Column (b) 2023. Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.3_resident_or_part_year_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2005 RB",
+          "text": "Were you a resident or part-year resident? Check Yes or No for each year. (Answer No for nonresident years.). Column (c) 2022. Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.3_resident_or_part_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2006 RB",
+          "text": "Were you a resident or part-year resident? Check Yes or No for each year. (Answer No for nonresident years.). Column (d) 2021. Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.3_resident_or_part_year_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2007 RB",
+          "text": "Were you a resident or part-year resident? Check Yes or No for each year. (Answer No for nonresident years.). Column (e) 2020. Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.4_taxable_income_before_distribution_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2008",
+          "text": "6,378"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.4_taxable_income_before_distribution_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2009",
+          "text": "8,075"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.4_taxable_income_before_distribution_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2010",
+          "text": "6,432"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.4_taxable_income_before_distribution_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2011",
+          "text": "8,688"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.4_taxable_income_before_distribution_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2012",
+          "text": "6,963"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.5_distribution_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2013",
+          "text": "7,766"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.5_distribution_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2014",
+          "text": "6,773"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.5_distribution_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2015",
+          "text": "1,716"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.5_distribution_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2016",
+          "text": "1,675"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.5_distribution_amount_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2017",
+          "text": "5,995"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.6_recomputed_taxable_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2018",
+          "text": "3,743"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.6_recomputed_taxable_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2019",
+          "text": "5,690"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.6_recomputed_taxable_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2020",
+          "text": "3,903"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.6_recomputed_taxable_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2021",
+          "text": "1,726"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.6_recomputed_taxable_income_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2022",
+          "text": "8,845"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.7_tax_on_recomputed_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2023",
+          "text": "9,305"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.7_tax_on_recomputed_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2024",
+          "text": "4,341"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.7_tax_on_recomputed_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2025",
+          "text": "2,170"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.7_tax_on_recomputed_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2026",
+          "text": "5,500"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.7_tax_on_recomputed_income_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2027",
+          "text": "9,562"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.8_tax_before_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2028",
+          "text": "1,551"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.8_tax_before_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2029",
+          "text": "3,888"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.8_tax_before_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2030",
+          "text": "8,375"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.8_tax_before_credits_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2031",
+          "text": "7,389"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.8_tax_before_credits_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2032",
+          "text": "7,158"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.9_additional_tax_before_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2033",
+          "text": "9,130"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.9_additional_tax_before_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2034",
+          "text": "4,960"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.9_additional_tax_before_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2035",
+          "text": "1,595"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.9_additional_tax_before_credits_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2036",
+          "text": "9,056"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2a.9_additional_tax_before_credits_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2037",
+          "text": "1,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.1_income_accumulated_under_five",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2059",
+          "text": "1,710"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.10_tax_before_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2084",
+          "text": "2,201"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.10_tax_before_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2085",
+          "text": "7,483"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.10_tax_before_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2086",
+          "text": "1,227"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.10_tax_before_credits_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2087",
+          "text": "8,035"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.11_additional_tax_before_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2088",
+          "text": "3,823"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.11_additional_tax_before_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2089",
+          "text": "6,548"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.11_additional_tax_before_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2090",
+          "text": "1,026"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.11_additional_tax_before_credits_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2091",
+          "text": "5,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.12_tax_credit_adjustment_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2092",
+          "text": "2,037"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.12_tax_credit_adjustment_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2093",
+          "text": "7,676"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.12_tax_credit_adjustment_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2094",
+          "text": "6,388"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.12_tax_credit_adjustment_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2095",
+          "text": "4,850"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.13_additional_tax_after_credits_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2096",
+          "text": "9,024"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.13_additional_tax_after_credits_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2097",
+          "text": "9,789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.13_additional_tax_after_credits_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2098",
+          "text": "8,686"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.13_additional_tax_after_credits_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2099",
+          "text": "9,622"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.14_amt_adjustments_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2100",
+          "text": "5,037"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.14_amt_adjustments_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2101",
+          "text": "1,884"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.14_amt_adjustments_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2102",
+          "text": "7,176"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.14_amt_adjustments_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2103",
+          "text": "6,905"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.15_additional_tax_with_amt_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2104",
+          "text": "8,339"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.15_additional_tax_with_amt_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2105",
+          "text": "3,226"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.15_additional_tax_with_amt_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2106",
+          "text": "1,761"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.15_additional_tax_with_amt_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2107",
+          "text": "4,359"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.16_total_additional_tax",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2108",
+          "text": "8,796"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.2a_years_trust_accumulated",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2060",
+          "text": "3,312"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.3_averaging_factor_total",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2062",
+          "text": "9,972"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.4_line_1_divided_by_line_3",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2063",
+          "text": "2,046"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.5_resident_or_part_year_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2064 RB",
+          "text": "Were you a resident or part-year resident? Check Yes or No for each year. (Answer No for nonresident years.). Column (a) 2024. Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.5_resident_or_part_year_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2065 RB",
+          "text": "Were you a resident or part-year resident? Check Yes or No for each year. (Answer No for nonresident years.). Column (b) 2023. Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.5_resident_or_part_year_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2066 RB",
+          "text": "Were you a resident or part-year resident? Check Yes or No for each year. (Answer No for nonresident years.). Column (c) 2022. Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.5_resident_or_part_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2067 RB",
+          "text": "Were you a resident or part-year resident? Check Yes or No for each year. (Answer No for nonresident years.). Column (d) 2021. Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.6_taxable_income_before_distribution_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2068",
+          "text": "5,904"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.6_taxable_income_before_distribution_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2069",
+          "text": "2,420"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.6_taxable_income_before_distribution_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2070",
+          "text": "1,431"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.6_taxable_income_before_distribution_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2071",
+          "text": "6,500"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.7_distribution_amount_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2072",
+          "text": "2,992"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.7_distribution_amount_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2073",
+          "text": "1,306"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.7_distribution_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2074",
+          "text": "9,468"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.7_distribution_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2075",
+          "text": "6,439"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.8_recomputed_taxable_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2076",
+          "text": "3,288"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.8_recomputed_taxable_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2077",
+          "text": "4,408"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.8_recomputed_taxable_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2078",
+          "text": "3,443"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.8_recomputed_taxable_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2079",
+          "text": "8,340"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.9_tax_on_recomputed_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2080",
+          "text": "8,084"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.9_tax_on_recomputed_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2081",
+          "text": "3,997"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.9_tax_on_recomputed_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2082",
+          "text": "8,360"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.1.part2b.9_tax_on_recomputed_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 2083",
+          "text": "9,503"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.1_recomputed_taxable_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3006",
+          "text": "7,971"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.1_recomputed_taxable_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3007",
+          "text": "8,909"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.1_recomputed_taxable_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3008",
+          "text": "9,551"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.1_recomputed_taxable_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3009",
+          "text": "1,498"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.1_recomputed_taxable_income_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3010",
+          "text": "2,016"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.2_income_over_1000000_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3011",
+          "text": "3,774"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.2_income_over_1000000_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3012",
+          "text": "2,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.2_income_over_1000000_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3013",
+          "text": "7,505"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.2_income_over_1000000_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3014",
+          "text": "1,396"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.2_income_over_1000000_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3015",
+          "text": "4,203"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.3_one_percent_tax_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3016",
+          "text": "8,871"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.3_one_percent_tax_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3017",
+          "text": "9,664"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.3_one_percent_tax_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3018",
+          "text": "8,687"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.3_one_percent_tax_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3019",
+          "text": "8,021"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.3_one_percent_tax_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3020",
+          "text": "6,553"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.4_bhst_paid_before_distribution_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3021",
+          "text": "8,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.4_bhst_paid_before_distribution_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3022",
+          "text": "6,732"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.4_bhst_paid_before_distribution_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3023",
+          "text": "7,152"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.4_bhst_paid_before_distribution_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3024",
+          "text": "9,377"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.4_bhst_paid_before_distribution_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3025",
+          "text": "3,643"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.5_additional_bhst_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3026",
+          "text": "7,110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.5_additional_bhst_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3027",
+          "text": "3,998"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.5_additional_bhst_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3028",
+          "text": "5,531"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.5_additional_bhst_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3029",
+          "text": "7,704"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.5_additional_bhst_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3030",
+          "text": "3,524"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.6_total_bhst",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3031",
+          "text": "3,731"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.tax_year_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3001",
+          "text": "0763"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.tax_year_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3002",
+          "text": "2881"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.tax_year_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3003",
+          "text": "7883"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.tax_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3004",
+          "text": "8879"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_a.tax_year_col_e",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3005",
+          "text": "9650"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.1_recomputed_taxable_income_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3036",
+          "text": "4,327"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.1_recomputed_taxable_income_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3037",
+          "text": "8,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.1_recomputed_taxable_income_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3038",
+          "text": "1,383"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.1_recomputed_taxable_income_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3039",
+          "text": "3,852"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.2_income_over_1000000_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3040",
+          "text": "2,160"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.2_income_over_1000000_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3041",
+          "text": "8,656"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.2_income_over_1000000_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3042",
+          "text": "4,642"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.2_income_over_1000000_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3043",
+          "text": "8,604"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.3_one_percent_tax_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3044",
+          "text": "8,953"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.3_one_percent_tax_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3045",
+          "text": "5,287"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.3_one_percent_tax_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3046",
+          "text": "1,660"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.3_one_percent_tax_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3047",
+          "text": "9,332"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.4_bhst_paid_before_distribution_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3048",
+          "text": "4,873"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.4_bhst_paid_before_distribution_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3049",
+          "text": "9,433"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.4_bhst_paid_before_distribution_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3050",
+          "text": "9,666"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.4_bhst_paid_before_distribution_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3051",
+          "text": "4,046"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.5_additional_bhst_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3052",
+          "text": "1,377"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.5_additional_bhst_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3053",
+          "text": "5,402"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.5_additional_bhst_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3054",
+          "text": "9,917"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.5_additional_bhst_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3055",
+          "text": "8,550"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.6_total_bhst",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3056",
+          "text": "3,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.tax_year_col_a",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3032",
+          "text": "8703"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.tax_year_col_b",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3033",
+          "text": "1206"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.tax_year_col_c",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3034",
+          "text": "9666"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-5870a.2.part3_section_b.tax_year_col_d",
+      "widgets": [
+        {
+          "widgetName": "5870A form 3035",
+          "text": "1333"
+        }
+      ]
+    }
+  ]
+}

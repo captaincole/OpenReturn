@@ -1,0 +1,861 @@
+{
+  "formId": "form-3506",
+  "fieldCount": 95,
+  "entries": [
+    {
+      "fieldId": "form-3506.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1000",
+          "text": "T-FSYA2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1001",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.10_line_8_times_line_9",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1056",
+          "text": "2,812"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.11_prior_year_expenses_credit",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1057",
+          "text": "9,880"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.12_child_dependent_care_credit",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1058",
+          "text": "2,146"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1a_care_provider_name_provider1",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1014",
+          "text": "T-1TCU2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1a_care_provider_name_provider2",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1021",
+          "text": "T-XZEAK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1b_care_provider_address_provider1",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1015",
+          "text": "T-UVL2V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1b_care_provider_address_provider2",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1022",
+          "text": "T-7LF8U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1c_care_provider_telephone_provider1",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1016",
+          "text": "555-123-4567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1c_care_provider_telephone_provider2",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1023",
+          "text": "555-123-4567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1d_person_or_organization_provider1",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1017 RB",
+          "text": "Person\r."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1d_person_or_organization_provider2",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1024 RB",
+          "text": "Organization\r."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1e_identification_number_provider1",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1018",
+          "text": "T-A1TEG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1e_identification_number_provider2",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1025",
+          "text": "T-4DFCH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1f_address_where_care_provided_provider1",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1019",
+          "text": "T-BBJSC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1f_address_where_care_provided_provider2",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1026",
+          "text": "T-TC6CD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1g_amount_paid_for_care_provider1",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1020",
+          "text": "4,445"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1g_amount_paid_for_care_provider2",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1027",
+          "text": "3,626"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_date_of_birth_col_c",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1031",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_disabled_col_c",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1032 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_first_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1028",
+          "text": "T-18L1Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_last_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1029",
+          "text": "T-1W9H7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_physical_custody_percentage_col_d",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1033",
+          "text": "786"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_qualified_expenses_col_e",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1034",
+          "text": "5,521"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_ssn_col_b",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1030",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_date_of_birth_col_c",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1038",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_disabled_col_c",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1039 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_first_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1035",
+          "text": "T-BP4NC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_last_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1036",
+          "text": "T-SGCTG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_physical_custody_percentage_col_d",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1040",
+          "text": "793"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_qualified_expenses_col_e",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1041",
+          "text": "3,564"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_ssn_col_b",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1037",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_date_of_birth_col_c",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1045",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_disabled_col_c",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1046 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_first_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1042",
+          "text": "T-5L0ZZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_last_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1043",
+          "text": "T-1UONB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_physical_custody_percentage_col_d",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1047",
+          "text": "692"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_qualified_expenses_col_e",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1048",
+          "text": "4,694"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_ssn_col_b",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1044",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.3_total_qualified_expenses",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1049",
+          "text": "7,009"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.4_your_earned_income",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1050",
+          "text": "1,779"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.5_spouse_rdp_earned_income",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1051",
+          "text": "3,453"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.6_smallest_of_lines_3_4_5",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1052",
+          "text": "6,598"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.7_federal_credit_decimal_amount",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1053",
+          "text": "60"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.8_line_6_times_line_7",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1054",
+          "text": "1,284"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.9_california_credit_decimal_amount",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1055",
+          "text": "21"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row1_amount_left",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1003",
+          "text": "2,895"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row1_amount_right",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1005",
+          "text": "7,217"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row1_source_of_income_left",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1002",
+          "text": "T-T86WL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row1_source_of_income_right",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1004",
+          "text": "T-1S6QJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row2_amount_left",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1007",
+          "text": "4,893"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row2_amount_right",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1009",
+          "text": "2,667"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row2_source_of_income_left",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1006",
+          "text": "T-10RT2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row2_source_of_income_right",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1008",
+          "text": "T-1QPTZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row3_amount_left",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1011",
+          "text": "4,331"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row3_amount_right",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1013",
+          "text": "2,815"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row3_source_of_income_left",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1010",
+          "text": "T-A7O7K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.part1.row3_source_of_income_right",
+      "widgets": [
+        {
+          "widgetName": "3506 - 1012",
+          "text": "T-1ER90"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.13_dependent_care_benefits_received",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2001",
+          "text": "7,813"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.14_carryover_used_grace_period",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2002",
+          "text": "4,804"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.15_forfeited_or_carried_forward",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2003",
+          "text": "2,276"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.16_combined_benefits",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2004",
+          "text": "7,859"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.17_qualified_expenses_incurred",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2005",
+          "text": "1,919"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.18_smaller_of_line_16_or_17",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2006",
+          "text": "6,877"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.19_your_earned_income",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2007",
+          "text": "5,541"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.20_spouse_earned_income",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2008",
+          "text": "8,432"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.21_smallest_of_line_18_19_20",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2009",
+          "text": "8,087"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.22_exclusion_limit",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2010",
+          "text": "7,223"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.23_benefits_from_own_business",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2011",
+          "text": "8,528"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.24_line_16_minus_line_23",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2012",
+          "text": "1,522"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.25_deductible_benefits",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2013",
+          "text": "2,435"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.26_excluded_benefits",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2014",
+          "text": "2,971"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.27_taxable_benefits",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2015",
+          "text": "5,686"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.28_expense_limit",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2016",
+          "text": "7,375"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.29_deductible_plus_excluded_benefits",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2017",
+          "text": "3,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.30_limit_minus_benefits",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2018",
+          "text": "3,741"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.31_total_column_e_expenses",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2019",
+          "text": "1,125"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.32_federal_form_2441_line_31",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2020",
+          "text": "3,935"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.line.33_smallest_of_line_30_31_32",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2021",
+          "text": "8,381"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.1_prior_year_expenses_paid_prior_year",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2022",
+          "text": "4,707"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.10_line_8_minus_line_9",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2031",
+          "text": "5,667"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.11_prior_year_federal_agi",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2032",
+          "text": "4,332"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.12_prior_year_federal_agi_decimal",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2033",
+          "text": "84"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.13_line_10_times_line_12",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2034",
+          "text": "4,961"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.14_prior_year_california_agi_decimal",
+      "widgets": [
+        {
+          "widgetName": "3505 - 2035",
+          "text": "58"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.15_prior_year_expenses_credit",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2036",
+          "text": "5,796"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.2_prior_year_expenses_paid_this_year",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2023",
+          "text": "5,189"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.3_total_prior_year_expenses",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2024",
+          "text": "1,990"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.4_prior_year_expense_limit",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2025",
+          "text": "2,148"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.5_prior_year_excluded_benefits",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2026",
+          "text": "7,421"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.6_limit_minus_excluded_benefits",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2027",
+          "text": "4,805"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.7_smaller_prior_year_earned_income",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2028",
+          "text": "7,313"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.8_smallest_of_line_3_6_7",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2029",
+          "text": "8,268"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.9_prior_year_form_line_6",
+      "widgets": [
+        {
+          "widgetName": "3506 - 2030",
+          "text": "6,164"
+        }
+      ]
+    }
+  ]
+}

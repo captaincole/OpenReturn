@@ -1,0 +1,222 @@
+{
+  "formId": "form-3800-ca",
+  "fieldCount": 24,
+  "entries": [
+    {
+      "fieldId": "form-3800-ca.0.header.child_name",
+      "widgets": [
+        {
+          "widgetName": "Child's name as shown on return",
+          "text": "T-29QRS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.header.child_ssn",
+      "widgets": [
+        {
+          "widgetName": "Child's Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.header.parent_filing_status",
+      "widgets": [
+        {
+          "widgetName": "Parent's filing status",
+          "text": "Single."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.header.parent_name",
+      "widgets": [
+        {
+          "widgetName": "Parent's name (first, initial, and last). (Caution: See instructions before completing)",
+          "text": "T-1AB6B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.header.parent_ssn",
+      "widgets": [
+        {
+          "widgetName": "Parent's S S N or I T I N (9 digits)",
+          "text": "123456789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.1_child_unearned_income",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1. Enter the child's unearned income, such as taxable interest, ordinary dividends, and capital gains. See instructions. If this amount is $2,700 or less, stop here; do not file this form",
+          "text": "4,895"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.10_parent_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Enter the parent's tax from Form 540, line 31. See instructions for Form 540N R filers. Do not include any tax from form F T B 3803",
+          "text": "4,539"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.11_tax_difference_at_parent_rate",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Subtract line 10 from line 9. If you did not enter an amount on line 7, then enter the amount from line 11 on line 13 and skip line 12a and line 12b",
+          "text": "2,802"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.12a_all_children_net_unearned_income",
+      "widgets": [
+        {
+          "widgetName": "Line 12a. Add line 5 and line 7",
+          "text": "8,876"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.12b_child_share_decimal",
+      "widgets": [
+        {
+          "widgetName": "Line 12b. Divide line 5 by line 12a. Enter the result as a decimal (rounded to four places)",
+          "text": "1499"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.13_child_share_of_tentative_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Multiply line 11 by the decimal amount on line 12b",
+          "text": "3,427"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.14_taxable_income_less_net_unearned",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 14. Subtract line 5 from line 4",
+          "text": "5,334"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.15_tax_on_line_14",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Enter the tax on the amount on line 14 based on the child's filing status. Use the tax table or tax rate schedules found in the 2025 instructions for Form 540. See instructions for Form 540N R filers",
+          "text": "2,030"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.16_tax_at_parent_rate_total",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Add line 13 and line 15",
+          "text": "9,797"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.17_tax_on_line_4",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Enter the tax on the amount on line 4 based on the child's filing status. Use the tax table or tax rate schedules found in the 2025 instructions for Form 540. See instructions for Form 540N R filers",
+          "text": "5,380"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.18_child_tax",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Compare the amounts on line 16 and line 17. Enter the larger of the two amounts here and on the child's Form 540, line 31. Also, check the box labeled \"F T B 3800\" on the child's tax return. See instructions for Form 540N R filers",
+          "text": "1,969"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.2_unearned_income_deduction",
+      "widgets": [
+        {
+          "widgetName": "Line 2. If the child did not itemize deductions on Form 540 or Form 540N R, enter $2,700. If the child itemized deductions, see instructions",
+          "text": "8,191"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.3_unearned_income_less_deduction",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Subtract line 2 from line 1. If zero or less, stop here; do not complete the rest of this form but attach it to the child's return",
+          "text": "7,812"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.4_child_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Enter the child's taxable income from Form 540, line 19 or total taxable income from Form 540N R, line 19",
+          "text": "2,818"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.5_net_unearned_income",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Net unearned income. Enter the smaller of line 3 or line 4. If zero or less, stop here; do not complete the rest of this form but attach it to the child's return",
+          "text": "1,122"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.6_parent_taxable_income",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 6. Enter the parent's taxable income from Form 540, line 19; or total taxable income from Form 540NR, line 19. If zero or less, enter 0. See instructions",
+          "text": "5,413"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.7_other_children_net_unearned_income",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Enter the total net unearned income, if any, from form(s) F T B 3800, line 5, of all other children of the parent identified above. Do not include the amount from line 5 above",
+          "text": "9,773"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.8_total_income_at_parent_rate",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Add line 5 through line 7",
+          "text": "2,922"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3800-ca.0.line.9_tax_on_line_8",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Enter the tax on the amount on line 8 based on the parent's filing status. Use the tax table or tax rate schedules found in the 2025 instructions for Form 540. See instructions for Form 540N R filers",
+          "text": "8,661"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "form": {
+    "formId": "form-5805f",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 5805F, Underpayment of Estimated Tax by Farmers and Fishermen"
+  },
+  "fields": [
+    {
+      "fieldId": "form-5805f.0.header.name",
+      "label": "Name(s) as shown on return",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on return",
+      "position": {
+        "page": 0,
+        "x": 35.9867,
+        "y": 677.005
+      }
+    },
+    {
+      "fieldId": "form-5805f.0.header.ssn_or_itin",
+      "label": "Your S S N or I T I N (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Your S S N or I T I N (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 442.922,
+        "y": 677.005
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-5805f.0.line.1_current_year_tax_after_credits",
+      "label": "Part I, Line 1. 2025 tax after credits from Form 540, line 48, line 61, line 62, and any I R C Section 453A interest from line 63; Form 540NR, line 63, line 71, line 72, and any I R C Section 453A interest from line 73; or Form 541, line 28.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1. 2025 tax after credits from Form 540, line 48, line 61, line 62, and any I R C Section 453A interest from line 63; Form 540NR, line 63, line 71, line 72, and any I R C Section 453A interest from line 73; or Form 541, line 28",
+      "position": {
+        "page": 0,
+        "x": 491.972,
+        "y": 639.706
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.2_current_year_lump_sum_tax",
+      "label": "Line 2. 2025 tax on lump-sum distributions and accumulation distribution of trusts from Form 540, line 34; Form 540NR, line 41; or Form 541, line 21b.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. 2025 tax on lump-sum distributions and accumulation distribution of trusts from Form 540, line 34; Form 540NR, line 41; or Form 541, line 21b",
+      "position": {
+        "page": 0,
+        "x": 384.003,
+        "y": 609.679
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.3_current_year_tax_less_lump_sum",
+      "label": "Line 3. Subtract line 2 from line 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Subtract line 2 from line 1",
+      "position": {
+        "page": 0,
+        "x": 492.003,
+        "y": 591.665
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.4_two_thirds_of_current_year_tax",
+      "label": "Line 4. Multiply line 3 by 66 and two-thirds % (.6667).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Multiply line 3 by 66 and two-thirds % (.6667)",
+      "position": {
+        "page": 0,
+        "x": 384.011,
+        "y": 573.674
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.5_current_year_withholding",
+      "label": "Line 5. 2025 withholding taxes from Form 540, line 71 and line 73; Form 540NR, line 81 and line 83; or Form 541, line 29 and line 31.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. 2025 withholding taxes from Form 540, line 71 and line 73; Form 540NR, line 81 and line 83; or Form 541, line 29 and line 31",
+      "position": {
+        "page": 0,
+        "x": 492.003,
+        "y": 543.699
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.6_current_year_tax_less_withholding",
+      "label": "Line 6. Subtract line 5 from line 3. If less than $500 ($250 if married/R D P filing separately), STOP. You do not owe a penalty.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Subtract line 5 from line 3. If less than $500 ($250 if married/R D P filing separately), STOP. You do not owe a penalty",
+      "position": {
+        "page": 0,
+        "x": 491.973,
+        "y": 525.682
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.7_prior_year_tax_after_credits",
+      "label": "Line 7. 2024 tax after credits from Form 540, line 48, line 61, line 62, and any I R C Section 453A interest from line 63; Form 540NR, line 63, line 71, line 72, and any I R C Section 453A interest from line 73; or Form 541, line 28. (If you did not file a return for 2024 or if your 2024 taxable year was less than 12 months, do not complete line 7 through line 9. Instead, enter the amount from line 4 on line 10.)",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. 2024 tax after credits from Form 540, line 48, line 61, line 62, and any I R C Section 453A interest from line 63; Form 540NR, line 63, line 71, line 72, and any I R C Section 453A interest from line 73; or Form 541, line 28. (If you did not file a return for 2024 or if your 2024 taxable year was less than 12 months, do not complete line 7 through line 9. Instead, enter the amount from line 4 on line 10.)",
+      "position": {
+        "page": 0,
+        "x": 492.024,
+        "y": 471.703
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.8_prior_year_lump_sum_tax",
+      "label": "Line 8. 2024 tax on lump-sum distributions and accumulation distribution of trusts from Form 540, line 34; Form 540NR, line 41; or Form 541, line 21b.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. 2024 tax on lump-sum distributions and accumulation distribution of trusts from Form 540, line 34; Form 540NR, line 41; or Form 541, line 21b",
+      "position": {
+        "page": 0,
+        "x": 491.972,
+        "y": 441.707
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.9_prior_year_tax_less_lump_sum",
+      "label": "Line 9. Subtract line 8 from line 7. If less than $500 ($250 if married/R D P filing separately), STOP. You do not owe a penalty.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Subtract line 8 from line 7. If less than $500 ($250 if married/R D P filing separately), STOP. You do not owe a penalty",
+      "position": {
+        "page": 0,
+        "x": 492.003,
+        "y": 411.68
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.10_required_annual_payment",
+      "label": "Line 10. Enter the smaller of line 4 or line 9. (If your California A G I is equal to or greater than $1,000,000/$500,000 for married filing a separate return, use line 4.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Enter the smaller of line 4 or line 9. (If your California A G I is equal to or greater than $1,000,000/$500,000 for married filing a separate return, use line 4.)",
+      "position": {
+        "page": 0,
+        "x": 491.973,
+        "y": 381.682
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.11_withholding_and_estimated_payments",
+      "label": "Line 11. 2025 withholding taxes and estimated tax payments made on or before January 15, 2026, from Form 540, line 71, line 72, and line 73; Form 540NR, line 81, line 82, and line 83; or Form 541, line 29, line 31, and line 32.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. 2025 withholding taxes and estimated tax payments made on or before January 15, 2026, from Form 540, line 71, line 72, and line 73; Form 540NR, line 81, line 82, and line 83; or Form 541, line 29, line 31, and line 32",
+      "position": {
+        "page": 0,
+        "x": 492.003,
+        "y": 351.687
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.12_underpayment",
+      "label": "Line 12. Underpayment. Subtract line 11 from line 10. If zero or less, you do not owe a penalty. Be sure to check the box on Form 540, line 113; Form 540NR, line 123; or Form 541, line 45.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. Underpayment. Subtract line 11 from line 10. If zero or less, you do not owe a penalty. Be sure to check the box on Form 540, line 113; Form 540NR, line 123; or Form 541, line 45",
+      "position": {
+        "page": 0,
+        "x": 491.983,
+        "y": 321.702
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.13_date_underpayment_paid",
+      "label": "Part II, Line 13. Enter the date (mm/dd/yyyy) the amount on line 12 was paid or April 15, 2026, whichever is earlier.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 13. Enter the date (mm/dd/yyyy) the amount on line 12 was paid or April 15, 2026, whichever is earlier",
+      "position": {
+        "page": 0,
+        "x": 491.996,
+        "y": 285.689
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-5805f.0.line.14_number_of_days",
+      "label": "Line 14. Number of days after January 15, 2026, to and including the date on line 13.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Number of days after January 15, 2026, to and including the date on line 13",
+      "position": {
+        "page": 0,
+        "x": 492.006,
+        "y": 267.689
+      }
+    },
+    {
+      "fieldId": "form-5805f.0.line.15_penalty",
+      "label": "Line 15. Penalty: Number of days on line 14 divided by 365 multiplied by 0.7 multiplied by underpayment on line 12. Enter the result here. If you are requesting a waiver, go to line 16. Otherwise, enter this amount on Form 540, line 113; Form 540NR, line 123; or Form 541, line 45. Also, check the box on that line to show that form F T B 5805F is attached to the return.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Penalty: Number of days on line 14 divided by 365 multiplied by 0.7 multiplied by underpayment on line 12. Enter the result here. If you are requesting a waiver, go to line 16. Otherwise, enter this amount on Form 540, line 113; Form 540NR, line 123; or Form 541, line 45. Also, check the box on that line to show that form F T B 5805F is attached to the return",
+      "position": {
+        "page": 0,
+        "x": 491.981,
+        "y": 195.698
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.16_waiver_request_checkbox",
+      "label": "Line 16. To request a waiver, check the box on this line.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Line 16 - To request a waiver, check the box on this line",
+      "position": {
+        "page": 0,
+        "x": 492.775,
+        "y": 154.695
+      }
+    },
+    {
+      "fieldId": "form-5805f.0.line.16_waiver_amount",
+      "label": "Line 16. To request a waiver, check the box on this line and provide an explanation below. Be sure to check the box on Form 540, line 113; Form 540NR, line 123; or Form 541, line 45. See General Information E.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. To request a waiver, check the box on this line and provide an explanation below. Be sure to check the box on Form 540, line 113; Form 540NR, line 123; or Form 541, line 45. See General Information E",
+      "position": {
+        "page": 0,
+        "x": 506.993,
+        "y": 153.702
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-5805f.0.line.16_waiver_explanation_row1",
+      "label": "Enter explanation for waiver (1):",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Enter explanation for waiver (1):",
+      "position": {
+        "page": 0,
+        "x": 50.9914,
+        "y": 138.809
+      }
+    },
+    {
+      "fieldId": "form-5805f.0.line.16_waiver_explanation_row2",
+      "label": "Enter explanation for waiver (2):",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Enter explanation for waiver (2):",
+      "position": {
+        "page": 0,
+        "x": 50.989,
+        "y": 120.792
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/5805f/blank.pdf",
+    "ingestedAt": "2026-11-20T15:50:51.115Z",
+    "totalFields": 21,
+    "skipped": 0,
+    "catalogEntries": 21
+  }
+}

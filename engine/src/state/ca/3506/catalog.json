@@ -1,0 +1,1539 @@
+{
+  "form": {
+    "formId": "form-3506",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3506, Child and Dependent Care Expenses Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3506.0.header.name",
+      "label": "Name or names as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1000",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 684
+      }
+    },
+    {
+      "fieldId": "form-3506.0.header.ssn",
+      "label": "Social Security Number or Individual Taxpayer Identification Number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1001",
+      "position": {
+        "page": 0,
+        "x": 415,
+        "y": 684
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3506.0.part1.row1_source_of_income_left",
+      "label": "Part 1 . Unearned Income and Other Funds Received in 2025 (See instructions.) Item 1 . Source of Income/Funds.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1002",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 651
+      }
+    },
+    {
+      "fieldId": "form-3506.0.part1.row1_amount_left",
+      "label": "Item 1 . Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1003",
+      "position": {
+        "page": 0,
+        "x": 241,
+        "y": 651
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.part1.row1_source_of_income_right",
+      "label": "Item 2 . Source of Income/Funds.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1004",
+      "position": {
+        "page": 0,
+        "x": 307,
+        "y": 651
+      }
+    },
+    {
+      "fieldId": "form-3506.0.part1.row1_amount_right",
+      "label": "Item 2 . Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1005",
+      "position": {
+        "page": 0,
+        "x": 511,
+        "y": 651
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.part1.row2_source_of_income_left",
+      "label": "Item 3 . Source of Income/Funds.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1006",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 638
+      }
+    },
+    {
+      "fieldId": "form-3506.0.part1.row2_amount_left",
+      "label": "Item 3 . Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1007",
+      "position": {
+        "page": 0,
+        "x": 241,
+        "y": 638
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.part1.row2_source_of_income_right",
+      "label": "Item 4 . Source of Income/Funds.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1008",
+      "position": {
+        "page": 0,
+        "x": 307,
+        "y": 638
+      }
+    },
+    {
+      "fieldId": "form-3506.0.part1.row2_amount_right",
+      "label": "Item 4 . Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1009",
+      "position": {
+        "page": 0,
+        "x": 511,
+        "y": 638
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.part1.row3_source_of_income_left",
+      "label": "Item 5 . Source of Income/Funds.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1010",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 625.4
+      }
+    },
+    {
+      "fieldId": "form-3506.0.part1.row3_amount_left",
+      "label": "Item 5 . Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1011",
+      "position": {
+        "page": 0,
+        "x": 241,
+        "y": 625.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.part1.row3_source_of_income_right",
+      "label": "Item 6 . Source of Income/Funds.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1012",
+      "position": {
+        "page": 0,
+        "x": 307,
+        "y": 625.4
+      }
+    },
+    {
+      "fieldId": "form-3506.0.part1.row3_amount_right",
+      "label": "Item 6 . Amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1013",
+      "position": {
+        "page": 0,
+        "x": 511,
+        "y": 625.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.1a_care_provider_name_provider1",
+      "label": "Part 2 . Persons or Organizations Who Provided the Care in California (You must complete this part. See instructions.)  Line 1 . Enter the following information for each person or organization that provided care in California. Only care provided in California qualifies for the credit. If you need more space, attach a separate sheet. Line 1a. Care Provider's name. Provider 1 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1014",
+      "position": {
+        "page": 0,
+        "x": 199.2,
+        "y": 567
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.1a_care_provider_name_provider2",
+      "label": "Line 1a. Care Provider's name. Provider 2 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1021",
+      "position": {
+        "page": 0,
+        "x": 388.64,
+        "y": 567
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.1b_care_provider_address_provider1",
+      "label": "Line 1 b. Care provider’s address number, street, apartment number, city, state, and Zip Code. Provider 1 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1015",
+      "position": {
+        "page": 0,
+        "x": 199.2,
+        "y": 535
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-3506.0.line.1b_care_provider_address_provider2",
+      "label": "Line 1 b. Care provider’s address number, street, apartment number, city, state, and Zip Code. Provider 2 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1022",
+      "position": {
+        "page": 0,
+        "x": 388.64,
+        "y": 535
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-3506.0.line.1c_care_provider_telephone_provider1",
+      "label": "Line 1 c. Care provider's telephone number. Provider 1 . Enter 10 digits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1016",
+      "position": {
+        "page": 0,
+        "x": 199.2,
+        "y": 521
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.1c_care_provider_telephone_provider2",
+      "label": "Line 1 c. Care provider's telephone number. Provider 2 . Enter 10 digits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1023",
+      "position": {
+        "page": 0,
+        "x": 388.64,
+        "y": 521
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.1d_person_or_organization_provider1",
+      "label": "Line 1d — Is provider a person or organization? Provider 1.",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3506 - 1017 RB",
+      "position": {
+        "page": 0,
+        "x": 203.52,
+        "y": 508
+      },
+      "options": [
+        {
+          "value": "person",
+          "radioOption": "Person\r.",
+          "label": "Person"
+        },
+        {
+          "value": "organization",
+          "radioOption": "Organization.\r",
+          "label": "Organization"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1d_person_or_organization_provider2",
+      "label": "Line 1d — Is provider a person or organization? Provider 2.",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3506 - 1024 RB",
+      "position": {
+        "page": 0,
+        "x": 393.64,
+        "y": 508
+      },
+      "options": [
+        {
+          "value": "organization",
+          "radioOption": "Organization\r.",
+          "label": "Organization"
+        },
+        {
+          "value": "person",
+          "radioOption": "Person\r.",
+          "label": "Person"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3506.0.line.1e_identification_number_provider1",
+      "label": "Line 1e. Identification number. Enter Social Security Number, Individual Taxpayer Identification Number, or Federal Employer Identification Number. Provider 1 . Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1018",
+      "position": {
+        "page": 0,
+        "x": 199.2,
+        "y": 493
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3506.0.line.1e_identification_number_provider2",
+      "label": "Line 1 e. Identification number. Enter Social Security Number, Individual Taxpayer Identification Number, or Federal Employer Identification Number. Provider 2 . Enter 9 digits.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1025",
+      "position": {
+        "page": 0,
+        "x": 388.64,
+        "y": 493
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3506.0.line.1f_address_where_care_provided_provider1",
+      "label": "Line 1 f. Address where care was provided (number, street, apartment number, city, state, and Zip Code) Post Office Box not acceptable. Provider 1 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1019",
+      "position": {
+        "page": 0,
+        "x": 199.2,
+        "y": 461
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-3506.0.line.1f_address_where_care_provided_provider2",
+      "label": "Line 1 f. Address where care was provided (number, street, apartment number, city, state, and Zip Code) Post Office Box not acceptable. Provider 2 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1026",
+      "position": {
+        "page": 0,
+        "x": 388.64,
+        "y": 461
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-3506.0.line.1g_amount_paid_for_care_provider1",
+      "label": "Line 1 g. Amount paid for care provided. Provider 1 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1020",
+      "position": {
+        "page": 0,
+        "x": 199.2,
+        "y": 447
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.1g_amount_paid_for_care_provider2",
+      "label": "Line 1 g. Amount paid for care provided. Provider 2 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1027",
+      "position": {
+        "page": 0,
+        "x": 388.64,
+        "y": 447
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_date_of_birth_col_c",
+      "label": "Line 2 . Item 1 . Column (c). Qualifying person’s date of birth (D O B – mm/dd/yyyy) or disability status. Date of birth. Enter date as m m/ d d / y y y y .",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1031",
+      "position": {
+        "page": 0,
+        "x": 365.4,
+        "y": 352.6
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_first_name_col_a",
+      "label": "Part 3 . Credit for Child and Dependent Care Expenses.  Line 2 . Information about your qualifying person (or persons). See instructions. Item 1 . Column (a). Qualifying person's name. First name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1028",
+      "position": {
+        "page": 0,
+        "x": 37,
+        "y": 341
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_last_name_col_a",
+      "label": "Line 2 . Item 1 . Column (a). Last name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1029",
+      "position": {
+        "page": 0,
+        "x": 137.5,
+        "y": 341
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_ssn_col_b",
+      "label": "Line 2 . Item 1 . Column (b). Qualifying person's social security number (S S N). See instructions.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1030",
+      "position": {
+        "page": 0,
+        "x": 237.6,
+        "y": 341
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_disabled_col_c",
+      "label": "Line 2 . Item 1 . Column (c). Disabled. Yes. Check this box if the qualifying person is Disabled.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3506 - 1032 CB",
+      "position": {
+        "page": 0,
+        "x": 379.04,
+        "y": 341.54
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_physical_custody_percentage_col_d",
+      "label": "Line 2 . Item 1 . Column (d). Percentage of physical custody. (See instructions).",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1033",
+      "position": {
+        "page": 0,
+        "x": 427.2,
+        "y": 341
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row1_qualified_expenses_col_e",
+      "label": "Line 2 . Item 1 . Column (e). Qualified expenses you incurred and paid in 2025 for the qualifying person’s care in California.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1034",
+      "position": {
+        "page": 0,
+        "x": 488.4,
+        "y": 341
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_date_of_birth_col_c",
+      "label": "Line 2 . Item 2 . Column (c). Qualifying person's Date of Birth. Enter date as  m m/ d d / y y y y .",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1038",
+      "position": {
+        "page": 0,
+        "x": 364.8,
+        "y": 331.57
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_first_name_col_a",
+      "label": "Line 2 . Item 2 . Column (a). Qualifying person's name. First name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1035",
+      "position": {
+        "page": 0,
+        "x": 37,
+        "y": 320
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_last_name_col_a",
+      "label": "Line 2 . Item 2 . Column (a). Last name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1036",
+      "position": {
+        "page": 0,
+        "x": 137.5,
+        "y": 320
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_ssn_col_b",
+      "label": "Line 2 . Item 2 . Column (b). Qualifying person's social security number (S S N). See instructions.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1037",
+      "position": {
+        "page": 0,
+        "x": 237.6,
+        "y": 320
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_disabled_col_c",
+      "label": "Line 2 . Item 2 . Column (c). Disabled. Yes. Check this box if the qualifying person is Disabled.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3506 - 1039 CB",
+      "position": {
+        "page": 0,
+        "x": 378.72,
+        "y": 320.64
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_physical_custody_percentage_col_d",
+      "label": "Line 2 . Item 2 . Column (d). Percentage of physical custody. (See instructions).",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1040",
+      "position": {
+        "page": 0,
+        "x": 427.2,
+        "y": 320
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row2_qualified_expenses_col_e",
+      "label": "Line 2 . Item 2 . Column (e). Qualified expenses you incurred and paid in 2025 for the qualifying person’s care in California.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1041",
+      "position": {
+        "page": 0,
+        "x": 488.4,
+        "y": 320
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_date_of_birth_col_c",
+      "label": "Line 2 . Item 3 . Column (c). Qualifying person's Date of Birth. Enter date as  m m/ d d / y y y y .",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1045",
+      "position": {
+        "page": 0,
+        "x": 364.8,
+        "y": 310
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_first_name_col_a",
+      "label": "Line 2 . Item 3 . Column (a). Qualifying person's name. First name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1042",
+      "position": {
+        "page": 0,
+        "x": 37,
+        "y": 299
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_last_name_col_a",
+      "label": "Line 2 . Item 3 . Column (a). Last name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1043",
+      "position": {
+        "page": 0,
+        "x": 137.5,
+        "y": 299
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_ssn_col_b",
+      "label": "Line 2 . Item 3 . Column (b). Qualifying person's social security number (S S N). See instructions.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1044",
+      "position": {
+        "page": 0,
+        "x": 237.6,
+        "y": 299
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_disabled_col_c",
+      "label": "Line 2 . Item 3 . Column (c). Disabled. Yes. Check this box if the qualifying person is Disabled.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "3506 - 1046 CB",
+      "position": {
+        "page": 0,
+        "x": 378.72,
+        "y": 299.64
+      }
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_physical_custody_percentage_col_d",
+      "label": "Line 2 . Item 3 . Column (d). Percentage of physical custody. (See instructions).",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1047",
+      "position": {
+        "page": 0,
+        "x": 427.2,
+        "y": 299
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-3506.0.line.2_row3_qualified_expenses_col_e",
+      "label": "Line 2 . Item 3 . Column (e). Qualified expenses you incurred and paid in 2025 for the qualifying person’s care in California.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1048",
+      "position": {
+        "page": 0,
+        "x": 488.4,
+        "y": 299
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.3_total_qualified_expenses",
+      "label": "Line 3 . Add the amounts in column (e) of line 2 . Do not enter more than $3,000 for one qualifying person or $6,000 for two or more qualifying persons. If you completed Side 2, Part 4, enter the amount from line 33 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1049",
+      "position": {
+        "page": 0,
+        "x": 481.5,
+        "y": 277.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.4_your_earned_income",
+      "label": "Line 4 . Enter YOUR earned income. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1050",
+      "position": {
+        "page": 0,
+        "x": 481.5,
+        "y": 263.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.5_spouse_rdp_earned_income",
+      "label": "Line 5 . If married or a Registered Domestic Partner filing a joint return, enter your spouse's/registered domestic partner's earned income. (If your spouse/registered domestic partner was a student or was disabled, see instructions.) If you are not filing a joint tax return, enter the amount from line 4 .",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1051",
+      "position": {
+        "page": 0,
+        "x": 481.5,
+        "y": 203.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.6_smallest_of_lines_3_4_5",
+      "label": "Line 6 . Enter the smallest of line 3, line 4, or line 5 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1052",
+      "position": {
+        "page": 0,
+        "x": 481.5,
+        "y": 139
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.7_federal_credit_decimal_amount",
+      "label": "Line 7 . Enter the decimal amount shown in the chart of the instructions for line 7 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1053",
+      "position": {
+        "page": 0,
+        "x": 544.57,
+        "y": 127.4
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3506.0.line.8_line_6_times_line_7",
+      "label": "Line 8 . Multiply line 6 by the decimal amount on line 7 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1054",
+      "position": {
+        "page": 0,
+        "x": 481.5,
+        "y": 114.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.9_california_credit_decimal_amount",
+      "label": "Line 9 . Enter the decimal amount listed in the chart of the instructions for line 9 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1055",
+      "position": {
+        "page": 0,
+        "x": 544.32,
+        "y": 103.4
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3506.0.line.10_line_8_times_line_9",
+      "label": "Line 10 . Multiply line 8 by the decimal amount on line 9 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1056",
+      "position": {
+        "page": 0,
+        "x": 481.5,
+        "y": 90
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.11_prior_year_expenses_credit",
+      "label": "Line 11 . Credit for prior year expenses paid in 2025 . See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1057",
+      "position": {
+        "page": 0,
+        "x": 481.5,
+        "y": 77.52
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.0.line.12_child_dependent_care_credit",
+      "label": "Line 12 . Add line 10 and line 11 . Enter the amount here and on Form 540, line 40; or Form 540 N R, line 50 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 1058",
+      "position": {
+        "page": 0,
+        "x": 481.5,
+        "y": 65.28
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.13_dependent_care_benefits_received",
+      "label": "Part four . Dependent Care Benefits. Line 13 .  Enter the total amount of dependent care benefits you received for 2025 . This amount should be shown in box 10 of your federal Form or Forms W-2 . Do not include amounts that were reported to you as wages in box 1 of federal Form or Forms W-2 . If you were self-employed or a partner, include amounts you received under a dependent care assistance program from your sole proprietorship or partnership. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2001",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 678
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.14_carryover_used_grace_period",
+      "label": "Line 14 . Enter the amount, if any, you carried over from 2024 and used in 2025 during the grace period. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2002",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 665
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.15_forfeited_or_carried_forward",
+      "label": "Line 15 . Enter the amount, if any, you forfeited or carried forward to 2026 . See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2003",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 652
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.16_combined_benefits",
+      "label": "Line 16 . Combine line 13 through line 15 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2004",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 639
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.17_qualified_expenses_incurred",
+      "label": "Line 17 . Enter the total amount of qualified expenses incurred in 2025 for the care of the qualifying person or persons. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2005",
+      "position": {
+        "page": 1,
+        "x": 354.4,
+        "y": 616
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.18_smaller_of_line_16_or_17",
+      "label": "Line 18 . Enter the smaller of line 16 or line 17 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2006",
+      "position": {
+        "page": 1,
+        "x": 354.4,
+        "y": 603
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.19_your_earned_income",
+      "label": "Line 19 . Enter your earned income.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2007",
+      "position": {
+        "page": 1,
+        "x": 354.4,
+        "y": 590
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.20_spouse_earned_income",
+      "label": "Line 20 . If married or a Registered Domestic Partner filing a joint return, enter YOUR SPOUSE’S/Registered Domestic Partner’s earned income (if your spouse/Registered Domestic Partner was a student or was disabled, see the instructions for line 5); if married or a Registered Domestic Partner filing a separate tax return, see the instructions for the amount to enter; all others, enter the amount from line 19 .",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2008",
+      "position": {
+        "page": 1,
+        "x": 354.4,
+        "y": 544
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.21_smallest_of_line_18_19_20",
+      "label": "Line 21 . Enter the smallest of line 18, line 19, or line 20 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2009",
+      "position": {
+        "page": 1,
+        "x": 354.4,
+        "y": 531
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.22_exclusion_limit",
+      "label": "Line 22 . Enter $5,000 ($2,500 if married or a Registered Domestic Partner filing separately and you were required to enter your spouse’s/Registered Domestic Partner’s earned income on line 20). However, do not enter more than the maximum amount allowed under your dependent care plan.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2010",
+      "position": {
+        "page": 1,
+        "x": 354.4,
+        "y": 496
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.23_benefits_from_own_business",
+      "label": "Line 23 . Enter the amount from line 13 that you received from your sole proprietorship or partnership. If you did not receive any amounts, enter 0 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2011",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 473
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.24_line_16_minus_line_23",
+      "label": "Line 24 . Subtract line 23 from line 16 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2012",
+      "position": {
+        "page": 1,
+        "x": 354.4,
+        "y": 460
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.25_deductible_benefits",
+      "label": "Line 25 . Deductible benefits. Enter the smallest of line 21, line 22, or line 23 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2013",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 447
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.26_excluded_benefits",
+      "label": "Line 26 . Excluded benefits. Subtract line 25 from the smaller of line 21 or line 22 . If zero or less, enter 0 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2014",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 435
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.27_taxable_benefits",
+      "label": "Line 27 . Taxable benefits. Subtract line 26 from line 24 . If zero or less, enter 0 .",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2015",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 423
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.28_expense_limit",
+      "label": "Line 28 . Enter $3,000 ($6,000 if two or more qualifying persons).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2016",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 411
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.29_deductible_plus_excluded_benefits",
+      "label": "Line 29 . Add line 25 and line 26 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2017",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 399
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.30_limit_minus_benefits",
+      "label": "Line 30 . Subtract line 29 from line 28 . If zero or less, stop. You do not qualify for the credit. Exception. – If you paid 2024 expenses in 2025, see instructions for line 11 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2018",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 376
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.31_total_column_e_expenses",
+      "label": "Line 31 . Complete Side 1, Part 3, line 2 . Add the amounts in column (e) and enter the total here.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2019",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 364
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.32_federal_form_2441_line_31",
+      "label": "Line 32 . Enter the amount from your federal Form 2441, Part 3, line 31 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2020",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 352
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.line.33_smallest_of_line_30_31_32",
+      "label": "Line 33 . Enter the smallest of line 30, line 31, or line 32 . Also, enter this amount on Side 1, Part 3, line 3 and complete Part 3, line 4 through line 12 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2021",
+      "position": {
+        "page": 1,
+        "x": 474,
+        "y": 329
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.1_prior_year_expenses_paid_prior_year",
+      "label": "Worksheet. – Credit for 2024 Expenses Paid in 2025. Line 1 . Enter your 2024 qualified expenses paid in 2024 . If you did not claim the credit for these expenses on your 2024 tax return, get and complete a 2024 form F T B 3506 for these expenses. You may need to amend your 2024 tax return.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2022",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 292
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.2_prior_year_expenses_paid_this_year",
+      "label": "Line 2 . Enter your 2024 qualified expenses paid in 2025 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2023",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 279.84
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.3_total_prior_year_expenses",
+      "label": "Line 3 . Add line 1 and line 2 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2024",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 268
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.4_prior_year_expense_limit",
+      "label": "Line 4 . Enter $3,000 if care was for one qualifying person ($6,000 for two or more).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2025",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 256.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.5_prior_year_excluded_benefits",
+      "label": "Line 5 . Enter any dependent care benefits received for 2024 and excluded from your income (from your 2024 form F T B 3506, Part 4, line 26)",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2026",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 233.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.6_limit_minus_excluded_benefits",
+      "label": "Line 6 . Subtract line 5 from line 4.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2027",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 221.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.7_smaller_prior_year_earned_income",
+      "label": "Line 7 .  Compare your and your spouse’s/Registered Domestic Partner’s earned income for 2024 and enter the smaller amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2028",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 209.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.8_smallest_of_line_3_6_7",
+      "label": "Line 8 . If filing a joint tax return, compare the amounts on line 3, line 6, and line 7 and enter the smallest amount. If not filing a joint tax return, enter your earned income.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2029",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 186.72
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.9_prior_year_form_line_6",
+      "label": "Line 9 .  Enter the amount from your 2024 form F T B 3506, Side 1, Part 3, line 6 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2030",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 175
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.10_line_8_minus_line_9",
+      "label": "Line 10 . Subtract line 9 from line 8 . If zero or less, stop. You cannot increase your credit by any previous year’s expenses.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2031",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 163.44
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.11_prior_year_federal_agi",
+      "label": "Line 11 . Enter your 2024 federal adjusted gross income (A G I) from your 2024 Form 540, line 13, or Form 540 N R, line 13 .",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2032",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 151.68
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.12_prior_year_federal_agi_decimal",
+      "label": "Line 12 . 2024 federal adjusted gross income decimal amount from 2024 form F T B 3506, instructions for line 7 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2033",
+      "position": {
+        "page": 1,
+        "x": 520.64,
+        "y": 139
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.13_line_10_times_line_12",
+      "label": "Line 13 . Multiply line 10 by line 12 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2034",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 127.2
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.14_prior_year_california_agi_decimal",
+      "label": "Line 14 . 2024 California Adjusted Gross Income decimal amount (from 2024 form F T B 3506, instructions for line 9).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3505 - 2035",
+      "position": {
+        "page": 1,
+        "x": 520.64,
+        "y": 114.48
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-3506.1.worksheet.15_prior_year_expenses_credit",
+      "label": "Line 15 . Multiply line 13 by line 14 . Enter the result here and on your 2025 form F T B 3506, Side 1, Part 3, line 11 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3506 - 2036",
+      "position": {
+        "page": 1,
+        "x": 488.64,
+        "y": 102.72
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3506/blank.pdf",
+    "ingestedAt": "2026-11-20T15:43:37.824Z",
+    "totalFields": 95,
+    "skipped": 0,
+    "catalogEntries": 95
+  }
+}

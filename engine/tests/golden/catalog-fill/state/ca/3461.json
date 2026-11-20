@@ -1,0 +1,177 @@
+{
+  "formId": "form-3461",
+  "fieldCount": 19,
+  "entries": [
+    {
+      "fieldId": "form-3461.0.header.name_shown_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on tax return",
+          "text": "T-TKIDT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.header.ssn_or_itin",
+      "widgets": [
+        {
+          "widgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+          "text": "T-PG17T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.10_nonbusiness_income_or_gain",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 10. Enter any income or gain reported on line 1 through line 8 that is not attributable to a trade or business",
+          "text": "4,495"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.11_nonbusiness_losses_or_deductions",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Enter any losses or deductions reported on line 1 through line 8 that are not attributable to a trade or business. See instructions",
+          "text": "2,407"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.12_net_nonbusiness_amount",
+      "widgets": [
+        {
+          "widgetName": "Line 12. Subtract line 11 from line 10",
+          "text": "2,249"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.13_nonbusiness_adjustment_sign_reversed",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 13. If line 12 is a negative number, enter it here as a positive number. If line 12 is a positive number, enter it here as a negative number",
+          "text": "6,908"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.14a_business_income_or_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 14a. Add line 9 and line 13",
+          "text": "3,821"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.14b_prior_year_excess_loss_carryover",
+      "widgets": [
+        {
+          "widgetName": "Line 14b. Excess business losses carryover from prior years. See instructions",
+          "text": "8,165"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.14c_total_business_losses",
+      "widgets": [
+        {
+          "widgetName": "Line 14c. Total business losses. Add line 14a and line 14b",
+          "text": "4,707"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.15_threshold_amount",
+      "widgets": [
+        {
+          "widgetName": "Line 15. Enter $313,000 (or $626,000 if married/R D P filing jointly). See instructions",
+          "text": "4,030"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.16_excess_business_loss",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Add line 14c and line 15. If the result is zero or greater, you do not have excess business loss. Do not attach this form to your tax return. If the result is a negative amount, enter it here. Line 16 amount is your 2025 excess business loss to be carried forward to 2026. If you do not have an amount on line 14b, and line 16 is less than zero, enter the amount from line 16 as a positive number on Schedule C A (540), Part I, Section B, line 8p, column C. This is your 2025 excess business loss adjustment amount included as income. See instructions",
+          "text": "1,653"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.17_excess_business_loss_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Line 17. If you have an amount on line 14b, excess business losses carryover from prior years, and if the amount on line 16 (positive number) is more than the excess business loss adjustment amount included as income in prior years from Schedule C A (540), then reduce line 16 amount (positive number) by the excess business loss adjustment amount included as income in prior years. Enter the result here and enter line 17 amount as a positive number on Schedule C A (540), Part I, Section B, line 8p, column C. This is your 2025 excess business loss adjustment amount included as income. See instructions",
+          "text": "1,353"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.2_schedule_ca_section_b_line_3",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 2. Enter amount from Schedule C A (540), Part I, Section B, line 3, column A minus column B, plus column C",
+          "text": "5,558"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.3_schedule_ca_section_a_line_7a",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Enter amount from Schedule C A (540), Part I, Section A, line 7a, column A minus column B, plus column C",
+          "text": "6,585"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.4_schedule_ca_section_b_line_4",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Enter amount from Schedule C A (540), Part I, Section B, line 4, column A minus column B, plus column C",
+          "text": "1,881"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.5_schedule_ca_section_b_line_5",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Enter amount from Schedule C A (540), Part I, Section B, line 5, column A minus column B, plus column C",
+          "text": "7,982"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.6_schedule_ca_section_b_line_6",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Enter amount from Schedule C A (540), Part I, Section B, line 6, column A minus column B, plus column C",
+          "text": "3,428"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.8_other_trade_or_business_income",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Enter other income, gain, or losses from a trade or business not reported on line 1 through line 6",
+          "text": "5,843"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3461.0.line.9_total_income_loss_items",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Combine line 1 through line 8",
+          "text": "9,053"
+        }
+      ]
+    }
+  ]
+}

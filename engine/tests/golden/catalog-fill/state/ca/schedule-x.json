@@ -1,0 +1,258 @@
+{
+  "formId": "schedule-x",
+  "fieldCount": 28,
+  "entries": [
+    {
+      "fieldId": "schedule-x.0.header.name",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1001",
+          "text": "T-ZSFWG"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.header.ssn_or_itin",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1002",
+          "text": "T-1MXLV"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.1_amount_owed_amended_return",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1003",
+          "text": "2,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.10_applied_to_2026_estimated_tax",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1014",
+          "text": "2,772"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.11_refund",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1015",
+          "text": "7,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.2_overpaid_tax_original_return",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1004",
+          "text": "8,184"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.3_add_lines_1_and_2",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1005",
+          "text": "4,752"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.4_refund_amended_return",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1006",
+          "text": "7,785"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.5_tax_paid_original_return",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1007",
+          "text": "1,975"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.6_add_lines_4_and_5",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1008",
+          "text": "6,288"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.7_amount_you_owe",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1009",
+          "text": "5,118"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.8a_penalties",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1010",
+          "text": "8,677"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.8b_interest",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1011",
+          "text": "9,600"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.8c_total_penalties_interest",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1012",
+          "text": "3,497"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part1.9_refund_subtotal",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1013",
+          "text": "9,472"
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1a_protective_claim_for_refund",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1016 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1b_reservation_source_income_adjustments",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1017 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1c_pass_through_entity_adjustments",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1018 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1d_federal_audit_adjustments",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1019 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1e_ftb_audit_contact",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1020 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1g_error_on_original_return",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1021 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1h_credit_adjustment",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1022 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1i_eitc_yctc_fytc",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1023 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1j_disaster_loss",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1024 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1k_military_hr_100",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1025 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1l_informal_claim",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1026 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1m_other",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1027 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "schedule-x.0.part2.2_explanation_of_changes",
+      "widgets": [
+        {
+          "widgetName": "Sch X Form 1028",
+          "text": "T-G8UXN"
+        }
+      ]
+    }
+  ]
+}

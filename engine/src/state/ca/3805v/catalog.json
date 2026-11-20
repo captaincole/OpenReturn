@@ -1,0 +1,3553 @@
+{
+  "form": {
+    "formId": "form-3805v",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3805V, Net Operating Loss (NOL) Computation and NOL and Disaster Loss Limitations"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3805v.0.header.ssn",
+      "label": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N) (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 415.502,
+        "y": 689.989
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3805v.0.header.taxpayer_name",
+      "label": "Names as shown on tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Names as shown on tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9967,
+        "y": 660.395
+      }
+    },
+    {
+      "fieldId": "form-3805v.0.header.fein",
+      "label": "Federal Employer Identification Number (F E I N) (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Federal Employer Identification Number (F E I N) (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 415.502,
+        "y": 660.402
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3805v.0.part1.1_adjusted_gross_income",
+      "label": "Part I, Section A, Line 1. Adjusted gross income from 2025 Form 540, line 17. If negative, use brackets. Estates and Trusts, begin on line 3.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Section A, Line 1. Adjusted gross income from 2025 Form 540, line 17. If negative, use brackets. Estates and Trusts, begin on line 3",
+      "position": {
+        "page": 0,
+        "x": 501.014,
+        "y": 613.382
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.2_itemized_or_standard_deduction",
+      "label": "Line 2. Itemized deductions or standard deduction from 2025 Form 540, line 18.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Itemized deductions or standard deduction from 2025 Form 540, line 18",
+      "position": {
+        "page": 0,
+        "x": 501.014,
+        "y": 601.399
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.3a_agi_less_deductions",
+      "label": "Line 3a. Combine line 1 and line 2. (Estates and Trusts, enter taxable income, see instructions.) If negative, use brackets. If positive, enter 0 here and on line 25. Do not complete the rest of Section A. You do not have a current year N O L. Complete Part II and Part III if you have a carryover from prior years.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3a. Combine line 1 and line 2. (Estates and Trusts, enter taxable income, see instructions.) If negative, use brackets. If positive, enter 0 here and on line 25. Do not complete the rest of Section A. You do not have a current year N O L. Complete Part II and Part III if you have a carryover from prior years",
+      "position": {
+        "page": 0,
+        "x": 501.014,
+        "y": 565.387
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.3b_declared_disaster_loss",
+      "label": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number",
+      "position": {
+        "page": 0,
+        "x": 501.014,
+        "y": 553.383
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.3c_loss_without_disaster_loss",
+      "label": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4. If zero or more, do not complete the rest of Part I. Enter the amount from line 3b, if any, in Part III, line 3, column (d) and complete Part II and Part III as instructed.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4. If zero or more, do not complete the rest of Part I. Enter the amount from line 3b, if any, in Part III, line 3, column (d) and complete Part II and Part III as instructed",
+      "position": {
+        "page": 0,
+        "x": 501.014,
+        "y": 517.386
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.4_nonbusiness_capital_losses",
+      "label": "Line 4. Nonbusiness capital losses.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Nonbusiness capital losses",
+      "position": {
+        "page": 0,
+        "x": 324.005,
+        "y": 493.394
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.5_nonbusiness_capital_gains",
+      "label": "Line 5. Nonbusiness capital gains.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Nonbusiness capital gains",
+      "position": {
+        "page": 0,
+        "x": 324.012,
+        "y": 481.398
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.6_nonbusiness_capital_loss_excess",
+      "label": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0",
+      "position": {
+        "page": 0,
+        "x": 410.997,
+        "y": 469.397
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.7_nonbusiness_capital_gain_excess",
+      "label": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0",
+      "position": {
+        "page": 0,
+        "x": 410.997,
+        "y": 457.39
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.8_nonbusiness_deductions",
+      "label": "Line 8. Nonbusiness deductions. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Nonbusiness deductions. See instructions",
+      "position": {
+        "page": 0,
+        "x": 324.012,
+        "y": 445.382
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.9_nonbusiness_income_other",
+      "label": "Line 9. Nonbusiness income other than capital gains. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Nonbusiness income other than capital gains. See instructions",
+      "position": {
+        "page": 0,
+        "x": 324.012,
+        "y": 433.379
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.10_nonbusiness_income_total",
+      "label": "Line 10. Add line 7 and line 9.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Add line 7 and line 9",
+      "position": {
+        "page": 0,
+        "x": 410.997,
+        "y": 421.393
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.11_nonbusiness_deductions_excess",
+      "label": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0",
+      "position": {
+        "page": 0,
+        "x": 500.959,
+        "y": 409.387
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.12_nonbusiness_income_excess",
+      "label": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0",
+      "position": {
+        "page": 0,
+        "x": 324.012,
+        "y": 397.394
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.13_business_capital_losses",
+      "label": "Line 13. Business capital losses.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Business capital losses",
+      "position": {
+        "page": 0,
+        "x": 324.012,
+        "y": 385.395
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.14_business_capital_gains",
+      "label": "Line 14. Business capital gains.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Business capital gains",
+      "position": {
+        "page": 0,
+        "x": 324.012,
+        "y": 373.395
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.15_income_against_business_losses",
+      "label": "Line 15. Add line 12 and line 14.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Add line 12 and line 14",
+      "position": {
+        "page": 0,
+        "x": 410.997,
+        "y": 361.399
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.16_business_capital_loss_excess",
+      "label": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0. See instructions",
+      "position": {
+        "page": 0,
+        "x": 410.997,
+        "y": 349.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.17_capital_loss_excess_total",
+      "label": "Line 17. Add line 6 and line 16.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Add line 6 and line 16",
+      "position": {
+        "page": 0,
+        "x": 410.997,
+        "y": 337.373
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.18_schedule_d_line_8_loss",
+      "label": "Line 18. Enter the loss, if any, from Schedule D (540), line 8. Estates and Trusts, enter the loss, if any, from Schedule D (541), line 9, column (c). If you do not have a loss on that line, skip line 18 through line 21 and enter on line 22 the amount from line 17.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Enter the loss, if any, from Schedule D (540), line 8. Estates and Trusts, enter the loss, if any, from Schedule D (541), line 9, column (c). If you do not have a loss on that line, skip line 18 through line 21 and enter on line 22 the amount from line 17",
+      "position": {
+        "page": 0,
+        "x": 410.997,
+        "y": 301.381
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.19_schedule_d_line_9_loss",
+      "label": "Line 19. Enter the loss, if any, from Schedule D (540), line 9. Estates and Trusts, enter the loss, if any, from Schedule D (541), line 10. Enter as a positive number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Enter the loss, if any, from Schedule D (540), line 9. Estates and Trusts, enter the loss, if any, from Schedule D (541), line 10. Enter as a positive number",
+      "position": {
+        "page": 0,
+        "x": 410.997,
+        "y": 277.401
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.20_line_18_over_line_19",
+      "label": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0",
+      "position": {
+        "page": 0,
+        "x": 410.997,
+        "y": 265.388
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.21_line_19_over_line_18",
+      "label": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0",
+      "position": {
+        "page": 0,
+        "x": 501,
+        "y": 253.388
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.22_capital_loss_adjustment",
+      "label": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0",
+      "position": {
+        "page": 0,
+        "x": 501,
+        "y": 241.369
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.23_prior_year_nol_carryovers",
+      "label": "Line 23. N O L and disaster loss carryovers from prior years. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. N O L and disaster loss carryovers from prior years. See instructions",
+      "position": {
+        "page": 0,
+        "x": 501,
+        "y": 229.383
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.24_total_adjustments",
+      "label": "Line 24. Add lines 11, 21, 22, and 23.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Add lines 11, 21, 22, and 23",
+      "position": {
+        "page": 0,
+        "x": 501,
+        "y": 217.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.0.part1.25_current_year_nol",
+      "label": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. You do not have a current year N O L to carryover. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. You do not have a current year N O L to carryover. See instructions",
+      "position": {
+        "page": 0,
+        "x": 501,
+        "y": 193.373
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.1_adjusted_gross_income_col_a",
+      "label": "Section B, Line 1. Adjusted gross income. See instructions. If negative, use brackets, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Section B, Line 1. Adjusted gross income. See instructions. If negative, use brackets, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 215.988,
+        "y": 652.243
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.1_adjusted_gross_income_col_b",
+      "label": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.498,
+        "y": 652.243
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.1_adjusted_gross_income_col_c",
+      "label": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 652.243
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.1_adjusted_gross_income_col_d",
+      "label": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 652.243
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.1_adjusted_gross_income_col_e",
+      "label": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. Adjusted gross income. See instructions. If negative, use brackets, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 652.243
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.2_itemized_or_standard_deduction_col_a",
+      "label": "Line 2. Itemized deductions or standard deduction. See instructions, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Itemized deductions or standard deduction. See instructions, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 219.406,
+        "y": 632.25
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.2_itemized_or_standard_deduction_col_b",
+      "label": "Line 2. Itemized deductions or standard deduction. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Itemized deductions or standard deduction. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 292.207,
+        "y": 632.25
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.2_itemized_or_standard_deduction_col_c",
+      "label": "Line 2. Itemized deductions or standard deduction. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Itemized deductions or standard deduction. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 366.296,
+        "y": 632.25
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.2_itemized_or_standard_deduction_col_d",
+      "label": "Line 2. Itemized deductions or standard deduction. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Itemized deductions or standard deduction. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 437.919,
+        "y": 632.25
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.2_itemized_or_standard_deduction_col_e",
+      "label": "Line 2. Itemized deductions or standard deduction. See instructions, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Itemized deductions or standard deduction. See instructions, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 510.242,
+        "y": 632.25
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3a_combine_lines_1_and_2_col_a",
+      "label": "Line 3a. Combine line 1 and line 2. See instructions, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3a. Combine line 1 and line 2. See instructions, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 622.244
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3a_combine_lines_1_and_2_col_b",
+      "label": "Line 3a. Combine line 1 and line 2. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3a. Combine line 1 and line 2. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.498,
+        "y": 622.244
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3a_combine_lines_1_and_2_col_c",
+      "label": "Line 3a. Combine line 1 and line 2. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3a. Combine line 1 and line 2. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 622.244
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3a_combine_lines_1_and_2_col_d",
+      "label": "Line 3a. Combine line 1 and line 2. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3a. Combine line 1 and line 2. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 622.244
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3a_combine_lines_1_and_2_col_e",
+      "label": "Line 3a. Combine line 1 and line 2. See instructions, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3a. Combine line 1 and line 2. See instructions, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 622.244
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3b_declared_disaster_loss_col_a",
+      "label": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 602.265
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3b_declared_disaster_loss_col_b",
+      "label": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.498,
+        "y": 602.265
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3b_declared_disaster_loss_col_c",
+      "label": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 602.265
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3b_declared_disaster_loss_col_d",
+      "label": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 602.265
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3b_declared_disaster_loss_col_e",
+      "label": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3b. 2025 declared disaster loss included in line 3a. Enter as a positive number, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 602.265
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3c_combine_lines_3a_and_3b_col_a",
+      "label": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 581.223
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3c_combine_lines_3a_and_3b_col_b",
+      "label": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.498,
+        "y": 581.223
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3c_combine_lines_3a_and_3b_col_c",
+      "label": "Line 3c — Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (c) Enter amounts earned or received during the portion of the year you were a CA resident",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 581.223
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3c_combine_lines_3a_and_3b_col_d",
+      "label": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 581.223
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.3c_combine_lines_3a_and_3b_col_e",
+      "label": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3c. Combine line 3a and line 3b. If negative, use brackets and continue to line 4, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 581.223
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.4_nonbusiness_capital_losses_col_a",
+      "label": "Line 4. Nonbusiness capital losses, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Nonbusiness capital losses, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 559.762
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.4_nonbusiness_capital_losses_col_b",
+      "label": "Line 4. Nonbusiness capital losses, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Nonbusiness capital losses, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 559.762
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.4_nonbusiness_capital_losses_col_c",
+      "label": "Line 4. Nonbusiness capital losses, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Nonbusiness capital losses, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 559.762
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.4_nonbusiness_capital_losses_col_d",
+      "label": "Line 4. Nonbusiness capital losses, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Nonbusiness capital losses, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 559.762
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.4_nonbusiness_capital_losses_col_e",
+      "label": "Line 4. Nonbusiness capital losses, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Nonbusiness capital losses, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 559.762
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.5_nonbusiness_capital_gains_col_a",
+      "label": "Line 5. Nonbusiness capital gains, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Nonbusiness capital gains, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 549.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.5_nonbusiness_capital_gains_col_b",
+      "label": "Line 5. Nonbusiness capital gains, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Nonbusiness capital gains, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 549.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.5_nonbusiness_capital_gains_col_c",
+      "label": "Line 5. Nonbusiness capital gains, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Nonbusiness capital gains, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 549.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.5_nonbusiness_capital_gains_col_d",
+      "label": "Line 5. Nonbusiness capital gains, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Nonbusiness capital gains, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 549.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.5_nonbusiness_capital_gains_col_e",
+      "label": "Line 5. Nonbusiness capital gains, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Nonbusiness capital gains, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 549.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.6_nonbusiness_capital_loss_excess_col_a",
+      "label": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 529.757
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.6_nonbusiness_capital_loss_excess_col_b",
+      "label": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 529.757
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.6_nonbusiness_capital_loss_excess_col_c",
+      "label": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 529.757
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.6_nonbusiness_capital_loss_excess_col_d",
+      "label": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 529.757
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.6_nonbusiness_capital_loss_excess_col_e",
+      "label": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. If line 4 is more than line 5, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 529.757
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.7_nonbusiness_capital_gain_excess_col_a",
+      "label": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 509.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.7_nonbusiness_capital_gain_excess_col_b",
+      "label": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 509.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.7_nonbusiness_capital_gain_excess_col_c",
+      "label": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 509.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.7_nonbusiness_capital_gain_excess_col_d",
+      "label": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 509.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.7_nonbusiness_capital_gain_excess_col_e",
+      "label": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. If line 4 is less than line 5, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 509.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.8_nonbusiness_deductions_col_a",
+      "label": "Line 8. Nonbusiness deductions, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Nonbusiness deductions, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 499.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.8_nonbusiness_deductions_col_b",
+      "label": "Line 8. Nonbusiness deductions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Nonbusiness deductions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 499.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.8_nonbusiness_deductions_col_c",
+      "label": "Line 8. Nonbusiness deductions, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Nonbusiness deductions, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 499.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.8_nonbusiness_deductions_col_d",
+      "label": "Line 8. Nonbusiness deductions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Nonbusiness deductions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 499.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.8_nonbusiness_deductions_col_e",
+      "label": "Line 8. Nonbusiness deductions, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Nonbusiness deductions, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 499.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.9_nonbusiness_income_other_col_a",
+      "label": "Line 9. Nonbusiness income other than capital gains, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Nonbusiness income other than capital gains, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 489.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.9_nonbusiness_income_other_col_b",
+      "label": "Line 9. Nonbusiness income other than capital gains, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Nonbusiness income other than capital gains, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 489.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.9_nonbusiness_income_other_col_c",
+      "label": "Line 9. Nonbusiness income other than capital gains, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Nonbusiness income other than capital gains, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 489.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.9_nonbusiness_income_other_col_d",
+      "label": "Line 9. Nonbusiness income other than capital gains, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Nonbusiness income other than capital gains, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 489.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.9_nonbusiness_income_other_col_e",
+      "label": "Line 9. Nonbusiness income other than capital gains, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Nonbusiness income other than capital gains, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 489.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.10_add_lines_7_and_9_col_a",
+      "label": "Line 10. Add line 7 and line 9, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Add line 7 and line 9, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 479.755
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.10_add_lines_7_and_9_col_b",
+      "label": "Line 10. Add line 7 and line 9, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Add line 7 and line 9, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 479.755
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.10_add_lines_7_and_9_col_c",
+      "label": "Line 10. Add line 7 and line 9, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Add line 7 and line 9, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 479.755
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.10_add_lines_7_and_9_col_d",
+      "label": "Line 10. Add line 7 and line 9, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Add line 7 and line 9, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 479.755
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.10_add_lines_7_and_9_col_e",
+      "label": "Line 10. Add line 7 and line 9, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Add line 7 and line 9, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 479.755
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.11_nonbusiness_deductions_excess_col_a",
+      "label": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 459.723
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.11_nonbusiness_deductions_excess_col_b",
+      "label": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 459.723
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.11_nonbusiness_deductions_excess_col_c",
+      "label": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 459.723
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.11_nonbusiness_deductions_excess_col_d",
+      "label": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 459.723
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.11_nonbusiness_deductions_excess_col_e",
+      "label": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. If line 8 is more than line 10, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 459.723
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.12_nonbusiness_income_excess_col_a",
+      "label": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 439.739
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.12_nonbusiness_income_excess_col_b",
+      "label": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 439.739
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.12_nonbusiness_income_excess_col_c",
+      "label": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 439.739
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.12_nonbusiness_income_excess_col_d",
+      "label": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 439.739
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.12_nonbusiness_income_excess_col_e",
+      "label": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12. If line 8 is less than line 10, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 439.739
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.13_business_capital_losses_col_a",
+      "label": "Line 13. Business capital losses, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Business capital losses, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 429.733
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.13_business_capital_losses_col_b",
+      "label": "Line 13. Business capital losses, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Business capital losses, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 429.733
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.13_business_capital_losses_col_c",
+      "label": "Line 13. Business capital losses, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Business capital losses, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 429.733
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.13_business_capital_losses_col_d",
+      "label": "Line 13. Business capital losses, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Business capital losses, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 429.733
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.13_business_capital_losses_col_e",
+      "label": "Line 13. Business capital losses, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Business capital losses, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 429.733
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.14_business_capital_gains_col_a",
+      "label": "Line 14. Business capital gains, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Business capital gains, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 419.738
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.14_business_capital_gains_col_b",
+      "label": "Line 14. Business capital gains, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Business capital gains, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 419.738
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.14_business_capital_gains_col_c",
+      "label": "Line 14. Business capital gains, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Business capital gains, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 419.738
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.14_business_capital_gains_col_d",
+      "label": "Line 14. Business capital gains, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Business capital gains, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 419.738
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.14_business_capital_gains_col_e",
+      "label": "Line 14. Business capital gains, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 14. Business capital gains, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 419.738
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.15_add_lines_12_and_14_col_a",
+      "label": "Line 15. Add line 12 and line 14, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Add line 12 and line 14, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 409.755
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.15_add_lines_12_and_14_col_b",
+      "label": "Line 15. Add line 12 and line 14, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Add line 12 and line 14, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 409.755
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.15_add_lines_12_and_14_col_c",
+      "label": "Line 15. Add line 12 and line 14, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Add line 12 and line 14, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 409.755
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.15_add_lines_12_and_14_col_d",
+      "label": "Line 15. Add line 12 and line 14, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Add line 12 and line 14, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 409.755
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.15_add_lines_12_and_14_col_e",
+      "label": "Line 15. Add line 12 and line 14, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Add line 12 and line 14, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 409.755
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.16_business_capital_loss_excess_col_a",
+      "label": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 389.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.16_business_capital_loss_excess_col_b",
+      "label": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 389.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.16_business_capital_loss_excess_col_c",
+      "label": "Line 16 — If line 13 is more than line 15, enter the difference; otherwise, enter -0-, (c) Enter amounts earned or received during the portion of the year you were a CA resident",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 389.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.16_business_capital_loss_excess_col_d",
+      "label": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 389.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.16_business_capital_loss_excess_col_e",
+      "label": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. If line 13 is more than line 15, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 389.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.17_add_lines_6_and_16_col_a",
+      "label": "Line 17. Add line 6 and line 16, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Add line 6 and line 16, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 379.744
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.17_add_lines_6_and_16_col_b",
+      "label": "Line 17. Add line 6 and line 16, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Add line 6 and line 16, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 379.744
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.17_add_lines_6_and_16_col_c",
+      "label": "Line 17. Add line 6 and line 16, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Add line 6 and line 16, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 379.744
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.17_add_lines_6_and_16_col_d",
+      "label": "Line 17. Add line 6 and line 16, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Add line 6 and line 16, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 379.744
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.17_add_lines_6_and_16_col_e",
+      "label": "Line 17. Add line 6 and line 16, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. Add line 6 and line 16, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 379.744
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.18_schedule_d_line_4_loss_col_a",
+      "label": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 349.756
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.18_schedule_d_line_4_loss_col_b",
+      "label": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 349.756
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.18_schedule_d_line_4_loss_col_c",
+      "label": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 349.756
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.18_schedule_d_line_4_loss_col_d",
+      "label": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 349.756
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.18_schedule_d_line_4_loss_col_e",
+      "label": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. Enter the loss, if any, from line 4 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. See instructions, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 349.756
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.19_schedule_d_line_5_loss_col_a",
+      "label": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 319.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.19_schedule_d_line_5_loss_col_b",
+      "label": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 319.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.19_schedule_d_line_5_loss_col_c",
+      "label": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 319.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.19_schedule_d_line_5_loss_col_d",
+      "label": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 319.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.19_schedule_d_line_5_loss_col_e",
+      "label": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Enter the loss, if any, from line 5 of Schedule D (540N R) Worksheet for nonresidents and part-year residents. Enter as a positive number, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 319.747
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.20_line_18_over_line_19_col_a",
+      "label": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 299.726
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.20_line_18_over_line_19_col_b",
+      "label": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 299.726
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.20_line_18_over_line_19_col_c",
+      "label": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 299.726
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.20_line_18_over_line_19_col_d",
+      "label": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 299.726
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.20_line_18_over_line_19_col_e",
+      "label": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 20. If line 18 is more than line 19, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 299.726
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.21_line_19_over_line_18_col_a",
+      "label": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 279.757
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.21_line_19_over_line_18_col_b",
+      "label": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 279.757
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.21_line_19_over_line_18_col_c",
+      "label": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 279.757
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.21_line_19_over_line_18_col_d",
+      "label": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 279.757
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.21_line_19_over_line_18_col_e",
+      "label": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. If line 19 is more than line 18, enter the difference; otherwise, enter 0, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 279.757
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.22_capital_loss_adjustment_col_a",
+      "label": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 259.741
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.22_capital_loss_adjustment_col_b",
+      "label": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 259.741
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.22_capital_loss_adjustment_col_c",
+      "label": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 259.741
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.22_capital_loss_adjustment_col_d",
+      "label": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 259.741
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.22_capital_loss_adjustment_col_e",
+      "label": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Subtract line 20 from line 17. If zero or less, enter 0, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 259.741
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.23_nol_disaster_loss_carryovers_col_a",
+      "label": "Line 23. N O L and disaster loss carryovers from prior years, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. N O L and disaster loss carryovers from prior years, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 239.754
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.23_nol_disaster_loss_carryovers_col_b",
+      "label": "Line 23. N O L and disaster loss carryovers from prior years, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. N O L and disaster loss carryovers from prior years, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 239.754
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.23_nol_disaster_loss_carryovers_col_c",
+      "label": "Line 23. N O L and disaster loss carryovers from prior years, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. N O L and disaster loss carryovers from prior years, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 239.754
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.23_nol_disaster_loss_carryovers_col_d",
+      "label": "Line 23. N O L and disaster loss carryovers from prior years, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. N O L and disaster loss carryovers from prior years, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 239.754
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.23_nol_disaster_loss_carryovers_col_e",
+      "label": "Line 23. N O L and disaster loss carryovers from prior years, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. N O L and disaster loss carryovers from prior years, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 239.754
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.24_add_lines_11_21_22_23_col_a",
+      "label": "Line 24. Add lines 11, 21, 22, 23, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Add lines 11, 21, 22, 23, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 229.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.24_add_lines_11_21_22_23_col_b",
+      "label": "Line 24. Add lines 11, 21, 22, 23, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Add lines 11, 21, 22, 23, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 288.496,
+        "y": 229.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.24_add_lines_11_21_22_23_col_c",
+      "label": "Line 24. Add lines 11, 21, 22, 23, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Add lines 11, 21, 22, 23, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 229.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.24_add_lines_11_21_22_23_col_d",
+      "label": "Line 24. Add lines 11, 21, 22, 23, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Add lines 11, 21, 22, 23, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 229.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.24_add_lines_11_21_22_23_col_e",
+      "label": "Line 24. Add lines 11, 21, 22, 23, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Add lines 11, 21, 22, 23, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 505.624,
+        "y": 229.743
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.25_current_year_nol_col_a",
+      "label": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (a) Enter total amounts as if you were a C A resident for entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (a) Enter total amounts as if you were a C A resident for entire year",
+      "position": {
+        "page": 1,
+        "x": 216,
+        "y": 209.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.25_current_year_nol_col_b",
+      "label": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (b) Enter amounts earned or received from C A sources as if you were a nonresident for the entire year",
+      "position": {
+        "page": 1,
+        "x": 300.803,
+        "y": 209.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.25_current_year_nol_col_c",
+      "label": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (c) Enter amounts earned or received during the portion of the year you were a C A resident",
+      "position": {
+        "page": 1,
+        "x": 361.496,
+        "y": 209.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.25_current_year_nol_col_d",
+      "label": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (d) Enter amounts earned or received from C A sources during the portion of the year you were a nonresident",
+      "position": {
+        "page": 1,
+        "x": 433.555,
+        "y": 209.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.1.part1_section_b.25_current_year_nol_col_e",
+      "label": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (e) Total. Combine columns (c) and (d).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Current Year N O L. Combine line 3c and line 24. If more than zero, enter 0. See instructions, (e) Total. Combine columns (c) and (d)",
+      "position": {
+        "page": 1,
+        "x": 515.715,
+        "y": 209.749
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part2.1_taxable_income",
+      "label": "Part II, Line 1. Taxable income. See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 1. Taxable income. See instructions",
+      "position": {
+        "page": 2,
+        "x": 504.005,
+        "y": 698.905
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part2.2_capital_loss_deduction",
+      "label": "Line 2. Capital loss deduction included in line 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Capital loss deduction included in line 1",
+      "position": {
+        "page": 2,
+        "x": 504.005,
+        "y": 674.881
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part2.3_disaster_loss_carryover",
+      "label": "Line 3. Disaster loss carryover included in line 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Disaster loss carryover included in line 1",
+      "position": {
+        "page": 2,
+        "x": 504.005,
+        "y": 662.881
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part2.4_nol_carryover",
+      "label": "Line 4. N O L carryover included in line 1.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. N O L carryover included in line 1",
+      "position": {
+        "page": 2,
+        "x": 504.005,
+        "y": 650.881
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part2.5_itemized_deduction_adjustments",
+      "label": "Line 5. Adjustments to itemized deductions. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Adjustments to itemized deductions. See instructions",
+      "position": {
+        "page": 2,
+        "x": 504.005,
+        "y": 638.881
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part2.6_modified_taxable_income",
+      "label": "Line 6. M T I. Combine line 1 through line 5. If line 6 is zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. M T I. Combine line 1 through line 5. If line 6 is zero or less, enter 0",
+      "position": {
+        "page": 2,
+        "x": 504.005,
+        "y": 626.881
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.1_mti_available_balance_col_g",
+      "label": "Part III, Line 1.  MT I from Part II, line 6. If your net business income is $1,000,000 or more and modified adjusted gross income (AGI) is $1,000,000 or more for the taxable year, see instructions, (g) Available balance.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, Line 1.  MT I from Part II, line 6. If your net business income is $1,000,000 or more and modified adjusted gross income (AGI) is $1,000,000 or more for the taxable year, see instructions, (g) Available balance",
+      "position": {
+        "page": 2,
+        "x": 433.367,
+        "y": 552.793
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_a",
+      "label": "Prior Year N O Ls, Line 2. (a) Year of loss (yyyy) (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Prior Year N O Ls, Line 2. (a) Year of loss (yyyy) (1)",
+      "position": {
+        "page": 2,
+        "x": 51.8871,
+        "y": 460.064
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_b",
+      "label": "Line 2. (b) Code See instructions (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (b) Code See instructions (1)",
+      "position": {
+        "page": 2,
+        "x": 93.1336,
+        "y": 460.064
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_c",
+      "label": "Line 2. (c) Type of N O L See below (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (c) Type of N O L See below (1)",
+      "position": {
+        "page": 2,
+        "x": 158.603,
+        "y": 460.064
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_d",
+      "label": "Line 2. (d) Initial loss (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (d) Initial loss (1)",
+      "position": {
+        "page": 2,
+        "x": 233.865,
+        "y": 460.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_e",
+      "label": "Line 2. (e) Carryover from 2024 (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (e) Carryover from 2024 (1)",
+      "position": {
+        "page": 2,
+        "x": 304.096,
+        "y": 460.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_f",
+      "label": "Line 2. (f) Amount used in 2025 (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (f) Amount used in 2025 (1)",
+      "position": {
+        "page": 2,
+        "x": 377.655,
+        "y": 460.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_g",
+      "label": "Line 2. (g) Available balance (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (g) Available balance (1)",
+      "position": {
+        "page": 2,
+        "x": 433.362,
+        "y": 460.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row1_col_h",
+      "label": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (1)",
+      "position": {
+        "page": 2,
+        "x": 523.171,
+        "y": 460.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_a",
+      "label": "Line 2. (a) Year of loss (yyyy) (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (a) Year of loss (yyyy) (2)",
+      "position": {
+        "page": 2,
+        "x": 51.8871,
+        "y": 436.064
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_b",
+      "label": "Line 2. (b) Code See instructions (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (b) Code See instructions (2)",
+      "position": {
+        "page": 2,
+        "x": 93.1336,
+        "y": 436.064
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_c",
+      "label": "Line 2. (c) Type of N O L See below (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (c) Type of N O L See below (2)",
+      "position": {
+        "page": 2,
+        "x": 158.603,
+        "y": 436.064
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_d",
+      "label": "Line 2. (d) Initial loss (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (d) Initial loss (2)",
+      "position": {
+        "page": 2,
+        "x": 233.865,
+        "y": 436.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_e",
+      "label": "Line 2. (e) Carryover from 2024 (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (e) Carryover from 2024 (2)",
+      "position": {
+        "page": 2,
+        "x": 304.096,
+        "y": 436.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_f",
+      "label": "Line 2. (f) Amount used in 2025 (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (f) Amount used in 2025 (2)",
+      "position": {
+        "page": 2,
+        "x": 377.655,
+        "y": 436.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_g",
+      "label": "Line 2. (g) Available balance (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (g) Available balance (2)",
+      "position": {
+        "page": 2,
+        "x": 433.362,
+        "y": 436.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row2_col_h",
+      "label": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (2)",
+      "position": {
+        "page": 2,
+        "x": 523.171,
+        "y": 436.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_a",
+      "label": "Line 2. (a) Year of loss (yyyy) (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (a) Year of loss (yyyy) (3)",
+      "position": {
+        "page": 2,
+        "x": 51.8871,
+        "y": 412.054
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_b",
+      "label": "Line 2. (b) Code See instructions (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (b) Code See instructions (3)",
+      "position": {
+        "page": 2,
+        "x": 93.1336,
+        "y": 412.054
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_c",
+      "label": "Line 2. (c) Type of N O L See below (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (c) Type of N O L See below (3)",
+      "position": {
+        "page": 2,
+        "x": 158.603,
+        "y": 412.054
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_d",
+      "label": "Line 2. (d) Initial loss (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (d) Initial loss (3)",
+      "position": {
+        "page": 2,
+        "x": 233.865,
+        "y": 412.054
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_e",
+      "label": "Line 2. (e) Carryover from 2024 (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (e) Carryover from 2024 (3)",
+      "position": {
+        "page": 2,
+        "x": 304.096,
+        "y": 412.054
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_f",
+      "label": "Line 2. (f) Amount used in 2025 (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (f) Amount used in 2025 (3)",
+      "position": {
+        "page": 2,
+        "x": 377.655,
+        "y": 412.054
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_g",
+      "label": "Line 2. (g) Available balance (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (g) Available balance (3)",
+      "position": {
+        "page": 2,
+        "x": 433.362,
+        "y": 412.054
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row3_col_h",
+      "label": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (3)",
+      "position": {
+        "page": 2,
+        "x": 523.171,
+        "y": 412.054
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_a",
+      "label": "Line 2. (a) Year of loss (yyyy) (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (a) Year of loss (yyyy) (4)",
+      "position": {
+        "page": 2,
+        "x": 51.8871,
+        "y": 388.064
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_b",
+      "label": "Line 2. (b) Code See instructions (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (b) Code See instructions (4)",
+      "position": {
+        "page": 2,
+        "x": 93.1336,
+        "y": 388.064
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_c",
+      "label": "Line 2. (c) Type of N O L See below (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (c) Type of N O L See below (4)",
+      "position": {
+        "page": 2,
+        "x": 158.603,
+        "y": 388.064
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_d",
+      "label": "Line 2. (d) Initial loss (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (d) Initial loss (4)",
+      "position": {
+        "page": 2,
+        "x": 233.865,
+        "y": 388.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_e",
+      "label": "Line 2. (e) Carryover from 2024 (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (e) Carryover from 2024 (4)",
+      "position": {
+        "page": 2,
+        "x": 304.096,
+        "y": 388.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_f",
+      "label": "Line 2. (f) Amount used in 2025 (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (f) Amount used in 2025 (4)",
+      "position": {
+        "page": 2,
+        "x": 377.655,
+        "y": 388.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_g",
+      "label": "Line 2. (g) Available balance (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (g) Available balance (4)",
+      "position": {
+        "page": 2,
+        "x": 433.362,
+        "y": 388.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.2_row4_col_h",
+      "label": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (h) Carryover to 2026 column (e) minus column (f) (4)",
+      "position": {
+        "page": 2,
+        "x": 523.171,
+        "y": 388.064
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.3_current_year_disaster_nol_col_b",
+      "label": "Current Year N O Ls, Line 3. (b) Code See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Current Year N O Ls, Line 3. (b) Code See instructions",
+      "position": {
+        "page": 2,
+        "x": 89.28,
+        "y": 332.813
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.3_current_year_disaster_nol_col_d",
+      "label": "Line 3. (d) Initial loss.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (d) Initial loss",
+      "position": {
+        "page": 2,
+        "x": 230.942,
+        "y": 332.813
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.3_current_year_disaster_nol_col_f",
+      "label": "Line 3. (f) Amount used in 2025.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (f) Amount used in 2025",
+      "position": {
+        "page": 2,
+        "x": 376.184,
+        "y": 332.813
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.3_current_year_disaster_nol_col_h",
+      "label": "Line 3. (h) Column (d) minus column (f) See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (h) Column (d) minus column (f) See instructions",
+      "position": {
+        "page": 2,
+        "x": 522.698,
+        "y": 332.813
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row1_col_b",
+      "label": "Line 4. (b) Code See instructions (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (b) Code See instructions (1)",
+      "position": {
+        "page": 2,
+        "x": 89.28,
+        "y": 308.803
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row1_col_c",
+      "label": "Line 4. (c) Type of N O L See below (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (c) Type of N O L See below (1)",
+      "position": {
+        "page": 2,
+        "x": 155.498,
+        "y": 308.803
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row1_col_d",
+      "label": "Line 4. (d) Initial loss (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (d) Initial loss (1)",
+      "position": {
+        "page": 2,
+        "x": 230.942,
+        "y": 308.803
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row1_col_h",
+      "label": "Line 4. (h) Column (d) minus column (f) See instructions (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (h) Column (d) minus column (f) See instructions (1)",
+      "position": {
+        "page": 2,
+        "x": 522.698,
+        "y": 308.803
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row2_col_b",
+      "label": "Line 4. (b) Code See instructions (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (b) Code See instructions (2)",
+      "position": {
+        "page": 2,
+        "x": 89.28,
+        "y": 284.808
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row2_col_c",
+      "label": "Line 4. (c) Type of N O L See below (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (c) Type of N O L See below (2)",
+      "position": {
+        "page": 2,
+        "x": 155.498,
+        "y": 284.808
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row2_col_d",
+      "label": "Line 4. (d) Initial loss (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (d) Initial loss (2)",
+      "position": {
+        "page": 2,
+        "x": 230.942,
+        "y": 284.808
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row2_col_h",
+      "label": "Line 4. (h) Column (d) minus column (f) See instructions (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (h) Column (d) minus column (f) See instructions (2)",
+      "position": {
+        "page": 2,
+        "x": 522.698,
+        "y": 284.808
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row3_col_b",
+      "label": "Line 4. (b) Code See instructions (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (b) Code See instructions (3)",
+      "position": {
+        "page": 2,
+        "x": 89.28,
+        "y": 260.823
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row3_col_c",
+      "label": "Line 4. (c) Type of N O L See below (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (c) Type of N O L See below (3)",
+      "position": {
+        "page": 2,
+        "x": 155.498,
+        "y": 260.823
+      }
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row3_col_d",
+      "label": "Line 4. (d) Initial loss (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (d) Initial loss (3)",
+      "position": {
+        "page": 2,
+        "x": 230.942,
+        "y": 260.823
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.4_row3_col_h",
+      "label": "Line 4. (h) Column (d) minus column (f) See instructions (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (h) Column (d) minus column (f) See instructions (3)",
+      "position": {
+        "page": 2,
+        "x": 522.698,
+        "y": 260.823
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.5_nol_carryover",
+      "label": "Line 5. N O L carryover. Add the carryover amounts in column (h) that are not the result of a disaster loss.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. N O L carryover. Add the carryover amounts in column (h) that are not the result of a disaster loss",
+      "position": {
+        "page": 2,
+        "x": 504.014,
+        "y": 224.324
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805v.2.part3.6_disaster_loss_carryover",
+      "label": "Line 6. Disaster loss carryover. Enter the total loss carryover amounts in column (h) that are the result of disaster losses.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Disaster loss carryover. Enter the total loss carryover amounts in column (h) that are the result of disaster losses",
+      "position": {
+        "page": 2,
+        "x": 504.014,
+        "y": 212.326
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3805v/blank.pdf",
+    "ingestedAt": "2026-11-20T15:43:41.324Z",
+    "totalFields": 222,
+    "skipped": 0,
+    "catalogEntries": 222
+  }
+}

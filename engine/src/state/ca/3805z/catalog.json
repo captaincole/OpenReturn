@@ -1,0 +1,940 @@
+{
+  "form": {
+    "formId": "form-3805z",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3805Z, Enterprise Zone Deduction and Credit Summary"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3805z.0.header.identification_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3805Z_Form_1001 RB",
+      "position": {
+        "page": 0,
+        "x": 412.152,
+        "y": 693.144
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number or Individual Taxpayer Identification Number.",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation Number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number.",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.identification_number",
+      "label": "Enter identification number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1002",
+      "position": {
+        "page": 0,
+        "x": 413.3,
+        "y": 679.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.0.header.taxpayer_name",
+      "label": "Name or names as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1000",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 656.4
+      },
+      "multiline": true
+    },
+    {
+      "fieldId": "form-3805z.0.header.sos_file_number",
+      "label": "California Secretary of State (S O S) file number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1003",
+      "position": {
+        "page": 0,
+        "x": 412.8,
+        "y": 656.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.0.header.a_entity_type",
+      "label": "Line A — Check the appropriate box for your entity type",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "3805Z_Form_1004 RB",
+      "position": {
+        "page": 0,
+        "x": 65.1,
+        "y": 632.88
+      },
+      "options": [
+        {
+          "value": "individual",
+          "radioOption": "Individual.",
+          "label": "Individual"
+        },
+        {
+          "value": "estate",
+          "radioOption": "Estate.",
+          "label": "Estate"
+        },
+        {
+          "value": "trust",
+          "radioOption": "Trust.",
+          "label": "Trust"
+        },
+        {
+          "value": "c_corporation",
+          "radioOption": "C corporation.",
+          "label": "C corporation"
+        },
+        {
+          "value": "s_corporation",
+          "radioOption": "S corporation.",
+          "label": "S corporation"
+        },
+        {
+          "value": "partnership",
+          "radioOption": "Partnership.",
+          "label": "Partnership"
+        },
+        {
+          "value": "exempt_organization",
+          "radioOption": "Exempt organization.",
+          "label": "Exempt organization"
+        },
+        {
+          "value": "limited_liability_company",
+          "radioOption": "Limited liability company.",
+          "label": "Limited liability company"
+        },
+        {
+          "value": "limited_liability_partnership",
+          "radioOption": "Limited liability partnership.",
+          "label": "Limited liability partnership"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3805z.0.header.b_ez_business_name",
+      "label": "Line B. Enter the name of the Enterprise Zone (E Z) business.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1005",
+      "position": {
+        "page": 0,
+        "x": 240.6,
+        "y": 606.689
+      }
+    },
+    {
+      "fieldId": "form-3805z.0.header.c_ez_business_address",
+      "label": "Line C. Enter the address (actual location) where the E Z business is conducted.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1006",
+      "position": {
+        "page": 0,
+        "x": 61.8,
+        "y": 583.489
+      }
+    },
+    {
+      "fieldId": "form-3805z.0.header.d_enterprise_zone_name",
+      "label": "Line D. Enter the name of the E Z in which the business and/or investment activity is located.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1007",
+      "position": {
+        "page": 0,
+        "x": 48.6,
+        "y": 559.489
+      }
+    },
+    {
+      "fieldId": "form-3805z.0.header.e_principal_business_activity_code",
+      "label": "Line E. Enter the six-digit Principal Business Activity Code of the E Z Business. For Long Beach E Z, enter S I C code, see instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1008",
+      "position": {
+        "page": 0,
+        "x": 481.8,
+        "y": 548.4
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-3805z.0.header.f_total_employees_in_ez",
+      "label": "Line F. Total number of employees in the E Z.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1009",
+      "position": {
+        "page": 0,
+        "x": 481.8,
+        "y": 536.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.0.header.g_gross_annual_receipts",
+      "label": "Line G. Gross annual receipts of the business. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1010",
+      "position": {
+        "page": 0,
+        "x": 481.8,
+        "y": 524.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.0.header.h_total_asset_value",
+      "label": "Line H. Total asset value of the business. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1011",
+      "position": {
+        "page": 0,
+        "x": 481.8,
+        "y": 511.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.0.line.1a_hiring_credit_carryover",
+      "label": "Part One. Line 1a.  Hiring credit carryover from Schedule Z, line 8A, column (f) or line 10, column (c). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1012",
+      "position": {
+        "page": 0,
+        "x": 481.8,
+        "y": 470.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.0.line.1b_sales_use_tax_credit_carryover",
+      "label": "Line 1b.  Sales or use tax credit carryover from Schedule Z, line 9A, column (f) or line 11, column (c). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1013",
+      "position": {
+        "page": 0,
+        "x": 481.276,
+        "y": 458.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.0.line.1c_total_credit_carryover",
+      "label": "Line 1c. Add line 1a and line 1b. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1014",
+      "position": {
+        "page": 0,
+        "x": 481.8,
+        "y": 446.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.0.line.1d_credit_elected_refundable",
+      "label": "Line 1d. Credit amount to be elected as refundable in future years. See instructions. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1015",
+      "position": {
+        "page": 0,
+        "x": 481.8,
+        "y": 433.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.0.line.2_average_apportionment_percentage",
+      "label": "Part Two. Line 2 . Enter the average apportionment percentage of your former E Z business from Worksheet One, Section A, line 4 . If your operation is entirely within one former E Z, the average apportionment percentage is 100% (1.00).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1016",
+      "position": {
+        "page": 0,
+        "x": 481.8,
+        "y": 394.96
+      },
+      "maxLength": 7
+    },
+    {
+      "fieldId": "form-3805z.0.line.3a_ez_nol_carryover_prior_years",
+      "label": "Part Three. Line 3a. Enter the total E Z N O L carryover from prior years from Worksheet Two, line 9, column (b). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1017",
+      "position": {
+        "page": 0,
+        "x": 481.8,
+        "y": 367.66
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.0.line.3b_ez_nol_deduction_current_year",
+      "label": "Line 3b. Enter the total E Z N O L deduction used in the current year from Worksheet Two, line 9, column (c). Enter this amount on Schedule CA (540), Part One, Section B, line 9b3, column B, Schedule CA (540NR), Part Two, Section B, line 9b3, column B, Form 100, line 20, Form 100W, line 20, Form 100S, line 18, or Form 109, line 6. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1018",
+      "position": {
+        "page": 0,
+        "x": 481.8,
+        "y": 331.96
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.0.line.3c_ez_nol_carryover_future_years",
+      "label": "Line 3c. Enter the E Z N O L carryover to future years from Worksheet Two, line 9, column (e). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_1019",
+      "position": {
+        "page": 0,
+        "x": 481.8,
+        "y": 317.96
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.1_trade_or_business_income",
+      "label": "Schedule Z. Part One. Line 1 . Trade or business income. Individuals. Enter the amount from Worksheet One, Section B, line 14, column (c) on this line and on line 3 (skip line 2). See instructions. Corporations filing a combined report, enter the taxpayer’s business income apportioned to California. See instructions for form FTB 3805Z, Part Two. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2001",
+      "position": {
+        "page": 1,
+        "x": 487.8,
+        "y": 674.2
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.2_average_apportionment_percentage",
+      "label": "Line 2 . Corporations. Enter the average apportionment percentage from Worksheet One, Section A, line 4 . See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2002",
+      "position": {
+        "page": 1,
+        "x": 487.8,
+        "y": 661.2
+      },
+      "maxLength": 7
+    },
+    {
+      "fieldId": "form-3805z.1.line.3_apportioned_business_income",
+      "label": "Line 3 . Multiply line 1 by line 2 . Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2003",
+      "position": {
+        "page": 1,
+        "x": 487.8,
+        "y": 648.2
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.4_ez_nol_deduction",
+      "label": "Line 4 . Enter the E Z N O L deduction from Worksheet Two, line 9, column (c). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2004",
+      "position": {
+        "page": 1,
+        "x": 488.025,
+        "y": 635.425
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.5_ez_taxable_income",
+      "label": "Line 5 . E Z taxable income. Subtract line 4 from line 3 . Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2005",
+      "position": {
+        "page": 1,
+        "x": 488.025,
+        "y": 622.425
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.6a_tax_on_ez_income",
+      "label": "Line 6a. Compute the amount of tax due using the amount on line 5 . See Instructions. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2006",
+      "position": {
+        "page": 1,
+        "x": 378.025,
+        "y": 598.425
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.6b_tax_from_return",
+      "label": "Line 6b. Enter the amount of tax from Form 540, line 35, Form 540NR, line 42, Form 541, line 21, Form 100, line 23, Form 100W, line 23, Form 100S, line 21, or Form 109, line 10 . Corporations and S corporations, see instructions. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2007",
+      "position": {
+        "page": 1,
+        "x": 378.025,
+        "y": 562.425
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.7_ez_income_limitation",
+      "label": "Line 7 . Enter the smaller of line 6a or line 6b. This is the limitation based on the E Z business income. Go to Part Two, Part Three, or Part Four. See instructions. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2008",
+      "position": {
+        "page": 1,
+        "x": 487.025,
+        "y": 536.425
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_a_col_e",
+      "label": "Part Two. Column (a) Credit name. Line 8 Hiring credit carryover, Row A. Column (e) Limitation based on E Z business income. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2009",
+      "position": {
+        "page": 1,
+        "x": 387,
+        "y": 430.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_a_col_f",
+      "label": "Line 8 Hiring credit carryover, Row A. Column (f) Credit carryover used on Schedule P can never be greater than column (d) or column (e). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2010",
+      "position": {
+        "page": 1,
+        "x": 454.8,
+        "y": 430.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_b_col_b",
+      "label": "Line 8 Hiring credit carryover, Row B. Column (b) Total prior year carryover. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2011",
+      "position": {
+        "page": 1,
+        "x": 184.4,
+        "y": 410.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_b_col_c",
+      "label": "Line 8 Hiring credit carryover, Row B. Column (c) Total credit assigned from form FTB 3544, Part A, column (g). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2012",
+      "position": {
+        "page": 1,
+        "x": 252.075,
+        "y": 410.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_b_col_d",
+      "label": "Line 8 Hiring credit carryover, Row B. Column (d) Total credit column (b) minus column (c). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2013",
+      "position": {
+        "page": 1,
+        "x": 319.5,
+        "y": 410.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_b_col_e",
+      "label": "Line 8 Hiring credit carryover, Row B. Column (e) Limitation based on E Z business income. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2014",
+      "position": {
+        "page": 1,
+        "x": 387,
+        "y": 410.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.8_hiring_credit_row_b_col_g",
+      "label": "Line 8 Hiring credit carryover, Row B. Column (g) Total credit carryover column (d) minus column (e). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2015",
+      "position": {
+        "page": 1,
+        "x": 522.6,
+        "y": 410.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_a_col_e",
+      "label": "Line 9 Sales or use tax credit carryover, Row A. Column (e) Limitation based on E Z business income. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2016",
+      "position": {
+        "page": 1,
+        "x": 387,
+        "y": 389.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_a_col_f",
+      "label": "Line 9 Sales or use tax credit carryover, Row A. Column (f) Credit carryover used on Schedule P can never be greater than column (d) or column (e). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2017",
+      "position": {
+        "page": 1,
+        "x": 454.8,
+        "y": 389.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_b_col_b",
+      "label": "Line 9 Sales or use tax credit carryover, Row B. Column (b) Total prior year carryover. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2018",
+      "position": {
+        "page": 1,
+        "x": 184.4,
+        "y": 368.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_b_col_c",
+      "label": "Line 9 Sales or use tax credit carryover, Row B. Column (c) Total credit assigned from form FTB 3544, Part A, column (g). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2019",
+      "position": {
+        "page": 1,
+        "x": 252.075,
+        "y": 368.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_b_col_d",
+      "label": "Line 9 Sales or use tax credit carryover, Row B. Column (d) Total credit column (b) minus column (c). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2020",
+      "position": {
+        "page": 1,
+        "x": 319.5,
+        "y": 368.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_b_col_e",
+      "label": "Line 9 Sales or use tax credit carryover, Row B. Column (e) Limitation based on E Z business income. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2021",
+      "position": {
+        "page": 1,
+        "x": 387,
+        "y": 368.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.9_sales_use_tax_credit_row_b_col_g",
+      "label": "Line 9 Sales or use tax credit carryover, Row B. Column (g) Total credit carryover column (d) minus column (e). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2022",
+      "position": {
+        "page": 1,
+        "x": 522.6,
+        "y": 368.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.10_hiring_credit_col_b",
+      "label": "Part Three. Column (a) Credit name. Line 10 Hiring credit carryover. Column (b) Total prior year carryover. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2023",
+      "position": {
+        "page": 1,
+        "x": 186,
+        "y": 272.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.10_hiring_credit_col_c",
+      "label": "Line 10 Hiring credit carryover.  Column (c) Credit carryover used this year by S corporation. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2024",
+      "position": {
+        "page": 1,
+        "x": 322.2,
+        "y": 272.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.10_hiring_credit_col_d",
+      "label": "Line 10 Hiring credit carryover.  Column (d) Carryover column (b) minus column (c). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2025",
+      "position": {
+        "page": 1,
+        "x": 457.2,
+        "y": 272.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.11_sales_use_tax_credit_col_b",
+      "label": "Line 11 Sales or use tax credit carryover.  Column (b) Total prior year carryover. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2026",
+      "position": {
+        "page": 1,
+        "x": 186,
+        "y": 237.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.11_sales_use_tax_credit_col_c",
+      "label": "Line 11 Sales or use tax credit carryover.  Column (c) Credit carryover used this year by S corporation. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2027",
+      "position": {
+        "page": 1,
+        "x": 322.2,
+        "y": 237.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.11_sales_use_tax_credit_col_d",
+      "label": "Line 11 Sales or use tax credit carryover. Column (d) Carryover column (b) minus column (c). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2028",
+      "position": {
+        "page": 1,
+        "x": 457.2,
+        "y": 237.8
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.12_hiring_credit_col_b",
+      "label": "Part Four. Column (a) Credit name. Line 12 Hiring credit carryover.  Column (b) Total prior year carryover. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2029",
+      "position": {
+        "page": 1,
+        "x": 186,
+        "y": 149.2
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.12_hiring_credit_col_c",
+      "label": "Line 12 Hiring credit carryover.  Column (c) Total credit assigned from form FTB 3544, Part A, column (g). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2030",
+      "position": {
+        "page": 1,
+        "x": 323.4,
+        "y": 149.2
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.12_hiring_credit_col_d",
+      "label": "Line 12 Hiring credit carryover. Column (d) Total credit Carryover column (b) minus column (c). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2031",
+      "position": {
+        "page": 1,
+        "x": 458.4,
+        "y": 149.2
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.13_sales_use_tax_credit_col_b",
+      "label": "Line 13 Sales or use tax credit carryover. Column (b) Total prior year carryover. Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2032",
+      "position": {
+        "page": 1,
+        "x": 186,
+        "y": 122.2
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.13_sales_use_tax_credit_col_c",
+      "label": "Line 13 Sales or use tax credit carryover. Column (c) Total credit assigned from form FTB 3544, Part A, column (g). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2033",
+      "position": {
+        "page": 1,
+        "x": 323.4,
+        "y": 122.2
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3805z.1.line.13_sales_use_tax_credit_col_d",
+      "label": "Line 13 Sales or use tax credit carryover. Column (d) Total credit Carryover column (b) minus column (c). Enter dollar amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "3805Z_Form_2034",
+      "position": {
+        "page": 1,
+        "x": 458.4,
+        "y": 122.2
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3805z/blank.pdf",
+    "ingestedAt": "2026-11-20T15:43:42.132Z",
+    "totalFields": 54,
+    "skipped": 0,
+    "catalogEntries": 54
+  }
+}

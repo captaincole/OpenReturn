@@ -1,0 +1,1115 @@
+{
+  "form": {
+    "formId": "form-3541",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3541, California Motion Picture and Television Production Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3541.0.header.taxpayer_id_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 422.068,
+        "y": 701.109
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.taxpayer_id_number",
+      "label": "S S N or I T I N, C A Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 419.856,
+        "y": 685.7
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9976,
+        "y": 661.583
+      }
+    },
+    {
+      "fieldId": "form-3541.0.header.sos_file_number",
+      "label": "C A Secretary of State (SOS) file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "C A Secretary of State (SOS) file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 419.849,
+        "y": 661.565
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.header.credit_owner_id_type",
+      "label": "Owner of credit. Type of identification number: CA Corporation no. or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Owner of credit, Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 422.061,
+        "y": 652.83
+      },
+      "options": [
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "C A Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "F E I N.",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3541.0.header.credit_owner_id_number",
+      "label": "Owner of credit, C A Corporation number, F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Owner of credit, C A Corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 419.851,
+        "y": 637.44
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.header.credit_owner_name",
+      "label": "Name of owner of credit.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name of owner of credit",
+      "position": {
+        "page": 0,
+        "x": 35.9976,
+        "y": 613.328
+      }
+    },
+    {
+      "fieldId": "form-3541.0.header.credit_owner_sos_file_number",
+      "label": "Owner of credit, C A Secretary of State (S O S) file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Owner of credit, C A Secretary of State (S O S) file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 419.852,
+        "y": 613.323
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.header.original_credit",
+      "label": "Original California Motion Picture and Television Production Credit. Check this box for certificate number(s) 1000-4999.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Original California Motion Picture and Television Production Credit. Check this box for certificate number(s) 1000-4999",
+      "position": {
+        "page": 0,
+        "x": 50.509,
+        "y": 553.418
+      }
+    },
+    {
+      "fieldId": "form-3541.0.header.new_credit",
+      "label": "New California Motion Picture and Television Production Credit. Check this box for certificate number(s) 5000-6999",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "New California Motion Picture and Television Production Credit. Check this box for certificate number(s) 5000-6999",
+      "position": {
+        "page": 0,
+        "x": 50.6727,
+        "y": 535.473
+      }
+    },
+    {
+      "fieldId": "form-3541.0.header.program_3_0_credit",
+      "label": "Program 3.0 California Motion Picture and Television Production Credit. Check this box for certificate number(s) 7000-7999",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Program 3.0 California Motion Picture and Television Production Credit. Check this box for certificate number(s) 7000-7999",
+      "position": {
+        "page": 0,
+        "x": 50.7454,
+        "y": 517.4
+      }
+    },
+    {
+      "fieldId": "form-3541.0.header.soundstage_filming_credit",
+      "label": "Soundstage Filming Tax Credit. Check this box for certificate number(s) 8000-8199",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Soundstage Filming Tax Credit. Check this box for certificate number(s) 8000-8199",
+      "position": {
+        "page": 0,
+        "x": 50.7091,
+        "y": 499.655
+      }
+    },
+    {
+      "fieldId": "form-3541.0.header.program_4_0_credit",
+      "label": "Program 4.0 California Motion Picture and Television Production Credit. Check this box for certificate number(s) 8200 and higher.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Program 4.0 California Motion Picture and Television Production Credit. Check this box for certificate number(s) 8200 and higher",
+      "position": {
+        "page": 0,
+        "x": 50.6727,
+        "y": 481.473
+      }
+    },
+    {
+      "fieldId": "form-3541.0.header.refundable_program_4_0_election",
+      "label": "Refundable Program 4.0 Election. Check this box if making the irrevocable election for program 4.0 credit, that exceeds tax, to be refundable. Attach this completed form with the taxpayer's original timely filed return",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Refundable Program 4.0 Election. Check this box if making the irrevocable election for program 4.0 credit, that exceeds tax, to be refundable. Attach this completed form with the taxpayer's original timely filed return",
+      "position": {
+        "page": 0,
+        "x": 50.6728,
+        "y": 463.745
+      }
+    },
+    {
+      "fieldId": "form-3541.0.line.a_year_certificate_issued",
+      "label": "Part I, Line A. Year certificate issued.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line A. Year certificate issued",
+      "position": {
+        "page": 0,
+        "x": 139.495,
+        "y": 413.401
+      }
+    },
+    {
+      "fieldId": "form-3541.0.line.b_credit_certificate_number",
+      "label": "Line B. Credit certificate number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line B. Credit certificate number",
+      "position": {
+        "page": 0,
+        "x": 301.475,
+        "y": 413.401
+      },
+      "maxLength": 17
+    },
+    {
+      "fieldId": "form-3541.0.line.c_copyright_registration_number",
+      "label": "Line C. Copyright registration number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line C. Copyright registration number",
+      "position": {
+        "page": 0,
+        "x": 503.991,
+        "y": 413.401
+      }
+    },
+    {
+      "fieldId": "form-3541.0.line.1_current_year_generated_credit",
+      "label": "Line 1. Current year generated credit. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. Current year generated credit. See instructions",
+      "position": {
+        "page": 0,
+        "x": 443.241,
+        "y": 397.402
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.line.2_credit_from_passthrough_entities",
+      "label": "Line 2. Credit received from pass-through entities (Schedule K-1). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Credit received from pass-through entities (Schedule K-1). See instructions",
+      "position": {
+        "page": 0,
+        "x": 443.224,
+        "y": 378.389
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.line.3_credit_purchased_from_entities",
+      "label": "Line 3. Credit purchased from other entities. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Credit purchased from other entities. See instructions",
+      "position": {
+        "page": 0,
+        "x": 443.211,
+        "y": 359.395
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.line.4a_credit_from_affiliated_corporations",
+      "label": "Line 4a. Credit received from affiliated corporations. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4a. Credit received from affiliated corporations. See instructions",
+      "position": {
+        "page": 0,
+        "x": 443.241,
+        "y": 340.391
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.line.4b_assignor_name",
+      "label": "Line 4b. Assignor name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4b. Assignor name",
+      "position": {
+        "page": 0,
+        "x": 178.744,
+        "y": 324.384
+      }
+    },
+    {
+      "fieldId": "form-3541.0.line.4c_assignor_id_number",
+      "label": "Line 4c. Assignor C A corporation no., F E I N, or C A S O S no.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4c. Assignor C A corporation no., F E I N, or C A S O S no",
+      "position": {
+        "page": 0,
+        "x": 320.242,
+        "y": 308.398
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.line.5a_credit_carryover_prior_year",
+      "label": "Line 5a. Credit carryover from prior year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5a. Credit carryover from prior year",
+      "position": {
+        "page": 0,
+        "x": 443.233,
+        "y": 289.39
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.line.5b_assignable_credit_carryover",
+      "label": "Line 5b. Assignable credit carryover from prior year. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5b. Assignable credit carryover from prior year. See instructions",
+      "position": {
+        "page": 0,
+        "x": 320.74,
+        "y": 273.384
+      }
+    },
+    {
+      "fieldId": "form-3541.0.line.6_credit_sold_to_entities",
+      "label": "Line 6. Credit sold to other entities. See instructions",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Credit sold to other entities. See instructions",
+      "position": {
+        "page": 0,
+        "x": 443.241,
+        "y": 254.399
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.line.7_credit_assigned_to_affiliates",
+      "label": "Line 7. Credit assigned to affiliated corporations from Part III, line 19, column (c). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7. Credit assigned to affiliated corporations from Part III, line 19, column (c). See instructions",
+      "position": {
+        "page": 0,
+        "x": 443.233,
+        "y": 235.408
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.line.8_credit_passed_through_k1",
+      "label": "Line 8. Credit passed through on Schedule K-1. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Credit passed through on Schedule K-1. See instructions",
+      "position": {
+        "page": 0,
+        "x": 443.23,
+        "y": 216.384
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.line.9_credit_applied_sales_use_tax",
+      "label": "Line 9. Credit applied against sales and use taxes. See instructions",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 9. Credit applied against sales and use taxes. See instructions",
+      "position": {
+        "page": 0,
+        "x": 443.266,
+        "y": 197.402
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.line.10_total_credit_sold_assigned_applied",
+      "label": "Line 10. Total credit sold, assigned, passed through, or applied against sales and use taxes. Add line 6 through line 9.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 10. Total credit sold, assigned, passed through, or applied against sales and use taxes. Add line 6 through line 9",
+      "position": {
+        "page": 0,
+        "x": 443,
+        "y": 178.397
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.0.line.11_total_available_credit",
+      "label": "Line 11. Total available credit. Subtract line 10 from any entry made on line 1, line 2, line 3, line 4a, or line 5a.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 11. Total available credit. Subtract line 10 from any entry made on line 1, line 2, line 3, line 4a, or line 5a",
+      "position": {
+        "page": 0,
+        "x": 442.959,
+        "y": 159.368
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.12a_credit_claimed",
+      "label": "Part II, Line 12a. Credit claimed. Enter the amount of the nonrefundable credit claimed on the current year tax return. (Do not include any assigned credit claimed on form FTB 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 12a. Credit claimed. Enter the amount of the nonrefundable credit claimed on the current year tax return. (Do not include any assigned credit claimed on form FTB 3544, Part B.)",
+      "position": {
+        "page": 1,
+        "x": 443.249,
+        "y": 684.966
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.12b_total_credit_assigned",
+      "label": "Line 12b. Total credit assigned. Enter the total amount from form FTB 3544, Part A, column (g). If you are not a corporation, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12b. Total credit assigned. Enter the total amount from form FTB 3544, Part A, column (g). If you are not a corporation, enter 0",
+      "position": {
+        "page": 1,
+        "x": 443.239,
+        "y": 658.963
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.12c_credit_elected_refundable_future",
+      "label": "Line 12c. Credit amount to be elected as refundable in future years. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12c. Credit amount to be elected as refundable in future years. See instructions",
+      "position": {
+        "page": 1,
+        "x": 443.479,
+        "y": 639.939
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.12d_program_4_credit_elected_refundable",
+      "label": "Line 12d. Total available program 4.0 credit elected as refundable. Enter the amount from Part IV, line 22.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 12d. Total available program 4.0 credit elected as refundable. Enter the amount from Part IV, line 22",
+      "position": {
+        "page": 1,
+        "x": 443.224,
+        "y": 620.97
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.13_credit_carryover_future_years",
+      "label": "Line 13. Credit carryover available for future years. Add lines 12a, 12b, 12c, and 12d, subtract the result from line 11.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 13. Credit carryover available for future years. Add lines 12a, 12b, 12c, and 12d, subtract the result from line 11",
+      "position": {
+        "page": 1,
+        "x": 443.221,
+        "y": 591.967
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.14_total_credit_available_assignment",
+      "label": "Part III, Line 14. Total credit available for assignment, before applying tax liability limit. Add line 1, line 2, and line 5b from Part I.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part III, Line 14. Total credit available for assignment, before applying tax liability limit. Add line 1, line 2, and line 5b from Part I",
+      "position": {
+        "page": 1,
+        "x": 443.233,
+        "y": 542.957
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.15_tax",
+      "label": "Line 15. Tax. If you are claiming program 3.0, soundstage filming, or program 4.0 credit, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 15. Tax. If you are claiming program 3.0, soundstage filming, or program 4.0 credit, enter 0. See instructions",
+      "position": {
+        "page": 1,
+        "x": 443.238,
+        "y": 527.971
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.16_credit_available_affiliated_corporations",
+      "label": "Line 16. Credit available for assigning to affiliated corporations. Subtract line 15 from line 14, enter the result here and on line 17, column (d). If the result is '0' or less, enter '0'. See instructions",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 16. Credit available for assigning to affiliated corporations. Subtract line 15 from line 14, enter the result here and on line 17, column (d). If the result is '0' or less, enter '0'. See instructions",
+      "position": {
+        "page": 1,
+        "x": 443.241,
+        "y": 500.97
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.17_credit_available_col_d",
+      "label": "Line 17. (d) Credit available for assignment.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 17. (d) Credit available for assignment",
+      "position": {
+        "page": 1,
+        "x": 487.521,
+        "y": 415.633
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row1_col_a",
+      "label": "Line 18. (a) Assignee name (1):",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (a) Assignee name (1):",
+      "position": {
+        "page": 1,
+        "x": 53.2447,
+        "y": 397.624
+      }
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row1_col_b",
+      "label": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (1).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (1)",
+      "position": {
+        "page": 1,
+        "x": 320.124,
+        "y": 397.624
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row1_col_c",
+      "label": "Line 18. (c) Amount of credit assigned (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (c) Amount of credit assigned (1)",
+      "position": {
+        "page": 1,
+        "x": 404.343,
+        "y": 397.624
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row1_col_d",
+      "label": "Line 18. (d) Credit available for assignment (1).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (d) Credit available for assignment (1)",
+      "position": {
+        "page": 1,
+        "x": 487.521,
+        "y": 397.624
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row2_col_a",
+      "label": "Line 18. (a) Assignee name (2):",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (a) Assignee name (2):",
+      "position": {
+        "page": 1,
+        "x": 53.2447,
+        "y": 379.634
+      }
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row2_col_b",
+      "label": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (2).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (2)",
+      "position": {
+        "page": 1,
+        "x": 320.124,
+        "y": 379.634
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row2_col_c",
+      "label": "Line 18. (c) Amount of credit assigned (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (c) Amount of credit assigned (2)",
+      "position": {
+        "page": 1,
+        "x": 404.343,
+        "y": 379.634
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row2_col_d",
+      "label": "Line 18. (d) Credit available for assignment (2).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (d) Credit available for assignment (2)",
+      "position": {
+        "page": 1,
+        "x": 487.521,
+        "y": 379.634
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row3_col_a",
+      "label": "Line 18. (a) Assignee name (3):",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (a) Assignee name (3):",
+      "position": {
+        "page": 1,
+        "x": 53.2447,
+        "y": 361.64
+      }
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row3_col_b",
+      "label": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (3).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (3)",
+      "position": {
+        "page": 1,
+        "x": 320.124,
+        "y": 361.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row3_col_c",
+      "label": "Line 18. (c) Amount of credit assigned (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (c) Amount of credit assigned (3)",
+      "position": {
+        "page": 1,
+        "x": 404.343,
+        "y": 361.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row3_col_d",
+      "label": "Line 18. (d) Credit available for assignment (3).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (d) Credit available for assignment (3)",
+      "position": {
+        "page": 1,
+        "x": 487.521,
+        "y": 361.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row4_col_a",
+      "label": "Line 18. (a) Assignee name (4):",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (a) Assignee name (4):",
+      "position": {
+        "page": 1,
+        "x": 53.2447,
+        "y": 343.64
+      }
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row4_col_b",
+      "label": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (4).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (4)",
+      "position": {
+        "page": 1,
+        "x": 320.124,
+        "y": 343.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row4_col_c",
+      "label": "Line 18. (c) Amount of credit assigned (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (c) Amount of credit assigned (4)",
+      "position": {
+        "page": 1,
+        "x": 404.343,
+        "y": 343.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row4_col_d",
+      "label": "Line 18. (d) Credit available for assignment (4).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (d) Credit available for assignment (4)",
+      "position": {
+        "page": 1,
+        "x": 487.521,
+        "y": 343.64
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row5_col_a",
+      "label": "Line 18. (a) Assignee name (5):",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (a) Assignee name (5):",
+      "position": {
+        "page": 1,
+        "x": 53.2447,
+        "y": 325.626
+      }
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row5_col_b",
+      "label": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (5).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (b) Assignee C A corporation number, F E I N, or C A S O S number (12 digits) (5)",
+      "position": {
+        "page": 1,
+        "x": 320.124,
+        "y": 325.626
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row5_col_c",
+      "label": "Line 18. (c) Amount of credit assigned (5).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (c) Amount of credit assigned (5)",
+      "position": {
+        "page": 1,
+        "x": 404.343,
+        "y": 325.626
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.18_row5_col_d",
+      "label": "Line 18. (d) Credit available for assignment (5).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 18. (d) Credit available for assignment (5)",
+      "position": {
+        "page": 1,
+        "x": 487.521,
+        "y": 325.626
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.19_total_credit_assigned_col_c",
+      "label": "Line 19. Total credit assigned. Add the amounts in column (c). Enter the total here and on Part I, line 7, (c) Amount of credit assigned.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 19. Total credit assigned. Add the amounts in column (c). Enter the total here and on Part I, line 7, (c) Amount of credit assigned",
+      "position": {
+        "page": 1,
+        "x": 404.335,
+        "y": 307.629
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.20_program_4_credit_amount",
+      "label": "Part IV, Line 20. 2025 Program 4.0 credit amount. Enter the amount from Part I, line 1, 2, or 4a.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part IV, Line 20. 2025 Program 4.0 credit amount. Enter the amount from Part I, line 1, 2, or 4a",
+      "position": {
+        "page": 1,
+        "x": 441,
+        "y": 247.697
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.21_ca_income_tax_liability",
+      "label": "Line 21. Enter your California income tax liability for the purpose of the program 4.0 refundable credit calculation. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 21. Enter your California income tax liability for the purpose of the program 4.0 refundable credit calculation. See instructions",
+      "position": {
+        "page": 1,
+        "x": 440.983,
+        "y": 217.7
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.22_available_credit_elected_refundable",
+      "label": "Line 22. Available 2025 program 4.0 credit that can be elected as refundable. Subtract line 21 from line 20. Enter on Part II, line 12d. If zero or less, stop. You do not qualify to elect a refundable credit.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 22. Available 2025 program 4.0 credit that can be elected as refundable. Subtract line 21 from line 20. Enter on Part II, line 12d. If zero or less, stop. You do not qualify to elect a refundable credit",
+      "position": {
+        "page": 1,
+        "x": 441,
+        "y": 187.719
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.23_total_refundable_amount",
+      "label": "Line 23. Multiply line 22 by 90%. This is your total refundable amount.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 23. Multiply line 22 by 90%. This is your total refundable amount",
+      "position": {
+        "page": 1,
+        "x": 440.983,
+        "y": 166.714
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.24_annual_refundable_amount",
+      "label": "Line 24. Multiply line 23 by 20%. This is your annual refundable amount available for each year of your refundable period. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 24. Multiply line 23 by 20%. This is your annual refundable amount available for each year of your refundable period. See instructions",
+      "position": {
+        "page": 1,
+        "x": 441,
+        "y": 133.703
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.25_refundable_credits_claimed",
+      "label": "Line 25. Refundable program 4.0 credits claimed in 2025. Enter the credit amount on Form 540 line 74; Form 540NR line 84: Form 541 line 33; Form 100 line 35; Form 100W line 35; Form 100X line 27; or Form 109 line 18. This amount may be less than the amount on line 24 if your credit is limited by the $5,000,000 credit limitation. See instructions",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 25. Refundable program 4.0 credits claimed in 2025. Enter the credit amount on Form 540 line 74; Form 540NR line 84: Form 541 line 33; Form 100 line 35; Form 100W line 35; Form 100X line 27; or Form 109 line 18. This amount may be less than the amount on line 24 if your credit is limited by the $5,000,000 credit limitation. See instructions",
+      "position": {
+        "page": 1,
+        "x": 440.977,
+        "y": 79.7095
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3541.1.line.26_refundable_credit_carryover",
+      "label": "Line 26. Refundable credit carryover. Subtract line 25 from line 24. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 26. Refundable credit carryover. Subtract line 25 from line 24. See instructions",
+      "position": {
+        "page": 1,
+        "x": 440.986,
+        "y": 58.7106
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3541/blank.pdf",
+    "ingestedAt": "2026-11-20T15:43:39.252Z",
+    "totalFields": 68,
+    "skipped": 0,
+    "catalogEntries": 68
+  }
+}

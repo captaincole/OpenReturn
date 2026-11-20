@@ -76,6 +76,22 @@ The golden suite ran 25 scenarios.
 | FTB 3801 | California 2025 | 0 | 337 | 0 | 0 | 0 | 337 | 0 | 0 |
 | FTB 3510 | California 2025 | 0 | 40 | 0 | 0 | 0 | 40 | 0 | 0 |
 | FTB 3803 | California 2025 | 0 | 15 | 0 | 0 | 0 | 15 | 0 | 0 |
+| Schedule G-1 | California 2025 | 0 | 30 | 0 | 0 | 0 | 30 | 0 | 0 |
+| Schedule X | California 2025 | 0 | 28 | 0 | 0 | 0 | 28 | 0 | 0 |
+| FTB 3461 | California 2025 | 0 | 19 | 0 | 0 | 0 | 19 | 0 | 0 |
+| FTB 3506 | California 2025 | 0 | 95 | 0 | 0 | 0 | 95 | 0 | 0 |
+| FTB 3507 | California 2025 | 0 | 13 | 0 | 0 | 0 | 13 | 0 | 0 |
+| FTB 3541 | California 2025 | 0 | 68 | 0 | 0 | 0 | 68 | 0 | 0 |
+| FTB 3800 | California 2025 | 0 | 24 | 0 | 0 | 0 | 24 | 0 | 0 |
+| FTB 3804-CR | California 2025 | 0 | 39 | 0 | 0 | 0 | 39 | 0 | 0 |
+| FTB 3805V | California 2025 | 0 | 222 | 0 | 0 | 0 | 222 | 0 | 0 |
+| FTB 3805Z | California 2025 | 0 | 54 | 0 | 0 | 0 | 54 | 0 | 0 |
+| FTB 3807 | California 2025 | 0 | 54 | 0 | 0 | 0 | 54 | 0 | 0 |
+| FTB 3809 | California 2025 | 0 | 55 | 0 | 0 | 0 | 55 | 0 | 0 |
+| FTB 3853 | California 2025 | 0 | 448 | 0 | 0 | 0 | 448 | 0 | 0 |
+| FTB 3913 | California 2025 | 0 | 9 | 0 | 0 | 0 | 9 | 0 | 0 |
+| FTB 5805F | California 2025 | 0 | 21 | 0 | 0 | 0 | 21 | 0 | 0 |
+| FTB 5870A | California 2025 | 0 | 225 | 0 | 0 | 0 | 225 | 0 | 0 |
 
 ## By form
 
@@ -815,6 +831,134 @@ For each form: the fields that are not verified and that other fields read, by t
 
 15 more not checked, each of which feeds fewer fields.
 
+### Schedule G-1
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 30 verified, 30 not checked
+
+30 more not checked, each of which feeds fewer fields.
+
+### Schedule X
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 28 verified, 28 not checked
+
+28 more not checked, each of which feeds fewer fields.
+
+### FTB 3461
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 19 verified, 19 not checked
+
+19 more not checked, each of which feeds fewer fields.
+
+### FTB 3506
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 95 verified, 95 not checked
+
+95 more not checked, each of which feeds fewer fields.
+
+### FTB 3507
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 13 verified, 13 not checked
+
+13 more not checked, each of which feeds fewer fields.
+
+### FTB 3541
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 68 verified, 68 not checked
+
+68 more not checked, each of which feeds fewer fields.
+
+### FTB 3800
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 24 verified, 24 not checked
+
+24 more not checked, each of which feeds fewer fields.
+
+### FTB 3804-CR
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 39 verified, 39 not checked
+
+39 more not checked, each of which feeds fewer fields.
+
+### FTB 3805V
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 222 verified, 222 not checked
+
+222 more not checked, each of which feeds fewer fields.
+
+### FTB 3805Z
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 54 verified, 54 not checked
+
+54 more not checked, each of which feeds fewer fields.
+
+### FTB 3807
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 54 verified, 54 not checked
+
+54 more not checked, each of which feeds fewer fields.
+
+### FTB 3809
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 55 verified, 55 not checked
+
+55 more not checked, each of which feeds fewer fields.
+
+### FTB 3853
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 448 verified, 448 not checked
+
+448 more not checked, each of which feeds fewer fields.
+
+### FTB 3913
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 9 verified, 9 not checked
+
+9 more not checked, each of which feeds fewer fields.
+
+### FTB 5805F
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 21 verified, 21 not checked
+
+21 more not checked, each of which feeds fewer fields.
+
+### FTB 5870A
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 225 verified, 225 not checked
+
+225 more not checked, each of which feeds fewer fields.
+
 ## Forms the engine lacks
 
 A blank field names the form that it waits for, in its label or its reason. Each form here is on the list in `engine/scripts/formGraph/missingForms.ts`. **Fields that wait** is the count of blank fields that name the form. **Fields they feed** is the count of other fields that read those blank fields, directly or through other fields. The About column is a short description, not the form's official title.
@@ -843,48 +987,34 @@ A blank field names the form that it waits for, in its label or its reason. Each
 | Form 8936 | Clean vehicle credits | Federal 2025 | 4 | 50 | Schedule 2, Schedule 3 |
 | Form 8911 | Alternative fuel vehicle refueling property credit | Federal 2025 | 3 | 50 | Schedule 2, Schedule 3 |
 | Form 8933 | Carbon oxide sequestration credit | Federal 2025 | 2 | 50 | Schedule 2 |
-| FTB 3461 | California limit on business losses | California 2025 | 3 | 47 | Schedule CA (540) |
 | Form 8978 | Partner's additional reporting year tax | Federal 2025 | 3 | 46 | Schedule 2, Schedule 3 |
 | Form 8863 | Education credits | Federal 2025 | 2 | 36 | Form 1040, Schedule 3 |
 | Form 8880 | Credit for retirement savings contributions | Federal 2025 | 1 | 36 | Schedule 3 |
 | Form 8396 | Mortgage interest credit | Federal 2025 | 1 | 34 | Schedule 3 |
 | Form 8859 | District of Columbia first-time homebuyer credit carryforward | Federal 2025 | 1 | 34 | Schedule 3 |
-| FTB 3805V | California net operating loss | California 2025 | 6 | 30 | Schedule CA (540), Schedule CA (540NR), Schedule P (540) |
-| FTB 3805Z | California enterprise zone deduction and credit | California 2025 | 2 | 30 | Schedule CA (540), Schedule CA (540NR) |
-| Schedule G-1 | California tax on lump-sum distributions | California 2025 | 3 | 20 | Form 540, Form 540NR |
-| FTB 5870A | California tax on an accumulation distribution of a trust | California 2025 | 3 | 20 | Form 540, Form 540NR |
 | Form 3800 | General business credit | Federal 2025 | 2 | 9 | Schedule 3 |
 | Form 8834 | Qualified electric vehicle credit | Federal 2025 | 1 | 9 | Schedule 3 |
 | Form 8912 | Credit to holders of tax credit bonds | Federal 2025 | 1 | 9 | Schedule 3 |
-| FTB 3541 | California motion picture and television production credit | California 2025 | 1 | 9 | Form 540 |
 | Form 8621 | Passive foreign investment company shareholder | Federal 2025 | 2 | 7 | Schedule 2 |
 | Form 4970 | Tax on an accumulation distribution of a trust | Federal 2025 | 1 | 7 | Schedule 2 |
 | Form 8697 | Interest under the look-back method | Federal 2025 | 1 | 7 | Schedule 2 |
 | Form 8828 | Recapture of the federal mortgage subsidy | Federal 2025 | 1 | 7 | Schedule 2 |
-| FTB 3853 | California health coverage exemptions and penalty | California 2025 | 1 | 7 | Form 540 |
 | Form 5329 | Additional taxes on retirement plans and other accounts | Federal 2025 | 2 | 6 | Schedule 2 |
 | Form 8611 | Recapture of the low-income housing credit | Federal 2025 | 1 | 6 | Schedule 2 |
-| FTB 3913 | California moving expense deduction | California 2025 | 3 | 2 | Schedule CA (540), Schedule CA (540NR) |
-| FTB 3506 | California child and dependent care expenses credit | California 2025 | 5 | 1 | Form 540, Form 540NR, Schedule P (540) |
-| FTB 3507 | California prison inmate labor credit | California 2025 | 3 | 1 | Schedule P (540) |
-| FTB 3804-CR | California pass-through entity elective tax credit | California 2025 | 4 | 0 | Schedule P (540) |
-| FTB 3800 | California tax for certain children with unearned income | California 2025 | 2 | 0 | Form 540, Form 540NR |
-| FTB 5805F | California underpayment of estimated tax by farmers and fishermen | California 2025 | 2 | 0 | Form 540, Form 540NR |
 | Form 965-A | Net tax on deferred foreign income, paid in installments | Federal 2025 | 1 | 0 | Schedule 2 |
 | Form 4136 | Credit for federal tax paid on fuels | Federal 2025 | 1 | 0 | Schedule 3 |
 | Form 4972 | Tax on lump-sum distributions | Federal 2025 | 1 | 0 | Form 1040 |
 | Form 8888 | Split of the refund between accounts | Federal 2025 | 1 | 0 | Form 1040 |
-| Schedule X | Explanation of an amended California return | California 2025 | 1 | 0 | Form 540 |
 
 ### Names not classified
 
 A form name in a blank field that no list has. Add it to `missingForms.ts`: as a form the engine lacks, or as a name that is not a form on the return.
 
-- FTB 3807 (1 fields)
-- FTB 3809 (1 fields)
 - Form 1098 (3 fields)
 - Form 1098-C (4 fields)
+- Form 1099-R (3 fields)
 - Schedule I (3 fields)
+- Schedule J (3 fields)
 
 ## Loops
 

@@ -1,0 +1,631 @@
+{
+  "form": {
+    "formId": "form-3804-cr",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "FTB 3804-CR, Pass-Through Entity Elective Tax Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3804-cr.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 373.833,
+        "y": 697.432
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3804-cr.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return (S M L L C s see instructions).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return (S M L L C s see instructions)",
+      "position": {
+        "page": 0,
+        "x": 35.9873,
+        "y": 682.746
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.header.ssn_itin_or_fein",
+      "label": "S S N or I T I N, F E I N (9 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, F E I N (9 digits)",
+      "position": {
+        "page": 0,
+        "x": 371.516,
+        "y": 682.746
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1a_electing_pte_col_a",
+      "label": "Part I, Line 1a. (a) Electing qualified pass-through entity (P T E) name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1a. (a) Electing qualified pass-through entity (P T E) name",
+      "position": {
+        "page": 0,
+        "x": 65.4561,
+        "y": 620.632
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1a_electing_pte_col_b",
+      "label": "Line 1a. (b) Entity identification number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1a. (b) Entity identification number",
+      "position": {
+        "page": 0,
+        "x": 384.363,
+        "y": 620.632
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1a_electing_pte_col_c",
+      "label": "Line 1a. (c) P T E elective tax credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1a. (c) P T E elective tax credit(s)",
+      "position": {
+        "page": 0,
+        "x": 486.169,
+        "y": 620.632
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1b_electing_pte_col_a",
+      "label": "Line 1b. (a) Electing qualified pass-through entity (P T E) name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. (a) Electing qualified pass-through entity (P T E) name",
+      "position": {
+        "page": 0,
+        "x": 65.4561,
+        "y": 596.632
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1b_electing_pte_col_b",
+      "label": "Line 1b. (b) Entity identification number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. (b) Entity identification number",
+      "position": {
+        "page": 0,
+        "x": 384.363,
+        "y": 596.632
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1b_electing_pte_col_c",
+      "label": "Line 1b. (c) P T E elective tax credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1b. (c) P T E elective tax credit(s)",
+      "position": {
+        "page": 0,
+        "x": 486.169,
+        "y": 596.632
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1c_electing_pte_col_a",
+      "label": "Line 1c. (a) Electing qualified pass-through entity (P T E) name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. (a) Electing qualified pass-through entity (P T E) name",
+      "position": {
+        "page": 0,
+        "x": 65.4561,
+        "y": 572.627
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1c_electing_pte_col_b",
+      "label": "Line 1c. (b) Entity identification number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. (b) Entity identification number",
+      "position": {
+        "page": 0,
+        "x": 384.363,
+        "y": 572.627
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1c_electing_pte_col_c",
+      "label": "Line 1c. (c) P T E elective tax credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1c. (c) P T E elective tax credit(s)",
+      "position": {
+        "page": 0,
+        "x": 486.169,
+        "y": 572.627
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1d_electing_pte_col_a",
+      "label": "Line 1d. (a) Electing qualified pass-through entity (P T E) name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. (a) Electing qualified pass-through entity (P T E) name",
+      "position": {
+        "page": 0,
+        "x": 65.4561,
+        "y": 548.621
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1d_electing_pte_col_b",
+      "label": "Line 1d. (b) Entity identification number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. (b) Entity identification number",
+      "position": {
+        "page": 0,
+        "x": 384.363,
+        "y": 548.621
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1d_electing_pte_col_c",
+      "label": "Line 1d. (c) P T E elective tax credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1d. (c) P T E elective tax credit(s)",
+      "position": {
+        "page": 0,
+        "x": 486.169,
+        "y": 548.621
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1e_electing_pte_col_a",
+      "label": "Line 1e. (a) Electing qualified pass-through entity (P T E) name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1e. (a) Electing qualified pass-through entity (P T E) name",
+      "position": {
+        "page": 0,
+        "x": 65.4561,
+        "y": 524.616
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1e_electing_pte_col_b",
+      "label": "Line 1e. (b) Entity identification number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1e. (b) Entity identification number",
+      "position": {
+        "page": 0,
+        "x": 384.363,
+        "y": 524.616
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1e_electing_pte_col_c",
+      "label": "Line 1e. (c) P T E elective tax credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1e. (c) P T E elective tax credit(s)",
+      "position": {
+        "page": 0,
+        "x": 486.169,
+        "y": 524.616
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1f_electing_pte_col_a",
+      "label": "Line 1f. (a) Electing qualified pass-through entity (P T E) name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1f. (a) Electing qualified pass-through entity (P T E) name",
+      "position": {
+        "page": 0,
+        "x": 65.4561,
+        "y": 500.637
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1f_electing_pte_col_b",
+      "label": "Line 1f. (b) Entity identification number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1f. (b) Entity identification number",
+      "position": {
+        "page": 0,
+        "x": 384.363,
+        "y": 500.637
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1f_electing_pte_col_c",
+      "label": "Line 1f. (c) P T E elective tax credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1f. (c) P T E elective tax credit(s)",
+      "position": {
+        "page": 0,
+        "x": 486.169,
+        "y": 500.637
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1g_electing_pte_col_a",
+      "label": "Line 1g. (a) Electing qualified pass-through entity (P T E) name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1g. (a) Electing qualified pass-through entity (P T E) name",
+      "position": {
+        "page": 0,
+        "x": 65.4561,
+        "y": 476.642
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1g_electing_pte_col_b",
+      "label": "Line 1g. (b) Entity identification number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1g. (b) Entity identification number",
+      "position": {
+        "page": 0,
+        "x": 384.363,
+        "y": 476.642
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1g_electing_pte_col_c",
+      "label": "Line 1g. (c) P T E elective tax credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1g. (c) P T E elective tax credit(s)",
+      "position": {
+        "page": 0,
+        "x": 486.169,
+        "y": 476.642
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1h_electing_pte_col_a",
+      "label": "Line 1h. (a) Electing qualified pass-through entity (P T E) name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1h. (a) Electing qualified pass-through entity (P T E) name",
+      "position": {
+        "page": 0,
+        "x": 65.4561,
+        "y": 452.629
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1h_electing_pte_col_b",
+      "label": "Line 1h. (b) Entity identification number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1h. (b) Entity identification number",
+      "position": {
+        "page": 0,
+        "x": 384.363,
+        "y": 452.629
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1h_electing_pte_col_c",
+      "label": "Line 1h. (c) P T E elective tax credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1h. (c) P T E elective tax credit(s)",
+      "position": {
+        "page": 0,
+        "x": 486.169,
+        "y": 452.629
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1i_electing_pte_col_a",
+      "label": "Line 1i. (a) Electing qualified pass-through entity (P T E) name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1i. (a) Electing qualified pass-through entity (P T E) name",
+      "position": {
+        "page": 0,
+        "x": 65.4561,
+        "y": 428.624
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1i_electing_pte_col_b",
+      "label": "Line 1i. (b) Entity identification number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1i. (b) Entity identification number",
+      "position": {
+        "page": 0,
+        "x": 384.363,
+        "y": 428.624
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1i_electing_pte_col_c",
+      "label": "Line 1i. (c) P T E elective tax credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1i. (c) P T E elective tax credit(s)",
+      "position": {
+        "page": 0,
+        "x": 486.169,
+        "y": 428.624
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1j_electing_pte_col_a",
+      "label": "Line 1j. (a) Electing qualified pass-through entity (P T E) name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1j. (a) Electing qualified pass-through entity (P T E) name",
+      "position": {
+        "page": 0,
+        "x": 65.4561,
+        "y": 404.629
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1j_electing_pte_col_b",
+      "label": "Line 1j. (b) Entity identification number.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1j. (b) Entity identification number",
+      "position": {
+        "page": 0,
+        "x": 384.363,
+        "y": 404.629
+      }
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.1j_electing_pte_col_c",
+      "label": "Line 1j. (c) P T E elective tax credit(s).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1j. (c) P T E elective tax credit(s)",
+      "position": {
+        "page": 0,
+        "x": 486.169,
+        "y": 404.629
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part1.2_total_pte_elective_tax_credit",
+      "label": "Line 2. Total P T E elective tax credit amount. Add the amounts in column (c) and enter total here.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Total P T E elective tax credit amount. Add the amounts in column (c) and enter total here",
+      "position": {
+        "page": 0,
+        "x": 486.169,
+        "y": 380.995
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part2.1_total_credit_from_ptes",
+      "label": "Part II, Line 1. Total credit from electing qualified P T E s. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 1. Total credit from electing qualified P T E s. See instructions",
+      "position": {
+        "page": 0,
+        "x": 478.494,
+        "y": 353.332
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part2.2_credit_carryover_prior_year",
+      "label": "Line 2. Credit carryover from prior year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Credit carryover from prior year",
+      "position": {
+        "page": 0,
+        "x": 478.494,
+        "y": 341.326
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part2.3_total_available_credit",
+      "label": "Line 3. Total available credit. Add line 1 and line 2.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Total available credit. Add line 1 and line 2",
+      "position": {
+        "page": 0,
+        "x": 478.494,
+        "y": 329.326
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part2.4_credit_claimed_current_year",
+      "label": "Line 4. Enter the amount of the credit claimed on the current year tax return. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Enter the amount of the credit claimed on the current year tax return. See instructions",
+      "position": {
+        "page": 0,
+        "x": 478.494,
+        "y": 317.323
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3804-cr.0.part2.5_credit_carryover_future_years",
+      "label": "Line 5. Credit carryover to future years. Subtract line 4 from line 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Credit carryover to future years. Subtract line 4 from line 3",
+      "position": {
+        "page": 0,
+        "x": 478.494,
+        "y": 305.314
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3804-cr/blank.pdf",
+    "ingestedAt": "2026-11-20T15:43:40.625Z",
+    "totalFields": 39,
+    "skipped": 0,
+    "catalogEntries": 39
+  }
+}

@@ -1,0 +1,452 @@
+{
+  "form": {
+    "formId": "schedule-x",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Schedule X, California Explanation of Amended Return Changes"
+  },
+  "fields": [
+    {
+      "fieldId": "schedule-x.0.header.name",
+      "label": "Name or names as shown on amended tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1001",
+      "position": {
+        "page": 0,
+        "x": 36.75,
+        "y": 682.5
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.header.ssn_or_itin",
+      "label": "Your Social Security Number or Individual Taxpayer Identification Number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1002",
+      "position": {
+        "page": 0,
+        "x": 466.56,
+        "y": 682.44
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "schedule-x.0.part1.1_amount_owed_amended_return",
+      "label": "Part 1 . Line 1 . Enter the amount you owe, as shown on the amended tax return.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1003",
+      "position": {
+        "page": 0,
+        "x": 444.581,
+        "y": 634.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.2_overpaid_tax_original_return",
+      "label": "Line 2 . Overpaid tax, if any, as shown on original tax return or as previously adjusted by the FTB. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1004",
+      "position": {
+        "page": 0,
+        "x": 444.581,
+        "y": 610.38
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.3_add_lines_1_and_2",
+      "label": "Line 3 . Add line 1 and line 2 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1005",
+      "position": {
+        "page": 0,
+        "x": 444.581,
+        "y": 586.62
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.4_refund_amended_return",
+      "label": "Line 4 . Enter the refund, as shown on the amended tax return. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1006",
+      "position": {
+        "page": 0,
+        "x": 444.581,
+        "y": 562.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.5_tax_paid_original_return",
+      "label": "Line 5 . Tax paid with original tax return plus additional tax paid after it was filed. Do not include penalties and interest.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1007",
+      "position": {
+        "page": 0,
+        "x": 444.581,
+        "y": 538.38
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.6_add_lines_4_and_5",
+      "label": "Line 6 . Add line 4 and line 5 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1008",
+      "position": {
+        "page": 0,
+        "x": 444.581,
+        "y": 514.38
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.7_amount_you_owe",
+      "label": "Line 7 . Amount you owe. If line 3 is more than line 6, subtract line 6 from line 3 . See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1009",
+      "position": {
+        "page": 0,
+        "x": 444.581,
+        "y": 490.492
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.8a_penalties",
+      "label": "Line 8 . Penalties/Interest. See instructions. Line 8 A. Penalties.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1010",
+      "position": {
+        "page": 0,
+        "x": 164.16,
+        "y": 466.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.8b_interest",
+      "label": "Line 8 B. Interest.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1011",
+      "position": {
+        "page": 0,
+        "x": 308,
+        "y": 466.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.8c_total_penalties_interest",
+      "label": "Line 8 C. Total Penalties and Interest. Enter the total of line 8 A and line 8 B.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1012",
+      "position": {
+        "page": 0,
+        "x": 444.581,
+        "y": 466.492
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.9_refund_subtotal",
+      "label": "Line 9 . Refund subtotal. If line 6 is more than line 3, subtract line 3 from line 6 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1013",
+      "position": {
+        "page": 0,
+        "x": 444.581,
+        "y": 442.38
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.10_applied_to_2026_estimated_tax",
+      "label": "Line 10 . Amount of line 9 you want applied to your 2026 estimated tax. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1014",
+      "position": {
+        "page": 0,
+        "x": 444.581,
+        "y": 418.38
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part1.11_refund",
+      "label": "Line 11 . REFUND. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1015",
+      "position": {
+        "page": 0,
+        "x": 444.581,
+        "y": 394.5
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1a_protective_claim_for_refund",
+      "label": "Part 2. Line 1. Check all that apply. Line 1 a. Protective claim for refund. See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1016 CB",
+      "position": {
+        "page": 0,
+        "x": 81.84,
+        "y": 333.44
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1g_error_on_original_return",
+      "label": "Line 1 g. Error on original return.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1021 CB",
+      "position": {
+        "page": 0,
+        "x": 283.44,
+        "y": 333.8
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1k_military_hr_100",
+      "label": "Line 1 k. Military HR 100 .",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1025 CB",
+      "position": {
+        "page": 0,
+        "x": 463.44,
+        "y": 333.92
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1b_reservation_source_income_adjustments",
+      "label": "Line 1 b. Reservation source income adjustments.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1017 CB",
+      "position": {
+        "page": 0,
+        "x": 81.84,
+        "y": 309.68
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1h_credit_adjustment",
+      "label": "Line 1 h. Credit adjustment.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1022 CB",
+      "position": {
+        "page": 0,
+        "x": 283.44,
+        "y": 309.867
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1l_informal_claim",
+      "label": "Line 1 l . Informal claim.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1026 CB",
+      "position": {
+        "page": 0,
+        "x": 463.44,
+        "y": 309.92
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1c_pass_through_entity_adjustments",
+      "label": "Line 1 c. Pass-through entity adjustments.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1018 CB",
+      "position": {
+        "page": 0,
+        "x": 81.84,
+        "y": 285.68
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1i_eitc_yctc_fytc",
+      "label": "Line 1 i. Earned income tax credit / Young child tax credit / Foster youth tax credit.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1023 CB",
+      "position": {
+        "page": 0,
+        "x": 282.96,
+        "y": 285.92
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1m_other",
+      "label": "Line 1 m. Other. See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1027 CB",
+      "position": {
+        "page": 0,
+        "x": 463.44,
+        "y": 285.92
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1d_federal_audit_adjustments",
+      "label": "Line 1 d. Federal audit and/or adjustments.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1019 CB",
+      "position": {
+        "page": 0,
+        "x": 81.84,
+        "y": 261.68
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1j_disaster_loss",
+      "label": "Line 1 j. Disaster Loss.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1024 CB",
+      "position": {
+        "page": 0,
+        "x": 283.44,
+        "y": 252.8
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.1e_ftb_audit_contact",
+      "label": "Line 1 e. FTB audit contact.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "Sch X Form 1020 CB",
+      "position": {
+        "page": 0,
+        "x": 81.84,
+        "y": 237.68
+      }
+    },
+    {
+      "fieldId": "schedule-x.0.part2.2_explanation_of_changes",
+      "label": "Line 2 . Provide further explanation of reason or reasons for amending below. If needed, attach a separate sheet that includes your name and Social Security Number or Individual Taxpayer Identification Number. See instructions. Limit approximately 600 characters.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Sch X Form 1028",
+      "position": {
+        "page": 0,
+        "x": 55.32,
+        "y": 84.1544
+      },
+      "multiline": true
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/schedule-x/blank.pdf",
+    "ingestedAt": "2026-11-20T15:43:36.347Z",
+    "totalFields": 28,
+    "skipped": 0,
+    "catalogEntries": 28
+  }
+}
